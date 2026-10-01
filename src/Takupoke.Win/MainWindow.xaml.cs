@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Takupoke.Core;
 using Takupoke.Win.ViewModels;
+using Takupoke.Win.Platform;
 using Windows.Storage.Pickers;
 
 namespace Takupoke.Win;
@@ -15,27 +16,50 @@ public sealed partial class MainWindow : Window
     private string _page = "home";
     private bool _dialogOpen;
     private bool _ready;
+    private DesktopIntegration? _desktop;
+    private bool _exitRequested;
     public MainWindow()
     {
         InitializeComponent();
         _model = new(DispatcherQueue);
         _model.SnapshotChanged += Render;
         _model.PropertyChanged += (_, _) => UpdateStatus();
-        _model.PrivateDataCleared += () => { CloseBrowser(); _pdfDialog?.Hide(); Render(); };
-        _model.NotificationActivated += () => { _model.WeekStart = _model.Today.DisplayWeekStart(); Navigation.SelectedItem = Navigation.MenuItems[2]; Activate(); };
+        _model.PrivateDataCleared += () => { CloseBrowser(); if (_pdfImage is not null) _pdfImage.Source = null; _pdfDialog?.Hide(); Render(); };
+        _model.NotificationActivated += () => { _model.WeekStart = _model.Today.DisplayWeekStart(); Navigation.SelectedItem = Navigation.MenuItems[2]; ShowWindow(); };
         AppWindow.Resize(new(1150, 820));
         Navigation.SelectedItem = Navigation.MenuItems[0];
         RootGrid.Loaded += Loaded;
         Activated += (_, args) => { if (_ready && args.WindowActivationState != WindowActivationState.Deactivated) _ = _model.RefreshAsync(); };
-        Closed += async (_, _) => await _model.DisposeAsync();
+        AppWindow.Closing += (_, args) =>
+        { if (!_exitRequested && _model.Preferences.KeepInTray && _desktop?.TrayAvailable == true) { args.Cancel = true; AppWindow.Hide(); } };
+        Closed += async (_, _) => { CloseBrowser(); _desktop?.Dispose(); Program.OpenRequested = null; await _model.DisposeAsync(); };
+        Program.OpenRequested = () => DispatcherQueue.TryEnqueue(ShowWindow);
     }
     private async void Loaded(object sender, RoutedEventArgs args)
     {
         if (_ready) return;
         _ready = true;
+        if (!_model.OfflineTest)
+        {
+            try
+            {
+                _desktop = new(WinRT.Interop.WindowNative.GetWindowHandle(this));
+                _desktop.LockedChanged += locked => _ = _model.SetLockedAsync(locked);
+                _desktop.Resumed += () => _ = _model.RefreshAsync(); _desktop.Suspended += _model.Cancel;
+                _desktop.OpenRequested += ShowWindow; _desktop.ExitRequested += () => { _exitRequested = true; Close(); };
+            }
+            catch { await _model.SetLockedAsync(true); await Message("Windowsとの連携を開始できません", "ロック通知を受け取れないため学校データの利用を停止しました。通常ユーザー権限で再起動してください。"); }
+        }
         await _model.InitializeAsync();
+        if (_desktop is not null)
+        {
+            try { _desktop.SetTray(_model.Preferences.KeepInTray); }
+            catch { await Message("通知領域に表示できません", "ウィンドウを閉じると完全終了します。Windowsの通知領域を確認してください。"); }
+            if (_desktop.TrayAvailable && Environment.GetCommandLineArgs().Contains("--background")) AppWindow.Hide();
+        }
         if (!_model.Preferences.SetupCompleted && !_model.OfflineTest) await InitialSetup();
     }
+    private void ShowWindow() { AppWindow.Show(); Activate(); }
     private void Navigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
         if (args.SelectedItem is NavigationViewItem item) _page = (string)item.Tag;

@@ -10,6 +10,7 @@ public static class Program
 {
     private static readonly ConcurrentQueue<Uri> Pending = new();
     internal static Action<Uri>? ProtocolCallback;
+    internal static Action? OpenRequested;
     [STAThread]
     public static void Main(string[] args)
     {
@@ -27,6 +28,7 @@ public static class Program
             { var callback = ProtocolCallback; if (callback is null) Pending.Enqueue(protocol.Uri); else callback(protocol.Uri); }
         }
         instance.Activated += (_, data) => Activated(data);
+        instance.Activated += (_, data) => { if (data.Kind != ExtendedActivationKind.Protocol) OpenRequested?.Invoke(); };
         Activated(activation);
         Application.Start(initialization =>
         {

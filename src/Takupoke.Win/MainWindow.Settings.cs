@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Takupoke.Core;
 using Takupoke.Win.ViewModels;
+using Takupoke.Win.Platform;
 
 namespace Takupoke.Win;
 
@@ -45,7 +46,12 @@ public sealed partial class MainWindow
         changes.Toggled += async (_, _) => await _model.SavePreferencesAsync(_model.Preferences with { NotifyChanges = changes.IsOn, NotificationsSetupCompleted = true }); Add(changes);
         var special = new ToggleSwitch { Header = "試験・返却PDF更新の通知", IsOn = _model.Preferences.NotifySpecials };
         special.Toggled += async (_, _) => await _model.SavePreferencesAsync(_model.Preferences with { NotifySpecials = special.IsOn, NotificationsSetupCompleted = true }); Add(special);
-        Add(Text("閉じても確認を続けるトレイ常駐と自動起動は、Windows連携の実装中です。完全終了・電源断・スリープ中は確認しません。"));
+        var tray = new ToggleSwitch { Header = "ウィンドウを閉じても通知領域で確認を続ける", IsOn = _model.Preferences.KeepInTray, IsEnabled = _desktop is not null };
+        tray.Toggled += async (_, _) => { try { _desktop?.SetTray(tray.IsOn); await _model.SavePreferencesAsync(_model.Preferences with { KeepInTray = tray.IsOn }); } catch { await Message("常駐を設定できません", "通知領域にアイコンを登録できませんでした。ウィンドウを閉じると完全終了します。"); } }; Add(tray);
+        var startup = new ToggleSwitch { Header = "Windowsへのサインイン時に自動起動", IsOn = _model.Preferences.AutoStart, IsEnabled = !_model.OfflineTest };
+        startup.Toggled += async (_, _) => { try { DesktopIntegration.SetAutoStart(startup.IsOn); await _model.SavePreferencesAsync(_model.Preferences with { AutoStart = startup.IsOn }); } catch { await Message("自動起動を設定できません", "Windowsの設定またはアプリの実行ファイルを確認してください。"); } }; Add(startup);
+        Add(Button("アプリを完全に終了", () => { _exitRequested = true; Close(); return Task.CompletedTask; }));
+        Add(Text("常駐中は15分ごとに確認し、スリープ復帰時にも確認します。完全終了・電源断・スリープ中の定刻確認は保証しません。自動起動はWindowsの「スタートアップ アプリ」からも変更できます。"));
         Add(Text("保存期限", 22)); Add(Text("学校データは日本時間4月1日・10月1日に削除します。資料のアプリ内コピー・選択情報・解析結果・学校用データが対象です。個人設定・公開行事・OneDrive上の原本は保持します。"));
         Add(Button("初期設定をもう一度表示", InitialSetup)); Add(Button("使い方", () => Message("使い方", "クラスを選び、4種類の資料を個別に選択します。ホームと時間割は同じ保存済み結果を表示します。授業を選ぶと詳細が開きます。一覧のリンクは右クリックでお気に入り・色・非表示を変更できます。新しいデータの取得は学校アカウントで行います。")));
         Add(Text("たくポケ Win · 開発版", 20)); Add(Text("iOS版の全機能対応とWindows実機確認が揃うまで正式版として配布しません。"));

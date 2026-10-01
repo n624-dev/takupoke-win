@@ -33,6 +33,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private string _status = "読み込み中です。";
     private bool _busy;
     private bool _pendingRefresh;
+    public bool Locked { get; private set; }
+    public long PrivateEpoch { get; private set; }
     public string Status { get => _status; private set => SetProperty(ref _status, value); }
     public bool Busy { get => _busy; private set => SetProperty(ref _busy, value); }
     public bool OfflineTest { get; } = Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1";
@@ -82,6 +84,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     }
     private void ClearPrivateData()
     {
+        PrivateEpoch++;
         Data = Data with { Timetable = null, Changes = null, Specials = null, Times = null };
         Links = null; Mappings = null; Materials = new Dictionary<MaterialKind, MaterialSnapshot>(); Revisions = new Dictionary<DataSet, RevisionResult>();
         _displayPeriod = null; _watcher.Replace([]);
@@ -102,6 +105,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private int ParserYear => int.TryParse(Preferences.DefaultSchoolYear, out var year) && year is >= 1900 and <= 9998 ? year : Today.SchoolYear();
     public Task RefreshAsync()
     {
+        if (Locked) return Task.CompletedTask;
         if (Busy) { _pendingRefresh = true; return Task.CompletedTask; }
         return RunAsync(async token =>
     {
@@ -143,6 +147,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     });
     public async Task<byte[]> ReadPdfAsync(MaterialKind kind, bool accepted)
     {
+        if (Locked) throw new OperationCanceledException();
         var lease = await _school.BeginAsync();
         var source = accepted ? Materials.GetValueOrDefault(kind)?.Analysis?.OriginalId : Materials.GetValueOrDefault(kind)?.Source?.Id;
         return source is not null ? await _school.ReadOriginalAsync(lease, source) : throw new InvalidDataException("保存したPDFがありません。");
@@ -184,6 +189,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     }
     private async Task RunAsync(Func<CancellationToken, Task> action)
     {
+        if (Locked) { Status = "Windowsのロック中は学校データを利用できません。"; return; }
         if (Busy) return;
         await _operations.WaitAsync(); Busy = true;
         if (_session.IsCancellationRequested) { _session.Dispose(); _session = new(); }
@@ -201,7 +207,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public void Cancel() { _session.Cancel(); _authentication.Cancel(); }
     public async Task SetLockedAsync(bool locked)
     {
-        Cancel(); ClearPrivateData();
+        Locked = locked; Cancel(); ClearPrivateData();
         await _school.SetProtectedDataAvailableAsync(!locked);
         if (!locked) await RefreshAsync();
     }

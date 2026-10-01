@@ -85,6 +85,7 @@ public sealed partial class MainWindow
         var available = changes ? ClassSelection.Candidates.Concat(_model.Data.Changes?.Select(c => c.DisplayClassName) ?? []).Distinct().Order().ToArray() : ClassSelection.Candidates.ToArray();
         var selected = (changes ? _model.Preferences.ChangeClasses : _model.Preferences.SelectedClasses).ToHashSet();
         var checks = available.Select(cls => new CheckBox { Content = ClassSelection.Display(cls), Tag = cls, IsChecked = selected.Contains(cls) }).ToArray();
+        foreach (var check in checks) AutomationProperties.SetAutomationId(check, "class-" + (string)check.Tag);
         var warning = Text(changes ? "時間割の選択と独立した一覧専用のクラスです。" : "基本は1クラスです。1年生はホームルームと学科を1つずつ組み合わせられます。");
         if (!changes)
             foreach (var check in checks) check.Checked += (_, _) =>
