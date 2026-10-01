@@ -3,29 +3,5 @@ $executable = Join-Path $PSScriptRoot '../../src/Takupoke.Win/bin/x64/Release/ne
 $executable = (Resolve-Path -LiteralPath $executable).Path
 $env:TAKUPOKE_OFFLINE_TEST_MODE = '1'
 $env:TAKUPOKE_DATA_ROOT = Join-Path $env:TAKUPOKE_CI_TEMP 'test-app-data'
-$process = Start-Process -FilePath $executable -PassThru
-
-try {
-    $deadline = [DateTime]::UtcNow.AddSeconds(45)
-    do {
-        $process.Refresh()
-        if ($process.HasExited) {
-            throw "App exited before opening its development window (exit code $($process.ExitCode))."
-        }
-        if ($process.MainWindowHandle -ne [IntPtr]::Zero -and $process.MainWindowTitle -eq 'たくポケ Win') {
-            Write-Output 'WinUI development window opened successfully on the CI runner.'
-            exit 0
-        }
-        Start-Sleep -Milliseconds 250
-    } while ([DateTime]::UtcNow -lt $deadline)
-
-    throw 'The development window did not open before the timeout.'
-}
-finally {
-    $process.Refresh()
-    if (-not $process.HasExited) {
-        $process.Kill($true)
-        $process.WaitForExit(5000) | Out-Null
-    }
-    $process.Dispose()
-}
+dotnet run --project (Join-Path $PSScriptRoot 'Takupoke.Win.UITests.csproj') --configuration Release -- $executable $env:TAKUPOKE_DATA_ROOT
+if ($LASTEXITCODE -ne 0) { throw 'Windows UI automation checks failed.' }

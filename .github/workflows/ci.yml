@@ -92,7 +92,7 @@ jobs:
       - name: Build WinUI app
         if: matrix.suite == 'windows'
         run: dotnet build src/Takupoke.Win/Takupoke.Win.csproj --configuration ${{ matrix.configuration }} -p:Platform=${{ matrix.platform }}
-      - name: Check development window launch
+      - name: Check native UI navigation and saved settings
         if: matrix.suite == 'windows' && matrix.platform == 'x64' && matrix.configuration == 'Release'
         run: ./tests/Takupoke.Win.UITests/startup-smoke.ps1
       - name: Clean temporary package and CLI caches

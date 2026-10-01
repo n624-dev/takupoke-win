@@ -7,5 +7,6 @@
   <Folder Name="/tests/">
     <Project Path="tests/Takupoke.Core.Tests/Takupoke.Core.Tests.csproj" />
     <Project Path="tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj" />
+    <Project Path="tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj" />
   </Folder>
 </Solution>
