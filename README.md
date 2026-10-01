@@ -2,14 +2,14 @@
 
 時間割・時間割変更・試験・返却・学校行事・リンクを確認する、Windows向けの非公式アプリです。
 
-現在は開発開始段階です。WinUIの起動用ひな形と半期の判定処理を用意しています。時間割などの機能、インストーラー、配布版はまだありません。
+現在は開発中です。共通の時間割統合・名称照合・検索・通知差分、時間割変更XLSXの読み取り、学校データの暗号化保存を実装しています。WinUIの画面は起動用ひな形で、利用者向けの機能画面、インストーラー、配布版はまだありません。
 
 初回正式版は、iOS版の現行機能への対応、同じ入力に対する結果の比較、失敗時の動作確認、Windows実機での確認が揃ってから公開します。
 
 ## 開発構成
 
 C# / .NET 10 / WinUI 3によるWindowsネイティブアプリとして開発します。
-以下の構成で実装を進めます。資料解析・API・保存処理・機能画面は未実装です。
+以下の構成で実装を進めます。PDF解析・API連携・機能画面は開発対象です。
 
 ```text
 src/
@@ -28,12 +28,14 @@ tests/
 
 ```sh
 dotnet test tests/Takupoke.Core.Tests/Takupoke.Core.Tests.csproj --configuration Release
+dotnet test tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj --configuration Release
 dotnet build src/Takupoke.Win/Takupoke.Win.csproj --configuration Release -p:Platform=x64
 ```
 
 GitHub Actionsはpush・pull request・手動実行に対応します。現在は以下を確認します。
 
-- 日本時間の4月・10月境界、年度、うるう日、異なる時差での半期判定（Linux / Windows）。
+- 時間割の優先関係・授業時刻・クラス制約・名称照合・検索・通知差分、iOSと共用する架空のXLSX正規化データ（Linux / Windows）。
+- XLSXの構造・数式の保存値・不正入力拒否、暗号化保存・正常結果保持・ロック・日本時間の半期切り替え（Linux / Windows）。
 - WinUIのx64 Debug / Release、ARM64 Releaseビルド。
 - x64 Release版の開発用ウィンドウの起動。
 - 内部文書・資料などの追跡禁止ファイルと、GitHub noreplyのコミット作者情報。
