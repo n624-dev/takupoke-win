@@ -91,7 +91,7 @@ public sealed class XlsxChangeReaderTests
         using var zip = new BoundedZip(bytes);
         Assert.Throws<InvalidDataException>(() => zip.Read("fake", 512));
     }
-    private static byte[] Workbook(bool formula = false, string? cache = null, Action<Dictionary<string, string>>? mutate = null)
+    internal static byte[] Workbook(bool formula = false, string? cache = null, Action<Dictionary<string, string>>? mutate = null)
     {
         XNamespace ns = Ns;
         XElement Cell(string reference, string value) => new(ns + "c", new XAttribute("r", reference), new XAttribute("t", "inlineStr"),
