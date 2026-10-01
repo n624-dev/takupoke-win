@@ -77,6 +77,8 @@ public sealed partial class MainWindow : Window
         if (_dialogOpen) { UpdateStatus(); return; }
         var focused = RootGrid.XamlRoot is null ? null : FocusManager.GetFocusedElement(RootGrid.XamlRoot) as FrameworkElement;
         var focusId = focused is null ? "" : AutomationProperties.GetAutomationId(focused);
+        if (new Windows.UI.ViewManagement.AccessibilitySettings().HighContrast) Navigation.ClearValue(Control.ForegroundProperty);
+        else Navigation.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(LinkColor(_model.Preferences.MainColor));
         PageContent.Children.Clear();
         switch (_page) { case "links": BuildLinks(); break; case "timetable": BuildTimetable(); break; case "settings": BuildSettings(); break; default: BuildHome(); break; }
         UpdateStatus();

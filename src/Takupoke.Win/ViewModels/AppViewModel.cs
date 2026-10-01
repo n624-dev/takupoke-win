@@ -74,6 +74,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private DateTimeOffset _nextCheck = DateTimeOffset.UtcNow.AddMinutes(15);
     private DateOnly? _lastDay;
     private int _lastMinute = -1;
+    private bool _checkedEventSource;
+    public string? EventSourceMessage { get; private set; }
+    public string? EventsUpdateMessage { get; private set; }
     private void TimerTick(DispatcherQueueTimer sender, object args)
     {
         var now = DateTimeOffset.UtcNow;
@@ -115,9 +118,16 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         if (!OfflineTest)
         {
             Revisions = await _shared.CheckAsync(token);
+            var failedYears = new List<int>();
             foreach (var year in _events.SavedYears())
                 try { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await _events.LoadAsync(year, token), token), token); }
-                catch (ApiException) { /* Keep each previously validated public year independently. */ }
+                catch (ApiException) { failedYears.Add(year); }
+            EventsUpdateMessage = failedYears.Count == 0 ? null : string.Join("、", failedYears) + "年度の学校行事を更新確認できませんでした。保存済みの結果を表示しています。";
+            if (!_checkedEventSource)
+            {
+                _checkedEventSource = true;
+                EventSourceMessage = EventSourceChecker.Message(await new EventSourceChecker(_http).CheckAsync(await _events.LoadAsync(EventSourceChecker.SourceSchoolYear, token), token));
+            }
         }
         await ReloadAsync(token); Status = "登録した原本と公開更新情報を確認しました。OneDriveのクラウド同期完了を示すものではありません。";
         });
@@ -140,7 +150,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         Status = string.Join(" / ", results.Select(r => DataSetLabel(r.Kind) + "：" + (r.Updated ? "更新しました" : r.Failure is { } failure ? new ApiException(failure).Message : "保持しています")));
     });
     public Task FetchEventsAsync(int year) => RunAsync(async token =>
-    { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await _events.LoadAsync(year, token), token), token); await ReloadAsync(token); Status = "学校行事を保存しました。"; });
+    { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await _events.LoadAsync(year, token), token), token); EventSourceMessage = null; EventsUpdateMessage = null; await ReloadAsync(token); Status = "学校行事を保存しました。元PDFの更新確認は次回起動時に行います。"; });
     public Task SavePreferencesAsync(UserPreferences next) => RunAsync(async token =>
     {
         await _preferences.SaveAsync(next.Validated(), token); Preferences = next; await CheckNotificationsAsync(token); SnapshotChanged?.Invoke();

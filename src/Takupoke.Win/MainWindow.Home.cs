@@ -33,6 +33,8 @@ public sealed partial class MainWindow
         var updates = _model.Revisions.Where(p => p.Value.Changed).Select(p => AppViewModel.DataSetLabel(p.Key)).ToArray();
         if (updates.Length > 0) Add(Card(Panel(Text(string.Join("・", updates) + "のデータを取得・更新できます。"), Button("学校アカウントでデータを更新", _model.UpdateSharedAsync))));
         var classes = _model.Preferences.SelectedClasses;
+        if (_model.EventSourceMessage is { } eventWarning) Add(Card(Text(eventWarning)));
+        if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
         if (classes.Length == 0) Add(Card(Panel(Text("今日の授業を表示するには、クラスを選択してください。"), Button("クラスを選択", ChooseClasses))));
         var engine = _model.Engine; var day = _model.Today; var fullDay = engine.FullDayEventTitle(day, classes);
         var plan = engine.Plan(day);

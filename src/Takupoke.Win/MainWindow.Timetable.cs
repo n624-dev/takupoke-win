@@ -10,6 +10,8 @@ public sealed partial class MainWindow
     private void BuildTimetable()
     {
         TitleText("時間割", "page-timetable");
+        if (_model.EventSourceMessage is { } eventWarning) Add(Card(Text(eventWarning)));
+        if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
         Add(Button("クラス：" + string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display)), ChooseClasses));
         var controls = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
         var bounds = _model.Engine.ReachableWeeks(_model.Today, _model.Preferences.SelectedClasses);

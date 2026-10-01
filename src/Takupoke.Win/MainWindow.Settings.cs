@@ -15,7 +15,6 @@ public sealed partial class MainWindow
         Add(Button("クラスを選択", ChooseClasses));
         var mainColor = new ComboBox { Header = "メインカラー", ItemsSource = UserPreferences.MainColors, SelectedItem = _model.Preferences.MainColor };
         mainColor.SelectionChanged += async (_, _) => { if (mainColor.SelectedItem is string value) await _model.SavePreferencesAsync(_model.Preferences with { MainColor = value }); }; Add(mainColor);
-        if (!new Windows.UI.ViewManagement.AccessibilitySettings().HighContrast) Navigation.Foreground = new SolidColorBrush(LinkColor(_model.Preferences.MainColor));
         var opening = new ComboBox { Header = "リンクの開き方", ItemsSource = new[] { "アプリ内ブラウザ", "外部ブラウザ" }, SelectedIndex = (int)_model.Preferences.OpeningMode };
         opening.SelectionChanged += async (_, _) => await _model.SavePreferencesAsync(_model.Preferences with { OpeningMode = (LinkOpeningMode)opening.SelectedIndex }); Add(opening);
         Add(Text("学校資料", 22));
@@ -35,6 +34,8 @@ public sealed partial class MainWindow
         }
         Add(Button("学校アカウントでリンク・名称・授業時刻を取得", _model.UpdateSharedAsync));
         Add(Text("学校行事", 22));
+        if (_model.EventSourceMessage is { } eventWarning) Add(Card(Text(eventWarning)));
+        if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
         var eventsYear = new NumberBox { Header = "取得する学校年度", Minimum = 1900, Maximum = 9998, Value = _model.Today.SchoolYear(), SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Inline };
         Add(eventsYear); Add(Button("この年度の学校行事を取得", () => _model.FetchEventsAsync((int)eventsYear.Value)));
         foreach (var savedYear in _model.SavedEventYears) Add(Button(savedYear + "年度の学校行事を表示", async () =>
@@ -84,12 +85,34 @@ public sealed partial class MainWindow
     private async Task ShowAnalysis(MaterialKind kind)
     {
         var analysis = _model.Materials.GetValueOrDefault(kind)?.Analysis; if (analysis is null) return;
-        IEnumerable<string> lines = kind switch
+        var filtered = kind is MaterialKind.Timetable or MaterialKind.Changes;
+        var selected = (kind == MaterialKind.Timetable ? _model.Preferences.TimetableAnalysisClasses : _model.Preferences.ChangeAnalysisClasses).ToHashSet();
+        var available = kind == MaterialKind.Timetable ? analysis.Timetable?.Lessons.Select(l => l.ClassName).Distinct().Order().ToArray() ?? []
+            : analysis.Changes?.Select(c => c.DisplayClassName).Distinct().Order().ToArray() ?? [];
+        var result = Text("");
+        void Populate()
         {
-            MaterialKind.Timetable => analysis.Timetable?.Lessons.Select(l => $"{ClassSelection.Display(l.ClassName)} · {new[] { "", "月", "火", "水", "木", "金", "土", "日" }[l.Weekday]} · {l.Period}限 · {l.Names.Subject} · {l.Names.Teacher} · {l.Names.Room}") ?? [],
-            MaterialKind.Changes => analysis.Changes?.Select(c => c.ChangeDate + " · " + c.DisplayClassName + " · " + c.DisplayPeriod + " · " + c.BeforeSubject + " → " + c.AfterSubject + " · " + c.Note) ?? [],
-            _ => analysis.Special?.Lessons.Select(l => l.Date + " · " + l.ClassName + " · " + l.Period + "限 · " + string.Join(" · ", l.Lines)) ?? []
-        };
-        await Dialog("解析結果", Text(string.Join("\n", lines)));
+            IEnumerable<string> lines = kind switch
+            {
+                MaterialKind.Timetable => analysis.Timetable?.Lessons.Where(l => selected.Count == 0 || selected.Contains(l.ClassName)).Select(l => $"{ClassSelection.Display(l.ClassName)} · {new[] { "", "月", "火", "水", "木", "金", "土", "日" }[l.Weekday]} · {l.Period}限 · {l.Names.Subject} · {l.Names.Teacher} · {l.Names.Room}") ?? [],
+                MaterialKind.Changes => analysis.Changes?.Where(c => selected.Count == 0 || selected.Contains(c.DisplayClassName)).Select(c => c.ChangeDate + " · " + ClassSelection.Display(c.DisplayClassName) + " · " + c.DisplayPeriod + " · " + c.BeforeSubject + " → " + c.AfterSubject + " · " + c.Teacher + " · " + c.Room + " · " + c.Note + "\n元の行：" + c.RawText) ?? [],
+                _ => analysis.Special?.Lessons.Select(l => l.Date + " · " + ClassSelection.Display(l.ClassName) + " · " + l.Period + "限 · " + string.Join(" · ", l.Lines)) ?? []
+            };
+            result.Text = string.Join("\n", lines);
+        }
+        var panel = Panel(Text("解析版：" + analysis.ParserVersion + " · " + analysis.SourceName));
+        if (filtered)
+        {
+            panel.Children.Add(Text("確認するクラス（未選択は全クラス）。時間割の選択とは独立して保存します。"));
+            foreach (var cls in available.Concat(selected).Distinct().Order())
+            {
+                var check = new CheckBox { Content = ClassSelection.Display(cls), IsChecked = selected.Contains(cls) };
+                check.Checked += (_, _) => { selected.Add(cls); Populate(); }; check.Unchecked += (_, _) => { selected.Remove(cls); Populate(); };
+                panel.Children.Add(check);
+            }
+        }
+        Populate(); panel.Children.Add(result); await Dialog("解析結果", panel);
+        if (filtered) await _model.SavePreferencesAsync(kind == MaterialKind.Timetable ? _model.Preferences with { TimetableAnalysisClasses = selected.ToArray() }
+            : _model.Preferences with { ChangeAnalysisClasses = selected.ToArray() });
     }
 }
