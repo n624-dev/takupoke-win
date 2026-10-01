@@ -57,6 +57,8 @@ jobs:
     env:
       DOTNET_CLI_TELEMETRY_OPTOUT: '1'
       DOTNET_NOLOGO: '1'
+      DOTNET_CLI_USE_MSBUILD_SERVER: '0'
+      MSBUILDDISABLENODEREUSE: '1'
     defaults:
       run:
         shell: pwsh
@@ -97,8 +99,23 @@ jobs:
           if ($env:TAKUPOKE_CI_TEMP -and [IO.Path]::GetFullPath($env:TAKUPOKE_CI_TEMP) -ne [IO.Path]::GetFullPath($expected)) {
               throw 'Unexpected cleanup path.'
           }
-          if (Test-Path -LiteralPath $expected) {
-              Remove-Item -LiteralPath $expected -Recurse -Force -ErrorAction Stop
+          if (Get-Command dotnet -ErrorAction SilentlyContinue) {
+              dotnet build-server shutdown
+              if ($LASTEXITCODE -ne 0) {
+                  throw 'Build servers did not shut down successfully.'
+              }
+          }
+          for ($attempt = 1; $attempt -le 5; $attempt++) {
+              try {
+                  if (Test-Path -LiteralPath $expected) {
+                      Remove-Item -LiteralPath $expected -Recurse -Force -ErrorAction Stop
+                  }
+                  break
+              }
+              catch {
+                  if ($attempt -eq 5) { throw }
+                  Start-Sleep -Seconds 1
+              }
           }
           if (Test-Path -LiteralPath $expected) {
               throw 'Temporary caches remain.'
