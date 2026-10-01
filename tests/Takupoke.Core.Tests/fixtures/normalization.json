@@ -1,0 +1,737 @@
+{
+  "schemaVersion": 1,
+  "description": "実資料を使用せず作成した架空の表。固定したPython参照実装とSwift解析の比較に使用。",
+  "reference": {
+    "repository": "https://github.com/n624-dev/denpa-schedule-csv",
+    "commit": "ba3db92dddd8b453348e5a78b5d716a10ee72145",
+    "file": "excel_to_class_schedule_csvs.py",
+    "sha256": "7bbbbca774f40623ee6fbd9c227a68e8bd675ae3fcdf6a0415cfd67a00513f90"
+  },
+  "cases": [
+    {
+      "id": "unicode-and-serial",
+      "defaultYear": 2032,
+      "iosDisposition": "compare",
+      "sheetRows": [
+        [
+          "架空の試験表"
+        ],
+        [],
+        [
+          "学 年",
+          "学科・クラス",
+          "月日",
+          "時限",
+          "変更前",
+          "変更後",
+          "教員",
+          "教室",
+          "備考"
+        ],
+        [
+          "１.０",
+          "ｚｚ",
+          "４６１１９.０",
+          "２限目",
+          " 架空科目Ａ ",
+          "架空科目Ｂ",
+          "架空教員Ａ",
+          "架空教室Ａ",
+          "架空備考Ａ\r\n\r\n架空備考Ｂ"
+        ],
+        [],
+        [
+          "1",
+          "ZZ",
+          "2032年7月10日",
+          "3.0",
+          "架空科目C",
+          "架空科目D",
+          "架空教員B"
+        ]
+      ],
+      "expectedRecords": [
+        {
+          "change_date": "2026-04-07",
+          "class_name": "1_ZZ",
+          "period": "2",
+          "before_subject": "架空科目A",
+          "after_subject": "架空科目B",
+          "teacher": "架空教員A",
+          "room": "架空教室A",
+          "note": "架空備考A\n架空備考B",
+          "raw_text": "学 年:1 | 学科・クラス:zz | 月日:2026/4/7 | 時限:2限目 | 変更前:架空科目A | 変更後:架空科目B | 教員:架空教員A | 教室:架空教室A | 備考:架空備考A\n架空備考B",
+          "canonical_text": "2026-04-07 | 1_ZZ | 2 | 架空科目A | 架空科目B | 架空教員A | 架空教室A | 架空備考A\n架空備考B | 学 年:1 | 学科・クラス:zz | 月日:2026/4/7 | 時限:2限目 | 変更前:架空科目A | 変更後:架空科目B | 教員:架空教員A | 教室:架空教室A | 備考:架空備考A\n架空備考B"
+        },
+        {
+          "change_date": "2032-07-10",
+          "class_name": "1_ZZ",
+          "period": "3",
+          "before_subject": "架空科目C",
+          "after_subject": "架空科目D",
+          "teacher": "架空教員B",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:1 | 学科・クラス:ZZ | 月日:2032年7月10日 | 時限:3 | 変更前:架空科目C | 変更後:架空科目D | 教員:架空教員B",
+          "canonical_text": "2032-07-10 | 1_ZZ | 3 | 架空科目C | 架空科目D | 架空教員B | 学 年:1 | 学科・クラス:ZZ | 月日:2032年7月10日 | 時限:3 | 変更前:架空科目C | 変更後:架空科目D | 教員:架空教員B"
+        }
+      ]
+    },
+    {
+      "id": "year-ranges-and-class-order",
+      "defaultYear": 2032,
+      "iosDisposition": "compare",
+      "sheetRows": [
+        [
+          "学 年",
+          "学科・クラス",
+          "月日",
+          "科目"
+        ],
+        [
+          "1～2",
+          "ZZ、YY",
+          "7/10",
+          "架空科目A"
+        ],
+        [
+          "3-2",
+          "ｚｚ，ｙｙ",
+          "2032.7.11",
+          "架空科目B"
+        ]
+      ],
+      "expectedRecords": [
+        {
+          "change_date": "2032-07-10",
+          "class_name": "1_ZZ",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目A",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:1~2 | 学科・クラス:ZZ、YY | 月日:7/10 | 科目:架空科目A",
+          "canonical_text": "2032-07-10 | 1_ZZ | 架空科目A | 学 年:1~2 | 学科・クラス:ZZ、YY | 月日:7/10 | 科目:架空科目A"
+        },
+        {
+          "change_date": "2032-07-10",
+          "class_name": "1_YY",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目A",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:1~2 | 学科・クラス:ZZ、YY | 月日:7/10 | 科目:架空科目A",
+          "canonical_text": "2032-07-10 | 1_YY | 架空科目A | 学 年:1~2 | 学科・クラス:ZZ、YY | 月日:7/10 | 科目:架空科目A"
+        },
+        {
+          "change_date": "2032-07-10",
+          "class_name": "2_ZZ",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目A",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:1~2 | 学科・クラス:ZZ、YY | 月日:7/10 | 科目:架空科目A",
+          "canonical_text": "2032-07-10 | 2_ZZ | 架空科目A | 学 年:1~2 | 学科・クラス:ZZ、YY | 月日:7/10 | 科目:架空科目A"
+        },
+        {
+          "change_date": "2032-07-10",
+          "class_name": "2_YY",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目A",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:1~2 | 学科・クラス:ZZ、YY | 月日:7/10 | 科目:架空科目A",
+          "canonical_text": "2032-07-10 | 2_YY | 架空科目A | 学 年:1~2 | 学科・クラス:ZZ、YY | 月日:7/10 | 科目:架空科目A"
+        },
+        {
+          "change_date": "2032-07-11",
+          "class_name": "3_ZZ",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目B",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:3-2 | 学科・クラス:zz,yy | 月日:2032.7.11 | 科目:架空科目B",
+          "canonical_text": "2032-07-11 | 3_ZZ | 架空科目B | 学 年:3-2 | 学科・クラス:zz,yy | 月日:2032.7.11 | 科目:架空科目B"
+        },
+        {
+          "change_date": "2032-07-11",
+          "class_name": "3_YY",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目B",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:3-2 | 学科・クラス:zz,yy | 月日:2032.7.11 | 科目:架空科目B",
+          "canonical_text": "2032-07-11 | 3_YY | 架空科目B | 学 年:3-2 | 学科・クラス:zz,yy | 月日:2032.7.11 | 科目:架空科目B"
+        },
+        {
+          "change_date": "2032-07-11",
+          "class_name": "2_ZZ",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目B",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:3-2 | 学科・クラス:zz,yy | 月日:2032.7.11 | 科目:架空科目B",
+          "canonical_text": "2032-07-11 | 2_ZZ | 架空科目B | 学 年:3-2 | 学科・クラス:zz,yy | 月日:2032.7.11 | 科目:架空科目B"
+        },
+        {
+          "change_date": "2032-07-11",
+          "class_name": "2_YY",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目B",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:3-2 | 学科・クラス:zz,yy | 月日:2032.7.11 | 科目:架空科目B",
+          "canonical_text": "2032-07-11 | 2_YY | 架空科目B | 学 年:3-2 | 学科・クラス:zz,yy | 月日:2032.7.11 | 科目:架空科目B"
+        }
+      ]
+    },
+    {
+      "id": "all-known-classes-excludes-ai",
+      "defaultYear": 2032,
+      "iosDisposition": "compare",
+      "sheetRows": [
+        [
+          "学 年",
+          "学科・クラス",
+          "月日",
+          "科目"
+        ],
+        [
+          "2",
+          "全",
+          "2032/7/10",
+          "架空科目A"
+        ],
+        [
+          "2",
+          "ZZ,AI,YY",
+          "2032/7/11",
+          "架空科目B"
+        ],
+        [
+          "3",
+          "XX",
+          "2032/7/11",
+          "架空科目C"
+        ]
+      ],
+      "expectedRecords": [
+        {
+          "change_date": "2032-07-10",
+          "class_name": "2_YY",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目A",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:2 | 学科・クラス:全 | 月日:2032/7/10 | 科目:架空科目A",
+          "canonical_text": "2032-07-10 | 2_YY | 架空科目A | 学 年:2 | 学科・クラス:全 | 月日:2032/7/10 | 科目:架空科目A"
+        },
+        {
+          "change_date": "2032-07-10",
+          "class_name": "2_ZZ",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目A",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:2 | 学科・クラス:全 | 月日:2032/7/10 | 科目:架空科目A",
+          "canonical_text": "2032-07-10 | 2_ZZ | 架空科目A | 学 年:2 | 学科・クラス:全 | 月日:2032/7/10 | 科目:架空科目A"
+        },
+        {
+          "change_date": "2032-07-11",
+          "class_name": "2_ZZ",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目B",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:2 | 学科・クラス:ZZ,AI,YY | 月日:2032/7/11 | 科目:架空科目B",
+          "canonical_text": "2032-07-11 | 2_ZZ | 架空科目B | 学 年:2 | 学科・クラス:ZZ,AI,YY | 月日:2032/7/11 | 科目:架空科目B"
+        },
+        {
+          "change_date": "2032-07-11",
+          "class_name": "2_AI",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目B",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:2 | 学科・クラス:ZZ,AI,YY | 月日:2032/7/11 | 科目:架空科目B",
+          "canonical_text": "2032-07-11 | 2_AI | 架空科目B | 学 年:2 | 学科・クラス:ZZ,AI,YY | 月日:2032/7/11 | 科目:架空科目B"
+        },
+        {
+          "change_date": "2032-07-11",
+          "class_name": "2_YY",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目B",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:2 | 学科・クラス:ZZ,AI,YY | 月日:2032/7/11 | 科目:架空科目B",
+          "canonical_text": "2032-07-11 | 2_YY | 架空科目B | 学 年:2 | 学科・クラス:ZZ,AI,YY | 月日:2032/7/11 | 科目:架空科目B"
+        },
+        {
+          "change_date": "2032-07-11",
+          "class_name": "3_XX",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目C",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:3 | 学科・クラス:XX | 月日:2032/7/11 | 科目:架空科目C",
+          "canonical_text": "2032-07-11 | 3_XX | 架空科目C | 学 年:3 | 学科・クラス:XX | 月日:2032/7/11 | 科目:架空科目C"
+        }
+      ],
+      "iosClassAliases": {
+        "2_AI": "AI_2"
+      }
+    },
+    {
+      "id": "all-without-known-classes",
+      "defaultYear": 2032,
+      "iosDisposition": "requiresValidation",
+      "sheetRows": [
+        [
+          "学 年",
+          "学科・クラス",
+          "月日",
+          "科目"
+        ],
+        [
+          "4",
+          "全",
+          "2032/7/12",
+          "架空科目A"
+        ]
+      ],
+      "expectedRecords": []
+    },
+    {
+      "id": "change-content-fallback",
+      "defaultYear": 2032,
+      "iosDisposition": "compare",
+      "sheetRows": [
+        [
+          "学 年",
+          "学科・クラス",
+          "月日",
+          "時限",
+          "変更内容",
+          "科目（担当教員）"
+        ],
+        [
+          "1",
+          "ZZ",
+          "7/10",
+          "1,2",
+          "休講",
+          "架空科目A（架空教員A）"
+        ],
+        [
+          "1",
+          "ZZ",
+          "7/11",
+          "3時限",
+          "補講",
+          "架空科目B（架空教員B）"
+        ],
+        [
+          "1",
+          "ZZ",
+          "7/12",
+          "4限",
+          "変更",
+          "架空科目C（架空教員C）"
+        ]
+      ],
+      "expectedRecords": [
+        {
+          "change_date": "2032-07-10",
+          "class_name": "1_ZZ",
+          "period": "1,2",
+          "before_subject": "架空科目A(架空教員A)",
+          "after_subject": "",
+          "teacher": "",
+          "room": "",
+          "note": "休講",
+          "raw_text": "学 年:1 | 学科・クラス:ZZ | 月日:7/10 | 時限:1,2 | 変更内容:休講 | 科目(担当教員):架空科目A(架空教員A)",
+          "canonical_text": "2032-07-10 | 1_ZZ | 1,2 | 架空科目A(架空教員A) | 休講 | 学 年:1 | 学科・クラス:ZZ | 月日:7/10 | 時限:1,2 | 変更内容:休講 | 科目(担当教員):架空科目A(架空教員A)"
+        },
+        {
+          "change_date": "2032-07-11",
+          "class_name": "1_ZZ",
+          "period": "3",
+          "before_subject": "",
+          "after_subject": "架空科目B(架空教員B)",
+          "teacher": "",
+          "room": "",
+          "note": "補講",
+          "raw_text": "学 年:1 | 学科・クラス:ZZ | 月日:7/11 | 時限:3時限 | 変更内容:補講 | 科目(担当教員):架空科目B(架空教員B)",
+          "canonical_text": "2032-07-11 | 1_ZZ | 3 | 架空科目B(架空教員B) | 補講 | 学 年:1 | 学科・クラス:ZZ | 月日:7/11 | 時限:3時限 | 変更内容:補講 | 科目(担当教員):架空科目B(架空教員B)"
+        },
+        {
+          "change_date": "2032-07-12",
+          "class_name": "1_ZZ",
+          "period": "4",
+          "before_subject": "",
+          "after_subject": "架空科目C(架空教員C)",
+          "teacher": "",
+          "room": "",
+          "note": "変更",
+          "raw_text": "学 年:1 | 学科・クラス:ZZ | 月日:7/12 | 時限:4限 | 変更内容:変更 | 科目(担当教員):架空科目C(架空教員C)",
+          "canonical_text": "2032-07-12 | 1_ZZ | 4 | 架空科目C(架空教員C) | 変更 | 学 年:1 | 学科・クラス:ZZ | 月日:7/12 | 時限:4限 | 変更内容:変更 | 科目(担当教員):架空科目C(架空教員C)"
+        }
+      ]
+    },
+    {
+      "id": "explicit-subject-and-note-win",
+      "defaultYear": 2032,
+      "iosDisposition": "compare",
+      "sheetRows": [
+        [
+          "学 年",
+          "学科・クラス",
+          "月日",
+          "変更前科目",
+          "変更後 科目",
+          "変更種別",
+          "科目",
+          "備考"
+        ],
+        [
+          "1",
+          "ZZ",
+          "2032-7-10",
+          "架空科目A",
+          "架空科目B",
+          "休講",
+          "架空科目C",
+          "架空備考A"
+        ],
+        [
+          "1",
+          "ZZ",
+          "2032-7-11",
+          "架空科目D",
+          "",
+          "補講",
+          "架空科目E",
+          ""
+        ]
+      ],
+      "expectedRecords": [
+        {
+          "change_date": "2032-07-10",
+          "class_name": "1_ZZ",
+          "period": "",
+          "before_subject": "架空科目A",
+          "after_subject": "架空科目B",
+          "teacher": "",
+          "room": "",
+          "note": "架空備考A",
+          "raw_text": "学 年:1 | 学科・クラス:ZZ | 月日:2032-7-10 | 変更前科目:架空科目A | 変更後 科目:架空科目B | 変更種別:休講 | 科目:架空科目C | 備考:架空備考A",
+          "canonical_text": "2032-07-10 | 1_ZZ | 架空科目A | 架空科目B | 架空備考A | 学 年:1 | 学科・クラス:ZZ | 月日:2032-7-10 | 変更前科目:架空科目A | 変更後 科目:架空科目B | 変更種別:休講 | 科目:架空科目C | 備考:架空備考A"
+        },
+        {
+          "change_date": "2032-07-11",
+          "class_name": "1_ZZ",
+          "period": "",
+          "before_subject": "架空科目D",
+          "after_subject": "",
+          "teacher": "",
+          "room": "",
+          "note": "補講",
+          "raw_text": "学 年:1 | 学科・クラス:ZZ | 月日:2032-7-11 | 変更前科目:架空科目D | 変更種別:補講 | 科目:架空科目E",
+          "canonical_text": "2032-07-11 | 1_ZZ | 架空科目D | 補講 | 学 年:1 | 学科・クラス:ZZ | 月日:2032-7-11 | 変更前科目:架空科目D | 変更種別:補講 | 科目:架空科目E"
+        }
+      ]
+    },
+    {
+      "id": "alias-header-order",
+      "defaultYear": 2032,
+      "iosDisposition": "compare",
+      "sheetRows": [
+        [
+          "学 年",
+          "学科・クラス",
+          "月日",
+          "校時",
+          "時限",
+          "担当",
+          "教員",
+          "場所",
+          "連絡"
+        ],
+        [
+          "1",
+          "ZZ",
+          "7/10",
+          "",
+          "2限",
+          "",
+          "架空教員A",
+          "架空教室A",
+          "架空備考A"
+        ]
+      ],
+      "expectedRecords": [
+        {
+          "change_date": "2032-07-10",
+          "class_name": "1_ZZ",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "",
+          "teacher": "",
+          "room": "架空教室A",
+          "note": "架空備考A",
+          "raw_text": "学 年:1 | 学科・クラス:ZZ | 月日:7/10 | 時限:2限 | 教員:架空教員A | 場所:架空教室A | 連絡:架空備考A",
+          "canonical_text": "2032-07-10 | 1_ZZ | 架空教室A | 架空備考A | 学 年:1 | 学科・クラス:ZZ | 月日:7/10 | 時限:2限 | 教員:架空教員A | 場所:架空教室A | 連絡:架空備考A"
+        }
+      ]
+    },
+    {
+      "id": "empty-rows-and-duplicates",
+      "defaultYear": 2032,
+      "iosDisposition": "compare",
+      "sheetRows": [
+        [
+          "学 年",
+          "学科・クラス",
+          "月日",
+          "科目"
+        ],
+        [],
+        [
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "1",
+          "ZZ,ZZ",
+          "2032/7/10",
+          "架空科目A"
+        ],
+        [
+          "1",
+          "ZZ",
+          "2032/7/10",
+          "架空科目A"
+        ]
+      ],
+      "expectedRecords": [
+        {
+          "change_date": "2032-07-10",
+          "class_name": "1_ZZ",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目A",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:1 | 学科・クラス:ZZ,ZZ | 月日:2032/7/10 | 科目:架空科目A",
+          "canonical_text": "2032-07-10 | 1_ZZ | 架空科目A | 学 年:1 | 学科・クラス:ZZ,ZZ | 月日:2032/7/10 | 科目:架空科目A"
+        },
+        {
+          "change_date": "2032-07-10",
+          "class_name": "1_ZZ",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目A",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:1 | 学科・クラス:ZZ,ZZ | 月日:2032/7/10 | 科目:架空科目A",
+          "canonical_text": "2032-07-10 | 1_ZZ | 架空科目A | 学 年:1 | 学科・クラス:ZZ,ZZ | 月日:2032/7/10 | 科目:架空科目A"
+        },
+        {
+          "change_date": "2032-07-10",
+          "class_name": "1_ZZ",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目A",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:1 | 学科・クラス:ZZ | 月日:2032/7/10 | 科目:架空科目A",
+          "canonical_text": "2032-07-10 | 1_ZZ | 架空科目A | 学 年:1 | 学科・クラス:ZZ | 月日:2032/7/10 | 科目:架空科目A"
+        }
+      ]
+    },
+    {
+      "id": "invalid-dates-reference-behavior",
+      "defaultYear": 2032,
+      "iosDisposition": "requiresValidation",
+      "sheetRows": [
+        [
+          "学 年",
+          "学科・クラス",
+          "月日",
+          "科目"
+        ],
+        [
+          "1",
+          "ZZ",
+          "2032/2/30",
+          "架空科目A"
+        ],
+        [
+          "1",
+          "ZZ",
+          "架空未確定日",
+          "架空科目B"
+        ]
+      ],
+      "expectedRecords": [
+        {
+          "change_date": "2032-02-30",
+          "class_name": "1_ZZ",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目A",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:1 | 学科・クラス:ZZ | 月日:2032/2/30 | 科目:架空科目A",
+          "canonical_text": "2032-02-30 | 1_ZZ | 架空科目A | 学 年:1 | 学科・クラス:ZZ | 月日:2032/2/30 | 科目:架空科目A"
+        },
+        {
+          "change_date": "架空未確定日",
+          "class_name": "1_ZZ",
+          "period": "",
+          "before_subject": "",
+          "after_subject": "架空科目B",
+          "teacher": "",
+          "room": "",
+          "note": "",
+          "raw_text": "学 年:1 | 学科・クラス:ZZ | 月日:架空未確定日 | 科目:架空科目B",
+          "canonical_text": "架空未確定日 | 1_ZZ | 架空科目B | 学 年:1 | 学科・クラス:ZZ | 月日:架空未確定日 | 科目:架空科目B"
+        }
+      ]
+    },
+    {
+      "id": "literal-ai-grade",
+      "defaultYear": 2032,
+      "iosDisposition": "compare",
+      "sheetRows": [
+        [
+          "学 年",
+          "学科・クラス",
+          "月日",
+          "時限",
+          "変更内容",
+          "科目(担当教員)"
+        ],
+        [
+          "ａ ｉ",
+          "３，２",
+          "2032/7/10",
+          "4限",
+          "補講",
+          "架空科目C(架空教員C)"
+        ],
+        [
+          "AI",
+          "全",
+          "2032/7/11",
+          "2限",
+          "休講",
+          "架空科目D(架空教員D)"
+        ],
+        [
+          "2",
+          "ZZ",
+          "2032/7/12",
+          "3限",
+          "変更",
+          "架空科目E(架空教員E)"
+        ]
+      ],
+      "expectedRecords": [
+        {
+          "change_date": "2032-07-10",
+          "class_name": "AI_3",
+          "period": "4",
+          "before_subject": "",
+          "after_subject": "架空科目C(架空教員C)",
+          "teacher": "",
+          "room": "",
+          "note": "補講",
+          "raw_text": "学 年:a i | 学科・クラス:3,2 | 月日:2032/7/10 | 時限:4限 | 変更内容:補講 | 科目(担当教員):架空科目C(架空教員C)",
+          "canonical_text": "2032-07-10 | AI_3 | 4 | 架空科目C(架空教員C) | 補講 | 学 年:a i | 学科・クラス:3,2 | 月日:2032/7/10 | 時限:4限 | 変更内容:補講 | 科目(担当教員):架空科目C(架空教員C)"
+        },
+        {
+          "change_date": "2032-07-10",
+          "class_name": "AI_2",
+          "period": "4",
+          "before_subject": "",
+          "after_subject": "架空科目C(架空教員C)",
+          "teacher": "",
+          "room": "",
+          "note": "補講",
+          "raw_text": "学 年:a i | 学科・クラス:3,2 | 月日:2032/7/10 | 時限:4限 | 変更内容:補講 | 科目(担当教員):架空科目C(架空教員C)",
+          "canonical_text": "2032-07-10 | AI_2 | 4 | 架空科目C(架空教員C) | 補講 | 学 年:a i | 学科・クラス:3,2 | 月日:2032/7/10 | 時限:4限 | 変更内容:補講 | 科目(担当教員):架空科目C(架空教員C)"
+        },
+        {
+          "change_date": "2032-07-11",
+          "class_name": "AI_2",
+          "period": "2",
+          "before_subject": "架空科目D(架空教員D)",
+          "after_subject": "",
+          "teacher": "",
+          "room": "",
+          "note": "休講",
+          "raw_text": "学 年:AI | 学科・クラス:全 | 月日:2032/7/11 | 時限:2限 | 変更内容:休講 | 科目(担当教員):架空科目D(架空教員D)",
+          "canonical_text": "2032-07-11 | AI_2 | 2 | 架空科目D(架空教員D) | 休講 | 学 年:AI | 学科・クラス:全 | 月日:2032/7/11 | 時限:2限 | 変更内容:休講 | 科目(担当教員):架空科目D(架空教員D)"
+        },
+        {
+          "change_date": "2032-07-11",
+          "class_name": "AI_3",
+          "period": "2",
+          "before_subject": "架空科目D(架空教員D)",
+          "after_subject": "",
+          "teacher": "",
+          "room": "",
+          "note": "休講",
+          "raw_text": "学 年:AI | 学科・クラス:全 | 月日:2032/7/11 | 時限:2限 | 変更内容:休講 | 科目(担当教員):架空科目D(架空教員D)",
+          "canonical_text": "2032-07-11 | AI_3 | 2 | 架空科目D(架空教員D) | 休講 | 学 年:AI | 学科・クラス:全 | 月日:2032/7/11 | 時限:2限 | 変更内容:休講 | 科目(担当教員):架空科目D(架空教員D)"
+        },
+        {
+          "change_date": "2032-07-12",
+          "class_name": "2_ZZ",
+          "period": "3",
+          "before_subject": "",
+          "after_subject": "架空科目E(架空教員E)",
+          "teacher": "",
+          "room": "",
+          "note": "変更",
+          "raw_text": "学 年:2 | 学科・クラス:ZZ | 月日:2032/7/12 | 時限:3限 | 変更内容:変更 | 科目(担当教員):架空科目E(架空教員E)",
+          "canonical_text": "2032-07-12 | 2_ZZ | 3 | 架空科目E(架空教員E) | 変更 | 学 年:2 | 学科・クラス:ZZ | 月日:2032/7/12 | 時限:3限 | 変更内容:変更 | 科目(担当教員):架空科目E(架空教員E)"
+        }
+      ]
+    }
+  ]
+}
