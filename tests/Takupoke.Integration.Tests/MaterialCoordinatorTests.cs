@@ -8,7 +8,7 @@ namespace Takupoke.Integration.Tests;
 
 public sealed class MaterialCoordinatorTests
 {
-    private sealed class Identity : IFileIdentityProvider
+    private sealed class FakeIdentity : IFileIdentityProvider
     { public string Value { get; set; } = "fake-file-identity"; public string Identity(FileStream stream) => Value; }
     private sealed class Protector : IKeyProtector, IDisposable
     {
@@ -26,7 +26,7 @@ public sealed class MaterialCoordinatorTests
         {
             var path = Path.Combine(root, "fictional.xlsx"); await File.WriteAllBytesAsync(path, XlsxChangeReaderTests.Workbook());
             await using var store = new SchoolDataStore(Path.Combine(root, "data"), protector);
-            var coordinator = new MaterialCoordinator(store, new(new Identity()));
+            var coordinator = new MaterialCoordinator(store, new(new FakeIdentity()));
             Assert.True((await coordinator.SelectAsync(MaterialKind.Changes, path, 2032)).Parsed);
             var lease = await store.BeginAsync(); var original = await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes");
             Assert.False((await coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Changed);
@@ -50,7 +50,7 @@ public sealed class MaterialCoordinatorTests
         {
             var path = Path.Combine(root, "fictional.xlsx"); await File.WriteAllBytesAsync(path, XlsxChangeReaderTests.Workbook());
             await using var store = new SchoolDataStore(Path.Combine(root, "data"), protector);
-            var identity = new Identity(); var coordinator = new MaterialCoordinator(store, new(identity));
+            var identity = new FakeIdentity(); var coordinator = new MaterialCoordinator(store, new(identity));
             await coordinator.SelectAsync(MaterialKind.Changes, path, 2032);
             var lease = await store.BeginAsync(); var source = await store.ReadAsync<SourceRecord>(lease, "selection.Changes");
             identity.Value = "fake-replacement-identity";
