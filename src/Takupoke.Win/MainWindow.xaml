@@ -17,7 +17,9 @@
                 <NavigationViewItem Content="設定" Tag="settings" Icon="Setting" AutomationProperties.AutomationId="nav-settings" />
             </NavigationView.MenuItems>
             <ScrollViewer HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" VerticalScrollBarVisibility="Auto">
-                <StackPanel x:Name="PageContent" Padding="24" Spacing="18" MinWidth="300" />
+                <ContentControl x:Name="PageHost" HorizontalContentAlignment="Stretch">
+                    <StackPanel x:Name="PageContent" Padding="24" Spacing="18" MinWidth="300" />
+                </ContentControl>
             </ScrollViewer>
         </NavigationView>
         <Grid Grid.Row="1" Padding="16,8" ColumnSpacing="12">

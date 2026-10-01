@@ -39,6 +39,7 @@ public sealed partial class MainWindow
         foreach (var savedYear in _model.SavedEventYears) Add(Button(savedYear + "年度の学校行事を表示", async () =>
         { var items = _model.Data.Events?.Where(e => SchoolDate.TryParse(e.Date, out var day) && day.SchoolYear() == savedYear).OrderBy(e => e.Date).ToArray() ?? []; await Dialog(savedYear + "年度の学校行事", Text(string.Join("\n", items.Select(e => e.Date + (e.EndDate is { } end ? "〜" + end : "") + " · " + e.Title + " · " + e.Tag)))); }));
         Add(Text("通知・バックグラウンド", 22));
+        Add(Text(_model.NotificationStatus));
         Add(Text("選択中クラスの今日以降の変更と、解析に成功した試験・返却PDFの更新を通知します。初回取り込みは比較基準の保存だけです。"));
         var changes = new ToggleSwitch { Header = "時間割変更の通知", IsOn = _model.Preferences.NotifyChanges };
         changes.Toggled += async (_, _) => await _model.SavePreferencesAsync(_model.Preferences with { NotifyChanges = changes.IsOn, NotificationsSetupCompleted = true }); Add(changes);

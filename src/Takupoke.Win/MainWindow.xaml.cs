@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Takupoke.Core;
 using Takupoke.Win.ViewModels;
@@ -21,6 +22,7 @@ public sealed partial class MainWindow : Window
         _model.SnapshotChanged += Render;
         _model.PropertyChanged += (_, _) => UpdateStatus();
         _model.PrivateDataCleared += () => { CloseBrowser(); _pdfDialog?.Hide(); Render(); };
+        _model.NotificationActivated += () => { _model.WeekStart = _model.Today.DisplayWeekStart(); Navigation.SelectedItem = Navigation.MenuItems[2]; Activate(); };
         AppWindow.Resize(new(1150, 820));
         Navigation.SelectedItem = Navigation.MenuItems[0];
         RootGrid.Loaded += Loaded;
@@ -44,7 +46,7 @@ public sealed partial class MainWindow : Window
     {
         StatusText.Text = _model.Status;
         Activity.Visibility = CancelButton.Visibility = _model.Busy ? Visibility.Visible : Visibility.Collapsed;
-        PageContent.IsEnabled = !_model.Busy;
+        PageHost.IsEnabled = !_model.Busy;
     }
     private void Render()
     {

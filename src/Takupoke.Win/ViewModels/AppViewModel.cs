@@ -4,6 +4,7 @@ using Takupoke.Core;
 using Takupoke.Infrastructure.Api;
 using Takupoke.Infrastructure.Authentication;
 using Takupoke.Infrastructure.Materials;
+using Takupoke.Infrastructure.Notifications;
 using Takupoke.Infrastructure.Storage;
 using Takupoke.Win.Platform;
 
@@ -25,6 +26,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private readonly MaterialCoordinator _materials;
     private readonly SourceWatcher _watcher = new();
     private readonly BrowserAuthenticator _authentication;
+    private readonly WindowsNotifications _notificationSink = new();
+    private readonly NotificationCoordinator _notifications;
     private readonly DispatcherQueueTimer _timer;
     private SchoolDataPeriod? _displayPeriod;
     private string _status = "読み込み中です。";
@@ -46,6 +49,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public TimetableEngine Engine => new(Data, Preferences.IncludesChanges, Preferences.International, Mappings is null ? null : Mappings.IsInternational);
     public event Action? SnapshotChanged;
     public event Action? PrivateDataCleared;
+    public event Action? NotificationActivated;
+    public string NotificationStatus => _notificationSink.Status;
     private sealed class OfflineHandler : HttpMessageHandler
     { protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken token) => throw new InvalidOperationException("CI does not perform network requests."); }
     public AppViewModel(DispatcherQueue dispatcher)
@@ -57,6 +62,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         _school = new(Root, new WindowsDpapiProtector()); _preferences = new(Root); _events = new(Root);
         _api = new(_http); _shared = new(_api, _school); _materials = new(_school, new(new WindowsFileIdentity()));
         _authentication = new(new OidcClient(_http)); WeekStart = Today.DisplayWeekStart();
+        _notifications = new(_school, _notificationSink);
+        _notificationSink.Activated += () => _dispatcher.TryEnqueue(() => NotificationActivated?.Invoke());
         _school.RetentionChanged += ClearPrivateData;
         _watcher.Changed += () => _dispatcher.TryEnqueue(() => _ = RefreshAsync());
         _timer = dispatcher.CreateTimer(); _timer.Interval = TimeSpan.FromSeconds(1); _timer.Tick += TimerTick;
@@ -86,7 +93,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         await RunAsync(async token =>
         {
             Preferences = await _preferences.LoadAsync(token);
-            if (!OfflineTest) BrowserAuthenticator.RegisterProtocol();
+            if (!OfflineTest) { BrowserAuthenticator.RegisterProtocol(); _notificationSink.Initialize(); }
             await ReloadAsync(token); Status = "学校資料を選択すると、端末内で解析します。";
         });
         _timer.Start();
@@ -132,7 +139,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await _events.LoadAsync(year, token), token), token); await ReloadAsync(token); Status = "学校行事を保存しました。"; });
     public Task SavePreferencesAsync(UserPreferences next) => RunAsync(async token =>
     {
-        await _preferences.SaveAsync(next.Validated(), token); Preferences = next; SnapshotChanged?.Invoke();
+        await _preferences.SaveAsync(next.Validated(), token); Preferences = next; await CheckNotificationsAsync(token); SnapshotChanged?.Invoke();
     });
     public async Task<byte[]> ReadPdfAsync(MaterialKind kind, bool accepted)
     {
@@ -142,6 +149,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     }
     private async Task ReloadAsync(CancellationToken token)
     {
+        if (_displayPeriod is null || _displayPeriod != SchoolDataPeriod.FromInstant(DateTimeOffset.UtcNow))
+            await _notifications.ClearAsync(token);
         var lease = await _school.BeginAsync(token);
         var snapshots = new Dictionary<MaterialKind, MaterialSnapshot>();
         foreach (var kind in Enum.GetValues<MaterialKind>()) snapshots[kind] = new(
@@ -162,7 +171,16 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             new[] { snapshots[MaterialKind.Exam].Analysis?.Special, snapshots[MaterialKind.ExamReturn].Analysis?.Special }.OfType<SpecialAnalysis>().ToArray(), events, times);
         _displayPeriod = lease.Period;
         _watcher.Replace(snapshots.Values.Select(s => s.Source?.Path).OfType<string>());
+        await CheckNotificationsAsync(token);
         SnapshotChanged?.Invoke();
+    }
+    private Task CheckNotificationsAsync(CancellationToken token)
+    {
+        var eligible = Materials.Where(p => p.Value.Analysis is { } analysis && p.Value.Source?.Digest == analysis.SourceDigest
+            && analysis.ParserVersion == (p.Key == MaterialKind.Changes ? 1 : p.Key == MaterialKind.Timetable
+                ? Takupoke.Infrastructure.Parsing.PdfScheduleParser.TimetableVersion : Takupoke.Infrastructure.Parsing.PdfScheduleParser.SpecialVersion))
+            .ToDictionary(p => p.Key, p => p.Value.Analysis!.SourceDigest);
+        return _notifications.CheckAsync(eligible.ContainsKey(MaterialKind.Changes) ? Data : Data with { Changes = null }, eligible, Preferences, Today, token);
     }
     private async Task RunAsync(Func<CancellationToken, Task> action)
     {
@@ -192,6 +210,6 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public async ValueTask DisposeAsync()
     {
         Cancel(); _timer.Stop(); _watcher.Dispose(); _authentication.Dispose();
-        await _operations.WaitAsync(); await _school.DisposeAsync(); _http.Dispose(); _session.Dispose(); _operations.Dispose();
+        await _operations.WaitAsync(); await _school.DisposeAsync(); _notificationSink.Dispose(); _http.Dispose(); _session.Dispose(); _operations.Dispose();
     }
 }
