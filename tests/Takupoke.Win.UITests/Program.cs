@@ -1,7 +1,12 @@
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Text.Json;
 using System.Windows.Automation;
+using Takupoke.Core;
+using Takupoke.Infrastructure.Api;
+using Takupoke.Infrastructure.Parsing;
+using Takupoke.Infrastructure.Storage;
 
 namespace Takupoke.Win.UITests;
 
@@ -18,9 +23,18 @@ internal static class Program
         {
             if (args.Length != 2 || Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") != "1")
                 throw new InvalidOperationException("An executable and isolated offline test data root are required.");
+            SeedAsync(args[1]).GetAwaiter().GetResult();
             Start(args[0]);
             Wait(() => Find("page-home") is not null, "home heading");
-            Navigate("links"); Navigate("timetable"); Navigate("settings");
+            Navigate("links");
+            Wait(() => Find("link-fake-study") is not null, "saved links are displayed");
+            var search = WaitElement("link-search");
+            var edit = search.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit)) ?? search;
+            ((ValuePattern)edit.GetCurrentPattern(ValuePattern.Pattern)).SetValue("存在しない架空検索語");
+            Wait(() => Find("link-fake-study") is null, "search excludes nonmatching links");
+            ((ValuePattern)edit.GetCurrentPattern(ValuePattern.Pattern)).SetValue("かくうがくしゅう");
+            Wait(() => Find("link-fake-study") is not null, "kana search finds saved link");
+            Navigate("timetable"); Navigate("settings");
             Invoke(ByName("クラスを選択"));
             var homeroom = WaitElement("class-1_1"); Toggle(homeroom);
             var department = WaitElement("class-1_CN"); Toggle(department);
@@ -32,6 +46,10 @@ internal static class Program
             Wait(() => SavedClass(preferences) == "3_IT", "class preference is persisted");
             Navigate("timetable");
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "クラス：3-IT")) is not null, "selected class appears on timetable");
+            var lesson = WaitElement("架空科目甲");
+            Invoke(lesson);
+            Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "架空科目甲（正式名称）")) is not null, "lesson details show the saved full subject name");
+            Invoke(ByName("閉じる"));
             Navigate("home");
             var refresh = WaitElement("refresh-home");
             refresh.SetFocus();
@@ -41,7 +59,8 @@ internal static class Program
             Stop();
             Start(args[0]); Navigate("timetable");
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "クラス：3-IT")) is not null, "saved class survives app restart");
-            Console.WriteLine($"Passed {_checks} Windows UI checks: navigation, class constraints, persistence, focus and offline refresh.");
+            Wait(() => Find("架空科目甲") is not null, "accepted timetable remains after source is unavailable");
+            Console.WriteLine($"Passed {_checks} Windows UI checks: navigation, class constraints, saved lessons and details, kana search, persistence, focus and offline refresh.");
             return 0;
         }
         catch (Exception error)
@@ -51,6 +70,24 @@ internal static class Program
             return 1;
         }
         finally { Stop(); }
+    }
+    private static async Task SeedAsync(string root)
+    {
+        if (Path.GetFullPath(root) != Path.GetFullPath(Environment.GetEnvironmentVariable("TAKUPOKE_DATA_ROOT") ?? ""))
+            throw new InvalidOperationException("The seed root must match the isolated app root.");
+        await using var store = new SchoolDataStore(root, new WindowsDpapiProtector());
+        var lease = await store.BeginAsync(); var now = DateTimeOffset.UtcNow;
+        var bytes = Encoding.UTF8.GetBytes("%PDF-1.7\n% Entirely synthetic accepted-store UI fixture.\n");
+        var source = new SourceRecord(Guid.NewGuid().ToString("N"), MaterialKind.Timetable, Path.Combine(root, "fake-unavailable-original.pdf"), "fake-identity", "fake-timetable.pdf",
+            NotificationDiff.Digest(bytes), bytes.Length, now, now, now);
+        await store.SaveOriginalAsync(lease, source, bytes);
+        var lessons = Enumerable.Range(1, 5).Select(day => new NormalLesson("3_IT", day, 1,
+            new("架空科目甲", "架空教員甲", "架空教室甲", "架空科目甲（正式名称）"), "完全に架空の授業", 1)).ToArray();
+        await store.SaveAnalysisAsync(lease, new(source.Id, source.Kind, PdfScheduleParser.TimetableVersion, source.Digest, source.OriginalName, now, lease.Period.SchoolYear,
+            Timetable: new(lease.Period.SchoolYear, lease.Period.Half == 1 ? "前期" : "後期", lessons)));
+        var link = new LinkItem("fake-study", "fake-category", "架空学習リンク", "https://example.invalid/", "blue", true, 1, true, 1, [], "架空学習リンク|かくうがくしゅうりんく|kakuugakushuurinku");
+        await store.WriteAsync(lease, "api.links", new SavedLinks(new("v1", "sha256-" + new string('a', 64), [new("fake-category", "架空カテゴリ", 1, [link])]),
+            "\"fake-etag\"", now, new string('A', 43)));
     }
     private static void Start(string executable)
     {

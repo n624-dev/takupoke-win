@@ -1,4 +1,5 @@
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Takupoke.Core;
@@ -14,7 +15,8 @@ public sealed partial class MainWindow
     {
         TitleText("一覧", "page-links");
         var search = new AutoSuggestBox { PlaceholderText = "リンクを検索（かな・ローマ字も使えます）", Text = _linkQuery };
-        search.TextChanged += (_, args) => { if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) { _linkQuery = search.Text; PopulateLinks(); } }; Add(search);
+        AutomationProperties.SetAutomationId(search, "link-search");
+        search.TextChanged += (_, _) => { _linkQuery = search.Text; PopulateLinks(); }; Add(search);
         Add(Button("非表示のリンクを管理", RestoreHiddenLinks));
         _linkResults = new StackPanel { Spacing = 12 }; Add(_linkResults); PopulateLinks();
     }
@@ -41,7 +43,7 @@ public sealed partial class MainWindow
     private Button LinkButton(LinkItem link)
     {
         var favorite = _model.Preferences.FavoriteIds.Contains(link.Id);
-        var button = Button((favorite ? "★ " : "") + link.Label, () => OpenLink(link));
+        var button = Button((favorite ? "★ " : "") + link.Label, () => OpenLink(link), "link-" + link.Id);
         button.HorizontalAlignment = HorizontalAlignment.Stretch;
         var color = _model.Preferences.LinkColors.GetValueOrDefault(link.Id) ?? link.Color;
         if (!new Windows.UI.ViewManagement.AccessibilitySettings().HighContrast) button.BorderBrush = new SolidColorBrush(LinkColor(color));
