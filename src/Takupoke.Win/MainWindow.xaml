@@ -3,10 +3,30 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="たくポケ Win">
-    <Grid Padding="32">
-        <StackPanel Spacing="12" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="たくポケ Win" Style="{StaticResource TitleTextBlockStyle}" />
-            <TextBlock Text="開発中です。" AutomationProperties.Name="開発中です。" />
-        </StackPanel>
+    <Grid x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <NavigationView x:Name="Navigation" IsBackButtonVisible="Collapsed" PaneDisplayMode="Auto" IsSettingsVisible="False"
+                        SelectionChanged="Navigation_SelectionChanged" Header="たくポケ Win">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="ホーム" Tag="home" Icon="Home" AutomationProperties.AutomationId="nav-home" />
+                <NavigationViewItem Content="一覧" Tag="links" Icon="Link" AutomationProperties.AutomationId="nav-links" />
+                <NavigationViewItem Content="時間割" Tag="timetable" Icon="Calendar" AutomationProperties.AutomationId="nav-timetable" />
+                <NavigationViewItem Content="設定" Tag="settings" Icon="Setting" AutomationProperties.AutomationId="nav-settings" />
+            </NavigationView.MenuItems>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="PageContent" Padding="24" Spacing="18" MinWidth="300" />
+            </ScrollViewer>
+        </NavigationView>
+        <Grid Grid.Row="1" Padding="16,8" ColumnSpacing="12">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+            <StackPanel Spacing="6">
+                <ProgressBar x:Name="Activity" IsIndeterminate="True" Visibility="Collapsed" />
+                <TextBlock x:Name="StatusText" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
+            </StackPanel>
+            <Button x:Name="CancelButton" Grid.Column="1" Content="処理を中止" Click="Cancel_Click" Visibility="Collapsed" />
+        </Grid>
     </Grid>
 </Window>
