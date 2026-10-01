@@ -1,0 +1,101 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-tree:
+    name: Public files and commit identity
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - run: python3 scripts/check-public-tree.py
+      - run: git diff-tree --check HEAD
+
+  verify:
+    name: ${{ matrix.label }}
+    needs: public-tree
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: Core tests (Linux)
+            os: ubuntu-24.04
+            suite: core
+            configuration: Release
+          - label: Core tests (Windows)
+            os: windows-2025
+            suite: core
+            configuration: Release
+          - label: WinUI x64 Debug build
+            os: windows-2025
+            suite: windows
+            platform: x64
+            configuration: Debug
+          - label: WinUI x64 Release build and launch
+            os: windows-2025
+            suite: windows
+            platform: x64
+            configuration: Release
+          - label: WinUI ARM64 Release build
+            os: windows-2025
+            suite: windows
+            platform: ARM64
+            configuration: Release
+    env:
+      TAKUPOKE_CI_TEMP: ${{ runner.temp }}/takupoke-ci-${{ github.run_id }}-${{ github.run_attempt }}
+      DOTNET_CLI_HOME: ${{ runner.temp }}/takupoke-ci-${{ github.run_id }}-${{ github.run_attempt }}/dotnet-home
+      NUGET_PACKAGES: ${{ runner.temp }}/takupoke-ci-${{ github.run_id }}-${{ github.run_attempt }}/nuget-packages
+      NUGET_HTTP_CACHE_PATH: ${{ runner.temp }}/takupoke-ci-${{ github.run_id }}-${{ github.run_attempt }}/nuget-http
+      NUGET_PLUGINS_CACHE_PATH: ${{ runner.temp }}/takupoke-ci-${{ github.run_id }}-${{ github.run_attempt }}/nuget-plugins
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+      DOTNET_NOLOGO: '1'
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: 10.0.x
+          cache: false
+      - name: Build infrastructure
+        if: matrix.suite == 'core'
+        run: dotnet build src/Takupoke.Infrastructure/Takupoke.Infrastructure.csproj --configuration ${{ matrix.configuration }}
+      - name: Run core tests
+        if: matrix.suite == 'core'
+        run: dotnet test tests/Takupoke.Core.Tests/Takupoke.Core.Tests.csproj --configuration ${{ matrix.configuration }} --logger 'console;verbosity=normal'
+      - name: Build WinUI app
+        if: matrix.suite == 'windows'
+        run: dotnet build src/Takupoke.Win/Takupoke.Win.csproj --configuration ${{ matrix.configuration }} -p:Platform=${{ matrix.platform }}
+      - name: Check development window launch
+        if: matrix.suite == 'windows' && matrix.platform == 'x64' && matrix.configuration == 'Release'
+        run: ./tests/Takupoke.Win.UITests/startup-smoke.ps1
+      - name: Clean temporary package and CLI caches
+        if: always()
+        run: |
+          $expected = Join-Path $env:RUNNER_TEMP "takupoke-ci-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          if ([IO.Path]::GetFullPath($env:TAKUPOKE_CI_TEMP) -ne [IO.Path]::GetFullPath($expected)) {
+              throw 'Unexpected cleanup path.'
+          }
+          if (Test-Path -LiteralPath $expected) {
+              Remove-Item -LiteralPath $expected -Recurse -Force -ErrorAction Stop
+          }
+          if (Test-Path -LiteralPath $expected) {
+              throw 'Temporary caches remain.'
+          }
+          Write-Output 'Temporary package and CLI caches removed. No Actions cache or artifact was created.'

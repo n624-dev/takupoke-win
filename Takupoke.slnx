@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Takupoke.Core/Takupoke.Core.csproj" />
+    <Project Path="src/Takupoke.Infrastructure/Takupoke.Infrastructure.csproj" />
+    <Project Path="src/Takupoke.Win/Takupoke.Win.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Takupoke.Core.Tests/Takupoke.Core.Tests.csproj" />
+  </Folder>
+</Solution>

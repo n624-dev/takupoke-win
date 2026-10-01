@@ -1,0 +1,12 @@
+<Window
+    x:Class="Takupoke.Win.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="たくポケ Win">
+    <Grid Padding="32">
+        <StackPanel Spacing="12" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="たくポケ Win" Style="{StaticResource TitleTextBlockStyle}" />
+            <TextBlock Text="開発中です。" AutomationProperties.Name="開発中です。" />
+        </StackPanel>
+    </Grid>
+</Window>

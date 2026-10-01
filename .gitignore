@@ -1,0 +1,62 @@
+# Internal documentation and local working data
+/AGENTS.md
+**/AGENTS.md
+/docs/
+/internal/
+/private/
+/local-data/
+/secrets/
+*.local.*
+.env
+.env.*
+
+# .NET / Visual Studio / editors
+**/bin/
+**/obj/
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+TestResults/
+**/TestResults/
+coverage/
+artifacts/
+packages/
+
+# Source school materials, derived data, databases and logs
+*.[pP][dD][fF]
+*.[xX][lL][sS][xX]
+*.[xX][lL][sS][mM]
+*.[xX][lL][sS]
+*.[cC][sS][vV]
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.log
+*.dmp
+
+# Signing material and distribution output
+*.pfx
+*.p12
+*.pem
+*.key
+*.cer
+*.msix
+*.msixbundle
+*.appx
+*.appxbundle
+*.msixupload
+*.appxupload
+*.zip
+AppPackages/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
