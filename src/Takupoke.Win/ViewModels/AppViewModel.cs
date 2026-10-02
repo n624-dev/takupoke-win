@@ -47,6 +47,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public IReadOnlyDictionary<MaterialKind, MaterialSnapshot> Materials { get; private set; } = new Dictionary<MaterialKind, MaterialSnapshot>();
     public IReadOnlyDictionary<DataSet, RevisionResult> Revisions { get; private set; } = new Dictionary<DataSet, RevisionResult>();
     public IReadOnlyList<int> SavedEventYears { get; private set; } = [];
+    public IReadOnlyDictionary<int, SavedEvents> EventRecords { get; private set; } = new Dictionary<int, SavedEvents>();
     public DateOnly Today => SchoolDate.InJapan(DateTimeOffset.UtcNow);
     public DateOnly WeekStart { get; set; }
     public SchedulePresentation Presentation => new(Data, Mappings);
@@ -192,19 +193,20 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         var linksRecord = await _school.ReadAsync<SavedLinks>(lease, "api.links", token); var links = linksRecord?.Payload.Validated();
         var timesRecord = await _school.ReadAsync<SavedTimes>(lease, "api.times", token); var times = timesRecord?.Data.Validated();
         var events = new List<SchoolEvent>();
+        var eventRecords = new Dictionary<int, SavedEvents>();
         var years = _events.SavedYears();
-        foreach (var year in years) { var saved = await _events.LoadAsync(year, token); if (saved is not null) events.AddRange(saved.Payload.Project()); }
+        foreach (var year in years) { var saved = await _events.LoadAsync(year, token); if (saved is not null) { eventRecords[year] = saved; events.AddRange(saved.Payload.Project()); } }
         token.ThrowIfCancellationRequested();
         if (await _school.BeginAsync(token) != lease) throw new OperationCanceledException();
         var timetable = snapshots[MaterialKind.Timetable].Analysis?.Timetable;
         if (timetable is not null && mappings is not null) timetable = timetable with { Lessons = timetable.Lessons.Select(l => l with { Names = mappings.Apply(l.Names, l.ClassName) }).ToArray() };
         MappingRecord = mappingRecord; LinksRecord = linksRecord; TimesRecord = timesRecord;
-        Materials = snapshots; Mappings = mappings; Links = links; SavedEventYears = years;
+        Materials = snapshots; Mappings = mappings; Links = links; SavedEventYears = years; EventRecords = eventRecords;
         Data = new(timetable, snapshots[MaterialKind.Changes].Analysis?.Changes,
             new[] { snapshots[MaterialKind.Exam].Analysis?.Special, snapshots[MaterialKind.ExamReturn].Analysis?.Special }.OfType<SpecialAnalysis>().ToArray(), events, times);
         _displayPeriod = lease.Period;
         await _school.CollectOriginalsAsync(lease, token);
-        _watcher.Replace(snapshots.Values.Select(s => s.Source?.Path).OfType<string>());
+        if (!_session.IsCancellationRequested) _watcher.Replace(snapshots.Values.Select(s => s.Source?.Path).OfType<string>());
         await CheckNotificationsAsync(token);
         SnapshotChanged?.Invoke();
     }

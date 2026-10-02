@@ -24,6 +24,18 @@ jobs:
       - run: python3 tests/package-notices-tests.py
       - run: git diff-tree --check HEAD
 
+  ios-reference:
+    name: Original iOS reference comparison
+    needs: public-tree
+    runs-on: macos-15
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Verify fictional expectations against pinned Swift sources
+        run: python3 scripts/check-ios-parity.py
+
   verify:
     name: ${{ matrix.label }}
     needs: public-tree

@@ -83,6 +83,13 @@ public sealed partial class MainWindow
         };
         return Message(AppViewModel.DataSetLabel(kind), detail);
     }
+    private Task EventDetails(int year)
+    {
+        if (!_model.EventRecords.TryGetValue(year, out var record)) return Message("学校行事", "保存したデータはありません。");
+        var items = record.Payload.Project().OrderBy(item => item.Date).ToArray();
+        return Dialog(year + "年度の学校行事", Panel(Text($"取得日時：{record.FetchedAt.ToLocalTime():g}\n件数：{items.Length}\n版：{record.Payload.Version}\n配信ETag：{record.ApiETag ?? "未確認"}\n元PDF ETag：{record.Payload.SourcePdfETag ?? "未確認"}"),
+            Text(string.Join("\n", items.Select(item => item.Date + (item.EndDate is { } end ? "〜" + end : "") + " · " + item.Title + " · " + item.Tag)))));
+    }
     private int _setupStep;
     private void BuildSetup()
     {

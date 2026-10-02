@@ -54,6 +54,7 @@ public sealed record UserPreferences
     public string? DefaultSchoolYear { get; init; }
     public string[] TimetableAnalysisClasses { get; init; } = [];
     public string[] ChangeAnalysisClasses { get; init; } = [];
+    public int TimetableAnalysisWeekday { get; init; }
     public HashSet<string> FavoriteIds { get; init; } = [];
     public HashSet<string> HiddenIds { get; init; } = [];
     public Dictionary<string, string> LinkColors { get; init; } = [];
@@ -70,7 +71,7 @@ public sealed record UserPreferences
     { "default" => "デフォルト", "blue" => "青", "green" => "緑", "yellow" => "黄色", "orange" => "オレンジ", "red" => "赤", "pink" => "ピンク", "purple" => "紫", _ => "デフォルト" };
     public UserPreferences Validated()
     {
-        if (SelectedClasses.Length > 2 || ChangeClasses.Length > 30 || !MainColors.Contains(MainColor)
+        if (TimetableAnalysisWeekday is < 0 or > 5 || SelectedClasses.Length > 2 || ChangeClasses.Length > 30 || !MainColors.Contains(MainColor)
             || LinkColors.Values.Any(c => !LinksPayload.Colors.Contains(c))) throw new InvalidDataException("個人設定の形式を確認できません。");
         return this;
     }

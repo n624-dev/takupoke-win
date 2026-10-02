@@ -49,7 +49,7 @@ public sealed partial class MainWindow
         if (_model.Preferences.ChangeClasses.Length > 0) Add(Button("時間割設定に戻す", () => _model.SavePreferencesAsync(_model.Preferences with { ChangeClasses = [] })));
         var changes = _model.Engine.Changes(selected, _model.Preferences.ChangeRange, _model.Today, start).ToArray();
         if (changes.Length == 0) Add(Text("この条件の時間割変更はありません。"));
-        foreach (var change in changes) Add(Button(change.ChangeDate + " · " + ClassSelection.Display(change.DisplayClassName) + " · " + change.DisplayPeriod + " · " + change.KindLabel + " · " + _model.Presentation.BeforeSubject(change) + " → " + _model.Presentation.ChangeNames(change).After.Subject, () => ChangeDetail(change)));
+        foreach (var change in changes) Add(Button(change.ChangeDate + " · " + ClassSelection.Display(change.DisplayClassName) + " · " + change.DisplayPeriod + " · " + change.KindLabel + " · " + _model.Presentation.BeforeSubject(change) + " → " + (_model.Presentation.ChangeNames(change).After.Subject.Trim().Length == 0 ? "記載なし" : _model.Presentation.ChangeNames(change).After.Subject) + " · " + DisplayText.FullWidthKana(change.Note), () => ChangeDetail(change)));
     }
     private void BuildWeekGrid(DateOnly start)
     {

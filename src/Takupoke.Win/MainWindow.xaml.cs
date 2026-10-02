@@ -59,6 +59,7 @@ public sealed partial class MainWindow : Window
             {
                 _desktop = new(WinRT.Interop.WindowNative.GetWindowHandle(this));
                 _desktop.LockedChanged += locked => _ = _model.SetLockedAsync(locked);
+                if (!DesktopIntegration.IsInputDesktopAccessible()) await _model.SetLockedAsync(true);
                 _desktop.Resumed += () => _ = _model.RefreshAsync(); _desktop.Suspended += _model.Cancel;
                 _desktop.OpenRequested += ShowWindow; _desktop.ExitRequested += () => { _exitRequested = true; Close(); };
             }
@@ -71,7 +72,7 @@ public sealed partial class MainWindow : Window
             catch { await Message("通知領域に表示できません", "ウィンドウを閉じると完全終了します。Windowsの通知領域を確認してください。"); }
             if (_desktop.TrayAvailable && Environment.GetCommandLineArgs().Contains("--background")) AppWindow.Hide();
         }
-        if (!_model.Preferences.SetupCompleted && !_model.OfflineTest) await InitialSetup();
+        if (_model.PreferencesReady && !_model.Preferences.SetupCompleted && !_model.OfflineTest) await InitialSetup();
     }
     private void ShowWindow() { AppWindow.Show(); Activate(); }
     private void Navigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -108,6 +109,7 @@ public sealed partial class MainWindow : Window
             ((SolidColorBrush)((ResourceDictionary)Navigation.Resources.ThemeDictionaries[theme])["NavigationViewSelectionIndicatorForeground"]).Color = MainAccentColor();
         PageContent.Children.Clear();
         if (_page.StartsWith("material.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var material)) BuildMaterialDetails(material);
+        else if (_page.StartsWith("analysis.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var analysed)) BuildAnalysis(analysed);
         else if (_page == "account") BuildAccountData();
         else if (_page == "setup") BuildSetup();
         else if (_page == "help") BuildHelp();

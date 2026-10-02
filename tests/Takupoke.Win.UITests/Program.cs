@@ -41,6 +41,11 @@ internal static class Program
                 SelectMainColor(color, preferences);
                 Require(TextColor("page-settings") == bodyColor, "Changing the main color must not recolor page text.");
             }
+            Invoke(WaitElement("material-details-Timetable"));
+            Wait(() => Find("page-material-Timetable") is not null, "normal material detail screen");
+            Invoke(WaitElement("analysis-Timetable"));
+            Wait(() => Find("page-analysis-Timetable") is not null && Find("analysis-weekday") is not null, "normal analysis and independent weekday filter");
+            Invoke(ByName("資料の詳細に戻る")); Invoke(WaitElement("back-settings"));
             Invoke(WaitElement("material-details-Exam"));
             Wait(() => Find("page-material-Exam") is not null, "material detail screen");
             Invoke(WaitElement("back-settings"));
@@ -173,17 +178,25 @@ internal static class Program
     }
     private static void SelectMainColor(string color, string preferences)
     {
-        AutomationElement? combo = null;
-        Wait(() => (combo = Find("main-color"))?.Current.IsEnabled == true, "main color setting is ready");
-        if (combo!.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll)) ((ScrollItemPattern)scroll).ScrollIntoView();
-        var expansion = (ExpandCollapsePattern)combo.GetCurrentPattern(ExpandCollapsePattern.Pattern);
-        expansion.Expand();
-        AutomationElement? option = null;
-        Wait(() => (option = _window!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.NameProperty, UserPreferences.MainColorLabel(color)), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem)))) ?.Current.IsEnabled == true, "main color option");
-        ((SelectionItemPattern)option!.GetCurrentPattern(SelectionItemPattern.Pattern)).Select();
-        try { expansion.Collapse(); } catch (ElementNotAvailableException) { } catch (ElementNotEnabledException) { }
-        Wait(() => SavedMainColor(preferences) == color && Find("main-color")?.Current.IsEnabled == true, "main color preference is saved");
+        Wait(() =>
+        {
+            if (SavedMainColor(preferences) == color && Find("main-color")?.Current.IsEnabled == true) return true;
+            var combo = Find("main-color");
+            if (combo?.Current.IsEnabled != true) return false;
+            if (combo.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll)) ((ScrollItemPattern)scroll).ScrollIntoView();
+            var expansion = (ExpandCollapsePattern)combo.GetCurrentPattern(ExpandCollapsePattern.Pattern);
+            try
+            {
+                if (expansion.Current.ExpandCollapseState == ExpandCollapseState.Collapsed) expansion.Expand();
+                var option = _window!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.NameProperty, UserPreferences.MainColorLabel(color)), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem)));
+                if (option?.Current.IsEnabled != true) return false;
+                ((SelectionItemPattern)option.GetCurrentPattern(SelectionItemPattern.Pattern)).Select();
+                return false; // Saving and rendering are asynchronous; verify persisted state on the next pass.
+            }
+            catch (ElementNotEnabledException) { return false; }
+        }, "main color " + color + " is selectable and saved");
     }
+
     private static string? SavedMainColor(string path)
     {
         if (!File.Exists(path)) return null;

@@ -14,6 +14,19 @@ public sealed class DesktopIntegration : IDisposable
     public event Action<bool>? LockedChanged;
     public event Action? Resumed, Suspended, OpenRequested, ExitRequested;
     public bool TrayAvailable => _tray;
+    public static bool IsInputDesktopAccessible()
+    {
+        // READOBJECTS only; this does not switch desktops or change permissions.
+        var desktop = OpenInputDesktop(0, false, 0x0001);
+        if (desktop == 0) return false;
+        try
+        {
+            var name = new System.Text.StringBuilder(256);
+            return GetUserObjectInformation(desktop, 2, name, (uint)(name.Capacity * sizeof(char)), out _)
+                && name.ToString().Equals("Default", StringComparison.OrdinalIgnoreCase);
+        }
+        finally { CloseDesktop(desktop); }
+    }
     public DesktopIntegration(nint window)
     {
         _window = window; _callback = WindowProc;
@@ -97,6 +110,10 @@ public sealed class DesktopIntegration : IDisposable
     }
     [StructLayout(LayoutKind.Sequential)] private struct Point { public int X, Y; }
     [UnmanagedFunctionPointer(CallingConvention.Winapi)] private delegate nint SubclassProc(nint window, uint message, nuint wparam, nint lparam, nuint id, nuint data);
+    [DllImport("user32.dll", SetLastError = true)] private static extern nint OpenInputDesktop(uint flags, [MarshalAs(UnmanagedType.Bool)] bool inherit, uint access);
+    [DllImport("user32.dll", EntryPoint = "GetUserObjectInformationW", CharSet = CharSet.Unicode, SetLastError = true)]
+    private static extern bool GetUserObjectInformation(nint handle, int index, System.Text.StringBuilder information, uint length, out uint needed);
+    [DllImport("user32.dll")] private static extern bool CloseDesktop(nint desktop);
     [DllImport("comctl32.dll", SetLastError = true)] private static extern bool SetWindowSubclass(nint window, SubclassProc callback, nuint id, nuint data);
     [DllImport("comctl32.dll")] private static extern bool RemoveWindowSubclass(nint window, SubclassProc callback, nuint id);
     [DllImport("comctl32.dll")] private static extern nint DefSubclassProc(nint window, uint message, nuint wparam, nint lparam);

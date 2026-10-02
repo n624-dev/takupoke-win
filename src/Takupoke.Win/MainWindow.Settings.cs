@@ -43,8 +43,7 @@ public sealed partial class MainWindow
         if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
         var eventsYear = new NumberBox { Header = "取得する学校年度", Minimum = 1900, Maximum = 9998, Value = _model.Today.SchoolYear(), SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Inline };
         Add(eventsYear); Add(Button("この年度の学校行事を取得", () => _model.FetchEventsAsync(double.IsNaN(eventsYear.Value) ? _model.Today.SchoolYear() : (int)eventsYear.Value)));
-        foreach (var savedYear in _model.SavedEventYears) Add(Button(savedYear + "年度の学校行事を表示", async () =>
-        { var items = _model.Data.Events?.Where(e => SchoolDate.TryParse(e.Date, out var day) && day.SchoolYear() == savedYear).OrderBy(e => e.Date).ToArray() ?? []; await Dialog(savedYear + "年度の学校行事", Text(string.Join("\n", items.Select(e => e.Date + (e.EndDate is { } end ? "〜" + end : "") + " · " + e.Title + " · " + e.Tag)))); }));
+        foreach (var savedYear in _model.SavedEventYears) Add(Button(savedYear + "年度の学校行事を表示", () => EventDetails(savedYear)));
         Add(Text("通知・バックグラウンド", 22));
         Add(Text(_model.NotificationStatus));
         Add(Text("選択中クラスの今日以降の変更と、解析に成功した試験・返却PDFの更新を通知します。初回取り込みは比較基準の保存だけです。"));
@@ -87,37 +86,5 @@ public sealed partial class MainWindow
             Button(source is null ? "資料を選択" : "資料を選び直す", () => SelectMaterial(kind), "select-material-" + kind),
             Button("詳細を見る", () => OpenPage("material." + kind), "material-details-" + kind)));
     }
-    private async Task ShowAnalysis(MaterialKind kind)
-    {
-        var analysis = _model.Materials.GetValueOrDefault(kind)?.Analysis; if (analysis is null) return;
-        var filtered = kind is MaterialKind.Timetable or MaterialKind.Changes;
-        var selected = (kind == MaterialKind.Timetable ? _model.Preferences.TimetableAnalysisClasses : _model.Preferences.ChangeAnalysisClasses).ToHashSet();
-        var available = kind == MaterialKind.Timetable ? analysis.Timetable?.Lessons.Select(l => l.ClassName).Distinct().Order().ToArray() ?? []
-            : analysis.Changes?.Select(c => c.DisplayClassName).Distinct().Order().ToArray() ?? [];
-        var result = Text("");
-        void Populate()
-        {
-            IEnumerable<string> lines = kind switch
-            {
-                MaterialKind.Timetable => analysis.Timetable?.Lessons.Where(l => selected.Count == 0 || selected.Contains(l.ClassName)).Select(l => $"{ClassSelection.Display(l.ClassName)} · {new[] { "", "月", "火", "水", "木", "金", "土", "日" }[l.Weekday]} · {l.Period}限 · {l.Names.Subject} · {l.Names.Teacher} · {l.Names.Room}") ?? [],
-                MaterialKind.Changes => analysis.Changes?.Where(c => selected.Count == 0 || selected.Contains(c.DisplayClassName)).Select(c => c.ChangeDate + " · " + ClassSelection.Display(c.DisplayClassName) + " · " + c.DisplayPeriod + " · " + c.BeforeSubject + " → " + c.AfterSubject + " · " + c.Teacher + " · " + c.Room + " · " + c.Note + "\n元の行：" + c.RawText) ?? [],
-                _ => analysis.Special?.Lessons.Select(l => l.Date + " · " + ClassSelection.Display(l.ClassName) + " · " + l.Period + "限 · " + string.Join(" · ", l.Lines)) ?? []
-            };
-            result.Text = string.Join("\n", lines);
-        }
-        var panel = Panel(Text("解析版：" + analysis.ParserVersion + " · " + analysis.SourceName));
-        if (filtered)
-        {
-            panel.Children.Add(Text("確認するクラス（未選択は全クラス）。時間割の選択とは独立して保存します。"));
-            foreach (var cls in available.Concat(selected).Distinct().Order())
-            {
-                var check = new CheckBox { Content = ClassSelection.Display(cls), IsChecked = selected.Contains(cls) };
-                check.Checked += (_, _) => { selected.Add(cls); Populate(); }; check.Unchecked += (_, _) => { selected.Remove(cls); Populate(); };
-                panel.Children.Add(check);
-            }
-        }
-        Populate(); panel.Children.Add(result); await Dialog("解析結果", panel);
-        if (filtered) await _model.SavePreferencesAsync(kind == MaterialKind.Timetable ? _model.Preferences with { TimetableAnalysisClasses = selected.ToArray() }
-            : _model.Preferences with { ChangeAnalysisClasses = selected.ToArray() });
-    }
+    private Task ShowAnalysis(MaterialKind kind) => OpenPage("analysis." + kind);
 }
