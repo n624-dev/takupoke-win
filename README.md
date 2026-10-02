@@ -8,7 +8,7 @@
 
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版のダウンロード](https://github.com/n624-dev/takupoke-win/releases)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。
+[開発確認版0.1.0-dev.5のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.5)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。
 
 1. Intel/AMDの通常の64ビットPC：`win-x64-Setup.exe`。Windows on Arm：`win-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
@@ -81,7 +81,9 @@ GitHub Actionsの保存用キャッシュやartifactは作成しません。配�
 
 テストは実装に合わせて追加します。CIでの確認と、学校アカウント認証・OneDrive同期・OS通知・ロックや復帰・アクセシビリティ・インストールや更新の実機確認は別に扱います。
 
-2026-10-02の修正は、コミット`88a89cc`の[Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37004319953)で全7ジョブが成功しました。Core180件・Integration97件をLinuxとWindowsで確認し、x64 Debug／Release・ARM64 Releaseビルド、Swiftの固定比較、架空データによるWindows UI250項目を確認しました。時刻欄の余白、上部ヘッダーの削除、検索・停止復帰、ウィンドウの縮小復元、定期再描画時のスクロール保持も検証しています。今回のコードによる新しい導入パッケージの配布と実機確認は未実施です。
+2026-10-02の修正は、コミット`88a89cc`の[Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37004319953)で全7ジョブが成功しました。Core180件・Integration97件をLinuxとWindowsで確認し、x64 Debug／Release・ARM64 Releaseビルド、Swiftの固定比較、架空データによるWindows UI250項目を確認しました。時刻欄の余白、上部ヘッダーと一覧の色付き外枠の削除、日本時間表示、検索・停止復帰、ウィンドウの縮小復元、定期再描画時のスクロール保持も検証しています。
+
+同じ実装を含むコミット`1ef2abb`から[開発確認版0.1.0-dev.5](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.5)を公開しました。[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37019808496)は全8ジョブが成功し、x64新規導入後のUI251項目・再インストール後のUI252項目、設定保持、アンインストールを確認しました。x64・ARM64のSetupとZIP、導入説明、SHA-256を配布しています。ARM64実機と学校アカウント・実資料による確認は未完了です。
 
 ## データの扱い
 
