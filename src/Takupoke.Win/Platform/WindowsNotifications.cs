@@ -8,7 +8,16 @@ public sealed class WindowsNotifications : INotificationSink, IDisposable
 {
     private bool _registered;
     public event Action? Activated;
-    public string Status { get; private set; } = "通知の利用状態を確認していません。";
+    private string _status = "通知の利用状態を確認していません。";
+    public string Status
+    {
+        get
+        {
+            try { return _registered ? "Windowsの通知設定：" + AppNotificationManager.Default.Setting : _status; }
+            catch { return "Windowsの通知設定を確認できません。"; }
+        }
+        private set => _status = value;
+    }
     public void Initialize()
     {
         try

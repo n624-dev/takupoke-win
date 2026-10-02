@@ -105,6 +105,14 @@ public sealed partial class MainWindow : Window
                 resources["AccentTextFillColorPrimaryBrush"] = new SolidColorBrush(tint);
                 RootGrid.Resources.ThemeDictionaries[theme] = resources;
             }
+        // Explicitly retain the standard WinUI high-contrast palette even with a selected tint.
+        if (_model.Preferences.MainColor != "default")
+        {
+            var highContrast = new ResourceDictionary();
+            foreach (var key in new[] { "AccentFillColorDefaultBrush", "AccentFillColorSecondaryBrush", "AccentFillColorTertiaryBrush", "AccentTextFillColorPrimaryBrush" })
+                highContrast[key] = Application.Current.Resources[key];
+            RootGrid.Resources.ThemeDictionaries["HighContrast"] = highContrast;
+        }
         foreach (var theme in new[] { "Light", "Dark" })
             ((SolidColorBrush)((ResourceDictionary)Navigation.Resources.ThemeDictionaries[theme])["NavigationViewSelectionIndicatorForeground"]).Color = MainAccentColor();
         PageContent.Children.Clear();
