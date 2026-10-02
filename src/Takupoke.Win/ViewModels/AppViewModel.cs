@@ -34,6 +34,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private bool _busy;
     private bool _pendingRefresh;
     private bool _platformInitialized;
+    private bool _automaticPaused;
     public bool Locked { get; private set; }
     public long PrivateEpoch { get; private set; }
     public string Status { get => _status; private set => SetProperty(ref _status, value); }
@@ -75,7 +76,11 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         _notifications = new(_school, _notificationSink);
         _notificationSink.Activated += () => _dispatcher.TryEnqueue(() => NotificationActivated?.Invoke());
         _school.RetentionChanged += ClearPrivateData;
-        _watcher.Changed += () => _dispatcher.TryEnqueue(() => _ = RefreshAsync());
+        _watcher.Changed += () =>
+        {
+            var generation = System.Threading.Volatile.Read(ref _operationGeneration);
+            _dispatcher.TryEnqueue(() => { if (!_automaticPaused && generation == _operationGeneration) _ = RefreshAsync(); });
+        };
         _timer = dispatcher.CreateTimer(); _timer.Interval = TimeSpan.FromSeconds(1); _timer.Tick += TimerTick;
         Program.ProtocolCallback = uri => _dispatcher.TryEnqueue(() => _authentication.HandleCallback(uri)); Program.DrainCallbacks();
     }
@@ -91,7 +96,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         var now = DateTimeOffset.UtcNow;
         if (_displayPeriod is { } displayed && displayed != SchoolDataPeriod.FromInstant(now))
         { _session.Cancel(); _authentication.Cancel(); ClearPrivateData(); _ = RefreshAsync(); return; }
-        if (Preferences.KeepInTray && now >= _nextCheck) { _nextCheck = now.AddMinutes(15); _ = RefreshAsync(); }
+        if (!_automaticPaused && Preferences.KeepInTray && now >= _nextCheck) { _nextCheck = now.AddMinutes(15); _ = RefreshAsync(); }
         if (_lastDay != Today || now - _lastClock >= TimeSpan.FromSeconds(15)) { _lastDay = Today; _lastClock = now; ClockChanged?.Invoke(); }
     }
     private void ClearPrivateData()
@@ -124,6 +129,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public Task RefreshAsync()
     {
         if (Locked) return Task.CompletedTask;
+        _automaticPaused = false;
         if (Busy) { _pendingRefresh = true; return Task.CompletedTask; }
         return RunAsync(async token =>
     {
@@ -213,7 +219,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             new[] { snapshots[MaterialKind.Exam].Analysis?.Special, snapshots[MaterialKind.ExamReturn].Analysis?.Special }.OfType<SpecialAnalysis>().ToArray(), events, times);
         _displayPeriod = lease.Period;
         await _school.CollectOriginalsAsync(lease, token);
-        if (!_session.IsCancellationRequested) _watcher.Replace(snapshots.Values.Select(s => s.Source?.Path).OfType<string>());
+        if (!_automaticPaused && !_session.IsCancellationRequested) _watcher.Replace(snapshots.Values.Select(s => s.Source?.Path).OfType<string>());
         await CheckNotificationsAsync(token);
         SnapshotChanged?.Invoke();
     }
@@ -251,7 +257,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             if (_pendingRefresh) { _pendingRefresh = false; _dispatcher.TryEnqueue(() => _ = RefreshAsync()); }
         }
     }
-    public void Cancel() { _operationGeneration++; _pendingRefresh = false; _watcher.Replace([]); _session.Cancel(); _authentication.Cancel(); }
+    public void Cancel() { _automaticPaused = true; _operationGeneration++; _pendingRefresh = false; _watcher.Replace([]); _session.Cancel(); _authentication.Cancel(); }
     public async Task SetLockedAsync(bool locked)
     {
         Locked = locked; Cancel(); ClearPrivateData();
