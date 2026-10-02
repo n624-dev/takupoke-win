@@ -18,7 +18,11 @@ public sealed record SourceContent(byte[] Bytes, string Identity, DateTimeOffset
 public sealed class FileSourceReader(IFileIdentityProvider identity)
 {
     public const int MaximumBytes = 50 * 1024 * 1024;
-    public async Task<SourceContent> ReadAsync(string path, MaterialKind kind, string? expectedIdentity, CancellationToken token = default)
+    // Opening an online-only OneDrive file can block before the first async read.
+    // Keep metadata queries, hydration and handle creation away from the WinUI thread.
+    public Task<SourceContent> ReadAsync(string path, MaterialKind kind, string? expectedIdentity, CancellationToken token = default) =>
+        Task.Run(() => ReadOnWorkerAsync(path, kind, expectedIdentity, token), token);
+    private async Task<SourceContent> ReadOnWorkerAsync(string path, MaterialKind kind, string? expectedIdentity, CancellationToken token)
     {
         try
         {
