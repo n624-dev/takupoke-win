@@ -141,7 +141,7 @@ public sealed partial class MainWindow : Window
         foreach (var theme in new[] { "Light", "Dark" })
             ((SolidColorBrush)((ResourceDictionary)Navigation.Resources.ThemeDictionaries[theme])["NavigationViewSelectionIndicatorForeground"]).Color = MainAccentColor();
         PageContent.Children.Clear(); _operationControls.Clear();
-        PageContent.Spacing = _page == "timetable" ? 10 : 18;
+        PageContent.Spacing = _page is "timetable" or "settings" ? 10 : 18;
         if (_page.StartsWith("material.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var material)) BuildMaterialDetails(material);
         else if (_page.StartsWith("analysis.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var analysed)) BuildAnalysis(analysed);
         else if (_page == "account") BuildAccountData();

@@ -156,7 +156,7 @@ public sealed partial class MainWindow
     }
     private void BuildLicenses()
     {
-        TitleText("依存ライブラリのライセンス", "page-licenses"); BackToSettings();
+        TitleText("依存ライブラリのライセンス", "page-licenses"); Add(Button("このアプリについてに戻る", () => OpenPage("about"), "back-about"));
         var directory = Path.Combine(AppContext.BaseDirectory, "Licenses");
         if (Directory.Exists(directory))
             foreach (var file in Directory.EnumerateFiles(directory, "*", SearchOption.AllDirectories).Order(StringComparer.Ordinal))

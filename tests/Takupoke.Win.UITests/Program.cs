@@ -93,6 +93,10 @@ internal static class Program
             Wait(() => SavedClass(preferences) == "3_IT", "class preference is persisted");
             Navigate("timetable");
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "クラス：3-IT")) is not null, "selected class appears on timetable");
+            var tableBounds = WaitElement("timetable-grid-scroller").Current.BoundingRectangle;
+            var pageBounds = WaitElement("page-scroller").Current.BoundingRectangle;
+            Require(tableBounds.Width >= pageBounds.Width - 64, "The desktop table uses the available content width.");
+            Require(tableBounds.Height >= pageBounds.Height - 170 && tableBounds.Bottom <= pageBounds.Bottom + 4, "The timetable viewport fills the page without pushing the table below it.");
             AutomationElement? lesson = null;
             Wait(() => (lesson = Find("架空科目甲")) is not null && !lesson.Current.IsOffscreen && lesson.Current.IsEnabled, "lesson is visible after navigation");
             PointerClick(lesson!);
@@ -113,7 +117,7 @@ internal static class Program
             Require(TextColor("page-settings") == bodyColor, "Restart retains theme text color.");
             Invoke(WaitElement("settings-materials"));
             Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "file selected through the native picker survives restart");
-            Console.WriteLine($"Passed {_checks} Windows UI checks: navigation, class constraints, saved lessons and details, kana search, persistence, seven accent colors and OS default without recoloring text, focus and offline refresh.");
+            Console.WriteLine($"Passed {_checks} Windows UI checks: hierarchical settings, desktop timetable geometry, raw and OS URI callbacks, fake OIDC verification and three datasets, failure/cancellation recovery, transient footer, persistence, colors, pointer and keyboard operations.");
             return 0;
         }
         catch (Exception error)
@@ -159,6 +163,7 @@ internal static class Program
         using (var scheme = Registry.CurrentUser.CreateSubKey(@"Software\Classes\jp.n624.takupoke.win")) scheme.SetValue("URL Protocol", "");
         try
         {
+            File.Delete(tokenRequests); File.Delete(privateRequests);
             Invoke(WaitElement("settings-account"));
             Wait(() => Find("page-account") is not null, "account child screen");
             WriteProbe(mode, "fail"); File.Delete(state);
@@ -174,6 +179,7 @@ internal static class Program
             Require(ReadProbe(tokenRequests) == "1" && !File.Exists(privateRequests), "Token failure cannot download school data.");
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "学校アカウントの認証を完了できませんでした。")) is not null, "authentication failure is visible on the account screen");
             Wait(() => !Visible("status-bar"), "failure footer disappears after a short interval");
+            Require(Find("account-update-error")?.Current.Name == "学校アカウントの認証を完了できませんでした。", "The account failure remains available after the transient footer disappears.");
             Require(Find("shared-details-Links")?.Current.IsEnabled == true, "The account screen stays usable after the footer disappears.");
             WriteProbe(mode, "hold"); File.Delete(state);
             Invoke(WaitElement("update-account"));
@@ -262,6 +268,10 @@ internal static class Program
         var link = new LinkItem("fake-study", "fake-category", "架空学習リンク", "https://example.invalid/", "blue", true, 1, true, 1, [], "架空学習リンク|かくうがくしゅうりんく|kakuugakushuurinku");
         await store.WriteAsync(lease, "api.links", new SavedLinks(new("v1", "sha256-" + new string('a', 64), [new("fake-category", "架空カテゴリ", 1, [link, link with { Id = "fake-second", Label = "架空の別リンク", SortOrder = 0, SearchTerms = "別リンク" }])]),
             "\"fake-etag\"", now, new string('A', 43)));
+        // Each installer run starts with three old fictional revisions, while
+        // personal preferences are deliberately left intact for reinstallation.
+        await store.WriteAsync(lease, "api.mapping", new SavedMapping(new string('A', 43), "fake-old", 1, "\"fake-old-mapping\"", new string('a', 64), "2032-04-01T00:00:00Z", now, new([], [], [])));
+        await store.WriteAsync(lease, "api.times", new SavedTimes(new string('A', 43), now, new(1, [])));
     }
     private static void Start(string executable)
     {

@@ -12,13 +12,13 @@ public sealed partial class MainWindow
     private void BuildSettings()
     {
         TitleText("設定", "page-settings");
-        Add(Text("データ", 20));
-        Add(Card(Panel(
+        Add(Text("データ", 18));
+        Add(SettingsGroup(
             SettingsRow("時間割ファイル", () => OpenPage("materials"), "settings-materials"),
             SettingsRow("学校行事", () => OpenPage("events"), "settings-events"),
             SettingsRow("リンク・名称・授業時刻", () => OpenPage("account"), "settings-account",
-                _model.Revisions.Values.Any(value => value.Changed) ? "更新あり" : null))));
-        Add(Text("アプリ設定", 20));
+                _model.Revisions.Values.Any(value => value.Changed) ? "更新あり" : null)));
+        Add(Text("アプリ設定", 18));
         var initialMainColor = _model.Preferences.MainColor;
         var mainColor = OperationControl(new ComboBox { MinWidth = 155 });
         foreach (var key in UserPreferences.MainColors) mainColor.Items.Add(new ComboBoxItem { Content = UserPreferences.MainColorLabel(key), Tag = key });
@@ -40,18 +40,21 @@ public sealed partial class MainWindow
                 && opening.SelectedIndex != (int)_model.Preferences.OpeningMode)
                 await _model.SavePreferencesAsync(_model.Preferences with { OpeningMode = (LinkOpeningMode)opening.SelectedIndex });
         };
-        Add(Card(Panel(
+        Add(SettingsGroup(
             SettingsRow("クラス", ChooseClasses, "settings-class", _model.Preferences.SelectedClasses.Length == 0 ? "未選択" : string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display))),
             SettingsRow("通知・バックグラウンド", () => OpenPage("notifications"), "settings-notifications"),
-            SettingField("メインカラー", mainColor), SettingField("リンクの開き方", opening))));
-        Add(Text("サポート", 20));
-        Add(Card(Panel(SettingsRow("初期設定", InitialSetup, "settings-setup"),
+            SettingField("メインカラー", mainColor), SettingField("リンクの開き方", opening)));
+        Add(Text("サポート", 18));
+        Add(SettingsGroup(SettingsRow("初期設定", InitialSetup, "settings-setup"),
             SettingsRow("使い方", () => OpenPage("help"), "settings-help"),
-            SettingsRow("このアプリについて", () => OpenPage("about"), "settings-about"))));
+            SettingsRow("このアプリについて", () => OpenPage("about"), "settings-about")));
     }
+    private static Border SettingsGroup(params UIElement[] rows)
+    { var panel = Panel(rows); panel.Spacing = 0; var card = Card(panel); card.Padding = new Thickness(8); return card; }
     private Button SettingsRow(string label, Func<Task> action, string id, string? value = null)
     {
         var button = Button(label, action, id); button.HorizontalAlignment = HorizontalAlignment.Stretch;
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(button, label + (value is null ? "" : "、" + value));
         button.HorizontalContentAlignment = HorizontalAlignment.Stretch; button.MinHeight = 44;
         var row = new Grid { ColumnSpacing = 16 };
         row.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) });

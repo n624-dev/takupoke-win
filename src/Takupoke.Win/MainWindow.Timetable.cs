@@ -156,14 +156,14 @@ public sealed partial class MainWindow
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(scroll, "timetable-grid-scroller");
         void FitWidth()
         {
-            scroll.Height = Math.Max(300, RootGrid.ActualHeight - 180 - (StatusBar.Visibility == Visibility.Visible ? StatusBar.ActualHeight : 0));
+            scroll.Height = Math.Max(260, PageScroller.ViewportHeight - 144);
             var minimum = 88 + days.Count * Math.Max(144, classes.Length * 120);
             var width = Math.Max(minimum, scroll.ActualWidth);
             if (Math.Abs(grid.Width - width) > 0.5 || double.IsNaN(grid.Width)) grid.Width = width;
         }
         scroll.Loaded += (_, _) => FitWidth(); scroll.SizeChanged += (_, _) => FitWidth();
         Microsoft.UI.Xaml.SizeChangedEventHandler resize = (_, _) => FitWidth();
-        RootGrid.SizeChanged += resize; scroll.Unloaded += (_, _) => RootGrid.SizeChanged -= resize;
+        PageScroller.SizeChanged += resize; scroll.Unloaded += (_, _) => PageScroller.SizeChanged -= resize;
         Add(scroll);
     }
     private Task ChooseClasses() => ChooseClasses(false);
