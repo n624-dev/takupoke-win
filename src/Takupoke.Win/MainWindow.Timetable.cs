@@ -33,7 +33,7 @@ public sealed partial class MainWindow
         else BuildWeekGrid(start);
         Add(Text("時間割変更一覧", 22)); Add(Button("一覧のクラスを選択", () => ChooseClasses(changes: true)));
         var range = new ComboBox { Header = "一覧の範囲", ItemsSource = new[] { "今日以降", "この週", "全件" }, SelectedIndex = (int)_model.Preferences.ChangeRange };
-        range.SelectionChanged += async (_, _) => await _model.SavePreferencesAsync(_model.Preferences with { ChangeRange = (ChangeRange)range.SelectedIndex }); Add(range);
+        range.SelectionChanged += async (_, _) => { if (range.SelectedIndex is >= 0 and <= 2 && range.SelectedIndex != (int)_model.Preferences.ChangeRange) await _model.SavePreferencesAsync(_model.Preferences with { ChangeRange = (ChangeRange)range.SelectedIndex }); }; Add(range);
         var selected = (_model.Preferences.ChangeClasses.Length > 0 ? _model.Preferences.ChangeClasses : _model.Preferences.SelectedClasses).ToHashSet();
         var changes = _model.Engine.Changes(selected, _model.Preferences.ChangeRange, _model.Today, start).ToArray();
         if (changes.Length == 0) Add(Text("この条件の時間割変更はありません。"));

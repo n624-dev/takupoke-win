@@ -6,7 +6,7 @@ using Microsoft.UI.Xaml.Media;
 using Takupoke.Core;
 using Takupoke.Win.ViewModels;
 using Takupoke.Win.Platform;
-using Windows.Storage.Pickers;
+using Microsoft.Windows.Storage.Pickers;
 
 namespace Takupoke.Win;
 
@@ -124,11 +124,15 @@ public sealed partial class MainWindow : Window
         _selectingMaterial = true;
         try
         {
-            var picker = new FileOpenPicker();
-            WinRT.Interop.InitializeWithWindow.Initialize(picker, WinRT.Interop.WindowNative.GetWindowHandle(this));
+            var picker = new FileOpenPicker(AppWindow.Id);
             picker.FileTypeFilter.Add(kind == MaterialKind.Changes ? ".xlsx" : ".pdf");
             var file = await picker.PickSingleFileAsync();
-            if (file is not null && file.Path.Length > 0) await _model.SelectAsync(kind, file.Path);
+            if (file is not null)
+            {
+                if (string.IsNullOrWhiteSpace(file.Path))
+                    await Message("原本の場所を確認できません", "OneDriveの同期フォルダーにあるPDF・XLSXを選択してください。選択情報は変更していません。");
+                else await _model.SelectAsync(kind, file.Path);
+            }
         }
         finally { _selectingMaterial = false; }
     }

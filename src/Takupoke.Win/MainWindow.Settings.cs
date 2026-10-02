@@ -14,9 +14,9 @@ public sealed partial class MainWindow
         TitleText("設定", "page-settings");
         Add(Button("クラスを選択", ChooseClasses));
         var mainColor = new ComboBox { Header = "メインカラー", ItemsSource = UserPreferences.MainColors, SelectedItem = _model.Preferences.MainColor };
-        mainColor.SelectionChanged += async (_, _) => { if (mainColor.SelectedItem is string value) await _model.SavePreferencesAsync(_model.Preferences with { MainColor = value }); }; Add(mainColor);
+        mainColor.SelectionChanged += async (_, _) => { if (mainColor.SelectedItem is string value && value != _model.Preferences.MainColor) await _model.SavePreferencesAsync(_model.Preferences with { MainColor = value }); }; Add(mainColor);
         var opening = new ComboBox { Header = "リンクの開き方", ItemsSource = new[] { "アプリ内ブラウザ", "外部ブラウザ" }, SelectedIndex = (int)_model.Preferences.OpeningMode };
-        opening.SelectionChanged += async (_, _) => await _model.SavePreferencesAsync(_model.Preferences with { OpeningMode = (LinkOpeningMode)opening.SelectedIndex }); Add(opening);
+        opening.SelectionChanged += async (_, _) => { if (opening.SelectedIndex is >= 0 and <= 1 && opening.SelectedIndex != (int)_model.Preferences.OpeningMode) await _model.SavePreferencesAsync(_model.Preferences with { OpeningMode = (LinkOpeningMode)opening.SelectedIndex }); }; Add(opening);
         Add(Text("学校資料", 22));
         Add(Text("OneDriveの同期フォルダーにある資料を選択してください。オフラインでも原本を読むには、OneDriveの「このデバイス上で常に保持する」を利用できます。"));
         foreach (var kind in Enum.GetValues<MaterialKind>()) Add(MaterialCard(kind));
