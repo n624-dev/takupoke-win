@@ -25,6 +25,8 @@ TestResults/
 coverage/
 artifacts/
 packages/
+**/__pycache__/
+*.pyc
 
 # Source school materials, derived data, databases and logs
 *.[pP][dD][fF]

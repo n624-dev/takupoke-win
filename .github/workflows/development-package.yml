@@ -1,0 +1,71 @@
+name: Development installers
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Development version (for example 0.1.0-dev.1)'
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: development-installers
+  cancel-in-progress: false
+jobs:
+  checks:
+    uses: ./.github/workflows/ci.yml
+  package:
+    name: Build and test downloadable installers
+    needs: checks
+    runs-on: windows-2025
+    timeout-minutes: 35
+    permissions:
+      contents: write
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      DISTRIBUTION_VERSION: ${{ inputs.version }}
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+      DOTNET_NOLOGO: '1'
+      DOTNET_CLI_USE_MSBUILD_SERVER: '0'
+      MSBUILDDISABLENODEREUSE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare isolated paths and validate development version
+        run: |
+          if ($env:DISTRIBUTION_VERSION -notmatch '^\d+\.\d+\.\d+-dev\.\d+$') { throw 'Only development versions are permitted.' }
+          $taskRoot = Join-Path $env:RUNNER_TEMP "takupoke-package-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          @(
+            "TAKUPOKE_CI_TEMP=$taskRoot"
+            "DOTNET_CLI_HOME=$(Join-Path $taskRoot 'dotnet-home')"
+            "NUGET_PACKAGES=$(Join-Path $taskRoot 'nuget-packages')"
+            "NUGET_HTTP_CACHE_PATH=$(Join-Path $taskRoot 'nuget-http')"
+            "NUGET_PLUGINS_CACHE_PATH=$(Join-Path $taskRoot 'nuget-plugins')"
+          ) | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: 10.0.x
+          cache: false
+      - name: Publish self-contained apps and build installers
+        run: ./scripts/build-development-package.ps1 -Version $env:DISTRIBUTION_VERSION -Commit $env:GITHUB_SHA
+      - name: Test the x64 installer and installed app
+        run: ./scripts/test-development-package.ps1 -Version $env:DISTRIBUTION_VERSION
+      - name: Publish verified development release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./scripts/publish-development-release.ps1 -Version $env:DISTRIBUTION_VERSION
+      - name: Remove all job-owned package, CLI, and build files
+        if: always()
+        run: |
+          $expected = Join-Path $env:RUNNER_TEMP "takupoke-package-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          if ($env:TAKUPOKE_CI_TEMP -and [IO.Path]::GetFullPath($env:TAKUPOKE_CI_TEMP) -ne [IO.Path]::GetFullPath($expected)) { throw 'Unexpected cleanup path.' }
+          if (Get-Command dotnet -ErrorAction SilentlyContinue) { dotnet build-server shutdown; if ($LASTEXITCODE -ne 0) { throw 'Build server shutdown failed.' } }
+          for ($attempt = 1; $attempt -le 5; $attempt++) {
+            try { if (Test-Path -LiteralPath $expected) { Remove-Item -LiteralPath $expected -Recurse -Force -ErrorAction Stop }; break }
+            catch { if ($attempt -eq 5) { throw }; Start-Sleep -Seconds 1 }
+          }
+          if (Test-Path -LiteralPath $expected) { throw 'Temporary files remain.' }
+          Write-Output 'Package workspace and temporary caches removed. No Actions cache or artifact was created.'

@@ -55,8 +55,17 @@ public sealed partial class MainWindow
         Add(Text("常駐中は15分ごとに確認し、スリープ復帰時にも確認します。完全終了・電源断・スリープ中の定刻確認は保証しません。自動起動はWindowsの「スタートアップ アプリ」からも変更できます。"));
         Add(Text("保存期限", 22)); Add(Text("学校データは日本時間4月1日・10月1日に削除します。資料のアプリ内コピー・選択情報・解析結果・学校用データが対象です。個人設定・公開行事・OneDrive上の原本は保持します。"));
         Add(Button("初期設定をもう一度表示", InitialSetup)); Add(Button("使い方", () => Message("使い方", "クラスを選び、4種類の資料を個別に選択します。ホームと時間割は同じ保存済み結果を表示します。授業を選ぶと詳細が開きます。一覧のリンクは右クリックでお気に入り・色・非表示を変更できます。新しいデータの取得は学校アカウントで行います。")));
-        Add(Text("たくポケ Win · 開発版", 20)); Add(Text("iOS版の全機能対応とWindows実機確認が揃うまで正式版として配布しません。"));
-        Add(Button("規約・ライセンス", () => Message("規約・ライセンス", "非公式アプリです。学校資料の利用条件を守って使用してください。依存ライブラリのライセンスはlicensesディレクトリで管理します。プロジェクト自体のライセンスは未選定です。")));
+        var version = System.Reflection.Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(System.Reflection.AssemblyInformationalVersionAttribute), false)
+            .OfType<System.Reflection.AssemblyInformationalVersionAttribute>().FirstOrDefault()?.InformationalVersion.Split('+')[0] ?? "開発版";
+        Add(Text("たくポケ Win · " + version, 20)); Add(Text("iOS版の全機能対応とWindows実機確認が揃うまで正式版として配布しません。Windows用の認証クライアントは未登録です。"));
+        Add(Button("利用規約", () => ShowProductDocument("利用規約", Path.Combine("Legal", "terms.txt"))));
+        Add(Button("プライバシーポリシー", () => ShowProductDocument("プライバシーポリシー", Path.Combine("Legal", "privacy.txt"))));
+        Add(Button("依存ライブラリのライセンス", () => ShowProductDocument("依存ライブラリのライセンス", "THIRD-PARTY-NOTICES.txt")));
+    }
+    private async Task ShowProductDocument(string title, string relative)
+    {
+        var path = Path.Combine(AppContext.BaseDirectory, relative);
+        await Message(title, File.Exists(path) ? await File.ReadAllTextAsync(path) : "開発ソースからの起動では配布用文書が含まれない場合があります。依存ライセンスは配布パッケージに同梱します。プロジェクト自体のライセンスは未選定です。");
     }
     private Border MaterialCard(MaterialKind kind)
     {

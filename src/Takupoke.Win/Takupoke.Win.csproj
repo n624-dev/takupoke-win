@@ -21,4 +21,7 @@
     <ProjectReference Include="../Takupoke.Core/Takupoke.Core.csproj" />
     <ProjectReference Include="../Takupoke.Infrastructure/Takupoke.Infrastructure.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="../../packaging/legal/*.txt" Link="Legal/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>

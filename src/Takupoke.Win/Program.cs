@@ -15,6 +15,14 @@ public static class Program
     public static void Main(string[] args)
     {
         WinRT.ComWrappersSupport.InitializeComWrappers();
+        if (args is ["--unregister"])
+        {
+            try { ActivationRegistrationManager.UnregisterForProtocolActivation("jp.n624.takupoke.win", Environment.ProcessPath!); }
+            catch { }
+            try { Microsoft.Windows.AppNotifications.AppNotificationManager.Default.UnregisterAll(); }
+            catch { }
+            return;
+        }
         var activation = AppInstance.GetCurrent().GetActivatedEventArgs();
         var instance = AppInstance.FindOrRegisterForKey("takupoke-win");
         if (!instance.IsCurrent)

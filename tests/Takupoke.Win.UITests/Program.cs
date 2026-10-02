@@ -35,6 +35,10 @@ internal static class Program
             ((ValuePattern)edit.GetCurrentPattern(ValuePattern.Pattern)).SetValue("かくうがくしゅう");
             Wait(() => Find("link-fake-study") is not null, "kana search finds saved link");
             Navigate("timetable"); Navigate("settings");
+            Invoke(ByName("利用規約"));
+            Invoke(ByName("閉じる"));
+            Invoke(ByName("プライバシーポリシー"));
+            Invoke(ByName("閉じる"));
             Invoke(ByName("クラスを選択"));
             var homeroom = WaitElement("class-1_1"); Toggle(homeroom);
             var department = WaitElement("class-1_CN"); Toggle(department);
