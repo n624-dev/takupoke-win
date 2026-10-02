@@ -99,7 +99,7 @@ internal static class Program
         Wait(() =>
         {
             _process.Refresh();
-            if (_process.HasExited) throw new InvalidOperationException("App exited before its window was available.");
+            if (_process.HasExited) throw new InvalidOperationException($"App exited before its window was available (0x{_process.ExitCode:X8}).");
             if (_process.MainWindowHandle == 0) return false;
             _window = AutomationElement.FromHandle(_process.MainWindowHandle); return _window is not null;
         }, "WinUI window");

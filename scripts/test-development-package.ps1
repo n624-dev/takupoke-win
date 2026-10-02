@@ -12,6 +12,9 @@ $env:TAKUPOKE_DATA_ROOT = Join-Path $taskRoot 'installed-app-test-data'
 $env:DOTNET_ROOT = Join-Path $taskRoot 'not-an-installed-runtime'
 $env:DOTNET_ROOT_X64 = $env:DOTNET_ROOT
 $env:DOTNET_MULTILEVEL_LOOKUP = '0'
+$testStarted = Get-Date
+$env:DOTNET_HOST_TRACE = '1'
+$env:DOTNET_HOST_TRACEFILE = Join-Path $taskRoot 'installed-app-host.log'
 function Run-Installer([string]$Path, [string[]]$Arguments) {
     $process = Start-Process -FilePath $Path -ArgumentList $Arguments -PassThru -Wait
     try { if ($process.ExitCode -ne 0) { throw "Installer operation failed: $($process.ExitCode)" } }
@@ -42,9 +45,20 @@ try {
     if (Test-Path -LiteralPath 'HKCU:/Software/Classes/jp.n624.takupoke.win') { throw 'Protocol registration remains after uninstall.' }
     if (-not (Test-Path -LiteralPath $preferences)) { throw 'Uninstall unexpectedly deleted personal settings.' }
     Write-Output 'Verified installer deployment, published app UI, reinstallation with preserved settings, and uninstall cleanup.'
+} catch {
+    # This job uses exclusively synthetic data. Capture runtime diagnostics only
+    # for this app, never machine-wide event logs or school files.
+    if (Test-Path -LiteralPath $env:DOTNET_HOST_TRACEFILE) {
+        Get-Content -LiteralPath $env:DOTNET_HOST_TRACEFILE -Tail 35 | Write-Output
+    }
+    Get-WinEvent -FilterHashtable @{ LogName = 'Application'; StartTime = $testStarted } -ErrorAction SilentlyContinue |
+        Where-Object { $_.ProviderName -in @('.NET Runtime', 'Application Error') -and $_.Message.Contains('Takupoke.Win') } |
+        Select-Object -First 4 -ExpandProperty Message | Write-Output
+    throw
 } finally {
     if (Test-Path -LiteralPath (Join-Path $installDir 'unins000.exe')) {
         Run-Installer (Join-Path $installDir 'unins000.exe') @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART')
     }
     Remove-Item Env:/DOTNET_ROOT, Env:/DOTNET_ROOT_X64, Env:/DOTNET_MULTILEVEL_LOOKUP -ErrorAction SilentlyContinue
+    Remove-Item Env:/DOTNET_HOST_TRACE, Env:/DOTNET_HOST_TRACEFILE -ErrorAction SilentlyContinue
 }
