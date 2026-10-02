@@ -142,31 +142,21 @@ internal static class Program
     }
     private static void PickMaterial(string? path)
     {
-        var root = AutomationElement.RootElement;
         var dialogs = new AndCondition(new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window), new PropertyCondition(AutomationElement.ClassNameProperty, "#32770"));
-        var existing = root.FindAll(TreeScope.Children, dialogs).Cast<AutomationElement>().Select(e => e.Current.NativeWindowHandle).ToHashSet();
+        // The desktop picker is an owned window beneath the app in the UIA tree.
+        // Restrict discovery to this app rather than unrelated desktop dialogs.
+        var existing = _window!.FindAll(TreeScope.Descendants, dialogs).Cast<AutomationElement>().Select(e => e.Current.NativeWindowHandle).ToHashSet();
         AutomationElement? select = null;
         Wait(() => (select = Find("select-material-Exam"))?.Current.IsEnabled == true, "material selection is ready");
         if (select!.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll)) ((ScrollItemPattern)scroll).ScrollIntoView();
         Invoke(select);
         AutomationElement? dialog = null;
-        try { Wait(() => (dialog = root.FindAll(TreeScope.Children, dialogs).Cast<AutomationElement>().FirstOrDefault(e => !existing.Contains(e.Current.NativeWindowHandle))) is not null, "native file picker opens"); }
-        catch (TimeoutException)
-        {
-            // This executable requires an isolated, entirely synthetic offline test root.
-            // Diagnose window ownership and app controls without taking a desktop screenshot.
-            foreach (AutomationElement element in root.FindAll(TreeScope.Children, Condition.TrueCondition))
-                Console.Error.WriteLine($"Desktop control: class={element.Current.ClassName} type={element.Current.ControlType.ProgrammaticName} pid={element.Current.ProcessId} hwnd={element.Current.NativeWindowHandle}");
-            foreach (var element in _window!.FindAll(TreeScope.Descendants, Condition.TrueCondition).Cast<AutomationElement>().Take(120))
-                Console.Error.WriteLine($"Synthetic app control: class={element.Current.ClassName} id={element.Current.AutomationId} type={element.Current.ControlType.ProgrammaticName} enabled={element.Current.IsEnabled} offscreen={element.Current.IsOffscreen} name={element.Current.Name}");
-            throw;
-        }
+        Wait(() => (dialog = _window!.FindAll(TreeScope.Descendants, dialogs).Cast<AutomationElement>().FirstOrDefault(e => !existing.Contains(e.Current.NativeWindowHandle))) is not null, "native file picker opens");
         if (path is not null)
         {
-            var field = dialog!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, "1148"));
-            if (field is null) throw new InvalidOperationException("Native file-name field was not found.");
-            var edit = field.TryGetCurrentPattern(ValuePattern.Pattern, out var value) ? field : field.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit));
-            ((ValuePattern)edit!.GetCurrentPattern(ValuePattern.Pattern)).SetValue(path);
+            var edit = dialog!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.AutomationIdProperty, "1148"), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit)));
+            if (edit is null) throw new InvalidOperationException("Native file-name field was not found.");
+            ((ValuePattern)edit.GetCurrentPattern(ValuePattern.Pattern)).SetValue(path);
         }
         var button = dialog!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button), new PropertyCondition(AutomationElement.AutomationIdProperty, path is null ? "2" : "1")));
         if (button is null) throw new InvalidOperationException("Native file picker action was not found.");
