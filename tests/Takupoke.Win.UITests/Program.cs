@@ -37,6 +37,7 @@ internal static class Program
             Invoke(ByName("閉じる"));
             Invoke(ByName("プライバシーポリシー"));
             Invoke(ByName("閉じる"));
+            Wait(() => _window!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.NameProperty, "閉じる"), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button))) is null, "product document closes before opening the picker");
             var selectedPdf = Path.Combine(args[1], "fictional-selection.pdf");
             File.WriteAllText(selectedPdf, "%PDF-1.7\n% Entirely synthetic malformed PDF for selection persistence.\n", Encoding.ASCII);
             PickMaterial(selectedPdf);
@@ -144,9 +145,22 @@ internal static class Program
         var root = AutomationElement.RootElement;
         var dialogs = new AndCondition(new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window), new PropertyCondition(AutomationElement.ClassNameProperty, "#32770"));
         var existing = root.FindAll(TreeScope.Children, dialogs).Cast<AutomationElement>().Select(e => e.Current.NativeWindowHandle).ToHashSet();
-        Invoke(WaitElement("select-material-Exam"));
+        AutomationElement? select = null;
+        Wait(() => (select = Find("select-material-Exam"))?.Current.IsEnabled == true, "material selection is ready");
+        if (select!.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll)) ((ScrollItemPattern)scroll).ScrollIntoView();
+        Invoke(select);
         AutomationElement? dialog = null;
-        Wait(() => (dialog = root.FindAll(TreeScope.Children, dialogs).Cast<AutomationElement>().FirstOrDefault(e => !existing.Contains(e.Current.NativeWindowHandle))) is not null, "native file picker opens");
+        try { Wait(() => (dialog = root.FindAll(TreeScope.Children, dialogs).Cast<AutomationElement>().FirstOrDefault(e => !existing.Contains(e.Current.NativeWindowHandle))) is not null, "native file picker opens"); }
+        catch (TimeoutException)
+        {
+            // This executable requires an isolated, entirely synthetic offline test root.
+            // Diagnose window ownership and app controls without taking a desktop screenshot.
+            foreach (AutomationElement element in root.FindAll(TreeScope.Children, Condition.TrueCondition))
+                Console.Error.WriteLine($"Desktop control: class={element.Current.ClassName} type={element.Current.ControlType.ProgrammaticName} pid={element.Current.ProcessId} hwnd={element.Current.NativeWindowHandle}");
+            foreach (var element in _window!.FindAll(TreeScope.Descendants, Condition.TrueCondition).Cast<AutomationElement>().Take(120))
+                Console.Error.WriteLine($"Synthetic app control: class={element.Current.ClassName} id={element.Current.AutomationId} type={element.Current.ControlType.ProgrammaticName} enabled={element.Current.IsEnabled} offscreen={element.Current.IsOffscreen} name={element.Current.Name}");
+            throw;
+        }
         if (path is not null)
         {
             var field = dialog!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, "1148"));
