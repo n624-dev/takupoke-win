@@ -103,6 +103,8 @@ internal static class Program
             Wait(() => SavedClass(preferences) == "3_IT", "class preference is persisted");
             Navigate("timetable");
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "クラス：3-IT")) is not null, "selected class appears on timetable");
+            Wait(() => !Visible("status-bar") && !Visible("dismiss-status") && !Visible("cancel-operation"),
+                "The class-save footer disappears before measuring the timetable");
             var pageBounds = VisiblePageBounds();
             var tableBounds = WaitElement("timetable-grid-scroller").Current.BoundingRectangle;
             Require(tableBounds.Width >= pageBounds.Width - 64, "The desktop table uses the available content width.");
@@ -120,9 +122,21 @@ internal static class Program
             var timetableScroller = WaitElement("timetable-grid-scroller");
             var scrolling = (ScrollPattern)timetableScroller.GetCurrentPattern(ScrollPattern.Pattern);
             scrolling.SetScrollPercent(ScrollPattern.NoScroll, 60);
-            var priorGridId = timetableScroller.GetRuntimeId();
+            Wait(() => Math.Abs(((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current.VerticalScrollPercent - 60) < 2,
+                "The requested timetable scroll position is applied");
+            var appliedScroll = ((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current;
+            var savedOffsetFraction = appliedScroll.VerticalScrollPercent / 100 * (1 - appliedScroll.VerticalViewSize / 100);
+            var priorGridId = WaitElement("timetable-grid-scroller").GetRuntimeId();
             Wait(() => Find("timetable-grid-scroller") is { } refreshed && !refreshed.GetRuntimeId().SequenceEqual(priorGridId), "The clock periodically redraws the timetable");
-            Wait(() => Math.Abs(((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current.VerticalScrollPercent - 60) < 2, "Timetable redraw retains its vertical scroll position");
+            Wait(() =>
+            {
+                var redrawn = ((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current;
+                // UIA percent is relative to the remaining scroll range, so
+                // viewport changes can alter it while the pixel offset stays
+                // fixed. The synthetic content extent remains unchanged.
+                var redrawnOffsetFraction = redrawn.VerticalScrollPercent / 100 * (1 - redrawn.VerticalViewSize / 100);
+                return Math.Abs(redrawnOffsetFraction - savedOffsetFraction) <= 0.005;
+            }, "Timetable redraw retains its vertical scroll offset within the fixed synthetic content");
             ((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).SetScrollPercent(ScrollPattern.NoScroll, 0);
             Require(SetWindowPos(_process!.MainWindowHandle, 0, (int)originalWindowBounds.Left, (int)originalWindowBounds.Top,
                 (int)originalWindowBounds.Width, (int)originalWindowBounds.Height, 0x0044), "The original test window size can be restored.");
