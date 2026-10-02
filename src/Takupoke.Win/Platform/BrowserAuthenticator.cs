@@ -41,7 +41,7 @@ public sealed class BrowserAuthenticator(OidcClient oidc, Action<Uri>? openBrows
             var attempt = OidcClient.CreateAttempt(); var completion = new TaskCompletionSource<Uri>(TaskCreationOptions.RunContinuationsAsynchronously);
             lock (_callbackGate) { _attempt = attempt; _callback = completion; }
             using var registration = deadline.Token.Register(() => completion.TrySetCanceled(deadline.Token));
-            ProgressChanged?.Invoke("学校アカウントの認証待ちです。ブラウザで認証を完了してください。");
+            ProgressChanged?.Invoke("ブラウザでの認証を待っています。");
             if (openBrowser is not null) openBrowser(attempt.AuthorizationUri);
             else Process.Start(new ProcessStartInfo(attempt.AuthorizationUri.AbsoluteUri) { UseShellExecute = true });
             var callback = await completion.Task;

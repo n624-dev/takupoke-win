@@ -24,8 +24,8 @@ internal sealed class OfflineTestNetwork : HttpMessageHandler
         if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") != "1") throw new InvalidOperationException("An isolated offline test is required.");
         _root = root;
     }
-    private string Mode => File.Exists(Path.Combine(_root, "offline-auth-mode.txt")) ? File.ReadAllText(Path.Combine(_root, "offline-auth-mode.txt")).Trim() : "disabled";
-    private string Revision => File.Exists(Path.Combine(_root, "offline-auth-revision.txt")) ? File.ReadAllText(Path.Combine(_root, "offline-auth-revision.txt")).Trim() : new string('B', 43);
+    private string Mode => File.Exists(Path.Combine(_root, "offline-auth-mode.txt")) ? ReadProbe(Path.Combine(_root, "offline-auth-mode.txt")).Trim() : "disabled";
+    private string Revision => File.Exists(Path.Combine(_root, "offline-auth-revision.txt")) ? ReadProbe(Path.Combine(_root, "offline-auth-revision.txt")).Trim() : new string('B', 43);
     internal void OpenBrowser(Uri authorization)
     {
         if (Mode == "disabled") throw new InvalidOperationException("CI does not launch a real browser or authenticate.");
@@ -33,7 +33,7 @@ internal sealed class OfflineTestNetwork : HttpMessageHandler
             .ToDictionary(pair => Uri.UnescapeDataString(pair[0]), pair => Uri.UnescapeDataString(pair[1]));
         _nonce = query["nonce"];
         // Only this synthetic state's file is used to send a fake OS callback.
-        File.WriteAllText(Path.Combine(_root, "offline-auth-state.txt"), query["state"]);
+        WriteProbe("offline-auth-state.txt", query["state"]);
     }
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken token)
     {
@@ -46,7 +46,7 @@ internal sealed class OfflineTestNetwork : HttpMessageHandler
         }
         if (uri.AbsolutePath == "/oauth/token")
         {
-            File.WriteAllText(Path.Combine(_root, "offline-token-requests.txt"), (++_tokenRequests).ToString());
+            WriteProbe("offline-token-requests.txt", (++_tokenRequests).ToString());
             while (Mode == "hold") await Task.Delay(50, token);
             if (Mode == "fail") return new(HttpStatusCode.BadRequest) { Content = new StringContent("{}") };
             var now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
@@ -64,7 +64,7 @@ internal sealed class OfflineTestNetwork : HttpMessageHandler
                 x = OidcClient.Base64Url(key.Q.X!), y = OidcClient.Base64Url(key.Q.Y!) } } }), "application/json");
         }
         if (request.Headers.Authorization?.Parameter != "fake-offline-access") throw new InvalidOperationException("A validated fake token is required.");
-        File.WriteAllText(Path.Combine(_root, "offline-private-requests.txt"), (++_privateRequests).ToString());
+        WriteProbe("offline-private-requests.txt", (++_privateRequests).ToString());
         if (uri.AbsolutePath == "/links")
         {
             var link = new LinkItem("fake-study", "fake-category", "架空学習リンク", "https://example.invalid/", "blue", true, 1, true, 1, [], "架空学習リンク|かくうがくしゅうりんく|kakuugakushuurinku");
@@ -92,5 +92,9 @@ internal sealed class OfflineTestNetwork : HttpMessageHandler
         if (type is not null) response.Content.Headers.ContentType = new MediaTypeHeaderValue(type);
         return response;
     }
+    private static string ReadProbe(string path)
+    { using var file = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete); using var text = new StreamReader(file); return text.ReadToEnd(); }
+    private void WriteProbe(string name, string value)
+    { var path = Path.Combine(_root, name); File.WriteAllText(path + ".tmp", value); File.Move(path + ".tmp", path, true); }
     protected override void Dispose(bool disposing) { if (disposing) _key.Dispose(); base.Dispose(disposing); }
 }

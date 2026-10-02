@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using Microsoft.Windows.AppLifecycle;
 using Windows.ApplicationModel.Activation;
+using WinRT;
 
 namespace Takupoke.Win;
 
@@ -8,11 +9,12 @@ internal static class ProtocolActivation
 {
     internal static Uri? GetCallback(AppActivationArguments activation)
     {
-        if (activation.Kind == ExtendedActivationKind.Protocol && activation.Data is ProtocolActivatedEventArgs protocol)
-            return protocol.Uri;
+        if (activation.Kind == ExtendedActivationKind.Protocol)
+            return activation.Data.As<IProtocolActivatedEventArgs>().Uri;
         // Earlier installers passed the raw URI. App SDK reports those as Launch,
         // including when forwarding activation to the existing app instance.
-        if (activation.Kind != ExtendedActivationKind.Launch || activation.Data is not LaunchActivatedEventArgs launch) return null;
+        if (activation.Kind != ExtendedActivationKind.Launch) return null;
+        var launch = activation.Data.As<ILaunchActivatedEventArgs>();
         var memory = CommandLineToArgvW(launch.Arguments, out var count);
         if (memory == 0) return null;
         try

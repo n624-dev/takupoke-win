@@ -22,6 +22,7 @@ AppUpdatesURL=https://github.com/n624-dev/takupoke-win/releases
 DefaultDirName={localappdata}\Programs\TakupokeWin
 DefaultGroupName=たくポケ Win
 DisableProgramGroupPage=yes
+DisableWelcomePage=no
 PrivilegesRequired=lowest
 MinVersion=10.0.17763
 #if TargetArch == "arm64"
@@ -45,6 +46,20 @@ SetupLogging=yes
 [Languages]
 Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
 Name: "english"; MessagesFile: "compiler:Default.isl"
+
+[CustomMessages]
+japanese.UpdateTitle=たくポケ Winを更新
+japanese.ReinstallTitle=たくポケ Winを再インストール
+japanese.UpdateButton=更新する
+japanese.ReinstallButton=再インストール
+japanese.InstalledVersion=現在のバージョン
+japanese.NewVersion=インストールするバージョン
+english.UpdateTitle=Update Takupoke Win
+english.ReinstallTitle=Reinstall Takupoke Win
+english.UpdateButton=Update
+english.ReinstallButton=Reinstall
+english.InstalledVersion=Installed version
+english.NewVersion=Version to install
 
 [Files]
 Source: "{#PublishDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "*.pdb"
@@ -70,6 +85,39 @@ Filename: "{app}\Takupoke.Win.exe"; Description: "たくポケ Winを起動"; Fl
 Filename: "{app}\Takupoke.Win.exe"; Parameters: "--unregister"; Flags: runhidden waituntilterminated skipifdoesntexist
 
 [Code]
+var PreviousVersion: String;
+
+function InitializeSetup: Boolean;
+begin
+  PreviousVersion := '';
+  RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{00C9D0A0-362C-4F7A-93E7-C25D5160C279}_is1', 'DisplayVersion', PreviousVersion);
+  Result := True;
+end;
+
+function UpgradeTitle: String;
+begin
+  if PreviousVersion = '{#AppVersion}' then Result := ExpandConstant('{cm:ReinstallTitle}')
+  else Result := ExpandConstant('{cm:UpdateTitle}');
+end;
+
+procedure InitializeWizard;
+begin
+  if PreviousVersion <> '' then begin
+    WizardForm.Caption := UpgradeTitle;
+    WizardForm.WelcomeLabel1.Caption := UpgradeTitle;
+    WizardForm.WelcomeLabel2.Caption := ExpandConstant('{cm:InstalledVersion}') + ': ' + PreviousVersion + #13#10 +
+      ExpandConstant('{cm:NewVersion}') + ': {#AppVersion}';
+    WizardForm.ReadyLabel.Caption := UpgradeTitle;
+  end;
+end;
+
+procedure CurPageChanged(CurPageID: Integer);
+begin
+  if (PreviousVersion <> '') and (CurPageID = wpReady) then
+    if PreviousVersion = '{#AppVersion}' then WizardForm.NextButton.Caption := ExpandConstant('{cm:ReinstallButton}')
+    else WizardForm.NextButton.Caption := ExpandConstant('{cm:UpdateButton}');
+end;
+
 function HasWebView(Root: Integer; const Key: String): Boolean;
 var Version: String;
 begin

@@ -79,7 +79,7 @@ public sealed partial class MainWindow
             if (failure is { } value) panel.Children.Add(Text(new ApiException(value).Message));
             Add(Card(panel));
         }
-        if (_model.SharedUpdateMessage is { } message) Add(Text(message));
+        if (_model.SharedUpdateMessage is { } message) { var error = Text(message); error.Foreground = WarningBrush; Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(error, "account-update-error"); Add(error); }
         Add(OperationButton("更新を確認・取得", _model.UpdateSharedAsync, "update-account"));
     }
     private Task SharedDetails(DataSet kind)

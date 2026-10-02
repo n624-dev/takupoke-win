@@ -211,7 +211,7 @@ public sealed partial class MainWindow : Window
         _selectingMaterial = true;
         try
         {
-            var picker = new FileOpenPicker(AppWindow.Id) { Title = AppViewModel.MaterialLabel(kind) + "を選択 — OneDriveの同期フォルダーにある原本", SettingsIdentifier = "takupoke-" + kind };
+            var picker = new FileOpenPicker(AppWindow.Id) { Title = AppViewModel.MaterialLabel(kind) + "を選択", SettingsIdentifier = "takupoke-" + kind };
             picker.FileTypeFilter.Add(kind == MaterialKind.Changes ? ".xlsx" : ".pdf");
             var file = await picker.PickSingleFileAsync();
             if (file is not null)

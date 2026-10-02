@@ -34,6 +34,16 @@ try {
     $command = (Get-ItemProperty -LiteralPath 'HKCU:/Software/Classes/jp.n624.takupoke.win/shell/open/command').'(default)'
     if ($command -ne "`"$exe`" `"----ms-protocol:%1`"") { throw 'Protocol callback command is incompatible with App SDK activation.' }
     Run-UiChecks
+    $uninstallKey = 'HKCU:/Software/Microsoft/Windows/CurrentVersion/Uninstall/{00C9D0A0-362C-4F7A-93E7-C25D5160C279}_is1'
+    $installedVersion = (Get-ItemProperty -LiteralPath $uninstallKey).DisplayVersion
+    dotnet exec tests/Takupoke.Win.UITests/bin/Release/net10.0-windows/Takupoke.Win.UITests.dll --check-installer $setup '再インストール'
+    if ($LASTEXITCODE -ne 0) { throw 'Reinstall wizard display was not verified.' }
+    try {
+        # Simulate an older installed version only in this runner-owned installation.
+        Set-ItemProperty -LiteralPath $uninstallKey -Name DisplayVersion -Value '0.0.0-dev.0'
+        dotnet exec tests/Takupoke.Win.UITests/bin/Release/net10.0-windows/Takupoke.Win.UITests.dll --check-installer $setup '更新'
+        if ($LASTEXITCODE -ne 0) { throw 'Upgrade wizard display was not verified.' }
+    } finally { Set-ItemProperty -LiteralPath $uninstallKey -Name DisplayVersion -Value $installedVersion }
     $preferences = Join-Path $env:TAKUPOKE_DATA_ROOT 'preferences.json'
     $before = (Get-FileHash -LiteralPath $preferences).Hash
     Run-Installer $setup @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', "/DIR=`"$installDir`"", "/LOG=`"$(Join-Path $taskRoot 'setup-update.log')`"")

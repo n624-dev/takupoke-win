@@ -73,6 +73,12 @@ public sealed partial class MainWindow
         for (var period = 1; period <= 8; period++)
         {
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(64) });
+            for (var column = 0; column <= days.Count; column++)
+            {
+                var cell = new Border { BorderThickness = new Thickness(0, 0, 1, 1),
+                    BorderBrush = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["CardStrokeColorDefaultBrush"] };
+                Grid.SetRow(cell, period); Grid.SetColumn(cell, column); grid.Children.Add(cell);
+            }
             var time = engine.CommonPeriodTime(period, days, classes);
             var label = Text(allNoClass ? "" : period + "限\n" + DisplayText.PeriodTime(time), 14); label.TextAlignment = TextAlignment.Center; Grid.SetRow(label, period); grid.Children.Add(label);
         }

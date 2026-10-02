@@ -45,7 +45,7 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <Button x:Name="CancelButton" Content="処理を中止" Click="Cancel_Click" Visibility="Collapsed" AutomationProperties.AutomationId="cancel-operation" />
-                <Button x:Name="DismissStatusButton" Content="閉じる" Click="DismissStatus_Click" Visibility="Collapsed" AutomationProperties.AutomationId="dismiss-status" />
+                <Button x:Name="DismissStatusButton" Content="×" Click="DismissStatus_Click" Visibility="Collapsed" AutomationProperties.Name="結果を閉じる" AutomationProperties.AutomationId="dismiss-status" />
             </StackPanel>
         </Grid>
     </Grid>

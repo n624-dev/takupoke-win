@@ -24,6 +24,8 @@ internal static class Program
     {
         try
         {
+            if (args is ["--check-installer", var installer, var caption] && Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
+                return CheckInstallerDisplay(installer, caption);
             if (args.Length != 2 || Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") != "1")
                 throw new InvalidOperationException("An executable and isolated offline test data root are required.");
             // UI Automation returns physical pixels. Match the tested app's per-monitor context.
@@ -142,6 +144,10 @@ internal static class Program
         finally { Stop(); }
     }
     private static bool Visible(string id) => Find(id) is { } element && !element.Current.IsOffscreen;
+    private static string ReadProbe(string path)
+    { using var file = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete); using var text = new StreamReader(file); return text.ReadToEnd(); }
+    private static void WriteProbe(string path, string value)
+    { File.WriteAllText(path + ".tmp", value); File.Move(path + ".tmp", path, true); }
     private static void CheckAuthentication(string executable, string root)
     {
         var mode = Path.Combine(root, "offline-auth-mode.txt"); var state = Path.Combine(root, "offline-auth-state.txt");
@@ -155,44 +161,44 @@ internal static class Program
         {
             Invoke(WaitElement("settings-account"));
             Wait(() => Find("page-account") is not null, "account child screen");
-            File.WriteAllText(mode, "fail"); File.Delete(state);
+            WriteProbe(mode, "fail"); File.Delete(state);
             Invoke(WaitElement("update-account"));
             Wait(() => File.Exists(state) && Visible("cancel-operation"), "authentication waits for an OS callback");
-            var attemptState = File.ReadAllText(state);
+            var attemptState = ReadProbe(state);
             Require(Find("shared-details-Links")?.Current.IsEnabled == true, "Saved data details remain available while authenticating.");
             Invoke(WaitElement("shared-details-Links")); Invoke(ByName("閉じる"));
             SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=forged", shell: false);
             Require(Visible("cancel-operation") && !File.Exists(tokenRequests), "An unmatched callback neither completes authentication nor exchanges a token.");
             SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=" + attemptState, shell: false);
             Wait(() => Find("update-account")?.Current.IsEnabled == true && !Visible("cancel-operation"), "Legacy raw-URI launch ends authentication after token failure");
-            Require(File.ReadAllText(tokenRequests) == "1" && !File.Exists(privateRequests), "Token failure cannot download school data.");
+            Require(ReadProbe(tokenRequests) == "1" && !File.Exists(privateRequests), "Token failure cannot download school data.");
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "学校アカウントの認証を完了できませんでした。")) is not null, "authentication failure is visible on the account screen");
             Wait(() => !Visible("status-bar"), "failure footer disappears after a short interval");
             Require(Find("shared-details-Links")?.Current.IsEnabled == true, "The account screen stays usable after the footer disappears.");
-            File.WriteAllText(mode, "hold"); File.Delete(state);
+            WriteProbe(mode, "hold"); File.Delete(state);
             Invoke(WaitElement("update-account"));
             Wait(() => File.Exists(state) && Visible("cancel-operation"), "retry creates a fresh authentication attempt");
-            attemptState = File.ReadAllText(state);
+            attemptState = ReadProbe(state);
             SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=" + attemptState, shell: true);
-            Wait(() => File.ReadAllText(tokenRequests) == "2", "Windows protocol launch reaches token exchange");
+            Wait(() => ReadProbe(tokenRequests) == "2", "Windows protocol launch reaches token exchange");
             Require(Find("operation-status")?.Current.Name.Contains("認証情報を検証", StringComparison.Ordinal) == true, "Progress identifies token verification rather than a stale refresh result.");
             Invoke(WaitElement("back-settings"));
             Require(Find("settings-materials")?.Current.IsEnabled == true && Find("settings-help")?.Current.IsEnabled == true, "Settings navigation stays usable during token exchange.");
             Invoke(WaitElement("settings-help")); Wait(() => Find("page-help") is not null, "help is readable during token exchange");
             Invoke(WaitElement("back-settings")); Invoke(WaitElement("settings-account"));
-            File.WriteAllText(mode, "success");
+            WriteProbe(mode, "success");
             Wait(() => Find("update-account")?.Current.IsEnabled == true && !Visible("cancel-operation"), "Validated fake authentication completes downloads and releases the UI");
-            Require(File.ReadAllText(privateRequests) == "3", "All three datasets require the verified token and download once.");
+            Require(ReadProbe(privateRequests) == "3", "All three datasets require the verified token and download once.");
             foreach (var kind in Enum.GetValues<DataSet>()) Require(Find("shared-status-" + kind)?.Current.Name == "取得済み", "Each independently saved dataset shows acquired status.");
             Wait(() => !Visible("status-bar"), "success footer automatically hides");
-            File.WriteAllText(Path.Combine(root, "offline-auth-revision.txt"), new string('C', 43));
-            File.WriteAllText(mode, "hold"); File.Delete(state);
+            WriteProbe(Path.Combine(root, "offline-auth-revision.txt"), new string('C', 43));
+            WriteProbe(mode, "hold"); File.Delete(state);
             Invoke(WaitElement("update-account")); Wait(() => File.Exists(state) && Visible("cancel-operation"), "another update is cancellable");
-            SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=" + File.ReadAllText(state), shell: true);
-            Wait(() => File.ReadAllText(tokenRequests) == "3", "cancellation test reaches token exchange");
+            SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=" + ReadProbe(state), shell: true);
+            Wait(() => ReadProbe(tokenRequests) == "3", "cancellation test reaches token exchange");
             Invoke(WaitElement("cancel-operation"));
             Wait(() => Find("update-account")?.Current.IsEnabled == true && !Visible("cancel-operation"), "canceling token exchange releases the UI");
-            Require(File.ReadAllText(privateRequests) == "3", "Cancellation preserves previous data and starts no private downloads.");
+            Require(ReadProbe(privateRequests) == "3", "Cancellation preserves previous data and starts no private downloads.");
             foreach (var kind in Enum.GetValues<DataSet>()) Require(Find("shared-status-" + kind)?.Current.Name == "取得済み", "Canceled authentication retains all prior datasets.");
             if (Visible("dismiss-status")) Invoke(WaitElement("dismiss-status"));
             Require(!Visible("status-bar"), "The result footer can be dismissed immediately.");
@@ -211,6 +217,33 @@ internal static class Program
         if (!shell) info.ArgumentList.Add(callback);
         using var redirect = Process.Start(info);
         if (!shell && (redirect is null || !redirect.WaitForExit(10000) || redirect.ExitCode != 0)) throw new InvalidOperationException("The synthetic callback process did not redirect successfully.");
+    }
+    private static int CheckInstallerDisplay(string installer, string caption)
+    {
+        var info = new ProcessStartInfo(Path.GetFullPath(installer)) { UseShellExecute = false };
+        info.ArgumentList.Add("/LANG=japanese"); info.ArgumentList.Add("/SP-"); info.ArgumentList.Add("/NORESTART");
+        using var process = Process.Start(info) ?? throw new InvalidOperationException("Installer did not start.");
+        try
+        {
+            AutomationElement? wizard = null;
+            Wait(() =>
+            {
+                process.Refresh();
+                if (process.HasExited) throw new InvalidOperationException("Installer exited before displaying the wizard.");
+                if (process.MainWindowHandle == 0) return false;
+                wizard = AutomationElement.FromHandle(process.MainWindowHandle);
+                return wizard.Current.Name.Contains(caption, StringComparison.Ordinal);
+            }, "installer caption identifies " + caption);
+            Require(wizard!.FindAll(TreeScope.Descendants, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Text))
+                .Cast<AutomationElement>().Any(text => text.Current.Name.Contains("現在のバージョン", StringComparison.Ordinal)
+                    && text.Current.Name.Contains("インストールするバージョン", StringComparison.Ordinal)), "Upgrade wizard shows both version labels.");
+            Console.WriteLine("Verified installer display: " + caption + " and installed/new version labels."); return 0;
+        }
+        finally
+        {
+            // No installation step was invoked; terminate only this isolated wizard.
+            if (!process.HasExited) { process.Kill(true); process.WaitForExit(5000); }
+        }
     }
     private static async Task SeedAsync(string root)
     {
