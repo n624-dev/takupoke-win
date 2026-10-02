@@ -3,10 +3,15 @@ using System.Text.RegularExpressions;
 
 namespace Takupoke.Infrastructure.Parsing;
 
-public sealed class PdfParseException(string stage, int? page = null) : Exception("PDFの" + Label(stage) + "を確認できませんでした。正常な解析結果は保持しています。")
+public sealed record PdfFailurePosition(int ClassRow, int Weekday, int Period, int? DetectedLines = null);
+public sealed class PdfParseException(string stage, int? page = null, PdfFailurePosition? cell = null)
+    : Exception($"PDFの{Label(stage)}を確認できませんでした（{stage}" + (page is null ? "" : $"、{page}ページ")
+        + (cell is null ? "" : $"、クラス位置{cell.ClassRow}・曜日{cell.Weekday}・{cell.Period}限" + (cell.DetectedLines is null ? "" : $"・{cell.DetectedLines}行"))
+        + "）。正常な解析結果は保持しています。")
 {
     public string Stage { get; } = stage;
     public int? Page { get; } = page;
+    public PdfFailurePosition? Cell { get; } = cell;
     private static string Label(string stage) => stage switch
     { "P01" => "文字と位置の対応", "P02" => "ページの向き", "P03" => "年度の見出し", "P04" => "資料名・学期・ページ数",
         "P05" => "時限の見出し", "P06" => "表の列の罫線", "P07" => "日付の行の罫線", "P08" => "表のセルの罫線",

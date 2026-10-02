@@ -17,6 +17,8 @@ public sealed class BrowserAuthenticator(OidcClient oidc) : IDisposable
         lock (_callbackGate)
         {
             if (_attempt is null || _callback is null) return;
+            if (OidcClient.IsAuthenticatedErrorCallback(uri, _attempt))
+            { _callback.TrySetException(new ApiException(ApiFailure.Authentication)); return; }
             try { OidcClient.ValidateCallback(uri, _attempt); _callback.TrySetResult(uri); }
             catch (ApiException) { /* An unrelated or forged protocol activation cannot finish the current request. */ }
         }

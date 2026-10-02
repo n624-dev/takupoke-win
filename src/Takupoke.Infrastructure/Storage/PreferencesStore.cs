@@ -1,4 +1,5 @@
 using Takupoke.Core;
+using System.Text.Json.Nodes;
 
 namespace Takupoke.Infrastructure.Storage;
 
@@ -15,7 +16,12 @@ public sealed class PreferencesStore(string root)
     public async Task SaveAsync(UserPreferences preferences, CancellationToken token = default)
     {
         await _gate.WaitAsync(token);
-        try { await DataCodec.AtomicWriteAsync(_file, DataCodec.Encode(preferences.Validated()), token); }
+        try
+        {
+            var saved = JsonNode.Parse(DataCodec.Encode(preferences.Validated()))!.AsObject();
+            if (preferences.MainColor == "default") saved.Remove("mainColor");
+            await DataCodec.AtomicWriteAsync(_file, System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(saved, DataCodec.Options), token);
+        }
         finally { _gate.Release(); }
     }
 }

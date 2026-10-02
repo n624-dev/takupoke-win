@@ -43,6 +43,20 @@ public sealed class OidcClient(HttpClient http, TimeProvider? timeProvider = nul
             || !CryptographicOperations.FixedTimeEquals(Encoding.UTF8.GetBytes(states[0].Value), Encoding.UTF8.GetBytes(attempt.State))) throw new ApiException(ApiFailure.Authentication);
         return codes[0].Value;
     }
+    public static bool IsAuthenticatedErrorCallback(Uri callback, AuthorizationAttempt attempt)
+    {
+        if (!callback.IsAbsoluteUri || callback.Scheme != "jp.n624.takupoke.win" || callback.Host.Length != 0
+            || callback.AbsolutePath != "/oauth/callback" || callback.Fragment.Length != 0 || callback.OriginalString.Length > 16000) return false;
+        try
+        {
+            var fields = callback.Query.TrimStart('?').Split('&', StringSplitOptions.RemoveEmptyEntries).Select(part =>
+            { var pair = part.Split('=', 2); return (Name: Uri.UnescapeDataString(pair[0].Replace('+', ' ')), Value: pair.Length == 2 ? Uri.UnescapeDataString(pair[1].Replace('+', ' ')) : ""); }).ToArray();
+            var states = fields.Where(p => p.Name == "state").ToArray(); var errors = fields.Where(p => p.Name == "error").ToArray();
+            return states.Length == 1 && errors.Length == 1 && errors[0].Value.Length > 0 && !fields.Any(p => p.Name == "code")
+                && CryptographicOperations.FixedTimeEquals(Encoding.UTF8.GetBytes(states[0].Value), Encoding.UTF8.GetBytes(attempt.State));
+        }
+        catch { return false; }
+    }
     public async Task<string> ExchangeAsync(Uri callback, AuthorizationAttempt attempt, CancellationToken token = default)
     {
         try

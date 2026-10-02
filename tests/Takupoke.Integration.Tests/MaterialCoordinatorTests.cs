@@ -84,4 +84,47 @@ public sealed class MaterialCoordinatorTests
         }
         finally { Directory.Delete(root, true); }
     }
+    [Fact]
+    public async Task WeekdayPreviewIsReadOnlyAndRejectsDifferentYearOrSource()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-material-tests-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root); using var protector = new Protector();
+        try
+        {
+            var path = Path.Combine(root, "fictional.xlsx"); await File.WriteAllBytesAsync(path, XlsxChangeReaderTests.Workbook());
+            await using var store = new SchoolDataStore(Path.Combine(root, "data"), protector);
+            var coordinator = new MaterialCoordinator(store, new(new FakeIdentity()));
+            await coordinator.SelectAsync(MaterialKind.Changes, path, 2032);
+            var lease = await store.BeginAsync(); var good = await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes");
+            await File.WriteAllBytesAsync(path, XlsxChangeReaderTests.Workbook(formula: true, cache: "火"));
+            Assert.False((await coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed);
+            var failure = await store.ReadAsync<MaterialAttempt>(lease, "attempt.Changes");
+            var preview = await coordinator.PreviewChangesAsync(2032);
+            Assert.Single(preview.Changes); Assert.Single(preview.Warnings);
+            Assert.Equal(good!.OriginalId, (await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes"))!.OriginalId);
+            Assert.Equal(failure, await store.ReadAsync<MaterialAttempt>(lease, "attempt.Changes"));
+            await Assert.ThrowsAsync<InvalidDataException>(() => coordinator.PreviewChangesAsync(2033));
+            await File.WriteAllBytesAsync(path, XlsxChangeReaderTests.Workbook());
+            await coordinator.RefreshAsync(MaterialKind.Changes, 2032);
+            await Assert.ThrowsAsync<InvalidDataException>(() => coordinator.PreviewChangesAsync(2032));
+        }
+        finally { Directory.Delete(root, true); }
+    }
+    [Theory]
+    [InlineData("fictional.txt")]
+    [InlineData("~$fictional.xlsx")]
+    public async Task WrongExtensionAndExcelTemporaryFilesCannotReplaceSelection(string name)
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-material-tests-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root); using var protector = new Protector();
+        try
+        {
+            var path = Path.Combine(root, name); await File.WriteAllBytesAsync(path, XlsxChangeReaderTests.Workbook());
+            await using var store = new SchoolDataStore(Path.Combine(root, "data"), protector);
+            Assert.False((await new MaterialCoordinator(store, new(new FakeIdentity())).SelectAsync(MaterialKind.Changes, path, 2032)).Changed);
+            Assert.Null(await store.ReadAsync<SourceRecord>(await store.BeginAsync(), "selection.Changes"));
+        }
+        finally { Directory.Delete(root, true); }
+    }
+
 }

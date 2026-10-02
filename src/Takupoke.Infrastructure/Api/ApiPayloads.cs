@@ -32,7 +32,23 @@ public static class ApiPayloads
     }
     private static T Decode<T>(JsonElement root) => root.Deserialize<T>(DataCodec.Options) ?? throw new ApiException(ApiFailure.InvalidResponse);
     public static LinksPayload Links(byte[] bytes)
-    { using var document = Json(bytes, 3_000_000); return Decode<LinksPayload>(document.RootElement).Validated(); }
+    {
+        using var document = Json(bytes, 3_000_000);
+        // Swift Codable requires every nonoptional field, including false booleans and zero sort orders.
+        RequiredKeys(document.RootElement, "version", "linksVersion", "categories");
+        foreach (var category in document.RootElement.GetProperty("categories").EnumerateArray())
+        {
+            RequiredKeys(category, "id", "label", "sortOrder", "buttons");
+            foreach (var item in category.GetProperty("buttons").EnumerateArray())
+                RequiredKeys(item, "id", "categoryId", "label", "href", "color", "visible", "sortOrder", "recommended", "recommendationOrder", "searchAliases", "searchTerms");
+        }
+        return Decode<LinksPayload>(document.RootElement).Validated();
+    }
+    private static void RequiredKeys(JsonElement value, params string[] keys)
+    {
+        if (value.ValueKind != JsonValueKind.Object || keys.Any(key => !value.TryGetProperty(key, out var property) || property.ValueKind == JsonValueKind.Null))
+            throw new ApiException(ApiFailure.InvalidResponse);
+    }
     public static ScheduleTimes Times(byte[] bytes)
     {
         using var document = Json(bytes, 128 * 1024);

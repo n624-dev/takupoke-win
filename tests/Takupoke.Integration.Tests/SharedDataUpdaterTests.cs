@@ -99,4 +99,24 @@ public sealed class SharedDataUpdaterTests
         }
         finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
     }
+    [Fact]
+    public async Task CurrentRevisionsRequireNeitherAuthenticationNorDownloads()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-update-tests-" + Guid.NewGuid().ToString("N"));
+        using var protector = new Protector();
+        try
+        {
+            await using var store = new SchoolDataStore(root, protector); var lease = await store.BeginAsync();
+            await store.WriteAsync(lease, "api.links", new SavedLinks(new("v1", "sha256-" + new string('a', 64), [new("fake-category", "架空カテゴリ", 0, [])]), "\"fake-links\"", DateTimeOffset.UtcNow, Revision));
+            await store.WriteAsync(lease, "api.mapping", new SavedMapping(Revision, "fake-v1", 1, "\"fake-mapping\"", new string('a', 64), "2032-04-01T00:00:00Z", DateTimeOffset.UtcNow, new([], [], [])));
+            await store.WriteAsync(lease, "api.times", new SavedTimes(Revision, DateTimeOffset.UtcNow, new(1, [])));
+            var handler = new Handler(); using var http = new HttpClient(handler);
+            var updater = new SharedDataUpdater(new(http, new("https://example.invalid/")), store);
+            var result = await updater.UpdateAsync(_ => throw new InvalidOperationException("Current data must not authenticate."));
+            Assert.Equal(3, result.Count); Assert.All(result, item => { Assert.False(item.Updated); Assert.Null(item.Failure); });
+            Assert.Equal(3, handler.PublicRequests); Assert.Equal(0, handler.AuthenticatedRequests);
+        }
+        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
+
 }

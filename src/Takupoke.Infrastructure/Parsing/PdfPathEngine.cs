@@ -22,6 +22,12 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
     private readonly Stack<PdfMatrix> _stack = new();
     private readonly List<List<(double X, double Y)>> _paths = [];
     private readonly List<PdfRule> _rules = [];
+    private int _paintWork;
+    private void ConsumePaintWork()
+    {
+        if (++_paintWork > 1_000_000) throw new PdfParseException("limit");
+        if (_paintWork % 128 == 0) token.ThrowIfCancellationRequested();
+    }
     private static readonly IReadOnlyDictionary<string, int> Counts = new Dictionary<string, int>
     { ["q"] = 0, ["Q"] = 0, ["cm"] = 6, ["m"] = 2, ["l"] = 2, ["re"] = 4, ["h"] = 0, ["S"] = 0, ["s"] = 0,
         ["f"] = 0, ["F"] = 0, ["f*"] = 0, ["B"] = 0, ["B*"] = 0, ["b"] = 0, ["b*"] = 0, ["n"] = 0, ["c"] = 6, ["v"] = 4, ["y"] = 4 };
@@ -51,7 +57,7 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
             case "n": _paths.Clear(); break;
             case "c": case "v": case "y": if (_paths.Count > 0) _paths[^1].Clear(); break;
         }
-        if (_paths.Count > 10000 || _paths.Any(path => path.Count > 10000)) throw new PdfParseException("limit");
+        if (_paths.Count > 10000 || _paths.Count > 0 && _paths[^1].Count > 10000) throw new PdfParseException("limit");
     }
     private void Line((double X, double Y) a, (double X, double Y) b)
     {
@@ -61,15 +67,20 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
     }
     private void Paint(bool fill, bool stroke)
     {
-        foreach (var path in _paths.Where(p => p.Count >= 2))
+        token.ThrowIfCancellationRequested();
+        foreach (var path in _paths)
         {
+            ConsumePaintWork();
+            if (path.Count < 2) continue;
             if (fill)
             {
-                var left = path.Min(p => p.X); var right = path.Max(p => p.X); var top = path.Min(p => p.Y); var bottom = path.Max(p => p.Y);
+                var left = path[0].X; var right = left; var top = path[0].Y; var bottom = top;
+                foreach (var point in path)
+                { ConsumePaintWork(); left = Math.Min(left, point.X); right = Math.Max(right, point.X); top = Math.Min(top, point.Y); bottom = Math.Max(bottom, point.Y); }
                 if (right - left <= 2.1 && bottom - top > 3) Line(((left + right) / 2, top), ((left + right) / 2, bottom));
                 else if (bottom - top <= 2.1 && right - left > 3) Line((left, (top + bottom) / 2), (right, (top + bottom) / 2));
             }
-            if (stroke) for (var index = 1; index < path.Count; index++) Line(path[index - 1], path[index]);
+            if (stroke) for (var index = 1; index < path.Count; index++) { ConsumePaintWork(); Line(path[index - 1], path[index]); }
         }
         _paths.Clear();
     }

@@ -68,8 +68,9 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
 
     public IEnumerable<ScheduleChange> Changes(IReadOnlySet<string> classes, ChangeRange range, DateOnly today, DateOnly weekStart) =>
         (data.Changes ?? []).Where(c => classes.Contains(c.DisplayClassName) && SchoolDate.TryParse(c.ChangeDate, out var day)
+            && Visible(c.DisplayClassName, c.BeforeSubject, c.AfterSubject)
             && (range == ChangeRange.All || range == ChangeRange.Today && day >= today || range == ChangeRange.Week && day >= weekStart && day < weekStart.AddDays(7)))
-            .OrderBy(c => c.ChangeDate, StringComparer.Ordinal).ThenBy(c => c.Period, StringComparer.Ordinal);
+            .OrderBy(c => c.ChangeDate, StringComparer.Ordinal).ThenBy(c => c.Period, StringComparer.Ordinal).ThenBy(c => c.DisplayClassName, StringComparer.Ordinal);
 
     public static ScheduleChange? EffectiveChange(IEnumerable<ScheduleChange> changes)
     {

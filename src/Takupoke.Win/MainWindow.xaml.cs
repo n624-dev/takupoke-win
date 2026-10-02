@@ -15,28 +15,38 @@ public sealed partial class MainWindow : Window
     private readonly AppViewModel _model;
     private string _page = "home";
     private bool _dialogOpen;
+    private ContentDialog? _activeDialog;
     private bool _ready;
     private bool _selectingMaterial;
     private readonly Windows.UI.ViewManagement.AccessibilitySettings _accessibility = new();
+    private readonly Windows.UI.ViewManagement.UISettings _uiSettings = new();
+    private Microsoft.UI.Dispatching.DispatcherQueueTimer? _themeTimer;
+    private bool _lastHighContrast;
     private DesktopIntegration? _desktop;
     private bool _exitRequested;
     public MainWindow()
     {
         InitializeComponent();
         _model = new(DispatcherQueue);
-        _accessibility.HighContrastChanged += Accessibility_HighContrastChanged;
+        // HighContrastChanged subscription fails for some unpackaged installations.
+        // Poll only the display setting; native ThemeResources still follow Windows.
+        _lastHighContrast = _accessibility.HighContrast;
+        _themeTimer = DispatcherQueue.CreateTimer(); _themeTimer.Interval = TimeSpan.FromSeconds(15);
+        _themeTimer.Tick += (_, _) => { var current = _accessibility.HighContrast; if (current != _lastHighContrast) { _lastHighContrast = current; if (_ready) Render(); } };
+        _themeTimer.Start();
         RootGrid.ActualThemeChanged += (_, _) => { if (_ready) Render(); };
         _model.SnapshotChanged += Render;
+        _model.ClockChanged += () => { if (_page is "home" or "timetable" && !_model.Busy && !_selectingMaterial) Render(); };
         _model.PropertyChanged += (_, _) => UpdateStatus();
-        _model.PrivateDataCleared += () => { CloseBrowser(); if (_pdfImage is not null) _pdfImage.Source = null; _pdfDialog?.Hide(); Render(); };
-        _model.NotificationActivated += () => { _model.WeekStart = _model.Today.DisplayWeekStart(); Navigation.SelectedItem = Navigation.MenuItems[2]; ShowWindow(); };
+        _model.PrivateDataCleared += () => { if (_activeDialog is { } active) { active.Content = null; active.Hide(); } CloseBrowser(); if (_pdfImage is not null) _pdfImage.Source = null; _pdfDialog?.Hide(); Render(); };
+        _model.NotificationActivated += () => { _model.OpenTodayWeek(); Navigation.SelectedItem = Navigation.MenuItems[2]; ShowWindow(); };
         AppWindow.Resize(new(1150, 820));
         Navigation.SelectedItem = Navigation.MenuItems[0];
         RootGrid.Loaded += Loaded;
         Activated += (_, args) => { if (_ready && !_selectingMaterial && args.WindowActivationState != WindowActivationState.Deactivated) _ = _model.RefreshAsync(); };
         AppWindow.Closing += (_, args) =>
         { if (!_exitRequested && _model.Preferences.KeepInTray && _desktop?.TrayAvailable == true) { args.Cancel = true; AppWindow.Hide(); } };
-        Closed += async (_, _) => { _accessibility.HighContrastChanged -= Accessibility_HighContrastChanged; CloseBrowser(); _desktop?.Dispose(); Program.OpenRequested = null; await _model.DisposeAsync(); };
+        Closed += async (_, _) => { _themeTimer?.Stop(); CloseBrowser(); _desktop?.Dispose(); Program.OpenRequested = null; await _model.DisposeAsync(); };
         Program.OpenRequested = () => DispatcherQueue.TryEnqueue(ShowWindow);
     }
     private async void Loaded(object sender, RoutedEventArgs args)
@@ -64,8 +74,6 @@ public sealed partial class MainWindow : Window
         if (!_model.Preferences.SetupCompleted && !_model.OfflineTest) await InitialSetup();
     }
     private void ShowWindow() { AppWindow.Show(); Activate(); }
-    private void Accessibility_HighContrastChanged(Windows.UI.ViewManagement.AccessibilitySettings sender, object args)
-        => DispatcherQueue.TryEnqueue(() => { if (_ready) Render(); });
     private void Navigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
         if (args.SelectedItem is NavigationViewItem item) _page = (string)item.Tag;
@@ -80,18 +88,42 @@ public sealed partial class MainWindow : Window
     }
     private void Render()
     {
-        if (_dialogOpen) { UpdateStatus(); return; }
+        if (_dialogOpen || _selectingMaterial) { UpdateStatus(); return; }
         var focused = RootGrid.XamlRoot is null ? null : FocusManager.GetFocusedElement(RootGrid.XamlRoot) as FrameworkElement;
         var focusId = focused is null ? "" : AutomationProperties.GetAutomationId(focused);
-        // Accent only the selection marker. Setting Navigation.Foreground also
-        // propagates to the entire page, including lesson and settings text.
+        // Keep body text on theme brushes; tint only standard controls and explicit actions.
+        RootGrid.Resources.ThemeDictionaries.Clear();
+        if (_model.Preferences.MainColor != "default")
+            foreach (var theme in new[] { "Light", "Dark" })
+            {
+                var tint = MainAccentColor();
+                var resources = new ResourceDictionary();
+                resources["AccentFillColorDefaultBrush"] = new SolidColorBrush(tint);
+                resources["AccentFillColorSecondaryBrush"] = new SolidColorBrush(tint) { Opacity = 0.9 };
+                resources["AccentFillColorTertiaryBrush"] = new SolidColorBrush(tint) { Opacity = 0.8 };
+                resources["AccentTextFillColorPrimaryBrush"] = new SolidColorBrush(tint);
+                RootGrid.Resources.ThemeDictionaries[theme] = resources;
+            }
         foreach (var theme in new[] { "Light", "Dark" })
-            ((SolidColorBrush)((ResourceDictionary)Navigation.Resources.ThemeDictionaries[theme])["NavigationViewSelectionIndicatorForeground"]).Color = LinkColor(_model.Preferences.MainColor);
+            ((SolidColorBrush)((ResourceDictionary)Navigation.Resources.ThemeDictionaries[theme])["NavigationViewSelectionIndicatorForeground"]).Color = MainAccentColor();
         PageContent.Children.Clear();
-        switch (_page) { case "links": BuildLinks(); break; case "timetable": BuildTimetable(); break; case "settings": BuildSettings(); break; default: BuildHome(); break; }
+        if (_page.StartsWith("material.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var material)) BuildMaterialDetails(material);
+        else if (_page == "account") BuildAccountData();
+        else if (_page == "setup") BuildSetup();
+        else if (_page == "help") BuildHelp();
+        else if (_page == "licenses") BuildLicenses();
+        else switch (_page) { case "links": BuildLinks(); break; case "timetable": BuildTimetable(); break; case "settings": BuildSettings(); break; default: BuildHome(); break; }
         UpdateStatus();
         if (focusId.Length > 0) FindById(PageContent, focusId)?.Focus(FocusState.Programmatic);
     }
+    private Windows.UI.Color MainAccentColor() => _model.Preferences.MainColor == "default"
+        ? _uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Accent) : LinkColor(_model.Preferences.MainColor);
+    private Brush ActionBrush => _accessibility.HighContrast
+        ? (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"] : new SolidColorBrush(MainAccentColor());
+    private Brush WarningBrush => _accessibility.HighContrast
+        ? (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"] : new SolidColorBrush(LinkColor("orange"));
+    private Button AccentButton(string label, Func<Task> action, string? id = null)
+    { var button = Button(label, action, id); button.Foreground = ActionBrush; return button; }
     private static Control? FindById(DependencyObject root, string id)
     {
         if (root is Control control && AutomationProperties.GetAutomationId(control) == id) return control;
@@ -121,9 +153,10 @@ public sealed partial class MainWindow : Window
             var dialog = new ContentDialog { XamlRoot = RootGrid.XamlRoot, Title = title,
                 Content = new ScrollViewer { Content = content, MaxHeight = 560, VerticalScrollBarVisibility = ScrollBarVisibility.Auto },
                 PrimaryButtonText = primary, CloseButtonText = secondary ?? "", DefaultButton = ContentDialogButton.Primary };
+            _activeDialog = dialog;
             return await dialog.ShowAsync();
         }
-        finally { _dialogOpen = false; Render(); }
+        finally { _activeDialog = null; _dialogOpen = false; Render(); }
     }
     private Task Message(string title, string message) => Dialog(title, Text(message));
     private async Task SelectMaterial(MaterialKind kind)
@@ -131,7 +164,7 @@ public sealed partial class MainWindow : Window
         _selectingMaterial = true;
         try
         {
-            var picker = new FileOpenPicker(AppWindow.Id);
+            var picker = new FileOpenPicker(AppWindow.Id) { Title = AppViewModel.MaterialLabel(kind) + "を選択 — OneDriveの同期フォルダーにある原本", SettingsIdentifier = "takupoke-" + kind };
             picker.FileTypeFilter.Add(kind == MaterialKind.Changes ? ".xlsx" : ".pdf");
             var file = await picker.PickSingleFileAsync();
             if (file is not null)
@@ -141,16 +174,10 @@ public sealed partial class MainWindow : Window
                 else await _model.SelectAsync(kind, file.Path);
             }
         }
-        finally { _selectingMaterial = false; }
+        finally { _selectingMaterial = false; Render(); }
     }
-    private async Task InitialSetup()
+    private Task InitialSetup()
     {
-        var body = Panel(Text("学校資料を端末内で解析する非公式アプリです。クラスと資料は設定からいつでも選び直せます。"),
-            Text("学校データは日本時間の4月1日・10月1日で削除し、再選択・再取得が必要です。お気に入りなどの個人設定とOneDriveの原本は保持します。"),
-            Text("まずクラスを選び、通常時間割・変更・試験・返却の資料を個別に登録してください。学校アカウントの認証後にリンク・名称・授業時刻を取得できます。"),
-            Text("通知は設定で有効にできます。完全終了中・電源断・スリープ中の更新確認は保証しません。"));
-        var result = await Dialog("はじめに", body, "設定を開く", "あとで設定");
-        await _model.SavePreferencesAsync(_model.Preferences with { SetupCompleted = true });
-        if (result == ContentDialogResult.Primary) { _page = "settings"; Navigation.SelectedItem = Navigation.MenuItems[3]; Render(); }
+        _setupStep = 0; _page = "setup"; Render(); return Task.CompletedTask;
     }
 }

@@ -11,6 +11,7 @@ public sealed record ChangeTable(IReadOnlyList<IReadOnlyList<string>> Rows, IRea
 
 public static class XlsxChangeReader
 {
+    public const int Version = 4;
     private const string SpreadsheetNamespace = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
     private const string RelationshipNamespace = "http://schemas.openxmlformats.org/package/2006/relationships";
     private const string DocumentRelationshipNamespace = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";

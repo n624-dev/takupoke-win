@@ -40,6 +40,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public bool OfflineTest { get; } = Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1";
     public string Root { get; }
     public UserPreferences Preferences { get; private set; } = new();
+    public bool PreferencesReady { get; private set; }
     public ScheduleData Data { get; private set; } = new();
     public MappingRules? Mappings { get; private set; }
     public LinksPayload? Links { get; private set; }
@@ -48,8 +49,13 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public IReadOnlyList<int> SavedEventYears { get; private set; } = [];
     public DateOnly Today => SchoolDate.InJapan(DateTimeOffset.UtcNow);
     public DateOnly WeekStart { get; set; }
-    public TimetableEngine Engine => new(Data, Preferences.IncludesChanges, Preferences.International, Mappings is null ? null : Mappings.IsInternational);
+    public SchedulePresentation Presentation => new(Data, Mappings);
+    public TimetableEngine Engine => Presentation.Engine(Preferences);
+    public TimetableEngine HomeEngine => Presentation.Engine(Preferences, home: true);
+    public DateOnly NavigationAnchor { get; private set; }
+    public void OpenTodayWeek() { NavigationAnchor = Today; WeekStart = Today.Monday(); }
     public event Action? SnapshotChanged;
+    public event Action? ClockChanged;
     public event Action? PrivateDataCleared;
     public event Action? NotificationActivated;
     public string NotificationStatus => _notificationSink.Status;
@@ -63,7 +69,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         _http = OfflineTest ? new(new OfflineHandler()) : ApiClient.CreateHttpClient();
         _school = new(Root, new WindowsDpapiProtector()); _preferences = new(Root); _events = new(Root);
         _api = new(_http); _shared = new(_api, _school); _materials = new(_school, new(new WindowsFileIdentity()));
-        _authentication = new(new OidcClient(_http)); WeekStart = Today.DisplayWeekStart();
+        _authentication = new(new OidcClient(_http)); NavigationAnchor = Today; WeekStart = Today.DisplayWeekStart();
         _notifications = new(_school, _notificationSink);
         _notificationSink.Activated += () => _dispatcher.TryEnqueue(() => NotificationActivated?.Invoke());
         _school.RetentionChanged += ClearPrivateData;
@@ -73,7 +79,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     }
     private DateTimeOffset _nextCheck = DateTimeOffset.UtcNow.AddMinutes(15);
     private DateOnly? _lastDay;
-    private int _lastMinute = -1;
+    private DateTimeOffset _lastClock;
+    private long _operationGeneration;
     private bool _checkedEventSource;
     public string? EventSourceMessage { get; private set; }
     public string? EventsUpdateMessage { get; private set; }
@@ -83,13 +90,14 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         if (_displayPeriod is { } displayed && displayed != SchoolDataPeriod.FromInstant(now))
         { _session.Cancel(); _authentication.Cancel(); ClearPrivateData(); _ = RefreshAsync(); return; }
         if (Preferences.KeepInTray && now >= _nextCheck) { _nextCheck = now.AddMinutes(15); _ = RefreshAsync(); }
-        if (_lastDay != Today || _lastMinute != now.Minute) { _lastDay = Today; _lastMinute = now.Minute; SnapshotChanged?.Invoke(); }
+        if (_lastDay != Today || now - _lastClock >= TimeSpan.FromSeconds(15)) { _lastDay = Today; _lastClock = now; ClockChanged?.Invoke(); }
     }
     private void ClearPrivateData()
     {
+        if (_displayPeriod is not null) Cancel();
         PrivateEpoch++;
         Data = Data with { Timetable = null, Changes = null, Specials = null, Times = null };
-        Links = null; Mappings = null; Materials = new Dictionary<MaterialKind, MaterialSnapshot>(); Revisions = new Dictionary<DataSet, RevisionResult>();
+        LinksRecord = null; MappingRecord = null; TimesRecord = null; Links = null; Mappings = null; Materials = new Dictionary<MaterialKind, MaterialSnapshot>(); Revisions = new Dictionary<DataSet, RevisionResult>();
         _displayPeriod = null; _watcher.Replace([]);
         void Notify() { PrivateDataCleared?.Invoke(); SnapshotChanged?.Invoke(); }
         if (_dispatcher.HasThreadAccess) Notify(); else _dispatcher.TryEnqueue(Notify);
@@ -98,7 +106,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     {
         await RunAsync(async token =>
         {
-            Preferences = await _preferences.LoadAsync(token);
+            Preferences = await _preferences.LoadAsync(token); PreferencesReady = true;
             if (!OfflineTest) { BrowserAuthenticator.RegisterProtocol(); _notificationSink.Initialize(); }
             await ReloadAsync(token); Status = "学校資料を選択すると、端末内で解析します。";
         });
@@ -112,6 +120,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         if (Busy) { _pendingRefresh = true; return Task.CompletedTask; }
         return RunAsync(async token =>
     {
+        if (!PreferencesReady) { Preferences = await _preferences.LoadAsync(token); PreferencesReady = true; }
         // Checking the lease first invalidates expired data before reading originals or contacting the API.
         await _school.BeginAsync(token);
         foreach (var kind in Enum.GetValues<MaterialKind>()) await _materials.RefreshAsync(kind, ParserYear, token);
@@ -144,8 +153,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     });
     public Task UpdateSharedAsync() => RunAsync(async token =>
     {
-        var results = await _shared.UpdateAsync(_authentication.AuthenticateAsync, token);
-        await ReloadAsync(token);
+        IReadOnlyList<UpdateResult> results;
+        try { results = await _shared.UpdateAsync(_authentication.AuthenticateAsync, token); }
+        finally { if (!Locked) await ReloadAsync(CancellationToken.None); }
         Revisions = await _shared.CheckAsync(token);
         Status = string.Join(" / ", results.Select(r => DataSetLabel(r.Kind) + "：" + (r.Updated ? "更新しました" : r.Failure is { } failure ? new ApiException(failure).Message : "保持しています")));
     });
@@ -153,6 +163,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await _events.LoadAsync(year, token), token), token); EventSourceMessage = null; EventsUpdateMessage = null; await ReloadAsync(token); Status = "学校行事を保存しました。元PDFの更新確認は次回起動時に行います。"; });
     public Task SavePreferencesAsync(UserPreferences next) => RunAsync(async token =>
     {
+        if (!PreferencesReady) throw new InvalidDataException("保存済みの個人設定を読み込めません。再読み込みするまで設定を変更できません。");
         await _preferences.SaveAsync(next.Validated(), token); Preferences = next; await CheckNotificationsAsync(token); SnapshotChanged?.Invoke();
     });
     public async Task<byte[]> ReadPdfAsync(MaterialKind kind, bool accepted)
@@ -162,6 +173,12 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         var source = accepted ? Materials.GetValueOrDefault(kind)?.Analysis?.OriginalId : Materials.GetValueOrDefault(kind)?.Source?.Id;
         return source is not null ? await _school.ReadOriginalAsync(lease, source) : throw new InvalidDataException("保存したPDFがありません。");
     }
+    public Task<ChangePreview> PreviewChangesAsync() => _materials.PreviewChangesAsync(ParserYear, _session.Token);
+    public Task ReacquireAsync(MaterialKind kind) => RunAsync(async token =>
+    { var result = await _materials.RefreshAsync(kind, ParserYear, token); await ReloadAsync(token); Status = result.Error ?? "同じ原本を確認しました。"; });
+    public SavedLinks? LinksRecord { get; private set; }
+    public SavedMapping? MappingRecord { get; private set; }
+    public SavedTimes? TimesRecord { get; private set; }
     private async Task ReloadAsync(CancellationToken token)
     {
         if (_displayPeriod is null || _displayPeriod != SchoolDataPeriod.FromInstant(DateTimeOffset.UtcNow))
@@ -171,9 +188,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         foreach (var kind in Enum.GetValues<MaterialKind>()) snapshots[kind] = new(
             await _school.ReadAsync<SourceRecord>(lease, "selection." + kind, token), await _school.ReadAsync<MaterialAnalysis>(lease, "analysis." + kind, token),
             await _school.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token), await _school.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, token));
-        var mappings = (await _school.ReadAsync<SavedMapping>(lease, "api.mapping", token))?.Rules;
-        var links = (await _school.ReadAsync<SavedLinks>(lease, "api.links", token))?.Payload.Validated();
-        var times = (await _school.ReadAsync<SavedTimes>(lease, "api.times", token))?.Data.Validated();
+        var mappingRecord = await _school.ReadAsync<SavedMapping>(lease, "api.mapping", token); var mappings = mappingRecord?.Rules;
+        var linksRecord = await _school.ReadAsync<SavedLinks>(lease, "api.links", token); var links = linksRecord?.Payload.Validated();
+        var timesRecord = await _school.ReadAsync<SavedTimes>(lease, "api.times", token); var times = timesRecord?.Data.Validated();
         var events = new List<SchoolEvent>();
         var years = _events.SavedYears();
         foreach (var year in years) { var saved = await _events.LoadAsync(year, token); if (saved is not null) events.AddRange(saved.Payload.Project()); }
@@ -181,10 +198,12 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         if (await _school.BeginAsync(token) != lease) throw new OperationCanceledException();
         var timetable = snapshots[MaterialKind.Timetable].Analysis?.Timetable;
         if (timetable is not null && mappings is not null) timetable = timetable with { Lessons = timetable.Lessons.Select(l => l with { Names = mappings.Apply(l.Names, l.ClassName) }).ToArray() };
+        MappingRecord = mappingRecord; LinksRecord = linksRecord; TimesRecord = timesRecord;
         Materials = snapshots; Mappings = mappings; Links = links; SavedEventYears = years;
         Data = new(timetable, snapshots[MaterialKind.Changes].Analysis?.Changes,
             new[] { snapshots[MaterialKind.Exam].Analysis?.Special, snapshots[MaterialKind.ExamReturn].Analysis?.Special }.OfType<SpecialAnalysis>().ToArray(), events, times);
         _displayPeriod = lease.Period;
+        await _school.CollectOriginalsAsync(lease, token);
         _watcher.Replace(snapshots.Values.Select(s => s.Source?.Path).OfType<string>());
         await CheckNotificationsAsync(token);
         SnapshotChanged?.Invoke();
@@ -192,7 +211,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private Task CheckNotificationsAsync(CancellationToken token)
     {
         var eligible = Materials.Where(p => p.Value.Analysis is { } analysis && p.Value.Source?.Digest == analysis.SourceDigest
-            && analysis.ParserVersion == (p.Key == MaterialKind.Changes ? 1 : p.Key == MaterialKind.Timetable
+            && analysis.ParserVersion == (p.Key == MaterialKind.Changes ? Takupoke.Infrastructure.Parsing.XlsxChangeReader.Version : p.Key == MaterialKind.Timetable
                 ? Takupoke.Infrastructure.Parsing.PdfScheduleParser.TimetableVersion : Takupoke.Infrastructure.Parsing.PdfScheduleParser.SpecialVersion))
             .ToDictionary(p => p.Key, p => p.Value.Analysis!.SourceDigest);
         return _notifications.CheckAsync(eligible.ContainsKey(MaterialKind.Changes) ? Data : Data with { Changes = null }, eligible, Preferences, Today, token);
@@ -202,9 +221,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         if (Locked) { Status = "Windowsのロック中は学校データを利用できません。"; return; }
         // Picker completion can race a refresh triggered by window activation.
         // Explicit operations must wait for the current operation, never disappear.
-        var epoch = PrivateEpoch;
+        var epoch = PrivateEpoch; var generation = _operationGeneration;
         await _operations.WaitAsync();
-        if (Locked || epoch != PrivateEpoch)
+        if (Locked || epoch != PrivateEpoch || generation != _operationGeneration)
         {
             _operations.Release();
             Status = "学校データの利用状態が変わったため処理を中止しました。もう一度お試しください。";
@@ -223,7 +242,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             if (_pendingRefresh) { _pendingRefresh = false; _dispatcher.TryEnqueue(() => _ = RefreshAsync()); }
         }
     }
-    public void Cancel() { _session.Cancel(); _authentication.Cancel(); }
+    public void Cancel() { _operationGeneration++; _pendingRefresh = false; _watcher.Replace([]); _session.Cancel(); _authentication.Cancel(); }
     public async Task SetLockedAsync(bool locked)
     {
         Locked = locked; Cancel(); ClearPrivateData();

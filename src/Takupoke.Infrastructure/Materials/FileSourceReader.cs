@@ -24,7 +24,9 @@ public sealed class FileSourceReader(IFileIdentityProvider identity)
         {
             token.ThrowIfCancellationRequested();
             var file = new FileInfo(path); file.Refresh();
-            if ((file.Attributes & FileAttributes.Directory) != 0) throw new SourceException(SourceFailure.Invalid);
+            if ((file.Attributes & FileAttributes.Directory) != 0 || file.LinkTarget is not null
+                || !file.Extension.Equals(kind == MaterialKind.Changes ? ".xlsx" : ".pdf", StringComparison.OrdinalIgnoreCase)
+                || kind == MaterialKind.Changes && file.Name.StartsWith("~$", StringComparison.Ordinal)) throw new SourceException(SourceFailure.Invalid);
             // Share reads only: a writer cannot modify this handle while we copy it.
             await using var input = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 64 * 1024, FileOptions.Asynchronous | FileOptions.SequentialScan);
             var initialIdentity = identity.Identity(input);
@@ -37,6 +39,7 @@ public sealed class FileSourceReader(IFileIdentityProvider identity)
                 await input.ReadExactlyAsync(bytes, token);
                 if (input.Length != initialLength || await input.ReadAsync(new byte[1], token) != 0) throw new SourceException(SourceFailure.Changing);
                 file.Refresh();
+                if (file.LinkTarget is not null) throw new SourceException(SourceFailure.Invalid);
                 await using var current = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
                 if (identity.Identity(current) != initialIdentity || file.Length != initialLength || file.LastWriteTimeUtc != initialTime) throw new SourceException(SourceFailure.Changing);
                 if (kind == MaterialKind.Changes ? bytes.Length < 4 || !bytes.AsSpan(0, 4).SequenceEqual(new byte[] { 0x50, 0x4b, 0x03, 0x04 })

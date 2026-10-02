@@ -41,7 +41,12 @@ public sealed class SharedDataUpdater(ApiClient api, SchoolDataStore store)
             var results = new List<UpdateResult>();
             foreach (var kind in Enum.GetValues<DataSet>())
             {
-                try { revisions[kind] = (await api.CheckRevisionAsync(kind, await InstalledAsync(kind, lease, token), token)).Revision; }
+                try
+                {
+                    var revision = await api.CheckRevisionAsync(kind, await InstalledAsync(kind, lease, token), token);
+                    if (revision.Changed) revisions[kind] = revision.Revision;
+                    else results.Add(new(kind, false));
+                }
                 catch (ApiException error) { results.Add(new(kind, false, error.Failure)); }
             }
             if (revisions.Count == 0) return results;

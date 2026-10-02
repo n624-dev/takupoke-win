@@ -78,4 +78,14 @@ public sealed class OidcClientTests
         var jwk = new { kid = "fake-key", kty = "EC", crv = "P-256", alg = "ES256", use = "sig", x = OidcClient.Base64Url(publicKey.Q.X!), y = OidcClient.Base64Url(publicKey.Q.Y!) };
         return (signing + "." + OidcClient.Base64Url(signature), DataCodec.Encode(new { keys = mutation == "duplicateKey" ? new[] { jwk, jwk } : [jwk] }));
     }
+    [Fact]
+    public void ErrorCallbackMustMatchRedirectAndStateAndContainNoCode()
+    {
+        var attempt = OidcClient.CreateAttempt();
+        Assert.True(OidcClient.IsAuthenticatedErrorCallback(new(OidcClient.RedirectUri + "?error=access_denied&state=" + attempt.State), attempt));
+        Assert.False(OidcClient.IsAuthenticatedErrorCallback(new(OidcClient.RedirectUri + "?error=access_denied&state=forged"), attempt));
+        Assert.False(OidcClient.IsAuthenticatedErrorCallback(new(OidcClient.RedirectUri + "?error=access_denied&state=" + attempt.State + "&code=fake"), attempt));
+        Assert.False(OidcClient.IsAuthenticatedErrorCallback(new("https://example.invalid/oauth/callback?error=access_denied&state=" + attempt.State), attempt));
+    }
+
 }

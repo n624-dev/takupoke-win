@@ -58,14 +58,16 @@ public sealed record UserPreferences
     public HashSet<string> HiddenIds { get; init; } = [];
     public Dictionary<string, string> LinkColors { get; init; } = [];
     public LinkOpeningMode OpeningMode { get; init; } = LinkOpeningMode.InApp;
-    public string MainColor { get; init; } = "blue";
+    public string MainColor { get; init; } = "default";
     public bool SetupCompleted { get; init; }
     public bool NotificationsSetupCompleted { get; init; }
     public bool NotifyChanges { get; init; }
     public bool NotifySpecials { get; init; }
     public bool KeepInTray { get; init; }
     public bool AutoStart { get; init; }
-    public static IReadOnlyList<string> MainColors { get; } = ["blue", "green", "yellow", "orange", "red", "pink", "purple"];
+    public static IReadOnlyList<string> MainColors { get; } = ["default", "blue", "green", "yellow", "orange", "red", "pink", "purple"];
+    public static string MainColorLabel(string color) => color switch
+    { "default" => "デフォルト", "blue" => "青", "green" => "緑", "yellow" => "黄色", "orange" => "オレンジ", "red" => "赤", "pink" => "ピンク", "purple" => "紫", _ => "デフォルト" };
     public UserPreferences Validated()
     {
         if (SelectedClasses.Length > 2 || ChangeClasses.Length > 30 || !MainColors.Contains(MainColor)

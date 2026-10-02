@@ -36,7 +36,7 @@ public static partial class PdfScheduleParser
         if (!double.IsFinite(bodyBottom)) throw new PdfParseException("P06", 1);
         var classRows = PdfGrid.Rows(page.Glyphs.Where(g => classBox.Left < g.Cx && g.Cx < classBox.Right && g.Cy > first.Bottom && g.Cy < bodyBottom));
         var classes = new HashSet<string>(); var output = new List<NormalLesson>();
-        foreach (var glyphs in classRows)
+        foreach (var (glyphs, classIndex) in classRows.Select((glyphs, index) => (glyphs, index)))
         {
             token.ThrowIfCancellationRequested();
             var label = PdfGrid.Key(Joined(glyphs));
@@ -51,14 +51,18 @@ public static partial class PdfScheduleParser
                 foreach (var box in grid.Slices(row, header[column].Cx))
                 {
                     token.ThrowIfCancellationRequested();
-                    var lines = grid.TimetableText(box);
+                    var position = new PdfFailurePosition(classIndex + 1, column / 8 + 1, column % 8 + 1);
+                    IReadOnlyList<string> lines;
+                    try { lines = grid.TimetableText(box); }
+                    catch (PdfParseException error) { throw new PdfParseException(error.Stage, 1, position); }
+                    position = position with { DetectedLines = lines.Count };
                     if (lines.Count == 0) continue;
-                    if (lines.Count > 3 || lines[0].Length == 0) throw new PdfParseException("P17", 1);
+                    if (lines.Count > 3 || lines[0].Length == 0) throw new PdfParseException("P17", 1, position);
                     var fields = lines.Concat(Enumerable.Repeat("", 3 - lines.Count)).ToArray();
                     var parts = fields.Select(f => f.Replace('･', '・').Split('・')).ToArray();
                     var parallel = lines.Count == 3 && parts.All(p => p.Length == 2);
-                    if (parts[0].Length > 1 && parts[1].Length > 1 && !parallel) throw new PdfParseException("P18", 1);
-                    if (parallel && parts[0].Any(string.IsNullOrEmpty)) throw new PdfParseException("P19", 1);
+                    if (parts[0].Length > 1 && parts[1].Length > 1 && !parallel) throw new PdfParseException("P18", 1, position);
+                    if (parallel && parts[0].Any(string.IsNullOrEmpty)) throw new PdfParseException("P19", 1, position);
                     for (var variant = 0; variant < (parallel ? 2 : 1); variant++)
                     {
                         var values = parallel ? parts.Select(p => p[variant]).ToArray() : fields;

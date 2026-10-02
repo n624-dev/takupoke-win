@@ -70,18 +70,24 @@ public sealed partial class MainWindow
         var image = new Image(); AutomationProperties.SetName(image, "保存した資料のPDFページ。読み取った内容は解析結果から確認できます。");
         _pdfImage = image;
         var label = Text(""); var pageNumber = 0u; var zoom = new Slider { Header = "表示幅", Minimum = 300, Maximum = 1600, Value = 700 };
-        var rendering = false;
+        var rendering = false; var pending = false;
         async Task RenderPage()
         {
-            if (rendering || epoch != _model.PrivateEpoch || _model.Locked) return; rendering = true;
+            if (epoch != _model.PrivateEpoch || _model.Locked) return;
+            pending = true; if (rendering) return; rendering = true;
             try
             {
-                using var page = document.GetPage(pageNumber); using var rendered = new InMemoryRandomAccessStream();
-                await page.RenderToStreamAsync(rendered, new PdfPageRenderOptions { DestinationWidth = (uint)zoom.Value });
+                while (pending && epoch == _model.PrivateEpoch && !_model.Locked)
+                {
+                pending = false; var requestedPage = pageNumber; var requestedWidth = (uint)zoom.Value;
+                using var page = document.GetPage(requestedPage); using var rendered = new InMemoryRandomAccessStream();
+                await page.RenderToStreamAsync(rendered, new PdfPageRenderOptions { DestinationWidth = requestedWidth });
                 rendered.Seek(0); var bitmap = new BitmapImage(); await bitmap.SetSourceAsync(rendered);
                 if (epoch != _model.PrivateEpoch || _model.Locked) return;
+                if (requestedPage != pageNumber || requestedWidth != (uint)zoom.Value) { pending = true; continue; }
                 image.Source = bitmap;
-                label.Text = $"{pageNumber + 1} / {document.PageCount}ページ";
+                label.Text = $"{requestedPage + 1} / {document.PageCount}ページ";
+                }
             }
             finally { rendering = false; }
         }

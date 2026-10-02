@@ -1,4 +1,5 @@
 using Takupoke.Core;
+using Takupoke.Infrastructure.Parsing;
 
 namespace Takupoke.Infrastructure.Storage;
 
@@ -9,7 +10,7 @@ public sealed record MaterialAnalysis(string OriginalId, MaterialKind Kind, int 
     string SourceName, DateTimeOffset ParsedAt, int SchoolYear, TimetableAnalysis? Timetable = null,
     IReadOnlyList<ScheduleChange>? Changes = null, SpecialAnalysis? Special = null);
 public sealed record MaterialAttempt(DateTimeOffset At, string? Failure, bool Parsing, string? SourceDigest = null,
-    int? SchoolYear = null, ChangeErrorCode? ChangeError = null);
+    int? SchoolYear = null, ChangeErrorCode? ChangeError = null, int? ParserVersion = null, int? Page = null, PdfFailurePosition? Cell = null);
 public sealed record RetentionMarker(int SchemaVersion, int SchoolYear, int Half);
 public interface IKeyProtector
 {

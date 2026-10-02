@@ -185,7 +185,7 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
         foreach (var pair in new[]
         {
             ("analysis." + analysis.Kind, DataCodec.Encode(analysis)),
-            ("attempt." + analysis.Kind, DataCodec.Encode(new MaterialAttempt(analysis.ParsedAt, null, true, analysis.SourceDigest, analysis.SchoolYear)))
+            ("attempt." + analysis.Kind, DataCodec.Encode(new MaterialAttempt(analysis.ParsedAt, null, true, analysis.SourceDigest, analysis.SchoolYear, ParserVersion: analysis.ParserVersion)))
         })
         {
             try

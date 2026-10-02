@@ -25,7 +25,7 @@ public sealed partial class MainWindow
         if (_linkResults is null) return;
         _linkResults.Children.Clear();
         if (_model.Links is not { } links)
-        { _linkResults.Children.Add(Text("リンク一覧を取得していません。学校アカウントで取得してください。")); _linkResults.Children.Add(Button("学校アカウントでデータを更新", _model.UpdateSharedAsync)); return; }
+        { _linkResults.Children.Add(Text("リンク一覧を取得していません。学校アカウントで取得してください。")); _linkResults.Children.Add(Button("設定でデータを取得", () => OpenPage("account"))); return; }
         if (_linkQuery.Trim().Length > 0)
         {
             var results = links.Search(_linkQuery, _model.Preferences.HiddenIds).ToArray();
@@ -47,7 +47,15 @@ public sealed partial class MainWindow
         button.HorizontalAlignment = HorizontalAlignment.Stretch;
         var color = _model.Preferences.LinkColors.GetValueOrDefault(link.Id) ?? link.Color;
         if (!_accessibility.HighContrast) button.BorderBrush = new SolidColorBrush(LinkColor(color));
-        button.BorderThickness = new Thickness(3, 1, 1, 1);
+        var icon = new FontIcon { Glyph = "\uE71B", FontFamily = new FontFamily("Segoe Fluent Icons"), Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 255, 255, 255)), FontSize = 18 };
+        var badge = new Border { Width = 34, Height = 34, CornerRadius = new CornerRadius(9), Child = icon,
+            Background = _accessibility.HighContrast ? (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"] : new SolidColorBrush(LinkColor(color)) };
+        if (_accessibility.HighContrast) icon.Foreground = (Brush)Application.Current.Resources["ApplicationPageBackgroundThemeBrush"];
+        var row = new Grid { ColumnSpacing = 12 }; row.ColumnDefinitions.Add(new() { Width = GridLength.Auto }); row.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) }); row.ColumnDefinitions.Add(new() { Width = GridLength.Auto });
+        row.Children.Add(badge); var label = Text(link.Label, 16); label.VerticalAlignment = VerticalAlignment.Center; Grid.SetColumn(label, 1); row.Children.Add(label);
+        if (favorite) { var star = Text("★", 18); if (!_accessibility.HighContrast) star.Foreground = new SolidColorBrush(LinkColor("yellow")); Grid.SetColumn(star, 2); row.Children.Add(star); }
+        button.Content = row; button.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+        AutomationProperties.SetName(button, link.Label + (favorite ? "、お気に入り" : ""));
         var menu = new MenuFlyout();
         void Item(string label, Func<Task> action) { var item = new MenuFlyoutItem { Text = label }; item.Click += async (_, _) => await action(); menu.Items.Add(item); }
         Item("開く", () => OpenLink(link)); Item("今回だけ別の開き方で開く", () => OpenLink(link, true));
@@ -59,6 +67,8 @@ public sealed partial class MainWindow
             if (await Dialog("色を変更", choice, "保存", "キャンセル") == ContentDialogResult.Primary && choice.SelectedItem is string value)
             { var map = new Dictionary<string, string>(_model.Preferences.LinkColors) { [link.Id] = value }; await _model.SavePreferencesAsync(_model.Preferences with { LinkColors = map }); }
         });
+        if (_model.Preferences.LinkColors.ContainsKey(link.Id)) Item("既定色に戻す", async () =>
+        { var map = new Dictionary<string, string>(_model.Preferences.LinkColors); map.Remove(link.Id); await _model.SavePreferencesAsync(_model.Preferences with { LinkColors = map }); });
         Item("非表示", async () => { var hidden = _model.Preferences.HiddenIds.ToHashSet(); hidden.Add(link.Id); await _model.SavePreferencesAsync(_model.Preferences with { HiddenIds = hidden }); });
         button.ContextFlyout = menu;
         // Keyboard users can open the same context menu with the application key or Shift+F10.
