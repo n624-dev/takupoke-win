@@ -136,7 +136,17 @@ public sealed partial class MainWindow
         }
         grid.Loaded += (_, _) => FitRows();
         grid.SizeChanged += (_, args) => { if (Math.Abs(args.PreviousSize.Width - args.NewSize.Width) > 0.5) FitRows(); };
-        Add(grid);
+        var scroll = new ScrollViewer { Content = grid, HorizontalScrollMode = ScrollMode.Enabled, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+            VerticalScrollMode = ScrollMode.Disabled, VerticalScrollBarVisibility = ScrollBarVisibility.Disabled };
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(scroll, "timetable-grid-scroller");
+        void FitWidth()
+        {
+            var minimum = 72 + days.Count * Math.Max(128, classes.Length * 90);
+            var width = Math.Max(minimum, scroll.ActualWidth);
+            if (Math.Abs(grid.Width - width) > 0.5 || double.IsNaN(grid.Width)) grid.Width = width;
+        }
+        scroll.Loaded += (_, _) => FitWidth(); scroll.SizeChanged += (_, _) => FitWidth();
+        Add(scroll);
     }
     private Task ChooseClasses() => ChooseClasses(false);
     private async Task ChooseClasses(bool changes)

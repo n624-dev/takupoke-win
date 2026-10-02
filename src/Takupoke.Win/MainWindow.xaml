@@ -31,7 +31,7 @@
                 <NavigationViewItem Content="時間割" Tag="timetable" Icon="Calendar" AutomationProperties.AutomationId="nav-timetable" />
                 <NavigationViewItem Content="設定" Tag="settings" Icon="Setting" AutomationProperties.AutomationId="nav-settings" />
             </NavigationView.MenuItems>
-            <ScrollViewer x:Name="PageScroller" AutomationProperties.AutomationId="page-scroller" HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer x:Name="PageScroller" AutomationProperties.AutomationId="page-scroller" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Auto">
                 <ContentControl x:Name="PageHost" HorizontalContentAlignment="Stretch">
                     <StackPanel x:Name="PageContent" Padding="24" Spacing="18" MinWidth="300" />
                 </ContentControl>

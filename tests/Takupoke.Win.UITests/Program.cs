@@ -104,6 +104,19 @@ internal static class Program
         {
             // Only synthetic labels appear in this test. Do not capture screenshots or application data.
             Console.Error.WriteLine("Windows UI check failed: " + error.GetType().Name + " — " + error.Message + " (step: " + _lastStep + ", passed: " + _checks + ")");
+            if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
+                foreach (var id in new[] { "page-scroller", "timetable-grid-scroller", "page-timetable", "架空科目甲" })
+                {
+                    try
+                    {
+                        var element = Find(id); if (element is null) continue;
+                        var bounds = element.Current.BoundingRectangle;
+                        Console.Error.WriteLine($"Synthetic layout {id}: offscreen={element.Current.IsOffscreen}, enabled={element.Current.IsEnabled}, bounds={bounds}");
+                        if (element.TryGetCurrentPattern(ScrollPattern.Pattern, out var pattern))
+                        { var scroll = ((ScrollPattern)pattern).Current; Console.Error.WriteLine($"Scroll: horizontal={scroll.HorizontalScrollPercent}, vertical={scroll.VerticalScrollPercent}, view={scroll.HorizontalViewSize}/{scroll.VerticalViewSize}"); }
+                    }
+                    catch (ElementNotAvailableException) { }
+                }
             if (args.Length == 2 && Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1"
                 && Path.GetFullPath(args[1]) == Path.GetFullPath(Environment.GetEnvironmentVariable("TAKUPOKE_DATA_ROOT") ?? ""))
             {
