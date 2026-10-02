@@ -35,8 +35,11 @@ public sealed class FileReadResponsivenessTests
             Assert.True(returned.Wait(TimeSpan.FromSeconds(5)), "Opening the file blocked the caller while the provider was waiting.");
             Assert.Null(startFailure); Assert.NotNull(operation);
         }
-        finally { identity.Continue.Set(); ui?.Join(TimeSpan.FromSeconds(5)); }
-        try { if (operation is not null) using (await operation) { } }
-        finally { Directory.Delete(directory, true); }
+        finally
+        {
+            identity.Continue.Set(); ui?.Join(TimeSpan.FromSeconds(5));
+            try { if (operation is not null) using (await operation) { } }
+            finally { Directory.Delete(directory, true); }
+        }
     }
 }
