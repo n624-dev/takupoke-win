@@ -28,6 +28,8 @@ internal static partial class Program
                 return CapturePages(capturedApp, captureRoot);
             if (args is ["--check-installer", var installer, var caption] && Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
                 return CheckInstallerDisplay(installer, caption);
+            if (args is ["--shortcut", var shortcut, var target, var directory, var icon])
+                return CheckShortcut(shortcut, target, directory, icon);
             if (args.Length != 2 || Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") != "1")
                 throw new InvalidOperationException("An executable and isolated offline test data root are required.");
             // UI Automation returns physical pixels. Match the tested app's per-monitor context.

@@ -53,11 +53,6 @@ function Get-LegacyInstaller {
     if ((Get-FileHash -LiteralPath $installer -Algorithm SHA256).Hash.ToLowerInvariant() -cne $hash) { throw 'The historical installer failed checksum verification.' }
     return $installer
 }
-function Same-FilePath([string]$Actual, [string]$Expected) {
-    if ([string]::IsNullOrWhiteSpace($Actual)) { return $false }
-    return [string]::Equals([IO.Path]::GetFullPath($Actual.Trim('"')).TrimEnd([char]92),
-        [IO.Path]::GetFullPath($Expected).TrimEnd([char]92), [StringComparison]::OrdinalIgnoreCase)
-}
 function Check-InstalledBranding {
     if (-not (Test-Path -LiteralPath $shortcut)) { throw 'Start menu shortcut was not created.' }
     if (Test-Path -LiteralPath $legacyShortcut) { throw 'The previous product-name shortcut remains.' }
@@ -75,18 +70,8 @@ function Check-InstalledBranding {
     if (-not (Test-Path -LiteralPath $iconLicense)) { throw 'The original icon license is missing.' }
     if ((Get-FileHash -LiteralPath $iconLicense).Hash -ne (Get-FileHash -LiteralPath 'src/Takupoke.Win/Assets/FluentIcons/LICENSE.txt').Hash) { throw 'The published icon license was changed.' }
     if (-not (Test-Path -LiteralPath (Join-Path $installDir 'Licenses/FluentSystemIcons-source.json'))) { throw 'The pinned icon source provenance is missing.' }
-    $shell = New-Object -ComObject WScript.Shell
-    $entry = $null
-    try {
-        $entry = $shell.CreateShortcut($shortcut)
-        if (!(Same-FilePath $entry.TargetPath $exe) -or !(Same-FilePath $entry.WorkingDirectory $installDir)) {
-            throw "The start menu entry points to another installation. Target=[$($entry.TargetPath)] expected=[$exe]; working=[$($entry.WorkingDirectory)] expected=[$installDir]."
-        }
-        if ($entry.IconLocation -ne "$icon,0") { throw 'The start menu entry does not use the app icon.' }
-    } finally {
-        if ($null -ne $entry) { [System.Runtime.InteropServices.Marshal]::FinalReleaseComObject($entry) | Out-Null }
-        [System.Runtime.InteropServices.Marshal]::FinalReleaseComObject($shell) | Out-Null
-    }
+    dotnet exec tests/Takupoke.Win.UITests/bin/Release/net10.0-windows/Takupoke.Win.UITests.dll --shortcut $shortcut $exe $installDir $icon
+    if ($LASTEXITCODE -ne 0) { throw 'Installed native shortcut validation failed.' }
 }
 function Run-UiChecks {
     dotnet build tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj --configuration Release
@@ -94,6 +79,8 @@ function Run-UiChecks {
     dotnet exec tests/Takupoke.Win.UITests/bin/Release/net10.0-windows/Takupoke.Win.UITests.dll $exe $env:TAKUPOKE_DATA_ROOT
     if ($LASTEXITCODE -ne 0) { throw 'Installed app UI tests failed.' }
 }
+dotnet build tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj --configuration Release
+if ($LASTEXITCODE -ne 0) { throw 'UI test helper did not build.' }
 try {
     if ($null -ne (Get-StartupValue 'takupoke') -or $null -ne (Get-StartupValue 'TakupokeWin')) { throw 'Refusing to modify pre-existing startup registration in this test runner.' }
     Run-Installer $setup @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', "/DIR=`"$installDir`"", "/LOG=`"$(Join-Path $taskRoot 'setup-first.log')`"")
