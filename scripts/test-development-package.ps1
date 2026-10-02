@@ -32,7 +32,7 @@ try {
     $shortcut = Join-Path ([Environment]::GetFolderPath('Programs')) 'たくポケ Win.lnk'
     if (-not (Test-Path -LiteralPath $shortcut)) { throw 'Start menu shortcut was not created.' }
     $command = (Get-ItemProperty -LiteralPath 'HKCU:/Software/Classes/jp.n624.takupoke.win/shell/open/command').'(default)'
-    if ($command -notlike "*$exe*") { throw 'Protocol callback does not point to the installed app.' }
+    if ($command -ne "`"$exe`" `"----ms-protocol:%1`"") { throw 'Protocol callback command is incompatible with App SDK activation.' }
     Run-UiChecks
     $preferences = Join-Path $env:TAKUPOKE_DATA_ROOT 'preferences.json'
     $before = (Get-FileHash -LiteralPath $preferences).Hash

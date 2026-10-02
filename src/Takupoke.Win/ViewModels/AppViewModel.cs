@@ -30,14 +30,19 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private readonly NotificationCoordinator _notifications;
     private readonly DispatcherQueueTimer _timer;
     private SchoolDataPeriod? _displayPeriod;
-    private string _status = "読み込み中です。";
+    private string _status = "";
+    private string _operationStatus = "読み込み中です。";
+    private DateTimeOffset _statusUntil;
+    private DateTimeOffset _lastAutomaticCheck;
     private bool _busy;
     private bool _pendingRefresh;
     private bool _platformInitialized;
     private bool _automaticPaused;
     public bool Locked { get; private set; }
     public long PrivateEpoch { get; private set; }
-    public string Status { get => _status; private set => SetProperty(ref _status, value); }
+    public string Status { get => _status; private set { _statusUntil = DateTimeOffset.UtcNow.AddSeconds(5); SetProperty(ref _status, value); } }
+    public string OperationStatus { get => _operationStatus; private set => SetProperty(ref _operationStatus, value); }
+    public void DismissStatus() => Status = "";
     public bool Busy { get => _busy; private set => SetProperty(ref _busy, value); }
     public bool OfflineTest { get; } = Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1";
     public string Root { get; }
@@ -62,24 +67,25 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public event Action? PrivateDataCleared;
     public event Action? NotificationActivated;
     public string NotificationStatus => _notificationSink.Status;
-    private sealed class OfflineHandler : HttpMessageHandler
-    { protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken token) => throw new InvalidOperationException("CI does not perform network requests."); }
     public AppViewModel(DispatcherQueue dispatcher)
     {
         _dispatcher = dispatcher;
         Root = OfflineTest ? Environment.GetEnvironmentVariable("TAKUPOKE_DATA_ROOT") ?? throw new InvalidOperationException("CI data root is required.")
             : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TakupokeWin");
-        _http = OfflineTest ? new(new OfflineHandler()) : ApiClient.CreateHttpClient();
+        var offline = OfflineTest ? new OfflineTestNetwork(Root) : null;
+        _http = offline is not null ? new(offline) : ApiClient.CreateHttpClient();
         _school = new(Root, new WindowsDpapiProtector()); _preferences = new(Root); _events = new(Root);
         _api = new(_http); _shared = new(_api, _school); _materials = new(_school, new(new WindowsFileIdentity()));
-        _authentication = new(new OidcClient(_http)); NavigationAnchor = Today; WeekStart = Today.DisplayWeekStart();
+        _authentication = new(new OidcClient(_http), offline is null ? null : offline.OpenBrowser);
+        _authentication.ProgressChanged += value => OperationStatus = value;
+        NavigationAnchor = Today; WeekStart = Today.DisplayWeekStart();
         _notifications = new(_school, _notificationSink);
         _notificationSink.Activated += () => _dispatcher.TryEnqueue(() => NotificationActivated?.Invoke());
         _school.RetentionChanged += ClearPrivateData;
         _watcher.Changed += () =>
         {
             var generation = System.Threading.Volatile.Read(ref _operationGeneration);
-            _dispatcher.TryEnqueue(() => { if (!_automaticPaused && generation == _operationGeneration) _ = RefreshAsync(); });
+            _dispatcher.TryEnqueue(() => { if (!_automaticPaused && generation == _operationGeneration) { if (Busy) _pendingRefresh = true; else _ = RefreshAutomaticallyAsync(force: true); } });
         };
         _timer = dispatcher.CreateTimer(); _timer.Interval = TimeSpan.FromSeconds(1); _timer.Tick += TimerTick;
         Program.ProtocolCallback = uri => _dispatcher.TryEnqueue(() => _authentication.HandleCallback(uri)); Program.DrainCallbacks();
@@ -94,9 +100,10 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private void TimerTick(DispatcherQueueTimer sender, object args)
     {
         var now = DateTimeOffset.UtcNow;
+        if (!Busy && Status.Length > 0 && now >= _statusUntil) DismissStatus();
         if (_displayPeriod is { } displayed && displayed != SchoolDataPeriod.FromInstant(now))
         { _session.Cancel(); _authentication.Cancel(); ClearPrivateData(); _ = RefreshAsync(); return; }
-        if (!_automaticPaused && Preferences.KeepInTray && now >= _nextCheck) { _nextCheck = now.AddMinutes(15); _ = RefreshAsync(); }
+        if (!_automaticPaused && Preferences.KeepInTray && now >= _nextCheck) { _nextCheck = now.AddMinutes(15); _ = RefreshAutomaticallyAsync(force: true); }
         if (_lastDay != Today || now - _lastClock >= TimeSpan.FromSeconds(15)) { _lastDay = Today; _lastClock = now; ClockChanged?.Invoke(); }
     }
     private void ClearPrivateData()
@@ -105,6 +112,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         PrivateEpoch++;
         Data = Data with { Timetable = null, Changes = null, Specials = null, Times = null };
         LinksRecord = null; MappingRecord = null; TimesRecord = null; Links = null; Mappings = null; Materials = new Dictionary<MaterialKind, MaterialSnapshot>(); Revisions = new Dictionary<DataSet, RevisionResult>();
+        SharedUpdateResults = []; SharedUpdateMessage = null; DismissStatus();
         _displayPeriod = null; _watcher.Replace([]);
         void Notify() { PrivateDataCleared?.Invoke(); SnapshotChanged?.Invoke(); }
         if (_dispatcher.HasThreadAccess) Notify(); else _dispatcher.TryEnqueue(Notify);
@@ -115,10 +123,10 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         {
             Preferences = await _preferences.LoadAsync(token); PreferencesReady = true;
             InitializePlatform();
-            await ReloadAsync(token); Status = "学校資料を選択すると、端末内で解析します。";
+            await ReloadAsync(token);
         });
         _timer.Start();
-        if (!OfflineTest) await RefreshAsync();
+        if (!OfflineTest) await RefreshAutomaticallyAsync(force: true);
     }
     private void InitializePlatform()
     {
@@ -126,7 +134,14 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         BrowserAuthenticator.RegisterProtocol(); _notificationSink.Initialize(); _platformInitialized = true;
     }
     private int ParserYear => int.TryParse(Preferences.DefaultSchoolYear, out var year) && year is >= 1900 and <= 9998 ? year : Today.SchoolYear();
-    public Task RefreshAsync()
+    public Task RefreshAsync() => RefreshAsync(automatic: false);
+    public Task RefreshAutomaticallyAsync(bool force = false)
+    {
+        if (Locked || Busy || !force && DateTimeOffset.UtcNow - _lastAutomaticCheck < TimeSpan.FromMinutes(1)) return Task.CompletedTask;
+        _lastAutomaticCheck = DateTimeOffset.UtcNow;
+        return RefreshAsync(automatic: true);
+    }
+    private Task RefreshAsync(bool automatic)
     {
         if (Locked) return Task.CompletedTask;
         _automaticPaused = false;
@@ -152,8 +167,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
                 EventSourceMessage = EventSourceChecker.Message(await new EventSourceChecker(_http).CheckAsync(await _events.LoadAsync(EventSourceChecker.SourceSchoolYear, token), token));
             }
         }
-        await ReloadAsync(token); Status = "登録した原本と公開更新情報を確認しました。OneDriveのクラウド同期完了を示すものではありません。";
-        });
+        await ReloadAsync(token); if (!automatic) Status = "資料と更新情報を確認しました。";
+        }, "資料と更新情報を確認しています。", automatic);
     }
     public Task SelectAsync(MaterialKind kind, string path) => RunAsync(async token =>
     {
@@ -167,12 +182,19 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     });
     public Task UpdateSharedAsync() => RunAsync(async token =>
     {
+        SharedUpdateResults = []; SharedUpdateMessage = null;
         IReadOnlyList<UpdateResult> results;
         try { results = await _shared.UpdateAsync(_authentication.AuthenticateAsync, token); }
+        catch (ApiException error) { SharedUpdateMessage = error.Message; throw; }
+        catch (OperationCanceledException) { SharedUpdateMessage = "取得を中止しました。"; throw; }
         finally { if (!Locked) await ReloadAsync(CancellationToken.None); }
+        SharedUpdateResults = results;
+        OperationStatus = "取得結果を確認しています。";
         Revisions = await _shared.CheckAsync(token);
         Status = string.Join(" / ", results.Select(r => DataSetLabel(r.Kind) + "：" + (r.Updated ? "更新しました" : r.Failure is { } failure ? new ApiException(failure).Message : "保持しています")));
-    });
+    }, "更新情報を確認しています。");
+    public IReadOnlyList<UpdateResult> SharedUpdateResults { get; private set; } = [];
+    public string? SharedUpdateMessage { get; private set; }
     public Task FetchEventsAsync(int year) => RunAsync(async token =>
     { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await _events.LoadAsync(year, token), token), token); EventSourceMessage = null; EventsUpdateMessage = null; await ReloadAsync(token); Status = "学校行事を保存しました。元PDFの更新確認は次回起動時に行います。"; });
     public Task SavePreferencesAsync(UserPreferences next) => RunAsync(async token =>
@@ -231,7 +253,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             .ToDictionary(p => p.Key, p => p.Value.Analysis!.SourceDigest);
         return _notifications.CheckAsync(eligible.ContainsKey(MaterialKind.Changes) ? Data : Data with { Changes = null }, eligible, Preferences, Today, token);
     }
-    private async Task RunAsync(Func<CancellationToken, Task> action)
+    private async Task RunAsync(Func<CancellationToken, Task> action, string progress = "処理しています。", bool automatic = false)
     {
         if (Locked) { Status = "Windowsのロック中は学校データを利用できません。"; return; }
         // Picker completion can race a refresh triggered by window activation.
@@ -244,7 +266,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             Status = "学校データの利用状態が変わったため処理を中止しました。もう一度お試しください。";
             return;
         }
-        Busy = true;
+        OperationStatus = progress; Busy = true;
         if (_session.IsCancellationRequested) { _session.Dispose(); _session = new(); }
         try { await action(_session.Token); }
         catch (OperationCanceledException) { Status = "処理を中止しました。保存期間内の正常なデータは保持しています。"; }
@@ -254,7 +276,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         finally
         {
             Busy = false; _operations.Release(); SnapshotChanged?.Invoke();
-            if (_pendingRefresh) { _pendingRefresh = false; _dispatcher.TryEnqueue(() => _ = RefreshAsync()); }
+            if (!automatic && Status.Length > 0) _statusUntil = DateTimeOffset.UtcNow.AddSeconds(5);
+            if (_pendingRefresh) { _pendingRefresh = false; _dispatcher.TryEnqueue(() => _ = RefreshAutomaticallyAsync(force: true)); }
         }
     }
     public void Cancel() { _automaticPaused = true; _operationGeneration++; _pendingRefresh = false; _watcher.Replace([]); _session.Cancel(); _authentication.Cancel(); }
@@ -262,7 +285,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     {
         Locked = locked; Cancel(); ClearPrivateData();
         await _school.SetProtectedDataAvailableAsync(!locked);
-        if (!locked) await RefreshAsync();
+        if (!locked) await RefreshAutomaticallyAsync(force: true);
     }
     public static string MaterialLabel(MaterialKind kind) => kind switch { MaterialKind.Timetable => "通常時間割PDF", MaterialKind.Changes => "時間割変更XLSX", MaterialKind.Exam => "試験時間割PDF", _ => "試験返却時間割PDF" };
     public static string DataSetLabel(DataSet kind) => kind switch { DataSet.Links => "リンク一覧", DataSet.Mapping => "名称対応表", _ => "授業時刻" };

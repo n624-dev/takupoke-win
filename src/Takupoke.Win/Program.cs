@@ -32,11 +32,15 @@ public static class Program
         }
         void Activated(AppActivationArguments data)
         {
-            if (data.Kind == ExtendedActivationKind.Protocol && data.Data is ProtocolActivatedEventArgs protocol)
-            { var callback = ProtocolCallback; if (callback is null) Pending.Enqueue(protocol.Uri); else callback(protocol.Uri); }
+            var uri = ProtocolActivation.GetCallback(data);
+            if (uri is not null)
+            {
+                var callback = ProtocolCallback; if (callback is null) Pending.Enqueue(uri); else callback(uri);
+                OpenRequested?.Invoke();
+            }
+            else if (data.Kind != ExtendedActivationKind.Protocol) OpenRequested?.Invoke();
         }
         instance.Activated += (_, data) => Activated(data);
-        instance.Activated += (_, data) => { if (data.Kind != ExtendedActivationKind.Protocol) OpenRequested?.Invoke(); };
         Activated(activation);
         Application.Start(initialization =>
         {

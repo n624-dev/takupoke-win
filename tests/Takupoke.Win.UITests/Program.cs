@@ -3,6 +3,8 @@ using System.IO;
 using System.Text;
 using System.Text.Json;
 using System.Windows.Automation;
+using Microsoft.Win32;
+using Takupoke.Infrastructure.Authentication;
 using Takupoke.Core;
 using Takupoke.Infrastructure.Api;
 using Takupoke.Infrastructure.Parsing;
@@ -37,40 +39,49 @@ internal static class Program
             SetSearch("かくうがくしゅう");
             Wait(() => Find("link-fake-study") is not null, "kana search finds saved link");
             Navigate("timetable"); Navigate("settings");
+            Require(Find("material-summary-Exam") is null && Find("fetch-events") is null, "Root settings contains destinations rather than file and event details.");
             var preferences = Path.Combine(args[1], "preferences.json");
+            Wait(() => !Visible("status-bar"), "idle footer is hidden");
             var bodyColor = TextColor("page-settings");
             foreach (var color in new[] { "green", "yellow", "orange", "red", "pink", "blue", "default", "purple" })
             {
                 SelectMainColor(color, preferences);
                 Require(TextColor("page-settings") == bodyColor, "Changing the main color must not recolor page text.");
             }
+            CheckAuthentication(args[0], args[1]);
+            Invoke(WaitElement("settings-materials"));
+            Wait(() => Find("page-materials") is not null, "material list is a settings child screen");
             Invoke(WaitElement("material-details-Timetable"));
             Wait(() => Find("page-material-Timetable") is not null, "normal material detail screen");
             Invoke(WaitElement("analysis-Timetable"));
             Wait(() => Find("page-analysis-Timetable") is not null && Find("analysis-weekday") is not null, "normal analysis and independent weekday filter");
-            Invoke(ByName("資料の詳細に戻る")); Invoke(WaitElement("back-settings"));
+            Invoke(ByName("資料の詳細に戻る")); Invoke(WaitElement("back-materials"));
             Invoke(WaitElement("material-details-Exam"));
             Wait(() => Find("page-material-Exam") is not null, "material detail screen");
-            Invoke(WaitElement("back-settings"));
-            Invoke(ByName("使い方")); Wait(() => Find("page-help") is not null, "purpose-based help");
+            Invoke(WaitElement("back-materials")); Invoke(WaitElement("back-settings"));
+            Invoke(WaitElement("settings-help")); Wait(() => Find("page-help") is not null, "purpose-based help");
             Invoke(ByName("時間割を見る")); Invoke(ByName("閉じる")); Invoke(WaitElement("back-settings"));
-            Invoke(ByName("初期設定をもう一度表示"));
+            Invoke(WaitElement("settings-setup"));
             Wait(() => Find("page-setup") is not null, "guided setup");
             Invoke(WaitElement("setup-next")); Wait(() => Find("setup-events") is not null, "setup material and event step");
             Invoke(WaitElement("setup-next")); Wait(() => Find("setup-class") is not null, "setup class step");
             Invoke(WaitElement("setup-later")); Navigate("settings");
+            Invoke(WaitElement("settings-about"));
+            Wait(() => Find("page-about") is not null, "about contains the legal documents");
             Invoke(ByName("利用規約"));
             Invoke(ByName("閉じる"));
             Invoke(ByName("プライバシーポリシー"));
             Invoke(ByName("閉じる"));
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.NameProperty, "閉じる"), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button))) is null, "product document closes before opening the picker");
+            Invoke(WaitElement("back-settings")); Invoke(WaitElement("settings-materials"));
             var selectedPdf = Path.Combine(args[1], "fictional-selection.pdf");
             File.WriteAllText(selectedPdf, "%PDF-1.7\n% Entirely synthetic malformed PDF for selection persistence.\n", Encoding.ASCII);
             PickMaterial(selectedPdf);
             Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "picker selection is saved even when parsing fails");
             PickMaterial(null);
             Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "canceling the picker preserves the previous selection");
-            Invoke(ByName("クラスを選択"));
+            Invoke(WaitElement("back-settings"));
+            Invoke(WaitElement("settings-class"));
             var homeroom = WaitElement("class-1_1"); Toggle(homeroom);
             var department = WaitElement("class-1_CN"); Toggle(department);
             Require(Checked(homeroom) && Checked(department), "Year one allows a homeroom and department together.");
@@ -98,6 +109,7 @@ internal static class Program
             Navigate("settings");
             Require(SavedMainColor(preferences) == "purple", "Main color survives app restart.");
             Require(TextColor("page-settings") == bodyColor, "Restart retains theme text color.");
+            Invoke(WaitElement("settings-materials"));
             Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "file selected through the native picker survives restart");
             Console.WriteLine($"Passed {_checks} Windows UI checks: navigation, class constraints, saved lessons and details, kana search, persistence, seven accent colors and OS default without recoloring text, focus and offline refresh.");
             return 0;
@@ -128,6 +140,77 @@ internal static class Program
             return 1;
         }
         finally { Stop(); }
+    }
+    private static bool Visible(string id) => Find(id) is { } element && !element.Current.IsOffscreen;
+    private static void CheckAuthentication(string executable, string root)
+    {
+        var mode = Path.Combine(root, "offline-auth-mode.txt"); var state = Path.Combine(root, "offline-auth-state.txt");
+        var tokenRequests = Path.Combine(root, "offline-token-requests.txt"); var privateRequests = Path.Combine(root, "offline-private-requests.txt");
+        const string commandPath = @"Software\Classes\jp.n624.takupoke.win\shell\open\command";
+        using var existing = Registry.CurrentUser.OpenSubKey(commandPath);
+        var previous = existing?.GetValue("") as string;
+        using (var command = Registry.CurrentUser.CreateSubKey(commandPath)) command.SetValue("", "\"" + Path.GetFullPath(executable) + "\" \"----ms-protocol:%1\"");
+        using (var scheme = Registry.CurrentUser.CreateSubKey(@"Software\Classes\jp.n624.takupoke.win")) scheme.SetValue("URL Protocol", "");
+        try
+        {
+            Invoke(WaitElement("settings-account"));
+            Wait(() => Find("page-account") is not null, "account child screen");
+            File.WriteAllText(mode, "fail"); File.Delete(state);
+            Invoke(WaitElement("update-account"));
+            Wait(() => File.Exists(state) && Visible("cancel-operation"), "authentication waits for an OS callback");
+            var attemptState = File.ReadAllText(state);
+            Require(Find("shared-details-Links")?.Current.IsEnabled == true, "Saved data details remain available while authenticating.");
+            Invoke(WaitElement("shared-details-Links")); Invoke(ByName("閉じる"));
+            SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=forged", shell: false);
+            Require(Visible("cancel-operation") && !File.Exists(tokenRequests), "An unmatched callback neither completes authentication nor exchanges a token.");
+            SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=" + attemptState, shell: false);
+            Wait(() => Find("update-account")?.Current.IsEnabled == true && !Visible("cancel-operation"), "Legacy raw-URI launch ends authentication after token failure");
+            Require(File.ReadAllText(tokenRequests) == "1" && !File.Exists(privateRequests), "Token failure cannot download school data.");
+            Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "学校アカウントの認証を完了できませんでした。")) is not null, "authentication failure is visible on the account screen");
+            Wait(() => !Visible("status-bar"), "failure footer disappears after a short interval");
+            Require(Find("shared-details-Links")?.Current.IsEnabled == true, "The account screen stays usable after the footer disappears.");
+            File.WriteAllText(mode, "hold"); File.Delete(state);
+            Invoke(WaitElement("update-account"));
+            Wait(() => File.Exists(state) && Visible("cancel-operation"), "retry creates a fresh authentication attempt");
+            attemptState = File.ReadAllText(state);
+            SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=" + attemptState, shell: true);
+            Wait(() => File.ReadAllText(tokenRequests) == "2", "Windows protocol launch reaches token exchange");
+            Require(Find("operation-status")?.Current.Name.Contains("認証情報を検証", StringComparison.Ordinal) == true, "Progress identifies token verification rather than a stale refresh result.");
+            Invoke(WaitElement("back-settings"));
+            Require(Find("settings-materials")?.Current.IsEnabled == true && Find("settings-help")?.Current.IsEnabled == true, "Settings navigation stays usable during token exchange.");
+            Invoke(WaitElement("settings-help")); Wait(() => Find("page-help") is not null, "help is readable during token exchange");
+            Invoke(WaitElement("back-settings")); Invoke(WaitElement("settings-account"));
+            File.WriteAllText(mode, "success");
+            Wait(() => Find("update-account")?.Current.IsEnabled == true && !Visible("cancel-operation"), "Validated fake authentication completes downloads and releases the UI");
+            Require(File.ReadAllText(privateRequests) == "3", "All three datasets require the verified token and download once.");
+            foreach (var kind in Enum.GetValues<DataSet>()) Require(Find("shared-status-" + kind)?.Current.Name == "取得済み", "Each independently saved dataset shows acquired status.");
+            Wait(() => !Visible("status-bar"), "success footer automatically hides");
+            File.WriteAllText(Path.Combine(root, "offline-auth-revision.txt"), new string('C', 43));
+            File.WriteAllText(mode, "hold"); File.Delete(state);
+            Invoke(WaitElement("update-account")); Wait(() => File.Exists(state) && Visible("cancel-operation"), "another update is cancellable");
+            SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=" + File.ReadAllText(state), shell: true);
+            Wait(() => File.ReadAllText(tokenRequests) == "3", "cancellation test reaches token exchange");
+            Invoke(WaitElement("cancel-operation"));
+            Wait(() => Find("update-account")?.Current.IsEnabled == true && !Visible("cancel-operation"), "canceling token exchange releases the UI");
+            Require(File.ReadAllText(privateRequests) == "3", "Cancellation preserves previous data and starts no private downloads.");
+            foreach (var kind in Enum.GetValues<DataSet>()) Require(Find("shared-status-" + kind)?.Current.Name == "取得済み", "Canceled authentication retains all prior datasets.");
+            if (Visible("dismiss-status")) Invoke(WaitElement("dismiss-status"));
+            Require(!Visible("status-bar"), "The result footer can be dismissed immediately.");
+            Invoke(WaitElement("back-settings"));
+        }
+        finally
+        {
+            File.Delete(mode); File.Delete(state); File.Delete(Path.Combine(root, "offline-auth-revision.txt"));
+            if (previous is not null) { using var command = Registry.CurrentUser.CreateSubKey(commandPath); command.SetValue("", previous); }
+            else Registry.CurrentUser.DeleteSubKeyTree(@"Software\Classes\jp.n624.takupoke.win", false);
+        }
+    }
+    private static void SendCallback(string executable, string callback, bool shell)
+    {
+        var info = shell ? new ProcessStartInfo(callback) { UseShellExecute = true } : new ProcessStartInfo(Path.GetFullPath(executable)) { UseShellExecute = false };
+        if (!shell) info.ArgumentList.Add(callback);
+        using var redirect = Process.Start(info);
+        if (!shell && (redirect is null || !redirect.WaitForExit(10000) || redirect.ExitCode != 0)) throw new InvalidOperationException("The synthetic callback process did not redirect successfully.");
     }
     private static async Task SeedAsync(string root)
     {

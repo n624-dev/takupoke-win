@@ -12,24 +12,30 @@ public sealed partial class MainWindow
         TitleText("時間割", "page-timetable");
         if (_model.EventSourceMessage is { } eventWarning) Add(Card(Text(eventWarning)));
         if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
-        Add(Button("クラス：" + string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display)), ChooseClasses));
-        var controls = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
         var bounds = _model.Engine.ReachableWeeks(_model.NavigationAnchor, _model.Preferences.SelectedClasses);
         var start = _model.WeekStart;
         if (start < bounds.Lower) start = bounds.Lower; if (start > bounds.Upper) start = bounds.Upper; _model.WeekStart = start;
-        var previous = AccentButton("前の週", () => { _model.WeekStart = start.AddDays(-7); Render(); return Task.CompletedTask; }); previous.IsEnabled = start > bounds.Lower;
-        var next = AccentButton("次の週", () => { _model.WeekStart = start.AddDays(7); Render(); return Task.CompletedTask; }); next.IsEnabled = start < bounds.Upper;
-        controls.Children.Add(previous); controls.Children.Add(AccentButton("今週", () => { _model.WeekStart = _model.Today.DisplayWeekStart(); Render(); return Task.CompletedTask; })); controls.Children.Add(next);
-        Add(controls);
+        var toolbar = new CommandBar { DefaultLabelPosition = CommandBarDefaultLabelPosition.Right, IsOpen = false };
         var calendar = new CalendarDatePicker { Date = new DateTimeOffset(start.ToDateTime(TimeOnly.MinValue), TimeSpan.FromHours(9)),
             MinDate = new DateTimeOffset(bounds.Lower.ToDateTime(TimeOnly.MinValue), TimeSpan.FromHours(9)),
-            MaxDate = new DateTimeOffset(bounds.Upper.AddDays(6).ToDateTime(TimeOnly.MinValue), TimeSpan.FromHours(9)), Header = "表示する週" };
+            MaxDate = new DateTimeOffset(bounds.Upper.AddDays(6).ToDateTime(TimeOnly.MinValue), TimeSpan.FromHours(9)), MinWidth = 140 };
         calendar.Foreground = ActionBrush;
-        calendar.DateChanged += (_, args) => { if (args.NewDate is { } value && DateOnly.FromDateTime(value.DateTime).Monday() != _model.WeekStart) { _model.WeekStart = DateOnly.FromDateTime(value.DateTime).Monday(); Render(); } }; Add(calendar);
-        var included = new ToggleSwitch { Header = "時間割変更を反映", IsOn = _model.Preferences.IncludesChanges };
-        included.Toggled += async (_, _) => { if (included.IsOn != _model.Preferences.IncludesChanges) await _model.SavePreferencesAsync(_model.Preferences with { IncludesChanges = included.IsOn }); }; Add(included);
-        var international = new ToggleSwitch { Header = "留学生向けの授業を表示", IsOn = _model.Preferences.International };
-        international.Toggled += async (_, _) => { if (international.IsOn != _model.Preferences.International) await _model.SavePreferencesAsync(_model.Preferences with { International = international.IsOn }); }; Add(international);
+        calendar.DateChanged += (_, args) => { if (args.NewDate is { } value && DateOnly.FromDateTime(value.DateTime).Monday() != _model.WeekStart) { _model.WeekStart = DateOnly.FromDateTime(value.DateTime).Monday(); Render(); } };
+        toolbar.Content = calendar;
+        var previous = new AppBarButton { Label = "前週", Icon = new SymbolIcon(Symbol.Back), IsEnabled = start > bounds.Lower, Foreground = ActionBrush };
+        previous.Click += (_, _) => { _model.WeekStart = start.AddDays(-7); Render(); };
+        var current = new AppBarButton { Label = "今週", Icon = new SymbolIcon(Symbol.Calendar), Foreground = ActionBrush };
+        current.Click += (_, _) => { _model.WeekStart = _model.Today.DisplayWeekStart(); Render(); };
+        var next = new AppBarButton { Label = "翌週", Icon = new SymbolIcon(Symbol.Forward), IsEnabled = start < bounds.Upper, Foreground = ActionBrush };
+        next.Click += (_, _) => { _model.WeekStart = start.AddDays(7); Render(); };
+        var selectedClasses = new AppBarButton { Label = "クラス：" + string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display)), Icon = new SymbolIcon(Symbol.People) };
+        selectedClasses.Click += async (_, _) => await ChooseClasses();
+        toolbar.PrimaryCommands.Add(previous); toolbar.PrimaryCommands.Add(current); toolbar.PrimaryCommands.Add(next); toolbar.PrimaryCommands.Add(selectedClasses);
+        var included = OperationControl(new AppBarToggleButton { Label = "変更を反映", IsChecked = _model.Preferences.IncludesChanges });
+        included.Click += async (_, _) => { if (included.IsChecked != _model.Preferences.IncludesChanges) await _model.SavePreferencesAsync(_model.Preferences with { IncludesChanges = included.IsChecked == true }); };
+        var international = OperationControl(new AppBarToggleButton { Label = "留学生向け授業", IsChecked = _model.Preferences.International });
+        international.Click += async (_, _) => { if (international.IsChecked != _model.Preferences.International) await _model.SavePreferencesAsync(_model.Preferences with { International = international.IsChecked == true }); };
+        toolbar.SecondaryCommands.Add(included); toolbar.SecondaryCommands.Add(international); Add(toolbar);
         if (_model.Preferences.SelectedClasses.Length == 0) Add(Text("クラスを選択してください。"));
         else BuildWeekGrid(start);
         var weeklyEvents = Enumerable.Range(0, 7).Select(offset => start.AddDays(offset)).Select(day => (Day: day, Events: _model.Engine.Plan(day).Events)).Where(item => item.Events.Count > 0).ToArray();
@@ -40,32 +46,35 @@ public sealed partial class MainWindow
         }
         if (_model.Data.Changes is null) Add(Text("時間割変更の解析結果がありません。"));
         if (_model.SavedEventYears.Count == 0) Add(Text("学校行事は未取得です。"));
-        Add(Text("時間割変更一覧", 22)); Add(Button("一覧のクラスを選択", () => ChooseClasses(changes: true)));
+        var list = new StackPanel { Spacing = 12 };
+        void AddChange(UIElement element) => list.Children.Add(element);
+        AddChange(Button("一覧のクラスを選択", () => ChooseClasses(changes: true)));
         var range = new ComboBox { Header = "一覧の範囲", ItemsSource = new[] { "今日以降", "この週", "全件" }, SelectedIndex = (int)_model.Preferences.ChangeRange };
-        range.SelectionChanged += async (_, _) => { if (range.SelectedIndex is >= 0 and <= 2 && range.SelectedIndex != (int)_model.Preferences.ChangeRange) await _model.SavePreferencesAsync(_model.Preferences with { ChangeRange = (ChangeRange)range.SelectedIndex }); }; Add(range);
+        range.SelectionChanged += async (_, _) => { if (range.SelectedIndex is >= 0 and <= 2 && range.SelectedIndex != (int)_model.Preferences.ChangeRange) await _model.SavePreferencesAsync(_model.Preferences with { ChangeRange = (ChangeRange)range.SelectedIndex }); }; AddChange(range);
         var selected = (_model.Preferences.ChangeClasses.Length > 0 ? _model.Preferences.ChangeClasses : _model.Preferences.SelectedClasses).ToHashSet();
         var parsedClasses = (_model.Data.Timetable?.Lessons.Select(l => l.ClassName) ?? []).Concat(_model.Data.Changes?.Select(c => c.DisplayClassName) ?? []).ToHashSet();
-        if (_model.Preferences.ChangeClasses.Any(cls => !parsedClasses.Contains(cls))) Add(Text("保存した対象クラスの一部は現在の資料にありません。選択は保持しています。"));
-        if (_model.Preferences.ChangeClasses.Length > 0) Add(Button("時間割設定に戻す", () => _model.SavePreferencesAsync(_model.Preferences with { ChangeClasses = [] })));
+        if (_model.Preferences.ChangeClasses.Any(cls => !parsedClasses.Contains(cls))) AddChange(Text("保存した対象クラスの一部は現在の資料にありません。選択は保持しています。"));
+        if (_model.Preferences.ChangeClasses.Length > 0) AddChange(Button("時間割設定に戻す", () => _model.SavePreferencesAsync(_model.Preferences with { ChangeClasses = [] })));
         var changes = _model.Engine.Changes(selected, _model.Preferences.ChangeRange, _model.Today, start).ToArray();
-        if (changes.Length == 0) Add(Text("この条件の時間割変更はありません。"));
-        foreach (var change in changes) Add(Button(change.ChangeDate + " · " + ClassSelection.Display(change.DisplayClassName) + " · " + change.DisplayPeriod + " · " + change.KindLabel + " · " + _model.Presentation.BeforeSubject(change) + " → " + (_model.Presentation.ChangeNames(change).After.Subject.Trim().Length == 0 ? "記載なし" : _model.Presentation.ChangeNames(change).After.Subject) + " · " + DisplayText.FullWidthKana(change.Note), () => ChangeDetail(change)));
+        if (changes.Length == 0) AddChange(Text("この条件の時間割変更はありません。"));
+        foreach (var change in changes) AddChange(Button(change.ChangeDate + " · " + ClassSelection.Display(change.DisplayClassName) + " · " + change.DisplayPeriod + " · " + change.KindLabel + " · " + _model.Presentation.BeforeSubject(change) + " → " + (_model.Presentation.ChangeNames(change).After.Subject.Trim().Length == 0 ? "記載なし" : _model.Presentation.ChangeNames(change).After.Subject) + " · " + DisplayText.FullWidthKana(change.Note), () => ChangeDetail(change)));
+        Add(new Expander { Header = "時間割変更一覧（" + changes.Length + "件）", Content = list, HorizontalAlignment = HorizontalAlignment.Stretch, IsExpanded = false });
     }
     private void BuildWeekGrid(DateOnly start)
     {
         var classes = _model.Preferences.SelectedClasses; var engine = _model.Engine;
         var days = engine.DisplayedDays(start, classes); var grid = new Grid { ColumnSpacing = 0, RowSpacing = 0 };
-        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(72) });
-        foreach (var day in days) grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star), MinWidth = Math.Max(128, classes.Length * 90) });
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(88) });
+        foreach (var day in days) grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star), MinWidth = Math.Max(144, classes.Length * 120) });
         grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
         var allNoClass = days.All(day => engine.FullDayEventTitle(day, classes) is not null);
         var nestedRows = new List<Grid>();
         var fullDayCards = new List<Border>();
         for (var period = 1; period <= 8; period++)
         {
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(130) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(64) });
             var time = engine.CommonPeriodTime(period, days, classes);
-            var label = Text(allNoClass ? "" : period + "限\n" + DisplayText.PeriodTime(time), 13); label.TextAlignment = TextAlignment.Center; Grid.SetRow(label, period); grid.Children.Add(label);
+            var label = Text(allNoClass ? "" : period + "限\n" + DisplayText.PeriodTime(time), 14); label.TextAlignment = TextAlignment.Center; Grid.SetRow(label, period); grid.Children.Add(label);
         }
         for (var dayIndex = 0; dayIndex < days.Count; dayIndex++)
         {
@@ -91,7 +100,7 @@ public sealed partial class MainWindow
                 var card = Card(title); card.Padding = new Thickness(3); fullDayCards.Add(card); Grid.SetColumn(card, dayIndex + 1); Grid.SetRow(card, 1); Grid.SetRowSpan(card, 8); grid.Children.Add(card); continue;
             }
             var cellGrid = new Grid { ColumnSpacing = 0, RowSpacing = 0 };
-            for (var period = 1; period <= 8; period++) cellGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(130) });
+            for (var period = 1; period <= 8; period++) cellGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(64) });
             var offset = 0;
             foreach (var cls in classes)
             {
@@ -109,7 +118,7 @@ public sealed partial class MainWindow
         }
         void FitRows()
         {
-            var heights = Enumerable.Repeat(allNoClass ? 1.0 : 100.0, 8).ToArray();
+            var heights = Enumerable.Repeat(allNoClass ? 1.0 : 62.0, 8).ToArray();
             foreach (var cells in nestedRows)
                 foreach (var button in cells.Children.OfType<Button>())
                 {
@@ -122,7 +131,7 @@ public sealed partial class MainWindow
             if (allNoClass)
                 foreach (var card in fullDayCards)
                 {
-                    var width = (grid.ActualWidth - 72) / Math.Max(1, days.Count);
+                    var width = (grid.ActualWidth - 88) / Math.Max(1, days.Count);
                     if (width <= 0) continue;
                     card.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
                     var needed = Math.Ceiling(card.DesiredSize.Height / 8);
@@ -137,15 +146,18 @@ public sealed partial class MainWindow
         grid.Loaded += (_, _) => FitRows();
         grid.SizeChanged += (_, args) => { if (Math.Abs(args.PreviousSize.Width - args.NewSize.Width) > 0.5) FitRows(); };
         var scroll = new ScrollViewer { Content = grid, HorizontalScrollMode = ScrollMode.Enabled, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
-            VerticalScrollMode = ScrollMode.Disabled, VerticalScrollBarVisibility = ScrollBarVisibility.Disabled };
+            VerticalScrollMode = ScrollMode.Enabled, VerticalScrollBarVisibility = ScrollBarVisibility.Auto };
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(scroll, "timetable-grid-scroller");
         void FitWidth()
         {
-            var minimum = 72 + days.Count * Math.Max(128, classes.Length * 90);
+            scroll.Height = Math.Max(300, RootGrid.ActualHeight - 180 - (StatusBar.Visibility == Visibility.Visible ? StatusBar.ActualHeight : 0));
+            var minimum = 88 + days.Count * Math.Max(144, classes.Length * 120);
             var width = Math.Max(minimum, scroll.ActualWidth);
             if (Math.Abs(grid.Width - width) > 0.5 || double.IsNaN(grid.Width)) grid.Width = width;
         }
         scroll.Loaded += (_, _) => FitWidth(); scroll.SizeChanged += (_, _) => FitWidth();
+        Microsoft.UI.Xaml.SizeChangedEventHandler resize = (_, _) => FitWidth();
+        RootGrid.SizeChanged += resize; scroll.Unloaded += (_, _) => RootGrid.SizeChanged -= resize;
         Add(scroll);
     }
     private Task ChooseClasses() => ChooseClasses(false);

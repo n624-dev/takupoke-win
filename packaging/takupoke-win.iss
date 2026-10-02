@@ -58,7 +58,7 @@ Name: "{userprograms}\たくポケ Win"; Filename: "{app}\Takupoke.Win.exe"; Wor
 [Registry]
 Root: HKCU; Subkey: "Software\Classes\jp.n624.takupoke.win"; ValueType: string; ValueData: "たくポケ Win 認証"; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\Classes\jp.n624.takupoke.win"; ValueType: string; ValueName: "URL Protocol"; ValueData: ""
-Root: HKCU; Subkey: "Software\Classes\jp.n624.takupoke.win\shell\open\command"; ValueType: string; ValueData: """{app}\Takupoke.Win.exe"" ""%1"""
+Root: HKCU; Subkey: "Software\Classes\jp.n624.takupoke.win\shell\open\command"; ValueType: string; ValueData: """{app}\Takupoke.Win.exe"" ""----ms-protocol:%1"""
 
 [Run]
 #ifdef WebViewBootstrapper

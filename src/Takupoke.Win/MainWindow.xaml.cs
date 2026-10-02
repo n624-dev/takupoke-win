@@ -26,6 +26,8 @@ public sealed partial class MainWindow : Window
     private DesktopIntegration? _desktop;
     private bool _exitRequested;
     private bool _initialSetupOffered;
+    private bool _windowActive;
+    private readonly List<Control> _operationControls = [];
     public MainWindow()
     {
         InitializeComponent();
@@ -51,7 +53,12 @@ public sealed partial class MainWindow : Window
         else AppWindow.Resize(new(1150, 820));
         Navigation.SelectedItem = Navigation.MenuItems[0];
         RootGrid.Loaded += Loaded;
-        Activated += (_, args) => { if (_ready && !_selectingMaterial && args.WindowActivationState != WindowActivationState.Deactivated) _ = _model.RefreshAsync(); };
+        Activated += (_, args) =>
+        {
+            var active = args.WindowActivationState != WindowActivationState.Deactivated;
+            var returned = active && !_windowActive; _windowActive = active;
+            if (returned && _ready && !_selectingMaterial && !_model.Busy) _ = _model.RefreshAutomaticallyAsync();
+        };
         AppWindow.Closing += (_, args) =>
         { if (!_exitRequested && _model.Preferences.KeepInTray && _desktop?.TrayAvailable == true) { args.Cancel = true; AppWindow.Hide(); } };
         Closed += async (_, _) => { _themeTimer?.Stop(); CloseBrowser(); _desktop?.Dispose(); Program.OpenRequested = null; await _model.DisposeAsync(); };
@@ -68,7 +75,7 @@ public sealed partial class MainWindow : Window
                 _desktop = new(WinRT.Interop.WindowNative.GetWindowHandle(this));
                 _desktop.LockedChanged += locked => _ = _model.SetLockedAsync(locked);
                 if (!DesktopIntegration.IsInputDesktopAccessible()) await _model.SetLockedAsync(true);
-                _desktop.Resumed += () => _ = _model.RefreshAsync(); _desktop.Suspended += _model.Cancel;
+                _desktop.Resumed += () => _ = _model.RefreshAutomaticallyAsync(force: true); _desktop.Suspended += _model.Cancel;
                 _desktop.OpenRequested += ShowWindow; _desktop.ExitRequested += () => { _exitRequested = true; Close(); };
             }
             catch { await _model.SetLockedAsync(true); await Message("Windowsとの連携を開始できません", "ロック通知を受け取れないため学校データの利用を停止しました。通常ユーザー権限で再起動してください。"); }
@@ -94,11 +101,15 @@ public sealed partial class MainWindow : Window
         if (_model is not null) Render();
     }
     private void Cancel_Click(object sender, RoutedEventArgs args) => _model.Cancel();
+    private void DismissStatus_Click(object sender, RoutedEventArgs args) => _model.DismissStatus();
     private void UpdateStatus()
     {
-        StatusText.Text = _model.Status;
+        StatusText.Text = _model.Busy ? _model.OperationStatus : _model.Status;
+        StatusBar.Visibility = _model.Busy || _model.Status.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
+        DismissStatusButton.Visibility = !_model.Busy && _model.Status.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
         Activity.Visibility = CancelButton.Visibility = _model.Busy ? Visibility.Visible : Visibility.Collapsed;
-        PageHost.IsEnabled = !_model.Busy;
+        PageHost.IsEnabled = !_model.Locked;
+        foreach (var control in _operationControls) control.IsEnabled = !_model.Busy && _model.PreferencesReady && !_model.Locked;
     }
     private void Render()
     {
@@ -129,13 +140,18 @@ public sealed partial class MainWindow : Window
         }
         foreach (var theme in new[] { "Light", "Dark" })
             ((SolidColorBrush)((ResourceDictionary)Navigation.Resources.ThemeDictionaries[theme])["NavigationViewSelectionIndicatorForeground"]).Color = MainAccentColor();
-        PageContent.Children.Clear();
+        PageContent.Children.Clear(); _operationControls.Clear();
+        PageContent.Spacing = _page == "timetable" ? 10 : 18;
         if (_page.StartsWith("material.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var material)) BuildMaterialDetails(material);
         else if (_page.StartsWith("analysis.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var analysed)) BuildAnalysis(analysed);
         else if (_page == "account") BuildAccountData();
         else if (_page == "setup") BuildSetup();
         else if (_page == "help") BuildHelp();
         else if (_page == "licenses") BuildLicenses();
+        else if (_page == "materials") BuildMaterials();
+        else if (_page == "events") BuildEventsSettings();
+        else if (_page == "notifications") BuildNotificationSettings();
+        else if (_page == "about") BuildAbout();
         else switch (_page) { case "links": BuildLinks(); break; case "timetable": BuildTimetable(); break; case "settings": BuildSettings(); break; default: BuildHome(); break; }
         UpdateStatus();
         if (pageChanged)
@@ -171,6 +187,8 @@ public sealed partial class MainWindow : Window
         return button;
     }
     private void Add(UIElement element) => PageContent.Children.Add(element);
+    private T OperationControl<T>(T control) where T : Control { _operationControls.Add(control); control.IsEnabled = !_model.Busy && _model.PreferencesReady; return control; }
+    private Button OperationButton(string label, Func<Task> action, string? id = null) => OperationControl(Button(label, action, id));
     private void TitleText(string title, string id) { var heading = Text(title, 28); AutomationProperties.SetAutomationId(heading, id); Add(heading); }
     private static Border Card(UIElement content) => new() { Child = content, Padding = new Thickness(16), CornerRadius = new CornerRadius(8),
         BorderThickness = new Thickness(1), BorderBrush = (Brush)Application.Current.Resources["CardStrokeColorDefaultBrush"] };

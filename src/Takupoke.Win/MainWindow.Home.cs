@@ -22,7 +22,7 @@ public sealed partial class MainWindow
         if (change?.IsCancellation != true)
         {
             var source = names.Subject.Trim().Length == 0 ? "変更を確認" : names.Subject.Trim();
-            var subject = Text(home ? DisplayText.Continuous(source) : DisplayText.CellSubject(source), home ? 17 : 14);
+            var subject = Text(home ? DisplayText.Continuous(source) : DisplayText.CellSubject(source), home ? 17 : 16);
             if (change is not null && !home)
             {
                 subject.SizeChanged += (_, _) =>
@@ -45,7 +45,8 @@ public sealed partial class MainWindow
         {
             foreach (var text in content.Children.OfType<TextBlock>()) text.TextAlignment = TextAlignment.Center;
             if (change is not null) button.Foreground = WarningBrush;
-            button.Content = content; button.Padding = new Thickness(3);
+            button.Content = content; button.Padding = new Thickness(8, 6, 8, 6);
+            button.VerticalContentAlignment = VerticalAlignment.Center;
         }
         else
         {
@@ -63,7 +64,7 @@ public sealed partial class MainWindow
     private void BuildHome()
     {
         TitleText("ホーム", "page-home"); Add(Text(_model.Today.ToString("yyyy年M月d日（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP")), 20));
-        Add(Button("資料と更新情報を確認", _model.RefreshAsync, "refresh-home"));
+        Add(OperationButton("資料と更新情報を確認", _model.RefreshAsync, "refresh-home"));
         var updates = _model.Revisions.Where(p => p.Value.Changed && (p.Key == DataSet.Times || p.Key == DataSet.Links && _model.Links is not null || p.Key == DataSet.Mapping && _model.Mappings is not null)).Select(p => AppViewModel.DataSetLabel(p.Key)).ToArray();
         if (updates.Length > 0) Add(Card(Panel(Text(string.Join("・", updates) + "のデータを取得・更新できます。"), Button("データの更新を確認", () => OpenPage("account")))));
         var classes = _model.Preferences.SelectedClasses;

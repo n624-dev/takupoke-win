@@ -19,7 +19,7 @@ public sealed partial class MainWindow
     private void BackToSettings() => Add(Button("設定に戻る", () => OpenPage("settings"), "back-settings"));
     private void BuildMaterialDetails(MaterialKind kind)
     {
-        TitleText(AppViewModel.MaterialLabel(kind), "page-material-" + kind); BackToSettings();
+        TitleText(AppViewModel.MaterialLabel(kind), "page-material-" + kind); Add(Button("時間割ファイルに戻る", () => OpenPage("materials"), "back-materials"));
         var snapshot = _model.Materials.GetValueOrDefault(kind); var source = snapshot?.Source; var analysis = snapshot?.Analysis;
         Add(Text("状態・操作", 22));
         if (snapshot?.AcquisitionAttempt is { } acquisition)
@@ -31,11 +31,11 @@ public sealed partial class MainWindow
             if (attempt.ChangeError is ChangeErrorCode.FormulaCache or ChangeErrorCode.WeekdayMismatch)
                 Add(Button("警告を確認して内容を見る", PreviewChanges, "preview-changes"));
         }
-        Add(Button(source is null ? "資料を選択" : "資料を選び直す", () => SelectMaterial(kind), "select-material-" + kind));
+        Add(OperationButton(source is null ? "資料を選択" : "資料を選び直す", () => SelectMaterial(kind), "select-material-" + kind));
         if (source is not null)
         {
-            Add(Button("同じファイルを再取得", () => _model.ReacquireAsync(kind), "reacquire-" + kind));
-            Add(Button("保存した原本を再解析", () => _model.ReparseAsync(kind), "reparse-" + kind));
+            Add(OperationButton("同じファイルを再取得", () => _model.ReacquireAsync(kind), "reacquire-" + kind));
+            Add(OperationButton("保存した原本を再解析", () => _model.ReparseAsync(kind), "reparse-" + kind));
             if (kind != MaterialKind.Changes) Add(Button("保存済みのPDFを見る", () => ShowPdf(kind, false), "view-pdf-" + kind));
             Add(Text("ファイル情報", 22));
             Add(Text($"名前：{source.OriginalName}\nサイズ：{source.ByteCount:N0}バイト\n最終取得：{source.AcquiredAt.ToLocalTime():g}\n最終確認：{source.LastCheckedAt.ToLocalTime():g}\n元ファイルの更新：{source.SourceModifiedAt?.ToLocalTime().ToString("g") ?? "未確認"}"));
@@ -67,15 +67,20 @@ public sealed partial class MainWindow
     private void BuildAccountData()
     {
         TitleText("リンク・名称・授業時刻", "page-account"); BackToSettings();
-        Add(Text("更新のあるデータを一回の学校アカウント認証で取得します。保存済みのデータはオフラインでも使えます。"));
+
         foreach (var kind in Enum.GetValues<DataSet>())
         {
             var state = _model.Revisions.GetValueOrDefault(kind);
             var saved = kind switch { DataSet.Links => _model.LinksRecord is not null, DataSet.Mapping => _model.MappingRecord is not null, _ => _model.TimesRecord is not null };
-            Add(Card(Panel(Text(AppViewModel.DataSetLabel(kind), 20), Text(!saved ? "未取得です。" : state is null ? "保存済みです。更新を確認できていません。" : state.Changed ? "更新があります。" : "保存済みの版です。"),
-                Button("詳細を見る", () => SharedDetails(kind), "shared-details-" + kind))));
+            var failure = _model.SharedUpdateResults.FirstOrDefault(result => result.Kind == kind)?.Failure;
+            var status = Text(failure is not null ? "要確認" : !saved ? "未取得" : state is null ? "取得済み" : state.Changed ? "更新あり" : "取得済み");
+            Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(status, "shared-status-" + kind);
+            var panel = Panel(Text(AppViewModel.DataSetLabel(kind), 20), status, Button("詳細を見る", () => SharedDetails(kind), "shared-details-" + kind));
+            if (failure is { } value) panel.Children.Add(Text(new ApiException(value).Message));
+            Add(Card(panel));
         }
-        Add(Button("更新を確認・取得", _model.UpdateSharedAsync, "update-account"));
+        if (_model.SharedUpdateMessage is { } message) Add(Text(message));
+        Add(OperationButton("更新を確認・取得", _model.UpdateSharedAsync, "update-account"));
     }
     private Task SharedDetails(DataSet kind)
     {
@@ -103,14 +108,14 @@ public sealed partial class MainWindow
         {
             Add(Text("学校アカウントでデータを取得", 22));
             Add(Text("リンク一覧・名称データ・授業時刻を取得します。後から設定することもできます。"));
-            Add(Button("学校アカウントで取得", _model.UpdateSharedAsync, "setup-account"));
+            Add(OperationButton("学校アカウントで取得", _model.UpdateSharedAsync, "setup-account"));
         }
         else if (_setupStep == 1)
         {
             Add(Text("時間割ファイルと学校行事", 22));
             Add(Text("OneDriveの同期フォルダーから通常時間割PDFと時間割変更XLSXを選びます。試験・返却PDFは手元にある場合に選択してください。"));
             foreach (var kind in Enum.GetValues<MaterialKind>()) Add(MaterialCard(kind));
-            Add(Button("今年度の学校行事を取得", () => _model.FetchEventsAsync(_model.Today.SchoolYear()), "setup-events"));
+            Add(OperationButton("今年度の学校行事を取得", () => _model.FetchEventsAsync(_model.Today.SchoolYear()), "setup-events"));
         }
         else
         {

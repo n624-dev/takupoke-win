@@ -9,7 +9,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <NavigationView x:Name="Navigation" IsBackButtonVisible="Collapsed" PaneDisplayMode="Auto" IsSettingsVisible="False"
-                        SelectionChanged="Navigation_SelectionChanged" Header="たくポケ Win">
+                        SelectionChanged="Navigation_SelectionChanged" Header="たくポケ Win" OpenPaneLength="210">
             <NavigationView.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.ThemeDictionaries>
@@ -37,13 +37,16 @@
                 </ContentControl>
             </ScrollViewer>
         </NavigationView>
-        <Grid Grid.Row="1" Padding="16,8" ColumnSpacing="12">
+        <Grid x:Name="StatusBar" Grid.Row="1" Padding="16,8" ColumnSpacing="12" Visibility="Collapsed" AutomationProperties.AutomationId="status-bar">
             <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
             <StackPanel Spacing="6">
-                <ProgressBar x:Name="Activity" IsIndeterminate="True" Visibility="Collapsed" />
-                <TextBlock x:Name="StatusText" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
+                <ProgressBar x:Name="Activity" IsIndeterminate="True" Visibility="Collapsed" AutomationProperties.AutomationId="operation-progress" />
+                <TextBlock x:Name="StatusText" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" AutomationProperties.AutomationId="operation-status" />
             </StackPanel>
-            <Button x:Name="CancelButton" Grid.Column="1" Content="処理を中止" Click="Cancel_Click" Visibility="Collapsed" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button x:Name="CancelButton" Content="処理を中止" Click="Cancel_Click" Visibility="Collapsed" AutomationProperties.AutomationId="cancel-operation" />
+                <Button x:Name="DismissStatusButton" Content="閉じる" Click="DismissStatus_Click" Visibility="Collapsed" AutomationProperties.AutomationId="dismiss-status" />
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
