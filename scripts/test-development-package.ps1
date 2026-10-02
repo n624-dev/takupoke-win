@@ -35,6 +35,18 @@ function Get-StartupValue([string]$Name) {
     try { return $key.GetValue($Name, $null, [Microsoft.Win32.RegistryValueOptions]::DoNotExpandEnvironmentNames) }
     finally { $key.Dispose() }
 }
+function Uninstall-RegisteredApp([string]$Directory) {
+    $registration = Get-ItemProperty -LiteralPath $uninstallKey
+    $path = $registration.UninstallString.Trim('"')
+    $expectedDirectory = [IO.Path]::GetFullPath($Directory).TrimEnd([char]92)
+    if (-not [string]::Equals($registration.InstallLocation.TrimEnd([char]92), $expectedDirectory, [StringComparison]::OrdinalIgnoreCase) -or
+        -not [string]::Equals([IO.Path]::GetDirectoryName($path), $expectedDirectory, [StringComparison]::OrdinalIgnoreCase) -or
+        -not (Test-Path -LiteralPath $path -PathType Leaf)) { throw 'The registered uninstaller is outside the owned installation or missing.' }
+    # During a same-folder legacy replacement, Inno Setup may select unins001.exe
+    # while the previous uninstaller is still completing its self-removal.
+    Run-Installer $path @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART')
+    if (Test-Path -LiteralPath $uninstallKey) { throw 'The app uninstall registration remains after uninstall.' }
+}
 function Get-LegacyInstaller {
     # Exercise the actual released installer, rather than relabeling a new app.
     $directory = Join-Path $taskRoot 'legacy-dev5-release'
@@ -132,7 +144,7 @@ try {
     if ((Get-FileHash -LiteralPath $preferences).Hash -ne $before) { throw 'Reinstallation changed personal settings.' }
     Check-InstalledBranding
     Run-UiChecks
-    Run-Installer (Join-Path $installDir 'unins000.exe') @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART')
+    Uninstall-RegisteredApp $installDir
     if ($null -ne (Get-StartupValue 'takupoke')) { throw 'App startup registration remains after uninstall.' }
     if (Test-Path -LiteralPath $exe) { throw 'App executable remains after uninstall.' }
     if (Test-Path -LiteralPath $shortcut) { throw 'App shortcut remains after uninstall.' }
@@ -185,7 +197,7 @@ try {
         Check-InstalledBranding
         Run-UiChecks
         $before = (Get-FileHash -LiteralPath $preferences).Hash
-        Run-Installer (Join-Path $installDir 'unins000.exe') @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART')
+        Uninstall-RegisteredApp $installDir
         if ($scenario -eq 'unrelated-startup') {
             if ((Get-StartupValue 'takupoke') -cne $unrelatedStartup) { throw 'Uninstall removed an unrelated startup command.' }
             Remove-ItemProperty -LiteralPath $runKey -Name takupoke
@@ -204,9 +216,13 @@ try {
         Select-Object -First 4 -ExpandProperty Message | Write-Output
     throw
 } finally {
-    foreach ($directory in ($ownedInstallDirs | Select-Object -Unique)) {
-        if ($directory -and (Test-Path -LiteralPath (Join-Path $directory 'unins000.exe'))) {
-            Run-Installer (Join-Path $directory 'unins000.exe') @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART')
+    if (Test-Path -LiteralPath $uninstallKey) {
+        $registeredDirectory = (Get-ItemProperty -LiteralPath $uninstallKey).InstallLocation.TrimEnd([char]92)
+        foreach ($directory in ($ownedInstallDirs | Select-Object -Unique)) {
+            if ([string]::Equals($directory.TrimEnd([char]92), $registeredDirectory, [StringComparison]::OrdinalIgnoreCase)) {
+                Uninstall-RegisteredApp $directory
+                break
+            }
         }
     }
     foreach ($name in @('takupoke', 'TakupokeWin')) {
