@@ -53,6 +53,11 @@ function Get-LegacyInstaller {
     if ((Get-FileHash -LiteralPath $installer -Algorithm SHA256).Hash.ToLowerInvariant() -cne $hash) { throw 'The historical installer failed checksum verification.' }
     return $installer
 }
+function Same-FilePath([string]$Actual, [string]$Expected) {
+    if ([string]::IsNullOrWhiteSpace($Actual)) { return $false }
+    return [string]::Equals([IO.Path]::GetFullPath($Actual.Trim('"')).TrimEnd([char]92),
+        [IO.Path]::GetFullPath($Expected).TrimEnd([char]92), [StringComparison]::OrdinalIgnoreCase)
+}
 function Check-InstalledBranding {
     if (-not (Test-Path -LiteralPath $shortcut)) { throw 'Start menu shortcut was not created.' }
     if (Test-Path -LiteralPath $legacyShortcut) { throw 'The previous product-name shortcut remains.' }
@@ -74,7 +79,9 @@ function Check-InstalledBranding {
     $entry = $null
     try {
         $entry = $shell.CreateShortcut($shortcut)
-        if ($entry.TargetPath -ne $exe -or $entry.WorkingDirectory -ne $installDir) { throw 'The start menu entry points to another installation.' }
+        if (!(Same-FilePath $entry.TargetPath $exe) -or !(Same-FilePath $entry.WorkingDirectory $installDir)) {
+            throw "The start menu entry points to another installation. Target=[$($entry.TargetPath)] expected=[$exe]; working=[$($entry.WorkingDirectory)] expected=[$installDir]."
+        }
         if ($entry.IconLocation -ne "$icon,0") { throw 'The start menu entry does not use the app icon.' }
     } finally {
         if ($null -ne $entry) { [System.Runtime.InteropServices.Marshal]::FinalReleaseComObject($entry) | Out-Null }
