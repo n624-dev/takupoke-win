@@ -32,14 +32,15 @@ public sealed partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        ConfigureWindowChrome();
         _model = new(DispatcherQueue);
         // HighContrastChanged subscription fails for some unpackaged installations.
         // Poll only the display setting; native ThemeResources still follow Windows.
         _lastHighContrast = _accessibility.HighContrast;
         _themeTimer = DispatcherQueue.CreateTimer(); _themeTimer.Interval = TimeSpan.FromSeconds(15);
-        _themeTimer.Tick += (_, _) => { var current = _accessibility.HighContrast; if (current != _lastHighContrast) { _lastHighContrast = current; if (_ready) Render(); } };
+        _themeTimer.Tick += (_, _) => { var current = _accessibility.HighContrast; if (current != _lastHighContrast) { _lastHighContrast = current; ApplyWindowChrome(); if (_ready) Render(); } };
         _themeTimer.Start();
-        RootGrid.ActualThemeChanged += (_, _) => { if (_ready) Render(); };
+        RootGrid.ActualThemeChanged += (_, _) => { ApplyWindowChrome(); if (_ready) Render(); };
         _uiSettings.TextScaleFactorChanged += (_, _) => DispatcherQueue.TryEnqueue(() => { if (_ready) Render(); });
         _model.SnapshotChanged += () => { Render(); OfferInitialSetup(); };
         _model.ClockChanged += () => { if (_page is "home" or "timetable" && !_model.Busy && !_selectingMaterial) Render(); };
@@ -87,6 +88,11 @@ public sealed partial class MainWindow : Window
         {
             try { _desktop.SetTray(_model.Preferences.KeepInTray); }
             catch { await Message("通知領域に表示できません", "ウィンドウを閉じると完全終了します。Windowsの通知領域を確認してください。"); }
+            if (_model.Preferences.AutoStart)
+            {
+                try { DesktopIntegration.SetAutoStart(true); }
+                catch { await Message("自動起動を設定できません", "Windowsへのサインイン時に起動する設定を反映できませんでした。設定の「通知・バックグラウンド」で設定し直してください。"); }
+            }
             if (_desktop.TrayAvailable && Environment.GetCommandLineArgs().Contains("--background")) AppWindow.Hide();
         }
         OfferInitialSetup();
@@ -105,6 +111,12 @@ public sealed partial class MainWindow : Window
             Render();
             if (_ready && _page == "links") _ = _model.CheckLinkRevisionAsync();
         }
+    }
+    private void Navigation_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+    {
+        if (args.InvokedItemContainer is not NavigationViewItem { Tag: string page } || _page == page) return;
+        _page = page; Render();
+        if (_ready && _page == "links") _ = _model.CheckLinkRevisionAsync();
     }
     private void Cancel_Click(object sender, RoutedEventArgs args) => _model.Cancel();
     private void DismissStatus_Click(object sender, RoutedEventArgs args) => _model.DismissStatus();
@@ -152,7 +164,8 @@ public sealed partial class MainWindow : Window
         foreach (var theme in new[] { "Light", "Dark" })
             ((SolidColorBrush)((ResourceDictionary)Navigation.Resources.ThemeDictionaries[theme])["NavigationViewSelectionIndicatorForeground"]).Color = MainAccentColor();
         PageContent.Children.Clear(); _operationControls.Clear(); _preferenceControls.Clear();
-        PageContent.Spacing = _page is "timetable" or "settings" ? 10 : 18;
+        UpdatePageLayout();
+        PageContent.Spacing = 24;
         if (_page.StartsWith("material.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var material)) BuildMaterialDetails(material);
         else if (_page.StartsWith("analysis.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var analysed)) BuildAnalysis(analysed);
         else if (_page == "account") BuildAccountData();
@@ -188,22 +201,24 @@ public sealed partial class MainWindow : Window
         return null;
     }
     private static string DisplayDateTime(DateTimeOffset value) => value.ToOffset(TimeSpan.FromHours(9)).ToString("yyyy/M/d H:mm", System.Globalization.CultureInfo.GetCultureInfo("ja-JP"));
-    private static TextBlock Text(string value, double size = 14) => new() { Text = value, FontSize = size, TextWrapping = TextWrapping.Wrap, IsTextSelectionEnabled = true };
+    private static TextBlock Text(string value, double size = 14) => new() { Text = value, FontSize = size, LineHeight = size * 1.5, TextWrapping = TextWrapping.Wrap, IsTextSelectionEnabled = true };
     private static StackPanel Panel(params UIElement[] elements)
-    { var panel = new StackPanel { Spacing = 10 }; foreach (var element in elements) panel.Children.Add(element); return panel; }
+    { var panel = new StackPanel { Spacing = 12 }; foreach (var element in elements) panel.Children.Add(element); return panel; }
     private Button Button(string label, Func<Task> action, string? id = null)
     {
-        var button = new Button { Content = label, HorizontalAlignment = HorizontalAlignment.Left };
+        var button = new Button { Content = label, HorizontalAlignment = HorizontalAlignment.Left, Padding = new Thickness(16, 10, 16, 10), MinHeight = 40, CornerRadius = new CornerRadius(8) };
         AutomationProperties.SetAutomationId(button, id ?? label);
-        button.Click += async (_, _) => { try { await action(); } catch { if (!_dialogOpen) await Message("処理を完了できませんでした", "保存情報または選択した資料を確認して、もう一度お試しください。"); } };
+        AutomationProperties.SetName(button, label);
+        button.Click += async (_, _) => { try { await action(); } catch { if (!_dialogOpen) await Message("処理を完了できませんでした", "操作を完了できませんでした。選択した資料や設定を確認し、もう一度お試しください。保存済みの資料は引き続き表示します。"); } };
         return button;
     }
     private void Add(UIElement element) => PageContent.Children.Add(element);
     private T OperationControl<T>(T control) where T : Control { _operationControls.Add(control); control.IsEnabled = !_model.Busy && _model.PreferencesReady; return control; }
     private T PreferenceControl<T>(T control) where T : Control { _preferenceControls.Add(control); control.IsEnabled = _model.PreferencesReady; return control; }
     private Button OperationButton(string label, Func<Task> action, string? id = null) => OperationControl(Button(label, action, id));
-    private void TitleText(string title, string id) { var heading = Text(title, 28); AutomationProperties.SetAutomationId(heading, id); Add(heading); }
-    private static Border Card(UIElement content) => new() { Child = content, Padding = new Thickness(16), CornerRadius = new CornerRadius(8),
+    private void TitleText(string title, string id) { var heading = Text(title, 30); heading.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold; AutomationProperties.SetAutomationId(heading, id); Add(heading); }
+    private static Border Card(UIElement content) => new() { Child = content, Padding = new Thickness(20), CornerRadius = new CornerRadius(12),
+        Background = (Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"],
         BorderThickness = new Thickness(1), BorderBrush = (Brush)Application.Current.Resources["CardStrokeColorDefaultBrush"] };
     private async Task<ContentDialogResult> Dialog(string title, UIElement content, string primary = "閉じる", string? secondary = null)
     {
@@ -211,7 +226,7 @@ public sealed partial class MainWindow : Window
         try
         {
             var dialog = new ContentDialog { XamlRoot = RootGrid.XamlRoot, Title = title,
-                Content = new ScrollViewer { Content = content, MaxHeight = 560, VerticalScrollBarVisibility = ScrollBarVisibility.Auto },
+                Content = new ScrollViewer { Content = new Border { Child = content, Padding = new Thickness(0, 4, 12, 8) }, MaxHeight = 560, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollMode = ScrollMode.Disabled, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled },
                 PrimaryButtonText = primary, CloseButtonText = secondary ?? "", DefaultButton = ContentDialogButton.Primary };
             _activeDialog = dialog;
             return await dialog.ShowAsync();

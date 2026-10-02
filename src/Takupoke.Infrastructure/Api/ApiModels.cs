@@ -7,9 +7,9 @@ public enum ApiFailure { Unavailable, InvalidResponse, Authentication, Changed, 
 public sealed class ApiException(ApiFailure failure) : Exception(failure switch
 {
     ApiFailure.Authentication => "学校アカウントの認証を完了できませんでした。",
-    ApiFailure.AuthenticationTimeout => "認証の戻り先を受け取れないか、認証処理が時間切れになりました。もう一度取得を開始してください。",
+    ApiFailure.AuthenticationTimeout => "ブラウザでの認証結果を受け取れないか、認証処理が時間切れになりました。もう一度取得を開始してください。",
     ApiFailure.Changed => "取得中にデータが更新されました。もう一度お試しください。",
-    ApiFailure.UnsupportedYear => "この年度の学校行事はAPIでまだ公開されていません。",
+    ApiFailure.UnsupportedYear => "この年度の学校行事はまだ公開されていません。",
     ApiFailure.InvalidResponse => "取得したデータの内容を確認できませんでした。保存済みの結果は保持しています。",
     ApiFailure.Storage => "データを保存できませんでした。保存済みの結果は保持しています。",
     _ => "データを取得できませんでした。通信状態を確認して再試行してください。"

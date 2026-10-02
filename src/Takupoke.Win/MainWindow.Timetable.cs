@@ -12,6 +12,12 @@ public sealed partial class MainWindow
     private (string Key, double Horizontal, double Vertical)? _timetableScrollPosition;
     private bool _changesExpanded = true;
     private bool _restoringTimetableScroll;
+    private Button WeekNavigationButton(string label, string icon, Action action, bool enabled, string id)
+    {
+        var button = IconButton(label, icon, () => { action(); return Task.CompletedTask; }, id);
+        button.Content = FluentIcon(icon); button.Width = 44; button.Height = 44; button.Padding = new Thickness(12); button.IsEnabled = enabled;
+        AutomationProperties.SetName(button, label); ToolTipService.SetToolTip(button, label); return button;
+    }
     private void BuildTimetable()
     {
         TitleText("時間割", "page-timetable");
@@ -20,62 +26,85 @@ public sealed partial class MainWindow
         var bounds = _model.Engine.ReachableWeeks(_model.NavigationAnchor, _model.Preferences.SelectedClasses);
         var start = _model.WeekStart;
         if (start < bounds.Lower) start = bounds.Lower; if (start > bounds.Upper) start = bounds.Upper; _model.WeekStart = start;
-        var toolbar = new CommandBar { DefaultLabelPosition = CommandBarDefaultLabelPosition.Right, IsOpen = false };
         var calendar = new CalendarDatePicker { Date = new DateTimeOffset(start.ToDateTime(TimeOnly.MinValue), TimeSpan.FromHours(9)),
             MinDate = new DateTimeOffset(bounds.Lower.ToDateTime(TimeOnly.MinValue), TimeSpan.FromHours(9)),
-            MaxDate = new DateTimeOffset(bounds.Upper.AddDays(6).ToDateTime(TimeOnly.MinValue), TimeSpan.FromHours(9)), MinWidth = 140 };
-        calendar.Foreground = ActionBrush;
+            MaxDate = new DateTimeOffset(bounds.Upper.AddDays(6).ToDateTime(TimeOnly.MinValue), TimeSpan.FromHours(9)), MinWidth = 156, MinHeight = 44,
+            HorizontalAlignment = HorizontalAlignment.Stretch };
+        AutomationProperties.SetAutomationId(calendar, "timetable-week-picker"); AutomationProperties.SetName(calendar, "表示する週を選択");
         calendar.DateChanged += (_, args) => { if (args.NewDate is { } value && DateOnly.FromDateTime(value.DateTime).Monday() != _model.WeekStart) { _model.WeekStart = DateOnly.FromDateTime(value.DateTime).Monday(); Render(); } };
-        toolbar.Content = calendar;
-        var previous = new AppBarButton { Label = "前週", Icon = new SymbolIcon(Symbol.Back), IsEnabled = start > bounds.Lower, Foreground = ActionBrush };
-        previous.Click += (_, _) => { _model.WeekStart = start.AddDays(-7); Render(); };
-        var current = new AppBarButton { Label = "今週", Icon = new SymbolIcon(Symbol.Calendar), Foreground = ActionBrush };
-        current.Click += (_, _) => { _model.WeekStart = _model.Today.DisplayWeekStart(); Render(); };
-        var next = new AppBarButton { Label = "翌週", Icon = new SymbolIcon(Symbol.Forward), IsEnabled = start < bounds.Upper, Foreground = ActionBrush };
-        next.Click += (_, _) => { _model.WeekStart = start.AddDays(7); Render(); };
-        var selectedClasses = new AppBarButton { Label = "クラス：" + string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display)), Icon = new SymbolIcon(Symbol.People) };
-        selectedClasses.Click += async (_, _) => await ChooseClasses();
-        toolbar.PrimaryCommands.Add(previous); toolbar.PrimaryCommands.Add(current); toolbar.PrimaryCommands.Add(next); toolbar.PrimaryCommands.Add(selectedClasses);
-        var included = PreferenceControl(new AppBarToggleButton { Label = "変更を反映", IsChecked = _model.Preferences.IncludesChanges });
-        included.Click += async (_, _) => { var enabled = included.IsChecked == true; if (enabled != _model.Preferences.IncludesChanges) await _model.SavePreferencesAsync(current => current with { IncludesChanges = enabled }); };
-        var international = PreferenceControl(new AppBarToggleButton { Label = "留学生向け授業", IsChecked = _model.Preferences.International });
-        international.Click += async (_, _) => { var enabled = international.IsChecked == true; if (enabled != _model.Preferences.International) await _model.SavePreferencesAsync(current => current with { International = enabled }); };
-        toolbar.SecondaryCommands.Add(included); toolbar.SecondaryCommands.Add(international); Add(toolbar);
-        if (_model.Preferences.SelectedClasses.Length == 0) Add(Text("クラスを選択してください。"));
+        var navigation = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
+        navigation.Children.Add(WeekNavigationButton("前の週", "chevron-left", () => { _model.WeekStart = start.AddDays(-7); Render(); }, start > bounds.Lower, "timetable-previous"));
+        var current = IconButton("今週", "calendar", () => { _model.OpenTodayWeek(); Render(); return Task.CompletedTask; }, "timetable-current");
+        current.Height = 44; navigation.Children.Add(current);
+        navigation.Children.Add(WeekNavigationButton("次の週", "chevron-right", () => { _model.WeekStart = start.AddDays(7); Render(); }, start < bounds.Upper, "timetable-next"));
+        var weekRow = new Grid { ColumnSpacing = 12 }; weekRow.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) }); weekRow.ColumnDefinitions.Add(new() { Width = GridLength.Auto });
+        weekRow.Children.Add(calendar); Grid.SetColumn(navigation, 1); weekRow.Children.Add(navigation);
+        var classLabel = "クラス：" + (_model.Preferences.SelectedClasses.Length == 0 ? "未選択" : string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display)));
+        var classes = IconButton(classLabel, "people", ChooseClasses, "timetable-classes"); AutomationProperties.SetName(classes, classLabel); classes.HorizontalAlignment = HorizontalAlignment.Stretch; classes.HorizontalContentAlignment = HorizontalAlignment.Left;
+        var displayMenu = new MenuFlyout();
+        var included = PreferenceControl(new ToggleMenuFlyoutItem { Text = "時間割変更を反映", IsChecked = _model.Preferences.IncludesChanges });
+        included.Click += async (_, _) => { var enabled = included.IsChecked; if (enabled != _model.Preferences.IncludesChanges) await _model.SavePreferencesAsync(current => current with { IncludesChanges = enabled }); };
+        var international = PreferenceControl(new ToggleMenuFlyoutItem { Text = "留学生向け授業を表示", IsChecked = _model.Preferences.International });
+        international.Click += async (_, _) => { var enabled = international.IsChecked; if (enabled != _model.Preferences.International) await _model.SavePreferencesAsync(current => current with { International = enabled }); };
+        displayMenu.Items.Add(included); displayMenu.Items.Add(international);
+        var displayLabel = Text("表示設定", 15); displayLabel.IsTextSelectionEnabled = false;
+        var displayOptions = new DropDownButton { Content = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 10, Children = { FluentIcon("settings"), displayLabel } }, Flyout = displayMenu, MinHeight = 44, Padding = new Thickness(16, 10, 16, 10) };
+        AutomationProperties.SetAutomationId(displayOptions, "timetable-display-options"); AutomationProperties.SetName(displayOptions, "時間割の表示設定");
+        var selectionRow = new Grid { ColumnSpacing = 12 }; selectionRow.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) }); selectionRow.ColumnDefinitions.Add(new() { Width = GridLength.Auto });
+        selectionRow.Children.Add(classes); Grid.SetColumn(displayOptions, 1); selectionRow.Children.Add(displayOptions); Add(Panel(weekRow, selectionRow));
+        if (_model.Preferences.SelectedClasses.Length == 0) Add(ScheduleNotice("クラスが未選択です", "授業を表示するクラスを選んでください。", "クラスを選択", "people", ChooseClasses));
         else BuildWeekGrid(start);
         var weeklyEvents = Enumerable.Range(0, 7).Select(offset => start.AddDays(offset)).Select(day => (Day: day, Events: _model.Engine.Plan(day).Events)).Where(item => item.Events.Count > 0).ToArray();
         if (weeklyEvents.Length > 0)
         {
-            Add(Text("この週の学校行事", 22));
-            foreach (var item in weeklyEvents) Add(Text(item.Day.ToString("M/d（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP")) + " · " + DisplayText.FullWidthKana(string.Join("・", item.Events.Select(e => e.Title)))));
+            var events = Panel(ScheduleHeading("この週の学校行事", "calendar"));
+            foreach (var item in weeklyEvents) events.Children.Add(ScheduleDetailRow(item.Day.ToString("M/d（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP")), DisplayText.FullWidthKana(string.Join("・", item.Events.Select(e => e.Title)))));
+            Add(Card(events));
         }
-        if (_model.Data.Changes is null) Add(Text("時間割変更の解析結果がありません。"));
-        if (_model.SavedEventYears.Count == 0) Add(Text("学校行事は未取得です。"));
-        var list = new StackPanel { Spacing = 12 };
+        if (_model.Data.Changes is null) Add(ScheduleNotice("時間割変更を表示できません", "時間割変更ファイルを選択して、状況を確認してください。", "時間割ファイルを開く", "document", () => OpenPage("materials")));
+        if (_model.SavedEventYears.Count == 0) Add(ScheduleNotice("学校行事は未取得です", "学校行事を取得すると、授業のない日や試験の日を時間割に反映します。", "学校行事を取得", "calendar", () => OpenPage("events")));
+        var list = new StackPanel { Spacing = 16, Padding = new Thickness(16) };
         void AddChange(UIElement element) => list.Children.Add(element);
-        AddChange(Button("一覧のクラスを選択", () => ChooseClasses(changes: true)));
-        var range = new ComboBox { Header = "一覧の範囲", ItemsSource = new[] { "今日以降", "この週", "全件" }, SelectedIndex = (int)_model.Preferences.ChangeRange };
+        AddChange(IconButton("一覧のクラスを選択", "people", () => ChooseClasses(changes: true), "timetable-change-classes"));
+        var range = new ComboBox { Header = "表示する期間", ItemsSource = new[] { "今日以降", "この週", "全件" }, SelectedIndex = (int)_model.Preferences.ChangeRange, HorizontalAlignment = HorizontalAlignment.Stretch };
+        AutomationProperties.SetAutomationId(range, "timetable-change-range");
         range.SelectionChanged += async (_, _) => { if (range.SelectedIndex is >= 0 and <= 2 && range.SelectedIndex != (int)_model.Preferences.ChangeRange) { var value = (ChangeRange)range.SelectedIndex; await _model.SavePreferencesAsync(current => current with { ChangeRange = value }); } }; AddChange(range);
         var selected = (_model.Preferences.ChangeClasses.Length > 0 ? _model.Preferences.ChangeClasses : _model.Preferences.SelectedClasses).ToHashSet();
         var parsedClasses = (_model.Data.Timetable?.Lessons.Select(l => l.ClassName) ?? []).Concat(_model.Data.Changes?.Select(c => c.DisplayClassName) ?? []).ToHashSet();
-        if (_model.Preferences.ChangeClasses.Any(cls => !parsedClasses.Contains(cls))) AddChange(Text("保存した対象クラスの一部は現在の資料にありません。選択は保持しています。"));
-        if (_model.Preferences.ChangeClasses.Length > 0) AddChange(Button("時間割設定に戻す", () => _model.SavePreferencesAsync(current => current with { ChangeClasses = [] })));
+        if (_model.Preferences.ChangeClasses.Any(cls => !parsedClasses.Contains(cls))) AddChange(Text("選択したクラスの一部が、現在の時間割にありません。"));
+        if (_model.Preferences.ChangeClasses.Length > 0) AddChange(IconButton("時間割と同じクラスにする", "people", () => _model.SavePreferencesAsync(current => current with { ChangeClasses = [] })));
         var changes = _model.Engine.Changes(selected, _model.Preferences.ChangeRange, _model.Today, start).ToArray();
-        if (changes.Length == 0) AddChange(Text("この条件の時間割変更はありません。"));
-        foreach (var change in changes) AddChange(Button(change.ChangeDate + " · " + ClassSelection.Display(change.DisplayClassName) + " · " + change.DisplayPeriod + " · " + change.KindLabel + " · " + _model.Presentation.BeforeSubject(change) + " → " + (_model.Presentation.ChangeNames(change).After.Subject.Trim().Length == 0 ? "記載なし" : _model.Presentation.ChangeNames(change).After.Subject) + " · " + DisplayText.FullWidthKana(change.Note), () => ChangeDetail(change)));
-        var changeList = new Expander { Header = "時間割変更一覧（" + changes.Length + "件）", Content = list, HorizontalAlignment = HorizontalAlignment.Stretch, IsExpanded = _changesExpanded };
+        if (changes.Length == 0) AddChange(Text("この期間・クラスの時間割変更はありません。"));
+        for (var index = 0; index < changes.Length; index++) AddChange(ChangeListButton(changes[index], index));
+        var changeList = new Expander { Header = "時間割変更（" + changes.Length + "件）", Content = list, HorizontalAlignment = HorizontalAlignment.Stretch, IsExpanded = _changesExpanded };
         AutomationProperties.SetAutomationId(changeList, "timetable-change-list");
-        changeList.Expanding += (_, _) => _changesExpanded = true;
-        changeList.Collapsed += (_, _) => _changesExpanded = false;
-        Add(changeList);
+        changeList.Expanding += (_, _) => _changesExpanded = true; changeList.Collapsed += (_, _) => _changesExpanded = false; Add(changeList);
+    }
+    private Button ChangeListButton(ScheduleChange change, int index)
+    {
+        var before = ScheduleValue(_model.Presentation.BeforeSubject(change)); var after = ScheduleValue(_model.Presentation.ChangeNames(change).After.Subject);
+        var date = SchoolDate.TryParse(change.ChangeDate, out var day) ? day.ToString("M月d日（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP")) : change.ChangeDate;
+        var heading = Text(date + " · " + ClassSelection.Display(change.DisplayClassName) + " · " + change.DisplayPeriod, 14);
+        var kind = Text(change.KindLabel, 14); kind.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold; kind.Foreground = WarningBrush;
+        var changeNames = Text(before + " → " + after, 17); changeNames.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold;
+        var content = Panel(heading, kind, changeNames); content.Spacing = 6;
+        if (!string.IsNullOrWhiteSpace(change.Note) && change.Note.Trim() != change.KindLabel) content.Children.Add(Text(DisplayText.FullWidthKana(change.Note), 14));
+        foreach (var text in content.Children.OfType<TextBlock>()) text.IsTextSelectionEnabled = false;
+        var description = change.ChangeDate + "、" + ClassSelection.Display(change.DisplayClassName) + "、" + change.DisplayPeriod + "、" + change.KindLabel + "、" + before + "から" + after + "へ";
+        var button = Button(description, () => ChangeDetail(change), "timetable-change-" + index);
+        AutomationProperties.SetName(button, description);
+        var row = new Grid { ColumnSpacing = 16 }; row.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) }); row.ColumnDefinitions.Add(new() { Width = GridLength.Auto });
+        row.Children.Add(content); var arrow = FluentIcon("chevron-right", 18); arrow.VerticalAlignment = VerticalAlignment.Center; Grid.SetColumn(arrow, 1); row.Children.Add(arrow);
+        button.Content = row; button.HorizontalAlignment = HorizontalAlignment.Stretch; button.HorizontalContentAlignment = HorizontalAlignment.Stretch; button.Padding = new Thickness(16); button.MinHeight = 100;
+        return button;
     }
     private void BuildWeekGrid(DateOnly start)
     {
         var classes = _model.Preferences.SelectedClasses; var engine = _model.Engine;
         var days = engine.DisplayedDays(start, classes); var grid = new Grid { ColumnSpacing = 0, RowSpacing = 0 };
         var scale = Math.Max(1, _uiSettings.TextScaleFactor);
-        var timeWidth = 40.0 * scale;
-        var dayMinimum = Math.Max(58, classes.Length * 58) * scale;
+        var timeWidth = 84.0 * scale;
+        var dayMinimum = Math.Max(128, classes.Length * 128) * scale;
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(timeWidth) });
         foreach (var day in days) grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star), MinWidth = dayMinimum });
         grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
@@ -85,7 +114,7 @@ public sealed partial class MainWindow
         var timeLabels = new List<Border>();
         for (var period = 1; period <= 8; period++)
         {
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(72 * scale) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(100 * scale) });
             for (var column = 0; column <= days.Count; column++)
             {
                 var cell = new Border { BorderThickness = new Thickness(0, 0, 1, 1),
@@ -93,28 +122,28 @@ public sealed partial class MainWindow
                 Grid.SetRow(cell, period); Grid.SetColumn(cell, column); grid.Children.Add(cell);
             }
             var time = engine.CommonPeriodTime(period, days, classes);
-            var texts = new StackPanel { Spacing = 2, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
+            var texts = new StackPanel { Spacing = 6, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
             var periodLabel = Text(allNoClass ? "" : period + "限", 15); periodLabel.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold;
-            var clockLabel = Text(allNoClass ? "" : DisplayText.PeriodTime(time), 9);
+            var clockLabel = Text(allNoClass ? "" : DisplayText.PeriodTime(time), 12);
             AutomationProperties.SetAutomationId(periodLabel, "timetable-period-label-" + period);
             AutomationProperties.SetAutomationId(clockLabel, "timetable-clock-label-" + period);
             foreach (var label in new[] { periodLabel, clockLabel }) { label.TextAlignment = TextAlignment.Center; label.TextWrapping = TextWrapping.NoWrap; texts.Children.Add(label); }
-            var timeCell = new Border { Child = texts, Padding = new Thickness(6, 3, 6, 3) };
+            var timeCell = new Border { Child = texts, Padding = new Thickness(12, 10, 12, 10) };
             AutomationProperties.SetAutomationId(timeCell, "timetable-time-" + period);
             texts.Measure(new Windows.Foundation.Size(double.PositiveInfinity, double.PositiveInfinity));
-            timeWidth = Math.Max(timeWidth, Math.Ceiling(texts.DesiredSize.Width) + 12);
+            timeWidth = Math.Max(timeWidth, Math.Ceiling(texts.DesiredSize.Width) + 24);
             timeLabels.Add(timeCell); Grid.SetRow(timeCell, period); grid.Children.Add(timeCell);
         }
         for (var dayIndex = 0; dayIndex < days.Count; dayIndex++)
         {
             var day = days[dayIndex]; var plan = engine.Plan(day); var fullDay = engine.FullDayEventTitle(day, classes);
-            var header = Panel(Text(day.ToString("M/d（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP")), 15));
-            foreach (var schoolEvent in plan.HeaderEvents(fullDay is not null)) header.Children.Add(Text(DisplayText.FullWidthKana(schoolEvent.Title), 9));
-            foreach (var cls in classes) foreach (var message in engine.MissingMessages(day, cls)) header.Children.Add(Text(ClassSelection.Display(cls) + "：" + message, 9));
-            var dayHeader = Card(header); dayHeader.Padding = new Thickness(8);
+            var header = Panel(Text(day.ToString("M/d（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP")), 16));
+            foreach (var schoolEvent in plan.HeaderEvents(fullDay is not null)) header.Children.Add(Text(DisplayText.FullWidthKana(schoolEvent.Title), 12));
+            foreach (var cls in classes) foreach (var message in engine.MissingMessages(day, cls)) header.Children.Add(Text(ClassSelection.Display(cls) + "：" + message, 12));
+            var dayHeader = Card(header); dayHeader.Padding = new Thickness(12); dayHeader.Margin = new Thickness(3, 0, 3, 6); header.Spacing = 6;
             if (day == _model.Today)
             {
-                header.Children.Add(Text("今日", 12));
+                header.Children.Add(Text("今日", 13));
                 if (!_accessibility.HighContrast)
                 {
                     var color = _uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Accent);
@@ -126,10 +155,10 @@ public sealed partial class MainWindow
             if (fullDay is not null)
             {
                 var title = Text(fullDay, 14); title.FontWeight = Microsoft.UI.Text.FontWeights.Bold; title.TextAlignment = TextAlignment.Center;
-                var card = Card(title); card.Padding = new Thickness(3); fullDayCards.Add(card); Grid.SetColumn(card, dayIndex + 1); Grid.SetRow(card, 1); Grid.SetRowSpan(card, 8); grid.Children.Add(card); continue;
+                var card = Card(title); card.Padding = new Thickness(16); card.Margin = new Thickness(3); fullDayCards.Add(card); Grid.SetColumn(card, dayIndex + 1); Grid.SetRow(card, 1); Grid.SetRowSpan(card, 8); grid.Children.Add(card); continue;
             }
             var cellGrid = new Grid { ColumnSpacing = 0, RowSpacing = 0 };
-            for (var period = 1; period <= 8; period++) cellGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(72 * scale) });
+            for (var period = 1; period <= 8; period++) cellGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(100 * scale) });
             var offset = 0;
             foreach (var cls in classes)
             {
@@ -143,24 +172,24 @@ public sealed partial class MainWindow
                 for (var period = 1; period <= 8; period++)
                 {
                     if (positioned.Any(p => p.Block.StartPeriod <= period && p.Block.EndPeriod >= period)) continue;
-                    var empty = Text("—", 11); empty.TextAlignment = TextAlignment.Center; empty.VerticalAlignment = VerticalAlignment.Center;
+                    var empty = Text("—", 14); empty.TextAlignment = TextAlignment.Center; empty.VerticalAlignment = VerticalAlignment.Center;
                     Grid.SetColumn(empty, offset); Grid.SetColumnSpan(empty, lanes); Grid.SetRow(empty, period - 1); cellGrid.Children.Add(empty);
                 }
                 offset += lanes;
             }
-            grid.ColumnDefinitions[dayIndex + 1].MinWidth = 58 * Math.Max(1, cellGrid.ColumnDefinitions.Count) * scale;
+            grid.ColumnDefinitions[dayIndex + 1].MinWidth = 128 * Math.Max(1, cellGrid.ColumnDefinitions.Count) * scale;
             nestedRows.Add(cellGrid);
             Grid.SetColumn(cellGrid, dayIndex + 1); Grid.SetRow(cellGrid, 1); Grid.SetRowSpan(cellGrid, 8); grid.Children.Add(cellGrid);
         }
         grid.ColumnDefinitions[0].Width = new GridLength(timeWidth);
         void FitRows()
         {
-            var heights = Enumerable.Repeat(allNoClass ? 9.0 * scale : 72.0 * scale, 8).ToArray();
+            var heights = Enumerable.Repeat(allNoClass ? 12.5 * scale : 100.0 * scale, 8).ToArray();
             for (var row = 0; !allNoClass && row < timeLabels.Count; row++)
             {
                 // Measure the content without the previous fixed row constraint.
-                timeLabels[row].Child.Measure(new Windows.Foundation.Size(Math.Max(1, timeWidth - 12), double.PositiveInfinity));
-                heights[row] = Math.Max(heights[row], Math.Ceiling(timeLabels[row].Child.DesiredSize.Height) + 6);
+                timeLabels[row].Child.Measure(new Windows.Foundation.Size(Math.Max(1, timeWidth - 24), double.PositiveInfinity));
+                heights[row] = Math.Max(heights[row], Math.Ceiling(timeLabels[row].Child.DesiredSize.Height) + 20);
             }
             foreach (var cells in nestedRows)
                 foreach (var button in cells.Children.OfType<Button>())
@@ -193,14 +222,15 @@ public sealed partial class MainWindow
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(scroll, "timetable-grid-scroller");
         void FitWidth()
         {
-            // ViewportHeight can still describe the previous page during a
-            // content swap. Use the arranged host size so removing the
-            // navigation header and resizing both expand the timetable.
-            scroll.Height = Math.Max(260, PageScroller.ActualHeight - 144);
+            // Keep the viewport within the space below the actual week
+            // controls, including text scaling and the page's bottom padding.
+            var top = scroll.TransformToVisual(PageContent).TransformPoint(new Windows.Foundation.Point(0, 0)).Y;
+            var height = Math.Max(160, PageScroller.ActualHeight - top - PageContent.Padding.Bottom);
+            if (Math.Abs(scroll.Height - height) > 0.5 || double.IsNaN(scroll.Height)) scroll.Height = height;
             foreach (var label in timeLabels)
             {
                 label.Child.Measure(new Windows.Foundation.Size(double.PositiveInfinity, double.PositiveInfinity));
-                timeWidth = Math.Max(timeWidth, Math.Ceiling(label.Child.DesiredSize.Width) + 12);
+                timeWidth = Math.Max(timeWidth, Math.Ceiling(label.Child.DesiredSize.Width) + 24);
             }
             grid.ColumnDefinitions[0].Width = new GridLength(timeWidth);
             var minimum = timeWidth + grid.ColumnDefinitions.Skip(1).Sum(column => column.MinWidth);
@@ -210,6 +240,15 @@ public sealed partial class MainWindow
         scroll.Loaded += (_, _) => FitWidth(); scroll.SizeChanged += (_, _) => FitWidth();
         Microsoft.UI.Xaml.SizeChangedEventHandler resize = (_, _) => FitWidth();
         PageScroller.SizeChanged += resize; scroll.Unloaded += (_, _) => PageScroller.SizeChanged -= resize;
+        void FitViewportAfterLayout(object? sender, object args)
+        {
+            if (_timetableScroller != scroll) return;
+            var top = scroll.TransformToVisual(PageContent).TransformPoint(new Windows.Foundation.Point(0, 0)).Y;
+            var height = Math.Max(160, PageScroller.ActualHeight - top - PageContent.Padding.Bottom);
+            if (Math.Abs(scroll.Height - height) > 0.5 || double.IsNaN(scroll.Height)) scroll.Height = height;
+        }
+        scroll.LayoutUpdated += FitViewportAfterLayout;
+        scroll.Unloaded += (_, _) => scroll.LayoutUpdated -= FitViewportAfterLayout;
         _timetableScroller = scroll;
         _timetableScrollKey = start.Iso() + ":" + string.Join(",", classes);
         _restoringTimetableScroll = _timetableScrollPosition is { } position && position.Key == _timetableScrollKey;
@@ -224,10 +263,11 @@ public sealed partial class MainWindow
         {
             void LayoutDiagnostic(object? sender, object args)
             {
+                if (_timetableScroller != scroll || Math.Abs(scroll.ActualHeight - scroll.Height) > 0.5) return;
                 // Expose only geometry from the isolated fake-data UI test.
                 // ScrollViewer's UIA bounds may include unclipped content.
                 var pageOrigin = PageScroller.TransformToVisual(RootGrid).TransformPoint(new Windows.Foundation.Point(0, 0));
-                var geometry = FormattableString.Invariant($"Synthetic layout: root={RootGrid.ActualWidth:R},{RootGrid.ActualHeight:R}; page={PageScroller.ActualWidth:R},{PageScroller.ActualHeight:R}; viewport={PageScroller.ViewportWidth:R},{PageScroller.ViewportHeight:R}; pageOrigin={pageOrigin.X:R},{pageOrigin.Y:R}; host={PageHost.ActualWidth:R},{PageHost.ActualHeight:R}; table={scroll.ActualWidth:R},{scroll.ActualHeight:R}; tableHeight={scroll.Height:R}; scale={RootGrid.XamlRoot.RasterizationScale:R}");
+                var geometry = FormattableString.Invariant($"Synthetic layout: root={RootGrid.ActualWidth:R},{RootGrid.ActualHeight:R}; page={PageScroller.ActualWidth:R},{PageScroller.ActualHeight:R}; viewport={PageScroller.ViewportWidth:R},{PageScroller.ViewportHeight:R}; pageOrigin={pageOrigin.X:R},{pageOrigin.Y:R}; host={PageHost.ActualWidth:R},{PageHost.ActualHeight:R}; table={scroll.ActualWidth:R},{scroll.ActualHeight:R}; tableHeight={scroll.Height:R}; tableTop={scroll.TransformToVisual(PageContent).TransformPoint(new Windows.Foundation.Point(0, 0)).Y:R}; pageBottomPadding={PageContent.Padding.Bottom:R}; textScale={_uiSettings.TextScaleFactor:R}; scale={RootGrid.XamlRoot.RasterizationScale:R}");
                 if (AutomationProperties.GetName(scroll) != geometry) AutomationProperties.SetName(scroll, geometry);
             }
             scroll.LayoutUpdated += LayoutDiagnostic;
@@ -240,9 +280,18 @@ public sealed partial class MainWindow
     {
         var available = changes ? ClassSelection.Candidates.Concat(_model.Preferences.ChangeClasses).Concat(_model.Data.Changes?.Select(c => c.DisplayClassName) ?? []).Distinct().Order().ToArray() : ClassSelection.Candidates.ToArray();
         var selected = (changes ? _model.Preferences.ChangeClasses : _model.Preferences.SelectedClasses).ToHashSet();
-        var checks = available.Select(cls => new CheckBox { Content = ClassSelection.Display(cls), Tag = cls, IsChecked = selected.Contains(cls) }).ToArray();
-        foreach (var check in checks) AutomationProperties.SetAutomationId(check, "class-" + (string)check.Tag);
-        var warning = Text(changes ? "時間割の選択と独立した一覧専用のクラスです。" : "基本は1クラスです。1年生はホームルームと学科を1つずつ組み合わせられます。");
+        var checks = available.Select(cls =>
+        {
+            var label = Text(ClassSelection.Display(cls), 16); label.IsTextSelectionEnabled = false;
+            return new CheckBox { Content = label, Tag = cls, IsChecked = selected.Contains(cls), MinHeight = 40,
+                HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0, 4, 0, 4) };
+        }).ToArray();
+        foreach (var check in checks)
+        {
+            AutomationProperties.SetAutomationId(check, "class-" + (string)check.Tag);
+            AutomationProperties.SetName(check, ClassSelection.Display((string)check.Tag));
+        }
+        var warning = Text(changes ? "変更一覧に表示するクラスを選んでください。時間割とは別に選べます。" : "クラスを1つ選んでください。1年生はホームルームと学科を1つずつ組み合わせて選べます。");
         if (changes)
         {
             foreach (var check in checks) check.Checked += (_, _) => { if (checks.Count(c => c.IsChecked == true) > 30) { check.IsChecked = false; warning.Text = "選択できるクラスは30件までです。"; } };
@@ -274,8 +323,15 @@ public sealed partial class MainWindow
                 actions.Children.Add(Button("すべて解除", () => { foreach (var check in groupChecks) check.IsChecked = false; return Task.CompletedTask; }, "class-group-clear-" + group.Key));
                 groupHeader.Children.Add(actions);
             }
-            choices.Children.Add(groupHeader);
-            foreach (var check in group) choices.Children.Add(check);
+            var groupChoices = new Grid { ColumnSpacing = 12 };
+            for (var column = 0; column < 3; column++) groupChoices.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) });
+            var position = 0;
+            foreach (var check in group)
+            {
+                if (position % 3 == 0) groupChoices.RowDefinitions.Add(new() { Height = GridLength.Auto });
+                Grid.SetColumn(check, position % 3); Grid.SetRow(check, position / 3); groupChoices.Children.Add(check); position++;
+            }
+            choices.Children.Add(Card(Panel(groupHeader, groupChoices)));
         }
         if (await Dialog(changes ? "変更一覧のクラス" : "時間割のクラス", choices, "保存", "キャンセル") == ContentDialogResult.Primary)
         {

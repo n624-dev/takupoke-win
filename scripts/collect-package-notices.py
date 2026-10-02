@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import re
+import shutil
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -37,10 +38,30 @@ def verify_build_only_package(name: str, version: str, folder: Path, output: Pat
     return True
 
 
-def collect(packages: Path, output: Path, license_templates: Path):
+def append_icon_notices(sections: list[str], asset_notices: Path, output: Path):
+    license_file = asset_notices / "LICENSE.txt"
+    source_file = asset_notices / "SOURCE.json"
+    if not license_file.is_file() or not source_file.is_file():
+        raise ValueError("The icon asset license and source provenance are required.")
+    source = json.loads(source_file.read_text(encoding="utf-8-sig"))
+    repository = source.get("repository", "")
+    commit = source.get("commit", "")
+    if repository != "https://github.com/microsoft/fluentui-system-icons" or not re.fullmatch(r"[a-f0-9]{40}", commit) or source.get("license") != "MIT":
+        raise ValueError("Icon source provenance must identify the official repository and a pinned commit.")
+    original = license_file.read_text(encoding="utf-8-sig")
+    if not original.strip():
+        raise ValueError("The original icon asset license text is empty.")
+    sections.append(f"\n{'=' * 72}\nFluent UI System Icons\n{repository}/tree/{commit}\n\n" + original)
+    destination = output / "Licenses"
+    destination.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(license_file, destination / "FluentSystemIcons.txt")
+    shutil.copyfile(source_file, destination / "FluentSystemIcons-source.json")
+
+
+def collect(packages: Path, output: Path, license_templates: Path, asset_notices: Path | None = None):
     packages = packages.resolve()
     output.mkdir(parents=True, exist_ok=True)
-    sections = ["Third-party software included or used when building Takupoke Win.\n"
+    sections = ["Third-party software included or used when building たくポケ.\n"
                 "Each package retains its own license; this document does not license the app itself.\n"]
     count = 0
     for spec in sorted(packages.glob("*/*/*.nuspec")):
@@ -97,6 +118,8 @@ def collect(packages: Path, output: Path, license_templates: Path):
         count += 1
     if count == 0:
         raise ValueError("No restored package notices were found.")
+    if asset_notices is not None:
+        append_icon_notices(sections, asset_notices, output)
     (output / "THIRD-PARTY-NOTICES.txt").write_text("\n".join(sections), encoding="utf-8")
     print(f"Collected original license notices for {count} restored packages.")
 
@@ -106,5 +129,6 @@ if __name__ == "__main__":
     parser.add_argument("packages", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("license_templates", type=Path)
+    parser.add_argument("--asset-notices", type=Path, help="Public Fluent icon license and pinned source provenance directory.")
     args = parser.parse_args()
-    collect(args.packages, args.output, args.license_templates)
+    collect(args.packages, args.output, args.license_templates, args.asset_notices)

@@ -18,6 +18,31 @@ public sealed class MaterialCoordinatorTests
         public void Dispose() => _cipher.Dispose();
     }
     [Fact]
+    public async Task DeletedOriginalReportsUnavailableAndKeepsAcceptedDataAndSavedCopy()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-material-tests-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root); using var protector = new Protector();
+        try
+        {
+            var path = Path.Combine(root, "fictional.xlsx");
+            var bytes = XlsxChangeReaderTests.Workbook();
+            await File.WriteAllBytesAsync(path, bytes);
+            await using var store = new SchoolDataStore(Path.Combine(root, "data"), protector);
+            var coordinator = new MaterialCoordinator(store, new(new FakeIdentity()));
+            Assert.True((await coordinator.SelectAsync(MaterialKind.Changes, path, 2032)).Parsed);
+            var lease = await store.BeginAsync();
+            var accepted = await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes");
+            File.Delete(path);
+            var result = await coordinator.RefreshAsync(MaterialKind.Changes, 2032);
+            Assert.Equal(new SourceException(SourceFailure.Unavailable).Message, result.Error);
+            Assert.False(result.Changed);
+            Assert.Equal(accepted!.OriginalId, (await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes"))!.OriginalId);
+            Assert.Equal(bytes, await store.ReadOriginalAsync(lease, accepted.OriginalId));
+            Assert.Equal(result.Error, (await store.ReadAsync<MaterialAttempt>(lease, "acquisition.Changes"))!.Failure);
+        }
+        finally { Directory.Delete(root, recursive: true); }
+    }
+    [Fact]
     public async Task ChangedButInvalidXlsxRetainsPreviousAcceptedAnalysisAndBothOriginals()
     {
         var root = Path.Combine(Path.GetTempPath(), "takupoke-material-tests-" + Guid.NewGuid().ToString("N"));

@@ -204,7 +204,7 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
         {
             if (data.Timetable is null) result.Add("通常時間割の解析結果がありません。");
             else if (data.Timetable.ApplicableRange is not { } range) result.Add("通常時間割の学期を確認できません。再解析してください。");
-            else if (!range.Contains(day)) result.Add("今日に適用できる通常時間割がありません。");
+            else if (!range.Contains(day)) result.Add("この日に適用できる通常時間割がありません。");
             else if (!data.Timetable.Lessons.Any(l => l.ClassName == className)) result.Add("このクラスの通常時間割がありません。");
         }
         return result;

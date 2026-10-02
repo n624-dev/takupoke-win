@@ -10,7 +10,7 @@ public sealed class SourceException(SourceFailure failure) : Exception(failure s
     SourceFailure.Changing => "資料が書き換え中または同期中です。少し待ってから再確認してください。",
     SourceFailure.Invalid => "選択した資料の形式を確認できませんでした。",
     SourceFailure.Limit => "資料のサイズが上限を超えています。",
-    _ => "原本を読み取れません。移動・削除・アクセス権・OneDriveの保持設定を確認してください。"
+    _ => "原本を読み取れません。ファイルの移動・削除・アクセス権・同期ソフトの設定を確認してください。"
 }) { public SourceFailure Failure { get; } = failure; }
 public interface IFileIdentityProvider { string Identity(FileStream stream); }
 public sealed record SourceContent(byte[] Bytes, string Identity, DateTimeOffset ModifiedAt) : IDisposable
@@ -28,6 +28,7 @@ public sealed class FileSourceReader(IFileIdentityProvider identity)
         {
             token.ThrowIfCancellationRequested();
             var file = new FileInfo(path); file.Refresh();
+            if (!file.Exists) throw new SourceException(SourceFailure.Unavailable);
             if ((file.Attributes & FileAttributes.Directory) != 0 || file.LinkTarget is not null
                 || !file.Extension.Equals(kind == MaterialKind.Changes ? ".xlsx" : ".pdf", StringComparison.OrdinalIgnoreCase)
                 || kind == MaterialKind.Changes && file.Name.StartsWith("~$", StringComparison.Ordinal)) throw new SourceException(SourceFailure.Invalid);
@@ -36,7 +37,8 @@ public sealed class FileSourceReader(IFileIdentityProvider identity)
             var initialIdentity = identity.Identity(input);
             if (string.IsNullOrEmpty(initialIdentity) || expectedIdentity is not null && initialIdentity != expectedIdentity) throw new SourceException(SourceFailure.Replaced);
             var initialLength = input.Length; var initialTime = file.LastWriteTimeUtc;
-            if (initialLength is < 1 or > MaximumBytes) throw new SourceException(SourceFailure.Limit);
+            if (initialLength < 1) throw new SourceException(SourceFailure.Invalid);
+            if (initialLength > MaximumBytes) throw new SourceException(SourceFailure.Limit);
             var bytes = new byte[(int)initialLength];
             try
             {

@@ -16,20 +16,20 @@ public sealed partial class MainWindow
         var inProgress = home && engine.IsInProgress(day, cls, block, DateTimeOffset.UtcNow);
         var change = (block.Content as ChangeContent)?.Change;
         var button = Button(names.Subject, () => LessonDetail(day, cls, block));
-        var content = new StackPanel { Spacing = home ? 4 : 1, HorizontalAlignment = home ? HorizontalAlignment.Stretch : HorizontalAlignment.Center };
-        if (change is not null) { var kind = Text(change.KindLabel, home ? 12 : 9); kind.Foreground = WarningBrush; content.Children.Add(kind); }
+        var content = new StackPanel { Spacing = home ? 6 : 4, HorizontalAlignment = home ? HorizontalAlignment.Stretch : HorizontalAlignment.Center };
+        if (change is not null) { var kind = Text(change.KindLabel, home ? 13 : 12); kind.Foreground = WarningBrush; content.Children.Add(kind); }
         if (inProgress) { var progress = Text("授業中", 12); progress.Foreground = ActionBrush; content.Children.Add(progress); }
         if (change?.IsCancellation != true)
         {
             var source = names.Subject.Trim().Length == 0 ? "変更を確認" : names.Subject.Trim();
-            var subject = Text(home ? DisplayText.Continuous(source) : DisplayText.CellSubject(source), home ? 17 : 11);
+            var subject = Text(home ? DisplayText.Continuous(source) : DisplayText.CellSubject(source), home ? 20 : 14);
             if (!home) { subject.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold; subject.MaxLines = 2; subject.TextTrimming = TextTrimming.CharacterEllipsis; }
             if (change is not null && !home)
             {
-                subject.SizeChanged += (_, _) =>
+                button.SizeChanged += (_, _) =>
                 {
                     var shortName = _model.Mappings?.ShortSubject(change, _model.Data.Timetable?.Lessons ?? []);
-                    var width = subject.ActualWidth;
+                    var width = button.ActualWidth - button.Padding.Left - button.Padding.Right - button.BorderThickness.Left - button.BorderThickness.Right;
                     if (width <= 0) return;
                     bool Fits(string value)
                     {
@@ -44,12 +44,12 @@ public sealed partial class MainWindow
             }
             content.Children.Add(subject);
         }
-        if (showTime && !home && time is not null) content.Children.Add(Text(time.Display, 9));
+        if (showTime && !home && time is not null) content.Children.Add(Text(time.Display, 12));
         var teacher = block.Content is SpecialContent && !home ? names.Teacher : DisplayText.Metadata(names.Teacher);
         var room = block.Content is SpecialContent && !home ? names.Room : DisplayText.Metadata(names.Room);
         foreach (var metadata in new[] { teacher, room }.Where(value => value.Length > 0))
         {
-            var text = Text(DisplayText.Continuous(metadata), home ? 14 : 9);
+            var text = Text(DisplayText.Continuous(metadata), home ? 15 : 12);
             if (!home) { text.MaxLines = 1; text.TextTrimming = TextTrimming.CharacterEllipsis; }
             content.Children.Add(text);
         }
@@ -58,14 +58,18 @@ public sealed partial class MainWindow
         {
             foreach (var text in content.Children.OfType<TextBlock>()) text.TextAlignment = TextAlignment.Center;
             if (change is not null) button.Foreground = WarningBrush;
-            button.Content = content; button.Padding = new Thickness(4, 3, 4, 3);
+            button.Content = content; button.Padding = new Thickness(12, 10, 12, 10); button.Margin = new Thickness(3); button.CornerRadius = new CornerRadius(10);
             button.VerticalContentAlignment = VerticalAlignment.Center;
         }
         else
         {
-            var row = new Grid { ColumnSpacing = 12 }; row.ColumnDefinitions.Add(new() { Width = GridLength.Auto }); row.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) });
-            var timeLabel = Text(DisplayText.PeriodTime(time), 13); timeLabel.IsTextSelectionEnabled = false; timeLabel.TextAlignment = TextAlignment.Center; timeLabel.MinWidth = 60;
-            row.Children.Add(timeLabel); Grid.SetColumn(content, 1); row.Children.Add(content); button.Content = row;
+            var row = new Grid { ColumnSpacing = 20 }; row.ColumnDefinitions.Add(new() { Width = GridLength.Auto }); row.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) });
+            var timeColumn = new StackPanel { Spacing = 6, MinWidth = 84, VerticalAlignment = VerticalAlignment.Center };
+            var periodLabel = Text(PeriodCaption(block.StartPeriod, block.EndPeriod), 13); periodLabel.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold;
+            var timeLabel = Text(DisplayText.PeriodTime(time), 14);
+            foreach (var text in new[] { periodLabel, timeLabel }) { text.IsTextSelectionEnabled = false; text.TextAlignment = TextAlignment.Center; timeColumn.Children.Add(text); }
+            row.Children.Add(timeColumn); Grid.SetColumn(content, 1); row.Children.Add(content); button.Content = row;
+            button.Padding = new Thickness(20, 16, 20, 16); button.MinHeight = 112; button.CornerRadius = new CornerRadius(10);
             if (inProgress) { button.BorderThickness = new Thickness(3, 0, 0, 0); button.BorderBrush = ActionBrush; }
         }
         button.HorizontalAlignment = HorizontalAlignment.Stretch; button.HorizontalContentAlignment = HorizontalAlignment.Stretch;
@@ -74,44 +78,71 @@ public sealed partial class MainWindow
             + DisplayText.Accessibility(names, time, change?.KindLabel) + (inProgress ? "、授業中" : ""));
         return button;
     }
+    private static string PeriodCaption(int start, int end) => start == end ? start + "限" : $"{start}〜{end}限";
+    private static string ScheduleValue(string value) => string.IsNullOrWhiteSpace(value) ? "記載なし" : DisplayText.Continuous(value);
+    private StackPanel ScheduleHeading(string title, string icon)
+    {
+        var heading = Text(title, 22); heading.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold;
+        return new StackPanel { Orientation = Orientation.Horizontal, Spacing = 12, Children = { FluentIcon(icon, 22), heading } };
+    }
+    private Border ScheduleNotice(string title, string message, string action, string icon, Func<Task> run)
+    {
+        var heading = Text(title, 18); heading.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold;
+        return Card(Panel(heading, Text(message), IconButton(action, icon, run)));
+    }
+    private static Grid ScheduleDetailRow(string label, string value)
+    {
+        var row = new Grid { ColumnSpacing = 20, Margin = new Thickness(0, 4, 0, 4) };
+        row.ColumnDefinitions.Add(new() { Width = new GridLength(92) }); row.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) });
+        var caption = Text(label); caption.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
+        row.Children.Add(caption); var detail = Text(value); Grid.SetColumn(detail, 1); row.Children.Add(detail); return row;
+    }
     private void BuildHome()
     {
-        TitleText("ホーム", "page-home"); Add(Text(_model.Today.ToString("yyyy年M月d日（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP")), 20));
-        Add(OperationButton("資料と更新情報を確認", _model.RefreshAsync, "refresh-home"));
+        TitleText("ホーム", "page-home");
+        Add(Text(_model.Today.ToString("yyyy年M月d日（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP")), 18));
+        Add(OperationControl(IconButton("更新を確認", "refresh", _model.RefreshAsync, "refresh-home")));
         var updates = _model.Revisions.Where(p => p.Value.Changed && (p.Key == DataSet.Times || p.Key == DataSet.Links && _model.Links is not null || p.Key == DataSet.Mapping && _model.Mappings is not null)).Select(p => AppViewModel.DataSetLabel(p.Key)).ToArray();
-        if (updates.Length > 0) Add(Card(Panel(Text(string.Join("・", updates) + "のデータを取得・更新できます。"), Button("データの更新を確認", () => OpenPage("account")))));
+        if (updates.Length > 0) Add(ScheduleNotice("新しいデータがあります", string.Join("・", updates) + "を取得できます。", "データを取得", "download", () => OpenPage("account")));
+        if (_model.RevisionFailures.Count > 0) Add(ScheduleNotice("更新を確認できませんでした", "通信状況を確認して、もう一度お試しください。保存済みのデータはそのまま使えます。", "もう一度確認", "refresh", _model.RefreshAsync));
         var classes = _model.Preferences.SelectedClasses;
         if (_model.EventSourceMessage is { } eventWarning) Add(Card(Text(eventWarning)));
         if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
-        if (classes.Length == 0) Add(Card(Panel(Text("今日の授業を表示するには、クラスを選択してください。"), Button("クラスを選択", ChooseClasses))));
-        var engine = _model.HomeEngine; var day = _model.Today; var fullDay = engine.FullDayEventTitle(day, classes);
-        var plan = engine.Plan(day);
-        var eventTitles = plan.Events.Select(e => e.Title).ToArray();
-        if (eventTitles.Length > 0) Add(Text(DisplayText.FullWidthKana(string.Join("・", eventTitles))));
-        if (classes.Length > 0 && _model.Data.Changes is null) Add(Text("時間割変更の解析結果がありません。"));
-        if (classes.Length > 0 && _model.SavedEventYears.Count == 0) Add(Text("学校行事は未取得です。"));
-        foreach (var cls in classes)
+        if (classes.Length == 0) Add(ScheduleNotice("クラスを選んでください", "クラスを選ぶと、今日の授業をここに表示します。", "クラスを選択", "people", ChooseClasses));
+        var engine = _model.HomeEngine; var day = _model.Today;
+        var eventTitles = engine.Plan(day).Events.Select(e => e.Title).ToArray();
+        if (eventTitles.Length > 0) Add(Card(Panel(ScheduleHeading("今日の学校行事", "calendar"), Text(DisplayText.FullWidthKana(string.Join("・", eventTitles))))));
+        if (classes.Length > 0)
         {
-            Add(Text(ClassSelection.Display(cls), 16));
-            var missing = engine.MissingMessages(day, cls); var blocks = engine.Blocks(day, cls);
-            if (missing.Count == 0 && blocks.Count == 0 && _model.Data.Changes is not null && _model.SavedEventYears.Count > 0) Add(Text("授業はありません。"));
-            foreach (var message in missing) Add(Text(ClassSelection.Display(cls) + "：" + message));
-            foreach (var block in blocks) Add(LessonButton(day, cls, block, home: true));
+            Add(ScheduleHeading("今日の授業", "calendar"));
+            foreach (var cls in classes)
+            {
+                var heading = Text(ClassSelection.Display(cls), 18); heading.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold;
+                var group = Panel(heading); var missing = engine.MissingMessages(day, cls); var blocks = engine.Blocks(day, cls);
+                if (missing.Count == 0 && blocks.Count == 0 && _model.Data.Changes is not null && _model.SavedEventYears.Count > 0) group.Children.Add(Text("今日は授業がありません。"));
+                foreach (var message in missing) group.Children.Add(Text(message));
+                if (missing.Count > 0) group.Children.Add(IconButton("時間割ファイルを確認", "document", () => OpenPage("materials")));
+                foreach (var block in blocks) group.Children.Add(LessonButton(day, cls, block, home: true));
+                Add(Card(group));
+            }
+            if (_model.Data.Changes is null) Add(ScheduleNotice("時間割変更を表示できません", "時間割変更ファイルを選択して、状況を確認してください。", "時間割ファイルを開く", "document", () => OpenPage("materials")));
+            if (_model.SavedEventYears.Count == 0) Add(ScheduleNotice("学校行事は未取得です", "学校行事を取得すると、授業のない日や試験の日を時間割に反映します。", "学校行事を取得", "calendar", () => OpenPage("events")));
         }
-        Add(AccentButton("時間割を見る", () => { _model.OpenTodayWeek(); Navigation.SelectedItem = Navigation.MenuItems[2]; return Task.CompletedTask; }, "home-timetable"));
+        Add(IconButton("時間割を見る", "calendar", () => { _model.OpenTodayWeek(); Navigation.SelectedItem = Navigation.MenuItems[2]; return Task.CompletedTask; }, "home-timetable"));
         var favorites = _model.Links?.Items.Where(i => i.Visible && _model.Preferences.FavoriteIds.Contains(i.Id) && !_model.Preferences.HiddenIds.Contains(i.Id)).ToArray() ?? [];
-        if (favorites.Length > 0) Add(Text("お気に入り", 21));
-        foreach (var item in favorites) Add(LinkButton(item));
+        if (favorites.Length > 0) { Add(ScheduleHeading("お気に入り", "star")); foreach (var item in favorites) Add(LinkButton(item)); }
         var recommended = _model.Links?.Recommendations(_model.Preferences.HiddenIds).ToArray() ?? [];
-        if (recommended.Length > 0) { Add(Text("おすすめ", 21)); foreach (var item in recommended) Add(LinkButton(item)); }
+        if (recommended.Length > 0) { Add(ScheduleHeading("おすすめ", "link")); foreach (var item in recommended) Add(LinkButton(item)); }
     }
     private async Task LessonDetail(DateOnly day, string cls, ScheduleBlock block)
     {
         if (block.Content is ChangeContent change) { await ChangeDetail(change.Change); return; }
         var names = _model.Presentation.Names(cls, block); var time = _model.Engine.CardTime(day, cls, block);
-        var panel = Panel(Text(DisplayText.Continuous(names.DetailSubject), 22), Text($"{day:yyyy/M/d} · {ClassSelection.Display(cls)} · {block.StartPeriod}〜{block.EndPeriod}限"),
-            Text("時刻：" + (time?.Display ?? "未確認")), Text("教員：" + (names.DetailTeacher.Length > 0 ? DisplayText.Continuous(names.DetailTeacher) : "記載なし")),
-            Text("教室：" + (names.DetailRoom.Length > 0 ? DisplayText.Continuous(names.DetailRoom) : "記載なし")),
+        var panel = Panel(Text(ScheduleValue(names.DetailSubject), 24),
+            ScheduleDetailRow("日付", day.ToString("yyyy年M月d日（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP"))),
+            ScheduleDetailRow("クラス", ClassSelection.Display(cls)), ScheduleDetailRow("時限", PeriodCaption(block.StartPeriod, block.EndPeriod)),
+            ScheduleDetailRow("時刻", time?.Display ?? "未確認"), ScheduleDetailRow("教員", ScheduleValue(names.DetailTeacher)),
+            ScheduleDetailRow("教室", ScheduleValue(names.DetailRoom)),
             new Expander { Header = "PDFの記載名", Content = Text($"科目：{names.Subject}\n教員：{names.Teacher}\n教室：{names.Room}") });
         if (block.Content is NormalContent normal) panel.Children.Add(new Expander { Header = "元のセルの記載", Content = Text(normal.Lesson.SourceText) });
         if (block.Content is SpecialContent special) panel.Children.Add(new Expander { Header = "元のセルの記載", Content = Text(string.Join("\n", special.Lesson.Lines)) });
@@ -120,10 +151,12 @@ public sealed partial class MainWindow
     private async Task ChangeDetail(ScheduleChange change)
     {
         var presentation = _model.Presentation.ChangeNames(change);
-        var panel = Panel(Text(change.KindLabel + " · " + change.ChangeDate + " · " + ClassSelection.Display(change.DisplayClassName) + " · " + change.DisplayPeriod, 20),
-            Text("変更前：" + DisplayText.Continuous(_model.Presentation.BeforeSubject(change, detail: true))), Text("変更後：" + DisplayText.Continuous(presentation.After.DetailSubject)),
-            Text("教員：" + DisplayText.Continuous(presentation.After.DetailTeacher)), Text("教室：" + DisplayText.Continuous(presentation.After.DetailRoom)),
-            Text("備考：" + DisplayText.FullWidthKana(change.Note)), Text("時刻：" + string.Join(" / ", _model.Engine.ChangeTimes(change).Select(t => t?.Display ?? "未確認"))));
+        var panel = Panel(Text(change.KindLabel, 24), ScheduleDetailRow("日付", SchoolDate.TryParse(change.ChangeDate, out var changedDay) ? changedDay.ToString("yyyy年M月d日（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP")) : change.ChangeDate),
+            ScheduleDetailRow("クラス", ClassSelection.Display(change.DisplayClassName)), ScheduleDetailRow("時限", change.DisplayPeriod),
+            ScheduleDetailRow("変更前", ScheduleValue(_model.Presentation.BeforeSubject(change, detail: true))),
+            ScheduleDetailRow("変更後", ScheduleValue(presentation.After.DetailSubject)), ScheduleDetailRow("教員", ScheduleValue(presentation.After.DetailTeacher)),
+            ScheduleDetailRow("教室", ScheduleValue(presentation.After.DetailRoom)), ScheduleDetailRow("備考", ScheduleValue(change.Note)),
+            ScheduleDetailRow("時刻", string.Join(" / ", _model.Engine.ChangeTimes(change).Select(t => t?.Display ?? "未確認")) is { Length: > 0 } times ? times : "未確認"));
         if (presentation.Before.DetailTeacher.Length > 0) panel.Children.Add(Text("変更前の教員：" + DisplayText.FullWidthKana(presentation.Before.DetailTeacher)));
         if (presentation.Before.DetailRoom.Length > 0) panel.Children.Add(Text("変更前の教室：" + DisplayText.FullWidthKana(presentation.Before.DetailRoom)));
         if (change.BeforeSubject.Length == 0 && _model.Presentation.NormalOriginals(change).Count > 0) panel.Children.Add(Text("変更前は通常時間割から表示しています。"));

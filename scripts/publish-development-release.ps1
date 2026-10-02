@@ -10,28 +10,25 @@ $notes = Join-Path $env:TAKUPOKE_CI_TEMP 'release-notes.txt'
 @"
 Windowsでビルドせずに導入できる開発確認版です。初回正式版ではありません。
 
-通常のIntel/AMD PCは win-x64-Setup.exe、Windows on Armは win-arm64-Setup.exe を実行してください。
-スタートメニューの「たくポケ Win」から起動できます。.NET・Windows App SDK・VCランタイムを同梱しています。
+通常のIntel/AMD PCは takupoke-$Version-x64-Setup.exe、Windows on Armは takupoke-$Version-arm64-Setup.exe を実行してください。
+スタートメニューの「たくポケ」から起動できます。.NET・Windows App SDK・VCランタイムを同梱しています。
 WebView2 Runtimeが未導入の場合はセットアップがMicrosoftの公式インストーラーを実行します（通信が必要です）。
 
-未署名のためWindowsの警告や組織のポリシーで起動が制限される場合があります。
-Windows用認証クライアントを登録し、invalid_requestの原因を解消しました。認可開始の同意画面まで確認済みです。学校アカウントでのログイン完了と実データ取得の実機確認は継続中です。
-ファイル選択画面から戻った際の自動更新との競合により、選択した資料の保存が実行されない問題を修正しました。選択・キャンセル・再起動後の保持をWindowsの標準ファイル選択画面を使って自動確認します。
-現行iOS main（bbd2bd7）の画面・仕様・更新処理を再比較して修正しました。
-メインカラーはiOSの用途に合わせ、標準操作・明示的な移動ボタン・「授業中」の目印に使います。本文・見出しはテーマ色、時間割の「今日」の背景はOSのアクセント色です。「デフォルト」を加え、個別の色指定を解除できます。
-ホームの常時変更反映、特別時間割の表示名、留学生授業の絞り込み、変更前の授業や同じ枠の変更、週表示と時刻を修正しました。
-資料の詳細情報、曜日・クラスによる独立した解析結果の絞り込み、授業ごとの詳細、警告を確認したXLSXの閲覧専用プレビュー、段階式の初期設定、目的別の使い方、個別ライセンスを追加しました。
-更新がない場合の不要な認証、解析失敗後のコピー回収、旧解析版の再試行、キャンセル・ロック・保存期限時の表示と処理も修正しました。
-架空データの期待結果を固定したiOSのSwift処理から生成し、時間割88ケース、XLSX正規化11ケース、PDFの位置と罫線5ケース、検索・表示文字・クラス・色の比較をActionsで実施します。実資料での適合性と実機でのOneDrive・学校認証・通知・ロック・復帰・アクセシビリティの確認は未完了です。
-認証の戻り先を通常起動として扱って待機が終わらない経路を修正しました。旧形式の戻り先も受け取り、認証待ち・トークン検証・取得の進行を区別します。架空のWindows URI起動から署名検証・3種類の保存、失敗・取消後の操作復帰まで自動確認します。
-設定をiOS同様の3区分と子画面に整理し、通常画面の説明を使い方へ集約しました。下部バーは処理中と結果の5秒間だけ表示し、閉じることもできます。既存版がある場合、Setupは「更新」または「再インストール」と現在/導入する版を表示します。時間割は週操作をまとめ、画面に合わせた表の領域と文字サイズを使います。
-自動更新は未実装です。更新時は完全終了して新しいSetup.exeを実行してください。
+今回の更新
+- アプリ、セットアップ、スタートメニュー、アンインストール一覧の表示名を「たくポケ」に統一しました。
+- 実行ファイル・導入フォルダー・配布ファイルを takupoke の名前にそろえ、アプリとセットアップにアイコンを追加しました。
+- 以前の導入先と異なるフォルダーへの更新では、以前のアンインストーラーで管理対象だけを整理します。旧名称のショートカットを削除し、個人設定と無関係なファイルを保持します。
+- ホーム、一覧、時間割、設定と各詳細を読みやすい構成に整えました。
 
-ZIPは同梱ファイルを全て展開してTakupoke.Win.exeを起動します。Setup.exeを使う方法を推奨します。
+未署名のためWindowsの警告や組織のポリシーで起動が制限される場合があります。
+学校アカウントでのログイン完了、実資料の解析、OneDrive同期、通知、ロック・復帰、アクセシビリティの実機確認は継続中です。
+自動更新は未実装です。更新時はアプリを完全に終了し、新しいSetup.exeを実行してください。
+
+ZIPは同梱ファイルを全て展開して takupoke.exe を起動します。Setup.exeを使う方法を推奨します。
 SHA256SUMS.txtで配布ファイルのハッシュを確認できます。
 
 ビルド元コミット: $env:GITHUB_SHA
-導入・再インストール・アンインストールと画面操作の自動確認: $runUrl
+導入・フォルダー移行・再インストール・アンインストールと画面操作の自動確認: $runUrl
 ARM64はビルドと実行形式の確認を行い、ARM64実機での起動は未確認です。
 "@ | Set-Content -LiteralPath $notes -Encoding utf8
 $assets = @(Get-ChildItem -LiteralPath (Join-Path $env:TAKUPOKE_CI_TEMP 'release-assets') -File | Select-Object -ExpandProperty FullName)
@@ -39,7 +36,7 @@ if ($assets.Count -ne 6) { throw 'Unexpected release asset count.' }
 gh release view $tag --repo $repo *> $null
 if ($LASTEXITCODE -eq 0) { throw 'This release version already exists; published assets will not be replaced.' }
 try {
-    gh release create $tag @assets --repo $repo --target $env:GITHUB_SHA --draft --prerelease --title "たくポケ Win $Version（開発確認版）" --notes-file $notes
+    gh release create $tag @assets --repo $repo --target $env:GITHUB_SHA --draft --prerelease --title "たくポケ $Version（開発確認版）" --notes-file $notes
     if ($LASTEXITCODE -ne 0) { throw 'Creating the development release failed.' }
     gh release edit $tag --repo $repo --draft=false --prerelease --latest=false
     if ($LASTEXITCODE -ne 0) { throw 'Publishing the development release failed.' }

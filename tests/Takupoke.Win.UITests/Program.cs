@@ -12,7 +12,7 @@ using Takupoke.Infrastructure.Storage;
 
 namespace Takupoke.Win.UITests;
 
-internal static class Program
+internal static partial class Program
 {
     private static Process? _process;
     private static AutomationElement? _window;
@@ -24,6 +24,8 @@ internal static class Program
     {
         try
         {
+            if (args is ["--capture", var capturedApp, var captureRoot] && Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
+                return CapturePages(capturedApp, captureRoot);
             if (args is ["--check-installer", var installer, var caption] && Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
                 return CheckInstallerDisplay(installer, caption);
             if (args.Length != 2 || Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") != "1")
@@ -34,7 +36,14 @@ internal static class Program
             Start(args[0]);
             Wait(() => Find("page-home") is not null, "home heading");
             Navigate("links");
-            Require(WaitElement("main-navigation").FindAll(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "たくポケ Win")).Count == 0, "The navigation body does not repeat the app title.");
+            Require(_window!.Current.Name == "たくポケ", "The native window uses the product name.");
+            Require(WaitElement("main-navigation").FindAll(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "たくポケ Win")).Count == 0, "The navigation body does not repeat the development name.");
+            Invoke(WaitElement("link-menu-fake-study"));
+            Wait(() => ByName("お気に入りに追加", ControlType.MenuItem) is not null, "The visible link edit button exposes favorite controls");
+            Invoke(ByName("お気に入りに追加", ControlType.MenuItem));
+            Wait(() => Find("link-fake-study")?.Current.Name.Contains("お気に入り", StringComparison.Ordinal) == true, "Favorite editing persists through the visible menu");
+            Invoke(WaitElement("link-menu-fake-study")); Invoke(ByName("お気に入りから外す", ControlType.MenuItem));
+            Wait(() => Find("link-fake-study")?.Current.Name.Contains("お気に入り", StringComparison.Ordinal) == false, "Favorite editing can be undone");
             Wait(() => Find("link-fake-study") is not null && Find("link-fake-second") is not null, "saved links are displayed");
             Require(Find("link-fake-study")!.Current.BoundingRectangle.Top < Find("link-fake-second")!.Current.BoundingRectangle.Top, "Link order follows the API array rather than sort-order metadata.");
             SetSearch("存在しない架空検索語");
@@ -108,7 +117,7 @@ internal static class Program
             var pageBounds = VisiblePageBounds();
             var tableBounds = WaitElement("timetable-grid-scroller").Current.BoundingRectangle;
             Require(tableBounds.Width >= pageBounds.Width - 64, "The desktop table uses the available content width.");
-            Require(tableBounds.Height >= pageBounds.Height - 170 && tableBounds.Bottom <= pageBounds.Bottom + 4, "The timetable viewport fills the page without pushing the table below it.");
+            Require(TableFillsAvailableHeight(tableBounds, pageBounds), "The timetable fills the space below its arranged controls and keeps bottom padding.");
             var clockBounds = WaitElement("timetable-clock-label-1").Current.BoundingRectangle;
             Require(clockBounds.Left >= tableBounds.Left + 5 && clockBounds.Right < tableBounds.Right && clockBounds.Height > 0, "The first timetable clock has visible horizontal padding.");
             var changeList = WaitElement("timetable-change-list");
@@ -145,7 +154,7 @@ internal static class Program
                 var restoredTable = WaitElement("timetable-grid-scroller").Current.BoundingRectangle;
                 var restoredPage = VisiblePageBounds();
                 return restoredPage.Height >= pageBounds.Height - 1
-                    && restoredTable.Height >= restoredPage.Height - 170 && restoredTable.Bottom <= restoredPage.Bottom + 4;
+                    && TableFillsAvailableHeight(restoredTable, restoredPage);
             }, "Restoring the window expands the timetable viewport again");
             AutomationElement? lesson = null;
             Wait(() => (lesson = Find("架空科目甲")) is not null && !lesson.Current.IsOffscreen && lesson.Current.IsEnabled, "lesson is visible after navigation");
@@ -175,7 +184,8 @@ internal static class Program
         }
         catch (Exception error)
         {
-            // Only synthetic labels appear in this test. Do not capture screenshots or application data.
+            // Failure logs contain synthetic geometry only. Screen capture is
+            // an explicit, isolated --capture mode with no production data.
             Console.Error.WriteLine("Windows UI check failed: " + error.GetType().Name + " — " + error.Message + " (step: " + _lastStep + ", passed: " + _checks + ")");
             if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
                 Console.Error.WriteLine("Synthetic native window: " + _window?.Current.BoundingRectangle);
@@ -243,7 +253,7 @@ internal static class Program
             attemptState = ReadProbe(state);
             SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=" + attemptState, shell: true);
             Wait(() => ReadProbe(tokenRequests) == "2", "Windows protocol launch reaches token exchange");
-            Require(Find("operation-status")?.Current.Name.Contains("認証情報を検証", StringComparison.Ordinal) == true, "Progress identifies token verification rather than a stale refresh result.");
+            Require(Find("operation-status")?.Current.Name.Contains("認証情報を確認", StringComparison.Ordinal) == true, "Progress identifies token verification rather than a stale refresh result.");
             Invoke(WaitElement("back-settings"));
             Require(Find("settings-materials")?.Current.IsEnabled == true && Find("settings-help")?.Current.IsEnabled == true, "Settings navigation stays usable during token exchange.");
             SelectMainColor("green", Path.Combine(root, "preferences.json"));
@@ -439,16 +449,23 @@ internal static class Program
     }
     private static AutomationElement? Find(string id) => _window?.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, id));
     private static AutomationElement WaitElement(string id) { AutomationElement? result = null; Wait(() => (result = Find(id)) is not null, id); return result!; }
-    private static AutomationElement ByName(string name)
+    private static AutomationElement ByName(string name, ControlType? role = null)
     {
         AutomationElement? result = null;
-        Wait(() => (result = _window!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.NameProperty, name), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button)))) is not null, name);
+        Wait(() => (result = _window!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.NameProperty, name), new PropertyCondition(AutomationElement.ControlTypeProperty, role ?? ControlType.Button)))) is not null, name);
         return result!;
     }
     private static void Navigate(string page)
     {
+        if (Find("page-" + page) is not null) return;
         var item = WaitElement("nav-" + page);
-        if (item.TryGetCurrentPattern(SelectionItemPattern.Pattern, out var pattern)) ((SelectionItemPattern)pattern).Select();
+        if (item.TryGetCurrentPattern(SelectionItemPattern.Pattern, out var pattern))
+        {
+            var selection = (SelectionItemPattern)pattern;
+            if (selection.Current.IsSelected && page != "home")
+            { Navigate("home"); item = WaitElement("nav-" + page); selection = (SelectionItemPattern)item.GetCurrentPattern(SelectionItemPattern.Pattern); }
+            selection.Select();
+        }
         else Invoke(item);
         Wait(() => Find("page-" + page) is not null, page + " page");
     }
@@ -538,11 +555,11 @@ internal static class Program
     [System.Runtime.InteropServices.DllImport("user32.dll", EntryPoint = "mouse_event")] private static extern void MouseEvent(uint flags, uint x, uint y, uint data, nuint extra);
     private static void Invoke(AutomationElement element)
     {
-        var id = element.Current.AutomationId; var name = element.Current.Name;
+        var id = element.Current.AutomationId; var name = element.Current.Name; var role = element.Current.ControlType;
         Wait(() =>
         {
             var current = id.Length > 0 ? Find(id) : _window!.FindFirst(TreeScope.Descendants,
-                new AndCondition(new PropertyCondition(AutomationElement.NameProperty, name), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button)));
+                new AndCondition(new PropertyCondition(AutomationElement.NameProperty, name), new PropertyCondition(AutomationElement.ControlTypeProperty, role)));
             if (current?.Current.IsEnabled != true || !current.TryGetCurrentPattern(InvokePattern.Pattern, out var pattern)) return false;
             try { ((InvokePattern)pattern).Invoke(); return true; }
             catch (ElementNotEnabledException) { return false; }

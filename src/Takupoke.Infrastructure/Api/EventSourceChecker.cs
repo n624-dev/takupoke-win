@@ -28,9 +28,9 @@ public sealed class EventSourceChecker(HttpClient http, Uri? sourceUri = null)
     }
     public static string? Message(EventSourceState state) => state switch
     {
-        EventSourceState.Changed => "学校サイトの学校行事PDFがAPIの元PDFから更新された可能性があります。APIの更新を確認してください。保存済みの学校行事は表示しています。",
+        EventSourceState.Changed => "学校サイトの学校行事PDFが更新された可能性があります。学校行事を取得し直して、配信データの更新を確認してください。保存済みの学校行事は表示しています。",
         EventSourceState.Unavailable => "学校サイトの学校行事PDFを確認できませんでした。保存済みの学校行事は表示しています。",
-        EventSourceState.MissingETag => "保存済みの学校行事には元PDFのETagがありません。APIから取得し直すと起動時の更新確認ができます。",
+        EventSourceState.MissingETag => "元資料の更新確認に必要な情報がありません。学校行事を取得し直してください。",
         _ => null
     };
 }

@@ -49,17 +49,17 @@ foreach ($arch in @('x64', 'arm64')) {
     if (-not $crt) { throw "No redistributable CRT for $arch in runtime version $($redist.Name)." }
     Write-Output "Native runtime: $($redist.Name) / $arch / $($crt.Name)"
     Get-ChildItem -LiteralPath $crt.FullName -Filter '*.dll' | Copy-Item -Destination $payload -Force
-    foreach ($required in @('Takupoke.Win.exe', 'App.xbf', 'MainWindow.xbf', 'Legal/terms.txt', 'Legal/privacy.txt', 'coreclr.dll', 'hostfxr.dll', 'hostpolicy.dll', 'Microsoft.UI.Xaml.dll', 'vcruntime140.dll', 'msvcp140.dll')) {
+    foreach ($required in @('takupoke.exe', 'Assets/takupoke.ico', 'Assets/takupoke.png', 'Assets/FluentIcons/LICENSE.txt', 'App.xbf', 'MainWindow.xbf', 'Legal/terms.txt', 'Legal/privacy.txt', 'coreclr.dll', 'hostfxr.dll', 'hostpolicy.dll', 'Microsoft.UI.Xaml.dll', 'vcruntime140.dll', 'msvcp140.dll')) {
         if (-not (Test-Path -LiteralPath (Join-Path $payload $required))) { throw "Published $arch payload is missing $required." }
     }
     $expectedMachine = if ($arch -eq 'x64') { 0x8664 } else { 0xaa64 }
-    foreach ($binary in @('Takupoke.Win.exe', 'coreclr.dll', 'Microsoft.UI.Xaml.dll')) {
+    foreach ($binary in @('takupoke.exe', 'coreclr.dll', 'Microsoft.UI.Xaml.dll')) {
         if ((Get-PeMachine (Join-Path $payload $binary)) -ne $expectedMachine) { throw "Wrong architecture in $binary." }
     }
-    $runtime = Get-Content -LiteralPath (Join-Path $payload 'Takupoke.Win.runtimeconfig.json') -Raw | ConvertFrom-Json
+    $runtime = Get-Content -LiteralPath (Join-Path $payload 'takupoke.runtimeconfig.json') -Raw | ConvertFrom-Json
     if (-not $runtime.runtimeOptions.includedFrameworks) { throw 'The published app is not .NET self-contained.' }
     Copy-Item -LiteralPath 'packaging/development-info.txt' -Destination (Join-Path $payload 'インストールと注意事項.txt')
-    python scripts/collect-package-notices.py $env:NUGET_PACKAGES $payload licenses/spdx
+    python scripts/collect-package-notices.py $env:NUGET_PACKAGES $payload licenses/spdx --asset-notices src/Takupoke.Win/Assets/FluentIcons
     if ($LASTEXITCODE -ne 0) { throw 'Dependency notices could not be collected.' }
     $licenseOutput = Join-Path $payload 'Licenses'
     New-Item -ItemType Directory -Path $licenseOutput -Force | Out-Null
@@ -82,7 +82,7 @@ foreach ($arch in @('x64', 'arm64')) {
     } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $payload 'package-manifest.json') -Encoding utf8
     & $compiler "/DAppVersion=$Version" "/DTargetArch=$arch" "/DPublishDir=$payload" "/DOutputDir=$output" "/DWebViewBootstrapper=$bootstrapper" packaging/takupoke-win.iss
     if ($LASTEXITCODE -ne 0) { throw "Installer compilation failed for $arch." }
-    Compress-Archive -Path (Join-Path $payload '*') -DestinationPath (Join-Path $output "TakupokeWin-$Version-win-$arch.zip") -CompressionLevel Optimal
+    Compress-Archive -Path (Join-Path $payload '*') -DestinationPath (Join-Path $output "takupoke-$Version-$arch.zip") -CompressionLevel Optimal
     Write-Output "Prepared $arch self-contained payload and installer."
 }
 Copy-Item -LiteralPath 'packaging/development-info.txt' -Destination (Join-Path $output 'INSTALL.txt')

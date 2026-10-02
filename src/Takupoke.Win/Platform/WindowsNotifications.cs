@@ -13,11 +13,21 @@ public sealed class WindowsNotifications : INotificationSink, IDisposable
     {
         get
         {
-            try { return _registered ? "Windowsの通知設定：" + AppNotificationManager.Default.Setting + (_status.StartsWith("通知を送信", StringComparison.Ordinal) ? "\n" + _status : "") : _status; }
+            try { return _registered ? "Windowsの通知設定：" + SettingLabel(AppNotificationManager.Default.Setting)
+                    + (_status.StartsWith("通知を送信", StringComparison.Ordinal) ? "\n" + _status : "") : _status; }
             catch { return "Windowsの通知設定を確認できません。"; }
         }
         private set => _status = value;
     }
+    private static string SettingLabel(AppNotificationSetting setting) => setting switch
+    {
+        AppNotificationSetting.Enabled => "有効です。",
+        AppNotificationSetting.DisabledForApplication => "このアプリの通知が無効です。Windowsの通知設定で有効にしてください。",
+        AppNotificationSetting.DisabledForUser => "Windowsの通知が無効です。Windowsの通知設定を確認してください。",
+        AppNotificationSetting.DisabledByGroupPolicy => "管理者の設定により通知が無効です。",
+        AppNotificationSetting.Unsupported => "この環境では通知を利用できません。",
+        _ => "通知の利用状態を確認できません。"
+    };
     public void Initialize()
     {
         try
@@ -25,7 +35,7 @@ public sealed class WindowsNotifications : INotificationSink, IDisposable
             if (!AppNotificationManager.IsSupported()) { Status = "この環境ではWindowsアプリ通知を利用できません。"; return; }
             AppNotificationManager.Default.NotificationInvoked += OnInvoked;
             AppNotificationManager.Default.Register(); _registered = true;
-            Status = "Windowsの通知設定：" + AppNotificationManager.Default.Setting;
+            Status = "Windowsの通知設定：" + SettingLabel(AppNotificationManager.Default.Setting);
         }
         catch { Status = "Windows通知を登録できませんでした。通常ユーザー権限と実行環境を確認してください。"; }
     }
@@ -49,7 +59,7 @@ public sealed class WindowsNotifications : INotificationSink, IDisposable
         try
         {
             var label = kind switch { "changes" => "時間割変更", "exam" => "試験時間割PDFの更新", _ => "試験返却時間割PDFの更新" };
-            var notice = new AppNotificationBuilder().AddText("たくポケ Win").AddText(label + "：" + count + "件。詳細はアプリで確認してください。")
+            var notice = new AppNotificationBuilder().AddText("たくポケ").AddText(label + "：" + count + "件。詳細はアプリで確認してください。")
                 .AddArgument("destination", "timetable").BuildNotification();
             notice.Tag = Tag(fingerprint); notice.Group = kind;
             AppNotificationManager.Default.Show(notice);

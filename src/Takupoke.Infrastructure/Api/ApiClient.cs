@@ -46,10 +46,11 @@ public sealed class ApiClient(HttpClient http, Uri? baseUri = null, TimeProvider
         if (response.StatusCode != HttpStatusCode.OK) throw new ApiException(ApiFailure.Unavailable);
         if (response.Content.Headers.ContentType?.MediaType?.Equals(contentType, StringComparison.OrdinalIgnoreCase) != true) throw new ApiException(ApiFailure.InvalidResponse);
     }
-    private static async Task<T> Guard<T>(Func<Task<T>> action)
+    private static async Task<T> Guard<T>(Func<Task<T>> action, CancellationToken token)
     {
         try { return await action(); }
         catch (ApiException) { throw; }
+        catch (OperationCanceledException) when (!token.IsCancellationRequested) { throw new ApiException(ApiFailure.Unavailable); }
         catch (OperationCanceledException) { throw; }
         catch (HttpRequestException) { throw new ApiException(ApiFailure.Unavailable); }
         catch { throw new ApiException(ApiFailure.InvalidResponse); }
@@ -66,7 +67,7 @@ public sealed class ApiClient(HttpClient http, Uri? baseUri = null, TimeProvider
         var etag = Header(response, "ETag");
         if (etag.Length != 45 || etag[0] != '"' || etag[^1] != '"' || !ApiPayloads.ValidRevision(etag[1..^1])) throw new ApiException(ApiFailure.InvalidResponse);
         return new RevisionResult(etag[1..^1], etag[1..^1] != installed);
-    });
+    }, token);
     public Task<SavedLinks> DownloadLinksAsync(string accessToken, string expectedRevision, CancellationToken token = default) => Download(
         "links", "application/json", "X-Links-Revision", accessToken, expectedRevision, 3_000_000,
         (bytes, response) => new SavedLinks(ApiPayloads.Links(bytes), ValidETag(response), _clock.GetUtcNow(), expectedRevision), token);
@@ -87,7 +88,7 @@ public sealed class ApiClient(HttpClient http, Uri? baseUri = null, TimeProvider
         Success(response, type);
         if (Header(response, revisionHeader) != expected) throw new ApiException(ApiFailure.Changed);
         return decode(await ReadBoundedAsync(response, maximum, token), response);
-    });
+    }, token);
     public Task<SavedEvents> DownloadEventsAsync(int schoolYear, SavedEvents? saved, CancellationToken token = default) => Guard(async () =>
     {
         if (schoolYear is < 1900 or > 9998) throw new ApiException(ApiFailure.InvalidResponse);
@@ -106,5 +107,5 @@ public sealed class ApiClient(HttpClient http, Uri? baseUri = null, TimeProvider
         }
         Success(response, "application/json");
         return new SavedEvents(_clock.GetUtcNow(), ApiPayloads.Events(bytes, schoolYear), etag);
-    });
+    }, token);
 }

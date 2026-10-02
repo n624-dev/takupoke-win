@@ -16,12 +16,23 @@ public sealed class SourceWatcher : IDisposable
             Clear();
             foreach (var path in paths.Distinct(StringComparer.OrdinalIgnoreCase))
             {
-                var parent = Path.GetDirectoryName(path); var name = Path.GetFileName(path);
-                if (parent is null || !Directory.Exists(parent) || name.Length == 0) continue;
-                var watcher = new FileSystemWatcher(parent, name)
-                { IncludeSubdirectories = false, NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size | NotifyFilters.LastWrite };
-                watcher.Changed += OnChanged; watcher.Created += OnChanged; watcher.Deleted += OnChanged; watcher.Renamed += OnChanged;
-                watcher.Error += (_, _) => Signal(); _watchers.Add(watcher); watcher.EnableRaisingEvents = true;
+                FileSystemWatcher? watcher = null;
+                try
+                {
+                    var parent = Path.GetDirectoryName(path); var name = Path.GetFileName(path);
+                    if (parent is null || !Directory.Exists(parent) || name.Length == 0) continue;
+                    watcher = new FileSystemWatcher(parent, name)
+                    { IncludeSubdirectories = false, NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size | NotifyFilters.LastWrite };
+                    watcher.Changed += OnChanged; watcher.Created += OnChanged; watcher.Deleted += OnChanged; watcher.Renamed += OnChanged;
+                    watcher.Error += (_, _) => Signal(); watcher.EnableRaisingEvents = true;
+                    _watchers.Add(watcher);
+                }
+                catch (Exception error) when (error is IOException or UnauthorizedAccessException or ArgumentException)
+                {
+                    // Permissions, removable drives, and folder deletion must not block other files
+                    // or the saved analysis. Periodic and manual reads still report source failures.
+                    watcher?.Dispose();
+                }
             }
         }
     }

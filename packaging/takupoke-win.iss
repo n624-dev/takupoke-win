@@ -13,14 +13,15 @@
 
 [Setup]
 AppId={{00C9D0A0-362C-4F7A-93E7-C25D5160C279}
-AppName=たくポケ Win 開発版
+AppName=たくポケ
 AppVersion={#AppVersion}
 AppPublisher=n624-dev
 AppPublisherURL=https://github.com/n624-dev/takupoke-win
 AppSupportURL=https://github.com/n624-dev/takupoke-win/issues
 AppUpdatesURL=https://github.com/n624-dev/takupoke-win/releases
-DefaultDirName={localappdata}\Programs\TakupokeWin
-DefaultGroupName=たくポケ Win
+DefaultDirName={localappdata}\Programs\takupoke
+UsePreviousAppDir=no
+DefaultGroupName=たくポケ
 DisableProgramGroupPage=yes
 DisableWelcomePage=no
 PrivilegesRequired=lowest
@@ -33,12 +34,14 @@ ArchitecturesAllowed=x64compatible and not arm64
 ArchitecturesInstallIn64BitMode=x64compatible
 #endif
 OutputDir={#OutputDir}
-OutputBaseFilename=TakupokeWin-{#AppVersion}-win-{#TargetArch}-Setup
+OutputBaseFilename=takupoke-{#AppVersion}-{#TargetArch}-Setup
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern
 InfoBeforeFile=development-info.txt
-UninstallDisplayIcon={app}\Takupoke.Win.exe
+SetupIconFile={#PublishDir}\Assets\takupoke.ico
+UninstallDisplayName=たくポケ
+UninstallDisplayIcon={app}\takupoke.exe
 CloseApplications=yes
 RestartApplications=no
 SetupLogging=yes
@@ -48,18 +51,20 @@ Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [CustomMessages]
-japanese.UpdateTitle=たくポケ Winを更新
-japanese.ReinstallTitle=たくポケ Winを再インストール
+japanese.UpdateTitle=たくポケを更新
+japanese.ReinstallTitle=たくポケを再インストール
 japanese.UpdateButton=更新する
 japanese.ReinstallButton=再インストール
 japanese.InstalledVersion=現在のバージョン
 japanese.NewVersion=インストールするバージョン
-english.UpdateTitle=Update Takupoke Win
-english.ReinstallTitle=Reinstall Takupoke Win
+japanese.MoveFailed=以前のたくポケを整理できませんでした。アプリを完全に終了して、もう一度実行してください。
+english.UpdateTitle=Update たくポケ
+english.ReinstallTitle=Reinstall たくポケ
 english.UpdateButton=Update
 english.ReinstallButton=Reinstall
 english.InstalledVersion=Installed version
 english.NewVersion=Version to install
+english.MoveFailed=The previous installation of たくポケ could not be removed. Fully exit the app and try again.
 
 [Files]
 Source: "{#PublishDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "*.pdb"
@@ -67,31 +72,62 @@ Source: "{#PublishDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 Source: "{#WebViewBootstrapper}"; DestDir: "{tmp}"; Flags: deleteafterinstall; Check: NeedsWebView
 #endif
 
+[InstallDelete]
+; Remove only the start-menu shortcut created under the previous product name.
+Type: files; Name: "{userprograms}\たくポケ Win.lnk"
+
 [Icons]
-Name: "{userprograms}\たくポケ Win"; Filename: "{app}\Takupoke.Win.exe"; WorkingDir: "{app}"
+Name: "{userprograms}\たくポケ"; Filename: "{app}\takupoke.exe"; WorkingDir: "{app}"; IconFilename: "{app}\Assets\takupoke.ico"
 
 [Registry]
-Root: HKCU; Subkey: "Software\Classes\jp.n624.takupoke.win"; ValueType: string; ValueData: "たくポケ Win 認証"; Flags: uninsdeletekey
+Root: HKCU; Subkey: "Software\Classes\jp.n624.takupoke.win"; ValueType: string; ValueData: "たくポケ"; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\Classes\jp.n624.takupoke.win"; ValueType: string; ValueName: "URL Protocol"; ValueData: ""
-Root: HKCU; Subkey: "Software\Classes\jp.n624.takupoke.win\shell\open\command"; ValueType: string; ValueData: """{app}\Takupoke.Win.exe"" ""----ms-protocol:%1"""
+Root: HKCU; Subkey: "Software\Classes\jp.n624.takupoke.win\shell\open\command"; ValueType: string; ValueData: """{app}\takupoke.exe"" ""----ms-protocol:%1"""
 
 [Run]
 #ifdef WebViewBootstrapper
 Filename: "{tmp}\MicrosoftEdgeWebview2Setup.exe"; Parameters: "/silent /install"; StatusMsg: "WebView2 Runtimeを準備しています…"; Flags: waituntilterminated; Check: NeedsWebView
 #endif
-Filename: "{app}\Takupoke.Win.exe"; Description: "たくポケ Winを起動"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\takupoke.exe"; Description: "たくポケを起動"; Flags: nowait postinstall skipifsilent
 
 [UninstallRun]
-Filename: "{app}\Takupoke.Win.exe"; Parameters: "--unregister"; Flags: runhidden waituntilterminated skipifdoesntexist
+Filename: "{app}\takupoke.exe"; Parameters: "--unregister"; Flags: runhidden waituntilterminated skipifdoesntexist
 
 [Code]
-var PreviousVersion: String;
+var
+  PreviousVersion: String;
+  PreviousInstallDir: String;
+  PreviousUninstaller: String;
 
 function InitializeSetup: Boolean;
 begin
   PreviousVersion := '';
+  PreviousInstallDir := '';
+  PreviousUninstaller := '';
   RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{00C9D0A0-362C-4F7A-93E7-C25D5160C279}_is1', 'DisplayVersion', PreviousVersion);
+  RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{00C9D0A0-362C-4F7A-93E7-C25D5160C279}_is1', 'InstallLocation', PreviousInstallDir);
+  RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{00C9D0A0-362C-4F7A-93E7-C25D5160C279}_is1', 'UninstallString', PreviousUninstaller);
   Result := True;
+end;
+
+function PrepareToInstall(var NeedsRestart: Boolean): String;
+var Uninstaller: String; ExitCode: Integer;
+begin
+  Result := '';
+  if (PreviousVersion <> '') and (PreviousInstallDir <> '') and
+     (CompareText(AddBackslash(PreviousInstallDir), AddBackslash(WizardDirValue)) <> 0) then begin
+    { Let the registered installer remove only its own files; keep unknown files and app data. }
+    Uninstaller := RemoveQuotes(PreviousUninstaller);
+    if (CompareText(AddBackslash(ExtractFileDir(Uninstaller)), AddBackslash(PreviousInstallDir)) <> 0) or
+       not FileExists(Uninstaller) then begin
+      Result := ExpandConstant('{cm:MoveFailed}');
+      Exit;
+    end;
+    if not Exec(Uninstaller, '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART', PreviousInstallDir, SW_HIDE, ewWaitUntilTerminated, ExitCode) then
+      Result := ExpandConstant('{cm:MoveFailed}')
+    else if ExitCode <> 0 then Result := ExpandConstant('{cm:MoveFailed}');
+    if Result = '' then PreviousInstallDir := '';
+  end;
 end;
 
 function UpgradeTitle: String;
@@ -130,11 +166,18 @@ begin
     HasWebView(HKCU32, 'Software\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}'));
 end;
 
-procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+procedure RemoveOwnStartup(const Name: String);
 var Command: String;
 begin
-  if CurUninstallStep = usUninstall then
-    if RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'TakupokeWin', Command) then
-      if Pos(Lowercase(ExpandConstant('{app}\Takupoke.Win.exe')), Lowercase(Command)) > 0 then
-        RegDeleteValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'TakupokeWin');
+  if RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', Name, Command) then
+    if Pos(Lowercase('"' + ExpandConstant('{app}\takupoke.exe') + '"'), Lowercase(Command)) = 1 then
+      RegDeleteValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', Name);
+end;
+
+procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+begin
+  if CurUninstallStep = usUninstall then begin
+    RemoveOwnStartup('takupoke');
+    RemoveOwnStartup('TakupokeWin');
+  end;
 end;

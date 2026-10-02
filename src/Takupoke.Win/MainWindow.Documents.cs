@@ -21,14 +21,17 @@ public sealed partial class MainWindow
         if (_model.OfflineTest || _model.Locked) return;
         var epoch = _model.PrivateEpoch;
         CloseBrowser();
-        var browser = new WebView2(); var window = new Window { Title = title + " — たくポケ Win" };
-        var controls = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8, Padding = new Thickness(8) };
-        controls.Children.Add(Button("戻る", () => { if (browser.CanGoBack) browser.GoBack(); return Task.CompletedTask; }));
-        controls.Children.Add(Button("進む", () => { if (browser.CanGoForward) browser.GoForward(); return Task.CompletedTask; }));
-        controls.Children.Add(Button("再読み込み", () => { browser.Reload(); return Task.CompletedTask; }));
-        controls.Children.Add(Button("外部ブラウザで開く", async () => { if (browser.Source is { } current && current.Scheme == "https") await Windows.System.Launcher.LaunchUriAsync(current); }));
+        var browser = new WebView2(); var window = new Window { Title = title + " — たくポケ" };
+        var controls = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 12, Padding = new Thickness(16, 12, 16, 12) };
+        var back = IconButton("戻る", "back", () => { if (browser.CanGoBack) browser.GoBack(); return Task.CompletedTask; });
+        var forward = IconButton("進む", "forward", () => { if (browser.CanGoForward) browser.GoForward(); return Task.CompletedTask; });
+        var reload = IconButton("再読み込み", "refresh", () => { browser.Reload(); return Task.CompletedTask; });
+        var external = IconButton("既定のブラウザで開く", "open", async () => { if (browser.Source is { } current && current.Scheme == "https") await Windows.System.Launcher.LaunchUriAsync(current); }, "外部ブラウザで開く");
+        back.IsEnabled = forward.IsEnabled = reload.IsEnabled = external.IsEnabled = false;
+        controls.Children.Add(back); controls.Children.Add(forward); controls.Children.Add(reload); controls.Children.Add(external);
         var root = new Grid(); root.RowDefinitions.Add(new() { Height = GridLength.Auto }); root.RowDefinitions.Add(new() { Height = new GridLength(1, GridUnitType.Star) });
-        root.Children.Add(controls); Grid.SetRow(browser, 1); root.Children.Add(browser);
+        root.Children.Add(new ScrollViewer { Content = controls, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto, VerticalScrollBarVisibility = ScrollBarVisibility.Disabled });
+        Grid.SetRow(browser, 1); root.Children.Add(browser);
         window.Content = root; _browserWindow = window; _browser = browser;
         window.Closed += (_, _) => { browser.Close(); if (_browser == browser) { _browser = null; _browserWindow = null; } };
         window.Activate();
@@ -39,6 +42,8 @@ public sealed partial class MainWindow
             await browser.EnsureCoreWebView2Async(environment, options);
             if (epoch != _model.PrivateEpoch || _model.Locked || _browser != browser) { browser.Close(); return; }
             browser.CoreWebView2.Settings.IsWebMessageEnabled = false; browser.CoreWebView2.Settings.AreHostObjectsAllowed = false;
+            reload.IsEnabled = external.IsEnabled = true;
+            browser.CoreWebView2.HistoryChanged += (_, _) => { back.IsEnabled = browser.CanGoBack; forward.IsEnabled = browser.CanGoForward; };
             browser.CoreWebView2.DownloadStarting += (_, args) => args.Cancel = true;
             browser.CoreWebView2.NavigationStarting += (_, args) =>
             { if (!Uri.TryCreate(args.Uri, UriKind.Absolute, out var destination) || destination.Scheme != "https") args.Cancel = true; };
@@ -46,7 +51,7 @@ public sealed partial class MainWindow
             { args.Handled = true; if (Uri.TryCreate(args.Uri, UriKind.Absolute, out var destination) && destination.Scheme == "https") browser.Source = destination; };
             browser.Source = uri;
         }
-        catch { CloseBrowser(); await Message("アプリ内ブラウザを開けません", "WebView2の実行環境を確認してください。設定から外部ブラウザを選ぶこともできます。"); }
+        catch { CloseBrowser(); await Message("アプリ内ブラウザを開けませんでした", "設定の「リンクの開き方」を「既定のブラウザ」に変更して、もう一度リンクを開いてください。"); }
     }
     private void CloseBrowser()
     {

@@ -21,7 +21,7 @@ public sealed class SharedDataUpdaterTests
     private sealed class Handler : HttpMessageHandler
     {
         public DataSet? FailedRevision { get; set; }
-        public bool CancelRevision { get; set; }
+        public CancellationTokenSource? CancelRevision { get; set; }
         public List<string> RevisionPaths { get; } = [];
         public int PublicRequests { get; private set; }
         public int AuthenticatedRequests { get; private set; }
@@ -34,7 +34,7 @@ public sealed class SharedDataUpdaterTests
             {
                 Assert.Null(request.Headers.Authorization); PublicRequests++;
                 RevisionPaths.Add(path);
-                if (CancelRevision) throw new OperationCanceledException(token);
+                if (CancelRevision is { } cancellation) { cancellation.Cancel(); throw new OperationCanceledException(token); }
                 if (FailedRevision is { } failed && path == "/" + ApiClient.RevisionPath(failed)) response.StatusCode = HttpStatusCode.ServiceUnavailable;
                 response.Headers.ETag = new('"' + Revision + '"');
             }
@@ -172,10 +172,11 @@ public sealed class SharedDataUpdaterTests
             var handler = new Handler(); using var http = new HttpClient(handler);
             var updater = new SharedDataUpdater(new(http, new("https://example.invalid/")), store);
             var known = await updater.CheckDetailedAsync();
-            handler.CancelRevision = true;
-            await Assert.ThrowsAsync<OperationCanceledException>(() => updater.CheckDetailedAsync());
+            using var cancellation = new CancellationTokenSource();
+            handler.CancelRevision = cancellation;
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => updater.CheckDetailedAsync(cancellation.Token));
             Assert.Equal(3, known.Revisions.Count); Assert.Empty(known.Failures);
-            handler.CancelRevision = false;
+            handler.CancelRevision = null;
             Assert.Equal(3, (await updater.CheckDetailedAsync()).Revisions.Count);
         }
         finally { if (Directory.Exists(root)) Directory.Delete(root, true); }

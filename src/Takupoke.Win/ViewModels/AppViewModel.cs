@@ -37,7 +37,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private DateTimeOffset _lastAutomaticCheck;
     private bool _busy;
     private bool _pendingRefresh;
-    private bool _platformInitialized;
+    private bool _notificationsInitialized;
+    private bool _protocolRegistered;
     private bool _automaticPaused;
     public bool AutomaticRefreshPaused => _automaticPaused;
     public bool Locked { get; private set; }
@@ -48,6 +49,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public bool Busy { get => _busy; private set => SetProperty(ref _busy, value); }
     public bool OfflineTest { get; } = Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1";
     public string Root { get; }
+    public string? RootMigrationMessage { get; }
+    public string? PlatformMessage { get; private set; }
     public UserPreferences Preferences { get; private set; } = new();
     public bool PreferencesReady { get; private set; }
     public ScheduleData Data { get; private set; } = new();
@@ -74,8 +77,10 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public AppViewModel(DispatcherQueue dispatcher)
     {
         _dispatcher = dispatcher;
-        Root = OfflineTest ? Environment.GetEnvironmentVariable("TAKUPOKE_DATA_ROOT") ?? throw new InvalidOperationException("CI data root is required.")
-            : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TakupokeWin");
+        var directory = OfflineTest
+            ? new DataDirectoryResult(Environment.GetEnvironmentVariable("TAKUPOKE_DATA_ROOT") ?? throw new InvalidOperationException("CI data root is required."))
+            : DataDirectory.Resolve(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+        Root = directory.Root; RootMigrationMessage = directory.Message;
         var offline = OfflineTest ? new OfflineTestNetwork(Root) : null;
         _http = offline is not null ? new(offline) : ApiClient.CreateHttpClient();
         _school = new(Root, new WindowsDpapiProtector()); _preferences = new(Root); _events = new(Root);
@@ -134,8 +139,13 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     }
     private void InitializePlatform()
     {
-        if (OfflineTest || _platformInitialized) return;
-        BrowserAuthenticator.RegisterProtocol(); _notificationSink.Initialize(); _platformInitialized = true;
+        if (OfflineTest) return;
+        if (!_protocolRegistered)
+        {
+            try { BrowserAuthenticator.RegisterProtocol(); _protocolRegistered = true; PlatformMessage = null; }
+            catch { PlatformMessage = "ブラウザから認証結果を受け取る設定を登録できませんでした。アプリを起動し直してください。保存済みの資料は利用できます。"; }
+        }
+        if (!_notificationsInitialized) { _notificationSink.Initialize(); _notificationsInitialized = true; }
     }
     private int ParserYear => int.TryParse(Preferences.DefaultSchoolYear, out var year) && year is >= 1900 and <= 9998 ? year : Today.SchoolYear();
     public Task RefreshAsync() => RefreshAsync(automatic: false);
@@ -167,22 +177,31 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         InitializePlatform();
         // Checking the lease first invalidates expired data before reading originals or contacting the API.
         await _school.BeginAsync(token);
-        foreach (var kind in Enum.GetValues<MaterialKind>()) await _materials.RefreshAsync(kind, ParserYear, token);
+        var incomplete = false;
+        foreach (var kind in Enum.GetValues<MaterialKind>())
+            if ((await _materials.RefreshAsync(kind, ParserYear, token)).Error is not null) incomplete = true;
         if (!OfflineTest)
         {
             ApplyRevisionCheck(await _shared.CheckDetailedAsync(token));
+            incomplete |= RevisionFailures.Count > 0;
             var failedYears = new List<int>();
             foreach (var year in _events.SavedYears())
                 try { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await _events.LoadAsync(year, token), token), token); }
                 catch (ApiException) { failedYears.Add(year); }
             EventsUpdateMessage = failedYears.Count == 0 ? null : string.Join("、", failedYears) + "年度の学校行事を更新確認できませんでした。保存済みの結果を表示しています。";
+            incomplete |= failedYears.Count > 0;
             if (!_checkedEventSource)
             {
                 _checkedEventSource = true;
-                EventSourceMessage = EventSourceChecker.Message(await new EventSourceChecker(_http).CheckAsync(await _events.LoadAsync(EventSourceChecker.SourceSchoolYear, token), token));
+                var sourceState = await new EventSourceChecker(_http).CheckAsync(await _events.LoadAsync(EventSourceChecker.SourceSchoolYear, token), token);
+                EventSourceMessage = EventSourceChecker.Message(sourceState);
+                incomplete |= sourceState == EventSourceState.Unavailable;
             }
         }
-        await ReloadAsync(token); if (!automatic) Status = "資料と更新情報を確認しました。";
+        await ReloadAsync(token);
+        if (!automatic) Status = incomplete
+            ? "一部の資料や更新情報を確認できませんでした。各項目の状態を確認してください。保存済みの正常なデータは保持しています。"
+            : "資料と更新情報を確認しました。";
         }, "資料と更新情報を確認しています。", automatic);
     }
     public Task SelectAsync(MaterialKind kind, string path) => RunAsync(async token =>
@@ -200,6 +219,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public Task UpdateSharedAsync() => RunAsync(async token =>
     {
         SharedUpdateResults = []; SharedUpdateMessage = null;
+        InitializePlatform();
+        if (!OfflineTest && !_protocolRegistered)
+        { SharedUpdateMessage = PlatformMessage; Status = PlatformMessage!; return; }
         IReadOnlyList<UpdateResult> results;
         try { results = await _shared.UpdateAsync(_authentication.AuthenticateAsync, token); }
         catch (ApiException error) { SharedUpdateMessage = error.Message; throw; }

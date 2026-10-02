@@ -15,7 +15,7 @@ public sealed class BrowserAuthenticator(OidcClient oidc, Action<Uri>? openBrows
     public event Action<string>? ProgressChanged;
     public static void RegisterProtocol()
     {
-        ActivationRegistrationManager.RegisterForProtocolActivation("jp.n624.takupoke.win", "", "たくポケ Win", Environment.ProcessPath!);
+        ActivationRegistrationManager.RegisterForProtocolActivation("jp.n624.takupoke.win", "", "たくポケ", Environment.ProcessPath!);
         // Repair the direct command left by older installers as well as the SDK association.
         using var command = Registry.CurrentUser.CreateSubKey(@"Software\Classes\jp.n624.takupoke.win\shell\open\command");
         command.SetValue("", "\"" + Environment.ProcessPath! + "\" \"----ms-protocol:%1\"");
@@ -45,7 +45,7 @@ public sealed class BrowserAuthenticator(OidcClient oidc, Action<Uri>? openBrows
             if (openBrowser is not null) openBrowser(attempt.AuthorizationUri);
             else Process.Start(new ProcessStartInfo(attempt.AuthorizationUri.AbsoluteUri) { UseShellExecute = true });
             var callback = await completion.Task;
-            ProgressChanged?.Invoke("認証の戻り先を受け取りました。認証情報を検証しています。");
+            ProgressChanged?.Invoke("ブラウザでの認証結果を受け取りました。認証情報を確認しています。");
             var result = await oidc.ExchangeAsync(callback, attempt, deadline.Token);
             ProgressChanged?.Invoke("認証情報の検証が完了しました。学校データを取得しています。");
             return result;

@@ -27,6 +27,47 @@ public sealed class ApiClientTests
         return response;
     }
     private static ApiClient Client(HttpClient http) => new(http, new("https://example.invalid/"));
+    private sealed class WaitingHandler : HttpMessageHandler
+    {
+        internal TaskCompletionSource Started { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken token)
+        {
+            Assert.Equal("example.invalid", request.RequestUri!.Host);
+            Started.TrySetResult();
+            await Task.Delay(Timeout.Infinite, token);
+            throw new InvalidOperationException("The fake request must be cancelled.");
+        }
+    }
+    private static Task Request(ApiClient client, string kind, CancellationToken token) => kind switch
+    {
+        "revision" => client.CheckRevisionAsync(DataSet.Links, null, token),
+        "download" => client.DownloadLinksAsync("fake-token", Revision, token),
+        _ => client.DownloadEventsAsync(2032, null, token)
+    };
+    [Theory]
+    [InlineData("revision")]
+    [InlineData("download")]
+    [InlineData("events")]
+    public async Task HttpTimeoutIsReportedAsCommunicationFailure(string kind)
+    {
+        using var http = new HttpClient(new WaitingHandler()) { Timeout = TimeSpan.FromMilliseconds(50) };
+        var failure = await Assert.ThrowsAsync<ApiException>(() => Request(Client(http), kind, CancellationToken.None));
+        Assert.Equal(ApiFailure.Unavailable, failure.Failure);
+    }
+    [Theory]
+    [InlineData("revision")]
+    [InlineData("download")]
+    [InlineData("events")]
+    public async Task CallerCanCancelAnActiveRequestWithoutReportingCommunicationFailure(string kind)
+    {
+        var handler = new WaitingHandler();
+        using var http = new HttpClient(handler);
+        using var cancellation = new CancellationTokenSource();
+        var request = Request(Client(http), kind, cancellation.Token);
+        await handler.Started.Task.WaitAsync(TimeSpan.FromSeconds(5));
+        cancellation.Cancel();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => request);
+    }
     [Fact]
     public async Task PublicRevisionNeverSendsAuthenticationAndUsesInstalledRevision()
     {

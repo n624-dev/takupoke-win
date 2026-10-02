@@ -16,6 +16,9 @@ public partial class App : Application
                 Directory.CreateDirectory(testRoot);
                 File.AppendAllText(Path.Combine(testRoot, "ui-error.txt"), args.Exception.ToString());
             };
+        if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
+            RequestedTheme = Environment.GetEnvironmentVariable("TAKUPOKE_TEST_THEME") switch
+            { "Dark" => ApplicationTheme.Dark, "Light" => ApplicationTheme.Light, _ => RequestedTheme };
         InitializeComponent();
     }
 

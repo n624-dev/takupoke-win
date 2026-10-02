@@ -36,6 +36,44 @@ class NoticesTests(unittest.TestCase):
         for expected in ["Fake.Package 1.0", "Fake author", "Fake MIT template", "Copyright Fake original author", "Fake attribution"]:
             self.assertIn(expected, text)
 
+    def icon_assets(self, commit="a" * 40):
+        self.metadata('<license type="expression">MIT</license>')
+        assets = self.root / "icons"
+        assets.mkdir()
+        original = "Fake asset author\nOriginal asset license terms.\n"
+        (assets / "LICENSE.txt").write_text(original, encoding="utf-8")
+        (assets / "SOURCE.json").write_text(json.dumps({
+            "repository": "https://github.com/microsoft/fluentui-system-icons",
+            "commit": commit, "license": "MIT", "icons": {}
+        }), encoding="utf-8")
+        return assets, original
+
+    def test_non_nuget_icon_license_and_pinned_source_are_included_verbatim(self):
+        assets, original = self.icon_assets()
+        notices.collect(self.root / "packages", self.root / "out", self.templates, assets)
+        output = self.root / "out"
+        text = (output / "THIRD-PARTY-NOTICES.txt").read_text(encoding="utf-8")
+        self.assertIn(original, text)
+        self.assertIn("Fluent UI System Icons", text)
+        self.assertIn("/tree/" + "a" * 40, text)
+        self.assertEqual((assets / "LICENSE.txt").read_bytes(), (output / "Licenses/FluentSystemIcons.txt").read_bytes())
+        self.assertEqual((assets / "SOURCE.json").read_bytes(), (output / "Licenses/FluentSystemIcons-source.json").read_bytes())
+
+    def test_non_nuget_icon_notice_requires_license_and_provenance(self):
+        assets, _ = self.icon_assets()
+        (assets / "LICENSE.txt").unlink()
+        with self.assertRaisesRegex(ValueError, "license and source provenance are required"):
+            notices.collect(self.root / "packages", self.root / "out", self.templates, assets)
+        (assets / "LICENSE.txt").write_text("Fake asset license", encoding="utf-8")
+        (assets / "SOURCE.json").unlink()
+        with self.assertRaisesRegex(ValueError, "license and source provenance are required"):
+            notices.collect(self.root / "packages", self.root / "out", self.templates, assets)
+
+    def test_non_nuget_icon_notice_requires_pinned_revision(self):
+        assets, _ = self.icon_assets(commit="main")
+        with self.assertRaisesRegex(ValueError, "pinned commit"):
+            notices.collect(self.root / "packages", self.root / "out", self.templates, assets)
+
     def test_refuses_license_path_outside_package(self):
         self.metadata('<license type="file">../../private.txt</license>')
         with self.assertRaisesRegex(ValueError, "Invalid license path"):

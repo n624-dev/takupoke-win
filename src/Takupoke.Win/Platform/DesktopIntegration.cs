@@ -11,6 +11,7 @@ public sealed class DesktopIntegration : IDisposable
     private readonly SubclassProc _callback;
     private readonly uint _taskbarCreated = RegisterWindowMessage("TaskbarCreated");
     private bool _tray;
+    private nint _icon;
     public event Action<bool>? LockedChanged;
     public event Action? Resumed, Suspended, OpenRequested, ExitRequested;
     public bool TrayAvailable => _tray;
@@ -33,6 +34,7 @@ public sealed class DesktopIntegration : IDisposable
         if (!SetWindowSubclass(window, _callback, 1, 0)) throw new Win32Exception(Marshal.GetLastWin32Error());
         if (!WTSRegisterSessionNotification(window, 0))
         { RemoveWindowSubclass(window, _callback, 1); throw new Win32Exception(Marshal.GetLastWin32Error()); }
+        _icon = LoadImage(0, Path.Combine(AppContext.BaseDirectory, "Assets", "takupoke.ico"), 1, 32, 32, 0x0010);
     }
     public void SetTray(bool enabled)
     {
@@ -53,14 +55,15 @@ public sealed class DesktopIntegration : IDisposable
             var executable = Environment.ProcessPath ?? throw new InvalidOperationException("実行ファイルを確認できません。");
             var command = "\"" + executable + "\" --background";
             if (command.Length > 260) throw new InvalidOperationException("自動起動に対応するパス長を超えています。");
-            key.SetValue("TakupokeWin", command, RegistryValueKind.String);
+            key.SetValue("takupoke", command, RegistryValueKind.String);
+            key.DeleteValue("TakupokeWin", false);
         }
-        else key.DeleteValue("TakupokeWin", false);
+        else { key.DeleteValue("takupoke", false); key.DeleteValue("TakupokeWin", false); }
     }
     private NotifyIconData IconData() => new()
     {
         Size = (uint)Marshal.SizeOf<NotifyIconData>(), Window = _window, Id = 1, Flags = 1 | 2 | 4 | 128,
-        CallbackMessage = TrayMessage, Icon = LoadIcon(0, (nint)32512), Tip = "たくポケ Win — 開く / 完全に終了", Info = "", InfoTitle = ""
+        CallbackMessage = TrayMessage, Icon = _icon != 0 ? _icon : LoadIcon(0, (nint)32512), Tip = "たくポケ", Info = "", InfoTitle = ""
     };
     // Delegate lifetime is rooted by this instance; callbacks stay on the owning UI thread.
     private nint WindowProc(nint window, uint message, nuint wparam, nint lparam, nuint id, nuint data)
@@ -87,7 +90,7 @@ public sealed class DesktopIntegration : IDisposable
         var menu = CreatePopupMenu(); if (menu == 0) return;
         try
         {
-            AppendMenu(menu, 0, 1, "たくポケ Winを開く"); AppendMenu(menu, 0, 2, "完全に終了");
+            AppendMenu(menu, 0, 1, "たくポケを開く"); AppendMenu(menu, 0, 2, "完全に終了");
             GetCursorPos(out var point); SetForegroundWindow(_window);
             var chosen = TrackPopupMenu(menu, 0x0100 | 0x0002, point.X, point.Y, 0, _window, 0);
             PostMessage(_window, 0, 0, 0);
@@ -96,7 +99,7 @@ public sealed class DesktopIntegration : IDisposable
         finally { DestroyMenu(menu); }
     }
     public void Dispose()
-    { SetTray(false); WTSUnRegisterSessionNotification(_window); RemoveWindowSubclass(_window, _callback, 1); }
+    { SetTray(false); WTSUnRegisterSessionNotification(_window); RemoveWindowSubclass(_window, _callback, 1); if (_icon != 0) { DestroyIcon(_icon); _icon = 0; } }
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     private struct NotifyIconData
     {
@@ -122,6 +125,8 @@ public sealed class DesktopIntegration : IDisposable
     [DllImport("shell32.dll", EntryPoint = "Shell_NotifyIconW", CharSet = CharSet.Unicode)] private static extern bool ShellNotifyIcon(uint message, ref NotifyIconData data);
     [DllImport("user32.dll", EntryPoint = "RegisterWindowMessageW", CharSet = CharSet.Unicode)] private static extern uint RegisterWindowMessage(string message);
     [DllImport("user32.dll", EntryPoint = "LoadIconW")] private static extern nint LoadIcon(nint instance, nint resource);
+    [DllImport("user32.dll", EntryPoint = "LoadImageW", CharSet = CharSet.Unicode)] private static extern nint LoadImage(nint instance, string filename, uint type, int width, int height, uint flags);
+    [DllImport("user32.dll")] private static extern bool DestroyIcon(nint icon);
     [DllImport("user32.dll")] private static extern nint CreatePopupMenu();
     [DllImport("user32.dll", EntryPoint = "AppendMenuW", CharSet = CharSet.Unicode)] private static extern bool AppendMenu(nint menu, uint flags, nuint id, string text);
     [DllImport("user32.dll")] private static extern uint TrackPopupMenu(nint menu, uint flags, int x, int y, int reserved, nint window, nint rectangle);
