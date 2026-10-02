@@ -17,12 +17,15 @@ public sealed partial class MainWindow : Window
     private bool _dialogOpen;
     private bool _ready;
     private bool _selectingMaterial;
+    private readonly Windows.UI.ViewManagement.AccessibilitySettings _accessibility = new();
     private DesktopIntegration? _desktop;
     private bool _exitRequested;
     public MainWindow()
     {
         InitializeComponent();
         _model = new(DispatcherQueue);
+        _accessibility.HighContrastChanged += Accessibility_HighContrastChanged;
+        RootGrid.ActualThemeChanged += (_, _) => { if (_ready) Render(); };
         _model.SnapshotChanged += Render;
         _model.PropertyChanged += (_, _) => UpdateStatus();
         _model.PrivateDataCleared += () => { CloseBrowser(); if (_pdfImage is not null) _pdfImage.Source = null; _pdfDialog?.Hide(); Render(); };
@@ -33,7 +36,7 @@ public sealed partial class MainWindow : Window
         Activated += (_, args) => { if (_ready && !_selectingMaterial && args.WindowActivationState != WindowActivationState.Deactivated) _ = _model.RefreshAsync(); };
         AppWindow.Closing += (_, args) =>
         { if (!_exitRequested && _model.Preferences.KeepInTray && _desktop?.TrayAvailable == true) { args.Cancel = true; AppWindow.Hide(); } };
-        Closed += async (_, _) => { CloseBrowser(); _desktop?.Dispose(); Program.OpenRequested = null; await _model.DisposeAsync(); };
+        Closed += async (_, _) => { _accessibility.HighContrastChanged -= Accessibility_HighContrastChanged; CloseBrowser(); _desktop?.Dispose(); Program.OpenRequested = null; await _model.DisposeAsync(); };
         Program.OpenRequested = () => DispatcherQueue.TryEnqueue(ShowWindow);
     }
     private async void Loaded(object sender, RoutedEventArgs args)
@@ -61,6 +64,8 @@ public sealed partial class MainWindow : Window
         if (!_model.Preferences.SetupCompleted && !_model.OfflineTest) await InitialSetup();
     }
     private void ShowWindow() { AppWindow.Show(); Activate(); }
+    private void Accessibility_HighContrastChanged(Windows.UI.ViewManagement.AccessibilitySettings sender, object args)
+        => DispatcherQueue.TryEnqueue(() => { if (_ready) Render(); });
     private void Navigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
         if (args.SelectedItem is NavigationViewItem item) _page = (string)item.Tag;
@@ -78,8 +83,10 @@ public sealed partial class MainWindow : Window
         if (_dialogOpen) { UpdateStatus(); return; }
         var focused = RootGrid.XamlRoot is null ? null : FocusManager.GetFocusedElement(RootGrid.XamlRoot) as FrameworkElement;
         var focusId = focused is null ? "" : AutomationProperties.GetAutomationId(focused);
-        if (new Windows.UI.ViewManagement.AccessibilitySettings().HighContrast) Navigation.ClearValue(Control.ForegroundProperty);
-        else Navigation.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(LinkColor(_model.Preferences.MainColor));
+        // Accent only the selection marker. Setting Navigation.Foreground also
+        // propagates to the entire page, including lesson and settings text.
+        foreach (var theme in new[] { "Light", "Dark" })
+            ((SolidColorBrush)((ResourceDictionary)Navigation.Resources.ThemeDictionaries[theme])["NavigationViewSelectionIndicatorForeground"]).Color = LinkColor(_model.Preferences.MainColor);
         PageContent.Children.Clear();
         switch (_page) { case "links": BuildLinks(); break; case "timetable": BuildTimetable(); break; case "settings": BuildSettings(); break; default: BuildHome(); break; }
         UpdateStatus();

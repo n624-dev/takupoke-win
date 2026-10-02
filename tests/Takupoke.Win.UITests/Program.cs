@@ -33,6 +33,13 @@ internal static class Program
             SetSearch("かくうがくしゅう");
             Wait(() => Find("link-fake-study") is not null, "kana search finds saved link");
             Navigate("timetable"); Navigate("settings");
+            var preferences = Path.Combine(args[1], "preferences.json");
+            var bodyColor = TextColor("page-settings");
+            foreach (var color in new[] { "green", "yellow", "orange", "red", "pink", "blue", "purple" })
+            {
+                SelectMainColor(color, preferences);
+                Require(TextColor("page-settings") == bodyColor, "Changing the main color must not recolor page text.");
+            }
             Invoke(ByName("利用規約"));
             Invoke(ByName("閉じる"));
             Invoke(ByName("プライバシーポリシー"));
@@ -51,7 +58,6 @@ internal static class Program
             var upper = WaitElement("class-3_IT"); Toggle(upper);
             Require(Checked(upper) && !Checked(homeroom) && !Checked(department), "Selecting another class removes incompatible selections.");
             Invoke(ByName("保存"));
-            var preferences = Path.Combine(args[1], "preferences.json");
             Wait(() => SavedClass(preferences) == "3_IT", "class preference is persisted");
             Navigate("timetable");
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "クラス：3-IT")) is not null, "selected class appears on timetable");
@@ -70,8 +76,10 @@ internal static class Program
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "クラス：3-IT")) is not null, "saved class survives app restart");
             Wait(() => Find("架空科目甲") is not null, "accepted timetable remains after source is unavailable");
             Navigate("settings");
+            Require(SavedMainColor(preferences) == "purple", "Main color survives app restart.");
+            Require(TextColor("page-settings") == bodyColor, "Restart retains theme text color.");
             Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "file selected through the native picker survives restart");
-            Console.WriteLine($"Passed {_checks} Windows UI checks: navigation, class constraints, saved lessons and details, kana search, persistence, focus and offline refresh.");
+            Console.WriteLine($"Passed {_checks} Windows UI checks: navigation, class constraints, saved lessons and details, kana search, persistence, seven accent colors without recoloring text, focus and offline refresh.");
             return 0;
         }
         catch (Exception error)
@@ -139,6 +147,31 @@ internal static class Program
         var search = WaitElement("link-search");
         var edit = search.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit)) ?? search;
         ((ValuePattern)edit.GetCurrentPattern(ValuePattern.Pattern)).SetValue(query);
+    }
+    private static int TextColor(string id)
+    {
+        var text = (TextPattern)WaitElement(id).GetCurrentPattern(TextPattern.Pattern);
+        return text.DocumentRange.GetAttributeValue(TextPattern.ForegroundColorAttribute) is int color
+            ? color : throw new InvalidOperationException("The text provider did not report its rendered foreground color.");
+    }
+    private static void SelectMainColor(string color, string preferences)
+    {
+        AutomationElement? combo = null;
+        Wait(() => (combo = Find("main-color"))?.Current.IsEnabled == true, "main color setting is ready");
+        if (combo!.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll)) ((ScrollItemPattern)scroll).ScrollIntoView();
+        var expansion = (ExpandCollapsePattern)combo.GetCurrentPattern(ExpandCollapsePattern.Pattern);
+        expansion.Expand();
+        AutomationElement? option = null;
+        Wait(() => (option = _window!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.NameProperty, color), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem)))) is not null, "main color option");
+        ((SelectionItemPattern)option!.GetCurrentPattern(SelectionItemPattern.Pattern)).Select();
+        try { expansion.Collapse(); } catch (ElementNotAvailableException) { }
+        Wait(() => SavedMainColor(preferences) == color && Find("main-color")?.Current.IsEnabled == true, "main color preference is saved");
+    }
+    private static string? SavedMainColor(string path)
+    {
+        if (!File.Exists(path)) return null;
+        using var document = JsonDocument.Parse(File.ReadAllBytes(path));
+        return document.RootElement.GetProperty("mainColor").GetString();
     }
     private static void PickMaterial(string? path)
     {

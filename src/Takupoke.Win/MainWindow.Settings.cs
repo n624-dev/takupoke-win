@@ -14,6 +14,7 @@ public sealed partial class MainWindow
         TitleText("設定", "page-settings");
         Add(Button("クラスを選択", ChooseClasses));
         var mainColor = new ComboBox { Header = "メインカラー", ItemsSource = UserPreferences.MainColors, SelectedItem = _model.Preferences.MainColor };
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(mainColor, "main-color");
         mainColor.SelectionChanged += async (_, _) => { if (mainColor.SelectedItem is string value && value != _model.Preferences.MainColor) await _model.SavePreferencesAsync(_model.Preferences with { MainColor = value }); }; Add(mainColor);
         var opening = new ComboBox { Header = "リンクの開き方", ItemsSource = new[] { "アプリ内ブラウザ", "外部ブラウザ" }, SelectedIndex = (int)_model.Preferences.OpeningMode };
         opening.SelectionChanged += async (_, _) => { if (opening.SelectedIndex is >= 0 and <= 1 && opening.SelectedIndex != (int)_model.Preferences.OpeningMode) await _model.SavePreferencesAsync(_model.Preferences with { OpeningMode = (LinkOpeningMode)opening.SelectedIndex }); }; Add(opening);

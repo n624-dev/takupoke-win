@@ -58,7 +58,18 @@ public sealed partial class MainWindow
             var header = Panel(Text(day.ToString("M/d（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP")), 18));
             foreach (var schoolEvent in plan.HeaderEvents(fullDay is not null)) header.Children.Add(Text(schoolEvent.Title, 12));
             foreach (var cls in classes) foreach (var message in engine.MissingMessages(day, cls)) header.Children.Add(Text(ClassSelection.Display(cls) + "：" + message, 12));
-            Grid.SetColumn(header, dayIndex + 1); grid.Children.Add(header);
+            var dayHeader = Card(header); dayHeader.Padding = new Thickness(8);
+            if (day == _model.Today)
+            {
+                header.Children.Add(Text("今日", 12));
+                if (!_accessibility.HighContrast)
+                {
+                    var color = LinkColor(_model.Preferences.MainColor);
+                    dayHeader.Background = new Microsoft.UI.Xaml.Media.SolidColorBrush(Windows.UI.Color.FromArgb(36, color.R, color.G, color.B));
+                }
+            }
+            Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(dayHeader, "timetable-day-" + day.ToString("yyyy-MM-dd"));
+            Grid.SetColumn(dayHeader, dayIndex + 1); grid.Children.Add(dayHeader);
             if (fullDay is not null)
             {
                 var card = Card(Text(fullDay, 20)); Grid.SetColumn(card, dayIndex + 1); Grid.SetRow(card, 1); Grid.SetRowSpan(card, 8); grid.Children.Add(card); continue;

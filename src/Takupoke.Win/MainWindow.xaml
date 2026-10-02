@@ -10,6 +10,21 @@
         </Grid.RowDefinitions>
         <NavigationView x:Name="Navigation" IsBackButtonVisible="Collapsed" PaneDisplayMode="Auto" IsSettingsVisible="False"
                         SelectionChanged="Navigation_SelectionChanged" Header="たくポケ Win">
+            <NavigationView.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.ThemeDictionaries>
+                        <ResourceDictionary x:Key="Light">
+                            <SolidColorBrush x:Key="NavigationViewSelectionIndicatorForeground" Color="#2563EB" />
+                        </ResourceDictionary>
+                        <ResourceDictionary x:Key="Dark">
+                            <SolidColorBrush x:Key="NavigationViewSelectionIndicatorForeground" Color="#2563EB" />
+                        </ResourceDictionary>
+                        <ResourceDictionary x:Key="HighContrast">
+                            <SolidColorBrush x:Key="NavigationViewSelectionIndicatorForeground" Color="{ThemeResource SystemColorHighlightTextColor}" />
+                        </ResourceDictionary>
+                    </ResourceDictionary.ThemeDictionaries>
+                </ResourceDictionary>
+            </NavigationView.Resources>
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="ホーム" Tag="home" Icon="Home" AutomationProperties.AutomationId="nav-home" />
                 <NavigationViewItem Content="一覧" Tag="links" Icon="Link" AutomationProperties.AutomationId="nav-links" />

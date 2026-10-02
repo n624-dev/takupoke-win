@@ -46,7 +46,7 @@ public sealed partial class MainWindow
         var button = Button((favorite ? "★ " : "") + link.Label, () => OpenLink(link), "link-" + link.Id);
         button.HorizontalAlignment = HorizontalAlignment.Stretch;
         var color = _model.Preferences.LinkColors.GetValueOrDefault(link.Id) ?? link.Color;
-        if (!new Windows.UI.ViewManagement.AccessibilitySettings().HighContrast) button.BorderBrush = new SolidColorBrush(LinkColor(color));
+        if (!_accessibility.HighContrast) button.BorderBrush = new SolidColorBrush(LinkColor(color));
         button.BorderThickness = new Thickness(3, 1, 1, 1);
         var menu = new MenuFlyout();
         void Item(string label, Func<Task> action) { var item = new MenuFlyoutItem { Text = label }; item.Click += async (_, _) => await action(); menu.Items.Add(item); }
