@@ -5,7 +5,8 @@ using System.Text.Json;
 namespace Takupoke.Core;
 
 public sealed record ChangeFingerprint(string Date, string ClassName, string Period, string Fingerprint);
-public sealed record PendingNotice(string Fingerprint, int Count);
+public sealed record ChangeNoticeTarget(string Date, string ClassName, string Period);
+public sealed record PendingNotice(string Fingerprint, int Count, IReadOnlyList<ChangeNoticeTarget>? ChangeTargets = null);
 public sealed record NotificationBaseline(IReadOnlyList<ChangeFingerprint>? Changes = null,
     IReadOnlyDictionary<string, string>? SpecialDigests = null, IReadOnlyDictionary<string, PendingNotice>? Pending = null);
 
@@ -19,23 +20,41 @@ public static class NotificationDiff
     }).Distinct().OrderBy(f => f.Date, StringComparer.Ordinal).ThenBy(f => f.ClassName, StringComparer.Ordinal).ThenBy(f => f.Period, StringComparer.Ordinal)
         .ThenBy(f => f.Fingerprint, StringComparer.Ordinal).ToArray();
     public static int ChangeCount(IReadOnlyList<ChangeFingerprint>? previous, IReadOnlyList<ChangeFingerprint> next,
+        DateOnly today, IReadOnlySet<string> classes) => ChangedTargets(previous, next, today, classes).Count;
+    private static IReadOnlyList<ChangeNoticeTarget> ChangedTargets(IReadOnlyList<ChangeFingerprint>? previous, IReadOnlyList<ChangeFingerprint> next,
         DateOnly today, IReadOnlySet<string> classes)
     {
-        if (previous is null) return 0;
+        if (previous is null) return [];
         var changed = previous.ToHashSet();
         changed.SymmetricExceptWith(next);
-        return changed.Where(c => SchoolDate.TryParse(c.Date, out var day) && day >= today && classes.Contains(c.ClassName))
-            .Select(c => (c.Date, c.ClassName, c.Period)).Distinct().Count();
+        return EligibleTargets(changed.Select(c => new ChangeNoticeTarget(c.Date, c.ClassName, c.Period)), today, classes);
     }
+    private static IReadOnlyList<ChangeNoticeTarget> EligibleTargets(IEnumerable<ChangeNoticeTarget> targets, DateOnly today, IReadOnlySet<string> classes) =>
+        targets.Where(c => SchoolDate.TryParse(c.Date, out var day) && day >= today && classes.Contains(c.ClassName)).Distinct()
+            .OrderBy(c => c.Date, StringComparer.Ordinal).ThenBy(c => c.ClassName, StringComparer.Ordinal).ThenBy(c => c.Period, StringComparer.Ordinal).ToArray();
     public static NotificationBaseline Reconcile(NotificationBaseline previous, IReadOnlyList<ChangeFingerprint>? changes,
         IReadOnlyDictionary<string, string> specialDigests, DateOnly today, IReadOnlySet<string> classes, bool notifyChanges, bool notifySpecials)
     {
         var pending = new Dictionary<string, PendingNotice>(previous.Pending ?? new Dictionary<string, PendingNotice>());
         var specials = new Dictionary<string, string>(previous.SpecialDigests ?? new Dictionary<string, string>());
+        if (pending.TryGetValue("changes", out var notice))
+        {
+            // Older saved notices lack the targets needed to determine whether a retry
+            // is still relevant. Keep the baseline, but safely discard those notices.
+            var targets = EligibleTargets(notice.ChangeTargets ?? [], today, classes);
+            if (!notifyChanges || targets.Count == 0) pending.Remove("changes");
+            else pending["changes"] = notice with { Count = targets.Count, ChangeTargets = targets };
+        }
         if (changes is not null)
         {
-            var count = ChangeCount(previous.Changes, changes, today, classes);
-            if (notifyChanges && count > 0) pending["changes"] = new(Digest(JsonSerializer.SerializeToUtf8Bytes(changes.Select(c => c.Fingerprint).Order(StringComparer.Ordinal))), count);
+            var targets = ChangedTargets(previous.Changes, changes, today, classes);
+            if (notifyChanges && targets.Count > 0)
+            {
+                // Collect unsent slots across updates, counting a repeatedly changed slot once.
+                var retained = pending.GetValueOrDefault("changes")?.ChangeTargets ?? [];
+                targets = EligibleTargets(retained.Concat(targets), today, classes);
+                pending["changes"] = new(Digest(JsonSerializer.SerializeToUtf8Bytes(changes.Select(c => c.Fingerprint).Order(StringComparer.Ordinal))), targets.Count, targets);
+            }
         }
         foreach (var pair in specialDigests)
         {

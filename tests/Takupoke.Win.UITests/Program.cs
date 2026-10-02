@@ -74,6 +74,12 @@ internal static partial class Program
             Wait(() => Find("automatic-refresh-paused") is not null, "Automatic file checking can be suspended while idle");
             Invoke(WaitElement("refresh-materials"));
             Wait(() => Find("refresh-materials")?.Current.IsEnabled == true && Find("automatic-refresh-paused") is null, "Manual refresh resumes automatic checking");
+            var schoolYearInput = WaitElement("materials-school-year");
+            ((ValuePattern)schoolYearInput.GetCurrentPattern(ValuePattern.Pattern)).SetValue("2030");
+            Navigate("home"); Navigate("settings"); Invoke(WaitElement("settings-materials"));
+            Require(((ValuePattern)WaitElement("materials-school-year").GetCurrentPattern(ValuePattern.Pattern)).Current.Value == "2030",
+                "An unsaved school-year draft survives rebuilding the page");
+            ((ValuePattern)WaitElement("materials-school-year").GetCurrentPattern(ValuePattern.Pattern)).SetValue("");
             Invoke(WaitElement("material-details-Timetable"));
             Wait(() => Find("page-material-Timetable") is not null, "normal material detail screen");
             Invoke(WaitElement("analysis-Timetable"));

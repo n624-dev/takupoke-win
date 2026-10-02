@@ -39,4 +39,40 @@ public sealed class NotificationDiffTests
         Assert.Equal(1, result.Pending!["exam"].Count);
         Assert.Empty(NotificationDiff.Reconcile(result, null, new Dictionary<string, string>(), Today, Classes, true, false).Pending!);
     }
+    [Fact]
+    public void PendingChangesAreFilteredByCurrentClassesAndDateWithoutChangingTheStableOsTag()
+    {
+        var baseline = NotificationDiff.Reconcile(new(), NotificationDiff.Fingerprints([Change(), Change(date: "2032-04-06", cls: "2_CN")]),
+            new Dictionary<string, string>(), Today, new HashSet<string> { "1_CN", "2_CN" }, true, true);
+        var updated = NotificationDiff.Fingerprints([Change("架空更新A"), Change("架空更新B", "2032-04-06", "2_CN")]);
+        var pending = NotificationDiff.Reconcile(baseline, updated, new Dictionary<string, string>(), Today, new HashSet<string> { "1_CN", "2_CN" }, true, true);
+        Assert.Equal(2, pending.Pending!["changes"].Count);
+        var filtered = NotificationDiff.Reconcile(pending, updated, new Dictionary<string, string>(), Today.AddDays(1), new HashSet<string> { "2_CN" }, true, true);
+        var remaining = filtered.Pending!["changes"];
+        Assert.Equal(1, remaining.Count);
+        Assert.Equal(pending.Pending["changes"].Fingerprint, remaining.Fingerprint);
+        Assert.Equal(new ChangeNoticeTarget("2032-04-06", "2_CN", "1,2"), Assert.Single(remaining.ChangeTargets!));
+        Assert.Empty(NotificationDiff.Reconcile(filtered, updated, new Dictionary<string, string>(), Today.AddDays(2), Classes, true, true).Pending!);
+    }
+    [Fact]
+    public void LegacyChangeNoticeIsDiscardedButComparisonBaselineRemainsUsable()
+    {
+        var changes = NotificationDiff.Fingerprints([Change()]);
+        var legacy = new NotificationBaseline(changes, Pending: new Dictionary<string, PendingNotice> { ["changes"] = new("fake-legacy", 7) });
+        var next = NotificationDiff.Reconcile(legacy, changes, new Dictionary<string, string>(), Today, Classes, true, true);
+        Assert.Empty(next.Pending!);
+        Assert.Equal(changes, next.Changes);
+        var fresh = NotificationDiff.Reconcile(next, NotificationDiff.Fingerprints([Change("架空更新")]), new Dictionary<string, string>(), Today, Classes, true, true);
+        Assert.Equal(1, fresh.Pending!["changes"].Count);
+    }
+    [Fact]
+    public void UnsentSlotsAccumulateWithoutCountingRepeatedUpdatesToTheSameSlotTwice()
+    {
+        var baseline = NotificationDiff.Reconcile(new(), NotificationDiff.Fingerprints([Change(), Change(date: "2032-04-06")]), new Dictionary<string, string>(), Today, Classes, true, true);
+        var first = NotificationDiff.Reconcile(baseline, NotificationDiff.Fingerprints([Change("架空更新A"), Change(date: "2032-04-06")]), new Dictionary<string, string>(), Today, Classes, true, true);
+        Assert.Equal(1, first.Pending!["changes"].Count);
+        var second = NotificationDiff.Reconcile(first, NotificationDiff.Fingerprints([Change("架空更新B"), Change("架空更新C", "2032-04-06")]), new Dictionary<string, string>(), Today, Classes, true, true);
+        Assert.Equal(2, second.Pending!["changes"].Count);
+        Assert.Equal(2, second.Pending["changes"].ChangeTargets!.Count);
+    }
 }

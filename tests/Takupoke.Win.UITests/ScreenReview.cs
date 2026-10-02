@@ -87,11 +87,11 @@ internal static partial class Program
                     return match.Success && double.TryParse(match.Groups[1].Value, System.Globalization.NumberStyles.Float,
                         System.Globalization.CultureInfo.InvariantCulture, out var actual) && Math.Abs(actual - percent / 100.0) < 0.01;
                 }, "The app receives the real Windows text scale " + percent);
+                Capture(theme + "-" + percent + "-timetable");
                 var clock = WaitElement("timetable-clock-label-1").Current.BoundingRectangle;
                 var cell = WaitElement("timetable-time-1").Current.BoundingRectangle;
                 Require(clock.Left >= cell.Left + 11 && clock.Right <= cell.Right - 11 && clock.Bottom <= cell.Bottom - 9,
                     "Timetable clocks retain padding at enlarged Windows text sizes");
-                Capture(theme + "-" + percent + "-timetable");
                 Navigate("settings"); Capture(theme + "-" + percent + "-settings");
                 Invoke(WaitElement("settings-materials")); Capture(theme + "-" + percent + "-materials");
                 var window = _window!.Current.BoundingRectangle;

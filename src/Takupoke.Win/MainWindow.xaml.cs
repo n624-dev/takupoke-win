@@ -191,7 +191,17 @@ public sealed partial class MainWindow : Window
             var page = _page;
             DispatcherQueue.TryEnqueue(() => { if (_page == page) PageScroller.ChangeView(0, 0, null, true); });
         }
-        if (focusId.Length > 0) FindById(PageContent, focusId)?.Focus(FocusState.Programmatic);
+        if (focusId.Length > 0)
+        {
+            var focusPage = _page;
+            DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+            {
+                if (_page != focusPage || _dialogOpen || _activePopups.Count > 0 || _model.Locked) return;
+                // New controls need to enter the visual tree before accepting focus.
+                PageContent.UpdateLayout();
+                FindById(PageContent, focusId)?.Focus(FocusState.Programmatic);
+            });
+        }
     }
     private Windows.UI.Color MainAccentColor() => _model.Preferences.MainColor == "default"
         ? _uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Accent) : LinkColor(_model.Preferences.MainColor);

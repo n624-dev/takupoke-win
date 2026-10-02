@@ -53,12 +53,12 @@ public sealed partial class MainWindow
         var bounds = _model.Engine.ReachableWeeks(_model.NavigationAnchor, _model.Preferences.SelectedClasses);
         var start = _model.WeekStart;
         if (start < bounds.Lower) start = bounds.Lower; if (start > bounds.Upper) start = bounds.Upper; _model.WeekStart = start;
-        var calendar = new CalendarDatePicker { Date = new DateTimeOffset(start.ToDateTime(TimeOnly.MinValue), TimeSpan.FromHours(9)),
-            MinDate = new DateTimeOffset(bounds.Lower.ToDateTime(TimeOnly.MinValue), TimeSpan.FromHours(9)),
-            MaxDate = new DateTimeOffset(bounds.Upper.AddDays(6).ToDateTime(TimeOnly.MinValue), TimeSpan.FromHours(9)), MinWidth = 156, MinHeight = 44,
-            HorizontalAlignment = HorizontalAlignment.Stretch };
+        var calendar = new CalendarDatePicker { Date = new DateTimeOffset(start.ToDateTime(TimeOnly.MinValue, DateTimeKind.Local)),
+            MinDate = new DateTimeOffset(bounds.Lower.ToDateTime(TimeOnly.MinValue, DateTimeKind.Local)),
+            MaxDate = new DateTimeOffset(bounds.Upper.AddDays(6).ToDateTime(TimeOnly.MinValue, DateTimeKind.Local)), MinWidth = 156, MinHeight = 44,
+            Language = "ja-JP", DateFormat = "{year.full}/{month.integer}/{day.integer}", HorizontalAlignment = HorizontalAlignment.Stretch };
         AutomationProperties.SetAutomationId(calendar, "timetable-week-picker"); AutomationProperties.SetName(calendar, "表示する週を選択");
-        calendar.DateChanged += (_, args) => { if (args.NewDate is { } value && DateOnly.FromDateTime(value.DateTime).Monday() != _model.WeekStart) { _model.WeekStart = DateOnly.FromDateTime(value.DateTime).Monday(); Render(); } };
+        calendar.DateChanged += (_, args) => { if (args.NewDate is { } value && DateOnly.FromDateTime(value.LocalDateTime).Monday() != _model.WeekStart) { _model.WeekStart = DateOnly.FromDateTime(value.LocalDateTime).Monday(); Render(); } };
         var navigation = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
         navigation.Children.Add(WeekNavigationButton("前の週", "chevron-left", () => { _model.WeekStart = start.AddDays(-7); Render(); }, start > bounds.Lower, "timetable-previous"));
         var current = IconButton("今週", "calendar", () => { _model.OpenTodayWeek(); Render(); return Task.CompletedTask; }, "timetable-current");
@@ -155,6 +155,7 @@ public sealed partial class MainWindow
             foreach (var label in new[] { periodLabel, clockLabel }) { label.TextAlignment = TextAlignment.Center; label.TextWrapping = TextWrapping.NoWrap; texts.Children.Add(label); }
             var timeCell = new Border { Child = texts, Padding = new Thickness(12, 10, 12, 10) };
             AutomationProperties.SetAutomationId(timeCell, "timetable-time-" + period);
+            AutomationProperties.SetName(timeCell, period + "限の時刻");
             texts.Measure(new Windows.Foundation.Size(double.PositiveInfinity, double.PositiveInfinity));
             timeWidth = Math.Max(timeWidth, Math.Ceiling(texts.DesiredSize.Width) + 24);
             timeLabels.Add(timeCell); Grid.SetRow(timeCell, period); grid.Children.Add(timeCell);

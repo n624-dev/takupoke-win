@@ -105,6 +105,7 @@ public sealed partial class MainWindow
     }
     private string? _schoolYearDraft;
     private double? _eventsYearDraft;
+    private string? _eventsYearTextDraft;
     private void BuildMaterials()
     {
         TitleText("時間割ファイル", "page-materials"); BackToSettings();
@@ -140,6 +141,8 @@ public sealed partial class MainWindow
         if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
         if (_model.EventStorageMessage is { } storageFailure) Add(Card(Text(storageFailure)));
         var eventsYear = OperationControl(new NumberBox { Header = "学校年度", Minimum = 1900, Maximum = 9998, Value = _eventsYearDraft ?? _model.Today.SchoolYear(), SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Inline, MaxWidth = 420, HorizontalAlignment = HorizontalAlignment.Stretch });
+        if (_eventsYearTextDraft is { } yearText) eventsYear.Text = yearText;
+        eventsYear.RegisterPropertyChangedCallback(NumberBox.TextProperty, (_, _) => _eventsYearTextDraft = eventsYear.Text);
         AutomationProperties.SetAutomationId(eventsYear, "events-school-year");
         eventsYear.ValueChanged += (_, _) => _eventsYearDraft = eventsYear.Value;
         Add(Card(Panel(SettingsSectionTitle("行事データを取得"), eventsYear,
