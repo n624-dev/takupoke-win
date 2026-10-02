@@ -24,4 +24,14 @@
   <ItemGroup>
     <Content Include="../../packaging/legal/*.txt" Link="Legal/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
+  <!-- The unpackaged publish pipeline does not automatically carry the XAML
+       compiler's loose binary resources from the build output into deployment. -->
+  <Target Name="PublishCompiledWinUiResources" AfterTargets="Publish" Condition="'$(WindowsPackageType)' == 'None'">
+    <ItemGroup>
+      <_CompiledWinUiResource Include="$(TargetDir)**/*.xbf" Exclude="$(TargetDir)publish/**;$(PublishDir)**" />
+      <_CompiledWinUiResource Include="$(TargetDir)$(TargetName).pri" Condition="Exists('$(TargetDir)$(TargetName).pri')" />
+      <_CompiledWinUiResource Include="$(TargetDir)resources.pri" Condition="Exists('$(TargetDir)resources.pri')" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_CompiledWinUiResource)" DestinationFiles="@(_CompiledWinUiResource->'$(PublishDir)%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
 </Project>

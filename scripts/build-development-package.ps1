@@ -49,7 +49,7 @@ foreach ($arch in @('x64', 'arm64')) {
     if (-not $crt) { throw "No redistributable CRT for $arch in runtime version $($redist.Name)." }
     Write-Output "Native runtime: $($redist.Name) / $arch / $($crt.Name)"
     Get-ChildItem -LiteralPath $crt.FullName -Filter '*.dll' | Copy-Item -Destination $payload -Force
-    foreach ($required in @('Takupoke.Win.exe', 'coreclr.dll', 'hostfxr.dll', 'hostpolicy.dll', 'Microsoft.UI.Xaml.dll', 'vcruntime140.dll', 'msvcp140.dll')) {
+    foreach ($required in @('Takupoke.Win.exe', 'App.xbf', 'MainWindow.xbf', 'Legal/terms.txt', 'Legal/privacy.txt', 'coreclr.dll', 'hostfxr.dll', 'hostpolicy.dll', 'Microsoft.UI.Xaml.dll', 'vcruntime140.dll', 'msvcp140.dll')) {
         if (-not (Test-Path -LiteralPath (Join-Path $payload $required))) { throw "Published $arch payload is missing $required." }
     }
     $expectedMachine = if ($arch -eq 'x64') { 0x8664 } else { 0xaa64 }
