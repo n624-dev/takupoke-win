@@ -33,6 +33,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private string _status = "読み込み中です。";
     private bool _busy;
     private bool _pendingRefresh;
+    private bool _platformInitialized;
     public bool Locked { get; private set; }
     public long PrivateEpoch { get; private set; }
     public string Status { get => _status; private set => SetProperty(ref _status, value); }
@@ -108,11 +109,16 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         await RunAsync(async token =>
         {
             Preferences = await _preferences.LoadAsync(token); PreferencesReady = true;
-            if (!OfflineTest) { BrowserAuthenticator.RegisterProtocol(); _notificationSink.Initialize(); }
+            InitializePlatform();
             await ReloadAsync(token); Status = "学校資料を選択すると、端末内で解析します。";
         });
         _timer.Start();
         if (!OfflineTest) await RefreshAsync();
+    }
+    private void InitializePlatform()
+    {
+        if (OfflineTest || _platformInitialized) return;
+        BrowserAuthenticator.RegisterProtocol(); _notificationSink.Initialize(); _platformInitialized = true;
     }
     private int ParserYear => int.TryParse(Preferences.DefaultSchoolYear, out var year) && year is >= 1900 and <= 9998 ? year : Today.SchoolYear();
     public Task RefreshAsync()
@@ -122,6 +128,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         return RunAsync(async token =>
     {
         if (!PreferencesReady) { Preferences = await _preferences.LoadAsync(token); PreferencesReady = true; }
+        InitializePlatform();
         // Checking the lease first invalidates expired data before reading originals or contacting the API.
         await _school.BeginAsync(token);
         foreach (var kind in Enum.GetValues<MaterialKind>()) await _materials.RefreshAsync(kind, ParserYear, token);

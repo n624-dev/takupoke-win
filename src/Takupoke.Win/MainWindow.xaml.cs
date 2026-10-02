@@ -24,6 +24,7 @@ public sealed partial class MainWindow : Window
     private bool _lastHighContrast;
     private DesktopIntegration? _desktop;
     private bool _exitRequested;
+    private bool _initialSetupOffered;
     public MainWindow()
     {
         InitializeComponent();
@@ -35,7 +36,7 @@ public sealed partial class MainWindow : Window
         _themeTimer.Tick += (_, _) => { var current = _accessibility.HighContrast; if (current != _lastHighContrast) { _lastHighContrast = current; if (_ready) Render(); } };
         _themeTimer.Start();
         RootGrid.ActualThemeChanged += (_, _) => { if (_ready) Render(); };
-        _model.SnapshotChanged += Render;
+        _model.SnapshotChanged += () => { Render(); OfferInitialSetup(); };
         _model.ClockChanged += () => { if (_page is "home" or "timetable" && !_model.Busy && !_selectingMaterial) Render(); };
         _model.PropertyChanged += (_, _) => UpdateStatus();
         _model.PrivateDataCleared += () => { if (_activeDialog is { } active) { active.Content = null; active.Hide(); } CloseBrowser(); if (_pdfImage is not null) _pdfImage.Source = null; _pdfDialog?.Hide(); Render(); };
@@ -72,7 +73,12 @@ public sealed partial class MainWindow : Window
             catch { await Message("通知領域に表示できません", "ウィンドウを閉じると完全終了します。Windowsの通知領域を確認してください。"); }
             if (_desktop.TrayAvailable && Environment.GetCommandLineArgs().Contains("--background")) AppWindow.Hide();
         }
-        if (_model.PreferencesReady && !_model.Preferences.SetupCompleted && !_model.OfflineTest) await InitialSetup();
+        OfferInitialSetup();
+    }
+    private void OfferInitialSetup()
+    {
+        if (_ready && !_initialSetupOffered && !_model.OfflineTest && !_model.Locked && !_model.Busy && _model.PreferencesReady && !_model.Preferences.SetupCompleted)
+            _ = InitialSetup();
     }
     private void ShowWindow() { AppWindow.Show(); Activate(); }
     private void Navigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -188,6 +194,6 @@ public sealed partial class MainWindow : Window
     }
     private Task InitialSetup()
     {
-        _setupStep = 0; _page = "setup"; Render(); return Task.CompletedTask;
+        _initialSetupOffered = true; _setupStep = 0; _page = "setup"; Render(); return Task.CompletedTask;
     }
 }
