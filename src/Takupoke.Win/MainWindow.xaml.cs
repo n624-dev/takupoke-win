@@ -14,6 +14,7 @@ public sealed partial class MainWindow : Window
 {
     private readonly AppViewModel _model;
     private string _page = "home";
+    private string? _renderedPage;
     private bool _dialogOpen;
     private ContentDialog? _activeDialog;
     private bool _ready;
@@ -96,6 +97,7 @@ public sealed partial class MainWindow : Window
     private void Render()
     {
         if (_dialogOpen || _selectingMaterial) { UpdateStatus(); return; }
+        var pageChanged = _renderedPage != _page; _renderedPage = _page;
         var focused = RootGrid.XamlRoot is null ? null : FocusManager.GetFocusedElement(RootGrid.XamlRoot) as FrameworkElement;
         var focusId = focused is null ? "" : AutomationProperties.GetAutomationId(focused);
         // Keep body text on theme brushes; tint only standard controls and explicit actions.
@@ -130,6 +132,11 @@ public sealed partial class MainWindow : Window
         else if (_page == "licenses") BuildLicenses();
         else switch (_page) { case "links": BuildLinks(); break; case "timetable": BuildTimetable(); break; case "settings": BuildSettings(); break; default: BuildHome(); break; }
         UpdateStatus();
+        if (pageChanged)
+        {
+            var page = _page;
+            DispatcherQueue.TryEnqueue(() => { if (_page == page) PageScroller.ChangeView(0, 0, null, true); });
+        }
         if (focusId.Length > 0) FindById(PageContent, focusId)?.Focus(FocusState.Programmatic);
     }
     private Windows.UI.Color MainAccentColor() => _model.Preferences.MainColor == "default"

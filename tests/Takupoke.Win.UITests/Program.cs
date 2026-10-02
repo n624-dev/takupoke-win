@@ -78,8 +78,9 @@ internal static class Program
             Wait(() => SavedClass(preferences) == "3_IT", "class preference is persisted");
             Navigate("timetable");
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "クラス：3-IT")) is not null, "selected class appears on timetable");
-            var lesson = WaitElement("架空科目甲");
-            PointerClick(lesson);
+            AutomationElement? lesson = null;
+            Wait(() => (lesson = Find("架空科目甲")) is not null && !lesson.Current.IsOffscreen && lesson.Current.IsEnabled, "lesson is visible after navigation");
+            PointerClick(lesson!);
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "架空科目甲（正式名称）")) is not null, "lesson details show the saved full subject name");
             Invoke(ByName("閉じる"));
             Navigate("home");
@@ -232,7 +233,12 @@ internal static class Program
         _lastStep = "pointer click on lesson text opens details";
         if (element.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll)) ((ScrollItemPattern)scroll).ScrollIntoView();
         element.SetFocus();
-        if (!element.TryGetClickablePoint(out var point)) throw new InvalidOperationException("The synthetic lesson has no visible clickable point.");
+        if (!element.TryGetClickablePoint(out var point))
+        {
+            var bounds = element.Current.BoundingRectangle;
+            if (element.Current.IsOffscreen || bounds.IsEmpty || bounds.Width <= 0 || bounds.Height <= 0) throw new InvalidOperationException("The synthetic lesson is outside the visible viewport.");
+            point = new System.Windows.Point(bounds.Left + bounds.Width / 2, bounds.Top + bounds.Height / 2);
+        }
         if (!SetCursorPos((int)point.X, (int)point.Y)) throw new InvalidOperationException("The test pointer could not be positioned.");
         MouseEvent(0x0002, 0, 0, 0, 0); MouseEvent(0x0004, 0, 0, 0, 0);
     }
