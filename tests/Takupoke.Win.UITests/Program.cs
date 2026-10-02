@@ -179,7 +179,7 @@ internal static class Program
         var expansion = (ExpandCollapsePattern)combo.GetCurrentPattern(ExpandCollapsePattern.Pattern);
         expansion.Expand();
         AutomationElement? option = null;
-        Wait(() => (option = _window!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.NameProperty, UserPreferences.MainColorLabel(color)), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem)))) is not null, "main color option");
+        Wait(() => (option = _window!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.NameProperty, UserPreferences.MainColorLabel(color)), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem)))) ?.Current.IsEnabled == true, "main color option");
         ((SelectionItemPattern)option!.GetCurrentPattern(SelectionItemPattern.Pattern)).Select();
         try { expansion.Collapse(); } catch (ElementNotAvailableException) { } catch (ElementNotEnabledException) { }
         Wait(() => SavedMainColor(preferences) == color && Find("main-color")?.Current.IsEnabled == true, "main color preference is saved");
