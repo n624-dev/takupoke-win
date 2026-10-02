@@ -24,6 +24,8 @@ internal static class Program
         {
             if (args.Length != 2 || Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") != "1")
                 throw new InvalidOperationException("An executable and isolated offline test data root are required.");
+            // UI Automation returns physical pixels. Match the tested app's per-monitor context.
+            if (SetThreadDpiAwarenessContext((nint)(-4)) == 0) throw new InvalidOperationException("Per-monitor coordinates could not be enabled for the test.");
             SeedAsync(args[1]).GetAwaiter().GetResult();
             Start(args[0]);
             Wait(() => Find("page-home") is not null, "home heading");
@@ -153,6 +155,9 @@ internal static class Program
             _process.Refresh();
             if (_process.HasExited) throw new InvalidOperationException($"App exited before its window was available (0x{_process.ExitCode:X8}).");
             if (_process.MainWindowHandle == 0) return false;
+            if (!SystemParametersInfo(0x0030, 0, out var work, 0)) throw new InvalidOperationException("The test desktop work area could not be queried.");
+            if (!SetWindowPos(_process.MainWindowHandle, 0, work.Left, work.Top, Math.Min(1150, work.Right - work.Left), Math.Min(820, work.Bottom - work.Top), 0x0044))
+                throw new InvalidOperationException("The isolated app could not be positioned on the test desktop.");
             _window = AutomationElement.FromHandle(_process.MainWindowHandle); return _window is not null;
         }, "WinUI window");
         Wait(() => Find("page-home") is not null && Find("refresh-home")?.Current.IsEnabled == true, "app initialization");
@@ -255,6 +260,11 @@ internal static class Program
         if (!SetCursorPos((int)point.X, (int)point.Y)) throw new InvalidOperationException("The test pointer could not be positioned.");
         MouseEvent(0x0002, 0, 0, 0, 0); MouseEvent(0x0004, 0, 0, 0, 0);
     }
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    private struct NativeRect { public int Left, Top, Right, Bottom; }
+    [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern nint SetThreadDpiAwarenessContext(nint context);
+    [System.Runtime.InteropServices.DllImport("user32.dll", EntryPoint = "SystemParametersInfoW")] private static extern bool SystemParametersInfo(uint action, uint parameter, out NativeRect value, uint update);
+    [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool SetWindowPos(nint window, nint after, int x, int y, int width, int height, uint flags);
     [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool SetCursorPos(int x, int y);
     [System.Runtime.InteropServices.DllImport("user32.dll", EntryPoint = "mouse_event")] private static extern void MouseEvent(uint flags, uint x, uint y, uint data, nuint extra);
     private static void Invoke(AutomationElement element) => ((InvokePattern)element.GetCurrentPattern(InvokePattern.Pattern)).Invoke();

@@ -42,7 +42,13 @@ public sealed partial class MainWindow : Window
         _model.PropertyChanged += (_, _) => UpdateStatus();
         _model.PrivateDataCleared += () => { if (_activeDialog is { } active) { active.Content = null; active.Hide(); } CloseBrowser(); if (_pdfImage is not null) _pdfImage.Source = null; _pdfDialog?.Hide(); Render(); };
         _model.NotificationActivated += () => { _model.OpenTodayWeek(); Navigation.SelectedItem = Navigation.MenuItems[2]; ShowWindow(); };
-        AppWindow.Resize(new(1150, 820));
+        var display = Microsoft.UI.Windowing.DisplayArea.GetFromWindowId(AppWindow.Id, Microsoft.UI.Windowing.DisplayAreaFallback.Primary);
+        if (display is not null)
+        {
+            var work = display.WorkArea; var width = Math.Min(1150, work.Width); var height = Math.Min(820, work.Height);
+            AppWindow.MoveAndResize(new(work.X + (work.Width - width) / 2, work.Y + (work.Height - height) / 2, width, height));
+        }
+        else AppWindow.Resize(new(1150, 820));
         Navigation.SelectedItem = Navigation.MenuItems[0];
         RootGrid.Loaded += Loaded;
         Activated += (_, args) => { if (_ready && !_selectingMaterial && args.WindowActivationState != WindowActivationState.Deactivated) _ = _model.RefreshAsync(); };
