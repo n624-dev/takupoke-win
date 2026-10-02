@@ -220,6 +220,19 @@ public sealed partial class MainWindow
                 scroll.ChangeView(saved.Horizontal, saved.Vertical, null, true);
                 _restoringTimetableScroll = false;
             });
+        if (_model.OfflineTest)
+        {
+            void LayoutDiagnostic(object? sender, object args)
+            {
+                // Expose only geometry from the isolated fake-data UI test.
+                // ScrollViewer's UIA bounds may include unclipped content.
+                var pageOrigin = PageScroller.TransformToVisual(RootGrid).TransformPoint(new Windows.Foundation.Point(0, 0));
+                var geometry = FormattableString.Invariant($"Synthetic layout: root={RootGrid.ActualWidth:R},{RootGrid.ActualHeight:R}; page={PageScroller.ActualWidth:R},{PageScroller.ActualHeight:R}; viewport={PageScroller.ViewportWidth:R},{PageScroller.ViewportHeight:R}; pageOrigin={pageOrigin.X:R},{pageOrigin.Y:R}; host={PageHost.ActualWidth:R},{PageHost.ActualHeight:R}; table={scroll.ActualWidth:R},{scroll.ActualHeight:R}; tableHeight={scroll.Height:R}; scale={RootGrid.XamlRoot.RasterizationScale:R}");
+                if (AutomationProperties.GetName(scroll) != geometry) AutomationProperties.SetName(scroll, geometry);
+            }
+            scroll.LayoutUpdated += LayoutDiagnostic;
+            scroll.Unloaded += (_, _) => scroll.LayoutUpdated -= LayoutDiagnostic;
+        }
         Add(scroll);
     }
     private Task ChooseClasses() => ChooseClasses(false);

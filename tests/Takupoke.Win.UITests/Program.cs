@@ -103,7 +103,7 @@ internal static class Program
             Navigate("timetable");
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "クラス：3-IT")) is not null, "selected class appears on timetable");
             var tableBounds = WaitElement("timetable-grid-scroller").Current.BoundingRectangle;
-            var pageBounds = WaitElement("page-scroller").Current.BoundingRectangle;
+            var pageBounds = VisiblePageBounds();
             Require(tableBounds.Width >= pageBounds.Width - 64, "The desktop table uses the available content width.");
             Require(tableBounds.Height >= pageBounds.Height - 170 && tableBounds.Bottom <= pageBounds.Bottom + 4, "The timetable viewport fills the page without pushing the table below it.");
             var clockBounds = WaitElement("timetable-clock-label-1").Current.BoundingRectangle;
@@ -127,7 +127,7 @@ internal static class Program
             Wait(() =>
             {
                 var restoredTable = WaitElement("timetable-grid-scroller").Current.BoundingRectangle;
-                var restoredPage = WaitElement("page-scroller").Current.BoundingRectangle;
+                var restoredPage = VisiblePageBounds();
                 return restoredTable.Height >= restoredPage.Height - 170 && restoredTable.Bottom <= restoredPage.Bottom + 4;
             }, "Restoring the window expands the timetable viewport again");
             AutomationElement? lesson = null;
@@ -161,6 +161,8 @@ internal static class Program
             // Only synthetic labels appear in this test. Do not capture screenshots or application data.
             Console.Error.WriteLine("Windows UI check failed: " + error.GetType().Name + " — " + error.Message + " (step: " + _lastStep + ", passed: " + _checks + ")");
             if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
+                Console.Error.WriteLine("Synthetic native window: " + _window?.Current.BoundingRectangle);
+            if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
                 foreach (var id in new[] { "page-scroller", "timetable-grid-scroller", "page-timetable", "架空科目甲" })
                 {
                     try
@@ -168,6 +170,7 @@ internal static class Program
                         var element = Find(id); if (element is null) continue;
                         var bounds = element.Current.BoundingRectangle;
                         Console.Error.WriteLine($"Synthetic layout {id}: offscreen={element.Current.IsOffscreen}, enabled={element.Current.IsEnabled}, bounds={bounds}");
+                        if (id == "timetable-grid-scroller") Console.Error.WriteLine(element.Current.Name);
                         if (element.TryGetCurrentPattern(ScrollPattern.Pattern, out var pattern))
                         { var scroll = ((ScrollPattern)pattern).Current; Console.Error.WriteLine($"Scroll: horizontal={scroll.HorizontalScrollPercent}, vertical={scroll.VerticalScrollPercent}, view={scroll.HorizontalViewSize}/{scroll.VerticalViewSize}"); }
                     }
@@ -387,6 +390,14 @@ internal static class Program
         if (_process is null) return;
         try { if (!_process.HasExited) { _process.Kill(true); _process.WaitForExit(5000); } }
         finally { _process.Dispose(); _process = null; _window = null; }
+    }
+    private static System.Windows.Rect VisiblePageBounds()
+    {
+        // WinUI's outer ScrollViewer peer can expose its unclipped content
+        // rectangle when the changes section is expanded. Compare against
+        // the portion inside the actual native window, which users can see.
+        return System.Windows.Rect.Intersect(WaitElement("page-scroller").Current.BoundingRectangle,
+            _window!.Current.BoundingRectangle);
     }
     private static AutomationElement? Find(string id) => _window?.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, id));
     private static AutomationElement WaitElement(string id) { AutomationElement? result = null; Wait(() => (result = Find(id)) is not null, id); return result!; }
