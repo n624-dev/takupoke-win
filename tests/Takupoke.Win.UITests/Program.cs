@@ -103,8 +103,8 @@ internal static class Program
             Wait(() => SavedClass(preferences) == "3_IT", "class preference is persisted");
             Navigate("timetable");
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "クラス：3-IT")) is not null, "selected class appears on timetable");
-            var tableBounds = WaitElement("timetable-grid-scroller").Current.BoundingRectangle;
             var pageBounds = VisiblePageBounds();
+            var tableBounds = WaitElement("timetable-grid-scroller").Current.BoundingRectangle;
             Require(tableBounds.Width >= pageBounds.Width - 64, "The desktop table uses the available content width.");
             Require(tableBounds.Height >= pageBounds.Height - 170 && tableBounds.Bottom <= pageBounds.Bottom + 4, "The timetable viewport fills the page without pushing the table below it.");
             var clockBounds = WaitElement("timetable-clock-label-1").Current.BoundingRectangle;
@@ -113,9 +113,10 @@ internal static class Program
             Require(((ExpandCollapsePattern)changeList.GetCurrentPattern(ExpandCollapsePattern.Pattern)).Current.ExpandCollapseState == ExpandCollapseState.Expanded, "Changes are initially visible.");
             var originalWindowBounds = _window!.Current.BoundingRectangle;
             Require(SetWindowPos(_process!.MainWindowHandle, 0, (int)originalWindowBounds.Left, (int)originalWindowBounds.Top,
-                (int)originalWindowBounds.Width, 600, 0x0044), "The test window can be shortened for the scroll regression.");
-            Wait(() => ((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current.VerticallyScrollable,
-                "Shortening the host makes the synthetic eight-period grid scrollable");
+                (int)originalWindowBounds.Width, Math.Max(400, (int)originalWindowBounds.Height - 200), 0x0044), "The test window can be shortened for the scroll regression.");
+            Wait(() => VisiblePageBounds().Height < pageBounds.Height - 60
+                && ((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current.VerticallyScrollable,
+                "The shortened viewport is arranged and the synthetic eight-period grid is scrollable");
             var timetableScroller = WaitElement("timetable-grid-scroller");
             var scrolling = (ScrollPattern)timetableScroller.GetCurrentPattern(ScrollPattern.Pattern);
             scrolling.SetScrollPercent(ScrollPattern.NoScroll, 60);
@@ -129,7 +130,8 @@ internal static class Program
             {
                 var restoredTable = WaitElement("timetable-grid-scroller").Current.BoundingRectangle;
                 var restoredPage = VisiblePageBounds();
-                return restoredTable.Height >= restoredPage.Height - 170 && restoredTable.Bottom <= restoredPage.Bottom + 4;
+                return restoredPage.Height >= pageBounds.Height - 1
+                    && restoredTable.Height >= restoredPage.Height - 170 && restoredTable.Bottom <= restoredPage.Bottom + 4;
             }, "Restoring the window expands the timetable viewport again");
             AutomationElement? lesson = null;
             Wait(() => (lesson = Find("架空科目甲")) is not null && !lesson.Current.IsOffscreen && lesson.Current.IsEnabled, "lesson is visible after navigation");
@@ -394,18 +396,32 @@ internal static class Program
     }
     private static System.Windows.Rect VisiblePageBounds()
     {
-        // WinUI's outer ScrollViewer peer can expose its unclipped content
-        // rectangle when the changes section is expanded. Compare against
-        // the portion inside the actual native window, which users can see.
-        var bounds = System.Windows.Rect.Intersect(WaitElement("page-scroller").Current.BoundingRectangle,
-            _window!.Current.BoundingRectangle);
-        if (Find("status-bar") is { } footer && !footer.Current.IsOffscreen)
-        {
-            var footerBounds = footer.Current.BoundingRectangle;
-            if (!footerBounds.IsEmpty && footerBounds.Height > 0 && footerBounds.Top > bounds.Top && footerBounds.Top < bounds.Bottom)
-                bounds.Height = footerBounds.Top - bounds.Top;
-        }
+        var bounds = System.Windows.Rect.Empty;
+        Wait(() => TryMeasuredPageBounds(out bounds), "The arranged page viewport is available through the isolated layout probe");
         return bounds;
+    }
+    private static bool TryMeasuredPageBounds(out System.Windows.Rect bounds)
+    {
+        bounds = System.Windows.Rect.Empty;
+        // The outer ScrollViewer peer includes unclipped content in its UIA
+        // height. The fake-data app probe reports the arranged viewport in
+        // logical pixels; convert that actual size to physical UIA pixels.
+        if (Find("timetable-grid-scroller") is not { } table || Find("page-scroller") is not { } page) return false;
+        var geometry = table.Current.Name;
+        if (!geometry.StartsWith("Synthetic layout: ", StringComparison.Ordinal)) return false;
+        var measuredPage = System.Text.RegularExpressions.Regex.Match(geometry, @"; page=([^,;]+),([^;]+);");
+        var measuredScale = System.Text.RegularExpressions.Regex.Match(geometry, @"; scale=([^;]+)$");
+        bool Number(string text, out double value) => double.TryParse(text, System.Globalization.NumberStyles.Float,
+            System.Globalization.CultureInfo.InvariantCulture, out value) && double.IsFinite(value) && value > 0;
+        if (!measuredPage.Success || !measuredScale.Success
+            || !Number(measuredPage.Groups[1].Value, out var width)
+            || !Number(measuredPage.Groups[2].Value, out var height)
+            || !Number(measuredScale.Groups[1].Value, out var scale)) return false;
+        var origin = page.Current.BoundingRectangle;
+        if (origin.IsEmpty) return false;
+        bounds = System.Windows.Rect.Intersect(new System.Windows.Rect(origin.Left, origin.Top, width * scale, height * scale),
+            _window!.Current.BoundingRectangle);
+        return !bounds.IsEmpty;
     }
     private static AutomationElement? Find(string id) => _window?.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, id));
     private static AutomationElement WaitElement(string id) { AutomationElement? result = null; Wait(() => (result = Find(id)) is not null, id); return result!; }
