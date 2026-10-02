@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
 using Takupoke.Core;
+using Takupoke.Win.ViewModels;
 
 namespace Takupoke.Win;
 
