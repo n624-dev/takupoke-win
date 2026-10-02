@@ -120,7 +120,10 @@ public sealed partial class MainWindow
                 ? "：取得・解析を完了できていないため、授業に反映していません。"
                 : "：最新の内容を反映できていません。前回の正常な解析結果を表示しています。")));
         warnings.Children.Add(IconButton("取得・解析の状況を確認", "document", () => OpenPage("materials"), "schedule-material-warnings"));
-        var expander = new Expander { Header = "最新の内容を反映できていない資料があります（" + stale.Length + "件）", Content = warnings, HorizontalAlignment = HorizontalAlignment.Stretch, IsExpanded = _expandedMaterialWarnings.Contains(_page) };
+        var warningTitle = "確認が必要な時間割ファイル（" + stale.Length + "件）";
+        var header = Text(warningTitle); header.IsTextSelectionEnabled = false;
+        var expander = new Expander { Header = header, Content = warnings, HorizontalAlignment = HorizontalAlignment.Stretch, IsExpanded = _expandedMaterialWarnings.Contains(_page) };
+        AutomationProperties.SetName(expander, warningTitle);
         var warningPage = _page;
         expander.Expanding += (_, _) => _expandedMaterialWarnings.Add(warningPage);
         expander.Collapsed += (_, _) => _expandedMaterialWarnings.Remove(warningPage);
