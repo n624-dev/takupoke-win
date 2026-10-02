@@ -3,5 +3,12 @@ $executable = Join-Path $PSScriptRoot '../../src/Takupoke.Win/bin/x64/Release/ne
 $executable = (Resolve-Path -LiteralPath $executable).Path
 $env:TAKUPOKE_OFFLINE_TEST_MODE = '1'
 $env:TAKUPOKE_DATA_ROOT = Join-Path $env:TAKUPOKE_CI_TEMP 'test-app-data'
+$testStarted = Get-Date
 dotnet run --project (Join-Path $PSScriptRoot 'Takupoke.Win.UITests.csproj') --configuration Release -- $executable $env:TAKUPOKE_DATA_ROOT
-if ($LASTEXITCODE -ne 0) { throw 'Windows UI automation checks failed.' }
+if ($LASTEXITCODE -ne 0) {
+    # Only this app runs with an isolated synthetic offline data root.
+    Get-WinEvent -FilterHashtable @{ LogName = 'Application'; StartTime = $testStarted } -ErrorAction SilentlyContinue |
+        Where-Object { $_.ProviderName -in @('.NET Runtime', 'Application Error') -and $_.Message.Contains('Takupoke.Win') } |
+        Select-Object -First 4 -ExpandProperty Message | Write-Output
+    throw 'Windows UI automation checks failed.'
+}

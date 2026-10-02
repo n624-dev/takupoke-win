@@ -86,6 +86,12 @@ internal static class Program
         {
             // Only synthetic labels appear in this test. Do not capture screenshots or application data.
             Console.Error.WriteLine("Windows UI check failed: " + error.GetType().Name + " — " + error.Message);
+            if (args.Length == 2 && Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1"
+                && Path.GetFullPath(args[1]) == Path.GetFullPath(Environment.GetEnvironmentVariable("TAKUPOKE_DATA_ROOT") ?? ""))
+            {
+                var diagnostic = Path.Combine(args[1], "ui-error.txt");
+                if (File.Exists(diagnostic)) foreach (var line in File.ReadLines(diagnostic).Take(30)) Console.Error.WriteLine(line);
+            }
             return 1;
         }
         finally { Stop(); }
