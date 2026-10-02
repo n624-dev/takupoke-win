@@ -91,6 +91,10 @@ GitHub Actionsの保存用キャッシュやartifactは作成しません。配�
 
 同じ実装を含むコミット`1ef2abb`から[開発確認版0.1.0-dev.5](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.5)を公開しました。[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37019808496)は全8ジョブが成功し、x64新規導入後のUI251項目・再インストール後のUI252項目、設定保持、アンインストールを確認しました。x64・ARM64のSetupとZIP、導入説明、SHA-256を配布しています。ARM64実機と学校アカウント・実資料による確認は未完了です。
 
+2026-10-03（日本時間）の全面見直しは、コミット`2043cbe`の[push CI](https://github.com/n624-dev/takupoke-win/actions/runs/37039440433)全7ジョブと[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37039441046)全8ジョブが成功し、[開発確認版0.1.0-dev.6](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.6)として公開しました。Core183件・Integration120件、固定Swift比較、x64 Debug／Release・ARM64 Releaseビルドに加え、x64の6つの導入状態でUI262項目以上を確認しました。実dev.5から同じ／別フォルダーへの更新、無関係な自動起動の保護、設定と無関係ファイルの保持、削除も成功しています。公開6ファイルの名前・ビルド元と、SHA-256一覧をGitHubの配布ハッシュへ照合しました。
+
+独立した4名が重複する範囲で全コード・文言・配布経路を確認しました。Windowsネイティブの最終44画面では、明暗テーマ、通常幅と680幅、150／200%文字拡大を確認しています。指摘された日付選択、コントラスト、フォーム配置、警告件数の見切れ、年度不足・破損キャッシュ、削除案内は修正確認済みです。公開テストは架空入力のみで、ARM64実機・学校認証・実資料・OneDrive同期・OS通知・ロック／復帰・High Contrastの実画面確認は含みません。
+
 ## データの扱い
 
 学校資料は端末内で解析し、OneDriveの同期フォルダーから利用者が選んだファイルを読み取ります。再読み取りの成功は、クラウド上の最新版との同期完了を示すものではありません。個人設定は端末内に保存します。
