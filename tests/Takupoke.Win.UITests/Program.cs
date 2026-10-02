@@ -66,6 +66,10 @@ internal static partial class Program
             CheckAuthentication(args[0], args[1]);
             Invoke(WaitElement("settings-materials"));
             Wait(() => Find("page-materials") is not null, "material list is a settings child screen");
+            // Authentication cancellation intentionally pauses automatic checks.
+            // Resume first so this separate test exercises an enabled stop action.
+            Invoke(WaitElement("refresh-materials"));
+            Wait(() => Find("refresh-materials")?.Current.IsEnabled == true && Find("automatic-refresh-paused") is null, "Manual refresh resumes checking after authentication cancellation");
             Invoke(WaitElement("suspend-automatic-refresh"));
             Wait(() => Find("automatic-refresh-paused") is not null, "Automatic file checking can be suspended while idle");
             Invoke(WaitElement("refresh-materials"));
@@ -156,8 +160,10 @@ internal static partial class Program
                 return restoredPage.Height >= pageBounds.Height - 1
                     && TableFillsAvailableHeight(restoredTable, restoredPage);
             }, "Restoring the window expands the timetable viewport again");
+            CheckLessonFocusAcrossClock();
+            CheckTimetableMenuAcrossClock(args[1], preferences);
             AutomationElement? lesson = null;
-            Wait(() => (lesson = Find("架空科目甲")) is not null && !lesson.Current.IsOffscreen && lesson.Current.IsEnabled, "lesson is visible after navigation");
+            Wait(() => (lesson = FindLessons("架空科目甲").FirstOrDefault()) is not null && !lesson.Current.IsOffscreen && lesson.Current.IsEnabled, "lesson is visible after navigation");
             var periodBounds = WaitElement("timetable-period-label-1").Current.BoundingRectangle;
             clockBounds = WaitElement("timetable-clock-label-1").Current.BoundingRectangle;
             Require(clockBounds.Right + 5 <= lesson!.Current.BoundingRectangle.Left && clockBounds.Top >= periodBounds.Bottom + 1, "Timetable clocks fit within their column with padding and spacing below the period.");
@@ -173,7 +179,7 @@ internal static partial class Program
             Stop();
             Start(args[0]); Navigate("timetable");
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "クラス：3-IT")) is not null, "saved class survives app restart");
-            Wait(() => Find("架空科目甲") is not null, "accepted timetable remains after source is unavailable");
+            Wait(() => FindLessons("架空科目甲").Length > 0, "accepted timetable remains after source is unavailable");
             Navigate("settings");
             Require(SavedMainColor(preferences) == "purple", "Main color survives app restart.");
             Require(TextColor("page-settings") == bodyColor, "Restart retains theme text color.");
@@ -190,13 +196,13 @@ internal static partial class Program
             if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
                 Console.Error.WriteLine("Synthetic native window: " + _window?.Current.BoundingRectangle);
             if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
-                foreach (var id in new[] { "page-scroller", "status-bar", "timetable-grid-scroller", "page-timetable", "架空科目甲" })
+                foreach (var id in new[] { "page-scroller", "status-bar", "timetable-grid-scroller", "page-timetable", "synthetic-lesson" })
                 {
                     try
                     {
-                        var element = Find(id); if (element is null) continue;
+                        var element = id == "synthetic-lesson" ? FindLessons("架空科目甲").FirstOrDefault() : Find(id); if (element is null) continue;
                         var bounds = element.Current.BoundingRectangle;
-                        Console.Error.WriteLine($"Synthetic layout {id}: offscreen={element.Current.IsOffscreen}, enabled={element.Current.IsEnabled}, bounds={bounds}");
+                        Console.Error.WriteLine($"Synthetic layout {id}: automationId={element.Current.AutomationId}, focused={element.Current.HasKeyboardFocus}, offscreen={element.Current.IsOffscreen}, enabled={element.Current.IsEnabled}, bounds={bounds}");
                         if (id == "timetable-grid-scroller") Console.Error.WriteLine(element.Current.Name);
                         if (element.TryGetCurrentPattern(ScrollPattern.Pattern, out var pattern))
                         { var scroll = ((ScrollPattern)pattern).Current; Console.Error.WriteLine($"Scroll: horizontal={scroll.HorizontalScrollPercent}, vertical={scroll.VerticalScrollPercent}, view={scroll.HorizontalViewSize}/{scroll.VerticalViewSize}"); }
@@ -214,6 +220,58 @@ internal static partial class Program
         finally { Stop(); }
     }
     private static bool Visible(string id) => Find(id) is { } element && !element.Current.IsOffscreen;
+    private static AutomationElement[] FindLessons(string subject) => _window?.FindAll(TreeScope.Descendants,
+        new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button)).Cast<AutomationElement>()
+        .Where(element => element.Current.Name.Contains(subject, StringComparison.Ordinal)).ToArray() ?? [];
+    private static void CheckLessonFocusAcrossClock()
+    {
+        AutomationElement[] lessons = [];
+        Wait(() => (lessons = FindLessons("架空科目甲")).Length == 5, "The synthetic subject appears on all five weekdays");
+        var ids = lessons.Select(lesson => lesson.Current.AutomationId).Order(StringComparer.Ordinal).ToArray();
+        Require(ids.All(id => id.Length > 0) && ids.Distinct(StringComparer.Ordinal).Count() == 5,
+            "The same subject on different weekdays has five stable unique automation IDs.");
+        var laterDay = WaitElement(ids[1]);
+        if (laterDay.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll)) ((ScrollItemPattern)scroll).ScrollIntoView();
+        laterDay.SetFocus();
+        Wait(() => Find(ids[1])?.Current.HasKeyboardFocus == true, "The Tuesday lesson receives keyboard focus");
+        var previousGrid = WaitElement("timetable-grid-scroller").GetRuntimeId();
+        var elapsed = Stopwatch.StartNew();
+        Wait(() => elapsed.Elapsed >= TimeSpan.FromSeconds(16)
+            && Find("timetable-grid-scroller") is { } current && !current.GetRuntimeId().SequenceEqual(previousGrid),
+            "A real periodic clock redraw occurs after focusing a later-day lesson");
+        Wait(() => Find(ids[1])?.Current.HasKeyboardFocus == true,
+            "Clock redraw preserves focus on the same Tuesday lesson rather than the Monday subject");
+        Require(FindLessons("架空科目甲").Select(lesson => lesson.Current.AutomationId).Order(StringComparer.Ordinal).SequenceEqual(ids),
+            "Clock redraw retains the same unique weekday lesson IDs.");
+    }
+    private static void CheckTimetableMenuAcrossClock(string root, string preferences)
+    {
+        var clockProbe = Path.Combine(root, "offline-clock-ticks.txt");
+        Wait(() => File.Exists(clockProbe), "The isolated clock tick probe is available");
+        var previousValue = SavedIncludesChanges(preferences);
+        Invoke(WaitElement("timetable-display-options"));
+        var option = ByName("時間割変更を反映", ControlType.MenuItem);
+        var menuId = option.GetRuntimeId();
+        var previousGrid = WaitElement("timetable-grid-scroller").GetRuntimeId();
+        var previousTick = ReadProbe(clockProbe);
+        var elapsed = Stopwatch.StartNew();
+        Wait(() => elapsed.Elapsed >= TimeSpan.FromSeconds(16) && ReadProbe(clockProbe) != previousTick,
+            "The clock ticks while the timetable display menu remains open");
+        option = ByName("時間割変更を反映", ControlType.MenuItem);
+        Require(!option.Current.IsOffscreen && option.Current.IsEnabled && option.GetRuntimeId().SequenceEqual(menuId),
+            "Periodic clock updates retain the original visible display menu item.");
+        Require(WaitElement("timetable-grid-scroller").GetRuntimeId().SequenceEqual(previousGrid),
+            "The timetable defers its periodic redraw while the display menu is open.");
+        Invoke(option);
+        Wait(() => SavedIncludesChanges(preferences) != previousValue, "The retained display menu option remains selectable and saves its value");
+        Invoke(WaitElement("timetable-display-options")); Invoke(ByName("時間割変更を反映", ControlType.MenuItem));
+        Wait(() => SavedIncludesChanges(preferences) == previousValue, "The menu regression restores the original display preference");
+    }
+    private static bool SavedIncludesChanges(string path)
+    {
+        using var document = JsonDocument.Parse(File.ReadAllBytes(path));
+        return !document.RootElement.TryGetProperty("includesChanges", out var value) || value.GetBoolean();
+    }
     private static string ReadProbe(string path)
     { using var file = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete); using var text = new StreamReader(file); return text.ReadToEnd(); }
     private static void WriteProbe(string path, string value)

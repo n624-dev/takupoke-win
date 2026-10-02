@@ -28,10 +28,10 @@ public sealed record EventsPayload(string Version, int SchoolYear, string Source
     { "月曜日授業" => 1, "火曜日授業" => 2, "水曜日授業" => 3, "木曜日授業" => 4, "金曜日授業" => 5, _ => null };
     public EventsPayload Validated(int requestedYear)
     {
-        if (Version != "v1" || SchoolYear != requestedYear || SchoolYear is < 1900 or > 9998 || !ApiPayloads.HexDigest(SourcePdfSha256)
-            || SourcePdfETag is not null && !ApiPayloads.SourceETag(SourcePdfETag) || Events.Count is < 1 or > 2000) throw new ApiException(ApiFailure.InvalidResponse);
+        if (Version != "v1" || SchoolYear != requestedYear || SchoolYear is < 1900 or > 9998 || SourcePdfSha256 is null || !ApiPayloads.HexDigest(SourcePdfSha256)
+            || SourcePdfETag is not null && !ApiPayloads.SourceETag(SourcePdfETag) || Events is null || Events.Count is < 1 or > 2000) throw new ApiException(ApiFailure.InvalidResponse);
         foreach (var row in Events)
-            if (!SchoolDate.TryParse(row.StartDate, out var start) || !SchoolDate.TryParse(row.EndDate, out var end)
+            if (row is null || !SchoolDate.TryParse(row.StartDate, out var start) || !SchoolDate.TryParse(row.EndDate, out var end)
                 || start < new DateOnly(SchoolYear, 4, 1) || start > end || end > new DateOnly(SchoolYear + 1, 3, 31)
                 || string.IsNullOrWhiteSpace(row.Title) || row.Title.Length > 200 || !Tags.Contains(row.Tag)
                 || row.Tag == "曜日振替" && OverrideDay(row.Title) is null) throw new ApiException(ApiFailure.InvalidResponse);

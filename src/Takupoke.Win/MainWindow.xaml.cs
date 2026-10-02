@@ -27,6 +27,7 @@ public sealed partial class MainWindow : Window
     private bool _exitRequested;
     private bool _initialSetupOffered;
     private bool _windowActive;
+    private int _offlineClockTicks;
     private readonly List<Control> _operationControls = [];
     private readonly List<Control> _preferenceControls = [];
     public MainWindow()
@@ -43,9 +44,14 @@ public sealed partial class MainWindow : Window
         RootGrid.ActualThemeChanged += (_, _) => { ApplyWindowChrome(); if (_ready) Render(); };
         _uiSettings.TextScaleFactorChanged += (_, _) => DispatcherQueue.TryEnqueue(() => { if (_ready) Render(); });
         _model.SnapshotChanged += () => { Render(); OfferInitialSetup(); };
-        _model.ClockChanged += () => { if (_page is "home" or "timetable" && !_model.Busy && !_selectingMaterial) Render(); };
+        _model.ClockChanged += () =>
+        {
+            if (_model.OfflineTest)
+                try { File.WriteAllText(Path.Combine(_model.Root, "offline-clock-ticks.txt"), (++_offlineClockTicks).ToString(System.Globalization.CultureInfo.InvariantCulture)); } catch { }
+            if (_page is "home" or "timetable" && !_model.Busy && !_selectingMaterial) Render();
+        };
         _model.PropertyChanged += (_, _) => UpdateStatus();
-        _model.PrivateDataCleared += () => { if (_activeDialog is { } active) { active.Content = null; active.Hide(); } CloseBrowser(); if (_pdfImage is not null) _pdfImage.Source = null; _pdfDialog?.Hide(); Render(); };
+        _model.PrivateDataCleared += () => { ClosePrivatePopups(); if (_activeDialog is { } active) { active.Content = null; active.Hide(); } CloseBrowser(); if (_pdfImage is not null) _pdfImage.Source = null; _pdfDialog?.Hide(); Render(); };
         _model.NotificationActivated += () => { _model.OpenTodayWeek(); Navigation.SelectedItem = Navigation.MenuItems[2]; ShowWindow(); };
         var display = Microsoft.UI.Windowing.DisplayArea.GetFromWindowId(AppWindow.Id, Microsoft.UI.Windowing.DisplayAreaFallback.Primary);
         if (display is not null)
@@ -132,7 +138,8 @@ public sealed partial class MainWindow : Window
     }
     private void Render()
     {
-        if (_dialogOpen || _selectingMaterial) { UpdateStatus(); return; }
+        if (_dialogOpen || _selectingMaterial || DeferRenderForPopups()) { UpdateStatus(); return; }
+        _popupRenderPending = false;
         var pageChanged = _renderedPage != _page;
         if (!pageChanged && _page == "timetable" && !_restoringTimetableScroll && _timetableScroller is { } previousScroller)
             _timetableScrollPosition = (_timetableScrollKey, previousScroller.HorizontalOffset, previousScroller.VerticalOffset);
@@ -145,19 +152,20 @@ public sealed partial class MainWindow : Window
         if (_model.Preferences.MainColor != "default")
             foreach (var theme in new[] { "Light", "Dark" })
             {
-                var tint = MainAccentColor();
+                var tint = MainAccentColor(); var dark = theme == "Dark"; var tintText = TextOnTint(tint);
                 var resources = new ResourceDictionary();
                 resources["AccentFillColorDefaultBrush"] = new SolidColorBrush(tint);
-                resources["AccentFillColorSecondaryBrush"] = new SolidColorBrush(tint) { Opacity = 0.9 };
-                resources["AccentFillColorTertiaryBrush"] = new SolidColorBrush(tint) { Opacity = 0.8 };
-                resources["AccentTextFillColorPrimaryBrush"] = new SolidColorBrush(tint);
+                resources["AccentFillColorSecondaryBrush"] = new SolidColorBrush(tint) { Opacity = ReadableFillOpacity(tint, tintText, dark, 0.9) };
+                resources["AccentFillColorTertiaryBrush"] = new SolidColorBrush(tint) { Opacity = ReadableFillOpacity(tint, tintText, dark, 0.8) };
+                resources["AccentTextFillColorPrimaryBrush"] = new SolidColorBrush(ReadableTextColor(tint, dark));
+                resources["TextOnAccentFillColorPrimaryBrush"] = new SolidColorBrush(tintText);
                 RootGrid.Resources.ThemeDictionaries[theme] = resources;
             }
         // Explicitly retain the standard WinUI high-contrast palette even with a selected tint.
         if (_model.Preferences.MainColor != "default")
         {
             var highContrast = new ResourceDictionary();
-            foreach (var key in new[] { "AccentFillColorDefaultBrush", "AccentFillColorSecondaryBrush", "AccentFillColorTertiaryBrush", "AccentTextFillColorPrimaryBrush" })
+            foreach (var key in new[] { "AccentFillColorDefaultBrush", "AccentFillColorSecondaryBrush", "AccentFillColorTertiaryBrush", "AccentTextFillColorPrimaryBrush", "TextOnAccentFillColorPrimaryBrush" })
                 highContrast[key] = Application.Current.Resources[key];
             RootGrid.Resources.ThemeDictionaries["HighContrast"] = highContrast;
         }
@@ -188,9 +196,9 @@ public sealed partial class MainWindow : Window
     private Windows.UI.Color MainAccentColor() => _model.Preferences.MainColor == "default"
         ? _uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Accent) : LinkColor(_model.Preferences.MainColor);
     private Brush ActionBrush => _accessibility.HighContrast
-        ? (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"] : new SolidColorBrush(MainAccentColor());
+        ? (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"] : new SolidColorBrush(ReadableTextColor(MainAccentColor(), RootGrid.ActualTheme == ElementTheme.Dark));
     private Brush WarningBrush => _accessibility.HighContrast
-        ? (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"] : new SolidColorBrush(LinkColor("orange"));
+        ? (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"] : new SolidColorBrush(ReadableTextColor(LinkColor("orange"), RootGrid.ActualTheme == ElementTheme.Dark));
     private Button AccentButton(string label, Func<Task> action, string? id = null)
     { var button = Button(label, action, id); button.Foreground = ActionBrush; return button; }
     private static Control? FindById(DependencyObject root, string id)
@@ -212,7 +220,7 @@ public sealed partial class MainWindow : Window
         button.Click += async (_, _) => { try { await action(); } catch { if (!_dialogOpen) await Message("処理を完了できませんでした", "操作を完了できませんでした。選択した資料や設定を確認し、もう一度お試しください。保存済みの資料は引き続き表示します。"); } };
         return button;
     }
-    private void Add(UIElement element) => PageContent.Children.Add(element);
+    private void Add(UIElement element) { RegisterPopupTree(element); PageContent.Children.Add(element); }
     private T OperationControl<T>(T control) where T : Control { _operationControls.Add(control); control.IsEnabled = !_model.Busy && _model.PreferencesReady; return control; }
     private T PreferenceControl<T>(T control) where T : Control { _preferenceControls.Add(control); control.IsEnabled = _model.PreferencesReady; return control; }
     private Button OperationButton(string label, Func<Task> action, string? id = null) => OperationControl(Button(label, action, id));
@@ -223,6 +231,7 @@ public sealed partial class MainWindow : Window
     private async Task<ContentDialogResult> Dialog(string title, UIElement content, string primary = "閉じる", string? secondary = null)
     {
         _dialogOpen = true;
+        RegisterPopupTree(content);
         try
         {
             var dialog = new ContentDialog { XamlRoot = RootGrid.XamlRoot, Title = title,

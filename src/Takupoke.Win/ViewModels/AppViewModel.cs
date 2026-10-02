@@ -186,14 +186,14 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             incomplete |= RevisionFailures.Count > 0;
             var failedYears = new List<int>();
             foreach (var year in _events.SavedYears())
-                try { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await _events.LoadAsync(year, token), token), token); }
+                try { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await LoadEventsAsync(year, token), token), token); }
                 catch (ApiException) { failedYears.Add(year); }
             EventsUpdateMessage = failedYears.Count == 0 ? null : string.Join("、", failedYears) + "年度の学校行事を更新確認できませんでした。保存済みの結果を表示しています。";
             incomplete |= failedYears.Count > 0;
             if (!_checkedEventSource)
             {
                 _checkedEventSource = true;
-                var sourceState = await new EventSourceChecker(_http).CheckAsync(await _events.LoadAsync(EventSourceChecker.SourceSchoolYear, token), token);
+                var sourceState = await new EventSourceChecker(_http).CheckAsync(await LoadEventsAsync(EventSourceChecker.SourceSchoolYear, token), token);
                 EventSourceMessage = EventSourceChecker.Message(sourceState);
                 incomplete |= sourceState == EventSourceState.Unavailable;
             }
@@ -248,7 +248,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         ApplyRevisionCheck(await _shared.CheckDetailedAsync(DataSet.Links, token));
     }, "一覧の更新情報を確認しています。", automatic: true);
     public Task FetchEventsAsync(int year) => RunAsync(async token =>
-    { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await _events.LoadAsync(year, token), token), token); EventSourceMessage = null; EventsUpdateMessage = null; await ReloadAsync(token); Status = "学校行事を保存しました。元PDFの更新確認は次回起動時に行います。"; });
+    { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await LoadEventsAsync(year, token), token), token); EventSourceMessage = null; EventsUpdateMessage = null; await ReloadAsync(token); Status = "学校行事を保存しました。元PDFの更新確認は次回起動時に行います。"; });
     public async Task SavePreferencesAsync(Func<UserPreferences, UserPreferences> update)
     {
         await _preferenceOperations.WaitAsync();
@@ -280,6 +280,15 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public SavedLinks? LinksRecord { get; private set; }
     public SavedMapping? MappingRecord { get; private set; }
     public SavedTimes? TimesRecord { get; private set; }
+    private readonly SortedSet<int> _eventReadFailures = [];
+    public string? EventStorageMessage => _eventReadFailures.Count == 0 ? null
+        : string.Join("、", _eventReadFailures) + "年度の保存した学校行事を読み込めませんでした。この年度の行事は時間割に反映していません。設定の「学校行事」で取得し直してください。他の資料は引き続き表示します。";
+    private async Task<SavedEvents?> LoadEventsAsync(int year, CancellationToken token)
+    {
+        var read = await _events.LoadAvailableAsync(year, token);
+        if (read.Failed) _eventReadFailures.Add(year); else _eventReadFailures.Remove(year);
+        return read.Events;
+    }
     private async Task ReloadAsync(CancellationToken token)
     {
         if (_displayPeriod is null || _displayPeriod != SchoolDataPeriod.FromInstant(DateTimeOffset.UtcNow))
@@ -295,13 +304,13 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         var events = new List<SchoolEvent>();
         var eventRecords = new Dictionary<int, SavedEvents>();
         var years = _events.SavedYears();
-        foreach (var year in years) { var saved = await _events.LoadAsync(year, token); if (saved is not null) { eventRecords[year] = saved; events.AddRange(saved.Payload.Project()); } }
+        foreach (var year in years) { var saved = await LoadEventsAsync(year, token); if (saved is not null) { eventRecords[year] = saved; events.AddRange(saved.Payload.Project()); } }
         token.ThrowIfCancellationRequested();
         if (await _school.BeginAsync(token) != lease) throw new OperationCanceledException();
         var timetable = snapshots[MaterialKind.Timetable].Analysis?.Timetable;
         if (timetable is not null && mappings is not null) timetable = timetable with { Lessons = timetable.Lessons.Select(l => l with { Names = mappings.Apply(l.Names, l.ClassName) }).ToArray() };
         MappingRecord = mappingRecord; LinksRecord = linksRecord; TimesRecord = timesRecord;
-        Materials = snapshots; Mappings = mappings; Links = links; SavedEventYears = years; EventRecords = eventRecords;
+        Materials = snapshots; Mappings = mappings; Links = links; SavedEventYears = eventRecords.Keys.Order().ToArray(); EventRecords = eventRecords;
         Data = new(timetable, snapshots[MaterialKind.Changes].Analysis?.Changes,
             new[] { snapshots[MaterialKind.Exam].Analysis?.Special, snapshots[MaterialKind.ExamReturn].Analysis?.Special }.OfType<SpecialAnalysis>().ToArray(), events, times);
         _displayPeriod = lease.Period;

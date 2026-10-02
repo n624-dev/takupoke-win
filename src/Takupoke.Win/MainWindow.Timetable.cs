@@ -46,8 +46,10 @@ public sealed partial class MainWindow
     private void BuildTimetable()
     {
         TitleText("時間割", "page-timetable");
+        AddMaterialWarnings();
         if (_model.EventSourceMessage is { } eventWarning) Add(Card(Text(eventWarning)));
         if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
+        if (_model.EventStorageMessage is { } storageFailure) Add(Card(Text(storageFailure)));
         var bounds = _model.Engine.ReachableWeeks(_model.NavigationAnchor, _model.Preferences.SelectedClasses);
         var start = _model.WeekStart;
         if (start < bounds.Lower) start = bounds.Lower; if (start > bounds.Upper) start = bounds.Upper; _model.WeekStart = start;

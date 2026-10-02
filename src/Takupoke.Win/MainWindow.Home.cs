@@ -106,6 +106,27 @@ public sealed partial class MainWindow
         var caption = Text(label); caption.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
         row.Children.Add(caption); var detail = Text(value); Grid.SetColumn(detail, 1); row.Children.Add(detail); return row;
     }
+    private readonly HashSet<string> _expandedMaterialWarnings = [];
+    private void AddMaterialWarnings()
+    {
+        var stale = _model.Materials.Where(item => item.Value.AcquisitionAttempt?.Failure is not null
+            || item.Value.ParseAttempt?.Failure is not null
+            || item.Value.Source is { } source && item.Value.Analysis is { } analysis && source.Digest != analysis.SourceDigest)
+            .ToArray();
+        if (stale.Length == 0) return;
+        var warnings = Panel(ScheduleHeading("時間割ファイルの確認が必要です", "info"));
+        foreach (var item in stale)
+            warnings.Children.Add(Text(AppViewModel.MaterialLabel(item.Key) + (item.Value.Analysis is null
+                ? "：取得・解析を完了できていないため、授業に反映していません。"
+                : "：最新の内容を反映できていません。前回の正常な解析結果を表示しています。")));
+        warnings.Children.Add(IconButton("取得・解析の状況を確認", "document", () => OpenPage("materials"), "schedule-material-warnings"));
+        var expander = new Expander { Header = "最新の内容を反映できていない資料があります（" + stale.Length + "件）", Content = warnings, HorizontalAlignment = HorizontalAlignment.Stretch, IsExpanded = _expandedMaterialWarnings.Contains(_page) };
+        var warningPage = _page;
+        expander.Expanding += (_, _) => _expandedMaterialWarnings.Add(warningPage);
+        expander.Collapsed += (_, _) => _expandedMaterialWarnings.Remove(warningPage);
+        AutomationProperties.SetAutomationId(expander, "schedule-material-warning-summary");
+        Add(expander);
+    }
     private void BuildHome()
     {
         TitleText("ホーム", "page-home");
@@ -114,9 +135,11 @@ public sealed partial class MainWindow
         var updates = _model.Revisions.Where(p => p.Value.Changed && (p.Key == DataSet.Times || p.Key == DataSet.Links && _model.Links is not null || p.Key == DataSet.Mapping && _model.Mappings is not null)).Select(p => AppViewModel.DataSetLabel(p.Key)).ToArray();
         if (updates.Length > 0) Add(ScheduleNotice("新しいデータがあります", string.Join("・", updates) + "を取得できます。", "データを取得", "download", () => OpenPage("account")));
         if (_model.RevisionFailures.Count > 0) Add(ScheduleNotice("更新を確認できませんでした", "通信状況を確認して、もう一度お試しください。保存済みのデータはそのまま使えます。", "もう一度確認", "refresh", _model.RefreshAsync));
+        AddMaterialWarnings();
         var classes = _model.Preferences.SelectedClasses;
         if (_model.EventSourceMessage is { } eventWarning) Add(Card(Text(eventWarning)));
         if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
+        if (_model.EventStorageMessage is { } storageFailure) Add(Card(Text(storageFailure)));
         if (classes.Length == 0) Add(ScheduleNotice("クラスを選んでください", "クラスを選ぶと、今日の授業をここに表示します。", "クラスを選択", "people", ChooseClasses));
         var engine = _model.HomeEngine; var day = _model.Today;
         var eventTitles = engine.Plan(day).Events.Select(e => e.Title).ToArray();

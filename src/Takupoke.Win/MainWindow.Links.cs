@@ -24,7 +24,7 @@ public sealed partial class MainWindow
     }
     private void PopulateLinks()
     {
-        if (_linkResults is null) return;
+        if (_linkResults is null || DeferRenderForPopups()) return;
         _linkResults.Children.Clear();
         if (_model.Links is not { } links)
         { _linkResults.Children.Add(Card(Panel(Text("リンクはまだ取得していません。", 18), Text("学校アカウントでデータを取得すると、学校のリンクをここに表示します。"), IconButton("データを取得", "download", () => OpenPage("account"))))); return; }
@@ -57,7 +57,7 @@ public sealed partial class MainWindow
         button.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(0, 0, 0, 0));
         button.Padding = new Thickness(12); button.MinHeight = 64;
         var color = _model.Preferences.LinkColors.GetValueOrDefault(link.Id) ?? link.Color;
-        var icon = FluentIcon("link", 20); icon.Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 255, 255, 255));
+        var icon = FluentIcon("link", 20); icon.Foreground = new SolidColorBrush(TextOnTint(LinkColor(color)));
         var badge = new Border { Width = 40, Height = 40, CornerRadius = new CornerRadius(10), Child = icon,
             Background = _accessibility.HighContrast ? (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"] : new SolidColorBrush(LinkColor(color)) };
         if (_accessibility.HighContrast) icon.Foreground = (Brush)Application.Current.Resources["ApplicationPageBackgroundThemeBrush"];
@@ -99,6 +99,7 @@ public sealed partial class MainWindow
         container.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) });
         container.ColumnDefinitions.Add(new() { Width = GridLength.Auto });
         container.Children.Add(button); Grid.SetColumn(more, 1); container.Children.Add(more);
+        RegisterPopupTree(container);
         return container;
     }
     private static readonly (string Id, string Label)[] LinkPalette =

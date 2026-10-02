@@ -103,17 +103,22 @@ public sealed partial class MainWindow
         AutomationProperties.SetName(control, label);
         return row;
     }
+    private string? _schoolYearDraft;
+    private double? _eventsYearDraft;
     private void BuildMaterials()
     {
         TitleText("時間割ファイル", "page-materials"); BackToSettings();
         Add(SettingsDescription("OneDriveの同期フォルダーから資料を選びます。取得や解析の状況は各資料の詳細で確認できます。"));
         foreach (var kind in Enum.GetValues<MaterialKind>()) Add(MaterialCard(kind));
-        var year = PreferenceControl(new TextBox { Header = "学校年度", Text = _model.Preferences.DefaultSchoolYear ?? "", PlaceholderText = _model.Today.SchoolYear() + "（自動）", MaxWidth = 420, HorizontalAlignment = HorizontalAlignment.Stretch });
+        var year = PreferenceControl(new TextBox { Header = "学校年度", Text = _schoolYearDraft ?? _model.Preferences.DefaultSchoolYear ?? "", PlaceholderText = _model.Today.SchoolYear() + "（自動）", MaxWidth = 420, HorizontalAlignment = HorizontalAlignment.Stretch });
+        AutomationProperties.SetAutomationId(year, "materials-school-year");
+        year.TextChanged += (_, _) => _schoolYearDraft = year.Text;
         var saveYear = Button("年度を保存", async () =>
         {
             if (year.Text.Trim().Length > 0 && (!int.TryParse(year.Text, out var value) || value is < 1900 or > 9998)) { await Message("年度を確認してください", "1900〜9998の学校年度を入力してください。"); return; }
             var selectedYear = year.Text.Trim();
             await _model.SavePreferencesAsync(current => current with { DefaultSchoolYear = selectedYear.Length == 0 ? null : selectedYear });
+            if (_model.Preferences.DefaultSchoolYear == (selectedYear.Length == 0 ? null : selectedYear)) _schoolYearDraft = null;
         });
         Add(Card(Panel(SettingsSectionTitle("年のない変更日を補完"), SettingsDescription("空欄なら現在の学校年度を使います。1〜3月は翌年の日付として扱います。年度を変えたら、時間割変更の資料を再解析してください。"), year, saveYear)));
         var stop = Button("自動確認を中止", () => { _model.SuspendAutomaticRefresh(); Render(); return Task.CompletedTask; }, "suspend-automatic-refresh");
@@ -133,7 +138,10 @@ public sealed partial class MainWindow
         Add(SettingsDescription("学校年度ごとの行事データを取得します。保存した行事はホームと時間割に表示します。"));
         if (_model.EventSourceMessage is { } eventWarning) Add(Card(Text(eventWarning)));
         if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
-        var eventsYear = OperationControl(new NumberBox { Header = "学校年度", Minimum = 1900, Maximum = 9998, Value = _model.Today.SchoolYear(), SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Inline, MaxWidth = 420, HorizontalAlignment = HorizontalAlignment.Stretch });
+        if (_model.EventStorageMessage is { } storageFailure) Add(Card(Text(storageFailure)));
+        var eventsYear = OperationControl(new NumberBox { Header = "学校年度", Minimum = 1900, Maximum = 9998, Value = _eventsYearDraft ?? _model.Today.SchoolYear(), SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Inline, MaxWidth = 420, HorizontalAlignment = HorizontalAlignment.Stretch });
+        AutomationProperties.SetAutomationId(eventsYear, "events-school-year");
+        eventsYear.ValueChanged += (_, _) => _eventsYearDraft = eventsYear.Value;
         Add(Card(Panel(SettingsSectionTitle("行事データを取得"), eventsYear,
             OperationButton("選んだ年度の行事を取得", () => _model.FetchEventsAsync(double.IsNaN(eventsYear.Value) ? _model.Today.SchoolYear() : (int)eventsYear.Value), "fetch-events"))));
         Add(SettingsSectionTitle("保存済みの年度"));
