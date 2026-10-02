@@ -17,7 +17,7 @@ public sealed partial class MainWindow
             SettingsRow("時間割ファイル", () => OpenPage("materials"), "settings-materials"),
             SettingsRow("学校行事", () => OpenPage("events"), "settings-events"),
             SettingsRow("リンク・名称・授業時刻", () => OpenPage("account"), "settings-account",
-                _model.Revisions.Values.Any(value => value.Changed) ? "更新あり" : null)));
+                _model.RevisionFailures.Count > 0 ? "要確認" : _model.Revisions.Values.Any(value => value.Changed) ? "更新あり" : null)));
         Add(Text("アプリ設定", 18));
         var initialMainColor = _model.Preferences.MainColor;
         var mainColor = PreferenceControl(new ComboBox { MinWidth = 155 });
@@ -84,6 +84,8 @@ public sealed partial class MainWindow
             await _model.SavePreferencesAsync(current => current with { DefaultSchoolYear = selectedYear.Length == 0 ? null : selectedYear });
         }));
         Add(OperationButton("登録した原本を確認", _model.RefreshAsync, "refresh-materials"));
+        Add(Button("自動確認を中止", () => { _model.SuspendAutomaticRefresh(); Render(); return Task.CompletedTask; }, "suspend-automatic-refresh"));
+        if (_model.AutomaticRefreshPaused) { var paused = Text("自動確認を中止しています。手動確認またはアプリへの復帰で再開します。"); Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(paused, "automatic-refresh-paused"); Add(paused); }
     }
     private void BuildEventsSettings()
     {
@@ -114,12 +116,16 @@ public sealed partial class MainWindow
         TitleText("このアプリについて", "page-about"); BackToSettings();
         var version = System.Reflection.Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(System.Reflection.AssemblyInformationalVersionAttribute), false)
             .OfType<System.Reflection.AssemblyInformationalVersionAttribute>().FirstOrDefault()?.InformationalVersion.Split('+')[0] ?? "開発版";
-        Add(Text("たくポケ Win · " + version, 20));
+        Add(Text("香川高専詫間キャンパスの学生向けに個人が開発・運営する非公式アプリです。"));
+        Add(Text("バージョン：" + version));
+        Add(Text("ビルド：" + (System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "—")));
         Add(Button("利用規約", () => ShowProductDocument("利用規約", Path.Combine("Legal", "terms.txt"))));
         Add(Button("プライバシーポリシー", () => ShowProductDocument("プライバシーポリシー", Path.Combine("Legal", "privacy.txt"))));
         Add(Button("たくにん利用規約", () => OpenBrowser(new("https://takuma-gakunin.n624.jp/terms"), "たくにん利用規約")));
         Add(Button("たくにんプライバシーポリシー", () => OpenBrowser(new("https://takuma-gakunin.n624.jp/privacy"), "たくにんプライバシーポリシー")));
         Add(Button("依存ライブラリのライセンス", () => OpenPage("licenses")));
+        Add(Button("ソースコード", () => OpenBrowser(new("https://github.com/n624-dev/takupoke-win"), "ソースコード"), "about-source"));
+        Add(Button("問い合わせ", async () => { if (!await Windows.System.Launcher.LaunchUriAsync(new("mailto:takupoke@n624.jp"))) await Message("問い合わせを開けません", "メールアプリから takupoke@n624.jp へお問い合わせください。"); }, "about-contact"));
         Add(Button("配布ページを開く", () => OpenBrowser(new("https://github.com/n624-dev/takupoke-win/releases"), "配布ページ")));
         Add(Button("配布URLをコピー", () => { var data = new Windows.ApplicationModel.DataTransfer.DataPackage(); data.SetText("https://github.com/n624-dev/takupoke-win/releases"); Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(data); return Task.CompletedTask; }));
     }

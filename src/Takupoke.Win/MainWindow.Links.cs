@@ -26,11 +26,11 @@ public sealed partial class MainWindow
         _linkResults.Children.Clear();
         if (_model.Links is not { } links)
         { _linkResults.Children.Add(Text("リンク一覧を取得していません。学校アカウントで取得してください。")); _linkResults.Children.Add(Button("設定でデータを取得", () => OpenPage("account"))); return; }
-        if (_linkQuery.Trim().Length > 0)
+        if (LinkSearch.Normalize(_linkQuery).Length > 0)
         {
             var results = links.Search(_linkQuery, _model.Preferences.HiddenIds).ToArray();
             if (results.Length == 0) _linkResults.Children.Add(Text("該当するリンクはありません。"));
-            foreach (var link in results) _linkResults.Children.Add(LinkButton(link));
+            foreach (var link in results) _linkResults.Children.Add(LinkButton(link, links.Categories.FirstOrDefault(category => category.Id == link.CategoryId)?.Label));
         }
         else
             foreach (var category in links.Categories)
@@ -40,22 +40,26 @@ public sealed partial class MainWindow
                 _linkResults.Children.Add(Text(category.Label, 22)); foreach (var link in items) _linkResults.Children.Add(LinkButton(link));
             }
     }
-    private Button LinkButton(LinkItem link)
+    private Button LinkButton(LinkItem link, string? subtitle = null)
     {
         var favorite = _model.Preferences.FavoriteIds.Contains(link.Id);
         var button = Button((favorite ? "★ " : "") + link.Label, () => OpenLink(link), "link-" + link.Id);
         button.HorizontalAlignment = HorizontalAlignment.Stretch;
+        button.BorderThickness = new Thickness(0);
         var color = _model.Preferences.LinkColors.GetValueOrDefault(link.Id) ?? link.Color;
-        if (!_accessibility.HighContrast) button.BorderBrush = new SolidColorBrush(LinkColor(color));
         var icon = new FontIcon { Glyph = "\uE71B", FontFamily = new FontFamily("Segoe Fluent Icons"), Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 255, 255, 255)), FontSize = 18 };
         var badge = new Border { Width = 34, Height = 34, CornerRadius = new CornerRadius(9), Child = icon,
             Background = _accessibility.HighContrast ? (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"] : new SolidColorBrush(LinkColor(color)) };
         if (_accessibility.HighContrast) icon.Foreground = (Brush)Application.Current.Resources["ApplicationPageBackgroundThemeBrush"];
         var row = new Grid { ColumnSpacing = 12 }; row.ColumnDefinitions.Add(new() { Width = GridLength.Auto }); row.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) }); row.ColumnDefinitions.Add(new() { Width = GridLength.Auto });
-        row.Children.Add(badge); var label = Text(link.Label, 16); label.IsTextSelectionEnabled = false; label.VerticalAlignment = VerticalAlignment.Center; Grid.SetColumn(label, 1); row.Children.Add(label);
+        row.Children.Add(badge);
+        var labels = new StackPanel { Spacing = 2, VerticalAlignment = VerticalAlignment.Center };
+        var label = Text(link.Label, 16); label.IsTextSelectionEnabled = false; labels.Children.Add(label);
+        if (subtitle is not null) { var category = Text(subtitle, 12); category.IsTextSelectionEnabled = false; labels.Children.Add(category); }
+        Grid.SetColumn(labels, 1); row.Children.Add(labels);
         if (favorite) { var star = Text("★", 18); star.IsTextSelectionEnabled = false; if (!_accessibility.HighContrast) star.Foreground = new SolidColorBrush(LinkColor("yellow")); Grid.SetColumn(star, 2); row.Children.Add(star); }
         button.Content = row; button.HorizontalContentAlignment = HorizontalAlignment.Stretch;
-        AutomationProperties.SetName(button, link.Label + (favorite ? "、お気に入り" : ""));
+        AutomationProperties.SetName(button, link.Label + (subtitle is null ? "" : "、" + subtitle) + (favorite ? "、お気に入り" : ""));
         var menu = new MenuFlyout();
         void Item(string label, Func<Task> action) { var item = new MenuFlyoutItem { Text = label }; item.Click += async (_, _) => await action(); menu.Items.Add(item); }
         Item("開く", () => OpenLink(link)); Item("今回だけ別の開き方で開く", () => OpenLink(link, true));
@@ -63,8 +67,10 @@ public sealed partial class MainWindow
         { await _model.SavePreferencesAsync(current => { var ids = current.FavoriteIds.ToHashSet(); if (favorite) ids.Remove(link.Id); else ids.Add(link.Id); return current with { FavoriteIds = ids }; }); });
         Item("色を変更", async () =>
         {
-            var colors = LinksPayload.Colors.Order().ToArray(); var choice = new ComboBox { Header = "リンクの色", ItemsSource = colors, SelectedItem = color };
-            if (await Dialog("色を変更", choice, "保存", "キャンセル") == ContentDialogResult.Primary && choice.SelectedItem is string value)
+            var choice = new ComboBox { Header = "リンクの色" };
+            foreach (var entry in LinkPalette) choice.Items.Add(new ComboBoxItem { Content = entry.Label, Tag = entry.Id });
+            choice.SelectedItem = choice.Items.Cast<ComboBoxItem>().FirstOrDefault(item => (string)item.Tag == color);
+            if (await Dialog("色を変更", choice, "保存", "キャンセル") == ContentDialogResult.Primary && choice.SelectedItem is ComboBoxItem { Tag: string value })
                 await _model.SavePreferencesAsync(current => current with { LinkColors = new Dictionary<string, string>(current.LinkColors) { [link.Id] = value } });
         });
         if (_model.Preferences.LinkColors.ContainsKey(link.Id)) Item("既定色に戻す", async () =>
@@ -74,6 +80,13 @@ public sealed partial class MainWindow
         // Keyboard users can open the same context menu with the application key or Shift+F10.
         return button;
     }
+    private static readonly (string Id, string Label)[] LinkPalette =
+    [
+        ("sky", "スカイ"), ("blue", "ブルー"), ("emerald", "エメラルド"), ("green", "グリーン"),
+        ("amber", "アンバー"), ("yellow", "イエロー"), ("orange", "オレンジ"), ("rose", "ローズ"),
+        ("red", "レッド"), ("indigo", "インディゴ"), ("purple", "パープル"), ("pink", "ピンク"),
+        ("teal", "ティール"), ("slate", "スレート"), ("gray", "グレー")
+    ];
     private static Windows.UI.Color LinkColor(string color)
     {
         var rgb = color switch

@@ -3,25 +3,49 @@ using Takupoke.Infrastructure.Storage;
 namespace Takupoke.Infrastructure.Api;
 
 public sealed record UpdateResult(DataSet Kind, bool Updated, ApiFailure? Failure = null);
+public sealed record RevisionCheckResult(
+    IReadOnlyDictionary<DataSet, RevisionResult> Revisions,
+    IReadOnlyDictionary<DataSet, ApiFailure> Failures)
+{
+    public static RevisionCheckResult Empty => new(new Dictionary<DataSet, RevisionResult>(), new Dictionary<DataSet, ApiFailure>());
+
+    // A failed check must retain the last known update notice. A check of one
+    // dataset must not clear failures or update notices belonging to another.
+    public RevisionCheckResult Merge(RevisionCheckResult next)
+    {
+        var revisions = Revisions.ToDictionary();
+        var failures = Failures.ToDictionary();
+        foreach (var pair in next.Revisions) { revisions[pair.Key] = pair.Value; failures.Remove(pair.Key); }
+        foreach (var pair in next.Failures) failures[pair.Key] = pair.Value;
+        return new(revisions, failures);
+    }
+}
 
 /// <summary>Public checks never authenticate. A user-requested update authenticates once; each dataset commits independently.</summary>
 public sealed class SharedDataUpdater(ApiClient api, SchoolDataStore store)
 {
     private readonly SemaphoreSlim _gate = new(1, 1);
     public async Task<IReadOnlyDictionary<DataSet, RevisionResult>> CheckAsync(CancellationToken token = default)
+        => (await CheckDetailedAsync(token)).Revisions;
+    public Task<RevisionCheckResult> CheckDetailedAsync(CancellationToken token = default)
+        => CheckDetailedAsync(Enum.GetValues<DataSet>(), token);
+    public Task<RevisionCheckResult> CheckDetailedAsync(DataSet kind, CancellationToken token = default)
+        => CheckDetailedAsync([kind], token);
+    private async Task<RevisionCheckResult> CheckDetailedAsync(IEnumerable<DataSet> kinds, CancellationToken token)
     {
         await _gate.WaitAsync(token);
         try
         {
             var lease = await store.BeginAsync(token);
             var results = new Dictionary<DataSet, RevisionResult>();
-            foreach (var kind in Enum.GetValues<DataSet>())
+            var failures = new Dictionary<DataSet, ApiFailure>();
+            foreach (var kind in kinds)
             {
                 var installed = await InstalledAsync(kind, lease, token);
                 try { results[kind] = await api.CheckRevisionAsync(kind, installed, token); }
-                catch (ApiException) { /* One unavailable public endpoint does not suppress the other checks. */ }
+                catch (ApiException error) { failures[kind] = error.Failure; }
             }
-            return results;
+            return new(results, failures);
         }
         finally { _gate.Release(); }
     }

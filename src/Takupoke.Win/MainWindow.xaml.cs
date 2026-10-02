@@ -40,6 +40,7 @@ public sealed partial class MainWindow : Window
         _themeTimer.Tick += (_, _) => { var current = _accessibility.HighContrast; if (current != _lastHighContrast) { _lastHighContrast = current; if (_ready) Render(); } };
         _themeTimer.Start();
         RootGrid.ActualThemeChanged += (_, _) => { if (_ready) Render(); };
+        _uiSettings.TextScaleFactorChanged += (_, _) => DispatcherQueue.TryEnqueue(() => { if (_ready) Render(); });
         _model.SnapshotChanged += () => { Render(); OfferInitialSetup(); };
         _model.ClockChanged += () => { if (_page is "home" or "timetable" && !_model.Busy && !_selectingMaterial) Render(); };
         _model.PropertyChanged += (_, _) => UpdateStatus();
@@ -58,7 +59,7 @@ public sealed partial class MainWindow : Window
         {
             var active = args.WindowActivationState != WindowActivationState.Deactivated;
             var returned = active && !_windowActive; _windowActive = active;
-            if (returned && _ready && !_selectingMaterial && !_model.Busy) _ = _model.RefreshAutomaticallyAsync();
+            if (returned && _ready) _ = _model.ResumeAutomaticRefreshAsync(refresh: !_selectingMaterial);
         };
         AppWindow.Closing += (_, args) =>
         { if (!_exitRequested && _model.Preferences.KeepInTray && _desktop?.TrayAvailable == true) { args.Cancel = true; AppWindow.Hide(); } };
@@ -76,7 +77,7 @@ public sealed partial class MainWindow : Window
                 _desktop = new(WinRT.Interop.WindowNative.GetWindowHandle(this));
                 _desktop.LockedChanged += locked => _ = _model.SetLockedAsync(locked);
                 if (!DesktopIntegration.IsInputDesktopAccessible()) await _model.SetLockedAsync(true);
-                _desktop.Resumed += () => _ = _model.RefreshAutomaticallyAsync(force: true); _desktop.Suspended += _model.Cancel;
+                _desktop.Resumed += () => _ = _model.ResumeAutomaticRefreshAsync(force: true); _desktop.Suspended += _model.Cancel;
                 _desktop.OpenRequested += ShowWindow; _desktop.ExitRequested += () => { _exitRequested = true; Close(); };
             }
             catch { await _model.SetLockedAsync(true); await Message("Windowsとの連携を開始できません", "ロック通知を受け取れないため学校データの利用を停止しました。通常ユーザー権限で再起動してください。"); }
@@ -99,7 +100,11 @@ public sealed partial class MainWindow : Window
     private void Navigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
         if (args.SelectedItem is NavigationViewItem item) _page = (string)item.Tag;
-        if (_model is not null) Render();
+        if (_model is not null)
+        {
+            Render();
+            if (_ready && _page == "links") _ = _model.CheckLinkRevisionAsync();
+        }
     }
     private void Cancel_Click(object sender, RoutedEventArgs args) => _model.Cancel();
     private void DismissStatus_Click(object sender, RoutedEventArgs args) => _model.DismissStatus();
@@ -116,7 +121,11 @@ public sealed partial class MainWindow : Window
     private void Render()
     {
         if (_dialogOpen || _selectingMaterial) { UpdateStatus(); return; }
-        var pageChanged = _renderedPage != _page; _renderedPage = _page;
+        var pageChanged = _renderedPage != _page;
+        if (!pageChanged && _page == "timetable" && !_restoringTimetableScroll && _timetableScroller is { } previousScroller)
+            _timetableScrollPosition = (_timetableScrollKey, previousScroller.HorizontalOffset, previousScroller.VerticalOffset);
+        else if (pageChanged) _timetableScrollPosition = null;
+        _timetableScroller = null; _renderedPage = _page;
         var focused = RootGrid.XamlRoot is null ? null : FocusManager.GetFocusedElement(RootGrid.XamlRoot) as FrameworkElement;
         var focusId = focused is null ? "" : AutomationProperties.GetAutomationId(focused);
         // Keep body text on theme brushes; tint only standard controls and explicit actions.
@@ -178,6 +187,7 @@ public sealed partial class MainWindow : Window
             if (FindById(VisualTreeHelper.GetChild(root, index), id) is { } result) return result;
         return null;
     }
+    private static string DisplayDateTime(DateTimeOffset value) => value.ToOffset(TimeSpan.FromHours(9)).ToString("yyyy/M/d H:mm", System.Globalization.CultureInfo.GetCultureInfo("ja-JP"));
     private static TextBlock Text(string value, double size = 14) => new() { Text = value, FontSize = size, TextWrapping = TextWrapping.Wrap, IsTextSelectionEnabled = true };
     private static StackPanel Panel(params UIElement[] elements)
     { var panel = new StackPanel { Spacing = 10 }; foreach (var element in elements) panel.Children.Add(element); return panel; }

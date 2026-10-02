@@ -39,6 +39,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private bool _pendingRefresh;
     private bool _platformInitialized;
     private bool _automaticPaused;
+    public bool AutomaticRefreshPaused => _automaticPaused;
     public bool Locked { get; private set; }
     public long PrivateEpoch { get; private set; }
     public string Status { get => _status; private set { _statusUntil = DateTimeOffset.UtcNow.AddSeconds(5); SetProperty(ref _status, value); } }
@@ -53,7 +54,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public MappingRules? Mappings { get; private set; }
     public LinksPayload? Links { get; private set; }
     public IReadOnlyDictionary<MaterialKind, MaterialSnapshot> Materials { get; private set; } = new Dictionary<MaterialKind, MaterialSnapshot>();
-    public IReadOnlyDictionary<DataSet, RevisionResult> Revisions { get; private set; } = new Dictionary<DataSet, RevisionResult>();
+    private RevisionCheckResult _revisionChecks = RevisionCheckResult.Empty;
+    public IReadOnlyDictionary<DataSet, RevisionResult> Revisions => _revisionChecks.Revisions;
+    public IReadOnlyDictionary<DataSet, ApiFailure> RevisionFailures => _revisionChecks.Failures;
     public IReadOnlyList<int> SavedEventYears { get; private set; } = [];
     public IReadOnlyDictionary<int, SavedEvents> EventRecords { get; private set; } = new Dictionary<int, SavedEvents>();
     public DateOnly Today => SchoolDate.InJapan(DateTimeOffset.UtcNow);
@@ -112,7 +115,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         if (_displayPeriod is not null) Cancel();
         PrivateEpoch++;
         Data = Data with { Timetable = null, Changes = null, Specials = null, Times = null };
-        LinksRecord = null; MappingRecord = null; TimesRecord = null; Links = null; Mappings = null; Materials = new Dictionary<MaterialKind, MaterialSnapshot>(); Revisions = new Dictionary<DataSet, RevisionResult>();
+        LinksRecord = null; MappingRecord = null; TimesRecord = null; Links = null; Mappings = null; Materials = new Dictionary<MaterialKind, MaterialSnapshot>(); _revisionChecks = RevisionCheckResult.Empty;
         SharedUpdateResults = []; SharedUpdateMessage = null; DismissStatus();
         _displayPeriod = null; _watcher.Replace([]);
         void Notify() { PrivateDataCleared?.Invoke(); SnapshotChanged?.Invoke(); }
@@ -138,14 +141,25 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public Task RefreshAsync() => RefreshAsync(automatic: false);
     public Task RefreshAutomaticallyAsync(bool force = false)
     {
-        if (Locked || Busy || !force && DateTimeOffset.UtcNow - _lastAutomaticCheck < TimeSpan.FromMinutes(1)) return Task.CompletedTask;
+        if (Locked || Busy || _automaticPaused || !force && DateTimeOffset.UtcNow - _lastAutomaticCheck < TimeSpan.FromMinutes(1)) return Task.CompletedTask;
         _lastAutomaticCheck = DateTimeOffset.UtcNow;
         return RefreshAsync(automatic: true);
+    }
+    public Task ResumeAutomaticRefreshAsync(bool force = false, bool refresh = true)
+    {
+        ResumeFileMonitoring();
+        SnapshotChanged?.Invoke();
+        return refresh ? RefreshAutomaticallyAsync(force) : Task.CompletedTask;
+    }
+    private void ResumeFileMonitoring()
+    {
+        _automaticPaused = false;
+        if (!Locked) _watcher.Replace(Materials.Values.Select(s => s.Source?.Path).OfType<string>());
     }
     private Task RefreshAsync(bool automatic)
     {
         if (Locked) return Task.CompletedTask;
-        _automaticPaused = false;
+        if (!automatic) _automaticPaused = false;
         if (Busy) { _pendingRefresh = true; return Task.CompletedTask; }
         return RunAsync(async token =>
     {
@@ -156,7 +170,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         foreach (var kind in Enum.GetValues<MaterialKind>()) await _materials.RefreshAsync(kind, ParserYear, token);
         if (!OfflineTest)
         {
-            Revisions = await _shared.CheckAsync(token);
+            ApplyRevisionCheck(await _shared.CheckDetailedAsync(token));
             var failedYears = new List<int>();
             foreach (var year in _events.SavedYears())
                 try { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await _events.LoadAsync(year, token), token), token); }
@@ -173,11 +187,13 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     }
     public Task SelectAsync(MaterialKind kind, string path) => RunAsync(async token =>
     {
+        ResumeFileMonitoring();
         var result = await _materials.SelectAsync(kind, path, ParserYear, token); await ReloadAsync(token);
         Status = result.Error ?? (result.Parsed ? "資料の解析結果を保存しました。" : "資料を保存しました。");
     });
     public Task ReparseAsync(MaterialKind kind) => RunAsync(async token =>
     {
+        ResumeFileMonitoring();
         var result = await _materials.ReparseAsync(kind, ParserYear, token); await ReloadAsync(token);
         Status = result.Error ?? "保存した資料を再解析しました。";
     });
@@ -191,11 +207,24 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         finally { if (!Locked) await ReloadAsync(CancellationToken.None); }
         SharedUpdateResults = results;
         OperationStatus = "取得結果を確認しています。";
-        Revisions = await _shared.CheckAsync(token);
+        ApplyRevisionCheck(await _shared.CheckDetailedAsync(token), clearPreviousUpdateFailures: false);
         Status = string.Join(" / ", results.Select(r => DataSetLabel(r.Kind) + "：" + (r.Updated ? "更新しました" : r.Failure is { } failure ? new ApiException(failure).Message : "保持しています")));
     }, "更新情報を確認しています。");
     public IReadOnlyList<UpdateResult> SharedUpdateResults { get; private set; } = [];
     public string? SharedUpdateMessage { get; private set; }
+    private void ApplyRevisionCheck(RevisionCheckResult check, bool clearPreviousUpdateFailures = true)
+    {
+        _revisionChecks = _revisionChecks.Merge(check);
+        if (!clearPreviousUpdateFailures) return;
+        SharedUpdateResults = SharedUpdateResults.Where(result => result.Failure is null || !check.Revisions.ContainsKey(result.Kind)).ToArray();
+        if (check.Failures.Count == 0 && check.Revisions.Count == Enum.GetValues<DataSet>().Length) SharedUpdateMessage = null;
+    }
+    public Task CheckLinkRevisionAsync() => RunAsync(async token =>
+    {
+        // Public revision checks do not read selected files or authenticate.
+        // They remain available while automatic selected-file checks are paused.
+        ApplyRevisionCheck(await _shared.CheckDetailedAsync(DataSet.Links, token));
+    }, "一覧の更新情報を確認しています。", automatic: true);
     public Task FetchEventsAsync(int year) => RunAsync(async token =>
     { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await _events.LoadAsync(year, token), token), token); EventSourceMessage = null; EventsUpdateMessage = null; await ReloadAsync(token); Status = "学校行事を保存しました。元PDFの更新確認は次回起動時に行います。"; });
     public async Task SavePreferencesAsync(Func<UserPreferences, UserPreferences> update)
@@ -225,7 +254,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     }
     public Task<ChangePreview> PreviewChangesAsync() => _materials.PreviewChangesAsync(ParserYear, _session.Token);
     public Task ReacquireAsync(MaterialKind kind) => RunAsync(async token =>
-    { var result = await _materials.RefreshAsync(kind, ParserYear, token); await ReloadAsync(token); Status = result.Error ?? "同じ原本を確認しました。"; });
+    { ResumeFileMonitoring(); var result = await _materials.RefreshAsync(kind, ParserYear, token); await ReloadAsync(token); Status = result.Error ?? "同じ原本を確認しました。"; });
     public SavedLinks? LinksRecord { get; private set; }
     public SavedMapping? MappingRecord { get; private set; }
     public SavedTimes? TimesRecord { get; private set; }
@@ -295,11 +324,17 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         }
     }
     public void Cancel() { _automaticPaused = true; _operationGeneration++; _pendingRefresh = false; _watcher.Replace([]); _session.Cancel(); _authentication.Cancel(); }
+    public void SuspendAutomaticRefresh()
+    {
+        Cancel();
+        Status = Busy ? "中止を要求しました。処理の終了を待っています。" : "自動確認を中止しました。";
+        SnapshotChanged?.Invoke();
+    }
     public async Task SetLockedAsync(bool locked)
     {
         Locked = locked; Cancel(); ClearPrivateData();
         await _school.SetProtectedDataAvailableAsync(!locked);
-        if (!locked) await RefreshAutomaticallyAsync(force: true);
+        if (!locked) await ResumeAutomaticRefreshAsync(force: true);
     }
     public static string MaterialLabel(MaterialKind kind) => kind switch { MaterialKind.Timetable => "通常時間割PDF", MaterialKind.Changes => "時間割変更XLSX", MaterialKind.Exam => "試験時間割PDF", _ => "試験返却時間割PDF" };
     public static string DataSetLabel(DataSet kind) => kind switch { DataSet.Links => "リンク一覧", DataSet.Mapping => "名称対応表", _ => "授業時刻" };

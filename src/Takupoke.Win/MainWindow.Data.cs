@@ -23,10 +23,10 @@ public sealed partial class MainWindow
         var snapshot = _model.Materials.GetValueOrDefault(kind); var source = snapshot?.Source; var analysis = snapshot?.Analysis;
         Add(Text("状態・操作", 22));
         if (snapshot?.AcquisitionAttempt is { } acquisition)
-            Add(Text($"取得試行：{acquisition.At.ToLocalTime():g}\n" + (acquisition.Failure ?? "原本を確認しました。")));
+            Add(Text($"取得試行：{DisplayDateTime(acquisition.At)}\n" + (acquisition.Failure ?? "原本を確認しました。")));
         if (snapshot?.ParseAttempt is { } attempt)
         {
-            Add(Text($"解析試行：{attempt.At.ToLocalTime():g}\n" + (attempt.Failure is { } failure
+            Add(Text($"解析試行：{DisplayDateTime(attempt.At)}\n" + (attempt.Failure is { } failure
                 ? failure.StartsWith('P') ? new PdfParseException(failure, attempt.Page, attempt.Cell).Message : failure : "解析結果を保存しました。")));
             if (attempt.ChangeError is ChangeErrorCode.FormulaCache or ChangeErrorCode.WeekdayMismatch)
                 Add(Button("警告を確認して内容を見る", PreviewChanges, "preview-changes"));
@@ -38,14 +38,14 @@ public sealed partial class MainWindow
             Add(OperationButton("保存した原本を再解析", () => _model.ReparseAsync(kind), "reparse-" + kind));
             if (kind != MaterialKind.Changes) Add(Button("保存済みのPDFを見る", () => ShowPdf(kind, false), "view-pdf-" + kind));
             Add(Text("ファイル情報", 22));
-            Add(Text($"名前：{source.OriginalName}\nサイズ：{source.ByteCount:N0}バイト\n最終取得：{source.AcquiredAt.ToLocalTime():g}\n最終確認：{source.LastCheckedAt.ToLocalTime():g}\n元ファイルの更新：{source.SourceModifiedAt?.ToLocalTime().ToString("g") ?? "未確認"}"));
+            Add(Text($"名前：{source.OriginalName}\nサイズ：{source.ByteCount:N0}バイト\n最終取得：{DisplayDateTime(source.AcquiredAt)}\n最終確認：{DisplayDateTime(source.LastCheckedAt)}\n元ファイルの更新：{(source.SourceModifiedAt is { } modified ? DisplayDateTime(modified) : "未確認")}"));
         }
         else Add(Text("資料を選択していません。"));
         Add(Text("解析結果", 22));
         if (analysis is null) { Add(Text("正常な解析結果はありません。")); return; }
         if (analysis.SourceDigest != source?.Digest || analysis.ParserVersion != MaterialCoordinator.ParserVersion(kind)) Add(Text("前回の解析結果を表示しています。選択中の原本と異なる場合があります。"));
         var count = analysis.Timetable?.Lessons.Count ?? analysis.Changes?.Count ?? analysis.Special?.Lessons.Count ?? 0;
-        Add(Text($"最終解析成功：{analysis.ParsedAt.ToLocalTime():g}\n元資料：{analysis.SourceName}\n年度：{analysis.SchoolYear}\n件数：{count}\n解析版：{analysis.ParserVersion}"));
+        Add(Text($"最終解析成功：{DisplayDateTime(analysis.ParsedAt)}\n元資料：{analysis.SourceName}\n年度：{analysis.SchoolYear}\n件数：{count}\n解析版：{analysis.ParserVersion}"));
         if (analysis.Timetable is { } timetable) Add(Text("学期：" + (timetable.Term ?? "未確認")));
         if (analysis.Special is { } special) Add(Text("対象日：" + string.Join("・", special.CoveredDates) + "\n対象クラス：" + string.Join("・", special.CoveredClasses.Select(ClassSelection.Display))));
         Add(Button("解析結果を確認", () => ShowAnalysis(kind), "analysis-" + kind));
@@ -72,7 +72,7 @@ public sealed partial class MainWindow
         {
             var state = _model.Revisions.GetValueOrDefault(kind);
             var saved = kind switch { DataSet.Links => _model.LinksRecord is not null, DataSet.Mapping => _model.MappingRecord is not null, _ => _model.TimesRecord is not null };
-            var failure = _model.SharedUpdateResults.FirstOrDefault(result => result.Kind == kind)?.Failure;
+            var failure = _model.SharedUpdateResults.FirstOrDefault(result => result.Kind == kind)?.Failure ?? (_model.RevisionFailures.TryGetValue(kind, out var revisionFailure) ? revisionFailure : (ApiFailure?)null);
             var status = Text(failure is not null ? "要確認" : !saved ? "未取得" : state is null ? "取得済み" : state.Changed ? "更新あり" : "取得済み");
             Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(status, "shared-status-" + kind);
             var panel = Panel(Text(AppViewModel.DataSetLabel(kind), 20), status, Button("詳細を見る", () => SharedDetails(kind), "shared-details-" + kind));
@@ -84,11 +84,17 @@ public sealed partial class MainWindow
     }
     private Task SharedDetails(DataSet kind)
     {
+        if (kind == DataSet.Times && _model.TimesRecord is { } savedTimes)
+        {
+            var panel = Panel(Text($"取得日時：{DisplayDateTime(savedTimes.FetchedAt)}\n件数：{savedTimes.Data.Days.Sum(day => day.Periods.Count)}\n更新識別子：{savedTimes.Revision}"));
+            foreach (var day in savedTimes.Data.Days)
+                panel.Children.Add(Panel(Text(day.Date, 18), Text(string.Join("\n", day.Periods.Select(period => $"{period.Period}限：{period.Start}〜{period.End}")))));
+            return Dialog("授業時刻", panel);
+        }
         var detail = kind switch
         {
-            DataSet.Links when _model.LinksRecord is { } links => $"取得日時：{links.CheckedAt.ToLocalTime():g}\n件数：{links.Payload.Items.Count()}\nカテゴリ数：{links.Payload.Categories.Count}\n版：{links.Payload.LinksVersion}\n更新識別子：{links.Revision}",
-            DataSet.Mapping when _model.MappingRecord is { } mapping => $"取得日時：{mapping.FetchedAt.ToLocalTime():g}\n科目：{mapping.Rules.Subjects.Count}件\n教員：{mapping.Rules.Teachers.Count}件\n教室：{mapping.Rules.Rooms.Count}件\n条件付き教員：{mapping.Rules.TeacherContexts?.Count ?? 0}件\n版：{mapping.Version}\n更新識別子：{mapping.Revision}",
-            DataSet.Times when _model.TimesRecord is { } times => $"取得日時：{times.FetchedAt.ToLocalTime():g}\n件数：{times.Data.Days.Count}\n更新識別子：{times.Revision}",
+            DataSet.Links when _model.LinksRecord is { } links => $"取得日時：{DisplayDateTime(links.CheckedAt)}\n件数：{links.Payload.Items.Count()}\nカテゴリ数：{links.Payload.Categories.Count}\n版：{links.Payload.LinksVersion}\n更新識別子：{links.Revision}",
+            DataSet.Mapping when _model.MappingRecord is { } mapping => $"取得日時：{DisplayDateTime(mapping.FetchedAt)}\n科目：{mapping.Rules.Subjects.Count}件\n教員：{mapping.Rules.Teachers.Count}件\n教室：{mapping.Rules.Rooms.Count}件\n条件付き教員：{mapping.Rules.TeacherContexts?.Count ?? 0}件\n版：{mapping.Version}\n更新識別子：{mapping.Revision}",
             _ => "保存したデータはありません。"
         };
         return Message(AppViewModel.DataSetLabel(kind), detail);
@@ -97,7 +103,7 @@ public sealed partial class MainWindow
     {
         if (!_model.EventRecords.TryGetValue(year, out var record)) return Message("学校行事", "保存したデータはありません。");
         var items = record.Payload.Project().OrderBy(item => item.Date).ToArray();
-        return Dialog(year + "年度の学校行事", Panel(Text($"取得日時：{record.FetchedAt.ToLocalTime():g}\n件数：{items.Length}\n版：{record.Payload.Version}\n配信ETag：{record.ApiETag ?? "未確認"}\n元PDF ETag：{record.Payload.SourcePdfETag ?? "未確認"}"),
+        return Dialog(year + "年度の学校行事", Panel(Text($"取得日時：{DisplayDateTime(record.FetchedAt)}\n件数：{items.Length}\n版：{record.Payload.Version}\n配信ETag：{record.ApiETag ?? "未確認"}\n元PDF ETag：{record.Payload.SourcePdfETag ?? "未確認"}"),
             Text(string.Join("\n", items.Select(item => item.Date + (item.EndDate is { } end ? "〜" + end : "") + " · " + item.Title + " · " + item.Tag)))));
     }
     private int _setupStep;

@@ -20,6 +20,9 @@ public sealed class SharedDataUpdaterTests
     }
     private sealed class Handler : HttpMessageHandler
     {
+        public DataSet? FailedRevision { get; set; }
+        public bool CancelRevision { get; set; }
+        public List<string> RevisionPaths { get; } = [];
         public int PublicRequests { get; private set; }
         public int AuthenticatedRequests { get; private set; }
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken token)
@@ -30,6 +33,9 @@ public sealed class SharedDataUpdaterTests
             if (path.EndsWith("-revision", StringComparison.Ordinal))
             {
                 Assert.Null(request.Headers.Authorization); PublicRequests++;
+                RevisionPaths.Add(path);
+                if (CancelRevision) throw new OperationCanceledException(token);
+                if (FailedRevision is { } failed && path == "/" + ApiClient.RevisionPath(failed)) response.StatusCode = HttpStatusCode.ServiceUnavailable;
                 response.Headers.ETag = new('"' + Revision + '"');
             }
             else
@@ -115,6 +121,62 @@ public sealed class SharedDataUpdaterTests
             var result = await updater.UpdateAsync(_ => throw new InvalidOperationException("Current data must not authenticate."));
             Assert.Equal(3, result.Count); Assert.All(result, item => { Assert.False(item.Updated); Assert.Null(item.Failure); });
             Assert.Equal(3, handler.PublicRequests); Assert.Equal(0, handler.AuthenticatedRequests);
+        }
+        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
+
+    [Fact]
+    public async Task PublicFailureIsReportedIndependentlyAndRetryClearsOnlyItsFailure()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-update-tests-" + Guid.NewGuid().ToString("N"));
+        using var protector = new Protector();
+        try
+        {
+            await using var store = new SchoolDataStore(root, protector);
+            var handler = new Handler(); using var http = new HttpClient(handler);
+            var updater = new SharedDataUpdater(new(http, new("https://example.invalid/")), store);
+            var known = await updater.CheckDetailedAsync();
+            Assert.Equal(3, known.Revisions.Count); Assert.Empty(known.Failures);
+
+            handler.FailedRevision = DataSet.Links;
+            var failed = await updater.CheckDetailedAsync();
+            Assert.Equal(2, failed.Revisions.Count);
+            Assert.Equal(ApiFailure.Unavailable, failed.Failures[DataSet.Links]);
+            known = known.Merge(failed);
+            Assert.True(known.Revisions[DataSet.Links].Changed);
+            Assert.Equal(Revision, known.Revisions[DataSet.Links].Revision);
+
+            handler.FailedRevision = DataSet.Mapping;
+            known = known.Merge(await updater.CheckDetailedAsync(DataSet.Mapping));
+            Assert.Equal(2, known.Failures.Count);
+            handler.FailedRevision = null;
+            handler.RevisionPaths.Clear();
+            known = known.Merge(await updater.CheckDetailedAsync(DataSet.Links));
+            Assert.Equal(["/links-revision"], handler.RevisionPaths);
+            Assert.False(known.Failures.ContainsKey(DataSet.Links));
+            Assert.Equal(ApiFailure.Unavailable, known.Failures[DataSet.Mapping]);
+            Assert.Equal(3, known.Revisions.Count);
+            Assert.Equal(0, handler.AuthenticatedRequests);
+        }
+        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
+
+    [Fact]
+    public async Task PublicCheckCancellationPropagatesWithoutReplacingKnownState()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-update-tests-" + Guid.NewGuid().ToString("N"));
+        using var protector = new Protector();
+        try
+        {
+            await using var store = new SchoolDataStore(root, protector);
+            var handler = new Handler(); using var http = new HttpClient(handler);
+            var updater = new SharedDataUpdater(new(http, new("https://example.invalid/")), store);
+            var known = await updater.CheckDetailedAsync();
+            handler.CancelRevision = true;
+            await Assert.ThrowsAsync<OperationCanceledException>(() => updater.CheckDetailedAsync());
+            Assert.Equal(3, known.Revisions.Count); Assert.Empty(known.Failures);
+            handler.CancelRevision = false;
+            Assert.Equal(3, (await updater.CheckDetailedAsync()).Revisions.Count);
         }
         finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
     }

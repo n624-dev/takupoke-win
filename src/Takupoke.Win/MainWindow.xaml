@@ -8,8 +8,8 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <NavigationView x:Name="Navigation" IsBackButtonVisible="Collapsed" PaneDisplayMode="Auto" IsSettingsVisible="False"
-                        SelectionChanged="Navigation_SelectionChanged" Header="たくポケ Win" OpenPaneLength="210">
+        <NavigationView x:Name="Navigation" AutomationProperties.AutomationId="main-navigation" IsBackButtonVisible="Collapsed" PaneDisplayMode="Auto" IsSettingsVisible="False"
+                        SelectionChanged="Navigation_SelectionChanged" OpenPaneLength="210">
             <NavigationView.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.ThemeDictionaries>

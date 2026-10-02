@@ -17,12 +17,13 @@ public sealed partial class MainWindow
         var change = (block.Content as ChangeContent)?.Change;
         var button = Button(names.Subject, () => LessonDetail(day, cls, block));
         var content = new StackPanel { Spacing = home ? 4 : 1, HorizontalAlignment = home ? HorizontalAlignment.Stretch : HorizontalAlignment.Center };
-        if (change is not null) { var kind = Text(change.KindLabel, 12); kind.Foreground = WarningBrush; content.Children.Add(kind); }
+        if (change is not null) { var kind = Text(change.KindLabel, home ? 12 : 9); kind.Foreground = WarningBrush; content.Children.Add(kind); }
         if (inProgress) { var progress = Text("授業中", 12); progress.Foreground = ActionBrush; content.Children.Add(progress); }
         if (change?.IsCancellation != true)
         {
             var source = names.Subject.Trim().Length == 0 ? "変更を確認" : names.Subject.Trim();
-            var subject = Text(home ? DisplayText.Continuous(source) : DisplayText.CellSubject(source), home ? 17 : 16);
+            var subject = Text(home ? DisplayText.Continuous(source) : DisplayText.CellSubject(source), home ? 17 : 11);
+            if (!home) { subject.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold; subject.MaxLines = 2; subject.TextTrimming = TextTrimming.CharacterEllipsis; }
             if (change is not null && !home)
             {
                 subject.SizeChanged += (_, _) =>
@@ -30,22 +31,34 @@ public sealed partial class MainWindow
                     var shortName = _model.Mappings?.ShortSubject(change, _model.Data.Timetable?.Lessons ?? []);
                     var width = subject.ActualWidth;
                     if (width <= 0) return;
-                    bool Fits(string value) { var measure = Text(value, subject.FontSize); measure.Measure(new Windows.Foundation.Size(double.PositiveInfinity, double.PositiveInfinity)); return measure.DesiredSize.Width <= width; }
+                    bool Fits(string value)
+                    {
+                        var measure = Text(value, subject.FontSize); measure.FontWeight = subject.FontWeight;
+                        var line = Text("国", subject.FontSize); line.FontWeight = subject.FontWeight;
+                        line.Measure(new Windows.Foundation.Size(double.PositiveInfinity, double.PositiveInfinity));
+                        measure.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
+                        return measure.DesiredSize.Height <= line.DesiredSize.Height * 2 + 0.5;
+                    }
                     subject.Text = DisplayText.ChangeCardSubject(DisplayText.CellSubject(source), shortName is null ? null : DisplayText.CellSubject(shortName), Fits);
                 };
             }
             content.Children.Add(subject);
         }
-        if (showTime && !home && time is not null) content.Children.Add(Text(time.Display, 11));
+        if (showTime && !home && time is not null) content.Children.Add(Text(time.Display, 9));
         var teacher = block.Content is SpecialContent && !home ? names.Teacher : DisplayText.Metadata(names.Teacher);
         var room = block.Content is SpecialContent && !home ? names.Room : DisplayText.Metadata(names.Room);
-        foreach (var metadata in new[] { teacher, room }.Where(value => value.Length > 0)) content.Children.Add(Text(DisplayText.Continuous(metadata), home ? 14 : 12));
+        foreach (var metadata in new[] { teacher, room }.Where(value => value.Length > 0))
+        {
+            var text = Text(DisplayText.Continuous(metadata), home ? 14 : 9);
+            if (!home) { text.MaxLines = 1; text.TextTrimming = TextTrimming.CharacterEllipsis; }
+            content.Children.Add(text);
+        }
         foreach (var text in content.Children.OfType<TextBlock>()) text.IsTextSelectionEnabled = false;
         if (!home)
         {
             foreach (var text in content.Children.OfType<TextBlock>()) text.TextAlignment = TextAlignment.Center;
             if (change is not null) button.Foreground = WarningBrush;
-            button.Content = content; button.Padding = new Thickness(8, 6, 8, 6);
+            button.Content = content; button.Padding = new Thickness(4, 3, 4, 3);
             button.VerticalContentAlignment = VerticalAlignment.Center;
         }
         else
