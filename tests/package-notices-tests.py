@@ -88,6 +88,19 @@ class NoticesTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "manifest is required"):
             notices.collect(self.root / "packages", self.root / "out", self.templates)
 
+    def test_sdk_reference_package_uses_its_official_legacy_license(self):
+        self.metadata('<licenseUrl>https://aka.ms/WinSDKLicenseURL</licenseUrl>')
+        spec = self.package / "fake.nuspec"
+        spec.write_text(spec.read_text().replace("Fake.Package", "Microsoft.Windows.SDK.NET.Ref"))
+        (self.root / "microsoft-windows-sdk.txt").write_text("Original SDK license terms", encoding="utf-8")
+        notices.collect(self.root / "packages", self.root / "out", self.templates)
+        self.assertIn("Original SDK license terms", (self.root / "out/THIRD-PARTY-NOTICES.txt").read_text())
+
+    def test_legacy_license_url_does_not_waive_missing_license(self):
+        self.metadata('<licenseUrl>https://aka.ms/WinSDKLicenseURL</licenseUrl>')
+        with self.assertRaisesRegex(ValueError, "No bundled license text"):
+            notices.collect(self.root / "packages", self.root / "out", self.templates)
+
 
 if __name__ == "__main__":
     unittest.main()

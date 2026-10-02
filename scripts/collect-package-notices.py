@@ -79,7 +79,14 @@ def collect(packages: Path, output: Path, license_templates: Path):
             # Older packages sometimes ship their notice without a modern nuspec license field.
             candidates = [p for p in spec.parent.iterdir() if p.is_file() and re.match(r"(?i)^licen[cs]e(?:[._-]|$)", p.name)]
             if not candidates:
-                raise ValueError(f"No bundled license text for {name} {version}.")
+                license_url = values.get("licenseUrl")
+                if name.casefold() == "microsoft.windows.sdk.net.ref" and license_url is not None and license_url.text == "https://aka.ms/WinSDKLicenseURL":
+                    original = license_templates.parent / "microsoft-windows-sdk.txt"
+                    if not original.is_file():
+                        raise ValueError("The original Windows SDK license text is missing.")
+                    candidates = [original]
+                else:
+                    raise ValueError(f"No bundled license text for {name} {version}.")
             text.extend(p.read_text(encoding="utf-8-sig") for p in candidates)
         for extra in spec.parent.iterdir():
             if extra.is_file() and re.match(r"(?i)^(?:notice|third.?party.?notices)(?:[._-]|$)", extra.name):
