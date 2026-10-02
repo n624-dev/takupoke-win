@@ -58,12 +58,13 @@ public static class XlsxChangeReader
         using var stream = new MemoryStream(bytes, writable: false);
         using var document = SpreadsheetDocument.Open(stream, false, new OpenSettings { AutoSave = false, MaxCharactersInPart = BoundedXml.MaximumBytes });
         var part = document.WorkbookPart ?? throw new ChangeParseException(ChangeErrorCode.InvalidXml);
-        var sdkSheets = part.Workbook.GetFirstChild<Sheets>()?.Elements<Sheet>().Where(s => s.Name?.Value == "時間割変更").ToArray() ?? [];
+        var sdkWorkbook = part.Workbook ?? throw new ChangeParseException(ChangeErrorCode.InvalidXml);
+        var sdkSheets = sdkWorkbook.GetFirstChild<Sheets>()?.Elements<Sheet>().Where(s => s.Name?.Value == "時間割変更").ToArray() ?? [];
         if (sdkSheets.Length != 1 || sdkSheets[0].Id?.Value != id.Value || part.GetPartById(id.Value) is not WorksheetPart worksheetPart)
             throw new ChangeParseException(ChangeErrorCode.MissingSheet);
-        var strings = part.SharedStringTablePart?.SharedStringTable.Elements<SharedStringItem>().Select(RichText).ToArray() ?? [];
+        var strings = part.SharedStringTablePart?.SharedStringTable?.Elements<SharedStringItem>().Select(RichText).ToArray() ?? [];
         if (strings.Length > 50_000) throw new ChangeParseException(ChangeErrorCode.Limit);
-        var sheet = worksheetPart.Worksheet;
+        var sheet = worksheetPart.Worksheet ?? throw new ChangeParseException(ChangeErrorCode.InvalidXml);
         var sheetData = sheet.GetFirstChild<SheetData>() ?? throw new ChangeParseException(ChangeErrorCode.InvalidXml);
         var rows = new List<IReadOnlyList<string>>();
         var formulas = new List<(int Row, int Column, bool HasCache)>();

@@ -16,6 +16,7 @@ internal static class Program
     private static AutomationElement? _window;
     private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(30);
     private static int _checks;
+    private static string _lastStep = "start";
     [STAThread]
     public static int Main(string[] args)
     {
@@ -40,6 +41,16 @@ internal static class Program
                 SelectMainColor(color, preferences);
                 Require(TextColor("page-settings") == bodyColor, "Changing the main color must not recolor page text.");
             }
+            Invoke(WaitElement("material-details-Exam"));
+            Wait(() => Find("page-material-Exam") is not null, "material detail screen");
+            Invoke(WaitElement("back-settings"));
+            Invoke(ByName("使い方")); Wait(() => Find("page-help") is not null, "purpose-based help");
+            Invoke(ByName("時間割を見る")); Invoke(ByName("閉じる")); Invoke(WaitElement("back-settings"));
+            Invoke(ByName("初期設定をもう一度表示"));
+            Wait(() => Find("page-setup") is not null, "guided setup");
+            Invoke(WaitElement("setup-next")); Wait(() => Find("setup-events") is not null, "setup material and event step");
+            Invoke(WaitElement("setup-next")); Wait(() => Find("setup-class") is not null, "setup class step");
+            Invoke(WaitElement("setup-later")); Navigate("settings");
             Invoke(ByName("利用規約"));
             Invoke(ByName("閉じる"));
             Invoke(ByName("プライバシーポリシー"));
@@ -85,7 +96,7 @@ internal static class Program
         catch (Exception error)
         {
             // Only synthetic labels appear in this test. Do not capture screenshots or application data.
-            Console.Error.WriteLine("Windows UI check failed: " + error.GetType().Name + " — " + error.Message);
+            Console.Error.WriteLine("Windows UI check failed: " + error.GetType().Name + " — " + error.Message + " (step: " + _lastStep + ", passed: " + _checks + ")");
             if (args.Length == 2 && Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1"
                 && Path.GetFullPath(args[1]) == Path.GetFullPath(Environment.GetEnvironmentVariable("TAKUPOKE_DATA_ROOT") ?? ""))
             {
@@ -170,7 +181,7 @@ internal static class Program
         AutomationElement? option = null;
         Wait(() => (option = _window!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.NameProperty, UserPreferences.MainColorLabel(color)), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem)))) is not null, "main color option");
         ((SelectionItemPattern)option!.GetCurrentPattern(SelectionItemPattern.Pattern)).Select();
-        try { expansion.Collapse(); } catch (ElementNotAvailableException) { }
+        try { expansion.Collapse(); } catch (ElementNotAvailableException) { } catch (ElementNotEnabledException) { }
         Wait(() => SavedMainColor(preferences) == color && Find("main-color")?.Current.IsEnabled == true, "main color preference is saved");
     }
     private static string? SavedMainColor(string path)
@@ -215,6 +226,7 @@ internal static class Program
     private static void Require(bool success, string label) { if (!success) throw new InvalidOperationException(label); _checks++; }
     private static void Wait(Func<bool> condition, string label)
     {
+        _lastStep = label;
         var deadline = DateTime.UtcNow + Timeout;
         do
         {
