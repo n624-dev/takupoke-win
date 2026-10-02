@@ -39,6 +39,12 @@ internal static class Program
             Invoke(ByName("閉じる"));
             Invoke(ByName("プライバシーポリシー"));
             Invoke(ByName("閉じる"));
+            var selectedPdf = Path.Combine(args[1], "fictional-selection.pdf");
+            File.WriteAllText(selectedPdf, "%PDF-1.7\n% Entirely synthetic malformed PDF for selection persistence.\n", Encoding.ASCII);
+            PickMaterial(selectedPdf);
+            Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "picker selection is saved even when parsing fails");
+            PickMaterial(null);
+            Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "canceling the picker preserves the previous selection");
             Invoke(ByName("クラスを選択"));
             var homeroom = WaitElement("class-1_1"); Toggle(homeroom);
             var department = WaitElement("class-1_CN"); Toggle(department);
@@ -64,6 +70,8 @@ internal static class Program
             Start(args[0]); Navigate("timetable");
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "クラス：3-IT")) is not null, "saved class survives app restart");
             Wait(() => Find("架空科目甲") is not null, "accepted timetable remains after source is unavailable");
+            Navigate("settings");
+            Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "file selected through the native picker survives restart");
             Console.WriteLine($"Passed {_checks} Windows UI checks: navigation, class constraints, saved lessons and details, kana search, persistence, focus and offline refresh.");
             return 0;
         }
@@ -125,6 +133,26 @@ internal static class Program
         if (item.TryGetCurrentPattern(SelectionItemPattern.Pattern, out var pattern)) ((SelectionItemPattern)pattern).Select();
         else Invoke(item);
         Wait(() => Find("page-" + page) is not null, page + " page");
+    }
+    private static void PickMaterial(string? path)
+    {
+        var root = AutomationElement.RootElement;
+        var dialogs = new AndCondition(new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window), new PropertyCondition(AutomationElement.ClassNameProperty, "#32770"));
+        var existing = root.FindAll(TreeScope.Children, dialogs).Cast<AutomationElement>().Select(e => e.Current.NativeWindowHandle).ToHashSet();
+        Invoke(WaitElement("select-material-Exam"));
+        AutomationElement? dialog = null;
+        Wait(() => (dialog = root.FindAll(TreeScope.Children, dialogs).Cast<AutomationElement>().FirstOrDefault(e => !existing.Contains(e.Current.NativeWindowHandle))) is not null, "native file picker opens");
+        if (path is not null)
+        {
+            var field = dialog!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, "1148"));
+            if (field is null) throw new InvalidOperationException("Native file-name field was not found.");
+            var edit = field.TryGetCurrentPattern(ValuePattern.Pattern, out var value) ? field : field.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit));
+            ((ValuePattern)edit!.GetCurrentPattern(ValuePattern.Pattern)).SetValue(path);
+        }
+        var button = dialog!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button), new PropertyCondition(AutomationElement.AutomationIdProperty, path is null ? "2" : "1")));
+        if (button is null) throw new InvalidOperationException("Native file picker action was not found.");
+        Invoke(button);
+        Wait(() => { try { return !dialog.Current.IsEnabled || dialog.Current.NativeWindowHandle == 0; } catch (ElementNotAvailableException) { return true; } }, "native file picker closes");
     }
     private static void Invoke(AutomationElement element) => ((InvokePattern)element.GetCurrentPattern(InvokePattern.Pattern)).Invoke();
     private static void Toggle(AutomationElement element) => ((TogglePattern)element.GetCurrentPattern(TogglePattern.Pattern)).Toggle();

@@ -16,6 +16,7 @@ public sealed partial class MainWindow : Window
     private string _page = "home";
     private bool _dialogOpen;
     private bool _ready;
+    private bool _selectingMaterial;
     private DesktopIntegration? _desktop;
     private bool _exitRequested;
     public MainWindow()
@@ -29,7 +30,7 @@ public sealed partial class MainWindow : Window
         AppWindow.Resize(new(1150, 820));
         Navigation.SelectedItem = Navigation.MenuItems[0];
         RootGrid.Loaded += Loaded;
-        Activated += (_, args) => { if (_ready && args.WindowActivationState != WindowActivationState.Deactivated) _ = _model.RefreshAsync(); };
+        Activated += (_, args) => { if (_ready && !_selectingMaterial && args.WindowActivationState != WindowActivationState.Deactivated) _ = _model.RefreshAsync(); };
         AppWindow.Closing += (_, args) =>
         { if (!_exitRequested && _model.Preferences.KeepInTray && _desktop?.TrayAvailable == true) { args.Cancel = true; AppWindow.Hide(); } };
         Closed += async (_, _) => { CloseBrowser(); _desktop?.Dispose(); Program.OpenRequested = null; await _model.DisposeAsync(); };
@@ -120,11 +121,16 @@ public sealed partial class MainWindow : Window
     private Task Message(string title, string message) => Dialog(title, Text(message));
     private async Task SelectMaterial(MaterialKind kind)
     {
-        var picker = new FileOpenPicker();
-        WinRT.Interop.InitializeWithWindow.Initialize(picker, WinRT.Interop.WindowNative.GetWindowHandle(this));
-        picker.FileTypeFilter.Add(kind == MaterialKind.Changes ? ".xlsx" : ".pdf");
-        var file = await picker.PickSingleFileAsync();
-        if (file is not null && file.Path.Length > 0) await _model.SelectAsync(kind, file.Path);
+        _selectingMaterial = true;
+        try
+        {
+            var picker = new FileOpenPicker();
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, WinRT.Interop.WindowNative.GetWindowHandle(this));
+            picker.FileTypeFilter.Add(kind == MaterialKind.Changes ? ".xlsx" : ".pdf");
+            var file = await picker.PickSingleFileAsync();
+            if (file is not null && file.Path.Length > 0) await _model.SelectAsync(kind, file.Path);
+        }
+        finally { _selectingMaterial = false; }
     }
     private async Task InitialSetup()
     {

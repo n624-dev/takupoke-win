@@ -42,6 +42,30 @@ public sealed class MaterialCoordinatorTests
         finally { Directory.Delete(root, true); }
     }
     [Fact]
+    public async Task FirstSelectionAndOriginalSurviveRestartWhenPdfCannotBeParsed()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-material-tests-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root); using var protector = new Protector();
+        try
+        {
+            var path = Path.Combine(root, "fictional.pdf");
+            var bytes = System.Text.Encoding.ASCII.GetBytes("%PDF-1.7\n% Entirely fictional malformed PDF.\n");
+            await File.WriteAllBytesAsync(path, bytes);
+            await using (var store = new SchoolDataStore(Path.Combine(root, "data"), protector))
+            {
+                var result = await new MaterialCoordinator(store, new(new FakeIdentity())).SelectAsync(MaterialKind.Exam, path, 2032);
+                Assert.True(result.Changed); Assert.False(result.Parsed); Assert.NotNull(result.Error);
+            }
+            await using var reopened = new SchoolDataStore(Path.Combine(root, "data"), protector);
+            var lease = await reopened.BeginAsync();
+            var source = await reopened.ReadAsync<SourceRecord>(lease, "selection.Exam");
+            Assert.NotNull(source); Assert.Equal(path, source.Path);
+            Assert.Equal(bytes, await reopened.ReadOriginalAsync(lease, source.Id));
+            Assert.NotNull((await reopened.ReadAsync<MaterialAttempt>(lease, "attempt.Exam"))?.Failure);
+        }
+        finally { Directory.Delete(root, true); }
+    }
+    [Fact]
     public async Task ReplacedFileAtSamePathIsNotSilentlyAdopted()
     {
         var root = Path.Combine(Path.GetTempPath(), "takupoke-material-tests-" + Guid.NewGuid().ToString("N"));

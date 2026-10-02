@@ -200,8 +200,17 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private async Task RunAsync(Func<CancellationToken, Task> action)
     {
         if (Locked) { Status = "Windowsのロック中は学校データを利用できません。"; return; }
-        if (Busy) return;
-        await _operations.WaitAsync(); Busy = true;
+        // Picker completion can race a refresh triggered by window activation.
+        // Explicit operations must wait for the current operation, never disappear.
+        var epoch = PrivateEpoch;
+        await _operations.WaitAsync();
+        if (Locked || epoch != PrivateEpoch)
+        {
+            _operations.Release();
+            Status = "学校データの利用状態が変わったため処理を中止しました。もう一度お試しください。";
+            return;
+        }
+        Busy = true;
         if (_session.IsCancellationRequested) { _session.Dispose(); _session = new(); }
         try { await action(_session.Token); }
         catch (OperationCanceledException) { Status = "処理を中止しました。保存期間内の正常なデータは保持しています。"; }

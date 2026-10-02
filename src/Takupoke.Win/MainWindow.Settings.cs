@@ -70,8 +70,10 @@ public sealed partial class MainWindow
     private Border MaterialCard(MaterialKind kind)
     {
         var snapshot = _model.Materials.GetValueOrDefault(kind); var source = snapshot?.Source; var analysis = snapshot?.Analysis;
-        var panel = Panel(Text(AppViewModel.MaterialLabel(kind), 18), Text(source is null ? "資料を選択していません。" : source.OriginalName + "\n取得：" + source.AcquiredAt.ToLocalTime().ToString("g") + "\n確認：" + source.LastCheckedAt.ToLocalTime().ToString("g")),
-            Button(source is null ? "資料を選択" : "資料を選び直す", () => SelectMaterial(kind)));
+        var summary = Text(source is null ? "資料を選択していません。" : source.OriginalName + "\n取得：" + source.AcquiredAt.ToLocalTime().ToString("g") + "\n確認：" + source.LastCheckedAt.ToLocalTime().ToString("g"));
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(summary, "material-summary-" + kind);
+        var panel = Panel(Text(AppViewModel.MaterialLabel(kind), 18), summary,
+            Button(source is null ? "資料を選択" : "資料を選び直す", () => SelectMaterial(kind), "select-material-" + kind));
         if (snapshot?.AcquisitionAttempt?.Failure is { } acquisition) panel.Children.Add(Text(acquisition));
         if (snapshot?.ParseAttempt?.Failure is { } failure)
         {
