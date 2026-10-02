@@ -29,7 +29,7 @@ public sealed partial class MainWindow
             {
                 if (picker.SelectedItem is not ComboBoxItem { Tag: string cls } || cls == selected || !PageContent.Children.Contains(picker)) return;
                 var values = cls.Length == 0 ? Array.Empty<string>() : [cls];
-                await _model.SavePreferencesAsync(kind == MaterialKind.Timetable ? _model.Preferences with { TimetableAnalysisClasses = values } : _model.Preferences with { ChangeAnalysisClasses = values });
+                await _model.SavePreferencesAsync(current => kind == MaterialKind.Timetable ? current with { TimetableAnalysisClasses = values } : current with { ChangeAnalysisClasses = values });
             };
             Add(picker);
             if (selected.Length > 0 && !available.Contains(selected)) Add(Text("選択したクラスは現在の解析結果にありません。選択は保持しています。"));
@@ -38,7 +38,7 @@ public sealed partial class MainWindow
                 var weekday = _model.Preferences.TimetableAnalysisWeekday;
                 var days = new ComboBox { Header = "曜日", ItemsSource = new[] { "すべて", "月", "火", "水", "木", "金" }, SelectedIndex = weekday };
                 AutomationProperties.SetAutomationId(days, "analysis-weekday");
-                days.SelectionChanged += async (_, _) => { if (days.SelectedIndex is >= 0 and <= 5 && days.SelectedIndex != weekday && PageContent.Children.Contains(days)) await _model.SavePreferencesAsync(_model.Preferences with { TimetableAnalysisWeekday = days.SelectedIndex }); };
+                days.SelectionChanged += async (_, _) => { if (days.SelectedIndex is >= 0 and <= 5 && days.SelectedIndex != weekday && PageContent.Children.Contains(days)) { var value = days.SelectedIndex; await _model.SavePreferencesAsync(current => current with { TimetableAnalysisWeekday = value }); } };
                 Add(days);
                 foreach (var lesson in analysis.Timetable?.Lessons.Where(l => (selected.Length == 0 || l.ClassName == selected) && (weekday == 0 || l.Weekday == weekday)) ?? [])
                     Add(Button(DisplayText.Continuous(lesson.Names.Subject) + "\n" + ClassSelection.Display(lesson.ClassName) + " · " + new[] { "", "月", "火", "水", "木", "金" }[lesson.Weekday] + "曜 · " + lesson.Period + "限\n" + lesson.Names.Teacher + " · " + lesson.Names.Room, () => NormalAnalysisDetail(lesson)));

@@ -28,6 +28,7 @@ public sealed partial class MainWindow : Window
     private bool _initialSetupOffered;
     private bool _windowActive;
     private readonly List<Control> _operationControls = [];
+    private readonly List<Control> _preferenceControls = [];
     public MainWindow()
     {
         InitializeComponent();
@@ -110,6 +111,7 @@ public sealed partial class MainWindow : Window
         Activity.Visibility = CancelButton.Visibility = _model.Busy ? Visibility.Visible : Visibility.Collapsed;
         PageHost.IsEnabled = !_model.Locked;
         foreach (var control in _operationControls) control.IsEnabled = !_model.Busy && _model.PreferencesReady && !_model.Locked;
+        foreach (var control in _preferenceControls) control.IsEnabled = _model.PreferencesReady && !_model.Locked;
     }
     private void Render()
     {
@@ -140,7 +142,7 @@ public sealed partial class MainWindow : Window
         }
         foreach (var theme in new[] { "Light", "Dark" })
             ((SolidColorBrush)((ResourceDictionary)Navigation.Resources.ThemeDictionaries[theme])["NavigationViewSelectionIndicatorForeground"]).Color = MainAccentColor();
-        PageContent.Children.Clear(); _operationControls.Clear();
+        PageContent.Children.Clear(); _operationControls.Clear(); _preferenceControls.Clear();
         PageContent.Spacing = _page is "timetable" or "settings" ? 10 : 18;
         if (_page.StartsWith("material.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var material)) BuildMaterialDetails(material);
         else if (_page.StartsWith("analysis.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var analysed)) BuildAnalysis(analysed);
@@ -188,6 +190,7 @@ public sealed partial class MainWindow : Window
     }
     private void Add(UIElement element) => PageContent.Children.Add(element);
     private T OperationControl<T>(T control) where T : Control { _operationControls.Add(control); control.IsEnabled = !_model.Busy && _model.PreferencesReady; return control; }
+    private T PreferenceControl<T>(T control) where T : Control { _preferenceControls.Add(control); control.IsEnabled = _model.PreferencesReady; return control; }
     private Button OperationButton(string label, Func<Task> action, string? id = null) => OperationControl(Button(label, action, id));
     private void TitleText(string title, string id) { var heading = Text(title, 28); AutomationProperties.SetAutomationId(heading, id); Add(heading); }
     private static Border Card(UIElement content) => new() { Child = content, Padding = new Thickness(16), CornerRadius = new CornerRadius(8),

@@ -31,10 +31,10 @@ public sealed partial class MainWindow
         var selectedClasses = new AppBarButton { Label = "クラス：" + string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display)), Icon = new SymbolIcon(Symbol.People) };
         selectedClasses.Click += async (_, _) => await ChooseClasses();
         toolbar.PrimaryCommands.Add(previous); toolbar.PrimaryCommands.Add(current); toolbar.PrimaryCommands.Add(next); toolbar.PrimaryCommands.Add(selectedClasses);
-        var included = OperationControl(new AppBarToggleButton { Label = "変更を反映", IsChecked = _model.Preferences.IncludesChanges });
-        included.Click += async (_, _) => { if (included.IsChecked != _model.Preferences.IncludesChanges) await _model.SavePreferencesAsync(_model.Preferences with { IncludesChanges = included.IsChecked == true }); };
-        var international = OperationControl(new AppBarToggleButton { Label = "留学生向け授業", IsChecked = _model.Preferences.International });
-        international.Click += async (_, _) => { if (international.IsChecked != _model.Preferences.International) await _model.SavePreferencesAsync(_model.Preferences with { International = international.IsChecked == true }); };
+        var included = PreferenceControl(new AppBarToggleButton { Label = "変更を反映", IsChecked = _model.Preferences.IncludesChanges });
+        included.Click += async (_, _) => { var enabled = included.IsChecked == true; if (enabled != _model.Preferences.IncludesChanges) await _model.SavePreferencesAsync(current => current with { IncludesChanges = enabled }); };
+        var international = PreferenceControl(new AppBarToggleButton { Label = "留学生向け授業", IsChecked = _model.Preferences.International });
+        international.Click += async (_, _) => { var enabled = international.IsChecked == true; if (enabled != _model.Preferences.International) await _model.SavePreferencesAsync(current => current with { International = enabled }); };
         toolbar.SecondaryCommands.Add(included); toolbar.SecondaryCommands.Add(international); Add(toolbar);
         if (_model.Preferences.SelectedClasses.Length == 0) Add(Text("クラスを選択してください。"));
         else BuildWeekGrid(start);
@@ -50,11 +50,11 @@ public sealed partial class MainWindow
         void AddChange(UIElement element) => list.Children.Add(element);
         AddChange(Button("一覧のクラスを選択", () => ChooseClasses(changes: true)));
         var range = new ComboBox { Header = "一覧の範囲", ItemsSource = new[] { "今日以降", "この週", "全件" }, SelectedIndex = (int)_model.Preferences.ChangeRange };
-        range.SelectionChanged += async (_, _) => { if (range.SelectedIndex is >= 0 and <= 2 && range.SelectedIndex != (int)_model.Preferences.ChangeRange) await _model.SavePreferencesAsync(_model.Preferences with { ChangeRange = (ChangeRange)range.SelectedIndex }); }; AddChange(range);
+        range.SelectionChanged += async (_, _) => { if (range.SelectedIndex is >= 0 and <= 2 && range.SelectedIndex != (int)_model.Preferences.ChangeRange) { var value = (ChangeRange)range.SelectedIndex; await _model.SavePreferencesAsync(current => current with { ChangeRange = value }); } }; AddChange(range);
         var selected = (_model.Preferences.ChangeClasses.Length > 0 ? _model.Preferences.ChangeClasses : _model.Preferences.SelectedClasses).ToHashSet();
         var parsedClasses = (_model.Data.Timetable?.Lessons.Select(l => l.ClassName) ?? []).Concat(_model.Data.Changes?.Select(c => c.DisplayClassName) ?? []).ToHashSet();
         if (_model.Preferences.ChangeClasses.Any(cls => !parsedClasses.Contains(cls))) AddChange(Text("保存した対象クラスの一部は現在の資料にありません。選択は保持しています。"));
-        if (_model.Preferences.ChangeClasses.Length > 0) AddChange(Button("時間割設定に戻す", () => _model.SavePreferencesAsync(_model.Preferences with { ChangeClasses = [] })));
+        if (_model.Preferences.ChangeClasses.Length > 0) AddChange(Button("時間割設定に戻す", () => _model.SavePreferencesAsync(current => current with { ChangeClasses = [] })));
         var changes = _model.Engine.Changes(selected, _model.Preferences.ChangeRange, _model.Today, start).ToArray();
         if (changes.Length == 0) AddChange(Text("この条件の時間割変更はありません。"));
         foreach (var change in changes) AddChange(Button(change.ChangeDate + " · " + ClassSelection.Display(change.DisplayClassName) + " · " + change.DisplayPeriod + " · " + change.KindLabel + " · " + _model.Presentation.BeforeSubject(change) + " → " + (_model.Presentation.ChangeNames(change).After.Subject.Trim().Length == 0 ? "記載なし" : _model.Presentation.ChangeNames(change).After.Subject) + " · " + DisplayText.FullWidthKana(change.Note), () => ChangeDetail(change)));
@@ -188,7 +188,7 @@ public sealed partial class MainWindow
         {
             var values = checks.Where(c => c.IsChecked == true).Select(c => (string)c.Tag).ToArray();
             if (!changes && !ClassSelection.IsValid(values)) return;
-            await _model.SavePreferencesAsync(changes ? _model.Preferences with { ChangeClasses = values } : _model.Preferences with { SelectedClasses = values });
+            await _model.SavePreferencesAsync(current => changes ? current with { ChangeClasses = values } : current with { SelectedClasses = values });
         }
     }
 }

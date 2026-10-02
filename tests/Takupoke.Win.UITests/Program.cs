@@ -190,6 +190,9 @@ internal static class Program
             Require(Find("operation-status")?.Current.Name.Contains("認証情報を検証", StringComparison.Ordinal) == true, "Progress identifies token verification rather than a stale refresh result.");
             Invoke(WaitElement("back-settings"));
             Require(Find("settings-materials")?.Current.IsEnabled == true && Find("settings-help")?.Current.IsEnabled == true, "Settings navigation stays usable during token exchange.");
+            SelectMainColor("green", Path.Combine(root, "preferences.json"));
+            SelectMainColor("purple", Path.Combine(root, "preferences.json"));
+            Require(ReadProbe(tokenRequests) == "2" && Visible("cancel-operation"), "Local preferences save without completing or canceling the pending token exchange.");
             Invoke(WaitElement("settings-help")); Wait(() => Find("page-help") is not null, "help is readable during token exchange");
             Invoke(WaitElement("back-settings")); Invoke(WaitElement("settings-account"));
             WriteProbe(mode, "success");
@@ -428,7 +431,18 @@ internal static class Program
     [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool SetWindowPos(nint window, nint after, int x, int y, int width, int height, uint flags);
     [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool SetCursorPos(int x, int y);
     [System.Runtime.InteropServices.DllImport("user32.dll", EntryPoint = "mouse_event")] private static extern void MouseEvent(uint flags, uint x, uint y, uint data, nuint extra);
-    private static void Invoke(AutomationElement element) => ((InvokePattern)element.GetCurrentPattern(InvokePattern.Pattern)).Invoke();
+    private static void Invoke(AutomationElement element)
+    {
+        var id = element.Current.AutomationId; var name = element.Current.Name;
+        Wait(() =>
+        {
+            var current = id.Length > 0 ? Find(id) : _window!.FindFirst(TreeScope.Descendants,
+                new AndCondition(new PropertyCondition(AutomationElement.NameProperty, name), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button)));
+            if (current?.Current.IsEnabled != true || !current.TryGetCurrentPattern(InvokePattern.Pattern, out var pattern)) return false;
+            try { ((InvokePattern)pattern).Invoke(); return true; }
+            catch (ElementNotEnabledException) { return false; }
+        }, "invoke " + name);
+    }
     private static void Toggle(AutomationElement element) => ((TogglePattern)element.GetCurrentPattern(TogglePattern.Pattern)).Toggle();
     private static bool Checked(AutomationElement element) => ((TogglePattern)element.GetCurrentPattern(TogglePattern.Pattern)).Current.ToggleState == ToggleState.On;
     private static string? SavedClass(string path)

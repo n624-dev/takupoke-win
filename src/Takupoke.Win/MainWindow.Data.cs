@@ -130,7 +130,7 @@ public sealed partial class MainWindow
             if (!_model.Preferences.NotificationsSetupCompleted)
             {
                 var allow = await Dialog("更新の通知", Text("選択中クラスの時間割変更と試験・返却PDFの更新を通知します。種類別に設定から変更できます。"), "通知を有効にする", "今は有効にしない");
-                await _model.SavePreferencesAsync(_model.Preferences with { NotificationsSetupCompleted = true, NotifyChanges = allow == ContentDialogResult.Primary, NotifySpecials = allow == ContentDialogResult.Primary });
+                await _model.SavePreferencesAsync(current => current with { NotificationsSetupCompleted = true, NotifyChanges = allow == ContentDialogResult.Primary, NotifySpecials = allow == ContentDialogResult.Primary });
             }
             await FinishSetup();
         }, "setup-next"));
@@ -138,7 +138,7 @@ public sealed partial class MainWindow
     }
     private async Task FinishSetup()
     {
-        await _model.SavePreferencesAsync(_model.Preferences with { SetupCompleted = true });
+        await _model.SavePreferencesAsync(current => current with { SetupCompleted = true });
         _page = "home"; Navigation.SelectedItem = Navigation.MenuItems[0]; Render();
     }
     private void BuildHelp()

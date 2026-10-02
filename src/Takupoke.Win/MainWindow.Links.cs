@@ -60,16 +60,16 @@ public sealed partial class MainWindow
         void Item(string label, Func<Task> action) { var item = new MenuFlyoutItem { Text = label }; item.Click += async (_, _) => await action(); menu.Items.Add(item); }
         Item("開く", () => OpenLink(link)); Item("今回だけ別の開き方で開く", () => OpenLink(link, true));
         Item(favorite ? "お気に入りから外す" : "お気に入りに追加", async () =>
-        { var ids = _model.Preferences.FavoriteIds.ToHashSet(); if (!ids.Add(link.Id)) ids.Remove(link.Id); await _model.SavePreferencesAsync(_model.Preferences with { FavoriteIds = ids }); });
+        { await _model.SavePreferencesAsync(current => { var ids = current.FavoriteIds.ToHashSet(); if (favorite) ids.Remove(link.Id); else ids.Add(link.Id); return current with { FavoriteIds = ids }; }); });
         Item("色を変更", async () =>
         {
             var colors = LinksPayload.Colors.Order().ToArray(); var choice = new ComboBox { Header = "リンクの色", ItemsSource = colors, SelectedItem = color };
             if (await Dialog("色を変更", choice, "保存", "キャンセル") == ContentDialogResult.Primary && choice.SelectedItem is string value)
-            { var map = new Dictionary<string, string>(_model.Preferences.LinkColors) { [link.Id] = value }; await _model.SavePreferencesAsync(_model.Preferences with { LinkColors = map }); }
+                await _model.SavePreferencesAsync(current => current with { LinkColors = new Dictionary<string, string>(current.LinkColors) { [link.Id] = value } });
         });
         if (_model.Preferences.LinkColors.ContainsKey(link.Id)) Item("既定色に戻す", async () =>
-        { var map = new Dictionary<string, string>(_model.Preferences.LinkColors); map.Remove(link.Id); await _model.SavePreferencesAsync(_model.Preferences with { LinkColors = map }); });
-        Item("非表示", async () => { var hidden = _model.Preferences.HiddenIds.ToHashSet(); hidden.Add(link.Id); await _model.SavePreferencesAsync(_model.Preferences with { HiddenIds = hidden }); });
+        { await _model.SavePreferencesAsync(current => { var map = new Dictionary<string, string>(current.LinkColors); map.Remove(link.Id); return current with { LinkColors = map }; }); });
+        Item("非表示", async () => { await _model.SavePreferencesAsync(current => { var hidden = current.HiddenIds.ToHashSet(); hidden.Add(link.Id); return current with { HiddenIds = hidden }; }); });
         button.ContextFlyout = menu;
         // Keyboard users can open the same context menu with the application key or Shift+F10.
         return button;
@@ -84,12 +84,12 @@ public sealed partial class MainWindow
     }
     private async Task RestoreHiddenLinks()
     {
-        var hidden = _model.Preferences.HiddenIds.ToHashSet(); var panel = new StackPanel { Spacing = 8 };
+        var original = _model.Preferences.HiddenIds.ToHashSet(); var hidden = original.ToHashSet(); var panel = new StackPanel { Spacing = 8 };
         foreach (var link in _model.Links?.Items.Where(i => i.Visible && hidden.Contains(i.Id)) ?? [])
         { var checkbox = new CheckBox { Content = link.Label, IsChecked = true }; checkbox.Unchecked += (_, _) => hidden.Remove(link.Id); checkbox.Checked += (_, _) => hidden.Add(link.Id); panel.Children.Add(checkbox); }
         if (panel.Children.Count == 0) panel.Children.Add(Text("非表示にしたリンクはありません。"));
         if (await Dialog("非表示のリンク（チェックを外すと再表示）", panel, "保存", "キャンセル") == ContentDialogResult.Primary)
-            await _model.SavePreferencesAsync(_model.Preferences with { HiddenIds = hidden });
+            await _model.SavePreferencesAsync(current => { var next = current.HiddenIds.ToHashSet(); next.ExceptWith(original.Except(hidden)); return current with { HiddenIds = next }; });
     }
     private async Task OpenLink(LinkItem link, bool opposite = false)
     {

@@ -20,7 +20,7 @@ public sealed partial class MainWindow
                 _model.Revisions.Values.Any(value => value.Changed) ? "更新あり" : null)));
         Add(Text("アプリ設定", 18));
         var initialMainColor = _model.Preferences.MainColor;
-        var mainColor = OperationControl(new ComboBox { MinWidth = 155 });
+        var mainColor = PreferenceControl(new ComboBox { MinWidth = 155 });
         foreach (var key in UserPreferences.MainColors) mainColor.Items.Add(new ComboBoxItem { Content = UserPreferences.MainColorLabel(key), Tag = key });
         mainColor.SelectedIndex = UserPreferences.MainColors.ToList().IndexOf(initialMainColor);
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(mainColor, "main-color");
@@ -29,16 +29,16 @@ public sealed partial class MainWindow
         {
             if (mainColor.SelectedItem is ComboBoxItem { Tag: string value } && value != initialMainColor
                 && value != _model.Preferences.MainColor && mainColor.IsLoaded)
-                await _model.SavePreferencesAsync(_model.Preferences with { MainColor = value });
+                await _model.SavePreferencesAsync(current => current with { MainColor = value });
         };
-        var opening = OperationControl(new ComboBox { MinWidth = 155, ItemsSource = new[] { "アプリ内で開く", "デフォルトのブラウザ" }, SelectedIndex = (int)_model.Preferences.OpeningMode });
+        var opening = PreferenceControl(new ComboBox { MinWidth = 155, ItemsSource = new[] { "アプリ内で開く", "デフォルトのブラウザ" }, SelectedIndex = (int)_model.Preferences.OpeningMode });
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(opening, "link-opening-mode");
         var initialOpening = opening.SelectedIndex;
         opening.SelectionChanged += async (_, _) =>
         {
             if (opening.IsLoaded && opening.SelectedIndex is >= 0 and <= 1 && opening.SelectedIndex != initialOpening
                 && opening.SelectedIndex != (int)_model.Preferences.OpeningMode)
-                await _model.SavePreferencesAsync(_model.Preferences with { OpeningMode = (LinkOpeningMode)opening.SelectedIndex });
+                { var value = (LinkOpeningMode)opening.SelectedIndex; await _model.SavePreferencesAsync(current => current with { OpeningMode = value }); }
         };
         Add(SettingsGroup(
             SettingsRow("クラス", ChooseClasses, "settings-class", _model.Preferences.SelectedClasses.Length == 0 ? "未選択" : string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display))),
@@ -76,11 +76,12 @@ public sealed partial class MainWindow
     {
         TitleText("時間割ファイル", "page-materials"); BackToSettings();
         foreach (var kind in Enum.GetValues<MaterialKind>()) Add(MaterialCard(kind));
-        var year = OperationControl(new TextBox { Header = "学校年度", Text = _model.Preferences.DefaultSchoolYear ?? "", PlaceholderText = _model.Today.SchoolYear().ToString() });
-        Add(year); Add(OperationButton("年度を保存", async () =>
+        var year = PreferenceControl(new TextBox { Header = "学校年度", Text = _model.Preferences.DefaultSchoolYear ?? "", PlaceholderText = _model.Today.SchoolYear().ToString() });
+        Add(year); Add(Button("年度を保存", async () =>
         {
             if (year.Text.Trim().Length > 0 && (!int.TryParse(year.Text, out var value) || value is < 1900 or > 9998)) { await Message("年度を確認してください", "1900〜9998の学校年度を入力してください。"); return; }
-            await _model.SavePreferencesAsync(_model.Preferences with { DefaultSchoolYear = year.Text.Trim().Length == 0 ? null : year.Text.Trim() });
+            var selectedYear = year.Text.Trim();
+            await _model.SavePreferencesAsync(current => current with { DefaultSchoolYear = selectedYear.Length == 0 ? null : selectedYear });
         }));
         Add(OperationButton("登録した原本を確認", _model.RefreshAsync, "refresh-materials"));
     }
@@ -97,15 +98,15 @@ public sealed partial class MainWindow
     {
         TitleText("通知・バックグラウンド", "page-notifications"); BackToSettings();
         Add(Text(_model.NotificationStatus));
-        var changes = OperationControl(new ToggleSwitch { Header = "時間割変更", IsOn = _model.Preferences.NotifyChanges });
-        changes.Toggled += async (_, _) => { if (changes.IsOn == _model.Preferences.NotifyChanges) return; await _model.SavePreferencesAsync(_model.Preferences with { NotifyChanges = changes.IsOn, NotificationsSetupCompleted = true }); }; Add(changes);
-        var special = OperationControl(new ToggleSwitch { Header = "試験・返却", IsOn = _model.Preferences.NotifySpecials });
-        special.Toggled += async (_, _) => { if (special.IsOn == _model.Preferences.NotifySpecials) return; await _model.SavePreferencesAsync(_model.Preferences with { NotifySpecials = special.IsOn, NotificationsSetupCompleted = true }); }; Add(special);
+        var changes = PreferenceControl(new ToggleSwitch { Header = "時間割変更", IsOn = _model.Preferences.NotifyChanges });
+        changes.Toggled += async (_, _) => { var enabled = changes.IsOn; if (enabled == _model.Preferences.NotifyChanges) return; await _model.SavePreferencesAsync(current => current with { NotifyChanges = enabled, NotificationsSetupCompleted = true }); }; Add(changes);
+        var special = PreferenceControl(new ToggleSwitch { Header = "試験・返却", IsOn = _model.Preferences.NotifySpecials });
+        special.Toggled += async (_, _) => { var enabled = special.IsOn; if (enabled == _model.Preferences.NotifySpecials) return; await _model.SavePreferencesAsync(current => current with { NotifySpecials = enabled, NotificationsSetupCompleted = true }); }; Add(special);
         Add(Text("バックグラウンド", 20));
         var tray = new ToggleSwitch { Header = "通知領域に常駐", IsOn = _model.Preferences.KeepInTray, IsEnabled = _desktop is not null };
-        tray.Toggled += async (_, _) => { if (tray.IsOn == _model.Preferences.KeepInTray) return; try { _desktop?.SetTray(tray.IsOn); await _model.SavePreferencesAsync(_model.Preferences with { KeepInTray = tray.IsOn }); } catch { await Message("常駐を設定できません", "通知領域にアイコンを登録できませんでした。"); } }; Add(tray);
+        tray.Toggled += async (_, _) => { var enabled = tray.IsOn; if (enabled == _model.Preferences.KeepInTray) return; try { _desktop?.SetTray(enabled); await _model.SavePreferencesAsync(current => current with { KeepInTray = enabled }); } catch { await Message("常駐を設定できません", "通知領域にアイコンを登録できませんでした。"); } }; Add(tray);
         var startup = new ToggleSwitch { Header = "Windowsへのサインイン時に起動", IsOn = _model.Preferences.AutoStart, IsEnabled = !_model.OfflineTest };
-        startup.Toggled += async (_, _) => { if (startup.IsOn == _model.Preferences.AutoStart) return; try { DesktopIntegration.SetAutoStart(startup.IsOn); await _model.SavePreferencesAsync(_model.Preferences with { AutoStart = startup.IsOn }); } catch { await Message("自動起動を設定できません", "Windowsの設定を確認してください。"); } }; Add(startup);
+        startup.Toggled += async (_, _) => { var enabled = startup.IsOn; if (enabled == _model.Preferences.AutoStart) return; try { DesktopIntegration.SetAutoStart(enabled); await _model.SavePreferencesAsync(current => current with { AutoStart = enabled }); } catch { await Message("自動起動を設定できません", "Windowsの設定を確認してください。"); } }; Add(startup);
         Add(Button("アプリを完全に終了", () => { _exitRequested = true; Close(); return Task.CompletedTask; }));
     }
     private void BuildAbout()

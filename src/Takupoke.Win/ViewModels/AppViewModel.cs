@@ -16,6 +16,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
 {
     private readonly DispatcherQueue _dispatcher;
     private readonly SemaphoreSlim _operations = new(1, 1);
+    private readonly SemaphoreSlim _preferenceOperations = new(1, 1);
     private CancellationTokenSource _session = new();
     private readonly HttpClient _http;
     private readonly SchoolDataStore _school;
@@ -197,11 +198,24 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public string? SharedUpdateMessage { get; private set; }
     public Task FetchEventsAsync(int year) => RunAsync(async token =>
     { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await _events.LoadAsync(year, token), token), token); EventSourceMessage = null; EventsUpdateMessage = null; await ReloadAsync(token); Status = "学校行事を保存しました。元PDFの更新確認は次回起動時に行います。"; });
-    public Task SavePreferencesAsync(UserPreferences next) => RunAsync(async token =>
+    public async Task SavePreferencesAsync(Func<UserPreferences, UserPreferences> update)
     {
-        if (!PreferencesReady) throw new InvalidDataException("保存済みの個人設定を読み込めません。再読み込みするまで設定を変更できません。");
-        await _preferences.SaveAsync(next.Validated(), token); Preferences = next; await CheckNotificationsAsync(token); SnapshotChanged?.Invoke();
-    });
+        await _preferenceOperations.WaitAsync();
+        try
+        {
+            if (!PreferencesReady) { Status = "個人設定を読み込めませんでした。再読み込みしてください。"; return; }
+            // Apply just this edit to the latest preferences. Authentication and
+            // file-provider waits never block local settings or lose another edit.
+            var next = update(Preferences).Validated();
+            await _preferences.SaveAsync(next); Preferences = next;
+            if (!Locked && _displayPeriod is not null)
+                try { await CheckNotificationsAsync(_session.Token); }
+                catch (OperationCanceledException) { }
+                catch { Status = "設定は保存しましたが、通知の確認を完了できませんでした。"; }
+        }
+        catch { Status = "個人設定を保存できませんでした。もう一度お試しください。"; }
+        finally { _preferenceOperations.Release(); SnapshotChanged?.Invoke(); }
+    }
     public async Task<byte[]> ReadPdfAsync(MaterialKind kind, bool accepted)
     {
         if (Locked) throw new OperationCanceledException();
@@ -292,6 +306,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public async ValueTask DisposeAsync()
     {
         Cancel(); _timer.Stop(); _watcher.Dispose(); _authentication.Dispose();
-        await _operations.WaitAsync(); await _school.DisposeAsync(); _notificationSink.Dispose(); _http.Dispose(); _session.Dispose(); _operations.Dispose();
+        await _operations.WaitAsync(); await _preferenceOperations.WaitAsync();
+        await _school.DisposeAsync(); _notificationSink.Dispose(); _http.Dispose(); _session.Dispose(); _operations.Dispose(); _preferenceOperations.Dispose();
     }
 }
