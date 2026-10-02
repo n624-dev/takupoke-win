@@ -98,15 +98,33 @@ var
   PreviousVersion: String;
   PreviousInstallDir: String;
   PreviousUninstaller: String;
+  PreviousStartupCommand: String;
+  MigrateStartup: Boolean;
+
+function OwnStartupCommand(const Command, Directory: String): Boolean;
+begin
+  { Only the two commands actually written by released apps are supported. }
+  Result := (CompareText(Command, '"' + AddBackslash(Directory) + 'takupoke.exe" --background') = 0) or
+    (CompareText(Command, '"' + AddBackslash(Directory) + 'Takupoke.Win.exe" --background') = 0);
+end;
 
 function InitializeSetup: Boolean;
 begin
   PreviousVersion := '';
   PreviousInstallDir := '';
   PreviousUninstaller := '';
+  PreviousStartupCommand := '';
+  MigrateStartup := False;
   RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{00C9D0A0-362C-4F7A-93E7-C25D5160C279}_is1', 'DisplayVersion', PreviousVersion);
   RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{00C9D0A0-362C-4F7A-93E7-C25D5160C279}_is1', 'InstallLocation', PreviousInstallDir);
   RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{00C9D0A0-362C-4F7A-93E7-C25D5160C279}_is1', 'UninstallString', PreviousUninstaller);
+  if (PreviousVersion <> '') and (PreviousInstallDir <> '') then begin
+    if RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'takupoke', PreviousStartupCommand) then
+      MigrateStartup := OwnStartupCommand(PreviousStartupCommand, PreviousInstallDir);
+    if not MigrateStartup then
+      if RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'TakupokeWin', PreviousStartupCommand) then
+        MigrateStartup := OwnStartupCommand(PreviousStartupCommand, PreviousInstallDir);
+  end;
   Result := True;
 end;
 
@@ -115,7 +133,8 @@ var Uninstaller: String; ExitCode: Integer;
 begin
   Result := '';
   if (PreviousVersion <> '') and (PreviousInstallDir <> '') and
-     (CompareText(AddBackslash(PreviousInstallDir), AddBackslash(WizardDirValue)) <> 0) then begin
+     ((CompareText(AddBackslash(PreviousInstallDir), AddBackslash(WizardDirValue)) <> 0) or
+      FileExists(AddBackslash(PreviousInstallDir) + 'Takupoke.Win.exe')) then begin
     { Let the registered installer remove only its own files; keep unknown files and app data. }
     Uninstaller := RemoveQuotes(PreviousUninstaller);
     if (CompareText(AddBackslash(ExtractFileDir(Uninstaller)), AddBackslash(PreviousInstallDir)) <> 0) or
@@ -127,6 +146,22 @@ begin
       Result := ExpandConstant('{cm:MoveFailed}')
     else if ExitCode <> 0 then Result := ExpandConstant('{cm:MoveFailed}');
     if Result = '' then PreviousInstallDir := '';
+  end;
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+var Command, NewCommand: String;
+begin
+  if (CurStep = ssPostInstall) and MigrateStartup then begin
+    NewCommand := '"' + ExpandConstant('{app}\takupoke.exe') + '" --background';
+    { An unrelated value with the same name must never be replaced. }
+    if not RegValueExists(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'takupoke') or
+       (RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'takupoke', Command) and
+        ((CompareText(Command, PreviousStartupCommand) = 0) or (CompareText(Command, NewCommand) = 0))) then
+      RegWriteStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'takupoke', NewCommand);
+    if RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'TakupokeWin', Command) then
+      if CompareText(Command, PreviousStartupCommand) = 0 then
+        RegDeleteValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'TakupokeWin');
   end;
 end;
 
@@ -170,7 +205,7 @@ procedure RemoveOwnStartup(const Name: String);
 var Command: String;
 begin
   if RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', Name, Command) then
-    if Pos(Lowercase('"' + ExpandConstant('{app}\takupoke.exe') + '"'), Lowercase(Command)) = 1 then
+    if CompareText(Command, '"' + ExpandConstant('{app}\takupoke.exe') + '" --background') = 0 then
       RegDeleteValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', Name);
 end;
 

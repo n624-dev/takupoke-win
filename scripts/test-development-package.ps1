@@ -7,6 +7,10 @@ $setup = Join-Path $taskRoot "release-assets/takupoke-$Version-x64-Setup.exe"
 $installDir = Join-Path $taskRoot 'installed-app with spaces'
 $exe = Join-Path $installDir 'takupoke.exe'
 $previousInstallDir = $null
+$ownedInstallDirs = [System.Collections.Generic.List[string]]::new()
+$ownedInstallDirs.Add($installDir)
+$ownedStartupCommands = [System.Collections.Generic.List[string]]::new()
+$runKey = 'HKCU:/Software/Microsoft/Windows/CurrentVersion/Run'
 $shortcut = Join-Path ([Environment]::GetFolderPath('Programs')) 'たくポケ.lnk'
 $legacyShortcut = Join-Path ([Environment]::GetFolderPath('Programs')) 'たくポケ Win.lnk'
 $legacyShortcutOwned = $false
@@ -24,6 +28,30 @@ function Run-Installer([string]$Path, [string[]]$Arguments) {
     $process = Start-Process -FilePath $Path -ArgumentList $Arguments -PassThru -Wait
     try { if ($process.ExitCode -ne 0) { throw "Installer operation failed: $($process.ExitCode)" } }
     finally { $process.Dispose() }
+}
+function Get-StartupValue([string]$Name) {
+    $key = [Microsoft.Win32.Registry]::CurrentUser.OpenSubKey('Software\Microsoft\Windows\CurrentVersion\Run')
+    if ($null -eq $key) { return $null }
+    try { return $key.GetValue($Name, $null, [Microsoft.Win32.RegistryValueOptions]::DoNotExpandEnvironmentNames) }
+    finally { $key.Dispose() }
+}
+function Get-LegacyInstaller {
+    # Exercise the actual released installer, rather than relabeling a new app.
+    $directory = Join-Path $taskRoot 'legacy-dev5-release'
+    New-Item -ItemType Directory -Path $directory -Force | Out-Null
+    $name = 'TakupokeWin-0.1.0-dev.5-win-x64-Setup.exe'
+    $base = 'https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.5'
+    $checksums = Join-Path $directory 'SHA256SUMS.txt'
+    $installer = Join-Path $directory $name
+    Invoke-WebRequest -Uri "$base/SHA256SUMS.txt" -OutFile $checksums
+    $checksumEntries = @(Get-Content -LiteralPath $checksums | Where-Object { $_ -cmatch ('^[0-9a-f]{64}  ' + [regex]::Escape($name) + '$') })
+    if ($checksumEntries.Count -ne 1) { throw 'The historical installer checksum is missing or ambiguous.' }
+    $hash = $checksumEntries[0].Substring(0, 64)
+    # Pin the original release checksum as well as checking its published file.
+    if ($hash -cne '70e3c8be8a18c04ec40d88f1753e7727fcf2d594d638436f10bc210a295c2d03') { throw 'The historical release checksum changed.' }
+    Invoke-WebRequest -Uri "$base/$name" -OutFile $installer
+    if ((Get-FileHash -LiteralPath $installer -Algorithm SHA256).Hash.ToLowerInvariant() -cne $hash) { throw 'The historical installer failed checksum verification.' }
+    return $installer
 }
 function Check-InstalledBranding {
     if (-not (Test-Path -LiteralPath $shortcut)) { throw 'Start menu shortcut was not created.' }
@@ -60,6 +88,7 @@ function Run-UiChecks {
     if ($LASTEXITCODE -ne 0) { throw 'Installed app UI tests failed.' }
 }
 try {
+    if ($null -ne (Get-StartupValue 'takupoke') -or $null -ne (Get-StartupValue 'TakupokeWin')) { throw 'Refusing to modify pre-existing startup registration in this test runner.' }
     Run-Installer $setup @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', "/DIR=`"$installDir`"", "/LOG=`"$(Join-Path $taskRoot 'setup-first.log')`"")
     if (-not (Test-Path -LiteralPath $exe)) { throw 'Installer did not create the app executable.' }
     Check-InstalledBranding
@@ -74,6 +103,13 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Upgrade wizard display was not verified.' }
     } finally { Set-ItemProperty -LiteralPath $uninstallKey -Name DisplayVersion -Value $installedVersion }
     $preferences = Join-Path $env:TAKUPOKE_DATA_ROOT 'preferences.json'
+    $savedPreferences = Get-Content -LiteralPath $preferences -Raw | ConvertFrom-Json
+    $savedPreferences | Add-Member -NotePropertyName autoStart -NotePropertyValue $true -Force
+    $savedPreferences | ConvertTo-Json -Depth 64 | Set-Content -LiteralPath $preferences -Encoding utf8
+    $currentStartup = "`"$exe`" --background"
+    $ownedStartupCommands.Add($currentStartup)
+    if (-not (Test-Path -LiteralPath $runKey)) { New-Item -Path $runKey | Out-Null }
+    New-ItemProperty -LiteralPath $runKey -Name takupoke -Value $currentStartup -PropertyType String -Force | Out-Null
     $before = (Get-FileHash -LiteralPath $preferences).Hash
     # Exercise a registered installation moving to the new folder. The old
     # uninstaller owns its payload, but must leave unrelated files and app data.
@@ -85,7 +121,11 @@ try {
     $legacyShortcutOwned = $true
     $installDir = Join-Path $taskRoot 'takupoke installed with spaces'
     $exe = Join-Path $installDir 'takupoke.exe'
+    $ownedInstallDirs.Add($installDir)
     Run-Installer $setup @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', "/DIR=`"$installDir`"", "/LOG=`"$(Join-Path $taskRoot 'setup-move.log')`"")
+    $currentStartup = "`"$exe`" --background"
+    $ownedStartupCommands.Add($currentStartup)
+    if ((Get-StartupValue 'takupoke') -cne $currentStartup) { throw 'Silent folder migration lost startup before the app was launched.' }
     if (Test-Path -LiteralPath (Join-Path $previousInstallDir 'takupoke.exe')) { throw 'The previous executable remains after moving the installation.' }
     if (-not (Test-Path -LiteralPath $unrelated)) { throw 'Moving the installation deleted an unrelated file.' }
     if ((Get-FileHash -LiteralPath $unrelated).Hash -ne $unrelatedHash) { throw 'Moving the installation changed an unrelated file.' }
@@ -94,15 +134,71 @@ try {
     Run-UiChecks
     $before = (Get-FileHash -LiteralPath $preferences).Hash
     Run-Installer $setup @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', "/DIR=`"$installDir`"", "/LOG=`"$(Join-Path $taskRoot 'setup-update.log')`"")
+    if ((Get-StartupValue 'takupoke') -cne $currentStartup) { throw 'Same-folder reinstall lost startup before the app was launched.' }
     if ((Get-FileHash -LiteralPath $preferences).Hash -ne $before) { throw 'Reinstallation changed personal settings.' }
     Check-InstalledBranding
     Run-UiChecks
     Run-Installer (Join-Path $installDir 'unins000.exe') @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART')
+    if ($null -ne (Get-StartupValue 'takupoke')) { throw 'App startup registration remains after uninstall.' }
     if (Test-Path -LiteralPath $exe) { throw 'App executable remains after uninstall.' }
     if (Test-Path -LiteralPath $shortcut) { throw 'App shortcut remains after uninstall.' }
     if (Test-Path -LiteralPath 'HKCU:/Software/Classes/jp.n624.takupoke.win') { throw 'Protocol registration remains after uninstall.' }
     if (-not (Test-Path -LiteralPath $preferences)) { throw 'Uninstall unexpectedly deleted personal settings.' }
-    Write-Output 'Verified app branding and icons, deployment, installed app UI, folder and shortcut migration without deleting unrelated files or settings, reinstallation, and uninstall cleanup.'
+    $legacySetup = Get-LegacyInstaller
+    # Synthetic saved settings model an existing user with startup enabled.
+    $savedPreferences = Get-Content -LiteralPath $preferences -Raw | ConvertFrom-Json
+    $savedPreferences | Add-Member -NotePropertyName autoStart -NotePropertyValue $true -Force
+    $savedPreferences | ConvertTo-Json -Depth 64 | Set-Content -LiteralPath $preferences -Encoding utf8
+    $before = (Get-FileHash -LiteralPath $preferences).Hash
+    foreach ($scenario in @('same-folder', 'different-folder', 'unrelated-startup')) {
+        $legacyDir = Join-Path $taskRoot "legacy dev5 $scenario with spaces"
+        $ownedInstallDirs.Add($legacyDir)
+        # /VERYSILENT skips the historical setup's post-install app launch.
+        Run-Installer $legacySetup @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', "/DIR=`"$legacyDir`"", "/LOG=`"$(Join-Path $taskRoot "setup-dev5-$scenario.log")`"")
+        $legacyExe = Join-Path $legacyDir 'Takupoke.Win.exe'
+        if (-not (Test-Path -LiteralPath $legacyExe)) { throw 'The historical installer did not install its original executable.' }
+        $legacyPayloadNames = @(Get-ChildItem -LiteralPath $legacyDir -File | Where-Object { $_.Name.StartsWith('Takupoke.Win.', [StringComparison]::OrdinalIgnoreCase) } | Select-Object -ExpandProperty Name)
+        if ($legacyPayloadNames.Count -lt 5) { throw 'The historical executable, DLL, and runtime metadata were not installed.' }
+        if (-not (Test-Path -LiteralPath $legacyShortcut)) { throw 'The historical installer did not create its original shortcut.' }
+        $legacyShortcutOwned = $true
+        $unrelated = Join-Path $legacyDir 'unrelated-file.txt'
+        Set-Content -LiteralPath $unrelated -Value "Synthetic unrelated file for $scenario." -Encoding utf8
+        $unrelatedHash = (Get-FileHash -LiteralPath $unrelated).Hash
+        $legacyCommand = "`"$legacyExe`" --background"
+        $ownedStartupCommands.Add($legacyCommand)
+        if (-not (Test-Path -LiteralPath $runKey)) { New-Item -Path $runKey | Out-Null }
+        New-ItemProperty -LiteralPath $runKey -Name TakupokeWin -Value $legacyCommand -PropertyType String -Force | Out-Null
+        $installDir = if ($scenario -eq 'same-folder') { $legacyDir } else { Join-Path $taskRoot "takupoke upgraded $scenario with spaces" }
+        $ownedInstallDirs.Add($installDir)
+        $exe = Join-Path $installDir 'takupoke.exe'
+        $newCommand = "`"$exe`" --background"
+        $ownedStartupCommands.Add($newCommand)
+        $unrelatedStartup = "`"$(Join-Path $taskRoot 'fictional unrelated app.exe')`" --fixture"
+        if ($scenario -eq 'unrelated-startup') {
+            $ownedStartupCommands.Add($unrelatedStartup)
+            New-ItemProperty -LiteralPath $runKey -Name takupoke -Value $unrelatedStartup -PropertyType String -Force | Out-Null
+        }
+        Run-Installer $setup @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', "/DIR=`"$installDir`"", "/LOG=`"$(Join-Path $taskRoot "setup-legacy-upgrade-$scenario.log")`"")
+        # Check immediately, before launching the new app can repair startup.
+        $expectedStartup = if ($scenario -eq 'unrelated-startup') { $unrelatedStartup } else { $newCommand }
+        if ((Get-StartupValue 'takupoke') -cne $expectedStartup) { throw "Silent $scenario upgrade lost startup or overwrote an unrelated command." }
+        if ($null -ne (Get-StartupValue 'TakupokeWin')) { throw 'The old startup registration remains after upgrade.' }
+        foreach ($name in $legacyPayloadNames) {
+            if (Test-Path -LiteralPath (Join-Path $legacyDir $name)) { throw "Legacy app payload remains after $scenario upgrade: $name" }
+        }
+        if (-not (Test-Path -LiteralPath $unrelated) -or (Get-FileHash -LiteralPath $unrelated).Hash -ne $unrelatedHash) { throw 'Legacy upgrade changed an unrelated file.' }
+        if ((Get-FileHash -LiteralPath $preferences).Hash -ne $before) { throw 'Legacy upgrade changed saved settings.' }
+        Check-InstalledBranding
+        Run-UiChecks
+        $before = (Get-FileHash -LiteralPath $preferences).Hash
+        Run-Installer (Join-Path $installDir 'unins000.exe') @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART')
+        if ($scenario -eq 'unrelated-startup') {
+            if ((Get-StartupValue 'takupoke') -cne $unrelatedStartup) { throw 'Uninstall removed an unrelated startup command.' }
+            Remove-ItemProperty -LiteralPath $runKey -Name takupoke
+        } elseif ($null -ne (Get-StartupValue 'takupoke')) { throw 'Uninstall left the migrated startup registration.' }
+        if ((Get-FileHash -LiteralPath $preferences).Hash -ne $before) { throw 'Uninstall changed saved settings.' }
+    }
+    Write-Output 'Verified installed UI and branding, new/same-folder reinstall, actual dev.5 upgrades in both folders, silent startup migration, unrelated file/startup and settings preservation, and uninstall cleanup.'
 } catch {
     # This job uses exclusively synthetic data. Capture runtime diagnostics only
     # for this app, never machine-wide event logs or school files.
@@ -114,10 +210,14 @@ try {
         Select-Object -First 4 -ExpandProperty Message | Write-Output
     throw
 } finally {
-    foreach ($directory in (@($installDir, $previousInstallDir) | Select-Object -Unique)) {
+    foreach ($directory in ($ownedInstallDirs | Select-Object -Unique)) {
         if ($directory -and (Test-Path -LiteralPath (Join-Path $directory 'unins000.exe'))) {
             Run-Installer (Join-Path $directory 'unins000.exe') @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART')
         }
+    }
+    foreach ($name in @('takupoke', 'TakupokeWin')) {
+        $command = Get-StartupValue $name
+        if ($null -ne $command -and $ownedStartupCommands.Contains([string]$command)) { Remove-ItemProperty -LiteralPath $runKey -Name $name }
     }
     if ($legacyShortcutOwned -and (Test-Path -LiteralPath $legacyShortcut)) { Remove-Item -LiteralPath $legacyShortcut }
     Remove-Item Env:/DOTNET_ROOT, Env:/DOTNET_ROOT_X64, Env:/DOTNET_MULTILEVEL_LOOKUP -ErrorAction SilentlyContinue

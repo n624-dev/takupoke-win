@@ -268,9 +268,9 @@ internal static partial class Program
             "Periodic clock updates retain the original visible display menu item.");
         Require(WaitElement("timetable-grid-scroller").GetRuntimeId().SequenceEqual(previousGrid),
             "The timetable defers its periodic redraw while the display menu is open.");
-        Invoke(option);
+        Toggle(option);
         Wait(() => SavedIncludesChanges(preferences) != previousValue, "The retained display menu option remains selectable and saves its value");
-        Invoke(WaitElement("timetable-display-options")); Invoke(ByName("時間割変更を反映", ControlType.MenuItem));
+        Invoke(WaitElement("timetable-display-options")); Toggle(ByName("時間割変更を反映", ControlType.MenuItem));
         Wait(() => SavedIncludesChanges(preferences) == previousValue, "The menu regression restores the original display preference");
     }
     private static bool SavedIncludesChanges(string path)

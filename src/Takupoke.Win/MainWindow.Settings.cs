@@ -97,10 +97,20 @@ public sealed partial class MainWindow
     }
     private static StackPanel SettingField(string label, Control control)
     {
-        var row = Panel(Text(label, 15), control); row.Padding = new Thickness(12); row.Spacing = 8;
+        var row = Panel(Text(label, 15), SettingInput(control)); row.Padding = new Thickness(12); row.Spacing = 8;
         control.HorizontalAlignment = HorizontalAlignment.Stretch;
         control.MaxWidth = 420;
         AutomationProperties.SetName(control, label);
+        return row;
+    }
+    private static Grid SettingInput(Control control)
+    {
+        // Constrain the input column, rather than centering a MaxWidth control
+        // in the full card. The column also shrinks with a narrow window.
+        var row = new Grid();
+        row.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star), MaxWidth = 420 });
+        control.HorizontalAlignment = HorizontalAlignment.Stretch;
+        row.Children.Add(control);
         return row;
     }
     private string? _schoolYearDraft;
@@ -121,7 +131,7 @@ public sealed partial class MainWindow
             await _model.SavePreferencesAsync(current => current with { DefaultSchoolYear = selectedYear.Length == 0 ? null : selectedYear });
             if (_model.Preferences.DefaultSchoolYear == (selectedYear.Length == 0 ? null : selectedYear)) _schoolYearDraft = null;
         });
-        Add(Card(Panel(SettingsSectionTitle("年のない変更日を補完"), SettingsDescription("空欄なら現在の学校年度を使います。1〜3月は翌年の日付として扱います。年度を変えたら、時間割変更の資料を再解析してください。"), year, saveYear)));
+        Add(Card(Panel(SettingsSectionTitle("年のない変更日を補完"), SettingsDescription("空欄なら現在の学校年度を使います。1〜3月は翌年の日付として扱います。年度を変えたら、時間割変更の資料を再解析してください。"), SettingInput(year), saveYear)));
         var stop = Button("自動確認を中止", () => { _model.SuspendAutomaticRefresh(); Render(); return Task.CompletedTask; }, "suspend-automatic-refresh");
         stop.IsEnabled = !_model.AutomaticRefreshPaused;
         var updates = Panel(SettingsSectionTitle("資料の更新確認"), SettingsDescription("登録したファイルを確認します。OneDriveの同期が完了しているか、先に確認してください。"),
@@ -145,7 +155,7 @@ public sealed partial class MainWindow
         eventsYear.RegisterPropertyChangedCallback(NumberBox.TextProperty, (_, _) => _eventsYearTextDraft = eventsYear.Text);
         AutomationProperties.SetAutomationId(eventsYear, "events-school-year");
         eventsYear.ValueChanged += (_, _) => _eventsYearDraft = eventsYear.Value;
-        Add(Card(Panel(SettingsSectionTitle("行事データを取得"), eventsYear,
+        Add(Card(Panel(SettingsSectionTitle("行事データを取得"), SettingInput(eventsYear),
             OperationButton("選んだ年度の行事を取得", () => _model.FetchEventsAsync(double.IsNaN(eventsYear.Value) ? _model.Today.SchoolYear() : (int)eventsYear.Value), "fetch-events"))));
         Add(SettingsSectionTitle("保存済みの年度"));
         if (_model.SavedEventYears.Count == 0) Add(Card(SettingsDescription("行事データをまだ取得していません。上で学校年度を選んで取得してください。")));

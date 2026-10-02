@@ -50,15 +50,20 @@ public sealed class DesktopIntegration : IDisposable
     public static void SetAutoStart(bool enabled)
     {
         using var key = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
+        var executable = Environment.ProcessPath ?? throw new InvalidOperationException("実行ファイルを確認できません。");
+        var command = "\"" + executable + "\" --background";
+        var legacyCommand = "\"" + Path.Combine(Path.GetDirectoryName(executable)!, "Takupoke.Win.exe") + "\" --background";
+        bool Owned(object? value) => value is string text && (string.Equals(text, command, StringComparison.OrdinalIgnoreCase)
+            || string.Equals(text, legacyCommand, StringComparison.OrdinalIgnoreCase));
         if (enabled)
         {
-            var executable = Environment.ProcessPath ?? throw new InvalidOperationException("実行ファイルを確認できません。");
-            var command = "\"" + executable + "\" --background";
             if (command.Length > 260) throw new InvalidOperationException("自動起動に対応するパス長を超えています。");
+            if (key.GetValue("takupoke") is { } existing && !Owned(existing))
+                throw new InvalidOperationException("別のアプリの自動起動設定を保持しています。Windowsのスタートアップ設定を確認してください。");
             key.SetValue("takupoke", command, RegistryValueKind.String);
-            key.DeleteValue("TakupokeWin", false);
         }
-        else { key.DeleteValue("takupoke", false); key.DeleteValue("TakupokeWin", false); }
+        else if (Owned(key.GetValue("takupoke"))) key.DeleteValue("takupoke", false);
+        if (Owned(key.GetValue("TakupokeWin"))) key.DeleteValue("TakupokeWin", false);
     }
     private NotifyIconData IconData() => new()
     {

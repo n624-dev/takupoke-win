@@ -20,9 +20,10 @@ public sealed partial class MainWindow
     }
     private static Color ReadableTextColor(Color tint, bool dark)
     {
-        // The strictest of the page/card surfaces used by this app. Moving text
+        // Include layered card fills and hovered/pressed controls, beyond the
+        // base page surface observed in the real Windows screenshots. Moving text
         // toward black/white preserves the chosen hue and the original fill tint.
-        var surface = dark ? Color.FromArgb(255, 43, 43, 43) : Color.FromArgb(255, 243, 243, 243);
+        var surface = dark ? Color.FromArgb(255, 80, 80, 80) : Color.FromArgb(255, 215, 215, 215);
         var target = dark ? (byte)255 : (byte)0;
         for (var step = 0; step <= 100; step++)
         {
@@ -45,8 +46,8 @@ public sealed partial class MainWindow
         // Hover/pressed fill opacity can reduce a formerly readable white label
         // on a light surface. Retain the tint and as much of the state opacity as
         // possible, increasing opacity only when that label would fall below 4.5.
-        var surfaces = dark ? new[] { Color.FromArgb(255, 32, 32, 32), Color.FromArgb(255, 43, 43, 43) }
-            : new[] { Color.FromArgb(255, 243, 243, 243), Color.FromArgb(255, 255, 255, 255) };
+        var surfaces = dark ? new[] { Color.FromArgb(255, 32, 32, 32), Color.FromArgb(255, 50, 50, 50), Color.FromArgb(255, 80, 80, 80) }
+            : new[] { Color.FromArgb(255, 215, 215, 215), Color.FromArgb(255, 243, 243, 243), Color.FromArgb(255, 255, 255, 255) };
         for (var step = 0; step <= 100; step++)
         {
             var opacity = preferredOpacity + (1 - preferredOpacity) * step / 100;
