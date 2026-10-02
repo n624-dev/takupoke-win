@@ -180,7 +180,7 @@ internal static class Program
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "学校アカウントの認証を完了できませんでした。")) is not null, "authentication failure is visible on the account screen");
             Wait(() => !Visible("status-bar"), "failure footer disappears after a short interval");
             Require(Find("account-update-error")?.Current.Name == "学校アカウントの認証を完了できませんでした。", "The account failure remains available after the transient footer disappears.");
-            Require(Find("shared-details-Links")?.Current.IsEnabled == true, "The account screen stays usable after the footer disappears.");
+            Wait(() => Find("shared-details-Links")?.Current.IsEnabled == true, "The account screen stays usable after the footer disappears.");
             WriteProbe(mode, "hold"); File.Delete(state);
             Invoke(WaitElement("update-account"));
             Wait(() => File.Exists(state) && Visible("cancel-operation"), "retry creates a fresh authentication attempt");
@@ -235,10 +235,16 @@ internal static class Program
             Wait(() =>
             {
                 process.Refresh();
-                if (process.HasExited) throw new InvalidOperationException("Installer exited before displaying the wizard.");
-                if (process.MainWindowHandle == 0) return false;
-                wizard = AutomationElement.FromHandle(process.MainWindowHandle);
-                return wizard.Current.Name.Contains(caption, StringComparison.Ordinal);
+                var owners = DescendantProcesses((uint)process.Id);
+                EnumWindows((window, _) =>
+                {
+                    GetWindowThreadProcessId(window, out var owner);
+                    if (!owners.Contains(owner) || !IsWindowVisible(window)) return true;
+                    var candidate = AutomationElement.FromHandle(window);
+                    if (!candidate.Current.Name.Contains(caption, StringComparison.Ordinal)) return true;
+                    wizard = candidate; return false;
+                }, 0);
+                return wizard is not null;
             }, "installer caption identifies " + caption);
             Require(wizard!.FindAll(TreeScope.Descendants, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Text))
                 .Cast<AutomationElement>().Any(text => text.Current.Name.Contains("現在のバージョン", StringComparison.Ordinal)
@@ -251,6 +257,35 @@ internal static class Program
             if (!process.HasExited) { process.Kill(true); process.WaitForExit(5000); }
         }
     }
+    private static HashSet<uint> DescendantProcesses(uint root)
+    {
+        var owners = new HashSet<uint> { root }; var parents = new List<(uint Id, uint Parent)>();
+        var snapshot = CreateToolhelp32Snapshot(2, 0);
+        if (snapshot == (nint)(-1)) throw new InvalidOperationException("Installer process tree could not be inspected.");
+        try
+        {
+            var entry = new ProcessEntry { Size = (uint)System.Runtime.InteropServices.Marshal.SizeOf<ProcessEntry>() };
+            if (Process32First(snapshot, ref entry)) do { parents.Add((entry.Id, entry.ParentId)); } while (Process32Next(snapshot, ref entry));
+            while (true)
+            { var previous = owners.Count; foreach (var pair in parents) if (owners.Contains(pair.Parent)) owners.Add(pair.Id); if (previous == owners.Count) break; }
+            return owners;
+        }
+        finally { CloseHandle(snapshot); }
+    }
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential, CharSet = System.Runtime.InteropServices.CharSet.Unicode)]
+    private struct ProcessEntry
+    {
+        public uint Size, Usage, Id; public nuint DefaultHeap; public uint ModuleId, Threads, ParentId; public int Priority; public uint Flags;
+        [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst = 260)] public string Executable;
+    }
+    private delegate bool EnumWindow(nint window, nint parameter);
+    [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool EnumWindows(EnumWindow callback, nint parameter);
+    [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool IsWindowVisible(nint window);
+    [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern uint GetWindowThreadProcessId(nint window, out uint process);
+    [System.Runtime.InteropServices.DllImport("kernel32.dll")] private static extern nint CreateToolhelp32Snapshot(uint flags, uint process);
+    [System.Runtime.InteropServices.DllImport("kernel32.dll", EntryPoint = "Process32FirstW", CharSet = System.Runtime.InteropServices.CharSet.Unicode)] private static extern bool Process32First(nint snapshot, ref ProcessEntry entry);
+    [System.Runtime.InteropServices.DllImport("kernel32.dll", EntryPoint = "Process32NextW", CharSet = System.Runtime.InteropServices.CharSet.Unicode)] private static extern bool Process32Next(nint snapshot, ref ProcessEntry entry);
+    [System.Runtime.InteropServices.DllImport("kernel32.dll")] private static extern bool CloseHandle(nint handle);
     private static async Task SeedAsync(string root)
     {
         if (Path.GetFullPath(root) != Path.GetFullPath(Environment.GetEnvironmentVariable("TAKUPOKE_DATA_ROOT") ?? ""))
