@@ -110,14 +110,26 @@ internal static class Program
             Require(clockBounds.Left >= tableBounds.Left + 5 && clockBounds.Right < tableBounds.Right && clockBounds.Height > 0, "The first timetable clock has visible horizontal padding.");
             var changeList = WaitElement("timetable-change-list");
             Require(((ExpandCollapsePattern)changeList.GetCurrentPattern(ExpandCollapsePattern.Pattern)).Current.ExpandCollapseState == ExpandCollapseState.Expanded, "Changes are initially visible.");
+            var originalWindowBounds = _window!.Current.BoundingRectangle;
+            Require(SetWindowPos(_process!.MainWindowHandle, 0, (int)originalWindowBounds.Left, (int)originalWindowBounds.Top,
+                (int)originalWindowBounds.Width, 600, 0x0044), "The test window can be shortened for the scroll regression.");
+            Wait(() => ((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current.VerticallyScrollable,
+                "Shortening the host makes the synthetic eight-period grid scrollable");
             var timetableScroller = WaitElement("timetable-grid-scroller");
             var scrolling = (ScrollPattern)timetableScroller.GetCurrentPattern(ScrollPattern.Pattern);
-            Require(scrolling.Current.VerticallyScrollable, "The synthetic eight-period grid can be scrolled.");
             scrolling.SetScrollPercent(ScrollPattern.NoScroll, 60);
             var priorGridId = timetableScroller.GetRuntimeId();
             Wait(() => Find("timetable-grid-scroller") is { } refreshed && !refreshed.GetRuntimeId().SequenceEqual(priorGridId), "The clock periodically redraws the timetable");
             Wait(() => Math.Abs(((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current.VerticalScrollPercent - 60) < 2, "Timetable redraw retains its vertical scroll position");
             ((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).SetScrollPercent(ScrollPattern.NoScroll, 0);
+            Require(SetWindowPos(_process!.MainWindowHandle, 0, (int)originalWindowBounds.Left, (int)originalWindowBounds.Top,
+                (int)originalWindowBounds.Width, (int)originalWindowBounds.Height, 0x0044), "The original test window size can be restored.");
+            Wait(() =>
+            {
+                var restoredTable = WaitElement("timetable-grid-scroller").Current.BoundingRectangle;
+                var restoredPage = WaitElement("page-scroller").Current.BoundingRectangle;
+                return restoredTable.Height >= restoredPage.Height - 170 && restoredTable.Bottom <= restoredPage.Bottom + 4;
+            }, "Restoring the window expands the timetable viewport again");
             AutomationElement? lesson = null;
             Wait(() => (lesson = Find("架空科目甲")) is not null && !lesson.Current.IsOffscreen && lesson.Current.IsEnabled, "lesson is visible after navigation");
             var periodBounds = WaitElement("timetable-period-label-1").Current.BoundingRectangle;

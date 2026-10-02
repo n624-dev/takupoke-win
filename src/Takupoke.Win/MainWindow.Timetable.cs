@@ -193,7 +193,10 @@ public sealed partial class MainWindow
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(scroll, "timetable-grid-scroller");
         void FitWidth()
         {
-            scroll.Height = Math.Max(260, PageScroller.ViewportHeight - 144);
+            // ViewportHeight can still describe the previous page during a
+            // content swap. Use the arranged host size so removing the
+            // navigation header and resizing both expand the timetable.
+            scroll.Height = Math.Max(260, PageScroller.ActualHeight - 144);
             foreach (var label in timeLabels)
             {
                 label.Child.Measure(new Windows.Foundation.Size(double.PositiveInfinity, double.PositiveInfinity));
