@@ -32,11 +32,11 @@ public sealed partial class MainWindow
         international.Toggled += async (_, _) => { if (international.IsOn != _model.Preferences.International) await _model.SavePreferencesAsync(_model.Preferences with { International = international.IsOn }); }; Add(international);
         if (_model.Preferences.SelectedClasses.Length == 0) Add(Text("クラスを選択してください。"));
         else BuildWeekGrid(start);
-        var weeklyEvents = _model.Data.Events?.Where(e => Enumerable.Range(0, 7).Any(offset => e.Applies(start.AddDays(offset)))).ToArray() ?? [];
+        var weeklyEvents = Enumerable.Range(0, 7).Select(offset => start.AddDays(offset)).Select(day => (Day: day, Events: _model.Engine.Plan(day).Events)).Where(item => item.Events.Count > 0).ToArray();
         if (weeklyEvents.Length > 0)
         {
             Add(Text("この週の学校行事", 22));
-            foreach (var item in weeklyEvents) Add(Text(item.Date + (item.EndDate is { } end ? "〜" + end : "") + " · " + DisplayText.FullWidthKana(item.Title) + " · " + item.Tag));
+            foreach (var item in weeklyEvents) Add(Text(item.Day.ToString("M/d（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP")) + " · " + DisplayText.FullWidthKana(string.Join("・", item.Events.Select(e => e.Title)))));
         }
         if (_model.Data.Changes is null) Add(Text("時間割変更の解析結果がありません。"));
         if (_model.SavedEventYears.Count == 0) Add(Text("学校行事は未取得です。"));
@@ -60,6 +60,7 @@ public sealed partial class MainWindow
         grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
         var allNoClass = days.All(day => engine.FullDayEventTitle(day, classes) is not null);
         var nestedRows = new List<Grid>();
+        var fullDayCards = new List<Border>();
         for (var period = 1; period <= 8; period++)
         {
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(130) });
@@ -86,7 +87,8 @@ public sealed partial class MainWindow
             Grid.SetColumn(dayHeader, dayIndex + 1); grid.Children.Add(dayHeader);
             if (fullDay is not null)
             {
-                var card = Card(Text(fullDay, 20)); Grid.SetColumn(card, dayIndex + 1); Grid.SetRow(card, 1); Grid.SetRowSpan(card, 8); grid.Children.Add(card); continue;
+                var title = Text(fullDay, 14); title.FontWeight = Microsoft.UI.Text.FontWeights.Bold; title.TextAlignment = TextAlignment.Center;
+                var card = Card(title); card.Padding = new Thickness(3); fullDayCards.Add(card); Grid.SetColumn(card, dayIndex + 1); Grid.SetRow(card, 1); Grid.SetRowSpan(card, 8); grid.Children.Add(card); continue;
             }
             var cellGrid = new Grid { ColumnSpacing = 0, RowSpacing = 0 };
             for (var period = 1; period <= 8; period++) cellGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(130) });
@@ -107,7 +109,7 @@ public sealed partial class MainWindow
         }
         void FitRows()
         {
-            var heights = Enumerable.Repeat(allNoClass ? 24.0 : 100.0, 8).ToArray();
+            var heights = Enumerable.Repeat(allNoClass ? 1.0 : 100.0, 8).ToArray();
             foreach (var cells in nestedRows)
                 foreach (var button in cells.Children.OfType<Button>())
                 {
@@ -116,6 +118,15 @@ public sealed partial class MainWindow
                     button.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
                     var span = Grid.GetRowSpan(button); var needed = Math.Ceiling(button.DesiredSize.Height / span);
                     for (var row = Grid.GetRow(button); row < Grid.GetRow(button) + span; row++) heights[row] = Math.Max(heights[row], needed);
+                }
+            if (allNoClass)
+                foreach (var card in fullDayCards)
+                {
+                    var width = (grid.ActualWidth - 72) / Math.Max(1, days.Count);
+                    if (width <= 0) continue;
+                    card.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
+                    var needed = Math.Ceiling(card.DesiredSize.Height / 8);
+                    for (var row = 0; row < 8; row++) heights[row] = Math.Max(heights[row], needed);
                 }
             for (var row = 0; row < 8; row++)
             {

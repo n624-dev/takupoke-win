@@ -33,9 +33,9 @@ public sealed partial class MainWindow
             foreach (var link in results) _linkResults.Children.Add(LinkButton(link));
         }
         else
-            foreach (var category in links.Categories.OrderBy(c => c.SortOrder))
+            foreach (var category in links.Categories)
             {
-                var items = category.Buttons.Where(i => i.Visible && !_model.Preferences.HiddenIds.Contains(i.Id)).OrderBy(i => i.SortOrder).ToArray();
+                var items = category.Buttons.Where(i => i.Visible && !_model.Preferences.HiddenIds.Contains(i.Id)).ToArray();
                 if (items.Length == 0) continue;
                 _linkResults.Children.Add(Text(category.Label, 22)); foreach (var link in items) _linkResults.Children.Add(LinkButton(link));
             }
@@ -85,7 +85,7 @@ public sealed partial class MainWindow
     private async Task RestoreHiddenLinks()
     {
         var hidden = _model.Preferences.HiddenIds.ToHashSet(); var panel = new StackPanel { Spacing = 8 };
-        foreach (var link in _model.Links?.Items.Where(i => hidden.Contains(i.Id)) ?? [])
+        foreach (var link in _model.Links?.Items.Where(i => i.Visible && hidden.Contains(i.Id)) ?? [])
         { var checkbox = new CheckBox { Content = link.Label, IsChecked = true }; checkbox.Unchecked += (_, _) => hidden.Remove(link.Id); checkbox.Checked += (_, _) => hidden.Add(link.Id); panel.Children.Add(checkbox); }
         if (panel.Children.Count == 0) panel.Children.Add(Text("非表示にしたリンクはありません。"));
         if (await Dialog("非表示のリンク（チェックを外すと再表示）", panel, "保存", "キャンセル") == ContentDialogResult.Primary)

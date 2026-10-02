@@ -28,7 +28,8 @@ internal static class Program
             Start(args[0]);
             Wait(() => Find("page-home") is not null, "home heading");
             Navigate("links");
-            Wait(() => Find("link-fake-study") is not null, "saved links are displayed");
+            Wait(() => Find("link-fake-study") is not null && Find("link-fake-second") is not null, "saved links are displayed");
+            Require(Find("link-fake-study")!.Current.BoundingRectangle.Top < Find("link-fake-second")!.Current.BoundingRectangle.Top, "Link order follows the API array rather than sort-order metadata.");
             SetSearch("存在しない架空検索語");
             Wait(() => Find("link-fake-study") is null, "search excludes nonmatching links");
             SetSearch("かくうがくしゅう");
@@ -127,7 +128,7 @@ internal static class Program
         await store.SaveAnalysisAsync(lease, new(source.Id, source.Kind, PdfScheduleParser.TimetableVersion, source.Digest, source.OriginalName, now, lease.Period.SchoolYear,
             Timetable: new(lease.Period.SchoolYear, lease.Period.Half == 1 ? "前期" : "後期", lessons)));
         var link = new LinkItem("fake-study", "fake-category", "架空学習リンク", "https://example.invalid/", "blue", true, 1, true, 1, [], "架空学習リンク|かくうがくしゅうりんく|kakuugakushuurinku");
-        await store.WriteAsync(lease, "api.links", new SavedLinks(new("v1", "sha256-" + new string('a', 64), [new("fake-category", "架空カテゴリ", 1, [link])]),
+        await store.WriteAsync(lease, "api.links", new SavedLinks(new("v1", "sha256-" + new string('a', 64), [new("fake-category", "架空カテゴリ", 1, [link, link with { Id = "fake-second", Label = "架空の別リンク", SortOrder = 0, SearchTerms = "別リンク" }])]),
             "\"fake-etag\"", now, new string('A', 43)));
     }
     private static void Start(string executable)

@@ -48,8 +48,14 @@ public sealed partial class MainWindow
         }
         else if (analysis.Special is { } special)
             foreach (var lesson in special.Lessons)
-                Add(Button(lesson.Date + " · " + ClassSelection.Display(lesson.ClassName) + " · " + lesson.Period + "限\n" + string.Join(" · ", lesson.Lines), () => Message("特別時間割の授業詳細", lesson.Date + " · " + ClassSelection.Display(lesson.ClassName) + " · " + lesson.Period + "限\n時刻：" + (special.TimeFor(lesson)?.Display ?? "未確認") + "\n" + string.Join("\n", lesson.Lines) + "\nPDFページ：" + lesson.Page)));
+                Add(Button(lesson.Date + " · " + ClassSelection.Display(lesson.ClassName) + " · " + lesson.Period + "限\n" + string.Join(" · ", lesson.Lines), () => SpecialAnalysisDetail(special, lesson)));
+
     }
+    private Task SpecialAnalysisDetail(SpecialAnalysis analysis, SpecialLesson lesson) => Dialog("特別時間割の授業詳細", Panel(
+        Text(lesson.Date + " · " + ClassSelection.Display(lesson.ClassName) + " · " + lesson.Period + "限"),
+        Text("時刻：" + (analysis.TimeFor(lesson)?.Display ?? "未確認")), Text("科目：" + DisplayText.Continuous(lesson.Names.Subject)),
+        Text("教員：" + DisplayText.Continuous(lesson.Names.Teacher)), Text("教室：" + DisplayText.Continuous(lesson.Names.Room)),
+        new Expander { Header = "元のセルの記載", Content = Text(string.Join("\n", lesson.Lines)) }));
     private Task NormalAnalysisDetail(NormalLesson lesson)
     {
         var names = _model.Mappings?.Apply(lesson.Names, lesson.ClassName) ?? lesson.Names;
