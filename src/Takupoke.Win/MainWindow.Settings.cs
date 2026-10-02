@@ -57,7 +57,7 @@ public sealed partial class MainWindow
         Add(Button("初期設定をもう一度表示", InitialSetup)); Add(Button("使い方", () => Message("使い方", "クラスを選び、4種類の資料を個別に選択します。ホームと時間割は同じ保存済み結果を表示します。授業を選ぶと詳細が開きます。一覧のリンクは右クリックでお気に入り・色・非表示を変更できます。新しいデータの取得は学校アカウントで行います。")));
         var version = System.Reflection.Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(System.Reflection.AssemblyInformationalVersionAttribute), false)
             .OfType<System.Reflection.AssemblyInformationalVersionAttribute>().FirstOrDefault()?.InformationalVersion.Split('+')[0] ?? "開発版";
-        Add(Text("たくポケ Win · " + version, 20)); Add(Text("iOS版の全機能対応とWindows実機確認が揃うまで正式版として配布しません。Windows用の認証クライアントは未登録です。"));
+        Add(Text("たくポケ Win · " + version, 20)); Add(Text("iOS版の全機能対応とWindows実機確認が揃うまで正式版として配布しません。学校アカウント認証と実データ取得の実機確認は継続中です。"));
         Add(Button("利用規約", () => ShowProductDocument("利用規約", Path.Combine("Legal", "terms.txt"))));
         Add(Button("プライバシーポリシー", () => ShowProductDocument("プライバシーポリシー", Path.Combine("Legal", "privacy.txt"))));
         Add(Button("依存ライブラリのライセンス", () => ShowProductDocument("依存ライブラリのライセンス", "THIRD-PARTY-NOTICES.txt")));

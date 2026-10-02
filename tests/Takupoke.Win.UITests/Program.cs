@@ -28,11 +28,9 @@ internal static class Program
             Wait(() => Find("page-home") is not null, "home heading");
             Navigate("links");
             Wait(() => Find("link-fake-study") is not null, "saved links are displayed");
-            var search = WaitElement("link-search");
-            var edit = search.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit)) ?? search;
-            ((ValuePattern)edit.GetCurrentPattern(ValuePattern.Pattern)).SetValue("存在しない架空検索語");
+            SetSearch("存在しない架空検索語");
             Wait(() => Find("link-fake-study") is null, "search excludes nonmatching links");
-            ((ValuePattern)edit.GetCurrentPattern(ValuePattern.Pattern)).SetValue("かくうがくしゅう");
+            SetSearch("かくうがくしゅう");
             Wait(() => Find("link-fake-study") is not null, "kana search finds saved link");
             Navigate("timetable"); Navigate("settings");
             Invoke(ByName("利用規約"));
@@ -133,6 +131,13 @@ internal static class Program
         if (item.TryGetCurrentPattern(SelectionItemPattern.Pattern, out var pattern)) ((SelectionItemPattern)pattern).Select();
         else Invoke(item);
         Wait(() => Find("page-" + page) is not null, page + " page");
+    }
+    private static void SetSearch(string query)
+    {
+        // The minute refresh can rebuild controls between consecutive inputs.
+        var search = WaitElement("link-search");
+        var edit = search.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit)) ?? search;
+        ((ValuePattern)edit.GetCurrentPattern(ValuePattern.Pattern)).SetValue(query);
     }
     private static void PickMaterial(string? path)
     {
