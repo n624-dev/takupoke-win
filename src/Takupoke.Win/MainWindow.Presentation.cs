@@ -65,8 +65,11 @@ public sealed partial class MainWindow
 
     private static PathIcon FluentIcon(string name, double size = 20)
     {
-        var template = (PathIcon)Application.Current.Resources["FluentIcon." + name];
-        var icon = new PathIcon { Data = template.Data, Width = size, Height = size, IsHitTestVisible = false };
+        var data = (string)Application.Current.Resources["FluentIcon." + name];
+        // Geometry belongs to one PathIcon. Parse a fresh instance for each use.
+        var icon = (PathIcon)Microsoft.UI.Xaml.Markup.XamlReader.Load(
+            "<PathIcon xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" Data=\"" + System.Security.SecurityElement.Escape(data) + "\" />");
+        icon.Width = size; icon.Height = size; icon.IsHitTestVisible = false;
         AutomationProperties.SetAccessibilityView(icon, AccessibilityView.Raw);
         return icon;
     }

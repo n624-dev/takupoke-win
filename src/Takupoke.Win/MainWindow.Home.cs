@@ -9,13 +9,22 @@ namespace Takupoke.Win;
 
 public sealed partial class MainWindow
 {
-    private Button LessonButton(DateOnly day, string cls, ScheduleBlock block, bool home = false, bool showTime = true)
+    private Button LessonButton(DateOnly day, string cls, ScheduleBlock block, bool home = false, bool showTime = true, int lane = 0, int index = 0)
     {
         var names = _model.Presentation.Names(cls, block, home); var engine = home ? _model.HomeEngine : _model.Engine;
         var time = engine.CardTime(day, cls, block);
         var inProgress = home && engine.IsInProgress(day, cls, block, DateTimeOffset.UtcNow);
         var change = (block.Content as ChangeContent)?.Change;
-        var button = Button(names.Subject, () => LessonDetail(day, cls, block));
+        var contentKind = block.Content switch
+        {
+            ChangeContent { Change.IsCancellation: true } => "cancelled",
+            ChangeContent { Change.IsMakeup: true } => "makeup",
+            ChangeContent => "change",
+            SpecialContent special => special.Kind.ToString().ToLowerInvariant(),
+            _ => "normal"
+        };
+        var id = $"lesson-{(home ? "home" : "week")}-{day.Iso()}-{Uri.EscapeDataString(cls)}-{block.StartPeriod}-{block.EndPeriod}-{contentKind}-{lane}-{index}";
+        var button = Button(names.Subject, () => LessonDetail(day, cls, block), id);
         var content = new StackPanel { Spacing = home ? 6 : 4, HorizontalAlignment = home ? HorizontalAlignment.Stretch : HorizontalAlignment.Center };
         if (change is not null) { var kind = Text(change.KindLabel, home ? 13 : 12); kind.Foreground = WarningBrush; content.Children.Add(kind); }
         if (inProgress) { var progress = Text("授業中", 12); progress.Foreground = ActionBrush; content.Children.Add(progress); }
@@ -119,14 +128,14 @@ public sealed partial class MainWindow
             {
                 var heading = Text(ClassSelection.Display(cls), 18); heading.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold;
                 var group = Panel(heading); var missing = engine.MissingMessages(day, cls); var blocks = engine.Blocks(day, cls);
-                if (missing.Count == 0 && blocks.Count == 0 && _model.Data.Changes is not null && _model.SavedEventYears.Count > 0) group.Children.Add(Text("今日は授業がありません。"));
+                if (missing.Count == 0 && blocks.Count == 0 && _model.Data.Changes is not null && _model.SavedEventYears.Contains(day.SchoolYear())) group.Children.Add(Text("今日は授業がありません。"));
                 foreach (var message in missing) group.Children.Add(Text(message));
                 if (missing.Count > 0) group.Children.Add(IconButton("時間割ファイルを確認", "document", () => OpenPage("materials")));
-                foreach (var block in blocks) group.Children.Add(LessonButton(day, cls, block, home: true));
+                for (var index = 0; index < blocks.Count; index++) group.Children.Add(LessonButton(day, cls, blocks[index], home: true, index: index));
                 Add(Card(group));
             }
             if (_model.Data.Changes is null) Add(ScheduleNotice("時間割変更を表示できません", "時間割変更ファイルを選択して、状況を確認してください。", "時間割ファイルを開く", "document", () => OpenPage("materials")));
-            if (_model.SavedEventYears.Count == 0) Add(ScheduleNotice("学校行事は未取得です", "学校行事を取得すると、授業のない日や試験の日を時間割に反映します。", "学校行事を取得", "calendar", () => OpenPage("events")));
+            if (!_model.SavedEventYears.Contains(day.SchoolYear())) Add(ScheduleNotice("学校行事は未取得です", "学校行事を取得すると、授業のない日や試験の日を時間割に反映します。", "学校行事を取得", "calendar", () => OpenPage("events")));
         }
         Add(IconButton("時間割を見る", "calendar", () => { _model.OpenTodayWeek(); Navigation.SelectedItem = Navigation.MenuItems[2]; return Task.CompletedTask; }, "home-timetable"));
         var favorites = _model.Links?.Items.Where(i => i.Visible && _model.Preferences.FavoriteIds.Contains(i.Id) && !_model.Preferences.HiddenIds.Contains(i.Id)).ToArray() ?? [];

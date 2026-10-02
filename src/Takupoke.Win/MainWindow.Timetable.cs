@@ -18,6 +18,31 @@ public sealed partial class MainWindow
         button.Content = FluentIcon(icon); button.Width = 44; button.Height = 44; button.Padding = new Thickness(12); button.IsEnabled = enabled;
         AutomationProperties.SetName(button, label); ToolTipService.SetToolTip(button, label); return button;
     }
+    private static Grid TimetableControlRow(FrameworkElement primary, FrameworkElement secondary)
+    {
+        var row = new Grid { ColumnSpacing = 12 };
+        row.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) });
+        row.ColumnDefinitions.Add(new() { Width = GridLength.Auto });
+        row.RowDefinitions.Add(new() { Height = GridLength.Auto });
+        row.RowDefinitions.Add(new() { Height = GridLength.Auto });
+        row.Children.Add(primary); Grid.SetColumn(secondary, 1); row.Children.Add(secondary);
+        bool? stacked = null;
+        void Reflow()
+        {
+            if (row.ActualWidth <= 0) return;
+            primary.Measure(new Windows.Foundation.Size(double.PositiveInfinity, double.PositiveInfinity));
+            secondary.Measure(new Windows.Foundation.Size(double.PositiveInfinity, double.PositiveInfinity));
+            var needsStack = primary.DesiredSize.Width + secondary.DesiredSize.Width + 12 > row.ActualWidth + 0.5;
+            if (stacked == needsStack) return;
+            stacked = needsStack;
+            row.ColumnDefinitions[1].Width = needsStack ? new GridLength(0) : GridLength.Auto;
+            row.ColumnSpacing = needsStack ? 0 : 12; row.RowSpacing = needsStack ? 12 : 0;
+            Grid.SetColumn(secondary, needsStack ? 0 : 1); Grid.SetRow(secondary, needsStack ? 1 : 0);
+            secondary.HorizontalAlignment = needsStack ? HorizontalAlignment.Left : HorizontalAlignment.Right;
+        }
+        row.Loaded += (_, _) => Reflow(); row.SizeChanged += (_, _) => Reflow();
+        return row;
+    }
     private void BuildTimetable()
     {
         TitleText("時間割", "page-timetable");
@@ -35,10 +60,9 @@ public sealed partial class MainWindow
         var navigation = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
         navigation.Children.Add(WeekNavigationButton("前の週", "chevron-left", () => { _model.WeekStart = start.AddDays(-7); Render(); }, start > bounds.Lower, "timetable-previous"));
         var current = IconButton("今週", "calendar", () => { _model.OpenTodayWeek(); Render(); return Task.CompletedTask; }, "timetable-current");
-        current.Height = 44; navigation.Children.Add(current);
+        current.MinHeight = 44; navigation.Children.Add(current);
         navigation.Children.Add(WeekNavigationButton("次の週", "chevron-right", () => { _model.WeekStart = start.AddDays(7); Render(); }, start < bounds.Upper, "timetable-next"));
-        var weekRow = new Grid { ColumnSpacing = 12 }; weekRow.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) }); weekRow.ColumnDefinitions.Add(new() { Width = GridLength.Auto });
-        weekRow.Children.Add(calendar); Grid.SetColumn(navigation, 1); weekRow.Children.Add(navigation);
+        var weekRow = TimetableControlRow(calendar, navigation);
         var classLabel = "クラス：" + (_model.Preferences.SelectedClasses.Length == 0 ? "未選択" : string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display)));
         var classes = IconButton(classLabel, "people", ChooseClasses, "timetable-classes"); AutomationProperties.SetName(classes, classLabel); classes.HorizontalAlignment = HorizontalAlignment.Stretch; classes.HorizontalContentAlignment = HorizontalAlignment.Left;
         var displayMenu = new MenuFlyout();
@@ -50,8 +74,7 @@ public sealed partial class MainWindow
         var displayLabel = Text("表示設定", 15); displayLabel.IsTextSelectionEnabled = false;
         var displayOptions = new DropDownButton { Content = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 10, Children = { FluentIcon("settings"), displayLabel } }, Flyout = displayMenu, MinHeight = 44, Padding = new Thickness(16, 10, 16, 10) };
         AutomationProperties.SetAutomationId(displayOptions, "timetable-display-options"); AutomationProperties.SetName(displayOptions, "時間割の表示設定");
-        var selectionRow = new Grid { ColumnSpacing = 12 }; selectionRow.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) }); selectionRow.ColumnDefinitions.Add(new() { Width = GridLength.Auto });
-        selectionRow.Children.Add(classes); Grid.SetColumn(displayOptions, 1); selectionRow.Children.Add(displayOptions); Add(Panel(weekRow, selectionRow));
+        var selectionRow = TimetableControlRow(classes, displayOptions); Add(Panel(weekRow, selectionRow));
         if (_model.Preferences.SelectedClasses.Length == 0) Add(ScheduleNotice("クラスが未選択です", "授業を表示するクラスを選んでください。", "クラスを選択", "people", ChooseClasses));
         else BuildWeekGrid(start);
         var weeklyEvents = Enumerable.Range(0, 7).Select(offset => start.AddDays(offset)).Select(day => (Day: day, Events: _model.Engine.Plan(day).Events)).Where(item => item.Events.Count > 0).ToArray();
@@ -62,7 +85,7 @@ public sealed partial class MainWindow
             Add(Card(events));
         }
         if (_model.Data.Changes is null) Add(ScheduleNotice("時間割変更を表示できません", "時間割変更ファイルを選択して、状況を確認してください。", "時間割ファイルを開く", "document", () => OpenPage("materials")));
-        if (_model.SavedEventYears.Count == 0) Add(ScheduleNotice("学校行事は未取得です", "学校行事を取得すると、授業のない日や試験の日を時間割に反映します。", "学校行事を取得", "calendar", () => OpenPage("events")));
+        if (Enumerable.Range(0, 7).Any(offset => !_model.SavedEventYears.Contains(start.AddDays(offset).SchoolYear()))) Add(ScheduleNotice("学校行事は未取得です", "学校行事を取得すると、授業のない日や試験の日を時間割に反映します。", "学校行事を取得", "calendar", () => OpenPage("events")));
         var list = new StackPanel { Spacing = 16, Padding = new Thickness(16) };
         void AddChange(UIElement element) => list.Children.Add(element);
         AddChange(IconButton("一覧のクラスを選択", "people", () => ChooseClasses(changes: true), "timetable-change-classes"));
@@ -164,9 +187,10 @@ public sealed partial class MainWindow
             {
                 var positioned = TimetableEngine.Positioned(engine.Blocks(day, cls)); var lanes = Math.Max(1, positioned.Select(p => p.Lane + 1).DefaultIfEmpty(1).Max());
                 for (var lane = 0; lane < lanes; lane++) cellGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                foreach (var p in positioned)
+                for (var index = 0; index < positioned.Count; index++)
                 {
-                    var button = LessonButton(day, cls, p.Block, showTime: p.Block.StartPeriod != p.Block.EndPeriod || engine.CommonPeriodTime(p.Block.StartPeriod, days, classes) is null); button.VerticalAlignment = VerticalAlignment.Stretch;
+                    var p = positioned[index];
+                    var button = LessonButton(day, cls, p.Block, showTime: p.Block.StartPeriod != p.Block.EndPeriod || engine.CommonPeriodTime(p.Block.StartPeriod, days, classes) is null, lane: p.Lane, index: index); button.VerticalAlignment = VerticalAlignment.Stretch;
                     Grid.SetColumn(button, offset + p.Lane); Grid.SetRow(button, p.Block.StartPeriod - 1); Grid.SetRowSpan(button, p.Block.EndPeriod - p.Block.StartPeriod + 1); cellGrid.Children.Add(button);
                 }
                 for (var period = 1; period <= 8; period++)
