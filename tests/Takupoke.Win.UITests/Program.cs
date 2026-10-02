@@ -249,9 +249,26 @@ internal static class Program
                 }, 0);
                 return wizard is not null;
             }, "installer caption identifies " + caption);
-            Require(wizard!.FindAll(TreeScope.Descendants, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Text))
-                .Cast<AutomationElement>().Any(text => text.Current.Name.Contains("現在のバージョン", StringComparison.Ordinal)
-                    && text.Current.Name.Contains("インストールするバージョン", StringComparison.Ordinal)), "Upgrade wizard shows both version labels.");
+            // Inno's static labels may be exposed as a different UIA role, or
+            // appear after the outer window. Inspect the visible native controls
+            // as well, rather than assuming every label is a UIA Text element.
+            Wait(() =>
+            {
+                var text = string.Join("\n", wizard!.FindAll(TreeScope.Descendants, Condition.TrueCondition)
+                    .Cast<AutomationElement>().Where(element => !element.Current.IsOffscreen).Select(element => element.Current.Name));
+                var handle = (nint)wizard.Current.NativeWindowHandle;
+                EnumChildWindows(handle, (child, _) =>
+                {
+                    if (IsWindowVisible(child))
+                    {
+                        var buffer = new System.Text.StringBuilder(GetWindowTextLength(child) + 1);
+                        GetWindowText(child, buffer, buffer.Capacity); text += "\n" + buffer;
+                    }
+                    return true;
+                }, 0);
+                return text.Contains("現在のバージョン", StringComparison.Ordinal)
+                    && text.Contains("インストールするバージョン", StringComparison.Ordinal);
+            }, "upgrade wizard shows installed and new version labels");
             Console.WriteLine("Verified installer display: " + caption + " and installed/new version labels."); return 0;
         }
         finally
@@ -283,6 +300,9 @@ internal static class Program
     }
     private delegate bool EnumWindow(nint window, nint parameter);
     [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool EnumWindows(EnumWindow callback, nint parameter);
+    [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool EnumChildWindows(nint parent, EnumWindow callback, nint parameter);
+    [System.Runtime.InteropServices.DllImport("user32.dll", EntryPoint = "GetWindowTextLengthW", CharSet = System.Runtime.InteropServices.CharSet.Unicode)] private static extern int GetWindowTextLength(nint window);
+    [System.Runtime.InteropServices.DllImport("user32.dll", EntryPoint = "GetWindowTextW", CharSet = System.Runtime.InteropServices.CharSet.Unicode)] private static extern int GetWindowText(nint window, System.Text.StringBuilder text, int count);
     [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool IsWindowVisible(nint window);
     [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern uint GetWindowThreadProcessId(nint window, out uint process);
     [System.Runtime.InteropServices.DllImport("kernel32.dll")] private static extern nint CreateToolhelp32Snapshot(uint flags, uint process);
