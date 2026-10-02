@@ -44,9 +44,11 @@ foreach ($arch in @('x64', 'arm64')) {
         -p:Platform=$platform -p:WindowsAppSDKSelfContained=true -p:PublishSingleFile=false -p:PublishTrimmed=false `
         -p:Version=$Version -p:FileVersion=$fileVersion -p:InformationalVersion="$Version+$Commit" -p:DebugType=None -p:DebugSymbols=false --output $payload
     if ($LASTEXITCODE -ne 0) { throw "Publish failed for $arch." }
-    $crt = Join-Path $redist.FullName "$arch/Microsoft.VC143.CRT"
-    if (-not (Test-Path -LiteralPath $crt)) { throw "No redistributable CRT for $arch." }
-    Get-ChildItem -LiteralPath $crt -Filter '*.dll' | Copy-Item -Destination $payload -Force
+    $crt = Get-ChildItem -LiteralPath (Join-Path $redist.FullName $arch) -Directory -Filter 'Microsoft.VC*.CRT' |
+        Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'vcruntime140.dll') } | Select-Object -First 1
+    if (-not $crt) { throw "No redistributable CRT for $arch in runtime version $($redist.Name)." }
+    Write-Output "Native runtime: $($redist.Name) / $arch / $($crt.Name)"
+    Get-ChildItem -LiteralPath $crt.FullName -Filter '*.dll' | Copy-Item -Destination $payload -Force
     foreach ($required in @('Takupoke.Win.exe', 'coreclr.dll', 'hostfxr.dll', 'hostpolicy.dll', 'Microsoft.UI.Xaml.dll', 'vcruntime140.dll', 'msvcp140.dll')) {
         if (-not (Test-Path -LiteralPath (Join-Path $payload $required))) { throw "Published $arch payload is missing $required." }
     }
