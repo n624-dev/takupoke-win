@@ -125,7 +125,7 @@ internal static partial class Program
             "fake-changes-identity", "架空の時間割変更.xlsx", NotificationDiff.Digest(bytes), bytes.Length, now, now, now);
         await store.SaveOriginalAsync(lease, source, bytes);
         await store.SaveAnalysisAsync(lease, new(source.Id, source.Kind, XlsxChangeReader.Version, source.Digest, source.OriginalName, now, lease.Period.SchoolYear, Changes: []));
-        await new PublicEventsStore(root).SaveAsync(new(now, new("v1", lease.Period.SchoolYear, new string('a', 64), "\"fake-source-etag\"", []), "\"fake-api-etag\""));
+        await new PublicEventsStore(root).SaveAsync(new(now, new("v1", lease.Period.SchoolYear, new string('a', 64), null, [new($"{lease.Period.SchoolYear + 1}-03-10", $"{lease.Period.SchoolYear + 1}-03-10", "架空の行事メモ", "行事メモ")]), "\"fake-api-etag\""));
     }
 
     private static void Capture(string name)

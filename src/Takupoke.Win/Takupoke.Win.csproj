@@ -28,7 +28,7 @@
     <ProjectReference Include="../Takupoke.Infrastructure/Takupoke.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets/takupoke.ico;Assets/takupoke.png;Assets/FluentIcons/LICENSE.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Update="Assets/takupoke.ico;Assets/takupoke.png;Assets/FluentIcons/LICENSE.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <Content Include="../../packaging/legal/*.txt" Link="Legal/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
   <!-- The unpackaged publish pipeline does not automatically carry the XAML
