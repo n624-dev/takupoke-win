@@ -40,6 +40,7 @@ public sealed partial class MainWindow
         var teacher = block.Content is SpecialContent && !home ? names.Teacher : DisplayText.Metadata(names.Teacher);
         var room = block.Content is SpecialContent && !home ? names.Room : DisplayText.Metadata(names.Room);
         foreach (var metadata in new[] { teacher, room }.Where(value => value.Length > 0)) content.Children.Add(Text(DisplayText.Continuous(metadata), home ? 14 : 12));
+        foreach (var text in content.Children.OfType<TextBlock>()) text.IsTextSelectionEnabled = false;
         if (!home)
         {
             foreach (var text in content.Children.OfType<TextBlock>()) text.TextAlignment = TextAlignment.Center;
@@ -49,7 +50,7 @@ public sealed partial class MainWindow
         else
         {
             var row = new Grid { ColumnSpacing = 12 }; row.ColumnDefinitions.Add(new() { Width = GridLength.Auto }); row.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) });
-            var timeLabel = Text(DisplayText.PeriodTime(time), 13); timeLabel.TextAlignment = TextAlignment.Center; timeLabel.MinWidth = 60;
+            var timeLabel = Text(DisplayText.PeriodTime(time), 13); timeLabel.IsTextSelectionEnabled = false; timeLabel.TextAlignment = TextAlignment.Center; timeLabel.MinWidth = 60;
             row.Children.Add(timeLabel); Grid.SetColumn(content, 1); row.Children.Add(content); button.Content = row;
             if (inProgress) { button.BorderThickness = new Thickness(3, 0, 0, 0); button.BorderBrush = ActionBrush; }
         }
