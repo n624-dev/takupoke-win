@@ -1,8 +1,40 @@
 """Collect original notices from the job-owned restored NuGet packages, without network calls."""
 import argparse
+import hashlib
+import json
 import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
+
+
+def verify_build_only_package(name: str, version: str, folder: Path, output: Path):
+    """The SDK compiler tools have no bundled license and are not redistributed."""
+    if name.casefold() != "microsoft.windows.sdk.buildtools":
+        return False
+    manifests = list(output.glob("*.deps.json"))
+    if not manifests:
+        raise ValueError("Published dependency manifest is required to exclude build tools.")
+    key = f"{name}/{version}".casefold()
+    for manifest in manifests:
+        document = json.loads(manifest.read_text(encoding="utf-8-sig"))
+        for target in document.get("targets", {}).values():
+            for identity, assets in target.items():
+                if identity.casefold() == key and any(assets.get(kind) for kind in ("runtime", "native", "runtimeTargets", "resources")):
+                    raise ValueError("SDK build tools unexpectedly have deployed runtime assets.")
+    # Also detect content copied outside the dependency manifest. Never waive the
+    # redistribution notice if a build-tool file is actually present in the app.
+    deployed = {}
+    for path in output.rglob("*"):
+        if path.is_file():
+            deployed.setdefault(path.name.casefold(), []).append(path)
+    for source in folder.rglob("*"):
+        if source.is_file() and source.name.casefold() in deployed:
+            for destination in deployed[source.name.casefold()]:
+                if source.stat().st_size == destination.stat().st_size:
+                    with source.open("rb") as source_stream, destination.open("rb") as destination_stream:
+                        if hashlib.file_digest(source_stream, "sha256").digest() == hashlib.file_digest(destination_stream, "sha256").digest():
+                            raise ValueError("An SDK build-tool file was included in the published app.")
+    return True
 
 
 def collect(packages: Path, output: Path, license_templates: Path):
@@ -23,6 +55,9 @@ def collect(packages: Path, output: Path, license_templates: Path):
         values = {node.tag.split("}")[-1]: node for node in metadata}
         name = values["id"].text or ""
         version = values["version"].text or ""
+        if verify_build_only_package(name, version, spec.parent, output):
+            print(f"Excluded {name} {version}: verified no build-tool assets are redistributed.")
+            continue
         license_node = values.get("license")
         text = []
         if license_node is not None and license_node.attrib.get("type") == "file":

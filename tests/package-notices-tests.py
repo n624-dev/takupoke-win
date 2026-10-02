@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -53,6 +54,39 @@ class NoticesTests(unittest.TestCase):
         (folder / "license.txt").write_text(text, encoding="utf-8")
         notices.collect(self.root / "packages", self.root / "out", self.templates)
         self.assertIn(text, (self.root / "out/THIRD-PARTY-NOTICES.txt").read_text(encoding="utf-8"))
+
+    def build_tools(self, assets=None):
+        folder = self.root / "packages/sdktools/1.0"
+        folder.mkdir(parents=True)
+        (folder / "tools.nuspec").write_text('<package><metadata><id>Microsoft.Windows.SDK.BuildTools</id><version>1.0</version></metadata></package>', encoding="utf-8")
+        output = self.root / "out"
+        output.mkdir()
+        (output / "app.deps.json").write_text(json.dumps({"targets": {"win": {"Microsoft.Windows.SDK.BuildTools/1.0": assets or {}}}}), encoding="utf-8")
+        self.metadata('<license type="expression">MIT</license>')
+        return folder, output
+
+    def test_excludes_verified_build_only_tools(self):
+        self.build_tools()
+        notices.collect(self.root / "packages", self.root / "out", self.templates)
+        self.assertNotIn("Microsoft.Windows.SDK.BuildTools", (self.root / "out/THIRD-PARTY-NOTICES.txt").read_text())
+
+    def test_refuses_build_tools_with_runtime_assets(self):
+        self.build_tools({"native": {"tools.dll": {}}})
+        with self.assertRaisesRegex(ValueError, "deployed runtime assets"):
+            notices.collect(self.root / "packages", self.root / "out", self.templates)
+
+    def test_refuses_build_tool_copied_outside_manifest(self):
+        folder, output = self.build_tools()
+        (folder / "tool.dll").write_bytes(b"fake binary")
+        (output / "tool.dll").write_bytes(b"fake binary")
+        with self.assertRaisesRegex(ValueError, "included in the published app"):
+            notices.collect(self.root / "packages", output, self.templates)
+
+    def test_build_only_exclusion_requires_manifest(self):
+        self.build_tools()
+        (self.root / "out/app.deps.json").unlink()
+        with self.assertRaisesRegex(ValueError, "manifest is required"):
+            notices.collect(self.root / "packages", self.root / "out", self.templates)
 
 
 if __name__ == "__main__":
