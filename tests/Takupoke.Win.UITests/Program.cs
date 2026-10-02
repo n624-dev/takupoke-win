@@ -78,7 +78,8 @@ internal static class Program
             Invoke(WaitElement("setup-later")); Navigate("settings");
             Invoke(WaitElement("settings-about"));
             Wait(() => Find("page-about") is not null, "about contains the legal documents");
-            Require(Find("about-source") is not null && Find("about-contact") is not null, "About provides source and contact destinations.");
+            Wait(() => Find("about-source") is not null && Find("about-contact") is not null,
+                "About provides source and contact destinations");
             Invoke(ByName("利用規約"));
             Invoke(ByName("閉じる"));
             Invoke(ByName("プライバシーポリシー"));
