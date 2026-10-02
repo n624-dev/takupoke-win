@@ -201,6 +201,6 @@ public sealed partial class MainWindow : Window
     }
     private Task InitialSetup()
     {
-        _initialSetupOffered = true; _setupStep = 0; _page = "setup"; Render(); return Task.CompletedTask;
+        _initialSetupOffered = true; _setupStep = 0; return OpenPage("setup");
     }
 }

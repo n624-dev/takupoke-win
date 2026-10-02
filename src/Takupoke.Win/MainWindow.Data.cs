@@ -10,7 +10,12 @@ namespace Takupoke.Win;
 
 public sealed partial class MainWindow
 {
-    private Task OpenPage(string page) { _page = page; Render(); return Task.CompletedTask; }
+    private Task OpenPage(string page)
+    {
+        // These detail/help/setup views belong to Settings, including entry from Home.
+        Navigation.SelectedItem = Navigation.MenuItems[3];
+        _page = page; Render(); return Task.CompletedTask;
+    }
     private void BackToSettings() => Add(Button("設定に戻る", () => OpenPage("settings"), "back-settings"));
     private void BuildMaterialDetails(MaterialKind kind)
     {
