@@ -40,11 +40,11 @@ internal static partial class Program
             Navigate("links");
             Require(_window!.Current.Name == "たくポケ", "The native window uses the product name.");
             Require(WaitElement("main-navigation").FindAll(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "たくポケ Win")).Count == 0, "The navigation body does not repeat the development name.");
-            Invoke(WaitElement("link-menu-fake-study"));
+            Invoke("link-menu-fake-study");
             Wait(() => ByName("お気に入りに追加", ControlType.MenuItem) is not null, "The visible link edit button exposes favorite controls");
             Invoke(ByName("お気に入りに追加", ControlType.MenuItem));
             Wait(() => Find("link-fake-study")?.Current.Name.Contains("お気に入り", StringComparison.Ordinal) == true, "Favorite editing persists through the visible menu");
-            Invoke(WaitElement("link-menu-fake-study")); Invoke(ByName("お気に入りから外す", ControlType.MenuItem));
+            Invoke("link-menu-fake-study"); Invoke(ByName("お気に入りから外す", ControlType.MenuItem));
             Wait(() => Find("link-fake-study")?.Current.Name.Contains("お気に入り", StringComparison.Ordinal) == false, "Favorite editing can be undone");
             Wait(() => Find("link-fake-study") is not null && Find("link-fake-second") is not null, "saved links are displayed");
             Require(Find("link-fake-study")!.Current.BoundingRectangle.Top < Find("link-fake-second")!.Current.BoundingRectangle.Top, "Link order follows the API array rather than sort-order metadata.");
@@ -66,38 +66,38 @@ internal static partial class Program
                 Require(TextColor("page-settings") == bodyColor, "Changing the main color must not recolor page text.");
             }
             CheckAuthentication(args[0], args[1]);
-            Invoke(WaitElement("settings-materials"));
+            Invoke("settings-materials");
             Wait(() => Find("page-materials") is not null, "material list is a settings child screen");
             // Authentication cancellation intentionally pauses automatic checks.
             // Resume first so this separate test exercises an enabled stop action.
-            Invoke(WaitElement("refresh-materials"));
+            Invoke("refresh-materials");
             Wait(() => Find("refresh-materials")?.Current.IsEnabled == true && Find("automatic-refresh-paused") is null, "Manual refresh resumes checking after authentication cancellation");
-            Invoke(WaitElement("suspend-automatic-refresh"));
+            Invoke("suspend-automatic-refresh");
             Wait(() => Find("automatic-refresh-paused") is not null, "Automatic file checking can be suspended while idle");
-            Invoke(WaitElement("refresh-materials"));
+            Invoke("refresh-materials");
             Wait(() => Find("refresh-materials")?.Current.IsEnabled == true && Find("automatic-refresh-paused") is null, "Manual refresh resumes automatic checking");
             var schoolYearInput = WaitElement("materials-school-year");
             ((ValuePattern)schoolYearInput.GetCurrentPattern(ValuePattern.Pattern)).SetValue("2030");
-            Navigate("home"); Navigate("settings"); Invoke(WaitElement("settings-materials"));
+            Navigate("home"); Navigate("settings"); Invoke("settings-materials");
             Require(((ValuePattern)WaitElement("materials-school-year").GetCurrentPattern(ValuePattern.Pattern)).Current.Value == "2030",
                 "An unsaved school-year draft survives rebuilding the page");
             ((ValuePattern)WaitElement("materials-school-year").GetCurrentPattern(ValuePattern.Pattern)).SetValue("");
-            Invoke(WaitElement("material-details-Timetable"));
+            Invoke("material-details-Timetable");
             Wait(() => Find("page-material-Timetable") is not null, "normal material detail screen");
-            Invoke(WaitElement("analysis-Timetable"));
+            Invoke("analysis-Timetable");
             Wait(() => Find("page-analysis-Timetable") is not null && Find("analysis-weekday") is not null, "normal analysis and independent weekday filter");
-            Invoke(ByName("資料の詳細に戻る")); Invoke(WaitElement("back-materials"));
-            Invoke(WaitElement("material-details-Exam"));
+            Invoke(ByName("資料の詳細に戻る")); Invoke("back-materials");
+            Invoke("material-details-Exam");
             Wait(() => Find("page-material-Exam") is not null, "material detail screen");
-            Invoke(WaitElement("back-materials")); Invoke(WaitElement("back-settings"));
-            Invoke(WaitElement("settings-help")); Wait(() => Find("page-help") is not null, "purpose-based help");
-            Invoke(ByName("時間割を見る")); Invoke(ByName("閉じる")); Invoke(WaitElement("back-settings"));
-            Invoke(WaitElement("settings-setup"));
+            Invoke("back-materials"); Invoke("back-settings");
+            Invoke("settings-help"); Wait(() => Find("page-help") is not null, "purpose-based help");
+            Invoke(ByName("時間割を見る")); Invoke(ByName("閉じる")); Invoke("back-settings");
+            Invoke("settings-setup");
             Wait(() => Find("page-setup") is not null, "guided setup");
-            Invoke(WaitElement("setup-next")); Wait(() => Find("setup-events") is not null, "setup material and event step");
-            Invoke(WaitElement("setup-next")); Wait(() => Find("setup-class") is not null, "setup class step");
-            Invoke(WaitElement("setup-later")); Navigate("settings");
-            Invoke(WaitElement("settings-about"));
+            Invoke("setup-next"); Wait(() => Find("setup-events") is not null, "setup material and event step");
+            Invoke("setup-next"); Wait(() => Find("setup-class") is not null, "setup class step");
+            Invoke("setup-later"); Navigate("settings");
+            Invoke("settings-about");
             Wait(() => Find("page-about") is not null, "about contains the legal documents");
             Wait(() => Find("about-source") is not null && Find("about-contact") is not null,
                 "About provides source and contact destinations");
@@ -106,15 +106,15 @@ internal static partial class Program
             Invoke(ByName("プライバシーポリシー"));
             Invoke(ByName("閉じる"));
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.NameProperty, "閉じる"), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button))) is null, "product document closes before opening the picker");
-            Invoke(WaitElement("back-settings")); Invoke(WaitElement("settings-materials"));
+            Invoke("back-settings"); Invoke("settings-materials");
             var selectedPdf = Path.Combine(args[1], "fictional-selection.pdf");
             File.WriteAllText(selectedPdf, "%PDF-1.7\n% Entirely synthetic malformed PDF for selection persistence.\n", Encoding.ASCII);
             PickMaterial(selectedPdf);
             Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "picker selection is saved even when parsing fails");
             PickMaterial(null);
             Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "canceling the picker preserves the previous selection");
-            Invoke(WaitElement("back-settings"));
-            Invoke(WaitElement("settings-class"));
+            Invoke("back-settings");
+            Invoke("settings-class");
             var homeroom = WaitElement("class-1_1"); Toggle(homeroom);
             var department = WaitElement("class-1_CN"); Toggle(department);
             Require(Checked(homeroom) && Checked(department), "Year one allows a homeroom and department together.");
@@ -191,7 +191,7 @@ internal static partial class Program
             Navigate("settings");
             Require(SavedMainColor(preferences) == "purple", "Main color survives app restart.");
             Require(TextColor("page-settings") == bodyColor, "Restart retains theme text color.");
-            Invoke(WaitElement("settings-materials"));
+            Invoke("settings-materials");
             Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "file selected through the native picker survives restart");
             Console.WriteLine($"Passed {_checks} Windows UI checks: hierarchical settings, desktop timetable geometry, raw and OS URI callbacks, fake OIDC verification and three datasets, failure/cancellation recovery, transient footer, persistence, colors, pointer and keyboard operations.");
             return 0;
@@ -257,7 +257,7 @@ internal static partial class Program
         var clockProbe = Path.Combine(root, "offline-clock-ticks.txt");
         Wait(() => File.Exists(clockProbe), "The isolated clock tick probe is available");
         var previousValue = SavedIncludesChanges(preferences);
-        Invoke(WaitElement("timetable-display-options"));
+        Invoke("timetable-display-options");
         var option = ByName("時間割変更を反映", ControlType.MenuItem);
         var menuId = option.GetRuntimeId();
         var previousGrid = WaitElement("timetable-grid-scroller").GetRuntimeId();
@@ -272,7 +272,7 @@ internal static partial class Program
             "The timetable defers its periodic redraw while the display menu is open.");
         Toggle(option);
         Wait(() => SavedIncludesChanges(preferences) != previousValue, "The retained display menu option remains selectable and saves its value");
-        Invoke(WaitElement("timetable-display-options")); Toggle(ByName("時間割変更を反映", ControlType.MenuItem));
+        Invoke("timetable-display-options"); Toggle(ByName("時間割変更を反映", ControlType.MenuItem));
         Wait(() => SavedIncludesChanges(preferences) == previousValue, "The menu regression restores the original display preference");
     }
     private static bool SavedIncludesChanges(string path)
@@ -296,14 +296,14 @@ internal static partial class Program
         try
         {
             File.Delete(tokenRequests); File.Delete(privateRequests);
-            Invoke(WaitElement("settings-account"));
+            Invoke("settings-account");
             Wait(() => Find("page-account") is not null, "account child screen");
             WriteProbe(mode, "fail"); File.Delete(state);
-            Invoke(WaitElement("update-account"));
+            Invoke("update-account");
             Wait(() => File.Exists(state) && Visible("cancel-operation"), "authentication waits for an OS callback");
             var attemptState = ReadProbe(state);
             Require(Find("shared-details-Links")?.Current.IsEnabled == true, "Saved data details remain available while authenticating.");
-            Invoke(WaitElement("shared-details-Links")); Invoke(ByName("閉じる"));
+            Invoke("shared-details-Links"); Invoke(ByName("閉じる"));
             SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=forged", shell: false);
             Require(Visible("cancel-operation") && !File.Exists(tokenRequests), "An unmatched callback neither completes authentication nor exchanges a token.");
             SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=" + attemptState, shell: false);
@@ -314,19 +314,19 @@ internal static partial class Program
             Require(Find("account-update-error")?.Current.Name == "学校アカウントの認証を完了できませんでした。", "The account failure remains available after the transient footer disappears.");
             Wait(() => Find("shared-details-Links")?.Current.IsEnabled == true, "The account screen stays usable after the footer disappears.");
             WriteProbe(mode, "hold"); File.Delete(state);
-            Invoke(WaitElement("update-account"));
+            Invoke("update-account");
             Wait(() => File.Exists(state) && Visible("cancel-operation"), "retry creates a fresh authentication attempt");
             attemptState = ReadProbe(state);
             SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=" + attemptState, shell: true);
             Wait(() => ReadProbe(tokenRequests) == "2", "Windows protocol launch reaches token exchange");
             Require(Find("operation-status")?.Current.Name.Contains("認証情報を確認", StringComparison.Ordinal) == true, "Progress identifies token verification rather than a stale refresh result.");
-            Invoke(WaitElement("back-settings"));
+            Invoke("back-settings");
             Wait(() => Find("page-settings") is not null && Find("settings-materials")?.Current.IsEnabled == true && Find("settings-help")?.Current.IsEnabled == true, "Settings navigation stays usable during token exchange");
             SelectMainColor("green", Path.Combine(root, "preferences.json"));
             SelectMainColor("purple", Path.Combine(root, "preferences.json"));
             Require(ReadProbe(tokenRequests) == "2" && Visible("cancel-operation"), "Local preferences save without completing or canceling the pending token exchange.");
-            Invoke(WaitElement("settings-help")); Wait(() => Find("page-help") is not null, "help is readable during token exchange");
-            Invoke(WaitElement("back-settings")); Invoke(WaitElement("settings-account"));
+            Invoke("settings-help"); Wait(() => Find("page-help") is not null, "help is readable during token exchange");
+            Invoke("back-settings"); Invoke("settings-account");
             WriteProbe(mode, "success");
             Wait(() => Find("update-account")?.Current.IsEnabled == true && !Visible("cancel-operation"), "Validated fake authentication completes downloads and releases the UI");
             Require(ReadProbe(privateRequests) == "3", "All three datasets require the verified token and download once.");
@@ -334,16 +334,16 @@ internal static partial class Program
             Wait(() => !Visible("status-bar"), "success footer automatically hides");
             WriteProbe(Path.Combine(root, "offline-auth-revision.txt"), new string('C', 43));
             WriteProbe(mode, "hold"); File.Delete(state);
-            Invoke(WaitElement("update-account")); Wait(() => File.Exists(state) && Visible("cancel-operation"), "another update is cancellable");
+            Invoke("update-account"); Wait(() => File.Exists(state) && Visible("cancel-operation"), "another update is cancellable");
             SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=" + ReadProbe(state), shell: true);
             Wait(() => ReadProbe(tokenRequests) == "3", "cancellation test reaches token exchange");
-            Invoke(WaitElement("cancel-operation"));
+            Invoke("cancel-operation");
             Wait(() => Find("update-account")?.Current.IsEnabled == true && !Visible("cancel-operation"), "canceling token exchange releases the UI");
             Require(ReadProbe(privateRequests) == "3", "Cancellation preserves previous data and starts no private downloads.");
             foreach (var kind in Enum.GetValues<DataSet>()) Require(Find("shared-status-" + kind)?.Current.Name == "取得済み", "Canceled authentication retains all prior datasets.");
-            if (Visible("dismiss-status")) Invoke(WaitElement("dismiss-status"));
+            if (Visible("dismiss-status")) Invoke("dismiss-status");
             Require(!Visible("status-bar"), "The result footer can be dismissed immediately.");
-            Invoke(WaitElement("back-settings"));
+            Invoke("back-settings");
         }
         finally
         {
@@ -619,6 +619,18 @@ internal static partial class Program
     [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool SetWindowPos(nint window, nint after, int x, int y, int width, int height, uint flags);
     [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool SetCursorPos(int x, int y);
     [System.Runtime.InteropServices.DllImport("user32.dll", EntryPoint = "mouse_event")] private static extern void MouseEvent(uint flags, uint x, uint y, uint data, nuint extra);
+    private static void Invoke(string id)
+    {
+        // Find and invoke inside the retry boundary: a periodic render can
+        // replace a control even between obtaining it and reading its ID.
+        Wait(() =>
+        {
+            var current = Find(id);
+            if (current?.Current.IsEnabled != true || !current.TryGetCurrentPattern(InvokePattern.Pattern, out var pattern)) return false;
+            try { ((InvokePattern)pattern).Invoke(); return true; }
+            catch (ElementNotEnabledException) { return false; }
+        }, "invoke " + id);
+    }
     private static void Invoke(AutomationElement element)
     {
         var id = element.Current.AutomationId; var name = element.Current.Name; var role = element.Current.ControlType;
