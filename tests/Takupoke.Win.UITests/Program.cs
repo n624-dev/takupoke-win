@@ -164,7 +164,7 @@ internal static class Program
             if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
                 Console.Error.WriteLine("Synthetic native window: " + _window?.Current.BoundingRectangle);
             if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
-                foreach (var id in new[] { "page-scroller", "timetable-grid-scroller", "page-timetable", "架空科目甲" })
+                foreach (var id in new[] { "page-scroller", "status-bar", "timetable-grid-scroller", "page-timetable", "架空科目甲" })
                 {
                     try
                     {
@@ -397,8 +397,15 @@ internal static class Program
         // WinUI's outer ScrollViewer peer can expose its unclipped content
         // rectangle when the changes section is expanded. Compare against
         // the portion inside the actual native window, which users can see.
-        return System.Windows.Rect.Intersect(WaitElement("page-scroller").Current.BoundingRectangle,
+        var bounds = System.Windows.Rect.Intersect(WaitElement("page-scroller").Current.BoundingRectangle,
             _window!.Current.BoundingRectangle);
+        if (Find("status-bar") is { } footer && !footer.Current.IsOffscreen)
+        {
+            var footerBounds = footer.Current.BoundingRectangle;
+            if (!footerBounds.IsEmpty && footerBounds.Height > 0 && footerBounds.Top > bounds.Top && footerBounds.Top < bounds.Bottom)
+                bounds.Height = footerBounds.Top - bounds.Top;
+        }
+        return bounds;
     }
     private static AutomationElement? Find(string id) => _window?.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, id));
     private static AutomationElement WaitElement(string id) { AutomationElement? result = null; Wait(() => (result = Find(id)) is not null, id); return result!; }
