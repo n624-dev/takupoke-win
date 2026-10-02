@@ -319,7 +319,7 @@ internal static partial class Program
             Wait(() => ReadProbe(tokenRequests) == "2", "Windows protocol launch reaches token exchange");
             Require(Find("operation-status")?.Current.Name.Contains("認証情報を確認", StringComparison.Ordinal) == true, "Progress identifies token verification rather than a stale refresh result.");
             Invoke(WaitElement("back-settings"));
-            Require(Find("settings-materials")?.Current.IsEnabled == true && Find("settings-help")?.Current.IsEnabled == true, "Settings navigation stays usable during token exchange.");
+            Wait(() => Find("page-settings") is not null && Find("settings-materials")?.Current.IsEnabled == true && Find("settings-help")?.Current.IsEnabled == true, "Settings navigation stays usable during token exchange");
             SelectMainColor("green", Path.Combine(root, "preferences.json"));
             SelectMainColor("purple", Path.Combine(root, "preferences.json"));
             Require(ReadProbe(tokenRequests) == "2" && Visible("cancel-operation"), "Local preferences save without completing or canceling the pending token exchange.");
