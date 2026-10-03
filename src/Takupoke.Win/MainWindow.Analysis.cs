@@ -83,13 +83,15 @@ public sealed partial class MainWindow
     private Task SpecialAnalysisDetail(SpecialAnalysis analysis, SpecialLesson lesson) => Dialog("特別時間割の授業詳細", Panel(
         Card(Panel(SettingsSectionTitle(DisplayText.Continuous(lesson.Names.Subject)), SettingsDescription(lesson.Date + " · " + ClassSelection.Display(lesson.ClassName) + " · " + lesson.Period + "限"),
             DataField("時刻", analysis.TimeFor(lesson)?.Display ?? "未確認"), DataField("教員", DisplayText.Continuous(lesson.Names.Teacher)), DataField("教室", DisplayText.Continuous(lesson.Names.Room)))),
-        new Expander { Header = "元のセルの記載", Content = Text(string.Join("\n", lesson.Lines)) }));
+        new Expander { Header = "元のセルの記載", Content = Text(string.Join("\n", lesson.Lines)) }),
+        detailRevision: () => ScheduleDetailRevision(analysis.Kind, names: false));
     private Task NormalAnalysisDetail(NormalLesson lesson)
     {
         var names = _model.Mappings?.Apply(lesson.Names, lesson.ClassName) ?? lesson.Names;
         return Dialog("授業詳細", Panel(Card(Panel(SettingsSectionTitle(DisplayText.Continuous(names.DetailSubject)), SettingsDescription(ClassSelection.Display(lesson.ClassName) + " · " + lesson.Period + "限"),
             DataField("教員", DisplayText.Continuous(names.DetailTeacher)), DataField("教室", DisplayText.Continuous(names.DetailRoom)))),
             new Expander { Header = "PDFの記載名", Content = Text(lesson.Names.Subject + "\n" + lesson.Names.Teacher + "\n" + lesson.Names.Room) },
-            new Expander { Header = "元のセルの記載", Content = Text(lesson.SourceText) }));
+            new Expander { Header = "元のセルの記載", Content = Text(lesson.SourceText) }),
+            detailRevision: () => ScheduleDetailRevision(MaterialKind.Timetable));
     }
 }

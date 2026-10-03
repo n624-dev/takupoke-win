@@ -185,7 +185,7 @@ public sealed partial class MainWindow
             new Expander { Header = "PDFの記載名", Content = Text($"科目：{names.Subject}\n教員：{names.Teacher}\n教室：{names.Room}") });
         if (block.Content is NormalContent normal) panel.Children.Add(new Expander { Header = "元のセルの記載", Content = Text(normal.Lesson.SourceText) });
         if (block.Content is SpecialContent special) panel.Children.Add(new Expander { Header = "元のセルの記載", Content = Text(string.Join("\n", special.Lesson.Lines)) });
-        await Dialog("授業詳細", panel);
+        await Dialog("授業詳細", panel, detailRevision: () => ScheduleDetailRevision());
     }
     private async Task ChangeDetail(ScheduleChange change)
     {
@@ -211,6 +211,6 @@ public sealed partial class MainWindow
         if (specialOriginals.Count > 0) panel.Children.Add(new Expander { Header = "変更前の試験・返却時間割", Content = Text(string.Join("\n", specialOriginals.Select(item =>
             (item.Kind == MaterialKind.Exam ? "試験" : "返却") + " · " + item.Names.Subject + " · " + (item.Time?.Display ?? "時刻未確認") + " · " + item.Names.Teacher + " · " + item.Names.Room))) });
         panel.Children.Add(new Expander { Header = "元の行の記載", Content = Text(change.RawText) });
-        await Dialog("時間割変更の詳細", panel);
+        await Dialog("時間割変更の詳細", panel, detailRevision: () => ScheduleDetailRevision());
     }
 }

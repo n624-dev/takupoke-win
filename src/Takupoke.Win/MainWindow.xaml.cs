@@ -138,6 +138,7 @@ public sealed partial class MainWindow : Window
     }
     private void Render()
     {
+        DismissChangedScheduleDetail();
         if (_dialogOpen || _selectingMaterial || DeferRenderForPopups()) { UpdateStatus(); return; }
         _popupRenderPending = false;
         var pageChanged = _renderedPage != _page;
@@ -240,7 +241,8 @@ public sealed partial class MainWindow : Window
     private static Border Card(UIElement content) => new() { Child = content, Padding = new Thickness(20), CornerRadius = new CornerRadius(12),
         Background = (Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"],
         BorderThickness = new Thickness(1), BorderBrush = (Brush)Application.Current.Resources["CardStrokeColorDefaultBrush"] };
-    private async Task<ContentDialogResult> Dialog(string title, UIElement content, string primary = "閉じる", string? secondary = null)
+    private async Task<ContentDialogResult> Dialog(string title, UIElement content, string primary = "閉じる", string? secondary = null,
+        Func<string>? detailRevision = null)
     {
         if (_dialogOpen) return ContentDialogResult.None;
         _dialogOpen = true;
@@ -251,9 +253,11 @@ public sealed partial class MainWindow : Window
                 Content = new ScrollViewer { Content = new Border { Child = content, Padding = new Thickness(0, 4, 12, 8) }, MaxHeight = 560, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollMode = ScrollMode.Disabled, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled },
                 PrimaryButtonText = primary, CloseButtonText = secondary ?? "", DefaultButton = ContentDialogButton.Primary };
             _activeDialog = dialog;
+            _scheduleDetailRevision = detailRevision;
+            _scheduleDetailSnapshot = detailRevision?.Invoke();
             return await dialog.ShowAsync();
         }
-        finally { _activeDialog = null; _dialogOpen = false; Render(); }
+        finally { _scheduleDetailRevision = null; _scheduleDetailSnapshot = null; _activeDialog = null; _dialogOpen = false; Render(); }
     }
     private Task Message(string title, string message) => Dialog(title, Text(message));
     private async Task SelectMaterial(MaterialKind kind)

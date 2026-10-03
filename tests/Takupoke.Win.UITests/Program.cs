@@ -211,6 +211,7 @@ internal static partial class Program
             Invoke("settings-materials");
             Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "file selected through the native picker survives restart");
             CheckRecoveryUi(args[0], args[1]);
+            CheckDetailSnapshotUpdates(args[0], args[1]);
             Console.WriteLine($"Passed {_checks} Windows UI checks: hierarchical settings, desktop timetable geometry, raw and OS URI callbacks, fake OIDC verification and three datasets, failure/cancellation recovery, transient footer, persistence, colors, pointer and keyboard operations.");
             return 0;
         }

@@ -60,7 +60,7 @@ public sealed class PdfGrid(PdfPageLayout page, CancellationToken token = defaul
     public void SetLessonCells(IEnumerable<PdfBox> cells)
     {
         if (_lessonArea is not { } area) throw new PdfParseException("P17");
-        var boxes = cells.Distinct().ToArray();
+        var boxes = cells.Distinct().ToArray(); Step(boxes.Length);
         if (boxes.Any(c => c.Left < area.Left || c.Right > area.Right || c.Top < area.Top || c.Bottom > area.Bottom)) throw new PdfParseException("P17");
         _calibrationBoxes = boxes; _baselineCache.Clear();
     }
@@ -171,9 +171,10 @@ public sealed class PdfGrid(PdfPageLayout page, CancellationToken token = defaul
             _calibrationBoxes = candidates.ToArray();
         }
         var assignments = new List<string[]>(); double[]? reference = null;
-        foreach (var candidate in _calibrationBoxes.Where(c => Math.Abs(c.Bottom - c.Top - box.Bottom + box.Top) < .5))
+        foreach (var candidate in _calibrationBoxes)
         {
             Step();
+            if (!(Math.Abs(candidate.Bottom - candidate.Top - box.Bottom + box.Top) < .5)) continue;
             if (!_baselineCache.TryGetValue(candidate, out var baseline))
             {
                 var candidateRows = Rows(Glyphs(candidate));
