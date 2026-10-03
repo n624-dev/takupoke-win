@@ -46,6 +46,21 @@ public sealed class RecoveryPipelineTests
         Assert.False(raster.HasUnrecognizedInk([repeatedBoxes[0]], []));
     }
     [Fact]
+    public void EmptyCellChecksShareAPageBudgetDuringRecovery()
+    {
+        var raster = new RecoveryRaster(512, 512, Enumerable.Repeat((byte)255, 512 * 512 * 4).ToArray());
+        var scan = raster.InkFreeScanner(); var box = new RecoveryBox(0, 0, 512, 512);
+        var error = Assert.Throws<InvalidDataException>(() => { for (var i = 0; i < 300; i++) scan(box); });
+        Assert.Contains("画素処理数", error.Message);
+        Assert.True(raster.InkFreeScanner()(box));
+        var page = Layout(MaterialKind.Timetable);
+        page = page with { Glyphs = page.Glyphs.Where(g => g.Text != "架空教員B").ToArray() };
+        var inkCalls = 0;
+        Assert.Throws<InvalidDataException>(() => RecoveryDocumentBuilder.Build(new string('a', 64), MaterialKind.Timetable, [page],
+            (_, _) => { inkCalls++; return scan(box); }, allowStructureProposal: true));
+        Assert.Equal(1, inkCalls);
+    }
+    [Fact]
     public void CanceledRecoveryCannotContinueRasterAnalysisEvenWithNoCandidateInk()
     {
         var raster = new RecoveryRaster(80, 80, Enumerable.Repeat((byte)255, 80 * 80 * 4).ToArray());

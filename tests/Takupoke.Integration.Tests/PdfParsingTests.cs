@@ -78,6 +78,9 @@ public sealed class PdfParsingTests
     [Theory]
     [InlineData("令和13年度令和14年度前期時間割")]
     [InlineData("令和14年度2031年度前期時間割")]
+    [InlineData("令和14年度令和100年度前期時間割")]
+    [InlineData("令和14年度12032年度前期時間割")]
+    [InlineData("令和14年度999999999999999999年度前期時間割")]
     public void ConflictingTitleYearsCannotSelectTheFirstYear(string heading)
     {
         var page = TimetableLayout("架空科目", "架空教員", "架空教室");

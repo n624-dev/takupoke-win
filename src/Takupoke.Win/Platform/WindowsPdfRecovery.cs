@@ -61,7 +61,8 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
             return await Task.Run(() =>
             {
                 var ruleMasks = rasters.Select((r, index) => r.RuleMask(rasterRules[index], token)).ToArray();
-                return RecoveryDocumentBuilder.Build(hash, kind, pages, (page, box) => rasters[page - 1].InkFree(box, ruleMasks[page - 1], token), ocrPages, token, allowStructureProposal: true);
+                var blankScanners = rasters.Select((r, index) => r.InkFreeScanner(ruleMasks[index], token)).ToArray();
+                return RecoveryDocumentBuilder.Build(hash, kind, pages, (page, box) => blankScanners[page - 1](box), ocrPages, token, allowStructureProposal: true);
             }, token);
         }
         finally

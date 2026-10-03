@@ -27,7 +27,7 @@ public static class RecoveryDocumentBuilder
         {
             token.ThrowIfCancellationRequested();
             _comparisons += amount;
-            if (_comparisons > 20_000_000) throw new InvalidDataException("PDF復旧の位置比較数が上限を超えています。");
+            if (_comparisons > 20_000_000) throw RecoveryWorkLimits.Exceeded("PDF復旧の位置比較数が上限を超えています。");
         }
     }
     private static IEnumerable<Label> Labels(IReadOnlyList<Atom> atoms, Work work)
@@ -182,7 +182,7 @@ public static class RecoveryDocumentBuilder
                 {
                     work.Step(labels.Length * 3L + inside.Length * 24L);
                     try { scopes = RoleScopes(id, pi, box, inside, labels, inkFree); }
-                    catch (InvalidDataException)
+                    catch (InvalidDataException error) when (!RecoveryWorkLimits.IsExceeded(error))
                     {
                         LessonNames? trustedNames = null;
                         if (trustedNormal.TryGetValue(pi, out var normal)) { var matched = normal.Lessons.Where(l => l.ClassName == cls.Value && l.Weekday.ToString() == day.Value && slots.All(s => s.Period == l.Period)).ToArray(); if (matched.Length == 1) trustedNames = matched[0].Names; }

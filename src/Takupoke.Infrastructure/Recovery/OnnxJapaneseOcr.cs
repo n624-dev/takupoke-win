@@ -5,6 +5,15 @@ using Takupoke.Core.Recovery;
 using Takupoke.Infrastructure.Parsing;
 
 namespace Takupoke.Infrastructure.Recovery;
+internal static class RecoveryWorkLimits
+{
+    private const string Key = "RecoveryWorkLimitExceeded";
+    internal static InvalidDataException Exceeded(string message)
+    {
+        var error = new InvalidDataException(message); error.Data[Key] = true; return error;
+    }
+    internal static bool IsExceeded(InvalidDataException error) => error.Data.Contains(Key);
+}
 public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
 {
     public bool Valid => Width is > 0 and <= 4096 && Height is > 0 and <= 4096 && Bgra.Length == checked(Width * Height * 4);
@@ -14,18 +23,25 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         public void Step(long amount = 1)
         {
             _pixels += amount;
-            if (_pixels > 64_000_000) throw new InvalidDataException("OCRの画素処理数が上限を超えています。");
+            if (_pixels > 64_000_000) throw RecoveryWorkLimits.Exceeded("OCRの画素処理数が上限を超えています。");
             if (amount > 1 || _pixels % 128 == 0) token.ThrowIfCancellationRequested();
         }
     }
     public bool InkFree(RecoveryBox box, bool[]? ruleMask = null, CancellationToken token = default)
+        => InkFree(box, ruleMask, token, new PixelWork(token));
+    public Func<RecoveryBox, bool> InkFreeScanner(bool[]? ruleMask = null, CancellationToken token = default)
+    {
+        var work = new PixelWork(token);
+        return box => InkFree(box, ruleMask, token, work);
+    }
+    private bool InkFree(RecoveryBox box, bool[]? ruleMask, CancellationToken token, PixelWork work)
     {
         token.ThrowIfCancellationRequested();
         if (!Valid || !box.Valid || box.X + box.Width > Width || box.Y + box.Height > Height || ruleMask is not null && ruleMask.Length != Width * Height) return false;
         var left = Math.Clamp((int)Math.Ceiling(box.X - .5), 0, Width); var top = Math.Clamp((int)Math.Ceiling(box.Y - .5), 0, Height);
         var right = Math.Clamp((int)Math.Ceiling(box.X + box.Width - .5), 0, Width); var bottom = Math.Clamp((int)Math.Ceiling(box.Y + box.Height - .5), 0, Height);
         if (right <= left || bottom <= top) return false;
-        for (var y = top; y < bottom; y++) { token.ThrowIfCancellationRequested(); for (var x = left; x < right; x++) { var index = y * Width + x; if (ruleMask?[index] == true) continue; var p = index * 4; if (Bgra[p] != 255 || Bgra[p + 1] != 255 || Bgra[p + 2] != 255) return false; } }
+        for (var y = top; y < bottom; y++) { token.ThrowIfCancellationRequested(); for (var x = left; x < right; x++) { work.Step(); var index = y * Width + x; if (ruleMask?[index] == true) continue; var p = index * 4; if (Bgra[p] != 255 || Bgra[p + 1] != 255 || Bgra[p + 2] != 255) return false; } }
         return true;
     }
     public bool[] RuleMask(IReadOnlyList<PdfRule> rules, CancellationToken token = default)
@@ -93,7 +109,7 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
                 token.ThrowIfCancellationRequested();
                 bool Matches(PdfRule other)
                 {
-                    if (++comparisonWork > 1_000_000) throw new InvalidDataException("OCRの罫線比較数が上限を超えています。");
+                    if (++comparisonWork > 1_000_000) throw RecoveryWorkLimits.Exceeded("OCRの罫線比較数が上限を超えています。");
                     if (comparisonWork % 128 == 0) token.ThrowIfCancellationRequested();
                     return line.Vertical ? Math.Abs(other.Y1 - y) <= 3 && other.X1 - 3 <= x && x <= other.X2 + 3
                         : Math.Abs(other.X1 - x) <= 3 && other.Y1 - 3 <= y && y <= other.Y2 + 3;

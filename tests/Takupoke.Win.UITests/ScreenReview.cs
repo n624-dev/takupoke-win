@@ -139,7 +139,7 @@ internal static partial class Program
         await new PublicEventsStore(root).SaveAsync(new(now, new("v1", lease.Period.SchoolYear, new string('a', 64), null, [new($"{lease.Period.SchoolYear + 1}-03-10", $"{lease.Period.SchoolYear + 1}-03-10", "架空の行事メモ", "行事メモ")]), "\"fake-api-etag\""));
     }
 
-    private static void Capture(string name)
+    private static void Capture(string name, string marker = "TAKUPOKE_UI_IMAGE")
     {
         // The mode is reachable only through the offline fixture command. Capture
         // only our own visible app window; never the surrounding desktop or pickers.
@@ -155,11 +155,11 @@ internal static partial class Program
             graphics.CopyFromScreen((int)bounds.Left, (int)bounds.Top, 0, 0, image.Size, CopyPixelOperation.SourceCopy);
         using var stream = new MemoryStream(); image.Save(stream, ImageFormat.Png);
         var bytes = stream.ToArray(); var encoded = Convert.ToBase64String(bytes);
-        Console.WriteLine($"TAKUPOKE_UI_IMAGE BEGIN {name} {Convert.ToHexStringLower(SHA256.HashData(bytes))} {bytes.Length}");
+        Console.WriteLine($"{marker} BEGIN {name} {Convert.ToHexStringLower(SHA256.HashData(bytes))} {bytes.Length}");
         const int chunkLength = 6000;
         var chunks = (encoded.Length + chunkLength - 1) / chunkLength;
         for (var index = 0; index < chunks; index++)
-            Console.WriteLine($"TAKUPOKE_UI_IMAGE DATA {name} {index} {encoded.Substring(index * chunkLength, Math.Min(chunkLength, encoded.Length - index * chunkLength))}");
-        Console.WriteLine($"TAKUPOKE_UI_IMAGE END {name} {chunks}");
+            Console.WriteLine($"{marker} DATA {name} {index} {encoded.Substring(index * chunkLength, Math.Min(chunkLength, encoded.Length - index * chunkLength))}");
+        Console.WriteLine($"{marker} END {name} {chunks}");
     }
 }

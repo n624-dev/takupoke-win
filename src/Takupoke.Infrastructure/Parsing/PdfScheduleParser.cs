@@ -8,8 +8,8 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class PdfScheduleParser
 {
-    public const int TimetableVersion = 18;
-    public const int SpecialVersion = 17;
+    public const int TimetableVersion = 19;
+    public const int SpecialVersion = 18;
     private const int MaximumRecords = 10000;
     private static string Joined(IEnumerable<PdfGlyph> glyphs) => string.Concat(glyphs.Select(g => g.Text));
     private static string Heading(PdfPageLayout page, double fraction) => PdfGrid.Key(string.Concat(PdfGrid.Rows(page.Glyphs.Where(g => g.Cy < page.Height * fraction)).Select(Joined)));
@@ -18,9 +18,12 @@ public static partial class PdfScheduleParser
         var match = Regex.Match(heading, "令和([0-9]{1,2})年度");
         if (!match.Success || !int.TryParse(match.Groups[1].Value, out var era) || era is < 1 or > 99) throw new PdfParseException("P03", page);
         var year = 2018 + era;
-        foreach (Match label in Regex.Matches(heading, "令和([0-9]{1,2})年度|(?<![0-9])([0-9]{4})年度"))
+        foreach (Match label in Regex.Matches(heading, "令和([0-9]+)年度|(?<![0-9])([0-9]+)年度"))
         {
-            var value = label.Groups[1].Success ? 2018 + int.Parse(label.Groups[1].Value) : int.Parse(label.Groups[2].Value);
+            var eraLabel = label.Groups[1].Success;
+            if (!int.TryParse(label.Groups[eraLabel ? 1 : 2].Value, out var number) ||
+                (eraLabel ? number is < 1 or > 99 : number is < 1900 or > 9998)) throw new PdfParseException("P03", page);
+            var value = eraLabel ? 2018 + number : number;
             if (value != year) throw new PdfParseException("P03", page);
         }
         return year;

@@ -15,7 +15,7 @@ internal static partial class Program
 {
     // A prevalidated preview isolates UI and transactional adoption. Native
     // model/recognition behavior is covered separately, with fictional inputs.
-    private static (RecoveryDocument Doc, RecoveryResult Result) RecoveryUiFixture(SchoolDataPeriod period)
+    private static (RecoveryDocument Doc, RecoveryResult Result) RecoveryUiFixture(SchoolDataPeriod period, bool parallel = false)
     {
         var slots = (from d in Enumerable.Range(1, 5) from p in Enumerable.Range(1, 8) select new RecoverySlot("3_IT", d.ToString(), p)).ToArray();
         var box = new RecoveryBox(110, 110, 60, 10);
@@ -36,6 +36,23 @@ internal static partial class Program
         doc = doc with { Sources = doc.Sources.Where(s => s.Id != "teacher").Select(s => s.Id == "room" ? s with { Box = s.Box with { Y = 145 } } : s).ToArray(),
             Cells = doc.Cells.Select((c, i) => i == 0 ? c with { SourceIds = ["subject", "room"], BlankFields = ["teacher"], LessonBindings = [c.LessonBindings[0] with { Teacher = [] }] } : c).ToArray() };
         result = result with { Cells = result.Cells.Select((c, i) => i == 0 ? c with { Lessons = [c.Lessons[0] with { Teacher = new(RecoveryValueState.Empty, "", []) }] } : c).ToArray() };
+        if (parallel)
+        {
+            var atoms = new List<RecoverySource>(); var lessons = new List<RecoveryLesson>(); var bindings = new List<RecoveryLessonBinding>();
+            foreach (var index in Enumerable.Range(0, 2))
+            {
+                var suffix = index == 0 ? "A" : "B";
+                var ids = new[] { "parallel-subject-" + index, "parallel-teacher-" + index, "parallel-room-" + index };
+                var values = new[] { "架空並記科目" + suffix, "架空並記担当" + suffix, "架空並記教室" + suffix };
+                atoms.AddRange(ids.Select((id, role) => new RecoverySource(id, "c0", 1, values[role], new(110, 110 + index * 45 + role * 15, 80, 10))));
+                bindings.Add(new([ids[0]], [ids[1]], [ids[2]]));
+                lessons.Add(new(new(RecoveryValueState.Present, values[0], [ids[0]]), new(RecoveryValueState.Present, values[1], [ids[1]]),
+                    new(RecoveryValueState.Present, values[2], [ids[2]]), ["day1"], ["period1"]));
+            }
+            doc = doc with { Sources = doc.Sources.Where(s => s.CellId != "c0").Concat(atoms).ToArray(),
+                Cells = doc.Cells.Select((c, i) => i == 0 ? c with { ParallelCount = 2, SourceIds = atoms.Select(s => s.Id).ToArray(), BlankFields = [], LessonBindings = bindings } : c).ToArray() };
+            result = result with { Cells = result.Cells.Select((c, i) => i == 0 ? c with { Lessons = lessons } : c).ToArray() };
+        }
         return (doc, result);
     }
     private static byte[] RecoveryUiPdf()
@@ -50,7 +67,7 @@ internal static partial class Program
         foreach (var offset in offsets) pdf.Append(offset.ToString("D10", CultureInfo.InvariantCulture)).Append(" 00000 n \n");
         pdf.Append("trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n").Append(xref).Append("\n%%EOF\n"); return Encoding.ASCII.GetBytes(pdf.ToString());
     }
-    private static async Task<string> SeedRecoveryUiAsync(string root)
+    private static async Task<string> SeedRecoveryUiAsync(string root, bool parallel = false)
     {
         await using var store = new SchoolDataStore(root, new WindowsDpapiProtector()); var lease = await store.BeginAsync();
         var bytes = RecoveryUiPdf(); var path = Path.Combine(root, "fictional-recovery-original.pdf"); await File.WriteAllBytesAsync(path, bytes);
@@ -59,7 +76,7 @@ internal static partial class Program
         var source = new SourceRecord(Guid.NewGuid().ToString("N"), MaterialKind.Timetable, path, content.Identity, "fictional-recovery.pdf", hash, bytes.Length, now, now, content.ModifiedAt);
         await store.SaveOriginalAsync(lease, source, bytes);
         await store.WriteAsync(lease, "attempt.Timetable", new MaterialAttempt(now, "P13", true, hash, lease.Period.SchoolYear, ParserVersion: PdfScheduleParser.TimetableVersion, RecoveryPending: true));
-        var (doc, result) = RecoveryUiFixture(lease.Period); doc = doc with { PdfHash = hash }; result = result with { PdfHash = hash };
+        var (doc, result) = RecoveryUiFixture(lease.Period, parallel); doc = doc with { PdfHash = hash }; result = result with { PdfHash = hash };
         var errors = RecoveryValidator.Validate(doc, result).Errors;
         if (errors.Count > 0) throw new InvalidOperationException("Synthetic recovery preview failed validation: " + string.Join(",", errors));
         var preview = new RecoveryPreview(source.Id, lease, doc, result, now);
@@ -118,6 +135,36 @@ internal static partial class Program
     }
     private static bool RecoveryUiText(string fragment) => _window?.FindFirst(TreeScope.Descendants,
         new AndCondition(new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Text), new PropertyCondition(AutomationElement.NameProperty, fragment))) is not null;
+    private static void CheckRecoveryParallelUi(string executable, string root)
+    {
+        Stop(); SeedRecoveryUiAsync(root, parallel: true).GetAwaiter().GetResult(); Start(executable);
+        OpenRecoveryUiPreview();
+        foreach (var suffix in new[] { "A", "B" }) Require(RecoveryUiText($"架空並記科目{suffix} / 架空並記担当{suffix} / 架空並記教室{suffix}"),
+            "The preview keeps each parallel subject, teacher and room together: " + suffix);
+        foreach (var suffix in new[] { "A", "B" })
+        {
+            var text = ByName($"架空並記科目{suffix} / 架空並記担当{suffix} / 架空並記教室{suffix}", ControlType.Text);
+            var bounds = text.Current.BoundingRectangle;
+            Require(!text.Current.IsOffscreen && !bounds.IsEmpty && _window!.Current.BoundingRectangle.Contains(bounds),
+                "Both parallel lesson pairs are simultaneously visible in the preview: " + suffix);
+        }
+        Capture("windows-recovery-parallel", "TAKUPOKE_PARALLEL_UI_IMAGE");
+        Require(RecoveryUiFormalAsync(root).GetAwaiter().GetResult()?.Timetable?.Lessons.Count != 2,
+            "The parallel preview leaves the previously adopted formal result unchanged.");
+        Invoke("adopt-recovery-Timetable");
+        Wait(() => Find("adopt-recovery-Timetable") is null, "Explicit parallel adoption removes the confirmation action");
+        var accepted = RecoveryUiFormalAsync(root).GetAwaiter().GetResult();
+        Require(accepted?.Recovery is not null && accepted.Timetable?.Lessons.Count == 2 && accepted.Timetable.Lessons.All(l => l.ClassName == "3_IT" && l.Weekday == 1 && l.Period == 1),
+            "The formal result retains both lessons in the same class, weekday and period.");
+        Stop(); Start(executable);
+        Navigate("settings"); Invoke("settings-materials"); Invoke("material-details-Timetable"); Invoke("analysis-Timetable");
+        foreach (var suffix in new[] { "A", "B" })
+        {
+            Require(RecoveryUiText("架空並記科目" + suffix), "The restarted formal analysis displays parallel subject " + suffix);
+            Require(RecoveryUiText($"架空並記担当{suffix} · 架空並記教室{suffix}"), "The restarted formal analysis retains the paired teacher and room " + suffix);
+        }
+        Console.WriteLine("Recovery parallel UI: two paired lessons in preview, explicit adoption and restarted formal analysis passed.");
+    }
     private static void OpenRecoveryUiPreview(MaterialKind kind = MaterialKind.Timetable)
     {
         Navigate("settings"); Invoke("settings-materials"); Invoke("material-details-" + kind); Invoke("recovery-preview-" + kind);
@@ -158,6 +205,7 @@ internal static partial class Program
         Require(Find("download-ocr-model") is not null, "The OCR download action is available independently of a pending recovery job.");
         CheckRecoverySpecialUi(executable, root, MaterialKind.Exam);
         CheckRecoverySpecialUi(executable, root, MaterialKind.ExamReturn);
+        CheckRecoveryParallelUi(executable, root);
         Console.WriteLine("Recovery UI: original, empty fields/cells, whole-document scope, cancellation by leaving, restart, explicit adoption and independent model management passed.");
     }
 }
