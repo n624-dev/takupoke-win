@@ -79,6 +79,17 @@ public sealed class RecoveryPipelineTests
         Assert.False(raster.InkFree(new(0, 0, 80, 80))); Assert.True(raster.HasUnrecognizedInk([], []));
     }
 
+    [Theory] [InlineData(1, 1)] [InlineData(1, 40)] [InlineData(40, 1)] [InlineData(78, 40)] [InlineData(40, 78)]
+    public void UndetectedInkBesideARealBorderCannotBecomeEmpty(int x, int y)
+    {
+        var pixels = Enumerable.Repeat((byte)255, 80 * 80 * 4).ToArray();
+        for (var i = 0; i < 80; i++) for (var c = 0; c < 3; c++)
+        { pixels[i * 4 + c] = 0; pixels[(79 * 80 + i) * 4 + c] = 0; pixels[(i * 80) * 4 + c] = 0; pixels[(i * 80 + 79) * 4 + c] = 0; }
+        var raster = new RecoveryRaster(80, 80, pixels); var rules = raster.Rules(); var box = new RecoveryBox(0, 0, 80, 80);
+        Assert.Equal(4, rules.Count); Assert.False(raster.HasUnrecognizedInk([], rules)); Assert.True(raster.InkFree(box, raster.RuleMask(rules)));
+        for (var c = 0; c < 3; c++) pixels[(y * 80 + x) * 4 + c] = 254;
+        Assert.True(raster.HasUnrecognizedInk([], rules)); Assert.False(raster.InkFree(box, raster.RuleMask(rules)));
+    }
     [Fact] public void IsolatedLongCharacterStrokeCannotMaskUnrecognizedInkAsARule()
     {
         var pixels = Enumerable.Repeat((byte)255, 100 * 100 * 4).ToArray(); var raster = new RecoveryRaster(100, 100, pixels);

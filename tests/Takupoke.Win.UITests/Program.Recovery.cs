@@ -77,7 +77,10 @@ internal static partial class Program
         await using var store = new SchoolDataStore(root, new WindowsDpapiProtector()); var lease = await store.BeginAsync();
         var name = kind == MaterialKind.Exam ? "exam" : "return";
         var json = await File.ReadAllTextAsync(Path.Combine(AppContext.BaseDirectory, "fixtures", "recovery-" + name + ".json"));
-        // Retain wholly fictional dates while advancing the fixture school year.
+        // Move all ISO dates, evidence and date-keyed clocks into the active
+        // school half before advancing the wholly fictional fixture year.
+        var month = lease.Period.Half == 1 ? "04" : "10";
+        json = json.Replace("2026-10-", $"{lease.Period.SchoolYear}-{month}-", StringComparison.Ordinal);
         json = json.Replace("2026", lease.Period.SchoolYear.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal);
         var fixture = DataCodec.Decode<RecoveryUiSpecialFixture>(Encoding.UTF8.GetBytes(json));
         var bytes = RecoveryUiPdf(); var path = Path.Combine(root, "fictional-recovery-" + name + ".pdf"); await File.WriteAllBytesAsync(path, bytes);

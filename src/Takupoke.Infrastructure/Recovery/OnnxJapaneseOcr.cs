@@ -8,23 +8,46 @@ namespace Takupoke.Infrastructure.Recovery;
 public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
 {
     public bool Valid => Width is > 0 and <= 4096 && Height is > 0 and <= 4096 && Bgra.Length == checked(Width * Height * 4);
-    public bool InkFree(RecoveryBox box)
+    public bool InkFree(RecoveryBox box, bool[]? ruleMask = null)
     {
-        if (!Valid || !box.Valid) return false;
-        // Ignore the one-pixel ruled border, but preserve faint text inside it.
-        var left = Math.Clamp((int)Math.Ceiling(box.X) + 2, 0, Width); var top = Math.Clamp((int)Math.Ceiling(box.Y) + 2, 0, Height);
-        var right = Math.Clamp((int)Math.Floor(box.X + box.Width) - 2, 0, Width); var bottom = Math.Clamp((int)Math.Floor(box.Y + box.Height) - 2, 0, Height);
+        if (!Valid || !box.Valid || box.X + box.Width > Width || box.Y + box.Height > Height || ruleMask is not null && ruleMask.Length != Width * Height) return false;
+        var left = Math.Clamp((int)Math.Ceiling(box.X), 0, Width); var top = Math.Clamp((int)Math.Ceiling(box.Y), 0, Height);
+        var right = Math.Clamp((int)Math.Floor(box.X + box.Width), 0, Width); var bottom = Math.Clamp((int)Math.Floor(box.Y + box.Height), 0, Height);
         if (right <= left || bottom <= top) return false;
-        for (var y = top; y < bottom; y++) for (var x = left; x < right; x++) { var p = (y * Width + x) * 4; if (Bgra[p] != 255 || Bgra[p + 1] != 255 || Bgra[p + 2] != 255) return false; }
+        for (var y = top; y < bottom; y++) for (var x = left; x < right; x++) { var index = y * Width + x; if (ruleMask?[index] == true) continue; var p = index * 4; if (Bgra[p] != 255 || Bgra[p + 1] != 255 || Bgra[p + 2] != 255) return false; }
         return true;
+    }
+    public bool[] RuleMask(IReadOnlyList<PdfRule> rules)
+    {
+        if (!Valid) throw new InvalidDataException("OCR画像のサイズが不正です。");
+        var mask = new bool[Width * Height];
+        bool Ink(int x, int y) { var p = (y * Width + x) * 4; return Bgra[p] != 255 || Bgra[p + 1] != 255 || Bgra[p + 2] != 255; }
+        // A neighborhood around a centerline is not evidence of a stroke.
+        // Mask only physical rows/columns continuously printed along the rule;
+        // a missed glyph beside it must remain uncovered, even one pixel away.
+        foreach (var rule in rules)
+        {
+            if (rule.Horizontal)
+            {
+                var first = Math.Clamp((int)Math.Ceiling(Math.Min(rule.X1, rule.X2)), 0, Width - 1); var last = Math.Clamp((int)Math.Floor(Math.Max(rule.X1, rule.X2)), 0, Width - 1);
+                for (var y = Math.Max(0, (int)Math.Floor(rule.Y1) - 2); y <= Math.Min(Height - 1, (int)Math.Ceiling(rule.Y1) + 2); y++)
+                { var continuous = first < last; for (var x = first; x <= last && continuous; x++) continuous = Ink(x, y); if (continuous) for (var x = first; x <= last; x++) mask[y * Width + x] = true; }
+            }
+            else if (rule.Vertical)
+            {
+                var first = Math.Clamp((int)Math.Ceiling(Math.Min(rule.Y1, rule.Y2)), 0, Height - 1); var last = Math.Clamp((int)Math.Floor(Math.Max(rule.Y1, rule.Y2)), 0, Height - 1);
+                for (var x = Math.Max(0, (int)Math.Floor(rule.X1) - 2); x <= Math.Min(Width - 1, (int)Math.Ceiling(rule.X1) + 2); x++)
+                { var continuous = first < last; for (var y = first; y <= last && continuous; y++) continuous = Ink(x, y); if (continuous) for (var y = first; y <= last; y++) mask[y * Width + x] = true; }
+            }
+        }
+        return mask;
     }
     public bool HasUnrecognizedInk(IReadOnlyList<RecoveryBox> textBoxes, IReadOnlyList<PdfRule> rules)
     {
         if (!Valid) return true;
-        var covered = new bool[Width * Height];
+        var covered = RuleMask(rules);
         void Mark(int left, int top, int right, int bottom) { for (var y = Math.Max(0, top); y <= Math.Min(Height - 1, bottom); y++) for (var x = Math.Max(0, left); x <= Math.Min(Width - 1, right); x++) covered[y * Width + x] = true; }
         foreach (var box in textBoxes) Mark((int)Math.Floor(box.X) - 1, (int)Math.Floor(box.Y) - 1, (int)Math.Ceiling(box.X + box.Width) + 1, (int)Math.Ceiling(box.Y + box.Height) + 1);
-        foreach (var rule in rules) Mark((int)Math.Floor(Math.Min(rule.X1, rule.X2)) - 2, (int)Math.Floor(Math.Min(rule.Y1, rule.Y2)) - 2, (int)Math.Ceiling(Math.Max(rule.X1, rule.X2)) + 2, (int)Math.Ceiling(Math.Max(rule.Y1, rule.Y2)) + 2);
         for (var i = 0; i < covered.Length; i++) if (!covered[i] && (Bgra[i * 4] != 255 || Bgra[i * 4 + 1] != 255 || Bgra[i * 4 + 2] != 255)) return true;
         return false;
     }

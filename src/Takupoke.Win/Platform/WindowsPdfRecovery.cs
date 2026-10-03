@@ -57,7 +57,8 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                 var rules = raster.Rules(); if (raster.HasUnrecognizedInk(recognizedBoxes, rules)) throw new InvalidDataException("OCRが認識していない印字があります。読めなかった内容を省略できません。");
                 ocrPages.Add((int)i + 1); pages.Add(new(raster.Width, raster.Height, glyphs, rules));
             }
-            return await Task.Run(() => RecoveryDocumentBuilder.Build(hash, kind, pages, (page, box) => rasters[page - 1].InkFree(box), ocrPages, token), token);
+            var ruleMasks = rasters.Select(r => r.RuleMask(r.Rules())).ToArray();
+            return await Task.Run(() => RecoveryDocumentBuilder.Build(hash, kind, pages, (page, box) => rasters[page - 1].InkFree(box, ruleMasks[page - 1]), ocrPages, token), token);
         }
         finally { ocr?.Dispose(); foreach (var raster in rasters) CryptographicOperations.ZeroMemory(raster.Bgra); }
     }
