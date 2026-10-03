@@ -43,12 +43,21 @@ public static class PdfPigLayoutReader
                     token.ThrowIfCancellationRequested();
                     var name = operation.Operator;
                     if (name == "Do") throw new PdfParseException("P12", number);
-                    if (text is not null && name is "BDC" or "BMC" or "W" or "W*") throw new PdfParseException("P01", number);
+                    if (name is "BDC" or "BMC" or "W" or "W*") throw new PdfParseException("P01", number);
                     if (PdfPathEngine.Supports(name) || text is not null && PdfTextEngine.Supports(name))
                     {
                         var numbers = Numbers(operation);
                         if (PdfPathEngine.Supports(name)) paths.Operation(name, numbers);
                         if (text is not null && PdfTextEngine.Supports(name)) text.Operation(name, numbers);
+                    }
+                    // Visibility-affecting graphics state applies to every document kind.
+                    if (name == "gs")
+                    {
+                        using var serialized = new MemoryStream(); operation.Write(serialized);
+                        var items = Encoding.ASCII.GetString(serialized.ToArray()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
+                        if (items.Length != 2 || !items[0].StartsWith('/')) throw new PdfParseException("P01", number);
+                        var state = Resource(document, resources, "ExtGState", items[0][1..]);
+                        if (new[] { "Font", "SMask", "TR", "TR2" }.Any(state.Data.ContainsKey) || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1) throw new PdfParseException("P01", number);
                     }
                     if (text is null) continue;
                     switch (operation)
@@ -68,14 +77,7 @@ public static class PdfPigLayoutReader
                         case MoveToNextLineShowTextWithSpacing show:
                             text.Operation("Tw", show.WordSpacing); text.Operation("Tc", show.CharacterSpacing); text.Operation("T*"); text.Show(Bytes(show.Text, show.Bytes)); break;
                     }
-                    if (name == "gs")
-                    {
-                        using var serialized = new MemoryStream(); operation.Write(serialized);
-                        var items = Encoding.ASCII.GetString(serialized.ToArray()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
-                        if (items.Length != 2 || !items[0].StartsWith('/')) throw new PdfParseException("P01", number);
-                        var state = Resource(document, resources, "ExtGState", items[0][1..]);
-                        if (new[] { "Font", "SMask", "TR", "TR2" }.Any(state.Data.ContainsKey) || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1) throw new PdfParseException("P01", number);
-                    }
+
                 }
                 IReadOnlyList<PdfGlyph> glyphs = text is not null ? text.Finish(page.Text).Select(transform.Glyph).ToArray() : SpecialGlyphs(page, transform, token);
                 capture?.Record(number, RecoveryInputState.Partial, new PdfPageLayout(transform.Width, transform.Height, glyphs, []));

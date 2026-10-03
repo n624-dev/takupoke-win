@@ -45,4 +45,22 @@ public sealed class RecoveryModelStoreTests : IAsyncLifetime
         await new RecoveryModelStore(_root).DeleteAsync("foundryLocal"); Assert.False(File.Exists(next));
     }
 
+    [Fact] public async Task BundleStartupCleanupRetainsActiveAndLeasedAndUnrelatedDirectories()
+    {
+        var bytes = Content("ocr"); var bundle = new RecoveryModelBundle("fictional", "1", "windowsOcr", "10.0.26100", 1, "test-only", true,
+            [new("model.bin", "https://models.example.invalid/ocr", bytes.Length, NotificationDiff.Digest(bytes))]);
+        var store = new RecoveryModelBundleStore(_root);
+        var active = await store.InstallAsync(bundle, (_, _) => Task.FromResult<Stream>(new MemoryStream(bytes)), (_, _) => Task.CompletedTask);
+        var abandoned = Path.Combine(_root, "staging-" + Guid.NewGuid().ToString("N"));
+        var obsolete = Path.Combine(_root, "windowsOcr-fictional-0-" + new string('a', 64));
+        var leased = Path.Combine(_root, "windowsOcr-fictional-2-" + new string('b', 64));
+        var unrelated = Path.Combine(_root, "unrelated-directory");
+        foreach (var directory in new[] { abandoned, obsolete, leased, unrelated }) { Directory.CreateDirectory(directory); await File.WriteAllTextAsync(Path.Combine(directory, "data"), "fictional"); }
+        var temporaryPointer = Path.Combine(_root, "active.windowsOcr.json." + Guid.NewGuid().ToString("N") + ".tmp"); await File.WriteAllTextAsync(temporaryPointer, "fictional");
+        await store.CleanupAbandonedDirectoriesAsync(new HashSet<string> { leased });
+        Assert.True(Directory.Exists(active)); Assert.True(Directory.Exists(leased)); Assert.True(Directory.Exists(unrelated));
+        Assert.False(Directory.Exists(abandoned)); Assert.False(Directory.Exists(obsolete)); Assert.False(File.Exists(temporaryPointer));
+        Assert.NotNull(await store.ActiveAsync("windowsOcr"));
+    }
+
 }

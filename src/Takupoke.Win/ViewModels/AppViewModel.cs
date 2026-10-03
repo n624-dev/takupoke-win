@@ -153,6 +153,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         {
             Preferences = await _preferences.LoadAsync(token); PreferencesReady = true;
             InitializePlatform();
+            try { await _recoveryModels.CleanupBeforeProvidersAsync(token); }
+            catch (OperationCanceledException) { throw; }
+            catch (Exception e) when (e is IOException or InvalidDataException or UnauthorizedAccessException) { /* Model status is reported by ReloadAsync; school data remains available. */ }
             await ReloadAsync(token);
         });
         _timer.Start();
@@ -254,7 +257,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public Task InstallFoundryModelAsync(FoundryPinnedManifest manifest) => RunAsync(async token =>
     {
         await _recoveryModels.Foundry.InstallAsync(manifest, progress => _dispatcher.TryEnqueue(() => OperationStatus = $"端末内AIモデルを取得しています（{progress:0}%）。"), token);
-        FoundryModel = await _recoveryModels.Foundry.ActiveAsync(token); Status = "端末内AIモデルを準備しました。PDFの復旧を再度開始できます。";
+        FoundryModel = await _recoveryModels.Foundry.InstalledAsync(token); Status = "端末内AIモデルを準備しました。PDFの復旧を再度開始できます。";
     }, "端末内AIモデルを取得しています。学校資料は外部へ送信されません。");
     public Task DeleteFoundryModelAsync() => RunAsync(async token => { await _recoveryModels.Foundry.DeleteAsync(token); FoundryModel = null; Status = "端末内AIモデルを削除しました。"; });
     public async Task<byte[]> ReadRecoveryPdfAsync(MaterialKind kind, RecoveryPreview preview)
@@ -357,7 +360,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             await _school.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token), await _school.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, token),
             await _school.ReadAsync<RecoveryJob>(lease, "recovery." + kind, token), await _school.ReadAsync<RecoveryPreview>(lease, "recovery.preview." + kind, token));
         RecoveryModelMessage = null;
-        try { OcrModelReady = await _recoveryModels.OcrStateAsync(token) is not null; FoundryModel = await _recoveryModels.Foundry.ActiveAsync(token); }
+        try { OcrModelReady = await _recoveryModels.OcrStateAsync(token) is not null; FoundryModel = await _recoveryModels.Foundry.InstalledAsync(token); }
         catch (OperationCanceledException) { throw; }
         catch { OcrModelReady = false; FoundryModel = null; RecoveryModelMessage = "保存したAIモデルの状態を確認できません。資料の正常な解析結果は引き続き利用できます。モデル管理から準備し直してください。"; }
         var mappingRecord = await _school.ReadAsync<SavedMapping>(lease, "api.mapping", token); var mappings = mappingRecord?.Rules;

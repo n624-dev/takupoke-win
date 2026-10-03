@@ -108,4 +108,52 @@ public sealed class RecoveryPipelineTests
         Assert.Empty(raster.Rules()); Assert.True(raster.HasUnrecognizedInk([], raster.Rules()));
     }
 
+    private sealed class StructureProvider : ILocalRecoveryProvider
+    {
+        public string Id => "windowsLanguageModel"; public bool LocalOnly => true;
+        public RecoveryMetadata Metadata => new(Id, "fictional-structure", "1", "test", "3", RecoveryValidator.SchemaVersion, RecoveryValidator.Version, "test");
+        public int Calls;
+        public Task<LocalProviderState> AvailabilityAsync(CancellationToken token) => Task.FromResult(LocalProviderState.Ready);
+        public Task<IReadOnlyList<RecoveryLesson>> RecoverCellAsync(RecoveryPromptCell prompt, CancellationToken token)
+        {
+            Calls++;
+            RecoveryField Field(params string[] names)
+            {
+                var atoms = names.Select(n => prompt.Sources.Single(s => s.Text == n)).ToArray();
+                var top = atoms.Min(a => a.Box!.Y); var bottom = atoms.Max(a => a.Box!.Y + a.Box.Height); var left = atoms.Max(a => a.Box!.X + a.Box.Width);
+                return new(RecoveryValueState.Present, "", atoms.Select(a => a.Id).Concat(new[] {
+                    prompt.StructureCuts.Last(c => c.Axis == "horizontal" && c.Position <= top).Id,
+                    prompt.StructureCuts.First(c => c.Axis == "horizontal" && c.Position >= bottom).Id,
+                    prompt.StructureCuts.First(c => c.Axis == "vertical" && c.Position >= left).Id }).ToArray());
+            }
+            return Task.FromResult<IReadOnlyList<RecoveryLesson>>([new(Field("科目:"), Field("担当教", "員:"), Field("教室:"), [], [])]);
+        }
+    }
+    [Fact] public async Task FoldedActualLayoutNeedsProposalThenUsesOriginalValuesInFormalAnalysis()
+    {
+        var layout = Layout(MaterialKind.Timetable);
+        var body = new[] { new PdfGlyph("科目:", 74, 85, 6, 8), new PdfGlyph("架空科目A", 88, 85, 10, 8),
+            new PdfGlyph("担当教", 74, 97, 6, 8), new PdfGlyph("架空教員B", 88, 103, 10, 8), new PdfGlyph("員:", 74, 109, 4, 8),
+            new PdfGlyph("教室:", 74, 125, 6, 8), new PdfGlyph("架空教室C", 88, 125, 10, 8) };
+        layout = layout with { Glyphs = layout.Glyphs.Where(g => !(g.X >= 70 && g.X < 170 && g.Y >= 80 && g.Y < 140)).Concat(body).ToArray() };
+        bool InkFree(int _, RecoveryBox box) => !layout.Glyphs.Any(g => box.Contains(new(g.X, g.Y, g.Width, g.Height)));
+        Assert.Throws<InvalidDataException>(() => RecoveryDocumentBuilder.Build(new string('a', 64), MaterialKind.Timetable, [layout], InkFree));
+        var doc = RecoveryDocumentBuilder.Build(new string('a', 64), MaterialKind.Timetable, [layout], InkFree, allowStructureProposal: true);
+        var p = new StructureProvider(); var structure = await RecoveryStructure.ResolveAsync(doc, "windows", 10, [p], default);
+        Assert.NotNull(structure.Document); Assert.Equal(1, p.Calls);
+        var run = await RecoveryEngine.RunAsync(structure.Document!, "windows", 10, true, [], _ => null); Assert.NotNull(run.Result);
+        var source = new SourceRecord("fictional", MaterialKind.Timetable, "fictional.pdf", "fictional", "fictional.pdf", doc.PdfHash, 1, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, null);
+        var formal = RecoveryAnalysisConverter.Convert(source, structure.Document!, run.Result!, DateTimeOffset.UtcNow);
+        Assert.Equal("架空科目A", formal.Timetable!.Lessons.Single().Names.Subject); Assert.Equal("架空教員B", formal.Timetable.Lessons.Single().Names.Teacher);
+        Assert.Equal(p.Metadata, run.Result!.Metadata);
+    }
+    [Fact] public void RoleWordsInsideUnlabelledValuesCannotBeStrippedBySubstringMatching()
+    {
+        var layout = Layout(MaterialKind.Timetable);
+        var body = new[] { ("科目講義", 85d), ("担当甲", 105d), ("教室３", 125d) }
+            .SelectMany(row => row.Item1.Select((ch, i) => new PdfGlyph(ch.ToString(), 74 + i * 2, row.Item2, 2, 8))).ToArray();
+        layout = layout with { Glyphs = layout.Glyphs.Where(g => !(g.X >= 70 && g.X < 170 && g.Y >= 80 && g.Y < 140)).Concat(body).ToArray() };
+        Assert.Throws<InvalidDataException>(() => RecoveryDocumentBuilder.Build(new string('a', 64), MaterialKind.Timetable, [layout], (_, _) => true));
+    }
+
 }

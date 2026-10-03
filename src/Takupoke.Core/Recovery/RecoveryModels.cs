@@ -49,6 +49,7 @@ public sealed record RecoveryDocument(string PdfHash, RecoveryDocumentKind Kind,
     IReadOnlyDictionary<string, string> Times, IReadOnlyList<string> TimeEvidence,
     IReadOnlyList<string> NormalTimeNoteEvidence)
 {
+    public RecoveryMetadata? StructureMetadata { get; init; }
     public IReadOnlyList<string> CommonClockEvidence { get; init; } = [];
     public IReadOnlyDictionary<string, RecoveryHeaderRegion> CommonClockRegions { get; init; } = new Dictionary<string, RecoveryHeaderRegion>();
     public IReadOnlyList<string> DocumentTitleEvidence { get; init; } = [];
@@ -61,7 +62,7 @@ public sealed record RecoveryLesson(RecoveryField Subject, RecoveryField Teacher
     IReadOnlyList<string> DateEvidence, IReadOnlyList<string> PeriodEvidence);
 public sealed record RecoveredCell(string CellId, RecoveryValueState State, IReadOnlyList<RecoveryLesson> Lessons);
 public sealed record RecoveryMetadata(string Provider, string ModelId, string ModelVersion, string RuntimeVersion,
-    string PromptVersion, int RecoverySchemaVersion, int ValidatorVersion, string OsVersion, string RecoveryVersion = "1");
+    string PromptVersion, int RecoverySchemaVersion, int ValidatorVersion, string OsVersion, string RecoveryVersion = "2");
 public sealed record RecoveryResult(string PdfHash, RecoveryDocumentKind Kind, int SchoolYear, string? Term,
     IReadOnlyList<RecoveredCell> Cells, RecoveryMetadata Metadata);
 public sealed record RecoveryJob(string PdfHash, RecoveryDocumentKind Kind, RecoveryJobState State,

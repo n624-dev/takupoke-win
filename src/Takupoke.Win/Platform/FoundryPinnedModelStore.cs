@@ -20,6 +20,7 @@ public sealed record FoundryPinnedManifest(string ModelId, string Version, long 
 public sealed class FoundryPinnedModelStore(string root)
 {
     private readonly SemaphoreSlim _gate = new(1, 1);
+    private sealed record InstalledRecord(FoundryPinnedManifest Manifest, string CacheDirectory);
     private string CacheRoot => Path.Combine(root, "models", "foundry-cache");
     private string Pointer => Path.Combine(root, "models", "foundry-active.json");
     public static IReadOnlyList<FoundryPinnedManifest> Candidates => DataCodec.Decode<FoundryPinnedManifest[]>(File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Assets", "Recovery", "foundry-candidates.json")));
@@ -41,8 +42,23 @@ public sealed class FoundryPinnedModelStore(string root)
         foreach (var a in manifest.Artifacts) { await using var input = File.OpenRead(Path.Combine(path, a.Path.Replace('/', Path.DirectorySeparatorChar))); if (input.Length != a.Size || Convert.ToHexStringLower(await SHA256.HashDataAsync(input, token)) != a.Sha256) return false; }
         return true;
     }
+    // An installed but revoked model remains visible for deletion. Approval is
+    // required separately by ActiveAsync/OpenAsync before any inference.
+    private async Task<InstalledRecord?> InstalledRecordAsync(CancellationToken token)
+    {
+        if (!File.Exists(Pointer)) return null;
+        var bytes = await File.ReadAllBytesAsync(Pointer, token);
+        using var json = JsonDocument.Parse(bytes);
+        var record = json.RootElement.TryGetProperty("manifest", out _) ? DataCodec.Decode<InstalledRecord>(bytes) : new(DataCodec.Decode<FoundryPinnedManifest>(bytes), "");
+        if (!record.Manifest.WellFormed || record.CacheDirectory.Length > 0 && !OwnedCachePath(record.CacheDirectory))
+            throw new InvalidDataException("保存モデルManifestを確認できません。");
+        return record;
+    }
+    private bool OwnedCachePath(string path) => Path.IsPathFullyQualified(path) &&
+        Path.GetFullPath(path).StartsWith(Path.GetFullPath(CacheRoot) + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase);
+    public async Task<FoundryPinnedManifest?> InstalledAsync(CancellationToken token) => (await InstalledRecordAsync(token))?.Manifest;
     public async Task<FoundryPinnedManifest?> ActiveAsync(CancellationToken token)
-    { if (!File.Exists(Pointer)) return null; var m = DataCodec.Decode<FoundryPinnedManifest>(await File.ReadAllBytesAsync(Pointer, token)); return Approved(m) ? m : null; }
+    { var m = await InstalledAsync(token); return m is not null && Approved(m) ? m : null; }
     public async Task<FoundryLocalRecoveryProvider?> OpenAsync(CancellationToken token)
     {
         var active = await ActiveAsync(token); if (active is null) return null;
@@ -56,7 +72,7 @@ public sealed class FoundryPinnedModelStore(string root)
         await _gate.WaitAsync(token); IModel? candidate = null; var wasCached = false; var committed = false;
         try
         {
-            var previous = await ActiveAsync(token); candidate = await ModelAsync(manifest, token); var originalPath = await candidate.GetPathAsync(token); wasCached = originalPath is not null && Directory.Exists(originalPath);
+            var previous = await InstalledAsync(token); candidate = await ModelAsync(manifest, token); var originalPath = await candidate.GetPathAsync(token); wasCached = originalPath is not null && Directory.Exists(originalPath);
             await candidate.DownloadAsync(progress, token); if (!await VerifyAsync(candidate, manifest, token)) throw new InvalidDataException("取得したモデルのSHA-256が一致しません。");
             await using (var provider = new FoundryLocalRecoveryProvider(candidate, manifest.ProviderManifest, t => VerifyAsync(candidate, manifest, t), GC.GetGCMemoryInfo().TotalAvailableMemoryBytes))
             {
@@ -64,15 +80,39 @@ public sealed class FoundryPinnedModelStore(string root)
                 var output = await provider.RecoverCellAsync(prompt, token);
                 if (output.Count != 1 || output[0].Subject.Value != "架空科目A" || output[0].Teacher.Value != "架空教員B" || output[0].Room.Value != "架空教室C" || !output[0].Subject.Evidence.SequenceEqual(["s"]) || !output[0].Teacher.Evidence.SequenceEqual(["t"]) || !output[0].Room.Evidence.SequenceEqual(["r"])) throw new InvalidRecoveryOutputException();
             }
-            token.ThrowIfCancellationRequested(); await DataCodec.AtomicWriteAsync(Pointer, DataCodec.Encode(manifest), token); committed = true;
-            if (previous is not null && previous.ModelId != manifest.ModelId) { var old = await ModelAsync(previous, token); try { await old.RemoveFromCacheAsync(token); } catch (IOException) { } }
+            var installedPath = await candidate.GetPathAsync(token);
+            if (installedPath is null || !OwnedCachePath(installedPath)) throw new InvalidDataException("モデルの保存先を確認できません。");
+            token.ThrowIfCancellationRequested(); await DataCodec.AtomicWriteAsync(Pointer, DataCodec.Encode(new InstalledRecord(manifest, Path.GetFullPath(installedPath))), token); committed = true;
+            if (previous is not null && previous.ModelId != manifest.ModelId)
+            { try { var old = await ModelAsync(previous, token); await old.RemoveFromCacheAsync(token); } catch (Exception e) when (e is IOException or InvalidDataException) { /* New verified pointer remains active. */ } }
         }
         finally { try { if (!wasCached && !committed && candidate is not null) await candidate.RemoveFromCacheAsync(CancellationToken.None); } finally { _gate.Release(); } }
     }
     public async Task DeleteAsync(CancellationToken token)
     {
-        await _gate.WaitAsync(token); try { var active = await ActiveAsync(token); if (active is null) return; var model = await ModelAsync(active, token); token.ThrowIfCancellationRequested(); File.Delete(Pointer); await model.RemoveFromCacheAsync(token); } finally { _gate.Release(); }
+        await _gate.WaitAsync(token);
+        try
+        {
+            var installed = await InstalledRecordAsync(token); if (installed is null) return;
+            token.ThrowIfCancellationRequested();
+            if (installed.CacheDirectory.Length > 0)
+            {
+                // The app owns this SDK cache root and records the verified
+                // directory at installation. Deletion remains possible if a
+                // model is later removed from the catalog or approval list.
+                if (Directory.Exists(installed.CacheDirectory)) Directory.Delete(installed.CacheDirectory, true);
+            }
+            else
+            {
+                var model = await ModelAsync(installed.Manifest, token);
+                await model.RemoveFromCacheAsync(token);
+            }
+            // Keep the retryable ownership pointer until removal succeeds.
+            File.Delete(Pointer);
+        }
+        finally { _gate.Release(); }
     }
+
 }
 public sealed class LazyFoundryRecoveryProvider(FoundryPinnedModelStore models) : ILocalRecoveryProvider, IAsyncDisposable
 {

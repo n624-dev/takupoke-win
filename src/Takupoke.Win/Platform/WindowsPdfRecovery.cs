@@ -58,7 +58,7 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                 ocrPages.Add((int)i + 1); pages.Add(new(raster.Width, raster.Height, glyphs, rules));
             }
             var ruleMasks = rasters.Select(r => r.RuleMask(r.Rules())).ToArray();
-            return await Task.Run(() => RecoveryDocumentBuilder.Build(hash, kind, pages, (page, box) => rasters[page - 1].InkFree(box, ruleMasks[page - 1]), ocrPages, token), token);
+            return await Task.Run(() => RecoveryDocumentBuilder.Build(hash, kind, pages, (page, box) => rasters[page - 1].InkFree(box, ruleMasks[page - 1]), ocrPages, token, allowStructureProposal: true), token);
         }
         finally { ocr?.Dispose(); foreach (var raster in rasters) CryptographicOperations.ZeroMemory(raster.Bgra); }
     }

@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 using Xunit;
 
 namespace Takupoke.Core.Tests;
-public class RecoveryTests
+public partial class RecoveryTests
 {
     private static (RecoveryDocument Doc, RecoveryResult Result) Fixture()
     {

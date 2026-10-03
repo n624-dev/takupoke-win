@@ -9,7 +9,7 @@ namespace Takupoke.Core.Recovery;
 public static class RecoveryValidator
 {
     public const int SchemaVersion = 2;
-    public const int Version = 2;
+    public const int Version = 3;
     public static string Fingerprint<T>(T value) => Convert.ToHexStringLower(SHA256.HashData(JsonSerializer.SerializeToUtf8Bytes(value)));
     private static string Text(string value) => Regex.Replace(value.Normalize(NormalizationForm.FormKC), @"\s+", "").Replace('~', '〜').Replace('～', '〜');
     public static IReadOnlyList<string> SpecialClasses { get; } = new[] { "1_1", "1_2", "1_3" }.Concat(Enumerable.Range(2, 4).SelectMany(y => new[] { "CN", "ES", "IT" }.Select(c => $"{y}_{c}"))).Concat(new[] { "AI_1", "AI_2" }).ToArray();
@@ -24,7 +24,7 @@ public static class RecoveryValidator
         try { return ValidateCore(doc, result); }
         catch (Exception e) when (e is NullReferenceException or ArgumentException or KeyNotFoundException or InvalidOperationException) { return new(["malformedInput"]); }
     }
-    private static RecoveryValidation ValidateCore(RecoveryDocument doc, RecoveryResult result)
+    private static RecoveryValidation ValidateCore(RecoveryDocument doc, RecoveryResult result, bool structurePreflight = false)
     {
         var errors = new List<string>();
         if (doc.SchoolYear is < 1900 or > 9998 || doc.Classes.Count is < 1 or > 64 || doc.Days.Count is < 1 or > 31 || doc.Cells.Count is < 1 or > 20000 || doc.Sources.Count > 100000 || result.Cells.Count > 20000) return new(["inputLimit"]);
@@ -37,6 +37,7 @@ public static class RecoveryValidator
         Check(result.Metadata.RecoverySchemaVersion == SchemaVersion && result.Metadata.ValidatorVersion == Version &&
             new[] { result.Metadata.Provider, result.Metadata.ModelId, result.Metadata.ModelVersion, result.Metadata.RuntimeVersion,
                 result.Metadata.PromptVersion, result.Metadata.OsVersion, result.Metadata.RecoveryVersion }.All(v => !string.IsNullOrWhiteSpace(v)), "versions");
+        Check(doc.StructureMetadata is null || doc.StructureMetadata == result.Metadata, "structureMetadata");
         Check(doc.Classes.Count > 0 && doc.Classes.Distinct().Count() == doc.Classes.Count && doc.Classes.All(ClassSelection.Candidates.Contains) && doc.Days.Count > 0 && doc.Days.Distinct().Count() == doc.Days.Count, "scope");
         if (doc.Kind != RecoveryDocumentKind.Timetable) Check(SpecialClasses.ToHashSet().SetEquals(doc.Classes) && doc.Days.Count == 5, "specialScope");
         var maxPeriod = doc.Kind == RecoveryDocumentKind.Exam ? 6 : 8;
@@ -212,7 +213,7 @@ public static class RecoveryValidator
             var bodyIds = cell.SourceIds.Where(id => !inlineLabelIds.Contains(id)).ToHashSet();
             if (proposal)
             {
-                Check(cell.LessonBindings.Count == 0 && !cell.ConfirmedEmpty && cell.RoleScopes.Count == cell.ParallelCount * 3 &&
+                Check(cell.LessonBindings.Count == 0 && !cell.ConfirmedEmpty && (structurePreflight && RecoveryStructure.Pending(cell) || cell.RoleScopes.Count == cell.ParallelCount * 3) &&
                     cell.RoleScopes.Select(s => (s.LessonIndex, s.Role)).Distinct().Count() == cell.RoleScopes.Count, "roleScopeCount");
                 foreach (var scope in cell.RoleScopes)
                 {
@@ -225,7 +226,7 @@ public static class RecoveryValidator
                 }
                 Check(!cell.RoleScopes.SelectMany((a, i) => cell.RoleScopes.Skip(i + 1).Select(b => (a, b))).Any(p =>
                     Math.Min(p.a.Box.X + p.a.Box.Width, p.b.Box.X + p.b.Box.Width) > Math.Max(p.a.Box.X, p.b.Box.X) && Math.Min(p.a.Box.Y + p.a.Box.Height, p.b.Box.Y + p.b.Box.Height) > Math.Max(p.a.Box.Y, p.b.Box.Y)), "roleScopeOverlap");
-                Check(bodyIds.All(id => cell.RoleScopes.Count(s => s.Box.Contains(sources[id].Box)) == 1), "roleBodyCoverage");
+                Check(structurePreflight && RecoveryStructure.Pending(cell) || bodyIds.All(id => cell.RoleScopes.Count(s => s.Box.Contains(sources[id].Box)) == 1), "roleBodyCoverage");
             }
             var bindingIds = cell.LessonBindings.SelectMany(b => b.Subject.Concat(b.Teacher).Concat(b.Room)).ToArray();
             Check(proposal || (cell.ConfirmedEmpty ? cell.LessonBindings.Count == 0 : cell.LessonBindings.Count == cell.ParallelCount && bindingIds.Distinct().Count() == bindingIds.Length && bindingIds.ToHashSet().SetEquals(cell.SourceIds)), "lessonBinding");
@@ -267,7 +268,18 @@ public static class RecoveryValidator
         return new(errors);
     }
     public static IReadOnlyList<string> InputErrors(RecoveryDocument doc) => Validate(doc, new(doc.PdfHash, doc.Kind, doc.SchoolYear, doc.Term,
-        doc.Cells.Select(c => new RecoveredCell(c.Id, RecoveryValueState.Missing, [])).ToArray(), new("rule", "rules", "1", "1", "1", SchemaVersion, Version, "preflight"))).Errors.Where(e => e is not "cellState" and not "rolePartition").ToArray();
+        doc.Cells.Select(c => new RecoveredCell(c.Id, RecoveryValueState.Missing, [])).ToArray(), doc.StructureMetadata ?? new("rule", "rules", "1", "1", "1", SchemaVersion, Version, "preflight"))).Errors.Where(e => e is not "cellState" and not "rolePartition").ToArray();
+    internal static IReadOnlyList<string> StructureInputErrors(RecoveryDocument doc)
+    {
+        try
+        {
+            var result = new RecoveryResult(doc.PdfHash, doc.Kind, doc.SchoolYear, doc.Term,
+                doc.Cells.Select(c => new RecoveredCell(c.Id, RecoveryValueState.Missing, [])).ToArray(),
+                doc.StructureMetadata ?? new("rule", "rules", "1", "1", "1", SchemaVersion, Version, "preflight"));
+            return ValidateCore(doc, result, structurePreflight: true).Errors.Where(e => e is not "cellState" and not "rolePartition").ToArray();
+        }
+        catch (Exception e) when (e is NullReferenceException or ArgumentException or KeyNotFoundException or InvalidOperationException) { return ["malformedInput"]; }
+    }
     public static bool CanReuse(RecoveryAcceptance acceptance, RecoveryDocument document, RecoveryResult result) =>
         acceptance.PdfHash == document.PdfHash && acceptance.ResultHash == Fingerprint(result) && acceptance.ScopeHash == Fingerprint(document)
         && acceptance.Metadata == result.Metadata && Validate(document, result).CanAdopt;

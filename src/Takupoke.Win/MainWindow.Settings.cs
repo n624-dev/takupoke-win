@@ -30,16 +30,15 @@ public sealed partial class MainWindow
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(mainColor, "メインカラー");
         mainColor.SelectionChanged += async (_, _) =>
         {
-            if (mainColor.SelectedItem is ComboBoxItem { Tag: string value } && value != initialMainColor
+            if (mainColor.SelectedItem is ComboBoxItem { Tag: string value }
                 && value != _model.Preferences.MainColor && mainColor.IsLoaded)
                 await _model.SavePreferencesAsync(current => current with { MainColor = value });
         };
         var opening = PreferenceControl(new ComboBox { MinWidth = 155, ItemsSource = new[] { "アプリ内で開く", "既定のブラウザ" }, SelectedIndex = (int)_model.Preferences.OpeningMode });
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(opening, "link-opening-mode");
-        var initialOpening = opening.SelectedIndex;
         opening.SelectionChanged += async (_, _) =>
         {
-            if (opening.IsLoaded && opening.SelectedIndex is >= 0 and <= 1 && opening.SelectedIndex != initialOpening
+            if (opening.IsLoaded && opening.SelectedIndex is >= 0 and <= 1
                 && opening.SelectedIndex != (int)_model.Preferences.OpeningMode)
                 { var value = (LinkOpeningMode)opening.SelectedIndex; await _model.SavePreferencesAsync(current => current with { OpeningMode = value }); }
         };

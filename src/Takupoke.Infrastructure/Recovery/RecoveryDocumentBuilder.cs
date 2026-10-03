@@ -37,9 +37,9 @@ public static class RecoveryDocumentBuilder
                 // Retain real per-character geometry; do not invent sub-boxes for an OCR line.
                 var text = PdfGrid.Key(string.Concat(piece.Select(a => a.Glyph.Text)));
                 yield return new(text, row.Key, Bounds(piece), piece.Select(a => a.Id).ToArray());
-                var pattern = @"[1-8]時限目|[1-8][・〜-][1-8]時限連続|\d{1,2}:\d{2}[~〜～]\d{1,2}:\d{2}|(?:令和\d{1,2}|\d{4})年度|前期|後期|試験返却時間割|定期試験時間割|試験時間割|通常時間割|授業時間割|時間割|" + RecoveryRoleLabels.Pattern;
+                var pattern = @"[1-8]時限目|[1-8][・〜-][1-8]時限連続|\d{1,2}:\d{2}[~〜～]\d{1,2}:\d{2}|(?:令和\d{1,2}|\d{4})年度|前期|後期|試験返却時間割|定期試験時間割|試験時間割|通常時間割|授業時間割|時間割";
                 var raw = string.Concat(piece.Select(a => a.Glyph.Text));
-                foreach (Match match in Regex.Matches(raw, "(?:" + pattern + ")[：:]?"))
+                foreach (Match match in Regex.Matches(raw, "(?:" + pattern + ")[：:]?|(?:" + RecoveryRoleLabels.Pattern + ")[：:]"))
                 {
                     var offset = 0; var selected = new List<Atom>();
                     foreach (var atom in piece) { var end = offset + atom.Glyph.Text.Length; if (offset >= match.Index && end <= match.Index + match.Length) selected.Add(atom); offset = end; }
@@ -66,7 +66,7 @@ public static class RecoveryDocumentBuilder
         try { return new DateOnly(y, month, int.Parse(m.Groups[3].Value)).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture); } catch (ArgumentOutOfRangeException) { return null; }
     }
     public static RecoveryDocument Build(string hash, MaterialKind materialKind, IReadOnlyList<PdfPageLayout> pages,
-        Func<int, RecoveryBox, bool> inkFree, IReadOnlySet<int>? ocrPages = null, CancellationToken token = default)
+        Func<int, RecoveryBox, bool> inkFree, IReadOnlySet<int>? ocrPages = null, CancellationToken token = default, bool allowStructureProposal = false)
     {
         var kind = RecoveryPolicy.Kind(materialKind) ?? throw new InvalidDataException("PDF復旧の対象外です。");
         if (pages.Count is < 1 or > 12) throw new InvalidDataException("PDFのページ数が上限を超えています。");
@@ -166,14 +166,17 @@ public static class RecoveryDocumentBuilder
                         else if (trustedSpecial is not null) { var matched = trustedSpecial.Lessons.Where(l => l.Page == pi && l.ClassName == cls.Value && l.Date == day.Value && l.Period == slots.Min(s => s.Period)).ToArray(); if (matched.Length == 1) trustedNames = matched[0].Names; }
                         var rows = PdfGrid.Rows(inside.Select(a => a.Glyph));
                         var text = rows.Select(r => PdfGrid.Key(string.Concat(r.Select(g => g.Text)))).ToArray();
-                        if (trustedNames is null || rows.Count != 3 || !text.SequenceEqual(new[] { trustedNames.Subject, trustedNames.Teacher, trustedNames.Room }.Select(PdfGrid.Key))) throw;
-                        var bindings = rows.Select(r => (IReadOnlyList<string>)r.Select(g => inside.Single(a => ReferenceEquals(a.Glyph, g)).Id).ToArray()).ToArray();
-                        fixedBindings = [new(bindings[0], bindings[1], bindings[2])];
+                        if (trustedNames is not null && rows.Count == 3 && text.SequenceEqual(new[] { trustedNames.Subject, trustedNames.Teacher, trustedNames.Room }.Select(PdfGrid.Key)))
+                        {
+                            var bindings = rows.Select(r => (IReadOnlyList<string>)r.Select(g => inside.Single(a => ReferenceEquals(a.Glyph, g)).Id).ToArray()).ToArray();
+                            fixedBindings = [new(bindings[0], bindings[1], bindings[2])];
+                        }
+                        else if (!allowStructureProposal || inside.Length > 512) throw;
                     }
                 }
                 foreach (var a in inside) sources[a.Id] = sources[a.Id] with { CellId = id };
                 var blanks = scopes.Where(s => s.EmptyVerified).Select(s => s.Role.ToString().ToLowerInvariant()).ToArray();
-                var parallelCount = empty || fixedBindings.Count > 0 ? 1 : scopes.Select(s => s.LessonIndex).Distinct().Count();
+                var parallelCount = empty || fixedBindings.Count > 0 || scopes.Count == 0 ? 1 : scopes.Select(s => s.LessonIndex).Distinct().Count();
                 var cell = new RecoveryCell(id, pi, box, RecoveryInputState.Complete, slots, inside.Select(a => a.Id).ToArray(), blanks, empty, parallelCount)
                 { BindingMode = empty || fixedBindings.Count > 0 ? RecoveryBindingMode.Fixed : RecoveryBindingMode.RoleProposal, RoleScopes = scopes, LessonBindings = fixedBindings,
                     ClassHeaderIds = cls.Ids, DayHeaderIds = day.Ids, PeriodHeaderIds = chosenPeriods.SelectMany(l => l.Ids).ToArray(),

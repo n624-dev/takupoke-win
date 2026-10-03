@@ -3,8 +3,13 @@ using System.Text.Json;
 namespace Takupoke.Core.Recovery;
 
 public sealed record RecoveryPromptCell(string CellId, IReadOnlyList<RecoverySlot> Slots, IReadOnlyList<RecoveryPromptSource> Sources,
-    IReadOnlyList<string> BlankFields, int ParallelCount, IReadOnlyList<RecoveryLessonBinding> LessonBindings, IReadOnlyList<RecoveryRoleScope>? RoleScopes = null);
-public sealed record RecoveryPromptSource(string Id, string Text, RecoveryBox? Box = null, int? Page = null);
+    IReadOnlyList<string> BlankFields, int ParallelCount, IReadOnlyList<RecoveryLessonBinding> LessonBindings, IReadOnlyList<RecoveryRoleScope>? RoleScopes = null)
+{
+    public string Mode { get; init; } = "fieldExtraction";
+    public IReadOnlyList<RecoveryStructureCut> StructureCuts { get; init; } = [];
+}
+public sealed record RecoveryStructureCut(string Id, string Axis, double Position);
+public sealed record RecoveryPromptSource(string Id, string Text, RecoveryBox? Box = null, int? Page = null, int? SourceLine = null, int? SourceOrder = null);
 public interface ILocalRecoveryProvider
 {
     string Id { get; }
@@ -81,7 +86,7 @@ public static class RecoveryEngine
         RecoveryResult Result(RecoveryMetadata metadata) => new(document.PdfHash, document.Kind, document.SchoolYear, document.Term, recovered.Select(c => c!).ToArray(), metadata);
         if (missing.Length == 0)
         {
-            var result = Result(new("rule", "rules", "1", "1", "1", RecoveryValidator.SchemaVersion, RecoveryValidator.Version, os + ":" + osMajor));
+            var result = Result(document.StructureMetadata ?? new("rule", "rules", "1", "1", "1", RecoveryValidator.SchemaVersion, RecoveryValidator.Version, os + ":" + osMajor));
             var validation = RecoveryValidator.Validate(document, result);
             token.ThrowIfCancellationRequested();
             return new(validation.CanAdopt ? RecoveryJobState.AwaitingConfirmation : RecoveryJobState.Failed, validation.CanAdopt ? result : null, validation.Errors);

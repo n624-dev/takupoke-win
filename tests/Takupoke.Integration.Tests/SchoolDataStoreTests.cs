@@ -271,7 +271,11 @@ public sealed class SchoolDataStoreTests : IAsyncLifetime
     {
         await using var store = Store(); var (lease, source, audit) = await AwaitingRecoveryAsync(store);
         var strict = Takupoke.Infrastructure.Recovery.RecoveryAnalysisConverter.Convert(source, audit.Document, audit.Result, _clock.Now);
+        var staleJob = (await store.ReadAsync<RecoveryJob>(lease, "recovery.Exam"))!;
+        var stalePreview = (await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Exam"))!;
         await store.SaveAnalysisAsync(lease, strict);
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => store.SaveRecoveryProgressAsync(lease, source, staleJob, stalePreview));
+        Assert.Null(await store.ReadAsync<RecoveryJob>(lease, "recovery.Exam"));
         Assert.Null(await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Exam"));
         await Assert.ThrowsAnyAsync<OperationCanceledException>(() => store.SaveRecoveryAsync(lease, source, audit, _clock.Now));
         Assert.Null((await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"))!.Recovery);
@@ -288,4 +292,24 @@ public sealed class SchoolDataStoreTests : IAsyncLifetime
     }
     private SourceRecord Source(string id, byte[] bytes) => new(id, MaterialKind.Timetable, Path.Combine(_root, "fake.pdf"), "fake-identity", "架空資料A.pdf",
         NotificationDiff.Digest(bytes), bytes.Length, _clock.Now, _clock.Now, null);
+    private sealed class RecoveryIdentity : Takupoke.Infrastructure.Materials.IFileIdentityProvider
+    { public string Identity(FileStream stream) => "fictional-recovery-identity"; }
+    [Fact] public async Task ForegroundRecoveryPreservesPersistedJobStartWhileCreatingPreview()
+    {
+        _clock.Now = new(2026, 10, 1, 12, 0, 0, TimeSpan.FromHours(9));
+        await using var store = Store(); var lease = await store.BeginAsync();
+        var bytes = PdfParsingTests.SyntheticPdf(); var path = Path.Combine(_root, "fictional-coordinator.pdf"); await File.WriteAllBytesAsync(path, bytes);
+        var source = Source("fictional-coordinator", bytes) with { Kind = MaterialKind.Exam, Path = path, FileIdentity = "fictional-recovery-identity" };
+        await store.SaveOriginalAsync(lease, source, bytes);
+        var material = new Takupoke.Infrastructure.Materials.MaterialCoordinator(store, new(new RecoveryIdentity()), _clock);
+        var layout = RecoveryPipelineTests.Layout(MaterialKind.Exam);
+        var coordinator = new RecoveryCoordinator(store, material,
+            (_, kind, hash, _, _) => Task.FromResult(RecoveryDocumentBuilder.Build(hash, kind, [layout], (_, box) => !layout.Glyphs.Any(g => box.Contains(new(g.X, g.Y, g.Width, g.Height))))),
+            _ => Task.FromResult<IReadOnlyList<ILocalRecoveryProvider>>([]), TimeProvider.System);
+        var prepared = await coordinator.PrepareAsync(MaterialKind.Exam, 2026);
+        Assert.Equal(RecoveryJobState.AwaitingConfirmation, prepared.State); Assert.NotNull(prepared.Preview);
+        Assert.NotNull(await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Exam"));
+        Assert.Equal(_clock.GetUtcNow(), (await store.ReadAsync<RecoveryJob>(lease, "recovery.Exam"))!.CreatedAt);
+    }
+
 }

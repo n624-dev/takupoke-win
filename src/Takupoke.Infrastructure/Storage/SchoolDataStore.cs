@@ -271,6 +271,18 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
             try { var current = DataCodec.Decode<SourceRecord>(plain); if (current.Id != source.Id || current.Digest != source.Digest) throw new OperationCanceledException("復旧中に資料が更新されました。"); }
             finally { CryptographicOperations.ZeroMemory(plain); }
         }
+        async Task<T?> Current<T>(string entryKey)
+        {
+            using var read = connection.CreateCommand(); read.Transaction = transaction; read.CommandText = "SELECT payload FROM entry WHERE key=$key"; read.Parameters.AddWithValue("$key", entryKey);
+            if (await read.ExecuteScalarAsync(token) is not byte[] payload) return default;
+            var plain = _cipher!.Decrypt(payload, entryKey); try { return DataCodec.Decode<T>(plain); } finally { CryptographicOperations.ZeroMemory(plain); }
+        }
+        var attempt = await Current<MaterialAttempt>("attempt." + source.Kind);
+        if (attempt?.SourceDigest != source.Digest || attempt.ParserVersion != Takupoke.Infrastructure.Materials.MaterialCoordinator.ParserVersion(source.Kind) || attempt.Failure is null || !RecoveryPolicy.Eligible(source.Kind, attempt.Failure))
+            throw new OperationCanceledException("通常解析の状態が変わりました。もう一度資料を確認してください。");
+        var currentJob = await Current<RecoveryJob>("recovery." + source.Kind);
+        if (currentJob is null || currentJob.PdfHash != source.Digest || currentJob.Kind != job.Kind || currentJob.CreatedAt != job.CreatedAt)
+            throw new OperationCanceledException("復旧処理が更新されました。現在の資料を確認してください。");
         foreach (var entry in new (string Key, object? Value)[] { ("recovery." + source.Kind, job), ("recovery.preview." + source.Kind, preview) })
         {
             using var write = connection.CreateCommand(); write.Transaction = transaction; write.Parameters.AddWithValue("$key", entry.Key);

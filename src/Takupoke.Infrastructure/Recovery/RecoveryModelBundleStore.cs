@@ -59,6 +59,40 @@ public sealed class RecoveryModelBundleStore(string root)
         if (runtime is not "windowsOcr" and not "foundryLocal") throw new ArgumentException("Unknown runtime.");
         await _gate.WaitAsync(token); try { var pointer = Path.Combine(root, "active." + runtime + ".json"); if (!File.Exists(pointer)) return null; var bundle = DataCodec.Decode<RecoveryModelBundle>(await File.ReadAllBytesAsync(pointer, token)); var path = Path.Combine(root, DirectoryName(bundle)); return bundle.Runtime == runtime && await VerifyAsync(bundle, path, token) ? (bundle, path) : null; } finally { _gate.Release(); }
     }
+    /// Run before providers start. Retain active and explicitly leased bundle
+    /// directories; remove only this store's owned crash leftovers.
+    public async Task CleanupAbandonedDirectoriesAsync(IReadOnlySet<string> inUse, CancellationToken token = default)
+    {
+        await _gate.WaitAsync(token);
+        try
+        {
+            if (!Directory.Exists(root)) return;
+            var retained = inUse.Select(Path.GetFullPath).ToHashSet(StringComparer.OrdinalIgnoreCase);
+            foreach (var runtime in new[] { "windowsOcr", "foundryLocal" })
+            {
+                var pointer = Path.Combine(root, "active." + runtime + ".json");
+                if (!File.Exists(pointer)) continue;
+                var bundle = DataCodec.Decode<RecoveryModelBundle>(await File.ReadAllBytesAsync(pointer, token));
+                if (!bundle.Valid || bundle.Runtime != runtime) throw new InvalidDataException("保存モデルManifestを確認できません。");
+                retained.Add(Path.GetFullPath(Path.Combine(root, DirectoryName(bundle))));
+            }
+            foreach (var directory in Directory.EnumerateDirectories(root))
+            {
+                token.ThrowIfCancellationRequested();
+                var name = Path.GetFileName(directory);
+                var owned = Regex.IsMatch(name, @"^(?:staging-[a-f0-9]{32}|(?:windowsOcr|foundryLocal)-[A-Za-z0-9._-]{1,100}-[A-Za-z0-9._-]{1,100}-[a-f0-9]{64})$");
+                if (owned && !retained.Contains(Path.GetFullPath(directory)) && (File.GetAttributes(directory) & FileAttributes.ReparsePoint) == 0)
+                    try { Directory.Delete(directory, true); } catch (IOException) { } catch (UnauthorizedAccessException) { }
+            }
+            foreach (var file in Directory.EnumerateFiles(root))
+            {
+                token.ThrowIfCancellationRequested();
+                if (Regex.IsMatch(Path.GetFileName(file), @"^active\.(?:windowsOcr|foundryLocal)\.json\.[a-f0-9]{32}\.tmp$") && (File.GetAttributes(file) & FileAttributes.ReparsePoint) == 0)
+                    try { File.Delete(file); } catch (IOException) { } catch (UnauthorizedAccessException) { }
+            }
+        }
+        finally { _gate.Release(); }
+    }
     public async Task DeleteAsync(string runtime, CancellationToken token = default)
     {
         if (runtime is not "windowsOcr" and not "foundryLocal") throw new ArgumentException("Unknown runtime.");

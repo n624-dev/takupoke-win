@@ -62,6 +62,7 @@ internal static partial class Program
             var preferences = Path.Combine(args[1], "preferences.json");
             Wait(() => !Visible("status-bar"), "idle footer is hidden");
             var bodyColor = TextColor("page-settings");
+            var initialOpeningMode = CheckSettingsKeyboardRoundTrip(preferences);
             foreach (var color in new[] { "green", "yellow", "orange", "red", "pink", "blue", "default", "purple" })
             {
                 SelectMainColor(color, preferences);
@@ -204,6 +205,7 @@ internal static partial class Program
             Wait(() => FindLessons("架空科目甲").Length > 0, "accepted timetable remains after source is unavailable");
             Navigate("settings");
             Require(SavedMainColor(preferences) == "purple", "Main color survives app restart.");
+            Require(SavedSettings(preferences).OpeningMode == initialOpeningMode, "A to B to A link-opening choice survives app restart.");
             Require(TextColor("page-settings") == bodyColor, "Restart retains theme text color.");
             Invoke("settings-materials");
             Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "file selected through the native picker survives restart");

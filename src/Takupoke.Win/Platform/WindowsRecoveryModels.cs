@@ -13,6 +13,7 @@ public sealed class WindowsRecoveryModels(string root)
      new("rec.onnx", "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec_onnx/resolve/ed152b8b495f84de93cda5709d768548a9127622/inference.onnx", 16534782, "da72dc72ca4dc220df0dfde68c1dedc31c58d3e76a25871122e5056227d50092")]);
     private static string DictionaryPath => Path.Combine(AppContext.BaseDirectory, "Assets", "Recovery", "ocr-characters.json");
     private static async Task VerifyDictionary(CancellationToken token) { await using var input = File.OpenRead(DictionaryPath); if (Convert.ToHexStringLower(await SHA256.HashDataAsync(input, token)) != "d858428fbe0ada92b439a5f277b51bc1b318fd985d80946a3ce859d7f2446a92") throw new InvalidDataException("OCR辞書のSHA-256が一致しません。"); }
+    public Task CleanupBeforeProvidersAsync(CancellationToken token) => _store.CleanupAbandonedDirectoriesAsync(new HashSet<string>(), token);
     public Task<(RecoveryModelBundle Bundle, string Path)?> OcrStateAsync(CancellationToken token) => _store.ActiveAsync("windowsOcr", token);
     public async Task InstallOcrAsync(Action<long, long>? progress, CancellationToken token)
     {

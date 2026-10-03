@@ -8,8 +8,8 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class PdfScheduleParser
 {
-    public const int TimetableVersion = 11;
-    public const int SpecialVersion = 10;
+    public const int TimetableVersion = 12;
+    public const int SpecialVersion = 11;
     private const int MaximumRecords = 10000;
     private static string Joined(IEnumerable<PdfGlyph> glyphs) => string.Concat(glyphs.Select(g => g.Text));
     private static string Heading(PdfPageLayout page, double fraction) => PdfGrid.Key(string.Concat(PdfGrid.Rows(page.Glyphs.Where(g => g.Cy < page.Height * fraction)).Select(Joined)));
@@ -144,6 +144,8 @@ public static partial class PdfScheduleParser
             }
         }
         if (times.Count != count) throw new PdfParseException("P05");
+        for (var period = 2; period <= count; period++)
+            if (string.CompareOrdinal(times[period].Start, times[period - 1].End) < 0) throw new PdfParseException("P05");
         return new(times, consecutive);
     }
     private static DateOnly? Date(string text, int schoolYear, bool slash)

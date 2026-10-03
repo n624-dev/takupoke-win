@@ -47,6 +47,27 @@ public sealed class SpecialPdfParityTests
         Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special(Enumerable.Range(1, 6).Select(i => ExamPage(i, omitLastTime: i == 1)).ToArray(), MaterialKind.Exam));
     }
     [Theory]
+    [InlineData("9:20~10:35")]
+    [InlineData("8:40~9:30")]
+    public void RepeatedExamChartsCannotAcceptOverlappingOrReversedPeriodOrder(string second)
+    {
+        var times = new[] { "8:50~9:35", second, "10:50~11:35", "11:50~12:35", "13:20~14:05", "14:20~15:05" };
+        Assert.Equal("P05", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special(Enumerable.Range(1,6).Select(i=>ExamPage(i,timingOverride:times)).ToArray(),MaterialKind.Exam)).Stage);
+    }
+    [Fact]
+    public void ReturnChartCannotAcceptOverlappingFirstDayPeriods()
+    {
+        var times = new[] { "7:00~7:40", "7:50~8:30", "8:40~9:20", "9:30~10:10", "10:30~11:10", "11:00~11:50", "12:00~12:40", "12:40~13:20" };
+        Assert.Equal("P05", Assert.Throws<PdfParseException>(()=>PdfScheduleParser.Special([ReturnPage(timingOverride:times)],MaterialKind.ExamReturn)).Stage);
+    }
+    [Fact]
+    public void AdjacentExamPeriodsMayShareAnEndpoint()
+    {
+        var times = new[] { "8:50~9:35", "9:35~10:35", "10:50~11:35", "11:50~12:35", "13:20~14:05", "14:20~15:05" };
+        var result=PdfScheduleParser.Special(Enumerable.Range(1,6).Select(i=>ExamPage(i,timingOverride:times)).ToArray(),MaterialKind.Exam);
+        Assert.Equal(new TimeRange("09:35","10:35"),result.PeriodTimes[2]);
+    }
+    [Theory]
     [InlineData("3-XX")]
     [InlineData("3-1")]
     public void SeventeenExamClassesMustMatchTheRequiredSet(string replacement)
@@ -71,7 +92,7 @@ public sealed class SpecialPdfParityTests
         public void Line(double x1, double y1, double x2, double y2) => Lines.Add(new(x1, y1, x2, y2));
         public PdfPageLayout Page(double width, double pageHeight) => new(width, pageHeight, Glyphs, Lines);
     }
-    private static PdfPageLayout ExamPage(int number, bool merged = false, bool metadata = false, bool omitLastTime = false, string? firstLabel = null)
+    private static PdfPageLayout ExamPage(int number, bool merged = false, bool metadata = false, bool omitLastTime = false, string? firstLabel = null, string[]? timingOverride = null)
     {
         var b = new Builder(true, 8); var columns = number == 6 ? 2 : 3;
         string[] labels = number switch { 1 => ["1-1", "1-2", "1-3"], 6 => ["1年", "2年"], _ => [$"{number}-CN", $"{number}-ES", $"{number}-IT"] };
@@ -90,12 +111,12 @@ public sealed class SpecialPdfParityTests
             b.Write($"4月{index + 1}日", 16, 126 + index * 40);
             for (var column = 0; column < columns; column++) { b.Write("架空科目A", 106 + column * 240, 126 + index * 40, 6); b.Write("架空教員A", 106 + column * 240, 136 + index * 40, 5); b.Write("架空教室A", 106 + column * 240, 142 + index * 40, 5); }
         }
-        var times = new[] { "8:50~9:35", "9:50~10:35", "10:50~11:35", "11:50~12:35", "13:20~14:05", "14:20~15:05" };
+        var times = timingOverride ?? new[] { "8:50~9:35", "9:50~10:35", "10:50~11:35", "11:50~12:35", "13:20~14:05", "14:20~15:05" };
         for (var index = 0; index < times.Length; index++) if (!omitLastTime || index != 5) b.Write($"{index + 1}時限目{times[index]}", 20, 470 + index * 15);
         b.Write("1・2時限連続8:50~10:20", 300, 470);
         return b.Page(850, 600);
     }
-    private static PdfPageLayout ReturnPage(bool invalidAiClass = false)
+    private static PdfPageLayout ReturnPage(bool invalidAiClass = false, string[]? timingOverride = null)
     {
         var b = new Builder(false, 4); b.Write("令和8年度 試験返却時間割", 20, 20);
         for (var day = 0; day < 5; day++)
@@ -118,7 +139,7 @@ public sealed class SpecialPdfParityTests
         b.Write("架空科目D", 302, 122, 3); b.Write("架空教員D", 302, 127, 3); b.Write("架空教室D", 302, 132, 3);
         b.Write("架空科目E", 622, 122, 3); b.Write("架空教員E", 622, 127, 3); b.Write("架空教室E", 622, 132, 3);
         b.Write("4月1日の時間割は以下のとおりです。", 1300, 650); b.Write("4月2日~5日は通常の授業日どおりの授業時間です。", 1300, 670);
-        var times = new[] { "7:00~7:40", "7:50~8:30", "8:40~9:20", "9:30~10:10", "10:30~11:10", "11:10~11:50", "12:00~12:40", "12:40~13:20" };
+        var times = timingOverride ?? new[] { "7:00~7:40", "7:50~8:30", "8:40~9:20", "9:30~10:10", "10:30~11:10", "11:10~11:50", "12:00~12:40", "12:40~13:20" };
         for (var index = 0; index < times.Length; index++) b.Write($"{index + 1}時限目{times[index]}", 20, 760 + (index + 1) * 15);
         return b.Page(1800, 1000);
     }

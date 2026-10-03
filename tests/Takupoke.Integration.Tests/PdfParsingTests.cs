@@ -123,6 +123,37 @@ public sealed class PdfParsingTests
         Assert.Equal("架空", string.Concat(page.Glyphs.Select(g => g.Text)));
         Assert.Equal(4, page.Lines.Count);
     }
+    [Theory]
+    [InlineData(MaterialKind.Timetable)]
+    [InlineData(MaterialKind.Exam)]
+    [InlineData(MaterialKind.ExamReturn)]
+    public void ReaderAcceptsFullyOpaqueGraphicsStateForAllScheduleKinds(MaterialKind kind)
+    {
+        var page = Assert.Single(PdfPigLayoutReader.Read(SyntheticPdf(graphicsState: "/ca 1 /CA 1"), kind));
+        Assert.Equal("架空", string.Concat(page.Glyphs.Select(g => g.Text)));
+        Assert.Equal(4, page.Lines.Count);
+    }
+    [Theory]
+    [InlineData("/ca 0")]
+    [InlineData("/CA 0")]
+    [InlineData("/SMask /None")]
+    [InlineData("/TR /Identity")]
+    [InlineData("/TR2 /Identity")]
+    public void SpecialReaderRejectsInvisibleOrUnsupportedGraphicsState(string state)
+    {
+        foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
+            Assert.Equal("P01", Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(SyntheticPdf(graphicsState: state),kind)).Stage);
+    }
+    [Theory]
+    [InlineData("0 0 1 1 re W n ")]
+    [InlineData("0 0 1 1 re W* n ")]
+    [InlineData("/Artifact BMC ")]
+    [InlineData("/Artifact << >> BDC ")]
+    public void SpecialReaderCannotTreatClippedOrMarkedTextAsProvenVisible(string prefix)
+    {
+        foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
+            Assert.Equal("P01", Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(SyntheticPdf(prefix: prefix),kind)).Stage);
+    }
     [Fact]
     public void ReaderRejectsMissingMappingAndFormObjects()
     {
@@ -153,16 +184,16 @@ public sealed class PdfParsingTests
         for (var index = 0; index <= 40; index++) lines.Add(new(40 + index * 10, 60, 40 + index * 10, 140));
         return new(500, 500, glyphs, lines);
     }
-    internal static byte[] SyntheticPdf(bool removeMapping = false, bool formObject = false)
+    internal static byte[] SyntheticPdf(bool removeMapping = false, bool formObject = false, string? graphicsState = null, string? prefix = null)
     {
         var cmap = "1 begincodespacerange <00> <ff> endcodespacerange 2 beginbfchar <41> <67b6> <42> <7a7a> endbfchar";
-        var content = "BT /F1 10 Tf 1 0 0 1 20 100 Tm (AB) Tj ET 10 10 100 120 re S" + (formObject ? " /Fake Do" : "");
+        var content = (prefix ?? "") + (graphicsState is null ? "" : "/Ghost gs ") + "BT /F1 10 Tf 1 0 0 1 20 100 Tm (AB) Tj ET 10 10 100 120 re S" + (formObject ? " /Fake Do" : "");
         string Stream(string value) => "<< /Length " + Encoding.ASCII.GetByteCount(value) + " >>\nstream\n" + value + "\nendstream";
         var objects = new[]
         {
             "<< /Type /Catalog /Pages 2 0 R >>",
             "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
-            "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 200 200] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>",
+            "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 200 200] /Resources << /Font << /F1 4 0 R >> " + (graphicsState is null ? "" : "/ExtGState << /Ghost << /Type /ExtGState " + graphicsState + " >> >> ") + ">> /Contents 5 0 R >>",
             "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding /FirstChar 65 /LastChar 66 /Widths [500 500] /FontDescriptor 7 0 R" + (removeMapping ? "" : " /ToUnicode 6 0 R") + " >>",
             Stream(content), Stream(cmap),
             "<< /Type /FontDescriptor /FontName /Helvetica /Flags 32 /FontBBox [0 -200 1000 800] /ItalicAngle 0 /Ascent 800 /Descent -200 /CapHeight 700 /StemV 80 >>"

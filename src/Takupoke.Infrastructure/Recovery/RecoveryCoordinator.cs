@@ -34,7 +34,10 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                 await store.SaveRecoveryAsync(lease, source, cached, _clock.GetUtcNow(), token, reuseAccepted: true);
                 return new(RecoveryJobState.Adopted, null, "以前に確認した同じPDFの復旧結果を使用しました。", true);
             }
-            var job = new RecoveryJob(source.Digest, RecoveryPolicy.Kind(kind)!.Value, RecoveryJobState.Preparing, _clock.GetUtcNow());
+            var pendingJob = await store.ReadAsync<RecoveryJob>(lease, "recovery." + kind, token);
+            if (pendingJob is null || pendingJob.PdfHash != source.Digest || pendingJob.Kind != RecoveryPolicy.Kind(kind))
+                throw new OperationCanceledException("復旧待ちの資料が更新されました。");
+            var job = pendingJob with { State = RecoveryJobState.Preparing, ResultHash = null };
             await store.SaveRecoveryProgressAsync(lease, source, job, null, token);
             var bytes = await store.ReadOriginalAsync(lease, source.Id, token);
             try
@@ -47,7 +50,16 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                 var document = await buildDocument(bytes, kind, source.Digest, capture, token);
                 if (!RecoveryPolicy.MatchesPeriod(document, lease.Period)) throw new InvalidDataException("PDFの年度・学期が現在の保存期間と一致しません。");
                 var localProviders = await providers(token); RecoveryRun run;
-                try { run = await RecoveryEngine.RunAsync(document, "windows", Environment.OSVersion.Version.Major, true, localProviders, _ => null, token); }
+                try
+                {
+                    var structure = await RecoveryStructure.ResolveAsync(document, "windows", Environment.OSVersion.Version.Major, localProviders, token);
+                    if (structure.Document is null) run = new(structure.State, null, structure.Errors);
+                    else
+                    {
+                        document = structure.Document;
+                        run = await RecoveryEngine.RunAsync(document, "windows", Environment.OSVersion.Version.Major, true, localProviders, _ => null, token);
+                    }
+                }
                 finally { foreach (var provider in localProviders.OfType<IAsyncDisposable>()) await provider.DisposeAsync(); }
                 var preview = run.Result is not null ? new RecoveryPreview(source.Id, lease, document, run.Result, _clock.GetUtcNow()) : null;
                 await store.SaveRecoveryProgressAsync(lease, source, job with { State = run.State, ResultHash = run.Result is null ? null : RecoveryValidator.Fingerprint(run.Result) }, preview, token);
