@@ -306,7 +306,7 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
             var plain = _cipher!.Decrypt(payload, entryKey); try { return DataCodec.Decode<T>(plain); } finally { CryptographicOperations.ZeroMemory(plain); }
         }
         var attempt = await Current<MaterialAttempt>("attempt." + source.Kind);
-        if (attempt?.SourceDigest != source.Digest || attempt.Failure is null || !RecoveryPolicy.Eligible(source.Kind, attempt.Failure))
+        if (attempt?.SourceDigest != source.Digest || attempt.ParserVersion != Takupoke.Infrastructure.Materials.MaterialCoordinator.ParserVersion(source.Kind) || attempt.Failure is null || !RecoveryPolicy.Eligible(source.Kind, attempt.Failure))
             throw new OperationCanceledException("通常解析の状態が変わりました。もう一度資料を確認してください。");
         if (reuseAccepted)
         {

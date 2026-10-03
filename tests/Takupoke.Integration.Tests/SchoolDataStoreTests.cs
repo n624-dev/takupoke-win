@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 using Microsoft.Data.Sqlite;
 using Takupoke.Core;
 using Takupoke.Core.Recovery;
+using Takupoke.Infrastructure.Parsing;
 using Takupoke.Infrastructure.Storage;
 using Takupoke.Infrastructure.Recovery;
 using Xunit;
@@ -158,7 +159,7 @@ public sealed class SchoolDataStoreTests : IAsyncLifetime
         var doc = fixture.Document with { PdfHash = source.Digest }; var result = fixture.Result with { PdfHash = source.Digest };
         var audit = new RecoveryAudit(doc, result, new(source.Digest, RecoveryValidator.Fingerprint(result), RecoveryValidator.Fingerprint(doc), result.Metadata, _clock.Now));
         await store.SaveOriginalAsync(lease, source, bytes);
-        await store.SavePdfFailureAsync(lease, source, new(_clock.Now, "P08", true, source.Digest, 2026, ParserVersion: 1, RecoveryPending: true), new(source.Digest, doc.Kind, RecoveryJobState.Pending, _clock.Now));
+        await store.SavePdfFailureAsync(lease, source, new(_clock.Now, "P08", true, source.Digest, 2026, ParserVersion: PdfScheduleParser.SpecialVersion, RecoveryPending: true), new(source.Digest, doc.Kind, RecoveryJobState.Pending, _clock.Now));
         var job = new RecoveryJob(source.Digest, doc.Kind, RecoveryJobState.AwaitingConfirmation, _clock.Now, ResultHash: RecoveryValidator.Fingerprint(result));
         var preview = new RecoveryPreview(source.Id, lease, doc, result, _clock.Now);
         if (bypassPreviewValidation)
@@ -203,7 +204,7 @@ public sealed class SchoolDataStoreTests : IAsyncLifetime
         var doc = original with { Term = "後期", Sources = original.Sources.Select(s => original.TermEvidence.Contains(s.Id) ? s with { Text = "後期" } : s).ToArray() }; var result = Result(doc);
         Assert.True(RecoveryValidator.Validate(doc, result).CanAdopt); Assert.False(RecoveryPolicy.MatchesPeriod(doc, lease.Period));
         var acceptance = new RecoveryAcceptance(source.Digest, RecoveryValidator.Fingerprint(result), RecoveryValidator.Fingerprint(doc), metadata, _clock.Now); var audit = new RecoveryAudit(doc, result, acceptance);
-        await store.SavePdfFailureAsync(lease, source, new(_clock.Now, "P08", true, source.Digest, 2026, ParserVersion: 1, RecoveryPending: true), new(source.Digest, doc.Kind, RecoveryJobState.Pending, _clock.Now));
+        await store.SavePdfFailureAsync(lease, source, new(_clock.Now, "P08", true, source.Digest, 2026, ParserVersion: PdfScheduleParser.TimetableVersion, RecoveryPending: true), new(source.Digest, doc.Kind, RecoveryJobState.Pending, _clock.Now));
         var job = new RecoveryJob(source.Digest, doc.Kind, RecoveryJobState.AwaitingConfirmation, _clock.Now, RecoveryValidator.Fingerprint(result)); var preview = new RecoveryPreview(source.Id, lease, doc, result, _clock.Now);
         if (persistedPreview)
         {
@@ -232,6 +233,18 @@ public sealed class SchoolDataStoreTests : IAsyncLifetime
         Assert.NotNull(await store.ReadAsync<RecoveryAudit>(lease, "recovery.accepted.Exam." + source.Digest));
         Assert.Null(await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Exam")); Assert.Null(await store.ReadAsync<RecoveryJob>(lease, "recovery.Exam"));
         Assert.Null((await store.ReadAsync<MaterialAttempt>(lease, "attempt.Exam"))!.Failure);
+    }
+    [Theory] [InlineData(false)] [InlineData(true)]
+    public async Task OldStrictFailureCannotAuthorizePreviewAdoptionOrAcceptanceReuse(bool reuseAcceptance)
+    {
+        await using var store = Store(); var (lease, source, audit) = await AwaitingRecoveryAsync(store);
+        var oldAttempt = (await store.ReadAsync<MaterialAttempt>(lease, "attempt.Exam"))! with { ParserVersion = PdfScheduleParser.SpecialVersion - 1 };
+        await store.WriteAsync(lease, "attempt.Exam", oldAttempt);
+        if (reuseAcceptance) await store.WriteAsync(lease, "recovery.accepted.Exam." + source.Digest, audit);
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => store.SaveRecoveryAsync(lease, source, audit, _clock.Now, reuseAccepted: reuseAcceptance));
+        Assert.Null(await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"));
+        Assert.NotNull(await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Exam"));
+        Assert.Equal(oldAttempt, await store.ReadAsync<MaterialAttempt>(lease, "attempt.Exam"));
     }
     [Fact] public async Task StrictSuccessInvalidatesOldPreviewAndCannotBeOverwrittenByRecovery()
     {
