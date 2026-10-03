@@ -176,7 +176,10 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public Task RefreshAsync() => RefreshAsync(automatic: false);
     public Task RefreshAutomaticallyAsync(bool force = false)
     {
-        if (Locked || Busy || _automaticPaused || !force && DateTimeOffset.UtcNow - _lastAutomaticCheck < TimeSpan.FromMinutes(1)) return Task.CompletedTask;
+        if (Locked || _automaticPaused || !force && DateTimeOffset.UtcNow - _lastAutomaticCheck < TimeSpan.FromMinutes(1)) return Task.CompletedTask;
+        // Unlock/resume can arrive before a cancelled native worker has joined.
+        // Preserve the fresh request until that serialized operation finishes.
+        if (Busy) { _pendingRefresh = true; return Task.CompletedTask; }
         _lastAutomaticCheck = DateTimeOffset.UtcNow;
         return RefreshAsync(automatic: true);
     }
@@ -430,7 +433,15 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             }
             Busy = false; _operations.Release(); SnapshotChanged?.Invoke();
             if (!automatic && Status.Length > 0) _statusUntil = DateTimeOffset.UtcNow.AddSeconds(5);
-            if (_pendingRefresh) { _pendingRefresh = false; _dispatcher.TryEnqueue(() => _ = RefreshAutomaticallyAsync(force: true)); }
+            if (_pendingRefresh)
+            {
+                _pendingRefresh = false;
+                var refreshGeneration = _operationGeneration;
+                _dispatcher.TryEnqueue(() =>
+                {
+                    if (refreshGeneration == _operationGeneration) _ = RefreshAutomaticallyAsync(force: true);
+                });
+            }
         }
     }
     public void Cancel() { _automaticPaused = true; _operationGeneration++; _pendingRefresh = false; _watcher.Replace([]); _session.Cancel(); _authentication.Cancel(); }
