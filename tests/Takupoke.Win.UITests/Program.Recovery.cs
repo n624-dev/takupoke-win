@@ -160,8 +160,8 @@ internal static partial class Program
         Navigate("settings"); Invoke("settings-materials"); Invoke("material-details-Timetable"); Invoke("analysis-Timetable");
         foreach (var suffix in new[] { "A", "B" })
         {
-            Require(RecoveryUiText("架空並記科目" + suffix), "The restarted formal analysis displays parallel subject " + suffix);
-            Require(RecoveryUiText($"架空並記担当{suffix} · 架空並記教室{suffix}"), "The restarted formal analysis retains the paired teacher and room " + suffix);
+            Wait(() => RecoveryUiText("架空並記科目" + suffix), "The restarted formal analysis displays parallel subject " + suffix);
+            Wait(() => RecoveryUiText($"架空並記担当{suffix} · 架空並記教室{suffix}"), "The restarted formal analysis retains the paired teacher and room " + suffix);
         }
         Console.WriteLine("Recovery parallel UI: two paired lessons in preview, explicit adoption and restarted formal analysis passed.");
     }
