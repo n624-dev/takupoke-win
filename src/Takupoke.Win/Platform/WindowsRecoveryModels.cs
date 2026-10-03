@@ -23,7 +23,15 @@ public sealed class WindowsRecoveryModels(string root)
         using var http = new HttpClient(); http.Timeout = Timeout.InfiniteTimeSpan;
         Task<Stream> Download(string url, CancellationToken cancellation) => http.GetStreamAsync(url, cancellation);
         progress?.Invoke(0, OcrBundle.Size);
-        await _store.InstallAsync(OcrBundle, Download, async (path, cancellation) => { await VerifyDictionary(cancellation); using var runtime = new OnnxJapaneseOcr(Path.Combine(path, "det.onnx"), Path.Combine(path, "rec.onnx"), DictionaryPath); await Task.Run(() => runtime.SmokeTest(cancellation), cancellation); }, token);
+        await _store.InstallAsync(OcrBundle, Download, async (path, cancellation) =>
+        {
+            await VerifyDictionary(cancellation);
+            await Task.Run(() =>
+            {
+                using var runtime = new OnnxJapaneseOcr(Path.Combine(path, "det.onnx"), Path.Combine(path, "rec.onnx"), DictionaryPath);
+                cancellation.ThrowIfCancellationRequested(); runtime.SmokeTest(cancellation);
+            }, cancellation);
+        }, token);
         progress?.Invoke(OcrBundle.Size, OcrBundle.Size);
     }
     public Task DeleteOcrAsync(CancellationToken token) => _store.DeleteAsync("windowsOcr", token);
@@ -32,7 +40,12 @@ public sealed class WindowsRecoveryModels(string root)
         await VerifyDictionary(token); var active = await _store.ActiveAsync("windowsOcr", token);
         if (active is null || active.Value.Bundle != OcrBundle && RecoveryValidator.Fingerprint(active.Value.Bundle) != RecoveryValidator.Fingerprint(OcrBundle)) throw new InvalidDataException("画像PDFを読むには設定から約21 MBの日本語OCRモデルをダウンロードしてください。学校資料は外部へ送信されません。");
         if (GC.GetGCMemoryInfo().TotalAvailableMemoryBytes < OcrBundle.MinimumMemory) throw new InvalidDataException("OCRを動かすためのメモリを確保できません。");
-        return new(Path.Combine(active.Value.Path, "det.onnx"), Path.Combine(active.Value.Path, "rec.onnx"), DictionaryPath);
+        return await Task.Run(() =>
+        {
+            var runtime = new OnnxJapaneseOcr(Path.Combine(active.Value.Path, "det.onnx"), Path.Combine(active.Value.Path, "rec.onnx"), DictionaryPath);
+            try { token.ThrowIfCancellationRequested(); return runtime; }
+            catch { runtime.Dispose(); throw; }
+        }, token);
     }
     public Task<IReadOnlyList<ILocalRecoveryProvider>> ProvidersAsync(CancellationToken token) { token.ThrowIfCancellationRequested(); return Task.FromResult<IReadOnlyList<ILocalRecoveryProvider>>([new WindowsLanguageRecoveryProvider(), new LazyFoundryRecoveryProvider(Foundry)]); }
 }

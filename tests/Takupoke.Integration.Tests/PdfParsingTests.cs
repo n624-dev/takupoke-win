@@ -282,6 +282,31 @@ public sealed class PdfParsingTests
             Assert.Single(PdfPigLayoutReader.Read(SyntheticPdf(cropBox: "/CropBox [0 0 200 200]"), kind));
         }
     }
+    [Theory]
+    [InlineData("[] 0 d ", null, true)]
+    [InlineData("", "/D [[] 0]", true)]
+    [InlineData("[0 1000] 0 d ", null, false)]
+    [InlineData("[1 1000] 50 d ", null, false)]
+    [InlineData("", "/D [[0 1000] 0]", false)]
+    [InlineData("", "/D [[1 1000] 50]", false)]
+    public void InvisibleDashedSegmentsAreNotReusedAsSolidTableRules(string prefix, string? graphicsState, bool solid)
+    {
+        foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
+        {
+            var capture = new RecoveryReadCapture();
+            var bytes = SyntheticPdf(prefix: prefix, graphicsState: graphicsState);
+            if (solid)
+            {
+                var page = Assert.Single(PdfPigLayoutReader.Read(bytes, kind, capture: capture));
+                Assert.Equal(4, page.Lines.Count); Assert.True(capture.Complete);
+            }
+            else
+            {
+                Assert.Equal("P01", Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(bytes, kind, capture: capture)).Stage);
+                Assert.False(capture.Complete); Assert.DoesNotContain(capture.Pages, p => p.State == RecoveryInputState.Complete);
+            }
+        }
+    }
     [Fact]
     public void ReaderRejectsMissingMappingAndFormObjects()
     {

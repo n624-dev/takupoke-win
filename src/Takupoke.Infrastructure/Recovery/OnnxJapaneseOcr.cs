@@ -8,17 +8,19 @@ namespace Takupoke.Infrastructure.Recovery;
 public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
 {
     public bool Valid => Width is > 0 and <= 4096 && Height is > 0 and <= 4096 && Bgra.Length == checked(Width * Height * 4);
-    public bool InkFree(RecoveryBox box, bool[]? ruleMask = null)
+    public bool InkFree(RecoveryBox box, bool[]? ruleMask = null, CancellationToken token = default)
     {
+        token.ThrowIfCancellationRequested();
         if (!Valid || !box.Valid || box.X + box.Width > Width || box.Y + box.Height > Height || ruleMask is not null && ruleMask.Length != Width * Height) return false;
         var left = Math.Clamp((int)Math.Ceiling(box.X - .5), 0, Width); var top = Math.Clamp((int)Math.Ceiling(box.Y - .5), 0, Height);
         var right = Math.Clamp((int)Math.Ceiling(box.X + box.Width - .5), 0, Width); var bottom = Math.Clamp((int)Math.Ceiling(box.Y + box.Height - .5), 0, Height);
         if (right <= left || bottom <= top) return false;
-        for (var y = top; y < bottom; y++) for (var x = left; x < right; x++) { var index = y * Width + x; if (ruleMask?[index] == true) continue; var p = index * 4; if (Bgra[p] != 255 || Bgra[p + 1] != 255 || Bgra[p + 2] != 255) return false; }
+        for (var y = top; y < bottom; y++) { token.ThrowIfCancellationRequested(); for (var x = left; x < right; x++) { var index = y * Width + x; if (ruleMask?[index] == true) continue; var p = index * 4; if (Bgra[p] != 255 || Bgra[p + 1] != 255 || Bgra[p + 2] != 255) return false; } }
         return true;
     }
-    public bool[] RuleMask(IReadOnlyList<PdfRule> rules)
+    public bool[] RuleMask(IReadOnlyList<PdfRule> rules, CancellationToken token = default)
     {
+        token.ThrowIfCancellationRequested();
         if (!Valid) throw new InvalidDataException("OCR画像のサイズが不正です。");
         var mask = new bool[Width * Height];
         bool Ink(int x, int y) { var p = (y * Width + x) * 4; return Bgra[p] != 255 || Bgra[p + 1] != 255 || Bgra[p + 2] != 255; }
@@ -27,53 +29,64 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         // a missed glyph beside it must remain uncovered, even one pixel away.
         foreach (var rule in rules)
         {
+            token.ThrowIfCancellationRequested();
             if (rule.Horizontal)
             {
                 var first = Math.Clamp((int)Math.Ceiling(Math.Min(rule.X1, rule.X2)), 0, Width - 1); var last = Math.Clamp((int)Math.Floor(Math.Max(rule.X1, rule.X2)), 0, Width - 1);
                 for (var y = Math.Max(0, (int)Math.Floor(rule.Y1) - 2); y <= Math.Min(Height - 1, (int)Math.Ceiling(rule.Y1) + 2); y++)
-                { var continuous = first < last; for (var x = first; x <= last && continuous; x++) continuous = Ink(x, y); if (continuous) for (var x = first; x <= last; x++) mask[y * Width + x] = true; }
+                { token.ThrowIfCancellationRequested(); var continuous = first < last; for (var x = first; x <= last && continuous; x++) continuous = Ink(x, y); if (continuous) for (var x = first; x <= last; x++) mask[y * Width + x] = true; }
             }
             else if (rule.Vertical)
             {
                 var first = Math.Clamp((int)Math.Ceiling(Math.Min(rule.Y1, rule.Y2)), 0, Height - 1); var last = Math.Clamp((int)Math.Floor(Math.Max(rule.Y1, rule.Y2)), 0, Height - 1);
                 for (var x = Math.Max(0, (int)Math.Floor(rule.X1) - 2); x <= Math.Min(Width - 1, (int)Math.Ceiling(rule.X1) + 2); x++)
-                { var continuous = first < last; for (var y = first; y <= last && continuous; y++) continuous = Ink(x, y); if (continuous) for (var y = first; y <= last; y++) mask[y * Width + x] = true; }
+                { token.ThrowIfCancellationRequested(); var continuous = first < last; for (var y = first; y <= last && continuous; y++) continuous = Ink(x, y); if (continuous) for (var y = first; y <= last; y++) mask[y * Width + x] = true; }
             }
         }
         return mask;
     }
-    public bool HasUnrecognizedInk(IReadOnlyList<RecoveryBox> textBoxes, IReadOnlyList<PdfRule> rules)
+    public bool HasUnrecognizedInk(IReadOnlyList<RecoveryBox> textBoxes, IReadOnlyList<PdfRule> rules, CancellationToken token = default)
     {
+        token.ThrowIfCancellationRequested();
         if (!Valid) return true;
-        var covered = RuleMask(rules);
-        void Mark(int left, int top, int right, int bottom) { for (var y = Math.Max(0, top); y <= Math.Min(Height - 1, bottom); y++) for (var x = Math.Max(0, left); x <= Math.Min(Width - 1, right); x++) covered[y * Width + x] = true; }
+        var covered = RuleMask(rules, token);
+        void Mark(int left, int top, int right, int bottom) { for (var y = Math.Max(0, top); y <= Math.Min(Height - 1, bottom); y++) { token.ThrowIfCancellationRequested(); for (var x = Math.Max(0, left); x <= Math.Min(Width - 1, right); x++) covered[y * Width + x] = true; } }
         foreach (var box in textBoxes) Mark((int)Math.Floor(box.X) - 1, (int)Math.Floor(box.Y) - 1, (int)Math.Ceiling(box.X + box.Width) + 1, (int)Math.Ceiling(box.Y + box.Height) + 1);
-        for (var i = 0; i < covered.Length; i++) if (!covered[i] && (Bgra[i * 4] != 255 || Bgra[i * 4 + 1] != 255 || Bgra[i * 4 + 2] != 255)) return true;
+        for (var i = 0; i < covered.Length; i++) { if (i % 4096 == 0) token.ThrowIfCancellationRequested(); if (!covered[i] && (Bgra[i * 4] != 255 || Bgra[i * 4 + 1] != 255 || Bgra[i * 4 + 2] != 255)) return true; }
         return false;
     }
-    public IReadOnlyList<PdfRule> Rules()
+    public IReadOnlyList<PdfRule> Rules(CancellationToken token = default)
     {
+        token.ThrowIfCancellationRequested();
+        if (!Valid) throw new InvalidDataException("OCR画像のサイズが不正です。");
         var lines = new List<PdfRule>();
         bool Dark(int x, int y) { var p = (y * Width + x) * 4; return (Bgra[p] + Bgra[p + 1] + Bgra[p + 2]) / 3 < 160; }
-        for (var y = 0; y < Height; y++) { var start = -1; for (var x = 0; x <= Width; x++) { if (x < Width && Dark(x, y)) { if (start < 0) start = x; } else if (start >= 0) { if (x - start >= Math.Max(40, Width / 40)) lines.Add(new(start, y, x - 1, y)); start = -1; } } }
-        for (var x = 0; x < Width; x++) { var start = -1; for (var y = 0; y <= Height; y++) { if (y < Height && Dark(x, y)) { if (start < 0) start = y; } else if (start >= 0) { if (y - start >= Math.Max(40, Height / 40)) lines.Add(new(x, start, x, y - 1)); start = -1; } } }
+        for (var y = 0; y < Height; y++) { token.ThrowIfCancellationRequested(); var start = -1; for (var x = 0; x <= Width; x++) { if (x < Width && Dark(x, y)) { if (start < 0) start = x; } else if (start >= 0) { if (x - start >= Math.Max(40, Width / 40)) lines.Add(new(start, y, x - 1, y)); start = -1; } } }
+        for (var x = 0; x < Width; x++) { token.ThrowIfCancellationRequested(); var start = -1; for (var y = 0; y <= Height; y++) { if (y < Height && Dark(x, y)) { if (start < 0) start = y; } else if (start >= 0) { if (y - start >= Math.Max(40, Height / 40)) lines.Add(new(x, start, x, y - 1)); start = -1; } } }
         // Collapse adjacent scanlines from the same stroke to one centerline.
         var merged = lines.GroupBy(l => (l.Vertical, A: (int)(l.Vertical ? l.Y1 : l.X1) / 3, B: (int)(l.Vertical ? l.Y2 : l.X2) / 3))
             .SelectMany(g => { var ordered = g.OrderBy(l => l.Vertical ? l.X1 : l.Y1).ToArray(); var result = new List<PdfRule>(); var run = new List<PdfRule>(); foreach (var line in ordered) { if (run.Count > 0 && (line.Vertical ? line.X1 - run[^1].X1 : line.Y1 - run[^1].Y1) > 2) { result.Add(Merge(run)); run.Clear(); } run.Add(line); } if (run.Count > 0) result.Add(Merge(run)); return result; }).ToArray();
         // Long isolated character strokes (一 / I) are ink, not table borders.
         // A raster rule must connect to a perpendicular border at both ends.
-        var connectedRules = merged;
+        var connectedRules = merged; var comparisonWork = 0;
         for (var pass = 0; pass < 64; pass++)
         {
+            token.ThrowIfCancellationRequested();
             var vertical = connectedRules.Where(l => l.Vertical).GroupBy(l => (int)Math.Round(l.X1 / 3)).ToDictionary(g => g.Key, g => g.ToArray());
             var horizontal = connectedRules.Where(l => l.Horizontal).GroupBy(l => (int)Math.Round(l.Y1 / 3)).ToDictionary(g => g.Key, g => g.ToArray());
             bool Connected(PdfRule line, double x, double y)
             {
+                token.ThrowIfCancellationRequested();
+                bool Matches(PdfRule other)
+                {
+                    if (++comparisonWork > 1_000_000) throw new InvalidDataException("OCRの罫線比較数が上限を超えています。");
+                    if (comparisonWork % 128 == 0) token.ThrowIfCancellationRequested();
+                    return line.Vertical ? Math.Abs(other.Y1 - y) <= 3 && other.X1 - 3 <= x && x <= other.X2 + 3
+                        : Math.Abs(other.X1 - x) <= 3 && other.Y1 - 3 <= y && y <= other.Y2 + 3;
+                }
                 var index = line.Vertical ? horizontal : vertical; var key = (int)Math.Round((line.Vertical ? y : x) / 3);
                 for (var bucket = key - 1; bucket <= key + 1; bucket++)
-                    if (index.TryGetValue(bucket, out var candidates) && candidates.Any(other => line.Vertical
-                        ? Math.Abs(other.Y1 - y) <= 3 && other.X1 - 3 <= x && x <= other.X2 + 3
-                        : Math.Abs(other.X1 - x) <= 3 && other.Y1 - 3 <= y && y <= other.Y2 + 3)) return true;
+                    if (index.TryGetValue(bucket, out var candidates) && candidates.Any(Matches)) return true;
                 return false;
             }
             var next = connectedRules.Where(l => Connected(l, l.X1, l.Y1) && Connected(l, l.X2, l.Y2)).ToArray();
@@ -124,6 +137,12 @@ public sealed class OnnxJapaneseOcr : IDisposable
         var ratio = Math.Min(1, 960d / Math.Max(image.Width, image.Height)); var dw = Math.Max(32, (int)Math.Round(image.Width * ratio / 32) * 32); var dh = Math.Max(32, (int)Math.Round(image.Height * ratio / 32) * 32);
         using var detection = _detector.Run([NamedOnnxValue.CreateFromTensor("x", Image(image, new(0, 0, image.Width, image.Height), dw, dh, true))]); token.ThrowIfCancellationRequested();
         var map = detection.First().AsTensor<float>(); if (map.Dimensions.Length != 4 || map.Dimensions[2] != dh || map.Dimensions[3] != dw) throw new InvalidDataException("OCR検出モデルの出力形状が一致しません。");
+        for (var y = 0; y < dh; y++)
+        {
+            token.ThrowIfCancellationRequested();
+            for (var x = 0; x < dw; x++) if (!float.IsFinite(map[0, 0, y, x]) || map[0, 0, y, x] is < 0 or > 1)
+                throw new InvalidDataException("OCR検出の確信度が不正です。");
+        }
         var visited = new bool[dw * dh]; var boxes = new List<RecoveryBox>();
         for (var y = 0; y < dh; y++) for (var x = 0; x < dw; x++)
         {
@@ -140,6 +159,12 @@ public sealed class OnnxJapaneseOcr : IDisposable
             token.ThrowIfCancellationRequested(); var width = Math.Clamp((int)Math.Ceiling(box.Width / box.Height * 48), 16, 960);
             using var recognition = _recognizer.Run([NamedOnnxValue.CreateFromTensor("x", Image(image, box, width, 48, false))]); var logits = recognition.First().AsTensor<float>();
             if (logits.Dimensions.Length != 3 || logits.Dimensions[2] != 18385) throw new InvalidDataException("OCR認識モデルの出力形状が一致しません。");
+            var checkedScores = 0;
+            foreach (var score in logits)
+            {
+                if (++checkedScores % 4096 == 0) token.ThrowIfCancellationRequested();
+                if (!float.IsFinite(score) || score is < 0 or > 1) throw new InvalidDataException("OCR認識の確信度が不正です。");
+            }
             var tCount = logits.Dimensions[1]; var previous = -1; var pieces = new List<(string Text, int Start, int End, float Confidence)>();
             for (var t = 0; t < tCount; t++) { var best = 0; var score = logits[0, t, 0]; for (var c = 1; c < 18385; c++) if (logits[0, t, c] > score) { score = logits[0, t, c]; best = c; } if (best != 0 && best != previous) pieces.Add((_dictionary[best], t, t + 1, score)); else if (best != 0 && pieces.Count > 0) { var last = pieces[^1]; pieces[^1] = last with { End = t + 1, Confidence = Math.Max(last.Confidence, score) }; } previous = best; }
             if (pieces.Count == 0 || pieces.Any(p => p.Confidence < .8f)) throw new InvalidDataException("OCRで判読できない文字があります。空欄には置き換えません。");

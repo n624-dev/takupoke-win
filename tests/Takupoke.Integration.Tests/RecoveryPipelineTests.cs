@@ -10,6 +10,17 @@ using Xunit;
 namespace Takupoke.Integration.Tests;
 public sealed class RecoveryPipelineTests
 {
+    [Fact]
+    public void CanceledRecoveryCannotContinueRasterAnalysisEvenWithNoCandidateInk()
+    {
+        var raster = new RecoveryRaster(80, 80, Enumerable.Repeat((byte)255, 80 * 80 * 4).ToArray());
+        using var cancellation = new CancellationTokenSource(); cancellation.Cancel();
+        Assert.Throws<OperationCanceledException>(() => raster.Rules(cancellation.Token));
+        Assert.Throws<OperationCanceledException>(() => raster.RuleMask([], cancellation.Token));
+        Assert.Throws<OperationCanceledException>(() => raster.HasUnrecognizedInk([], [], cancellation.Token));
+        Assert.Throws<OperationCanceledException>(() => raster.InkFree(new(0, 0, 80, 80), token: cancellation.Token));
+        Assert.Empty(raster.Rules()); Assert.True(raster.InkFree(new(0, 0, 80, 80)));
+    }
     internal static PdfPageLayout Layout(MaterialKind kind)
     {
         var special = kind != MaterialKind.Timetable; var max = kind == MaterialKind.Exam ? 6 : 8;

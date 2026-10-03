@@ -5,6 +5,7 @@ using Takupoke.Core.Recovery;
 using UglyToad.PdfPig;
 using UglyToad.PdfPig.Content;
 using UglyToad.PdfPig.Graphics.Operations;
+using UglyToad.PdfPig.Graphics.Operations.General;
 using UglyToad.PdfPig.Graphics.Operations.TextShowing;
 using UglyToad.PdfPig.Graphics.Operations.TextState;
 using UglyToad.PdfPig.Parser.Parts;
@@ -66,6 +67,12 @@ public static class PdfPigLayoutReader
                         var state = Resource(document, resources, "ExtGState", items[0][1..]);
                         if (new[] { "Font", "SMask", "TR", "TR2" }.Any(state.Data.ContainsKey) || state.Data.ContainsKey("BM") && Name(document, state, "BM") != "Normal" || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1) throw new PdfParseException("P01", number);
                         if (state.Data.ContainsKey("LW")) visibility.SetLineWidth(Number(document, state, "LW"), number);
+                        if (state.Data.ContainsKey("D"))
+                        {
+                            var dash = Resolve<ArrayToken>(document, Get(state, "D"));
+                            if (dash.Length != 2 || Resolve<ArrayToken>(document, dash[0]).Length != 0 || !double.IsFinite(Resolve<NumericToken>(document, dash[1]).Data))
+                                throw new PdfParseException("P01", number);
+                        }
                     }
                     if (text is null) continue;
                     switch (operation)
@@ -178,6 +185,10 @@ public static class PdfPigLayoutReader
             };
             switch (name)
             {
+                case "d":
+                    // A dash pattern can paint no part of an extracted segment.
+                    if (operation is not SetLineDashPattern dash || dash.Pattern.Array.Count != 0) throw new PdfParseException("P01", page);
+                    break;
                 case "q":
                     if (_stack.Count >= 64) throw new PdfParseException("limit", page);
                     _stack.Push(_state); break;
