@@ -44,8 +44,8 @@ public sealed class RecoveryPipelineTests
     private sealed class SyntheticProvider(RecoveryMetadata metadata) : ILocalRecoveryProvider
     {
         public string Id => "windowsLanguageModel"; public bool LocalOnly => true; public RecoveryMetadata Metadata => metadata;
-        public int Calls;
-        public Task<LocalProviderState> AvailabilityAsync(CancellationToken token) => Task.FromResult(LocalProviderState.Ready);
+        public int Calls, AvailabilityCalls;
+        public Task<LocalProviderState> AvailabilityAsync(CancellationToken token) { AvailabilityCalls++; return Task.FromResult(LocalProviderState.Unsupported); }
         public Task<IReadOnlyList<RecoveryLesson>> RecoverCellAsync(RecoveryPromptCell cell, CancellationToken token)
         {
             Calls++; RecoveryField Field(string value) { var source = cell.Sources.Single(s => s.Text == value); return new(RecoveryValueState.Present, value, [source.Id]); }
@@ -53,14 +53,14 @@ public sealed class RecoveryPipelineTests
         }
     }
     [Theory] [InlineData(MaterialKind.Timetable)] [InlineData(MaterialKind.Exam)] [InlineData(MaterialKind.ExamReturn)]
-    public async Task PrintedRoleTableReachesModelThenFormalAnalysis(MaterialKind kind)
+    public async Task PrintedRoleTableUsesRulesBeforeModelsThenFormalAnalysis(MaterialKind kind)
     {
         var layout = Layout(kind); var hash = new string('a', 64);
         var document = RecoveryDocumentBuilder.Build(hash, kind, [layout], (_, b) => !layout.Glyphs.Any(g => b.Contains(new(g.X, g.Y, g.Width, g.Height))));
         Assert.Empty(RecoveryValidator.InputErrors(document));
         var provider = new SyntheticProvider(new("windowsLanguageModel", "synthetic", "1", "1", "2", RecoveryValidator.SchemaVersion, RecoveryValidator.Version, "test"));
         var run = await RecoveryEngine.RunAsync(document, "windows", 10, true, [provider], _ => null);
-        Assert.Equal(RecoveryJobState.AwaitingConfirmation, run.State); Assert.Equal(1, provider.Calls);
+        Assert.Equal(RecoveryJobState.AwaitingConfirmation, run.State); Assert.Equal(0, provider.Calls); Assert.Equal(0, provider.AvailabilityCalls);
         var source = new SourceRecord("source", kind, "synthetic.pdf", "synthetic.pdf", "synthetic", hash, 1, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, null);
         var formal = RecoveryAnalysisConverter.Convert(source, document, run.Result!, DateTimeOffset.UtcNow);
         Assert.Equal("架空科目A", formal.Timetable?.Lessons.Single().Names.Subject ?? formal.Special?.Lessons.Single().Names.Subject);
@@ -71,4 +71,30 @@ public sealed class RecoveryPipelineTests
         var pixels = Enumerable.Repeat((byte)255, 80 * 80 * 4).ToArray(); var raster = new RecoveryRaster(80, 80, pixels); var box = new RecoveryBox(0, 0, 80, 80);
         Assert.True(raster.InkFree(box)); pixels[(20 * 80 + 20) * 4] = 0; Assert.False(raster.InkFree(box)); Assert.True(raster.HasUnrecognizedInk([], [])); Assert.False(raster.HasUnrecognizedInk([new(18, 18, 6, 6)], []));
     }
+    [Theory] [InlineData(254, 254, 254)] [InlineData(200, 200, 200)] [InlineData(0, 0, 255)]
+    public void FaintOrColoredUndetectedInkCannotBecomeAnEmptyCell(byte blue, byte green, byte red)
+    {
+        var pixels = Enumerable.Repeat((byte)255, 80 * 80 * 4).ToArray(); var raster = new RecoveryRaster(80, 80, pixels); var p = (20 * 80 + 20) * 4;
+        pixels[p] = blue; pixels[p + 1] = green; pixels[p + 2] = red;
+        Assert.False(raster.InkFree(new(0, 0, 80, 80))); Assert.True(raster.HasUnrecognizedInk([], []));
+    }
+
+    [Fact] public void IsolatedLongCharacterStrokeCannotMaskUnrecognizedInkAsARule()
+    {
+        var pixels = Enumerable.Repeat((byte)255, 100 * 100 * 4).ToArray(); var raster = new RecoveryRaster(100, 100, pixels);
+        for (var x = 10; x < 90; x++) for (var c = 0; c < 3; c++) pixels[(50 * 100 + x) * 4 + c] = 0;
+        Assert.Empty(raster.Rules()); Assert.True(raster.HasUnrecognizedInk([], raster.Rules()));
+        for (var x = 0; x < 100; x++) for (var c = 0; c < 3; c++) { pixels[x * 4 + c] = 0; pixels[(99 * 100 + x) * 4 + c] = 0; }
+        for (var y = 0; y < 100; y++) for (var c = 0; c < 3; c++) { pixels[(y * 100) * 4 + c] = 0; pixels[(y * 100 + 99) * 4 + c] = 0; }
+        Assert.Equal(4, raster.Rules().Count); Assert.True(raster.HasUnrecognizedInk([], raster.Rules()));
+    }
+
+    [Fact] public void DanglingHShapeCannotUseRejectedStrokesToProveItsMiddleRule()
+    {
+        var pixels = Enumerable.Repeat((byte)255, 120 * 120 * 4).ToArray(); var raster = new RecoveryRaster(120, 120, pixels);
+        for (var y = 20; y <= 100; y++) for (var c = 0; c < 3; c++) { pixels[(y * 120 + 20) * 4 + c] = 0; pixels[(y * 120 + 100) * 4 + c] = 0; }
+        for (var x = 20; x <= 100; x++) for (var c = 0; c < 3; c++) pixels[(60 * 120 + x) * 4 + c] = 0;
+        Assert.Empty(raster.Rules()); Assert.True(raster.HasUnrecognizedInk([], raster.Rules()));
+    }
+
 }

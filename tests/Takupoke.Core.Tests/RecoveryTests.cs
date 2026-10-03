@@ -91,12 +91,12 @@ public class RecoveryTests
     private sealed class AssignmentProvider(RecoveryMetadata metadata, RecoveryLesson lesson) : ILocalRecoveryProvider
     {
         public string Id => "windowsLanguageModel"; public bool LocalOnly => true; public RecoveryMetadata Metadata => metadata with { Provider = Id };
-        public int Calls;
-        public Task<LocalProviderState> AvailabilityAsync(CancellationToken token) => Task.FromResult(LocalProviderState.Ready);
+        public int Calls, AvailabilityCalls;
+        public Task<LocalProviderState> AvailabilityAsync(CancellationToken token) { AvailabilityCalls++; return Task.FromResult(LocalProviderState.Unsupported); }
         public Task<IReadOnlyList<RecoveryLesson>> RecoverCellAsync(RecoveryPromptCell cell, CancellationToken token) { Calls++; return Task.FromResult<IReadOnlyList<RecoveryLesson>>([lesson with { Subject = lesson.Subject with { Value = "model-generated-value-is-ignored" } }]); }
     }
-    [Fact] public async Task RoleProposalReachesModelAndRebuildsValuesFromOriginalAtoms()
-    { var (d, r) = Proposal(); Assert.Empty(RecoveryValidator.InputErrors(d)); var p = new AssignmentProvider(r.Metadata, r.Cells[0].Lessons[0]); var run = await RecoveryEngine.RunAsync(d, "windows", 10, true, [p], _ => null); Assert.Equal(1, p.Calls); Assert.Equal(RecoveryJobState.AwaitingConfirmation, run.State); Assert.Equal("架空科目A", run.Result!.Cells[0].Lessons[0].Subject.Value); }
+    [Fact] public async Task ProvedRoleScopesUseRulesWithoutModelAvailabilityOrInference()
+    { var (d, r) = Proposal(); Assert.Empty(RecoveryValidator.InputErrors(d)); var p = new AssignmentProvider(r.Metadata, r.Cells[0].Lessons[0]); var run = await RecoveryEngine.RunAsync(d, "windows", 10, true, [p], _ => null); Assert.Equal(0, p.Calls); Assert.Equal(0, p.AvailabilityCalls); Assert.Equal(RecoveryJobState.AwaitingConfirmation, run.State); Assert.Equal("架空科目A", run.Result!.Cells[0].Lessons[0].Subject.Value); }
     [Fact] public void ProposalCannotSwapSubjectAndTeacherEvenWhenEveryAtomIsUsed()
     { var (d, r) = Proposal(); var l = r.Cells[0].Lessons[0]; Assert.Contains("roleFieldEvidence", RecoveryValidator.Validate(d, r with { Cells = new[] { r.Cells[0] with { Lessons = [l with { Subject = l.Teacher, Teacher = l.Subject }] } }.Concat(r.Cells.Skip(1)).ToArray() }).Errors); }
     [Fact] public void FixedCellCannotUseUnusedScopeToHideOrphanText()
@@ -125,7 +125,7 @@ public class RecoveryTests
         Assert.Contains("spanTimeEvidence", RecoveryValidator.Validate(d, r).Errors);
     }
 
-    [Theory] [InlineData("教員:架空教員A")] [InlineData("架空教員A・教員:架空教員B")] public void FixedBindingCannotTreatOriginalRolePrefixAsAValue(string original)
+    [Theory] [InlineData("教員:架空教員A")] [InlineData("架空教員A・教員:架空教員B")] [InlineData("担当教員:架空教員")] [InlineData("授業名:架空授業")] [InlineData("会場:架空教室")] public void FixedBindingCannotTreatOriginalRolePrefixAsAValue(string original)
     {
         var (d, r) = Fixture(); var teacher = r.Cells[0].Lessons[0].Teacher with { Value = original };
         d = d with { Sources = d.Sources.Select(s => s.Id == "teacher" ? s with { Text = teacher.Value } : s).ToArray() };

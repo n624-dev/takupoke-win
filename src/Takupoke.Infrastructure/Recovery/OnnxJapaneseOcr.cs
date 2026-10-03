@@ -15,7 +15,7 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         var left = Math.Clamp((int)Math.Ceiling(box.X) + 2, 0, Width); var top = Math.Clamp((int)Math.Ceiling(box.Y) + 2, 0, Height);
         var right = Math.Clamp((int)Math.Floor(box.X + box.Width) - 2, 0, Width); var bottom = Math.Clamp((int)Math.Floor(box.Y + box.Height) - 2, 0, Height);
         if (right <= left || bottom <= top) return false;
-        for (var y = top; y < bottom; y++) for (var x = left; x < right; x++) { var p = (y * Width + x) * 4; if (Bgra[p] < 245 || Bgra[p + 1] < 245 || Bgra[p + 2] < 245) return false; }
+        for (var y = top; y < bottom; y++) for (var x = left; x < right; x++) { var p = (y * Width + x) * 4; if (Bgra[p] != 255 || Bgra[p + 1] != 255 || Bgra[p + 2] != 255) return false; }
         return true;
     }
     public bool HasUnrecognizedInk(IReadOnlyList<RecoveryBox> textBoxes, IReadOnlyList<PdfRule> rules)
@@ -25,7 +25,7 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         void Mark(int left, int top, int right, int bottom) { for (var y = Math.Max(0, top); y <= Math.Min(Height - 1, bottom); y++) for (var x = Math.Max(0, left); x <= Math.Min(Width - 1, right); x++) covered[y * Width + x] = true; }
         foreach (var box in textBoxes) Mark((int)Math.Floor(box.X) - 1, (int)Math.Floor(box.Y) - 1, (int)Math.Ceiling(box.X + box.Width) + 1, (int)Math.Ceiling(box.Y + box.Height) + 1);
         foreach (var rule in rules) Mark((int)Math.Floor(Math.Min(rule.X1, rule.X2)) - 2, (int)Math.Floor(Math.Min(rule.Y1, rule.Y2)) - 2, (int)Math.Ceiling(Math.Max(rule.X1, rule.X2)) + 2, (int)Math.Ceiling(Math.Max(rule.Y1, rule.Y2)) + 2);
-        for (var i = 0; i < covered.Length; i++) if (!covered[i] && (Bgra[i * 4] < 230 || Bgra[i * 4 + 1] < 230 || Bgra[i * 4 + 2] < 230)) return true;
+        for (var i = 0; i < covered.Length; i++) if (!covered[i] && (Bgra[i * 4] != 255 || Bgra[i * 4 + 1] != 255 || Bgra[i * 4 + 2] != 255)) return true;
         return false;
     }
     public IReadOnlyList<PdfRule> Rules()
@@ -35,8 +35,30 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         for (var y = 0; y < Height; y++) { var start = -1; for (var x = 0; x <= Width; x++) { if (x < Width && Dark(x, y)) { if (start < 0) start = x; } else if (start >= 0) { if (x - start >= Math.Max(40, Width / 40)) lines.Add(new(start, y, x - 1, y)); start = -1; } } }
         for (var x = 0; x < Width; x++) { var start = -1; for (var y = 0; y <= Height; y++) { if (y < Height && Dark(x, y)) { if (start < 0) start = y; } else if (start >= 0) { if (y - start >= Math.Max(40, Height / 40)) lines.Add(new(x, start, x, y - 1)); start = -1; } } }
         // Collapse adjacent scanlines from the same stroke to one centerline.
-        return lines.GroupBy(l => (l.Vertical, A: (int)(l.Vertical ? l.Y1 : l.X1) / 3, B: (int)(l.Vertical ? l.Y2 : l.X2) / 3))
+        var merged = lines.GroupBy(l => (l.Vertical, A: (int)(l.Vertical ? l.Y1 : l.X1) / 3, B: (int)(l.Vertical ? l.Y2 : l.X2) / 3))
             .SelectMany(g => { var ordered = g.OrderBy(l => l.Vertical ? l.X1 : l.Y1).ToArray(); var result = new List<PdfRule>(); var run = new List<PdfRule>(); foreach (var line in ordered) { if (run.Count > 0 && (line.Vertical ? line.X1 - run[^1].X1 : line.Y1 - run[^1].Y1) > 2) { result.Add(Merge(run)); run.Clear(); } run.Add(line); } if (run.Count > 0) result.Add(Merge(run)); return result; }).ToArray();
+        // Long isolated character strokes (一 / I) are ink, not table borders.
+        // A raster rule must connect to a perpendicular border at both ends.
+        var connectedRules = merged;
+        for (var pass = 0; pass < 64; pass++)
+        {
+            var vertical = connectedRules.Where(l => l.Vertical).GroupBy(l => (int)Math.Round(l.X1 / 3)).ToDictionary(g => g.Key, g => g.ToArray());
+            var horizontal = connectedRules.Where(l => l.Horizontal).GroupBy(l => (int)Math.Round(l.Y1 / 3)).ToDictionary(g => g.Key, g => g.ToArray());
+            bool Connected(PdfRule line, double x, double y)
+            {
+                var index = line.Vertical ? horizontal : vertical; var key = (int)Math.Round((line.Vertical ? y : x) / 3);
+                for (var bucket = key - 1; bucket <= key + 1; bucket++)
+                    if (index.TryGetValue(bucket, out var candidates) && candidates.Any(other => line.Vertical
+                        ? Math.Abs(other.Y1 - y) <= 3 && other.X1 - 3 <= x && x <= other.X2 + 3
+                        : Math.Abs(other.X1 - x) <= 3 && other.Y1 - 3 <= y && y <= other.Y2 + 3)) return true;
+                return false;
+            }
+            var next = connectedRules.Where(l => Connected(l, l.X1, l.Y1) && Connected(l, l.X2, l.Y2)).ToArray();
+            if (next.Length == connectedRules.Length) return next;
+            connectedRules = next;
+        }
+        // An unstable candidate graph cannot establish a table boundary.
+        return [];
         static PdfRule Merge(List<PdfRule> run) => run[0].Vertical ? new(run.Average(l => l.X1), run.Min(l => l.Y1), run.Average(l => l.X2), run.Max(l => l.Y2)) : new(run.Min(l => l.X1), run.Average(l => l.Y1), run.Max(l => l.X2), run.Average(l => l.Y2));
     }
 }

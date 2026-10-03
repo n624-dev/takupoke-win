@@ -37,7 +37,7 @@ public static class RecoveryDocumentBuilder
                 // Retain real per-character geometry; do not invent sub-boxes for an OCR line.
                 var text = PdfGrid.Key(string.Concat(piece.Select(a => a.Glyph.Text)));
                 yield return new(text, row.Key, Bounds(piece), piece.Select(a => a.Id).ToArray());
-                var pattern = @"[1-8]時限目|[1-8][・〜-][1-8]時限連続|\d{1,2}:\d{2}[~〜～]\d{1,2}:\d{2}|(?:令和\d{1,2}|\d{4})年度|前期|後期|試験返却時間割|定期試験時間割|試験時間割|通常時間割|授業時間割|時間割|授業科目|科目名|科目|担当教員|担当|教員|教師|授業教室|教室|場所";
+                var pattern = @"[1-8]時限目|[1-8][・〜-][1-8]時限連続|\d{1,2}:\d{2}[~〜～]\d{1,2}:\d{2}|(?:令和\d{1,2}|\d{4})年度|前期|後期|試験返却時間割|定期試験時間割|試験時間割|通常時間割|授業時間割|時間割|" + RecoveryRoleLabels.Pattern;
                 var raw = string.Concat(piece.Select(a => a.Glyph.Text));
                 foreach (Match match in Regex.Matches(raw, "(?:" + pattern + ")[：:]?"))
                 {
@@ -196,8 +196,8 @@ public static class RecoveryDocumentBuilder
         var result = new List<RecoveryRoleScope>(); double[]? columnAnchors = null;
         foreach (var role in Enum.GetValues<RecoveryFieldRole>())
         {
-            var names = role switch { RecoveryFieldRole.Subject => new[] { "科目", "授業科目", "科目名" }, RecoveryFieldRole.Teacher => ["教員", "担当", "担当教員", "教師"], _ => ["教室", "場所", "授業教室"] };
-            var candidates = labels.Where(l => l.Page == page && box.Contains(l.Box) && names.Contains(l.Value)).DistinctBy(l => string.Join(",", l.Ids)).OrderBy(l => l.Box.X).ToArray();
+            var names = RecoveryRoleLabels.For(role);
+            var candidates = labels.Where(l => l.Page == page && box.Contains(l.Box) && names.Contains(l.Value.TrimEnd(':', '：'))).DistinctBy(l => string.Join(",", l.Ids)).OrderBy(l => l.Box.X).ToArray();
             if (candidates.Length is < 1 or > 4 || columnAnchors is not null && (columnAnchors.Length != candidates.Length || columnAnchors.Where((x, i) => Math.Abs(x - candidates[i].Box.X) > 1).Any())) throw new InvalidDataException("科目・教員・教室の独立した原文ラベルを確認できません。");
             columnAnchors ??= candidates.Select(l => l.Box.X).ToArray();
             foreach (var (label, lessonIndex) in candidates.Select((l, i) => (l, i)))

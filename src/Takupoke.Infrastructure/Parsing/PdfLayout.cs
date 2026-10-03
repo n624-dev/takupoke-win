@@ -126,7 +126,7 @@ public sealed class PdfGrid(PdfPageLayout page)
         foreach (var candidate in _calibrationBoxes.Where(c => Math.Abs(c.Bottom - c.Top - box.Bottom + box.Top) < .5))
         {
             var candidateRows = Rows(Glyphs(candidate)); if (candidateRows.Count != 3) continue;
-            var values = TimetableText(candidate); if (values.Count != 3 || values.Any(v => Regex.IsMatch(Key(v), "^(?:科目|授業科目|科目名|教員|担当|教師|教室|授業教室|場所)[：:]"))) continue;
+            var values = TimetableText(candidate); if (values.Count != 3 || values.Any(Takupoke.Core.Recovery.RecoveryRoleLabels.HasPrefix)) continue;
             var baseline = candidateRows.Select(r => r.Average(g => g.Cy) - candidate.Top).ToArray();
             if (reference is not null && baseline.Where((value, i) => Math.Abs(reference[i] - value) > .75).Any()) throw new PdfParseException("P17");
             reference ??= baseline;

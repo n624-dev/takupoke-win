@@ -19,7 +19,28 @@ public static class RecoveryRules
 {
     public static RecoveredCell? Recover(RecoveryDocument doc, RecoveryCell cell)
     {
-        if (cell.BindingMode != RecoveryBindingMode.Fixed || cell.InputState != RecoveryInputState.Complete || cell.ConfirmedEmpty || cell.LessonBindings.Count != cell.ParallelCount) return null;
+        if (cell.InputState != RecoveryInputState.Complete || cell.ConfirmedEmpty) return null;
+        if (cell.BindingMode == RecoveryBindingMode.RoleProposal)
+        {
+            var inlineLabels = cell.RoleScopes.Where(s => s.Proof == RecoveryRoleProof.InlineLabel).SelectMany(s => s.LabelSourceIds).ToHashSet();
+            var bodyIds = cell.SourceIds.Where(id => !inlineLabels.Contains(id)).ToHashSet(); var assigned = new List<string>(); var proposalLessons = new List<RecoveryLesson>();
+            RecoveryField? ScopedField(int index, RecoveryFieldRole role)
+            {
+                var scopes = cell.RoleScopes.Where(s => s.LessonIndex == index && s.Role == role).ToArray(); if (scopes.Length != 1) return null; var scope = scopes[0];
+                var atoms = doc.Sources.Where(s => bodyIds.Contains(s.Id) && s.CellId == cell.Id && s.Page == cell.Page && scope.Box.Contains(s.Box)).ToArray();
+                if (atoms.Length == 0) return role != RecoveryFieldRole.Subject && scope.EmptyVerified ? new(RecoveryValueState.Empty, "", []) : null;
+                var ids = atoms.Select(s => s.Id).ToArray(); assigned.AddRange(ids); return new(RecoveryValueState.Present, string.Concat(atoms.Select(s => s.Text)), ids);
+            }
+            if (cell.ParallelCount is < 1 or > 4 || cell.RoleScopes.Count != cell.ParallelCount * 3) return null;
+            for (var i = 0; i < cell.ParallelCount; i++)
+            {
+                var subject = ScopedField(i, RecoveryFieldRole.Subject); var teacher = ScopedField(i, RecoveryFieldRole.Teacher); var room = ScopedField(i, RecoveryFieldRole.Room);
+                if (subject is null || teacher is null || room is null) return null;
+                proposalLessons.Add(new(subject, teacher, room, cell.DayHeaderIds, cell.PeriodHeaderIds));
+            }
+            return assigned.Count == bodyIds.Count && assigned.Distinct().Count() == assigned.Count && assigned.ToHashSet().SetEquals(bodyIds) ? new(cell.Id, RecoveryValueState.Present, proposalLessons) : null;
+        }
+        if (cell.BindingMode != RecoveryBindingMode.Fixed || cell.LessonBindings.Count != cell.ParallelCount) return null;
         var sources = doc.Sources.GroupBy(s => s.Id).ToDictionary(g => g.Key, g => g.First());
         RecoveryField? Field(IReadOnlyList<string> ids, string name)
         {

@@ -103,6 +103,9 @@ internal static partial class Program
         Wait(() => Find("adopt-recovery-" + kind) is null, "Explicit special adoption closes confirmation");
         var accepted = RecoveryUiFormalAsync(root, kind).GetAwaiter().GetResult();
         Require(accepted?.Recovery is not null && accepted.Special?.Lessons.Any(l => l.SpanStart == 1 && l.SpanEnd == 2) == true, "Special schedule adoption preserves the explicit merged period span.");
+        Stop(); Start(executable);
+        var restarted = RecoveryUiFormalAsync(root, kind).GetAwaiter().GetResult();
+        Require(restarted?.Recovery is not null && restarted.Recovery.Document.PdfHash == accepted?.Recovery?.Document.PdfHash && restarted.Special?.Lessons.Any(l => l.SpanStart == 1 && l.SpanEnd == 2) == true, "The adopted special document and merged span persist across native app restart.");
     }
     private static bool RecoveryUiText(string fragment) => _window?.FindFirst(TreeScope.Descendants,
         new AndCondition(new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Text), new PropertyCondition(AutomationElement.NameProperty, fragment))) is not null;
