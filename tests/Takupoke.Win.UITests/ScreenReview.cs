@@ -121,7 +121,7 @@ internal static partial class Program
         var lease = await store.BeginAsync(); var now = DateTimeOffset.UtcNow;
         // Review screenshots show complete, entirely fictional input states.
         // Main regressions independently delete their source to check retention.
-        var bytes = Encoding.UTF8.GetBytes("PK Entirely fictional accepted change-list fixture.");
+        var bytes = new byte[] { 0x50, 0x4b, 0x03, 0x04 }.Concat(Encoding.UTF8.GetBytes("Entirely fictional accepted change-list fixture.")).ToArray();
         var path = Path.Combine(root, "fictional-current-changes.xlsx");
         await File.WriteAllBytesAsync(path, bytes);
         using var content = await new FileSourceReader(new WindowsFileIdentity()).ReadAsync(path, MaterialKind.Changes, null);
