@@ -11,6 +11,41 @@ namespace Takupoke.Integration.Tests;
 public sealed class RecoveryPipelineTests
 {
     [Fact]
+    public void CanceledVectorRecoveryStopsBeforeLabelOrInkWork()
+    {
+        using var cancellation = new CancellationTokenSource(); cancellation.Cancel();
+        var inkCalls = 0;
+        Assert.Throws<OperationCanceledException>(() => RecoveryDocumentBuilder.Build(new string('a', 64), MaterialKind.Timetable,
+            [Layout(MaterialKind.Timetable)], (_, _) => { inkCalls++; return true; }, token: cancellation.Token));
+        Assert.Equal(0, inkCalls);
+    }
+    [Fact]
+    public void DenseVectorGridStopsAtTheComparisonBudget()
+    {
+        var page = Layout(MaterialKind.Timetable);
+        var lines = Enumerable.Range(0, 350).SelectMany(i => new[] { new PdfRule(i * 4, 0, i * 4, 1500), new PdfRule(0, i * 4, 1500, i * 4) }).ToArray();
+        page = page with { Height = 1600, Lines = lines };
+        var error = Assert.Throws<InvalidDataException>(() => RecoveryDocumentBuilder.Build(new string('a', 64), MaterialKind.Timetable, [page], (_, _) => true));
+        Assert.Contains("位置比較数", error.Message);
+    }
+    [Fact]
+    public void DuplicateGlyphIdentityCannotBeAssignedTwoSourceIds()
+    {
+        var page = Layout(MaterialKind.Timetable);
+        page = page with { Glyphs = page.Glyphs.Append(page.Glyphs[0]).ToArray() };
+        var error = Assert.Throws<InvalidDataException>(() => RecoveryDocumentBuilder.Build(new string('a', 64), MaterialKind.Timetable, [page], (_, _) => true));
+        Assert.Contains("重複", error.Message);
+    }
+    [Fact]
+    public void RepeatedOcrCoverageCannotSpendUnboundedPixelWork()
+    {
+        var raster = new RecoveryRaster(512, 512, Enumerable.Repeat((byte)255, 512 * 512 * 4).ToArray());
+        var repeatedBoxes = Enumerable.Repeat(new RecoveryBox(0, 0, 512, 512), 300).ToArray();
+        var error = Assert.Throws<InvalidDataException>(() => raster.HasUnrecognizedInk(repeatedBoxes, []));
+        Assert.Contains("画素処理数", error.Message);
+        Assert.False(raster.HasUnrecognizedInk([repeatedBoxes[0]], []));
+    }
+    [Fact]
     public void CanceledRecoveryCannotContinueRasterAnalysisEvenWithNoCandidateInk()
     {
         var raster = new RecoveryRaster(80, 80, Enumerable.Repeat((byte)255, 80 * 80 * 4).ToArray());

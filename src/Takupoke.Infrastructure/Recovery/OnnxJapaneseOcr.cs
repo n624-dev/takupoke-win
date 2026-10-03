@@ -8,6 +8,16 @@ namespace Takupoke.Infrastructure.Recovery;
 public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
 {
     public bool Valid => Width is > 0 and <= 4096 && Height is > 0 and <= 4096 && Bgra.Length == checked(Width * Height * 4);
+    private sealed class PixelWork(CancellationToken token)
+    {
+        private long _pixels;
+        public void Step(long amount = 1)
+        {
+            _pixels += amount;
+            if (_pixels > 64_000_000) throw new InvalidDataException("OCRの画素処理数が上限を超えています。");
+            if (amount > 1 || _pixels % 128 == 0) token.ThrowIfCancellationRequested();
+        }
+    }
     public bool InkFree(RecoveryBox box, bool[]? ruleMask = null, CancellationToken token = default)
     {
         token.ThrowIfCancellationRequested();
@@ -19,6 +29,8 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         return true;
     }
     public bool[] RuleMask(IReadOnlyList<PdfRule> rules, CancellationToken token = default)
+        => RuleMask(rules, token, new PixelWork(token));
+    private bool[] RuleMask(IReadOnlyList<PdfRule> rules, CancellationToken token, PixelWork work)
     {
         token.ThrowIfCancellationRequested();
         if (!Valid) throw new InvalidDataException("OCR画像のサイズが不正です。");
@@ -29,18 +41,19 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         // a missed glyph beside it must remain uncovered, even one pixel away.
         foreach (var rule in rules)
         {
-            token.ThrowIfCancellationRequested();
+            token.ThrowIfCancellationRequested(); work.Step();
+            if (!new[] { rule.X1, rule.Y1, rule.X2, rule.Y2 }.All(double.IsFinite)) throw new InvalidDataException("OCR罫線の位置が不正です。");
             if (rule.Horizontal)
             {
                 var first = Math.Clamp((int)Math.Ceiling(Math.Min(rule.X1, rule.X2)), 0, Width - 1); var last = Math.Clamp((int)Math.Floor(Math.Max(rule.X1, rule.X2)), 0, Width - 1);
                 for (var y = Math.Max(0, (int)Math.Floor(rule.Y1) - 2); y <= Math.Min(Height - 1, (int)Math.Ceiling(rule.Y1) + 2); y++)
-                { token.ThrowIfCancellationRequested(); var continuous = first < last; for (var x = first; x <= last && continuous; x++) continuous = Ink(x, y); if (continuous) for (var x = first; x <= last; x++) mask[y * Width + x] = true; }
+                { token.ThrowIfCancellationRequested(); work.Step(2L * (last - first + 1)); var continuous = first < last; for (var x = first; x <= last && continuous; x++) continuous = Ink(x, y); if (continuous) for (var x = first; x <= last; x++) mask[y * Width + x] = true; }
             }
             else if (rule.Vertical)
             {
                 var first = Math.Clamp((int)Math.Ceiling(Math.Min(rule.Y1, rule.Y2)), 0, Height - 1); var last = Math.Clamp((int)Math.Floor(Math.Max(rule.Y1, rule.Y2)), 0, Height - 1);
                 for (var x = Math.Max(0, (int)Math.Floor(rule.X1) - 2); x <= Math.Min(Width - 1, (int)Math.Ceiling(rule.X1) + 2); x++)
-                { token.ThrowIfCancellationRequested(); var continuous = first < last; for (var y = first; y <= last && continuous; y++) continuous = Ink(x, y); if (continuous) for (var y = first; y <= last; y++) mask[y * Width + x] = true; }
+                { token.ThrowIfCancellationRequested(); work.Step(2L * (last - first + 1)); var continuous = first < last; for (var y = first; y <= last && continuous; y++) continuous = Ink(x, y); if (continuous) for (var y = first; y <= last; y++) mask[y * Width + x] = true; }
             }
         }
         return mask;
@@ -49,18 +62,19 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
     {
         token.ThrowIfCancellationRequested();
         if (!Valid) return true;
-        var covered = RuleMask(rules, token);
-        void Mark(int left, int top, int right, int bottom) { for (var y = Math.Max(0, top); y <= Math.Min(Height - 1, bottom); y++) { token.ThrowIfCancellationRequested(); for (var x = Math.Max(0, left); x <= Math.Min(Width - 1, right); x++) covered[y * Width + x] = true; } }
+        if (textBoxes.Count > 10000 || textBoxes.Any(b => !b.Valid || b.X + b.Width > Width || b.Y + b.Height > Height)) throw new InvalidDataException("OCR文字の位置を確認できません。");
+        var work = new PixelWork(token); var covered = RuleMask(rules, token, work);
+        void Mark(int left, int top, int right, int bottom) { for (var y = Math.Max(0, top); y <= Math.Min(Height - 1, bottom); y++) { token.ThrowIfCancellationRequested(); work.Step(Math.Max(0, Math.Min(Width - 1, right) - Math.Max(0, left) + 1)); for (var x = Math.Max(0, left); x <= Math.Min(Width - 1, right); x++) covered[y * Width + x] = true; } }
         foreach (var box in textBoxes) Mark((int)Math.Floor(box.X) - 1, (int)Math.Floor(box.Y) - 1, (int)Math.Ceiling(box.X + box.Width) + 1, (int)Math.Ceiling(box.Y + box.Height) + 1);
-        for (var i = 0; i < covered.Length; i++) { if (i % 4096 == 0) token.ThrowIfCancellationRequested(); if (!covered[i] && (Bgra[i * 4] != 255 || Bgra[i * 4 + 1] != 255 || Bgra[i * 4 + 2] != 255)) return true; }
+        for (var i = 0; i < covered.Length; i++) { work.Step(); if (i % 4096 == 0) token.ThrowIfCancellationRequested(); if (!covered[i] && (Bgra[i * 4] != 255 || Bgra[i * 4 + 1] != 255 || Bgra[i * 4 + 2] != 255)) return true; }
         return false;
     }
     public IReadOnlyList<PdfRule> Rules(CancellationToken token = default)
     {
         token.ThrowIfCancellationRequested();
         if (!Valid) throw new InvalidDataException("OCR画像のサイズが不正です。");
-        var lines = new List<PdfRule>();
-        bool Dark(int x, int y) { var p = (y * Width + x) * 4; return (Bgra[p] + Bgra[p + 1] + Bgra[p + 2]) / 3 < 160; }
+        var lines = new List<PdfRule>(); var work = new PixelWork(token);
+        bool Dark(int x, int y) { work.Step(); var p = (y * Width + x) * 4; return (Bgra[p] + Bgra[p + 1] + Bgra[p + 2]) / 3 < 160; }
         for (var y = 0; y < Height; y++) { token.ThrowIfCancellationRequested(); var start = -1; for (var x = 0; x <= Width; x++) { if (x < Width && Dark(x, y)) { if (start < 0) start = x; } else if (start >= 0) { if (x - start >= Math.Max(40, Width / 40)) lines.Add(new(start, y, x - 1, y)); start = -1; } } }
         for (var x = 0; x < Width; x++) { token.ThrowIfCancellationRequested(); var start = -1; for (var y = 0; y <= Height; y++) { if (y < Height && Dark(x, y)) { if (start < 0) start = y; } else if (start >= 0) { if (y - start >= Math.Max(40, Height / 40)) lines.Add(new(x, start, x, y - 1)); start = -1; } } }
         // Collapse adjacent scanlines from the same stroke to one centerline.
