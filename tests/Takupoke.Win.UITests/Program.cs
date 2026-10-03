@@ -342,7 +342,23 @@ internal static partial class Program
             Wait(() => Find("page-settings") is not null && Find("settings-materials")?.Current.IsEnabled == true && Find("settings-help")?.Current.IsEnabled == true, "Settings navigation stays usable during token exchange");
             SelectMainColor("green", Path.Combine(root, "preferences.json"));
             SelectMainColor("purple", Path.Combine(root, "preferences.json"));
-            Require(ReadProbe(tokenRequests) == "2" && Visible("cancel-operation"), "Local preferences save without completing or canceling the pending token exchange.");
+            try
+            {
+                // Preference JSON is saved before the asynchronous UI render.
+                // Await the same pending-authentication condition after that render.
+                Wait(() => ReadProbe(tokenRequests) == "2" && Visible("cancel-operation"),
+                    "Local preferences save without completing or canceling the pending token exchange.");
+            }
+            catch
+            {
+                try
+                {
+                    var cancellation = Find("cancel-operation");
+                    Console.WriteLine($"Pending-auth setting diagnostic: tokenRequests={ReadProbe(tokenRequests)}; cancelExists={cancellation is not null}; cancelOffscreen={cancellation?.Current.IsOffscreen}; cancelEnabled={cancellation?.Current.IsEnabled}; operation={Find("operation-status")?.Current.Name}");
+                }
+                catch (ElementNotAvailableException) { Console.WriteLine("Pending-auth setting diagnostic: controls changed during diagnostic collection."); }
+                throw;
+            }
             Invoke("settings-help"); Wait(() => Find("page-help") is not null, "help is readable during token exchange");
             Invoke("back-settings"); Invoke("settings-account");
             WriteProbe(mode, "success");
