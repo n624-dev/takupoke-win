@@ -207,7 +207,7 @@ public static class RecoveryValidator
             Check(Enum.IsDefined(cell.BindingMode), "bindingMode");
             var proposal = cell.BindingMode == RecoveryBindingMode.RoleProposal;
             Check(proposal || cell.RoleScopes.Count == 0, "unusedRoleScopes");
-            if (!proposal) Check(!cell.LessonBindings.SelectMany(b => new[] { b.Subject, b.Teacher, b.Room }).Any(ids => Regex.IsMatch(Text(string.Concat(ids.Where(sources.ContainsKey).Select(id => sources[id].Text))), @"^(?:科目|授業科目|科目名|教員|担当|担当教員|教師|教室|授業教室|場所):")), "unboundRoleLabel");
+            if (!proposal) Check(!cell.LessonBindings.SelectMany(b => new[] { b.Subject, b.Teacher, b.Room }).Any(ids => Regex.IsMatch(Text(string.Concat(ids.Where(sources.ContainsKey).Select(id => sources[id].Text))), @"(?:^|[・/])(?:科目|授業科目|科目名|教員|担当|担当教員|教師|教室|授業教室|場所):")), "unboundRoleLabel");
             var inlineLabelIds = cell.RoleScopes.Where(s => s.Proof == RecoveryRoleProof.InlineLabel).SelectMany(s => s.LabelSourceIds).ToHashSet();
             var bodyIds = cell.SourceIds.Where(id => !inlineLabelIds.Contains(id)).ToHashSet();
             if (proposal)

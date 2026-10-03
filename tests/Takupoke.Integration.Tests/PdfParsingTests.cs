@@ -94,6 +94,10 @@ public sealed class PdfParsingTests
         Assert.Equal(new[] { "科目だけ", "", "教室あり" }, Grid(false).LessonFields(new(0, 0, 100, 100)));
         Assert.Equal("P17", Assert.Throws<PdfParseException>(() => Grid(true).LessonFields(new(0, 0, 100, 100))).Stage);
     }
+    [Fact] public void PartialRoleLabelInSecondParallelLessonCannotBypassRecoveryConfirmation()
+    {
+        Assert.Equal("P17", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Timetable([TimetableLayout("科A・科B", "教A・教員:教B", "室A・室B")])).Stage);
+    }
     [Fact]
     public void TimetableRejectsAmbiguousParallelPairing()
     {

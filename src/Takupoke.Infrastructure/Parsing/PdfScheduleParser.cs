@@ -60,7 +60,7 @@ public static partial class PdfScheduleParser
                     position = position with { DetectedLines = lines.Count };
                     if (lines.Count == 0) continue;
                     if (lines.Count != 3 || lines[0].Length == 0) throw new PdfParseException("P17", 1, position);
-                    if (lines.Any(l => Regex.IsMatch(PdfGrid.Key(l), "^(?:科目|授業科目|科目名|教員|担当|教師|教室|授業教室|場所)[：:]"))) throw new PdfParseException("P17", 1, position);
+                    if (lines.Any(l => Regex.IsMatch(PdfGrid.Key(l), "(?:^|[・／/])(?:科目|授業科目|科目名|教員|担当|担当教員|教師|教室|授業教室|場所)[：:]"))) throw new PdfParseException("P17", 1, position);
                     var fields = lines.Concat(Enumerable.Repeat("", 3 - lines.Count)).ToArray();
                     var parts = fields.Select(f => f.Replace('･', '・').Split('・')).ToArray();
                     var parallel = lines.Count == 3 && parts.All(p => p.Length == 2);
@@ -157,7 +157,7 @@ public static partial class PdfScheduleParser
         var lines = grid.LessonFields(box).Select(l => l.Trim()).ToArray();
         if (lines.Length > 0 && lines.Length != 3 || lines.Sum(l => Encoding.UTF8.GetByteCount(l)) > 4096) throw new PdfParseException("P17", page);
         if (lines.Length == 0) return null;
-        if (lines.Any(l => Regex.IsMatch(PdfGrid.Key(l), "^(?:科目|授業科目|科目名|教員|担当|教師|教室|授業教室|場所)[：:]"))) throw new PdfParseException("P17", page);
+        if (lines.Any(l => Regex.IsMatch(PdfGrid.Key(l), "(?:^|[・／/])(?:科目|授業科目|科目名|教員|担当|担当教員|教師|教室|授業教室|場所)[：:]"))) throw new PdfParseException("P17", page);
         var covered = xs.Select((x, i) => (x, i)).Where(p => box.Left + 0.5 < p.x && p.x < box.Right - 0.5).Select(p => p.i + 1).ToArray();
         if (covered.Length == 0 || !covered.Contains(period)) throw new PdfParseException("P08", page);
         var first = covered[0]; var last = covered[^1];

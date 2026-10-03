@@ -125,9 +125,9 @@ public class RecoveryTests
         Assert.Contains("spanTimeEvidence", RecoveryValidator.Validate(d, r).Errors);
     }
 
-    [Fact] public void FixedBindingCannotTreatOriginalRolePrefixAsAValue()
+    [Theory] [InlineData("教員:架空教員A")] [InlineData("架空教員A・教員:架空教員B")] public void FixedBindingCannotTreatOriginalRolePrefixAsAValue(string original)
     {
-        var (d, r) = Fixture(); var teacher = r.Cells[0].Lessons[0].Teacher with { Value = "教員:架空教員A" };
+        var (d, r) = Fixture(); var teacher = r.Cells[0].Lessons[0].Teacher with { Value = original };
         d = d with { Sources = d.Sources.Select(s => s.Id == "teacher" ? s with { Text = teacher.Value } : s).ToArray() };
         r = r with { Cells = r.Cells.Select((c, i) => i == 0 ? c with { Lessons = [c.Lessons[0] with { Teacher = teacher }] } : c).ToArray() };
         Assert.Contains("unboundRoleLabel", RecoveryValidator.Validate(d, r).Errors);
