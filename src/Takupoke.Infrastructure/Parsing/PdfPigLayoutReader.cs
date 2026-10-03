@@ -36,12 +36,14 @@ public static class PdfPigLayoutReader
                 if (page.Letters.Count == 0) throw new PdfParseException("raster", number);
                 var transform = new PdfDisplayTransform(media.Left, media.Bottom, media.Width, media.Height, page.Rotation.Value);
                 var paths = new PdfPathEngine(transform, token);
+                var visibility = new VisibilityState();
                 var text = kind == MaterialKind.Timetable ? new PdfTextEngine(token) : null;
                 var resources = Resources(document, page.Dictionary); var fonts = new Dictionary<string, PdfFont>();
                 foreach (var operation in page.Operations)
                 {
                     token.ThrowIfCancellationRequested();
                     var name = operation.Operator;
+                    visibility.Operation(operation, number, paths);
                     if (name == "Do") throw new PdfParseException("P12", number);
                     if (name is "BDC" or "BMC" or "W" or "W*") throw new PdfParseException("P01", number);
                     if (PdfPathEngine.Supports(name) || text is not null && PdfTextEngine.Supports(name))
@@ -57,7 +59,7 @@ public static class PdfPigLayoutReader
                         var items = Encoding.ASCII.GetString(serialized.ToArray()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
                         if (items.Length != 2 || !items[0].StartsWith('/')) throw new PdfParseException("P01", number);
                         var state = Resource(document, resources, "ExtGState", items[0][1..]);
-                        if (new[] { "Font", "SMask", "TR", "TR2" }.Any(state.Data.ContainsKey) || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1) throw new PdfParseException("P01", number);
+                        if (new[] { "Font", "SMask", "TR", "TR2" }.Any(state.Data.ContainsKey) || state.Data.ContainsKey("BM") && Name(document, state, "BM") != "Normal" || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1) throw new PdfParseException("P01", number);
                     }
                     if (text is null) continue;
                     switch (operation)
@@ -82,6 +84,8 @@ public static class PdfPigLayoutReader
                 IReadOnlyList<PdfGlyph> glyphs = text is not null ? text.Finish(page.Text).Select(transform.Glyph).ToArray() : SpecialGlyphs(page, transform, token);
                 capture?.Record(number, RecoveryInputState.Partial, new PdfPageLayout(transform.Width, transform.Height, glyphs, []));
                 var layout = new PdfPageLayout(transform.Width, transform.Height, glyphs, paths.Finish());
+                if (RulesOverlapText(layout.Lines, glyphs, token))
+                    throw new PdfParseException("P01", number);
                 capture?.Record(number, glyphs.Count == 0 ? RecoveryInputState.RasterOnly : RecoveryInputState.Complete, layout);
                 layout.Validate(number); output.Add(layout);
             }
@@ -93,6 +97,104 @@ public static class PdfPigLayoutReader
     }
     private static byte[] Bytes(string? literal, ReadOnlyMemory<byte> bytes)
     { if (literal is null) return bytes.ToArray(); if (literal.Any(c => c > 255)) throw new PdfParseException("P01"); return Encoding.Latin1.GetBytes(literal); }
+    private static bool RulesOverlapText(IReadOnlyList<PdfRule> rules, IReadOnlyList<PdfGlyph> glyphs, CancellationToken token)
+    {
+        // Search only rules crossing each glyph's coordinate interval, rather
+        // than comparing every glyph with every rule on large pages.
+        var vertical = rules.Where(r => r.Vertical).OrderBy(r => r.X1).ToArray();
+        var horizontal = rules.Where(r => r.Horizontal).OrderBy(r => r.Y1).ToArray();
+        var work = 0;
+        static int LowerBound(PdfRule[] items, double minimum, bool isVertical)
+        {
+            var low = 0; var high = items.Length;
+            while (low < high)
+            { var middle = low + (high - low) / 2; if ((isVertical ? items[middle].X1 : items[middle].Y1) < minimum) low = middle + 1; else high = middle; }
+            return low;
+        }
+        foreach (var glyph in glyphs)
+        {
+            token.ThrowIfCancellationRequested();
+            foreach (var isVertical in new[] { true, false })
+            {
+                var items = isVertical ? vertical : horizontal;
+                var minimum = (isVertical ? glyph.X : glyph.Y) - 1.5;
+                var maximum = (isVertical ? glyph.X + glyph.Width : glyph.Y + glyph.Height) + 1.5;
+                for (var index = LowerBound(items, minimum, isVertical); index < items.Length; index++)
+                {
+                    var rule = items[index]; if ((isVertical ? rule.X1 : rule.Y1) >= maximum) break;
+                    if (++work > 1_000_000) throw new PdfParseException("limit");
+                    if (work % 128 == 0) token.ThrowIfCancellationRequested();
+                    if (isVertical ? rule.Y1 - 1.5 < glyph.Y + glyph.Height && glyph.Y < rule.Y2 + 1.5
+                        : rule.X1 - 1.5 < glyph.X + glyph.Width && glyph.X < rule.X2 + 1.5) return true;
+                }
+            }
+        }
+        return false;
+    }
+    // Only reuse the supported black-text drawing subset. Unsupported colours
+    // or later paint can leave extractable text which is absent from the page.
+    private sealed class VisibilityState
+    {
+        private readonly record struct State(bool FillBlack, bool FillWhite, bool StrokeBlack, int TextMode, double LineWidth, PdfMatrix Ctm);
+        private State _state = new(true, false, true, 0, 1, PdfMatrix.Identity);
+        private readonly Stack<State> _stack = new();
+        private bool _shown;
+        public void Operation(IGraphicsStateOperation operation, int page, PdfPathEngine paths)
+        {
+            var name = operation.Operator;
+            bool Black(double[] components) => name.ToLowerInvariant() switch
+            {
+                "g" => components.Length == 1 && components[0] == 0,
+                "rg" => components.Length == 3 && components.All(v => v == 0),
+                "k" => components.Length == 4 && components.Take(3).All(v => v == 0) && components[3] == 1,
+                _ => false
+            };
+            bool White(double[] components) => name switch
+            {
+                "g" => components.Length == 1 && components[0] == 1,
+                "rg" => components.Length == 3 && components.All(v => v == 1),
+                "k" => components.Length == 4 && components.All(v => v == 0),
+                _ => false
+            };
+            switch (name)
+            {
+                case "q":
+                    if (_stack.Count >= 64) throw new PdfParseException("limit", page);
+                    _stack.Push(_state); break;
+                case "Q":
+                    if (!_stack.TryPop(out _state)) throw new PdfParseException("P01", page); break;
+                case "cm":
+                    _state = _state with { Ctm = PdfMatrix.From(Numbers(operation)).FollowedBy(_state.Ctm) }; break;
+                case "g": case "rg": case "k":
+                    var colour = Numbers(operation);
+                    _state = _state with { FillBlack = Black(colour), FillWhite = White(colour) }; break;
+                case "G": case "RG": case "K":
+                    _state = _state with { StrokeBlack = Black(Numbers(operation)) }; break;
+                case "CS": case "cs": case "SC": case "SCN": case "sc": case "scn":
+                case "sh": case "BI": case "ID": case "EI":
+                case "c": case "v": case "y":
+                    throw new PdfParseException("P01", page);
+                case "w":
+                    var width = Numbers(operation);
+                    if (width.Length != 1 || width[0] < 0) throw new PdfParseException("P01", page);
+                    _state = _state with { LineWidth = width[0] }; break;
+                case "Tr":
+                    var mode = Numbers(operation);
+                    if (mode.Length != 1 || mode[0] is not 0 and not 1 and not 2) throw new PdfParseException("P01", page);
+                    _state = _state with { TextMode = (int)mode[0] }; break;
+                case "Tj": case "TJ": case "'": case "\"":
+                    if (_state.TextMode is 0 or 2 && !_state.FillBlack || _state.TextMode is 1 or 2 && !_state.StrokeBlack)
+                        throw new PdfParseException("P01", page);
+                    _shown = true; break;
+                case "f": case "F": case "f*": case "B": case "B*": case "b": case "b*":
+                    if (_shown || !_state.FillWhite && !(_state.FillBlack && paths.PendingFillIsThinRules)) throw new PdfParseException("P01", page); break;
+                case "S": case "s":
+                    var origin = _state.Ctm.Point(0, 0); var x = _state.Ctm.Point(1, 0); var y = _state.Ctm.Point(0, 1);
+                    var scale = Math.Max(Math.Sqrt(Math.Pow(x.X - origin.X, 2) + Math.Pow(x.Y - origin.Y, 2)), Math.Sqrt(Math.Pow(y.X - origin.X, 2) + Math.Pow(y.Y - origin.Y, 2)));
+                    if (!_state.StrokeBlack || _state.LineWidth * scale > 2) throw new PdfParseException("P01", page); break;
+            }
+        }
+    }
     private static double[] Numbers(IGraphicsStateOperation operation)
     {
         using var output = new MemoryStream(); operation.Write(output);

@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Text;
 using Takupoke.Core;
+using Takupoke.Core.Recovery;
 using Takupoke.Infrastructure.Parsing;
 using Xunit;
 
@@ -129,7 +130,7 @@ public sealed class PdfParsingTests
     [InlineData(MaterialKind.ExamReturn)]
     public void ReaderAcceptsFullyOpaqueGraphicsStateForAllScheduleKinds(MaterialKind kind)
     {
-        var page = Assert.Single(PdfPigLayoutReader.Read(SyntheticPdf(graphicsState: "/ca 1 /CA 1"), kind));
+        var page = Assert.Single(PdfPigLayoutReader.Read(SyntheticPdf(graphicsState: "/ca 1 /CA 1 /BM /Normal"), kind));
         Assert.Equal("架空", string.Concat(page.Glyphs.Select(g => g.Text)));
         Assert.Equal(4, page.Lines.Count);
     }
@@ -139,6 +140,9 @@ public sealed class PdfParsingTests
     [InlineData("/SMask /None")]
     [InlineData("/TR /Identity")]
     [InlineData("/TR2 /Identity")]
+    [InlineData("/BM /Multiply")]
+    [InlineData("/BM /Screen")]
+    [InlineData("/BM [/Normal]")]
     public void SpecialReaderRejectsInvisibleOrUnsupportedGraphicsState(string state)
     {
         foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
@@ -153,6 +157,44 @@ public sealed class PdfParsingTests
     {
         foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
             Assert.Equal("P01", Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(SyntheticPdf(prefix: prefix),kind)).Stage);
+    }
+    [Theory]
+    [InlineData("1 g ", "")]
+    [InlineData("1 1 1 rg ", "")]
+    [InlineData("0 0 0 0 k ", "")]
+    [InlineData("0 g 0 0 200 200 re f ", "")]
+    [InlineData("0 0 0 rg 0 0 200 200 re f ", "")]
+    [InlineData("0 0 0 1 k 0 0 200 200 re f ", "")]
+    [InlineData("20 100 m 40 100 l S ", "")]
+    [InlineData("", " 20 100 m 40 100 l S")]
+    [InlineData("", " 1 g 10 80 80 40 re f")]
+    [InlineData("", " 1 G 20 w 10 100 m 100 100 l S")]
+    public void ReaderDoesNotReuseWhiteOrOverpaintedText(string prefix, string suffix)
+    {
+        foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
+        {
+            var capture = new RecoveryReadCapture();
+            Assert.Equal("P01", Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(SyntheticPdf(prefix: prefix, suffix: suffix), kind, capture: capture)).Stage);
+            Assert.False(capture.Complete);
+            Assert.DoesNotContain(capture.Pages, p => p.State == RecoveryInputState.Complete);
+        }
+    }
+    [Theory]
+    [InlineData("0 g ")]
+    [InlineData("0 0 0 rg ")]
+    [InlineData("0 0 0 1 k ")]
+    [InlineData("q 1 g 0 0 200 200 re f Q ")]
+    [InlineData("1 g 0 0 200 200 re f 0 g ")]
+    [InlineData("0 g 10 10 1 100 re f ")]
+    public void ReaderStillReusesBlackTextAfterAnEarlierBackground(string prefix)
+    {
+        foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
+        {
+            var capture = new RecoveryReadCapture();
+            var page = Assert.Single(PdfPigLayoutReader.Read(SyntheticPdf(prefix: prefix), kind, capture: capture));
+            Assert.Equal("架空", string.Concat(page.Glyphs.Select(g => g.Text)));
+            Assert.True(capture.Complete);
+        }
     }
     [Fact]
     public void ReaderRejectsMissingMappingAndFormObjects()
@@ -184,10 +226,10 @@ public sealed class PdfParsingTests
         for (var index = 0; index <= 40; index++) lines.Add(new(40 + index * 10, 60, 40 + index * 10, 140));
         return new(500, 500, glyphs, lines);
     }
-    internal static byte[] SyntheticPdf(bool removeMapping = false, bool formObject = false, string? graphicsState = null, string? prefix = null)
+    internal static byte[] SyntheticPdf(bool removeMapping = false, bool formObject = false, string? graphicsState = null, string? prefix = null, string? suffix = null)
     {
         var cmap = "1 begincodespacerange <00> <ff> endcodespacerange 2 beginbfchar <41> <67b6> <42> <7a7a> endbfchar";
-        var content = (prefix ?? "") + (graphicsState is null ? "" : "/Ghost gs ") + "BT /F1 10 Tf 1 0 0 1 20 100 Tm (AB) Tj ET 10 10 100 120 re S" + (formObject ? " /Fake Do" : "");
+        var content = (prefix ?? "") + (graphicsState is null ? "" : "/Ghost gs ") + "BT /F1 10 Tf 1 0 0 1 20 100 Tm (AB) Tj ET 10 10 100 120 re S" + (suffix ?? "") + (formObject ? " /Fake Do" : "");
         string Stream(string value) => "<< /Length " + Encoding.ASCII.GetByteCount(value) + " >>\nstream\n" + value + "\nendstream";
         var objects = new[]
         {

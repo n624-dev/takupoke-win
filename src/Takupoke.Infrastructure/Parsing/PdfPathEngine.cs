@@ -32,6 +32,24 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
     { ["q"] = 0, ["Q"] = 0, ["cm"] = 6, ["m"] = 2, ["l"] = 2, ["re"] = 4, ["h"] = 0, ["S"] = 0, ["s"] = 0,
         ["f"] = 0, ["F"] = 0, ["f*"] = 0, ["B"] = 0, ["B*"] = 0, ["b"] = 0, ["b*"] = 0, ["n"] = 0, ["c"] = 6, ["v"] = 4, ["y"] = 4 };
     public static bool Supports(string operation) => Counts.ContainsKey(operation);
+    public bool PendingFillIsThinRules
+    {
+        get
+        {
+            foreach (var path in _paths)
+            {
+                ConsumePaintWork();
+                if (path.Count != 5 || path[0] != path[4] || path.Take(4).Distinct().Count() != 4) return false;
+                var left = path.Min(p => p.X); var right = path.Max(p => p.X);
+                var top = path.Min(p => p.Y); var bottom = path.Max(p => p.Y);
+                if (path.Any(p => p.X != left && p.X != right || p.Y != top && p.Y != bottom)) return false;
+                if (!((right - left <= 2.1 && bottom - top > 3) || (bottom - top <= 2.1 && right - left > 3))) return false;
+                for (var index = 1; index < path.Count; index++)
+                    if (path[index].X != path[index - 1].X && path[index].Y != path[index - 1].Y) return false;
+            }
+            return true;
+        }
+    }
     private (double X, double Y) Point(double x, double y) { var p = _ctm.Point(x, y); return display.Point(p.X, p.Y); }
     private void Close() { if (_paths.Count > 0 && _paths[^1].Count > 0) _paths[^1].Add(_paths[^1][0]); }
     public void Operation(string operation, double[] numbers)

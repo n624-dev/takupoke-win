@@ -11,7 +11,7 @@ public sealed record RecoveryModelBundle(string Id, string Version, string Runti
 }
 /// Owns pinned, verified artifact directories. A failed download or smoke test
 /// leaves the old active directory intact; no SDK catalog auto-update is used.
-public sealed class RecoveryModelBundleStore(string root)
+public sealed class RecoveryModelBundleStore(string root, Action<string>? removeDirectory = null)
 {
     private readonly SemaphoreSlim _gate = new(1, 1);
     private static string DirectoryName(RecoveryModelBundle bundle) => bundle.Runtime + "-" + Regex.Replace(bundle.Id, "[^a-zA-Z0-9._-]", "_") + "-" + bundle.Version + "-" + Takupoke.Core.Recovery.RecoveryValidator.Fingerprint(bundle);
@@ -54,10 +54,24 @@ public sealed class RecoveryModelBundleStore(string root)
         foreach (var artifact in bundle.Artifacts) { var file = Path.Combine(path, artifact.Path.Replace('/', Path.DirectorySeparatorChar)); if (!File.Exists(file)) return false; await using var input = File.OpenRead(file); if (input.Length != artifact.Size || Convert.ToHexStringLower(await SHA256.HashDataAsync(input, token)) != artifact.Sha256) return false; }
         return true;
     }
+    private async Task<(RecoveryModelBundle Bundle, string Path)?> StoredCoreAsync(string runtime, CancellationToken token)
+    {
+        var pointer = Path.Combine(root, "active." + runtime + ".json"); if (!File.Exists(pointer)) return null;
+        var bundle = DataCodec.Decode<RecoveryModelBundle>(await File.ReadAllBytesAsync(pointer, token));
+        if (!bundle.Valid || bundle.Runtime != runtime) throw new InvalidDataException("保存モデルManifestを確認できません。");
+        return (bundle, Path.Combine(root, DirectoryName(bundle)));
+    }
+    public async Task<(RecoveryModelBundle Bundle, string Path)?> InstalledAsync(string runtime, CancellationToken token = default)
+    {
+        if (runtime is not "windowsOcr" and not "foundryLocal") throw new ArgumentException("Unknown runtime.");
+        await _gate.WaitAsync(token); try { return await StoredCoreAsync(runtime, token); } finally { _gate.Release(); }
+    }
     public async Task<(RecoveryModelBundle Bundle, string Path)?> ActiveAsync(string runtime, CancellationToken token = default)
     {
         if (runtime is not "windowsOcr" and not "foundryLocal") throw new ArgumentException("Unknown runtime.");
-        await _gate.WaitAsync(token); try { var pointer = Path.Combine(root, "active." + runtime + ".json"); if (!File.Exists(pointer)) return null; var bundle = DataCodec.Decode<RecoveryModelBundle>(await File.ReadAllBytesAsync(pointer, token)); var path = Path.Combine(root, DirectoryName(bundle)); return bundle.Runtime == runtime && await VerifyAsync(bundle, path, token) ? (bundle, path) : null; } finally { _gate.Release(); }
+        await _gate.WaitAsync(token);
+        try { var stored = await StoredCoreAsync(runtime, token); return stored is { } value && await VerifyAsync(value.Bundle, value.Path, token) ? stored : null; }
+        finally { _gate.Release(); }
     }
     /// Run before providers start. Retain active and explicitly leased bundle
     /// directories; remove only this store's owned crash leftovers.
@@ -96,6 +110,15 @@ public sealed class RecoveryModelBundleStore(string root)
     public async Task DeleteAsync(string runtime, CancellationToken token = default)
     {
         if (runtime is not "windowsOcr" and not "foundryLocal") throw new ArgumentException("Unknown runtime.");
-        await _gate.WaitAsync(token); try { var pointer = Path.Combine(root, "active." + runtime + ".json"); if (!File.Exists(pointer)) return; var bundle = DataCodec.Decode<RecoveryModelBundle>(await File.ReadAllBytesAsync(pointer, token)); if (!bundle.Valid || bundle.Runtime != runtime) throw new InvalidDataException("モデルManifestを確認できません。"); token.ThrowIfCancellationRequested(); File.Delete(pointer); var path = Path.Combine(root, DirectoryName(bundle)); if (Directory.Exists(path)) Directory.Delete(path, true); } finally { _gate.Release(); }
+        await _gate.WaitAsync(token);
+        try
+        {
+            var installed = await StoredCoreAsync(runtime, token); if (installed is not { } value) return;
+            token.ThrowIfCancellationRequested();
+            if (Directory.Exists(value.Path))
+            { if (removeDirectory is null) Directory.Delete(value.Path, true); else removeDirectory(value.Path); }
+            File.Delete(Path.Combine(root, "active." + runtime + ".json"));
+        }
+        finally { _gate.Release(); }
     }
 }

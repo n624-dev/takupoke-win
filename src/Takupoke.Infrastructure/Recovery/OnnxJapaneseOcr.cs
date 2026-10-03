@@ -11,8 +11,8 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
     public bool InkFree(RecoveryBox box, bool[]? ruleMask = null)
     {
         if (!Valid || !box.Valid || box.X + box.Width > Width || box.Y + box.Height > Height || ruleMask is not null && ruleMask.Length != Width * Height) return false;
-        var left = Math.Clamp((int)Math.Ceiling(box.X), 0, Width); var top = Math.Clamp((int)Math.Ceiling(box.Y), 0, Height);
-        var right = Math.Clamp((int)Math.Floor(box.X + box.Width), 0, Width); var bottom = Math.Clamp((int)Math.Floor(box.Y + box.Height), 0, Height);
+        var left = Math.Clamp((int)Math.Ceiling(box.X - .5), 0, Width); var top = Math.Clamp((int)Math.Ceiling(box.Y - .5), 0, Height);
+        var right = Math.Clamp((int)Math.Ceiling(box.X + box.Width - .5), 0, Width); var bottom = Math.Clamp((int)Math.Ceiling(box.Y + box.Height - .5), 0, Height);
         if (right <= left || bottom <= top) return false;
         for (var y = top; y < bottom; y++) for (var x = left; x < right; x++) { var index = y * Width + x; if (ruleMask?[index] == true) continue; var p = index * 4; if (Bgra[p] != 255 || Bgra[p + 1] != 255 || Bgra[p + 2] != 255) return false; }
         return true;

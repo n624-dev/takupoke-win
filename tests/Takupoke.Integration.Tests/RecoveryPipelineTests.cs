@@ -156,4 +156,13 @@ public sealed class RecoveryPipelineTests
         Assert.Throws<InvalidDataException>(() => RecoveryDocumentBuilder.Build(new string('a', 64), MaterialKind.Timetable, [layout], (_, _) => true));
     }
 
+    [Theory] [InlineData(10, 15, 10.25)] [InlineData(15, 10, 10.25)] [InlineData(30, 15, 10.75)] [InlineData(15, 30, 10.75)]
+    public void FractionalBlankRegionChecksAllPixelsWhoseCentersAreInside(int x, int y, double origin)
+    {
+        var pixels = Enumerable.Repeat((byte)255, 80 * 80 * 4).ToArray(); var raster = new RecoveryRaster(80, 80, pixels);
+        var box = new RecoveryBox(origin, origin, 20, 20); Assert.True(raster.InkFree(box));
+        for (var channel = 0; channel < 3; channel++) pixels[(y * 80 + x) * 4 + channel] = 254;
+        Assert.False(raster.InkFree(box));
+    }
+
 }

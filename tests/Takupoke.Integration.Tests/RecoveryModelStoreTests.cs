@@ -63,4 +63,16 @@ public sealed class RecoveryModelStoreTests : IAsyncLifetime
         Assert.NotNull(await store.ActiveAsync("windowsOcr"));
     }
 
+    [Fact] public async Task PartialBundleDeleteFailureKeepsIdentityAcrossRestartAndCanRetry()
+    {
+        var bytes = Content("ocr"); var bundle = new RecoveryModelBundle("fictional", "1", "windowsOcr", "10.0.26100", 1, "test-only", true,
+            [new("first.bin", "https://models.example.invalid/first", bytes.Length, NotificationDiff.Digest(bytes)), new("second.bin", "https://models.example.invalid/second", bytes.Length, NotificationDiff.Digest(bytes))]);
+        var path = await new RecoveryModelBundleStore(_root).InstallAsync(bundle, (_, _) => Task.FromResult<Stream>(new MemoryStream(bytes)), (_, _) => Task.CompletedTask);
+        var failing = new RecoveryModelBundleStore(_root, directory => { File.Delete(Path.Combine(directory, "first.bin")); throw new IOException("fictional partial removal failure"); });
+        await Assert.ThrowsAsync<IOException>(() => failing.DeleteAsync("windowsOcr"));
+        var restarted = new RecoveryModelBundleStore(_root); Assert.NotNull(await restarted.InstalledAsync("windowsOcr")); Assert.Null(await restarted.ActiveAsync("windowsOcr"));
+        Assert.True(File.Exists(Path.Combine(path, "second.bin"))); await restarted.DeleteAsync("windowsOcr");
+        Assert.Null(await restarted.InstalledAsync("windowsOcr")); Assert.False(Directory.Exists(path));
+    }
+
 }

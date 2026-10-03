@@ -41,6 +41,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private readonly RecoveryCoordinator _recovery;
     private readonly WindowsRecoveryModels _recoveryModels;
     public bool OcrModelReady { get; private set; }
+    public bool OcrModelInstalled { get; private set; }
     public string? RecoveryModelMessage { get; private set; }
     public FoundryPinnedManifest? FoundryModel { get; private set; }
     public IReadOnlyList<FoundryPinnedManifest> FoundryCandidates => FoundryPinnedModelStore.Candidates;
@@ -251,9 +252,10 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public Task InstallOcrModelAsync() => RunAsync(async token =>
     {
         await _recoveryModels.InstallOcrAsync((done, total) => _dispatcher.TryEnqueue(() => OperationStatus = $"日本語OCRモデルを取得しています（{done / 1024 / 1024} / {total / 1024 / 1024} MB）。"), token);
+        OcrModelInstalled = await _recoveryModels.OcrInstalledAsync(token) is not null;
         OcrModelReady = await _recoveryModels.OcrStateAsync(token) is not null; Status = "日本語OCRモデルを準備しました。資料の復旧を再度開始できます。";
     }, "日本語OCRモデルを取得しています。学校資料は外部へ送信されません。");
-    public Task DeleteOcrModelAsync() => RunAsync(async token => { await _recoveryModels.DeleteOcrAsync(token); OcrModelReady = false; Status = "日本語OCRモデルを削除しました。"; });
+    public Task DeleteOcrModelAsync() => RunAsync(async token => { await _recoveryModels.DeleteOcrAsync(token); OcrModelReady = false; OcrModelInstalled = false; Status = "日本語OCRモデルを削除しました。"; });
     public Task InstallFoundryModelAsync(FoundryPinnedManifest manifest) => RunAsync(async token =>
     {
         await _recoveryModels.Foundry.InstallAsync(manifest, progress => _dispatcher.TryEnqueue(() => OperationStatus = $"端末内AIモデルを取得しています（{progress:0}%）。"), token);
@@ -360,9 +362,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             await _school.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token), await _school.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, token),
             await _school.ReadAsync<RecoveryJob>(lease, "recovery." + kind, token), await _school.ReadAsync<RecoveryPreview>(lease, "recovery.preview." + kind, token));
         RecoveryModelMessage = null;
-        try { OcrModelReady = await _recoveryModels.OcrStateAsync(token) is not null; FoundryModel = await _recoveryModels.Foundry.InstalledAsync(token); }
+        try { OcrModelInstalled = await _recoveryModels.OcrInstalledAsync(token) is not null; OcrModelReady = await _recoveryModels.OcrStateAsync(token) is not null; FoundryModel = await _recoveryModels.Foundry.InstalledAsync(token); }
         catch (OperationCanceledException) { throw; }
-        catch { OcrModelReady = false; FoundryModel = null; RecoveryModelMessage = "保存したAIモデルの状態を確認できません。資料の正常な解析結果は引き続き利用できます。モデル管理から準備し直してください。"; }
+        catch { OcrModelReady = false; OcrModelInstalled = false; FoundryModel = null; RecoveryModelMessage = "保存したAIモデルの状態を確認できません。資料の正常な解析結果は引き続き利用できます。モデル管理から準備し直してください。"; }
         var mappingRecord = await _school.ReadAsync<SavedMapping>(lease, "api.mapping", token); var mappings = mappingRecord?.Rules;
         var linksRecord = await _school.ReadAsync<SavedLinks>(lease, "api.links", token); var links = linksRecord?.Payload.Validated();
         var timesRecord = await _school.ReadAsync<SavedTimes>(lease, "api.times", token); var times = timesRecord?.Data.Validated();

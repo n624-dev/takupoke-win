@@ -35,9 +35,12 @@ internal static partial class Program
         if (combo.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll)) ((ScrollItemPattern)scroll).ScrollIntoView();
         combo.SetFocus();
         Wait(() => combo.Current.HasKeyboardFocus, id + " supports keyboard focus");
-        ((ExpandCollapsePattern)combo.GetCurrentPattern(ExpandCollapsePattern.Pattern)).Expand();
-        Wait(() => ByName(label, ControlType.ListItem).Current.IsEnabled,
-            id + " exposes the selected option");
+        var expansion = (ExpandCollapsePattern)combo.GetCurrentPattern(ExpandCollapsePattern.Pattern);
+        expansion.Expand();
+        // The popup virtualizes items around the current selection. Its target
+        // item need not be exposed to UIA until keyboard navigation reaches it.
+        Wait(() => expansion.Current.ExpandCollapseState == ExpandCollapseState.Expanded,
+            id + " popup is expanded for keyboard selection");
         // UIA SetFocus on a popup item need not move the ComboBox's highlighted
         // item. Exercise its standard keyboard selection from a known position.
         var labels = id == "main-color"
@@ -46,7 +49,18 @@ internal static partial class Program
         var index = Array.IndexOf(labels, label);
         Require(index >= 0, "Requested keyboard option exists in its ordered list.");
         System.Windows.Forms.SendKeys.SendWait("{HOME}" + string.Concat(Enumerable.Repeat("{DOWN}", index)) + "{ENTER}");
-        Wait(() => saved() && Find(id)?.Current.IsEnabled == true,
-            id + " keyboard selection is persisted: " + label);
+        try
+        {
+            Wait(() => saved() && Find(id)?.Current.IsEnabled == true,
+                id + " keyboard selection is persisted: " + label);
+        }
+        catch
+        {
+            var current = Find(id);
+            var selected = current?.TryGetCurrentPattern(SelectionPattern.Pattern, out var pattern) == true
+                ? string.Join(", ", ((SelectionPattern)pattern!).Current.GetSelection().Select(item => item.Current.Name)) : "unavailable";
+            Console.WriteLine($"Keyboard setting diagnostic: {id}; expected={label}; selected={selected}; persisted={saved()}");
+            throw;
+        }
     }
 }
