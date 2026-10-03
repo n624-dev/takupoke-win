@@ -1,0 +1,23 @@
+name: Evaluate pinned local recovery models
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/pdf-local-recovery]
+    paths: ['tools/model-evaluation/**', '.github/workflows/recovery-model-evaluation.yml']
+jobs:
+  evaluate:
+    runs-on: windows-2025
+    timeout-minutes: 120
+    permissions:
+      contents: read
+    env:
+      ORT_TELEMETRY_DISABLED: '1'
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Download pinned public models and evaluate invented cells
+        shell: pwsh
+        run: dotnet run --project tools/model-evaluation/ModelEvaluation.csproj --configuration Release --no-launch-profile
