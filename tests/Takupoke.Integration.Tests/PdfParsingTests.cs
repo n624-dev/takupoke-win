@@ -153,7 +153,7 @@ public sealed class PdfParsingTests
         for (var index = 0; index <= 40; index++) lines.Add(new(40 + index * 10, 60, 40 + index * 10, 140));
         return new(500, 500, glyphs, lines);
     }
-    private static byte[] SyntheticPdf(bool removeMapping = false, bool formObject = false)
+    internal static byte[] SyntheticPdf(bool removeMapping = false, bool formObject = false)
     {
         var cmap = "1 begincodespacerange <00> <ff> endcodespacerange 2 beginbfchar <41> <67b6> <42> <7a7a> endbfchar";
         var content = "BT /F1 10 Tf 1 0 0 1 20 100 Tm (AB) Tj ET 10 10 100 120 re S" + (formObject ? " /Fake Do" : "");
