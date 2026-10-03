@@ -8,9 +8,9 @@
 
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版0.1.0-dev.6のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.6)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。
+[開発確認版0.1.0-dev.7のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.7)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。
 
-1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.6-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.6-arm64-Setup.exe`。
+1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.7-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.7-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
 3. スタートメニューの「たくポケ」から起動します。
 
@@ -94,6 +94,9 @@ GitHub Actionsの保存用キャッシュやartifactは作成しません。配�
 2026-10-03（日本時間）の全面見直しは、コミット`2043cbe`の[push CI](https://github.com/n624-dev/takupoke-win/actions/runs/37039440433)全7ジョブと[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37039441046)全8ジョブが成功し、[開発確認版0.1.0-dev.6](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.6)として公開しました。Core183件・Integration120件、固定Swift比較、x64 Debug／Release・ARM64 Releaseビルドに加え、x64の6つの導入状態でUI262項目以上を確認しました。実dev.5から同じ／別フォルダーへの更新、無関係な自動起動の保護、設定と無関係ファイルの保持、削除も成功しています。公開6ファイルの名前・ビルド元と、SHA-256一覧をGitHubの配布ハッシュへ照合しました。
 
 独立した4名が重複する範囲で全コード・文言・配布経路を確認しました。Windowsネイティブの最終44画面では、明暗テーマ、通常幅と680幅、150／200%文字拡大を確認しています。指摘された日付選択、コントラスト、フォーム配置、警告件数の見切れ、年度不足・破損キャッシュ、削除案内は修正確認済みです。公開テストは架空入力のみで、ARM64実機・学校認証・実資料・OneDrive同期・OS通知・ロック／復帰・High Contrastの実画面確認は含みません。
+
+
+2026-10-03（日本時間）の追加修正は、コミット`4425bd1`の[push CI](https://github.com/n624-dev/takupoke-win/actions/runs/37081382640)全7ジョブと[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37081384250)全8ジョブが成功し、[開発確認版0.1.0-dev.7](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.7)として公開しました。学校行事の弱いETagによる再確認失敗を修正し、初回取得と繰り返しの304応答を検証しました。解析状態はiOSと同じ短い文言にそろえ、設定などの重複する説明文を整理しました。時間割は表全体の高さを確保して表内の縦スクロールを廃止し、未確定の時刻を非表示にしました。複数時限のカードに背後の罫線が透けないことを明暗テーマと文字拡大の実描画で確認しています。Core183件・Integration123件、Windows UI276項目以上、44画面の撮影、6つの導入状態と公開ファイルのSHA-256照合が成功しました。
 
 ## データの扱い
 
