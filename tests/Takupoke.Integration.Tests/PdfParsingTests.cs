@@ -42,6 +42,26 @@ public sealed class PdfParsingTests
         var map = PdfUnicodeMap.Read("1 begincodespacerange <00> <ff> endcodespacerange 1 beginbfchar <41> <67b6> endbfchar 1 beginbfrange <42> <43> <0042> endbfrange"u8.ToArray());
         Assert.Equal("架", map.Values[65]); Assert.Equal("B", map.Values[66]); Assert.Equal("C", map.Values[67]);
     }
+    [Fact]
+    public void CmapHandlesTheFullTwoByteDomainWithoutPairwiseRangeScans()
+    {
+        var source = new StringBuilder("65536 begincodespacerange\n");
+        for (var code = 0; code <= 65535; code++) source.AppendFormat(CultureInfo.InvariantCulture, "<{0:x4}> <{0:x4}>\n", code);
+        source.Append("endcodespacerange\n65536 beginbfchar\n");
+        for (var code = 0; code <= 65535; code++) source.AppendFormat(CultureInfo.InvariantCulture, "<{0:x4}> <67b6>\n", code);
+        source.Append("endbfchar");
+        var bytes = Encoding.ASCII.GetBytes(source.ToString()); Assert.True(bytes.Length < 2_000_000);
+        var map = PdfUnicodeMap.Read(bytes);
+        Assert.Equal(2, map.CodeBytes); Assert.Equal(65536, map.Values.Count);
+        Assert.Equal("架", map.Values[0]); Assert.Equal("架", map.Values[65535]);
+    }
+    [Theory]
+    [InlineData("2 begincodespacerange <00> <20> <20> <ff> endcodespacerange 1 beginbfchar <41> <67b6> endbfchar")]
+    [InlineData("1 begincodespacerange <00> <20> endcodespacerange 1 beginbfchar <41> <67b6> endbfchar")]
+    public void IndexedCmapStillRejectsOverlappingRangesAndUncoveredCodes(string source)
+    {
+        Assert.Throws<PdfParseException>(() => PdfUnicodeMap.Read(Encoding.ASCII.GetBytes(source)));
+    }
     [Theory]
     [InlineData("usecmap")]
     [InlineData("/WMode 1")]
@@ -81,6 +101,9 @@ public sealed class PdfParsingTests
     [InlineData("令和14年度令和100年度前期時間割")]
     [InlineData("令和14年度12032年度前期時間割")]
     [InlineData("令和14年度999999999999999999年度前期時間割")]
+    [InlineData("令和14年度令和Ⅸ年度前期時間割")]
+    [InlineData("令和14年度令和௰年度前期時間割")]
+    [InlineData("令和14年度ⅯⅯⅩⅩⅦ年度前期時間割")]
     public void ConflictingTitleYearsCannotSelectTheFirstYear(string heading)
     {
         var page = TimetableLayout("架空科目", "架空教員", "架空教室");
@@ -90,6 +113,7 @@ public sealed class PdfParsingTests
     [Theory]
     [InlineData("令和14年度令和14年度前期時間割")]
     [InlineData("令和14年度2032年度前期時間割")]
+    [InlineData("令 和 １ ４ 年 度 ２ ０ ３ ２ 年 度 前期時間割")]
     public void RepeatedOrEquivalentTitleYearsRemainValid(string heading)
     {
         var page = TimetableLayout("架空科目", "架空教員", "架空教室");

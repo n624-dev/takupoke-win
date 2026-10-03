@@ -8,20 +8,22 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class PdfScheduleParser
 {
-    public const int TimetableVersion = 19;
-    public const int SpecialVersion = 18;
+    public const int TimetableVersion = 20;
+    public const int SpecialVersion = 19;
     private const int MaximumRecords = 10000;
     private static string Joined(IEnumerable<PdfGlyph> glyphs) => string.Concat(glyphs.Select(g => g.Text));
-    private static string Heading(PdfPageLayout page, double fraction) => PdfGrid.Key(string.Concat(PdfGrid.Rows(page.Glyphs.Where(g => g.Cy < page.Height * fraction)).Select(Joined)));
+    private static string Heading(PdfPageLayout page, double fraction) => string.Concat(PdfGrid.Rows(page.Glyphs.Where(g => g.Cy < page.Height * fraction)).Select(Joined));
     private static int Year(string heading, int page)
     {
-        var match = Regex.Match(heading, "令和([0-9]{1,2})年度");
+        var match = Regex.Match(PdfGrid.Key(heading), "令和([0-9]{1,2})年度");
         if (!match.Success || !int.TryParse(match.Groups[1].Value, out var era) || era is < 1 or > 99) throw new PdfParseException("P03", page);
         var year = 2018 + era;
-        foreach (Match label in Regex.Matches(heading, "令和([0-9]+)年度|(?<![0-9])([0-9]+)年度"))
+        var raw = Regex.Replace(heading, @"\s", "");
+        foreach (Match label in Regex.Matches(raw, @"令和([^年度]*)年度|(?<!\p{N})(\p{N}+)年度"))
         {
             var eraLabel = label.Groups[1].Success;
-            if (!int.TryParse(label.Groups[eraLabel ? 1 : 2].Value, out var number) ||
+            var digits = PdfGrid.Key(label.Groups[eraLabel ? 1 : 2].Value);
+            if (!Regex.IsMatch(digits, "^[0-9]+$") || !int.TryParse(digits, out var number) ||
                 (eraLabel ? number is < 1 or > 99 : number is < 1900 or > 9998)) throw new PdfParseException("P03", page);
             var value = eraLabel ? 2018 + number : number;
             if (value != year) throw new PdfParseException("P03", page);
@@ -38,7 +40,7 @@ public static partial class PdfScheduleParser
     {
         if (pages.Count != 1) throw new PdfParseException("P04");
         var page = pages[0]; page.Validate(1); token.ThrowIfCancellationRequested();
-        var heading = Heading(page, 1.0 / 8); var year = Year(heading, 1);
+        var rawHeading = Heading(page, 1.0 / 8); var year = Year(rawHeading, 1); var heading = PdfGrid.Key(rawHeading);
         if (!heading.Contains("時間割") || heading.Contains("前期") == heading.Contains("後期")) throw new PdfParseException("P04", 1);
         var grid = new PdfGrid(page); var header = PeriodHeader(page, "12345678", 5, 0.2);
         var first = grid.Box(header[0].Cx, header[0].Cy); var classBox = grid.Box(first.Left - 2, first.Bottom + 20);

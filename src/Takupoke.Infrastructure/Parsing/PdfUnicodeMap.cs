@@ -8,11 +8,12 @@ public sealed record PdfUnicodeMap(int CodeBytes, IReadOnlyDictionary<int, strin
 {
     public static PdfUnicodeMap Read(byte[] data, CancellationToken cancellationToken = default)
     {
+        cancellationToken.ThrowIfCancellationRequested();
         if (data.Length > 2_000_000 || data.Any(b => b > 127)) throw new PdfParseException("P01");
         var source = Regex.Replace(Encoding.ASCII.GetString(data), "%[^\\r\\n]*", "");
         var tokens = Regex.Matches(source, "<[^<>]*>|\\[|\\]|[^\\s<>\\[\\]]+").Select(m => m.Value).ToArray();
         if (tokens.Contains("usecmap") || tokens.Contains("beginnotdefrange") || tokens.Contains("beginnotdefchar")) throw new PdfParseException("P01");
-        var spaces = new List<(int Low, int High)>(); int? codeBytes = null; var values = new Dictionary<int, string>(); var cursor = 0;
+        var coveredCodes = new bool[65536]; int? codeBytes = null; var values = new Dictionary<int, string>(); var cursor = 0; var work = 0;
         string Next() => cursor < tokens.Length ? tokens[cursor++] : throw new PdfParseException("P01");
         static byte[] Hex(string token)
         {
@@ -25,7 +26,8 @@ public sealed record PdfUnicodeMap(int CodeBytes, IReadOnlyDictionary<int, strin
         int Code(string token) { var bytes = Hex(token); if (bytes.Length != codeBytes) throw new PdfParseException("P01"); return Number(bytes); }
         void Insert(int code, byte[] bytes)
         {
-            if (bytes.Length % 2 != 0 || values.Count >= 65536 || !spaces.Any(s => s.Low <= code && code <= s.High)) throw new PdfParseException("P01");
+            if (++work % 128 == 0) cancellationToken.ThrowIfCancellationRequested();
+            if (bytes.Length % 2 != 0 || values.Count >= 65536 || !coveredCodes[code]) throw new PdfParseException("P01");
             string text;
             try { text = new UnicodeEncoding(true, false, true).GetString(bytes); } catch { throw new PdfParseException("P01"); }
             if (text.Length == 0 || text.Any(char.IsControl) || !values.TryAdd(code, text)) throw new PdfParseException("P01");
@@ -45,7 +47,12 @@ public sealed record PdfUnicodeMap(int CodeBytes, IReadOnlyDictionary<int, strin
                     var low = Hex(Next()); var high = Hex(Next());
                     if (low.Length is not 1 and not 2 || low.Length != high.Length || codeBytes is not null && codeBytes != low.Length) throw new PdfParseException("P01");
                     codeBytes = low.Length; var a = Number(low); var b = Number(high);
-                    if (a > b || spaces.Any(s => a <= s.High && b >= s.Low)) throw new PdfParseException("P01"); spaces.Add((a, b));
+                    if (a > b) throw new PdfParseException("P01");
+                    for (var code = a; code <= b; code++)
+                    {
+                        if (++work % 128 == 0) cancellationToken.ThrowIfCancellationRequested();
+                        if (coveredCodes[code]) throw new PdfParseException("P01"); coveredCodes[code] = true;
+                    }
                 }
                 else if (token == "beginbfchar") { var code = Code(Next()); Insert(code, Hex(Next())); }
                 else

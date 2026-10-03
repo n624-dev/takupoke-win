@@ -8,11 +8,17 @@ namespace Takupoke.Integration.Tests;
 public sealed class SpecialPdfParityTests
 {
     [Theory]
-    [InlineData(MaterialKind.Exam)]
-    [InlineData(MaterialKind.ExamReturn)]
-    public void ConflictingSpecialTitleYearsCannotSelectTheFirstYear(MaterialKind kind)
+    [InlineData(MaterialKind.Exam, "令和8年度令和9年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度2027年度")]
+    [InlineData(MaterialKind.Exam, "令和8年度令和Ⅸ年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度令和Ⅸ年度")]
+    [InlineData(MaterialKind.Exam, "令和8年度令和௰年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度令和௰年度")]
+    [InlineData(MaterialKind.Exam, "令和8年度ⅯⅯⅩⅩⅦ年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度ⅯⅯⅩⅩⅦ年度")]
+    public void ConflictingSpecialTitleYearsCannotSelectTheFirstYear(MaterialKind kind, string title)
     {
-        var pages = kind == MaterialKind.Exam ? Enumerable.Range(1, 6).Select(i => ExamPage(i, titleYears: i == 1 ? "令和8年度令和9年度" : "令和8年度")).ToArray() : new[] { ReturnPage(titleYears: "令和8年度2027年度") };
+        var pages = kind == MaterialKind.Exam ? Enumerable.Range(1, 6).Select(i => ExamPage(i, titleYears: i == 1 ? title : "令和8年度")).ToArray() : new[] { ReturnPage(titleYears: title) };
         Assert.Equal("P03", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special(pages, kind)).Stage);
     }
     [Theory]

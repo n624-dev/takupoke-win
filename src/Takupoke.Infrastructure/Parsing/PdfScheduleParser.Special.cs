@@ -15,7 +15,7 @@ public static partial class PdfScheduleParser
         {
             token.ThrowIfCancellationRequested();
             var page = pages[index]; page.Validate(index + 1);
-            var heading = Heading(page, 0.25); var currentYear = Year(heading, index + 1);
+            var rawHeading = Heading(page, 0.25); var currentYear = Year(rawHeading, index + 1); var heading = PdfGrid.Key(rawHeading);
             if (!heading.Contains("試験") || heading.Contains("返却") != (kind == MaterialKind.ExamReturn)) throw new PdfParseException("P04", index + 1);
             if (year is not null && year != currentYear) throw new PdfParseException("P03", index + 1);
             year = currentYear;
