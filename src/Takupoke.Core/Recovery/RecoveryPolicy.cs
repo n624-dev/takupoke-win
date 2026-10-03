@@ -16,7 +16,13 @@ public static class RecoveryPolicy
         _ => []
     };
     public static bool MayTryNext(LocalProviderState state) => state is LocalProviderState.Unsupported or LocalProviderState.InsufficientMemory;
-    public static bool MatchesPeriod(RecoveryDocument document, SchoolDataPeriod period) =>
-        document.SchoolYear == period.SchoolYear && (document.Kind != RecoveryDocumentKind.Timetable ||
-            document.Term == (period.Half == 1 ? "前期" : "後期"));
+    public static bool MatchesPeriod(RecoveryDocument document, SchoolDataPeriod period)
+    {
+        if (document.SchoolYear != period.SchoolYear) return false;
+        if (document.Kind == RecoveryDocumentKind.Timetable) return document.Term == (period.Half == 1 ? "前期" : "後期");
+        return document.Days.Count > 0 && document.Days.All(day =>
+            DateOnly.TryParseExact(day, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out var date) &&
+            SchoolDataPeriod.FromInstant(new DateTimeOffset(date.Year, date.Month, date.Day, 12, 0, 0, TimeSpan.FromHours(9))) == period);
+    }
 }

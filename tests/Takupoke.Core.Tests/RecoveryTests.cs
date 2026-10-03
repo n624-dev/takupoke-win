@@ -66,6 +66,16 @@ public class RecoveryTests
     private sealed record SpecialFixture(RecoveryDocument Document, RecoveryResult Result);
     private static (RecoveryDocument Doc, RecoveryResult Result) Special(string kind = "exam") { var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) } }; var f = JsonSerializer.Deserialize<SpecialFixture>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "fixtures", "recovery-" + kind + ".json")), options)!; return (f.Document, f.Result); }
     [Theory] [InlineData("exam")] [InlineData("return")] public void SpecialSchedulesWithFullScopeAndExplicitSpanTimesPass(string kind) { var (d, r) = Special(kind); Assert.Empty(RecoveryValidator.Validate(d, r).Errors); }
+    [Theory] [InlineData("exam")] [InlineData("return")]
+    public void SpecialRecoveryRequiresEveryDateInTheSelectedHalf(string kind)
+    {
+        var (doc, _) = Special(kind);
+        Assert.True(RecoveryPolicy.MatchesPeriod(doc, new(2026, 2)));
+        Assert.False(RecoveryPolicy.MatchesPeriod(doc, new(2026, 1)));
+        Assert.False(RecoveryPolicy.MatchesPeriod(doc with { Days = [.. doc.Days, "2026-09-30"] }, new(2026, 2)));
+        Assert.False(RecoveryPolicy.MatchesPeriod(doc with { Days = [] }, new(2026, 2)));
+        Assert.False(RecoveryPolicy.MatchesPeriod(doc with { Days = ["2026-10-32"] }, new(2026, 2)));
+    }
     [Fact] public void InventoryCannotDiscardTextToClaimEmpty() { var (d, r) = Fixture(); Assert.Contains("sourceInventory", RecoveryValidator.Validate(d with { Cells = d.Cells.Select((c, i) => i == 0 ? c with { SourceIds = [], LessonBindings = [], ConfirmedEmpty = true } : c).ToArray() }, r with { Cells = r.Cells.Select((c, i) => i == 0 ? c with { State = RecoveryValueState.Empty, Lessons = [] } : c).ToArray() }).Errors); }
     [Fact] public void UnassignedTextInBlankCellRejects() { var (d, r) = Fixture(); Assert.Contains("unassignedCellText", RecoveryValidator.Validate(d with { Sources = d.Sources.Append(new RecoverySource("unassigned", "unassigned", d.Cells[1].Page, "架空の未割当文字", d.Cells[1].Box)).ToArray() }, r).Errors); }
     [Fact] public void UnboundLiteralCannotBeClassifiedAsPeriodHeader() { var (d, r) = Fixture(); var evidence = d.PeriodEvidence.ToDictionary(); evidence["1"] = evidence["1"].Append("orphan").ToArray(); Assert.Contains("periodHeaderCoverage", RecoveryValidator.Validate(d with { Sources = d.Sources.Append(new RecoverySource("orphan", "unassigned", 1, "1", new(650, 200, 10, 10))).ToArray(), PeriodEvidence = evidence }, r).Errors); }

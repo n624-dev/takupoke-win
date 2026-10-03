@@ -149,9 +149,9 @@ public sealed class SchoolDataStoreTests : IAsyncLifetime
     }
 
     private sealed record RecoveryFixture(RecoveryDocument Document, RecoveryResult Result);
-    private async Task<(SchoolLease Lease, SourceRecord Source, RecoveryAudit Audit)> AwaitingRecoveryAsync(SchoolDataStore store, int documentYear = 2026, bool bypassPreviewValidation = false)
+    private async Task<(SchoolLease Lease, SourceRecord Source, RecoveryAudit Audit)> AwaitingRecoveryAsync(SchoolDataStore store, int documentYear = 2026, bool bypassPreviewValidation = false, bool wrongHalf = false)
     {
-        _clock.Now = new(2026, 9, 30, 23, 59, 0, TimeSpan.FromHours(9));
+        _clock.Now = wrongHalf ? new(2026, 9, 30, 23, 59, 0, TimeSpan.FromHours(9)) : new(2026, 10, 1, 0, 0, 0, TimeSpan.FromHours(9));
         var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) } };
         var raw = await File.ReadAllTextAsync(Path.Combine(AppContext.BaseDirectory, "fixtures", "recovery-exam.json"));
         var fixture = JsonSerializer.Deserialize<RecoveryFixture>(raw.Replace("2026", documentYear.ToString(System.Globalization.CultureInfo.InvariantCulture), StringComparison.Ordinal), options)!;
@@ -220,6 +220,27 @@ public sealed class SchoolDataStoreTests : IAsyncLifetime
         var kept = (await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Timetable"))!;
         Assert.Equal("前期", kept.Timetable!.Term); Assert.Equal(prior.ParsedAt, kept.ParsedAt); Assert.Null(kept.Recovery);
         Assert.Equal("P08", (await store.ReadAsync<MaterialAttempt>(lease, "attempt.Timetable"))!.Failure);
+    }
+    [Fact] public async Task SpecialDatesFromAnotherHalfCannotReachRecoveryPreview()
+    {
+        await using var store = Store();
+        await Assert.ThrowsAsync<InvalidDataException>(() => AwaitingRecoveryAsync(store, wrongHalf: true));
+        var lease = await store.BeginAsync();
+        Assert.Null(await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Exam"));
+        Assert.Null(await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"));
+    }
+    [Theory] [InlineData(false)] [InlineData(true)]
+    public async Task SpecialDatesFromAnotherHalfCannotBeAdoptedFromOldPreviewOrAcceptance(bool reuseAcceptance)
+    {
+        await using var store = Store();
+        var (lease, source, audit) = await AwaitingRecoveryAsync(store, bypassPreviewValidation: true, wrongHalf: true);
+        Assert.True(RecoveryValidator.Validate(audit.Document, audit.Result).CanAdopt);
+        Assert.False(RecoveryPolicy.MatchesPeriod(audit.Document, lease.Period));
+        if (reuseAcceptance) await store.WriteAsync(lease, "recovery.accepted.Exam." + source.Digest, audit);
+        await Assert.ThrowsAsync<InvalidDataException>(() => store.SaveRecoveryAsync(lease, source, audit, _clock.Now, reuseAccepted: reuseAcceptance));
+        Assert.Null(await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"));
+        Assert.NotNull(await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Exam"));
+        Assert.Equal("P08", (await store.ReadAsync<MaterialAttempt>(lease, "attempt.Exam"))!.Failure);
     }
     [Fact] public async Task RecoveryAdoptionCommitsFormalAuditAcceptanceAndClearsPendingTogether()
     {
