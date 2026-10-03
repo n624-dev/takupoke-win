@@ -7,8 +7,8 @@ namespace Takupoke.Win.UITests;
 
 internal static partial class Program
 {
-    private static UserPreferences SavedSettings(string path) => File.Exists(path)
-        ? DataCodec.Decode<UserPreferences>(File.ReadAllBytes(path)) : new UserPreferences();
+    private static UserPreferences SavedSettings(string path) =>
+        DataCodec.Decode<UserPreferences>(PreferenceSnapshot.ReadBytes(path));
 
     private static LinkOpeningMode CheckSettingsKeyboardRoundTrip(string preferences)
     {

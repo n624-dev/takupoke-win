@@ -318,7 +318,7 @@ internal static partial class Program
     }
     private static bool SavedIncludesChanges(string path)
     {
-        using var document = JsonDocument.Parse(File.ReadAllBytes(path));
+        using var document = JsonDocument.Parse(PreferenceSnapshot.ReadBytes(path));
         return !document.RootElement.TryGetProperty("includesChanges", out var value) || value.GetBoolean();
     }
     private static string ReadProbe(string path)
@@ -636,8 +636,7 @@ internal static partial class Program
 
     private static string? SavedMainColor(string path)
     {
-        if (!File.Exists(path)) return null;
-        using var document = JsonDocument.Parse(File.ReadAllBytes(path));
+        using var document = JsonDocument.Parse(PreferenceSnapshot.ReadBytes(path));
         return document.RootElement.TryGetProperty("mainColor", out var color) ? color.GetString() : "default";
     }
     private static void PickMaterial(string? path)
@@ -712,8 +711,7 @@ internal static partial class Program
     private static bool Checked(AutomationElement element) => ((TogglePattern)element.GetCurrentPattern(TogglePattern.Pattern)).Current.ToggleState == ToggleState.On;
     private static string? SavedClass(string path)
     {
-        if (!File.Exists(path)) return null;
-        using var document = JsonDocument.Parse(File.ReadAllBytes(path));
+        using var document = JsonDocument.Parse(PreferenceSnapshot.ReadBytes(path));
         var classes = document.RootElement.GetProperty("selectedClasses");
         return classes.GetArrayLength() == 1 ? classes[0].GetString() : null;
     }
