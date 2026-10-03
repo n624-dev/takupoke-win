@@ -9,6 +9,8 @@ using Takupoke.Infrastructure.Storage;
 using Takupoke.Infrastructure.Api;
 using Takupoke.Infrastructure.Parsing;
 using System.Text;
+using Takupoke.Infrastructure.Materials;
+using Takupoke.Win.Platform;
 
 namespace Takupoke.Win.UITests;
 
@@ -118,10 +120,15 @@ internal static partial class Program
         await using var store = new SchoolDataStore(root, new WindowsDpapiProtector());
         var lease = await store.BeginAsync(); var now = DateTimeOffset.UtcNow;
         // Review screenshots show complete, entirely fictional input states.
-        // Main regression tests retain their independent missing-source fixtures.
-        var bytes = Encoding.UTF8.GetBytes("Entirely fictional accepted change-list fixture.");
-        var source = new SourceRecord(Guid.NewGuid().ToString("N"), MaterialKind.Changes, Path.Combine(root, "fake-unavailable-changes.xlsx"),
-            "fake-changes-identity", "架空の時間割変更.xlsx", NotificationDiff.Digest(bytes), bytes.Length, now, now, now);
+        // Main regressions independently delete their source to check retention.
+        var bytes = Encoding.UTF8.GetBytes("PK Entirely fictional accepted change-list fixture.");
+        var path = Path.Combine(root, "fictional-current-changes.xlsx");
+        await File.WriteAllBytesAsync(path, bytes);
+        using var content = await new FileSourceReader(new WindowsFileIdentity()).ReadAsync(path, MaterialKind.Changes, null);
+        var source = new SourceRecord(Guid.NewGuid().ToString("N"), MaterialKind.Changes, path,
+            content.Identity, "架空の時間割変更.xlsx", NotificationDiff.Digest(bytes), bytes.Length, now, now, content.ModifiedAt);
+        await store.WriteAsync(lease, "acquisition.Changes", new MaterialAttempt(now, null, false, source.Digest));
+        await store.WriteAsync(lease, "attempt.Changes", new MaterialAttempt(now, null, true, source.Digest, lease.Period.SchoolYear, ParserVersion: XlsxChangeReader.Version));
         await store.SaveOriginalAsync(lease, source, bytes);
         await store.SaveAnalysisAsync(lease, new(source.Id, source.Kind, XlsxChangeReader.Version, source.Digest, source.OriginalName, now, lease.Period.SchoolYear, Changes: [new(SchoolDate.InJapan(now).DisplayWeekStart().ToString("yyyy-MM-dd"), "3_IT", "1~2", "", "架空の実習科目（長い名称の折り返し確認）", "架空の担当教員", "架空の実習室", "補講", "完全に架空の授業変更", "架空の授業変更")]));
         await new PublicEventsStore(root).SaveAsync(new(now, new("v1", lease.Period.SchoolYear, new string('a', 64), null, [new($"{lease.Period.SchoolYear + 1}-03-10", $"{lease.Period.SchoolYear + 1}-03-10", "架空の行事メモ", "行事メモ")]), "\"fake-api-etag\""));

@@ -8,6 +8,8 @@ using Takupoke.Infrastructure.Authentication;
 using Takupoke.Core;
 using Takupoke.Infrastructure.Api;
 using Takupoke.Infrastructure.Parsing;
+using Takupoke.Infrastructure.Materials;
+using Takupoke.Win.Platform;
 using Takupoke.Infrastructure.Storage;
 
 namespace Takupoke.Win.UITests;
@@ -68,6 +70,7 @@ internal static partial class Program
             Invoke("settings-materials");
             Wait(() => Find("material-summary-Timetable")?.Current.Name.EndsWith("解析済み", StringComparison.Ordinal) == true, "A current accepted analysis displays the same completed state as iOS");
             Invoke("back-settings");
+            File.Delete(Path.Combine(args[1], "fake-available-original.pdf"));
             CheckAuthentication(args[0], args[1]);
             Invoke("settings-materials");
             Wait(() => Find("page-materials") is not null, "material list is a settings child screen");
@@ -459,8 +462,14 @@ internal static partial class Program
         await using var store = new SchoolDataStore(root, new WindowsDpapiProtector());
         var lease = await store.BeginAsync(); var now = DateTimeOffset.UtcNow;
         var bytes = Encoding.UTF8.GetBytes("%PDF-1.7\n% Entirely synthetic accepted-store UI fixture.\n");
-        var source = new SourceRecord(Guid.NewGuid().ToString("N"), MaterialKind.Timetable, Path.Combine(root, "fake-unavailable-original.pdf"), "fake-identity", "fake-timetable.pdf",
-            NotificationDiff.Digest(bytes), bytes.Length, now, now, now);
+        // A real fictional file keeps the accepted digest current even when
+        // native activation checks it. The scenario deletes it after checking
+        // the completed status, then verifies retained results after failure.
+        var sourcePath = Path.Combine(root, "fake-available-original.pdf");
+        await File.WriteAllBytesAsync(sourcePath, bytes);
+        using var content = await new FileSourceReader(new WindowsFileIdentity()).ReadAsync(sourcePath, MaterialKind.Timetable, null);
+        var source = new SourceRecord(Guid.NewGuid().ToString("N"), MaterialKind.Timetable, sourcePath, content.Identity, "fake-timetable.pdf",
+            NotificationDiff.Digest(bytes), bytes.Length, now, now, content.ModifiedAt);
         await store.SaveOriginalAsync(lease, source, bytes);
         var lessons = Enumerable.Range(1, 5).Select(day => new NormalLesson("3_IT", day, 1,
             new("架空科目甲", "架空教員甲", "架空教室甲", "架空科目甲（正式名称）"), "完全に架空の授業", 1)).ToArray();
