@@ -41,6 +41,14 @@ public sealed class SpecialPdfParityTests
             Assert.All(pair, l => Assert.Equal(date == "2026-04-01" ? new("10:30", "11:50") : new TimeRange("12:50", "14:20"), result.TimeFor(l)));
         }
     }
+    [Theory]
+    [InlineData(3, 4, 2, 5, 6)]
+    [InlineData(1, 2, 6, 4, 5)]
+    public void ReturnDateColumnsCannotMoveTheDedicatedClockToAnotherDay(int first, int second, int third, int fourth, int last)
+    {
+        Assert.Equal("P10", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special(
+            [ReturnPage(dateDays: [first, second, third, fourth, last])], MaterialKind.ExamReturn)).Stage);
+    }
     [Fact]
     public void MissingSpecialTimeCannotBeReplacedByOrdinaryTime()
     {
@@ -116,12 +124,13 @@ public sealed class SpecialPdfParityTests
         b.Write("1・2時限連続8:50~10:20", 300, 470);
         return b.Page(850, 600);
     }
-    private static PdfPageLayout ReturnPage(bool invalidAiClass = false, string[]? timingOverride = null)
+    private static PdfPageLayout ReturnPage(bool invalidAiClass = false, string[]? timingOverride = null, int[]? dateDays = null)
     {
+        var days = dateDays ?? [1, 2, 3, 4, 5];
         var b = new Builder(false, 4); b.Write("令和8年度 試験返却時間割", 20, 20);
         for (var day = 0; day < 5; day++)
         {
-            b.Write($"4/{day + 1}", 150 + day * 8 * 40, 70);
+            b.Write($"4/{days[day]}", 150 + day * 8 * 40, 70);
             for (var period = 0; period < 8; period++) b.Write((period + 1).ToString(), 150 + (day * 8 + period) * 40, 100);
         }
         var groups = new[] { ("1", new[] { "1", "2", "3" }), ("2", new[] { "CN", "ES", "IT" }), ("3", new[] { "CN", "ES", "IT" }),
@@ -138,7 +147,7 @@ public sealed class SpecialPdfParityTests
         b.Write("架空科目C", 502, 322, 3); b.Write("架空教員C", 502, 327, 3); b.Write("架空教室C", 502, 332, 3);
         b.Write("架空科目D", 302, 122, 3); b.Write("架空教員D", 302, 127, 3); b.Write("架空教室D", 302, 132, 3);
         b.Write("架空科目E", 622, 122, 3); b.Write("架空教員E", 622, 127, 3); b.Write("架空教室E", 622, 132, 3);
-        b.Write("4月1日の時間割は以下のとおりです。", 1300, 650); b.Write("4月2日~5日は通常の授業日どおりの授業時間です。", 1300, 670);
+        b.Write($"4月{days[0]}日の時間割は以下のとおりです。", 1300, 650); b.Write($"4月{days[1]}日~{days[^1]}日は通常の授業日どおりの授業時間です。", 1300, 670);
         var times = timingOverride ?? new[] { "7:00~7:40", "7:50~8:30", "8:40~9:20", "9:30~10:10", "10:30~11:10", "11:10~11:50", "12:00~12:40", "12:40~13:20" };
         for (var index = 0; index < times.Length; index++) b.Write($"{index + 1}時限目{times[index]}", 20, 760 + (index + 1) * 15);
         return b.Page(1800, 1000);

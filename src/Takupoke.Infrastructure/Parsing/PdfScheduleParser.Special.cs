@@ -48,9 +48,10 @@ public static partial class PdfScheduleParser
         var grid = new PdfGrid(page); var lessons = new List<SpecialLesson>();
         var firstBox = grid.Box(periods[0].Cx, dates[0].Run.Cy); var lastBox = grid.Box(periods[^1].Cx, dates[^1].Run.Cy);
         grid.SetLessonArea(new(firstBox.Left, firstBox.Top, lastBox.Right, lastBox.Bottom));
-        foreach (var pair in dates)
+        var lessonRows = dates.Select(pair => { token.ThrowIfCancellationRequested(); return grid.Box(pair.Run.Cx, pair.Run.Cy); }).ToArray();
+        grid.SetLessonCells(lessonRows.SelectMany(row => periods.SelectMany(period => grid.Slices(row, period.Cx))));
+        foreach (var (pair, row) in dates.Zip(lessonRows))
         {
-            var row = grid.Box(pair.Run.Cx, pair.Run.Cy);
             for (var column = 0; column < names.Length; column++)
             {
                 var xs = Enumerable.Range(0, 6).Select(i => periods[column * 6 + i].Cx).ToArray();
@@ -71,6 +72,7 @@ public static partial class PdfScheduleParser
         var dates = Runs(page.Glyphs.Where(g => g.Cy < headerY && g.Cy > headerY - page.Height / 20))
             .Select(run => (Run: run, Day: Date(run.Text, year, true))).Where(p => p.Day is not null).OrderBy(p => p.Run.Cx).ToArray();
         if (dates.Length != 5 || dates.Select(p => p.Day).Distinct().Count() != 5) throw new PdfParseException("P10", 1);
+        if (!dates.Select(p => p.Day!.Value).SequenceEqual(dates.Select(p => p.Day!.Value).Order())) throw new PdfParseException("P10", 1);
         var specialDay = dates[0].Day!.Value; var ordinaryStart = dates[1].Day!.Value; var ordinaryEnd = dates[^1].Day!.Value;
         var note = PdfGrid.Key(string.Concat(PdfGrid.Rows(page.Glyphs).Select(Joined))).Replace('～', '~').Replace('〜', '~');
         if (ordinaryStart.Month != ordinaryEnd.Month || !note.Contains($"{specialDay.Month}月{specialDay.Day}日の時間割は以下のとおり")
@@ -84,13 +86,14 @@ public static partial class PdfScheduleParser
         var classes = new HashSet<string>(); var lessons = new List<SpecialLesson>(); var grid = new PdfGrid(page);
         var firstBox = grid.Box(periods[0].Cx, classRuns[0].Cy); var lastBox = grid.Box(periods[^1].Cx, classRuns[^1].Cy);
         grid.SetLessonArea(new(firstBox.Left, firstBox.Top, lastBox.Right, lastBox.Bottom));
-        foreach (var run in classRuns)
+        var lessonRows = classRuns.Select(run => { token.ThrowIfCancellationRequested(); return grid.Box(run.Cx, run.Cy); }).ToArray();
+        grid.SetLessonCells(lessonRows.SelectMany(row => periods.SelectMany(period => grid.Slices(row, period.Cx))));
+        foreach (var (run, row) in classRuns.Zip(lessonRows))
         {
             var grade = grades.MinBy(g => Math.Abs(g.Cy - run.Cy))!;
             if (Math.Abs(grade.Cy - run.Cy) >= step * 2.5) throw new PdfParseException("P15", 1);
             var name = grade.Text == "AI" ? "AI_" + run.Text : grade.Text + "_" + run.Text;
             if (!classes.Add(name)) throw new PdfParseException("P16", 1);
-            var row = grid.Box(run.Cx, run.Cy);
             for (var dayIndex = 0; dayIndex < dates.Length; dayIndex++)
             {
                 var dayTimes = dayIndex == 0 ? times : ordinary; var day = dates[dayIndex].Day!.Value;

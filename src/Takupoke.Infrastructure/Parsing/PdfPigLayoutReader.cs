@@ -31,6 +31,7 @@ public static class PdfPigLayoutReader
             {
                 token.ThrowIfCancellationRequested();
                 var page = document.GetPage(number); var media = page.MediaBox.Bounds;
+                if (page.CropBox.Bounds != media) throw new PdfParseException("P01", number);
                 if (page.Rotation.Value is not 0 and not 90 and not 180 and not 270) throw new PdfParseException("P02", number);
                 if (page.Operations.Count > 1_000_000 || page.Letters.Count > 100000 || page.Text.Length > 100000) throw new PdfParseException("limit", number);
                 if (page.Letters.Count == 0) throw new PdfParseException("raster", number);
@@ -60,6 +61,7 @@ public static class PdfPigLayoutReader
                         if (items.Length != 2 || !items[0].StartsWith('/')) throw new PdfParseException("P01", number);
                         var state = Resource(document, resources, "ExtGState", items[0][1..]);
                         if (new[] { "Font", "SMask", "TR", "TR2" }.Any(state.Data.ContainsKey) || state.Data.ContainsKey("BM") && Name(document, state, "BM") != "Normal" || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1) throw new PdfParseException("P01", number);
+                        if (state.Data.ContainsKey("LW")) visibility.SetLineWidth(Number(document, state, "LW"), number);
                     }
                     if (text is null) continue;
                     switch (operation)
@@ -139,6 +141,11 @@ public static class PdfPigLayoutReader
         private State _state = new(true, false, true, 0, 1, PdfMatrix.Identity);
         private readonly Stack<State> _stack = new();
         private bool _shown;
+        public void SetLineWidth(double width, int page)
+        {
+            if (!double.IsFinite(width) || width < 0) throw new PdfParseException("P01", page);
+            _state = _state with { LineWidth = width };
+        }
         public void Operation(IGraphicsStateOperation operation, int page, PdfPathEngine paths)
         {
             var name = operation.Operator;
@@ -177,7 +184,7 @@ public static class PdfPigLayoutReader
                 case "w":
                     var width = Numbers(operation);
                     if (width.Length != 1 || width[0] < 0) throw new PdfParseException("P01", page);
-                    _state = _state with { LineWidth = width[0] }; break;
+                    SetLineWidth(width[0], page); break;
                 case "Tr":
                     var mode = Numbers(operation);
                     if (mode.Length != 1 || mode[0] is not 0 and not 1 and not 2) throw new PdfParseException("P01", page);

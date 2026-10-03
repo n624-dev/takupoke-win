@@ -29,30 +29,69 @@ internal static partial class Program
     }
     private static string OpeningLabel(LinkOpeningMode mode) => mode == LinkOpeningMode.InApp ? "アプリ内で開く" : "既定のブラウザ";
 
-    private static void SelectSettingsOptionWithKeyboard(string id, string label, Func<bool> saved)
+    private static void CheckAnalysisFilterKeyboardRoundTrip(string preferences)
     {
-        var combo = WaitElement(id);
-        if (combo.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll)) ((ScrollItemPattern)scroll).ScrollIntoView();
-        combo.SetFocus();
-        Wait(() => combo.Current.HasKeyboardFocus, id + " supports keyboard focus");
-        var expansion = (ExpandCollapsePattern)combo.GetCurrentPattern(ExpandCollapsePattern.Pattern);
-        expansion.Expand();
-        // The popup virtualizes items around the current selection. Its target
-        // item need not be exposed to UIA until keyboard navigation reaches it.
-        Wait(() => expansion.Current.ExpandCollapseState == ExpandCollapseState.Expanded,
-            id + " popup is expanded for keyboard selection");
-        // UIA SetFocus on a popup item need not move the ComboBox's highlighted
-        // item. Exercise its standard keyboard selection from a known position.
-        var labels = id == "main-color"
+        var initial = SavedSettings(preferences);
+        var classes = new[] { "すべて", "3-IT" }; // The actual stored, wholly fictional timetable contains 3_IT.
+        Require(initial.TimetableAnalysisClasses.Length <= 1 && initial.TimetableAnalysisClasses.All(value => value == "3_IT"),
+            "Invented analysis round-trip starts with an available class filter.");
+        var alternateClass = initial.TimetableAnalysisClasses.Length == 0 ? new[] { "3_IT" } : Array.Empty<string>();
+        SelectSettingsOptionWithKeyboard("analysis-class", alternateClass.Length == 0 ? "すべて" : "3-IT",
+            () => SavedSettings(preferences).TimetableAnalysisClasses.SequenceEqual(alternateClass), classes);
+        SelectSettingsOptionWithKeyboard("analysis-class", initial.TimetableAnalysisClasses.Length == 0 ? "すべて" : "3-IT",
+            () => SavedSettings(preferences).TimetableAnalysisClasses.SequenceEqual(initial.TimetableAnalysisClasses), classes);
+        var days = new[] { "すべて", "月", "火", "水", "木", "金" };
+        var alternateDay = initial.TimetableAnalysisWeekday == 1 ? 2 : 1;
+        SelectSettingsOptionWithKeyboard("analysis-weekday", days[alternateDay],
+            () => SavedSettings(preferences).TimetableAnalysisWeekday == alternateDay, days);
+        Wait(() => _window!.FindFirst(TreeScope.Descendants, new AndCondition(
+            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Text),
+            new PropertyCondition(AutomationElement.NameProperty, "読み取った内容 · 1件"))) is not null,
+            "The selected weekday actually filters the five invented lessons to one.");
+        SelectSettingsOptionWithKeyboard("analysis-weekday", days[initial.TimetableAnalysisWeekday],
+            () => SavedSettings(preferences).TimetableAnalysisWeekday == initial.TimetableAnalysisWeekday, days);
+        Require(SavedSettings(preferences).TimetableAnalysisClasses.SequenceEqual(initial.TimetableAnalysisClasses)
+            && SavedSettings(preferences).TimetableAnalysisWeekday == initial.TimetableAnalysisWeekday,
+            "Analysis class and weekday filters persist A to B to A on the same page.");
+    }
+
+    private static void SelectSettingsOptionWithKeyboard(string id, string label, Func<bool> saved, string[]? orderedLabels = null)
+    {
+        var labels = orderedLabels ?? (id == "main-color"
             ? UserPreferences.MainColors.Select(UserPreferences.MainColorLabel).ToArray()
-            : new[] { "アプリ内で開く", "既定のブラウザ" };
+            : new[] { "アプリ内で開く", "既定のブラウザ" });
         var index = Array.IndexOf(labels, label);
         Require(index >= 0, "Requested keyboard option exists in its ordered list.");
-        System.Windows.Forms.SendKeys.SendWait("{HOME}" + string.Concat(Enumerable.Repeat("{DOWN}", index)) + "{ENTER}");
+        var keyboardSent = false;
         try
         {
-            Wait(() => saved() && Find(id)?.Current.IsEnabled == true,
-                id + " keyboard selection is persisted: " + label);
+            Wait(() =>
+            {
+                // Saving can replace controls between focus/expansion and the
+                // next poll. Reacquire inside the same retry boundary as Invoke.
+                var current = Find(id);
+                if (current?.Current.IsEnabled != true) return false;
+                var expansion = (ExpandCollapsePattern)current.GetCurrentPattern(ExpandCollapsePattern.Pattern);
+                if (keyboardSent && saved() && expansion.Current.ExpandCollapseState == ExpandCollapseState.Collapsed) return true;
+                try
+                {
+                    if (expansion.Current.ExpandCollapseState == ExpandCollapseState.Collapsed)
+                    {
+                        if (current.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll)) ((ScrollItemPattern)scroll).ScrollIntoView();
+                        current.SetFocus();
+                        if (!current.Current.HasKeyboardFocus) return false;
+                        expansion.Expand();
+                        return false;
+                    }
+                    if (expansion.Current.ExpandCollapseState != ExpandCollapseState.Expanded) return false;
+                    // Popup items are virtualized. HOME/DOWN moves the actual
+                    // ComboBox highlight without requiring a target UIA item.
+                    System.Windows.Forms.SendKeys.SendWait("{HOME}" + string.Concat(Enumerable.Repeat("{DOWN}", index)) + "{ENTER}");
+                    keyboardSent = true;
+                    return false;
+                }
+                catch (ElementNotEnabledException) { return false; }
+            }, id + " keyboard selection is persisted: " + label);
         }
         catch
         {

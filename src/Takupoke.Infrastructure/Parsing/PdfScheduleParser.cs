@@ -8,8 +8,8 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class PdfScheduleParser
 {
-    public const int TimetableVersion = 13;
-    public const int SpecialVersion = 12;
+    public const int TimetableVersion = 14;
+    public const int SpecialVersion = 13;
     private const int MaximumRecords = 10000;
     private static string Joined(IEnumerable<PdfGlyph> glyphs) => string.Concat(glyphs.Select(g => g.Text));
     private static string Heading(PdfPageLayout page, double fraction) => PdfGrid.Key(string.Concat(PdfGrid.Rows(page.Glyphs.Where(g => g.Cy < page.Height * fraction)).Select(Joined)));
@@ -38,6 +38,13 @@ public static partial class PdfScheduleParser
         var lastPeriodBox = grid.Box(header[^1].Cx, header[^1].Cy);
         grid.SetLessonArea(new(first.Left, first.Bottom, lastPeriodBox.Right, bodyBottom));
         var classRows = PdfGrid.Rows(page.Glyphs.Where(g => classBox.Left < g.Cx && g.Cx < classBox.Right && g.Cy > first.Bottom && g.Cy < bodyBottom));
+        var lessonRows = classRows.Select(glyphs =>
+        {
+            token.ThrowIfCancellationRequested();
+            var y = glyphs.Average(g => g.Cy); var row = grid.Box((classBox.Left + classBox.Right) / 2, y);
+            return row with { Top = Math.Max(row.Top, grid.Box(header[0].Cx, y).Top) };
+        }).ToArray();
+        grid.SetLessonCells(lessonRows.SelectMany(row => header.SelectMany(period => grid.Slices(row, period.Cx))));
         var classes = new HashSet<string>(); var output = new List<NormalLesson>();
         foreach (var (glyphs, classIndex) in classRows.Select((glyphs, index) => (glyphs, index)))
         {
@@ -49,7 +56,7 @@ public static partial class PdfScheduleParser
             if (grade != "AI" && !Regex.IsMatch(grade, "^[1-9]$")) throw new PdfParseException("P15", 1);
             var name = ClassSelection.Canonical(grade + "_" + label);
             if (!classes.Add(name)) throw new PdfParseException("P16", 1);
-            row = row with { Top = Math.Max(row.Top, grid.Box(header[0].Cx, y).Top) };
+            row = lessonRows[classIndex];
             for (var column = 0; column < header.Count; column++)
                 foreach (var box in grid.Slices(row, header[column].Cx))
                 {

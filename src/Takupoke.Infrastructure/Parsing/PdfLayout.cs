@@ -41,6 +41,13 @@ public sealed class PdfGrid(PdfPageLayout page)
     private PdfBox? _lessonArea;
     private IReadOnlyList<PdfBox>? _calibrationBoxes;
     public void SetLessonArea(PdfBox area) { _lessonArea = area; _calibrationBoxes = null; }
+    public void SetLessonCells(IEnumerable<PdfBox> cells)
+    {
+        if (_lessonArea is not { } area) throw new PdfParseException("P17");
+        var boxes = cells.Distinct().ToArray();
+        if (boxes.Any(c => c.Left < area.Left || c.Right > area.Right || c.Top < area.Top || c.Bottom > area.Bottom)) throw new PdfParseException("P17");
+        _calibrationBoxes = boxes;
+    }
     public static string Key(string text) => Regex.Replace(text.Normalize(NormalizationForm.FormKC), @"\s", "");
     public PdfBox Box(double x, double y)
     {

@@ -82,6 +82,19 @@ public sealed class PdfParsingTests
         page = page with { Glyphs = page.Glyphs.Where(g => g.Text != "架空教員").ToArray() };
         Assert.Equal("P17", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Timetable([page])).Stage);
     }
+    [Fact]
+    public void AnnotationInAnUnusedTableRowCannotTurnTeacherIntoSubject()
+    {
+        var glyphs = new List<PdfGlyph> { new("令和14年度前期時間割", 30, 20, 100, 10) };
+        for (var index = 0; index < 40; index++) glyphs.Add(new((index % 8 + 1).ToString(CultureInfo.InvariantCulture), 42 + index * 10, 70, 5, 10));
+        glyphs.AddRange([new("CN", 25, 210, 8, 10), new("1", 5, 210, 8, 10), new("教員だけ", 41, 215, 8, 4),
+            new("注記一", 61, 165, 8, 4), new("注記二", 61, 175, 8, 4), new("注記三", 61, 185, 8, 4)]);
+        var lines = new List<PdfRule>();
+        foreach (var y in new[] { 60, 90, 140, 190, 240 }) lines.Add(new(0, y, 440, y));
+        lines.Add(new(0, 60, 0, 240)); lines.Add(new(20, 60, 20, 240));
+        for (var index = 0; index <= 40; index++) lines.Add(new(40 + index * 10, 60, 40 + index * 10, 240));
+        Assert.Equal("P17", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Timetable([new(500, 500, glyphs, lines)])).Stage);
+    }
     [Fact] public void ShortCellCalibrationPreservesTeacherHoleAndRejectsTeacherOnlyEvenWithOutsideAnnotation()
     {
         PdfGrid Grid(bool teacherOnly)
@@ -197,6 +210,25 @@ public sealed class PdfParsingTests
         }
     }
     [Fact]
+    public void GraphicsStateLineWidthCannotBypassTheOverpaintCheck()
+    {
+        foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
+            Assert.Equal("P01", Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(
+                SyntheticPdf(graphicsState: "/LW 25", suffix: " 10 115 m 100 115 l S"), kind)).Stage);
+    }
+    [Fact]
+    public void CroppedOutTextCannotBeReusedAsCompleteInput()
+    {
+        foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
+        {
+            var capture = new RecoveryReadCapture();
+            Assert.Equal("P01", Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(
+                SyntheticPdf(cropBox: "/CropBox [0 150 200 200]"), kind, capture: capture)).Stage);
+            Assert.False(capture.Complete); Assert.All(capture.Pages, p => Assert.Equal(RecoveryInputState.RasterOnly, p.State));
+            Assert.Single(PdfPigLayoutReader.Read(SyntheticPdf(cropBox: "/CropBox [0 0 200 200]"), kind));
+        }
+    }
+    [Fact]
     public void ReaderRejectsMissingMappingAndFormObjects()
     {
         Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(SyntheticPdf(removeMapping: true), MaterialKind.Timetable));
@@ -226,7 +258,7 @@ public sealed class PdfParsingTests
         for (var index = 0; index <= 40; index++) lines.Add(new(40 + index * 10, 60, 40 + index * 10, 140));
         return new(500, 500, glyphs, lines);
     }
-    internal static byte[] SyntheticPdf(bool removeMapping = false, bool formObject = false, string? graphicsState = null, string? prefix = null, string? suffix = null)
+    internal static byte[] SyntheticPdf(bool removeMapping = false, bool formObject = false, string? graphicsState = null, string? prefix = null, string? suffix = null, string? cropBox = null)
     {
         var cmap = "1 begincodespacerange <00> <ff> endcodespacerange 2 beginbfchar <41> <67b6> <42> <7a7a> endbfchar";
         var content = (prefix ?? "") + (graphicsState is null ? "" : "/Ghost gs ") + "BT /F1 10 Tf 1 0 0 1 20 100 Tm (AB) Tj ET 10 10 100 120 re S" + (suffix ?? "") + (formObject ? " /Fake Do" : "");
@@ -235,7 +267,7 @@ public sealed class PdfParsingTests
         {
             "<< /Type /Catalog /Pages 2 0 R >>",
             "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
-            "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 200 200] /Resources << /Font << /F1 4 0 R >> " + (graphicsState is null ? "" : "/ExtGState << /Ghost << /Type /ExtGState " + graphicsState + " >> >> ") + ">> /Contents 5 0 R >>",
+            "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 200 200] " + (cropBox ?? "") + " /Resources << /Font << /F1 4 0 R >> " + (graphicsState is null ? "" : "/ExtGState << /Ghost << /Type /ExtGState " + graphicsState + " >> >> ") + ">> /Contents 5 0 R >>",
             "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding /FirstChar 65 /LastChar 66 /Widths [500 500] /FontDescriptor 7 0 R" + (removeMapping ? "" : " /ToUnicode 6 0 R") + " >>",
             Stream(content), Stream(cmap),
             "<< /Type /FontDescriptor /FontName /Helvetica /Flags 32 /FontBBox [0 -200 1000 800] /ItalicAngle 0 /Ascent 800 /Descent -200 /CapHeight 700 /StemV 80 >>"

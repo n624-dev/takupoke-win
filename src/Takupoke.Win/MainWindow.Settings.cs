@@ -23,6 +23,7 @@ public sealed partial class MainWindow
                 _model.RevisionFailures.Count > 0 ? "要確認" : _model.Revisions.Values.Any(value => value.Changed) ? "更新あり" : null)));
         Add(SettingsSectionTitle("表示と操作"));
         var initialMainColor = _model.Preferences.MainColor;
+        var requestedMainColor = initialMainColor;
         var mainColor = PreferenceControl(new ComboBox { MinWidth = 155 });
         foreach (var key in UserPreferences.MainColors) mainColor.Items.Add(new ComboBoxItem { Content = UserPreferences.MainColorLabel(key), Tag = key });
         mainColor.SelectedIndex = UserPreferences.MainColors.ToList().IndexOf(initialMainColor);
@@ -31,16 +32,20 @@ public sealed partial class MainWindow
         mainColor.SelectionChanged += async (_, _) =>
         {
             if (mainColor.SelectedItem is ComboBoxItem { Tag: string value }
-                && value != _model.Preferences.MainColor && mainColor.IsLoaded)
+                && value != requestedMainColor && mainColor.IsLoaded)
+            {
+                requestedMainColor = value;
                 await _model.SavePreferencesAsync(current => current with { MainColor = value });
+            }
         };
         var opening = PreferenceControl(new ComboBox { MinWidth = 155, ItemsSource = new[] { "アプリ内で開く", "既定のブラウザ" }, SelectedIndex = (int)_model.Preferences.OpeningMode });
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(opening, "link-opening-mode");
+        var requestedOpeningMode = opening.SelectedIndex;
         opening.SelectionChanged += async (_, _) =>
         {
             if (opening.IsLoaded && opening.SelectedIndex is >= 0 and <= 1
-                && opening.SelectedIndex != (int)_model.Preferences.OpeningMode)
-                { var value = (LinkOpeningMode)opening.SelectedIndex; await _model.SavePreferencesAsync(current => current with { OpeningMode = value }); }
+                && opening.SelectedIndex != requestedOpeningMode)
+                { requestedOpeningMode = opening.SelectedIndex; var value = (LinkOpeningMode)requestedOpeningMode; await _model.SavePreferencesAsync(current => current with { OpeningMode = value }); }
         };
         Add(SettingsGroup(
             SettingsRow("クラス", ChooseClasses, "settings-class", _model.Preferences.SelectedClasses.Length == 0 ? "未選択" : string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display))),

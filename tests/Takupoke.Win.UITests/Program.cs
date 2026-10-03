@@ -93,6 +93,7 @@ internal static partial class Program
             Wait(() => Find("page-material-Timetable") is not null, "normal material detail screen");
             Invoke("analysis-Timetable");
             Wait(() => Find("page-analysis-Timetable") is not null && Find("analysis-weekday") is not null, "normal analysis and independent weekday filter");
+            CheckAnalysisFilterKeyboardRoundTrip(preferences);
             Invoke(ByName("資料の詳細に戻る")); Invoke("back-materials");
             Invoke("material-details-Exam");
             Wait(() => Find("page-material-Exam") is not null, "material detail screen");
