@@ -8,8 +8,8 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class PdfScheduleParser
 {
-    public const int TimetableVersion = 20;
-    public const int SpecialVersion = 19;
+    public const int TimetableVersion = 21;
+    public const int SpecialVersion = 20;
     private const int MaximumRecords = 10000;
     private static string Joined(IEnumerable<PdfGlyph> glyphs) => string.Concat(glyphs.Select(g => g.Text));
     private static string Heading(PdfPageLayout page, double fraction) => string.Concat(PdfGrid.Rows(page.Glyphs.Where(g => g.Cy < page.Height * fraction)).Select(Joined));
@@ -18,7 +18,16 @@ public static partial class PdfScheduleParser
         var match = Regex.Match(PdfGrid.Key(heading), "令和([0-9]{1,2})年度");
         if (!match.Success || !int.TryParse(match.Groups[1].Value, out var era) || era is < 1 or > 99) throw new PdfParseException("P03", page);
         var year = 2018 + era;
-        var raw = Regex.Replace(heading, @"\s", "");
+        var rawBuilder = new StringBuilder();
+        foreach (var scalar in heading.EnumerateRunes())
+        {
+            if (Rune.IsWhiteSpace(scalar)) continue;
+            var category = Rune.GetUnicodeCategory(scalar);
+            var original = scalar.ToString();
+            rawBuilder.Append(category is UnicodeCategory.DecimalDigitNumber or UnicodeCategory.LetterNumber or UnicodeCategory.OtherNumber
+                ? original : PdfGrid.Key(original));
+        }
+        var raw = rawBuilder.ToString();
         foreach (Match label in Regex.Matches(raw, @"令和([^年度]*)年度|(?<!\p{N})(\p{N}+)年度"))
         {
             var eraLabel = label.Groups[1].Success;
@@ -42,7 +51,7 @@ public static partial class PdfScheduleParser
         var page = pages[0]; page.Validate(1); token.ThrowIfCancellationRequested();
         var rawHeading = Heading(page, 1.0 / 8); var year = Year(rawHeading, 1); var heading = PdfGrid.Key(rawHeading);
         if (!heading.Contains("時間割") || heading.Contains("前期") == heading.Contains("後期")) throw new PdfParseException("P04", 1);
-        var grid = new PdfGrid(page); var header = PeriodHeader(page, "12345678", 5, 0.2);
+        var grid = new PdfGrid(page, token); var header = PeriodHeader(page, "12345678", 5, 0.2);
         var first = grid.Box(header[0].Cx, header[0].Cy); var classBox = grid.Box(first.Left - 2, first.Bottom + 20);
         var bodyBottom = page.Lines.Where(l => l.Vertical && Math.Abs(l.X1 - classBox.Right) < 0.3).Select(l => l.Y2).DefaultIfEmpty(double.NaN).Max();
         if (!double.IsFinite(bodyBottom)) throw new PdfParseException("P06", 1);

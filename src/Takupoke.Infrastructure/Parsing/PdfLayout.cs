@@ -43,21 +43,31 @@ public sealed record PdfPageLayout(double Width, double Height, IReadOnlyList<Pd
         if (Lines.Count == 0) throw new PdfParseException("P08", page);
     }
 }
-public sealed class PdfGrid(PdfPageLayout page)
+public sealed class PdfGrid(PdfPageLayout page, CancellationToken token = default)
 {
+    private long _work;
+    private (PdfGlyph Glyph, int Index)[]? _yIndex;
+    private readonly Dictionary<PdfBox, double[]?> _baselineCache = [];
+    private void Step(long count = 1)
+    {
+        token.ThrowIfCancellationRequested();
+        _work += count;
+        if (_work > 64_000_000) throw new PdfParseException("limit");
+    }
     private PdfBox? _lessonArea;
     private IReadOnlyList<PdfBox>? _calibrationBoxes;
-    public void SetLessonArea(PdfBox area) { _lessonArea = area; _calibrationBoxes = null; }
+    public void SetLessonArea(PdfBox area) { _lessonArea = area; _calibrationBoxes = null; _baselineCache.Clear(); }
     public void SetLessonCells(IEnumerable<PdfBox> cells)
     {
         if (_lessonArea is not { } area) throw new PdfParseException("P17");
         var boxes = cells.Distinct().ToArray();
         if (boxes.Any(c => c.Left < area.Left || c.Right > area.Right || c.Top < area.Top || c.Bottom > area.Bottom)) throw new PdfParseException("P17");
-        _calibrationBoxes = boxes;
+        _calibrationBoxes = boxes; _baselineCache.Clear();
     }
     public static string Key(string text) => Regex.Replace(text.Normalize(NormalizationForm.FormKC), @"\s", "");
     public PdfBox Box(double x, double y)
     {
+        Step(page.Lines.Count * 4L);
         var vertical = page.Lines.Where(l => l.Vertical && l.Y1 - 0.8 <= y && y <= l.Y2 + 0.8).ToArray();
         var horizontal = page.Lines.Where(l => l.Horizontal && l.X1 - 0.8 <= x && x <= l.X2 + 0.8).ToArray();
         var left = vertical.Where(l => l.X1 < x - 0.5).Select(l => l.X1).DefaultIfEmpty(double.NaN).Max();
@@ -67,7 +77,30 @@ public sealed class PdfGrid(PdfPageLayout page)
         if (!new[] { left, right, top, bottom }.All(double.IsFinite)) throw new PdfParseException("P08");
         return new(left, top, right, bottom);
     }
-    public IReadOnlyList<PdfGlyph> Glyphs(PdfBox box) => page.Glyphs.Where(g => box.Left + 0.3 < g.Cx && g.Cx < box.Right - 0.3 && box.Top + 0.3 < g.Cy && g.Cy < box.Bottom - 0.3).ToArray();
+    public IReadOnlyList<PdfGlyph> Glyphs(PdfBox box)
+    {
+        Step();
+        if (_yIndex is null)
+        {
+            Step(page.Glyphs.Count);
+            _yIndex = page.Glyphs.Select((g, i) => (Glyph: g, Index: i)).OrderBy(p => p.Glyph.Cy).ToArray();
+            token.ThrowIfCancellationRequested();
+        }
+        var low = 0; var high = _yIndex.Length;
+        while (low < high)
+        {
+            var middle = low + (high - low) / 2;
+            if (_yIndex[middle].Glyph.Cy <= box.Top + .3) low = middle + 1; else high = middle;
+        }
+        var selected = new List<(PdfGlyph Glyph, int Index)>();
+        for (var i = low; i < _yIndex.Length && _yIndex[i].Glyph.Cy < box.Bottom - .3; i++)
+        {
+            Step(); var entry = _yIndex[i];
+            if (box.Left + .3 < entry.Glyph.Cx && entry.Glyph.Cx < box.Right - .3) selected.Add(entry);
+        }
+        // Retain original input order for equal geometric positions and source rows.
+        return selected.OrderBy(p => p.Index).Select(p => p.Glyph).ToArray();
+    }
     public static IReadOnlyList<IReadOnlyList<PdfGlyph>> Rows(IEnumerable<PdfGlyph> glyphs)
     {
         var rows = new List<List<PdfGlyph>>();
@@ -124,7 +157,7 @@ public sealed class PdfGrid(PdfPageLayout page)
     /// deleting a row never shifts another row into its role.
     public IReadOnlyList<string> LessonFields(PdfBox box)
     {
-        var text = TimetableText(box);
+        Step(); var text = TimetableText(box);
         if (text.Count is 0 or 3) return text;
         if (text.Count > 3) throw new PdfParseException("P17");
         var rows = Rows(Glyphs(box)); if (rows.Count != text.Count) throw new PdfParseException("P17");
@@ -132,16 +165,28 @@ public sealed class PdfGrid(PdfPageLayout page)
         if (_calibrationBoxes is null)
         {
             var candidates = new HashSet<PdfBox>();
+            Step(page.Glyphs.Count);
             foreach (var glyph in page.Glyphs.Where(g => g.Cx > area.Left && g.Cx < area.Right && g.Cy > area.Top && g.Cy < area.Bottom))
-            { try { var candidate = Box(glyph.Cx, glyph.Cy); if (candidate.Left >= area.Left && candidate.Right <= area.Right && candidate.Top >= area.Top && candidate.Bottom <= area.Bottom) candidates.Add(candidate); } catch (PdfParseException) { } }
+            { try { var candidate = Box(glyph.Cx, glyph.Cy); if (candidate.Left >= area.Left && candidate.Right <= area.Right && candidate.Top >= area.Top && candidate.Bottom <= area.Bottom) candidates.Add(candidate); } catch (PdfParseException error) when (error.Stage != "limit") { } }
             _calibrationBoxes = candidates.ToArray();
         }
         var assignments = new List<string[]>(); double[]? reference = null;
         foreach (var candidate in _calibrationBoxes.Where(c => Math.Abs(c.Bottom - c.Top - box.Bottom + box.Top) < .5))
         {
-            var candidateRows = Rows(Glyphs(candidate)); if (candidateRows.Count != 3) continue;
-            var values = TimetableText(candidate); if (values.Count != 3 || values.Any(Takupoke.Core.Recovery.RecoveryRoleLabels.HasPrefix)) continue;
-            var baseline = candidateRows.Select(r => r.Average(g => g.Cy) - candidate.Top).ToArray();
+            Step();
+            if (!_baselineCache.TryGetValue(candidate, out var baseline))
+            {
+                var candidateRows = Rows(Glyphs(candidate));
+                baseline = null;
+                if (candidateRows.Count == 3)
+                {
+                    var values = TimetableText(candidate);
+                    if (values.Count == 3 && !values.Any(Takupoke.Core.Recovery.RecoveryRoleLabels.HasPrefix))
+                        baseline = candidateRows.Select(r => r.Average(g => g.Cy) - candidate.Top).ToArray();
+                }
+                _baselineCache[candidate] = baseline;
+            }
+            if (baseline is null) continue;
             if (reference is not null && baseline.Where((value, i) => Math.Abs(reference[i] - value) > .75).Any()) throw new PdfParseException("P17");
             reference ??= baseline;
             var gap = baseline.Zip(baseline.Skip(1)).Min(p => p.Second - p.First); if (gap <= 2) continue;
@@ -159,6 +204,7 @@ public sealed class PdfGrid(PdfPageLayout page)
     }
     public IReadOnlyList<PdfBox> Slices(PdfBox row, double x)
     {
+        Step(page.Lines.Count);
         var edges = new[] { row.Top }.Concat(page.Lines.Where(l => l.Horizontal && l.X1 - 0.5 <= x && x <= l.X2 + 0.5 && row.Top + 1 < l.Y1 && l.Y1 < row.Bottom - 1)
             .Select(l => Math.Round(l.Y1 * 100) / 100).Distinct().Order()).Append(row.Bottom).ToArray();
         return edges.Zip(edges.Skip(1)).Where(p => p.Second - p.First >= 2).Select(p => Box(x, (p.First + p.Second) / 2)).Distinct().ToArray();

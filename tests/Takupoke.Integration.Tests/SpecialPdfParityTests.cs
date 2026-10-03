@@ -16,6 +16,12 @@ public sealed class SpecialPdfParityTests
     [InlineData(MaterialKind.ExamReturn, "令和8年度令和௰年度")]
     [InlineData(MaterialKind.Exam, "令和8年度ⅯⅯⅩⅩⅦ年度")]
     [InlineData(MaterialKind.ExamReturn, "令和8年度ⅯⅯⅩⅩⅦ年度")]
+    [InlineData(MaterialKind.Exam, "令和8年度令和9年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度令和9年度")]
+    [InlineData(MaterialKind.Exam, "令和8年度㋿9年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度㋿9年度")]
+    [InlineData(MaterialKind.Exam, "令和8年度令和Ⅸ年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度令和Ⅸ年度")]
     public void ConflictingSpecialTitleYearsCannotSelectTheFirstYear(MaterialKind kind, string title)
     {
         var pages = kind == MaterialKind.Exam ? Enumerable.Range(1, 6).Select(i => ExamPage(i, titleYears: i == 1 ? title : "令和8年度")).ToArray() : new[] { ReturnPage(titleYears: title) };
@@ -26,7 +32,7 @@ public sealed class SpecialPdfParityTests
     [InlineData(MaterialKind.ExamReturn)]
     public void EquivalentSpecialTitleYearsRemainValid(MaterialKind kind)
     {
-        var pages = kind == MaterialKind.Exam ? Enumerable.Range(1, 6).Select(i => ExamPage(i, titleYears: "令和8年度2026年度")).ToArray() : new[] { ReturnPage(titleYears: "令和8年度令和8年度") };
+        var pages = kind == MaterialKind.Exam ? Enumerable.Range(1, 6).Select(i => ExamPage(i, titleYears: "㋿8年度２０２６年度")).ToArray() : new[] { ReturnPage(titleYears: "㋿8年度令和8年度") };
         Assert.Equal(2026, PdfScheduleParser.Special(pages, kind).SchoolYear);
     }
     [Fact]

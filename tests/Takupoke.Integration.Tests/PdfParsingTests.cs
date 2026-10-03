@@ -104,6 +104,9 @@ public sealed class PdfParsingTests
     [InlineData("令和14年度令和Ⅸ年度前期時間割")]
     [InlineData("令和14年度令和௰年度前期時間割")]
     [InlineData("令和14年度ⅯⅯⅩⅩⅦ年度前期時間割")]
+    [InlineData("令和14年度令和15年度前期時間割")]
+    [InlineData("令和14年度㋿15年度前期時間割")]
+    [InlineData("令和14年度令和Ⅸ年度前期時間割")]
     public void ConflictingTitleYearsCannotSelectTheFirstYear(string heading)
     {
         var page = TimetableLayout("架空科目", "架空教員", "架空教室");
@@ -113,6 +116,7 @@ public sealed class PdfParsingTests
     [Theory]
     [InlineData("令和14年度令和14年度前期時間割")]
     [InlineData("令和14年度2032年度前期時間割")]
+    [InlineData("㋿14年度２０３２年度前期時間割")]
     [InlineData("令 和 １ ４ 年 度 ２ ０ ３ ２ 年 度 前期時間割")]
     public void RepeatedOrEquivalentTitleYearsRemainValid(string heading)
     {
@@ -166,6 +170,34 @@ public sealed class PdfParsingTests
         }
         Assert.Equal(new[] { "科目だけ", "", "教室あり" }, Grid(false).LessonFields(new(0, 0, 100, 100)));
         Assert.Equal("P17", Assert.Throws<PdfParseException>(() => Grid(true).LessonFields(new(0, 0, 100, 100))).Stage);
+    }
+    [Fact]
+    public void ManyShortCellsReuseCalibrationsDespiteUnrelatedPageText()
+    {
+        var glyphs = new List<PdfGlyph>(); var boxes = new List<PdfBox>();
+        for (var i = 0; i < 680; i++)
+        {
+            var x = i * 6d; boxes.Add(new(x, 0, x + 6, 40));
+            glyphs.Add(new("架", x + 1, 5, 2, 2));
+            if (i % 2 == 0) { glyphs.Add(new("空", x + 1, 15, 2, 2)); glyphs.Add(new("室", x + 1, 25, 2, 2)); }
+        }
+        // Unrelated page annotations must not multiply each cell/reference lookup.
+        for (var i = 0; i < 74000; i++) glyphs.Add(new("注", i % 4000, 80, 1, 1));
+        using var cancellation = new CancellationTokenSource();
+        var grid = new PdfGrid(new(4200, 100, glyphs, [new(0, 0, 4200, 0)]), cancellation.Token);
+        grid.SetLessonArea(new(0, 0, 4080, 40)); grid.SetLessonCells(boxes);
+        foreach (var box in boxes.Where((_, i) => i % 2 == 1)) Assert.Equal(new[] { "架", "", "" }, grid.LessonFields(box));
+        cancellation.Cancel();
+        Assert.Throws<OperationCanceledException>(() => grid.LessonFields(boxes[1]));
+    }
+    [Fact]
+    public void GridRuleWorkHasASharedLimitAcrossRepeatedQueries()
+    {
+        var rules = Enumerable.Range(0, 25000).SelectMany(_ => new PdfRule[]
+            { new(0, 0, 0, 100), new(100, 0, 100, 100), new(0, 0, 100, 0), new(0, 100, 100, 100) }).ToArray();
+        var grid = new PdfGrid(new(100, 100, [new("架", 10, 10, 2, 2)], rules));
+        for (var i = 0; i < 160; i++) Assert.Equal(new PdfBox(0, 0, 100, 100), grid.Box(50, 50));
+        Assert.Equal("limit", Assert.Throws<PdfParseException>(() => grid.Box(50, 50)).Stage);
     }
     [Theory] [InlineData("担当教員")] [InlineData("教員名")] [InlineData("教師名")] [InlineData("授業名")] [InlineData("会場")] public void PartialRoleLabelInSecondParallelLessonCannotBypassRecoveryConfirmation(string alias)
     {

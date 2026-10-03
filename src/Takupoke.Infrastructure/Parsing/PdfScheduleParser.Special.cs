@@ -45,7 +45,7 @@ public static partial class PdfScheduleParser
             .Where(run => run.Cx < periods[0].Cx).Select(run => (Run: run, Day: Date(run.Text, year, false)))
             .Where(p => p.Day is not null).OrderBy(p => p.Run.Cy).ToArray();
         if (dates.Length != 5 || dates.Select(p => p.Day).Distinct().Count() != 5) throw new PdfParseException("P10", number);
-        var grid = new PdfGrid(page); var lessons = new List<SpecialLesson>();
+        var grid = new PdfGrid(page, token); var lessons = new List<SpecialLesson>();
         var firstBox = grid.Box(periods[0].Cx, dates[0].Run.Cy); var lastBox = grid.Box(periods[^1].Cx, dates[^1].Run.Cy);
         grid.SetLessonArea(new(firstBox.Left, firstBox.Top, lastBox.Right, lastBox.Bottom));
         var lessonRows = dates.Select(pair => { token.ThrowIfCancellationRequested(); return grid.Box(pair.Run.Cx, pair.Run.Cy); }).ToArray();
@@ -83,7 +83,7 @@ public static partial class PdfScheduleParser
         var grades = left.Where(run => run.Cx < gradeMax && Regex.IsMatch(run.Text, "^(?:[1-5]|AI)$")).ToArray();
         var classRuns = left.Where(run => run.Cx >= gradeMax && Regex.IsMatch(run.Text, "^(?:[1-3]|CN|ES|IT)$")).OrderBy(run => run.Cy).ToArray();
         if (grades.Length != 6 || classRuns.Length != 17) throw new PdfParseException("P14", 1);
-        var classes = new HashSet<string>(); var lessons = new List<SpecialLesson>(); var grid = new PdfGrid(page);
+        var classes = new HashSet<string>(); var lessons = new List<SpecialLesson>(); var grid = new PdfGrid(page, token);
         var firstBox = grid.Box(periods[0].Cx, classRuns[0].Cy); var lastBox = grid.Box(periods[^1].Cx, classRuns[^1].Cy);
         grid.SetLessonArea(new(firstBox.Left, firstBox.Top, lastBox.Right, lastBox.Bottom));
         var lessonRows = classRuns.Select(run => { token.ThrowIfCancellationRequested(); return grid.Box(run.Cx, run.Cy); }).ToArray();

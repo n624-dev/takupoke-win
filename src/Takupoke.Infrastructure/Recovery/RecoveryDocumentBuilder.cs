@@ -102,8 +102,8 @@ public static class RecoveryDocumentBuilder
         if (kind == RecoveryDocumentKind.Timetable && term is null) throw new InvalidDataException("学期の見出しを確認できません。");
         Label Expand(Label label)
         {
-            try { work.Step(pages[label.Page - 1].Lines.Count * 4L); var b = new PdfGrid(pages[label.Page - 1]).Box(label.Box.X + label.Box.Width / 2, label.Box.Y + label.Box.Height / 2); return label with { Box = new(b.Left, b.Top, b.Right - b.Left, b.Bottom - b.Top) }; }
-            catch (PdfParseException) { return label; }
+            try { work.Step(pages[label.Page - 1].Lines.Count * 4L); var b = new PdfGrid(pages[label.Page - 1], token).Box(label.Box.X + label.Box.Width / 2, label.Box.Y + label.Box.Height / 2); return label with { Box = new(b.Left, b.Top, b.Right - b.Left, b.Bottom - b.Top) }; }
+            catch (PdfParseException error) when (error.Stage != "limit") { return label; }
         }
         var legacyClassLabels = new List<Label>();
         foreach (var dept in labels.Where(l => Regex.IsMatch(l.Value, "^(?:[1-3]|CN|ES|IT)$")))
@@ -114,7 +114,7 @@ public static class RecoveryDocumentBuilder
             try
             {
                 work.Step(page.Lines.Count * 8L + atoms.Length * 2L);
-                var grid = new PdfGrid(pages[dept.Page - 1]); var classBox = grid.Box(dept.Box.X + dept.Box.Width / 2, dept.Box.Y + dept.Box.Height / 2);
+                var grid = new PdfGrid(pages[dept.Page - 1], token); var classBox = grid.Box(dept.Box.X + dept.Box.Width / 2, dept.Box.Y + dept.Box.Height / 2);
                 var gradeBox = grid.Box(classBox.Left - 2, dept.Box.Y + dept.Box.Height / 2);
                 var gradeAtoms = atoms.Where(a => a.Page == dept.Page && a.Glyph.Cx > gradeBox.Left && a.Glyph.Cx < gradeBox.Right && a.Glyph.Cy > gradeBox.Top && a.Glyph.Cy < gradeBox.Bottom).ToArray();
                 var grade = PdfGrid.Key(string.Concat(gradeAtoms.Select(a => a.Glyph.Text))); var cls = grade + "_" + dept.Value;
@@ -123,7 +123,7 @@ public static class RecoveryDocumentBuilder
                 var box = new RecoveryBox(gradeBox.Left, Math.Min(gradeBox.Top, classBox.Top), classBox.Right - gradeBox.Left, Math.Max(gradeBox.Bottom, classBox.Bottom) - Math.Min(gradeBox.Top, classBox.Top));
                 legacyClassLabels.Add(new(cls, dept.Page, box, atoms.Where(a => ids.Contains(a.Id)).Select(a => a.Id).ToArray()));
             }
-            catch (PdfParseException) { }
+            catch (PdfParseException error) when (error.Stage != "limit") { }
         }
         var maxPeriod = kind == RecoveryDocumentKind.Exam ? 6 : 8;
         var classLabels = labels.Where(l => ClassSelection.Candidates.Contains(l.Value.Replace('-', '_'))).Select(l => Expand(l) with { Value = l.Value.Replace('-', '_') }).Concat(legacyClassLabels).ToArray();
@@ -133,9 +133,9 @@ public static class RecoveryDocumentBuilder
         var trustedNormal = new Dictionary<int, TimetableAnalysis>(); SpecialAnalysis? trustedSpecial = null;
         if (kind == RecoveryDocumentKind.Timetable)
         {
-            foreach (var (page, index) in pages.Select((p, i) => (p, i + 1))) try { trustedNormal[index] = PdfScheduleParser.Timetable([page], token); } catch (PdfParseException) { }
+            foreach (var (page, index) in pages.Select((p, i) => (p, i + 1))) try { trustedNormal[index] = PdfScheduleParser.Timetable([page], token); } catch (PdfParseException error) when (error.Stage != "limit") { }
         }
-        else try { trustedSpecial = PdfScheduleParser.Special(pages, materialKind, token); } catch (PdfParseException) { }
+        else try { trustedSpecial = PdfScheduleParser.Special(pages, materialKind, token); } catch (PdfParseException error) when (error.Stage != "limit") { }
         var sources = atoms.ToDictionary(a => a.Id, a => new RecoverySource(a.Id, "header", a.Page, a.Glyph.Text, a.Box, ocrPages?.Contains(a.Page) == true, a.Glyph.SourceLine, a.Glyph.SourceOrder));
         var cells = new List<RecoveryCell>();
         var usedClass = new Dictionary<string, HashSet<string>>(); var usedDay = new Dictionary<string, HashSet<string>>(); var usedPeriod = new Dictionary<string, HashSet<string>>();
@@ -143,7 +143,7 @@ public static class RecoveryDocumentBuilder
         foreach (var (page, pi) in pages.Select((p, i) => (p, i + 1)))
         {
             token.ThrowIfCancellationRequested();
-            var grid = new PdfGrid(page);
+            var grid = new PdfGrid(page, token);
             var headers = classLabels.Where(l => l.Page == pi).Concat(dayLabels.Where(l => l.Page == pi)).Concat(periodLabels.Where(l => l.Page == pi)).ToArray();
             var xs = page.Lines.Where(l => l.Vertical).Select(l => l.X1).Distinct().Order().ToArray();
             var ys = page.Lines.Where(l => l.Horizontal).Select(l => l.Y1).Distinct().Order().ToArray();
@@ -155,7 +155,7 @@ public static class RecoveryDocumentBuilder
                 if (right - left < 4 || bottom - top < 4) continue;
                 work.Step(page.Lines.Count * 4L);
                 try { var b = grid.Box((left + right) / 2, (top + bottom) / 2); boxes.Add(new(b.Left, b.Top, b.Right - b.Left, b.Bottom - b.Top)); }
-                catch (PdfParseException) { }
+                catch (PdfParseException error) when (error.Stage != "limit") { }
                 if (boxes.Count > 20000) throw new InvalidDataException("表の候補数が上限を超えています。");
             }
             foreach (var box in boxes.OrderBy(b => b.Y).ThenBy(b => b.X))
