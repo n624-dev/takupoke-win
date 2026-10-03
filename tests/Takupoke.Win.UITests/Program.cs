@@ -65,10 +65,12 @@ internal static partial class Program
                 SelectMainColor(color, preferences);
                 Require(TextColor("page-settings") == bodyColor, "Changing the main color must not recolor page text.");
             }
+            Invoke("settings-materials");
+            Wait(() => Find("material-summary-Timetable")?.Current.Name.EndsWith("解析済み", StringComparison.Ordinal) == true, "A current accepted analysis displays the same completed state as iOS");
+            Invoke("back-settings");
             CheckAuthentication(args[0], args[1]);
             Invoke("settings-materials");
             Wait(() => Find("page-materials") is not null, "material list is a settings child screen");
-            Wait(() => Find("material-summary-Timetable")?.Current.Name.EndsWith("解析済み", StringComparison.Ordinal) == true, "A current accepted analysis displays the same completed state as iOS");
             // Authentication cancellation intentionally pauses automatic checks.
             // Resume first so this separate test exercises an enabled stop action.
             Invoke("refresh-materials");
@@ -464,6 +466,8 @@ internal static partial class Program
             new("架空科目甲", "架空教員甲", "架空教室甲", "架空科目甲（正式名称）"), "完全に架空の授業", 1)).ToArray();
         await store.SaveAnalysisAsync(lease, new(source.Id, source.Kind, PdfScheduleParser.TimetableVersion, source.Digest, source.OriginalName, now, lease.Period.SchoolYear,
             Timetable: new(lease.Period.SchoolYear, lease.Period.Half == 1 ? "前期" : "後期", lessons)));
+        await store.WriteAsync(lease, "acquisition.Timetable", new MaterialAttempt(now, null, false, source.Digest));
+        await store.WriteAsync(lease, "attempt.Timetable", new MaterialAttempt(now, null, true, source.Digest, lease.Period.SchoolYear, ParserVersion: PdfScheduleParser.TimetableVersion));
         var link = new LinkItem("fake-study", "fake-category", "架空学習リンク", "https://example.invalid/", "blue", true, 1, true, 1, [], "架空学習リンク|かくうがくしゅうりんく|kakuugakushuurinku");
         await store.WriteAsync(lease, "api.links", new SavedLinks(new("v1", "sha256-" + new string('a', 64), [new("fake-category", "架空カテゴリ", 1, [link, link with { Id = "fake-second", Label = "架空の別リンク", SortOrder = 0, SearchTerms = "別リンク" }])]),
             "\"fake-etag\"", now, new string('A', 43)));
