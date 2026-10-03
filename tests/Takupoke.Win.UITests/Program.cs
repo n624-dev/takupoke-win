@@ -288,10 +288,32 @@ internal static partial class Program
             "Periodic clock updates retain the original visible display menu item.");
         Require(WaitElement("timetable-grid-scroller").GetRuntimeId().SequenceEqual(previousGrid),
             "The timetable defers its periodic redraw while the display menu is open.");
-        Toggle(option);
+        option.SetFocus();
+        Wait(() => ByName("時間割変更を反映", ControlType.MenuItem).Current.HasKeyboardFocus,
+            "The retained display menu option receives keyboard focus");
+        System.Windows.Forms.SendKeys.SendWait("{ENTER}");
         Wait(() => SavedIncludesChanges(preferences) != previousValue, "The retained display menu option remains selectable and saves its value");
-        Invoke("timetable-display-options"); Toggle(ByName("時間割変更を反映", ControlType.MenuItem));
-        Wait(() => SavedIncludesChanges(preferences) == previousValue, "The menu regression restores the original display preference");
+        Wait(() => !WaitElement("timetable-grid-scroller").GetRuntimeId().SequenceEqual(previousGrid),
+            "Selecting the menu option closes the popup and redraws the saved preference");
+        Invoke("timetable-display-options");
+        option = ByName("時間割変更を反映", ControlType.MenuItem);
+        Require(Checked(option) != previousValue, "The reopened display menu reflects the saved preference.");
+        option.SetFocus();
+        Wait(() => ByName("時間割変更を反映", ControlType.MenuItem).Current.HasKeyboardFocus,
+            "The reopened display menu option receives keyboard focus");
+        System.Windows.Forms.SendKeys.SendWait("{ENTER}");
+        try
+        {
+            Wait(() => SavedIncludesChanges(preferences) == previousValue, "The menu regression restores the original display preference");
+        }
+        catch
+        {
+            var remaining = _window!.FindFirst(TreeScope.Descendants,
+                new AndCondition(new PropertyCondition(AutomationElement.NameProperty, "時間割変更を反映"),
+                    new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.MenuItem)));
+            Console.Error.WriteLine($"Display-menu restore diagnostic: initial={previousValue}; saved={SavedIncludesChanges(preferences)}; menuExists={remaining is not null}; menuChecked={(remaining is null ? "absent" : Checked(remaining).ToString())}");
+            throw;
+        }
     }
     private static bool SavedIncludesChanges(string path)
     {
