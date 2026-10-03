@@ -170,15 +170,19 @@ public sealed partial class MainWindow
         TitleText("通知・バックグラウンド", "page-notifications"); BackToSettings();
         Add(Card(Panel(SettingsSectionTitle("通知の状態"), SettingsDescription(_model.NotificationStatus))));
         var changes = PreferenceControl(new ToggleSwitch { Header = "時間割変更", IsOn = _model.Preferences.NotifyChanges });
-        changes.Toggled += async (_, _) => { var enabled = changes.IsOn; if (enabled == _model.Preferences.NotifyChanges) return; await _model.SavePreferencesAsync(current => current with { NotifyChanges = enabled, NotificationsSetupCompleted = true }); };
+        var requestedNotifyChanges = changes.IsOn;
+        changes.Toggled += async (_, _) => { var enabled = changes.IsOn; if (enabled == requestedNotifyChanges) return; requestedNotifyChanges = enabled; await _model.SavePreferencesAsync(current => current with { NotifyChanges = enabled, NotificationsSetupCompleted = true }); };
         var special = PreferenceControl(new ToggleSwitch { Header = "試験・返却", IsOn = _model.Preferences.NotifySpecials });
-        special.Toggled += async (_, _) => { var enabled = special.IsOn; if (enabled == _model.Preferences.NotifySpecials) return; await _model.SavePreferencesAsync(current => current with { NotifySpecials = enabled, NotificationsSetupCompleted = true }); };
+        var requestedNotifySpecials = special.IsOn;
+        special.Toggled += async (_, _) => { var enabled = special.IsOn; if (enabled == requestedNotifySpecials) return; requestedNotifySpecials = enabled; await _model.SavePreferencesAsync(current => current with { NotifySpecials = enabled, NotificationsSetupCompleted = true }); };
         Add(Card(Panel(SettingsSectionTitle("通知する更新"), changes, special)));
         Add(SettingsSectionTitle("バックグラウンド"));
         var tray = new ToggleSwitch { Header = "通知領域に常駐", IsOn = _model.Preferences.KeepInTray, IsEnabled = _desktop is not null };
-        tray.Toggled += async (_, _) => { var enabled = tray.IsOn; if (enabled == _model.Preferences.KeepInTray) return; try { _desktop?.SetTray(enabled); await _model.SavePreferencesAsync(current => current with { KeepInTray = enabled }); } catch { await Message("常駐を設定できません", "通知領域にアイコンを登録できませんでした。"); } };
+        var requestedKeepInTray = tray.IsOn;
+        tray.Toggled += async (_, _) => { var enabled = tray.IsOn; if (enabled == requestedKeepInTray) return; requestedKeepInTray = enabled; try { _desktop?.SetTray(enabled); await _model.SavePreferencesAsync(current => current with { KeepInTray = enabled }); } catch { await Message("常駐を設定できません", "通知領域にアイコンを登録できませんでした。"); } };
         var startup = new ToggleSwitch { Header = "Windowsへのサインイン時に起動", IsOn = _model.Preferences.AutoStart, IsEnabled = !_model.OfflineTest };
-        startup.Toggled += async (_, _) => { var enabled = startup.IsOn; if (enabled == _model.Preferences.AutoStart) return; try { DesktopIntegration.SetAutoStart(enabled); await _model.SavePreferencesAsync(current => current with { AutoStart = enabled }); } catch { await Message("自動起動を設定できません", "Windowsの設定を確認してください。"); } };
+        var requestedAutoStart = startup.IsOn;
+        startup.Toggled += async (_, _) => { var enabled = startup.IsOn; if (enabled == requestedAutoStart) return; requestedAutoStart = enabled; try { DesktopIntegration.SetAutoStart(enabled); await _model.SavePreferencesAsync(current => current with { AutoStart = enabled }); } catch { await Message("自動起動を設定できません", "Windowsの設定を確認してください。"); } };
         Add(Card(Panel(tray, SettingsDescription("ウィンドウを閉じた後も更新を確認"), startup)));
         Add(Button("アプリを完全に終了", () => { _exitRequested = true; Close(); return Task.CompletedTask; }));
     }

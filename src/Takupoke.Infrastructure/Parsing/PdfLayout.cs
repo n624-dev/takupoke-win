@@ -26,12 +26,19 @@ public sealed record PdfRule(double X1, double Y1, double X2, double Y2)
 public readonly record struct PdfBox(double Left, double Top, double Right, double Bottom);
 public sealed record PdfPageLayout(double Width, double Height, IReadOnlyList<PdfGlyph> Glyphs, IReadOnlyList<PdfRule> Lines)
 {
+    public void ValidateViewport(int page)
+    {
+        if (Glyphs.Any(g => !new[] { g.X, g.Y, g.Width, g.Height }.All(double.IsFinite) || g.X < 0 || g.Y < 0 || g.X + g.Width > Width || g.Y + g.Height > Height)
+            || Lines.Any(l => !new[] { l.X1, l.Y1, l.X2, l.Y2 }.All(double.IsFinite) || l.X1 < 0 || l.X2 < 0 || l.Y1 < 0 || l.Y2 < 0 || l.X1 > Width || l.X2 > Width || l.Y1 > Height || l.Y2 > Height))
+            throw new PdfParseException("P01", page);
+    }
     public void Validate(int page)
     {
         if (!double.IsFinite(Width) || !double.IsFinite(Height) || Width is <= 0 or > 5000 || Height is <= 0 or > 5000
             || Glyphs.Count > 100000 || Lines.Count > 100000
             || Glyphs.Any(g => !new[] { g.X, g.Y, g.Width, g.Height }.All(double.IsFinite) || g.Width < 0 || g.Height < 0 || Encoding.UTF8.GetByteCount(g.Text) > 64)
             || Lines.Any(l => !new[] { l.X1, l.Y1, l.X2, l.Y2 }.All(double.IsFinite))) throw new PdfParseException("limit", page);
+        ValidateViewport(page);
         if (Glyphs.Count == 0) throw new PdfParseException("raster", page);
         if (Lines.Count == 0) throw new PdfParseException("P08", page);
     }

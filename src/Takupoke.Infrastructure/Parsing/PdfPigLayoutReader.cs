@@ -50,7 +50,11 @@ public static class PdfPigLayoutReader
                     if (PdfPathEngine.Supports(name) || text is not null && PdfTextEngine.Supports(name))
                     {
                         var numbers = Numbers(operation);
-                        if (PdfPathEngine.Supports(name)) paths.Operation(name, numbers);
+                        if (PdfPathEngine.Supports(name))
+                        {
+                            var paint = visibility.FillWhite ? name switch { "f" or "F" or "f*" => "n", "B" or "B*" => "S", "b" or "b*" => "s", _ => name } : name;
+                            paths.Operation(paint, numbers);
+                        }
                         if (text is not null && PdfTextEngine.Supports(name)) text.Operation(name, numbers);
                     }
                     // Visibility-affecting graphics state applies to every document kind.
@@ -86,6 +90,7 @@ public static class PdfPigLayoutReader
                 IReadOnlyList<PdfGlyph> glyphs = text is not null ? text.Finish(page.Text).Select(transform.Glyph).ToArray() : SpecialGlyphs(page, transform, token);
                 capture?.Record(number, RecoveryInputState.Partial, new PdfPageLayout(transform.Width, transform.Height, glyphs, []));
                 var layout = new PdfPageLayout(transform.Width, transform.Height, glyphs, paths.Finish());
+                layout.ValidateViewport(number);
                 if (RulesOverlapText(layout.Lines, glyphs, token))
                     throw new PdfParseException("P01", number);
                 capture?.Record(number, glyphs.Count == 0 ? RecoveryInputState.RasterOnly : RecoveryInputState.Complete, layout);
@@ -141,6 +146,14 @@ public static class PdfPigLayoutReader
         private State _state = new(true, false, true, 0, 1, PdfMatrix.Identity);
         private readonly Stack<State> _stack = new();
         private bool _shown;
+        private bool _painted;
+        public bool FillWhite => _state.FillWhite;
+        private void CheckStroke(int page, PdfPathEngine paths, bool closeLast)
+        {
+            var origin = _state.Ctm.Point(0, 0); var x = _state.Ctm.Point(1, 0); var y = _state.Ctm.Point(0, 1);
+            var scale = Math.Max(Math.Sqrt(Math.Pow(x.X - origin.X, 2) + Math.Pow(x.Y - origin.Y, 2)), Math.Sqrt(Math.Pow(y.X - origin.X, 2) + Math.Pow(y.Y - origin.Y, 2)));
+            if (!_state.StrokeBlack || !double.IsFinite(scale) || _state.LineWidth * scale > 2 || !paths.PendingStrokeIsRules(closeLast)) throw new PdfParseException("P01", page);
+        }
         public void SetLineWidth(double width, int page)
         {
             if (!double.IsFinite(width) || width < 0) throw new PdfParseException("P01", page);
@@ -187,18 +200,20 @@ public static class PdfPigLayoutReader
                     SetLineWidth(width[0], page); break;
                 case "Tr":
                     var mode = Numbers(operation);
-                    if (mode.Length != 1 || mode[0] is not 0 and not 1 and not 2) throw new PdfParseException("P01", page);
+                    // Extracted glyph bounds do not include a painted outline.
+                    if (mode.Length != 1 || mode[0] != 0) throw new PdfParseException("P01", page);
                     _state = _state with { TextMode = (int)mode[0] }; break;
                 case "Tj": case "TJ": case "'": case "\"":
                     if (_state.TextMode is 0 or 2 && !_state.FillBlack || _state.TextMode is 1 or 2 && !_state.StrokeBlack)
                         throw new PdfParseException("P01", page);
                     _shown = true; break;
                 case "f": case "F": case "f*": case "B": case "B*": case "b": case "b*":
-                    if (_shown || !_state.FillWhite && !(_state.FillBlack && paths.PendingFillIsThinRules)) throw new PdfParseException("P01", page); break;
+                    if (_shown || _state.FillWhite && _painted || !_state.FillWhite && !(_state.FillBlack && paths.PendingFillIsThinRules)) throw new PdfParseException("P01", page);
+                    if (name is "B" or "B*" or "b" or "b*") { CheckStroke(page, paths, name is "b" or "b*"); _painted = true; }
+                    else if (!_state.FillWhite) _painted = true;
+                    break;
                 case "S": case "s":
-                    var origin = _state.Ctm.Point(0, 0); var x = _state.Ctm.Point(1, 0); var y = _state.Ctm.Point(0, 1);
-                    var scale = Math.Max(Math.Sqrt(Math.Pow(x.X - origin.X, 2) + Math.Pow(x.Y - origin.Y, 2)), Math.Sqrt(Math.Pow(y.X - origin.X, 2) + Math.Pow(y.Y - origin.Y, 2)));
-                    if (!_state.StrokeBlack || _state.LineWidth * scale > 2) throw new PdfParseException("P01", page); break;
+                    CheckStroke(page, paths, name == "s"); _painted = true; break;
             }
         }
     }

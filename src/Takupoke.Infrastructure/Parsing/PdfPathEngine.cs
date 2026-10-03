@@ -50,6 +50,24 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
             return true;
         }
     }
+    public bool PendingStrokeIsRules(bool closeLast)
+    {
+        bool IsRule((double X, double Y) a, (double X, double Y) b)
+        {
+            ConsumePaintWork();
+            return Math.Abs(a.X - b.X) < .2 && Math.Abs(a.Y - b.Y) > .1 ||
+                Math.Abs(a.Y - b.Y) < .2 && Math.Abs(a.X - b.X) > .1;
+        }
+        for (var index = 0; index < _paths.Count; index++)
+        {
+            var path = _paths[index]; ConsumePaintWork();
+            if (path.Count < 2) return false;
+            for (var point = 1; point < path.Count; point++)
+                if (!IsRule(path[point - 1], path[point])) return false;
+            if (closeLast && index == _paths.Count - 1 && path[^1] != path[0] && !IsRule(path[^1], path[0])) return false;
+        }
+        return true;
+    }
     private (double X, double Y) Point(double x, double y) { var p = _ctm.Point(x, y); return display.Point(p.X, p.Y); }
     private void Close() { if (_paths.Count > 0 && _paths[^1].Count > 0) _paths[^1].Add(_paths[^1][0]); }
     public void Operation(string operation, double[] numbers)

@@ -95,6 +95,20 @@ public sealed class PdfParsingTests
         for (var index = 0; index <= 40; index++) lines.Add(new(40 + index * 10, 60, 40 + index * 10, 240));
         Assert.Equal("P17", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Timetable([new(500, 500, glyphs, lines)])).Stage);
     }
+    [Fact]
+    public void AWholeTableOutsideTheVisiblePageCannotBeAccepted()
+    {
+        var page = TimetableLayout("架空科目", "架空教員", "架空教室");
+        var shifted = page with { Glyphs = page.Glyphs.Select(g => g with { X = g.X + 1000 }).ToArray(),
+            Lines = page.Lines.Select(l => l with { X1 = l.X1 + 1000, X2 = l.X2 + 1000 }).ToArray() };
+        Assert.Equal("P01", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Timetable([shifted])).Stage);
+        foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
+        {
+            var capture = new RecoveryReadCapture();
+            Assert.Equal("P01", Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(SyntheticPdf(prefix: "1 0 0 1 1000 0 cm "), kind, capture: capture)).Stage);
+            Assert.False(capture.Complete); Assert.DoesNotContain(capture.Pages, p => p.State == RecoveryInputState.Complete);
+        }
+    }
     [Fact] public void ShortCellCalibrationPreservesTeacherHoleAndRejectsTeacherOnlyEvenWithOutsideAnnotation()
     {
         PdfGrid Grid(bool teacherOnly)
@@ -215,6 +229,46 @@ public sealed class PdfParsingTests
         foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
             Assert.Equal("P01", Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(
                 SyntheticPdf(graphicsState: "/LW 25", suffix: " 10 115 m 100 115 l S"), kind)).Stage);
+    }
+    [Theory]
+    [InlineData("q 1 g 40 20 1 140 re f Q ", 4)]
+    [InlineData("q 1 g 40 20 1 140 re B Q ", 8)]
+    [InlineData("q 0 g 40 20 1 140 re B Q ", 9)]
+    public void WhiteFillDoesNotCreateAnInvisibleRuleAndBlackStrokeRemainsVisible(string prefix, int ruleCount)
+    {
+        foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
+        {
+            var capture = new RecoveryReadCapture();
+            var page = Assert.Single(PdfPigLayoutReader.Read(SyntheticPdf(prefix: prefix), kind, capture: capture));
+            Assert.Equal(ruleCount, page.Lines.Count);
+            Assert.Equal("架空", string.Concat(page.Glyphs.Select(g => g.Text)));
+            Assert.True(capture.Complete);
+        }
+    }
+    [Theory]
+    [InlineData("40 20 m 40 160 l S q 1 g 0 0 200 200 re f Q ")]
+    [InlineData("25 w 40 20 1 140 re B ")]
+    [InlineData("25 w 40 20 1 140 re B* ")]
+    [InlineData("25 w 40 20 1 140 re b ")]
+    [InlineData("25 w 40 20 1 140 re b* ")]
+    [InlineData("1 G 40 20 1 140 re B ")]
+    [InlineData("q 1 g 1 G 40 20 1 140 re B Q ")]
+    [InlineData("20 90 m 50 120 l S ")]
+    [InlineData("20 90 m 50 90 l 50 120 l s ")]
+    [InlineData("1 Tr ")]
+    [InlineData("2 Tr ")]
+    [InlineData("25 w 1 Tr ")]
+    [InlineData("25 w 2 Tr ")]
+    public void UnsupportedPaintCannotBeCertifiedAsCompleteSource(string prefix)
+    {
+        foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
+        {
+            var capture = new RecoveryReadCapture();
+            Assert.Equal("P01", Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(
+                SyntheticPdf(prefix: prefix), kind, capture: capture)).Stage);
+            Assert.False(capture.Complete);
+            Assert.DoesNotContain(capture.Pages, p => p.State == RecoveryInputState.Complete);
+        }
     }
     [Fact]
     public void CroppedOutTextCannotBeReusedAsCompleteInput()
