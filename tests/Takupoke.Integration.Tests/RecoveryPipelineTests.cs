@@ -10,7 +10,7 @@ using Xunit;
 namespace Takupoke.Integration.Tests;
 public sealed class RecoveryPipelineTests
 {
-    private static PdfPageLayout Layout(MaterialKind kind)
+    internal static PdfPageLayout Layout(MaterialKind kind)
     {
         var special = kind != MaterialKind.Timetable; var max = kind == MaterialKind.Exam ? 6 : 8;
         var classes = special ? RecoveryValidator.SpecialClasses : new[] { "3_CN" };

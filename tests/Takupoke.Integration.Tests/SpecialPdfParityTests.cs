@@ -46,6 +46,19 @@ public sealed class SpecialPdfParityTests
     {
         Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special(Enumerable.Range(1, 6).Select(i => ExamPage(i, omitLastTime: i == 1)).ToArray(), MaterialKind.Exam));
     }
+    [Theory]
+    [InlineData("3-XX")]
+    [InlineData("3-1")]
+    public void SeventeenExamClassesMustMatchTheRequiredSet(string replacement)
+    {
+        var pages = Enumerable.Range(1, 6).Select(i => ExamPage(i, firstLabel: i == 3 ? replacement : null)).ToArray();
+        Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special(pages, MaterialKind.Exam));
+    }
+    [Fact]
+    public void SeventeenReturnClassesCannotReplaceAiTwoWithAiThree()
+    {
+        Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special([ReturnPage(invalidAiClass: true)], MaterialKind.ExamReturn));
+    }
     private sealed class Builder(bool ordered, double height)
     {
         public readonly List<PdfGlyph> Glyphs = []; public readonly List<PdfRule> Lines = [];
@@ -58,10 +71,11 @@ public sealed class SpecialPdfParityTests
         public void Line(double x1, double y1, double x2, double y2) => Lines.Add(new(x1, y1, x2, y2));
         public PdfPageLayout Page(double width, double pageHeight) => new(width, pageHeight, Glyphs, Lines);
     }
-    private static PdfPageLayout ExamPage(int number, bool merged = false, bool metadata = false, bool omitLastTime = false)
+    private static PdfPageLayout ExamPage(int number, bool merged = false, bool metadata = false, bool omitLastTime = false, string? firstLabel = null)
     {
         var b = new Builder(true, 8); var columns = number == 6 ? 2 : 3;
         string[] labels = number switch { 1 => ["1-1", "1-2", "1-3"], 6 => ["1年", "2年"], _ => [$"{number}-CN", $"{number}-ES", $"{number}-IT"] };
+        if (firstLabel is not null) labels[0] = firstLabel;
         b.Write("令和8年度 試験時間割", 20, 20);
         for (var column = 0; column < columns; column++)
         {
@@ -81,7 +95,7 @@ public sealed class SpecialPdfParityTests
         b.Write("1・2時限連続8:50~10:20", 300, 470);
         return b.Page(850, 600);
     }
-    private static PdfPageLayout ReturnPage()
+    private static PdfPageLayout ReturnPage(bool invalidAiClass = false)
     {
         var b = new Builder(false, 4); b.Write("令和8年度 試験返却時間割", 20, 20);
         for (var day = 0; day < 5; day++)
@@ -90,7 +104,7 @@ public sealed class SpecialPdfParityTests
             for (var period = 0; period < 8; period++) b.Write((period + 1).ToString(), 150 + (day * 8 + period) * 40, 100);
         }
         var groups = new[] { ("1", new[] { "1", "2", "3" }), ("2", new[] { "CN", "ES", "IT" }), ("3", new[] { "CN", "ES", "IT" }),
-            ("4", new[] { "CN", "ES", "IT" }), ("5", new[] { "CN", "ES", "IT" }), ("AI", new[] { "1", "2" }) };
+            ("4", new[] { "CN", "ES", "IT" }), ("5", new[] { "CN", "ES", "IT" }), ("AI", new[] { "1", invalidAiClass ? "3" : "2" }) };
         var row = 0;
         foreach (var (grade, classes) in groups)
         { b.Write(grade, 30, 132 + (row + classes.Length / 2) * 25); foreach (var cls in classes) { b.Write(cls, 124, 132 + row * 25); row++; } }

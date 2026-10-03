@@ -30,7 +30,7 @@ public static partial class PdfScheduleParser
             classes.UnionWith(parsed.Classes); lessons.AddRange(parsed.Lessons);
             if (lessons.Count > MaximumRecords) throw new PdfParseException("limit", index + 1);
         }
-        if (year is null || expectedDates is null || expectedTimes is null || classes.Count != 17 || lessons.Count == 0) throw new PdfParseException("P04");
+        if (year is null || expectedDates is null || expectedTimes is null || !classes.SetEquals(Takupoke.Core.Recovery.RecoveryValidator.SpecialClasses) || lessons.Count == 0) throw new PdfParseException("P04");
         return new(kind, year.Value, expectedDates, classes.Order(StringComparer.Ordinal).ToArray(), expectedTimes.Single,
             lessons.OrderBy(l => l.Date, StringComparer.Ordinal).ThenBy(l => l.ClassName, StringComparer.Ordinal).ThenBy(l => l.Period).ThenBy(l => l.Page).ToArray());
     }

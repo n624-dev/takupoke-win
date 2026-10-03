@@ -6,6 +6,7 @@ using Microsoft.Data.Sqlite;
 using Takupoke.Core;
 using Takupoke.Core.Recovery;
 using Takupoke.Infrastructure.Storage;
+using Takupoke.Infrastructure.Recovery;
 using Xunit;
 
 namespace Takupoke.Integration.Tests;
@@ -147,17 +148,77 @@ public sealed class SchoolDataStoreTests : IAsyncLifetime
     }
 
     private sealed record RecoveryFixture(RecoveryDocument Document, RecoveryResult Result);
-    private async Task<(SchoolLease Lease, SourceRecord Source, RecoveryAudit Audit)> AwaitingRecoveryAsync(SchoolDataStore store)
+    private async Task<(SchoolLease Lease, SourceRecord Source, RecoveryAudit Audit)> AwaitingRecoveryAsync(SchoolDataStore store, int documentYear = 2026, bool bypassPreviewValidation = false)
     {
+        _clock.Now = new(2026, 9, 30, 23, 59, 0, TimeSpan.FromHours(9));
         var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) } };
-        var fixture = JsonSerializer.Deserialize<RecoveryFixture>(await File.ReadAllTextAsync(Path.Combine(AppContext.BaseDirectory, "fixtures", "recovery-exam.json")), options)!;
+        var raw = await File.ReadAllTextAsync(Path.Combine(AppContext.BaseDirectory, "fixtures", "recovery-exam.json"));
+        var fixture = JsonSerializer.Deserialize<RecoveryFixture>(raw.Replace("2026", documentYear.ToString(System.Globalization.CultureInfo.InvariantCulture), StringComparison.Ordinal), options)!;
         var lease = await store.BeginAsync(); var bytes = "%PDF-synthetic-adoption"u8.ToArray(); var source = Source("recovery-adopt", bytes) with { Kind = MaterialKind.Exam };
         var doc = fixture.Document with { PdfHash = source.Digest }; var result = fixture.Result with { PdfHash = source.Digest };
         var audit = new RecoveryAudit(doc, result, new(source.Digest, RecoveryValidator.Fingerprint(result), RecoveryValidator.Fingerprint(doc), result.Metadata, _clock.Now));
         await store.SaveOriginalAsync(lease, source, bytes);
         await store.SavePdfFailureAsync(lease, source, new(_clock.Now, "P08", true, source.Digest, 2026, ParserVersion: 1, RecoveryPending: true), new(source.Digest, doc.Kind, RecoveryJobState.Pending, _clock.Now));
-        await store.SaveRecoveryProgressAsync(lease, source, new(source.Digest, doc.Kind, RecoveryJobState.AwaitingConfirmation, _clock.Now, ResultHash: RecoveryValidator.Fingerprint(result)), new(source.Id, lease, doc, result, _clock.Now));
+        var job = new RecoveryJob(source.Digest, doc.Kind, RecoveryJobState.AwaitingConfirmation, _clock.Now, ResultHash: RecoveryValidator.Fingerprint(result));
+        var preview = new RecoveryPreview(source.Id, lease, doc, result, _clock.Now);
+        if (bypassPreviewValidation)
+        {
+            // Reproduce a preview persisted by an older application version.
+            await store.WriteAsync(lease, "recovery.Exam", job);
+            await store.WriteAsync(lease, "recovery.preview.Exam", preview);
+        }
+        else await store.SaveRecoveryProgressAsync(lease, source, job, preview);
         return (lease, source, audit);
+    }
+    [Fact] public async Task PriorYearCannotReachRecoveryPreview()
+    {
+        await using var store = Store();
+        var failure = await Assert.ThrowsAsync<InvalidDataException>(() => AwaitingRecoveryAsync(store, documentYear: 2025));
+        Assert.Contains("年度・学期", failure.Message);
+        var lease = await store.BeginAsync(); Assert.Null(await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Exam"));
+        Assert.Null(await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"));
+    }
+    [Theory] [InlineData(false)] [InlineData(true)]
+    public async Task PriorYearPersistedPreviewOrAcceptanceCannotBeAdopted(bool reuseAcceptance)
+    {
+        await using var store = Store(); var (lease, source, audit) = await AwaitingRecoveryAsync(store, documentYear: 2025, bypassPreviewValidation: true);
+        Assert.True(RecoveryValidator.Validate(audit.Document, audit.Result).CanAdopt);
+        if (reuseAcceptance) await store.WriteAsync(lease, "recovery.accepted.Exam." + source.Digest, audit);
+        var failure = await Assert.ThrowsAsync<InvalidDataException>(() => store.SaveRecoveryAsync(lease, source, audit, _clock.Now, reuseAccepted: reuseAcceptance));
+        Assert.Contains("年度・学期", failure.Message); Assert.Null(await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"));
+        Assert.NotNull(await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Exam"));
+    }
+    [Theory] [InlineData(false, false)] [InlineData(true, false)] [InlineData(true, true)]
+    public async Task WrongTermCannotReachPreviewOrReplaceTheCurrentFormalAnalysis(bool persistedPreview, bool reuseAcceptance)
+    {
+        _clock.Now = new(2026, 9, 30, 23, 59, 0, TimeSpan.FromHours(9));
+        await using var store = Store(); var lease = await store.BeginAsync(); var bytes = "%PDF-synthetic-term-boundary"u8.ToArray(); var source = Source("term-boundary", bytes);
+        await store.SaveOriginalAsync(lease, source, bytes);
+        var layout = RecoveryPipelineTests.Layout(MaterialKind.Timetable);
+        var original = RecoveryDocumentBuilder.Build(source.Digest, MaterialKind.Timetable, [layout], (_, box) => !layout.Glyphs.Any(g => box.Contains(new(g.X, g.Y, g.Width, g.Height))));
+        var metadata = new RecoveryMetadata("rule", "rules", "1", "1", "2", RecoveryValidator.SchemaVersion, RecoveryValidator.Version, "test");
+        RecoveryResult Result(RecoveryDocument doc) => new(source.Digest, doc.Kind, doc.SchoolYear, doc.Term, doc.Cells.Select(c => c.ConfirmedEmpty ? new RecoveredCell(c.Id, RecoveryValueState.Empty, []) : RecoveryRules.Recover(doc, c)!).ToArray(), metadata);
+        var prior = RecoveryAnalysisConverter.Convert(source, original, Result(original), _clock.Now);
+        await store.SaveAnalysisAsync(lease, prior);
+        var doc = original with { Term = "後期", Sources = original.Sources.Select(s => original.TermEvidence.Contains(s.Id) ? s with { Text = "後期" } : s).ToArray() }; var result = Result(doc);
+        Assert.True(RecoveryValidator.Validate(doc, result).CanAdopt); Assert.False(RecoveryPolicy.MatchesPeriod(doc, lease.Period));
+        var acceptance = new RecoveryAcceptance(source.Digest, RecoveryValidator.Fingerprint(result), RecoveryValidator.Fingerprint(doc), metadata, _clock.Now); var audit = new RecoveryAudit(doc, result, acceptance);
+        await store.SavePdfFailureAsync(lease, source, new(_clock.Now, "P08", true, source.Digest, 2026, ParserVersion: 1, RecoveryPending: true), new(source.Digest, doc.Kind, RecoveryJobState.Pending, _clock.Now));
+        var job = new RecoveryJob(source.Digest, doc.Kind, RecoveryJobState.AwaitingConfirmation, _clock.Now, RecoveryValidator.Fingerprint(result)); var preview = new RecoveryPreview(source.Id, lease, doc, result, _clock.Now);
+        if (persistedPreview)
+        {
+            await store.WriteAsync(lease, "recovery.Timetable", job); await store.WriteAsync(lease, "recovery.preview.Timetable", preview);
+            if (reuseAcceptance) await store.WriteAsync(lease, "recovery.accepted.Timetable." + source.Digest, audit);
+            await Assert.ThrowsAsync<InvalidDataException>(() => store.SaveRecoveryAsync(lease, source, audit, _clock.Now, reuseAccepted: reuseAcceptance));
+        }
+        else
+        {
+            await Assert.ThrowsAsync<InvalidDataException>(() => store.SaveRecoveryProgressAsync(lease, source, job, preview));
+            Assert.Null(await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Timetable"));
+        }
+        var kept = (await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Timetable"))!;
+        Assert.Equal("前期", kept.Timetable!.Term); Assert.Equal(prior.ParsedAt, kept.ParsedAt); Assert.Null(kept.Recovery);
+        Assert.Equal("P08", (await store.ReadAsync<MaterialAttempt>(lease, "attempt.Timetable"))!.Failure);
     }
     [Fact] public async Task RecoveryAdoptionCommitsFormalAuditAcceptanceAndClearsPendingTogether()
     {

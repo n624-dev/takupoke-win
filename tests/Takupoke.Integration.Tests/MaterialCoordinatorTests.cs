@@ -43,6 +43,27 @@ public sealed class MaterialCoordinatorTests
         finally { Directory.Delete(root, true); }
     }
     [Fact]
+    public async Task SameBytesRefreshUpdatesSourceModificationWithoutReparsingOrReacquiring()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-source-metadata-" + Guid.NewGuid().ToString("N")); Directory.CreateDirectory(root); using var protector = new Protector();
+        try
+        {
+            var path = Path.Combine(root, "fictional.xlsx"); await File.WriteAllBytesAsync(path, XlsxChangeReaderTests.Workbook());
+            await using var store = new SchoolDataStore(Path.Combine(root, "data"), protector); var coordinator = new MaterialCoordinator(store, new(new FakeIdentity()));
+            Assert.True((await coordinator.SelectAsync(MaterialKind.Changes, path, 2032)).Parsed);
+            var lease = await store.BeginAsync(); var original = (await store.ReadAsync<SourceRecord>(lease, "selection.Changes"))!;
+            var analysis = (await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes"))!;
+            File.SetLastWriteTimeUtc(path, new DateTime(2031, 2, 3, 4, 5, 6, DateTimeKind.Utc));
+            Assert.True((await coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed);
+            var refreshed = (await store.ReadAsync<SourceRecord>(lease, "selection.Changes"))!;
+            Assert.Equal(new DateTimeOffset(File.GetLastWriteTimeUtc(path)), refreshed.SourceModifiedAt);
+            Assert.NotEqual(original.SourceModifiedAt, refreshed.SourceModifiedAt);
+            Assert.Equal(original.AcquiredAt, refreshed.AcquiredAt); Assert.Equal(original.Id, refreshed.Id);
+            Assert.Equal(analysis.ParsedAt, (await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes"))!.ParsedAt);
+        }
+        finally { Directory.Delete(root, true); }
+    }
+    [Fact]
     public async Task DeletedOriginalReportsUnavailableAndKeepsAcceptedDataAndSavedCopy()
     {
         var root = Path.Combine(Path.GetTempPath(), "takupoke-material-tests-" + Guid.NewGuid().ToString("N"));

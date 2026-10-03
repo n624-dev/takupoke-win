@@ -16,4 +16,7 @@ public static class RecoveryPolicy
         _ => []
     };
     public static bool MayTryNext(LocalProviderState state) => state is LocalProviderState.Unsupported or LocalProviderState.InsufficientMemory;
+    public static bool MatchesPeriod(RecoveryDocument document, SchoolDataPeriod period) =>
+        document.SchoolYear == period.SchoolYear && (document.Kind != RecoveryDocumentKind.Timetable ||
+            document.Term == (period.Half == 1 ? "前期" : "後期"));
 }

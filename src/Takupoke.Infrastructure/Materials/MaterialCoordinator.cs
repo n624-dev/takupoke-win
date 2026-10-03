@@ -35,14 +35,15 @@ public sealed class MaterialCoordinator(SchoolDataStore store, FileSourceReader 
                 var digest = NotificationDiff.Digest(content.Bytes); var now = _clock.GetUtcNow();
                 if (!selecting && digest == source!.Digest)
                 {
-                    await store.WriteAsync(lease, "selection." + kind, source with { LastCheckedAt = now }, token);
+                    source = source with { LastCheckedAt = now, SourceModifiedAt = content.ModifiedAt };
+                    await store.WriteAsync(lease, "selection." + kind, source, token);
                     await store.WriteAsync(lease, "acquisition." + kind, new MaterialAttempt(now, null, false, digest), token);
                     var analysis = await store.ReadAsync<MaterialAnalysis>(lease, "analysis." + kind, token);
                     var attempt = await store.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token);
                     var version = ParserVersion(kind);
                     if (analysis?.SourceDigest == digest && analysis.ParserVersion == version && (kind != MaterialKind.Changes || analysis.SchoolYear == year)) return new(kind, false, true);
                     if (attempt?.SourceDigest == digest && attempt.Failure is not null && attempt.ParserVersion == version && (kind != MaterialKind.Changes || attempt.SchoolYear == year)) return new(kind, false, false, attempt.Failure);
-                    return await ParseAsync(lease, source with { LastCheckedAt = now }, content.Bytes, year, false, token);
+                    return await ParseAsync(lease, source, content.Bytes, year, false, token);
                 }
                 var next = new SourceRecord(Guid.NewGuid().ToString("N"), kind, Path.GetFullPath(selectedPath ?? source!.Path), content.Identity,
                     Path.GetFileName(selectedPath ?? source!.Path), digest, content.Bytes.Length, now, now, content.ModifiedAt);

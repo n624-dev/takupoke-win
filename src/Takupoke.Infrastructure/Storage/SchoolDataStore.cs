@@ -257,6 +257,8 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
     public Task SaveRecoveryProgressAsync(SchoolLease lease, SourceRecord source, RecoveryJob job, RecoveryPreview? preview,
         CancellationToken token = default) => WithConnectionAsync(lease, async connection =>
     {
+        if (preview is not null && !RecoveryPolicy.MatchesPeriod(preview.Document, lease.Period))
+            throw new InvalidDataException("PDFの年度・学期が現在の保存期間と一致しません。");
         if (job.PdfHash != source.Digest || job.Kind != RecoveryPolicy.Kind(source.Kind) || preview is not null && (preview.SourceId != source.Id || preview.Lease != lease || preview.Document.PdfHash != source.Digest || !RecoveryValidator.Validate(preview.Document, preview.Result).CanAdopt))
             throw new InvalidDataException("復旧処理と原本の対応を確認できません。");
         using var transaction = connection.BeginTransaction();
@@ -281,6 +283,8 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
     public Task SaveRecoveryAsync(SchoolLease lease, SourceRecord source, RecoveryAudit audit, DateTimeOffset adoptedAt,
         CancellationToken token = default, bool reuseAccepted = false) => WithConnectionAsync(lease, async connection =>
     {
+        if (!RecoveryPolicy.MatchesPeriod(audit.Document, lease.Period))
+            throw new InvalidDataException("PDFの年度・学期が現在の保存期間と一致しません。");
         if (audit.Document.PdfHash != source.Digest || RecoveryPolicy.Kind(source.Kind) != audit.Document.Kind ||
             !RecoveryValidator.CanReuse(audit.Acceptance, audit.Document, audit.Result))
             throw new InvalidDataException("復旧結果と確認内容の対応を確認できません。");
