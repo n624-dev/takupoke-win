@@ -8,8 +8,8 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class PdfScheduleParser
 {
-    public const int TimetableVersion = 17;
-    public const int SpecialVersion = 16;
+    public const int TimetableVersion = 18;
+    public const int SpecialVersion = 17;
     private const int MaximumRecords = 10000;
     private static string Joined(IEnumerable<PdfGlyph> glyphs) => string.Concat(glyphs.Select(g => g.Text));
     private static string Heading(PdfPageLayout page, double fraction) => PdfGrid.Key(string.Concat(PdfGrid.Rows(page.Glyphs.Where(g => g.Cy < page.Height * fraction)).Select(Joined)));
@@ -17,7 +17,13 @@ public static partial class PdfScheduleParser
     {
         var match = Regex.Match(heading, "令和([0-9]{1,2})年度");
         if (!match.Success || !int.TryParse(match.Groups[1].Value, out var era) || era is < 1 or > 99) throw new PdfParseException("P03", page);
-        return 2018 + era;
+        var year = 2018 + era;
+        foreach (Match label in Regex.Matches(heading, "令和([0-9]{1,2})年度|(?<![0-9])([0-9]{4})年度"))
+        {
+            var value = label.Groups[1].Success ? 2018 + int.Parse(label.Groups[1].Value) : int.Parse(label.Groups[2].Value);
+            if (value != year) throw new PdfParseException("P03", page);
+        }
+        return year;
     }
     private static IReadOnlyList<PdfGlyph> PeriodHeader(PdfPageLayout page, string sequence, int count, double fraction)
     {

@@ -75,6 +75,24 @@ public sealed class PdfParsingTests
         Assert.Equal("科B", analysis.Lessons[1].Names.Subject); Assert.Equal("", analysis.Lessons[1].Names.Room);
         Assert.Equal("1_CN", analysis.Lessons[0].ClassName);
     }
+    [Theory]
+    [InlineData("令和13年度令和14年度前期時間割")]
+    [InlineData("令和14年度2031年度前期時間割")]
+    public void ConflictingTitleYearsCannotSelectTheFirstYear(string heading)
+    {
+        var page = TimetableLayout("架空科目", "架空教員", "架空教室");
+        page = page with { Glyphs = page.Glyphs.Select((g, i) => i == 0 ? g with { Text = heading } : g).ToArray() };
+        Assert.Equal("P03", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Timetable([page])).Stage);
+    }
+    [Theory]
+    [InlineData("令和14年度令和14年度前期時間割")]
+    [InlineData("令和14年度2032年度前期時間割")]
+    public void RepeatedOrEquivalentTitleYearsRemainValid(string heading)
+    {
+        var page = TimetableLayout("架空科目", "架空教員", "架空教室");
+        page = page with { Glyphs = page.Glyphs.Select((g, i) => i == 0 ? g with { Text = heading } : g).ToArray() };
+        Assert.Equal(2032, PdfScheduleParser.Timetable([page]).SchoolYear);
+    }
     [Fact]
     public void TimetableCannotShiftRoomIntoMissingTeacher()
     {

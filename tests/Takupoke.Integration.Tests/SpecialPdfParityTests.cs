@@ -7,6 +7,22 @@ namespace Takupoke.Integration.Tests;
 /// <summary>Fictional ruled tables with intact role baselines, empty fields and merged lessons.</summary>
 public sealed class SpecialPdfParityTests
 {
+    [Theory]
+    [InlineData(MaterialKind.Exam)]
+    [InlineData(MaterialKind.ExamReturn)]
+    public void ConflictingSpecialTitleYearsCannotSelectTheFirstYear(MaterialKind kind)
+    {
+        var pages = kind == MaterialKind.Exam ? Enumerable.Range(1, 6).Select(i => ExamPage(i, titleYears: i == 1 ? "令和8年度令和9年度" : "令和8年度")).ToArray() : new[] { ReturnPage(titleYears: "令和8年度2027年度") };
+        Assert.Equal("P03", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special(pages, kind)).Stage);
+    }
+    [Theory]
+    [InlineData(MaterialKind.Exam)]
+    [InlineData(MaterialKind.ExamReturn)]
+    public void EquivalentSpecialTitleYearsRemainValid(MaterialKind kind)
+    {
+        var pages = kind == MaterialKind.Exam ? Enumerable.Range(1, 6).Select(i => ExamPage(i, titleYears: "令和8年度2026年度")).ToArray() : new[] { ReturnPage(titleYears: "令和8年度令和8年度") };
+        Assert.Equal(2026, PdfScheduleParser.Special(pages, kind).SchoolYear);
+    }
     [Fact]
     public void ExamMatchesIosCoveredClassesDatesTimesAndMergedLessons()
     {
@@ -100,12 +116,12 @@ public sealed class SpecialPdfParityTests
         public void Line(double x1, double y1, double x2, double y2) => Lines.Add(new(x1, y1, x2, y2));
         public PdfPageLayout Page(double width, double pageHeight) => new(width, pageHeight, Glyphs, Lines);
     }
-    private static PdfPageLayout ExamPage(int number, bool merged = false, bool metadata = false, bool omitLastTime = false, string? firstLabel = null, string[]? timingOverride = null)
+    private static PdfPageLayout ExamPage(int number, bool merged = false, bool metadata = false, bool omitLastTime = false, string? firstLabel = null, string[]? timingOverride = null, string titleYears = "令和8年度")
     {
         var b = new Builder(true, 8); var columns = number == 6 ? 2 : 3;
         string[] labels = number switch { 1 => ["1-1", "1-2", "1-3"], 6 => ["1年", "2年"], _ => [$"{number}-CN", $"{number}-ES", $"{number}-IT"] };
         if (firstLabel is not null) labels[0] = firstLabel;
-        b.Write("令和8年度 試験時間割", 20, 20);
+        b.Write(titleYears + " 試験時間割", 20, 20);
         for (var column = 0; column < columns; column++)
         {
             b.Write(labels[column], 200 + column * 240, 70);
@@ -124,10 +140,10 @@ public sealed class SpecialPdfParityTests
         b.Write("1・2時限連続8:50~10:20", 300, 470);
         return b.Page(850, 600);
     }
-    private static PdfPageLayout ReturnPage(bool invalidAiClass = false, string[]? timingOverride = null, int[]? dateDays = null)
+    private static PdfPageLayout ReturnPage(bool invalidAiClass = false, string[]? timingOverride = null, int[]? dateDays = null, string titleYears = "令和8年度")
     {
         var days = dateDays ?? [1, 2, 3, 4, 5];
-        var b = new Builder(false, 4); b.Write("令和8年度 試験返却時間割", 20, 20);
+        var b = new Builder(false, 4); b.Write(titleYears + " 試験返却時間割", 20, 20);
         for (var day = 0; day < 5; day++)
         {
             b.Write($"4/{days[day]}", 150 + day * 8 * 40, 70);
