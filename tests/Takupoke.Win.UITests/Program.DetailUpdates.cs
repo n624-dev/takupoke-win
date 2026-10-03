@@ -40,14 +40,30 @@ internal static partial class Program
                 if (surface == "timetable")
                 {
                     Navigate("timetable");
-                    if (FindLessons("架空科目甲").Length == 0 && Find("timetable-next")?.Current.IsEnabled == true) Invoke("timetable-next");
+                    // Heading availability precedes the completed UIA subtree. Select
+                    // this week through the real control rather than treating a
+                    // transient missing row as permission to advance to another week.
+                    Wait(() => Find("timetable-current") is { Current.IsEnabled: true },"The native current-week control is available");
+                    Invoke("timetable-current");
                 }
                 else { Navigate("settings"); Invoke("settings-materials"); Invoke("material-details-Timetable"); Invoke("analysis-Timetable"); }
 
                 void Open(string subject)
                 {
                     AutomationElement[] lessons = [];
-                    Wait(() => (lessons=FindLessons(subject)).Length > 0, "The accepted row is rendered for " + surface);
+                    try { Wait(() => (lessons=FindLessons(subject)).Length > 0, "The accepted row is rendered for " + surface); }
+                    catch
+                    {
+                        // Report the wholly fictional child before its guaranteed
+                        // cleanup; the outer capture otherwise sees no failed window.
+                        var saved = DetailStoreAsync(isolated).GetAwaiter().GetResult();
+                        var preferences = new PreferencesStore(isolated).LoadAsync().GetAwaiter().GetResult();
+                        var elements = _window?.FindAll(TreeScope.Descendants,Condition.TrueCondition).Cast<AutomationElement>()
+                            .Select(e => e.Current.ControlType.ProgrammaticName + ":" + e.Current.AutomationId + ":" + e.Current.Name)
+                            .Where(name => !string.IsNullOrWhiteSpace(name)).Take(160).ToArray() ?? [];
+                        Console.WriteLine($"Synthetic detail failure {surface}: expected={subject}; period={saved.Analysis.SchoolYear}/{saved.Analysis.Timetable?.Term}; classes={string.Join(',',preferences.SelectedClasses)}; formal={string.Join(',',saved.Analysis.Timetable?.Lessons.Select(l => l.ClassName+"/"+l.Weekday+"/"+l.Names.Subject) ?? [])}; current-week={Find("timetable-week-picker")?.Current.Name}; nodes={string.Join(" | ",elements)}");
+                        throw;
+                    }
                     Invoke(lessons[0]); Wait(LessonDetailOpen,"The native lesson detail opens for " + surface);
                 }
 
