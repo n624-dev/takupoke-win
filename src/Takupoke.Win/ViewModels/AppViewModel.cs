@@ -12,7 +12,7 @@ using Takupoke.Win.Platform;
 
 namespace Takupoke.Win.ViewModels;
 
-public sealed record MaterialSnapshot(SourceRecord? Source, MaterialAnalysis? Analysis, MaterialAttempt? ParseAttempt, MaterialAttempt? AcquisitionAttempt, RecoveryJob? RecoveryJob = null, RecoveryPreview? RecoveryPreview = null)
+public sealed record MaterialSnapshot(SourceRecord? Source, MaterialAnalysis? Analysis, MaterialAttempt? ParseAttempt, MaterialAttempt? AcquisitionAttempt, RecoveryJob? RecoveryJob = null, RecoveryPreview? RecoveryPreview = null, RecoveryPreviewDisplay? RecoveryDisplay = null)
 {
     public string AnalysisStatus(MaterialKind kind)
     {
@@ -361,6 +361,12 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             await _school.ReadAsync<SourceRecord>(lease, "selection." + kind, token), await _school.ReadAsync<MaterialAnalysis>(lease, "analysis." + kind, token),
             await _school.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token), await _school.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, token),
             await _school.ReadAsync<RecoveryJob>(lease, "recovery." + kind, token), await _school.ReadAsync<RecoveryPreview>(lease, "recovery.preview." + kind, token));
+        foreach (var kind in snapshots.Keys.ToArray())
+            if (snapshots[kind].RecoveryPreview is { } preview)
+            {
+                var display = await Task.Run(() => RecoveryPreviewDisplay.Create(preview, token), token);
+                snapshots[kind] = snapshots[kind] with { RecoveryDisplay = display };
+            }
         RecoveryModelMessage = null;
         try { OcrModelInstalled = await _recoveryModels.OcrInstalledAsync(token) is not null; OcrModelReady = await _recoveryModels.OcrStateAsync(token) is not null; FoundryModel = await _recoveryModels.Foundry.InstalledAsync(token); }
         catch (OperationCanceledException) { throw; }

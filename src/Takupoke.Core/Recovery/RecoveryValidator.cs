@@ -19,16 +19,19 @@ public static class RecoveryValidator
         if (!DateOnly.TryParseExact(day, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var d)) return [];
         return [day, $"{d.Year}/{d.Month}/{d.Day}", $"{d.Month}/{d.Day}", $"{d.Month}月{d.Day}日"];
     }
-    public static RecoveryValidation Validate(RecoveryDocument doc, RecoveryResult result)
+    public static RecoveryValidation Validate(RecoveryDocument doc, RecoveryResult result, CancellationToken token = default)
     {
-        try { return ValidateCore(doc, result); }
+        try { return ValidateCore(doc, result, token: token); }
+        catch (RecoveryWorkLimitException) { return new(["validationLimit"]); }
         catch (Exception e) when (e is NullReferenceException or ArgumentException or KeyNotFoundException or InvalidOperationException) { return new(["malformedInput"]); }
     }
-    private static RecoveryValidation ValidateCore(RecoveryDocument doc, RecoveryResult result, bool structurePreflight = false)
+    private static RecoveryValidation ValidateCore(RecoveryDocument doc, RecoveryResult result, bool structurePreflight = false, CancellationToken token = default)
     {
+        var work = new RecoveryWorkBudget(token); work.Step();
+        bool Contains(RecoveryBox outer, RecoveryBox inner) { work.Step(); return outer.Contains(inner); }
         var errors = new List<string>();
-        if (doc.SchoolYear is < 1900 or > 9998 || doc.Classes.Count is < 1 or > 64 || doc.Days.Count is < 1 or > 31 || doc.Cells.Count is < 1 or > 20000 || doc.Sources.Count > 100000 || result.Cells.Count > 20000) return new(["inputLimit"]);
-        void Check(bool condition, string code) { if (!condition && !errors.Contains(code)) errors.Add(code); }
+        if (doc.SchoolYear is < 1900 or > 9998 || doc.Classes.Count is < 1 or > 64 || doc.Days.Count is < 1 or > 31 || doc.Cells.Count is < 1 or > 20000 || doc.Sources.Count > 100000 || result.Cells.Count > 20000 || doc.Cells.Any(c => c.SourceIds.Count > 100000 || c.RoleScopes.Count > 12 || c.LessonBindings.Count > 4 || c.Slots.Count > 8) || result.Cells.Any(c => c.Lessons.Count > 4)) return new(["inputLimit"]);
+        void Check(bool condition, string code) { work.Step(); if (!condition && !errors.Contains(code)) errors.Add(code); }
         Check(Enum.IsDefined(doc.Kind), "documentKind");
         Check(Regex.IsMatch(doc.PdfHash, "^[a-f0-9]{64}$") && result.PdfHash == doc.PdfHash, "sourceHash");
         Check(doc.Complete && doc.Cells.Count is > 0 and <= 20000 && doc.Sources.Count <= 100000, "incompleteDocument");
@@ -50,41 +53,68 @@ public static class RecoveryValidator
         Check(slots.Length == required.Count && required.SetEquals(slots), "coverage");
         Check(doc.Cells.Select(c => c.Id).Distinct().Count() == doc.Cells.Count && doc.Sources.Select(s => s.Id).Distinct().Count() == doc.Sources.Count, "duplicateIds");
         // Use TryAdd: malformed provider/input IDs must produce a rejection, not an exception.
-        var sources = new Dictionary<string, RecoverySource>(); foreach (var s in doc.Sources) sources.TryAdd(s.Id, s);
+        if (doc.Sources.Any(s => { work.Step(); return s.Page < 1 || !s.Box.Valid || s.Text.Length > 4096; })) return new(["sourceLimit"]);
+        var index = new RecoverySourceIndex(doc, work, spatial: true);
+        var sources = index.ById;
+        string Raw(IEnumerable<string> ids) => work.Concat(ids.Select(id => sources[id].Text));
         var cells = new Dictionary<string, RecoveredCell>(); foreach (var c in result.Cells) Check(cells.TryAdd(c.CellId, c), "duplicateCells");
         Check(cells.Count == doc.Cells.Count && doc.Cells.All(c => cells.ContainsKey(c.Id)), "resultCoverage");
-        bool Evidence(IReadOnlyList<string> ids, IReadOnlyList<string> allowed, string? value = null) => ids.Count > 0 && ids.Distinct().Count() == ids.Count
-            && ids.All(id => allowed.Contains(id) && sources.ContainsKey(id)) && (value is null || Text(value).Length > 0 && Text(string.Concat(ids.Select(id => sources[id].Text))) == Text(value) || value is not null && Regex.IsMatch(Text(value), @"^\d{2}:\d{2}〜\d{2}:\d{2}$") && Regex.Replace(Text(string.Concat(ids.Select(id => sources[id].Text))), @"(?<!\d)(\d):", "0$1:") == Text(value));
-        var order = doc.Sources.Select((source, i) => (source.Id, i)).GroupBy(p => p.Id).ToDictionary(g => g.Key, g => g.First().i);
-        bool Ordered(IReadOnlyList<string> ids) => ids.All(order.ContainsKey) && ids.Select(id => order[id]).Zip(ids.Skip(1).Select(id => order[id])).All(p => p.First < p.Second);
+        var allowedSets = new Dictionary<IReadOnlyList<string>, HashSet<string>>(ReferenceEqualityComparer.Instance);
+        HashSet<string> Allowed(IReadOnlyList<string> ids)
+        {
+            if (!allowedSets.TryGetValue(ids, out var set)) { work.Step(ids.Count); allowedSets.Add(ids, set = ids.ToHashSet()); }
+            return set;
+        }
+        bool AllowedContains(IReadOnlyList<string> ids, string id) { work.Step(); return Allowed(ids).Contains(id); }
+        bool Evidence(IReadOnlyList<string> ids, IReadOnlyList<string> allowed, string? value = null)
+        {
+            work.Step(ids.Count);
+            var set = Allowed(allowed);
+            if (ids.Count == 0 || ids.Distinct().Count() != ids.Count || !ids.All(id => set.Contains(id) && sources.ContainsKey(id))) return false;
+            if (value is null) return true;
+            work.Step(value.Length);
+            var original = Text(Raw(ids)); var expected = Text(value);
+            return expected.Length > 0 && original == expected || Regex.IsMatch(expected, @"^\d{2}:\d{2}〜\d{2}:\d{2}$") && Regex.Replace(original, @"(?<!\d)(\d):", "0$1:") == expected;
+        }
+        var order = index.Order;
+        bool Ordered(IReadOnlyList<string> ids)
+        { work.Step(ids.Count); return ids.All(order.ContainsKey) && ids.Select(id => order[id]).Zip(ids.Skip(1).Select(id => order[id])).All(p => p.First < p.Second); }
         bool Header(IReadOnlyList<string> ids, IReadOnlyList<string> allowed, IReadOnlyList<string> labels, RecoveryCell? cell = null, RecoveryHeaderRegion? region = null)
         {
             if (!Evidence(ids, allowed) || !Ordered(ids)) return false;
-            var joinedMatches = labels.Select(Text).Contains(Text(string.Concat(ids.Select(id => sources[id].Text))));
-            if (cell is null) return joinedMatches || Regex.IsMatch(Text(string.Concat(ids.Select(id => sources[id].Text))), "^(?:" + string.Join("|", labels.Select(l => Regex.Escape(Text(l)))) + ")+$");
+            var joinedMatches = labels.Select(Text).Contains(Text(Raw(ids)));
+            if (cell is null) return joinedMatches || Regex.IsMatch(Text(Raw(ids)), "^(?:" + string.Join("|", labels.Select(l => Regex.Escape(Text(l)))) + ")+$");
             if (region is null || region.Page != cell.Page || !region.Box.Valid || !Enum.IsDefined(region.Axis)) return false;
             var aligned = region.Axis == RecoveryHeaderAxis.Above ? region.Box.Y + region.Box.Height <= cell.Box.Y && Math.Min(region.Box.X + region.Box.Width, cell.Box.X + cell.Box.Width) > Math.Max(region.Box.X, cell.Box.X) : region.Box.X + region.Box.Width <= cell.Box.X && Math.Min(region.Box.Y + region.Box.Height, cell.Box.Y + cell.Box.Height) > Math.Max(region.Box.Y, cell.Box.Y);
-            return joinedMatches && aligned && ids.All(id => { var src = sources[id]; return src.Page == region.Page && region.Box.Contains(src.Box); });
+            return joinedMatches && aligned && ids.All(id => { var src = sources[id]; return src.Page == region.Page && Contains(region.Box, src.Box); });
         }
         Check(doc.Sources.All(s => s.Page > 0 && s.Box.Valid && s.Text.Length <= 4096), "sourceLimit");
         Check(Evidence(doc.YearEvidence, doc.YearEvidence), "yearEvidence");
-        var yearText = string.Concat(doc.YearEvidence.Where(sources.ContainsKey).Select(id => sources[id].Text));
+        var yearText = Raw(doc.YearEvidence.Where(sources.ContainsKey));
         Check(Regex.IsMatch(Text(yearText), "^(?:" + doc.SchoolYear + "年度|令和" + (doc.SchoolYear - 2018) + "年度)+$"), "yearEvidenceText");
         if (doc.Term is not null) Check(Header(doc.TermEvidence, doc.TermEvidence, [doc.Term]), "termEvidence");
         foreach (var cls in doc.Classes) Check(doc.ClassEvidence.TryGetValue(cls, out var ids) && Header(ids, ids, [cls, cls.Replace('_', '-'), cls.Replace("_", ""), string.Concat(cls.Split('_').Reverse())]), "classEvidence");
         foreach (var day in doc.Days) Check(doc.DayEvidence.TryGetValue(day, out var ids) && Header(ids, ids, DayLabels(day, doc.Kind)), "dayEvidence");
         foreach (var period in Enumerable.Range(1, maxPeriod)) Check(doc.PeriodEvidence.TryGetValue(period.ToString(CultureInfo.InvariantCulture), out var ids) && Header(ids, ids, [period.ToString(), $"{period}限", $"{period}時限", $"{period}時限目", $"第{period}時限"]), "periodEvidence");
+        var clockCache = new Dictionary<(string, int, int, string), bool>();
         bool ClockBound(string day, int start, int end, string clock)
+        {
+            work.Step(); var key = (day, start, end, clock);
+            if (!clockCache.TryGetValue(key, out var valid)) clockCache[key] = valid = ClockBoundCore(day, start, end, clock);
+            return valid;
+        }
+        bool ClockBoundCore(string day, int start, int end, string clock)
         {
             var suffix = start == end ? start.ToString() : $"{start}-{end}"; var key = $"{day}:{suffix}"; var ids = doc.ClockEvidence.GetValueOrDefault(key) ?? [];
             if (!doc.ClockBindings.TryGetValue(key, out var primary)) return false;
-            var allBindings = new[] { primary }.Concat(doc.ClockReplicas.GetValueOrDefault(key) ?? []).ToArray();
-            if (allBindings.Select(b => b.Page).Distinct().Count() != allBindings.Length || !ids.All(id => sources.TryGetValue(id, out var src) && allBindings.Count(b => b.Page == src.Page && b.Box.Contains(src.Box)) == 1)) return false;
+            var replicas = doc.ClockReplicas.GetValueOrDefault(key) ?? []; work.Step(replicas.Count);
+            var allBindings = new[] { primary }.Concat(replicas).ToArray();
+            if (allBindings.Select(b => b.Page).Distinct().Count() != allBindings.Length || !ids.All(id => sources.TryGetValue(id, out var src) && allBindings.Count(b => { work.Step(); return b.Page == src.Page && Contains(b.Box, src.Box); }) == 1)) return false;
             return allBindings.All(binding => Bound(binding));
             bool Bound(RecoveryClockBinding binding)
             {
             var pageIds = ids.Where(id => sources.TryGetValue(id, out var src) && src.Page == binding.Page).ToArray();
-            if (binding.Day != day || binding.SpanStart != start || binding.SpanEnd != end || binding.Page < 1 || !binding.Box.Valid || !Evidence(pageIds, doc.TimeEvidence, clock) || !pageIds.All(id => sources[id].Page == binding.Page && binding.Box.Contains(sources[id].Box))) return false;
+            if (binding.Day != day || binding.SpanStart != start || binding.SpanEnd != end || binding.Page < 1 || !binding.Box.Valid || !Evidence(pageIds, doc.TimeEvidence, clock) || !pageIds.All(id => sources[id].Page == binding.Page && Contains(binding.Box, sources[id].Box))) return false;
             var parts = clock.Split('〜'); if (parts.Length != 2 || string.CompareOrdinal(parts[0], parts[1]) >= 0) return false;
             var virtualCell = new RecoveryCell("clock", binding.Page, binding.Box, RecoveryInputState.Complete, [], pageIds, []);
             string[] labels = start == end ? [start.ToString(), $"{start}限", $"{start}時限", $"{start}時限目", $"第{start}時限"] : [$"{start}・{end}時限連続", $"{start}〜{end}時限連続", $"{start}〜{end}限", $"{start}-{end}限"];
@@ -101,9 +131,13 @@ public static class RecoveryValidator
             return doc.Cells.Where(c => c.Page == binding.Page).SelectMany(c => c.Slots).Select(s => s.Day).ToHashSet().SetEquals(doc.Days);
             }
         }
-        if (doc.ClockBindings.Values.Concat(doc.ClockReplicas.Values.SelectMany(b => b)).Any(b => b.CommonScope))
+        work.Step(doc.ClockBindings.Count + doc.ClockReplicas.Count);
+        foreach (var replicas in doc.ClockReplicas.Values) work.Step(replicas.Count);
+        var allClocks = doc.ClockBindings.Values.Concat(doc.ClockReplicas.Values.SelectMany(b => b)).ToArray();
+        var commonPages = allClocks.Where(b => b.CommonScope).Select(b => b.Page.ToString(CultureInfo.InvariantCulture)).ToHashSet();
+        if (commonPages.Count > 0)
         {
-            Check(doc.CommonClockRegions.Keys.All(k => doc.ClockBindings.Values.Concat(doc.ClockReplicas.Values.SelectMany(b => b)).Any(b => b.CommonScope && b.Page.ToString(CultureInfo.InvariantCulture) == k)) && doc.CommonClockRegions.Count > 0 && Evidence(doc.CommonClockEvidence, doc.CommonClockEvidence) && doc.CommonClockEvidence.All(id => sources.TryGetValue(id, out var src) && doc.CommonClockRegions.TryGetValue(src.Page.ToString(CultureInfo.InvariantCulture), out var r) && r.Box.Contains(src.Box) && src.Page == r.Page), "commonClockProof");
+            Check(doc.CommonClockRegions.Keys.All(commonPages.Contains) && doc.CommonClockRegions.Count > 0 && Evidence(doc.CommonClockEvidence, doc.CommonClockEvidence) && doc.CommonClockEvidence.All(id => sources.TryGetValue(id, out var src) && doc.CommonClockRegions.TryGetValue(src.Page.ToString(CultureInfo.InvariantCulture), out var r) && Contains(r.Box, src.Box) && src.Page == r.Page), "commonClockProof");
             foreach (var period in Enumerable.Range(1, maxPeriod))
             {
                 var clocks = doc.ClockBindings.Where(p => p.Value.CommonScope && p.Value.SpanStart == period && p.Value.SpanEnd == period).ToArray();
@@ -116,7 +150,7 @@ public static class RecoveryValidator
         foreach (var period in Enumerable.Range(1, maxPeriod))
         {
             var allowed = doc.PeriodEvidence.GetValueOrDefault(period.ToString(CultureInfo.InvariantCulture)) ?? [];
-            var bound = doc.Cells.Where(c => c.Slots.Any(s => s.Period == period)).SelectMany(c => c.PeriodHeaderIds).Where(allowed.Contains).Concat(validClocks.Where(b => b.SpanStart == period && b.SpanEnd == period).SelectMany(b => b.PeriodHeaderIds));
+            var bound = doc.Cells.Where(c => c.Slots.Any(s => s.Period == period)).SelectMany(c => c.PeriodHeaderIds).Where(id => AllowedContains(allowed, id)).Concat(validClocks.Where(b => b.SpanStart == period && b.SpanEnd == period).SelectMany(b => b.PeriodHeaderIds));
             Check(allowed.ToHashSet().SetEquals(bound), "periodHeaderCoverage");
         }
         foreach (var page in doc.Cells.GroupBy(c => c.Page))
@@ -124,7 +158,7 @@ public static class RecoveryValidator
             var active = new List<RecoveryCell>();
             foreach (var cell in page.OrderBy(c => c.Box.X))
             {
-                active.RemoveAll(c => c.Box.X + c.Box.Width <= cell.Box.X);
+                work.Step(active.Count * 2L); active.RemoveAll(c => c.Box.X + c.Box.Width <= cell.Box.X);
                 Check(!active.Any(c => Math.Min(c.Box.Y + c.Box.Height, cell.Box.Y + cell.Box.Height) > Math.Max(c.Box.Y, cell.Box.Y)), "cellOverlap");
                 active.Add(cell);
             }
@@ -133,11 +167,11 @@ public static class RecoveryValidator
         var noteGroups = doc.NormalTimeNoteEvidence.Where(sources.ContainsKey).GroupBy(id => sources[id].Page).ToArray();
         var expectedNote = dates.Length == 5 && dates.All(d => d != default) && dates[1].Month == dates[4].Month ? $"{dates[0].Month}月{dates[0].Day}日の時間割は以下のとおり{dates[1].Month}月{dates[1].Day}日〜{dates[4].Day}日は通常の授業日どおりの授業時間" : "";
         var noteValid = doc.Kind == RecoveryDocumentKind.Return && expectedNote.Length > 0 && Evidence(doc.NormalTimeNoteEvidence, doc.NormalTimeNoteEvidence) && noteGroups.Length > 0
-            && noteGroups.All(group => Ordered(group.ToArray()) && Text(string.Concat(group.Select(id => sources[id].Text))).Replace("。", "").Replace("です", "") == expectedNote);
+            && noteGroups.All(group => Ordered(group.ToArray()) && Text(Raw(group)).Replace("。", "").Replace("です", "") == expectedNote);
 
         var titleLabels = doc.Kind switch { RecoveryDocumentKind.Timetable => new[] { "時間割", "通常時間割", "授業時間割" }, RecoveryDocumentKind.Exam => ["試験時間割", "定期試験時間割"], _ => ["試験返却時間割"] };
         Check(doc.DocumentTitleEvidence.Count == 0 || Header(doc.DocumentTitleEvidence, doc.DocumentTitleEvidence, titleLabels), "documentTitle");
-        Check(doc.ClockBindings.Values.Concat(doc.ClockReplicas.Values.SelectMany(b => b)).Any(b => b.CommonScope) || doc.CommonClockEvidence.Count == 0 && doc.CommonClockRegions.Count == 0, "unusedCommonClockProof");
+        Check(commonPages.Count > 0 || doc.CommonClockEvidence.Count == 0 && doc.CommonClockRegions.Count == 0, "unusedCommonClockProof");
         var classified = doc.Cells.SelectMany(c => c.SourceIds).Concat(doc.CommonClockEvidence).Concat(doc.YearEvidence).Concat(doc.DocumentTitleEvidence).Concat(doc.Term is null ? [] : doc.TermEvidence).ToHashSet();
         foreach (var cls in doc.Classes) classified.UnionWith(doc.ClassEvidence.GetValueOrDefault(cls) ?? []);
         foreach (var day in doc.Days) classified.UnionWith(doc.DayEvidence.GetValueOrDefault(day) ?? []);
@@ -182,16 +216,18 @@ public static class RecoveryValidator
         }
         foreach (var cell in doc.Cells)
         {
-            Check(doc.Sources.Where(s => s.CellId == cell.Id).Select(s => s.Id).ToHashSet().SetEquals(cell.SourceIds), "sourceInventory");
-            Check(doc.Sources.Where(s => s.Page == cell.Page && Math.Min(s.Box.X + s.Box.Width, cell.Box.X + cell.Box.Width) > Math.Max(s.Box.X, cell.Box.X) && Math.Min(s.Box.Y + s.Box.Height, cell.Box.Y + cell.Box.Height) > Math.Max(s.Box.Y, cell.Box.Y)).All(s => s.CellId == cell.Id && cell.SourceIds.Contains(s.Id)), "unassignedCellText");
+            work.Step(cell.SourceIds.Count + index.Cell(cell.Id).Count);
+            var cellIds = cell.SourceIds.ToHashSet();
+            Check(index.Cell(cell.Id).Select(s => s.Id).ToHashSet().SetEquals(cellIds), "sourceInventory");
+            Check(index.Intersecting(cell.Page, cell.Box).All(s => s.CellId == cell.Id && cellIds.Contains(s.Id)), "unassignedCellText");
             Check(cell.InputState == RecoveryInputState.Complete && cell.Box.Valid && cell.Page > 0, "incompleteCell");
             Check(cell.SourceIds.Distinct().Count() == cell.SourceIds.Count && cell.SourceIds.All(id => sources.TryGetValue(id, out var source)
-                && source.CellId == cell.Id && source.Page == cell.Page && cell.Box.Contains(source.Box)), "sourcePosition");
+                && source.CellId == cell.Id && source.Page == cell.Page && Contains(cell.Box, source.Box)), "sourcePosition");
             if (cell.Slots.FirstOrDefault() is { } slot)
             {
                 Check(Header(cell.ClassHeaderIds, doc.ClassEvidence.GetValueOrDefault(slot.ClassName) ?? [], [slot.ClassName, slot.ClassName.Replace('_', '-'), slot.ClassName.Replace("_", ""), string.Concat(slot.ClassName.Split('_').Reverse())], cell, cell.ClassRegion), "classBinding");
                 Check(Header(cell.DayHeaderIds, doc.DayEvidence.GetValueOrDefault(slot.Day) ?? [], DayLabels(slot.Day, doc.Kind), cell, cell.DayRegion), "dayBinding");
-                Check(cell.Slots.All(s => Header(cell.PeriodHeaderIds.Where(id => (doc.PeriodEvidence.GetValueOrDefault(s.Period.ToString()) ?? []).Contains(id)).ToArray(), doc.PeriodEvidence.GetValueOrDefault(s.Period.ToString()) ?? [], [s.Period.ToString(), $"{s.Period}限", $"{s.Period}時限", $"{s.Period}時限目", $"第{s.Period}時限"], cell, cell.PeriodRegions.GetValueOrDefault(s.Period.ToString()))), "periodBinding");
+                Check(cell.Slots.All(s => Header(cell.PeriodHeaderIds.Where(id => AllowedContains(doc.PeriodEvidence.GetValueOrDefault(s.Period.ToString()) ?? [], id)).ToArray(), doc.PeriodEvidence.GetValueOrDefault(s.Period.ToString()) ?? [], [s.Period.ToString(), $"{s.Period}限", $"{s.Period}時限", $"{s.Period}時限目", $"第{s.Period}時限"], cell, cell.PeriodRegions.GetValueOrDefault(s.Period.ToString()))), "periodBinding");
             }
             var periods = cell.Slots.Select(s => s.Period).Order().ToArray();
             if (doc.Kind != RecoveryDocumentKind.Timetable && periods.Length > 1)
@@ -208,7 +244,7 @@ public static class RecoveryValidator
             Check(Enum.IsDefined(cell.BindingMode), "bindingMode");
             var proposal = cell.BindingMode == RecoveryBindingMode.RoleProposal;
             Check(proposal || cell.RoleScopes.Count == 0, "unusedRoleScopes");
-            if (!proposal) Check(!cell.LessonBindings.SelectMany(b => new[] { b.Subject, b.Teacher, b.Room }).Any(ids => RecoveryRoleLabels.HasPrefix(string.Concat(ids.Where(sources.ContainsKey).Select(id => sources[id].Text)))), "unboundRoleLabel");
+            if (!proposal) Check(!cell.LessonBindings.SelectMany(b => new[] { b.Subject, b.Teacher, b.Room }).Any(ids => RecoveryRoleLabels.HasPrefix(Raw(ids.Where(sources.ContainsKey)))), "unboundRoleLabel");
             var inlineLabelIds = cell.RoleScopes.Where(s => s.Proof == RecoveryRoleProof.InlineLabel).SelectMany(s => s.LabelSourceIds).ToHashSet();
             var bodyIds = cell.SourceIds.Where(id => !inlineLabelIds.Contains(id)).ToHashSet();
             if (proposal)
@@ -218,15 +254,15 @@ public static class RecoveryValidator
                 foreach (var scope in cell.RoleScopes)
                 {
                     var labels = RecoveryRoleLabels.For(scope.Role);
-                    Check(scope.LessonIndex >= 0 && scope.LessonIndex < cell.ParallelCount && Enum.IsDefined(scope.Role) && Enum.IsDefined(scope.Proof) && scope.Page == cell.Page && cell.Box.Contains(scope.Box), "roleScopePosition");
+                    Check(scope.LessonIndex >= 0 && scope.LessonIndex < cell.ParallelCount && Enum.IsDefined(scope.Role) && Enum.IsDefined(scope.Proof) && scope.Page == cell.Page && Contains(cell.Box, scope.Box), "roleScopePosition");
                     var allowed = scope.Proof == RecoveryRoleProof.InlineLabel ? cell.SourceIds : scope.LabelSourceIds;
                     var virtualCell = cell with { Box = scope.Box };
                     Check(Header(scope.LabelSourceIds, allowed, labels.Concat(labels.Select(l => l + ":")).ToArray(), virtualCell, scope.LabelRegion), "roleScopeProof");
-                    Check(!scope.EmptyVerified || scope.Role != RecoveryFieldRole.Subject && !bodyIds.Any(id => scope.Box.Contains(sources[id].Box)), "roleFalseEmpty");
+                    Check(!scope.EmptyVerified || scope.Role != RecoveryFieldRole.Subject && !bodyIds.Any(id => Contains(scope.Box, sources[id].Box)), "roleFalseEmpty");
                 }
                 Check(!cell.RoleScopes.SelectMany((a, i) => cell.RoleScopes.Skip(i + 1).Select(b => (a, b))).Any(p =>
                     Math.Min(p.a.Box.X + p.a.Box.Width, p.b.Box.X + p.b.Box.Width) > Math.Max(p.a.Box.X, p.b.Box.X) && Math.Min(p.a.Box.Y + p.a.Box.Height, p.b.Box.Y + p.b.Box.Height) > Math.Max(p.a.Box.Y, p.b.Box.Y)), "roleScopeOverlap");
-                Check(structurePreflight && RecoveryStructure.Pending(cell) || bodyIds.All(id => cell.RoleScopes.Count(s => s.Box.Contains(sources[id].Box)) == 1), "roleBodyCoverage");
+                Check(structurePreflight && RecoveryStructure.Pending(cell) || bodyIds.All(id => cell.RoleScopes.Count(s => Contains(s.Box, sources[id].Box)) == 1), "roleBodyCoverage");
             }
             var bindingIds = cell.LessonBindings.SelectMany(b => b.Subject.Concat(b.Teacher).Concat(b.Room)).ToArray();
             Check(proposal || (cell.ConfirmedEmpty ? cell.LessonBindings.Count == 0 : cell.LessonBindings.Count == cell.ParallelCount && bindingIds.Distinct().Count() == bindingIds.Length && bindingIds.ToHashSet().SetEquals(cell.SourceIds)), "lessonBinding");
@@ -247,7 +283,7 @@ public static class RecoveryValidator
                     {
                         var role = pair.Item1 == "subject" ? RecoveryFieldRole.Subject : pair.Item1 == "teacher" ? RecoveryFieldRole.Teacher : RecoveryFieldRole.Room;
                         var scope = cell.RoleScopes.SingleOrDefault(s => s.LessonIndex == lessonIndex && s.Role == role);
-                        var allowed = scope is null ? [] : bodyIds.Where(id => scope.Box.Contains(sources[id].Box)).ToArray();
+                        var allowed = scope is null ? [] : bodyIds.Where(id => Contains(scope.Box, sources[id].Box)).ToArray();
                         Check(scope is not null && (field.State == RecoveryValueState.Empty ? scope.EmptyVerified && field.Value.Length == 0 && field.Evidence.Count == 0 && allowed.Length == 0 : field.State == RecoveryValueState.Present && Ordered(field.Evidence) && Evidence(field.Evidence, allowed, field.Value)), "roleFieldEvidence");
                     }
                     else if (field.State == RecoveryValueState.Empty) Check((pair.Item1 == "subject" ? binding.Subject : pair.Item1 == "teacher" ? binding.Teacher : binding.Room).Count == 0 && pair.Item1 != "subject" && field.Value.Length == 0 && field.Evidence.Count == 0 && cell.BlankFields.Contains(pair.Item1), "falseBlankField");
@@ -256,7 +292,7 @@ public static class RecoveryValidator
                 var day = cell.Slots.FirstOrDefault()?.Day;
                 Check(day is not null && doc.DayEvidence.TryGetValue(day, out var dateIds) && Evidence(lesson.DateEvidence, cell.DayHeaderIds), "lessonDateEvidence");
                 var periodIds = cell.PeriodHeaderIds;
-                Check(Evidence(lesson.PeriodEvidence, periodIds) && cell.Slots.All(s => lesson.PeriodEvidence.Any(id => (doc.PeriodEvidence.GetValueOrDefault(s.Period.ToString(CultureInfo.InvariantCulture)) ?? []).Contains(id))), "lessonPeriodEvidence");
+                Check(Evidence(lesson.PeriodEvidence, periodIds) && cell.Slots.All(s => lesson.PeriodEvidence.Any(id => AllowedContains(doc.PeriodEvidence.GetValueOrDefault(s.Period.ToString(CultureInfo.InvariantCulture)) ?? [], id))), "lessonPeriodEvidence");
             }
             if (proposal)
             {
@@ -267,20 +303,25 @@ public static class RecoveryValidator
         }
         return new(errors);
     }
-    public static IReadOnlyList<string> InputErrors(RecoveryDocument doc) => Validate(doc, new(doc.PdfHash, doc.Kind, doc.SchoolYear, doc.Term,
-        doc.Cells.Select(c => new RecoveredCell(c.Id, RecoveryValueState.Missing, [])).ToArray(), doc.StructureMetadata ?? new("rule", "rules", "1", "1", "1", SchemaVersion, Version, "preflight"))).Errors.Where(e => e is not "cellState" and not "rolePartition").ToArray();
-    internal static IReadOnlyList<string> StructureInputErrors(RecoveryDocument doc)
+    public static IReadOnlyList<string> InputErrors(RecoveryDocument doc, CancellationToken token = default) => Validate(doc, new(doc.PdfHash, doc.Kind, doc.SchoolYear, doc.Term,
+        doc.Cells.Select(c => new RecoveredCell(c.Id, RecoveryValueState.Missing, [])).ToArray(), doc.StructureMetadata ?? new("rule", "rules", "1", "1", "1", SchemaVersion, Version, "preflight")), token).Errors.Where(e => e is not "cellState" and not "rolePartition").ToArray();
+    internal static IReadOnlyList<string> StructureInputErrors(RecoveryDocument doc, CancellationToken token = default)
     {
         try
         {
             var result = new RecoveryResult(doc.PdfHash, doc.Kind, doc.SchoolYear, doc.Term,
                 doc.Cells.Select(c => new RecoveredCell(c.Id, RecoveryValueState.Missing, [])).ToArray(),
                 doc.StructureMetadata ?? new("rule", "rules", "1", "1", "1", SchemaVersion, Version, "preflight"));
-            return ValidateCore(doc, result, structurePreflight: true).Errors.Where(e => e is not "cellState" and not "rolePartition").ToArray();
+            return ValidateCore(doc, result, structurePreflight: true, token: token).Errors.Where(e => e is not "cellState" and not "rolePartition").ToArray();
         }
+        catch (RecoveryWorkLimitException) { return ["validationLimit"]; }
         catch (Exception e) when (e is NullReferenceException or ArgumentException or KeyNotFoundException or InvalidOperationException) { return ["malformedInput"]; }
     }
-    public static bool CanReuse(RecoveryAcceptance acceptance, RecoveryDocument document, RecoveryResult result) =>
-        acceptance.PdfHash == document.PdfHash && acceptance.ResultHash == Fingerprint(result) && acceptance.ScopeHash == Fingerprint(document)
-        && acceptance.Metadata == result.Metadata && Validate(document, result).CanAdopt;
+    public static bool CanReuse(RecoveryAcceptance acceptance, RecoveryDocument document, RecoveryResult result, CancellationToken token = default)
+    {
+        token.ThrowIfCancellationRequested();
+        if (acceptance.PdfHash != document.PdfHash || acceptance.ResultHash != Fingerprint(result) || acceptance.Metadata != result.Metadata) return false;
+        token.ThrowIfCancellationRequested(); var scopeHash = Fingerprint(document); token.ThrowIfCancellationRequested();
+        return acceptance.ScopeHash == scopeHash && Validate(document, result, token).CanAdopt;
+    }
 }

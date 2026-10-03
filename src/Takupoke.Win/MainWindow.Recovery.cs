@@ -12,9 +12,12 @@ public sealed partial class MainWindow
         TitleText("端末内で読み取った結果", "page-recovery-" + kind);
         Add(IconButton("資料の詳細に戻る", "back", () => OpenPage("material." + kind), "back-recovery"));
         var snapshot = _model.Materials.GetValueOrDefault(kind); var preview = snapshot?.RecoveryPreview;
-        if (preview is null || preview.SourceId != snapshot?.Source?.Id || preview.Document.PdfHash != snapshot.Source.Digest || snapshot.RecoveryJob?.State != RecoveryJobState.AwaitingConfirmation || !RecoveryValidator.Validate(preview.Document, preview.Result).CanAdopt)
+        var document = snapshot?.RecoveryDisplay;
+        if (preview is null || document is null || preview.SourceId != snapshot?.Source?.Id || document.SourceId != preview.SourceId ||
+            document.PdfHash != snapshot.Source.Digest || preview.Document.PdfHash != document.PdfHash ||
+            snapshot.RecoveryJob?.State != RecoveryJobState.AwaitingConfirmation || snapshot.RecoveryJob.PdfHash != document.PdfHash ||
+            snapshot.RecoveryJob.Kind != document.Kind || snapshot.RecoveryJob.ResultHash != document.ResultHash)
         { Add(Text("確認待ちの結果がありません。PDFが更新された場合は資料の詳細から復旧してください。")); return; }
-        var document = preview.Document;
         Add(Card(Panel(SettingsSectionTitle("原本を確認してから使用してください"), Text($"{document.SchoolYear}年度 {document.Term} · {AppViewModel.MaterialLabel(kind)}"), Text("表示中のクラスだけでなく、資料全体・全クラスの結果を採用します。採用するまで時間割には反映されません。学校の資料と読み取り結果は外部へ送信されません。"),
             Button("対応する元PDFを確認", () => ShowPdf(kind, false, preview), "recovery-original-" + kind))));
         if (_recoveryClass is null || !document.Classes.Contains(_recoveryClass)) _recoveryClass = document.Classes.FirstOrDefault(c => _model.Preferences.SelectedClasses.Contains(c)) ?? document.Classes[0];
@@ -23,19 +26,20 @@ public sealed partial class MainWindow
             var panel = Panel(); foreach (var cls in document.Classes) panel.Children.Add(Button(ClassSelection.Display(cls), () => { _recoveryClass = cls; _activeDialog?.Hide(); Render(); return Task.CompletedTask; }));
             await Dialog("確認するクラス", panel);
         }, "recovery-class"));
+        var firstDay = document.Days.Min();
         foreach (var cell in document.Cells.Where(c => c.Slots.Any(s => s.ClassName == _recoveryClass)).OrderBy(c => c.Slots[0].Day).ThenBy(c => c.Slots[0].Period))
         {
-            var recovered = preview.Result.Cells.Single(c => c.CellId == cell.Id); var slot = cell.Slots[0];
+            var slot = cell.Slots[0];
             var day = kind == MaterialKind.Timetable ? new[] { "", "月", "火", "水", "木", "金" }[int.Parse(slot.Day)] : slot.Day;
             var periods = string.Join("・", cell.Slots.Select(s => s.Period)) + "限";
             var content = Panel(SettingsSectionTitle(day + " " + periods));
-            if (kind != MaterialKind.Timetable) { var span = cell.Slots.Count > 1 ? $"{cell.Slots.Min(s => s.Period)}-{cell.Slots.Max(s => s.Period)}" : slot.Period.ToString(); var clock = (cell.Slots.Count > 1 ? document.SpanTimes : document.Times).GetValueOrDefault(slot.Day + ":" + span); content.Children.Add(Text(clock ?? "時刻未確認")); if (kind == MaterialKind.ExamReturn) content.Children.Add(SettingsDescription(slot.Day == document.Days.Order().First() ? "初日専用の時刻" : "PDF中の注記に基づく通常授業時間")); }
-            if (recovered.State == RecoveryValueState.Empty) content.Children.Add(Text("空欄（原本で確認済み）"));
-            foreach (var lesson in recovered.Lessons) content.Children.Add(Text(lesson.Subject.Value + " / " + (lesson.Teacher.State == RecoveryValueState.Empty ? "教員記載なし" : lesson.Teacher.Value) + " / " + (lesson.Room.State == RecoveryValueState.Empty ? "教室記載なし" : lesson.Room.Value)));
+            if (kind != MaterialKind.Timetable) { var span = cell.Slots.Length > 1 ? $"{cell.Slots.Min(s => s.Period)}-{cell.Slots.Max(s => s.Period)}" : slot.Period.ToString(); var clock = (cell.Slots.Length > 1 ? document.SpanTimes : document.Times).GetValueOrDefault(slot.Day + ":" + span); content.Children.Add(Text(clock ?? "時刻未確認")); if (kind == MaterialKind.ExamReturn) content.Children.Add(SettingsDescription(slot.Day == firstDay ? "初日専用の時刻" : "PDF中の注記に基づく通常授業時間")); }
+            if (cell.State == RecoveryValueState.Empty) content.Children.Add(Text("空欄（原本で確認済み）"));
+            foreach (var lesson in cell.Lessons) content.Children.Add(Text(lesson.Subject + " / " + (lesson.TeacherEmpty ? "教員記載なし" : lesson.Teacher) + " / " + (lesson.RoomEmpty ? "教室記載なし" : lesson.Room)));
             Add(Card(content));
         }
         Add(OperationButton("資料全体を確認しました。全クラスの結果を使用", () => _model.AdoptRecoveryAsync(kind, preview), "adopt-recovery-" + kind));
-        Add(TechnicalDetails(DataField("端末内Provider", preview.Result.Metadata.Provider), DataField("モデル", preview.Result.Metadata.ModelId + " " + preview.Result.Metadata.ModelVersion), DataField("検証版", preview.Result.Metadata.ValidatorVersion.ToString())));
+        Add(TechnicalDetails(DataField("端末内Provider", document.Metadata.Provider), DataField("モデル", document.Metadata.ModelId + " " + document.Metadata.ModelVersion), DataField("検証版", document.Metadata.ValidatorVersion.ToString())));
     }
     private void BuildRecoveryModels()
     {

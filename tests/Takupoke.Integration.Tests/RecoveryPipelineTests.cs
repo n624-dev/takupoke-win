@@ -8,7 +8,7 @@ using Takupoke.Infrastructure.Storage;
 using Xunit;
 
 namespace Takupoke.Integration.Tests;
-public sealed class RecoveryPipelineTests
+public sealed partial class RecoveryPipelineTests
 {
     [Fact]
     public void CanceledVectorRecoveryStopsBeforeLabelOrInkWork()

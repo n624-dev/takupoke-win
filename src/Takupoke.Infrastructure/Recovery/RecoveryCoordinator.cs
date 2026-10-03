@@ -29,7 +29,7 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
             if (attempt?.SourceDigest != source.Digest || attempt.Failure is null || !RecoveryPolicy.Eligible(kind, attempt.Failure))
                 return new(RecoveryJobState.Failed, null, "原本の破損・保護・入力上限など、この失敗は端末内復旧の対象外です。前回の正常結果を保持しています。");
             var cached = await store.ReadAsync<RecoveryAudit>(lease, "recovery.accepted." + kind + "." + source.Digest, token);
-            if (cached is not null && RecoveryPolicy.MatchesPeriod(cached.Document, lease.Period) && RecoveryValidator.CanReuse(cached.Acceptance, cached.Document, cached.Result))
+            if (cached is not null && RecoveryPolicy.MatchesPeriod(cached.Document, lease.Period) && await Task.Run(() => RecoveryValidator.CanReuse(cached.Acceptance, cached.Document, cached.Result, token), token).ConfigureAwait(false))
             {
                 await store.SaveRecoveryAsync(lease, source, cached, _clock.GetUtcNow(), token, reuseAccepted: true);
                 return new(RecoveryJobState.Adopted, null, "以前に確認した同じPDFの復旧結果を使用しました。", true);
@@ -44,7 +44,7 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
             {
                 if (NotificationDiff.Digest(bytes) != source.Digest) throw new InvalidDataException("保存した原本のハッシュが一致しません。");
                 var capture = new RecoveryReadCapture();
-                try { PdfPigLayoutReader.Read(bytes, kind, token, capture); }
+                try { await Task.Run(() => PdfPigLayoutReader.Read(bytes, kind, token, capture), token).ConfigureAwait(false); }
                 catch (OperationCanceledException) { throw; }
                 catch (PdfParseException failure) when (RecoveryPolicy.Eligible(kind, failure.Stage)) { }
                 var document = await buildDocument(bytes, kind, source.Digest, capture, token);
@@ -52,12 +52,12 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                 var localProviders = await providers(token); RecoveryRun run;
                 try
                 {
-                    var structure = await RecoveryStructure.ResolveAsync(document, "windows", Environment.OSVersion.Version.Major, localProviders, token);
+                    var structure = await Task.Run(() => RecoveryStructure.ResolveAsync(document, "windows", Environment.OSVersion.Version.Major, localProviders, token), token).ConfigureAwait(false);
                     if (structure.Document is null) run = new(structure.State, null, structure.Errors);
                     else
                     {
                         document = structure.Document;
-                        run = await RecoveryEngine.RunAsync(document, "windows", Environment.OSVersion.Version.Major, true, localProviders, _ => null, token);
+                        run = await Task.Run(() => RecoveryEngine.RunAsync(document, "windows", Environment.OSVersion.Version.Major, true, localProviders, _ => null, token), token).ConfigureAwait(false);
                     }
                 }
                 finally { foreach (var provider in localProviders.OfType<IAsyncDisposable>()) await provider.DisposeAsync(); }

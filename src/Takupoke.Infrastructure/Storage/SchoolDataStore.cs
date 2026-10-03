@@ -259,7 +259,7 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
     {
         if (preview is not null && !RecoveryPolicy.MatchesPeriod(preview.Document, lease.Period))
             throw new InvalidDataException("PDFの年度・学期が現在の保存期間と一致しません。");
-        if (job.PdfHash != source.Digest || job.Kind != RecoveryPolicy.Kind(source.Kind) || preview is not null && (preview.SourceId != source.Id || preview.Lease != lease || preview.Document.PdfHash != source.Digest || !RecoveryValidator.Validate(preview.Document, preview.Result).CanAdopt))
+        if (job.PdfHash != source.Digest || job.Kind != RecoveryPolicy.Kind(source.Kind) || preview is not null && (preview.SourceId != source.Id || preview.Lease != lease || preview.Document.PdfHash != source.Digest || !(await Task.Run(() => RecoveryValidator.Validate(preview.Document, preview.Result, token), token).ConfigureAwait(false)).CanAdopt))
             throw new InvalidDataException("復旧処理と原本の対応を確認できません。");
         using var transaction = connection.BeginTransaction();
         var key = "selection." + source.Kind;
@@ -298,9 +298,9 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
         if (!RecoveryPolicy.MatchesPeriod(audit.Document, lease.Period))
             throw new InvalidDataException("PDFの年度・学期が現在の保存期間と一致しません。");
         if (audit.Document.PdfHash != source.Digest || RecoveryPolicy.Kind(source.Kind) != audit.Document.Kind ||
-            !RecoveryValidator.CanReuse(audit.Acceptance, audit.Document, audit.Result))
+            !await Task.Run(() => RecoveryValidator.CanReuse(audit.Acceptance, audit.Document, audit.Result, token), token).ConfigureAwait(false))
             throw new InvalidDataException("復旧結果と確認内容の対応を確認できません。");
-        var analysis = Takupoke.Infrastructure.Recovery.RecoveryAnalysisConverter.Convert(source, audit.Document, audit.Result, adoptedAt);
+        var analysis = await Task.Run(() => Takupoke.Infrastructure.Recovery.RecoveryAnalysisConverter.Convert(source, audit.Document, audit.Result, adoptedAt, token), token).ConfigureAwait(false);
         using var transaction = connection.BeginTransaction();
         var key = "selection." + source.Kind;
         using (var read = connection.CreateCommand())

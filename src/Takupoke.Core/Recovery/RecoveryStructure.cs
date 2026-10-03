@@ -144,9 +144,10 @@ public static class RecoveryStructure
     }
     public static async Task<RecoveryStructureRun> ResolveAsync(RecoveryDocument doc, string os, int osMajor, IReadOnlyList<ILocalRecoveryProvider> providers, CancellationToken token)
     {
+        token.ThrowIfCancellationRequested();
         var pending = doc.Cells.Where(Pending).ToArray(); if (pending.Length == 0) return new(doc, null, RecoveryJobState.Running, []);
         if (pending.Length > 32 || !doc.Complete || doc.Cells.Any(c => c.InputState != RecoveryInputState.Complete)) return new(null, null, RecoveryJobState.Failed, ["incompleteStructure"]);
-        var input = RecoveryValidator.StructureInputErrors(doc); if (input.Count > 0) return new(null, null, RecoveryJobState.Failed, input);
+        var input = RecoveryValidator.StructureInputErrors(doc, token); if (input.Count > 0) return new(null, null, RecoveryJobState.Failed, input);
         foreach (var original in pending)
         {
             token.ThrowIfCancellationRequested(); var prompt = Prompt(doc, original); var scopes = Cheap(doc, original, prompt);
@@ -178,7 +179,7 @@ public static class RecoveryStructure
                 token.ThrowIfCancellationRequested();
                 var metadata = provider.Metadata with { PromptVersion = "3", RecoveryVersion = "2" };
                 attempt = attempt with { StructureMetadata = metadata };
-                var errors = RecoveryValidator.InputErrors(attempt);
+                var errors = RecoveryValidator.InputErrors(attempt, token);
                 return errors.Count == 0 ? new(attempt, metadata, RecoveryJobState.Running, []) : new(null, null, RecoveryJobState.Failed, errors);
             }
             catch (OperationCanceledException) { throw; }

@@ -7,13 +7,22 @@ namespace Takupoke.Infrastructure.Recovery;
 
 public static class RecoveryAnalysisConverter
 {
-    public static MaterialAnalysis Convert(SourceRecord source, RecoveryDocument document, RecoveryResult result, DateTimeOffset at)
+    public static MaterialAnalysis Convert(SourceRecord source, RecoveryDocument document, RecoveryResult result, DateTimeOffset at, CancellationToken token = default)
     {
-        if (source.Digest != document.PdfHash || RecoveryPolicy.Kind(source.Kind) != document.Kind || !RecoveryValidator.Validate(document, result).CanAdopt)
+        token.ThrowIfCancellationRequested();
+        if (source.Digest != document.PdfHash || RecoveryPolicy.Kind(source.Kind) != document.Kind || !RecoveryValidator.Validate(document, result, token).CanAdopt)
             throw new InvalidDataException("復旧結果を正式な解析結果へ変換できません。");
+        token.ThrowIfCancellationRequested();
+        var sources = document.Sources.ToDictionary(s => { token.ThrowIfCancellationRequested(); return s.Id; });
+        var raw = new Dictionary<string, string>();
         var recovered = result.Cells.ToDictionary(c => c.CellId);
-        string Raw(RecoveryCell c) => string.Join("\n", c.SourceIds.Select(id => document.Sources.Single(s => s.Id == id).Text));
-        LessonNames Names(RecoveryLesson l) => new(l.Subject.Value, l.Teacher.Value, l.Room.Value);
+        string Raw(RecoveryCell c)
+        {
+            token.ThrowIfCancellationRequested();
+            if (!raw.TryGetValue(c.Id, out var value)) raw[c.Id] = value = string.Join("\n", c.SourceIds.Select(id => { token.ThrowIfCancellationRequested(); return sources[id].Text; }));
+            return value;
+        }
+        LessonNames Names(RecoveryLesson l) { token.ThrowIfCancellationRequested(); return new(l.Subject.Value, l.Teacher.Value, l.Room.Value); }
         if (source.Kind == MaterialKind.Timetable)
         {
             var lessons = document.Cells.SelectMany(c => c.Slots.SelectMany(slot => recovered[c.Id].Lessons.Select(l =>
@@ -24,6 +33,7 @@ public static class RecoveryAnalysisConverter
         static TimeRange Clock(string text) { var p = text.Split('〜'); if (p.Length != 2) throw new InvalidDataException("時刻を確認できません。"); var t = new TimeRange(p[0], p[1]); if (!t.IsValid) throw new InvalidDataException("時刻を確認できません。"); return t; }
         var times = document.Times.ToDictionary(p => p.Key, p => Clock(p.Value));
         var specialLessons = document.Cells.SelectMany(c => c.Slots.SelectMany(slot => recovered[c.Id].Lessons.Select(l => {
+            token.ThrowIfCancellationRequested();
             var first = c.Slots.Min(s => s.Period); var last = c.Slots.Max(s => s.Period);
             var key = slot.Day + ":" + (first == last ? first.ToString() : first + "-" + last);
             var recorded = first == last ? times[key] : Clock(document.SpanTimes[key]);
