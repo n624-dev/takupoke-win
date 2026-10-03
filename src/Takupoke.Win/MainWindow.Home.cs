@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
 using Takupoke.Core;
 using Takupoke.Infrastructure.Api;
+using Takupoke.Infrastructure.Materials;
 using Takupoke.Win.ViewModels;
 
 namespace Takupoke.Win;
@@ -97,7 +98,10 @@ public sealed partial class MainWindow
     private Border ScheduleNotice(string title, string message, string action, string icon, Func<Task> run)
     {
         var heading = Text(title, 18); heading.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold;
-        return Card(Panel(heading, Text(message), IconButton(action, icon, run)));
+        var content = Panel(heading);
+        if (message.Length > 0) content.Children.Add(Text(message));
+        content.Children.Add(IconButton(action, icon, run));
+        return Card(content);
     }
     private static Grid ScheduleDetailRow(string label, string value)
     {
@@ -111,7 +115,7 @@ public sealed partial class MainWindow
     {
         var stale = _model.Materials.Where(item => item.Value.AcquisitionAttempt?.Failure is not null
             || item.Value.ParseAttempt?.Failure is not null
-            || item.Value.Source is { } source && item.Value.Analysis is { } analysis && source.Digest != analysis.SourceDigest)
+            || item.Value.Source is { } source && item.Value.Analysis is { } analysis && (source.Digest != analysis.SourceDigest || analysis.ParserVersion != MaterialCoordinator.ParserVersion(item.Key)))
             .ToArray();
         if (stale.Length == 0) return;
         var warnings = Panel(ScheduleHeading("時間割ファイルの確認が必要です", "info"));
@@ -143,7 +147,7 @@ public sealed partial class MainWindow
         if (_model.EventSourceMessage is { } eventWarning) Add(Card(Text(eventWarning)));
         if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
         if (_model.EventStorageMessage is { } storageFailure) Add(Card(Text(storageFailure)));
-        if (classes.Length == 0) Add(ScheduleNotice("クラスを選んでください", "クラスを選ぶと、今日の授業をここに表示します。", "クラスを選択", "people", ChooseClasses));
+        if (classes.Length == 0) Add(ScheduleNotice("クラスを選んでください", "", "クラスを選択", "people", ChooseClasses));
         var engine = _model.HomeEngine; var day = _model.Today;
         var eventTitles = engine.Plan(day).Events.Select(e => e.Title).ToArray();
         if (eventTitles.Length > 0) Add(Card(Panel(ScheduleHeading("今日の学校行事", "calendar"), Text(DisplayText.FullWidthKana(string.Join("・", eventTitles))))));
@@ -161,7 +165,7 @@ public sealed partial class MainWindow
                 Add(Card(group));
             }
             if (_model.Data.Changes is null) Add(ScheduleNotice("時間割変更を表示できません", "時間割変更ファイルを選択して、状況を確認してください。", "時間割ファイルを開く", "document", () => OpenPage("materials")));
-            if (!_model.SavedEventYears.Contains(day.SchoolYear())) Add(ScheduleNotice("学校行事は未取得です", "学校行事を取得すると、授業のない日や試験の日を時間割に反映します。", "学校行事を取得", "calendar", () => OpenPage("events")));
+            if (!_model.SavedEventYears.Contains(day.SchoolYear())) Add(ScheduleNotice("学校行事は未取得です", "", "学校行事を取得", "calendar", () => OpenPage("events")));
         }
         Add(IconButton("時間割を見る", "calendar", () => { _model.OpenTodayWeek(); Navigation.SelectedItem = Navigation.MenuItems[2]; return Task.CompletedTask; }, "home-timetable"));
         var favorites = _model.Links?.Items.Where(i => i.Visible && _model.Preferences.FavoriteIds.Contains(i.Id) && !_model.Preferences.HiddenIds.Contains(i.Id)).ToArray() ?? [];

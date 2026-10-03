@@ -20,7 +20,9 @@ public sealed class ApiClient(HttpClient http, Uri? baseUri = null, TimeProvider
     }
     public static async Task<byte[]> ReadBoundedAsync(HttpResponseMessage response, int maximum, CancellationToken token)
     {
-        if (response.Content.Headers.ContentLength is { } length && length > maximum) throw new ApiException(ApiFailure.InvalidResponse);
+        // A 304 Content-Length describes the selected representation, not a body.
+        // Continue bounding the actual stream, including rejecting a nonempty 304.
+        if (response.StatusCode != HttpStatusCode.NotModified && response.Content.Headers.ContentLength is { } length && length > maximum) throw new ApiException(ApiFailure.InvalidResponse);
         await using var input = await response.Content.ReadAsStreamAsync(token);
         using var output = new MemoryStream(); var buffer = new byte[32 * 1024];
         int read;
@@ -95,7 +97,7 @@ public sealed class ApiClient(HttpClient http, Uri? baseUri = null, TimeProvider
         if (saved is not null) saved.Payload.Validated(schoolYear);
         using var request = Request("events?schoolYear=" + schoolYear, accept: "application/json");
         if (saved?.ApiETag is { } sent)
-        { if (!ApiPayloads.ValidETag(sent)) throw new ApiException(ApiFailure.InvalidResponse); request.Headers.IfNoneMatch.Add(new(sent)); }
+        { if (!ApiPayloads.ValidETag(sent)) throw new ApiException(ApiFailure.InvalidResponse); request.Headers.IfNoneMatch.Add(EntityTagHeaderValue.Parse(sent)); }
         using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token);
         if (response.StatusCode == HttpStatusCode.NotFound) throw new ApiException(ApiFailure.UnsupportedYear);
         var etag = response.Headers.Contains("ETag") ? ValidETag(response) : null;

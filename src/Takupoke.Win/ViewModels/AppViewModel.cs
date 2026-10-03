@@ -10,7 +10,18 @@ using Takupoke.Win.Platform;
 
 namespace Takupoke.Win.ViewModels;
 
-public sealed record MaterialSnapshot(SourceRecord? Source, MaterialAnalysis? Analysis, MaterialAttempt? ParseAttempt, MaterialAttempt? AcquisitionAttempt);
+public sealed record MaterialSnapshot(SourceRecord? Source, MaterialAnalysis? Analysis, MaterialAttempt? ParseAttempt, MaterialAttempt? AcquisitionAttempt)
+{
+    public string AnalysisStatus(MaterialKind kind)
+    {
+        if (Source is null) return "未選択";
+        var previous = Analysis is null ? "" : "（前回結果あり）";
+        if (AcquisitionAttempt?.Failure is not null) return "取得失敗" + previous;
+        if (ParseAttempt?.Failure is not null) return "解析失敗" + previous;
+        return Analysis is not null && Analysis.SourceDigest == Source.Digest && Analysis.ParserVersion == MaterialCoordinator.ParserVersion(kind)
+            ? "解析済み" : "未解析" + previous;
+    }
+}
 
 public sealed class AppViewModel : ObservableObject, IAsyncDisposable
 {

@@ -116,6 +116,52 @@ public sealed class ApiClientTests
         await Assert.ThrowsAsync<ApiException>(() => Client(http).DownloadEventsAsync(2032, null));
     }
     [Fact]
+    public async Task EventsFirstDownloadThenRepeatedWeakEtagChecksReachTheServer()
+    {
+        var payload = new EventsPayload("v1", 2032, new string('a', 64), "\"fake-source\"", [new("2032-04-05", "2032-04-05", "架空行事", "行事")]);
+        var requests = 0;
+        using var http = new HttpClient(new Handler(request =>
+        {
+            Assert.Null(request.Headers.Authorization);
+            requests++;
+            if (requests == 1)
+            {
+                Assert.Empty(request.Headers.IfNoneMatch);
+                return Response(HttpStatusCode.OK, Encoding.UTF8.GetString(DataCodec.Encode(payload)), headers: [("ETag", "W/\"fake-events\"")]);
+            }
+            var tag = Assert.Single(request.Headers.IfNoneMatch);
+            Assert.True(tag.IsWeak);
+            Assert.Equal("\"fake-events\"", tag.Tag);
+            var response = Response(HttpStatusCode.NotModified, headers: [("ETag", "W/\"fake-events\"")]);
+            response.Content.Headers.ContentLength = 1234;
+            return response;
+        }));
+        var client = Client(http);
+        var saved = await client.DownloadEventsAsync(2032, null);
+        for (var check = 0; check < 2; check++)
+        {
+            var checkedResult = await client.DownloadEventsAsync(2032, saved);
+            Assert.Same(saved.Payload, checkedResult.Payload);
+            saved = checkedResult;
+        }
+        Assert.Equal(3, requests);
+    }
+    [Theory]
+    [InlineData("W/\"wrong-events\"", "")]
+    [InlineData("W/\"fake-events\"", "unexpected body")]
+    public async Task WeakEventsChecksRejectMismatchedValidatorsAndNonempty304Bodies(string etag, string body)
+    {
+        var payload = new EventsPayload("v1", 2032, new string('a', 64), "\"fake-source\"", [new("2032-04-05", "2032-04-05", "架空行事", "行事")]);
+        var saved = new SavedEvents(DateTimeOffset.UtcNow, payload, "W/\"fake-events\"");
+        using var http = new HttpClient(new Handler(request =>
+        {
+            Assert.Equal(saved.ApiETag, Assert.Single(request.Headers.IfNoneMatch).ToString());
+            return Response(HttpStatusCode.NotModified, body, headers: [("ETag", etag)]);
+        }));
+        var failure = await Assert.ThrowsAsync<ApiException>(() => Client(http).DownloadEventsAsync(2032, saved));
+        Assert.Equal(ApiFailure.InvalidResponse, failure.Failure);
+    }
+    [Fact]
     public async Task StreamingLimitAppliesWithoutContentLength()
     {
         using var response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StreamContent(new MemoryStream(new byte[1025])) };

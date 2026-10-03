@@ -16,10 +16,10 @@ public sealed partial class MainWindow
         TitleText("設定", "page-settings");
         Add(SettingsSectionTitle("データ"));
         Add(SettingsGroup(
-            SettingsRow("時間割ファイル", () => OpenPage("materials"), "settings-materials", description: "資料の選択、取得状況、解析結果を確認"),
-            SettingsRow("学校行事", () => OpenPage("events"), "settings-events", description: "年度ごとの行事データを取得・確認"),
+            SettingsRow("時間割ファイル", () => OpenPage("materials"), "settings-materials"),
+            SettingsRow("学校行事", () => OpenPage("events"), "settings-events"),
             SettingsRow("リンク・名称・授業時刻", () => OpenPage("account"), "settings-account",
-                _model.RevisionFailures.Count > 0 ? "要確認" : _model.Revisions.Values.Any(value => value.Changed) ? "更新あり" : null, description: "学校アカウントで使うデータを取得・確認")));
+                _model.RevisionFailures.Count > 0 ? "要確認" : _model.Revisions.Values.Any(value => value.Changed) ? "更新あり" : null)));
         Add(SettingsSectionTitle("表示と操作"));
         var initialMainColor = _model.Preferences.MainColor;
         var mainColor = PreferenceControl(new ComboBox { MinWidth = 155 });
@@ -50,7 +50,7 @@ public sealed partial class MainWindow
         Add(SettingsGroup(SettingsRow("初期設定", InitialSetup, "settings-setup"),
             SettingsRow("使い方", () => OpenPage("help"), "settings-help"),
             SettingsRow("このアプリについて", () => OpenPage("about"), "settings-about")));
-        var storage = Panel(SettingsDescription("アプリ内の保存データと個人設定を置く場所です。選択したOneDriveの原本とは別です。"), Text(_model.Root));
+        var storage = Panel(Text(_model.Root));
         if (_model.RootMigrationMessage is { } migration) storage.Children.Add(Text(migration));
         Add(new Expander { Header = "データの保存先", Content = storage, HorizontalAlignment = HorizontalAlignment.Stretch });
     }
@@ -119,7 +119,6 @@ public sealed partial class MainWindow
     private void BuildMaterials()
     {
         TitleText("時間割ファイル", "page-materials"); BackToSettings();
-        Add(SettingsDescription("OneDriveの同期フォルダーから資料を選びます。取得や解析の状況は各資料の詳細で確認できます。"));
         foreach (var kind in Enum.GetValues<MaterialKind>()) Add(MaterialCard(kind));
         var year = PreferenceControl(new TextBox { Header = "学校年度", Text = _schoolYearDraft ?? _model.Preferences.DefaultSchoolYear ?? "", PlaceholderText = _model.Today.SchoolYear() + "（自動）", MaxWidth = 420, HorizontalAlignment = HorizontalAlignment.Stretch });
         AutomationProperties.SetAutomationId(year, "materials-school-year");
@@ -131,10 +130,10 @@ public sealed partial class MainWindow
             await _model.SavePreferencesAsync(current => current with { DefaultSchoolYear = selectedYear.Length == 0 ? null : selectedYear });
             if (_model.Preferences.DefaultSchoolYear == (selectedYear.Length == 0 ? null : selectedYear)) _schoolYearDraft = null;
         });
-        Add(Card(Panel(SettingsSectionTitle("年のない変更日を補完"), SettingsDescription("空欄なら現在の学校年度を使います。1〜3月は翌年の日付として扱います。年度を変えたら、時間割変更の資料を再解析してください。"), SettingInput(year), saveYear)));
+        Add(Card(Panel(SettingsSectionTitle("年のない変更日を補完"), SettingsDescription("空欄は現在の年度。1〜3月は翌年扱い。変更後は再解析してください。"), SettingInput(year), saveYear)));
         var stop = Button("自動確認を中止", () => { _model.SuspendAutomaticRefresh(); Render(); return Task.CompletedTask; }, "suspend-automatic-refresh");
         stop.IsEnabled = !_model.AutomaticRefreshPaused;
-        var updates = Panel(SettingsSectionTitle("資料の更新確認"), SettingsDescription("登録したファイルを確認します。OneDriveの同期が完了しているか、先に確認してください。"),
+        var updates = Panel(SettingsSectionTitle("資料の更新確認"),
             OperationButton("登録した原本を確認", _model.RefreshAsync, "refresh-materials"), stop);
         if (_model.AutomaticRefreshPaused)
         {
@@ -146,7 +145,6 @@ public sealed partial class MainWindow
     private void BuildEventsSettings()
     {
         TitleText("学校行事", "page-events"); BackToSettings();
-        Add(SettingsDescription("学校年度ごとの行事データを取得します。保存した行事はホームと時間割に表示します。"));
         if (_model.EventSourceMessage is { } eventWarning) Add(Card(Text(eventWarning)));
         if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
         if (_model.EventStorageMessage is { } storageFailure) Add(Card(Text(storageFailure)));
@@ -159,7 +157,7 @@ public sealed partial class MainWindow
             OperationButton("選んだ年度の行事を取得", () => _model.FetchEventsAsync(double.IsNaN(eventsYear.Value) ? _model.Today.SchoolYear() : (int)eventsYear.Value), "fetch-events"))));
         Add(SettingsSectionTitle("保存済みの年度"));
         if (_model.SavedEventYears.Count == 0) Add(Card(SettingsDescription("行事データをまだ取得していません。上で学校年度を選んで取得してください。")));
-        else Add(SettingsGroup(_model.SavedEventYears.Select(savedYear => SettingsRow(savedYear + "年度", () => EventDetails(savedYear), "events-details-" + savedYear, "取得済み", "行事と取得状況を確認")).Cast<UIElement>().ToArray()));
+        else Add(SettingsGroup(_model.SavedEventYears.Select(savedYear => SettingsRow(savedYear + "年度", () => EventDetails(savedYear), "events-details-" + savedYear, "取得済み")).Cast<UIElement>().ToArray()));
     }
     private void BuildNotificationSettings()
     {
@@ -169,13 +167,13 @@ public sealed partial class MainWindow
         changes.Toggled += async (_, _) => { var enabled = changes.IsOn; if (enabled == _model.Preferences.NotifyChanges) return; await _model.SavePreferencesAsync(current => current with { NotifyChanges = enabled, NotificationsSetupCompleted = true }); };
         var special = PreferenceControl(new ToggleSwitch { Header = "試験・返却", IsOn = _model.Preferences.NotifySpecials });
         special.Toggled += async (_, _) => { var enabled = special.IsOn; if (enabled == _model.Preferences.NotifySpecials) return; await _model.SavePreferencesAsync(current => current with { NotifySpecials = enabled, NotificationsSetupCompleted = true }); };
-        Add(Card(Panel(SettingsSectionTitle("通知する更新"), SettingsDescription("選択中のクラスの変更と、正常に解析できた試験・返却の更新を通知します。初回の取り込みは通知しません。"), changes, special)));
+        Add(Card(Panel(SettingsSectionTitle("通知する更新"), changes, special)));
         Add(SettingsSectionTitle("バックグラウンド"));
         var tray = new ToggleSwitch { Header = "通知領域に常駐", IsOn = _model.Preferences.KeepInTray, IsEnabled = _desktop is not null };
         tray.Toggled += async (_, _) => { var enabled = tray.IsOn; if (enabled == _model.Preferences.KeepInTray) return; try { _desktop?.SetTray(enabled); await _model.SavePreferencesAsync(current => current with { KeepInTray = enabled }); } catch { await Message("常駐を設定できません", "通知領域にアイコンを登録できませんでした。"); } };
         var startup = new ToggleSwitch { Header = "Windowsへのサインイン時に起動", IsOn = _model.Preferences.AutoStart, IsEnabled = !_model.OfflineTest };
         startup.Toggled += async (_, _) => { var enabled = startup.IsOn; if (enabled == _model.Preferences.AutoStart) return; try { DesktopIntegration.SetAutoStart(enabled); await _model.SavePreferencesAsync(current => current with { AutoStart = enabled }); } catch { await Message("自動起動を設定できません", "Windowsの設定を確認してください。"); } };
-        Add(Card(Panel(tray, SettingsDescription("ウィンドウを閉じても動作を続け、15分ごとに資料を確認します。完全終了・スリープ中は確認しません。"), startup)));
+        Add(Card(Panel(tray, SettingsDescription("ウィンドウを閉じた後も更新を確認"), startup)));
         Add(Button("アプリを完全に終了", () => { _exitRequested = true; Close(); return Task.CompletedTask; }));
     }
     private void BuildAbout()
@@ -194,9 +192,9 @@ public sealed partial class MainWindow
             SettingsRow("依存ライブラリのライセンス", () => OpenPage("licenses"), "依存ライブラリのライセンス")));
         Add(SettingsSectionTitle("開発とサポート"));
         Add(SettingsGroup(
-            SettingsRow("ソースコード", () => OpenBrowser(new("https://github.com/n624-dev/takupoke-win"), "ソースコード"), "about-source", description: "GitHubで公開しています"),
-            SettingsRow("問い合わせ", async () => { if (!await Windows.System.Launcher.LaunchUriAsync(new("mailto:takupoke@n624.jp"))) await Message("メールアプリを開けませんでした", "メールアプリから takupoke@n624.jp へお問い合わせください。"); }, "about-contact", description: "メールで問い合わせる"),
-            SettingsRow("配布ページを開く", () => OpenBrowser(new("https://github.com/n624-dev/takupoke-win/releases"), "配布ページ"), "配布ページを開く", description: "開発確認版をダウンロード")));
+            SettingsRow("ソースコード", () => OpenBrowser(new("https://github.com/n624-dev/takupoke-win"), "ソースコード"), "about-source"),
+            SettingsRow("問い合わせ", async () => { if (!await Windows.System.Launcher.LaunchUriAsync(new("mailto:takupoke@n624.jp"))) await Message("メールアプリを開けませんでした", "メールアプリから takupoke@n624.jp へお問い合わせください。"); }, "about-contact"),
+            SettingsRow("配布ページを開く", () => OpenBrowser(new("https://github.com/n624-dev/takupoke-win/releases"), "配布ページ"), "配布ページを開く")));
         Add(Button("配布URLをコピー", () => { var data = new Windows.ApplicationModel.DataTransfer.DataPackage(); data.SetText("https://github.com/n624-dev/takupoke-win/releases"); Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(data); return Task.CompletedTask; }));
     }
     private async Task ShowProductDocument(string title, string relative)
@@ -207,8 +205,7 @@ public sealed partial class MainWindow
     private Border MaterialCard(MaterialKind kind)
     {
         var snapshot = _model.Materials.GetValueOrDefault(kind); var source = snapshot?.Source;
-        var state = source is null ? "資料を選択していません。" : snapshot?.AcquisitionAttempt?.Failure is not null ? "ファイルを取得できませんでした。詳細を確認してください。"
-            : snapshot?.ParseAttempt?.Failure is not null ? "解析できませんでした。詳細を確認してください。" : snapshot?.Analysis is null ? "解析結果はまだありません。" : "解析結果を保存しています。";
+        var state = snapshot?.AnalysisStatus(kind) ?? "未選択";
         var summary = SettingsDescription(source is null ? state : source.OriginalName + "\n" + state);
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(summary, "material-summary-" + kind);
         if (snapshot?.AcquisitionAttempt?.Failure is not null || snapshot?.ParseAttempt?.Failure is not null) summary.Foreground = WarningBrush;

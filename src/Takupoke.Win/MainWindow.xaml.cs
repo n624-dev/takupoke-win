@@ -142,7 +142,7 @@ public sealed partial class MainWindow : Window
         _popupRenderPending = false;
         var pageChanged = _renderedPage != _page;
         if (!pageChanged && _page == "timetable" && !_restoringTimetableScroll && _timetableScroller is { } previousScroller)
-            _timetableScrollPosition = (_timetableScrollKey, previousScroller.HorizontalOffset, previousScroller.VerticalOffset);
+            _timetableScrollPosition = (_timetableScrollKey, previousScroller.HorizontalOffset, PageScroller.VerticalOffset);
         else if (pageChanged) _timetableScrollPosition = null;
         _timetableScroller = null; _renderedPage = _page;
         var focused = RootGrid.XamlRoot is null ? null : FocusManager.GetFocusedElement(RootGrid.XamlRoot) as FrameworkElement;

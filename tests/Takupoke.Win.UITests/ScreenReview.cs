@@ -14,7 +14,7 @@ namespace Takupoke.Win.UITests;
 
 internal static partial class Program
 {
-    private static bool TableFillsAvailableHeight(System.Windows.Rect table, System.Windows.Rect page)
+    private static bool TableFitsContentHeight()
     {
         var probe = WaitElement("timetable-grid-scroller").Current.Name;
         double Value(string key)
@@ -22,12 +22,7 @@ internal static partial class Program
             var match = System.Text.RegularExpressions.Regex.Match(probe, @"; " + key + @"=([^;]+);");
             return match.Success ? double.Parse(match.Groups[1].Value, System.Globalization.CultureInfo.InvariantCulture) : double.NaN;
         }
-        var scale = Value("scale");
-        // scale is the final field of the probe, without a trailing semicolon.
-        if (double.IsNaN(scale))
-            scale = double.Parse(probe[(probe.LastIndexOf("scale=", StringComparison.Ordinal) + 6)..], System.Globalization.CultureInfo.InvariantCulture);
-        var expected = Math.Max(160 * scale, page.Height - (Value("tableTop") + Value("pageBottomPadding")) * scale);
-        return Math.Abs(table.Height - expected) <= 4 && table.Bottom <= page.Bottom - Value("pageBottomPadding") * scale + 4;
+        return Value("contentHeight") > 0 && Math.Abs(Value("tableHeight") - Value("contentHeight")) <= 2;
     }
 
     private static int CapturePages(string executable, string root)

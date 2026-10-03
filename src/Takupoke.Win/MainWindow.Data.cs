@@ -32,15 +32,15 @@ public sealed partial class MainWindow
         var snapshot = _model.Materials.GetValueOrDefault(kind); var source = snapshot?.Source; var analysis = snapshot?.Analysis;
         var attempts = Panel(SettingsSectionTitle("取得と解析の状況"));
         if (snapshot?.AcquisitionAttempt is { } acquisition)
-            attempts.Children.Add(DataField("最終取得の試行 · " + DisplayDateTime(acquisition.At), acquisition.Failure ?? "原本を確認しました。"));
+            attempts.Children.Add(DataField("最終取得の試行 · " + DisplayDateTime(acquisition.At), acquisition.Failure ?? "取得済み"));
         if (snapshot?.ParseAttempt is { } attempt)
         {
             attempts.Children.Add(DataField("最終解析の試行 · " + DisplayDateTime(attempt.At), attempt.Failure is { } failure
-                ? failure.StartsWith('P') ? new PdfParseException(failure, attempt.Page, attempt.Cell).Message : failure : "解析結果を保存しました。"));
+                ? failure.StartsWith('P') ? new PdfParseException(failure, attempt.Page, attempt.Cell).Message : failure : "解析済み"));
             if (attempt.ChangeError is ChangeErrorCode.FormulaCache or ChangeErrorCode.WeekdayMismatch)
                 attempts.Children.Add(Button("警告を確認して内容を見る", PreviewChanges, "preview-changes"));
         }
-        if (source is null) attempts.Children.Add(SettingsDescription("資料を選択していません。OneDriveの同期フォルダーから資料を選んでください。"));
+        if (source is null) attempts.Children.Add(SettingsDescription("未選択"));
         attempts.Children.Add(OperationButton(source is null ? "資料を選択" : "資料を選び直す", () => SelectMaterial(kind), "select-material-" + kind));
         if (source is not null)
         {
@@ -56,7 +56,7 @@ public sealed partial class MainWindow
         var results = Panel(SettingsSectionTitle("保存済みの解析結果"));
         if (analysis is null)
         {
-            results.Children.Add(SettingsDescription("正常な解析結果はまだありません。上の取得・解析状況を確認してください。")); Add(Card(results)); return;
+            results.Children.Add(SettingsDescription("未解析")); Add(Card(results)); return;
         }
         if (analysis.SourceDigest != source?.Digest || analysis.ParserVersion != MaterialCoordinator.ParserVersion(kind))
             results.Children.Add(SettingsDescription("前回の正常な解析結果を表示しています。選択中の原本と異なる場合があります。"));
@@ -91,7 +91,6 @@ public sealed partial class MainWindow
     private void BuildAccountData()
     {
         TitleText("リンク・名称・授業時刻", "page-account"); BackToSettings();
-        Add(SettingsDescription("学校アカウントでデータを取得します。更新の確認だけでは認証を開始しません。"));
         if (_model.PlatformMessage is { } platformMessage) Add(Card(Panel(SettingsSectionTitle("認証の準備を確認してください"), Text(platformMessage))));
         foreach (var kind in Enum.GetValues<DataSet>())
         {
@@ -101,14 +100,13 @@ public sealed partial class MainWindow
             var status = Text(failure is not null ? "要確認" : !saved ? "未取得" : state is null ? "取得済み" : state.Changed ? "更新あり" : "取得済み");
             Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(status, "shared-status-" + kind);
             if (failure is not null) status.Foreground = WarningBrush;
-            var description = kind switch { DataSet.Links => "一覧・ホームで使うリンク", DataSet.Mapping => "科目・教員・教室の名称", _ => "日付ごとの授業の開始・終了時刻" };
-            var panel = Panel(SettingsSectionTitle(AppViewModel.DataSetLabel(kind)), SettingsDescription(description), status,
+            var panel = Panel(SettingsSectionTitle(AppViewModel.DataSetLabel(kind)), status,
                 Button("詳細を見る", () => SharedDetails(kind), "shared-details-" + kind));
             if (failure is { } value) panel.Children.Add(Text(new ApiException(value).Message));
             Add(Card(panel));
         }
         if (_model.SharedUpdateMessage is { } message) { var error = Text(message); error.Foreground = WarningBrush; Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(error, "account-update-error"); Add(error); }
-        Add(Card(Panel(SettingsDescription("更新があるデータを取得します。必要な場合はブラウザで学校アカウントの認証が開きます。"), OperationButton("更新を確認・取得", _model.UpdateSharedAsync, "update-account"))));
+        Add(Card(Panel(OperationButton("更新を確認・取得", _model.UpdateSharedAsync, "update-account"))));
     }
     private Task SharedDetails(DataSet kind)
     {
@@ -146,21 +144,21 @@ public sealed partial class MainWindow
     private int _setupStep;
     private void BuildSetup()
     {
-        TitleText("初期設定", "page-setup"); Add(SettingsDescription($"手順 {_setupStep + 1} / 3 · 後から設定で変更できます。"));
+        TitleText("初期設定", "page-setup"); Add(SettingsDescription($"手順 {_setupStep + 1} / 3"));
         if (_setupStep == 0)
         {
-            Add(Card(Panel(SettingsSectionTitle("学校アカウントでデータを取得"), Text("リンク一覧・科目や教員の名称・授業時刻を取得します。ブラウザで学校アカウントの認証が開きます。"), OperationButton("学校アカウントで取得", _model.UpdateSharedAsync, "setup-account"))));
+            Add(Card(Panel(SettingsSectionTitle("学校アカウントでデータを取得"), OperationButton("学校アカウントで取得", _model.UpdateSharedAsync, "setup-account"))));
         }
         else if (_setupStep == 1)
         {
             Add(SettingsSectionTitle("時間割ファイルと学校行事"));
-            Add(Text("OneDriveの同期フォルダーから通常時間割PDFと時間割変更XLSXを選びます。試験・返却PDFは手元にある場合に選択してください。"));
+            Add(Text("試験・返却PDFは任意です。"));
             foreach (var kind in Enum.GetValues<MaterialKind>()) Add(MaterialCard(kind));
             Add(OperationButton("今年度の学校行事を取得", () => _model.FetchEventsAsync(_model.Today.SchoolYear()), "setup-events"));
         }
         else
         {
-            Add(Card(Panel(SettingsSectionTitle("クラスを選択"), Text("表示するクラスを選んでください。1年生はホームルームと学科を組み合わせられます。"), Button("クラスを選択", ChooseClasses, "setup-class"), SettingsDescription(_model.Preferences.SelectedClasses.Length == 0 ? "クラスはまだ選択していません。" : string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display))))));
+            Add(Card(Panel(SettingsSectionTitle("クラスを選択"), Text("1年生はホームルーム＋学科を選択。"), Button("クラスを選択", ChooseClasses, "setup-class"), SettingsDescription(_model.Preferences.SelectedClasses.Length == 0 ? "クラスはまだ選択していません。" : string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display))))));
         }
         if (_setupStep > 0) Add(Button("戻る", () => { _setupStep--; Render(); return Task.CompletedTask; }, "setup-back"));
         Add(AccentButton(_setupStep == 2 ? "はじめる" : "次へ", async () =>
@@ -191,13 +189,11 @@ public sealed partial class MainWindow
             ("更新と通知", "資料は起動・復帰・ファイル変更・手動確認で読み直し、内容が変わると解析します。保存済み年度の学校行事も確認します。\nホームの更新案内からデータの取得画面を開けます。認証は取得操作のときだけ開始します。\n通知は今日以降・選択中クラスの変更と、解析成功した試験・返却PDFの更新が対象です。初回は通知しません。\n通知領域での常駐を有効にすると、閉じた後も15分ごとに確認します。完全終了・電源断・スリープ中は確認しません。\n4月1日・10月1日の切替後は資料を選び直し、学校データを再取得してください。個人設定とOneDriveの原本は保持します。"),
             ("困ったとき", "更新されない場合はOneDriveの同期状況を確認し、エクスプローラーで資料を開いてから再確認します。移動・削除・アクセス不能では資料を選び直してください。\n解析失敗は資料の詳細で確認します。再解析に失敗しても保存期間内の前回正常結果を保持します。\n年のない変更日には学校年度を使い、1〜3月は翌年の日付になります。年度を変えたら再解析してください。\n半期切替でファイル選択が消えた場合は再選択が必要です。設定から初期設定を再度開くこともできます。")
         };
-        Add(SettingsDescription("使いたい機能や、困っていることから選んでください。"));
         Add(SettingsGroup(topics.Select(topic => SettingsRow(topic.Title, () => Message(topic.Title, topic.Body), topic.Title, icon: "help")).Cast<UIElement>().ToArray()));
     }
     private void BuildLicenses()
     {
         TitleText("依存ライブラリのライセンス", "page-licenses"); Add(IconButton("このアプリについてに戻る", "back", () => OpenPage("about"), "back-about"));
-        Add(SettingsDescription("このアプリに含まれるライブラリのライセンス全文を確認できます。"));
         var directory = Path.Combine(AppContext.BaseDirectory, "Licenses");
         if (Directory.Exists(directory))
             foreach (var file in Directory.EnumerateFiles(directory, "*.txt", SearchOption.AllDirectories).Order(StringComparer.Ordinal))

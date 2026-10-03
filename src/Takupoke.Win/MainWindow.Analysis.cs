@@ -14,7 +14,7 @@ public sealed partial class MainWindow
         Add(IconButton("資料の詳細に戻る", "back", () => OpenPage("material." + kind)));
         var analysis = _model.Materials.GetValueOrDefault(kind)?.Analysis;
         if (analysis is null) { Add(Card(SettingsDescription("正常な解析結果はまだありません。資料の詳細で取得・解析状況を確認してください。"))); return; }
-        Add(Card(Panel(DataField("解析した資料", analysis.SourceName), SettingsDescription("項目を選ぶと、読み取った授業や変更の詳細を確認できます。"))));
+        Add(Card(Panel(DataField("解析した資料", analysis.SourceName))));
         var rows = new List<UIElement>();
         if (kind is MaterialKind.Timetable or MaterialKind.Changes)
         {
@@ -33,7 +33,7 @@ public sealed partial class MainWindow
                 var values = cls.Length == 0 ? Array.Empty<string>() : [cls];
                 await _model.SavePreferencesAsync(current => kind == MaterialKind.Timetable ? current with { TimetableAnalysisClasses = values } : current with { ChangeAnalysisClasses = values });
             };
-            var filters = Panel(SettingsSectionTitle("確認する範囲"), SettingsDescription("ここで選んだクラスは、ホームや時間割のクラス選択には影響しません。"), SettingInput(picker));
+            var filters = Panel(SettingsSectionTitle("確認する範囲"), SettingInput(picker));
             if (selected.Length > 0 && !available.Contains(selected)) filters.Children.Add(SettingsDescription("選択したクラスは現在の解析結果にありません。選択は保持しています。"));
             if (kind == MaterialKind.Timetable)
             {

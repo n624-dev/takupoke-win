@@ -18,7 +18,6 @@ public sealed partial class MainWindow
         AutomationProperties.SetAutomationId(search, "link-search");
         AutomationProperties.SetName(search, "リンクを検索");
         search.TextChanged += (_, _) => { _linkQuery = search.Text; PopulateLinks(); }; Add(search);
-        Add(SettingsDescription("ひらがな・カタカナ・ローマ字でも検索できます。各リンクの「…」からお気に入りや表示を変更できます。"));
         Add(IconButton("非表示のリンクを管理", "settings", RestoreHiddenLinks));
         _linkResults = new StackPanel { Spacing = 24 }; Add(_linkResults); PopulateLinks();
     }
@@ -27,7 +26,7 @@ public sealed partial class MainWindow
         if (_linkResults is null || DeferRenderForPopups()) return;
         _linkResults.Children.Clear();
         if (_model.Links is not { } links)
-        { _linkResults.Children.Add(Card(Panel(Text("リンクはまだ取得していません。", 18), Text("学校アカウントでデータを取得すると、学校のリンクをここに表示します。"), IconButton("データを取得", "download", () => OpenPage("account"))))); return; }
+        { _linkResults.Children.Add(Card(Panel(Text("リンクはまだ取得していません。", 18), IconButton("データを取得", "download", () => OpenPage("account"))))); return; }
         if (LinkSearch.Normalize(_linkQuery).Length > 0)
         {
             var results = links.Search(_linkQuery, _model.Preferences.HiddenIds).ToArray();

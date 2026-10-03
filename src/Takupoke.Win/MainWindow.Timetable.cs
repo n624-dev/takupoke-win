@@ -77,7 +77,7 @@ public sealed partial class MainWindow
         var displayOptions = new DropDownButton { Content = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 10, Children = { FluentIcon("settings"), displayLabel } }, Flyout = displayMenu, MinHeight = 44, Padding = new Thickness(16, 10, 16, 10) };
         AutomationProperties.SetAutomationId(displayOptions, "timetable-display-options"); AutomationProperties.SetName(displayOptions, "時間割の表示設定");
         var selectionRow = TimetableControlRow(classes, displayOptions); Add(Panel(weekRow, selectionRow));
-        if (_model.Preferences.SelectedClasses.Length == 0) Add(ScheduleNotice("クラスが未選択です", "授業を表示するクラスを選んでください。", "クラスを選択", "people", ChooseClasses));
+        if (_model.Preferences.SelectedClasses.Length == 0) Add(ScheduleNotice("クラスが未選択です", "", "クラスを選択", "people", ChooseClasses));
         else BuildWeekGrid(start);
         var weeklyEvents = Enumerable.Range(0, 7).Select(offset => start.AddDays(offset)).Select(day => (Day: day, Events: _model.Engine.Plan(day).Events)).Where(item => item.Events.Count > 0).ToArray();
         if (weeklyEvents.Length > 0)
@@ -87,7 +87,7 @@ public sealed partial class MainWindow
             Add(Card(events));
         }
         if (_model.Data.Changes is null) Add(ScheduleNotice("時間割変更を表示できません", "時間割変更ファイルを選択して、状況を確認してください。", "時間割ファイルを開く", "document", () => OpenPage("materials")));
-        if (Enumerable.Range(0, 7).Any(offset => !_model.SavedEventYears.Contains(start.AddDays(offset).SchoolYear()))) Add(ScheduleNotice("学校行事は未取得です", "学校行事を取得すると、授業のない日や試験の日を時間割に反映します。", "学校行事を取得", "calendar", () => OpenPage("events")));
+        if (Enumerable.Range(0, 7).Any(offset => !_model.SavedEventYears.Contains(start.AddDays(offset).SchoolYear()))) Add(ScheduleNotice("学校行事は未取得です", "", "学校行事を取得", "calendar", () => OpenPage("events")));
         var list = new StackPanel { Spacing = 16, Padding = new Thickness(16) };
         void AddChange(UIElement element) => list.Children.Add(element);
         AddChange(IconButton("一覧のクラスを選択", "people", () => ChooseClasses(changes: true), "timetable-change-classes"));
@@ -149,7 +149,8 @@ public sealed partial class MainWindow
             var time = engine.CommonPeriodTime(period, days, classes);
             var texts = new StackPanel { Spacing = 6, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
             var periodLabel = Text(allNoClass ? "" : period + "限", 15); periodLabel.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold;
-            var clockLabel = Text(allNoClass ? "" : DisplayText.PeriodTime(time), 12);
+            var clockLabel = Text(allNoClass || time is null ? "" : DisplayText.PeriodTime(time), 12);
+            clockLabel.Visibility = allNoClass || time is null ? Visibility.Collapsed : Visibility.Visible;
             AutomationProperties.SetAutomationId(periodLabel, "timetable-period-label-" + period);
             AutomationProperties.SetAutomationId(clockLabel, "timetable-clock-label-" + period);
             foreach (var label in new[] { periodLabel, clockLabel }) { label.TextAlignment = TextAlignment.Center; label.TextWrapping = TextWrapping.NoWrap; texts.Children.Add(label); }
@@ -181,7 +182,7 @@ public sealed partial class MainWindow
             if (fullDay is not null)
             {
                 var title = Text(fullDay, 14); title.FontWeight = Microsoft.UI.Text.FontWeights.Bold; title.TextAlignment = TextAlignment.Center;
-                var card = Card(title); card.Padding = new Thickness(16); card.Margin = new Thickness(3); fullDayCards.Add(card); Grid.SetColumn(card, dayIndex + 1); Grid.SetRow(card, 1); Grid.SetRowSpan(card, 8); grid.Children.Add(card); continue;
+                var card = Card(title); card.Background = TimetableCardBackground(); card.Padding = new Thickness(16); card.Margin = new Thickness(3); fullDayCards.Add(card); Grid.SetColumn(card, dayIndex + 1); Grid.SetRow(card, 1); Grid.SetRowSpan(card, 8); grid.Children.Add(card); continue;
             }
             var cellGrid = new Grid { ColumnSpacing = 0, RowSpacing = 0 };
             for (var period = 1; period <= 8; period++) cellGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(100 * scale) });
@@ -194,6 +195,9 @@ public sealed partial class MainWindow
                 {
                     var p = positioned[index];
                     var button = LessonButton(day, cls, p.Block, showTime: p.Block.StartPeriod != p.Block.EndPeriod || engine.CommonPeriodTime(p.Block.StartPeriod, days, classes) is null, lane: p.Lane, index: index); button.VerticalAlignment = VerticalAlignment.Stretch;
+                    var background = new Border { Background = TimetableCardBackground(), CornerRadius = new CornerRadius(10), Margin = new Thickness(3), IsHitTestVisible = false };
+                    AutomationProperties.SetAccessibilityView(background, Microsoft.UI.Xaml.Automation.Peers.AccessibilityView.Raw);
+                    Grid.SetColumn(background, offset + p.Lane); Grid.SetRow(background, p.Block.StartPeriod - 1); Grid.SetRowSpan(background, p.Block.EndPeriod - p.Block.StartPeriod + 1); cellGrid.Children.Add(background);
                     Grid.SetColumn(button, offset + p.Lane); Grid.SetRow(button, p.Block.StartPeriod - 1); Grid.SetRowSpan(button, p.Block.EndPeriod - p.Block.StartPeriod + 1); cellGrid.Children.Add(button);
                 }
                 for (var period = 1; period <= 8; period++)
@@ -245,15 +249,10 @@ public sealed partial class MainWindow
         grid.Loaded += (_, _) => FitRows();
         grid.SizeChanged += (_, args) => { if (Math.Abs(args.PreviousSize.Width - args.NewSize.Width) > 0.5) FitRows(); };
         var scroll = new ScrollViewer { Content = grid, HorizontalScrollMode = ScrollMode.Enabled, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
-            VerticalScrollMode = ScrollMode.Enabled, VerticalScrollBarVisibility = ScrollBarVisibility.Auto };
+            VerticalScrollMode = ScrollMode.Disabled, VerticalScrollBarVisibility = ScrollBarVisibility.Disabled };
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(scroll, "timetable-grid-scroller");
         void FitWidth()
         {
-            // Keep the viewport within the space below the actual week
-            // controls, including text scaling and the page's bottom padding.
-            var top = scroll.TransformToVisual(PageContent).TransformPoint(new Windows.Foundation.Point(0, 0)).Y;
-            var height = Math.Max(160, PageScroller.ActualHeight - top - PageContent.Padding.Bottom);
-            if (Math.Abs(scroll.Height - height) > 0.5 || double.IsNaN(scroll.Height)) scroll.Height = height;
             foreach (var label in timeLabels)
             {
                 label.Child.Measure(new Windows.Foundation.Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -265,42 +264,39 @@ public sealed partial class MainWindow
             if (Math.Abs(grid.Width - width) > 0.5 || double.IsNaN(grid.Width)) grid.Width = width;
         }
         scroll.Loaded += (_, _) => FitWidth(); scroll.SizeChanged += (_, _) => FitWidth();
-        Microsoft.UI.Xaml.SizeChangedEventHandler resize = (_, _) => FitWidth();
-        PageScroller.SizeChanged += resize; scroll.Unloaded += (_, _) => PageScroller.SizeChanged -= resize;
-        void FitViewportAfterLayout(object? sender, object args)
-        {
-            if (_timetableScroller != scroll) return;
-            var top = scroll.TransformToVisual(PageContent).TransformPoint(new Windows.Foundation.Point(0, 0)).Y;
-            var height = Math.Max(160, PageScroller.ActualHeight - top - PageContent.Padding.Bottom);
-            if (Math.Abs(scroll.Height - height) > 0.5 || double.IsNaN(scroll.Height)) scroll.Height = height;
-        }
-        scroll.LayoutUpdated += FitViewportAfterLayout;
-        scroll.Unloaded += (_, _) => scroll.LayoutUpdated -= FitViewportAfterLayout;
         _timetableScroller = scroll;
         _timetableScrollKey = start.Iso() + ":" + string.Join(",", classes);
         _restoringTimetableScroll = _timetableScrollPosition is { } position && position.Key == _timetableScrollKey;
         if (_timetableScrollPosition is { } saved && _restoringTimetableScroll)
-            scroll.Loaded += (_, _) => DispatcherQueue.TryEnqueue(() =>
+            scroll.Loaded += (_, _) => DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
             {
                 if (_timetableScroller != scroll) return;
-                scroll.ChangeView(saved.Horizontal, saved.Vertical, null, true);
+                PageContent.UpdateLayout();
+                scroll.ChangeView(saved.Horizontal, 0, null, true);
+                PageScroller.ChangeView(null, saved.Vertical, null, true);
                 _restoringTimetableScroll = false;
             });
         if (_model.OfflineTest)
         {
             void LayoutDiagnostic(object? sender, object args)
             {
-                if (_timetableScroller != scroll || Math.Abs(scroll.ActualHeight - scroll.Height) > 0.5) return;
+                if (_timetableScroller != scroll) return;
                 // Expose only geometry from the isolated fake-data UI test.
                 // ScrollViewer's UIA bounds may include unclipped content.
                 var pageOrigin = PageScroller.TransformToVisual(RootGrid).TransformPoint(new Windows.Foundation.Point(0, 0));
-                var geometry = FormattableString.Invariant($"Synthetic layout: root={RootGrid.ActualWidth:R},{RootGrid.ActualHeight:R}; page={PageScroller.ActualWidth:R},{PageScroller.ActualHeight:R}; viewport={PageScroller.ViewportWidth:R},{PageScroller.ViewportHeight:R}; pageOrigin={pageOrigin.X:R},{pageOrigin.Y:R}; host={PageHost.ActualWidth:R},{PageHost.ActualHeight:R}; table={scroll.ActualWidth:R},{scroll.ActualHeight:R}; tableHeight={scroll.Height:R}; tableTop={scroll.TransformToVisual(PageContent).TransformPoint(new Windows.Foundation.Point(0, 0)).Y:R}; pageBottomPadding={PageContent.Padding.Bottom:R}; textScale={_uiSettings.TextScaleFactor:R}; scale={RootGrid.XamlRoot.RasterizationScale:R}");
+                var geometry = FormattableString.Invariant($"Synthetic layout: root={RootGrid.ActualWidth:R},{RootGrid.ActualHeight:R}; page={PageScroller.ActualWidth:R},{PageScroller.ActualHeight:R}; viewport={PageScroller.ViewportWidth:R},{PageScroller.ViewportHeight:R}; pageOrigin={pageOrigin.X:R},{pageOrigin.Y:R}; host={PageHost.ActualWidth:R},{PageHost.ActualHeight:R}; table={scroll.ActualWidth:R},{scroll.ActualHeight:R}; tableHeight={scroll.ActualHeight:R}; contentHeight={grid.ActualHeight:R}; tableTop={scroll.TransformToVisual(PageContent).TransformPoint(new Windows.Foundation.Point(0, 0)).Y:R}; pageBottomPadding={PageContent.Padding.Bottom:R}; textScale={_uiSettings.TextScaleFactor:R}; scale={RootGrid.XamlRoot.RasterizationScale:R}");
                 if (AutomationProperties.GetName(scroll) != geometry) AutomationProperties.SetName(scroll, geometry);
             }
             scroll.LayoutUpdated += LayoutDiagnostic;
             scroll.Unloaded += (_, _) => scroll.LayoutUpdated -= LayoutDiagnostic;
         }
         Add(scroll);
+    }
+    private Microsoft.UI.Xaml.Media.Brush TimetableCardBackground()
+    {
+        var color = _accessibility.HighContrast ? _uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Background)
+            : RootGrid.ActualTheme == ElementTheme.Dark ? Windows.UI.Color.FromArgb(255, 50, 50, 50) : Windows.UI.Color.FromArgb(255, 255, 255, 255);
+        return new Microsoft.UI.Xaml.Media.SolidColorBrush(Windows.UI.Color.FromArgb(255, color.R, color.G, color.B));
     }
     private Task ChooseClasses() => ChooseClasses(false);
     private async Task ChooseClasses(bool changes)

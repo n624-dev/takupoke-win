@@ -68,6 +68,7 @@ internal static partial class Program
             CheckAuthentication(args[0], args[1]);
             Invoke("settings-materials");
             Wait(() => Find("page-materials") is not null, "material list is a settings child screen");
+            Wait(() => Find("material-summary-Timetable")?.Current.Name.EndsWith("解析済み", StringComparison.Ordinal) == true, "A current accepted analysis displays the same completed state as iOS");
             // Authentication cancellation intentionally pauses automatic checks.
             // Resume first so this separate test exercises an enabled stop action.
             Invoke("refresh-materials");
@@ -114,6 +115,9 @@ internal static partial class Program
             PickMaterial(null);
             Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "canceling the picker preserves the previous selection");
             Invoke("back-settings");
+            Invoke("settings-materials");
+            Wait(() => Find("material-summary-Timetable")?.Current.Name.EndsWith("取得失敗（前回結果あり）", StringComparison.Ordinal) == true, "An unavailable source retains its accepted analysis and shows the same failure state as iOS");
+            Invoke("back-settings");
             Invoke("settings-class");
             var homeroom = WaitElement("class-1_1"); Toggle(homeroom);
             var department = WaitElement("class-1_CN"); Toggle(department);
@@ -129,47 +133,52 @@ internal static partial class Program
             var pageBounds = VisiblePageBounds();
             var tableBounds = WaitElement("timetable-grid-scroller").Current.BoundingRectangle;
             Require(tableBounds.Width >= pageBounds.Width - 64, "The desktop table uses the available content width.");
-            Require(TableFillsAvailableHeight(tableBounds, pageBounds), "The timetable fills the space below its arranged controls and keeps bottom padding.");
+            Require(TableFitsContentHeight(), "The timetable fits its full content height without an internal vertical viewport.");
             var clockBounds = WaitElement("timetable-clock-label-1").Current.BoundingRectangle;
             Require(clockBounds.Left >= tableBounds.Left + 5 && clockBounds.Right < tableBounds.Right && clockBounds.Height > 0, "The first timetable clock has visible horizontal padding.");
+            Require(Find("timetable-clock-label-2") is not { Current.IsOffscreen: false } || Find("timetable-clock-label-2")?.Current.Name.Length == 0, "An undetermined common time is hidden while period labels remain");
             var changeList = WaitElement("timetable-change-list");
             Require(((ExpandCollapsePattern)changeList.GetCurrentPattern(ExpandCollapsePattern.Pattern)).Current.ExpandCollapseState == ExpandCollapseState.Expanded, "Changes are initially visible.");
             var originalWindowBounds = _window!.Current.BoundingRectangle;
             Require(SetWindowPos(_process!.MainWindowHandle, 0, (int)originalWindowBounds.Left, (int)originalWindowBounds.Top,
                 (int)originalWindowBounds.Width, Math.Max(400, (int)originalWindowBounds.Height - 200), 0x0044), "The test window can be shortened for the scroll regression.");
             Wait(() => VisiblePageBounds().Height < pageBounds.Height - 60
-                && ((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current.VerticallyScrollable,
-                "The shortened viewport is arranged and the synthetic eight-period grid is scrollable");
-            var timetableScroller = WaitElement("timetable-grid-scroller");
+                && ((ScrollPattern)WaitElement("page-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current.VerticallyScrollable,
+                "The shortened viewport is arranged and the whole page is scrollable");
+            Require(!((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current.VerticallyScrollable, "The table has no internal vertical scrolling even in a short window.");
+            Require(TableFitsContentHeight(), "Shortening the window retains the complete table height.");
+            var timetableScroller = WaitElement("page-scroller");
             var scrolling = (ScrollPattern)timetableScroller.GetCurrentPattern(ScrollPattern.Pattern);
             scrolling.SetScrollPercent(ScrollPattern.NoScroll, 60);
-            Wait(() => Math.Abs(((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current.VerticalScrollPercent - 60) < 2,
-                "The requested timetable scroll position is applied");
-            var appliedScroll = ((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current;
+            Wait(() => Math.Abs(((ScrollPattern)WaitElement("page-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current.VerticalScrollPercent - 60) < 2,
+                "The requested page scroll position is applied");
+            var appliedScroll = ((ScrollPattern)WaitElement("page-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current;
             var savedOffsetFraction = appliedScroll.VerticalScrollPercent / 100 * (1 - appliedScroll.VerticalViewSize / 100);
             var priorGridId = WaitElement("timetable-grid-scroller").GetRuntimeId();
             Wait(() => Find("timetable-grid-scroller") is { } refreshed && !refreshed.GetRuntimeId().SequenceEqual(priorGridId), "The clock periodically redraws the timetable");
             Wait(() =>
             {
-                var redrawn = ((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current;
+                var redrawn = ((ScrollPattern)WaitElement("page-scroller").GetCurrentPattern(ScrollPattern.Pattern)).Current;
                 // UIA percent is relative to the remaining scroll range, so
                 // viewport changes can alter it while the pixel offset stays
                 // fixed. The synthetic content extent remains unchanged.
                 var redrawnOffsetFraction = redrawn.VerticalScrollPercent / 100 * (1 - redrawn.VerticalViewSize / 100);
                 return Math.Abs(redrawnOffsetFraction - savedOffsetFraction) <= 0.005;
-            }, "Timetable redraw retains its vertical scroll offset within the fixed synthetic content");
-            ((ScrollPattern)WaitElement("timetable-grid-scroller").GetCurrentPattern(ScrollPattern.Pattern)).SetScrollPercent(ScrollPattern.NoScroll, 0);
+            }, "Timetable redraw retains the page vertical scroll offset within the fixed synthetic content");
+            ((ScrollPattern)WaitElement("page-scroller").GetCurrentPattern(ScrollPattern.Pattern)).SetScrollPercent(ScrollPattern.NoScroll, 0);
             Require(SetWindowPos(_process!.MainWindowHandle, 0, (int)originalWindowBounds.Left, (int)originalWindowBounds.Top,
                 (int)originalWindowBounds.Width, (int)originalWindowBounds.Height, 0x0044), "The original test window size can be restored.");
             Wait(() =>
             {
-                var restoredTable = WaitElement("timetable-grid-scroller").Current.BoundingRectangle;
                 var restoredPage = VisiblePageBounds();
                 return restoredPage.Height >= pageBounds.Height - 1
-                    && TableFillsAvailableHeight(restoredTable, restoredPage);
-            }, "Restoring the window expands the timetable viewport again");
+                    && TableFitsContentHeight();
+            }, "Restoring the window retains the complete timetable height");
             CheckLessonFocusAcrossClock();
+            ((ScrollPattern)WaitElement("page-scroller").GetCurrentPattern(ScrollPattern.Pattern)).SetScrollPercent(ScrollPattern.NoScroll, 0);
+            Wait(() => !WaitElement("timetable-display-options").Current.IsOffscreen, "Display options are visible after scrolling the page to the top");
             CheckTimetableMenuAcrossClock(args[1], preferences);
+            ((ScrollPattern)WaitElement("page-scroller").GetCurrentPattern(ScrollPattern.Pattern)).SetScrollPercent(ScrollPattern.NoScroll, 0);
             AutomationElement? lesson = null;
             Wait(() => (lesson = FindLessons("架空科目甲").FirstOrDefault()) is not null && !lesson.Current.IsOffscreen && lesson.Current.IsEnabled, "lesson is visible after navigation");
             var periodBounds = WaitElement("timetable-period-label-1").Current.BoundingRectangle;
