@@ -51,7 +51,15 @@ internal static partial class Program
                 void Open(string subject)
                 {
                     AutomationElement[] lessons = [];
-                    try { Wait(() => (lessons=FindLessons(subject)).Length > 0, "The accepted row is rendered for " + surface); }
+                    AutomationElement[] ExactSubjectRows() => _window?.FindAll(TreeScope.Descendants,
+                        new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button)).Cast<AutomationElement>()
+                        .Where(button => button.Current.Name.Contains(subject,StringComparison.Ordinal) ||
+                            button.FindFirst(TreeScope.Descendants,new AndCondition(
+                                new PropertyCondition(AutomationElement.ControlTypeProperty,ControlType.Text),
+                                new PropertyCondition(AutomationElement.NameProperty,subject))) is not null).ToArray() ?? [];
+                    // Lesson cards display the short subject, while their accessible
+                    // name correctly follows the saved full-name mapping.
+                    try { Wait(() => (lessons=ExactSubjectRows()).Length > 0, "The accepted row is rendered for " + surface); }
                     catch
                     {
                         // Report the wholly fictional child before its guaranteed
@@ -59,7 +67,7 @@ internal static partial class Program
                         var saved = DetailStoreAsync(isolated).GetAwaiter().GetResult();
                         var preferences = new PreferencesStore(isolated).LoadAsync().GetAwaiter().GetResult();
                         var elements = _window?.FindAll(TreeScope.Descendants,Condition.TrueCondition).Cast<AutomationElement>()
-                            .Select(e => e.Current.ControlType.ProgrammaticName + ":" + e.Current.AutomationId + ":" + e.Current.Name)
+                            .Select(e => e.Current.ControlType.ProgrammaticName + ":" + e.Current.AutomationId + ":" + e.Current.Name.Replace('\r',' ').Replace('\n',' '))
                             .Where(name => !string.IsNullOrWhiteSpace(name)).Take(160).ToArray() ?? [];
                         Console.WriteLine($"Synthetic detail failure {surface}: expected={subject}; period={saved.Analysis.SchoolYear}/{saved.Analysis.Timetable?.Term}; classes={string.Join(',',preferences.SelectedClasses)}; formal={string.Join(',',saved.Analysis.Timetable?.Lessons.Select(l => l.ClassName+"/"+l.Weekday+"/"+l.Names.Subject) ?? [])}; current-week={Find("timetable-week-picker")?.Current.Name}; nodes={string.Join(" | ",elements)}");
                         throw;
