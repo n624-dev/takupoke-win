@@ -33,13 +33,19 @@ internal static partial class Program
     {
         var combo = WaitElement(id);
         if (combo.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll)) ((ScrollItemPattern)scroll).ScrollIntoView();
+        combo.SetFocus();
+        Wait(() => combo.Current.HasKeyboardFocus, id + " supports keyboard focus");
         ((ExpandCollapsePattern)combo.GetCurrentPattern(ExpandCollapsePattern.Pattern)).Expand();
-        AutomationElement? option = null;
-        Wait(() => (option = ByName(label, ControlType.ListItem))?.Current.IsEnabled == true,
+        Wait(() => ByName(label, ControlType.ListItem).Current.IsEnabled,
             id + " exposes the selected option");
-        option!.SetFocus();
-        Wait(() => option.Current.HasKeyboardFocus, id + " option supports keyboard focus");
-        System.Windows.Forms.SendKeys.SendWait("{ENTER}");
+        // UIA SetFocus on a popup item need not move the ComboBox's highlighted
+        // item. Exercise its standard keyboard selection from a known position.
+        var labels = id == "main-color"
+            ? UserPreferences.MainColors.Select(UserPreferences.MainColorLabel).ToArray()
+            : new[] { "アプリ内で開く", "既定のブラウザ" };
+        var index = Array.IndexOf(labels, label);
+        Require(index >= 0, "Requested keyboard option exists in its ordered list.");
+        System.Windows.Forms.SendKeys.SendWait("{HOME}" + string.Concat(Enumerable.Repeat("{DOWN}", index)) + "{ENTER}");
         Wait(() => saved() && Find(id)?.Current.IsEnabled == true,
             id + " keyboard selection is persisted: " + label);
     }

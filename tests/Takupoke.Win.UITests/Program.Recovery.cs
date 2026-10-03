@@ -63,7 +63,9 @@ internal static partial class Program
         var errors = RecoveryValidator.Validate(doc, result).Errors;
         if (errors.Count > 0) throw new InvalidOperationException("Synthetic recovery preview failed validation: " + string.Join(",", errors));
         var preview = new RecoveryPreview(source.Id, lease, doc, result, now);
-        await store.SaveRecoveryProgressAsync(lease, source, new(hash, RecoveryDocumentKind.Timetable, RecoveryJobState.AwaitingConfirmation, now, RecoveryValidator.Fingerprint(result)), preview);
+        var job = new RecoveryJob(hash, RecoveryDocumentKind.Timetable, RecoveryJobState.Pending, now);
+        await store.WriteAsync(lease, "recovery.Timetable", job);
+        await store.SaveRecoveryProgressAsync(lease, source, job with { State = RecoveryJobState.AwaitingConfirmation, ResultHash = RecoveryValidator.Fingerprint(result) }, preview);
         return hash;
     }
     private static async Task<MaterialAnalysis?> RecoveryUiFormalAsync(string root, MaterialKind kind = MaterialKind.Timetable)
@@ -94,7 +96,9 @@ internal static partial class Program
         var doc = fixture.Document with { PdfHash = hash }; var result = fixture.Result with { PdfHash = hash };
         var errors = RecoveryValidator.Validate(doc, result).Errors;
         if (errors.Count > 0) throw new InvalidOperationException("Synthetic special recovery preview failed validation: " + string.Join(",", errors));
-        await store.SaveRecoveryProgressAsync(lease, source, new(hash, doc.Kind, RecoveryJobState.AwaitingConfirmation, now, RecoveryValidator.Fingerprint(result)), new(source.Id, lease, doc, result, now));
+        var job = new RecoveryJob(hash, doc.Kind, RecoveryJobState.Pending, now);
+        await store.WriteAsync(lease, "recovery." + kind, job);
+        await store.SaveRecoveryProgressAsync(lease, source, job with { State = RecoveryJobState.AwaitingConfirmation, ResultHash = RecoveryValidator.Fingerprint(result) }, new(source.Id, lease, doc, result, now));
     }
     private static void CheckRecoverySpecialUi(string executable, string root, MaterialKind kind)
     {
