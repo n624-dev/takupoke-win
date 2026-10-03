@@ -55,8 +55,7 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
         bool IsRule((double X, double Y) a, (double X, double Y) b)
         {
             ConsumePaintWork();
-            return Math.Abs(a.X - b.X) < .2 && Math.Abs(a.Y - b.Y) > .1 ||
-                Math.Abs(a.Y - b.Y) < .2 && Math.Abs(a.X - b.X) > .1;
+            return a.X == b.X && a.Y != b.Y || a.Y == b.Y && a.X != b.X;
         }
         for (var index = 0; index < _paths.Count; index++)
         {

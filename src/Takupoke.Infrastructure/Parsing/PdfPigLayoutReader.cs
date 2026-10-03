@@ -158,8 +158,14 @@ public static class PdfPigLayoutReader
         private void CheckStroke(int page, PdfPathEngine paths, bool closeLast)
         {
             var origin = _state.Ctm.Point(0, 0); var x = _state.Ctm.Point(1, 0); var y = _state.Ctm.Point(0, 1);
-            var scale = Math.Max(Math.Sqrt(Math.Pow(x.X - origin.X, 2) + Math.Pow(x.Y - origin.Y, 2)), Math.Sqrt(Math.Pow(y.X - origin.X, 2) + Math.Pow(y.Y - origin.Y, 2)));
-            if (!_state.StrokeBlack || !double.IsFinite(scale) || _state.LineWidth * scale > 2 || !paths.PendingStrokeIsRules(closeLast)) throw new PdfParseException("P01", page);
+            var xx = x.X - origin.X; var xy = x.Y - origin.Y; var yx = y.X - origin.X; var yy = y.Y - origin.Y;
+            var xLength = xx * xx + xy * xy; var yLength = yx * yx + yy * yy; var scale = Math.Sqrt(Math.Max(xLength, yLength));
+            // Under a similarity transform, right-angle grid joins remain
+            // right angles and their painted miter fits the collision margin.
+            // Shear/nonuniform scaling can hide a much longer original miter.
+            var tolerance = Math.Max(xLength, yLength) * 1e-12;
+            if (!_state.StrokeBlack || !double.IsFinite(scale) || scale <= 0 || Math.Abs(xLength - yLength) > tolerance || Math.Abs(xx * yx + xy * yy) > tolerance
+                || _state.LineWidth * scale > 2 || !paths.PendingStrokeIsRules(closeLast)) throw new PdfParseException("P01", page);
         }
         public void SetLineWidth(double width, int page)
         {
