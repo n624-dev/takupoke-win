@@ -8,8 +8,8 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class PdfScheduleParser
 {
-    public const int TimetableVersion = 21;
-    public const int SpecialVersion = 20;
+    public const int TimetableVersion = 22;
+    public const int SpecialVersion = 21;
     private const int MaximumRecords = 10000;
     private static string Joined(IEnumerable<PdfGlyph> glyphs) => string.Concat(glyphs.Select(g => g.Text));
     private static string Heading(PdfPageLayout page, double fraction) => string.Concat(PdfGrid.Rows(page.Glyphs.Where(g => g.Cy < page.Height * fraction)).Select(Joined));
@@ -28,14 +28,33 @@ public static partial class PdfScheduleParser
                 ? original : PdfGrid.Key(original));
         }
         var raw = rawBuilder.ToString();
-        foreach (Match label in Regex.Matches(raw, @"令和([^年度]*)年度|(?<!\p{N})(\p{N}+)年度"))
+        void CheckLabel(string originalDigits, bool eraLabel)
         {
-            var eraLabel = label.Groups[1].Success;
-            var digits = PdfGrid.Key(label.Groups[eraLabel ? 1 : 2].Value);
+            var digits = PdfGrid.Key(originalDigits);
             if (!Regex.IsMatch(digits, "^[0-9]+$") || !int.TryParse(digits, out var number) ||
                 (eraLabel ? number is < 1 or > 99 : number is < 1900 or > 9998)) throw new PdfParseException("P03", page);
-            var value = eraLabel ? 2018 + number : number;
-            if (value != year) throw new PdfParseException("P03", page);
+            if ((eraLabel ? 2018 + number : number) != year) throw new PdfParseException("P03", page);
+        }
+        foreach (Match label in Regex.Matches(raw, @"令和([^年度]*)年度")) CheckLabel(label.Groups[1].Value, true);
+        // .NET regex numeric classes inspect UTF-16 units. Scan Unicode scalars
+        // so supplementary-plane numeric year labels cannot disappear here.
+        var numeric = new StringBuilder(); var offset = 0; var numericStart = 0;
+        foreach (var scalar in raw.EnumerateRunes())
+        {
+            var category = Rune.GetUnicodeCategory(scalar);
+            if (category is UnicodeCategory.DecimalDigitNumber or UnicodeCategory.LetterNumber or UnicodeCategory.OtherNumber)
+            {
+                if (numeric.Length == 0) numericStart = offset;
+                numeric.Append(scalar.ToString());
+            }
+            else
+            {
+                if (numeric.Length > 0 && raw.AsSpan(offset).StartsWith("年度", StringComparison.Ordinal) &&
+                    !(numericStart >= 2 && raw.AsSpan(numericStart - 2, 2).SequenceEqual("令和")))
+                    CheckLabel(numeric.ToString(), false);
+                numeric.Clear();
+            }
+            offset += scalar.Utf16SequenceLength;
         }
         return year;
     }

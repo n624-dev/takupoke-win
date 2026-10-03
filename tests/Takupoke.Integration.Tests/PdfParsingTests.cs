@@ -105,6 +105,7 @@ public sealed class PdfParsingTests
     [InlineData("令和14年度令和௰年度前期時間割")]
     [InlineData("令和14年度ⅯⅯⅩⅩⅦ年度前期時間割")]
     [InlineData("令和14年度令和15年度前期時間割")]
+    [InlineData("令和14年度𝟚𝟘𝟛𝟙年度前期時間割")]
     [InlineData("令和14年度㋿15年度前期時間割")]
     [InlineData("令和14年度令和Ⅸ年度前期時間割")]
     public void ConflictingTitleYearsCannotSelectTheFirstYear(string heading)
@@ -117,6 +118,7 @@ public sealed class PdfParsingTests
     [InlineData("令和14年度令和14年度前期時間割")]
     [InlineData("令和14年度2032年度前期時間割")]
     [InlineData("㋿14年度２０３２年度前期時間割")]
+    [InlineData("令和14年度𝟚𝟘𝟛𝟚年度前期時間割")]
     [InlineData("令 和 １ ４ 年 度 ２ ０ ３ ２ 年 度 前期時間割")]
     public void RepeatedOrEquivalentTitleYearsRemainValid(string heading)
     {
