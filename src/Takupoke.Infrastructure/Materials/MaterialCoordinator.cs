@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using Takupoke.Core;
+using Takupoke.Core.Recovery;
 using Takupoke.Infrastructure.Parsing;
 using Takupoke.Infrastructure.Storage;
 
@@ -83,7 +84,10 @@ public sealed class MaterialCoordinator(SchoolDataStore store, FileSourceReader 
         catch (OperationCanceledException) { throw; }
         catch (PdfParseException error)
         {
-            await store.WriteAsync(lease, "attempt." + source.Kind, new MaterialAttempt(now, error.Stage, true, source.Digest, year, ParserVersion: ParserVersion(source.Kind), Page: error.Page, Cell: error.Cell), token);
+            var eligible = RecoveryPolicy.Eligible(source.Kind, error.Stage);
+            var attempt = new MaterialAttempt(now, error.Stage, true, source.Digest, year, ParserVersion: ParserVersion(source.Kind), Page: error.Page, Cell: error.Cell, RecoveryPending: eligible);
+            var job = eligible ? new RecoveryJob(source.Digest, RecoveryPolicy.Kind(source.Kind)!.Value, RecoveryJobState.Pending, now) : null;
+            await store.SavePdfFailureAsync(lease, source, attempt, job, token);
             await store.CollectOriginalsAsync(lease, token);
             return new(source.Kind, changed, false, error.Message);
         }

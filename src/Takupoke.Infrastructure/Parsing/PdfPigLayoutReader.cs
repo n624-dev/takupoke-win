@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Text;
 using Takupoke.Core;
+using Takupoke.Core.Recovery;
 using UglyToad.PdfPig;
 using UglyToad.PdfPig.Content;
 using UglyToad.PdfPig.Graphics.Operations;
@@ -14,21 +15,25 @@ namespace Takupoke.Infrastructure.Parsing;
 /// <summary>Opens bytes locally. Ordinary timetables use a separate, strict drawing interpreter and verify its text against PdfPig.</summary>
 public static class PdfPigLayoutReader
 {
-    public static IReadOnlyList<PdfPageLayout> Read(byte[] bytes, MaterialKind kind, CancellationToken token = default)
+    public static IReadOnlyList<PdfPageLayout> Read(byte[] bytes, MaterialKind kind, CancellationToken token = default, RecoveryReadCapture? capture = null)
     {
-        if (bytes.Length is < 1 or > 50 * 1024 * 1024 || !bytes.AsSpan(0, Math.Min(bytes.Length, 5)).SequenceEqual("%PDF-"u8) || kind == MaterialKind.Changes) throw new PdfParseException("P04");
+        capture?.Reset();
+        if (bytes.Length is < 1 or > 50 * 1024 * 1024 || !bytes.AsSpan(0, Math.Min(bytes.Length, 5)).SequenceEqual("%PDF-"u8) || kind == MaterialKind.Changes) throw new PdfParseException("unreadable");
         try
         {
             token.ThrowIfCancellationRequested();
             using var document = PdfDocument.Open(bytes, new ParsingOptions { UseLenientParsing = false, SkipMissingFonts = false, MaxStackDepth = 64, UseActualText = false });
-            if (document.IsEncrypted || document.NumberOfPages is < 1 or > 12) throw new PdfParseException("P04");
+            if (document.IsEncrypted || document.NumberOfPages < 1) throw new PdfParseException("unreadable");
+            if (document.NumberOfPages > 12) throw new PdfParseException("limit");
+            capture?.Begin(document.NumberOfPages);
             var output = new List<PdfPageLayout>();
             for (var number = 1; number <= document.NumberOfPages; number++)
             {
                 token.ThrowIfCancellationRequested();
                 var page = document.GetPage(number); var media = page.MediaBox.Bounds;
                 if (page.Rotation.Value is not 0 and not 90 and not 180 and not 270) throw new PdfParseException("P02", number);
-                if (page.Operations.Count > 1_000_000 || page.Letters.Count is < 1 or > 100000 || page.Text.Length > 100000) throw new PdfParseException("limit", number);
+                if (page.Operations.Count > 1_000_000 || page.Letters.Count > 100000 || page.Text.Length > 100000) throw new PdfParseException("limit", number);
+                if (page.Letters.Count == 0) throw new PdfParseException("raster", number);
                 var transform = new PdfDisplayTransform(media.Left, media.Bottom, media.Width, media.Height, page.Rotation.Value);
                 var paths = new PdfPathEngine(transform, token);
                 var text = kind == MaterialKind.Timetable ? new PdfTextEngine(token) : null;
@@ -73,13 +78,16 @@ public static class PdfPigLayoutReader
                     }
                 }
                 IReadOnlyList<PdfGlyph> glyphs = text is not null ? text.Finish(page.Text).Select(transform.Glyph).ToArray() : SpecialGlyphs(page, transform, token);
-                var layout = new PdfPageLayout(transform.Width, transform.Height, glyphs, paths.Finish()); layout.Validate(number); output.Add(layout);
+                capture?.Record(number, RecoveryInputState.Partial, new PdfPageLayout(transform.Width, transform.Height, glyphs, []));
+                var layout = new PdfPageLayout(transform.Width, transform.Height, glyphs, paths.Finish());
+                capture?.Record(number, glyphs.Count == 0 ? RecoveryInputState.RasterOnly : RecoveryInputState.Complete, layout);
+                layout.Validate(number); output.Add(layout);
             }
-            return output;
+            capture?.Finish(); return output;
         }
         catch (PdfParseException) { throw; }
         catch (OperationCanceledException) { throw; }
-        catch { throw new PdfParseException("P01"); }
+        catch { throw new PdfParseException("unreadable"); }
     }
     private static byte[] Bytes(string? literal, ReadOnlyMemory<byte> bytes)
     { if (literal is null) return bytes.ToArray(); if (literal.Any(c => c > 255)) throw new PdfParseException("P01"); return Encoding.Latin1.GetBytes(literal); }

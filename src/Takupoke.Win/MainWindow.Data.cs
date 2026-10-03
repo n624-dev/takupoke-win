@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Takupoke.Core;
+using Takupoke.Core.Recovery;
 using Takupoke.Infrastructure.Api;
 using Takupoke.Infrastructure.Materials;
 using Takupoke.Infrastructure.Parsing;
@@ -35,8 +36,10 @@ public sealed partial class MainWindow
             attempts.Children.Add(DataField("最終取得の試行 · " + DisplayDateTime(acquisition.At), acquisition.Failure ?? "取得済み"));
         if (snapshot?.ParseAttempt is { } attempt)
         {
+            if (attempt.RecoveryPending && attempt.SourceDigest == source?.Digest)
+                attempts.Children.Add(SettingsDescription("端末内AIによる復旧待ちです。新しい資料をまだ反映できていません。前回の正常結果を保持しています。"));
             attempts.Children.Add(DataField("最終解析の試行 · " + DisplayDateTime(attempt.At), attempt.Failure is { } failure
-                ? failure.StartsWith('P') ? new PdfParseException(failure, attempt.Page, attempt.Cell).Message : failure : "解析済み"));
+                ? kind != MaterialKind.Changes ? new PdfParseException(failure, attempt.Page, attempt.Cell).Message : failure : "解析済み"));
             if (attempt.ChangeError is ChangeErrorCode.FormulaCache or ChangeErrorCode.WeekdayMismatch)
                 attempts.Children.Add(Button("警告を確認して内容を見る", PreviewChanges, "preview-changes"));
         }
@@ -46,6 +49,12 @@ public sealed partial class MainWindow
         {
             attempts.Children.Add(OperationButton("同じファイルを再取得", () => _model.ReacquireAsync(kind), "reacquire-" + kind));
             attempts.Children.Add(OperationButton("保存した原本を再解析", () => _model.ReparseAsync(kind), "reparse-" + kind));
+            if (kind != MaterialKind.Changes && snapshot?.ParseAttempt?.RecoveryPending == true && snapshot.ParseAttempt.SourceDigest == source.Digest)
+            {
+                attempts.Children.Add(OperationButton("端末内でPDFを復旧", async () => { await _model.PrepareRecoveryAsync(kind); if (_model.Materials.GetValueOrDefault(kind)?.RecoveryPreview is not null) await OpenPage("recovery." + kind); }, "recover-pdf-" + kind));
+                if (snapshot.RecoveryPreview is not null) attempts.Children.Add(Button("復旧した内容を確認", () => OpenPage("recovery." + kind), "recovery-preview-" + kind));
+                attempts.Children.Add(Button("端末内モデルを管理", () => OpenPage("ai-models"), "recovery-models-" + kind));
+            }
             if (kind != MaterialKind.Changes) attempts.Children.Add(Button("保存済みのPDFを見る", () => ShowPdf(kind, false), "view-pdf-" + kind));
         }
         Add(Card(attempts));
@@ -73,6 +82,7 @@ public sealed partial class MainWindow
         }
         results.Children.Add(Button("解析結果を確認", () => ShowAnalysis(kind), "analysis-" + kind));
         if (kind != MaterialKind.Changes && source?.Id != analysis.OriginalId) results.Children.Add(Button("正常結果に対応する保存PDFを見る", () => ShowPdf(kind, true)));
+        if (analysis.Recovery is { } recovery) results.Children.Add(TechnicalDetails(DataField("端末内復旧", recovery.Result.Metadata.Provider), DataField("モデル", recovery.Result.Metadata.ModelId + " · " + recovery.Result.Metadata.ModelVersion), DataField("確認日時", DisplayDateTime(recovery.Acceptance.AcceptedAt))));
         results.Children.Add(TechnicalDetails(DataField("解析版", analysis.ParserVersion.ToString())));
         Add(Card(results));
     }

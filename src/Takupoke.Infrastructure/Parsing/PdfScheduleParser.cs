@@ -7,8 +7,8 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class PdfScheduleParser
 {
-    public const int TimetableVersion = 8;
-    public const int SpecialVersion = 6;
+    public const int TimetableVersion = 10;
+    public const int SpecialVersion = 8;
     private const int MaximumRecords = 10000;
     private static string Joined(IEnumerable<PdfGlyph> glyphs) => string.Concat(glyphs.Select(g => g.Text));
     private static string Heading(PdfPageLayout page, double fraction) => PdfGrid.Key(string.Concat(PdfGrid.Rows(page.Glyphs.Where(g => g.Cy < page.Height * fraction)).Select(Joined)));
@@ -34,6 +34,8 @@ public static partial class PdfScheduleParser
         var first = grid.Box(header[0].Cx, header[0].Cy); var classBox = grid.Box(first.Left - 2, first.Bottom + 20);
         var bodyBottom = page.Lines.Where(l => l.Vertical && Math.Abs(l.X1 - classBox.Right) < 0.3).Select(l => l.Y2).DefaultIfEmpty(double.NaN).Max();
         if (!double.IsFinite(bodyBottom)) throw new PdfParseException("P06", 1);
+        var lastPeriodBox = grid.Box(header[^1].Cx, header[^1].Cy);
+        grid.SetLessonArea(new(first.Left, first.Bottom, lastPeriodBox.Right, bodyBottom));
         var classRows = PdfGrid.Rows(page.Glyphs.Where(g => classBox.Left < g.Cx && g.Cx < classBox.Right && g.Cy > first.Bottom && g.Cy < bodyBottom));
         var classes = new HashSet<string>(); var output = new List<NormalLesson>();
         foreach (var (glyphs, classIndex) in classRows.Select((glyphs, index) => (glyphs, index)))
@@ -53,11 +55,12 @@ public static partial class PdfScheduleParser
                     token.ThrowIfCancellationRequested();
                     var position = new PdfFailurePosition(classIndex + 1, column / 8 + 1, column % 8 + 1);
                     IReadOnlyList<string> lines;
-                    try { lines = grid.TimetableText(box); }
+                    try { lines = grid.LessonFields(box); }
                     catch (PdfParseException error) { throw new PdfParseException(error.Stage, 1, position); }
                     position = position with { DetectedLines = lines.Count };
                     if (lines.Count == 0) continue;
-                    if (lines.Count > 3 || lines[0].Length == 0) throw new PdfParseException("P17", 1, position);
+                    if (lines.Count != 3 || lines[0].Length == 0) throw new PdfParseException("P17", 1, position);
+                    if (lines.Any(l => Regex.IsMatch(PdfGrid.Key(l), "^(?:科目|授業科目|科目名|教員|担当|教師|教室|授業教室|場所)[：:]"))) throw new PdfParseException("P17", 1, position);
                     var fields = lines.Concat(Enumerable.Repeat("", 3 - lines.Count)).ToArray();
                     var parts = fields.Select(f => f.Replace('･', '・').Split('・')).ToArray();
                     var parallel = lines.Count == 3 && parts.All(p => p.Length == 2);
@@ -151,9 +154,10 @@ public static partial class PdfScheduleParser
     }
     private static SpecialLesson? SpecialCell(PdfGrid grid, PdfBox box, DateOnly day, string cls, int period, double[] xs, PdfTimes times, int page)
     {
-        var lines = grid.TimetableText(box).Select(l => l.Trim()).Where(l => l.Length > 0).ToArray();
-        if (lines.Length > 8 || lines.Sum(l => Encoding.UTF8.GetByteCount(l)) > 4096) throw new PdfParseException("P17", page);
+        var lines = grid.LessonFields(box).Select(l => l.Trim()).ToArray();
+        if (lines.Length > 0 && lines.Length != 3 || lines.Sum(l => Encoding.UTF8.GetByteCount(l)) > 4096) throw new PdfParseException("P17", page);
         if (lines.Length == 0) return null;
+        if (lines.Any(l => Regex.IsMatch(PdfGrid.Key(l), "^(?:科目|授業科目|科目名|教員|担当|教師|教室|授業教室|場所)[：:]"))) throw new PdfParseException("P17", page);
         var covered = xs.Select((x, i) => (x, i)).Where(p => box.Left + 0.5 < p.x && p.x < box.Right - 0.5).Select(p => p.i + 1).ToArray();
         if (covered.Length == 0 || !covered.Contains(period)) throw new PdfParseException("P08", page);
         var first = covered[0]; var last = covered[^1];

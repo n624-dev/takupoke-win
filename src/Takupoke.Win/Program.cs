@@ -14,6 +14,11 @@ public static class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        if (!OperatingSystem.IsWindowsVersionAtLeast(10, 0, 26100))
+        {
+            MessageBoxW(IntPtr.Zero, "たくポケにはWindows 11 24H2（build 26100）以降が必要です。", "たくポケ", 0x10);
+            return;
+        }
         WinRT.ComWrappersSupport.InitializeComWrappers();
         if (args is ["--unregister"])
         {
@@ -48,5 +53,7 @@ public static class Program
             _ = new App();
         });
     }
+    [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Unicode)]
+    private static extern int MessageBoxW(IntPtr window, string text, string caption, uint type);
     internal static void DrainCallbacks() { while (Pending.TryDequeue(out var uri)) ProtocolCallback?.Invoke(uri); }
 }

@@ -1,7 +1,10 @@
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.Data.Sqlite;
 using Takupoke.Core;
+using Takupoke.Core.Recovery;
 using Takupoke.Infrastructure.Storage;
 using Xunit;
 
@@ -104,6 +107,89 @@ public sealed class SchoolDataStoreTests : IAsyncLifetime
         Assert.Throws<AuthenticationTagMismatchException>(() => cipher.Decrypt(encrypted, "record-b"));
         encrypted[^1] ^= 1;
         Assert.Throws<AuthenticationTagMismatchException>(() => cipher.Decrypt(encrypted, "record-a"));
+    }
+    [Fact]
+    public async Task PendingFailureAndJobCommitTogetherAndNewSourceInvalidatesJob()
+    {
+        await using var store = Store(); var lease = await store.BeginAsync(); var bytes = "%PDF-synthetic-recovery"u8.ToArray(); var source = Source("recovery", bytes);
+        await store.SaveOriginalAsync(lease, source, bytes);
+        var attempt = new MaterialAttempt(_clock.Now, "P08", true, source.Digest, 2032, ParserVersion: 1, RecoveryPending: true);
+        var job = new RecoveryJob(source.Digest, RecoveryDocumentKind.Timetable, RecoveryJobState.Pending, _clock.Now);
+        await store.SavePdfFailureAsync(lease, source, attempt, job);
+        Assert.True((await store.ReadAsync<MaterialAttempt>(lease, "attempt.Timetable"))!.RecoveryPending);
+        Assert.Equal(source.Digest, (await store.ReadAsync<RecoveryJob>(lease, "recovery.Timetable"))!.PdfHash);
+        using var cancelled = new CancellationTokenSource(); cancelled.Cancel();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => store.SavePdfFailureAsync(lease, source, attempt with { Failure = "limit", RecoveryPending = false }, null, cancelled.Token));
+        Assert.NotNull(await store.ReadAsync<RecoveryJob>(lease, "recovery.Timetable"));
+        await store.SavePdfFailureAsync(lease, source, attempt with { Failure = "limit", RecoveryPending = false }, null);
+        Assert.Null(await store.ReadAsync<RecoveryJob>(lease, "recovery.Timetable"));
+        await store.SavePdfFailureAsync(lease, source, attempt, job);
+        var nextBytes = "%PDF-synthetic-new"u8.ToArray(); await store.SaveOriginalAsync(lease, Source("next", nextBytes), nextBytes);
+        Assert.Null(await store.ReadAsync<RecoveryJob>(lease, "recovery.Timetable"));
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => store.SavePdfFailureAsync(lease, source, attempt, job));
+    }
+    [Fact]
+    public async Task SameHashReselectionInvalidatesFailureCacheBeforeAReplacementParseStarts()
+    {
+        await using var store = Store(); var lease = await store.BeginAsync();
+        var bytes = "%PDF-synthetic-same-hash"u8.ToArray(); var first = Source("same-first", bytes);
+        await store.SaveOriginalAsync(lease, first, bytes);
+        var attempt = new MaterialAttempt(_clock.Now, "P08", true, first.Digest, 2032, ParserVersion: 1, RecoveryPending: true);
+        await store.SavePdfFailureAsync(lease, first, attempt,
+            new RecoveryJob(first.Digest, RecoveryDocumentKind.Timetable, RecoveryJobState.Pending, _clock.Now));
+        var second = Source("same-second", bytes);
+        await store.SaveOriginalAsync(lease, second, bytes);
+        // This is the persisted boundary when cancellation occurs before parsing.
+        Assert.Equal(second.Id, (await store.ReadAsync<SourceRecord>(lease, "selection.Timetable"))!.Id);
+        Assert.Null(await store.ReadAsync<MaterialAttempt>(lease, "attempt.Timetable"));
+        Assert.Null(await store.ReadAsync<RecoveryJob>(lease, "recovery.Timetable"));
+        Assert.Equal(bytes, await store.ReadOriginalAsync(lease, second.Id));
+    }
+
+    private sealed record RecoveryFixture(RecoveryDocument Document, RecoveryResult Result);
+    private async Task<(SchoolLease Lease, SourceRecord Source, RecoveryAudit Audit)> AwaitingRecoveryAsync(SchoolDataStore store)
+    {
+        var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) } };
+        var fixture = JsonSerializer.Deserialize<RecoveryFixture>(await File.ReadAllTextAsync(Path.Combine(AppContext.BaseDirectory, "fixtures", "recovery-exam.json")), options)!;
+        var lease = await store.BeginAsync(); var bytes = "%PDF-synthetic-adoption"u8.ToArray(); var source = Source("recovery-adopt", bytes) with { Kind = MaterialKind.Exam };
+        var doc = fixture.Document with { PdfHash = source.Digest }; var result = fixture.Result with { PdfHash = source.Digest };
+        var audit = new RecoveryAudit(doc, result, new(source.Digest, RecoveryValidator.Fingerprint(result), RecoveryValidator.Fingerprint(doc), result.Metadata, _clock.Now));
+        await store.SaveOriginalAsync(lease, source, bytes);
+        await store.SavePdfFailureAsync(lease, source, new(_clock.Now, "P08", true, source.Digest, 2026, ParserVersion: 1, RecoveryPending: true), new(source.Digest, doc.Kind, RecoveryJobState.Pending, _clock.Now));
+        await store.SaveRecoveryProgressAsync(lease, source, new(source.Digest, doc.Kind, RecoveryJobState.AwaitingConfirmation, _clock.Now, ResultHash: RecoveryValidator.Fingerprint(result)), new(source.Id, lease, doc, result, _clock.Now));
+        return (lease, source, audit);
+    }
+    [Fact] public async Task RecoveryAdoptionCommitsFormalAuditAcceptanceAndClearsPendingTogether()
+    {
+        await using var store = Store(); var (lease, source, audit) = await AwaitingRecoveryAsync(store);
+        var preview = (await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Exam"))!;
+        var job = (await store.ReadAsync<RecoveryJob>(lease, "recovery.Exam"))!;
+        Assert.Equal(lease, preview.Lease); Assert.Equal(source.Id, preview.SourceId); Assert.Equal(RecoveryValidator.Fingerprint(audit.Result), job.ResultHash);
+        Assert.Equal(RecoveryValidator.Fingerprint(audit.Document), RecoveryValidator.Fingerprint(preview.Document)); Assert.Equal(RecoveryValidator.Fingerprint(audit.Result), RecoveryValidator.Fingerprint(preview.Result));
+        await store.SaveRecoveryAsync(lease, source, audit, _clock.Now);
+        var formal = await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"); Assert.Equal(source.Digest, formal!.SourceDigest); Assert.Equal(audit.Acceptance, formal.Recovery!.Acceptance);
+        Assert.NotNull(await store.ReadAsync<RecoveryAudit>(lease, "recovery.accepted.Exam." + source.Digest));
+        Assert.Null(await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Exam")); Assert.Null(await store.ReadAsync<RecoveryJob>(lease, "recovery.Exam"));
+        Assert.Null((await store.ReadAsync<MaterialAttempt>(lease, "attempt.Exam"))!.Failure);
+    }
+    [Fact] public async Task StrictSuccessInvalidatesOldPreviewAndCannotBeOverwrittenByRecovery()
+    {
+        await using var store = Store(); var (lease, source, audit) = await AwaitingRecoveryAsync(store);
+        var strict = Takupoke.Infrastructure.Recovery.RecoveryAnalysisConverter.Convert(source, audit.Document, audit.Result, _clock.Now);
+        await store.SaveAnalysisAsync(lease, strict);
+        Assert.Null(await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Exam"));
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => store.SaveRecoveryAsync(lease, source, audit, _clock.Now));
+        Assert.Null((await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"))!.Recovery);
+    }
+    [Fact] public async Task CancelledAdoptionPreservesPreviewAndSelectionChangeRejectsIt()
+    {
+        await using var store = Store(); var (lease, source, audit) = await AwaitingRecoveryAsync(store);
+        using var cancellation = new CancellationTokenSource(); cancellation.Cancel();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => store.SaveRecoveryAsync(lease, source, audit, _clock.Now, cancellation.Token));
+        Assert.NotNull(await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Exam")); Assert.Null(await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"));
+        var bytes = "%PDF-synthetic-reselected"u8.ToArray(); await store.SaveOriginalAsync(lease, Source("replacement", bytes) with { Kind = MaterialKind.Exam }, bytes);
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => store.SaveRecoveryAsync(lease, source, audit, _clock.Now));
+        Assert.Null(await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"));
     }
     private SourceRecord Source(string id, byte[] bytes) => new(id, MaterialKind.Timetable, Path.Combine(_root, "fake.pdf"), "fake-identity", "架空資料A.pdf",
         NotificationDiff.Digest(bytes), bytes.Length, _clock.Now, _clock.Now, null);

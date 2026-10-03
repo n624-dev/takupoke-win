@@ -17,6 +17,7 @@ public sealed partial class MainWindow
         Add(SettingsSectionTitle("データ"));
         Add(SettingsGroup(
             SettingsRow("時間割ファイル", () => OpenPage("materials"), "settings-materials"),
+            SettingsRow("端末内AIモデル", () => OpenPage("ai-models"), "settings-recovery-models"),
             SettingsRow("学校行事", () => OpenPage("events"), "settings-events"),
             SettingsRow("リンク・名称・授業時刻", () => OpenPage("account"), "settings-account",
                 _model.RevisionFailures.Count > 0 ? "要確認" : _model.Revisions.Values.Any(value => value.Changed) ? "更新あり" : null)));
@@ -120,6 +121,7 @@ public sealed partial class MainWindow
     {
         TitleText("時間割ファイル", "page-materials"); BackToSettings();
         foreach (var kind in Enum.GetValues<MaterialKind>()) Add(MaterialCard(kind));
+        Add(Button("端末内AIモデルを管理", () => OpenPage("ai-models"), "materials-recovery-models"));
         var year = PreferenceControl(new TextBox { Header = "学校年度", Text = _schoolYearDraft ?? _model.Preferences.DefaultSchoolYear ?? "", PlaceholderText = _model.Today.SchoolYear() + "（自動）", MaxWidth = 420, HorizontalAlignment = HorizontalAlignment.Stretch });
         AutomationProperties.SetAutomationId(year, "materials-school-year");
         year.TextChanged += (_, _) => _schoolYearDraft = year.Text;

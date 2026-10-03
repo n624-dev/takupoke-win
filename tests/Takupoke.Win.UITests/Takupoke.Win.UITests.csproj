@@ -8,5 +8,7 @@
   <ItemGroup>
     <Compile Include="../../src/Takupoke.Win/Platform/WindowsFileIdentity.cs" Link="WindowsFileIdentity.cs" />
     <ProjectReference Include="../../src/Takupoke.Infrastructure/Takupoke.Infrastructure.csproj" />
+    <Content Include="../Takupoke.Core.Tests/fixtures/recovery-exam.json" Link="fixtures/recovery-exam.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../Takupoke.Core.Tests/fixtures/recovery-return.json" Link="fixtures/recovery-return.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

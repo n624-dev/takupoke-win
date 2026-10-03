@@ -3,8 +3,10 @@ namespace Takupoke.Core;
 /// <summary>The school-data retention period, determined from the actual instant in Japan.</summary>
 public readonly record struct SchoolDataPeriod
 {
-    private SchoolDataPeriod(int schoolYear, int half)
+    [System.Text.Json.Serialization.JsonConstructor]
+    public SchoolDataPeriod(int schoolYear, int half)
     {
+        if (schoolYear is < 1900 or > 9998 || half is < 1 or > 2) throw new ArgumentOutOfRangeException(nameof(schoolYear));
         SchoolYear = schoolYear;
         Half = half;
     }

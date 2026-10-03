@@ -51,12 +51,12 @@ public static class LinkSearch
         var expanded = new List<string>();
         foreach (var term in terms.Split('|').Where(t => t.Length > 0))
         {
-            expanded.Add(term);
-            if (term.Any(c => c is >= '\u3041' and <= '\u3096'))
+            expanded.Add(Normalize(term));
+            if (Hiragana(term).Any(c => c is >= '\u3041' and <= '\u3096'))
             {
                 var roman = Normalize(Romaji(term));
                 expanded.Add(roman);
-                expanded.Add(roman.Replace("ou", "o").Replace("uu", "o").Replace("oo", "o"));
+                expanded.Add(roman.Replace("ou", "o").Replace("uu", "u").Replace("oo", "o"));
             }
         }
         var best = -1;

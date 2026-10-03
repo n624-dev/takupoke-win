@@ -69,6 +69,10 @@ internal static partial class Program
                 Capture(theme + "-settings-narrow"); Navigate("timetable"); Capture(theme + "-timetable-narrow");
             }
             finally { Stop(); }
+            SeedRecoveryUiAsync(root).GetAwaiter().GetResult();
+            Start(executable);
+            try { CaptureRecoveryUi(theme); }
+            finally { Stop(); }
         }
         foreach (var (theme, percent) in new[] { ("Light", 200), ("Dark", 150) })
         {
@@ -95,6 +99,7 @@ internal static partial class Program
                 Require(SetWindowPos(_process!.MainWindowHandle, 0, (int)window.Left, (int)window.Top, 680, 680, 0x0044), "Resize the enlarged review window");
                 Navigate("settings"); Capture(theme + "-" + percent + "-settings-narrow");
                 Navigate("timetable"); Capture(theme + "-" + percent + "-timetable-narrow");
+                OpenRecoveryUiPreview(); Capture(theme + "-" + percent + "-recovery-narrow");
             }
             finally { Stop(); }
         }

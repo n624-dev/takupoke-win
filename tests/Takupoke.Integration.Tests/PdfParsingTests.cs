@@ -75,6 +75,26 @@ public sealed class PdfParsingTests
         Assert.Equal("1_CN", analysis.Lessons[0].ClassName);
     }
     [Fact]
+    public void TimetableCannotShiftRoomIntoMissingTeacher()
+    {
+        var page = TimetableLayout("架空科目", "架空教員", "架空教室");
+        page = page with { Glyphs = page.Glyphs.Where(g => g.Text != "架空教員").ToArray() };
+        Assert.Equal("P17", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Timetable([page])).Stage);
+    }
+    [Fact] public void ShortCellCalibrationPreservesTeacherHoleAndRejectsTeacherOnlyEvenWithOutsideAnnotation()
+    {
+        PdfGrid Grid(bool teacherOnly)
+        {
+            var glyphs = new List<PdfGlyph> { new("基準科目", 110, 5, 20, 4), new("基準教員", 110, 15, 20, 4), new("基準教室", 110, 25, 20, 4),
+                new("注記一", 210, 15, 20, 4), new("注記二", 210, 25, 20, 4), new("注記三", 210, 35, 20, 4) };
+            if (teacherOnly) glyphs.Add(new("教員だけ", 10, 15, 20, 4)); else { glyphs.Add(new("科目だけ", 10, 5, 20, 4)); glyphs.Add(new("教室あり", 10, 25, 20, 4)); }
+            var grid = new PdfGrid(new(300, 100, glyphs, [new(0, 0, 300, 0), new(0, 100, 300, 100), new(0, 0, 0, 100), new(100, 0, 100, 100), new(200, 0, 200, 100), new(300, 0, 300, 100)]));
+            grid.SetLessonArea(new(0, 0, 200, 100)); return grid;
+        }
+        Assert.Equal(new[] { "科目だけ", "", "教室あり" }, Grid(false).LessonFields(new(0, 0, 100, 100)));
+        Assert.Equal("P17", Assert.Throws<PdfParseException>(() => Grid(true).LessonFields(new(0, 0, 100, 100))).Stage);
+    }
+    [Fact]
     public void TimetableRejectsAmbiguousParallelPairing()
     {
         Assert.Equal("P18", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Timetable([TimetableLayout("科A・科B", "教A・教B", "室A")])).Stage);
@@ -104,6 +124,21 @@ public sealed class PdfParsingTests
     {
         Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(SyntheticPdf(removeMapping: true), MaterialKind.Timetable));
         Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(SyntheticPdf(formObject: true), MaterialKind.Timetable));
+    }
+    [Fact] public void ReaderCaptureKeepsCompleteLayoutAndResetsForAnotherAttempt()
+    {
+        var capture = new RecoveryReadCapture();
+        var pages = PdfPigLayoutReader.Read(SyntheticPdf(), MaterialKind.Timetable, capture: capture);
+        Assert.True(capture.Complete); Assert.Equal(pages[0].Glyphs, capture.Pages[0].Layout!.Glyphs);
+        Assert.Equal(pages[0].Lines, capture.Pages[0].Layout!.Lines);
+        Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read("invalid"u8.ToArray(), MaterialKind.Timetable, capture: capture));
+        Assert.False(capture.Complete); Assert.Empty(capture.Pages);
+    }
+    [Fact] public void ImageAndMissingRulesHaveRecoverableClassification()
+    {
+        Assert.Equal("raster", Assert.Throws<PdfParseException>(() => new PdfPageLayout(100, 100, [], []).Validate(1)).Stage);
+        Assert.Equal("P08", Assert.Throws<PdfParseException>(() => new PdfPageLayout(100, 100, [new("架", 10, 10, 10, 10)], []).Validate(1)).Stage);
+        Assert.Equal("limit", Assert.Throws<PdfParseException>(() => new PdfPageLayout(double.NaN, 100, [], []).Validate(1)).Stage);
     }
     private static PdfPageLayout TimetableLayout(string subject, string teacher, string room)
     {

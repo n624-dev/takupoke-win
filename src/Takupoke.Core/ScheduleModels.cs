@@ -78,10 +78,12 @@ public sealed record SpecialLesson(string Date, string ClassName, int Period, in
 public sealed record SpecialAnalysis(MaterialKind Kind, int SchoolYear, IReadOnlyList<string> CoveredDates,
     IReadOnlyList<string> CoveredClasses, IReadOnlyDictionary<int, TimeRange> PeriodTimes, IReadOnlyList<SpecialLesson> Lessons)
 {
+    public IReadOnlyDictionary<string, TimeRange>? DatePeriodTimes { get; init; }
     public bool Applies(DateOnly day, string className) => CoveredDates.Contains(day.Iso()) && CoveredClasses.Contains(className);
     public TimeRange? PeriodTime(DateOnly day, int period)
     {
         if (!CoveredDates.Contains(day.Iso())) return null;
+        if (DatePeriodTimes is not null) return DatePeriodTimes.GetValueOrDefault(day.Iso() + ":" + period);
         if (Kind == MaterialKind.ExamReturn && day.Iso() != CoveredDates.FirstOrDefault()) return ScheduleTimes.Normal.GetValueOrDefault(period);
         return PeriodTimes.GetValueOrDefault(period);
     }

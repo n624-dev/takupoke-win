@@ -1,6 +1,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using Takupoke.Core;
+using Takupoke.Core.Recovery;
+using Takupoke.Infrastructure.Recovery;
 using Takupoke.Infrastructure.Api;
 using Takupoke.Infrastructure.Authentication;
 using Takupoke.Infrastructure.Materials;
@@ -10,7 +12,7 @@ using Takupoke.Win.Platform;
 
 namespace Takupoke.Win.ViewModels;
 
-public sealed record MaterialSnapshot(SourceRecord? Source, MaterialAnalysis? Analysis, MaterialAttempt? ParseAttempt, MaterialAttempt? AcquisitionAttempt)
+public sealed record MaterialSnapshot(SourceRecord? Source, MaterialAnalysis? Analysis, MaterialAttempt? ParseAttempt, MaterialAttempt? AcquisitionAttempt, RecoveryJob? RecoveryJob = null, RecoveryPreview? RecoveryPreview = null)
 {
     public string AnalysisStatus(MaterialKind kind)
     {
@@ -36,6 +38,12 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private readonly ApiClient _api;
     private readonly SharedDataUpdater _shared;
     private readonly MaterialCoordinator _materials;
+    private readonly RecoveryCoordinator _recovery;
+    private readonly WindowsRecoveryModels _recoveryModels;
+    public bool OcrModelReady { get; private set; }
+    public string? RecoveryModelMessage { get; private set; }
+    public FoundryPinnedManifest? FoundryModel { get; private set; }
+    public IReadOnlyList<FoundryPinnedManifest> FoundryCandidates => FoundryPinnedModelStore.Candidates;
     private readonly SourceWatcher _watcher = new();
     private readonly BrowserAuthenticator _authentication;
     private readonly WindowsNotifications _notificationSink = new();
@@ -96,6 +104,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         _http = offline is not null ? new(offline) : ApiClient.CreateHttpClient();
         _school = new(Root, new WindowsDpapiProtector()); _preferences = new(Root); _events = new(Root);
         _api = new(_http); _shared = new(_api, _school); _materials = new(_school, new(new WindowsFileIdentity()));
+        _recoveryModels = new(Root);
+        _recovery = new(_school, _materials, new WindowsPdfRecovery(_recoveryModels).BuildAsync, _recoveryModels.ProvidersAsync);
         _authentication = new(new OidcClient(_http), offline is null ? null : offline.OpenBrowser);
         _authentication.ProgressChanged += value => OperationStatus = value;
         NavigationAnchor = Today; WeekStart = Today.DisplayWeekStart();
@@ -227,6 +237,36 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         var result = await _materials.ReparseAsync(kind, ParserYear, token); await ReloadAsync(token);
         Status = result.Error ?? "保存した資料を再解析しました。";
     });
+    public Task PrepareRecoveryAsync(MaterialKind kind) => RunAsync(async token =>
+    {
+        var result = await _recovery.PrepareAsync(kind, ParserYear, token); await ReloadAsync(token, notify: false); Status = result.Message;
+    }, "端末内でPDFの内容を復旧しています。");
+    public Task AdoptRecoveryAsync(MaterialKind kind, RecoveryPreview preview) => RunAsync(async token =>
+    {
+        await _recovery.AdoptAsync(kind, preview, token); await ReloadAsync(token); Status = "確認した復旧結果を保存しました。";
+    }, "確認した結果を保存しています。");
+    public Task InstallOcrModelAsync() => RunAsync(async token =>
+    {
+        await _recoveryModels.InstallOcrAsync((done, total) => _dispatcher.TryEnqueue(() => OperationStatus = $"日本語OCRモデルを取得しています（{done / 1024 / 1024} / {total / 1024 / 1024} MB）。"), token);
+        OcrModelReady = await _recoveryModels.OcrStateAsync(token) is not null; Status = "日本語OCRモデルを準備しました。資料の復旧を再度開始できます。";
+    }, "日本語OCRモデルを取得しています。学校資料は外部へ送信されません。");
+    public Task DeleteOcrModelAsync() => RunAsync(async token => { await _recoveryModels.DeleteOcrAsync(token); OcrModelReady = false; Status = "日本語OCRモデルを削除しました。"; });
+    public Task InstallFoundryModelAsync(FoundryPinnedManifest manifest) => RunAsync(async token =>
+    {
+        await _recoveryModels.Foundry.InstallAsync(manifest, progress => _dispatcher.TryEnqueue(() => OperationStatus = $"端末内AIモデルを取得しています（{progress:0}%）。"), token);
+        FoundryModel = await _recoveryModels.Foundry.ActiveAsync(token); Status = "端末内AIモデルを準備しました。PDFの復旧を再度開始できます。";
+    }, "端末内AIモデルを取得しています。学校資料は外部へ送信されません。");
+    public Task DeleteFoundryModelAsync() => RunAsync(async token => { await _recoveryModels.Foundry.DeleteAsync(token); FoundryModel = null; Status = "端末内AIモデルを削除しました。"; });
+    public async Task<byte[]> ReadRecoveryPdfAsync(MaterialKind kind, RecoveryPreview preview)
+    {
+        if (Locked) throw new OperationCanceledException();
+        var lease = await _school.BeginAsync(_session.Token); if (lease != preview.Lease) throw new OperationCanceledException();
+        var source = await _school.ReadAsync<SourceRecord>(lease, "selection." + kind, _session.Token);
+        if (source?.Id != preview.SourceId || source.Digest != preview.Document.PdfHash) throw new OperationCanceledException("確認中のPDFが更新されました。");
+        var bytes = await _school.ReadOriginalAsync(lease, preview.SourceId, _session.Token);
+        if (NotificationDiff.Digest(bytes) != preview.Document.PdfHash) { System.Security.Cryptography.CryptographicOperations.ZeroMemory(bytes); throw new InvalidDataException("原本のハッシュを確認できません。"); }
+        return bytes;
+    }
     public Task UpdateSharedAsync() => RunAsync(async token =>
     {
         SharedUpdateResults = []; SharedUpdateMessage = null;
@@ -300,15 +340,26 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         if (read.Failed) _eventReadFailures.Add(year); else _eventReadFailures.Remove(year);
         return read.Events;
     }
-    private async Task ReloadAsync(CancellationToken token)
+    private async Task ReloadAsync(CancellationToken token, bool notify = true)
     {
+        if (Locked) throw new OperationCanceledException();
         if (_displayPeriod is null || _displayPeriod != SchoolDataPeriod.FromInstant(DateTimeOffset.UtcNow))
             await _notifications.ClearAsync(token);
         var lease = await _school.BeginAsync(token);
+        token.ThrowIfCancellationRequested();
+        if (Locked) throw new OperationCanceledException();
+        // BeginAsync may intentionally clear a previous retention period. Capture
+        // the epoch after that transition, then reject later lock/period changes.
+        var epoch = PrivateEpoch;
         var snapshots = new Dictionary<MaterialKind, MaterialSnapshot>();
         foreach (var kind in Enum.GetValues<MaterialKind>()) snapshots[kind] = new(
             await _school.ReadAsync<SourceRecord>(lease, "selection." + kind, token), await _school.ReadAsync<MaterialAnalysis>(lease, "analysis." + kind, token),
-            await _school.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token), await _school.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, token));
+            await _school.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token), await _school.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, token),
+            await _school.ReadAsync<RecoveryJob>(lease, "recovery." + kind, token), await _school.ReadAsync<RecoveryPreview>(lease, "recovery.preview." + kind, token));
+        RecoveryModelMessage = null;
+        try { OcrModelReady = await _recoveryModels.OcrStateAsync(token) is not null; FoundryModel = await _recoveryModels.Foundry.ActiveAsync(token); }
+        catch (OperationCanceledException) { throw; }
+        catch { OcrModelReady = false; FoundryModel = null; RecoveryModelMessage = "保存したAIモデルの状態を確認できません。資料の正常な解析結果は引き続き利用できます。モデル管理から準備し直してください。"; }
         var mappingRecord = await _school.ReadAsync<SavedMapping>(lease, "api.mapping", token); var mappings = mappingRecord?.Rules;
         var linksRecord = await _school.ReadAsync<SavedLinks>(lease, "api.links", token); var links = linksRecord?.Payload.Validated();
         var timesRecord = await _school.ReadAsync<SavedTimes>(lease, "api.times", token); var times = timesRecord?.Data.Validated();
@@ -317,7 +368,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         var years = _events.SavedYears();
         foreach (var year in years) { var saved = await LoadEventsAsync(year, token); if (saved is not null) { eventRecords[year] = saved; events.AddRange(saved.Payload.Project()); } }
         token.ThrowIfCancellationRequested();
-        if (await _school.BeginAsync(token) != lease) throw new OperationCanceledException();
+        if (await _school.BeginAsync(token) != lease || Locked || epoch != PrivateEpoch) throw new OperationCanceledException();
         var timetable = snapshots[MaterialKind.Timetable].Analysis?.Timetable;
         if (timetable is not null && mappings is not null) timetable = timetable with { Lessons = timetable.Lessons.Select(l => l with { Names = mappings.Apply(l.Names, l.ClassName) }).ToArray() };
         MappingRecord = mappingRecord; LinksRecord = linksRecord; TimesRecord = timesRecord;
@@ -327,7 +378,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         _displayPeriod = lease.Period;
         await _school.CollectOriginalsAsync(lease, token);
         if (!_automaticPaused && !_session.IsCancellationRequested) _watcher.Replace(snapshots.Values.Select(s => s.Source?.Path).OfType<string>());
-        await CheckNotificationsAsync(token);
+        if (notify) await CheckNotificationsAsync(token);
         SnapshotChanged?.Invoke();
     }
     private Task CheckNotificationsAsync(CancellationToken token)
@@ -353,13 +404,19 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         }
         OperationStatus = progress; Busy = true;
         if (_session.IsCancellationRequested) { _session.Dispose(); _session = new(); }
-        try { await action(_session.Token); }
+        var completed = false;
+        try { await action(_session.Token); completed = true; }
         catch (OperationCanceledException) { Status = "処理を中止しました。保存期間内の正常なデータは保持しています。"; }
         catch (ApiException error) { Status = error.Message; }
         catch (SourceException error) { Status = error.Message; }
         catch { Status = "処理を完了できませんでした。保存済みの正常なデータは保持しています。もう一度お試しください。"; }
         finally
         {
+            if (!completed && !Locked && epoch == PrivateEpoch)
+            {
+                try { await ReloadAsync(CancellationToken.None, notify: false); }
+                catch { var message = Status; ClearPrivateData(); Status = message; }
+            }
             Busy = false; _operations.Release(); SnapshotChanged?.Invoke();
             if (!automatic && Status.Length > 0) _statusUntil = DateTimeOffset.UtcNow.AddSeconds(5);
             if (_pendingRefresh) { _pendingRefresh = false; _dispatcher.TryEnqueue(() => _ = RefreshAutomaticallyAsync(force: true)); }

@@ -175,6 +175,8 @@ public sealed partial class MainWindow : Window
         UpdatePageLayout();
         PageContent.Spacing = 24;
         if (_page.StartsWith("material.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var material)) BuildMaterialDetails(material);
+        else if (_page.StartsWith("recovery.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var recovering)) BuildRecoveryPreview(recovering);
+        else if (_page == "ai-models") BuildRecoveryModels();
         else if (_page.StartsWith("analysis.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var analysed)) BuildAnalysis(analysed);
         else if (_page == "account") BuildAccountData();
         else if (_page == "setup") BuildSetup();
@@ -240,6 +242,7 @@ public sealed partial class MainWindow : Window
         BorderThickness = new Thickness(1), BorderBrush = (Brush)Application.Current.Resources["CardStrokeColorDefaultBrush"] };
     private async Task<ContentDialogResult> Dialog(string title, UIElement content, string primary = "閉じる", string? secondary = null)
     {
+        if (_dialogOpen) return ContentDialogResult.None;
         _dialogOpen = true;
         RegisterPopupTree(content);
         try

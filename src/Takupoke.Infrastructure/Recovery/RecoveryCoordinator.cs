@@ -1,0 +1,86 @@
+using System.Security.Cryptography;
+using Takupoke.Core;
+using Takupoke.Core.Recovery;
+using Takupoke.Infrastructure.Materials;
+using Takupoke.Infrastructure.Parsing;
+using Takupoke.Infrastructure.Storage;
+
+namespace Takupoke.Infrastructure.Recovery;
+
+public sealed record RecoveryPreparation(RecoveryJobState State, RecoveryPreview? Preview, string Message, bool ReusedAcceptance = false);
+public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinator materials,
+    Func<byte[], MaterialKind, string, RecoveryReadCapture, CancellationToken, Task<RecoveryDocument>> buildDocument,
+    Func<CancellationToken, Task<IReadOnlyList<ILocalRecoveryProvider>>> providers, TimeProvider? clock = null)
+{
+    private readonly SemaphoreSlim _gate = new(1, 1);
+    private readonly TimeProvider _clock = clock ?? TimeProvider.System;
+    public async Task<RecoveryPreparation> PrepareAsync(MaterialKind kind, int schoolYear, CancellationToken token = default)
+    {
+        if (RecoveryPolicy.Kind(kind) is null) throw new InvalidOperationException("この資料はPDF復旧の対象外です。");
+        await _gate.WaitAsync(token);
+        try
+        {
+            // Explicit foreground requests still give Strict Parser the first opportunity.
+            var strict = await materials.ReparseAsync(kind, schoolYear, token);
+            if (strict.Parsed) return new(RecoveryJobState.Adopted, null, "通常の方法で解析できました。");
+            var lease = await store.BeginAsync(token);
+            var source = await store.ReadAsync<SourceRecord>(lease, "selection." + kind, token) ?? throw new InvalidDataException("選択したPDFがありません。");
+            var attempt = await store.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token);
+            if (attempt?.SourceDigest != source.Digest || attempt.Failure is null || !RecoveryPolicy.Eligible(kind, attempt.Failure))
+                return new(RecoveryJobState.Failed, null, "原本の破損・保護・入力上限など、この失敗は端末内復旧の対象外です。前回の正常結果を保持しています。");
+            var cached = await store.ReadAsync<RecoveryAudit>(lease, "recovery.accepted." + kind + "." + source.Digest, token);
+            if (cached is not null && RecoveryValidator.CanReuse(cached.Acceptance, cached.Document, cached.Result))
+            {
+                await store.SaveRecoveryAsync(lease, source, cached, _clock.GetUtcNow(), token, reuseAccepted: true);
+                return new(RecoveryJobState.Adopted, null, "以前に確認した同じPDFの復旧結果を使用しました。", true);
+            }
+            var job = new RecoveryJob(source.Digest, RecoveryPolicy.Kind(kind)!.Value, RecoveryJobState.Preparing, _clock.GetUtcNow());
+            await store.SaveRecoveryProgressAsync(lease, source, job, null, token);
+            var bytes = await store.ReadOriginalAsync(lease, source.Id, token);
+            try
+            {
+                if (NotificationDiff.Digest(bytes) != source.Digest) throw new InvalidDataException("保存した原本のハッシュが一致しません。");
+                var capture = new RecoveryReadCapture();
+                try { PdfPigLayoutReader.Read(bytes, kind, token, capture); }
+                catch (OperationCanceledException) { throw; }
+                catch (PdfParseException failure) when (RecoveryPolicy.Eligible(kind, failure.Stage)) { }
+                var document = await buildDocument(bytes, kind, source.Digest, capture, token);
+                var localProviders = await providers(token); RecoveryRun run;
+                try { run = await RecoveryEngine.RunAsync(document, "windows", Environment.OSVersion.Version.Major, true, localProviders, _ => null, token); }
+                finally { foreach (var provider in localProviders.OfType<IAsyncDisposable>()) await provider.DisposeAsync(); }
+                var preview = run.Result is not null ? new RecoveryPreview(source.Id, lease, document, run.Result, _clock.GetUtcNow()) : null;
+                await store.SaveRecoveryProgressAsync(lease, source, job with { State = run.State, ResultHash = run.Result is null ? null : RecoveryValidator.Fingerprint(run.Result) }, preview, token);
+                return new(run.State, preview, run.State switch {
+                    RecoveryJobState.AwaitingConfirmation => "原本と読み取り結果を確認し、使用する場合は採用してください。",
+                    RecoveryJobState.AwaitingModel => "利用できる端末内モデルがありません。AIモデルの準備を確認してください。",
+                    _ => "内容の完全性を確認できませんでした。前回の正常結果を保持しています。" });
+            }
+            catch (OperationCanceledException) { throw; }
+            catch (Exception failure) when (failure is InvalidDataException or PdfParseException or InvalidRecoveryOutputException)
+            {
+                await store.SaveRecoveryProgressAsync(lease, source, job with { State = RecoveryJobState.Failed }, null, token);
+                return new(RecoveryJobState.Failed, null, "復旧できませんでした。" + failure.Message + " 前回の正常結果を保持しています。");
+            }
+            finally { CryptographicOperations.ZeroMemory(bytes); }
+        }
+        finally { _gate.Release(); }
+    }
+    public async Task AdoptAsync(MaterialKind kind, RecoveryPreview preview, CancellationToken token = default)
+    {
+        await _gate.WaitAsync(token);
+        try
+        {
+            var lease = await store.BeginAsync(token);
+            if (lease != preview.Lease) throw new OperationCanceledException("保存期間または学校データの利用状態が変わりました。");
+            var source = await store.ReadAsync<SourceRecord>(lease, "selection." + kind, token) ?? throw new OperationCanceledException("資料の選択が変わりました。");
+            if (source.Id != preview.SourceId || source.Digest != preview.Document.PdfHash) throw new OperationCanceledException("確認中にPDFが更新されました。新しいPDFを確認してください。");
+            var persisted = await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview." + kind, token);
+            if (persisted is null || persisted.SourceId != preview.SourceId || RecoveryValidator.Fingerprint(persisted.Document) != RecoveryValidator.Fingerprint(preview.Document) || RecoveryValidator.Fingerprint(persisted.Result) != RecoveryValidator.Fingerprint(preview.Result))
+                throw new InvalidDataException("現在の確認用結果との対応を確認できません。");
+            var acceptance = new RecoveryAcceptance(source.Digest, RecoveryValidator.Fingerprint(preview.Result), RecoveryValidator.Fingerprint(preview.Document), preview.Result.Metadata, _clock.GetUtcNow());
+            await store.SaveRecoveryAsync(lease, source, new(preview.Document, preview.Result, acceptance), acceptance.AcceptedAt, token);
+            await store.CollectOriginalsAsync(lease, token);
+        }
+        finally { _gate.Release(); }
+    }
+}

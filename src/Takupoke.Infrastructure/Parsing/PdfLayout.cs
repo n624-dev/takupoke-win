@@ -13,7 +13,7 @@ public sealed class PdfParseException(string stage, int? page = null, PdfFailure
     public int? Page { get; } = page;
     public PdfFailurePosition? Cell { get; } = cell;
     private static string Label(string stage) => stage switch
-    { "P01" => "文字と位置の対応", "P02" => "ページの向き", "P03" => "年度の見出し", "P04" => "資料名・学期・ページ数",
+    { "raster" => "画像からの文字認識", "unreadable" => "読取可能な原本", "limit" => "解析上限", "P01" => "文字と位置の対応", "P02" => "ページの向き", "P03" => "年度の見出し", "P04" => "資料名・学期・ページ数",
         "P05" => "時限の見出し", "P06" => "表の列の罫線", "P07" => "日付の行の罫線", "P08" => "表のセルの罫線",
         "P10" => "日付の列", "P12" => "埋め込み描画", "P13" => "文字の行と読み順", "P14" => "クラス欄",
         "P15" => "学年欄", "P16" => "クラス行の重複", "P17" => "授業欄の行分け", "P18" => "並記された授業の対応",
@@ -29,13 +29,18 @@ public sealed record PdfPageLayout(double Width, double Height, IReadOnlyList<Pd
     public void Validate(int page)
     {
         if (!double.IsFinite(Width) || !double.IsFinite(Height) || Width is <= 0 or > 5000 || Height is <= 0 or > 5000
-            || Glyphs.Count is < 1 or > 100000 || Lines.Count is < 1 or > 100000
+            || Glyphs.Count > 100000 || Lines.Count > 100000
             || Glyphs.Any(g => !new[] { g.X, g.Y, g.Width, g.Height }.All(double.IsFinite) || g.Width < 0 || g.Height < 0 || Encoding.UTF8.GetByteCount(g.Text) > 64)
             || Lines.Any(l => !new[] { l.X1, l.Y1, l.X2, l.Y2 }.All(double.IsFinite))) throw new PdfParseException("limit", page);
+        if (Glyphs.Count == 0) throw new PdfParseException("raster", page);
+        if (Lines.Count == 0) throw new PdfParseException("P08", page);
     }
 }
 public sealed class PdfGrid(PdfPageLayout page)
 {
+    private PdfBox? _lessonArea;
+    private IReadOnlyList<PdfBox>? _calibrationBoxes;
+    public void SetLessonArea(PdfBox area) { _lessonArea = area; _calibrationBoxes = null; }
     public static string Key(string text) => Regex.Replace(text.Normalize(NormalizationForm.FormKC), @"\s", "");
     public PdfBox Box(double x, double y)
     {
@@ -100,10 +105,61 @@ public sealed class PdfGrid(PdfPageLayout page)
         }
         return bands.Select(band => string.Concat(band.OrderBy(f => f.Left).SelectMany(f => f.Glyphs).Select(g => g.Text))).ToArray();
     }
+    /// Known Strict template roles are calibrated using intact neighboring cells.
+    /// A short cell must occupy the same printed subject/teacher/room baselines;
+    /// deleting a row never shifts another row into its role.
+    public IReadOnlyList<string> LessonFields(PdfBox box)
+    {
+        var text = TimetableText(box);
+        if (text.Count is 0 or 3) return text;
+        if (text.Count > 3) throw new PdfParseException("P17");
+        var rows = Rows(Glyphs(box)); if (rows.Count != text.Count) throw new PdfParseException("P17");
+        if (_lessonArea is not { } area) throw new PdfParseException("P17");
+        if (_calibrationBoxes is null)
+        {
+            var candidates = new HashSet<PdfBox>();
+            foreach (var glyph in page.Glyphs.Where(g => g.Cx > area.Left && g.Cx < area.Right && g.Cy > area.Top && g.Cy < area.Bottom))
+            { try { var candidate = Box(glyph.Cx, glyph.Cy); if (candidate.Left >= area.Left && candidate.Right <= area.Right && candidate.Top >= area.Top && candidate.Bottom <= area.Bottom) candidates.Add(candidate); } catch (PdfParseException) { } }
+            _calibrationBoxes = candidates.ToArray();
+        }
+        var assignments = new List<string[]>(); double[]? reference = null;
+        foreach (var candidate in _calibrationBoxes.Where(c => Math.Abs(c.Bottom - c.Top - box.Bottom + box.Top) < .5))
+        {
+            var candidateRows = Rows(Glyphs(candidate)); if (candidateRows.Count != 3) continue;
+            var values = TimetableText(candidate); if (values.Count != 3 || values.Any(v => Regex.IsMatch(Key(v), "^(?:科目|授業科目|科目名|教員|担当|教師|教室|授業教室|場所)[：:]"))) continue;
+            var baseline = candidateRows.Select(r => r.Average(g => g.Cy) - candidate.Top).ToArray();
+            if (reference is not null && baseline.Where((value, i) => Math.Abs(reference[i] - value) > .75).Any()) throw new PdfParseException("P17");
+            reference ??= baseline;
+            var gap = baseline.Zip(baseline.Skip(1)).Min(p => p.Second - p.First); if (gap <= 2) continue;
+            var tolerance = Math.Min(.75, gap / 3); var fields = new[] { "", "", "" }; var matched = true;
+            foreach (var (row, i) in rows.Select((r, i) => (r, i)))
+            {
+                var y = row.Average(g => g.Cy) - box.Top; var roles = baseline.Select((v, role) => (v, role)).Where(p => Math.Abs(p.v - y) <= tolerance).ToArray();
+                if (roles.Length != 1 || fields[roles[0].role].Length > 0) { matched = false; break; }
+                fields[roles[0].role] = text[i];
+            }
+            if (matched) assignments.Add(fields);
+        }
+        if (assignments.Count == 0 || assignments[0][0].Length == 0 || assignments.Skip(1).Any(a => !a.SequenceEqual(assignments[0]))) throw new PdfParseException("P17");
+        return assignments[0];
+    }
     public IReadOnlyList<PdfBox> Slices(PdfBox row, double x)
     {
         var edges = new[] { row.Top }.Concat(page.Lines.Where(l => l.Horizontal && l.X1 - 0.5 <= x && x <= l.X2 + 0.5 && row.Top + 1 < l.Y1 && l.Y1 < row.Bottom - 1)
             .Select(l => Math.Round(l.Y1 * 100) / 100).Distinct().Order()).Append(row.Bottom).ToArray();
         return edges.Zip(edges.Skip(1)).Where(p => p.Second - p.First >= 2).Select(p => Box(x, (p.First + p.Second) / 2)).Distinct().ToArray();
     }
+}
+
+/// Ephemeral intermediate data, confined to a single reader attempt.
+public sealed record RecoveryReadPage(int Page, Takupoke.Core.Recovery.RecoveryInputState State, PdfPageLayout? Layout);
+public sealed class RecoveryReadCapture
+{
+    public IReadOnlyList<RecoveryReadPage> Pages { get; private set; } = [];
+    public bool ReaderCompleted { get; private set; }
+    public bool Complete => ReaderCompleted && Pages.Count > 0 && Pages.All(p => p.State == Takupoke.Core.Recovery.RecoveryInputState.Complete);
+    public void Reset() { Pages = []; ReaderCompleted = false; }
+    public void Begin(int pageCount) { if (pageCount is < 1 or > 12) throw new ArgumentOutOfRangeException(nameof(pageCount)); Pages = Enumerable.Range(1, pageCount).Select(p => new RecoveryReadPage(p, Takupoke.Core.Recovery.RecoveryInputState.RasterOnly, null)).ToArray(); ReaderCompleted = false; }
+    public void Record(int page, Takupoke.Core.Recovery.RecoveryInputState state, PdfPageLayout layout) { if (page < 1 || page > Pages.Count) throw new ArgumentOutOfRangeException(nameof(page)); Pages = Pages.Select(p => p.Page == page ? new RecoveryReadPage(page, state, layout with { Glyphs = layout.Glyphs.ToArray(), Lines = layout.Lines.ToArray() }) : p).ToArray(); }
+    public void Finish() => ReaderCompleted = true;
 }

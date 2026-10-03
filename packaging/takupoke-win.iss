@@ -25,7 +25,7 @@ DefaultGroupName=たくポケ
 DisableProgramGroupPage=yes
 DisableWelcomePage=no
 PrivilegesRequired=lowest
-MinVersion=10.0.17763
+MinVersion=10.0.26100
 #if TargetArch == "arm64"
 ArchitecturesAllowed=arm64
 ArchitecturesInstallIn64BitMode=arm64

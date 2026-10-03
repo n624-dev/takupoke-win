@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using Microsoft.Data.Sqlite;
 using Takupoke.Core;
+using Takupoke.Core.Recovery;
 
 namespace Takupoke.Infrastructure.Storage;
 
@@ -132,6 +133,41 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
         finally { CryptographicOperations.ZeroMemory(plain); }
         return true;
     }, token);
+    public Task SavePdfFailureAsync(SchoolLease lease, SourceRecord source, MaterialAttempt attempt, RecoveryJob? job,
+        CancellationToken token = default) => WithConnectionAsync(lease, async connection =>
+    {
+        if (RecoveryPolicy.Kind(source.Kind) is null || attempt.SourceDigest != source.Digest || attempt.Failure is null ||
+            attempt.RecoveryPending != (job is not null) || job is not null && (job.PdfHash != source.Digest || job.Kind != RecoveryPolicy.Kind(source.Kind)))
+            throw new InvalidDataException("復旧待ち記録と原本の対応を確認できません。");
+        using var transaction = connection.BeginTransaction();
+        var selectionKey = "selection." + source.Kind;
+        using (var read = connection.CreateCommand())
+        {
+            read.Transaction = transaction; read.CommandText = "SELECT payload FROM entry WHERE key=$key"; read.Parameters.AddWithValue("$key", selectionKey);
+            if (await read.ExecuteScalarAsync(token) is not byte[] payload) throw new OperationCanceledException("選択資料がありません。");
+            var plain = _cipher!.Decrypt(payload, selectionKey);
+            try { var current = DataCodec.Decode<SourceRecord>(plain); if (current.Id != source.Id || current.Digest != source.Digest) throw new OperationCanceledException("選択資料が変わりました。"); }
+            finally { CryptographicOperations.ZeroMemory(plain); }
+        }
+        var entries = new List<(string Key, byte[] Plain)> { ("attempt." + source.Kind, DataCodec.Encode(attempt)) };
+        if (job is not null) entries.Add(("recovery." + source.Kind, DataCodec.Encode(job)));
+        try
+        {
+            foreach (var entry in entries)
+            {
+                using var write = connection.CreateCommand(); write.Transaction = transaction;
+                write.CommandText = "INSERT INTO entry(key,payload) VALUES($key,$payload) ON CONFLICT(key) DO UPDATE SET payload=excluded.payload";
+                write.Parameters.AddWithValue("$key", entry.Key); write.Parameters.AddWithValue("$payload", _cipher!.Encrypt(entry.Plain, entry.Key)); await write.ExecuteNonQueryAsync(token);
+            }
+            if (job is null)
+            {
+                using var clear = connection.CreateCommand(); clear.Transaction = transaction; clear.CommandText = "DELETE FROM entry WHERE key=$key"; clear.Parameters.AddWithValue("$key", "recovery." + source.Kind); await clear.ExecuteNonQueryAsync(token);
+            }
+            Verify(lease); await transaction.CommitAsync(token);
+        }
+        finally { foreach (var entry in entries) CryptographicOperations.ZeroMemory(entry.Plain); }
+        return true;
+    }, token);
     public Task SaveOriginalAsync(SchoolLease lease, SourceRecord source, byte[] content, CancellationToken token = default) => WithConnectionAsync(lease, async connection =>
     {
         Verify(lease);
@@ -154,6 +190,17 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
                 command.Transaction = transaction; command.CommandText = "INSERT INTO entry(key,payload) VALUES($key,$payload) ON CONFLICT(key) DO UPDATE SET payload=excluded.payload";
                 command.Parameters.AddWithValue("$key", key); command.Parameters.AddWithValue("$payload", _cipher!.Encrypt(plain, key));
                 await command.ExecuteNonQueryAsync(token);
+            }
+            using (var clear = connection.CreateCommand())
+            {
+                // Attempts belong to the previous selection, even when its bytes
+                // have the same hash. Cancellation before parsing the new selection
+                // must leave it retryable instead of caching an obsolete failure.
+                clear.Transaction = transaction; clear.CommandText = "DELETE FROM entry WHERE key IN ($job,$attempt,$preview)";
+                clear.Parameters.AddWithValue("$job", "recovery." + source.Kind);
+                clear.Parameters.AddWithValue("$attempt", "attempt." + source.Kind);
+                clear.Parameters.AddWithValue("$preview", "recovery.preview." + source.Kind);
+                await clear.ExecuteNonQueryAsync(token);
             }
             Verify(lease); await transaction.CommitAsync(token);
         }
@@ -197,7 +244,89 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
             }
             finally { CryptographicOperations.ZeroMemory(pair.Item2); }
         }
+        using (var clear = connection.CreateCommand())
+        {
+            clear.Transaction = transaction; clear.CommandText = "DELETE FROM entry WHERE key IN ($key,$preview)";
+            clear.Parameters.AddWithValue("$key", "recovery." + analysis.Kind);
+            clear.Parameters.AddWithValue("$preview", "recovery.preview." + analysis.Kind);
+            await clear.ExecuteNonQueryAsync(token);
+        }
         Verify(lease); await transaction.CommitAsync(token);
+        return true;
+    }, token);
+    public Task SaveRecoveryProgressAsync(SchoolLease lease, SourceRecord source, RecoveryJob job, RecoveryPreview? preview,
+        CancellationToken token = default) => WithConnectionAsync(lease, async connection =>
+    {
+        if (job.PdfHash != source.Digest || job.Kind != RecoveryPolicy.Kind(source.Kind) || preview is not null && (preview.SourceId != source.Id || preview.Lease != lease || preview.Document.PdfHash != source.Digest || !RecoveryValidator.Validate(preview.Document, preview.Result).CanAdopt))
+            throw new InvalidDataException("復旧処理と原本の対応を確認できません。");
+        using var transaction = connection.BeginTransaction();
+        var key = "selection." + source.Kind;
+        using (var read = connection.CreateCommand())
+        {
+            read.Transaction = transaction; read.CommandText = "SELECT payload FROM entry WHERE key=$key"; read.Parameters.AddWithValue("$key", key);
+            if (await read.ExecuteScalarAsync(token) is not byte[] payload) throw new OperationCanceledException("選択資料がありません。");
+            var plain = _cipher!.Decrypt(payload, key);
+            try { var current = DataCodec.Decode<SourceRecord>(plain); if (current.Id != source.Id || current.Digest != source.Digest) throw new OperationCanceledException("復旧中に資料が更新されました。"); }
+            finally { CryptographicOperations.ZeroMemory(plain); }
+        }
+        foreach (var entry in new (string Key, object? Value)[] { ("recovery." + source.Kind, job), ("recovery.preview." + source.Kind, preview) })
+        {
+            using var write = connection.CreateCommand(); write.Transaction = transaction; write.Parameters.AddWithValue("$key", entry.Key);
+            if (entry.Value is null) { write.CommandText = "DELETE FROM entry WHERE key=$key"; await write.ExecuteNonQueryAsync(token); }
+            else { var plain = DataCodec.Encode(entry.Value); try { write.CommandText = "INSERT INTO entry(key,payload) VALUES($key,$payload) ON CONFLICT(key) DO UPDATE SET payload=excluded.payload"; write.Parameters.AddWithValue("$payload", _cipher!.Encrypt(plain, entry.Key)); await write.ExecuteNonQueryAsync(token); } finally { CryptographicOperations.ZeroMemory(plain); } }
+        }
+        Verify(lease); token.ThrowIfCancellationRequested(); await transaction.CommitAsync(token);
+        return true;
+    }, token);
+    public Task SaveRecoveryAsync(SchoolLease lease, SourceRecord source, RecoveryAudit audit, DateTimeOffset adoptedAt,
+        CancellationToken token = default, bool reuseAccepted = false) => WithConnectionAsync(lease, async connection =>
+    {
+        if (audit.Document.PdfHash != source.Digest || RecoveryPolicy.Kind(source.Kind) != audit.Document.Kind ||
+            !RecoveryValidator.CanReuse(audit.Acceptance, audit.Document, audit.Result))
+            throw new InvalidDataException("復旧結果と確認内容の対応を確認できません。");
+        var analysis = Takupoke.Infrastructure.Recovery.RecoveryAnalysisConverter.Convert(source, audit.Document, audit.Result, adoptedAt);
+        using var transaction = connection.BeginTransaction();
+        var key = "selection." + source.Kind;
+        using (var read = connection.CreateCommand())
+        {
+            read.Transaction = transaction; read.CommandText = "SELECT payload FROM entry WHERE key=$key"; read.Parameters.AddWithValue("$key", key);
+            if (await read.ExecuteScalarAsync(token) is not byte[] payload) throw new OperationCanceledException("選択資料がありません。");
+            var plain = _cipher!.Decrypt(payload, key);
+            try { var current = DataCodec.Decode<SourceRecord>(plain); if (current.Id != source.Id || current.Digest != source.Digest) throw new OperationCanceledException("確認中に資料が更新されました。新しい資料を確認してください。"); }
+            finally { CryptographicOperations.ZeroMemory(plain); }
+        }
+        async Task<T?> Current<T>(string entryKey)
+        {
+            using var read = connection.CreateCommand(); read.Transaction = transaction; read.CommandText = "SELECT payload FROM entry WHERE key=$key"; read.Parameters.AddWithValue("$key", entryKey);
+            if (await read.ExecuteScalarAsync(token) is not byte[] payload) return default;
+            var plain = _cipher!.Decrypt(payload, entryKey); try { return DataCodec.Decode<T>(plain); } finally { CryptographicOperations.ZeroMemory(plain); }
+        }
+        var attempt = await Current<MaterialAttempt>("attempt." + source.Kind);
+        if (attempt?.SourceDigest != source.Digest || attempt.Failure is null || !RecoveryPolicy.Eligible(source.Kind, attempt.Failure))
+            throw new OperationCanceledException("通常解析の状態が変わりました。もう一度資料を確認してください。");
+        if (reuseAccepted)
+        {
+            var savedAudit = await Current<RecoveryAudit>("recovery.accepted." + source.Kind + "." + source.Digest);
+            if (savedAudit is null || RecoveryValidator.Fingerprint(savedAudit) != RecoveryValidator.Fingerprint(audit)) throw new InvalidDataException("以前の確認内容と一致しません。");
+        }
+        else
+        {
+            var job = await Current<RecoveryJob>("recovery." + source.Kind);
+            var preview = await Current<RecoveryPreview>("recovery.preview." + source.Kind);
+            if (job?.State != RecoveryJobState.AwaitingConfirmation || job.PdfHash != source.Digest || job.ResultHash != RecoveryValidator.Fingerprint(audit.Result) || preview is null || preview.Lease != lease || preview.SourceId != source.Id || RecoveryValidator.Fingerprint(preview.Document) != RecoveryValidator.Fingerprint(audit.Document) || RecoveryValidator.Fingerprint(preview.Result) != RecoveryValidator.Fingerprint(audit.Result))
+                throw new OperationCanceledException("確認待ちの復旧結果が更新されました。現在の資料を確認してください。");
+        }
+        foreach (var entry in new (string Key, object Value)[] {
+            ("analysis." + source.Kind, analysis with { Recovery = audit }),
+            ("attempt." + source.Kind, new MaterialAttempt(analysis.ParsedAt, null, true, source.Digest, analysis.SchoolYear, ParserVersion: analysis.ParserVersion)),
+            ("recovery.accepted." + source.Kind + "." + source.Digest, audit) })
+        {
+            var plain = DataCodec.Encode(entry.Value);
+            try { using var write = connection.CreateCommand(); write.Transaction = transaction; write.CommandText = "INSERT INTO entry(key,payload) VALUES($key,$payload) ON CONFLICT(key) DO UPDATE SET payload=excluded.payload"; write.Parameters.AddWithValue("$key", entry.Key); write.Parameters.AddWithValue("$payload", _cipher!.Encrypt(plain, entry.Key)); await write.ExecuteNonQueryAsync(token); }
+            finally { CryptographicOperations.ZeroMemory(plain); }
+        }
+        using (var clear = connection.CreateCommand()) { clear.Transaction = transaction; clear.CommandText = "DELETE FROM entry WHERE key IN ($job,$preview)"; clear.Parameters.AddWithValue("$job", "recovery." + source.Kind); clear.Parameters.AddWithValue("$preview", "recovery.preview." + source.Kind); await clear.ExecuteNonQueryAsync(token); }
+        Verify(lease); token.ThrowIfCancellationRequested(); await transaction.CommitAsync(token);
         return true;
     }, token);
     public Task CollectOriginalsAsync(SchoolLease lease, CancellationToken token = default) => WithConnectionAsync(lease, async connection =>

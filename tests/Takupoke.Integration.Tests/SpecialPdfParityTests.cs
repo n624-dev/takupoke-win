@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Takupoke.Integration.Tests;
 
-/// <summary>Fictional geometry and expected results match the iOS SpecialScheduleTests fixtures.</summary>
+/// <summary>Fictional ruled tables with intact role baselines, empty fields and merged lessons.</summary>
 public sealed class SpecialPdfParityTests
 {
     [Fact]
@@ -74,8 +74,7 @@ public sealed class SpecialPdfParityTests
         for (var index = 0; index < 5; index++)
         {
             b.Write($"4月{index + 1}日", 16, 126 + index * 40);
-            for (var column = 0; column < columns; column++) b.Write("架空科目A", 106 + column * 240, 126 + index * 40, 6);
-            if (metadata && index == 0) { b.Write("架空教員A", 106, 136, 5); b.Write("架空教室A", 106, 145, 5); }
+            for (var column = 0; column < columns; column++) { b.Write("架空科目A", 106 + column * 240, 126 + index * 40, 6); b.Write("架空教員A", 106 + column * 240, 136 + index * 40, 5); b.Write("架空教室A", 106 + column * 240, 142 + index * 40, 5); }
         }
         var times = new[] { "8:50~9:35", "9:50~10:35", "10:50~11:35", "11:50~12:35", "13:20~14:05", "14:20~15:05" };
         for (var index = 0; index < times.Length; index++) if (!omitLastTime || index != 5) b.Write($"{index + 1}時限目{times[index]}", 20, 470 + index * 15);
@@ -99,8 +98,11 @@ public sealed class SpecialPdfParityTests
         b.Line(110, 110, 110, 545);
         for (var index = 0; index <= 17; index++) b.Line(0, 120 + index * 25, 1740, 120 + index * 25);
         b.Line(220, 332.5, 260, 332.5);
-        b.Write("架空科目A", 222, 322, 3); b.Write("架空教員A", 222, 327, 3); b.Write("架空科目B", 222, 335, 3); b.Write("架空教員B", 222, 340, 3);
-        b.Write("架空科目C", 502, 322, 3); b.Write("架空科目D", 302, 130, 3); b.Write("架空科目E", 622, 130, 3);
+        b.Write("架空科目A", 222, 321, 3); b.Write("架空教員A", 222, 324, 3); b.Write("架空科目B", 222, 333.5, 3); b.Write("架空教員B", 222, 336.5, 3);
+        b.Line(260, 332.5, 300, 332.5); b.Write("架空位置基準", 262, 321, 3); b.Write("架空教員基準", 262, 324, 3); b.Write("架空教室基準", 262, 327, 3);
+        b.Write("架空科目C", 502, 322, 3); b.Write("架空教員C", 502, 327, 3); b.Write("架空教室C", 502, 332, 3);
+        b.Write("架空科目D", 302, 122, 3); b.Write("架空教員D", 302, 127, 3); b.Write("架空教室D", 302, 132, 3);
+        b.Write("架空科目E", 622, 122, 3); b.Write("架空教員E", 622, 127, 3); b.Write("架空教室E", 622, 132, 3);
         b.Write("4月1日の時間割は以下のとおりです。", 1300, 650); b.Write("4月2日~5日は通常の授業日どおりの授業時間です。", 1300, 670);
         var times = new[] { "7:00~7:40", "7:50~8:30", "8:40~9:20", "9:30~10:10", "10:30~11:10", "11:10~11:50", "12:00~12:40", "12:40~13:20" };
         for (var index = 0; index < times.Length; index++) b.Write($"{index + 1}時限目{times[index]}", 20, 760 + (index + 1) * 15);
