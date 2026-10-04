@@ -173,40 +173,32 @@ public sealed partial class RecoveryPipelineTests
     {
         public string Id => "windowsLanguageModel"; public bool LocalOnly => true;
         public RecoveryMetadata Metadata => new(Id, "fictional-structure", "1", "test", "3", RecoveryValidator.SchemaVersion, RecoveryValidator.Version, "test");
-        public int Calls;
-        public Task<LocalProviderState> AvailabilityAsync(CancellationToken token) => Task.FromResult(LocalProviderState.Ready);
+        public int Calls, AvailabilityCalls;
+        public Task<LocalProviderState> AvailabilityAsync(CancellationToken token) { AvailabilityCalls++; return Task.FromResult(LocalProviderState.Ready); }
         public Task<IReadOnlyList<RecoveryLesson>> RecoverCellAsync(RecoveryPromptCell prompt, CancellationToken token)
-        {
-            Calls++;
-            RecoveryField Field(params string[] names)
-            {
-                var atoms = names.Select(n => prompt.Sources.Single(s => s.Text == n)).ToArray();
-                var top = atoms.Min(a => a.Box!.Y); var bottom = atoms.Max(a => a.Box!.Y + a.Box.Height); var left = atoms.Max(a => a.Box!.X + a.Box.Width);
-                return new(RecoveryValueState.Present, "", atoms.Select(a => a.Id).Concat(new[] {
-                    prompt.StructureCuts.Last(c => c.Axis == "horizontal" && c.Position <= top).Id,
-                    prompt.StructureCuts.First(c => c.Axis == "horizontal" && c.Position >= bottom).Id,
-                    prompt.StructureCuts.First(c => c.Axis == "vertical" && c.Position >= left).Id }).ToArray());
-            }
-            return Task.FromResult<IReadOnlyList<RecoveryLesson>>([new(Field("科目:"), Field("担当教", "員:"), Field("教室:"), [], [])]);
-        }
+        { Calls++; throw new InvalidRecoveryOutputException(); }
     }
-    [Fact] public async Task FoldedActualLayoutNeedsProposalThenUsesOriginalValuesInFormalAnalysis()
+    [Theory] [InlineData(MaterialKind.Timetable)] [InlineData(MaterialKind.Exam)] [InlineData(MaterialKind.ExamReturn)]
+    public async Task FoldedActualLayoutResolvesByRulesThenUsesOriginalValuesInFormalAnalysis(MaterialKind kind)
     {
-        var layout = Layout(MaterialKind.Timetable);
+        var layout = Layout(kind);
         var body = new[] { new PdfGlyph("科目:", 74, 85, 6, 8), new PdfGlyph("架空科目A", 88, 85, 10, 8),
             new PdfGlyph("担当教", 74, 97, 6, 8), new PdfGlyph("架空教員B", 88, 103, 10, 8), new PdfGlyph("員:", 74, 109, 4, 8),
             new PdfGlyph("教室:", 74, 125, 6, 8), new PdfGlyph("架空教室C", 88, 125, 10, 8) };
         layout = layout with { Glyphs = layout.Glyphs.Where(g => !(g.X >= 70 && g.X < 170 && g.Y >= 80 && g.Y < 140)).Concat(body).ToArray() };
         bool InkFree(int _, RecoveryBox box) => !layout.Glyphs.Any(g => box.Contains(new(g.X, g.Y, g.Width, g.Height)));
-        Assert.Throws<InvalidDataException>(() => RecoveryDocumentBuilder.Build(new string('a', 64), MaterialKind.Timetable, [layout], InkFree));
-        var doc = RecoveryDocumentBuilder.Build(new string('a', 64), MaterialKind.Timetable, [layout], InkFree, allowStructureProposal: true);
+        Assert.Throws<InvalidDataException>(() => RecoveryDocumentBuilder.Build(new string('a', 64), kind, [layout], InkFree));
+        var doc = RecoveryDocumentBuilder.Build(new string('a', 64), kind, [layout], InkFree, allowStructureProposal: true);
         var p = new StructureProvider(); var structure = await RecoveryStructure.ResolveAsync(doc, "windows", 10, [p], default);
-        Assert.NotNull(structure.Document); Assert.Equal(1, p.Calls);
+        Assert.NotNull(structure.Document); Assert.Equal(0, p.Calls); Assert.Equal(0, p.AvailabilityCalls);
         var run = await RecoveryEngine.RunAsync(structure.Document!, "windows", 10, true, [], _ => null); Assert.NotNull(run.Result);
-        var source = new SourceRecord("fictional", MaterialKind.Timetable, "fictional.pdf", "fictional", "fictional.pdf", doc.PdfHash, 1, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, null);
+        var source = new SourceRecord("fictional", kind, "fictional.pdf", "fictional", "fictional.pdf", doc.PdfHash, 1, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, null);
         var formal = RecoveryAnalysisConverter.Convert(source, structure.Document!, run.Result!, DateTimeOffset.UtcNow);
-        Assert.Equal("架空科目A", formal.Timetable!.Lessons.Single().Names.Subject); Assert.Equal("架空教員B", formal.Timetable.Lessons.Single().Names.Teacher);
-        Assert.Equal(p.Metadata, run.Result!.Metadata);
+        var names = formal.Timetable?.Lessons.Single().Names ?? formal.Special!.Lessons.Single().Names;
+        Assert.Equal("架空科目A", names.Subject); Assert.Equal("架空教員B", names.Teacher); Assert.Equal("架空教室C", names.Room);
+        Assert.Equal(kind == MaterialKind.Timetable ? 40 : kind == MaterialKind.Exam ? 510 : 680, structure.Document!.RequiredSlots.Count);
+        if (formal.Special is { } special) Assert.Equal("08:50", special.PeriodTime(new(2026, 10, 2), 1)?.Start);
+        Assert.Equal("rule", run.Result!.Metadata.Provider); Assert.True(RecoveryValidator.Validate(structure.Document!, run.Result).CanAdopt);
     }
     [Fact] public void RoleWordsInsideUnlabelledValuesCannotBeStrippedBySubstringMatching()
     {

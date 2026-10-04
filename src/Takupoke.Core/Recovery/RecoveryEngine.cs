@@ -101,7 +101,7 @@ public static class RecoveryEngine
         RecoveryResult Result(RecoveryMetadata metadata) => new(document.PdfHash, document.Kind, document.SchoolYear, document.Term, recovered.Select(c => c!).ToArray(), metadata);
         if (missing.Length == 0)
         {
-            var result = Result(document.StructureMetadata ?? new("rule", "rules", "1", "1", "1", RecoveryValidator.SchemaVersion, RecoveryValidator.Version, os + ":" + osMajor));
+            var result = Result(document.StructureMetadata ?? new("rule", "rules", "3", "3", "1", RecoveryValidator.SchemaVersion, RecoveryValidator.Version, os + ":" + osMajor));
             var validation = RecoveryValidator.Validate(document, result, token);
             token.ThrowIfCancellationRequested();
             return new(validation.CanAdopt ? RecoveryJobState.AwaitingConfirmation : RecoveryJobState.Failed, validation.CanAdopt ? result : null, validation.Errors);

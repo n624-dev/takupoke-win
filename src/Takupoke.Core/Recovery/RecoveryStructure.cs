@@ -113,34 +113,51 @@ public static class RecoveryStructure
         if (scopes.Any(s => !body.Any(a => s.Box.Contains(a.Box))) || scopes.SelectMany((a, i) => scopes.Skip(i + 1).Select(b => (a, b))).Any(p => Math.Min(p.a.Box.Y + p.a.Box.Height, p.b.Box.Y + p.b.Box.Height) > Math.Max(p.a.Box.Y, p.b.Box.Y))) throw new InvalidRecoveryOutputException();
         return scopes;
     }
-    private static IReadOnlyList<RecoveryRoleScope>? Cheap(RecoveryDocument doc, RecoveryCell cell, RecoveryPromptCell prompt)
+    private static IReadOnlyList<RecoveryRoleScope>? Cheap(RecoveryDocument doc, RecoveryCell cell, RecoveryPromptCell prompt, CancellationToken token)
     {
-        var units = Units(doc, cell); var rows = units.GroupBy(s => Math.Round((s.Box.Y + s.Box.Height / 2) / 2)).OrderBy(g => g.Key).Select(g => g.ToArray()).ToArray();
-        var fields = new Dictionary<RecoveryFieldRole, RecoveryField>();
-        foreach (var role in Enum.GetValues<RecoveryFieldRole>())
+        var units = Units(doc, cell);
+        // The certificate already forces all left-rail atoms into exactly three
+        // original colon-terminated role chains. Enumerate only measured rails;
+        // label fragments may be separated by body rows and need no margin guess.
+        foreach (var rail in prompt.StructureCuts.Where(c => c.Axis == "vertical"))
         {
-            foreach (var first in units.Where(u => RecoveryRoleLabels.For(role).Any(n => (Key(n) + ":").StartsWith(Key(u.Text), StringComparison.Ordinal))))
+            token.ThrowIfCancellationRequested();
+            if (units.Any(u => u.Box.X < rail.Position && u.Box.X + u.Box.Width > rail.Position)) continue;
+            var labels = units.Where(u => u.Box.X + u.Box.Width <= rail.Position).ToArray();
+            var chains = new Dictionary<RecoveryFieldRole, Unit[]>(); var chain = new List<Unit>(); var invalid = false;
+            foreach (var label in labels)
             {
-                var start = Array.FindIndex(rows, r => r.Contains(first));
-                for (var length = 1; length <= 3 && start + length <= rows.Length; length++)
-                {
-                    var selectedRows = rows.Skip(start).Take(length).ToArray();
-                    if (selectedRows.Any(r => !r.Any(u => u.Box.X - cell.Box.X <= u.Box.Height))) continue;
-                    var labels = selectedRows.SelectMany(r => r.Where(u => u.Box.X - cell.Box.X <= u.Box.Height)).ToArray();
-                    if (!RecoveryRoleLabels.For(role).Any(n => Key(n) + ":" == Key(string.Concat(labels.Select(u => u.Text))))) continue;
-                    var originalIds = labels.SelectMany(u => u.SourceIds).ToHashSet(); var box = Bounds(doc.Sources.Where(s => originalIds.Contains(s.Id)));
-                    var left = prompt.StructureCuts.FirstOrDefault(c => c.Axis == "vertical" && c.Position >= box.X + box.Width);
-                    var top = prompt.StructureCuts.LastOrDefault(c => c.Axis == "horizontal" && c.Position <= box.Y);
-                    var bottom = prompt.StructureCuts.FirstOrDefault(c => c.Axis == "horizontal" && c.Position >= box.Y + box.Height);
-                    if (left is null || top is null || bottom is null) continue;
-                    fields[role] = new(RecoveryValueState.Present, "", labels.Select(u => u.Id).Concat(new[] { top.Id, bottom.Id, left.Id }).ToArray()); break;
-                }
-                if (fields.ContainsKey(role)) break;
+                token.ThrowIfCancellationRequested();
+                var text = Key(label.Text);
+                if (text.Count(c => c == ':') > 1 || text.Contains(':') && !text.EndsWith(':')) { invalid = true; break; }
+                chain.Add(label); if (!text.EndsWith(':')) continue;
+                var combined = Key(string.Concat(chain.Select(u => u.Text)));
+                var roles = Enum.GetValues<RecoveryFieldRole>().Where(role => RecoveryRoleLabels.For(role).Any(n => Key(n) + ":" == combined)).ToArray();
+                if (roles.Length != 1 || chain.Count > 48 || !chains.TryAdd(roles[0], chain.ToArray())) { invalid = true; break; }
+                chain.Clear();
             }
+            if (invalid || chain.Count != 0 || chains.Count != 3) continue;
+            var fields = new Dictionary<RecoveryFieldRole, RecoveryField>();
+            foreach (var (role, labelChain) in chains)
+            {
+                var top = labelChain.Min(u => u.Box.Y); var bottom = labelChain.Max(u => u.Box.Y + u.Box.Height);
+                var upperCut = prompt.StructureCuts.LastOrDefault(c => c.Axis == "horizontal" && c.Position <= top);
+                var lowerCut = prompt.StructureCuts.FirstOrDefault(c => c.Axis == "horizontal" && c.Position >= bottom);
+                if (upperCut is null || lowerCut is null) { invalid = true; break; }
+                fields[role] = new(RecoveryValueState.Present, "", labelChain.Select(u => u.Id).Concat(new[] { upperCut.Id, lowerCut.Id, rail.Id }).ToArray());
+            }
+            if (invalid) continue;
+            try
+            {
+                // Nearest measured bounds contain all body atoms that the
+                // unchanged verifier can independently force to these labels.
+                // It still rejects overlaps, unsupported labels and orphan ink.
+                var verified = Verify(doc, cell, prompt, [new(fields[RecoveryFieldRole.Subject], fields[RecoveryFieldRole.Teacher], fields[RecoveryFieldRole.Room], [], [])]);
+                token.ThrowIfCancellationRequested(); return verified;
+            }
+            catch (InvalidRecoveryOutputException) { }
         }
-        if (fields.Count != 3) return null;
-        try { return Verify(doc, cell, prompt, [new(fields[RecoveryFieldRole.Subject], fields[RecoveryFieldRole.Teacher], fields[RecoveryFieldRole.Room], [], [])]); }
-        catch (InvalidRecoveryOutputException) { return null; }
+        return null;
     }
     public static async Task<RecoveryStructureRun> ResolveAsync(RecoveryDocument doc, string os, int osMajor, IReadOnlyList<ILocalRecoveryProvider> providers, CancellationToken token)
     {
@@ -150,10 +167,11 @@ public static class RecoveryStructure
         var input = RecoveryValidator.StructureInputErrors(doc, token); if (input.Count > 0) return new(null, null, RecoveryJobState.Failed, input);
         foreach (var original in pending)
         {
-            token.ThrowIfCancellationRequested(); var prompt = Prompt(doc, original); var scopes = Cheap(doc, original, prompt);
+            token.ThrowIfCancellationRequested(); var prompt = Prompt(doc, original); var scopes = Cheap(doc, original, prompt, token);
             if (scopes is not null) doc = doc with { Cells = doc.Cells.Select(c => c.Id == original.Id ? c with { RoleScopes = scopes } : c).ToArray() };
         }
         pending = doc.Cells.Where(Pending).ToArray();
+        token.ThrowIfCancellationRequested();
         if (pending.Length == 0) return new(doc, null, RecoveryJobState.Running, []);
         var runtimeFailed = false;
         foreach (var id in RecoveryPolicy.Providers(os, osMajor))
