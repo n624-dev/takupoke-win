@@ -30,6 +30,25 @@ public static class RecoveryDocumentBuilder
             if (_comparisons > 20_000_000) throw RecoveryWorkLimits.Exceeded("PDF復旧の位置比較数が上限を超えています。");
         }
     }
+    // A merged physical cell repeats its unchanged three fields at each covered
+    // Strict slot. Every slot must have exactly one independent matching lesson;
+    // parallel alternatives, gaps or differing values cannot establish this binding.
+    internal static LessonNames? TrustedNormalNames(TimetableAnalysis normal, IReadOnlyList<RecoverySlot> slots, Action<long> charge)
+    {
+        charge(slots.Count * 2L);
+        if (slots.Count == 0 || slots.Distinct().Count() != slots.Count) return null;
+        var first = slots[0]; LessonNames? names = null;
+        foreach (var slot in slots)
+        {
+            if (slot.ClassName != first.ClassName || slot.Day != first.Day) return null;
+            charge(normal.Lessons.Count);
+            var matches = normal.Lessons.Where(l => l.ClassName == slot.ClassName &&
+                l.Weekday.ToString(CultureInfo.InvariantCulture) == slot.Day && l.Period == slot.Period).ToArray();
+            if (matches.Length != 1 || names is not null && names != matches[0].Names) return null;
+            names = matches[0].Names;
+        }
+        return names;
+    }
     private const string HeaderPattern = @"[1-8]時限目|[1-8][・〜-][1-8]時限連続|\d{1,2}:\d{2}[~〜～]\d{1,2}:\d{2}|(?:令和\d{1,2}|\d{4})年度|前期|後期|試験返却時間割|定期試験時間割|試験時間割|通常時間割|授業時間割|時間割";
     private static IEnumerable<Label> Labels(IReadOnlyList<Atom> atoms, Work work)
     {
@@ -256,7 +275,7 @@ public static class RecoveryDocumentBuilder
                     catch (InvalidDataException error) when (!RecoveryWorkLimits.IsExceeded(error))
                     {
                         LessonNames? trustedNames = null;
-                        if (trustedNormal.TryGetValue(pi, out var normal)) { var matched = normal.Lessons.Where(l => l.ClassName == cls.Value && l.Weekday.ToString() == day.Value && slots.All(s => s.Period == l.Period)).ToArray(); if (matched.Length == 1) trustedNames = matched[0].Names; }
+                        if (trustedNormal.TryGetValue(pi, out var normal)) trustedNames = TrustedNormalNames(normal, slots, work.Step);
                         else if (trustedSpecial is not null) { var matched = trustedSpecial.Lessons.Where(l => l.Page == pi && l.ClassName == cls.Value && l.Date == day.Value && l.Period == slots.Min(s => s.Period)).ToArray(); if (matched.Length == 1) trustedNames = matched[0].Names; }
                         var rows = PdfGrid.Rows(inside.Select(a => a.Glyph));
                         var text = rows.Select(r => PdfGrid.Key(string.Concat(r.Select(g => g.Text)))).ToArray();
