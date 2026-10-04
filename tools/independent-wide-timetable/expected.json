@@ -1,0 +1,7994 @@
+{
+  "schemaVersion": 1,
+  "scope": "independently invented 17-class complete timetable assertion only",
+  "seed": 20320819,
+  "schoolYear": 2032,
+  "term": "後期",
+  "classes": [
+    "1_1",
+    "1_2",
+    "1_3",
+    "2_CN",
+    "2_ES",
+    "2_IT",
+    "3_CN",
+    "3_ES",
+    "3_IT",
+    "4_CN",
+    "4_ES",
+    "4_IT",
+    "5_CN",
+    "5_ES",
+    "5_IT",
+    "AI_1",
+    "AI_2"
+  ],
+  "weekdays": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "periods": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "slots": [
+    {
+      "className": "1_1",
+      "weekday": 1,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目001",
+          "teacher": "架空教員001",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目002",
+          "teacher": "架空教員002",
+          "room": "架空室002"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 1,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目003",
+          "teacher": "架空教員003",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 1,
+      "period": 4,
+      "lessons": []
+    },
+    {
+      "className": "1_1",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目004",
+          "teacher": "架空教員004",
+          "room": "架空室004"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目005",
+          "teacher": "架空教員005",
+          "room": "架空室005"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目005",
+          "teacher": "架空教員005",
+          "room": "架空室005"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 1,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目006",
+          "teacher": "架空教員006",
+          "room": "架空室006"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目007",
+          "teacher": "架空教員007",
+          "room": "架空室007"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目007",
+          "teacher": "架空教員007",
+          "room": "架空室007"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 2,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目007",
+          "teacher": "架空教員007",
+          "room": "架空室007"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目008",
+          "teacher": "架空教員008",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目009",
+          "teacher": "架空教員009",
+          "room": "架空室009"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 2,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目009",
+          "teacher": "架空教員009",
+          "room": "架空室009"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 2,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目009",
+          "teacher": "架空教員009",
+          "room": "架空室009"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目010",
+          "teacher": "架空教員010",
+          "room": "架空室010"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目011",
+          "teacher": "架空教員011",
+          "room": "架空室011"
+        },
+        {
+          "subject": "架空科目012",
+          "teacher": "架空教員012",
+          "room": "架空室012"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目011",
+          "teacher": "架空教員011",
+          "room": "架空室011"
+        },
+        {
+          "subject": "架空科目012",
+          "teacher": "架空教員012",
+          "room": "架空室012"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 3,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目011",
+          "teacher": "架空教員011",
+          "room": "架空室011"
+        },
+        {
+          "subject": "架空科目012",
+          "teacher": "架空教員012",
+          "room": "架空室012"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 3,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目013",
+          "teacher": "架空教員013",
+          "room": "架空室013"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目014",
+          "teacher": "架空教員014",
+          "room": "架空室014"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目015",
+          "teacher": "架空教員015",
+          "room": "架空室015"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目016",
+          "teacher": "架空教員016",
+          "room": "架空室016"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目016",
+          "teacher": "架空教員016",
+          "room": "架空室016"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目017",
+          "teacher": "架空教員017",
+          "room": "架空室017"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 4,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目018",
+          "teacher": "架空教員018",
+          "room": "架空室018"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 4,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目019",
+          "teacher": "架空教員019",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目020",
+          "teacher": "架空教員020",
+          "room": "架空室020"
+        },
+        {
+          "subject": "架空科目021",
+          "teacher": "",
+          "room": "架空室021"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目020",
+          "teacher": "架空教員020",
+          "room": "架空室020"
+        },
+        {
+          "subject": "架空科目021",
+          "teacher": "",
+          "room": "架空室021"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 4,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目022",
+          "teacher": "架空教員022",
+          "room": "架空室022"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 4,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目023",
+          "teacher": "架空教員023",
+          "room": "架空室023"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 4,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目024",
+          "teacher": "架空教員024",
+          "room": "架空室024"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 5,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目025",
+          "teacher": "架空教員025",
+          "room": "架空室025"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 5,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目025",
+          "teacher": "架空教員025",
+          "room": "架空室025"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目025",
+          "teacher": "架空教員025",
+          "room": "架空室025"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目026",
+          "teacher": "架空教員026",
+          "room": "架空室026"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 5,
+      "period": 5,
+      "lessons": []
+    },
+    {
+      "className": "1_1",
+      "weekday": 5,
+      "period": 6,
+      "lessons": []
+    },
+    {
+      "className": "1_1",
+      "weekday": 5,
+      "period": 7,
+      "lessons": []
+    },
+    {
+      "className": "1_1",
+      "weekday": 5,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目027",
+          "teacher": "架空教員027",
+          "room": "架空室027"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 1,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目028",
+          "teacher": "架空教員028",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目028",
+          "teacher": "架空教員028",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 1,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目029",
+          "teacher": "架空教員029",
+          "room": "架空室029"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 1,
+      "period": 4,
+      "lessons": []
+    },
+    {
+      "className": "1_2",
+      "weekday": 1,
+      "period": 5,
+      "lessons": []
+    },
+    {
+      "className": "1_2",
+      "weekday": 1,
+      "period": 6,
+      "lessons": []
+    },
+    {
+      "className": "1_2",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目030",
+          "teacher": "架空教員030",
+          "room": "架空室030"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 1,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "1_2",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目031",
+          "teacher": "架空教員031",
+          "room": "架空室031"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目032",
+          "teacher": "架空教員032",
+          "room": "架空室032"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 2,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "1_2",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目033",
+          "teacher": "架空教員033",
+          "room": "架空室033"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目034",
+          "teacher": "架空教員034",
+          "room": "架空室034"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 2,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目035",
+          "teacher": "架空教員035",
+          "room": "架空室035"
+        },
+        {
+          "subject": "架空科目036",
+          "teacher": "",
+          "room": "架空室036"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 2,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目035",
+          "teacher": "架空教員035",
+          "room": "架空室035"
+        },
+        {
+          "subject": "架空科目036",
+          "teacher": "",
+          "room": "架空室036"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目035",
+          "teacher": "架空教員035",
+          "room": "架空室035"
+        },
+        {
+          "subject": "架空科目036",
+          "teacher": "",
+          "room": "架空室036"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目037",
+          "teacher": "架空教員037",
+          "room": "架空室037"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目038",
+          "teacher": "架空教員038",
+          "room": "架空室038"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 3,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "1_2",
+      "weekday": 3,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目039",
+          "teacher": "架空教員039",
+          "room": "架空室039"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目040",
+          "teacher": "架空教員040",
+          "room": "架空室040"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 3,
+      "period": 6,
+      "lessons": []
+    },
+    {
+      "className": "1_2",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目041",
+          "teacher": "",
+          "room": "架空室041"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目042",
+          "teacher": "架空教員042",
+          "room": "架空室042"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目043",
+          "teacher": "架空教員043",
+          "room": "架空室043"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 4,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目044",
+          "teacher": "架空教員044",
+          "room": "架空室044"
+        },
+        {
+          "subject": "架空科目045",
+          "teacher": "架空教員045",
+          "room": "架空室045"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 4,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目044",
+          "teacher": "架空教員044",
+          "room": "架空室044"
+        },
+        {
+          "subject": "架空科目045",
+          "teacher": "架空教員045",
+          "room": "架空室045"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目046",
+          "teacher": "架空教員046",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目047",
+          "teacher": "架空教員047",
+          "room": "架空室047"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 4,
+      "period": 6,
+      "lessons": []
+    },
+    {
+      "className": "1_2",
+      "weekday": 4,
+      "period": 7,
+      "lessons": []
+    },
+    {
+      "className": "1_2",
+      "weekday": 4,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目048",
+          "teacher": "架空教員048",
+          "room": "架空室048"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 5,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目049",
+          "teacher": "架空教員049",
+          "room": "架空室049"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 5,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目050",
+          "teacher": "",
+          "room": "架空室050"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目051",
+          "teacher": "架空教員051",
+          "room": "架空室051"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目051",
+          "teacher": "架空教員051",
+          "room": "架空室051"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 5,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目051",
+          "teacher": "架空教員051",
+          "room": "架空室051"
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目052",
+          "teacher": "架空教員052",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 5,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目053",
+          "teacher": "架空教員053",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "1_2",
+      "weekday": 5,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "1_3",
+      "weekday": 1,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目054",
+          "teacher": "架空教員054",
+          "room": "架空室054"
+        },
+        {
+          "subject": "架空科目055",
+          "teacher": "架空教員055",
+          "room": "架空室055"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目054",
+          "teacher": "架空教員054",
+          "room": "架空室054"
+        },
+        {
+          "subject": "架空科目055",
+          "teacher": "架空教員055",
+          "room": "架空室055"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 1,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "1_3",
+      "weekday": 1,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目056",
+          "teacher": "架空教員056",
+          "room": "架空室056"
+        },
+        {
+          "subject": "架空科目057",
+          "teacher": "架空教員057",
+          "room": "架空室057"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目056",
+          "teacher": "架空教員056",
+          "room": "架空室056"
+        },
+        {
+          "subject": "架空科目057",
+          "teacher": "架空教員057",
+          "room": "架空室057"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目056",
+          "teacher": "架空教員056",
+          "room": "架空室056"
+        },
+        {
+          "subject": "架空科目057",
+          "teacher": "架空教員057",
+          "room": "架空室057"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目058",
+          "teacher": "架空教員058",
+          "room": "架空室058"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 1,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目058",
+          "teacher": "架空教員058",
+          "room": "架空室058"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 2,
+      "period": 1,
+      "lessons": []
+    },
+    {
+      "className": "1_3",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目059",
+          "teacher": "架空教員059",
+          "room": "架空室059"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 2,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目059",
+          "teacher": "架空教員059",
+          "room": "架空室059"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目059",
+          "teacher": "架空教員059",
+          "room": "架空室059"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目060",
+          "teacher": "架空教員060",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 2,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目061",
+          "teacher": "架空教員061",
+          "room": "架空室061"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 2,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目062",
+          "teacher": "架空教員062",
+          "room": "架空室062"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目063",
+          "teacher": "架空教員063",
+          "room": "架空室063"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目064",
+          "teacher": "架空教員064",
+          "room": "架空室064"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目065",
+          "teacher": "架空教員065",
+          "room": "架空室065"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 3,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目065",
+          "teacher": "架空教員065",
+          "room": "架空室065"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 3,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目065",
+          "teacher": "架空教員065",
+          "room": "架空室065"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 3,
+      "period": 5,
+      "lessons": []
+    },
+    {
+      "className": "1_3",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目066",
+          "teacher": "",
+          "room": "架空室066"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目066",
+          "teacher": "",
+          "room": "架空室066"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目067",
+          "teacher": "架空教員067",
+          "room": "架空室067"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目068",
+          "teacher": "架空教員068",
+          "room": "架空室068"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 4,
+      "period": 2,
+      "lessons": []
+    },
+    {
+      "className": "1_3",
+      "weekday": 4,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目069",
+          "teacher": "架空教員069",
+          "room": "架空室069"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目069",
+          "teacher": "架空教員069",
+          "room": "架空室069"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目069",
+          "teacher": "架空教員069",
+          "room": "架空室069"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 4,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目070",
+          "teacher": "架空教員070",
+          "room": "架空室070"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 4,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目070",
+          "teacher": "架空教員070",
+          "room": "架空室070"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 4,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "1_3",
+      "weekday": 5,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目071",
+          "teacher": "架空教員071",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 5,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目072",
+          "teacher": "架空教員072",
+          "room": "架空室072"
+        },
+        {
+          "subject": "架空科目073",
+          "teacher": "",
+          "room": "架空室073"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目072",
+          "teacher": "架空教員072",
+          "room": "架空室072"
+        },
+        {
+          "subject": "架空科目073",
+          "teacher": "",
+          "room": "架空室073"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目072",
+          "teacher": "架空教員072",
+          "room": "架空室072"
+        },
+        {
+          "subject": "架空科目073",
+          "teacher": "",
+          "room": "架空室073"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 5,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目074",
+          "teacher": "",
+          "room": "架空室074"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目075",
+          "teacher": "",
+          "room": "架空室075"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 5,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目076",
+          "teacher": "架空教員076",
+          "room": "架空室076"
+        }
+      ]
+    },
+    {
+      "className": "1_3",
+      "weekday": 5,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目077",
+          "teacher": "架空教員077",
+          "room": "架空室077"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 1,
+      "period": 1,
+      "lessons": []
+    },
+    {
+      "className": "2_CN",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目078",
+          "teacher": "架空教員078",
+          "room": "架空室078"
+        },
+        {
+          "subject": "架空科目079",
+          "teacher": "架空教員079",
+          "room": "架空室079"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 1,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目078",
+          "teacher": "架空教員078",
+          "room": "架空室078"
+        },
+        {
+          "subject": "架空科目079",
+          "teacher": "架空教員079",
+          "room": "架空室079"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 1,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目080",
+          "teacher": "架空教員080",
+          "room": "架空室080"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目080",
+          "teacher": "架空教員080",
+          "room": "架空室080"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目080",
+          "teacher": "架空教員080",
+          "room": "架空室080"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目081",
+          "teacher": "架空教員081",
+          "room": "架空室081"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 1,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "2_CN",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目082",
+          "teacher": "架空教員082",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目083",
+          "teacher": "架空教員083",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 2,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目084",
+          "teacher": "架空教員084",
+          "room": "架空室084"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目085",
+          "teacher": "架空教員085",
+          "room": "架空室085"
+        },
+        {
+          "subject": "架空科目086",
+          "teacher": "架空教員086",
+          "room": "架空室086"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目085",
+          "teacher": "架空教員085",
+          "room": "架空室085"
+        },
+        {
+          "subject": "架空科目086",
+          "teacher": "架空教員086",
+          "room": "架空室086"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 2,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目087",
+          "teacher": "",
+          "room": "架空室087"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 2,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目087",
+          "teacher": "",
+          "room": "架空室087"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目088",
+          "teacher": "架空教員088",
+          "room": "架空室088"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目089",
+          "teacher": "",
+          "room": "架空室089"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目090",
+          "teacher": "架空教員090",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 3,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目091",
+          "teacher": "架空教員091",
+          "room": "架空室091"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 3,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目092",
+          "teacher": "架空教員092",
+          "room": "架空室092"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目092",
+          "teacher": "架空教員092",
+          "room": "架空室092"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目093",
+          "teacher": "架空教員093",
+          "room": "架空室093"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目094",
+          "teacher": "架空教員094",
+          "room": "架空室094"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目095",
+          "teacher": "架空教員095",
+          "room": "架空室095"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目096",
+          "teacher": "架空教員096",
+          "room": "架空室096"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 4,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目097",
+          "teacher": "架空教員097",
+          "room": "架空室097"
+        },
+        {
+          "subject": "架空科目098",
+          "teacher": "架空教員098",
+          "room": "架空室098"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 4,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目097",
+          "teacher": "架空教員097",
+          "room": "架空室097"
+        },
+        {
+          "subject": "架空科目098",
+          "teacher": "架空教員098",
+          "room": "架空室098"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目099",
+          "teacher": "",
+          "room": "架空室099"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目099",
+          "teacher": "",
+          "room": "架空室099"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 4,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目100",
+          "teacher": "架空教員100",
+          "room": "架空室100"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 4,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目100",
+          "teacher": "架空教員100",
+          "room": "架空室100"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 4,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目100",
+          "teacher": "架空教員100",
+          "room": "架空室100"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 5,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目101",
+          "teacher": "架空教員101",
+          "room": "架空室101"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 5,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目102",
+          "teacher": "架空教員102",
+          "room": "架空室102"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目103",
+          "teacher": "架空教員103",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目104",
+          "teacher": "架空教員104",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 5,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目104",
+          "teacher": "架空教員104",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目104",
+          "teacher": "架空教員104",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 5,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目105",
+          "teacher": "架空教員105",
+          "room": "架空室105"
+        }
+      ]
+    },
+    {
+      "className": "2_CN",
+      "weekday": 5,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目106",
+          "teacher": "架空教員106",
+          "room": "架空室106"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 1,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目107",
+          "teacher": "架空教員107",
+          "room": "架空室107"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目108",
+          "teacher": "架空教員108",
+          "room": "架空室108"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 1,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目108",
+          "teacher": "架空教員108",
+          "room": "架空室108"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 1,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目108",
+          "teacher": "架空教員108",
+          "room": "架空室108"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目109",
+          "teacher": "架空教員109",
+          "room": "架空室109"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目110",
+          "teacher": "架空教員110",
+          "room": "架空室110"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目111",
+          "teacher": "架空教員111",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 1,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "2_ES",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目112",
+          "teacher": "架空教員112",
+          "room": "架空室112"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目113",
+          "teacher": "",
+          "room": "架空室113"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 2,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目114",
+          "teacher": "架空教員114",
+          "room": "架空室114"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 2,
+      "period": 4,
+      "lessons": []
+    },
+    {
+      "className": "2_ES",
+      "weekday": 2,
+      "period": 5,
+      "lessons": []
+    },
+    {
+      "className": "2_ES",
+      "weekday": 2,
+      "period": 6,
+      "lessons": []
+    },
+    {
+      "className": "2_ES",
+      "weekday": 2,
+      "period": 7,
+      "lessons": []
+    },
+    {
+      "className": "2_ES",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目115",
+          "teacher": "架空教員115",
+          "room": "架空室115"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目116",
+          "teacher": "架空教員116",
+          "room": "架空室116"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目117",
+          "teacher": "",
+          "room": "架空室117"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 3,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "2_ES",
+      "weekday": 3,
+      "period": 4,
+      "lessons": []
+    },
+    {
+      "className": "2_ES",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目118",
+          "teacher": "架空教員118",
+          "room": "架空室118"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目119",
+          "teacher": "架空教員119",
+          "room": "架空室119"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目120",
+          "teacher": "架空教員120",
+          "room": "架空室120"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目120",
+          "teacher": "架空教員120",
+          "room": "架空室120"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目121",
+          "teacher": "架空教員121",
+          "room": "架空室121"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 4,
+      "period": 2,
+      "lessons": []
+    },
+    {
+      "className": "2_ES",
+      "weekday": 4,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "2_ES",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目122",
+          "teacher": "架空教員122",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目123",
+          "teacher": "架空教員123",
+          "room": "架空室123"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 4,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目124",
+          "teacher": "架空教員124",
+          "room": "架空室124"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 4,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目124",
+          "teacher": "架空教員124",
+          "room": "架空室124"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 4,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目125",
+          "teacher": "架空教員125",
+          "room": "架空室125"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 5,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目126",
+          "teacher": "架空教員126",
+          "room": "架空室126"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 5,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目127",
+          "teacher": "架空教員127",
+          "room": "架空室127"
+        },
+        {
+          "subject": "架空科目128",
+          "teacher": "架空教員128",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目127",
+          "teacher": "架空教員127",
+          "room": "架空室127"
+        },
+        {
+          "subject": "架空科目128",
+          "teacher": "架空教員128",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目129",
+          "teacher": "架空教員129",
+          "room": "架空室129"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 5,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目129",
+          "teacher": "架空教員129",
+          "room": "架空室129"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目129",
+          "teacher": "架空教員129",
+          "room": "架空室129"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 5,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目130",
+          "teacher": "架空教員130",
+          "room": "架空室130"
+        }
+      ]
+    },
+    {
+      "className": "2_ES",
+      "weekday": 5,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "2_IT",
+      "weekday": 1,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目131",
+          "teacher": "架空教員131",
+          "room": "架空室131"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目132",
+          "teacher": "架空教員132",
+          "room": "架空室132"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 1,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目133",
+          "teacher": "架空教員133",
+          "room": "架空室133"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 1,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目134",
+          "teacher": "架空教員134",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目134",
+          "teacher": "架空教員134",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目134",
+          "teacher": "架空教員134",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目135",
+          "teacher": "架空教員135",
+          "room": "架空室135"
+        },
+        {
+          "subject": "架空科目136",
+          "teacher": "架空教員136",
+          "room": "架空室136"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 1,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目135",
+          "teacher": "架空教員135",
+          "room": "架空室135"
+        },
+        {
+          "subject": "架空科目136",
+          "teacher": "架空教員136",
+          "room": "架空室136"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目137",
+          "teacher": "架空教員137",
+          "room": ""
+        },
+        {
+          "subject": "架空科目138",
+          "teacher": "架空教員138",
+          "room": "架空室138"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目137",
+          "teacher": "架空教員137",
+          "room": ""
+        },
+        {
+          "subject": "架空科目138",
+          "teacher": "架空教員138",
+          "room": "架空室138"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 2,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目139",
+          "teacher": "架空教員139",
+          "room": "架空室139"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目140",
+          "teacher": "架空教員140",
+          "room": "架空室140"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目141",
+          "teacher": "架空教員141",
+          "room": "架空室141"
+        },
+        {
+          "subject": "架空科目142",
+          "teacher": "架空教員142",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 2,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目141",
+          "teacher": "架空教員141",
+          "room": "架空室141"
+        },
+        {
+          "subject": "架空科目142",
+          "teacher": "架空教員142",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 2,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目143",
+          "teacher": "架空教員143",
+          "room": "架空室143"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目144",
+          "teacher": "架空教員144",
+          "room": "架空室144"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目145",
+          "teacher": "架空教員145",
+          "room": "架空室145"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目146",
+          "teacher": "架空教員146",
+          "room": "架空室146"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 3,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目147",
+          "teacher": "",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 3,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目148",
+          "teacher": "架空教員148",
+          "room": "架空室148"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目149",
+          "teacher": "架空教員149",
+          "room": "架空室149"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目149",
+          "teacher": "架空教員149",
+          "room": "架空室149"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目149",
+          "teacher": "架空教員149",
+          "room": "架空室149"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目150",
+          "teacher": "架空教員150",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目151",
+          "teacher": "架空教員151",
+          "room": "架空室151"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 4,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目151",
+          "teacher": "架空教員151",
+          "room": "架空室151"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 4,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目152",
+          "teacher": "架空教員152",
+          "room": "架空室152"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目153",
+          "teacher": "架空教員153",
+          "room": "架空室153"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 4,
+      "period": 5,
+      "lessons": []
+    },
+    {
+      "className": "2_IT",
+      "weekday": 4,
+      "period": 6,
+      "lessons": []
+    },
+    {
+      "className": "2_IT",
+      "weekday": 4,
+      "period": 7,
+      "lessons": []
+    },
+    {
+      "className": "2_IT",
+      "weekday": 4,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "2_IT",
+      "weekday": 5,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目154",
+          "teacher": "架空教員154",
+          "room": "架空室154"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 5,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目155",
+          "teacher": "架空教員155",
+          "room": "架空室155"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目156",
+          "teacher": "架空教員156",
+          "room": "架空室156"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目157",
+          "teacher": "架空教員157",
+          "room": "架空室157"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 5,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目158",
+          "teacher": "架空教員158",
+          "room": "架空室158"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目159",
+          "teacher": "",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 5,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目160",
+          "teacher": "架空教員160",
+          "room": "架空室160"
+        }
+      ]
+    },
+    {
+      "className": "2_IT",
+      "weekday": 5,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目161",
+          "teacher": "架空教員161",
+          "room": "架空室161"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 1,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目162",
+          "teacher": "架空教員162",
+          "room": "架空室162"
+        },
+        {
+          "subject": "架空科目163",
+          "teacher": "架空教員163",
+          "room": "架空室163"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目162",
+          "teacher": "架空教員162",
+          "room": "架空室162"
+        },
+        {
+          "subject": "架空科目163",
+          "teacher": "架空教員163",
+          "room": "架空室163"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 1,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "3_CN",
+      "weekday": 1,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目164",
+          "teacher": "架空教員164",
+          "room": "架空室164"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目165",
+          "teacher": "架空教員165",
+          "room": "架空室165"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目166",
+          "teacher": "",
+          "room": "架空室166"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目166",
+          "teacher": "",
+          "room": "架空室166"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 1,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目166",
+          "teacher": "",
+          "room": "架空室166"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目167",
+          "teacher": "架空教員167",
+          "room": "架空室167"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目168",
+          "teacher": "架空教員168",
+          "room": "架空室168"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 2,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目169",
+          "teacher": "架空教員169",
+          "room": "架空室169"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目170",
+          "teacher": "架空教員170",
+          "room": "架空室170"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目171",
+          "teacher": "架空教員171",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 2,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目171",
+          "teacher": "架空教員171",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 2,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目172",
+          "teacher": "架空教員172",
+          "room": "架空室172"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目173",
+          "teacher": "架空教員173",
+          "room": "架空室173"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目174",
+          "teacher": "架空教員174",
+          "room": "架空室174"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目174",
+          "teacher": "架空教員174",
+          "room": "架空室174"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 3,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目174",
+          "teacher": "架空教員174",
+          "room": "架空室174"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 3,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目175",
+          "teacher": "架空教員175",
+          "room": "架空室175"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目176",
+          "teacher": "架空教員176",
+          "room": "架空室176"
+        },
+        {
+          "subject": "架空科目177",
+          "teacher": "架空教員177",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目176",
+          "teacher": "架空教員176",
+          "room": "架空室176"
+        },
+        {
+          "subject": "架空科目177",
+          "teacher": "架空教員177",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目178",
+          "teacher": "",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目179",
+          "teacher": "架空教員179",
+          "room": "架空室179"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目180",
+          "teacher": "架空教員180",
+          "room": "架空室180"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 4,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目181",
+          "teacher": "架空教員181",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 4,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "3_CN",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目182",
+          "teacher": "架空教員182",
+          "room": "架空室182"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目183",
+          "teacher": "架空教員183",
+          "room": "架空室183"
+        },
+        {
+          "subject": "架空科目184",
+          "teacher": "架空教員184",
+          "room": "架空室184"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 4,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目183",
+          "teacher": "架空教員183",
+          "room": "架空室183"
+        },
+        {
+          "subject": "架空科目184",
+          "teacher": "架空教員184",
+          "room": "架空室184"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 4,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目185",
+          "teacher": "",
+          "room": "架空室185"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 4,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目186",
+          "teacher": "架空教員186",
+          "room": "架空室186"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 5,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目187",
+          "teacher": "架空教員187",
+          "room": "架空室187"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 5,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目187",
+          "teacher": "架空教員187",
+          "room": "架空室187"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目187",
+          "teacher": "架空教員187",
+          "room": "架空室187"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 5,
+      "period": 4,
+      "lessons": []
+    },
+    {
+      "className": "3_CN",
+      "weekday": 5,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目188",
+          "teacher": "架空教員188",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目189",
+          "teacher": "架空教員189",
+          "room": "架空室189"
+        }
+      ]
+    },
+    {
+      "className": "3_CN",
+      "weekday": 5,
+      "period": 7,
+      "lessons": []
+    },
+    {
+      "className": "3_CN",
+      "weekday": 5,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目190",
+          "teacher": "架空教員190",
+          "room": "架空室190"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 1,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目191",
+          "teacher": "架空教員191",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 1,
+      "period": 2,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 1,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 1,
+      "period": 4,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 1,
+      "period": 5,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目192",
+          "teacher": "",
+          "room": "架空室192"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目192",
+          "teacher": "",
+          "room": "架空室192"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 1,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目193",
+          "teacher": "",
+          "room": "架空室193"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目194",
+          "teacher": "架空教員194",
+          "room": "架空室194"
+        },
+        {
+          "subject": "架空科目195",
+          "teacher": "架空教員195",
+          "room": "架空室195"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目194",
+          "teacher": "架空教員194",
+          "room": "架空室194"
+        },
+        {
+          "subject": "架空科目195",
+          "teacher": "架空教員195",
+          "room": "架空室195"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 2,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目194",
+          "teacher": "架空教員194",
+          "room": "架空室194"
+        },
+        {
+          "subject": "架空科目195",
+          "teacher": "架空教員195",
+          "room": "架空室195"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 2,
+      "period": 4,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 2,
+      "period": 5,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 2,
+      "period": 6,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 2,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目196",
+          "teacher": "架空教員196",
+          "room": "架空室196"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目196",
+          "teacher": "架空教員196",
+          "room": "架空室196"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 3,
+      "period": 1,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目197",
+          "teacher": "架空教員197",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 3,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目198",
+          "teacher": "架空教員198",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 3,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目199",
+          "teacher": "架空教員199",
+          "room": "架空室199"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目200",
+          "teacher": "",
+          "room": "架空室200"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目201",
+          "teacher": "架空教員201",
+          "room": "架空室201"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目202",
+          "teacher": "",
+          "room": "架空室202"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目203",
+          "teacher": "架空教員203",
+          "room": "架空室203"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目204",
+          "teacher": "",
+          "room": "架空室204"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 4,
+      "period": 2,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 4,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目205",
+          "teacher": "",
+          "room": "架空室205"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目206",
+          "teacher": "架空教員206",
+          "room": "架空室206"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 4,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目206",
+          "teacher": "架空教員206",
+          "room": "架空室206"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 4,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目206",
+          "teacher": "架空教員206",
+          "room": "架空室206"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 4,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目207",
+          "teacher": "架空教員207",
+          "room": "架空室207"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 5,
+      "period": 1,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 5,
+      "period": 2,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目208",
+          "teacher": "架空教員208",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目209",
+          "teacher": "架空教員209",
+          "room": "架空室209"
+        }
+      ]
+    },
+    {
+      "className": "3_ES",
+      "weekday": 5,
+      "period": 5,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 5,
+      "period": 6,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 5,
+      "period": 7,
+      "lessons": []
+    },
+    {
+      "className": "3_ES",
+      "weekday": 5,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "3_IT",
+      "weekday": 1,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目210",
+          "teacher": "架空教員210",
+          "room": "架空室210"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目211",
+          "teacher": "架空教員211",
+          "room": "架空室211"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 1,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目212",
+          "teacher": "架空教員212",
+          "room": "架空室212"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 1,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目213",
+          "teacher": "架空教員213",
+          "room": "架空室213"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目214",
+          "teacher": "架空教員214",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目215",
+          "teacher": "架空教員215",
+          "room": "架空室215"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目216",
+          "teacher": "",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 1,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "3_IT",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目217",
+          "teacher": "架空教員217",
+          "room": "架空室217"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目218",
+          "teacher": "架空教員218",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 2,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目219",
+          "teacher": "架空教員219",
+          "room": "架空室219"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目220",
+          "teacher": "架空教員220",
+          "room": "架空室220"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目221",
+          "teacher": "架空教員221",
+          "room": ""
+        },
+        {
+          "subject": "架空科目222",
+          "teacher": "",
+          "room": "架空室222"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 2,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目221",
+          "teacher": "架空教員221",
+          "room": ""
+        },
+        {
+          "subject": "架空科目222",
+          "teacher": "",
+          "room": "架空室222"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 2,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目221",
+          "teacher": "架空教員221",
+          "room": ""
+        },
+        {
+          "subject": "架空科目222",
+          "teacher": "",
+          "room": "架空室222"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目223",
+          "teacher": "架空教員223",
+          "room": "架空室223"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目224",
+          "teacher": "架空教員224",
+          "room": "架空室224"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目225",
+          "teacher": "架空教員225",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 3,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目225",
+          "teacher": "架空教員225",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 3,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目225",
+          "teacher": "架空教員225",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目226",
+          "teacher": "架空教員226",
+          "room": "架空室226"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目227",
+          "teacher": "架空教員227",
+          "room": "架空室227"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目227",
+          "teacher": "架空教員227",
+          "room": "架空室227"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目228",
+          "teacher": "",
+          "room": "架空室228"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目229",
+          "teacher": "架空教員229",
+          "room": "架空室229"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 4,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目230",
+          "teacher": "架空教員230",
+          "room": "架空室230"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 4,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目231",
+          "teacher": "",
+          "room": "架空室231"
+        },
+        {
+          "subject": "架空科目232",
+          "teacher": "架空教員232",
+          "room": "架空室232"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目231",
+          "teacher": "",
+          "room": "架空室231"
+        },
+        {
+          "subject": "架空科目232",
+          "teacher": "架空教員232",
+          "room": "架空室232"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目233",
+          "teacher": "架空教員233",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 4,
+      "period": 6,
+      "lessons": []
+    },
+    {
+      "className": "3_IT",
+      "weekday": 4,
+      "period": 7,
+      "lessons": []
+    },
+    {
+      "className": "3_IT",
+      "weekday": 4,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "3_IT",
+      "weekday": 5,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目234",
+          "teacher": "架空教員234",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 5,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目235",
+          "teacher": "架空教員235",
+          "room": "架空室235"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目236",
+          "teacher": "架空教員236",
+          "room": "架空室236"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目236",
+          "teacher": "架空教員236",
+          "room": "架空室236"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 5,
+      "period": 5,
+      "lessons": []
+    },
+    {
+      "className": "3_IT",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目237",
+          "teacher": "架空教員237",
+          "room": "架空室237"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 5,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目237",
+          "teacher": "架空教員237",
+          "room": "架空室237"
+        }
+      ]
+    },
+    {
+      "className": "3_IT",
+      "weekday": 5,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目238",
+          "teacher": "架空教員238",
+          "room": "架空室238"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 1,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目239",
+          "teacher": "架空教員239",
+          "room": "架空室239"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目240",
+          "teacher": "架空教員240",
+          "room": "架空室240"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 1,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目241",
+          "teacher": "架空教員241",
+          "room": "架空室241"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 1,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目241",
+          "teacher": "架空教員241",
+          "room": "架空室241"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目241",
+          "teacher": "架空教員241",
+          "room": "架空室241"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目242",
+          "teacher": "架空教員242",
+          "room": "架空室242"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目243",
+          "teacher": "架空教員243",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 1,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目244",
+          "teacher": "架空教員244",
+          "room": "架空室244"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目245",
+          "teacher": "架空教員245",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 2,
+      "period": 2,
+      "lessons": []
+    },
+    {
+      "className": "4_CN",
+      "weekday": 2,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目246",
+          "teacher": "",
+          "room": "架空室246"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目247",
+          "teacher": "架空教員247",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目247",
+          "teacher": "架空教員247",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 2,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目248",
+          "teacher": "架空教員248",
+          "room": "架空室248"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 2,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目249",
+          "teacher": "架空教員249",
+          "room": "架空室249"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目250",
+          "teacher": "架空教員250",
+          "room": "架空室250"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目251",
+          "teacher": "架空教員251",
+          "room": "架空室251"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 3,
+      "period": 2,
+      "lessons": []
+    },
+    {
+      "className": "4_CN",
+      "weekday": 3,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "4_CN",
+      "weekday": 3,
+      "period": 4,
+      "lessons": []
+    },
+    {
+      "className": "4_CN",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目252",
+          "teacher": "架空教員252",
+          "room": "架空室252"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目253",
+          "teacher": "架空教員253",
+          "room": "架空室253"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目254",
+          "teacher": "架空教員254",
+          "room": "架空室254"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目255",
+          "teacher": "架空教員255",
+          "room": "架空室255"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目256",
+          "teacher": "架空教員256",
+          "room": "架空室256"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 4,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目257",
+          "teacher": "架空教員257",
+          "room": "架空室257"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 4,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目258",
+          "teacher": "架空教員258",
+          "room": "架空室258"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目259",
+          "teacher": "架空教員259",
+          "room": "架空室259"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目260",
+          "teacher": "架空教員260",
+          "room": "架空室260"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 4,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目261",
+          "teacher": "架空教員261",
+          "room": "架空室261"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 4,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目262",
+          "teacher": "架空教員262",
+          "room": "架空室262"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 4,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目262",
+          "teacher": "架空教員262",
+          "room": "架空室262"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 5,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目263",
+          "teacher": "",
+          "room": "架空室263"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 5,
+      "period": 2,
+      "lessons": []
+    },
+    {
+      "className": "4_CN",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目264",
+          "teacher": "架空教員264",
+          "room": "架空室264"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目264",
+          "teacher": "架空教員264",
+          "room": "架空室264"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 5,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目264",
+          "teacher": "架空教員264",
+          "room": "架空室264"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目265",
+          "teacher": "架空教員265",
+          "room": "架空室265"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 5,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目265",
+          "teacher": "架空教員265",
+          "room": "架空室265"
+        }
+      ]
+    },
+    {
+      "className": "4_CN",
+      "weekday": 5,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目265",
+          "teacher": "架空教員265",
+          "room": "架空室265"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 1,
+      "period": 1,
+      "lessons": []
+    },
+    {
+      "className": "4_ES",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目266",
+          "teacher": "架空教員266",
+          "room": "架空室266"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 1,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "4_ES",
+      "weekday": 1,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目267",
+          "teacher": "架空教員267",
+          "room": "架空室267"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目268",
+          "teacher": "架空教員268",
+          "room": "架空室268"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目269",
+          "teacher": "架空教員269",
+          "room": "架空室269"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目270",
+          "teacher": "架空教員270",
+          "room": "架空室270"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 1,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目271",
+          "teacher": "架空教員271",
+          "room": "架空室271"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目272",
+          "teacher": "架空教員272",
+          "room": "架空室272"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目273",
+          "teacher": "架空教員273",
+          "room": "架空室273"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 2,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "4_ES",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目274",
+          "teacher": "架空教員274",
+          "room": "架空室274"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目275",
+          "teacher": "架空教員275",
+          "room": "架空室275"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 2,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目276",
+          "teacher": "架空教員276",
+          "room": "架空室276"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 2,
+      "period": 7,
+      "lessons": []
+    },
+    {
+      "className": "4_ES",
+      "weekday": 2,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "4_ES",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目277",
+          "teacher": "架空教員277",
+          "room": "架空室277"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目278",
+          "teacher": "",
+          "room": "架空室278"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 3,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目279",
+          "teacher": "",
+          "room": "架空室279"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 3,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目280",
+          "teacher": "架空教員280",
+          "room": "架空室280"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目281",
+          "teacher": "架空教員281",
+          "room": "架空室281"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目282",
+          "teacher": "架空教員282",
+          "room": "架空室282"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 3,
+      "period": 7,
+      "lessons": []
+    },
+    {
+      "className": "4_ES",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目283",
+          "teacher": "架空教員283",
+          "room": "架空室283"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 4,
+      "period": 1,
+      "lessons": []
+    },
+    {
+      "className": "4_ES",
+      "weekday": 4,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目284",
+          "teacher": "架空教員284",
+          "room": "架空室284"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 4,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目285",
+          "teacher": "架空教員285",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目285",
+          "teacher": "架空教員285",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目285",
+          "teacher": "架空教員285",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 4,
+      "period": 6,
+      "lessons": []
+    },
+    {
+      "className": "4_ES",
+      "weekday": 4,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目286",
+          "teacher": "架空教員286",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 4,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目287",
+          "teacher": "架空教員287",
+          "room": "架空室287"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 5,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目288",
+          "teacher": "架空教員288",
+          "room": "架空室288"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 5,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目289",
+          "teacher": "架空教員289",
+          "room": "架空室289"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目290",
+          "teacher": "架空教員290",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目291",
+          "teacher": "架空教員291",
+          "room": "架空室291"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 5,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目292",
+          "teacher": "",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目293",
+          "teacher": "架空教員293",
+          "room": "架空室293"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 5,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目293",
+          "teacher": "架空教員293",
+          "room": "架空室293"
+        }
+      ]
+    },
+    {
+      "className": "4_ES",
+      "weekday": 5,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目293",
+          "teacher": "架空教員293",
+          "room": "架空室293"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 1,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目294",
+          "teacher": "架空教員294",
+          "room": "架空室294"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目295",
+          "teacher": "架空教員295",
+          "room": "架空室295"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 1,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目296",
+          "teacher": "架空教員296",
+          "room": "架空室296"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 1,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目297",
+          "teacher": "架空教員297",
+          "room": "架空室297"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目298",
+          "teacher": "架空教員298",
+          "room": "架空室298"
+        },
+        {
+          "subject": "架空科目299",
+          "teacher": "架空教員299",
+          "room": "架空室299"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目298",
+          "teacher": "架空教員298",
+          "room": "架空室298"
+        },
+        {
+          "subject": "架空科目299",
+          "teacher": "架空教員299",
+          "room": "架空室299"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目300",
+          "teacher": "",
+          "room": "架空室300"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 1,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "4_IT",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目301",
+          "teacher": "架空教員301",
+          "room": "架空室301"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目301",
+          "teacher": "架空教員301",
+          "room": "架空室301"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 2,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目302",
+          "teacher": "架空教員302",
+          "room": "架空室302"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目303",
+          "teacher": "架空教員303",
+          "room": "架空室303"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目304",
+          "teacher": "架空教員304",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 2,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目305",
+          "teacher": "架空教員305",
+          "room": "架空室305"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 2,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目306",
+          "teacher": "架空教員306",
+          "room": "架空室306"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目307",
+          "teacher": "架空教員307",
+          "room": "架空室307"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目308",
+          "teacher": "架空教員308",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目309",
+          "teacher": "架空教員309",
+          "room": "架空室309"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 3,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目310",
+          "teacher": "架空教員310",
+          "room": "架空室310"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 3,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目311",
+          "teacher": "",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目312",
+          "teacher": "架空教員312",
+          "room": "架空室312"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目313",
+          "teacher": "架空教員313",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目313",
+          "teacher": "架空教員313",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目313",
+          "teacher": "架空教員313",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目314",
+          "teacher": "架空教員314",
+          "room": "架空室314"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 4,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目315",
+          "teacher": "架空教員315",
+          "room": "架空室315"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 4,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目316",
+          "teacher": "架空教員316",
+          "room": "架空室316"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目316",
+          "teacher": "架空教員316",
+          "room": "架空室316"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目316",
+          "teacher": "架空教員316",
+          "room": "架空室316"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 4,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目317",
+          "teacher": "架空教員317",
+          "room": "架空室317"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 4,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目318",
+          "teacher": "架空教員318",
+          "room": "架空室318"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 4,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目319",
+          "teacher": "架空教員319",
+          "room": "架空室319"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 5,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目320",
+          "teacher": "架空教員320",
+          "room": "架空室320"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 5,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目321",
+          "teacher": "架空教員321",
+          "room": "架空室321"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目321",
+          "teacher": "架空教員321",
+          "room": "架空室321"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目321",
+          "teacher": "架空教員321",
+          "room": "架空室321"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 5,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目322",
+          "teacher": "架空教員322",
+          "room": "架空室322"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目323",
+          "teacher": "架空教員323",
+          "room": "架空室323"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 5,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目324",
+          "teacher": "架空教員324",
+          "room": "架空室324"
+        }
+      ]
+    },
+    {
+      "className": "4_IT",
+      "weekday": 5,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目325",
+          "teacher": "架空教員325",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 1,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目326",
+          "teacher": "架空教員326",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目327",
+          "teacher": "架空教員327",
+          "room": "架空室327"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 1,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目328",
+          "teacher": "架空教員328",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 1,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目328",
+          "teacher": "架空教員328",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目329",
+          "teacher": "架空教員329",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目330",
+          "teacher": "架空教員330",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目331",
+          "teacher": "架空教員331",
+          "room": "架空室331"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 1,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目332",
+          "teacher": "架空教員332",
+          "room": "架空室332"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目333",
+          "teacher": "架空教員333",
+          "room": "架空室333"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目333",
+          "teacher": "架空教員333",
+          "room": "架空室333"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 2,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "5_CN",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目334",
+          "teacher": "",
+          "room": "架空室334"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目335",
+          "teacher": "架空教員335",
+          "room": "架空室335"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 2,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目336",
+          "teacher": "架空教員336",
+          "room": "架空室336"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 2,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目337",
+          "teacher": "架空教員337",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目338",
+          "teacher": "",
+          "room": "架空室338"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目339",
+          "teacher": "架空教員339",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目340",
+          "teacher": "架空教員340",
+          "room": "架空室340"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 3,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目341",
+          "teacher": "架空教員341",
+          "room": "架空室341"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 3,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目342",
+          "teacher": "架空教員342",
+          "room": "架空室342"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目343",
+          "teacher": "架空教員343",
+          "room": "架空室343"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目344",
+          "teacher": "架空教員344",
+          "room": "架空室344"
+        },
+        {
+          "subject": "架空科目345",
+          "teacher": "架空教員345",
+          "room": "架空室345"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目344",
+          "teacher": "架空教員344",
+          "room": "架空室344"
+        },
+        {
+          "subject": "架空科目345",
+          "teacher": "架空教員345",
+          "room": "架空室345"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目344",
+          "teacher": "架空教員344",
+          "room": "架空室344"
+        },
+        {
+          "subject": "架空科目345",
+          "teacher": "架空教員345",
+          "room": "架空室345"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目346",
+          "teacher": "架空教員346",
+          "room": "架空室346"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 4,
+      "period": 2,
+      "lessons": []
+    },
+    {
+      "className": "5_CN",
+      "weekday": 4,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目347",
+          "teacher": "架空教員347",
+          "room": "架空室347"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目348",
+          "teacher": "架空教員348",
+          "room": "架空室348"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目349",
+          "teacher": "架空教員349",
+          "room": "架空室349"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 4,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目350",
+          "teacher": "架空教員350",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 4,
+      "period": 7,
+      "lessons": []
+    },
+    {
+      "className": "5_CN",
+      "weekday": 4,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目351",
+          "teacher": "架空教員351",
+          "room": "架空室351"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 5,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目352",
+          "teacher": "",
+          "room": "架空室352"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 5,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目352",
+          "teacher": "",
+          "room": "架空室352"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目352",
+          "teacher": "",
+          "room": "架空室352"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目353",
+          "teacher": "架空教員353",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 5,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目354",
+          "teacher": "架空教員354",
+          "room": "架空室354"
+        },
+        {
+          "subject": "架空科目355",
+          "teacher": "架空教員355",
+          "room": "架空室355"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目354",
+          "teacher": "架空教員354",
+          "room": "架空室354"
+        },
+        {
+          "subject": "架空科目355",
+          "teacher": "架空教員355",
+          "room": "架空室355"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 5,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目354",
+          "teacher": "架空教員354",
+          "room": "架空室354"
+        },
+        {
+          "subject": "架空科目355",
+          "teacher": "架空教員355",
+          "room": "架空室355"
+        }
+      ]
+    },
+    {
+      "className": "5_CN",
+      "weekday": 5,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目356",
+          "teacher": "架空教員356",
+          "room": "架空室356"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 1,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目357",
+          "teacher": "架空教員357",
+          "room": "架空室357"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目358",
+          "teacher": "",
+          "room": "架空室358"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 1,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目359",
+          "teacher": "架空教員359",
+          "room": "架空室359"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 1,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目360",
+          "teacher": "架空教員360",
+          "room": "架空室360"
+        },
+        {
+          "subject": "架空科目361",
+          "teacher": "架空教員361",
+          "room": "架空室361"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目360",
+          "teacher": "架空教員360",
+          "room": "架空室360"
+        },
+        {
+          "subject": "架空科目361",
+          "teacher": "架空教員361",
+          "room": "架空室361"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目362",
+          "teacher": "架空教員362",
+          "room": "架空室362"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目363",
+          "teacher": "架空教員363",
+          "room": "架空室363"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 1,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目364",
+          "teacher": "架空教員364",
+          "room": "架空室364"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目365",
+          "teacher": "架空教員365",
+          "room": "架空室365"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目365",
+          "teacher": "架空教員365",
+          "room": "架空室365"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 2,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目365",
+          "teacher": "架空教員365",
+          "room": "架空室365"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目366",
+          "teacher": "架空教員366",
+          "room": "架空室366"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目367",
+          "teacher": "架空教員367",
+          "room": "架空室367"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 2,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目368",
+          "teacher": "架空教員368",
+          "room": "架空室368"
+        },
+        {
+          "subject": "架空科目369",
+          "teacher": "",
+          "room": "架空室369"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 2,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目368",
+          "teacher": "架空教員368",
+          "room": "架空室368"
+        },
+        {
+          "subject": "架空科目369",
+          "teacher": "",
+          "room": "架空室369"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目368",
+          "teacher": "架空教員368",
+          "room": "架空室368"
+        },
+        {
+          "subject": "架空科目369",
+          "teacher": "",
+          "room": "架空室369"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目370",
+          "teacher": "架空教員370",
+          "room": "架空室370"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目371",
+          "teacher": "架空教員371",
+          "room": "架空室371"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 3,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "5_ES",
+      "weekday": 3,
+      "period": 4,
+      "lessons": []
+    },
+    {
+      "className": "5_ES",
+      "weekday": 3,
+      "period": 5,
+      "lessons": []
+    },
+    {
+      "className": "5_ES",
+      "weekday": 3,
+      "period": 6,
+      "lessons": []
+    },
+    {
+      "className": "5_ES",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目372",
+          "teacher": "架空教員372",
+          "room": "架空室372"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目373",
+          "teacher": "架空教員373",
+          "room": "架空室373"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目374",
+          "teacher": "架空教員374",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 4,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目375",
+          "teacher": "架空教員375",
+          "room": "架空室375"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 4,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "5_ES",
+      "weekday": 4,
+      "period": 4,
+      "lessons": []
+    },
+    {
+      "className": "5_ES",
+      "weekday": 4,
+      "period": 5,
+      "lessons": []
+    },
+    {
+      "className": "5_ES",
+      "weekday": 4,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目376",
+          "teacher": "架空教員376",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 4,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目376",
+          "teacher": "架空教員376",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 4,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目376",
+          "teacher": "架空教員376",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 5,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目377",
+          "teacher": "架空教員377",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 5,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目378",
+          "teacher": "",
+          "room": "架空室378"
+        },
+        {
+          "subject": "架空科目379",
+          "teacher": "架空教員379",
+          "room": "架空室379"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目378",
+          "teacher": "",
+          "room": "架空室378"
+        },
+        {
+          "subject": "架空科目379",
+          "teacher": "架空教員379",
+          "room": "架空室379"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目378",
+          "teacher": "",
+          "room": "架空室378"
+        },
+        {
+          "subject": "架空科目379",
+          "teacher": "架空教員379",
+          "room": "架空室379"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 5,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目380",
+          "teacher": "",
+          "room": "架空室380"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目381",
+          "teacher": "架空教員381",
+          "room": "架空室381"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 5,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目382",
+          "teacher": "架空教員382",
+          "room": "架空室382"
+        }
+      ]
+    },
+    {
+      "className": "5_ES",
+      "weekday": 5,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目383",
+          "teacher": "架空教員383",
+          "room": "架空室383"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 1,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目384",
+          "teacher": "架空教員384",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目385",
+          "teacher": "架空教員385",
+          "room": "架空室385"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 1,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目386",
+          "teacher": "架空教員386",
+          "room": "架空室386"
+        },
+        {
+          "subject": "架空科目387",
+          "teacher": "架空教員387",
+          "room": "架空室387"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 1,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目386",
+          "teacher": "架空教員386",
+          "room": "架空室386"
+        },
+        {
+          "subject": "架空科目387",
+          "teacher": "架空教員387",
+          "room": "架空室387"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目388",
+          "teacher": "架空教員388",
+          "room": "架空室388"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目389",
+          "teacher": "架空教員389",
+          "room": "架空室389"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目390",
+          "teacher": "架空教員390",
+          "room": "架空室390"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 1,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目390",
+          "teacher": "架空教員390",
+          "room": "架空室390"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目391",
+          "teacher": "架空教員391",
+          "room": "架空室391"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目392",
+          "teacher": "架空教員392",
+          "room": "架空室392"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 2,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目393",
+          "teacher": "架空教員393",
+          "room": "架空室393"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目394",
+          "teacher": "架空教員394",
+          "room": "架空室394"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目395",
+          "teacher": "架空教員395",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 2,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目396",
+          "teacher": "架空教員396",
+          "room": "架空室396"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 2,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目397",
+          "teacher": "架空教員397",
+          "room": "架空室397"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目398",
+          "teacher": "架空教員398",
+          "room": "架空室398"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 3,
+      "period": 1,
+      "lessons": []
+    },
+    {
+      "className": "5_IT",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目399",
+          "teacher": "",
+          "room": "架空室399"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 3,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目400",
+          "teacher": "架空教員400",
+          "room": "架空室400"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 3,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目401",
+          "teacher": "架空教員401",
+          "room": "架空室401"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目402",
+          "teacher": "架空教員402",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目403",
+          "teacher": "架空教員403",
+          "room": "架空室403"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目404",
+          "teacher": "架空教員404",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目405",
+          "teacher": "架空教員405",
+          "room": "架空室405"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目406",
+          "teacher": "架空教員406",
+          "room": "架空室406"
+        },
+        {
+          "subject": "架空科目407",
+          "teacher": "架空教員407",
+          "room": "架空室407"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 4,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目406",
+          "teacher": "架空教員406",
+          "room": "架空室406"
+        },
+        {
+          "subject": "架空科目407",
+          "teacher": "架空教員407",
+          "room": "架空室407"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 4,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目408",
+          "teacher": "架空教員408",
+          "room": "架空室408"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目409",
+          "teacher": "架空教員409",
+          "room": "架空室409"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目410",
+          "teacher": "架空教員410",
+          "room": "架空室410"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 4,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目411",
+          "teacher": "",
+          "room": "架空室411"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 4,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目412",
+          "teacher": "架空教員412",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 4,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目412",
+          "teacher": "架空教員412",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 5,
+      "period": 1,
+      "lessons": []
+    },
+    {
+      "className": "5_IT",
+      "weekday": 5,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目413",
+          "teacher": "架空教員413",
+          "room": "架空室413"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目414",
+          "teacher": "架空教員414",
+          "room": ""
+        },
+        {
+          "subject": "架空科目415",
+          "teacher": "架空教員415",
+          "room": "架空室415"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目414",
+          "teacher": "架空教員414",
+          "room": ""
+        },
+        {
+          "subject": "架空科目415",
+          "teacher": "架空教員415",
+          "room": "架空室415"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 5,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目414",
+          "teacher": "架空教員414",
+          "room": ""
+        },
+        {
+          "subject": "架空科目415",
+          "teacher": "架空教員415",
+          "room": "架空室415"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目416",
+          "teacher": "架空教員416",
+          "room": "架空室416"
+        }
+      ]
+    },
+    {
+      "className": "5_IT",
+      "weekday": 5,
+      "period": 7,
+      "lessons": []
+    },
+    {
+      "className": "5_IT",
+      "weekday": 5,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目417",
+          "teacher": "架空教員417",
+          "room": "架空室417"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 1,
+      "period": 1,
+      "lessons": []
+    },
+    {
+      "className": "AI_1",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目418",
+          "teacher": "架空教員418",
+          "room": "架空室418"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 1,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目419",
+          "teacher": "架空教員419",
+          "room": "架空室419"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 1,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目419",
+          "teacher": "架空教員419",
+          "room": "架空室419"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目419",
+          "teacher": "架空教員419",
+          "room": "架空室419"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目420",
+          "teacher": "架空教員420",
+          "room": "架空室420"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目421",
+          "teacher": "",
+          "room": "架空室421"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 1,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "AI_1",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目422",
+          "teacher": "架空教員422",
+          "room": "架空室422"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目422",
+          "teacher": "架空教員422",
+          "room": "架空室422"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 2,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目422",
+          "teacher": "架空教員422",
+          "room": "架空室422"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目423",
+          "teacher": "架空教員423",
+          "room": "架空室423"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目424",
+          "teacher": "架空教員424",
+          "room": "架空室424"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 2,
+      "period": 6,
+      "lessons": []
+    },
+    {
+      "className": "AI_1",
+      "weekday": 2,
+      "period": 7,
+      "lessons": []
+    },
+    {
+      "className": "AI_1",
+      "weekday": 2,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "AI_1",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目425",
+          "teacher": "架空教員425",
+          "room": "架空室425"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 3,
+      "period": 2,
+      "lessons": []
+    },
+    {
+      "className": "AI_1",
+      "weekday": 3,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "AI_1",
+      "weekday": 3,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目426",
+          "teacher": "架空教員426",
+          "room": "架空室426"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目427",
+          "teacher": "架空教員427",
+          "room": ""
+        },
+        {
+          "subject": "架空科目428",
+          "teacher": "架空教員428",
+          "room": "架空室428"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目427",
+          "teacher": "架空教員427",
+          "room": ""
+        },
+        {
+          "subject": "架空科目428",
+          "teacher": "架空教員428",
+          "room": "架空室428"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目429",
+          "teacher": "架空教員429",
+          "room": "架空室429"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目429",
+          "teacher": "架空教員429",
+          "room": "架空室429"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目430",
+          "teacher": "",
+          "room": "架空室430"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 4,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目431",
+          "teacher": "架空教員431",
+          "room": "架空室431"
+        },
+        {
+          "subject": "架空科目432",
+          "teacher": "架空教員432",
+          "room": "架空室432"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 4,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目431",
+          "teacher": "架空教員431",
+          "room": "架空室431"
+        },
+        {
+          "subject": "架空科目432",
+          "teacher": "架空教員432",
+          "room": "架空室432"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目431",
+          "teacher": "架空教員431",
+          "room": "架空室431"
+        },
+        {
+          "subject": "架空科目432",
+          "teacher": "架空教員432",
+          "room": "架空室432"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目433",
+          "teacher": "架空教員433",
+          "room": "架空室433"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 4,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目433",
+          "teacher": "架空教員433",
+          "room": "架空室433"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 4,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目433",
+          "teacher": "架空教員433",
+          "room": "架空室433"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 4,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目434",
+          "teacher": "架空教員434",
+          "room": "架空室434"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 5,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目435",
+          "teacher": "",
+          "room": "架空室435"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 5,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目436",
+          "teacher": "架空教員436",
+          "room": "架空室436"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 5,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目436",
+          "teacher": "架空教員436",
+          "room": "架空室436"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目436",
+          "teacher": "架空教員436",
+          "room": "架空室436"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 5,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目437",
+          "teacher": "架空教員437",
+          "room": "架空室437"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目438",
+          "teacher": "",
+          "room": "架空室438"
+        },
+        {
+          "subject": "架空科目439",
+          "teacher": "架空教員439",
+          "room": "架空室439"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 5,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目438",
+          "teacher": "",
+          "room": "架空室438"
+        },
+        {
+          "subject": "架空科目439",
+          "teacher": "架空教員439",
+          "room": "架空室439"
+        }
+      ]
+    },
+    {
+      "className": "AI_1",
+      "weekday": 5,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目438",
+          "teacher": "",
+          "room": "架空室438"
+        },
+        {
+          "subject": "架空科目439",
+          "teacher": "架空教員439",
+          "room": "架空室439"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 1,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目440",
+          "teacher": "架空教員440",
+          "room": "架空室440"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 1,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目441",
+          "teacher": "",
+          "room": "架空室441"
+        },
+        {
+          "subject": "架空科目442",
+          "teacher": "架空教員442",
+          "room": "架空室442"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 1,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目441",
+          "teacher": "",
+          "room": "架空室441"
+        },
+        {
+          "subject": "架空科目442",
+          "teacher": "架空教員442",
+          "room": "架空室442"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 1,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目443",
+          "teacher": "架空教員443",
+          "room": "架空室443"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 1,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目444",
+          "teacher": "架空教員444",
+          "room": "架空室444"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 1,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目445",
+          "teacher": "架空教員445",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 1,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目446",
+          "teacher": "",
+          "room": "架空室446"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 1,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目447",
+          "teacher": "架空教員447",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 2,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目448",
+          "teacher": "架空教員448",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 2,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目448",
+          "teacher": "架空教員448",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 2,
+      "period": 3,
+      "lessons": [
+        {
+          "subject": "架空科目448",
+          "teacher": "架空教員448",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 2,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目449",
+          "teacher": "架空教員449",
+          "room": "架空室449"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 2,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目450",
+          "teacher": "架空教員450",
+          "room": "架空室450"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 2,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目451",
+          "teacher": "",
+          "room": "架空室451"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 2,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目452",
+          "teacher": "架空教員452",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 2,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目453",
+          "teacher": "架空教員453",
+          "room": "架空室453"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 3,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目454",
+          "teacher": "架空教員454",
+          "room": "架空室454"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 3,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目455",
+          "teacher": "架空教員455",
+          "room": "架空室455"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 3,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "AI_2",
+      "weekday": 3,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目456",
+          "teacher": "架空教員456",
+          "room": "架空室456"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 3,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目457",
+          "teacher": "架空教員457",
+          "room": "架空室457"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 3,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目458",
+          "teacher": "架空教員458",
+          "room": "架空室458"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 3,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目458",
+          "teacher": "架空教員458",
+          "room": "架空室458"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 3,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目458",
+          "teacher": "架空教員458",
+          "room": "架空室458"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 4,
+      "period": 1,
+      "lessons": [
+        {
+          "subject": "架空科目459",
+          "teacher": "架空教員459",
+          "room": ""
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 4,
+      "period": 2,
+      "lessons": [
+        {
+          "subject": "架空科目460",
+          "teacher": "架空教員460",
+          "room": "架空室460"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 4,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "AI_2",
+      "weekday": 4,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目461",
+          "teacher": "架空教員461",
+          "room": "架空室461"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 4,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目462",
+          "teacher": "架空教員462",
+          "room": "架空室462"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 4,
+      "period": 6,
+      "lessons": []
+    },
+    {
+      "className": "AI_2",
+      "weekday": 4,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目463",
+          "teacher": "架空教員463",
+          "room": "架空室463"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 4,
+      "period": 8,
+      "lessons": []
+    },
+    {
+      "className": "AI_2",
+      "weekday": 5,
+      "period": 1,
+      "lessons": []
+    },
+    {
+      "className": "AI_2",
+      "weekday": 5,
+      "period": 2,
+      "lessons": []
+    },
+    {
+      "className": "AI_2",
+      "weekday": 5,
+      "period": 3,
+      "lessons": []
+    },
+    {
+      "className": "AI_2",
+      "weekday": 5,
+      "period": 4,
+      "lessons": [
+        {
+          "subject": "架空科目464",
+          "teacher": "架空教員464",
+          "room": "架空室464"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 5,
+      "period": 5,
+      "lessons": [
+        {
+          "subject": "架空科目464",
+          "teacher": "架空教員464",
+          "room": "架空室464"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 5,
+      "period": 6,
+      "lessons": [
+        {
+          "subject": "架空科目464",
+          "teacher": "架空教員464",
+          "room": "架空室464"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 5,
+      "period": 7,
+      "lessons": [
+        {
+          "subject": "架空科目465",
+          "teacher": "架空教員465",
+          "room": "架空室465"
+        }
+      ]
+    },
+    {
+      "className": "AI_2",
+      "weekday": 5,
+      "period": 8,
+      "lessons": [
+        {
+          "subject": "架空科目466",
+          "teacher": "架空教員466",
+          "room": "架空室466"
+        }
+      ]
+    }
+  ]
+}

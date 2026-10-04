@@ -1,0 +1,48 @@
+name: Independent fictional wide vector pipeline
+on:
+  push:
+    branches: [codex/pdf-local-recovery]
+    paths:
+      - '.github/workflows/independent-wide-vector-native.yml'
+      - 'tools/independent-vector-raster-probe/**'
+      - 'tools/independent-wide-timetable/**'
+  workflow_dispatch:
+env:
+  PYTHONUTF8: '1'
+  PYTHONIOENCODING: utf-8
+permissions:
+  contents: read
+jobs:
+  fictional-vector-blank:
+    runs-on: windows-2025
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Public source policy
+        run: python scripts/check-public-tree.py
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: '10.0.x'
+      - name: Install fixed public generator dependencies
+        run: python -m pip install --disable-pip-version-check -r tools/independent-wide-timetable/requirements.txt
+      - name: Generate only invented temporary PDFs
+        shell: pwsh
+        run: |
+          $fixture = Join-Path $env:RUNNER_TEMP 'independent-wide-owned'
+          python tools/independent-wide-timetable/generate.py --source-root . --class-contract tools/independent-wide-timetable/canonical-class-source.txt --output $fixture
+          if ($LASTEXITCODE -ne 0) { throw 'Independent generation failed' }
+      - name: Compile and execute two fixed vector cases without OCR
+        shell: pwsh
+        run: |
+          $fixture = Join-Path $env:RUNNER_TEMP 'independent-wide-owned'
+          dotnet build tools/independent-vector-raster-probe/Probe.csproj --nologo
+          if ($LASTEXITCODE -ne 0) { throw 'Vector probe compile failed' }
+          python tools/independent-vector-raster-probe/run.py . $fixture tools/independent-vector-raster-probe/bin/Debug/net10.0-windows10.0.26100.0/Probe.dll
+          if ($LASTEXITCODE -ne 0) { throw 'Vector report failed' }
+      - name: Remove owned temporary generated PDFs and font files
+        if: always()
+        shell: pwsh
+        run: |
+          $fixture = Join-Path $env:RUNNER_TEMP 'independent-wide-owned'
+          if (Test-Path $fixture) { Remove-Item -LiteralPath $fixture -Recurse -Force }
+          if (Test-Path $fixture) { throw 'Owned generated files remain' }
