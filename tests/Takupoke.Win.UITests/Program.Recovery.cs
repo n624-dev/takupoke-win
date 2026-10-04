@@ -75,6 +75,7 @@ internal static partial class Program
         var now = DateTimeOffset.UtcNow; var hash = NotificationDiff.Digest(bytes);
         var source = new SourceRecord(Guid.NewGuid().ToString("N"), MaterialKind.Timetable, path, content.Identity, "fictional-recovery.pdf", hash, bytes.Length, now, now, content.ModifiedAt);
         await store.SaveOriginalAsync(lease, source, bytes);
+        await store.WriteAsync(lease, "acquisition.Timetable", new MaterialAttempt(now, null, false, hash));
         await store.WriteAsync(lease, "attempt.Timetable", new MaterialAttempt(now, "P13", true, hash, lease.Period.SchoolYear, ParserVersion: PdfScheduleParser.TimetableVersion, RecoveryPending: true));
         var (doc, result) = RecoveryUiFixture(lease.Period, parallel); doc = doc with { PdfHash = hash }; result = result with { PdfHash = hash };
         var errors = RecoveryValidator.Validate(doc, result).Errors;
@@ -109,6 +110,7 @@ internal static partial class Program
         var now = DateTimeOffset.UtcNow; var hash = NotificationDiff.Digest(bytes);
         var source = new SourceRecord(Guid.NewGuid().ToString("N"), kind, path, content.Identity, "fictional-recovery-" + name + ".pdf", hash, bytes.Length, now, now, content.ModifiedAt);
         await store.SaveOriginalAsync(lease, source, bytes);
+        await store.WriteAsync(lease, "acquisition." + kind, new MaterialAttempt(now, null, false, hash));
         await store.WriteAsync(lease, "attempt." + kind, new MaterialAttempt(now, "P13", true, hash, lease.Period.SchoolYear, ParserVersion: PdfScheduleParser.SpecialVersion, RecoveryPending: true));
         var doc = fixture.Document with { PdfHash = hash }; var result = fixture.Result with { PdfHash = hash };
         var errors = RecoveryValidator.Validate(doc, result).Errors;
