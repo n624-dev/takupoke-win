@@ -9,4 +9,5 @@
 *.md text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf
+tools/recovery-prompt-contracts/prompts/*.txt text eol=lf
 *.ps1 text eol=crlf

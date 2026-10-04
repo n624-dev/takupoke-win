@@ -1,4 +1,3 @@
-using System.Text.Json;
 using Betalgo.Ranul.OpenAI.ObjectModels.RequestModels;
 using Microsoft.AI.Foundry.Local;
 using Takupoke.Core.Recovery;
@@ -15,7 +14,7 @@ public sealed class FoundryLocalRecoveryProvider(IModel model, RecoveryModelMani
     private bool _loaded;
     public string Id => "foundryLocal";
     public bool LocalOnly => true;
-    public RecoveryMetadata Metadata => new(Id, manifest.ModelId, manifest.Version, "Foundry.Local.WinML:1.2.4", "3", RecoveryValidator.SchemaVersion, RecoveryValidator.Version, Environment.OSVersion.VersionString);
+    public RecoveryMetadata Metadata => new(Id, manifest.ModelId, manifest.Version, "Foundry.Local.WinML:1.2.4", RecoveryPromptInstructions.FieldExtractionVersion, RecoveryValidator.SchemaVersion, RecoveryValidator.Version, Environment.OSVersion.VersionString);
     public async Task<LocalProviderState> AvailabilityAsync(CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
@@ -31,7 +30,7 @@ public sealed class FoundryLocalRecoveryProvider(IModel model, RecoveryModelMani
         if (!_loaded) { await model.LoadAsync(token); _loaded = true; }
         var client = await model.GetChatClientAsync(token);
         var instruction = RecoveryStructure.Instruction(cell);
-        var completion = await client.CompleteChatAsync(new[] { new ChatMessage { Role = "system", Content = instruction }, new ChatMessage { Role = "user", Content = JsonSerializer.Serialize(cell, DataCodec.Options) } }, token);
+        var completion = await client.CompleteChatAsync(new[] { new ChatMessage { Role = "system", Content = instruction }, new ChatMessage { Role = "user", Content = RecoveryPromptInstructions.Input(cell, DataCodec.Options) } }, token);
         token.ThrowIfCancellationRequested();
         if (completion.Choices.Count != 1 || completion.Choices[0].Message is null) throw new InvalidRecoveryOutputException();
         var text = completion.Choices[0].Message.Content;

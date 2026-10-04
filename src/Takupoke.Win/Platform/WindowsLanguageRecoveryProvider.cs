@@ -1,4 +1,3 @@
-using System.Text.Json;
 using Microsoft.Windows.AI;
 using Microsoft.Windows.AI.Text;
 using Takupoke.Core.Recovery;
@@ -12,7 +11,7 @@ public sealed class WindowsLanguageRecoveryProvider : ILocalRecoveryProvider
 {
     public string Id => "windowsLanguageModel";
     public bool LocalOnly => true;
-    public RecoveryMetadata Metadata => new(Id, "Windows.LanguageModel", "os-managed", "WindowsAppSDK:2.5.1", "3", RecoveryValidator.SchemaVersion, RecoveryValidator.Version, Environment.OSVersion.VersionString);
+    public RecoveryMetadata Metadata => new(Id, "Windows.LanguageModel", "os-managed", "WindowsAppSDK:2.5.1", RecoveryPromptInstructions.FieldExtractionVersion, RecoveryValidator.SchemaVersion, RecoveryValidator.Version, Environment.OSVersion.VersionString);
     public Task<LocalProviderState> AvailabilityAsync(CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
@@ -28,7 +27,7 @@ public sealed class WindowsLanguageRecoveryProvider : ILocalRecoveryProvider
         token.ThrowIfCancellationRequested();
         // EnsureReadyAsync may download gigabytes. This provider never calls it implicitly.
         using var model = await LanguageModel.CreateAsync().AsTask(token);
-        var prompt = RecoveryStructure.Instruction(cell) + "\n" + JsonSerializer.Serialize(cell, DataCodec.Options);
+        var prompt = RecoveryStructure.Instruction(cell) + "\n" + RecoveryPromptInstructions.Input(cell, DataCodec.Options);
         var response = await model.GenerateResponseAsync(prompt).AsTask(token);
         token.ThrowIfCancellationRequested();
         if (response.Text.Length > 16384) throw new InvalidRecoveryOutputException();

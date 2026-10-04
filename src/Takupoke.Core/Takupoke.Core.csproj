@@ -2,4 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="../../tools/recovery-prompt-contracts/prompts/field-extraction-v4.txt" LogicalName="Takupoke.Core.Recovery.Prompts.field-extraction-v4.txt" />
+  </ItemGroup>
 </Project>
