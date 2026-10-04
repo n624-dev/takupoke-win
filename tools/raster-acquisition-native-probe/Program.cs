@@ -30,6 +30,15 @@ Console.WriteLine(JsonSerializer.Serialize(new { corpusSha256 = Sha(manifestByte
 if (args.SequenceEqual(new[] { "--preflight" })) { foreach (var c in corpus) c.Oracle.Dispose(); return 0; }
 var diagnosticOnly = args.SequenceEqual(new[] { "--tensor-diagnostics" });
 if ((!diagnosticOnly && args.Length != 0) || !OperatingSystem.IsWindows()) throw new InvalidOperationException("Native acquisition requires Windows; arbitrary inputs and arguments are prohibited.");
+// Both historical recipes used the former direct-width nearest sampler.
+// Never download/run the changed production sampler under those recipe names.
+if (typeof(OnnxJapaneseOcr).GetMethod("Image", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic) is null)
+{
+    Console.WriteLine(JsonSerializer.Serialize(new { evaluationStatus = "historical-preprocessing-recipe-incompatible", qualityStatus = "unassessed", nativeCalls = 0,
+        scope = "Use the original pinned source for historical evidence; current recognition resize/padding and CTC geometry require a separately named recipe." }));
+    foreach (var c in corpus) c.Oracle.Dispose();
+    return 1;
+}
 var ownedRoot = Path.Combine(Path.GetTempPath(), "takupoke-fictional-raster-" + Guid.NewGuid().ToString("N"));
 using var lifetime = new CancellationTokenSource(TimeSpan.FromMinutes(20));
 var observations = new List<object>(); var acceptedExact = 0; var incorrectValidatorAcceptances = 0; var operationalErrors = 0; var unassessedAcquisitionFailures = 0; var pipelineSafeRejections = 0; var expectedNegativesRejected = 0; var readablePositiveRejections = 0; var positiveCasesAssessed = 0; var negativeCasesAssessed = 0;
