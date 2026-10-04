@@ -6,6 +6,12 @@ on:
       - '.github/workflows/raster-acquisition-native-probe.yml'
       - 'tools/raster-acquisition-native-probe/**'
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Raw tensor diagnostics or unchanged full acquisition baseline'
+        type: choice
+        default: tensor-diagnostics
+        options: [tensor-diagnostics, baseline]
 permissions:
   contents: read
 jobs:
@@ -29,6 +35,20 @@ jobs:
       - name: Assemble fixed lossless image-only fictional PDFs
         shell: pwsh
         run: python tools/raster-acquisition-native-probe/fixtures/assemble.py
-      - name: Run actual Windows PDF and OCR acquisition with a literal full oracle
+      - name: Record runner-visible hardware
         shell: pwsh
-        run: dotnet run --project tools/raster-acquisition-native-probe/WindowsRasterNativeProbe.csproj --configuration Release --no-launch-profile
+        run: |
+          $cpu = @(Get-CimInstance Win32_Processor | Select-Object Name, NumberOfCores, NumberOfLogicalProcessors)
+          $system = Get-CimInstance Win32_ComputerSystem
+          $os = Get-CimInstance Win32_OperatingSystem
+          @{ sourceCommit = $env:GITHUB_SHA; processors = $cpu; allocatedPhysicalMemoryBytes = [Int64]$system.TotalPhysicalMemory; architecture = [Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString(); os = $os.Caption; osVersion = $os.Version; osBuild = $os.BuildNumber } | ConvertTo-Json -Depth 5
+      - name: Run fixed native OCR evidence mode
+        shell: pwsh
+        env:
+          EVIDENCE_MODE: ${{ inputs.mode }}
+        run: |
+          if ($env:EVIDENCE_MODE -eq 'baseline') {
+            dotnet run --project tools/raster-acquisition-native-probe/WindowsRasterNativeProbe.csproj --configuration Release --no-launch-profile
+          } else {
+            dotnet run --project tools/raster-acquisition-native-probe/WindowsRasterNativeProbe.csproj --configuration Release --no-launch-profile -- --tensor-diagnostics
+          }

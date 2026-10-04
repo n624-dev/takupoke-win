@@ -28,7 +28,8 @@ foreach (var fixture in fixtures)
 }
 Console.WriteLine(JsonSerializer.Serialize(new { corpusSha256 = Sha(manifestBytes), cases = corpus.Select(c => new { c.Id, pdfSha256 = Sha(c.Pdf) }), scope = "Fixed literal image-only fictional PDF acquisition baseline; no LLM or model qualification" }));
 if (args.SequenceEqual(new[] { "--preflight" })) { foreach (var c in corpus) c.Oracle.Dispose(); return 0; }
-if (args.Length != 0 || !OperatingSystem.IsWindows()) throw new InvalidOperationException("Native acquisition requires Windows; arbitrary inputs and arguments are prohibited.");
+var diagnosticOnly = args.SequenceEqual(new[] { "--tensor-diagnostics" });
+if ((!diagnosticOnly && args.Length != 0) || !OperatingSystem.IsWindows()) throw new InvalidOperationException("Native acquisition requires Windows; arbitrary inputs and arguments are prohibited.");
 var ownedRoot = Path.Combine(Path.GetTempPath(), "takupoke-fictional-raster-" + Guid.NewGuid().ToString("N"));
 using var lifetime = new CancellationTokenSource(TimeSpan.FromMinutes(20));
 var observations = new List<object>(); var acceptedExact = 0; var incorrectValidatorAcceptances = 0; var operationalErrors = 0; var unassessedAcquisitionFailures = 0; var pipelineSafeRejections = 0; var expectedNegativesRejected = 0; var readablePositiveRejections = 0; var positiveCasesAssessed = 0; var negativeCasesAssessed = 0;
@@ -38,6 +39,19 @@ try
     var models = new WindowsRecoveryModels(ownedRoot);
     await models.InstallOcrAsync(null, lifetime.Token); // Actual pinned production OCR bundle/store and smoke test.
     initializationStage = "Per-document acquisition";
+    if (diagnosticOnly)
+    {
+        var tensorObservations = new List<object>();
+        foreach (var c in corpus)
+        {
+            using var deadline = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token); deadline.CancelAfter(TimeSpan.FromSeconds(90));
+            try { tensorObservations.Add(await OcrTensorDiagnostics.RunAsync(c.Id, c.Pdf, models, deadline.Token)); }
+            catch (Exception error) { tensorObservations.Add(new { c.Id, errorType = error.GetType().Name, errorMessage = error.Message[..Math.Min(error.Message.Length, 1024)] }); }
+        }
+        Console.WriteLine(JsonSerializer.Serialize(new { recipe = "fictional-native-ocr-tensor-diagnostics-v1", sourceCommit = Environment.GetEnvironmentVariable("GITHUB_SHA") ?? "research-uncommitted", tensorObservations,
+            scope = "Separate raw tensor/CTC evidence only; same production preprocessing and thresholds, firstpage, no recovery/quality denominator or LLM. Single optimizer-off detector contrast only for existingconfusable2." }, new JsonSerializerOptions { WriteIndented = true }));
+        return tensorObservations.Any(o => o.GetType().GetProperty("errorType") is not null) ? 1 : 0;
+    }
     var reader = new WindowsPdfRecovery(models);
     foreach (var c in corpus)
     {
@@ -109,7 +123,7 @@ try
 catch (Exception error)
 {
     Console.WriteLine(JsonSerializer.Serialize(new { sourceCommit = Environment.GetEnvironmentVariable("GITHUB_SHA") ?? "research-uncommitted",
-        recipe = "real-fictional-raster-acquisition-baseline-v1", evaluationStatus = "initialization-or-run-error", initializationStage,
+        recipe = diagnosticOnly ? "fictional-native-ocr-tensor-diagnostics-v1" : "real-fictional-raster-acquisition-baseline-v1", evaluationStatus = "initialization-or-run-error", initializationStage,
         pdfCasesEligible = corpus.Count, casesObserved = observations.Count, remainingCasesUnassessed = corpus.Count - observations.Count,
         acceptedExact, incorrectValidatorAcceptances, expectedNegativesRejected, readablePositiveRejections, positiveCasesAssessed, negativeCasesAssessed,
         executionError = new { type = error.GetType().Name, message = error.Message[..Math.Min(error.Message.Length, 1024)] },
