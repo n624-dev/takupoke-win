@@ -1,0 +1,27 @@
+name: Evaluate readable JSON local model probe
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/pdf-local-recovery]
+    paths: ['tools/readable-model-probe/**', '.github/workflows/readable-native-probe.yml']
+jobs:
+  evaluate:
+    runs-on: windows-2025
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        model: ['qwen2.5-1.5b-instruct-generic-cpu:4', 'qwen3.5-2b-text-generic-cpu:1']
+    permissions:
+      contents: read
+    env:
+      ORT_TELEMETRY_DISABLED: '1'
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: '10.0.x'
+      - name: Download pinned public model and probe readable fictional JSON
+        shell: pwsh
+        run: dotnet run --project tools/readable-model-probe/WindowsReadableNativeProbe.csproj --configuration Release --no-launch-profile -- '${{ matrix.model }}'

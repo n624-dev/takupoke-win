@@ -1,0 +1,88 @@
+name: Publish fictional Windows QA benchmark
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/pdf-local-recovery]
+    paths: ['tools/readable-model-probe/**', '.github/workflows/windows-fictional-benchmark.yml']
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: windows-2025
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    env:
+      ORT_TELEMETRY_DISABLED: '1'
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+      DOTNET_NOLOGO: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: '10.0.x'
+      - name: Gate public source tree and GitHub noreply identities
+        shell: pwsh
+        run: python scripts/check-public-tree.py
+      - name: Build self-contained ZIP and run fictional production Rules controls
+        shell: pwsh
+        run: python tools/readable-model-probe/package.py --output "$env:RUNNER_TEMP/fictional-benchmark-${{ github.run_id }}-${{ github.run_attempt }}"
+      - name: Publish dedicated QA prerelease with ZIP and checksum
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $package = "$env:RUNNER_TEMP/fictional-benchmark-${{ github.run_id }}-${{ github.run_attempt }}"
+          $tag = "qa-windows-fictional-benchmark-${{ github.run_id }}-${{ github.run_attempt }}"
+          @'
+          Fictional Windows x64 development benchmark for Windows 25H2 / 16 GB RAM physical testing.
+
+          Extract the ZIP and run RunPreflight.cmd, then RunQwen25.cmd or RunQwen35.cmd.
+          .NET is included; public CPU model weights are downloaded separately into an owned temporary cache.
+          Microsoft Visual C++ x64 Redistributable is required for native model execution; the README links the official installer.
+          Rules controls use the real Builder/Engine/Validator/formal converter. Direct model probes measure developmental correctness only.
+          No model qualification, catalog activation, app release, PDF Reader/OCR validation, or physical-device PASS is claimed.
+          The source snapshot and binary inventory are inside the ZIP. The SHA-256 sidecar verifies the download.
+          QA owner: ${{ github.run_id }}-${{ github.run_attempt }} at ${{ github.sha }}
+          '@ | Set-Content -Encoding utf8 "$package/release-notes.txt"
+          $ErrorActionPreference = 'Stop'
+          $ownedDraftAttempted = $false
+          $owner = 'QA owner: ${{ github.run_id }}-${{ github.run_attempt }} at ${{ github.sha }}'
+          try {
+            $ownedDraftAttempted = $true
+            gh release create $tag --target '${{ github.sha }}' --title 'Windows fictional QA benchmark' --notes-file "$package/release-notes.txt" --draft --prerelease --latest=false
+            if ($LASTEXITCODE -ne 0) { throw 'Failed to create the job-owned QA draft.' }
+            $archive = "$package/takupoke-windows-fictional-benchmark-x64.zip"
+            $sidecar = "$archive.sha256.txt"
+            gh release upload $tag $archive $sidecar
+            if ($LASTEXITCODE -ne 0) { throw 'Failed to upload the complete QA assets.' }
+            $release = gh release view $tag --json isDraft,assets | ConvertFrom-Json
+            if ($LASTEXITCODE -ne 0 -or -not $release.isDraft -or $release.assets.Count -ne 2) { throw 'Incomplete QA draft readback.' }
+            New-Item -ItemType Directory -Path "$package/readback" | Out-Null
+            gh release download $tag --dir "$package/readback"
+            if ($LASTEXITCODE -ne 0) { throw 'Failed to read back QA draft assets.' }
+            foreach ($asset in @($archive, $sidecar)) {
+              $original = Get-Item -LiteralPath $asset
+              $remote = Get-Item -LiteralPath "$package/readback/$($original.Name)"
+              if ($remote.Length -ne $original.Length -or (Get-FileHash $remote.FullName -Algorithm SHA256).Hash -ne (Get-FileHash $original.FullName -Algorithm SHA256).Hash) { throw 'QA asset readback SHA-256 mismatch.' }
+            }
+            $declared = ((Get-Content -LiteralPath "$package/readback/takupoke-windows-fictional-benchmark-x64.zip.sha256.txt" -Raw).Trim() -split '\s+')[0]
+            if ($declared -ne (Get-FileHash $archive -Algorithm SHA256).Hash.ToLowerInvariant()) { throw 'QA sidecar checksum mismatch.' }
+            gh release edit $tag --draft=false --prerelease --latest=false
+            if ($LASTEXITCODE -ne 0) { throw 'Failed to publish the verified QA prerelease.' }
+          } catch {
+            if ($ownedDraftAttempted) {
+              # Delete only a draft whose body proves ownership by this exact
+              # run/attempt/source. A verified release already published stays.
+              $provisional = gh release view $tag --json isDraft,body 2>$null | ConvertFrom-Json
+              if ($LASTEXITCODE -eq 0 -and $provisional.isDraft -and $provisional.body.Contains($owner)) {
+                gh release delete $tag --cleanup-tag --yes
+                if ($LASTEXITCODE -ne 0) { Write-Warning 'Job-owned QA draft cleanup failed; inspect only the tag printed below.' }
+              }
+              Write-Output "Provisional QA tag: $tag"
+            }
+            throw
+          }
