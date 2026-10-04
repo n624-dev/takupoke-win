@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0-windows10.0.26100.0</TargetFramework><RuntimeIdentifier>win-x64</RuntimeIdentifier><EnableWindowsTargeting>true</EnableWindowsTargeting><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><TreatWarningsAsErrors>true</TreatWarningsAsErrors></PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AI.Foundry.Local.WinML" Version="1.2.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
+    <ProjectReference Include="../../src/Takupoke.Infrastructure/Takupoke.Infrastructure.csproj" />
+    <Compile Include="../model-evaluation/QualificationCorpus.cs" Link="QualificationCorpus.cs" />
+    <Compile Include="../label-selection-model-probe/LabelSelectionProtocol.cs" Link="LabelSelectionProtocol.cs" />
+    <Compile Include="../label-selection-model-probe/SingleRoleProtocol.cs" Link="SingleRoleProtocol.cs" />
+    <Compile Include="../label-selection-model-probe/FormalComparison.cs" Link="FormalComparison.cs" />
+    <None Include="../../tests/Takupoke.Core.Tests/fixtures/recovery-*.json" Link="fixtures/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="artifact-pin.json" CopyToOutputDirectory="PreserveNewest" />
+    <EmbeddedResource Include="compact-header-role-v2.txt" LogicalName="CompactHeaderInstruction" />
+  </ItemGroup>
+</Project>
