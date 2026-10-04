@@ -1,0 +1,45 @@
+name: Diagnose constrained first-ID bias and short role classification
+on:
+  push:
+    branches: [research/windows-model-route-short-role-20261004]
+    paths:
+      - 'tools/model-route-short-role/*.cs'
+      - 'tools/model-route-short-role/*.csproj'
+      - 'tools/model-route-short-role/artifact-pin.json'
+      - '.github/workflows/model-route-short-role-diagnostic.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    runs-on: windows-2025
+    timeout-minutes: 35
+    env:
+      ORT_TELEMETRY_DISABLED: '1'
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Gate public tree
+        shell: pwsh
+        run: python scripts/check-public-tree.py
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: '10.0.x'
+          cache: false
+      - name: Record runner-visible hardware
+        shell: pwsh
+        run: |
+          $cpu = @(Get-CimInstance Win32_Processor | Select-Object Name, NumberOfCores, NumberOfLogicalProcessors)
+          $system = Get-CimInstance Win32_ComputerSystem
+          $os = Get-CimInstance Win32_OperatingSystem
+          @{ sourceCommit = $env:GITHUB_SHA; processors = $cpu; allocatedPhysicalMemoryBytes = [Int64]$system.TotalPhysicalMemory; architecture = [Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString(); os = $os.Caption; osVersion = $os.Version; osBuild = $os.BuildNumber } | ConvertTo-Json -Depth 5
+      - name: Check bounded transport
+        shell: pwsh
+        working-directory: tools/model-route-short-role
+        run: python -m unittest -v test_collect.py
+      - name: Run ten fixed diagnostic calls on one pinned loaded model
+        shell: pwsh
+        run: dotnet run --project tools/model-route-short-role/ModelRouteShortRole.csproj --configuration Release --no-launch-profile

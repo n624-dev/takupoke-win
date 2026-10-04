@@ -1,0 +1,15 @@
+# Fixed routing and short role diagnostic
+
+This research recipe uses the existing Qwen3.5-4B CPU variant and the exact 14-file historical artifact inventory (3,235,313,679 bytes), Foundry.Local.WinML 1.2.4, temperature 0, seed 17, max tokens 32, and no tools. It changes no app, model catalog, recovery certificate, Validator, archived result or release. No school documents are inputs.
+
+Ten calls run once in a fixed order on one loaded model:
+
+1. One unrelated literal Lark marker, against a conflicting unrestricted request, observes routing agreement.
+2. Four identical two-header teacher-ID selection requests compare the former optional 0–48-item grammar and a one-item grammar, each with forward and reversed ID alternatives. The input source order stays `u0,u1`; reversing alternatives preserves each grammar's language. Grammar shape is a separate explicit factor. The scorer preserves original ID order and rejects duplicate/foreign/reversed IDs, without deleting a spurious first ID.
+3. Four Japanese single-header role classifications use the same short instruction and public subject/teacher/room/unknown enum. A fifth call repeats the teacher header with no response-format constraint. Expected answers exist only in scoring, never in the grammar or native request.
+
+The literal, ID selection and role classification denominators remain separate. These consumed aliases are already deterministically recognizable; no recovery, whole formal output or useful-AI quality is assessed. Literal agreement does not prove hard token enforcement. First-ID sensitivity can support a grammar/API contribution without identifying a model-intrinsic cause. No prompt, seed, model or format sweep follows an unsuccessful control automatically.
+
+Each call has a cooperative 120-second deadline; the evaluator allows 25 minutes inside a 35-minute CI job. It streams each observation and a bounded numbered/base64 report with byte count and SHA. `collect.py` rejects incomplete transport and requires all ten case IDs. API errors/no-return/deadline paths remain operationally unassessed; a returned malformed JSON is assessed wrong. Raw prefixes retain 2,048 characters with original length/truncation. Unexpected choice counts cannot retain a single raw completion. Process peak excludes child runtimes and is cumulative; runner RAM is allocation context, not proof of minimum hardware support. Download initialization errors preserve the available report; incomplete ten-case reports fail complete transport restoration.
+
+Run `dotnet run --project tools/model-route-short-role/ModelRouteShortRole.csproj -- --preflight` for scorer-only checks. The initial research-branch source push registers and runs the one diagnostic job; manual dispatch remains available, with no duplicate dispatch. Data publication paths do not trigger it. The workflow verifies all actual model artifact bytes before loading and deletes its owned temporary cache at completion. No Actions artifact/cache upload or production activation occurs.
