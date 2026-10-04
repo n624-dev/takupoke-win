@@ -105,6 +105,9 @@ internal static partial class Program
         json = json.Replace("10/", lease.Period.Half == 1 ? "4/" : "10/", StringComparison.Ordinal);
         json = json.Replace("2026", lease.Period.SchoolYear.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal);
         var fixture = DataCodec.Decode<RecoveryUiSpecialFixture>(Encoding.UTF8.GetBytes(json));
+        // The immutable fixture records v4; native preview/adoption tests use
+        // the current validator while preserving its original semantic inputs.
+        fixture = fixture with { Result = fixture.Result with { Metadata = fixture.Result.Metadata with { ValidatorVersion = RecoveryValidator.Version } } };
         var bytes = RecoveryUiPdf(); var path = Path.Combine(root, "fictional-recovery-" + name + ".pdf"); await File.WriteAllBytesAsync(path, bytes);
         using var content = await new FileSourceReader(new WindowsFileIdentity()).ReadAsync(path, kind, null);
         var now = DateTimeOffset.UtcNow; var hash = NotificationDiff.Digest(bytes);
