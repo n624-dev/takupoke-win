@@ -1,0 +1,33 @@
+name: Evaluate schema-constrained local label selection
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/pdf-local-recovery]
+    paths: ['tools/label-selection-model-probe/**', '.github/workflows/label-selection-native-probe.yml']
+permissions:
+  contents: read
+jobs:
+  evaluate:
+    runs-on: windows-2025
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        model: ['qwen2.5-1.5b-instruct-generic-cpu:4', 'qwen3.5-2b-text-generic-cpu:1']
+    env:
+      ORT_TELEMETRY_DISABLED: '1'
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Gate public source tree and GitHub noreply identities
+        shell: pwsh
+        run: python scripts/check-public-tree.py
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: '10.0.x'
+      - name: Run native generic-schema label selection on fictional documents
+        shell: pwsh
+        run: dotnet run --project tools/label-selection-model-probe/WindowsLabelSelectionProbe.csproj --configuration Release --no-launch-profile -- '${{ matrix.model }}'
