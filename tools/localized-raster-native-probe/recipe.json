@@ -1,0 +1,37 @@
+{
+  "recipe": "original-pixel-grid-704-context128-v1",
+  "arms": [
+    "pinned-cpu-fullpage",
+    "pinned-cpu-fixed-grid"
+  ],
+  "render": "unchanged WindowsPdfRecovery render: width=clamp(round(pageWidth*2),640,2400), aspect height, cap3200",
+  "tileCorePixels": 704,
+  "contextPixelsPerEdge": 128,
+  "tileMaximumPixelsPerEdge": 960,
+  "maximumAdjacentOverlapPixels": 256,
+  "boundaryGuardPixels": 2,
+  "ownership": "detector margin-before support center in half-open core; padded recognition region and all CTC glyphs must fit context; nonphysical context border contact rejects whole page",
+  "dedup": "one owner core per detector-support center; positive overlap of accepted margin-before support rectangles conflicts/rejects, while recognition-padding-only overlap is allowed; never string-value dedup",
+  "coordinates": "original pixel crop, integer offset only; CTC character boxes unchanged within region; fullpage rules and fullpage uncovered-ink check unchanged",
+  "model": "same official pinned production WindowsRecoveryModels.OcrBundle; no threshold/normalization/CTC/preprocessing changes",
+  "runtime": {
+    "managedVersion": "1.26.0.0",
+    "managedSHA256": "de7f8ddef8af207f62cdd135e1fb0c21cc5dd42111d97b0f677ca2f61300f29e",
+    "nativeSHA256": "6a4129504501cbd615efddc897345ec9557390b408887165ab5faf9812a54b31"
+  },
+  "envelope": {
+    "maxPdfBytes": 2000000,
+    "maxPages": 5,
+    "maxRenderedWidth": 2400,
+    "maxRenderedHeight": 3200,
+    "maxDocumentPixels": 40000000,
+    "maxTilesPerDocument": 128,
+    "maxCandidatesPerPage": 10000,
+    "maxDocumentSeconds": 900,
+    "evaluatorMinutes": 80,
+    "CIHardMinutes": 90
+  },
+  "partial": "any tile execution failure/boundary integrity/conflict/uncovered ink prohibits whole document acceptance; returned readable-positive rejection and runtime unassessed reported separately",
+  "scope": "All nine consumed controls development only. Holdout to be independently drawn after this recipe freeze. No oracle/text driven tiling; no LLM/model adoption.",
+  "implementationBeforeInferenceRevision": "Support-overlap guard clarification before any native result; independent holdout bytes unchanged from creation after initial geometry freeze740c2c6f1fc18c293b1520e40d204fbf55c84e1f9909f3c43b5e024c72592861"
+}

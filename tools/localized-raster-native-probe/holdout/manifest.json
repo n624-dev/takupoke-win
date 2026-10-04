@@ -1,0 +1,79 @@
+{
+  "scope": "Six independently drawn unused image-only PDFs, frozen after recipe; literal oracle never from OCR/model/Rules or adjusted after results. This small screen does not establish broad statistical qualification.",
+  "recipeSHA256": "0bdec55548182fb2ed6f12738d0c5e0ea346ec52a21ecbffb4fe1d33d3769fdc",
+  "fontSha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+  "generatorSha256": "baee0c29ef3cb17160c612d59e488fa178b65047061ea0468e2071505665977b",
+  "assemblerSha256": "825cbb7d226585fc8e194f30484812b98b4d4edf00881e15521e14f2a5dcd3e9",
+  "fixtures": [
+    {
+      "id": "independent-Timetable-literal-乙",
+      "oracleFile": "independent-Timetable-literal-乙/literal-oracle.json",
+      "oracleSha256": "c5c288e2d7dc23c27e48a001afb3c0f61b3fa49f04d99ef007d2d08e8b1bd460",
+      "pdfSha256": "233dec852ec7e43c93c70c42d8f88238a0c2e8aef146445c4b94d674bb6cc187",
+      "drawingSourceSha256": "c2acd23ad38bc9e6eea4ded8b1fb790ac5817bb7891f090483a2f28084eab1b9",
+      "positive": true,
+      "formalOracleFile": "independent-Timetable-literal-乙/literal-analysis-oracle.json",
+      "formalOracleSha256": "0451ac80edac37e4e424d3d78b1d96ffe31cd06711024abe301c2ceff1e515c0"
+    },
+    {
+      "id": "independent-Timetable-verifiedblank-丙",
+      "oracleFile": "independent-Timetable-verifiedblank-丙/literal-oracle.json",
+      "oracleSha256": "b2db88d7f9e232c29c37d25437ec644d2ce77466f50374d23ac131362fa85d39",
+      "pdfSha256": "2625bf49044d59088b53109fc15ba7813073fdedac71bde5eb82925c297050f8",
+      "drawingSourceSha256": "fdbb25473adc36c9c31a01686a6255377557a383ae98f47cf89276bb0e8c3c40",
+      "positive": true,
+      "formalOracleFile": "independent-Timetable-verifiedblank-丙/literal-analysis-oracle.json",
+      "formalOracleSha256": "8ff9ea8dc55fb6e010e18c6019f938c47840bf589fdd503d2db9d18072184f43"
+    },
+    {
+      "id": "independent-Exam-reverseclasses-丁",
+      "oracleFile": "independent-Exam-reverseclasses-丁/literal-oracle.json",
+      "oracleSha256": "ee1b8d01bc6ea800244799f229426a3dcd956f6e7988ca92053d56070cf4a8be",
+      "pdfSha256": "d203599cbe7bd8e05a9ca2223fde96b4a4a9453752dab5d289659ec4ef963301",
+      "drawingSourceSha256": "2fd254ba815dfc23b63f3a4561538163f0c014e615b0e99afd2a0345357d4f41",
+      "positive": true,
+      "formalOracleFile": "independent-Exam-reverseclasses-丁/literal-analysis-oracle.json",
+      "formalOracleSha256": "157978182f5ff543c8402322fb29a47b2ed6c050879128be3e9f27c80de2165b"
+    },
+    {
+      "id": "independent-Exam-shiftclasses-戊",
+      "oracleFile": "independent-Exam-shiftclasses-戊/literal-oracle.json",
+      "oracleSha256": "a5343709b9cf60891ef31fbd458f9e62060bac2cf4d7cabcbf76790b9a30d707",
+      "pdfSha256": "01b43dfdadbd2639b79c2cbd8df5c6ef0db36ccfaffc302fe6db8bf36c4d99c2",
+      "drawingSourceSha256": "5b6c70810af9b361467fae32e1b77bb847935e896434e912206365b1fa1b5964",
+      "positive": true,
+      "formalOracleFile": "independent-Exam-shiftclasses-戊/literal-analysis-oracle.json",
+      "formalOracleSha256": "572ee578e26786b6cd5ca126b597092a929085bcfdbb71422affd3d975e5908c"
+    },
+    {
+      "id": "independent-ExamReturn-verifiedblank-己",
+      "oracleFile": "independent-ExamReturn-verifiedblank-己/literal-oracle.json",
+      "oracleSha256": "69572593d720f72f3aa332353582b5c23db36dd92ee6b9767855fbb39be31686",
+      "pdfSha256": "39d6ec796baddc4fcd7d1c68b26d6f9de09b53d50c8d4325857d91cd9c35019d",
+      "drawingSourceSha256": "770c2eda2b062d670dc2c75a95443bf2795ee917e5eb2cf48ff48258c83ee8e6",
+      "positive": true,
+      "formalOracleFile": "independent-ExamReturn-verifiedblank-己/literal-analysis-oracle.json",
+      "formalOracleSha256": "7de9a9b9c0ab14b1dbda242cb57199eab88b359d60c8bb5ee7b8fdb2f3ec0a4c"
+    },
+    {
+      "id": "independent-ExamReturn-unreadableink-庚",
+      "oracleFile": "independent-ExamReturn-unreadableink-庚/literal-oracle.json",
+      "oracleSha256": "27d5178f932fb5848955dd5c02c0b098b4ef9757b4bc5923ca0d235b5d15bce3",
+      "pdfSha256": "a8dd2034626d01a8436b1c5e802622785aa9e1817134d4d593754cce1c5289f9",
+      "drawingSourceSha256": "6248c8b60cb28799fd0eb0bb3f46c2f25b64b0eb3189490ccd07e9342ab5840a",
+      "positive": false,
+      "formalOracleFile": "independent-ExamReturn-unreadableink-庚/literal-analysis-oracle.json",
+      "formalOracleSha256": "acb776c05451800196e5699fb4d102bb405bff3d5c5771d15f2d8d2f3ad75c60"
+    }
+  ],
+  "plannedPositives": 5,
+  "plannedUnreadableNegatives": 1,
+  "plannedPDFs": 6,
+  "plannedPages": 30,
+  "noInferencePerformed": true,
+  "noOracleCoordinatesToRuntime": true,
+  "previousManifestSHA256": "dbd9803181a8d849adeb716f9d1ab91d7e08aa407118aa3e1e904fee93b1dbea",
+  "revisionReason": "Before any OCR: correct missing right ruled border on all6 input canvases. Width increases1px to contain original right grid coordinate; horizontal lines connect to it. Text/fonts/positions, kind/classes/dates/values and v2 clock semantics unchanged. v1/v2 archives retained. Actual pixel RecoveryRaster.Rules must pass semantic preflight before native.",
+  "freezeScriptSha256": "9dc3b50cf7a89462d150ef9741017519e22535d80c7d392505e4dac6822f4e81",
+  "createdUTC": "2026-10-04T12:02:44.942687+00:00"
+}

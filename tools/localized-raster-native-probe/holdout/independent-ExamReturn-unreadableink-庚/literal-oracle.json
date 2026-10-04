@@ -1,0 +1,332 @@
+{
+  "kind": "ExamReturn",
+  "profile": "independent-ExamReturn-unreadableink-庚",
+  "schoolYear": 2028,
+  "term": null,
+  "classes": [
+    "1_3",
+    "2_CN",
+    "2_ES",
+    "2_IT",
+    "3_CN",
+    "3_ES",
+    "3_IT",
+    "4_CN",
+    "4_ES",
+    "4_IT",
+    "5_CN",
+    "5_ES",
+    "5_IT",
+    "AI_1",
+    "AI_2",
+    "1_1",
+    "1_2"
+  ],
+  "days": [
+    "2028-11-16",
+    "2028-11-17",
+    "2028-11-18",
+    "2028-11-19",
+    "2028-11-20"
+  ],
+  "maxPeriod": 8,
+  "requiredSlots": 680,
+  "lessons": [
+    {
+      "class": "1_3",
+      "day": "2028-11-16",
+      "periods": [
+        1
+      ],
+      "subject": "架空数学庚",
+      "teacher": null,
+      "room": "架空室庚"
+    }
+  ],
+  "allOtherSlotsBlank": true,
+  "expectedSafeRejection": true,
+  "pdfFile": "fictional.pdf",
+  "pdfSha256": "a8dd2034626d01a8436b1c5e802622785aa9e1817134d4d593754cce1c5289f9",
+  "pages": [
+    {
+      "page": 1,
+      "imageFile": "page-1.png",
+      "imageSha256": "bdb122d3c1613cb313a58199d962910bce20396f776e1d1428928c6c7ad1365f",
+      "width": 1025,
+      "height": 1670
+    },
+    {
+      "page": 2,
+      "imageFile": "page-2.png",
+      "imageSha256": "ad3d780d98ac7a669725fa9bf90c2d25c96827d073095940dd42fee4028c0025",
+      "width": 1025,
+      "height": 1670
+    },
+    {
+      "page": 3,
+      "imageFile": "page-3.png",
+      "imageSha256": "f4ef3ed6d4f1524e1532b475dda6c8c69ce90ed96fae8878b9dad5b95e7ceb19",
+      "width": 1025,
+      "height": 1670
+    },
+    {
+      "page": 4,
+      "imageFile": "page-4.png",
+      "imageSha256": "b89067a60a5a7c7a7d3409e79d020510e2a224a8468c3f20ffb8b02a1906bc1e",
+      "width": 1025,
+      "height": 1670
+    },
+    {
+      "page": 5,
+      "imageFile": "page-5.png",
+      "imageSha256": "9a2049bbaa87040e87449b290417ef66db2316ffeaf58e7293291ce84991d347",
+      "width": 1025,
+      "height": 1670
+    }
+  ],
+  "datePeriodClocks": [
+    {
+      "date": "2028-11-16",
+      "period": 1,
+      "start": "09:10",
+      "end": "09:50"
+    },
+    {
+      "date": "2028-11-16",
+      "period": 2,
+      "start": "10:00",
+      "end": "10:40"
+    },
+    {
+      "date": "2028-11-16",
+      "period": 3,
+      "start": "10:50",
+      "end": "11:30"
+    },
+    {
+      "date": "2028-11-16",
+      "period": 4,
+      "start": "11:40",
+      "end": "12:20"
+    },
+    {
+      "date": "2028-11-16",
+      "period": 5,
+      "start": "13:10",
+      "end": "13:50"
+    },
+    {
+      "date": "2028-11-16",
+      "period": 6,
+      "start": "14:00",
+      "end": "14:40"
+    },
+    {
+      "date": "2028-11-16",
+      "period": 7,
+      "start": "14:50",
+      "end": "15:30"
+    },
+    {
+      "date": "2028-11-16",
+      "period": 8,
+      "start": "15:40",
+      "end": "16:20"
+    },
+    {
+      "date": "2028-11-17",
+      "period": 1,
+      "start": "08:50",
+      "end": "09:35"
+    },
+    {
+      "date": "2028-11-17",
+      "period": 2,
+      "start": "09:35",
+      "end": "10:20"
+    },
+    {
+      "date": "2028-11-17",
+      "period": 3,
+      "start": "10:30",
+      "end": "11:15"
+    },
+    {
+      "date": "2028-11-17",
+      "period": 4,
+      "start": "11:15",
+      "end": "12:00"
+    },
+    {
+      "date": "2028-11-17",
+      "period": 5,
+      "start": "12:50",
+      "end": "13:35"
+    },
+    {
+      "date": "2028-11-17",
+      "period": 6,
+      "start": "13:35",
+      "end": "14:20"
+    },
+    {
+      "date": "2028-11-17",
+      "period": 7,
+      "start": "14:30",
+      "end": "15:15"
+    },
+    {
+      "date": "2028-11-17",
+      "period": 8,
+      "start": "15:15",
+      "end": "16:00"
+    },
+    {
+      "date": "2028-11-18",
+      "period": 1,
+      "start": "08:50",
+      "end": "09:35"
+    },
+    {
+      "date": "2028-11-18",
+      "period": 2,
+      "start": "09:35",
+      "end": "10:20"
+    },
+    {
+      "date": "2028-11-18",
+      "period": 3,
+      "start": "10:30",
+      "end": "11:15"
+    },
+    {
+      "date": "2028-11-18",
+      "period": 4,
+      "start": "11:15",
+      "end": "12:00"
+    },
+    {
+      "date": "2028-11-18",
+      "period": 5,
+      "start": "12:50",
+      "end": "13:35"
+    },
+    {
+      "date": "2028-11-18",
+      "period": 6,
+      "start": "13:35",
+      "end": "14:20"
+    },
+    {
+      "date": "2028-11-18",
+      "period": 7,
+      "start": "14:30",
+      "end": "15:15"
+    },
+    {
+      "date": "2028-11-18",
+      "period": 8,
+      "start": "15:15",
+      "end": "16:00"
+    },
+    {
+      "date": "2028-11-19",
+      "period": 1,
+      "start": "08:50",
+      "end": "09:35"
+    },
+    {
+      "date": "2028-11-19",
+      "period": 2,
+      "start": "09:35",
+      "end": "10:20"
+    },
+    {
+      "date": "2028-11-19",
+      "period": 3,
+      "start": "10:30",
+      "end": "11:15"
+    },
+    {
+      "date": "2028-11-19",
+      "period": 4,
+      "start": "11:15",
+      "end": "12:00"
+    },
+    {
+      "date": "2028-11-19",
+      "period": 5,
+      "start": "12:50",
+      "end": "13:35"
+    },
+    {
+      "date": "2028-11-19",
+      "period": 6,
+      "start": "13:35",
+      "end": "14:20"
+    },
+    {
+      "date": "2028-11-19",
+      "period": 7,
+      "start": "14:30",
+      "end": "15:15"
+    },
+    {
+      "date": "2028-11-19",
+      "period": 8,
+      "start": "15:15",
+      "end": "16:00"
+    },
+    {
+      "date": "2028-11-20",
+      "period": 1,
+      "start": "08:50",
+      "end": "09:35"
+    },
+    {
+      "date": "2028-11-20",
+      "period": 2,
+      "start": "09:35",
+      "end": "10:20"
+    },
+    {
+      "date": "2028-11-20",
+      "period": 3,
+      "start": "10:30",
+      "end": "11:15"
+    },
+    {
+      "date": "2028-11-20",
+      "period": 4,
+      "start": "11:15",
+      "end": "12:00"
+    },
+    {
+      "date": "2028-11-20",
+      "period": 5,
+      "start": "12:50",
+      "end": "13:35"
+    },
+    {
+      "date": "2028-11-20",
+      "period": 6,
+      "start": "13:35",
+      "end": "14:20"
+    },
+    {
+      "date": "2028-11-20",
+      "period": 7,
+      "start": "14:30",
+      "end": "15:15"
+    },
+    {
+      "date": "2028-11-20",
+      "period": 8,
+      "start": "15:15",
+      "end": "16:00"
+    }
+  ],
+  "normalTimeNote": "11月16日の時間割は以下のとおり11月17日〜20日は通常の授業日どおりの授業時間",
+  "unreadableRole": "teacher",
+  "negativeReason": "Opaque original black ink with no readable teacher glyphs; never treat it as verified blank or invent a value."
+}

@@ -1,0 +1,72 @@
+{
+  "kind": "Timetable",
+  "profile": "independent-Timetable-literal-乙",
+  "schoolYear": 2027,
+  "term": "前期",
+  "classes": [
+    "5_ES"
+  ],
+  "days": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "maxPeriod": 8,
+  "requiredSlots": 40,
+  "lessons": [
+    {
+      "class": "5_ES",
+      "day": "1",
+      "periods": [
+        1
+      ],
+      "subject": "架空化学乙",
+      "teacher": "架空担当乙",
+      "room": "架空室乙"
+    }
+  ],
+  "allOtherSlotsBlank": true,
+  "periodClocks": [],
+  "expectedSafeRejection": false,
+  "pdfFile": "fictional.pdf",
+  "pdfSha256": "233dec852ec7e43c93c70c42d8f88238a0c2e8aef146445c4b94d674bb6cc187",
+  "pages": [
+    {
+      "page": 1,
+      "imageFile": "page-1.png",
+      "imageSha256": "a0db633e4ee653dd18ab0d99b00f69aa3aa7f8d009f86e2b03c3cffd23bba6a7",
+      "width": 1025,
+      "height": 206
+    },
+    {
+      "page": 2,
+      "imageFile": "page-2.png",
+      "imageSha256": "e4b7f6cfa73a27567893e6a555b720c954bee2f709b77bb60066938b67a793b8",
+      "width": 1025,
+      "height": 206
+    },
+    {
+      "page": 3,
+      "imageFile": "page-3.png",
+      "imageSha256": "b9eff63c09a77fa9a054a478287fe1737b66710bfc39eda436109e519774100e",
+      "width": 1025,
+      "height": 206
+    },
+    {
+      "page": 4,
+      "imageFile": "page-4.png",
+      "imageSha256": "32bfc1384924e8c63dd97f53529726daf64d8e6f5425c73a73cad578156cafa3",
+      "width": 1025,
+      "height": 206
+    },
+    {
+      "page": 5,
+      "imageFile": "page-5.png",
+      "imageSha256": "4933332d579a7ddc1c3123fdd6c22206f851483193a891f19ead01a0cc19a4b4",
+      "width": 1025,
+      "height": 206
+    }
+  ]
+}

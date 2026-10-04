@@ -1,0 +1,2791 @@
+{
+  "schoolYear": 2027,
+  "kind": "Exam",
+  "expectedAdopt": true,
+  "requiredSlotSet": [
+    {
+      "className": "AI_2",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "AI_2",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "AI_1",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "5_IT",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "5_ES",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "5_CN",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "4_IT",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "4_ES",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "4_CN",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "3_IT",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "3_ES",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "3_CN",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "2_IT",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "2_ES",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "2_CN",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "1_3",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "1_2",
+      "day": "2027-10-15",
+      "period": 6
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-11",
+      "period": 1
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-11",
+      "period": 2
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-11",
+      "period": 3
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-11",
+      "period": 4
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-11",
+      "period": 5
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-11",
+      "period": 6
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-12",
+      "period": 1
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-12",
+      "period": 2
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-12",
+      "period": 3
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-12",
+      "period": 4
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-12",
+      "period": 5
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-12",
+      "period": 6
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-13",
+      "period": 1
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-13",
+      "period": 2
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-13",
+      "period": 3
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-13",
+      "period": 4
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-13",
+      "period": 5
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-13",
+      "period": 6
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-14",
+      "period": 1
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-14",
+      "period": 2
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-14",
+      "period": 3
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-14",
+      "period": 4
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-14",
+      "period": 5
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-14",
+      "period": 6
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-15",
+      "period": 1
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-15",
+      "period": 2
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-15",
+      "period": 3
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-15",
+      "period": 4
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-15",
+      "period": 5
+    },
+    {
+      "className": "1_1",
+      "day": "2027-10-15",
+      "period": 6
+    }
+  ],
+  "allOtherSlotsBlank": true,
+  "scope": "Independent literal semantic Analysis oracle, excludes runtime/source-record IDs, timestamps, parser version and provider metadata. No converter or OCR/model output invoked.",
+  "special": {
+    "coveredClasses": [
+      "AI_2",
+      "AI_1",
+      "5_IT",
+      "5_ES",
+      "5_CN",
+      "4_IT",
+      "4_ES",
+      "4_CN",
+      "3_IT",
+      "3_ES",
+      "3_CN",
+      "2_IT",
+      "2_ES",
+      "2_CN",
+      "1_3",
+      "1_2",
+      "1_1"
+    ],
+    "coveredDates": [
+      "2027-10-11",
+      "2027-10-12",
+      "2027-10-13",
+      "2027-10-14",
+      "2027-10-15"
+    ],
+    "lessons": [
+      {
+        "className": "AI_2",
+        "date": "2027-10-11",
+        "period": 1,
+        "spanStart": 1,
+        "spanEnd": 1,
+        "names": {
+          "subject": "架空数学丁",
+          "teacher": "架空担当丁",
+          "room": "架空室丁"
+        },
+        "recordedTime": {
+          "start": "09:10",
+          "end": "09:50"
+        },
+        "displayedTime": {
+          "start": "09:10",
+          "end": "09:50"
+        }
+      }
+    ],
+    "datePeriodClocks": [
+      {
+        "date": "2027-10-11",
+        "period": 1,
+        "start": "09:10",
+        "end": "09:50"
+      },
+      {
+        "date": "2027-10-11",
+        "period": 2,
+        "start": "10:00",
+        "end": "10:40"
+      },
+      {
+        "date": "2027-10-11",
+        "period": 3,
+        "start": "10:50",
+        "end": "11:30"
+      },
+      {
+        "date": "2027-10-11",
+        "period": 4,
+        "start": "11:40",
+        "end": "12:20"
+      },
+      {
+        "date": "2027-10-11",
+        "period": 5,
+        "start": "13:10",
+        "end": "13:50"
+      },
+      {
+        "date": "2027-10-11",
+        "period": 6,
+        "start": "14:00",
+        "end": "14:40"
+      },
+      {
+        "date": "2027-10-12",
+        "period": 1,
+        "start": "09:10",
+        "end": "09:50"
+      },
+      {
+        "date": "2027-10-12",
+        "period": 2,
+        "start": "10:00",
+        "end": "10:40"
+      },
+      {
+        "date": "2027-10-12",
+        "period": 3,
+        "start": "10:50",
+        "end": "11:30"
+      },
+      {
+        "date": "2027-10-12",
+        "period": 4,
+        "start": "11:40",
+        "end": "12:20"
+      },
+      {
+        "date": "2027-10-12",
+        "period": 5,
+        "start": "13:10",
+        "end": "13:50"
+      },
+      {
+        "date": "2027-10-12",
+        "period": 6,
+        "start": "14:00",
+        "end": "14:40"
+      },
+      {
+        "date": "2027-10-13",
+        "period": 1,
+        "start": "09:10",
+        "end": "09:50"
+      },
+      {
+        "date": "2027-10-13",
+        "period": 2,
+        "start": "10:00",
+        "end": "10:40"
+      },
+      {
+        "date": "2027-10-13",
+        "period": 3,
+        "start": "10:50",
+        "end": "11:30"
+      },
+      {
+        "date": "2027-10-13",
+        "period": 4,
+        "start": "11:40",
+        "end": "12:20"
+      },
+      {
+        "date": "2027-10-13",
+        "period": 5,
+        "start": "13:10",
+        "end": "13:50"
+      },
+      {
+        "date": "2027-10-13",
+        "period": 6,
+        "start": "14:00",
+        "end": "14:40"
+      },
+      {
+        "date": "2027-10-14",
+        "period": 1,
+        "start": "09:10",
+        "end": "09:50"
+      },
+      {
+        "date": "2027-10-14",
+        "period": 2,
+        "start": "10:00",
+        "end": "10:40"
+      },
+      {
+        "date": "2027-10-14",
+        "period": 3,
+        "start": "10:50",
+        "end": "11:30"
+      },
+      {
+        "date": "2027-10-14",
+        "period": 4,
+        "start": "11:40",
+        "end": "12:20"
+      },
+      {
+        "date": "2027-10-14",
+        "period": 5,
+        "start": "13:10",
+        "end": "13:50"
+      },
+      {
+        "date": "2027-10-14",
+        "period": 6,
+        "start": "14:00",
+        "end": "14:40"
+      },
+      {
+        "date": "2027-10-15",
+        "period": 1,
+        "start": "09:10",
+        "end": "09:50"
+      },
+      {
+        "date": "2027-10-15",
+        "period": 2,
+        "start": "10:00",
+        "end": "10:40"
+      },
+      {
+        "date": "2027-10-15",
+        "period": 3,
+        "start": "10:50",
+        "end": "11:30"
+      },
+      {
+        "date": "2027-10-15",
+        "period": 4,
+        "start": "11:40",
+        "end": "12:20"
+      },
+      {
+        "date": "2027-10-15",
+        "period": 5,
+        "start": "13:10",
+        "end": "13:50"
+      },
+      {
+        "date": "2027-10-15",
+        "period": 6,
+        "start": "14:00",
+        "end": "14:40"
+      }
+    ]
+  }
+}

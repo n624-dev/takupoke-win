@@ -1,0 +1,45 @@
+name: Compare fixed original-pixel OCR tiles and fullpage
+on:
+  push:
+    branches: [research/windows-raster-tiles-20261004]
+    paths: ['tools/localized-raster-native-probe/**', '.github/workflows/localized-raster-native-probe.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: windows-2025
+    timeout-minutes: 90
+    env:
+      ORT_TELEMETRY_DISABLED: '1'
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Public tree and source identity
+        run: python scripts/check-public-tree.py
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: '10.0.x'
+          cache: false
+      - name: Exact original PNG assembly and model-free geometry
+        shell: pwsh
+        run: |
+          python tools/raster-acquisition-native-probe/fixtures/assemble.py
+          if ($LASTEXITCODE -ne 0) { throw 'Development original pin failure' }
+          python tools/localized-raster-native-probe/assemble-heldout.py
+          if ($LASTEXITCODE -ne 0) { throw 'Independent holdout pin failure' }
+          dotnet run --project tools/localized-raster-native-probe/preflight/TilePreflight.csproj --configuration Release
+          if ($LASTEXITCODE -ne 0) { throw 'Geometry/crop preflight failure' }
+      - name: Actual runner hardware
+        shell: pwsh
+        run: |
+          $cpu = @(Get-CimInstance Win32_Processor | Select-Object Name, NumberOfCores, NumberOfLogicalProcessors)
+          $system = Get-CimInstance Win32_ComputerSystem
+          $os = Get-CimInstance Win32_OperatingSystem
+          @{ sourceCommit = $env:GITHUB_SHA; processors = $cpu; allocatedPhysicalMemoryBytes = [Int64]$system.TotalPhysicalMemory; architecture = [Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString(); os = $os.Caption; osVersion = $os.Version; osBuild = $os.BuildNumber } | ConvertTo-Json -Depth 5
+      - name: One common full-formal acquisition comparison
+        shell: pwsh
+        run: dotnet run --project tools/localized-raster-native-probe/LocalizedRasterNativeProbe.csproj --configuration Release --no-launch-profile

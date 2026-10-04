@@ -1,0 +1,119 @@
+{
+  "kind": "Exam",
+  "profile": "independent-Exam-shiftclasses-戊",
+  "schoolYear": 2028,
+  "term": null,
+  "classes": [
+    "3_IT",
+    "4_CN",
+    "4_ES",
+    "4_IT",
+    "5_CN",
+    "5_ES",
+    "5_IT",
+    "AI_1",
+    "AI_2",
+    "1_1",
+    "1_2",
+    "1_3",
+    "2_CN",
+    "2_ES",
+    "2_IT",
+    "3_CN",
+    "3_ES"
+  ],
+  "days": [
+    "2028-11-06",
+    "2028-11-07",
+    "2028-11-08",
+    "2028-11-09",
+    "2028-11-10"
+  ],
+  "maxPeriod": 6,
+  "requiredSlots": 510,
+  "lessons": [
+    {
+      "class": "3_IT",
+      "day": "2028-11-06",
+      "periods": [
+        1
+      ],
+      "subject": "架空化学戊",
+      "teacher": "架空担当戊",
+      "room": "架空室戊"
+    }
+  ],
+  "allOtherSlotsBlank": true,
+  "periodClocks": [
+    {
+      "period": 1,
+      "start": "09:10",
+      "end": "09:50"
+    },
+    {
+      "period": 2,
+      "start": "10:00",
+      "end": "10:40"
+    },
+    {
+      "period": 3,
+      "start": "10:50",
+      "end": "11:30"
+    },
+    {
+      "period": 4,
+      "start": "11:40",
+      "end": "12:20"
+    },
+    {
+      "period": 5,
+      "start": "13:10",
+      "end": "13:50"
+    },
+    {
+      "period": 6,
+      "start": "14:00",
+      "end": "14:40"
+    }
+  ],
+  "expectedSafeRejection": false,
+  "pdfFile": "fictional.pdf",
+  "pdfSha256": "01b43dfdadbd2639b79c2cbd8df5c6ef0db36ccfaffc302fe6db8bf36c4d99c2",
+  "pages": [
+    {
+      "page": 1,
+      "imageFile": "page-1.png",
+      "imageSha256": "b83f58204784179e282192798d0d5bcb789eb3a74f143d798962461c35676b9c",
+      "width": 793,
+      "height": 1670
+    },
+    {
+      "page": 2,
+      "imageFile": "page-2.png",
+      "imageSha256": "23f25c1e8bddbfc6bd5c2e34e6f28d959094b50bdfc6472cd6d216e1866e48ed",
+      "width": 793,
+      "height": 1670
+    },
+    {
+      "page": 3,
+      "imageFile": "page-3.png",
+      "imageSha256": "a3c5fed6f038aa13c705a782df84ecf21da1f3148d3d850aa0f918079b4172f5",
+      "width": 793,
+      "height": 1670
+    },
+    {
+      "page": 4,
+      "imageFile": "page-4.png",
+      "imageSha256": "cbb57bdbd0c9bf63ff503abf672a61e1fbabee218f9ddff52e3ef45bc50e255e",
+      "width": 793,
+      "height": 1670
+    },
+    {
+      "page": 5,
+      "imageFile": "page-5.png",
+      "imageSha256": "595a1fe5f64672bad1853f561d104bcbfd84c0a853d17585428a38785d606d92",
+      "width": 793,
+      "height": 1670
+    }
+  ]
+}

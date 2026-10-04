@@ -1,0 +1,72 @@
+{
+  "kind": "Timetable",
+  "profile": "independent-Timetable-verifiedblank-丙",
+  "schoolYear": 2028,
+  "term": "後期",
+  "classes": [
+    "2_IT"
+  ],
+  "days": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "maxPeriod": 8,
+  "requiredSlots": 40,
+  "lessons": [
+    {
+      "class": "2_IT",
+      "day": "1",
+      "periods": [
+        1
+      ],
+      "subject": "架空物理丙",
+      "teacher": "",
+      "room": "架空室丙"
+    }
+  ],
+  "allOtherSlotsBlank": true,
+  "periodClocks": [],
+  "expectedSafeRejection": false,
+  "pdfFile": "fictional.pdf",
+  "pdfSha256": "2625bf49044d59088b53109fc15ba7813073fdedac71bde5eb82925c297050f8",
+  "pages": [
+    {
+      "page": 1,
+      "imageFile": "page-1.png",
+      "imageSha256": "5dc6c33f3600c7c2e8f8cffced619a96af292ece024f82357c77857936b6e3c7",
+      "width": 1025,
+      "height": 210
+    },
+    {
+      "page": 2,
+      "imageFile": "page-2.png",
+      "imageSha256": "a337510f7052b27adce3f24d38fa17ae7dfbc7cad7295dbf0390753acdc2b1af",
+      "width": 1025,
+      "height": 210
+    },
+    {
+      "page": 3,
+      "imageFile": "page-3.png",
+      "imageSha256": "bfaed1fc9931f04b7e86946d482455fbfbe7b110ab66a756e68bd17cd6974185",
+      "width": 1025,
+      "height": 210
+    },
+    {
+      "page": 4,
+      "imageFile": "page-4.png",
+      "imageSha256": "255cc9bbfb95f17ab9f0bb453495804ccc525705540a6eb8635d06d6dff548ce",
+      "width": 1025,
+      "height": 210
+    },
+    {
+      "page": 5,
+      "imageFile": "page-5.png",
+      "imageSha256": "41ebdb01f4f3dfeb0ab323150545871961cc0bca6d4a2e3aa91abacd78c6dbfd",
+      "width": 1025,
+      "height": 210
+    }
+  ]
+}

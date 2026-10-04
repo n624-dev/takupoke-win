@@ -1,0 +1,330 @@
+{
+  "kind": "ExamReturn",
+  "profile": "independent-ExamReturn-verifiedblank-己",
+  "schoolYear": 2027,
+  "term": null,
+  "classes": [
+    "2_IT",
+    "3_CN",
+    "3_ES",
+    "3_IT",
+    "4_CN",
+    "4_ES",
+    "4_IT",
+    "5_CN",
+    "5_ES",
+    "5_IT",
+    "AI_1",
+    "AI_2",
+    "1_1",
+    "1_2",
+    "1_3",
+    "2_CN",
+    "2_ES"
+  ],
+  "days": [
+    "2027-10-21",
+    "2027-10-22",
+    "2027-10-23",
+    "2027-10-24",
+    "2027-10-25"
+  ],
+  "maxPeriod": 8,
+  "requiredSlots": 680,
+  "lessons": [
+    {
+      "class": "2_IT",
+      "day": "2027-10-21",
+      "periods": [
+        1
+      ],
+      "subject": "架空情報己",
+      "teacher": "架空担当己",
+      "room": ""
+    }
+  ],
+  "allOtherSlotsBlank": true,
+  "expectedSafeRejection": false,
+  "pdfFile": "fictional.pdf",
+  "pdfSha256": "39d6ec796baddc4fcd7d1c68b26d6f9de09b53d50c8d4325857d91cd9c35019d",
+  "pages": [
+    {
+      "page": 1,
+      "imageFile": "page-1.png",
+      "imageSha256": "55b174a5f3758718721edd5ed8ad22fe76bd07a24a30d0b7d92b8d6925028361",
+      "width": 1025,
+      "height": 1602
+    },
+    {
+      "page": 2,
+      "imageFile": "page-2.png",
+      "imageSha256": "6b0b066c54e525f3e1ca858ee7a410737d19cf97b6638d828e08f1e7285a3ea7",
+      "width": 1025,
+      "height": 1602
+    },
+    {
+      "page": 3,
+      "imageFile": "page-3.png",
+      "imageSha256": "b94ed79de41a180109c9aff0726392f08698931d01e462fbf5ba88a6d2e6c0d2",
+      "width": 1025,
+      "height": 1602
+    },
+    {
+      "page": 4,
+      "imageFile": "page-4.png",
+      "imageSha256": "a5a7485e46434ca226f1380cbb7f98d472d3177e6f50dba0a1073e9f3d9d61b7",
+      "width": 1025,
+      "height": 1602
+    },
+    {
+      "page": 5,
+      "imageFile": "page-5.png",
+      "imageSha256": "3ab874a17f1233cfdfc401aba0eebb7d9cdf11addd84880f4eb6307f63c0a4d4",
+      "width": 1025,
+      "height": 1602
+    }
+  ],
+  "datePeriodClocks": [
+    {
+      "date": "2027-10-21",
+      "period": 1,
+      "start": "09:10",
+      "end": "09:50"
+    },
+    {
+      "date": "2027-10-21",
+      "period": 2,
+      "start": "10:00",
+      "end": "10:40"
+    },
+    {
+      "date": "2027-10-21",
+      "period": 3,
+      "start": "10:50",
+      "end": "11:30"
+    },
+    {
+      "date": "2027-10-21",
+      "period": 4,
+      "start": "11:40",
+      "end": "12:20"
+    },
+    {
+      "date": "2027-10-21",
+      "period": 5,
+      "start": "13:10",
+      "end": "13:50"
+    },
+    {
+      "date": "2027-10-21",
+      "period": 6,
+      "start": "14:00",
+      "end": "14:40"
+    },
+    {
+      "date": "2027-10-21",
+      "period": 7,
+      "start": "14:50",
+      "end": "15:30"
+    },
+    {
+      "date": "2027-10-21",
+      "period": 8,
+      "start": "15:40",
+      "end": "16:20"
+    },
+    {
+      "date": "2027-10-22",
+      "period": 1,
+      "start": "08:50",
+      "end": "09:35"
+    },
+    {
+      "date": "2027-10-22",
+      "period": 2,
+      "start": "09:35",
+      "end": "10:20"
+    },
+    {
+      "date": "2027-10-22",
+      "period": 3,
+      "start": "10:30",
+      "end": "11:15"
+    },
+    {
+      "date": "2027-10-22",
+      "period": 4,
+      "start": "11:15",
+      "end": "12:00"
+    },
+    {
+      "date": "2027-10-22",
+      "period": 5,
+      "start": "12:50",
+      "end": "13:35"
+    },
+    {
+      "date": "2027-10-22",
+      "period": 6,
+      "start": "13:35",
+      "end": "14:20"
+    },
+    {
+      "date": "2027-10-22",
+      "period": 7,
+      "start": "14:30",
+      "end": "15:15"
+    },
+    {
+      "date": "2027-10-22",
+      "period": 8,
+      "start": "15:15",
+      "end": "16:00"
+    },
+    {
+      "date": "2027-10-23",
+      "period": 1,
+      "start": "08:50",
+      "end": "09:35"
+    },
+    {
+      "date": "2027-10-23",
+      "period": 2,
+      "start": "09:35",
+      "end": "10:20"
+    },
+    {
+      "date": "2027-10-23",
+      "period": 3,
+      "start": "10:30",
+      "end": "11:15"
+    },
+    {
+      "date": "2027-10-23",
+      "period": 4,
+      "start": "11:15",
+      "end": "12:00"
+    },
+    {
+      "date": "2027-10-23",
+      "period": 5,
+      "start": "12:50",
+      "end": "13:35"
+    },
+    {
+      "date": "2027-10-23",
+      "period": 6,
+      "start": "13:35",
+      "end": "14:20"
+    },
+    {
+      "date": "2027-10-23",
+      "period": 7,
+      "start": "14:30",
+      "end": "15:15"
+    },
+    {
+      "date": "2027-10-23",
+      "period": 8,
+      "start": "15:15",
+      "end": "16:00"
+    },
+    {
+      "date": "2027-10-24",
+      "period": 1,
+      "start": "08:50",
+      "end": "09:35"
+    },
+    {
+      "date": "2027-10-24",
+      "period": 2,
+      "start": "09:35",
+      "end": "10:20"
+    },
+    {
+      "date": "2027-10-24",
+      "period": 3,
+      "start": "10:30",
+      "end": "11:15"
+    },
+    {
+      "date": "2027-10-24",
+      "period": 4,
+      "start": "11:15",
+      "end": "12:00"
+    },
+    {
+      "date": "2027-10-24",
+      "period": 5,
+      "start": "12:50",
+      "end": "13:35"
+    },
+    {
+      "date": "2027-10-24",
+      "period": 6,
+      "start": "13:35",
+      "end": "14:20"
+    },
+    {
+      "date": "2027-10-24",
+      "period": 7,
+      "start": "14:30",
+      "end": "15:15"
+    },
+    {
+      "date": "2027-10-24",
+      "period": 8,
+      "start": "15:15",
+      "end": "16:00"
+    },
+    {
+      "date": "2027-10-25",
+      "period": 1,
+      "start": "08:50",
+      "end": "09:35"
+    },
+    {
+      "date": "2027-10-25",
+      "period": 2,
+      "start": "09:35",
+      "end": "10:20"
+    },
+    {
+      "date": "2027-10-25",
+      "period": 3,
+      "start": "10:30",
+      "end": "11:15"
+    },
+    {
+      "date": "2027-10-25",
+      "period": 4,
+      "start": "11:15",
+      "end": "12:00"
+    },
+    {
+      "date": "2027-10-25",
+      "period": 5,
+      "start": "12:50",
+      "end": "13:35"
+    },
+    {
+      "date": "2027-10-25",
+      "period": 6,
+      "start": "13:35",
+      "end": "14:20"
+    },
+    {
+      "date": "2027-10-25",
+      "period": 7,
+      "start": "14:30",
+      "end": "15:15"
+    },
+    {
+      "date": "2027-10-25",
+      "period": 8,
+      "start": "15:15",
+      "end": "16:00"
+    }
+  ],
+  "normalTimeNote": "10月21日の時間割は以下のとおり10月22日〜25日は通常の授業日どおりの授業時間"
+}

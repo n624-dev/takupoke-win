@@ -1,0 +1,224 @@
+{
+  "schoolYear": 2027,
+  "kind": "Timetable",
+  "expectedAdopt": true,
+  "requiredSlotSet": [
+    {
+      "className": "5_ES",
+      "day": "1",
+      "period": 1
+    },
+    {
+      "className": "5_ES",
+      "day": "1",
+      "period": 2
+    },
+    {
+      "className": "5_ES",
+      "day": "1",
+      "period": 3
+    },
+    {
+      "className": "5_ES",
+      "day": "1",
+      "period": 4
+    },
+    {
+      "className": "5_ES",
+      "day": "1",
+      "period": 5
+    },
+    {
+      "className": "5_ES",
+      "day": "1",
+      "period": 6
+    },
+    {
+      "className": "5_ES",
+      "day": "1",
+      "period": 7
+    },
+    {
+      "className": "5_ES",
+      "day": "1",
+      "period": 8
+    },
+    {
+      "className": "5_ES",
+      "day": "2",
+      "period": 1
+    },
+    {
+      "className": "5_ES",
+      "day": "2",
+      "period": 2
+    },
+    {
+      "className": "5_ES",
+      "day": "2",
+      "period": 3
+    },
+    {
+      "className": "5_ES",
+      "day": "2",
+      "period": 4
+    },
+    {
+      "className": "5_ES",
+      "day": "2",
+      "period": 5
+    },
+    {
+      "className": "5_ES",
+      "day": "2",
+      "period": 6
+    },
+    {
+      "className": "5_ES",
+      "day": "2",
+      "period": 7
+    },
+    {
+      "className": "5_ES",
+      "day": "2",
+      "period": 8
+    },
+    {
+      "className": "5_ES",
+      "day": "3",
+      "period": 1
+    },
+    {
+      "className": "5_ES",
+      "day": "3",
+      "period": 2
+    },
+    {
+      "className": "5_ES",
+      "day": "3",
+      "period": 3
+    },
+    {
+      "className": "5_ES",
+      "day": "3",
+      "period": 4
+    },
+    {
+      "className": "5_ES",
+      "day": "3",
+      "period": 5
+    },
+    {
+      "className": "5_ES",
+      "day": "3",
+      "period": 6
+    },
+    {
+      "className": "5_ES",
+      "day": "3",
+      "period": 7
+    },
+    {
+      "className": "5_ES",
+      "day": "3",
+      "period": 8
+    },
+    {
+      "className": "5_ES",
+      "day": "4",
+      "period": 1
+    },
+    {
+      "className": "5_ES",
+      "day": "4",
+      "period": 2
+    },
+    {
+      "className": "5_ES",
+      "day": "4",
+      "period": 3
+    },
+    {
+      "className": "5_ES",
+      "day": "4",
+      "period": 4
+    },
+    {
+      "className": "5_ES",
+      "day": "4",
+      "period": 5
+    },
+    {
+      "className": "5_ES",
+      "day": "4",
+      "period": 6
+    },
+    {
+      "className": "5_ES",
+      "day": "4",
+      "period": 7
+    },
+    {
+      "className": "5_ES",
+      "day": "4",
+      "period": 8
+    },
+    {
+      "className": "5_ES",
+      "day": "5",
+      "period": 1
+    },
+    {
+      "className": "5_ES",
+      "day": "5",
+      "period": 2
+    },
+    {
+      "className": "5_ES",
+      "day": "5",
+      "period": 3
+    },
+    {
+      "className": "5_ES",
+      "day": "5",
+      "period": 4
+    },
+    {
+      "className": "5_ES",
+      "day": "5",
+      "period": 5
+    },
+    {
+      "className": "5_ES",
+      "day": "5",
+      "period": 6
+    },
+    {
+      "className": "5_ES",
+      "day": "5",
+      "period": 7
+    },
+    {
+      "className": "5_ES",
+      "day": "5",
+      "period": 8
+    }
+  ],
+  "allOtherSlotsBlank": true,
+  "scope": "Independent literal semantic Analysis oracle, excludes runtime/source-record IDs, timestamps, parser version and provider metadata. No converter or OCR/model output invoked.",
+  "timetable": {
+    "term": "前期",
+    "lessons": [
+      {
+        "className": "5_ES",
+        "weekday": 1,
+        "period": 1,
+        "names": {
+          "subject": "架空化学乙",
+          "teacher": "架空担当乙",
+          "room": "架空室乙"
+        }
+      }
+    ]
+  }
+}

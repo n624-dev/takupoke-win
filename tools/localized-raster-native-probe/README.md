@@ -1,0 +1,24 @@
+# 原画素タイルでの日本語OCR比較（研究専用）
+
+同じWindows native renderの原画素から、既存CPU OCRの全文縮小と固定タイルを比較します。今回推論するのは、入力妥当性検証が成功した独立の通常PDF2件だけです。既存9PDFは消費済みdevelopmentとして履歴を保持し、再推論しません。recipe凍結後に独立描画した新6PDFのうち特殊4件は、時刻の契約・Builderの上限による事前検証失敗として分け、OCR品質の分母や正しいnegative拒否へ加算しません。閾値・文字列補正・モデル・CTC・正規化を変更しません。LLMの呼び出し、モデル認定、保存結果の採用は行いません。
+
+固定recipe SHAは `0bdec55548182fb2ed6f12738d0c5e0ea346ec52a21ecbffb4fe1d33d3769fdc`。704pxの半開core格子に各辺128pxのcontextを足し、tileは最大960px、重複幅は最大256pxです。セルが既知だとは扱わず、配置は原画素寸法のみで決めます。margin追加前のdetector support矩形の中心で唯一のcoreに所属させ、人工context境界2px以内に触れる所有regionはページ全体を拒否します。異なる原文位置の同じ文字を消しません。所有support矩形同士の面積が正の重なりは曖昧として拒否します。別の原文行のrecognition-paddingだけが重なる場合は残します。supportとpaddedの両座標を保存します。
+
+研究adapterは元のOnnxJapaneseOcrのsessionとprivate Image preprocessingを再利用します。元のDB connected components .3/.6、CTCと全probability range、文字confidence .8をそのまま使います。所有外context領域はrecognizerに入れる前に除外します。これにより、別coreに属する人工端の切断文字が無関係なcoreを拒否することを避けます。所有する切断regionを無視したり補完したりはしません。全tileの処理が必要で、全文座標へ整数offsetした後、全原画素に対する未認識印字、原罫線、空欄証明、既存Builder/certificate/Rules/Engine/Validatorと正式変換を確認します。
+
+全文armはOS OCRを使わず、元のOnnxJapaneseOcr.ReadによるCPU OCRだけです。過去のWindowsPdfRecovery実測にはOS/fallback分岐の不確実性があり、その結果を新armへ流用しません。同じonce-rendered rastersと同じloaded sessionで全文→タイルの順に実行するため、速度の因果比較やcold-start順位とは扱いません。実際のmanaged/native ORT1.26のSHAを確認し、一致しなければ採点前に止めます。
+
+各docはPDF2MB、1..5page、幅2400px/高さ3200px、合計40M原画素、128tileまでです。1pageのBGRA最大30.72MB、tileのBGRA最大3.69MBを逐次破棄し、doc rastersは最大160MBです。ONNX sessions/tensors・Builder・出力は別途memoryを使い、観測はevaluator processのみです。native inferenceには協調キャンセルしかなく、強制割込みはしません。render180秒、各arm900秒、全run80分、CI90分です。人工端/重なり/認識不可をpositive拒否として記録し、SDK・range・資源・deadline等の実行失敗は未評価で、正しいnegative拒否へ加算しません。各観測を直ちにconsoleへ書きます。
+
+独立oracleはruntime tile位置/文字認識への入力になりません。今回の通常2件は独立の完全semantic Analysis oracleで採点します。全slot集合、年・term・class・日付、唯一の授業の全値と他slotのblankを正式結果と照合します。特殊用scorerはspan/recorded/displayed time・全日全period clockの境界検証だけを行い、無効な特殊入力の品質を採点しません。誤った文字が原OCR sourceに一致してValidatorを通った場合もincorrectValidatorAcceptanceへ数えます。Validator受理後の正式変換・採点例外はacceptedUnassessed、incorrectValidatorAcceptance=nullとして未評価を維持し、誤採用ゼロの証明にはしません。
+
+入力作成後、OCR前の契約検証で返却時刻と画像外の右罫線を修正しました。元v1/v2の資料とpinsは研究履歴に保持し、現在v3 manifestは `050b7640b6de309db2be78a932cf558f4d36b3b89c29b95f7737228e025079b9` です。元描画の文字位置と元PNGの実罫線・空欄検証からBuilder→Rules→Validator→正式oracleへ進むモデルなし対照で、通常2件の40slot/全値が一致しました。試験2件のclock-day契約・見出しID順序、返却の既存20M work制約は別途の入力/実装問題として残し、goldを通すための追加調整を行いません。
+
+```sh
+python tools/raster-acquisition-native-probe/fixtures/assemble.py
+python tools/localized-raster-native-probe/assemble-heldout.py
+dotnet run --project tools/localized-raster-native-probe/preflight/TilePreflight.csproj -c Release
+dotnet run --project tools/localized-raster-native-probe/LocalizedRasterNativeProbe.csproj -c Release -- --preflight
+```
+
+上記はモデルなしのgeometry/原文pin確認であり、native OCRの成功や品質を証明しません。sourceを3者の変更範囲レビューで確認してから、fresh通常2件だけを一回のWindows CIで実行します。結果に合わせたpreset探索やholdout変更はしません。架空原文PNGのgenerator/provenanceはholdout内に保存し、native実行では使用しません。nativeモデルは元のApache2公式Paddle2ファイル＋元のpinned辞書だけです。本研究のproduction source/prompt/catalogは元commitのままです。既存Builderの修正は別patchと正常CIで検証し、この比較へ混在させません。
