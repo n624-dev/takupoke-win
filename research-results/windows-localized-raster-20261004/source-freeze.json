@@ -1,0 +1,315 @@
+{
+  "baseCommit": "f0eca36c9a6d949c20e0758916ae97bac799e0b2",
+  "worktree": "/tmp/takupoke-windows-raster-tiles-20261004",
+  "recipeSHA256": "0bdec55548182fb2ed6f12738d0c5e0ea346ec52a21ecbffb4fe1d33d3769fdc",
+  "files": {
+    "tools/localized-raster-native-probe/FormalPreflight.cs": {
+      "bytes": 5961,
+      "sha256": "9d7f38f6bfb4143d7c89203bc1411a20f0a6ad528f4b18d6e3b1e6191b48fa43"
+    },
+    "tools/localized-raster-native-probe/IndependentFormalOracle.cs": {
+      "bytes": 3326,
+      "sha256": "5efb5d12e238ff9ca4929dec22da6c45702bc62029d1a303baf22efc6604e774"
+    },
+    "tools/localized-raster-native-probe/LiteralOracle.cs": {
+      "bytes": 3062,
+      "sha256": "ccf952465b2370b3552d90b16b8660ac800bf0fcf647bdb59da6bdedfdabc3c9"
+    },
+    "tools/localized-raster-native-probe/LocalizedRasterNativeProbe.csproj": {
+      "bytes": 2439,
+      "sha256": "c47960daa57ee5c2f10f7a5f7d441d2d6bce050e40202f3d6ad8c7897cc4a2c9"
+    },
+    "tools/localized-raster-native-probe/NativeRasterReader.cs": {
+      "bytes": 5657,
+      "sha256": "47d39f416197dc80e158c332e5863ead7bd43756b168b354c012501a87cbdbff"
+    },
+    "tools/localized-raster-native-probe/OwnedTileOcr.cs": {
+      "bytes": 7397,
+      "sha256": "2b7547ebb4753e6635485e4d885974da088de155b1f5458e90104b94276cc4c9"
+    },
+    "tools/localized-raster-native-probe/Program.cs": {
+      "bytes": 16507,
+      "sha256": "d05bc91332c6142f2c272b7d9ebe5cedf9f36f4c3add34ea1f35bfdd2d348ff4"
+    },
+    "tools/localized-raster-native-probe/README.md": {
+      "bytes": 5784,
+      "sha256": "f0384a18576c6187e77a66f92af73d9dfa39f731cedd60a1af20c16aa3f0874e"
+    },
+    "tools/localized-raster-native-probe/TileGeometry.cs": {
+      "bytes": 5735,
+      "sha256": "f7f8fb065ceac951e54efc750ab4aa749fa2ce93ed09a53ff3c4b6f6465317b1"
+    },
+    "tools/localized-raster-native-probe/TilePreflight.cs": {
+      "bytes": 5008,
+      "sha256": "4f1d903dd5c2c73b5f951de9faf70abff49d38159e0de236b2be5d88ac7f2809"
+    },
+    "tools/localized-raster-native-probe/assemble-heldout.py": {
+      "bytes": 1809,
+      "sha256": "8677a833264dd2aa2bb6bb2a3fc53293e06a07ee66199af58144f813b8705c1f"
+    },
+    "tools/localized-raster-native-probe/holdout/freeze.py": {
+      "bytes": 4312,
+      "sha256": "9dc3b50cf7a89462d150ef9741017519e22535d80c7d392505e4dac6822f4e81"
+    },
+    "tools/localized-raster-native-probe/holdout/frozen-receipt.json": {
+      "bytes": 10291,
+      "sha256": "eb18f1bd3bae4ebcc03801e1b0ca0ab0f48b92c1eae677587cbb041ec6e26e90"
+    },
+    "tools/localized-raster-native-probe/holdout/generate.py": {
+      "bytes": 8214,
+      "sha256": "baee0c29ef3cb17160c612d59e488fa178b65047061ea0468e2071505665977b"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-reverseclasses-丁/drawing-source.json": {
+      "bytes": 43904,
+      "sha256": "2fd254ba815dfc23b63f3a4561538163f0c014e615b0e99afd2a0345357d4f41"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-reverseclasses-丁/literal-analysis-oracle.json": {
+      "bytes": 48016,
+      "sha256": "157978182f5ff543c8402322fb29a47b2ed6c050879128be3e9f27c80de2165b"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-reverseclasses-丁/literal-oracle.json": {
+      "bytes": 2345,
+      "sha256": "ee1b8d01bc6ea800244799f229426a3dcd956f6e7988ca92053d56070cf4a8be"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-reverseclasses-丁/page-1.png": {
+      "bytes": 34131,
+      "sha256": "9791cf2f04e6ce7f0d8d5eb63c81a560bf6fdc56710a3037d154138d0237a580"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-reverseclasses-丁/page-2.png": {
+      "bytes": 29496,
+      "sha256": "1043a20d45fc95c7e44880ce9aad113973adad869dd3e99192c733d598b02658"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-reverseclasses-丁/page-3.png": {
+      "bytes": 29546,
+      "sha256": "5b4578c0c9459e49b0762e46db15ae80f90c789f00ff913fa2f6f113a0787c37"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-reverseclasses-丁/page-4.png": {
+      "bytes": 29440,
+      "sha256": "ed97fb5b65538e15ac911ce5ba0f66cb23ce0283fa9630e395d69a0632002895"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-reverseclasses-丁/page-5.png": {
+      "bytes": 29509,
+      "sha256": "f2928a5b3176b81fc4914ffd2528a1def51bb79f35eb5b949bff8344e7d3999b"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-shiftclasses-戊/drawing-source.json": {
+      "bytes": 43909,
+      "sha256": "5b6c70810af9b361467fae32e1b77bb847935e896434e912206365b1fa1b5964"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-shiftclasses-戊/literal-analysis-oracle.json": {
+      "bytes": 48016,
+      "sha256": "572ee578e26786b6cd5ca126b597092a929085bcfdbb71422affd3d975e5908c"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-shiftclasses-戊/literal-oracle.json": {
+      "bytes": 2343,
+      "sha256": "a5343709b9cf60891ef31fbd458f9e62060bac2cf4d7cabcbf76790b9a30d707"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-shiftclasses-戊/page-1.png": {
+      "bytes": 35739,
+      "sha256": "b83f58204784179e282192798d0d5bcb789eb3a74f143d798962461c35676b9c"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-shiftclasses-戊/page-2.png": {
+      "bytes": 29650,
+      "sha256": "23f25c1e8bddbfc6bd5c2e34e6f28d959094b50bdfc6472cd6d216e1866e48ed"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-shiftclasses-戊/page-3.png": {
+      "bytes": 29835,
+      "sha256": "a3c5fed6f038aa13c705a782df84ecf21da1f3148d3d850aa0f918079b4172f5"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-shiftclasses-戊/page-4.png": {
+      "bytes": 29802,
+      "sha256": "cbb57bdbd0c9bf63ff503abf672a61e1fbabee218f9ddff52e3ef45bc50e255e"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Exam-shiftclasses-戊/page-5.png": {
+      "bytes": 29787,
+      "sha256": "595a1fe5f64672bad1853f561d104bcbfd84c0a853d17585428a38785d606d92"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-unreadableink-庚/drawing-source.json": {
+      "bytes": 60840,
+      "sha256": "6248c8b60cb28799fd0eb0bb3f46c2f25b64b0eb3189490ccd07e9342ab5840a"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-unreadableink-庚/literal-analysis-oracle.json": {
+      "bytes": 63768,
+      "sha256": "acb776c05451800196e5699fb4d102bb405bff3d5c5771d15f2d8d2f3ad75c60"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-unreadableink-庚/literal-oracle.json": {
+      "bytes": 6383,
+      "sha256": "27d5178f932fb5848955dd5c02c0b098b4ef9757b4bc5923ca0d235b5d15bce3"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-unreadableink-庚/page-1.png": {
+      "bytes": 46709,
+      "sha256": "bdb122d3c1613cb313a58199d962910bce20396f776e1d1428928c6c7ad1365f"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-unreadableink-庚/page-2.png": {
+      "bytes": 41214,
+      "sha256": "ad3d780d98ac7a669725fa9bf90c2d25c96827d073095940dd42fee4028c0025"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-unreadableink-庚/page-3.png": {
+      "bytes": 41464,
+      "sha256": "f4ef3ed6d4f1524e1532b475dda6c8c69ce90ed96fae8878b9dad5b95e7ceb19"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-unreadableink-庚/page-4.png": {
+      "bytes": 41420,
+      "sha256": "b89067a60a5a7c7a7d3409e79d020510e2a224a8468c3f20ffb8b02a1906bc1e"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-unreadableink-庚/page-5.png": {
+      "bytes": 41737,
+      "sha256": "9a2049bbaa87040e87449b290417ef66db2316ffeaf58e7293291ce84991d347"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-verifiedblank-己/drawing-source.json": {
+      "bytes": 60816,
+      "sha256": "770c2eda2b062d670dc2c75a95443bf2795ee917e5eb2cf48ff48258c83ee8e6"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-verifiedblank-己/literal-analysis-oracle.json": {
+      "bytes": 63600,
+      "sha256": "7de9a9b9c0ab14b1dbda242cb57199eab88b359d60c8bb5ee7b8fdb2f3ec0a4c"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-verifiedblank-己/literal-oracle.json": {
+      "bytes": 6221,
+      "sha256": "69572593d720f72f3aa332353582b5c23db36dd92ee6b9767855fbb39be31686"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-verifiedblank-己/page-1.png": {
+      "bytes": 45678,
+      "sha256": "55b174a5f3758718721edd5ed8ad22fe76bd07a24a30d0b7d92b8d6925028361"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-verifiedblank-己/page-2.png": {
+      "bytes": 41671,
+      "sha256": "6b0b066c54e525f3e1ca858ee7a410737d19cf97b6638d828e08f1e7285a3ea7"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-verifiedblank-己/page-3.png": {
+      "bytes": 42021,
+      "sha256": "b94ed79de41a180109c9aff0726392f08698931d01e462fbf5ba88a6d2e6c0d2"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-verifiedblank-己/page-4.png": {
+      "bytes": 41925,
+      "sha256": "a5a7485e46434ca226f1380cbb7f98d472d3177e6f50dba0a1073e9f3d9d61b7"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-ExamReturn-verifiedblank-己/page-5.png": {
+      "bytes": 41995,
+      "sha256": "3ab874a17f1233cfdfc401aba0eebb7d9cdf11addd84880f4eb6307f63c0a4d4"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-literal-乙/drawing-source.json": {
+      "bytes": 14662,
+      "sha256": "c2acd23ad38bc9e6eea4ded8b1fb790ac5817bb7891f090483a2f28084eab1b9"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-literal-乙/literal-analysis-oracle.json": {
+      "bytes": 3655,
+      "sha256": "0451ac80edac37e4e424d3d78b1d96ffe31cd06711024abe301c2ceff1e515c0"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-literal-乙/literal-oracle.json": {
+      "bytes": 1644,
+      "sha256": "c5c288e2d7dc23c27e48a001afb3c0f61b3fa49f04d99ef007d2d08e8b1bd460"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-literal-乙/page-1.png": {
+      "bytes": 13079,
+      "sha256": "a0db633e4ee653dd18ab0d99b00f69aa3aa7f8d009f86e2b03c3cffd23bba6a7"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-literal-乙/page-2.png": {
+      "bytes": 8111,
+      "sha256": "e4b7f6cfa73a27567893e6a555b720c954bee2f709b77bb60066938b67a793b8"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-literal-乙/page-3.png": {
+      "bytes": 8132,
+      "sha256": "b9eff63c09a77fa9a054a478287fe1737b66710bfc39eda436109e519774100e"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-literal-乙/page-4.png": {
+      "bytes": 8044,
+      "sha256": "32bfc1384924e8c63dd97f53529726daf64d8e6f5425c73a73cad578156cafa3"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-literal-乙/page-5.png": {
+      "bytes": 8147,
+      "sha256": "4933332d579a7ddc1c3123fdd6c22206f851483193a891f19ead01a0cc19a4b4"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-verifiedblank-丙/drawing-source.json": {
+      "bytes": 14635,
+      "sha256": "fdbb25473adc36c9c31a01686a6255377557a383ae98f47cf89276bb0e8c3c40"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-verifiedblank-丙/literal-analysis-oracle.json": {
+      "bytes": 3640,
+      "sha256": "8ff9ea8dc55fb6e010e18c6019f938c47840bf589fdd503d2db9d18072184f43"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-verifiedblank-丙/literal-oracle.json": {
+      "bytes": 1635,
+      "sha256": "b2db88d7f9e232c29c37d25437ec644d2ce77466f50374d23ac131362fa85d39"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-verifiedblank-丙/page-1.png": {
+      "bytes": 12397,
+      "sha256": "5dc6c33f3600c7c2e8f8cffced619a96af292ece024f82357c77857936b6e3c7"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-verifiedblank-丙/page-2.png": {
+      "bytes": 8452,
+      "sha256": "a337510f7052b27adce3f24d38fa17ae7dfbc7cad7295dbf0390753acdc2b1af"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-verifiedblank-丙/page-3.png": {
+      "bytes": 8480,
+      "sha256": "bfaed1fc9931f04b7e86946d482455fbfbe7b110ab66a756e68bd17cd6974185"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-verifiedblank-丙/page-4.png": {
+      "bytes": 8386,
+      "sha256": "255cc9bbfb95f17ab9f0bb453495804ccc525705540a6eb8635d06d6dff548ce"
+    },
+    "tools/localized-raster-native-probe/holdout/independent-Timetable-verifiedblank-丙/page-5.png": {
+      "bytes": 8489,
+      "sha256": "41ebdb01f4f3dfeb0ab323150545871961cc0bca6d4a2e3aa91abacd78c6dbfd"
+    },
+    "tools/localized-raster-native-probe/holdout/manifest.json": {
+      "bytes": 5195,
+      "sha256": "050b7640b6de309db2be78a932cf558f4d36b3b89c29b95f7737228e025079b9"
+    },
+    "tools/localized-raster-native-probe/preflight/Program.cs": {
+      "bytes": 192,
+      "sha256": "d46c5ed24ce716488e7f53ba0cbea46f7a6a8417ca354fb8920177f47e53561c"
+    },
+    "tools/localized-raster-native-probe/preflight/TilePreflight.csproj": {
+      "bytes": 616,
+      "sha256": "8ba2f3366afcacc8699005246d702233a9c77a8b05aee7b8bc7c2089b22541cd"
+    },
+    "tools/localized-raster-native-probe/recipe.json": {
+      "bytes": 2277,
+      "sha256": "0bdec55548182fb2ed6f12738d0c5e0ea346ec52a21ecbffb4fe1d33d3769fdc"
+    },
+    ".github/workflows/localized-raster-native-probe.yml": {
+      "bytes": 2293,
+      "sha256": "41ede1e12d272c84fe940f7ef843e6344c38ba8affd6025309acd7bf82ab03c7"
+    }
+  },
+  "proof": {
+    "compileOnly": {
+      "bytes": 615,
+      "sha256": "620d6d5263d3d6f7f842ecb152a30c448a6e1e5431a95f3c2d2c854eb5b96508"
+    },
+    "geometry74formal34": {
+      "bytes": 320,
+      "sha256": "85a47bfcc99ff8ba1697dc2d29e779c21bebe2514b34e602500dc82a4bfa78f7"
+    },
+    "managed15Pins": {
+      "bytes": 2647,
+      "sha256": "ce340181782977bb1d1377a4d1e9a402652224613720c57a81b7683a78078de0"
+    },
+    "originalDrawingSourceValidity": {
+      "bytes": 28750,
+      "sha256": "539269a36311ab1953bf05bc7d9afdf78173fe2ac361c020bc5dfc2aaad4a61e"
+    },
+    "nativeCalls": 0,
+    "productionBuilderUnchangedFromBase": "9b43e5cb1a3649043312c0edad3bacf56917f2dfc0c4a1f3ff063616f3ac6470"
+  },
+  "holdout": {
+    "manifestSHA256": "050b7640b6de309db2be78a932cf558f4d36b3b89c29b95f7737228e025079b9",
+    "receiptSHA256": "eb18f1bd3bae4ebcc03801e1b0ca0ab0f48b92c1eae677587cbb041ec6e26e90",
+    "initialRecipeSHA256": "740c2c6f1fc18c293b1520e40d204fbf55c84e1f9909f3c43b5e024c72592861",
+    "archiveRootsRetained": [
+      "v1",
+      "v2"
+    ],
+    "preOCRCorrections": "Return date-specific clock contract; clipped physical right border only; no OCR outputs consulted",
+    "nativeEligible": [
+      "independent-Timetable-literal-乙",
+      "independent-Timetable-verifiedblank-丙"
+    ],
+    "excludedNative": {
+      "consumedDevelopment": 9,
+      "specialInputContractOrCapacityFailure": 4,
+      "negativeCredit": 0
+    }
+  },
+  "scope": "Research only; one native comparison of two fresh valid ordinary PDFs/fullpage and fixed tiles. Historical9 and invalidspecial4 excluded without inference or negative credit. Production source-order fix separate. No physical/model qualification."
+}

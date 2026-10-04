@@ -1,0 +1,1352 @@
+{
+  "sourceCommit": "4c3bce06463bc94328f3e0d89314f07e5390cb4f",
+  "run": 37203068032,
+  "job": 111438534385,
+  "ciConclusion": "success",
+  "qualityQualified": false,
+  "rawLog": {
+    "path": "/workspace/review-notes/windows-localized-raster-native-full.log",
+    "bytes": 45442,
+    "sha256": "890e43425d459ebd7b60fc41895ccd4578fe44587ce2bc805aa1c90036444adc"
+  },
+  "runtime": {
+    "runtimeEvidence": {
+      "managed": {
+        "version": "1.26.0.0",
+        "sha256": "de7f8ddef8af207f62cdd135e1fb0c21cc5dd42111d97b0f677ca2f61300f29e"
+      },
+      "native": [
+        {
+          "FileVersion": "1.26.20260520.2.756157b",
+          "sha256": "6a4129504501cbd615efddc897345ec9557390b408887165ab5faf9812a54b31"
+        }
+      ]
+    },
+    "ocrBundle": {
+      "Id": "paddle-ppocrv5-mobile",
+      "Version": "official-20260526",
+      "Runtime": "windowsOcr",
+      "MinimumOs": "10.0.26100",
+      "MinimumMemory": 1073741824,
+      "License": "Apache-2.0",
+      "Validated": true,
+      "Artifacts": [
+        {
+          "Path": "det.onnx",
+          "Url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_det_onnx/resolve/e6f4fa85f00e168c862bc462aebca69eef9b3d3d/inference.onnx",
+          "Size": 4826518,
+          "Sha256": "a431985659dc921974177a95adcfbb90fd9e51989a5e04d70d0b75f597b6e61d"
+        },
+        {
+          "Path": "rec.onnx",
+          "Url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec_onnx/resolve/ed152b8b495f84de93cda5709d768548a9127622/inference.onnx",
+          "Size": 16534782,
+          "Sha256": "da72dc72ca4dc220df0dfde68c1dedc31c58d3e76a25871122e5056227d50092"
+        }
+      ],
+      "Size": 21361300,
+      "Valid": true
+    },
+    "llmCalls": 0,
+    "scope": "Pinned CPU OCR sessions only; no OS OCR branch"
+  },
+  "summary": {
+    "recipeSHA256": "0bdec55548182fb2ed6f12738d0c5e0ea346ec52a21ecbffb4fe1d33d3769fdc",
+    "eligibleDocumentsPerArm": 2,
+    "excludedInputs": [
+      {
+        "Id": "Timetable-clean",
+        "Cohort": "development",
+        "nativeCalls": 0,
+        "qualityAssessed": false,
+        "correctNegativeRejection": false,
+        "reason": "Consumed historical development; no repeated acquisition"
+      },
+      {
+        "Id": "Exam-clean",
+        "Cohort": "development",
+        "nativeCalls": 0,
+        "qualityAssessed": false,
+        "correctNegativeRejection": false,
+        "reason": "Consumed historical development; no repeated acquisition"
+      },
+      {
+        "Id": "ExamReturn-clean",
+        "Cohort": "development",
+        "nativeCalls": 0,
+        "qualityAssessed": false,
+        "correctNegativeRejection": false,
+        "reason": "Consumed historical development; no repeated acquisition"
+      },
+      {
+        "Id": "Timetable-confusable-1",
+        "Cohort": "development",
+        "nativeCalls": 0,
+        "qualityAssessed": false,
+        "correctNegativeRejection": false,
+        "reason": "Consumed historical development; no repeated acquisition"
+      },
+      {
+        "Id": "Timetable-confusable-2",
+        "Cohort": "development",
+        "nativeCalls": 0,
+        "qualityAssessed": false,
+        "correctNegativeRejection": false,
+        "reason": "Consumed historical development; no repeated acquisition"
+      },
+      {
+        "Id": "Timetable-blank-values",
+        "Cohort": "development",
+        "nativeCalls": 0,
+        "qualityAssessed": false,
+        "correctNegativeRejection": false,
+        "reason": "Consumed historical development; no repeated acquisition"
+      },
+      {
+        "Id": "Timetable-unreadable",
+        "Cohort": "development",
+        "nativeCalls": 0,
+        "qualityAssessed": false,
+        "correctNegativeRejection": false,
+        "reason": "Consumed historical development; no repeated acquisition"
+      },
+      {
+        "Id": "Timetable-small-font",
+        "Cohort": "development",
+        "nativeCalls": 0,
+        "qualityAssessed": false,
+        "correctNegativeRejection": false,
+        "reason": "Consumed historical development; no repeated acquisition"
+      },
+      {
+        "Id": "Timetable-rotate-90",
+        "Cohort": "development",
+        "nativeCalls": 0,
+        "qualityAssessed": false,
+        "correctNegativeRejection": false,
+        "reason": "Consumed historical development; no repeated acquisition"
+      },
+      {
+        "Id": "independent-Exam-reverseclasses-丁",
+        "Cohort": "unused-holdout",
+        "nativeCalls": 0,
+        "qualityAssessed": false,
+        "correctNegativeRejection": false,
+        "reason": "Special input contract/capacity preflight failure; no OCR-quality or negative credit"
+      },
+      {
+        "Id": "independent-Exam-shiftclasses-戊",
+        "Cohort": "unused-holdout",
+        "nativeCalls": 0,
+        "qualityAssessed": false,
+        "correctNegativeRejection": false,
+        "reason": "Special input contract/capacity preflight failure; no OCR-quality or negative credit"
+      },
+      {
+        "Id": "independent-ExamReturn-verifiedblank-己",
+        "Cohort": "unused-holdout",
+        "nativeCalls": 0,
+        "qualityAssessed": false,
+        "correctNegativeRejection": false,
+        "reason": "Special input contract/capacity preflight failure; no OCR-quality or negative credit"
+      },
+      {
+        "Id": "independent-ExamReturn-unreadableink-庚",
+        "Cohort": "unused-holdout",
+        "nativeCalls": 0,
+        "qualityAssessed": false,
+        "correctNegativeRejection": false,
+        "reason": "Special input contract/capacity preflight failure; no OCR-quality or negative credit"
+      }
+    ],
+    "cohorts": [
+      {
+        "cohort": "unused-holdout",
+        "arm": "pinned-cpu-fullpage",
+        "positiveEligible": 2,
+        "negativeEligible": 0,
+        "positiveAssessed": 2,
+        "negativeAssessed": 0,
+        "positiveUnassessed": 0,
+        "negativeUnassessed": 0,
+        "positiveExact": 0,
+        "readablePositiveRejections": 2,
+        "correctNegativeRejections": 0,
+        "acceptedUnassessed": 0,
+        "incorrectValidatorAcceptances": 0
+      },
+      {
+        "cohort": "unused-holdout",
+        "arm": "pinned-cpu-fixed-grid",
+        "positiveEligible": 2,
+        "negativeEligible": 0,
+        "positiveAssessed": 2,
+        "negativeAssessed": 0,
+        "positiveUnassessed": 0,
+        "negativeUnassessed": 0,
+        "positiveExact": 0,
+        "readablePositiveRejections": 2,
+        "correctNegativeRejections": 0,
+        "acceptedUnassessed": 0,
+        "incorrectValidatorAcceptances": 0
+      }
+    ],
+    "executionErrors": 0,
+    "incorrectValidatorAcceptances": 0,
+    "observations": [
+      {
+        "Id": "independent-Timetable-literal-乙",
+        "Cohort": "unused-holdout",
+        "arm": "pinned-cpu-fullpage",
+        "assessed": true,
+        "accepted": false,
+        "exact": null,
+        "negative": false,
+        "incorrectValidatorAcceptance": false,
+        "readablePositiveRejection": true,
+        "correctNegativeRejection": false,
+        "stage": "OCR/fullpage coverage/Builder",
+        "milliseconds": 292,
+        "errorType": "InvalidDataException",
+        "errorMessage": "OCRで判読できない文字があります。空欄には置き換えません。",
+        "llmCalls": 0
+      },
+      {
+        "Id": "independent-Timetable-literal-乙",
+        "Cohort": "unused-holdout",
+        "arm": "pinned-cpu-fixed-grid",
+        "assessed": true,
+        "accepted": false,
+        "exact": null,
+        "negative": false,
+        "incorrectValidatorAcceptance": false,
+        "readablePositiveRejection": true,
+        "correctNegativeRejection": false,
+        "stage": "OCR/fullpage coverage/Builder",
+        "milliseconds": 1130,
+        "errorType": "InvalidDataException",
+        "errorMessage": "OCRで判読できない文字があります。空欄には置き換えません。",
+        "llmCalls": 0
+      },
+      {
+        "Id": "independent-Timetable-verifiedblank-丙",
+        "Cohort": "unused-holdout",
+        "arm": "pinned-cpu-fullpage",
+        "assessed": true,
+        "accepted": false,
+        "exact": null,
+        "negative": false,
+        "incorrectValidatorAcceptance": false,
+        "readablePositiveRejection": true,
+        "correctNegativeRejection": false,
+        "stage": "OCR/fullpage coverage/Builder",
+        "milliseconds": 687,
+        "errorType": "InvalidDataException",
+        "errorMessage": "OCRで判読できない文字があります。空欄には置き換えません。",
+        "llmCalls": 0
+      },
+      {
+        "Id": "independent-Timetable-verifiedblank-丙",
+        "Cohort": "unused-holdout",
+        "arm": "pinned-cpu-fixed-grid",
+        "assessed": true,
+        "accepted": false,
+        "exact": null,
+        "negative": false,
+        "incorrectValidatorAcceptance": false,
+        "readablePositiveRejection": true,
+        "correctNegativeRejection": false,
+        "stage": "OCR/fullpage coverage/Builder",
+        "milliseconds": 269,
+        "errorType": "InvalidDataException",
+        "errorMessage": "OCRで判読できない文字があります。空欄には置き換えません。",
+        "llmCalls": 0
+      }
+    ],
+    "evaluatorProcessPeakWorkingSetBytes": 295596032,
+    "scope": "Two fresh source-valid ordinary PDFs only, same once-rendered image and pinned OCR; fixed fullpage-then-tile order/warm sessions, no causal latency rank. Consumed nine and invalid special inputs excluded without native calls/negative credit. Original thresholds and global ink/blank/certificate/Validator/formal guards. Accepted but formal-unassessed positives have unknown incorrect-accept status, never inferred correct. Native synchronous inference uses cooperative cancellation; hard CI deadline can terminate final report. No LLM/production adoption/model qualification."
+  },
+  "nativeEvidence": [
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "ownedCandidateBox": {
+            "X": 283.5,
+            "Y": 14.953125,
+            "Width": 66,
+            "Height": 21.65625,
+            "Valid": true
+          },
+          "detectorSupport": {
+            "X": 287,
+            "Y": 18.5625,
+            "Width": 59,
+            "Height": 14.4375,
+            "Valid": true
+          },
+          "stage": "ownership-before-recognition"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "global": {
+            "X": 283.5,
+            "Y": 14.953125,
+            "Width": 66,
+            "Height": 21.65625,
+            "Valid": true
+          },
+          "globalSupport": {
+            "X": 287,
+            "Y": 18.5625,
+            "Width": 59,
+            "Height": 14.4375,
+            "Valid": true
+          },
+          "actualCtcText": "時間割",
+          "pieces": [
+            {
+              "Text": "時",
+              "Start": 2,
+              "End": 3,
+              "Confidence": 0.8079579
+            },
+            {
+              "Text": "間",
+              "Start": 8,
+              "End": 9,
+              "Confidence": 0.93363905
+            },
+            {
+              "Text": "割",
+              "Start": 14,
+              "End": 15,
+              "Confidence": 0.9992824
+            }
+          ],
+          "stage": "actual-owned-recognition-before-confidence-guard"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "ownedCandidateBox": {
+            "X": 9,
+            "Y": 16.5,
+            "Width": 142,
+            "Height": 18.5625,
+            "Valid": true
+          },
+          "detectorSupport": {
+            "X": 12,
+            "Y": 19.59375,
+            "Width": 136,
+            "Height": 12.375,
+            "Valid": true
+          },
+          "stage": "ownership-before-recognition"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "global": {
+            "X": 9,
+            "Y": 16.5,
+            "Width": 142,
+            "Height": 18.5625,
+            "Valid": true
+          },
+          "globalSupport": {
+            "X": 12,
+            "Y": 19.59375,
+            "Width": 136,
+            "Height": 12.375,
+            "Valid": true
+          },
+          "actualCtcText": "2027年度前期",
+          "pieces": [
+            {
+              "Text": "2",
+              "Start": 0,
+              "End": 1,
+              "Confidence": 0.9975248
+            },
+            {
+              "Text": "0",
+              "Start": 4,
+              "End": 5,
+              "Confidence": 0.9993787
+            },
+            {
+              "Text": "2",
+              "Start": 9,
+              "End": 10,
+              "Confidence": 0.99917465
+            },
+            {
+              "Text": "7",
+              "Start": 13,
+              "End": 14,
+              "Confidence": 0.9987727
+            },
+            {
+              "Text": "年",
+              "Start": 18,
+              "End": 19,
+              "Confidence": 0.99991286
+            },
+            {
+              "Text": "度",
+              "Start": 26,
+              "End": 27,
+              "Confidence": 0.9998242
+            },
+            {
+              "Text": "前",
+              "Start": 35,
+              "End": 36,
+              "Confidence": 0.999482
+            },
+            {
+              "Text": "期",
+              "Start": 42,
+              "End": 43,
+              "Confidence": 0.98333305
+            }
+          ],
+          "stage": "actual-owned-recognition-before-confidence-guard"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "ownedCandidateBox": {
+            "X": 133.5,
+            "Y": 50.015625,
+            "Width": 24,
+            "Height": 27.84375,
+            "Valid": true
+          },
+          "detectorSupport": {
+            "X": 138,
+            "Y": 54.65625,
+            "Width": 15,
+            "Height": 18.5625,
+            "Valid": true
+          },
+          "stage": "ownership-before-recognition"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "global": {
+            "X": 133.5,
+            "Y": 50.015625,
+            "Width": 24,
+            "Height": 27.84375,
+            "Valid": true
+          },
+          "globalSupport": {
+            "X": 138,
+            "Y": 54.65625,
+            "Width": 15,
+            "Height": 18.5625,
+            "Valid": true
+          },
+          "actualCtcText": "月",
+          "pieces": [
+            {
+              "Text": "月",
+              "Start": 2,
+              "End": 3,
+              "Confidence": 0.99979717
+            }
+          ],
+          "stage": "actual-owned-recognition-before-confidence-guard"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "ownedCandidateBox": {
+            "X": 426.25,
+            "Y": 86.8828125,
+            "Width": 18.5,
+            "Height": 29.390625,
+            "Valid": true
+          },
+          "detectorSupport": {
+            "X": 431,
+            "Y": 91.78125,
+            "Width": 9,
+            "Height": 19.59375,
+            "Valid": true
+          },
+          "stage": "ownership-before-recognition"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "global": {
+            "X": 426.25,
+            "Y": 86.8828125,
+            "Width": 18.5,
+            "Height": 29.390625,
+            "Valid": true
+          },
+          "globalSupport": {
+            "X": 431,
+            "Y": 91.78125,
+            "Width": 9,
+            "Height": 19.59375,
+            "Valid": true
+          },
+          "actualCtcText": "3",
+          "pieces": [
+            {
+              "Text": "3",
+              "Start": 1,
+              "End": 2,
+              "Confidence": 0.9194198
+            }
+          ],
+          "stage": "actual-owned-recognition-before-confidence-guard"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "ownedCandidateBox": {
+            "X": 129,
+            "Y": 87.65625,
+            "Width": 18,
+            "Height": 30.9375,
+            "Valid": true
+          },
+          "detectorSupport": {
+            "X": 134,
+            "Y": 92.8125,
+            "Width": 8,
+            "Height": 20.625,
+            "Valid": true
+          },
+          "stage": "ownership-before-recognition"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "global": {
+            "X": 129,
+            "Y": 87.65625,
+            "Width": 18,
+            "Height": 30.9375,
+            "Valid": true
+          },
+          "globalSupport": {
+            "X": 134,
+            "Y": 92.8125,
+            "Width": 8,
+            "Height": 20.625,
+            "Valid": true
+          },
+          "actualCtcText": "1",
+          "pieces": [
+            {
+              "Text": "1",
+              "Start": 1,
+              "End": 2,
+              "Confidence": 0.9521161
+            }
+          ],
+          "stage": "actual-owned-recognition-before-confidence-guard"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "ownedCandidateBox": {
+            "X": 276.5,
+            "Y": 88.171875,
+            "Width": 20,
+            "Height": 27.84375,
+            "Valid": true
+          },
+          "detectorSupport": {
+            "X": 281,
+            "Y": 92.8125,
+            "Width": 11,
+            "Height": 18.5625,
+            "Valid": true
+          },
+          "stage": "ownership-before-recognition"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "global": {
+            "X": 276.5,
+            "Y": 88.171875,
+            "Width": 20,
+            "Height": 27.84375,
+            "Valid": true
+          },
+          "globalSupport": {
+            "X": 281,
+            "Y": 92.8125,
+            "Width": 11,
+            "Height": 18.5625,
+            "Valid": true
+          },
+          "actualCtcText": "2",
+          "pieces": [
+            {
+              "Text": "2",
+              "Start": 2,
+              "End": 3,
+              "Confidence": 0.9863027
+            }
+          ],
+          "stage": "actual-owned-recognition-before-confidence-guard"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "ownedCandidateBox": {
+            "X": 574.75,
+            "Y": 88.4296875,
+            "Width": 17.5,
+            "Height": 26.296875,
+            "Valid": true
+          },
+          "detectorSupport": {
+            "X": 579,
+            "Y": 92.8125,
+            "Width": 9,
+            "Height": 17.53125,
+            "Valid": true
+          },
+          "stage": "ownership-before-recognition"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "global": {
+            "X": 574.75,
+            "Y": 88.4296875,
+            "Width": 17.5,
+            "Height": 26.296875,
+            "Valid": true
+          },
+          "globalSupport": {
+            "X": 579,
+            "Y": 92.8125,
+            "Width": 9,
+            "Height": 17.53125,
+            "Valid": true
+          },
+          "actualCtcText": "4",
+          "pieces": [
+            {
+              "Text": "4",
+              "Start": 1,
+              "End": 2,
+              "Confidence": 0.9990777
+            }
+          ],
+          "stage": "actual-owned-recognition-before-confidence-guard"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "ownedCandidateBox": {
+            "X": 129.25,
+            "Y": 130.1953125,
+            "Width": 124.5,
+            "Height": 17.015625,
+            "Valid": true
+          },
+          "detectorSupport": {
+            "X": 132,
+            "Y": 133.03125,
+            "Width": 119,
+            "Height": 11.34375,
+            "Valid": true
+          },
+          "stage": "ownership-before-recognition"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "global": {
+            "X": 129.25,
+            "Y": 130.1953125,
+            "Width": 124.5,
+            "Height": 17.015625,
+            "Valid": true
+          },
+          "globalSupport": {
+            "X": 132,
+            "Y": 133.03125,
+            "Width": 119,
+            "Height": 11.34375,
+            "Valid": true
+          },
+          "actualCtcText": "科目：架空化学乙",
+          "pieces": [
+            {
+              "Text": "科",
+              "Start": 1,
+              "End": 2,
+              "Confidence": 0.999388
+            },
+            {
+              "Text": "目",
+              "Start": 7,
+              "End": 8,
+              "Confidence": 0.99665856
+            },
+            {
+              "Text": "：",
+              "Start": 11,
+              "End": 12,
+              "Confidence": 0.91310245
+            },
+            {
+              "Text": "架",
+              "Start": 17,
+              "End": 18,
+              "Confidence": 0.993483
+            },
+            {
+              "Text": "空",
+              "Start": 23,
+              "End": 24,
+              "Confidence": 0.9997002
+            },
+            {
+              "Text": "化",
+              "Start": 29,
+              "End": 30,
+              "Confidence": 0.99866724
+            },
+            {
+              "Text": "学",
+              "Start": 35,
+              "End": 36,
+              "Confidence": 0.9992193
+            },
+            {
+              "Text": "乙",
+              "Start": 41,
+              "End": 42,
+              "Confidence": 0.9578509
+            }
+          ],
+          "stage": "actual-owned-recognition-before-confidence-guard"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "ownedCandidateBox": {
+            "X": 5.5,
+            "Y": 154.171875,
+            "Width": 46,
+            "Height": 21.65625,
+            "Valid": true
+          },
+          "detectorSupport": {
+            "X": 9,
+            "Y": 157.78125,
+            "Width": 39,
+            "Height": 14.4375,
+            "Valid": true
+          },
+          "stage": "ownership-before-recognition"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "global": {
+            "X": 5.5,
+            "Y": 154.171875,
+            "Width": 46,
+            "Height": 21.65625,
+            "Valid": true
+          },
+          "globalSupport": {
+            "X": 9,
+            "Y": 157.78125,
+            "Width": 39,
+            "Height": 14.4375,
+            "Valid": true
+          },
+          "actualCtcText": "5_ES",
+          "pieces": [
+            {
+              "Text": "5",
+              "Start": 1,
+              "End": 2,
+              "Confidence": 0.99910957
+            },
+            {
+              "Text": "_",
+              "Start": 4,
+              "End": 5,
+              "Confidence": 0.98885673
+            },
+            {
+              "Text": "E",
+              "Start": 7,
+              "End": 8,
+              "Confidence": 0.9957968
+            },
+            {
+              "Text": "S",
+              "Start": 10,
+              "End": 11,
+              "Confidence": 0.9925379
+            }
+          ],
+          "stage": "actual-owned-recognition-before-confidence-guard"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "ownedCandidateBox": {
+            "X": 128.25,
+            "Y": 158.0390625,
+            "Width": 125.5,
+            "Height": 17.015625,
+            "Valid": true
+          },
+          "detectorSupport": {
+            "X": 131,
+            "Y": 160.875,
+            "Width": 120,
+            "Height": 11.34375,
+            "Valid": true
+          },
+          "stage": "ownership-before-recognition"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-literal-乙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "global": {
+            "X": 128.25,
+            "Y": 158.0390625,
+            "Width": 125.5,
+            "Height": 17.015625,
+            "Valid": true
+          },
+          "globalSupport": {
+            "X": 131,
+            "Y": 160.875,
+            "Width": 120,
+            "Height": 11.34375,
+            "Valid": true
+          },
+          "actualCtcText": "担当：架空担当乙",
+          "pieces": [
+            {
+              "Text": "担",
+              "Start": 2,
+              "End": 3,
+              "Confidence": 0.9499813
+            },
+            {
+              "Text": "当",
+              "Start": 7,
+              "End": 8,
+              "Confidence": 0.9958003
+            },
+            {
+              "Text": "：",
+              "Start": 11,
+              "End": 12,
+              "Confidence": 0.85185194
+            },
+            {
+              "Text": "架",
+              "Start": 18,
+              "End": 19,
+              "Confidence": 0.97223896
+            },
+            {
+              "Text": "空",
+              "Start": 24,
+              "End": 25,
+              "Confidence": 0.99749607
+            },
+            {
+              "Text": "担",
+              "Start": 30,
+              "End": 31,
+              "Confidence": 0.9960984
+            },
+            {
+              "Text": "当",
+              "Start": 35,
+              "End": 36,
+              "Confidence": 0.9983455
+            },
+            {
+              "Text": "乙",
+              "Start": 41,
+              "End": 42,
+              "Confidence": 0.4571511
+            }
+          ],
+          "stage": "actual-owned-recognition-before-confidence-guard"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-verifiedblank-丙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "ownedCandidateBox": {
+            "X": 283.75,
+            "Y": 14.4482421875,
+            "Width": 65.5,
+            "Height": 20.490234375,
+            "Valid": true
+          },
+          "detectorSupport": {
+            "X": 287,
+            "Y": 17.86328125,
+            "Width": 59,
+            "Height": 13.66015625,
+            "Valid": true
+          },
+          "stage": "ownership-before-recognition"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-verifiedblank-丙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "global": {
+            "X": 283.75,
+            "Y": 14.4482421875,
+            "Width": 65.5,
+            "Height": 20.490234375,
+            "Valid": true
+          },
+          "globalSupport": {
+            "X": 287,
+            "Y": 17.86328125,
+            "Width": 59,
+            "Height": 13.66015625,
+            "Valid": true
+          },
+          "actualCtcText": "時間割",
+          "pieces": [
+            {
+              "Text": "時",
+              "Start": 2,
+              "End": 3,
+              "Confidence": 0.8159927
+            },
+            {
+              "Text": "間",
+              "Start": 9,
+              "End": 10,
+              "Confidence": 0.91532135
+            },
+            {
+              "Text": "割",
+              "Start": 15,
+              "End": 16,
+              "Confidence": 0.9994301
+            }
+          ],
+          "stage": "actual-owned-recognition-before-confidence-guard"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-verifiedblank-丙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "ownedCandidateBox": {
+            "X": 9.25,
+            "Y": 16.0244140625,
+            "Width": 142.5,
+            "Height": 17.337890625,
+            "Valid": true
+          },
+          "detectorSupport": {
+            "X": 12,
+            "Y": 18.9140625,
+            "Width": 137,
+            "Height": 11.55859375,
+            "Valid": true
+          },
+          "stage": "ownership-before-recognition"
+        }
+      }
+    },
+    {
+      "Id": "independent-Timetable-verifiedblank-丙",
+      "Cohort": "unused-holdout",
+      "arm": "pinned-cpu-fixed-grid",
+      "nativeEvidence": {
+        "page": 1,
+        "Index": 0,
+        "recognition": {
+          "tile": 0,
+          "global": {
+            "X": 9.25,
+            "Y": 16.0244140625,
+            "Width": 142.5,
+            "Height": 17.337890625,
+            "Valid": true
+          },
+          "globalSupport": {
+            "X": 12,
+            "Y": 18.9140625,
+            "Width": 137,
+            "Height": 11.55859375,
+            "Valid": true
+          },
+          "actualCtcText": "2028年度爱期",
+          "pieces": [
+            {
+              "Text": "2",
+              "Start": 0,
+              "End": 1,
+              "Confidence": 0.99745506
+            },
+            {
+              "Text": "0",
+              "Start": 5,
+              "End": 6,
+              "Confidence": 0.9997526
+            },
+            {
+              "Text": "2",
+              "Start": 9,
+              "End": 10,
+              "Confidence": 0.9974613
+            },
+            {
+              "Text": "8",
+              "Start": 14,
+              "End": 15,
+              "Confidence": 0.99758554
+            },
+            {
+              "Text": "年",
+              "Start": 20,
+              "End": 21,
+              "Confidence": 0.9998939
+            },
+            {
+              "Text": "度",
+              "Start": 28,
+              "End": 29,
+              "Confidence": 0.9991986
+            },
+            {
+              "Text": "爱",
+              "Start": 38,
+              "End": 39,
+              "Confidence": 0.4302363
+            },
+            {
+              "Text": "期",
+              "Start": 45,
+              "End": 46,
+              "Confidence": 0.9360071
+            }
+          ],
+          "stage": "actual-owned-recognition-before-confidence-guard"
+        }
+      }
+    }
+  ],
+  "preflight": {
+    "recipeSHA256": "0bdec55548182fb2ed6f12738d0c5e0ea346ec52a21ecbffb4fe1d33d3769fdc",
+    "sourceCommit": "4c3bce06463bc94328f3e0d89314f07e5390cb4f",
+    "originalPins": [
+      {
+        "Id": "Timetable-clean",
+        "Cohort": "development",
+        "pdfSHA256": "709a1c6654d4def6d9d6a077dd976275407bdd26edfa039c3e99485b984ee464"
+      },
+      {
+        "Id": "Exam-clean",
+        "Cohort": "development",
+        "pdfSHA256": "c6fa44d83fddf00c31f464e37e268e2ea5bf6affcc9c1da5bbb5d50700de3ce3"
+      },
+      {
+        "Id": "ExamReturn-clean",
+        "Cohort": "development",
+        "pdfSHA256": "932c9a783cae67b52d878bb4b7f090d9993cea0eb88f1171b4fd4c01a31696f1"
+      },
+      {
+        "Id": "Timetable-confusable-1",
+        "Cohort": "development",
+        "pdfSHA256": "85e8fbefb3cc2a63fbc7c3e59fe498f5a78194e369dc16b88838344d790640ab"
+      },
+      {
+        "Id": "Timetable-confusable-2",
+        "Cohort": "development",
+        "pdfSHA256": "761168d36ea66ceffc50b5f6d48d94fad5bbd7059645b18432f41d90e767b6a4"
+      },
+      {
+        "Id": "Timetable-blank-values",
+        "Cohort": "development",
+        "pdfSHA256": "d86f56336d6f1b47ab54e6d5ec20bbdcecfc30afbbed13c574430c11520c6fe0"
+      },
+      {
+        "Id": "Timetable-unreadable",
+        "Cohort": "development",
+        "pdfSHA256": "b3fda900e7a097304fc119ef7e50896e3429ba5e3582d9ff8c7f11267cdc3eda"
+      },
+      {
+        "Id": "Timetable-small-font",
+        "Cohort": "development",
+        "pdfSHA256": "9d1bc3fa307c383381cb23e38319f78409ae40768404239ff1f08a1c713a7a32"
+      },
+      {
+        "Id": "Timetable-rotate-90",
+        "Cohort": "development",
+        "pdfSHA256": "740fafecd9b08ccb00b5b7bbf5d54713279fc6c73bb030494cf68cdd22375a7b"
+      },
+      {
+        "Id": "independent-Timetable-literal-乙",
+        "Cohort": "unused-holdout",
+        "pdfSHA256": "233dec852ec7e43c93c70c42d8f88238a0c2e8aef146445c4b94d674bb6cc187"
+      },
+      {
+        "Id": "independent-Timetable-verifiedblank-丙",
+        "Cohort": "unused-holdout",
+        "pdfSHA256": "2625bf49044d59088b53109fc15ba7813073fdedac71bde5eb82925c297050f8"
+      },
+      {
+        "Id": "independent-Exam-reverseclasses-丁",
+        "Cohort": "unused-holdout",
+        "pdfSHA256": "d203599cbe7bd8e05a9ca2223fde96b4a4a9453752dab5d289659ec4ef963301"
+      },
+      {
+        "Id": "independent-Exam-shiftclasses-戊",
+        "Cohort": "unused-holdout",
+        "pdfSHA256": "01b43dfdadbd2639b79c2cbd8df5c6ef0db36ccfaffc302fe6db8bf36c4d99c2"
+      },
+      {
+        "Id": "independent-ExamReturn-verifiedblank-己",
+        "Cohort": "unused-holdout",
+        "pdfSHA256": "39d6ec796baddc4fcd7d1c68b26d6f9de09b53d50c8d4325857d91cd9c35019d"
+      },
+      {
+        "Id": "independent-ExamReturn-unreadableink-庚",
+        "Cohort": "unused-holdout",
+        "pdfSHA256": "a8dd2034626d01a8436b1c5e802622785aa9e1817134d4d593754cce1c5289f9"
+      }
+    ],
+    "preflight": {
+      "geometryChecks": 74,
+      "modelCalls": 0,
+      "scope": "Geometry/crop/boundary/conflict/coverage controls only; no OCR quality"
+    },
+    "formalScorerPreflight": {
+      "scorerChecks": 34,
+      "positiveOracleShapes": 5,
+      "nativeCalls": 0,
+      "scope": "Synthetic semantic scorer controls made from immutable independent gold; never OCR or quality evidence"
+    },
+    "scope": "Deterministic geometry/fixture controls only; no native OCR or model quality"
+  },
+  "limitations": [
+    "Two consumed-after-run ordinary positives only; no negative or special quality denominator",
+    "Fullpage empty-CTC or low-confidence exception does not log offending glyph/state; exact trigger undetermined",
+    "Tile observations stop at first low-confidence region; not a complete source inventory or full formal result",
+    "No acquisition succeeded; no formal comparison reached; incorrectaccept0 observed with accepted0 only",
+    "Fixed fullpage-then-tile warm sessions; no latency causality or physical minimum-memory claim"
+  ],
+  "hardware": {
+    "processors": [
+      {
+        "Name": "AMD EPYC 7763 64-Core Processor                ",
+        "NumberOfCores": 2,
+        "NumberOfLogicalProcessors": 4
+      }
+    ],
+    "allocatedPhysicalMemoryBytes": 17174360064,
+    "sourceCommit": "4c3bce06463bc94328f3e0d89314f07e5390cb4f",
+    "osBuild": "26100",
+    "osVersion": "10.0.26100",
+    "os": "Microsoft Windows Server 2025 Datacenter",
+    "architecture": "X64"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "baseCommit": "ff0043970cc6c357bb0f2bd776f1b1a89dbac22c",
+  "file": ".gitattributes",
+  "newFile": {
+    "bytes": 349,
+    "sha256": "2d93b1e096c1c148495ae902c5e26c8df5fdde92abbd4b41876b36673c5c13f7"
+  },
+  "patch": {
+    "bytes": 324,
+    "sha256": "49bbe44db68a4c2d3116fa07801181fcce0dda1da6bd050f1cc93c35454d82dc"
+  },
+  "initialRun": 37202785662,
+  "initialJob": 111437704972,
+  "initialLog": {
+    "bytes": 17025,
+    "sha256": "9850f979f0ed2f460fe137199063619ea8f29638a10b0e875cd38999a8b88d8a"
+  },
+  "nativeCalls": 0,
+  "failureStage": "model-free Original PNG assembler SHA gate; no quality assessment",
+  "unfixedCoreAutocrlfTrueSHA": "6c5b7aff7fb26c8e0c848707113b514f661c63594bc0e9794e6b1d356891a931",
+  "fixedCoreAutocrlfTrueSHA": "825cbb7d226585fc8e194f30484812b98b4d4edf00881e15521e14f2a5dcd3e9",
+  "actualProofCommand": "git -c core.autocrlf=true cat-file --filters HEAD:tools/raster-acquisition-native-probe/fixtures/assemble.py before/after scoped gitattributes",
+  "unchanged67FilesAllSHA": true,
+  "fixedAssemblyPDFs": 6,
+  "goldRecipeModelThresholdChange": false,
+  "retryScope": "One actual native4arms still unexecuted; operational infrastructure fix only",
+  "causeEvidence": {
+    "strength": "supported",
+    "confirmed": "Actual native0 failed original assembler SHA gate; Git core.autocrlf=true filters reproduce mismatching bytes; scoped LF preserves exact pinned bytes",
+    "undetermined": "Initial Windows checkout actual assembler SHA was not logged, so exact CRLF cause is not claimed confirmed"
+  }
+}

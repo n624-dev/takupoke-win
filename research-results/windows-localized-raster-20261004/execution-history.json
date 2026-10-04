@@ -1,0 +1,56 @@
+{
+  "sourceCommit": "ff0043970cc6c357bb0f2bd776f1b1a89dbac22c",
+  "sourceTree": "7ebc30b059416260a863ae1feba34804c8885c39",
+  "run": 37202785662,
+  "url": "https://github.com/n624-dev/takupoke-win/actions/runs/37202785662",
+  "autoPushOnly": true,
+  "manualDispatch": false,
+  "sourceFreeze": {
+    "sha256": "0f0745c27b1ee5c590a49d9921e870ab82e7b3559866a92edc41e7e2cce55322",
+    "bytes": 15727
+  },
+  "finalIndependentReviews": {
+    "windows-owner-localized-raster-targeted-review.json": {
+      "sha256": "d659d56cc817feef7db8ab973afaf96865d4fe8f28d5610d558c74672239a64b",
+      "bytes": 2885
+    },
+    "ios-high-windows-tiled-ocr-final-third-review.json": {
+      "sha256": "185802a4326718edcd66d6f516af4c7108267a06a81caf088ea7f12b7b8eab4d",
+      "bytes": 2632
+    },
+    "root-windows-localized-raster-final-source-review.json": {
+      "sha256": "de421259f557170c40a298a6a583bc1bf5da4666d12f0c24068d1c71ee55805e",
+      "bytes": 1138
+    }
+  },
+  "reviewerCriteria": "direct final67/tail PASS message",
+  "eligibleDocuments": 2,
+  "armsPerDocument": 2,
+  "excludedHistorical": 9,
+  "excludedInvalidSpecial": 4,
+  "negativeCreditEligible": 0,
+  "llmCalls": 0,
+  "nativeOutcome": "initial model-free gate failure; no native call",
+  "qualificationClaim": false,
+  "initialNativeOutcome": {
+    "run": 37202785662,
+    "conclusion": "failure",
+    "stage": "model-free assembler SHA gate",
+    "nativeCalls": 0,
+    "qualityAssessed": false,
+    "logSHA256": "9850f979f0ed2f460fe137199063619ea8f29638a10b0e875cd38999a8b88d8a"
+  },
+  "operationalRetry": {
+    "sourceCommit": "4c3bce06463bc94328f3e0d89314f07e5390cb4f",
+    "run": 37203068032,
+    "url": "https://github.com/n624-dev/takupoke-win/actions/runs/37203068032",
+    "metadataOnlyRepair": ".gitattributes two scoped Python LF lines",
+    "newPushAutomaticRun": false,
+    "manualDispatchCount": 1,
+    "unchanged67FrozenFiles": true,
+    "fourNativeArmsStillUnexecutedAtRetry": true,
+    "outcome": "completed operational success; fullpage0/2 and tiled0/2 positive exact; no qualification",
+    "repairFreezeSHA256": "436d3d46d2072e46e9420c36cebb2d40d7c1f4df8060745e18ceeaf7269a2440",
+    "actualJob": 111438534385
+  }
+}

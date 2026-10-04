@@ -1,0 +1,347 @@
+{
+  "sourceCommit": "4c3bce06463bc94328f3e0d89314f07e5390cb4f",
+  "run": 37203068032,
+  "rawLog": {
+    "path": "/workspace/review-notes/windows-localized-raster-native-full.log",
+    "bytes": 45442,
+    "sha256": "890e43425d459ebd7b60fc41895ccd4578fe44587ce2bc805aa1c90036444adc"
+  },
+  "resultsSHA256": "76b63d3067ce9584c3c99f6e85cfa3c0bbf99e97200d69fe8f84d19f47f79b34",
+  "hardware": {
+    "processors": [
+      {
+        "Name": "AMD EPYC 7763 64-Core Processor                ",
+        "NumberOfCores": 2,
+        "NumberOfLogicalProcessors": 4
+      }
+    ],
+    "allocatedPhysicalMemoryBytes": 17174360064,
+    "sourceCommit": "4c3bce06463bc94328f3e0d89314f07e5390cb4f",
+    "osBuild": "26100",
+    "osVersion": "10.0.26100",
+    "os": "Microsoft Windows Server 2025 Datacenter",
+    "architecture": "X64"
+  },
+  "rows": [
+    {
+      "id": "independent-Timetable-literal-乙",
+      "arm": "pinned-cpu-fullpage",
+      "assessment": "readable-positive recovery failure; protective guard rejection; no negative credit or execution error",
+      "failureStage": "OCR original empty-CTC or low-confidence guard; exact trigger unknown; Builder/Rules/Validator/formal not reached",
+      "confirmed": {
+        "nativeGuardMessage": "OCRで判読できない文字があります。空欄には置き換えません。",
+        "confidenceThresholdUnchanged": 0.8,
+        "accepted": false,
+        "negativeCredit": false,
+        "runtimePinsMatch": true,
+        "guardCondition": "empty recognition OR any piece confidence below0.8; which branch fired is unlogged"
+      },
+      "lastObservedOwnedRegion": null,
+      "original": null,
+      "causalEvidenceStrength": "confirmed guard; supported precursor attribution; intrinsic model/crop/font/render cause undetermined",
+      "supported": [],
+      "undetermined": [
+        "Underlying font/raster/crop versus pretrained recognition limitation is not isolated by this four-arm experiment.",
+        "No evidence that an AI prompt or LLM failed; llmCalls0.",
+        "Fullpage original reader does not emit offending region/text/confidence; cannot infer same glyph as tile from shared exception.",
+        "Fullpage exception alone cannot distinguish empty CTC from a low-confidence piece."
+      ],
+      "stopDecision": "No observed benefit from common tiling recipe; stop preset/model sweep and retain failed raw without altering threshold/gold."
+    },
+    {
+      "id": "independent-Timetable-literal-乙",
+      "arm": "pinned-cpu-fixed-grid",
+      "assessment": "readable-positive recovery failure; protective guard rejection; no negative credit or execution error",
+      "failureStage": "OCR/recognition confidence guard; Builder/Rules/Validator/formal not reached",
+      "confirmed": {
+        "nativeGuardMessage": "OCRで判読できない文字があります。空欄には置き換えません。",
+        "confidenceThresholdUnchanged": 0.8,
+        "accepted": false,
+        "negativeCredit": false,
+        "runtimePinsMatch": true,
+        "lowConfidencePiece": {
+          "Text": "乙",
+          "Start": 41,
+          "End": 42,
+          "Confidence": 0.4571511
+        }
+      },
+      "lastObservedOwnedRegion": {
+        "tile": 0,
+        "global": {
+          "X": 128.25,
+          "Y": 158.0390625,
+          "Width": 125.5,
+          "Height": 17.015625,
+          "Valid": true
+        },
+        "globalSupport": {
+          "X": 131,
+          "Y": 160.875,
+          "Width": 120,
+          "Height": 11.34375,
+          "Valid": true
+        },
+        "actualCtcText": "担当：架空担当乙",
+        "pieces": [
+          {
+            "Text": "担",
+            "Start": 2,
+            "End": 3,
+            "Confidence": 0.9499813
+          },
+          {
+            "Text": "当",
+            "Start": 7,
+            "End": 8,
+            "Confidence": 0.9958003
+          },
+          {
+            "Text": "：",
+            "Start": 11,
+            "End": 12,
+            "Confidence": 0.85185194
+          },
+          {
+            "Text": "架",
+            "Start": 18,
+            "End": 19,
+            "Confidence": 0.97223896
+          },
+          {
+            "Text": "空",
+            "Start": 24,
+            "End": 25,
+            "Confidence": 0.99749607
+          },
+          {
+            "Text": "担",
+            "Start": 30,
+            "End": 31,
+            "Confidence": 0.9960984
+          },
+          {
+            "Text": "当",
+            "Start": 35,
+            "End": 36,
+            "Confidence": 0.9983455
+          },
+          {
+            "Text": "乙",
+            "Start": 41,
+            "End": 42,
+            "Confidence": 0.4571511
+          }
+        ],
+        "stage": "actual-owned-recognition-before-confidence-guard"
+      },
+      "original": [
+        {
+          "text": "担当:",
+          "x": 99,
+          "y": 117,
+          "fontPixels": 13,
+          "bbox": [
+            99,
+            122,
+            129,
+            135
+          ]
+        },
+        {
+          "text": "架空担当乙",
+          "x": 135,
+          "y": 117,
+          "fontPixels": 13,
+          "bbox": [
+            135,
+            122,
+            200,
+            135
+          ]
+        }
+      ],
+      "causalEvidenceStrength": "confirmed guard; supported precursor attribution; intrinsic model/crop/font/render cause undetermined",
+      "supported": [
+        "Last actual recognition precedes terminal guard with no later region, consistent with this piece causing the unchanged rejection.",
+        "Observed region is fully interior to first tile, so artificial tile edge/owner conflict did not cause this terminal guard."
+      ],
+      "undetermined": [
+        "Underlying font/raster/crop versus pretrained recognition limitation is not isolated by this four-arm experiment.",
+        "No evidence that an AI prompt or LLM failed; llmCalls0."
+      ],
+      "stopDecision": "No observed benefit from common tiling recipe; stop preset/model sweep and retain failed raw without altering threshold/gold.",
+      "outputDifference": {
+        "originalText": "担当:架空担当乙",
+        "observedCtc": "担当：架空担当乙",
+        "rawDifferences": [
+          "label ASCII colon read as fullwidth colon; body is exact"
+        ],
+        "wrongGlyph": null,
+        "scope": "teacher body plus label",
+        "bodyCharactersCorrect": true
+      }
+    },
+    {
+      "id": "independent-Timetable-verifiedblank-丙",
+      "arm": "pinned-cpu-fullpage",
+      "assessment": "readable-positive recovery failure; protective guard rejection; no negative credit or execution error",
+      "failureStage": "OCR original empty-CTC or low-confidence guard; exact trigger unknown; Builder/Rules/Validator/formal not reached",
+      "confirmed": {
+        "nativeGuardMessage": "OCRで判読できない文字があります。空欄には置き換えません。",
+        "confidenceThresholdUnchanged": 0.8,
+        "accepted": false,
+        "negativeCredit": false,
+        "runtimePinsMatch": true,
+        "guardCondition": "empty recognition OR any piece confidence below0.8; which branch fired is unlogged"
+      },
+      "lastObservedOwnedRegion": null,
+      "original": null,
+      "causalEvidenceStrength": "confirmed guard; supported precursor attribution; intrinsic model/crop/font/render cause undetermined",
+      "supported": [],
+      "undetermined": [
+        "Underlying font/raster/crop versus pretrained recognition limitation is not isolated by this four-arm experiment.",
+        "No evidence that an AI prompt or LLM failed; llmCalls0.",
+        "Fullpage original reader does not emit offending region/text/confidence; cannot infer same glyph as tile from shared exception.",
+        "Fullpage exception alone cannot distinguish empty CTC from a low-confidence piece."
+      ],
+      "stopDecision": "No observed benefit from common tiling recipe; stop preset/model sweep and retain failed raw without altering threshold/gold."
+    },
+    {
+      "id": "independent-Timetable-verifiedblank-丙",
+      "arm": "pinned-cpu-fixed-grid",
+      "assessment": "readable-positive recovery failure; protective guard rejection; no negative credit or execution error",
+      "failureStage": "OCR/recognition confidence guard; Builder/Rules/Validator/formal not reached",
+      "confirmed": {
+        "nativeGuardMessage": "OCRで判読できない文字があります。空欄には置き換えません。",
+        "confidenceThresholdUnchanged": 0.8,
+        "accepted": false,
+        "negativeCredit": false,
+        "runtimePinsMatch": true,
+        "lowConfidencePiece": {
+          "Text": "爱",
+          "Start": 38,
+          "End": 39,
+          "Confidence": 0.4302363
+        }
+      },
+      "lastObservedOwnedRegion": {
+        "tile": 0,
+        "global": {
+          "X": 9.25,
+          "Y": 16.0244140625,
+          "Width": 142.5,
+          "Height": 17.337890625,
+          "Valid": true
+        },
+        "globalSupport": {
+          "X": 12,
+          "Y": 18.9140625,
+          "Width": 137,
+          "Height": 11.55859375,
+          "Valid": true
+        },
+        "actualCtcText": "2028年度爱期",
+        "pieces": [
+          {
+            "Text": "2",
+            "Start": 0,
+            "End": 1,
+            "Confidence": 0.99745506
+          },
+          {
+            "Text": "0",
+            "Start": 5,
+            "End": 6,
+            "Confidence": 0.9997526
+          },
+          {
+            "Text": "2",
+            "Start": 9,
+            "End": 10,
+            "Confidence": 0.9974613
+          },
+          {
+            "Text": "8",
+            "Start": 14,
+            "End": 15,
+            "Confidence": 0.99758554
+          },
+          {
+            "Text": "年",
+            "Start": 20,
+            "End": 21,
+            "Confidence": 0.9998939
+          },
+          {
+            "Text": "度",
+            "Start": 28,
+            "End": 29,
+            "Confidence": 0.9991986
+          },
+          {
+            "Text": "爱",
+            "Start": 38,
+            "End": 39,
+            "Confidence": 0.4302363
+          },
+          {
+            "Text": "期",
+            "Start": 45,
+            "End": 46,
+            "Confidence": 0.9360071
+          }
+        ],
+        "stage": "actual-owned-recognition-before-confidence-guard"
+      },
+      "original": [
+        {
+          "text": "2028年度 後期",
+          "x": 5,
+          "y": 5,
+          "fontPixels": 18,
+          "bbox": [
+            5,
+            10,
+            121,
+            28
+          ]
+        }
+      ],
+      "causalEvidenceStrength": "confirmed guard; supported precursor attribution; intrinsic model/crop/font/render cause undetermined",
+      "supported": [
+        "Last actual recognition precedes terminal guard with no later region, consistent with this piece causing the unchanged rejection.",
+        "Observed region is fully interior to first tile, so artificial tile edge/owner conflict did not cause this terminal guard."
+      ],
+      "undetermined": [
+        "Underlying font/raster/crop versus pretrained recognition limitation is not isolated by this four-arm experiment.",
+        "No evidence that an AI prompt or LLM failed; llmCalls0."
+      ],
+      "stopDecision": "No observed benefit from common tiling recipe; stop preset/model sweep and retain failed raw without altering threshold/gold.",
+      "outputDifference": {
+        "originalText": "2028年度 後期",
+        "observedCtc": "2028年度爱期",
+        "rawDifferences": [
+          "original space absent in unchanged CTC",
+          "後 read as 爱"
+        ],
+        "wrongGlyph": {
+          "expected": "後",
+          "observed": "爱"
+        },
+        "scope": "school year/term metadata header",
+        "termCharactersCorrect": false
+      }
+    }
+  ],
+  "counts": {
+    "rows": 4,
+    "accepted": 0,
+    "positiveExact": 0,
+    "incorrectAcceptedObserved": 0,
+    "runtimeErrors": 0,
+    "negativeEligible": 0,
+    "llmCalls": 0
+  },
+  "qualification": false
+}

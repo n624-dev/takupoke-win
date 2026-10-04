@@ -1,0 +1,1782 @@
+{
+  "scope": "Three independent actual-output reviews; no new model inference or qualification",
+  "reviews": [
+    {
+      "file": "windows-localized-raster-independent-final-high.json",
+      "bytes": 39965,
+      "sha256": "151b205ba002cedd13ff6ccdda9727c9933a6fd0c8a8b7e17b3ab61cdf5b4978",
+      "report": {
+        "scope": "Actual four-arm finite original-PDF OCR evidence review, no source/model/threshold mutation or native rerun. Independent2ordinary originals consumed by this one run; excludedspecial4/development9 without inference or negativecredit. No LLM/provider/catalog qualification.",
+        "run": 37203068032,
+        "sourceCommit": "4c3bce06463bc94328f3e0d89314f07e5390cb4f",
+        "inputPins": {
+          "fullRawLogSHA256": "890e43425d459ebd7b60fc41895ccd4578fe44587ce2bc805aa1c90036444adc",
+          "derivedResultsSHA256": "4caf16a565fadf810f9a87bf7c7481d2ad8a4d9181994af67a753139616bdc56",
+          "originalManifestSHA256": "050b7640b6de309db2be78a932cf558f4d36b3b89c29b95f7737228e025079b9",
+          "recipeSHA256": "0bdec55548182fb2ed6f12738d0c5e0ea346ec52a21ecbffb4fe1d33d3769fdc",
+          "drawingAndFormal": {
+            "independent-Timetable-literal-乙": {
+              "drawingSourceSHA256": "c2acd23ad38bc9e6eea4ded8b1fb790ac5817bb7891f090483a2f28084eab1b9",
+              "formalOracleSHA256": "0451ac80edac37e4e424d3d78b1d96ffe31cd06711024abe301c2ceff1e515c0",
+              "pdfSHA256": "233dec852ec7e43c93c70c42d8f88238a0c2e8aef146445c4b94d674bb6cc187"
+            },
+            "independent-Timetable-verifiedblank-丙": {
+              "drawingSourceSHA256": "fdbb25473adc36c9c31a01686a6255377557a383ae98f47cf89276bb0e8c3c40",
+              "formalOracleSHA256": "8ff9ea8dc55fb6e010e18c6019f938c47840bf589fdd503d2db9d18072184f43",
+              "pdfSHA256": "2625bf49044d59088b53109fc15ba7813073fdedac71bde5eb82925c297050f8"
+            }
+          }
+        },
+        "runtime": {
+          "runtimeEvidence": {
+            "managed": {
+              "version": "1.26.0.0",
+              "sha256": "de7f8ddef8af207f62cdd135e1fb0c21cc5dd42111d97b0f677ca2f61300f29e"
+            },
+            "native": [
+              {
+                "FileVersion": "1.26.20260520.2.756157b",
+                "sha256": "6a4129504501cbd615efddc897345ec9557390b408887165ab5faf9812a54b31"
+              }
+            ]
+          },
+          "ocrBundle": {
+            "Id": "paddle-ppocrv5-mobile",
+            "Version": "official-20260526",
+            "Runtime": "windowsOcr",
+            "MinimumOs": "10.0.26100",
+            "MinimumMemory": 1073741824,
+            "License": "Apache-2.0",
+            "Validated": true,
+            "Artifacts": [
+              {
+                "Path": "det.onnx",
+                "Url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_det_onnx/resolve/e6f4fa85f00e168c862bc462aebca69eef9b3d3d/inference.onnx",
+                "Size": 4826518,
+                "Sha256": "a431985659dc921974177a95adcfbb90fd9e51989a5e04d70d0b75f597b6e61d"
+              },
+              {
+                "Path": "rec.onnx",
+                "Url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec_onnx/resolve/ed152b8b495f84de93cda5709d768548a9127622/inference.onnx",
+                "Size": 16534782,
+                "Sha256": "da72dc72ca4dc220df0dfde68c1dedc31c58d3e76a25871122e5056227d50092"
+              }
+            ],
+            "Size": 21361300,
+            "Valid": true
+          },
+          "llmCalls": 0,
+          "scope": "Pinned CPU OCR sessions only; no OS OCR branch"
+        },
+        "hardware": {
+          "processors": [
+            {
+              "Name": "AMD EPYC 7763 64-Core Processor                ",
+              "NumberOfCores": 2,
+              "NumberOfLogicalProcessors": 4
+            }
+          ],
+          "allocatedPhysicalMemoryBytes": 17174360064,
+          "sourceCommit": "4c3bce06463bc94328f3e0d89314f07e5390cb4f",
+          "osBuild": "26100",
+          "osVersion": "10.0.26100",
+          "os": "Microsoft Windows Server 2025 Datacenter",
+          "architecture": "X64"
+        },
+        "summary": {
+          "fullpagePositiveExact": "0/2",
+          "tilePositiveExact": "0/2",
+          "assessedPositiveArmFailures": 4,
+          "accepted": 0,
+          "incorrectAcceptancesObserved": 0,
+          "executionErrors": 0,
+          "negativeEligible": 0,
+          "safeNegativeRejects": 0,
+          "fullFormalReached": 0,
+          "partialTileEvents": 24,
+          "actualCTCRegionsBeforeFirstRejection": 12,
+          "llmCalls": 0,
+          "evaluatorProcessPeakWorkingSetBytes": 295596032,
+          "qualityQualified": false
+        },
+        "armCauses": [
+          {
+            "id": "independent-Timetable-literal-乙",
+            "arm": "pinned-cpu-fullpage",
+            "outcome": "readable-positive recovery failure; protective OCR guard rejection, never safe-negative credit",
+            "actualObservation": {
+              "Id": "independent-Timetable-literal-乙",
+              "Cohort": "unused-holdout",
+              "arm": "pinned-cpu-fullpage",
+              "assessed": true,
+              "accepted": false,
+              "exact": null,
+              "negative": false,
+              "incorrectValidatorAcceptance": false,
+              "readablePositiveRejection": true,
+              "correctNegativeRejection": false,
+              "stage": "OCR/fullpage coverage/Builder",
+              "milliseconds": 292,
+              "errorType": "InvalidDataException",
+              "errorMessage": "OCRで判読できない文字があります。空欄には置き換えません。",
+              "llmCalls": 0
+            },
+            "lastPartialTileRecognition": null,
+            "confirmed": "Original recognition guard rejected; low confidence or empty CTC is its disjunction. Offending text/region not logged.",
+            "supported": "No basis to assert same offending glyph as tile arm.",
+            "undetermined": [
+              "Fullpage specific offending character",
+              "Intrinsic recognition/crop/render/font root cause",
+              "Unprocessed later regions/pages and complete literal recovery"
+            ],
+            "fullFormalReached": false,
+            "fullLiteralOracleQualityAssessed": true,
+            "literalSuccess": false
+          },
+          {
+            "id": "independent-Timetable-literal-乙",
+            "arm": "pinned-cpu-fixed-grid",
+            "outcome": "readable-positive recovery failure; protective OCR guard rejection, never safe-negative credit",
+            "actualObservation": {
+              "Id": "independent-Timetable-literal-乙",
+              "Cohort": "unused-holdout",
+              "arm": "pinned-cpu-fixed-grid",
+              "assessed": true,
+              "accepted": false,
+              "exact": null,
+              "negative": false,
+              "incorrectValidatorAcceptance": false,
+              "readablePositiveRejection": true,
+              "correctNegativeRejection": false,
+              "stage": "OCR/fullpage coverage/Builder",
+              "milliseconds": 1130,
+              "errorType": "InvalidDataException",
+              "errorMessage": "OCRで判読できない文字があります。空欄には置き換えません。",
+              "llmCalls": 0
+            },
+            "lastPartialTileRecognition": {
+              "id": "independent-Timetable-literal-乙",
+              "page": 1,
+              "tileIndex": 0,
+              "actualRecognition": {
+                "tile": 0,
+                "global": {
+                  "X": 128.25,
+                  "Y": 158.0390625,
+                  "Width": 125.5,
+                  "Height": 17.015625,
+                  "Valid": true
+                },
+                "globalSupport": {
+                  "X": 131,
+                  "Y": 160.875,
+                  "Width": 120,
+                  "Height": 11.34375,
+                  "Valid": true
+                },
+                "actualCtcText": "担当：架空担当乙",
+                "pieces": [
+                  {
+                    "Text": "担",
+                    "Start": 2,
+                    "End": 3,
+                    "Confidence": 0.9499813
+                  },
+                  {
+                    "Text": "当",
+                    "Start": 7,
+                    "End": 8,
+                    "Confidence": 0.9958003
+                  },
+                  {
+                    "Text": "：",
+                    "Start": 11,
+                    "End": 12,
+                    "Confidence": 0.85185194
+                  },
+                  {
+                    "Text": "架",
+                    "Start": 18,
+                    "End": 19,
+                    "Confidence": 0.97223896
+                  },
+                  {
+                    "Text": "空",
+                    "Start": 24,
+                    "End": 25,
+                    "Confidence": 0.99749607
+                  },
+                  {
+                    "Text": "担",
+                    "Start": 30,
+                    "End": 31,
+                    "Confidence": 0.9960984
+                  },
+                  {
+                    "Text": "当",
+                    "Start": 35,
+                    "End": 36,
+                    "Confidence": 0.9983455
+                  },
+                  {
+                    "Text": "乙",
+                    "Start": 41,
+                    "End": 42,
+                    "Confidence": 0.4571511
+                  }
+                ],
+                "stage": "actual-owned-recognition-before-confidence-guard"
+              },
+              "originalDrawingTextEntries": [
+                {
+                  "text": "担当:",
+                  "x": 99,
+                  "y": 117,
+                  "fontPixels": 13,
+                  "bbox": [
+                    99,
+                    122,
+                    129,
+                    135
+                  ]
+                },
+                {
+                  "text": "架空担当乙",
+                  "x": 135,
+                  "y": 117,
+                  "fontPixels": 13,
+                  "bbox": [
+                    135,
+                    122,
+                    200,
+                    135
+                  ]
+                }
+              ],
+              "originalJoinedText": "担当:架空担当乙",
+              "exactLiteral": false,
+              "normalizationOnlyTextMatchDiagnostic": true,
+              "lowConfidencePieces": [
+                {
+                  "Text": "乙",
+                  "Start": 41,
+                  "End": 42,
+                  "Confidence": 0.4571511
+                }
+              ],
+              "spatialMappingScope": "Correspondence uses original drawing glyph ink bbox and derived PDF150DPI→Windows96DPI→2x requested raster transform(1.28;roundedheight). Native raster dimensions were source-guarded but not separately logged; this is derived spatial corroboration, not a captured raster measurement."
+            },
+            "confirmed": "Original recognition guard rejected before complete Sources/Builder/Rules/Validator/formal; accepted0. Tiled last recorded pieces contain confidence<.8; complete ownership/padded-boundary guard already passed for this region.",
+            "supported": "Tile final low-confidence piece causes the following terminal guard with no subsequent recognition; intrinsic crop/font/render/pretrained model cause not isolated.",
+            "undetermined": [
+              "Fullpage specific offending character",
+              "Intrinsic recognition/crop/render/font root cause",
+              "Unprocessed later regions/pages and complete literal recovery"
+            ],
+            "fullFormalReached": false,
+            "fullLiteralOracleQualityAssessed": true,
+            "literalSuccess": false
+          },
+          {
+            "id": "independent-Timetable-verifiedblank-丙",
+            "arm": "pinned-cpu-fullpage",
+            "outcome": "readable-positive recovery failure; protective OCR guard rejection, never safe-negative credit",
+            "actualObservation": {
+              "Id": "independent-Timetable-verifiedblank-丙",
+              "Cohort": "unused-holdout",
+              "arm": "pinned-cpu-fullpage",
+              "assessed": true,
+              "accepted": false,
+              "exact": null,
+              "negative": false,
+              "incorrectValidatorAcceptance": false,
+              "readablePositiveRejection": true,
+              "correctNegativeRejection": false,
+              "stage": "OCR/fullpage coverage/Builder",
+              "milliseconds": 687,
+              "errorType": "InvalidDataException",
+              "errorMessage": "OCRで判読できない文字があります。空欄には置き換えません。",
+              "llmCalls": 0
+            },
+            "lastPartialTileRecognition": null,
+            "confirmed": "Original recognition guard rejected; low confidence or empty CTC is its disjunction. Offending text/region not logged.",
+            "supported": "No basis to assert same offending glyph as tile arm.",
+            "undetermined": [
+              "Fullpage specific offending character",
+              "Intrinsic recognition/crop/render/font root cause",
+              "Unprocessed later regions/pages and complete literal recovery"
+            ],
+            "fullFormalReached": false,
+            "fullLiteralOracleQualityAssessed": true,
+            "literalSuccess": false
+          },
+          {
+            "id": "independent-Timetable-verifiedblank-丙",
+            "arm": "pinned-cpu-fixed-grid",
+            "outcome": "readable-positive recovery failure; protective OCR guard rejection, never safe-negative credit",
+            "actualObservation": {
+              "Id": "independent-Timetable-verifiedblank-丙",
+              "Cohort": "unused-holdout",
+              "arm": "pinned-cpu-fixed-grid",
+              "assessed": true,
+              "accepted": false,
+              "exact": null,
+              "negative": false,
+              "incorrectValidatorAcceptance": false,
+              "readablePositiveRejection": true,
+              "correctNegativeRejection": false,
+              "stage": "OCR/fullpage coverage/Builder",
+              "milliseconds": 269,
+              "errorType": "InvalidDataException",
+              "errorMessage": "OCRで判読できない文字があります。空欄には置き換えません。",
+              "llmCalls": 0
+            },
+            "lastPartialTileRecognition": {
+              "id": "independent-Timetable-verifiedblank-丙",
+              "page": 1,
+              "tileIndex": 0,
+              "actualRecognition": {
+                "tile": 0,
+                "global": {
+                  "X": 9.25,
+                  "Y": 16.0244140625,
+                  "Width": 142.5,
+                  "Height": 17.337890625,
+                  "Valid": true
+                },
+                "globalSupport": {
+                  "X": 12,
+                  "Y": 18.9140625,
+                  "Width": 137,
+                  "Height": 11.55859375,
+                  "Valid": true
+                },
+                "actualCtcText": "2028年度爱期",
+                "pieces": [
+                  {
+                    "Text": "2",
+                    "Start": 0,
+                    "End": 1,
+                    "Confidence": 0.99745506
+                  },
+                  {
+                    "Text": "0",
+                    "Start": 5,
+                    "End": 6,
+                    "Confidence": 0.9997526
+                  },
+                  {
+                    "Text": "2",
+                    "Start": 9,
+                    "End": 10,
+                    "Confidence": 0.9974613
+                  },
+                  {
+                    "Text": "8",
+                    "Start": 14,
+                    "End": 15,
+                    "Confidence": 0.99758554
+                  },
+                  {
+                    "Text": "年",
+                    "Start": 20,
+                    "End": 21,
+                    "Confidence": 0.9998939
+                  },
+                  {
+                    "Text": "度",
+                    "Start": 28,
+                    "End": 29,
+                    "Confidence": 0.9991986
+                  },
+                  {
+                    "Text": "爱",
+                    "Start": 38,
+                    "End": 39,
+                    "Confidence": 0.4302363
+                  },
+                  {
+                    "Text": "期",
+                    "Start": 45,
+                    "End": 46,
+                    "Confidence": 0.9360071
+                  }
+                ],
+                "stage": "actual-owned-recognition-before-confidence-guard"
+              },
+              "originalDrawingTextEntries": [
+                {
+                  "text": "2028年度 後期",
+                  "x": 5,
+                  "y": 5,
+                  "fontPixels": 18,
+                  "bbox": [
+                    5,
+                    10,
+                    121,
+                    28
+                  ]
+                }
+              ],
+              "originalJoinedText": "2028年度 後期",
+              "exactLiteral": false,
+              "normalizationOnlyTextMatchDiagnostic": false,
+              "lowConfidencePieces": [
+                {
+                  "Text": "爱",
+                  "Start": 38,
+                  "End": 39,
+                  "Confidence": 0.4302363
+                }
+              ],
+              "spatialMappingScope": "Correspondence uses original drawing glyph ink bbox and derived PDF150DPI→Windows96DPI→2x requested raster transform(1.28;roundedheight). Native raster dimensions were source-guarded but not separately logged; this is derived spatial corroboration, not a captured raster measurement."
+            },
+            "confirmed": "Original recognition guard rejected before complete Sources/Builder/Rules/Validator/formal; accepted0. Tiled last recorded pieces contain confidence<.8; complete ownership/padded-boundary guard already passed for this region.",
+            "supported": "Tile final low-confidence piece causes the following terminal guard with no subsequent recognition; intrinsic crop/font/render/pretrained model cause not isolated.",
+            "undetermined": [
+              "Fullpage specific offending character",
+              "Intrinsic recognition/crop/render/font root cause",
+              "Unprocessed later regions/pages and complete literal recovery"
+            ],
+            "fullFormalReached": false,
+            "fullLiteralOracleQualityAssessed": true,
+            "literalSuccess": false
+          }
+        ],
+        "partialCTCRegions": [
+          {
+            "id": "independent-Timetable-literal-乙",
+            "page": 1,
+            "tileIndex": 0,
+            "actualRecognition": {
+              "tile": 0,
+              "global": {
+                "X": 283.5,
+                "Y": 14.953125,
+                "Width": 66,
+                "Height": 21.65625,
+                "Valid": true
+              },
+              "globalSupport": {
+                "X": 287,
+                "Y": 18.5625,
+                "Width": 59,
+                "Height": 14.4375,
+                "Valid": true
+              },
+              "actualCtcText": "時間割",
+              "pieces": [
+                {
+                  "Text": "時",
+                  "Start": 2,
+                  "End": 3,
+                  "Confidence": 0.8079579
+                },
+                {
+                  "Text": "間",
+                  "Start": 8,
+                  "End": 9,
+                  "Confidence": 0.93363905
+                },
+                {
+                  "Text": "割",
+                  "Start": 14,
+                  "End": 15,
+                  "Confidence": 0.9992824
+                }
+              ],
+              "stage": "actual-owned-recognition-before-confidence-guard"
+            },
+            "originalDrawingTextEntries": [
+              {
+                "text": "時間割",
+                "x": 220,
+                "y": 5,
+                "fontPixels": 18,
+                "bbox": [
+                  220,
+                  10,
+                  274,
+                  29
+                ]
+              }
+            ],
+            "originalJoinedText": "時間割",
+            "exactLiteral": true,
+            "normalizationOnlyTextMatchDiagnostic": true,
+            "lowConfidencePieces": [],
+            "spatialMappingScope": "Correspondence uses original drawing glyph ink bbox and derived PDF150DPI→Windows96DPI→2x requested raster transform(1.28;roundedheight). Native raster dimensions were source-guarded but not separately logged; this is derived spatial corroboration, not a captured raster measurement."
+          },
+          {
+            "id": "independent-Timetable-literal-乙",
+            "page": 1,
+            "tileIndex": 0,
+            "actualRecognition": {
+              "tile": 0,
+              "global": {
+                "X": 9,
+                "Y": 16.5,
+                "Width": 142,
+                "Height": 18.5625,
+                "Valid": true
+              },
+              "globalSupport": {
+                "X": 12,
+                "Y": 19.59375,
+                "Width": 136,
+                "Height": 12.375,
+                "Valid": true
+              },
+              "actualCtcText": "2027年度前期",
+              "pieces": [
+                {
+                  "Text": "2",
+                  "Start": 0,
+                  "End": 1,
+                  "Confidence": 0.9975248
+                },
+                {
+                  "Text": "0",
+                  "Start": 4,
+                  "End": 5,
+                  "Confidence": 0.9993787
+                },
+                {
+                  "Text": "2",
+                  "Start": 9,
+                  "End": 10,
+                  "Confidence": 0.99917465
+                },
+                {
+                  "Text": "7",
+                  "Start": 13,
+                  "End": 14,
+                  "Confidence": 0.9987727
+                },
+                {
+                  "Text": "年",
+                  "Start": 18,
+                  "End": 19,
+                  "Confidence": 0.99991286
+                },
+                {
+                  "Text": "度",
+                  "Start": 26,
+                  "End": 27,
+                  "Confidence": 0.9998242
+                },
+                {
+                  "Text": "前",
+                  "Start": 35,
+                  "End": 36,
+                  "Confidence": 0.999482
+                },
+                {
+                  "Text": "期",
+                  "Start": 42,
+                  "End": 43,
+                  "Confidence": 0.98333305
+                }
+              ],
+              "stage": "actual-owned-recognition-before-confidence-guard"
+            },
+            "originalDrawingTextEntries": [
+              {
+                "text": "2027年度 前期",
+                "x": 5,
+                "y": 5,
+                "fontPixels": 18,
+                "bbox": [
+                  5,
+                  10,
+                  121,
+                  28
+                ]
+              }
+            ],
+            "originalJoinedText": "2027年度 前期",
+            "exactLiteral": false,
+            "normalizationOnlyTextMatchDiagnostic": true,
+            "lowConfidencePieces": [],
+            "spatialMappingScope": "Correspondence uses original drawing glyph ink bbox and derived PDF150DPI→Windows96DPI→2x requested raster transform(1.28;roundedheight). Native raster dimensions were source-guarded but not separately logged; this is derived spatial corroboration, not a captured raster measurement."
+          },
+          {
+            "id": "independent-Timetable-literal-乙",
+            "page": 1,
+            "tileIndex": 0,
+            "actualRecognition": {
+              "tile": 0,
+              "global": {
+                "X": 133.5,
+                "Y": 50.015625,
+                "Width": 24,
+                "Height": 27.84375,
+                "Valid": true
+              },
+              "globalSupport": {
+                "X": 138,
+                "Y": 54.65625,
+                "Width": 15,
+                "Height": 18.5625,
+                "Valid": true
+              },
+              "actualCtcText": "月",
+              "pieces": [
+                {
+                  "Text": "月",
+                  "Start": 2,
+                  "End": 3,
+                  "Confidence": 0.99979717
+                }
+              ],
+              "stage": "actual-owned-recognition-before-confidence-guard"
+            },
+            "originalDrawingTextEntries": [
+              {
+                "text": "月",
+                "x": 106,
+                "y": 36,
+                "fontPixels": 17,
+                "bbox": [
+                  106,
+                  42,
+                  123,
+                  58
+                ]
+              }
+            ],
+            "originalJoinedText": "月",
+            "exactLiteral": true,
+            "normalizationOnlyTextMatchDiagnostic": true,
+            "lowConfidencePieces": [],
+            "spatialMappingScope": "Correspondence uses original drawing glyph ink bbox and derived PDF150DPI→Windows96DPI→2x requested raster transform(1.28;roundedheight). Native raster dimensions were source-guarded but not separately logged; this is derived spatial corroboration, not a captured raster measurement."
+          },
+          {
+            "id": "independent-Timetable-literal-乙",
+            "page": 1,
+            "tileIndex": 0,
+            "actualRecognition": {
+              "tile": 0,
+              "global": {
+                "X": 426.25,
+                "Y": 86.8828125,
+                "Width": 18.5,
+                "Height": 29.390625,
+                "Valid": true
+              },
+              "globalSupport": {
+                "X": 431,
+                "Y": 91.78125,
+                "Width": 9,
+                "Height": 19.59375,
+                "Valid": true
+              },
+              "actualCtcText": "3",
+              "pieces": [
+                {
+                  "Text": "3",
+                  "Start": 1,
+                  "End": 2,
+                  "Confidence": 0.9194198
+                }
+              ],
+              "stage": "actual-owned-recognition-before-confidence-guard"
+            },
+            "originalDrawingTextEntries": [
+              {
+                "text": "3",
+                "x": 336,
+                "y": 66,
+                "fontPixels": 15,
+                "bbox": [
+                  336,
+                  73,
+                  344,
+                  84
+                ]
+              }
+            ],
+            "originalJoinedText": "3",
+            "exactLiteral": true,
+            "normalizationOnlyTextMatchDiagnostic": true,
+            "lowConfidencePieces": [],
+            "spatialMappingScope": "Correspondence uses original drawing glyph ink bbox and derived PDF150DPI→Windows96DPI→2x requested raster transform(1.28;roundedheight). Native raster dimensions were source-guarded but not separately logged; this is derived spatial corroboration, not a captured raster measurement."
+          },
+          {
+            "id": "independent-Timetable-literal-乙",
+            "page": 1,
+            "tileIndex": 0,
+            "actualRecognition": {
+              "tile": 0,
+              "global": {
+                "X": 129,
+                "Y": 87.65625,
+                "Width": 18,
+                "Height": 30.9375,
+                "Valid": true
+              },
+              "globalSupport": {
+                "X": 134,
+                "Y": 92.8125,
+                "Width": 8,
+                "Height": 20.625,
+                "Valid": true
+              },
+              "actualCtcText": "1",
+              "pieces": [
+                {
+                  "Text": "1",
+                  "Start": 1,
+                  "End": 2,
+                  "Confidence": 0.9521161
+                }
+              ],
+              "stage": "actual-owned-recognition-before-confidence-guard"
+            },
+            "originalDrawingTextEntries": [
+              {
+                "text": "1",
+                "x": 104,
+                "y": 66,
+                "fontPixels": 15,
+                "bbox": [
+                  104,
+                  73,
+                  112,
+                  84
+                ]
+              }
+            ],
+            "originalJoinedText": "1",
+            "exactLiteral": true,
+            "normalizationOnlyTextMatchDiagnostic": true,
+            "lowConfidencePieces": [],
+            "spatialMappingScope": "Correspondence uses original drawing glyph ink bbox and derived PDF150DPI→Windows96DPI→2x requested raster transform(1.28;roundedheight). Native raster dimensions were source-guarded but not separately logged; this is derived spatial corroboration, not a captured raster measurement."
+          },
+          {
+            "id": "independent-Timetable-literal-乙",
+            "page": 1,
+            "tileIndex": 0,
+            "actualRecognition": {
+              "tile": 0,
+              "global": {
+                "X": 276.5,
+                "Y": 88.171875,
+                "Width": 20,
+                "Height": 27.84375,
+                "Valid": true
+              },
+              "globalSupport": {
+                "X": 281,
+                "Y": 92.8125,
+                "Width": 11,
+                "Height": 18.5625,
+                "Valid": true
+              },
+              "actualCtcText": "2",
+              "pieces": [
+                {
+                  "Text": "2",
+                  "Start": 2,
+                  "End": 3,
+                  "Confidence": 0.9863027
+                }
+              ],
+              "stage": "actual-owned-recognition-before-confidence-guard"
+            },
+            "originalDrawingTextEntries": [
+              {
+                "text": "2",
+                "x": 220,
+                "y": 66,
+                "fontPixels": 15,
+                "bbox": [
+                  220,
+                  73,
+                  228,
+                  84
+                ]
+              }
+            ],
+            "originalJoinedText": "2",
+            "exactLiteral": true,
+            "normalizationOnlyTextMatchDiagnostic": true,
+            "lowConfidencePieces": [],
+            "spatialMappingScope": "Correspondence uses original drawing glyph ink bbox and derived PDF150DPI→Windows96DPI→2x requested raster transform(1.28;roundedheight). Native raster dimensions were source-guarded but not separately logged; this is derived spatial corroboration, not a captured raster measurement."
+          },
+          {
+            "id": "independent-Timetable-literal-乙",
+            "page": 1,
+            "tileIndex": 0,
+            "actualRecognition": {
+              "tile": 0,
+              "global": {
+                "X": 574.75,
+                "Y": 88.4296875,
+                "Width": 17.5,
+                "Height": 26.296875,
+                "Valid": true
+              },
+              "globalSupport": {
+                "X": 579,
+                "Y": 92.8125,
+                "Width": 9,
+                "Height": 17.53125,
+                "Valid": true
+              },
+              "actualCtcText": "4",
+              "pieces": [
+                {
+                  "Text": "4",
+                  "Start": 1,
+                  "End": 2,
+                  "Confidence": 0.9990777
+                }
+              ],
+              "stage": "actual-owned-recognition-before-confidence-guard"
+            },
+            "originalDrawingTextEntries": [
+              {
+                "text": "4",
+                "x": 452,
+                "y": 66,
+                "fontPixels": 15,
+                "bbox": [
+                  452,
+                  73,
+                  460,
+                  84
+                ]
+              }
+            ],
+            "originalJoinedText": "4",
+            "exactLiteral": true,
+            "normalizationOnlyTextMatchDiagnostic": true,
+            "lowConfidencePieces": [],
+            "spatialMappingScope": "Correspondence uses original drawing glyph ink bbox and derived PDF150DPI→Windows96DPI→2x requested raster transform(1.28;roundedheight). Native raster dimensions were source-guarded but not separately logged; this is derived spatial corroboration, not a captured raster measurement."
+          },
+          {
+            "id": "independent-Timetable-literal-乙",
+            "page": 1,
+            "tileIndex": 0,
+            "actualRecognition": {
+              "tile": 0,
+              "global": {
+                "X": 129.25,
+                "Y": 130.1953125,
+                "Width": 124.5,
+                "Height": 17.015625,
+                "Valid": true
+              },
+              "globalSupport": {
+                "X": 132,
+                "Y": 133.03125,
+                "Width": 119,
+                "Height": 11.34375,
+                "Valid": true
+              },
+              "actualCtcText": "科目：架空化学乙",
+              "pieces": [
+                {
+                  "Text": "科",
+                  "Start": 1,
+                  "End": 2,
+                  "Confidence": 0.999388
+                },
+                {
+                  "Text": "目",
+                  "Start": 7,
+                  "End": 8,
+                  "Confidence": 0.99665856
+                },
+                {
+                  "Text": "：",
+                  "Start": 11,
+                  "End": 12,
+                  "Confidence": 0.91310245
+                },
+                {
+                  "Text": "架",
+                  "Start": 17,
+                  "End": 18,
+                  "Confidence": 0.993483
+                },
+                {
+                  "Text": "空",
+                  "Start": 23,
+                  "End": 24,
+                  "Confidence": 0.9997002
+                },
+                {
+                  "Text": "化",
+                  "Start": 29,
+                  "End": 30,
+                  "Confidence": 0.99866724
+                },
+                {
+                  "Text": "学",
+                  "Start": 35,
+                  "End": 36,
+                  "Confidence": 0.9992193
+                },
+                {
+                  "Text": "乙",
+                  "Start": 41,
+                  "End": 42,
+                  "Confidence": 0.9578509
+                }
+              ],
+              "stage": "actual-owned-recognition-before-confidence-guard"
+            },
+            "originalDrawingTextEntries": [
+              {
+                "text": "科目:",
+                "x": 99,
+                "y": 96,
+                "fontPixels": 13,
+                "bbox": [
+                  99,
+                  101,
+                  129,
+                  114
+                ]
+              },
+              {
+                "text": "架空化学乙",
+                "x": 135,
+                "y": 96,
+                "fontPixels": 13,
+                "bbox": [
+                  135,
+                  100,
+                  200,
+                  115
+                ]
+              }
+            ],
+            "originalJoinedText": "科目:架空化学乙",
+            "exactLiteral": false,
+            "normalizationOnlyTextMatchDiagnostic": true,
+            "lowConfidencePieces": [],
+            "spatialMappingScope": "Correspondence uses original drawing glyph ink bbox and derived PDF150DPI→Windows96DPI→2x requested raster transform(1.28;roundedheight). Native raster dimensions were source-guarded but not separately logged; this is derived spatial corroboration, not a captured raster measurement."
+          },
+          {
+            "id": "independent-Timetable-literal-乙",
+            "page": 1,
+            "tileIndex": 0,
+            "actualRecognition": {
+              "tile": 0,
+              "global": {
+                "X": 5.5,
+                "Y": 154.171875,
+                "Width": 46,
+                "Height": 21.65625,
+                "Valid": true
+              },
+              "globalSupport": {
+                "X": 9,
+                "Y": 157.78125,
+                "Width": 39,
+                "Height": 14.4375,
+                "Valid": true
+              },
+              "actualCtcText": "5_ES",
+              "pieces": [
+                {
+                  "Text": "5",
+                  "Start": 1,
+                  "End": 2,
+                  "Confidence": 0.99910957
+                },
+                {
+                  "Text": "_",
+                  "Start": 4,
+                  "End": 5,
+                  "Confidence": 0.98885673
+                },
+                {
+                  "Text": "E",
+                  "Start": 7,
+                  "End": 8,
+                  "Confidence": 0.9957968
+                },
+                {
+                  "Text": "S",
+                  "Start": 10,
+                  "End": 11,
+                  "Confidence": 0.9925379
+                }
+              ],
+              "stage": "actual-owned-recognition-before-confidence-guard"
+            },
+            "originalDrawingTextEntries": [
+              {
+                "text": "5_ES",
+                "x": 5,
+                "y": 114,
+                "fontPixels": 15,
+                "bbox": [
+                  5,
+                  121,
+                  40,
+                  134
+                ]
+              }
+            ],
+            "originalJoinedText": "5_ES",
+            "exactLiteral": true,
+            "normalizationOnlyTextMatchDiagnostic": true,
+            "lowConfidencePieces": [],
+            "spatialMappingScope": "Correspondence uses original drawing glyph ink bbox and derived PDF150DPI→Windows96DPI→2x requested raster transform(1.28;roundedheight). Native raster dimensions were source-guarded but not separately logged; this is derived spatial corroboration, not a captured raster measurement."
+          },
+          {
+            "id": "independent-Timetable-literal-乙",
+            "page": 1,
+            "tileIndex": 0,
+            "actualRecognition": {
+              "tile": 0,
+              "global": {
+                "X": 128.25,
+                "Y": 158.0390625,
+                "Width": 125.5,
+                "Height": 17.015625,
+                "Valid": true
+              },
+              "globalSupport": {
+                "X": 131,
+                "Y": 160.875,
+                "Width": 120,
+                "Height": 11.34375,
+                "Valid": true
+              },
+              "actualCtcText": "担当：架空担当乙",
+              "pieces": [
+                {
+                  "Text": "担",
+                  "Start": 2,
+                  "End": 3,
+                  "Confidence": 0.9499813
+                },
+                {
+                  "Text": "当",
+                  "Start": 7,
+                  "End": 8,
+                  "Confidence": 0.9958003
+                },
+                {
+                  "Text": "：",
+                  "Start": 11,
+                  "End": 12,
+                  "Confidence": 0.85185194
+                },
+                {
+                  "Text": "架",
+                  "Start": 18,
+                  "End": 19,
+                  "Confidence": 0.97223896
+                },
+                {
+                  "Text": "空",
+                  "Start": 24,
+                  "End": 25,
+                  "Confidence": 0.99749607
+                },
+                {
+                  "Text": "担",
+                  "Start": 30,
+                  "End": 31,
+                  "Confidence": 0.9960984
+                },
+                {
+                  "Text": "当",
+                  "Start": 35,
+                  "End": 36,
+                  "Confidence": 0.9983455
+                },
+                {
+                  "Text": "乙",
+                  "Start": 41,
+                  "End": 42,
+                  "Confidence": 0.4571511
+                }
+              ],
+              "stage": "actual-owned-recognition-before-confidence-guard"
+            },
+            "originalDrawingTextEntries": [
+              {
+                "text": "担当:",
+                "x": 99,
+                "y": 117,
+                "fontPixels": 13,
+                "bbox": [
+                  99,
+                  122,
+                  129,
+                  135
+                ]
+              },
+              {
+                "text": "架空担当乙",
+                "x": 135,
+                "y": 117,
+                "fontPixels": 13,
+                "bbox": [
+                  135,
+                  122,
+                  200,
+                  135
+                ]
+              }
+            ],
+            "originalJoinedText": "担当:架空担当乙",
+            "exactLiteral": false,
+            "normalizationOnlyTextMatchDiagnostic": true,
+            "lowConfidencePieces": [
+              {
+                "Text": "乙",
+                "Start": 41,
+                "End": 42,
+                "Confidence": 0.4571511
+              }
+            ],
+            "spatialMappingScope": "Correspondence uses original drawing glyph ink bbox and derived PDF150DPI→Windows96DPI→2x requested raster transform(1.28;roundedheight). Native raster dimensions were source-guarded but not separately logged; this is derived spatial corroboration, not a captured raster measurement."
+          },
+          {
+            "id": "independent-Timetable-verifiedblank-丙",
+            "page": 1,
+            "tileIndex": 0,
+            "actualRecognition": {
+              "tile": 0,
+              "global": {
+                "X": 283.75,
+                "Y": 14.4482421875,
+                "Width": 65.5,
+                "Height": 20.490234375,
+                "Valid": true
+              },
+              "globalSupport": {
+                "X": 287,
+                "Y": 17.86328125,
+                "Width": 59,
+                "Height": 13.66015625,
+                "Valid": true
+              },
+              "actualCtcText": "時間割",
+              "pieces": [
+                {
+                  "Text": "時",
+                  "Start": 2,
+                  "End": 3,
+                  "Confidence": 0.8159927
+                },
+                {
+                  "Text": "間",
+                  "Start": 9,
+                  "End": 10,
+                  "Confidence": 0.91532135
+                },
+                {
+                  "Text": "割",
+                  "Start": 15,
+                  "End": 16,
+                  "Confidence": 0.9994301
+                }
+              ],
+              "stage": "actual-owned-recognition-before-confidence-guard"
+            },
+            "originalDrawingTextEntries": [
+              {
+                "text": "時間割",
+                "x": 220,
+                "y": 5,
+                "fontPixels": 18,
+                "bbox": [
+                  220,
+                  10,
+                  274,
+                  29
+                ]
+              }
+            ],
+            "originalJoinedText": "時間割",
+            "exactLiteral": true,
+            "normalizationOnlyTextMatchDiagnostic": true,
+            "lowConfidencePieces": [],
+            "spatialMappingScope": "Correspondence uses original drawing glyph ink bbox and derived PDF150DPI→Windows96DPI→2x requested raster transform(1.28;roundedheight). Native raster dimensions were source-guarded but not separately logged; this is derived spatial corroboration, not a captured raster measurement."
+          },
+          {
+            "id": "independent-Timetable-verifiedblank-丙",
+            "page": 1,
+            "tileIndex": 0,
+            "actualRecognition": {
+              "tile": 0,
+              "global": {
+                "X": 9.25,
+                "Y": 16.0244140625,
+                "Width": 142.5,
+                "Height": 17.337890625,
+                "Valid": true
+              },
+              "globalSupport": {
+                "X": 12,
+                "Y": 18.9140625,
+                "Width": 137,
+                "Height": 11.55859375,
+                "Valid": true
+              },
+              "actualCtcText": "2028年度爱期",
+              "pieces": [
+                {
+                  "Text": "2",
+                  "Start": 0,
+                  "End": 1,
+                  "Confidence": 0.99745506
+                },
+                {
+                  "Text": "0",
+                  "Start": 5,
+                  "End": 6,
+                  "Confidence": 0.9997526
+                },
+                {
+                  "Text": "2",
+                  "Start": 9,
+                  "End": 10,
+                  "Confidence": 0.9974613
+                },
+                {
+                  "Text": "8",
+                  "Start": 14,
+                  "End": 15,
+                  "Confidence": 0.99758554
+                },
+                {
+                  "Text": "年",
+                  "Start": 20,
+                  "End": 21,
+                  "Confidence": 0.9998939
+                },
+                {
+                  "Text": "度",
+                  "Start": 28,
+                  "End": 29,
+                  "Confidence": 0.9991986
+                },
+                {
+                  "Text": "爱",
+                  "Start": 38,
+                  "End": 39,
+                  "Confidence": 0.4302363
+                },
+                {
+                  "Text": "期",
+                  "Start": 45,
+                  "End": 46,
+                  "Confidence": 0.9360071
+                }
+              ],
+              "stage": "actual-owned-recognition-before-confidence-guard"
+            },
+            "originalDrawingTextEntries": [
+              {
+                "text": "2028年度 後期",
+                "x": 5,
+                "y": 5,
+                "fontPixels": 18,
+                "bbox": [
+                  5,
+                  10,
+                  121,
+                  28
+                ]
+              }
+            ],
+            "originalJoinedText": "2028年度 後期",
+            "exactLiteral": false,
+            "normalizationOnlyTextMatchDiagnostic": false,
+            "lowConfidencePieces": [
+              {
+                "Text": "爱",
+                "Start": 38,
+                "End": 39,
+                "Confidence": 0.4302363
+              }
+            ],
+            "spatialMappingScope": "Correspondence uses original drawing glyph ink bbox and derived PDF150DPI→Windows96DPI→2x requested raster transform(1.28;roundedheight). Native raster dimensions were source-guarded but not separately logged; this is derived spatial corroboration, not a captured raster measurement."
+          }
+        ],
+        "limits": [
+          "Zero incorrect accepts with zero accepts supplies no precision or recovered-document safety estimate.",
+          "The correct low-confidence乙 body and wrong low-confidence爱 metadata glyph are distinct. Keep ASCII/fullwidth colon and whitespace differences as literal diagnostics; no repairs performed.",
+          "Partial tile events are not complete Sources or full-page coverage; later cells/pages were not recovered.",
+          "Confidence is not truth, and no threshold weakening is justified by one correct low-confidence glyph.",
+          "Fixed fullpage→tile warm-session ordering and hosted hardware preclude causal speed ranking/minimumphysicalmemory claim.",
+          "Stop same preset/model loop: this frozen tiling recipe showed no successful recovery benefit on these2 source-valid originals."
+        ]
+      }
+    },
+    {
+      "file": "android-high-windows-ordinary-four-third-cause-review.json",
+      "bytes": 9671,
+      "sha256": "fa3143bdee550c992c97a8c83c5c555f10858951f89d8ecec0f01784c46e057c",
+      "report": {
+        "reviewer": "Android owner independent third actual-output cause review",
+        "sourceCommit": "4c3bce06463bc94328f3e0d89314f07e5390cb4f",
+        "run": 37203068032,
+        "resultsSHA256": "4caf16a565fadf810f9a87bf7c7481d2ad8a4d9181994af67a753139616bdc56",
+        "rawLogSHA256": "890e43425d459ebd7b60fc41895ccd4578fe44587ce2bc805aa1c90036444adc",
+        "causesReviewedSHA256": "090a66a5bde1543976344743fe700c676ba2f75a5d846761c8b99207d52774af",
+        "manifestSHA256": "050b7640b6de309db2be78a932cf558f4d36b3b89c29b95f7737228e025079b9",
+        "recipeSHA256": "0bdec55548182fb2ed6f12738d0c5e0ea346ec52a21ecbffb4fe1d33d3769fdc",
+        "pinsAndRawDerivationMatch": true,
+        "hardwareExactRawMatch": true,
+        "originalPNGsVisuallyInspected": [
+          "independent-Timetable-literal-乙/page-1.png",
+          "independent-Timetable-verifiedblank-丙/page-1.png"
+        ],
+        "inputs": {
+          "independent-Timetable-literal-乙": {
+            "pdfSHA256": "233dec852ec7e43c93c70c42d8f88238a0c2e8aef146445c4b94d674bb6cc187",
+            "drawingSourceSHA256": "c2acd23ad38bc9e6eea4ded8b1fb790ac5817bb7891f090483a2f28084eab1b9",
+            "formalOracleSHA256": "0451ac80edac37e4e424d3d78b1d96ffe31cd06711024abe301c2ceff1e515c0",
+            "originalPages": 5,
+            "formalObligations": 40,
+            "oraclePositive": true
+          },
+          "independent-Timetable-verifiedblank-丙": {
+            "pdfSHA256": "2625bf49044d59088b53109fc15ba7813073fdedac71bde5eb82925c297050f8",
+            "drawingSourceSHA256": "fdbb25473adc36c9c31a01686a6255377557a383ae98f47cf89276bb0e8c3c40",
+            "formalOracleSHA256": "8ff9ea8dc55fb6e010e18c6019f938c47840bf589fdd503d2db9d18072184f43",
+            "originalPages": 5,
+            "formalObligations": 40,
+            "oraclePositive": true
+          }
+        },
+        "rows": [
+          {
+            "id": "independent-Timetable-literal-乙",
+            "arm": "pinned-cpu-fullpage",
+            "outcome": "readable_positive_recovery_failure",
+            "confirmedStage": "native OCR CTC empty/low-confidence guard before Builder",
+            "accepted": false,
+            "negativeCredit": false,
+            "executionError": false,
+            "formalReached": false,
+            "completeSourceInventoryAvailable": false,
+            "renderedRasterHashAvailable": false,
+            "observedRecognitionCount": 0,
+            "llmCalls": 0,
+            "causeStrength": {
+              "guard": "confirmed",
+              "intrinsic OCR model/font/render/crop attribution": "undetermined"
+            },
+            "offendingToken": "undetermined: fullpage reader emits no offending region/confidence"
+          },
+          {
+            "id": "independent-Timetable-literal-乙",
+            "arm": "pinned-cpu-fixed-grid",
+            "outcome": "readable_positive_recovery_failure",
+            "confirmedStage": "native OCR CTC empty/low-confidence guard before Builder",
+            "accepted": false,
+            "negativeCredit": false,
+            "executionError": false,
+            "formalReached": false,
+            "completeSourceInventoryAvailable": false,
+            "renderedRasterHashAvailable": false,
+            "observedRecognitionCount": 10,
+            "llmCalls": 0,
+            "causeStrength": {
+              "guard": "confirmed",
+              "intrinsic OCR model/font/render/crop attribution": "undetermined",
+              "last low-confidence piece precipitates rejection": "supported by immediate last recognition and unchanged guard"
+            },
+            "lastActualRecognition": {
+              "tile": 0,
+              "global": {
+                "X": 128.25,
+                "Y": 158.0390625,
+                "Width": 125.5,
+                "Height": 17.015625,
+                "Valid": true
+              },
+              "globalSupport": {
+                "X": 131,
+                "Y": 160.875,
+                "Width": 120,
+                "Height": 11.34375,
+                "Valid": true
+              },
+              "actualCtcText": "担当：架空担当乙",
+              "pieces": [
+                {
+                  "Text": "担",
+                  "Start": 2,
+                  "End": 3,
+                  "Confidence": 0.9499813
+                },
+                {
+                  "Text": "当",
+                  "Start": 7,
+                  "End": 8,
+                  "Confidence": 0.9958003
+                },
+                {
+                  "Text": "：",
+                  "Start": 11,
+                  "End": 12,
+                  "Confidence": 0.85185194
+                },
+                {
+                  "Text": "架",
+                  "Start": 18,
+                  "End": 19,
+                  "Confidence": 0.97223896
+                },
+                {
+                  "Text": "空",
+                  "Start": 24,
+                  "End": 25,
+                  "Confidence": 0.99749607
+                },
+                {
+                  "Text": "担",
+                  "Start": 30,
+                  "End": 31,
+                  "Confidence": 0.9960984
+                },
+                {
+                  "Text": "当",
+                  "Start": 35,
+                  "End": 36,
+                  "Confidence": 0.9983455
+                },
+                {
+                  "Text": "乙",
+                  "Start": 41,
+                  "End": 42,
+                  "Confidence": 0.4571511
+                }
+              ],
+              "stage": "actual-owned-recognition-before-confidence-guard"
+            },
+            "rejectionPrecursor": {
+              "Text": "乙",
+              "Start": 41,
+              "End": 42,
+              "Confidence": 0.4571511
+            },
+            "originalContrast": {
+              "bodyCorrect": true,
+              "labelASCIIColonReadFullwidth": true,
+              "body": "架空担当乙"
+            },
+            "tileBoundaryCauseObserved": false
+          },
+          {
+            "id": "independent-Timetable-verifiedblank-丙",
+            "arm": "pinned-cpu-fullpage",
+            "outcome": "readable_positive_recovery_failure",
+            "confirmedStage": "native OCR CTC empty/low-confidence guard before Builder",
+            "accepted": false,
+            "negativeCredit": false,
+            "executionError": false,
+            "formalReached": false,
+            "completeSourceInventoryAvailable": false,
+            "renderedRasterHashAvailable": false,
+            "observedRecognitionCount": 0,
+            "llmCalls": 0,
+            "causeStrength": {
+              "guard": "confirmed",
+              "intrinsic OCR model/font/render/crop attribution": "undetermined"
+            },
+            "offendingToken": "undetermined: fullpage reader emits no offending region/confidence"
+          },
+          {
+            "id": "independent-Timetable-verifiedblank-丙",
+            "arm": "pinned-cpu-fixed-grid",
+            "outcome": "readable_positive_recovery_failure",
+            "confirmedStage": "native OCR CTC empty/low-confidence guard before Builder",
+            "accepted": false,
+            "negativeCredit": false,
+            "executionError": false,
+            "formalReached": false,
+            "completeSourceInventoryAvailable": false,
+            "renderedRasterHashAvailable": false,
+            "observedRecognitionCount": 2,
+            "llmCalls": 0,
+            "causeStrength": {
+              "guard": "confirmed",
+              "intrinsic OCR model/font/render/crop attribution": "undetermined",
+              "last low-confidence piece precipitates rejection": "supported by immediate last recognition and unchanged guard"
+            },
+            "lastActualRecognition": {
+              "tile": 0,
+              "global": {
+                "X": 9.25,
+                "Y": 16.0244140625,
+                "Width": 142.5,
+                "Height": 17.337890625,
+                "Valid": true
+              },
+              "globalSupport": {
+                "X": 12,
+                "Y": 18.9140625,
+                "Width": 137,
+                "Height": 11.55859375,
+                "Valid": true
+              },
+              "actualCtcText": "2028年度爱期",
+              "pieces": [
+                {
+                  "Text": "2",
+                  "Start": 0,
+                  "End": 1,
+                  "Confidence": 0.99745506
+                },
+                {
+                  "Text": "0",
+                  "Start": 5,
+                  "End": 6,
+                  "Confidence": 0.9997526
+                },
+                {
+                  "Text": "2",
+                  "Start": 9,
+                  "End": 10,
+                  "Confidence": 0.9974613
+                },
+                {
+                  "Text": "8",
+                  "Start": 14,
+                  "End": 15,
+                  "Confidence": 0.99758554
+                },
+                {
+                  "Text": "年",
+                  "Start": 20,
+                  "End": 21,
+                  "Confidence": 0.9998939
+                },
+                {
+                  "Text": "度",
+                  "Start": 28,
+                  "End": 29,
+                  "Confidence": 0.9991986
+                },
+                {
+                  "Text": "爱",
+                  "Start": 38,
+                  "End": 39,
+                  "Confidence": 0.4302363
+                },
+                {
+                  "Text": "期",
+                  "Start": 45,
+                  "End": 46,
+                  "Confidence": 0.9360071
+                }
+              ],
+              "stage": "actual-owned-recognition-before-confidence-guard"
+            },
+            "rejectionPrecursor": {
+              "Text": "爱",
+              "Start": 38,
+              "End": 39,
+              "Confidence": 0.4302363
+            },
+            "originalContrast": {
+              "termCorrect": false,
+              "original": "2028年度 後期",
+              "observed": "2028年度爱期",
+              "wrongGlyph": "後→爱"
+            },
+            "tileBoundaryCauseObserved": false
+          }
+        ],
+        "counts": {
+          "plannedArms": 4,
+          "assessedReadableRejections": 4,
+          "executionErrors": 0,
+          "accepted": 0,
+          "formalResults": 0,
+          "incorrectAdoptionsObserved": 0,
+          "negativeEligible": 0,
+          "llmCalls": 0
+        },
+        "closure": "PASS result/cause correctness; native acquisition quality failed0/2 perarm, no improvement demonstrated",
+        "limits": [
+          "No complete native source inventory, global-ink result or formal result emitted: all arms stopped at first page confidence guard.",
+          "Zero incorrect adoptions with accepted0 gives no wrong-glyph safety proof.",
+          "No high-confidence wrong literal reached Validator, so none is asserted as false adoption here.",
+          "Fullpage bad token unknown; tile text partial, confidence is not truth; no blanket pretrained/model/prompt failure attribution.",
+          "Fixed fullpage-first warm sessions and evaluator total PeakWorkingSet do not prove latency rank or physical minimum memory.",
+          "No new native inference or thresholds/presets/gold/source edits performed."
+        ]
+      }
+    },
+    {
+      "file": "ios-high-windows-tiled-four-output-cause-review.json",
+      "bytes": 4661,
+      "sha256": "27a99204efee41d2921db32826f3daafa8f2de3e8316af67cc2503c870c8ffb9",
+      "report": {
+        "reviewer": "ios-high independent already-read four-arm cause check",
+        "result": "PASS evidence consistency; OCR quality failed both arms",
+        "sourceCommit": "4c3bce06463bc94328f3e0d89314f07e5390cb4f",
+        "run": 37203068032,
+        "job": 111438534385,
+        "rawSHA256": "890e43425d459ebd7b60fc41895ccd4578fe44587ce2bc805aa1c90036444adc",
+        "derivedSHA256": "bc597eb1306cdb2418139e1946c580ed2c82ff89799cad3cac72643967d2544b",
+        "observedSummaryAnd24RawEventsEqualActualLog": true,
+        "counts": {
+          "fullpagePositiveExact": 0,
+          "fullpagePositiveDenominator": 2,
+          "tilePositiveExact": 0,
+          "tilePositiveDenominator": 2,
+          "readablePositiveRejected": 4,
+          "accepted": 0,
+          "runtimeErrors": 0,
+          "negativeDenominator": 0,
+          "incorrectAcceptance": 0,
+          "tilePartialRecognitionEvents": 12,
+          "pairedOwnershipAndRecognitionEvents": 24
+        },
+        "tileTerminalLowConfidence": [
+          {
+            "caseId": "independent-Timetable-literal-乙",
+            "text": "担当：架空担当乙",
+            "pieces": [
+              {
+                "Text": "担",
+                "Start": 2,
+                "End": 3,
+                "Confidence": 0.9499813
+              },
+              {
+                "Text": "当",
+                "Start": 7,
+                "End": 8,
+                "Confidence": 0.9958003
+              },
+              {
+                "Text": "：",
+                "Start": 11,
+                "End": 12,
+                "Confidence": 0.85185194
+              },
+              {
+                "Text": "架",
+                "Start": 18,
+                "End": 19,
+                "Confidence": 0.97223896
+              },
+              {
+                "Text": "空",
+                "Start": 24,
+                "End": 25,
+                "Confidence": 0.99749607
+              },
+              {
+                "Text": "担",
+                "Start": 30,
+                "End": 31,
+                "Confidence": 0.9960984
+              },
+              {
+                "Text": "当",
+                "Start": 35,
+                "End": 36,
+                "Confidence": 0.9983455
+              },
+              {
+                "Text": "乙",
+                "Start": 41,
+                "End": 42,
+                "Confidence": 0.4571511
+              }
+            ],
+            "box": {
+              "X": 128.25,
+              "Y": 158.0390625,
+              "Width": 125.5,
+              "Height": 17.015625,
+              "Valid": true
+            },
+            "minimumConfidence": 0.4571511
+          },
+          {
+            "caseId": "independent-Timetable-verifiedblank-丙",
+            "text": "2028年度爱期",
+            "pieces": [
+              {
+                "Text": "2",
+                "Start": 0,
+                "End": 1,
+                "Confidence": 0.99745506
+              },
+              {
+                "Text": "0",
+                "Start": 5,
+                "End": 6,
+                "Confidence": 0.9997526
+              },
+              {
+                "Text": "2",
+                "Start": 9,
+                "End": 10,
+                "Confidence": 0.9974613
+              },
+              {
+                "Text": "8",
+                "Start": 14,
+                "End": 15,
+                "Confidence": 0.99758554
+              },
+              {
+                "Text": "年",
+                "Start": 20,
+                "End": 21,
+                "Confidence": 0.9998939
+              },
+              {
+                "Text": "度",
+                "Start": 28,
+                "End": 29,
+                "Confidence": 0.9991986
+              },
+              {
+                "Text": "爱",
+                "Start": 38,
+                "End": 39,
+                "Confidence": 0.4302363
+              },
+              {
+                "Text": "期",
+                "Start": 45,
+                "End": 46,
+                "Confidence": 0.9360071
+              }
+            ],
+            "box": {
+              "X": 9.25,
+              "Y": 16.0244140625,
+              "Width": 142.5,
+              "Height": 17.337890625,
+              "Valid": true
+            },
+            "minimumConfidence": 0.4302363
+          }
+        ],
+        "interpretation": [
+          "Literal乙 teacher text is exactly original架空担当乙 but final乙 confidence0.4571511 belowunchanged0.8; literal correctness does not authorize threshold relaxation.",
+          "Blankteacher丙 fails in header firstpage: original後期 recognized爱期 with爱 confidence0.4302363; lowconfidence rejects wrong glyph before full formal.",
+          "No owner boundary/overlap exception reached; confidenceguard is observed terminalcause. No claim crop/math/backend/rootmodel causal isolation.",
+          "Fullpage actual offending glyph/crop absent, so which glyph caused rejection remains undetermined; same message alone cannot equatefullpage and tile causes.",
+          "Native ORT1.26 identity matches pinnedactualWindows; Linux1.23.2 results not used as byte-identical output claim.",
+          "All4 rejected before formal; zeroaccepted scoped4 positives, no broad negative-safety proof. Tileevents are partial until firstfailure; no fullpage coverage or glyph success rate computed.",
+          "OperationalCI success is accounting/run completion; native0qualityqualified. No improvement supports stopping preset/model repeats."
+        ],
+        "inferenceReruns": 0
+      }
+    }
+  ]
+}
