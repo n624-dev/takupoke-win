@@ -1,4 +1,4 @@
-name: Evaluate schema-constrained local label selection
+name: Diagnose native local format routing
 on:
   workflow_dispatch:
   push:
@@ -28,6 +28,6 @@ jobs:
       - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
         with:
           dotnet-version: '10.0.x'
-      - name: Run native generic-schema label selection on fictional documents
+      - name: Diagnose JSON-schema and Lark routing with unrelated literal controls
         shell: pwsh
-        run: dotnet run --project tools/label-selection-model-probe/WindowsLabelSelectionProbe.csproj --configuration Release --no-launch-profile -- '${{ matrix.model }}'
+        run: dotnet run --project tools/label-selection-model-probe/WindowsLabelSelectionProbe.csproj --configuration Release --no-launch-profile -- --format-routing '${{ matrix.model }}'

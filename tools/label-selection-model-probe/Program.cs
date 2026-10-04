@@ -12,7 +12,9 @@ using Takupoke.Win.Platform;
 // Public artifacts and entirely fictional documents only. No school file input,
 // app storage, school endpoint, cloud inference, upload, or production activation.
 Environment.SetEnvironmentVariable("ORT_TELEMETRY_DISABLED", "1");
-var requested = args.Length == 0 ? new[] { "qwen2.5-1.5b-instruct-generic-cpu:4" } : args;
+var formatRoutingOnly = args.Contains("--format-routing", StringComparer.Ordinal);
+var modelArgs = args.Where(arg => arg != "--format-routing").ToArray();
+var requested = modelArgs.Length == 0 ? new[] { "qwen2.5-1.5b-instruct-generic-cpu:4" } : modelArgs;
 var allowed = new[] { "qwen3-0.6b-generic-cpu:4", "qwen2.5-1.5b-instruct-generic-cpu:4", "qwen3.5-2b-text-generic-cpu:1", "qwen3.5-4b-generic-cpu:3" };
 if (!args.SequenceEqual(new[] { "--preflight" }) && requested.Any(id => !allowed.Contains(id))) throw new ArgumentException("Only pinned public evaluation IDs are accepted.");
 var corpus = QualificationCorpus.Create().Where(c => c.Id.EndsWith("-0", StringComparison.Ordinal) || c.Id.EndsWith("-1", StringComparison.Ordinal)).ToArray();
@@ -29,6 +31,7 @@ foreach (var c in corpus.Where(c => c.ShouldAdopt))
     expectedResults[c.Id] = preflight.Result;
 }
 Console.WriteLine(JsonSerializer.Serialize(new { labelProtocolPreflight = await LabelProtocolPreflight.RunAsync(corpus),
+    formatRoutingPreflight = NativeFormatRouting.Preflight(),
     corpusManifest = corpus.Select(c => new { c.Id, c.ShouldAdopt, sourceHash = RecoveryValidator.Fingerprint(c.Document) }).ToArray(),
     productionRuleControls = await ProductionRuleBench.RunAsync(),
     nativePrerequisites = "Model-free preflight does not check Visual C++ native prerequisites." }));
@@ -75,6 +78,19 @@ try
             foreach (var file in Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories).Order(StringComparer.Ordinal))
             { await using var input = File.OpenRead(file); bytes += input.Length; files.Add(new(Path.GetRelativePath(path, file).Replace('\\', '/'), input.Length, Convert.ToHexStringLower(await SHA256.HashDataAsync(input, cancellation.Token)))); }
             if (files.Count == 0 || bytes > 8L * 1024 * 1024 * 1024) throw new InvalidDataException("Artifact inventory outside bounds.");
+            if (formatRoutingOnly)
+            {
+                var diagnostic = await NativeFormatRouting.RunAsync(model, cancellation.Token);
+                results.Add(new { modelId = id, sourceCommit = Environment.GetEnvironmentVariable("GITHUB_SHA") ?? "local-uncommitted",
+                    runtimeVersion = "Foundry.Local.WinML:1.2.4", backend = "Windows CPU", osVersion = Environment.OSVersion.VersionString,
+                    artifactBytes = bytes, artifacts = files, inferenceRecipe = NativeFormatRouting.Recipe,
+                    sampler = new { temperature = 0, randomSeed = 17, maxTokens = 32, toolChoice = "none" },
+                    errors = diagnostic.Errors, nativeCompletionsStarted = diagnostic.Started, nativeCompletionsReturned = diagnostic.Returned,
+                    formatCases = diagnostic.Cases, routingMatched = diagnostic.Matched, routingEligible = 2,
+                    evaluationStatus = diagnostic.Errors == 0 ? "completed" : "runtime-errors",
+                    scope = "Arbitrary literal format-routing controls only; no recovery documents or quality scoring; no catalog activation" });
+                continue;
+            }
             async Task<bool> Verify(CancellationToken token)
             {
                 foreach (var f in files)
