@@ -13,12 +13,14 @@ using Takupoke.Win.Platform;
 // app storage, school endpoint, cloud inference, upload, or production activation.
 Environment.SetEnvironmentVariable("ORT_TELEMETRY_DISABLED", "1");
 var formatRoutingOnly = args.Contains("--format-routing", StringComparer.Ordinal);
-var modelArgs = args.Where(arg => arg != "--format-routing").ToArray();
+var firstCaseOnly = args.Contains("--first-case", StringComparer.Ordinal);
+var modelArgs = args.Where(arg => arg is not "--format-routing" and not "--first-case").ToArray();
 var requested = modelArgs.Length == 0 ? new[] { "qwen2.5-1.5b-instruct-generic-cpu:4" } : modelArgs;
 var allowed = new[] { "qwen3-0.6b-generic-cpu:4", "qwen2.5-1.5b-instruct-generic-cpu:4", "qwen3.5-2b-text-generic-cpu:1", "qwen3.5-4b-generic-cpu:3",
     "Phi-4-mini-instruct-generic-cpu:5", "ministral-3-3b-instruct-2512-generic-cpu:2", "smollm3-3b-generic-cpu:1" };
 if (!args.SequenceEqual(new[] { "--preflight" }) && requested.Any(id => !allowed.Contains(id))) throw new ArgumentException("Only pinned public evaluation IDs are accepted.");
 var corpus = QualificationCorpus.Create().Where(c => c.Id.EndsWith("-0", StringComparison.Ordinal) || c.Id.EndsWith("-1", StringComparison.Ordinal)).ToArray();
+if (firstCaseOnly) corpus = corpus.Take(1).ToArray();
 // Preflight establishes that every positive admits a physical certificate and
 // complete production Validator result; these oracle outputs are never model input.
 var expectedResults = new Dictionary<string, RecoveryResult>();
@@ -37,6 +39,12 @@ Console.WriteLine(JsonSerializer.Serialize(new { labelProtocolPreflight = await 
     productionRuleControls = await ProductionRuleBench.RunAsync(),
     nativePrerequisites = "Model-free preflight does not check Visual C++ native prerequisites." }));
 if (args.SequenceEqual(new[] { "--preflight" })) return 0;
+if (firstCaseOnly)
+{
+    var first = corpus.Single(); var prompt = RecoveryStructure.Prompt(first.Document, first.Document.Cells.Single(c => c.Id == first.CellId));
+    Console.WriteLine(JsonSerializer.Serialize(new { exactNativeGrammar = LabelSelectionProtocol.Format(prompt).LarkGrammar,
+        scope = "One-case operational replay of the same frozen input/grammar; no native compatibility or full-corpus quality claim" }));
+}
 // Check only the four known x64 CRT imports in System32. Do not search a
 // caller-controlled directory and never download a model before this gate.
 if (!OperatingSystem.IsWindows())
@@ -147,6 +155,8 @@ try
                 catch (Exception failure)
                 {
                     errors++; watch.Stop(); caseResults.Add(new { c.Id, c.ShouldAdopt, sourceHash = RecoveryValidator.Fingerprint(c.Document), errorType = failure.GetType().Name,
+                        errorMessage = failure.Message[..Math.Min(failure.Message.Length, 1024)], innerErrorType = failure.InnerException?.GetType().Name,
+                        innerErrorMessage = failure.InnerException?.Message is { } inner ? inner[..Math.Min(inner.Length, 1024)] : null,
                         calls = measured.Calls - beforeCalls, nativeCompletionsStarted = production.NativeCompletionsStarted - beforeNative, nativeCompletionsReturned = production.NativeCompletionsReturned - beforeReturned,
                         rawLabelSelection = production.LastSelection, rawModelOutput = production.LastRawOutput, rawOriginalLength = production.LastRawOriginalLength, rawTruncated = production.LastRawTruncated,
                         adapterStage = production.LastStage, milliseconds = watch.ElapsedMilliseconds });
@@ -164,7 +174,7 @@ try
                 evaluationStatus = errors == 0 ? "completed" : "runtime-errors",
                 developmentCorpusStatus = errors == 0 && positiveExact == corpus.Count(c => c.ShouldAdopt) && negativeRejected == corpus.Count(c => !c.ShouldAdopt) && incorrectValidatorAcceptances == 0 ? "exact" : "failed", evaluatorProcessPeakWorkingSetBytes = process.PeakWorkingSet64, evaluatorProcessTerminalPrivateMemoryBytes = process.PrivateMemorySize64,
                 memoryScope = "Evaluator process only; peak cumulative within process, excludes any child runtime processes; no minimum-device claim",
-                sourceCommit = Environment.GetEnvironmentVariable("GITHUB_SHA") ?? "local-uncommitted", pipelineStage = "Isolated model label-selection correctness experiment after production Rules safety preflight; generic all-ID schema and measured cuts then unchanged production certificate; NOT production model benefit or PDF/Strict/builder/formal-conversion model validation",
+                sourceCommit = Environment.GetEnvironmentVariable("GITHUB_SHA") ?? "local-uncommitted", executionScope = firstCaseOnly ? "Single first-case operational replay; not full-corpus comparison" : "Full frozen development corpus", pipelineStage = "Isolated model label-selection correctness experiment after production Rules safety preflight; generic all-ID schema and measured cuts then unchanged production certificate; NOT production model benefit or PDF/Strict/builder/formal-conversion model validation",
                 rawOutputScope = "Every scored completion retains a bounded 16384-character prefix with original length/truncation marker; no extra or substituted diagnostic generation", caseResults, qualification = "candidate evidence only; independent held-out validation required before activation" });
         }
         catch (Exception failure) { results.Add(new { modelId = id, errorType = failure.GetType().Name }); }
