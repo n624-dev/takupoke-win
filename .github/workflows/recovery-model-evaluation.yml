@@ -8,6 +8,10 @@ jobs:
   evaluate:
     runs-on: windows-2025
     timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        model: ['qwen2.5-1.5b-instruct-generic-cpu:4', 'qwen3.5-2b-text-generic-cpu:1']
     permissions:
       contents: read
     env:
@@ -20,4 +24,4 @@ jobs:
           dotnet-version: '10.0.x'
       - name: Download pinned public models and evaluate invented cells
         shell: pwsh
-        run: dotnet run --project tools/model-evaluation/ModelEvaluation.csproj --configuration Release --no-launch-profile
+        run: dotnet run --project tools/model-evaluation/ModelEvaluation.csproj --configuration Release --no-launch-profile -- '${{ matrix.model }}'
