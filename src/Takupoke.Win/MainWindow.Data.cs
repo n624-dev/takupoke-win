@@ -48,7 +48,7 @@ public sealed partial class MainWindow
         if (source is not null)
         {
             attempts.Children.Add(OperationButton("同じファイルを再取得", () => _model.ReacquireAsync(kind), "reacquire-" + kind));
-            attempts.Children.Add(OperationButton("保存した原本を再解析", () => _model.ReparseAsync(kind), "reparse-" + kind));
+            attempts.Children.Add(OperationButton("最新を取得して再解析", () => _model.ReparseAsync(kind), "reparse-" + kind));
             if (kind != MaterialKind.Changes && snapshot?.ParseAttempt?.RecoveryPending == true && snapshot.ParseAttempt.SourceDigest == source.Digest)
             {
                 attempts.Children.Add(OperationButton("端末内でPDFを復旧", async () => { await _model.PrepareRecoveryAsync(kind); if (_model.Materials.GetValueOrDefault(kind)?.RecoveryPreview is not null) await OpenPage("recovery." + kind); }, "recover-pdf-" + kind));
@@ -196,7 +196,7 @@ public sealed partial class MainWindow
             ("はじめに", "1. OneDriveの同期フォルダーで資料を開けることを確認します。「このデバイス上で常に保持する」でオフラインでも原本を利用できます。\n2. 設定から学校アカウントでリンク・名称・授業時刻を取得します。\n3. 通常時間割PDFと時間割変更XLSXを選びます。試験・返却PDFは必要なときに選びます。\n4. 学校行事の年度を確認して取得します。\n5. クラスを選びます。"),
             ("時間割を見る", "ホームには今日の授業と行事を表示します。「時間割を見る」で今日を含む週へ移動します。ホームは常に変更込みです。\n時間割は前週・翌週・カレンダーで移動できます。授業を選ぶと詳細が開きます。連続授業はまとめ、重なる授業は並べます。\n変更一覧は今日以降・この週・全件で絞り込めます。一覧専用のクラスを選ぶこともできます。"),
             ("リンクを使う", "一覧の検索はかな・ローマ字にも対応します。\n各リンクの「…」から、お気に入り・アイコンの色・非表示・今回だけ別の開き方を選べます。右クリックやShift+F10でも同じメニューを開けます。お気に入りはホームに表示します。\n非表示のリンクを管理する画面から再表示できます。設定でアプリ内・外部ブラウザを選べます。"),
-            ("更新と通知", "資料は起動・復帰・ファイル変更・手動確認で読み直し、内容が変わると解析します。保存済み年度の学校行事も確認します。\nホームの更新案内からデータの取得画面を開けます。認証は取得操作のときだけ開始します。\n通知は今日以降・選択中クラスの変更と、解析成功した試験・返却PDFの更新が対象です。初回は通知しません。\n通知領域での常駐を有効にすると、閉じた後も15分ごとに確認します。完全終了・電源断・スリープ中は確認しません。\n4月1日・10月1日の切替後は資料を選び直し、学校データを再取得してください。個人設定とOneDriveの原本は保持します。"),
+            ("更新と通知", "資料は起動・復帰・ファイル変更・手動確認で読み直し、内容が変わると解析します。同じ保存先で同期更新された資料も選び直す必要はありません。「最新を取得して再解析」は選択中の原本を読み直して解析します。保存済み年度の学校行事も確認します。\nホームの更新案内からデータの取得画面を開けます。認証は取得操作のときだけ開始します。\n通知は今日以降・選択中クラスの変更と、解析成功した試験・返却PDFの更新が対象です。初回は通知しません。\n通知領域での常駐を有効にすると、閉じた後も15分ごとに確認します。完全終了・電源断・スリープ中は確認しません。\n4月1日・10月1日の切替後は資料を選び直し、学校データを再取得してください。個人設定とOneDriveの原本は保持します。"),
             ("困ったとき", "更新されない場合はOneDriveの同期状況を確認し、エクスプローラーで資料を開いてから再確認します。移動・削除・アクセス不能では資料を選び直してください。\n解析失敗は資料の詳細で確認します。再解析に失敗しても保存期間内の前回正常結果を保持します。\n年のない変更日には学校年度を使い、1〜3月は翌年の日付になります。年度を変えたら再解析してください。\n半期切替でファイル選択が消えた場合は再選択が必要です。設定から初期設定を再度開くこともできます。")
         };
         Add(SettingsGroup(topics.Select(topic => SettingsRow(topic.Title, () => Message(topic.Title, topic.Body), topic.Title, icon: "help")).Cast<UIElement>().ToArray()));

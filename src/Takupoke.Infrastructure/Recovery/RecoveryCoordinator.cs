@@ -25,6 +25,9 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
             if (strict.Parsed) return new(RecoveryJobState.Adopted, null, "通常の方法で解析できました。");
             var lease = await store.BeginAsync(token);
             var source = await store.ReadAsync<SourceRecord>(lease, "selection." + kind, token) ?? throw new InvalidDataException("選択したPDFがありません。");
+            var acquisition = await store.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, token);
+            if (acquisition?.Failure is not null)
+                return new(RecoveryJobState.Failed, null, acquisition.Failure + " 前回の正常結果を保持しています。");
             var attempt = await store.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token);
             if (attempt?.SourceDigest != source.Digest || attempt.Failure is null || !RecoveryPolicy.Eligible(kind, attempt.Failure))
                 return new(RecoveryJobState.Failed, null, "原本の破損・保護・入力上限など、この失敗は端末内復旧の対象外です。前回の正常結果を保持しています。");
@@ -85,6 +88,12 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
         {
             var lease = await store.BeginAsync(token);
             if (lease != preview.Lease) throw new OperationCanceledException("保存期間または学校データの利用状態が変わりました。");
+            // Confirmation must still refer to the selected path's latest readable version.
+            await materials.RefreshAsync(kind, lease.Period.SchoolYear, token);
+            lease = await store.BeginAsync(token);
+            if (lease != preview.Lease) throw new OperationCanceledException("保存期間または学校データの利用状態が変わりました。");
+            var acquisition = await store.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, token);
+            if (acquisition?.Failure is not null) throw new InvalidDataException(acquisition.Failure);
             var source = await store.ReadAsync<SourceRecord>(lease, "selection." + kind, token) ?? throw new OperationCanceledException("資料の選択が変わりました。");
             if (source.Id != preview.SourceId || source.Digest != preview.Document.PdfHash) throw new OperationCanceledException("確認中にPDFが更新されました。新しいPDFを確認してください。");
             var persisted = await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview." + kind, token);

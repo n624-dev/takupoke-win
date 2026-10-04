@@ -14,6 +14,20 @@ public sealed class ViewModelOfflineCollection;
 [Collection("view-model-offline")]
 public sealed class AppViewModelRefreshTests
 {
+    [Fact]
+    public async Task KnownLatestAcquisitionFailureBlocksPendingPreviewPdfWithoutChangingLastGood()
+    {
+        await using var fixture = await Fixture.CreateAsync();
+        var store = Field<SchoolDataStore>(fixture.Model, "_school"); var lease = await store.BeginAsync();
+        var doc = Takupoke.Infrastructure.Recovery.RecoveryDocumentBuilder.Build(fixture.Source.Digest, MaterialKind.Timetable,
+            [RecoveryPipelineTests.Layout(MaterialKind.Timetable)], (_, _) => true);
+        var run = await Takupoke.Core.Recovery.RecoveryEngine.RunAsync(doc, "windows", 10, true, [], _ => null);
+        var preview = new RecoveryPreview(fixture.Source.Id, lease, doc, Assert.IsType<Takupoke.Core.Recovery.RecoveryResult>(run.Result), DateTimeOffset.UtcNow);
+        await store.WriteAsync(lease, "acquisition.Timetable", new MaterialAttempt(DateTimeOffset.UtcNow, "Fictional latest-read failure", false));
+        await Assert.ThrowsAsync<InvalidDataException>(() => fixture.Model.ReadRecoveryPdfAsync(MaterialKind.Timetable, preview));
+        Assert.Equal(fixture.Source.Digest, (await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Timetable"))!.SourceDigest);
+        Assert.Equal(fixture.Source.Digest, NotificationDiff.Digest(await store.ReadOriginalAsync(lease, fixture.Source.Id)));
+    }
     private static T Field<T>(AppViewModel model, string name) =>
         (T)typeof(AppViewModel).GetField(name, BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(model)!;
     private static Task Run(AppViewModel model, Func<CancellationToken, Task> worker) =>

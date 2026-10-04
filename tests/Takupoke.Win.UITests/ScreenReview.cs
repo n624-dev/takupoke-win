@@ -97,6 +97,15 @@ internal static partial class Program
                 Invoke(WaitElement("settings-materials")); Capture(theme + "-" + percent + "-materials");
                 var window = _window!.Current.BoundingRectangle;
                 Require(SetWindowPos(_process!.MainWindowHandle, 0, (int)window.Left, (int)window.Top, 680, 680, 0x0044), "Resize the enlarged review window");
+                Navigate("settings"); Invoke(WaitElement("settings-materials")); Invoke(WaitElement("material-details-Timetable"));
+                var reparse = WaitElement("reparse-Timetable");
+                Require(reparse.Current.Name == "最新を取得して再解析", "Latest reparse remains discoverable at enlarged text sizes");
+                if (reparse.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll)) ((ScrollItemPattern)scroll).ScrollIntoView();
+                Capture(theme + "-" + percent + "-material-details-narrow");
+                var button = WaitElement("reparse-Timetable").Current.BoundingRectangle;
+                var bounds = _window!.Current.BoundingRectangle;
+                Require(button.Width > 0 && button.Left >= bounds.Left && button.Right <= bounds.Right,
+                    "Latest reparse control stays within the 680px enlarged-text window");
                 Navigate("settings"); Capture(theme + "-" + percent + "-settings-narrow");
                 Navigate("timetable"); Capture(theme + "-" + percent + "-timetable-narrow");
                 OpenRecoveryUiPreview(); Capture(theme + "-" + percent + "-recovery-narrow");

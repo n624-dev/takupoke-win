@@ -205,7 +205,28 @@ internal static partial class Program
         Require(Find("download-ocr-model") is not null, "The OCR download action is available independently of a pending recovery job.");
         CheckRecoverySpecialUi(executable, root, MaterialKind.Exam);
         CheckRecoverySpecialUi(executable, root, MaterialKind.ExamReturn);
+        CheckRecoveryLatestAcquisitionFailure(executable, root);
         CheckRecoveryParallelUi(executable, root);
         Console.WriteLine("Recovery UI: original, empty fields/cells, whole-document scope, cancellation by leaving, restart, explicit adoption and independent model management passed.");
+    }
+    private static void CheckRecoveryLatestAcquisitionFailure(string executable, string root)
+    {
+        Stop(); SeedRecoveryUiAsync(root).GetAwaiter().GetResult();
+        var before = DetailStoreAsync(root).GetAwaiter().GetResult();
+        File.Delete(before.Source.Path); Start(executable); OpenRecoveryUiPreview();
+        Wait(() => RecoveryUiText("最新の原本を取得できないため採用できません。資料の詳細から再取得してください。前回の正常結果は保持しています。"),
+            "Latest acquisition failure explains why pending recovery cannot be adopted");
+        Require(Find("adopt-recovery-Timetable") is null && Find("recovery-original-Timetable") is null,
+            "An unavailable latest original hides both adoption and the pending original viewer");
+        Require(DetailStoreAsync(root).GetAwaiter().GetResult().Analysis.SourceDigest == before.Analysis.SourceDigest,
+            "Latest acquisition failure keeps the previous accepted formal result");
+        Capture("latest-original-unavailable-recovery");
+        Invoke("back-recovery"); File.WriteAllBytes(before.Source.Path, RecoveryUiPdf());
+        Invoke("reacquire-Timetable");
+        Wait(() => DetailStoreAsync(root).GetAwaiter().GetResult().Source.FileIdentity != before.Source.FileIdentity,
+            "Restoring the identical selected PDF reacquires its new native file identity");
+        Invoke("recovery-preview-Timetable");
+        Wait(() => Find("adopt-recovery-Timetable") is not null && Find("recovery-original-Timetable") is not null,
+            "Successful identical-byte reacquisition restores confirmation for the same hash-bound preview");
     }
 }

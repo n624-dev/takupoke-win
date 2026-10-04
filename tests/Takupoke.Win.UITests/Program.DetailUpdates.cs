@@ -79,11 +79,17 @@ internal static partial class Program
                 var before = DetailStoreAsync(isolated).GetAwaiter().GetResult();
                 var ticks = DetailClockTicks(isolated);
                 // A real SourceWatcher refresh changes only acquisition/check metadata.
-                File.SetLastWriteTimeUtc(before.Source.Path,DateTime.UtcNow.AddSeconds(2));
+                var replacementPath = before.Source.Path + ".replacement.pdf";
+                File.Copy(before.Source.Path, replacementPath);
+                File.Move(replacementPath, before.Source.Path, true);
                 Wait(() => DetailStoreAsync(isolated).GetAwaiter().GetResult().Source.LastCheckedAt > before.Source.LastCheckedAt,
                     "The unchanged original completed a real source refresh while the detail was open");
                 Wait(() => DetailClockTicks(isolated)>ticks,"A real periodic clock tick occurred with the detail open");
                 Require(LessonDetailOpen(),"Metadata-only refresh and clock/busy changes preserve the detail snapshot");
+                var identicalReplacement = DetailStoreAsync(isolated).GetAwaiter().GetResult();
+                Require(identicalReplacement.Source.FileIdentity != before.Source.FileIdentity && identicalReplacement.Source.Id == before.Source.Id
+                    && identicalReplacement.Source.Digest == before.Source.Digest && identicalReplacement.Analysis.ParsedAt == before.Analysis.ParsedAt,
+                    "A real atomic same-byte Windows file replacement updates identity without losing the accepted analysis or requesting reselection");
 
                 var updated = before.Analysis with { ParsedAt = DateTimeOffset.UtcNow,
                     Timetable = before.Analysis.Timetable! with { Lessons = before.Analysis.Timetable.Lessons.Select(l =>
@@ -101,11 +107,23 @@ internal static partial class Program
 
                 Open("架空更新科目");
                 Require(RecoveryUiText("架空更新正式名"),"The reopened detail uses the new mapping with the accepted lesson");
-                File.AppendAllText(before.Source.Path,"\n% Entirely fictional changed source for an open detail.\n");
+                File.Copy(before.Source.Path, replacementPath);
+                File.AppendAllText(replacementPath,"\n% Entirely fictional changed source for an open detail.\n");
+                File.Move(replacementPath, before.Source.Path, true);
                 Wait(() => !LessonDetailOpen(),"An actual changed original closes the captured detail for " + surface);
                 var changed = DetailStoreAsync(isolated).GetAwaiter().GetResult();
                 Require(changed.Source.Digest != before.Source.Digest && changed.Analysis.SourceDigest == before.Source.Digest,
                     "A failed changed source keeps the previous formal analysis while closing stale details");
+
+                Navigate("settings"); Invoke("settings-materials"); Invoke("material-details-Timetable");
+                Wait(() => Find("reparse-Timetable") is { Current.IsEnabled: true }, "Latest-original reparse is available after the file update");
+                Require(Find("reparse-Timetable")!.Current.Name == "最新を取得して再解析", "Reparse names its latest-original behavior");
+                Invoke("reparse-Timetable");
+                Wait(() => DetailStoreAsync(isolated).GetAwaiter().GetResult().Source.LastCheckedAt > changed.Source.LastCheckedAt,
+                    "The reparse UI reads the latest selected path again");
+                var reparsed = DetailStoreAsync(isolated).GetAwaiter().GetResult();
+                Require(reparsed.Source.Digest == changed.Source.Digest && reparsed.Analysis.SourceDigest == before.Source.Digest,
+                    "Strict failure on the latest reparse preserves the previous formal result without relabeling its hash");
 
                 Navigate("settings"); Invoke("settings-about"); Invoke(ByName("利用規約"));
                 Wait(LessonDetailOpen,"A general legal dialog opens independently of schedule data");

@@ -12,6 +12,11 @@ public sealed partial class MainWindow
         TitleText("端末内で読み取った結果", "page-recovery-" + kind);
         Add(IconButton("資料の詳細に戻る", "back", () => OpenPage("material." + kind), "back-recovery"));
         var snapshot = _model.Materials.GetValueOrDefault(kind); var preview = snapshot?.RecoveryPreview;
+        if (snapshot?.AcquisitionAttempt?.Failure is not null)
+        {
+            Add(Text("最新の原本を取得できないため採用できません。資料の詳細から再取得してください。前回の正常結果は保持しています。"));
+            return;
+        }
         var document = snapshot?.RecoveryDisplay;
         if (preview is null || document is null || preview.SourceId != snapshot?.Source?.Id || document.SourceId != preview.SourceId ||
             document.PdfHash != snapshot.Source.Digest || preview.Document.PdfHash != document.PdfHash ||
