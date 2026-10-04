@@ -23,7 +23,8 @@ internal static class LabelProtocolPreflight
             var format = LabelSelectionProtocol.Format(prompt);
             var idRule = "id: " + string.Join(" | ", prompt.Sources.Select(s => JsonSerializer.Serialize(JsonSerializer.Serialize(s.Id))));
             if (format.Type != "lark_grammar" || format.JsonSchema is not null || format.LarkGrammar is not { } grammar ||
-                !grammar.Split('\n').Contains(idRule) || !grammar.Contains("ids: \"[\" [id (\",\" id)~0..47] \"]\"", StringComparison.Ordinal))
+                !grammar.Split('\n').Contains(idRule) || !grammar.Contains("ids: \"[\" [items_1] \"]\"", StringComparison.Ordinal) ||
+                !grammar.Split('\n').Contains("items_48: id") || grammar.Contains('~'))
                 throw new InvalidDataException("The shared grammar failed the complete same-source-ID requirement.");
             var malformed = new[] { "```json\n" + json + "\n```", json[..^1] + ",\"subject\":[]}",
                 json[..^1] + ",\"other\":[]}", "{\"subject\":null,\"teacher\":[],\"room\":[]}",

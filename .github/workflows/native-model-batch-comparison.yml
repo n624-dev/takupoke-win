@@ -1,9 +1,6 @@
 name: Compare six pinned local models with one frozen recipe
 on:
   workflow_dispatch:
-  push:
-    branches: [codex/pdf-local-recovery]
-    paths: ['.github/workflows/native-model-batch-comparison.yml', 'tools/label-selection-model-probe/batch-candidates.json']
 permissions:
   contents: read
 jobs:
@@ -41,6 +38,6 @@ jobs:
           $benchmarkMachine = Get-CimInstance Win32_ComputerSystem
           $benchmarkOs = Get-CimInstance Win32_OperatingSystem
           @{ benchmarkHardware = @{ processors = $benchmarkCpus; physicalMemoryBytes = [long]$benchmarkMachine.TotalPhysicalMemory; architecture = $env:PROCESSOR_ARCHITECTURE; osCaption = $benchmarkOs.Caption; osVersion = $benchmarkOs.Version; osBuild = $benchmarkOs.BuildNumber }; sourceCommit = $env:GITHUB_SHA } | ConvertTo-Json -Depth 5 -Compress
-      - name: Compare the fixed corpus with the identical v3 sampler and strict scorer
+      - name: Compare the fixed corpus with the identical bounded native grammar and strict scorer
         shell: pwsh
         run: dotnet run --project tools/label-selection-model-probe/WindowsLabelSelectionProbe.csproj --configuration Release --no-launch-profile -- '${{ matrix.model }}'

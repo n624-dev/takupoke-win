@@ -1,5 +1,5 @@
 {
-  "recipe": "label-selection-lark-no-tools-v3",
+  "recipe": "label-selection-lark-bounded-native-v4",
   "runtime": "Foundry.Local.WinML:1.2.4",
   "catalogSource": "https://api.catalog.azureml.ms/asset-gallery/v1.0/models",
   "catalogSha256": "61d41bdad48d244225705d075de7c33dac47b97304f15fb7d51b1c67742814c3",
