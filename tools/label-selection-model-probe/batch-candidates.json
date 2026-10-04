@@ -1,0 +1,104 @@
+{
+  "recipe": "label-selection-lark-no-tools-v3",
+  "runtime": "Foundry.Local.WinML:1.2.4",
+  "catalogSource": "https://api.catalog.azureml.ms/asset-gallery/v1.0/models",
+  "catalogSha256": "61d41bdad48d244225705d075de7c33dac47b97304f15fb7d51b1c67742814c3",
+  "catalogRetrievedUTC": "2026-10-04",
+  "candidates": [
+    {
+      "modelId": "qwen2.5-1.5b-instruct-generic-cpu:4",
+      "publisher": "Microsoft",
+      "catalogModelBytes": 1911260446,
+      "executionProvider": "CPUExecutionProvider",
+      "quantization": [
+        "RTN"
+      ],
+      "minimumFoundryVersion": "0.0.0",
+      "license": "apache-2.0",
+      "declaredLicenseSource": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct/blob/main/LICENSE",
+      "fullLicenseSource": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct/raw/main/LICENSE",
+      "fullLicenseSha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "baseModelAssetId": "azureml://registries/azureml/models/qwen2.5-1.5b-instruct/versions/1"
+    },
+    {
+      "modelId": "qwen3.5-2b-text-generic-cpu:1",
+      "publisher": "Microsoft",
+      "catalogModelBytes": 1535843405,
+      "executionProvider": "CPUExecutionProvider",
+      "quantization": [
+        "RTN"
+      ],
+      "minimumFoundryVersion": "1.2.0",
+      "license": "apache-2.0",
+      "declaredLicenseSource": "https://huggingface.co/Qwen/Qwen3.5-2B/blob/main/LICENSE",
+      "fullLicenseSource": "https://huggingface.co/Qwen/Qwen3.5-2B/raw/main/LICENSE",
+      "fullLicenseSha256": "bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a",
+      "baseModelAssetId": "azureml://registries/azureml/models/qwen3.5-2b-text/versions/1"
+    },
+    {
+      "modelId": "qwen3.5-4b-generic-cpu:3",
+      "publisher": "Microsoft",
+      "catalogModelBytes": 3235313264,
+      "executionProvider": "CPUExecutionProvider",
+      "quantization": [
+        "RTN"
+      ],
+      "minimumFoundryVersion": "1.1.0",
+      "license": "apache-2.0",
+      "declaredLicenseSource": "https://huggingface.co/Qwen/Qwen3.5-4B/blob/main/LICENSE",
+      "fullLicenseSource": "https://huggingface.co/Qwen/Qwen3.5-4B/raw/main/LICENSE",
+      "fullLicenseSha256": "bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a",
+      "baseModelAssetId": "azureml://registries/azureml/models/qwen3.5-4b/versions/1"
+    },
+    {
+      "modelId": "Phi-4-mini-instruct-generic-cpu:5",
+      "publisher": "Microsoft",
+      "catalogModelBytes": 5153960755,
+      "executionProvider": "CPUExecutionProvider",
+      "quantization": [
+        "RTN"
+      ],
+      "minimumFoundryVersion": "0.0.0",
+      "license": "MIT",
+      "declaredLicenseSource": "https://huggingface.co/microsoft/Phi-4-mini-instruct/blob/main/LICENSE",
+      "fullLicenseSource": "https://huggingface.co/microsoft/Phi-4-mini-instruct/raw/main/LICENSE",
+      "fullLicenseSha256": "fa8235e5b48faca34e3ca98cf4f694ef08bd216d28b58071a1f85b1d50cb814d",
+      "baseModelAssetId": "azureml://registries/azureml/models/Phi-4-mini-instruct/versions/1"
+    },
+    {
+      "modelId": "ministral-3-3b-instruct-2512-generic-cpu:2",
+      "publisher": "Microsoft",
+      "catalogModelBytes": 4919876804,
+      "executionProvider": "CPUExecutionProvider",
+      "quantization": [
+        "RTN"
+      ],
+      "minimumFoundryVersion": "1.2.0",
+      "license": "apache-2.0",
+      "declaredLicenseSource": "https://www.apache.org/licenses/LICENSE-2.0.html",
+      "fullLicenseSource": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "fullLicenseSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "baseModelAssetId": "azureml://registries/azureml/models/ministral-3-3b-instruct-2512/versions/1"
+    },
+    {
+      "modelId": "smollm3-3b-generic-cpu:1",
+      "publisher": "Microsoft",
+      "catalogModelBytes": 2235118245,
+      "executionProvider": "CPUExecutionProvider",
+      "quantization": [
+        "GPTQ"
+      ],
+      "minimumFoundryVersion": "0.0.0",
+      "license": "apache-2.0",
+      "declaredLicenseSource": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B/blob/main/LICENSE",
+      "fullLicenseSource": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "fullLicenseSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "baseModelAssetId": "azureml://registries/azureml/models/smollm3-3b/versions/1",
+      "originalLicenseDeclarationSource": "https://huggingface.co/api/models/HuggingFaceTB/SmolLM3-3B",
+      "originalModelRevision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "originalMetadataSha256": "31232e69db23c038f10128469210c500df7fbcf0e9b0d38de213284ee1115a70",
+      "licenseFileNote": "Catalog LICENSE link404; publisher modelcard explicitlydeclaresApache2; fullstandardlicense fromofficialApache"
+    }
+  ],
+  "resourceScope": "Each artifact inventory is bounded to8GiB; catalogbytes are modelmetadata, not exact downloadedinventory or RAM proof.16GiB target plausibility only; record measured runtimeerrors and per-run evaluator memory."
+}

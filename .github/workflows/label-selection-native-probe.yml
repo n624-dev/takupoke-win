@@ -1,9 +1,6 @@
 name: Diagnose native local format routing
 on:
   workflow_dispatch:
-  push:
-    branches: [codex/pdf-local-recovery]
-    paths: ['tools/label-selection-model-probe/**', '.github/workflows/label-selection-native-probe.yml']
 permissions:
   contents: read
 jobs:

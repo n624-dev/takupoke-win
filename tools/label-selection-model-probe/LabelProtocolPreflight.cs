@@ -20,10 +20,11 @@ internal static class LabelProtocolPreflight
             var rebuilt = c.Document with { Cells = c.Document.Cells.Select(v => v.Id == cell.Id ? v with { RoleScopes = scopes } : v).ToArray() };
             var result = await RecoveryEngine.RunAsync(rebuilt, "windows", 10, true, [], _ => null);
             if (result.Result is null || !RecoveryValidator.Validate(rebuilt, result.Result).CanAdopt) throw new InvalidDataException("Adapter positive certificate preflight failed.");
-            var schema = LabelSelectionProtocol.Format(prompt).JsonSchema?.Schema ?? throw new InvalidDataException("Schema is missing.");
-            var properties = schema.Properties ?? throw new InvalidDataException("Schema properties are missing.");
-            if (properties.Count != 3 || properties.Any(pair => pair.Value.Items?.Enum is not { } ids || !ids.SequenceEqual(prompt.Sources.Select(s => s.Id))))
-                throw new InvalidDataException("A role schema failed the complete same-source-ID enum requirement.");
+            var format = LabelSelectionProtocol.Format(prompt);
+            var idRule = "id: " + string.Join(" | ", prompt.Sources.Select(s => JsonSerializer.Serialize(JsonSerializer.Serialize(s.Id))));
+            if (format.Type != "lark_grammar" || format.JsonSchema is not null || format.LarkGrammar is not { } grammar ||
+                !grammar.Split('\n').Contains(idRule) || !grammar.Contains("ids: \"[\" [id (\",\" id)~0..47] \"]\"", StringComparison.Ordinal))
+                throw new InvalidDataException("The shared grammar failed the complete same-source-ID requirement.");
             var malformed = new[] { "```json\n" + json + "\n```", json[..^1] + ",\"subject\":[]}",
                 json[..^1] + ",\"other\":[]}", "{\"subject\":null,\"teacher\":[],\"room\":[]}",
                 JsonSerializer.Serialize(gold.ToDictionary(p => p.Key, p => p.Key == "subject" ? new[] { "unknown-source" } : p.Value)),
@@ -44,7 +45,7 @@ internal static class LabelProtocolPreflight
             completed++;
         }
         return new { recipe = LabelSelectionProtocol.Recipe, positiveAdapterCertificates = completed, malformedSelectionsRejected = strictRejections,
-            swappedRolesCertificateRejected = certificatesRejected, modelCalls = 0, schemaScope = "Every role array permits the same complete supplied source-ID enum; no expected answer constraints",
+            swappedRolesCertificateRejected = certificatesRejected, modelCalls = 0, grammarScope = "Every role array permits the same complete supplied source-ID enum; no expected answer constraints",
             scope = "Deterministic fictional adapter preflight only; native structured-generation support remains unverified" };
     }
 }

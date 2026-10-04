@@ -1,0 +1,46 @@
+name: Compare six pinned local models with one frozen recipe
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/pdf-local-recovery]
+    paths: ['.github/workflows/native-model-batch-comparison.yml', 'tools/label-selection-model-probe/batch-candidates.json']
+permissions:
+  contents: read
+jobs:
+  evaluate:
+    runs-on: windows-2025
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        model:
+          - 'qwen2.5-1.5b-instruct-generic-cpu:4'
+          - 'qwen3.5-2b-text-generic-cpu:1'
+          - 'qwen3.5-4b-generic-cpu:3'
+          - 'Phi-4-mini-instruct-generic-cpu:5'
+          - 'ministral-3-3b-instruct-2512-generic-cpu:2'
+          - 'smollm3-3b-generic-cpu:1'
+    env:
+      ORT_TELEMETRY_DISABLED: '1'
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Gate public source tree and GitHub noreply identities
+        shell: pwsh
+        run: python scripts/check-public-tree.py
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: '10.0.x'
+      - name: Record actual runner CPU, RAM and OS for comparison limits
+        shell: pwsh
+        run: |
+          $benchmarkCpus = @(Get-CimInstance Win32_Processor | Select-Object Name, NumberOfCores, NumberOfLogicalProcessors)
+          $benchmarkMachine = Get-CimInstance Win32_ComputerSystem
+          $benchmarkOs = Get-CimInstance Win32_OperatingSystem
+          @{ benchmarkHardware = @{ processors = $benchmarkCpus; physicalMemoryBytes = [long]$benchmarkMachine.TotalPhysicalMemory; architecture = $env:PROCESSOR_ARCHITECTURE; osCaption = $benchmarkOs.Caption; osVersion = $benchmarkOs.Version; osBuild = $benchmarkOs.BuildNumber }; sourceCommit = $env:GITHUB_SHA } | ConvertTo-Json -Depth 5 -Compress
+      - name: Compare the fixed corpus with the identical v3 sampler and strict scorer
+        shell: pwsh
+        run: dotnet run --project tools/label-selection-model-probe/WindowsLabelSelectionProbe.csproj --configuration Release --no-launch-profile -- '${{ matrix.model }}'

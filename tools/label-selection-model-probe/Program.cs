@@ -15,7 +15,8 @@ Environment.SetEnvironmentVariable("ORT_TELEMETRY_DISABLED", "1");
 var formatRoutingOnly = args.Contains("--format-routing", StringComparer.Ordinal);
 var modelArgs = args.Where(arg => arg != "--format-routing").ToArray();
 var requested = modelArgs.Length == 0 ? new[] { "qwen2.5-1.5b-instruct-generic-cpu:4" } : modelArgs;
-var allowed = new[] { "qwen3-0.6b-generic-cpu:4", "qwen2.5-1.5b-instruct-generic-cpu:4", "qwen3.5-2b-text-generic-cpu:1", "qwen3.5-4b-generic-cpu:3" };
+var allowed = new[] { "qwen3-0.6b-generic-cpu:4", "qwen2.5-1.5b-instruct-generic-cpu:4", "qwen3.5-2b-text-generic-cpu:1", "qwen3.5-4b-generic-cpu:3",
+    "Phi-4-mini-instruct-generic-cpu:5", "ministral-3-3b-instruct-2512-generic-cpu:2", "smollm3-3b-generic-cpu:1" };
 if (!args.SequenceEqual(new[] { "--preflight" }) && requested.Any(id => !allowed.Contains(id))) throw new ArgumentException("Only pinned public evaluation IDs are accepted.");
 var corpus = QualificationCorpus.Create().Where(c => c.Id.EndsWith("-0", StringComparison.Ordinal) || c.Id.EndsWith("-1", StringComparison.Ordinal)).ToArray();
 // Preflight establishes that every positive admits a physical certificate and
@@ -147,16 +148,18 @@ try
                 {
                     errors++; watch.Stop(); caseResults.Add(new { c.Id, c.ShouldAdopt, sourceHash = RecoveryValidator.Fingerprint(c.Document), errorType = failure.GetType().Name,
                         calls = measured.Calls - beforeCalls, nativeCompletionsStarted = production.NativeCompletionsStarted - beforeNative, nativeCompletionsReturned = production.NativeCompletionsReturned - beforeReturned,
-                        rawModelOutput = production.LastRawOutput, rawOriginalLength = production.LastRawOriginalLength, rawTruncated = production.LastRawTruncated,
+                        rawLabelSelection = production.LastSelection, rawModelOutput = production.LastRawOutput, rawOriginalLength = production.LastRawOriginalLength, rawTruncated = production.LastRawTruncated,
                         adapterStage = production.LastStage, milliseconds = watch.ElapsedMilliseconds });
                 }
                 Console.WriteLine(JsonSerializer.Serialize(new { model = id, caseId = c.Id, completed = caseResults.Count }));
             }
             var process = Process.GetCurrentProcess(); process.Refresh();
             results.Add(new { modelId = id, runtimeVersion = "Foundry.Local.WinML:1.2.4", backend = "Windows CPU", osVersion = Environment.OSVersion.VersionString,
-                artifactBytes = bytes, artifacts = files, corpus = "fictional-folded-structure-v1-label-selection-pilot-variants-0-1", inferenceRecipe = LabelSelectionProtocol.Recipe, inputEncoding = "Japanese-readable label-selection JSON", sampler = new { temperature = 0, randomSeed = 17, maxTokens = 512, responseFormat = "json_schema", toolChoice = "none", maxLabelIdsPerRole = 48 }, positiveCases = corpus.Count(c => c.ShouldAdopt), negativeCases = corpus.Count(c => !c.ShouldAdopt),
+                artifactBytes = bytes, artifacts = files, corpus = "fictional-folded-structure-v1-label-selection-pilot-variants-0-1", inferenceRecipe = LabelSelectionProtocol.Recipe, inputEncoding = "Japanese-readable label-selection JSON", sampler = new { temperature = 0, randomSeed = 17, maxTokens = 512, responseFormat = "lark_grammar", toolChoice = "none", maxLabelIdsPerRole = 48 }, positiveCases = corpus.Count(c => c.ShouldAdopt), negativeCases = corpus.Count(c => !c.ShouldAdopt),
                 positiveExact, negativeRejected, incorrectValidatorAcceptances, errors, modelCalls = measured.Calls, positiveLabelRolesExact, positiveLabelRolesWrong, positiveLabelRolesAssessed, positiveLabelRolesEligible = 3 * corpus.Count(c => c.ShouldAdopt),
                 nativeCompletionsStarted = production.NativeCompletionsStarted, nativeCompletionsReturned = production.NativeCompletionsReturned,
+                strictSelectionsDecoded = caseResults.Count(r => r.GetType().GetProperty("rawLabelSelection")?.GetValue(r) is not null),
+                strictSelectionScope = "Strict object/arrays and source-ID order/uniqueness decoding only; not native hard grammar enforcement or semantic correctness",
                 labelRoleScoring = "Positive source-label obligations only; a completion failing the strict label decoder fails all three obligations. Runtime exceptions remain separately counted; assessed and eligible denominators are both reported.",
                 evaluationStatus = errors == 0 ? "completed" : "runtime-errors",
                 developmentCorpusStatus = errors == 0 && positiveExact == corpus.Count(c => c.ShouldAdopt) && negativeRejected == corpus.Count(c => !c.ShouldAdopt) && incorrectValidatorAcceptances == 0 ? "exact" : "failed", evaluatorProcessPeakWorkingSetBytes = process.PeakWorkingSet64, evaluatorProcessTerminalPrivateMemoryBytes = process.PrivateMemorySize64,
