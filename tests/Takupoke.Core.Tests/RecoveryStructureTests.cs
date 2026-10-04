@@ -152,6 +152,51 @@ public partial class RecoveryTests
         await Assert.ThrowsAsync<InvalidRecoveryOutputException>(() => RecoveryStructure.ResolveAsync(doc, "windows", 10, [provider], default));
         Assert.Equal(0, provider.Calls); Assert.Equal(0, provider.AvailabilityCalls);
     }
+    [Theory]
+    [InlineData(RecoveryFieldRole.Teacher, "担当", "教員")]
+    [InlineData(RecoveryFieldRole.Subject, "授業", "科目")]
+    [InlineData(RecoveryFieldRole.Room, "教室", "名")]
+    public async Task AliasExpansionAcrossCertifiedRailsIsTerminalBeforeAnyProvider(RecoveryFieldRole ambiguousRole, string prefix, string extension)
+    {
+        var (doc, _) = Fixture(); var cell = doc.Cells[0]; var others = Enum.GetValues<RecoveryFieldRole>().Where(role => role != ambiguousRole).ToArray();
+        string Label(RecoveryFieldRole role) => role switch { RecoveryFieldRole.Subject => "科目:", RecoveryFieldRole.Teacher => "担当教員:", _ => "教室:" };
+        var atoms = new List<RecoverySource>();
+        void Atom(string id, string text, double x, double y, double width = 4) => atoms.Add(new(id, cell.Id, 1, text, new(x, y, width, 3)));
+        Atom("first-label", Label(others[0]), 102, 105); Atom("first-body", "架空値一", 124, 105, 10);
+        Atom("ambiguous-label", prefix, 102, 120); Atom("alias-extension", extension, 110, 126); Atom("ambiguous-body", "架空値二", 124, 126, 10); Atom("colon", ":", 102, 132, 1);
+        Atom("last-label", Label(others[1]), 102, 147); Atom("last-body", "架空値三", 124, 147, 10);
+        cell = cell with { BindingMode = RecoveryBindingMode.RoleProposal, SourceIds = atoms.Select(a => a.Id).ToArray(), LessonBindings = [], RoleScopes = [], ConfirmedEmpty = false };
+        doc = doc with { Sources = doc.Sources.Where(a => a.CellId != cell.Id).Concat(atoms).ToArray(), Cells = doc.Cells.Select(c => c.Id == cell.Id ? cell : c).ToArray() };
+        var prompt = RecoveryStructure.Prompt(doc, cell);
+        RecoveryField Field(RecoveryFieldRole role, double rail)
+        {
+            var labelTexts = role == ambiguousRole ? (rail == 108 ? new[] { prefix, ":" } : new[] { prefix, extension, ":" }) : new[] { Label(role) };
+            var labels = labelTexts.Select(text => prompt.Sources.Single(source => source.Text == text)).ToArray();
+            return new(RecoveryValueState.Present, "", labels.Select(label => label.Id).Concat(new[] {
+                prompt.StructureCuts.Last(c => c.Axis == "horizontal" && c.Position <= labels.Min(label => label.Box!.Y)).Id,
+                prompt.StructureCuts.First(c => c.Axis == "horizontal" && c.Position >= labels.Max(label => label.Box!.Y + label.Box.Height)).Id,
+                prompt.StructureCuts.Single(c => c.Axis == "vertical" && c.Position == rail).Id }).ToArray());
+        }
+        var ownerships = new List<string>();
+        foreach (var rail in new[] { 108d, 119d })
+        {
+            // Both local certificates individually pass. Their incompatible
+            // original source ownership is why whole-document preparation must reject.
+            var proposal = new RecoveryLesson(Field(RecoveryFieldRole.Subject, rail), Field(RecoveryFieldRole.Teacher, rail), Field(RecoveryFieldRole.Room, rail), [], []);
+            var scopes = RecoveryStructure.Verify(doc, cell, prompt, [proposal]);
+            var rebuilt = doc with { Cells = doc.Cells.Select(c => c.Id == cell.Id ? c with { RoleScopes = scopes } : c).ToArray() };
+            var run = await RecoveryEngine.RunAsync(rebuilt, "windows", 10, true, [], _ => null);
+            Assert.Equal(RecoveryJobState.AwaitingConfirmation, run.State);
+            var lesson = run.Result!.Cells[0].Lessons[0]; var field = ambiguousRole == RecoveryFieldRole.Subject ? lesson.Subject : ambiguousRole == RecoveryFieldRole.Teacher ? lesson.Teacher : lesson.Room;
+            ownerships.Add(string.Join(',', field.Evidence));
+        }
+        Assert.NotEqual(ownerships[0], ownerships[1]);
+        var provider = new StructureProvider(); var fallback = new StructureProvider("foundryLocal");
+        var resolution = await RecoveryStructure.ResolveAsync(doc, "windows", 10, [provider, fallback], default);
+        Assert.Null(resolution.Document); Assert.Equal(RecoveryJobState.Failed, resolution.State); Assert.Equal(new[] { "ambiguousStructure" }, resolution.Errors);
+        Assert.Equal(0, provider.Calls); Assert.Equal(0, provider.AvailabilityCalls); Assert.Equal(0, fallback.Calls); Assert.Equal(0, fallback.AvailabilityCalls);
+        Assert.Empty(doc.Cells[0].RoleScopes);
+    }
     [Fact] public async Task InvalidProposalIsTerminalBeforeFallback()
     {
         var p = new StructureProvider { Invalid = true }; var fallback = new StructureProvider("foundryLocal");

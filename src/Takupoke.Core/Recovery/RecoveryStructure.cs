@@ -113,21 +113,24 @@ public static class RecoveryStructure
         if (scopes.Any(s => !body.Any(a => s.Box.Contains(a.Box))) || scopes.SelectMany((a, i) => scopes.Skip(i + 1).Select(b => (a, b))).Any(p => Math.Min(p.a.Box.Y + p.a.Box.Height, p.b.Box.Y + p.b.Box.Height) > Math.Max(p.a.Box.Y, p.b.Box.Y))) throw new InvalidRecoveryOutputException();
         return scopes;
     }
-    private static IReadOnlyList<RecoveryRoleScope>? Cheap(RecoveryDocument doc, RecoveryCell cell, RecoveryPromptCell prompt, CancellationToken token)
+    private sealed record CheapResult(IReadOnlyList<RecoveryRoleScope>? Scopes, bool Ambiguous = false);
+    private sealed record Ownership(RecoveryFieldRole Role, IReadOnlyList<string> Labels, IReadOnlyList<string> Body);
+    private static CheapResult Cheap(RecoveryDocument doc, RecoveryCell cell, RecoveryPromptCell prompt, RecoveryWorkBudget work)
     {
-        var units = Units(doc, cell);
+        work.Step(doc.Sources.Count); var units = Units(doc, cell);
+        IReadOnlyList<RecoveryRoleScope>? selected = null; Ownership[]? ownership = null;
         // The certificate already forces all left-rail atoms into exactly three
         // original colon-terminated role chains. Enumerate only measured rails;
         // label fragments may be separated by body rows and need no margin guess.
         foreach (var rail in prompt.StructureCuts.Where(c => c.Axis == "vertical"))
         {
-            token.ThrowIfCancellationRequested();
+            work.Step(units.Length);
             if (units.Any(u => u.Box.X < rail.Position && u.Box.X + u.Box.Width > rail.Position)) continue;
             var labels = units.Where(u => u.Box.X + u.Box.Width <= rail.Position).ToArray();
             var chains = new Dictionary<RecoveryFieldRole, Unit[]>(); var chain = new List<Unit>(); var invalid = false;
             foreach (var label in labels)
             {
-                token.ThrowIfCancellationRequested();
+                work.Step(units.Length);
                 var text = Key(label.Text);
                 if (text.Count(c => c == ':') > 1 || text.Contains(':') && !text.EndsWith(':')) { invalid = true; break; }
                 chain.Add(label); if (!text.EndsWith(':')) continue;
@@ -152,12 +155,27 @@ public static class RecoveryStructure
                 // Nearest measured bounds contain all body atoms that the
                 // unchanged verifier can independently force to these labels.
                 // It still rejects overlaps, unsupported labels and orphan ink.
+                work.Step(6L * doc.Sources.Count + units.Length);
                 var verified = Verify(doc, cell, prompt, [new(fields[RecoveryFieldRole.Subject], fields[RecoveryFieldRole.Teacher], fields[RecoveryFieldRole.Room], [], [])]);
-                token.ThrowIfCancellationRequested(); return verified;
+                var labelGroups = labels.Select(u => u.Id).ToHashSet();
+                var candidate = verified.OrderBy(scope => scope.Role).Select(scope =>
+                {
+                    work.Step(units.Length + scope.LabelSourceIds.Count);
+                    var body = units.Where(u => !labelGroups.Contains(u.Id) && scope.Box.Contains(u.Box)).SelectMany(u => u.SourceIds).ToArray();
+                    work.Step(body.Length);
+                    return new Ownership(scope.Role, scope.LabelSourceIds, body);
+                }).ToArray();
+                if (ownership is not null && (ownership.Length != candidate.Length || !ownership.Zip(candidate).All(pair => pair.First.Role == pair.Second.Role &&
+                    pair.First.Labels.SequenceEqual(pair.Second.Labels) && pair.First.Body.SequenceEqual(pair.Second.Body))))
+                    return new(null, true);
+                // Different margins with identical original label/body ownership
+                // are equivalent. Alias expansion that consumes original body
+                // ink changes ownership and must fail before any Provider.
+                selected ??= verified; ownership ??= candidate;
             }
             catch (InvalidRecoveryOutputException) { }
         }
-        return null;
+        return new(selected);
     }
     public static async Task<RecoveryStructureRun> ResolveAsync(RecoveryDocument doc, string os, int osMajor, IReadOnlyList<ILocalRecoveryProvider> providers, CancellationToken token)
     {
@@ -165,11 +183,17 @@ public static class RecoveryStructure
         var pending = doc.Cells.Where(Pending).ToArray(); if (pending.Length == 0) return new(doc, null, RecoveryJobState.Running, []);
         if (pending.Length > 32 || !doc.Complete || doc.Cells.Any(c => c.InputState != RecoveryInputState.Complete)) return new(null, null, RecoveryJobState.Failed, ["incompleteStructure"]);
         var input = RecoveryValidator.StructureInputErrors(doc, token); if (input.Count > 0) return new(null, null, RecoveryJobState.Failed, input);
-        foreach (var original in pending)
+        var structureWork = new RecoveryWorkBudget(token);
+        try
         {
-            token.ThrowIfCancellationRequested(); var prompt = Prompt(doc, original); var scopes = Cheap(doc, original, prompt, token);
-            if (scopes is not null) doc = doc with { Cells = doc.Cells.Select(c => c.Id == original.Id ? c with { RoleScopes = scopes } : c).ToArray() };
+            foreach (var original in pending)
+            {
+                structureWork.Step(doc.Sources.Count); var prompt = Prompt(doc, original); var cheap = Cheap(doc, original, prompt, structureWork);
+                if (cheap.Ambiguous) return new(null, null, RecoveryJobState.Failed, ["ambiguousStructure"]);
+                if (cheap.Scopes is not null) doc = doc with { Cells = doc.Cells.Select(c => c.Id == original.Id ? c with { RoleScopes = cheap.Scopes } : c).ToArray() };
+            }
         }
+        catch (RecoveryWorkLimitException) { return new(null, null, RecoveryJobState.Failed, ["validationLimit"]); }
         pending = doc.Cells.Where(Pending).ToArray();
         token.ThrowIfCancellationRequested();
         if (pending.Length == 0) return new(doc, null, RecoveryJobState.Running, []);
