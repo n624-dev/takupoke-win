@@ -8,7 +8,7 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class PdfScheduleParser
 {
-    public const int TimetableVersion = 23;
+    public const int TimetableVersion = 24;
     public const int SpecialVersion = 21;
     private const int MaximumRecords = 10000;
     private static string Joined(IEnumerable<PdfGlyph> glyphs) => string.Concat(glyphs.Select(g => g.Text));
@@ -111,7 +111,7 @@ public static partial class PdfScheduleParser
                     var fields = lines.Concat(Enumerable.Repeat("", 3 - lines.Count)).ToArray();
                     var parts = fields.Select(f => f.Replace('･', '・').Split('・')).ToArray();
                     var parallel = lines.Count == 3 && parts.All(p => p.Length == 2);
-                    if (parts[0].Length > 1 && parts[1].Length > 1 && !parallel) throw new PdfParseException("P18", 1, position);
+                    if (parts.Count(p => p.Length > 1) >= 2 && !parallel) throw new PdfParseException("P18", 1, position);
                     if (parallel && parts[0].Any(string.IsNullOrEmpty)) throw new PdfParseException("P19", 1, position);
                     for (var variant = 0; variant < (parallel ? 2 : 1); variant++)
                     {

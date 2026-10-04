@@ -205,10 +205,27 @@ public sealed class PdfParsingTests
     {
         Assert.Equal("P17", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Timetable([TimetableLayout("科A・科B", "教A・" + alias + ":教B", "室A・室B")])).Stage);
     }
-    [Fact]
-    public void TimetableRejectsAmbiguousParallelPairing()
+    [Theory]
+    [InlineData("科A・科B", "教A・教B", "室A")]
+    [InlineData("科A・科B", "教A", "室A・室B")]
+    [InlineData("科A", "教A・教B", "室A・室B")]
+    [InlineData("科A・科B・科C", "教A・教B", "室A・室B")]
+    [InlineData("科A･科B", "教A", "室A･室B")]
+    public void TimetableRejectsAmbiguousParallelPairing(string subject, string teacher, string room)
     {
-        Assert.Equal("P18", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Timetable([TimetableLayout("科A・科B", "教A・教B", "室A")])).Stage);
+        Assert.Equal("P18", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Timetable([TimetableLayout(subject, teacher, room)])).Stage);
+    }
+    [Theory]
+    [InlineData("科A・科B", "教A", "室A")]
+    [InlineData("科A", "教A・教B", "室A")]
+    [InlineData("科A", "教A", "室A・室B")]
+    [InlineData("科A･科B", "教A", "室A")]
+    public void TimetablePreservesSingleCompoundField(string subject, string teacher, string room)
+    {
+        var lesson = Assert.Single(PdfScheduleParser.Timetable([TimetableLayout(subject, teacher, room)]).Lessons);
+        Assert.Equal(subject, lesson.Names.Subject);
+        Assert.Equal(teacher, lesson.Names.Teacher);
+        Assert.Equal(room, lesson.Names.Room);
     }
     [Theory]
     [InlineData("ﾒﾃﾞﾞｨｱ", "ﾒﾃﾞｨｱ")]
