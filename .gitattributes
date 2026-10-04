@@ -10,6 +10,7 @@
 *.yml text eol=lf
 *.yaml text eol=lf
 tools/recovery-prompt-contracts/prompts/*.txt text eol=lf
+tools/compact-header-role-probe/*.txt text eol=lf
 *.ps1 text eol=crlf
 
 tools/independent-wide-timetable/**/*.py text eol=lf
