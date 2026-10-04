@@ -1,5 +1,10 @@
 name: Measure actual fictional raster PDF acquisition
 on:
+  push:
+    branches: ['codex/pdf-local-recovery']
+    paths:
+      - '.github/workflows/raster-acquisition-native-probe.yml'
+      - 'tools/raster-acquisition-native-probe/**'
   workflow_dispatch:
 permissions:
   contents: read
