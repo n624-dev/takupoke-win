@@ -8,4 +8,10 @@ Render sizing, BGRA format, vector scaling, original physical rule mask, scanner
 
 `run.py` verifies exact PDF pins before calling the driver. The independently generated 680-slot oracle is used only after each child returns. All fields, parallel lessons, empty slots, year and term are compared; extra slots refuse equality. Results separate Strict acceptance, Recovery formal acceptance, refusal, execution exception and literal mismatch. No synthetic result qualifies a downloaded model.
 
-The first Windows execution and SDK behavior remain pending until the one authorized native workflow finishes. Local cross-build checks compilation only. Runtime errors never earn safe-negative credit; there is no negative corpus in this two-case native run.
+Local cross-build checks compilation only. Runtime errors never earn safe-negative credit; there is no negative corpus in this two-case native run. Native semantic assessment requires a completely retained report.
+
+## Console retention
+
+Each case prints a compact scored observation before its raw report. Raw JSON is retained as numbered 4,096-byte base64 chunks with total byte count and SHA-256; each console line is below 8 KiB. `report_transport.read_reports` rejects missing, duplicated or modified chunks. No Actions artifacts or caches are used.
+
+The initial run 37221204309 completed build and cleanup, but its three unchunked Python report lines are absent from the retained Actions log. Its semantic results remain unknown. The transport repair repeats the same two fixed inputs and pipeline once; it changes console retention only.

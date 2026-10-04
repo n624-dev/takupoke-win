@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+from report_transport import emit_report
 
 repo, fixture_root, dll = map(Path, sys.argv[1:])
 pins = json.loads((repo / "tools/independent-wide-timetable/artifact-pins.json").read_text(encoding="utf-8"))
@@ -20,7 +21,6 @@ for name in ("unlabeled", "labeled-control"):
                            capture_output=True, encoding="utf-8", timeout=240)
     assert len(child.stdout.encode("utf-8")) <= 64 * 1024 * 1024
     result = json.loads(child.stdout)
-    print(json.dumps({"case": name, "nativeReport": result, "processExitCode": child.returncode}, ensure_ascii=False), flush=True)
     # Gold enters only this independent post-execution assertion, never the reader.
     gold_bytes = (fixture_root / "expected.json").read_bytes()
     assert hashlib.sha256(gold_bytes).hexdigest() == pins["expectedSha256"]
@@ -45,6 +45,10 @@ for name in ("unlabeled", "labeled-control"):
                          "processExitCode": child.returncode, "accepted": accepted, "literalExact": exact,
                          "incorrectAcceptance": (accepted and exact is False) if exact is not None else None, "literalAssessmentStatus": "assessed" if exact is not None else "unassessed", "slotObligations": 680,
                          "slotMismatches": mismatch_count, "extraSlots": extras, "nativeOcrCalls": result["nativeOcrCalls"], "llmCalls": result["llmCalls"]})
+    # A compact observation survives independently of the bounded raw transport.
+    print(json.dumps({"caseSummary": observations[-1]}, ensure_ascii=False), flush=True)
+    emit_report(name, {"case": name, "nativeReport": result, "processExitCode": child.returncode},
+                write=lambda line: print(line, flush=True))
 print(json.dumps({"recipe": "fictional-windows-vector-render-blank-v1", "observations": observations,
                   "scope": "Independent generated vector main and inline-label control; actual source/blank pipeline. No OCR, model qualification, or negative safety denominator."}, ensure_ascii=False), flush=True)
 # Refusals and execution errors remain explicit. This research exit means the

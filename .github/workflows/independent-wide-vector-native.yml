@@ -35,6 +35,8 @@ jobs:
         shell: pwsh
         run: |
           $fixture = Join-Path $env:RUNNER_TEMP 'independent-wide-owned'
+          python -m unittest discover -s tools/independent-vector-raster-probe -p test_report_transport.py
+          if ($LASTEXITCODE -ne 0) { throw 'Bounded report transport failed' }
           dotnet build tools/independent-vector-raster-probe/Probe.csproj --nologo
           if ($LASTEXITCODE -ne 0) { throw 'Vector probe compile failed' }
           python tools/independent-vector-raster-probe/run.py . $fixture tools/independent-vector-raster-probe/bin/Debug/net10.0-windows10.0.26100.0/Probe.dll
