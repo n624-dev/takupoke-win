@@ -17,7 +17,7 @@ internal static class RecoveryWorkLimits
 public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
 {
     public bool Valid => Width is > 0 and <= 4096 && Height is > 0 and <= 4096 && Bgra.Length == checked(Width * Height * 4);
-    private sealed class PixelWork(CancellationToken token)
+    internal sealed class PixelWork(CancellationToken token)
     {
         private long _pixels;
         public void Step(long amount = 1)
@@ -46,7 +46,7 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
     }
     public bool[] RuleMask(IReadOnlyList<PdfRule> rules, CancellationToken token = default)
         => RuleMask(rules, token, new PixelWork(token));
-    private bool[] RuleMask(IReadOnlyList<PdfRule> rules, CancellationToken token, PixelWork work)
+    internal bool[] RuleMask(IReadOnlyList<PdfRule> rules, CancellationToken token, PixelWork work)
     {
         token.ThrowIfCancellationRequested();
         if (!Valid) throw new InvalidDataException("OCR画像のサイズが不正です。");
@@ -85,11 +85,12 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         for (var i = 0; i < covered.Length; i++) { work.Step(); if (i % 4096 == 0) token.ThrowIfCancellationRequested(); if (!covered[i] && (Bgra[i * 4] != 255 || Bgra[i * 4 + 1] != 255 || Bgra[i * 4 + 2] != 255)) return true; }
         return false;
     }
-    public IReadOnlyList<PdfRule> Rules(CancellationToken token = default)
+    public IReadOnlyList<PdfRule> Rules(CancellationToken token = default) => Rules(token, new PixelWork(token));
+    internal IReadOnlyList<PdfRule> Rules(CancellationToken token, PixelWork work)
     {
         token.ThrowIfCancellationRequested();
         if (!Valid) throw new InvalidDataException("OCR画像のサイズが不正です。");
-        var lines = new List<PdfRule>(); var work = new PixelWork(token);
+        var lines = new List<PdfRule>();
         bool Dark(int x, int y) { work.Step(); var p = (y * Width + x) * 4; return (Bgra[p] + Bgra[p + 1] + Bgra[p + 2]) / 3 < 160; }
         for (var y = 0; y < Height; y++) { token.ThrowIfCancellationRequested(); var start = -1; for (var x = 0; x <= Width; x++) { if (x < Width && Dark(x, y)) { if (start < 0) start = x; } else if (start >= 0) { if (x - start >= Math.Max(40, Width / 40)) lines.Add(new(start, y, x - 1, y)); start = -1; } } }
         for (var x = 0; x < Width; x++) { token.ThrowIfCancellationRequested(); var start = -1; for (var y = 0; y <= Height; y++) { if (y < Height && Dark(x, y)) { if (start < 0) start = y; } else if (start >= 0) { if (y - start >= Math.Max(40, Height / 40)) lines.Add(new(x, start, x, y - 1)); start = -1; } } }
@@ -128,6 +129,13 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         static PdfRule Merge(List<PdfRule> run) => run[0].Vertical ? new(run.Average(l => l.X1), run.Min(l => l.Y1), run.Average(l => l.X2), run.Max(l => l.Y2)) : new(run.Min(l => l.X1), run.Average(l => l.Y1), run.Max(l => l.X2), run.Average(l => l.Y2));
     }
 }
+internal sealed record OcrRecognitionPiece(string Text, int Start, int End, float Confidence);
+internal sealed record OcrRecognitionObservation(RecoveryBox DetectedCrop, RecoveryBox RecognitionCrop,
+    int ValidWidth, int InputWidth, int TimeCount, IReadOnlyList<OcrRecognitionPiece> Pieces)
+{
+    public bool ZeroPieces => Pieces.Count == 0;
+    public bool BelowConfidence => Pieces.Any(p => p.Confidence < .8f);
+}
 /// Independent, CPU-only Japanese OCR for unpackaged Windows. No telemetry,
 /// network transport, package identity or Copilot+ hardware is required.
 public sealed class OnnxJapaneseOcr : IDisposable
@@ -135,6 +143,9 @@ public sealed class OnnxJapaneseOcr : IDisposable
     private readonly InferenceSession _detector, _recognizer;
     private readonly string[] _dictionary;
     public IReadOnlyList<RecoveryBox> RecognizedBoxes { get; private set; } = [];
+    // Opt-in local diagnostics only. No allocation/logging when unset; an
+    // observer never supplies recognition values or bypasses safety guards.
+    internal Action<OcrRecognitionObservation>? RecognitionObserver { get; set; }
     public OnnxJapaneseOcr(string detector, string recognizer, string dictionary)
     {
         Environment.SetEnvironmentVariable("ORT_TELEMETRY_DISABLED", "1");
@@ -173,9 +184,14 @@ public sealed class OnnxJapaneseOcr : IDisposable
             var margin = Math.Max(1, (bottom - top + 1) * .25); var bx = Math.Max(0, (left - margin) * image.Width / dw); var by = Math.Max(0, (top - margin) * image.Height / dh); var ex = Math.Min(image.Width, (right + 1 + margin) * image.Width / dw); var ey = Math.Min(image.Height, (bottom + 1 + margin) * image.Height / dh);
             boxes.Add(new(bx, by, ex - bx, ey - by)); if (boxes.Count > 10000) throw new InvalidDataException("OCR候補数が上限を超えています。");
         }
+        // Complete ORIGINAL connected ink support before recognizer input.
+        // Coverage and CTC geometry use this same crop, never a coverage-only
+        // enlarged rectangle that could conceal omitted disconnected text.
+        var recognitionBoxes = OcrCropCompleteness.Complete(image, boxes, token);
         var output = new List<PdfGlyph>(); var order = 0; var line = 0;
-        foreach (var box in boxes.OrderBy(b => b.Y).ThenBy(b => b.X))
+        foreach (var index in Enumerable.Range(0, recognitionBoxes.Count).OrderBy(i => recognitionBoxes[i].Y).ThenBy(i => recognitionBoxes[i].X))
         {
+            var box = recognitionBoxes[index];
             token.ThrowIfCancellationRequested(); var input = OcrInputTransform.Recognition(image, box, token);
             VerifyRecognitionWidth(input.InputWidth);
             using var recognition = _recognizer.Run([NamedOnnxValue.CreateFromTensor("x", input.Tensor)]); token.ThrowIfCancellationRequested(); var logits = recognition.First().AsTensor<float>();
@@ -188,6 +204,10 @@ public sealed class OnnxJapaneseOcr : IDisposable
             }
             var tCount = logits.Dimensions[1]; var previous = -1; var pieces = new List<(string Text, int Start, int End, float Confidence)>();
             for (var t = 0; t < tCount; t++) { var best = 0; var score = logits[0, t, 0]; for (var c = 1; c < 18385; c++) if (logits[0, t, c] > score) { score = logits[0, t, c]; best = c; } if (best != 0 && best != previous) pieces.Add((_dictionary[best], t, t + 1, score)); else if (best != 0 && pieces.Count > 0) { var last = pieces[^1]; pieces[^1] = last with { End = t + 1, Confidence = Math.Max(last.Confidence, score) }; } previous = best; }
+            // Retain already-computed pieces before the existing refusal. No
+            // extra model call, alternate decoding or confidence adjustment.
+            RecognitionObserver?.Invoke(new(boxes[index], box, input.ValidWidth, input.InputWidth, tCount,
+                Array.AsReadOnly(pieces.Select(p => new OcrRecognitionPiece(p.Text, p.Start, p.End, p.Confidence)).ToArray())));
             if (pieces.Count == 0 || pieces.Any(p => p.Confidence < .8f)) throw new InvalidDataException("OCRで判読できない文字があります。空欄には置き換えません。");
             // CTC time positions are retained as source geometry, never equally
             // spaced boxes inferred from a generated string.
@@ -198,7 +218,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
             }
             line++;
         }
-        token.ThrowIfCancellationRequested(); RecognizedBoxes = boxes; return output;
+        token.ThrowIfCancellationRequested(); RecognizedBoxes = recognitionBoxes; return output;
     }
     public void SmokeTest(CancellationToken token)
     {

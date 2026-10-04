@@ -36,6 +36,23 @@ resize-long/128-stride shape and DB contour/crop processing; those differences
 remain. This change reproduces selected resize/padding behavior, not the full
 official OCR pipeline. It provides no new model-quality or literal-recovery pass.
 
+Before recognition, crops are completed using 8-connected nonwhite pixels in
+the original raster. A component must have exactly one original crop owner;
+its minimal pixel bounds can extend that same recognition input. Unowned
+or shared components, text connected to a physical rule, newly enclosed
+foreign ink, and overlapping crop-supported pixels cause refusal. Rule scans,
+ownership and component traversal share the existing 64-million pixel-work
+limit. No disconnected ink is hidden by enlarging coverage alone. Successful
+coverage uses the exact completed recognition inputs; CTC coordinates use the
+same inputs. This establishes crop support, not correct characters or cells.
+
+An internal observer is unset by default and performs no logging. When a local
+fictional-data diagnostic opts in, it receives the original and completed crop,
+valid/input widths, time count, and already decoded piece text, confidence and
+time interval before the unchanged empty/low-confidence refusal. It supplies
+no recognition output and requires no additional inference. Observer exceptions
+propagate as execution failures; the observer does not bypass safety guards.
+
 Historical full-acquisition and tensor-diagnostic v1 recipes relied on the
 removed nearest/direct-width helper. Their workflow is manual-only and their
 entry point rejects incompatible current source before model installation,
