@@ -138,13 +138,26 @@ public static class RecoveryDocumentBuilder
         else try { trustedSpecial = PdfScheduleParser.Special(pages, materialKind, token); } catch (PdfParseException error) when (error.Stage != "limit") { }
         var sources = atoms.ToDictionary(a => a.Id, a => new RecoverySource(a.Id, "header", a.Page, a.Glyph.Text, a.Box, ocrPages?.Contains(a.Page) == true, a.Glyph.SourceLine, a.Glyph.SourceOrder));
         var cells = new List<RecoveryCell>();
+        // Retain the original order within each page while avoiding repeated
+        // comparisons with every other page's original text and headers.
+        work.Step(atoms.Length + labels.Length + classLabels.Length + dayLabels.Length + periodLabels.Length);
+        var atomsByPage = atoms.GroupBy(a => a.Page).ToDictionary(g => g.Key, g => g.ToArray());
+        var labelsByPage = labels.GroupBy(l => l.Page).ToDictionary(g => g.Key, g => g.ToArray());
+        var classesByPage = classLabels.GroupBy(l => l.Page).ToDictionary(g => g.Key, g => g.ToArray());
+        var daysByPage = dayLabels.GroupBy(l => l.Page).ToDictionary(g => g.Key, g => g.ToArray());
+        var periodsByPage = periodLabels.GroupBy(l => l.Page).ToDictionary(g => g.Key, g => g.ToArray());
+        var usedSlots = new HashSet<RecoverySlot>();
         var usedClass = new Dictionary<string, HashSet<string>>(); var usedDay = new Dictionary<string, HashSet<string>>(); var usedPeriod = new Dictionary<string, HashSet<string>>();
         void Register(Dictionary<string, HashSet<string>> inventory, string key, IEnumerable<string> ids) { if (!inventory.TryGetValue(key, out var set)) inventory[key] = set = []; set.UnionWith(ids); }
         foreach (var (page, pi) in pages.Select((p, i) => (p, i + 1)))
         {
             token.ThrowIfCancellationRequested();
             var grid = new PdfGrid(page, token);
-            var headers = classLabels.Where(l => l.Page == pi).Concat(dayLabels.Where(l => l.Page == pi)).Concat(periodLabels.Where(l => l.Page == pi)).ToArray();
+            var pageAtoms = atomsByPage.GetValueOrDefault(pi, []); var pageLabels = labelsByPage.GetValueOrDefault(pi, []);
+            var pageClasses = classesByPage.GetValueOrDefault(pi, []); var pageDays = daysByPage.GetValueOrDefault(pi, []);
+            var pagePeriods = periodsByPage.GetValueOrDefault(pi, []);
+            work.Step(pageClasses.Length + pageDays.Length + pagePeriods.Length);
+            var headers = pageClasses.Concat(pageDays).Concat(pagePeriods).ToArray();
             var xs = page.Lines.Where(l => l.Vertical).Select(l => l.X1).Distinct().Order().ToArray();
             var ys = page.Lines.Where(l => l.Horizontal).Select(l => l.Y1).Distinct().Order().ToArray();
             if (xs.Length * (long)ys.Length > 250000) throw new InvalidDataException("表の罫線が解析上限を超えています。");
@@ -160,28 +173,29 @@ public static class RecoveryDocumentBuilder
             }
             foreach (var box in boxes.OrderBy(b => b.Y).ThenBy(b => b.X))
             {
-                work.Step(headers.Length + labels.Length * 4L + atoms.Length + cells.Count * (long)maxPeriod * maxPeriod);
+                work.Step(headers.Length + pageLabels.Length * 4L + pageAtoms.Length);
                 // Header cells are not timetable body cells.
                 if (headers.Any(l => box.Contains(l.Box))) continue;
                 Label? Closest(IEnumerable<Label> candidates) => candidates.Where(l => Region(l, box) is not null).OrderBy(l => Region(l, box)!.Axis == RecoveryHeaderAxis.Above ? box.Y - l.Box.Y - l.Box.Height : box.X - l.Box.X - l.Box.Width).FirstOrDefault();
-                var cls = Closest(classLabels.Where(l => l.Page == pi)); var day = Closest(dayLabels.Where(l => l.Page == pi));
+                var cls = Closest(pageClasses); var day = Closest(pageDays);
                 if (cls is null || day is null) continue;
-                var period = periodLabels.Where(l => l.Page == pi && Region(l, box) is not null).GroupBy(l => l.Value).Select(g => Closest(g)!).Where(l => l is not null).ToArray();
+                var period = pagePeriods.Where(l => Region(l, box) is not null).GroupBy(l => l.Value).Select(g => Closest(g)!).Where(l => l is not null).ToArray();
                 if (period.Length == 0) continue;
                 // Multiple left headers in one column are alternatives, not a merged span.
                 var chosenPeriods = period.Where(l => Region(l, box)!.Axis == RecoveryHeaderAxis.Above).ToArray();
                 if (chosenPeriods.Length == 0) chosenPeriods = [Closest(period)!];
                 var slots = chosenPeriods.OrderBy(l => int.Parse(l.Value)).Select(l => new RecoverySlot(cls.Value, day.Value, int.Parse(l.Value))).ToArray();
-                if (cells.Any(c => c.Slots.Any(slots.Contains))) throw new InvalidDataException("時間割の同じ位置に複数のセル候補があります。");
+                work.Step(slots.Length * 2L); // Membership and registration, not a scan of past cells.
+                if (slots.Any(usedSlots.Contains)) throw new InvalidDataException("時間割の同じ位置に複数のセル候補があります。");
                 var id = $"p{pi}c{cells.Count}";
-                var inside = atoms.Where(a => a.Page == pi && box.Contains(a.Box)).ToArray();
+                var inside = pageAtoms.Where(a => box.Contains(a.Box)).ToArray();
                 var empty = inside.Length == 0 && inkFree(pi, box);
                 if (inside.Length == 0 && !empty) throw new InvalidDataException("文字を読めなかったセルを空欄として扱えません。");
                 IReadOnlyList<RecoveryRoleScope> scopes = []; IReadOnlyList<RecoveryLessonBinding> fixedBindings = [];
                 if (!empty)
                 {
-                    work.Step(labels.Length * 3L + inside.Length * 24L);
-                    try { scopes = RoleScopes(id, pi, box, inside, labels, inkFree); }
+                    work.Step(pageLabels.Length * 3L + inside.Length * 24L);
+                    try { scopes = RoleScopes(id, pi, box, inside, pageLabels, inkFree); }
                     catch (InvalidDataException error) when (!RecoveryWorkLimits.IsExceeded(error))
                     {
                         LessonNames? trustedNames = null;
@@ -206,7 +220,7 @@ public static class RecoveryDocumentBuilder
                 { BindingMode = empty || fixedBindings.Count > 0 ? RecoveryBindingMode.Fixed : RecoveryBindingMode.RoleProposal, RoleScopes = scopes, LessonBindings = fixedBindings,
                     ClassHeaderIds = cls.Ids, DayHeaderIds = day.Ids, PeriodHeaderIds = chosenPeriods.SelectMany(l => l.Ids).ToArray(),
                     ClassRegion = Region(cls, box), DayRegion = Region(day, box), PeriodRegions = chosenPeriods.ToDictionary(l => l.Value, l => Region(l, box)!) };
-                cells.Add(cell); Register(usedClass, cls.Value, cls.Ids); Register(usedDay, day.Value, day.Ids);
+                cells.Add(cell); usedSlots.UnionWith(slots); Register(usedClass, cls.Value, cls.Ids); Register(usedDay, day.Value, day.Ids);
                 foreach (var p in chosenPeriods) Register(usedPeriod, p.Value, p.Ids);
             }
         }
