@@ -215,7 +215,15 @@ internal static partial class Program
     {
         Stop(); SeedRecoveryUiAsync(root).GetAwaiter().GetResult();
         var before = DetailStoreAsync(root).GetAwaiter().GetResult();
-        File.Delete(before.Source.Path); Start(executable); OpenRecoveryUiPreview();
+        File.Delete(before.Source.Path); Start(executable);
+        // Offline fixtures deliberately skip the production startup refresh.
+        // Exercise the real acquisition control before expecting its failure UI.
+        Navigate("settings"); Invoke("settings-materials"); Invoke("material-details-Timetable");
+        Wait(() => Find("reacquire-Timetable") is { Current.IsEnabled: true }, "Latest acquisition control is ready");
+        Invoke("reacquire-Timetable");
+        Wait(() => RecoveryUiAcquisitionFailedAsync(root).GetAwaiter().GetResult(), "The real acquisition reports the deleted original");
+        Wait(() => Find("reacquire-Timetable") is { Current.IsEnabled: true }, "The failed acquisition has finished reloading its snapshot");
+        Invoke("recovery-preview-Timetable");
         Wait(() => RecoveryUiText("最新の原本を取得できないため採用できません。資料の詳細から再取得してください。前回の正常結果は保持しています。"),
             "Latest acquisition failure explains why pending recovery cannot be adopted");
         Require(Find("adopt-recovery-Timetable") is null && Find("recovery-original-Timetable") is null,
@@ -227,8 +235,14 @@ internal static partial class Program
         Invoke("reacquire-Timetable");
         Wait(() => DetailStoreAsync(root).GetAwaiter().GetResult().Source.FileIdentity != before.Source.FileIdentity,
             "Restoring the identical selected PDF reacquires its new native file identity");
+        Wait(() => Find("reacquire-Timetable") is { Current.IsEnabled: true }, "The restored acquisition has finished reloading its snapshot");
         Invoke("recovery-preview-Timetable");
         Wait(() => Find("adopt-recovery-Timetable") is not null && Find("recovery-original-Timetable") is not null,
             "Successful identical-byte reacquisition restores confirmation for the same hash-bound preview");
+    }
+    private static async Task<bool> RecoveryUiAcquisitionFailedAsync(string root)
+    {
+        await using var store = new SchoolDataStore(root, new WindowsDpapiProtector()); var lease = await store.BeginAsync();
+        return (await store.ReadAsync<MaterialAttempt>(lease, "acquisition.Timetable"))?.Failure is not null;
     }
 }
