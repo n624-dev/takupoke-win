@@ -30,7 +30,7 @@ public sealed record PdfUnicodeMap(int CodeBytes, IReadOnlyDictionary<int, strin
             if (bytes.Length % 2 != 0 || values.Count >= 65536 || !coveredCodes[code]) throw new PdfParseException("P01");
             string text;
             try { text = new UnicodeEncoding(true, false, true).GetString(bytes); } catch { throw new PdfParseException("P01"); }
-            if (text.Length == 0 || text.Any(char.IsControl) || !values.TryAdd(code, text)) throw new PdfParseException("P01");
+            if (text.Length == 0 || !values.TryAdd(code, text)) throw new PdfParseException("P01");
         }
         while (cursor < tokens.Length)
         {

@@ -40,7 +40,7 @@ public static class PdfPigLayoutReader
                 var paths = new PdfPathEngine(transform, token);
                 var visibility = new VisibilityState();
                 var text = kind == MaterialKind.Timetable ? new PdfTextEngine(token) : null;
-                var resources = Resources(document, page.Dictionary); var fonts = new Dictionary<string, PdfFont>();
+                var resources = Resources(document, page.Dictionary); var fonts = new Dictionary<string, Lazy<PdfFont>>();
                 foreach (var operation in page.Operations)
                 {
                     token.ThrowIfCancellationRequested();
@@ -79,8 +79,13 @@ public static class PdfPigLayoutReader
                     {
                         case SetFontAndSize font:
                             if (!fonts.TryGetValue(font.Font.Data, out var decoded))
-                            { if (fonts.Count >= 128) throw new PdfParseException("limit", number); decoded = ReadFont(document, Resource(document, resources, "Font", font.Font.Data), token); fonts.Add(font.Font.Data, decoded); }
-                            text.SetFont(decoded, font.Size); break;
+                            {
+                                if (fonts.Count >= 128) throw new PdfParseException("limit", number);
+                                var dictionary = Resource(document, resources, "Font", font.Font.Data);
+                                decoded = new Lazy<PdfFont>(() => ReadFont(document, dictionary, token));
+                                fonts.Add(font.Font.Data, decoded);
+                            }
+                            text.SelectFont(decoded, font.Size); break;
                         case ShowText show: text.Show(Bytes(show.Text, show.Bytes)); break;
                         case ShowTextsWithPositioning show:
                             if (show.Array.Count > 100000) throw new PdfParseException("limit", number);

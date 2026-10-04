@@ -8,7 +8,7 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class PdfScheduleParser
 {
-    public const int TimetableVersion = 22;
+    public const int TimetableVersion = 23;
     public const int SpecialVersion = 21;
     private const int MaximumRecords = 10000;
     private static string Joined(IEnumerable<PdfGlyph> glyphs) => string.Concat(glyphs.Select(g => g.Text));

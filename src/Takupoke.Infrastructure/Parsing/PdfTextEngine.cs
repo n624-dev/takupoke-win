@@ -23,7 +23,7 @@ public sealed record PdfFont(PdfUnicodeMap Map, IReadOnlyDictionary<int, double>
 }
 public sealed class PdfTextEngine(CancellationToken cancellationToken = default)
 {
-    private sealed record State(PdfMatrix Ctm, PdfFont? Font = null, double Size = 0, double Spacing = 0, double WordSpacing = 0, double Scale = 1, double Leading = 0, double Rise = 0);
+    private sealed record State(PdfMatrix Ctm, PdfFont? Font = null, double Size = 0, double Spacing = 0, double WordSpacing = 0, double Scale = 1, double Leading = 0, double Rise = 0, Lazy<PdfFont>? DeferredFont = null);
     private State _state = new(PdfMatrix.Identity);
     private readonly Stack<State> _stack = new();
     private PdfMatrix _matrix = PdfMatrix.Identity, _lineMatrix = PdfMatrix.Identity;
@@ -60,18 +60,25 @@ public sealed class PdfTextEngine(CancellationToken cancellationToken = default)
         }
     }
     public void SetFont(PdfFont font, double size)
-    { if (!double.IsFinite(size) || size <= 0) throw new PdfParseException("P01"); _state = _state with { Font = font.Validate(), Size = size }; }
+    { if (!double.IsFinite(size) || size <= 0) throw new PdfParseException("P01"); _state = _state with { Font = font.Validate(), DeferredFont = null, Size = size }; }
+    // Selecting an unused font need not supply text mapping. Every nonempty
+    // showing operation still resolves and validates that exact selected font.
+    internal void SelectFont(Lazy<PdfFont> font, double size)
+    { if (!double.IsFinite(size) || size <= 0) throw new PdfParseException("P01"); _state = _state with { Font = null, DeferredFont = font, Size = size }; }
     public void Adjust(double amount)
     { if (!_inText || !double.IsFinite(amount)) throw new PdfParseException("P01"); _matrix = _matrix.Translate(-amount / 1000 * _state.Size * _state.Scale, 0); }
     public void Show(ReadOnlySpan<byte> bytes)
     {
-        var font = _state.Font;
-        if (!_inText || font is null || _state.Size <= 0 || _state.Scale <= 0 || bytes.Length % font.Map.CodeBytes != 0 || _order + bytes.Length / font.Map.CodeBytes > 100000) throw new PdfParseException("P01");
+        cancellationToken.ThrowIfCancellationRequested();
+        if (!_inText || _state.Font is null && _state.DeferredFont is null || _state.Size <= 0 || _state.Scale <= 0) throw new PdfParseException("P01");
+        if (bytes.IsEmpty) return;
+        var font = _state.Font ?? _state.DeferredFont!.Value;
+        if (bytes.Length % font.Map.CodeBytes != 0 || _order + bytes.Length / font.Map.CodeBytes > 100000) throw new PdfParseException("P01");
         for (var offset = 0; offset < bytes.Length; offset += font.Map.CodeBytes)
         {
             cancellationToken.ThrowIfCancellationRequested();
             var cid = font.Map.CodeBytes == 1 ? bytes[offset] : bytes[offset] * 256 + bytes[offset + 1];
-            if (!font.Map.Values.TryGetValue(cid, out var text) || text.Length == 0 || _units + text.Length > 100000) throw new PdfParseException("P01");
+            if (!font.Map.Values.TryGetValue(cid, out var text) || text.Length == 0 || text.Any(char.IsControl) || _units + text.Length > 100000) throw new PdfParseException("P01");
             var width = font.Widths.GetValueOrDefault(cid, font.DefaultWidth) / 1000 * _state.Size;
             var total = _matrix.FollowedBy(_state.Ctm); var bottom = font.Descent / 1000 * _state.Size + _state.Rise; var top = font.Ascent / 1000 * _state.Size + _state.Rise;
             var points = new[] { total.Point(0, bottom), total.Point(width * _state.Scale, bottom), total.Point(0, top), total.Point(width * _state.Scale, top) };
