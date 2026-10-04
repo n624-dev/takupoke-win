@@ -115,12 +115,46 @@ internal static partial class Program
             Invoke(ByName("閉じる"));
             Wait(() => _window!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.NameProperty, "閉じる"), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button))) is null, "product document closes before opening the picker");
             Invoke("back-settings"); Invoke("settings-materials");
-            var selectedPdf = Path.Combine(args[1], "fictional-selection.pdf");
+            var selectedName = "fictional-selection-" + Guid.NewGuid().ToString("N") + ".pdf";
+            var selectedPdf = Path.Combine(args[1], selectedName);
             File.WriteAllText(selectedPdf, "%PDF-1.7\n% Entirely synthetic malformed PDF for selection persistence.\n", Encoding.ASCII);
-            PickMaterial(selectedPdf);
-            Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "picker selection is saved even when parsing fails");
-            PickMaterial(null);
-            Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "canceling the picker preserves the previous selection");
+            var previousSelection = ReadPickerSelectionAsync(args[1]).GetAwaiter().GetResult();
+            SourceRecord? selected = null;
+            try
+            {
+                PickMaterial(selectedPdf);
+                var expectedDigest = NotificationDiff.Digest(File.ReadAllBytes(selectedPdf));
+                Wait(() => (selected = ReadPickerSelectionAsync(args[1]).GetAwaiter().GetResult()) is { } current
+                    && current.Id != previousSelection?.Id && current.Kind == MaterialKind.Exam
+                    && string.Equals(Path.GetFullPath(current.Path), Path.GetFullPath(selectedPdf), StringComparison.OrdinalIgnoreCase)
+                    && current.Digest == expectedDigest, "This picker invocation commits its unique original and digest");
+                Wait(() => Find("select-material-Exam")?.Current.IsEnabled == true, "The new selection finishes parsing and reloading before cancel is tested");
+                ShowPickerSummary();
+                Wait(() => Visible("material-summary-Exam") && Find("material-summary-Exam")?.Current.Name.Contains(selectedName, StringComparison.Ordinal) == true, "picker selection is saved even when parsing fails");
+                PickMaterial(null);
+                Wait(() => Find("select-material-Exam")?.Current.IsEnabled == true, "The cancelled picker returns to its completed material page");
+                var afterCancel = ReadPickerSelectionAsync(args[1]).GetAwaiter().GetResult();
+                Require(afterCancel is not null && selected is not null && afterCancel.Id == selected.Id && afterCancel.Kind == selected.Kind
+                    && afterCancel.Path == selected.Path && afterCancel.Digest == selected.Digest && afterCancel.FileIdentity == selected.FileIdentity,
+                    "Cancel preserves the exact committed source identity, kind, path and digest");
+                ShowPickerSummary();
+                Wait(() => Visible("material-summary-Exam") && Find("material-summary-Exam")?.Current.Name.Contains(selectedName, StringComparison.Ordinal) == true, "canceling the picker preserves the previous selection");
+            }
+            catch
+            {
+                try
+                {
+                    Console.Error.WriteLine("Fictional picker diagnostic: " + JsonSerializer.Serialize(new { expectedName = selectedName, committed = selected,
+                        actual = ReadPickerSelectionAsync(args[1]).GetAwaiter().GetResult(), summary = Find("material-summary-Exam")?.Current.Name,
+                        summaryVisible = Visible("material-summary-Exam"), operationReady = Find("select-material-Exam")?.Current.IsEnabled,
+                        activeDialogs = _window!.FindAll(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window),
+                            new PropertyCondition(AutomationElement.ClassNameProperty, "#32770"))).Cast<AutomationElement>().Take(5)
+                            .Select(e => new { handle = e.Current.NativeWindowHandle, title = e.Current.Name, enabled = e.Current.IsEnabled }).ToArray() }));
+                    Capture("fictional-picker-persistence-failure");
+                }
+                catch (Exception diagnosticFailure) { Console.Error.WriteLine("Picker diagnostic unavailable: " + diagnosticFailure.GetType().Name); }
+                throw;
+            }
             Invoke("back-settings");
             Invoke("settings-materials");
             Wait(() => Find("material-summary-Timetable")?.Current.Name.EndsWith("取得失敗（前回結果あり）", StringComparison.Ordinal) == true, "An unavailable source retains its accepted analysis and shows the same failure state as iOS");
@@ -209,7 +243,8 @@ internal static partial class Program
             Require(SavedSettings(preferences).OpeningMode == initialOpeningMode, "A to B to A link-opening choice survives app restart.");
             Require(TextColor("page-settings") == bodyColor, "Restart retains theme text color.");
             Invoke("settings-materials");
-            Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "file selected through the native picker survives restart");
+            ShowPickerSummary();
+            Wait(() => Find("material-summary-Exam")?.Current.Name.Contains(selectedName, StringComparison.Ordinal) == true, "file selected through the native picker survives restart");
             CheckRecoveryUi(args[0], args[1]);
             CheckDetailSnapshotUpdates(args[0], args[1]);
             Console.WriteLine($"Passed {_checks} Windows UI checks: hierarchical settings, desktop timetable geometry, raw and OS URI callbacks, fake OIDC verification and three datasets, failure/cancellation recovery, transient footer, persistence, colors, pointer and keyboard operations.");
@@ -434,6 +469,21 @@ internal static partial class Program
         return (await store.ReadAsync<SavedLinks>(lease, "api.links"))?.Revision == expected
             && (await store.ReadAsync<SavedMapping>(lease, "api.mapping"))?.Revision == expected
             && (await store.ReadAsync<SavedTimes>(lease, "api.times"))?.Revision == expected;
+    }
+    private static async Task<SourceRecord?> ReadPickerSelectionAsync(string root)
+    {
+        await using var store = new SchoolDataStore(root, new WindowsDpapiProtector()); var lease = await store.BeginAsync();
+        return await store.ReadAsync<SourceRecord>(lease, "selection.Exam");
+    }
+    private static void ShowPickerSummary()
+    {
+        var page = WaitElement("page-scroller");
+        if (!page.TryGetCurrentPattern(ScrollPattern.Pattern, out var pattern) || !((ScrollPattern)pattern).Current.VerticallyScrollable) return;
+        for (var step = 0; step <= 10 && !Visible("material-summary-Exam"); step++)
+        {
+            ((ScrollPattern)pattern).SetScrollPercent(ScrollPattern.NoScroll, step * 10);
+            System.Threading.Thread.Sleep(75);
+        }
     }
     private static void SendCallback(string executable, string callback, bool shell)
     {
@@ -697,8 +747,10 @@ internal static partial class Program
         }
         var button = dialog!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button), new PropertyCondition(AutomationElement.AutomationIdProperty, path is null ? "2" : "1")));
         if (button is null) throw new InvalidOperationException("Native file picker action was not found.");
-        Invoke(button);
-        Wait(() => { try { return !dialog.Current.IsEnabled || dialog.Current.NativeWindowHandle == 0; } catch (ElementNotAvailableException) { return true; } }, "native file picker closes");
+        var pickerHandle = dialog!.Current.NativeWindowHandle;
+        if (pickerHandle == 0 || !IsWindowVisible(pickerHandle)) throw new InvalidOperationException("The selected native picker window is not visible.");
+        ((InvokePattern)button.GetCurrentPattern(InvokePattern.Pattern)).Invoke();
+        Wait(() => !IsWindowVisible(pickerHandle), "native file picker actually disappears");
     }
     private static void PointerClick(AutomationElement element)
     {
