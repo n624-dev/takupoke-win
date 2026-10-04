@@ -1,0 +1,328 @@
+{
+  "classification": "Confirmed deterministic Builder refusal; no completed formal result and no saved adoption",
+  "replay": "Original captured scaled vector glyphs/physical rules plus SHA-verified actual Windows BGRA; no render/OCR/model rerun",
+  "instrumentation": "Off-repo copy of exact Builder changes exception diagnostics only, no selection/guards/input/output semantics",
+  "trace": {
+    "currentBox": {
+      "X": 103.80078636959371,
+      "Y": 119.6040404040404,
+      "Width": 112.69921363040629,
+      "Height": 37.395959595959596,
+      "Valid": true
+    },
+    "currentClass": {
+      "Value": "1_1",
+      "Page": 1,
+      "Box": {
+        "X": 25.163826998689384,
+        "Y": 81.83434343434342,
+        "Width": 78.33617300131061,
+        "Height": 112.66565656565658,
+        "Valid": true
+      },
+      "Ids": [
+        "p1s62",
+        "p1s91"
+      ]
+    },
+    "currentSlots": [
+      {
+        "ClassName": "1_1",
+        "Day": "1",
+        "Period": 1
+      }
+    ],
+    "pageClasses": [
+      {
+        "Value": "1_1",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 81.83434343434342,
+          "Width": 78.33617300131061,
+          "Height": 112.66565656565658,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s62",
+          "p1s91"
+        ]
+      },
+      {
+        "Value": "1_2",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 81.83434343434342,
+          "Width": 78.33617300131061,
+          "Height": 112.66565656565658,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s91",
+          "p1s63"
+        ]
+      },
+      {
+        "Value": "1_3",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 81.83434343434342,
+          "Width": 78.33617300131061,
+          "Height": 112.66565656565658,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s91",
+          "p1s64"
+        ]
+      },
+      {
+        "Value": "2_CN",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 195.14343434343434,
+          "Width": 78.33617300131061,
+          "Height": 112.85656565656566,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s65",
+          "p1s66",
+          "p1s92"
+        ]
+      },
+      {
+        "Value": "2_ES",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 195.14343434343434,
+          "Width": 78.33617300131061,
+          "Height": 112.85656565656566,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s92",
+          "p1s67",
+          "p1s68"
+        ]
+      },
+      {
+        "Value": "2_IT",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 195.14343434343434,
+          "Width": 78.33617300131061,
+          "Height": 112.85656565656566,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s92",
+          "p1s69",
+          "p1s70"
+        ]
+      },
+      {
+        "Value": "3_CN",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 308.4525252525252,
+          "Width": 78.33617300131061,
+          "Height": 112.54747474747478,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s71",
+          "p1s72",
+          "p1s93"
+        ]
+      },
+      {
+        "Value": "3_ES",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 308.4525252525252,
+          "Width": 78.33617300131061,
+          "Height": 112.54747474747478,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s93",
+          "p1s73",
+          "p1s74"
+        ]
+      },
+      {
+        "Value": "3_IT",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 308.4525252525252,
+          "Width": 78.33617300131061,
+          "Height": 112.54747474747478,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s93",
+          "p1s75",
+          "p1s76"
+        ]
+      },
+      {
+        "Value": "4_CN",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 421.76161616161613,
+          "Width": 78.33617300131061,
+          "Height": 112.73838383838387,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s77",
+          "p1s78",
+          "p1s94"
+        ]
+      },
+      {
+        "Value": "4_ES",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 421.76161616161613,
+          "Width": 78.33617300131061,
+          "Height": 112.73838383838387,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s94",
+          "p1s79",
+          "p1s80"
+        ]
+      },
+      {
+        "Value": "4_IT",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 421.76161616161613,
+          "Width": 78.33617300131061,
+          "Height": 112.73838383838387,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s94",
+          "p1s81",
+          "p1s82"
+        ]
+      },
+      {
+        "Value": "5_CN",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 535.070707070707,
+          "Width": 78.33617300131061,
+          "Height": 112.92929292929296,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s83",
+          "p1s84",
+          "p1s95"
+        ]
+      },
+      {
+        "Value": "5_ES",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 535.070707070707,
+          "Width": 78.33617300131061,
+          "Height": 112.92929292929296,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s95",
+          "p1s85",
+          "p1s86"
+        ]
+      },
+      {
+        "Value": "5_IT",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 535.070707070707,
+          "Width": 78.33617300131061,
+          "Height": 112.92929292929296,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s95",
+          "p1s87",
+          "p1s88"
+        ]
+      },
+      {
+        "Value": "AI_1",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 648.3797979797979,
+          "Width": 78.33617300131061,
+          "Height": 75.1202020202021,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s89",
+          "p1s96",
+          "p1s97"
+        ]
+      },
+      {
+        "Value": "AI_2",
+        "Page": 1,
+        "Box": {
+          "X": 25.163826998689384,
+          "Y": 648.3797979797979,
+          "Width": 78.33617300131061,
+          "Height": 75.1202020202021,
+          "Valid": true
+        },
+        "Ids": [
+          "p1s96",
+          "p1s97",
+          "p1s90"
+        ]
+      }
+    ],
+    "existing": [
+      {
+        "Id": "p1c0",
+        "Box": {
+          "X": 103.80078636959371,
+          "Y": 81.83434343434342,
+          "Width": 56.19921363040629,
+          "Height": 37.165656565656576,
+          "Valid": true
+        },
+        "Slots": [
+          {
+            "ClassName": "1_1",
+            "Day": "1",
+            "Period": 1
+          }
+        ]
+      }
+    ]
+  },
+  "cause": "Legacy class header combines vertically merged grade box with each individual department row; 1_1/1_2/1_3 candidates have identical header bounds, so second physical row selects first class 1_1 and existing same period slot",
+  "limits": "No bbox clipping, header-evidence relocation, collision-guard removal or Validator weakening. Stronger separate grade/department ownership proof would be needed for recovery; normal unlabeled Strict source already succeeds."
+}

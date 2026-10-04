@@ -1,0 +1,22 @@
+{
+  "commit": "107bb396608dcac0ef22c3096069ccf1f6c2a4e2",
+  "runId": 37221677121,
+  "originalMissingRun": 37221204309,
+  "sourceFiles": {
+    ".github/workflows/independent-wide-vector-native.yml": "da431b3f541704e17e30768bf97102d20ac2d531e0594ff3c03fe5c128e1bc64",
+    "tools/independent-vector-raster-probe/run.py": "a2ab53f432fd47a725eb1218c224b6dd16ea88830ad50ba036d4408e87cf48b3",
+    "tools/independent-vector-raster-probe/report_transport.py": "d735584b817c1ca8cbaa77fe75a4b74cac40f74849bcb12cc8d97f16ef3e794e",
+    "tools/independent-vector-raster-probe/test_report_transport.py": "810e85fefd88a31823c6844ff8da328dbefea891a6c67d114f18efd7dadd4687",
+    "tools/independent-vector-raster-probe/README.md": "daecdd78cad3d9c8953d98d52d1f6721afecfcbf8a08af0ef407618d5d6aa523"
+  },
+  "testsPassed": 4,
+  "changes": "console reporting only; same two PDF SHA/reader/renderer/blank/Builder/Validator/formal and no OCR/model; parser separate reviewed commit changes ambiguous negative only",
+  "expectedRequiredReportIds": [
+    "unlabeled",
+    "labeled-control"
+  ],
+  "rawChunkBytes": 4096,
+  "maxEncodedLineBytes": 8192,
+  "rawReportBound": 67108864,
+  "testLogSha256": "7926728658ddf2bf527023750a1a9bdaf2c602b4e4a723c944deea18276d56bb"
+}

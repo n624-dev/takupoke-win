@@ -1,0 +1,44 @@
+{
+  "runId": 37221640656,
+  "sourceCommit": "8e7b5bbdbf00f032daace6dd34bbc680fb144285",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "id": 111493007328,
+      "name": "Public files and commit identity",
+      "conclusion": "success"
+    },
+    {
+      "id": 111493029000,
+      "name": "Original iOS reference comparison",
+      "conclusion": "success"
+    },
+    {
+      "id": 111493029001,
+      "name": "WinUI x64 Debug build",
+      "conclusion": "success"
+    },
+    {
+      "id": 111493029041,
+      "name": "Core tests (Windows)",
+      "conclusion": "success"
+    },
+    {
+      "id": 111493029060,
+      "name": "WinUI x64 Release build and launch",
+      "conclusion": "success"
+    },
+    {
+      "id": 111493029082,
+      "name": "WinUI ARM64 Release build",
+      "conclusion": "success"
+    },
+    {
+      "id": 111493029091,
+      "name": "Core tests (Linux)",
+      "conclusion": "success"
+    }
+  ],
+  "nativeMeasurementSourceCommit": "107bb396608dcac0ef22c3096069ccf1f6c2a4e2",
+  "productionSourceEqual": "107bb396 changes only research transport/workflow/doc versus reviewed8e7b5bb; no extra normalCI rerun"
+}
