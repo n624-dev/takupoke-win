@@ -1,0 +1,66 @@
+{
+  "scope": "new helpers and minimal default-run/cascade source context only",
+  "sourceReview": "no concrete blocker",
+  "meaningTests": {
+    "passed": 12,
+    "failed": 0,
+    "nativeModelCalls": 0
+  },
+  "facts": [
+    "RGB255 outer margins only removed before same recognition invocation",
+    "all original nonwhite pixels including gray254 retained",
+    "outside coordinates never clamped for acceptance",
+    "physical rules obtained from actual unchanged production Raster Rules/RuleMask without semantic gold",
+    "rule/crosscell/outside/sharedink disqualify proposed sources",
+    "raw native recognition retained as diagnostic even when source fails",
+    "model session outputs returned unchanged; softmax is explicit uncalibrated diagnostic only",
+    "no mask/NMS/threshold/source-text correction"
+  ],
+  "limitations": [
+    "retained-source ownership is not full global ink/whole formal proof",
+    "white trimming does not fix arbitrary detector parent incompleteness",
+    "whole-line UTF8 span interface and duplicate ownership remain separate issues"
+  ],
+  "files": [
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/pixel_trim.py",
+      "bytes": 4159,
+      "sha256": "5ba2b420b0f833a85ab1d4c10736004b35891ab2690a0cc1571125ed81a7a62e"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/run_trim.py",
+      "bytes": 7269,
+      "sha256": "a2088e673b128ee914825751fb575b9f3d14520e6cb13d15785dad94b1764c24"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/token_stats.py",
+      "bytes": 1288,
+      "sha256": "4e5f99cdd702423b14195354cd4549e1ff7c701ce3459b3d089ebf886be8b96b"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/rules-probe/Program.cs",
+      "bytes": 1229,
+      "sha256": "94d58f229e09bbd8bb9bd389a5ac9fbe9b738f1260bd904e9b0ccba3e10aca1f"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/supervise_trim.py",
+      "bytes": 2653,
+      "sha256": "795c56acf0835b3985668d468db0260d723fbec2e1fc25285d745d71e1693743"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/test_pixel_trim.py",
+      "bytes": 2358,
+      "sha256": "e0011d2d9561fc8888029441a07d6af9e015477d7c716b218d97a5325dd5ab08"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/test_token_stats.py",
+      "bytes": 1260,
+      "sha256": "e89c0b7d795f2576fda49661cb04a34929f538bb30e3878251d8be75bfd6f696"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/recipe-spec.json",
+      "bytes": 1682,
+      "sha256": "0541d5f7ec1ac24a0c31dba33d02db29686cf7e9165ab4787b701c2b7184d782"
+    }
+  ]
+}

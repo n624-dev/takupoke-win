@@ -1,0 +1,17 @@
+{
+  "engine": "ndl",
+  "command": [
+    "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/env/bin/python",
+    "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/run_ndl.py",
+    "/workspace/recovery-research/windows-nonpaddle-ocr-20261004"
+  ],
+  "exitCode": 0,
+  "stopReason": null,
+  "elapsedSeconds": 9.752597301005153,
+  "sampledOwnedProcessTreePeakRSSBytes": 889761792,
+  "RSSsamples": 68,
+  "memoryScope": "sampled sum current own process-tree RSS, shared pages may be double counted; not global RAM or physical-device minimum",
+  "rawBytes": 83002,
+  "rawSHA256": "b0cfba054d18812a7f0e896357b5c05eb7b59f1cff754380f2a28e93332956ca",
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

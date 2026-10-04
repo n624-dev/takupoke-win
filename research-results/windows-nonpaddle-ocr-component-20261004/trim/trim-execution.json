@@ -1,0 +1,16 @@
+{
+  "engine": "trim",
+  "command": [
+    "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/env/bin/python",
+    "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/run_trim.py"
+  ],
+  "exitCode": 0,
+  "stopReason": null,
+  "elapsedSeconds": 9.970189596991986,
+  "sampledOwnedProcessTreePeakRSSBytes": 898084864,
+  "RSSsamples": 69,
+  "memoryScope": "sampled sum current own process-tree RSS, shared pages may be double counted; not global RAM or physical-device minimum",
+  "rawBytes": 1035230,
+  "rawSHA256": "77ad2309755b63ccd9c5099461769ed7dc6429d71fb0d369af1e63a494347748",
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

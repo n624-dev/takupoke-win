@@ -1,0 +1,26 @@
+{
+  "diagnosticOnly": true,
+  "primaryResultSHA256": "3bdd253f3d8b8807b0fbb2b2a3386f6cd03746795bf00b6cd21b93a04cb825f8",
+  "summary": [
+    {
+      "condition": "clear",
+      "fields": 24,
+      "rawConcatColonOnlyExact": 18,
+      "singleCandidateColonOnlyExact": 24,
+      "nativePixelDerivedFieldBandContained": 24,
+      "strictTuplesExact": 0,
+      "wholeSourceAdoptionEligible": false,
+      "unambiguousOwnership": "not whole formal qualification"
+    },
+    {
+      "condition": "small",
+      "fields": 24,
+      "rawConcatColonOnlyExact": 24,
+      "singleCandidateColonOnlyExact": 0,
+      "nativePixelDerivedFieldBandContained": 24,
+      "strictTuplesExact": 0,
+      "wholeSourceAdoptionEligible": false,
+      "unambiguousOwnership": "not whole formal qualification"
+    }
+  ]
+}

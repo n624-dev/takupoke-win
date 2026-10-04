@@ -1,0 +1,48 @@
+[
+  {
+    "condition": "clear",
+    "cascadeModelIndex": 0,
+    "actualRecognitionROI": [
+      624,
+      142,
+      821,
+      166
+    ],
+    "tensorSHA256": "a0a42b91c9f867afa9f26994bb120c44f96b41a6ccab69eb778b59d77dc2be97",
+    "token": {
+      "timeIndex": 7,
+      "actualArgmaxID": 4492,
+      "actualArgmaxText": "紫",
+      "argmaxLogit": 27.466039657592773,
+      "runnerUpLogit": 19.781494140625,
+      "logitMargin": 7.684545516967773,
+      "derivedArgmaxSoftmax": 0.9991076115446061,
+      "beforeFirstEOS": true
+    },
+    "noOriginalCharacterBox": true,
+    "softmaxIsUncalibrated": true
+  },
+  {
+    "condition": "small",
+    "cascadeModelIndex": 0,
+    "actualRecognitionROI": [
+      702,
+      142,
+      782,
+      158
+    ],
+    "tensorSHA256": "80ee959b998b66a0db9adcb2b6ed238768805a81ee7db57dc414c025fe0bb22a",
+    "token": {
+      "timeIndex": 4,
+      "actualArgmaxID": 4492,
+      "actualArgmaxText": "紫",
+      "argmaxLogit": 24.007089614868164,
+      "runnerUpLogit": 18.477968215942383,
+      "logitMargin": 5.529121398925781,
+      "derivedArgmaxSoftmax": 0.9933575150908975,
+      "beforeFirstEOS": true
+    },
+    "noOriginalCharacterBox": true,
+    "softmaxIsUncalibrated": true
+  }
+]

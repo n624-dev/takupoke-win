@@ -1,0 +1,24 @@
+{
+  "sourceCommit": "ae07e47fa68faeef210934b9f3688d6974587094",
+  "minimumActualOCRSource": [
+    {
+      "file": "OnnxJapaneseOcr.cs",
+      "sha256": "cba2dab6892802b94b38487c736ecb21d1a4a7d256ac7cb61b1d05fd076571b6",
+      "bytes": 19775
+    },
+    {
+      "file": "OcrInputTransform.cs",
+      "sha256": "5242f91554c370d135b00e4e6cde00d9ec2a826ee85a5306d4aa0a29bd8951df",
+      "bytes": 5647
+    },
+    {
+      "file": "OcrCropCompleteness.cs",
+      "sha256": "cd2ca77d976855da1eb80739d040b11b6e311e85a4104c5477ddc1005f4bd182",
+      "bytes": 6003
+    }
+  ],
+  "isolatedBuild": true,
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "productionEdited": false
+}

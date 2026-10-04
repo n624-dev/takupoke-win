@@ -1,0 +1,62 @@
+{
+  "files": [
+    {
+      "repo": "ndl-lab/ndlocr-lite",
+      "revision": "636d1cfeb1331f89f4048f416e49e23a09a714b5",
+      "path": "src/model/deim-s-1024x1024.onnx",
+      "localPath": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/deim-s-1024x1024.onnx",
+      "bytes": 40256763,
+      "sha256": "c156ce0c4e704bc3bf7e4016d0a87b949cffa8b3724f4b4cc696b8284c3c7373",
+      "gitBlobSHA": "1a446d4d440ff670f984898a20b8f85fa8b6b284",
+      "license": "CC-BY-4.0",
+      "URL": "https://raw.githubusercontent.com/ndl-lab/ndlocr-lite/636d1cfeb1331f89f4048f416e49e23a09a714b5/src/model/deim-s-1024x1024.onnx"
+    },
+    {
+      "repo": "ndl-lab/ndlocr-lite",
+      "revision": "636d1cfeb1331f89f4048f416e49e23a09a714b5",
+      "path": "src/model/parseq-ndl-24x256-30-tiny-189epoch-tegaki3-r8data-202604.onnx",
+      "localPath": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/parseq-ndl-24x256-30-tiny-189epoch-tegaki3-r8data-202604.onnx",
+      "bytes": 36457393,
+      "sha256": "9e651bae4c1a4d5254da1127e86e82e21ef62d5339b37e62d4a3d3d30831772d",
+      "gitBlobSHA": "d9ce8c85009e746298708678b220a4805c09e6ca",
+      "license": "CC-BY-4.0",
+      "URL": "https://raw.githubusercontent.com/ndl-lab/ndlocr-lite/636d1cfeb1331f89f4048f416e49e23a09a714b5/src/model/parseq-ndl-24x256-30-tiny-189epoch-tegaki3-r8data-202604.onnx"
+    },
+    {
+      "repo": "ndl-lab/ndlocr-lite",
+      "revision": "636d1cfeb1331f89f4048f416e49e23a09a714b5",
+      "path": "src/model/parseq-ndl-24x384-50-tiny-300epoch-tegaki3-r8data-202604.onnx",
+      "localPath": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/parseq-ndl-24x384-50-tiny-300epoch-tegaki3-r8data-202604.onnx",
+      "bytes": 37808553,
+      "sha256": "49cea9db4552f19eb05c8ee202fcf74714977749b2f4c9376b127fde41b07a99",
+      "gitBlobSHA": "2d465ad8546a9daa8fb53d3828d1c9ae653d671d",
+      "license": "CC-BY-4.0",
+      "URL": "https://raw.githubusercontent.com/ndl-lab/ndlocr-lite/636d1cfeb1331f89f4048f416e49e23a09a714b5/src/model/parseq-ndl-24x384-50-tiny-300epoch-tegaki3-r8data-202604.onnx"
+    },
+    {
+      "repo": "ndl-lab/ndlocr-lite",
+      "revision": "636d1cfeb1331f89f4048f416e49e23a09a714b5",
+      "path": "src/model/parseq-ndl-24x768-100-tiny-153epoch-tegaki3-r8data-202604.onnx",
+      "localPath": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/parseq-ndl-24x768-100-tiny-153epoch-tegaki3-r8data-202604.onnx",
+      "bytes": 42588187,
+      "sha256": "06462b0dbd5b0b8508545c8c3d485cf20dbf4ffa652fe145e69c9e7457080602",
+      "gitBlobSHA": "f2813e712b34e1e0f94a3c6ba10e6ed637746149",
+      "license": "CC-BY-4.0",
+      "URL": "https://raw.githubusercontent.com/ndl-lab/ndlocr-lite/636d1cfeb1331f89f4048f416e49e23a09a714b5/src/model/parseq-ndl-24x768-100-tiny-153epoch-tegaki3-r8data-202604.onnx"
+    },
+    {
+      "repo": "tesseract-ocr/tessdata_best",
+      "revision": "e12c65a915945e4c28e237a9b52bc4a8f39a0cec",
+      "path": "jpn.traineddata",
+      "localPath": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/tess-models/jpn.traineddata",
+      "bytes": 14330109,
+      "sha256": "36bdf9ac823f5911e624c30d0553e890b8abc7c31a65b3ef14da943658c40b79",
+      "gitBlobSHA": "d2a8eab80ba3aba7654ac789b82f70b64d1cf051",
+      "license": "Apache-2.0",
+      "URL": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_best/e12c65a915945e4c28e237a9b52bc4a8f39a0cec/jpn.traineddata"
+    }
+  ],
+  "totalBytes": 171441005,
+  "nativeInferenceExecuted": false,
+  "sampleImageDownloaded": false
+}

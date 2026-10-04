@@ -1,0 +1,457 @@
+{
+  "recipe": "nonpaddle-horizontal-component-v1",
+  "nativeInferenceExecuted": true,
+  "sourceIndependentAfterRecipe": true,
+  "originalsOrSampleImagesAcquired": false,
+  "pins": [
+    {
+      "path": "/usr/bin/tesseract",
+      "bytes": 51536,
+      "sha256": "74b76a5b994adcc18be362bf64ed5118082b2401d5d9a35242e92fc4c62e2b4b"
+    },
+    {
+      "path": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "bytes": 19484784,
+      "sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a"
+    },
+    {
+      "path": "/workspace/recovery-research/artifacts/ocr-det.onnx",
+      "bytes": 4826518,
+      "sha256": "a431985659dc921974177a95adcfbb90fd9e51989a5e04d70d0b75f597b6e61d"
+    },
+    {
+      "path": "/workspace/recovery-research/artifacts/ocr-rec.onnx",
+      "bytes": 16534782,
+      "sha256": "da72dc72ca4dc220df0dfde68c1dedc31c58d3e76a25871122e5056227d50092"
+    },
+    {
+      "path": "/workspace/recovery-research/ocr-non-paddle-fresh-source-high-20261004/README.md",
+      "bytes": 2101,
+      "sha256": "b95d43b4bd80e13de1baead2851485b57a032780019baa51a7b6ebbba63b2e5f"
+    },
+    {
+      "path": "/workspace/recovery-research/ocr-non-paddle-fresh-source-high-20261004/drawing-source.json",
+      "bytes": 3451,
+      "sha256": "b0ccafbd534a6c51f5d1bf870c2bd6a29775443dc609313a88f138674cf1445e"
+    },
+    {
+      "path": "/workspace/recovery-research/ocr-non-paddle-fresh-source-high-20261004/font-license.txt",
+      "bytes": 4383,
+      "sha256": "eb5a2a88566ca8ef61f20f7cddd3fec621cf3a017ecf363a92740590a9b8870c"
+    },
+    {
+      "path": "/workspace/recovery-research/ocr-non-paddle-fresh-source-high-20261004/frozen.json",
+      "bytes": 2732,
+      "sha256": "59160b66b1056003ca5a2823d20aaba0b29d4884d2aae296bb95ee2253af9c81"
+    },
+    {
+      "path": "/workspace/recovery-research/ocr-non-paddle-fresh-source-high-20261004/generate.py",
+      "bytes": 6146,
+      "sha256": "d22c479d9b1dd62cc76fe71c7f0a1fd4fa43cea9dc8c26ddff403ad9d2c31ba2"
+    },
+    {
+      "path": "/workspace/recovery-research/ocr-non-paddle-fresh-source-high-20261004/input-preflight-receipt.json",
+      "bytes": 1587,
+      "sha256": "62054e2f409346fd30b9cd690cd6d366f0c795e17edebe67187017c7f6e7143e"
+    },
+    {
+      "path": "/workspace/recovery-research/ocr-non-paddle-fresh-source-high-20261004/literal-position-oracle.json",
+      "bytes": 110283,
+      "sha256": "d4ce7a1a1c5236f224b74bed6872d603e625dd39d7a07f310d261610cc5ed068"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/model-artifacts-frozen.json",
+      "bytes": 3605,
+      "sha256": "9393a0ca21a66b3701173cfeaf8a51a42d98df7bd1fef1d25aa34961d0794a48"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/native-inputs.json",
+      "bytes": 964,
+      "sha256": "243c758b6510520f0a5d58931f166ed57acb11da47877f8af07e04fa20a7e714"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/config/NDLmoji.yaml",
+      "bytes": 42434,
+      "sha256": "f6ad5a2de444b495155866af811cf1a98309dcae3225db802767ea531a2dc529"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/config/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/config/ndl.yaml",
+      "bytes": 299,
+      "sha256": "0c2a6a184dd322375b76f2ce3842f8ac555d53edad0ab63655c013f4c471c5a0"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/deim.py",
+      "bytes": 8032,
+      "sha256": "b745278585306c351579b85c257e385a2618bb57b59261848fad80b4265b29d8"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/deim-s-1024x1024.onnx",
+      "bytes": 40256763,
+      "sha256": "c156ce0c4e704bc3bf7e4016d0a87b949cffa8b3724f4b4cc696b8284c3c7373"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/parseq-ndl-24x256-30-tiny-189epoch-tegaki3-r8data-202604.onnx",
+      "bytes": 36457393,
+      "sha256": "9e651bae4c1a4d5254da1127e86e82e21ef62d5339b37e62d4a3d3d30831772d"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/parseq-ndl-24x384-50-tiny-300epoch-tegaki3-r8data-202604.onnx",
+      "bytes": 37808553,
+      "sha256": "49cea9db4552f19eb05c8ee202fcf74714977749b2f4c9376b127fde41b07a99"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/parseq-ndl-24x768-100-tiny-153epoch-tegaki3-r8data-202604.onnx",
+      "bytes": 42588187,
+      "sha256": "06462b0dbd5b0b8508545c8c3d485cf20dbf4ffa652fe145e69c9e7457080602"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/ndl_parser.py",
+      "bytes": 43421,
+      "sha256": "abe329084b3bc11bf57f330ffe057a610f672a3dd6f691e631f3339098a10997"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/ocr.py",
+      "bytes": 54702,
+      "sha256": "9e3e6cf0c082c5c6cb492f1ca4a9e067133ee07f081c37d81fa2b2d3a1a9b54b"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/optional_features/__init__.py",
+      "bytes": 1647,
+      "sha256": "2e73ea42892121443f7e18796ff1f1b07dd7bbd67a1901ad531fc51459ad8ce5"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/parseq.py",
+      "bytes": 3512,
+      "sha256": "638066d19ded10e63046e7448fe956ba25a97d0d143f9ba6f1bbaaea0c3ba6a7"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/pdf_output_utils.py",
+      "bytes": 2305,
+      "sha256": "52773c83246e63d90c75483e7dc8b92f7d812e935dfc272b452eedf8e2ebec71"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/order/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/order/parse_xml.py",
+      "bytes": 5169,
+      "sha256": "53d360a425f413196764912cfda869136ec178a38b68f79ceff01cc81b19ce8d"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/order/reorder.py",
+      "bytes": 7225,
+      "sha256": "10f70501a54d1b84a0c87668aa80ac91eaf0b9c139393823578170617816ab5e"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/order/smooth_order.py",
+      "bytes": 3928,
+      "sha256": "e65da8b03e989d850c1dfaa391c6b5bd158de5c8a3caddfa4ba59ef86b1feab3"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/order/warichu_block.py",
+      "bytes": 5694,
+      "sha256": "50a31488e86c338078b366c0d506584949fbbbb7970e0cc2cb58069c883a3012"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/order/wrap_dataset.py",
+      "bytes": 459,
+      "sha256": "57e3f2e9c4fe2bb4bf7ac96416634509b5f1f76911f59e178d65e1f93986eada"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/utils/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/utils/file.py",
+      "bytes": 694,
+      "sha256": "8a8f27d3babe228417421a94914e5df953c7384935475e43411281c061f89e87"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/utils/logger.py",
+      "bytes": 799,
+      "sha256": "b4b18f9d7a3a7cc84ee34568622c30d721d418d571129430b5ecd2a7a6d9aee0"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/utils/time.py",
+      "bytes": 1839,
+      "sha256": "38936d312df9298d82196eaefd54c67fd1cfa68fdb51421669bc99bd211d6eeb"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/utils/xml.py",
+      "bytes": 2753,
+      "sha256": "4f2660326e3d3f20aa8ea94544ade6d6041ec11731fb5feca6c66e8289bb9efa"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/xy_cut/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/xy_cut/block_xy_cut.py",
+      "bytes": 10740,
+      "sha256": "5c5790d0a85beff5c1a1246e0369daa9a15a12f50e312f1e9b0e332d74b34f94"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/xy_cut/eval.py",
+      "bytes": 2178,
+      "sha256": "c424b8954ef844b44bb0067487b15d29c841abbec8aaa14a3adf41d2dc09fa60"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/set_version.py",
+      "bytes": 2128,
+      "sha256": "bd513932bb29f1c4dd6b7260a61050635f32cc3f0d8c99f31702eb320a97bb87"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/tcy_wrapper.py",
+      "bytes": 8340,
+      "sha256": "97c3fd3febdc4b12ba159ad972ccdda48d05f1079e92e619cc92b653ac2674d1"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/tools/ndlkoten2tei.py",
+      "bytes": 4414,
+      "sha256": "00f7b8445513e6d441d0452872bbaa2c47a26309aa976556a6eebd82246a9e71"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/uicomponent/localelabel.py",
+      "bytes": 3312,
+      "sha256": "7de1646fe9a6cfae9f0dae02fe9fef4fa0f6dc8b9a1161543f7b4e2e87491331"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/uicomponent/textdaisy.py",
+      "bytes": 43475,
+      "sha256": "4258b099f54e6f783bf140672c6b045a2ea59b84b5c9c21a945ff07265b4dcd4"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/version.py",
+      "bytes": 106,
+      "sha256": "af0348035f473afdc515b3b303fe343ed6e8cc254ec4410df40b12bbdd542caf"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source-pin-receipt.json",
+      "bytes": 7103,
+      "sha256": "4b82993ff9782b9605c68b1bb44a78f5ec02bb5138ad86fef9ec4cdbbe207294"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/owned-images/clear.bgra",
+      "bytes": 1792000,
+      "sha256": "00d28a761ca10d2ea53d3c0a35ab88137674f9d1a5e0b6470dc8222ac35505ab"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/owned-images/clear.png",
+      "bytes": 68874,
+      "sha256": "d2c40db1a01f52b64428700efb89e7b435cfaddb5623c807b35a37d2ad0ac482"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/owned-images/small.bgra",
+      "bytes": 1792000,
+      "sha256": "f478289c48869994a9d424f0a0cba3879ac70ea07e4960065a69e427b63a8bc2"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/owned-images/small.png",
+      "bytes": 47010,
+      "sha256": "8f6ce0dd72d21c7dcf09052df5fc1b4c59fd08f8dcee7ca74248257b211f53ad"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-characters.json",
+      "bytes": 110788,
+      "sha256": "d858428fbe0ada92b439a5f277b51bc1b318fd985d80946a3ce859d7f2446a92"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-probe/Probe.csproj",
+      "bytes": 394,
+      "sha256": "79b655a5a861d6b2f424fd8a01a77d9cda91f97c2979e66f3da8a2540b6a1012"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-probe/Program.cs",
+      "bytes": 2345,
+      "sha256": "ab51f83df0242031489b1fb0977f3bdd9c3281cc4171da7b3041c5a54ff767cb"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-probe/bin/Debug/net10.0/Microsoft.ML.OnnxRuntime.dll",
+      "bytes": 232480,
+      "sha256": "4c6985df4aa2f810ba8a2b37c3c791e619d8fe126954a6bd28cffd3f4adeba95"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-probe/bin/Debug/net10.0/Takupoke.Core.dll",
+      "bytes": 325120,
+      "sha256": "8d719d2f685bc568ef8af72549e5a20f642ebba8e7094e3df66842e0339a5801"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-probe/bin/Debug/net10.0/Takupoke.Infrastructure.dll",
+      "bytes": 483328,
+      "sha256": "33e248e726a6e4de3ebc6f4425b38388cf34339cf146b07899d6a4ff67896fa6"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-probe/bin/Debug/net10.0/Takupoke.Integration.Tests.dll",
+      "bytes": 18432,
+      "sha256": "e35e2083b10e209dba16b93e0a214fc8bbf17f37cea8be345e2247b0486ea05e"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-probe/bin/Debug/net10.0/runtimes/linux-x64/native/libonnxruntime.so",
+      "bytes": 22326072,
+      "sha256": "13ab8084954fa4a47c777880180b90810d6020f021441395712b48a75b74c68b"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-source/src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs",
+      "bytes": 6003,
+      "sha256": "cd2ca77d976855da1eb80739d040b11b6e311e85a4104c5477ddc1005f4bd182"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-source/src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs",
+      "bytes": 5647,
+      "sha256": "5242f91554c370d135b00e4e6cde00d9ec2a826ee85a5306d4aa0a29bd8951df"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-source/src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs",
+      "bytes": 19775,
+      "sha256": "cba2dab6892802b94b38487c736ecb21d1a4a7d256ac7cb61b1d05fd076571b6"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-source/src/Takupoke.Infrastructure/Recovery/RecoveryAnalysisConverter.cs",
+      "bytes": 5231,
+      "sha256": "b9cce0c0bb178e7b709de2102f0c46e281ccb0a91296b73aeec8cbb7f1e7b8a9"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-source/src/Takupoke.Infrastructure/Recovery/RecoveryAuditCertification.cs",
+      "bytes": 3917,
+      "sha256": "846d2caeea792ef0a7b67af5a3db38c778f59cd1c1221f40575129da00396c73"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-source/src/Takupoke.Infrastructure/Recovery/RecoveryCoordinator.cs",
+      "bytes": 9312,
+      "sha256": "83b57f08b6738ae5332646ca76b7d2cc18aa8fd4ec2458b55dc9702f15dd68e3"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-source/src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs",
+      "bytes": 36252,
+      "sha256": "cc491b887c9ed5237a04656f4d8c9c959f7e2c024af5f75a63802a18b8c22cb1"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-source/src/Takupoke.Infrastructure/Recovery/RecoveryModelBundleStore.cs",
+      "bytes": 9902,
+      "sha256": "b059a1a1aaae42a8a61db504ffee272fa4456a80f7e39769b3f95df8fbf163df"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-source/src/Takupoke.Infrastructure/Recovery/RecoveryModelStore.cs",
+      "bytes": 6942,
+      "sha256": "ad370251951dc72467268bd8eceeaeccbddcfcb69465c841e47df9a9e825bc61"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-source/src/Takupoke.Infrastructure/Recovery/RecoveryOutputDecoder.cs",
+      "bytes": 2235,
+      "sha256": "4b0da14cef205b426ca06c8bb8453663bde0aba76d16b7fb637f960e5aee3849"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-source-identity.json",
+      "bytes": 661,
+      "sha256": "cd0e025105cff4023af54c8090e6e263891f12dceffc0fde24519f2c11a41dbc"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/python-freeze.txt",
+      "bytes": 2511,
+      "sha256": "f3911b7634ae41853bce193770bb4ea7343aef3e10ff68c1018051e28b029f41"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/recipe-spec.json",
+      "bytes": 2821,
+      "sha256": "83cd7ffcaeb112901998a696f0bb166b2bbbe38c3568504d3e934242ad1bbe07"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/run_ndl.py",
+      "bytes": 2933,
+      "sha256": "82f844b70fd6ffe274bb7a8f604f4e925ba954d3c3e1242916dbf8a4203f58fa"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/run_tess.py",
+      "bytes": 1662,
+      "sha256": "4f2fdd097e2a621bc68ddf1d017651e535f4db749b0fa293e5f99368bf089a18"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/score.py",
+      "bytes": 6307,
+      "sha256": "e8667c4f19fe8b235ee4797bbd3f907785da735066a0edb9af2140d870d87e5b"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/supervise.py",
+      "bytes": 2851,
+      "sha256": "9120fc9d3ed1dcaf96a3971db394146e1a7cbc113daeaa2805ecd45b2691e8b9"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/tess-models/jpn.traineddata",
+      "bytes": 14330109,
+      "sha256": "36bdf9ac823f5911e624c30d0553e890b8abc7c31a65b3ef14da943658c40b79"
+    },
+    {
+      "path": "/usr/share/tesseract-ocr/5/tessdata/configs/hocr",
+      "bytes": 40,
+      "sha256": "d6a7ec7c5143317a59fce2393054f6b7a8261824b934e7426fdd24febc929ad6"
+    },
+    {
+      "path": "/usr/share/tesseract-ocr/5/tessdata/configs/tsv",
+      "bytes": 22,
+      "sha256": "59d079bb75d8b3d7c839a3564580cb559e362c93a9d70f234e421c0c3e767e04"
+    },
+    {
+      "path": "/usr/share/tesseract-ocr/5/tessdata/configs/makebox",
+      "bytes": 26,
+      "sha256": "a8fe20a2bc9ff1e9e8ed06d56845336c978627b8e965600abd63f1f412c18ffe"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/tess-output-repair.json",
+      "bytes": 1119,
+      "sha256": "74deced7adac8547976e36bb8e27772d2c6662cae7f8b189c813a200b16e7d49"
+    }
+  ],
+  "firstPairOnly": true,
+  "modelsAndAlgorithmFrozenBeforeOutputs": true,
+  "scoring": "offline whole literal + actual source containment; no substring/gold nativeinput",
+  "plannedNativeImageInvocations": {
+    "NDL": 2,
+    "Tess": 2,
+    "Paddle": 2
+  },
+  "nativeExecutedBeforeOutputRepair": {
+    "NDL": 2,
+    "Paddle": 2,
+    "Tess": 2
+  },
+  "repair": {
+    "reason": "Initial actual named config lookup failed under owned tessdata-dir; exit0 produced TXT only, bbox outputs absent. First actual two calls retained; coordinate/tuple unassessed, not OCR accuracy zero.",
+    "scope": "Output render flags only equivalent to installed config contents, unchanged language/OEM/PSM/models/input/no other engine rerun",
+    "originalConfigs": {
+      "hocr": {
+        "content": "tessedit_create_hocr 1\nhocr_font_info 0\n",
+        "sha256": "d6a7ec7c5143317a59fce2393054f6b7a8261824b934e7426fdd24febc929ad6"
+      },
+      "tsv": {
+        "content": "tessedit_create_tsv 1\n",
+        "sha256": "59d079bb75d8b3d7c839a3564580cb559e362c93a9d70f234e421c0c3e767e04"
+      },
+      "makebox": {
+        "content": "tessedit_create_boxfile 1\n",
+        "sha256": "a8fe20a2bc9ff1e9e8ed06d56845336c978627b8e965600abd63f1f412c18ffe"
+      }
+    },
+    "jpnVertWarning": "Implicit jpn language subdependency unavailable; retained unchanged, no extra weights or recognition-property override",
+    "oldRawSHA256": "884ec5d8f3bcbe8887b92487de7931047892ecefe8a965be5534206ff563ad90",
+    "twoImageOperationalRetry": true
+  }
+}

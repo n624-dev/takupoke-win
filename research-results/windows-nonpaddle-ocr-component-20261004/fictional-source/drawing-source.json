@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "scope": "Wholly new invented horizontal OCR component; same eight tuples paired font conditions, not two independent full documents or formal40slot recovery",
+  "createdAfterRecipeFreeze": {
+    "NDL": "default CPU cascade; source commit636d1cf; default confidence args .2/.25/.2; no TCY/simple",
+    "Tesseract": "tessdata_best jpn only commit e12c65a; OEM1 PSM11; no vertical or per-image correction override",
+    "Paddle": "Existing production Read/settings/.8; raw observation separate from guard"
+  },
+  "nativeRunsBeforeFreeze": 0,
+  "noExistingDocumentsOrValuesReadOrCopied": true,
+  "font": {
+    "expectedSHA256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+    "bytes": 19484784,
+    "collectionIndex": 0,
+    "face": "Noto Sans CJK JP Regular",
+    "version": "2.004",
+    "copyright": "© 2014-2021 Adobe (http://www.adobe.com/).",
+    "license": "SIL Open Font License 1.1",
+    "upstream": "https://github.com/notofonts/noto-cjk",
+    "localAcquisition": "Existing installed fonts-noto-cjk; no model/image/PDF/sample acquisition"
+  },
+  "renderer": {
+    "Pillow": "12.3.0",
+    "FreeType": "2.14.3",
+    "mode": "RGB",
+    "background": [
+      255,
+      255,
+      255
+    ],
+    "foreground": [
+      0,
+      0,
+      0
+    ],
+    "width": 1120,
+    "height": 400,
+    "fontConditionSizes": {
+      "clear": 24,
+      "small": 16
+    },
+    "fixedGeometryAcrossConditions": true,
+    "noRotationCropRescaleNoiseOrOCRDependentAdjustment": true
+  },
+  "metadata": {
+    "title": "架設読取検証",
+    "year": 2031,
+    "yearLiteral": "2031年度",
+    "term": "前期"
+  },
+  "classNames": [
+    "検証組A",
+    "検証組B"
+  ],
+  "weekdays": [
+    "月曜日",
+    "木曜日"
+  ],
+  "periods": [
+    1,
+    2
+  ],
+  "roleLabels": {
+    "subject": "科目：",
+    "teacher": "担当：",
+    "room": "教室："
+  },
+  "slots": [
+    {
+      "className": "検証組A",
+      "weekday": "月曜日",
+      "period": 1,
+      "subject": "色票工作桃",
+      "teacher": "試作役霞",
+      "room": "仮区画花"
+    },
+    {
+      "className": "検証組A",
+      "weekday": "月曜日",
+      "period": 2,
+      "subject": "線形試作青",
+      "teacher": "試作役霧",
+      "room": "仮区画葉"
+    },
+    {
+      "className": "検証組A",
+      "weekday": "木曜日",
+      "period": 1,
+      "subject": "立体習作紫",
+      "teacher": "試作役露",
+      "room": "仮区画芽"
+    },
+    {
+      "className": "検証組A",
+      "weekday": "木曜日",
+      "period": 2,
+      "subject": "模様演習橙",
+      "teacher": "試作役風",
+      "room": "仮区画枝"
+    },
+    {
+      "className": "検証組B",
+      "weekday": "月曜日",
+      "period": 1,
+      "subject": "紙形実習銀",
+      "teacher": "試作役雲",
+      "room": "仮区画根"
+    },
+    {
+      "className": "検証組B",
+      "weekday": "月曜日",
+      "period": 2,
+      "subject": "配色演習緑",
+      "teacher": "試作役虹",
+      "room": "仮区画蕾"
+    },
+    {
+      "className": "検証組B",
+      "weekday": "木曜日",
+      "period": 1,
+      "subject": "輪郭習作朱",
+      "teacher": "試作役星",
+      "room": "仮区画実"
+    },
+    {
+      "className": "検証組B",
+      "weekday": "木曜日",
+      "period": 2,
+      "subject": "影絵実習墨",
+      "teacher": "試作役月",
+      "room": "仮区画苔"
+    }
+  ]
+}

@@ -1,0 +1,4588 @@
+{
+  "rows": [
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "year",
+      "expected": "2031年度",
+      "observed": "2031年度前期",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "term",
+      "expected": "前期",
+      "observed": "",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "retained-output-location",
+          "reason": "no actual native unit center uniquely corresponds to this printed region; candidate elsewhere/unobserved latent scope not inferred",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "title",
+      "expected": "架設読取検証",
+      "observed": "架設読取検証",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "class-label",
+      "expected": "クラス",
+      "observed": "クラス",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "day-0",
+      "expected": "月曜日",
+      "observed": "月曜日",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "day-1",
+      "expected": "木曜日",
+      "observed": "木曜日",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "period-0",
+      "expected": "1時限",
+      "observed": "1時限",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "period-1",
+      "expected": "2時限",
+      "observed": "2時限",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "period-2",
+      "expected": "1時限",
+      "observed": "1時限",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "period-3",
+      "expected": "2時限",
+      "observed": "2時限",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "class-0",
+      "expected": "検証組A",
+      "observed": "検証組A",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "class-1",
+      "expected": "検証組B",
+      "observed": "検証組B",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-0-subject",
+      "expected": "科目：色票工作桃",
+      "observed": "科目:色票工作桃",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-0-teacher",
+      "expected": "担当：試作役霞",
+      "observed": "担当:試作役霞",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-0-room",
+      "expected": "教室：仮区画花",
+      "observed": "教室:教室:仮区画花仮区画花",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-1-subject",
+      "expected": "科目：線形試作青",
+      "observed": "科目:線形試作青",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-1-teacher",
+      "expected": "担当：試作役霧",
+      "observed": "担当:試作役霧",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-1-room",
+      "expected": "教室：仮区画葉",
+      "observed": "教室:仮区画葉",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-2-subject",
+      "expected": "科目：立体習作紫",
+      "observed": "科目:立体習作業",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-2-teacher",
+      "expected": "担当：試作役露",
+      "observed": "担当:試作役露",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-2-room",
+      "expected": "教室：仮区画芽",
+      "observed": "教室:仮区画芽",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-3-subject",
+      "expected": "科目：模様演習橙",
+      "observed": "科目:模様演習橙",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-3-teacher",
+      "expected": "担当：試作役風",
+      "observed": "担当:試作役風",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-3-room",
+      "expected": "教室：仮区画枝",
+      "observed": "教室:仮区画枝",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-4-subject",
+      "expected": "科目：紙形実習銀",
+      "observed": "科目:科目:紙形実習銀紙形実習銀",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-4-teacher",
+      "expected": "担当：試作役雲",
+      "observed": "担当:担当:試作役雲試作役雲",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-4-room",
+      "expected": "教室：仮区画根",
+      "observed": "教室:教室:仮区画根仮区画根",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-5-subject",
+      "expected": "科目：配色演習緑",
+      "observed": "科目:科目:配色演習緑",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-5-teacher",
+      "expected": "担当：試作役虹",
+      "observed": "担当:試作役虹",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-5-room",
+      "expected": "教室：仮区画蕾",
+      "observed": "教室:教室:仮区画蕾",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-6-subject",
+      "expected": "科目：輪郭習作朱",
+      "observed": "科目:輪郭習作朱",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-6-teacher",
+      "expected": "担当：試作役星",
+      "observed": "担当:試作役星",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-6-room",
+      "expected": "教室：仮区画実",
+      "observed": "教室:仮区画実",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-7-subject",
+      "expected": "科目：影絵実習墨",
+      "observed": "科目:影絵実習墨",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-7-teacher",
+      "expected": "担当：試作役月",
+      "observed": "担当:試作役月",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "clear",
+      "target": "tuple-7-room",
+      "expected": "教室：仮区画苔",
+      "observed": "教室:仮区画苔",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "year",
+      "expected": "2031年度",
+      "observed": "2031年度",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "term",
+      "expected": "前期",
+      "observed": "",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "retained-output-location",
+          "reason": "no actual native unit center uniquely corresponds to this printed region; candidate elsewhere/unobserved latent scope not inferred",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "title",
+      "expected": "架設読取検証",
+      "observed": "架設読取検証",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "class-label",
+      "expected": "クラス",
+      "observed": "クラス",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "day-0",
+      "expected": "月曜日",
+      "observed": "月曜日",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "day-1",
+      "expected": "木曜日",
+      "observed": "木曜日",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "period-0",
+      "expected": "1時限",
+      "observed": "1時限",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "period-1",
+      "expected": "2時限",
+      "observed": "2時限",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "period-2",
+      "expected": "1時限",
+      "observed": "1時限",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "period-3",
+      "expected": "2時限",
+      "observed": "2時限",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "class-0",
+      "expected": "検証組A",
+      "observed": "検証組A",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "class-1",
+      "expected": "検証組B",
+      "observed": "検証組B",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-0-subject",
+      "expected": "科目：色票工作桃",
+      "observed": "科目:色票工作桃",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-0-teacher",
+      "expected": "担当：試作役霞",
+      "observed": "担当:試作役霞",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-0-room",
+      "expected": "教室：仮区画花",
+      "observed": "教室:仮区画花",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-1-subject",
+      "expected": "科目：線形試作青",
+      "observed": "科目:線形試作青",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-1-teacher",
+      "expected": "担当：試作役霧",
+      "observed": "担当:試作役霧",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-1-room",
+      "expected": "教室：仮区画葉",
+      "observed": "教室:仮区画葉",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-2-subject",
+      "expected": "科目：立体習作紫",
+      "observed": "科目:立体習作業",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-2-teacher",
+      "expected": "担当：試作役露",
+      "observed": "担当:試作役露",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-2-room",
+      "expected": "教室：仮区画芽",
+      "observed": "教室:仮区画芽",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-3-subject",
+      "expected": "科目：模様演習橙",
+      "observed": "科目:模様演習橙",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-3-teacher",
+      "expected": "担当：試作役風",
+      "observed": "担当:試作役風",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-3-room",
+      "expected": "教室：仮区画枝",
+      "observed": "教室:仮区画枝",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-4-subject",
+      "expected": "科目：紙形実習銀",
+      "observed": "科目:紙形実習銀",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-4-teacher",
+      "expected": "担当：試作役雲",
+      "observed": "担当:試作役雲",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-4-room",
+      "expected": "教室：仮区画根",
+      "observed": "教室:仮区画根",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-5-subject",
+      "expected": "科目：配色演習緑",
+      "observed": "科目:配色演習緑",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-5-teacher",
+      "expected": "担当：試作役虹",
+      "observed": "担当:試作役虹",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-5-room",
+      "expected": "教室：仮区画蕾",
+      "observed": "教室:仮区画蕾",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-6-subject",
+      "expected": "科目：輪郭習作朱",
+      "observed": "科目:輪郭習作朱",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-6-teacher",
+      "expected": "担当：試作役星",
+      "observed": "担当:試作役星",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-6-room",
+      "expected": "教室：仮区画実",
+      "observed": "教室:仮区画実",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-7-subject",
+      "expected": "科目：影絵実習墨",
+      "observed": "科目:影絵実習墨",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-7-teacher",
+      "expected": "担当：試作役月",
+      "observed": "担当:試作役月",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "ndl",
+      "condition": "small",
+      "target": "tuple-7-room",
+      "expected": "教室：仮区画苔",
+      "observed": "教室:仮区画苔",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "punctuation-output",
+          "reason": "ASCII colon vs printed fullwidth colon; exact mismatch, semantic equivalence not primary credit",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "year",
+      "expected": "2031年度",
+      "observed": "2031年度",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "term",
+      "expected": "前期",
+      "observed": "前期",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "title",
+      "expected": "架設読取検証",
+      "observed": "架設読取検証",
+      "strictExact": true,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "class-label",
+      "expected": "クラス",
+      "observed": "クラス",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "day-0",
+      "expected": "月曜日",
+      "observed": "月曜日",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "day-1",
+      "expected": "木曜日",
+      "observed": "木曜日",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "period-0",
+      "expected": "1時限",
+      "observed": "1時限",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "period-1",
+      "expected": "2時限",
+      "observed": "2時限",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "period-2",
+      "expected": "1時限",
+      "observed": "1時限",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "period-3",
+      "expected": "2時限",
+      "observed": "2時限",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "class-0",
+      "expected": "検証組A",
+      "observed": "検証組A",
+      "strictExact": true,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "class-1",
+      "expected": "検証組B",
+      "observed": "検証組B",
+      "strictExact": true,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-0-subject",
+      "expected": "科目：色票工作桃",
+      "observed": "科目色票工作桃",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-0-teacher",
+      "expected": "担当：試作役霞",
+      "observed": "日当試作役霞",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-0-room",
+      "expected": "教室：仮区画花",
+      "observed": "仮区画花|",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-1-subject",
+      "expected": "科目：線形試作青",
+      "observed": "|科目:線形試作青",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-1-teacher",
+      "expected": "担当：試作役霧",
+      "observed": "担当試作役霧_",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-1-room",
+      "expected": "教室：仮区画葉",
+      "observed": "教仮区画葉",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-2-subject",
+      "expected": "科目：立体習作紫",
+      "observed": "|科目立体習作紫",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-2-teacher",
+      "expected": "担当：試作役露",
+      "observed": "担当試作役露",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              2,
+              3
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-2-room",
+      "expected": "教室：仮区画芽",
+      "observed": "教仮区画芽",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-3-subject",
+      "expected": "科目：模様演習橙",
+      "observed": "|科目模様演習枯",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-3-teacher",
+      "expected": "担当：試作役風",
+      "observed": "担当試作役風",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-3-room",
+      "expected": "教室：仮区画枝",
+      "observed": "教仮区画枝",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-4-subject",
+      "expected": "科目：紙形実習銀",
+      "observed": "科目紙形実習銀",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              3,
+              4
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-4-teacher",
+      "expected": "担当：試作役雲",
+      "observed": "旧当試作役雲",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-4-room",
+      "expected": "教室：仮区画根",
+      "observed": "仮区画根|",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-5-subject",
+      "expected": "科目：配色演習緑",
+      "observed": "|科目配色演習緑",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-5-teacher",
+      "expected": "担当：試作役虹",
+      "observed": "担当試作役虹|",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-5-room",
+      "expected": "教室：仮区画蕾",
+      "observed": "教仮区画攻",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-6-subject",
+      "expected": "科目：輪郭習作朱",
+      "observed": "|科目輪郭習作朱",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-6-teacher",
+      "expected": "担当：試作役星",
+      "observed": "担当試作役星|",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              2,
+              3
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-6-room",
+      "expected": "教室：仮区画実",
+      "observed": "教仮区画",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-7-subject",
+      "expected": "科目：影絵実習墨",
+      "observed": "|科目影絵実習黒",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              3,
+              4
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-7-teacher",
+      "expected": "担当：試作役月",
+      "observed": "担当試作役月",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "clear",
+      "target": "tuple-7-room",
+      "expected": "教室：仮区画苔",
+      "observed": "教仮区画昔",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "year",
+      "expected": "2031年度",
+      "observed": "2031年度",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "term",
+      "expected": "前期",
+      "observed": "前期",
+      "strictExact": true,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "title",
+      "expected": "架設読取検証",
+      "observed": "連設読取検証",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "class-label",
+      "expected": "クラス",
+      "observed": "クラス",
+      "strictExact": true,
+      "findings": [],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "day-0",
+      "expected": "月曜日",
+      "observed": "月曜日",
+      "strictExact": true,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "day-1",
+      "expected": "木曜日",
+      "observed": "木曜昌",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "period-0",
+      "expected": "1時限",
+      "observed": "1時限",
+      "strictExact": true,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "period-1",
+      "expected": "2時限",
+      "observed": "2時限",
+      "strictExact": true,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "period-2",
+      "expected": "1時限",
+      "observed": "1時限",
+      "strictExact": true,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "period-3",
+      "expected": "2時限",
+      "observed": "2時限",
+      "strictExact": true,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "class-0",
+      "expected": "検証組A",
+      "observed": "検証組A",
+      "strictExact": true,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "class-1",
+      "expected": "検証組B",
+      "observed": "検証組B",
+      "strictExact": true,
+      "findings": [
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-0-subject",
+      "expected": "科目：色票工作桃",
+      "observed": "科目色票工作桃",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-0-teacher",
+      "expected": "担当：試作役霞",
+      "observed": "担当試作役起",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-0-room",
+      "expected": "教室：仮区画花",
+      "observed": "教室仮区画花",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-1-subject",
+      "expected": "科目：線形試作青",
+      "observed": "科目線形試作青",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-1-teacher",
+      "expected": "担当：試作役霧",
+      "observed": "担当試作役霧",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-1-room",
+      "expected": "教室：仮区画葉",
+      "observed": "教室仮区画葉",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-2-subject",
+      "expected": "科目：立体習作紫",
+      "observed": "科目立体習作紫",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-2-teacher",
+      "expected": "担当：試作役露",
+      "observed": "担当試作役露",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-2-room",
+      "expected": "教室：仮区画芽",
+      "observed": "教室仮区画芽",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-3-subject",
+      "expected": "科目：模様演習橙",
+      "observed": "科目模様演習欄",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-3-teacher",
+      "expected": "担当：試作役風",
+      "observed": "担当試作役風",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-3-room",
+      "expected": "教室：仮区画枝",
+      "observed": "教室仮区画枝",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-4-subject",
+      "expected": "科目：紙形実習銀",
+      "observed": "科目紙形実習銀",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-4-teacher",
+      "expected": "担当：試作役雲",
+      "observed": "担当試作役雲",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-4-room",
+      "expected": "教室：仮区画根",
+      "observed": "教室仮区画根",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-5-subject",
+      "expected": "科目：配色演習緑",
+      "observed": "科目配色注習緑",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-5-teacher",
+      "expected": "担当：試作役虹",
+      "observed": "担当試作役虹",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-5-room",
+      "expected": "教室：仮区画蕾",
+      "observed": "教室仮区画航",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-6-subject",
+      "expected": "科目：輪郭習作朱",
+      "observed": "科目輪郭習作朱",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-6-teacher",
+      "expected": "担当：試作役星",
+      "observed": "担当試作役星",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-6-room",
+      "expected": "教室：仮区画実",
+      "observed": "教室仮区画実",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-7-subject",
+      "expected": "科目：影絵実習墨",
+      "observed": "科目影絵実習黒",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              2,
+              3
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-7-teacher",
+      "expected": "担当：試作役月",
+      "observed": "担当試作役月",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "tess",
+      "condition": "small",
+      "target": "tuple-7-room",
+      "expected": "教室：仮区画苔",
+      "observed": "教室仮区画苔",
+      "strictExact": false,
+      "findings": [
+        {
+          "stage": "text-or-extra-ownership",
+          "reason": "actual retained text differs; raw units retained, no gold-based repair",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "duplicate-region-ownership",
+          "overlappingPairs": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "reason": "native retained overlapping full/partial regions; both concatenated, duplicate text cannot be treated as intrinsic glyph error",
+          "strength": "confirmed"
+        },
+        {
+          "stage": "source-geometry",
+          "reason": "actual native region crosses independently frozen semantic field/header band, no posthoc clamp",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "year",
+      "expected": "2031年度",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "term",
+      "expected": "前期",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "title",
+      "expected": "架設読取検証",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "class-label",
+      "expected": "クラス",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "day-0",
+      "expected": "月曜日",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "day-1",
+      "expected": "木曜日",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "period-0",
+      "expected": "1時限",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "period-1",
+      "expected": "2時限",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "period-2",
+      "expected": "1時限",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "period-3",
+      "expected": "2時限",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "class-0",
+      "expected": "検証組A",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "class-1",
+      "expected": "検証組B",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-0-subject",
+      "expected": "科目：色票工作桃",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-0-teacher",
+      "expected": "担当：試作役霞",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-0-room",
+      "expected": "教室：仮区画花",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-1-subject",
+      "expected": "科目：線形試作青",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-1-teacher",
+      "expected": "担当：試作役霧",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-1-room",
+      "expected": "教室：仮区画葉",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-2-subject",
+      "expected": "科目：立体習作紫",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-2-teacher",
+      "expected": "担当：試作役露",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-2-room",
+      "expected": "教室：仮区画芽",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-3-subject",
+      "expected": "科目：模様演習橙",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-3-teacher",
+      "expected": "担当：試作役風",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-3-room",
+      "expected": "教室：仮区画枝",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-4-subject",
+      "expected": "科目：紙形実習銀",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-4-teacher",
+      "expected": "担当：試作役雲",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-4-room",
+      "expected": "教室：仮区画根",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-5-subject",
+      "expected": "科目：配色演習緑",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-5-teacher",
+      "expected": "担当：試作役虹",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-5-room",
+      "expected": "教室：仮区画蕾",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-6-subject",
+      "expected": "科目：輪郭習作朱",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-6-teacher",
+      "expected": "担当：試作役星",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-6-room",
+      "expected": "教室：仮区画実",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-7-subject",
+      "expected": "科目：影絵実習墨",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-7-teacher",
+      "expected": "担当：試作役月",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "clear",
+      "target": "tuple-7-room",
+      "expected": "教室：仮区画苔",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "year",
+      "expected": "2031年度",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "term",
+      "expected": "前期",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "title",
+      "expected": "架設読取検証",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "class-label",
+      "expected": "クラス",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "day-0",
+      "expected": "月曜日",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "day-1",
+      "expected": "木曜日",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "period-0",
+      "expected": "1時限",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "period-1",
+      "expected": "2時限",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "period-2",
+      "expected": "1時限",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "period-3",
+      "expected": "2時限",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "class-0",
+      "expected": "検証組A",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "class-1",
+      "expected": "検証組B",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-0-subject",
+      "expected": "科目：色票工作桃",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-0-teacher",
+      "expected": "担当：試作役霞",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-0-room",
+      "expected": "教室：仮区画花",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-1-subject",
+      "expected": "科目：線形試作青",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-1-teacher",
+      "expected": "担当：試作役霧",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-1-room",
+      "expected": "教室：仮区画葉",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-2-subject",
+      "expected": "科目：立体習作紫",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-2-teacher",
+      "expected": "担当：試作役露",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-2-room",
+      "expected": "教室：仮区画芽",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-3-subject",
+      "expected": "科目：模様演習橙",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-3-teacher",
+      "expected": "担当：試作役風",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-3-room",
+      "expected": "教室：仮区画枝",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-4-subject",
+      "expected": "科目：紙形実習銀",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-4-teacher",
+      "expected": "担当：試作役雲",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-4-room",
+      "expected": "教室：仮区画根",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-5-subject",
+      "expected": "科目：配色演習緑",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-5-teacher",
+      "expected": "担当：試作役虹",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-5-room",
+      "expected": "教室：仮区画蕾",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-6-subject",
+      "expected": "科目：輪郭習作朱",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-6-teacher",
+      "expected": "担当：試作役星",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-6-room",
+      "expected": "教室：仮区画実",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-7-subject",
+      "expected": "科目：影絵実習墨",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-7-teacher",
+      "expected": "担当：試作役月",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    },
+    {
+      "engine": "paddle",
+      "condition": "small",
+      "target": "tuple-7-room",
+      "expected": "教室：仮区画苔",
+      "observed": "",
+      "strictExact": null,
+      "findings": [
+        {
+          "stage": "acquisition-pre-recognition",
+          "reason": "unchanged crop completeness guard stopped before CTC; later source units unassessed",
+          "strength": "confirmed"
+        }
+      ],
+      "intrinsicModelCapacity": "undetermined",
+      "fullFormal": "unassessed"
+    }
+  ],
+  "noMoreNativeRuns": true,
+  "sourceResultSHA256": "94a6cd178a828c19e18257a52c1354e8f4c0685974e5013fdf78c7be30852016",
+  "NDLSourceLimitations": [
+    "iou_threshold is stored but not used for NMS in pinned DEIM source; parameter supplied is not proof suppression executed",
+    "postprocess score-filters predictions/scores but not class_ids/char_counts before zip; potential correspondence bug, causal influence on this actual output unconfirmed",
+    "reported line confidence is detection confidence; transcription confidence and native char alignment unavailable",
+    "score_threshold, like iou_threshold, is stored but not applied by pinned DEIM postprocess; the active score filter uses conf_threshold only."
+  ],
+  "initialTessFailure": "Named output configs absent; real TXT output retained, coordinates unassessed. Root-authorized same-model/PSM/PNG output-only renderer repair, no NDL/Paddle rerun.",
+  "implicitTessDependency": "jpn_vert load warning even when -l jpn; no extra weights or recognition override, primary jpn produced output",
+  "notQualification": true
+}

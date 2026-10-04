@@ -1,0 +1,26 @@
+{
+  "scope": "New trim-only source plus minimum upstream ROI/reading-order/session context; no native execution by reviewer",
+  "freeze": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/comparison-recipe-frozen.json",
+  "freezeSHA256": "5480c381792a14751f240c7dca4531cbed2746c18e38aa37fe9ad814b00e6854",
+  "allFrozenPinsMatched": 60,
+  "independentOfflineTestsPassed": 12,
+  "failed": 0,
+  "sourceClosure": "No blocking source finding for the finite same-two-image comparison",
+  "confirmed": [
+    "Original parent ROI integer bounds are checked; no clamp or invented charbox",
+    "All RGB nonwhite ink in selected ROI conserved; only RGB255 outer margin removed",
+    "Reading-order evaluation precedes changed ROI code; immutable detector and cascade logic retained",
+    "Observer calls each wrapped native session once and returns unchanged tensors; no argmax/threshold/candidate correction",
+    "Full/subline shared original ink marks both proposed sources inadmissible",
+    "Whole worker own-process-tree sampled3GiB/420s and32MiB stdout bounds; partial raw retained"
+  ],
+  "limitations": [
+    "Only selected ROI support conservation; no global page ink coverage or formal adoption eligibility",
+    "Derived XML bbox/vertical flags/markdown may differ with measured trim envelope; not independent layout recovery proof",
+    "Native Add-logit softmax uncalibrated; no correctness confidence threshold or alternate adoption",
+    "Actual shape/resource profile is pinned-model-specific; no arbitrary-model tensor safety certification",
+    "Same consumed paired8-tuples: no fresh statistical/model/full40 qualification"
+  ],
+  "nativeInferenceByReviewer": 0,
+  "remainingBlockingFindings": []
+}

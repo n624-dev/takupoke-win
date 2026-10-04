@@ -1,0 +1,17 @@
+{
+  "engine": "paddle",
+  "command": [
+    "/tmp/takupoke-tools/dotnet/dotnet",
+    "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/paddle-probe/bin/Debug/net10.0/Takupoke.Integration.Tests.dll",
+    "/workspace/recovery-research/windows-nonpaddle-ocr-20261004"
+  ],
+  "exitCode": 0,
+  "stopReason": null,
+  "elapsedSeconds": 1.0211809150059707,
+  "sampledOwnedProcessTreePeakRSSBytes": 345788416,
+  "RSSsamples": 8,
+  "memoryScope": "sampled sum current own process-tree RSS, shared pages may be double counted; not global RAM or physical-device minimum",
+  "rawBytes": 925,
+  "rawSHA256": "1dcfb33e6b7e1d8ba3f2f71d9f7d876cf01e0a9d635a76361a4fe1c162a5e700",
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

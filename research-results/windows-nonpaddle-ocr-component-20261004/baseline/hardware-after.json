@@ -1,0 +1,5 @@
+{
+  "/sys/fs/cgroup/memory.events": "low 0\nhigh 0\nmax 213980\noom 11\noom_kill 3\noom_group_kill 0\n",
+  "/sys/fs/cgroup/memory.current": "15938945024\n",
+  "/sys/fs/cgroup/memory.peak": "17180295168\n"
+}

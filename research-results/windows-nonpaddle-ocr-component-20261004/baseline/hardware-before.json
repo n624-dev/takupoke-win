@@ -1,0 +1,15 @@
+{
+  "os": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+  "logicalCPUCount": 5,
+  "affinityCount": 5,
+  "meminfo": "MemTotal:       18440136 kB\nMemFree:         2683916 kB\nMemAvailable:    8824632 kB\nBuffers:           55644 kB\nCached:         14877216 kB\nSwapCached:            0 kB\nActive:          9008800 kB\nInactive:        5939204 kB\nActive(anon):    3206348 kB\nInactive(anon):  5594492 kB\nActive(file):    5802452 kB\nInactive(file):   344712 kB\nUnevictable:       29920 kB\nMlocked:               0 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nDirty:               420 kB\nWriteback:             0 kB\nAnonPages:         45296 kB\nMapped:            83632 kB\nShmem:           8755780 kB\nKReclaimable:     345564 kB\nSlab:             453284 kB\nSReclaimable:     345564 kB\nSUnreclaim:       107720 kB\nKernelStack:        2320 kB\nPageTables:         3344 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:     9220068 kB\nCommitted_AS:    9130416 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:        4556 kB\nVmallocChunk:          0 kB\nPercpu:             1296 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:   4030464 kB\nFilePmdMapped:         0 kB\nBalloon:               0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:       18432 kB\nDirectMap2M:     3375104 kB\nDirectMap1G:    32505856 kB\n",
+  "cgroup": {
+    "/sys/fs/cgroup/memory.max": "17179869184\n",
+    "/sys/fs/cgroup/memory.current": "15686029312\n",
+    "/sys/fs/cgroup/memory.events": "low 0\nhigh 0\nmax 213980\noom 11\noom_kill 3\noom_group_kill 0\n",
+    "/sys/fs/cgroup/cpu.max": "400000 100000\n"
+  },
+  "tesseractVersion": "tesseract 5.5.0\n leptonica-1.84.1\n  libgif 5.2.2 : libjpeg 6b (libjpeg-turbo 2.1.5) : libpng 1.6.48 : libtiff 4.7.0 : zlib 1.3.1 : libwebp 1.5.0 : libopenjp2 2.5.3\n Found AVX512BW\n Found AVX512F\n Found AVX512VNNI\n Found AVX2\n Found AVX\n Found FMA\n Found SSE4.1\n Found OpenMP 201511\n Found libarchive 3.7.4 zlib/1.3.1 liblzma/5.8.1 bz2lib/1.0.8 liblz4/1.10.0 libzstd/1.5.7\n Found libcurl/8.14.1 OpenSSL/3.5.7 zlib/1.3.1 brotli/1.1.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.64.0 nghttp3/1.8.0 librtmp/2.3 OpenLDAP/2.6.10\n",
+  "tesseractBinarySHA256": "74b76a5b994adcc18be362bf64ed5118082b2401d5d9a35242e92fc4c62e2b4b"
+}

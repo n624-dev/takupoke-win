@@ -1,0 +1,17 @@
+test_antialiased_gray_is_retained (test_pixel_trim.ProofTests.test_antialiased_gray_is_retained) ... ok
+test_empty_no_false_empty_proof (test_pixel_trim.ProofTests.test_empty_no_false_empty_proof) ... ok
+test_only_white_margin_and_all_ink (test_pixel_trim.ProofTests.test_only_white_margin_and_all_ink) ... ok
+test_outside_rejected_not_clipped (test_pixel_trim.ProofTests.test_outside_rejected_not_clipped) ... ok
+test_rule_ink_kept_but_source_rejected (test_pixel_trim.ProofTests.test_rule_ink_kept_but_source_rejected) ... ok
+test_shared_ink_parent_child_conflicts (test_pixel_trim.ProofTests.test_shared_ink_parent_child_conflicts) ... ok
+test_two_physical_cells_not_claimed_one (test_pixel_trim.ProofTests.test_two_physical_cells_not_claimed_one) ... ok
+test_white_overlap_not_glyph_conflict (test_pixel_trim.ProofTests.test_white_overlap_not_glyph_conflict) ... ok
+test_stable_extreme_logits_identity_and_eos (test_token_stats.Tests.test_stable_extreme_logits_identity_and_eos) ... ok
+test_tie_uses_original_numpy_argmax (test_token_stats.Tests.test_tie_uses_original_numpy_argmax) ... ok
+test_truncation_and_nonfinite_are_unknown (test_token_stats.Tests.test_truncation_and_nonfinite_are_unknown) ... ok
+test_wrong_dictionary_contract_no_fabrication (test_token_stats.Tests.test_wrong_dictionary_contract_no_fabrication) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.003s
+
+OK

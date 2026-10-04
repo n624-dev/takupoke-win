@@ -1,0 +1,23 @@
+{
+  "recipe": "NDL-white-only-outer-trim-v1",
+  "fixedSources": {
+    "NDL": "636d1cfeb1331f89f4048f416e49e23a09a714b5",
+    "PaddlePureRules": "ae07e47fa68faeef210934b9f3688d6974587094"
+  },
+  "causalDelta": "Only complete white RGB255 outer margins removed before unchanged default native recognizer. Same native detector, layout graph/order, cascade, models/dictionary, render pixels, thresholds, mask mapping and no NMS unchanged. Derived output box is measured retained original ink envelope; original parent and all detections retained.",
+  "newSemanticSelection": false,
+  "maskCorrection": false,
+  "textDedupOrSelection": false,
+  "fontPaddingSweep": false,
+  "sourceGuards": "Original integer parent within raster; same entire parent nonwhite support count/hash; connected production physical rules define interior components. Original rule ink/cross-cell/outside or shared original ink ownership makes proposed sources rejected. Diagnostic native text is retained even for nonadmissible sources, never production adoption.",
+  "globalInkCoverage": "not proved; selected ROI nonwhite conservation only",
+  "noGoldInNative": true,
+  "confidenceObserver": "Actual same PARSeq session.run Add-logit tensors observed once; bounded128 argmax/EOS/top2/softmax diagnostics, tensorSHA/finite/shape; no distribution-calibration claim, guard threshold or alternate selection",
+  "nativeRequests": 2,
+  "component": "Same consumed development paired8tuple PNGs; not fresh heldout/full40 qualification",
+  "resources": "same owned-tree3GiB/420s guard as baseline",
+  "meaningTests": 12,
+  "readOnlyRulesCalls": 2,
+  "nativeInferenceExecuted": false,
+  "baselineUnchangedPins": true
+}

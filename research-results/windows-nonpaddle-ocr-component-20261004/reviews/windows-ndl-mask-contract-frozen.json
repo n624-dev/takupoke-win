@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "nativeInferenceCalls": 0,
+  "tests": {
+    "passed": 15,
+    "failed": 0
+  },
+  "currentNativeMaskCause": false,
+  "maskOnlyNativeRunRequired": false,
+  "files": [
+    {
+      "path": "/workspace/recovery-research/windows-ndl-adapter-contract-20261004/ndl_tensor_contract.py",
+      "bytes": 4844,
+      "sha256": "7fca3d9277485644abb14cd3d2aced2308077c148aaf69372f8cd61f779db58a"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-adapter-contract-20261004/test_ndl_tensor_contract.py",
+      "bytes": 8199,
+      "sha256": "04fe0e8e23d4674b5c9613e0c8f48eb6a4aeaf0c82889bf76695476917b5ec9f"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-adapter-contract-20261004/audit_pinned_graph.py",
+      "bytes": 3712,
+      "sha256": "7ac69fa3cf60b51eb8d9d31effa7ca5769d4f2d24688d2879c1dd1aff6e94776"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-adapter-contract-20261004/pinned-graph-and-prefix-audit.json",
+      "bytes": 8395,
+      "sha256": "4008f6cd76e3ab865d0c0506ed360e3a4e37918270e54a4ecde9ae3285b4406f"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-adapter-contract-20261004/README.md",
+      "bytes": 2510,
+      "sha256": "11f37229ecfc70af9f20a8341eb71ed0de9136cdc5cb77edbd8eac51d25f553e"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-adapter-contract-20261004/test-results.log",
+      "bytes": 2361,
+      "sha256": "42462a0c500adce3ebe70071cc5514598bc60d2601fdd77a45a1eedd183bda5e"
+    }
+  ]
+}

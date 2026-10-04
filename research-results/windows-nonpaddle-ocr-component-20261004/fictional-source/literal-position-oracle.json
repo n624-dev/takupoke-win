@@ -1,0 +1,4847 @@
+{
+  "version": 1,
+  "scope": "Evaluator-only independent original literals/paint locations for eight invented tuples paired fontsize24/16. Not model input, full40slot document, OCR repair or formal Analysis oracle.",
+  "sourceSHA256": "b0ccafbd534a6c51f5d1bf870c2bd6a29775443dc609313a88f138674cf1445e",
+  "metadata": {
+    "title": "架設読取検証",
+    "year": 2031,
+    "yearLiteral": "2031年度",
+    "term": "前期"
+  },
+  "expectedEightTuples": [
+    {
+      "className": "検証組A",
+      "weekday": "月曜日",
+      "period": 1,
+      "subject": "色票工作桃",
+      "teacher": "試作役霞",
+      "room": "仮区画花"
+    },
+    {
+      "className": "検証組A",
+      "weekday": "月曜日",
+      "period": 2,
+      "subject": "線形試作青",
+      "teacher": "試作役霧",
+      "room": "仮区画葉"
+    },
+    {
+      "className": "検証組A",
+      "weekday": "木曜日",
+      "period": 1,
+      "subject": "立体習作紫",
+      "teacher": "試作役露",
+      "room": "仮区画芽"
+    },
+    {
+      "className": "検証組A",
+      "weekday": "木曜日",
+      "period": 2,
+      "subject": "模様演習橙",
+      "teacher": "試作役風",
+      "room": "仮区画枝"
+    },
+    {
+      "className": "検証組B",
+      "weekday": "月曜日",
+      "period": 1,
+      "subject": "紙形実習銀",
+      "teacher": "試作役雲",
+      "room": "仮区画根"
+    },
+    {
+      "className": "検証組B",
+      "weekday": "月曜日",
+      "period": 2,
+      "subject": "配色演習緑",
+      "teacher": "試作役虹",
+      "room": "仮区画蕾"
+    },
+    {
+      "className": "検証組B",
+      "weekday": "木曜日",
+      "period": 1,
+      "subject": "輪郭習作朱",
+      "teacher": "試作役星",
+      "room": "仮区画実"
+    },
+    {
+      "className": "検証組B",
+      "weekday": "木曜日",
+      "period": 2,
+      "subject": "影絵実習墨",
+      "teacher": "試作役月",
+      "room": "仮区画苔"
+    }
+  ],
+  "conditions": [
+    {
+      "condition": "clear",
+      "width": 1120,
+      "height": 400,
+      "sourcePaintRegions": [
+        {
+          "id": "year",
+          "literal": "2031年度",
+          "paintAnchor": [
+            59,
+            18
+          ],
+          "actualOriginalInkBox": [
+            60,
+            18,
+            159,
+            42
+          ],
+          "semanticCell": [
+            30,
+            10,
+            190,
+            50
+          ],
+          "kind": "year"
+        },
+        {
+          "id": "term",
+          "literal": "前期",
+          "paintAnchor": [
+            226,
+            18
+          ],
+          "actualOriginalInkBox": [
+            227,
+            18,
+            273,
+            42
+          ],
+          "semanticCell": [
+            205,
+            10,
+            295,
+            50
+          ],
+          "kind": "term"
+        },
+        {
+          "id": "title",
+          "literal": "架設読取検証",
+          "paintAnchor": [
+            500,
+            20
+          ],
+          "actualOriginalInkBox": [
+            500,
+            20,
+            644,
+            44
+          ],
+          "semanticCell": [
+            480,
+            10,
+            1060,
+            50
+          ],
+          "kind": "title"
+        },
+        {
+          "id": "class-label",
+          "literal": "クラス",
+          "paintAnchor": [
+            65,
+            85
+          ],
+          "actualOriginalInkBox": [
+            67,
+            85,
+            135,
+            107
+          ],
+          "semanticCell": [
+            30,
+            62,
+            172,
+            130
+          ],
+          "kind": "class-label"
+        },
+        {
+          "id": "day-0",
+          "literal": "月曜日",
+          "paintAnchor": [
+            358,
+            67
+          ],
+          "actualOriginalInkBox": [
+            358,
+            67,
+            426,
+            90
+          ],
+          "semanticCell": [
+            172,
+            62,
+            612,
+            96
+          ],
+          "kind": "weekday",
+          "weekday": "月曜日"
+        },
+        {
+          "id": "day-1",
+          "literal": "木曜日",
+          "paintAnchor": [
+            798,
+            67
+          ],
+          "actualOriginalInkBox": [
+            798,
+            67,
+            866,
+            91
+          ],
+          "semanticCell": [
+            612,
+            62,
+            1052,
+            96
+          ],
+          "kind": "weekday",
+          "weekday": "木曜日"
+        },
+        {
+          "id": "period-0",
+          "literal": "1時限",
+          "paintAnchor": [
+            250,
+            101
+          ],
+          "actualOriginalInkBox": [
+            252,
+            101,
+            311,
+            125
+          ],
+          "semanticCell": [
+            172,
+            96,
+            392,
+            130
+          ],
+          "kind": "period",
+          "weekday": "月曜日",
+          "period": 1
+        },
+        {
+          "id": "period-1",
+          "literal": "2時限",
+          "paintAnchor": [
+            471,
+            101
+          ],
+          "actualOriginalInkBox": [
+            472,
+            101,
+            532,
+            125
+          ],
+          "semanticCell": [
+            392,
+            96,
+            612,
+            130
+          ],
+          "kind": "period",
+          "weekday": "月曜日",
+          "period": 2
+        },
+        {
+          "id": "period-2",
+          "literal": "1時限",
+          "paintAnchor": [
+            690,
+            101
+          ],
+          "actualOriginalInkBox": [
+            692,
+            101,
+            751,
+            125
+          ],
+          "semanticCell": [
+            612,
+            96,
+            832,
+            130
+          ],
+          "kind": "period",
+          "weekday": "木曜日",
+          "period": 1
+        },
+        {
+          "id": "period-3",
+          "literal": "2時限",
+          "paintAnchor": [
+            911,
+            101
+          ],
+          "actualOriginalInkBox": [
+            912,
+            101,
+            972,
+            125
+          ],
+          "semanticCell": [
+            832,
+            96,
+            1052,
+            130
+          ],
+          "kind": "period",
+          "weekday": "木曜日",
+          "period": 2
+        },
+        {
+          "id": "class-0",
+          "literal": "検証組A",
+          "paintAnchor": [
+            57,
+            173
+          ],
+          "actualOriginalInkBox": [
+            57,
+            173,
+            144,
+            197
+          ],
+          "semanticCell": [
+            30,
+            130,
+            172,
+            240
+          ],
+          "kind": "class",
+          "className": "検証組A"
+        },
+        {
+          "id": "class-1",
+          "literal": "検証組B",
+          "paintAnchor": [
+            57,
+            283
+          ],
+          "actualOriginalInkBox": [
+            57,
+            283,
+            144,
+            307
+          ],
+          "semanticCell": [
+            30,
+            240,
+            172,
+            350
+          ],
+          "kind": "class",
+          "className": "検証組B"
+        },
+        {
+          "id": "slot-0-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            184,
+            142
+          ],
+          "actualOriginalInkBox": [
+            184,
+            142,
+            246,
+            166
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 0,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-0-subject-value",
+          "literal": "色票工作桃",
+          "paintAnchor": [
+            262,
+            142
+          ],
+          "actualOriginalInkBox": [
+            262,
+            142,
+            382,
+            166
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 0,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-0-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            184,
+            172
+          ],
+          "actualOriginalInkBox": [
+            184,
+            172,
+            246,
+            196
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 0,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-0-teacher-value",
+          "literal": "試作役霞",
+          "paintAnchor": [
+            262,
+            172
+          ],
+          "actualOriginalInkBox": [
+            262,
+            172,
+            357,
+            196
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 0,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-0-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            184,
+            202
+          ],
+          "actualOriginalInkBox": [
+            184,
+            202,
+            246,
+            226
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 0,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-0-room-value",
+          "literal": "仮区画花",
+          "paintAnchor": [
+            262,
+            202
+          ],
+          "actualOriginalInkBox": [
+            262,
+            202,
+            357,
+            226
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 0,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-1-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            404,
+            142
+          ],
+          "actualOriginalInkBox": [
+            404,
+            142,
+            466,
+            166
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 1,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-1-subject-value",
+          "literal": "線形試作青",
+          "paintAnchor": [
+            482,
+            142
+          ],
+          "actualOriginalInkBox": [
+            482,
+            142,
+            601,
+            166
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 1,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-1-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            404,
+            172
+          ],
+          "actualOriginalInkBox": [
+            404,
+            172,
+            466,
+            196
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 1,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-1-teacher-value",
+          "literal": "試作役霧",
+          "paintAnchor": [
+            482,
+            172
+          ],
+          "actualOriginalInkBox": [
+            482,
+            172,
+            577,
+            196
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 1,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-1-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            404,
+            202
+          ],
+          "actualOriginalInkBox": [
+            404,
+            202,
+            466,
+            226
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 1,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "room"
+        },
+        {
+          "id": "slot-1-room-value",
+          "literal": "仮区画葉",
+          "paintAnchor": [
+            482,
+            202
+          ],
+          "actualOriginalInkBox": [
+            482,
+            202,
+            578,
+            226
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 1,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "room"
+        },
+        {
+          "id": "slot-2-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            624,
+            142
+          ],
+          "actualOriginalInkBox": [
+            624,
+            142,
+            686,
+            166
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 2,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-2-subject-value",
+          "literal": "立体習作紫",
+          "paintAnchor": [
+            702,
+            142
+          ],
+          "actualOriginalInkBox": [
+            703,
+            142,
+            821,
+            166
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 2,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-2-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            624,
+            172
+          ],
+          "actualOriginalInkBox": [
+            624,
+            172,
+            686,
+            196
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 2,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-2-teacher-value",
+          "literal": "試作役露",
+          "paintAnchor": [
+            702,
+            172
+          ],
+          "actualOriginalInkBox": [
+            702,
+            172,
+            798,
+            196
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 2,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-2-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            624,
+            202
+          ],
+          "actualOriginalInkBox": [
+            624,
+            202,
+            686,
+            226
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 2,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-2-room-value",
+          "literal": "仮区画芽",
+          "paintAnchor": [
+            702,
+            202
+          ],
+          "actualOriginalInkBox": [
+            702,
+            202,
+            797,
+            226
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 2,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-3-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            844,
+            142
+          ],
+          "actualOriginalInkBox": [
+            844,
+            142,
+            906,
+            166
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 3,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-3-subject-value",
+          "literal": "模様演習橙",
+          "paintAnchor": [
+            922,
+            142
+          ],
+          "actualOriginalInkBox": [
+            922,
+            142,
+            1042,
+            166
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 3,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-3-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            844,
+            172
+          ],
+          "actualOriginalInkBox": [
+            844,
+            172,
+            906,
+            196
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 3,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-3-teacher-value",
+          "literal": "試作役風",
+          "paintAnchor": [
+            922,
+            172
+          ],
+          "actualOriginalInkBox": [
+            922,
+            172,
+            1018,
+            196
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 3,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-3-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            844,
+            202
+          ],
+          "actualOriginalInkBox": [
+            844,
+            202,
+            906,
+            226
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 3,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "room"
+        },
+        {
+          "id": "slot-3-room-value",
+          "literal": "仮区画枝",
+          "paintAnchor": [
+            922,
+            202
+          ],
+          "actualOriginalInkBox": [
+            922,
+            202,
+            1018,
+            226
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 3,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "room"
+        },
+        {
+          "id": "slot-4-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            184,
+            252
+          ],
+          "actualOriginalInkBox": [
+            184,
+            252,
+            246,
+            276
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 4,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-4-subject-value",
+          "literal": "紙形実習銀",
+          "paintAnchor": [
+            262,
+            252
+          ],
+          "actualOriginalInkBox": [
+            262,
+            252,
+            382,
+            276
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 4,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-4-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            184,
+            282
+          ],
+          "actualOriginalInkBox": [
+            184,
+            282,
+            246,
+            306
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 4,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-4-teacher-value",
+          "literal": "試作役雲",
+          "paintAnchor": [
+            262,
+            282
+          ],
+          "actualOriginalInkBox": [
+            262,
+            282,
+            357,
+            306
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 4,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-4-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            184,
+            312
+          ],
+          "actualOriginalInkBox": [
+            184,
+            312,
+            246,
+            336
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 4,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-4-room-value",
+          "literal": "仮区画根",
+          "paintAnchor": [
+            262,
+            312
+          ],
+          "actualOriginalInkBox": [
+            262,
+            312,
+            358,
+            336
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 4,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-5-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            404,
+            252
+          ],
+          "actualOriginalInkBox": [
+            404,
+            252,
+            466,
+            276
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 5,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-5-subject-value",
+          "literal": "配色演習緑",
+          "paintAnchor": [
+            482,
+            252
+          ],
+          "actualOriginalInkBox": [
+            483,
+            252,
+            602,
+            276
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 5,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-5-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            404,
+            282
+          ],
+          "actualOriginalInkBox": [
+            404,
+            282,
+            466,
+            306
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 5,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-5-teacher-value",
+          "literal": "試作役虹",
+          "paintAnchor": [
+            482,
+            282
+          ],
+          "actualOriginalInkBox": [
+            482,
+            282,
+            578,
+            306
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 5,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-5-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            404,
+            312
+          ],
+          "actualOriginalInkBox": [
+            404,
+            312,
+            466,
+            336
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 5,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "room"
+        },
+        {
+          "id": "slot-5-room-value",
+          "literal": "仮区画蕾",
+          "paintAnchor": [
+            482,
+            312
+          ],
+          "actualOriginalInkBox": [
+            482,
+            312,
+            577,
+            336
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 5,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "room"
+        },
+        {
+          "id": "slot-6-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            624,
+            252
+          ],
+          "actualOriginalInkBox": [
+            624,
+            252,
+            686,
+            276
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 6,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-6-subject-value",
+          "literal": "輪郭習作朱",
+          "paintAnchor": [
+            702,
+            252
+          ],
+          "actualOriginalInkBox": [
+            702,
+            252,
+            822,
+            276
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 6,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-6-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            624,
+            282
+          ],
+          "actualOriginalInkBox": [
+            624,
+            282,
+            686,
+            306
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 6,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-6-teacher-value",
+          "literal": "試作役星",
+          "paintAnchor": [
+            702,
+            282
+          ],
+          "actualOriginalInkBox": [
+            702,
+            282,
+            797,
+            306
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 6,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-6-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            624,
+            312
+          ],
+          "actualOriginalInkBox": [
+            624,
+            312,
+            686,
+            336
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 6,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-6-room-value",
+          "literal": "仮区画実",
+          "paintAnchor": [
+            702,
+            312
+          ],
+          "actualOriginalInkBox": [
+            702,
+            312,
+            797,
+            336
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 6,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-7-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            844,
+            252
+          ],
+          "actualOriginalInkBox": [
+            844,
+            252,
+            906,
+            276
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 7,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-7-subject-value",
+          "literal": "影絵実習墨",
+          "paintAnchor": [
+            922,
+            252
+          ],
+          "actualOriginalInkBox": [
+            923,
+            252,
+            1041,
+            276
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 7,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-7-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            844,
+            282
+          ],
+          "actualOriginalInkBox": [
+            844,
+            282,
+            906,
+            306
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 7,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-7-teacher-value",
+          "literal": "試作役月",
+          "paintAnchor": [
+            922,
+            282
+          ],
+          "actualOriginalInkBox": [
+            922,
+            282,
+            1014,
+            306
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 7,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-7-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            844,
+            312
+          ],
+          "actualOriginalInkBox": [
+            844,
+            312,
+            906,
+            336
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 7,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "room"
+        },
+        {
+          "id": "slot-7-room-value",
+          "literal": "仮区画苔",
+          "paintAnchor": [
+            922,
+            312
+          ],
+          "actualOriginalInkBox": [
+            922,
+            312,
+            1017,
+            336
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 7,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "room"
+        }
+      ],
+      "wholeFieldLines": [
+        {
+          "id": "tuple-0-subject",
+          "tupleIndex": 0,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "色票工作桃",
+          "wholeLineLiteral": "科目：色票工作桃",
+          "originalDrawSourceIDs": [
+            "slot-0-subject-label",
+            "slot-0-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            184,
+            142,
+            382,
+            166
+          ],
+          "semanticFieldBand": [
+            173,
+            131,
+            391,
+            169
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ]
+        },
+        {
+          "id": "tuple-0-teacher",
+          "tupleIndex": 0,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役霞",
+          "wholeLineLiteral": "担当：試作役霞",
+          "originalDrawSourceIDs": [
+            "slot-0-teacher-label",
+            "slot-0-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            184,
+            172,
+            357,
+            196
+          ],
+          "semanticFieldBand": [
+            173,
+            169,
+            391,
+            199
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ]
+        },
+        {
+          "id": "tuple-0-room",
+          "tupleIndex": 0,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画花",
+          "wholeLineLiteral": "教室：仮区画花",
+          "originalDrawSourceIDs": [
+            "slot-0-room-label",
+            "slot-0-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            184,
+            202,
+            357,
+            226
+          ],
+          "semanticFieldBand": [
+            173,
+            199,
+            391,
+            239
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ]
+        },
+        {
+          "id": "tuple-1-subject",
+          "tupleIndex": 1,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "線形試作青",
+          "wholeLineLiteral": "科目：線形試作青",
+          "originalDrawSourceIDs": [
+            "slot-1-subject-label",
+            "slot-1-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            404,
+            142,
+            601,
+            166
+          ],
+          "semanticFieldBand": [
+            393,
+            131,
+            611,
+            169
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ]
+        },
+        {
+          "id": "tuple-1-teacher",
+          "tupleIndex": 1,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役霧",
+          "wholeLineLiteral": "担当：試作役霧",
+          "originalDrawSourceIDs": [
+            "slot-1-teacher-label",
+            "slot-1-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            404,
+            172,
+            577,
+            196
+          ],
+          "semanticFieldBand": [
+            393,
+            169,
+            611,
+            199
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ]
+        },
+        {
+          "id": "tuple-1-room",
+          "tupleIndex": 1,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画葉",
+          "wholeLineLiteral": "教室：仮区画葉",
+          "originalDrawSourceIDs": [
+            "slot-1-room-label",
+            "slot-1-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            404,
+            202,
+            578,
+            226
+          ],
+          "semanticFieldBand": [
+            393,
+            199,
+            611,
+            239
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ]
+        },
+        {
+          "id": "tuple-2-subject",
+          "tupleIndex": 2,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "立体習作紫",
+          "wholeLineLiteral": "科目：立体習作紫",
+          "originalDrawSourceIDs": [
+            "slot-2-subject-label",
+            "slot-2-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            624,
+            142,
+            821,
+            166
+          ],
+          "semanticFieldBand": [
+            613,
+            131,
+            831,
+            169
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ]
+        },
+        {
+          "id": "tuple-2-teacher",
+          "tupleIndex": 2,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役露",
+          "wholeLineLiteral": "担当：試作役露",
+          "originalDrawSourceIDs": [
+            "slot-2-teacher-label",
+            "slot-2-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            624,
+            172,
+            798,
+            196
+          ],
+          "semanticFieldBand": [
+            613,
+            169,
+            831,
+            199
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ]
+        },
+        {
+          "id": "tuple-2-room",
+          "tupleIndex": 2,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画芽",
+          "wholeLineLiteral": "教室：仮区画芽",
+          "originalDrawSourceIDs": [
+            "slot-2-room-label",
+            "slot-2-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            624,
+            202,
+            797,
+            226
+          ],
+          "semanticFieldBand": [
+            613,
+            199,
+            831,
+            239
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ]
+        },
+        {
+          "id": "tuple-3-subject",
+          "tupleIndex": 3,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "模様演習橙",
+          "wholeLineLiteral": "科目：模様演習橙",
+          "originalDrawSourceIDs": [
+            "slot-3-subject-label",
+            "slot-3-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            844,
+            142,
+            1042,
+            166
+          ],
+          "semanticFieldBand": [
+            833,
+            131,
+            1051,
+            169
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ]
+        },
+        {
+          "id": "tuple-3-teacher",
+          "tupleIndex": 3,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役風",
+          "wholeLineLiteral": "担当：試作役風",
+          "originalDrawSourceIDs": [
+            "slot-3-teacher-label",
+            "slot-3-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            844,
+            172,
+            1018,
+            196
+          ],
+          "semanticFieldBand": [
+            833,
+            169,
+            1051,
+            199
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ]
+        },
+        {
+          "id": "tuple-3-room",
+          "tupleIndex": 3,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画枝",
+          "wholeLineLiteral": "教室：仮区画枝",
+          "originalDrawSourceIDs": [
+            "slot-3-room-label",
+            "slot-3-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            844,
+            202,
+            1018,
+            226
+          ],
+          "semanticFieldBand": [
+            833,
+            199,
+            1051,
+            239
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ]
+        },
+        {
+          "id": "tuple-4-subject",
+          "tupleIndex": 4,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "紙形実習銀",
+          "wholeLineLiteral": "科目：紙形実習銀",
+          "originalDrawSourceIDs": [
+            "slot-4-subject-label",
+            "slot-4-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            184,
+            252,
+            382,
+            276
+          ],
+          "semanticFieldBand": [
+            173,
+            241,
+            391,
+            279
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ]
+        },
+        {
+          "id": "tuple-4-teacher",
+          "tupleIndex": 4,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役雲",
+          "wholeLineLiteral": "担当：試作役雲",
+          "originalDrawSourceIDs": [
+            "slot-4-teacher-label",
+            "slot-4-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            184,
+            282,
+            357,
+            306
+          ],
+          "semanticFieldBand": [
+            173,
+            279,
+            391,
+            309
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ]
+        },
+        {
+          "id": "tuple-4-room",
+          "tupleIndex": 4,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画根",
+          "wholeLineLiteral": "教室：仮区画根",
+          "originalDrawSourceIDs": [
+            "slot-4-room-label",
+            "slot-4-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            184,
+            312,
+            358,
+            336
+          ],
+          "semanticFieldBand": [
+            173,
+            309,
+            391,
+            349
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ]
+        },
+        {
+          "id": "tuple-5-subject",
+          "tupleIndex": 5,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "配色演習緑",
+          "wholeLineLiteral": "科目：配色演習緑",
+          "originalDrawSourceIDs": [
+            "slot-5-subject-label",
+            "slot-5-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            404,
+            252,
+            602,
+            276
+          ],
+          "semanticFieldBand": [
+            393,
+            241,
+            611,
+            279
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ]
+        },
+        {
+          "id": "tuple-5-teacher",
+          "tupleIndex": 5,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役虹",
+          "wholeLineLiteral": "担当：試作役虹",
+          "originalDrawSourceIDs": [
+            "slot-5-teacher-label",
+            "slot-5-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            404,
+            282,
+            578,
+            306
+          ],
+          "semanticFieldBand": [
+            393,
+            279,
+            611,
+            309
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ]
+        },
+        {
+          "id": "tuple-5-room",
+          "tupleIndex": 5,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画蕾",
+          "wholeLineLiteral": "教室：仮区画蕾",
+          "originalDrawSourceIDs": [
+            "slot-5-room-label",
+            "slot-5-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            404,
+            312,
+            577,
+            336
+          ],
+          "semanticFieldBand": [
+            393,
+            309,
+            611,
+            349
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ]
+        },
+        {
+          "id": "tuple-6-subject",
+          "tupleIndex": 6,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "輪郭習作朱",
+          "wholeLineLiteral": "科目：輪郭習作朱",
+          "originalDrawSourceIDs": [
+            "slot-6-subject-label",
+            "slot-6-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            624,
+            252,
+            822,
+            276
+          ],
+          "semanticFieldBand": [
+            613,
+            241,
+            831,
+            279
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ]
+        },
+        {
+          "id": "tuple-6-teacher",
+          "tupleIndex": 6,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役星",
+          "wholeLineLiteral": "担当：試作役星",
+          "originalDrawSourceIDs": [
+            "slot-6-teacher-label",
+            "slot-6-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            624,
+            282,
+            797,
+            306
+          ],
+          "semanticFieldBand": [
+            613,
+            279,
+            831,
+            309
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ]
+        },
+        {
+          "id": "tuple-6-room",
+          "tupleIndex": 6,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画実",
+          "wholeLineLiteral": "教室：仮区画実",
+          "originalDrawSourceIDs": [
+            "slot-6-room-label",
+            "slot-6-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            624,
+            312,
+            797,
+            336
+          ],
+          "semanticFieldBand": [
+            613,
+            309,
+            831,
+            349
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ]
+        },
+        {
+          "id": "tuple-7-subject",
+          "tupleIndex": 7,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "影絵実習墨",
+          "wholeLineLiteral": "科目：影絵実習墨",
+          "originalDrawSourceIDs": [
+            "slot-7-subject-label",
+            "slot-7-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            844,
+            252,
+            1041,
+            276
+          ],
+          "semanticFieldBand": [
+            833,
+            241,
+            1051,
+            279
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ]
+        },
+        {
+          "id": "tuple-7-teacher",
+          "tupleIndex": 7,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役月",
+          "wholeLineLiteral": "担当：試作役月",
+          "originalDrawSourceIDs": [
+            "slot-7-teacher-label",
+            "slot-7-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            844,
+            282,
+            1014,
+            306
+          ],
+          "semanticFieldBand": [
+            833,
+            279,
+            1051,
+            309
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ]
+        },
+        {
+          "id": "tuple-7-room",
+          "tupleIndex": 7,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画苔",
+          "wholeLineLiteral": "教室：仮区画苔",
+          "originalDrawSourceIDs": [
+            "slot-7-room-label",
+            "slot-7-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            844,
+            312,
+            1017,
+            336
+          ],
+          "semanticFieldBand": [
+            833,
+            309,
+            1051,
+            349
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ]
+        }
+      ],
+      "tupleBindings": [
+        {
+          "index": 0,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 1,
+          "subject": "色票工作桃",
+          "teacher": "試作役霞",
+          "room": "仮区画花",
+          "classHeaderID": "class-0",
+          "weekdayHeaderID": "day-0",
+          "periodHeaderID": "period-0",
+          "fieldLineIDs": [
+            "tuple-0-subject",
+            "tuple-0-teacher",
+            "tuple-0-room"
+          ]
+        },
+        {
+          "index": 1,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 2,
+          "subject": "線形試作青",
+          "teacher": "試作役霧",
+          "room": "仮区画葉",
+          "classHeaderID": "class-0",
+          "weekdayHeaderID": "day-0",
+          "periodHeaderID": "period-1",
+          "fieldLineIDs": [
+            "tuple-1-subject",
+            "tuple-1-teacher",
+            "tuple-1-room"
+          ]
+        },
+        {
+          "index": 2,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 1,
+          "subject": "立体習作紫",
+          "teacher": "試作役露",
+          "room": "仮区画芽",
+          "classHeaderID": "class-0",
+          "weekdayHeaderID": "day-1",
+          "periodHeaderID": "period-2",
+          "fieldLineIDs": [
+            "tuple-2-subject",
+            "tuple-2-teacher",
+            "tuple-2-room"
+          ]
+        },
+        {
+          "index": 3,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 2,
+          "subject": "模様演習橙",
+          "teacher": "試作役風",
+          "room": "仮区画枝",
+          "classHeaderID": "class-0",
+          "weekdayHeaderID": "day-1",
+          "periodHeaderID": "period-3",
+          "fieldLineIDs": [
+            "tuple-3-subject",
+            "tuple-3-teacher",
+            "tuple-3-room"
+          ]
+        },
+        {
+          "index": 4,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 1,
+          "subject": "紙形実習銀",
+          "teacher": "試作役雲",
+          "room": "仮区画根",
+          "classHeaderID": "class-1",
+          "weekdayHeaderID": "day-0",
+          "periodHeaderID": "period-0",
+          "fieldLineIDs": [
+            "tuple-4-subject",
+            "tuple-4-teacher",
+            "tuple-4-room"
+          ]
+        },
+        {
+          "index": 5,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 2,
+          "subject": "配色演習緑",
+          "teacher": "試作役虹",
+          "room": "仮区画蕾",
+          "classHeaderID": "class-1",
+          "weekdayHeaderID": "day-0",
+          "periodHeaderID": "period-1",
+          "fieldLineIDs": [
+            "tuple-5-subject",
+            "tuple-5-teacher",
+            "tuple-5-room"
+          ]
+        },
+        {
+          "index": 6,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 1,
+          "subject": "輪郭習作朱",
+          "teacher": "試作役星",
+          "room": "仮区画実",
+          "classHeaderID": "class-1",
+          "weekdayHeaderID": "day-1",
+          "periodHeaderID": "period-2",
+          "fieldLineIDs": [
+            "tuple-6-subject",
+            "tuple-6-teacher",
+            "tuple-6-room"
+          ]
+        },
+        {
+          "index": 7,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 2,
+          "subject": "影絵実習墨",
+          "teacher": "試作役月",
+          "room": "仮区画苔",
+          "classHeaderID": "class-1",
+          "weekdayHeaderID": "day-1",
+          "periodHeaderID": "period-3",
+          "fieldLineIDs": [
+            "tuple-7-subject",
+            "tuple-7-teacher",
+            "tuple-7-room"
+          ]
+        }
+      ],
+      "RGBSHA256": "b885e1232fc3e1cd698998d15c2fd0a0296f8f74b6f1b1a5ec3bbea09ee0e437"
+    },
+    {
+      "condition": "small",
+      "width": 1120,
+      "height": 400,
+      "sourcePaintRegions": [
+        {
+          "id": "year",
+          "literal": "2031年度",
+          "paintAnchor": [
+            76,
+            22
+          ],
+          "actualOriginalInkBox": [
+            76,
+            22,
+            144,
+            38
+          ],
+          "semanticCell": [
+            30,
+            10,
+            190,
+            50
+          ],
+          "kind": "year"
+        },
+        {
+          "id": "term",
+          "literal": "前期",
+          "paintAnchor": [
+            234,
+            21
+          ],
+          "actualOriginalInkBox": [
+            234,
+            21,
+            265,
+            38
+          ],
+          "semanticCell": [
+            205,
+            10,
+            295,
+            50
+          ],
+          "kind": "term"
+        },
+        {
+          "id": "title",
+          "literal": "架設読取検証",
+          "paintAnchor": [
+            500,
+            20
+          ],
+          "actualOriginalInkBox": [
+            500,
+            20,
+            596,
+            36
+          ],
+          "semanticCell": [
+            480,
+            10,
+            1060,
+            50
+          ],
+          "kind": "title"
+        },
+        {
+          "id": "class-label",
+          "literal": "クラス",
+          "paintAnchor": [
+            77,
+            88
+          ],
+          "actualOriginalInkBox": [
+            78,
+            88,
+            124,
+            104
+          ],
+          "semanticCell": [
+            30,
+            62,
+            172,
+            130
+          ],
+          "kind": "class-label"
+        },
+        {
+          "id": "day-0",
+          "literal": "月曜日",
+          "paintAnchor": [
+            369,
+            71
+          ],
+          "actualOriginalInkBox": [
+            369,
+            71,
+            415,
+            86
+          ],
+          "semanticCell": [
+            172,
+            62,
+            612,
+            96
+          ],
+          "kind": "weekday",
+          "weekday": "月曜日"
+        },
+        {
+          "id": "day-1",
+          "literal": "木曜日",
+          "paintAnchor": [
+            809,
+            71
+          ],
+          "actualOriginalInkBox": [
+            809,
+            71,
+            855,
+            87
+          ],
+          "semanticCell": [
+            612,
+            62,
+            1052,
+            96
+          ],
+          "kind": "weekday",
+          "weekday": "木曜日"
+        },
+        {
+          "id": "period-0",
+          "literal": "1時限",
+          "paintAnchor": [
+            261,
+            105
+          ],
+          "actualOriginalInkBox": [
+            262,
+            105,
+            302,
+            121
+          ],
+          "semanticCell": [
+            172,
+            96,
+            392,
+            130
+          ],
+          "kind": "period",
+          "weekday": "月曜日",
+          "period": 1
+        },
+        {
+          "id": "period-1",
+          "literal": "2時限",
+          "paintAnchor": [
+            481,
+            105
+          ],
+          "actualOriginalInkBox": [
+            481,
+            105,
+            522,
+            121
+          ],
+          "semanticCell": [
+            392,
+            96,
+            612,
+            130
+          ],
+          "kind": "period",
+          "weekday": "月曜日",
+          "period": 2
+        },
+        {
+          "id": "period-2",
+          "literal": "1時限",
+          "paintAnchor": [
+            701,
+            105
+          ],
+          "actualOriginalInkBox": [
+            702,
+            105,
+            742,
+            121
+          ],
+          "semanticCell": [
+            612,
+            96,
+            832,
+            130
+          ],
+          "kind": "period",
+          "weekday": "木曜日",
+          "period": 1
+        },
+        {
+          "id": "period-3",
+          "literal": "2時限",
+          "paintAnchor": [
+            921,
+            105
+          ],
+          "actualOriginalInkBox": [
+            921,
+            105,
+            962,
+            121
+          ],
+          "semanticCell": [
+            832,
+            96,
+            1052,
+            130
+          ],
+          "kind": "period",
+          "weekday": "木曜日",
+          "period": 2
+        },
+        {
+          "id": "class-0",
+          "literal": "検証組A",
+          "paintAnchor": [
+            72,
+            177
+          ],
+          "actualOriginalInkBox": [
+            72,
+            177,
+            130,
+            193
+          ],
+          "semanticCell": [
+            30,
+            130,
+            172,
+            240
+          ],
+          "kind": "class",
+          "className": "検証組A"
+        },
+        {
+          "id": "class-1",
+          "literal": "検証組B",
+          "paintAnchor": [
+            72,
+            287
+          ],
+          "actualOriginalInkBox": [
+            72,
+            287,
+            130,
+            303
+          ],
+          "semanticCell": [
+            30,
+            240,
+            172,
+            350
+          ],
+          "kind": "class",
+          "className": "検証組B"
+        },
+        {
+          "id": "slot-0-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            184,
+            142
+          ],
+          "actualOriginalInkBox": [
+            184,
+            142,
+            226,
+            158
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 0,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-0-subject-value",
+          "literal": "色票工作桃",
+          "paintAnchor": [
+            262,
+            142
+          ],
+          "actualOriginalInkBox": [
+            262,
+            142,
+            342,
+            158
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 0,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-0-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            184,
+            172
+          ],
+          "actualOriginalInkBox": [
+            184,
+            172,
+            226,
+            188
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 0,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-0-teacher-value",
+          "literal": "試作役霞",
+          "paintAnchor": [
+            262,
+            172
+          ],
+          "actualOriginalInkBox": [
+            262,
+            172,
+            326,
+            188
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 0,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-0-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            184,
+            202
+          ],
+          "actualOriginalInkBox": [
+            184,
+            202,
+            226,
+            218
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 0,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-0-room-value",
+          "literal": "仮区画花",
+          "paintAnchor": [
+            262,
+            202
+          ],
+          "actualOriginalInkBox": [
+            262,
+            202,
+            326,
+            218
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 0,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-1-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            404,
+            142
+          ],
+          "actualOriginalInkBox": [
+            404,
+            142,
+            446,
+            158
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 1,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-1-subject-value",
+          "literal": "線形試作青",
+          "paintAnchor": [
+            482,
+            142
+          ],
+          "actualOriginalInkBox": [
+            482,
+            142,
+            562,
+            159
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 1,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-1-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            404,
+            172
+          ],
+          "actualOriginalInkBox": [
+            404,
+            172,
+            446,
+            188
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 1,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-1-teacher-value",
+          "literal": "試作役霧",
+          "paintAnchor": [
+            482,
+            172
+          ],
+          "actualOriginalInkBox": [
+            482,
+            172,
+            546,
+            188
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 1,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-1-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            404,
+            202
+          ],
+          "actualOriginalInkBox": [
+            404,
+            202,
+            446,
+            218
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 1,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "room"
+        },
+        {
+          "id": "slot-1-room-value",
+          "literal": "仮区画葉",
+          "paintAnchor": [
+            482,
+            202
+          ],
+          "actualOriginalInkBox": [
+            482,
+            202,
+            546,
+            218
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 1,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "room"
+        },
+        {
+          "id": "slot-2-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            624,
+            142
+          ],
+          "actualOriginalInkBox": [
+            624,
+            142,
+            666,
+            158
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 2,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-2-subject-value",
+          "literal": "立体習作紫",
+          "paintAnchor": [
+            702,
+            142
+          ],
+          "actualOriginalInkBox": [
+            702,
+            142,
+            782,
+            158
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 2,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-2-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            624,
+            172
+          ],
+          "actualOriginalInkBox": [
+            624,
+            172,
+            666,
+            188
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 2,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-2-teacher-value",
+          "literal": "試作役露",
+          "paintAnchor": [
+            702,
+            172
+          ],
+          "actualOriginalInkBox": [
+            702,
+            172,
+            766,
+            188
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 2,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-2-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            624,
+            202
+          ],
+          "actualOriginalInkBox": [
+            624,
+            202,
+            666,
+            218
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 2,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-2-room-value",
+          "literal": "仮区画芽",
+          "paintAnchor": [
+            702,
+            202
+          ],
+          "actualOriginalInkBox": [
+            702,
+            202,
+            766,
+            218
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 2,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-3-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            844,
+            142
+          ],
+          "actualOriginalInkBox": [
+            844,
+            142,
+            886,
+            158
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 3,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-3-subject-value",
+          "literal": "模様演習橙",
+          "paintAnchor": [
+            922,
+            142
+          ],
+          "actualOriginalInkBox": [
+            922,
+            142,
+            1002,
+            158
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 3,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-3-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            844,
+            172
+          ],
+          "actualOriginalInkBox": [
+            844,
+            172,
+            886,
+            188
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 3,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-3-teacher-value",
+          "literal": "試作役風",
+          "paintAnchor": [
+            922,
+            172
+          ],
+          "actualOriginalInkBox": [
+            922,
+            172,
+            986,
+            188
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 3,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-3-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            844,
+            202
+          ],
+          "actualOriginalInkBox": [
+            844,
+            202,
+            886,
+            218
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ],
+          "kind": "role-label",
+          "tupleIndex": 3,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "room"
+        },
+        {
+          "id": "slot-3-room-value",
+          "literal": "仮区画枝",
+          "paintAnchor": [
+            922,
+            202
+          ],
+          "actualOriginalInkBox": [
+            922,
+            202,
+            986,
+            218
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ],
+          "kind": "role-value",
+          "tupleIndex": 3,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "room"
+        },
+        {
+          "id": "slot-4-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            184,
+            252
+          ],
+          "actualOriginalInkBox": [
+            184,
+            252,
+            226,
+            268
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 4,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-4-subject-value",
+          "literal": "紙形実習銀",
+          "paintAnchor": [
+            262,
+            252
+          ],
+          "actualOriginalInkBox": [
+            262,
+            252,
+            342,
+            268
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 4,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-4-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            184,
+            282
+          ],
+          "actualOriginalInkBox": [
+            184,
+            282,
+            226,
+            298
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 4,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-4-teacher-value",
+          "literal": "試作役雲",
+          "paintAnchor": [
+            262,
+            282
+          ],
+          "actualOriginalInkBox": [
+            262,
+            282,
+            326,
+            298
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 4,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-4-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            184,
+            312
+          ],
+          "actualOriginalInkBox": [
+            184,
+            312,
+            226,
+            328
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 4,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-4-room-value",
+          "literal": "仮区画根",
+          "paintAnchor": [
+            262,
+            312
+          ],
+          "actualOriginalInkBox": [
+            262,
+            312,
+            326,
+            328
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 4,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-5-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            404,
+            252
+          ],
+          "actualOriginalInkBox": [
+            404,
+            252,
+            446,
+            268
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 5,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-5-subject-value",
+          "literal": "配色演習緑",
+          "paintAnchor": [
+            482,
+            252
+          ],
+          "actualOriginalInkBox": [
+            482,
+            252,
+            562,
+            268
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 5,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-5-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            404,
+            282
+          ],
+          "actualOriginalInkBox": [
+            404,
+            282,
+            446,
+            298
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 5,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-5-teacher-value",
+          "literal": "試作役虹",
+          "paintAnchor": [
+            482,
+            282
+          ],
+          "actualOriginalInkBox": [
+            482,
+            282,
+            546,
+            298
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 5,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-5-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            404,
+            312
+          ],
+          "actualOriginalInkBox": [
+            404,
+            312,
+            446,
+            328
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 5,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "room"
+        },
+        {
+          "id": "slot-5-room-value",
+          "literal": "仮区画蕾",
+          "paintAnchor": [
+            482,
+            312
+          ],
+          "actualOriginalInkBox": [
+            482,
+            312,
+            546,
+            328
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 5,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 2,
+          "role": "room"
+        },
+        {
+          "id": "slot-6-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            624,
+            252
+          ],
+          "actualOriginalInkBox": [
+            624,
+            252,
+            666,
+            268
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 6,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-6-subject-value",
+          "literal": "輪郭習作朱",
+          "paintAnchor": [
+            702,
+            252
+          ],
+          "actualOriginalInkBox": [
+            702,
+            252,
+            782,
+            268
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 6,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "subject"
+        },
+        {
+          "id": "slot-6-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            624,
+            282
+          ],
+          "actualOriginalInkBox": [
+            624,
+            282,
+            666,
+            298
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 6,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-6-teacher-value",
+          "literal": "試作役星",
+          "paintAnchor": [
+            702,
+            282
+          ],
+          "actualOriginalInkBox": [
+            702,
+            282,
+            765,
+            298
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 6,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-6-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            624,
+            312
+          ],
+          "actualOriginalInkBox": [
+            624,
+            312,
+            666,
+            328
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 6,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-6-room-value",
+          "literal": "仮区画実",
+          "paintAnchor": [
+            702,
+            312
+          ],
+          "actualOriginalInkBox": [
+            702,
+            312,
+            766,
+            328
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 6,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 1,
+          "role": "room"
+        },
+        {
+          "id": "slot-7-subject-label",
+          "literal": "科目：",
+          "paintAnchor": [
+            844,
+            252
+          ],
+          "actualOriginalInkBox": [
+            844,
+            252,
+            886,
+            268
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 7,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-7-subject-value",
+          "literal": "影絵実習墨",
+          "paintAnchor": [
+            922,
+            252
+          ],
+          "actualOriginalInkBox": [
+            922,
+            252,
+            1002,
+            268
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 7,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "subject"
+        },
+        {
+          "id": "slot-7-teacher-label",
+          "literal": "担当：",
+          "paintAnchor": [
+            844,
+            282
+          ],
+          "actualOriginalInkBox": [
+            844,
+            282,
+            886,
+            298
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 7,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-7-teacher-value",
+          "literal": "試作役月",
+          "paintAnchor": [
+            922,
+            282
+          ],
+          "actualOriginalInkBox": [
+            922,
+            282,
+            984,
+            298
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 7,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "teacher"
+        },
+        {
+          "id": "slot-7-room-label",
+          "literal": "教室：",
+          "paintAnchor": [
+            844,
+            312
+          ],
+          "actualOriginalInkBox": [
+            844,
+            312,
+            886,
+            328
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ],
+          "kind": "role-label",
+          "tupleIndex": 7,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "room"
+        },
+        {
+          "id": "slot-7-room-value",
+          "literal": "仮区画苔",
+          "paintAnchor": [
+            922,
+            312
+          ],
+          "actualOriginalInkBox": [
+            922,
+            312,
+            986,
+            328
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ],
+          "kind": "role-value",
+          "tupleIndex": 7,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 2,
+          "role": "room"
+        }
+      ],
+      "wholeFieldLines": [
+        {
+          "id": "tuple-0-subject",
+          "tupleIndex": 0,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "色票工作桃",
+          "wholeLineLiteral": "科目：色票工作桃",
+          "originalDrawSourceIDs": [
+            "slot-0-subject-label",
+            "slot-0-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            184,
+            142,
+            342,
+            158
+          ],
+          "semanticFieldBand": [
+            173,
+            131,
+            391,
+            169
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ]
+        },
+        {
+          "id": "tuple-0-teacher",
+          "tupleIndex": 0,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役霞",
+          "wholeLineLiteral": "担当：試作役霞",
+          "originalDrawSourceIDs": [
+            "slot-0-teacher-label",
+            "slot-0-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            184,
+            172,
+            326,
+            188
+          ],
+          "semanticFieldBand": [
+            173,
+            169,
+            391,
+            199
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ]
+        },
+        {
+          "id": "tuple-0-room",
+          "tupleIndex": 0,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画花",
+          "wholeLineLiteral": "教室：仮区画花",
+          "originalDrawSourceIDs": [
+            "slot-0-room-label",
+            "slot-0-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            184,
+            202,
+            326,
+            218
+          ],
+          "semanticFieldBand": [
+            173,
+            199,
+            391,
+            239
+          ],
+          "semanticCell": [
+            172,
+            130,
+            392,
+            240
+          ]
+        },
+        {
+          "id": "tuple-1-subject",
+          "tupleIndex": 1,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "線形試作青",
+          "wholeLineLiteral": "科目：線形試作青",
+          "originalDrawSourceIDs": [
+            "slot-1-subject-label",
+            "slot-1-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            404,
+            142,
+            562,
+            159
+          ],
+          "semanticFieldBand": [
+            393,
+            131,
+            611,
+            169
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ]
+        },
+        {
+          "id": "tuple-1-teacher",
+          "tupleIndex": 1,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役霧",
+          "wholeLineLiteral": "担当：試作役霧",
+          "originalDrawSourceIDs": [
+            "slot-1-teacher-label",
+            "slot-1-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            404,
+            172,
+            546,
+            188
+          ],
+          "semanticFieldBand": [
+            393,
+            169,
+            611,
+            199
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ]
+        },
+        {
+          "id": "tuple-1-room",
+          "tupleIndex": 1,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画葉",
+          "wholeLineLiteral": "教室：仮区画葉",
+          "originalDrawSourceIDs": [
+            "slot-1-room-label",
+            "slot-1-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            404,
+            202,
+            546,
+            218
+          ],
+          "semanticFieldBand": [
+            393,
+            199,
+            611,
+            239
+          ],
+          "semanticCell": [
+            392,
+            130,
+            612,
+            240
+          ]
+        },
+        {
+          "id": "tuple-2-subject",
+          "tupleIndex": 2,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "立体習作紫",
+          "wholeLineLiteral": "科目：立体習作紫",
+          "originalDrawSourceIDs": [
+            "slot-2-subject-label",
+            "slot-2-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            624,
+            142,
+            782,
+            158
+          ],
+          "semanticFieldBand": [
+            613,
+            131,
+            831,
+            169
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ]
+        },
+        {
+          "id": "tuple-2-teacher",
+          "tupleIndex": 2,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役露",
+          "wholeLineLiteral": "担当：試作役露",
+          "originalDrawSourceIDs": [
+            "slot-2-teacher-label",
+            "slot-2-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            624,
+            172,
+            766,
+            188
+          ],
+          "semanticFieldBand": [
+            613,
+            169,
+            831,
+            199
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ]
+        },
+        {
+          "id": "tuple-2-room",
+          "tupleIndex": 2,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画芽",
+          "wholeLineLiteral": "教室：仮区画芽",
+          "originalDrawSourceIDs": [
+            "slot-2-room-label",
+            "slot-2-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            624,
+            202,
+            766,
+            218
+          ],
+          "semanticFieldBand": [
+            613,
+            199,
+            831,
+            239
+          ],
+          "semanticCell": [
+            612,
+            130,
+            832,
+            240
+          ]
+        },
+        {
+          "id": "tuple-3-subject",
+          "tupleIndex": 3,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "模様演習橙",
+          "wholeLineLiteral": "科目：模様演習橙",
+          "originalDrawSourceIDs": [
+            "slot-3-subject-label",
+            "slot-3-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            844,
+            142,
+            1002,
+            158
+          ],
+          "semanticFieldBand": [
+            833,
+            131,
+            1051,
+            169
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ]
+        },
+        {
+          "id": "tuple-3-teacher",
+          "tupleIndex": 3,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役風",
+          "wholeLineLiteral": "担当：試作役風",
+          "originalDrawSourceIDs": [
+            "slot-3-teacher-label",
+            "slot-3-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            844,
+            172,
+            986,
+            188
+          ],
+          "semanticFieldBand": [
+            833,
+            169,
+            1051,
+            199
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ]
+        },
+        {
+          "id": "tuple-3-room",
+          "tupleIndex": 3,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画枝",
+          "wholeLineLiteral": "教室：仮区画枝",
+          "originalDrawSourceIDs": [
+            "slot-3-room-label",
+            "slot-3-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            844,
+            202,
+            986,
+            218
+          ],
+          "semanticFieldBand": [
+            833,
+            199,
+            1051,
+            239
+          ],
+          "semanticCell": [
+            832,
+            130,
+            1052,
+            240
+          ]
+        },
+        {
+          "id": "tuple-4-subject",
+          "tupleIndex": 4,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "紙形実習銀",
+          "wholeLineLiteral": "科目：紙形実習銀",
+          "originalDrawSourceIDs": [
+            "slot-4-subject-label",
+            "slot-4-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            184,
+            252,
+            342,
+            268
+          ],
+          "semanticFieldBand": [
+            173,
+            241,
+            391,
+            279
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ]
+        },
+        {
+          "id": "tuple-4-teacher",
+          "tupleIndex": 4,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役雲",
+          "wholeLineLiteral": "担当：試作役雲",
+          "originalDrawSourceIDs": [
+            "slot-4-teacher-label",
+            "slot-4-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            184,
+            282,
+            326,
+            298
+          ],
+          "semanticFieldBand": [
+            173,
+            279,
+            391,
+            309
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ]
+        },
+        {
+          "id": "tuple-4-room",
+          "tupleIndex": 4,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画根",
+          "wholeLineLiteral": "教室：仮区画根",
+          "originalDrawSourceIDs": [
+            "slot-4-room-label",
+            "slot-4-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            184,
+            312,
+            326,
+            328
+          ],
+          "semanticFieldBand": [
+            173,
+            309,
+            391,
+            349
+          ],
+          "semanticCell": [
+            172,
+            240,
+            392,
+            350
+          ]
+        },
+        {
+          "id": "tuple-5-subject",
+          "tupleIndex": 5,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "配色演習緑",
+          "wholeLineLiteral": "科目：配色演習緑",
+          "originalDrawSourceIDs": [
+            "slot-5-subject-label",
+            "slot-5-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            404,
+            252,
+            562,
+            268
+          ],
+          "semanticFieldBand": [
+            393,
+            241,
+            611,
+            279
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ]
+        },
+        {
+          "id": "tuple-5-teacher",
+          "tupleIndex": 5,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役虹",
+          "wholeLineLiteral": "担当：試作役虹",
+          "originalDrawSourceIDs": [
+            "slot-5-teacher-label",
+            "slot-5-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            404,
+            282,
+            546,
+            298
+          ],
+          "semanticFieldBand": [
+            393,
+            279,
+            611,
+            309
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ]
+        },
+        {
+          "id": "tuple-5-room",
+          "tupleIndex": 5,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画蕾",
+          "wholeLineLiteral": "教室：仮区画蕾",
+          "originalDrawSourceIDs": [
+            "slot-5-room-label",
+            "slot-5-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            404,
+            312,
+            546,
+            328
+          ],
+          "semanticFieldBand": [
+            393,
+            309,
+            611,
+            349
+          ],
+          "semanticCell": [
+            392,
+            240,
+            612,
+            350
+          ]
+        },
+        {
+          "id": "tuple-6-subject",
+          "tupleIndex": 6,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "輪郭習作朱",
+          "wholeLineLiteral": "科目：輪郭習作朱",
+          "originalDrawSourceIDs": [
+            "slot-6-subject-label",
+            "slot-6-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            624,
+            252,
+            782,
+            268
+          ],
+          "semanticFieldBand": [
+            613,
+            241,
+            831,
+            279
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ]
+        },
+        {
+          "id": "tuple-6-teacher",
+          "tupleIndex": 6,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役星",
+          "wholeLineLiteral": "担当：試作役星",
+          "originalDrawSourceIDs": [
+            "slot-6-teacher-label",
+            "slot-6-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            624,
+            282,
+            765,
+            298
+          ],
+          "semanticFieldBand": [
+            613,
+            279,
+            831,
+            309
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ]
+        },
+        {
+          "id": "tuple-6-room",
+          "tupleIndex": 6,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画実",
+          "wholeLineLiteral": "教室：仮区画実",
+          "originalDrawSourceIDs": [
+            "slot-6-room-label",
+            "slot-6-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            624,
+            312,
+            766,
+            328
+          ],
+          "semanticFieldBand": [
+            613,
+            309,
+            831,
+            349
+          ],
+          "semanticCell": [
+            612,
+            240,
+            832,
+            350
+          ]
+        },
+        {
+          "id": "tuple-7-subject",
+          "tupleIndex": 7,
+          "role": "subject",
+          "labelLiteral": "科目：",
+          "bodyLiteral": "影絵実習墨",
+          "wholeLineLiteral": "科目：影絵実習墨",
+          "originalDrawSourceIDs": [
+            "slot-7-subject-label",
+            "slot-7-subject-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            844,
+            252,
+            1002,
+            268
+          ],
+          "semanticFieldBand": [
+            833,
+            241,
+            1051,
+            279
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ]
+        },
+        {
+          "id": "tuple-7-teacher",
+          "tupleIndex": 7,
+          "role": "teacher",
+          "labelLiteral": "担当：",
+          "bodyLiteral": "試作役月",
+          "wholeLineLiteral": "担当：試作役月",
+          "originalDrawSourceIDs": [
+            "slot-7-teacher-label",
+            "slot-7-teacher-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            844,
+            282,
+            984,
+            298
+          ],
+          "semanticFieldBand": [
+            833,
+            279,
+            1051,
+            309
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ]
+        },
+        {
+          "id": "tuple-7-room",
+          "tupleIndex": 7,
+          "role": "room",
+          "labelLiteral": "教室：",
+          "bodyLiteral": "仮区画苔",
+          "wholeLineLiteral": "教室：仮区画苔",
+          "originalDrawSourceIDs": [
+            "slot-7-room-label",
+            "slot-7-room-value"
+          ],
+          "wholeLineOriginalInkBox": [
+            844,
+            312,
+            986,
+            328
+          ],
+          "semanticFieldBand": [
+            833,
+            309,
+            1051,
+            349
+          ],
+          "semanticCell": [
+            832,
+            240,
+            1052,
+            350
+          ]
+        }
+      ],
+      "tupleBindings": [
+        {
+          "index": 0,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 1,
+          "subject": "色票工作桃",
+          "teacher": "試作役霞",
+          "room": "仮区画花",
+          "classHeaderID": "class-0",
+          "weekdayHeaderID": "day-0",
+          "periodHeaderID": "period-0",
+          "fieldLineIDs": [
+            "tuple-0-subject",
+            "tuple-0-teacher",
+            "tuple-0-room"
+          ]
+        },
+        {
+          "index": 1,
+          "className": "検証組A",
+          "weekday": "月曜日",
+          "period": 2,
+          "subject": "線形試作青",
+          "teacher": "試作役霧",
+          "room": "仮区画葉",
+          "classHeaderID": "class-0",
+          "weekdayHeaderID": "day-0",
+          "periodHeaderID": "period-1",
+          "fieldLineIDs": [
+            "tuple-1-subject",
+            "tuple-1-teacher",
+            "tuple-1-room"
+          ]
+        },
+        {
+          "index": 2,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 1,
+          "subject": "立体習作紫",
+          "teacher": "試作役露",
+          "room": "仮区画芽",
+          "classHeaderID": "class-0",
+          "weekdayHeaderID": "day-1",
+          "periodHeaderID": "period-2",
+          "fieldLineIDs": [
+            "tuple-2-subject",
+            "tuple-2-teacher",
+            "tuple-2-room"
+          ]
+        },
+        {
+          "index": 3,
+          "className": "検証組A",
+          "weekday": "木曜日",
+          "period": 2,
+          "subject": "模様演習橙",
+          "teacher": "試作役風",
+          "room": "仮区画枝",
+          "classHeaderID": "class-0",
+          "weekdayHeaderID": "day-1",
+          "periodHeaderID": "period-3",
+          "fieldLineIDs": [
+            "tuple-3-subject",
+            "tuple-3-teacher",
+            "tuple-3-room"
+          ]
+        },
+        {
+          "index": 4,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 1,
+          "subject": "紙形実習銀",
+          "teacher": "試作役雲",
+          "room": "仮区画根",
+          "classHeaderID": "class-1",
+          "weekdayHeaderID": "day-0",
+          "periodHeaderID": "period-0",
+          "fieldLineIDs": [
+            "tuple-4-subject",
+            "tuple-4-teacher",
+            "tuple-4-room"
+          ]
+        },
+        {
+          "index": 5,
+          "className": "検証組B",
+          "weekday": "月曜日",
+          "period": 2,
+          "subject": "配色演習緑",
+          "teacher": "試作役虹",
+          "room": "仮区画蕾",
+          "classHeaderID": "class-1",
+          "weekdayHeaderID": "day-0",
+          "periodHeaderID": "period-1",
+          "fieldLineIDs": [
+            "tuple-5-subject",
+            "tuple-5-teacher",
+            "tuple-5-room"
+          ]
+        },
+        {
+          "index": 6,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 1,
+          "subject": "輪郭習作朱",
+          "teacher": "試作役星",
+          "room": "仮区画実",
+          "classHeaderID": "class-1",
+          "weekdayHeaderID": "day-1",
+          "periodHeaderID": "period-2",
+          "fieldLineIDs": [
+            "tuple-6-subject",
+            "tuple-6-teacher",
+            "tuple-6-room"
+          ]
+        },
+        {
+          "index": 7,
+          "className": "検証組B",
+          "weekday": "木曜日",
+          "period": 2,
+          "subject": "影絵実習墨",
+          "teacher": "試作役月",
+          "room": "仮区画苔",
+          "classHeaderID": "class-1",
+          "weekdayHeaderID": "day-1",
+          "periodHeaderID": "period-3",
+          "fieldLineIDs": [
+            "tuple-7-subject",
+            "tuple-7-teacher",
+            "tuple-7-room"
+          ]
+        }
+      ],
+      "RGBSHA256": "a4fec62afa79f6ae03820998720fa976328e8e04ac5c45c70d48b9ef74ceaa40"
+    }
+  ],
+  "strictTupleDefinition": "Exact original class/day/period and each role whole-line literal; each corresponding actual native bbox completely contained in original semantic region. Center-only match and whitespace-only normalization are diagnostic. No invented character boxes or substring-based column allocation.",
+  "denominators": {
+    "sourceTuples": 8,
+    "pairedObservedTupleObligations": 16,
+    "independentDocuments": 0,
+    "ordinaryFull40FormalAssessed": 0
+  },
+  "nativeRunsBeforeFreeze": 0
+}

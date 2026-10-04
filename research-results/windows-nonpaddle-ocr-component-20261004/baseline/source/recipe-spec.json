@@ -1,0 +1,68 @@
+{
+  "recipe": "nonpaddle-horizontal-component-v1",
+  "sourceInputPolicy": "exact newly generated independent fictional paired PNGs only; no original PDF/image and no old literal copying",
+  "plannedImages": 2,
+  "plannedSlotsEach": 8,
+  "pairedCondition": "same 8 tuples in clear24px and small16px; not independent documents",
+  "NDL": {
+    "revision": "636d1cfeb1331f89f4048f416e49e23a09a714b5",
+    "device": "cpu",
+    "officialCallable": "ocr._run_ocr_on_image_array",
+    "detScoreThreshold": 0.2,
+    "detConfidenceThreshold": 0.25,
+    "detIoUThreshold": 0.2,
+    "defaultCascade": true,
+    "simpleMode": false,
+    "enableTCY": false,
+    "recognitionConfidence": null,
+    "confidenceMeaning": "native JSON line confidence is detector, never transcription guard replacement",
+    "characterGeometry": "unavailable; native line boxes retained, no division by character count",
+    "runtime": "Python ONNXRuntime1.26.0"
+  },
+  "Tesseract": {
+    "engine": "5.5.0",
+    "binarySHA256": "74b76a5b994adcc18be362bf64ed5118082b2401d5d9a35242e92fc4c62e2b4b",
+    "language": "jpn",
+    "traineddataRevision": "e12c65a915945e4c28e237a9b52bc4a8f39a0cec",
+    "OEM": 1,
+    "PSM": 11,
+    "hocr_char_boxes": true,
+    "outputRenderers": [
+      "hocr",
+      "tsv",
+      "makebox"
+    ],
+    "oneInvocationPerImage": true,
+    "confidenceMeaning": "native word/candidate units; cross-engine calibration unproven"
+  },
+  "Paddle": {
+    "sourceCommit": "ae07e47fa68faeef210934b9f3688d6974587094",
+    "actualCallable": "OnnxJapaneseOcr.Read",
+    "model": "PP-OCRv5_mobile_det/rec_onnx",
+    "runtime": "C# ONNXRuntime1.23.2",
+    "confidenceGuard": 0.8,
+    "pixelBudget": 64000000,
+    "actualPreprocessingAndCropCompletionUnchanged": true,
+    "observer": "already-computed raw pieces before refusal",
+    "earlyStop": "later fields unassessed; rejection is not missing detection proof",
+    "CTCGeometry": "native timestep source mapping estimates, not true character boxes"
+  },
+  "resources": {
+    "ownedProcessTreeSampledRSSLimitBytes": 3221225472,
+    "wallSecondsPerEngineTwoImages": 420,
+    "PaddleCooperativeSecondsPerImage": 180,
+    "sampleIntervalSeconds": 0.1
+  },
+  "scoring": {
+    "nativeSeesOracle": false,
+    "literalRawExact": true,
+    "whitespaceOnlyDiagnosticSeparate": true,
+    "centerUnique": "diagnostic mapping only",
+    "strictTuple": "all original class/day/period/three literal lines correct plus native region containment in semantic bands; cross-cell candidate never split",
+    "charEqualDivision": false,
+    "truncationOrEarlyStop": "unassessed missing scope",
+    "full40FormalQualification": false
+  },
+  "speedLimitation": "different runtimes and cold/warm model lifecycle; timing/RSS descriptive, no engine-only causal superiority claim",
+  "nativeInferenceExecuted": false
+}

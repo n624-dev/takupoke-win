@@ -1,0 +1,79 @@
+{
+  "root": "/workspace/recovery-research/ocr-non-paddle-fresh-source-high-20261004",
+  "scope": "Post-recipe independent new source/literal/position freeze, before any OCR inference; paired component only",
+  "ocrRecipeSHA256": "83cd7ffcaeb112901998a696f0bb166b2bbbe38c3568504d3e934242ad1bbe07",
+  "files": [
+    {
+      "path": "drawing-source.json",
+      "bytes": 3451,
+      "sha256": "b0ccafbd534a6c51f5d1bf870c2bd6a29775443dc609313a88f138674cf1445e"
+    },
+    {
+      "path": "generate.py",
+      "bytes": 6146,
+      "sha256": "d22c479d9b1dd62cc76fe71c7f0a1fd4fa43cea9dc8c26ddff403ad9d2c31ba2"
+    },
+    {
+      "path": "literal-position-oracle.json",
+      "bytes": 110283,
+      "sha256": "d4ce7a1a1c5236f224b74bed6872d603e625dd39d7a07f310d261610cc5ed068"
+    },
+    {
+      "path": "input-preflight-receipt.json",
+      "bytes": 1587,
+      "sha256": "62054e2f409346fd30b9cd690cd6d366f0c795e17edebe67187017c7f6e7143e"
+    },
+    {
+      "path": "font-license.txt",
+      "bytes": 4383,
+      "sha256": "eb5a2a88566ca8ef61f20f7cddd3fec621cf3a017ecf363a92740590a9b8870c"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2101,
+      "sha256": "b95d43b4bd80e13de1baead2851485b57a032780019baa51a7b6ebbba63b2e5f"
+    }
+  ],
+  "pngIdentities": [
+    {
+      "condition": "clear",
+      "fontPixels": 24,
+      "width": 1120,
+      "height": 400,
+      "pngBytes": 68874,
+      "pngSHA256": "d2c40db1a01f52b64428700efb89e7b435cfaddb5623c807b35a37d2ad0ac482",
+      "RGBSHA256": "b885e1232fc3e1cd698998d15c2fd0a0296f8f74b6f1b1a5ec3bbea09ee0e437",
+      "sourceTextRegions": 60,
+      "sourceAllInkWithinSemanticCells": true,
+      "textInkRegionsDoNotOverlap": true
+    },
+    {
+      "condition": "small",
+      "fontPixels": 16,
+      "width": 1120,
+      "height": 400,
+      "pngBytes": 47010,
+      "pngSHA256": "8f6ce0dd72d21c7dcf09052df5fc1b4c59fd08f8dcee7ca74248257b211f53ad",
+      "RGBSHA256": "a4fec62afa79f6ae03820998720fa976328e8e04ac5c45c70d48b9ef74ceaa40",
+      "sourceTextRegions": 60,
+      "sourceAllInkWithinSemanticCells": true,
+      "textInkRegionsDoNotOverlap": true
+    }
+  ],
+  "font": {
+    "expectedSHA256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+    "bytes": 19484784,
+    "collectionIndex": 0,
+    "face": "Noto Sans CJK JP Regular",
+    "version": "2.004",
+    "copyright": "© 2014-2021 Adobe (http://www.adobe.com/).",
+    "license": "SIL Open Font License 1.1",
+    "upstream": "https://github.com/notofonts/noto-cjk",
+    "localAcquisition": "Existing installed fonts-noto-cjk; no model/image/PDF/sample acquisition"
+  },
+  "Pillow": "12.3.0",
+  "FreeType": "2.14.3",
+  "nativeRuns": 0,
+  "unchangedOriginalsRead": 0,
+  "noPNGOrModelWeightsRetained": true
+}

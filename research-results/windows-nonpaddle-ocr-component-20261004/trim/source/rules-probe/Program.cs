@@ -1,0 +1,6 @@
+using System.Text.Json;
+using System.Security.Cryptography;
+using Takupoke.Infrastructure.Recovery;
+var root=Path.GetFullPath(args[0]);var rows=JsonDocument.Parse(File.ReadAllBytes(Path.Combine(root,"native-inputs.json"))).RootElement.GetProperty("images");
+foreach(var row in rows.EnumerateArray()) { var id=row.GetProperty("id").GetString()!;var bytes=File.ReadAllBytes(row.GetProperty("bgraPath").GetString()!);if(Convert.ToHexStringLower(SHA256.HashData(bytes))!=row.GetProperty("bgraSHA256").GetString())throw new InvalidDataException("Pinned fake pixels changed");
+var raster=new RecoveryRaster(row.GetProperty("width").GetInt32(),row.GetProperty("height").GetInt32(),bytes);using var cancel=new CancellationTokenSource(TimeSpan.FromSeconds(60));var rules=raster.Rules(cancel.Token);var mask=raster.RuleMask(rules,cancel.Token);var data=mask.Select(x=>x?(byte)1:(byte)0).ToArray();var path=Path.Combine(root,"trim-only-candidate",id+"-rule-mask.bin");File.WriteAllBytes(path,data);Console.WriteLine(JsonSerializer.Serialize(new{id,rules,maskPath=path,sha256=Convert.ToHexStringLower(SHA256.HashData(data)),width=raster.Width,height=raster.Height,scope="Unchanged production pixel Rules/RuleMask, no OCR/semantic gold"}));}
