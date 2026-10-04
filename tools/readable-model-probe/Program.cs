@@ -11,6 +11,8 @@ using Takupoke.Win.Platform;
 
 // Public artifacts and entirely fictional documents only. No school file input,
 // app storage, school endpoint, cloud inference, upload, or production activation.
+try { LegacyInstructionGuard.EnsureCompatible(); }
+catch (InvalidDataException error) { Console.WriteLine(JsonSerializer.Serialize(new { errorType = "LegacyPromptRecipeMismatch", errorMessage = error.Message, nativeCalls = 0, assessment = "Unassessed operational recipe mismatch; historical results unchanged" })); return 1; }
 Environment.SetEnvironmentVariable("ORT_TELEMETRY_DISABLED", "1");
 var requested = args.Length == 0 ? new[] { "qwen2.5-1.5b-instruct-generic-cpu:4" } : args;
 var allowed = new[] { "qwen3-0.6b-generic-cpu:4", "qwen2.5-1.5b-instruct-generic-cpu:4", "qwen3.5-2b-text-generic-cpu:1", "qwen3.5-4b-generic-cpu:3" };

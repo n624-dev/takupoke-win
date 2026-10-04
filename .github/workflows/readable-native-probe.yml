@@ -1,9 +1,6 @@
 name: Evaluate readable JSON local model probe
 on:
   workflow_dispatch:
-  push:
-    branches: [codex/pdf-local-recovery]
-    paths: ['tools/readable-model-probe/**', '.github/workflows/readable-native-probe.yml']
 jobs:
   evaluate:
     runs-on: windows-2025

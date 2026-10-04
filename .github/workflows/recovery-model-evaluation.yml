@@ -1,9 +1,6 @@
 name: Evaluate pinned local recovery models
 on:
   workflow_dispatch:
-  push:
-    branches: [codex/pdf-local-recovery]
-    paths: ['tools/model-evaluation/**', '.github/workflows/recovery-model-evaluation.yml']
 jobs:
   evaluate:
     runs-on: windows-2025

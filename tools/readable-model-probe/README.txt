@@ -23,3 +23,5 @@ RunPreflight.cmd はモデルを読まないため、Visual C++ の準備完了�
 同梱ソフトウェアのライセンス・元の第三者通知とバージョンは THIRD-PARTY-NOTICES.txt と Licenses フォルダーに収録しています。
 
 モデル検証の終了コード0は推論処理が完了したことを示します。positiveExact が不足する場合の品質判定は失敗です。preflight だけの成功はモデル品質を示しません。
+
+Historical instruction3 guard: current source fails closed before catalog/model download if linked Core instructions differ from the immutable instruction3 SHA pins. This is an unassessed recipe mismatch with zero native calls, not model accuracy failure. Existing published historical ZIPs/results retain their exact source. The legacy native and benchmark publication workflows are manual-only; guard maintenance does not rerun models or publish another ZIP.

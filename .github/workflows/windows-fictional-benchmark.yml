@@ -1,9 +1,6 @@
 name: Publish fictional Windows QA benchmark
 on:
   workflow_dispatch:
-  push:
-    branches: [codex/pdf-local-recovery]
-    paths: ['tools/readable-model-probe/**', '.github/workflows/windows-fictional-benchmark.yml']
 permissions:
   contents: read
 jobs:

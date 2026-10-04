@@ -30,6 +30,7 @@ public sealed class FoundryLocalRecoveryProvider(IModel model, RecoveryModelMani
     }
     public async Task<IReadOnlyList<RecoveryLesson>> RecoverCellAsync(RecoveryPromptCell cell, CancellationToken token)
     {
+        LegacyInstructionGuard.Verify(cell);
         if (await AvailabilityAsync(token) != LocalProviderState.Ready) throw new InvalidDataException("検証済みの端末内モデルが必要です。");
         if (!_loaded) { await model.LoadAsync(token); _loaded = true; }
         var client = await model.GetChatClientAsync(token);
