@@ -36,15 +36,31 @@ public sealed class PreferenceSnapshotTests
             await new PreferencesStore(root).SaveAsync(new() { IncludesChanges = false, MainColor = "purple" });
             var locked = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
             var retried = new TaskCompletionSource<IOException>(TaskCreationOptions.RunContinuationsAsynchronously);
+            using var resumeRetry = new ManualResetEventSlim(false);
             Task<byte[]>? read = null;
             try
             {
-                read = Task.Run(() => PreferenceSnapshot.ReadBytes(path, error => retried.TrySetResult(error)));
+                read = Task.Run(() => PreferenceSnapshot.ReadBytes(path, error =>
+                {
+                    // Hold the first retry until the test releases the actual
+                    // exclusive handle, even if its continuation is scheduled late.
+                    if (retried.TrySetResult(error)) resumeRetry.Wait();
+                }));
                 var error = await retried.Task.WaitAsync(TimeSpan.FromSeconds(5));
                 Assert.True(OperatingSystem.IsWindows() ? (error.HResult & 0xffff) is 32 or 33 : (error.HResult & 0xffff) == 11);
                 Assert.False(read.IsCompleted);
             }
-            finally { locked.Dispose(); }
+            finally
+            {
+                try { locked.Dispose(); }
+                finally
+                {
+                    resumeRetry.Set();
+                    // Join on assertion/timeout failures as well as success before
+                    // disposing the handoff or deleting the temporary directory.
+                    if (read is not null) await read;
+                }
+            }
             var saved = DataCodec.Decode<UserPreferences>(await read!);
             Assert.False(saved.IncludesChanges); Assert.Equal("purple", saved.MainColor);
         }

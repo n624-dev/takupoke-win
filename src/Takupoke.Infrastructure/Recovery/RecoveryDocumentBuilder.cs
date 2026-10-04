@@ -30,6 +30,7 @@ public static class RecoveryDocumentBuilder
             if (_comparisons > 20_000_000) throw RecoveryWorkLimits.Exceeded("PDF復旧の位置比較数が上限を超えています。");
         }
     }
+    private const string HeaderPattern = @"[1-8]時限目|[1-8][・〜-][1-8]時限連続|\d{1,2}:\d{2}[~〜～]\d{1,2}:\d{2}|(?:令和\d{1,2}|\d{4})年度|前期|後期|試験返却時間割|定期試験時間割|試験時間割|通常時間割|授業時間割|時間割";
     private static IEnumerable<Label> Labels(IReadOnlyList<Atom> atoms, Work work)
     {
         foreach (var row in atoms.GroupBy(a => a.Page))
@@ -54,14 +55,63 @@ public static class RecoveryDocumentBuilder
                     // Retain real per-character geometry; do not invent sub-boxes for an OCR line.
                     var text = PdfGrid.Key(string.Concat(piece.Select(a => a.Glyph.Text)));
                     yield return new(text, row.Key, Bounds(piece), piece.Select(a => a.Id).ToArray());
-                    var pattern = @"[1-8]時限目|[1-8][・〜-][1-8]時限連続|\d{1,2}:\d{2}[~〜～]\d{1,2}:\d{2}|(?:令和\d{1,2}|\d{4})年度|前期|後期|試験返却時間割|定期試験時間割|試験時間割|通常時間割|授業時間割|時間割";
                     var raw = string.Concat(piece.Select(a => a.Glyph.Text));
-                    foreach (Match match in Regex.Matches(raw, "(?:" + pattern + ")[：:]?|(?:" + RecoveryRoleLabels.Pattern + ")[：:]"))
+                    foreach (Match match in Regex.Matches(raw, "(?:" + HeaderPattern + ")[：:]?|(?:" + RecoveryRoleLabels.Pattern + ")[：:]"))
                     {
                         var offset = 0; var selected = new List<Atom>();
                         foreach (var atom in piece) { work.Step(); var end = offset + atom.Glyph.Text.Length; if (offset >= match.Index && end <= match.Index + match.Length) selected.Add(atom); offset = end; }
                         if (selected.Count > 0 && string.Concat(selected.Select(a => a.Glyph.Text)) == match.Value && match.Value != text) yield return new(match.Value.TrimEnd(':', '：'), row.Key, Bounds(selected), selected.Select(a => a.Id).ToArray());
                     }
+                }
+            }
+        }
+    }
+    private static IEnumerable<Label> OcrLineLabels(IReadOnlyList<Atom> atoms, IReadOnlyList<PdfPageLayout> pages,
+        IReadOnlySet<int> ocrPages, Work work)
+    {
+        foreach (var page in atoms.GroupBy(a => a.Page))
+        {
+            if (!ocrPages.Contains(page.Key)) continue;
+            var pageAtoms = page.ToArray(); work.Step(pageAtoms.Length * 2L);
+            foreach (var nativeLine in pageAtoms.Where(a => a.Glyph.SourceLine is >= 0).GroupBy(a => a.Glyph.SourceLine))
+            {
+                var line = nativeLine.ToArray(); work.Step(line.Length * 9L);
+                // Native order must ALREADY agree with the supplied spatial
+                // atom order. Never sort/repair metadata or widen glyph boxes.
+                var valid = line.All(a => a.Glyph.SourceOrder is >= 0);
+                if (!valid) continue;
+                for (var i = 1; i < line.Length; i++)
+                {
+                    work.Step();
+                    valid &= (long)line[i].Glyph.SourceOrder.GetValueOrDefault() == (long)line[i - 1].Glyph.SourceOrder.GetValueOrDefault() + 1
+                        && line[i].Box.X >= line[i - 1].Box.X + line[i - 1].Box.Width;
+                }
+                if (!valid || line.Max(a => a.Box.Y) >= line.Min(a => a.Box.Y + a.Box.Height)) continue;
+                var bounds = Bounds(line);
+                bool Intersects(RecoveryBox other) => Math.Max(bounds.X, other.X) < Math.Min(bounds.X + bounds.Width, other.X + other.Width)
+                    && Math.Max(bounds.Y, other.Y) < Math.Min(bounds.Y + bounds.Height, other.Y + other.Height);
+                var conflict = false;
+                foreach (var other in pageAtoms)
+                { work.Step(); if (other.Glyph.SourceLine != nativeLine.Key && Intersects(other.Box)) conflict = true; }
+                foreach (var rule in pages[page.Key - 1].Lines)
+                {
+                    work.Step();
+                    conflict |= rule.Vertical && bounds.X < rule.X1 && rule.X1 < bounds.X + bounds.Width
+                        && Math.Max(bounds.Y, Math.Min(rule.Y1, rule.Y2)) < Math.Min(bounds.Y + bounds.Height, Math.Max(rule.Y1, rule.Y2))
+                        || rule.Horizontal && bounds.Y < rule.Y1 && rule.Y1 < bounds.Y + bounds.Height
+                        && Math.Max(bounds.X, Math.Min(rule.X1, rule.X2)) < Math.Min(bounds.X + bounds.Width, Math.Max(rule.X1, rule.X2));
+                }
+                if (conflict) continue;
+                var raw = string.Concat(line.Select(a => a.Glyph.Text)); work.Step(raw.Length);
+                // Only the existing public header/role patterns, using whole
+                // original atoms. A native line is not an arbitrary label.
+                foreach (Match match in Regex.Matches(raw, "(?:" + HeaderPattern + ")[：:]?|(?:" + RecoveryRoleLabels.Pattern + ")[：:]"))
+                {
+                    var offset = 0; var selected = new List<Atom>();
+                    foreach (var atom in line)
+                    { work.Step(); var end = offset + atom.Glyph.Text.Length; if (offset >= match.Index && end <= match.Index + match.Length) selected.Add(atom); offset = end; }
+                    if (selected.Count > 0 && string.Concat(selected.Select(a => a.Glyph.Text)) == match.Value)
+                        yield return new(match.Value.TrimEnd(':', '：'), page.Key, Bounds(selected), selected.Select(a => a.Id).ToArray());
                 }
             }
         }
@@ -93,6 +143,13 @@ public static class RecoveryDocumentBuilder
         if (atoms.Length > 100000 || atoms.Any(a => !a.Box.Valid)) throw new InvalidDataException("文字の位置を確認できません。");
         atoms = atoms.OrderBy(a => a.Page).ThenBy(a => Math.Round(a.Glyph.Cy / 2)).ThenBy(a => a.Glyph.Cx).ToArray();
         var labels = Labels(atoms, work).ToArray();
+        if (ocrPages is { Count: > 0 })
+        {
+            (int, string, string) Key(Label label)
+            { work.Step(label.Ids.Count); return (label.Page, label.Value, string.Join(',', label.Ids)); }
+            var seen = labels.Select(Key).ToHashSet();
+            labels = labels.Concat(OcrLineLabels(atoms, pages, ocrPages, work).Where(label => seen.Add(Key(label)))).ToArray();
+        }
         var years = labels.Where(l => Regex.IsMatch(l.Value, @"^(?:\d{4}|令和\d{1,2})年度$")).ToArray();
         var yearValues = years.Select(l => l.Value.StartsWith("令和", StringComparison.Ordinal) ? 2018 + int.Parse(l.Value[2..^2]) : int.Parse(l.Value[..4])).Distinct().ToArray();
         if (yearValues.Length != 1) throw new InvalidDataException("年度の独立した見出しがありません。");

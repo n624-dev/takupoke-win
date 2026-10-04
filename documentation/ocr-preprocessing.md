@@ -46,6 +46,15 @@ limit. No disconnected ink is hidden by enlarging coverage alone. Successful
 coverage uses the exact completed recognition inputs; CTC coordinates use the
 same inputs. This establishes crop support, not correct characters or cells.
 
+For explicitly marked OCR pages, Builder may additionally recognize existing
+public header patterns from one native source line. Supplied native order must
+already match spatial atom order with consecutive source orders; all atoms must
+share vertical overlap. Crossing a physical rule or overlapping another line's
+scope prevents this supplemental candidate. Matches retain whole original
+atoms and boxes and are deduplicated against legacy labels by page, value and
+ordered source IDs. Vector labels, distance limits and Validator are unchanged.
+A recovered year header does not imply that later cell/header geometry passes.
+
 An internal observer is unset by default and performs no logging. When a local
 fictional-data diagnostic opts in, it receives the original and completed crop,
 valid/input widths, time count, and already decoded piece text, confidence and
