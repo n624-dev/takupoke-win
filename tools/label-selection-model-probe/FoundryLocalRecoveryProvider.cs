@@ -16,6 +16,7 @@ public sealed class FoundryLocalRecoveryProvider(IModel model, RecoveryModelMani
 {
     private static readonly JsonSerializerOptions ReadableOptions = new(DataCodec.Options) { Encoder = JavaScriptEncoder.Create(UnicodeRanges.All) };
     private bool _loaded;
+    internal bool ClearerPrompt { get; set; }
     internal string? LastRawOutput { get; private set; }
     internal int? LastRawOriginalLength { get; private set; }
     internal bool LastRawTruncated { get; private set; }
@@ -50,7 +51,7 @@ public sealed class FoundryLocalRecoveryProvider(IModel model, RecoveryModelMani
         client.Settings.ToolChoice = ToolChoice.None;
         LastStage = "native-generation";
         NativeCompletionsStarted++;
-        var completion = await client.CompleteChatAsync(new[] { new ChatMessage { Role = "system", Content = LabelSelectionProtocol.Instruction },
+        var completion = await client.CompleteChatAsync(new[] { new ChatMessage { Role = "system", Content = ClearerPrompt ? LabelSelectionProtocol.ClearInstruction : LabelSelectionProtocol.Instruction },
             new ChatMessage { Role = "user", Content = LabelSelectionProtocol.Input(cell) } }, token);
         NativeCompletionsReturned++;
         token.ThrowIfCancellationRequested();

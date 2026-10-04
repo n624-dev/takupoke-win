@@ -14,7 +14,10 @@ using Takupoke.Win.Platform;
 Environment.SetEnvironmentVariable("ORT_TELEMETRY_DISABLED", "1");
 var formatRoutingOnly = args.Contains("--format-routing", StringComparer.Ordinal);
 var firstCaseOnly = args.Contains("--first-case", StringComparer.Ordinal);
-var modelArgs = args.Where(arg => arg is not "--format-routing" and not "--first-case").ToArray();
+var promptAb = args.Contains("--prompt-ab", StringComparer.Ordinal);
+if (promptAb && (formatRoutingOnly || firstCaseOnly)) throw new ArgumentException("Prompt A/B is a full-corpus comparison, separate from diagnostic modes.");
+var promptVariants = promptAb ? new[] { false, true } : new[] { false };
+var modelArgs = args.Where(arg => arg is not "--format-routing" and not "--first-case" and not "--prompt-ab").ToArray();
 var requested = modelArgs.Length == 0 ? new[] { "qwen2.5-1.5b-instruct-generic-cpu:4" } : modelArgs;
 var allowed = new[] { "qwen3-0.6b-generic-cpu:4", "qwen2.5-1.5b-instruct-generic-cpu:4", "qwen3.5-2b-text-generic-cpu:1", "qwen3.5-4b-generic-cpu:3",
     "Phi-4-mini-instruct-generic-cpu:5", "ministral-3-3b-instruct-2512-generic-cpu:2", "smollm3-3b-generic-cpu:1" };
@@ -111,6 +114,10 @@ try
             var manifest = new RecoveryModelManifest(id, "evaluation-1", "https://models.example.invalid/evaluation-only", bytes,
                 RecoveryValidator.Fingerprint(files), "foundryLocal", "10.0.26100", 1, "CPU", "candidate-not-activated", true);
             await using var production = new FoundryLocalRecoveryProvider(model, manifest, Verify, GC.GetGCMemoryInfo().TotalAvailableMemoryBytes);
+            foreach (var clearerPrompt in promptVariants)
+            {
+            production.ClearerPrompt = clearerPrompt;
+            var variantNativeStarted = production.NativeCompletionsStarted; var variantNativeReturned = production.NativeCompletionsReturned;
             var measured = new CountingProvider(production); var caseResults = new List<object>(); var positiveExact = 0; var negativeRejected = 0; var incorrectValidatorAcceptances = 0; var errors = 0; var positiveLabelRolesExact = 0; var positiveLabelRolesWrong = 0; var positiveLabelRolesAssessed = 0;
             foreach (var c in corpus)
             {
@@ -161,26 +168,29 @@ try
                         rawLabelSelection = production.LastSelection, rawModelOutput = production.LastRawOutput, rawOriginalLength = production.LastRawOriginalLength, rawTruncated = production.LastRawTruncated,
                         adapterStage = production.LastStage, milliseconds = watch.ElapsedMilliseconds });
                 }
-                Console.WriteLine(JsonSerializer.Serialize(new { model = id, caseId = c.Id, completed = caseResults.Count }));
+                Console.WriteLine(JsonSerializer.Serialize(new { model = id, inferenceRecipe = LabelSelectionProtocol.RecipeFor(clearerPrompt), caseId = c.Id, completed = caseResults.Count }));
             }
             var process = Process.GetCurrentProcess(); process.Refresh();
             results.Add(new { modelId = id, runtimeVersion = "Foundry.Local.WinML:1.2.4", backend = "Windows CPU", osVersion = Environment.OSVersion.VersionString,
-                artifactBytes = bytes, artifacts = files, corpus = "fictional-folded-structure-v1-label-selection-pilot-variants-0-1", inferenceRecipe = LabelSelectionProtocol.Recipe, inputEncoding = "Japanese-readable label-selection JSON", sampler = new { temperature = 0, randomSeed = 17, maxTokens = 512, responseFormat = "lark_grammar", toolChoice = "none", maxLabelIdsPerRole = 48 }, positiveCases = corpus.Count(c => c.ShouldAdopt), negativeCases = corpus.Count(c => !c.ShouldAdopt),
+                artifactBytes = bytes, artifacts = files, corpus = "fictional-folded-structure-v1-label-selection-pilot-variants-0-1", inferenceRecipe = LabelSelectionProtocol.RecipeFor(clearerPrompt), inputEncoding = "Japanese-readable label-selection JSON", sampler = new { temperature = 0, randomSeed = 17, maxTokens = 512, responseFormat = "lark_grammar", toolChoice = "none", maxLabelIdsPerRole = 48 }, positiveCases = corpus.Count(c => c.ShouldAdopt), negativeCases = corpus.Count(c => !c.ShouldAdopt),
+                systemInstructionSha256 = Convert.ToHexStringLower(SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(clearerPrompt ? LabelSelectionProtocol.ClearInstruction : LabelSelectionProtocol.Instruction))),
                 positiveExact, negativeRejected, incorrectValidatorAcceptances, errors, modelCalls = measured.Calls, positiveLabelRolesExact, positiveLabelRolesWrong, positiveLabelRolesAssessed, positiveLabelRolesEligible = 3 * corpus.Count(c => c.ShouldAdopt),
-                nativeCompletionsStarted = production.NativeCompletionsStarted, nativeCompletionsReturned = production.NativeCompletionsReturned,
+                nativeCompletionsStarted = production.NativeCompletionsStarted - variantNativeStarted, nativeCompletionsReturned = production.NativeCompletionsReturned - variantNativeReturned,
                 strictSelectionsDecoded = caseResults.Count(r => r.GetType().GetProperty("rawLabelSelection")?.GetValue(r) is not null),
                 strictSelectionScope = "Strict object/arrays and source-ID order/uniqueness decoding only; not native hard grammar enforcement or semantic correctness",
                 labelRoleScoring = "Positive source-label obligations only; a completion failing the strict label decoder fails all three obligations. Runtime exceptions remain separately counted; assessed and eligible denominators are both reported.",
                 evaluationStatus = errors == 0 ? "completed" : "runtime-errors",
                 developmentCorpusStatus = errors == 0 && positiveExact == corpus.Count(c => c.ShouldAdopt) && negativeRejected == corpus.Count(c => !c.ShouldAdopt) && incorrectValidatorAcceptances == 0 ? "exact" : "failed", evaluatorProcessPeakWorkingSetBytes = process.PeakWorkingSet64, evaluatorProcessTerminalPrivateMemoryBytes = process.PrivateMemorySize64,
-                memoryScope = "Evaluator process only; peak cumulative within process, excludes any child runtime processes; no minimum-device claim",
+                memoryScope = "Evaluator process only; peak cumulative within process and A/B recipes, excludes any child runtime processes; no minimum-device claim",
+                promptComparison = promptAb ? "Fixed baseline-then-clear order, same downloaded/loaded model and all inputs/settings/scoring; latency is not a randomized cold-start comparison" : "Single baseline instruction",
                 sourceCommit = Environment.GetEnvironmentVariable("GITHUB_SHA") ?? "local-uncommitted", executionScope = firstCaseOnly ? "Single first-case operational replay; not full-corpus comparison" : "Full frozen development corpus", pipelineStage = "Isolated model label-selection correctness experiment after production Rules safety preflight; generic all-ID schema and measured cuts then unchanged production certificate; NOT production model benefit or PDF/Strict/builder/formal-conversion model validation",
                 rawOutputScope = "Every scored completion retains a bounded 16384-character prefix with original length/truncation marker; no extra or substituted diagnostic generation", caseResults, qualification = "candidate evidence only; independent held-out validation required before activation" });
+            }
         }
         catch (Exception failure) { results.Add(new { modelId = id, errorType = failure.GetType().Name }); }
     }
     Console.WriteLine(JsonSerializer.Serialize(results, new JsonSerializerOptions { WriteIndented = true }));
-    return results.Count == requested.Length && !results.Any(r => r.GetType().GetProperty("errorType") is not null || r.GetType().GetProperty("errors")?.GetValue(r) is int failures && failures > 0) ? 0 : 1;
+    return results.Count == requested.Length * (formatRoutingOnly ? 1 : promptVariants.Length) && !results.Any(r => r.GetType().GetProperty("errorType") is not null || r.GetType().GetProperty("errors")?.GetValue(r) is int failures && failures > 0) ? 0 : 1;
 }
 catch (Exception failure) { Console.WriteLine(JsonSerializer.Serialize(new { errorType = failure.GetType().Name })); return 1; }
 finally

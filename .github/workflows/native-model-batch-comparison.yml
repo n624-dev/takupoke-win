@@ -1,4 +1,4 @@
-name: Compare six pinned local models with one frozen recipe
+name: Compare six pinned local models with two shared prompt recipes
 on:
   workflow_dispatch:
 permissions:
@@ -38,6 +38,6 @@ jobs:
           $benchmarkMachine = Get-CimInstance Win32_ComputerSystem
           $benchmarkOs = Get-CimInstance Win32_OperatingSystem
           @{ benchmarkHardware = @{ processors = $benchmarkCpus; physicalMemoryBytes = [long]$benchmarkMachine.TotalPhysicalMemory; architecture = $env:PROCESSOR_ARCHITECTURE; osCaption = $benchmarkOs.Caption; osVersion = $benchmarkOs.Version; osBuild = $benchmarkOs.BuildNumber }; sourceCommit = $env:GITHUB_SHA } | ConvertTo-Json -Depth 5 -Compress
-      - name: Compare the fixed corpus with the identical bounded native grammar and strict scorer
+      - name: Compare both shared prompts on the fixed corpus and strict scorer
         shell: pwsh
-        run: dotnet run --project tools/label-selection-model-probe/WindowsLabelSelectionProbe.csproj --configuration Release --no-launch-profile -- '${{ matrix.model }}'
+        run: dotnet run --project tools/label-selection-model-probe/WindowsLabelSelectionProbe.csproj --configuration Release --no-launch-profile -- --prompt-ab '${{ matrix.model }}'
