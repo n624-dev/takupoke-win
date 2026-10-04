@@ -1,0 +1,43 @@
+name: Compare one header role per native call on frozen controls
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/pdf-local-recovery]
+    paths:
+      - '.github/workflows/single-header-role-native-probe.yml'
+      - 'tools/label-selection-model-probe/SingleRole*.cs'
+      - 'tools/label-selection-model-probe/FormalComparison.cs'
+      - 'tools/label-selection-model-probe/single-role-baseline.json'
+      - 'tools/label-selection-model-probe/FoundryLocalRecoveryProvider.cs'
+      - 'tools/label-selection-model-probe/Program.cs'
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: windows-2025
+    timeout-minutes: 95
+    env:
+      ORT_TELEMETRY_DISABLED: '1'
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Gate public tree and source identity
+        shell: pwsh
+        run: python scripts/check-public-tree.py
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: '10.0.x'
+          cache: false
+      - name: Record runner-visible hardware
+        shell: pwsh
+        run: |
+          $cpu = @(Get-CimInstance Win32_Processor | Select-Object Name, NumberOfCores, NumberOfLogicalProcessors)
+          $system = Get-CimInstance Win32_ComputerSystem
+          $os = Get-CimInstance Win32_OperatingSystem
+          @{ sourceCommit = $env:GITHUB_SHA; processors = $cpu; allocatedPhysicalMemoryBytes = [Int64]$system.TotalPhysicalMemory; architecture = [Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString(); os = $os.Caption; osVersion = $os.Version; osBuild = $os.BuildNumber } | ConvertTo-Json -Depth 5
+      - name: Run three fixed role calls per original case
+        shell: pwsh
+        run: dotnet run --project tools/label-selection-model-probe/WindowsLabelSelectionProbe.csproj --configuration Release --no-launch-profile -- --single-role 'qwen3.5-4b-generic-cpu:3'
