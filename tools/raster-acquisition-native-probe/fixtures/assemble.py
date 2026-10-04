@@ -41,9 +41,9 @@ def assemble(path, page_paths):
 
 if __name__ == '__main__':
     root = Path(__file__).resolve().parent
-    manifest = json.loads((root/'manifest.json').read_text())
+    manifest = json.loads((root/'manifest.json').read_text(encoding='utf-8'))
     for fixture in manifest['fixtures']:
-        directory = root/fixture['id']; oracle = json.loads((directory/'literal-oracle.json').read_text())
+        directory = root/fixture['id']; oracle = json.loads((directory/'literal-oracle.json').read_text(encoding='utf-8'))
         pages = [directory/p['imageFile'] for p in oracle['pages']]
         for p,path in zip(oracle['pages'],pages):
             if hashlib.sha256(path.read_bytes()).hexdigest() != p['imageSha256']: raise ValueError('Frozen image SHA mismatch')
