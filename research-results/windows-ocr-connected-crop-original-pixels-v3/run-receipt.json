@@ -1,0 +1,60 @@
+{
+  "nativeSourceCommit": "3dd01c5a56e869afb1d331309d6e988413798c76",
+  "posthocSourceCommit": "5810599e751ca28eb30abbc4c37bc4a8e8e5c987",
+  "nativeRecipe": "pinned-ocr-connected-crop-original-pixels-v3",
+  "nativeExecution": "completed once; exit 1 retained",
+  "nativeSourceCI": {
+    "runId": 37214837198,
+    "successJobs": 6,
+    "failedJobs": 1,
+    "failure": "PreferenceSnapshotTests real-sharing test worker can finish/exhaust retries before async test continuation; fixed with deterministic callback barrier, unchanged production retry helper."
+  },
+  "finalSourceCI": {
+    "runId": 37216822510,
+    "head": "5810599e751ca28eb30abbc4c37bc4a8e8e5c987",
+    "jobsSucceeded": 7,
+    "jobsTotal": 7,
+    "windowsUiChecksPassed": 537
+  },
+  "localTests": {
+    "corePassed": 270,
+    "integrationPassed": 397,
+    "cropRegressionPassed": 23,
+    "nativeHeaderRegressionPassed": 17
+  },
+  "runtimeAndHardwareAsRun": {
+    "runtime": {
+      "nativeVersion": "1.23.2",
+      "managedVersion": "1.23.2.0",
+      "managedSha256": "4c6985df4aa2f810ba8a2b37c3c791e619d8fe126954a6bd28cffd3f4adeba95",
+      "native": [
+        {
+          "path": "/workspace/recovery-research/windows-ocr-crop-completion-development-v3-20261004/bin/Debug/net10.0/runtimes/linux-x64/native/libonnxruntime.so",
+          "sha256": "13ab8084954fa4a47c777880180b90810d6020f021441395712b48a75b74c68b"
+        }
+      ],
+      "pipelineAssemblies": [
+        {
+          "name": "Takupoke.Infrastructure",
+          "sha256": "979bd2d65af838ea6e05ec296e926c7dc020855d9c0356d2becc39c54424e474"
+        },
+        {
+          "name": "Takupoke.Core",
+          "sha256": "a124b1a5a10594fbbedaa2de7c308c682d08df8dda838efde2470d751e066cc4"
+        }
+      ],
+      "os": "Debian GNU/Linux 13 (trixie)",
+      "architecture": "X64",
+      "cpuModel": "model name\t: INTEL(R) XEON(R) PLATINUM 8573C",
+      "availableMemoryLimitBytes": 12884901888
+    },
+    "recipe": "pinned-ocr-connected-crop-original-pixels-v3",
+    "inputSha256": "aa81abc1a6d5bc4c2d0f3dad55191432683201108394cc91de286483abf841da",
+    "scope": "Actual production OCR source and Linux ORT1.23.2; same original PDFs' lossless embedded pixels, not Windows-rendered pixels or deploy qualification; no LLM"
+  },
+  "coverage": "Two consumed fictional development originals, ten embedded image pages. Original pixels, not Windows PDF renderer. No negative corpus; no useful GenAI or model qualification claim.",
+  "modelsChanged": false,
+  "thresholdsChanged": false,
+  "llmCalls": 0,
+  "additionalNativeInferenceForReplayOrPublication": 0
+}

@@ -1,0 +1,74 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 4013,
+      "sha256": "b9fbb0331ea48b665608cfeb83b97186dff339b3ee5b6a58bee41ae00e31a488"
+    },
+    {
+      "path": "archived-driver.cs.txt",
+      "bytes": 12657,
+      "sha256": "4afad7647af1291cdbf465375ca8e34aff3059b60b457245597e4a0ecb0e6849"
+    },
+    {
+      "path": "archived-formal-oracle.cs.txt",
+      "bytes": 3326,
+      "sha256": "5efb5d12e238ff9ca4929dec22da6c45702bc62029d1a303baf22efc6604e774"
+    },
+    {
+      "path": "archived-project.csproj.txt",
+      "bytes": 436,
+      "sha256": "a2981662ebc46d875c2d460d57be027c09b065798e051a2a43cee78c5f055f2c"
+    },
+    {
+      "path": "ci-ui-proof.json",
+      "bytes": 869,
+      "sha256": "7749b2abe9c07e45ba773ba7000dbc52aed7d18bfed5f3e9ee4b6413d2c69fd2"
+    },
+    {
+      "path": "ci.json",
+      "bytes": 10085,
+      "sha256": "16ef0035ae2ce1a2c1847612caefaf047340a77cdf660b882d8ad93a855e7581"
+    },
+    {
+      "path": "fixture-proof.json",
+      "bytes": 986,
+      "sha256": "e46b3479327003b28cb7585600f1ed8a724355577c968e256efa5039dd86304d"
+    },
+    {
+      "path": "geometry-causes.json",
+      "bytes": 58696,
+      "sha256": "fed7a1608586a4cc5a03447f4ad7342df347570d2572491b615cbf385a3a7570"
+    },
+    {
+      "path": "inputs.json",
+      "bytes": 5702,
+      "sha256": "aa81abc1a6d5bc4c2d0f3dad55191432683201108394cc91de286483abf841da"
+    },
+    {
+      "path": "native-console.json",
+      "bytes": 372900,
+      "sha256": "f5f55ae9611e6fa7f51f01af14609cf9bd7e051ababcf65586f4cd51a9e5c6a8"
+    },
+    {
+      "path": "native-results.json",
+      "bytes": 212929,
+      "sha256": "aba9d15af5dc156cb8126b39051a5670be3cce617e294cba2a8fdaf84802f533"
+    },
+    {
+      "path": "recipe.json",
+      "bytes": 4785,
+      "sha256": "8e5bd07f45d6f66c734dde3866982e7c8a3433392625285320a12eafdab069a0"
+    },
+    {
+      "path": "run-receipt.json",
+      "bytes": 2579,
+      "sha256": "f1dbe3a3e615ee2cb3b4cc766d0a68c48ac7ae5bc5d1cf6f4e823922b7708a9f"
+    },
+    {
+      "path": "source-only-replay.json",
+      "bytes": 12904,
+      "sha256": "6f2b044445dc74f9dddebb590301eaa8dfa2c74104f40629de13d2aa857347db"
+    }
+  ]
+}

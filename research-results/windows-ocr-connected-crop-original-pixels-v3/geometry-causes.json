@@ -1,0 +1,2822 @@
+{
+  "scope": "Exact captured v3 OCR + new native-header-only Builder replay. Original boxes unchanged, no OCR or output clipping. Comparisons reproduce containment/intersection only, no new adoption or literal score.",
+  "sourceCommit": "5810599e751ca28eb30abbc4c37bc4a8e8e5c987",
+  "nativeCalls": 0,
+  "builderYear": 2027,
+  "builderTerm": "前期",
+  "requiredSlots": 40,
+  "structureErrors": [
+    "unassignedCellText",
+    "dayBinding",
+    "periodBinding"
+  ],
+  "formalReached": false,
+  "cellGeometryRows": [
+    {
+      "cell": "p1c0",
+      "page": 1,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "1",
+          "Period": 1
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [
+        "p1s15"
+      ],
+      "outsideDayRegion": [
+        "p1s11"
+      ],
+      "outsidePeriodRegion": [
+        "p1s15"
+      ],
+      "cellBox": {
+        "X": 96,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 1,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "1": {
+          "Page": 1,
+          "Box": {
+            "X": 96,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p1s11": {
+          "Id": "p1s11",
+          "CellId": "header",
+          "Page": 1,
+          "Text": "月",
+          "Box": {
+            "X": 110.72620738636364,
+            "Y": 37.8203125,
+            "Width": 3.9796401515151416,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        },
+        "p1s15": {
+          "Id": "p1s15",
+          "CellId": "header",
+          "Page": 1,
+          "Text": "1",
+          "Box": {
+            "X": 106.20960202991452,
+            "Y": 68.13020833333333,
+            "Width": 3.7232905982906033,
+            "Height": 22.53125,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 6,
+          "SourceOrder": 15
+        }
+      }
+    },
+    {
+      "cell": "p1c1",
+      "page": 1,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "1",
+          "Period": 2
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [
+        "p1s12"
+      ],
+      "outsideDayRegion": [
+        "p1s11"
+      ],
+      "outsidePeriodRegion": [
+        "p1s12"
+      ],
+      "cellBox": {
+        "X": 212,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 1,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "2": {
+          "Page": 1,
+          "Box": {
+            "X": 212,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p1s12": {
+          "Id": "p1s12",
+          "CellId": "header",
+          "Page": 1,
+          "Text": "2",
+          "Box": {
+            "X": 223.15104166666666,
+            "Y": 65.44791666666667,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 3,
+          "SourceOrder": 12
+        },
+        "p1s11": {
+          "Id": "p1s11",
+          "CellId": "header",
+          "Page": 1,
+          "Text": "月",
+          "Box": {
+            "X": 110.72620738636364,
+            "Y": 37.8203125,
+            "Width": 3.9796401515151416,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p1c2",
+      "page": 1,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "1",
+          "Period": 3
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p1s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 328,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 1,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "3": {
+          "Page": 1,
+          "Box": {
+            "X": 328,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p1s11": {
+          "Id": "p1s11",
+          "CellId": "header",
+          "Page": 1,
+          "Text": "月",
+          "Box": {
+            "X": 110.72620738636364,
+            "Y": 37.8203125,
+            "Width": 3.9796401515151416,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p1c3",
+      "page": 1,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "1",
+          "Period": 4
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p1s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 444,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 1,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "4": {
+          "Page": 1,
+          "Box": {
+            "X": 444,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p1s11": {
+          "Id": "p1s11",
+          "CellId": "header",
+          "Page": 1,
+          "Text": "月",
+          "Box": {
+            "X": 110.72620738636364,
+            "Y": 37.8203125,
+            "Width": 3.9796401515151416,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p1c4",
+      "page": 1,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "1",
+          "Period": 5
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p1s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 560,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 1,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "5": {
+          "Page": 1,
+          "Box": {
+            "X": 560,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p1s11": {
+          "Id": "p1s11",
+          "CellId": "header",
+          "Page": 1,
+          "Text": "月",
+          "Box": {
+            "X": 110.72620738636364,
+            "Y": 37.8203125,
+            "Width": 3.9796401515151416,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p1c5",
+      "page": 1,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "1",
+          "Period": 6
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p1s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 676,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 1,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "6": {
+          "Page": 1,
+          "Box": {
+            "X": 676,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p1s11": {
+          "Id": "p1s11",
+          "CellId": "header",
+          "Page": 1,
+          "Text": "月",
+          "Box": {
+            "X": 110.72620738636364,
+            "Y": 37.8203125,
+            "Width": 3.9796401515151416,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p1c6",
+      "page": 1,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "1",
+          "Period": 7
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p1s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 792,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 1,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "7": {
+          "Page": 1,
+          "Box": {
+            "X": 792,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p1s11": {
+          "Id": "p1s11",
+          "CellId": "header",
+          "Page": 1,
+          "Text": "月",
+          "Box": {
+            "X": 110.72620738636364,
+            "Y": 37.8203125,
+            "Width": 3.9796401515151416,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p1c7",
+      "page": 1,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "1",
+          "Period": 8
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p1s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 908,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 1,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "8": {
+          "Page": 1,
+          "Box": {
+            "X": 908,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p1s11": {
+          "Id": "p1s11",
+          "CellId": "header",
+          "Page": 1,
+          "Text": "月",
+          "Box": {
+            "X": 110.72620738636364,
+            "Y": 37.8203125,
+            "Width": 3.9796401515151416,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p2c8",
+      "page": 2,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "2",
+          "Period": 1
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [
+        "p2s15"
+      ],
+      "outsideDayRegion": [
+        "p2s11"
+      ],
+      "outsidePeriodRegion": [
+        "p2s15"
+      ],
+      "cellBox": {
+        "X": 96,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 2,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "1": {
+          "Page": 2,
+          "Box": {
+            "X": 96,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p2s11": {
+          "Id": "p2s11",
+          "CellId": "header",
+          "Page": 2,
+          "Text": "火",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        },
+        "p2s15": {
+          "Id": "p2s15",
+          "CellId": "header",
+          "Page": 2,
+          "Text": "1",
+          "Box": {
+            "X": 103.57579703282828,
+            "Y": 67.86197916666667,
+            "Width": 4.011994949494948,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 6,
+          "SourceOrder": 15
+        }
+      }
+    },
+    {
+      "cell": "p2c9",
+      "page": 2,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "2",
+          "Period": 2
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [
+        "p2s13"
+      ],
+      "outsideDayRegion": [
+        "p2s11"
+      ],
+      "outsidePeriodRegion": [
+        "p2s13"
+      ],
+      "cellBox": {
+        "X": 212,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 2,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "2": {
+          "Page": 2,
+          "Box": {
+            "X": 212,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p2s13": {
+          "Id": "p2s13",
+          "CellId": "header",
+          "Page": 2,
+          "Text": "2",
+          "Box": {
+            "X": 219.9393061155914,
+            "Y": 66.7890625,
+            "Width": 3.9952956989247355,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 4,
+          "SourceOrder": 13
+        },
+        "p2s11": {
+          "Id": "p2s11",
+          "CellId": "header",
+          "Page": 2,
+          "Text": "火",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p2c10",
+      "page": 2,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "2",
+          "Period": 3
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p2s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 328,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 2,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "3": {
+          "Page": 2,
+          "Box": {
+            "X": 328,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p2s11": {
+          "Id": "p2s11",
+          "CellId": "header",
+          "Page": 2,
+          "Text": "火",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p2c11",
+      "page": 2,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "2",
+          "Period": 4
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p2s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 444,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 2,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "4": {
+          "Page": 2,
+          "Box": {
+            "X": 444,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p2s11": {
+          "Id": "p2s11",
+          "CellId": "header",
+          "Page": 2,
+          "Text": "火",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p2c12",
+      "page": 2,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "2",
+          "Period": 5
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p2s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 560,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 2,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "5": {
+          "Page": 2,
+          "Box": {
+            "X": 560,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p2s11": {
+          "Id": "p2s11",
+          "CellId": "header",
+          "Page": 2,
+          "Text": "火",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p2c13",
+      "page": 2,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "2",
+          "Period": 6
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p2s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 676,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 2,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "6": {
+          "Page": 2,
+          "Box": {
+            "X": 676,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p2s11": {
+          "Id": "p2s11",
+          "CellId": "header",
+          "Page": 2,
+          "Text": "火",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p2c14",
+      "page": 2,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "2",
+          "Period": 7
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p2s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 792,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 2,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "7": {
+          "Page": 2,
+          "Box": {
+            "X": 792,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p2s11": {
+          "Id": "p2s11",
+          "CellId": "header",
+          "Page": 2,
+          "Text": "火",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p2c15",
+      "page": 2,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "2",
+          "Period": 8
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p2s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 908,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 2,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "8": {
+          "Page": 2,
+          "Box": {
+            "X": 908,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p2s11": {
+          "Id": "p2s11",
+          "CellId": "header",
+          "Page": 2,
+          "Text": "火",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p3c16",
+      "page": 3,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "3",
+          "Period": 1
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [
+        "p3s15"
+      ],
+      "outsideDayRegion": [
+        "p3s11"
+      ],
+      "outsidePeriodRegion": [
+        "p3s15"
+      ],
+      "cellBox": {
+        "X": 96,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 3,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "1": {
+          "Page": 3,
+          "Box": {
+            "X": 96,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p3s15": {
+          "Id": "p3s15",
+          "CellId": "header",
+          "Page": 3,
+          "Text": "1",
+          "Box": {
+            "X": 103.57579703282828,
+            "Y": 67.86197916666667,
+            "Width": 4.011994949494948,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 6,
+          "SourceOrder": 15
+        },
+        "p3s11": {
+          "Id": "p3s11",
+          "CellId": "header",
+          "Page": 3,
+          "Text": "水",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p3c17",
+      "page": 3,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "3",
+          "Period": 2
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [
+        "p3s13"
+      ],
+      "outsideDayRegion": [
+        "p3s11"
+      ],
+      "outsidePeriodRegion": [
+        "p3s13"
+      ],
+      "cellBox": {
+        "X": 212,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 3,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "2": {
+          "Page": 3,
+          "Box": {
+            "X": 212,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p3s11": {
+          "Id": "p3s11",
+          "CellId": "header",
+          "Page": 3,
+          "Text": "水",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        },
+        "p3s13": {
+          "Id": "p3s13",
+          "CellId": "header",
+          "Page": 3,
+          "Text": "2",
+          "Box": {
+            "X": 219.9393061155914,
+            "Y": 66.7890625,
+            "Width": 3.9952956989247355,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 4,
+          "SourceOrder": 13
+        }
+      }
+    },
+    {
+      "cell": "p3c18",
+      "page": 3,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "3",
+          "Period": 3
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p3s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 328,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 3,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "3": {
+          "Page": 3,
+          "Box": {
+            "X": 328,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p3s11": {
+          "Id": "p3s11",
+          "CellId": "header",
+          "Page": 3,
+          "Text": "水",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p3c19",
+      "page": 3,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "3",
+          "Period": 4
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p3s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 444,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 3,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "4": {
+          "Page": 3,
+          "Box": {
+            "X": 444,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p3s11": {
+          "Id": "p3s11",
+          "CellId": "header",
+          "Page": 3,
+          "Text": "水",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p3c20",
+      "page": 3,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "3",
+          "Period": 5
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p3s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 560,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 3,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "5": {
+          "Page": 3,
+          "Box": {
+            "X": 560,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p3s11": {
+          "Id": "p3s11",
+          "CellId": "header",
+          "Page": 3,
+          "Text": "水",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p3c21",
+      "page": 3,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "3",
+          "Period": 6
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p3s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 676,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 3,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "6": {
+          "Page": 3,
+          "Box": {
+            "X": 676,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p3s11": {
+          "Id": "p3s11",
+          "CellId": "header",
+          "Page": 3,
+          "Text": "水",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p3c22",
+      "page": 3,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "3",
+          "Period": 7
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p3s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 792,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 3,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "7": {
+          "Page": 3,
+          "Box": {
+            "X": 792,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p3s11": {
+          "Id": "p3s11",
+          "CellId": "header",
+          "Page": 3,
+          "Text": "水",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p3c23",
+      "page": 3,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "3",
+          "Period": 8
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p3s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 908,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 3,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "8": {
+          "Page": 3,
+          "Box": {
+            "X": 908,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p3s11": {
+          "Id": "p3s11",
+          "CellId": "header",
+          "Page": 3,
+          "Text": "水",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p4c24",
+      "page": 4,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "4",
+          "Period": 1
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [
+        "p4s15"
+      ],
+      "outsideDayRegion": [
+        "p4s11"
+      ],
+      "outsidePeriodRegion": [
+        "p4s15"
+      ],
+      "cellBox": {
+        "X": 96,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 4,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "1": {
+          "Page": 4,
+          "Box": {
+            "X": 96,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p4s11": {
+          "Id": "p4s11",
+          "CellId": "header",
+          "Page": 4,
+          "Text": "木",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        },
+        "p4s15": {
+          "Id": "p4s15",
+          "CellId": "header",
+          "Page": 4,
+          "Text": "1",
+          "Box": {
+            "X": 103.57579703282828,
+            "Y": 67.86197916666667,
+            "Width": 4.011994949494948,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 6,
+          "SourceOrder": 15
+        }
+      }
+    },
+    {
+      "cell": "p4c25",
+      "page": 4,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "4",
+          "Period": 2
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [
+        "p4s13"
+      ],
+      "outsideDayRegion": [
+        "p4s11"
+      ],
+      "outsidePeriodRegion": [
+        "p4s13"
+      ],
+      "cellBox": {
+        "X": 212,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 4,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "2": {
+          "Page": 4,
+          "Box": {
+            "X": 212,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p4s13": {
+          "Id": "p4s13",
+          "CellId": "header",
+          "Page": 4,
+          "Text": "2",
+          "Box": {
+            "X": 219.9393061155914,
+            "Y": 66.7890625,
+            "Width": 3.9952956989247355,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 4,
+          "SourceOrder": 13
+        },
+        "p4s11": {
+          "Id": "p4s11",
+          "CellId": "header",
+          "Page": 4,
+          "Text": "木",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p4c26",
+      "page": 4,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "4",
+          "Period": 3
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p4s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 328,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 4,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "3": {
+          "Page": 4,
+          "Box": {
+            "X": 328,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p4s11": {
+          "Id": "p4s11",
+          "CellId": "header",
+          "Page": 4,
+          "Text": "木",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p4c27",
+      "page": 4,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "4",
+          "Period": 4
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p4s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 444,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 4,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "4": {
+          "Page": 4,
+          "Box": {
+            "X": 444,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p4s11": {
+          "Id": "p4s11",
+          "CellId": "header",
+          "Page": 4,
+          "Text": "木",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p4c28",
+      "page": 4,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "4",
+          "Period": 5
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p4s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 560,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 4,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "5": {
+          "Page": 4,
+          "Box": {
+            "X": 560,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p4s11": {
+          "Id": "p4s11",
+          "CellId": "header",
+          "Page": 4,
+          "Text": "木",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p4c29",
+      "page": 4,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "4",
+          "Period": 6
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p4s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 676,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 4,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "6": {
+          "Page": 4,
+          "Box": {
+            "X": 676,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p4s11": {
+          "Id": "p4s11",
+          "CellId": "header",
+          "Page": 4,
+          "Text": "木",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p4c30",
+      "page": 4,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "4",
+          "Period": 7
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p4s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 792,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 4,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "7": {
+          "Page": 4,
+          "Box": {
+            "X": 792,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p4s11": {
+          "Id": "p4s11",
+          "CellId": "header",
+          "Page": 4,
+          "Text": "木",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p4c31",
+      "page": 4,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "4",
+          "Period": 8
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p4s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 908,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 4,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "8": {
+          "Page": 4,
+          "Box": {
+            "X": 908,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p4s11": {
+          "Id": "p4s11",
+          "CellId": "header",
+          "Page": 4,
+          "Text": "木",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 37.552083333333336,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p5c32",
+      "page": 5,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "5",
+          "Period": 1
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [
+        "p5s15"
+      ],
+      "outsideDayRegion": [
+        "p5s11"
+      ],
+      "outsidePeriodRegion": [
+        "p5s15"
+      ],
+      "cellBox": {
+        "X": 96,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 5,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "1": {
+          "Page": 5,
+          "Box": {
+            "X": 96,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p5s15": {
+          "Id": "p5s15",
+          "CellId": "header",
+          "Page": 5,
+          "Text": "1",
+          "Box": {
+            "X": 103.57579703282828,
+            "Y": 67.86197916666667,
+            "Width": 4.011994949494948,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 6,
+          "SourceOrder": 15
+        },
+        "p5s11": {
+          "Id": "p5s11",
+          "CellId": "header",
+          "Page": 5,
+          "Text": "金",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 36.479166666666664,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p5c33",
+      "page": 5,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "5",
+          "Period": 2
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [
+        "p5s13"
+      ],
+      "outsideDayRegion": [
+        "p5s11"
+      ],
+      "outsidePeriodRegion": [
+        "p5s13"
+      ],
+      "cellBox": {
+        "X": 212,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 5,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "2": {
+          "Page": 5,
+          "Box": {
+            "X": 212,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p5s11": {
+          "Id": "p5s11",
+          "CellId": "header",
+          "Page": 5,
+          "Text": "金",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 36.479166666666664,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        },
+        "p5s13": {
+          "Id": "p5s13",
+          "CellId": "header",
+          "Page": 5,
+          "Text": "2",
+          "Box": {
+            "X": 219.9393061155914,
+            "Y": 66.7890625,
+            "Width": 3.9952956989247355,
+            "Height": 24.140625,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 4,
+          "SourceOrder": 13
+        }
+      }
+    },
+    {
+      "cell": "p5c34",
+      "page": 5,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "5",
+          "Period": 3
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p5s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 328,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 5,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "3": {
+          "Page": 5,
+          "Box": {
+            "X": 328,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p5s11": {
+          "Id": "p5s11",
+          "CellId": "header",
+          "Page": 5,
+          "Text": "金",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 36.479166666666664,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p5c35",
+      "page": 5,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "5",
+          "Period": 4
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p5s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 444,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 5,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "4": {
+          "Page": 5,
+          "Box": {
+            "X": 444,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p5s11": {
+          "Id": "p5s11",
+          "CellId": "header",
+          "Page": 5,
+          "Text": "金",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 36.479166666666664,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p5c36",
+      "page": 5,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "5",
+          "Period": 5
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p5s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 560,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 5,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "5": {
+          "Page": 5,
+          "Box": {
+            "X": 560,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p5s11": {
+          "Id": "p5s11",
+          "CellId": "header",
+          "Page": 5,
+          "Text": "金",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 36.479166666666664,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p5c37",
+      "page": 5,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "5",
+          "Period": 6
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p5s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 676,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 5,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "6": {
+          "Page": 5,
+          "Box": {
+            "X": 676,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p5s11": {
+          "Id": "p5s11",
+          "CellId": "header",
+          "Page": 5,
+          "Text": "金",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 36.479166666666664,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p5c38",
+      "page": 5,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "5",
+          "Period": 7
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p5s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 792,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 5,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "7": {
+          "Page": 5,
+          "Box": {
+            "X": 792,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p5s11": {
+          "Id": "p5s11",
+          "CellId": "header",
+          "Page": 5,
+          "Text": "金",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 36.479166666666664,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    },
+    {
+      "cell": "p5c39",
+      "page": 5,
+      "slots": [
+        {
+          "ClassName": "5_ES",
+          "Day": "5",
+          "Period": 8
+        }
+      ],
+      "unassignedIntersectingSourceIDs": [],
+      "outsideDayRegion": [
+        "p5s11"
+      ],
+      "outsidePeriodRegion": [],
+      "cellBox": {
+        "X": 908,
+        "Y": 90,
+        "Width": 116,
+        "Height": 76,
+        "Valid": true
+      },
+      "dayRegion": {
+        "Page": 5,
+        "Box": {
+          "X": 96,
+          "Y": 32,
+          "Width": 928,
+          "Height": 28,
+          "Valid": true
+        },
+        "Axis": 0
+      },
+      "periodRegions": {
+        "8": {
+          "Page": 5,
+          "Box": {
+            "X": 908,
+            "Y": 60,
+            "Width": 116,
+            "Height": 30,
+            "Valid": true
+          },
+          "Axis": 0
+        }
+      },
+      "sourceDetails": {
+        "p5s11": {
+          "Id": "p5s11",
+          "CellId": "header",
+          "Page": 5,
+          "Text": "金",
+          "Box": {
+            "X": 111.04166666666666,
+            "Y": 36.479166666666664,
+            "Width": 4.270833333333343,
+            "Height": 25.75,
+            "Valid": true
+          },
+          "FromOcr": true,
+          "SourceLine": 2,
+          "SourceOrder": 11
+        }
+      }
+    }
+  ],
+  "counts": {
+    "cellsWithGeometryIssue": 40,
+    "unassigned": 10,
+    "dayOutside": 40,
+    "periodOutside": 10
+  }
+}

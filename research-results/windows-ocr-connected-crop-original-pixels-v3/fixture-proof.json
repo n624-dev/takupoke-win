@@ -1,0 +1,34 @@
+{
+  "packetBytes": 5661796,
+  "packetSha256": "9966f271f0bde4bb237328baab2dd57d02cfb0625cf539e271c234fd3108d533",
+  "sourceLogSha256": "f136400c65a3729d431fafb86dbb246e9779e29128ac7b2b533356bddfff947f",
+  "pages": [
+    {
+      "width": 1025,
+      "height": 206,
+      "bgraSha256": "61a64c898758f186500fd6772c584a3e6abfecb54b7a5d05e02c0df872c73f62"
+    },
+    {
+      "width": 1025,
+      "height": 206,
+      "bgraSha256": "d3df4c666936a233d8234e54a7fd97ecd2a8704c6b023869f85e3a5c4184de37"
+    },
+    {
+      "width": 1025,
+      "height": 206,
+      "bgraSha256": "1e8c0cd8d765e2fdb9393f17d78918af9f94c76fd558ba6d97a09165f1bab79d"
+    },
+    {
+      "width": 1025,
+      "height": 206,
+      "bgraSha256": "b641a03dd0f9094dec67895e2e80af5932d28c14138929af8e2ede3a46a4ef38"
+    },
+    {
+      "width": 1025,
+      "height": 206,
+      "bgraSha256": "5c28abde5de89d0c880bf4fd9e22dfafe1282e7151fb1aa48b845e9c0a87095d"
+    }
+  ],
+  "nativeCalls": 0,
+  "compressedFixtureBytes": 92043
+}
