@@ -46,6 +46,8 @@ public sealed class FoundryLocalRecoveryProvider(IModel model, RecoveryModelMani
         client.Settings.RandomSeed = 17;
         client.Settings.MaxTokens = 512;
         client.Settings.ResponseFormat = LabelSelectionProtocol.Format(cell);
+        // Foundry's no-tools JSON recommendation; isolate this setting from v1.
+        client.Settings.ToolChoice = ToolChoice.None;
         LastStage = "native-generation";
         NativeCompletionsStarted++;
         var completion = await client.CompleteChatAsync(new[] { new ChatMessage { Role = "system", Content = LabelSelectionProtocol.Instruction },
