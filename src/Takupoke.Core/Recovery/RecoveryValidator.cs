@@ -9,7 +9,7 @@ namespace Takupoke.Core.Recovery;
 public static class RecoveryValidator
 {
     public const int SchemaVersion = 2;
-    public const int Version = 4;
+    public const int Version = 5;
     public static string Fingerprint<T>(T value) => Convert.ToHexStringLower(SHA256.HashData(JsonSerializer.SerializeToUtf8Bytes(value)));
     private static string Text(string value) => Regex.Replace(value.Normalize(NormalizationForm.FormKC), @"\s+", "").Replace('~', '〜').Replace('～', '〜');
     public static IReadOnlyList<string> SpecialClasses { get; } = new[] { "1_1", "1_2", "1_3" }.Concat(Enumerable.Range(2, 4).SelectMany(y => new[] { "CN", "ES", "IT" }.Select(c => $"{y}_{c}"))).Concat(new[] { "AI_1", "AI_2" }).ToArray();
@@ -37,10 +37,12 @@ public static class RecoveryValidator
         Check(doc.Complete && doc.Cells.Count is > 0 and <= 20000 && doc.Sources.Count <= 100000, "incompleteDocument");
         Check(result.Kind == doc.Kind && result.SchoolYear == doc.SchoolYear && result.Term == doc.Term, "documentIdentity");
         Check(doc.SchoolYear is >= 1900 and <= 9998 && (doc.Kind != RecoveryDocumentKind.Timetable || doc.Term is "前期" or "後期"), "yearTerm");
-        Check(result.Metadata.RecoverySchemaVersion == SchemaVersion && result.Metadata.ValidatorVersion == Version &&
-            new[] { result.Metadata.Provider, result.Metadata.ModelId, result.Metadata.ModelVersion, result.Metadata.RuntimeVersion,
-                result.Metadata.PromptVersion, result.Metadata.OsVersion, result.Metadata.RecoveryVersion }.All(v => !string.IsNullOrWhiteSpace(v)), "versions");
-        Check(doc.StructureMetadata is null || doc.StructureMetadata == result.Metadata, "structureMetadata");
+        bool ValidMetadata(RecoveryMetadata metadata) => metadata.RecoverySchemaVersion == SchemaVersion && metadata.ValidatorVersion == Version &&
+            new[] { metadata.Provider, metadata.ModelId, metadata.ModelVersion, metadata.RuntimeVersion,
+                metadata.PromptVersion, metadata.OsVersion, metadata.RecoveryVersion }.All(v => !string.IsNullOrWhiteSpace(v));
+        Check(ValidMetadata(result.Metadata), "versions");
+        // Structural and field inference have independently recorded histories.
+        Check(doc.StructureMetadata is null || ValidMetadata(doc.StructureMetadata), "structureMetadata");
         Check(doc.Classes.Count > 0 && doc.Classes.Distinct().Count() == doc.Classes.Count && doc.Classes.All(ClassSelection.Candidates.Contains) && doc.Days.Count > 0 && doc.Days.Distinct().Count() == doc.Days.Count, "scope");
         if (doc.Kind != RecoveryDocumentKind.Timetable) Check(SpecialClasses.ToHashSet().SetEquals(doc.Classes) && doc.Days.Count == 5, "specialScope");
         var maxPeriod = doc.Kind == RecoveryDocumentKind.Exam ? 6 : 8;
@@ -260,11 +262,36 @@ public static class RecoveryValidator
                     Check(Header(scope.LabelSourceIds, allowed, labels.Concat(labels.Select(l => l + ":")).ToArray(), virtualCell, scope.LabelRegion), "roleScopeProof");
                     Check(!scope.EmptyVerified || scope.Role != RecoveryFieldRole.Subject && !bodyIds.Any(id => Contains(scope.Box, sources[id].Box)), "roleFalseEmpty");
                 }
+                foreach (var lessonScopes in cell.RoleScopes.Where(s => s.Proof == RecoveryRoleProof.InlineLabel).GroupBy(s => s.LessonIndex))
+                {
+                    var pluralRoles = 0;
+                    foreach (var scope in lessonScopes)
+                    {
+                        work.Step(cell.SourceIds.Count);
+                        var ids = cell.SourceIds.Where(id => !inlineLabelIds.Contains(id) && sources.TryGetValue(id, out var source) && Contains(scope.Box, source.Box)).ToArray();
+                        var raw = Raw(ids); work.Step(raw.Length * 3L);
+                        if (raw.Replace('･', '・').Split('・').Length > 1) pluralRoles++;
+                    }
+                    // One inline label per role cannot certify several tuples,
+                    // including in previously stored audits and previews.
+                    Check(pluralRoles < 2, "inlineParallelEvidence");
+                }
                 Check(!cell.RoleScopes.SelectMany((a, i) => cell.RoleScopes.Skip(i + 1).Select(b => (a, b))).Any(p =>
                     Math.Min(p.a.Box.X + p.a.Box.Width, p.b.Box.X + p.b.Box.Width) > Math.Max(p.a.Box.X, p.b.Box.X) && Math.Min(p.a.Box.Y + p.a.Box.Height, p.b.Box.Y + p.b.Box.Height) > Math.Max(p.a.Box.Y, p.b.Box.Y)), "roleScopeOverlap");
                 Check(structurePreflight && RecoveryStructure.Pending(cell) || bodyIds.All(id => cell.RoleScopes.Count(s => Contains(s.Box, sources[id].Box)) == 1), "roleBodyCoverage");
             }
             var bindingIds = cell.LessonBindings.SelectMany(b => b.Subject.Concat(b.Teacher).Concat(b.Room)).ToArray();
+            foreach (var binding in cell.LessonBindings)
+            {
+                var pluralRoles = 0;
+                foreach (var ids in new[] { binding.Subject, binding.Teacher, binding.Room })
+                {
+                    work.Step(ids.Count);
+                    var raw = Raw(ids.Where(sources.ContainsKey)); work.Step(raw.Length * 3L);
+                    if (raw.Replace('･', '・').Split('・').Length > 1) pluralRoles++;
+                }
+                Check(pluralRoles < 2, "fixedParallelEvidence");
+            }
             Check(proposal || (cell.ConfirmedEmpty ? cell.LessonBindings.Count == 0 : cell.LessonBindings.Count == cell.ParallelCount && bindingIds.Distinct().Count() == bindingIds.Length && bindingIds.ToHashSet().SetEquals(cell.SourceIds)), "lessonBinding");
             Check(cell.Slots.Count > 0 && cell.Slots.Select(s => (s.ClassName, s.Day)).Distinct().Count() == 1 &&
                 cell.Slots.Select(s => s.Period).Order().Zip(cell.Slots.Select(s => s.Period).Order().Skip(1)).All(p => p.Second == p.First + 1), "span");

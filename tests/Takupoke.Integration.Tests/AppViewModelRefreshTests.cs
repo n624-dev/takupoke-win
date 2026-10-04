@@ -1,7 +1,9 @@
 using System.Reflection;
 using Microsoft.UI.Dispatching;
 using Takupoke.Core;
+using Takupoke.Core.Recovery;
 using Takupoke.Infrastructure.Materials;
+using Takupoke.Infrastructure.Recovery;
 using Takupoke.Infrastructure.Storage;
 using Takupoke.Win.ViewModels;
 using Xunit;
@@ -14,6 +16,54 @@ public sealed class ViewModelOfflineCollection;
 [Collection("view-model-offline")]
 public sealed class AppViewModelRefreshTests
 {
+    [Theory]
+    [InlineData(4, false, false, true)]
+    [InlineData(5, false, false, true)]
+    [InlineData(4, true, false, false)]
+    [InlineData(5, true, false, false)]
+    [InlineData(5, false, true, false)]
+    public async Task SavedRecoveryDisplayRequiresConfirmedSemanticAuditAndExactFormalProjection(
+        int version, bool compound, bool changedProjection, bool expectedVisible)
+    {
+        await using var fixture = await Fixture.CreateAsync();
+        await fixture.Model.SavePreferencesAsync(p => p with { SelectedClasses = ["3_CN"] });
+        var store = Field<SchoolDataStore>(fixture.Model, "_school"); var lease = await store.BeginAsync();
+        var layout = RecoveryPipelineTests.Layout(MaterialKind.Timetable);
+        layout = layout with { Glyphs = layout.Glyphs.Select(g => g.Text == "2026年度" ? g with { Text = lease.Period.SchoolYear + "年度" } :
+            g.Text == "前期" ? g with { Text = lease.Period.Half == 1 ? "前期" : "後期" } : g).ToArray() };
+        var document = RecoveryDocumentBuilder.Build(fixture.Source.Digest, MaterialKind.Timetable, [layout], (_, _) => true);
+        var run = await RecoveryEngine.RunAsync(document, "windows", 10, true, [], _ => null);
+        var result = Assert.IsType<RecoveryResult>(run.Result);
+        var formal = RecoveryAnalysisConverter.Convert(fixture.Source, document, result, fixture.Analysis.ParsedAt);
+        string Compound(string text) => compound ? text.Replace("架空科目A", "架空科目A・架空科目B").Replace("架空教室C", "架空教室C・架空教室D") : text;
+        document = document with { Sources = document.Sources.Select(s => s with { Text = Compound(s.Text) }).ToArray() };
+        result = result with { Metadata = result.Metadata with { ValidatorVersion = version }, Cells = result.Cells.Select(c => c with {
+            Lessons = c.Lessons.Select(l => l with { Subject = l.Subject with { Value = Compound(l.Subject.Value) },
+                Room = l.Room with { Value = Compound(l.Room.Value) } }).ToArray() }).ToArray() };
+        var acceptance = new RecoveryAcceptance(document.PdfHash, RecoveryValidator.Fingerprint(result),
+            RecoveryValidator.Fingerprint(document), result.Metadata, fixture.Analysis.ParsedAt);
+        var audit = new RecoveryAudit(document, result, acceptance);
+        formal = formal with { Recovery = audit, ParserVersion = version == 4 ? 24 : 25, Timetable = formal.Timetable! with {
+            Lessons = formal.Timetable!.Lessons.Select(l => l with { Names = l.Names with {
+                Subject = changedProjection ? "架空の改変された本文" : Compound(l.Names.Subject), Room = Compound(l.Names.Room!)
+            } }).ToArray() } };
+        await store.WriteAsync(lease, "analysis.Timetable", formal);
+        var savedFingerprint = RecoveryValidator.Fingerprint(formal);
+        var preferences = fixture.Model.Preferences;
+
+        await (Task)typeof(AppViewModel).GetMethod("ReloadAsync", BindingFlags.Instance | BindingFlags.NonPublic)!
+            .Invoke(fixture.Model, [CancellationToken.None, false])!;
+
+        Assert.Equal(expectedVisible, fixture.Model.Data.Timetable is not null);
+        Assert.Equal(expectedVisible, fixture.Model.Materials[MaterialKind.Timetable].Analysis is not null);
+        if (!expectedVisible) Assert.Contains("確認内容を検証できません", fixture.Model.Materials[MaterialKind.Timetable].ParseAttempt!.Failure);
+        Assert.Equal(preferences, fixture.Model.Preferences);
+        Assert.Equal(new[] { "3_CN" }, fixture.Model.Preferences.SelectedClasses);
+        Assert.Equal(fixture.Source.Id, fixture.Model.Materials[MaterialKind.Timetable].Source!.Id);
+        Assert.Equal(savedFingerprint, RecoveryValidator.Fingerprint((await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Timetable"))!));
+        Assert.Null(await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Timetable"));
+    }
+
     [Fact]
     public async Task KnownLatestAcquisitionFailureBlocksPendingPreviewPdfWithoutChangingLastGood()
     {

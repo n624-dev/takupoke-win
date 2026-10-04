@@ -64,7 +64,8 @@ public partial class RecoveryTests
     [Fact] public void NullProviderFieldCannotCrashValidator() { var (d, r) = Fixture(); var l = r.Cells[0].Lessons[0]; Assert.False(RecoveryValidator.Validate(d, r with { Cells = r.Cells.Select((c, i) => i == 0 ? c with { Lessons = [l with { Teacher = l.Teacher with { Evidence = null! } }] } : c).ToArray() }).CanAdopt); }
 
     private sealed record SpecialFixture(RecoveryDocument Document, RecoveryResult Result);
-    private static (RecoveryDocument Doc, RecoveryResult Result) Special(string kind = "exam") { var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) } }; var f = JsonSerializer.Deserialize<SpecialFixture>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "fixtures", "recovery-" + kind + ".json")), options)!; return (f.Document, f.Result); }
+    private static (RecoveryDocument Doc, RecoveryResult Result) Special(string kind = "exam") { var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) } }; var f = JsonSerializer.Deserialize<SpecialFixture>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "fixtures", "recovery-" + kind + ".json")), options)!; // Keep historical fixture bytes immutable; this loader exercises current semantic validation.
+        return (f.Document, f.Result with { Metadata = f.Result.Metadata with { ValidatorVersion = RecoveryValidator.Version } }); }
     [Theory] [InlineData("exam")] [InlineData("return")] public void SpecialSchedulesWithFullScopeAndExplicitSpanTimesPass(string kind) { var (d, r) = Special(kind); Assert.Empty(RecoveryValidator.Validate(d, r).Errors); }
     [Theory] [InlineData("exam")] [InlineData("return")]
     public void SpecialRecoveryRequiresEveryDateInTheSelectedHalf(string kind)

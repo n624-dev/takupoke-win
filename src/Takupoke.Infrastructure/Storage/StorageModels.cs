@@ -10,7 +10,10 @@ public sealed record SourceRecord(string Id, MaterialKind Kind, string Path, str
 public sealed record MaterialAnalysis(string OriginalId, MaterialKind Kind, int ParserVersion, string SourceDigest,
     string SourceName, DateTimeOffset ParsedAt, int SchoolYear, TimetableAnalysis? Timetable = null,
     IReadOnlyList<ScheduleChange>? Changes = null, SpecialAnalysis? Special = null, RecoveryAudit? Recovery = null);
-public sealed record RecoveryAudit(RecoveryDocument Document, RecoveryResult Result, RecoveryAcceptance Acceptance);
+public sealed record RecoveryAudit(RecoveryDocument Document, RecoveryResult Result, RecoveryAcceptance Acceptance)
+{
+    public RecoveryAcceptance? PreviousAcceptance { get; init; }
+}
 public sealed record RecoveryPreview(string SourceId, SchoolLease Lease, RecoveryDocument Document, RecoveryResult Result, DateTimeOffset CreatedAt);
 public sealed record MaterialAttempt(DateTimeOffset At, string? Failure, bool Parsing, string? SourceDigest = null,
     int? SchoolYear = null, ChangeErrorCode? ChangeError = null, int? ParserVersion = null, int? Page = null, PdfFailurePosition? Cell = null, bool RecoveryPending = false);

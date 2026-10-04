@@ -155,6 +155,9 @@ public sealed class SchoolDataStoreTests : IAsyncLifetime
         var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) } };
         var raw = await File.ReadAllTextAsync(Path.Combine(AppContext.BaseDirectory, "fixtures", "recovery-exam.json"));
         var fixture = JsonSerializer.Deserialize<RecoveryFixture>(raw.Replace("2026", documentYear.ToString(System.Globalization.CultureInfo.InvariantCulture), StringComparison.Ordinal), options)!;
+        // The immutable fixture records v4; these period/storage tests require
+        // a semantically validated current-version result.
+        fixture = fixture with { Result = fixture.Result with { Metadata = fixture.Result.Metadata with { ValidatorVersion = RecoveryValidator.Version } } };
         var lease = await store.BeginAsync(); var bytes = "%PDF-synthetic-adoption"u8.ToArray(); var source = Source("recovery-adopt", bytes) with { Kind = MaterialKind.Exam };
         var doc = fixture.Document with { PdfHash = source.Digest }; var result = fixture.Result with { PdfHash = source.Digest };
         var audit = new RecoveryAudit(doc, result, new(source.Digest, RecoveryValidator.Fingerprint(result), RecoveryValidator.Fingerprint(doc), result.Metadata, _clock.Now));

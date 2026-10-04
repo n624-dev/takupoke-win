@@ -367,6 +367,12 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             await _school.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token), await _school.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, token),
             await _school.ReadAsync<RecoveryJob>(lease, "recovery." + kind, token), await _school.ReadAsync<RecoveryPreview>(lease, "recovery.preview." + kind, token));
         foreach (var kind in snapshots.Keys.ToArray())
+            if (snapshots[kind].Analysis is { Recovery: not null } analysis &&
+                !await Task.Run(() => RecoveryAnalysisConverter.MayDisplay(analysis, token), token))
+                snapshots[kind] = snapshots[kind] with { Analysis = null, ParseAttempt = new MaterialAttempt(analysis.ParsedAt,
+                    "以前の復旧結果の確認内容を検証できません。資料を再解析してください。", false, analysis.SourceDigest,
+                    analysis.SchoolYear, ParserVersion: analysis.ParserVersion) };
+        foreach (var kind in snapshots.Keys.ToArray())
             if (snapshots[kind].RecoveryPreview is { } preview)
             {
                 var display = await Task.Run(() => RecoveryPreviewDisplay.Create(preview, token), token);

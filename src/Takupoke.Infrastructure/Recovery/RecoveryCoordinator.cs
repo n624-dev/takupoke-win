@@ -32,9 +32,12 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
             if (attempt?.SourceDigest != source.Digest || attempt.Failure is null || !RecoveryPolicy.Eligible(kind, attempt.Failure))
                 return new(RecoveryJobState.Failed, null, "原本の破損・保護・入力上限など、この失敗は端末内復旧の対象外です。前回の正常結果を保持しています。");
             var cached = await store.ReadAsync<RecoveryAudit>(lease, "recovery.accepted." + kind + "." + source.Digest, token);
-            if (cached is not null && RecoveryPolicy.MatchesPeriod(cached.Document, lease.Period) && await Task.Run(() => RecoveryValidator.CanReuse(cached.Acceptance, cached.Document, cached.Result, token), token).ConfigureAwait(false))
+            RecoveryAudit? reusable = null;
+            if (cached is not null && RecoveryPolicy.MatchesPeriod(cached.Document, lease.Period))
+                reusable = await Task.Run(() => RecoveryAuditCertification.Reusable(cached, token), token).ConfigureAwait(false);
+            if (reusable is not null)
             {
-                await store.SaveRecoveryAsync(lease, source, cached, _clock.GetUtcNow(), token, reuseAccepted: true);
+                await store.SaveRecoveryAsync(lease, source, reusable, _clock.GetUtcNow(), token, reuseAccepted: true);
                 return new(RecoveryJobState.Adopted, null, "以前に確認した同じPDFの復旧結果を使用しました。", true);
             }
             var pendingJob = await store.ReadAsync<RecoveryJob>(lease, "recovery." + kind, token);

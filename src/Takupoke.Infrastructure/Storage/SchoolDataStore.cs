@@ -298,7 +298,7 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
         if (!RecoveryPolicy.MatchesPeriod(audit.Document, lease.Period))
             throw new InvalidDataException("PDFの年度・学期が現在の保存期間と一致しません。");
         if (audit.Document.PdfHash != source.Digest || RecoveryPolicy.Kind(source.Kind) != audit.Document.Kind ||
-            !await Task.Run(() => RecoveryValidator.CanReuse(audit.Acceptance, audit.Document, audit.Result, token), token).ConfigureAwait(false))
+            !await Task.Run(() => Takupoke.Infrastructure.Recovery.RecoveryAuditCertification.IsCurrent(audit, token), token).ConfigureAwait(false))
             throw new InvalidDataException("復旧結果と確認内容の対応を確認できません。");
         var analysis = await Task.Run(() => Takupoke.Infrastructure.Recovery.RecoveryAnalysisConverter.Convert(source, audit.Document, audit.Result, adoptedAt, token), token).ConfigureAwait(false);
         using var transaction = connection.BeginTransaction();
@@ -323,7 +323,13 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
         if (reuseAccepted)
         {
             var savedAudit = await Current<RecoveryAudit>("recovery.accepted." + source.Kind + "." + source.Digest);
-            if (savedAudit is null || RecoveryValidator.Fingerprint(savedAudit) != RecoveryValidator.Fingerprint(audit)) throw new InvalidDataException("以前の確認内容と一致しません。");
+            if (savedAudit is null) throw new InvalidDataException("以前の確認内容と一致しません。");
+            if (RecoveryValidator.Fingerprint(savedAudit) != RecoveryValidator.Fingerprint(audit))
+            {
+                var recertified = Takupoke.Infrastructure.Recovery.RecoveryAuditCertification.TryRecertify(savedAudit, token);
+                if (recertified is null || RecoveryValidator.Fingerprint(recertified) != RecoveryValidator.Fingerprint(audit))
+                    throw new InvalidDataException("以前の確認内容と一致しません。");
+            }
         }
         else
         {

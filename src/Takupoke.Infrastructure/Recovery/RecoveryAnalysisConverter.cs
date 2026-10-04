@@ -7,6 +7,28 @@ namespace Takupoke.Infrastructure.Recovery;
 
 public static class RecoveryAnalysisConverter
 {
+    /// <summary>Protects display of persisted recovery projections without changing stored bytes or consent.</summary>
+    public static bool MayDisplay(MaterialAnalysis analysis, CancellationToken token = default)
+    {
+        token.ThrowIfCancellationRequested();
+        if (analysis.Recovery is null) return true; // Strict results retain their existing last-good behavior.
+        try
+        {
+            var audit = RecoveryAuditCertification.Reusable(analysis.Recovery, token);
+            if (audit is null || analysis.SourceDigest != audit.Document.PdfHash) return false;
+            // Conversion consumes only this proven audit. The synthetic descriptor
+            // supplies persisted identity fields; no path or source is opened.
+            var source = new SourceRecord(analysis.OriginalId, analysis.Kind, "", "", analysis.SourceName,
+                analysis.SourceDigest, 0, analysis.ParsedAt, analysis.ParsedAt, null);
+            var expected = Convert(source, audit.Document, audit.Result, analysis.ParsedAt, token);
+            token.ThrowIfCancellationRequested();
+            return analysis.SchoolYear == expected.SchoolYear &&
+                RecoveryValidator.Fingerprint(new { analysis.Timetable, analysis.Changes, analysis.Special }) ==
+                RecoveryValidator.Fingerprint(new { expected.Timetable, expected.Changes, expected.Special });
+        }
+        catch (Exception error) when (error is InvalidDataException or NullReferenceException or ArgumentException or KeyNotFoundException or InvalidOperationException)
+        { return false; }
+    }
     public static MaterialAnalysis Convert(SourceRecord source, RecoveryDocument document, RecoveryResult result, DateTimeOffset at, CancellationToken token = default)
     {
         token.ThrowIfCancellationRequested();

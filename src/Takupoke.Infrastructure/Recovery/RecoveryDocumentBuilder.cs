@@ -269,6 +269,9 @@ public static class RecoveryDocumentBuilder
                         }
                         else if (!allowStructureProposal || inside.Length > 512) throw;
                     }
+                    // Outside the fallback catch: ambiguity must never become
+                    // a provider structure request or a guessed fixed binding.
+                    RejectInlineParallelAmbiguity(scopes, inside, work);
                 }
                 foreach (var a in inside) sources[a.Id] = sources[a.Id] with { CellId = id };
                 var blanks = scopes.Where(s => s.EmptyVerified).Select(s => s.Role.ToString().ToLowerInvariant()).ToArray();
@@ -311,6 +314,25 @@ public static class RecoveryDocumentBuilder
             }
         }
         return result;
+    }
+    private static void RejectInlineParallelAmbiguity(IReadOnlyList<RecoveryRoleScope> scopes, Atom[] body, Work work)
+    {
+        work.Step(scopes.Count);
+        foreach (var lesson in scopes.GroupBy(s => s.LessonIndex))
+        {
+            var counts = lesson.Select(scope =>
+            {
+                work.Step(body.Length);
+                var values = body.Where(a => scope.Box.Contains(a.Box)).ToArray();
+                work.Step(values.Sum(a => (long)a.Glyph.Text.Length) * 3L);
+                return string.Concat(values.Select(a => a.Glyph.Text)).Replace('･', '・').Split('・').Length;
+            }).ToArray();
+            // A single inline label for each role proves one lesson scope.
+            // Multiple paired values need independent lesson labels; do not
+            // collapse them to one compound lesson or guess missing values.
+            if (counts.Count(count => count > 1) >= 2)
+                throw new InvalidDataException("並記された各授業の独立した原文ラベルを確認できません。");
+        }
     }
     private static RecoveryDocument AddTimes(RecoveryDocument document, Label[] labels, Work work)
     {

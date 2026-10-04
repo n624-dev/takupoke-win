@@ -1,0 +1,342 @@
+using System.Security.Cryptography;
+using Takupoke.Core;
+using Takupoke.Core.Recovery;
+using Takupoke.Infrastructure.Materials;
+using Takupoke.Infrastructure.Parsing;
+using Takupoke.Infrastructure.Recovery;
+using Takupoke.Infrastructure.Storage;
+using Xunit;
+
+namespace Takupoke.Integration.Tests;
+
+public sealed class RecoveryInlineParallelCacheTests
+{
+    [Fact]
+    public async Task AlteredPreviousAcceptanceCannotPassCurrentReuseDisplayOrStoreDespiteValidCurrentHashes()
+    {
+        await using var context = await Context.CreateAsync();
+        var old = context.Audit(compound: false, version: 4);
+        var certified = Assert.IsType<RecoveryAudit>(RecoveryAuditCertification.TryRecertify(old));
+        var bad = certified with { PreviousAcceptance = certified.PreviousAcceptance! with { ScopeHash = new string('b', 64) } };
+        Assert.True(RecoveryValidator.CanReuse(bad.Acceptance, bad.Document, bad.Result));
+        Assert.Null(RecoveryAuditCertification.Reusable(bad));
+        var formal = RecoveryAnalysisConverter.Convert(context.Source, bad.Document, bad.Result, context.Clock.GetUtcNow()) with { Recovery = bad };
+        Assert.False(RecoveryAnalysisConverter.MayDisplay(formal));
+        await context.Store.WriteAsync(context.Lease, context.AcceptedKey, bad);
+        await Assert.ThrowsAsync<InvalidDataException>(() => context.Store.SaveRecoveryAsync(context.Lease, context.Source,
+            bad, context.Clock.GetUtcNow(), reuseAccepted: true));
+
+        var prepared = await context.Coordinator.PrepareAsync(MaterialKind.Timetable, 2026);
+        Assert.False(prepared.ReusedAcceptance); Assert.Equal(RecoveryJobState.AwaitingConfirmation, prepared.State);
+        Assert.Equal(1, context.BuildCalls); await context.AssertPriorFormalPreservedAsync();
+    }
+
+    [Theory]
+    [InlineData(4)]
+    [InlineData(5)]
+    public async Task CachedInlineCompoundAuditIsNotReusedAndReachesTheActualBuilder(int version)
+    {
+        await using var context = await Context.CreateAsync();
+        var bad = context.Audit(compound: true, version);
+        AssertInlineCompoundInvalid(bad);
+        await context.Store.WriteAsync(context.Lease, context.AcceptedKey, bad);
+
+        var prepared = await context.Coordinator.PrepareAsync(MaterialKind.Timetable, 2026);
+
+        Assert.Equal(RecoveryJobState.AwaitingConfirmation, prepared.State);
+        Assert.False(prepared.ReusedAcceptance);
+        Assert.Equal(1, context.BuildCalls);
+        Assert.Equal(1, context.ProviderFactoryCalls); // The factory returns no providers/models.
+        Assert.Equal(5, prepared.Preview!.Result.Metadata.ValidatorVersion);
+        Assert.Equal("架空科目A", Assert.Single(prepared.Preview.Result.Cells.SelectMany(c => c.Lessons)).Subject.Value);
+        await context.AssertPriorFormalPreservedAsync();
+        Assert.Equal(RecoveryValidator.Fingerprint(bad), RecoveryValidator.Fingerprint((await context.Store.ReadAsync<RecoveryAudit>(context.Lease, context.AcceptedKey))!));
+    }
+
+    [Theory]
+    [InlineData(4)]
+    [InlineData(5)]
+    public async Task OldPersistedInlineCompoundPreviewCannotBeAdoptedEvenWithCurrentVersion(int version)
+    {
+        await using var context = await Context.CreateAsync();
+        var bad = context.Audit(compound: true, version);
+        AssertInlineCompoundInvalid(bad);
+        var preview = new RecoveryPreview(context.Source.Id, context.Lease, bad.Document, bad.Result, context.Clock.GetUtcNow());
+        // WriteAsync reproduces a preview already persisted by the old app;
+        // SaveRecoveryProgress would correctly reject it in the current app.
+        await context.Store.WriteAsync(context.Lease, "recovery.preview.Timetable", preview);
+        await context.Store.WriteAsync(context.Lease, "recovery.Timetable", new RecoveryJob(context.Source.Digest,
+            bad.Document.Kind, RecoveryJobState.AwaitingConfirmation, context.Clock.GetUtcNow(), RecoveryValidator.Fingerprint(bad.Result)));
+
+        var error = await Assert.ThrowsAsync<InvalidDataException>(() => context.Coordinator.AdoptAsync(MaterialKind.Timetable, preview));
+
+        Assert.Contains("復旧結果と確認内容", error.Message); // SaveRecovery's current validation gate, not an unrelated job/lease mismatch.
+        Assert.Equal(0, context.BuildCalls);
+        Assert.Equal(0, context.ProviderFactoryCalls);
+        await context.AssertPriorFormalPreservedAsync();
+        Assert.NotNull(await context.Store.ReadAsync<RecoveryPreview>(context.Lease, "recovery.preview.Timetable"));
+        Assert.Null(await context.Store.ReadAsync<RecoveryAudit>(context.Lease, context.AcceptedKey));
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task PreviouslyAcceptedGoodAuditIsRecertifiedAndAutomaticallyReusedWithoutAnotherConfirmation(bool structureMetadata)
+    {
+        await using var context = await Context.CreateAsync();
+        var old = context.Audit(compound: false, version: 4);
+        if (structureMetadata)
+        {
+            var originalDocument = old.Document with { StructureMetadata = old.Result.Metadata };
+            old = old with { Document = originalDocument, Acceptance = old.Acceptance with { ScopeHash = RecoveryValidator.Fingerprint(originalDocument) } };
+        }
+        await context.Store.WriteAsync(context.Lease, context.AcceptedKey, old);
+
+        var prepared = await context.Coordinator.PrepareAsync(MaterialKind.Timetable, 2026);
+
+        Assert.Equal(RecoveryJobState.Adopted, prepared.State);
+        Assert.True(prepared.ReusedAcceptance);
+        Assert.Null(prepared.Preview);
+        Assert.Equal(0, context.BuildCalls);
+        Assert.Equal(0, context.ProviderFactoryCalls);
+        Assert.Null(await context.Store.ReadAsync<RecoveryPreview>(context.Lease, "recovery.preview.Timetable"));
+        Assert.Null(await context.Store.ReadAsync<RecoveryJob>(context.Lease, "recovery.Timetable"));
+        var current = Assert.IsType<RecoveryAudit>(await context.Store.ReadAsync<RecoveryAudit>(context.Lease, context.AcceptedKey));
+        Assert.Equal(5, current.Result.Metadata.ValidatorVersion);
+        Assert.True(RecoveryValidator.CanReuse(current.Acceptance, current.Document, current.Result));
+        Assert.Equal(old.Acceptance.AcceptedAt, current.Acceptance.AcceptedAt);
+        Assert.Equal(old.Acceptance, current.PreviousAcceptance);
+        Assert.Equal(old.Result.Metadata with { ValidatorVersion = 5 }, current.Result.Metadata);
+        Assert.Equal(old.Document.StructureMetadata is null ? null : old.Document.StructureMetadata with { ValidatorVersion = 5 }, current.Document.StructureMetadata);
+        Assert.Equal(RecoveryValidator.Fingerprint(old.Document with { StructureMetadata = null }), RecoveryValidator.Fingerprint(current.Document with { StructureMetadata = null }));
+        Assert.Equal(RecoveryValidator.Fingerprint(old.Result.Cells), RecoveryValidator.Fingerprint(current.Result.Cells));
+        var formal = Assert.IsType<MaterialAnalysis>(await context.Store.ReadAsync<MaterialAnalysis>(context.Lease, "analysis.Timetable"));
+        Assert.Equal(25, formal.ParserVersion);
+        Assert.Equal("架空科目A", Assert.Single(formal.Timetable!.Lessons).Names.Subject);
+        Assert.NotNull(formal.Recovery);
+        Assert.Equal(current.Acceptance, formal.Recovery!.Acceptance);
+        var reusedAgain = await context.Coordinator.PrepareAsync(MaterialKind.Timetable, 2026);
+        Assert.Equal(RecoveryJobState.Adopted, reusedAgain.State); Assert.True(reusedAgain.ReusedAcceptance); Assert.Null(reusedAgain.Preview);
+        Assert.Equal(0, context.BuildCalls); Assert.Equal(0, context.ProviderFactoryCalls);
+        Assert.Equal(RecoveryValidator.Fingerprint(current), RecoveryValidator.Fingerprint((await context.Store.ReadAsync<RecoveryAudit>(context.Lease, context.AcceptedKey))!));
+    }
+
+    [Fact]
+    public async Task HistoricallyImpossibleDistinctVersion4MetadataCannotInventPriorConfirmation()
+    {
+        await using var context = await Context.CreateAsync();
+        var old = context.Audit(compound: false, version: 4);
+        var document = old.Document with { StructureMetadata = old.Result.Metadata with {
+            Provider = "fictional-structure-provider", ModelId = "fictional-structure-model",
+            ModelVersion = "2", RuntimeVersion = "fictional-structure-runtime", PromptVersion = "3"
+        } };
+        old = old with { Document = document, Acceptance = old.Acceptance with { ScopeHash = RecoveryValidator.Fingerprint(document) } };
+        Assert.Null(RecoveryAuditCertification.TryRecertify(old));
+        await context.Store.WriteAsync(context.Lease, context.AcceptedKey, old);
+
+        var prepared = await context.Coordinator.PrepareAsync(MaterialKind.Timetable, 2026);
+
+        Assert.False(prepared.ReusedAcceptance);
+        Assert.Equal(RecoveryJobState.AwaitingConfirmation, prepared.State);
+        Assert.Equal(1, context.BuildCalls);
+        Assert.Equal(1, context.ProviderFactoryCalls);
+        await context.AssertPriorFormalPreservedAsync();
+    }
+
+    [Fact]
+    public async Task ValidUpgradeCannotReuseAnAcceptanceChangedBeforeTheStorageTransaction()
+    {
+        await using var context = await Context.CreateAsync();
+        var old = context.Audit(compound: false, version: 4);
+        await context.Store.WriteAsync(context.Lease, context.AcceptedKey, old);
+        var candidate = Assert.IsType<RecoveryAudit>(RecoveryAuditCertification.TryRecertify(old));
+        Assert.True(RecoveryValidator.CanReuse(candidate.Acceptance, candidate.Document, candidate.Result));
+        // Deterministic handoff: certification already finished, then another
+        // writer changes consent before SaveRecovery rereads under its transaction.
+        var replaced = old with { Acceptance = old.Acceptance with { AcceptedAt = old.Acceptance.AcceptedAt.AddMinutes(1) } };
+        await context.Store.WriteAsync(context.Lease, context.AcceptedKey, replaced);
+
+        var error = await Assert.ThrowsAsync<InvalidDataException>(() => context.Store.SaveRecoveryAsync(context.Lease,
+            context.Source, candidate, context.Clock.GetUtcNow(), reuseAccepted: true));
+
+        Assert.Contains("以前の確認内容と一致", error.Message);
+        await context.AssertPriorFormalPreservedAsync();
+        Assert.Equal(RecoveryValidator.Fingerprint(replaced), RecoveryValidator.Fingerprint((await context.Store.ReadAsync<RecoveryAudit>(context.Lease, context.AcceptedKey))!));
+    }
+
+    [Theory]
+    [InlineData("pdf")]
+    [InlineData("result")]
+    [InlineData("scope")]
+    [InlineData("metadata")]
+    [InlineData("document")]
+    [InlineData("output")]
+    public async Task TamperedOldAcceptanceCannotBeRecertifiedOrBypassRebuilding(string field)
+    {
+        await using var context = await Context.CreateAsync();
+        var old = context.Audit(compound: false, version: 4);
+        var broken = field switch {
+            "document" => old with { Document = old.Document with { Sources = old.Document.Sources.Select(s => s with { Text = s.Text.Replace("架空科目A", "架空改変科目") }).ToArray() } },
+            "output" => old with { Result = old.Result with { Cells = old.Result.Cells.Select(cell => cell with { Lessons = cell.Lessons.Select(lesson => lesson with { Subject = lesson.Subject with { Value = "架空改変科目" } }).ToArray() }).ToArray() } },
+            _ => old with { Acceptance = field switch {
+            "pdf" => old.Acceptance with { PdfHash = new string('b', 64) },
+            "result" => old.Acceptance with { ResultHash = new string('b', 64) },
+            "scope" => old.Acceptance with { ScopeHash = new string('b', 64) },
+            _ => old.Acceptance with { Metadata = old.Acceptance.Metadata with { ModelId = "fictional-tampered-metadata" } }
+            } }
+        };
+        await context.Store.WriteAsync(context.Lease, context.AcceptedKey, broken);
+
+        var prepared = await context.Coordinator.PrepareAsync(MaterialKind.Timetable, 2026);
+
+        Assert.False(prepared.ReusedAcceptance);
+        Assert.Equal(RecoveryJobState.AwaitingConfirmation, prepared.State);
+        Assert.Equal(1, context.BuildCalls);
+        Assert.Equal(1, context.ProviderFactoryCalls);
+        await context.AssertPriorFormalPreservedAsync();
+    }
+
+    [Fact]
+    public async Task CurrentValidChangedContentCannotMasqueradeAsTheExactStoredAcceptanceUpgrade()
+    {
+        await using var context = await Context.CreateAsync();
+        var old = context.Audit(compound: false, version: 4);
+        await context.Store.WriteAsync(context.Lease, context.AcceptedKey, old);
+        var document = old.Document with { Sources = old.Document.Sources.Select(s => s with { Text = s.Text.Replace("架空科目A", "架空科目X") }).ToArray() };
+        var result = old.Result with { Metadata = old.Result.Metadata with { ValidatorVersion = 5 },
+            Cells = old.Result.Cells.Select(cell => cell with { Lessons = cell.Lessons.Select(lesson => lesson with {
+                Subject = lesson.Subject with { Value = lesson.Subject.Value.Replace("架空科目A", "架空科目X") }
+            }).ToArray() }).ToArray() };
+        var candidate = new RecoveryAudit(document, result, new(context.Source.Digest, RecoveryValidator.Fingerprint(result),
+            RecoveryValidator.Fingerprint(document), result.Metadata, old.Acceptance.AcceptedAt));
+        Assert.True(RecoveryValidator.CanReuse(candidate.Acceptance, candidate.Document, candidate.Result));
+        // A standalone valid current audit still cannot replace stored consent
+        // through reuseAccepted. Broken ancestry is tested separately above.
+        Assert.True(RecoveryAuditCertification.IsCurrent(candidate));
+
+        var error = await Assert.ThrowsAsync<InvalidDataException>(() => context.Store.SaveRecoveryAsync(context.Lease,
+            context.Source, candidate, context.Clock.GetUtcNow(), reuseAccepted: true));
+
+        Assert.Contains("以前の確認内容と一致", error.Message);
+        await context.AssertPriorFormalPreservedAsync();
+        Assert.Equal(RecoveryValidator.Fingerprint(old), RecoveryValidator.Fingerprint((await context.Store.ReadAsync<RecoveryAudit>(context.Lease, context.AcceptedKey))!));
+    }
+
+    [Fact]
+    public async Task SameHashVersion24SuccessCannotSkipAnActualVersion25RefreshParse()
+    {
+        await using var context = await Context.CreateAsync(seedFailure: false);
+        var before = Assert.IsType<MaterialAnalysis>(await context.Store.ReadAsync<MaterialAnalysis>(context.Lease, "analysis.Timetable"));
+        Assert.Equal(24, before.ParserVersion);
+        Assert.Equal(context.Source.Digest, before.SourceDigest);
+        Assert.Null((await context.Store.ReadAsync<MaterialAttempt>(context.Lease, "attempt.Timetable"))!.Failure);
+
+        var refreshed = await context.Materials.RefreshAsync(MaterialKind.Timetable, 2026);
+
+        Assert.False(refreshed.Changed);
+        // The actual generated minimal PDF is readable but not a timetable.
+        // A stale early return would say Parsed=true and leave the old attempt.
+        Assert.False(refreshed.Parsed);
+        var attempt = Assert.IsType<MaterialAttempt>(await context.Store.ReadAsync<MaterialAttempt>(context.Lease, "attempt.Timetable"));
+        Assert.Equal(25, attempt.ParserVersion);
+        Assert.Equal(context.Source.Digest, attempt.SourceDigest);
+        Assert.NotNull(attempt.Failure);
+        Assert.True(attempt.RecoveryPending);
+        await context.AssertPriorFormalPreservedAsync();
+        Assert.Equal(context.Bytes, await context.Store.ReadOriginalAsync(context.Lease, context.Source.Id));
+    }
+
+    private static void AssertInlineCompoundInvalid(RecoveryAudit audit)
+    {
+        var validation = RecoveryValidator.Validate(audit.Document, audit.Result);
+        Assert.False(validation.CanAdopt);
+        Assert.Contains("inlineParallelEvidence", validation.Errors);
+        Assert.All(validation.Errors, error => Assert.Contains(error, new[] { "versions", "inlineParallelEvidence" }));
+    }
+
+    private sealed class Context : IAsyncDisposable
+    {
+        private readonly string _root = Path.Combine(Path.GetTempPath(), "takupoke-inline-cache-" + Guid.NewGuid().ToString("N"));
+        private readonly Protector _protector = new();
+        public Clock Clock { get; } = new();
+        public SchoolDataStore Store { get; private set; } = null!;
+        public SchoolLease Lease { get; private set; }
+        public SourceRecord Source { get; private set; } = null!;
+        public byte[] Bytes { get; } = PdfParsingTests.SyntheticPdf();
+        public MaterialCoordinator Materials { get; private set; } = null!;
+        public RecoveryCoordinator Coordinator { get; private set; } = null!;
+        public int BuildCalls, ProviderFactoryCalls;
+        public string AcceptedKey => "recovery.accepted.Timetable." + Source.Digest;
+        private RecoveryDocument _good = null!;
+        private MaterialAnalysis _prior = null!;
+
+        public static async Task<Context> CreateAsync(bool seedFailure = true)
+        {
+            var context = new Context();
+            try { await context.InitializeAsync(seedFailure); return context; }
+            catch { await context.DisposeAsync(); throw; }
+        }
+        private async Task InitializeAsync(bool seedFailure)
+        {
+            Directory.CreateDirectory(_root);
+            var path = Path.Combine(_root, "fictional.pdf"); await File.WriteAllBytesAsync(path, Bytes);
+            Store = new(Path.Combine(_root, "data"), _protector, Clock); Lease = await Store.BeginAsync();
+            var now = Clock.GetUtcNow();
+            Source = new("fictional-original", MaterialKind.Timetable, path, "fictional-file-identity", "fictional.pdf", NotificationDiff.Digest(Bytes), Bytes.Length, now, now, null);
+            await Store.SaveOriginalAsync(Lease, Source, Bytes);
+            _prior = new(Source.Id, Source.Kind, 24, Source.Digest, Source.OriginalName, now.AddDays(-3), 2026,
+                Timetable: new(2026, "前期", [new("3_CN", 1, 1, new("架空前回の正常科目"), "架空前回の原文", 1)]));
+            await Store.SaveAnalysisAsync(Lease, _prior);
+            Materials = new(Store, new(new FakeIdentity()), Clock);
+            if (seedFailure)
+            {
+                var strict = await Materials.RefreshAsync(MaterialKind.Timetable, 2026);
+                Assert.False(strict.Parsed);
+                Assert.True((await Store.ReadAsync<MaterialAttempt>(Lease, "attempt.Timetable"))!.RecoveryPending);
+            }
+            var page = RecoveryPipelineTests.Layout(MaterialKind.Timetable);
+            _good = RecoveryDocumentBuilder.Build(Source.Digest, Source.Kind, [page], (_, box) => !page.Glyphs.Any(g => box.Contains(new(g.X, g.Y, g.Width, g.Height))));
+            Coordinator = new(Store, Materials, (actual, kind, hash, _, _) => {
+                BuildCalls++; Assert.Equal(Bytes, actual); Assert.Equal(Source.Digest, hash);
+                // Coordinator lifecycle/cache safety, not PDF extraction quality:
+                // use its documented build seam with the real Builder on synthetic geometry.
+                return Task.FromResult(RecoveryDocumentBuilder.Build(hash, kind, [page], (_, box) => !page.Glyphs.Any(g => box.Contains(new(g.X, g.Y, g.Width, g.Height)))));
+            }, _ => { ProviderFactoryCalls++; return Task.FromResult<IReadOnlyList<ILocalRecoveryProvider>>([]); }, Clock);
+        }
+        public RecoveryAudit Audit(bool compound, int version)
+        {
+            string Body(string value) => compound ? value.Replace("架空科目A", "架空科目A・架空科目B").Replace("架空教室C", "架空教室C・架空教室D") : value;
+            var document = _good with { Sources = _good.Sources.Select(s => s with { Text = Body(s.Text) }).ToArray() };
+            var metadata = new RecoveryMetadata("rule", "rules", "3", "3", "4", RecoveryValidator.SchemaVersion, version, "test");
+            var cells = _good.Cells.Select(cell => cell.ConfirmedEmpty ? new RecoveredCell(cell.Id, RecoveryValueState.Empty, []) : RecoveryRules.Recover(_good, cell)!).Select(cell => cell with {
+                Lessons = cell.Lessons.Select(lesson => lesson with {
+                    Subject = lesson.Subject with { Value = Body(lesson.Subject.Value) },
+                    Room = lesson.Room with { Value = Body(lesson.Room.Value) }
+                }).ToArray()
+            }).ToArray();
+            var result = new RecoveryResult(Source.Digest, document.Kind, document.SchoolYear, document.Term, cells, metadata);
+            return new(document, result, new(Source.Digest, RecoveryValidator.Fingerprint(result), RecoveryValidator.Fingerprint(document), metadata, Clock.GetUtcNow().AddDays(-2)));
+        }
+        public async Task AssertPriorFormalPreservedAsync()
+        {
+            var formal = Assert.IsType<MaterialAnalysis>(await Store.ReadAsync<MaterialAnalysis>(Lease, "analysis.Timetable"));
+            Assert.Equal(_prior.ParsedAt, formal.ParsedAt); Assert.Equal(_prior.ParserVersion, formal.ParserVersion);
+            Assert.Equal("架空前回の正常科目", Assert.Single(formal.Timetable!.Lessons).Names.Subject); Assert.Null(formal.Recovery);
+        }
+        public async ValueTask DisposeAsync()
+        {
+            if (Store is not null) await Store.DisposeAsync();
+            _protector.Dispose();
+            if (Directory.Exists(_root)) Directory.Delete(_root, true);
+        }
+    }
+    private sealed class Clock : TimeProvider { public override DateTimeOffset GetUtcNow() => new(2026, 4, 16, 12, 0, 0, TimeSpan.Zero); }
+    private sealed class FakeIdentity : IFileIdentityProvider { public string Identity(FileStream stream) => "fictional-file-identity"; }
+    private sealed class Protector : IKeyProtector, IDisposable
+    {
+        private readonly EnvelopeCipher _cipher = new(RandomNumberGenerator.GetBytes(32));
+        public byte[] Protect(byte[] key) => _cipher.Encrypt(key, "fictional-key");
+        public byte[] Unprotect(byte[] bytes) => _cipher.Decrypt(bytes, "fictional-key");
+        public void Dispose() => _cipher.Dispose();
+    }
+}
