@@ -23,26 +23,22 @@ public sealed class MaterialCoordinator(SchoolDataStore store, FileSourceReader 
             var lease = await store.BeginAsync(token);
             var source = await store.ReadAsync<SourceRecord>(lease, "selection." + kind, token);
             if (!selecting && source is null) return new(kind, false, false);
-            if (reparsing)
-            {
-                var bytes = await store.ReadOriginalAsync(lease, source!.Id, token);
-                try { return await ParseAsync(lease, source, bytes, year, false, token); }
-                finally { CryptographicOperations.ZeroMemory(bytes); }
-            }
             try
             {
-                using var content = await reader.ReadAsync(selectedPath ?? source!.Path, kind, selecting ? null : source!.FileIdentity, token);
+                // Selection follows this path's latest version, including atomic replacements
+                // by sync providers. The reader still rejects changes during this read.
+                using var content = await reader.ReadAsync(selectedPath ?? source!.Path, kind, null, token);
                 var digest = NotificationDiff.Digest(content.Bytes); var now = _clock.GetUtcNow();
                 if (!selecting && digest == source!.Digest)
                 {
-                    source = source with { LastCheckedAt = now, SourceModifiedAt = content.ModifiedAt };
+                    source = source with { FileIdentity = content.Identity, LastCheckedAt = now, SourceModifiedAt = content.ModifiedAt };
                     await store.WriteAsync(lease, "selection." + kind, source, token);
                     await store.WriteAsync(lease, "acquisition." + kind, new MaterialAttempt(now, null, false, digest), token);
                     var analysis = await store.ReadAsync<MaterialAnalysis>(lease, "analysis." + kind, token);
                     var attempt = await store.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token);
                     var version = ParserVersion(kind);
-                    if (analysis?.SourceDigest == digest && analysis.ParserVersion == version && (kind != MaterialKind.Changes || analysis.SchoolYear == year)) return new(kind, false, true);
-                    if (attempt?.SourceDigest == digest && attempt.Failure is not null && attempt.ParserVersion == version && (kind != MaterialKind.Changes || attempt.SchoolYear == year)) return new(kind, false, false, attempt.Failure);
+                    if (!reparsing && analysis?.SourceDigest == digest && analysis.ParserVersion == version && (kind != MaterialKind.Changes || analysis.SchoolYear == year)) return new(kind, false, true);
+                    if (!reparsing && attempt?.SourceDigest == digest && attempt.Failure is not null && attempt.ParserVersion == version && (kind != MaterialKind.Changes || attempt.SchoolYear == year)) return new(kind, false, false, attempt.Failure);
                     return await ParseAsync(lease, source, content.Bytes, year, false, token);
                 }
                 var next = new SourceRecord(Guid.NewGuid().ToString("N"), kind, Path.GetFullPath(selectedPath ?? source!.Path), content.Identity,

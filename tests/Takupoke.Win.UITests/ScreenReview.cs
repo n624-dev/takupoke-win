@@ -97,6 +97,22 @@ internal static partial class Program
                 Invoke(WaitElement("settings-materials")); Capture(theme + "-" + percent + "-materials");
                 var window = _window!.Current.BoundingRectangle;
                 Require(SetWindowPos(_process!.MainWindowHandle, 0, (int)window.Left, (int)window.Top, 680, 680, 0x0044), "Resize the enlarged review window");
+                Navigate("settings"); Invoke(WaitElement("settings-materials")); Invoke(WaitElement("material-details-Timetable"));
+                var reparse = WaitElement("reparse-Timetable");
+                Require(reparse.Current.Name == "最新を取得して再解析", "Latest reparse remains discoverable at enlarged text sizes");
+                var bounds = _window!.Current.BoundingRectangle;
+                var scrolling = (ScrollPattern)WaitElement("page-scroller").GetCurrentPattern(ScrollPattern.Pattern);
+                for (var step = 0; step <= 10; step++)
+                {
+                    scrolling.SetScrollPercent(ScrollPattern.NoScroll, step * 10);
+                    System.Threading.Thread.Sleep(75);
+                    var visible = WaitElement("reparse-Timetable").Current.BoundingRectangle;
+                    if (visible.Width > 0 && visible.Top >= bounds.Top + 48 && visible.Bottom <= bounds.Bottom) break;
+                }
+                var button = WaitElement("reparse-Timetable").Current.BoundingRectangle;
+                Require(button.Width > 0 && button.Left >= bounds.Left && button.Right <= bounds.Right && button.Top >= bounds.Top + 48 && button.Bottom <= bounds.Bottom,
+                    "Latest reparse control stays within the 680px enlarged-text window");
+                Capture(theme + "-" + percent + "-material-details-narrow");
                 Navigate("settings"); Capture(theme + "-" + percent + "-settings-narrow");
                 Navigate("timetable"); Capture(theme + "-" + percent + "-timetable-narrow");
                 OpenRecoveryUiPreview(); Capture(theme + "-" + percent + "-recovery-narrow");

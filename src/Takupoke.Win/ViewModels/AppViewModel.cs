@@ -242,7 +242,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     {
         ResumeFileMonitoring();
         var result = await _materials.ReparseAsync(kind, ParserYear, token); await ReloadAsync(token);
-        Status = result.Error ?? "保存した資料を再解析しました。";
+        Status = result.Error ?? "最新の原本を取得して再解析しました。";
     });
     public Task PrepareRecoveryAsync(MaterialKind kind) => RunAsync(async token =>
     {
@@ -269,6 +269,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     {
         if (Locked) throw new OperationCanceledException();
         var lease = await _school.BeginAsync(_session.Token); if (lease != preview.Lease) throw new OperationCanceledException();
+        var acquisition = await _school.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, _session.Token);
+        if (acquisition?.Failure is not null) throw new InvalidDataException("最新の原本を取得できません。資料の詳細から再取得してください。");
         var source = await _school.ReadAsync<SourceRecord>(lease, "selection." + kind, _session.Token);
         if (source?.Id != preview.SourceId || source.Digest != preview.Document.PdfHash) throw new OperationCanceledException("確認中のPDFが更新されました。");
         var bytes = await _school.ReadOriginalAsync(lease, preview.SourceId, _session.Token);

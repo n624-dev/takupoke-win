@@ -137,7 +137,7 @@ public sealed class MaterialCoordinatorTests
         finally { Directory.Delete(root, true); }
     }
     [Fact]
-    public async Task ReplacedFileAtSamePathIsNotSilentlyAdopted()
+    public async Task ReplacedFileWithSameBytesUpdatesIdentityWithoutReacquiringOrReparsing()
     {
         var root = Path.Combine(Path.GetTempPath(), "takupoke-material-tests-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root); using var protector = new Protector();
@@ -149,9 +149,12 @@ public sealed class MaterialCoordinatorTests
             await coordinator.SelectAsync(MaterialKind.Changes, path, 2032);
             var lease = await store.BeginAsync(); var source = await store.ReadAsync<SourceRecord>(lease, "selection.Changes");
             identity.Value = "fake-replacement-identity";
-            Assert.False((await coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed);
-            Assert.Equal(source!.Id, (await store.ReadAsync<SourceRecord>(lease, "selection.Changes"))!.Id);
-            Assert.True((await coordinator.SelectAsync(MaterialKind.Changes, path, 2032)).Parsed);
+            var previous = await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes");
+            Assert.True((await coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed);
+            var current = (await store.ReadAsync<SourceRecord>(lease, "selection.Changes"))!;
+            Assert.Equal(source!.Id, current.Id); Assert.Equal(source.Digest, current.Digest);
+            Assert.Equal(identity.Value, current.FileIdentity);
+            Assert.Equal(previous!.ParsedAt, (await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes"))!.ParsedAt);
         }
         finally { Directory.Delete(root, true); }
     }

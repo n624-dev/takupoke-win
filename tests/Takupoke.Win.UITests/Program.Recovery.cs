@@ -75,6 +75,7 @@ internal static partial class Program
         var now = DateTimeOffset.UtcNow; var hash = NotificationDiff.Digest(bytes);
         var source = new SourceRecord(Guid.NewGuid().ToString("N"), MaterialKind.Timetable, path, content.Identity, "fictional-recovery.pdf", hash, bytes.Length, now, now, content.ModifiedAt);
         await store.SaveOriginalAsync(lease, source, bytes);
+        await store.WriteAsync(lease, "acquisition.Timetable", new MaterialAttempt(now, null, false, hash));
         await store.WriteAsync(lease, "attempt.Timetable", new MaterialAttempt(now, "P13", true, hash, lease.Period.SchoolYear, ParserVersion: PdfScheduleParser.TimetableVersion, RecoveryPending: true));
         var (doc, result) = RecoveryUiFixture(lease.Period, parallel); doc = doc with { PdfHash = hash }; result = result with { PdfHash = hash };
         var errors = RecoveryValidator.Validate(doc, result).Errors;
@@ -109,6 +110,7 @@ internal static partial class Program
         var now = DateTimeOffset.UtcNow; var hash = NotificationDiff.Digest(bytes);
         var source = new SourceRecord(Guid.NewGuid().ToString("N"), kind, path, content.Identity, "fictional-recovery-" + name + ".pdf", hash, bytes.Length, now, now, content.ModifiedAt);
         await store.SaveOriginalAsync(lease, source, bytes);
+        await store.WriteAsync(lease, "acquisition." + kind, new MaterialAttempt(now, null, false, hash));
         await store.WriteAsync(lease, "attempt." + kind, new MaterialAttempt(now, "P13", true, hash, lease.Period.SchoolYear, ParserVersion: PdfScheduleParser.SpecialVersion, RecoveryPending: true));
         var doc = fixture.Document with { PdfHash = hash }; var result = fixture.Result with { PdfHash = hash };
         var errors = RecoveryValidator.Validate(doc, result).Errors;
@@ -205,7 +207,42 @@ internal static partial class Program
         Require(Find("download-ocr-model") is not null, "The OCR download action is available independently of a pending recovery job.");
         CheckRecoverySpecialUi(executable, root, MaterialKind.Exam);
         CheckRecoverySpecialUi(executable, root, MaterialKind.ExamReturn);
+        CheckRecoveryLatestAcquisitionFailure(executable, root);
         CheckRecoveryParallelUi(executable, root);
         Console.WriteLine("Recovery UI: original, empty fields/cells, whole-document scope, cancellation by leaving, restart, explicit adoption and independent model management passed.");
+    }
+    private static void CheckRecoveryLatestAcquisitionFailure(string executable, string root)
+    {
+        Stop(); SeedRecoveryUiAsync(root).GetAwaiter().GetResult();
+        var before = DetailStoreAsync(root).GetAwaiter().GetResult();
+        File.Delete(before.Source.Path); Start(executable);
+        // Offline fixtures deliberately skip the production startup refresh.
+        // Exercise the real acquisition control before expecting its failure UI.
+        Navigate("settings"); Invoke("settings-materials"); Invoke("material-details-Timetable");
+        Wait(() => Find("reacquire-Timetable") is { Current.IsEnabled: true }, "Latest acquisition control is ready");
+        Invoke("reacquire-Timetable");
+        Wait(() => RecoveryUiAcquisitionFailedAsync(root).GetAwaiter().GetResult(), "The real acquisition reports the deleted original");
+        Wait(() => Find("reacquire-Timetable") is { Current.IsEnabled: true }, "The failed acquisition has finished reloading its snapshot");
+        Invoke("recovery-preview-Timetable");
+        Wait(() => RecoveryUiText("最新の原本を取得できないため採用できません。資料の詳細から再取得してください。前回の正常結果は保持しています。"),
+            "Latest acquisition failure explains why pending recovery cannot be adopted");
+        Require(Find("adopt-recovery-Timetable") is null && Find("recovery-original-Timetable") is null,
+            "An unavailable latest original hides both adoption and the pending original viewer");
+        Require(DetailStoreAsync(root).GetAwaiter().GetResult().Analysis.SourceDigest == before.Analysis.SourceDigest,
+            "Latest acquisition failure keeps the previous accepted formal result");
+        Capture("latest-original-unavailable-recovery");
+        Invoke("back-recovery"); File.WriteAllBytes(before.Source.Path, RecoveryUiPdf());
+        Invoke("reacquire-Timetable");
+        Wait(() => DetailStoreAsync(root).GetAwaiter().GetResult().Source.FileIdentity != before.Source.FileIdentity,
+            "Restoring the identical selected PDF reacquires its new native file identity");
+        Wait(() => Find("reacquire-Timetable") is { Current.IsEnabled: true }, "The restored acquisition has finished reloading its snapshot");
+        Invoke("recovery-preview-Timetable");
+        Wait(() => Find("adopt-recovery-Timetable") is not null && Find("recovery-original-Timetable") is not null,
+            "Successful identical-byte reacquisition restores confirmation for the same hash-bound preview");
+    }
+    private static async Task<bool> RecoveryUiAcquisitionFailedAsync(string root)
+    {
+        await using var store = new SchoolDataStore(root, new WindowsDpapiProtector()); var lease = await store.BeginAsync();
+        return (await store.ReadAsync<MaterialAttempt>(lease, "acquisition.Timetable"))?.Failure is not null;
     }
 }

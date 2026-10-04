@@ -387,7 +387,19 @@ internal static partial class Program
             WriteProbe(mode, "success");
             Wait(() => Find("update-account")?.Current.IsEnabled == true && !Visible("cancel-operation"), "Validated fake authentication completes downloads and releases the UI");
             Require(ReadProbe(privateRequests) == "3", "All three datasets require the verified token and download once.");
-            foreach (var kind in Enum.GetValues<DataSet>()) Require(Find("shared-status-" + kind)?.Current.Name == "取得済み", "Each independently saved dataset shows acquired status.");
+            Wait(() => SavedAuthenticationRevisionsAsync(root).GetAwaiter().GetResult(), "All three verified downloads commit the expected fictional revision");
+            try
+            {
+                // Operation controls can re-enable before the new UIA subtree is arranged.
+                foreach (var kind in Enum.GetValues<DataSet>())
+                    Wait(() => Find("shared-status-" + kind)?.Current.Name == "取得済み", "Each independently saved dataset shows acquired status: " + kind);
+            }
+            catch
+            {
+                Console.Error.WriteLine("Fictional acquisition status diagnostic: " + string.Join("; ", Enum.GetValues<DataSet>().Select(kind => kind + "=" + (Find("shared-status-" + kind)?.Current.Name ?? "<missing>"))));
+                Capture("fictional-acquisition-status-failure");
+                throw;
+            }
             Wait(() => !Visible("status-bar"), "success footer automatically hides");
             WriteProbe(Path.Combine(root, "offline-auth-revision.txt"), new string('C', 43));
             WriteProbe(mode, "hold"); File.Delete(state);
@@ -408,6 +420,14 @@ internal static partial class Program
             if (previous is not null) { using var command = Registry.CurrentUser.CreateSubKey(commandPath); command.SetValue("", previous); }
             else Registry.CurrentUser.DeleteSubKeyTree(@"Software\Classes\jp.n624.takupoke.win", false);
         }
+    }
+    private static async Task<bool> SavedAuthenticationRevisionsAsync(string root)
+    {
+        await using var store = new SchoolDataStore(root, new WindowsDpapiProtector()); var lease = await store.BeginAsync();
+        var expected = new string('B', 43);
+        return (await store.ReadAsync<SavedLinks>(lease, "api.links"))?.Revision == expected
+            && (await store.ReadAsync<SavedMapping>(lease, "api.mapping"))?.Revision == expected
+            && (await store.ReadAsync<SavedTimes>(lease, "api.times"))?.Revision == expected;
     }
     private static void SendCallback(string executable, string callback, bool shell)
     {
