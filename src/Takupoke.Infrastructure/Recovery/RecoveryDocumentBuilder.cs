@@ -306,6 +306,18 @@ public static class RecoveryDocumentBuilder
             if (!binding.CommonScope) dayEvidence[binding.Day] = dayEvidence.GetValueOrDefault(binding.Day, []).Concat(binding.DayHeaderIds).Distinct().ToArray();
             if (binding.SpanStart == binding.SpanEnd) { var key = binding.SpanStart.ToString(); periodEvidence[key] = periodEvidence.GetValueOrDefault(key, []).Concat(binding.PeriodHeaderIds).Distinct().ToArray(); }
         }
+        // Table headers and later clock-chart headers can interleave across pages.
+        // Preserve their original source-array order, rather than append order.
+        IReadOnlyList<string> OriginalOrder(IReadOnlyList<string> ids)
+        {
+            work.Step(ids.Count + document.Sources.Count);
+            var wanted = ids.ToHashSet(StringComparer.Ordinal);
+            var ordered = document.Sources.Where(s => wanted.Contains(s.Id)).Select(s => s.Id).ToArray();
+            if (ordered.Length != wanted.Count) throw new InvalidDataException("時刻見出しの原文IDを確認できません。");
+            return ordered;
+        }
+        dayEvidence = dayEvidence.ToDictionary(p => p.Key, p => OriginalOrder(p.Value));
+        periodEvidence = periodEvidence.ToDictionary(p => p.Key, p => OriginalOrder(p.Value));
         return document with { Times = times, SpanTimes = spans, TimeEvidence = bindings.Keys.SelectMany(k => evidence[k]).Distinct().ToArray(), ClockEvidence = evidence, ClockBindings = bindings, ClockReplicas = replicas,
             DayEvidence = dayEvidence, PeriodEvidence = periodEvidence, CommonClockEvidence = commonIds.Distinct().ToArray(), CommonClockRegions = commonRegions, NormalTimeNoteEvidence = normalIds };
     }
