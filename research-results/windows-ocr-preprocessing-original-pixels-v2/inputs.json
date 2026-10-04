@@ -1,0 +1,105 @@
+{
+  "scope": "Same lossless embedded original pixels; NOT Windows PDF-rendered pixels. Input metadata only, no gold text/roles/geometry/state. Formal oracle read only after OCR.",
+  "documents": [
+    {
+      "id": "independent-Timetable-literal-乙",
+      "pdfPath": "/workspace/recovery-research/windows-raster-independent-heldout-v3-20261004/independent-Timetable-literal-乙/fictional.pdf",
+      "pdfSha256": "233dec852ec7e43c93c70c42d8f88238a0c2e8aef146445c4b94d674bb6cc187",
+      "pdfBytes": 48187,
+      "pages": [
+        {
+          "page": 1,
+          "width": 1025,
+          "height": 206,
+          "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/pixels/independent-Timetable-literal-乙/page-1.bgra",
+          "bgraSha256": "61a64c898758f186500fd6772c584a3e6abfecb54b7a5d05e02c0df872c73f62",
+          "pngSha256": "a0db633e4ee653dd18ab0d99b00f69aa3aa7f8d009f86e2b03c3cffd23bba6a7"
+        },
+        {
+          "page": 2,
+          "width": 1025,
+          "height": 206,
+          "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/pixels/independent-Timetable-literal-乙/page-2.bgra",
+          "bgraSha256": "d3df4c666936a233d8234e54a7fd97ecd2a8704c6b023869f85e3a5c4184de37",
+          "pngSha256": "e4b7f6cfa73a27567893e6a555b720c954bee2f709b77bb60066938b67a793b8"
+        },
+        {
+          "page": 3,
+          "width": 1025,
+          "height": 206,
+          "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/pixels/independent-Timetable-literal-乙/page-3.bgra",
+          "bgraSha256": "1e8c0cd8d765e2fdb9393f17d78918af9f94c76fd558ba6d97a09165f1bab79d",
+          "pngSha256": "b9eff63c09a77fa9a054a478287fe1737b66710bfc39eda436109e519774100e"
+        },
+        {
+          "page": 4,
+          "width": 1025,
+          "height": 206,
+          "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/pixels/independent-Timetable-literal-乙/page-4.bgra",
+          "bgraSha256": "b641a03dd0f9094dec67895e2e80af5932d28c14138929af8e2ede3a46a4ef38",
+          "pngSha256": "32bfc1384924e8c63dd97f53529726daf64d8e6f5425c73a73cad578156cafa3"
+        },
+        {
+          "page": 5,
+          "width": 1025,
+          "height": 206,
+          "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/pixels/independent-Timetable-literal-乙/page-5.bgra",
+          "bgraSha256": "5c28abde5de89d0c880bf4fd9e22dfafe1282e7151fb1aa48b845e9c0a87095d",
+          "pngSha256": "4933332d579a7ddc1c3123fdd6c22206f851483193a891f19ead01a0cc19a4b4"
+        }
+      ],
+      "formalOraclePath": "/workspace/recovery-research/windows-raster-independent-heldout-v3-20261004/independent-Timetable-literal-乙/literal-analysis-oracle.json",
+      "formalOracleSha256": "0451ac80edac37e4e424d3d78b1d96ffe31cd06711024abe301c2ceff1e515c0"
+    },
+    {
+      "id": "independent-Timetable-verifiedblank-丙",
+      "pdfPath": "/workspace/recovery-research/windows-raster-independent-heldout-v3-20261004/independent-Timetable-verifiedblank-丙/fictional.pdf",
+      "pdfSha256": "2625bf49044d59088b53109fc15ba7813073fdedac71bde5eb82925c297050f8",
+      "pdfBytes": 48888,
+      "pages": [
+        {
+          "page": 1,
+          "width": 1025,
+          "height": 210,
+          "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/pixels/independent-Timetable-verifiedblank-丙/page-1.bgra",
+          "bgraSha256": "551a25a29703c815632adbc2cb6049794e58f5f291a04095ad12dcc4bc2c6f64",
+          "pngSha256": "5dc6c33f3600c7c2e8f8cffced619a96af292ece024f82357c77857936b6e3c7"
+        },
+        {
+          "page": 2,
+          "width": 1025,
+          "height": 210,
+          "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/pixels/independent-Timetable-verifiedblank-丙/page-2.bgra",
+          "bgraSha256": "a5aa69994b7a8480bc93434ab27edb23a7449506a1edc9868c0e69f4c1cc658f",
+          "pngSha256": "a337510f7052b27adce3f24d38fa17ae7dfbc7cad7295dbf0390753acdc2b1af"
+        },
+        {
+          "page": 3,
+          "width": 1025,
+          "height": 210,
+          "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/pixels/independent-Timetable-verifiedblank-丙/page-3.bgra",
+          "bgraSha256": "a5793b638e9f29472e9c95991e63d21ee266de8afff893b520c97b14e77b7f9f",
+          "pngSha256": "bfaed1fc9931f04b7e86946d482455fbfbe7b110ab66a756e68bd17cd6974185"
+        },
+        {
+          "page": 4,
+          "width": 1025,
+          "height": 210,
+          "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/pixels/independent-Timetable-verifiedblank-丙/page-4.bgra",
+          "bgraSha256": "9102af5df60ca834639ef2c2a25713d43b02a752c89896cc209e2abefe01f144",
+          "pngSha256": "255cc9bbfb95f17ab9f0bb453495804ccc525705540a6eb8635d06d6dff548ce"
+        },
+        {
+          "page": 5,
+          "width": 1025,
+          "height": 210,
+          "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/pixels/independent-Timetable-verifiedblank-丙/page-5.bgra",
+          "bgraSha256": "f81502f3a83c425cfc203978b2616f3e8730885490b4952c4701c6b9387926da",
+          "pngSha256": "41ebdb01f4f3dfeb0ab323150545871961cc0bca6d4a2e3aa91abacd78c6dbfd"
+        }
+      ],
+      "formalOraclePath": "/workspace/recovery-research/windows-raster-independent-heldout-v3-20261004/independent-Timetable-verifiedblank-丙/literal-analysis-oracle.json",
+      "formalOracleSha256": "8ff9ea8dc55fb6e010e18c6019f938c47840bf589fdd503d2db9d18072184f43"
+    }
+  ]
+}

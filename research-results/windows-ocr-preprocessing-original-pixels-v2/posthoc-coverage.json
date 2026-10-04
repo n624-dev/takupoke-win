@@ -1,0 +1,374 @@
+{
+  "scope": "No new native inference; original drawing geometry used posthoc only, never model input. Remaining failed CTC pages cannot be localized from API evidence.",
+  "pages": [
+    {
+      "id": "independent-Timetable-literal-乙",
+      "page": 1,
+      "count": 10,
+      "boundsInclusive": [
+        5,
+        12,
+        6,
+        25
+      ],
+      "originalPrintedSpans": [
+        {
+          "originalPrintedSpan": "2027年度 前期",
+          "bbox": [
+            5,
+            10,
+            121,
+            28
+          ],
+          "uncoveredPixels": 10
+        }
+      ],
+      "first32Pixels": [
+        [
+          6,
+          12,
+          [
+            254,
+            254,
+            254
+          ]
+        ],
+        [
+          5,
+          13,
+          [
+            245,
+            245,
+            245
+          ]
+        ],
+        [
+          6,
+          13,
+          [
+            81,
+            81,
+            81
+          ]
+        ],
+        [
+          5,
+          14,
+          [
+            247,
+            247,
+            247
+          ]
+        ],
+        [
+          6,
+          14,
+          [
+            84,
+            84,
+            84
+          ]
+        ],
+        [
+          6,
+          23,
+          [
+            252,
+            252,
+            252
+          ]
+        ],
+        [
+          5,
+          24,
+          [
+            251,
+            251,
+            251
+          ]
+        ],
+        [
+          6,
+          24,
+          [
+            86,
+            86,
+            86
+          ]
+        ],
+        [
+          5,
+          25,
+          [
+            200,
+            200,
+            200
+          ]
+        ],
+        [
+          6,
+          25,
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "drawingSourceSha256": "c2acd23ad38bc9e6eea4ded8b1fb790ac5817bb7891f090483a2f28084eab1b9",
+      "cause": "Actual complete-text return still leaves original printed pixels outside recognized boxes and physical rule mask. Protective wholepage-ink guard rejects. No box inflation/threshold change applied."
+    },
+    {
+      "id": "independent-Timetable-literal-乙",
+      "page": 2,
+      "count": 4,
+      "boundsInclusive": [
+        5,
+        13,
+        5,
+        25
+      ],
+      "originalPrintedSpans": [
+        {
+          "originalPrintedSpan": "2027年度 前期",
+          "bbox": [
+            5,
+            10,
+            121,
+            28
+          ],
+          "uncoveredPixels": 4
+        }
+      ],
+      "first32Pixels": [
+        [
+          5,
+          13,
+          [
+            245,
+            245,
+            245
+          ]
+        ],
+        [
+          5,
+          14,
+          [
+            247,
+            247,
+            247
+          ]
+        ],
+        [
+          5,
+          24,
+          [
+            251,
+            251,
+            251
+          ]
+        ],
+        [
+          5,
+          25,
+          [
+            200,
+            200,
+            200
+          ]
+        ]
+      ],
+      "drawingSourceSha256": "c2acd23ad38bc9e6eea4ded8b1fb790ac5817bb7891f090483a2f28084eab1b9",
+      "cause": "Actual complete-text return still leaves original printed pixels outside recognized boxes and physical rule mask. Protective wholepage-ink guard rejects. No box inflation/threshold change applied."
+    },
+    {
+      "id": "independent-Timetable-literal-乙",
+      "page": 3,
+      "count": 4,
+      "boundsInclusive": [
+        5,
+        13,
+        5,
+        25
+      ],
+      "originalPrintedSpans": [
+        {
+          "originalPrintedSpan": "2027年度 前期",
+          "bbox": [
+            5,
+            10,
+            121,
+            28
+          ],
+          "uncoveredPixels": 4
+        }
+      ],
+      "first32Pixels": [
+        [
+          5,
+          13,
+          [
+            245,
+            245,
+            245
+          ]
+        ],
+        [
+          5,
+          14,
+          [
+            247,
+            247,
+            247
+          ]
+        ],
+        [
+          5,
+          24,
+          [
+            251,
+            251,
+            251
+          ]
+        ],
+        [
+          5,
+          25,
+          [
+            200,
+            200,
+            200
+          ]
+        ]
+      ],
+      "drawingSourceSha256": "c2acd23ad38bc9e6eea4ded8b1fb790ac5817bb7891f090483a2f28084eab1b9",
+      "cause": "Actual complete-text return still leaves original printed pixels outside recognized boxes and physical rule mask. Protective wholepage-ink guard rejects. No box inflation/threshold change applied."
+    },
+    {
+      "id": "independent-Timetable-literal-乙",
+      "page": 4,
+      "count": 4,
+      "boundsInclusive": [
+        5,
+        13,
+        5,
+        25
+      ],
+      "originalPrintedSpans": [
+        {
+          "originalPrintedSpan": "2027年度 前期",
+          "bbox": [
+            5,
+            10,
+            121,
+            28
+          ],
+          "uncoveredPixels": 4
+        }
+      ],
+      "first32Pixels": [
+        [
+          5,
+          13,
+          [
+            245,
+            245,
+            245
+          ]
+        ],
+        [
+          5,
+          14,
+          [
+            247,
+            247,
+            247
+          ]
+        ],
+        [
+          5,
+          24,
+          [
+            251,
+            251,
+            251
+          ]
+        ],
+        [
+          5,
+          25,
+          [
+            200,
+            200,
+            200
+          ]
+        ]
+      ],
+      "drawingSourceSha256": "c2acd23ad38bc9e6eea4ded8b1fb790ac5817bb7891f090483a2f28084eab1b9",
+      "cause": "Actual complete-text return still leaves original printed pixels outside recognized boxes and physical rule mask. Protective wholepage-ink guard rejects. No box inflation/threshold change applied."
+    },
+    {
+      "id": "independent-Timetable-literal-乙",
+      "page": 5,
+      "count": 4,
+      "boundsInclusive": [
+        5,
+        13,
+        5,
+        25
+      ],
+      "originalPrintedSpans": [
+        {
+          "originalPrintedSpan": "2027年度 前期",
+          "bbox": [
+            5,
+            10,
+            121,
+            28
+          ],
+          "uncoveredPixels": 4
+        }
+      ],
+      "first32Pixels": [
+        [
+          5,
+          13,
+          [
+            245,
+            245,
+            245
+          ]
+        ],
+        [
+          5,
+          14,
+          [
+            247,
+            247,
+            247
+          ]
+        ],
+        [
+          5,
+          24,
+          [
+            251,
+            251,
+            251
+          ]
+        ],
+        [
+          5,
+          25,
+          [
+            200,
+            200,
+            200
+          ]
+        ]
+      ],
+      "drawingSourceSha256": "c2acd23ad38bc9e6eea4ded8b1fb790ac5817bb7891f090483a2f28084eab1b9",
+      "cause": "Actual complete-text return still leaves original printed pixels outside recognized boxes and physical rule mask. Protective wholepage-ink guard rejects. No box inflation/threshold change applied."
+    }
+  ]
+}
