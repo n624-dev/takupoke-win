@@ -10,3 +10,5 @@
 *.yml text eol=lf
 *.yaml text eol=lf
 *.ps1 text eol=crlf
+tools/raster-acquisition-native-probe/fixtures/assemble.py text eol=lf
+tools/localized-raster-native-probe/**/*.py text eol=lf
