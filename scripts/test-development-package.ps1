@@ -117,6 +117,8 @@ try {
     if (-not (Test-Path -LiteralPath $runKey)) { New-Item -Path $runKey | Out-Null }
     New-ItemProperty -LiteralPath $runKey -Name takupoke -Value $currentStartup -PropertyType String -Force | Out-Null
     $before = (Get-FileHash -LiteralPath $preferences).Hash
+    $schoolDatabase = Join-Path $env:TAKUPOKE_DATA_ROOT 'school/school.sqlite'
+    $schoolBefore = (Get-FileHash -LiteralPath $schoolDatabase).Hash
     # Exercise a registered installation moving to the new folder. The old
     # uninstaller owns its payload, but must leave unrelated files and app data.
     $previousInstallDir = $installDir
@@ -137,11 +139,14 @@ try {
     if ((Get-FileHash -LiteralPath $unrelated).Hash -ne $unrelatedHash) { throw 'Moving the installation changed an unrelated file.' }
     Check-InstalledBranding
     if ((Get-FileHash -LiteralPath $preferences).Hash -ne $before) { throw 'Moving the installation changed personal settings.' }
+    if ((Get-FileHash -LiteralPath $schoolDatabase).Hash -ne $schoolBefore) { throw 'Moving the installation changed saved school data.' }
     Run-UiChecks
     $before = (Get-FileHash -LiteralPath $preferences).Hash
+    $schoolBefore = (Get-FileHash -LiteralPath $schoolDatabase).Hash
     Run-Installer $setup @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', "/DIR=`"$installDir`"", "/LOG=`"$(Join-Path $taskRoot 'setup-update.log')`"")
     if ((Get-StartupValue 'takupoke') -cne $currentStartup) { throw 'Same-folder reinstall lost startup before the app was launched.' }
     if ((Get-FileHash -LiteralPath $preferences).Hash -ne $before) { throw 'Reinstallation changed personal settings.' }
+    if ((Get-FileHash -LiteralPath $schoolDatabase).Hash -ne $schoolBefore) { throw 'Reinstallation changed saved school data.' }
     Check-InstalledBranding
     Run-UiChecks
     Uninstall-RegisteredApp $installDir
