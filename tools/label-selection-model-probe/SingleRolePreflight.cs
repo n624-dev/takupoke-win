@@ -5,6 +5,7 @@ internal static class SingleRolePreflight
 {
     internal static object Run(IReadOnlyList<QualificationCase> corpus)
     {
+        _ = SingleRoleProtocol.Instruction; // Verify exact embedded bytes before any catalog/download/native call.
         var decoded = 0; var rejected = 0; var certificates = 0;
         foreach (var c in corpus.Where(c => c.ShouldAdopt))
         {
@@ -45,7 +46,7 @@ internal static class SingleRolePreflight
             if (grammar != "start: \"{\" \"\\\"ids\\\"\" \":\" ids \"}\"\n" + remainder)
                 throw new InvalidDataException("Single-role grammar changed shared all-ID/count productions.");
         }
-        return new { recipe = SingleRoleProtocol.Recipe, decodedRoles = decoded, malformedOrReorderedRejected = rejected, mergedCertificates = certificates,
+        return new { recipe = SingleRoleProtocol.Recipe, instructionSHA256 = SingleRoleProtocol.InstructionSha256, decodedRoles = decoded, malformedOrReorderedRejected = rejected, mergedCertificates = certificates,
             nativeCalls = 0, scope = "Deterministic scorer/input/grammar/certificate controls only; no native support or model quality claim" };
     }
 }

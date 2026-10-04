@@ -1,15 +1,6 @@
 name: Compare one header role per native call on frozen controls
 on:
   workflow_dispatch:
-  push:
-    branches: [codex/pdf-local-recovery]
-    paths:
-      - '.github/workflows/single-header-role-native-probe.yml'
-      - 'tools/label-selection-model-probe/SingleRole*.cs'
-      - 'tools/label-selection-model-probe/FormalComparison.cs'
-      - 'tools/label-selection-model-probe/single-role-baseline.json'
-      - 'tools/label-selection-model-probe/FoundryLocalRecoveryProvider.cs'
-      - 'tools/label-selection-model-probe/Program.cs'
 permissions:
   contents: read
 jobs:

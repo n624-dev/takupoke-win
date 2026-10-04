@@ -1,0 +1,37 @@
+{
+  "sourceCommit": "ea2e82d53e5e7b7497ea6d6ad872bf60792c8e54",
+  "runId": 37198104939,
+  "rawCIContentSHA256": "d926bf7ef734c06d75ad64f877883f2940ab2ba80fe8cad866cf34045ae69ab7",
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 3204,
+      "sha256": "b233d21efee25cd41c1993324e03ee8455b02b66ffdb7946c00d80454165a8c1"
+    },
+    {
+      "file": "independent-replay.json",
+      "bytes": 65370,
+      "sha256": "9dde9138ba3eac9b1f89f2b190b517f83892bf283c52642c75ded1fd0d5dbb25"
+    },
+    {
+      "file": "native-results.json",
+      "bytes": 44254,
+      "sha256": "90cf143527830ee6aa0922517f846f235861108ed072b0f9bc844553ee892953"
+    },
+    {
+      "file": "per-role-output-review.json",
+      "bytes": 44798,
+      "sha256": "307c001c0bd2521efe09ba28dd1815094856bc5c62c0991d633ea70e75867ec8"
+    },
+    {
+      "file": "run-receipt.json",
+      "bytes": 1331,
+      "sha256": "628e3770544fcadd5959bff1813292be20d45afb47bfa36842c4818ba89413f5"
+    },
+    {
+      "file": "third-output-review.json",
+      "bytes": 21474,
+      "sha256": "e3eda2573163ab0e54fef56f4333060c01121bf6f9d0b3945f9b82dc08e2b23d"
+    }
+  ]
+}

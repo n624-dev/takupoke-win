@@ -6,6 +6,7 @@
     <Compile Include="$(TakupokeRepositoryRoot)/tools/model-evaluation/QualificationCorpus.cs" Link="QualificationCorpus.cs" />
     <ProjectReference Include="$(TakupokeRepositoryRoot)/src/Takupoke.Infrastructure/Takupoke.Infrastructure.csproj" />
     <None Include="$(TakupokeRepositoryRoot)/tests/Takupoke.Core.Tests/fixtures/recovery-*.json" Link="fixtures/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <EmbeddedResource Include="$(TakupokeRepositoryRoot)/tools/recovery-prompt-contracts/prompts/single-header-role-ja-v1.txt" LogicalName="RecoveryPrompts.SingleHeaderRoleJaV1" />
     <None Update="single-role-baseline.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>
