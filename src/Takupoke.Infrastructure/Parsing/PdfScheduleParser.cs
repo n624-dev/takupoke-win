@@ -9,7 +9,7 @@ namespace Takupoke.Infrastructure.Parsing;
 public static partial class PdfScheduleParser
 {
     public const int TimetableVersion = 25;
-    public const int SpecialVersion = 21;
+    public const int SpecialVersion = 22;
     private const int MaximumRecords = 10000;
     private static string Joined(IEnumerable<PdfGlyph> glyphs) => string.Concat(glyphs.Select(g => g.Text));
     private static string Heading(PdfPageLayout page, double fraction) => string.Concat(PdfGrid.Rows(page.Glyphs.Where(g => g.Cy < page.Height * fraction)).Select(Joined));
@@ -143,10 +143,14 @@ public static partial class PdfScheduleParser
     }
     private sealed record Run(string Text, PdfBox Box)
     { public double Cx => (Box.Left + Box.Right) / 2; public double Cy => (Box.Top + Box.Bottom) / 2; }
-    private static IReadOnlyList<Run> Runs(IEnumerable<PdfGlyph> glyphs)
+    private static IReadOnlyList<Run> Runs(PdfPageLayout page, IEnumerable<PdfGlyph> glyphs, bool fromOcr)
     {
-        var runs = new List<Run>();
-        foreach (var row in PdfGrid.Rows(glyphs))
+        var input = glyphs.ToArray(); var runs = new List<Run>(); long work = 0;
+        void Charge(long amount) { work += amount; if (work > 20_000_000) throw new PdfParseException("limit"); }
+        var nativeRows = fromOcr ? PdfGrid.OcrHeaderRows(page, input, Charge).ToArray() : [];
+        var nativeAtoms = new HashSet<PdfGlyph>(nativeRows.SelectMany(r => r), ReferenceEqualityComparer.Instance);
+        foreach (var row in nativeRows) Add(row);
+        foreach (var row in PdfGrid.Rows(input.Where(g => !nativeAtoms.Contains(g))))
         {
             var chunks = new List<List<PdfGlyph>>();
             foreach (var g in row)
@@ -156,11 +160,15 @@ public static partial class PdfScheduleParser
             }
             foreach (var chunk in chunks)
             {
-                var text = PdfGrid.Key(Joined(chunk));
-                if (text.Length > 0) runs.Add(new(text, new(chunk.Min(g => g.X), chunk.Min(g => g.Y), chunk.Max(g => g.X + g.Width), chunk.Max(g => g.Y + g.Height))));
+                Add(chunk);
             }
         }
         return runs;
+        void Add(IReadOnlyList<PdfGlyph> chunk)
+        {
+            var text = PdfGrid.Key(Joined(chunk));
+            if (text.Length > 0) runs.Add(new(text, new(chunk.Min(g => g.X), chunk.Min(g => g.Y), chunk.Max(g => g.X + g.Width), chunk.Max(g => g.Y + g.Height))));
+        }
     }
     private sealed record PdfTimes(IReadOnlyDictionary<int, TimeRange> Single, IReadOnlyDictionary<string, TimeRange> Consecutive)
     {

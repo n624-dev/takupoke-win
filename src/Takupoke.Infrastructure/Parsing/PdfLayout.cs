@@ -111,6 +111,50 @@ public sealed class PdfGrid(PdfPageLayout page, CancellationToken token = defaul
         }
         return rows.Select(r => (IReadOnlyList<PdfGlyph>)r.OrderBy(g => g.Cx).ToArray()).ToArray();
     }
+    // CTC intervals estimate token support. Their empty gaps cannot split an
+    // intact native row, but row metadata alone cannot bridge independent cells.
+    internal static IEnumerable<IReadOnlyList<PdfGlyph>> OcrHeaderRows(PdfPageLayout page,
+        IReadOnlyList<PdfGlyph> candidates, Action<long> charge)
+    {
+        var selected = new HashSet<PdfGlyph>(candidates, ReferenceEqualityComparer.Instance);
+        charge(page.Glyphs.Count + candidates.Count + page.Lines.Count);
+        if (!double.IsFinite(page.Width) || !double.IsFinite(page.Height) || page.Width <= 0 || page.Height <= 0
+            || page.Lines.Any(r => !new[] { r.X1, r.Y1, r.X2, r.Y2 }.All(double.IsFinite)
+                || !(r.Vertical && r.Y1 != r.Y2 || r.Horizontal && r.X1 != r.X2))) yield break;
+        foreach (var group in page.Glyphs.Where(g => g.SourceLine is >= 0).GroupBy(g => g.SourceLine))
+        {
+            var row = group.ToArray(); charge(row.Length * 9L);
+            if (!row.All(selected.Contains) || row.Any(g => g.SourceOrder is null or < 0 || g.Width <= 0 || g.Height <= 0
+                || !new[] { g.X, g.Y, g.Width, g.Height, g.X + g.Width, g.Y + g.Height }.All(double.IsFinite)
+                || g.X < 0 || g.Y < 0 || g.X + g.Width > page.Width || g.Y + g.Height > page.Height)) continue;
+            var valid = true;
+            for (var i = 1; i < row.Length; i++)
+            {
+                charge(1);
+                valid &= (long)row[i].SourceOrder!.Value == (long)row[i - 1].SourceOrder!.Value + 1
+                    && row[i].X >= row[i - 1].X + row[i - 1].Width;
+            }
+            if (!valid || row.Max(g => g.Y) >= row.Min(g => g.Y + g.Height)) continue;
+            var left = row.Min(g => g.X); var right = row.Max(g => g.X + g.Width);
+            var top = row.Min(g => g.Y); var bottom = row.Max(g => g.Y + g.Height);
+            var conflict = false;
+            foreach (var other in page.Glyphs)
+            {
+                charge(1);
+                conflict |= other.SourceLine != group.Key && Math.Max(left, other.X) < Math.Min(right, other.X + other.Width)
+                    && Math.Max(top, other.Y) < Math.Min(bottom, other.Y + other.Height);
+            }
+            foreach (var rule in page.Lines)
+            {
+                charge(1);
+                conflict |= rule.Vertical && left < rule.X1 && rule.X1 < right
+                    && Math.Max(top, Math.Min(rule.Y1, rule.Y2)) < Math.Min(bottom, Math.Max(rule.Y1, rule.Y2))
+                    || rule.Horizontal && top < rule.Y1 && rule.Y1 < bottom
+                    && Math.Max(left, Math.Min(rule.X1, rule.X2)) < Math.Min(right, Math.Max(rule.X1, rule.X2));
+            }
+            if (!conflict) yield return row;
+        }
+    }
     public static IReadOnlyList<IReadOnlyList<PdfGlyph>> ContentRows(IReadOnlyList<PdfGlyph> glyphs)
     {
         if (!glyphs.Any(g => g.SourceLine is not null || g.SourceOrder is not null)) return Rows(glyphs);

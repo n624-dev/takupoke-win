@@ -1,0 +1,767 @@
+{
+  "scope": "Exact immutable fictional tight V3 raw CTC interval estimates; complete source-row snippets for extraction regression only, no measured ink geometry, native calls or full formal scoring. Original sourceLine and global page sourceOrder are retained exactly.",
+  "nativeRawSHA256": "10c9272d7b1009943fc37765772b3bf9cafd66ad2e61d4e3780399897408f767",
+  "fixtureManifestSHA256": "dad019d444dd7781c3e5999c84f1bd6cff15993b2cae82e6215ff972ce93f864",
+  "rows": [
+    {
+      "targetID": "day-1",
+      "imageID": "normal-page-1",
+      "sourceLine": 3,
+      "rawEvidenceID": 3,
+      "rawConfidencePieces": [
+        {
+          "Text": "月",
+          "Start": 2,
+          "End": 3,
+          "Confidence": 0.99987364
+        },
+        {
+          "Text": "曜",
+          "Start": 8,
+          "End": 9,
+          "Confidence": 0.9993073
+        },
+        {
+          "Text": "日",
+          "Start": 14,
+          "End": 15,
+          "Confidence": 0.99981314
+        }
+      ],
+      "originalROI": [
+        480,
+        94,
+        542,
+        116
+      ],
+      "glyphs": [
+        {
+          "Text": "月",
+          "X": 487.29411764705884,
+          "Y": 94,
+          "Width": 3.6470588235293917,
+          "Height": 22,
+          "SourceLine": 3,
+          "SourceOrder": 11
+        },
+        {
+          "Text": "曜",
+          "X": 509.1764705882353,
+          "Y": 94,
+          "Width": 3.6470588235294485,
+          "Height": 22,
+          "SourceLine": 3,
+          "SourceOrder": 12
+        },
+        {
+          "Text": "日",
+          "X": 531.0588235294117,
+          "Y": 94,
+          "Width": 3.6470588235295054,
+          "Height": 22,
+          "SourceLine": 3,
+          "SourceOrder": 13
+        }
+      ]
+    },
+    {
+      "targetID": "day-2",
+      "imageID": "normal-page-1",
+      "sourceLine": 4,
+      "rawEvidenceID": 4,
+      "rawConfidencePieces": [
+        {
+          "Text": "火",
+          "Start": 2,
+          "End": 3,
+          "Confidence": 0.9993063
+        },
+        {
+          "Text": "曜",
+          "Start": 8,
+          "End": 9,
+          "Confidence": 0.9984383
+        },
+        {
+          "Text": "日",
+          "Start": 14,
+          "End": 15,
+          "Confidence": 0.99806577
+        }
+      ],
+      "originalROI": [
+        1263,
+        94,
+        1326,
+        116
+      ],
+      "glyphs": [
+        {
+          "Text": "火",
+          "X": 1270.304347826087,
+          "Y": 94,
+          "Width": 3.652173913043498,
+          "Height": 22,
+          "SourceLine": 4,
+          "SourceOrder": 14
+        },
+        {
+          "Text": "曜",
+          "X": 1292.2173913043478,
+          "Y": 94,
+          "Width": 3.652173913043498,
+          "Height": 22,
+          "SourceLine": 4,
+          "SourceOrder": 15
+        },
+        {
+          "Text": "日",
+          "X": 1314.1304347826087,
+          "Y": 94,
+          "Width": 3.652173913043498,
+          "Height": 22,
+          "SourceLine": 4,
+          "SourceOrder": 16
+        }
+      ]
+    },
+    {
+      "targetID": "day-3",
+      "imageID": "normal-page-1",
+      "sourceLine": 5,
+      "rawEvidenceID": 5,
+      "rawConfidencePieces": [
+        {
+          "Text": "水",
+          "Start": 2,
+          "End": 3,
+          "Confidence": 0.99870276
+        },
+        {
+          "Text": "曜",
+          "Start": 8,
+          "End": 9,
+          "Confidence": 0.99826545
+        },
+        {
+          "Text": "日",
+          "Start": 14,
+          "End": 15,
+          "Confidence": 0.99850637
+        }
+      ],
+      "originalROI": [
+        2047,
+        94,
+        2110,
+        116
+      ],
+      "glyphs": [
+        {
+          "Text": "水",
+          "X": 2054.304347826087,
+          "Y": 94,
+          "Width": 3.652173913043498,
+          "Height": 22,
+          "SourceLine": 5,
+          "SourceOrder": 17
+        },
+        {
+          "Text": "曜",
+          "X": 2076.217391304348,
+          "Y": 94,
+          "Width": 3.652173913043498,
+          "Height": 22,
+          "SourceLine": 5,
+          "SourceOrder": 18
+        },
+        {
+          "Text": "日",
+          "X": 2098.1304347826085,
+          "Y": 94,
+          "Width": 3.652173913043498,
+          "Height": 22,
+          "SourceLine": 5,
+          "SourceOrder": 19
+        }
+      ]
+    },
+    {
+      "targetID": "day-4",
+      "imageID": "normal-page-1",
+      "sourceLine": 6,
+      "rawEvidenceID": 6,
+      "rawConfidencePieces": [
+        {
+          "Text": "木",
+          "Start": 2,
+          "End": 3,
+          "Confidence": 0.9982114
+        },
+        {
+          "Text": "曜",
+          "Start": 8,
+          "End": 9,
+          "Confidence": 0.9988366
+        },
+        {
+          "Text": "日",
+          "Start": 14,
+          "End": 15,
+          "Confidence": 0.99800545
+        }
+      ],
+      "originalROI": [
+        2831,
+        94,
+        2894,
+        116
+      ],
+      "glyphs": [
+        {
+          "Text": "木",
+          "X": 2838.304347826087,
+          "Y": 94,
+          "Width": 3.652173913043498,
+          "Height": 22,
+          "SourceLine": 6,
+          "SourceOrder": 20
+        },
+        {
+          "Text": "曜",
+          "X": 2860.217391304348,
+          "Y": 94,
+          "Width": 3.652173913043498,
+          "Height": 22,
+          "SourceLine": 6,
+          "SourceOrder": 21
+        },
+        {
+          "Text": "日",
+          "X": 2882.1304347826085,
+          "Y": 94,
+          "Width": 3.652173913043498,
+          "Height": 22,
+          "SourceLine": 6,
+          "SourceOrder": 22
+        }
+      ]
+    },
+    {
+      "targetID": "day-5",
+      "imageID": "normal-page-1",
+      "sourceLine": 7,
+      "rawEvidenceID": 7,
+      "rawConfidencePieces": [
+        {
+          "Text": "金",
+          "Start": 2,
+          "End": 3,
+          "Confidence": 0.9999279
+        },
+        {
+          "Text": "曜",
+          "Start": 8,
+          "End": 9,
+          "Confidence": 0.9970583
+        },
+        {
+          "Text": "日",
+          "Start": 14,
+          "End": 15,
+          "Confidence": 0.99852294
+        }
+      ],
+      "originalROI": [
+        3615,
+        94,
+        3678,
+        116
+      ],
+      "glyphs": [
+        {
+          "Text": "金",
+          "X": 3622.304347826087,
+          "Y": 94,
+          "Width": 3.652173913043498,
+          "Height": 22,
+          "SourceLine": 7,
+          "SourceOrder": 23
+        },
+        {
+          "Text": "曜",
+          "X": 3644.217391304348,
+          "Y": 94,
+          "Width": 3.652173913043498,
+          "Height": 22,
+          "SourceLine": 7,
+          "SourceOrder": 24
+        },
+        {
+          "Text": "日",
+          "X": 3666.1304347826085,
+          "Y": 94,
+          "Width": 3.652173913043498,
+          "Height": 22,
+          "SourceLine": 7,
+          "SourceOrder": 25
+        }
+      ]
+    },
+    {
+      "targetID": "date-1",
+      "imageID": "exam-page-1",
+      "sourceLine": 54,
+      "rawEvidenceID": 376,
+      "rawConfidencePieces": [
+        {
+          "Text": "1",
+          "Start": 0,
+          "End": 1,
+          "Confidence": 0.9998809
+        },
+        {
+          "Text": "0",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.9999304
+        },
+        {
+          "Text": "月",
+          "Start": 9,
+          "End": 10,
+          "Confidence": 0.99950826
+        },
+        {
+          "Text": "1",
+          "Start": 14,
+          "End": 15,
+          "Confidence": 0.999785
+        },
+        {
+          "Text": "日",
+          "Start": 18,
+          "End": 19,
+          "Confidence": 0.9984793
+        }
+      ],
+      "originalROI": [
+        31,
+        232,
+        106,
+        253
+      ],
+      "glyphs": [
+        {
+          "Text": "1",
+          "X": 31,
+          "Y": 232,
+          "Width": 3.4883720930232585,
+          "Height": 21,
+          "SourceLine": 54,
+          "SourceOrder": 150
+        },
+        {
+          "Text": "0",
+          "X": 44.95348837209302,
+          "Y": 232,
+          "Width": 3.4883720930232585,
+          "Height": 21,
+          "SourceLine": 54,
+          "SourceOrder": 151
+        },
+        {
+          "Text": "月",
+          "X": 62.395348837209305,
+          "Y": 232,
+          "Width": 3.4883720930232514,
+          "Height": 21,
+          "SourceLine": 54,
+          "SourceOrder": 152
+        },
+        {
+          "Text": "1",
+          "X": 79.83720930232559,
+          "Y": 232,
+          "Width": 3.4883720930232585,
+          "Height": 21,
+          "SourceLine": 54,
+          "SourceOrder": 153
+        },
+        {
+          "Text": "日",
+          "X": 93.79069767441861,
+          "Y": 232,
+          "Width": 3.4883720930232585,
+          "Height": 21,
+          "SourceLine": 54,
+          "SourceOrder": 154
+        }
+      ]
+    },
+    {
+      "targetID": "date-2",
+      "imageID": "exam-page-1",
+      "sourceLine": 105,
+      "rawEvidenceID": 427,
+      "rawConfidencePieces": [
+        {
+          "Text": "1",
+          "Start": 0,
+          "End": 2,
+          "Confidence": 0.9993981
+        },
+        {
+          "Text": "0",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.999923
+        },
+        {
+          "Text": "月",
+          "Start": 9,
+          "End": 10,
+          "Confidence": 0.9993461
+        },
+        {
+          "Text": "2",
+          "Start": 14,
+          "End": 15,
+          "Confidence": 0.9996302
+        },
+        {
+          "Text": "日",
+          "Start": 19,
+          "End": 20,
+          "Confidence": 0.998887
+        }
+      ],
+      "originalROI": [
+        30,
+        328,
+        107,
+        349
+      ],
+      "glyphs": [
+        {
+          "Text": "1",
+          "X": 30,
+          "Y": 328,
+          "Width": 7,
+          "Height": 21,
+          "SourceLine": 105,
+          "SourceOrder": 322
+        },
+        {
+          "Text": "0",
+          "X": 44,
+          "Y": 328,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 105,
+          "SourceOrder": 323
+        },
+        {
+          "Text": "月",
+          "X": 61.5,
+          "Y": 328,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 105,
+          "SourceOrder": 324
+        },
+        {
+          "Text": "2",
+          "X": 79,
+          "Y": 328,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 105,
+          "SourceOrder": 325
+        },
+        {
+          "Text": "日",
+          "X": 96.5,
+          "Y": 328,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 105,
+          "SourceOrder": 326
+        }
+      ]
+    },
+    {
+      "targetID": "date-3",
+      "imageID": "exam-page-1",
+      "sourceLine": 157,
+      "rawEvidenceID": 479,
+      "rawConfidencePieces": [
+        {
+          "Text": "1",
+          "Start": 0,
+          "End": 1,
+          "Confidence": 0.9998826
+        },
+        {
+          "Text": "0",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.9999393
+        },
+        {
+          "Text": "月",
+          "Start": 9,
+          "End": 10,
+          "Confidence": 0.9995222
+        },
+        {
+          "Text": "3",
+          "Start": 14,
+          "End": 15,
+          "Confidence": 0.9996921
+        },
+        {
+          "Text": "日",
+          "Start": 19,
+          "End": 20,
+          "Confidence": 0.99951005
+        }
+      ],
+      "originalROI": [
+        30,
+        424,
+        107,
+        445
+      ],
+      "glyphs": [
+        {
+          "Text": "1",
+          "X": 30,
+          "Y": 424,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 157,
+          "SourceOrder": 497
+        },
+        {
+          "Text": "0",
+          "X": 44,
+          "Y": 424,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 157,
+          "SourceOrder": 498
+        },
+        {
+          "Text": "月",
+          "X": 61.5,
+          "Y": 424,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 157,
+          "SourceOrder": 499
+        },
+        {
+          "Text": "3",
+          "X": 79,
+          "Y": 424,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 157,
+          "SourceOrder": 500
+        },
+        {
+          "Text": "日",
+          "X": 96.5,
+          "Y": 424,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 157,
+          "SourceOrder": 501
+        }
+      ]
+    },
+    {
+      "targetID": "date-4",
+      "imageID": "exam-page-1",
+      "sourceLine": 209,
+      "rawEvidenceID": 531,
+      "rawConfidencePieces": [
+        {
+          "Text": "1",
+          "Start": 0,
+          "End": 2,
+          "Confidence": 0.9972107
+        },
+        {
+          "Text": "0",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.9999137
+        },
+        {
+          "Text": "月",
+          "Start": 9,
+          "End": 10,
+          "Confidence": 0.9994941
+        },
+        {
+          "Text": "4",
+          "Start": 14,
+          "End": 15,
+          "Confidence": 0.9992073
+        },
+        {
+          "Text": "日",
+          "Start": 19,
+          "End": 20,
+          "Confidence": 0.999035
+        }
+      ],
+      "originalROI": [
+        30,
+        520,
+        107,
+        541
+      ],
+      "glyphs": [
+        {
+          "Text": "1",
+          "X": 30,
+          "Y": 520,
+          "Width": 7,
+          "Height": 21,
+          "SourceLine": 209,
+          "SourceOrder": 672
+        },
+        {
+          "Text": "0",
+          "X": 44,
+          "Y": 520,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 209,
+          "SourceOrder": 673
+        },
+        {
+          "Text": "月",
+          "X": 61.5,
+          "Y": 520,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 209,
+          "SourceOrder": 674
+        },
+        {
+          "Text": "4",
+          "X": 79,
+          "Y": 520,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 209,
+          "SourceOrder": 675
+        },
+        {
+          "Text": "日",
+          "X": 96.5,
+          "Y": 520,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 209,
+          "SourceOrder": 676
+        }
+      ]
+    },
+    {
+      "targetID": "date-5",
+      "imageID": "exam-page-1",
+      "sourceLine": 261,
+      "rawEvidenceID": 583,
+      "rawConfidencePieces": [
+        {
+          "Text": "1",
+          "Start": 0,
+          "End": 1,
+          "Confidence": 0.99984455
+        },
+        {
+          "Text": "0",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.9999304
+        },
+        {
+          "Text": "月",
+          "Start": 9,
+          "End": 10,
+          "Confidence": 0.9994837
+        },
+        {
+          "Text": "5",
+          "Start": 14,
+          "End": 15,
+          "Confidence": 0.99962306
+        },
+        {
+          "Text": "日",
+          "Start": 19,
+          "End": 20,
+          "Confidence": 0.99941635
+        }
+      ],
+      "originalROI": [
+        30,
+        616,
+        107,
+        637
+      ],
+      "glyphs": [
+        {
+          "Text": "1",
+          "X": 30,
+          "Y": 616,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 261,
+          "SourceOrder": 847
+        },
+        {
+          "Text": "0",
+          "X": 44,
+          "Y": 616,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 261,
+          "SourceOrder": 848
+        },
+        {
+          "Text": "月",
+          "X": 61.5,
+          "Y": 616,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 261,
+          "SourceOrder": 849
+        },
+        {
+          "Text": "5",
+          "X": 79,
+          "Y": 616,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 261,
+          "SourceOrder": 850
+        },
+        {
+          "Text": "日",
+          "X": 96.5,
+          "Y": 616,
+          "Width": 3.5,
+          "Height": 21,
+          "SourceLine": 261,
+          "SourceOrder": 851
+        }
+      ]
+    }
+  ]
+}

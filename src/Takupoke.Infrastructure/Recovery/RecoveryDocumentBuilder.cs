@@ -14,7 +14,7 @@ public static class RecoveryDocumentBuilder
     {
         public RecoveryBox Box => new(Glyph.X, Glyph.Y, Glyph.Width, Glyph.Height);
     }
-    private sealed record Label(string Value, int Page, RecoveryBox Box, IReadOnlyList<string> Ids, RecoveryBox? OwnershipBox = null);
+    private sealed record Label(string Value, int Page, RecoveryBox Box, IReadOnlyList<string> Ids, RecoveryBox? OwnershipBox = null, bool WholeOcrRow = false);
     private static RecoveryBox Bounds(IEnumerable<Atom> atoms)
     {
         var a = atoms.ToArray(); var left = a.Min(x => x.Box.X); var top = a.Min(x => x.Box.Y);
@@ -99,36 +99,17 @@ public static class RecoveryDocumentBuilder
         {
             if (!ocrPages.Contains(page.Key)) continue;
             var pageAtoms = page.ToArray(); work.Step(pageAtoms.Length * 2L);
-            foreach (var nativeLine in pageAtoms.Where(a => a.Glyph.SourceLine is >= 0).GroupBy(a => a.Glyph.SourceLine))
+            var byGlyph = new Dictionary<PdfGlyph, Atom>(ReferenceEqualityComparer.Instance);
+            foreach (var atom in pageAtoms) byGlyph.Add(atom.Glyph, atom);
+            foreach (var nativeRow in PdfGrid.OcrHeaderRows(pages[page.Key - 1], pageAtoms.Select(a => a.Glyph).ToArray(), work.Step))
             {
-                var line = nativeLine.ToArray(); work.Step(line.Length * 9L);
-                // Native order must ALREADY agree with the supplied spatial
-                // atom order. Never sort/repair metadata or widen glyph boxes.
-                var valid = line.All(a => a.Glyph.SourceOrder is >= 0);
-                if (!valid) continue;
-                for (var i = 1; i < line.Length; i++)
-                {
-                    work.Step();
-                    valid &= (long)line[i].Glyph.SourceOrder.GetValueOrDefault() == (long)line[i - 1].Glyph.SourceOrder.GetValueOrDefault() + 1
-                        && line[i].Box.X >= line[i - 1].Box.X + line[i - 1].Box.Width;
-                }
-                if (!valid || line.Max(a => a.Box.Y) >= line.Min(a => a.Box.Y + a.Box.Height)) continue;
-                var bounds = Bounds(line);
-                bool Intersects(RecoveryBox other) => Math.Max(bounds.X, other.X) < Math.Min(bounds.X + bounds.Width, other.X + other.Width)
-                    && Math.Max(bounds.Y, other.Y) < Math.Min(bounds.Y + bounds.Height, other.Y + other.Height);
-                var conflict = false;
-                foreach (var other in pageAtoms)
-                { work.Step(); if (other.Glyph.SourceLine != nativeLine.Key && Intersects(other.Box)) conflict = true; }
-                foreach (var rule in pages[page.Key - 1].Lines)
-                {
-                    work.Step();
-                    conflict |= rule.Vertical && bounds.X < rule.X1 && rule.X1 < bounds.X + bounds.Width
-                        && Math.Max(bounds.Y, Math.Min(rule.Y1, rule.Y2)) < Math.Min(bounds.Y + bounds.Height, Math.Max(rule.Y1, rule.Y2))
-                        || rule.Horizontal && bounds.Y < rule.Y1 && rule.Y1 < bounds.Y + bounds.Height
-                        && Math.Max(bounds.X, Math.Min(rule.X1, rule.X2)) < Math.Min(bounds.X + bounds.Width, Math.Max(rule.X1, rule.X2));
-                }
-                if (conflict) continue;
+                var line = nativeRow.Select(g => byGlyph[g]).ToArray();
                 var raw = string.Concat(line.Select(a => a.Glyph.Text)); work.Step(raw.Length);
+                // Accept only complete existing day/class syntax; never infer
+                // a date or class from a substring or repair a native atom.
+                var key = PdfGrid.Key(raw);
+                if (Regex.IsMatch(key, @"^(?:[月火水木金](?:曜(?:日)?)?|(?:(?:\d{4})年)?\d{1,2}月\d{1,2}日|(?:(?:\d{4})[-/])?\d{1,2}[-/]\d{1,2}|[1-5][_-](?:[1-3]|[A-Z]{2})|AI[_-][12]|[12]年)$"))
+                    yield return new(key, page.Key, Bounds(line), line.Select(a => a.Id).ToArray(), WholeOcrRow: true);
                 // Only the existing public header/role patterns, using whole
                 // original atoms. A native line is not an arbitrary label.
                 foreach (Match match in Regex.Matches(raw, "(?:" + HeaderPattern + ")[：:]?|(?:" + RecoveryRoleLabels.Pattern + ")[：:]"))
@@ -263,6 +244,20 @@ public static class RecoveryDocumentBuilder
         }
         var classLabels = printedClasses.Where(l => !l.Ids.Any(ambiguousDateHeaders.Contains)).Select(l => BindAiGrade(Expand(l) with { Value = l.Value.Replace('-', '_') })).Concat(legacyClassLabels).ToArray();
         var dayLabels = labels.Where(l => !l.Ids.Any(ambiguousClassHeaders.Contains)).Select(l => (Label: l, Day: Day(l.Value, kind, year))).Where(p => p.Day is not null).Select(p => Expand(p.Label) with { Value = p.Day! }).ToArray();
+        // A gap-split weekday such as 月 must not hide the intact 月曜日 from
+        // the same validated row and physical header owner. Independent labels
+        // or labels in different owners remain separate evidence candidates.
+        var wholeDays = dayLabels.Where(l => l.WholeOcrRow).ToArray();
+        dayLabels = dayLabels.Where(label =>
+        {
+            foreach (var whole in wholeDays)
+            {
+                work.Step((long)label.Ids.Count * whole.Ids.Count + whole.Ids.Count);
+                if (label.Page == whole.Page && label.Value == whole.Value && label.Box == whole.Box
+                    && label.Ids.Count < whole.Ids.Count && label.Ids.All(whole.Ids.Contains)) return false;
+            }
+            return true;
+        }).ToArray();
         // Numeric grade/department atoms are already independently owned class
         // evidence. They cannot also become nearby left-side period alternatives.
         work.Step(classLabels.Sum(l => (long)l.Ids.Count) + periodLabels.Length);
@@ -274,7 +269,7 @@ public static class RecoveryDocumentBuilder
         {
             foreach (var (page, index) in pages.Select((p, i) => (p, i + 1))) try { trustedNormal[index] = PdfScheduleParser.Timetable([page], token); } catch (PdfParseException error) when (error.Stage != "limit") { }
         }
-        else try { trustedSpecial = PdfScheduleParser.Special(pages, materialKind, token); } catch (PdfParseException error) when (error.Stage != "limit") { }
+        else try { trustedSpecial = PdfScheduleParser.Special(pages, materialKind, token, ocrPages); } catch (PdfParseException error) when (error.Stage != "limit") { }
         var sources = atoms.ToDictionary(a => a.Id, a => new RecoverySource(a.Id, "header", a.Page, a.Glyph.Text, a.Box, ocrPages?.Contains(a.Page) == true, a.Glyph.SourceLine, a.Glyph.SourceOrder));
         var cells = new List<RecoveryCell>();
         // Retain the original order within each page while avoiding repeated

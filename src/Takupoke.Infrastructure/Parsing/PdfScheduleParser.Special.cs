@@ -6,7 +6,8 @@ namespace Takupoke.Infrastructure.Parsing;
 public static partial class PdfScheduleParser
 {
     private sealed record ParsedSpecialPage(IReadOnlyList<string> Dates, IReadOnlyList<string> Classes, IReadOnlyList<SpecialLesson> Lessons);
-    public static SpecialAnalysis Special(IReadOnlyList<PdfPageLayout> pages, MaterialKind kind, CancellationToken token = default)
+    public static SpecialAnalysis Special(IReadOnlyList<PdfPageLayout> pages, MaterialKind kind, CancellationToken token = default,
+        IReadOnlySet<int>? ocrPages = null)
     {
         if (kind is not MaterialKind.Exam and not MaterialKind.ExamReturn || pages.Count != (kind == MaterialKind.Exam ? 6 : 1)) throw new PdfParseException("P04");
         int? year = null; string[]? expectedDates = null; PdfTimes? expectedTimes = null;
@@ -22,7 +23,8 @@ public static partial class PdfScheduleParser
             var times = ReadTimes(page, kind == MaterialKind.Exam ? 6 : 8);
             if (expectedTimes is not null && !expectedTimes.Same(times)) throw new PdfParseException("P05", index + 1);
             expectedTimes = times;
-            var parsed = kind == MaterialKind.Exam ? ExamPage(page, currentYear, index + 1, times, token) : ReturnPage(page, currentYear, times, token);
+            var fromOcr = ocrPages?.Contains(index + 1) == true;
+            var parsed = kind == MaterialKind.Exam ? ExamPage(page, currentYear, index + 1, times, token, fromOcr) : ReturnPage(page, currentYear, times, token, fromOcr);
             var dates = parsed.Dates.Order(StringComparer.Ordinal).ToArray();
             if (expectedDates is not null && !expectedDates.SequenceEqual(dates)) throw new PdfParseException("P10", index + 1);
             expectedDates = dates;
@@ -34,14 +36,14 @@ public static partial class PdfScheduleParser
         return new(kind, year.Value, expectedDates, classes.Order(StringComparer.Ordinal).ToArray(), expectedTimes.Single,
             lessons.OrderBy(l => l.Date, StringComparer.Ordinal).ThenBy(l => l.ClassName, StringComparer.Ordinal).ThenBy(l => l.Period).ThenBy(l => l.Page).ToArray());
     }
-    private static ParsedSpecialPage ExamPage(PdfPageLayout page, int year, int number, PdfTimes times, CancellationToken token)
+    private static ParsedSpecialPage ExamPage(PdfPageLayout page, int year, int number, PdfTimes times, CancellationToken token, bool fromOcr)
     {
         var columns = number == 6 ? 2 : 3; var periods = PeriodHeader(page, "123456", columns, 0.25); var headerY = periods[0].Cy;
-        var labels = Runs(page.Glyphs.Where(g => g.Cy < headerY - 3 && g.Cy > headerY - page.Height / 10))
+        var labels = Runs(page, page.Glyphs.Where(g => g.Cy < headerY - 3 && g.Cy > headerY - page.Height / 10), fromOcr)
             .Where(run => Regex.IsMatch(run.Text, number == 6 ? "^[12]年$" : "^[1-5]-(?:[1-3]|[A-Z]{2})$")).OrderBy(run => run.Cx).ToArray();
         if (labels.Length != columns) throw new PdfParseException("P14", number);
         var names = labels.Select(run => number == 6 ? "AI_" + run.Text[..1] : run.Text.Replace('-', '_')).ToArray();
-        var dates = Runs(page.Glyphs.Where(g => g.Cy > headerY + 5 && g.Cy < page.Height * 0.7))
+        var dates = Runs(page, page.Glyphs.Where(g => g.Cy > headerY + 5 && g.Cy < page.Height * 0.7), fromOcr)
             .Where(run => run.Cx < periods[0].Cx).Select(run => (Run: run, Day: Date(run.Text, year, false)))
             .Where(p => p.Day is not null).OrderBy(p => p.Run.Cy).ToArray();
         if (dates.Length != 5 || dates.Select(p => p.Day).Distinct().Count() != 5) throw new PdfParseException("P10", number);
@@ -65,11 +67,11 @@ public static partial class PdfScheduleParser
         }
         return new(dates.Select(p => p.Day!.Value.Iso()).ToArray(), names, lessons);
     }
-    private static ParsedSpecialPage ReturnPage(PdfPageLayout page, int year, PdfTimes times, CancellationToken token)
+    private static ParsedSpecialPage ReturnPage(PdfPageLayout page, int year, PdfTimes times, CancellationToken token, bool fromOcr)
     {
         var periods = PeriodHeader(page, "12345678", 5, 0.25); var headerY = periods[0].Cy; var step = periods[1].Cx - periods[0].Cx;
         if (step <= 5) throw new PdfParseException("P05", 1);
-        var dates = Runs(page.Glyphs.Where(g => g.Cy < headerY && g.Cy > headerY - page.Height / 20))
+        var dates = Runs(page, page.Glyphs.Where(g => g.Cy < headerY && g.Cy > headerY - page.Height / 20), fromOcr)
             .Select(run => (Run: run, Day: Date(run.Text, year, true))).Where(p => p.Day is not null).OrderBy(p => p.Run.Cx).ToArray();
         if (dates.Length != 5 || dates.Select(p => p.Day).Distinct().Count() != 5) throw new PdfParseException("P10", 1);
         if (!dates.Select(p => p.Day!.Value).SequenceEqual(dates.Select(p => p.Day!.Value).Order())) throw new PdfParseException("P10", 1);
@@ -78,7 +80,7 @@ public static partial class PdfScheduleParser
         if (ordinaryStart.Month != ordinaryEnd.Month || !note.Contains($"{specialDay.Month}月{specialDay.Day}日の時間割は以下のとおり")
             || !note.Contains($"{ordinaryStart.Month}月{ordinaryStart.Day}日~{ordinaryEnd.Day}日は通常の授業日どおりの授業時間")) throw new PdfParseException("P05", 1);
         var ordinary = new PdfTimes(ScheduleTimes.Normal, new Dictionary<string, TimeRange>());
-        var left = Runs(page.Glyphs.Where(g => g.Cx < periods[0].Cx - step * 0.15 && g.Cy > headerY + 5 && g.Cy < page.Height * 0.7));
+        var left = Runs(page, page.Glyphs.Where(g => g.Cx < periods[0].Cx - step * 0.15 && g.Cy > headerY + 5 && g.Cy < page.Height * 0.7), fromOcr);
         var gradeMax = periods[0].Cx - step * 0.8;
         var grades = left.Where(run => run.Cx < gradeMax && Regex.IsMatch(run.Text, "^(?:[1-5]|AI)$")).ToArray();
         var classRuns = left.Where(run => run.Cx >= gradeMax && Regex.IsMatch(run.Text, "^(?:[1-3]|CN|ES|IT)$")).OrderBy(run => run.Cy).ToArray();
