@@ -22,7 +22,8 @@ internal static class RecoveryAuditCertification
                     original.PreviousAcceptance, certificate, original.PreviousCertification, token).CanAdopt;
         // Current ordinary acceptances cannot smuggle an old certificate or a
         // metadata-only historical promotion into the fresh-validation path.
-        return original.PreviousCertification is null && original.PreviousAcceptance is null &&
+        return original.Result?.Metadata?.ValidatorVersion == RecoveryValidator.Version &&
+            original.PreviousCertification is null && original.PreviousAcceptance is null &&
             RecoveryValidator.CanReuse(original.Acceptance, original.Document, original.Result, token);
     }
     internal static RecoveryAudit? TryRecertify(RecoveryAudit original, CancellationToken token = default)
