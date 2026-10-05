@@ -1,0 +1,60 @@
+{
+  "scope": "New50-file data-only publication, checksum proof for six exact raw wrappers and minimum newREADME claims; no native/source changes",
+  "freezeSHA256": "2322eb9f0cd5efb278241f782b413f65bd8b4b60eb70bf8a92d974d7962df2ce",
+  "all50FrozenFilesMatch": true,
+  "rawWrappers": [
+    {
+      "path": "tess-row-candidate/native-stderr.log.zlib-base64.json",
+      "originalSHA256": "b20ddb9f11a9b69f9855ffc3c4778df6c1eed7fcdaa7a6d72ad841630e84926b",
+      "bytes": 247,
+      "byteExactOriginal": true
+    },
+    {
+      "path": "tess-row-candidate/native-raw.log.zlib-base64.json",
+      "originalSHA256": "c2efa65e4ae6b2f0daebc9d5e801800adbd2a4c9555563ae24bf78700a2fb2d5",
+      "bytes": 1208129,
+      "byteExactOriginal": true
+    },
+    {
+      "path": "row-crop-candidate/model-30-stderr.log.zlib-base64.json",
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "byteExactOriginal": true
+    },
+    {
+      "path": "row-crop-candidate/model-30-raw.log.zlib-base64.json",
+      "originalSHA256": "7293f1c6ae45cfd76f147bfce61af75f1c92be0aed1dc66820ac80a897430b54",
+      "bytes": 1526836,
+      "byteExactOriginal": true
+    },
+    {
+      "path": "row-crop-candidate/model-100-stderr.log.zlib-base64.json",
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "byteExactOriginal": true
+    },
+    {
+      "path": "row-crop-candidate/model-100-raw.log.zlib-base64.json",
+      "originalSHA256": "309a3fd81bc70dda5615fa36d8e50a4987e050a8a10021d71919c2b8d8af2858",
+      "bytes": 4398363,
+      "byteExactOriginal": true
+    }
+  ],
+  "PNGOrPDFPayload": false,
+  "confidentialOriginalInput": false,
+  "metricsIndependentMatch": {
+    "PARSeq30_BODY": 119,
+    "PARSeq100_BODY": 120,
+    "Tess_BODY": 4,
+    "headers": [
+      18,
+      39,
+      20
+    ],
+    "formalTuplesAssessed": 0,
+    "formalTuplesUnavailable": 120,
+    "formalAccuracy": null,
+    "runtimeErrors": 0
+  },
+  "notes": "HostTess scope correction is final reporting-only update, does not change raw or semantic results; no output-specific engine choice or modelquality pass"
+}

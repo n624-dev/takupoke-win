@@ -1,0 +1,50 @@
+{
+  "recipe": "tesseract-uniform-170-native-word-host-replay",
+  "productionSource": "3b5b23bc19f0c63b34a44e6fc0690a05463a241f",
+  "nativeReruns": 0,
+  "changedReportKeys": [
+    "acquisitionLimitation",
+    "scope"
+  ],
+  "semanticFieldsUnchanged": true,
+  "formalReturned": 0,
+  "readableRecoveryFailures": 1,
+  "operationalErrors": 0,
+  "actualRecoveryAccepted": false,
+  "tupleAssessed": 0,
+  "tupleUnavailable": 40,
+  "accuracy": null,
+  "scope": "Native TSV whole-word boxes; native BOX symbols diagnostic only. Native confidence0..100 uncalibrated; no production acquisition qualification.",
+  "files": [
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/tess-formal-probe/Program.cs",
+      "bytes": 8758,
+      "sha256": "224789066c6c57ee8afd4de6c9abaa1c58e51182c6dbbee72d1445849902719e"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/tess-formal-probe/TessFormalProbe.csproj",
+      "bytes": 375,
+      "sha256": "1832c76ea7a6efc33aee7b059342a6f1d065353bcf4c36e8ef4d7a6596432298"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/tess-row-candidate/native-raw.log",
+      "bytes": 1208129,
+      "sha256": "c2efa65e4ae6b2f0daebc9d5e801800adbd2a4c9555563ae24bf78700a2fb2d5"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/tess-row-candidate/host-replay.json",
+      "bytes": 342731,
+      "sha256": "81db36ebbffef430d8119de1cb1ff1296c09dccaa514aa47a39b55e2705bee1c"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/tess-row-candidate/host-replay-preliminary-scope.json",
+      "bytes": 342622,
+      "sha256": "4645ac3d4e2755bc0aada325f2639f656ff3c03de3e3c65689c56c8a5289fc06"
+    },
+    {
+      "path": "/workspace/review-notes/windows-tess-formal-probe-build.log",
+      "bytes": 727,
+      "sha256": "47fe7917285bebdfcbbbbabca7a1e44e10cd19115d4db9281028392b14327a08"
+    }
+  ]
+}

@@ -6,6 +6,11 @@
       "sha256": "74f8ed0f86b6ad9573daeb627b85e9cbab2dd636cf424fd521cfec346a3089cc"
     },
     {
+      "path": "independent-reviews/windows-physical-row-publication-independent-review-high.json",
+      "bytes": 2180,
+      "sha256": "85f6515c5eee1d2c8458f804724a6b7d7089a5923fdd62d66aedfc965e63d881"
+    },
+    {
       "path": "independent-reviews/windows-pixel-row-actual-independent-review-high.json",
       "bytes": 391392,
       "sha256": "91a5c873d0282087ef11e45ad1e6a0d2040d90197466f1ff15252d4ac9d93818"
@@ -14,6 +19,11 @@
       "path": "independent-reviews/windows-pixel-row-source-independent-review-high.json",
       "bytes": 1122,
       "sha256": "a48e047efcfe22d72b30823ede6f9bfe07ca178e5a4ca5c82d0382be6d73bb4c"
+    },
+    {
+      "path": "independent-reviews/windows-tess-row-actual-independent-review-high.json",
+      "bytes": 462656,
+      "sha256": "5907c7c195fbc185273ff0da4a626fd48abde1e43cae778f3e0047cb00c9d9e5"
     },
     {
       "path": "notices/NDLOCR-Lite-LICENCE",
@@ -179,6 +189,11 @@
       "path": "tess-row-candidate/execution.json",
       "bytes": 909,
       "sha256": "cb053127533a33fc61527f0cbded9a5eeeef2c6f03d49aadba40592a1f89d30c"
+    },
+    {
+      "path": "tess-row-candidate/host-replay-frozen.json",
+      "bytes": 2015,
+      "sha256": "2b7cf2ba702f0244d7676da0e66d38a1dcb729d33c1d0d42ac326be1db6381d9"
     },
     {
       "path": "tess-row-candidate/host-replay-preliminary-scope.json",
