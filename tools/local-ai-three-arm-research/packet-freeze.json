@@ -1,13 +1,13 @@
 {
   "format": "portable-fictional-three-arm-inference-packet-v1",
   "status": "SOURCE_PREPARATION_ONLY_NO_MODEL_EXECUTION",
-  "workflowSHA256": "6ebd0bea31a89aa8a91b2ee150c6907748bb8b22490ded7229cd55ea267999af",
+  "workflowSHA256": "86346333b28ee5136a1edb23fe9d8099c4dfa9660c77d4b245b85640268fc5bc",
   "pathPolicy": "Relativepayloadpins; onlycropPath relocated; originalIDs/coords/confidence/order preserved. Newpacketidentity; no old111pinPASSclaim.",
   "pins": [
     {
       "path": "bootstrap_ci.py",
-      "bytes": 10743,
-      "sha256": "eba17c1e0e24d65b6a7b6d4242c408f49cf10e457ddb57fcba507d89278da720"
+      "bytes": 14186,
+      "sha256": "1d13b945e230fc1c73bf6219c7f2767c041bc9bf803a385a6aad75f73447f9bb"
     },
     {
       "path": "crops/t000466d2ba598e3e.png",
@@ -71,8 +71,8 @@
     },
     {
       "path": "guard.py",
-      "bytes": 7799,
-      "sha256": "9d90dcf8ca0d866391fcc08479fe9ecef1052109c1b0a2c462c69bcb39a1144c"
+      "bytes": 9061,
+      "sha256": "7f84a7d1c57692a03ade11d04c66411a7ba63ba7fdecf13aa5b0690bb00f8042"
     },
     {
       "path": "inputs.json",
@@ -101,18 +101,18 @@
     },
     {
       "path": "protocol.py",
-      "bytes": 7365,
-      "sha256": "5b9bab7893e154cbb0a08410fc2f7b36fa9c8303ee41179a7c081c005bb9522d"
+      "bytes": 8737,
+      "sha256": "e27ec1322faf2486e3d990ac088f01dfe84155f19285030702c062b36e21b408"
     },
     {
       "path": "recipe.json",
-      "bytes": 6563,
-      "sha256": "7736bcea403f914c382eff4d3b7143de2f87e64bc850c660721f5c4ed5822ef1"
+      "bytes": 7558,
+      "sha256": "100b9e41de1fe333975ac6465140ac6fc0b31b84e5328f5707d9dd276baf6b57"
     },
     {
       "path": "run_once.py",
-      "bytes": 8405,
-      "sha256": "ae30d69d1b4d43ed721c3ff9f6c99c241a0bef0b1d8f81b53c286afcff92ede9"
+      "bytes": 8529,
+      "sha256": "6b84ded90b1b07f72784b28838bc3fb4643142effddbf7f98cf066785daaa6b2"
     },
     {
       "path": "runtime-identity.json",
@@ -131,18 +131,23 @@
     },
     {
       "path": "test_portable.py",
-      "bytes": 12612,
-      "sha256": "737441d388f7a48a04359996f868c553f7410a07695ce034b9a6c416cb3242c4"
+      "bytes": 21546,
+      "sha256": "6c306287d131dae2a943868bfe4ea9495928d0633bde66a7ba5f0318be263fd2"
     },
     {
       "path": "test_preparation.py",
-      "bytes": 20588,
-      "sha256": "b6f7c240f292641b73d40509c21254614fc9a71129b14f13affd41844366110e"
+      "bytes": 20798,
+      "sha256": "2993d56281b4792fec8fdf584555617fd49c0a8f69a5a7aa26e527a626b4d764"
+    },
+    {
+      "path": "token-budget.json",
+      "bytes": 12015,
+      "sha256": "9a80c1f322213d3592f618e0c2b75199c83aacc6d5041cbbe70b8ba3afd83196"
     },
     {
       "path": "worker.py",
-      "bytes": 5810,
-      "sha256": "1f8db878a83b1368d88c296f5e7a487416242c95ed9ab412c1388d4a1f284a4b"
+      "bytes": 6805,
+      "sha256": "1909e160cdc8b4d24ead45874d14335e4009021511d5c6313fb48dd1f7cb9b27"
     }
   ],
   "workerPinPaths": [
@@ -172,5 +177,7 @@
   "newRecognizerCalls": 0,
   "productionAdoption": false,
   "wholeDocumentFormalSlotsUNASSESSED": 1270,
-  "wholeDocumentFormalClocksUNASSESSED": 70
+  "wholeDocumentFormalClocksUNASSESSED": 70,
+  "parentPortablePacketSHA256": "e3c7ac3bd340d0a69007d6fb5909bb7f045831a46fb58c4c7676697723f10ed5",
+  "version": "addendum-first-attempt-push-root-memory-capacity-exit-rawlogs"
 }

@@ -37,6 +37,18 @@ def read_cgroups():
     current_path = mount / paths[0].lstrip('/')
     records = []
     while True:
+        core=[(current_path/name).exists() for name in ('memory.current','memory.max','memory.high')]
+        if current_path==mount and not any(core):
+            mount_roots=[line.split()[3] for line in Path('/proc/self/mountinfo').read_text().splitlines() if ' - cgroup2 ' in line and line.split()[4]=='/sys/fs/cgroup']
+            controllers=(mount/'cgroup.controllers').read_text().split()
+            if mount_roots!=['/'] or 'memory' not in controllers:raise RuntimeError('HIERARCHY_ROOT_ABSENCE_NOT_PROVEN')
+            # A global kernel hierarchy root is non-limiting, not a fabricated
+            # memory observation. memory.stat may legitimately exist there.
+            records.append({'path':str(mount),'max':None,'high':None,'current':None,'stat':None,
+                            'hierarchyRootNonLimiting':True,'completeAncestorWalk':True,
+                            'rootAbsenceProof':{'fullMountRoot':True,'memoryControllerAvailable':True,'currentMaxHighAllAbsent':True}})
+            break
+        if not all(core):raise RuntimeError('CGROUP_MEMORY_FILES_PARTIALLY_MISSING')
         before = int((current_path / 'memory.current').read_text())
         stat = {k: int(v) for k, v in (line.split() for line in (current_path / 'memory.stat').read_text().splitlines())}
         after = int((current_path / 'memory.current').read_text())
@@ -45,6 +57,7 @@ def read_cgroups():
             return None if value == 'max' else int(value)
         records.append({'path': str(current_path), 'max': limit('memory.max'), 'high': limit('memory.high'), 'current': max(before, after), 'stat': stat})
         if current_path == mount:
+            records[-1]['completeAncestorWalk']=True
             break
         current_path = current_path.parent
     return records
@@ -64,6 +77,7 @@ def resources(root, recipe, disk_free=None, cgroup_records=None):
     else:
         # A VM exception is permitted ONLY after every visible ancestor is
         # unbounded and full host visibility is independently established.
+        if not records[-1].get('completeAncestorWalk'):raise RuntimeError('UNBOUNDED_ANCESTOR_WALK_INCOMPLETE')
         proof=full_vm_proof()
         if not proof['verified']:raise RuntimeError('UNBOUNDED_CGROUP_WITHOUT_FULL_VM_PROOF')
         values=dict(line.split(':',1) for line in Path('/proc/meminfo').read_text().splitlines())

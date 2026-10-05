@@ -1,0 +1,378 @@
+{
+  "status": "MODEL_FREE_TOKENIZER_ANALYSIS_NOT_EXACT_NATIVE_CHAT_SERIALIZATION_PROOF",
+  "tooling": {
+    "source": "PyPI publicsentencepiece0.2.1",
+    "URL": "https://files.pythonhosted.org/packages/04/88/14f2f4a2b922d8b39be45bf63d79e6cd3a9b2f248b2fcb98a69b12af12f5/sentencepiece-0.2.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+    "wheelSHA256": "0cdfecef430d985f1c2bcbfff3defd1d95dae876fbd0173376012d2d7d24044b",
+    "wheelBytes": 1387881,
+    "tokenizerSourceBundleSHA256": "181938105e0eefd105961417e8da75903eacda102c4fce9ce90f50b97139a63c",
+    "sectionType": 4,
+    "beginOffset": 32768,
+    "endOffset": 4721781,
+    "tokenizerBytes": 4689013,
+    "tokenizerSHA256": "e594c8a90eb08d8bda498ff4747977dc827ae0c3c56b5c0d41a605a22d02ef03",
+    "GemmaGenerativeModelLoads": 0,
+    "inferenceCalls": 0,
+    "EngineImports": 0
+  },
+  "SentencePieceTokenizerLoads": 1,
+  "GemmaEngineImports": 0,
+  "GemmaGenerativeModelLoads": 0,
+  "inferenceCalls": 0,
+  "tokenizerVocabularySize": 262144,
+  "contextTokens": 8192,
+  "outputTokensAllArms": 768,
+  "rows": [
+    {
+      "taskID": "t61a6d5e0d6a0ecf9",
+      "promptUTF8Bytes": 1804,
+      "textCapacity": {
+        "promptTokens": 563,
+        "schemaTokens": 537,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 2139,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "evaluationOnlyExpectedBlindComparisonCapacity": {
+        "promptTokens": 632,
+        "schemaTokens": 537,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 2208,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "uniqueIdFourLessonCompactEnvelopeTokens": 99,
+      "sameEnvelopeSpacedTokens": 125
+    },
+    {
+      "taskID": "t9c209ba49ec09a6c",
+      "promptUTF8Bytes": 3724,
+      "textCapacity": {
+        "promptTokens": 1717,
+        "schemaTokens": 1457,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 4213,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "evaluationOnlyExpectedBlindComparisonCapacity": {
+        "promptTokens": 1798,
+        "schemaTokens": 1457,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 4294,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "uniqueIdFourLessonCompactEnvelopeTokens": 191,
+      "sameEnvelopeSpacedTokens": 231
+    },
+    {
+      "taskID": "t000466d2ba598e3e",
+      "promptUTF8Bytes": 3565,
+      "textCapacity": {
+        "promptTokens": 1616,
+        "schemaTokens": 1397,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 4052,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "evaluationOnlyExpectedBlindComparisonCapacity": {
+        "promptTokens": 1697,
+        "schemaTokens": 1397,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 4133,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "uniqueIdFourLessonCompactEnvelopeTokens": 185,
+      "sameEnvelopeSpacedTokens": 224
+    },
+    {
+      "taskID": "td0c28684ec33746d",
+      "promptUTF8Bytes": 4258,
+      "textCapacity": {
+        "promptTokens": 2041,
+        "schemaTokens": 1787,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 4867,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "evaluationOnlyExpectedBlindComparisonCapacity": {
+        "promptTokens": 2127,
+        "schemaTokens": 1787,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 4953,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "uniqueIdFourLessonCompactEnvelopeTokens": 224,
+      "sameEnvelopeSpacedTokens": 268
+    },
+    {
+      "taskID": "tab477632a6790f57",
+      "promptUTF8Bytes": 2300,
+      "textCapacity": {
+        "promptTokens": 878,
+        "schemaTokens": 737,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 2654,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "evaluationOnlyExpectedBlindComparisonCapacity": {
+        "promptTokens": 942,
+        "schemaTokens": 737,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 2718,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "uniqueIdFourLessonCompactEnvelopeTokens": 119,
+      "sameEnvelopeSpacedTokens": 148
+    },
+    {
+      "taskID": "tad54893172742baa",
+      "promptUTF8Bytes": 1797,
+      "textCapacity": {
+        "promptTokens": 559,
+        "schemaTokens": 537,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 2135,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "evaluationOnlyExpectedBlindComparisonCapacity": {
+        "promptTokens": 629,
+        "schemaTokens": 537,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 2205,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "uniqueIdFourLessonCompactEnvelopeTokens": 99,
+      "sameEnvelopeSpacedTokens": 125
+    },
+    {
+      "taskID": "t67fad3fe29a93876",
+      "promptUTF8Bytes": 4039,
+      "textCapacity": {
+        "promptTokens": 1872,
+        "schemaTokens": 1667,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 4578,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "evaluationOnlyExpectedBlindComparisonCapacity": {
+        "promptTokens": 1953,
+        "schemaTokens": 1667,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 4659,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "uniqueIdFourLessonCompactEnvelopeTokens": 212,
+      "sameEnvelopeSpacedTokens": 255
+    },
+    {
+      "taskID": "tafab1e9d46190a4d",
+      "promptUTF8Bytes": 2039,
+      "textCapacity": {
+        "promptTokens": 644,
+        "schemaTokens": 717,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 2400,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "evaluationOnlyExpectedBlindComparisonCapacity": {
+        "promptTokens": 716,
+        "schemaTokens": 717,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 2472,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "uniqueIdFourLessonCompactEnvelopeTokens": 117,
+      "sameEnvelopeSpacedTokens": 146
+    },
+    {
+      "taskID": "ta8e5321bf2145f08",
+      "promptUTF8Bytes": 1918,
+      "textCapacity": {
+        "promptTokens": 630,
+        "schemaTokens": 597,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 2266,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "evaluationOnlyExpectedBlindComparisonCapacity": {
+        "promptTokens": 701,
+        "schemaTokens": 597,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 2337,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "uniqueIdFourLessonCompactEnvelopeTokens": 105,
+      "sameEnvelopeSpacedTokens": 132
+    },
+    {
+      "taskID": "tb92df51f3d0d45cc",
+      "promptUTF8Bytes": 3692,
+      "textCapacity": {
+        "promptTokens": 1692,
+        "schemaTokens": 1457,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 4188,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "evaluationOnlyExpectedBlindComparisonCapacity": {
+        "promptTokens": 1773,
+        "schemaTokens": 1457,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 4269,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "uniqueIdFourLessonCompactEnvelopeTokens": 191,
+      "sameEnvelopeSpacedTokens": 231
+    },
+    {
+      "taskID": "t08b61e2e3bc39ce0",
+      "promptUTF8Bytes": 3696,
+      "textCapacity": {
+        "promptTokens": 1697,
+        "schemaTokens": 1497,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 4233,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "evaluationOnlyExpectedBlindComparisonCapacity": {
+        "promptTokens": 1778,
+        "schemaTokens": 1497,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 4314,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "uniqueIdFourLessonCompactEnvelopeTokens": 195,
+      "sameEnvelopeSpacedTokens": 235
+    },
+    {
+      "taskID": "t3f67e213450be38a",
+      "promptUTF8Bytes": 4893,
+      "textCapacity": {
+        "promptTokens": 2384,
+        "schemaTokens": 2057,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 5480,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "evaluationOnlyExpectedBlindComparisonCapacity": {
+        "promptTokens": 2465,
+        "schemaTokens": 2057,
+        "systemTokens": 15,
+        "chatTemplateReserveTokens": 256,
+        "visionReserveTokens": 0,
+        "outputReserveTokens": 768,
+        "conservativeTotalTokens": 5561,
+        "limitTokens": 8192,
+        "passed": true
+      },
+      "uniqueIdFourLessonCompactEnvelopeTokens": 251,
+      "sameEnvelopeSpacedTokens": 300
+    }
+  ],
+  "blindCapacity": {
+    "promptTokens": 93,
+    "schemaTokens": 60,
+    "systemTokens": 15,
+    "chatTemplateReserveTokens": 256,
+    "visionReserveTokens": 280,
+    "outputReserveTokens": 768,
+    "conservativeTotalTokens": 1472,
+    "limitTokens": 8192,
+    "passed": true
+  },
+  "allKnownInputAndEvaluationExpectedBlindComparisonsFit": true,
+  "schemaIncludedConservatively": true,
+  "evaluationTruthNeverWorkerInput": true,
+  "unknownBlindResponsePolicy": "Runtime re-tokenizes actualcomparisonincluding blindcandidate andFULLschema; oversizedcandidate/context or explicitdecodecap evidence =>OPERATIONAL_UNASSESSED, no retry/correction/accuracyFAIL."
+}

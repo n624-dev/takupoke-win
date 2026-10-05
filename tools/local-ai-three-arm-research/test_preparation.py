@@ -188,7 +188,8 @@ class Preparation(unittest.TestCase):
                  patch.object(run_once.subprocess,'run',return_value=SimpleNamespace(returncode=0,stderr=b'')) as reporter, \
                  patch.object(run_once,'rss_group',return_value=recipe['maximumRSSBytes']+1 if kind=='PROCESS_RSS_LIMIT' else 1), \
                  patch.object(run_once.time,'monotonic',return_value=1000), patch.object(run_once.os,'killpg') as kill, patch('builtins.print'):
-                run_once.main()
+                with self.assertRaises(SystemExit) as stopped:run_once.main()
+                self.assertEqual(stopped.exception.code,1)
             self.assertEqual(launch.call_count,1)
             kill.assert_called_once_with(fake.pid,signal.SIGKILL)
             receipt=json.loads((root/'execution-receipt.json').read_text())
@@ -239,7 +240,8 @@ print(json.dumps({'installed':guard['installed'],'checks':len(checks),'inherited
                  patch.object(run_once.subprocess,'Popen',return_value=fake),patch.object(run_once,'rss_group',side_effect=OSError('injected monitor error')), \
                  patch.object(run_once.os,'killpg') as kill,patch.object(run_once,'group_pids',return_value=[]), \
                  patch.object(run_once.subprocess,'run',return_value=SimpleNamespace(returncode=0,stderr=b'')) as reporter,patch('builtins.print'):
-                run_once.main()
+                with self.assertRaises(SystemExit) as stopped:run_once.main()
+                self.assertEqual(stopped.exception.code,1)
             kill.assert_called_once_with(fake.pid,signal.SIGKILL)
             self.assertEqual(reporter.call_count,1)
             receipt=json.loads((root/'execution-receipt.json').read_text())

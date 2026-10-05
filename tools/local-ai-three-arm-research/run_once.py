@@ -168,6 +168,8 @@ def main():
         receipt['reporter'] = {'exitCode': None, 'state': 'UNASSESSED_REPORTER_FAILED', 'error': str(exc)}
     (ROOT / 'execution-receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
     print(json.dumps(receipt))
+    if failure or code!=0 or not cleanup['complete'] or receipt['reporter'].get('exitCode')!=0:
+        raise SystemExit(1)
 
 if __name__ == '__main__':
     main()

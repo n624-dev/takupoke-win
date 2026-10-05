@@ -21,7 +21,7 @@
   "pythonPath": "RUNTIME_BINDING_REQUIRED",
   "backend": "CPU2 text and CPU2 vision; image routing actual execution UNASSESSED",
   "modelLoadsMaximum": 1,
-  "contextTokens": 4096,
+  "contextTokens": 8192,
   "visionImagesPerCall": 1,
   "bundleMaxVisionTokens": 280,
   "processorChatTemplate": "existing pinned bundle/runtime default; no custom processor/resampling/chat template overrides",
@@ -30,7 +30,7 @@
     "temperature": 0,
     "seed": 17,
     "thinking": false,
-    "maximumOutputTokens": 256
+    "maximumOutputTokens": 768
   },
   "maximumCalls": 36,
   "maximumTasks": 12,
@@ -98,5 +98,12 @@
   "workerNetworkCalls": 0,
   "controllerAssetDownloadsMaximum": 2,
   "portableAssetDownloadDeadlineSeconds": 300,
-  "workflowDeadlineMinutes": 40
+  "workflowDeadlineMinutes": 40,
+  "chatTemplateReserveTokens": 256,
+  "maximumPrintedWorkerLogBytes": 1048576,
+  "rootExecutionAuthority": "One explicitly reviewed rootpush on exactresearchbranch; eventafter==githubSHA==gitHEAD; nondeleted/nonforced/attempt1. Manualdispatch onlyexacthashes, notplanned.",
+  "researchBranch": "research/windows-local-ai-three-arm-portable-20261005",
+  "imageLiteralAdmission": "Blindtranscription isdiagnostic/comparison only; selectednativeIDs cannot repairOCRliteral; no newimage-originIDs orproductioncertificate.",
+  "capacityPolicy": "Prospective8192context/768output beforefirstEngine. Runtime conservativeactualtokenizer prompt+FULLschema+system+256template+280vision(ifimage)+768output gate; oversized/truncated tokens explicitoperationalUNASSESSED, no retries. Sourcecounts are not exactnativechat serialization proof.",
+  "retainedRawLogs": "Print bounded fictionalresponses/events and1MiBtail eachstdout/stderr beforealwaysownedcleanup; no artifact/cache/environment/binaryupload."
 }

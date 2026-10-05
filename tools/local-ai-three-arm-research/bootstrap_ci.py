@@ -15,9 +15,26 @@ from guard import resources
 from protocol import digest
 
 ROOT = Path(__file__).resolve().parent
+REPOSITORY='n624-dev/takupoke-win'
+BRANCH='refs/heads/research/windows-local-ai-three-arm-portable-20261005'
 
 def read(path):
     return json.loads(Path(path).read_text())
+
+def first_attempt():
+    if os.environ.get('GITHUB_RUN_ATTEMPT')!='1':raise RuntimeError('RESEARCH_RERUN_NOT_AUTHORIZED')
+
+def verify_push_authority(root):
+    first_attempt()
+    if os.environ.get('GITHUB_ACTIONS')!='true' or os.environ.get('GITHUB_EVENT_NAME')!='push' or os.environ.get('GITHUB_REPOSITORY')!=REPOSITORY or os.environ.get('GITHUB_REF')!=BRANCH:
+        raise RuntimeError('EXACT_RESEARCH_PUSH_CONTEXT_REQUIRED')
+    event=read(os.environ['GITHUB_EVENT_PATH']);sha=os.environ['GITHUB_SHA']
+    if len(sha)!=40 or any(c not in '0123456789abcdef' for c in sha):raise RuntimeError('PUSH_SHA_INVALID')
+    if event.get('deleted') is not False or event.get('forced') is not False or event.get('ref')!=BRANCH or event.get('repository',{}).get('full_name')!=REPOSITORY or event.get('after')!=sha:
+        raise RuntimeError('PUSH_EVENT_AUTHORITY_MISMATCH')
+    head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root.parents[1],text=True).strip()
+    if head!=sha:raise RuntimeError('PUSH_HEAD_NOT_CHECKED_OUT')
+    return {'type':'EXACT_REVIEWED_RESEARCH_BRANCH_PUSH','repository':REPOSITORY,'ref':BRANCH,'eventAfterSHA':sha,'localGitHEAD':head,'runAttempt':1,'manualApproval':False}
 
 def verify_source(root, packet_sha, recipe_sha, workflow):
     if len(packet_sha)!=64 or len(recipe_sha)!=64 or any(c not in '0123456789abcdef' for c in packet_sha+recipe_sha):
@@ -92,7 +109,22 @@ def terminate_owned(process, packet):
                 if time.monotonic()>=deadline:raise RuntimeError('OWNED_CHILD_CLEANUP_INCOMPLETE')
                 time.sleep(.05)
 
-def execute(root, packet_sha, recipe_sha, workflow, scratch_parent):
+def print_research_logs(packet,recipe):
+    for name in ('responses.jsonl','worker-events.jsonl'):
+        path=packet/name
+        if path.exists():
+            if path.stat().st_size>recipe['maximumOutputBytes']:raise RuntimeError('RAW_RESEARCH_LOG_BOUND_EXCEEDED')
+            print(name+'\n'+path.read_text(),flush=True)
+    for name in ('worker-stdout.log','worker-stderr.log'):
+        path=packet/name
+        if path.exists():
+            with path.open('rb') as stream:
+                size=path.stat().st_size;stream.seek(max(0,size-recipe['maximumPrintedWorkerLogBytes']))
+                tail=stream.read(recipe['maximumPrintedWorkerLogBytes']).decode(errors='replace')
+            print(json.dumps({'log':name,'totalBytes':size,'printedTailBytesMaximum':recipe['maximumPrintedWorkerLogBytes'],'tail':tail}),flush=True)
+
+def execute(root, packet_sha, recipe_sha, workflow, scratch_parent, authority=None):
+    first_attempt()
     freeze=verify_source(root,packet_sha,recipe_sha,workflow)
     if sys.version_info[:3]!=(3,12,14):raise RuntimeError('EXACT_PYTHON_3_12_14_REQUIRED')
     if sys.platform!='linux' or os.uname().machine!='x86_64':raise RuntimeError('LINUX_X86_64_SECCOMP_PLATFORM_REQUIRED')
@@ -105,8 +137,10 @@ def execute(root, packet_sha, recipe_sha, workflow, scratch_parent):
     marker=Path(scratch_parent)/'fictional-three-arm-owned-path.txt'
     if marker.exists():
         shutil.rmtree(scratch);raise RuntimeError('EXCLUSIVE_SCRATCH_ALREADY_EXISTS')
-    marker.write_text(str(scratch)+'\n')
+    marker_owned=False
     try:
+        with marker.open('x') as stream:stream.write(str(scratch)+'\n')
+        marker_owned=True
         model=legal['model']
         model_path=scratch/'gemma-4-E2B-it.litertlm'
         download({'url':model['downloadURL'],'bytes':recipe['modelBytes'],'sha256':recipe['modelSHA256']},model_path)
@@ -128,7 +162,8 @@ def execute(root, packet_sha, recipe_sha, workflow, scratch_parent):
         (packet/'model').mkdir();shutil.move(str(model_path),packet/recipe['modelPath'])
         wheel_path.unlink()
         (packet/'runtime-binding.json').write_text(json.dumps({'pythonVersion':'3.12.14','pythonExecutable':str(python),'packageRoot':str(package),'wheelSHA256':wheel['sha256'],'newPortableRuntimeFilesVerified':True})+'\n')
-        (packet/'root-inference-approval.json').write_text(json.dumps({'action':'ONE_LOCAL_GEMMA4_THREE_ARM_DEVELOPMENT_COMPONENT_PROBE','sourceFreezeSHA256':packet_sha,'recipeSHA256':recipe_sha,'plannedMaximumCalls':36,'newRecognizerCalls':0,'productionAdoption':False,'fullDocumentAssessment':False})+'\n')
+        print(json.dumps({'portablePacketSHA256':packet_sha,'recipeSHA256':recipe_sha,'modelSHA256Verified':recipe['modelSHA256'],'modelBytes':recipe['modelBytes'],'runtimeWheelSHA256Verified':wheel['sha256'],'runtimeFilesVerified':identity['files'],'pythonVersion':'3.12.14','inputPayloadSHA256':digest(packet/'inputs.json') if (packet/'inputs.json').exists() else None,'executionAuthority':authority or {'type':'MANUAL_WORKFLOW_DISPATCH_EXACT_HASH_ARGUMENTS'}}),flush=True)
+        (packet/'root-inference-approval.json').write_text(json.dumps({'action':'ONE_LOCAL_GEMMA4_THREE_ARM_DEVELOPMENT_COMPONENT_PROBE','sourceFreezeSHA256':packet_sha,'recipeSHA256':recipe_sha,'plannedMaximumCalls':36,'newRecognizerCalls':0,'productionAdoption':False,'fullDocumentAssessment':False,'authority':authority or {'type':'MANUAL_WORKFLOW_DISPATCH_EXACT_HASH_ARGUMENTS'}})+'\n')
         # Asset hashing warms file cache: this measured gate is mandatory now.
         resources(packet,recipe)
         env={k:v for k,v in os.environ.items() if k not in ('GITHUB_TOKEN','GH_TOKEN','ACTIONS_RUNTIME_TOKEN','ACTIONS_ID_TOKEN_REQUEST_TOKEN')}
@@ -143,12 +178,15 @@ def execute(root, packet_sha, recipe_sha, workflow, scratch_parent):
         for name in ('preflight-failure.json','execution-receipt.json','comparison-report.json'):
             path=packet/name
             if path.exists():print(name+'\n'+path.read_text(),flush=True)
+        # Every fictional completion/event is retained in bounded CI logs before
+        # scratch deletion; binary crops/model/environment are never printed.
+        print_research_logs(packet,recipe)
         return code
     finally:
         try:terminate_owned(process,packet)
         finally:
             shutil.rmtree(scratch)
-            marker.unlink(missing_ok=True)
+            if marker_owned:marker.unlink(missing_ok=True)
             print(json.dumps({'ownedScratchRemoved':not scratch.exists(),'modelDistributed':False,'artifactUploads':0,'productionAdoption':False}),flush=True)
 
 def cleanup_only(parent):
@@ -162,14 +200,20 @@ def cleanup_only(parent):
     marker.unlink()
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--cleanup-only',action='store_true');parser.add_argument('--packet-sha');parser.add_argument('--recipe-sha')
+    parser=argparse.ArgumentParser();parser.add_argument('--cleanup-only',action='store_true');parser.add_argument('--approved-research-push',action='store_true');parser.add_argument('--packet-sha');parser.add_argument('--recipe-sha')
     args=parser.parse_args();parent=Path(os.environ['RUNNER_TEMP'])
     if args.cleanup_only:cleanup_only(parent);return
+    first_attempt()
+    authority=None
+    if args.approved_research_push:
+        if args.packet_sha or args.recipe_sha:raise RuntimeError('MIXED_PUSH_MANUAL_AUTHORITY_REFUSED')
+        authority=verify_push_authority(ROOT)
+        args.packet_sha=digest(ROOT/'packet-freeze.json');args.recipe_sha=digest(ROOT/'recipe.json')
     workflow=ROOT.parents[1]/'.github/workflows/local-ai-three-arm-research.yml'
     def terminate(signum,frame):raise InterruptedError('controller terminated; clean owned child/scratch')
     previous_term=signal.getsignal(signal.SIGTERM)
     signal.signal(signal.SIGTERM,terminate)
-    try:code=execute(ROOT,args.packet_sha or '',args.recipe_sha or '',workflow,parent)
+    try:code=execute(ROOT,args.packet_sha or '',args.recipe_sha or '',workflow,parent,authority)
     except Exception as exc:
         print(json.dumps({'controllerDisposition':'OPERATIONAL_UNASSESSED','error':type(exc).__name__+':'+str(exc),
                           'modelAccuracy':'UNASSESSED','modelLoads':'UNKNOWN_UNLESS_EXECUTION_RECEIPT_PRESENT',

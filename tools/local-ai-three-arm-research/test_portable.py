@@ -11,13 +11,16 @@ from unittest.mock import patch
 import bootstrap_ci
 import guard
 import protocol
+import run_once
 
 ROOT=Path(__file__).resolve().parent
 
 class Portable(unittest.TestCase):
+    def setUp(self):
+        env=patch.dict(bootstrap_ci.os.environ,{'GITHUB_RUN_ATTEMPT':'1'});env.start();self.addCleanup(env.stop)
     def recipe(self):return {'diskReserveBytes':10,'workingAllowanceBytes':2,'minimumAvailableMemoryBytes':20}
     def stat(self):return {k:0 for k in ('file','shmem','inactive_file','file_dirty','file_writeback','file_mapped','unevictable')}
-    def record(self):return {'path':'synthetic','max':None,'high':None,'current':0,'stat':self.stat()}
+    def record(self):return {'path':'synthetic','max':None,'high':None,'current':0,'stat':self.stat(),'completeAncestorWalk':True}
 
     def test_no_visible_cgroup_records_never_uses_host(self):
         with patch.object(guard,'full_vm_proof') as proof:
@@ -143,12 +146,108 @@ class Portable(unittest.TestCase):
         self.assertEqual(report['modelAccuracy'],'UNASSESSED');self.assertEqual(report['wholeDocumentFormalSlots']['UNASSESSED'],1270)
         self.assertEqual(report['wholeDocumentFormalClocks']['UNASSESSED'],70);self.assertFalse(report['productionAdoption'])
 
-    def test_workflow_manual_only_no_upload_or_cache(self):
+    def test_workflow_exact_research_push_or_manual_no_upload_or_cache(self):
         workflow=(ROOT.parents[1]/'.github/workflows/local-ai-three-arm-research.yml').read_text()
         self.assertIn('workflow_dispatch:',workflow)
-        for banned in ('upload-artifact','actions/cache','push:','pull_request:','schedule:'):
+        for banned in ('upload-artifact','actions/cache','cache:','pull_request:','schedule:'):
             self.assertNotIn(banned,workflow)
         self.assertIn('persist-credentials: false',workflow);self.assertIn("python-version: '3.12.14'",workflow)
+        self.assertIn('branches: [research/windows-local-ai-three-arm-portable-20261005]',workflow)
+        self.assertIn("github.run_attempt == '1'",workflow);self.assertIn('cancel-in-progress: false',workflow)
+        self.assertIn('group: fictional-local-ai-three-arm-research-${{ github.sha }}',workflow)
+
+    def push_event(self,root):
+        sha='a'*40;event={'deleted':False,'forced':False,'ref':bootstrap_ci.BRANCH,'repository':{'full_name':bootstrap_ci.REPOSITORY},'after':sha}
+        file=root/'event.json';file.write_text(json.dumps(event))
+        return event,{'GITHUB_ACTIONS':'true','GITHUB_EVENT_NAME':'push','GITHUB_REPOSITORY':bootstrap_ci.REPOSITORY,'GITHUB_REF':bootstrap_ci.BRANCH,'GITHUB_SHA':sha,'GITHUB_EVENT_PATH':str(file),'GITHUB_RUN_ATTEMPT':'1'}
+
+    def test_exact_push_authority_nonforced_nondeleted_matching_head(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);event,env=self.push_event(root)
+            with patch.dict(bootstrap_ci.os.environ,env),patch.object(bootstrap_ci.subprocess,'check_output',return_value='a'*40+'\n'):
+                self.assertFalse(bootstrap_ci.verify_push_authority(root)['manualApproval'])
+                for key in ('forced','deleted'):
+                    bad={**event,key:True};(root/'event.json').write_text(json.dumps(bad))
+                    with self.assertRaisesRegex(RuntimeError,'AUTHORITY'):bootstrap_ci.verify_push_authority(root)
+                (root/'event.json').write_text(json.dumps(event))
+                with patch.dict(bootstrap_ci.os.environ,{'GITHUB_REF':'refs/heads/main'}):
+                    with self.assertRaisesRegex(RuntimeError,'CONTEXT'):bootstrap_ci.verify_push_authority(root)
+                with patch.object(bootstrap_ci.subprocess,'check_output',return_value='b'*40):
+                    with self.assertRaisesRegex(RuntimeError,'HEAD'):bootstrap_ci.verify_push_authority(root)
+
+    def test_repeated_attempt_stops_before_download_or_payload(self):
+        with patch.dict(bootstrap_ci.os.environ,{'GITHUB_RUN_ATTEMPT':'2'}),patch.object(bootstrap_ci,'verify_source') as source,patch.object(bootstrap_ci,'download') as download:
+            with self.assertRaisesRegex(RuntimeError,'RERUN'):bootstrap_ci.execute(ROOT,'p','r',ROOT/'workflow',ROOT)
+        source.assert_not_called();download.assert_not_called()
+
+    def read_tree(self,limit='max',missing_child=False,partial_root=False,mount_root='/'):
+        base='/sys/fs/cgroup';child=base+'/child'
+        data={'/proc/self/cgroup':'0::/child\n','/proc/self/mountinfo':f'1 0 0:1 {mount_root} /sys/fs/cgroup rw - cgroup2 cgroup rw\n',base+'/cgroup.controllers':'memory cpu\n',child+'/memory.max':limit,child+'/memory.high':'max',child+'/memory.current':'10',child+'/memory.stat':'\n'.join(k+' 0' for k in self.stat())}
+        if missing_child:del data[child+'/memory.current']
+        if partial_root:data[base+'/memory.current']='20'
+        def text(path):
+            if str(path) not in data:raise FileNotFoundError(str(path))
+            return data[str(path)]
+        with patch.object(guard.Path,'read_text',text),patch.object(guard.Path,'exists',lambda path:str(path) in data):return guard.read_cgroups()
+
+    def test_missing_child_or_partial_root_or_submount_holds(self):
+        for args in ({'missing_child':True},{'partial_root':True},{'mount_root':'/container'}):
+            with self.assertRaises(RuntimeError):self.read_tree(**args)
+
+    def test_finite_child_with_proved_nonlimiting_root_never_uses_host(self):
+        records=self.read_tree(limit='100')
+        self.assertIsNone(records[-1]['current']);self.assertTrue(records[-1]['hierarchyRootNonLimiting'])
+        with patch.object(guard,'full_vm_proof') as proof:result=guard.resources(ROOT,self.recipe(),disk_free=99,cgroup_records=records)
+        proof.assert_not_called();self.assertEqual(result['availableCgroupMemoryBudgetBytes'],90)
+
+    def test_unbounded_absent_root_requires_complete_walk_and_full_vm(self):
+        records=self.read_tree()
+        with patch.object(guard,'full_vm_proof',return_value={'verified':True}),patch.object(guard.Path,'read_text',return_value='MemAvailable: 100 kB\n'):
+            self.assertTrue(guard.resources(ROOT,self.recipe(),disk_free=99,cgroup_records=records)['hostMemAvailableUsed'])
+        with patch.object(guard,'full_vm_proof',return_value={'verified':False}):
+            with self.assertRaisesRegex(RuntimeError,'FULL_VM'):guard.resources(ROOT,self.recipe(),disk_free=99,cgroup_records=records)
+        records[-1]['completeAncestorWalk']=False
+        with self.assertRaisesRegex(RuntimeError,'WALK_INCOMPLETE'):guard.resources(ROOT,self.recipe(),disk_free=99,cgroup_records=records)
+
+    def test_capacity_is_operational_only_with_explicit_evidence(self):
+        self.assertEqual(protocol.response_capacity_failure({},768,768),'DECODE_TOKEN_CAP_REACHED')
+        self.assertIn('CAPACITY',protocol.response_capacity_failure({'finish_reason':'length'},12,768))
+        self.assertIsNone(protocol.response_capacity_failure({'finish_reason':'stop'},12,768))
+        self.assertIsNone(protocol.response_capacity_failure({'content':[]},None,768))
+
+    def test_context_capacity_includes_schema_system_output_and_vision(self):
+        recipe={'contextTokens':8192,'chatTemplateReserveTokens':256,'bundleMaxVisionTokens':280,'sampler':{'maximumOutputTokens':768}}
+        counts=protocol.context_capacity(lambda s:list(s),'a','b',recipe,True)
+        self.assertEqual(counts['visionReserveTokens'],280);self.assertTrue(counts['passed'])
+        counts=protocol.context_capacity(lambda s:list(s),'a'*8192,{},recipe)
+        self.assertFalse(counts['passed'])
+
+    def test_worker_nonzero_or_reporter_failure_causes_nonzero_supervisor(self):
+        for worker_code,reporter_code in ((7,0),(0,9)):
+            with tempfile.TemporaryDirectory() as d:
+                root=Path(d);(root/'recipe.json').write_text((ROOT/'recipe.json').read_text());fake=SimpleNamespace(pid=987654,poll=lambda:worker_code,returncode=worker_code,wait=lambda **kw:worker_code)
+                with patch.object(run_once,'ROOT',root),patch.object(run_once,'verify_packet',return_value={'sourceFreezeSHA256':'opaque'}),patch.object(run_once,'bind_runtime',side_effect=lambda root,r:r),patch.object(run_once,'resources',return_value={}),patch.object(run_once,'subreaper'),patch.object(run_once.subprocess,'Popen',return_value=fake),patch.object(run_once,'cleanup_group',return_value={'complete':True,'remainingGroupPids':[],'errors':[]}),patch.object(run_once.subprocess,'run',return_value=SimpleNamespace(returncode=reporter_code,stderr=b'')),patch('builtins.print'):
+                    with self.assertRaises(SystemExit) as stopped:run_once.main()
+                    self.assertEqual(stopped.exception.code,1)
+                receipt=json.loads((root/'execution-receipt.json').read_text());self.assertEqual(receipt['exitCode'],worker_code);self.assertEqual(receipt['reporter']['exitCode'],reporter_code)
+
+    def test_raw_results_events_and_only_bounded_stdout_stderr_tail(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);(root/'responses.jsonl').write_text('{"call":1,"completeResponse":{"finish_reason":"length"}}\n');(root/'worker-events.jsonl').write_text('{"event":"callComplete"}\n');(root/'worker-stderr.log').write_text('large-prefix-last');(root/'worker-stdout.log').write_text('stdouttail')
+            recipe={'maximumOutputBytes':128,'maximumPrintedWorkerLogBytes':4}
+            with patch('builtins.print') as output:bootstrap_ci.print_research_logs(root,recipe)
+            values=[x.args[0] for x in output.call_args_list]
+            self.assertTrue(any('completeResponse' in x for x in values));self.assertTrue(any('callComplete' in x for x in values))
+            tails=[json.loads(x) for x in values if x.startswith('{')]
+            self.assertEqual({x['tail'] for x in tails},{'tail','last'})
+            (root/'responses.jsonl').write_text('x'*129)
+            with self.assertRaisesRegex(RuntimeError,'BOUND_EXCEEDED'):bootstrap_ci.print_research_logs(root,recipe)
+
+    def test_tokenizer_budget_proof_is_evaluation_only_and_common_limits(self):
+        proof=json.loads((ROOT/'token-budget.json').read_text());recipe=json.loads((ROOT/'recipe.json').read_text());freeze=json.loads((ROOT/'packet-freeze.json').read_text())
+        self.assertEqual(recipe['contextTokens'],8192);self.assertEqual(recipe['sampler']['maximumOutputTokens'],768)
+        self.assertEqual(len(proof['rows']),12);self.assertTrue(proof['allKnownInputAndEvaluationExpectedBlindComparisonsFit'])
+        self.assertEqual(proof['inferenceCalls'],0);self.assertNotIn('token-budget.json',freeze['workerPinPaths'])
 
     def test_published_payload_digest_and_no_host_paths(self):
         provenance=json.loads((ROOT/'local-verified-provenance.json').read_text())
