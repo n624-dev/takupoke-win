@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "selectionSeed": "focal-request-v1:",
+  "purpose": "BODY_ASSIGNMENT_PROPOSAL",
+  "profiles": [
+    "REFERENCE_454",
+    "FOCAL_BODY_V1"
+  ],
+  "stages": [
+    "text",
+    "compare"
+  ],
+  "records": [
+    {
+      "taskID": "ta8e5321bf2145f08",
+      "sourceSnapshotSHA256": "71ca04755302296450da508729553e2286687ebb8550d60b2fb0d0bf209b7760",
+      "intent": {
+        "purpose": "BODY_ASSIGNMENT_PROPOSAL",
+        "authority": "EXPLICIT_ROOT_REVIEWED_RESEARCH_QUERY",
+        "taskID": "ta8e5321bf2145f08",
+        "sourceSnapshotSHA256": "71ca04755302296450da508729553e2286687ebb8550d60b2fb0d0bf209b7760",
+        "productionFieldExtraction": false
+      },
+      "eligibility": "RESEARCH_SOURCE_GEOMETRY_CHECKED_NO_ROLE_PROOF",
+      "diagnostic": {
+        "state": "CANDIDATE",
+        "lines": [
+          "10/1"
+        ]
+      }
+    },
+    {
+      "taskID": "t000466d2ba598e3e",
+      "sourceSnapshotSHA256": "f7983a27961adb91ab4d99e75386cfff74d55dc50811a56bf87fe02cffba12a5",
+      "intent": {
+        "purpose": "BODY_ASSIGNMENT_PROPOSAL",
+        "authority": "EXPLICIT_ROOT_REVIEWED_RESEARCH_QUERY",
+        "taskID": "t000466d2ba598e3e",
+        "sourceSnapshotSHA256": "f7983a27961adb91ab4d99e75386cfff74d55dc50811a56bf87fe02cffba12a5",
+        "productionFieldExtraction": false
+      },
+      "eligibility": "RESEARCH_SOURCE_GEOMETRY_CHECKED_NO_ROLE_PROOF",
+      "diagnostic": {
+        "state": "CANDIDATE",
+        "lines": [
+          "幻学03",
+          "詠Z2",
+          "含71"
+        ]
+      }
+    },
+    {
+      "taskID": "tb92df51f3d0d45cc",
+      "sourceSnapshotSHA256": "9e7d343689bec0d6678ad40f8a19a2c3c5c25c4d3eb8d574af5adb3c978a1d30",
+      "eligibility": "REFUSED_BEFORE_MODEL",
+      "refusal": "NATIVE_CONFIDENCE_REFUSAL"
+    },
+    {
+      "taskID": "td0c28684ec33746d",
+      "sourceSnapshotSHA256": "3938e2dda9198b7121d446bc3edc24e8857b8b3d233308ae189f701695eeb2c6",
+      "eligibility": "REFUSED_BEFORE_MODEL",
+      "refusal": "ORIGINAL_OCR_MIDDLE_DOT_AMBIGUOUS"
+    }
+  ],
+  "maximumTasks": 4,
+  "maximumCalls": 16,
+  "sourceEligibleMaximumCalls": 8,
+  "newImageCalls": 0,
+  "newRecognizerCalls": 0,
+  "productionAdoption": false,
+  "authority": "PREPARATION_ONLY_ROOT_EXECUTION_GO_AND_GUARDED_ADAPTER_REQUIRED",
+  "retainedInputSHA256": "54866e2784434e266c21e5d5257728c3cb63f657a092fa14c8b9083aa24183b7",
+  "retainedBlindResponsesSHA256": "416b10c97f22275f30d13fcd5a95c9a46066493b5f4ed193fc67053950768a06",
+  "retainedBlindMeaning": "OLD_CONSUMED_DEVELOPMENT_DIAGNOSTIC_ONLY; NOT_FRESH_BLIND_ARM_OR_CORRECTION_EVIDENCE"
+}

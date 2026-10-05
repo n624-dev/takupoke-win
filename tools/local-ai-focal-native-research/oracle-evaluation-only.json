@@ -1,0 +1,1284 @@
+{
+  "scope": "WORKER_MUST_NOT_OPEN",
+  "tasks": [
+    {
+      "id": "t61a6d5e0d6a0ecf9",
+      "literalLines": [
+        "月曜日"
+      ],
+      "expectedOwnedRoleIDs": {
+        "year": [],
+        "term": [],
+        "title": [],
+        "class": [],
+        "day": [
+          "p1s11",
+          "p1s12",
+          "p1s13"
+        ],
+        "period": [],
+        "note": [],
+        "subject": [],
+        "teacher": [],
+        "room": []
+      },
+      "expectedParallelCount": 0,
+      "paint": [
+        {
+          "id": "day-1",
+          "literal": "月曜日",
+          "semanticBox": [
+            120,
+            88,
+            904,
+            122
+          ],
+          "actualInkBox": [
+            480,
+            94,
+            542,
+            116
+          ],
+          "kind": "day",
+          "fontBaseline": 113,
+          "fontAnchor": "ls",
+          "day": "1"
+        }
+      ],
+      "imageID": "normal-page-1",
+      "regionID": 0,
+      "evaluationOnly": true,
+      "provenance": "all originally fictional V3; previously consumed DEVELOPMENT, no independent holdout claim",
+      "expectedTuples": null,
+      "tupleTruthProvenance": "UNASSESSED_NO_BOUND_ORIGINAL_ORACLE_TUPLE"
+    },
+    {
+      "id": "t9c209ba49ec09a6c",
+      "literalLines": [
+        "虚研01",
+        "偽O0",
+        "舎01"
+      ],
+      "expectedOwnedRoleIDs": {
+        "year": [],
+        "term": [],
+        "title": [],
+        "class": [
+          "p1s328",
+          "p1s329"
+        ],
+        "day": [
+          "p1s11",
+          "p1s12",
+          "p1s13"
+        ],
+        "period": [
+          "p1s31",
+          "p1s32"
+        ],
+        "note": [],
+        "subject": [
+          "p1s66",
+          "p1s67",
+          "p1s68",
+          "p1s69"
+        ],
+        "teacher": [
+          "p1s215",
+          "p1s216",
+          "p1s217"
+        ],
+        "room": [
+          "p1s330",
+          "p1s331",
+          "p1s332"
+        ]
+      },
+      "expectedParallelCount": 1,
+      "paint": [
+        {
+          "id": "cell-1-1-subject",
+          "literal": "虚研01",
+          "semanticBox": [
+            120,
+            194,
+            316,
+            226
+          ],
+          "actualInkBox": [
+            184,
+            199,
+            251,
+            221
+          ],
+          "kind": "body",
+          "fontBaseline": 218,
+          "fontAnchor": "ls",
+          "role": "subject",
+          "className": "1_1",
+          "day": "1",
+          "periods": [
+            1,
+            2
+          ],
+          "parallel": false
+        },
+        {
+          "id": "cell-1-1-teacher",
+          "literal": "偽O0",
+          "semanticBox": [
+            120,
+            226,
+            316,
+            258
+          ],
+          "actualInkBox": [
+            192,
+            231,
+            243,
+            253
+          ],
+          "kind": "body",
+          "fontBaseline": 250,
+          "fontAnchor": "ls",
+          "role": "teacher",
+          "className": "1_1",
+          "day": "1",
+          "periods": [
+            1,
+            2
+          ],
+          "parallel": false
+        },
+        {
+          "id": "cell-1-1-room",
+          "literal": "舎01",
+          "semanticBox": [
+            120,
+            258,
+            316,
+            290
+          ],
+          "actualInkBox": [
+            195,
+            263,
+            240,
+            285
+          ],
+          "kind": "body",
+          "fontBaseline": 282,
+          "fontAnchor": "ls",
+          "role": "room",
+          "className": "1_1",
+          "day": "1",
+          "periods": [
+            1,
+            2
+          ],
+          "parallel": false
+        }
+      ],
+      "imageID": "normal-page-1",
+      "regionID": 47,
+      "evaluationOnly": true,
+      "provenance": "all originally fictional V3; previously consumed DEVELOPMENT, no independent holdout claim",
+      "expectedTuples": [
+        {
+          "subject": "虚研01",
+          "teacher": "偽O0",
+          "room": "舎01"
+        }
+      ],
+      "tupleTruthProvenance": "original fictional fixture-manifest requiredSlots[].lessons full tuple objects/original array order; every merged slot agrees; no invented lesson/source ID, no inference from aligned dots",
+      "tupleTruthSlotReferences": [
+        {
+          "className": "1_1",
+          "day": "1",
+          "period": 1
+        },
+        {
+          "className": "1_1",
+          "day": "1",
+          "period": 2
+        }
+      ]
+    },
+    {
+      "id": "t000466d2ba598e3e",
+      "literalLines": [
+        "幻学03",
+        "詠Z2",
+        "舎71"
+      ],
+      "expectedOwnedRoleIDs": {
+        "year": [],
+        "term": [],
+        "title": [],
+        "class": [
+          "p1s328",
+          "p1s329"
+        ],
+        "day": [
+          "p1s11",
+          "p1s12",
+          "p1s13"
+        ],
+        "period": [
+          "p1s33"
+        ],
+        "note": [],
+        "subject": [
+          "p1s70",
+          "p1s71",
+          "p1s72",
+          "p1s73"
+        ],
+        "teacher": [
+          "p1s218",
+          "p1s219",
+          "p1s220"
+        ],
+        "room": [
+          "p1s333",
+          "p1s334",
+          "p1s335"
+        ]
+      },
+      "expectedParallelCount": 1,
+      "paint": [
+        {
+          "id": "cell-1-3-subject",
+          "literal": "幻学03",
+          "semanticBox": [
+            316,
+            194,
+            414,
+            226
+          ],
+          "actualInkBox": [
+            330,
+            199,
+            398,
+            221
+          ],
+          "kind": "body",
+          "fontBaseline": 218,
+          "fontAnchor": "ls",
+          "role": "subject",
+          "className": "1_1",
+          "day": "1",
+          "periods": [
+            3
+          ],
+          "parallel": false
+        },
+        {
+          "id": "cell-1-3-teacher",
+          "literal": "詠Z2",
+          "semanticBox": [
+            316,
+            226,
+            414,
+            258
+          ],
+          "actualInkBox": [
+            340,
+            231,
+            388,
+            253
+          ],
+          "kind": "body",
+          "fontBaseline": 250,
+          "fontAnchor": "ls",
+          "role": "teacher",
+          "className": "1_1",
+          "day": "1",
+          "periods": [
+            3
+          ],
+          "parallel": false
+        },
+        {
+          "id": "cell-1-3-room",
+          "literal": "舎71",
+          "semanticBox": [
+            316,
+            258,
+            414,
+            290
+          ],
+          "actualInkBox": [
+            342,
+            263,
+            387,
+            285
+          ],
+          "kind": "body",
+          "fontBaseline": 282,
+          "fontAnchor": "ls",
+          "role": "room",
+          "className": "1_1",
+          "day": "1",
+          "periods": [
+            3
+          ],
+          "parallel": false
+        }
+      ],
+      "imageID": "normal-page-1",
+      "regionID": 48,
+      "evaluationOnly": true,
+      "provenance": "all originally fictional V3; previously consumed DEVELOPMENT, no independent holdout claim",
+      "expectedTuples": [
+        {
+          "subject": "幻学03",
+          "teacher": "詠Z2",
+          "room": "舎71"
+        }
+      ],
+      "tupleTruthProvenance": "original fictional fixture-manifest requiredSlots[].lessons full tuple objects/original array order; every merged slot agrees; no invented lesson/source ID, no inference from aligned dots",
+      "tupleTruthSlotReferences": [
+        {
+          "className": "1_1",
+          "day": "1",
+          "period": 3
+        }
+      ]
+    },
+    {
+      "id": "td0c28684ec33746d",
+      "literalLines": [
+        "演1・題7",
+        "師1・師7",
+        "館0・館5"
+      ],
+      "expectedOwnedRoleIDs": {
+        "year": [],
+        "term": [],
+        "title": [],
+        "class": [
+          "p1s328",
+          "p1s329"
+        ],
+        "day": [
+          "p1s17",
+          "p1s18",
+          "p1s19"
+        ],
+        "period": [
+          "p1s47"
+        ],
+        "note": [],
+        "subject": [
+          "p1s126",
+          "p1s127",
+          "p1s128",
+          "p1s129",
+          "p1s130"
+        ],
+        "teacher": [
+          "p1s260",
+          "p1s261",
+          "p1s262",
+          "p1s263",
+          "p1s264"
+        ],
+        "room": [
+          "p1s375",
+          "p1s376",
+          "p1s377",
+          "p1s378",
+          "p1s379"
+        ]
+      },
+      "expectedParallelCount": 2,
+      "paint": [
+        {
+          "id": "cell-3-3-subject",
+          "literal": "演1・題7",
+          "semanticBox": [
+            1884,
+            194,
+            1982,
+            226
+          ],
+          "actualInkBox": [
+            1886,
+            199,
+            1977,
+            221
+          ],
+          "kind": "body",
+          "fontBaseline": 218,
+          "fontAnchor": "ls",
+          "role": "subject",
+          "className": "1_1",
+          "day": "3",
+          "periods": [
+            3
+          ],
+          "parallel": true
+        },
+        {
+          "id": "cell-3-3-teacher",
+          "literal": "師1・師7",
+          "semanticBox": [
+            1884,
+            226,
+            1982,
+            258
+          ],
+          "actualInkBox": [
+            1889,
+            231,
+            1976,
+            253
+          ],
+          "kind": "body",
+          "fontBaseline": 250,
+          "fontAnchor": "ls",
+          "role": "teacher",
+          "className": "1_1",
+          "day": "3",
+          "periods": [
+            3
+          ],
+          "parallel": true
+        },
+        {
+          "id": "cell-3-3-room",
+          "literal": "館0・館5",
+          "semanticBox": [
+            1884,
+            258,
+            1982,
+            290
+          ],
+          "actualInkBox": [
+            1887,
+            263,
+            1978,
+            285
+          ],
+          "kind": "body",
+          "fontBaseline": 282,
+          "fontAnchor": "ls",
+          "role": "room",
+          "className": "1_1",
+          "day": "3",
+          "periods": [
+            3
+          ],
+          "parallel": true
+        }
+      ],
+      "imageID": "normal-page-1",
+      "regionID": 62,
+      "evaluationOnly": true,
+      "provenance": "all originally fictional V3; previously consumed DEVELOPMENT, no independent holdout claim",
+      "expectedTuples": [
+        {
+          "subject": "演1",
+          "teacher": "師1",
+          "room": "館0"
+        },
+        {
+          "subject": "題7",
+          "teacher": "師7",
+          "room": "館5"
+        }
+      ],
+      "tupleTruthProvenance": "original fictional fixture-manifest requiredSlots[].lessons full tuple objects/original array order; every merged slot agrees; no invented lesson/source ID, no inference from aligned dots",
+      "tupleTruthSlotReferences": [
+        {
+          "className": "1_1",
+          "day": "3",
+          "period": 3
+        }
+      ]
+    },
+    {
+      "id": "tab477632a6790f57",
+      "literalLines": [],
+      "expectedOwnedRoleIDs": {
+        "year": [],
+        "term": [],
+        "title": [],
+        "class": [
+          "p1s328",
+          "p1s329"
+        ],
+        "day": [
+          "p1s11",
+          "p1s12",
+          "p1s13"
+        ],
+        "period": [
+          "p1s36"
+        ],
+        "note": [],
+        "subject": [],
+        "teacher": [],
+        "room": []
+      },
+      "expectedParallelCount": 0,
+      "paint": [],
+      "imageID": "normal-page-1",
+      "regionID": "blank",
+      "evaluationOnly": true,
+      "provenance": "all originally fictional V3; previously consumed DEVELOPMENT, no independent holdout claim",
+      "expectedTuples": null,
+      "tupleTruthProvenance": "UNASSESSED_NO_BOUND_ORIGINAL_ORACLE_TUPLE"
+    },
+    {
+      "id": "tad54893172742baa",
+      "literalLines": [
+        "1-1"
+      ],
+      "expectedOwnedRoleIDs": {
+        "year": [],
+        "term": [],
+        "title": [],
+        "class": [
+          "p1s11",
+          "p1s12",
+          "p1s13"
+        ],
+        "day": [],
+        "period": [],
+        "note": [],
+        "subject": [],
+        "teacher": [],
+        "room": []
+      },
+      "expectedParallelCount": 0,
+      "paint": [
+        {
+          "id": "class-1_1",
+          "literal": "1-1",
+          "semanticBox": [
+            120,
+            88,
+            708,
+            122
+          ],
+          "actualInkBox": [
+            400,
+            97,
+            428,
+            113
+          ],
+          "kind": "class",
+          "fontBaseline": 113,
+          "fontAnchor": "ls",
+          "className": "1_1"
+        }
+      ],
+      "imageID": "exam-page-1",
+      "regionID": 0,
+      "evaluationOnly": true,
+      "provenance": "all originally fictional V3; previously consumed DEVELOPMENT, no independent holdout claim",
+      "expectedTuples": null,
+      "tupleTruthProvenance": "UNASSESSED_NO_BOUND_ORIGINAL_ORACLE_TUPLE"
+    },
+    {
+      "id": "t67fad3fe29a93876",
+      "literalLines": [
+        "虚研01",
+        "模O0",
+        "庭01"
+      ],
+      "expectedOwnedRoleIDs": {
+        "year": [],
+        "term": [],
+        "title": [],
+        "class": [
+          "p1s11",
+          "p1s12",
+          "p1s13"
+        ],
+        "day": [
+          "p1s150",
+          "p1s151",
+          "p1s152",
+          "p1s153",
+          "p1s154"
+        ],
+        "period": [
+          "p1s23",
+          "p1s24"
+        ],
+        "note": [],
+        "subject": [
+          "p1s38",
+          "p1s39",
+          "p1s40",
+          "p1s41"
+        ],
+        "teacher": [
+          "p1s102",
+          "p1s103",
+          "p1s104"
+        ],
+        "room": [
+          "p1s155",
+          "p1s156",
+          "p1s157"
+        ]
+      },
+      "expectedParallelCount": 1,
+      "paint": [
+        {
+          "id": "cell-1_1-1-1-subject",
+          "literal": "虚研01",
+          "semanticBox": [
+            120,
+            194,
+            316,
+            226
+          ],
+          "actualInkBox": [
+            184,
+            199,
+            251,
+            221
+          ],
+          "kind": "body",
+          "fontBaseline": 218,
+          "fontAnchor": "ls",
+          "role": "subject",
+          "className": "1_1",
+          "day": "2035-10-01",
+          "periods": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "cell-1_1-1-1-teacher",
+          "literal": "模O0",
+          "semanticBox": [
+            120,
+            226,
+            316,
+            258
+          ],
+          "actualInkBox": [
+            192,
+            231,
+            243,
+            253
+          ],
+          "kind": "body",
+          "fontBaseline": 250,
+          "fontAnchor": "ls",
+          "role": "teacher",
+          "className": "1_1",
+          "day": "2035-10-01",
+          "periods": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "cell-1_1-1-1-room",
+          "literal": "庭01",
+          "semanticBox": [
+            120,
+            258,
+            316,
+            290
+          ],
+          "actualInkBox": [
+            195,
+            263,
+            240,
+            285
+          ],
+          "kind": "body",
+          "fontBaseline": 282,
+          "fontAnchor": "ls",
+          "role": "room",
+          "className": "1_1",
+          "day": "2035-10-01",
+          "periods": [
+            1,
+            2
+          ]
+        }
+      ],
+      "imageID": "exam-page-1",
+      "regionID": 21,
+      "evaluationOnly": true,
+      "provenance": "all originally fictional V3; previously consumed DEVELOPMENT, no independent holdout claim",
+      "expectedTuples": [
+        {
+          "subject": "虚研01",
+          "teacher": "模O0",
+          "room": "庭01"
+        }
+      ],
+      "tupleTruthProvenance": "original fictional fixture-manifest requiredSlots[].lessons full tuple objects/original array order; every merged slot agrees; no invented lesson/source ID, no inference from aligned dots",
+      "tupleTruthSlotReferences": [
+        {
+          "className": "1_1",
+          "day": "2035-10-01",
+          "period": 1
+        },
+        {
+          "className": "1_1",
+          "day": "2035-10-01",
+          "period": 2
+        }
+      ]
+    },
+    {
+      "id": "tafab1e9d46190a4d",
+      "literalLines": [
+        "1年AI_1"
+      ],
+      "expectedOwnedRoleIDs": {
+        "year": [],
+        "term": [],
+        "title": [],
+        "class": [
+          "p6s11",
+          "p6s12",
+          "p6s13",
+          "p6s14",
+          "p6s15",
+          "p6s16"
+        ],
+        "day": [],
+        "period": [],
+        "note": [],
+        "subject": [],
+        "teacher": [],
+        "room": []
+      },
+      "expectedParallelCount": 0,
+      "paint": [
+        {
+          "id": "class-AI_1",
+          "literal": "1年",
+          "semanticBox": [
+            120,
+            88,
+            320,
+            122
+          ],
+          "actualInkBox": [
+            204,
+            94,
+            236,
+            116
+          ],
+          "kind": "class",
+          "fontBaseline": 113,
+          "fontAnchor": "ls",
+          "className": "AI_1"
+        },
+        {
+          "id": "canonical-AI_1",
+          "literal": "AI_1",
+          "semanticBox": [
+            360,
+            88,
+            708,
+            122
+          ],
+          "actualInkBox": [
+            509,
+            97,
+            558,
+            115
+          ],
+          "kind": "class",
+          "fontBaseline": 113,
+          "fontAnchor": "ls",
+          "className": "AI_1"
+        }
+      ],
+      "imageID": "exam-page-6",
+      "regionID": 0,
+      "evaluationOnly": true,
+      "provenance": "all originally fictional V3; previously consumed DEVELOPMENT, no independent holdout claim",
+      "expectedTuples": null,
+      "tupleTruthProvenance": "UNASSESSED_NO_BOUND_ORIGINAL_ORACLE_TUPLE"
+    },
+    {
+      "id": "ta8e5321bf2145f08",
+      "literalLines": [
+        "10/1"
+      ],
+      "expectedOwnedRoleIDs": {
+        "year": [],
+        "term": [],
+        "title": [],
+        "class": [],
+        "day": [
+          "p1s13",
+          "p1s14",
+          "p1s15",
+          "p1s16"
+        ],
+        "period": [],
+        "note": [],
+        "subject": [],
+        "teacher": [],
+        "room": []
+      },
+      "expectedParallelCount": 0,
+      "paint": [
+        {
+          "id": "date-1",
+          "literal": "10/1",
+          "semanticBox": [
+            120,
+            88,
+            904,
+            122
+          ],
+          "actualInkBox": [
+            491,
+            96,
+            532,
+            117
+          ],
+          "kind": "day",
+          "fontBaseline": 113,
+          "fontAnchor": "ls",
+          "day": "2035-10-01"
+        }
+      ],
+      "imageID": "return-page-1",
+      "regionID": 0,
+      "evaluationOnly": true,
+      "provenance": "all originally fictional V3; previously consumed DEVELOPMENT, no independent holdout claim",
+      "expectedTuples": null,
+      "tupleTruthProvenance": "UNASSESSED_NO_BOUND_ORIGINAL_ORACLE_TUPLE"
+    },
+    {
+      "id": "tb92df51f3d0d45cc",
+      "literalLines": [
+        "仮読01",
+        "偽O0",
+        "庭01"
+      ],
+      "expectedOwnedRoleIDs": {
+        "year": [],
+        "term": [],
+        "title": [],
+        "class": [
+          "p1s339",
+          "p1s734"
+        ],
+        "day": [
+          "p1s13",
+          "p1s14",
+          "p1s15",
+          "p1s16"
+        ],
+        "period": [
+          "p1s38"
+        ],
+        "note": [],
+        "subject": [
+          "p1s73",
+          "p1s74",
+          "p1s75",
+          "p1s76"
+        ],
+        "teacher": [
+          "p1s225",
+          "p1s226",
+          "p1s227"
+        ],
+        "room": [
+          "p1s340",
+          "p1s341",
+          "p1s342"
+        ]
+      },
+      "expectedParallelCount": 1,
+      "paint": [
+        {
+          "id": "cell-1_1-1-1-subject",
+          "literal": "仮読01",
+          "semanticBox": [
+            120,
+            194,
+            218,
+            226
+          ],
+          "actualInkBox": [
+            135,
+            199,
+            202,
+            221
+          ],
+          "kind": "body",
+          "fontBaseline": 218,
+          "fontAnchor": "ls",
+          "role": "subject",
+          "className": "1_1",
+          "day": "2035-10-01",
+          "periods": [
+            1
+          ]
+        },
+        {
+          "id": "cell-1_1-1-1-teacher",
+          "literal": "偽O0",
+          "semanticBox": [
+            120,
+            226,
+            218,
+            258
+          ],
+          "actualInkBox": [
+            143,
+            231,
+            194,
+            253
+          ],
+          "kind": "body",
+          "fontBaseline": 250,
+          "fontAnchor": "ls",
+          "role": "teacher",
+          "className": "1_1",
+          "day": "2035-10-01",
+          "periods": [
+            1
+          ]
+        },
+        {
+          "id": "cell-1_1-1-1-room",
+          "literal": "庭01",
+          "semanticBox": [
+            120,
+            258,
+            218,
+            290
+          ],
+          "actualInkBox": [
+            146,
+            263,
+            191,
+            285
+          ],
+          "kind": "body",
+          "fontBaseline": 282,
+          "fontAnchor": "ls",
+          "role": "room",
+          "className": "1_1",
+          "day": "2035-10-01",
+          "periods": [
+            1
+          ]
+        }
+      ],
+      "imageID": "return-page-1",
+      "regionID": 47,
+      "evaluationOnly": true,
+      "provenance": "all originally fictional V3; previously consumed DEVELOPMENT, no independent holdout claim",
+      "expectedTuples": [
+        {
+          "subject": "仮読01",
+          "teacher": "偽O0",
+          "room": "庭01"
+        }
+      ],
+      "tupleTruthProvenance": "original fictional fixture-manifest requiredSlots[].lessons full tuple objects/original array order; every merged slot agrees; no invented lesson/source ID, no inference from aligned dots",
+      "tupleTruthSlotReferences": [
+        {
+          "className": "1_1",
+          "day": "2035-10-01",
+          "period": 1
+        }
+      ]
+    },
+    {
+      "id": "t08b61e2e3bc39ce0",
+      "literalLines": [
+        "幻学I1",
+        "模O0",
+        "舎01"
+      ],
+      "expectedOwnedRoleIDs": {
+        "year": [],
+        "term": [],
+        "title": [],
+        "class": [
+          "p1s339",
+          "p1s734"
+        ],
+        "day": [
+          "p1s17",
+          "p1s18",
+          "p1s19",
+          "p1s20"
+        ],
+        "period": [
+          "p1s45"
+        ],
+        "note": [],
+        "subject": [
+          "p1s105",
+          "p1s106",
+          "p1s107",
+          "p1s108"
+        ],
+        "teacher": [
+          "p1s249",
+          "p1s250",
+          "p1s251"
+        ],
+        "room": [
+          "p1s364",
+          "p1s365",
+          "p1s366"
+        ]
+      },
+      "expectedParallelCount": 1,
+      "paint": [
+        {
+          "id": "cell-1_1-2-1-subject",
+          "literal": "幻学I1",
+          "semanticBox": [
+            904,
+            194,
+            1002,
+            226
+          ],
+          "actualInkBox": [
+            921,
+            199,
+            984,
+            221
+          ],
+          "kind": "body",
+          "fontBaseline": 218,
+          "fontAnchor": "ls",
+          "role": "subject",
+          "className": "1_1",
+          "day": "2035-10-02",
+          "periods": [
+            1
+          ]
+        },
+        {
+          "id": "cell-1_1-2-1-teacher",
+          "literal": "模O0",
+          "semanticBox": [
+            904,
+            226,
+            1002,
+            258
+          ],
+          "actualInkBox": [
+            927,
+            231,
+            978,
+            253
+          ],
+          "kind": "body",
+          "fontBaseline": 250,
+          "fontAnchor": "ls",
+          "role": "teacher",
+          "className": "1_1",
+          "day": "2035-10-02",
+          "periods": [
+            1
+          ]
+        },
+        {
+          "id": "cell-1_1-2-1-room",
+          "literal": "舎01",
+          "semanticBox": [
+            904,
+            258,
+            1002,
+            290
+          ],
+          "actualInkBox": [
+            930,
+            263,
+            975,
+            285
+          ],
+          "kind": "body",
+          "fontBaseline": 282,
+          "fontAnchor": "ls",
+          "role": "room",
+          "className": "1_1",
+          "day": "2035-10-02",
+          "periods": [
+            1
+          ]
+        }
+      ],
+      "imageID": "return-page-1",
+      "regionID": 55,
+      "evaluationOnly": true,
+      "provenance": "all originally fictional V3; previously consumed DEVELOPMENT, no independent holdout claim",
+      "expectedTuples": [
+        {
+          "subject": "幻学I1",
+          "teacher": "模O0",
+          "room": "舎01"
+        }
+      ],
+      "tupleTruthProvenance": "original fictional fixture-manifest requiredSlots[].lessons full tuple objects/original array order; every merged slot agrees; no invented lesson/source ID, no inference from aligned dots",
+      "tupleTruthSlotReferences": [
+        {
+          "className": "1_1",
+          "day": "2035-10-02",
+          "period": 1
+        }
+      ]
+    },
+    {
+      "id": "t3f67e213450be38a",
+      "literalLines": [
+        "虚研09",
+        "模O0",
+        "舎01"
+      ],
+      "expectedOwnedRoleIDs": {
+        "year": [],
+        "term": [],
+        "title": [],
+        "class": [
+          "p1s328",
+          "p1s329"
+        ],
+        "day": [
+          "p1s14",
+          "p1s15",
+          "p1s16"
+        ],
+        "period": [
+          "p1s38"
+        ],
+        "note": [],
+        "subject": [
+          "p1s90",
+          "p1s91",
+          "p1s92",
+          "p1s93"
+        ],
+        "teacher": [
+          "p1s233",
+          "p1s234",
+          "p1s235"
+        ],
+        "room": [
+          "p1s348",
+          "p1s349",
+          "p1s350"
+        ]
+      },
+      "expectedParallelCount": 1,
+      "paint": [
+        {
+          "id": "cell-2-1-subject",
+          "literal": "虚研09",
+          "semanticBox": [
+            904,
+            194,
+            1002,
+            226
+          ],
+          "actualInkBox": [
+            918,
+            199,
+            987,
+            221
+          ],
+          "kind": "body",
+          "fontBaseline": 218,
+          "fontAnchor": "ls",
+          "role": "subject",
+          "className": "1_1",
+          "day": "2",
+          "periods": [
+            1
+          ],
+          "parallel": false
+        },
+        {
+          "id": "cell-2-1-teacher",
+          "literal": "模O0",
+          "semanticBox": [
+            904,
+            226,
+            1002,
+            258
+          ],
+          "actualInkBox": [
+            927,
+            231,
+            978,
+            253
+          ],
+          "kind": "body",
+          "fontBaseline": 250,
+          "fontAnchor": "ls",
+          "role": "teacher",
+          "className": "1_1",
+          "day": "2",
+          "periods": [
+            1
+          ],
+          "parallel": false
+        },
+        {
+          "id": "cell-2-1-room",
+          "literal": "舎01",
+          "semanticBox": [
+            904,
+            258,
+            1002,
+            290
+          ],
+          "actualInkBox": [
+            930,
+            263,
+            975,
+            285
+          ],
+          "kind": "body",
+          "fontBaseline": 282,
+          "fontAnchor": "ls",
+          "role": "room",
+          "className": "1_1",
+          "day": "2",
+          "periods": [
+            1
+          ],
+          "parallel": false
+        }
+      ],
+      "imageID": "normal-page-1",
+      "regionID": 53,
+      "evaluationOnly": true,
+      "provenance": "all originally fictional V3; previously consumed DEVELOPMENT, no independent holdout claim",
+      "expectedTuples": [
+        {
+          "subject": "虚研09",
+          "teacher": "模O0",
+          "room": "舎01"
+        }
+      ],
+      "tupleTruthProvenance": "original fictional fixture-manifest requiredSlots[].lessons full tuple objects/original array order; every merged slot agrees; no invented lesson/source ID, no inference from aligned dots",
+      "tupleTruthSlotReferences": [
+        {
+          "className": "1_1",
+          "day": "2",
+          "period": 1
+        }
+      ]
+    }
+  ]
+}

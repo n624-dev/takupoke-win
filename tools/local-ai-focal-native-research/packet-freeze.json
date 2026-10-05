@@ -1,0 +1,129 @@
+{
+  "format": "portable-fictional-focal-inference-packet-v1",
+  "status": "FROZEN_SOURCE_NOT_YET_NATIVE_EXECUTED",
+  "sourceBase": "d9525a09618b71f2bc3151e548521f02d70cda39",
+  "workflowSHA256": "a1b1a7a05d5003e4a3c878361db112fe98283f2d8035f9b2d5d0997704dc5102",
+  "pins": [
+    {
+      "path": "bootstrap_ci.py",
+      "bytes": 20855,
+      "sha256": "7f8f20b3031f606f76bd3cff75b554b36edc0e51c877f4b9bca7dbef39b9005b"
+    },
+    {
+      "path": "caller-plan.json",
+      "bytes": 2587,
+      "sha256": "853ce5815fbe353546e1baaa6fd46ff69ffb209d3071479b3245d5ba287b9432"
+    },
+    {
+      "path": "comparison-config.json",
+      "bytes": 48,
+      "sha256": "8660bd751f9042562270a1f399b66fc88a768c16bde8d3d2123494bd52cb5d3e"
+    },
+    {
+      "path": "comparison.py",
+      "bytes": 1600,
+      "sha256": "86a541f2f52b0edcb4297538432a8cafed3bfa3e2dccdad4782400d11c9d82d8"
+    },
+    {
+      "path": "guard.py",
+      "bytes": 12084,
+      "sha256": "84bdb2304960aa18010da8964212fae17df8fd79bb38b38c336598071502e9de"
+    },
+    {
+      "path": "inputs.json",
+      "bytes": 134462,
+      "sha256": "54866e2784434e266c21e5d5257728c3cb63f657a092fa14c8b9083aa24183b7"
+    },
+    {
+      "path": "legal.json",
+      "bytes": 2053,
+      "sha256": "1ea669d5fa1c8affab263ff1c503f89e99c19fb07a6ccf6ca6c51997b2bc40d2"
+    },
+    {
+      "path": "network_guard.py",
+      "bytes": 2171,
+      "sha256": "d07bde6a1fea19e11abd8b7b52a1c2f1ca3efb0a6500b5d71163397011e7f76a"
+    },
+    {
+      "path": "oracle-evaluation-only.json",
+      "bytes": 28642,
+      "sha256": "5e78a5cf80fffd72d5286d69547cbfb67d2ba96626e861b23887e83948e4ba18"
+    },
+    {
+      "path": "protocol.py",
+      "bytes": 8737,
+      "sha256": "e27ec1322faf2486e3d990ac088f01dfe84155f19285030702c062b36e21b408"
+    },
+    {
+      "path": "recipe.json",
+      "bytes": 2975,
+      "sha256": "ed4528cad640a704980f0253b1d277b935e25829f1fec5a5fa26d41f8be4d932"
+    },
+    {
+      "path": "reference/comparison.py",
+      "bytes": 5582,
+      "sha256": "4dde661659d0b719aeac69e02de0c0e10f6f7e34bf095b65f6e86aff06698d85"
+    },
+    {
+      "path": "reference/protocol.py",
+      "bytes": 8737,
+      "sha256": "e27ec1322faf2486e3d990ac088f01dfe84155f19285030702c062b36e21b408"
+    },
+    {
+      "path": "reference_contract.py",
+      "bytes": 3203,
+      "sha256": "1a53eb78d6b7bd576650243d39d2f56299edaea1f1571ffbbd2c2ee4582ce310"
+    },
+    {
+      "path": "request_contract.py",
+      "bytes": 20179,
+      "sha256": "641ff4e2a6449c04a38feba3c6ab3f2b7f83f6f8b84721597284134e0b0a5892"
+    },
+    {
+      "path": "run_once.py",
+      "bytes": 9164,
+      "sha256": "13ae35e38b32ca732204969da46e34c7eb0c163500a9dc0c3ada587355bb0787"
+    },
+    {
+      "path": "runtime-identity.json",
+      "bytes": 2716,
+      "sha256": "e8ccc225cc8dcb15675d7d94e8171efd891dc723ec0ba26df169223ef015b011"
+    },
+    {
+      "path": "score_outputs.py",
+      "bytes": 4754,
+      "sha256": "af5455869c7455b3ae1c36435b5596a5586a1c830fb03a929fe4b560b5baeb50"
+    },
+    {
+      "path": "test_adapter.py",
+      "bytes": 2869,
+      "sha256": "e22c28167a8052e7c8bea62ae061b2e0b709636941babe9b9d2fddc6da7e5b66"
+    },
+    {
+      "path": "worker.py",
+      "bytes": 5560,
+      "sha256": "e6f76de64a89d2317f35a4cb51c8b7f52b58aff793379143f6914fbfe12ab68c"
+    }
+  ],
+  "workerPinPaths": [
+    "caller-plan.json",
+    "comparison.py",
+    "guard.py",
+    "inputs.json",
+    "network_guard.py",
+    "protocol.py",
+    "recipe.json",
+    "reference/comparison.py",
+    "reference/protocol.py",
+    "reference_contract.py",
+    "request_contract.py",
+    "runtime-identity.json",
+    "worker.py"
+  ],
+  "maximumInferenceCalls": 16,
+  "sourceEligibleMaximumCalls": 8,
+  "newImageCalls": 0,
+  "newRecognizerCalls": 0,
+  "qualifiedGenAIModels": [],
+  "productionAdoption": false
+}

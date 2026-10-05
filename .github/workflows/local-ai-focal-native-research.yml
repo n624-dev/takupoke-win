@@ -1,0 +1,56 @@
+name: Fictional local AI focal request comparison
+on:
+  push:
+    branches: [research/windows-local-ai-focal-native-20261005]
+  workflow_dispatch:
+    inputs:
+      approved_packet_sha256:
+        description: Exact independently reviewed portable packet SHA256
+        required: true
+        type: string
+      approved_recipe_sha256:
+        description: Exact reviewed bounded recipe SHA256
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: fictional-local-ai-focal-native-research-${{ github.sha }}
+  cancel-in-progress: false
+jobs:
+  research:
+    name: ${{ matrix.condition }}
+    if: github.repository == 'n624-dev/takupoke-win' && github.ref == 'refs/heads/research/windows-local-ai-focal-native-20261005' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        condition: [gemma-focal]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /tools/local-ai-focal-native-research/
+            /.github/workflows/local-ai-focal-native-research.yml
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12.14'
+      - name: One bounded CPU-only synthetic comparison
+        env:
+          APPROVED_PACKET_SHA: ${{ inputs.approved_packet_sha256 }}
+          APPROVED_RECIPE_SHA: ${{ inputs.approved_recipe_sha256 }}
+          PYTHONDONTWRITEBYTECODE: '1'
+          COMPARISON_CONDITION: ${{ matrix.condition }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = push ]; then
+            python tools/local-ai-focal-native-research/bootstrap_ci.py --approved-research-push --condition "$COMPARISON_CONDITION"
+          else
+            python tools/local-ai-focal-native-research/bootstrap_ci.py --packet-sha "$APPROVED_PACKET_SHA" --recipe-sha "$APPROVED_RECIPE_SHA" --condition "$COMPARISON_CONDITION"
+          fi
+      - name: Always remove owned research scratch
+        if: always()
+        run: python tools/local-ai-focal-native-research/bootstrap_ci.py --cleanup-only
