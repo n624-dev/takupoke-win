@@ -1,0 +1,186 @@
+{
+  "status": "LOCAL_SOURCE_ONLY_VERIFIED_PORTABLE_PAYLOAD; NOT_CI_EXECUTION_OR_MODEL_QUALIFICATION",
+  "v1FreezeSHA256": "03038c88e6f4d01cbbdbcde0ede8ab885e2d76416f48891b45370c7572c82493",
+  "v2FreezeSHA256": "1fd33d240a7ea886acccbca966ef8d65264cc1a0ca3573ea9ebb52bbaa4f18ae",
+  "matching": "same12source/cropnames/IDs/text/coords/CTCconfidence/order/context;onlycropPathrelocated andhostBGRAPath removed",
+  "tasks": [
+    {
+      "taskID": "t61a6d5e0d6a0ecf9",
+      "cropSHA256": "072a5f50c396d535bb0984f86d0f15fce35199c831028c70b883c1a57631b8a1",
+      "originalRGBSHA256": "4dec21cbe1bcb8eb4f2694ffb642e9635cd5c52f8ae2eddc24e6ede2b7b935cd",
+      "nativeAtomOccurrences": 3,
+      "nativeAtomPayloadUnchanged": true,
+      "pathRelocationOnly": true
+    },
+    {
+      "taskID": "t9c209ba49ec09a6c",
+      "cropSHA256": "bf798a2fad9f013793bfb0275739bdf06489e57671018357d09c8abd7d8a60fd",
+      "originalRGBSHA256": "73727eabe3d061a4c7e07b1585b12e2122d339cfa799be2ac44c09228ad6cc98",
+      "nativeAtomOccurrences": 17,
+      "nativeAtomPayloadUnchanged": true,
+      "pathRelocationOnly": true
+    },
+    {
+      "taskID": "t000466d2ba598e3e",
+      "cropSHA256": "ee9cb921489d05cbc9fcff0aaf4126e4470870373cbf57bf96143e15ccef1d90",
+      "originalRGBSHA256": "36523542f40088781e90b211ada7f1f02435dbd678e2cc7d5e64582ab1a8daf1",
+      "nativeAtomOccurrences": 16,
+      "nativeAtomPayloadUnchanged": true,
+      "pathRelocationOnly": true
+    },
+    {
+      "taskID": "td0c28684ec33746d",
+      "cropSHA256": "758b3036efe287ef9554366e487a19cbbbf8d3d005f1623d589ab04280d973e5",
+      "originalRGBSHA256": "27934b66796ee064c88c4bae687b5b26f025e7d5f7699fc9ee75df293f519b90",
+      "nativeAtomOccurrences": 21,
+      "nativeAtomPayloadUnchanged": true,
+      "pathRelocationOnly": true
+    },
+    {
+      "taskID": "tab477632a6790f57",
+      "cropSHA256": "a2f19926fac3a3c855e603bb172c86e842ac43f4ad24f9a1c5a01ee99ecc1f5a",
+      "originalRGBSHA256": "a6061be87df495245c7c026f85b858c274d1abcec641dbc61dfebd75838e27ea",
+      "nativeAtomOccurrences": 6,
+      "nativeAtomPayloadUnchanged": true,
+      "pathRelocationOnly": true
+    },
+    {
+      "taskID": "tad54893172742baa",
+      "cropSHA256": "9c8e60a177711a8317604a9c904e082ee010e4ea089d300308a9e42d8a169acb",
+      "originalRGBSHA256": "238f9a89257377299a4c1ad4266933911c4791ce26c1260c39969efc18ab8d45",
+      "nativeAtomOccurrences": 3,
+      "nativeAtomPayloadUnchanged": true,
+      "pathRelocationOnly": true
+    },
+    {
+      "taskID": "t67fad3fe29a93876",
+      "cropSHA256": "c81f368226cf91cb69334e63d13c5fb9c1050237bdfea571ce5c425a15233f91",
+      "originalRGBSHA256": "5e463067b64554eacc575812591d46fdf946905159cd5efa86bdd2d389ade8ef",
+      "nativeAtomOccurrences": 20,
+      "nativeAtomPayloadUnchanged": true,
+      "pathRelocationOnly": true
+    },
+    {
+      "taskID": "tafab1e9d46190a4d",
+      "cropSHA256": "ab3bd861d4edfa5c43a1f45c8367abfe668ebb54d4d1c36d2377f69a936833cf",
+      "originalRGBSHA256": "0bfa4258ca026fc402addc0d8c1c26b953c9c8b61e7c7d6125e67c21870574c8",
+      "nativeAtomOccurrences": 6,
+      "nativeAtomPayloadUnchanged": true,
+      "pathRelocationOnly": true
+    },
+    {
+      "taskID": "ta8e5321bf2145f08",
+      "cropSHA256": "22820ead7fa9b9b82a286881157eb2c2dd470d4ec15c8b96d04c283c0f61be27",
+      "originalRGBSHA256": "dafb47537a9166758e8c187f3c82ebc98d2898ee8341b9956a6dbf7114073468",
+      "nativeAtomOccurrences": 4,
+      "nativeAtomPayloadUnchanged": true,
+      "pathRelocationOnly": true
+    },
+    {
+      "taskID": "tb92df51f3d0d45cc",
+      "cropSHA256": "98e72e56b07a10810bf7d4a9afcef76f610cab83ef6781790f669c223b43e954",
+      "originalRGBSHA256": "b48a1f6e405ab41029608bac230585fc69081c2d8674e6db9781ebfff6e620a1",
+      "nativeAtomOccurrences": 17,
+      "nativeAtomPayloadUnchanged": true,
+      "pathRelocationOnly": true
+    },
+    {
+      "taskID": "t08b61e2e3bc39ce0",
+      "cropSHA256": "46f60e1f58f61866f853d3e8c34476aa4b98eb9ec2e90e47ed3fb53b67bf039a",
+      "originalRGBSHA256": "d90b6ca7e542e5878d129d3141ae65f35b6bc929f71380b9f48341167cd52954",
+      "nativeAtomOccurrences": 17,
+      "nativeAtomPayloadUnchanged": true,
+      "pathRelocationOnly": true
+    },
+    {
+      "taskID": "t3f67e213450be38a",
+      "cropSHA256": "1eeaa8b209e08b70918a8f33b63e6ef999a2b93aee801d43010742b421e1fc36",
+      "originalRGBSHA256": "68b013b711d45bf135a0d1ac799b319239297cd754de2886eefd451100d5df84",
+      "nativeAtomOccurrences": 26,
+      "nativeAtomPayloadUnchanged": true,
+      "pathRelocationOnly": true
+    }
+  ],
+  "originalBGRAsLocalVerifiedNotPublished": true,
+  "oldHostPinPASSNotTransferredToCI": true,
+  "originalDataUsed": false,
+  "modelLoads": 0,
+  "inferenceCalls": 0,
+  "newRecognizerCalls": 0,
+  "sourceReplayRuns": 0,
+  "coreBindings": "UNASSESSED",
+  "all1270Slots70Clocks": "UNASSESSED",
+  "portablePayloadPins": [
+    {
+      "path": "inputs.json",
+      "bytes": 134462,
+      "sha256": "54866e2784434e266c21e5d5257728c3cb63f657a092fa14c8b9083aa24183b7"
+    },
+    {
+      "path": "oracle-evaluation-only.json",
+      "bytes": 28642,
+      "sha256": "5e78a5cf80fffd72d5286d69547cbfb67d2ba96626e861b23887e83948e4ba18"
+    },
+    {
+      "path": "crops/t000466d2ba598e3e.png",
+      "bytes": 3394,
+      "sha256": "ee9cb921489d05cbc9fcff0aaf4126e4470870373cbf57bf96143e15ccef1d90"
+    },
+    {
+      "path": "crops/t08b61e2e3bc39ce0.png",
+      "bytes": 3146,
+      "sha256": "46f60e1f58f61866f853d3e8c34476aa4b98eb9ec2e90e47ed3fb53b67bf039a"
+    },
+    {
+      "path": "crops/t3f67e213450be38a.png",
+      "bytes": 3275,
+      "sha256": "1eeaa8b209e08b70918a8f33b63e6ef999a2b93aee801d43010742b421e1fc36"
+    },
+    {
+      "path": "crops/t61a6d5e0d6a0ecf9.png",
+      "bytes": 1308,
+      "sha256": "072a5f50c396d535bb0984f86d0f15fce35199c831028c70b883c1a57631b8a1"
+    },
+    {
+      "path": "crops/t67fad3fe29a93876.png",
+      "bytes": 3518,
+      "sha256": "c81f368226cf91cb69334e63d13c5fb9c1050237bdfea571ce5c425a15233f91"
+    },
+    {
+      "path": "crops/t9c209ba49ec09a6c.png",
+      "bytes": 3437,
+      "sha256": "bf798a2fad9f013793bfb0275739bdf06489e57671018357d09c8abd7d8a60fd"
+    },
+    {
+      "path": "crops/ta8e5321bf2145f08.png",
+      "bytes": 972,
+      "sha256": "22820ead7fa9b9b82a286881157eb2c2dd470d4ec15c8b96d04c283c0f61be27"
+    },
+    {
+      "path": "crops/tab477632a6790f57.png",
+      "bytes": 262,
+      "sha256": "a2f19926fac3a3c855e603bb172c86e842ac43f4ad24f9a1c5a01ee99ecc1f5a"
+    },
+    {
+      "path": "crops/tad54893172742baa.png",
+      "bytes": 416,
+      "sha256": "9c8e60a177711a8317604a9c904e082ee010e4ea089d300308a9e42d8a169acb"
+    },
+    {
+      "path": "crops/tafab1e9d46190a4d.png",
+      "bytes": 1270,
+      "sha256": "ab3bd861d4edfa5c43a1f45c8367abfe668ebb54d4d1c36d2377f69a936833cf"
+    },
+    {
+      "path": "crops/tb92df51f3d0d45cc.png",
+      "bytes": 3465,
+      "sha256": "98e72e56b07a10810bf7d4a9afcef76f610cab83ef6781790f669c223b43e954"
+    },
+    {
+      "path": "crops/td0c28684ec33746d.png",
+      "bytes": 3329,
+      "sha256": "758b3036efe287ef9554366e487a19cbbbf8d3d005f1623d589ab04280d973e5"
+    }
+  ],
+  "portablePayloadSHA256": "9b4049ae81a67dfaa9094c2b48b6a5f25b5234e29cbdc9832aec4432ad0f1dcf"
+}

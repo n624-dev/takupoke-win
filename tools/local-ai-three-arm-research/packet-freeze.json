@@ -1,0 +1,176 @@
+{
+  "format": "portable-fictional-three-arm-inference-packet-v1",
+  "status": "SOURCE_PREPARATION_ONLY_NO_MODEL_EXECUTION",
+  "workflowSHA256": "6ebd0bea31a89aa8a91b2ee150c6907748bb8b22490ded7229cd55ea267999af",
+  "pathPolicy": "Relativepayloadpins; onlycropPath relocated; originalIDs/coords/confidence/order preserved. Newpacketidentity; no old111pinPASSclaim.",
+  "pins": [
+    {
+      "path": "bootstrap_ci.py",
+      "bytes": 10743,
+      "sha256": "eba17c1e0e24d65b6a7b6d4242c408f49cf10e457ddb57fcba507d89278da720"
+    },
+    {
+      "path": "crops/t000466d2ba598e3e.png",
+      "bytes": 3394,
+      "sha256": "ee9cb921489d05cbc9fcff0aaf4126e4470870373cbf57bf96143e15ccef1d90"
+    },
+    {
+      "path": "crops/t08b61e2e3bc39ce0.png",
+      "bytes": 3146,
+      "sha256": "46f60e1f58f61866f853d3e8c34476aa4b98eb9ec2e90e47ed3fb53b67bf039a"
+    },
+    {
+      "path": "crops/t3f67e213450be38a.png",
+      "bytes": 3275,
+      "sha256": "1eeaa8b209e08b70918a8f33b63e6ef999a2b93aee801d43010742b421e1fc36"
+    },
+    {
+      "path": "crops/t61a6d5e0d6a0ecf9.png",
+      "bytes": 1308,
+      "sha256": "072a5f50c396d535bb0984f86d0f15fce35199c831028c70b883c1a57631b8a1"
+    },
+    {
+      "path": "crops/t67fad3fe29a93876.png",
+      "bytes": 3518,
+      "sha256": "c81f368226cf91cb69334e63d13c5fb9c1050237bdfea571ce5c425a15233f91"
+    },
+    {
+      "path": "crops/t9c209ba49ec09a6c.png",
+      "bytes": 3437,
+      "sha256": "bf798a2fad9f013793bfb0275739bdf06489e57671018357d09c8abd7d8a60fd"
+    },
+    {
+      "path": "crops/ta8e5321bf2145f08.png",
+      "bytes": 972,
+      "sha256": "22820ead7fa9b9b82a286881157eb2c2dd470d4ec15c8b96d04c283c0f61be27"
+    },
+    {
+      "path": "crops/tab477632a6790f57.png",
+      "bytes": 262,
+      "sha256": "a2f19926fac3a3c855e603bb172c86e842ac43f4ad24f9a1c5a01ee99ecc1f5a"
+    },
+    {
+      "path": "crops/tad54893172742baa.png",
+      "bytes": 416,
+      "sha256": "9c8e60a177711a8317604a9c904e082ee010e4ea089d300308a9e42d8a169acb"
+    },
+    {
+      "path": "crops/tafab1e9d46190a4d.png",
+      "bytes": 1270,
+      "sha256": "ab3bd861d4edfa5c43a1f45c8367abfe668ebb54d4d1c36d2377f69a936833cf"
+    },
+    {
+      "path": "crops/tb92df51f3d0d45cc.png",
+      "bytes": 3465,
+      "sha256": "98e72e56b07a10810bf7d4a9afcef76f610cab83ef6781790f669c223b43e954"
+    },
+    {
+      "path": "crops/td0c28684ec33746d.png",
+      "bytes": 3329,
+      "sha256": "758b3036efe287ef9554366e487a19cbbbf8d3d005f1623d589ab04280d973e5"
+    },
+    {
+      "path": "guard.py",
+      "bytes": 7799,
+      "sha256": "9d90dcf8ca0d866391fcc08479fe9ecef1052109c1b0a2c462c69bcb39a1144c"
+    },
+    {
+      "path": "inputs.json",
+      "bytes": 134462,
+      "sha256": "54866e2784434e266c21e5d5257728c3cb63f657a092fa14c8b9083aa24183b7"
+    },
+    {
+      "path": "legal.json",
+      "bytes": 936,
+      "sha256": "408c85ebe246e8b231c60319915413584f309d0b64570202adaed52448cb72f3"
+    },
+    {
+      "path": "local-verified-provenance.json",
+      "bytes": 7204,
+      "sha256": "a96a8574c8bdeca28ce3ef46629f674f873efbdf215377f6f6eff5d828b29c55"
+    },
+    {
+      "path": "network_guard.py",
+      "bytes": 2171,
+      "sha256": "d07bde6a1fea19e11abd8b7b52a1c2f1ca3efb0a6500b5d71163397011e7f76a"
+    },
+    {
+      "path": "oracle-evaluation-only.json",
+      "bytes": 28642,
+      "sha256": "5e78a5cf80fffd72d5286d69547cbfb67d2ba96626e861b23887e83948e4ba18"
+    },
+    {
+      "path": "protocol.py",
+      "bytes": 7365,
+      "sha256": "5b9bab7893e154cbb0a08410fc2f7b36fa9c8303ee41179a7c081c005bb9522d"
+    },
+    {
+      "path": "recipe.json",
+      "bytes": 6563,
+      "sha256": "7736bcea403f914c382eff4d3b7143de2f87e64bc850c660721f5c4ed5822ef1"
+    },
+    {
+      "path": "run_once.py",
+      "bytes": 8405,
+      "sha256": "ae30d69d1b4d43ed721c3ff9f6c99c241a0bef0b1d8f81b53c286afcff92ede9"
+    },
+    {
+      "path": "runtime-identity.json",
+      "bytes": 2716,
+      "sha256": "e8ccc225cc8dcb15675d7d94e8171efd891dc723ec0ba26df169223ef015b011"
+    },
+    {
+      "path": "runtime-public-wheel-metadata.json",
+      "bytes": 679,
+      "sha256": "f57a7d22155f065c0ccccf9cfd799c2d5234e7eead5ede503149a94b16ac13ed"
+    },
+    {
+      "path": "score_outputs.py",
+      "bytes": 8165,
+      "sha256": "a372960beba29c090eb3829fc8d970925583e50802a3ce8581140a3175cad9c0"
+    },
+    {
+      "path": "test_portable.py",
+      "bytes": 12612,
+      "sha256": "737441d388f7a48a04359996f868c553f7410a07695ce034b9a6c416cb3242c4"
+    },
+    {
+      "path": "test_preparation.py",
+      "bytes": 20588,
+      "sha256": "b6f7c240f292641b73d40509c21254614fc9a71129b14f13affd41844366110e"
+    },
+    {
+      "path": "worker.py",
+      "bytes": 5810,
+      "sha256": "1f8db878a83b1368d88c296f5e7a487416242c95ed9ab412c1388d4a1f284a4b"
+    }
+  ],
+  "workerPinPaths": [
+    "crops/t000466d2ba598e3e.png",
+    "crops/t08b61e2e3bc39ce0.png",
+    "crops/t3f67e213450be38a.png",
+    "crops/t61a6d5e0d6a0ecf9.png",
+    "crops/t67fad3fe29a93876.png",
+    "crops/t9c209ba49ec09a6c.png",
+    "crops/ta8e5321bf2145f08.png",
+    "crops/tab477632a6790f57.png",
+    "crops/tad54893172742baa.png",
+    "crops/tafab1e9d46190a4d.png",
+    "crops/tb92df51f3d0d45cc.png",
+    "crops/td0c28684ec33746d.png",
+    "guard.py",
+    "inputs.json",
+    "network_guard.py",
+    "protocol.py",
+    "recipe.json",
+    "runtime-identity.json",
+    "worker.py"
+  ],
+  "modelAndRuntimeAssets": "Fetched/verified intoownedCI scratch AFTER exactmanualapproval; dynamicbinding exactruntimefileidentity andmodelSHA checked independently beforeEngine",
+  "maximumInferenceCalls": 36,
+  "modelLoadsMaximum": 1,
+  "newRecognizerCalls": 0,
+  "productionAdoption": false,
+  "wholeDocumentFormalSlotsUNASSESSED": 1270,
+  "wholeDocumentFormalClocksUNASSESSED": 70
+}

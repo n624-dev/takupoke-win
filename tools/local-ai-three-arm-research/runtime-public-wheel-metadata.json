@@ -1,0 +1,16 @@
+{
+  "sourceURL": "https://pypi.org/pypi/litert-lm-api/0.17.1/json",
+  "sourceResponseSHA256": "00364597779fafb10113d6d5a2e4d10787c4f94efaa41e3c551832ae4406e554",
+  "name": "litert-lm-api",
+  "version": "0.17.1",
+  "linuxX86Wheels": [
+    {
+      "filename": "litert_lm_api-0.17.1-py3-none-manylinux_2_27_x86_64.whl",
+      "url": "https://files.pythonhosted.org/packages/58/7f/255f85bc2a7db75fb30e66279acabab6508aa722aabe71e8a108d8761581/litert_lm_api-0.17.1-py3-none-manylinux_2_27_x86_64.whl",
+      "sha256": "4e52fa3a57bd54c399302d4237dd7d5b2235d92040922acc6e259f55b8732979",
+      "bytes": 47233934
+    }
+  ],
+  "modelDownloadsDuringPreparation": 0,
+  "inferenceCalls": 0
+}

@@ -1,0 +1,5656 @@
+{
+  "scope": "DEVELOPMENT_COMPONENTS_ONLY; ORIGINAL_FICTIONAL_RGB_AND_RETAINED_NATIVE_OCR; NEVER_TEACHER_HOLDOUT",
+  "tasks": [
+    {
+      "id": "t61a6d5e0d6a0ecf9",
+      "sources": [
+        {
+          "id": "p1s11",
+          "text": "月",
+          "box": [
+            490.94117647058823,
+            94,
+            3.6470588235293917,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 11,
+          "nativeConfidence": 0.9999968,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s12",
+          "text": "曜",
+          "box": [
+            512.8235294117648,
+            94,
+            3.6470588235293917,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 12,
+          "nativeConfidence": 0.9999498,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s13",
+          "text": "日",
+          "box": [
+            531.0588235294117,
+            94,
+            3.6470588235295054,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 13,
+          "nativeConfidence": 0.9999397,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 14,
+          "ctcEnd": 15,
+          "owner": "cell"
+        }
+      ],
+      "promptInput": {
+        "cellID": "t61a6d5e0d6a0ecf9",
+        "cellBox": [
+          120.5,
+          88.5,
+          904.5,
+          122.5
+        ],
+        "coordinateScope": "original pixels; CTC character intervals ESTIMATED, not ink boxes",
+        "sources": [
+          {
+            "id": "p1s11",
+            "text": "月",
+            "box": [
+              490.94117647058823,
+              94,
+              3.6470588235293917,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 11,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s12",
+            "text": "曜",
+            "box": [
+              512.8235294117648,
+              94,
+              3.6470588235293917,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 12,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s13",
+            "text": "日",
+            "box": [
+              531.0588235294117,
+              94,
+              3.6470588235295054,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 13,
+            "owner": "cell"
+          }
+        ],
+        "surroundingClosedBoxes": []
+      },
+      "cropPath": "crops/t61a6d5e0d6a0ecf9.png",
+      "cropSHA256": "072a5f50c396d535bb0984f86d0f15fce35199c831028c70b883c1a57631b8a1",
+      "originalRGBSHA256": "4dec21cbe1bcb8eb4f2694ffb642e9635cd5c52f8ae2eddc24e6ede2b7b935cd",
+      "cropBox": [
+        122,
+        90,
+        904,
+        122
+      ],
+      "originalBGRASHA256": "02003ce94dfbb3b081710570f887523e2e62aa7dfa24cfbf41ce140c37c738d3",
+      "acquisitionRows": [
+        {
+          "id": 3,
+          "rawText": "月曜日",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        }
+      ],
+      "originalChunkIDs": [
+        3
+      ],
+      "sourceProof": "NO_PRODUCTION_ROLE_OR_WHOLE_DOCUMENT_CERTIFICATE; CANDIDATE_ONLY",
+      "developmentConsumed": true
+    },
+    {
+      "id": "t9c209ba49ec09a6c",
+      "sources": [
+        {
+          "id": "p1s11",
+          "text": "月",
+          "box": [
+            490.94117647058823,
+            94,
+            3.6470588235293917,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 11,
+          "nativeConfidence": 0.9999968,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "context"
+        },
+        {
+          "id": "p1s12",
+          "text": "曜",
+          "box": [
+            512.8235294117648,
+            94,
+            3.6470588235293917,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 12,
+          "nativeConfidence": 0.9999498,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "context"
+        },
+        {
+          "id": "p1s13",
+          "text": "日",
+          "box": [
+            531.0588235294117,
+            94,
+            3.6470588235295054,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 13,
+          "nativeConfidence": 0.9999397,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 14,
+          "ctcEnd": 15,
+          "owner": "context"
+        },
+        {
+          "id": "p1s31",
+          "text": "1",
+          "box": [
+            166.66666666666666,
+            150,
+            2.6666666666666856,
+            16
+          ],
+          "sourceLine": 13,
+          "sourceOrder": 31,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 13,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s32",
+          "text": "2",
+          "box": [
+            266.3333333333333,
+            150,
+            2.6666666666666856,
+            16
+          ],
+          "sourceLine": 14,
+          "sourceOrder": 32,
+          "nativeConfidence": 0.9999869,
+          "fromOcr": true,
+          "chunkID": 14,
+          "ctcStart": 2,
+          "ctcEnd": 3,
+          "owner": "context"
+        },
+        {
+          "id": "p1s66",
+          "text": "虚",
+          "box": [
+            194.9387755102041,
+            199,
+            3.6462585034013557,
+            22
+          ],
+          "sourceLine": 48,
+          "sourceOrder": 66,
+          "nativeConfidence": 0.9948456,
+          "fromOcr": true,
+          "chunkID": 48,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s67",
+          "text": "研",
+          "box": [
+            216.81632653061223,
+            199,
+            3.646258503401384,
+            22
+          ],
+          "sourceLine": 48,
+          "sourceOrder": 67,
+          "nativeConfidence": 0.9991116,
+          "fromOcr": true,
+          "chunkID": 48,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s68",
+          "text": "0",
+          "box": [
+            235.04761904761904,
+            199,
+            3.646258503401384,
+            22
+          ],
+          "sourceLine": 48,
+          "sourceOrder": 68,
+          "nativeConfidence": 0.9998658,
+          "fromOcr": true,
+          "chunkID": 48,
+          "ctcStart": 14,
+          "ctcEnd": 15,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s69",
+          "text": "1",
+          "box": [
+            245.98639455782313,
+            199,
+            3.6462585034013557,
+            22
+          ],
+          "sourceLine": 48,
+          "sourceOrder": 69,
+          "nativeConfidence": 0.99990845,
+          "fromOcr": true,
+          "chunkID": 48,
+          "ctcStart": 17,
+          "ctcEnd": 18,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s215",
+          "text": "偽",
+          "box": [
+            202.92857142857142,
+            231,
+            3.642857142857167,
+            22
+          ],
+          "sourceLine": 85,
+          "sourceOrder": 215,
+          "nativeConfidence": 0.9996203,
+          "fromOcr": true,
+          "chunkID": 85,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s216",
+          "text": "O",
+          "box": [
+            221.14285714285714,
+            231,
+            3.642857142857139,
+            22
+          ],
+          "sourceLine": 85,
+          "sourceOrder": 216,
+          "nativeConfidence": 0.7588137,
+          "fromOcr": true,
+          "chunkID": 85,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s217",
+          "text": "0",
+          "box": [
+            235.71428571428572,
+            231,
+            3.642857142857139,
+            22
+          ],
+          "sourceLine": 85,
+          "sourceOrder": 217,
+          "nativeConfidence": 0.9983584,
+          "fromOcr": true,
+          "chunkID": 85,
+          "ctcStart": 12,
+          "ctcEnd": 13,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s328",
+          "text": "1",
+          "box": [
+            37.666666666666664,
+            234,
+            2.6666666666666714,
+            16
+          ],
+          "sourceLine": 122,
+          "sourceOrder": 328,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 122,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s329",
+          "text": "1",
+          "box": [
+            87.66666666666667,
+            234,
+            2.666666666666657,
+            16
+          ],
+          "sourceLine": 123,
+          "sourceOrder": 329,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 123,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s330",
+          "text": "舎",
+          "box": [
+            205.9090909090909,
+            263,
+            3.6363636363636545,
+            22
+          ],
+          "sourceLine": 124,
+          "sourceOrder": 330,
+          "nativeConfidence": 0.99699175,
+          "fromOcr": true,
+          "chunkID": 124,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s331",
+          "text": "0",
+          "box": [
+            224.0909090909091,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 124,
+          "sourceOrder": 331,
+          "nativeConfidence": 0.9999851,
+          "fromOcr": true,
+          "chunkID": 124,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s332",
+          "text": "1",
+          "box": [
+            235,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 124,
+          "sourceOrder": 332,
+          "nativeConfidence": 0.99994206,
+          "fromOcr": true,
+          "chunkID": 124,
+          "ctcStart": 11,
+          "ctcEnd": 12,
+          "owner": "cell"
+        }
+      ],
+      "promptInput": {
+        "cellID": "t9c209ba49ec09a6c",
+        "cellBox": [
+          120.5,
+          194.5,
+          316.5,
+          290
+        ],
+        "coordinateScope": "original pixels; CTC character intervals ESTIMATED, not ink boxes",
+        "sources": [
+          {
+            "id": "p1s11",
+            "text": "月",
+            "box": [
+              490.94117647058823,
+              94,
+              3.6470588235293917,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 11,
+            "owner": "context"
+          },
+          {
+            "id": "p1s12",
+            "text": "曜",
+            "box": [
+              512.8235294117648,
+              94,
+              3.6470588235293917,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 12,
+            "owner": "context"
+          },
+          {
+            "id": "p1s13",
+            "text": "日",
+            "box": [
+              531.0588235294117,
+              94,
+              3.6470588235295054,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 13,
+            "owner": "context"
+          },
+          {
+            "id": "p1s31",
+            "text": "1",
+            "box": [
+              166.66666666666666,
+              150,
+              2.6666666666666856,
+              16
+            ],
+            "sourceLine": 13,
+            "sourceOrder": 31,
+            "owner": "context"
+          },
+          {
+            "id": "p1s32",
+            "text": "2",
+            "box": [
+              266.3333333333333,
+              150,
+              2.6666666666666856,
+              16
+            ],
+            "sourceLine": 14,
+            "sourceOrder": 32,
+            "owner": "context"
+          },
+          {
+            "id": "p1s66",
+            "text": "虚",
+            "box": [
+              194.9387755102041,
+              199,
+              3.6462585034013557,
+              22
+            ],
+            "sourceLine": 48,
+            "sourceOrder": 66,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s67",
+            "text": "研",
+            "box": [
+              216.81632653061223,
+              199,
+              3.646258503401384,
+              22
+            ],
+            "sourceLine": 48,
+            "sourceOrder": 67,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s68",
+            "text": "0",
+            "box": [
+              235.04761904761904,
+              199,
+              3.646258503401384,
+              22
+            ],
+            "sourceLine": 48,
+            "sourceOrder": 68,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s69",
+            "text": "1",
+            "box": [
+              245.98639455782313,
+              199,
+              3.6462585034013557,
+              22
+            ],
+            "sourceLine": 48,
+            "sourceOrder": 69,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s215",
+            "text": "偽",
+            "box": [
+              202.92857142857142,
+              231,
+              3.642857142857167,
+              22
+            ],
+            "sourceLine": 85,
+            "sourceOrder": 215,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s216",
+            "text": "O",
+            "box": [
+              221.14285714285714,
+              231,
+              3.642857142857139,
+              22
+            ],
+            "sourceLine": 85,
+            "sourceOrder": 216,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s217",
+            "text": "0",
+            "box": [
+              235.71428571428572,
+              231,
+              3.642857142857139,
+              22
+            ],
+            "sourceLine": 85,
+            "sourceOrder": 217,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s328",
+            "text": "1",
+            "box": [
+              37.666666666666664,
+              234,
+              2.6666666666666714,
+              16
+            ],
+            "sourceLine": 122,
+            "sourceOrder": 328,
+            "owner": "context"
+          },
+          {
+            "id": "p1s329",
+            "text": "1",
+            "box": [
+              87.66666666666667,
+              234,
+              2.666666666666657,
+              16
+            ],
+            "sourceLine": 123,
+            "sourceOrder": 329,
+            "owner": "context"
+          },
+          {
+            "id": "p1s330",
+            "text": "舎",
+            "box": [
+              205.9090909090909,
+              263,
+              3.6363636363636545,
+              22
+            ],
+            "sourceLine": 124,
+            "sourceOrder": 330,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s331",
+            "text": "0",
+            "box": [
+              224.0909090909091,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 124,
+            "sourceOrder": 331,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s332",
+            "text": "1",
+            "box": [
+              235,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 124,
+            "sourceOrder": 332,
+            "owner": "cell"
+          }
+        ],
+        "surroundingClosedBoxes": [
+          [
+            120.5,
+            88.5,
+            904.5,
+            122.5
+          ],
+          [
+            120.5,
+            122.5,
+            218.5,
+            194.5
+          ],
+          [
+            218.5,
+            122.5,
+            316.5,
+            194.5
+          ],
+          [
+            20.5,
+            194.5,
+            60.5,
+            290
+          ],
+          [
+            60.5,
+            194.5,
+            120.5,
+            290
+          ]
+        ]
+      },
+      "cropPath": "crops/t9c209ba49ec09a6c.png",
+      "cropSHA256": "bf798a2fad9f013793bfb0275739bdf06489e57671018357d09c8abd7d8a60fd",
+      "originalRGBSHA256": "73727eabe3d061a4c7e07b1585b12e2122d339cfa799be2ac44c09228ad6cc98",
+      "cropBox": [
+        122,
+        196,
+        316,
+        290
+      ],
+      "originalBGRASHA256": "02003ce94dfbb3b081710570f887523e2e62aa7dfa24cfbf41ce140c37c738d3",
+      "acquisitionRows": [
+        {
+          "id": 48,
+          "rawText": "虚研01",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        },
+        {
+          "id": 85,
+          "rawText": "偽O0",
+          "currentSafetyFloorPassed": false,
+          "belowCurrentConfidenceFloor": true,
+          "assessed": true
+        },
+        {
+          "id": 124,
+          "rawText": "舎01",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        }
+      ],
+      "originalChunkIDs": [
+        48,
+        85,
+        124
+      ],
+      "sourceProof": "NO_PRODUCTION_ROLE_OR_WHOLE_DOCUMENT_CERTIFICATE; CANDIDATE_ONLY",
+      "developmentConsumed": true
+    },
+    {
+      "id": "t000466d2ba598e3e",
+      "sources": [
+        {
+          "id": "p1s11",
+          "text": "月",
+          "box": [
+            490.94117647058823,
+            94,
+            3.6470588235293917,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 11,
+          "nativeConfidence": 0.9999968,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "context"
+        },
+        {
+          "id": "p1s12",
+          "text": "曜",
+          "box": [
+            512.8235294117648,
+            94,
+            3.6470588235293917,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 12,
+          "nativeConfidence": 0.9999498,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "context"
+        },
+        {
+          "id": "p1s13",
+          "text": "日",
+          "box": [
+            531.0588235294117,
+            94,
+            3.6470588235295054,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 13,
+          "nativeConfidence": 0.9999397,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 14,
+          "ctcEnd": 15,
+          "owner": "context"
+        },
+        {
+          "id": "p1s33",
+          "text": "3",
+          "box": [
+            364.3333333333333,
+            150,
+            2.6666666666666856,
+            16
+          ],
+          "sourceLine": 15,
+          "sourceOrder": 33,
+          "nativeConfidence": 0.99996185,
+          "fromOcr": true,
+          "chunkID": 15,
+          "ctcStart": 2,
+          "ctcEnd": 3,
+          "owner": "context"
+        },
+        {
+          "id": "p1s70",
+          "text": "幻",
+          "box": [
+            340.9530201342282,
+            199,
+            3.651006711409366,
+            22
+          ],
+          "sourceLine": 49,
+          "sourceOrder": 70,
+          "nativeConfidence": 0.99982184,
+          "fromOcr": true,
+          "chunkID": 49,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s71",
+          "text": "学",
+          "box": [
+            362.8590604026846,
+            199,
+            3.651006711409366,
+            22
+          ],
+          "sourceLine": 49,
+          "sourceOrder": 71,
+          "nativeConfidence": 0.9999839,
+          "fromOcr": true,
+          "chunkID": 49,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s72",
+          "text": "0",
+          "box": [
+            377.46308724832215,
+            199,
+            3.6510067114094227,
+            22
+          ],
+          "sourceLine": 49,
+          "sourceOrder": 72,
+          "nativeConfidence": 0.99999046,
+          "fromOcr": true,
+          "chunkID": 49,
+          "ctcStart": 13,
+          "ctcEnd": 14,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s73",
+          "text": "3",
+          "box": [
+            392.06711409395973,
+            199,
+            3.6510067114094227,
+            22
+          ],
+          "sourceLine": 49,
+          "sourceOrder": 73,
+          "nativeConfidence": 0.999998,
+          "fromOcr": true,
+          "chunkID": 49,
+          "ctcStart": 17,
+          "ctcEnd": 18,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s218",
+          "text": "詠",
+          "box": [
+            350.9714285714286,
+            231,
+            3.657142857142844,
+            22
+          ],
+          "sourceLine": 86,
+          "sourceOrder": 218,
+          "nativeConfidence": 0.999566,
+          "fromOcr": true,
+          "chunkID": 86,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s219",
+          "text": "Z",
+          "box": [
+            369.25714285714287,
+            231,
+            3.657142857142844,
+            22
+          ],
+          "sourceLine": 86,
+          "sourceOrder": 219,
+          "nativeConfidence": 0.9990683,
+          "fromOcr": true,
+          "chunkID": 86,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s220",
+          "text": "2",
+          "box": [
+            380.2285714285714,
+            231,
+            3.657142857142901,
+            22
+          ],
+          "sourceLine": 86,
+          "sourceOrder": 220,
+          "nativeConfidence": 0.99999416,
+          "fromOcr": true,
+          "chunkID": 86,
+          "ctcStart": 11,
+          "ctcEnd": 12,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s328",
+          "text": "1",
+          "box": [
+            37.666666666666664,
+            234,
+            2.6666666666666714,
+            16
+          ],
+          "sourceLine": 122,
+          "sourceOrder": 328,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 122,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s329",
+          "text": "1",
+          "box": [
+            87.66666666666667,
+            234,
+            2.666666666666657,
+            16
+          ],
+          "sourceLine": 123,
+          "sourceOrder": 329,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 123,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s333",
+          "text": "舎",
+          "box": [
+            352.90909090909093,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 125,
+          "sourceOrder": 333,
+          "nativeConfidence": 0.989893,
+          "fromOcr": true,
+          "chunkID": 125,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s334",
+          "text": "7",
+          "box": [
+            371.0909090909091,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 125,
+          "sourceOrder": 334,
+          "nativeConfidence": 0.99999595,
+          "fromOcr": true,
+          "chunkID": 125,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s335",
+          "text": "1",
+          "box": [
+            382,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 125,
+          "sourceOrder": 335,
+          "nativeConfidence": 0.99998164,
+          "fromOcr": true,
+          "chunkID": 125,
+          "ctcStart": 11,
+          "ctcEnd": 12,
+          "owner": "cell"
+        }
+      ],
+      "promptInput": {
+        "cellID": "t000466d2ba598e3e",
+        "cellBox": [
+          316.5,
+          194.5,
+          414.5,
+          290
+        ],
+        "coordinateScope": "original pixels; CTC character intervals ESTIMATED, not ink boxes",
+        "sources": [
+          {
+            "id": "p1s11",
+            "text": "月",
+            "box": [
+              490.94117647058823,
+              94,
+              3.6470588235293917,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 11,
+            "owner": "context"
+          },
+          {
+            "id": "p1s12",
+            "text": "曜",
+            "box": [
+              512.8235294117648,
+              94,
+              3.6470588235293917,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 12,
+            "owner": "context"
+          },
+          {
+            "id": "p1s13",
+            "text": "日",
+            "box": [
+              531.0588235294117,
+              94,
+              3.6470588235295054,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 13,
+            "owner": "context"
+          },
+          {
+            "id": "p1s33",
+            "text": "3",
+            "box": [
+              364.3333333333333,
+              150,
+              2.6666666666666856,
+              16
+            ],
+            "sourceLine": 15,
+            "sourceOrder": 33,
+            "owner": "context"
+          },
+          {
+            "id": "p1s70",
+            "text": "幻",
+            "box": [
+              340.9530201342282,
+              199,
+              3.651006711409366,
+              22
+            ],
+            "sourceLine": 49,
+            "sourceOrder": 70,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s71",
+            "text": "学",
+            "box": [
+              362.8590604026846,
+              199,
+              3.651006711409366,
+              22
+            ],
+            "sourceLine": 49,
+            "sourceOrder": 71,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s72",
+            "text": "0",
+            "box": [
+              377.46308724832215,
+              199,
+              3.6510067114094227,
+              22
+            ],
+            "sourceLine": 49,
+            "sourceOrder": 72,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s73",
+            "text": "3",
+            "box": [
+              392.06711409395973,
+              199,
+              3.6510067114094227,
+              22
+            ],
+            "sourceLine": 49,
+            "sourceOrder": 73,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s218",
+            "text": "詠",
+            "box": [
+              350.9714285714286,
+              231,
+              3.657142857142844,
+              22
+            ],
+            "sourceLine": 86,
+            "sourceOrder": 218,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s219",
+            "text": "Z",
+            "box": [
+              369.25714285714287,
+              231,
+              3.657142857142844,
+              22
+            ],
+            "sourceLine": 86,
+            "sourceOrder": 219,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s220",
+            "text": "2",
+            "box": [
+              380.2285714285714,
+              231,
+              3.657142857142901,
+              22
+            ],
+            "sourceLine": 86,
+            "sourceOrder": 220,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s328",
+            "text": "1",
+            "box": [
+              37.666666666666664,
+              234,
+              2.6666666666666714,
+              16
+            ],
+            "sourceLine": 122,
+            "sourceOrder": 328,
+            "owner": "context"
+          },
+          {
+            "id": "p1s329",
+            "text": "1",
+            "box": [
+              87.66666666666667,
+              234,
+              2.666666666666657,
+              16
+            ],
+            "sourceLine": 123,
+            "sourceOrder": 329,
+            "owner": "context"
+          },
+          {
+            "id": "p1s333",
+            "text": "舎",
+            "box": [
+              352.90909090909093,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 125,
+            "sourceOrder": 333,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s334",
+            "text": "7",
+            "box": [
+              371.0909090909091,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 125,
+            "sourceOrder": 334,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s335",
+            "text": "1",
+            "box": [
+              382,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 125,
+            "sourceOrder": 335,
+            "owner": "cell"
+          }
+        ],
+        "surroundingClosedBoxes": [
+          [
+            120.5,
+            88.5,
+            904.5,
+            122.5
+          ],
+          [
+            316.5,
+            122.5,
+            414.5,
+            194.5
+          ],
+          [
+            20.5,
+            194.5,
+            60.5,
+            290
+          ],
+          [
+            60.5,
+            194.5,
+            120.5,
+            290
+          ]
+        ]
+      },
+      "cropPath": "crops/t000466d2ba598e3e.png",
+      "cropSHA256": "ee9cb921489d05cbc9fcff0aaf4126e4470870373cbf57bf96143e15ccef1d90",
+      "originalRGBSHA256": "36523542f40088781e90b211ada7f1f02435dbd678e2cc7d5e64582ab1a8daf1",
+      "cropBox": [
+        318,
+        196,
+        414,
+        290
+      ],
+      "originalBGRASHA256": "02003ce94dfbb3b081710570f887523e2e62aa7dfa24cfbf41ce140c37c738d3",
+      "acquisitionRows": [
+        {
+          "id": 49,
+          "rawText": "幻学03",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        },
+        {
+          "id": 86,
+          "rawText": "詠Z2",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        },
+        {
+          "id": 125,
+          "rawText": "舎71",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        }
+      ],
+      "originalChunkIDs": [
+        49,
+        86,
+        125
+      ],
+      "sourceProof": "NO_PRODUCTION_ROLE_OR_WHOLE_DOCUMENT_CERTIFICATE; CANDIDATE_ONLY",
+      "developmentConsumed": true
+    },
+    {
+      "id": "td0c28684ec33746d",
+      "sources": [
+        {
+          "id": "p1s17",
+          "text": "水",
+          "box": [
+            2057.9565217391305,
+            94,
+            3.652173913043498,
+            22
+          ],
+          "sourceLine": 5,
+          "sourceOrder": 17,
+          "nativeConfidence": 0.9998074,
+          "fromOcr": true,
+          "chunkID": 5,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "context"
+        },
+        {
+          "id": "p1s18",
+          "text": "曜",
+          "box": [
+            2079.8695652173915,
+            94,
+            3.652173913043498,
+            22
+          ],
+          "sourceLine": 5,
+          "sourceOrder": 18,
+          "nativeConfidence": 0.9999126,
+          "fromOcr": true,
+          "chunkID": 5,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "context"
+        },
+        {
+          "id": "p1s19",
+          "text": "日",
+          "box": [
+            2101.782608695652,
+            94,
+            3.652173913043498,
+            22
+          ],
+          "sourceLine": 5,
+          "sourceOrder": 19,
+          "nativeConfidence": 0.99976414,
+          "fromOcr": true,
+          "chunkID": 5,
+          "ctcStart": 15,
+          "ctcEnd": 16,
+          "owner": "context"
+        },
+        {
+          "id": "p1s47",
+          "text": "3",
+          "box": [
+            1932.3333333333333,
+            150,
+            2.6666666666667425,
+            16
+          ],
+          "sourceLine": 29,
+          "sourceOrder": 47,
+          "nativeConfidence": 0.99996185,
+          "fromOcr": true,
+          "chunkID": 29,
+          "ctcStart": 2,
+          "ctcEnd": 3,
+          "owner": "context"
+        },
+        {
+          "id": "p1s126",
+          "text": "演",
+          "box": [
+            1896.9748743718592,
+            199,
+            3.658291457286623,
+            22
+          ],
+          "sourceLine": 63,
+          "sourceOrder": 126,
+          "nativeConfidence": 0.9993912,
+          "fromOcr": true,
+          "chunkID": 63,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s127",
+          "text": "1",
+          "box": [
+            1915.2663316582914,
+            199,
+            3.6582914572863956,
+            22
+          ],
+          "sourceLine": 63,
+          "sourceOrder": 127,
+          "nativeConfidence": 0.9999814,
+          "fromOcr": true,
+          "chunkID": 63,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s128",
+          "text": "·",
+          "box": [
+            1929.8994974874372,
+            199,
+            3.6582914572863956,
+            22
+          ],
+          "sourceLine": 63,
+          "sourceOrder": 128,
+          "nativeConfidence": 0.9817054,
+          "fromOcr": true,
+          "chunkID": 63,
+          "ctcStart": 12,
+          "ctcEnd": 13,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s129",
+          "text": "題",
+          "box": [
+            1955.5075376884422,
+            199,
+            3.6582914572863956,
+            22
+          ],
+          "sourceLine": 63,
+          "sourceOrder": 129,
+          "nativeConfidence": 0.98746127,
+          "fromOcr": true,
+          "chunkID": 63,
+          "ctcStart": 19,
+          "ctcEnd": 20,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s130",
+          "text": "7",
+          "box": [
+            1970.140703517588,
+            199,
+            3.6582914572863956,
+            22
+          ],
+          "sourceLine": 63,
+          "sourceOrder": 130,
+          "nativeConfidence": 0.99999905,
+          "fromOcr": true,
+          "chunkID": 63,
+          "ctcStart": 23,
+          "ctcEnd": 24,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s260",
+          "text": "師",
+          "box": [
+            1899.9894736842105,
+            231,
+            3.663157894736969,
+            22
+          ],
+          "sourceLine": 100,
+          "sourceOrder": 260,
+          "nativeConfidence": 0.9998654,
+          "fromOcr": true,
+          "chunkID": 100,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s261",
+          "text": "1",
+          "box": [
+            1914.6421052631579,
+            231,
+            3.663157894736969,
+            22
+          ],
+          "sourceLine": 100,
+          "sourceOrder": 261,
+          "nativeConfidence": 0.9996952,
+          "fromOcr": true,
+          "chunkID": 100,
+          "ctcStart": 7,
+          "ctcEnd": 8,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s262",
+          "text": "·",
+          "box": [
+            1929.2947368421053,
+            231,
+            3.6631578947367416,
+            22
+          ],
+          "sourceLine": 100,
+          "sourceOrder": 262,
+          "nativeConfidence": 0.9925263,
+          "fromOcr": true,
+          "chunkID": 100,
+          "ctcStart": 11,
+          "ctcEnd": 12,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s263",
+          "text": "師",
+          "box": [
+            1954.9368421052632,
+            231,
+            3.6631578947367416,
+            22
+          ],
+          "sourceLine": 100,
+          "sourceOrder": 263,
+          "nativeConfidence": 0.9998394,
+          "fromOcr": true,
+          "chunkID": 100,
+          "ctcStart": 18,
+          "ctcEnd": 19,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s264",
+          "text": "7",
+          "box": [
+            1969.5894736842106,
+            231,
+            3.6631578947367416,
+            22
+          ],
+          "sourceLine": 100,
+          "sourceOrder": 264,
+          "nativeConfidence": 0.9999945,
+          "fromOcr": true,
+          "chunkID": 100,
+          "ctcStart": 22,
+          "ctcEnd": 23,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s328",
+          "text": "1",
+          "box": [
+            37.666666666666664,
+            234,
+            2.6666666666666714,
+            16
+          ],
+          "sourceLine": 122,
+          "sourceOrder": 328,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 122,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s329",
+          "text": "1",
+          "box": [
+            87.66666666666667,
+            234,
+            2.666666666666657,
+            16
+          ],
+          "sourceLine": 123,
+          "sourceOrder": 329,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 123,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s375",
+          "text": "館",
+          "box": [
+            1897.9748743718592,
+            263,
+            3.658291457286623,
+            22
+          ],
+          "sourceLine": 139,
+          "sourceOrder": 375,
+          "nativeConfidence": 0.9998832,
+          "fromOcr": true,
+          "chunkID": 139,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s376",
+          "text": "0",
+          "box": [
+            1912.608040201005,
+            263,
+            3.6582914572863956,
+            22
+          ],
+          "sourceLine": 139,
+          "sourceOrder": 376,
+          "nativeConfidence": 0.998133,
+          "fromOcr": true,
+          "chunkID": 139,
+          "ctcStart": 7,
+          "ctcEnd": 8,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s377",
+          "text": "·",
+          "box": [
+            1930.8994974874372,
+            263,
+            3.6582914572863956,
+            22
+          ],
+          "sourceLine": 139,
+          "sourceOrder": 377,
+          "nativeConfidence": 0.85436225,
+          "fromOcr": true,
+          "chunkID": 139,
+          "ctcStart": 12,
+          "ctcEnd": 13,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s378",
+          "text": "館",
+          "box": [
+            1956.5075376884422,
+            263,
+            3.6582914572863956,
+            22
+          ],
+          "sourceLine": 139,
+          "sourceOrder": 378,
+          "nativeConfidence": 0.9998012,
+          "fromOcr": true,
+          "chunkID": 139,
+          "ctcStart": 19,
+          "ctcEnd": 20,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s379",
+          "text": "5",
+          "box": [
+            1971.140703517588,
+            263,
+            3.6582914572863956,
+            22
+          ],
+          "sourceLine": 139,
+          "sourceOrder": 379,
+          "nativeConfidence": 0.999998,
+          "fromOcr": true,
+          "chunkID": 139,
+          "ctcStart": 23,
+          "ctcEnd": 24,
+          "owner": "cell"
+        }
+      ],
+      "promptInput": {
+        "cellID": "td0c28684ec33746d",
+        "cellBox": [
+          1884.5,
+          194.5,
+          1982.5,
+          290
+        ],
+        "coordinateScope": "original pixels; CTC character intervals ESTIMATED, not ink boxes",
+        "sources": [
+          {
+            "id": "p1s17",
+            "text": "水",
+            "box": [
+              2057.9565217391305,
+              94,
+              3.652173913043498,
+              22
+            ],
+            "sourceLine": 5,
+            "sourceOrder": 17,
+            "owner": "context"
+          },
+          {
+            "id": "p1s18",
+            "text": "曜",
+            "box": [
+              2079.8695652173915,
+              94,
+              3.652173913043498,
+              22
+            ],
+            "sourceLine": 5,
+            "sourceOrder": 18,
+            "owner": "context"
+          },
+          {
+            "id": "p1s19",
+            "text": "日",
+            "box": [
+              2101.782608695652,
+              94,
+              3.652173913043498,
+              22
+            ],
+            "sourceLine": 5,
+            "sourceOrder": 19,
+            "owner": "context"
+          },
+          {
+            "id": "p1s47",
+            "text": "3",
+            "box": [
+              1932.3333333333333,
+              150,
+              2.6666666666667425,
+              16
+            ],
+            "sourceLine": 29,
+            "sourceOrder": 47,
+            "owner": "context"
+          },
+          {
+            "id": "p1s126",
+            "text": "演",
+            "box": [
+              1896.9748743718592,
+              199,
+              3.658291457286623,
+              22
+            ],
+            "sourceLine": 63,
+            "sourceOrder": 126,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s127",
+            "text": "1",
+            "box": [
+              1915.2663316582914,
+              199,
+              3.6582914572863956,
+              22
+            ],
+            "sourceLine": 63,
+            "sourceOrder": 127,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s128",
+            "text": "·",
+            "box": [
+              1929.8994974874372,
+              199,
+              3.6582914572863956,
+              22
+            ],
+            "sourceLine": 63,
+            "sourceOrder": 128,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s129",
+            "text": "題",
+            "box": [
+              1955.5075376884422,
+              199,
+              3.6582914572863956,
+              22
+            ],
+            "sourceLine": 63,
+            "sourceOrder": 129,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s130",
+            "text": "7",
+            "box": [
+              1970.140703517588,
+              199,
+              3.6582914572863956,
+              22
+            ],
+            "sourceLine": 63,
+            "sourceOrder": 130,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s260",
+            "text": "師",
+            "box": [
+              1899.9894736842105,
+              231,
+              3.663157894736969,
+              22
+            ],
+            "sourceLine": 100,
+            "sourceOrder": 260,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s261",
+            "text": "1",
+            "box": [
+              1914.6421052631579,
+              231,
+              3.663157894736969,
+              22
+            ],
+            "sourceLine": 100,
+            "sourceOrder": 261,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s262",
+            "text": "·",
+            "box": [
+              1929.2947368421053,
+              231,
+              3.6631578947367416,
+              22
+            ],
+            "sourceLine": 100,
+            "sourceOrder": 262,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s263",
+            "text": "師",
+            "box": [
+              1954.9368421052632,
+              231,
+              3.6631578947367416,
+              22
+            ],
+            "sourceLine": 100,
+            "sourceOrder": 263,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s264",
+            "text": "7",
+            "box": [
+              1969.5894736842106,
+              231,
+              3.6631578947367416,
+              22
+            ],
+            "sourceLine": 100,
+            "sourceOrder": 264,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s328",
+            "text": "1",
+            "box": [
+              37.666666666666664,
+              234,
+              2.6666666666666714,
+              16
+            ],
+            "sourceLine": 122,
+            "sourceOrder": 328,
+            "owner": "context"
+          },
+          {
+            "id": "p1s329",
+            "text": "1",
+            "box": [
+              87.66666666666667,
+              234,
+              2.666666666666657,
+              16
+            ],
+            "sourceLine": 123,
+            "sourceOrder": 329,
+            "owner": "context"
+          },
+          {
+            "id": "p1s375",
+            "text": "館",
+            "box": [
+              1897.9748743718592,
+              263,
+              3.658291457286623,
+              22
+            ],
+            "sourceLine": 139,
+            "sourceOrder": 375,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s376",
+            "text": "0",
+            "box": [
+              1912.608040201005,
+              263,
+              3.6582914572863956,
+              22
+            ],
+            "sourceLine": 139,
+            "sourceOrder": 376,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s377",
+            "text": "·",
+            "box": [
+              1930.8994974874372,
+              263,
+              3.6582914572863956,
+              22
+            ],
+            "sourceLine": 139,
+            "sourceOrder": 377,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s378",
+            "text": "館",
+            "box": [
+              1956.5075376884422,
+              263,
+              3.6582914572863956,
+              22
+            ],
+            "sourceLine": 139,
+            "sourceOrder": 378,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s379",
+            "text": "5",
+            "box": [
+              1971.140703517588,
+              263,
+              3.6582914572863956,
+              22
+            ],
+            "sourceLine": 139,
+            "sourceOrder": 379,
+            "owner": "cell"
+          }
+        ],
+        "surroundingClosedBoxes": [
+          [
+            1688.5,
+            88.5,
+            2472.5,
+            122.5
+          ],
+          [
+            1884.5,
+            122.5,
+            1982.5,
+            194.5
+          ],
+          [
+            20.5,
+            194.5,
+            60.5,
+            290
+          ],
+          [
+            60.5,
+            194.5,
+            120.5,
+            290
+          ]
+        ]
+      },
+      "cropPath": "crops/td0c28684ec33746d.png",
+      "cropSHA256": "758b3036efe287ef9554366e487a19cbbbf8d3d005f1623d589ab04280d973e5",
+      "originalRGBSHA256": "27934b66796ee064c88c4bae687b5b26f025e7d5f7699fc9ee75df293f519b90",
+      "cropBox": [
+        1886,
+        196,
+        1982,
+        290
+      ],
+      "originalBGRASHA256": "02003ce94dfbb3b081710570f887523e2e62aa7dfa24cfbf41ce140c37c738d3",
+      "acquisitionRows": [
+        {
+          "id": 63,
+          "rawText": "演1·題7",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        },
+        {
+          "id": 100,
+          "rawText": "師1·師7",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        },
+        {
+          "id": 139,
+          "rawText": "館0·館5",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        }
+      ],
+      "originalChunkIDs": [
+        63,
+        100,
+        139
+      ],
+      "sourceProof": "NO_PRODUCTION_ROLE_OR_WHOLE_DOCUMENT_CERTIFICATE; CANDIDATE_ONLY",
+      "developmentConsumed": true
+    },
+    {
+      "id": "tab477632a6790f57",
+      "sources": [
+        {
+          "id": "p1s11",
+          "text": "月",
+          "box": [
+            490.94117647058823,
+            94,
+            3.6470588235293917,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 11,
+          "nativeConfidence": 0.9999968,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "context"
+        },
+        {
+          "id": "p1s12",
+          "text": "曜",
+          "box": [
+            512.8235294117648,
+            94,
+            3.6470588235293917,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 12,
+          "nativeConfidence": 0.9999498,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "context"
+        },
+        {
+          "id": "p1s13",
+          "text": "日",
+          "box": [
+            531.0588235294117,
+            94,
+            3.6470588235295054,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 13,
+          "nativeConfidence": 0.9999397,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 14,
+          "ctcEnd": 15,
+          "owner": "context"
+        },
+        {
+          "id": "p1s36",
+          "text": "7",
+          "box": [
+            756.3333333333334,
+            150,
+            2.6666666666666288,
+            16
+          ],
+          "sourceLine": 18,
+          "sourceOrder": 36,
+          "nativeConfidence": 0.99881303,
+          "fromOcr": true,
+          "chunkID": 18,
+          "ctcStart": 2,
+          "ctcEnd": 3,
+          "owner": "context"
+        },
+        {
+          "id": "p1s328",
+          "text": "1",
+          "box": [
+            37.666666666666664,
+            234,
+            2.6666666666666714,
+            16
+          ],
+          "sourceLine": 122,
+          "sourceOrder": 328,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 122,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s329",
+          "text": "1",
+          "box": [
+            87.66666666666667,
+            234,
+            2.666666666666657,
+            16
+          ],
+          "sourceLine": 123,
+          "sourceOrder": 329,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 123,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        }
+      ],
+      "promptInput": {
+        "cellID": "tab477632a6790f57",
+        "cellBox": [
+          708.5,
+          194.5,
+          806.5,
+          290
+        ],
+        "coordinateScope": "original pixels; CTC character intervals ESTIMATED, not ink boxes",
+        "sources": [
+          {
+            "id": "p1s11",
+            "text": "月",
+            "box": [
+              490.94117647058823,
+              94,
+              3.6470588235293917,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 11,
+            "owner": "context"
+          },
+          {
+            "id": "p1s12",
+            "text": "曜",
+            "box": [
+              512.8235294117648,
+              94,
+              3.6470588235293917,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 12,
+            "owner": "context"
+          },
+          {
+            "id": "p1s13",
+            "text": "日",
+            "box": [
+              531.0588235294117,
+              94,
+              3.6470588235295054,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 13,
+            "owner": "context"
+          },
+          {
+            "id": "p1s36",
+            "text": "7",
+            "box": [
+              756.3333333333334,
+              150,
+              2.6666666666666288,
+              16
+            ],
+            "sourceLine": 18,
+            "sourceOrder": 36,
+            "owner": "context"
+          },
+          {
+            "id": "p1s328",
+            "text": "1",
+            "box": [
+              37.666666666666664,
+              234,
+              2.6666666666666714,
+              16
+            ],
+            "sourceLine": 122,
+            "sourceOrder": 328,
+            "owner": "context"
+          },
+          {
+            "id": "p1s329",
+            "text": "1",
+            "box": [
+              87.66666666666667,
+              234,
+              2.666666666666657,
+              16
+            ],
+            "sourceLine": 123,
+            "sourceOrder": 329,
+            "owner": "context"
+          }
+        ],
+        "surroundingClosedBoxes": [
+          [
+            120.5,
+            88.5,
+            904.5,
+            122.5
+          ],
+          [
+            708.5,
+            122.5,
+            806.5,
+            194.5
+          ],
+          [
+            20.5,
+            194.5,
+            60.5,
+            290
+          ],
+          [
+            60.5,
+            194.5,
+            120.5,
+            290
+          ]
+        ]
+      },
+      "cropPath": "crops/tab477632a6790f57.png",
+      "cropSHA256": "a2f19926fac3a3c855e603bb172c86e842ac43f4ad24f9a1c5a01ee99ecc1f5a",
+      "originalRGBSHA256": "a6061be87df495245c7c026f85b858c274d1abcec641dbc61dfebd75838e27ea",
+      "cropBox": [
+        710,
+        196,
+        806,
+        290
+      ],
+      "originalBGRASHA256": "02003ce94dfbb3b081710570f887523e2e62aa7dfa24cfbf41ce140c37c738d3",
+      "acquisitionRows": [],
+      "originalChunkIDs": [],
+      "sourceProof": "NO_PRODUCTION_ROLE_OR_WHOLE_DOCUMENT_CERTIFICATE; CANDIDATE_ONLY",
+      "developmentConsumed": true
+    },
+    {
+      "id": "tad54893172742baa",
+      "sources": [
+        {
+          "id": "p1s11",
+          "text": "1",
+          "box": [
+            405.3333333333333,
+            97,
+            2.6666666666666856,
+            16
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 11,
+          "nativeConfidence": 0.99986124,
+          "fromOcr": true,
+          "chunkID": 324,
+          "ctcStart": 2,
+          "ctcEnd": 3,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s12",
+          "text": "-",
+          "box": [
+            413.3333333333333,
+            97,
+            2.6666666666666856,
+            16
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 12,
+          "nativeConfidence": 0.9996401,
+          "fromOcr": true,
+          "chunkID": 324,
+          "ctcStart": 5,
+          "ctcEnd": 6,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s13",
+          "text": "1",
+          "box": [
+            421.3333333333333,
+            97,
+            2.6666666666666856,
+            16
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 13,
+          "nativeConfidence": 0.99979824,
+          "fromOcr": true,
+          "chunkID": 324,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        }
+      ],
+      "promptInput": {
+        "cellID": "tad54893172742baa",
+        "cellBox": [
+          120.5,
+          88.5,
+          708.5,
+          122.5
+        ],
+        "coordinateScope": "original pixels; CTC character intervals ESTIMATED, not ink boxes",
+        "sources": [
+          {
+            "id": "p1s11",
+            "text": "1",
+            "box": [
+              405.3333333333333,
+              97,
+              2.6666666666666856,
+              16
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 11,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s12",
+            "text": "-",
+            "box": [
+              413.3333333333333,
+              97,
+              2.6666666666666856,
+              16
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 12,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s13",
+            "text": "1",
+            "box": [
+              421.3333333333333,
+              97,
+              2.6666666666666856,
+              16
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 13,
+            "owner": "cell"
+          }
+        ],
+        "surroundingClosedBoxes": []
+      },
+      "cropPath": "crops/tad54893172742baa.png",
+      "cropSHA256": "9c8e60a177711a8317604a9c904e082ee010e4ea089d300308a9e42d8a169acb",
+      "originalRGBSHA256": "238f9a89257377299a4c1ad4266933911c4791ce26c1260c39969efc18ab8d45",
+      "cropBox": [
+        122,
+        90,
+        708,
+        122
+      ],
+      "originalBGRASHA256": "1ffcb79c79c27103845425de3461cb271a776effcfc13df83f7ef90f10d37b9e",
+      "acquisitionRows": [
+        {
+          "id": 324,
+          "rawText": "1-1",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        }
+      ],
+      "originalChunkIDs": [
+        324
+      ],
+      "sourceProof": "NO_PRODUCTION_ROLE_OR_WHOLE_DOCUMENT_CERTIFICATE; CANDIDATE_ONLY",
+      "developmentConsumed": true
+    },
+    {
+      "id": "t67fad3fe29a93876",
+      "sources": [
+        {
+          "id": "p1s11",
+          "text": "1",
+          "box": [
+            405.3333333333333,
+            97,
+            2.6666666666666856,
+            16
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 11,
+          "nativeConfidence": 0.99986124,
+          "fromOcr": true,
+          "chunkID": 324,
+          "ctcStart": 2,
+          "ctcEnd": 3,
+          "owner": "context"
+        },
+        {
+          "id": "p1s12",
+          "text": "-",
+          "box": [
+            413.3333333333333,
+            97,
+            2.6666666666666856,
+            16
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 12,
+          "nativeConfidence": 0.9996401,
+          "fromOcr": true,
+          "chunkID": 324,
+          "ctcStart": 5,
+          "ctcEnd": 6,
+          "owner": "context"
+        },
+        {
+          "id": "p1s13",
+          "text": "1",
+          "box": [
+            421.3333333333333,
+            97,
+            2.6666666666666856,
+            16
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 13,
+          "nativeConfidence": 0.99979824,
+          "fromOcr": true,
+          "chunkID": 324,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "context"
+        },
+        {
+          "id": "p1s23",
+          "text": "1",
+          "box": [
+            169.4,
+            150,
+            2.6999999999999886,
+            16
+          ],
+          "sourceLine": 8,
+          "sourceOrder": 23,
+          "nativeConfidence": 0.99791044,
+          "fromOcr": true,
+          "chunkID": 330,
+          "ctcStart": 2,
+          "ctcEnd": 3,
+          "owner": "context"
+        },
+        {
+          "id": "p1s24",
+          "text": "2",
+          "box": [
+            266.6,
+            150,
+            2.6999999999999886,
+            16
+          ],
+          "sourceLine": 8,
+          "sourceOrder": 24,
+          "nativeConfidence": 0.999587,
+          "fromOcr": true,
+          "chunkID": 330,
+          "ctcStart": 38,
+          "ctcEnd": 39,
+          "owner": "context"
+        },
+        {
+          "id": "p1s38",
+          "text": "虚",
+          "box": [
+            194.9387755102041,
+            199,
+            3.6462585034013557,
+            22
+          ],
+          "sourceLine": 22,
+          "sourceOrder": 38,
+          "nativeConfidence": 0.9948456,
+          "fromOcr": true,
+          "chunkID": 344,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s39",
+          "text": "研",
+          "box": [
+            216.81632653061223,
+            199,
+            3.646258503401384,
+            22
+          ],
+          "sourceLine": 22,
+          "sourceOrder": 39,
+          "nativeConfidence": 0.9991116,
+          "fromOcr": true,
+          "chunkID": 344,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s40",
+          "text": "0",
+          "box": [
+            235.04761904761904,
+            199,
+            3.646258503401384,
+            22
+          ],
+          "sourceLine": 22,
+          "sourceOrder": 40,
+          "nativeConfidence": 0.9998658,
+          "fromOcr": true,
+          "chunkID": 344,
+          "ctcStart": 14,
+          "ctcEnd": 15,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s41",
+          "text": "1",
+          "box": [
+            245.98639455782313,
+            199,
+            3.6462585034013557,
+            22
+          ],
+          "sourceLine": 22,
+          "sourceOrder": 41,
+          "nativeConfidence": 0.99990845,
+          "fromOcr": true,
+          "chunkID": 344,
+          "ctcStart": 17,
+          "ctcEnd": 18,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s102",
+          "text": "模",
+          "box": [
+            202.92857142857142,
+            231,
+            3.642857142857167,
+            22
+          ],
+          "sourceLine": 38,
+          "sourceOrder": 102,
+          "nativeConfidence": 0.9999409,
+          "fromOcr": true,
+          "chunkID": 360,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s103",
+          "text": "O",
+          "box": [
+            221.14285714285714,
+            231,
+            3.642857142857139,
+            22
+          ],
+          "sourceLine": 38,
+          "sourceOrder": 103,
+          "nativeConfidence": 0.90269524,
+          "fromOcr": true,
+          "chunkID": 360,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s104",
+          "text": "0",
+          "box": [
+            235.71428571428572,
+            231,
+            3.642857142857139,
+            22
+          ],
+          "sourceLine": 38,
+          "sourceOrder": 104,
+          "nativeConfidence": 0.9974712,
+          "fromOcr": true,
+          "chunkID": 360,
+          "ctcStart": 12,
+          "ctcEnd": 13,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s150",
+          "text": "1",
+          "box": [
+            34.48837209302326,
+            232,
+            3.4883720930232514,
+            21
+          ],
+          "sourceLine": 54,
+          "sourceOrder": 150,
+          "nativeConfidence": 0.99999833,
+          "fromOcr": true,
+          "chunkID": 376,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s151",
+          "text": "0",
+          "box": [
+            44.95348837209302,
+            232,
+            3.4883720930232585,
+            21
+          ],
+          "sourceLine": 54,
+          "sourceOrder": 151,
+          "nativeConfidence": 0.99999905,
+          "fromOcr": true,
+          "chunkID": 376,
+          "ctcStart": 4,
+          "ctcEnd": 5,
+          "owner": "context"
+        },
+        {
+          "id": "p1s152",
+          "text": "月",
+          "box": [
+            62.395348837209305,
+            232,
+            3.4883720930232514,
+            21
+          ],
+          "sourceLine": 54,
+          "sourceOrder": 152,
+          "nativeConfidence": 0.99999416,
+          "fromOcr": true,
+          "chunkID": 376,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "context"
+        },
+        {
+          "id": "p1s153",
+          "text": "1",
+          "box": [
+            79.83720930232559,
+            232,
+            3.4883720930232585,
+            21
+          ],
+          "sourceLine": 54,
+          "sourceOrder": 153,
+          "nativeConfidence": 0.999998,
+          "fromOcr": true,
+          "chunkID": 376,
+          "ctcStart": 14,
+          "ctcEnd": 15,
+          "owner": "context"
+        },
+        {
+          "id": "p1s154",
+          "text": "日",
+          "box": [
+            97.27906976744187,
+            232,
+            3.4883720930232442,
+            21
+          ],
+          "sourceLine": 54,
+          "sourceOrder": 154,
+          "nativeConfidence": 0.9999907,
+          "fromOcr": true,
+          "chunkID": 376,
+          "ctcStart": 19,
+          "ctcEnd": 20,
+          "owner": "context"
+        },
+        {
+          "id": "p1s155",
+          "text": "庭",
+          "box": [
+            205.9090909090909,
+            263,
+            3.6363636363636545,
+            22
+          ],
+          "sourceLine": 55,
+          "sourceOrder": 155,
+          "nativeConfidence": 0.9999951,
+          "fromOcr": true,
+          "chunkID": 377,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s156",
+          "text": "0",
+          "box": [
+            224.0909090909091,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 55,
+          "sourceOrder": 156,
+          "nativeConfidence": 0.9999931,
+          "fromOcr": true,
+          "chunkID": 377,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s157",
+          "text": "1",
+          "box": [
+            235,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 55,
+          "sourceOrder": 157,
+          "nativeConfidence": 0.9999652,
+          "fromOcr": true,
+          "chunkID": 377,
+          "ctcStart": 11,
+          "ctcEnd": 12,
+          "owner": "cell"
+        }
+      ],
+      "promptInput": {
+        "cellID": "t67fad3fe29a93876",
+        "cellBox": [
+          120.5,
+          194.5,
+          316.5,
+          290.5
+        ],
+        "coordinateScope": "original pixels; CTC character intervals ESTIMATED, not ink boxes",
+        "sources": [
+          {
+            "id": "p1s11",
+            "text": "1",
+            "box": [
+              405.3333333333333,
+              97,
+              2.6666666666666856,
+              16
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 11,
+            "owner": "context"
+          },
+          {
+            "id": "p1s12",
+            "text": "-",
+            "box": [
+              413.3333333333333,
+              97,
+              2.6666666666666856,
+              16
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 12,
+            "owner": "context"
+          },
+          {
+            "id": "p1s13",
+            "text": "1",
+            "box": [
+              421.3333333333333,
+              97,
+              2.6666666666666856,
+              16
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 13,
+            "owner": "context"
+          },
+          {
+            "id": "p1s23",
+            "text": "1",
+            "box": [
+              169.4,
+              150,
+              2.6999999999999886,
+              16
+            ],
+            "sourceLine": 8,
+            "sourceOrder": 23,
+            "owner": "context"
+          },
+          {
+            "id": "p1s24",
+            "text": "2",
+            "box": [
+              266.6,
+              150,
+              2.6999999999999886,
+              16
+            ],
+            "sourceLine": 8,
+            "sourceOrder": 24,
+            "owner": "context"
+          },
+          {
+            "id": "p1s38",
+            "text": "虚",
+            "box": [
+              194.9387755102041,
+              199,
+              3.6462585034013557,
+              22
+            ],
+            "sourceLine": 22,
+            "sourceOrder": 38,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s39",
+            "text": "研",
+            "box": [
+              216.81632653061223,
+              199,
+              3.646258503401384,
+              22
+            ],
+            "sourceLine": 22,
+            "sourceOrder": 39,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s40",
+            "text": "0",
+            "box": [
+              235.04761904761904,
+              199,
+              3.646258503401384,
+              22
+            ],
+            "sourceLine": 22,
+            "sourceOrder": 40,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s41",
+            "text": "1",
+            "box": [
+              245.98639455782313,
+              199,
+              3.6462585034013557,
+              22
+            ],
+            "sourceLine": 22,
+            "sourceOrder": 41,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s102",
+            "text": "模",
+            "box": [
+              202.92857142857142,
+              231,
+              3.642857142857167,
+              22
+            ],
+            "sourceLine": 38,
+            "sourceOrder": 102,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s103",
+            "text": "O",
+            "box": [
+              221.14285714285714,
+              231,
+              3.642857142857139,
+              22
+            ],
+            "sourceLine": 38,
+            "sourceOrder": 103,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s104",
+            "text": "0",
+            "box": [
+              235.71428571428572,
+              231,
+              3.642857142857139,
+              22
+            ],
+            "sourceLine": 38,
+            "sourceOrder": 104,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s150",
+            "text": "1",
+            "box": [
+              34.48837209302326,
+              232,
+              3.4883720930232514,
+              21
+            ],
+            "sourceLine": 54,
+            "sourceOrder": 150,
+            "owner": "context"
+          },
+          {
+            "id": "p1s151",
+            "text": "0",
+            "box": [
+              44.95348837209302,
+              232,
+              3.4883720930232585,
+              21
+            ],
+            "sourceLine": 54,
+            "sourceOrder": 151,
+            "owner": "context"
+          },
+          {
+            "id": "p1s152",
+            "text": "月",
+            "box": [
+              62.395348837209305,
+              232,
+              3.4883720930232514,
+              21
+            ],
+            "sourceLine": 54,
+            "sourceOrder": 152,
+            "owner": "context"
+          },
+          {
+            "id": "p1s153",
+            "text": "1",
+            "box": [
+              79.83720930232559,
+              232,
+              3.4883720930232585,
+              21
+            ],
+            "sourceLine": 54,
+            "sourceOrder": 153,
+            "owner": "context"
+          },
+          {
+            "id": "p1s154",
+            "text": "日",
+            "box": [
+              97.27906976744187,
+              232,
+              3.4883720930232442,
+              21
+            ],
+            "sourceLine": 54,
+            "sourceOrder": 154,
+            "owner": "context"
+          },
+          {
+            "id": "p1s155",
+            "text": "庭",
+            "box": [
+              205.9090909090909,
+              263,
+              3.6363636363636545,
+              22
+            ],
+            "sourceLine": 55,
+            "sourceOrder": 155,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s156",
+            "text": "0",
+            "box": [
+              224.0909090909091,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 55,
+            "sourceOrder": 156,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s157",
+            "text": "1",
+            "box": [
+              235,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 55,
+            "sourceOrder": 157,
+            "owner": "cell"
+          }
+        ],
+        "surroundingClosedBoxes": [
+          [
+            120.5,
+            88.5,
+            708.5,
+            122.5
+          ],
+          [
+            120.5,
+            122.5,
+            316.5,
+            194.5
+          ],
+          [
+            20.5,
+            194.5,
+            120.5,
+            290.5
+          ]
+        ]
+      },
+      "cropPath": "crops/t67fad3fe29a93876.png",
+      "cropSHA256": "c81f368226cf91cb69334e63d13c5fb9c1050237bdfea571ce5c425a15233f91",
+      "originalRGBSHA256": "5e463067b64554eacc575812591d46fdf946905159cd5efa86bdd2d389ade8ef",
+      "cropBox": [
+        122,
+        196,
+        316,
+        290
+      ],
+      "originalBGRASHA256": "1ffcb79c79c27103845425de3461cb271a776effcfc13df83f7ef90f10d37b9e",
+      "acquisitionRows": [
+        {
+          "id": 344,
+          "rawText": "虚研01",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        },
+        {
+          "id": 360,
+          "rawText": "模O0",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        },
+        {
+          "id": 377,
+          "rawText": "庭01",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        }
+      ],
+      "originalChunkIDs": [
+        344,
+        360,
+        377
+      ],
+      "sourceProof": "NO_PRODUCTION_ROLE_OR_WHOLE_DOCUMENT_CERTIFICATE; CANDIDATE_ONLY",
+      "developmentConsumed": true
+    },
+    {
+      "id": "tafab1e9d46190a4d",
+      "sources": [
+        {
+          "id": "p6s11",
+          "text": "1",
+          "box": [
+            207.6875,
+            94,
+            3.6875,
+            22
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 11,
+          "nativeConfidence": 0.9996371,
+          "fromOcr": true,
+          "chunkID": 1770,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "cell"
+        },
+        {
+          "id": "p6s12",
+          "text": "年",
+          "box": [
+            222.4375,
+            94,
+            3.6875,
+            22
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 12,
+          "nativeConfidence": 0.9995352,
+          "fromOcr": true,
+          "chunkID": 1770,
+          "ctcStart": 5,
+          "ctcEnd": 6,
+          "owner": "cell"
+        },
+        {
+          "id": "p6s13",
+          "text": "A",
+          "box": [
+            517.4375,
+            94,
+            3.6875,
+            22
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 13,
+          "nativeConfidence": 0.9997125,
+          "fromOcr": true,
+          "chunkID": 1770,
+          "ctcStart": 85,
+          "ctcEnd": 86,
+          "owner": "cell"
+        },
+        {
+          "id": "p6s14",
+          "text": "I",
+          "box": [
+            528.5,
+            94,
+            3.6875,
+            22
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 14,
+          "nativeConfidence": 0.9961118,
+          "fromOcr": true,
+          "chunkID": 1770,
+          "ctcStart": 88,
+          "ctcEnd": 89,
+          "owner": "cell"
+        },
+        {
+          "id": "p6s15",
+          "text": "_",
+          "box": [
+            543.25,
+            94,
+            3.6875,
+            22
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 15,
+          "nativeConfidence": 0.7807973,
+          "fromOcr": true,
+          "chunkID": 1770,
+          "ctcStart": 92,
+          "ctcEnd": 93,
+          "owner": "cell"
+        },
+        {
+          "id": "p6s16",
+          "text": "1",
+          "box": [
+            550.625,
+            94,
+            3.6875,
+            22
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 16,
+          "nativeConfidence": 0.9995797,
+          "fromOcr": true,
+          "chunkID": 1770,
+          "ctcStart": 94,
+          "ctcEnd": 95,
+          "owner": "cell"
+        }
+      ],
+      "promptInput": {
+        "cellID": "tafab1e9d46190a4d",
+        "cellBox": [
+          120.5,
+          88.5,
+          708.5,
+          122.5
+        ],
+        "coordinateScope": "original pixels; CTC character intervals ESTIMATED, not ink boxes",
+        "sources": [
+          {
+            "id": "p6s11",
+            "text": "1",
+            "box": [
+              207.6875,
+              94,
+              3.6875,
+              22
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 11,
+            "owner": "cell"
+          },
+          {
+            "id": "p6s12",
+            "text": "年",
+            "box": [
+              222.4375,
+              94,
+              3.6875,
+              22
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 12,
+            "owner": "cell"
+          },
+          {
+            "id": "p6s13",
+            "text": "A",
+            "box": [
+              517.4375,
+              94,
+              3.6875,
+              22
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 13,
+            "owner": "cell"
+          },
+          {
+            "id": "p6s14",
+            "text": "I",
+            "box": [
+              528.5,
+              94,
+              3.6875,
+              22
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 14,
+            "owner": "cell"
+          },
+          {
+            "id": "p6s15",
+            "text": "_",
+            "box": [
+              543.25,
+              94,
+              3.6875,
+              22
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 15,
+            "owner": "cell"
+          },
+          {
+            "id": "p6s16",
+            "text": "1",
+            "box": [
+              550.625,
+              94,
+              3.6875,
+              22
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 16,
+            "owner": "cell"
+          }
+        ],
+        "surroundingClosedBoxes": []
+      },
+      "cropPath": "crops/tafab1e9d46190a4d.png",
+      "cropSHA256": "ab3bd861d4edfa5c43a1f45c8367abfe668ebb54d4d1c36d2377f69a936833cf",
+      "originalRGBSHA256": "0bfa4258ca026fc402addc0d8c1c26b953c9c8b61e7c7d6125e67c21870574c8",
+      "cropBox": [
+        122,
+        90,
+        708,
+        122
+      ],
+      "originalBGRASHA256": "1d40935b6b44b29f466a731e8e58ebeb884f40e836a23600ac5ab0d1802833e6",
+      "acquisitionRows": [
+        {
+          "id": 1770,
+          "rawText": "1年AI_1",
+          "currentSafetyFloorPassed": false,
+          "belowCurrentConfidenceFloor": true,
+          "assessed": true
+        }
+      ],
+      "originalChunkIDs": [
+        1770
+      ],
+      "sourceProof": "NO_PRODUCTION_ROLE_OR_WHOLE_DOCUMENT_CERTIFICATE; CANDIDATE_ONLY",
+      "developmentConsumed": true
+    },
+    {
+      "id": "ta8e5321bf2145f08",
+      "sources": [
+        {
+          "id": "p1s13",
+          "text": "1",
+          "box": [
+            494.48936170212767,
+            96,
+            3.489361702127667,
+            21
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 13,
+          "nativeConfidence": 0.9999969,
+          "fromOcr": true,
+          "chunkID": 1963,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s14",
+          "text": "0",
+          "box": [
+            504.9574468085106,
+            96,
+            3.489361702127667,
+            21
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 14,
+          "nativeConfidence": 0.99999535,
+          "fromOcr": true,
+          "chunkID": 1963,
+          "ctcStart": 4,
+          "ctcEnd": 5,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s15",
+          "text": "/",
+          "box": [
+            518.9148936170212,
+            96,
+            3.489361702127667,
+            21
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 15,
+          "nativeConfidence": 0.99997604,
+          "fromOcr": true,
+          "chunkID": 1963,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s16",
+          "text": "1",
+          "box": [
+            525.8936170212766,
+            96,
+            3.489361702127667,
+            21
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 16,
+          "nativeConfidence": 0.9997851,
+          "fromOcr": true,
+          "chunkID": 1963,
+          "ctcStart": 10,
+          "ctcEnd": 11,
+          "owner": "cell"
+        }
+      ],
+      "promptInput": {
+        "cellID": "ta8e5321bf2145f08",
+        "cellBox": [
+          120.5,
+          88.5,
+          904.5,
+          122.5
+        ],
+        "coordinateScope": "original pixels; CTC character intervals ESTIMATED, not ink boxes",
+        "sources": [
+          {
+            "id": "p1s13",
+            "text": "1",
+            "box": [
+              494.48936170212767,
+              96,
+              3.489361702127667,
+              21
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 13,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s14",
+            "text": "0",
+            "box": [
+              504.9574468085106,
+              96,
+              3.489361702127667,
+              21
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 14,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s15",
+            "text": "/",
+            "box": [
+              518.9148936170212,
+              96,
+              3.489361702127667,
+              21
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 15,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s16",
+            "text": "1",
+            "box": [
+              525.8936170212766,
+              96,
+              3.489361702127667,
+              21
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 16,
+            "owner": "cell"
+          }
+        ],
+        "surroundingClosedBoxes": []
+      },
+      "cropPath": "crops/ta8e5321bf2145f08.png",
+      "cropSHA256": "22820ead7fa9b9b82a286881157eb2c2dd470d4ec15c8b96d04c283c0f61be27",
+      "originalRGBSHA256": "dafb47537a9166758e8c187f3c82ebc98d2898ee8341b9956a6dbf7114073468",
+      "cropBox": [
+        122,
+        90,
+        904,
+        122
+      ],
+      "originalBGRASHA256": "2349eccf14405e7d97bfb8532be6238fd79fd0c50259a6ea99a859ba82956b9b",
+      "acquisitionRows": [
+        {
+          "id": 1963,
+          "rawText": "10/1",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        }
+      ],
+      "originalChunkIDs": [
+        1963
+      ],
+      "sourceProof": "NO_PRODUCTION_ROLE_OR_WHOLE_DOCUMENT_CERTIFICATE; CANDIDATE_ONLY",
+      "developmentConsumed": true
+    },
+    {
+      "id": "tb92df51f3d0d45cc",
+      "sources": [
+        {
+          "id": "p1s13",
+          "text": "1",
+          "box": [
+            494.48936170212767,
+            96,
+            3.489361702127667,
+            21
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 13,
+          "nativeConfidence": 0.9999969,
+          "fromOcr": true,
+          "chunkID": 1963,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s14",
+          "text": "0",
+          "box": [
+            504.9574468085106,
+            96,
+            3.489361702127667,
+            21
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 14,
+          "nativeConfidence": 0.99999535,
+          "fromOcr": true,
+          "chunkID": 1963,
+          "ctcStart": 4,
+          "ctcEnd": 5,
+          "owner": "context"
+        },
+        {
+          "id": "p1s15",
+          "text": "/",
+          "box": [
+            518.9148936170212,
+            96,
+            3.489361702127667,
+            21
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 15,
+          "nativeConfidence": 0.99997604,
+          "fromOcr": true,
+          "chunkID": 1963,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "context"
+        },
+        {
+          "id": "p1s16",
+          "text": "1",
+          "box": [
+            525.8936170212766,
+            96,
+            3.489361702127667,
+            21
+          ],
+          "sourceLine": 2,
+          "sourceOrder": 16,
+          "nativeConfidence": 0.9997851,
+          "fromOcr": true,
+          "chunkID": 1963,
+          "ctcStart": 10,
+          "ctcEnd": 11,
+          "owner": "context"
+        },
+        {
+          "id": "p1s38",
+          "text": "1",
+          "box": [
+            166.66666666666666,
+            150,
+            2.6666666666666856,
+            16
+          ],
+          "sourceLine": 12,
+          "sourceOrder": 38,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 1973,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s73",
+          "text": "仮",
+          "box": [
+            145.9387755102041,
+            199,
+            3.6462585034013557,
+            22
+          ],
+          "sourceLine": 47,
+          "sourceOrder": 73,
+          "nativeConfidence": 0.99825543,
+          "fromOcr": true,
+          "chunkID": 2008,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s74",
+          "text": "読",
+          "box": [
+            167.81632653061223,
+            199,
+            3.646258503401384,
+            22
+          ],
+          "sourceLine": 47,
+          "sourceOrder": 74,
+          "nativeConfidence": 0.99753016,
+          "fromOcr": true,
+          "chunkID": 2008,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s75",
+          "text": "0",
+          "box": [
+            186.04761904761904,
+            199,
+            3.646258503401384,
+            22
+          ],
+          "sourceLine": 47,
+          "sourceOrder": 75,
+          "nativeConfidence": 0.99996483,
+          "fromOcr": true,
+          "chunkID": 2008,
+          "ctcStart": 14,
+          "ctcEnd": 15,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s76",
+          "text": "1",
+          "box": [
+            196.98639455782313,
+            199,
+            3.6462585034013557,
+            22
+          ],
+          "sourceLine": 47,
+          "sourceOrder": 76,
+          "nativeConfidence": 0.9999777,
+          "fromOcr": true,
+          "chunkID": 2008,
+          "ctcStart": 17,
+          "ctcEnd": 18,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s225",
+          "text": "偽",
+          "box": [
+            153.92857142857142,
+            231,
+            3.642857142857167,
+            22
+          ],
+          "sourceLine": 85,
+          "sourceOrder": 225,
+          "nativeConfidence": 0.9996203,
+          "fromOcr": true,
+          "chunkID": 2046,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s226",
+          "text": "O",
+          "box": [
+            172.14285714285714,
+            231,
+            3.642857142857139,
+            22
+          ],
+          "sourceLine": 85,
+          "sourceOrder": 226,
+          "nativeConfidence": 0.7588137,
+          "fromOcr": true,
+          "chunkID": 2046,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s227",
+          "text": "0",
+          "box": [
+            186.71428571428572,
+            231,
+            3.642857142857139,
+            22
+          ],
+          "sourceLine": 85,
+          "sourceOrder": 227,
+          "nativeConfidence": 0.9983584,
+          "fromOcr": true,
+          "chunkID": 2046,
+          "ctcStart": 12,
+          "ctcEnd": 13,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s339",
+          "text": "1",
+          "box": [
+            92.66666666666667,
+            234,
+            2.666666666666657,
+            16
+          ],
+          "sourceLine": 123,
+          "sourceOrder": 339,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 2084,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s340",
+          "text": "庭",
+          "box": [
+            156.9090909090909,
+            263,
+            3.6363636363636545,
+            22
+          ],
+          "sourceLine": 124,
+          "sourceOrder": 340,
+          "nativeConfidence": 0.9999951,
+          "fromOcr": true,
+          "chunkID": 2085,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s341",
+          "text": "0",
+          "box": [
+            175.0909090909091,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 124,
+          "sourceOrder": 341,
+          "nativeConfidence": 0.9999931,
+          "fromOcr": true,
+          "chunkID": 2085,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s342",
+          "text": "1",
+          "box": [
+            186,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 124,
+          "sourceOrder": 342,
+          "nativeConfidence": 0.9999652,
+          "fromOcr": true,
+          "chunkID": 2085,
+          "ctcStart": 11,
+          "ctcEnd": 12,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s734",
+          "text": "1",
+          "box": [
+            42.666666666666664,
+            330,
+            2.6666666666666714,
+            16
+          ],
+          "sourceLine": 242,
+          "sourceOrder": 734,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 2203,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        }
+      ],
+      "promptInput": {
+        "cellID": "tb92df51f3d0d45cc",
+        "cellBox": [
+          120.5,
+          194.5,
+          218.5,
+          290.5
+        ],
+        "coordinateScope": "original pixels; CTC character intervals ESTIMATED, not ink boxes",
+        "sources": [
+          {
+            "id": "p1s13",
+            "text": "1",
+            "box": [
+              494.48936170212767,
+              96,
+              3.489361702127667,
+              21
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 13,
+            "owner": "context"
+          },
+          {
+            "id": "p1s14",
+            "text": "0",
+            "box": [
+              504.9574468085106,
+              96,
+              3.489361702127667,
+              21
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 14,
+            "owner": "context"
+          },
+          {
+            "id": "p1s15",
+            "text": "/",
+            "box": [
+              518.9148936170212,
+              96,
+              3.489361702127667,
+              21
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 15,
+            "owner": "context"
+          },
+          {
+            "id": "p1s16",
+            "text": "1",
+            "box": [
+              525.8936170212766,
+              96,
+              3.489361702127667,
+              21
+            ],
+            "sourceLine": 2,
+            "sourceOrder": 16,
+            "owner": "context"
+          },
+          {
+            "id": "p1s38",
+            "text": "1",
+            "box": [
+              166.66666666666666,
+              150,
+              2.6666666666666856,
+              16
+            ],
+            "sourceLine": 12,
+            "sourceOrder": 38,
+            "owner": "context"
+          },
+          {
+            "id": "p1s73",
+            "text": "仮",
+            "box": [
+              145.9387755102041,
+              199,
+              3.6462585034013557,
+              22
+            ],
+            "sourceLine": 47,
+            "sourceOrder": 73,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s74",
+            "text": "読",
+            "box": [
+              167.81632653061223,
+              199,
+              3.646258503401384,
+              22
+            ],
+            "sourceLine": 47,
+            "sourceOrder": 74,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s75",
+            "text": "0",
+            "box": [
+              186.04761904761904,
+              199,
+              3.646258503401384,
+              22
+            ],
+            "sourceLine": 47,
+            "sourceOrder": 75,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s76",
+            "text": "1",
+            "box": [
+              196.98639455782313,
+              199,
+              3.6462585034013557,
+              22
+            ],
+            "sourceLine": 47,
+            "sourceOrder": 76,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s225",
+            "text": "偽",
+            "box": [
+              153.92857142857142,
+              231,
+              3.642857142857167,
+              22
+            ],
+            "sourceLine": 85,
+            "sourceOrder": 225,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s226",
+            "text": "O",
+            "box": [
+              172.14285714285714,
+              231,
+              3.642857142857139,
+              22
+            ],
+            "sourceLine": 85,
+            "sourceOrder": 226,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s227",
+            "text": "0",
+            "box": [
+              186.71428571428572,
+              231,
+              3.642857142857139,
+              22
+            ],
+            "sourceLine": 85,
+            "sourceOrder": 227,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s339",
+            "text": "1",
+            "box": [
+              92.66666666666667,
+              234,
+              2.666666666666657,
+              16
+            ],
+            "sourceLine": 123,
+            "sourceOrder": 339,
+            "owner": "context"
+          },
+          {
+            "id": "p1s340",
+            "text": "庭",
+            "box": [
+              156.9090909090909,
+              263,
+              3.6363636363636545,
+              22
+            ],
+            "sourceLine": 124,
+            "sourceOrder": 340,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s341",
+            "text": "0",
+            "box": [
+              175.0909090909091,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 124,
+            "sourceOrder": 341,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s342",
+            "text": "1",
+            "box": [
+              186,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 124,
+            "sourceOrder": 342,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s734",
+            "text": "1",
+            "box": [
+              42.666666666666664,
+              330,
+              2.6666666666666714,
+              16
+            ],
+            "sourceLine": 242,
+            "sourceOrder": 734,
+            "owner": "context"
+          }
+        ],
+        "surroundingClosedBoxes": [
+          [
+            120.5,
+            88.5,
+            904.5,
+            122.5
+          ],
+          [
+            120.5,
+            122.5,
+            218.5,
+            194.5
+          ],
+          [
+            20.5,
+            194.5,
+            70.5,
+            482.5
+          ],
+          [
+            70.5,
+            194.5,
+            120.5,
+            290.5
+          ]
+        ]
+      },
+      "cropPath": "crops/tb92df51f3d0d45cc.png",
+      "cropSHA256": "98e72e56b07a10810bf7d4a9afcef76f610cab83ef6781790f669c223b43e954",
+      "originalRGBSHA256": "b48a1f6e405ab41029608bac230585fc69081c2d8674e6db9781ebfff6e620a1",
+      "cropBox": [
+        122,
+        196,
+        218,
+        290
+      ],
+      "originalBGRASHA256": "2349eccf14405e7d97bfb8532be6238fd79fd0c50259a6ea99a859ba82956b9b",
+      "acquisitionRows": [
+        {
+          "id": 2008,
+          "rawText": "仮読01",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        },
+        {
+          "id": 2046,
+          "rawText": "偽O0",
+          "currentSafetyFloorPassed": false,
+          "belowCurrentConfidenceFloor": true,
+          "assessed": true
+        },
+        {
+          "id": 2085,
+          "rawText": "庭01",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        }
+      ],
+      "originalChunkIDs": [
+        2008,
+        2046,
+        2085
+      ],
+      "sourceProof": "NO_PRODUCTION_ROLE_OR_WHOLE_DOCUMENT_CERTIFICATE; CANDIDATE_ONLY",
+      "developmentConsumed": true
+    },
+    {
+      "id": "t08b61e2e3bc39ce0",
+      "sources": [
+        {
+          "id": "p1s17",
+          "text": "1",
+          "box": [
+            1277.4747474747476,
+            96,
+            3.474747474747346,
+            21
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 17,
+          "nativeConfidence": 0.99999857,
+          "fromOcr": true,
+          "chunkID": 1964,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s18",
+          "text": "0",
+          "box": [
+            1287.8989898989898,
+            96,
+            3.4747474747475735,
+            21
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 18,
+          "nativeConfidence": 0.99999833,
+          "fromOcr": true,
+          "chunkID": 1964,
+          "ctcStart": 4,
+          "ctcEnd": 5,
+          "owner": "context"
+        },
+        {
+          "id": "p1s19",
+          "text": "/",
+          "box": [
+            1301.79797979798,
+            96,
+            3.474747474747346,
+            21
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 19,
+          "nativeConfidence": 0.9999844,
+          "fromOcr": true,
+          "chunkID": 1964,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "context"
+        },
+        {
+          "id": "p1s20",
+          "text": "2",
+          "box": [
+            1308.7474747474748,
+            96,
+            3.474747474747346,
+            21
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 20,
+          "nativeConfidence": 0.99999917,
+          "fromOcr": true,
+          "chunkID": 1964,
+          "ctcStart": 10,
+          "ctcEnd": 11,
+          "owner": "context"
+        },
+        {
+          "id": "p1s45",
+          "text": "1",
+          "box": [
+            950.6666666666666,
+            150,
+            2.6666666666667425,
+            16
+          ],
+          "sourceLine": 19,
+          "sourceOrder": 45,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 1980,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s105",
+          "text": "幻",
+          "box": [
+            931.9565217391304,
+            199,
+            3.652173913043498,
+            22
+          ],
+          "sourceLine": 55,
+          "sourceOrder": 105,
+          "nativeConfidence": 0.9998223,
+          "fromOcr": true,
+          "chunkID": 2016,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s106",
+          "text": "学",
+          "box": [
+            953.8695652173913,
+            199,
+            3.652173913043498,
+            22
+          ],
+          "sourceLine": 55,
+          "sourceOrder": 106,
+          "nativeConfidence": 0.999987,
+          "fromOcr": true,
+          "chunkID": 2016,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s107",
+          "text": "I",
+          "box": [
+            968.4782608695652,
+            199,
+            3.652173913043498,
+            22
+          ],
+          "sourceLine": 55,
+          "sourceOrder": 107,
+          "nativeConfidence": 0.94582224,
+          "fromOcr": true,
+          "chunkID": 2016,
+          "ctcStart": 13,
+          "ctcEnd": 14,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s108",
+          "text": "1",
+          "box": [
+            975.7826086956521,
+            199,
+            3.652173913043498,
+            22
+          ],
+          "sourceLine": 55,
+          "sourceOrder": 108,
+          "nativeConfidence": 0.9744134,
+          "fromOcr": true,
+          "chunkID": 2016,
+          "ctcStart": 15,
+          "ctcEnd": 16,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s249",
+          "text": "模",
+          "box": [
+            937.9285714285714,
+            231,
+            3.6428571428571104,
+            22
+          ],
+          "sourceLine": 93,
+          "sourceOrder": 249,
+          "nativeConfidence": 0.9999409,
+          "fromOcr": true,
+          "chunkID": 2054,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s250",
+          "text": "O",
+          "box": [
+            956.1428571428571,
+            231,
+            3.642857142857224,
+            22
+          ],
+          "sourceLine": 93,
+          "sourceOrder": 250,
+          "nativeConfidence": 0.90269524,
+          "fromOcr": true,
+          "chunkID": 2054,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s251",
+          "text": "0",
+          "box": [
+            970.7142857142857,
+            231,
+            3.642857142857224,
+            22
+          ],
+          "sourceLine": 93,
+          "sourceOrder": 251,
+          "nativeConfidence": 0.9974712,
+          "fromOcr": true,
+          "chunkID": 2054,
+          "ctcStart": 12,
+          "ctcEnd": 13,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s339",
+          "text": "1",
+          "box": [
+            92.66666666666667,
+            234,
+            2.666666666666657,
+            16
+          ],
+          "sourceLine": 123,
+          "sourceOrder": 339,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 2084,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s364",
+          "text": "舎",
+          "box": [
+            940.9090909090909,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 132,
+          "sourceOrder": 364,
+          "nativeConfidence": 0.9969928,
+          "fromOcr": true,
+          "chunkID": 2093,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s365",
+          "text": "0",
+          "box": [
+            959.0909090909091,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 132,
+          "sourceOrder": 365,
+          "nativeConfidence": 0.9999851,
+          "fromOcr": true,
+          "chunkID": 2093,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s366",
+          "text": "1",
+          "box": [
+            970,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 132,
+          "sourceOrder": 366,
+          "nativeConfidence": 0.9999422,
+          "fromOcr": true,
+          "chunkID": 2093,
+          "ctcStart": 11,
+          "ctcEnd": 12,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s734",
+          "text": "1",
+          "box": [
+            42.666666666666664,
+            330,
+            2.6666666666666714,
+            16
+          ],
+          "sourceLine": 242,
+          "sourceOrder": 734,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 2203,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        }
+      ],
+      "promptInput": {
+        "cellID": "t08b61e2e3bc39ce0",
+        "cellBox": [
+          904.5,
+          194.5,
+          1002.5,
+          290.5
+        ],
+        "coordinateScope": "original pixels; CTC character intervals ESTIMATED, not ink boxes",
+        "sources": [
+          {
+            "id": "p1s17",
+            "text": "1",
+            "box": [
+              1277.4747474747476,
+              96,
+              3.474747474747346,
+              21
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 17,
+            "owner": "context"
+          },
+          {
+            "id": "p1s18",
+            "text": "0",
+            "box": [
+              1287.8989898989898,
+              96,
+              3.4747474747475735,
+              21
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 18,
+            "owner": "context"
+          },
+          {
+            "id": "p1s19",
+            "text": "/",
+            "box": [
+              1301.79797979798,
+              96,
+              3.474747474747346,
+              21
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 19,
+            "owner": "context"
+          },
+          {
+            "id": "p1s20",
+            "text": "2",
+            "box": [
+              1308.7474747474748,
+              96,
+              3.474747474747346,
+              21
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 20,
+            "owner": "context"
+          },
+          {
+            "id": "p1s45",
+            "text": "1",
+            "box": [
+              950.6666666666666,
+              150,
+              2.6666666666667425,
+              16
+            ],
+            "sourceLine": 19,
+            "sourceOrder": 45,
+            "owner": "context"
+          },
+          {
+            "id": "p1s105",
+            "text": "幻",
+            "box": [
+              931.9565217391304,
+              199,
+              3.652173913043498,
+              22
+            ],
+            "sourceLine": 55,
+            "sourceOrder": 105,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s106",
+            "text": "学",
+            "box": [
+              953.8695652173913,
+              199,
+              3.652173913043498,
+              22
+            ],
+            "sourceLine": 55,
+            "sourceOrder": 106,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s107",
+            "text": "I",
+            "box": [
+              968.4782608695652,
+              199,
+              3.652173913043498,
+              22
+            ],
+            "sourceLine": 55,
+            "sourceOrder": 107,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s108",
+            "text": "1",
+            "box": [
+              975.7826086956521,
+              199,
+              3.652173913043498,
+              22
+            ],
+            "sourceLine": 55,
+            "sourceOrder": 108,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s249",
+            "text": "模",
+            "box": [
+              937.9285714285714,
+              231,
+              3.6428571428571104,
+              22
+            ],
+            "sourceLine": 93,
+            "sourceOrder": 249,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s250",
+            "text": "O",
+            "box": [
+              956.1428571428571,
+              231,
+              3.642857142857224,
+              22
+            ],
+            "sourceLine": 93,
+            "sourceOrder": 250,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s251",
+            "text": "0",
+            "box": [
+              970.7142857142857,
+              231,
+              3.642857142857224,
+              22
+            ],
+            "sourceLine": 93,
+            "sourceOrder": 251,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s339",
+            "text": "1",
+            "box": [
+              92.66666666666667,
+              234,
+              2.666666666666657,
+              16
+            ],
+            "sourceLine": 123,
+            "sourceOrder": 339,
+            "owner": "context"
+          },
+          {
+            "id": "p1s364",
+            "text": "舎",
+            "box": [
+              940.9090909090909,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 132,
+            "sourceOrder": 364,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s365",
+            "text": "0",
+            "box": [
+              959.0909090909091,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 132,
+            "sourceOrder": 365,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s366",
+            "text": "1",
+            "box": [
+              970,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 132,
+            "sourceOrder": 366,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s734",
+            "text": "1",
+            "box": [
+              42.666666666666664,
+              330,
+              2.6666666666666714,
+              16
+            ],
+            "sourceLine": 242,
+            "sourceOrder": 734,
+            "owner": "context"
+          }
+        ],
+        "surroundingClosedBoxes": [
+          [
+            904.5,
+            88.5,
+            1688.5,
+            122.5
+          ],
+          [
+            904.5,
+            122.5,
+            1002.5,
+            194.5
+          ],
+          [
+            20.5,
+            194.5,
+            70.5,
+            482.5
+          ],
+          [
+            70.5,
+            194.5,
+            120.5,
+            290.5
+          ]
+        ]
+      },
+      "cropPath": "crops/t08b61e2e3bc39ce0.png",
+      "cropSHA256": "46f60e1f58f61866f853d3e8c34476aa4b98eb9ec2e90e47ed3fb53b67bf039a",
+      "originalRGBSHA256": "d90b6ca7e542e5878d129d3141ae65f35b6bc929f71380b9f48341167cd52954",
+      "cropBox": [
+        906,
+        196,
+        1002,
+        290
+      ],
+      "originalBGRASHA256": "2349eccf14405e7d97bfb8532be6238fd79fd0c50259a6ea99a859ba82956b9b",
+      "acquisitionRows": [
+        {
+          "id": 2016,
+          "rawText": "幻学I1",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        },
+        {
+          "id": 2054,
+          "rawText": "模O0",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        },
+        {
+          "id": 2093,
+          "rawText": "舎01",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        }
+      ],
+      "originalChunkIDs": [
+        2016,
+        2054,
+        2093
+      ],
+      "sourceProof": "NO_PRODUCTION_ROLE_OR_WHOLE_DOCUMENT_CERTIFICATE; CANDIDATE_ONLY",
+      "developmentConsumed": true
+    },
+    {
+      "id": "t3f67e213450be38a",
+      "sources": [
+        {
+          "id": "p1s14",
+          "text": "火",
+          "box": [
+            1273.9565217391305,
+            94,
+            3.652173913043498,
+            22
+          ],
+          "sourceLine": 4,
+          "sourceOrder": 14,
+          "nativeConfidence": 0.9999548,
+          "fromOcr": true,
+          "chunkID": 4,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "context"
+        },
+        {
+          "id": "p1s15",
+          "text": "曜",
+          "box": [
+            1295.8695652173913,
+            94,
+            3.652173913043498,
+            22
+          ],
+          "sourceLine": 4,
+          "sourceOrder": 15,
+          "nativeConfidence": 0.9999639,
+          "fromOcr": true,
+          "chunkID": 4,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "context"
+        },
+        {
+          "id": "p1s16",
+          "text": "日",
+          "box": [
+            1317.7826086956522,
+            94,
+            3.652173913043498,
+            22
+          ],
+          "sourceLine": 4,
+          "sourceOrder": 16,
+          "nativeConfidence": 0.99982893,
+          "fromOcr": true,
+          "chunkID": 4,
+          "ctcStart": 15,
+          "ctcEnd": 16,
+          "owner": "context"
+        },
+        {
+          "id": "p1s38",
+          "text": "1",
+          "box": [
+            950.6666666666666,
+            150,
+            2.6666666666667425,
+            16
+          ],
+          "sourceLine": 20,
+          "sourceOrder": 38,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 20,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s90",
+          "text": "虚",
+          "box": [
+            928.9668874172186,
+            199,
+            3.6556291390728575,
+            22
+          ],
+          "sourceLine": 54,
+          "sourceOrder": 90,
+          "nativeConfidence": 0.9881423,
+          "fromOcr": true,
+          "chunkID": 54,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s91",
+          "text": "研",
+          "box": [
+            950.9006622516556,
+            199,
+            3.6556291390728575,
+            22
+          ],
+          "sourceLine": 54,
+          "sourceOrder": 91,
+          "nativeConfidence": 0.9993754,
+          "fromOcr": true,
+          "chunkID": 54,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s92",
+          "text": "0",
+          "box": [
+            965.523178807947,
+            199,
+            3.6556291390728575,
+            22
+          ],
+          "sourceLine": 54,
+          "sourceOrder": 92,
+          "nativeConfidence": 0.99999523,
+          "fromOcr": true,
+          "chunkID": 54,
+          "ctcStart": 13,
+          "ctcEnd": 14,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s93",
+          "text": "9",
+          "box": [
+            980.1456953642385,
+            199,
+            3.655629139072744,
+            22
+          ],
+          "sourceLine": 54,
+          "sourceOrder": 93,
+          "nativeConfidence": 0.9999989,
+          "fromOcr": true,
+          "chunkID": 54,
+          "ctcStart": 17,
+          "ctcEnd": 18,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s94",
+          "text": "虚",
+          "box": [
+            1027.938775510204,
+            199,
+            3.646258503401441,
+            22
+          ],
+          "sourceLine": 55,
+          "sourceOrder": 94,
+          "nativeConfidence": 0.9935429,
+          "fromOcr": true,
+          "chunkID": 55,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "context"
+        },
+        {
+          "id": "p1s95",
+          "text": "研",
+          "box": [
+            1049.8163265306123,
+            199,
+            3.6462585034012136,
+            22
+          ],
+          "sourceLine": 55,
+          "sourceOrder": 95,
+          "nativeConfidence": 0.99884254,
+          "fromOcr": true,
+          "chunkID": 55,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "context"
+        },
+        {
+          "id": "p1s96",
+          "text": "1",
+          "box": [
+            1064.4013605442176,
+            199,
+            3.646258503401441,
+            22
+          ],
+          "sourceLine": 55,
+          "sourceOrder": 96,
+          "nativeConfidence": 0.9999974,
+          "fromOcr": true,
+          "chunkID": 55,
+          "ctcStart": 13,
+          "ctcEnd": 14,
+          "owner": "context"
+        },
+        {
+          "id": "p1s97",
+          "text": "0",
+          "box": [
+            1075.3401360544217,
+            199,
+            3.646258503401441,
+            22
+          ],
+          "sourceLine": 55,
+          "sourceOrder": 97,
+          "nativeConfidence": 0.9999975,
+          "fromOcr": true,
+          "chunkID": 55,
+          "ctcStart": 16,
+          "ctcEnd": 17,
+          "owner": "context"
+        },
+        {
+          "id": "p1s233",
+          "text": "模",
+          "box": [
+            937.9285714285714,
+            231,
+            3.6428571428571104,
+            22
+          ],
+          "sourceLine": 91,
+          "sourceOrder": 233,
+          "nativeConfidence": 0.9999409,
+          "fromOcr": true,
+          "chunkID": 91,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s234",
+          "text": "O",
+          "box": [
+            956.1428571428571,
+            231,
+            3.642857142857224,
+            22
+          ],
+          "sourceLine": 91,
+          "sourceOrder": 234,
+          "nativeConfidence": 0.90269524,
+          "fromOcr": true,
+          "chunkID": 91,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s235",
+          "text": "0",
+          "box": [
+            970.7142857142857,
+            231,
+            3.642857142857224,
+            22
+          ],
+          "sourceLine": 91,
+          "sourceOrder": 235,
+          "nativeConfidence": 0.9974712,
+          "fromOcr": true,
+          "chunkID": 91,
+          "ctcStart": 12,
+          "ctcEnd": 13,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s236",
+          "text": "偽",
+          "box": [
+            1037.9514563106795,
+            231,
+            3.6504854368931774,
+            22
+          ],
+          "sourceLine": 92,
+          "sourceOrder": 236,
+          "nativeConfidence": 0.99948645,
+          "fromOcr": true,
+          "chunkID": 92,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "context"
+        },
+        {
+          "id": "p1s237",
+          "text": "S",
+          "box": [
+            1056.2038834951456,
+            231,
+            3.6504854368931774,
+            22
+          ],
+          "sourceLine": 92,
+          "sourceOrder": 237,
+          "nativeConfidence": 0.9998715,
+          "fromOcr": true,
+          "chunkID": 92,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "context"
+        },
+        {
+          "id": "p1s238",
+          "text": "5",
+          "box": [
+            1067.1553398058252,
+            231,
+            3.6504854368931774,
+            22
+          ],
+          "sourceLine": 92,
+          "sourceOrder": 238,
+          "nativeConfidence": 0.9999962,
+          "fromOcr": true,
+          "chunkID": 92,
+          "ctcStart": 11,
+          "ctcEnd": 12,
+          "owner": "context"
+        },
+        {
+          "id": "p1s328",
+          "text": "1",
+          "box": [
+            37.666666666666664,
+            234,
+            2.6666666666666714,
+            16
+          ],
+          "sourceLine": 122,
+          "sourceOrder": 328,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 122,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s329",
+          "text": "1",
+          "box": [
+            87.66666666666667,
+            234,
+            2.666666666666657,
+            16
+          ],
+          "sourceLine": 123,
+          "sourceOrder": 329,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 123,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s348",
+          "text": "舎",
+          "box": [
+            940.9090909090909,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 130,
+          "sourceOrder": 348,
+          "nativeConfidence": 0.9969928,
+          "fromOcr": true,
+          "chunkID": 130,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s349",
+          "text": "0",
+          "box": [
+            959.0909090909091,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 130,
+          "sourceOrder": 349,
+          "nativeConfidence": 0.9999851,
+          "fromOcr": true,
+          "chunkID": 130,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s350",
+          "text": "1",
+          "box": [
+            970,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 130,
+          "sourceOrder": 350,
+          "nativeConfidence": 0.9999422,
+          "fromOcr": true,
+          "chunkID": 130,
+          "ctcStart": 11,
+          "ctcEnd": 12,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s351",
+          "text": "庭",
+          "box": [
+            1039,
+            263,
+            3.6666666666667425,
+            22
+          ],
+          "sourceLine": 131,
+          "sourceOrder": 351,
+          "nativeConfidence": 0.99999523,
+          "fromOcr": true,
+          "chunkID": 131,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "context"
+        },
+        {
+          "id": "p1s352",
+          "text": "1",
+          "box": [
+            1053.6666666666667,
+            263,
+            3.666666666666515,
+            22
+          ],
+          "sourceLine": 131,
+          "sourceOrder": 352,
+          "nativeConfidence": 0.9999938,
+          "fromOcr": true,
+          "chunkID": 131,
+          "ctcStart": 7,
+          "ctcEnd": 8,
+          "owner": "context"
+        },
+        {
+          "id": "p1s353",
+          "text": "7",
+          "box": [
+            1064.6666666666667,
+            263,
+            3.666666666666515,
+            22
+          ],
+          "sourceLine": 131,
+          "sourceOrder": 353,
+          "nativeConfidence": 0.9999988,
+          "fromOcr": true,
+          "chunkID": 131,
+          "ctcStart": 10,
+          "ctcEnd": 11,
+          "owner": "context"
+        }
+      ],
+      "promptInput": {
+        "cellID": "t3f67e213450be38a",
+        "cellBox": [
+          904.5,
+          194.5,
+          1002.5,
+          290
+        ],
+        "coordinateScope": "original pixels; CTC character intervals ESTIMATED, not ink boxes",
+        "sources": [
+          {
+            "id": "p1s14",
+            "text": "火",
+            "box": [
+              1273.9565217391305,
+              94,
+              3.652173913043498,
+              22
+            ],
+            "sourceLine": 4,
+            "sourceOrder": 14,
+            "owner": "context"
+          },
+          {
+            "id": "p1s15",
+            "text": "曜",
+            "box": [
+              1295.8695652173913,
+              94,
+              3.652173913043498,
+              22
+            ],
+            "sourceLine": 4,
+            "sourceOrder": 15,
+            "owner": "context"
+          },
+          {
+            "id": "p1s16",
+            "text": "日",
+            "box": [
+              1317.7826086956522,
+              94,
+              3.652173913043498,
+              22
+            ],
+            "sourceLine": 4,
+            "sourceOrder": 16,
+            "owner": "context"
+          },
+          {
+            "id": "p1s38",
+            "text": "1",
+            "box": [
+              950.6666666666666,
+              150,
+              2.6666666666667425,
+              16
+            ],
+            "sourceLine": 20,
+            "sourceOrder": 38,
+            "owner": "context"
+          },
+          {
+            "id": "p1s90",
+            "text": "虚",
+            "box": [
+              928.9668874172186,
+              199,
+              3.6556291390728575,
+              22
+            ],
+            "sourceLine": 54,
+            "sourceOrder": 90,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s91",
+            "text": "研",
+            "box": [
+              950.9006622516556,
+              199,
+              3.6556291390728575,
+              22
+            ],
+            "sourceLine": 54,
+            "sourceOrder": 91,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s92",
+            "text": "0",
+            "box": [
+              965.523178807947,
+              199,
+              3.6556291390728575,
+              22
+            ],
+            "sourceLine": 54,
+            "sourceOrder": 92,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s93",
+            "text": "9",
+            "box": [
+              980.1456953642385,
+              199,
+              3.655629139072744,
+              22
+            ],
+            "sourceLine": 54,
+            "sourceOrder": 93,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s94",
+            "text": "虚",
+            "box": [
+              1027.938775510204,
+              199,
+              3.646258503401441,
+              22
+            ],
+            "sourceLine": 55,
+            "sourceOrder": 94,
+            "owner": "context"
+          },
+          {
+            "id": "p1s95",
+            "text": "研",
+            "box": [
+              1049.8163265306123,
+              199,
+              3.6462585034012136,
+              22
+            ],
+            "sourceLine": 55,
+            "sourceOrder": 95,
+            "owner": "context"
+          },
+          {
+            "id": "p1s96",
+            "text": "1",
+            "box": [
+              1064.4013605442176,
+              199,
+              3.646258503401441,
+              22
+            ],
+            "sourceLine": 55,
+            "sourceOrder": 96,
+            "owner": "context"
+          },
+          {
+            "id": "p1s97",
+            "text": "0",
+            "box": [
+              1075.3401360544217,
+              199,
+              3.646258503401441,
+              22
+            ],
+            "sourceLine": 55,
+            "sourceOrder": 97,
+            "owner": "context"
+          },
+          {
+            "id": "p1s233",
+            "text": "模",
+            "box": [
+              937.9285714285714,
+              231,
+              3.6428571428571104,
+              22
+            ],
+            "sourceLine": 91,
+            "sourceOrder": 233,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s234",
+            "text": "O",
+            "box": [
+              956.1428571428571,
+              231,
+              3.642857142857224,
+              22
+            ],
+            "sourceLine": 91,
+            "sourceOrder": 234,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s235",
+            "text": "0",
+            "box": [
+              970.7142857142857,
+              231,
+              3.642857142857224,
+              22
+            ],
+            "sourceLine": 91,
+            "sourceOrder": 235,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s236",
+            "text": "偽",
+            "box": [
+              1037.9514563106795,
+              231,
+              3.6504854368931774,
+              22
+            ],
+            "sourceLine": 92,
+            "sourceOrder": 236,
+            "owner": "context"
+          },
+          {
+            "id": "p1s237",
+            "text": "S",
+            "box": [
+              1056.2038834951456,
+              231,
+              3.6504854368931774,
+              22
+            ],
+            "sourceLine": 92,
+            "sourceOrder": 237,
+            "owner": "context"
+          },
+          {
+            "id": "p1s238",
+            "text": "5",
+            "box": [
+              1067.1553398058252,
+              231,
+              3.6504854368931774,
+              22
+            ],
+            "sourceLine": 92,
+            "sourceOrder": 238,
+            "owner": "context"
+          },
+          {
+            "id": "p1s328",
+            "text": "1",
+            "box": [
+              37.666666666666664,
+              234,
+              2.6666666666666714,
+              16
+            ],
+            "sourceLine": 122,
+            "sourceOrder": 328,
+            "owner": "context"
+          },
+          {
+            "id": "p1s329",
+            "text": "1",
+            "box": [
+              87.66666666666667,
+              234,
+              2.666666666666657,
+              16
+            ],
+            "sourceLine": 123,
+            "sourceOrder": 329,
+            "owner": "context"
+          },
+          {
+            "id": "p1s348",
+            "text": "舎",
+            "box": [
+              940.9090909090909,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 130,
+            "sourceOrder": 348,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s349",
+            "text": "0",
+            "box": [
+              959.0909090909091,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 130,
+            "sourceOrder": 349,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s350",
+            "text": "1",
+            "box": [
+              970,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 130,
+            "sourceOrder": 350,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s351",
+            "text": "庭",
+            "box": [
+              1039,
+              263,
+              3.6666666666667425,
+              22
+            ],
+            "sourceLine": 131,
+            "sourceOrder": 351,
+            "owner": "context"
+          },
+          {
+            "id": "p1s352",
+            "text": "1",
+            "box": [
+              1053.6666666666667,
+              263,
+              3.666666666666515,
+              22
+            ],
+            "sourceLine": 131,
+            "sourceOrder": 352,
+            "owner": "context"
+          },
+          {
+            "id": "p1s353",
+            "text": "7",
+            "box": [
+              1064.6666666666667,
+              263,
+              3.666666666666515,
+              22
+            ],
+            "sourceLine": 131,
+            "sourceOrder": 353,
+            "owner": "context"
+          }
+        ],
+        "surroundingClosedBoxes": [
+          [
+            904.5,
+            88.5,
+            1688.5,
+            122.5
+          ],
+          [
+            904.5,
+            122.5,
+            1002.5,
+            194.5
+          ],
+          [
+            20.5,
+            194.5,
+            60.5,
+            290
+          ],
+          [
+            60.5,
+            194.5,
+            120.5,
+            290
+          ],
+          [
+            1002.5,
+            194.5,
+            1100.5,
+            290
+          ]
+        ]
+      },
+      "cropPath": "crops/t3f67e213450be38a.png",
+      "cropSHA256": "1eeaa8b209e08b70918a8f33b63e6ef999a2b93aee801d43010742b421e1fc36",
+      "originalRGBSHA256": "68b013b711d45bf135a0d1ac799b319239297cd754de2886eefd451100d5df84",
+      "cropBox": [
+        906,
+        196,
+        1002,
+        290
+      ],
+      "originalBGRASHA256": "02003ce94dfbb3b081710570f887523e2e62aa7dfa24cfbf41ce140c37c738d3",
+      "acquisitionRows": [
+        {
+          "id": 54,
+          "rawText": "虚研09",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        },
+        {
+          "id": 91,
+          "rawText": "模O0",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        },
+        {
+          "id": 130,
+          "rawText": "舎01",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        }
+      ],
+      "originalChunkIDs": [
+        54,
+        91,
+        130
+      ],
+      "sourceProof": "NO_PRODUCTION_ROLE_OR_WHOLE_DOCUMENT_CERTIFICATE; CANDIDATE_ONLY",
+      "developmentConsumed": true
+    }
+  ],
+  "nativeGate": false,
+  "wholeDocumentSlots": 1270,
+  "wholeDocumentClocks": 70
+}
