@@ -14,7 +14,7 @@ public static class RecoveryDocumentBuilder
     {
         public RecoveryBox Box => new(Glyph.X, Glyph.Y, Glyph.Width, Glyph.Height);
     }
-    private sealed record Label(string Value, int Page, RecoveryBox Box, IReadOnlyList<string> Ids);
+    private sealed record Label(string Value, int Page, RecoveryBox Box, IReadOnlyList<string> Ids, RecoveryBox? OwnershipBox = null);
     private static RecoveryBox Bounds(IEnumerable<Atom> atoms)
     {
         var a = atoms.ToArray(); var left = a.Min(x => x.Box.X); var top = a.Min(x => x.Box.Y);
@@ -144,6 +144,18 @@ public static class RecoveryDocumentBuilder
     }
     private static RecoveryHeaderRegion? Region(Label label, RecoveryBox target)
     {
+        if (label.OwnershipBox is { } ownership)
+        {
+            // Keep evidence bounds separate from ownership: a merged grade rail
+            // supplies each class's grade evidence, while its own physical row
+            // owns the body. Periods retain their original printed token bounds
+            // even when several tokens share one expanded physical header cell.
+            var above = ownership.Y + ownership.Height <= target.Y &&
+                Math.Min(ownership.X + ownership.Width, target.X + target.Width) > Math.Max(ownership.X, target.X);
+            var left = ownership.X + ownership.Width <= target.X &&
+                Math.Min(ownership.Y + ownership.Height, target.Y + target.Height) > Math.Max(ownership.Y, target.Y);
+            if (!above && !left) return null;
+        }
         var horizontal = Math.Min(label.Box.X + label.Box.Width, target.X + target.Width) > Math.Max(label.Box.X, target.X);
         var vertical = Math.Min(label.Box.Y + label.Box.Height, target.Y + target.Height) > Math.Max(label.Box.Y, target.Y);
         if (label.Box.Y + label.Box.Height <= target.Y && horizontal) return new(label.Page, label.Box, RecoveryHeaderAxis.Above);
@@ -204,14 +216,40 @@ public static class RecoveryDocumentBuilder
                 if (!ClassSelection.Candidates.Contains(cls)) continue;
                 var ids = gradeAtoms.Select(a => a.Id).Concat(dept.Ids).ToHashSet();
                 var box = new RecoveryBox(gradeBox.Left, Math.Min(gradeBox.Top, classBox.Top), classBox.Right - gradeBox.Left, Math.Max(gradeBox.Bottom, classBox.Bottom) - Math.Min(gradeBox.Top, classBox.Top));
-                legacyClassLabels.Add(new(cls, dept.Page, box, atoms.Where(a => ids.Contains(a.Id)).Select(a => a.Id).ToArray()));
+                legacyClassLabels.Add(new(cls, dept.Page, box, atoms.Where(a => ids.Contains(a.Id)).Select(a => a.Id).ToArray(),
+                    new(classBox.Left, classBox.Top, classBox.Right - classBox.Left, classBox.Bottom - classBox.Top)));
             }
             catch (PdfParseException error) when (error.Stage != "limit") { }
         }
         var maxPeriod = kind == RecoveryDocumentKind.Exam ? 6 : 8;
-        var classLabels = labels.Where(l => ClassSelection.Candidates.Contains(l.Value.Replace('-', '_'))).Select(l => Expand(l) with { Value = l.Value.Replace('-', '_') }).Concat(legacyClassLabels).ToArray();
-        var dayLabels = labels.Select(l => (Label: l, Day: Day(l.Value, kind, year))).Where(p => p.Day is not null).Select(p => Expand(p.Label) with { Value = p.Day! }).ToArray();
-        var periodLabels = labels.Select(l => (Label: l, Match: Regex.Match(l.Value, @"^(?:第)?([1-8])(?:限|時限)?$"))).Where(p => p.Match.Success && int.Parse(p.Match.Groups[1].Value) <= maxPeriod).Select(p => Expand(p.Label) with { Value = p.Match.Groups[1].Value }).ToArray();
+        var periodLabels = labels.Select(l => (Label: l, Match: Regex.Match(l.Value, @"^(?:第)?([1-8])(?:限|時限)?$"))).Where(p => p.Match.Success && int.Parse(p.Match.Groups[1].Value) <= maxPeriod).Select(p => Expand(p.Label) with { Value = p.Match.Groups[1].Value, OwnershipBox = p.Label.Box }).ToArray();
+        var printedClasses = labels.Where(l => ClassSelection.Candidates.Contains(l.Value.Replace('-', '_'))).ToArray();
+        var ambiguousClassHeaders = new HashSet<string>(StringComparer.Ordinal);
+        var ambiguousDateHeaders = new HashSet<string>(StringComparer.Ordinal);
+        if (kind == RecoveryDocumentKind.Exam)
+        {
+            foreach (var label in printedClasses.Where(l => Day(l.Value, kind, year) is not null))
+            {
+                var header = Expand(label);
+                work.Step(periodLabels.Length * 8L + label.Ids.Count);
+                // A hyphenated class and a real month-day can have identical text.
+                // The class rail owns the adjacent, horizontally contained complete
+                // period band; a date in the left body rail does not. Use original
+                // physical boundaries and IDs, never a global textual exclusion.
+                var owned = periodLabels.Where(p => p.Page == header.Page && p.Box.Y == header.Box.Y + header.Box.Height &&
+                    p.Box.X >= header.Box.X && p.Box.X + p.Box.Width <= header.Box.X + header.Box.Width).ToArray();
+                var isClass = owned.Select(p => p.Value).Distinct().Order().SequenceEqual(Enumerable.Range(1, maxPeriod).Select(p => p.ToString(CultureInfo.InvariantCulture))) &&
+                    owned.Min(p => p.Box.X) == header.Box.X && owned.Max(p => p.Box.X + p.Box.Width) == header.Box.X + header.Box.Width;
+                (isClass ? ambiguousClassHeaders : ambiguousDateHeaders).UnionWith(label.Ids);
+            }
+        }
+        var classLabels = printedClasses.Where(l => !l.Ids.Any(ambiguousDateHeaders.Contains)).Select(l => Expand(l) with { Value = l.Value.Replace('-', '_') }).Concat(legacyClassLabels).ToArray();
+        var dayLabels = labels.Where(l => !l.Ids.Any(ambiguousClassHeaders.Contains)).Select(l => (Label: l, Day: Day(l.Value, kind, year))).Where(p => p.Day is not null).Select(p => Expand(p.Label) with { Value = p.Day! }).ToArray();
+        // Numeric grade/department atoms are already independently owned class
+        // evidence. They cannot also become nearby left-side period alternatives.
+        work.Step(classLabels.Sum(l => (long)l.Ids.Count) + periodLabels.Length);
+        var classHeaderIds = classLabels.SelectMany(l => l.Ids).ToHashSet(StringComparer.Ordinal);
+        periodLabels = periodLabels.Where(l => !l.Ids.Any(classHeaderIds.Contains)).ToArray();
         if (classLabels.Length == 0 || dayLabels.Length == 0 || periodLabels.Length == 0) throw new InvalidDataException("クラス・日付・時限の見出しを確認できません。");
         var trustedNormal = new Dictionary<int, TimetableAnalysis>(); SpecialAnalysis? trustedSpecial = null;
         if (kind == RecoveryDocumentKind.Timetable)
