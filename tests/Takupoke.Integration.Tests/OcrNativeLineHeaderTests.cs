@@ -10,7 +10,7 @@ public sealed class OcrNativeLineHeaderTests
     private static HashSet<int> OcrPages => Enumerable.Range(1, 5).ToHashSet();
 
     [Fact]
-    public async Task CapturedNativeLineRetainsOriginalAtomsAndExistingStructureFailures()
+    public async Task CapturedNativeLineRetainsOriginalAtomsAndFailsDownstreamAfterOwnedHeaderSelection()
     {
         var (pages, rasters, hash) = CapturedOcrHeaderFixture.Load();
         var document = CapturedOcrHeaderFixture.Build(pages, rasters, hash, OcrPages);
@@ -19,9 +19,20 @@ public sealed class OcrNativeLineHeaderTests
         Assert.Equal("前期", document.Term);
         Assert.Equal(40, document.RequiredSlots.Count);
         var structure = await RecoveryStructure.ResolveAsync(document, "windows", 10, [], default);
-        Assert.Equal(RecoveryJobState.Failed, structure.State);
-        Assert.Null(structure.Document);
-        Assert.Equal(new[] { "unassignedCellText", "dayBinding", "periodBinding" }, structure.Errors);
+        // Ownership filtering removed the pending candidate; this is not an
+        // adoption certificate. Complete coverage/evidence still fails closed.
+        Assert.Equal(RecoveryJobState.Running, structure.State);
+        Assert.Same(document, structure.Document);
+        Assert.Empty(structure.Errors);
+        Assert.DoesNotContain(document.Cells, RecoveryStructure.Pending);
+        var expectedErrors = new[] { "coverage", "periodEvidence", "unclassifiedSource", "dayBinding" };
+        Assert.Equal(expectedErrors, RecoveryValidator.InputErrors(document));
+        var run = await RecoveryEngine.RunAsync(document, "windows", 10, true, [], _ => null);
+        Assert.Equal(RecoveryJobState.Failed, run.State);
+        Assert.Equal(expectedErrors, run.Errors);
+        Assert.Null(run.Result);
+        Assert.Null(document.Capture);
+        Assert.Null(RecoveryManualAssistance.Prepare(document));
         Assert.Equal(pages.Sum(page => page.Glyphs.Count), document.Sources.Count);
         var sources = document.Sources.ToDictionary(source => source.Id);
         foreach (var (page, index) in pages.Select((page, index) => (page, index)))
