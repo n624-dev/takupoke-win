@@ -176,7 +176,7 @@ class GuardTests(unittest.TestCase):
         for condition in CONDITIONS:
             recipe = select_recipe(base, condition, config)
             validate_recipe(recipe)
-            for key, value in (('maximumCalls', 5), ('maximumConcurrentEngines', 2), ('modelDownloads', 1),
+            for key, value in (('maximumCalls', 5), ('maximumConcurrentEngines', 2), ('modelDownloads', 3),
                                ('productionAdoption', True), ('modelSHA256', '0'*64), ('maximumRSSBytes', 16*1024**3)):
                 bad = deepcopy(recipe)
                 bad[key] = value

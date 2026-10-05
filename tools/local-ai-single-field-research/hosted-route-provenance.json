@@ -1,0 +1,60 @@
+{
+  "parentPreparationCommit": "9b33f9d47e282f8f8b3349f8e266962f0d884407",
+  "parentPreparationFreezeSHA256": "cae0f67069a4040e9e6ac1b0053f873ab32cc00cd6fa69d8b2855a6a82dd2446",
+  "auditedHostedSupportSource": "tools/local-ai-focal-native-research/bootstrap_ci.py",
+  "auditedHostedSupportSourceSHA256": "7f8f20b3031f606f76bd3cff75b554b36edc0e51c877f4b9bca7dbef39b9005b",
+  "retainedFunctions": [
+    {
+      "name": "read",
+      "originalSHA256": "57c008ff4bfd843af6966be9c8f759d607e4e71c0efff98d7835454798353429",
+      "retainedSHA256": "57c008ff4bfd843af6966be9c8f759d607e4e71c0efff98d7835454798353429"
+    },
+    {
+      "name": "first_attempt",
+      "originalSHA256": "567b84d907020e3d8c14ea7ea72c582d229e314336cc8670eb78d8438cb771e5",
+      "retainedSHA256": "567b84d907020e3d8c14ea7ea72c582d229e314336cc8670eb78d8438cb771e5"
+    },
+    {
+      "name": "verify_source",
+      "originalSHA256": "5809104f355498a8f41a44dea8d4978b961a7ea30f1e724542a01e90f5fcf19b",
+      "retainedSHA256": "5809104f355498a8f41a44dea8d4978b961a7ea30f1e724542a01e90f5fcf19b"
+    },
+    {
+      "name": "download",
+      "originalSHA256": "97180e93ee5ee540cf48b3da8dc10eb16214f1aaa3ed6eabe4d66589a68338c4",
+      "retainedSHA256": "97180e93ee5ee540cf48b3da8dc10eb16214f1aaa3ed6eabe4d66589a68338c4"
+    },
+    {
+      "name": "proc_state",
+      "originalSHA256": "d9effa77620e32a6c5a64f6303a4e52d1d2f12f8989ff80a516fe11ccb228b6f",
+      "retainedSHA256": "d9effa77620e32a6c5a64f6303a4e52d1d2f12f8989ff80a516fe11ccb228b6f"
+    },
+    {
+      "name": "owned_pid",
+      "originalSHA256": "97e49afa0fc996951649e933ed698275f99779ad77cb34f422441392e6a5ae3c",
+      "retainedSHA256": "97e49afa0fc996951649e933ed698275f99779ad77cb34f422441392e6a5ae3c"
+    },
+    {
+      "name": "owned_group_members",
+      "originalSHA256": "94b2fce50a2368cfd0deeb010722281b838970067bd538971c8030578faa7f3f",
+      "retainedSHA256": "94b2fce50a2368cfd0deeb010722281b838970067bd538971c8030578faa7f3f"
+    },
+    {
+      "name": "terminate_owned",
+      "originalSHA256": "3e8fd344e24722f823a41b8ff28ffb9b1a9c09fc36b2eba530a8b97e150e6582",
+      "retainedSHA256": "3e8fd344e24722f823a41b8ff28ffb9b1a9c09fc36b2eba530a8b97e150e6582"
+    },
+    {
+      "name": "print_research_logs",
+      "originalSHA256": "3e592aed6229f793b04aa618abd09f2f31deb7359bb88c24971008732db099fa",
+      "retainedSHA256": "8c8adf79a004d6c8e96ff8b0189c3a903bd26db83afddac8d142ef706c3eaab1"
+    }
+  ],
+  "transportScope": "Two fresh hosted fetches of already validated model identities plus one exact runtime wheel; no new identity",
+  "maximumTotalCalls": 8,
+  "maximumConcurrentEngines": 1,
+  "qualification": "UNASSESSED",
+  "artifactUploads": 0,
+  "modelCacheUploads": 0,
+  "productionAdoption": false
+}

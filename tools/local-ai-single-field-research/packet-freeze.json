@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "status": "PREPARED_NOT_ROOT_APPROVED",
+  "status": "HOSTED_ROUTE_PREPARED_NOT_ROOT_APPROVED",
   "sourceBase": "a97f575792903fc29135fb4366a94675a42c4e68",
   "conditions": [
     "gemma-single-field",
@@ -18,8 +18,13 @@
   "pins": [
     {
       "path": "README.md",
-      "bytes": 7080,
-      "sha256": "1b669338d5fcbbe5b513f6890926e59989c90e30450288080168bc44afa8e7e0"
+      "bytes": 9897,
+      "sha256": "507f9106719dd1b2d57870fd63f409f7c9f85baec11436180d4d3312d9524fed"
+    },
+    {
+      "path": "bootstrap_ci.py",
+      "bytes": 14550,
+      "sha256": "358358e3ca40e66ca91da3349aa80ac1ff035d29e1f1b30bf667424f82291762"
     },
     {
       "path": "caller-plan.json",
@@ -38,8 +43,8 @@
     },
     {
       "path": "comparison.py",
-      "bytes": 2840,
-      "sha256": "9320ad7721a1e2f98fb1d58439ebc85c77bed5f58f94ea5c4d8bef3a0981ba8d"
+      "bytes": 2913,
+      "sha256": "7724274b6f6c359f703941a7e633d01071d83c2c967f9115fc220e4e27814406"
     },
     {
       "path": "contract.py",
@@ -50,6 +55,16 @@
       "path": "guard.py",
       "bytes": 12084,
       "sha256": "84bdb2304960aa18010da8964212fae17df8fd79bb38b38c336598071502e9de"
+    },
+    {
+      "path": "hosted-route-provenance.json",
+      "bytes": 2743,
+      "sha256": "5d1471db08b49c9b976cbc57acaec63a054425b2209b9f7ef30e86d939fc953f"
+    },
+    {
+      "path": "hosted_support.py",
+      "bytes": 9756,
+      "sha256": "c6f55998f8822c654f3b90d9a54677efcd5fded71ed6b0d3d2ce6daa4252248f"
     },
     {
       "path": "inputs.json",
@@ -93,8 +108,8 @@
     },
     {
       "path": "recipe.json",
-      "bytes": 3040,
-      "sha256": "329d76a0d07acad41777e478b7989a345e8c2f32997244cd666102a82983f348"
+      "bytes": 3297,
+      "sha256": "e6b7608effcfeec481229500a253c39c4704bcf6aae6384fb25dc87c18c31ebc"
     },
     {
       "path": "report_protocol.py",
@@ -124,7 +139,12 @@
     {
       "path": "test_contract.py",
       "bytes": 12169,
-      "sha256": "78ec135c07a84180d69a743beb3ea586070fb450f0eb46df37b52fe4757c892d"
+      "sha256": "a6523d43ebb7919f3b1995c3691a5f1d4a8000749c6d050131aee75a81521ee3"
+    },
+    {
+      "path": "test_hosted.py",
+      "bytes": 8030,
+      "sha256": "bde898bd126f2a15bc6660e1f4e1482c5a163177d576ad44b23ae260b6c6e17d"
     },
     {
       "path": "worker.py",
@@ -149,5 +169,11 @@
     "source-provenance.json",
     "source_contract.py",
     "worker.py"
-  ]
+  ],
+  "parentPreparationFreezeSHA256": "cae0f67069a4040e9e6ac1b0053f873ab32cc00cd6fa69d8b2855a6a82dd2446",
+  "parentPreparationCommit": "9b33f9d47e282f8f8b3349f8e266962f0d884407",
+  "workflowSHA256": "60f7601beaf00c3bc235d2fa251ed3f339bf04a375b56a610435b7fb471dc3ab",
+  "registrationPushInferenceCalls": 0,
+  "hostedPublicAssetFetchesMaximum": 3,
+  "newModelIdentities": 0
 }

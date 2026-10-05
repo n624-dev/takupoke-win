@@ -1,0 +1,59 @@
+name: Fictional single-field local AI research
+on:
+  push:
+    branches: [research/single-field-focal-20261005]
+  workflow_dispatch:
+    inputs:
+      approved_packet_sha256:
+        description: Exact root-reviewed source packet SHA256
+        required: true
+        type: string
+      approved_recipe_sha256:
+        description: Exact root-reviewed Gemma recipe SHA256
+        required: true
+        type: string
+      approved_qwen_recipe_sha256:
+        description: Exact root-reviewed derived Qwen recipe SHA256
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: fictional-single-field-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  research:
+    if: github.repository == 'n624-dev/takupoke-win' && github.ref == 'refs/heads/research/single-field-focal-20261005' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /tools/local-ai-single-field-research/
+            /.github/workflows/local-ai-single-field-research.yml
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12.14'
+      - name: Register and validate without downloads or inference
+        if: github.event_name == 'push'
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          python tools/local-ai-single-field-research/bootstrap_ci.py --validate-only
+          python -m unittest discover -s tools/local-ai-single-field-research -p 'test_*.py' -v
+      - name: Exact approved sequential eight-call hosted comparison
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          APPROVED_PACKET_SHA: ${{ inputs.approved_packet_sha256 }}
+          APPROVED_RECIPE_SHA: ${{ inputs.approved_recipe_sha256 }}
+          APPROVED_QWEN_RECIPE_SHA: ${{ inputs.approved_qwen_recipe_sha256 }}
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          python tools/local-ai-single-field-research/bootstrap_ci.py --packet-sha "$APPROVED_PACKET_SHA" --recipe-sha "$APPROVED_RECIPE_SHA" --qwen-recipe-sha "$APPROVED_QWEN_RECIPE_SHA"
+      - name: Always remove owned research scratch
+        if: always()
+        run: python tools/local-ai-single-field-research/bootstrap_ci.py --cleanup-only

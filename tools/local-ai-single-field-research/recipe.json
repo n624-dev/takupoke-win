@@ -71,11 +71,17 @@
   },
   "nativeTransportAdapterVersion": 1,
   "maximumOutputTokens": 256,
-  "modelDownloads": 0,
+  "modelDownloads": 2,
   "maximumConcurrentEngines": 1,
   "maximumTotalComparisonCalls": 8,
   "maximumHostedMemoryBytes": 17179869184,
   "originalInkOwnershipProof": "ABSENT",
   "roleAssignmentProof": "ABSENT",
-  "rootExecutionGo": false
+  "rootExecutionGo": false,
+  "newModelIdentities": 0,
+  "publicAssetFetchesMaximum": 3,
+  "maximumPrintedComparisonBytes": 41943040,
+  "hostedRuntime": "Ubuntu24.04 LinuxCPU; not Windows runtime qualification",
+  "hostedDispatchRequired": true,
+  "registrationPushInferenceCalls": 0
 }
