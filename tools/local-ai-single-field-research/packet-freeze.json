@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "status": "HOSTED_ROUTE_PREPARED_NOT_ROOT_APPROVED",
-  "sourceBase": "a97f575792903fc29135fb4366a94675a42c4e68",
+  "status": "HOSTED_ROW_CHOICE_PREPARED_NOT_ROOT_APPROVED",
+  "sourceBase": "a3666ab690b5a522964335b433cd692329481a07",
   "conditions": [
-    "gemma-single-field",
-    "qwen-single-field"
+    "gemma-row-choice",
+    "qwen-row-choice"
   ],
-  "comparisonCondition": "gemma-single-field",
-  "maximumInferenceCalls": 8,
+  "comparisonCondition": "gemma-row-choice",
+  "maximumInferenceCalls": 2,
   "maximumConcurrentEngines": 1,
-  "derivedFromSourcePacketSHA256": "aa6b18a9af6ff9704d81d0105e0f952c7b6fdd9159a1bdd36b1753a35b80607c",
-  "comparisonConfigurationSHA256": "422754c123a2c8d8fd32ec99d90f505ce82911454c96261d3c5445849176639b",
+  "derivedFromSourcePacketSHA256": "086ba1f9eaee0853c5aa3f16e3087861eec749748d487ea603e29fb4fc8f125a",
+  "comparisonConfigurationSHA256": "958f2b0d3da400cc03fe418648c3876c86cc122ab7dff6c5dd148b1e8d4e97f5",
   "originalInkOwnershipProof": "ABSENT",
   "roleAssignmentProof": "ABSENT",
   "qualifiedGenAIModels": [],
@@ -18,38 +18,43 @@
   "pins": [
     {
       "path": "README.md",
-      "bytes": 9897,
-      "sha256": "507f9106719dd1b2d57870fd63f409f7c9f85baec11436180d4d3312d9524fed"
+      "bytes": 6601,
+      "sha256": "d4f140b487be54d50e54e8bc0a14260ede1c8f7bcc598363e8147c5f4eb61daf"
+    },
+    {
+      "path": "acquisition.py",
+      "bytes": 2107,
+      "sha256": "cb34f8aa09a70dfab880e088c43f83a6f85811d20c13374993aabdf80a669804"
     },
     {
       "path": "bootstrap_ci.py",
-      "bytes": 14550,
-      "sha256": "358358e3ca40e66ca91da3349aa80ac1ff035d29e1f1b30bf667424f82291762"
+      "bytes": 14545,
+      "sha256": "f3bd3be2bab59e2412386bd030d9dc6da64fb1d3229dcd636ab67815ad276346"
     },
     {
       "path": "caller-plan.json",
-      "bytes": 4234,
-      "sha256": "dfe29e5e34433e61084886b763424f94f2b916b01126a4c66e868d4fe950731c"
+      "bytes": 1097,
+      "sha256": "865baa7266fe8624b3a2ee992bdb6436e463345f0938053282efd984f81bedb5"
     },
     {
       "path": "compare_once.py",
-      "bytes": 2870,
-      "sha256": "982081b341239b34dd8f54e68ffd7c549fb5dbbb9e5939792ec248dcdc0c44de"
+      "bytes": 2884,
+      "sha256": "1173f8d85a6cd02432968df0c45d9918534b378013c55709c14ef8dc70aaf15e"
     },
     {
       "path": "comparison-config.json",
-      "bytes": 493,
-      "sha256": "422754c123a2c8d8fd32ec99d90f505ce82911454c96261d3c5445849176639b"
+      "bytes": 489,
+      "sha256": "958f2b0d3da400cc03fe418648c3876c86cc122ab7dff6c5dd148b1e8d4e97f5"
     },
     {
       "path": "comparison.py",
-      "bytes": 2913,
-      "sha256": "7724274b6f6c359f703941a7e633d01071d83c2c967f9115fc220e4e27814406"
+      "bytes": 2907,
+      "sha256": "4ad775e87ae46715af383c32478c63f8cddbf3081867b44a8df887161b3eb842"
     },
     {
       "path": "contract.py",
-      "bytes": 9716,
-      "sha256": "7a355b81268e9de82d844b90697a443b232e2f90430a507928b6704c9d2d9ec8"
+      "bytes": 8466,
+      "sha256": "59d2d4e1e45278cd993d5c812c3f87900bd6e445be1fa9a3e3abf21355eec3c9"
     },
     {
       "path": "guard.py",
@@ -58,8 +63,8 @@
     },
     {
       "path": "hosted-route-provenance.json",
-      "bytes": 2743,
-      "sha256": "5d1471db08b49c9b976cbc57acaec63a054425b2209b9f7ef30e86d939fc953f"
+      "bytes": 2884,
+      "sha256": "cd4e11d34e34155658594d68531840f57b9b97bf3df874e5d2ffabd29af3d0a2"
     },
     {
       "path": "hosted_support.py",
@@ -89,17 +94,17 @@
     {
       "path": "prepare.py",
       "bytes": 947,
-      "sha256": "c6152b22ffddec5dc0ed916488e775c240565c9e938204520382149b6bbe266c"
+      "sha256": "7e7fe13b18512b25283e01e9c664b2a0110674840c62915f41854af4f941936f"
     },
     {
       "path": "prepare_condition.py",
-      "bytes": 2299,
-      "sha256": "6f714f4c695d11394003f555823e1fd0e2c329cfc0bc06bc70edf599639961d4"
+      "bytes": 2295,
+      "sha256": "c0ec284ae93c566b150bc86ce1382ff78afe7014b6fe18a2ca79096b1ed30aed"
     },
     {
       "path": "prompt.txt",
-      "bytes": 1762,
-      "sha256": "eafc546d3241ed7b09ece4444055620f98f9dadb71822eec228177369828dd07"
+      "bytes": 674,
+      "sha256": "cc206f4edaed79615d2f7c8edccd3e41b4b15f15ac6a8bb738ecedc3ca0546a9"
     },
     {
       "path": "protocol.py",
@@ -108,13 +113,13 @@
     },
     {
       "path": "recipe.json",
-      "bytes": 3297,
-      "sha256": "e6b7608effcfeec481229500a253c39c4704bcf6aae6384fb25dc87c18c31ebc"
+      "bytes": 3370,
+      "sha256": "ceb42a888bc89146f80972beaa42218935f0de2ddd5627d5d10d3111b5d5ae25"
     },
     {
       "path": "report_protocol.py",
-      "bytes": 1247,
-      "sha256": "b7bed873650d52556f8d2bada5b392bc4aac743367deecfd3608ababe73093d9"
+      "bytes": 1246,
+      "sha256": "6b56c31464e9783524c6ae4cbe4dfea3a39689aa68a33b094915d24ba53c9b3b"
     },
     {
       "path": "run_once.py",
@@ -128,8 +133,8 @@
     },
     {
       "path": "source-provenance.json",
-      "bytes": 597,
-      "sha256": "0a5e41aafcb4a2d6a06dc203decbd9903f440d731dfe4672923f07669fe53bab"
+      "bytes": 930,
+      "sha256": "fd1f6938199d9bc4626f0aa6d505c46f5e198e478ad5c2693ef644375bc65b9e"
     },
     {
       "path": "source_contract.py",
@@ -138,21 +143,22 @@
     },
     {
       "path": "test_contract.py",
-      "bytes": 12169,
-      "sha256": "a6523d43ebb7919f3b1995c3691a5f1d4a8000749c6d050131aee75a81521ee3"
+      "bytes": 12237,
+      "sha256": "608784ea286be7a6f4a56f11f37291fa13b224a461a48678a9e8c82ffcb577ff"
     },
     {
       "path": "test_hosted.py",
-      "bytes": 8030,
-      "sha256": "bde898bd126f2a15bc6660e1f4e1482c5a163177d576ad44b23ae260b6c6e17d"
+      "bytes": 8012,
+      "sha256": "b96261878fb538bdb116012333bbe1dd35379fcc5d8602b59500292263bc31dd"
     },
     {
       "path": "worker.py",
-      "bytes": 5392,
-      "sha256": "e7c60f1ebac3033575b62a87f95aeddfb11131d0d7c8475ee16d9ad49d4f4219"
+      "bytes": 5911,
+      "sha256": "baa4207e08213ee8a995fb1398d459f4b0e596047ed5c950a382f4bfe997dfd6"
     }
   ],
   "workerPinPaths": [
+    "acquisition.py",
     "caller-plan.json",
     "comparison-config.json",
     "comparison.py",
@@ -170,10 +176,12 @@
     "source_contract.py",
     "worker.py"
   ],
-  "parentPreparationFreezeSHA256": "cae0f67069a4040e9e6ac1b0053f873ab32cc00cd6fa69d8b2855a6a82dd2446",
-  "parentPreparationCommit": "9b33f9d47e282f8f8b3349f8e266962f0d884407",
-  "workflowSHA256": "60f7601beaf00c3bc235d2fa251ed3f339bf04a375b56a610435b7fb471dc3ab",
+  "parentPreparationFreezeSHA256": "086ba1f9eaee0853c5aa3f16e3087861eec749748d487ea603e29fb4fc8f125a",
+  "parentPreparationCommit": "a3666ab690b5a522964335b433cd692329481a07",
+  "workflowSHA256": "28c493f1f926e483a9d4ab5231f0fb68094c07fef89923a0498d9855f5b25286",
   "registrationPushInferenceCalls": 0,
   "hostedPublicAssetFetchesMaximum": 3,
-  "newModelIdentities": 0
+  "newModelIdentities": 0,
+  "priorActualRun": 37383946385,
+  "priorActualAttributionFreezeSHA256": "d5cc39759000c667b42a64996688927d18b2385443783c1d0ade3acf35651af0"
 }

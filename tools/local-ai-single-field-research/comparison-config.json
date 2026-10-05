@@ -1,7 +1,7 @@
 {
   "conditions": {
-    "gemma-single-field": {},
-    "qwen-single-field": {
+    "gemma-row-choice": {},
+    "qwen-row-choice": {
       "modelKey": "qwen",
       "modelPath": "model/Qwen3-0.6B_dynamic_wi4b32_afp32.litertlm",
       "modelBytes": 344671744,

@@ -1,6 +1,6 @@
 {
-  "parentPreparationCommit": "9b33f9d47e282f8f8b3349f8e266962f0d884407",
-  "parentPreparationFreezeSHA256": "cae0f67069a4040e9e6ac1b0053f873ab32cc00cd6fa69d8b2855a6a82dd2446",
+  "parentPreparationCommit": "a3666ab690b5a522964335b433cd692329481a07",
+  "parentPreparationFreezeSHA256": "086ba1f9eaee0853c5aa3f16e3087861eec749748d487ea603e29fb4fc8f125a",
   "auditedHostedSupportSource": "tools/local-ai-focal-native-research/bootstrap_ci.py",
   "auditedHostedSupportSourceSHA256": "7f8f20b3031f606f76bd3cff75b554b36edc0e51c877f4b9bca7dbef39b9005b",
   "retainedFunctions": [
@@ -51,10 +51,12 @@
     }
   ],
   "transportScope": "Two fresh hosted fetches of already validated model identities plus one exact runtime wheel; no new identity",
-  "maximumTotalCalls": 8,
+  "maximumTotalCalls": 2,
   "maximumConcurrentEngines": 1,
   "qualification": "UNASSESSED",
   "artifactUploads": 0,
   "modelCacheUploads": 0,
-  "productionAdoption": false
+  "productionAdoption": false,
+  "priorActualRun": 37383946385,
+  "priorActualAttributionFreezeSHA256": "d5cc39759000c667b42a64996688927d18b2385443783c1d0ade3acf35651af0"
 }

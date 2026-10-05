@@ -1,175 +1,167 @@
-"""Portable model-free single-field research boundary; no evaluation imports."""
+"""Code groups retained native rows; model selects one small candidate only."""
 from copy import deepcopy
 import hashlib
 import json
 from pathlib import Path
-from source_contract import (Refusal, canonical, fingerprint, inspect_source,
-                             _exact_keys, MAX_IDS, MAX_RESPONSE_BYTES)
+from acquisition import checked_source
+from source_contract import Refusal, canonical, fingerprint, _box, _contains, _exact_keys, MAX_RESPONSE_BYTES
 
 FIELDS = ('subject', 'teacher', 'room')
-STATES = ('PRESENT', 'EMPTY', 'UNREADABLE', 'MISSING', 'AMBIGUOUS', 'UNKNOWN', 'REFUSED')
-CONDITIONS = ('gemma-single-field', 'qwen-single-field')
-SELECTION_SEED = 'single-field-v1:'
-MAX_TASKS = 4
-MAX_CALLS_PER_MODEL = 4
-PURPOSE = 'SINGLE_FIELD_ID_PROPOSAL'
+CONDITIONS = ('gemma-row-choice', 'qwen-row-choice')
+PURPOSE = 'ROW_CANDIDATE_ID_PROPOSAL'
+TARGET_TASK = 't000466d2ba598e3e'
+TARGET_FIELD = 'subject'
+MAX_CALLS_PER_MODEL = 1
 INSTRUCTION = (Path(__file__).parent / 'prompt.txt').read_text(encoding='utf-8')
-GEOMETRY = 'ESTIMATED_CTC_FULL_CONTAINMENT_ONLY_NOT_ORIGINAL_INK_OWNERSHIP'
 
 
-def checked_source(task):
-    source = inspect_source(task)
-    if task['promptInput']['coordinateScope'] != 'original pixels; CTC character intervals ESTIMATED, not ink boxes':
-        raise Refusal('EXPLICIT_ESTIMATED_CTC_PROVENANCE_REQUIRED')
-    if task['sourceProof'] != 'NO_PRODUCTION_ROLE_OR_WHOLE_DOCUMENT_CERTIFICATE; CANDIDATE_ONLY':
-        raise Refusal('NO_UNVERIFIED_SOURCE_CERTIFICATE')
-    if task['developmentConsumed'] is not True:
-        raise Refusal('ONLY_CONSUMED_FICTIONAL_DEVELOPMENT')
-    rows = task['acquisitionRows']
-    if type(rows) is not list or any(type(r) is not dict for r in rows):
-        raise Refusal('ACQUISITION_LINEAGE_MISSING')
-    by_chunk = {}
-    for row in rows:
-        _exact_keys(row, ('id', 'rawText', 'currentSafetyFloorPassed', 'belowCurrentConfidenceFloor', 'assessed'), 'ACQUISITION_ROW_KEYS')
-        if (type(row['id']) is not int or row['id'] in by_chunk or type(row['rawText']) is not str or
-                row['assessed'] is not True or row['currentSafetyFloorPassed'] is not True or
-                row['belowCurrentConfidenceFloor'] is not False):
-            raise Refusal('ACQUISITION_ROW_UNASSESSED')
-        by_chunk[row['id']] = row
-    focal = [s for s in task['sources'] if s['owner'] == 'cell']
-    for s in focal:
-        if (s['fromOcr'] is not True or type(s['chunkID']) is not int or s['chunkID'] not in by_chunk or
-                type(s['ctcStart']) is not int or
-                type(s['ctcEnd']) is not int or not 0 <= s['ctcStart'] < s['ctcEnd']):
-            raise Refusal('ACTUAL_RETAINED_CTC_LINEAGE_REQUIRED')
-    if task['originalChunkIDs'] != list(by_chunk) or set(by_chunk) != {s['chunkID'] for s in focal}:
-        raise Refusal('INCOMPLETE_ORIGINAL_CHUNK_INVENTORY')
-    for chunk, row in by_chunk.items():
-        if ''.join(s['text'] for s in focal if s['chunkID'] == chunk) != row['rawText']:
-            raise Refusal('ORIGINAL_CHUNK_TEXT_REWRITE')
-    return source
+def _envelope(sources):
+    boxes = [_box(s['box'], 'XYWH') for s in sources]
+    return [min(b[0] for b in boxes), min(b[1] for b in boxes),
+            max(b[2] for b in boxes), max(b[3] for b in boxes)]
+
+
+def candidate_map(task):
+    checked_source(task)
+    chunks = {}
+    for source in task['sources']:
+        if source['owner'] == 'cell':
+            chunks.setdefault(source['chunkID'], []).append(source)
+    rows = {r['id']: r for r in task['acquisitionRows']}
+    out = []
+    for index, (chunk, sources) in enumerate(chunks.items()):
+        if len({s['sourceLine'] for s in sources}) != 1:
+            raise Refusal('NATIVE_CHUNK_MULTIPLE_SOURCE_LINES')
+        text = ''.join(s['text'] for s in sources)
+        if text != rows[chunk]['rawText']:
+            raise Refusal('NATIVE_ROW_TEXT_REWRITE')
+        out.append({'candidateID': 'r'+str(index), 'nativeChunkID': chunk, 'text': text,
+                    'originalIDs': [s['id'] for s in sources], 'estimatedSourceEnvelopeLTRB': _envelope(sources)})
+    if not 1 <= len(out) <= 8:
+        raise Refusal('BOUNDED_NATIVE_ROWS_REQUIRED')
+    return out
+
+
+def _contexts(task):
+    # Boundaries come only from supplied native chunkID and supplied closed
+    # owner boxes. No text segmentation, new ownership or semantic labels.
+    groups = {}
+    for source in task['sources']:
+        if source['owner'] != 'context':
+            continue
+        if type(source['chunkID']) is not int:
+            raise Refusal('CONTEXT_NATIVE_CHUNK_ID_MISSING')
+        groups.setdefault(source['chunkID'], []).append(source)
+    focal = _box(task['promptInput']['cellBox'], 'LTRB')
+    boxes = [_box(b, 'LTRB') for b in task['promptInput']['surroundingClosedBoxes']]
+    out = []
+    for members in groups.values():
+        owners = [i for i, b in enumerate(boxes) if all(_contains(b, _box(s['box'], 'XYWH')) for s in members)]
+        if len(owners) != 1:
+            raise Refusal('CONTEXT_CHUNK_SUPPLIED_OWNER_NOT_UNIQUE')
+        b = boxes[owners[0]]
+        position = []
+        if b[3] <= focal[1]: position.append('ABOVE_FOCAL')
+        if b[1] >= focal[3]: position.append('BELOW_FOCAL')
+        if b[2] <= focal[0]: position.append('LEFT_OF_FOCAL')
+        if b[0] >= focal[2]: position.append('RIGHT_OF_FOCAL')
+        out.append({'text': ''.join(s['text'] for s in members), 'relativePosition': position})
+    return out
 
 
 def caller_binding(task, field):
     if field not in FIELDS:
         raise Refusal('CALLER_REQUESTED_FIELD_REQUIRED')
-    source = checked_source(task)
+    candidates = candidate_map(task)
     return {'taskID': task['id'], 'requestedField': field, 'sourceSnapshotSHA256': fingerprint(task),
-            'selectableFocalIds': source['focalIds'], 'geometryProof': GEOMETRY,
-            'assignmentCertificate': 'ABSENT', 'emptyProof': None}
+            'candidateInventorySHA256': fingerprint(candidates), 'assignmentCertificate': 'ABSENT'}
 
 
 def request(task, binding):
-    _exact_keys(binding, ('taskID', 'requestedField', 'sourceSnapshotSHA256', 'selectableFocalIds',
-                          'geometryProof', 'assignmentCertificate', 'emptyProof'), 'CALLER_BINDING_KEYS')
+    _exact_keys(binding, ('taskID', 'requestedField', 'sourceSnapshotSHA256', 'candidateInventorySHA256',
+                          'assignmentCertificate'), 'CALLER_BINDING_KEYS')
     if binding != caller_binding(task, binding['requestedField']):
-        raise Refusal('CALLER_SOURCE_SCOPE_OR_FIELD_REWRITE')
-    source = checked_source(task)
-    return {'version': 1, 'purpose': PURPOSE, 'requestedField': binding['requestedField'],
-            'callerQueryIsRoleCertificate': False, 'selectableFocalIds': deepcopy(binding['selectableFocalIds']),
-            'focal': {'boxLTRB': source['focalBoxLTRB'], 'sources': [s for s in source['sources'] if s['owner'] == 'cell']},
-            'context': {'use': 'READ_ONLY_NOT_SELECTABLE', 'boxesLTRB': source['contextBoxesLTRB'],
-                        'sources': [s for s in source['sources'] if s['owner'] == 'context']},
-            'sourceArrayOrder': [s['id'] for s in source['sources']],
-            'coordinateFormats': {'source': 'XYWH original pixels; estimated CTC intervals', 'closedBox': 'LTRB original pixels'},
-            'sourceProof': GEOMETRY, 'originalInkOwnershipProof': 'ABSENT',
-            'roleAssignmentProof': 'ABSENT', 'emptyProof': None, 'productionAdoption': False}
+        raise Refusal('CALLER_SOURCE_OR_CANDIDATE_REWRITE')
+    candidates = candidate_map(task)
+    relationships = []
+    for a in candidates:
+        for b in candidates:
+            if a['candidateID'] != b['candidateID'] and a['estimatedSourceEnvelopeLTRB'][3] <= b['estimatedSourceEnvelopeLTRB'][1]:
+                relationships.append({'above': a['candidateID'], 'below': b['candidateID']})
+    # Keep characters, original IDs, floats, lineage and proof metadata solely
+    # in the caller/Validator map. Model gets short native text rows and hints.
+    return {'candidates': [{'candidateID': c['candidateID'], 'text': c['text']} for c in candidates],
+            'relativeRows': relationships, 'readOnlyContext': _contexts(task)}
 
 
 def schema(task, binding):
-    data = request(task, binding)
-    return {'type': 'object', 'additionalProperties': False, 'required': ['state', 'ids'],
-            'properties': {'state': {'type': 'string', 'enum': list(STATES)},
-                           'ids': {'type': 'array', 'maxItems': MAX_IDS, 'uniqueItems': True,
-                                   'items': {'type': 'string', 'enum': data['selectableFocalIds']}}}}
+    request(task, binding)
+    ids = [c['candidateID'] for c in candidate_map(task)]
+    return {'type': 'object', 'additionalProperties': False, 'required': ['state', 'candidateID'],
+            'properties': {'state': {'type': 'string', 'enum': ['PRESENT', 'UNKNOWN']},
+                           'candidateID': {'type': 'string', 'enum': ids + ['NONE']}}}
 
 
 def specification(task, binding):
     payload = request(task, binding)
-    prompt = INSTRUCTION + '\nREQUEST_DATA:\n' + canonical(payload).decode('utf-8')
-    semantic_schema = schema(task, binding)
+    prompt = INSTRUCTION + '\nCALLER_REQUESTED_FIELD: ' + binding['requestedField'] + '\nSOURCE_ROWS:\n' + canonical(payload).decode('utf-8')
+    semantic = schema(task, binding)
     return {'taskID': task['id'], 'requestedField': binding['requestedField'], 'prompt': prompt,
-            'promptSHA256': hashlib.sha256(prompt.encode('utf-8')).hexdigest(),
-            'schema': semantic_schema, 'semanticSchemaSHA256': fingerprint(semantic_schema),
-            'task': deepcopy(task), 'binding': deepcopy(binding), 'freshConversationRequired': True}
+            'promptSHA256': hashlib.sha256(prompt.encode()).hexdigest(), 'schema': semantic,
+            'semanticSchemaSHA256': fingerprint(semantic), 'task': deepcopy(task), 'binding': deepcopy(binding),
+            'candidateMap': candidate_map(task), 'freshConversationRequired': True}
 
 
 def decode(raw, task, binding):
     request(task, binding)
-    if type(raw) is not str or len(raw.encode('utf-8')) > MAX_RESPONSE_BYTES:
+    if type(raw) is not str or len(raw.encode()) > MAX_RESPONSE_BYTES:
         raise Refusal('RESPONSE_LIMIT')
     def pairs(items):
-        result = {}
+        out = {}
         for key, value in items:
-            if key in result:
-                raise Refusal('DUPLICATE_PROPERTY')
-            result[key] = value
-        return result
+            if key in out: raise Refusal('DUPLICATE_PROPERTY')
+            out[key] = value
+        return out
     value = json.loads(raw, object_pairs_hook=pairs,
                        parse_constant=lambda _: (_ for _ in ()).throw(Refusal('NONFINITE_JSON')))
-    _exact_keys(value, ('state', 'ids'), 'RESPONSE_KEYS')
-    if value['state'] not in STATES or type(value['ids']) is not list or len(value['ids']) > MAX_IDS:
+    _exact_keys(value, ('state', 'candidateID'), 'RESPONSE_KEYS')
+    if value['state'] not in ('PRESENT', 'UNKNOWN') or type(value['candidateID']) is not str:
         raise Refusal('RESPONSE_SHAPE')
-    ids = value['ids']
-    if any(type(sid) is not str or sid not in binding['selectableFocalIds'] for sid in ids):
-        raise Refusal('FOREIGN_OR_CONTEXT_ID')
-    if len(ids) != len(set(ids)):
-        raise Refusal('DUPLICATE_ID')
-    if value['state'] == 'EMPTY':
-        # No acquisition emptiness proof exists in this study. A model claim,
-        # omitted role label, missing field, or no OCR IDs can never create it.
-        raise Refusal('EMPTY_NOT_SOURCE_PROVEN')
-    if (value['state'] == 'PRESENT') != bool(ids):
-        raise Refusal('PRESENT_OR_ABSTENTION_ID_CONSISTENCY')
-    selected = set(ids)
-    ordered = [s for s in task['sources'] if s['id'] in selected]
-    return {'state': value['state'], 'ids': [s['id'] for s in ordered],
-            'value': ''.join(s['text'] for s in ordered), 'assignmentCertificate': 'ABSENT',
+    candidates = {c['candidateID']: c for c in candidate_map(task)}
+    if value['state'] == 'UNKNOWN':
+        if value['candidateID'] != 'NONE': raise Refusal('ABSTENTION_WITH_CANDIDATE')
+        selected = []
+    else:
+        if value['candidateID'] not in candidates: raise Refusal('FOREIGN_CONTEXT_OR_MISSING_CANDIDATE')
+        members = set(candidates[value['candidateID']]['originalIDs'])
+        selected = [s for s in task['sources'] if s['id'] in members]
+    return {'state': value['state'], 'candidateID': value['candidateID'], 'ids': [s['id'] for s in selected],
+            'value': ''.join(s['text'] for s in selected), 'assignmentCertificate': 'ABSENT',
             'roleCorrectness': 'UNASSESSED', 'productionAdoption': False}
 
 
 def prepare_plan(tasks):
-    if (type(tasks) is not list or len(tasks) != 12 or
-            any(type(t) is not dict or type(t.get('id')) is not str or not 0 < len(t['id']) <= 128 for t in tasks) or
+    if (type(tasks) is not list or len(tasks) != 12 or any(type(t) is not dict or type(t.get('id')) is not str for t in tasks) or
             len({t['id'] for t in tasks}) != len(tasks)):
-        raise Refusal('FROZEN_SELECTION_INVENTORY')
-    ranked = sorted(tasks, key=lambda t: fingerprint(SELECTION_SEED + t['id']))
-    eligible, refusals = [], []
-    # Explicit source-eligible study selection, before any engine or evaluator;
-    # no backfill after a selected task/model call fails.
-    for task in ranked:
-        try:
-            checked_source(task)
-            eligible.append(task)
-        except Refusal as exc:
-            refusals.append({'taskID': task['id'], 'reason': str(exc)})
-    selected = eligible[:MAX_TASKS]
-    if len(selected) != MAX_TASKS:
-        raise Refusal('FOUR_SOURCE_ELIGIBLE_CASES_REQUIRED')
-    records = []
-    for i, task in enumerate(selected):
-        binding = caller_binding(task, FIELDS[i % len(FIELDS)])
-        spec = specification(task, binding)
-        records.append({'binding': binding, 'promptSHA256': spec['promptSHA256'],
-                        'semanticSchemaSHA256': spec['semanticSchemaSHA256']})
-    return {'version': 1, 'purpose': PURPOSE, 'conditions': list(CONDITIONS), 'selectionSeed': SELECTION_SEED,
-            'selection': 'First four source-eligible tasks by SHA256(canonical seed+opaque ID); fields cycle subject/teacher/room independent of text; no post-call replacement',
-            'records': records, 'preselectionSourceRefusals': refusals, 'maximumCallsPerModel': MAX_CALLS_PER_MODEL,
-            'maximumTotalCalls': 8, 'originalInkOwnershipProof': 'ABSENT', 'roleAssignmentProof': 'ABSENT',
-            'qualifiedGenAIModels': [], 'productionAdoption': False, 'wholeDocumentQuality': 'UNASSESSED',
-            'rootExecutionGo': False}
+        raise Refusal('FROZEN_SOURCE_INVENTORY')
+    matches = [t for t in tasks if t['id'] == TARGET_TASK]
+    if len(matches) != 1: raise Refusal('EXPLICIT_CALLER_TARGET_REQUIRED')
+    task = matches[0]
+    binding = caller_binding(task, TARGET_FIELD)
+    spec = specification(task, binding)
+    return {'version': 2, 'purpose': PURPOSE, 'conditions': list(CONDITIONS),
+            'selection': 'Explicit root-chosen consumed development target after actual37383946385; no oracle role used in candidate construction',
+            'records': [{'binding': binding, 'promptSHA256': spec['promptSHA256'], 'semanticSchemaSHA256': spec['semanticSchemaSHA256']}],
+            'maximumCallsPerModel': 1, 'maximumTotalCalls': 2, 'originalInkOwnershipProof': 'ABSENT',
+            'roleAssignmentProof': 'ABSENT', 'qualifiedGenAIModels': [], 'productionAdoption': False,
+            'wholeDocumentQuality': 'UNASSESSED', 'rootExecutionGo': False}
 
 
 def execute_plan(plan, tasks, condition, fresh_call):
     if condition not in CONDITIONS or plan != prepare_plan(tasks):
         raise Refusal('FROZEN_PLAN_SOURCE_OR_CONDITION_REWRITE')
-    by_id = {t['id']: t for t in tasks}
-    rows = []
-    for i, record in enumerate(plan['records'], 1):
-        binding = record['binding']
-        task = by_id[binding['taskID']]
-        spec = specification(task, binding)
-        if spec['promptSHA256'] != record['promptSHA256'] or spec['semanticSchemaSHA256'] != record['semanticSchemaSHA256']:
-            raise Refusal('EXACT_REQUEST_PIN_MISMATCH')
-        rows.append(fresh_call({**spec, 'call': i, 'condition': condition}))
-    return {'calls': len(rows), 'rows': rows, 'productionAdoption': False}
+    task = next(t for t in tasks if t['id'] == TARGET_TASK)
+    binding = plan['records'][0]['binding']
+    spec = specification(task, binding)
+    row = fresh_call({**spec, 'call': 1, 'condition': condition})
+    return {'calls': 1, 'rows': [row], 'productionAdoption': False}

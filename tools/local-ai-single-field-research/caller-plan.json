@@ -1,128 +1,26 @@
 {
-  "version": 1,
-  "purpose": "SINGLE_FIELD_ID_PROPOSAL",
+  "version": 2,
+  "purpose": "ROW_CANDIDATE_ID_PROPOSAL",
   "conditions": [
-    "gemma-single-field",
-    "qwen-single-field"
+    "gemma-row-choice",
+    "qwen-row-choice"
   ],
-  "selectionSeed": "single-field-v1:",
-  "selection": "First four source-eligible tasks by SHA256(canonical seed+opaque ID); fields cycle subject/teacher/room independent of text; no post-call replacement",
+  "selection": "Explicit root-chosen consumed development target after actual37383946385; no oracle role used in candidate construction",
   "records": [
     {
       "binding": {
         "taskID": "t000466d2ba598e3e",
         "requestedField": "subject",
         "sourceSnapshotSHA256": "f7983a27961adb91ab4d99e75386cfff74d55dc50811a56bf87fe02cffba12a5",
-        "selectableFocalIds": [
-          "p1s70",
-          "p1s71",
-          "p1s72",
-          "p1s73",
-          "p1s218",
-          "p1s219",
-          "p1s220",
-          "p1s333",
-          "p1s334",
-          "p1s335"
-        ],
-        "geometryProof": "ESTIMATED_CTC_FULL_CONTAINMENT_ONLY_NOT_ORIGINAL_INK_OWNERSHIP",
-        "assignmentCertificate": "ABSENT",
-        "emptyProof": null
+        "candidateInventorySHA256": "7f6a5fa470f5aad0188ffb2c71ac3a0744715688b679ed3d8d08f5720f443c23",
+        "assignmentCertificate": "ABSENT"
       },
-      "promptSHA256": "06622e6e79914914835b785ae0e85f9e5ef03851406dfe9046af7781d8f65f88",
-      "semanticSchemaSHA256": "55d7f67514ecd58a67fa03fb78b5547c2ffb274b36ca2fda6473f45cc0851915"
-    },
-    {
-      "binding": {
-        "taskID": "ta8e5321bf2145f08",
-        "requestedField": "teacher",
-        "sourceSnapshotSHA256": "71ca04755302296450da508729553e2286687ebb8550d60b2fb0d0bf209b7760",
-        "selectableFocalIds": [
-          "p1s13",
-          "p1s14",
-          "p1s15",
-          "p1s16"
-        ],
-        "geometryProof": "ESTIMATED_CTC_FULL_CONTAINMENT_ONLY_NOT_ORIGINAL_INK_OWNERSHIP",
-        "assignmentCertificate": "ABSENT",
-        "emptyProof": null
-      },
-      "promptSHA256": "87a8d77729efa487ccc86294d167c7588f06597cc3ee428e7696e0d8a89a34de",
-      "semanticSchemaSHA256": "6b22413f8657a1e96e1012ffdf2749b1f3eca39a1908bb28332cf40507b40dfb"
-    },
-    {
-      "binding": {
-        "taskID": "t08b61e2e3bc39ce0",
-        "requestedField": "room",
-        "sourceSnapshotSHA256": "7f4236d005b9bcf4c0882b20af4ed29e5fec9b0fdab9cdd71ad742a789343eee",
-        "selectableFocalIds": [
-          "p1s105",
-          "p1s106",
-          "p1s107",
-          "p1s108",
-          "p1s249",
-          "p1s250",
-          "p1s251",
-          "p1s364",
-          "p1s365",
-          "p1s366"
-        ],
-        "geometryProof": "ESTIMATED_CTC_FULL_CONTAINMENT_ONLY_NOT_ORIGINAL_INK_OWNERSHIP",
-        "assignmentCertificate": "ABSENT",
-        "emptyProof": null
-      },
-      "promptSHA256": "b6d3363a3057e8c0e0947a97de18689dfcc860ecab27d08a010b3dee55468c5e",
-      "semanticSchemaSHA256": "80918bf8170e1deb419248e90c58e0279bdf99c4dd351c3582045b8cc6275607"
-    },
-    {
-      "binding": {
-        "taskID": "t3f67e213450be38a",
-        "requestedField": "subject",
-        "sourceSnapshotSHA256": "09970b790ab8b3f3de35f51978cb12ab76c5cdd5c641dc2b6904df26f1a140f6",
-        "selectableFocalIds": [
-          "p1s90",
-          "p1s91",
-          "p1s92",
-          "p1s93",
-          "p1s233",
-          "p1s234",
-          "p1s235",
-          "p1s348",
-          "p1s349",
-          "p1s350"
-        ],
-        "geometryProof": "ESTIMATED_CTC_FULL_CONTAINMENT_ONLY_NOT_ORIGINAL_INK_OWNERSHIP",
-        "assignmentCertificate": "ABSENT",
-        "emptyProof": null
-      },
-      "promptSHA256": "59807c9790bc5a654d7ca22a16d406e3a5213a5a327bc035a529288314552e9d",
-      "semanticSchemaSHA256": "b288d98f2ab22f58cff50af72c031e8257801d3225fbb9468038b0d148df7e5d"
+      "promptSHA256": "fb67395f1291c1f15f44003dd193ff9d74950ea85f83bf2be4f4da231d617eea",
+      "semanticSchemaSHA256": "8e05c4d7c27fa92f38d390283eb51adba7526dce5e85d44eb6ce3b4280631404"
     }
   ],
-  "preselectionSourceRefusals": [
-    {
-      "taskID": "td0c28684ec33746d",
-      "reason": "ORIGINAL_OCR_MIDDLE_DOT_AMBIGUOUS"
-    },
-    {
-      "taskID": "t9c209ba49ec09a6c",
-      "reason": "NATIVE_CONFIDENCE_REFUSAL"
-    },
-    {
-      "taskID": "tb92df51f3d0d45cc",
-      "reason": "NATIVE_CONFIDENCE_REFUSAL"
-    },
-    {
-      "taskID": "tab477632a6790f57",
-      "reason": "NO_FOCAL_SOURCE_NOT_EMPTY_PROOF"
-    },
-    {
-      "taskID": "tafab1e9d46190a4d",
-      "reason": "NATIVE_CONFIDENCE_REFUSAL"
-    }
-  ],
-  "maximumCallsPerModel": 4,
-  "maximumTotalCalls": 8,
+  "maximumCallsPerModel": 1,
+  "maximumTotalCalls": 2,
   "originalInkOwnershipProof": "ABSENT",
   "roleAssignmentProof": "ABSENT",
   "qualifiedGenAIModels": [],

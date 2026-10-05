@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parent
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--condition', choices=('gemma-single-field', 'qwen-single-field'), required=True)
+    parser.add_argument('--condition', choices=('gemma-row-choice', 'qwen-row-choice'), required=True)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     output = args.output.resolve()

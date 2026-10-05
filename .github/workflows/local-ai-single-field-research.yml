@@ -1,7 +1,7 @@
-name: Fictional single-field local AI research
+name: Fictional native-row candidate research
 on:
   push:
-    branches: [research/single-field-focal-20261005]
+    branches: [research/row-choice-focal-20261006]
   workflow_dispatch:
     inputs:
       approved_packet_sha256:
@@ -23,7 +23,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   research:
-    if: github.repository == 'n624-dev/takupoke-win' && github.ref == 'refs/heads/research/single-field-focal-20261005' && github.run_attempt == '1'
+    if: github.repository == 'n624-dev/takupoke-win' && github.ref == 'refs/heads/research/row-choice-focal-20261006' && github.run_attempt == '1'
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -45,7 +45,7 @@ jobs:
         run: |
           python tools/local-ai-single-field-research/bootstrap_ci.py --validate-only
           python -m unittest discover -s tools/local-ai-single-field-research -p 'test_*.py' -v
-      - name: Exact approved sequential eight-call hosted comparison
+      - name: Exact approved sequential two-call native-row comparison
         if: github.event_name == 'workflow_dispatch'
         env:
           APPROVED_PACKET_SHA: ${{ inputs.approved_packet_sha256 }}

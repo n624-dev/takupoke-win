@@ -15,7 +15,7 @@ def main():
     plan = prepare_plan(json.loads(raw)['tasks'])
     with (ROOT / 'caller-plan.json').open('x', encoding='utf-8') as stream:
         stream.write(json.dumps(plan, ensure_ascii=False, indent=2) + '\n')
-    print(json.dumps({'maximumTotalCalls': 8, 'cases': [r['binding']['taskID'] for r in plan['records']],
+    print(json.dumps({'maximumTotalCalls': 2, 'cases': [r['binding']['taskID'] for r in plan['records']],
                       'modelImports': 0, 'engineCalls': 0, 'oracleReads': 0, 'productionAdoption': False}))
 
 

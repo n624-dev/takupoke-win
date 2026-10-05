@@ -13,9 +13,9 @@ def main():
         if path.stat().st_size > 1024 * 1024:
             raise RuntimeError('BOUNDED_RESPONSES_REQUIRED')
         rows = [json.loads(line) for line in path.read_text().splitlines()]
-    if len(rows) > 4 or len({r['call'] for r in rows}) != len(rows):
-        raise RuntimeError('EXACT_FOUR_CALL_ACCOUNTING')
-    report = {'completedCalls': len(rows), 'missingCallsUNASSESSED': 4 - len(rows),
+    if len(rows) > 1 or len({r['call'] for r in rows}) != len(rows):
+        raise RuntimeError('EXACT_ONE_CALL_ACCOUNTING')
+    report = {'completedCalls': len(rows), 'missingCallsUNASSESSED': 1 - len(rows),
               'dispositions': dict(Counter(r['disposition'] for r in rows)),
               'fieldRoleQuality': 'UNASSESSED_NO_EVALUATOR_READ', 'qualifiedGenAIModels': [],
               'originalInkOwnershipProof': 'ABSENT', 'roleAssignmentProof': 'ABSENT',

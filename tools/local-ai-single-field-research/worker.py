@@ -48,17 +48,24 @@ def main():
         native_schema, transport = adapt(spec['schema'])
         row.update(transport)
         emit('requestSpecification', call=spec['call'], taskID=spec['taskID'], requestedField=spec['requestedField'],
-             prompt=spec['prompt'], semanticSchema=spec['schema'], nativeSchema=native_schema, nativeTransport=transport)
+             prompt=spec['prompt'], semanticSchema=spec['schema'], nativeSchema=native_schema, nativeTransport=transport,
+             validatorCandidateMap=spec['candidateMap'], sourceSnapshotSHA256=spec['binding']['sourceSnapshotSHA256'])
         try:
+            emit('tokenizeStarted', call=spec['call'])
             row['contextCapacity'] = context_capacity(engine.tokenize, spec['prompt'], native_schema, recipe)
+            emit('tokenizeComplete', call=spec['call'], contextCapacity=row['contextCapacity'])
             if not row['contextCapacity']['passed']:
                 raise RuntimeError('CONSERVATIVE_CONTEXT_CAPACITY_NO_SEND')
+            emit('conversationCreateStarted', call=spec['call'])
             with engine.create_conversation(system_message=SYSTEM_MESSAGE,
                     thinking_config=ThinkingConfig(enable_thinking=False, thinking_token_budget=-1),
                     sampler_config=SamplerConfig(top_k=1, temperature=0, seed=17), max_output_tokens=256,
                     automatic_tool_calling=False, tools=[], constrained_decoding_config=ConstrainedDecodingConfig(
                         enable=True, provider=LiteRtLmConstraintProviderType.LL_GUIDANCE)) as conv:
+                emit('conversationReady', call=spec['call'])
+                emit('nativeSendStarted', call=spec['call'])
                 response = conv.send_message(spec['prompt'], response_format=ResponseFormat.json(native_schema))
+                emit('nativeSendComplete', call=spec['call'])
                 row['completeResponse'] = response
                 try:
                     from dataclasses import asdict

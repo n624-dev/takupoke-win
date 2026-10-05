@@ -18,16 +18,16 @@ def main():
     if roots[0] == roots[1] or output.exists():
         raise RuntimeError('EXCLUSIVE_SEPARATE_CONDITIONS_REQUIRED')
     recipes = [json.loads((root / 'recipe.json').read_text()) for root in roots]
-    for recipe, condition in zip(recipes, ('gemma-single-field', 'qwen-single-field')):
+    for recipe, condition in zip(recipes, ('gemma-row-choice', 'qwen-row-choice')):
         validate_recipe(recipe)
         if recipe['comparisonCondition'] != condition:
             raise RuntimeError('FIXED_COMPARISON_MODEL_ORDER_REQUIRED')
-    for filename in ('inputs.json', 'caller-plan.json', 'prompt.txt', 'contract.py', 'source_contract.py', 'worker.py'):
+    for filename in ('inputs.json', 'caller-plan.json', 'prompt.txt', 'contract.py', 'acquisition.py', 'source_contract.py', 'worker.py'):
         if (roots[0] / filename).read_bytes() != (roots[1] / filename).read_bytes():
             raise RuntimeError('SHARED_RESEARCH_SOURCE_BYTES_REQUIRED')
     output.mkdir(parents=True)
     with (output / 'comparison-started.json').open('x') as stream:
-        json.dump({'conditions': [r['comparisonCondition'] for r in recipes], 'maximumCalls': 8,
+        json.dump({'conditions': [r['comparisonCondition'] for r in recipes], 'maximumCalls': 2,
                    'maximumConcurrentEngines': 1, 'retries': 0}, stream)
     receipts = []
     for root in roots:

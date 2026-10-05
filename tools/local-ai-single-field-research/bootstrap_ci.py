@@ -17,7 +17,7 @@ from protocol import digest
 
 ROOT = Path(__file__).resolve().parent
 REPOSITORY = 'n624-dev/takupoke-win'
-BRANCH = 'refs/heads/research/single-field-focal-20261005'
+BRANCH = 'refs/heads/research/row-choice-focal-20261006'
 WORKFLOW = ROOT.parents[1] / '.github/workflows/local-ai-single-field-research.yml'
 MARKER = 'fictional-single-field-owned-path.txt'
 PREFIX = 'fictional-single-field-'
@@ -46,7 +46,7 @@ def dispatch_authority(packet_sha, gemma_sha, qwen_sha):
     event = read(os.environ['GITHUB_EVENT_PATH'])
     expected = {'approved_packet_sha256': packet_sha, 'approved_recipe_sha256': gemma_sha,
                 'approved_qwen_recipe_sha256': qwen_sha}
-    if event.get('ref') not in ('research/single-field-focal-20261005', BRANCH) or event.get('inputs') != expected:
+    if event.get('ref') not in ('research/row-choice-focal-20261006', BRANCH) or event.get('inputs') != expected:
         raise RuntimeError('EXACT_DISPATCH_INPUTS_REQUIRED')
     sha = os.environ.get('GITHUB_SHA', '')
     if len(sha) != 40 or any(c not in '0123456789abcdef' for c in sha):
@@ -111,7 +111,7 @@ def stage_condition(root, scratch, freeze, recipe, packet_sha, binding, models, 
     approval = {'action': SCOPE_ACTION, 'sourceFreezeSHA256': digest(packet / 'packet-freeze.json'),
                 'recipeSHA256': digest(packet / 'recipe.json'), 'comparisonCondition': recipe['comparisonCondition'],
                 'originalSourcePacketSHA256': packet_sha, 'comparisonConfigurationSHA256': configuration_sha,
-                'plannedMaximumCalls': 4, 'newRecognizerCalls': 0, 'productionAdoption': False,
+                'plannedMaximumCalls': 1, 'newRecognizerCalls': 0, 'productionAdoption': False,
                 'fullDocumentAssessment': False, 'authority': authority}
     (packet / 'root-inference-approval.json').write_text(json.dumps(approval) + '\n')
     print(json.dumps({'preparedCondition': recipe['comparisonCondition'], 'approval': approval,
@@ -144,9 +144,9 @@ def condition_run(packet, recipe, binding, scratch):
                 receipt.get('reporter', {}).get('exitCode') != 0):
             raise RuntimeError('CONDITION_OPERATIONAL_FAILURE_STOP_NO_RETRY')
         report = read(packet / 'protocol-report.json')
-        if report['completedCalls'] != 4 or report['missingCallsUNASSESSED'] != 0:
-            raise RuntimeError('EXACT_FOUR_CALL_COMPLETION_REQUIRED')
-        result = {'condition': recipe['comparisonCondition'], 'completedCalls': 4, 'executionReceipt': receipt,
+        if report['completedCalls'] != 1 or report['missingCallsUNASSESSED'] != 0:
+            raise RuntimeError('EXACT_ONE_CALL_COMPLETION_REQUIRED')
+        result = {'condition': recipe['comparisonCondition'], 'completedCalls': 1, 'executionReceipt': receipt,
                   'protocolReport': report}
     except BaseException as exc:
         primary_error = type(exc).__name__ + ':' + str(exc)

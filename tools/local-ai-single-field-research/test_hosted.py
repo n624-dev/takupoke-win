@@ -46,7 +46,7 @@ class HostedTests(unittest.TestCase):
         env = {'GITHUB_ACTIONS': 'true', 'GITHUB_EVENT_NAME': 'workflow_dispatch', 'GITHUB_RUN_ATTEMPT': '1',
                'GITHUB_REPOSITORY': hosted.REPOSITORY, 'GITHUB_REF': hosted.BRANCH,
                'GITHUB_SHA': 'd'*40, 'GITHUB_EVENT_PATH': 'not-read-from-disk'}
-        event = {'ref': 'research/single-field-focal-20261005', 'inputs': expected}
+        event = {'ref': 'research/row-choice-focal-20261006', 'inputs': expected}
         with patch.dict(os.environ, env, clear=True), patch.object(hosted, 'read', return_value=event), \
                 patch.object(hosted.subprocess, 'check_output', return_value='d'*40+'\n'):
             authority = hosted.dispatch_authority(*hashes)
@@ -76,7 +76,7 @@ class HostedTests(unittest.TestCase):
                 if fail_first:
                     raise RuntimeError('first-model operational failure')
                 events.append('cleaned:'+condition)
-                return {'completedCalls': 4}
+                return {'completedCalls': 1}
             with patch.object(hosted, 'approved_recipes', return_value=({}, self.recipes)), \
                     patch.object(hosted, 'resources'), patch.object(hosted, 'fetch_runtime', side_effect=fetch), \
                     patch.object(hosted, 'stage_condition', side_effect=stage), \
@@ -92,13 +92,13 @@ class HostedTests(unittest.TestCase):
         return events
 
     def test_all_public_assets_before_payload_and_models_sequential(self):
-        self.assertEqual(self.exercise_execution(), ['verified-public-assets', 'payload:gemma-single-field',
-                         'start:gemma-single-field', 'cleaned:gemma-single-field', 'payload:qwen-single-field',
-                         'start:qwen-single-field', 'cleaned:qwen-single-field'])
+        self.assertEqual(self.exercise_execution(), ['verified-public-assets', 'payload:gemma-row-choice',
+                         'start:gemma-row-choice', 'cleaned:gemma-row-choice', 'payload:qwen-row-choice',
+                         'start:qwen-row-choice', 'cleaned:qwen-row-choice'])
 
     def test_first_operational_failure_prevents_second_stage_and_engine(self):
-        self.assertEqual(self.exercise_execution(True), ['verified-public-assets', 'payload:gemma-single-field',
-                         'start:gemma-single-field'])
+        self.assertEqual(self.exercise_execution(True), ['verified-public-assets', 'payload:gemma-row-choice',
+                         'start:gemma-row-choice'])
 
     def test_unknown_scratch_or_incomplete_cleanup_never_deleted(self):
         with tempfile.TemporaryDirectory() as name:
