@@ -71,7 +71,7 @@ def cleanup_group(process):
 
 def main():
     recipe = json.loads((ROOT / 'recipe.json').read_text())
-    launched=None
+    launched=None;launch_cleanup=None
     try:
         identity = verify_packet(ROOT, recipe)
         recipe=bind_runtime(ROOT,recipe)
@@ -79,7 +79,7 @@ def main():
             raise RuntimeError('EXCLUSIVE_RUN_ALREADY_STARTED_OR_OUTPUT_EXISTS')
         handles = []
         def launch():
-            nonlocal launched
+            nonlocal launched,launch_cleanup
             # Owned TMPDIR exists before Python/LiteRT module imports.
             (ROOT / 'owned-runtime-cache').mkdir(exist_ok=True)
             stdout = (ROOT / 'worker-stdout.log').open('xb')
@@ -94,13 +94,13 @@ def main():
             try:
                 (ROOT/'worker-process-group.json').write_text(json.dumps({'pid':process.pid,'group':process.pid})+'\n')
             except BaseException:
-                cleanup_group(process)
+                launch_cleanup=cleanup_group(process)
                 raise
             return process
         # There is no intervening dependent call between reserve and Popen.
         process, boundary = guarded_start(recipe, launch)
     except Exception as exc:
-        (ROOT / 'preflight-failure.json').write_text(json.dumps({'error': str(exc), 'dependentExecutionStarted': launched is not None, 'workerPID': launched.pid if launched is not None else None, 'modelLoads': 'UNKNOWN' if launched is not None else 0, 'inferenceCalls': 'UNKNOWN' if launched is not None else 0}) + '\n')
+        (ROOT / 'preflight-failure.json').write_text(json.dumps({'error': str(exc), 'dependentExecutionStarted': launched is not None, 'workerPID': launched.pid if launched is not None else None, 'launchCleanup':launch_cleanup, 'modelLoads': 'UNKNOWN' if launched is not None else 0, 'inferenceCalls': 'UNKNOWN' if launched is not None else 0}) + '\n')
         raise SystemExit(2)
     begin = time.monotonic()
     peak = 0

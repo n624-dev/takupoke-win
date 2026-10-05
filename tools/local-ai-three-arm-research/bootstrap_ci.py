@@ -130,8 +130,18 @@ def terminate_owned(process, packet):
                 while same_live_runner() and time.monotonic()<deadline:time.sleep(.1)
                 if same_live_runner():os.kill(pid,signal.SIGKILL)
         group_file=packet/'worker-process-group.json'
-        if group_file.exists():
-            group=read(group_file)['group']
+        group=None
+        if group_file.exists():group=read(group_file)['group']
+        elif (packet/'preflight-failure.json').exists():
+            failure=read(packet/'preflight-failure.json')
+            if failure.get('dependentExecutionStarted') is True:
+                group=failure.get('workerPID')
+                if type(group) is not int or group<=1:raise RuntimeError('LAUNCHED_WORKER_GROUP_IDENTITY_MISSING')
+            elif failure.get('dependentExecutionStarted') is not False:
+                raise RuntimeError('PREFLIGHT_LAUNCH_STATE_UNKNOWN')
+        elif (packet/'probe-started.json').exists():
+            raise RuntimeError('GUARDED_LAUNCH_GROUP_UNKNOWN; retain scratch')
+        if group is not None:
             if type(group) is not int or group<=1:raise RuntimeError('INVALID_OWNED_GROUP')
             selected=owned_group_members(group,packet)
             errors.extend(selected['errors']);zombies=selected['zombiePids']

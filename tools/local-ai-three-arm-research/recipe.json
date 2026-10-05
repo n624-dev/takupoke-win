@@ -38,14 +38,14 @@
   "processDeadlineSeconds": 1200,
   "loadDeadlineSeconds": 180,
   "callDeadlineSeconds": 60,
-  "maximumRSSBytes": 4294967296,
-  "minimumAvailableMemoryBytes": 4831838208,
+  "maximumRSSBytes": 6442450944,
+  "minimumAvailableMemoryBytes": 7516192768,
   "diskReserveBytes": 2147483648,
   "workingAllowanceBytes": 1174405120,
   "maximumOutputBytes": 16777216,
   "maximumCacheBytes": 1073741824,
   "cgroupMemoryPolicy": "minimum finite visible ancestor budget; host MemAvailable only for positively verified full GitHub VM when every visible ancestor max/high is unbounded",
-  "memoryFootprintEvidence": "Predeclared prospective4GiB cap/4.5GiB conservative cgroupbudget authorizedroot: successfulTEXT observedmax3,132,489,728B (2.92GiB) leaves1,162,477,568B image/runtimeallowance. Imagefootprintunknown; cap/deadline failures ExecutionError/UNASSESSED, never accuracyFAIL. This was chosen before first frozen packet or Engine, not a retry/bypass of a failed inference.",
+  "memoryFootprintEvidence": "Separate prospectively reviewed resource condition AFTER run37327003823: actual sampled4,785,328,128B exceeded original4GiB, causing OPERATIONAL_RESOURCE/accuracyUNASSESSED. New sampled6GiB cap and fresh7GiB conservative headroom on exploratory16GB GitHubLinux/Windows-class host only; NOT iPhone14 suitability or unchanged failed-config retry. Existing actualprePopen budget15,518,146,560B establishes historical feasibility only, never substitutes fresh gates. Image/context footprint and completion remain unknown; cap/deadline failures remain operationalUNASSESSED.",
   "ownedTMPDIR": "owned-runtime-cache",
   "monitorIntervalSeconds": 0.1,
   "retries": 0,
@@ -107,6 +107,18 @@
   "capacityPolicy": "Prospective8192context/768output beforefirstEngine. Runtime conservativeactualtokenizer prompt+FULLschema+system+256template+280vision(ifimage)+768output gate; oversized/truncated tokens explicitoperationalUNASSESSED, no retries. Sourcecounts are not exactnativechat serialization proof.",
   "retainedRawLogs": "Final diagnostic path attempts each bounded fictional receipt/response/event and stdout/stderr tail independently BEFORE any scratch deletion, including cleanup errors. No binary/environment. Incomplete owned cleanup retains marker/scratch; oversized/unreadable diagnostics fail operationally without hiding later stderr.",
   "namespaceMetadataFallback": "OnlyPID1readlink EACCES/EPERM afterallotherpositivefullVMflags andvalidatedunprivilegedself pidnamespace permitsfixed /usr/bin/sudo -n /usr/bin/readlink /proc/1/ns/pid (stdinDEVNULL/close_fds/5s). Matchingstrictpid:[digits] mandatory. No model/controller elevated; no genericmissing/container/othererror fallback.",
-  "runtimeDiskOnlyRequest": "Onlyexactint minimumAvailableMemoryBytes==0 isdisk-only (existingpostloadmonitor/call/reporterpaths); memoryAssessment NOT_REQUESTED/null/nohostcredit. InitialpreDownload/postasset/prePopen/workerpreEngine remainfresh4.5GiBproof BEFORENNP; no proofcache or NNPweakening.",
-  "cleanupSourceParent": "15611e8556b4ca02e14f7671f0c262b3981c8d04"
+  "runtimeDiskOnlyRequest": "Onlyexactint minimumAvailableMemoryBytes==0 isdisk-only (existingpostloadmonitor/call/reporterpaths); memoryAssessment NOT_REQUESTED/null/nohostcredit. InitialpreDownload/postasset/prePopen/workerpreEngine remainfresh7GiBproof BEFORENNP; no proofcache or NNPweakening.",
+  "cleanupSourceParent": "15611e8556b4ca02e14f7671f0c262b3981c8d04",
+  "prospectiveResourceCondition": {
+    "previousMaximumRSSBytes": 4294967296,
+    "previousMinimumAvailableMemoryBytes": 4831838208,
+    "newMaximumRSSBytes": 6442450944,
+    "newMinimumAvailableMemoryBytes": 7516192768,
+    "resourceConditionChanged": true,
+    "qualityThresholdsChanged": false,
+    "sameFailedConfigRerun": false,
+    "deviceSuitability": "Exploratory16GBhost only; iPhone14UNASSESSED",
+    "rootRequiresNewSourcePushNotRerun": true
+  },
+  "preflightLaunchTruth": "AfterPopen record-write failure counts UNKNOWN, launchCleanup retained; missing group record falls back only authoritative launched workerPID with marker-bound group checks. Guarded-launch state lacking proof holds scratch/no deletion."
 }

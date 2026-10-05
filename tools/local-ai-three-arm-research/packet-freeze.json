@@ -6,8 +6,8 @@
   "pins": [
     {
       "path": "bootstrap_ci.py",
-      "bytes": 18899,
-      "sha256": "a9b8885463db74aea36447cc4784cc760cb9389955a21bea7aa6a75d44a00912"
+      "bytes": 19550,
+      "sha256": "9de729c7f07b7add8807cd070363e61ca3806e6305665f1b909c3dde2296f61b"
     },
     {
       "path": "crops/t000466d2ba598e3e.png",
@@ -106,13 +106,13 @@
     },
     {
       "path": "recipe.json",
-      "bytes": 8608,
-      "sha256": "df8d75ad23e281746726ee8ccca9f5af03fd4f6c47239d2042dc9fe69dfa46d8"
+      "bytes": 9535,
+      "sha256": "4e23c78e75f012642d2719248ad265059732d3b7af3642a5de97926eba9e750c"
     },
     {
       "path": "run_once.py",
-      "bytes": 8760,
-      "sha256": "0b5ebba209fae1166b67b9404c080b59e4c7fb1579033c988c8ef7831ff7632d"
+      "bytes": 8842,
+      "sha256": "b348f6ca72f2ab624547c847af0b99b7e8e0429ff31e7131ad89efa81726e603"
     },
     {
       "path": "runtime-identity.json",
@@ -131,8 +131,13 @@
     },
     {
       "path": "test_cleanup.py",
-      "bytes": 9650,
-      "sha256": "c26ca6529df26c71ca75dd3e23d10369a477a9d32ab048f96aae01e26e98e485"
+      "bytes": 13103,
+      "sha256": "9f4cb74ddaf0c6d21f35404f215917be156ccfd0f8c60cf88030614ac89aada0"
+    },
+    {
+      "path": "test_memory_condition.py",
+      "bytes": 3263,
+      "sha256": "aa170f205527967ab148df22fc0f2f407e158d6118bc7b111f3e34a616dde1ae"
     },
     {
       "path": "test_namespace.py",
@@ -188,6 +193,6 @@
   "productionAdoption": false,
   "wholeDocumentFormalSlotsUNASSESSED": 1270,
   "wholeDocumentFormalClocksUNASSESSED": 70,
-  "parentPortablePacketSHA256": "15b750da2712ac39d8b581108fff55d66f40f512b334ea3c2995aff6c9a14fdd",
-  "version": "ownership-filtering-finally-diagnostics-source-only-unchanged4GiB-budget"
+  "parentPortablePacketSHA256": "87bf12313f2f51019fdc500ac2928a6f08f5b16790c6ee995ce4e141dd171a34",
+  "version": "separate-prospective6GiB-RSS7GiB-fresh-headroom-resource-condition"
 }

@@ -80,6 +80,42 @@ class Cleanup(unittest.TestCase):
                 result=b.terminate_owned(None,p)
             self.assertFalse(result['complete']);self.assertEqual(result['remainingOwnedPids'],[1234])
 
+    def test_group_record_failure_known_launched_group_still_checked(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d);(p/'preflight-failure.json').write_text('{"dependentExecutionStarted":true,"workerPID":1234,"launchCleanup":{"complete":false}}')
+            with patch.object(b,'owned_group_members',return_value={'members':[1234],'errors':['owned uninspectable'],'zombiePids':[]}),patch.object(b.os,'killpg') as kill:
+                result=b.terminate_owned(None,p)
+            self.assertFalse(result['complete']);kill.assert_not_called()
+
+    def test_failed_group_record_incomplete_launch_cleanup_never_deletes_live_scratch(self):
+        with tempfile.TemporaryDirectory() as d:
+            s=Path(d)/'fictional-three-arm-test';s.mkdir();p=s/'packet';p.mkdir();m=Path(d)/'marker';m.write_text(str(s))
+            (p/'probe-started.json').write_text('{}');(p/'preflight-failure.json').write_text('{"dependentExecutionStarted":true,"workerPID":1234,"launchCleanup":{"complete":false}}');(p/'worker-stderr.log').write_text('launch record failure')
+            with patch.object(b,'owned_group_members',return_value={'members':[1234],'errors':[],'zombiePids':[]}),patch.object(b.time,'monotonic',side_effect=[0,6]),patch.object(b.os,'killpg'),patch.object(b.shutil,'rmtree') as remove,patch('builtins.print') as output:
+                self.assertFalse(b.finish_owned_scratch(None,p,s,m,True,{}))
+            remove.assert_not_called();self.assertTrue(s.exists());self.assertTrue(m.exists());self.assertTrue(any('launch record failure' in x.args[0] for x in output.call_args_list))
+
+    def test_valid_preflight_selected_group_still_requires_owned_marker_scan(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d);(p/'preflight-failure.json').write_text('{"dependentExecutionStarted":true,"workerPID":1234}')
+            with patch.object(b,'owned_group_members',side_effect=[{'members':[1234],'errors':[],'zombiePids':[]},{'members':[],'errors':[],'zombiePids':[]}]) as scan,patch.object(b.os,'killpg') as kill:
+                result=b.terminate_owned(None,p)
+            self.assertTrue(result['complete']);self.assertEqual(scan.call_args.args,(1234,p));kill.assert_called_once_with(1234,b.signal.SIGKILL)
+
+    def test_missing_started_group_proof_finally_retains_marker_and_scratch(self):
+        with tempfile.TemporaryDirectory() as d:
+            s=Path(d)/'fictional-three-arm-test';s.mkdir();p=s/'packet';p.mkdir();m=Path(d)/'marker';m.write_text(str(s));(p/'probe-started.json').write_text('{}')
+            with patch.object(b.shutil,'rmtree') as remove,patch('builtins.print'):
+                self.assertFalse(b.finish_owned_scratch(None,p,s,m,True,{}))
+            remove.assert_not_called();self.assertTrue(m.exists());self.assertTrue(s.exists())
+
+    def test_unknown_or_malformed_started_group_holds_scratch(self):
+        for document in ({'dependentExecutionStarted':True,'workerPID':None},{'dependentExecutionStarted':True,'workerPID':False},None):
+            with tempfile.TemporaryDirectory() as d:
+                p=Path(d);(p/'probe-started.json').write_text('{}')
+                if document is not None:(p/'preflight-failure.json').write_text(json.dumps(document))
+                result=b.terminate_owned(None,p);self.assertFalse(result['complete'])
+
     def test_incomplete_cleanup_prints_logs_and_retains_scratch(self):
         with tempfile.TemporaryDirectory() as d:
             s=Path(d)/'scratch';s.mkdir();p=s/'packet';p.mkdir();m=Path(d)/'marker';m.write_text(str(s));(p/'worker-stderr.log').write_text('fictional native error')
@@ -119,8 +155,9 @@ class Cleanup(unittest.TestCase):
             def write(path,*args,**kwargs):
                 if path.name=='worker-process-group.json':raise PermissionError('synthetic record failure')
                 return original(path,*args,**kwargs)
-            with patch.object(run_once,'ROOT',p),patch.object(run_once,'verify_packet',return_value={'sourceFreezeSHA256':'fake'}),patch.object(run_once,'bind_runtime',side_effect=lambda p,r:r),patch.object(run_once,'resources',return_value={}),patch.object(run_once,'subreaper'),patch.object(run_once.subprocess,'Popen',return_value=fake),patch.object(run_once,'cleanup_group'),patch.object(Path,'write_text',write):
+            with patch.object(run_once,'ROOT',p),patch.object(run_once,'verify_packet',return_value={'sourceFreezeSHA256':'fake'}),patch.object(run_once,'bind_runtime',side_effect=lambda p,r:r),patch.object(run_once,'resources',return_value={}),patch.object(run_once,'subreaper'),patch.object(run_once.subprocess,'Popen',return_value=fake),patch.object(run_once,'cleanup_group',return_value={'complete':False,'errors':['live']}),patch.object(Path,'write_text',write):
                 with self.assertRaises(SystemExit):run_once.main()
             receipt=json.loads((p/'preflight-failure.json').read_text());self.assertTrue(receipt['dependentExecutionStarted']);self.assertEqual(receipt['modelLoads'],'UNKNOWN');self.assertEqual(receipt['inferenceCalls'],'UNKNOWN')
+            self.assertFalse(receipt['launchCleanup']['complete'])
 
 if __name__=='__main__':unittest.main(verbosity=2)
