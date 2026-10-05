@@ -1,0 +1,104 @@
+name: Actual consumed fictional image PDF Windows render
+on:
+  push:
+    branches: [research/windows-actual-pdf-render-20261005]
+    paths:
+      - '.github/workflows/actual-unlabeled-pdf-render.yml'
+      - 'tools/actual-unlabeled-pdf-render/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  PYTHONUTF8: '1'
+  PYTHONIOENCODING: utf-8
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      pdf_count: ${{ steps.generate.outputs.pdf_count }}
+      pdf_part0: ${{ steps.generate.outputs.pdf_part0 }}
+      pdf_part1: ${{ steps.generate.outputs.pdf_part1 }}
+      pdf_part2: ${{ steps.generate.outputs.pdf_part2 }}
+      manifest_base64: ${{ steps.generate.outputs.manifest_base64 }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c
+        with:
+          python-version: '3.12'
+      - name: Source-only public policy and fixed dependencies
+        run: |
+          python scripts/check-public-tree.py
+          python -m pip install --disable-pip-version-check -r tools/actual-unlabeled-pdf-render/requirements.txt
+      - name: Regenerate exact consumed invented pixels and lossless PDF
+        id: generate
+        run: |
+          mkdir "$RUNNER_TEMP/actual-unlabeled-pdf-owned"
+          python tools/actual-unlabeled-pdf-render/prepare_linux.py "$RUNNER_TEMP/actual-unlabeled-pdf-owned" --github-output "$GITHUB_OUTPUT"
+          PUBLIC_FONT_PATH="$RUNNER_TEMP/actual-unlabeled-pdf-owned/public-font.ttc" python -m unittest discover -s tools/actual-unlabeled-pdf-render -p 'test_*.py'
+      - name: Remove only owned synthetic PDF/font directory
+        if: always()
+        run: |
+          python - <<'PY'
+          import os, pathlib, shutil
+          root = pathlib.Path(os.environ['RUNNER_TEMP']) / 'actual-unlabeled-pdf-owned'
+          if root.exists():
+              marker = root / '.owned-actual-pdf-render'
+              if root.is_symlink() or not marker.is_file() or marker.read_bytes() != b'actual-pdf-render-v1\n':
+                  raise ValueError('Owned directory marker mismatch; no deletion')
+              shutil.rmtree(root)
+          assert not root.exists()
+          PY
+  actual-windows-render:
+    needs: generate
+    runs-on: windows-2025
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: '10.0.x'
+      - name: Source policy and bounded transport tests
+        run: |
+          python scripts/check-public-tree.py
+          if ($LASTEXITCODE -ne 0) { throw 'Source policy failed' }
+          python -m unittest discover -s tools/actual-unlabeled-pdf-render -p "test_report_transport.py"
+          if ($LASTEXITCODE -ne 0) { throw 'Bounded transport tests failed' }
+          python -m unittest discover -s tools/actual-unlabeled-pdf-render -p "test_required_report.py"
+          if ($LASTEXITCODE -ne 0) { throw 'Bounded transport tests failed' }
+      - name: Verify exact PDF job output before any rendering
+        env:
+          SYNTHETIC_PDF_COUNT: ${{ needs.generate.outputs.pdf_count }}
+          SYNTHETIC_PDF_PART0: ${{ needs.generate.outputs.pdf_part0 }}
+          SYNTHETIC_PDF_PART1: ${{ needs.generate.outputs.pdf_part1 }}
+          SYNTHETIC_PDF_PART2: ${{ needs.generate.outputs.pdf_part2 }}
+          SYNTHETIC_MANIFEST_BASE64: ${{ needs.generate.outputs.manifest_base64 }}
+        shell: pwsh
+        run: |
+          $owned = Join-Path $env:RUNNER_TEMP 'actual-unlabeled-pdf-owned'
+          New-Item -ItemType Directory -Path $owned | Out-Null
+          python tools/actual-unlabeled-pdf-render/receive_windows.py $owned
+          if ($LASTEXITCODE -ne 0) { throw 'Source-only PDF transport pin failed' }
+      - name: Compile real PDFReader and Windows SDK renderer
+        run: |
+          dotnet build tools/actual-unlabeled-pdf-render/reader-probe/ReaderProbe.csproj --nologo
+          if ($LASTEXITCODE -ne 0) { throw 'Actual Reader helper compile failed' }
+          dotnet build tools/actual-unlabeled-pdf-render/render-probe/RenderProbe.csproj --nologo
+          if ($LASTEXITCODE -ne 0) { throw 'Actual Windows renderer helper compile failed' }
+      - name: ONE actual image-only PDF read and actual render without OCR
+        shell: pwsh
+        run: |
+          $owned = Join-Path $env:RUNNER_TEMP 'actual-unlabeled-pdf-owned'
+          python tools/actual-unlabeled-pdf-render/run_render.py $owned tools/actual-unlabeled-pdf-render/reader-probe/bin/Debug/net10.0/ReaderProbe.dll tools/actual-unlabeled-pdf-render/render-probe/bin/Debug/net10.0-windows10.0.26100.0/RenderProbe.dll
+          if ($LASTEXITCODE -ne 0) { throw 'Actual PDF read/render or verified observation failed' }
+      - name: Remove only owned synthetic PDF and rendered pixel files
+        if: always()
+        shell: pwsh
+        run: |
+          $owned = Join-Path $env:RUNNER_TEMP 'actual-unlabeled-pdf-owned'
+          if (Test-Path $owned) {
+            $marker = Join-Path $owned '.owned-actual-pdf-render'
+            if (!(Test-Path $marker) -or ([IO.File]::ReadAllText($marker) -cne "actual-pdf-render-v1`n")) { throw 'Owned directory marker mismatch; no deletion' }
+            Remove-Item -LiteralPath $owned -Recurse -Force
+          }
+          if (Test-Path $owned) { throw 'Owned synthetic files remain' }
