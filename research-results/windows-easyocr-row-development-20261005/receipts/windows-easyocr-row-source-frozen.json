@@ -1,0 +1,326 @@
+{
+  "root": "/tmp/takupoke-windows-easyocr-rows-20261005",
+  "files": [
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/.gitattributes",
+      "bytes": 485,
+      "sha256": "c6ee0674264c36972b7e8fdc6eb3bd09d065f462576f8f8cac600634c5f9e1fe"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/.github/workflows/easyocr-row-probe.yml",
+      "bytes": 2829,
+      "sha256": "31c7ae04e95984655cb03202b676ba59398ff94b20641d26325d56fee11a9cca"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/README.md",
+      "bytes": 3180,
+      "sha256": "82d97749621eec3be2fb514897a3c8c4ba898d0e37a173f1e30f14fb28f8b09f"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/artifact-pin.json",
+      "bytes": 638,
+      "sha256": "832800685633125f608ab39641d2e2549e99174b4cdf9147e4ab9319cd92072a"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/contracts.py",
+      "bytes": 950,
+      "sha256": "bff2d42e30acfc0199d22bc82deb73eb1fe5d61d32ee3dbb1d4c95a3dced21e7"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/fictional-source/drawing-source.json",
+      "bytes": 6000,
+      "sha256": "25e8f58156bc3a955b3b8bf4616ad1267e627b9aff37676a829b3f3e625d815e"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/fictional-source/font-license.txt",
+      "bytes": 4383,
+      "sha256": "eb5a2a88566ca8ef61f20f7cddd3fec621cf3a017ecf363a92740590a9b8870c"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/fictional-source/generate.py",
+      "bytes": 7484,
+      "sha256": "a5bbf0151bfd8fbb6a37005613dbc407c59d0d4ea8aa4d30f0f2041081ed0b39"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/font-pin.json",
+      "bytes": 407,
+      "sha256": "78a634629da0ee0f784315844c5455f63787d2638ad38f92f1b50f2c0185b3b3"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/prepare.py",
+      "bytes": 4145,
+      "sha256": "f110b81fcaec119ef3ba96ca3774727ccdaf1c2e7113b8aa0807acea3dad365b"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/recipe.json",
+      "bytes": 11687,
+      "sha256": "c3b4b8804e682ad7492ec985427908cda840c80905fee84489af895bf151c766"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/requirements-wheel-pins.json",
+      "bytes": 9962,
+      "sha256": "20b5cb59f9ca7d9cde2f40d3ca35aba75f5c9df3df56904b8c759cb63d09d9d0"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/requirements.txt",
+      "bytes": 6140,
+      "sha256": "852ea6260bc2886cb9bb58cf993a8adca05a9fe6b495e1ca6791a49802ad4243"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/rows-before-native.json",
+      "bytes": 81574,
+      "sha256": "a07829d4632e92af54756d738ca735863d8481e47ef40e9bc38cdb4ae81f9cb9"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/source-inventory.json",
+      "bytes": 10646,
+      "sha256": "12323e7f7f97c5a0c83d54490297992e35bd57cc88dd1ea0c1be17f19569f87d"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/supervise.py",
+      "bytes": 3705,
+      "sha256": "5d55045b6524d9720680716e9655b05de1f9aec93fc4b06a510d27fb8cb8bfd4"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/test_contracts.py",
+      "bytes": 1139,
+      "sha256": "3f8a82cd2c076e3ef74446fbd52cf9ce5c94172b0abed9421ca8b788c1f37458"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/torch-wheel-size-metadata.json",
+      "bytes": 680,
+      "sha256": "c161d781ea5e67330b81565f30029e65ae7c148fea9bed82e480330254c6205c"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/DBNet.py",
+      "bytes": 28450,
+      "sha256": "14c9ac1813de16ea3a9ffb37bc93b1a8272e19c5804144dbaded1f592e5e68bb"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/assets/ops/dcn/__init__.py",
+      "bytes": 656,
+      "sha256": "f23444d26efff9139289fc0e92651b055336872b5833c90a6fdd058a11970243"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/assets/ops/dcn/functions/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/assets/ops/dcn/functions/deform_conv.py",
+      "bytes": 11869,
+      "sha256": "f2c9ed212032f96d63d90c8977cf15489481fc09cb5838c22142c8cadfcf24a8"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/assets/ops/dcn/functions/deform_pool.py",
+      "bytes": 5953,
+      "sha256": "87c113a586fc694ec646aadf170b9fa6e260e8209cbc5ae81b9a9cb586b12d00"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/assets/ops/dcn/modules/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/assets/ops/dcn/modules/deform_conv.py",
+      "bytes": 5198,
+      "sha256": "cb25af3798a8db100b86b9c3abb9ac44ddeda3c8c025afd01a359f549f23c957"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/assets/ops/dcn/modules/deform_pool.py",
+      "bytes": 7058,
+      "sha256": "99795d4a4561f27d3a3f8a4a2764041338398033927f069f315f7bc83634f1f4"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/assets/ops/dcn/setup.py",
+      "bytes": 933,
+      "sha256": "2ab5a2363c5a7340577b797e4bea13b2dcda0bee2508e79c8b49f85be437fe18"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/backbones/__init__.py",
+      "bytes": 165,
+      "sha256": "464800c15bf5a80dd4914c2250d799dad4d919f903571563e3962e7803756994"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/backbones/mobilenetv3.py",
+      "bytes": 8930,
+      "sha256": "7e0836fe6216c1495fd0ef38d6d9d9bf10732c08b8b224510a609fc9615c0ece"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/backbones/resnet.py",
+      "bytes": 12428,
+      "sha256": "ccf41eb970113a9c687b662a2edf93132ca75a8b207d31f9b8038db75e799bf3"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/decoders/__init__.py",
+      "bytes": 251,
+      "sha256": "22e6d2fedb5dbc2d7475198cb25743cab138f063b48c67c387fa7eee4375d461"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/decoders/balance_cross_entropy_loss.py",
+      "bytes": 1954,
+      "sha256": "74788de21696a440961ec7f56137a068c93c2ef178f8fc95fc49e2694d76f595"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/decoders/dice_loss.py",
+      "bytes": 6965,
+      "sha256": "b6297feccbfad8da3f66427727584db5d4025ce664ac20c86d9b5b0b839bd0dd"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/decoders/feature_attention.py",
+      "bytes": 5925,
+      "sha256": "551cfebc406edee158723efd8de115874047bf3c9d817abf215258064ae4b121"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/decoders/l1_loss.py",
+      "bytes": 1363,
+      "sha256": "cb26ca28641ad8d44859e63cef1adfec6357ece97176ca8809ce20a16692b599"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/decoders/pss_loss.py",
+      "bytes": 4582,
+      "sha256": "47af12701c3c4df69d644d15369293b77826b35a0ca78ac3fbcf2fc82d0599ff"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/decoders/seg_detector.py",
+      "bytes": 6112,
+      "sha256": "79362ad6a559c50cf11d7cc08e6753b21847e35af76e1014bfcb52f0d5592430"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/decoders/seg_detector_asf.py",
+      "bytes": 7048,
+      "sha256": "eff5837d6d800154a81e969765ebabee9d1fe8c4d79de82a2d1e69d8beb146b6"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/decoders/seg_detector_loss.py",
+      "bytes": 9529,
+      "sha256": "fdf67bc503eb564d45010e881c7a04260841148e9ce6d87b36b6b46889f32055"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/decoders/simple_detection.py",
+      "bytes": 6383,
+      "sha256": "aadd581e72dfd94792f30ff80a511d45537739a6920380d2d002dd42992c5b03"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/model/constructor.py",
+      "bytes": 3390,
+      "sha256": "7acaa791fcd2095b92b98a6562ee3bca3d6b1eccb2ec143b53ddc705023ab173"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/model/detector.py",
+      "bytes": 1493,
+      "sha256": "e618c4683abbd4ce6125015a1890f876035da86e13e9d8d919fdcf423e0491cb"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/DBNet/model/model.py",
+      "bytes": 2450,
+      "sha256": "87eb73828efabb82505a06486c16ce92ed0cec46727963e38bc44f11b6a58104"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/__init__.py",
+      "bytes": 51,
+      "sha256": "99994d47e10e30fdc3bad4c4c94b8bce4a1417f10c76d24b17d54f3dee1bfb6a"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/character/en_char.txt",
+      "bytes": 104,
+      "sha256": "14e42c3c8963dfd94146317bfc4e87059cae5ac7c4ce2a44a29b8a2f9f55de8e"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/character/ja_char.txt",
+      "bytes": 8400,
+      "sha256": "03c6ee6b0b3396c2b784efb84c752f15d1cfd29216ea28deb18bd7894b8e76e8"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/cli.py",
+      "bytes": 8659,
+      "sha256": "cbd275db64cfd1ef222db5c0d22836393e672b9698ca070ab48053362ca20b73"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/config.py",
+      "bytes": 91824,
+      "sha256": "9c36d6c674fe32b05bda27192211ff6b63bf22f00b8439d40d33b35e3e2c1f8d"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/craft.py",
+      "bytes": 2590,
+      "sha256": "68a112dbc24db2db1b33f8aac80b9c04c0d6036dab887ca369d8c33f0f2621e8"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/craft_utils.py",
+      "bytes": 9583,
+      "sha256": "5a28f1e248bb43f409973cd768bbba6d5c378add8d78155c5059eb885fa6248c"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/detection.py",
+      "bytes": 4222,
+      "sha256": "a8f99a1466534609cd8cbf62a607c026991e45bd8cf9a6fe968ffa30a2d1425a"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/detection_db.py",
+      "bytes": 8772,
+      "sha256": "e54cab65beceba752d3800770a69b7521d792132325dec66861a38eff8e79b86"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/easyocr.py",
+      "bytes": 31891,
+      "sha256": "78c6c5475df4e1ac1370f07804c59e61e3bef4e35ba168415782b1fec7a0a201"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/export.py",
+      "bytes": 5682,
+      "sha256": "ee96c66fe23317b19d3e031d9b9ee09224634e986a9d826f1a7e3d7ee5dc019f"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/imgproc.py",
+      "bytes": 2195,
+      "sha256": "a3cb8aa880fa11c19b01a63e160d8c229c76e89591e959f3fd65a5a08df43d12"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/model/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/model/model.py",
+      "bytes": 1462,
+      "sha256": "954753028dc8e380cdcc14bfd7ef1e31be082315e4d856e846d6f0db2a4e3194"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/model/modules.py",
+      "bytes": 10821,
+      "sha256": "6e22171d7b63ca993a4db4070c0e1b69498e700f4eb0cab5ae290115e7b55a4d"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/model/vgg_model.py",
+      "bytes": 1364,
+      "sha256": "946c718a6a907a1c5ff26750fd5b29ad5a3b7eb850253d94a3cbd7e11ffbb137"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/recognition.py",
+      "bytes": 9353,
+      "sha256": "636a1be53c78848ca5f8ecbae13dddc1df678cb22b63248e59771b949a96fb16"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/scripts/compile_dbnet_dcn.py",
+      "bytes": 3866,
+      "sha256": "fcfa4d3d49fc1d3373100dab89edd2577aeb33f30d48b5761800f20c6fbe2d58"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/upstream/easyocr/utils.py",
+      "bytes": 34062,
+      "sha256": "e3f985a2d17a9c1deca21693ae261adb77defca2c8066fab662c10905860f643"
+    },
+    {
+      "path": "/tmp/takupoke-windows-easyocr-rows-20261005/tools/easyocr-row-probe/worker.py",
+      "bytes": 7560,
+      "sha256": "dfc90e286f3480617ce7a12644721e803a9d4972c57b85c68122e52d15764367"
+    }
+  ],
+  "scope": "Initial CI bootstrap failed at pip check due to missing setuptools; native0 and image/model preparation0. Only pinned setuptools plus requirement/source-pin metadata added. All recognition settings and all original source/input/model bytes unchanged; one operational retry pending root closure."
+}

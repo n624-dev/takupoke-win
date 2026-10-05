@@ -1,0 +1,17 @@
+{
+  "artifactInspectionOnly": true,
+  "nativeCalls": 0,
+  "url": "https://github.com/JaidedAI/EasyOCR/releases/download/v1.3/japanese_g2.zip",
+  "releaseAssetBytes": 16065475,
+  "zipSHA256": "7b45d23da9b001e296590ed202a45bc1fcaf06ab661f457c463ed502de766fb5",
+  "files": [
+    {
+      "name": "japanese_g2.pth",
+      "bytes": 17321277,
+      "sha256": "afbb32b0485297de5a7c1f59aeecac12c69f32b15cedd3c3d8c2e8529de85af3",
+      "officialMD5": "bad5146990ccb1272cb0908440fbe15e"
+    }
+  ],
+  "licenseSource": "../LICENSE at pinned official repo revision363afb184047ce452e436f4224f3098422df872e Apache2.0",
+  "expandedBoundBytes": 50331648
+}

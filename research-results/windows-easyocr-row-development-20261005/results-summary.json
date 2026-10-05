@@ -1,0 +1,67 @@
+{
+  "scope": "ONE consumed fictional development PNG, identical170 measured originalRGB rows. Not actual PDF renderer, unused holdout, model qualification or production activation. No per-field best engine selection.",
+  "run": 37254147617,
+  "sourceCommit": "01b8eb72cf56217214fc8baf32c70a67dc2ef77e",
+  "diagnosticCounts": {
+    "plannedBodyFields": 120,
+    "assessedBodyFields": 120,
+    "rawBodyConcatExact": 109,
+    "oneBodyCandidateRawExact": 109,
+    "bodyLiteralAndPositionExact": 109,
+    "plannedHeaderTargets": 50,
+    "rawHeaderConcatExact": 45,
+    "headerLiteralAndPositionExact": 45,
+    "rawThreeValueCellsExact": 34,
+    "threeValuePositionsExact": 34,
+    "formalExact": null
+  },
+  "execution": {
+    "type": "execution",
+    "exitCode": 0,
+    "stopReason": null,
+    "elapsedSeconds": 5.819561548999957,
+    "sampledOwnedWorkerPeakRSSBytes": 422850560,
+    "RSSsamples": 58,
+    "memoryScope": "sampled own single worker process RSS; dataloader workers0, not global RAM or device minimum",
+    "rawBytes": 287126,
+    "rawSHA256": "d92ab437d5f8094a6700755de9caa28537fa2819cdfa61d5eb5019fe3e820df8",
+    "stderrBytes": 0,
+    "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "recipeSHA256": "c3b4b8804e682ad7492ec985427908cda840c80905fee84489af895bf151c766",
+    "scope": "single170-row uniform EasyOCR only; partial bytes pinned on every termination"
+  },
+  "host": {
+    "scope": "Actual EasyOCR greedy whole-row strings with original pixel-support ROIs, not native word or character boxes; diagnostic host replay only, gold after output",
+    "nativeRawSha": "d92ab437d5f8094a6700755de9caa28537fa2819cdfa61d5eb5019fe3e820df8",
+    "unrecognizedInk": false,
+    "geometryAndInkEligible": true,
+    "productionAcquisitionEligible": false,
+    "strictExact": false,
+    "strictProposedAnalysis": true,
+    "strictLiteralIncorrect": true,
+    "recoveryError": {
+      "type": "InvalidDataException",
+      "Message": "クラス・日付・時限の見出しを確認できません。",
+      "stage": "builder",
+      "failureClass": "sourceContractRefusal"
+    },
+    "hostProposedFormal": false,
+    "hostLiteralIncorrect": false,
+    "actualRecoveryAccepted": false,
+    "operationalError": false,
+    "providerCalls": 0
+  },
+  "formalTotals": {
+    "plannedDocuments": 1,
+    "recoveryFormalReturnedDocuments": 0,
+    "formalTuplesPlanned": 40,
+    "formalTuplesAssessed": 0,
+    "formalTuplesUnavailable": 40,
+    "formalAccuracy": null,
+    "incorrectStrictProposals": 1,
+    "incorrectRecoveryV5FormalProposals": 0,
+    "actualAcceptances": 0,
+    "runtimeErrors": 0,
+    "negativeDenominator": 0
+  }
+}

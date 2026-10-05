@@ -1,0 +1,19 @@
+{
+  "run": 37253684409,
+  "job": 111586256279,
+  "sourceCommit": "a5b5beb93235bfee4686b34186b0f587d14f44ce",
+  "failureStage": "pip-check before source/model preparation",
+  "actualMessage": "torch 2.5.1+cpu requires setuptools, which is not installed.",
+  "nativeCalls": 0,
+  "modelDownloadCalls": 0,
+  "sourceImagePreparation": 0,
+  "quality": "unassessed",
+  "ownedCleanup": "success",
+  "fullDecodedLog": {
+    "path": "/workspace/review-notes/windows-easyocr-first-ci-full.log",
+    "bytes": 33280,
+    "sha256": "adf444024cc4fc01b47267a39eb5f64d1c05f7e4a15de04a019b762a23ac16ac"
+  },
+  "repair": "Add pinned PyPI setuptools75.8.0 wheel; no recognition settings change",
+  "newFreezeSHA256": "421abdfdb91a22bf432afc831066d7f241bae716fb59379e6f961ee73b6071e8"
+}

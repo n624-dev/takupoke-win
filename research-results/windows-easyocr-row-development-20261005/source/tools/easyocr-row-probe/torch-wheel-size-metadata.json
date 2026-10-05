@@ -1,0 +1,40 @@
+{
+  "scope": "complete11376-entry HTTP range ZIP central directory only; no library downloaded/installed",
+  "wheelBytes": 174642530,
+  "uncompressedBytes": 660749412,
+  "files": 11376,
+  "largest": [
+    [
+      433155401,
+      "torch/lib/libtorch_cpu.so"
+    ],
+    [
+      26113896,
+      "torch/lib/libtorch_python.so"
+    ],
+    [
+      14856912,
+      "torch/bin/test_api"
+    ],
+    [
+      8943072,
+      "torch/bin/test_tensorexpr"
+    ],
+    [
+      7259344,
+      "torch/bin/test_jit"
+    ],
+    [
+      5330888,
+      "torch/bin/protoc-3.13.0.0"
+    ],
+    [
+      5330888,
+      "torch/bin/protoc"
+    ],
+    [
+      4896976,
+      "torch/bin/test_lazy"
+    ]
+  ]
+}

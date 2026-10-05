@@ -1,0 +1,64 @@
+name: Uniform EasyOCR Japanese row probe
+on:
+  push:
+    branches: [research/windows-easyocr-rows-20261005]
+    paths:
+      - .github/workflows/easyocr-row-probe.yml
+      - tools/easyocr-row-probe/**
+permissions:
+  contents: read
+jobs:
+  one-uniform-arm:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Actual hardware and source
+        shell: bash
+        run: |
+          python3 --version
+          uname -a
+          lscpu
+          free -b
+          git rev-parse HEAD
+          df -B1 /tmp
+      - name: Owned environment and pinned CPU dependencies
+        shell: bash
+        run: |
+          task_scratch="/tmp/takupoke-easyocr-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          mkdir "$task_scratch"
+          printf '%s\n' "${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" > "$task_scratch/.owned-easyocr-row-probe"
+          echo "EASYOCR_TASK_SCRATCH=$task_scratch" >> "$GITHUB_ENV"
+          python3 -m venv "$task_scratch/env"
+          "$task_scratch/env/bin/python" -m pip install --no-cache-dir --no-deps --require-hashes -r tools/easyocr-row-probe/requirements.txt
+          "$task_scratch/env/bin/python" -m pip check
+          "$task_scratch/env/bin/python" -m pip freeze
+      - name: Input counterexamples and exact synthetic regeneration
+        shell: bash
+        run: |
+          "$EASYOCR_TASK_SCRATCH/env/bin/python" -m unittest discover -s tools/easyocr-row-probe -p test_contracts.py -v
+          "$EASYOCR_TASK_SCRATCH/env/bin/python" tools/easyocr-row-probe/prepare.py --owned "$EASYOCR_TASK_SCRATCH"
+      - name: Single uniform170 recognizer arm
+        shell: bash
+        run: |
+          "$EASYOCR_TASK_SCRATCH/env/bin/python" tools/easyocr-row-probe/supervise.py --owned "$EASYOCR_TASK_SCRATCH"
+      - name: Delete only this run's owned temporary pixels and models
+        if: always()
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os, pathlib, shutil
+          expected = pathlib.Path('/tmp/takupoke-easyocr-'+os.environ['GITHUB_RUN_ID']+'-'+os.environ['GITHUB_RUN_ATTEMPT'])
+          recorded = os.environ.get('EASYOCR_TASK_SCRATCH')
+          if recorded:
+              actual = pathlib.Path(recorded)
+              marker = actual/'.owned-easyocr-row-probe'
+              if actual != expected or actual.is_symlink() or not marker.is_file():
+                  raise RuntimeError('Unverified cleanup ownership')
+              if marker.read_text().strip() != os.environ['GITHUB_RUN_ID']+'-'+os.environ['GITHUB_RUN_ATTEMPT']:
+                  raise RuntimeError('Cleanup marker mismatch')
+              shutil.rmtree(actual)
+              print('Deleted only exact owned run directory:', actual)
+          PY

@@ -1,0 +1,5356 @@
+{
+  "scope": "Actual EasyOCR greedy whole-row strings with original pixel-support ROIs, not native word or character boxes; diagnostic host replay only, gold after output",
+  "rules": 47,
+  "glyphs": 170,
+  "sourceHash": "3bb95ebcce616cf24c6b4c431f6fe9b790491e5d22085f74e4430cfd5871b946",
+  "schema": 2,
+  "validator": 5,
+  "operationalError": false,
+  "unrecognizedInk": false,
+  "nativeSourceAdoptionEligible": true,
+  "nativeTranscriptionConfidence": null,
+  "productionAcquisitionEligible": false,
+  "acquisitionLimitation": "Native EasyOCR sequence confidence retained in originalNativeAtoms as diagnostic only; primary confidenceNone has no calibrated transcription/character confidence or production acquisition contract; original pixel-support ROI availability is not qualification",
+  "nativeRawSha": "d92ab437d5f8094a6700755de9caa28537fa2819cdfa61d5eb5019fe3e820df8",
+  "originalNativeAtoms": [
+    {
+      "id": 0,
+      "originalPixelRowID": 0,
+      "text": "\u4EE4\u548C14\u5E74\u5EA6",
+      "boundingBox": [
+        [
+          98,
+          13
+        ],
+        [
+          202,
+          13
+        ],
+        [
+          202,
+          33
+        ],
+        [
+          98,
+          33
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.3434417863216523,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 1,
+      "originalPixelRowID": 1,
+      "text": "\u524D\u671F",
+      "boundingBox": [
+        [
+          351,
+          13
+        ],
+        [
+          389,
+          13
+        ],
+        [
+          389,
+          33
+        ],
+        [
+          351,
+          33
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9975394273437729,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 2,
+      "originalPixelRowID": 2,
+      "text": "\u6642\u9593\u5272",
+      "boundingBox": [
+        [
+          551,
+          13
+        ],
+        [
+          609,
+          13
+        ],
+        [
+          609,
+          33
+        ],
+        [
+          551,
+          33
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9956811427500332,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 3,
+      "originalPixelRowID": 3,
+      "text": "\u6708\u66DCH",
+      "boundingBox": [
+        [
+          450,
+          74
+        ],
+        [
+          507,
+          74
+        ],
+        [
+          507,
+          93
+        ],
+        [
+          450,
+          93
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.11641391440464956,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 4,
+      "originalPixelRowID": 4,
+      "text": "\u706B\u5065H",
+      "boundingBox": [
+        [
+          1171,
+          74
+        ],
+        [
+          1227,
+          74
+        ],
+        [
+          1227,
+          93
+        ],
+        [
+          1171,
+          93
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.25831394944061126,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 5,
+      "originalPixelRowID": 5,
+      "text": "\u6C34\u66DC\u53E3",
+      "boundingBox": [
+        [
+          1890,
+          74
+        ],
+        [
+          1947,
+          74
+        ],
+        [
+          1947,
+          94
+        ],
+        [
+          1890,
+          94
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.25629435749833285,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 6,
+      "originalPixelRowID": 6,
+      "text": "\u6728\u66DC\u53E3",
+      "boundingBox": [
+        [
+          2610,
+          74
+        ],
+        [
+          2667,
+          74
+        ],
+        [
+          2667,
+          94
+        ],
+        [
+          2610,
+          94
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.23165472205813373,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 7,
+      "originalPixelRowID": 7,
+      "text": "\u4F59\u5065H",
+      "boundingBox": [
+        [
+          3330,
+          74
+        ],
+        [
+          3387,
+          74
+        ],
+        [
+          3387,
+          93
+        ],
+        [
+          3330,
+          93
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.05068133875609773,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 8,
+      "originalPixelRowID": 8,
+      "text": "1",
+      "boundingBox": [
+        [
+          160,
+          107
+        ],
+        [
+          169,
+          107
+        ],
+        [
+          169,
+          122
+        ],
+        [
+          160,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9871059573811323,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 9,
+      "originalPixelRowID": 9,
+      "text": "2",
+      "boundingBox": [
+        [
+          249,
+          107
+        ],
+        [
+          260,
+          107
+        ],
+        [
+          260,
+          122
+        ],
+        [
+          249,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9978258519006431,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 10,
+      "originalPixelRowID": 10,
+      "text": "3",
+      "boundingBox": [
+        [
+          339,
+          107
+        ],
+        [
+          349,
+          107
+        ],
+        [
+          349,
+          122
+        ],
+        [
+          339,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9999346743762203,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 11,
+      "originalPixelRowID": 11,
+      "text": "4",
+      "boundingBox": [
+        [
+          429,
+          107
+        ],
+        [
+          440,
+          107
+        ],
+        [
+          440,
+          122
+        ],
+        [
+          429,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9996177323475344,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 12,
+      "originalPixelRowID": 12,
+      "text": "5",
+      "boundingBox": [
+        [
+          519,
+          107
+        ],
+        [
+          530,
+          107
+        ],
+        [
+          530,
+          122
+        ],
+        [
+          519,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9996110579145387,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 13,
+      "originalPixelRowID": 13,
+      "text": "6",
+      "boundingBox": [
+        [
+          610,
+          107
+        ],
+        [
+          620,
+          107
+        ],
+        [
+          620,
+          122
+        ],
+        [
+          610,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9370348369682837,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 14,
+      "originalPixelRowID": 14,
+      "text": "7",
+      "boundingBox": [
+        [
+          699,
+          107
+        ],
+        [
+          710,
+          107
+        ],
+        [
+          710,
+          122
+        ],
+        [
+          699,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9986157442654076,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 15,
+      "originalPixelRowID": 15,
+      "text": "8",
+      "boundingBox": [
+        [
+          789,
+          107
+        ],
+        [
+          800,
+          107
+        ],
+        [
+          800,
+          122
+        ],
+        [
+          789,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9999909401145146,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 16,
+      "originalPixelRowID": 16,
+      "text": "1",
+      "boundingBox": [
+        [
+          880,
+          107
+        ],
+        [
+          889,
+          107
+        ],
+        [
+          889,
+          122
+        ],
+        [
+          880,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9871059573811323,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 17,
+      "originalPixelRowID": 17,
+      "text": "2",
+      "boundingBox": [
+        [
+          969,
+          107
+        ],
+        [
+          980,
+          107
+        ],
+        [
+          980,
+          122
+        ],
+        [
+          969,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9978258519006431,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 18,
+      "originalPixelRowID": 18,
+      "text": "3",
+      "boundingBox": [
+        [
+          1059,
+          107
+        ],
+        [
+          1069,
+          107
+        ],
+        [
+          1069,
+          122
+        ],
+        [
+          1059,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9999346743762203,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 19,
+      "originalPixelRowID": 19,
+      "text": "4",
+      "boundingBox": [
+        [
+          1149,
+          107
+        ],
+        [
+          1160,
+          107
+        ],
+        [
+          1160,
+          122
+        ],
+        [
+          1149,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9996177323475344,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 20,
+      "originalPixelRowID": 20,
+      "text": "5",
+      "boundingBox": [
+        [
+          1239,
+          107
+        ],
+        [
+          1250,
+          107
+        ],
+        [
+          1250,
+          122
+        ],
+        [
+          1239,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9996110579145387,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 21,
+      "originalPixelRowID": 21,
+      "text": "6",
+      "boundingBox": [
+        [
+          1330,
+          107
+        ],
+        [
+          1340,
+          107
+        ],
+        [
+          1340,
+          122
+        ],
+        [
+          1330,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9370348369682837,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 22,
+      "originalPixelRowID": 22,
+      "text": "7",
+      "boundingBox": [
+        [
+          1419,
+          107
+        ],
+        [
+          1430,
+          107
+        ],
+        [
+          1430,
+          122
+        ],
+        [
+          1419,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9986157442654076,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 23,
+      "originalPixelRowID": 23,
+      "text": "8",
+      "boundingBox": [
+        [
+          1509,
+          107
+        ],
+        [
+          1520,
+          107
+        ],
+        [
+          1520,
+          122
+        ],
+        [
+          1509,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9999909401145146,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 24,
+      "originalPixelRowID": 24,
+      "text": "1",
+      "boundingBox": [
+        [
+          1600,
+          107
+        ],
+        [
+          1609,
+          107
+        ],
+        [
+          1609,
+          122
+        ],
+        [
+          1600,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9871059573811323,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 25,
+      "originalPixelRowID": 25,
+      "text": "2",
+      "boundingBox": [
+        [
+          1689,
+          107
+        ],
+        [
+          1700,
+          107
+        ],
+        [
+          1700,
+          122
+        ],
+        [
+          1689,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9978258519006431,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 26,
+      "originalPixelRowID": 26,
+      "text": "3",
+      "boundingBox": [
+        [
+          1779,
+          107
+        ],
+        [
+          1789,
+          107
+        ],
+        [
+          1789,
+          122
+        ],
+        [
+          1779,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9999346743762203,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 27,
+      "originalPixelRowID": 27,
+      "text": "4",
+      "boundingBox": [
+        [
+          1869,
+          107
+        ],
+        [
+          1880,
+          107
+        ],
+        [
+          1880,
+          122
+        ],
+        [
+          1869,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9996177323475344,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 28,
+      "originalPixelRowID": 28,
+      "text": "5",
+      "boundingBox": [
+        [
+          1959,
+          107
+        ],
+        [
+          1970,
+          107
+        ],
+        [
+          1970,
+          122
+        ],
+        [
+          1959,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9996110579145387,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 29,
+      "originalPixelRowID": 29,
+      "text": "6",
+      "boundingBox": [
+        [
+          2050,
+          107
+        ],
+        [
+          2060,
+          107
+        ],
+        [
+          2060,
+          122
+        ],
+        [
+          2050,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9370348369682837,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 30,
+      "originalPixelRowID": 30,
+      "text": "7",
+      "boundingBox": [
+        [
+          2139,
+          107
+        ],
+        [
+          2150,
+          107
+        ],
+        [
+          2150,
+          122
+        ],
+        [
+          2139,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9986157442654076,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 31,
+      "originalPixelRowID": 31,
+      "text": "8",
+      "boundingBox": [
+        [
+          2229,
+          107
+        ],
+        [
+          2240,
+          107
+        ],
+        [
+          2240,
+          122
+        ],
+        [
+          2229,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9999909401145146,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 32,
+      "originalPixelRowID": 32,
+      "text": "1",
+      "boundingBox": [
+        [
+          2320,
+          107
+        ],
+        [
+          2329,
+          107
+        ],
+        [
+          2329,
+          122
+        ],
+        [
+          2320,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9871059573811323,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 33,
+      "originalPixelRowID": 33,
+      "text": "2",
+      "boundingBox": [
+        [
+          2409,
+          107
+        ],
+        [
+          2420,
+          107
+        ],
+        [
+          2420,
+          122
+        ],
+        [
+          2409,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9978258519006431,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 34,
+      "originalPixelRowID": 34,
+      "text": "3",
+      "boundingBox": [
+        [
+          2499,
+          107
+        ],
+        [
+          2509,
+          107
+        ],
+        [
+          2509,
+          122
+        ],
+        [
+          2499,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9999346743762203,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 35,
+      "originalPixelRowID": 35,
+      "text": "4",
+      "boundingBox": [
+        [
+          2589,
+          107
+        ],
+        [
+          2600,
+          107
+        ],
+        [
+          2600,
+          122
+        ],
+        [
+          2589,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9996177323475344,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 36,
+      "originalPixelRowID": 36,
+      "text": "5",
+      "boundingBox": [
+        [
+          2679,
+          107
+        ],
+        [
+          2690,
+          107
+        ],
+        [
+          2690,
+          122
+        ],
+        [
+          2679,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9996110579145387,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 37,
+      "originalPixelRowID": 37,
+      "text": "6",
+      "boundingBox": [
+        [
+          2770,
+          107
+        ],
+        [
+          2780,
+          107
+        ],
+        [
+          2780,
+          122
+        ],
+        [
+          2770,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9370348369682837,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 38,
+      "originalPixelRowID": 38,
+      "text": "7",
+      "boundingBox": [
+        [
+          2859,
+          107
+        ],
+        [
+          2870,
+          107
+        ],
+        [
+          2870,
+          122
+        ],
+        [
+          2859,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9986157442654076,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 39,
+      "originalPixelRowID": 39,
+      "text": "8",
+      "boundingBox": [
+        [
+          2949,
+          107
+        ],
+        [
+          2960,
+          107
+        ],
+        [
+          2960,
+          122
+        ],
+        [
+          2949,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9999909401145146,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 40,
+      "originalPixelRowID": 40,
+      "text": "1",
+      "boundingBox": [
+        [
+          3040,
+          107
+        ],
+        [
+          3049,
+          107
+        ],
+        [
+          3049,
+          122
+        ],
+        [
+          3040,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9871059573811323,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 41,
+      "originalPixelRowID": 41,
+      "text": "2",
+      "boundingBox": [
+        [
+          3129,
+          107
+        ],
+        [
+          3140,
+          107
+        ],
+        [
+          3140,
+          122
+        ],
+        [
+          3129,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9978258519006431,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 42,
+      "originalPixelRowID": 42,
+      "text": "3",
+      "boundingBox": [
+        [
+          3219,
+          107
+        ],
+        [
+          3229,
+          107
+        ],
+        [
+          3229,
+          122
+        ],
+        [
+          3219,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9999346743762203,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 43,
+      "originalPixelRowID": 43,
+      "text": "4",
+      "boundingBox": [
+        [
+          3309,
+          107
+        ],
+        [
+          3320,
+          107
+        ],
+        [
+          3320,
+          122
+        ],
+        [
+          3309,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9996177323475344,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 44,
+      "originalPixelRowID": 44,
+      "text": "5",
+      "boundingBox": [
+        [
+          3399,
+          107
+        ],
+        [
+          3410,
+          107
+        ],
+        [
+          3410,
+          122
+        ],
+        [
+          3399,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9996110579145387,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 45,
+      "originalPixelRowID": 45,
+      "text": "6",
+      "boundingBox": [
+        [
+          3490,
+          107
+        ],
+        [
+          3500,
+          107
+        ],
+        [
+          3500,
+          122
+        ],
+        [
+          3490,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9370348369682837,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 46,
+      "originalPixelRowID": 46,
+      "text": "7",
+      "boundingBox": [
+        [
+          3579,
+          107
+        ],
+        [
+          3590,
+          107
+        ],
+        [
+          3590,
+          122
+        ],
+        [
+          3579,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9986157442654076,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 47,
+      "originalPixelRowID": 47,
+      "text": "8",
+      "boundingBox": [
+        [
+          3669,
+          107
+        ],
+        [
+          3680,
+          107
+        ],
+        [
+          3680,
+          122
+        ],
+        [
+          3669,
+          122
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9999909401145146,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 48,
+      "originalPixelRowID": 48,
+      "text": "\u56F3\u781401",
+      "boundingBox": [
+        [
+          134,
+          139
+        ],
+        [
+          195,
+          139
+        ],
+        [
+          195,
+          158
+        ],
+        [
+          134,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.4261520206928253,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 49,
+      "originalPixelRowID": 49,
+      "text": "\u56F3\u781402",
+      "boundingBox": [
+        [
+          224,
+          139
+        ],
+        [
+          286,
+          139
+        ],
+        [
+          286,
+          158
+        ],
+        [
+          224,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.974286675453186,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 50,
+      "originalPixelRowID": 50,
+      "text": "\u56F3\u781403",
+      "boundingBox": [
+        [
+          314,
+          139
+        ],
+        [
+          375,
+          139
+        ],
+        [
+          375,
+          158
+        ],
+        [
+          314,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9804481863975525,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 51,
+      "originalPixelRowID": 51,
+      "text": "\u56F3\u781404",
+      "boundingBox": [
+        [
+          404,
+          139
+        ],
+        [
+          466,
+          139
+        ],
+        [
+          466,
+          158
+        ],
+        [
+          404,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.7238544821739197,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 52,
+      "originalPixelRowID": 52,
+      "text": "\u56F3\u781405",
+      "boundingBox": [
+        [
+          494,
+          139
+        ],
+        [
+          556,
+          139
+        ],
+        [
+          556,
+          158
+        ],
+        [
+          494,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9741982817649841,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 53,
+      "originalPixelRowID": 53,
+      "text": "\u56F3\u781406",
+      "boundingBox": [
+        [
+          584,
+          139
+        ],
+        [
+          646,
+          139
+        ],
+        [
+          646,
+          158
+        ],
+        [
+          584,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9494212865829468,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 54,
+      "originalPixelRowID": 54,
+      "text": "\u56F3\u781407",
+      "boundingBox": [
+        [
+          674,
+          139
+        ],
+        [
+          736,
+          139
+        ],
+        [
+          736,
+          158
+        ],
+        [
+          674,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.8511519432067871,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 55,
+      "originalPixelRowID": 55,
+      "text": "\u56F3\u781408",
+      "boundingBox": [
+        [
+          764,
+          139
+        ],
+        [
+          826,
+          139
+        ],
+        [
+          826,
+          158
+        ],
+        [
+          764,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9515422582626343,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 56,
+      "originalPixelRowID": 56,
+      "text": "\u56F3\u781409",
+      "boundingBox": [
+        [
+          854,
+          139
+        ],
+        [
+          915,
+          139
+        ],
+        [
+          915,
+          158
+        ],
+        [
+          854,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9627694487571716,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 57,
+      "originalPixelRowID": 57,
+      "text": "\u56F3\u781410",
+      "boundingBox": [
+        [
+          944,
+          139
+        ],
+        [
+          1006,
+          139
+        ],
+        [
+          1006,
+          158
+        ],
+        [
+          944,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.2206866592168808,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 58,
+      "originalPixelRowID": 58,
+      "text": "\u56F3\u78141]",
+      "boundingBox": [
+        [
+          1034,
+          139
+        ],
+        [
+          1095,
+          139
+        ],
+        [
+          1095,
+          158
+        ],
+        [
+          1034,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.14111796021461487,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 59,
+      "originalPixelRowID": 59,
+      "text": "\u56F3\u781412",
+      "boundingBox": [
+        [
+          1124,
+          139
+        ],
+        [
+          1186,
+          139
+        ],
+        [
+          1186,
+          158
+        ],
+        [
+          1124,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9132205843925476,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 60,
+      "originalPixelRowID": 60,
+      "text": "\u56F3\u781413",
+      "boundingBox": [
+        [
+          1214,
+          139
+        ],
+        [
+          1275,
+          139
+        ],
+        [
+          1275,
+          158
+        ],
+        [
+          1214,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9793819785118103,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 61,
+      "originalPixelRowID": 61,
+      "text": "\u56F3\u781414",
+      "boundingBox": [
+        [
+          1304,
+          139
+        ],
+        [
+          1366,
+          139
+        ],
+        [
+          1366,
+          158
+        ],
+        [
+          1304,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.7310908436775208,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 62,
+      "originalPixelRowID": 62,
+      "text": "\u56F3\u78141",
+      "boundingBox": [
+        [
+          1394,
+          139
+        ],
+        [
+          1456,
+          139
+        ],
+        [
+          1456,
+          158
+        ],
+        [
+          1394,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.6511594030719624,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 63,
+      "originalPixelRowID": 63,
+      "text": "\u56F3\u781416",
+      "boundingBox": [
+        [
+          1484,
+          139
+        ],
+        [
+          1546,
+          139
+        ],
+        [
+          1546,
+          158
+        ],
+        [
+          1484,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.4793092906475067,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 64,
+      "originalPixelRowID": 64,
+      "text": "\u56F3\u7814]7",
+      "boundingBox": [
+        [
+          1574,
+          139
+        ],
+        [
+          1636,
+          139
+        ],
+        [
+          1636,
+          158
+        ],
+        [
+          1574,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.22374430298805237,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 65,
+      "originalPixelRowID": 65,
+      "text": "\u56F3\u781418",
+      "boundingBox": [
+        [
+          1664,
+          139
+        ],
+        [
+          1726,
+          139
+        ],
+        [
+          1726,
+          158
+        ],
+        [
+          1664,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.8973484635353088,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 66,
+      "originalPixelRowID": 66,
+      "text": "\u56F3\u781419",
+      "boundingBox": [
+        [
+          1754,
+          139
+        ],
+        [
+          1815,
+          139
+        ],
+        [
+          1815,
+          158
+        ],
+        [
+          1754,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.8360728025436401,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 67,
+      "originalPixelRowID": 67,
+      "text": "\u56F3\u781420",
+      "boundingBox": [
+        [
+          1844,
+          139
+        ],
+        [
+          1906,
+          139
+        ],
+        [
+          1906,
+          158
+        ],
+        [
+          1844,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.8663206100463867,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 68,
+      "originalPixelRowID": 68,
+      "text": "\u56F3\u781421",
+      "boundingBox": [
+        [
+          1934,
+          139
+        ],
+        [
+          1995,
+          139
+        ],
+        [
+          1995,
+          158
+        ],
+        [
+          1934,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.4332522749900818,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 69,
+      "originalPixelRowID": 69,
+      "text": "\u56F3\u781422",
+      "boundingBox": [
+        [
+          2024,
+          139
+        ],
+        [
+          2086,
+          139
+        ],
+        [
+          2086,
+          158
+        ],
+        [
+          2024,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9742767810821533,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 70,
+      "originalPixelRowID": 70,
+      "text": "\u56F3\u781423",
+      "boundingBox": [
+        [
+          2114,
+          139
+        ],
+        [
+          2175,
+          139
+        ],
+        [
+          2175,
+          158
+        ],
+        [
+          2114,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9347336888313293,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 71,
+      "originalPixelRowID": 71,
+      "text": "\u56F3\u781424",
+      "boundingBox": [
+        [
+          2204,
+          139
+        ],
+        [
+          2266,
+          139
+        ],
+        [
+          2266,
+          158
+        ],
+        [
+          2204,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.8319299817085266,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 72,
+      "originalPixelRowID": 72,
+      "text": "\u56F3\u781425",
+      "boundingBox": [
+        [
+          2294,
+          139
+        ],
+        [
+          2356,
+          139
+        ],
+        [
+          2356,
+          158
+        ],
+        [
+          2294,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9746338725090027,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 73,
+      "originalPixelRowID": 73,
+      "text": "\u56F3\u781426",
+      "boundingBox": [
+        [
+          2384,
+          139
+        ],
+        [
+          2446,
+          139
+        ],
+        [
+          2446,
+          158
+        ],
+        [
+          2384,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9821348786354065,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 74,
+      "originalPixelRowID": 74,
+      "text": "\u56F3\u781427",
+      "boundingBox": [
+        [
+          2474,
+          139
+        ],
+        [
+          2536,
+          139
+        ],
+        [
+          2536,
+          158
+        ],
+        [
+          2474,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9752376675605774,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 75,
+      "originalPixelRowID": 75,
+      "text": "\u56F3\u781428",
+      "boundingBox": [
+        [
+          2564,
+          139
+        ],
+        [
+          2626,
+          139
+        ],
+        [
+          2626,
+          158
+        ],
+        [
+          2564,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9711375832557678,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 76,
+      "originalPixelRowID": 76,
+      "text": "\u56F3\u781429",
+      "boundingBox": [
+        [
+          2654,
+          139
+        ],
+        [
+          2715,
+          139
+        ],
+        [
+          2715,
+          158
+        ],
+        [
+          2654,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.918031632900238,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 77,
+      "originalPixelRowID": 77,
+      "text": "\u56F3\u781430",
+      "boundingBox": [
+        [
+          2744,
+          139
+        ],
+        [
+          2806,
+          139
+        ],
+        [
+          2806,
+          158
+        ],
+        [
+          2744,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9574765563011169,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 78,
+      "originalPixelRowID": 78,
+      "text": "\u56F3\u781431",
+      "boundingBox": [
+        [
+          2834,
+          139
+        ],
+        [
+          2895,
+          139
+        ],
+        [
+          2895,
+          158
+        ],
+        [
+          2834,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.40371274948120117,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 79,
+      "originalPixelRowID": 79,
+      "text": "\u56F3\u781432",
+      "boundingBox": [
+        [
+          2924,
+          139
+        ],
+        [
+          2986,
+          139
+        ],
+        [
+          2986,
+          158
+        ],
+        [
+          2924,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9756044149398804,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 80,
+      "originalPixelRowID": 80,
+      "text": "\u56F3\u781433",
+      "boundingBox": [
+        [
+          3014,
+          139
+        ],
+        [
+          3075,
+          139
+        ],
+        [
+          3075,
+          158
+        ],
+        [
+          3014,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9766005277633667,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 81,
+      "originalPixelRowID": 81,
+      "text": "\u56F3\u781434",
+      "boundingBox": [
+        [
+          3104,
+          139
+        ],
+        [
+          3166,
+          139
+        ],
+        [
+          3166,
+          158
+        ],
+        [
+          3104,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9665719270706177,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 82,
+      "originalPixelRowID": 82,
+      "text": "\u56F3\u781435",
+      "boundingBox": [
+        [
+          3194,
+          139
+        ],
+        [
+          3256,
+          139
+        ],
+        [
+          3256,
+          158
+        ],
+        [
+          3194,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9793450832366943,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 83,
+      "originalPixelRowID": 83,
+      "text": "\u56F3\u781436",
+      "boundingBox": [
+        [
+          3284,
+          139
+        ],
+        [
+          3346,
+          139
+        ],
+        [
+          3346,
+          158
+        ],
+        [
+          3284,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9755505919456482,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 84,
+      "originalPixelRowID": 84,
+      "text": "\u56F3\u781437",
+      "boundingBox": [
+        [
+          3374,
+          139
+        ],
+        [
+          3436,
+          139
+        ],
+        [
+          3436,
+          158
+        ],
+        [
+          3374,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9817134737968445,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 85,
+      "originalPixelRowID": 85,
+      "text": "\u56F3\u781438",
+      "boundingBox": [
+        [
+          3464,
+          139
+        ],
+        [
+          3526,
+          139
+        ],
+        [
+          3526,
+          158
+        ],
+        [
+          3464,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9711557030677795,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 86,
+      "originalPixelRowID": 86,
+      "text": "\u56F3\u781439",
+      "boundingBox": [
+        [
+          3554,
+          139
+        ],
+        [
+          3615,
+          139
+        ],
+        [
+          3615,
+          158
+        ],
+        [
+          3554,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9708724617958069,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 87,
+      "originalPixelRowID": 87,
+      "text": "\u56F3\u781440",
+      "boundingBox": [
+        [
+          3644,
+          139
+        ],
+        [
+          3706,
+          139
+        ],
+        [
+          3706,
+          158
+        ],
+        [
+          3644,
+          158
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9430053234100342,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 88,
+      "originalPixelRowID": 88,
+      "text": "1",
+      "boundingBox": [
+        [
+          35,
+          171
+        ],
+        [
+          44,
+          171
+        ],
+        [
+          44,
+          186
+        ],
+        [
+          35,
+          186
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9871059573811323,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 89,
+      "originalPixelRowID": 89,
+      "text": "2",
+      "boundingBox": [
+        [
+          84,
+          171
+        ],
+        [
+          95,
+          171
+        ],
+        [
+          95,
+          186
+        ],
+        [
+          84,
+          186
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9978258519006431,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 90,
+      "originalPixelRowID": 90,
+      "text": "\u8A66\u5E2B0]",
+      "boundingBox": [
+        [
+          133,
+          171
+        ],
+        [
+          195,
+          171
+        ],
+        [
+          195,
+          191
+        ],
+        [
+          133,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.977834165096283,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 91,
+      "originalPixelRowID": 91,
+      "text": "\u8A66\u5E2B02",
+      "boundingBox": [
+        [
+          223,
+          171
+        ],
+        [
+          286,
+          171
+        ],
+        [
+          286,
+          191
+        ],
+        [
+          223,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9914806485176086,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 92,
+      "originalPixelRowID": 92,
+      "text": "\u8A66\u5E2B03",
+      "boundingBox": [
+        [
+          313,
+          171
+        ],
+        [
+          375,
+          171
+        ],
+        [
+          375,
+          191
+        ],
+        [
+          313,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9967249631881714,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 93,
+      "originalPixelRowID": 93,
+      "text": "\u8A66\u5E2B04",
+      "boundingBox": [
+        [
+          403,
+          171
+        ],
+        [
+          466,
+          171
+        ],
+        [
+          466,
+          191
+        ],
+        [
+          403,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9822343587875366,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 94,
+      "originalPixelRowID": 94,
+      "text": "\u8A66\u5E2B05",
+      "boundingBox": [
+        [
+          493,
+          171
+        ],
+        [
+          556,
+          171
+        ],
+        [
+          556,
+          191
+        ],
+        [
+          493,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9880111217498779,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 95,
+      "originalPixelRowID": 95,
+      "text": "\u8A66\u5E2B06",
+      "boundingBox": [
+        [
+          583,
+          171
+        ],
+        [
+          646,
+          171
+        ],
+        [
+          646,
+          191
+        ],
+        [
+          583,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9722985625267029,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 96,
+      "originalPixelRowID": 96,
+      "text": "\u8A66\u5E2B07",
+      "boundingBox": [
+        [
+          673,
+          171
+        ],
+        [
+          736,
+          171
+        ],
+        [
+          736,
+          191
+        ],
+        [
+          673,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.6458398103713989,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 97,
+      "originalPixelRowID": 97,
+      "text": "\u8A66\u5E2B08",
+      "boundingBox": [
+        [
+          763,
+          171
+        ],
+        [
+          826,
+          171
+        ],
+        [
+          826,
+          191
+        ],
+        [
+          763,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9848683476448059,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 98,
+      "originalPixelRowID": 98,
+      "text": "\u8A66\u5E2B09",
+      "boundingBox": [
+        [
+          853,
+          171
+        ],
+        [
+          915,
+          171
+        ],
+        [
+          915,
+          191
+        ],
+        [
+          853,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9060678482055664,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 99,
+      "originalPixelRowID": 99,
+      "text": "\u8A66\u5E2B10",
+      "boundingBox": [
+        [
+          943,
+          171
+        ],
+        [
+          1006,
+          171
+        ],
+        [
+          1006,
+          191
+        ],
+        [
+          943,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.569028913974762,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 100,
+      "originalPixelRowID": 100,
+      "text": "\u8A66\u5E2B1]",
+      "boundingBox": [
+        [
+          1033,
+          171
+        ],
+        [
+          1095,
+          171
+        ],
+        [
+          1095,
+          191
+        ],
+        [
+          1033,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.5744816064834595,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 101,
+      "originalPixelRowID": 101,
+      "text": "\u8A66\u5E2B12",
+      "boundingBox": [
+        [
+          1123,
+          171
+        ],
+        [
+          1186,
+          171
+        ],
+        [
+          1186,
+          191
+        ],
+        [
+          1123,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9833789467811584,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 102,
+      "originalPixelRowID": 102,
+      "text": "\u8A66\u5E2B13",
+      "boundingBox": [
+        [
+          1213,
+          171
+        ],
+        [
+          1275,
+          171
+        ],
+        [
+          1275,
+          191
+        ],
+        [
+          1213,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9820853471755981,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 103,
+      "originalPixelRowID": 103,
+      "text": "\u8A66\u5E2B14",
+      "boundingBox": [
+        [
+          1303,
+          171
+        ],
+        [
+          1366,
+          171
+        ],
+        [
+          1366,
+          191
+        ],
+        [
+          1303,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9047741293907166,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 104,
+      "originalPixelRowID": 104,
+      "text": "\u8A66\u5E2B15",
+      "boundingBox": [
+        [
+          1393,
+          171
+        ],
+        [
+          1456,
+          171
+        ],
+        [
+          1456,
+          191
+        ],
+        [
+          1393,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.4297606348991394,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 105,
+      "originalPixelRowID": 105,
+      "text": "\u8A66\u5E2B16",
+      "boundingBox": [
+        [
+          1483,
+          171
+        ],
+        [
+          1546,
+          171
+        ],
+        [
+          1546,
+          191
+        ],
+        [
+          1483,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.242925226688385,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 106,
+      "originalPixelRowID": 106,
+      "text": "\u8A66\u5E2B17",
+      "boundingBox": [
+        [
+          1573,
+          171
+        ],
+        [
+          1636,
+          171
+        ],
+        [
+          1636,
+          191
+        ],
+        [
+          1573,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.27940261363983154,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 107,
+      "originalPixelRowID": 107,
+      "text": "\u8A66\u5E2B18",
+      "boundingBox": [
+        [
+          1663,
+          171
+        ],
+        [
+          1726,
+          171
+        ],
+        [
+          1726,
+          191
+        ],
+        [
+          1663,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9666329026222229,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 108,
+      "originalPixelRowID": 108,
+      "text": "\u8A66\u5E2B19",
+      "boundingBox": [
+        [
+          1753,
+          171
+        ],
+        [
+          1815,
+          171
+        ],
+        [
+          1815,
+          191
+        ],
+        [
+          1753,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.8746205568313599,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 109,
+      "originalPixelRowID": 109,
+      "text": "\u8A66\u5E2B20",
+      "boundingBox": [
+        [
+          1843,
+          171
+        ],
+        [
+          1906,
+          171
+        ],
+        [
+          1906,
+          191
+        ],
+        [
+          1843,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9089803099632263,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 110,
+      "originalPixelRowID": 110,
+      "text": "\u8A66\u5E2B2]",
+      "boundingBox": [
+        [
+          1933,
+          171
+        ],
+        [
+          1995,
+          171
+        ],
+        [
+          1995,
+          191
+        ],
+        [
+          1933,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.922305166721344,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 111,
+      "originalPixelRowID": 111,
+      "text": "\u8A66\u5E2B22",
+      "boundingBox": [
+        [
+          2023,
+          171
+        ],
+        [
+          2086,
+          171
+        ],
+        [
+          2086,
+          191
+        ],
+        [
+          2023,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9833444356918335,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 112,
+      "originalPixelRowID": 112,
+      "text": "\u8A66\u5E2B23",
+      "boundingBox": [
+        [
+          2113,
+          171
+        ],
+        [
+          2175,
+          171
+        ],
+        [
+          2175,
+          191
+        ],
+        [
+          2113,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.927378237247467,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 113,
+      "originalPixelRowID": 113,
+      "text": "\u8A66\u5E2B24",
+      "boundingBox": [
+        [
+          2203,
+          171
+        ],
+        [
+          2266,
+          171
+        ],
+        [
+          2266,
+          191
+        ],
+        [
+          2203,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.8259546756744385,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 114,
+      "originalPixelRowID": 114,
+      "text": "\u8A66\u5E2B25",
+      "boundingBox": [
+        [
+          2293,
+          171
+        ],
+        [
+          2356,
+          171
+        ],
+        [
+          2356,
+          191
+        ],
+        [
+          2293,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9645020365715027,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 115,
+      "originalPixelRowID": 115,
+      "text": "\u8A66\u5E2B26",
+      "boundingBox": [
+        [
+          2383,
+          171
+        ],
+        [
+          2446,
+          171
+        ],
+        [
+          2446,
+          191
+        ],
+        [
+          2383,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9876002669334412,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 116,
+      "originalPixelRowID": 116,
+      "text": "\u8A66\u5E2B27",
+      "boundingBox": [
+        [
+          2473,
+          171
+        ],
+        [
+          2536,
+          171
+        ],
+        [
+          2536,
+          191
+        ],
+        [
+          2473,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9703953266143799,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 117,
+      "originalPixelRowID": 117,
+      "text": "\u8A66\u5E2B28",
+      "boundingBox": [
+        [
+          2563,
+          171
+        ],
+        [
+          2626,
+          171
+        ],
+        [
+          2626,
+          191
+        ],
+        [
+          2563,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9890753030776978,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 118,
+      "originalPixelRowID": 118,
+      "text": "\u8A66\u5E2B29",
+      "boundingBox": [
+        [
+          2653,
+          171
+        ],
+        [
+          2715,
+          171
+        ],
+        [
+          2715,
+          191
+        ],
+        [
+          2653,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9433014392852783,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 119,
+      "originalPixelRowID": 119,
+      "text": "\u8A66\u5E2B30",
+      "boundingBox": [
+        [
+          2743,
+          171
+        ],
+        [
+          2806,
+          171
+        ],
+        [
+          2806,
+          191
+        ],
+        [
+          2743,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9924391508102417,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 120,
+      "originalPixelRowID": 120,
+      "text": "\u8A66\u5E2B3]",
+      "boundingBox": [
+        [
+          2833,
+          171
+        ],
+        [
+          2895,
+          171
+        ],
+        [
+          2895,
+          191
+        ],
+        [
+          2833,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9886825084686279,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 121,
+      "originalPixelRowID": 121,
+      "text": "\u8A66\u5E2B32",
+      "boundingBox": [
+        [
+          2923,
+          171
+        ],
+        [
+          2986,
+          171
+        ],
+        [
+          2986,
+          191
+        ],
+        [
+          2923,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9491669769372433,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 122,
+      "originalPixelRowID": 122,
+      "text": "\u8A66\u5E2B33",
+      "boundingBox": [
+        [
+          3013,
+          171
+        ],
+        [
+          3075,
+          171
+        ],
+        [
+          3075,
+          191
+        ],
+        [
+          3013,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.6942829794737639,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 123,
+      "originalPixelRowID": 123,
+      "text": "\u8A66\u5E2B34",
+      "boundingBox": [
+        [
+          3103,
+          171
+        ],
+        [
+          3166,
+          171
+        ],
+        [
+          3166,
+          191
+        ],
+        [
+          3103,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9969842433929443,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 124,
+      "originalPixelRowID": 124,
+      "text": "\u8A66\u5E2B35",
+      "boundingBox": [
+        [
+          3193,
+          171
+        ],
+        [
+          3256,
+          171
+        ],
+        [
+          3256,
+          191
+        ],
+        [
+          3193,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9954931735992432,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 125,
+      "originalPixelRowID": 125,
+      "text": "\u8A66\u5E2B36",
+      "boundingBox": [
+        [
+          3283,
+          171
+        ],
+        [
+          3346,
+          171
+        ],
+        [
+          3346,
+          191
+        ],
+        [
+          3283,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9967151880264282,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 126,
+      "originalPixelRowID": 126,
+      "text": "\u8A66\u5E2B37",
+      "boundingBox": [
+        [
+          3373,
+          171
+        ],
+        [
+          3436,
+          171
+        ],
+        [
+          3436,
+          191
+        ],
+        [
+          3373,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9953769445419312,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 127,
+      "originalPixelRowID": 127,
+      "text": "\u8A66\u5E2B38",
+      "boundingBox": [
+        [
+          3463,
+          171
+        ],
+        [
+          3526,
+          171
+        ],
+        [
+          3526,
+          191
+        ],
+        [
+          3463,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9971935749053955,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 128,
+      "originalPixelRowID": 128,
+      "text": "\u8A66\u5E2B39",
+      "boundingBox": [
+        [
+          3553,
+          171
+        ],
+        [
+          3615,
+          171
+        ],
+        [
+          3615,
+          191
+        ],
+        [
+          3553,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.995809018611908,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 129,
+      "originalPixelRowID": 129,
+      "text": "\u8A66\u5E2B40",
+      "boundingBox": [
+        [
+          3643,
+          171
+        ],
+        [
+          3706,
+          171
+        ],
+        [
+          3706,
+          191
+        ],
+        [
+          3643,
+          191
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9696537256240845,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 130,
+      "originalPixelRowID": 130,
+      "text": "\u8A66\u57DF0]",
+      "boundingBox": [
+        [
+          133,
+          203
+        ],
+        [
+          195,
+          203
+        ],
+        [
+          195,
+          223
+        ],
+        [
+          133,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.95887291431427,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 131,
+      "originalPixelRowID": 131,
+      "text": "\u8A66\u57DF02",
+      "boundingBox": [
+        [
+          223,
+          203
+        ],
+        [
+          286,
+          203
+        ],
+        [
+          286,
+          223
+        ],
+        [
+          223,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.990350604057312,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 132,
+      "originalPixelRowID": 132,
+      "text": "\u8A66\u57DF03",
+      "boundingBox": [
+        [
+          313,
+          203
+        ],
+        [
+          375,
+          203
+        ],
+        [
+          375,
+          223
+        ],
+        [
+          313,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9939022660255432,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 133,
+      "originalPixelRowID": 133,
+      "text": "\u8A66\u57DF04",
+      "boundingBox": [
+        [
+          403,
+          203
+        ],
+        [
+          466,
+          203
+        ],
+        [
+          466,
+          223
+        ],
+        [
+          403,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9763297438621521,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 134,
+      "originalPixelRowID": 134,
+      "text": "\u8A66\u57DF05",
+      "boundingBox": [
+        [
+          493,
+          203
+        ],
+        [
+          556,
+          203
+        ],
+        [
+          556,
+          223
+        ],
+        [
+          493,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9873937964439392,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 135,
+      "originalPixelRowID": 135,
+      "text": "\u8A66\u57DF06",
+      "boundingBox": [
+        [
+          583,
+          203
+        ],
+        [
+          646,
+          203
+        ],
+        [
+          646,
+          223
+        ],
+        [
+          583,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9806987643241882,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 136,
+      "originalPixelRowID": 136,
+      "text": "\u8A66\u57DF07",
+      "boundingBox": [
+        [
+          673,
+          203
+        ],
+        [
+          736,
+          203
+        ],
+        [
+          736,
+          223
+        ],
+        [
+          673,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.8153601884841919,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 137,
+      "originalPixelRowID": 137,
+      "text": "\u8A66\u57DF08",
+      "boundingBox": [
+        [
+          763,
+          203
+        ],
+        [
+          826,
+          203
+        ],
+        [
+          826,
+          223
+        ],
+        [
+          763,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9885975122451782,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 138,
+      "originalPixelRowID": 138,
+      "text": "\u8A66\u57DF09",
+      "boundingBox": [
+        [
+          853,
+          203
+        ],
+        [
+          915,
+          203
+        ],
+        [
+          915,
+          223
+        ],
+        [
+          853,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.7754743695259094,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 139,
+      "originalPixelRowID": 139,
+      "text": "\u8A66\u57DF10",
+      "boundingBox": [
+        [
+          943,
+          203
+        ],
+        [
+          1006,
+          203
+        ],
+        [
+          1006,
+          223
+        ],
+        [
+          943,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.44455888867378235,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 140,
+      "originalPixelRowID": 140,
+      "text": "\u8A66\u57DF1]",
+      "boundingBox": [
+        [
+          1033,
+          203
+        ],
+        [
+          1095,
+          203
+        ],
+        [
+          1095,
+          223
+        ],
+        [
+          1033,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.45804107189178467,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 141,
+      "originalPixelRowID": 141,
+      "text": "\u8A66\u57DF12",
+      "boundingBox": [
+        [
+          1123,
+          203
+        ],
+        [
+          1186,
+          203
+        ],
+        [
+          1186,
+          223
+        ],
+        [
+          1123,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9497201442718506,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 142,
+      "originalPixelRowID": 142,
+      "text": "\u8A66\u57DF13",
+      "boundingBox": [
+        [
+          1213,
+          203
+        ],
+        [
+          1275,
+          203
+        ],
+        [
+          1275,
+          223
+        ],
+        [
+          1213,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9431892037391663,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 143,
+      "originalPixelRowID": 143,
+      "text": "\u8A66\u57DF14",
+      "boundingBox": [
+        [
+          1303,
+          203
+        ],
+        [
+          1366,
+          203
+        ],
+        [
+          1366,
+          223
+        ],
+        [
+          1303,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.7198192477226257,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 144,
+      "originalPixelRowID": 144,
+      "text": "\u8A66\u57DF15",
+      "boundingBox": [
+        [
+          1393,
+          203
+        ],
+        [
+          1456,
+          203
+        ],
+        [
+          1456,
+          223
+        ],
+        [
+          1393,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.4218754172325134,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 145,
+      "originalPixelRowID": 145,
+      "text": "\u8A66\u57DF16",
+      "boundingBox": [
+        [
+          1483,
+          203
+        ],
+        [
+          1546,
+          203
+        ],
+        [
+          1546,
+          223
+        ],
+        [
+          1483,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.24988576769828796,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 146,
+      "originalPixelRowID": 146,
+      "text": "\u8A66\u57DF17",
+      "boundingBox": [
+        [
+          1573,
+          203
+        ],
+        [
+          1636,
+          203
+        ],
+        [
+          1636,
+          223
+        ],
+        [
+          1573,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.29537513852119446,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 147,
+      "originalPixelRowID": 147,
+      "text": "\u8A66\u57DF18",
+      "boundingBox": [
+        [
+          1663,
+          203
+        ],
+        [
+          1726,
+          203
+        ],
+        [
+          1726,
+          223
+        ],
+        [
+          1663,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9443832675528783,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 148,
+      "originalPixelRowID": 148,
+      "text": "\u8A66\u57DF19",
+      "boundingBox": [
+        [
+          1753,
+          203
+        ],
+        [
+          1815,
+          203
+        ],
+        [
+          1815,
+          223
+        ],
+        [
+          1753,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.8431352376937866,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 149,
+      "originalPixelRowID": 149,
+      "text": "\u8A66\u57DF20",
+      "boundingBox": [
+        [
+          1843,
+          203
+        ],
+        [
+          1906,
+          203
+        ],
+        [
+          1906,
+          223
+        ],
+        [
+          1843,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.964546263217926,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 150,
+      "originalPixelRowID": 150,
+      "text": "\u8A66\u57DF2]",
+      "boundingBox": [
+        [
+          1933,
+          203
+        ],
+        [
+          1995,
+          203
+        ],
+        [
+          1995,
+          223
+        ],
+        [
+          1933,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9413580298423767,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 151,
+      "originalPixelRowID": 151,
+      "text": "\u8A66\u57DF22",
+      "boundingBox": [
+        [
+          2023,
+          203
+        ],
+        [
+          2086,
+          203
+        ],
+        [
+          2086,
+          223
+        ],
+        [
+          2023,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9769538044929504,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 152,
+      "originalPixelRowID": 152,
+      "text": "\u8A66\u57DF23",
+      "boundingBox": [
+        [
+          2113,
+          203
+        ],
+        [
+          2175,
+          203
+        ],
+        [
+          2175,
+          223
+        ],
+        [
+          2113,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9132313132286072,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 153,
+      "originalPixelRowID": 153,
+      "text": "\u8A66\u57DF24",
+      "boundingBox": [
+        [
+          2203,
+          203
+        ],
+        [
+          2266,
+          203
+        ],
+        [
+          2266,
+          223
+        ],
+        [
+          2203,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.8492271304130554,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 154,
+      "originalPixelRowID": 154,
+      "text": "\u8A66\u57DF25",
+      "boundingBox": [
+        [
+          2293,
+          203
+        ],
+        [
+          2356,
+          203
+        ],
+        [
+          2356,
+          223
+        ],
+        [
+          2293,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9763374924659729,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 155,
+      "originalPixelRowID": 155,
+      "text": "\u8A66\u57DF26",
+      "boundingBox": [
+        [
+          2383,
+          203
+        ],
+        [
+          2446,
+          203
+        ],
+        [
+          2446,
+          223
+        ],
+        [
+          2383,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9847824573516846,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 156,
+      "originalPixelRowID": 156,
+      "text": "\u8A66\u57DF27",
+      "boundingBox": [
+        [
+          2473,
+          203
+        ],
+        [
+          2536,
+          203
+        ],
+        [
+          2536,
+          223
+        ],
+        [
+          2473,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9862244725227356,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 157,
+      "originalPixelRowID": 157,
+      "text": "\u8A66\u57DF28",
+      "boundingBox": [
+        [
+          2563,
+          203
+        ],
+        [
+          2626,
+          203
+        ],
+        [
+          2626,
+          223
+        ],
+        [
+          2563,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9879744648933411,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 158,
+      "originalPixelRowID": 158,
+      "text": "\u8A66\u57DF29",
+      "boundingBox": [
+        [
+          2653,
+          203
+        ],
+        [
+          2715,
+          203
+        ],
+        [
+          2715,
+          223
+        ],
+        [
+          2653,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9591517448425293,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 159,
+      "originalPixelRowID": 159,
+      "text": "\u8A66\u57DF30",
+      "boundingBox": [
+        [
+          2743,
+          203
+        ],
+        [
+          2806,
+          203
+        ],
+        [
+          2806,
+          223
+        ],
+        [
+          2743,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9517135620117188,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 160,
+      "originalPixelRowID": 160,
+      "text": "\u8A66\u57DF3]",
+      "boundingBox": [
+        [
+          2833,
+          203
+        ],
+        [
+          2895,
+          203
+        ],
+        [
+          2895,
+          223
+        ],
+        [
+          2833,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9730508923530579,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 161,
+      "originalPixelRowID": 161,
+      "text": "\u8A66\u57DF32",
+      "boundingBox": [
+        [
+          2923,
+          203
+        ],
+        [
+          2986,
+          203
+        ],
+        [
+          2986,
+          223
+        ],
+        [
+          2923,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9912074730881418,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 162,
+      "originalPixelRowID": 162,
+      "text": "\u8A66\u57DF33",
+      "boundingBox": [
+        [
+          3013,
+          203
+        ],
+        [
+          3075,
+          203
+        ],
+        [
+          3075,
+          223
+        ],
+        [
+          3013,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9931665062904358,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 163,
+      "originalPixelRowID": 163,
+      "text": "\u8A66\u57DF34",
+      "boundingBox": [
+        [
+          3103,
+          203
+        ],
+        [
+          3166,
+          203
+        ],
+        [
+          3166,
+          223
+        ],
+        [
+          3103,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9935120940208435,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 164,
+      "originalPixelRowID": 164,
+      "text": "\u8A66\u57DF35",
+      "boundingBox": [
+        [
+          3193,
+          203
+        ],
+        [
+          3256,
+          203
+        ],
+        [
+          3256,
+          223
+        ],
+        [
+          3193,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9826614856719971,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 165,
+      "originalPixelRowID": 165,
+      "text": "\u8A66\u57DF36",
+      "boundingBox": [
+        [
+          3283,
+          203
+        ],
+        [
+          3346,
+          203
+        ],
+        [
+          3346,
+          223
+        ],
+        [
+          3283,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9895845651626587,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 166,
+      "originalPixelRowID": 166,
+      "text": "\u8A66\u57DF37",
+      "boundingBox": [
+        [
+          3373,
+          203
+        ],
+        [
+          3436,
+          203
+        ],
+        [
+          3436,
+          223
+        ],
+        [
+          3373,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.993073046207428,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 167,
+      "originalPixelRowID": 167,
+      "text": "\u8A66\u57DF38",
+      "boundingBox": [
+        [
+          3463,
+          203
+        ],
+        [
+          3526,
+          203
+        ],
+        [
+          3526,
+          223
+        ],
+        [
+          3463,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9944091439247131,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 168,
+      "originalPixelRowID": 168,
+      "text": "\u8A66\u57DF39",
+      "boundingBox": [
+        [
+          3553,
+          203
+        ],
+        [
+          3615,
+          203
+        ],
+        [
+          3615,
+          223
+        ],
+        [
+          3553,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9815528392791748,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    },
+    {
+      "id": 169,
+      "originalPixelRowID": 169,
+      "text": "\u8A66\u57DF40",
+      "boundingBox": [
+        [
+          3643,
+          203
+        ],
+        [
+          3706,
+          203
+        ],
+        [
+          3706,
+          223
+        ],
+        [
+          3643,
+          223
+        ]
+      ],
+      "confidence": null,
+      "recognizerSequenceConfidence": 0.9749051928520203,
+      "confidenceScope": "Official EasyOCR custom_mean, uncalibrated sequence diagnostic; not Paddle .8",
+      "geometryScope": "Original measured occupied-row pixel support ROI, not native predicted word/character box"
+    }
+  ],
+  "geometryAndInkEligible": true,
+  "adoptionEligible": false,
+  "downstreamDiagnosticOnly": true,
+  "strict": {
+    "SchoolYear": 2032,
+    "Term": "\u524D\u671F",
+    "Lessons": [
+      {
+        "ClassName": "1_2",
+        "Weekday": 1,
+        "Period": 1,
+        "Names": {
+          "Subject": "\u56F3\u781401",
+          "Teacher": "\u8A66\u5E2B0]",
+          "Room": "\u8A66\u57DF0]",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781401",
+          "DetailTeacher": "\u8A66\u5E2B0]",
+          "DetailRoom": "\u8A66\u57DF0]"
+        },
+        "SourceText": "\u56F3\u781401\n\u8A66\u5E2B0]\n\u8A66\u57DF0]",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 1,
+        "Period": 2,
+        "Names": {
+          "Subject": "\u56F3\u781402",
+          "Teacher": "\u8A66\u5E2B02",
+          "Room": "\u8A66\u57DF02",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781402",
+          "DetailTeacher": "\u8A66\u5E2B02",
+          "DetailRoom": "\u8A66\u57DF02"
+        },
+        "SourceText": "\u56F3\u781402\n\u8A66\u5E2B02\n\u8A66\u57DF02",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 1,
+        "Period": 3,
+        "Names": {
+          "Subject": "\u56F3\u781403",
+          "Teacher": "\u8A66\u5E2B03",
+          "Room": "\u8A66\u57DF03",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781403",
+          "DetailTeacher": "\u8A66\u5E2B03",
+          "DetailRoom": "\u8A66\u57DF03"
+        },
+        "SourceText": "\u56F3\u781403\n\u8A66\u5E2B03\n\u8A66\u57DF03",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 1,
+        "Period": 4,
+        "Names": {
+          "Subject": "\u56F3\u781404",
+          "Teacher": "\u8A66\u5E2B04",
+          "Room": "\u8A66\u57DF04",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781404",
+          "DetailTeacher": "\u8A66\u5E2B04",
+          "DetailRoom": "\u8A66\u57DF04"
+        },
+        "SourceText": "\u56F3\u781404\n\u8A66\u5E2B04\n\u8A66\u57DF04",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 1,
+        "Period": 5,
+        "Names": {
+          "Subject": "\u56F3\u781405",
+          "Teacher": "\u8A66\u5E2B05",
+          "Room": "\u8A66\u57DF05",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781405",
+          "DetailTeacher": "\u8A66\u5E2B05",
+          "DetailRoom": "\u8A66\u57DF05"
+        },
+        "SourceText": "\u56F3\u781405\n\u8A66\u5E2B05\n\u8A66\u57DF05",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 1,
+        "Period": 6,
+        "Names": {
+          "Subject": "\u56F3\u781406",
+          "Teacher": "\u8A66\u5E2B06",
+          "Room": "\u8A66\u57DF06",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781406",
+          "DetailTeacher": "\u8A66\u5E2B06",
+          "DetailRoom": "\u8A66\u57DF06"
+        },
+        "SourceText": "\u56F3\u781406\n\u8A66\u5E2B06\n\u8A66\u57DF06",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 1,
+        "Period": 7,
+        "Names": {
+          "Subject": "\u56F3\u781407",
+          "Teacher": "\u8A66\u5E2B07",
+          "Room": "\u8A66\u57DF07",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781407",
+          "DetailTeacher": "\u8A66\u5E2B07",
+          "DetailRoom": "\u8A66\u57DF07"
+        },
+        "SourceText": "\u56F3\u781407\n\u8A66\u5E2B07\n\u8A66\u57DF07",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 1,
+        "Period": 8,
+        "Names": {
+          "Subject": "\u56F3\u781408",
+          "Teacher": "\u8A66\u5E2B08",
+          "Room": "\u8A66\u57DF08",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781408",
+          "DetailTeacher": "\u8A66\u5E2B08",
+          "DetailRoom": "\u8A66\u57DF08"
+        },
+        "SourceText": "\u56F3\u781408\n\u8A66\u5E2B08\n\u8A66\u57DF08",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 2,
+        "Period": 1,
+        "Names": {
+          "Subject": "\u56F3\u781409",
+          "Teacher": "\u8A66\u5E2B09",
+          "Room": "\u8A66\u57DF09",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781409",
+          "DetailTeacher": "\u8A66\u5E2B09",
+          "DetailRoom": "\u8A66\u57DF09"
+        },
+        "SourceText": "\u56F3\u781409\n\u8A66\u5E2B09\n\u8A66\u57DF09",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 2,
+        "Period": 2,
+        "Names": {
+          "Subject": "\u56F3\u781410",
+          "Teacher": "\u8A66\u5E2B10",
+          "Room": "\u8A66\u57DF10",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781410",
+          "DetailTeacher": "\u8A66\u5E2B10",
+          "DetailRoom": "\u8A66\u57DF10"
+        },
+        "SourceText": "\u56F3\u781410\n\u8A66\u5E2B10\n\u8A66\u57DF10",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 2,
+        "Period": 3,
+        "Names": {
+          "Subject": "\u56F3\u78141]",
+          "Teacher": "\u8A66\u5E2B1]",
+          "Room": "\u8A66\u57DF1]",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u78141]",
+          "DetailTeacher": "\u8A66\u5E2B1]",
+          "DetailRoom": "\u8A66\u57DF1]"
+        },
+        "SourceText": "\u56F3\u78141]\n\u8A66\u5E2B1]\n\u8A66\u57DF1]",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 2,
+        "Period": 4,
+        "Names": {
+          "Subject": "\u56F3\u781412",
+          "Teacher": "\u8A66\u5E2B12",
+          "Room": "\u8A66\u57DF12",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781412",
+          "DetailTeacher": "\u8A66\u5E2B12",
+          "DetailRoom": "\u8A66\u57DF12"
+        },
+        "SourceText": "\u56F3\u781412\n\u8A66\u5E2B12\n\u8A66\u57DF12",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 2,
+        "Period": 5,
+        "Names": {
+          "Subject": "\u56F3\u781413",
+          "Teacher": "\u8A66\u5E2B13",
+          "Room": "\u8A66\u57DF13",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781413",
+          "DetailTeacher": "\u8A66\u5E2B13",
+          "DetailRoom": "\u8A66\u57DF13"
+        },
+        "SourceText": "\u56F3\u781413\n\u8A66\u5E2B13\n\u8A66\u57DF13",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 2,
+        "Period": 6,
+        "Names": {
+          "Subject": "\u56F3\u781414",
+          "Teacher": "\u8A66\u5E2B14",
+          "Room": "\u8A66\u57DF14",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781414",
+          "DetailTeacher": "\u8A66\u5E2B14",
+          "DetailRoom": "\u8A66\u57DF14"
+        },
+        "SourceText": "\u56F3\u781414\n\u8A66\u5E2B14\n\u8A66\u57DF14",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 2,
+        "Period": 7,
+        "Names": {
+          "Subject": "\u56F3\u78141",
+          "Teacher": "\u8A66\u5E2B15",
+          "Room": "\u8A66\u57DF15",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u78141",
+          "DetailTeacher": "\u8A66\u5E2B15",
+          "DetailRoom": "\u8A66\u57DF15"
+        },
+        "SourceText": "\u56F3\u78141\n\u8A66\u5E2B15\n\u8A66\u57DF15",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 2,
+        "Period": 8,
+        "Names": {
+          "Subject": "\u56F3\u781416",
+          "Teacher": "\u8A66\u5E2B16",
+          "Room": "\u8A66\u57DF16",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781416",
+          "DetailTeacher": "\u8A66\u5E2B16",
+          "DetailRoom": "\u8A66\u57DF16"
+        },
+        "SourceText": "\u56F3\u781416\n\u8A66\u5E2B16\n\u8A66\u57DF16",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 3,
+        "Period": 1,
+        "Names": {
+          "Subject": "\u56F3\u7814]7",
+          "Teacher": "\u8A66\u5E2B17",
+          "Room": "\u8A66\u57DF17",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u7814]7",
+          "DetailTeacher": "\u8A66\u5E2B17",
+          "DetailRoom": "\u8A66\u57DF17"
+        },
+        "SourceText": "\u56F3\u7814]7\n\u8A66\u5E2B17\n\u8A66\u57DF17",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 3,
+        "Period": 2,
+        "Names": {
+          "Subject": "\u56F3\u781418",
+          "Teacher": "\u8A66\u5E2B18",
+          "Room": "\u8A66\u57DF18",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781418",
+          "DetailTeacher": "\u8A66\u5E2B18",
+          "DetailRoom": "\u8A66\u57DF18"
+        },
+        "SourceText": "\u56F3\u781418\n\u8A66\u5E2B18\n\u8A66\u57DF18",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 3,
+        "Period": 3,
+        "Names": {
+          "Subject": "\u56F3\u781419",
+          "Teacher": "\u8A66\u5E2B19",
+          "Room": "\u8A66\u57DF19",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781419",
+          "DetailTeacher": "\u8A66\u5E2B19",
+          "DetailRoom": "\u8A66\u57DF19"
+        },
+        "SourceText": "\u56F3\u781419\n\u8A66\u5E2B19\n\u8A66\u57DF19",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 3,
+        "Period": 4,
+        "Names": {
+          "Subject": "\u56F3\u781420",
+          "Teacher": "\u8A66\u5E2B20",
+          "Room": "\u8A66\u57DF20",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781420",
+          "DetailTeacher": "\u8A66\u5E2B20",
+          "DetailRoom": "\u8A66\u57DF20"
+        },
+        "SourceText": "\u56F3\u781420\n\u8A66\u5E2B20\n\u8A66\u57DF20",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 3,
+        "Period": 5,
+        "Names": {
+          "Subject": "\u56F3\u781421",
+          "Teacher": "\u8A66\u5E2B2]",
+          "Room": "\u8A66\u57DF2]",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781421",
+          "DetailTeacher": "\u8A66\u5E2B2]",
+          "DetailRoom": "\u8A66\u57DF2]"
+        },
+        "SourceText": "\u56F3\u781421\n\u8A66\u5E2B2]\n\u8A66\u57DF2]",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 3,
+        "Period": 6,
+        "Names": {
+          "Subject": "\u56F3\u781422",
+          "Teacher": "\u8A66\u5E2B22",
+          "Room": "\u8A66\u57DF22",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781422",
+          "DetailTeacher": "\u8A66\u5E2B22",
+          "DetailRoom": "\u8A66\u57DF22"
+        },
+        "SourceText": "\u56F3\u781422\n\u8A66\u5E2B22\n\u8A66\u57DF22",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 3,
+        "Period": 7,
+        "Names": {
+          "Subject": "\u56F3\u781423",
+          "Teacher": "\u8A66\u5E2B23",
+          "Room": "\u8A66\u57DF23",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781423",
+          "DetailTeacher": "\u8A66\u5E2B23",
+          "DetailRoom": "\u8A66\u57DF23"
+        },
+        "SourceText": "\u56F3\u781423\n\u8A66\u5E2B23\n\u8A66\u57DF23",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 3,
+        "Period": 8,
+        "Names": {
+          "Subject": "\u56F3\u781424",
+          "Teacher": "\u8A66\u5E2B24",
+          "Room": "\u8A66\u57DF24",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781424",
+          "DetailTeacher": "\u8A66\u5E2B24",
+          "DetailRoom": "\u8A66\u57DF24"
+        },
+        "SourceText": "\u56F3\u781424\n\u8A66\u5E2B24\n\u8A66\u57DF24",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 4,
+        "Period": 1,
+        "Names": {
+          "Subject": "\u56F3\u781425",
+          "Teacher": "\u8A66\u5E2B25",
+          "Room": "\u8A66\u57DF25",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781425",
+          "DetailTeacher": "\u8A66\u5E2B25",
+          "DetailRoom": "\u8A66\u57DF25"
+        },
+        "SourceText": "\u56F3\u781425\n\u8A66\u5E2B25\n\u8A66\u57DF25",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 4,
+        "Period": 2,
+        "Names": {
+          "Subject": "\u56F3\u781426",
+          "Teacher": "\u8A66\u5E2B26",
+          "Room": "\u8A66\u57DF26",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781426",
+          "DetailTeacher": "\u8A66\u5E2B26",
+          "DetailRoom": "\u8A66\u57DF26"
+        },
+        "SourceText": "\u56F3\u781426\n\u8A66\u5E2B26\n\u8A66\u57DF26",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 4,
+        "Period": 3,
+        "Names": {
+          "Subject": "\u56F3\u781427",
+          "Teacher": "\u8A66\u5E2B27",
+          "Room": "\u8A66\u57DF27",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781427",
+          "DetailTeacher": "\u8A66\u5E2B27",
+          "DetailRoom": "\u8A66\u57DF27"
+        },
+        "SourceText": "\u56F3\u781427\n\u8A66\u5E2B27\n\u8A66\u57DF27",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 4,
+        "Period": 4,
+        "Names": {
+          "Subject": "\u56F3\u781428",
+          "Teacher": "\u8A66\u5E2B28",
+          "Room": "\u8A66\u57DF28",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781428",
+          "DetailTeacher": "\u8A66\u5E2B28",
+          "DetailRoom": "\u8A66\u57DF28"
+        },
+        "SourceText": "\u56F3\u781428\n\u8A66\u5E2B28\n\u8A66\u57DF28",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 4,
+        "Period": 5,
+        "Names": {
+          "Subject": "\u56F3\u781429",
+          "Teacher": "\u8A66\u5E2B29",
+          "Room": "\u8A66\u57DF29",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781429",
+          "DetailTeacher": "\u8A66\u5E2B29",
+          "DetailRoom": "\u8A66\u57DF29"
+        },
+        "SourceText": "\u56F3\u781429\n\u8A66\u5E2B29\n\u8A66\u57DF29",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 4,
+        "Period": 6,
+        "Names": {
+          "Subject": "\u56F3\u781430",
+          "Teacher": "\u8A66\u5E2B30",
+          "Room": "\u8A66\u57DF30",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781430",
+          "DetailTeacher": "\u8A66\u5E2B30",
+          "DetailRoom": "\u8A66\u57DF30"
+        },
+        "SourceText": "\u56F3\u781430\n\u8A66\u5E2B30\n\u8A66\u57DF30",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 4,
+        "Period": 7,
+        "Names": {
+          "Subject": "\u56F3\u781431",
+          "Teacher": "\u8A66\u5E2B3]",
+          "Room": "\u8A66\u57DF3]",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781431",
+          "DetailTeacher": "\u8A66\u5E2B3]",
+          "DetailRoom": "\u8A66\u57DF3]"
+        },
+        "SourceText": "\u56F3\u781431\n\u8A66\u5E2B3]\n\u8A66\u57DF3]",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 4,
+        "Period": 8,
+        "Names": {
+          "Subject": "\u56F3\u781432",
+          "Teacher": "\u8A66\u5E2B32",
+          "Room": "\u8A66\u57DF32",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781432",
+          "DetailTeacher": "\u8A66\u5E2B32",
+          "DetailRoom": "\u8A66\u57DF32"
+        },
+        "SourceText": "\u56F3\u781432\n\u8A66\u5E2B32\n\u8A66\u57DF32",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 5,
+        "Period": 1,
+        "Names": {
+          "Subject": "\u56F3\u781433",
+          "Teacher": "\u8A66\u5E2B33",
+          "Room": "\u8A66\u57DF33",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781433",
+          "DetailTeacher": "\u8A66\u5E2B33",
+          "DetailRoom": "\u8A66\u57DF33"
+        },
+        "SourceText": "\u56F3\u781433\n\u8A66\u5E2B33\n\u8A66\u57DF33",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 5,
+        "Period": 2,
+        "Names": {
+          "Subject": "\u56F3\u781434",
+          "Teacher": "\u8A66\u5E2B34",
+          "Room": "\u8A66\u57DF34",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781434",
+          "DetailTeacher": "\u8A66\u5E2B34",
+          "DetailRoom": "\u8A66\u57DF34"
+        },
+        "SourceText": "\u56F3\u781434\n\u8A66\u5E2B34\n\u8A66\u57DF34",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 5,
+        "Period": 3,
+        "Names": {
+          "Subject": "\u56F3\u781435",
+          "Teacher": "\u8A66\u5E2B35",
+          "Room": "\u8A66\u57DF35",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781435",
+          "DetailTeacher": "\u8A66\u5E2B35",
+          "DetailRoom": "\u8A66\u57DF35"
+        },
+        "SourceText": "\u56F3\u781435\n\u8A66\u5E2B35\n\u8A66\u57DF35",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 5,
+        "Period": 4,
+        "Names": {
+          "Subject": "\u56F3\u781436",
+          "Teacher": "\u8A66\u5E2B36",
+          "Room": "\u8A66\u57DF36",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781436",
+          "DetailTeacher": "\u8A66\u5E2B36",
+          "DetailRoom": "\u8A66\u57DF36"
+        },
+        "SourceText": "\u56F3\u781436\n\u8A66\u5E2B36\n\u8A66\u57DF36",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 5,
+        "Period": 5,
+        "Names": {
+          "Subject": "\u56F3\u781437",
+          "Teacher": "\u8A66\u5E2B37",
+          "Room": "\u8A66\u57DF37",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781437",
+          "DetailTeacher": "\u8A66\u5E2B37",
+          "DetailRoom": "\u8A66\u57DF37"
+        },
+        "SourceText": "\u56F3\u781437\n\u8A66\u5E2B37\n\u8A66\u57DF37",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 5,
+        "Period": 6,
+        "Names": {
+          "Subject": "\u56F3\u781438",
+          "Teacher": "\u8A66\u5E2B38",
+          "Room": "\u8A66\u57DF38",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781438",
+          "DetailTeacher": "\u8A66\u5E2B38",
+          "DetailRoom": "\u8A66\u57DF38"
+        },
+        "SourceText": "\u56F3\u781438\n\u8A66\u5E2B38\n\u8A66\u57DF38",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 5,
+        "Period": 7,
+        "Names": {
+          "Subject": "\u56F3\u781439",
+          "Teacher": "\u8A66\u5E2B39",
+          "Room": "\u8A66\u57DF39",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781439",
+          "DetailTeacher": "\u8A66\u5E2B39",
+          "DetailRoom": "\u8A66\u57DF39"
+        },
+        "SourceText": "\u56F3\u781439\n\u8A66\u5E2B39\n\u8A66\u57DF39",
+        "Page": 1
+      },
+      {
+        "ClassName": "1_2",
+        "Weekday": 5,
+        "Period": 8,
+        "Names": {
+          "Subject": "\u56F3\u781440",
+          "Teacher": "\u8A66\u5E2B40",
+          "Room": "\u8A66\u57DF40",
+          "SubjectFullName": null,
+          "TeacherFullName": null,
+          "RoomFullName": null,
+          "DetailSubject": "\u56F3\u781440",
+          "DetailTeacher": "\u8A66\u5E2B40",
+          "DetailRoom": "\u8A66\u57DF40"
+        },
+        "SourceText": "\u56F3\u781440\n\u8A66\u5E2B40\n\u8A66\u57DF40",
+        "Page": 1
+      }
+    ],
+    "ApplicableRange": {
+      "Start": "2032-04-01",
+      "EndExclusive": "2032-10-01"
+    }
+  },
+  "recoveryError": {
+    "type": "InvalidDataException",
+    "Message": "\u30AF\u30E9\u30B9\u30FB\u65E5\u4ED8\u30FB\u6642\u9650\u306E\u898B\u51FA\u3057\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002",
+    "stage": "builder",
+    "failureClass": "sourceContractRefusal"
+  },
+  "strictExact": false,
+  "formalExactPossible": false,
+  "hostProposedFormal": false,
+  "hostLiteralIncorrect": false,
+  "hostGeometryEligibleProposal": false,
+  "recoveryFormalExact": false,
+  "actualRecoveryAccepted": false,
+  "strictProposedAnalysis": true,
+  "strictLiteralIncorrect": true,
+  "providerCalls": 0
+}

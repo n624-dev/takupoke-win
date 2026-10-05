@@ -1,0 +1,24 @@
+{
+  "run": 37254147617,
+  "job": 111587583870,
+  "sourceCommit": "01b8eb72cf56217214fc8baf32c70a67dc2ef77e",
+  "fullDecodedLog": {
+    "path": "/workspace/review-notes/windows-easyocr-retry-ci-full.log",
+    "bytes": 93358,
+    "sha256": "6918fe4a7caffde244e2b522dca4b04a83de1e80aed18c1adcb0977e1666f127"
+  },
+  "restoredOriginalStreams": [
+    {
+      "file": "native-raw.log",
+      "originalBytes": 287126,
+      "originalSHA256": "d92ab437d5f8094a6700755de9caa28537fa2819cdfa61d5eb5019fe3e820df8",
+      "encoding": "zlib-base64"
+    },
+    {
+      "file": "native-stderr.log",
+      "originalBytes": 0,
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoding": "zlib-base64"
+    }
+  ]
+}

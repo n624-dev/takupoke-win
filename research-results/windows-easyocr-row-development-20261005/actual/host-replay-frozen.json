@@ -1,0 +1,50 @@
+{
+  "recipe": "easyocr-uniform-170-native-pixel-support-host-replay",
+  "productionSource": "3b5b23bc19f0c63b34a44e6fc0690a05463a241f",
+  "nativeReruns": 0,
+  "modelOutputWire": "170 actual EasyOCR greedy full-row strings, original measured pixel-support whole ROIs; not nativeword/charboxes; sequenceconfidence diagnostic only",
+  "formalReturned": false,
+  "readableRecoveryFailures": 1,
+  "operationalErrors": 0,
+  "hostLiteralIncorrect": false,
+  "actualRecoveryAccepted": false,
+  "tupleAssessed": 0,
+  "tupleUnavailable": 40,
+  "accuracy": null,
+  "productionAcquisitionQualification": false,
+  "files": [
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/easyocr-formal-probe/Program.cs",
+      "bytes": 8800,
+      "sha256": "59094d6cc8912f4b6545171c2de8ca8e26fbe4510164d7f8d6891cbab6b6d8bd"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/easyocr-formal-probe/EasyFormalProbe.csproj",
+      "bytes": 375,
+      "sha256": "1832c76ea7a6efc33aee7b059342a6f1d065353bcf4c36e8ef4d7a6596432298"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/easyocr-row-candidate/native-raw.log",
+      "bytes": 287126,
+      "sha256": "d92ab437d5f8094a6700755de9caa28537fa2819cdfa61d5eb5019fe3e820df8"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/easyocr-row-candidate/host-replay.json",
+      "bytes": 130976,
+      "sha256": "f80fb9b00d54beb233cf0cf09b50d8e8b4b0333d44e1e3d64ef050eb77334ae8"
+    },
+    {
+      "path": "/workspace/review-notes/windows-easyocr-formal-probe-build.log",
+      "bytes": 733,
+      "sha256": "08eb750b0d324da9e595b93d40b15cf13de45ba25c080520bd2bd8e3e989fdcd"
+    }
+  ],
+  "strictProposedAnalysis": true,
+  "strictLiteralIncorrect": true,
+  "strictExact": false,
+  "recoveryProposedFormal": false,
+  "actualProductionAdoptions": 0,
+  "strictIncorrectProposalCount": 1,
+  "recoveryIncorrectProposalCount": 0,
+  "formalAccuracyScope": "Recovery formal tuples unassessed when unavailable; returned Strict wrong proposal is separately scored, never hidden by confidence eligibility."
+}
