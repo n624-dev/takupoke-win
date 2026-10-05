@@ -35,17 +35,24 @@ public static class RecoveryDocumentBuilder
     // parallel alternatives, gaps or differing values cannot establish this binding.
     internal static LessonNames? TrustedNormalNames(TimetableAnalysis normal, IReadOnlyList<RecoverySlot> slots, Action<long> charge)
     {
+        var names = TrustedNormalTuples(normal, slots, charge);
+        return names is { Count: 1 } ? names[0] : null;
+    }
+    // Never take a tuple from only the first slot of a merged physical cell.
+    internal static IReadOnlyList<LessonNames>? TrustedNormalTuples(TimetableAnalysis normal, IReadOnlyList<RecoverySlot> slots, Action<long> charge)
+    {
         charge(slots.Count * 2L);
-        if (slots.Count == 0 || slots.Distinct().Count() != slots.Count) return null;
-        var first = slots[0]; LessonNames? names = null;
+        if (slots.Count is < 1 or > 8 || slots.Distinct().Count() != slots.Count) return null;
+        var first = slots[0]; LessonNames[]? names = null;
         foreach (var slot in slots)
         {
             if (slot.ClassName != first.ClassName || slot.Day != first.Day) return null;
             charge(normal.Lessons.Count);
             var matches = normal.Lessons.Where(l => l.ClassName == slot.ClassName &&
-                l.Weekday.ToString(CultureInfo.InvariantCulture) == slot.Day && l.Period == slot.Period).ToArray();
-            if (matches.Length != 1 || names is not null && names != matches[0].Names) return null;
-            names = matches[0].Names;
+                l.Weekday.ToString(CultureInfo.InvariantCulture) == slot.Day && l.Period == slot.Period).Select(l => l.Names).ToArray();
+            if (matches.Length == 2) charge(matches.Sum(n => (long)n.Subject.Length + n.Teacher.Length + n.Room.Length) * 2L);
+            if (matches.Length is < 1 or > 2 || matches.Distinct().Count() != matches.Length || names is not null && !names.SequenceEqual(matches)) return null;
+            names = matches;
         }
         return names;
     }
@@ -268,14 +275,15 @@ public static class RecoveryDocumentBuilder
                 var empty = inside.Length == 0 && inkFree(pi, box);
                 if (inside.Length == 0 && !empty) throw new InvalidDataException("文字を読めなかったセルを空欄として扱えません。");
                 IReadOnlyList<RecoveryRoleScope> scopes = []; IReadOnlyList<RecoveryLessonBinding> fixedBindings = [];
+                IReadOnlyDictionary<string, string>? separators = null; var fixedBlanks = new HashSet<string>();
                 if (!empty)
                 {
                     work.Step(pageLabels.Length * 3L + inside.Length * 24L);
                     try { scopes = RoleScopes(id, pi, box, inside, pageLabels, inkFree); }
                     catch (InvalidDataException error) when (!RecoveryWorkLimits.IsExceeded(error))
                     {
-                        LessonNames? trustedNames = null;
-                        if (trustedNormal.TryGetValue(pi, out var normal)) trustedNames = TrustedNormalNames(normal, slots, work.Step);
+                        LessonNames? trustedNames = null; IReadOnlyList<LessonNames>? trustedTuples = null;
+                        if (trustedNormal.TryGetValue(pi, out var normal)) { trustedTuples = TrustedNormalTuples(normal, slots, work.Step); trustedNames = trustedTuples is { Count: 1 } ? trustedTuples[0] : null; }
                         else if (trustedSpecial is not null) { var matched = trustedSpecial.Lessons.Where(l => l.Page == pi && l.ClassName == cls.Value && l.Date == day.Value && l.Period == slots.Min(s => s.Period)).ToArray(); if (matched.Length == 1) trustedNames = matched[0].Names; }
                         var rows = PdfGrid.Rows(inside.Select(a => a.Glyph));
                         var text = rows.Select(r => PdfGrid.Key(string.Concat(r.Select(g => g.Text)))).ToArray();
@@ -286,6 +294,43 @@ public static class RecoveryDocumentBuilder
                             var bindings = rows.Select(r => (IReadOnlyList<string>)r.Select(g => byGlyph[g]).ToArray()).ToArray();
                             fixedBindings = [new(bindings[0], bindings[1], bindings[2])];
                         }
+                        else if (trustedTuples is { Count: 2 } && rows.Count == 3)
+                        {
+                            var proof = new Dictionary<string, string>();
+                            var byGlyph = new Dictionary<PdfGlyph, string>(ReferenceEqualityComparer.Instance);
+                            foreach (var a in inside) { work.Step(); byGlyph.Add(a.Glyph, a.Id); }
+                            var parts = new IReadOnlyList<string>[2, 3]; var roles = new[] { "subject", "teacher", "room" };
+                            for (var role = 0; role < 3; role++)
+                            {
+                                work.Step(rows[role].Count * 3L + rows[role].Sum(g => (long)g.Text.Length) * 3L);
+                                var row = rows[role]; var cuts = row.Select((g, i) => (g, i)).Where(p => p.g.Text is "・" or "･").ToArray();
+                                // Whole original atoms only; never carve an OCR line into characters.
+                                if (cuts.Length != 1 || row.Any(g => g.Text is not ("・" or "･") && (g.Text.Contains('・') || g.Text.Contains('･')))) throw;
+                                var cut = cuts[0]; proof.Add(roles[role], byGlyph[cut.g]);
+                                for (var variant = 0; variant < 2; variant++)
+                                {
+                                    var original = variant == 0 ? row.Take(cut.i).ToArray() : row.Skip(cut.i + 1).ToArray();
+                                    var value = string.Concat(original.Select(g => g.Text));
+                                    var expected = role switch { 0 => trustedTuples[variant].Subject, 1 => trustedTuples[variant].Teacher, _ => trustedTuples[variant].Room };
+                                    work.Step(value.Length + expected.Length);
+                                    if (PdfGrid.Key(value) != PdfGrid.Key(expected)) throw;
+                                    if (original.Length == 0)
+                                    {
+                                        if (role == 0) throw;
+                                        var centers = rows.Select(r => r.Average(g => g.Cy)).ToArray();
+                                        var top = role == 0 ? box.Y : (centers[role - 1] + centers[role]) / 2;
+                                        var bottom = role == 2 ? box.Y + box.Height : (centers[role] + centers[role + 1]) / 2;
+                                        var left = variant == 0 ? box.X : cut.g.X + cut.g.Width;
+                                        var right = variant == 0 ? cut.g.X : box.X + box.Width;
+                                        if (right <= left || bottom <= top || !inkFree(pi, new(left, top, right - left, bottom - top))) throw;
+                                        fixedBlanks.Add(roles[role]);
+                                    }
+                                    parts[variant, role] = original.Select(g => byGlyph[g]).ToArray();
+                                }
+                            }
+                            separators = proof;
+                            fixedBindings = [new(parts[0, 0], parts[0, 1], parts[0, 2]), new(parts[1, 0], parts[1, 1], parts[1, 2])];
+                        }
                         else if (!allowStructureProposal || inside.Length > 512) throw;
                     }
                     // Outside the fallback catch: ambiguity must never become
@@ -293,10 +338,10 @@ public static class RecoveryDocumentBuilder
                     RejectInlineParallelAmbiguity(scopes, inside, work);
                 }
                 foreach (var a in inside) sources[a.Id] = sources[a.Id] with { CellId = id };
-                var blanks = scopes.Where(s => s.EmptyVerified).Select(s => s.Role.ToString().ToLowerInvariant()).ToArray();
-                var parallelCount = empty || fixedBindings.Count > 0 || scopes.Count == 0 ? 1 : scopes.Select(s => s.LessonIndex).Distinct().Count();
+                var blanks = scopes.Where(s => s.EmptyVerified).Select(s => s.Role.ToString().ToLowerInvariant()).Concat(fixedBlanks).Distinct().ToArray();
+                var parallelCount = fixedBindings.Count > 0 ? fixedBindings.Count : empty || scopes.Count == 0 ? 1 : scopes.Select(s => s.LessonIndex).Distinct().Count();
                 var cell = new RecoveryCell(id, pi, box, RecoveryInputState.Complete, slots, inside.Select(a => a.Id).ToArray(), blanks, empty, parallelCount)
-                { BindingMode = empty || fixedBindings.Count > 0 ? RecoveryBindingMode.Fixed : RecoveryBindingMode.RoleProposal, RoleScopes = scopes, LessonBindings = fixedBindings,
+                { BindingMode = empty || fixedBindings.Count > 0 ? RecoveryBindingMode.Fixed : RecoveryBindingMode.RoleProposal, RoleScopes = scopes, LessonBindings = fixedBindings, ParallelSeparators = separators,
                     ClassHeaderIds = cls.Ids, DayHeaderIds = day.Ids, PeriodHeaderIds = chosenPeriods.SelectMany(l => l.Ids).ToArray(),
                     ClassRegion = Region(cls, box), DayRegion = Region(day, box), PeriodRegions = chosenPeriods.ToDictionary(l => l.Value, l => Region(l, box)!) };
                 cells.Add(cell); usedSlots.UnionWith(slots); Register(usedClass, cls.Value, cls.Ids); Register(usedDay, day.Value, day.Ids);

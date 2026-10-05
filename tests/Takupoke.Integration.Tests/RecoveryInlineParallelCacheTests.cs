@@ -47,7 +47,7 @@ public sealed class RecoveryInlineParallelCacheTests
         Assert.False(prepared.ReusedAcceptance);
         Assert.Equal(1, context.BuildCalls);
         Assert.Equal(1, context.ProviderFactoryCalls); // The factory returns no providers/models.
-        Assert.Equal(5, prepared.Preview!.Result.Metadata.ValidatorVersion);
+        Assert.Equal(RecoveryValidator.Version, prepared.Preview!.Result.Metadata.ValidatorVersion);
         Assert.Equal("架空科目A", Assert.Single(prepared.Preview.Result.Cells.SelectMany(c => c.Lessons)).Subject.Value);
         await context.AssertPriorFormalPreservedAsync();
         Assert.Equal(RecoveryValidator.Fingerprint(bad), RecoveryValidator.Fingerprint((await context.Store.ReadAsync<RecoveryAudit>(context.Lease, context.AcceptedKey))!));
@@ -79,12 +79,14 @@ public sealed class RecoveryInlineParallelCacheTests
     }
 
     [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
-    public async Task PreviouslyAcceptedGoodAuditIsRecertifiedAndAutomaticallyReusedWithoutAnotherConfirmation(bool structureMetadata)
+    [InlineData(false, 4)]
+    [InlineData(true, 4)]
+    [InlineData(false, 5)]
+    [InlineData(true, 5)]
+    public async Task PreviouslyAcceptedGoodAuditIsRecertifiedAndAutomaticallyReusedWithoutAnotherConfirmation(bool structureMetadata, int version)
     {
         await using var context = await Context.CreateAsync();
-        var old = context.Audit(compound: false, version: 4);
+        var old = context.Audit(compound: false, version: version);
         if (structureMetadata)
         {
             var originalDocument = old.Document with { StructureMetadata = old.Result.Metadata };
@@ -102,12 +104,12 @@ public sealed class RecoveryInlineParallelCacheTests
         Assert.Null(await context.Store.ReadAsync<RecoveryPreview>(context.Lease, "recovery.preview.Timetable"));
         Assert.Null(await context.Store.ReadAsync<RecoveryJob>(context.Lease, "recovery.Timetable"));
         var current = Assert.IsType<RecoveryAudit>(await context.Store.ReadAsync<RecoveryAudit>(context.Lease, context.AcceptedKey));
-        Assert.Equal(5, current.Result.Metadata.ValidatorVersion);
+        Assert.Equal(RecoveryValidator.Version, current.Result.Metadata.ValidatorVersion);
         Assert.True(RecoveryValidator.CanReuse(current.Acceptance, current.Document, current.Result));
         Assert.Equal(old.Acceptance.AcceptedAt, current.Acceptance.AcceptedAt);
         Assert.Equal(old.Acceptance, current.PreviousAcceptance);
-        Assert.Equal(old.Result.Metadata with { ValidatorVersion = 5 }, current.Result.Metadata);
-        Assert.Equal(old.Document.StructureMetadata is null ? null : old.Document.StructureMetadata with { ValidatorVersion = 5 }, current.Document.StructureMetadata);
+        Assert.Equal(old.Result.Metadata with { ValidatorVersion = RecoveryValidator.Version }, current.Result.Metadata);
+        Assert.Equal(old.Document.StructureMetadata is null ? null : old.Document.StructureMetadata with { ValidatorVersion = RecoveryValidator.Version }, current.Document.StructureMetadata);
         Assert.Equal(RecoveryValidator.Fingerprint(old.Document with { StructureMetadata = null }), RecoveryValidator.Fingerprint(current.Document with { StructureMetadata = null }));
         Assert.Equal(RecoveryValidator.Fingerprint(old.Result.Cells), RecoveryValidator.Fingerprint(current.Result.Cells));
         var formal = Assert.IsType<MaterialAnalysis>(await context.Store.ReadAsync<MaterialAnalysis>(context.Lease, "analysis.Timetable"));
@@ -119,6 +121,82 @@ public sealed class RecoveryInlineParallelCacheTests
         Assert.Equal(RecoveryJobState.Adopted, reusedAgain.State); Assert.True(reusedAgain.ReusedAcceptance); Assert.Null(reusedAgain.Preview);
         Assert.Equal(0, context.BuildCalls); Assert.Equal(0, context.ProviderFactoryCalls);
         Assert.Equal(RecoveryValidator.Fingerprint(current), RecoveryValidator.Fingerprint((await context.Store.ReadAsync<RecoveryAudit>(context.Lease, context.AcceptedKey))!));
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task ExactV4ToV5ChainPreservesFirstConsentThroughV6AndRepeatedReuse(bool corruptPrevious)
+    {
+        await using var context = await Context.CreateAsync();
+        var first = context.Audit(compound: false, version: 4);
+        var metadata = first.Result.Metadata with { ValidatorVersion = 5 };
+        var result = first.Result with { Metadata = metadata };
+        var v5 = new RecoveryAudit(first.Document, result, new(first.Document.PdfHash,
+            RecoveryValidator.Fingerprint(result), RecoveryValidator.Fingerprint(first.Document), metadata, first.Acceptance.AcceptedAt)) {
+            PreviousAcceptance = corruptPrevious ? first.Acceptance with { ScopeHash = new string('b',64) } : first.Acceptance
+        };
+        await context.Store.WriteAsync(context.Lease, context.AcceptedKey, v5);
+        var prepared = await context.Coordinator.PrepareAsync(MaterialKind.Timetable, 2026);
+        if (corruptPrevious)
+        {
+            Assert.False(prepared.ReusedAcceptance); Assert.Equal(1,context.BuildCalls);
+            await context.AssertPriorFormalPreservedAsync();
+            Assert.Equal(RecoveryValidator.Fingerprint(v5),RecoveryValidator.Fingerprint((await context.Store.ReadAsync<RecoveryAudit>(context.Lease,context.AcceptedKey))!));
+            return;
+        }
+        Assert.True(prepared.ReusedAcceptance); Assert.Equal(0,context.BuildCalls);
+        var current = (await context.Store.ReadAsync<RecoveryAudit>(context.Lease, context.AcceptedKey))!;
+        Assert.Equal(6,current.Result.Metadata.ValidatorVersion);
+        Assert.Equal(first.Acceptance,current.PreviousAcceptance); Assert.Equal(first.Acceptance.AcceptedAt,current.Acceptance.AcceptedAt);
+        Assert.True(RecoveryAuditCertification.IsCurrent(current));
+        Assert.True((await context.Coordinator.PrepareAsync(MaterialKind.Timetable,2026)).ReusedAcceptance);
+        Assert.Equal(0,context.BuildCalls);
+    }
+    [Theory]
+    [InlineData(4)]
+    [InlineData(5)]
+    public async Task UnchangedNonparallelOcrAuditNeedsOldHashesAndCurrentSemanticRevalidation(int version)
+    {
+        await using var context = await Context.CreateAsync();
+        var old = context.Audit(compound: false, version);
+        var document = old.Document with { Sources = old.Document.Sources.Select(s=>s with { FromOcr = true }).ToArray() };
+        old = old with { Document = document, Acceptance = old.Acceptance with { ScopeHash = RecoveryValidator.Fingerprint(document) } };
+        await context.Store.WriteAsync(context.Lease,context.AcceptedKey,old);
+        var prepared = await context.Coordinator.PrepareAsync(MaterialKind.Timetable,2026);
+        Assert.True(prepared.ReusedAcceptance); Assert.Equal(0,context.BuildCalls);
+        var current = (await context.Store.ReadAsync<RecoveryAudit>(context.Lease,context.AcceptedKey))!;
+        Assert.Equal(old.Acceptance,current.PreviousAcceptance); Assert.Equal(old.Acceptance.AcceptedAt,current.Acceptance.AcceptedAt);
+        Assert.Equal(RecoveryValidator.Fingerprint(old.Document),RecoveryValidator.Fingerprint(current.Document));
+        Assert.All(current.Document.Cells,c=>Assert.Null(c.ParallelSeparators));
+        Assert.True(RecoveryAnalysisConverter.MayDisplay((await context.Store.ReadAsync<MaterialAnalysis>(context.Lease,"analysis.Timetable"))!));
+    }
+    [Fact]
+    public async Task ValidV5DistinctFieldAndStructureHistoriesRemainIndependentThroughV6()
+    {
+        await using var context=await Context.CreateAsync();var old=context.Audit(compound:false,version:5);
+        var structure=old.Result.Metadata with { Provider="fictional-structure",ModelId="fictional-structure-model",PromptVersion="3" };
+        var document=old.Document with { StructureMetadata=structure };
+        old=old with { Document=document,Acceptance=old.Acceptance with { ScopeHash=RecoveryValidator.Fingerprint(document) } };
+        await context.Store.WriteAsync(context.Lease,context.AcceptedKey,old);
+        Assert.True((await context.Coordinator.PrepareAsync(MaterialKind.Timetable,2026)).ReusedAcceptance);
+        var current=(await context.Store.ReadAsync<RecoveryAudit>(context.Lease,context.AcceptedKey))!;
+        Assert.Equal(old.Acceptance,current.PreviousAcceptance);Assert.Equal(structure with { ValidatorVersion=6 },current.Document.StructureMetadata);
+        Assert.Equal(old.Result.Metadata with { ValidatorVersion=6 },current.Result.Metadata);
+        Assert.True(RecoveryAuditCertification.IsCurrent(current));Assert.Equal(0,context.BuildCalls);
+    }
+
+    [Fact]
+    public async Task HistoricallyImpossibleNewSeparatorProofCannotUpgradeARehashedOldAudit()
+    {
+        await using var context = await Context.CreateAsync();
+        var old = context.Audit(compound: false, version: 5);
+        var document = old.Document with { Cells = old.Document.Cells.Select((c,i)=>i==0?c with { ParallelSeparators = new Dictionary<string,string>() }:c).ToArray() };
+        old = old with { Document=document,Acceptance=old.Acceptance with { ScopeHash=RecoveryValidator.Fingerprint(document) } };
+        Assert.Null(RecoveryAuditCertification.TryRecertify(old));
+        await context.Store.WriteAsync(context.Lease,context.AcceptedKey,old);
+        Assert.False((await context.Coordinator.PrepareAsync(MaterialKind.Timetable,2026)).ReusedAcceptance);
+        await context.AssertPriorFormalPreservedAsync();
     }
 
     [Fact]
@@ -203,7 +281,7 @@ public sealed class RecoveryInlineParallelCacheTests
         var old = context.Audit(compound: false, version: 4);
         await context.Store.WriteAsync(context.Lease, context.AcceptedKey, old);
         var document = old.Document with { Sources = old.Document.Sources.Select(s => s with { Text = s.Text.Replace("架空科目A", "架空科目X") }).ToArray() };
-        var result = old.Result with { Metadata = old.Result.Metadata with { ValidatorVersion = 5 },
+        var result = old.Result with { Metadata = old.Result.Metadata with { ValidatorVersion = RecoveryValidator.Version },
             Cells = old.Result.Cells.Select(cell => cell with { Lessons = cell.Lessons.Select(lesson => lesson with {
                 Subject = lesson.Subject with { Value = lesson.Subject.Value.Replace("架空科目A", "架空科目X") }
             }).ToArray() }).ToArray() };

@@ -9,7 +9,7 @@ namespace Takupoke.Core.Recovery;
 public static class RecoveryValidator
 {
     public const int SchemaVersion = 2;
-    public const int Version = 5;
+    public const int Version = 6;
     public static string Fingerprint<T>(T value) => Convert.ToHexStringLower(SHA256.HashData(JsonSerializer.SerializeToUtf8Bytes(value)));
     private static string Text(string value) => Regex.Replace(value.Normalize(NormalizationForm.FormKC), @"\s+", "").Replace('~', '〜').Replace('～', '〜');
     public static IReadOnlyList<string> SpecialClasses { get; } = new[] { "1_1", "1_2", "1_3" }.Concat(Enumerable.Range(2, 4).SelectMany(y => new[] { "CN", "ES", "IT" }.Select(c => $"{y}_{c}"))).Concat(new[] { "AI_1", "AI_2" }).ToArray();
@@ -30,7 +30,7 @@ public static class RecoveryValidator
         var work = new RecoveryWorkBudget(token); work.Step();
         bool Contains(RecoveryBox outer, RecoveryBox inner) { work.Step(); return outer.Contains(inner); }
         var errors = new List<string>();
-        if (doc.SchoolYear is < 1900 or > 9998 || doc.Classes.Count is < 1 or > 64 || doc.Days.Count is < 1 or > 31 || doc.Cells.Count is < 1 or > 20000 || doc.Sources.Count > 100000 || result.Cells.Count > 20000 || doc.Cells.Any(c => c.SourceIds.Count > 100000 || c.RoleScopes.Count > 12 || c.LessonBindings.Count > 4 || c.Slots.Count > 8) || result.Cells.Any(c => c.Lessons.Count > 4)) return new(["inputLimit"]);
+        if (doc.SchoolYear is < 1900 or > 9998 || doc.Classes.Count is < 1 or > 64 || doc.Days.Count is < 1 or > 31 || doc.Cells.Count is < 1 or > 20000 || doc.Sources.Count > 100000 || result.Cells.Count > 20000 || doc.Cells.Any(c => c.SourceIds.Count > 100000 || c.RoleScopes.Count > 12 || c.LessonBindings.Count > 4 || c.Slots.Count > 8 || c.ParallelSeparators is { Count: > 3 }) || result.Cells.Any(c => c.Lessons.Count > 4)) return new(["inputLimit"]);
         void Check(bool condition, string code) { work.Step(); if (!condition && !errors.Contains(code)) errors.Add(code); }
         Check(Enum.IsDefined(doc.Kind), "documentKind");
         Check(Regex.IsMatch(doc.PdfHash, "^[a-f0-9]{64}$") && result.PdfHash == doc.PdfHash, "sourceHash");
@@ -292,7 +292,43 @@ public static class RecoveryValidator
                 }
                 Check(pluralRoles < 2, "fixedParallelEvidence");
             }
-            Check(proposal || (cell.ConfirmedEmpty ? cell.LessonBindings.Count == 0 : cell.LessonBindings.Count == cell.ParallelCount && bindingIds.Distinct().Count() == bindingIds.Length && bindingIds.ToHashSet().SetEquals(cell.SourceIds)), "lessonBinding");
+            var separatorIds = new HashSet<string>();
+            if (cell.ParallelSeparators is { } proof)
+            {
+                var roles = new[] { "subject", "teacher", "room" };
+                work.Step(proof.Count);
+                var bindingSet = new HashSet<string>();
+                foreach (var id in bindingIds) { work.Step(); bindingSet.Add(id); }
+                var validProof = !proposal && !cell.ConfirmedEmpty && cell.ParallelCount == 2 && cell.LessonBindings.Count == 2 &&
+                    proof.Count == 3 && proof.Keys.ToHashSet().SetEquals(roles) && proof.Values.Distinct().Count() == 3;
+                Check(validProof, "parallelEvidence");
+                if (validProof)
+                {
+                    double? previousY = null;
+                    foreach (var role in roles)
+                    {
+                        var id = proof[role];
+                        if (!sources.TryGetValue(id, out var separator)) { Check(false, "parallelEvidence"); continue; }
+                        work.Step(); var y = separator.Box.Y + separator.Box.Height / 2;
+                        var belongs = separator.Text is "・" or "･" && separator.CellId == cell.Id && separator.Page == cell.Page &&
+                            cellIds.Contains(id) && Contains(cell.Box, separator.Box) && !bindingSet.Contains(id) && (previousY is null || y > previousY + 4);
+                        previousY = y;
+                        IReadOnlyList<string> Ids(RecoveryLessonBinding binding) => role == "subject" ? binding.Subject : role == "teacher" ? binding.Teacher : binding.Room;
+                        bool Side(IReadOnlyList<string> ids, bool left) => ids.All(sourceId => {
+                            work.Step();
+                            return sources.TryGetValue(sourceId, out var source) && source.CellId == cell.Id && source.Page == cell.Page &&
+                                Math.Abs(source.Box.Y + source.Box.Height / 2 - y) <= 2 &&
+                                (left ? source.Box.X + source.Box.Width <= separator.Box.X : source.Box.X >= separator.Box.X + separator.Box.Width);
+                        });
+                        belongs &= Side(Ids(cell.LessonBindings[0]), true) && Side(Ids(cell.LessonBindings[1]), false);
+                        Check(belongs, "parallelEvidence");
+                        // Only an individually proved original separator may be
+                        // subtracted from complete source inventory.
+                        if (belongs) separatorIds.Add(id);
+                    }
+                }
+            }
+            Check(proposal || (cell.ConfirmedEmpty ? cell.LessonBindings.Count == 0 : cell.LessonBindings.Count == cell.ParallelCount && bindingIds.Distinct().Count() == bindingIds.Length && bindingIds.ToHashSet().SetEquals(cell.SourceIds.Where(id => !separatorIds.Contains(id)))), "lessonBinding");
             Check(cell.Slots.Count > 0 && cell.Slots.Select(s => (s.ClassName, s.Day)).Distinct().Count() == 1 &&
                 cell.Slots.Select(s => s.Period).Order().Zip(cell.Slots.Select(s => s.Period).Order().Skip(1)).All(p => p.Second == p.First + 1), "span");
             if (!cells.TryGetValue(cell.Id, out var recovered)) continue;

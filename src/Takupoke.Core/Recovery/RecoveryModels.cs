@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Takupoke.Core.Recovery;
 
 // The wire meanings are shared with the independently implemented iOS/Android contracts.
@@ -29,6 +31,10 @@ public sealed record RecoveryCell(string Id, int Page, RecoveryBox Box, Recovery
     IReadOnlyList<RecoverySlot> Slots, IReadOnlyList<string> SourceIds, IReadOnlyList<string> BlankFields,
     bool ConfirmedEmpty = false, int ParallelCount = 1)
 {
+    // App-generated original separator proof, never a model response field.
+    // Null preserves the historical V4/V5 document JSON and scope fingerprint.
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public IReadOnlyDictionary<string, string>? ParallelSeparators { get; init; }
     public RecoveryBindingMode BindingMode { get; init; } = RecoveryBindingMode.Fixed;
     public IReadOnlyList<RecoveryRoleScope> RoleScopes { get; init; } = [];
     public IReadOnlyList<string> ClassHeaderIds { get; init; } = [];
