@@ -1,0 +1,56 @@
+name: Measure one fixed original PDF ROI detector acquisition
+on:
+  push:
+    branches: [research/windows-original-pdf-roi-20261006]
+    paths: [tools/original-pdf-roi-probe/**, .github/workflows/original-pdf-roi-native.yml]
+  workflow_dispatch:
+    inputs:
+      packet_sha256:
+        description: Exact reviewed packet-freeze SHA256
+        required: true
+        type: string
+      source_commit:
+        description: Exact reviewed source HEAD
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  source-registration:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {persist-credentials: false}
+      - run: python3 tools/original-pdf-roi-probe/run_once.py --validate-only
+  native-one:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: windows-2025
+    timeout-minutes: 15
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+      ORT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {persist-credentials: false}
+      - name: Validate exact root dispatch before any prerequisite
+        shell: pwsh
+        run: |
+          python -c "import sys;sys.path.insert(0,'tools/original-pdf-roi-probe');import run_once as r;r.event_gate(r.validate())"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with: {dotnet-version: '10.0.x'}
+      - name: Restore exact existing WindowsNuGet runtime lock
+        shell: pwsh
+        run: |
+          dotnet restore tools/original-pdf-roi-probe/native/RoiProbe.csproj --locked-mode
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Model-free geometry and parent capture controls
+        shell: pwsh
+        run: |
+          python -m unittest discover -s tools/original-pdf-roi-probe -p test_runner.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: ONE fixed original PDF, maximum three detector calls
+        shell: pwsh
+        run: python tools/original-pdf-roi-probe/run_once.py

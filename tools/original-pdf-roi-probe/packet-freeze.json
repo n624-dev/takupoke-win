@@ -1,0 +1,100 @@
+{
+  "status": "SOURCE_ONLY_NO_NATIVE",
+  "parentProductionCommit": "c07e4e2d990be59d812776b6b82e2e1c056bbb45",
+  "maximumDetectorCalls": 3,
+  "recognizerCalls": 0,
+  "newModelIdentities": 0,
+  "qualifiedModels": [],
+  "pins": [
+    {
+      "path": ".github/workflows/original-pdf-roi-native.yml",
+      "bytes": 2208,
+      "sha256": "70e72e5310e0f444bfafd2efa03d025dd9dcb7dc5791f05f91e8b97ecedd6c4e"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/README.md",
+      "bytes": 4497,
+      "sha256": "557982cceb31f0321d2f54e0015c665db7196690c7de300ecad541bdc10c98be"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/native/Geometry.cs",
+      "bytes": 3435,
+      "sha256": "361934317203caad31d76e81a09c728daf04c72bb95b1d0647257ad590180706"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/native/OcrCropCompleteness.cs",
+      "bytes": 6003,
+      "sha256": "cd2ca77d976855da1eb80739d040b11b6e311e85a4104c5477ddc1005f4bd182"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/native/OcrDetectorProbability.cs",
+      "bytes": 1386,
+      "sha256": "f221a38e197b8a7f2d9a922219077ceb0adc97950366d093e5c9503cf0b65c71"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/native/OcrInputTransform.cs",
+      "bytes": 5647,
+      "sha256": "5242f91554c370d135b00e4e6cde00d9ec2a826ee85a5306d4aa0a29bd8951df"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/native/PdfRule.cs",
+      "bytes": 220,
+      "sha256": "40fe007f24d8696f3c1faa8bbaaab12e131869c7fde58d212d137f4a51c4473c"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/native/ProductionRaster.cs",
+      "bytes": 13709,
+      "sha256": "5a552cc5b4208a63cfbb10aa9be938cd01c00df9c2372990ceda5124bee2c962"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/native/Program.cs",
+      "bytes": 12470,
+      "sha256": "c23531b94d45c1f7cd4ac7299b434cd55427e2e82e8ac750a0e55d6f332b3168"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/native/RecoveryBox.cs",
+      "bytes": 446,
+      "sha256": "35b9ba26e8bb788e3f8fc6adada85ade78d7692d11075365972d1628a6073fa1"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/native/RoiGeometry.cs",
+      "bytes": 4645,
+      "sha256": "c68fbc23b29c9a5fcf1f5b372321365009ca0eaf8fa3b2694e1175d2935c74c5"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/native/RoiProbe.csproj",
+      "bytes": 586,
+      "sha256": "4e6ea2ab8a763a5abc3e1c5afa0eff6a181e8f80141e2d00b776316d2a3ec661"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/native/WindowsScope.cs",
+      "bytes": 86,
+      "sha256": "661524f2d9a32ff463c0fef88d3ff327e756709ac0661316a3f28b90e624a4dc"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/native/packages.lock.json",
+      "bytes": 1342,
+      "sha256": "740742b4d6ed49d6e9912633fcfb82e1abff1ebee2e764728dcc5173f7b56960"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/read_closed_capture.py",
+      "bytes": 3391,
+      "sha256": "c316ff6293236e5db321e67c2aaab2f3bde0a5ed43d11b8c56e07336da416fb2"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/recipe.json",
+      "bytes": 1853,
+      "sha256": "f383bd485c483e7daadae525ccd432265bc80f649152755b9a5cd0818a6f9a4d"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/run_once.py",
+      "bytes": 9365,
+      "sha256": "2f56db278ba8db057b3f709cfbf5183bef01f45abf83656d3199535dfc05d9c2"
+    },
+    {
+      "path": "tools/original-pdf-roi-probe/test_runner.py",
+      "bytes": 3767,
+      "sha256": "85191c7c40e3480d461cc3a76de20b8746b7b946714c821cdd01d46235c6a08b"
+    }
+  ]
+}

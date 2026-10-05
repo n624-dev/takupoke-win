@@ -1,0 +1,43 @@
+{
+  "recipe": "original-pdf-sourceRect-roi-detector-v1",
+  "maximumDetectorCalls": 3,
+  "recognizerCalls": 0,
+  "modelIdentitiesNew": 0,
+  "retryAllowed": false,
+  "pageIndex": 0,
+  "fictionalPDFSHA256": "932c9a783cae67b52d878bb4b7f090d9993cea0eb88f1171b4fd4c01a31696f1",
+  "fictionalImagePins": [
+    {
+      "path": "tools/raster-acquisition-native-probe/fixtures/ExamReturn-clean/page-1.png",
+      "bytes": 44734,
+      "sha256": "f00bf81068b9876ffa3e73ed1797ce03138ca64efa5c6cef477dc7ac9d885c8e"
+    },
+    {
+      "path": "tools/raster-acquisition-native-probe/fixtures/ExamReturn-clean/page-2.png",
+      "bytes": 40068,
+      "sha256": "14615a41ecd1f181ecbde4262d9cafb8916f4f4a1968a54b4e1e764ae116f316"
+    },
+    {
+      "path": "tools/raster-acquisition-native-probe/fixtures/ExamReturn-clean/page-3.png",
+      "bytes": 40110,
+      "sha256": "f93e3baa10bc505dace8067398c31ffbf67780ffc978f8d03571b5da70ad4624"
+    },
+    {
+      "path": "tools/raster-acquisition-native-probe/fixtures/ExamReturn-clean/page-4.png",
+      "bytes": 39989,
+      "sha256": "f1c10a4280a35780c7957af83ef081dccd322053add67ab547bd8882a1f23b1b"
+    },
+    {
+      "path": "tools/raster-acquisition-native-probe/fixtures/ExamReturn-clean/page-5.png",
+      "bytes": 40076,
+      "sha256": "415a819febb444538bcd11c356d878eee2abe6bac44e4640c4da81457d25a41c"
+    }
+  ],
+  "assemblerSHA256": "825cbb7d226585fc8e194f30484812b98b4d4edf00881e15521e14f2a5dcd3e9",
+  "productionRendererSHA256": "af424c52f19cd5b314384a3dbcfa3018aa697f82b4e0a0f6cc07c10da6dfc9ba",
+  "managedWindowsNuGetSHA256": "4c6985df4aa2f810ba8a2b37c3c791e619d8fe126954a6bd28cffd3f4adeba95",
+  "nativeWindowsNuGetSHA256": "dec964ab1ee36cc9b0ae247d13b376627992fc57dec0454354017ab8fd84f1ea",
+  "old4060ComparisonPooling": false,
+  "fullPDFRoleQualification": "UNASSESSED",
+  "rootOwnsPushAndDispatch": true
+}
