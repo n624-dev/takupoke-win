@@ -120,11 +120,15 @@ public sealed class RecoveryDateHeaderOwnershipTests
     }
 
     [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
-    public async Task MatchingPrintedAiGradeAndCanonicalClassKeepAllOriginalEvidence(bool separateGradeAtoms)
+    [InlineData(false, false)]
+    [InlineData(true, false)]
+    [InlineData(false, true)]
+    [InlineData(true, true)]
+    public async Task MatchingPrintedAiGradeAndCanonicalClassKeepAllOriginalEvidence(bool separateGradeAtoms, bool hyphenCanonical)
     {
         var pages = ExamPages();
+        if (hyphenCanonical) pages[5] = pages[5] with { Glyphs = pages[5].Glyphs.Select(g => g.Text is "AI_1" or "AI_2"
+            ? g with { Text = g.Text.Replace('_', '-') } : g).ToArray() };
         if (separateGradeAtoms) pages[5] = pages[5] with { Glyphs = pages[5].Glyphs.SelectMany(g => g.Text is "1年" or "2年"
             ? new[] { g with { Text = g.Text[..1], Width = 6 }, g with { Text = "年", X = g.X + 6, Width = 6 } } : new[] { g }).ToArray() };
         var document = Build(pages);
@@ -132,7 +136,8 @@ public sealed class RecoveryDateHeaderOwnershipTests
         foreach (var cls in new[] { "AI_1", "AI_2" })
         {
             var ids = document.ClassEvidence[cls];
-            Assert.Equal(cls[^1] + "年" + cls, string.Concat(ids.Select(id => document.Sources.Single(s => s.Id == id).Text)));
+            Assert.Equal(cls[^1] + "年" + (hyphenCanonical ? cls.Replace('_', '-') : cls),
+                string.Concat(ids.Select(id => document.Sources.Single(s => s.Id == id).Text)));
             Assert.All(document.Cells.Where(c => c.Slots[0].ClassName == cls), c => Assert.Equal(ids, c.ClassHeaderIds));
         }
         foreach (var (page, pi) in pages.Select((p, i) => (p, i + 1)))
@@ -183,26 +188,33 @@ public sealed class RecoveryDateHeaderOwnershipTests
     }
 
     [Theory]
-    [InlineData("contradictory")]
-    [InlineData("duplicate")]
-    [InlineData("unowned")]
-    [InlineData("missingCanonical")]
-    [InlineData("canonicalAlias")]
-    [InlineData("missingGradeSuffix")]
-    [InlineData("crossClass")]
-    public void InvalidPrintedGradeNeverGetsIgnoredOrUsedAsAnAiClass(string mutation)
+    [InlineData("contradictory", false)]
+    [InlineData("duplicate", false)]
+    [InlineData("unowned", false)]
+    [InlineData("missingCanonical", false)]
+    [InlineData("unsupportedCanonical", false)]
+    [InlineData("missingGradeSuffix", false)]
+    [InlineData("crossClass", false)]
+    [InlineData("contradictory", true)]
+    [InlineData("duplicate", true)]
+    [InlineData("unowned", true)]
+    [InlineData("missingGradeSuffix", true)]
+    [InlineData("crossClass", true)]
+    public void InvalidPrintedGradeNeverGetsIgnoredOrUsedAsAnAiClass(string mutation, bool hyphenCanonical)
     {
         var pages = ExamPages(inlineRoles: true);
         var glyphs = pages[5].Glyphs.ToList();
         var grade = glyphs.FindIndex(g => g.Text == "1年");
         var canonical = glyphs.FindIndex(g => g.Text == "AI_1");
+        if (hyphenCanonical) glyphs = glyphs.Select(g => g.Text is "AI_1" or "AI_2"
+            ? g with { Text = g.Text.Replace('_', '-') } : g).ToList();
         switch (mutation)
         {
             case "contradictory": glyphs[grade] = glyphs[grade] with { Text = "2年" }; break;
             case "duplicate": glyphs.Add(glyphs[grade] with { X = 200 }); break;
             case "unowned": glyphs[grade] = glyphs[grade] with { Y = 58 }; break;
             case "missingCanonical": glyphs.RemoveAt(canonical); break;
-            case "canonicalAlias": glyphs[canonical] = glyphs[canonical] with { Text = "AI-1" }; break;
+            case "unsupportedCanonical": glyphs[canonical] = glyphs[canonical] with { Text = "AI1" }; break;
             case "missingGradeSuffix": glyphs[grade] = glyphs[grade] with { Text = "1" }; break;
             case "crossClass": glyphs[grade] = glyphs[grade] with { X = glyphs[grade].X + 588 }; break;
         }

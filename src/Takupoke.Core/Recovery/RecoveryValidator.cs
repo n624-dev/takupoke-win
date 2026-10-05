@@ -165,8 +165,10 @@ public static class RecoveryValidator
             // Both complete literals, in original reading order, must belong to
             // one physical class rail above a complete adjacent six-period band.
             var grade = cls[^1] + "年";
+            // Match the two canonical spellings recognized by the builder.
+            var canonical = new[] { cls, cls.Replace('_', '-') };
             return cell.ClassRegion is { Axis: RecoveryHeaderAxis.Above } region &&
-                Header(ids, allowed, [grade + cls, cls + grade], cell, region) && AiOwner(cls, region);
+                Header(ids, allowed, canonical.SelectMany(label => new[] { grade + label, label + grade }).ToArray(), cell, region) && AiOwner(cls, region);
         }
         Check(doc.Sources.All(s => s.Page > 0 && s.Box.Valid && s.Text.Length <= 4096), "sourceLimit");
         Check(Evidence(doc.YearEvidence, doc.YearEvidence), "yearEvidence");
