@@ -64,6 +64,7 @@ internal static partial class Program
         var job = new RecoveryJob(hash,RecoveryDocumentKind.Timetable,RecoveryJobState.AwaitingManualCorrection,now) { ManualPlan = plan };
         await store.WriteAsync(lease,"acquisition.Timetable",new MaterialAttempt(now,null,false,hash));
         await store.WriteAsync(lease,"attempt.Timetable",new MaterialAttempt(now,"P13",true,hash,lease.Period.SchoolYear,ParserVersion:PdfScheduleParser.TimetableVersion,RecoveryPending:true));
+        await store.WriteAsync(lease,"recovery.Timetable",job with { State = RecoveryJobState.Pending, ManualPlan = null });
         await store.SaveRecoveryProgressAsync(lease,source,job,null);
         return new(source.Id,lease,plan,now);
     }
