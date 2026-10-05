@@ -230,19 +230,22 @@ public sealed class OnnxJapaneseOcr : IDisposable
         if (!image.Valid) throw new InvalidDataException("OCR画像のサイズが不正です。");
         var ratio = Math.Min(1, 960d / Math.Max(image.Width, image.Height)); var dw = Math.Max(32, (int)Math.Round(image.Width * ratio / 32) * 32); var dh = Math.Max(32, (int)Math.Round(image.Height * ratio / 32) * 32);
         using var detection = _detector.Run([NamedOnnxValue.CreateFromTensor("x", OcrInputTransform.Detection(image, new(0, 0, image.Width, image.Height), dw, dh, token))]); token.ThrowIfCancellationRequested();
-        var map = detection.First().AsTensor<float>(); if (map.Dimensions.Length != 4 || map.Dimensions[2] != dh || map.Dimensions[3] != dw) throw new InvalidDataException("OCR検出モデルの出力形状が一致しません。");
+        var map = detection.First().AsTensor<float>(); OcrDetectorProbability.ValidateMapShape(map.Dimensions, dw, dh);
+        // Keep the native output untouched. Only the detector's declared
+        // probability map is normalized; each buffer stays bounded by 960².
+        var probabilities = new float[dw * dh];
         for (var y = 0; y < dh; y++)
         {
             token.ThrowIfCancellationRequested();
-            for (var x = 0; x < dw; x++) if (!float.IsFinite(map[0, 0, y, x]) || map[0, 0, y, x] is < 0 or > 1)
-                throw new InvalidDataException("OCR検出の確信度が不正です。");
+            for (var x = 0; x < dw; x++)
+                probabilities[y * dw + x] = OcrDetectorProbability.Normalize(map[0, 0, y, x]);
         }
         var visited = new bool[dw * dh]; var boxes = new List<RecoveryBox>();
         for (var y = 0; y < dh; y++) for (var x = 0; x < dw; x++)
         {
-            if (visited[y * dw + x] || map[0, 0, y, x] < .3) continue;
+            if (visited[y * dw + x] || probabilities[y * dw + x] < .3) continue;
             var queue = new Queue<(int X, int Y)>(); queue.Enqueue((x, y)); visited[y * dw + x] = true; var left = x; var top = y; var right = x; var bottom = y; double score = 0; var count = 0;
-            while (queue.TryDequeue(out var p)) { count++; score += map[0, 0, p.Y, p.X]; left = Math.Min(left, p.X); right = Math.Max(right, p.X); top = Math.Min(top, p.Y); bottom = Math.Max(bottom, p.Y); foreach (var (nx, ny) in new[] { (p.X - 1, p.Y), (p.X + 1, p.Y), (p.X, p.Y - 1), (p.X, p.Y + 1) }) if (nx >= 0 && ny >= 0 && nx < dw && ny < dh && !visited[ny * dw + nx] && map[0, 0, ny, nx] >= .3) { visited[ny * dw + nx] = true; queue.Enqueue((nx, ny)); } }
+            while (queue.TryDequeue(out var p)) { count++; score += probabilities[p.Y * dw + p.X]; left = Math.Min(left, p.X); right = Math.Max(right, p.X); top = Math.Min(top, p.Y); bottom = Math.Max(bottom, p.Y); foreach (var (nx, ny) in new[] { (p.X - 1, p.Y), (p.X + 1, p.Y), (p.X, p.Y - 1), (p.X, p.Y + 1) }) if (nx >= 0 && ny >= 0 && nx < dw && ny < dh && !visited[ny * dw + nx] && probabilities[ny * dw + nx] >= .3) { visited[ny * dw + nx] = true; queue.Enqueue((nx, ny)); } }
             token.ThrowIfCancellationRequested(); if (count < 6 || score / count < .6) continue;
             var margin = Math.Max(1, (bottom - top + 1) * .25); var bx = Math.Max(0, (left - margin) * image.Width / dw); var by = Math.Max(0, (top - margin) * image.Height / dh); var ex = Math.Min(image.Width, (right + 1 + margin) * image.Width / dw); var ey = Math.Min(image.Height, (bottom + 1 + margin) * image.Height / dh);
             boxes.Add(new(bx, by, ex - bx, ey - by)); if (boxes.Count > 10000) throw new InvalidDataException("OCR候補数が上限を超えています。");
