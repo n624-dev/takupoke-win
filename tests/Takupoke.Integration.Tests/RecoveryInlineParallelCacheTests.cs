@@ -11,16 +11,36 @@ namespace Takupoke.Integration.Tests;
 
 public sealed class RecoveryInlineParallelCacheTests
 {
+    private static void AssertOriginalAuditPreserved(RecoveryAudit original, RecoveryAudit certified)
+    {
+        Assert.Equal(RecoveryValidator.Fingerprint(original.Document), RecoveryValidator.Fingerprint(certified.Document));
+        Assert.Equal(RecoveryValidator.Fingerprint(original.Result), RecoveryValidator.Fingerprint(certified.Result));
+        Assert.Equal(System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(original.Document), System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(certified.Document));
+        Assert.Equal(System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(original.Result), System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(certified.Result));
+        Assert.Equal(System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(original.Acceptance), System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(certified.Acceptance));
+        Assert.Equal(original.PreviousAcceptance, certified.PreviousAcceptance);
+        Assert.Equal(original.Acceptance.AcceptedAt, certified.Acceptance.AcceptedAt);
+        Assert.Equal(RecoveryValidator.Version, certified.CurrentCertification!.ValidatorVersion);
+        Assert.Equal(RecoveryValidator.Fingerprint(original.Acceptance), certified.CurrentCertification.AcceptanceHash);
+        Assert.Equal(RecoveryValidator.Fingerprint(original.PreviousAcceptance), certified.CurrentCertification.PreviousAcceptanceHash);
+        Assert.Equal(RecoveryValidator.Fingerprint(null as RecoverySemanticCertification), certified.CurrentCertification.PreviousCertificationHash);
+    }
+
     [Fact]
     public async Task AlteredPreviousAcceptanceCannotPassCurrentReuseDisplayOrStoreDespiteValidCurrentHashes()
     {
         await using var context = await Context.CreateAsync();
-        var old = context.Audit(compound: false, version: 4);
+        var first = context.Audit(compound: false, version: 4);
+        var promotedMetadata = first.Result.Metadata with { ValidatorVersion = 8 };
+        var promotedResult = first.Result with { Metadata = promotedMetadata };
+        var old = new RecoveryAudit(first.Document, promotedResult, new(first.Document.PdfHash,
+            RecoveryValidator.Fingerprint(promotedResult), RecoveryValidator.Fingerprint(first.Document), promotedMetadata, first.Acceptance.AcceptedAt))
+        { PreviousAcceptance = first.Acceptance };
         var certified = Assert.IsType<RecoveryAudit>(RecoveryAuditCertification.TryRecertify(old));
         var bad = certified with { PreviousAcceptance = certified.PreviousAcceptance! with { ScopeHash = new string('b', 64) } };
-        Assert.True(RecoveryValidator.CanReuse(bad.Acceptance, bad.Document, bad.Result));
+        Assert.False(RecoveryValidator.CanReuse(bad.Acceptance, bad.Document, bad.Result));
         Assert.Null(RecoveryAuditCertification.Reusable(bad));
-        var formal = RecoveryAnalysisConverter.Convert(context.Source, bad.Document, bad.Result, context.Clock.GetUtcNow()) with { Recovery = bad };
+        var formal = RecoveryAnalysisConverter.ConvertCertified(context.Source, certified, context.Clock.GetUtcNow()) with { Recovery = bad };
         Assert.False(RecoveryAnalysisConverter.MayDisplay(formal));
         await context.Store.WriteAsync(context.Lease, context.AcceptedKey, bad);
         await Assert.ThrowsAsync<InvalidDataException>(() => context.Store.SaveRecoveryAsync(context.Lease, context.Source,
@@ -108,12 +128,9 @@ public sealed class RecoveryInlineParallelCacheTests
         Assert.Null(await context.Store.ReadAsync<RecoveryPreview>(context.Lease, "recovery.preview.Timetable"));
         Assert.Null(await context.Store.ReadAsync<RecoveryJob>(context.Lease, "recovery.Timetable"));
         var current = Assert.IsType<RecoveryAudit>(await context.Store.ReadAsync<RecoveryAudit>(context.Lease, context.AcceptedKey));
-        Assert.Equal(RecoveryValidator.Version, current.Result.Metadata.ValidatorVersion);
-        Assert.True(RecoveryValidator.CanReuse(current.Acceptance, current.Document, current.Result));
-        Assert.Equal(old.Acceptance.AcceptedAt, current.Acceptance.AcceptedAt);
-        Assert.Equal(old.Acceptance, current.PreviousAcceptance);
-        Assert.Equal(old.Result.Metadata with { ValidatorVersion = RecoveryValidator.Version }, current.Result.Metadata);
-        Assert.Equal(old.Document.StructureMetadata is null ? null : old.Document.StructureMetadata with { ValidatorVersion = RecoveryValidator.Version }, current.Document.StructureMetadata);
+        AssertOriginalAuditPreserved(old, current);
+        Assert.False(RecoveryValidator.CanReuse(current.Acceptance, current.Document, current.Result));
+        Assert.True(RecoveryAuditCertification.IsCurrent(current));
         Assert.Equal(RecoveryValidator.Fingerprint(old.Document with { StructureMetadata = null }), RecoveryValidator.Fingerprint(current.Document with { StructureMetadata = null }));
         Assert.Equal(RecoveryValidator.Fingerprint(old.Result.Cells), RecoveryValidator.Fingerprint(current.Result.Cells));
         var formal = Assert.IsType<MaterialAnalysis>(await context.Store.ReadAsync<MaterialAnalysis>(context.Lease, "analysis.Timetable"));
@@ -151,7 +168,7 @@ public sealed class RecoveryInlineParallelCacheTests
         }
         Assert.True(prepared.ReusedAcceptance); Assert.Equal(0,context.BuildCalls);
         var current = (await context.Store.ReadAsync<RecoveryAudit>(context.Lease, context.AcceptedKey))!;
-        Assert.Equal(RecoveryValidator.Version,current.Result.Metadata.ValidatorVersion);
+        AssertOriginalAuditPreserved(v5, current);
         Assert.Equal(first.Acceptance,current.PreviousAcceptance); Assert.Equal(first.Acceptance.AcceptedAt,current.Acceptance.AcceptedAt);
         Assert.True(RecoveryAuditCertification.IsCurrent(current));
         Assert.True((await context.Coordinator.PrepareAsync(MaterialKind.Timetable,2026)).ReusedAcceptance);
@@ -171,7 +188,7 @@ public sealed class RecoveryInlineParallelCacheTests
         var prepared = await context.Coordinator.PrepareAsync(MaterialKind.Timetable,2026);
         Assert.True(prepared.ReusedAcceptance); Assert.Equal(0,context.BuildCalls);
         var current = (await context.Store.ReadAsync<RecoveryAudit>(context.Lease,context.AcceptedKey))!;
-        Assert.Equal(old.Acceptance,current.PreviousAcceptance); Assert.Equal(old.Acceptance.AcceptedAt,current.Acceptance.AcceptedAt);
+        AssertOriginalAuditPreserved(old, current);
         Assert.Equal(RecoveryValidator.Fingerprint(old.Document),RecoveryValidator.Fingerprint(current.Document));
         Assert.All(current.Document.Cells,c=>Assert.Null(c.ParallelSeparators));
         Assert.True(RecoveryAnalysisConverter.MayDisplay((await context.Store.ReadAsync<MaterialAnalysis>(context.Lease,"analysis.Timetable"))!));
@@ -186,8 +203,9 @@ public sealed class RecoveryInlineParallelCacheTests
         await context.Store.WriteAsync(context.Lease,context.AcceptedKey,old);
         Assert.True((await context.Coordinator.PrepareAsync(MaterialKind.Timetable,2026)).ReusedAcceptance);
         var current=(await context.Store.ReadAsync<RecoveryAudit>(context.Lease,context.AcceptedKey))!;
-        Assert.Equal(old.Acceptance,current.PreviousAcceptance);Assert.Equal(structure with { ValidatorVersion=RecoveryValidator.Version },current.Document.StructureMetadata);
-        Assert.Equal(old.Result.Metadata with { ValidatorVersion=RecoveryValidator.Version },current.Result.Metadata);
+        AssertOriginalAuditPreserved(old, current);
+        Assert.Equal(structure,current.Document.StructureMetadata);
+        Assert.Equal(old.Result.Metadata,current.Result.Metadata);
         Assert.True(RecoveryAuditCertification.IsCurrent(current));Assert.Equal(0,context.BuildCalls);
     }
 
@@ -206,7 +224,7 @@ public sealed class RecoveryInlineParallelCacheTests
         await context.Store.WriteAsync(context.Lease, context.AcceptedKey, v6);
         Assert.True((await context.Coordinator.PrepareAsync(MaterialKind.Timetable, 2026)).ReusedAcceptance);
         var current = (await context.Store.ReadAsync<RecoveryAudit>(context.Lease, context.AcceptedKey))!;
-        Assert.Equal(RecoveryValidator.Version, current.Result.Metadata.ValidatorVersion);
+        AssertOriginalAuditPreserved(v6, current);
         Assert.Equal(first.Acceptance, current.PreviousAcceptance);
         Assert.Equal(first.Acceptance.AcceptedAt, current.Acceptance.AcceptedAt);
         Assert.True(RecoveryAuditCertification.IsCurrent(current));
@@ -327,7 +345,8 @@ public sealed class RecoveryInlineParallelCacheTests
         var old = context.Audit(compound: false, version: 4);
         await context.Store.WriteAsync(context.Lease, context.AcceptedKey, old);
         var candidate = Assert.IsType<RecoveryAudit>(RecoveryAuditCertification.TryRecertify(old));
-        Assert.True(RecoveryValidator.CanReuse(candidate.Acceptance, candidate.Document, candidate.Result));
+        Assert.False(RecoveryValidator.CanReuse(candidate.Acceptance, candidate.Document, candidate.Result));
+        Assert.True(RecoveryAuditCertification.IsCurrent(candidate));
         // Deterministic handoff: certification already finished, then another
         // writer changes consent before SaveRecovery rereads under its transaction.
         var replaced = old with { Acceptance = old.Acceptance with { AcceptedAt = old.Acceptance.AcceptedAt.AddMinutes(1) } };

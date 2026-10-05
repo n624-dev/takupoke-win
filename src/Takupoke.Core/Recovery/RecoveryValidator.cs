@@ -9,7 +9,7 @@ namespace Takupoke.Core.Recovery;
 public static class RecoveryValidator
 {
     public const int SchemaVersion = 2;
-    public const int Version = 8;
+    public const int Version = 9;
     public static string Fingerprint<T>(T value) => Convert.ToHexStringLower(SHA256.HashData(JsonSerializer.SerializeToUtf8Bytes(value)));
     private static string Text(string value) => Regex.Replace(value.Normalize(NormalizationForm.FormKC), @"\s+", "").Replace('~', '〜').Replace('～', '〜');
     public static IReadOnlyList<string> SpecialClasses { get; } = new[] { "1_1", "1_2", "1_3" }.Concat(Enumerable.Range(2, 4).SelectMany(y => new[] { "CN", "ES", "IT" }.Select(c => $"{y}_{c}"))).Concat(new[] { "AI_1", "AI_2" }).ToArray();
@@ -25,28 +25,102 @@ public static class RecoveryValidator
         catch (RecoveryWorkLimitException) { return new(["validationLimit"]); }
         catch (Exception e) when (e is NullReferenceException or ArgumentException or KeyNotFoundException or InvalidOperationException) { return new(["malformedInput"]); }
     }
+    // A source policy shared with Builder; callers supply original BODY sources.
+    public static bool OcrBodySeparatorAmbiguous(RecoverySource source) => source.FromOcr && source.Text.Contains('·');
+    private sealed record HistoricalAuditContext(int OriginVersion);
+
     public static RecoveryValidation ValidateHistoricalManual(RecoveryDocument doc, RecoveryResult result,
-        RecoveryAcceptance acceptance, RecoveryAcceptance? previous, RecoverySemanticCertification certificate, CancellationToken token = default)
+        RecoveryAcceptance acceptance, RecoveryAcceptance? previous, RecoverySemanticCertification certificate, CancellationToken token = default) =>
+        result.Metadata.ValidatorVersion == 7 && result.HumanCorrections is { Count: > 0 }
+            ? ValidateCertifiedAudit(doc, result, acceptance, previous, certificate, token: token)
+            : new(["historicalCertification"]);
+
+    public static RecoveryValidation ValidateCertifiedAudit(RecoveryDocument doc, RecoveryResult result,
+        RecoveryAcceptance acceptance, RecoveryAcceptance? previous, RecoverySemanticCertification certificate,
+        RecoverySemanticCertification? predecessor = null, CancellationToken token = default)
     {
         try
         {
             token.ThrowIfCancellationRequested();
-            // This adapter is solely for an immutable, explicitly accepted V7
-            // manual audit. Ordinary Validate/CanReuse keep their current gate.
-            if (Version != 8 || certificate.RecoverySchemaVersion != SchemaVersion || certificate.ValidatorVersion != Version ||
-                result.Metadata.ValidatorVersion != 7 || doc.StructureMetadata is { ValidatorVersion: not 7 } || result.HumanCorrections is not { Count: > 0 } ||
-                previous is not null || acceptance.AcceptedAt == default ||
-                acceptance.Metadata != result.Metadata || acceptance.PdfHash != doc.PdfHash || result.PdfHash != doc.PdfHash ||
+            var origin = result.Metadata.ValidatorVersion;
+            if (Version != 9 || origin is not (4 or 5 or 6 or 7 or 8) ||
+                certificate.RecoverySchemaVersion != SchemaVersion || certificate.ValidatorVersion != Version ||
+                result.Metadata.RecoverySchemaVersion != SchemaVersion || doc.StructureMetadata is { } structure && structure.ValidatorVersion != origin ||
+                acceptance.AcceptedAt == default || acceptance.Metadata != result.Metadata ||
+                acceptance.PdfHash != doc.PdfHash || result.PdfHash != doc.PdfHash ||
                 certificate.ScopeHash != acceptance.ScopeHash || certificate.ResultHash != acceptance.ResultHash ||
                 certificate.ScopeHash != Fingerprint(doc) || certificate.ResultHash != Fingerprint(result) ||
-                certificate.AcceptanceHash != Fingerprint(acceptance) || certificate.PreviousAcceptanceHash != Fingerprint(previous)) return new(["historicalCertification"]);
+                certificate.AcceptanceHash != Fingerprint(acceptance) || certificate.PreviousAcceptanceHash != Fingerprint(previous) ||
+                certificate.PreviousCertificationHash != Fingerprint(predecessor)) return new(["historicalCertification"]);
+            if (predecessor is not null &&
+                (origin != 7 || result.HumanCorrections is not { Count: > 0 } || previous is not null ||
+                 predecessor.RecoverySchemaVersion != SchemaVersion || predecessor.ValidatorVersion != 8 || predecessor.PreviousCertificationHash is not null ||
+                 predecessor.ScopeHash != certificate.ScopeHash || predecessor.ResultHash != certificate.ResultHash ||
+                 predecessor.AcceptanceHash != certificate.AcceptanceHash || predecessor.PreviousAcceptanceHash != Fingerprint(previous)))
+                return new(["historicalCertification"]);
+            if (origin < 7 && (doc.Capture is not null || result.HumanCorrections is not null || doc.Sources.Any(s => s.NativeConfidence is not null)) ||
+                origin == 7 && result.HumanCorrections is { Count: > 0 } && previous is not null)
+                return new(["historicalCertification"]);
+            if (!HistoricalAcceptanceEnvelopeValid(doc, result, acceptance, previous, token)) return new(["historicalCertification"]);
             token.ThrowIfCancellationRequested();
-            return ValidateCore(doc, result, token: token, historicalManual: true);
+            // The context is derived only after the exact audit envelope binds it.
+            return ValidateCore(doc, result, token: token, historical: new(origin));
         }
         catch (RecoveryWorkLimitException) { return new(["validationLimit"]); }
         catch (Exception e) when (e is NullReferenceException or ArgumentException or KeyNotFoundException or InvalidOperationException) { return new(["malformedInput"]); }
     }
-    private static RecoveryValidation ValidateCore(RecoveryDocument doc, RecoveryResult result, bool structurePreflight = false, CancellationToken token = default, bool historicalManual = false)
+    // A complete, bounded historical receipt query. No caller-supplied origin
+    // or compatibility flag can enable historical metadata in ordinary paths.
+    public static bool HistoricalAcceptanceEnvelopeValid(RecoveryDocument doc, RecoveryResult result,
+        RecoveryAcceptance acceptance, RecoveryAcceptance? previous, CancellationToken token = default)
+    {
+        token.ThrowIfCancellationRequested();
+        if (!HistoricalEnvelope(doc, result, acceptance, token)) return false;
+        if (previous is null) return true;
+        var metadata = result.Metadata; var structure = doc.StructureMetadata;
+        var version = previous.Metadata.ValidatorVersion;
+        if (!(metadata.ValidatorVersion == 5 && version == 4 || metadata.ValidatorVersion == 6 && version is 4 or 5 ||
+            metadata.ValidatorVersion == 7 && version is 4 or 5 or 6 || metadata.ValidatorVersion == 8 && version is 4 or 5 or 6 or 7) ||
+            previous.AcceptedAt != acceptance.AcceptedAt || result.HumanCorrections is not null) return false;
+        var oldDocument = doc with { StructureMetadata = structure is null ? null : structure with { ValidatorVersion = version } };
+        var oldResult = result with { Metadata = metadata with { ValidatorVersion = version } };
+        if (!HistoricalEnvelope(oldDocument, oldResult, previous, token)) return false;
+        var promotedDocument = oldDocument with { StructureMetadata = oldDocument.StructureMetadata is { } prior ? prior with { ValidatorVersion = metadata.ValidatorVersion } : null };
+        var promotedResult = oldResult with { Metadata = oldResult.Metadata with { ValidatorVersion = metadata.ValidatorVersion } };
+        return Fingerprint(promotedDocument) == acceptance.ScopeHash && Fingerprint(promotedResult) == acceptance.ResultHash;
+    }
+    private static bool HistoricalEnvelope(RecoveryDocument doc, RecoveryResult result, RecoveryAcceptance acceptance, CancellationToken token)
+    {
+        token.ThrowIfCancellationRequested();
+        var metadata = result.Metadata; var structure = doc.StructureMetadata;
+        if (doc.Cells.Count > 20000 || doc.Sources.Count > 100000 || result.Cells.Count > 20000 ||
+            doc.Cells.Any(c => c.SourceIds.Count > 100000 || c.RoleScopes.Count > 12 || c.LessonBindings.Count > 4 || c.Slots.Count > 8 || c.ParallelSeparators is { Count: > 3 }) ||
+            result.Cells.Any(c => c.Lessons.Count > 4)) return false;
+        if (Version != 9 || metadata.ValidatorVersion is not (4 or 5 or 6 or 7 or 8) ||
+            metadata.RecoverySchemaVersion != SchemaVersion || metadata.RecoveryVersion != "2" || acceptance.AcceptedAt == default ||
+            acceptance.PdfHash != doc.PdfHash || acceptance.PdfHash != result.PdfHash || acceptance.Metadata != metadata ||
+            structure is not null && (structure.ValidatorVersion != metadata.ValidatorVersion || metadata.ValidatorVersion == 4 && structure != metadata)) return false;
+        foreach (var source in doc.Sources)
+        {
+            token.ThrowIfCancellationRequested();
+            if (source.Text.Length > 4096 || metadata.ValidatorVersion < 7 && source.NativeConfidence is not null) return false;
+        }
+        if (metadata.ValidatorVersion < 7 && (doc.Capture is not null || result.HumanCorrections is not null)) return false;
+        if (metadata.ValidatorVersion < 8)
+        {
+            var gradeIds = doc.Sources.Where(s => s.Text.Contains('年')).Select(s => s.Id).ToHashSet();
+            foreach (var cell in doc.Cells)
+            {
+                token.ThrowIfCancellationRequested();
+                if (cell.Slots.Any(s => s.ClassName is "AI_1" or "AI_2") && cell.ClassHeaderIds.Any(gradeIds.Contains)) return false;
+            }
+        }
+        foreach (var cell in doc.Cells) { token.ThrowIfCancellationRequested(); if (metadata.ValidatorVersion < 6 && cell.ParallelSeparators is not null) return false; }
+        if (acceptance.ResultHash != Fingerprint(result)) return false;
+        token.ThrowIfCancellationRequested();
+        return acceptance.ScopeHash == Fingerprint(doc);
+    }
+    private static RecoveryValidation ValidateCore(RecoveryDocument doc, RecoveryResult result, bool structurePreflight = false, CancellationToken token = default, HistoricalAuditContext? historical = null)
     {
         var work = new RecoveryWorkBudget(token); work.Step();
         bool Contains(RecoveryBox outer, RecoveryBox inner) { work.Step(); return outer.Contains(inner); }
@@ -58,7 +132,7 @@ public static class RecoveryValidator
         Check(doc.Complete && doc.Cells.Count is > 0 and <= 20000 && doc.Sources.Count <= 100000, "incompleteDocument");
         Check(result.Kind == doc.Kind && result.SchoolYear == doc.SchoolYear && result.Term == doc.Term, "documentIdentity");
         Check(doc.SchoolYear is >= 1900 and <= 9998 && (doc.Kind != RecoveryDocumentKind.Timetable || doc.Term is "前期" or "後期"), "yearTerm");
-        bool ValidMetadata(RecoveryMetadata metadata) => metadata.RecoverySchemaVersion == SchemaVersion && (metadata.ValidatorVersion == Version || historicalManual && metadata.ValidatorVersion == 7) &&
+        bool ValidMetadata(RecoveryMetadata metadata) => metadata.RecoverySchemaVersion == SchemaVersion && (metadata.ValidatorVersion == (historical?.OriginVersion ?? Version)) &&
             new[] { metadata.Provider, metadata.ModelId, metadata.ModelVersion, metadata.RuntimeVersion,
                 metadata.PromptVersion, metadata.OsVersion, metadata.RecoveryVersion }.All(v => !string.IsNullOrWhiteSpace(v));
         Check(ValidMetadata(result.Metadata), "versions");
@@ -79,6 +153,14 @@ public static class RecoveryValidator
         if (doc.Sources.Any(s => { work.Step(); return s.Page < 1 || !s.Box.Valid || s.Text.Length > 4096; })) return new(["sourceLimit"]);
         var index = new RecoverySourceIndex(doc, work, spatial: true);
         var sources = index.ById;
+        foreach (var cell in doc.Cells)
+        foreach (var id in cell.SourceIds)
+        {
+            work.Step();
+            if (!sources.TryGetValue(id, out var body)) continue; // Ownership errors are checked below.
+            work.Step(body.Text.Length);
+            if (OcrBodySeparatorAmbiguous(body)) return new(["ocrSeparatorAmbiguity"]);
+        }
         var manual = RecoveryManualAssistance.Corrections(doc, result, work);
         Check(result.HumanCorrections is null || manual is not null, "humanProof");
         foreach (var source in doc.Sources)
@@ -154,7 +236,7 @@ public static class RecoveryValidator
         {
             if (!Evidence(ids, allowed) || !Ordered(ids)) return false;
             if (Header(ids, allowed, ClassLabels(cls), cell, cell?.ClassRegion)) return true;
-            if (historicalManual || doc.Kind != RecoveryDocumentKind.Exam || cls is not ("AI_1" or "AI_2")) return false;
+            if (historical is { OriginVersion: < 8 } || doc.Kind != RecoveryDocumentKind.Exam || cls is not ("AI_1" or "AI_2")) return false;
             if (cell is null)
             {
                 work.Step(doc.Cells.Count + ids.Count);

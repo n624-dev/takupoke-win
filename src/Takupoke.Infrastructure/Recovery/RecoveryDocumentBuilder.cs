@@ -325,6 +325,14 @@ public static class RecoveryDocumentBuilder
                 var inside = pageAtoms.Where(a => box.Contains(a.Box)).ToArray();
                 var empty = inside.Length == 0 && inkFree(pi, box);
                 if (inside.Length == 0 && !empty) throw new InvalidDataException("文字を読めなかったセルを空欄として扱えません。");
+                // Original OCR body markers are unresolved structure, not an
+                // inferred parallel separator or a compound-name exception.
+                if (ocrPages?.Contains(pi) == true)
+                {
+                    work.Step(inside.Sum(a => (long)a.Glyph.Text.Length));
+                    if (inside.Any(a => RecoveryValidator.OcrBodySeparatorAmbiguous(sources[a.Id])))
+                        throw new InvalidDataException("OCR原文に解釈を確定できない区切り文字があります。");
+                }
                 IReadOnlyList<RecoveryRoleScope> scopes = []; IReadOnlyList<RecoveryLessonBinding> fixedBindings = [];
                 IReadOnlyDictionary<string, string>? separators = null; var fixedBlanks = new HashSet<string>();
                 if (!empty)

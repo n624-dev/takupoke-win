@@ -87,10 +87,14 @@ public sealed record RecoveryJob(string PdfHash, RecoveryDocumentKind Kind, Reco
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public RecoveryManualPlan? ManualPlan { get; init; }
 }
-// Audit-level certification retains a V7 manual document/result and its explicit
-// acceptance unchanged while binding a current V8 semantic validation to them.
+// Audit-level certification retains historical objects and explicit acceptance
+// unchanged while binding current semantic validation and a bounded predecessor.
 public sealed record RecoverySemanticCertification(int RecoverySchemaVersion, int ValidatorVersion,
-    string ScopeHash, string ResultHash, string AcceptanceHash, string PreviousAcceptanceHash);
+    string ScopeHash, string ResultHash, string AcceptanceHash, string PreviousAcceptanceHash)
+{
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? PreviousCertificationHash { get; init; }
+}
 public sealed record RecoveryAcceptance(string PdfHash, string ResultHash, string ScopeHash, RecoveryMetadata Metadata, DateTimeOffset AcceptedAt);
 public sealed record RecoveryValidation(IReadOnlyList<string> Errors)
 {
