@@ -1,0 +1,80 @@
+{
+  "runtime": "litert-lm-api0.17.1",
+  "wheel": {
+    "filename": "litert_lm_api-0.17.1-py3-none-manylinux_2_27_x86_64.whl",
+    "url": "https://files.pythonhosted.org/packages/58/7f/255f85bc2a7db75fb30e66279acabab6508aa722aabe71e8a108d8761581/litert_lm_api-0.17.1-py3-none-manylinux_2_27_x86_64.whl",
+    "sha256": "4e52fa3a57bd54c399302d4237dd7d5b2235d92040922acc6e259f55b8732979",
+    "bytes": 47233934
+  },
+  "verifiedWheelSHA256": "4e52fa3a57bd54c399302d4237dd7d5b2235d92040922acc6e259f55b8732979",
+  "files": [
+    {
+      "name": "litert_lm/__init__.py",
+      "bytes": 3068,
+      "sha256": "574f0469f0cd1186bb67aba9bd7cd41b3c3d5293e0cc1b8253402575e264f6f9"
+    },
+    {
+      "name": "litert_lm/_ffi.py",
+      "bytes": 29218,
+      "sha256": "43d5636068a7c617bf9d24cf64fa0ce180f39aca2f45602e854d6836ae7352a9"
+    },
+    {
+      "name": "litert_lm/_messages.py",
+      "bytes": 7832,
+      "sha256": "d83cb458226a9f0178d31daeb200f6521ed795f82067355dbf7557d84ea5c5e2"
+    },
+    {
+      "name": "litert_lm/benchmark.py",
+      "bytes": 4838,
+      "sha256": "c1bc8961dfbb45a43448fae4cd698c0a0d81edac1d592dc029e2853e60b8adc6"
+    },
+    {
+      "name": "litert_lm/capabilities.py",
+      "bytes": 5080,
+      "sha256": "51d73ee6252b88e57b6d64df616a029c23887e7b73aad8d2bc26deafe4d4db3e"
+    },
+    {
+      "name": "litert_lm/conversation.py",
+      "bytes": 20229,
+      "sha256": "9635f4a7581e71b5013671b39271fec7c97bd2ae2a12495808f949d9a19b090e"
+    },
+    {
+      "name": "litert_lm/embedding_engine.py",
+      "bytes": 15486,
+      "sha256": "3b22fdb79ab55d13366fa6e24d9dc8c69e1b24fcffbdf398f0b044f23a7315fa"
+    },
+    {
+      "name": "litert_lm/engine.py",
+      "bytes": 17050,
+      "sha256": "da40bdd89d66a16537861a674f8a97aba19a78219e351509bd0d94804751c91a"
+    },
+    {
+      "name": "litert_lm/interfaces.py",
+      "bytes": 36271,
+      "sha256": "b79cbe10b2308bc36fe885a5e99ba32b99a1118fe7df78d65cc74c97eafc332a"
+    },
+    {
+      "name": "litert_lm/liblitert-lm.so",
+      "bytes": 131263152,
+      "sha256": "f202ca2351db108105fed241cd731266255c2471f3ed850c265d0c29d27fd841"
+    },
+    {
+      "name": "litert_lm/session.py",
+      "bytes": 7880,
+      "sha256": "e46391f15d46d1ef44012cad3e6a60e59bc204e31f6b1df636d05b37028ee71f"
+    },
+    {
+      "name": "litert_lm/tools.py",
+      "bytes": 3789,
+      "sha256": "acbd43a0f8498b6a61e6fa67af39e4a1bd0abf547a3fb594171de9f03d7e62f3"
+    },
+    {
+      "name": "litert_lm/utils.py",
+      "bytes": 3254,
+      "sha256": "ddd9486650eb963dddc47f07e1ac29af3e24fb21c388a97f8b4e840f99c6624c"
+    }
+  ],
+  "source": "PyPI public exactversion wheel verifiedwithoutimport/session; localmodel unchanged",
+  "modelDownloads": 0,
+  "inferenceCalls": 0
+}

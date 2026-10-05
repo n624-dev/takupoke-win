@@ -1,0 +1,87 @@
+{
+  "sourceBase": "a3666ab690b5a522964335b433cd692329481a07",
+  "originalFictionalInputSHA256": "54866e2784434e266c21e5d5257728c3cb63f657a092fa14c8b9083aa24183b7",
+  "taskID": "t000466d2ba598e3e",
+  "inputMeaning": "Consumed independent fictional cell; not role truth; estimated CTC full containment only",
+  "imagePixelProcessing": "Original retained PNG unchanged, no enlargement or redraw",
+  "oldHostPinPassedNotTransferred": true,
+  "originalSchoolPDFUsed": false,
+  "schoolNamesCopied": false,
+  "postFrozenEvaluationTruthOpened": false,
+  "originalInkOwnershipProof": "ABSENT",
+  "roleAssignmentProof": "ABSENT",
+  "productionAdoption": false,
+  "sourceSupportCopies": [
+    {
+      "path": "guard.py",
+      "sourceCommit": "a3666ab690b5a522964335b433cd692329481a07",
+      "sourcePath": "tools/local-ai-single-field-research/guard.py",
+      "sha256": "84bdb2304960aa18010da8964212fae17df8fd79bb38b38c336598071502e9de",
+      "byteIdenticalToRetainedSource": true
+    },
+    {
+      "path": "hosted_support.py",
+      "sourceCommit": "a3666ab690b5a522964335b433cd692329481a07",
+      "sourcePath": "tools/local-ai-single-field-research/hosted_support.py",
+      "sha256": "c6f55998f8822c654f3b90d9a54677efcd5fded71ed6b0d3d2ce6daa4252248f",
+      "byteIdenticalToRetainedSource": true
+    },
+    {
+      "path": "network_guard.py",
+      "sourceCommit": "a3666ab690b5a522964335b433cd692329481a07",
+      "sourcePath": "tools/local-ai-single-field-research/network_guard.py",
+      "sha256": "d07bde6a1fea19e11abd8b7b52a1c2f1ca3efb0a6500b5d71163397011e7f76a",
+      "byteIdenticalToRetainedSource": true
+    },
+    {
+      "path": "run_once.py",
+      "sourceCommit": "a3666ab690b5a522964335b433cd692329481a07",
+      "sourcePath": "tools/local-ai-single-field-research/run_once.py",
+      "sha256": "014adefffc933a424d5a0d8fdb026fdbbed579baf1230932161d1ff54102801a",
+      "byteIdenticalToRetainedSource": true
+    },
+    {
+      "path": "protocol.py",
+      "sourceCommit": "a3666ab690b5a522964335b433cd692329481a07",
+      "sourcePath": "tools/local-ai-single-field-research/protocol.py",
+      "sha256": "bcb3f90f10ffb3734cf5ce9b2e123cdb8397beffe0130d27611104eebaadb170",
+      "byteIdenticalToRetainedSource": true
+    },
+    {
+      "path": "contract.py",
+      "sourceCommit": "a3666ab690b5a522964335b433cd692329481a07",
+      "sourcePath": "tools/local-ai-single-field-research/contract.py",
+      "sha256": "7a355b81268e9de82d844b90697a443b232e2f90430a507928b6704c9d2d9ec8",
+      "byteIdenticalToRetainedSource": true
+    },
+    {
+      "path": "source_contract.py",
+      "sourceCommit": "a3666ab690b5a522964335b433cd692329481a07",
+      "sourcePath": "tools/local-ai-single-field-research/source_contract.py",
+      "sha256": "44e6708a97b7c1b903d3e176c07637052bf16268d496895ee7ef07e131185c06",
+      "byteIdenticalToRetainedSource": true
+    },
+    {
+      "path": "native_grammar.py",
+      "sourceCommit": "a3666ab690b5a522964335b433cd692329481a07",
+      "sourcePath": "tools/local-ai-single-field-research/native_grammar.py",
+      "sha256": "127a017965a1d81c1e09109ea167423169854b4f5e00e7eb64a0111e2e06b93e",
+      "byteIdenticalToRetainedSource": true
+    },
+    {
+      "path": "prompt.txt",
+      "sourceCommit": "a3666ab690b5a522964335b433cd692329481a07",
+      "sourcePath": "tools/local-ai-single-field-research/prompt.txt",
+      "sha256": "eafc546d3241ed7b09ece4444055620f98f9dadb71822eec228177369828dd07",
+      "byteIdenticalToRetainedSource": true
+    },
+    {
+      "path": "runtime-identity.json",
+      "sourceCommit": "a3666ab690b5a522964335b433cd692329481a07",
+      "sourcePath": "tools/local-ai-single-field-research/runtime-identity.json",
+      "sha256": "e8ccc225cc8dcb15675d7d94e8171efd891dc723ec0ba26df169223ef015b011",
+      "byteIdenticalToRetainedSource": true
+    }
+  ],
+  "hostedControllerParent": "tools/local-ai-single-field-research/bootstrap_ci.py; adapted two models/eight calls to one model/two image stages"
+}

@@ -1,0 +1,584 @@
+{
+  "tasks": [
+    {
+      "id": "t000466d2ba598e3e",
+      "sources": [
+        {
+          "id": "p1s11",
+          "text": "月",
+          "box": [
+            490.94117647058823,
+            94,
+            3.6470588235293917,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 11,
+          "nativeConfidence": 0.9999968,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "context"
+        },
+        {
+          "id": "p1s12",
+          "text": "曜",
+          "box": [
+            512.8235294117648,
+            94,
+            3.6470588235293917,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 12,
+          "nativeConfidence": 0.9999498,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "context"
+        },
+        {
+          "id": "p1s13",
+          "text": "日",
+          "box": [
+            531.0588235294117,
+            94,
+            3.6470588235295054,
+            22
+          ],
+          "sourceLine": 3,
+          "sourceOrder": 13,
+          "nativeConfidence": 0.9999397,
+          "fromOcr": true,
+          "chunkID": 3,
+          "ctcStart": 14,
+          "ctcEnd": 15,
+          "owner": "context"
+        },
+        {
+          "id": "p1s33",
+          "text": "3",
+          "box": [
+            364.3333333333333,
+            150,
+            2.6666666666666856,
+            16
+          ],
+          "sourceLine": 15,
+          "sourceOrder": 33,
+          "nativeConfidence": 0.99996185,
+          "fromOcr": true,
+          "chunkID": 15,
+          "ctcStart": 2,
+          "ctcEnd": 3,
+          "owner": "context"
+        },
+        {
+          "id": "p1s70",
+          "text": "幻",
+          "box": [
+            340.9530201342282,
+            199,
+            3.651006711409366,
+            22
+          ],
+          "sourceLine": 49,
+          "sourceOrder": 70,
+          "nativeConfidence": 0.99982184,
+          "fromOcr": true,
+          "chunkID": 49,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s71",
+          "text": "学",
+          "box": [
+            362.8590604026846,
+            199,
+            3.651006711409366,
+            22
+          ],
+          "sourceLine": 49,
+          "sourceOrder": 71,
+          "nativeConfidence": 0.9999839,
+          "fromOcr": true,
+          "chunkID": 49,
+          "ctcStart": 9,
+          "ctcEnd": 10,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s72",
+          "text": "0",
+          "box": [
+            377.46308724832215,
+            199,
+            3.6510067114094227,
+            22
+          ],
+          "sourceLine": 49,
+          "sourceOrder": 72,
+          "nativeConfidence": 0.99999046,
+          "fromOcr": true,
+          "chunkID": 49,
+          "ctcStart": 13,
+          "ctcEnd": 14,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s73",
+          "text": "3",
+          "box": [
+            392.06711409395973,
+            199,
+            3.6510067114094227,
+            22
+          ],
+          "sourceLine": 49,
+          "sourceOrder": 73,
+          "nativeConfidence": 0.999998,
+          "fromOcr": true,
+          "chunkID": 49,
+          "ctcStart": 17,
+          "ctcEnd": 18,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s218",
+          "text": "詠",
+          "box": [
+            350.9714285714286,
+            231,
+            3.657142857142844,
+            22
+          ],
+          "sourceLine": 86,
+          "sourceOrder": 218,
+          "nativeConfidence": 0.999566,
+          "fromOcr": true,
+          "chunkID": 86,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s219",
+          "text": "Z",
+          "box": [
+            369.25714285714287,
+            231,
+            3.657142857142844,
+            22
+          ],
+          "sourceLine": 86,
+          "sourceOrder": 219,
+          "nativeConfidence": 0.9990683,
+          "fromOcr": true,
+          "chunkID": 86,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s220",
+          "text": "2",
+          "box": [
+            380.2285714285714,
+            231,
+            3.657142857142901,
+            22
+          ],
+          "sourceLine": 86,
+          "sourceOrder": 220,
+          "nativeConfidence": 0.99999416,
+          "fromOcr": true,
+          "chunkID": 86,
+          "ctcStart": 11,
+          "ctcEnd": 12,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s328",
+          "text": "1",
+          "box": [
+            37.666666666666664,
+            234,
+            2.6666666666666714,
+            16
+          ],
+          "sourceLine": 122,
+          "sourceOrder": 328,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 122,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s329",
+          "text": "1",
+          "box": [
+            87.66666666666667,
+            234,
+            2.666666666666657,
+            16
+          ],
+          "sourceLine": 123,
+          "sourceOrder": 329,
+          "nativeConfidence": 0.99988294,
+          "fromOcr": true,
+          "chunkID": 123,
+          "ctcStart": 1,
+          "ctcEnd": 2,
+          "owner": "context"
+        },
+        {
+          "id": "p1s333",
+          "text": "舎",
+          "box": [
+            352.90909090909093,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 125,
+          "sourceOrder": 333,
+          "nativeConfidence": 0.989893,
+          "fromOcr": true,
+          "chunkID": 125,
+          "ctcStart": 3,
+          "ctcEnd": 4,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s334",
+          "text": "7",
+          "box": [
+            371.0909090909091,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 125,
+          "sourceOrder": 334,
+          "nativeConfidence": 0.99999595,
+          "fromOcr": true,
+          "chunkID": 125,
+          "ctcStart": 8,
+          "ctcEnd": 9,
+          "owner": "cell"
+        },
+        {
+          "id": "p1s335",
+          "text": "1",
+          "box": [
+            382,
+            263,
+            3.636363636363626,
+            22
+          ],
+          "sourceLine": 125,
+          "sourceOrder": 335,
+          "nativeConfidence": 0.99998164,
+          "fromOcr": true,
+          "chunkID": 125,
+          "ctcStart": 11,
+          "ctcEnd": 12,
+          "owner": "cell"
+        }
+      ],
+      "promptInput": {
+        "cellID": "t000466d2ba598e3e",
+        "cellBox": [
+          316.5,
+          194.5,
+          414.5,
+          290
+        ],
+        "coordinateScope": "original pixels; CTC character intervals ESTIMATED, not ink boxes",
+        "sources": [
+          {
+            "id": "p1s11",
+            "text": "月",
+            "box": [
+              490.94117647058823,
+              94,
+              3.6470588235293917,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 11,
+            "owner": "context"
+          },
+          {
+            "id": "p1s12",
+            "text": "曜",
+            "box": [
+              512.8235294117648,
+              94,
+              3.6470588235293917,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 12,
+            "owner": "context"
+          },
+          {
+            "id": "p1s13",
+            "text": "日",
+            "box": [
+              531.0588235294117,
+              94,
+              3.6470588235295054,
+              22
+            ],
+            "sourceLine": 3,
+            "sourceOrder": 13,
+            "owner": "context"
+          },
+          {
+            "id": "p1s33",
+            "text": "3",
+            "box": [
+              364.3333333333333,
+              150,
+              2.6666666666666856,
+              16
+            ],
+            "sourceLine": 15,
+            "sourceOrder": 33,
+            "owner": "context"
+          },
+          {
+            "id": "p1s70",
+            "text": "幻",
+            "box": [
+              340.9530201342282,
+              199,
+              3.651006711409366,
+              22
+            ],
+            "sourceLine": 49,
+            "sourceOrder": 70,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s71",
+            "text": "学",
+            "box": [
+              362.8590604026846,
+              199,
+              3.651006711409366,
+              22
+            ],
+            "sourceLine": 49,
+            "sourceOrder": 71,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s72",
+            "text": "0",
+            "box": [
+              377.46308724832215,
+              199,
+              3.6510067114094227,
+              22
+            ],
+            "sourceLine": 49,
+            "sourceOrder": 72,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s73",
+            "text": "3",
+            "box": [
+              392.06711409395973,
+              199,
+              3.6510067114094227,
+              22
+            ],
+            "sourceLine": 49,
+            "sourceOrder": 73,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s218",
+            "text": "詠",
+            "box": [
+              350.9714285714286,
+              231,
+              3.657142857142844,
+              22
+            ],
+            "sourceLine": 86,
+            "sourceOrder": 218,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s219",
+            "text": "Z",
+            "box": [
+              369.25714285714287,
+              231,
+              3.657142857142844,
+              22
+            ],
+            "sourceLine": 86,
+            "sourceOrder": 219,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s220",
+            "text": "2",
+            "box": [
+              380.2285714285714,
+              231,
+              3.657142857142901,
+              22
+            ],
+            "sourceLine": 86,
+            "sourceOrder": 220,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s328",
+            "text": "1",
+            "box": [
+              37.666666666666664,
+              234,
+              2.6666666666666714,
+              16
+            ],
+            "sourceLine": 122,
+            "sourceOrder": 328,
+            "owner": "context"
+          },
+          {
+            "id": "p1s329",
+            "text": "1",
+            "box": [
+              87.66666666666667,
+              234,
+              2.666666666666657,
+              16
+            ],
+            "sourceLine": 123,
+            "sourceOrder": 329,
+            "owner": "context"
+          },
+          {
+            "id": "p1s333",
+            "text": "舎",
+            "box": [
+              352.90909090909093,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 125,
+            "sourceOrder": 333,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s334",
+            "text": "7",
+            "box": [
+              371.0909090909091,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 125,
+            "sourceOrder": 334,
+            "owner": "cell"
+          },
+          {
+            "id": "p1s335",
+            "text": "1",
+            "box": [
+              382,
+              263,
+              3.636363636363626,
+              22
+            ],
+            "sourceLine": 125,
+            "sourceOrder": 335,
+            "owner": "cell"
+          }
+        ],
+        "surroundingClosedBoxes": [
+          [
+            120.5,
+            88.5,
+            904.5,
+            122.5
+          ],
+          [
+            316.5,
+            122.5,
+            414.5,
+            194.5
+          ],
+          [
+            20.5,
+            194.5,
+            60.5,
+            290
+          ],
+          [
+            60.5,
+            194.5,
+            120.5,
+            290
+          ]
+        ]
+      },
+      "cropPath": "crops/t000466d2ba598e3e.png",
+      "cropSHA256": "ee9cb921489d05cbc9fcff0aaf4126e4470870373cbf57bf96143e15ccef1d90",
+      "originalRGBSHA256": "36523542f40088781e90b211ada7f1f02435dbd678e2cc7d5e64582ab1a8daf1",
+      "cropBox": [
+        318,
+        196,
+        414,
+        290
+      ],
+      "originalBGRASHA256": "02003ce94dfbb3b081710570f887523e2e62aa7dfa24cfbf41ce140c37c738d3",
+      "acquisitionRows": [
+        {
+          "id": 49,
+          "rawText": "幻学03",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        },
+        {
+          "id": 86,
+          "rawText": "詠Z2",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        },
+        {
+          "id": 125,
+          "rawText": "舎71",
+          "currentSafetyFloorPassed": true,
+          "belowCurrentConfidenceFloor": false,
+          "assessed": true
+        }
+      ],
+      "originalChunkIDs": [
+        49,
+        86,
+        125
+      ],
+      "sourceProof": "NO_PRODUCTION_ROLE_OR_WHOLE_DOCUMENT_CERTIFICATE; CANDIDATE_ONLY",
+      "developmentConsumed": true
+    }
+  ],
+  "nativeGate": false
+}

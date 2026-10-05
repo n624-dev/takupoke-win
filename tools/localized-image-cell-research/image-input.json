@@ -1,0 +1,20 @@
+{
+  "taskID": "t000466d2ba598e3e",
+  "cropPath": "crops/t000466d2ba598e3e.png",
+  "cropSHA256": "ee9cb921489d05cbc9fcff0aaf4126e4470870373cbf57bf96143e15ccef1d90",
+  "cropBoxLTRB": [
+    318,
+    196,
+    414,
+    290
+  ],
+  "width": 96,
+  "height": 94,
+  "pixels": 9024,
+  "originalRGBSHA256": "36523542f40088781e90b211ada7f1f02435dbd678e2cc7d5e64582ab1a8daf1",
+  "retainedOriginalPixels": true,
+  "preprocessing": "NONE; runtime/bundle image processor defaults only",
+  "extraCrops": 0,
+  "extraRenders": 0,
+  "originalSchoolPDFUsed": false
+}
