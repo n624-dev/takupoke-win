@@ -46,7 +46,7 @@ internal static class RecoveryAuditCertification
         var structure = original.Document.StructureMetadata;
         if (!ValidAncestry(original, token)) return null;
         var firstConfirmation = original.PreviousAcceptance ?? old;
-        if (metadata.ValidatorVersion == 7 && structure?.ValidatorVersion == 7 && original.Result.HumanCorrections is { Count: > 0 })
+        if (metadata.ValidatorVersion == 7 && (structure is null || structure.ValidatorVersion == 7) && original.Result.HumanCorrections is { Count: > 0 })
         {
             var certificate = new RecoverySemanticCertification(RecoveryValidator.SchemaVersion, RecoveryValidator.Version,
                 old.ScopeHash, old.ResultHash, RecoveryValidator.Fingerprint(old), RecoveryValidator.Fingerprint(original.PreviousAcceptance));

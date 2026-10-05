@@ -251,8 +251,9 @@ public sealed class RecoveryInlineParallelCacheTests
         var old = new RecoveryAudit(document, result, new(document.PdfHash, RecoveryValidator.Fingerprint(result),
             RecoveryValidator.Fingerprint(document), result.Metadata, acceptedAt));
         var current = Assert.IsType<RecoveryAudit>(RecoveryAuditCertification.TryRecertify(old));
-        Assert.Equal(old.Acceptance, current.PreviousAcceptance);
+        Assert.Equal(RecoveryValidator.Fingerprint(old), RecoveryValidator.Fingerprint(current with { CurrentCertification = null }));
         Assert.Equal(acceptedAt, current.Acceptance.AcceptedAt);
+        Assert.NotNull(current.CurrentCertification);
         Assert.Equal(RecoveryValidator.Fingerprint(document), RecoveryValidator.Fingerprint(current.Document));
         Assert.Equal(RecoveryValidator.Fingerprint(result.HumanCorrections), RecoveryValidator.Fingerprint(current.Result.HumanCorrections));
         Assert.True(RecoveryAuditCertification.IsCurrent(current));

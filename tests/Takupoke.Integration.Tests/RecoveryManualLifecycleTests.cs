@@ -92,14 +92,16 @@ public sealed class RecoveryManualLifecycleTests
         Assert.Null(await c.Store.ReadAsync<RecoveryJob>(c.Lease, "recovery.Timetable"));
         await c.AssertLastGoodAsync();
     }
-    [Fact]
-    public async Task CertifiedV7ManualHistorySurvivesStoreDisplayRestartAndRejectsFreshOrChangedConsent()
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task CertifiedV7ManualHistorySurvivesStoreDisplayRestartAndRejectsFreshOrChangedConsent(bool structure)
     {
         await using var c = await Context.CreateAsync();
         Assert.NotNull((await c.Coordinator.PrepareAsync(MaterialKind.Timetable, 2032)).ManualSession);
         var failedStrict = Assert.IsType<MaterialAttempt>(await c.Store.ReadAsync<MaterialAttempt>(c.Lease, "attempt.Timetable"));
         Assert.NotNull(failedStrict.Failure);
-        var old = RecoveryManualCertificationTests.Historical(true, c.Source.Digest);
+        var old = RecoveryManualCertificationTests.Historical(structure, c.Source.Digest);
         var originalHash = RecoveryValidator.Fingerprint(old);
         await c.Store.WriteAsync(c.Lease, "recovery.accepted.Timetable." + c.Source.Digest, old);
         var prepared = await c.Coordinator.PrepareAsync(MaterialKind.Timetable, 2032);

@@ -36,13 +36,10 @@ public sealed class RecoveryManualCertificationTests
         Assert.Equal(RecoveryValidator.Fingerprint(old.Document), RecoveryValidator.Fingerprint(current.Document));
         Assert.Equal(RecoveryValidator.Fingerprint(old.Result.HumanCorrections), RecoveryValidator.Fingerprint(current.Result.HumanCorrections));
         Assert.Equal(old.Acceptance.AcceptedAt, current.Acceptance.AcceptedAt);
-        if (structure)
-        {
-            Assert.Equal(RecoveryValidator.Fingerprint(old), RecoveryValidator.Fingerprint(current with { CurrentCertification = null }));
-            Assert.Equal(RecoveryValidator.Version, current.CurrentCertification!.ValidatorVersion);
-            Assert.False(RecoveryValidator.Validate(current.Document, current.Result).CanAdopt);
-            Assert.False(RecoveryValidator.CanReuse(current.Acceptance, current.Document, current.Result));
-        }
+        Assert.Equal(RecoveryValidator.Fingerprint(old), RecoveryValidator.Fingerprint(current with { CurrentCertification = null }));
+        Assert.Equal(RecoveryValidator.Version, current.CurrentCertification!.ValidatorVersion);
+        Assert.False(RecoveryValidator.Validate(current.Document, current.Result).CanAdopt);
+        Assert.False(RecoveryValidator.CanReuse(current.Acceptance, current.Document, current.Result));
         Assert.True(RecoveryAuditCertification.IsCurrent(current));
         Assert.Equal(RecoveryValidator.Fingerprint(current), RecoveryValidator.Fingerprint(RecoveryAuditCertification.Reusable(current)));
     }

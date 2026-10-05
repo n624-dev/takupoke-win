@@ -34,7 +34,7 @@ public static class RecoveryValidator
             // This adapter is solely for an immutable, explicitly accepted V7
             // manual audit. Ordinary Validate/CanReuse keep their current gate.
             if (Version != 8 || certificate.RecoverySchemaVersion != SchemaVersion || certificate.ValidatorVersion != Version ||
-                result.Metadata.ValidatorVersion != 7 || doc.StructureMetadata?.ValidatorVersion != 7 || result.HumanCorrections is not { Count: > 0 } ||
+                result.Metadata.ValidatorVersion != 7 || doc.StructureMetadata is { ValidatorVersion: not 7 } || result.HumanCorrections is not { Count: > 0 } ||
                 previous is not null || acceptance.AcceptedAt == default ||
                 acceptance.Metadata != result.Metadata || acceptance.PdfHash != doc.PdfHash || result.PdfHash != doc.PdfHash ||
                 certificate.ScopeHash != acceptance.ScopeHash || certificate.ResultHash != acceptance.ResultHash ||
