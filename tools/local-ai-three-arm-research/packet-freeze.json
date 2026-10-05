@@ -1,13 +1,28 @@
 {
   "format": "portable-fictional-three-arm-inference-packet-v1",
   "status": "SOURCE_PREPARATION_ONLY_NO_MODEL_EXECUTION",
-  "workflowSHA256": "86346333b28ee5136a1edb23fe9d8099c4dfa9660c77d4b245b85640268fc5bc",
+  "workflowSHA256": "358b2667ce6121ef45a416abb7229bba7727c438fb44cb463f89afbb49c1ad99",
   "pathPolicy": "Relativepayloadpins; onlycropPath relocated; originalIDs/coords/confidence/order preserved. Newpacketidentity; no old111pinPASSclaim.",
   "pins": [
     {
       "path": "bootstrap_ci.py",
-      "bytes": 19550,
-      "sha256": "9de729c7f07b7add8807cd070363e61ca3806e6305665f1b909c3dde2296f61b"
+      "bytes": 20861,
+      "sha256": "08940915a5931442bba9570d59204231c7632adb0ab6c6ab8f770555c70612fa"
+    },
+    {
+      "path": "comparison-capacity-metadata.json",
+      "bytes": 1003,
+      "sha256": "bad7932ae5c409c0921292e3f60d78dd8c4235145c82f7560d30c2c7514910fd"
+    },
+    {
+      "path": "comparison-config.json",
+      "bytes": 1540,
+      "sha256": "5ede011331623bdf1c523109f769ed3f7df7549d8339a60c7a7308a89cd07b51"
+    },
+    {
+      "path": "comparison.py",
+      "bytes": 5582,
+      "sha256": "4dde661659d0b719aeac69e02de0c0e10f6f7e34bf095b65f6e86aff06698d85"
     },
     {
       "path": "crops/t000466d2ba598e3e.png",
@@ -71,8 +86,8 @@
     },
     {
       "path": "guard.py",
-      "bytes": 11360,
-      "sha256": "be0f3ea25ff7030d47b335f7998d01e02a3d2e0642e2be5a3c81f508ccb5c771"
+      "bytes": 12084,
+      "sha256": "84bdb2304960aa18010da8964212fae17df8fd79bb38b38c336598071502e9de"
     },
     {
       "path": "inputs.json",
@@ -81,8 +96,8 @@
     },
     {
       "path": "legal.json",
-      "bytes": 936,
-      "sha256": "408c85ebe246e8b231c60319915413584f309d0b64570202adaed52448cb72f3"
+      "bytes": 2053,
+      "sha256": "1ea669d5fa1c8affab263ff1c503f89e99c19fb07a6ccf6ca6c51997b2bc40d2"
     },
     {
       "path": "local-verified-provenance.json",
@@ -106,13 +121,13 @@
     },
     {
       "path": "recipe.json",
-      "bytes": 9535,
-      "sha256": "4e23c78e75f012642d2719248ad265059732d3b7af3642a5de97926eba9e750c"
+      "bytes": 9879,
+      "sha256": "79624c9bed1f5a9b131c9a7b9571d248e3175c2cb0ce558d7c315f38a55df743"
     },
     {
       "path": "run_once.py",
-      "bytes": 8842,
-      "sha256": "b348f6ca72f2ab624547c847af0b99b7e8e0429ff31e7131ad89efa81726e603"
+      "bytes": 9164,
+      "sha256": "13ae35e38b32ca732204969da46e34c7eb0c163500a9dc0c3ada587355bb0787"
     },
     {
       "path": "runtime-identity.json",
@@ -126,8 +141,8 @@
     },
     {
       "path": "score_outputs.py",
-      "bytes": 8165,
-      "sha256": "a372960beba29c090eb3829fc8d970925583e50802a3ce8581140a3175cad9c0"
+      "bytes": 9043,
+      "sha256": "2fe3657e101332e33ce36ccc9de0a6ae3cfc19112bb71cd5eec500a2fc737360"
     },
     {
       "path": "test_cleanup.py",
@@ -135,9 +150,14 @@
       "sha256": "9f4cb74ddaf0c6d21f35404f215917be156ccfd0f8c60cf88030614ac89aada0"
     },
     {
+      "path": "test_comparison.py",
+      "bytes": 9401,
+      "sha256": "b51a7a38f83a0ba20fd825417e5e2cda408e6ffa0f5c7a666a4ed79f3ad0d4f3"
+    },
+    {
       "path": "test_memory_condition.py",
-      "bytes": 3263,
-      "sha256": "aa170f205527967ab148df22fc0f2f407e158d6118bc7b111f3e34a616dde1ae"
+      "bytes": 3285,
+      "sha256": "89a0d1325fc26b73bd7cd8e0707bf718ea7cd6d0c3683e24505f1d62c8f60e7c"
     },
     {
       "path": "test_namespace.py",
@@ -146,13 +166,18 @@
     },
     {
       "path": "test_portable.py",
-      "bytes": 21658,
-      "sha256": "feb7326a1f3e319ce9f5f6b5e45729a84d583cf862764e29ea0b2b8abae625d9"
+      "bytes": 21839,
+      "sha256": "bbe52840fa01302d4c4f688a4a096e62f14f5069487cbfd1e1a75cf86af68f25"
     },
     {
       "path": "test_preparation.py",
-      "bytes": 20798,
-      "sha256": "2993d56281b4792fec8fdf584555617fd49c0a8f69a5a7aa26e527a626b4d764"
+      "bytes": 21090,
+      "sha256": "c83cbd7f217429fc5782cf21a237eb9087b277e1942925c98c300574a8f4210e"
+    },
+    {
+      "path": "text-model-provenance.json",
+      "bytes": 3293,
+      "sha256": "cadf1ca8c980b3c5af69d345f444e8e782e5829cb2991092d6695dc5a88f9056"
     },
     {
       "path": "token-budget.json",
@@ -161,8 +186,8 @@
     },
     {
       "path": "worker.py",
-      "bytes": 6805,
-      "sha256": "1909e160cdc8b4d24ead45874d14335e4009021511d5c6313fb48dd1f7cb9b27"
+      "bytes": 6928,
+      "sha256": "bbc08ae724be6bcaba81d01be64b0259bfae6de8da12229a79b83df03a6dc4fd"
     }
   ],
   "workerPinPaths": [
@@ -184,7 +209,8 @@
     "protocol.py",
     "recipe.json",
     "runtime-identity.json",
-    "worker.py"
+    "worker.py",
+    "comparison.py"
   ],
   "modelAndRuntimeAssets": "Fetched/verified intoownedCI scratch AFTER exactmanualapproval; dynamicbinding exactruntimefileidentity andmodelSHA checked independently beforeEngine",
   "maximumInferenceCalls": 36,
@@ -193,6 +219,6 @@
   "productionAdoption": false,
   "wholeDocumentFormalSlotsUNASSESSED": 1270,
   "wholeDocumentFormalClocksUNASSESSED": 70,
-  "parentPortablePacketSHA256": "87bf12313f2f51019fdc500ac2928a6f08f5b16790c6ee995ce4e141dd171a34",
-  "version": "separate-prospective6GiB-RSS7GiB-fresh-headroom-resource-condition"
+  "parentPortablePacketSHA256": "92e4f855081c188b79178752b22278278032ae82d897a8c6c8b2b6e66f83d10b",
+  "version": "matched-original-clarified-prompt-independentVM8GiB9.5GiB-optionalQwenTEXT12"
 }

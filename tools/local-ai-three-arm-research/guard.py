@@ -6,6 +6,7 @@ import errno
 import re
 from pathlib import Path
 from protocol import digest
+from comparison import SCOPE_ACTION, validate_recipe
 
 def cgroup_budget(records):
     if not records:
@@ -146,12 +147,18 @@ def verify_packet(root, recipe, verify_pins=True, pin_role='coordinator'):
     root = Path(root)
     freeze_path = root / 'packet-freeze.json'
     approval = json.loads((root / 'root-inference-approval.json').read_text())
-    if approval.get('action') != 'ONE_LOCAL_GEMMA4_THREE_ARM_DEVELOPMENT_COMPONENT_PROBE' or approval.get('sourceFreezeSHA256') != digest(freeze_path) or approval.get('recipeSHA256') != digest(root / 'recipe.json'):
+    if approval.get('action') != SCOPE_ACTION or approval.get('sourceFreezeSHA256') != digest(freeze_path) or approval.get('recipeSHA256') != digest(root / 'recipe.json'):
         raise RuntimeError('EXACT_ROOT_GO_MISSING_OR_MISMATCHED')
-    for key, value in {'plannedMaximumCalls': 36, 'newRecognizerCalls': 0, 'productionAdoption': False, 'fullDocumentAssessment': False}.items():
+    validate_recipe(recipe)
+    for key, value in {'plannedMaximumCalls': recipe['maximumCalls'], 'newRecognizerCalls': 0, 'productionAdoption': False, 'fullDocumentAssessment': False}.items():
         if type(approval.get(key)) is not type(value) or approval[key] != value:
             raise RuntimeError('ROOT_GO_SCOPE_MISMATCH')
     freeze = json.loads(freeze_path.read_text())
+    for field in ('derivedFromSourcePacketSHA256','comparisonConfigurationSHA256'):
+        value=freeze.get(field)
+        if type(value) is not str or len(value)!=64 or any(c not in '0123456789abcdef' for c in value):raise RuntimeError('DERIVED_SOURCE_IDENTITY_MISSING')
+    if approval.get('comparisonCondition')!=recipe['comparisonCondition'] or freeze.get('comparisonCondition')!=recipe['comparisonCondition'] or approval.get('originalSourcePacketSHA256')!=freeze.get('derivedFromSourcePacketSHA256') or approval.get('comparisonConfigurationSHA256')!=freeze.get('comparisonConfigurationSHA256'):
+        raise RuntimeError('DERIVED_CONDITION_APPROVAL_MISMATCH')
     if verify_pins:
         if pin_role not in ('coordinator', 'worker'):
             raise RuntimeError('UNKNOWN_PIN_ROLE')

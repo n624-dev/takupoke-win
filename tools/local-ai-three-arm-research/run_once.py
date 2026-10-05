@@ -71,13 +71,12 @@ def cleanup_group(process):
 
 def main():
     recipe = json.loads((ROOT / 'recipe.json').read_text())
-    launched=None;launch_cleanup=None
+    launched=None;launch_cleanup=None;handles=[]
     try:
         identity = verify_packet(ROOT, recipe)
         recipe=bind_runtime(ROOT,recipe)
         if any((ROOT / n).exists() for n in ('probe-started.json', 'responses.jsonl', 'worker-events.jsonl', 'execution-receipt.json')):
             raise RuntimeError('EXCLUSIVE_RUN_ALREADY_STARTED_OR_OUTPUT_EXISTS')
-        handles = []
         def launch():
             nonlocal launched,launch_cleanup
             # Owned TMPDIR exists before Python/LiteRT module imports.
@@ -100,7 +99,11 @@ def main():
         # There is no intervening dependent call between reserve and Popen.
         process, boundary = guarded_start(recipe, launch)
     except Exception as exc:
-        (ROOT / 'preflight-failure.json').write_text(json.dumps({'error': str(exc), 'dependentExecutionStarted': launched is not None, 'workerPID': launched.pid if launched is not None else None, 'launchCleanup':launch_cleanup, 'modelLoads': 'UNKNOWN' if launched is not None else 0, 'inferenceCalls': 'UNKNOWN' if launched is not None else 0}) + '\n')
+        close_errors=[]
+        for stream in handles:
+            try:stream.close()
+            except Exception as close_error:close_errors.append(type(close_error).__name__+':'+str(close_error))
+        (ROOT / 'preflight-failure.json').write_text(json.dumps({'error': str(exc), 'dependentExecutionStarted': launched is not None, 'workerPID': launched.pid if launched is not None else None, 'launchCleanup':launch_cleanup, 'logCloseErrors':close_errors, 'modelLoads': 'UNKNOWN' if launched is not None else 0, 'inferenceCalls': 'UNKNOWN' if launched is not None else 0}) + '\n')
         raise SystemExit(2)
     begin = time.monotonic()
     peak = 0
@@ -154,7 +157,7 @@ def main():
         for stream in handles:
             stream.close()
     code=process.returncode if hasattr(process,'returncode') else process.wait()
-    receipt = {'identity': identity, 'preStartResources': boundary, 'exitCode': code, 'failure': failure,
+    receipt = {'comparisonCondition':recipe.get('comparisonCondition'),'declaredMaximumCalls':recipe['maximumCalls'],'identity': identity, 'preStartResources': boundary, 'exitCode': code, 'failure': failure,
                'milliseconds': round((time.monotonic()-begin)*1000), 'peakRSSBytes': peak,
                'retries': 0, 'newRecognizerCalls': 0, 'nativeRawChanged': False, 'productionAdoption': False,
                'completedRunIsNotQualification': True}

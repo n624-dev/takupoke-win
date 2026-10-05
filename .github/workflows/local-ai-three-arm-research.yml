@@ -1,4 +1,4 @@
-name: Fictional local AI three-arm research
+name: Fictional local AI matched prompt comparison
 on:
   push:
     branches: [research/windows-local-ai-three-arm-portable-20261005]
@@ -19,9 +19,14 @@ concurrency:
   cancel-in-progress: false
 jobs:
   research:
+    name: ${{ matrix.condition }}
     if: github.repository == 'n624-dev/takupoke-win' && github.ref == 'refs/heads/research/windows-local-ai-three-arm-portable-20261005' && github.run_attempt == '1'
     runs-on: ubuntu-24.04
     timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        condition: [gemma-original, gemma-clarified, qwen-text-clarified]
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -39,11 +44,12 @@ jobs:
           APPROVED_PACKET_SHA: ${{ inputs.approved_packet_sha256 }}
           APPROVED_RECIPE_SHA: ${{ inputs.approved_recipe_sha256 }}
           PYTHONDONTWRITEBYTECODE: '1'
+          COMPARISON_CONDITION: ${{ matrix.condition }}
         run: |
           if [ "$GITHUB_EVENT_NAME" = push ]; then
-            python tools/local-ai-three-arm-research/bootstrap_ci.py --approved-research-push
+            python tools/local-ai-three-arm-research/bootstrap_ci.py --approved-research-push --condition "$COMPARISON_CONDITION"
           else
-            python tools/local-ai-three-arm-research/bootstrap_ci.py --packet-sha "$APPROVED_PACKET_SHA" --recipe-sha "$APPROVED_RECIPE_SHA"
+            python tools/local-ai-three-arm-research/bootstrap_ci.py --packet-sha "$APPROVED_PACKET_SHA" --recipe-sha "$APPROVED_RECIPE_SHA" --condition "$COMPARISON_CONDITION"
           fi
       - name: Always remove owned research scratch
         if: always()

@@ -17,5 +17,27 @@
   "data": {
     "provenance": "12ownedoriginalfictionaldevelopmentRGBcrops/nativeatoms frompreviouslyconsumedV3; no schoolPDF/namescopied/realteacherroom/inputuploaded;160teacherholdoutuntouched",
     "productionQualification": false
+  },
+  "models": {
+    "gemma": {
+      "repository": "litert-community/gemma-4-E2B-it-litert-lm",
+      "revision": "b3ca0d2f076785a8f4b2219ddbd2bdb99954eae1",
+      "license": "Apache-2.0 per retainedpublicmetadata",
+      "modelSHA256": "181938105e0eefd105961417e8da75903eacda102c4fce9ce90f50b97139a63c",
+      "modelBytes": 2588147712,
+      "downloadURL": "https://huggingface.co/litert-community/gemma-4-E2B-it-litert-lm/resolve/b3ca0d2f076785a8f4b2219ddbd2bdb99954eae1/gemma-4-E2B-it.litertlm",
+      "baseModel": "google/gemma-4-E2B-it"
+    },
+    "qwen": {
+      "repository": "litert-community/Qwen3-0.6B",
+      "revision": "a3c5d805ae362dff7f580bc25f2dfb9a5a7eaa76",
+      "license": "Apache-2.0 per retained exact officialmetadata",
+      "modelSHA256": "03e7da1eb1108b50dffaa9bb52cc7bcbad2eb0c66ca990267f480c1e545d2856",
+      "modelBytes": 344671744,
+      "downloadURL": "https://huggingface.co/litert-community/Qwen3-0.6B/resolve/a3c5d805ae362dff7f580bc25f2dfb9a5a7eaa76/Qwen3-0.6B_dynamic_wi4b32_afp32.litertlm",
+      "baseModel": "Qwen/Qwen3-0.6B",
+      "text": true,
+      "vision": false
+    }
   }
 }

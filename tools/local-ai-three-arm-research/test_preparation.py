@@ -114,21 +114,21 @@ class Preparation(unittest.TestCase):
     def test_worker_hash_gate_never_opens_evaluation_oracle(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            (root / 'recipe.json').write_text('{}')
+            (root / 'recipe.json').write_text((ROOT/'recipe.json').read_text())
             (root / 'worker-input').write_text('native only')
             oracle = root / 'oracle-evaluation-only.json'
             oracle.write_text('expected answer')
-            freeze = {'pins': [{'path': 'worker-input', 'bytes': 11, 'sha256': protocol.digest(root/'worker-input')},
+            freeze = {'comparisonCondition':'gemma-original','derivedFromSourcePacketSHA256':'a'*64,'comparisonConfigurationSHA256':'b'*64,'pins': [{'path': 'worker-input', 'bytes': 11, 'sha256': protocol.digest(root/'worker-input')},
                                {'path': 'oracle-evaluation-only.json', 'bytes': 15, 'sha256': protocol.digest(oracle)}], 'workerPinPaths': ['worker-input']}
             (root/'packet-freeze.json').write_text(json.dumps(freeze))
-            (root/'root-inference-approval.json').write_text(json.dumps({'action': 'ONE_LOCAL_GEMMA4_THREE_ARM_DEVELOPMENT_COMPONENT_PROBE',
+            (root/'root-inference-approval.json').write_text(json.dumps({'action': 'ONE_LOCAL_MATCHED_PROMPT_COMPONENT_COMPARISON',
                 'sourceFreezeSHA256': protocol.digest(root/'packet-freeze.json'), 'recipeSHA256': protocol.digest(root/'recipe.json'),
-                'plannedMaximumCalls': 36, 'newRecognizerCalls': 0, 'productionAdoption': False, 'fullDocumentAssessment': False}))
+                'comparisonCondition':'gemma-original','originalSourcePacketSHA256':'a'*64,'comparisonConfigurationSHA256':'b'*64,'plannedMaximumCalls': 36, 'newRecognizerCalls': 0, 'productionAdoption': False, 'fullDocumentAssessment': False}))
             real = guard.digest
             opened = []
             def tracked(path):
                 opened.append(str(path)); return real(path)
-            with patch.object(guard, 'digest', tracked): guard.verify_packet(root, {}, pin_role='worker')
+            with patch.object(guard, 'digest', tracked): guard.verify_packet(root, json.loads((root/'recipe.json').read_text()), pin_role='worker')
             self.assertNotIn(str(oracle), opened)
 
     def test_disk_and_memory_failure_no_launch_or_started_receipt(self):

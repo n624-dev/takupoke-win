@@ -5,6 +5,7 @@ import sys
 import time
 from protocol import BLIND_INSTRUCTION, BLIND_SCHEMA, SYSTEM_MESSAGE, context_capacity, response_capacity_failure, decode_blind, decode_candidate, digest, id_schema, text_prompt, validate_input
 from guard import resources, verify_packet, bind_runtime
+from comparison import prompt, validate_recipe, engine_options
 
 ROOT = Path(__file__).resolve().parent
 
@@ -16,6 +17,7 @@ def main():
         raise RuntimeError('GUARDED_RUNNER_RECEIPT_REQUIRED')
     recipe=bind_runtime(ROOT,recipe)
     resources(ROOT, recipe)
+    stages=validate_recipe(recipe)
     data = json.loads((ROOT / 'inputs.json').read_text())
     tasks = data['tasks']
     if len(tasks) != 12 or data['nativeGate'] is not False:
@@ -40,8 +42,8 @@ def main():
     parent_death_kill(json.loads((ROOT/'probe-started.json').read_text())['runnerPID'])
     emit('networkGuardReady', guard=install())
     from litert_lm import Backend, ConstrainedDecodingConfig, Content, Contents, Engine, LiteRtLmConstraintProviderType, ResponseFormat, SamplerConfig, ThinkingConfig
-    engine = Engine(recipe['modelPath'], backend=Backend.CPU(thread_count=2), vision_backend=Backend.CPU(thread_count=2),
-                    max_num_tokens=recipe['contextTokens'], max_num_images=1, cache_dir=str(cache))
+    options=engine_options(recipe,Backend.CPU,cache)
+    engine = Engine(recipe['modelPath'], **options)
     emit('loadComplete')
     calls = 0
     operational_errors=0
@@ -53,7 +55,7 @@ def main():
         resources(ROOT, {**recipe, 'minimumAvailableMemoryBytes': 0, 'workingAllowanceBytes': 0})
         emit('callStarted', call=calls, taskID=task['id'], stage=stage)
         begin = time.monotonic()
-        row = {'call': calls, 'taskID': task['id'], 'stage': stage, 'promptSHA256': __import__('hashlib').sha256(prompt.encode()).hexdigest(),
+        row = {'comparisonCondition':recipe['comparisonCondition'],'call': calls, 'taskID': task['id'], 'stage': stage, 'promptSHA256': __import__('hashlib').sha256(prompt.encode()).hexdigest(),
                'cropSHA256': task['cropSHA256'] if image else None, 'candidate': None, 'error': None, 'raw': None, 'completeResponse': None}
         try:
             row['contextCapacity']=context_capacity(engine.tokenize,prompt,schema,recipe,image)
@@ -94,16 +96,16 @@ def main():
     try:
         # Text baseline for every matched task is closed before image augmentation.
         for task in tasks:
-            call(task, 'arm2_text', text_prompt(task), id_schema(task))
-        for task in tasks:
+            call(task, 'arm2_text', prompt(task,recipe), id_schema(task))
+        for task in (tasks if 'arm3_blind' in stages else []):
             blind = call(task, 'arm3_blind', BLIND_INSTRUCTION, BLIND_SCHEMA, image=True)
             # An operational/malformed blind answer yields UNKNOWN augmentation;
             # never retry it or substitute an oracle/another model's answer.
             candidate = blind['candidate'] or {'state': 'UNKNOWN', 'lines': []}
-            call(task, 'arm3_compare', text_prompt(task, candidate), id_schema(task))
+            call(task, 'arm3_compare', prompt(task,recipe,candidate), id_schema(task))
     finally:
         engine.close()
-    emit('workerComplete', attemptedCalls=calls, operationalErrors=operational_errors, modelLoads=1, newRecognizerCalls=0, productionAdoption=False)
+    emit('workerComplete', comparisonCondition=recipe['comparisonCondition'], attemptedCalls=calls, operationalErrors=operational_errors, modelLoads=1, newRecognizerCalls=0, productionAdoption=False)
     if operational_errors:raise SystemExit(1)
 
 if __name__ == '__main__':

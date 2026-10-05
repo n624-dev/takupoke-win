@@ -1,17 +1,21 @@
 """Separate evaluator; never imported by the model worker."""
 import json
 from pathlib import Path
+from comparison import ALL_STAGES, validate_recipe
 from protocol import FIELDS, HEADERS, decode_blind, decode_candidate, digest
 
 ROOT = Path(__file__).resolve().parent
 
-def assess(inputs, oracle, records):
+def assess(inputs, oracle, records, stages=ALL_STAGES, condition=None):
     by = {}
     invalid_records = []
-    expected = {(t['id'], stage) for t in inputs['tasks'] for stage in ('arm2_text', 'arm3_blind', 'arm3_compare')}
+    expected = {(t['id'], stage) for t in inputs['tasks'] for stage in stages}
     for row in records:
         if not isinstance(row, dict):
             invalid_records.append({'error': 'non-object completion'})
+            continue
+        if condition is not None and row.get('comparisonCondition')!=condition:
+            invalid_records.append({'error':'comparison condition mismatch; no pooling','record':row})
             continue
         key = (row.get('taskID'), row.get('stage'))
         if key not in expected:
@@ -37,7 +41,9 @@ def assess(inputs, oracle, records):
             a = {'state': 'UNASSESSED', 'operationalError': None, 'candidate': None, 'literalExact': None,
                  'roleIdUnionExact': None, 'parallelCountExact': None, 'tupleBindingExact': None,
                  'tupleBindingAssessment': 'UNASSESSED', 'formalAccepted': False}
-            if row is None:
+            if stage not in stages:
+                a['state']='UNSUPPORTED';a['unsupportedReason']='TEXT_ONLY_MODEL_NO_VISION_CAPABILITY'
+            elif row is None:
                 a['operationalError'] = 'EXPECTED_COMPLETION_NOT_RETURNED'
             elif row.get('disposition') == 'OPERATIONAL_UNASSESSED':
                 a['operationalError'] = row.get('error')
@@ -80,7 +86,7 @@ def assess(inputs, oracle, records):
     summary = {'arm1': {'tasks': len(report), 'literalExact': sum(t['arm1']['literalExact'] for t in report), 'codeBindingUNASSESSED': len(report)}}
     for stage in ('arm2_text', 'arm3_blind', 'arm3_compare'):
         values = [t[stage] for t in report]
-        summary[stage] = {'expected': len(values), 'states': {state: sum(a['state'] == state for a in values) for state in ('CANDIDATE', 'NONE', 'UNKNOWN', 'SCHEMA_REJECTED', 'UNASSESSED')},
+        summary[stage] = {'expected': len(values), 'states': {state: sum(a['state'] == state for a in values) for state in ('CANDIDATE', 'NONE', 'UNKNOWN', 'SCHEMA_REJECTED', 'UNASSESSED', 'UNSUPPORTED')},
                           'literalExact': sum(a['literalExact'] is True for a in values),
                           'literalWrong': sum(a['literalExact'] is False for a in values),
                           'roleIdUnionExact': sum(a['roleIdUnionExact'] is True for a in values),
@@ -91,7 +97,7 @@ def assess(inputs, oracle, records):
                           'emptyImageNONECorrectWithoutEmptyProof': sum(a.get('emptyImageNONECorrect') is True for a in values),
                           'formalAccepted': 0}
     return {'scope': 'PREVIOUSLY_CONSUMED_FICTIONAL_DEVELOPMENT_COMPONENTS; NOT_UNTOUCHED_HOLDOUT_OR_MODEL_QUALIFICATION',
-        'matchedArms': ['OCR_CODE_AI0', 'SAME_OCR_TEXT_AI_IDS', 'SAME_TEXT_ARM_WITH_BLIND_ROI_THEN_COMPARE'],
+        'matchedArms': ['OCR_CODE_AI0', 'SAME_OCR_TEXT_AI_IDS']+(['SAME_TEXT_ARM_WITH_BLIND_ROI_THEN_COMPARE'] if 'arm3_blind' in stages else []),
         'tasks': report, 'summary': summary, 'expectedCalls': len(expected), 'returnedCalls': len(by),
         'missingCallsUNASSESSED': len(expected) - len(by), 'invalidCompletionRecords': invalid_records, 'nativeWholeDocumentProtectiveGate': False,
         'nativeWholeDocumentConfidenceRefusedChunks': 133, 'nativeCorrectWholeRowsRefusedDifferentDenominator': 127,
@@ -99,7 +105,9 @@ def assess(inputs, oracle, records):
         'wholeDocumentFormalSlots': {'expected': 1270, 'assessed': 0, 'UNASSESSED': 1270},
         'wholeDocumentFormalClocks': {'expected': 70, 'assessed': 0, 'UNASSESSED': 70},
         'actualProductionAdoptionAttempted': False, 'qualifiedGenAIModels': [],
-        'candidateValuesCannotReplaceOriginalEvidence': True}
+        'candidateValuesCannotReplaceOriginalEvidence': True,
+        'executedStageScope':list(stages),'schemaRejectedMeaning':'JSON/shape OR protocol semantic rejection; emptyCANDIDATE may be validJSON/native-schema but has no selected evidence',
+        'unsupportedStageIsNotMissingExpectedCall':True}
 
 def main():
     inputs = json.loads((ROOT / 'inputs.json').read_text())
@@ -113,7 +121,9 @@ def main():
                 records.append(json.loads(line))
             except json.JSONDecodeError:
                 records.append({'taskID': '__MALFORMED_OUTPUT__', 'stage': str(len(records)), 'error': 'malformed completion'})
-    report = assess(inputs, oracle, records)
+    recipe=json.loads((ROOT/'recipe.json').read_text());stages=validate_recipe(recipe)
+    report = assess(inputs, oracle, records,stages,recipe['comparisonCondition'])
+    report['comparisonCondition']=recipe['comparisonCondition']
     report['inputsSHA256'] = digest(ROOT / 'inputs.json')
     report['oracleSHA256'] = digest(ROOT / 'oracle-evaluation-only.json')
     (ROOT / 'comparison-report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')

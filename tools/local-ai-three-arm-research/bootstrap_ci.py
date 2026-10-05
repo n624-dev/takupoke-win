@@ -13,6 +13,7 @@ import time
 import urllib.request
 from guard import resources
 from protocol import digest
+from comparison import CONDITIONS, SCOPE_ACTION, select_recipe, derive_packet
 
 ROOT = Path(__file__).resolve().parent
 REPOSITORY='n624-dev/takupoke-win'
@@ -216,12 +217,14 @@ def finish_owned_scratch(process,packet,scratch,marker,marker_owned,recipe,prima
                       'modelDistributed':False,'artifactUploads':0,'productionAdoption':False}),flush=True)
     return cleanup['complete'] and diagnostics['complete'] and removed
 
-def execute(root, packet_sha, recipe_sha, workflow, scratch_parent, authority=None):
+def execute(root, packet_sha, recipe_sha, workflow, scratch_parent, authority=None, condition='gemma-original'):
     first_attempt()
     freeze=verify_source(root,packet_sha,recipe_sha,workflow)
     if sys.version_info[:3]!=(3,12,14):raise RuntimeError('EXACT_PYTHON_3_12_14_REQUIRED')
     if sys.platform!='linux' or os.uname().machine!='x86_64':raise RuntimeError('LINUX_X86_64_SECCOMP_PLATFORM_REQUIRED')
     recipe=read(root/'recipe.json');identity=read(root/'runtime-identity.json');legal=read(root/'legal.json')
+    configuration_path=root/'comparison-config.json'
+    if configuration_path.exists():recipe=select_recipe(recipe,condition,read(configuration_path))
     # Only resource/provenance source is read before exact assets are available.
     initial={**recipe,'workingAllowanceBytes':recipe['workingAllowanceBytes']+recipe['modelBytes']+identity['wheel']['bytes']+209715200}
     resources(scratch_parent,initial)
@@ -234,8 +237,9 @@ def execute(root, packet_sha, recipe_sha, workflow, scratch_parent, authority=No
     try:
         with marker.open('x') as stream:stream.write(str(scratch)+'\n')
         marker_owned=True
-        model=legal['model']
-        model_path=scratch/'gemma-4-E2B-it.litertlm'
+        model=legal['models'][recipe['modelKey']] if 'models' in legal else legal['model']
+        if model['modelSHA256']!=recipe['modelSHA256'] or model['modelBytes']!=recipe['modelBytes']:raise RuntimeError('SELECTED_LEGAL_MODEL_IDENTITY_MISMATCH')
+        model_path=scratch/'selected-model.litertlm'
         download({'url':model['downloadURL'],'bytes':recipe['modelBytes'],'sha256':recipe['modelSHA256']},model_path)
         wheel=identity['wheel'];wheel_path=scratch/wheel['filename'];download(wheel,wheel_path)
         venv=scratch/'runtime'
@@ -251,12 +255,16 @@ def execute(root, packet_sha, recipe_sha, workflow, scratch_parent, authority=No
         for pin in freeze['pins']:
             destination=packet/pin['path'];destination.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(root/pin['path'],destination)
-        shutil.copyfile(root/'packet-freeze.json',packet/'packet-freeze.json')
+        selected_recipe_bytes=(json.dumps(recipe,indent=2)+'\n').encode()
+        (packet/'recipe.json').write_bytes(selected_recipe_bytes)
+        derived_freeze=derive_packet(freeze,recipe,packet_sha,digest(configuration_path),selected_recipe_bytes)
+        (packet/'packet-freeze.json').write_text(json.dumps(derived_freeze,indent=2)+'\n')
+        selected_packet_sha=digest(packet/'packet-freeze.json');selected_recipe_sha=digest(packet/'recipe.json')
         (packet/'model').mkdir();shutil.move(str(model_path),packet/recipe['modelPath'])
         wheel_path.unlink()
         (packet/'runtime-binding.json').write_text(json.dumps({'pythonVersion':'3.12.14','pythonExecutable':str(python),'packageRoot':str(package),'wheelSHA256':wheel['sha256'],'newPortableRuntimeFilesVerified':True})+'\n')
-        print(json.dumps({'portablePacketSHA256':packet_sha,'recipeSHA256':recipe_sha,'modelSHA256Verified':recipe['modelSHA256'],'modelBytes':recipe['modelBytes'],'runtimeWheelSHA256Verified':wheel['sha256'],'runtimeFilesVerified':identity['files'],'pythonVersion':'3.12.14','inputPayloadSHA256':digest(packet/'inputs.json') if (packet/'inputs.json').exists() else None,'executionAuthority':authority or {'type':'MANUAL_WORKFLOW_DISPATCH_EXACT_HASH_ARGUMENTS'}}),flush=True)
-        (packet/'root-inference-approval.json').write_text(json.dumps({'action':'ONE_LOCAL_GEMMA4_THREE_ARM_DEVELOPMENT_COMPONENT_PROBE','sourceFreezeSHA256':packet_sha,'recipeSHA256':recipe_sha,'plannedMaximumCalls':36,'newRecognizerCalls':0,'productionAdoption':False,'fullDocumentAssessment':False,'authority':authority or {'type':'MANUAL_WORKFLOW_DISPATCH_EXACT_HASH_ARGUMENTS'}})+'\n')
+        print(json.dumps({'sourcePortablePacketSHA256':packet_sha,'sourceRecipeSHA256':recipe_sha,'portablePacketSHA256':selected_packet_sha,'recipeSHA256':selected_recipe_sha,'comparisonCondition':condition,'modelSHA256Verified':recipe['modelSHA256'],'modelBytes':recipe['modelBytes'],'runtimeWheelSHA256Verified':wheel['sha256'],'runtimeFilesVerified':identity['files'],'pythonVersion':'3.12.14','inputPayloadSHA256':digest(packet/'inputs.json') if (packet/'inputs.json').exists() else None,'executionAuthority':authority or {'type':'MANUAL_WORKFLOW_DISPATCH_EXACT_HASH_ARGUMENTS'}}),flush=True)
+        (packet/'root-inference-approval.json').write_text(json.dumps({'action':SCOPE_ACTION,'sourceFreezeSHA256':selected_packet_sha,'recipeSHA256':selected_recipe_sha,'comparisonCondition':condition,'originalSourcePacketSHA256':packet_sha,'comparisonConfigurationSHA256':digest(configuration_path),'plannedMaximumCalls':recipe['maximumCalls'],'newRecognizerCalls':0,'productionAdoption':False,'fullDocumentAssessment':False,'authority':authority or {'type':'MANUAL_WORKFLOW_DISPATCH_EXACT_HASH_ARGUMENTS'}})+'\n')
         # Asset hashing warms file cache: this measured gate is mandatory now.
         resources(packet,recipe)
         env={k:v for k,v in os.environ.items() if k not in ('GITHUB_TOKEN','GH_TOKEN','ACTIONS_RUNTIME_TOKEN','ACTIONS_ID_TOKEN_REQUEST_TOKEN')}
@@ -285,10 +293,11 @@ def cleanup_only(parent):
         raise RuntimeError('ALWAYS_CLEANUP_INCOMPLETE; owned scratch retained')
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--cleanup-only',action='store_true');parser.add_argument('--approved-research-push',action='store_true');parser.add_argument('--packet-sha');parser.add_argument('--recipe-sha')
+    parser=argparse.ArgumentParser();parser.add_argument('--cleanup-only',action='store_true');parser.add_argument('--approved-research-push',action='store_true');parser.add_argument('--packet-sha');parser.add_argument('--recipe-sha');parser.add_argument('--condition',choices=CONDITIONS)
     args=parser.parse_args();parent=Path(os.environ['RUNNER_TEMP'])
     if args.cleanup_only:cleanup_only(parent);return
     first_attempt()
+    if args.condition is None or not (ROOT/'comparison-config.json').is_file():raise RuntimeError('EXACT_COMPARISON_CONDITION_REQUIRED')
     authority=None
     if args.approved_research_push:
         if args.packet_sha or args.recipe_sha:raise RuntimeError('MIXED_PUSH_MANUAL_AUTHORITY_REFUSED')
@@ -298,7 +307,7 @@ def main():
     def terminate(signum,frame):raise InterruptedError('controller terminated; clean owned child/scratch')
     previous_term=signal.getsignal(signal.SIGTERM)
     signal.signal(signal.SIGTERM,terminate)
-    try:code=execute(ROOT,args.packet_sha or '',args.recipe_sha or '',workflow,parent,authority)
+    try:code=execute(ROOT,args.packet_sha or '',args.recipe_sha or '',workflow,parent,authority,args.condition)
     except Exception as exc:
         print(json.dumps({'controllerDisposition':'OPERATIONAL_UNASSESSED','error':type(exc).__name__+':'+str(exc),
                           'modelAccuracy':'UNASSESSED','modelLoads':'UNKNOWN_UNLESS_EXECUTION_RECEIPT_PRESENT',

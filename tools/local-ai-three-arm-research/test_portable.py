@@ -104,24 +104,25 @@ class Portable(unittest.TestCase):
                 with self.assertRaisesRegex(RuntimeError,'NONPORTABLE'):bootstrap_ci.verify_source(root,protocol.digest(root/'packet-freeze.json'),recipe,workflow)
 
     def fake_bootstrap(self,root):
-        recipe={**self.recipe(),'modelBytes':1,'modelSHA256':'fake','modelPath':'model/m','processDeadlineSeconds':1}
+        recipe=json.loads((ROOT/'recipe.json').read_text())
         (root/'recipe.json').write_text(json.dumps(recipe))
+        (root/'comparison-config.json').write_text((ROOT/'comparison-config.json').read_text())
         (root/'runtime-identity.json').write_text(json.dumps({'wheel':{'filename':'fake.whl','bytes':1,'sha256':'fake','url':'https://example.invalid'},'files':[]}))
-        (root/'legal.json').write_text(json.dumps({'model':{'downloadURL':'https://example.invalid'}}))
+        (root/'legal.json').write_text((ROOT/'legal.json').read_text())
         (root/'packet-freeze.json').write_text('{}')
         return recipe
 
     def test_initial_gate_failure_never_downloads_or_creates_scratch(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);self.fake_bootstrap(root)
-            with patch.object(bootstrap_ci,'verify_source',return_value={'pins':[]}),patch.object(bootstrap_ci.sys,'version_info',(3,12,14)),patch.object(bootstrap_ci,'resources',side_effect=RuntimeError('reserve')),patch.object(bootstrap_ci,'download') as download:
+            with patch.object(bootstrap_ci,'verify_source',return_value={'pins':[{'path':'recipe.json','bytes':1,'sha256':'fake'}]}),patch.object(bootstrap_ci.sys,'version_info',(3,12,14)),patch.object(bootstrap_ci,'resources',side_effect=RuntimeError('reserve')),patch.object(bootstrap_ci,'download') as download:
                 with self.assertRaisesRegex(RuntimeError,'reserve'):bootstrap_ci.execute(root,'p','r',root/'workflow',root)
             download.assert_not_called();self.assertEqual(list(root.glob('fictional-three-arm-*')),[])
 
     def test_download_exception_unconditionally_removes_owned_scratch(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);self.fake_bootstrap(root)
-            with patch.object(bootstrap_ci,'verify_source',return_value={'pins':[]}),patch.object(bootstrap_ci.sys,'version_info',(3,12,14)),patch.object(bootstrap_ci,'resources',return_value={}),patch.object(bootstrap_ci,'download',side_effect=RuntimeError('fake-download')),patch('builtins.print'):
+            with patch.object(bootstrap_ci,'verify_source',return_value={'pins':[{'path':'recipe.json','bytes':1,'sha256':'fake'}]}),patch.object(bootstrap_ci.sys,'version_info',(3,12,14)),patch.object(bootstrap_ci,'resources',return_value={}),patch.object(bootstrap_ci,'download',side_effect=RuntimeError('fake-download')),patch('builtins.print'):
                 with self.assertRaisesRegex(RuntimeError,'fake-download'):bootstrap_ci.execute(root,'p','r',root/'workflow',root)
             self.assertEqual(list(root.glob('fictional-three-arm-*')),[])
 
@@ -129,7 +130,7 @@ class Portable(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);self.fake_bootstrap(root)
             def fake_download(asset,path):path.write_bytes(b'x')
-            with patch.object(bootstrap_ci,'verify_source',return_value={'pins':[]}),patch.object(bootstrap_ci.sys,'version_info',(3,12,14)),patch.object(bootstrap_ci,'resources',side_effect=[{},RuntimeError('posthash-reserve')]),patch.object(bootstrap_ci,'download',side_effect=fake_download),patch.object(bootstrap_ci.subprocess,'run'),patch.object(bootstrap_ci.subprocess,'Popen') as launch,patch('builtins.print'):
+            with patch.object(bootstrap_ci,'verify_source',return_value={'pins':[{'path':'recipe.json','bytes':1,'sha256':'fake'}]}),patch.object(bootstrap_ci.sys,'version_info',(3,12,14)),patch.object(bootstrap_ci,'resources',side_effect=[{},RuntimeError('posthash-reserve')]),patch.object(bootstrap_ci,'download',side_effect=fake_download),patch.object(bootstrap_ci.subprocess,'run'),patch.object(bootstrap_ci.subprocess,'Popen') as launch,patch('builtins.print'):
                 with self.assertRaisesRegex(RuntimeError,'posthash-reserve'):bootstrap_ci.execute(root,'p','r',root/'workflow',root)
             launch.assert_not_called();self.assertEqual(list(root.glob('fictional-three-arm-*')),[])
 
@@ -139,7 +140,7 @@ class Portable(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError,'UNOWNED'):bootstrap_ci.cleanup_only(root)
 
     def test_controller_failure_reports_unassessed_not_accuracy_fail(self):
-        with tempfile.TemporaryDirectory() as d,patch.dict(bootstrap_ci.os.environ,{'RUNNER_TEMP':d}),patch.object(bootstrap_ci.sys,'argv',['bootstrap_ci.py']),patch.object(bootstrap_ci,'execute',side_effect=RuntimeError('synthetic resource hold')),patch('builtins.print') as output:
+        with tempfile.TemporaryDirectory() as d,patch.dict(bootstrap_ci.os.environ,{'RUNNER_TEMP':d}),patch.object(bootstrap_ci.sys,'argv',['bootstrap_ci.py','--condition','gemma-original']),patch.object(bootstrap_ci,'execute',side_effect=RuntimeError('synthetic resource hold')),patch('builtins.print') as output:
             with self.assertRaisesRegex(RuntimeError,'resource hold'):bootstrap_ci.main()
         report=json.loads(output.call_args.args[0])
         self.assertEqual(report['controllerDisposition'],'OPERATIONAL_UNASSESSED')
@@ -266,7 +267,7 @@ class Portable(unittest.TestCase):
     def test_actual_portable_packet_and_worker_whitelist(self):
         freeze=json.loads((ROOT/'packet-freeze.json').read_text())
         bootstrap_ci.verify_source(ROOT,protocol.digest(ROOT/'packet-freeze.json'),protocol.digest(ROOT/'recipe.json'),ROOT.parents[1]/'.github/workflows/local-ai-three-arm-research.yml')
-        self.assertEqual(len(freeze['workerPinPaths']),19)
+        self.assertEqual(len(freeze['workerPinPaths']),20)
         self.assertNotIn('oracle-evaluation-only.json',freeze['workerPinPaths'])
         self.assertNotIn('score_outputs.py',freeze['workerPinPaths'])
         self.assertFalse(any(Path(p['path']).suffix in ('.so','.dll','.whl','.bgra','.litertlm') for p in freeze['pins']))

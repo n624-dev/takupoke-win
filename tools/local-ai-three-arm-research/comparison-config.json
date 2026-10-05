@@ -1,0 +1,51 @@
+{
+  "conditions": {
+    "gemma-original": {
+      "modelKey": "gemma",
+      "comparisonCondition": "gemma-original",
+      "executionStages": [
+        "arm2_text",
+        "arm3_blind",
+        "arm3_compare"
+      ],
+      "visionSupported": true,
+      "maximumCalls": 36
+    },
+    "gemma-clarified": {
+      "modelKey": "gemma",
+      "comparisonCondition": "gemma-clarified",
+      "executionStages": [
+        "arm2_text",
+        "arm3_blind",
+        "arm3_compare"
+      ],
+      "visionSupported": true,
+      "maximumCalls": 36
+    },
+    "qwen-text-clarified": {
+      "modelKey": "qwen",
+      "comparisonCondition": "qwen-text-clarified",
+      "executionStages": [
+        "arm2_text"
+      ],
+      "visionSupported": false,
+      "maximumCalls": 12,
+      "modelPath": "model/Qwen3-0.6B_dynamic_wi4b32_afp32.litertlm",
+      "modelBytes": 344671744,
+      "modelSHA256": "03e7da1eb1108b50dffaa9bb52cc7bcbad2eb0c66ca990267f480c1e545d2856",
+      "modelRepository": "litert-community/Qwen3-0.6B",
+      "modelRevision": "a3c5d805ae362dff7f580bc25f2dfb9a5a7eaa76",
+      "modelLicense": "Apache-2.0 per exact retained officialmetadata",
+      "bundleMaxVisionTokens": 0,
+      "visionImagesPerCall": 0,
+      "backend": "CPU2 text only; image stagesUNSUPPORTED"
+    }
+  },
+  "sameSchemaAndValidator": true,
+  "maximumIndependentJobs": 3,
+  "maximumTotalCalls": 84,
+  "inputsOracleSharedImmutable": true,
+  "originalPromptPreservedByteExactly": true,
+  "eachGemma36CallsTextOnly12": true,
+  "noMultipleEnginesSameVM": true
+}

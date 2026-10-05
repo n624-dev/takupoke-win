@@ -1,0 +1,21 @@
+{
+  "contextTokensFixed": 8192,
+  "outputTokensFixed": 768,
+  "nativeSchemaAndSystemMessageUnchanged": true,
+  "originalPromptBudgetProof": "token-budget.json retained exact applies ORIGINALGemma only; source-onlySentencePiececounts not nativechatserializationproof",
+  "clarifiedNativeTokenBudget": "UNASSESSED_BEFORE_ENGINE; sameactualnative tokenizer fullschema+system+256template+280vision+768output conservativeguard BEFOREsend_message everycall",
+  "qwenNativeTokenBudget": "UNASSESSED differenttokenizer; actualruntime capacitygate; onlytext no280visionreserve",
+  "clarifiedInstructionUTF8Bytes": 2105,
+  "originalInstructionUTF8Bytes": 1216,
+  "maximumOriginalPromptUTF8Bytes": 4893,
+  "maximumClarifiedPromptUTF8Bytes": 5782,
+  "no6144FitOrExactChatSerializationClaim": true,
+  "promptOversizeDisposition": "OPERATIONAL_UNASSESSED no send_message/no retry, notaccuracyFAIL",
+  "maxCallsPerVM": [
+    36,
+    36,
+    12
+  ],
+  "hostEngineImports": 0,
+  "newLocalTokenizerOrModelDownloads": 0
+}
