@@ -331,7 +331,12 @@ public static class RecoveryDocumentBuilder
                 {
                     work.Step(inside.Sum(a => (long)a.Glyph.Text.Length));
                     if (inside.Any(a => RecoveryValidator.OcrBodySeparatorAmbiguous(sources[a.Id])))
-                        throw new InvalidDataException("OCR原文に解釈を確定できない区切り文字があります。");
+                    {
+                        var error = new InvalidDataException("OCR原文に解釈を確定できない区切り文字があります。");
+                        error.Data["RecoveryErrorKind"] = "sourceContractRefusal";
+                        error.Data["RecoveryErrorCode"] = "ocrSeparatorAmbiguity";
+                        throw error;
+                    }
                 }
                 IReadOnlyList<RecoveryRoleScope> scopes = []; IReadOnlyList<RecoveryLessonBinding> fixedBindings = [];
                 IReadOnlyDictionary<string, string>? separators = null; var fixedBlanks = new HashSet<string>();

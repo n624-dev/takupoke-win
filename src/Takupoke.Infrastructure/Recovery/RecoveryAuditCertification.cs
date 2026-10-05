@@ -30,6 +30,8 @@ internal static class RecoveryAuditCertification
         token.ThrowIfCancellationRequested();
         if (original.Document is null || original.Result?.Metadata is null || original.Acceptance is null ||
             original.PreviousCertification is not null || !HistoricalHashes(original, token)) return null;
+        if (!RecoveryValidator.AuditShapeWithinLimit(original.Document, original.Result, original.Acceptance,
+            original.PreviousAcceptance, original.CurrentCertification, original.PreviousCertification, token)) return null;
         var predecessor = original.CurrentCertification;
         if (predecessor is not null && !GenuineManual7Certificate8(original, predecessor, token)) return null;
         var old = original.Acceptance;

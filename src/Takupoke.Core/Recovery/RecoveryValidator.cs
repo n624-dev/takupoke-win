@@ -30,10 +30,29 @@ public static class RecoveryValidator
     private sealed record HistoricalAuditContext(int OriginVersion);
 
     public static RecoveryValidation ValidateHistoricalManual(RecoveryDocument doc, RecoveryResult result,
-        RecoveryAcceptance acceptance, RecoveryAcceptance? previous, RecoverySemanticCertification certificate, CancellationToken token = default) =>
-        result.Metadata.ValidatorVersion == 7 && result.HumanCorrections is { Count: > 0 }
-            ? ValidateCertifiedAudit(doc, result, acceptance, previous, certificate, token: token)
-            : new(["historicalCertification"]);
+        RecoveryAcceptance acceptance, RecoveryAcceptance? previous, RecoverySemanticCertification certificate, CancellationToken token = default)
+    {
+        try
+        {
+            token.ThrowIfCancellationRequested();
+            return result.Metadata.ValidatorVersion == 7 && result.HumanCorrections is { Count: > 0 }
+                ? ValidateCertifiedAudit(doc, result, acceptance, previous, certificate, token: token)
+                : new(["historicalCertification"]);
+        }
+        catch (RecoveryWorkLimitException) { return new(["validationLimit"]); }
+        catch (Exception e) when (e is NullReferenceException or ArgumentException or KeyNotFoundException or InvalidOperationException) { return new(["malformedInput"]); }
+    }
+
+    // Size-only query; this cannot enable historical semantic validation.
+    public static bool AuditShapeWithinLimit(RecoveryDocument doc, RecoveryResult result,
+        RecoveryAcceptance acceptance, RecoveryAcceptance? previous,
+        RecoverySemanticCertification? certificate = null, RecoverySemanticCertification? predecessor = null,
+        CancellationToken token = default)
+    {
+        try { RecoveryAuditShape.Check(doc, result, acceptance, previous, certificate, predecessor, token); return true; }
+        catch (RecoveryWorkLimitException) { return false; }
+        catch (Exception e) when (e is NullReferenceException or ArgumentException or KeyNotFoundException or InvalidOperationException) { return false; }
+    }
 
     public static RecoveryValidation ValidateCertifiedAudit(RecoveryDocument doc, RecoveryResult result,
         RecoveryAcceptance acceptance, RecoveryAcceptance? previous, RecoverySemanticCertification certificate,
@@ -42,7 +61,11 @@ public static class RecoveryValidator
         try
         {
             token.ThrowIfCancellationRequested();
+            RecoveryAuditShape.Check(doc, result, acceptance, previous, certificate, predecessor, token);
             var origin = result.Metadata.ValidatorVersion;
+            // Individual legacy shape caps and the complete envelope precede
+            // every certification fingerprint as well as semantic context.
+            if (!HistoricalAcceptanceEnvelopeValid(doc, result, acceptance, previous, token)) return new(["historicalCertification"]);
             if (Version != 9 || origin is not (4 or 5 or 6 or 7 or 8) ||
                 certificate.RecoverySchemaVersion != SchemaVersion || certificate.ValidatorVersion != Version ||
                 result.Metadata.RecoverySchemaVersion != SchemaVersion || doc.StructureMetadata is { } structure && structure.ValidatorVersion != origin ||
@@ -61,7 +84,6 @@ public static class RecoveryValidator
             if (origin < 7 && (doc.Capture is not null || result.HumanCorrections is not null || doc.Sources.Any(s => s.NativeConfidence is not null)) ||
                 origin == 7 && result.HumanCorrections is { Count: > 0 } && previous is not null)
                 return new(["historicalCertification"]);
-            if (!HistoricalAcceptanceEnvelopeValid(doc, result, acceptance, previous, token)) return new(["historicalCertification"]);
             token.ThrowIfCancellationRequested();
             // The context is derived only after the exact audit envelope binds it.
             return ValidateCore(doc, result, token: token, historical: new(origin));
@@ -73,6 +95,17 @@ public static class RecoveryValidator
     // or compatibility flag can enable historical metadata in ordinary paths.
     public static bool HistoricalAcceptanceEnvelopeValid(RecoveryDocument doc, RecoveryResult result,
         RecoveryAcceptance acceptance, RecoveryAcceptance? previous, CancellationToken token = default)
+    {
+        try
+        {
+            RecoveryAuditShape.Check(doc, result, acceptance, previous, null, null, token);
+            return HistoricalAcceptanceEnvelopeCore(doc, result, acceptance, previous, token);
+        }
+        catch (RecoveryWorkLimitException) { return false; }
+        catch (Exception e) when (e is NullReferenceException or ArgumentException or KeyNotFoundException or InvalidOperationException) { return false; }
+    }
+    private static bool HistoricalAcceptanceEnvelopeCore(RecoveryDocument doc, RecoveryResult result,
+        RecoveryAcceptance acceptance, RecoveryAcceptance? previous, CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
         if (!HistoricalEnvelope(doc, result, acceptance, token)) return false;
