@@ -1,0 +1,4801 @@
+{
+  "scope": "Actual direct-PARSeq string outputs with original pixel-support ROIs, not character boxes; diagnostic host replay only, gold after output",
+  "rules": 47,
+  "glyphs": 170,
+  "sourceHash": "3bb95ebcce616cf24c6b4c431f6fe9b790491e5d22085f74e4430cfd5871b946",
+  "schema": 2,
+  "validator": 5,
+  "operationalError": false,
+  "unrecognizedInk": false,
+  "nativeSourceAdoptionEligible": true,
+  "nativeTranscriptionConfidence": null,
+  "productionAcquisitionEligible": false,
+  "acquisitionLimitation": "No calibrated transcription/character confidence or production acquisition contract; geometry availability is not qualification",
+  "nativeRawSha": "7293f1c6ae45cfd76f147bfce61af75f1c92be0aed1dc66820ac80a897430b54",
+  "originalNativeAtoms": [
+    {
+      "id": 0,
+      "text": "\u4EE4\u548C14\u5E74\u5EA6",
+      "boundingBox": [
+        [
+          98,
+          13
+        ],
+        [
+          202,
+          13
+        ],
+        [
+          202,
+          33
+        ],
+        [
+          98,
+          33
+        ]
+      ],
+      "parentRegionID": 87,
+      "originalPixelRowID": 0,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 1,
+      "text": "\u524D\u671F",
+      "boundingBox": [
+        [
+          351,
+          13
+        ],
+        [
+          389,
+          13
+        ],
+        [
+          389,
+          33
+        ],
+        [
+          351,
+          33
+        ]
+      ],
+      "parentRegionID": 88,
+      "originalPixelRowID": 1,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 2,
+      "text": "\u6642\u9593\u5272",
+      "boundingBox": [
+        [
+          551,
+          13
+        ],
+        [
+          609,
+          13
+        ],
+        [
+          609,
+          33
+        ],
+        [
+          551,
+          33
+        ]
+      ],
+      "parentRegionID": 89,
+      "originalPixelRowID": 2,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 3,
+      "text": "\u6708\u66DC\u65E5",
+      "boundingBox": [
+        [
+          450,
+          74
+        ],
+        [
+          507,
+          74
+        ],
+        [
+          507,
+          93
+        ],
+        [
+          450,
+          93
+        ]
+      ],
+      "parentRegionID": 0,
+      "originalPixelRowID": 3,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 4,
+      "text": "\u706B\u66DC\u65E5",
+      "boundingBox": [
+        [
+          1171,
+          74
+        ],
+        [
+          1227,
+          74
+        ],
+        [
+          1227,
+          93
+        ],
+        [
+          1171,
+          93
+        ]
+      ],
+      "parentRegionID": 1,
+      "originalPixelRowID": 4,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 5,
+      "text": "\u6C34\u66DC\u65E5",
+      "boundingBox": [
+        [
+          1890,
+          74
+        ],
+        [
+          1947,
+          74
+        ],
+        [
+          1947,
+          94
+        ],
+        [
+          1890,
+          94
+        ]
+      ],
+      "parentRegionID": 2,
+      "originalPixelRowID": 5,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 6,
+      "text": "\u6728\u66DC\u65E5",
+      "boundingBox": [
+        [
+          2610,
+          74
+        ],
+        [
+          2667,
+          74
+        ],
+        [
+          2667,
+          94
+        ],
+        [
+          2610,
+          94
+        ]
+      ],
+      "parentRegionID": 3,
+      "originalPixelRowID": 6,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 7,
+      "text": "\u91D1\u66DC\u65E5",
+      "boundingBox": [
+        [
+          3330,
+          74
+        ],
+        [
+          3387,
+          74
+        ],
+        [
+          3387,
+          93
+        ],
+        [
+          3330,
+          93
+        ]
+      ],
+      "parentRegionID": 4,
+      "originalPixelRowID": 7,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 8,
+      "text": "11",
+      "boundingBox": [
+        [
+          160,
+          107
+        ],
+        [
+          169,
+          107
+        ],
+        [
+          169,
+          122
+        ],
+        [
+          160,
+          122
+        ]
+      ],
+      "parentRegionID": 5,
+      "originalPixelRowID": 8,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 9,
+      "text": "2)",
+      "boundingBox": [
+        [
+          249,
+          107
+        ],
+        [
+          260,
+          107
+        ],
+        [
+          260,
+          122
+        ],
+        [
+          249,
+          122
+        ]
+      ],
+      "parentRegionID": 6,
+      "originalPixelRowID": 9,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 10,
+      "text": "(33",
+      "boundingBox": [
+        [
+          339,
+          107
+        ],
+        [
+          349,
+          107
+        ],
+        [
+          349,
+          122
+        ],
+        [
+          339,
+          122
+        ]
+      ],
+      "parentRegionID": 7,
+      "originalPixelRowID": 10,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 11,
+      "text": "44",
+      "boundingBox": [
+        [
+          429,
+          107
+        ],
+        [
+          440,
+          107
+        ],
+        [
+          440,
+          122
+        ],
+        [
+          429,
+          122
+        ]
+      ],
+      "parentRegionID": 8,
+      "originalPixelRowID": 11,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 12,
+      "text": "5)",
+      "boundingBox": [
+        [
+          519,
+          107
+        ],
+        [
+          530,
+          107
+        ],
+        [
+          530,
+          122
+        ],
+        [
+          519,
+          122
+        ]
+      ],
+      "parentRegionID": 9,
+      "originalPixelRowID": 12,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 13,
+      "text": "6)",
+      "boundingBox": [
+        [
+          610,
+          107
+        ],
+        [
+          620,
+          107
+        ],
+        [
+          620,
+          122
+        ],
+        [
+          610,
+          122
+        ]
+      ],
+      "parentRegionID": 10,
+      "originalPixelRowID": 13,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 14,
+      "text": "7",
+      "boundingBox": [
+        [
+          699,
+          107
+        ],
+        [
+          710,
+          107
+        ],
+        [
+          710,
+          122
+        ],
+        [
+          699,
+          122
+        ]
+      ],
+      "parentRegionID": 11,
+      "originalPixelRowID": 14,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 15,
+      "text": "8",
+      "boundingBox": [
+        [
+          789,
+          107
+        ],
+        [
+          800,
+          107
+        ],
+        [
+          800,
+          122
+        ],
+        [
+          789,
+          122
+        ]
+      ],
+      "parentRegionID": 12,
+      "originalPixelRowID": 15,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 16,
+      "text": "11",
+      "boundingBox": [
+        [
+          880,
+          107
+        ],
+        [
+          889,
+          107
+        ],
+        [
+          889,
+          122
+        ],
+        [
+          880,
+          122
+        ]
+      ],
+      "parentRegionID": 13,
+      "originalPixelRowID": 16,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 17,
+      "text": "2)",
+      "boundingBox": [
+        [
+          969,
+          107
+        ],
+        [
+          980,
+          107
+        ],
+        [
+          980,
+          122
+        ],
+        [
+          969,
+          122
+        ]
+      ],
+      "parentRegionID": 14,
+      "originalPixelRowID": 17,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 18,
+      "text": "(33",
+      "boundingBox": [
+        [
+          1059,
+          107
+        ],
+        [
+          1069,
+          107
+        ],
+        [
+          1069,
+          122
+        ],
+        [
+          1059,
+          122
+        ]
+      ],
+      "parentRegionID": 15,
+      "originalPixelRowID": 18,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 19,
+      "text": "44",
+      "boundingBox": [
+        [
+          1149,
+          107
+        ],
+        [
+          1160,
+          107
+        ],
+        [
+          1160,
+          122
+        ],
+        [
+          1149,
+          122
+        ]
+      ],
+      "parentRegionID": 16,
+      "originalPixelRowID": 19,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 20,
+      "text": "5)",
+      "boundingBox": [
+        [
+          1239,
+          107
+        ],
+        [
+          1250,
+          107
+        ],
+        [
+          1250,
+          122
+        ],
+        [
+          1239,
+          122
+        ]
+      ],
+      "parentRegionID": 17,
+      "originalPixelRowID": 20,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 21,
+      "text": "6)",
+      "boundingBox": [
+        [
+          1330,
+          107
+        ],
+        [
+          1340,
+          107
+        ],
+        [
+          1340,
+          122
+        ],
+        [
+          1330,
+          122
+        ]
+      ],
+      "parentRegionID": 18,
+      "originalPixelRowID": 21,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 22,
+      "text": "7",
+      "boundingBox": [
+        [
+          1419,
+          107
+        ],
+        [
+          1430,
+          107
+        ],
+        [
+          1430,
+          122
+        ],
+        [
+          1419,
+          122
+        ]
+      ],
+      "parentRegionID": 19,
+      "originalPixelRowID": 22,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 23,
+      "text": "8",
+      "boundingBox": [
+        [
+          1509,
+          107
+        ],
+        [
+          1520,
+          107
+        ],
+        [
+          1520,
+          122
+        ],
+        [
+          1509,
+          122
+        ]
+      ],
+      "parentRegionID": 20,
+      "originalPixelRowID": 23,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 24,
+      "text": "11",
+      "boundingBox": [
+        [
+          1600,
+          107
+        ],
+        [
+          1609,
+          107
+        ],
+        [
+          1609,
+          122
+        ],
+        [
+          1600,
+          122
+        ]
+      ],
+      "parentRegionID": 21,
+      "originalPixelRowID": 24,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 25,
+      "text": "2)",
+      "boundingBox": [
+        [
+          1689,
+          107
+        ],
+        [
+          1700,
+          107
+        ],
+        [
+          1700,
+          122
+        ],
+        [
+          1689,
+          122
+        ]
+      ],
+      "parentRegionID": 22,
+      "originalPixelRowID": 25,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 26,
+      "text": "(33",
+      "boundingBox": [
+        [
+          1779,
+          107
+        ],
+        [
+          1789,
+          107
+        ],
+        [
+          1789,
+          122
+        ],
+        [
+          1779,
+          122
+        ]
+      ],
+      "parentRegionID": 23,
+      "originalPixelRowID": 26,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 27,
+      "text": "44",
+      "boundingBox": [
+        [
+          1869,
+          107
+        ],
+        [
+          1880,
+          107
+        ],
+        [
+          1880,
+          122
+        ],
+        [
+          1869,
+          122
+        ]
+      ],
+      "parentRegionID": 24,
+      "originalPixelRowID": 27,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 28,
+      "text": "5)",
+      "boundingBox": [
+        [
+          1959,
+          107
+        ],
+        [
+          1970,
+          107
+        ],
+        [
+          1970,
+          122
+        ],
+        [
+          1959,
+          122
+        ]
+      ],
+      "parentRegionID": 25,
+      "originalPixelRowID": 28,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 29,
+      "text": "6)",
+      "boundingBox": [
+        [
+          2050,
+          107
+        ],
+        [
+          2060,
+          107
+        ],
+        [
+          2060,
+          122
+        ],
+        [
+          2050,
+          122
+        ]
+      ],
+      "parentRegionID": 26,
+      "originalPixelRowID": 29,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 30,
+      "text": "7",
+      "boundingBox": [
+        [
+          2139,
+          107
+        ],
+        [
+          2150,
+          107
+        ],
+        [
+          2150,
+          122
+        ],
+        [
+          2139,
+          122
+        ]
+      ],
+      "parentRegionID": 27,
+      "originalPixelRowID": 30,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 31,
+      "text": "8",
+      "boundingBox": [
+        [
+          2229,
+          107
+        ],
+        [
+          2240,
+          107
+        ],
+        [
+          2240,
+          122
+        ],
+        [
+          2229,
+          122
+        ]
+      ],
+      "parentRegionID": 28,
+      "originalPixelRowID": 31,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 32,
+      "text": "11",
+      "boundingBox": [
+        [
+          2320,
+          107
+        ],
+        [
+          2329,
+          107
+        ],
+        [
+          2329,
+          122
+        ],
+        [
+          2320,
+          122
+        ]
+      ],
+      "parentRegionID": 29,
+      "originalPixelRowID": 32,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 33,
+      "text": "2)",
+      "boundingBox": [
+        [
+          2409,
+          107
+        ],
+        [
+          2420,
+          107
+        ],
+        [
+          2420,
+          122
+        ],
+        [
+          2409,
+          122
+        ]
+      ],
+      "parentRegionID": 30,
+      "originalPixelRowID": 33,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 34,
+      "text": "(33",
+      "boundingBox": [
+        [
+          2499,
+          107
+        ],
+        [
+          2509,
+          107
+        ],
+        [
+          2509,
+          122
+        ],
+        [
+          2499,
+          122
+        ]
+      ],
+      "parentRegionID": 31,
+      "originalPixelRowID": 34,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 35,
+      "text": "44",
+      "boundingBox": [
+        [
+          2589,
+          107
+        ],
+        [
+          2600,
+          107
+        ],
+        [
+          2600,
+          122
+        ],
+        [
+          2589,
+          122
+        ]
+      ],
+      "parentRegionID": 32,
+      "originalPixelRowID": 35,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 36,
+      "text": "5)",
+      "boundingBox": [
+        [
+          2679,
+          107
+        ],
+        [
+          2690,
+          107
+        ],
+        [
+          2690,
+          122
+        ],
+        [
+          2679,
+          122
+        ]
+      ],
+      "parentRegionID": 33,
+      "originalPixelRowID": 36,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 37,
+      "text": "6)",
+      "boundingBox": [
+        [
+          2770,
+          107
+        ],
+        [
+          2780,
+          107
+        ],
+        [
+          2780,
+          122
+        ],
+        [
+          2770,
+          122
+        ]
+      ],
+      "parentRegionID": 34,
+      "originalPixelRowID": 37,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 38,
+      "text": "7",
+      "boundingBox": [
+        [
+          2859,
+          107
+        ],
+        [
+          2870,
+          107
+        ],
+        [
+          2870,
+          122
+        ],
+        [
+          2859,
+          122
+        ]
+      ],
+      "parentRegionID": 35,
+      "originalPixelRowID": 38,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 39,
+      "text": "8",
+      "boundingBox": [
+        [
+          2949,
+          107
+        ],
+        [
+          2960,
+          107
+        ],
+        [
+          2960,
+          122
+        ],
+        [
+          2949,
+          122
+        ]
+      ],
+      "parentRegionID": 36,
+      "originalPixelRowID": 39,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 40,
+      "text": "11",
+      "boundingBox": [
+        [
+          3040,
+          107
+        ],
+        [
+          3049,
+          107
+        ],
+        [
+          3049,
+          122
+        ],
+        [
+          3040,
+          122
+        ]
+      ],
+      "parentRegionID": 37,
+      "originalPixelRowID": 40,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 41,
+      "text": "2)",
+      "boundingBox": [
+        [
+          3129,
+          107
+        ],
+        [
+          3140,
+          107
+        ],
+        [
+          3140,
+          122
+        ],
+        [
+          3129,
+          122
+        ]
+      ],
+      "parentRegionID": 38,
+      "originalPixelRowID": 41,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 42,
+      "text": "(33",
+      "boundingBox": [
+        [
+          3219,
+          107
+        ],
+        [
+          3229,
+          107
+        ],
+        [
+          3229,
+          122
+        ],
+        [
+          3219,
+          122
+        ]
+      ],
+      "parentRegionID": 39,
+      "originalPixelRowID": 42,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 43,
+      "text": "44",
+      "boundingBox": [
+        [
+          3309,
+          107
+        ],
+        [
+          3320,
+          107
+        ],
+        [
+          3320,
+          122
+        ],
+        [
+          3309,
+          122
+        ]
+      ],
+      "parentRegionID": 40,
+      "originalPixelRowID": 43,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 44,
+      "text": "5)",
+      "boundingBox": [
+        [
+          3399,
+          107
+        ],
+        [
+          3410,
+          107
+        ],
+        [
+          3410,
+          122
+        ],
+        [
+          3399,
+          122
+        ]
+      ],
+      "parentRegionID": 41,
+      "originalPixelRowID": 44,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 45,
+      "text": "6)",
+      "boundingBox": [
+        [
+          3490,
+          107
+        ],
+        [
+          3500,
+          107
+        ],
+        [
+          3500,
+          122
+        ],
+        [
+          3490,
+          122
+        ]
+      ],
+      "parentRegionID": 42,
+      "originalPixelRowID": 45,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 46,
+      "text": "7",
+      "boundingBox": [
+        [
+          3579,
+          107
+        ],
+        [
+          3590,
+          107
+        ],
+        [
+          3590,
+          122
+        ],
+        [
+          3579,
+          122
+        ]
+      ],
+      "parentRegionID": 43,
+      "originalPixelRowID": 46,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 47,
+      "text": "8",
+      "boundingBox": [
+        [
+          3669,
+          107
+        ],
+        [
+          3680,
+          107
+        ],
+        [
+          3680,
+          122
+        ],
+        [
+          3669,
+          122
+        ]
+      ],
+      "parentRegionID": 44,
+      "originalPixelRowID": 47,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 48,
+      "text": "\u56F3\u781401",
+      "boundingBox": [
+        [
+          134,
+          139
+        ],
+        [
+          195,
+          139
+        ],
+        [
+          195,
+          158
+        ],
+        [
+          134,
+          158
+        ]
+      ],
+      "parentRegionID": 47,
+      "originalPixelRowID": 48,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 49,
+      "text": "\u56F3\u781402",
+      "boundingBox": [
+        [
+          224,
+          139
+        ],
+        [
+          286,
+          139
+        ],
+        [
+          286,
+          158
+        ],
+        [
+          224,
+          158
+        ]
+      ],
+      "parentRegionID": 48,
+      "originalPixelRowID": 49,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 50,
+      "text": "\u56F3\u781403",
+      "boundingBox": [
+        [
+          314,
+          139
+        ],
+        [
+          375,
+          139
+        ],
+        [
+          375,
+          158
+        ],
+        [
+          314,
+          158
+        ]
+      ],
+      "parentRegionID": 49,
+      "originalPixelRowID": 50,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 51,
+      "text": "\u56F3\u781404",
+      "boundingBox": [
+        [
+          404,
+          139
+        ],
+        [
+          466,
+          139
+        ],
+        [
+          466,
+          158
+        ],
+        [
+          404,
+          158
+        ]
+      ],
+      "parentRegionID": 50,
+      "originalPixelRowID": 51,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 52,
+      "text": "\u56F3\u781405",
+      "boundingBox": [
+        [
+          494,
+          139
+        ],
+        [
+          556,
+          139
+        ],
+        [
+          556,
+          158
+        ],
+        [
+          494,
+          158
+        ]
+      ],
+      "parentRegionID": 51,
+      "originalPixelRowID": 52,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 53,
+      "text": "\u56F3\u781406",
+      "boundingBox": [
+        [
+          584,
+          139
+        ],
+        [
+          646,
+          139
+        ],
+        [
+          646,
+          158
+        ],
+        [
+          584,
+          158
+        ]
+      ],
+      "parentRegionID": 52,
+      "originalPixelRowID": 53,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 54,
+      "text": "\u56F307",
+      "boundingBox": [
+        [
+          674,
+          139
+        ],
+        [
+          736,
+          139
+        ],
+        [
+          736,
+          158
+        ],
+        [
+          674,
+          158
+        ]
+      ],
+      "parentRegionID": 53,
+      "originalPixelRowID": 54,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 55,
+      "text": "\u56F3\u781408",
+      "boundingBox": [
+        [
+          764,
+          139
+        ],
+        [
+          826,
+          139
+        ],
+        [
+          826,
+          158
+        ],
+        [
+          764,
+          158
+        ]
+      ],
+      "parentRegionID": 54,
+      "originalPixelRowID": 55,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 56,
+      "text": "\u56F3\u781409",
+      "boundingBox": [
+        [
+          854,
+          139
+        ],
+        [
+          915,
+          139
+        ],
+        [
+          915,
+          158
+        ],
+        [
+          854,
+          158
+        ]
+      ],
+      "parentRegionID": 55,
+      "originalPixelRowID": 56,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 57,
+      "text": "\u56F3\u781410",
+      "boundingBox": [
+        [
+          944,
+          139
+        ],
+        [
+          1006,
+          139
+        ],
+        [
+          1006,
+          158
+        ],
+        [
+          944,
+          158
+        ]
+      ],
+      "parentRegionID": 56,
+      "originalPixelRowID": 57,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 58,
+      "text": "\u56F3\u781411",
+      "boundingBox": [
+        [
+          1034,
+          139
+        ],
+        [
+          1095,
+          139
+        ],
+        [
+          1095,
+          158
+        ],
+        [
+          1034,
+          158
+        ]
+      ],
+      "parentRegionID": 57,
+      "originalPixelRowID": 58,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 59,
+      "text": "\u56F3\u781412",
+      "boundingBox": [
+        [
+          1124,
+          139
+        ],
+        [
+          1186,
+          139
+        ],
+        [
+          1186,
+          158
+        ],
+        [
+          1124,
+          158
+        ]
+      ],
+      "parentRegionID": 58,
+      "originalPixelRowID": 59,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 60,
+      "text": "\u56F3\u781413",
+      "boundingBox": [
+        [
+          1214,
+          139
+        ],
+        [
+          1275,
+          139
+        ],
+        [
+          1275,
+          158
+        ],
+        [
+          1214,
+          158
+        ]
+      ],
+      "parentRegionID": 59,
+      "originalPixelRowID": 60,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 61,
+      "text": "\u56F3\u781414",
+      "boundingBox": [
+        [
+          1304,
+          139
+        ],
+        [
+          1366,
+          139
+        ],
+        [
+          1366,
+          158
+        ],
+        [
+          1304,
+          158
+        ]
+      ],
+      "parentRegionID": 60,
+      "originalPixelRowID": 61,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 62,
+      "text": "\u56F3\u781415",
+      "boundingBox": [
+        [
+          1394,
+          139
+        ],
+        [
+          1456,
+          139
+        ],
+        [
+          1456,
+          158
+        ],
+        [
+          1394,
+          158
+        ]
+      ],
+      "parentRegionID": 61,
+      "originalPixelRowID": 62,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 63,
+      "text": "\u56F3\u781416",
+      "boundingBox": [
+        [
+          1484,
+          139
+        ],
+        [
+          1546,
+          139
+        ],
+        [
+          1546,
+          158
+        ],
+        [
+          1484,
+          158
+        ]
+      ],
+      "parentRegionID": 62,
+      "originalPixelRowID": 63,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 64,
+      "text": "\u56F3\u781417",
+      "boundingBox": [
+        [
+          1574,
+          139
+        ],
+        [
+          1636,
+          139
+        ],
+        [
+          1636,
+          158
+        ],
+        [
+          1574,
+          158
+        ]
+      ],
+      "parentRegionID": 63,
+      "originalPixelRowID": 64,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 65,
+      "text": "\u56F3\u781418",
+      "boundingBox": [
+        [
+          1664,
+          139
+        ],
+        [
+          1726,
+          139
+        ],
+        [
+          1726,
+          158
+        ],
+        [
+          1664,
+          158
+        ]
+      ],
+      "parentRegionID": 64,
+      "originalPixelRowID": 65,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 66,
+      "text": "\u56F3\u781419",
+      "boundingBox": [
+        [
+          1754,
+          139
+        ],
+        [
+          1815,
+          139
+        ],
+        [
+          1815,
+          158
+        ],
+        [
+          1754,
+          158
+        ]
+      ],
+      "parentRegionID": 65,
+      "originalPixelRowID": 66,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 67,
+      "text": "\u56F3\u781420",
+      "boundingBox": [
+        [
+          1844,
+          139
+        ],
+        [
+          1906,
+          139
+        ],
+        [
+          1906,
+          158
+        ],
+        [
+          1844,
+          158
+        ]
+      ],
+      "parentRegionID": 66,
+      "originalPixelRowID": 67,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 68,
+      "text": "\u56F3\u781421",
+      "boundingBox": [
+        [
+          1934,
+          139
+        ],
+        [
+          1995,
+          139
+        ],
+        [
+          1995,
+          158
+        ],
+        [
+          1934,
+          158
+        ]
+      ],
+      "parentRegionID": 67,
+      "originalPixelRowID": 68,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 69,
+      "text": "\u56F3\u781422",
+      "boundingBox": [
+        [
+          2024,
+          139
+        ],
+        [
+          2086,
+          139
+        ],
+        [
+          2086,
+          158
+        ],
+        [
+          2024,
+          158
+        ]
+      ],
+      "parentRegionID": 68,
+      "originalPixelRowID": 69,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 70,
+      "text": "\u56F3\u781423",
+      "boundingBox": [
+        [
+          2114,
+          139
+        ],
+        [
+          2175,
+          139
+        ],
+        [
+          2175,
+          158
+        ],
+        [
+          2114,
+          158
+        ]
+      ],
+      "parentRegionID": 69,
+      "originalPixelRowID": 70,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 71,
+      "text": "\u56F3\u781424",
+      "boundingBox": [
+        [
+          2204,
+          139
+        ],
+        [
+          2266,
+          139
+        ],
+        [
+          2266,
+          158
+        ],
+        [
+          2204,
+          158
+        ]
+      ],
+      "parentRegionID": 70,
+      "originalPixelRowID": 71,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 72,
+      "text": "\u56F3\u781425",
+      "boundingBox": [
+        [
+          2294,
+          139
+        ],
+        [
+          2356,
+          139
+        ],
+        [
+          2356,
+          158
+        ],
+        [
+          2294,
+          158
+        ]
+      ],
+      "parentRegionID": 71,
+      "originalPixelRowID": 72,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 73,
+      "text": "\u56F3\u781426",
+      "boundingBox": [
+        [
+          2384,
+          139
+        ],
+        [
+          2446,
+          139
+        ],
+        [
+          2446,
+          158
+        ],
+        [
+          2384,
+          158
+        ]
+      ],
+      "parentRegionID": 72,
+      "originalPixelRowID": 73,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 74,
+      "text": "\u56F3\u781427",
+      "boundingBox": [
+        [
+          2474,
+          139
+        ],
+        [
+          2536,
+          139
+        ],
+        [
+          2536,
+          158
+        ],
+        [
+          2474,
+          158
+        ]
+      ],
+      "parentRegionID": 73,
+      "originalPixelRowID": 74,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 75,
+      "text": "\u56F3\u781428",
+      "boundingBox": [
+        [
+          2564,
+          139
+        ],
+        [
+          2626,
+          139
+        ],
+        [
+          2626,
+          158
+        ],
+        [
+          2564,
+          158
+        ]
+      ],
+      "parentRegionID": 74,
+      "originalPixelRowID": 75,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 76,
+      "text": "\u56F3\u781429",
+      "boundingBox": [
+        [
+          2654,
+          139
+        ],
+        [
+          2715,
+          139
+        ],
+        [
+          2715,
+          158
+        ],
+        [
+          2654,
+          158
+        ]
+      ],
+      "parentRegionID": 75,
+      "originalPixelRowID": 76,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 77,
+      "text": "\u56F3\u781430",
+      "boundingBox": [
+        [
+          2744,
+          139
+        ],
+        [
+          2806,
+          139
+        ],
+        [
+          2806,
+          158
+        ],
+        [
+          2744,
+          158
+        ]
+      ],
+      "parentRegionID": 76,
+      "originalPixelRowID": 77,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 78,
+      "text": "\u56F3\u781431",
+      "boundingBox": [
+        [
+          2834,
+          139
+        ],
+        [
+          2895,
+          139
+        ],
+        [
+          2895,
+          158
+        ],
+        [
+          2834,
+          158
+        ]
+      ],
+      "parentRegionID": 77,
+      "originalPixelRowID": 78,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 79,
+      "text": "\u56F3\u781432",
+      "boundingBox": [
+        [
+          2924,
+          139
+        ],
+        [
+          2986,
+          139
+        ],
+        [
+          2986,
+          158
+        ],
+        [
+          2924,
+          158
+        ]
+      ],
+      "parentRegionID": 78,
+      "originalPixelRowID": 79,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 80,
+      "text": "\u56F3\u781433",
+      "boundingBox": [
+        [
+          3014,
+          139
+        ],
+        [
+          3075,
+          139
+        ],
+        [
+          3075,
+          158
+        ],
+        [
+          3014,
+          158
+        ]
+      ],
+      "parentRegionID": 79,
+      "originalPixelRowID": 80,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 81,
+      "text": "\u56F3\u781434",
+      "boundingBox": [
+        [
+          3104,
+          139
+        ],
+        [
+          3166,
+          139
+        ],
+        [
+          3166,
+          158
+        ],
+        [
+          3104,
+          158
+        ]
+      ],
+      "parentRegionID": 80,
+      "originalPixelRowID": 81,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 82,
+      "text": "\u56F3\u781435",
+      "boundingBox": [
+        [
+          3194,
+          139
+        ],
+        [
+          3256,
+          139
+        ],
+        [
+          3256,
+          158
+        ],
+        [
+          3194,
+          158
+        ]
+      ],
+      "parentRegionID": 81,
+      "originalPixelRowID": 82,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 83,
+      "text": "\u56F3\u781436",
+      "boundingBox": [
+        [
+          3284,
+          139
+        ],
+        [
+          3346,
+          139
+        ],
+        [
+          3346,
+          158
+        ],
+        [
+          3284,
+          158
+        ]
+      ],
+      "parentRegionID": 82,
+      "originalPixelRowID": 83,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 84,
+      "text": "\u56F3\u781437",
+      "boundingBox": [
+        [
+          3374,
+          139
+        ],
+        [
+          3436,
+          139
+        ],
+        [
+          3436,
+          158
+        ],
+        [
+          3374,
+          158
+        ]
+      ],
+      "parentRegionID": 83,
+      "originalPixelRowID": 84,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 85,
+      "text": "\u56F3\u781438",
+      "boundingBox": [
+        [
+          3464,
+          139
+        ],
+        [
+          3526,
+          139
+        ],
+        [
+          3526,
+          158
+        ],
+        [
+          3464,
+          158
+        ]
+      ],
+      "parentRegionID": 84,
+      "originalPixelRowID": 85,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 86,
+      "text": "\u56F3\u781439",
+      "boundingBox": [
+        [
+          3554,
+          139
+        ],
+        [
+          3615,
+          139
+        ],
+        [
+          3615,
+          158
+        ],
+        [
+          3554,
+          158
+        ]
+      ],
+      "parentRegionID": 85,
+      "originalPixelRowID": 86,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 87,
+      "text": "\u56F3\u781440",
+      "boundingBox": [
+        [
+          3644,
+          139
+        ],
+        [
+          3706,
+          139
+        ],
+        [
+          3706,
+          158
+        ],
+        [
+          3644,
+          158
+        ]
+      ],
+      "parentRegionID": 86,
+      "originalPixelRowID": 87,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 88,
+      "text": "11",
+      "boundingBox": [
+        [
+          35,
+          171
+        ],
+        [
+          44,
+          171
+        ],
+        [
+          44,
+          186
+        ],
+        [
+          35,
+          186
+        ]
+      ],
+      "parentRegionID": 45,
+      "originalPixelRowID": 88,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 89,
+      "text": "2)",
+      "boundingBox": [
+        [
+          84,
+          171
+        ],
+        [
+          95,
+          171
+        ],
+        [
+          95,
+          186
+        ],
+        [
+          84,
+          186
+        ]
+      ],
+      "parentRegionID": 46,
+      "originalPixelRowID": 89,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 90,
+      "text": "\u8A66\u5E2B01",
+      "boundingBox": [
+        [
+          133,
+          171
+        ],
+        [
+          195,
+          171
+        ],
+        [
+          195,
+          191
+        ],
+        [
+          133,
+          191
+        ]
+      ],
+      "parentRegionID": 47,
+      "originalPixelRowID": 90,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 91,
+      "text": "\u8A66\u5E2B02",
+      "boundingBox": [
+        [
+          223,
+          171
+        ],
+        [
+          286,
+          171
+        ],
+        [
+          286,
+          191
+        ],
+        [
+          223,
+          191
+        ]
+      ],
+      "parentRegionID": 48,
+      "originalPixelRowID": 91,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 92,
+      "text": "\u8A66\u5E2B03",
+      "boundingBox": [
+        [
+          313,
+          171
+        ],
+        [
+          375,
+          171
+        ],
+        [
+          375,
+          191
+        ],
+        [
+          313,
+          191
+        ]
+      ],
+      "parentRegionID": 49,
+      "originalPixelRowID": 92,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 93,
+      "text": "\u8A66\u5E2B04",
+      "boundingBox": [
+        [
+          403,
+          171
+        ],
+        [
+          466,
+          171
+        ],
+        [
+          466,
+          191
+        ],
+        [
+          403,
+          191
+        ]
+      ],
+      "parentRegionID": 50,
+      "originalPixelRowID": 93,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 94,
+      "text": "\u8A66\u5E2B05",
+      "boundingBox": [
+        [
+          493,
+          171
+        ],
+        [
+          556,
+          171
+        ],
+        [
+          556,
+          191
+        ],
+        [
+          493,
+          191
+        ]
+      ],
+      "parentRegionID": 51,
+      "originalPixelRowID": 94,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 95,
+      "text": "\u8A66\u5E2B06",
+      "boundingBox": [
+        [
+          583,
+          171
+        ],
+        [
+          646,
+          171
+        ],
+        [
+          646,
+          191
+        ],
+        [
+          583,
+          191
+        ]
+      ],
+      "parentRegionID": 52,
+      "originalPixelRowID": 95,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 96,
+      "text": "\u8A66\u5E2B07",
+      "boundingBox": [
+        [
+          673,
+          171
+        ],
+        [
+          736,
+          171
+        ],
+        [
+          736,
+          191
+        ],
+        [
+          673,
+          191
+        ]
+      ],
+      "parentRegionID": 53,
+      "originalPixelRowID": 96,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 97,
+      "text": "\u8A66\u5E2B08",
+      "boundingBox": [
+        [
+          763,
+          171
+        ],
+        [
+          826,
+          171
+        ],
+        [
+          826,
+          191
+        ],
+        [
+          763,
+          191
+        ]
+      ],
+      "parentRegionID": 54,
+      "originalPixelRowID": 97,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 98,
+      "text": "\u8A66\u5E2B09",
+      "boundingBox": [
+        [
+          853,
+          171
+        ],
+        [
+          915,
+          171
+        ],
+        [
+          915,
+          191
+        ],
+        [
+          853,
+          191
+        ]
+      ],
+      "parentRegionID": 55,
+      "originalPixelRowID": 98,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 99,
+      "text": "\u8A66\u5E2B10",
+      "boundingBox": [
+        [
+          943,
+          171
+        ],
+        [
+          1006,
+          171
+        ],
+        [
+          1006,
+          191
+        ],
+        [
+          943,
+          191
+        ]
+      ],
+      "parentRegionID": 56,
+      "originalPixelRowID": 99,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 100,
+      "text": "\u8A66\u5E2B11",
+      "boundingBox": [
+        [
+          1033,
+          171
+        ],
+        [
+          1095,
+          171
+        ],
+        [
+          1095,
+          191
+        ],
+        [
+          1033,
+          191
+        ]
+      ],
+      "parentRegionID": 57,
+      "originalPixelRowID": 100,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 101,
+      "text": "\u8A66\u5E2B12",
+      "boundingBox": [
+        [
+          1123,
+          171
+        ],
+        [
+          1186,
+          171
+        ],
+        [
+          1186,
+          191
+        ],
+        [
+          1123,
+          191
+        ]
+      ],
+      "parentRegionID": 58,
+      "originalPixelRowID": 101,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 102,
+      "text": "\u8A66\u5E2B13",
+      "boundingBox": [
+        [
+          1213,
+          171
+        ],
+        [
+          1275,
+          171
+        ],
+        [
+          1275,
+          191
+        ],
+        [
+          1213,
+          191
+        ]
+      ],
+      "parentRegionID": 59,
+      "originalPixelRowID": 102,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 103,
+      "text": "\u8A66\u5E2B14",
+      "boundingBox": [
+        [
+          1303,
+          171
+        ],
+        [
+          1366,
+          171
+        ],
+        [
+          1366,
+          191
+        ],
+        [
+          1303,
+          191
+        ]
+      ],
+      "parentRegionID": 60,
+      "originalPixelRowID": 103,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 104,
+      "text": "\u8A66\u5E2B15",
+      "boundingBox": [
+        [
+          1393,
+          171
+        ],
+        [
+          1456,
+          171
+        ],
+        [
+          1456,
+          191
+        ],
+        [
+          1393,
+          191
+        ]
+      ],
+      "parentRegionID": 61,
+      "originalPixelRowID": 104,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 105,
+      "text": "\u8A66\u5E2B16",
+      "boundingBox": [
+        [
+          1483,
+          171
+        ],
+        [
+          1546,
+          171
+        ],
+        [
+          1546,
+          191
+        ],
+        [
+          1483,
+          191
+        ]
+      ],
+      "parentRegionID": 62,
+      "originalPixelRowID": 105,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 106,
+      "text": "\u8A66\u5E2B17",
+      "boundingBox": [
+        [
+          1573,
+          171
+        ],
+        [
+          1636,
+          171
+        ],
+        [
+          1636,
+          191
+        ],
+        [
+          1573,
+          191
+        ]
+      ],
+      "parentRegionID": 63,
+      "originalPixelRowID": 106,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 107,
+      "text": "\u8A66\u5E2B18",
+      "boundingBox": [
+        [
+          1663,
+          171
+        ],
+        [
+          1726,
+          171
+        ],
+        [
+          1726,
+          191
+        ],
+        [
+          1663,
+          191
+        ]
+      ],
+      "parentRegionID": 64,
+      "originalPixelRowID": 107,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 108,
+      "text": "\u8A66\u5E2B19",
+      "boundingBox": [
+        [
+          1753,
+          171
+        ],
+        [
+          1815,
+          171
+        ],
+        [
+          1815,
+          191
+        ],
+        [
+          1753,
+          191
+        ]
+      ],
+      "parentRegionID": 65,
+      "originalPixelRowID": 108,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 109,
+      "text": "\u8A66\u5E2B20",
+      "boundingBox": [
+        [
+          1843,
+          171
+        ],
+        [
+          1906,
+          171
+        ],
+        [
+          1906,
+          191
+        ],
+        [
+          1843,
+          191
+        ]
+      ],
+      "parentRegionID": 66,
+      "originalPixelRowID": 109,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 110,
+      "text": "\u8A66\u5E2B21",
+      "boundingBox": [
+        [
+          1933,
+          171
+        ],
+        [
+          1995,
+          171
+        ],
+        [
+          1995,
+          191
+        ],
+        [
+          1933,
+          191
+        ]
+      ],
+      "parentRegionID": 67,
+      "originalPixelRowID": 110,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 111,
+      "text": "\u8A66\u5E2B22",
+      "boundingBox": [
+        [
+          2023,
+          171
+        ],
+        [
+          2086,
+          171
+        ],
+        [
+          2086,
+          191
+        ],
+        [
+          2023,
+          191
+        ]
+      ],
+      "parentRegionID": 68,
+      "originalPixelRowID": 111,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 112,
+      "text": "\u8A66\u5E2B23",
+      "boundingBox": [
+        [
+          2113,
+          171
+        ],
+        [
+          2175,
+          171
+        ],
+        [
+          2175,
+          191
+        ],
+        [
+          2113,
+          191
+        ]
+      ],
+      "parentRegionID": 69,
+      "originalPixelRowID": 112,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 113,
+      "text": "\u8A66\u5E2B24",
+      "boundingBox": [
+        [
+          2203,
+          171
+        ],
+        [
+          2266,
+          171
+        ],
+        [
+          2266,
+          191
+        ],
+        [
+          2203,
+          191
+        ]
+      ],
+      "parentRegionID": 70,
+      "originalPixelRowID": 113,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 114,
+      "text": "\u8A66\u5E2B25",
+      "boundingBox": [
+        [
+          2293,
+          171
+        ],
+        [
+          2356,
+          171
+        ],
+        [
+          2356,
+          191
+        ],
+        [
+          2293,
+          191
+        ]
+      ],
+      "parentRegionID": 71,
+      "originalPixelRowID": 114,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 115,
+      "text": "\u8A66\u5E2B26",
+      "boundingBox": [
+        [
+          2383,
+          171
+        ],
+        [
+          2446,
+          171
+        ],
+        [
+          2446,
+          191
+        ],
+        [
+          2383,
+          191
+        ]
+      ],
+      "parentRegionID": 72,
+      "originalPixelRowID": 115,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 116,
+      "text": "\u8A66\u5E2B27",
+      "boundingBox": [
+        [
+          2473,
+          171
+        ],
+        [
+          2536,
+          171
+        ],
+        [
+          2536,
+          191
+        ],
+        [
+          2473,
+          191
+        ]
+      ],
+      "parentRegionID": 73,
+      "originalPixelRowID": 116,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 117,
+      "text": "\u8A66\u5E2B28",
+      "boundingBox": [
+        [
+          2563,
+          171
+        ],
+        [
+          2626,
+          171
+        ],
+        [
+          2626,
+          191
+        ],
+        [
+          2563,
+          191
+        ]
+      ],
+      "parentRegionID": 74,
+      "originalPixelRowID": 117,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 118,
+      "text": "\u8A66\u5E2B29",
+      "boundingBox": [
+        [
+          2653,
+          171
+        ],
+        [
+          2715,
+          171
+        ],
+        [
+          2715,
+          191
+        ],
+        [
+          2653,
+          191
+        ]
+      ],
+      "parentRegionID": 75,
+      "originalPixelRowID": 118,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 119,
+      "text": "\u8A66\u5E2B30",
+      "boundingBox": [
+        [
+          2743,
+          171
+        ],
+        [
+          2806,
+          171
+        ],
+        [
+          2806,
+          191
+        ],
+        [
+          2743,
+          191
+        ]
+      ],
+      "parentRegionID": 76,
+      "originalPixelRowID": 119,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 120,
+      "text": "\u8A66\u5E2B31",
+      "boundingBox": [
+        [
+          2833,
+          171
+        ],
+        [
+          2895,
+          171
+        ],
+        [
+          2895,
+          191
+        ],
+        [
+          2833,
+          191
+        ]
+      ],
+      "parentRegionID": 77,
+      "originalPixelRowID": 120,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 121,
+      "text": "\u8A66\u5E2B32",
+      "boundingBox": [
+        [
+          2923,
+          171
+        ],
+        [
+          2986,
+          171
+        ],
+        [
+          2986,
+          191
+        ],
+        [
+          2923,
+          191
+        ]
+      ],
+      "parentRegionID": 78,
+      "originalPixelRowID": 121,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 122,
+      "text": "\u8A66\u5E2B33",
+      "boundingBox": [
+        [
+          3013,
+          171
+        ],
+        [
+          3075,
+          171
+        ],
+        [
+          3075,
+          191
+        ],
+        [
+          3013,
+          191
+        ]
+      ],
+      "parentRegionID": 79,
+      "originalPixelRowID": 122,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 123,
+      "text": "\u8A66\u5E2B34",
+      "boundingBox": [
+        [
+          3103,
+          171
+        ],
+        [
+          3166,
+          171
+        ],
+        [
+          3166,
+          191
+        ],
+        [
+          3103,
+          191
+        ]
+      ],
+      "parentRegionID": 80,
+      "originalPixelRowID": 123,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 124,
+      "text": "\u8A66\u5E2B35",
+      "boundingBox": [
+        [
+          3193,
+          171
+        ],
+        [
+          3256,
+          171
+        ],
+        [
+          3256,
+          191
+        ],
+        [
+          3193,
+          191
+        ]
+      ],
+      "parentRegionID": 81,
+      "originalPixelRowID": 124,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 125,
+      "text": "\u8A66\u5E2B36",
+      "boundingBox": [
+        [
+          3283,
+          171
+        ],
+        [
+          3346,
+          171
+        ],
+        [
+          3346,
+          191
+        ],
+        [
+          3283,
+          191
+        ]
+      ],
+      "parentRegionID": 82,
+      "originalPixelRowID": 125,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 126,
+      "text": "\u8A66\u5E2B37",
+      "boundingBox": [
+        [
+          3373,
+          171
+        ],
+        [
+          3436,
+          171
+        ],
+        [
+          3436,
+          191
+        ],
+        [
+          3373,
+          191
+        ]
+      ],
+      "parentRegionID": 83,
+      "originalPixelRowID": 126,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 127,
+      "text": "\u8A66\u5E2B38",
+      "boundingBox": [
+        [
+          3463,
+          171
+        ],
+        [
+          3526,
+          171
+        ],
+        [
+          3526,
+          191
+        ],
+        [
+          3463,
+          191
+        ]
+      ],
+      "parentRegionID": 84,
+      "originalPixelRowID": 127,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 128,
+      "text": "\u8A66\u5E2B39",
+      "boundingBox": [
+        [
+          3553,
+          171
+        ],
+        [
+          3615,
+          171
+        ],
+        [
+          3615,
+          191
+        ],
+        [
+          3553,
+          191
+        ]
+      ],
+      "parentRegionID": 85,
+      "originalPixelRowID": 128,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 129,
+      "text": "\u8A66\u5E2B40",
+      "boundingBox": [
+        [
+          3643,
+          171
+        ],
+        [
+          3706,
+          171
+        ],
+        [
+          3706,
+          191
+        ],
+        [
+          3643,
+          191
+        ]
+      ],
+      "parentRegionID": 86,
+      "originalPixelRowID": 129,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 130,
+      "text": "\u8A66\u57DF01",
+      "boundingBox": [
+        [
+          133,
+          203
+        ],
+        [
+          195,
+          203
+        ],
+        [
+          195,
+          223
+        ],
+        [
+          133,
+          223
+        ]
+      ],
+      "parentRegionID": 47,
+      "originalPixelRowID": 130,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 131,
+      "text": "\u8A66\u57DF02",
+      "boundingBox": [
+        [
+          223,
+          203
+        ],
+        [
+          286,
+          203
+        ],
+        [
+          286,
+          223
+        ],
+        [
+          223,
+          223
+        ]
+      ],
+      "parentRegionID": 48,
+      "originalPixelRowID": 131,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 132,
+      "text": "\u8A66\u57DF03",
+      "boundingBox": [
+        [
+          313,
+          203
+        ],
+        [
+          375,
+          203
+        ],
+        [
+          375,
+          223
+        ],
+        [
+          313,
+          223
+        ]
+      ],
+      "parentRegionID": 49,
+      "originalPixelRowID": 132,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 133,
+      "text": "\u8A66\u57DF04",
+      "boundingBox": [
+        [
+          403,
+          203
+        ],
+        [
+          466,
+          203
+        ],
+        [
+          466,
+          223
+        ],
+        [
+          403,
+          223
+        ]
+      ],
+      "parentRegionID": 50,
+      "originalPixelRowID": 133,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 134,
+      "text": "\u8A66\u57DF05",
+      "boundingBox": [
+        [
+          493,
+          203
+        ],
+        [
+          556,
+          203
+        ],
+        [
+          556,
+          223
+        ],
+        [
+          493,
+          223
+        ]
+      ],
+      "parentRegionID": 51,
+      "originalPixelRowID": 134,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 135,
+      "text": "\u8A66\u57DF06",
+      "boundingBox": [
+        [
+          583,
+          203
+        ],
+        [
+          646,
+          203
+        ],
+        [
+          646,
+          223
+        ],
+        [
+          583,
+          223
+        ]
+      ],
+      "parentRegionID": 52,
+      "originalPixelRowID": 135,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 136,
+      "text": "\u8A66\u57DF07",
+      "boundingBox": [
+        [
+          673,
+          203
+        ],
+        [
+          736,
+          203
+        ],
+        [
+          736,
+          223
+        ],
+        [
+          673,
+          223
+        ]
+      ],
+      "parentRegionID": 53,
+      "originalPixelRowID": 136,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 137,
+      "text": "\u8A66\u57DF08",
+      "boundingBox": [
+        [
+          763,
+          203
+        ],
+        [
+          826,
+          203
+        ],
+        [
+          826,
+          223
+        ],
+        [
+          763,
+          223
+        ]
+      ],
+      "parentRegionID": 54,
+      "originalPixelRowID": 137,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 138,
+      "text": "\u8A66\u57DF09",
+      "boundingBox": [
+        [
+          853,
+          203
+        ],
+        [
+          915,
+          203
+        ],
+        [
+          915,
+          223
+        ],
+        [
+          853,
+          223
+        ]
+      ],
+      "parentRegionID": 55,
+      "originalPixelRowID": 138,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 139,
+      "text": "\u8A66\u57DF10",
+      "boundingBox": [
+        [
+          943,
+          203
+        ],
+        [
+          1006,
+          203
+        ],
+        [
+          1006,
+          223
+        ],
+        [
+          943,
+          223
+        ]
+      ],
+      "parentRegionID": 56,
+      "originalPixelRowID": 139,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 140,
+      "text": "\u8A66\u57DF11",
+      "boundingBox": [
+        [
+          1033,
+          203
+        ],
+        [
+          1095,
+          203
+        ],
+        [
+          1095,
+          223
+        ],
+        [
+          1033,
+          223
+        ]
+      ],
+      "parentRegionID": 57,
+      "originalPixelRowID": 140,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 141,
+      "text": "\u8A66\u57DF12",
+      "boundingBox": [
+        [
+          1123,
+          203
+        ],
+        [
+          1186,
+          203
+        ],
+        [
+          1186,
+          223
+        ],
+        [
+          1123,
+          223
+        ]
+      ],
+      "parentRegionID": 58,
+      "originalPixelRowID": 141,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 142,
+      "text": "\u8A66\u57DF13",
+      "boundingBox": [
+        [
+          1213,
+          203
+        ],
+        [
+          1275,
+          203
+        ],
+        [
+          1275,
+          223
+        ],
+        [
+          1213,
+          223
+        ]
+      ],
+      "parentRegionID": 59,
+      "originalPixelRowID": 142,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 143,
+      "text": "\u8A66\u57DF14",
+      "boundingBox": [
+        [
+          1303,
+          203
+        ],
+        [
+          1366,
+          203
+        ],
+        [
+          1366,
+          223
+        ],
+        [
+          1303,
+          223
+        ]
+      ],
+      "parentRegionID": 60,
+      "originalPixelRowID": 143,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 144,
+      "text": "\u8A66\u57DF15",
+      "boundingBox": [
+        [
+          1393,
+          203
+        ],
+        [
+          1456,
+          203
+        ],
+        [
+          1456,
+          223
+        ],
+        [
+          1393,
+          223
+        ]
+      ],
+      "parentRegionID": 61,
+      "originalPixelRowID": 144,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 145,
+      "text": "\u8A66\u57DF16",
+      "boundingBox": [
+        [
+          1483,
+          203
+        ],
+        [
+          1546,
+          203
+        ],
+        [
+          1546,
+          223
+        ],
+        [
+          1483,
+          223
+        ]
+      ],
+      "parentRegionID": 62,
+      "originalPixelRowID": 145,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 146,
+      "text": "\u8A66\u57DF17",
+      "boundingBox": [
+        [
+          1573,
+          203
+        ],
+        [
+          1636,
+          203
+        ],
+        [
+          1636,
+          223
+        ],
+        [
+          1573,
+          223
+        ]
+      ],
+      "parentRegionID": 63,
+      "originalPixelRowID": 146,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 147,
+      "text": "\u8A66\u57DF18",
+      "boundingBox": [
+        [
+          1663,
+          203
+        ],
+        [
+          1726,
+          203
+        ],
+        [
+          1726,
+          223
+        ],
+        [
+          1663,
+          223
+        ]
+      ],
+      "parentRegionID": 64,
+      "originalPixelRowID": 147,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 148,
+      "text": "\u8A66\u57DF19",
+      "boundingBox": [
+        [
+          1753,
+          203
+        ],
+        [
+          1815,
+          203
+        ],
+        [
+          1815,
+          223
+        ],
+        [
+          1753,
+          223
+        ]
+      ],
+      "parentRegionID": 65,
+      "originalPixelRowID": 148,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 149,
+      "text": "\u8A66\u57DF20",
+      "boundingBox": [
+        [
+          1843,
+          203
+        ],
+        [
+          1906,
+          203
+        ],
+        [
+          1906,
+          223
+        ],
+        [
+          1843,
+          223
+        ]
+      ],
+      "parentRegionID": 66,
+      "originalPixelRowID": 149,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 150,
+      "text": "\u8A66\u57DF21",
+      "boundingBox": [
+        [
+          1933,
+          203
+        ],
+        [
+          1995,
+          203
+        ],
+        [
+          1995,
+          223
+        ],
+        [
+          1933,
+          223
+        ]
+      ],
+      "parentRegionID": 67,
+      "originalPixelRowID": 150,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 151,
+      "text": "\u8A66\u57DF22",
+      "boundingBox": [
+        [
+          2023,
+          203
+        ],
+        [
+          2086,
+          203
+        ],
+        [
+          2086,
+          223
+        ],
+        [
+          2023,
+          223
+        ]
+      ],
+      "parentRegionID": 68,
+      "originalPixelRowID": 151,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 152,
+      "text": "\u8A66\u57DF23",
+      "boundingBox": [
+        [
+          2113,
+          203
+        ],
+        [
+          2175,
+          203
+        ],
+        [
+          2175,
+          223
+        ],
+        [
+          2113,
+          223
+        ]
+      ],
+      "parentRegionID": 69,
+      "originalPixelRowID": 152,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 153,
+      "text": "\u8A66\u57DF24",
+      "boundingBox": [
+        [
+          2203,
+          203
+        ],
+        [
+          2266,
+          203
+        ],
+        [
+          2266,
+          223
+        ],
+        [
+          2203,
+          223
+        ]
+      ],
+      "parentRegionID": 70,
+      "originalPixelRowID": 153,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 154,
+      "text": "\u8A66\u57DF25",
+      "boundingBox": [
+        [
+          2293,
+          203
+        ],
+        [
+          2356,
+          203
+        ],
+        [
+          2356,
+          223
+        ],
+        [
+          2293,
+          223
+        ]
+      ],
+      "parentRegionID": 71,
+      "originalPixelRowID": 154,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 155,
+      "text": "\u8A66\u57DF26",
+      "boundingBox": [
+        [
+          2383,
+          203
+        ],
+        [
+          2446,
+          203
+        ],
+        [
+          2446,
+          223
+        ],
+        [
+          2383,
+          223
+        ]
+      ],
+      "parentRegionID": 72,
+      "originalPixelRowID": 155,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 156,
+      "text": "\u8A66\u57DF27",
+      "boundingBox": [
+        [
+          2473,
+          203
+        ],
+        [
+          2536,
+          203
+        ],
+        [
+          2536,
+          223
+        ],
+        [
+          2473,
+          223
+        ]
+      ],
+      "parentRegionID": 73,
+      "originalPixelRowID": 156,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 157,
+      "text": "\u8A66\u57DF28",
+      "boundingBox": [
+        [
+          2563,
+          203
+        ],
+        [
+          2626,
+          203
+        ],
+        [
+          2626,
+          223
+        ],
+        [
+          2563,
+          223
+        ]
+      ],
+      "parentRegionID": 74,
+      "originalPixelRowID": 157,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 158,
+      "text": "\u8A66\u57DF29",
+      "boundingBox": [
+        [
+          2653,
+          203
+        ],
+        [
+          2715,
+          203
+        ],
+        [
+          2715,
+          223
+        ],
+        [
+          2653,
+          223
+        ]
+      ],
+      "parentRegionID": 75,
+      "originalPixelRowID": 158,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 159,
+      "text": "\u8A66\u57DF30",
+      "boundingBox": [
+        [
+          2743,
+          203
+        ],
+        [
+          2806,
+          203
+        ],
+        [
+          2806,
+          223
+        ],
+        [
+          2743,
+          223
+        ]
+      ],
+      "parentRegionID": 76,
+      "originalPixelRowID": 159,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 160,
+      "text": "\u8A66\u57DF31",
+      "boundingBox": [
+        [
+          2833,
+          203
+        ],
+        [
+          2895,
+          203
+        ],
+        [
+          2895,
+          223
+        ],
+        [
+          2833,
+          223
+        ]
+      ],
+      "parentRegionID": 77,
+      "originalPixelRowID": 160,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 161,
+      "text": "\u8A66\u57DF32",
+      "boundingBox": [
+        [
+          2923,
+          203
+        ],
+        [
+          2986,
+          203
+        ],
+        [
+          2986,
+          223
+        ],
+        [
+          2923,
+          223
+        ]
+      ],
+      "parentRegionID": 78,
+      "originalPixelRowID": 161,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 162,
+      "text": "\u8A66\u57DF33",
+      "boundingBox": [
+        [
+          3013,
+          203
+        ],
+        [
+          3075,
+          203
+        ],
+        [
+          3075,
+          223
+        ],
+        [
+          3013,
+          223
+        ]
+      ],
+      "parentRegionID": 79,
+      "originalPixelRowID": 162,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 163,
+      "text": "\u8A66\u57DF34",
+      "boundingBox": [
+        [
+          3103,
+          203
+        ],
+        [
+          3166,
+          203
+        ],
+        [
+          3166,
+          223
+        ],
+        [
+          3103,
+          223
+        ]
+      ],
+      "parentRegionID": 80,
+      "originalPixelRowID": 163,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 164,
+      "text": "\u8A66\u57DF35",
+      "boundingBox": [
+        [
+          3193,
+          203
+        ],
+        [
+          3256,
+          203
+        ],
+        [
+          3256,
+          223
+        ],
+        [
+          3193,
+          223
+        ]
+      ],
+      "parentRegionID": 81,
+      "originalPixelRowID": 164,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 165,
+      "text": "\u8A66\u57DF36",
+      "boundingBox": [
+        [
+          3283,
+          203
+        ],
+        [
+          3346,
+          203
+        ],
+        [
+          3346,
+          223
+        ],
+        [
+          3283,
+          223
+        ]
+      ],
+      "parentRegionID": 82,
+      "originalPixelRowID": 165,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 166,
+      "text": "\u8A66\u57DF37",
+      "boundingBox": [
+        [
+          3373,
+          203
+        ],
+        [
+          3436,
+          203
+        ],
+        [
+          3436,
+          223
+        ],
+        [
+          3373,
+          223
+        ]
+      ],
+      "parentRegionID": 83,
+      "originalPixelRowID": 166,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 167,
+      "text": "\u8A66\u57DF38",
+      "boundingBox": [
+        [
+          3463,
+          203
+        ],
+        [
+          3526,
+          203
+        ],
+        [
+          3526,
+          223
+        ],
+        [
+          3463,
+          223
+        ]
+      ],
+      "parentRegionID": 84,
+      "originalPixelRowID": 167,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 168,
+      "text": "\u8A66\u57DF39",
+      "boundingBox": [
+        [
+          3553,
+          203
+        ],
+        [
+          3615,
+          203
+        ],
+        [
+          3615,
+          223
+        ],
+        [
+          3553,
+          223
+        ]
+      ],
+      "parentRegionID": 85,
+      "originalPixelRowID": 168,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    },
+    {
+      "id": 169,
+      "text": "\u8A66\u57DF40",
+      "boundingBox": [
+        [
+          3643,
+          203
+        ],
+        [
+          3706,
+          203
+        ],
+        [
+          3706,
+          223
+        ],
+        [
+          3643,
+          223
+        ]
+      ],
+      "parentRegionID": 86,
+      "originalPixelRowID": 169,
+      "confidence": null,
+      "transcriptionConfidence": null,
+      "geometryScope": "Exact original pixel support rectangle for occupied y-run; actual model returns string only; no native character box claim",
+      "sourceOrderScope": "Physical y/x ROI order initialized before output, no generated-answer sorting/repair"
+    }
+  ],
+  "geometryAndInkEligible": true,
+  "adoptionEligible": false,
+  "downstreamDiagnosticOnly": true,
+  "strictError": {
+    "type": "PdfParseException",
+    "Message": "PDF\u306E\u6642\u9650\u306E\u898B\u51FA\u3057\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3067\u3057\u305F\uFF08P05\uFF09\u3002\u6B63\u5E38\u306A\u89E3\u6790\u7D50\u679C\u306F\u4FDD\u6301\u3057\u3066\u3044\u307E\u3059\u3002",
+    "stage": "P05"
+  },
+  "recoveryError": {
+    "type": "InvalidDataException",
+    "Message": "\u30AF\u30E9\u30B9\u30FB\u65E5\u4ED8\u30FB\u6642\u9650\u306E\u898B\u51FA\u3057\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002",
+    "stage": "builder",
+    "failureClass": "sourceContractRefusal"
+  },
+  "strictExact": false,
+  "formalExactPossible": false,
+  "hostProposedFormal": false,
+  "hostLiteralIncorrect": false,
+  "hostGeometryEligibleProposal": false,
+  "recoveryFormalExact": false,
+  "actualRecoveryAccepted": false,
+  "strictProposedAnalysis": false,
+  "strictLiteralIncorrect": false,
+  "providerCalls": 0
+}

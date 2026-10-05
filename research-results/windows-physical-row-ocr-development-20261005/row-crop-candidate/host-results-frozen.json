@@ -1,0 +1,71 @@
+{
+  "sourceCommit": "3b5b23bc19f0c63b34a44e6fc0690a05463a241f",
+  "scope": "Two fixed entire-image direct PARSeq row arms on consumed invented pixel source; no actual PDF endpoint or production model acquisition qualification",
+  "files": [
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/row-formal-probe/Program.cs",
+      "bytes": 8649,
+      "sha256": "a04e901b3de8ccf1e2732365baa9a72a0b49ee16d4613af776cdcb8aa1793861"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/row-formal-probe/RowFormalProbe.csproj",
+      "bytes": 375,
+      "sha256": "1832c76ea7a6efc33aee7b059342a6f1d065353bcf4c36e8ef4d7a6596432298"
+    },
+    {
+      "path": "/workspace/review-notes/windows-row-formal-probe-build.log",
+      "bytes": 722,
+      "sha256": "28985a1768d9f5d13adbd36736803139fc295909a416cb55c42bc91259ad0092"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/row-crop-candidate/row-recipe-frozen.json",
+      "bytes": 17866,
+      "sha256": "612b72b7d51267359b0dfc925252242990e554285b6f818b42a33b0fbcbdcf43"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/row-crop-candidate/host-results-summary.json",
+      "bytes": 2171,
+      "sha256": "c7d7a3750ef07222567244c7b0909314fed2dba000ab5256f9e9162e4bde07cb"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/row-crop-candidate/model-30-raw.log",
+      "bytes": 1526836,
+      "sha256": "7293f1c6ae45cfd76f147bfce61af75f1c92be0aed1dc66820ac80a897430b54"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/row-crop-candidate/model-100-raw.log",
+      "bytes": 4398363,
+      "sha256": "309a3fd81bc70dda5615fa36d8e50a4987e050a8a10021d71919c2b8d8af2858"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/row-crop-candidate/host-model-30-replay.json",
+      "bytes": 117301,
+      "sha256": "83911ca3a775bc4eee596624dbb32527a015af5621c68109c7ec16fe4bf5801e"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/row-crop-candidate/host-model-100-replay.json",
+      "bytes": 117276,
+      "sha256": "bbd47f69871080106e2c5d320e64ca0e32049a2faf73fbdfa3f2a7912daf0277"
+    },
+    {
+      "path": "/tmp/takupoke-windows-raster-rule-endpoints-20261005/src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs",
+      "bytes": 37217,
+      "sha256": "14b88db29e0320b633a04543385d950877317b0daa5090d307ed2449245e85d9"
+    },
+    {
+      "path": "/tmp/takupoke-windows-raster-rule-endpoints-20261005/src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs",
+      "bytes": 23017,
+      "sha256": "8d8ed58ce30b7aa4f7b040b5a4ca298e26e523d894de4b769d262905ddab9d72"
+    },
+    {
+      "path": "/tmp/takupoke-windows-raster-rule-endpoints-20261005/src/Takupoke.Core/Recovery/RecoveryValidator.cs",
+      "bytes": 35788,
+      "sha256": "61a5a0cfe5e138a696af6400ec51b4d28069934d787b1f6a31a2ae99df37df27"
+    },
+    {
+      "path": "/workspace/recovery-research/ocr-unlabeled-fresh-source-high-20261004/literal-formal-oracle.json",
+      "bytes": 9883,
+      "sha256": "448d13ae7860890ed86b7211e226718c1d8068c41d913709d07e8a18e7868a69"
+    }
+  ]
+}

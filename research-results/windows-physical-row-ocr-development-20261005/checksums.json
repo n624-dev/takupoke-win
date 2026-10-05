@@ -1,0 +1,249 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 5358,
+      "sha256": "74f8ed0f86b6ad9573daeb627b85e9cbab2dd636cf424fd521cfec346a3089cc"
+    },
+    {
+      "path": "independent-reviews/windows-pixel-row-actual-independent-review-high.json",
+      "bytes": 391392,
+      "sha256": "91a5c873d0282087ef11e45ad1e6a0d2040d90197466f1ff15252d4ac9d93818"
+    },
+    {
+      "path": "independent-reviews/windows-pixel-row-source-independent-review-high.json",
+      "bytes": 1122,
+      "sha256": "a48e047efcfe22d72b30823ede6f9bfe07ca178e5a4ca5c82d0382be6d73bb4c"
+    },
+    {
+      "path": "notices/NDLOCR-Lite-LICENCE",
+      "bytes": 18653,
+      "sha256": "12538e73c4a1e05fc0c0b75d9d4de657f139d94ebc5f44b03a84cc1f793358f0"
+    },
+    {
+      "path": "notices/NDLOCR-Lite-LICENCE_DEPENDENCEIES",
+      "bytes": 61810,
+      "sha256": "d1651934d0ba82bc941fa59b99bc311c273b199ff379d8bb2beca81e2f1695e7"
+    },
+    {
+      "path": "notices/Tesseract-installed-package-copyright",
+      "bytes": 2473,
+      "sha256": "88a60e74ee421a24f89b5a33ede6300bf51fc12f0144f41cd311909f9445d346"
+    },
+    {
+      "path": "notices/tessdata_best-LICENSE",
+      "bytes": 10173,
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9"
+    },
+    {
+      "path": "results-summary.json",
+      "bytes": 8850,
+      "sha256": "722fa18c5d98b0750e1233323df855673f36e551cc2074ac9f65c683cf61431a"
+    },
+    {
+      "path": "row-crop-candidate/host-model-100-replay.json",
+      "bytes": 117276,
+      "sha256": "bbd47f69871080106e2c5d320e64ca0e32049a2faf73fbdfa3f2a7912daf0277"
+    },
+    {
+      "path": "row-crop-candidate/host-model-30-replay.json",
+      "bytes": 117301,
+      "sha256": "83911ca3a775bc4eee596624dbb32527a015af5621c68109c7ec16fe4bf5801e"
+    },
+    {
+      "path": "row-crop-candidate/host-results-frozen.json",
+      "bytes": 3337,
+      "sha256": "7b6c04ae66adb661c510cdfd6369f88e155d86614ddb524c2d415dc880226cc3"
+    },
+    {
+      "path": "row-crop-candidate/host-results-summary.json",
+      "bytes": 2171,
+      "sha256": "c7d7a3750ef07222567244c7b0909314fed2dba000ab5256f9e9162e4bde07cb"
+    },
+    {
+      "path": "row-crop-candidate/model-100-execution.json",
+      "bytes": 952,
+      "sha256": "64ae618b81215fb80bcf8194ae1b55a7e58cca28f821acb4de3e17a9d39858a6"
+    },
+    {
+      "path": "row-crop-candidate/model-100-raw.log.zlib-base64.json",
+      "bytes": 1044519,
+      "sha256": "8edd0d0cffac8c0d478c5d7888dfa24d958e5ec7b0ab3978b8f5a2ff18d22080"
+    },
+    {
+      "path": "row-crop-candidate/model-100-stderr.log.zlib-base64.json",
+      "bytes": 189,
+      "sha256": "5368cb37a14003c7ce6e3c0a87ccca064976e4f755db1876ca7e7e7acaaa86a3"
+    },
+    {
+      "path": "row-crop-candidate/model-30-execution.json",
+      "bytes": 948,
+      "sha256": "94600b02270da6984fd6247a0be584e3bd2efa594b43193d18b8f05f5495eab2"
+    },
+    {
+      "path": "row-crop-candidate/model-30-raw.log.zlib-base64.json",
+      "bytes": 355279,
+      "sha256": "09d9a826c9051866f070c6bbb0d74de32d1db5a78a951ec8c4f3fe9f1996954d"
+    },
+    {
+      "path": "row-crop-candidate/model-30-stderr.log.zlib-base64.json",
+      "bytes": 189,
+      "sha256": "5368cb37a14003c7ce6e3c0a87ccca064976e4f755db1876ca7e7e7acaaa86a3"
+    },
+    {
+      "path": "row-crop-candidate/no_rotation.py",
+      "bytes": 813,
+      "sha256": "97122398e69878102bc98b878fac1ae856aae0b5ad97db8e48719804baced73d"
+    },
+    {
+      "path": "row-crop-candidate/per-target-row-results.json",
+      "bytes": 515840,
+      "sha256": "2bd33229b6af99f90084704b2339dfa8c2798d74e1b0be77229ccb7337c2a9bd"
+    },
+    {
+      "path": "row-crop-candidate/pixel_rows.py",
+      "bytes": 2050,
+      "sha256": "f59330d67c6ad280ff11681dec9707009abe11c6238b1d3f1aeedf49b7c470e0"
+    },
+    {
+      "path": "row-crop-candidate/row-recipe-frozen.json",
+      "bytes": 17866,
+      "sha256": "612b72b7d51267359b0dfc925252242990e554285b6f818b42a33b0fbcbdcf43"
+    },
+    {
+      "path": "row-crop-candidate/rows-before-native.json",
+      "bytes": 81574,
+      "sha256": "a07829d4632e92af54756d738ca735863d8481e47ef40e9bc38cdb4ae81f9cb9"
+    },
+    {
+      "path": "row-crop-candidate/run_rows.py",
+      "bytes": 4377,
+      "sha256": "5908dd1263492510c2a7598fb433006fe2637431f064118af2791964be3973a8"
+    },
+    {
+      "path": "row-crop-candidate/score_rows.py",
+      "bytes": 4412,
+      "sha256": "ad63c7ed6df8bd0f3145ae2d1f8fbea3a33bae387412c5a01fde05a23dfcc93b"
+    },
+    {
+      "path": "row-crop-candidate/supervise_rows.py",
+      "bytes": 2923,
+      "sha256": "3f947b05b6ab129a74433c7edb9dd9e7bafdf046006c60b1c7edda83cb162b54"
+    },
+    {
+      "path": "row-crop-candidate/test_pixel_rows.py",
+      "bytes": 1351,
+      "sha256": "fed660a563df3b21505cfd57d02afc434bffc4aea99a8b0150d353bfbae603f6"
+    },
+    {
+      "path": "row-crop-candidate/token_stats.py",
+      "bytes": 1288,
+      "sha256": "4e5f99cdd702423b14195354cd4549e1ff7c701ce3459b3d089ebf886be8b96b"
+    },
+    {
+      "path": "runtime/hardware-before.json",
+      "bytes": 2609,
+      "sha256": "69e1e919aa5b5c8287320301e25949a62c69d075752c5fc21396a48a20a282b2"
+    },
+    {
+      "path": "runtime/ndl-source-pin-receipt.json",
+      "bytes": 7103,
+      "sha256": "4b82993ff9782b9605c68b1bb44a78f5ec02bb5138ad86fef9ec4cdbbe207294"
+    },
+    {
+      "path": "runtime/ndlocr-lite-pin.json",
+      "bytes": 161,
+      "sha256": "ebf3157c789779d43312df15ee61d384a8db23eaacdb21ed9bb10a581b3a2d3f"
+    },
+    {
+      "path": "runtime/python-freeze.txt",
+      "bytes": 2511,
+      "sha256": "f3911b7634ae41853bce193770bb4ea7343aef3e10ff68c1018051e28b029f41"
+    },
+    {
+      "path": "runtime/tessdata_best-pin.json",
+      "bytes": 169,
+      "sha256": "5f04d46a54489fc3a999c6af4fda6d6fb6d67b15b047d30e1fc338bd8b0566e7"
+    },
+    {
+      "path": "tess-row-candidate/capi-5.5.0.h",
+      "bytes": 21096,
+      "sha256": "377fda6050fb59c599f1b875fb1a66e24c67c7fa018ebdda8a1c1dea1f6fc8df"
+    },
+    {
+      "path": "tess-row-candidate/compare_actual_rows.py",
+      "bytes": 4096,
+      "sha256": "485c17ee4dde0262a6a6c4b164a5064eba4b9c854c61198bc55bdfd0866f583b"
+    },
+    {
+      "path": "tess-row-candidate/execution.json",
+      "bytes": 909,
+      "sha256": "cb053127533a33fc61527f0cbded9a5eeeef2c6f03d49aadba40592a1f89d30c"
+    },
+    {
+      "path": "tess-row-candidate/host-replay-preliminary-scope.json",
+      "bytes": 342622,
+      "sha256": "4645ac3d4e2755bc0aada325f2639f656ff3c03de3e3c65689c56c8a5289fc06"
+    },
+    {
+      "path": "tess-row-candidate/host-replay.json",
+      "bytes": 342731,
+      "sha256": "81db36ebbffef430d8119de1cb1ff1296c09dccaa514aa47a39b55e2705bee1c"
+    },
+    {
+      "path": "tess-row-candidate/native-raw.log.zlib-base64.json",
+      "bytes": 92051,
+      "sha256": "4aa3e6121c88da56f9a02153d16a3aef6fdb6aecbb6a71e4d434d0e26fe08e3a"
+    },
+    {
+      "path": "tess-row-candidate/native-stderr.log.zlib-base64.json",
+      "bytes": 447,
+      "sha256": "26458c4255f45f1f6e6ee1d5fabf794141e39a5f3f9b3c87d4612dbce6fd7686"
+    },
+    {
+      "path": "tess-row-candidate/native_boxes.py",
+      "bytes": 1419,
+      "sha256": "0499068a696dc1f266f478fb78f48be9ad094775f63d6eaaf18a65e7f98900c9"
+    },
+    {
+      "path": "tess-row-candidate/per-row-causes.json",
+      "bytes": 829210,
+      "sha256": "b21d08eecc21c49908e676cfcf7bd08bff85d50ec082ee87963dc53556127840"
+    },
+    {
+      "path": "tess-row-candidate/per-target-tess-results.json",
+      "bytes": 696097,
+      "sha256": "fe0c6c139d20bb78178fb5a155720bf60087c2c7725b5a9fc5b917bcc384661a"
+    },
+    {
+      "path": "tess-row-candidate/run_tess_rows.py",
+      "bytes": 4705,
+      "sha256": "3eb3133e44e61624d43cfb5a2c036b2c26c96d2f4d3f71e776dd592b649ca83d"
+    },
+    {
+      "path": "tess-row-candidate/score_tess_rows.py",
+      "bytes": 6237,
+      "sha256": "46de118f3d64b6b8ca5781bbcf307d606096965f6c7e2935c6439bf6f45da800"
+    },
+    {
+      "path": "tess-row-candidate/supervise_tess.py",
+      "bytes": 2762,
+      "sha256": "dd74338744fcb9e748d5df16e0f60b2504a3a0cb49301cc484babc02d64ca4b4"
+    },
+    {
+      "path": "tess-row-candidate/tess-recipe-frozen.json",
+      "bytes": 21120,
+      "sha256": "c0d385997ee410806a2832c1145556121ae4282eb924ec4f855a8a0b8a513316"
+    },
+    {
+      "path": "tess-row-candidate/tess_api.py",
+      "bytes": 2981,
+      "sha256": "45d66c07d209f784231a9e9967315040149b8d6c93b9cba0b6a3260d4bffeafc"
+    },
+    {
+      "path": "tess-row-candidate/test_native_boxes.py",
+      "bytes": 1096,
+      "sha256": "4500cdb143afd604fc809a551a0504b4d21dc6bc47f9ab96c7ec4d7befea4bf7"
+    }
+  ]
+}

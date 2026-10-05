@@ -1,0 +1,18 @@
+{
+  "recipeSHA256": "c0d385997ee410806a2832c1145556121ae4282eb924ec4f855a8a0b8a513316",
+  "command": [
+    "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/env/bin/python",
+    "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/tess-row-candidate/run_tess_rows.py"
+  ],
+  "exitCode": 0,
+  "stopReason": null,
+  "elapsedSeconds": 2.737307569987024,
+  "sampledOwnedProcessTreePeakRSSBytes": 95920128,
+  "RSSsamples": 21,
+  "memoryScope": "sampled sum own process tree RSS; shared pages may double count; not device minimum or global RAM",
+  "rawBytes": 1208129,
+  "rawSHA256": "c2efa65e4ae6b2f0daebc9d5e801800adbd2a4c9555563ae24bf78700a2fb2d5",
+  "stderrBytes": 247,
+  "stderrSHA256": "b20ddb9f11a9b69f9855ffc3c4778df6c1eed7fcdaa7a6d72ad841630e84926b",
+  "inferenceScope": "uniformsame170RGBrows/TessjpnOEM1PSM7 withwarmmodel/freshhistory; no per-rowselection/oldNDLrerun"
+}

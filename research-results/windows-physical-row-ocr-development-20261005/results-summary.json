@@ -1,0 +1,216 @@
+{
+  "scope": "One consumed independently invented development PNG, identical170 original pixel rows. Not an actual PDF endpoint, unused holdout, model qualification or production activation.",
+  "nativeArms": [
+    {
+      "arm": "PARSeq30",
+      "diagnosticCounts": {
+        "plannedBodyFields": 120,
+        "assessedBodyFields": 120,
+        "rawBodyConcatExact": 119,
+        "oneBodyCandidateRawExact": 119,
+        "bodyLiteralAndPositionExact": 119,
+        "plannedHeaderTargets": 50,
+        "rawHeaderConcatExact": 18,
+        "headerLiteralAndPositionExact": 18,
+        "rawThreeValueCellsExact": 39,
+        "threeValuePositionsExact": 39,
+        "formalExact": null
+      },
+      "execution": {
+        "arm": "30",
+        "recipeSHA256": "612b72b7d51267359b0dfc925252242990e554285b6f818b42a33b0fbcbdcf43",
+        "command": [
+          "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/env/bin/python",
+          "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/row-crop-candidate/run_rows.py",
+          "30"
+        ],
+        "exitCode": 0,
+        "stopReason": null,
+        "elapsedSeconds": 9.168034677000833,
+        "sampledOwnedProcessTreePeakRSSBytes": 206647296,
+        "RSSsamples": 75,
+        "memoryScope": "sampled sum own process tree RSS; shared pages may double count; not device minimum or global RAM",
+        "rawBytes": 1526836,
+        "rawSHA256": "7293f1c6ae45cfd76f147bfce61af75f1c92be0aed1dc66820ac80a897430b54",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "inferenceScope": "ONE fixed recognizer for ALL frozen rows, two whole-document arms30 and100; no per-output model selection/old90 rerun"
+      }
+    },
+    {
+      "arm": "PARSeq100",
+      "diagnosticCounts": {
+        "plannedBodyFields": 120,
+        "assessedBodyFields": 120,
+        "rawBodyConcatExact": 120,
+        "oneBodyCandidateRawExact": 120,
+        "bodyLiteralAndPositionExact": 120,
+        "plannedHeaderTargets": 50,
+        "rawHeaderConcatExact": 39,
+        "headerLiteralAndPositionExact": 39,
+        "rawThreeValueCellsExact": 40,
+        "threeValuePositionsExact": 40,
+        "formalExact": null
+      },
+      "execution": {
+        "arm": "100",
+        "recipeSHA256": "612b72b7d51267359b0dfc925252242990e554285b6f818b42a33b0fbcbdcf43",
+        "command": [
+          "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/env/bin/python",
+          "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/row-crop-candidate/run_rows.py",
+          "100"
+        ],
+        "exitCode": 0,
+        "stopReason": null,
+        "elapsedSeconds": 29.255733770987717,
+        "sampledOwnedProcessTreePeakRSSBytes": 278597632,
+        "RSSsamples": 239,
+        "memoryScope": "sampled sum own process tree RSS; shared pages may double count; not device minimum or global RAM",
+        "rawBytes": 4398363,
+        "rawSHA256": "309a3fd81bc70dda5615fa36d8e50a4987e050a8a10021d71919c2b8d8af2858",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "inferenceScope": "ONE fixed recognizer for ALL frozen rows, two whole-document arms30 and100; no per-output model selection/old90 rerun"
+      }
+    },
+    {
+      "arm": "Tesseract-jpn-OEM1-PSM7",
+      "diagnosticCounts": {
+        "plannedRows": 170,
+        "nativeRecognizeReturnedRows": 170,
+        "serializationCompletedRows": 170,
+        "runtimeErrors": 0,
+        "nativeWordCount": 516,
+        "emptyNativeWordCount": 0,
+        "nativeWordsOutsideOriginalRows": 0,
+        "nativeBOXSymbolCount": 596,
+        "nativeBOXSymbolsOutsideOriginalRows": 0,
+        "bodyRawLiteralExact": 4,
+        "bodyLiteralAndPositionExact": 4,
+        "headerRawLiteralExact": 20,
+        "headerLiteralAndPositionExact": 20,
+        "bodyTargets": 120,
+        "headerTargets": 50,
+        "rawThreeValuesExact": 0,
+        "threeValuePositionsExact": 0,
+        "formalExact": null
+      },
+      "execution": {
+        "recipeSHA256": "c0d385997ee410806a2832c1145556121ae4282eb924ec4f855a8a0b8a513316",
+        "command": [
+          "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/env/bin/python",
+          "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/tess-row-candidate/run_tess_rows.py"
+        ],
+        "exitCode": 0,
+        "stopReason": null,
+        "elapsedSeconds": 2.737307569987024,
+        "sampledOwnedProcessTreePeakRSSBytes": 95920128,
+        "RSSsamples": 21,
+        "memoryScope": "sampled sum own process tree RSS; shared pages may double count; not device minimum or global RAM",
+        "rawBytes": 1208129,
+        "rawSHA256": "c2efa65e4ae6b2f0daebc9d5e801800adbd2a4c9555563ae24bf78700a2fb2d5",
+        "stderrBytes": 247,
+        "stderrSHA256": "b20ddb9f11a9b69f9855ffc3c4778df6c1eed7fcdaa7a6d72ad841630e84926b",
+        "inferenceScope": "uniformsame170RGBrows/TessjpnOEM1PSM7 withwarmmodel/freshhistory; no per-rowselection/oldNDLrerun"
+      }
+    }
+  ],
+  "PARSeqHostResults": {
+    "scope": "Two fixed entire-image direct PARSeq row arms on consumed invented pixel source; no actual PDF endpoint or production model acquisition qualification",
+    "planned": 2,
+    "nativeReturned": 2,
+    "hostFormalReturned": 0,
+    "readableHostRecoveryFailures": 2,
+    "hostIncorrectProposals": 0,
+    "operationalErrors": 0,
+    "formalTuplesPlanned": 80,
+    "formalTuplesAssessed": 0,
+    "formalTuplesUnavailable": 80,
+    "formalTupleAccuracy": null,
+    "negativeExamples": 0,
+    "productionAcquisitionEligible": false,
+    "results": [
+      {
+        "arm": 30,
+        "nativeReturned": true,
+        "nativeAtoms": 170,
+        "sourceConfidence": null,
+        "productionAcquisitionEligible": false,
+        "geometryAndInkEligible": true,
+        "strictStage": "P05",
+        "builderFailure": {
+          "type": "InvalidDataException",
+          "Message": "クラス・日付・時限の見出しを確認できません。",
+          "stage": "builder",
+          "failureClass": "sourceContractRefusal"
+        },
+        "hostProposedFormal": false,
+        "hostLiteralIncorrect": false,
+        "formalExactPossible": false,
+        "actualRecoveryAccepted": false,
+        "operationalError": false
+      },
+      {
+        "arm": 100,
+        "nativeReturned": true,
+        "nativeAtoms": 170,
+        "sourceConfidence": null,
+        "productionAcquisitionEligible": false,
+        "geometryAndInkEligible": true,
+        "strictStage": "P05",
+        "builderFailure": {
+          "type": "InvalidDataException",
+          "Message": "クラス・日付・時限の見出しを確認できません。",
+          "stage": "builder",
+          "failureClass": "sourceContractRefusal"
+        },
+        "hostProposedFormal": false,
+        "hostLiteralIncorrect": false,
+        "formalExactPossible": false,
+        "actualRecoveryAccepted": false,
+        "operationalError": false
+      }
+    ],
+    "notes": [
+      "Returned raw/position BODY diagnostic correctness is separate from complete formal outputs.",
+      "No confidence values are invented; uncalibrated token probabilities are not the product .8 acquisition threshold.",
+      "Source pixels/crops/IDs/text/ordering are kept; gold loaded only after host stage execution."
+    ]
+  },
+  "TesseractHostResults": {
+    "scope": "Actual Tesseract native TSV whole-word outputs with exact original integer origin translation, not pixel-support/character boxes; diagnostic host replay only, gold after output",
+    "nativeRawSha": "c2efa65e4ae6b2f0daebc9d5e801800adbd2a4c9555563ae24bf78700a2fb2d5",
+    "unrecognizedInk": true,
+    "geometryAndInkEligible": false,
+    "productionAcquisitionEligible": false,
+    "strictError": {
+      "type": "PdfParseException",
+      "Message": "PDFの年度の見出しを確認できませんでした（P03、1ページ）。正常な解析結果は保持しています。",
+      "stage": "P03"
+    },
+    "recoveryError": {
+      "type": "InvalidDataException",
+      "Message": "年度の独立した見出しがありません。",
+      "stage": "builder",
+      "failureClass": "sourceContractRefusal"
+    },
+    "hostProposedFormal": false,
+    "hostLiteralIncorrect": false,
+    "actualRecoveryAccepted": false,
+    "operationalError": false,
+    "providerCalls": 0
+  },
+  "formalTotals": {
+    "plannedDocuments": 3,
+    "formalReturnedDocuments": 0,
+    "formalTuplesPlanned": 120,
+    "formalTuplesAssessed": 0,
+    "formalTuplesUnavailable": 120,
+    "formalTupleAccuracy": null,
+    "hostIncorrectProposals": 0,
+    "actualAcceptances": 0,
+    "runtimeErrors": 0,
+    "negativeDenominator": 0
+  },
+  "stoppedTesseractTuning": true
+}

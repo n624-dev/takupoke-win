@@ -1,0 +1,20 @@
+{
+  "arm": "30",
+  "recipeSHA256": "612b72b7d51267359b0dfc925252242990e554285b6f818b42a33b0fbcbdcf43",
+  "command": [
+    "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/env/bin/python",
+    "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/row-crop-candidate/run_rows.py",
+    "30"
+  ],
+  "exitCode": 0,
+  "stopReason": null,
+  "elapsedSeconds": 9.168034677000833,
+  "sampledOwnedProcessTreePeakRSSBytes": 206647296,
+  "RSSsamples": 75,
+  "memoryScope": "sampled sum own process tree RSS; shared pages may double count; not device minimum or global RAM",
+  "rawBytes": 1526836,
+  "rawSHA256": "7293f1c6ae45cfd76f147bfce61af75f1c92be0aed1dc66820ac80a897430b54",
+  "stderrBytes": 0,
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "inferenceScope": "ONE fixed recognizer for ALL frozen rows, two whole-document arms30 and100; no per-output model selection/old90 rerun"
+}

@@ -1,0 +1,62 @@
+{
+  "scope": "Two fixed entire-image direct PARSeq row arms on consumed invented pixel source; no actual PDF endpoint or production model acquisition qualification",
+  "planned": 2,
+  "nativeReturned": 2,
+  "hostFormalReturned": 0,
+  "readableHostRecoveryFailures": 2,
+  "hostIncorrectProposals": 0,
+  "operationalErrors": 0,
+  "formalTuplesPlanned": 80,
+  "formalTuplesAssessed": 0,
+  "formalTuplesUnavailable": 80,
+  "formalTupleAccuracy": null,
+  "negativeExamples": 0,
+  "productionAcquisitionEligible": false,
+  "results": [
+    {
+      "arm": 30,
+      "nativeReturned": true,
+      "nativeAtoms": 170,
+      "sourceConfidence": null,
+      "productionAcquisitionEligible": false,
+      "geometryAndInkEligible": true,
+      "strictStage": "P05",
+      "builderFailure": {
+        "type": "InvalidDataException",
+        "Message": "クラス・日付・時限の見出しを確認できません。",
+        "stage": "builder",
+        "failureClass": "sourceContractRefusal"
+      },
+      "hostProposedFormal": false,
+      "hostLiteralIncorrect": false,
+      "formalExactPossible": false,
+      "actualRecoveryAccepted": false,
+      "operationalError": false
+    },
+    {
+      "arm": 100,
+      "nativeReturned": true,
+      "nativeAtoms": 170,
+      "sourceConfidence": null,
+      "productionAcquisitionEligible": false,
+      "geometryAndInkEligible": true,
+      "strictStage": "P05",
+      "builderFailure": {
+        "type": "InvalidDataException",
+        "Message": "クラス・日付・時限の見出しを確認できません。",
+        "stage": "builder",
+        "failureClass": "sourceContractRefusal"
+      },
+      "hostProposedFormal": false,
+      "hostLiteralIncorrect": false,
+      "formalExactPossible": false,
+      "actualRecoveryAccepted": false,
+      "operationalError": false
+    }
+  ],
+  "notes": [
+    "Returned raw/position BODY diagnostic correctness is separate from complete formal outputs.",
+    "No confidence values are invented; uncalibrated token probabilities are not the product .8 acquisition threshold.",
+    "Source pixels/crops/IDs/text/ordering are kept; gold loaded only after host stage execution."
+  ]
+}
