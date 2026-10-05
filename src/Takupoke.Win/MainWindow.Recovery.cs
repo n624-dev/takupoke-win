@@ -76,10 +76,27 @@ public sealed partial class MainWindow
             var bitmap = new WriteableBitmap(original.Width, original.Height);
             using (var stream = bitmap.PixelBuffer.AsStream()) stream.Write(original.Bgra);
             bitmap.Invalidate();
-            var image = new Image { Source = bitmap, Stretch = Stretch.Uniform, Width = Math.Min(320d, original.Width * 4d), MaxHeight = 180, HorizontalAlignment = HorizontalAlignment.Left };
+            var image = new Image { Source = bitmap, Stretch = Stretch.Uniform, MaxWidth = 520, MaxHeight = 360, HorizontalAlignment = HorizontalAlignment.Stretch };
             AutomationProperties.SetAutomationId(image, "manual-crop-" + key);
-            AutomationProperties.SetName(image, "原本の該当箇所"); panel.Children.Add(image);
-            panel.Children.Add(Text("自動読取: " + target.OriginalOcr));
+            AutomationProperties.SetName(image, "原本の訂正対象範囲");
+            var cropPanel = Panel(SettingsDescription("原本の訂正対象範囲"), image, Text("自動読取: " + target.OriginalOcr));
+            var cropBorder = new Border { Child = cropPanel, Padding = new Thickness(12), BorderThickness = new Thickness(2),
+                BorderBrush = (Brush)Application.Current.Resources["AccentFillColorDefaultBrush"] };
+            var entryPanel = Panel();
+            var comparison = new Grid { ColumnSpacing = 18, RowSpacing = 12 };
+            comparison.ColumnDefinitions.Add(new()); comparison.ColumnDefinitions.Add(new());
+            comparison.RowDefinitions.Add(new()); comparison.RowDefinitions.Add(new());
+            comparison.Children.Add(cropBorder); comparison.Children.Add(entryPanel);
+            void Reflow()
+            {
+                var wide = RecoveryCorrectionLayout.SideBySide(comparison.ActualWidth);
+                comparison.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
+                comparison.ColumnDefinitions[1].Width = wide ? new GridLength(1, GridUnitType.Star) : new GridLength(0);
+                Grid.SetColumn(entryPanel, wide ? 1 : 0); Grid.SetRow(entryPanel, wide ? 0 : 1);
+                comparison.RowDefinitions[0].Height = GridLength.Auto;
+                comparison.RowDefinitions[1].Height = wide ? new GridLength(0) : GridLength.Auto;
+            }
+            comparison.SizeChanged += (_, _) => Reflow(); Reflow();
             var input = OperationControl(new TextBox { Text = _manualInput.Values[key], Header = "PDFに記載された全文", AcceptsReturn = true, TextWrapping = TextWrapping.Wrap, MaxLength = 256 });
             AutomationProperties.SetAutomationId(input, "manual-value-" + key);
             var acknowledgement = OperationControl(new CheckBox { Content = "原本と一致することを確認", IsChecked = _manualInput.IsAcknowledged(key) });
@@ -89,7 +106,7 @@ public sealed partial class MainWindow
             input.TextChanging += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Edit(key, input.Text); acknowledgement.IsChecked = _manualInput.IsAcknowledged(key); UpdateSubmit(); };
             acknowledgement.Checked += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Acknowledge(key, true); UpdateSubmit(); };
             acknowledgement.Unchecked += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Acknowledge(key, false); UpdateSubmit(); };
-            panel.Children.Add(input); panel.Children.Add(acknowledgement); Add(Card(panel));
+            entryPanel.Children.Add(input); entryPanel.Children.Add(acknowledgement); panel.Children.Add(comparison); Add(Card(panel));
         }
         UpdateSubmit(); Add(submit);
         Add(OperationButton("入力による補助を中止", async () => {
@@ -120,8 +137,23 @@ public sealed partial class MainWindow
         { Add(Text("確認待ちの結果がありません。PDFが更新された場合は資料の詳細から復旧してください。")); return; }
         Add(Card(Panel(SettingsSectionTitle("原本を確認してから使用してください"), Text($"{document.SchoolYear}年度 {document.Term} · {AppViewModel.MaterialLabel(kind)}"), Text("表示中のクラスだけでなく、資料全体・全クラスの結果を採用します。採用するまで時間割には反映されません。学校の資料と読み取り結果は外部へ送信されません。"),
             Button("対応する元PDFを確認", () => ShowPdf(kind, false, preview), "recovery-original-" + kind))));
-        if (preview.Result.HumanCorrections is { Count: > 0 } corrections)
-            Add(Text($"原本と照合して利用者が入力した{corrections.Count}項目を含みます。自動読取文字とは別に記録されます。"));
+        if (!document.Corrections.IsEmpty)
+        {
+            Add(SettingsSectionTitle("原本と照合して入力した箇所"));
+            foreach (var correction in document.Corrections)
+                Add(Card(Panel(SettingsSectionTitle(RecoveryTargetLabel(kind, correction.Slots, correction.LessonIndex, correction.Role)),
+                    Text("自動読取: " + correction.OriginalOcr), Text("利用者の入力: " + correction.UserText),
+                    SettingsDescription("原本と照合した利用者の入力として、自動読取とは別に記録されます。"))));
+        }
+        if (document.PreviousComparable)
+        {
+            Add(SettingsSectionTitle("前回の正式な結果との変更"));
+            if (document.PreviousChanges.IsEmpty) Add(SettingsDescription("同じ原本に対応する前回の正式な結果から変更はありません。"));
+            foreach (var change in document.PreviousChanges)
+                Add(Card(Panel(SettingsSectionTitle(RecoveryTargetLabel(kind, change.Slots, change.LessonIndex, change.Role)),
+                    Text("前回: " + change.PreviousText), Text("今回: " + change.CurrentText))));
+        }
+        else Add(SettingsDescription("対応を確認できる前回の正式な結果がないため、変更の比較は表示していません。"));
         if (_recoveryClass is null || !document.Classes.Contains(_recoveryClass)) _recoveryClass = document.Classes.FirstOrDefault(c => _model.Preferences.SelectedClasses.Contains(c)) ?? document.Classes[0];
         Add(Button("表示するクラス：" + ClassSelection.Display(_recoveryClass), async () =>
         {
@@ -137,11 +169,36 @@ public sealed partial class MainWindow
             var content = Panel(SettingsSectionTitle(day + " " + periods));
             if (kind != MaterialKind.Timetable) { var span = cell.Slots.Length > 1 ? $"{cell.Slots.Min(s => s.Period)}-{cell.Slots.Max(s => s.Period)}" : slot.Period.ToString(); var clock = (cell.Slots.Length > 1 ? document.SpanTimes : document.Times).GetValueOrDefault(slot.Day + ":" + span); content.Children.Add(Text(clock ?? "時刻未確認")); if (kind == MaterialKind.ExamReturn) content.Children.Add(SettingsDescription(slot.Day == firstDay ? "初日専用の時刻" : "PDF中の注記に基づく通常授業時間")); }
             if (cell.State == RecoveryValueState.Empty) content.Children.Add(Text("空欄（原本で確認済み）"));
-            foreach (var lesson in cell.Lessons) content.Children.Add(Text(lesson.Subject + " / " + (lesson.TeacherEmpty ? "教員記載なし" : lesson.Teacher) + " / " + (lesson.RoomEmpty ? "教室記載なし" : lesson.Room)));
+            for (var index = 0; index < cell.Lessons.Length; index++)
+            {
+                var lesson = cell.Lessons[index];
+                var corrected = document.Corrections.Where(c => c.CellId == cell.CellId && c.LessonIndex == index).ToArray();
+                var lessonPanel = Panel(Text(lesson.Subject + " / " + (lesson.TeacherEmpty ? "教員記載なし" : lesson.Teacher) + " / " + (lesson.RoomEmpty ? "教室記載なし" : lesson.Room)));
+                if (corrected.Length > 0)
+                {
+                    lessonPanel.Children.Insert(0, SettingsDescription("原本と照合した利用者の入力を含む授業: " + string.Join("・", corrected.Select(c => RecoveryRoleLabel(c.Role)))));
+                    var highlight = new Border { Child = lessonPanel, Padding = new Thickness(12), BorderThickness = new Thickness(2),
+                        BorderBrush = (Brush)Application.Current.Resources["AccentFillColorDefaultBrush"] };
+                    AutomationProperties.SetAutomationId(highlight, "recovery-corrected-" + cell.CellId + "-" + index);
+                    content.Children.Add(highlight);
+                }
+                else content.Children.Add(lessonPanel);
+            }
             Add(Card(content));
         }
         Add(OperationButton("資料全体を確認しました。全クラスの結果を使用", () => _model.AdoptRecoveryAsync(kind, preview), "adopt-recovery-" + kind));
         Add(TechnicalDetails(DataField("端末内Provider", document.Metadata.Provider), DataField("モデル", document.Metadata.ModelId + " " + document.Metadata.ModelVersion), DataField("検証版", document.Metadata.ValidatorVersion.ToString())));
+    }
+    private static string RecoveryRoleLabel(RecoveryFieldRole role) => role switch
+    { RecoveryFieldRole.Subject => "科目", RecoveryFieldRole.Teacher => "教員", _ => "教室" };
+    private static string RecoveryTargetLabel(MaterialKind kind, System.Collections.Immutable.ImmutableArray<RecoverySlot> slots,
+        int lessonIndex, RecoveryFieldRole role)
+    {
+        var locations = slots.GroupBy(s => (s.ClassName, s.Day)).Select(group => {
+            var day = kind == MaterialKind.Timetable ? new[] { "", "月", "火", "水", "木", "金" }[int.Parse(group.Key.Day)] + "曜日" : group.Key.Day;
+            return ClassSelection.Display(group.Key.ClassName) + " · " + day + " · " + string.Join("・", group.Select(s => s.Period).Distinct().Order()) + "限";
+        });
+        return string.Join(" / ", locations) + " · 授業" + (lessonIndex + 1) + " · " + RecoveryRoleLabel(role);
     }
     private void BuildRecoveryModels()
     {

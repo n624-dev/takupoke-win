@@ -420,7 +420,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         foreach (var kind in snapshots.Keys.ToArray())
             if (snapshots[kind].RecoveryPreview is { } preview)
             {
-                var display = await Task.Run(() => RecoveryPreviewDisplay.Create(preview, token), token);
+                var previous = snapshots[kind].Analysis;
+                var display = await Task.Run(() => RecoveryPreviewDisplay.Create(preview, token, previous), token);
                 snapshots[kind] = snapshots[kind] with { RecoveryDisplay = display };
             }
         RecoveryModelMessage = null;

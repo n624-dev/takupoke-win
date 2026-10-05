@@ -7,6 +7,7 @@
   <ItemGroup>
     <Compile Include="../Takupoke.Win.UITests/PreferenceSnapshot.cs" Link="PreferenceSnapshot.cs" />
     <Compile Include="../../src/Takupoke.Win/ViewModels/RecoveryPreviewDisplay.cs" Link="RecoveryPreviewDisplay.cs" />
+    <Compile Include="../../src/Takupoke.Win/ViewModels/RecoveryCorrectionLayout.cs" Link="RecoveryCorrectionLayout.cs" />
     <Compile Include="../../src/Takupoke.Win/ViewModels/RecoveryManualInputState.cs" Link="RecoveryManualInputState.cs" />
     <Compile Include="../../src/Takupoke.Win/ViewModels/AppViewModel.cs" Link="AppViewModel.cs" />
     <Compile Include="../../src/Takupoke.Win/Platform/OfflineTestNetwork.cs" Link="OfflineTestNetwork.cs" />
