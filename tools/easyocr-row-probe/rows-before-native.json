@@ -1,0 +1,3069 @@
+{
+  "rows": [
+    {
+      "parentRegionID": 87,
+      "box": [
+        98,
+        13,
+        202,
+        33
+      ],
+      "originalRGBSHA256": "a4ac1cf619d9fbac30657c16beeb6a252b88eebd3b0b8167c25cc1d3b71835b5",
+      "shape": [
+        20,
+        104,
+        3
+      ],
+      "nonwhitePixels": 895,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 0
+    },
+    {
+      "parentRegionID": 88,
+      "box": [
+        351,
+        13,
+        389,
+        33
+      ],
+      "originalRGBSHA256": "3c8f9e75f0ce5d46d5c7a8d58dbd93020fee0547fbbe3fc5298a0e96ca03b69d",
+      "shape": [
+        20,
+        38,
+        3
+      ],
+      "nonwhitePixels": 431,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 1
+    },
+    {
+      "parentRegionID": 89,
+      "box": [
+        551,
+        13,
+        609,
+        33
+      ],
+      "originalRGBSHA256": "cbca45c78d936721dc5f2103f57f4e3db7e786ebff506d6c229bac0a514ee1b4",
+      "shape": [
+        20,
+        58,
+        3
+      ],
+      "nonwhitePixels": 724,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 2
+    },
+    {
+      "parentRegionID": 0,
+      "box": [
+        450,
+        74,
+        507,
+        93
+      ],
+      "originalRGBSHA256": "8d5836ca9fe0b9c51a79d774100b90b2a571d9b1fd9711c885759ff633bb66c8",
+      "shape": [
+        19,
+        57,
+        3
+      ],
+      "nonwhitePixels": 565,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 3
+    },
+    {
+      "parentRegionID": 1,
+      "box": [
+        1171,
+        74,
+        1227,
+        93
+      ],
+      "originalRGBSHA256": "6e551eada52b547c55fc95a6c459f35d484f203c4644776ecc542ded05c15012",
+      "shape": [
+        19,
+        56,
+        3
+      ],
+      "nonwhitePixels": 537,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 4
+    },
+    {
+      "parentRegionID": 2,
+      "box": [
+        1890,
+        74,
+        1947,
+        94
+      ],
+      "originalRGBSHA256": "8a060091f10c56be563d758324c1465ecffefd59b60db277f26f686a4fbbcae3",
+      "shape": [
+        20,
+        57,
+        3
+      ],
+      "nonwhitePixels": 563,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 5
+    },
+    {
+      "parentRegionID": 3,
+      "box": [
+        2610,
+        74,
+        2667,
+        94
+      ],
+      "originalRGBSHA256": "fdcd0532e066cd332b99ba765345ae02b8e50dab521852d72b3aa23e3c16445a",
+      "shape": [
+        20,
+        57,
+        3
+      ],
+      "nonwhitePixels": 547,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 6
+    },
+    {
+      "parentRegionID": 4,
+      "box": [
+        3330,
+        74,
+        3387,
+        93
+      ],
+      "originalRGBSHA256": "2ff6c0db9a2d03b5cae5c58f5e4c69886c76a0bf1d5e8e49d98b8a8bae9dcde6",
+      "shape": [
+        19,
+        57,
+        3
+      ],
+      "nonwhitePixels": 594,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 7
+    },
+    {
+      "parentRegionID": 5,
+      "box": [
+        160,
+        107,
+        169,
+        122
+      ],
+      "originalRGBSHA256": "2a8a8c884be3ca90a6912db5644969f94f7af25f4eb027b023c8cb62857f6527",
+      "shape": [
+        15,
+        9,
+        3
+      ],
+      "nonwhitePixels": 53,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 8
+    },
+    {
+      "parentRegionID": 6,
+      "box": [
+        249,
+        107,
+        260,
+        122
+      ],
+      "originalRGBSHA256": "84150a6a2fd28d643672d30eb0097c57dfc3750cb0a01733fa74b3f0c5decf24",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 82,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 9
+    },
+    {
+      "parentRegionID": 7,
+      "box": [
+        339,
+        107,
+        349,
+        122
+      ],
+      "originalRGBSHA256": "0277325a8e2b55db8c6db825231bed33b56ec940f1826e614d3a3ab7aa7def6c",
+      "shape": [
+        15,
+        10,
+        3
+      ],
+      "nonwhitePixels": 85,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 10
+    },
+    {
+      "parentRegionID": 8,
+      "box": [
+        429,
+        107,
+        440,
+        122
+      ],
+      "originalRGBSHA256": "4f270a06802642d15d14af22f79cab96cb0a817868e83876572cbf9bf72d7aeb",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 84,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 11
+    },
+    {
+      "parentRegionID": 9,
+      "box": [
+        519,
+        107,
+        530,
+        122
+      ],
+      "originalRGBSHA256": "721b86a1f533a80bdac3b7a8a61b687e606bafdd0c0326db002282e1d960b4c3",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 82,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 12
+    },
+    {
+      "parentRegionID": 10,
+      "box": [
+        610,
+        107,
+        620,
+        122
+      ],
+      "originalRGBSHA256": "718df384b3611148584f6d325fbf79ce47965007f7280c6e2ad6c43e900a38ad",
+      "shape": [
+        15,
+        10,
+        3
+      ],
+      "nonwhitePixels": 96,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 13
+    },
+    {
+      "parentRegionID": 11,
+      "box": [
+        699,
+        107,
+        710,
+        122
+      ],
+      "originalRGBSHA256": "b39256c8497079eca40e88abfd21649ee0cb1276860d776dcb0a22d9b25b22c2",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 59,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 14
+    },
+    {
+      "parentRegionID": 12,
+      "box": [
+        789,
+        107,
+        800,
+        122
+      ],
+      "originalRGBSHA256": "7a8db57d5b697fd0da06b0d0979255ce3b3c80b3d180e360910381bab597cb02",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 103,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 15
+    },
+    {
+      "parentRegionID": 13,
+      "box": [
+        880,
+        107,
+        889,
+        122
+      ],
+      "originalRGBSHA256": "2a8a8c884be3ca90a6912db5644969f94f7af25f4eb027b023c8cb62857f6527",
+      "shape": [
+        15,
+        9,
+        3
+      ],
+      "nonwhitePixels": 53,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 16
+    },
+    {
+      "parentRegionID": 14,
+      "box": [
+        969,
+        107,
+        980,
+        122
+      ],
+      "originalRGBSHA256": "84150a6a2fd28d643672d30eb0097c57dfc3750cb0a01733fa74b3f0c5decf24",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 82,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 17
+    },
+    {
+      "parentRegionID": 15,
+      "box": [
+        1059,
+        107,
+        1069,
+        122
+      ],
+      "originalRGBSHA256": "0277325a8e2b55db8c6db825231bed33b56ec940f1826e614d3a3ab7aa7def6c",
+      "shape": [
+        15,
+        10,
+        3
+      ],
+      "nonwhitePixels": 85,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 18
+    },
+    {
+      "parentRegionID": 16,
+      "box": [
+        1149,
+        107,
+        1160,
+        122
+      ],
+      "originalRGBSHA256": "4f270a06802642d15d14af22f79cab96cb0a817868e83876572cbf9bf72d7aeb",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 84,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 19
+    },
+    {
+      "parentRegionID": 17,
+      "box": [
+        1239,
+        107,
+        1250,
+        122
+      ],
+      "originalRGBSHA256": "721b86a1f533a80bdac3b7a8a61b687e606bafdd0c0326db002282e1d960b4c3",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 82,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 20
+    },
+    {
+      "parentRegionID": 18,
+      "box": [
+        1330,
+        107,
+        1340,
+        122
+      ],
+      "originalRGBSHA256": "718df384b3611148584f6d325fbf79ce47965007f7280c6e2ad6c43e900a38ad",
+      "shape": [
+        15,
+        10,
+        3
+      ],
+      "nonwhitePixels": 96,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 21
+    },
+    {
+      "parentRegionID": 19,
+      "box": [
+        1419,
+        107,
+        1430,
+        122
+      ],
+      "originalRGBSHA256": "b39256c8497079eca40e88abfd21649ee0cb1276860d776dcb0a22d9b25b22c2",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 59,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 22
+    },
+    {
+      "parentRegionID": 20,
+      "box": [
+        1509,
+        107,
+        1520,
+        122
+      ],
+      "originalRGBSHA256": "7a8db57d5b697fd0da06b0d0979255ce3b3c80b3d180e360910381bab597cb02",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 103,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 23
+    },
+    {
+      "parentRegionID": 21,
+      "box": [
+        1600,
+        107,
+        1609,
+        122
+      ],
+      "originalRGBSHA256": "2a8a8c884be3ca90a6912db5644969f94f7af25f4eb027b023c8cb62857f6527",
+      "shape": [
+        15,
+        9,
+        3
+      ],
+      "nonwhitePixels": 53,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 24
+    },
+    {
+      "parentRegionID": 22,
+      "box": [
+        1689,
+        107,
+        1700,
+        122
+      ],
+      "originalRGBSHA256": "84150a6a2fd28d643672d30eb0097c57dfc3750cb0a01733fa74b3f0c5decf24",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 82,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 25
+    },
+    {
+      "parentRegionID": 23,
+      "box": [
+        1779,
+        107,
+        1789,
+        122
+      ],
+      "originalRGBSHA256": "0277325a8e2b55db8c6db825231bed33b56ec940f1826e614d3a3ab7aa7def6c",
+      "shape": [
+        15,
+        10,
+        3
+      ],
+      "nonwhitePixels": 85,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 26
+    },
+    {
+      "parentRegionID": 24,
+      "box": [
+        1869,
+        107,
+        1880,
+        122
+      ],
+      "originalRGBSHA256": "4f270a06802642d15d14af22f79cab96cb0a817868e83876572cbf9bf72d7aeb",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 84,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 27
+    },
+    {
+      "parentRegionID": 25,
+      "box": [
+        1959,
+        107,
+        1970,
+        122
+      ],
+      "originalRGBSHA256": "721b86a1f533a80bdac3b7a8a61b687e606bafdd0c0326db002282e1d960b4c3",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 82,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 28
+    },
+    {
+      "parentRegionID": 26,
+      "box": [
+        2050,
+        107,
+        2060,
+        122
+      ],
+      "originalRGBSHA256": "718df384b3611148584f6d325fbf79ce47965007f7280c6e2ad6c43e900a38ad",
+      "shape": [
+        15,
+        10,
+        3
+      ],
+      "nonwhitePixels": 96,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 29
+    },
+    {
+      "parentRegionID": 27,
+      "box": [
+        2139,
+        107,
+        2150,
+        122
+      ],
+      "originalRGBSHA256": "b39256c8497079eca40e88abfd21649ee0cb1276860d776dcb0a22d9b25b22c2",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 59,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 30
+    },
+    {
+      "parentRegionID": 28,
+      "box": [
+        2229,
+        107,
+        2240,
+        122
+      ],
+      "originalRGBSHA256": "7a8db57d5b697fd0da06b0d0979255ce3b3c80b3d180e360910381bab597cb02",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 103,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 31
+    },
+    {
+      "parentRegionID": 29,
+      "box": [
+        2320,
+        107,
+        2329,
+        122
+      ],
+      "originalRGBSHA256": "2a8a8c884be3ca90a6912db5644969f94f7af25f4eb027b023c8cb62857f6527",
+      "shape": [
+        15,
+        9,
+        3
+      ],
+      "nonwhitePixels": 53,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 32
+    },
+    {
+      "parentRegionID": 30,
+      "box": [
+        2409,
+        107,
+        2420,
+        122
+      ],
+      "originalRGBSHA256": "84150a6a2fd28d643672d30eb0097c57dfc3750cb0a01733fa74b3f0c5decf24",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 82,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 33
+    },
+    {
+      "parentRegionID": 31,
+      "box": [
+        2499,
+        107,
+        2509,
+        122
+      ],
+      "originalRGBSHA256": "0277325a8e2b55db8c6db825231bed33b56ec940f1826e614d3a3ab7aa7def6c",
+      "shape": [
+        15,
+        10,
+        3
+      ],
+      "nonwhitePixels": 85,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 34
+    },
+    {
+      "parentRegionID": 32,
+      "box": [
+        2589,
+        107,
+        2600,
+        122
+      ],
+      "originalRGBSHA256": "4f270a06802642d15d14af22f79cab96cb0a817868e83876572cbf9bf72d7aeb",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 84,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 35
+    },
+    {
+      "parentRegionID": 33,
+      "box": [
+        2679,
+        107,
+        2690,
+        122
+      ],
+      "originalRGBSHA256": "721b86a1f533a80bdac3b7a8a61b687e606bafdd0c0326db002282e1d960b4c3",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 82,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 36
+    },
+    {
+      "parentRegionID": 34,
+      "box": [
+        2770,
+        107,
+        2780,
+        122
+      ],
+      "originalRGBSHA256": "718df384b3611148584f6d325fbf79ce47965007f7280c6e2ad6c43e900a38ad",
+      "shape": [
+        15,
+        10,
+        3
+      ],
+      "nonwhitePixels": 96,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 37
+    },
+    {
+      "parentRegionID": 35,
+      "box": [
+        2859,
+        107,
+        2870,
+        122
+      ],
+      "originalRGBSHA256": "b39256c8497079eca40e88abfd21649ee0cb1276860d776dcb0a22d9b25b22c2",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 59,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 38
+    },
+    {
+      "parentRegionID": 36,
+      "box": [
+        2949,
+        107,
+        2960,
+        122
+      ],
+      "originalRGBSHA256": "7a8db57d5b697fd0da06b0d0979255ce3b3c80b3d180e360910381bab597cb02",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 103,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 39
+    },
+    {
+      "parentRegionID": 37,
+      "box": [
+        3040,
+        107,
+        3049,
+        122
+      ],
+      "originalRGBSHA256": "2a8a8c884be3ca90a6912db5644969f94f7af25f4eb027b023c8cb62857f6527",
+      "shape": [
+        15,
+        9,
+        3
+      ],
+      "nonwhitePixels": 53,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 40
+    },
+    {
+      "parentRegionID": 38,
+      "box": [
+        3129,
+        107,
+        3140,
+        122
+      ],
+      "originalRGBSHA256": "84150a6a2fd28d643672d30eb0097c57dfc3750cb0a01733fa74b3f0c5decf24",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 82,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 41
+    },
+    {
+      "parentRegionID": 39,
+      "box": [
+        3219,
+        107,
+        3229,
+        122
+      ],
+      "originalRGBSHA256": "0277325a8e2b55db8c6db825231bed33b56ec940f1826e614d3a3ab7aa7def6c",
+      "shape": [
+        15,
+        10,
+        3
+      ],
+      "nonwhitePixels": 85,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 42
+    },
+    {
+      "parentRegionID": 40,
+      "box": [
+        3309,
+        107,
+        3320,
+        122
+      ],
+      "originalRGBSHA256": "4f270a06802642d15d14af22f79cab96cb0a817868e83876572cbf9bf72d7aeb",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 84,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 43
+    },
+    {
+      "parentRegionID": 41,
+      "box": [
+        3399,
+        107,
+        3410,
+        122
+      ],
+      "originalRGBSHA256": "721b86a1f533a80bdac3b7a8a61b687e606bafdd0c0326db002282e1d960b4c3",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 82,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 44
+    },
+    {
+      "parentRegionID": 42,
+      "box": [
+        3490,
+        107,
+        3500,
+        122
+      ],
+      "originalRGBSHA256": "718df384b3611148584f6d325fbf79ce47965007f7280c6e2ad6c43e900a38ad",
+      "shape": [
+        15,
+        10,
+        3
+      ],
+      "nonwhitePixels": 96,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 45
+    },
+    {
+      "parentRegionID": 43,
+      "box": [
+        3579,
+        107,
+        3590,
+        122
+      ],
+      "originalRGBSHA256": "b39256c8497079eca40e88abfd21649ee0cb1276860d776dcb0a22d9b25b22c2",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 59,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 46
+    },
+    {
+      "parentRegionID": 44,
+      "box": [
+        3669,
+        107,
+        3680,
+        122
+      ],
+      "originalRGBSHA256": "7a8db57d5b697fd0da06b0d0979255ce3b3c80b3d180e360910381bab597cb02",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 103,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 47
+    },
+    {
+      "parentRegionID": 47,
+      "box": [
+        134,
+        139,
+        195,
+        158
+      ],
+      "originalRGBSHA256": "a8aa2275293f8449f7dd750fd47925653dbeeab5e0c73556d27891e6b8060706",
+      "shape": [
+        19,
+        61,
+        3
+      ],
+      "nonwhitePixels": 597,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 48
+    },
+    {
+      "parentRegionID": 48,
+      "box": [
+        224,
+        139,
+        286,
+        158
+      ],
+      "originalRGBSHA256": "cdb61655cb5ddcf1fef1f1dc81fbe0f036dfd13c0b27f7c6d65c650a97bdbd18",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 626,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 49
+    },
+    {
+      "parentRegionID": 49,
+      "box": [
+        314,
+        139,
+        375,
+        158
+      ],
+      "originalRGBSHA256": "aa422a1e79599a34d81edd3b4b83dfe75ed8d121fca2f6f0321e3dd6649e6f50",
+      "shape": [
+        19,
+        61,
+        3
+      ],
+      "nonwhitePixels": 629,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 50
+    },
+    {
+      "parentRegionID": 50,
+      "box": [
+        404,
+        139,
+        466,
+        158
+      ],
+      "originalRGBSHA256": "8069ce380ce7ebd0ec3c77af3dd54513f434376fd4c095fc2f604ed142a144e3",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 628,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 51
+    },
+    {
+      "parentRegionID": 51,
+      "box": [
+        494,
+        139,
+        556,
+        158
+      ],
+      "originalRGBSHA256": "43d1cfe022f37dd126691e3a484f327cbbcd71acabfb2d64c673f618c68c1bfd",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 626,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 52
+    },
+    {
+      "parentRegionID": 52,
+      "box": [
+        584,
+        139,
+        646,
+        158
+      ],
+      "originalRGBSHA256": "c9dd4cfcfd8c51a60db2b30a3d1373d5e0563d90979788e9f17f303c1c808b87",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 640,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 53
+    },
+    {
+      "parentRegionID": 53,
+      "box": [
+        674,
+        139,
+        736,
+        158
+      ],
+      "originalRGBSHA256": "9dd277acaf5d137a13e9f57e893e4ed2ff15828cd8566c104b91e34d23df6c1b",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 603,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 54
+    },
+    {
+      "parentRegionID": 54,
+      "box": [
+        764,
+        139,
+        826,
+        158
+      ],
+      "originalRGBSHA256": "8028d48de0765fd218919d7bc9435f049b54c3ca76bf3248de9b194716403787",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 647,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 55
+    },
+    {
+      "parentRegionID": 55,
+      "box": [
+        854,
+        139,
+        915,
+        158
+      ],
+      "originalRGBSHA256": "b863e6eb28c79d57b68ce4f42847e2e33e463c614cf665280df54cc04768631e",
+      "shape": [
+        19,
+        61,
+        3
+      ],
+      "nonwhitePixels": 638,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 56
+    },
+    {
+      "parentRegionID": 56,
+      "box": [
+        944,
+        139,
+        1006,
+        158
+      ],
+      "originalRGBSHA256": "5556ca04112d1526cb1ebb778eaa8c90c793de119e21503867ed6918ddf8dc95",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 597,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 57
+    },
+    {
+      "parentRegionID": 57,
+      "box": [
+        1034,
+        139,
+        1095,
+        158
+      ],
+      "originalRGBSHA256": "645f94ad01de6373e112b17b85b264e0f738c4743445f1747a76acd1fbd0c9bc",
+      "shape": [
+        19,
+        61,
+        3
+      ],
+      "nonwhitePixels": 563,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 58
+    },
+    {
+      "parentRegionID": 58,
+      "box": [
+        1124,
+        139,
+        1186,
+        158
+      ],
+      "originalRGBSHA256": "b26abe84b90d57a043fb06d9b65806effd46861ec92e1ee5fae1a145771c28f5",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 592,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 59
+    },
+    {
+      "parentRegionID": 59,
+      "box": [
+        1214,
+        139,
+        1275,
+        158
+      ],
+      "originalRGBSHA256": "ce9609229e2565fcbe2ccf81e4391814e3774eac2f86db1810040bda6b2dc53f",
+      "shape": [
+        19,
+        61,
+        3
+      ],
+      "nonwhitePixels": 595,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 60
+    },
+    {
+      "parentRegionID": 60,
+      "box": [
+        1304,
+        139,
+        1366,
+        158
+      ],
+      "originalRGBSHA256": "8530489bba8db009362057227c88507a8c6b30e1e5a30ee221fc3b5a8154eec9",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 594,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 61
+    },
+    {
+      "parentRegionID": 61,
+      "box": [
+        1394,
+        139,
+        1456,
+        158
+      ],
+      "originalRGBSHA256": "50dc05dd25918b2ec41e2003eb14a6b270bc296e658358b206d7e277547c5056",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 592,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 62
+    },
+    {
+      "parentRegionID": 62,
+      "box": [
+        1484,
+        139,
+        1546,
+        158
+      ],
+      "originalRGBSHA256": "fb6e745dcfe8255eba6aa9b9b259ed15a216c906c8c64e86017c663fa65368a3",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 606,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 63
+    },
+    {
+      "parentRegionID": 63,
+      "box": [
+        1574,
+        139,
+        1636,
+        158
+      ],
+      "originalRGBSHA256": "88f7d04eeff6b50e1c61a3616769ccb8a0e3242f7bf5c1475bff1c539b895a8a",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 569,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 64
+    },
+    {
+      "parentRegionID": 64,
+      "box": [
+        1664,
+        139,
+        1726,
+        158
+      ],
+      "originalRGBSHA256": "14dbea3594501dd1b8c2a52b0bf5449d7ed564b43133bb46698cc869ad4e0c25",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 613,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 65
+    },
+    {
+      "parentRegionID": 65,
+      "box": [
+        1754,
+        139,
+        1815,
+        158
+      ],
+      "originalRGBSHA256": "9c9b26a6b87cfac2ef065e6c106d08f58fae3f341f8bd7ac49c508b58d8eca5e",
+      "shape": [
+        19,
+        61,
+        3
+      ],
+      "nonwhitePixels": 604,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 66
+    },
+    {
+      "parentRegionID": 66,
+      "box": [
+        1844,
+        139,
+        1906,
+        158
+      ],
+      "originalRGBSHA256": "d099e2882b2e743111a3f83fd2a06baa34df2a8bd495de9140c6cb0e0a258974",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 626,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 67
+    },
+    {
+      "parentRegionID": 67,
+      "box": [
+        1934,
+        139,
+        1995,
+        158
+      ],
+      "originalRGBSHA256": "a6c4a30d4c7f1d7de8cc31a080afffd6e996a3d1c888e104df61911bc2761248",
+      "shape": [
+        19,
+        61,
+        3
+      ],
+      "nonwhitePixels": 592,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 68
+    },
+    {
+      "parentRegionID": 68,
+      "box": [
+        2024,
+        139,
+        2086,
+        158
+      ],
+      "originalRGBSHA256": "277616c3049e26a0fbea221bd71d1cfa62b6e8720515aa2f7ea203d6217b26d5",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 621,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 69
+    },
+    {
+      "parentRegionID": 69,
+      "box": [
+        2114,
+        139,
+        2175,
+        158
+      ],
+      "originalRGBSHA256": "98019022fe4f8ab151b12388ca9a08ea41f78cdd3cfc1cd4e0188a3a5636828c",
+      "shape": [
+        19,
+        61,
+        3
+      ],
+      "nonwhitePixels": 624,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 70
+    },
+    {
+      "parentRegionID": 70,
+      "box": [
+        2204,
+        139,
+        2266,
+        158
+      ],
+      "originalRGBSHA256": "82a9817931f09a3043b8a9d358c5154696dbed9123755a1f907b7c4787da8081",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 623,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 71
+    },
+    {
+      "parentRegionID": 71,
+      "box": [
+        2294,
+        139,
+        2356,
+        158
+      ],
+      "originalRGBSHA256": "3012b443c4b337b17bb6dec76352fe650d8113118445a5148d19ba1323fff199",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 621,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 72
+    },
+    {
+      "parentRegionID": 72,
+      "box": [
+        2384,
+        139,
+        2446,
+        158
+      ],
+      "originalRGBSHA256": "42a7de365cc2e8987baee7860a836d7f75d9eea61d7eba997a79ba9a7e0f45f3",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 635,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 73
+    },
+    {
+      "parentRegionID": 73,
+      "box": [
+        2474,
+        139,
+        2536,
+        158
+      ],
+      "originalRGBSHA256": "d63ac75d608537cc946fa2940753862bd07e9e4b3c46773d583e5815413e6ceb",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 598,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 74
+    },
+    {
+      "parentRegionID": 74,
+      "box": [
+        2564,
+        139,
+        2626,
+        158
+      ],
+      "originalRGBSHA256": "455d29866c1bbcaaf9f4ebcbeec5bb59aeb264ee7e02ace1a8f37a4b78b26317",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 642,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 75
+    },
+    {
+      "parentRegionID": 75,
+      "box": [
+        2654,
+        139,
+        2715,
+        158
+      ],
+      "originalRGBSHA256": "612293e812bcebf341f51dcbe2fc5a6de9165a297629f8fef69c53689d9d1fc8",
+      "shape": [
+        19,
+        61,
+        3
+      ],
+      "nonwhitePixels": 633,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 76
+    },
+    {
+      "parentRegionID": 76,
+      "box": [
+        2744,
+        139,
+        2806,
+        158
+      ],
+      "originalRGBSHA256": "e108b49b283644ae6a681dfeeb04759636e7b29b949556115b18844ab6cb6456",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 629,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 77
+    },
+    {
+      "parentRegionID": 77,
+      "box": [
+        2834,
+        139,
+        2895,
+        158
+      ],
+      "originalRGBSHA256": "be2e4e3a08b5e14f7f76fd0ea18c0824aa88d6c6da0bac5484712e87349c3b63",
+      "shape": [
+        19,
+        61,
+        3
+      ],
+      "nonwhitePixels": 595,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 78
+    },
+    {
+      "parentRegionID": 78,
+      "box": [
+        2924,
+        139,
+        2986,
+        158
+      ],
+      "originalRGBSHA256": "7e8b630a4710782222976bfe286336ff0769de3b4b3d779d48e1d7bb44d23daf",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 624,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 79
+    },
+    {
+      "parentRegionID": 79,
+      "box": [
+        3014,
+        139,
+        3075,
+        158
+      ],
+      "originalRGBSHA256": "e7d3e5bfe4ff7a1716a07fd24786f2da92973a3ae9c9401572afcf283d128930",
+      "shape": [
+        19,
+        61,
+        3
+      ],
+      "nonwhitePixels": 627,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 80
+    },
+    {
+      "parentRegionID": 80,
+      "box": [
+        3104,
+        139,
+        3166,
+        158
+      ],
+      "originalRGBSHA256": "b7c5793d98f6bd7a0ae5c26c517217a24d92d1219484dce661269061ccadf644",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 626,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 81
+    },
+    {
+      "parentRegionID": 81,
+      "box": [
+        3194,
+        139,
+        3256,
+        158
+      ],
+      "originalRGBSHA256": "183c323d7bf6ab2e829b3188af43f0350d9735f241c51b21ab3802a9b7e05a80",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 624,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 82
+    },
+    {
+      "parentRegionID": 82,
+      "box": [
+        3284,
+        139,
+        3346,
+        158
+      ],
+      "originalRGBSHA256": "8f93b4ecae47e6cd2949852c7df44e8543318c12d029cc0a4e5e5488f0ce7e15",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 638,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 83
+    },
+    {
+      "parentRegionID": 83,
+      "box": [
+        3374,
+        139,
+        3436,
+        158
+      ],
+      "originalRGBSHA256": "258404f2ab3fb805a979d56c0fa070ed531020f553cf16460b2d00a2183fb755",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 601,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 84
+    },
+    {
+      "parentRegionID": 84,
+      "box": [
+        3464,
+        139,
+        3526,
+        158
+      ],
+      "originalRGBSHA256": "1651fee424d84a5dca035bb851255eb4f952c57d8a19dde93a942e0446e7029c",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 645,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 85
+    },
+    {
+      "parentRegionID": 85,
+      "box": [
+        3554,
+        139,
+        3615,
+        158
+      ],
+      "originalRGBSHA256": "3535d3db5a703f12a4f77425aa685b601640c676114616bb93cdbd3a3b60f365",
+      "shape": [
+        19,
+        61,
+        3
+      ],
+      "nonwhitePixels": 636,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 86
+    },
+    {
+      "parentRegionID": 86,
+      "box": [
+        3644,
+        139,
+        3706,
+        158
+      ],
+      "originalRGBSHA256": "e1c323b02c6cb8691592940d6b61ef72ae84c2e29519c733e1b65e86789815de",
+      "shape": [
+        19,
+        62,
+        3
+      ],
+      "nonwhitePixels": 628,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 87
+    },
+    {
+      "parentRegionID": 45,
+      "box": [
+        35,
+        171,
+        44,
+        186
+      ],
+      "originalRGBSHA256": "2a8a8c884be3ca90a6912db5644969f94f7af25f4eb027b023c8cb62857f6527",
+      "shape": [
+        15,
+        9,
+        3
+      ],
+      "nonwhitePixels": 53,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 88
+    },
+    {
+      "parentRegionID": 46,
+      "box": [
+        84,
+        171,
+        95,
+        186
+      ],
+      "originalRGBSHA256": "84150a6a2fd28d643672d30eb0097c57dfc3750cb0a01733fa74b3f0c5decf24",
+      "shape": [
+        15,
+        11,
+        3
+      ],
+      "nonwhitePixels": 82,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 89
+    },
+    {
+      "parentRegionID": 47,
+      "box": [
+        133,
+        171,
+        195,
+        191
+      ],
+      "originalRGBSHA256": "2b90142dad6742d7bfe0daf9468bff759faaad0f33b3cc749fc101762000f394",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 578,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 90
+    },
+    {
+      "parentRegionID": 48,
+      "box": [
+        223,
+        171,
+        286,
+        191
+      ],
+      "originalRGBSHA256": "52d9afb413e010c627c8b7b1c2ae3ca8cb00e56d739ebcc871983c4c8e729ff3",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 607,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 91
+    },
+    {
+      "parentRegionID": 49,
+      "box": [
+        313,
+        171,
+        375,
+        191
+      ],
+      "originalRGBSHA256": "ff509d56b2e1cbcb44ab74632337587b33c398fc7cdf64a64f426cce67d707e5",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 610,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 92
+    },
+    {
+      "parentRegionID": 50,
+      "box": [
+        403,
+        171,
+        466,
+        191
+      ],
+      "originalRGBSHA256": "38946481f71055cfe6908e8680bc04473129d7275d44ce6059f02bc143fdb883",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 609,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 93
+    },
+    {
+      "parentRegionID": 51,
+      "box": [
+        493,
+        171,
+        556,
+        191
+      ],
+      "originalRGBSHA256": "f22c039032c25643a82911dc1716ec7f6d850da5964b78ec3589c6ba0c8bf99b",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 607,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 94
+    },
+    {
+      "parentRegionID": 52,
+      "box": [
+        583,
+        171,
+        646,
+        191
+      ],
+      "originalRGBSHA256": "464646764d3293afedd8fcfcc4b897d0d0887ba2181d68eb3acbecdab0d0ffa5",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 621,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 95
+    },
+    {
+      "parentRegionID": 53,
+      "box": [
+        673,
+        171,
+        736,
+        191
+      ],
+      "originalRGBSHA256": "1923cf716f2e1181e59da0f41c60f1d64bbec7a51a72d6c1945e248551204209",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 584,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 96
+    },
+    {
+      "parentRegionID": 54,
+      "box": [
+        763,
+        171,
+        826,
+        191
+      ],
+      "originalRGBSHA256": "f5b0401b153f209827b6f895e0b891bd0aa81e41f72360c5175f3aea2b5d10a6",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 628,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 97
+    },
+    {
+      "parentRegionID": 55,
+      "box": [
+        853,
+        171,
+        915,
+        191
+      ],
+      "originalRGBSHA256": "e3543cee268bef6b5a9277b49a1c7da48a42ee3674ae17e24a9a29f8143a809a",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 619,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 98
+    },
+    {
+      "parentRegionID": 56,
+      "box": [
+        943,
+        171,
+        1006,
+        191
+      ],
+      "originalRGBSHA256": "5fa4b950191d733a57da983c58820239240750fac3c8f15e82e0115184f53c96",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 578,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 99
+    },
+    {
+      "parentRegionID": 57,
+      "box": [
+        1033,
+        171,
+        1095,
+        191
+      ],
+      "originalRGBSHA256": "3d42e2719223f34fc07dcf7546733d8ae375c7c4d7bd8fb3215a822a078f506e",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 544,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 100
+    },
+    {
+      "parentRegionID": 58,
+      "box": [
+        1123,
+        171,
+        1186,
+        191
+      ],
+      "originalRGBSHA256": "7e0014c52e73f8004e2aea1a81bbbe93e4dc0b2648705cbe188bd99208d071ea",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 573,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 101
+    },
+    {
+      "parentRegionID": 59,
+      "box": [
+        1213,
+        171,
+        1275,
+        191
+      ],
+      "originalRGBSHA256": "551ca2dce2587a39bf3dcaa92d5dc175e80b162b2bb6103a8fbaa8496b610db2",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 576,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 102
+    },
+    {
+      "parentRegionID": 60,
+      "box": [
+        1303,
+        171,
+        1366,
+        191
+      ],
+      "originalRGBSHA256": "b2336fc2009564006e02d68297d733fc6b1d2346168490043b29994c6e255b43",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 575,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 103
+    },
+    {
+      "parentRegionID": 61,
+      "box": [
+        1393,
+        171,
+        1456,
+        191
+      ],
+      "originalRGBSHA256": "42f46f6477dd0c7b99f0f84291804055a61ca33957ecb1d590687d8be5ade7e9",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 573,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 104
+    },
+    {
+      "parentRegionID": 62,
+      "box": [
+        1483,
+        171,
+        1546,
+        191
+      ],
+      "originalRGBSHA256": "975ebdfecf515983b80ede65d0e87b6fb676ad0ccbd299d9f1131d56316ade9f",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 587,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 105
+    },
+    {
+      "parentRegionID": 63,
+      "box": [
+        1573,
+        171,
+        1636,
+        191
+      ],
+      "originalRGBSHA256": "5088181e97592a907efd0e9e32e14174fb08e27c30e9445a214d21223d9903aa",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 550,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 106
+    },
+    {
+      "parentRegionID": 64,
+      "box": [
+        1663,
+        171,
+        1726,
+        191
+      ],
+      "originalRGBSHA256": "bb437d9c848b0cf9f1a95fa471b8afbfa3401d9d00a7102df962d76e88ef8396",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 594,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 107
+    },
+    {
+      "parentRegionID": 65,
+      "box": [
+        1753,
+        171,
+        1815,
+        191
+      ],
+      "originalRGBSHA256": "21d47f836bac5eeeadb3801b2967383c830082bf8ee70c56b4d3fe89492c3896",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 585,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 108
+    },
+    {
+      "parentRegionID": 66,
+      "box": [
+        1843,
+        171,
+        1906,
+        191
+      ],
+      "originalRGBSHA256": "dbfe33341a329dd2148bbff7bb626a54f44b0746664546eedcacc2ef02a2d5e3",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 607,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 109
+    },
+    {
+      "parentRegionID": 67,
+      "box": [
+        1933,
+        171,
+        1995,
+        191
+      ],
+      "originalRGBSHA256": "79b2722bfc8e9d3def40e7524dcca483aef5be813b623ff7dbfc5baf34034aa4",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 573,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 110
+    },
+    {
+      "parentRegionID": 68,
+      "box": [
+        2023,
+        171,
+        2086,
+        191
+      ],
+      "originalRGBSHA256": "9ca6a96b3661f1a67ec1c760c3101b576a10be92ea7f4b172c02132078678af8",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 602,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 111
+    },
+    {
+      "parentRegionID": 69,
+      "box": [
+        2113,
+        171,
+        2175,
+        191
+      ],
+      "originalRGBSHA256": "d1e73e82172cace3f32c6464744db659b1949fee954451289a1fdab8bafe4e75",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 605,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 112
+    },
+    {
+      "parentRegionID": 70,
+      "box": [
+        2203,
+        171,
+        2266,
+        191
+      ],
+      "originalRGBSHA256": "0e1490541962cf4fd5b270fe96e0450b4aa1846df1512d8c5b075a3b4c035a53",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 604,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 113
+    },
+    {
+      "parentRegionID": 71,
+      "box": [
+        2293,
+        171,
+        2356,
+        191
+      ],
+      "originalRGBSHA256": "21b57b07358d25703c5262b0cae061d05dd6fb84353543c708691f09576468f0",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 602,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 114
+    },
+    {
+      "parentRegionID": 72,
+      "box": [
+        2383,
+        171,
+        2446,
+        191
+      ],
+      "originalRGBSHA256": "eb50ec2865770f4b8d4ed6d3ed9bb6729c69f9677b9cd41636be680bc6e714eb",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 616,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 115
+    },
+    {
+      "parentRegionID": 73,
+      "box": [
+        2473,
+        171,
+        2536,
+        191
+      ],
+      "originalRGBSHA256": "80f35f9296b1be93cf89b402a4e1c54e11189c6cbcb5917d2648d775497d787f",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 579,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 116
+    },
+    {
+      "parentRegionID": 74,
+      "box": [
+        2563,
+        171,
+        2626,
+        191
+      ],
+      "originalRGBSHA256": "605f532ce171ae4eaf0632ca3babf06f24e8f9171dae0b3b1163de0c2c61784b",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 623,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 117
+    },
+    {
+      "parentRegionID": 75,
+      "box": [
+        2653,
+        171,
+        2715,
+        191
+      ],
+      "originalRGBSHA256": "93438178fd67d922cab8a528d82bf0c0802ced2a42829b49b1e82f69a8a23a20",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 614,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 118
+    },
+    {
+      "parentRegionID": 76,
+      "box": [
+        2743,
+        171,
+        2806,
+        191
+      ],
+      "originalRGBSHA256": "23725fc008cc44d2038d8a4d36c8f3f8cfc28ad1576ad27ff1edbd3ae32c8da3",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 610,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 119
+    },
+    {
+      "parentRegionID": 77,
+      "box": [
+        2833,
+        171,
+        2895,
+        191
+      ],
+      "originalRGBSHA256": "bd1da2a20c0da4eb1a771043623b8456c059cc1ab6d43a976a948c2c85f951c5",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 576,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 120
+    },
+    {
+      "parentRegionID": 78,
+      "box": [
+        2923,
+        171,
+        2986,
+        191
+      ],
+      "originalRGBSHA256": "98ca9be6868baa207a6b9ab2958130f88e80338dd1f21a76a2181acb4ee3b2da",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 605,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 121
+    },
+    {
+      "parentRegionID": 79,
+      "box": [
+        3013,
+        171,
+        3075,
+        191
+      ],
+      "originalRGBSHA256": "45adb1abf1bf91cd6e6147e1e2d6231000d2e106c22a0f53bbf33caca103c400",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 608,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 122
+    },
+    {
+      "parentRegionID": 80,
+      "box": [
+        3103,
+        171,
+        3166,
+        191
+      ],
+      "originalRGBSHA256": "a2562ed30abe3f2bf03e5aa5669fbc4851b413a27fe6113ffda30724f137fc7b",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 607,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 123
+    },
+    {
+      "parentRegionID": 81,
+      "box": [
+        3193,
+        171,
+        3256,
+        191
+      ],
+      "originalRGBSHA256": "d73d727be6907bc291e1ea60ffe7decd54d5e931548243e6b6ffcb407f18168d",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 605,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 124
+    },
+    {
+      "parentRegionID": 82,
+      "box": [
+        3283,
+        171,
+        3346,
+        191
+      ],
+      "originalRGBSHA256": "04db8db63cbb45616c1f5fde225d38f58427d033624776857f8ad39d7481d5e2",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 619,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 125
+    },
+    {
+      "parentRegionID": 83,
+      "box": [
+        3373,
+        171,
+        3436,
+        191
+      ],
+      "originalRGBSHA256": "068ac623afec5f4e6bc15717a7ee4a8289bc59528c585100a49b973e43786fd4",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 582,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 126
+    },
+    {
+      "parentRegionID": 84,
+      "box": [
+        3463,
+        171,
+        3526,
+        191
+      ],
+      "originalRGBSHA256": "7f970253f3640297461b7dfa5cd55f865cee3f618e1ed9dae2ac5a75cd29fb66",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 626,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 127
+    },
+    {
+      "parentRegionID": 85,
+      "box": [
+        3553,
+        171,
+        3615,
+        191
+      ],
+      "originalRGBSHA256": "5c57107e40bc8abc2b8b34b06da2b19021858f5ce884b6188f1fd3331e6ea7ea",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 617,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 128
+    },
+    {
+      "parentRegionID": 86,
+      "box": [
+        3643,
+        171,
+        3706,
+        191
+      ],
+      "originalRGBSHA256": "d0dc870c75437b900cb9938707b3d489f1be12ee58225d5388968eb6fe2cb620",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 609,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 129
+    },
+    {
+      "parentRegionID": 47,
+      "box": [
+        133,
+        203,
+        195,
+        223
+      ],
+      "originalRGBSHA256": "0012232cdec00b609c90bb27627b59981664f74466eaa3fc816ddc9796c4835f",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 606,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 130
+    },
+    {
+      "parentRegionID": 48,
+      "box": [
+        223,
+        203,
+        286,
+        223
+      ],
+      "originalRGBSHA256": "84666f7ebf367a07b692d97397d1c1e3499f3667d68fa11e6ebadba9303993e9",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 635,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 131
+    },
+    {
+      "parentRegionID": 49,
+      "box": [
+        313,
+        203,
+        375,
+        223
+      ],
+      "originalRGBSHA256": "c696a98d5e170d8a3601b8efcc7817d97760902e2f55662e76cebe990f9af133",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 638,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 132
+    },
+    {
+      "parentRegionID": 50,
+      "box": [
+        403,
+        203,
+        466,
+        223
+      ],
+      "originalRGBSHA256": "781eb56936bed68cc7a818e939280f061db40e95d018e72ec3ed53fad5bb5e0e",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 637,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 133
+    },
+    {
+      "parentRegionID": 51,
+      "box": [
+        493,
+        203,
+        556,
+        223
+      ],
+      "originalRGBSHA256": "bad3ccd2421c2d07ea755fe2b6a108160ef19fc175079821db44d05b97efe8e5",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 635,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 134
+    },
+    {
+      "parentRegionID": 52,
+      "box": [
+        583,
+        203,
+        646,
+        223
+      ],
+      "originalRGBSHA256": "bfda72202122f983f17e44b19d96257cac0e3617d742a39c9b2fc1a7ef2645c0",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 649,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 135
+    },
+    {
+      "parentRegionID": 53,
+      "box": [
+        673,
+        203,
+        736,
+        223
+      ],
+      "originalRGBSHA256": "07fbc7e4186011e31f55b8ca052b79ec617af64e7ab922f7f6eb7620f5b435be",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 612,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 136
+    },
+    {
+      "parentRegionID": 54,
+      "box": [
+        763,
+        203,
+        826,
+        223
+      ],
+      "originalRGBSHA256": "92d512d9177e963e662b51f3c1ad30150d929b80a35f2ca0fddaf48fd05d2598",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 656,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 137
+    },
+    {
+      "parentRegionID": 55,
+      "box": [
+        853,
+        203,
+        915,
+        223
+      ],
+      "originalRGBSHA256": "1e79984f0313820d72289f51a9bd7b6e463be7405a1fe8dfb8e51a0ba206fbbf",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 647,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 138
+    },
+    {
+      "parentRegionID": 56,
+      "box": [
+        943,
+        203,
+        1006,
+        223
+      ],
+      "originalRGBSHA256": "a5672e32071dbe31cedfb1408213db3cfe45d6fb8daea12271b365bba4a5fc4d",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 606,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 139
+    },
+    {
+      "parentRegionID": 57,
+      "box": [
+        1033,
+        203,
+        1095,
+        223
+      ],
+      "originalRGBSHA256": "9a9c6fde7047cdf9d7ea76f08078b11db1404cd9ab8038be5f96617cdc0fdebe",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 572,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 140
+    },
+    {
+      "parentRegionID": 58,
+      "box": [
+        1123,
+        203,
+        1186,
+        223
+      ],
+      "originalRGBSHA256": "8af95ba8e380f110052a688e7ff45cf31dcefa30e18f202fc693833d67d75d2c",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 601,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 141
+    },
+    {
+      "parentRegionID": 59,
+      "box": [
+        1213,
+        203,
+        1275,
+        223
+      ],
+      "originalRGBSHA256": "5710c13c4d9e1e598e54ce880d13505b0b690b45bab93b86b87370fbf1b752c4",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 604,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 142
+    },
+    {
+      "parentRegionID": 60,
+      "box": [
+        1303,
+        203,
+        1366,
+        223
+      ],
+      "originalRGBSHA256": "ef811cef63c6b1135cb7df716991654a2ad6e761fd0dd00e27fe43d1dd998083",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 603,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 143
+    },
+    {
+      "parentRegionID": 61,
+      "box": [
+        1393,
+        203,
+        1456,
+        223
+      ],
+      "originalRGBSHA256": "acae672de3d25846daa4c1ea49b642484a645757915e1612117d485bf1c38854",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 601,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 144
+    },
+    {
+      "parentRegionID": 62,
+      "box": [
+        1483,
+        203,
+        1546,
+        223
+      ],
+      "originalRGBSHA256": "3aff221e70b0f222db1c3d48b2af70cf0148b0f4800da7dfef525dd732d42b51",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 615,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 145
+    },
+    {
+      "parentRegionID": 63,
+      "box": [
+        1573,
+        203,
+        1636,
+        223
+      ],
+      "originalRGBSHA256": "afb29557c140d66e6526a370c1a0278fbee5a909ded9a71af891114e942d3f3c",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 578,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 146
+    },
+    {
+      "parentRegionID": 64,
+      "box": [
+        1663,
+        203,
+        1726,
+        223
+      ],
+      "originalRGBSHA256": "920684bca461e94c2fe8e31097223fc9b93541c8e27a90a81b9b0df833cbbb2e",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 622,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 147
+    },
+    {
+      "parentRegionID": 65,
+      "box": [
+        1753,
+        203,
+        1815,
+        223
+      ],
+      "originalRGBSHA256": "58b82433a708c49b616bd3cf38754d988475f958ee8da0850107ad25cbfbc8ba",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 613,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 148
+    },
+    {
+      "parentRegionID": 66,
+      "box": [
+        1843,
+        203,
+        1906,
+        223
+      ],
+      "originalRGBSHA256": "f89861a5f1c39c5f7ac19b961f6de2e88608d52ee6ff21267048fbc140257e78",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 635,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 149
+    },
+    {
+      "parentRegionID": 67,
+      "box": [
+        1933,
+        203,
+        1995,
+        223
+      ],
+      "originalRGBSHA256": "d5437c64124a3d054e5b5982a4dfcd046c732d499192683e71c6c948a0c18a38",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 601,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 150
+    },
+    {
+      "parentRegionID": 68,
+      "box": [
+        2023,
+        203,
+        2086,
+        223
+      ],
+      "originalRGBSHA256": "2bdfd4c16c8415135001013f3d14299965c163c51b2222e271d7a4b10a974885",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 630,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 151
+    },
+    {
+      "parentRegionID": 69,
+      "box": [
+        2113,
+        203,
+        2175,
+        223
+      ],
+      "originalRGBSHA256": "403934a3201763999cff55a44b75cd094f2f62b00c6e0566958fdee9c1a0e160",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 633,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 152
+    },
+    {
+      "parentRegionID": 70,
+      "box": [
+        2203,
+        203,
+        2266,
+        223
+      ],
+      "originalRGBSHA256": "568f4c021d4f4f324e99ba2a9b6727ff1c15de103734a99d1e37cb44e073d839",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 632,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 153
+    },
+    {
+      "parentRegionID": 71,
+      "box": [
+        2293,
+        203,
+        2356,
+        223
+      ],
+      "originalRGBSHA256": "0560131ecfe28d5382f9aeb0b0ab1e5df0a4039291d7abe2a1c1760222d2ce60",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 630,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 154
+    },
+    {
+      "parentRegionID": 72,
+      "box": [
+        2383,
+        203,
+        2446,
+        223
+      ],
+      "originalRGBSHA256": "22496cc6292bf677f074ae8051acf74cf4d4754e811043b940dd777ae18882c4",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 644,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 155
+    },
+    {
+      "parentRegionID": 73,
+      "box": [
+        2473,
+        203,
+        2536,
+        223
+      ],
+      "originalRGBSHA256": "9a778b8616a05dc9a4e3296ea27043fbb0389aec372e5bee4de6cfbdaabe9a4c",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 607,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 156
+    },
+    {
+      "parentRegionID": 74,
+      "box": [
+        2563,
+        203,
+        2626,
+        223
+      ],
+      "originalRGBSHA256": "14556b7ee9f87c8de0027de70a18f11ca83cca7b79633adb94ae9a00660077f5",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 651,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 157
+    },
+    {
+      "parentRegionID": 75,
+      "box": [
+        2653,
+        203,
+        2715,
+        223
+      ],
+      "originalRGBSHA256": "33214ae0f057de1dd60fdb104790aa06fdf7d785ab303fb58dc13bb7a20898bb",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 642,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 158
+    },
+    {
+      "parentRegionID": 76,
+      "box": [
+        2743,
+        203,
+        2806,
+        223
+      ],
+      "originalRGBSHA256": "90f02fc0f88b68a6880d5cafc551bcdd0749c5818197edb1b55905483ff978a4",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 638,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 159
+    },
+    {
+      "parentRegionID": 77,
+      "box": [
+        2833,
+        203,
+        2895,
+        223
+      ],
+      "originalRGBSHA256": "c20e95ee646c9d4678742702555496318bc8c440dc5db9b5f07469a8f6fc9962",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 604,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 160
+    },
+    {
+      "parentRegionID": 78,
+      "box": [
+        2923,
+        203,
+        2986,
+        223
+      ],
+      "originalRGBSHA256": "bfadc92100c0825149542a2f2eba389bff37314b47f456d1dd7f163436f84050",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 633,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 161
+    },
+    {
+      "parentRegionID": 79,
+      "box": [
+        3013,
+        203,
+        3075,
+        223
+      ],
+      "originalRGBSHA256": "942200684ebf3796768bf7d3af982eabcb54a888e18ec45cccdce134098aff41",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 636,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 162
+    },
+    {
+      "parentRegionID": 80,
+      "box": [
+        3103,
+        203,
+        3166,
+        223
+      ],
+      "originalRGBSHA256": "1b14bac8aad7a54b45c0f25ceb6ec5497492a664ae7c573a9a907f48d5d52658",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 635,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 163
+    },
+    {
+      "parentRegionID": 81,
+      "box": [
+        3193,
+        203,
+        3256,
+        223
+      ],
+      "originalRGBSHA256": "2e920b81072b3107195d6f18b82a3c4edbc5057a72bafb59c7b8d85ad00d2ddb",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 633,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 164
+    },
+    {
+      "parentRegionID": 82,
+      "box": [
+        3283,
+        203,
+        3346,
+        223
+      ],
+      "originalRGBSHA256": "b3c5ef450e4b584f6eb2710aaa52c745312ec3c135557500c85d621c630a0206",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 647,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 165
+    },
+    {
+      "parentRegionID": 83,
+      "box": [
+        3373,
+        203,
+        3436,
+        223
+      ],
+      "originalRGBSHA256": "b9e688c0b117f29e32f6049d279adf78c7b1d33e5168f7498116c16dc83db4fb",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 610,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 166
+    },
+    {
+      "parentRegionID": 84,
+      "box": [
+        3463,
+        203,
+        3526,
+        223
+      ],
+      "originalRGBSHA256": "2fc3470ad099aad6fd7958ef5a5e7745f8e83768cd3e7030829eee4ef799550e",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 654,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 167
+    },
+    {
+      "parentRegionID": 85,
+      "box": [
+        3553,
+        203,
+        3615,
+        223
+      ],
+      "originalRGBSHA256": "a6891e398b7d759e07e5e1f207c99a8fa2976b60e68d9662d0c54a703c6adae1",
+      "shape": [
+        20,
+        62,
+        3
+      ],
+      "nonwhitePixels": 645,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 168
+    },
+    {
+      "parentRegionID": 86,
+      "box": [
+        3643,
+        203,
+        3706,
+        223
+      ],
+      "originalRGBSHA256": "d14b55b30e424f9673396ba08e1b8d885c76058840c8524a1333b1bbd83f3eae",
+      "shape": [
+        20,
+        63,
+        3
+      ],
+      "nonwhitePixels": 637,
+      "geometryScope": "Exact original pixel support rectangle of contiguous occupied row-run; NOT predicted character geometry or asserted semantic line/role",
+      "id": 169
+    }
+  ],
+  "originalNonRuleInkPixels": 81752,
+  "uniquelyOwnedOriginalPixels": 81752,
+  "completeOriginalPixelPlanningOwnership": true,
+  "scope": "Disconnected stroke/dot fragments remain separate ROI; no implied3rows/role binding/EMPTY or native completeness. Current Strict/Builder must validate any interpretation.",
+  "originalPNG": "3bb95ebcce616cf24c6b4c431f6fe9b790491e5d22085f74e4430cfd5871b946"
+}

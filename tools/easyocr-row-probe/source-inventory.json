@@ -1,0 +1,279 @@
+{
+  "revision": "363afb184047ce452e436f4224f3098422df872e",
+  "paths": [
+    {
+      "path": "LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "gitBlobSHA": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+    },
+    {
+      "path": "easyocr/DBNet/DBNet.py",
+      "bytes": 28450,
+      "sha256": "14c9ac1813de16ea3a9ffb37bc93b1a8272e19c5804144dbaded1f592e5e68bb",
+      "gitBlobSHA": "d08bdd93fe8f4abcf4cd99acae4f6cf33815a89d"
+    },
+    {
+      "path": "easyocr/DBNet/assets/ops/dcn/__init__.py",
+      "bytes": 656,
+      "sha256": "f23444d26efff9139289fc0e92651b055336872b5833c90a6fdd058a11970243",
+      "gitBlobSHA": "165e63725354de429a448d866f665cccca991916"
+    },
+    {
+      "path": "easyocr/DBNet/assets/ops/dcn/functions/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gitBlobSHA": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "easyocr/DBNet/assets/ops/dcn/functions/deform_conv.py",
+      "bytes": 11869,
+      "sha256": "f2c9ed212032f96d63d90c8977cf15489481fc09cb5838c22142c8cadfcf24a8",
+      "gitBlobSHA": "84db861a824223d44128f35b1a408c240bbf5e3a"
+    },
+    {
+      "path": "easyocr/DBNet/assets/ops/dcn/functions/deform_pool.py",
+      "bytes": 5953,
+      "sha256": "87c113a586fc694ec646aadf170b9fa6e260e8209cbc5ae81b9a9cb586b12d00",
+      "gitBlobSHA": "b4c9943cbc10212f1db23910dcafbd2a2d1b7435"
+    },
+    {
+      "path": "easyocr/DBNet/assets/ops/dcn/modules/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gitBlobSHA": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "easyocr/DBNet/assets/ops/dcn/modules/deform_conv.py",
+      "bytes": 5198,
+      "sha256": "cb25af3798a8db100b86b9c3abb9ac44ddeda3c8c025afd01a359f549f23c957",
+      "gitBlobSHA": "50d15d1513f0ebc145982e04958f76a5f1ca1343"
+    },
+    {
+      "path": "easyocr/DBNet/assets/ops/dcn/modules/deform_pool.py",
+      "bytes": 7058,
+      "sha256": "99795d4a4561f27d3a3f8a4a2764041338398033927f069f315f7bc83634f1f4",
+      "gitBlobSHA": "5e0196753ee1b427263bc397e0ae842af6a9938b"
+    },
+    {
+      "path": "easyocr/DBNet/assets/ops/dcn/setup.py",
+      "bytes": 933,
+      "sha256": "2ab5a2363c5a7340577b797e4bea13b2dcda0bee2508e79c8b49f85be437fe18",
+      "gitBlobSHA": "bd19888b7218bab6a947e4f413db1baf0e1d25e7"
+    },
+    {
+      "path": "easyocr/DBNet/backbones/__init__.py",
+      "bytes": 165,
+      "sha256": "464800c15bf5a80dd4914c2250d799dad4d919f903571563e3962e7803756994",
+      "gitBlobSHA": "ea8c226d195b18dfae0c819b519c8cd2b2c48cab"
+    },
+    {
+      "path": "easyocr/DBNet/backbones/mobilenetv3.py",
+      "bytes": 8930,
+      "sha256": "7e0836fe6216c1495fd0ef38d6d9d9bf10732c08b8b224510a609fc9615c0ece",
+      "gitBlobSHA": "0ed056be7688a26c0e29b1221daff38e6ff0ad64"
+    },
+    {
+      "path": "easyocr/DBNet/backbones/resnet.py",
+      "bytes": 12428,
+      "sha256": "ccf41eb970113a9c687b662a2edf93132ca75a8b207d31f9b8038db75e799bf3",
+      "gitBlobSHA": "f48c7bcfdc6f7bf940246fba9fdb09182778c45c"
+    },
+    {
+      "path": "easyocr/DBNet/decoders/__init__.py",
+      "bytes": 251,
+      "sha256": "22e6d2fedb5dbc2d7475198cb25743cab138f063b48c67c387fa7eee4375d461",
+      "gitBlobSHA": "3e06ab723ffae9dd944a898b9bdef82c39fd7170"
+    },
+    {
+      "path": "easyocr/DBNet/decoders/balance_cross_entropy_loss.py",
+      "bytes": 1954,
+      "sha256": "74788de21696a440961ec7f56137a068c93c2ef178f8fc95fc49e2694d76f595",
+      "gitBlobSHA": "44c7bf781d15c60d928cf60b55cda0e24ec21a32"
+    },
+    {
+      "path": "easyocr/DBNet/decoders/dice_loss.py",
+      "bytes": 6965,
+      "sha256": "b6297feccbfad8da3f66427727584db5d4025ce664ac20c86d9b5b0b839bd0dd",
+      "gitBlobSHA": "e3681dbb28cfd1f342d173e2aea8f189942bd19c"
+    },
+    {
+      "path": "easyocr/DBNet/decoders/feature_attention.py",
+      "bytes": 5925,
+      "sha256": "551cfebc406edee158723efd8de115874047bf3c9d817abf215258064ae4b121",
+      "gitBlobSHA": "1c737cc4708c1ee8c6a385c6344ec53199e7d3e8"
+    },
+    {
+      "path": "easyocr/DBNet/decoders/l1_loss.py",
+      "bytes": 1363,
+      "sha256": "cb26ca28641ad8d44859e63cef1adfec6357ece97176ca8809ce20a16692b599",
+      "gitBlobSHA": "c272700b1c8efdfef3bf3e461566ccf6ab95b895"
+    },
+    {
+      "path": "easyocr/DBNet/decoders/pss_loss.py",
+      "bytes": 4582,
+      "sha256": "47af12701c3c4df69d644d15369293b77826b35a0ca78ac3fbcf2fc82d0599ff",
+      "gitBlobSHA": "734a6bf64dd2c2af8e90f0554b3cbe0087e16d8d"
+    },
+    {
+      "path": "easyocr/DBNet/decoders/seg_detector.py",
+      "bytes": 6112,
+      "sha256": "79362ad6a559c50cf11d7cc08e6753b21847e35af76e1014bfcb52f0d5592430",
+      "gitBlobSHA": "54290a7c666c15c210150332664595fd7a663c55"
+    },
+    {
+      "path": "easyocr/DBNet/decoders/seg_detector_asf.py",
+      "bytes": 7048,
+      "sha256": "eff5837d6d800154a81e969765ebabee9d1fe8c4d79de82a2d1e69d8beb146b6",
+      "gitBlobSHA": "d0d937bd5fb5b6bb12b823c6bd556d3a245eeebd"
+    },
+    {
+      "path": "easyocr/DBNet/decoders/seg_detector_loss.py",
+      "bytes": 9529,
+      "sha256": "fdf67bc503eb564d45010e881c7a04260841148e9ce6d87b36b6b46889f32055",
+      "gitBlobSHA": "3fa32c3a6cc5f62ceca1c0689bfeed609363b71e"
+    },
+    {
+      "path": "easyocr/DBNet/decoders/simple_detection.py",
+      "bytes": 6383,
+      "sha256": "aadd581e72dfd94792f30ff80a511d45537739a6920380d2d002dd42992c5b03",
+      "gitBlobSHA": "70af6429cdc70114b1d23ef34bd8a64951affddb"
+    },
+    {
+      "path": "easyocr/DBNet/model/constructor.py",
+      "bytes": 3390,
+      "sha256": "7acaa791fcd2095b92b98a6562ee3bca3d6b1eccb2ec143b53ddc705023ab173",
+      "gitBlobSHA": "c355df0f079efc259fde860a7561292779ba079c"
+    },
+    {
+      "path": "easyocr/DBNet/model/detector.py",
+      "bytes": 1493,
+      "sha256": "e618c4683abbd4ce6125015a1890f876035da86e13e9d8d919fdcf423e0491cb",
+      "gitBlobSHA": "233200ea6552b424a4655e4f05973049fd57cf1b"
+    },
+    {
+      "path": "easyocr/DBNet/model/model.py",
+      "bytes": 2450,
+      "sha256": "87eb73828efabb82505a06486c16ce92ed0cec46727963e38bc44f11b6a58104",
+      "gitBlobSHA": "6c96a975fefc9893caaef344b3837a7d52fa65f8"
+    },
+    {
+      "path": "easyocr/__init__.py",
+      "bytes": 51,
+      "sha256": "99994d47e10e30fdc3bad4c4c94b8bce4a1417f10c76d24b17d54f3dee1bfb6a",
+      "gitBlobSHA": "290e614236a1bf690d7540c9d2821980f08ab030"
+    },
+    {
+      "path": "easyocr/cli.py",
+      "bytes": 8659,
+      "sha256": "cbd275db64cfd1ef222db5c0d22836393e672b9698ca070ab48053362ca20b73",
+      "gitBlobSHA": "e8520b8b1de5add6c048b9c7ce2a801432ec6cca"
+    },
+    {
+      "path": "easyocr/config.py",
+      "bytes": 91824,
+      "sha256": "9c36d6c674fe32b05bda27192211ff6b63bf22f00b8439d40d33b35e3e2c1f8d",
+      "gitBlobSHA": "a46d286a3a3bc48dc30c6198cffc3ff12d964d86"
+    },
+    {
+      "path": "easyocr/craft.py",
+      "bytes": 2590,
+      "sha256": "68a112dbc24db2db1b33f8aac80b9c04c0d6036dab887ca369d8c33f0f2621e8",
+      "gitBlobSHA": "074d7e4b467faad40d41b496433f31983e8b8be3"
+    },
+    {
+      "path": "easyocr/craft_utils.py",
+      "bytes": 9583,
+      "sha256": "5a28f1e248bb43f409973cd768bbba6d5c378add8d78155c5059eb885fa6248c",
+      "gitBlobSHA": "c319f8e715eee2b74aadb6b8f1b7daeaa1b9cd06"
+    },
+    {
+      "path": "easyocr/detection.py",
+      "bytes": 4222,
+      "sha256": "a8f99a1466534609cd8cbf62a607c026991e45bd8cf9a6fe968ffa30a2d1425a",
+      "gitBlobSHA": "e2964b71b45b620c94aaa83364bc9fc95afe899e"
+    },
+    {
+      "path": "easyocr/detection_db.py",
+      "bytes": 8772,
+      "sha256": "e54cab65beceba752d3800770a69b7521d792132325dec66861a38eff8e79b86",
+      "gitBlobSHA": "0a2978d637a2ccd45871f1c8dea5f4306a11497f"
+    },
+    {
+      "path": "easyocr/easyocr.py",
+      "bytes": 31891,
+      "sha256": "78c6c5475df4e1ac1370f07804c59e61e3bef4e35ba168415782b1fec7a0a201",
+      "gitBlobSHA": "c08fe0388ddcfdd7d027ad68a16fb9079b5e9267"
+    },
+    {
+      "path": "easyocr/export.py",
+      "bytes": 5682,
+      "sha256": "ee96c66fe23317b19d3e031d9b9ee09224634e986a9d826f1a7e3d7ee5dc019f",
+      "gitBlobSHA": "937253ab4aa709250487dbca9cf278de7b0031f5"
+    },
+    {
+      "path": "easyocr/imgproc.py",
+      "bytes": 2195,
+      "sha256": "a3cb8aa880fa11c19b01a63e160d8c229c76e89591e959f3fd65a5a08df43d12",
+      "gitBlobSHA": "ab09d6f81a9c8c490c0a981483ef38da7c1c4fd5"
+    },
+    {
+      "path": "easyocr/model/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gitBlobSHA": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "easyocr/model/model.py",
+      "bytes": 1462,
+      "sha256": "954753028dc8e380cdcc14bfd7ef1e31be082315e4d856e846d6f0db2a4e3194",
+      "gitBlobSHA": "ed3f3fb964c185637a210c05ec5fb7d0aa7c9b3f"
+    },
+    {
+      "path": "easyocr/model/modules.py",
+      "bytes": 10821,
+      "sha256": "6e22171d7b63ca993a4db4070c0e1b69498e700f4eb0cab5ae290115e7b55a4d",
+      "gitBlobSHA": "0850b0cd89c4bea23e716bf89634f0815d541537"
+    },
+    {
+      "path": "easyocr/model/vgg_model.py",
+      "bytes": 1364,
+      "sha256": "946c718a6a907a1c5ff26750fd5b29ad5a3b7eb850253d94a3cbd7e11ffbb137",
+      "gitBlobSHA": "b0f2ae1c655b9f6969fabef8afd8c8aae9c78e5a"
+    },
+    {
+      "path": "easyocr/recognition.py",
+      "bytes": 9353,
+      "sha256": "636a1be53c78848ca5f8ecbae13dddc1df678cb22b63248e59771b949a96fb16",
+      "gitBlobSHA": "530ef9517e25423ac0de4652cec51cd6c21650c1"
+    },
+    {
+      "path": "easyocr/scripts/compile_dbnet_dcn.py",
+      "bytes": 3866,
+      "sha256": "fcfa4d3d49fc1d3373100dab89edd2577aeb33f30d48b5761800f20c6fbe2d58",
+      "gitBlobSHA": "f916016e42216d83a9f2aea2d0c8333d66ee2f2c"
+    },
+    {
+      "path": "easyocr/utils.py",
+      "bytes": 34062,
+      "sha256": "e3f985a2d17a9c1deca21693ae261adb77defca2c8066fab662c10905860f643",
+      "gitBlobSHA": "987baf2c9a65179e1c89250896919c0c4beb39e7"
+    },
+    {
+      "path": "easyocr/character/en_char.txt",
+      "bytes": 104,
+      "sha256": "14e42c3c8963dfd94146317bfc4e87059cae5ac7c4ce2a44a29b8a2f9f55de8e"
+    },
+    {
+      "path": "easyocr/character/ja_char.txt",
+      "bytes": 8400,
+      "sha256": "03c6ee6b0b3396c2b784efb84c752f15d1cfd29216ea28deb18bd7894b8e76e8"
+    }
+  ],
+  "noImagesOrModelWeights": true,
+  "optionalUnconsumedLexicons": {
+    "en": "omitted",
+    "ja": "omitted",
+    "scope": "Official converter catches missing optional dictionary files; only greedy CTC used. Full model charset, no lexical/digit whitelist; no wordbeamsearch. Lexical data is not consulted by decode_greedy."
+  }
+}
