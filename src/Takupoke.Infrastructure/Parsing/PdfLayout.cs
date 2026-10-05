@@ -115,6 +115,13 @@ public sealed class PdfGrid(PdfPageLayout page, CancellationToken token = defaul
     // intact native row, but row metadata alone cannot bridge independent cells.
     internal static IEnumerable<IReadOnlyList<PdfGlyph>> OcrHeaderRows(PdfPageLayout page,
         IReadOnlyList<PdfGlyph> candidates, Action<long> charge)
+        => OcrHeaderRowsWhere(page, candidates, charge, _ => true);
+
+    // Eligibility may only discard rows which cannot produce the caller's
+    // existing output. It is not evidence: selected rows retain every proof.
+    internal static IEnumerable<IReadOnlyList<PdfGlyph>> OcrHeaderRowsWhere(PdfPageLayout page,
+        IReadOnlyList<PdfGlyph> candidates, Action<long> charge,
+        Func<IReadOnlyList<PdfGlyph>, bool> eligible)
     {
         var selected = new HashSet<PdfGlyph>(candidates, ReferenceEqualityComparer.Instance);
         charge(page.Glyphs.Count + candidates.Count + page.Lines.Count);
@@ -135,6 +142,7 @@ public sealed class PdfGrid(PdfPageLayout page, CancellationToken token = defaul
                     && row[i].X >= row[i - 1].X + row[i - 1].Width;
             }
             if (!valid || row.Max(g => g.Y) >= row.Min(g => g.Y + g.Height)) continue;
+            if (!eligible(row)) continue;
             var left = row.Min(g => g.X); var right = row.Max(g => g.X + g.Width);
             var top = row.Min(g => g.Y); var bottom = row.Max(g => g.Y + g.Height);
             var conflict = false;

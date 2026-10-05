@@ -57,6 +57,27 @@ public static class RecoveryDocumentBuilder
         return names;
     }
     private const string HeaderPattern = @"[1-8]時限目|[1-8][・〜-][1-8]時限連続|\d{1,2}:\d{2}[~〜～]\d{1,2}:\d{2}|(?:令和\d{1,2}|\d{4})年度|前期|後期|試験返却時間割|定期試験時間割|試験時間割|通常時間割|授業時間割|時間割";
+    private const string OcrWholeLabelPattern = @"^(?:[月火水木金](?:曜(?:日)?)?|(?:(?:\d{4})年)?\d{1,2}月\d{1,2}日|(?:(?:\d{4})[-/])?\d{1,2}[-/]\d{1,2}|[1-5][_-](?:[1-3]|[A-Z]{2})|AI[_-][12]|[12]年)$";
+    private static string OcrPublicLabelPattern => "(?:" + HeaderPattern + ")[：:]?|(?:" + RecoveryRoleLabels.Pattern + ")[：:]";
+    private static bool CanEmitOcrLabel(IReadOnlyList<PdfGlyph> row, Action<long> charge)
+    {
+        var raw = string.Concat(row.Select(g => g.Text)); charge(row.Count + raw.Length);
+        if (Regex.IsMatch(PdfGrid.Key(raw), OcrWholeLabelPattern)) return true;
+        foreach (Match match in Regex.Matches(raw, OcrPublicLabelPattern))
+        {
+            // Use the same whole-atom boundaries as output extraction. A match
+            // inside one atom cannot acquire evidence by pre-screening it.
+            var offset = 0; var text = new System.Text.StringBuilder();
+            foreach (var glyph in row)
+            {
+                charge(1); var end = offset + glyph.Text.Length;
+                if (offset >= match.Index && end <= match.Index + match.Length) text.Append(glyph.Text);
+                offset = end;
+            }
+            if (text.Length > 0 && text.ToString() == match.Value) return true;
+        }
+        return false;
+    }
     private static IEnumerable<Label> Labels(IReadOnlyList<Atom> atoms, Work work)
     {
         foreach (var row in atoms.GroupBy(a => a.Page))
@@ -101,18 +122,19 @@ public static class RecoveryDocumentBuilder
             var pageAtoms = page.ToArray(); work.Step(pageAtoms.Length * 2L);
             var byGlyph = new Dictionary<PdfGlyph, Atom>(ReferenceEqualityComparer.Instance);
             foreach (var atom in pageAtoms) byGlyph.Add(atom.Glyph, atom);
-            foreach (var nativeRow in PdfGrid.OcrHeaderRows(pages[page.Key - 1], pageAtoms.Select(a => a.Glyph).ToArray(), work.Step))
+            foreach (var nativeRow in PdfGrid.OcrHeaderRowsWhere(pages[page.Key - 1], pageAtoms.Select(a => a.Glyph).ToArray(), work.Step,
+                row => CanEmitOcrLabel(row, work.Step)))
             {
                 var line = nativeRow.Select(g => byGlyph[g]).ToArray();
                 var raw = string.Concat(line.Select(a => a.Glyph.Text)); work.Step(raw.Length);
                 // Accept only complete existing day/class syntax; never infer
                 // a date or class from a substring or repair a native atom.
                 var key = PdfGrid.Key(raw);
-                if (Regex.IsMatch(key, @"^(?:[月火水木金](?:曜(?:日)?)?|(?:(?:\d{4})年)?\d{1,2}月\d{1,2}日|(?:(?:\d{4})[-/])?\d{1,2}[-/]\d{1,2}|[1-5][_-](?:[1-3]|[A-Z]{2})|AI[_-][12]|[12]年)$"))
+                if (Regex.IsMatch(key, OcrWholeLabelPattern))
                     yield return new(key, page.Key, Bounds(line), line.Select(a => a.Id).ToArray(), WholeOcrRow: true);
                 // Only the existing public header/role patterns, using whole
                 // original atoms. A native line is not an arbitrary label.
-                foreach (Match match in Regex.Matches(raw, "(?:" + HeaderPattern + ")[：:]?|(?:" + RecoveryRoleLabels.Pattern + ")[：:]"))
+                foreach (Match match in Regex.Matches(raw, OcrPublicLabelPattern))
                 {
                     var offset = 0; var selected = new List<Atom>();
                     foreach (var atom in line)
