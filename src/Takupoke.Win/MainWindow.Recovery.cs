@@ -35,8 +35,8 @@ public sealed partial class MainWindow
             return false;
         var snapshot = _model.Materials.GetValueOrDefault(kind);
         var session = snapshot?.ManualSession;
-        return snapshot?.AcquisitionAttempt?.Failure is null && session is not null &&
-            snapshot.Source?.Id == session.SourceId && snapshot.Source.Digest == session.Plan.Document.PdfHash &&
+        return snapshot is not null && snapshot.AcquisitionAttempt?.Failure is null && session is not null &&
+            snapshot.Source is { } source && source.Id == session.SourceId && source.Digest == session.Plan.Document.PdfHash &&
             _manualInput.IsBoundTo(RecoveryValidator.Fingerprint(session));
     }
     private void BuildManualRecovery(MaterialKind kind, RecoveryManualSession session)

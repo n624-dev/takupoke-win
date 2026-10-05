@@ -103,7 +103,7 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                                 for (var row = 0; row < h; row++)
                                 {
                                     token.ThrowIfCancellationRequested();
-                                    Buffer.BlockCopy(raster.Bgra, ((y + row) * raster.Width + x) * 4, crop, row * w * 4, w * 4);
+                                    System.Buffer.BlockCopy(raster.Bgra, ((y + row) * raster.Width + x) * 4, crop, row * w * 4, w * 4);
                                 }
                                 crops.Add(new(target.Target, target.Page, x, y, w, h, proof[target.Page - 1].RasterHash,
                                     crop, Convert.ToHexStringLower(SHA256.HashData(crop))));
