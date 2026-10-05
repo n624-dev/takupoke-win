@@ -1,0 +1,64 @@
+{
+  "scope": "Research source only; no production hook, OCR model invocation or embedded source binary",
+  "publishedSourceFiles": [
+    {
+      "path": "Controls.cs",
+      "bytes": 9828,
+      "sha256": "3286ec5c29a85ade989192974a0f1bab6c2488b08985cd09b7a73b80289c2ed8"
+    },
+    {
+      "path": "LosslessImage.cs",
+      "bytes": 9360,
+      "sha256": "6846e9c86fc17e8a7a1d9121f467c4525fe6c53801f4e5eb80d95be5e92a637d"
+    },
+    {
+      "path": "LosslessImageProbe.csproj",
+      "bytes": 405,
+      "sha256": "bed23fce2b050394e41d6ce3767d6a45e3548a27d43a5cef1f7e3722f61b4e75"
+    },
+    {
+      "path": "Program.cs",
+      "bytes": 748,
+      "sha256": "c26f86f5b6ce44e2444145237a5284098da507b8824628f9dac244cb6b760ccf"
+    },
+    {
+      "path": "RawClassicPdf.cs",
+      "bytes": 9057,
+      "sha256": "37f1ca8c028e36efb52d4c8648045a3d6c420f9d3d63d6b8d719aa3f7f7320f0"
+    }
+  ],
+  "exactFrozenExtractionSource": [
+    {
+      "path": "LosslessImage.cs",
+      "unchanged": true,
+      "sha256": "6846e9c86fc17e8a7a1d9121f467c4525fe6c53801f4e5eb80d95be5e92a637d"
+    },
+    {
+      "path": "RawClassicPdf.cs",
+      "unchanged": true,
+      "sha256": "37f1ca8c028e36efb52d4c8648045a3d6c420f9d3d63d6b8d719aa3f7f7320f0"
+    }
+  ],
+  "publicControls": {
+    "generatedInMemory": true,
+    "passed": 57,
+    "failed": 0,
+    "nativeOCRCalls": 0,
+    "sourceImagePDFFontModelBinaryCommitted": false
+  },
+  "optionalConsumedFictionalIdentityReceipt": {
+    "passedIncludingSynthetic": 58,
+    "pdfSHA256": "7ceb34d191dc48a5d6bc072e75898172cd20f356f6c9c312f558635d6a454323",
+    "RGBSHA256": "62f80f469cd0d36cb98ddc8ecebee71c94a278c2ee3c7e22336688f844e38fd9",
+    "sourceBinaryCommitted": false,
+    "freshness": "Consumed development input; no fresh quality claim"
+  },
+  "dependencies": {
+    "PdfPig": "0.1.16",
+    "SharpZipLib": "1.4.2"
+  },
+  "changesForStandalonePublicUse": [
+    "Controls knownPath becomes optional; all57 synthetic controls run with no external PDF",
+    "Program accepts --controls without an external PDF; extraction implementation unchanged"
+  ]
+}
