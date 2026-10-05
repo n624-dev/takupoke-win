@@ -95,6 +95,14 @@
       "path": "tools/original-pdf-roi-probe/test_runner.py",
       "bytes": 3767,
       "sha256": "85191c7c40e3480d461cc3a76de20b8746b7b946714c821cdd01d46235c6a08b"
+    },
+    {
+      "path": ".gitattributes",
+      "bytes": 649,
+      "sha256": "e2bd39a3814f96744a8dc9ca12c2ffff3b1cf68a6b93bebc3a49c8219a10678a"
     }
-  ]
+  ],
+  "derivedFromSourceCommit": "f6b5aa981e4fb9e6405dd0faeca476edd318a576",
+  "derivedFromPacketSHA256": "716e07fa17ede29d0e0fc8e20328273865ab864fe29823c2420539e896490e4a",
+  "delta": "narrow exact LF checkout attributes only; no runtime/input/geometry/model changes"
 }

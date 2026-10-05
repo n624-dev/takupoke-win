@@ -15,3 +15,8 @@ tools/recovery-prompt-contracts/prompts/*.txt text eol=lf
 tools/independent-wide-timetable/**/*.py text eol=lf
 tools/independent-wide-timetable/*.txt text eol=lf
 tools/independent-vector-raster-probe/**/*.py text eol=lf
+
+# Exact research byte pins must survive a Windows checkout.
+/.gitattributes text eol=lf
+tools/original-pdf-roi-probe/*.py text eol=lf
+tools/raster-acquisition-native-probe/fixtures/assemble.py text eol=lf
