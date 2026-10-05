@@ -71,8 +71,8 @@
     },
     {
       "path": "guard.py",
-      "bytes": 9061,
-      "sha256": "7f84a7d1c57692a03ade11d04c66411a7ba63ba7fdecf13aa5b0690bb00f8042"
+      "bytes": 11360,
+      "sha256": "be0f3ea25ff7030d47b335f7998d01e02a3d2e0642e2be5a3c81f508ccb5c771"
     },
     {
       "path": "inputs.json",
@@ -106,8 +106,8 @@
     },
     {
       "path": "recipe.json",
-      "bytes": 7558,
-      "sha256": "100b9e41de1fe333975ac6465140ac6fc0b31b84e5328f5707d9dd276baf6b57"
+      "bytes": 8208,
+      "sha256": "4be58c1ab70c28016fdd4abea292fb134ef05eee73c1dd07fd6b563b06888e7f"
     },
     {
       "path": "run_once.py",
@@ -130,9 +130,14 @@
       "sha256": "a372960beba29c090eb3829fc8d970925583e50802a3ce8581140a3175cad9c0"
     },
     {
+      "path": "test_namespace.py",
+      "bytes": 7662,
+      "sha256": "94db34edbd59c87379783c376e3482f7b9696ca9dc12f0f6ad400a629a89df6a"
+    },
+    {
       "path": "test_portable.py",
-      "bytes": 21546,
-      "sha256": "6c306287d131dae2a943868bfe4ea9495928d0633bde66a7ba5f0318be263fd2"
+      "bytes": 21545,
+      "sha256": "65b4c3a189713d78fbae1ed40dcb4fd0cef1ab72b73f6528970cbf6d7a173bbb"
     },
     {
       "path": "test_preparation.py",
@@ -178,6 +183,6 @@
   "productionAdoption": false,
   "wholeDocumentFormalSlotsUNASSESSED": 1270,
   "wholeDocumentFormalClocksUNASSESSED": 70,
-  "parentPortablePacketSHA256": "e3c7ac3bd340d0a69007d6fb5909bb7f045831a46fb58c4c7676697723f10ed5",
-  "version": "addendum-first-attempt-push-root-memory-capacity-exit-rawlogs"
+  "parentPortablePacketSHA256": "b4467fcf3681bef0447dedbc8c378fdae40975c33633101749179379accaad1e",
+  "version": "namespace-permission-only-fixed-readonly-metadata-and-zero-only-disk-request"
 }

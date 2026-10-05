@@ -55,7 +55,7 @@ class Portable(unittest.TestCase):
     def test_full_vm_proof_requires_every_identity_flag(self):
         def text(path):
             return '1 0 0:1 / /sys/fs/cgroup rw - cgroup2 cgroup rw\n' if str(path).endswith('mountinfo') else 'systemd\n'
-        with patch.dict(guard.os.environ,{'GITHUB_ACTIONS':'true','RUNNER_ENVIRONMENT':'github-hosted'}),patch.object(guard.Path,'read_text',text),patch.object(guard.os,'readlink',return_value='pid:[same]'),patch.object(guard.subprocess,'run',return_value=SimpleNamespace(returncode=1,stdout='none\n')):
+        with patch.dict(guard.os.environ,{'GITHUB_ACTIONS':'true','RUNNER_ENVIRONMENT':'github-hosted'}),patch.object(guard.Path,'read_text',text),patch.object(guard.os,'readlink',return_value='pid:[123]'),patch.object(guard.subprocess,'run',return_value=SimpleNamespace(returncode=1,stdout='none\n')):
             self.assertTrue(guard.full_vm_proof()['verified'])
             with patch.dict(guard.os.environ,{'RUNNER_ENVIRONMENT':'self-hosted'}):self.assertFalse(guard.full_vm_proof()['verified'])
 

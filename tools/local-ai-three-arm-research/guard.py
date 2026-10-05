@@ -2,6 +2,8 @@
 import json
 import os
 import subprocess
+import errno
+import re
 from pathlib import Path
 from protocol import digest
 
@@ -63,9 +65,18 @@ def read_cgroups():
     return records
 
 def resources(root, recipe, disk_free=None, cgroup_records=None):
+    required_memory=recipe.get('minimumAvailableMemoryBytes')
+    if type(required_memory) is not int or required_memory<0:raise RuntimeError('MEMORY_REQUIREMENT_INVALID')
     if disk_free is None:
         stat = os.statvfs(root)
         disk_free = stat.f_bavail * stat.f_frsize
+    if required_memory==0:
+        # Existing after-load monitor/call/report paths explicitly request only
+        # disk reserve. Give NO memory credit and do not repeat sudo after NNP.
+        if disk_free<recipe['diskReserveBytes']+recipe['workingAllowanceBytes']:
+            raise RuntimeError('RESOURCE_PRECONDITION_DISK; no dependent execution')
+        return {'availableDiskBytes':disk_free,'availableCgroupMemoryBudgetBytes':None,'cgroups':None,
+                'memoryAssessment':'NOT_REQUESTED','hostMemAvailableUsed':False,'reclaimPolicy':'NONE_DISK_ONLY_NO_MEMORY_CREDIT'}
     records=read_cgroups() if cgroup_records is None else cgroup_records
     if not records:raise RuntimeError('CGROUP_MEMORY_NOT_OBSERVED')
     if any(k not in r or (r[k] is not None and (type(r[k]) is not int or r[k]<0)) for r in records for k in ('max','high')):
@@ -86,7 +97,7 @@ def resources(root, recipe, disk_free=None, cgroup_records=None):
         host_used=True
     if disk_free < recipe['diskReserveBytes'] + recipe['workingAllowanceBytes']:
         raise RuntimeError('RESOURCE_PRECONDITION_DISK; no dependent execution')
-    if available_memory < recipe['minimumAvailableMemoryBytes']:
+    if available_memory < required_memory:
         raise RuntimeError('RESOURCE_PRECONDITION_MEMORY; no dependent execution')
     return {'availableDiskBytes': disk_free, 'availableCgroupMemoryBudgetBytes': available_memory, 'cgroups': cgroups,
             'hostMemAvailableUsed': host_used, 'reclaimPolicy': 'finitecgroups:clean-unmapped-inactive-disk-file-only; unboundedfullyverifiedVM:hostMemAvailable'}
@@ -96,9 +107,28 @@ def full_vm_proof():
     check=subprocess.run(['systemd-detect-virt','--container'],capture_output=True,text=True,timeout=5)
     flags={'githubActions':os.environ.get('GITHUB_ACTIONS')=='true','githubHosted':os.environ.get('RUNNER_ENVIRONMENT')=='github-hosted',
            'cgroupMountFullRoot':mount_roots==['/'],'PID1Systemd':Path('/proc/1/comm').read_text().strip()=='systemd',
-           'samePIDNamespaceAsInit':os.readlink('/proc/1/ns/pid')==os.readlink('/proc/self/ns/pid'),
            'noContainerDetected':check.returncode==1 and check.stdout.strip()=='none'}
-    return {'verified':all(flags.values()),'flags':flags,'containerCheckExit':check.returncode}
+    # A namespace permission fallback cannot compensate for any other absent VM
+    # proof. Neither missing files nor a container can reach the fixed command.
+    if not all(flags.values()):
+        return {'verified':False,'flags':{**flags,'samePIDNamespaceAsInit':False},'containerCheckExit':check.returncode,'namespaceRead':'NOT_ATTEMPTED_OTHER_VM_FLAG_FAILED'}
+    self_ns=os.readlink('/proc/self/ns/pid')
+    valid=lambda value:type(value) is str and len(value)<=96 and re.fullmatch(r'pid:\[[1-9][0-9]*\]',value) is not None
+    if not valid(self_ns):raise RuntimeError('UNPRIVILEGED_SELF_PID_NAMESPACE_INVALID')
+    method='UNPRIVILEGED_DIRECT_READLINK'
+    try:init_ns=os.readlink('/proc/1/ns/pid')
+    except PermissionError as exc:
+        if exc.errno not in (errno.EACCES,errno.EPERM):raise
+        # Exact readonly namespace metadata command; no generic sudo, no model
+        # or controller runs elevated, and no input or alternate path is passed.
+        result=subprocess.run(['/usr/bin/sudo','-n','/usr/bin/readlink','/proc/1/ns/pid'],
+                              stdin=subprocess.DEVNULL,close_fds=True,capture_output=True,text=True,timeout=5)
+        if result.returncode!=0:raise RuntimeError('PID1_NAMESPACE_PRIVILEGED_METADATA_READ_UNAVAILABLE')
+        init_ns=result.stdout.strip();method='FIXED_READONLY_SUDO_READLINK_AFTER_EACCES_OR_EPERM'
+    if not valid(init_ns):raise RuntimeError('PID1_PID_NAMESPACE_INVALID')
+    flags['samePIDNamespaceAsInit']=self_ns==init_ns
+    return {'verified':all(flags.values()),'flags':flags,'containerCheckExit':check.returncode,
+            'namespaceRead':{'method':method,'unprivilegedSelfNamespace':self_ns,'observedPID1Namespace':init_ns,'fallbackDeadlineSeconds':5}}
 
 def bind_runtime(root,recipe):
     root=Path(root);binding=json.loads((root/'runtime-binding.json').read_text())
