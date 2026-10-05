@@ -8,6 +8,7 @@ from protocol import SYSTEM_MESSAGE,context_capacity,response_capacity_failure,d
 from guard import resources,verify_packet,bind_runtime
 from request_contract import execute_plan,decode
 from reference_contract import pinned_reference
+from native_grammar import adapt
 ROOT=Path(__file__).resolve().parent
 PROVENANCE_KEYS=('retainedInputSHA256','retainedBlindResponsesSHA256','retainedBlindMeaning')
 def core_plan(plan):return {k:v for k,v in plan.items() if k not in PROVENANCE_KEYS}
@@ -33,13 +34,14 @@ def main():
         emit('callStarted',call=spec['call'],taskID=spec['taskID'],stage=spec['stage'],profile=spec['profile'])
         begin=time.monotonic();row={k:spec[k] for k in ('profile','stage','taskID','call','promptSHA256','nativeSchemaCompactSHA256')}
         row.update(raw=None,completeResponse=None,candidate=None,error=None)
+        native_schema,transport=adapt(spec['schema']);row.update(transport)
         # Save exact sent request/schema independently; no inferred prompt reconstruction.
-        with (ROOT/'worker-events.jsonl').open('a') as stream:stream.write(json.dumps({'event':'requestSpecification','monotonic':time.monotonic(),'call':spec['call'],'profile':spec['profile'],'taskID':spec['taskID'],'stage':spec['stage'],'prompt':spec['prompt'],'schema':spec['schema']},ensure_ascii=False)+'\n')
+        with (ROOT/'worker-events.jsonl').open('a') as stream:stream.write(json.dumps({'event':'requestSpecification','monotonic':time.monotonic(),'call':spec['call'],'profile':spec['profile'],'taskID':spec['taskID'],'stage':spec['stage'],'prompt':spec['prompt'],'semanticSchema':spec['schema'],'nativeSchema':native_schema,'nativeTransport':transport},ensure_ascii=False)+'\n')
         try:
-            row['contextCapacity']=context_capacity(engine.tokenize,spec['prompt'],spec['schema'],recipe)
+            row['contextCapacity']=context_capacity(engine.tokenize,spec['prompt'],native_schema,recipe)
             if not row['contextCapacity']['passed']:raise RuntimeError('CONSERVATIVE_CONTEXT_CAPACITY_NO_SEND')
             with engine.create_conversation(system_message=SYSTEM_MESSAGE,thinking_config=ThinkingConfig(enable_thinking=False,thinking_token_budget=-1),sampler_config=SamplerConfig(top_k=1,temperature=0,seed=17),max_output_tokens=768,automatic_tool_calling=False,tools=[],constrained_decoding_config=ConstrainedDecodingConfig(enable=True,provider=LiteRtLmConstraintProviderType.LL_GUIDANCE)) as conv:
-                response=conv.send_message(spec['prompt'],response_format=ResponseFormat.json(spec['schema']));row['completeResponse']=response
+                response=conv.send_message(spec['prompt'],response_format=ResponseFormat.json(native_schema));row['completeResponse']=response
                 try:
                     from dataclasses import asdict
                     row['benchmarkInfo']=asdict(conv.get_benchmark_info())

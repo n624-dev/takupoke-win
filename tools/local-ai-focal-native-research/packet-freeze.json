@@ -1,7 +1,7 @@
 {
   "format": "portable-fictional-focal-inference-packet-v1",
   "status": "FROZEN_SOURCE_NOT_YET_NATIVE_EXECUTED",
-  "sourceBase": "d9525a09618b71f2bc3151e548521f02d70cda39",
+  "sourceBase": "e6f1fe4e053977a8d6c886c824f0854b132a56b0",
   "workflowSHA256": "a1b1a7a05d5003e4a3c878361db112fe98283f2d8035f9b2d5d0997704dc5102",
   "pins": [
     {
@@ -40,6 +40,11 @@
       "sha256": "1ea669d5fa1c8affab263ff1c503f89e99c19fb07a6ccf6ca6c51997b2bc40d2"
     },
     {
+      "path": "native_grammar.py",
+      "bytes": 1332,
+      "sha256": "f392efdfabe8b183cc2d91b092104b2deceeff57d8259e52743431d3652c29f5"
+    },
+    {
       "path": "network_guard.py",
       "bytes": 2171,
       "sha256": "d07bde6a1fea19e11abd8b7b52a1c2f1ca3efb0a6500b5d71163397011e7f76a"
@@ -56,8 +61,8 @@
     },
     {
       "path": "recipe.json",
-      "bytes": 2975,
-      "sha256": "ed4528cad640a704980f0253b1d277b935e25829f1fec5a5fa26d41f8be4d932"
+      "bytes": 3186,
+      "sha256": "a8d4873c35b58761309ed00dd4c9868c0694346d27b04f8e4eccf56b61e7daef"
     },
     {
       "path": "reference/comparison.py",
@@ -91,18 +96,18 @@
     },
     {
       "path": "score_outputs.py",
-      "bytes": 4754,
-      "sha256": "af5455869c7455b3ae1c36435b5596a5586a1c830fb03a929fe4b560b5baeb50"
+      "bytes": 4938,
+      "sha256": "1cbf51f0167be7b60914136e1bf973075c0a7899f30ed11c9bdcce3d8c03e2d0"
     },
     {
       "path": "test_adapter.py",
-      "bytes": 2869,
-      "sha256": "e22c28167a8052e7c8bea62ae061b2e0b709636941babe9b9d2fddc6da7e5b66"
+      "bytes": 4985,
+      "sha256": "48046ead0aa3010b0625835c453f89022de3b4f4447ee91cad57965b8277e267"
     },
     {
       "path": "worker.py",
-      "bytes": 5560,
-      "sha256": "e6f76de64a89d2317f35a4cb51c8b7f52b58aff793379143f6914fbfe12ab68c"
+      "bytes": 5732,
+      "sha256": "fabdaada981f414c39c73bd42a955a5503e2d9cec378b6e600814552dd0d39f5"
     }
   ],
   "workerPinPaths": [
@@ -110,6 +115,7 @@
     "comparison.py",
     "guard.py",
     "inputs.json",
+    "native_grammar.py",
     "network_guard.py",
     "protocol.py",
     "recipe.json",
@@ -125,5 +131,6 @@
   "newImageCalls": 0,
   "newRecognizerCalls": 0,
   "qualifiedGenAIModels": [],
-  "productionAdoption": false
+  "productionAdoption": false,
+  "priorOperationalEvidenceRun": 37377657259
 }

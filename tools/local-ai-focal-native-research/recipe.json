@@ -48,7 +48,7 @@
   "actualEligibleMaximumCalls": 8,
   "researchBranch": "research/windows-local-ai-focal-native-20261005",
   "status": "FROZEN_BOUNDED_FOCAL_REQUEST_COMPARISON",
-  "sourceBase": "d9525a09618b71f2bc3151e548521f02d70cda39",
+  "sourceBase": "e6f1fe4e053977a8d6c886c824f0854b132a56b0",
   "scope": "One pinned Gemma engine, fixed four consumed fictional tasks, two source refusals, eight eligible text-only calls; request/schema bundle comparison, not prompt-only effect",
   "productionAdoption": false,
   "qualifiedGenAIModels": [],
@@ -60,7 +60,7 @@
   "sourceRefusalMeaning": "Operational source UNASSESSED, no EMPTY or quality credit",
   "blindDiagnosticMeaning": "Same separately saved consumed454 diagnostic, no new image and no original OCR correction",
   "phoneSuitability": "UNASSESSED",
-  "nativeGrammarCompatibility": "Actual minItems/uniqueItems support and capacity measured at calls; native errors operationalUNASSESSED; no retry",
+  "nativeGrammarCompatibility": "Actual37377657259 LLGuidance rejectsuniqueItems; uniformnativekeywordelision for ALLarrays/profiles; strictsemanticunique membership/order/partition decoder unchanged. Bothsemantic/native schema hashes saved; allother constraints unchanged.",
   "wholeDocumentFormalSlots": {
     "expected": 1270,
     "assessed": 0,
@@ -70,5 +70,7 @@
     "expected": 70,
     "assessed": 0,
     "UNASSESSED": 70
-  }
+  },
+  "nativeTransportAdapterVersion": 1,
+  "priorOperationalEvidenceRun": 37377657259
 }
