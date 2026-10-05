@@ -86,7 +86,7 @@ public sealed partial class MainWindow
             AutomationProperties.SetAutomationId(acknowledgement, "manual-ack-" + key);
             // TextChanged is asynchronous and can arrive after a subsequent
             // acknowledgement. Record edits and clear consent synchronously.
-            input.TextChanging += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Edit(key, input.Text); acknowledgement.IsChecked = false; UpdateSubmit(); };
+            input.TextChanging += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Edit(key, input.Text); acknowledgement.IsChecked = _manualInput.IsAcknowledged(key); UpdateSubmit(); };
             acknowledgement.Checked += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Acknowledge(key, true); UpdateSubmit(); };
             acknowledgement.Unchecked += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Acknowledge(key, false); UpdateSubmit(); };
             panel.Children.Add(input); panel.Children.Add(acknowledgement); Add(Card(panel));

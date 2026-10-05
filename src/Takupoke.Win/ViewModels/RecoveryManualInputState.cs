@@ -25,6 +25,9 @@ internal sealed class RecoveryManualInputState
     public void Edit(string key, string value)
     {
         if (!_values.ContainsKey(key)) throw new InvalidOperationException();
+        // Rebinding/IME synchronization can publish an identical value. Only
+        // an actual ordinal text change revokes the acknowledgement.
+        if (string.Equals(_values[key], value, StringComparison.Ordinal)) return;
         _values[key] = value; _acknowledged.Remove(key);
     }
     public void Acknowledge(string key, bool acknowledged)
