@@ -243,7 +243,25 @@ public static class RecoveryDocumentBuilder
                 (isClass ? ambiguousClassHeaders : ambiguousDateHeaders).UnionWith(label.Ids);
             }
         }
-        var classLabels = printedClasses.Where(l => !l.Ids.Any(ambiguousDateHeaders.Contains)).Select(l => Expand(l) with { Value = l.Value.Replace('-', '_') }).Concat(legacyClassLabels).ToArray();
+        Label BindAiGrade(Label header)
+        {
+            // The strict Exam format prints 1年/2年. Recovery requires the
+            // canonical class as well, independent of page order or count.
+            if (kind != RecoveryDocumentKind.Exam || header.Value is not ("AI_1" or "AI_2")) return header;
+            work.Step(labels.Length * 2L + printedClasses.Length + periodLabels.Length * 3L + atoms.Length);
+            var grades = labels.Where(l => l.Page == header.Page && Regex.IsMatch(l.Value, "^[12]年$") && Expand(l).Box == header.Box).ToArray();
+            var canonical = printedClasses.Where(l => l.Page == header.Page && Expand(l).Box == header.Box).ToArray();
+            var owned = periodLabels.Where(p => p.Page == header.Page && p.Box.Y == header.Box.Y + header.Box.Height &&
+                p.Box.X >= header.Box.X && p.Box.X + p.Box.Width <= header.Box.X + header.Box.Width).ToArray();
+            var band = owned.Select(p => p.Box).Distinct().OrderBy(b => b.X).ToArray();
+            if (grades.Length != 1 || grades[0].Value != header.Value[^1] + "年" || canonical.Length != 1 ||
+                owned.Length != 6 || !owned.Select(p => p.Value).Order().SequenceEqual(new[] { "1", "2", "3", "4", "5", "6" }) ||
+                band[0].X != header.Box.X || band[^1].X + band[^1].Width != header.Box.X + header.Box.Width ||
+                band.Zip(band.Skip(1)).Any(pair => pair.First.X + pair.First.Width != pair.Second.X)) return header;
+            var ids = header.Ids.Concat(grades[0].Ids).ToHashSet(StringComparer.Ordinal);
+            return header with { Ids = atoms.Where(a => ids.Contains(a.Id)).Select(a => a.Id).ToArray() };
+        }
+        var classLabels = printedClasses.Where(l => !l.Ids.Any(ambiguousDateHeaders.Contains)).Select(l => BindAiGrade(Expand(l) with { Value = l.Value.Replace('-', '_') })).Concat(legacyClassLabels).ToArray();
         var dayLabels = labels.Where(l => !l.Ids.Any(ambiguousClassHeaders.Contains)).Select(l => (Label: l, Day: Day(l.Value, kind, year))).Where(p => p.Day is not null).Select(p => Expand(p.Label) with { Value = p.Day! }).ToArray();
         // Numeric grade/department atoms are already independently owned class
         // evidence. They cannot also become nearby left-side period alternatives.

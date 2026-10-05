@@ -9,7 +9,7 @@ namespace Takupoke.Core.Recovery;
 public static class RecoveryValidator
 {
     public const int SchemaVersion = 2;
-    public const int Version = 7;
+    public const int Version = 8;
     public static string Fingerprint<T>(T value) => Convert.ToHexStringLower(SHA256.HashData(JsonSerializer.SerializeToUtf8Bytes(value)));
     private static string Text(string value) => Regex.Replace(value.Normalize(NormalizationForm.FormKC), @"\s+", "").Replace('~', '〜').Replace('～', '〜');
     public static IReadOnlyList<string> SpecialClasses { get; } = new[] { "1_1", "1_2", "1_3" }.Concat(Enumerable.Range(2, 4).SelectMany(y => new[] { "CN", "ES", "IT" }.Select(c => $"{y}_{c}"))).Concat(new[] { "AI_1", "AI_2" }).ToArray();
@@ -98,12 +98,61 @@ public static class RecoveryValidator
             var aligned = region.Axis == RecoveryHeaderAxis.Above ? region.Box.Y + region.Box.Height <= cell.Box.Y && Math.Min(region.Box.X + region.Box.Width, cell.Box.X + cell.Box.Width) > Math.Max(region.Box.X, cell.Box.X) : region.Box.X + region.Box.Width <= cell.Box.X && Math.Min(region.Box.Y + region.Box.Height, cell.Box.Y + cell.Box.Height) > Math.Max(region.Box.Y, cell.Box.Y);
             return joinedMatches && aligned && ids.All(id => { var src = sources[id]; return src.Page == region.Page && Contains(region.Box, src.Box); });
         }
+        IReadOnlyList<string> ClassLabels(string cls) => [cls, cls.Replace('_', '-'), cls.Replace("_", ""), string.Concat(cls.Split('_').Reverse())];
+        var aiOwnerCache = new Dictionary<(string, RecoveryHeaderRegion), bool>();
+        bool AiOwner(string cls, RecoveryHeaderRegion region)
+        {
+            work.Step();
+            if (aiOwnerCache.TryGetValue((cls, region), out var cached)) return cached;
+            work.Step(doc.Cells.Count);
+            var valid = doc.Kind == RecoveryDocumentKind.Exam && region.Axis == RecoveryHeaderAxis.Above;
+            var ownerCells = doc.Cells.Where(c => c.Page == region.Page && c.ClassRegion == region && c.Slots.Count > 0 && c.Slots.All(s => s.ClassName == cls)).ToArray();
+            var band = new Dictionary<int, RecoveryHeaderRegion>();
+            foreach (var owner in ownerCells)
+            foreach (var slot in owner.Slots)
+            {
+                work.Step(owner.PeriodHeaderIds.Count + 1);
+                var key = slot.Period.ToString(CultureInfo.InvariantCulture);
+                var allowed = doc.PeriodEvidence.GetValueOrDefault(key) ?? [];
+                var ids = owner.PeriodHeaderIds.Where(id => AllowedContains(allowed, id)).ToArray();
+                if (!owner.PeriodRegions.TryGetValue(key, out var period) || period.Axis != RecoveryHeaderAxis.Above ||
+                    period.Box.Y != region.Box.Y + region.Box.Height || period.Box.X < region.Box.X ||
+                    period.Box.X + period.Box.Width > region.Box.X + region.Box.Width ||
+                    !Header(ids, allowed, [key, key + "限", key + "時限", key + "時限目", "第" + key + "時限"], owner, period))
+                { valid = false; continue; }
+                if (band.TryGetValue(slot.Period, out var existing) && existing != period) valid = false;
+                band[slot.Period] = period;
+            }
+            var boxes = band.Values.Select(r => r.Box).Distinct().OrderBy(b => b.X).ToArray();
+            valid &= band.Keys.Order().SequenceEqual(Enumerable.Range(1, 6)) && boxes.Length > 0 &&
+                boxes[0].X == region.Box.X && boxes[^1].X + boxes[^1].Width == region.Box.X + region.Box.Width &&
+                !boxes.Zip(boxes.Skip(1)).Any(pair => pair.First.X + pair.First.Width != pair.Second.X);
+            return aiOwnerCache[(cls, region)] = valid;
+        }
+        bool ClassHeader(IReadOnlyList<string> ids, IReadOnlyList<string> allowed, string cls, RecoveryCell? cell = null)
+        {
+            if (!Evidence(ids, allowed) || !Ordered(ids)) return false;
+            if (Header(ids, allowed, ClassLabels(cls), cell, cell?.ClassRegion)) return true;
+            if (doc.Kind != RecoveryDocumentKind.Exam || cls is not ("AI_1" or "AI_2")) return false;
+            if (cell is null)
+            {
+                work.Step(doc.Cells.Count + ids.Count);
+                var owners = doc.Cells.Where(c => c.Slots.FirstOrDefault()?.ClassName == cls).DistinctBy(c => string.Join(',', c.ClassHeaderIds)).ToArray();
+                return owners.Length > 0 && ids.ToHashSet().SetEquals(owners.SelectMany(c => c.ClassHeaderIds)) &&
+                    owners.All(c => ClassHeader(c.ClassHeaderIds, allowed, cls, c));
+            }
+            // Both complete literals, in original reading order, must belong to
+            // one physical class rail above a complete adjacent six-period band.
+            var grade = cls[^1] + "年";
+            return cell.ClassRegion is { Axis: RecoveryHeaderAxis.Above } region &&
+                Header(ids, allowed, [grade + cls, cls + grade], cell, region) && AiOwner(cls, region);
+        }
         Check(doc.Sources.All(s => s.Page > 0 && s.Box.Valid && s.Text.Length <= 4096), "sourceLimit");
         Check(Evidence(doc.YearEvidence, doc.YearEvidence), "yearEvidence");
         var yearText = Raw(doc.YearEvidence.Where(sources.ContainsKey));
         Check(Regex.IsMatch(Text(yearText), "^(?:" + doc.SchoolYear + "年度|令和" + (doc.SchoolYear - 2018) + "年度)+$"), "yearEvidenceText");
         if (doc.Term is not null) Check(Header(doc.TermEvidence, doc.TermEvidence, [doc.Term]), "termEvidence");
-        foreach (var cls in doc.Classes) Check(doc.ClassEvidence.TryGetValue(cls, out var ids) && Header(ids, ids, [cls, cls.Replace('_', '-'), cls.Replace("_", ""), string.Concat(cls.Split('_').Reverse())]), "classEvidence");
+        foreach (var cls in doc.Classes) Check(doc.ClassEvidence.TryGetValue(cls, out var ids) && ClassHeader(ids, ids, cls), "classEvidence");
         foreach (var day in doc.Days) Check(doc.DayEvidence.TryGetValue(day, out var ids) && Header(ids, ids, DayLabels(day, doc.Kind)), "dayEvidence");
         foreach (var period in Enumerable.Range(1, maxPeriod)) Check(doc.PeriodEvidence.TryGetValue(period.ToString(CultureInfo.InvariantCulture), out var ids) && Header(ids, ids, [period.ToString(), $"{period}限", $"{period}時限", $"{period}時限目", $"第{period}時限"]), "periodEvidence");
         var clockCache = new Dictionary<(string, int, int, string), bool>();
@@ -235,7 +284,7 @@ public static class RecoveryValidator
                 && source.CellId == cell.Id && source.Page == cell.Page && Contains(cell.Box, source.Box)), "sourcePosition");
             if (cell.Slots.FirstOrDefault() is { } slot)
             {
-                Check(Header(cell.ClassHeaderIds, doc.ClassEvidence.GetValueOrDefault(slot.ClassName) ?? [], [slot.ClassName, slot.ClassName.Replace('_', '-'), slot.ClassName.Replace("_", ""), string.Concat(slot.ClassName.Split('_').Reverse())], cell, cell.ClassRegion), "classBinding");
+                Check(ClassHeader(cell.ClassHeaderIds, doc.ClassEvidence.GetValueOrDefault(slot.ClassName) ?? [], slot.ClassName, cell), "classBinding");
                 Check(Header(cell.DayHeaderIds, doc.DayEvidence.GetValueOrDefault(slot.Day) ?? [], DayLabels(slot.Day, doc.Kind), cell, cell.DayRegion), "dayBinding");
                 Check(cell.Slots.All(s => Header(cell.PeriodHeaderIds.Where(id => AllowedContains(doc.PeriodEvidence.GetValueOrDefault(s.Period.ToString()) ?? [], id)).ToArray(), doc.PeriodEvidence.GetValueOrDefault(s.Period.ToString()) ?? [], [s.Period.ToString(), $"{s.Period}限", $"{s.Period}時限", $"{s.Period}時限目", $"第{s.Period}時限"], cell, cell.PeriodRegions.GetValueOrDefault(s.Period.ToString()))), "periodBinding");
             }

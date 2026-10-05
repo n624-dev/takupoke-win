@@ -118,6 +118,136 @@ public sealed class RecoveryDateHeaderOwnershipTests
         Assert.All(document.Cells.Where(c => c.Slots[0].ClassName == "1_1"), c => Assert.Equal(386, c.Box.Y));
     }
 
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task MatchingPrintedAiGradeAndCanonicalClassKeepAllOriginalEvidence(bool separateGradeAtoms)
+    {
+        var pages = ExamPages();
+        if (separateGradeAtoms) pages[5] = pages[5] with { Glyphs = pages[5].Glyphs.SelectMany(g => g.Text is "1年" or "2年"
+            ? new[] { g with { Text = g.Text[..1], Width = 6 }, g with { Text = "年", X = g.X + 6, Width = 6 } } : new[] { g }).ToArray() };
+        var document = Build(pages);
+        Assert.Empty(RecoveryValidator.InputErrors(document));
+        foreach (var cls in new[] { "AI_1", "AI_2" })
+        {
+            var ids = document.ClassEvidence[cls];
+            Assert.Equal(cls[^1] + "年" + cls, string.Concat(ids.Select(id => document.Sources.Single(s => s.Id == id).Text)));
+            Assert.All(document.Cells.Where(c => c.Slots[0].ClassName == cls), c => Assert.Equal(ids, c.ClassHeaderIds));
+        }
+        foreach (var (page, pi) in pages.Select((p, i) => (p, i + 1)))
+        foreach (var (glyph, gi) in page.Glyphs.Select((g, i) => (g, i)))
+        {
+            var source = Assert.Single(document.Sources, s => s.Id == $"p{pi}s{gi}");
+            Assert.Equal(glyph.Text, source.Text);
+            Assert.Equal(new RecoveryBox(glyph.X, glyph.Y, glyph.Width, glyph.Height), source.Box);
+        }
+        var run = await RecoveryEngine.RunAsync(document, "windows", 10, true, [], _ => null);
+        Assert.Equal(RecoveryJobState.AwaitingConfirmation, run.State);
+        Assert.True(RecoveryValidator.Validate(document, run.Result!).CanAdopt);
+        Assert.Equal(RecoveryValidator.Version, run.Result!.Metadata.ValidatorVersion);
+        Assert.Contains("versions", RecoveryValidator.Validate(document, run.Result with
+            { Metadata = run.Result.Metadata with { ValidatorVersion = RecoveryValidator.Version - 1 } }).Errors);
+        var oldStructure = run.Result.Metadata with { ValidatorVersion = RecoveryValidator.Version - 1 };
+        Assert.Contains("structureMetadata", RecoveryValidator.Validate(document with { StructureMetadata = oldStructure }, run.Result).Errors);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void AiHeaderProofIsIndependentOfPageOrderAndCount(bool additionalPage)
+    {
+        var pages = ExamPages(inlineRoles: true).Reverse().ToList();
+        if (additionalPage) pages.Insert(2, new PdfPageLayout(400, 400, [], []));
+        var document = Build(pages.ToArray());
+        Assert.Empty(RecoveryValidator.InputErrors(document));
+        Assert.All(document.Cells.Where(c => c.Slots[0].ClassName.StartsWith("AI_", StringComparison.Ordinal)), c => Assert.Equal(1, c.Page));
+        Assert.Equal(510, document.RequiredSlots.Count);
+    }
+
+    [Fact]
+    public void CanonicalOnlyAiHeaderDoesNotInventAnUnprintedGrade()
+    {
+        var pages = ExamPages(inlineRoles: true);
+        pages[5] = pages[5] with { Glyphs = pages[5].Glyphs.Where(g => g.Text is not ("1年" or "2年")).ToArray() };
+        var document = Build(pages);
+        Assert.Empty(RecoveryValidator.InputErrors(document));
+        foreach (var cls in new[] { "AI_1", "AI_2" })
+            Assert.Equal(cls, string.Concat(document.ClassEvidence[cls].Select(id => document.Sources.Single(s => s.Id == id).Text)));
+    }
+
+    [Theory]
+    [InlineData("contradictory")]
+    [InlineData("duplicate")]
+    [InlineData("unowned")]
+    [InlineData("missingCanonical")]
+    [InlineData("missingGradeSuffix")]
+    [InlineData("crossClass")]
+    public void InvalidPrintedGradeNeverGetsIgnoredOrUsedAsAnAiClass(string mutation)
+    {
+        var pages = ExamPages(inlineRoles: true);
+        var glyphs = pages[5].Glyphs.ToList();
+        var grade = glyphs.FindIndex(g => g.Text == "1年");
+        var canonical = glyphs.FindIndex(g => g.Text == "AI_1");
+        switch (mutation)
+        {
+            case "contradictory": glyphs[grade] = glyphs[grade] with { Text = "2年" }; break;
+            case "duplicate": glyphs.Add(glyphs[grade] with { X = 200 }); break;
+            case "unowned": glyphs[grade] = glyphs[grade] with { Y = 58 }; break;
+            case "missingCanonical": glyphs.RemoveAt(canonical); break;
+            case "missingGradeSuffix": glyphs[grade] = glyphs[grade] with { Text = "1" }; break;
+            case "crossClass": glyphs[grade] = glyphs[grade] with { X = glyphs[grade].X + 588 }; break;
+        }
+        pages[5] = pages[5] with { Glyphs = glyphs };
+        try { Assert.NotEmpty(RecoveryValidator.InputErrors(Build(pages))); }
+        catch (InvalidDataException) { }
+    }
+
+    [Theory]
+    [InlineData("contradictory")]
+    [InlineData("duplicate")]
+    [InlineData("unowned")]
+    [InlineData("crossClass")]
+    [InlineData("missingPeriod")]
+    [InlineData("missingGradeSuffix")]
+    [InlineData("reorderedEvidence")]
+    [InlineData("duplicateEvidence")]
+    [InlineData("periodGap")]
+    [InlineData("conflictingPeriod")]
+    [InlineData("wrongPage")]
+    public void ValidatorIndependentlyRejectsForgedAiCompositeProof(string mutation)
+    {
+        var document = Build(ExamPages());
+        var cell = document.Cells.First(c => c.Slots[0].ClassName == "AI_1");
+        var sources = document.Sources.ToArray();
+        var grade = Array.FindIndex(sources, s => s.Text == "1年");
+        switch (mutation)
+        {
+            case "contradictory": sources[grade] = sources[grade] with { Text = "2年" }; break;
+            case "duplicate": sources[grade] = sources[grade] with { Text = "1年1年" }; break;
+            case "unowned": sources[grade] = sources[grade] with { Box = sources[grade].Box with { Y = 58 } }; break;
+            case "crossClass": sources[grade] = sources[grade] with { Box = sources[grade].Box with { X = sources[grade].Box.X + 588 } }; break;
+            case "wrongPage": sources[grade] = sources[grade] with { Page = 5 }; break;
+            case "missingGradeSuffix": sources[grade] = sources[grade] with { Text = "1" }; break;
+            case "reorderedEvidence":
+            case "duplicateEvidence":
+                document = document with { ClassEvidence = document.ClassEvidence.ToDictionary(p => p.Key,
+                    p => p.Key == "AI_1" ? (IReadOnlyList<string>)(mutation == "reorderedEvidence" ? p.Value.Reverse().ToArray() : p.Value.Concat(p.Value).ToArray()) : p.Value) };
+                Assert.Contains("classEvidence", RecoveryValidator.InputErrors(document));
+                return;
+            case "periodGap":
+            case "conflictingPeriod":
+                document = document with { Cells = document.Cells.Select(c => c.Slots[0].ClassName == "AI_1" && c.Slots[0].Period == 6 &&
+                    (mutation == "periodGap" || c.Slots[0].Day == "2035-10-01")
+                    ? c with { PeriodRegions = c.PeriodRegions.ToDictionary(p => p.Key,
+                        p => p.Value with { Box = p.Value.Box with { X = p.Value.Box.X + 1 } }) } : c).ToArray() }; break;
+            case "missingPeriod":
+                document = document with { Cells = document.Cells.Select(c => c.Slots[0].ClassName == "AI_1" && c.Slots[0].Period == 6
+                    ? c with { PeriodRegions = new Dictionary<string, RecoveryHeaderRegion>() } : c).ToArray() }; break;
+        }
+        Assert.Contains("classBinding", RecoveryValidator.InputErrors(document with { Sources = sources }));
+        Assert.Contains("classEvidence", RecoveryValidator.InputErrors(document with { Sources = sources }));
+    }
+
     private static RecoveryDocument Build(PdfPageLayout[] pages) => RecoveryDocumentBuilder.Build(
         new string('a', 64), MaterialKind.Exam, pages,
         (page, box) => !pages[page - 1].Glyphs.Any(g => box.Contains(new(g.X, g.Y, g.Width, g.Height))));
@@ -182,8 +312,10 @@ public sealed class RecoveryDateHeaderOwnershipTests
             for (var period = 1; period <= 6; period++)
             {
                 Text($"{period}時限目", 20, bottom + 40 + (period - 1) * 40);
-                Text(clocks[period - 1], 44, bottom + 40 + (period - 1) * 40);
+                Text(clocks[period - 1], right - 150, bottom + 40 + (period - 1) * 40);
             }
+            Text("1・2時限連続", 20, bottom + 300);
+            Text("08:40〜10:20", right - 150, bottom + 300);
             pages.Add(new(right + 20, 1160, glyphs, rules));
         }
         return pages.ToArray();
