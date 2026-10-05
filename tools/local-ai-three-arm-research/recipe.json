@@ -80,7 +80,7 @@
   "iOSApplicationChanges": 0,
   "networkContainment": "permanent workerseccomp sockets/io_uring/groupescape denial beforeLiteRT;controllerpublicmodel/wheeldownload only before data consumption",
   "oracleBoundary": "Reader/tool/input exclusion and immutableinferenceonlypins; NOT filesystempermissiondenial",
-  "supervisorCleanup": "Unconditional try/finally bounded processgroup termination/reaping on success/error/timeout, descendants checked before reporter",
+  "supervisorCleanup": "Runner unconditional bounded processgroup kill/reap; controller stat/group/session filters before protected environ. Same-owned runner startTicks+marker rechecked before escalation; unknown ownership/group errors fail closed and retain owned scratch, no model beneath deletion.",
   "cachePolicy": "explicitownedcache only; retainedsame-model successfultext XNNPACKcache788,412,736B; bound1GiB (visionadditionunknown, capbreachoperationalUNASSESSED). None/defaultisNOTdisable; no undocumentedemptystringdisable orsharedartifactwrite.",
   "scoring": "roleIdUnionExact isclassification only; exactorderedfullsubject/teacher/roomtupleBindingExact fromoriginalfixture-manifest requiredSlots[].lessons for7bodycases, everymergedslotmustagree;5header/emptycasesbindingUNASSESSED; no inventedlessonID/certificate/sourcevalues",
   "networkGuardRequired": true,
@@ -105,7 +105,8 @@
   "researchBranch": "research/windows-local-ai-three-arm-portable-20261005",
   "imageLiteralAdmission": "Blindtranscription isdiagnostic/comparison only; selectednativeIDs cannot repairOCRliteral; no newimage-originIDs orproductioncertificate.",
   "capacityPolicy": "Prospective8192context/768output beforefirstEngine. Runtime conservativeactualtokenizer prompt+FULLschema+system+256template+280vision(ifimage)+768output gate; oversized/truncated tokens explicitoperationalUNASSESSED, no retries. Sourcecounts are not exactnativechat serialization proof.",
-  "retainedRawLogs": "Print bounded fictionalresponses/events and1MiBtail eachstdout/stderr beforealwaysownedcleanup; no artifact/cache/environment/binaryupload.",
+  "retainedRawLogs": "Final diagnostic path attempts each bounded fictional receipt/response/event and stdout/stderr tail independently BEFORE any scratch deletion, including cleanup errors. No binary/environment. Incomplete owned cleanup retains marker/scratch; oversized/unreadable diagnostics fail operationally without hiding later stderr.",
   "namespaceMetadataFallback": "OnlyPID1readlink EACCES/EPERM afterallotherpositivefullVMflags andvalidatedunprivilegedself pidnamespace permitsfixed /usr/bin/sudo -n /usr/bin/readlink /proc/1/ns/pid (stdinDEVNULL/close_fds/5s). Matchingstrictpid:[digits] mandatory. No model/controller elevated; no genericmissing/container/othererror fallback.",
-  "runtimeDiskOnlyRequest": "Onlyexactint minimumAvailableMemoryBytes==0 isdisk-only (existingpostloadmonitor/call/reporterpaths); memoryAssessment NOT_REQUESTED/null/nohostcredit. InitialpreDownload/postasset/prePopen/workerpreEngine remainfresh4.5GiBproof BEFORENNP; no proofcache or NNPweakening."
+  "runtimeDiskOnlyRequest": "Onlyexactint minimumAvailableMemoryBytes==0 isdisk-only (existingpostloadmonitor/call/reporterpaths); memoryAssessment NOT_REQUESTED/null/nohostcredit. InitialpreDownload/postasset/prePopen/workerpreEngine remainfresh4.5GiBproof BEFORENNP; no proofcache or NNPweakening.",
+  "cleanupSourceParent": "15611e8556b4ca02e14f7671f0c262b3981c8d04"
 }

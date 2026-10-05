@@ -6,8 +6,8 @@
   "pins": [
     {
       "path": "bootstrap_ci.py",
-      "bytes": 14186,
-      "sha256": "1d13b945e230fc1c73bf6219c7f2767c041bc9bf803a385a6aad75f73447f9bb"
+      "bytes": 18899,
+      "sha256": "a9b8885463db74aea36447cc4784cc760cb9389955a21bea7aa6a75d44a00912"
     },
     {
       "path": "crops/t000466d2ba598e3e.png",
@@ -106,13 +106,13 @@
     },
     {
       "path": "recipe.json",
-      "bytes": 8208,
-      "sha256": "4be58c1ab70c28016fdd4abea292fb134ef05eee73c1dd07fd6b563b06888e7f"
+      "bytes": 8608,
+      "sha256": "df8d75ad23e281746726ee8ccca9f5af03fd4f6c47239d2042dc9fe69dfa46d8"
     },
     {
       "path": "run_once.py",
-      "bytes": 8529,
-      "sha256": "6b84ded90b1b07f72784b28838bc3fb4643142effddbf7f98cf066785daaa6b2"
+      "bytes": 8760,
+      "sha256": "0b5ebba209fae1166b67b9404c080b59e4c7fb1579033c988c8ef7831ff7632d"
     },
     {
       "path": "runtime-identity.json",
@@ -130,14 +130,19 @@
       "sha256": "a372960beba29c090eb3829fc8d970925583e50802a3ce8581140a3175cad9c0"
     },
     {
+      "path": "test_cleanup.py",
+      "bytes": 9650,
+      "sha256": "c26ca6529df26c71ca75dd3e23d10369a477a9d32ab048f96aae01e26e98e485"
+    },
+    {
       "path": "test_namespace.py",
       "bytes": 7662,
       "sha256": "94db34edbd59c87379783c376e3482f7b9696ca9dc12f0f6ad400a629a89df6a"
     },
     {
       "path": "test_portable.py",
-      "bytes": 21545,
-      "sha256": "65b4c3a189713d78fbae1ed40dcb4fd0cef1ab72b73f6528970cbf6d7a173bbb"
+      "bytes": 21658,
+      "sha256": "feb7326a1f3e319ce9f5f6b5e45729a84d583cf862764e29ea0b2b8abae625d9"
     },
     {
       "path": "test_preparation.py",
@@ -183,6 +188,6 @@
   "productionAdoption": false,
   "wholeDocumentFormalSlotsUNASSESSED": 1270,
   "wholeDocumentFormalClocksUNASSESSED": 70,
-  "parentPortablePacketSHA256": "b4467fcf3681bef0447dedbc8c378fdae40975c33633101749179379accaad1e",
-  "version": "namespace-permission-only-fixed-readonly-metadata-and-zero-only-disk-request"
+  "parentPortablePacketSHA256": "15b750da2712ac39d8b581108fff55d66f40f512b334ea3c2995aff6c9a14fdd",
+  "version": "ownership-filtering-finally-diagnostics-source-only-unchanged4GiB-budget"
 }

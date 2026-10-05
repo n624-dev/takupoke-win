@@ -66,62 +66,145 @@ def download(asset, target):
             hashed.update(block);stream.write(block)
     if total!=asset['bytes'] or hashed.hexdigest()!=asset['sha256']:raise RuntimeError('PUBLIC_ASSET_HASH_MISMATCH')
 
+def proc_state(pid):
+    try:
+        fields=Path('/proc',str(pid),'stat').read_text().rsplit(')',1)[1].split()
+        return {'state':fields[0],'group':int(fields[2]),'session':int(fields[3]),'startTicks':int(fields[19])}
+    except (FileNotFoundError,ProcessLookupError):return None
+
 def owned_pid(pid,packet):
-    try:return ('FICTIONAL_RESEARCH_SCRATCH='+str(packet.parent)).encode() in Path('/proc',str(pid),'environ').read_bytes().split(b'\0')
-    except FileNotFoundError:return False
+    # Only inspect an already selected potential owned PID. Never print environ.
+    try:
+        path=Path('/proc',str(pid),'environ')
+        with path.open('rb') as stream:
+            value=stream.read(2097153)
+        if len(value)>2097152:raise RuntimeError('OWNERSHIP_ENVIRONMENT_BOUND')
+        return ('FICTIONAL_RESEARCH_SCRATCH='+str(packet.parent)).encode() in value.split(b'\0')
+    except (FileNotFoundError,ProcessLookupError):return False
+
+def owned_group_members(group,packet):
+    members=[];errors=[];zombies=[]
+    for entry in Path('/proc').iterdir():
+        if not entry.name.isdecimal():continue
+        pid=int(entry.name)
+        try:state=proc_state(pid)
+        except Exception as exc:
+            errors.append('uninspectablePotentialGroup:'+str(pid)+':'+type(exc).__name__);continue
+        # Group/session filtering MUST precede protected environ inspection.
+        if state is None or state['group']!=group or state['session']!=group:continue
+        if state['state']=='Z':zombies.append(pid);continue
+        try:
+            if not owned_pid(pid,packet):
+                errors.append('groupOwnershipNotProven:'+str(pid));continue
+        except Exception as exc:
+            errors.append('groupOwnershipUnavailable:'+str(pid)+':'+type(exc).__name__);continue
+        members.append(pid)
+    return {'members':members,'errors':errors,'zombiePids':zombies}
 
 def terminate_owned(process, packet):
-    # Runner normally handles its separate worker group; this is an outer guard.
-    if process is not None and process.poll() is None:
-        process.terminate()
-        try:process.wait(timeout=12)
-        except subprocess.TimeoutExpired:
-            process.kill();process.wait(timeout=5)
-    elif process is None and (packet/'controller-runner.json').exists():
-        pid=read(packet/'controller-runner.json')['pid']
-        if type(pid) is not int or pid<=1:raise RuntimeError('INVALID_OWNED_RUNNER_PID')
-        if owned_pid(pid,packet):
-            try:os.kill(pid,signal.SIGTERM)
-            except ProcessLookupError:pass
-            else:
+    # Outer fail-closed guard. Scratch may only be removed after complete cleanup.
+    errors=[];remaining=[];zombies=[]
+    try:
+        if process is not None and process.poll() is None:
+            process.terminate()
+            try:process.wait(timeout=12)
+            except subprocess.TimeoutExpired:
+                process.kill();process.wait(timeout=5)
+        elif process is None and (packet/'controller-runner.json').exists():
+            pid=read(packet/'controller-runner.json')['pid']
+            if type(pid) is not int or pid<=1:raise RuntimeError('INVALID_OWNED_RUNNER_PID')
+            state=proc_state(pid)
+            if state is not None and state['state']!='Z':
+                if not owned_pid(pid,packet):raise RuntimeError('RUNNER_OWNERSHIP_NOT_PROVEN')
+                original_start=state['startTicks']
+                recorded_start=read(packet/'controller-runner.json').get('startTicks')
+                if recorded_start is not None and recorded_start!=original_start:raise RuntimeError('RUNNER_START_IDENTITY_CHANGED')
+                def same_live_runner():
+                    current=proc_state(pid)
+                    if current is None or current['state']=='Z':return False
+                    if current['startTicks']!=original_start or not owned_pid(pid,packet):
+                        raise RuntimeError('RUNNER_OWNERSHIP_CHANGED; no signal')
+                    return True
+                if same_live_runner():os.kill(pid,signal.SIGTERM)
                 deadline=time.monotonic()+12
-                while owned_pid(pid,packet) and time.monotonic()<deadline:time.sleep(.1)
-                if owned_pid(pid,packet):
-                    try:os.kill(pid,signal.SIGKILL)
-                    except ProcessLookupError:pass
-    group_file=packet/'worker-process-group.json'
-    if group_file.exists():
-        group=read(group_file)['group']
-        if type(group) is not int or group<=1:raise RuntimeError('INVALID_OWNED_GROUP')
-        # Stale numeric records must never target a reused, unrelated process.
-        members=[]
-        for entry in Path('/proc').iterdir():
-            if not entry.name.isdecimal() or not owned_pid(int(entry.name),packet):continue
-            try:
-                stat=(entry/'stat').read_text().rsplit(')',1)[1].split()
-                if int(stat[2])==group:members.append(int(entry.name))
-            except FileNotFoundError:pass
-        if members:
-            try:os.killpg(group,signal.SIGKILL)
-            except ProcessLookupError:pass
+                while same_live_runner() and time.monotonic()<deadline:time.sleep(.1)
+                if same_live_runner():os.kill(pid,signal.SIGKILL)
+        group_file=packet/'worker-process-group.json'
+        if group_file.exists():
+            group=read(group_file)['group']
+            if type(group) is not int or group<=1:raise RuntimeError('INVALID_OWNED_GROUP')
+            selected=owned_group_members(group,packet)
+            errors.extend(selected['errors']);zombies=selected['zombiePids']
+            # Never signal a reused group with ambiguous or foreign ownership.
+            if selected['members'] and not selected['errors']:
+                try:os.killpg(group,signal.SIGKILL)
+                except ProcessLookupError:pass
             deadline=time.monotonic()+5
-            while any(owned_pid(pid,packet) for pid in members):
-                if time.monotonic()>=deadline:raise RuntimeError('OWNED_CHILD_CLEANUP_INCOMPLETE')
+            while True:
+                selected=owned_group_members(group,packet)
+                remaining=selected['members'];zombies=selected['zombiePids']
+                errors.extend(selected['errors'])
+                if errors or not remaining or time.monotonic()>=deadline:break
                 time.sleep(.05)
+            if remaining:errors.append('OWNED_CHILD_CLEANUP_INCOMPLETE')
+        if process is not None and process.poll() is None:
+            remaining.append(process.pid);errors.append('OWNED_RUNNER_STILL_LIVE')
+        elif process is None and (packet/'controller-runner.json').exists():
+            state=proc_state(pid)
+            if state is not None and state['state']!='Z':
+                remaining.append(pid);errors.append('OWNED_RUNNER_STILL_LIVE')
+    except Exception as exc:errors.append(type(exc).__name__+':'+str(exc))
+    return {'complete':not errors and not remaining,'remainingOwnedPids':sorted(set(remaining)),
+            'zombiePids':zombies,'errors':sorted(set(errors))}
 
 def print_research_logs(packet,recipe):
-    for name in ('responses.jsonl','worker-events.jsonl'):
+    # Per-file failure must never suppress the next diagnostic. No binary/env.
+    errors=[];printed=[];remaining=recipe.get('maximumOutputBytes',16777216)
+    tails=recipe.get('maximumPrintedWorkerLogBytes',1048576)
+    for name in ('preflight-failure.json','execution-receipt.json','comparison-report.json',
+                 'responses.jsonl','worker-events.jsonl','worker-stdout.log','worker-stderr.log'):
         path=packet/name
-        if path.exists():
-            if path.stat().st_size>recipe['maximumOutputBytes']:raise RuntimeError('RAW_RESEARCH_LOG_BOUND_EXCEEDED')
-            print(name+'\n'+path.read_text(),flush=True)
-    for name in ('worker-stdout.log','worker-stderr.log'):
-        path=packet/name
-        if path.exists():
+        try:
+            if not path.exists():continue
+            if path.is_symlink():raise RuntimeError('DIAGNOSTIC_SYMLINK_REFUSED')
+            size=path.stat().st_size;is_tail=name.endswith('.log')
+            limit=tails if is_tail else remaining
             with path.open('rb') as stream:
-                size=path.stat().st_size;stream.seek(max(0,size-recipe['maximumPrintedWorkerLogBytes']))
-                tail=stream.read(recipe['maximumPrintedWorkerLogBytes']).decode(errors='replace')
-            print(json.dumps({'log':name,'totalBytes':size,'printedTailBytesMaximum':recipe['maximumPrintedWorkerLogBytes'],'tail':tail}),flush=True)
+                if is_tail:stream.seek(max(0,size-limit))
+                raw=stream.read(limit)
+                value=raw.decode(errors='replace')
+            count=len(raw)
+            if not is_tail:remaining-=count
+            truncated=size>limit
+            if truncated and not is_tail:errors.append(name+':DIAGNOSTIC_BOUND_EXCEEDED')
+            # Bounded stdout/stderr tails are intentionally incomplete.
+            if is_tail:
+                print(json.dumps({'log':name,'totalBytes':size,'printedTailBytesMaximum':limit,'tail':value,'truncated':truncated}),flush=True)
+            else:
+                print(name+'\n'+value,flush=True)
+            printed.append({'name':name,'totalBytes':size,'printedBytes':count,'truncated':truncated})
+        except Exception as exc:errors.append(name+':'+type(exc).__name__+':'+str(exc))
+    return {'complete':not errors,'files':printed,'errors':errors}
+
+def finish_owned_scratch(process,packet,scratch,marker,marker_owned,recipe,primary_error=None):
+    try:cleanup=terminate_owned(process,packet)
+    except BaseException as exc:
+        cleanup={'complete':False,'remainingOwnedPids':None,'errors':[type(exc).__name__+':'+str(exc)]}
+    # ALWAYS diagnose before deletion, even if termination raises or is incomplete.
+    try:diagnostics=print_research_logs(packet,recipe)
+    except BaseException as exc:
+        diagnostics={'complete':False,'errors':[type(exc).__name__+':'+str(exc)]}
+    removed=False
+    if cleanup['complete']:
+        try:
+            shutil.rmtree(scratch)
+            if marker_owned:marker.unlink(missing_ok=True)
+            removed=not scratch.exists()
+        except Exception as exc:cleanup['errors'].append('scratchRemoval:'+type(exc).__name__+':'+str(exc));cleanup['complete']=False
+    print(json.dumps({'primaryControllerError':primary_error,'outerProcessCleanup':cleanup,'boundedDiagnostics':diagnostics,
+                      'ownedScratchRemoved':removed,'scratchRetainedForIncompleteCleanup':not cleanup['complete'],
+                      'modelDistributed':False,'artifactUploads':0,'productionAdoption':False}),flush=True)
+    return cleanup['complete'] and diagnostics['complete'] and removed
 
 def execute(root, packet_sha, recipe_sha, workflow, scratch_parent, authority=None):
     first_attempt()
@@ -137,7 +220,7 @@ def execute(root, packet_sha, recipe_sha, workflow, scratch_parent, authority=No
     marker=Path(scratch_parent)/'fictional-three-arm-owned-path.txt'
     if marker.exists():
         shutil.rmtree(scratch);raise RuntimeError('EXCLUSIVE_SCRATCH_ALREADY_EXISTS')
-    marker_owned=False
+    marker_owned=False;primary_error=None
     try:
         with marker.open('x') as stream:stream.write(str(scratch)+'\n')
         marker_owned=True
@@ -169,25 +252,16 @@ def execute(root, packet_sha, recipe_sha, workflow, scratch_parent, authority=No
         env={k:v for k,v in os.environ.items() if k not in ('GITHUB_TOKEN','GH_TOKEN','ACTIONS_RUNTIME_TOKEN','ACTIONS_ID_TOKEN_REQUEST_TOKEN')}
         env['FICTIONAL_RESEARCH_SCRATCH']=str(scratch)
         process=subprocess.Popen([str(python),str(packet/'run_once.py')],cwd=packet,env=env,stdin=subprocess.DEVNULL,close_fds=True)
-        (packet/'controller-runner.json').write_text(json.dumps({'pid':process.pid})+'\n')
+        (packet/'controller-runner.json').write_text(json.dumps({'pid':process.pid,'startTicks':proc_state(process.pid)['startTicks']})+'\n')
         try:code=process.wait(timeout=recipe['processDeadlineSeconds']+60)
-        except subprocess.TimeoutExpired:
-            terminate_owned(process,packet);raise RuntimeError('OUTER_CONTROLLER_DEADLINE')
-        terminate_owned(process,packet)
-        # Research logs only; no artifacts/cache or inference admission.
-        for name in ('preflight-failure.json','execution-receipt.json','comparison-report.json'):
-            path=packet/name
-            if path.exists():print(name+'\n'+path.read_text(),flush=True)
-        # Every fictional completion/event is retained in bounded CI logs before
-        # scratch deletion; binary crops/model/environment are never printed.
-        print_research_logs(packet,recipe)
+        except subprocess.TimeoutExpired:raise RuntimeError('OUTER_CONTROLLER_DEADLINE')
         return code
+    except BaseException as exc:
+        primary_error=type(exc).__name__+':'+str(exc)
+        raise
     finally:
-        try:terminate_owned(process,packet)
-        finally:
-            shutil.rmtree(scratch)
-            if marker_owned:marker.unlink(missing_ok=True)
-            print(json.dumps({'ownedScratchRemoved':not scratch.exists(),'modelDistributed':False,'artifactUploads':0,'productionAdoption':False}),flush=True)
+        complete=finish_owned_scratch(process,packet,scratch,marker,marker_owned,recipe,primary_error)
+        if not complete and primary_error is None:raise RuntimeError('CONTROLLER_CLEANUP_OR_DIAGNOSTICS_INCOMPLETE')
 
 def cleanup_only(parent):
     marker=parent/'fictional-three-arm-owned-path.txt'
@@ -195,9 +269,10 @@ def cleanup_only(parent):
     scratch=Path(marker.read_text().strip())
     if scratch.parent.resolve()!=parent.resolve() or not scratch.name.startswith('fictional-three-arm-') or scratch.is_symlink():
         raise RuntimeError('UNOWNED_CLEANUP_PATH_REFUSED')
-    terminate_owned(None,scratch/'packet')
-    if scratch.exists():shutil.rmtree(scratch)
-    marker.unlink()
+    packet=scratch/'packet'
+    recipe=read(packet/'recipe.json') if (packet/'recipe.json').exists() else {}
+    if not finish_owned_scratch(None,packet,scratch,marker,True,recipe):
+        raise RuntimeError('ALWAYS_CLEANUP_INCOMPLETE; owned scratch retained')
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--cleanup-only',action='store_true');parser.add_argument('--approved-research-push',action='store_true');parser.add_argument('--packet-sha');parser.add_argument('--recipe-sha')

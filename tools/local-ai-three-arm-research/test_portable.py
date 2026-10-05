@@ -241,7 +241,9 @@ class Portable(unittest.TestCase):
             tails=[json.loads(x) for x in values if x.startswith('{')]
             self.assertEqual({x['tail'] for x in tails},{'tail','last'})
             (root/'responses.jsonl').write_text('x'*129)
-            with self.assertRaisesRegex(RuntimeError,'BOUND_EXCEEDED'):bootstrap_ci.print_research_logs(root,recipe)
+            with patch('builtins.print'):
+                result=bootstrap_ci.print_research_logs(root,recipe)
+            self.assertFalse(result['complete']);self.assertTrue(any('BOUND_EXCEEDED' in e for e in result['errors']))
 
     def test_tokenizer_budget_proof_is_evaluation_only_and_common_limits(self):
         proof=json.loads((ROOT/'token-budget.json').read_text());recipe=json.loads((ROOT/'recipe.json').read_text());freeze=json.loads((ROOT/'packet-freeze.json').read_text())
