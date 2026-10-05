@@ -32,7 +32,7 @@ public sealed partial class MainWindow
         if (change?.IsCancellation != true)
         {
             var source = names.Subject.Trim().Length == 0 ? "変更を確認" : names.Subject.Trim();
-            var subject = Text(home ? DisplayText.Continuous(source) : DisplayText.CellSubject(source), home ? 20 : 14);
+            var subject = Text(DisplayText.CellSubject(source), home ? 20 : 14);
             if (!home) { subject.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold; subject.MaxLines = 2; subject.TextTrimming = TextTrimming.CharacterEllipsis; }
             if (change is not null && !home)
             {
@@ -55,8 +55,8 @@ public sealed partial class MainWindow
             content.Children.Add(subject);
         }
         if (showTime && !home && time is not null) content.Children.Add(Text(time.Display, 12));
-        var teacher = block.Content is SpecialContent && !home ? names.Teacher : DisplayText.Metadata(names.Teacher);
-        var room = block.Content is SpecialContent && !home ? names.Room : DisplayText.Metadata(names.Room);
+        var teacher = block.Content is SpecialContent ? names.Teacher : DisplayText.Metadata(names.Teacher);
+        var room = block.Content is SpecialContent ? names.Room : DisplayText.Metadata(names.Room);
         foreach (var metadata in new[] { teacher, room }.Where(value => value.Length > 0))
         {
             var text = Text(DisplayText.Continuous(metadata), home ? 15 : 12);

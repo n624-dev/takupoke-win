@@ -56,7 +56,7 @@ public sealed class SchedulePresentationTests
         Assert.Equal(current, day.Monday().Iso()); Assert.Equal(initial, day.DisplayWeekStart().Iso());
     }
     [Fact]
-    public void GridTransformsNeverChangeHomeTextOrPersistedSource()
+    public void CardDisplayTransformsKeepStoredSourceAndKanaPoliciesSeparate()
     {
         const string source = "架空ｶﾅ・科目\nA";
         Assert.Equal("架空カナ・科目A", DisplayText.Continuous(source));
