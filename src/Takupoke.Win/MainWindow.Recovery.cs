@@ -84,7 +84,9 @@ public sealed partial class MainWindow
             AutomationProperties.SetAutomationId(input, "manual-value-" + key);
             var acknowledgement = OperationControl(new CheckBox { Content = "原本と一致することを確認", IsChecked = _manualInput.IsAcknowledged(key) });
             AutomationProperties.SetAutomationId(acknowledgement, "manual-ack-" + key);
-            input.TextChanged += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Edit(key, input.Text); acknowledgement.IsChecked = false; UpdateSubmit(); };
+            // TextChanged is asynchronous and can arrive after a subsequent
+            // acknowledgement. Record edits and clear consent synchronously.
+            input.TextChanging += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Edit(key, input.Text); acknowledgement.IsChecked = false; UpdateSubmit(); };
             acknowledgement.Checked += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Acknowledge(key, true); UpdateSubmit(); };
             acknowledgement.Unchecked += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Acknowledge(key, false); UpdateSubmit(); };
             panel.Children.Add(input); panel.Children.Add(acknowledgement); Add(Card(panel));

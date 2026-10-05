@@ -102,10 +102,24 @@ internal static partial class Program
                 var ack=WaitElement("manual-ack-"+key);Require(!Checked(ack),"Every uncertain field starts unchecked.");
                 Require(Find("manual-crop-"+key) is not null,"Original pixel crop is shown with the field.");
                 var input=WaitElement("manual-value-"+key);
-                ((ValuePattern)input.GetCurrentPattern(ValuePattern.Pattern)).SetValue("架空手確認"+key);
+                var corrected = "架空手確認"+key;
+                ((ValuePattern)input.GetCurrentPattern(ValuePattern.Pattern)).SetValue(corrected);
+                Wait(() => ((ValuePattern)input.GetCurrentPattern(ValuePattern.Pattern)).Current.Value == corrected,
+                    "Typed manual field is visible before acknowledgement.");
                 Toggle(ack);
+                Wait(() => Find("manual-ack-"+key) is { } currentAck && Checked(currentAck), "Manual acknowledgement remains explicitly checked.");
             }
-            Wait(()=>Find("manual-submit-Timetable")?.Current.IsEnabled==true,"All one/three acknowledgements enable preview only.");
+            try { Wait(()=>Find("manual-submit-Timetable")?.Current.IsEnabled==true,"All one/three acknowledgements enable preview only."); }
+            catch (TimeoutException)
+            {
+                foreach (var key in keys)
+                {
+                    var field=Find("manual-value-"+key);var ack=Find("manual-ack-"+key);
+                    Console.Error.WriteLine($"Manual UI state {key}: text={((ValuePattern?)field?.GetCurrentPattern(ValuePattern.Pattern))?.Current.Value}, acknowledged={(ack is not null && Checked(ack))}, fieldEnabled={field?.Current.IsEnabled}, ackEnabled={ack?.Current.IsEnabled}");
+                }
+                Console.Error.WriteLine($"Manual UI submit enabled={Find("manual-submit-Timetable")?.Current.IsEnabled}");
+                throw;
+            }
             var first=keys[0];var edit=WaitElement("manual-value-"+first);edit.SetFocus();
             System.Windows.Forms.SendKeys.SendWait("{END}x");
             Wait(()=>!Checked(WaitElement("manual-ack-"+first)),"Keyboard editing clears that acknowledgement.");
