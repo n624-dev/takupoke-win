@@ -52,6 +52,52 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         if (!Valid) throw new InvalidDataException("OCR画像のサイズが不正です。");
         var mask = new bool[Width * Height];
         bool Ink(int x, int y) { var p = (y * Width + x) * 4; return Bgra[p] != 255 || Bgra[p + 1] != 255 || Bgra[p + 2] != 255; }
+        bool StrokeRange(bool horizontal, int lane, int first, int last, out int start, out int end)
+        {
+            start = first; end = last;
+            bool At(int p) { work.Step(); return horizontal ? Ink(p, lane) : Ink(lane, p); }
+            while (start <= end && !At(start) && start - first < 2) { start++; }
+            while (end >= start && !At(end) && last - end < 2) { end--; }
+            if (start >= end) return false;
+            for (var p = start; p <= end; p++) if (!At(p)) return false;
+            return true;
+        }
+        bool PrintedPerpendicular(PdfRule peer, bool horizontal, int lane)
+        {
+            var center = horizontal ? peer.X1 : peer.Y1;
+            var first = (int)Math.Ceiling(horizontal ? peer.Y1 : peer.X1);
+            var last = (int)Math.Floor(horizontal ? peer.Y2 : peer.X2);
+            var capacity = horizontal ? Height : Width;
+            first = Math.Clamp(first, 0, capacity - 1); last = Math.Clamp(last, 0, capacity - 1);
+            if (last - first + 1 < Math.Max(40, capacity / 40) || lane < first || lane > last) return false;
+            foreach (var perpendicularLane in new[] { (int)Math.Floor(center), (int)Math.Ceiling(center) }.Distinct())
+            {
+                if (perpendicularLane < 0 || perpendicularLane >= (horizontal ? Width : Height)) continue;
+                work.Step(); // Final intersection lookup below, in addition to the support scan.
+                if (StrokeRange(!horizontal, perpendicularLane, first, last, out var start, out var end) &&
+                    start <= lane && lane <= end && (horizontal ? Ink(perpendicularLane, lane) : Ink(lane, perpendicularLane))) return true;
+            }
+            return false;
+        }
+        bool SupportedEndpoints(PdfRule rule, bool horizontal, int lane, int start, int end)
+        {
+            var first = horizontal ? rule.X1 : rule.Y1; var last = horizontal ? rule.X2 : rule.Y2;
+            var starts = new HashSet<double>(); var ends = new HashSet<double>();
+            foreach (var peer in rules)
+            {
+                work.Step();
+                if (horizontal ? !peer.Vertical : !peer.Horizontal) continue;
+                var center = horizontal ? peer.X1 : peer.Y1;
+                if (Math.Abs(center - first) > 3 && Math.Abs(center - last) > 3) continue;
+                if (!PrintedPerpendicular(peer, horizontal, lane)) continue;
+                if (Math.Abs(center - first) <= 3) starts.Add(center);
+                if (Math.Abs(center - last) <= 3) ends.Add(center);
+            }
+            // Pixel support is [start,end+1). No tolerance inflates it around
+            // a measured perpendicular center, and competing rails fail closed.
+            return starts.Count == 1 && ends.Count == 1 && start <= starts.Single() && starts.Single() < end + 1 &&
+                start <= ends.Single() && ends.Single() < end + 1 && starts.Single() < ends.Single();
+        }
         // A neighborhood around a centerline is not evidence of a stroke.
         // Mask only physical rows/columns continuously printed along the rule;
         // a missed glyph beside it must remain uncovered, even one pixel away.
@@ -63,13 +109,23 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
             {
                 var first = Math.Clamp((int)Math.Ceiling(Math.Min(rule.X1, rule.X2)), 0, Width - 1); var last = Math.Clamp((int)Math.Floor(Math.Max(rule.X1, rule.X2)), 0, Width - 1);
                 for (var y = Math.Max(0, (int)Math.Floor(rule.Y1) - 2); y <= Math.Min(Height - 1, (int)Math.Ceiling(rule.Y1) + 2); y++)
-                { token.ThrowIfCancellationRequested(); work.Step(2L * (last - first + 1)); var continuous = first < last; for (var x = first; x <= last && continuous; x++) continuous = Ink(x, y); if (continuous) for (var x = first; x <= last; x++) mask[y * Width + x] = true; }
+                {
+                    token.ThrowIfCancellationRequested(); work.Step(last - first + 1L);
+                    if (!StrokeRange(true, y, first, last, out var start, out var end)) continue;
+                    if ((start != first || end != last) && !SupportedEndpoints(rule, true, y, start, end)) continue;
+                    for (var x = start; x <= end; x++) mask[y * Width + x] = true;
+                }
             }
             else if (rule.Vertical)
             {
                 var first = Math.Clamp((int)Math.Ceiling(Math.Min(rule.Y1, rule.Y2)), 0, Height - 1); var last = Math.Clamp((int)Math.Floor(Math.Max(rule.Y1, rule.Y2)), 0, Height - 1);
                 for (var x = Math.Max(0, (int)Math.Floor(rule.X1) - 2); x <= Math.Min(Width - 1, (int)Math.Ceiling(rule.X1) + 2); x++)
-                { token.ThrowIfCancellationRequested(); work.Step(2L * (last - first + 1)); var continuous = first < last; for (var y = first; y <= last && continuous; y++) continuous = Ink(x, y); if (continuous) for (var y = first; y <= last; y++) mask[y * Width + x] = true; }
+                {
+                    token.ThrowIfCancellationRequested(); work.Step(last - first + 1L);
+                    if (!StrokeRange(false, x, first, last, out var start, out var end)) continue;
+                    if ((start != first || end != last) && !SupportedEndpoints(rule, false, x, start, end)) continue;
+                    for (var y = start; y <= end; y++) mask[y * Width + x] = true;
+                }
             }
         }
         return mask;
