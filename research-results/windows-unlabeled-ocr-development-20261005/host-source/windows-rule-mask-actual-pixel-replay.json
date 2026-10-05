@@ -1,0 +1,14 @@
+{
+  "scope": "Host pixel-only RuleMask replay. No OCR, model, source glyph correction or gold comparison",
+  "bgraSHA256": "1840402f64f9e0343c414fa23d1d27f7528f9b225a66cd93a35c57d2e102f0df",
+  "rulesCount": 47,
+  "oldMaskSHA256": "69d1fdc730f545caffad71c7f9deaca8fbe9b0d4895a627d633ea78c36d8c92e",
+  "newMaskPath": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/owned-images/corrected-rule-mask.bin",
+  "newMaskSHA256": "f543e60beda570c920a70083388495aa4237ebcdc0e3262681558c4afa16150e",
+  "residualOld": 3772,
+  "residualNew": 0,
+  "added": 3772,
+  "removed": 0,
+  "maskedWhite": 0,
+  "actualHasUnrecognizedInk": false
+}

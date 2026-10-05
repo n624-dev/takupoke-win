@@ -1,0 +1,18 @@
+{
+  "recipeSHA256": "cc8a422fcb308fe4603e61c92337c27a12503b1db57e284a4d3579ac2801b697",
+  "command": [
+    "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/env/bin/python",
+    "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/run_grid.py"
+  ],
+  "exitCode": 0,
+  "stopReason": null,
+  "elapsedSeconds": 210.36659171299834,
+  "sampledOwnedProcessTreePeakRSSBytes": 901193728,
+  "RSSsamples": 1078,
+  "memoryScope": "sampled sum own process tree RSS; shared pages may double count; not device minimum or global RAM",
+  "rawBytes": 2607064,
+  "rawSHA256": "24e26b702d9f79e97bc5c8458e0dd08558f96054afae2fdacceebd9062fbbb47",
+  "stderrBytes": 0,
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "inferenceScope": "one known development image, fixed physical-region candidate only; old frame arms not repeated"
+}

@@ -1,0 +1,38 @@
+{
+  "base": "02394d756bf65bc1f38bedb4e897f8052a6a1ebb",
+  "worktree": "/tmp/takupoke-windows-raster-rule-endpoints-20261005",
+  "files": {
+    "src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs": "8d8ed58ce30b7aa4f7b040b5a4ca298e26e523d894de4b769d262905ddab9d72",
+    "tests/Takupoke.Integration.Tests/RecoveryRuleMaskEndpointTests.cs": "ac6ab27b391eeaad0dd1e48df23c6e1b3f37c7298b29009f4c701e089d227710"
+  },
+  "proofs": {
+    "windows-rule-mask-endpoint-red.log": "61db5efed98771bc81438a606b313a3faf0dffac77908ed875ff96106f2482a5",
+    "windows-rule-mask-endpoint-green.log": "d31524b0b36b5df13fa177a040511ff1f121ed9b24e9c68db174064b10429f1f",
+    "windows-rule-mask-endpoint-integration.log": "4cb8ffd7615fc98dbf462286d3b1ae22e41e782e0efcda5408b6c15c4561631f",
+    "windows-rule-mask-actual-pixel-replay.json": "e79e16668fba4df7a2e2d75723a52ece445a9bf01e49122702af4371072788b1",
+    "windows-rule-mask-endpoint-source.patch": "a129c9b330d135ad639c2f73c93604164821f66a78aafe103802ae8dfd90312a"
+  },
+  "results": {
+    "redFailed": 1,
+    "focusedPassed": 23,
+    "integrationPassed": 473,
+    "failed": 0,
+    "skipped": 0,
+    "actualOriginalPixelReplay": {
+      "scope": "Host pixel-only RuleMask replay. No OCR, model, source glyph correction or gold comparison",
+      "bgraSHA256": "1840402f64f9e0343c414fa23d1d27f7528f9b225a66cd93a35c57d2e102f0df",
+      "rulesCount": 47,
+      "oldMaskSHA256": "69d1fdc730f545caffad71c7f9deaca8fbe9b0d4895a627d633ea78c36d8c92e",
+      "newMaskPath": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/owned-images/corrected-rule-mask.bin",
+      "newMaskSHA256": "f543e60beda570c920a70083388495aa4237ebcdc0e3262681558c4afa16150e",
+      "residualOld": 3772,
+      "residualNew": 0,
+      "added": 3772,
+      "removed": 0,
+      "maskedWhite": 0,
+      "actualHasUnrecognizedInk": false
+    }
+  },
+  "scope": "Original extent WHITE endpoint trim <=2 only, continuous actual support and uniquely printed measured perpendicular endpoint centers. No model/OCR inference, no raster/glyph/gold or thresholds/caps changes. Old native baseline keeps old source and old mask immutable.",
+  "commit": "3b5b23bc19f0c63b34a44e6fc0690a05463a241f"
+}

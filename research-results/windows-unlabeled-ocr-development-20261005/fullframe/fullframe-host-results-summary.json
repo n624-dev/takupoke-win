@@ -1,0 +1,96 @@
+{
+  "scope": "One independently generated readable full40 source, same exact pixels: two frozen NDL OCR arms; each completed native return is assessed as a readable recovery failure, never a negative rejection",
+  "hostSource": "ae07e47fa68faeef210934b9f3688d6974587094",
+  "schema": 2,
+  "validator": 5,
+  "arms": [
+    {
+      "arm": "baseline",
+      "reportSha256": "a515629be7633a379dab1bf4733e605e9b6eb09fe8966177d94bccad591eb20d",
+      "nativeRawSha256": "a991a3c89290e8dedc5b07e598c5007b424be2e52487969b572adb18199925f9",
+      "nativeAtoms": 163,
+      "strictError": {
+        "type": "PdfParseException",
+        "Message": "PDFの時限の見出しを確認できませんでした（P05）。正常な解析結果は保持しています。",
+        "stage": "P05"
+      },
+      "builderError": {
+        "type": "InvalidDataException",
+        "Message": "年度の独立した見出しがありません。",
+        "stage": "builder",
+        "failureClass": "sourceContractRefusal"
+      },
+      "unrecognizedInk": true,
+      "sourceAdoptionEligible": null,
+      "downstreamDiagnosticOnly": true,
+      "actualAccepted": false,
+      "formalReturned": false,
+      "operationalError": false
+    },
+    {
+      "arm": "trim",
+      "reportSha256": "991a68204960655f115fd539ecc57c618f7f4d8a1745d361ea0f9feaefd906cd",
+      "nativeRawSha256": "8c64a49f4e9d4195b09101ba920d53896ce18427b9e916c06f12da4684c2b460",
+      "nativeAtoms": 163,
+      "strictError": {
+        "type": "PdfParseException",
+        "Message": "PDFの時限の見出しを確認できませんでした（P05）。正常な解析結果は保持しています。",
+        "stage": "P05"
+      },
+      "builderError": {
+        "type": "InvalidDataException",
+        "Message": "年度の独立した見出しがありません。",
+        "stage": "builder",
+        "failureClass": "sourceContractRefusal"
+      },
+      "unrecognizedInk": true,
+      "sourceAdoptionEligible": false,
+      "downstreamDiagnosticOnly": true,
+      "actualAccepted": false,
+      "formalReturned": false,
+      "operationalError": false
+    }
+  ],
+  "wholeCaseCounts": {
+    "planned": 2,
+    "nativeReturned": 2,
+    "formalReturned": 0,
+    "recoverySuccess": 0,
+    "readableRecoveryFailures": 2,
+    "negativeExamples": 0,
+    "incorrectAccepted": 0,
+    "runtimeErrors": 0
+  },
+  "tupleCounts": {
+    "planned": 80,
+    "formalOutputsAssessed": 0,
+    "formalOutputsUnavailable": 80,
+    "accuracy": null
+  },
+  "perfectDrawingTextControl": {
+    "glyphs": 548,
+    "rasterRules": 47,
+    "strictLiteralExact40": true,
+    "hostFormalExact40": true,
+    "oldMaskGlobalInkUncovered": true,
+    "actualPixelAdoptionEligible": false,
+    "noOCRorModelInference": true
+  },
+  "separateRuleMaskFixControl": {
+    "originalBgraSha256": "1840402f64f9e0343c414fa23d1d27f7528f9b225a66cd93a35c57d2e102f0df",
+    "addedPhysicalInkPixels": 3772,
+    "maskedWhite": 0,
+    "uncoveredAfter": 0,
+    "scope": "Same original glyph-source control only; actual OCR output quality not rescored and original old-mask arm reports retained"
+  },
+  "confirmedCauses": [
+    "Strict P05 occurs on actual whole-line period header representation; no artificial character splitting allowed",
+    "Builder rejects merged year/term/title native atom because no independent whole-atom year label; source value is not repaired or split",
+    "Actual global ink or ownership prerequisites also fail; downstream hypothetical host replay cannot become actual acceptance"
+  ],
+  "unprovedCauses": [
+    "Model capacity, detection/preprocessing versus recognition causal attribution",
+    "Complete literal correctness/coverage of all native source lines",
+    "Any model quality qualification, production NDL adoption or useful GenAI recovery"
+  ]
+}

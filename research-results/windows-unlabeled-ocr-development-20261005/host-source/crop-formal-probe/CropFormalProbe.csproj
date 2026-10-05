@@ -1,0 +1,1 @@
+<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><TargetFramework>net10.0</TargetFramework><OutputType>Exe</OutputType><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup><ItemGroup><ProjectReference Include="/tmp/takupoke-windows-raster-rule-endpoints-20261005/src/Takupoke.Infrastructure/Takupoke.Infrastructure.csproj" /></ItemGroup></Project>

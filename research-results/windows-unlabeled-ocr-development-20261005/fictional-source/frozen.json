@@ -1,0 +1,55 @@
+{
+  "phase": "Fresh invented unlabeled baseline source freeze; not final merged/parallel/blank coverage",
+  "inputIndependentOfOCROutputs": true,
+  "OCRNativeCalls": 0,
+  "modelCalls": 0,
+  "fontSHA256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+  "fontLicense": "SIL Open Font License1.1; Noto Sans CJK JP Regular2.004",
+  "Pillow": "12.3.0",
+  "FreeType": "2.14.3",
+  "PNGBytes": 44401,
+  "PNGSHA256": "3bb95ebcce616cf24c6b4c431f6fe9b790491e5d22085f74e4430cfd5871b946",
+  "glyphCount": 548,
+  "printedLines": 170,
+  "sourceContractPreflight": "Pending unchanged Strict/Builder/Rules/Engine/Validator/fullformal, not assumed success",
+  "files": [
+    {
+      "path": "drawing-source.json",
+      "bytes": 6000,
+      "sha256": "25e8f58156bc3a955b3b8bf4616ad1267e627b9aff37676a829b3f3e625d815e"
+    },
+    {
+      "path": "generate.py",
+      "bytes": 7484,
+      "sha256": "a5bbf0151bfd8fbb6a37005613dbc407c59d0d4ea8aa4d30f0f2041081ed0b39"
+    },
+    {
+      "path": "drawing-glyph-preflight.json",
+      "bytes": 189072,
+      "sha256": "662e9ce3d99c66a48fa5979ce122c4d6ec359a6f59425c55c06482abfa9a9427"
+    },
+    {
+      "path": "literal-formal-oracle.json",
+      "bytes": 9883,
+      "sha256": "448d13ae7860890ed86b7211e226718c1d8068c41d913709d07e8a18e7868a69"
+    },
+    {
+      "path": "font-license.txt",
+      "bytes": 4383,
+      "sha256": "eb5a2a88566ca8ef61f20f7cddd3fec621cf3a017ecf363a92740590a9b8870c"
+    }
+  ],
+  "inputIndependentRecipe": {
+    "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/recipe-before-input-frozen.json",
+    "sha256": "1f27694c0cbc1020cd0c82bbeb76be3562d31e8364ccb277ca942d478ee202e6",
+    "recordedModifiedUTCepoch": 1791157351.2855449,
+    "sourceModifiedUTCepoch": 1791157422.8852386
+  },
+  "scopeLimitations": [
+    "40 full present unmerged cells only, not final merged/parallel/verified blank teacher/room qualification",
+    "Values have invented natural lexical hints (師/域) but no public complete role aliases; do not claim role assignment blind",
+    "Full formal source contract preflight pending; native inputs pixels only; literal/source glyph/role oracle never native input",
+    "No actual character accuracy, OCR confidence, unknown-ink completeness, false-adoption statistics or model qualification yet"
+  ],
+  "creationOnlyGeneratorGuard": "Consumer --owned-output verifies all frozen input/gold/generator pins and regenerates only pixels; no evaluator/freeze overwrite; source geometry/PNG unchanged and native0."
+}

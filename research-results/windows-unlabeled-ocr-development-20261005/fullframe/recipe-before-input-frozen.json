@@ -1,0 +1,123 @@
+{
+  "recipe": "NDL-unlabeled-full40-fullframe-v1",
+  "nativeInferenceExecuted": false,
+  "nativeArms": [
+    "official default complete frame",
+    "fixed RGB255 outer-white trim complete frame"
+  ],
+  "nativeRequests": 2,
+  "inputs": "ONE independently invented traditional class1_2 5weekdays×8periods unmerged raster, three UNLABELED rows; no earlier subject/teacher/room values. Native receives only complete original pixels. Exact source/gold produced independently AFTER this recipe freeze. Source glyphs/gold for model-free validity and posthoc comparison only.",
+  "inputEnvelope": {
+    "maxWidth": 4096,
+    "maxHeight": 4096,
+    "plannedWidthApprox": 3740,
+    "plannedHeight": 800,
+    "fontSize": 20,
+    "pdfGitForbidden": true,
+    "originalPDFOrImageReacquisitionForbidden": true
+  },
+  "scaleCaveat": "Actual official DEIM fixed800×800 letterbox/downscale may merge individual period headers or miss small body text; this is a measured stage, not repaired. Same fontsizes on highwidth page are not comparable to first1120px component as engine-only effect.",
+  "detectorRecognizer": {
+    "files": [
+      {
+        "repo": "ndl-lab/ndlocr-lite",
+        "revision": "636d1cfeb1331f89f4048f416e49e23a09a714b5",
+        "path": "src/model/deim-s-1024x1024.onnx",
+        "localPath": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/deim-s-1024x1024.onnx",
+        "bytes": 40256763,
+        "sha256": "c156ce0c4e704bc3bf7e4016d0a87b949cffa8b3724f4b4cc696b8284c3c7373",
+        "gitBlobSHA": "1a446d4d440ff670f984898a20b8f85fa8b6b284",
+        "license": "CC-BY-4.0",
+        "URL": "https://raw.githubusercontent.com/ndl-lab/ndlocr-lite/636d1cfeb1331f89f4048f416e49e23a09a714b5/src/model/deim-s-1024x1024.onnx"
+      },
+      {
+        "repo": "ndl-lab/ndlocr-lite",
+        "revision": "636d1cfeb1331f89f4048f416e49e23a09a714b5",
+        "path": "src/model/parseq-ndl-24x256-30-tiny-189epoch-tegaki3-r8data-202604.onnx",
+        "localPath": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/parseq-ndl-24x256-30-tiny-189epoch-tegaki3-r8data-202604.onnx",
+        "bytes": 36457393,
+        "sha256": "9e651bae4c1a4d5254da1127e86e82e21ef62d5339b37e62d4a3d3d30831772d",
+        "gitBlobSHA": "d9ce8c85009e746298708678b220a4805c09e6ca",
+        "license": "CC-BY-4.0",
+        "URL": "https://raw.githubusercontent.com/ndl-lab/ndlocr-lite/636d1cfeb1331f89f4048f416e49e23a09a714b5/src/model/parseq-ndl-24x256-30-tiny-189epoch-tegaki3-r8data-202604.onnx"
+      },
+      {
+        "repo": "ndl-lab/ndlocr-lite",
+        "revision": "636d1cfeb1331f89f4048f416e49e23a09a714b5",
+        "path": "src/model/parseq-ndl-24x384-50-tiny-300epoch-tegaki3-r8data-202604.onnx",
+        "localPath": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/parseq-ndl-24x384-50-tiny-300epoch-tegaki3-r8data-202604.onnx",
+        "bytes": 37808553,
+        "sha256": "49cea9db4552f19eb05c8ee202fcf74714977749b2f4c9376b127fde41b07a99",
+        "gitBlobSHA": "2d465ad8546a9daa8fb53d3828d1c9ae653d671d",
+        "license": "CC-BY-4.0",
+        "URL": "https://raw.githubusercontent.com/ndl-lab/ndlocr-lite/636d1cfeb1331f89f4048f416e49e23a09a714b5/src/model/parseq-ndl-24x384-50-tiny-300epoch-tegaki3-r8data-202604.onnx"
+      },
+      {
+        "repo": "ndl-lab/ndlocr-lite",
+        "revision": "636d1cfeb1331f89f4048f416e49e23a09a714b5",
+        "path": "src/model/parseq-ndl-24x768-100-tiny-153epoch-tegaki3-r8data-202604.onnx",
+        "localPath": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/parseq-ndl-24x768-100-tiny-153epoch-tegaki3-r8data-202604.onnx",
+        "bytes": 42588187,
+        "sha256": "06462b0dbd5b0b8508545c8c3d485cf20dbf4ffa652fe145e69c9e7457080602",
+        "gitBlobSHA": "f2813e712b34e1e0f94a3c6ba10e6ed637746149",
+        "license": "CC-BY-4.0",
+        "URL": "https://raw.githubusercontent.com/ndl-lab/ndlocr-lite/636d1cfeb1331f89f4048f416e49e23a09a714b5/src/model/parseq-ndl-24x768-100-tiny-153epoch-tegaki3-r8data-202604.onnx"
+      },
+      {
+        "repo": "tesseract-ocr/tessdata_best",
+        "revision": "e12c65a915945e4c28e237a9b52bc4a8f39a0cec",
+        "path": "jpn.traineddata",
+        "localPath": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/tess-models/jpn.traineddata",
+        "bytes": 14330109,
+        "sha256": "36bdf9ac823f5911e624c30d0553e890b8abc7c31a65b3ef14da943658c40b79",
+        "gitBlobSHA": "d2a8eab80ba3aba7654ac789b82f70b64d1cf051",
+        "license": "Apache-2.0",
+        "URL": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_best/e12c65a915945e4c28e237a9b52bc4a8f39a0cec/jpn.traineddata"
+      }
+    ],
+    "totalBytes": 171441005,
+    "nativeInferenceExecuted": false,
+    "sampleImageDownloaded": false
+  },
+  "nativeSettings": "same official NDL CPU default cascade; active conf_threshold .25; score .2/iou .2 retained but fixed upstream does not apply NMS; no class mask override; same dictionary/EOS/argmax/rotations/preprocessing except white-trim arm",
+  "trimProof": "RGB==255 only; conserve all nonwhite within original integer parent crop, retain OriginalDetectionBox/PreTrimParsedParentCrop/ActualRecognitionROI. Actual raster Rules/mask only, no gold geometry. No dedup/alternate text/charbox division/no thresholds. Globalink coverage and full formal remain separate.",
+  "headerAtoms": "Native whole line/word boxes retained; no splitting multiple period digits by inferred character count. Existing Strict requires40 original independent header atoms; merged native atoms count as input-contract failure.",
+  "hostRoute": "unchanged PdfScheduleParser.Timetable -> RecoveryDocumentBuilder -> original Rules/Engine/Validator; use actual raster grid and original native whole boxes. Zero LLM providers, separately formal exact independent complete40slot oracle.",
+  "sourceGuards": "Raw text/cell/day/period/subject/teacher/room exact and position/overlap/crop integrity reported separately. Wrong accepted literal counted, execution failures unassessed; unknown stage never semantic0.",
+  "resources": "same owned3GiB process-tree RSS/420second per engine pair guard; input/rule mask bytes pinned; owned raster/PDF deleted after comparison. No production edits/catalog activation.",
+  "nextRecipe": "Any physical grid cell/heading cropping must be separate freeze based only original pixels/rules and coordinates, not source drawing or oracle. Not in this recipe.",
+  "implementationPins": [
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/run_ndl.py",
+      "sha256": "82f844b70fd6ffe274bb7a8f604f4e925ba954d3c3e1242916dbf8a4203f58fa"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/run_trim.py",
+      "sha256": "a2088e673b128ee914825751fb575b9f3d14520e6cb13d15785dad94b1764c24"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/pixel_trim.py",
+      "sha256": "5ba2b420b0f833a85ab1d4c10736004b35891ab2690a0cc1571125ed81a7a62e"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/token_stats.py",
+      "sha256": "4e5f99cdd702423b14195354cd4549e1ff7c701ce3459b3d089ebf886be8b96b"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/rules-probe/Program.cs",
+      "sha256": "94d58f229e09bbd8bb9bd389a5ac9fbe9b738f1260bd904e9b0ccba3e10aca1f"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/rules-probe/Rules.csproj",
+      "sha256": "f46144acfca047d308a4b48c2b216acd2c245ea4c3e540341d3194dd927a9c53"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/supervise.py",
+      "sha256": "9120fc9d3ed1dcaf96a3971db394146e1a7cbc113daeaa2805ecd45b2691e8b9"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/trim-only-candidate/supervise_trim.py",
+      "sha256": "795c56acf0835b3985668d468db0260d723fbec2e1fc25285d745d71e1693743"
+    }
+  ]
+}

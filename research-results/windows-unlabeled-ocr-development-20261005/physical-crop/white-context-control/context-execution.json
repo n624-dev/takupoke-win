@@ -1,0 +1,18 @@
+{
+  "recipeSHA256": "a09342ba368b5e81db0174cd87abb52818dabe5f144d7fe5567d434613c5dfb7",
+  "command": [
+    "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/env/bin/python",
+    "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/white-context-control/run_context.py"
+  ],
+  "exitCode": 0,
+  "stopReason": null,
+  "elapsedSeconds": 5.735501580013079,
+  "sampledOwnedProcessTreePeakRSSBytes": 335376384,
+  "RSSsamples": 42,
+  "memoryScope": "sampled sum own process tree RSS; shared pages may double count; not device minimum or global RAM",
+  "rawBytes": 285595,
+  "rawSHA256": "a577e8556e1a6a9cd0604d444b42f4e15aac8cd44d6b6c2309872005e2db608a",
+  "stderrBytes": 0,
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "inferenceScope": "13 unique actual original-pixel context controls; zero detector calls; old outputs preserved"
+}

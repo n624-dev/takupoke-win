@@ -1,0 +1,37 @@
+{
+  "scope": "ONE completed raster-region OCR developmental case, not actual PDF endpoint or model qualification",
+  "productionSourceCommit": "3b5b23bc19f0c63b34a44e6fc0690a05463a241f",
+  "plannedCases": 1,
+  "nativeReturnedCases": 1,
+  "formalReturnedCases": 0,
+  "readableRecoveryFailures": 1,
+  "incorrectAdoptions": 0,
+  "operationalErrors": 0,
+  "negativeExamples": 0,
+  "plannedLessonTuples": 40,
+  "formalTupleAssessments": 0,
+  "unavailableFormalTuples": 40,
+  "tupleAccuracy": null,
+  "strictStage": "P05",
+  "builderFailure": {
+    "type": "InvalidDataException",
+    "Message": "クラス・日付・時限の見出しを確認できません。",
+    "stage": "builder",
+    "failureClass": "sourceContractRefusal"
+  },
+  "globalUnrecognizedInk": true,
+  "nativeRegionAdoptionEligible": false,
+  "actualRecoveryAccepted": false,
+  "downstreamDiagnosticOnly": true,
+  "providerCalls": 0,
+  "nativeAtoms": 153,
+  "noGoldBeforeHostOutput": true,
+  "originalWholeAtomBoxesKept": true,
+  "confidenceScope": "NDL detector confidence, not text/character confidence; no calibrated acquisition safety qualification",
+  "notes": [
+    "IncorrectAdoptions=0 concerns this single readable refused case; no negative discrimination assessment.",
+    "Drawing-source semantic40/40 and corrected RuleMask pixel control are separate from actual OCR-source coverage.",
+    "No new OCR invocation during host replay.",
+    "No acceptance/catalog/production model activation."
+  ]
+}

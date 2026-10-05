@@ -1,0 +1,381 @@
+{
+  "recipe": "original-horizontal-white-context-causal-control-v1",
+  "scope": "13 unique actual OLD+NEW RGB shapes/bytes/model-index controls from41 observed predicate-true calls; no detector, no global evidence replacement or formal score",
+  "selectionSHA256": "1569bd685d6c425d5f7b37abc4648e385c829f59f43028abf91784562039a8d5",
+  "pins": [
+    {
+      "path": "/tmp/takupoke-windows-raster-rule-endpoints-20261005/src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs",
+      "bytes": 23017,
+      "sha256": "8d8ed58ce30b7aa4f7b040b5a4ca298e26e523d894de4b769d262905ddab9d72"
+    },
+    {
+      "path": "/tmp/takupoke-windows-raster-rule-endpoints-20261005/tests/Takupoke.Integration.Tests/RecoveryRuleMaskEndpointTests.cs",
+      "bytes": 5029,
+      "sha256": "ac6ab27b391eeaad0dd1e48df23c6e1b3f37c7298b29009f4c701e089d227710"
+    },
+    {
+      "path": "/workspace/recovery-research/ocr-unlabeled-fresh-source-high-20261004/drawing-glyph-preflight.json",
+      "bytes": 189072,
+      "sha256": "662e9ce3d99c66a48fa5979ce122c4d6ec359a6f59425c55c06482abfa9a9427"
+    },
+    {
+      "path": "/workspace/recovery-research/ocr-unlabeled-fresh-source-high-20261004/drawing-source.json",
+      "bytes": 6000,
+      "sha256": "25e8f58156bc3a955b3b8bf4616ad1267e627b9aff37676a829b3f3e625d815e"
+    },
+    {
+      "path": "/workspace/recovery-research/ocr-unlabeled-fresh-source-high-20261004/frozen.json",
+      "bytes": 2534,
+      "sha256": "00feb4453f5322321345d00ad6f062ab53eeeb99b8eb6888fb89e4d6635aec61"
+    },
+    {
+      "path": "/workspace/recovery-research/ocr-unlabeled-fresh-source-high-20261004/generate.py",
+      "bytes": 7484,
+      "sha256": "a5bbf0151bfd8fbb6a37005613dbc407c59d0d4ea8aa4d30f0f2041081ed0b39"
+    },
+    {
+      "path": "/workspace/recovery-research/ocr-unlabeled-fresh-source-high-20261004/literal-formal-oracle.json",
+      "bytes": 9883,
+      "sha256": "448d13ae7860890ed86b7211e226718c1d8068c41d913709d07e8a18e7868a69"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/README.md",
+      "bytes": 3062,
+      "sha256": "9d7ec9e91dc2f09c30308b410b0c11659e49dabd32e72f09cca13e366ebcdfe6"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/coordinates.py",
+      "bytes": 999,
+      "sha256": "262448a7ccefb91188c61a5dae7846c7e54f323a9f3cb38aecc3ef7087f59399"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/native-raw.log",
+      "bytes": 2607064,
+      "sha256": "24e26b702d9f79e97bc5c8458e0dd08558f96054afae2fdacceebd9062fbbb47"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/pixel_regions.py",
+      "bytes": 4023,
+      "sha256": "e6990e0bb7f052bade5837604be11e1df1ea97709dc56b927f6817d60293f30c"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/recipe-frozen.json",
+      "bytes": 16230,
+      "sha256": "cc8a422fcb308fe4603e61c92337c27a12503b1db57e284a4d3579ac2801b697"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/regions-before-native.json",
+      "bytes": 42059,
+      "sha256": "e7c9ad1d16039616eaa5b116d4a67e685ed8c41175676a12485ff6997b617259"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/run_grid.py",
+      "bytes": 9211,
+      "sha256": "c2efe4f07d9d5281aadc0d72e48efc8aff7d76d404ad667a5dfb4b7fe4aff1ba"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/supervise_grid.py",
+      "bytes": 2744,
+      "sha256": "942c42628c81b76d02e811ff7120e7821150844ff154e2d468e18986265e5b30"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/test_coordinates.py",
+      "bytes": 1208,
+      "sha256": "b3e0b8b0e30f2318966333b45a04a5cb5d245a54848e7e04593f0497603d16c8"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/test_pixel_regions.py",
+      "bytes": 1928,
+      "sha256": "366819f7e9fc131f5e50a602ce760ff829ba60d01edd46888bf1ee4cce4f7733"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/white-context-control/prepare.py",
+      "bytes": 2405,
+      "sha256": "c41a4f674c1df9f205ea033638318e71655f4b022491456b3d895aac22c706d3"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/white-context-control/run_context.py",
+      "bytes": 3913,
+      "sha256": "cfd5055e8daf3ad63698bf45bf4f60a98e0875ff6abb97d2ee60100613843b10"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/white-context-control/selected-inputs.json",
+      "bytes": 24840,
+      "sha256": "1569bd685d6c425d5f7b37abc4648e385c829f59f43028abf91784562039a8d5"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/white-context-control/supervise_context.py",
+      "bytes": 2765,
+      "sha256": "0d9d3299b34a976b3ad3d6bc2b0ba2086fadc1676ac3c1c46526d389b8d692d1"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/white-context-control/test_white_context.py",
+      "bytes": 999,
+      "sha256": "b9b2689487cec470e59185d29d03fd88339b0a667f855dd7baf19371fdaa71a3"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/white-context-control/white_context.py",
+      "bytes": 885,
+      "sha256": "0ce74208b96fa46e022bd5475f968e94c0ecfbd4f3e6e059884f7f1d7d869a62"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/model-scope-addendum.json",
+      "bytes": 346,
+      "sha256": "a23aac95f5095eb9eecfc2ce20309bbc0f32b524d93a3e1afd62b9b3edc7c35a"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/native-inputs.json",
+      "bytes": 607,
+      "sha256": "724127216ab5726418b6d45605973397516dc9d3dd1c65b40364781b78def54b"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/owned-images/corrected-rule-mask.bin",
+      "bytes": 2992000,
+      "sha256": "f543e60beda570c920a70083388495aa4237ebcdc0e3262681558c4afa16150e"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/owned-images/unlabeled-baseline.bgra",
+      "bytes": 11968000,
+      "sha256": "1840402f64f9e0343c414fa23d1d27f7528f9b225a66cd93a35c57d2e102f0df"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/owned-images/unlabeled-baseline.png",
+      "bytes": 44401,
+      "sha256": "3bb95ebcce616cf24c6b4c431f6fe9b790491e5d22085f74e4430cfd5871b946"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/raster-measured-boxes.json",
+      "bytes": 18166,
+      "sha256": "ce70365b7108d1b14c35f99f9ea472110112a7f7e0a213ff40f94bc92c426e6b"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/recipe-before-input-frozen.json",
+      "bytes": 8165,
+      "sha256": "1f27694c0cbc1020cd0c82bbeb76be3562d31e8364ccb277ca942d478ee202e6"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/supervise_family.py",
+      "bytes": 2787,
+      "sha256": "35fffbe3e864e15de017b852f0782e1f01b766bb62670472ab1a1ed2fb52acfd"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/trim-only-candidate/physical-rules.jsonl",
+      "bytes": 4011,
+      "sha256": "6d3c8fcb610c5522ebb4a5366a50a9067bf679db9c1b146ee4923cfda92aee40"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/trim-only-candidate/pixel_trim.py",
+      "bytes": 4159,
+      "sha256": "5ba2b420b0f833a85ab1d4c10736004b35891ab2690a0cc1571125ed81a7a62e"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/trim-only-candidate/run_trim.py",
+      "bytes": 7269,
+      "sha256": "a2088e673b128ee914825751fb575b9f3d14520e6cb13d15785dad94b1764c24"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/trim-only-candidate/token_stats.py",
+      "bytes": 1288,
+      "sha256": "4e5f99cdd702423b14195354cd4549e1ff7c701ce3459b3d089ebf886be8b96b"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/trim-only-candidate/unlabeled-full40-rule-mask.bin",
+      "bytes": 2992000,
+      "sha256": "69d1fdc730f545caffad71c7f9deaca8fbe9b0d4895a627d633ea78c36d8c92e"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/config/NDLmoji.yaml",
+      "bytes": 42434,
+      "sha256": "f6ad5a2de444b495155866af811cf1a98309dcae3225db802767ea531a2dc529"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/config/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/config/ndl.yaml",
+      "bytes": 299,
+      "sha256": "0c2a6a184dd322375b76f2ce3842f8ac555d53edad0ab63655c013f4c471c5a0"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/deim.py",
+      "bytes": 8032,
+      "sha256": "b745278585306c351579b85c257e385a2618bb57b59261848fad80b4265b29d8"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/deim-s-1024x1024.onnx",
+      "bytes": 40256763,
+      "sha256": "c156ce0c4e704bc3bf7e4016d0a87b949cffa8b3724f4b4cc696b8284c3c7373"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/parseq-ndl-24x256-30-tiny-189epoch-tegaki3-r8data-202604.onnx",
+      "bytes": 36457393,
+      "sha256": "9e651bae4c1a4d5254da1127e86e82e21ef62d5339b37e62d4a3d3d30831772d"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/parseq-ndl-24x384-50-tiny-300epoch-tegaki3-r8data-202604.onnx",
+      "bytes": 37808553,
+      "sha256": "49cea9db4552f19eb05c8ee202fcf74714977749b2f4c9376b127fde41b07a99"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/model/parseq-ndl-24x768-100-tiny-153epoch-tegaki3-r8data-202604.onnx",
+      "bytes": 42588187,
+      "sha256": "06462b0dbd5b0b8508545c8c3d485cf20dbf4ffa652fe145e69c9e7457080602"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/ndl_parser.py",
+      "bytes": 43421,
+      "sha256": "abe329084b3bc11bf57f330ffe057a610f672a3dd6f691e631f3339098a10997"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/ocr.py",
+      "bytes": 54702,
+      "sha256": "9e3e6cf0c082c5c6cb492f1ca4a9e067133ee07f081c37d81fa2b2d3a1a9b54b"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/optional_features/__init__.py",
+      "bytes": 1647,
+      "sha256": "2e73ea42892121443f7e18796ff1f1b07dd7bbd67a1901ad531fc51459ad8ce5"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/parseq.py",
+      "bytes": 3512,
+      "sha256": "638066d19ded10e63046e7448fe956ba25a97d0d143f9ba6f1bbaaea0c3ba6a7"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/pdf_output_utils.py",
+      "bytes": 2305,
+      "sha256": "52773c83246e63d90c75483e7dc8b92f7d812e935dfc272b452eedf8e2ebec71"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/order/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/order/parse_xml.py",
+      "bytes": 5169,
+      "sha256": "53d360a425f413196764912cfda869136ec178a38b68f79ceff01cc81b19ce8d"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/order/reorder.py",
+      "bytes": 7225,
+      "sha256": "10f70501a54d1b84a0c87668aa80ac91eaf0b9c139393823578170617816ab5e"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/order/smooth_order.py",
+      "bytes": 3928,
+      "sha256": "e65da8b03e989d850c1dfaa391c6b5bd158de5c8a3caddfa4ba59ef86b1feab3"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/order/warichu_block.py",
+      "bytes": 5694,
+      "sha256": "50a31488e86c338078b366c0d506584949fbbbb7970e0cc2cb58069c883a3012"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/order/wrap_dataset.py",
+      "bytes": 459,
+      "sha256": "57e3f2e9c4fe2bb4bf7ac96416634509b5f1f76911f59e178d65e1f93986eada"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/utils/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/utils/file.py",
+      "bytes": 694,
+      "sha256": "8a8f27d3babe228417421a94914e5df953c7384935475e43411281c061f89e87"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/utils/logger.py",
+      "bytes": 799,
+      "sha256": "b4b18f9d7a3a7cc84ee34568622c30d721d418d571129430b5ecd2a7a6d9aee0"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/utils/time.py",
+      "bytes": 1839,
+      "sha256": "38936d312df9298d82196eaefd54c67fd1cfa68fdb51421669bc99bd211d6eeb"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/utils/xml.py",
+      "bytes": 2753,
+      "sha256": "4f2660326e3d3f20aa8ea94544ade6d6041ec11731fb5feca6c66e8289bb9efa"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/xy_cut/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/xy_cut/block_xy_cut.py",
+      "bytes": 10740,
+      "sha256": "5c5790d0a85beff5c1a1246e0369daa9a15a12f50e312f1e9b0e332d74b34f94"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/reading_order/xy_cut/eval.py",
+      "bytes": 2178,
+      "sha256": "c424b8954ef844b44bb0067487b15d29c841abbec8aaa14a3adf41d2dc09fa60"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/set_version.py",
+      "bytes": 2128,
+      "sha256": "bd513932bb29f1c4dd6b7260a61050635f32cc3f0d8c99f31702eb320a97bb87"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/tcy_wrapper.py",
+      "bytes": 8340,
+      "sha256": "97c3fd3febdc4b12ba159ad972ccdda48d05f1079e92e619cc92b653ac2674d1"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/tools/ndlkoten2tei.py",
+      "bytes": 4414,
+      "sha256": "00f7b8445513e6d441d0452872bbaa2c47a26309aa976556a6eebd82246a9e71"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/uicomponent/localelabel.py",
+      "bytes": 3312,
+      "sha256": "7de1646fe9a6cfae9f0dae02fe9fef4fa0f6dc8b9a1161543f7b4e2e87491331"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/uicomponent/textdaisy.py",
+      "bytes": 43475,
+      "sha256": "4258b099f54e6f783bf140672c6b045a2ea59b84b5c9c21a945ff07265b4dcd4"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/ndl-source/src/version.py",
+      "bytes": 106,
+      "sha256": "af0348035f473afdc515b3b303fe343ed6e8cc254ec4410df40b12bbdd542caf"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-nonpaddle-ocr-20261004/run_ndl.py",
+      "bytes": 2933,
+      "sha256": "82f844b70fd6ffe274bb7a8f604f4e925ba954d3c3e1242916dbf8a4203f58fa"
+    },
+    {
+      "path": "/workspace/review-notes/windows-rule-mask-endpoint-source-frozen.json",
+      "bytes": 2203,
+      "sha256": "92ec0fed323e0fab27d4ebcc2e369cfbdbfab675305fabb01f030b93ca96b82c"
+    }
+  ],
+  "callsBeforeFreeze": 0,
+  "plannedCalls": 13,
+  "limits": {
+    "controls": 16,
+    "seconds": 60,
+    "sampledTreeRSSBytes": 3221225472,
+    "pollingRawCapBytes": 4194304
+  },
+  "change": "ONLY original RGB255 columns horizontally retained within measured physical ROI and exact original y interval. Model/prediction rule unmodified; no new pixels or ink/height/geometry repair."
+}

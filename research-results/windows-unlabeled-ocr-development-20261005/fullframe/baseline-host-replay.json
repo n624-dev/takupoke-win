@@ -1,0 +1,4271 @@
+{
+  "scope": "Actual OCR whole-line outputs \u002B actual raster host replay; no inference, no invented character boxes; gold after output",
+  "rules": 47,
+  "glyphs": 163,
+  "sourceHash": "3bb95ebcce616cf24c6b4c431f6fe9b790491e5d22085f74e4430cfd5871b946",
+  "schema": 2,
+  "validator": 5,
+  "operationalError": false,
+  "unrecognizedInk": true,
+  "nativeSourceAdoptionEligible": null,
+  "detectorConfidenceIsNotCharacterConfidence": true,
+  "nativeRawSha": "a991a3c89290e8dedc5b07e598c5007b424be2e52487969b572adb18199925f9",
+  "originalNativeAtoms": [
+    {
+      "boundingBox": [
+        [
+          99,
+          5
+        ],
+        [
+          99,
+          35
+        ],
+        [
+          611,
+          5
+        ],
+        [
+          611,
+          35
+        ]
+      ],
+      "id": 0,
+      "isVertical": "false",
+      "text": "\u4EE4\u548C14\u5E74\u5EA6\u524D\u671F\u6642\u9593\u5272",
+      "isTextline": "true",
+      "confidence": 0.475,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          437,
+          63
+        ],
+        [
+          437,
+          99
+        ],
+        [
+          522,
+          63
+        ],
+        [
+          522,
+          99
+        ]
+      ],
+      "id": 1,
+      "isVertical": "false",
+      "text": "\u6708\u66DC\u65E5",
+      "isTextline": "true",
+      "confidence": 0.559,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1155,
+          63
+        ],
+        [
+          1155,
+          100
+        ],
+        [
+          1248,
+          63
+        ],
+        [
+          1248,
+          100
+        ]
+      ],
+      "id": 2,
+      "isVertical": "false",
+      "text": "\u706B\u66DC\u65E5",
+      "isTextline": "true",
+      "confidence": 0.705,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1874,
+          63
+        ],
+        [
+          1874,
+          101
+        ],
+        [
+          1964,
+          63
+        ],
+        [
+          1964,
+          101
+        ]
+      ],
+      "id": 3,
+      "isVertical": "false",
+      "text": "\u6C34\u66DC\u65E5",
+      "isTextline": "true",
+      "confidence": 0.64,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2595,
+          62
+        ],
+        [
+          2595,
+          100
+        ],
+        [
+          2689,
+          62
+        ],
+        [
+          2689,
+          100
+        ]
+      ],
+      "id": 4,
+      "isVertical": "false",
+      "text": "\u6728\u66DC\u65E5",
+      "isTextline": "true",
+      "confidence": 0.65,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3318,
+          63
+        ],
+        [
+          3318,
+          100
+        ],
+        [
+          3405,
+          63
+        ],
+        [
+          3405,
+          100
+        ]
+      ],
+      "id": 5,
+      "isVertical": "false",
+      "text": "\u91D1\u66DC\u65E5",
+      "isTextline": "true",
+      "confidence": 0.706,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          56,
+          158
+        ],
+        [
+          56,
+          197
+        ],
+        [
+          118,
+          158
+        ],
+        [
+          118,
+          197
+        ]
+      ],
+      "id": 6,
+      "isVertical": "false",
+      "text": "0.0",
+      "isTextline": "true",
+      "confidence": 0.556,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          16,
+          156
+        ],
+        [
+          16,
+          198
+        ],
+        [
+          64,
+          156
+        ],
+        [
+          64,
+          198
+        ]
+      ],
+      "id": 7,
+      "isVertical": "false",
+      "text": "11",
+      "isTextline": "true",
+      "confidence": 0.418,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          128,
+          95
+        ],
+        [
+          128,
+          132
+        ],
+        [
+          201,
+          95
+        ],
+        [
+          201,
+          132
+        ]
+      ],
+      "id": 8,
+      "isVertical": "false",
+      "text": "11",
+      "isTextline": "true",
+      "confidence": 0.439,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          127,
+          126
+        ],
+        [
+          127,
+          164
+        ],
+        [
+          211,
+          126
+        ],
+        [
+          211,
+          164
+        ]
+      ],
+      "id": 9,
+      "isVertical": "false",
+      "text": "\u56F3\u781401",
+      "isTextline": "true",
+      "confidence": 0.65,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          121,
+          157
+        ],
+        [
+          121,
+          198
+        ],
+        [
+          213,
+          157
+        ],
+        [
+          213,
+          198
+        ]
+      ],
+      "id": 10,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B01",
+      "isTextline": "true",
+      "confidence": 0.785,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          119,
+          190
+        ],
+        [
+          119,
+          232
+        ],
+        [
+          212,
+          190
+        ],
+        [
+          212,
+          232
+        ]
+      ],
+      "id": 11,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5701",
+      "isTextline": "true",
+      "confidence": 0.782,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          215,
+          98
+        ],
+        [
+          215,
+          133
+        ],
+        [
+          290,
+          98
+        ],
+        [
+          290,
+          133
+        ]
+      ],
+      "id": 12,
+      "isVertical": "false",
+      "text": "$0,00",
+      "isTextline": "true",
+      "confidence": 0.444,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          213,
+          191
+        ],
+        [
+          213,
+          231
+        ],
+        [
+          304,
+          191
+        ],
+        [
+          304,
+          231
+        ]
+      ],
+      "id": 13,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5702",
+      "isTextline": "true",
+      "confidence": 0.785,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          212,
+          158
+        ],
+        [
+          212,
+          197
+        ],
+        [
+          305,
+          158
+        ],
+        [
+          305,
+          197
+        ]
+      ],
+      "id": 14,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B02",
+      "isTextline": "true",
+      "confidence": 0.79,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          211,
+          126
+        ],
+        [
+          211,
+          165
+        ],
+        [
+          306,
+          126
+        ],
+        [
+          306,
+          165
+        ]
+      ],
+      "id": 15,
+      "isVertical": "false",
+      "text": "\u56F36402",
+      "isTextline": "true",
+      "confidence": 0.717,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          313,
+          98
+        ],
+        [
+          313,
+          133
+        ],
+        [
+          391,
+          98
+        ],
+        [
+          391,
+          133
+        ]
+      ],
+      "id": 16,
+      "isVertical": "false",
+      "text": "1,00000000",
+      "isTextline": "true",
+      "confidence": 0.358,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          304,
+          126
+        ],
+        [
+          304,
+          164
+        ],
+        [
+          392,
+          126
+        ],
+        [
+          392,
+          164
+        ]
+      ],
+      "id": 17,
+      "isVertical": "false",
+      "text": "\u56F3\u781403",
+      "isTextline": "true",
+      "confidence": 0.699,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          301,
+          158
+        ],
+        [
+          301,
+          198
+        ],
+        [
+          394,
+          158
+        ],
+        [
+          394,
+          198
+        ]
+      ],
+      "id": 18,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B03",
+      "isTextline": "true",
+      "confidence": 0.776,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          301,
+          191
+        ],
+        [
+          301,
+          232
+        ],
+        [
+          394,
+          191
+        ],
+        [
+          394,
+          232
+        ]
+      ],
+      "id": 19,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5703",
+      "isTextline": "true",
+      "confidence": 0.772,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          401,
+          98
+        ],
+        [
+          401,
+          133
+        ],
+        [
+          486,
+          98
+        ],
+        [
+          486,
+          133
+        ]
+      ],
+      "id": 20,
+      "isVertical": "false",
+      "text": "4.4",
+      "isTextline": "true",
+      "confidence": 0.398,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          577,
+          96
+        ],
+        [
+          577,
+          131
+        ],
+        [
+          656,
+          96
+        ],
+        [
+          656,
+          131
+        ]
+      ],
+      "id": 21,
+      "isVertical": "false",
+      "text": "10.00",
+      "isTextline": "true",
+      "confidence": 0.446,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          575,
+          126
+        ],
+        [
+          575,
+          165
+        ],
+        [
+          663,
+          126
+        ],
+        [
+          663,
+          165
+        ]
+      ],
+      "id": 22,
+      "isVertical": "false",
+      "text": "\u56F36,06",
+      "isTextline": "true",
+      "confidence": 0.713,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          573,
+          158
+        ],
+        [
+          573,
+          197
+        ],
+        [
+          663,
+          158
+        ],
+        [
+          663,
+          197
+        ]
+      ],
+      "id": 23,
+      "isVertical": "false",
+      "text": "\u8A66\u9A1306",
+      "isTextline": "true",
+      "confidence": 0.786,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          572,
+          191
+        ],
+        [
+          572,
+          232
+        ],
+        [
+          662,
+          191
+        ],
+        [
+          662,
+          232
+        ]
+      ],
+      "id": 24,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5706",
+      "isTextline": "true",
+      "confidence": 0.767,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          480,
+          126
+        ],
+        [
+          480,
+          165
+        ],
+        [
+          575,
+          126
+        ],
+        [
+          575,
+          165
+        ]
+      ],
+      "id": 25,
+      "isVertical": "false",
+      "text": "\u56F3805",
+      "isTextline": "true",
+      "confidence": 0.688,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          480,
+          158
+        ],
+        [
+          480,
+          197
+        ],
+        [
+          576,
+          158
+        ],
+        [
+          576,
+          197
+        ]
+      ],
+      "id": 26,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B05",
+      "isTextline": "true",
+      "confidence": 0.781,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          480,
+          191
+        ],
+        [
+          480,
+          232
+        ],
+        [
+          576,
+          191
+        ],
+        [
+          576,
+          232
+        ]
+      ],
+      "id": 27,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5705",
+      "isTextline": "true",
+      "confidence": 0.779,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          394,
+          125
+        ],
+        [
+          394,
+          165
+        ],
+        [
+          484,
+          125
+        ],
+        [
+          484,
+          165
+        ]
+      ],
+      "id": 28,
+      "isVertical": "false",
+      "text": "\u56F3304",
+      "isTextline": "true",
+      "confidence": 0.697,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          393,
+          192
+        ],
+        [
+          393,
+          233
+        ],
+        [
+          484,
+          192
+        ],
+        [
+          484,
+          233
+        ]
+      ],
+      "id": 29,
+      "isVertical": "false",
+      "text": "\u8A08\u57DF04",
+      "isTextline": "true",
+      "confidence": 0.763,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          392,
+          159
+        ],
+        [
+          392,
+          199
+        ],
+        [
+          484,
+          159
+        ],
+        [
+          484,
+          199
+        ]
+      ],
+      "id": 30,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B04",
+      "isTextline": "true",
+      "confidence": 0.78,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          664,
+          97
+        ],
+        [
+          664,
+          131
+        ],
+        [
+          733,
+          97
+        ],
+        [
+          733,
+          131
+        ]
+      ],
+      "id": 31,
+      "isVertical": "false",
+      "text": "1,",
+      "isTextline": "true",
+      "confidence": 0.41,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          663,
+          189
+        ],
+        [
+          663,
+          230
+        ],
+        [
+          753,
+          189
+        ],
+        [
+          753,
+          230
+        ]
+      ],
+      "id": 32,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF07",
+      "isTextline": "true",
+      "confidence": 0.782,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          661,
+          125
+        ],
+        [
+          661,
+          165
+        ],
+        [
+          754,
+          125
+        ],
+        [
+          754,
+          165
+        ]
+      ],
+      "id": 33,
+      "isVertical": "false",
+      "text": "\u56F3\u523707",
+      "isTextline": "true",
+      "confidence": 0.707,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          661,
+          157
+        ],
+        [
+          661,
+          197
+        ],
+        [
+          753,
+          157
+        ],
+        [
+          753,
+          197
+        ]
+      ],
+      "id": 34,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B07",
+      "isTextline": "true",
+      "confidence": 0.787,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          762,
+          98
+        ],
+        [
+          762,
+          132
+        ],
+        [
+          835,
+          98
+        ],
+        [
+          835,
+          132
+        ]
+      ],
+      "id": 35,
+      "isVertical": "false",
+      "text": "10,00",
+      "isTextline": "true",
+      "confidence": 0.379,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          755,
+          126
+        ],
+        [
+          755,
+          164
+        ],
+        [
+          842,
+          126
+        ],
+        [
+          842,
+          164
+        ]
+      ],
+      "id": 36,
+      "isVertical": "false",
+      "text": "\u56F3408",
+      "isTextline": "true",
+      "confidence": 0.687,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          751,
+          158
+        ],
+        [
+          751,
+          198
+        ],
+        [
+          844,
+          158
+        ],
+        [
+          844,
+          198
+        ]
+      ],
+      "id": 37,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B08",
+      "isTextline": "true",
+      "confidence": 0.789,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          751,
+          191
+        ],
+        [
+          751,
+          232
+        ],
+        [
+          844,
+          191
+        ],
+        [
+          844,
+          232
+        ]
+      ],
+      "id": 38,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5708",
+      "isTextline": "true",
+      "confidence": 0.776,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          849,
+          99
+        ],
+        [
+          849,
+          132
+        ],
+        [
+          925,
+          99
+        ],
+        [
+          925,
+          132
+        ]
+      ],
+      "id": 39,
+      "isVertical": "false",
+      "text": "11",
+      "isTextline": "true",
+      "confidence": 0.364,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          845,
+          127
+        ],
+        [
+          845,
+          165
+        ],
+        [
+          933,
+          127
+        ],
+        [
+          933,
+          165
+        ]
+      ],
+      "id": 40,
+      "isVertical": "false",
+      "text": "\u56F3309",
+      "isTextline": "true",
+      "confidence": 0.702,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          843,
+          191
+        ],
+        [
+          843,
+          233
+        ],
+        [
+          934,
+          191
+        ],
+        [
+          934,
+          233
+        ]
+      ],
+      "id": 41,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5709",
+      "isTextline": "true",
+      "confidence": 0.777,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          842,
+          159
+        ],
+        [
+          842,
+          198
+        ],
+        [
+          934,
+          159
+        ],
+        [
+          934,
+          198
+        ]
+      ],
+      "id": 42,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5709",
+      "isTextline": "true",
+      "confidence": 0.799,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1026,
+          96
+        ],
+        [
+          1026,
+          132
+        ],
+        [
+          1106,
+          96
+        ],
+        [
+          1106,
+          132
+        ]
+      ],
+      "id": 43,
+      "isVertical": "false",
+      "text": "13",
+      "isTextline": "true",
+      "confidence": 0.465,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1023,
+          125
+        ],
+        [
+          1023,
+          164
+        ],
+        [
+          1112,
+          125
+        ],
+        [
+          1112,
+          164
+        ]
+      ],
+      "id": 44,
+      "isVertical": "false",
+      "text": "\u56F3\u7814II",
+      "isTextline": "true",
+      "confidence": 0.741,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1022,
+          95
+        ],
+        [
+          1022,
+          134
+        ],
+        [
+          1148,
+          95
+        ],
+        [
+          1148,
+          134
+        ]
+      ],
+      "id": 45,
+      "isVertical": "false",
+      "text": "10,000000",
+      "isTextline": "true",
+      "confidence": 0.279,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1022,
+          157
+        ],
+        [
+          1022,
+          197
+        ],
+        [
+          1113,
+          157
+        ],
+        [
+          1113,
+          197
+        ]
+      ],
+      "id": 46,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B11",
+      "isTextline": "true",
+      "confidence": 0.803,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1022,
+          190
+        ],
+        [
+          1022,
+          232
+        ],
+        [
+          1112,
+          190
+        ],
+        [
+          1112,
+          232
+        ]
+      ],
+      "id": 47,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF11",
+      "isTextline": "true",
+      "confidence": 0.78,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          930,
+          96
+        ],
+        [
+          930,
+          134
+        ],
+        [
+          1025,
+          96
+        ],
+        [
+          1025,
+          134
+        ]
+      ],
+      "id": 48,
+      "isVertical": "false",
+      "text": "1,0",
+      "isTextline": "true",
+      "confidence": 0.455,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          930,
+          158
+        ],
+        [
+          930,
+          198
+        ],
+        [
+          1025,
+          158
+        ],
+        [
+          1025,
+          198
+        ]
+      ],
+      "id": 49,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B10",
+      "isTextline": "true",
+      "confidence": 0.794,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          930,
+          190
+        ],
+        [
+          930,
+          232
+        ],
+        [
+          1025,
+          190
+        ],
+        [
+          1025,
+          232
+        ]
+      ],
+      "id": 50,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5710",
+      "isTextline": "true",
+      "confidence": 0.782,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          929,
+          126
+        ],
+        [
+          929,
+          165
+        ],
+        [
+          1025,
+          126
+        ],
+        [
+          1025,
+          165
+        ]
+      ],
+      "id": 51,
+      "isVertical": "false",
+      "text": "\u56F3\u781410",
+      "isTextline": "true",
+      "confidence": 0.746,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1118,
+          97
+        ],
+        [
+          1118,
+          131
+        ],
+        [
+          1218,
+          97
+        ],
+        [
+          1218,
+          131
+        ]
+      ],
+      "id": 52,
+      "isVertical": "false",
+      "text": "0.00",
+      "isTextline": "true",
+      "confidence": 0.405,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1379,
+          95
+        ],
+        [
+          1379,
+          133
+        ],
+        [
+          1474,
+          95
+        ],
+        [
+          1474,
+          133
+        ]
+      ],
+      "id": 53,
+      "isVertical": "false",
+      "text": "1,0",
+      "isTextline": "true",
+      "confidence": 0.418,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1477,
+          96
+        ],
+        [
+          1477,
+          131
+        ],
+        [
+          1547,
+          96
+        ],
+        [
+          1547,
+          131
+        ]
+      ],
+      "id": 54,
+      "isVertical": "false",
+      "text": "10,00",
+      "isTextline": "true",
+      "confidence": 0.479,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1474,
+          127
+        ],
+        [
+          1474,
+          165
+        ],
+        [
+          1561,
+          127
+        ],
+        [
+          1561,
+          165
+        ]
+      ],
+      "id": 55,
+      "isVertical": "false",
+      "text": "\u56F3\u781416",
+      "isTextline": "true",
+      "confidence": 0.718,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1472,
+          158
+        ],
+        [
+          1472,
+          198
+        ],
+        [
+          1564,
+          158
+        ],
+        [
+          1564,
+          198
+        ]
+      ],
+      "id": 56,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B16",
+      "isTextline": "true",
+      "confidence": 0.807,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1472,
+          191
+        ],
+        [
+          1472,
+          232
+        ],
+        [
+          1564,
+          191
+        ],
+        [
+          1564,
+          232
+        ]
+      ],
+      "id": 57,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5716",
+      "isTextline": "true",
+      "confidence": 0.795,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1380,
+          126
+        ],
+        [
+          1380,
+          165
+        ],
+        [
+          1474,
+          126
+        ],
+        [
+          1474,
+          165
+        ]
+      ],
+      "id": 58,
+      "isVertical": "false",
+      "text": "\u56F3\u781415",
+      "isTextline": "true",
+      "confidence": 0.75,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1380,
+          158
+        ],
+        [
+          1380,
+          198
+        ],
+        [
+          1475,
+          158
+        ],
+        [
+          1475,
+          198
+        ]
+      ],
+      "id": 59,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B15",
+      "isTextline": "true",
+      "confidence": 0.793,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1380,
+          190
+        ],
+        [
+          1380,
+          232
+        ],
+        [
+          1475,
+          190
+        ],
+        [
+          1475,
+          232
+        ]
+      ],
+      "id": 60,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF15",
+      "isTextline": "true",
+      "confidence": 0.787,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1293,
+          126
+        ],
+        [
+          1293,
+          165
+        ],
+        [
+          1383,
+          126
+        ],
+        [
+          1383,
+          165
+        ]
+      ],
+      "id": 61,
+      "isVertical": "false",
+      "text": "\u56F3\u781414",
+      "isTextline": "true",
+      "confidence": 0.71,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1292,
+          191
+        ],
+        [
+          1292,
+          233
+        ],
+        [
+          1385,
+          191
+        ],
+        [
+          1385,
+          233
+        ]
+      ],
+      "id": 62,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF14",
+      "isTextline": "true",
+      "confidence": 0.767,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1291,
+          159
+        ],
+        [
+          1291,
+          199
+        ],
+        [
+          1384,
+          159
+        ],
+        [
+          1384,
+          199
+        ]
+      ],
+      "id": 63,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B14",
+      "isTextline": "true",
+      "confidence": 0.796,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1206,
+          124
+        ],
+        [
+          1206,
+          165
+        ],
+        [
+          1294,
+          124
+        ],
+        [
+          1294,
+          165
+        ]
+      ],
+      "id": 64,
+      "isVertical": "false",
+      "text": "\u56F3\u781413",
+      "isTextline": "true",
+      "confidence": 0.58,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1203,
+          191
+        ],
+        [
+          1203,
+          232
+        ],
+        [
+          1294,
+          191
+        ],
+        [
+          1294,
+          232
+        ]
+      ],
+      "id": 65,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF13",
+      "isTextline": "true",
+      "confidence": 0.779,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1202,
+          158
+        ],
+        [
+          1202,
+          198
+        ],
+        [
+          1294,
+          158
+        ],
+        [
+          1294,
+          198
+        ]
+      ],
+      "id": 66,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B13",
+      "isTextline": "true",
+      "confidence": 0.795,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1113,
+          126
+        ],
+        [
+          1113,
+          166
+        ],
+        [
+          1209,
+          126
+        ],
+        [
+          1209,
+          166
+        ]
+      ],
+      "id": 67,
+      "isVertical": "false",
+      "text": "\u56F3\u781412",
+      "isTextline": "true",
+      "confidence": 0.665,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1113,
+          190
+        ],
+        [
+          1113,
+          231
+        ],
+        [
+          1206,
+          190
+        ],
+        [
+          1206,
+          231
+        ]
+      ],
+      "id": 68,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5712",
+      "isTextline": "true",
+      "confidence": 0.798,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1112,
+          158
+        ],
+        [
+          1112,
+          198
+        ],
+        [
+          1205,
+          158
+        ],
+        [
+          1205,
+          198
+        ]
+      ],
+      "id": 69,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B12",
+      "isTextline": "true",
+      "confidence": 0.786,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1574,
+          98
+        ],
+        [
+          1574,
+          132
+        ],
+        [
+          1643,
+          98
+        ],
+        [
+          1643,
+          132
+        ]
+      ],
+      "id": 70,
+      "isVertical": "false",
+      "text": "100",
+      "isTextline": "true",
+      "confidence": 0.432,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1664,
+          97
+        ],
+        [
+          1664,
+          133
+        ],
+        [
+          1738,
+          97
+        ],
+        [
+          1738,
+          133
+        ]
+      ],
+      "id": 71,
+      "isVertical": "false",
+      "text": "2,,0",
+      "isTextline": "true",
+      "confidence": 0.473,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2017,
+          98
+        ],
+        [
+          2017,
+          131
+        ],
+        [
+          2088,
+          98
+        ],
+        [
+          2088,
+          131
+        ]
+      ],
+      "id": 72,
+      "isVertical": "false",
+      "text": "1,,00",
+      "isTextline": "true",
+      "confidence": 0.432,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2013,
+          190
+        ],
+        [
+          2013,
+          231
+        ],
+        [
+          2102,
+          190
+        ],
+        [
+          2102,
+          231
+        ]
+      ],
+      "id": 73,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF22",
+      "isTextline": "true",
+      "confidence": 0.811,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2012,
+          157
+        ],
+        [
+          2012,
+          198
+        ],
+        [
+          2102,
+          157
+        ],
+        [
+          2102,
+          198
+        ]
+      ],
+      "id": 74,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B22",
+      "isTextline": "true",
+      "confidence": 0.793,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2011,
+          125
+        ],
+        [
+          2011,
+          164
+        ],
+        [
+          2104,
+          125
+        ],
+        [
+          2104,
+          164
+        ]
+      ],
+      "id": 75,
+      "isVertical": "false",
+      "text": "\u56F3\u781422",
+      "isTextline": "true",
+      "confidence": 0.729,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1924,
+          125
+        ],
+        [
+          1924,
+          164
+        ],
+        [
+          2012,
+          125
+        ],
+        [
+          2012,
+          164
+        ]
+      ],
+      "id": 76,
+      "isVertical": "false",
+      "text": "\u56F3\u781421",
+      "isTextline": "true",
+      "confidence": 0.675,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1922,
+          157
+        ],
+        [
+          1922,
+          197
+        ],
+        [
+          2013,
+          157
+        ],
+        [
+          2013,
+          197
+        ]
+      ],
+      "id": 77,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B21",
+      "isTextline": "true",
+      "confidence": 0.801,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1922,
+          190
+        ],
+        [
+          1922,
+          232
+        ],
+        [
+          2014,
+          190
+        ],
+        [
+          2014,
+          232
+        ]
+      ],
+      "id": 78,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF21",
+      "isTextline": "true",
+      "confidence": 0.778,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1831,
+          126
+        ],
+        [
+          1831,
+          166
+        ],
+        [
+          1926,
+          126
+        ],
+        [
+          1926,
+          166
+        ]
+      ],
+      "id": 79,
+      "isVertical": "false",
+      "text": "\u56F3\u781420",
+      "isTextline": "true",
+      "confidence": 0.691,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1830,
+          158
+        ],
+        [
+          1830,
+          198
+        ],
+        [
+          1925,
+          158
+        ],
+        [
+          1925,
+          198
+        ]
+      ],
+      "id": 80,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B20",
+      "isTextline": "true",
+      "confidence": 0.792,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1830,
+          190
+        ],
+        [
+          1830,
+          232
+        ],
+        [
+          1925,
+          190
+        ],
+        [
+          1925,
+          232
+        ]
+      ],
+      "id": 81,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF20",
+      "isTextline": "true",
+      "confidence": 0.797,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1829,
+          127
+        ],
+        [
+          1829,
+          165
+        ],
+        [
+          1916,
+          127
+        ],
+        [
+          1916,
+          165
+        ]
+      ],
+      "id": 82,
+      "isVertical": "false",
+      "text": "\u56F3\u781420",
+      "isTextline": "true",
+      "confidence": 0.263,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1742,
+          125
+        ],
+        [
+          1742,
+          165
+        ],
+        [
+          1834,
+          125
+        ],
+        [
+          1834,
+          165
+        ]
+      ],
+      "id": 83,
+      "isVertical": "false",
+      "text": "\u56F3\u781419",
+      "isTextline": "true",
+      "confidence": 0.696,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1742,
+          191
+        ],
+        [
+          1742,
+          233
+        ],
+        [
+          1834,
+          191
+        ],
+        [
+          1834,
+          233
+        ]
+      ],
+      "id": 84,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF19",
+      "isTextline": "true",
+      "confidence": 0.766,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1740,
+          159
+        ],
+        [
+          1740,
+          199
+        ],
+        [
+          1834,
+          159
+        ],
+        [
+          1834,
+          199
+        ]
+      ],
+      "id": 85,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B19",
+      "isTextline": "true",
+      "confidence": 0.791,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1656,
+          125
+        ],
+        [
+          1656,
+          164
+        ],
+        [
+          1744,
+          125
+        ],
+        [
+          1744,
+          164
+        ]
+      ],
+      "id": 86,
+      "isVertical": "false",
+      "text": "\u56F3\u781418",
+      "isTextline": "true",
+      "confidence": 0.727,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1653,
+          158
+        ],
+        [
+          1653,
+          199
+        ],
+        [
+          1743,
+          158
+        ],
+        [
+          1743,
+          199
+        ]
+      ],
+      "id": 87,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B18",
+      "isTextline": "true",
+      "confidence": 0.803,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1653,
+          191
+        ],
+        [
+          1653,
+          232
+        ],
+        [
+          1743,
+          191
+        ],
+        [
+          1743,
+          232
+        ]
+      ],
+      "id": 88,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5718",
+      "isTextline": "true",
+      "confidence": 0.788,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1564,
+          125
+        ],
+        [
+          1564,
+          164
+        ],
+        [
+          1656,
+          125
+        ],
+        [
+          1656,
+          164
+        ]
+      ],
+      "id": 89,
+      "isVertical": "false",
+      "text": "\u56F3\u781417",
+      "isTextline": "true",
+      "confidence": 0.737,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1564,
+          190
+        ],
+        [
+          1564,
+          230
+        ],
+        [
+          1653,
+          190
+        ],
+        [
+          1653,
+          230
+        ]
+      ],
+      "id": 90,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5717",
+      "isTextline": "true",
+      "confidence": 0.812,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          1563,
+          157
+        ],
+        [
+          1563,
+          198
+        ],
+        [
+          1653,
+          157
+        ],
+        [
+          1653,
+          198
+        ]
+      ],
+      "id": 91,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B17",
+      "isTextline": "true",
+      "confidence": 0.804,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2112,
+          96
+        ],
+        [
+          2112,
+          132
+        ],
+        [
+          2187,
+          96
+        ],
+        [
+          2187,
+          132
+        ]
+      ],
+      "id": 92,
+      "isVertical": "false",
+      "text": "100",
+      "isTextline": "true",
+      "confidence": 0.448,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2106,
+          125
+        ],
+        [
+          2106,
+          164
+        ],
+        [
+          2193,
+          125
+        ],
+        [
+          2193,
+          164
+        ]
+      ],
+      "id": 93,
+      "isVertical": "false",
+      "text": "\u56F3\u781423",
+      "isTextline": "true",
+      "confidence": 0.722,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2104,
+          158
+        ],
+        [
+          2104,
+          198
+        ],
+        [
+          2192,
+          158
+        ],
+        [
+          2192,
+          198
+        ]
+      ],
+      "id": 94,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B23",
+      "isTextline": "true",
+      "confidence": 0.8,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2103,
+          191
+        ],
+        [
+          2103,
+          232
+        ],
+        [
+          2192,
+          191
+        ],
+        [
+          2192,
+          232
+        ]
+      ],
+      "id": 95,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF23",
+      "isTextline": "true",
+      "confidence": 0.79,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2198,
+          98
+        ],
+        [
+          2198,
+          132
+        ],
+        [
+          2272,
+          98
+        ],
+        [
+          2272,
+          132
+        ]
+      ],
+      "id": 96,
+      "isVertical": "false",
+      "text": "$0,0000000",
+      "isTextline": "true",
+      "confidence": 0.332,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2194,
+          126
+        ],
+        [
+          2194,
+          166
+        ],
+        [
+          2282,
+          126
+        ],
+        [
+          2282,
+          166
+        ]
+      ],
+      "id": 97,
+      "isVertical": "false",
+      "text": "\u56F3\u781424",
+      "isTextline": "true",
+      "confidence": 0.68,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2192,
+          191
+        ],
+        [
+          2192,
+          232
+        ],
+        [
+          2283,
+          191
+        ],
+        [
+          2283,
+          232
+        ]
+      ],
+      "id": 98,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF24",
+      "isTextline": "true",
+      "confidence": 0.77,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2191,
+          158
+        ],
+        [
+          2191,
+          198
+        ],
+        [
+          2283,
+          158
+        ],
+        [
+          2283,
+          198
+        ]
+      ],
+      "id": 99,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B24",
+      "isTextline": "true",
+      "confidence": 0.793,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2293,
+          99
+        ],
+        [
+          2293,
+          134
+        ],
+        [
+          2367,
+          99
+        ],
+        [
+          2367,
+          134
+        ]
+      ],
+      "id": 100,
+      "isVertical": "false",
+      "text": "11",
+      "isTextline": "true",
+      "confidence": 0.373,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2281,
+          126
+        ],
+        [
+          2281,
+          165
+        ],
+        [
+          2373,
+          126
+        ],
+        [
+          2373,
+          165
+        ]
+      ],
+      "id": 101,
+      "isVertical": "false",
+      "text": "\u56F3\u781425",
+      "isTextline": "true",
+      "confidence": 0.738,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2280,
+          157
+        ],
+        [
+          2280,
+          197
+        ],
+        [
+          2374,
+          157
+        ],
+        [
+          2374,
+          197
+        ]
+      ],
+      "id": 102,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B25",
+      "isTextline": "true",
+      "confidence": 0.799,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2280,
+          190
+        ],
+        [
+          2280,
+          232
+        ],
+        [
+          2375,
+          190
+        ],
+        [
+          2375,
+          232
+        ]
+      ],
+      "id": 103,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF25",
+      "isTextline": "true",
+      "confidence": 0.797,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2376,
+          97
+        ],
+        [
+          2376,
+          132
+        ],
+        [
+          2451,
+          97
+        ],
+        [
+          2451,
+          132
+        ]
+      ],
+      "id": 104,
+      "isVertical": "false",
+      "text": "20",
+      "isTextline": "true",
+      "confidence": 0.454,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2374,
+          191
+        ],
+        [
+          2374,
+          232
+        ],
+        [
+          2465,
+          191
+        ],
+        [
+          2465,
+          232
+        ]
+      ],
+      "id": 105,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF26",
+      "isTextline": "true",
+      "confidence": 0.784,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2373,
+          126
+        ],
+        [
+          2373,
+          164
+        ],
+        [
+          2462,
+          126
+        ],
+        [
+          2462,
+          164
+        ]
+      ],
+      "id": 106,
+      "isVertical": "false",
+      "text": "\u56F3\u781426",
+      "isTextline": "true",
+      "confidence": 0.723,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2373,
+          157
+        ],
+        [
+          2373,
+          197
+        ],
+        [
+          2464,
+          157
+        ],
+        [
+          2464,
+          197
+        ]
+      ],
+      "id": 107,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B26",
+      "isTextline": "true",
+      "confidence": 0.791,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2464,
+          97
+        ],
+        [
+          2464,
+          132
+        ],
+        [
+          2553,
+          97
+        ],
+        [
+          2553,
+          132
+        ]
+      ],
+      "id": 108,
+      "isVertical": "false",
+      "text": "3,0000000",
+      "isTextline": "true",
+      "confidence": 0.393,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2462,
+          157
+        ],
+        [
+          2462,
+          198
+        ],
+        [
+          2552,
+          157
+        ],
+        [
+          2552,
+          198
+        ]
+      ],
+      "id": 109,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B27",
+      "isTextline": "true",
+      "confidence": 0.781,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2462,
+          190
+        ],
+        [
+          2462,
+          231
+        ],
+        [
+          2553,
+          190
+        ],
+        [
+          2553,
+          231
+        ]
+      ],
+      "id": 110,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF27",
+      "isTextline": "true",
+      "confidence": 0.802,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2461,
+          125
+        ],
+        [
+          2461,
+          164
+        ],
+        [
+          2552,
+          125
+        ],
+        [
+          2552,
+          164
+        ]
+      ],
+      "id": 111,
+      "isVertical": "false",
+      "text": "\u56F3\u781427",
+      "isTextline": "true",
+      "confidence": 0.73,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2740,
+          98
+        ],
+        [
+          2740,
+          133
+        ],
+        [
+          2819,
+          98
+        ],
+        [
+          2819,
+          133
+        ]
+      ],
+      "id": 112,
+      "isVertical": "false",
+      "text": "1,,0000",
+      "isTextline": "true",
+      "confidence": 0.361,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2823,
+          97
+        ],
+        [
+          2823,
+          131
+        ],
+        [
+          2901,
+          97
+        ],
+        [
+          2901,
+          131
+        ]
+      ],
+      "id": 113,
+      "isVertical": "false",
+      "text": "11",
+      "isTextline": "true",
+      "confidence": 0.416,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2916,
+          97
+        ],
+        [
+          2916,
+          131
+        ],
+        [
+          2982,
+          97
+        ],
+        [
+          2982,
+          131
+        ]
+      ],
+      "id": 114,
+      "isVertical": "false",
+      "text": "1,84",
+      "isTextline": "true",
+      "confidence": 0.456,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2558,
+          125
+        ],
+        [
+          2558,
+          164
+        ],
+        [
+          2643,
+          125
+        ],
+        [
+          2643,
+          164
+        ]
+      ],
+      "id": 115,
+      "isVertical": "false",
+      "text": "\u56F3\u781428",
+      "isTextline": "true",
+      "confidence": 0.721,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2554,
+          158
+        ],
+        [
+          2554,
+          198
+        ],
+        [
+          2643,
+          158
+        ],
+        [
+          2643,
+          198
+        ]
+      ],
+      "id": 116,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B28",
+      "isTextline": "true",
+      "confidence": 0.791,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2552,
+          191
+        ],
+        [
+          2552,
+          232
+        ],
+        [
+          2643,
+          191
+        ],
+        [
+          2643,
+          232
+        ]
+      ],
+      "id": 117,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF28",
+      "isTextline": "true",
+      "confidence": 0.774,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2731,
+          126
+        ],
+        [
+          2731,
+          165
+        ],
+        [
+          2821,
+          126
+        ],
+        [
+          2821,
+          165
+        ]
+      ],
+      "id": 118,
+      "isVertical": "false",
+      "text": "\u56F3\u781430",
+      "isTextline": "true",
+      "confidence": 0.733,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2730,
+          158
+        ],
+        [
+          2730,
+          197
+        ],
+        [
+          2824,
+          158
+        ],
+        [
+          2824,
+          197
+        ]
+      ],
+      "id": 119,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B30",
+      "isTextline": "true",
+      "confidence": 0.791,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2729,
+          190
+        ],
+        [
+          2729,
+          233
+        ],
+        [
+          2824,
+          190
+        ],
+        [
+          2824,
+          233
+        ]
+      ],
+      "id": 120,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5730",
+      "isTextline": "true",
+      "confidence": 0.787,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2645,
+          126
+        ],
+        [
+          2645,
+          165
+        ],
+        [
+          2733,
+          126
+        ],
+        [
+          2733,
+          165
+        ]
+      ],
+      "id": 121,
+      "isVertical": "false",
+      "text": "\u56F3\u781429",
+      "isTextline": "true",
+      "confidence": 0.611,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2642,
+          191
+        ],
+        [
+          2642,
+          232
+        ],
+        [
+          2733,
+          191
+        ],
+        [
+          2733,
+          232
+        ]
+      ],
+      "id": 122,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5729",
+      "isTextline": "true",
+      "confidence": 0.756,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2641,
+          158
+        ],
+        [
+          2641,
+          198
+        ],
+        [
+          2733,
+          158
+        ],
+        [
+          2733,
+          198
+        ]
+      ],
+      "id": 123,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B29",
+      "isTextline": "true",
+      "confidence": 0.779,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2911,
+          126
+        ],
+        [
+          2911,
+          165
+        ],
+        [
+          3003,
+          126
+        ],
+        [
+          3003,
+          165
+        ]
+      ],
+      "id": 124,
+      "isVertical": "false",
+      "text": "\u56F3\u781432",
+      "isTextline": "true",
+      "confidence": 0.739,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2911,
+          157
+        ],
+        [
+          2911,
+          198
+        ],
+        [
+          3003,
+          157
+        ],
+        [
+          3003,
+          198
+        ]
+      ],
+      "id": 125,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B32",
+      "isTextline": "true",
+      "confidence": 0.78,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2911,
+          190
+        ],
+        [
+          2911,
+          230
+        ],
+        [
+          3003,
+          190
+        ],
+        [
+          3003,
+          230
+        ]
+      ],
+      "id": 126,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5732",
+      "isTextline": "true",
+      "confidence": 0.803,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2825,
+          191
+        ],
+        [
+          2825,
+          232
+        ],
+        [
+          2914,
+          191
+        ],
+        [
+          2914,
+          232
+        ]
+      ],
+      "id": 127,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5731",
+      "isTextline": "true",
+      "confidence": 0.779,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2823,
+          125
+        ],
+        [
+          2823,
+          164
+        ],
+        [
+          2912,
+          125
+        ],
+        [
+          2912,
+          164
+        ]
+      ],
+      "id": 128,
+      "isVertical": "false",
+      "text": "\u56F3\u781431",
+      "isTextline": "true",
+      "confidence": 0.725,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          2823,
+          157
+        ],
+        [
+          2823,
+          197
+        ],
+        [
+          2913,
+          157
+        ],
+        [
+          2913,
+          197
+        ]
+      ],
+      "id": 129,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B31",
+      "isTextline": "true",
+      "confidence": 0.794,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3014,
+          99
+        ],
+        [
+          3014,
+          132
+        ],
+        [
+          3083,
+          99
+        ],
+        [
+          3083,
+          132
+        ]
+      ],
+      "id": 130,
+      "isVertical": "false",
+      "text": "11",
+      "isTextline": "true",
+      "confidence": 0.404,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3009,
+          126
+        ],
+        [
+          3009,
+          164
+        ],
+        [
+          3093,
+          126
+        ],
+        [
+          3093,
+          164
+        ]
+      ],
+      "id": 131,
+      "isVertical": "false",
+      "text": "\u56F3\u781433",
+      "isTextline": "true",
+      "confidence": 0.666,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3004,
+          158
+        ],
+        [
+          3004,
+          198
+        ],
+        [
+          3093,
+          158
+        ],
+        [
+          3093,
+          198
+        ]
+      ],
+      "id": 132,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B33",
+      "isTextline": "true",
+      "confidence": 0.787,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3003,
+          191
+        ],
+        [
+          3003,
+          232
+        ],
+        [
+          3094,
+          191
+        ],
+        [
+          3094,
+          232
+        ]
+      ],
+      "id": 133,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5733",
+      "isTextline": "true",
+      "confidence": 0.777,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3099,
+          98
+        ],
+        [
+          3099,
+          132
+        ],
+        [
+          3167,
+          98
+        ],
+        [
+          3167,
+          132
+        ]
+      ],
+      "id": 134,
+      "isVertical": "false",
+      "text": "200",
+      "isTextline": "true",
+      "confidence": 0.289,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3093,
+          126
+        ],
+        [
+          3093,
+          165
+        ],
+        [
+          3184,
+          126
+        ],
+        [
+          3184,
+          165
+        ]
+      ],
+      "id": 135,
+      "isVertical": "false",
+      "text": "\u56F3\u781434",
+      "isTextline": "true",
+      "confidence": 0.681,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3092,
+          158
+        ],
+        [
+          3092,
+          198
+        ],
+        [
+          3183,
+          158
+        ],
+        [
+          3183,
+          198
+        ]
+      ],
+      "id": 136,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B34",
+      "isTextline": "true",
+      "confidence": 0.778,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3092,
+          191
+        ],
+        [
+          3092,
+          232
+        ],
+        [
+          3184,
+          191
+        ],
+        [
+          3184,
+          232
+        ]
+      ],
+      "id": 137,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF34",
+      "isTextline": "true",
+      "confidence": 0.726,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3190,
+          98
+        ],
+        [
+          3190,
+          133
+        ],
+        [
+          3270,
+          98
+        ],
+        [
+          3270,
+          133
+        ]
+      ],
+      "id": 138,
+      "isVertical": "false",
+      "text": "$0,00",
+      "isTextline": "true",
+      "confidence": 0.384,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3181,
+          126
+        ],
+        [
+          3181,
+          165
+        ],
+        [
+          3270,
+          126
+        ],
+        [
+          3270,
+          165
+        ]
+      ],
+      "id": 139,
+      "isVertical": "false",
+      "text": "\u56F3\u781435",
+      "isTextline": "true",
+      "confidence": 0.726,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3179,
+          158
+        ],
+        [
+          3179,
+          197
+        ],
+        [
+          3273,
+          158
+        ],
+        [
+          3273,
+          197
+        ]
+      ],
+      "id": 140,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B35",
+      "isTextline": "true",
+      "confidence": 0.779,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3179,
+          190
+        ],
+        [
+          3179,
+          232
+        ],
+        [
+          3274,
+          190
+        ],
+        [
+          3274,
+          232
+        ]
+      ],
+      "id": 141,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5735",
+      "isTextline": "true",
+      "confidence": 0.776,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3303,
+          95
+        ],
+        [
+          3303,
+          133
+        ],
+        [
+          3438,
+          95
+        ],
+        [
+          3438,
+          133
+        ]
+      ],
+      "id": 142,
+      "isVertical": "false",
+      "text": "45",
+      "isTextline": "true",
+      "confidence": 0.397,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3280,
+          97
+        ],
+        [
+          3280,
+          132
+        ],
+        [
+          3356,
+          97
+        ],
+        [
+          3356,
+          132
+        ]
+      ],
+      "id": 143,
+      "isVertical": "false",
+      "text": "44",
+      "isTextline": "true",
+      "confidence": 0.387,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3274,
+          126
+        ],
+        [
+          3274,
+          165
+        ],
+        [
+          3364,
+          126
+        ],
+        [
+          3364,
+          165
+        ]
+      ],
+      "id": 144,
+      "isVertical": "false",
+      "text": "\u56F3\u781436",
+      "isTextline": "true",
+      "confidence": 0.553,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3273,
+          158
+        ],
+        [
+          3273,
+          197
+        ],
+        [
+          3364,
+          158
+        ],
+        [
+          3364,
+          197
+        ]
+      ],
+      "id": 145,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B36",
+      "isTextline": "true",
+      "confidence": 0.781,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3273,
+          191
+        ],
+        [
+          3273,
+          232
+        ],
+        [
+          3365,
+          191
+        ],
+        [
+          3365,
+          232
+        ]
+      ],
+      "id": 146,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5736",
+      "isTextline": "true",
+      "confidence": 0.769,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3369,
+          97
+        ],
+        [
+          3369,
+          132
+        ],
+        [
+          3447,
+          97
+        ],
+        [
+          3447,
+          132
+        ]
+      ],
+      "id": 147,
+      "isVertical": "false",
+      "text": "55",
+      "isTextline": "true",
+      "confidence": 0.326,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3365,
+          126
+        ],
+        [
+          3365,
+          166
+        ],
+        [
+          3453,
+          126
+        ],
+        [
+          3453,
+          166
+        ]
+      ],
+      "id": 148,
+      "isVertical": "false",
+      "text": "\u56F3\u781437",
+      "isTextline": "true",
+      "confidence": 0.637,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3362,
+          157
+        ],
+        [
+          3362,
+          197
+        ],
+        [
+          3454,
+          157
+        ],
+        [
+          3454,
+          197
+        ]
+      ],
+      "id": 149,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B37",
+      "isTextline": "true",
+      "confidence": 0.755,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3360,
+          190
+        ],
+        [
+          3360,
+          230
+        ],
+        [
+          3454,
+          190
+        ],
+        [
+          3454,
+          230
+        ]
+      ],
+      "id": 150,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5737",
+      "isTextline": "true",
+      "confidence": 0.791,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3459,
+          97
+        ],
+        [
+          3459,
+          133
+        ],
+        [
+          3538,
+          97
+        ],
+        [
+          3538,
+          133
+        ]
+      ],
+      "id": 151,
+      "isVertical": "false",
+      "text": "$6,0000000",
+      "isTextline": "true",
+      "confidence": 0.421,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3455,
+          126
+        ],
+        [
+          3455,
+          164
+        ],
+        [
+          3543,
+          126
+        ],
+        [
+          3543,
+          164
+        ]
+      ],
+      "id": 152,
+      "isVertical": "false",
+      "text": "\u56F3\u781438",
+      "isTextline": "true",
+      "confidence": 0.682,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3453,
+          159
+        ],
+        [
+          3453,
+          198
+        ],
+        [
+          3543,
+          159
+        ],
+        [
+          3543,
+          198
+        ]
+      ],
+      "id": 153,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B38",
+      "isTextline": "true",
+      "confidence": 0.761,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3452,
+          192
+        ],
+        [
+          3452,
+          234
+        ],
+        [
+          3543,
+          192
+        ],
+        [
+          3543,
+          234
+        ]
+      ],
+      "id": 154,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF38",
+      "isTextline": "true",
+      "confidence": 0.755,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3550,
+          98
+        ],
+        [
+          3550,
+          131
+        ],
+        [
+          3619,
+          98
+        ],
+        [
+          3619,
+          131
+        ]
+      ],
+      "id": 155,
+      "isVertical": "false",
+      "text": "1,0",
+      "isTextline": "true",
+      "confidence": 0.278,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3542,
+          126
+        ],
+        [
+          3542,
+          166
+        ],
+        [
+          3634,
+          126
+        ],
+        [
+          3634,
+          166
+        ]
+      ],
+      "id": 156,
+      "isVertical": "false",
+      "text": "\u56F3\u781439",
+      "isTextline": "true",
+      "confidence": 0.651,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3542,
+          191
+        ],
+        [
+          3542,
+          233
+        ],
+        [
+          3634,
+          191
+        ],
+        [
+          3634,
+          233
+        ]
+      ],
+      "id": 157,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF39",
+      "isTextline": "true",
+      "confidence": 0.739,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3541,
+          159
+        ],
+        [
+          3541,
+          198
+        ],
+        [
+          3633,
+          159
+        ],
+        [
+          3633,
+          198
+        ]
+      ],
+      "id": 158,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B39",
+      "isTextline": "true",
+      "confidence": 0.763,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3641,
+          97
+        ],
+        [
+          3641,
+          132
+        ],
+        [
+          3715,
+          97
+        ],
+        [
+          3715,
+          132
+        ]
+      ],
+      "id": 159,
+      "isVertical": "false",
+      "text": "1,",
+      "isTextline": "true",
+      "confidence": 0.444,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3631,
+          125
+        ],
+        [
+          3631,
+          165
+        ],
+        [
+          3722,
+          125
+        ],
+        [
+          3722,
+          165
+        ]
+      ],
+      "id": 160,
+      "isVertical": "false",
+      "text": "\u56F3\u781440",
+      "isTextline": "true",
+      "confidence": 0.729,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3631,
+          157
+        ],
+        [
+          3631,
+          197
+        ],
+        [
+          3722,
+          157
+        ],
+        [
+          3722,
+          197
+        ]
+      ],
+      "id": 161,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B40",
+      "isTextline": "true",
+      "confidence": 0.774,
+      "class_index": 1
+    },
+    {
+      "boundingBox": [
+        [
+          3631,
+          190
+        ],
+        [
+          3631,
+          230
+        ],
+        [
+          3723,
+          190
+        ],
+        [
+          3723,
+          230
+        ]
+      ],
+      "id": 162,
+      "isVertical": "false",
+      "text": "\u8A66\u9A5740",
+      "isTextline": "true",
+      "confidence": 0.754,
+      "class_index": 1
+    }
+  ],
+  "adoptionEligible": false,
+  "downstreamDiagnosticOnly": true,
+  "strictError": {
+    "type": "PdfParseException",
+    "Message": "PDF\u306E\u6642\u9650\u306E\u898B\u51FA\u3057\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3067\u3057\u305F\uFF08P05\uFF09\u3002\u6B63\u5E38\u306A\u89E3\u6790\u7D50\u679C\u306F\u4FDD\u6301\u3057\u3066\u3044\u307E\u3059\u3002",
+    "stage": "P05"
+  },
+  "recoveryError": {
+    "type": "InvalidDataException",
+    "Message": "\u5E74\u5EA6\u306E\u72EC\u7ACB\u3057\u305F\u898B\u51FA\u3057\u304C\u3042\u308A\u307E\u305B\u3093\u3002",
+    "stage": "builder",
+    "failureClass": "sourceContractRefusal"
+  },
+  "strictExact": false,
+  "formalExactPossible": false,
+  "recoveryFormalExact": false,
+  "actualRecoveryAccepted": false,
+  "providerCalls": 0
+}

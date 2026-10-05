@@ -1,0 +1,8295 @@
+{
+  "scope": "Actual OCR whole-line outputs \u002B actual raster host replay; no inference, no invented character boxes; gold after output",
+  "rules": 47,
+  "glyphs": 153,
+  "sourceHash": "3bb95ebcce616cf24c6b4c431f6fe9b790491e5d22085f74e4430cfd5871b946",
+  "schema": 2,
+  "validator": 5,
+  "operationalError": false,
+  "unrecognizedInk": true,
+  "nativeSourceAdoptionEligible": false,
+  "detectorConfidenceIsNotCharacterConfidence": true,
+  "nativeRawSha": "24e26b702d9f79e97bc5c8458e0dd08558f96054afae2fdacceebd9062fbbb47",
+  "originalNativeAtoms": [
+    {
+      "boundingBox": [
+        [
+          450,
+          74
+        ],
+        [
+          450,
+          92
+        ],
+        [
+          506,
+          74
+        ],
+        [
+          506,
+          92
+        ]
+      ],
+      "id": 0,
+      "isVertical": "false",
+      "text": "\u6708\u66DC\u65E5",
+      "isTextline": "true",
+      "confidence": 0.358,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 0,
+      "originalNativeLocalBoundingBox": [
+        [
+          328,
+          2
+        ],
+        [
+          328,
+          20
+        ],
+        [
+          384,
+          2
+        ],
+        [
+          384,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        122,
+        72,
+        840,
+        104
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1171,
+          74
+        ],
+        [
+          1171,
+          92
+        ],
+        [
+          1226,
+          74
+        ],
+        [
+          1226,
+          92
+        ]
+      ],
+      "id": 1,
+      "isVertical": "false",
+      "text": "\u706B\u66DC\u65E5",
+      "isTextline": "true",
+      "confidence": 0.375,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 1,
+      "originalNativeLocalBoundingBox": [
+        [
+          329,
+          2
+        ],
+        [
+          329,
+          20
+        ],
+        [
+          384,
+          2
+        ],
+        [
+          384,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        842,
+        72,
+        1560,
+        104
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1890,
+          74
+        ],
+        [
+          1890,
+          93
+        ],
+        [
+          1946,
+          74
+        ],
+        [
+          1946,
+          93
+        ]
+      ],
+      "id": 2,
+      "isVertical": "false",
+      "text": "\u6C34\u66DC\u65E5",
+      "isTextline": "true",
+      "confidence": 0.322,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 2,
+      "originalNativeLocalBoundingBox": [
+        [
+          328,
+          2
+        ],
+        [
+          328,
+          21
+        ],
+        [
+          384,
+          2
+        ],
+        [
+          384,
+          21
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1562,
+        72,
+        2280,
+        104
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2610,
+          74
+        ],
+        [
+          2610,
+          93
+        ],
+        [
+          2666,
+          74
+        ],
+        [
+          2666,
+          93
+        ]
+      ],
+      "id": 3,
+      "isVertical": "false",
+      "text": "\u6728\u66DC\u65E5",
+      "isTextline": "true",
+      "confidence": 0.332,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 3,
+      "originalNativeLocalBoundingBox": [
+        [
+          328,
+          2
+        ],
+        [
+          328,
+          21
+        ],
+        [
+          384,
+          2
+        ],
+        [
+          384,
+          21
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2282,
+        72,
+        3000,
+        104
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3331,
+          74
+        ],
+        [
+          3331,
+          92
+        ],
+        [
+          3386,
+          74
+        ],
+        [
+          3386,
+          92
+        ]
+      ],
+      "id": 4,
+      "isVertical": "false",
+      "text": "\u91D1\u66DC\u65E5",
+      "isTextline": "true",
+      "confidence": 0.361,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 4,
+      "originalNativeLocalBoundingBox": [
+        [
+          329,
+          2
+        ],
+        [
+          329,
+          20
+        ],
+        [
+          384,
+          2
+        ],
+        [
+          384,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3002,
+        72,
+        3720,
+        104
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          160,
+          107
+        ],
+        [
+          160,
+          122
+        ],
+        [
+          169,
+          107
+        ],
+        [
+          169,
+          122
+        ]
+      ],
+      "id": 5,
+      "isVertical": "true",
+      "text": "11",
+      "isTextline": "true",
+      "confidence": 0.255,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 5,
+      "originalNativeLocalBoundingBox": [
+        [
+          38,
+          1
+        ],
+        [
+          38,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        122,
+        106,
+        210,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          249,
+          107
+        ],
+        [
+          249,
+          122
+        ],
+        [
+          259,
+          107
+        ],
+        [
+          259,
+          122
+        ]
+      ],
+      "id": 6,
+      "isVertical": "true",
+      "text": "2",
+      "isTextline": "true",
+      "confidence": 0.72,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 6,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        212,
+        106,
+        300,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          339,
+          107
+        ],
+        [
+          339,
+          122
+        ],
+        [
+          348,
+          107
+        ],
+        [
+          348,
+          122
+        ]
+      ],
+      "id": 7,
+      "isVertical": "true",
+      "text": "3)",
+      "isTextline": "true",
+      "confidence": 0.648,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 7,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          46,
+          1
+        ],
+        [
+          46,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        302,
+        106,
+        390,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          429,
+          107
+        ],
+        [
+          429,
+          122
+        ],
+        [
+          439,
+          107
+        ],
+        [
+          439,
+          122
+        ]
+      ],
+      "id": 8,
+      "isVertical": "true",
+      "text": "4",
+      "isTextline": "true",
+      "confidence": 0.315,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 8,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        392,
+        106,
+        480,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          519,
+          107
+        ],
+        [
+          519,
+          122
+        ],
+        [
+          528,
+          107
+        ],
+        [
+          528,
+          122
+        ]
+      ],
+      "id": 9,
+      "isVertical": "true",
+      "text": "5(",
+      "isTextline": "true",
+      "confidence": 0.651,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 9,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          46,
+          1
+        ],
+        [
+          46,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        482,
+        106,
+        570,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          610,
+          107
+        ],
+        [
+          610,
+          122
+        ],
+        [
+          619,
+          107
+        ],
+        [
+          619,
+          122
+        ]
+      ],
+      "id": 10,
+      "isVertical": "true",
+      "text": "6",
+      "isTextline": "true",
+      "confidence": 0.731,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 10,
+      "originalNativeLocalBoundingBox": [
+        [
+          38,
+          1
+        ],
+        [
+          38,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        572,
+        106,
+        660,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          789,
+          107
+        ],
+        [
+          789,
+          122
+        ],
+        [
+          799,
+          107
+        ],
+        [
+          799,
+          122
+        ]
+      ],
+      "id": 11,
+      "isVertical": "true",
+      "text": "8",
+      "isTextline": "true",
+      "confidence": 0.764,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 12,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        752,
+        106,
+        840,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          880,
+          107
+        ],
+        [
+          880,
+          122
+        ],
+        [
+          889,
+          107
+        ],
+        [
+          889,
+          122
+        ]
+      ],
+      "id": 12,
+      "isVertical": "true",
+      "text": "11",
+      "isTextline": "true",
+      "confidence": 0.255,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 13,
+      "originalNativeLocalBoundingBox": [
+        [
+          38,
+          1
+        ],
+        [
+          38,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        842,
+        106,
+        930,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          969,
+          107
+        ],
+        [
+          969,
+          122
+        ],
+        [
+          979,
+          107
+        ],
+        [
+          979,
+          122
+        ]
+      ],
+      "id": 13,
+      "isVertical": "true",
+      "text": "2",
+      "isTextline": "true",
+      "confidence": 0.72,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 14,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        932,
+        106,
+        1020,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1059,
+          107
+        ],
+        [
+          1059,
+          122
+        ],
+        [
+          1068,
+          107
+        ],
+        [
+          1068,
+          122
+        ]
+      ],
+      "id": 14,
+      "isVertical": "true",
+      "text": "3)",
+      "isTextline": "true",
+      "confidence": 0.648,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 15,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          46,
+          1
+        ],
+        [
+          46,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1022,
+        106,
+        1110,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1149,
+          107
+        ],
+        [
+          1149,
+          122
+        ],
+        [
+          1159,
+          107
+        ],
+        [
+          1159,
+          122
+        ]
+      ],
+      "id": 15,
+      "isVertical": "true",
+      "text": "4",
+      "isTextline": "true",
+      "confidence": 0.315,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 16,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1112,
+        106,
+        1200,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1239,
+          107
+        ],
+        [
+          1239,
+          122
+        ],
+        [
+          1248,
+          107
+        ],
+        [
+          1248,
+          122
+        ]
+      ],
+      "id": 16,
+      "isVertical": "true",
+      "text": "5(",
+      "isTextline": "true",
+      "confidence": 0.651,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 17,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          46,
+          1
+        ],
+        [
+          46,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1202,
+        106,
+        1290,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1330,
+          107
+        ],
+        [
+          1330,
+          122
+        ],
+        [
+          1339,
+          107
+        ],
+        [
+          1339,
+          122
+        ]
+      ],
+      "id": 17,
+      "isVertical": "true",
+      "text": "6",
+      "isTextline": "true",
+      "confidence": 0.731,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 18,
+      "originalNativeLocalBoundingBox": [
+        [
+          38,
+          1
+        ],
+        [
+          38,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1292,
+        106,
+        1380,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1509,
+          107
+        ],
+        [
+          1509,
+          122
+        ],
+        [
+          1519,
+          107
+        ],
+        [
+          1519,
+          122
+        ]
+      ],
+      "id": 18,
+      "isVertical": "true",
+      "text": "8",
+      "isTextline": "true",
+      "confidence": 0.764,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 20,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1472,
+        106,
+        1560,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1600,
+          107
+        ],
+        [
+          1600,
+          122
+        ],
+        [
+          1609,
+          107
+        ],
+        [
+          1609,
+          122
+        ]
+      ],
+      "id": 19,
+      "isVertical": "true",
+      "text": "11",
+      "isTextline": "true",
+      "confidence": 0.255,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 21,
+      "originalNativeLocalBoundingBox": [
+        [
+          38,
+          1
+        ],
+        [
+          38,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1562,
+        106,
+        1650,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1689,
+          107
+        ],
+        [
+          1689,
+          122
+        ],
+        [
+          1699,
+          107
+        ],
+        [
+          1699,
+          122
+        ]
+      ],
+      "id": 20,
+      "isVertical": "true",
+      "text": "2",
+      "isTextline": "true",
+      "confidence": 0.72,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 22,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1652,
+        106,
+        1740,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1779,
+          107
+        ],
+        [
+          1779,
+          122
+        ],
+        [
+          1788,
+          107
+        ],
+        [
+          1788,
+          122
+        ]
+      ],
+      "id": 21,
+      "isVertical": "true",
+      "text": "3)",
+      "isTextline": "true",
+      "confidence": 0.648,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 23,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          46,
+          1
+        ],
+        [
+          46,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1742,
+        106,
+        1830,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1869,
+          107
+        ],
+        [
+          1869,
+          122
+        ],
+        [
+          1879,
+          107
+        ],
+        [
+          1879,
+          122
+        ]
+      ],
+      "id": 22,
+      "isVertical": "true",
+      "text": "4",
+      "isTextline": "true",
+      "confidence": 0.315,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 24,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1832,
+        106,
+        1920,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1959,
+          107
+        ],
+        [
+          1959,
+          122
+        ],
+        [
+          1968,
+          107
+        ],
+        [
+          1968,
+          122
+        ]
+      ],
+      "id": 23,
+      "isVertical": "true",
+      "text": "5(",
+      "isTextline": "true",
+      "confidence": 0.651,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 25,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          46,
+          1
+        ],
+        [
+          46,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1922,
+        106,
+        2010,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2050,
+          107
+        ],
+        [
+          2050,
+          122
+        ],
+        [
+          2059,
+          107
+        ],
+        [
+          2059,
+          122
+        ]
+      ],
+      "id": 24,
+      "isVertical": "true",
+      "text": "6",
+      "isTextline": "true",
+      "confidence": 0.731,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 26,
+      "originalNativeLocalBoundingBox": [
+        [
+          38,
+          1
+        ],
+        [
+          38,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2012,
+        106,
+        2100,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2229,
+          107
+        ],
+        [
+          2229,
+          122
+        ],
+        [
+          2239,
+          107
+        ],
+        [
+          2239,
+          122
+        ]
+      ],
+      "id": 25,
+      "isVertical": "true",
+      "text": "8",
+      "isTextline": "true",
+      "confidence": 0.764,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 28,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2192,
+        106,
+        2280,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2320,
+          107
+        ],
+        [
+          2320,
+          122
+        ],
+        [
+          2329,
+          107
+        ],
+        [
+          2329,
+          122
+        ]
+      ],
+      "id": 26,
+      "isVertical": "true",
+      "text": "11",
+      "isTextline": "true",
+      "confidence": 0.255,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 29,
+      "originalNativeLocalBoundingBox": [
+        [
+          38,
+          1
+        ],
+        [
+          38,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2282,
+        106,
+        2370,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2409,
+          107
+        ],
+        [
+          2409,
+          122
+        ],
+        [
+          2419,
+          107
+        ],
+        [
+          2419,
+          122
+        ]
+      ],
+      "id": 27,
+      "isVertical": "true",
+      "text": "2",
+      "isTextline": "true",
+      "confidence": 0.72,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 30,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2372,
+        106,
+        2460,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2499,
+          107
+        ],
+        [
+          2499,
+          122
+        ],
+        [
+          2508,
+          107
+        ],
+        [
+          2508,
+          122
+        ]
+      ],
+      "id": 28,
+      "isVertical": "true",
+      "text": "3)",
+      "isTextline": "true",
+      "confidence": 0.648,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 31,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          46,
+          1
+        ],
+        [
+          46,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2462,
+        106,
+        2550,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2589,
+          107
+        ],
+        [
+          2589,
+          122
+        ],
+        [
+          2599,
+          107
+        ],
+        [
+          2599,
+          122
+        ]
+      ],
+      "id": 29,
+      "isVertical": "true",
+      "text": "4",
+      "isTextline": "true",
+      "confidence": 0.315,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 32,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2552,
+        106,
+        2640,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2679,
+          107
+        ],
+        [
+          2679,
+          122
+        ],
+        [
+          2688,
+          107
+        ],
+        [
+          2688,
+          122
+        ]
+      ],
+      "id": 30,
+      "isVertical": "true",
+      "text": "5(",
+      "isTextline": "true",
+      "confidence": 0.651,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 33,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          46,
+          1
+        ],
+        [
+          46,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2642,
+        106,
+        2730,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2770,
+          107
+        ],
+        [
+          2770,
+          122
+        ],
+        [
+          2779,
+          107
+        ],
+        [
+          2779,
+          122
+        ]
+      ],
+      "id": 31,
+      "isVertical": "true",
+      "text": "6",
+      "isTextline": "true",
+      "confidence": 0.731,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 34,
+      "originalNativeLocalBoundingBox": [
+        [
+          38,
+          1
+        ],
+        [
+          38,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2732,
+        106,
+        2820,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2949,
+          107
+        ],
+        [
+          2949,
+          122
+        ],
+        [
+          2959,
+          107
+        ],
+        [
+          2959,
+          122
+        ]
+      ],
+      "id": 32,
+      "isVertical": "true",
+      "text": "8",
+      "isTextline": "true",
+      "confidence": 0.764,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 36,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2912,
+        106,
+        3000,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3040,
+          107
+        ],
+        [
+          3040,
+          122
+        ],
+        [
+          3049,
+          107
+        ],
+        [
+          3049,
+          122
+        ]
+      ],
+      "id": 33,
+      "isVertical": "true",
+      "text": "11",
+      "isTextline": "true",
+      "confidence": 0.255,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 37,
+      "originalNativeLocalBoundingBox": [
+        [
+          38,
+          1
+        ],
+        [
+          38,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3002,
+        106,
+        3090,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3129,
+          107
+        ],
+        [
+          3129,
+          122
+        ],
+        [
+          3139,
+          107
+        ],
+        [
+          3139,
+          122
+        ]
+      ],
+      "id": 34,
+      "isVertical": "true",
+      "text": "2",
+      "isTextline": "true",
+      "confidence": 0.72,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 38,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3092,
+        106,
+        3180,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3219,
+          107
+        ],
+        [
+          3219,
+          122
+        ],
+        [
+          3228,
+          107
+        ],
+        [
+          3228,
+          122
+        ]
+      ],
+      "id": 35,
+      "isVertical": "true",
+      "text": "3)",
+      "isTextline": "true",
+      "confidence": 0.648,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 39,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          46,
+          1
+        ],
+        [
+          46,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3182,
+        106,
+        3270,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3309,
+          107
+        ],
+        [
+          3309,
+          122
+        ],
+        [
+          3319,
+          107
+        ],
+        [
+          3319,
+          122
+        ]
+      ],
+      "id": 36,
+      "isVertical": "true",
+      "text": "4",
+      "isTextline": "true",
+      "confidence": 0.315,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 40,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3272,
+        106,
+        3360,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3399,
+          107
+        ],
+        [
+          3399,
+          122
+        ],
+        [
+          3408,
+          107
+        ],
+        [
+          3408,
+          122
+        ]
+      ],
+      "id": 37,
+      "isVertical": "true",
+      "text": "5(",
+      "isTextline": "true",
+      "confidence": 0.651,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 41,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          46,
+          1
+        ],
+        [
+          46,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3362,
+        106,
+        3450,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3490,
+          107
+        ],
+        [
+          3490,
+          122
+        ],
+        [
+          3499,
+          107
+        ],
+        [
+          3499,
+          122
+        ]
+      ],
+      "id": 38,
+      "isVertical": "true",
+      "text": "6",
+      "isTextline": "true",
+      "confidence": 0.731,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 42,
+      "originalNativeLocalBoundingBox": [
+        [
+          38,
+          1
+        ],
+        [
+          38,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3452,
+        106,
+        3540,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3669,
+          107
+        ],
+        [
+          3669,
+          122
+        ],
+        [
+          3679,
+          107
+        ],
+        [
+          3679,
+          122
+        ]
+      ],
+      "id": 39,
+      "isVertical": "true",
+      "text": "8",
+      "isTextline": "true",
+      "confidence": 0.764,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 44,
+      "originalNativeLocalBoundingBox": [
+        [
+          37,
+          1
+        ],
+        [
+          37,
+          16
+        ],
+        [
+          47,
+          1
+        ],
+        [
+          47,
+          16
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3632,
+        106,
+        3720,
+        136
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          35,
+          171
+        ],
+        [
+          35,
+          186
+        ],
+        [
+          44,
+          171
+        ],
+        [
+          44,
+          186
+        ]
+      ],
+      "id": 40,
+      "isVertical": "true",
+      "text": "11",
+      "isTextline": "true",
+      "confidence": 0.316,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 45,
+      "originalNativeLocalBoundingBox": [
+        [
+          13,
+          33
+        ],
+        [
+          13,
+          48
+        ],
+        [
+          22,
+          33
+        ],
+        [
+          22,
+          48
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        22,
+        138,
+        60,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          84,
+          171
+        ],
+        [
+          84,
+          186
+        ],
+        [
+          94,
+          171
+        ],
+        [
+          94,
+          186
+        ]
+      ],
+      "id": 41,
+      "isVertical": "true",
+      "text": "2",
+      "isTextline": "true",
+      "confidence": 0.253,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 46,
+      "originalNativeLocalBoundingBox": [
+        [
+          22,
+          33
+        ],
+        [
+          22,
+          48
+        ],
+        [
+          32,
+          33
+        ],
+        [
+          32,
+          48
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        62,
+        138,
+        120,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          134,
+          139
+        ],
+        [
+          134,
+          158
+        ],
+        [
+          194,
+          139
+        ],
+        [
+          194,
+          158
+        ]
+      ],
+      "id": 42,
+      "isVertical": "false",
+      "text": "\u56F3\u781401",
+      "isTextline": "true",
+      "confidence": 0.372,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 47,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          72,
+          1
+        ],
+        [
+          72,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        122,
+        138,
+        210,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          133,
+          171
+        ],
+        [
+          133,
+          191
+        ],
+        [
+          195,
+          171
+        ],
+        [
+          195,
+          191
+        ]
+      ],
+      "id": 43,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B01",
+      "isTextline": "true",
+      "confidence": 0.494,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 47,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        122,
+        138,
+        210,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          133,
+          203
+        ],
+        [
+          133,
+          223
+        ],
+        [
+          195,
+          203
+        ],
+        [
+          195,
+          223
+        ]
+      ],
+      "id": 44,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF01",
+      "isTextline": "true",
+      "confidence": 0.418,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 47,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        122,
+        138,
+        210,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          223,
+          171
+        ],
+        [
+          223,
+          191
+        ],
+        [
+          285,
+          171
+        ],
+        [
+          285,
+          191
+        ]
+      ],
+      "id": 45,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B02",
+      "isTextline": "true",
+      "confidence": 0.325,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 48,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        212,
+        138,
+        300,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          314,
+          139
+        ],
+        [
+          314,
+          158
+        ],
+        [
+          375,
+          139
+        ],
+        [
+          375,
+          158
+        ]
+      ],
+      "id": 46,
+      "isVertical": "false",
+      "text": "\u56F3\u781403",
+      "isTextline": "true",
+      "confidence": 0.283,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 49,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        302,
+        138,
+        390,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          313,
+          171
+        ],
+        [
+          313,
+          191
+        ],
+        [
+          375,
+          171
+        ],
+        [
+          375,
+          191
+        ]
+      ],
+      "id": 47,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B03",
+      "isTextline": "true",
+      "confidence": 0.402,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 49,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        302,
+        138,
+        390,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          313,
+          203
+        ],
+        [
+          313,
+          223
+        ],
+        [
+          375,
+          203
+        ],
+        [
+          375,
+          223
+        ]
+      ],
+      "id": 48,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF03",
+      "isTextline": "true",
+      "confidence": 0.321,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 49,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        302,
+        138,
+        390,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          404,
+          139
+        ],
+        [
+          404,
+          158
+        ],
+        [
+          465,
+          139
+        ],
+        [
+          465,
+          158
+        ]
+      ],
+      "id": 49,
+      "isVertical": "false",
+      "text": "\u56F3\u781404",
+      "isTextline": "true",
+      "confidence": 0.323,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 50,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        392,
+        138,
+        480,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          403,
+          171
+        ],
+        [
+          403,
+          191
+        ],
+        [
+          466,
+          171
+        ],
+        [
+          466,
+          191
+        ]
+      ],
+      "id": 50,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B04",
+      "isTextline": "true",
+      "confidence": 0.386,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 50,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          74,
+          33
+        ],
+        [
+          74,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        392,
+        138,
+        480,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          403,
+          171
+        ],
+        [
+          403,
+          223
+        ],
+        [
+          466,
+          171
+        ],
+        [
+          466,
+          223
+        ]
+      ],
+      "id": 51,
+      "isVertical": "false",
+      "text": "10.00",
+      "isTextline": "true",
+      "confidence": 0.295,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 50,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          74,
+          33
+        ],
+        [
+          74,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        392,
+        138,
+        480,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          403,
+          203
+        ],
+        [
+          403,
+          223
+        ],
+        [
+          466,
+          203
+        ],
+        [
+          466,
+          223
+        ]
+      ],
+      "id": 52,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF04",
+      "isTextline": "true",
+      "confidence": 0.311,
+      "class_index": 1,
+      "originalNativeID": 3,
+      "regionID": 50,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          74,
+          65
+        ],
+        [
+          74,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        392,
+        138,
+        480,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          494,
+          139
+        ],
+        [
+          494,
+          158
+        ],
+        [
+          555,
+          139
+        ],
+        [
+          555,
+          158
+        ]
+      ],
+      "id": 53,
+      "isVertical": "false",
+      "text": "\u56F3\u781405",
+      "isTextline": "true",
+      "confidence": 0.446,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 51,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        482,
+        138,
+        570,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          493,
+          171
+        ],
+        [
+          493,
+          191
+        ],
+        [
+          555,
+          171
+        ],
+        [
+          555,
+          191
+        ]
+      ],
+      "id": 54,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B05",
+      "isTextline": "true",
+      "confidence": 0.535,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 51,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        482,
+        138,
+        570,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          493,
+          203
+        ],
+        [
+          493,
+          223
+        ],
+        [
+          555,
+          203
+        ],
+        [
+          555,
+          223
+        ]
+      ],
+      "id": 55,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF05",
+      "isTextline": "true",
+      "confidence": 0.472,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 51,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        482,
+        138,
+        570,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          584,
+          139
+        ],
+        [
+          584,
+          158
+        ],
+        [
+          645,
+          139
+        ],
+        [
+          645,
+          158
+        ]
+      ],
+      "id": 56,
+      "isVertical": "false",
+      "text": "\u56F3\u781406",
+      "isTextline": "true",
+      "confidence": 0.296,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 52,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        572,
+        138,
+        660,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          583,
+          171
+        ],
+        [
+          583,
+          191
+        ],
+        [
+          645,
+          171
+        ],
+        [
+          645,
+          191
+        ]
+      ],
+      "id": 57,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B06",
+      "isTextline": "true",
+      "confidence": 0.428,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 52,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        572,
+        138,
+        660,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          583,
+          203
+        ],
+        [
+          583,
+          223
+        ],
+        [
+          645,
+          203
+        ],
+        [
+          645,
+          223
+        ]
+      ],
+      "id": 58,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF06",
+      "isTextline": "true",
+      "confidence": 0.337,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 52,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        572,
+        138,
+        660,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          674,
+          139
+        ],
+        [
+          674,
+          158
+        ],
+        [
+          735,
+          139
+        ],
+        [
+          735,
+          158
+        ]
+      ],
+      "id": 59,
+      "isVertical": "false",
+      "text": "\u56F307",
+      "isTextline": "true",
+      "confidence": 0.464,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 53,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        662,
+        138,
+        750,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          673,
+          171
+        ],
+        [
+          673,
+          191
+        ],
+        [
+          735,
+          171
+        ],
+        [
+          735,
+          191
+        ]
+      ],
+      "id": 60,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B07",
+      "isTextline": "true",
+      "confidence": 0.607,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 53,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        662,
+        138,
+        750,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          673,
+          203
+        ],
+        [
+          673,
+          223
+        ],
+        [
+          735,
+          203
+        ],
+        [
+          735,
+          223
+        ]
+      ],
+      "id": 61,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF07",
+      "isTextline": "true",
+      "confidence": 0.566,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 53,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        662,
+        138,
+        750,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          764,
+          139
+        ],
+        [
+          764,
+          158
+        ],
+        [
+          825,
+          139
+        ],
+        [
+          825,
+          158
+        ]
+      ],
+      "id": 62,
+      "isVertical": "false",
+      "text": "\u56F3\u781408",
+      "isTextline": "true",
+      "confidence": 0.318,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 54,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        752,
+        138,
+        840,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          763,
+          171
+        ],
+        [
+          763,
+          191
+        ],
+        [
+          825,
+          171
+        ],
+        [
+          825,
+          191
+        ]
+      ],
+      "id": 63,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B08",
+      "isTextline": "true",
+      "confidence": 0.419,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 54,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        752,
+        138,
+        840,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          763,
+          203
+        ],
+        [
+          763,
+          223
+        ],
+        [
+          825,
+          203
+        ],
+        [
+          825,
+          223
+        ]
+      ],
+      "id": 64,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF08",
+      "isTextline": "true",
+      "confidence": 0.318,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 54,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        752,
+        138,
+        840,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          854,
+          139
+        ],
+        [
+          854,
+          158
+        ],
+        [
+          914,
+          139
+        ],
+        [
+          914,
+          158
+        ]
+      ],
+      "id": 65,
+      "isVertical": "false",
+      "text": "\u56F3\u781409",
+      "isTextline": "true",
+      "confidence": 0.324,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 55,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          72,
+          1
+        ],
+        [
+          72,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        842,
+        138,
+        930,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          853,
+          171
+        ],
+        [
+          853,
+          191
+        ],
+        [
+          915,
+          171
+        ],
+        [
+          915,
+          191
+        ]
+      ],
+      "id": 66,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B09",
+      "isTextline": "true",
+      "confidence": 0.442,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 55,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        842,
+        138,
+        930,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          853,
+          203
+        ],
+        [
+          853,
+          223
+        ],
+        [
+          915,
+          203
+        ],
+        [
+          915,
+          223
+        ]
+      ],
+      "id": 67,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF09",
+      "isTextline": "true",
+      "confidence": 0.368,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 55,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        842,
+        138,
+        930,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          944,
+          139
+        ],
+        [
+          944,
+          158
+        ],
+        [
+          1005,
+          139
+        ],
+        [
+          1005,
+          158
+        ]
+      ],
+      "id": 68,
+      "isVertical": "false",
+      "text": "\u56F3\u781410",
+      "isTextline": "true",
+      "confidence": 0.3,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 56,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        932,
+        138,
+        1020,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          943,
+          171
+        ],
+        [
+          943,
+          191
+        ],
+        [
+          1005,
+          171
+        ],
+        [
+          1005,
+          191
+        ]
+      ],
+      "id": 69,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B10",
+      "isTextline": "true",
+      "confidence": 0.388,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 56,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        932,
+        138,
+        1020,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          943,
+          203
+        ],
+        [
+          943,
+          223
+        ],
+        [
+          1005,
+          203
+        ],
+        [
+          1005,
+          223
+        ]
+      ],
+      "id": 70,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF10",
+      "isTextline": "true",
+      "confidence": 0.323,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 56,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        932,
+        138,
+        1020,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1034,
+          139
+        ],
+        [
+          1034,
+          158
+        ],
+        [
+          1094,
+          139
+        ],
+        [
+          1094,
+          158
+        ]
+      ],
+      "id": 71,
+      "isVertical": "false",
+      "text": "\u56F3\u781411",
+      "isTextline": "true",
+      "confidence": 0.368,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 57,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          72,
+          1
+        ],
+        [
+          72,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1022,
+        138,
+        1110,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1033,
+          171
+        ],
+        [
+          1033,
+          191
+        ],
+        [
+          1095,
+          171
+        ],
+        [
+          1095,
+          191
+        ]
+      ],
+      "id": 72,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B11",
+      "isTextline": "true",
+      "confidence": 0.512,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 57,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1022,
+        138,
+        1110,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1033,
+          203
+        ],
+        [
+          1033,
+          223
+        ],
+        [
+          1095,
+          203
+        ],
+        [
+          1095,
+          223
+        ]
+      ],
+      "id": 73,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF11",
+      "isTextline": "true",
+      "confidence": 0.354,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 57,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1022,
+        138,
+        1110,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1123,
+          171
+        ],
+        [
+          1123,
+          191
+        ],
+        [
+          1185,
+          171
+        ],
+        [
+          1185,
+          191
+        ]
+      ],
+      "id": 74,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B12",
+      "isTextline": "true",
+      "confidence": 0.312,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 58,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1112,
+        138,
+        1200,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1214,
+          139
+        ],
+        [
+          1214,
+          158
+        ],
+        [
+          1275,
+          139
+        ],
+        [
+          1275,
+          158
+        ]
+      ],
+      "id": 75,
+      "isVertical": "false",
+      "text": "\u56F3\u781413",
+      "isTextline": "true",
+      "confidence": 0.342,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 59,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1202,
+        138,
+        1290,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1213,
+          171
+        ],
+        [
+          1213,
+          191
+        ],
+        [
+          1275,
+          171
+        ],
+        [
+          1275,
+          191
+        ]
+      ],
+      "id": 76,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B13",
+      "isTextline": "true",
+      "confidence": 0.414,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 59,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1202,
+        138,
+        1290,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1213,
+          203
+        ],
+        [
+          1213,
+          223
+        ],
+        [
+          1275,
+          203
+        ],
+        [
+          1275,
+          223
+        ]
+      ],
+      "id": 77,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF13",
+      "isTextline": "true",
+      "confidence": 0.349,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 59,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1202,
+        138,
+        1290,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1303,
+          139
+        ],
+        [
+          1303,
+          223
+        ],
+        [
+          1366,
+          139
+        ],
+        [
+          1366,
+          223
+        ]
+      ],
+      "id": 78,
+      "isVertical": "true",
+      "text": "1,,00000000000000000",
+      "isTextline": "true",
+      "confidence": 0.448,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 60,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          1
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          74,
+          1
+        ],
+        [
+          74,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1292,
+        138,
+        1380,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1394,
+          139
+        ],
+        [
+          1394,
+          158
+        ],
+        [
+          1455,
+          139
+        ],
+        [
+          1455,
+          158
+        ]
+      ],
+      "id": 79,
+      "isVertical": "false",
+      "text": "\u56F3\u781415",
+      "isTextline": "true",
+      "confidence": 0.415,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 61,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1382,
+        138,
+        1470,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1393,
+          171
+        ],
+        [
+          1393,
+          191
+        ],
+        [
+          1455,
+          171
+        ],
+        [
+          1455,
+          191
+        ]
+      ],
+      "id": 80,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B15",
+      "isTextline": "true",
+      "confidence": 0.501,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 61,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1382,
+        138,
+        1470,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1393,
+          203
+        ],
+        [
+          1393,
+          223
+        ],
+        [
+          1455,
+          203
+        ],
+        [
+          1455,
+          223
+        ]
+      ],
+      "id": 81,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF15",
+      "isTextline": "true",
+      "confidence": 0.458,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 61,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1382,
+        138,
+        1470,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1484,
+          139
+        ],
+        [
+          1484,
+          158
+        ],
+        [
+          1545,
+          139
+        ],
+        [
+          1545,
+          158
+        ]
+      ],
+      "id": 82,
+      "isVertical": "false",
+      "text": "\u56F3\u781416",
+      "isTextline": "true",
+      "confidence": 0.336,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 62,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1472,
+        138,
+        1560,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1483,
+          171
+        ],
+        [
+          1483,
+          191
+        ],
+        [
+          1545,
+          171
+        ],
+        [
+          1545,
+          191
+        ]
+      ],
+      "id": 83,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B16",
+      "isTextline": "true",
+      "confidence": 0.403,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 62,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1472,
+        138,
+        1560,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1483,
+          203
+        ],
+        [
+          1483,
+          223
+        ],
+        [
+          1545,
+          203
+        ],
+        [
+          1545,
+          223
+        ]
+      ],
+      "id": 84,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF16",
+      "isTextline": "true",
+      "confidence": 0.34,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 62,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1472,
+        138,
+        1560,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1574,
+          139
+        ],
+        [
+          1574,
+          158
+        ],
+        [
+          1635,
+          139
+        ],
+        [
+          1635,
+          158
+        ]
+      ],
+      "id": 85,
+      "isVertical": "false",
+      "text": "\u56F3\u781417",
+      "isTextline": "true",
+      "confidence": 0.455,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 63,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1562,
+        138,
+        1650,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1573,
+          171
+        ],
+        [
+          1573,
+          191
+        ],
+        [
+          1635,
+          171
+        ],
+        [
+          1635,
+          191
+        ]
+      ],
+      "id": 86,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B17",
+      "isTextline": "true",
+      "confidence": 0.618,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 63,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1562,
+        138,
+        1650,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1573,
+          203
+        ],
+        [
+          1573,
+          223
+        ],
+        [
+          1635,
+          203
+        ],
+        [
+          1635,
+          223
+        ]
+      ],
+      "id": 87,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF17",
+      "isTextline": "true",
+      "confidence": 0.595,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 63,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1562,
+        138,
+        1650,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1664,
+          139
+        ],
+        [
+          1664,
+          158
+        ],
+        [
+          1725,
+          139
+        ],
+        [
+          1725,
+          158
+        ]
+      ],
+      "id": 88,
+      "isVertical": "false",
+      "text": "\u56F3\u781418",
+      "isTextline": "true",
+      "confidence": 0.311,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 64,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1652,
+        138,
+        1740,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1663,
+          171
+        ],
+        [
+          1663,
+          191
+        ],
+        [
+          1725,
+          171
+        ],
+        [
+          1725,
+          191
+        ]
+      ],
+      "id": 89,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B18",
+      "isTextline": "true",
+      "confidence": 0.422,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 64,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1652,
+        138,
+        1740,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1663,
+          203
+        ],
+        [
+          1663,
+          223
+        ],
+        [
+          1725,
+          203
+        ],
+        [
+          1725,
+          223
+        ]
+      ],
+      "id": 90,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF18",
+      "isTextline": "true",
+      "confidence": 0.35,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 64,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1652,
+        138,
+        1740,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1754,
+          139
+        ],
+        [
+          1754,
+          158
+        ],
+        [
+          1814,
+          139
+        ],
+        [
+          1814,
+          158
+        ]
+      ],
+      "id": 91,
+      "isVertical": "false",
+      "text": "\u56F3\u781419",
+      "isTextline": "true",
+      "confidence": 0.316,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 65,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          72,
+          1
+        ],
+        [
+          72,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1742,
+        138,
+        1830,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1753,
+          171
+        ],
+        [
+          1753,
+          191
+        ],
+        [
+          1815,
+          171
+        ],
+        [
+          1815,
+          191
+        ]
+      ],
+      "id": 92,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B19",
+      "isTextline": "true",
+      "confidence": 0.457,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 65,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1742,
+        138,
+        1830,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1753,
+          203
+        ],
+        [
+          1753,
+          223
+        ],
+        [
+          1815,
+          203
+        ],
+        [
+          1815,
+          223
+        ]
+      ],
+      "id": 93,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF19",
+      "isTextline": "true",
+      "confidence": 0.416,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 65,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1742,
+        138,
+        1830,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1844,
+          139
+        ],
+        [
+          1844,
+          158
+        ],
+        [
+          1905,
+          139
+        ],
+        [
+          1905,
+          158
+        ]
+      ],
+      "id": 94,
+      "isVertical": "false",
+      "text": "\u56F3\u781420",
+      "isTextline": "true",
+      "confidence": 0.293,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 66,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1832,
+        138,
+        1920,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1843,
+          171
+        ],
+        [
+          1843,
+          191
+        ],
+        [
+          1905,
+          171
+        ],
+        [
+          1905,
+          191
+        ]
+      ],
+      "id": 95,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B20",
+      "isTextline": "true",
+      "confidence": 0.382,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 66,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1832,
+        138,
+        1920,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1843,
+          203
+        ],
+        [
+          1843,
+          223
+        ],
+        [
+          1905,
+          203
+        ],
+        [
+          1905,
+          223
+        ]
+      ],
+      "id": 96,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF20",
+      "isTextline": "true",
+      "confidence": 0.31,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 66,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1832,
+        138,
+        1920,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1934,
+          139
+        ],
+        [
+          1934,
+          158
+        ],
+        [
+          1994,
+          139
+        ],
+        [
+          1994,
+          158
+        ]
+      ],
+      "id": 97,
+      "isVertical": "false",
+      "text": "\u56F3\u781421",
+      "isTextline": "true",
+      "confidence": 0.375,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 67,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          72,
+          1
+        ],
+        [
+          72,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1922,
+        138,
+        2010,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1933,
+          171
+        ],
+        [
+          1933,
+          191
+        ],
+        [
+          1995,
+          171
+        ],
+        [
+          1995,
+          191
+        ]
+      ],
+      "id": 98,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B21",
+      "isTextline": "true",
+      "confidence": 0.462,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 67,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1922,
+        138,
+        2010,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          1933,
+          203
+        ],
+        [
+          1933,
+          223
+        ],
+        [
+          1995,
+          203
+        ],
+        [
+          1995,
+          223
+        ]
+      ],
+      "id": 99,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF21",
+      "isTextline": "true",
+      "confidence": 0.409,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 67,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        1922,
+        138,
+        2010,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2023,
+          171
+        ],
+        [
+          2023,
+          191
+        ],
+        [
+          2085,
+          171
+        ],
+        [
+          2085,
+          191
+        ]
+      ],
+      "id": 100,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B22",
+      "isTextline": "true",
+      "confidence": 0.314,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 68,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2012,
+        138,
+        2100,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2114,
+          139
+        ],
+        [
+          2114,
+          158
+        ],
+        [
+          2175,
+          139
+        ],
+        [
+          2175,
+          158
+        ]
+      ],
+      "id": 101,
+      "isVertical": "false",
+      "text": "\u56F3\u781423",
+      "isTextline": "true",
+      "confidence": 0.292,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 69,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2102,
+        138,
+        2190,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2113,
+          171
+        ],
+        [
+          2113,
+          191
+        ],
+        [
+          2175,
+          171
+        ],
+        [
+          2175,
+          191
+        ]
+      ],
+      "id": 102,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B23",
+      "isTextline": "true",
+      "confidence": 0.39,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 69,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2102,
+        138,
+        2190,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2113,
+          203
+        ],
+        [
+          2113,
+          223
+        ],
+        [
+          2175,
+          203
+        ],
+        [
+          2175,
+          223
+        ]
+      ],
+      "id": 103,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF23",
+      "isTextline": "true",
+      "confidence": 0.306,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 69,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2102,
+        138,
+        2190,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2203,
+          139
+        ],
+        [
+          2203,
+          223
+        ],
+        [
+          2266,
+          139
+        ],
+        [
+          2266,
+          223
+        ]
+      ],
+      "id": 104,
+      "isVertical": "true",
+      "text": "0,0,,,00",
+      "isTextline": "true",
+      "confidence": 0.36,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 70,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          1
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          74,
+          1
+        ],
+        [
+          74,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2192,
+        138,
+        2280,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2294,
+          139
+        ],
+        [
+          2294,
+          158
+        ],
+        [
+          2355,
+          139
+        ],
+        [
+          2355,
+          158
+        ]
+      ],
+      "id": 105,
+      "isVertical": "false",
+      "text": "\u56F3\u781425",
+      "isTextline": "true",
+      "confidence": 0.439,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 71,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2282,
+        138,
+        2370,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2293,
+          171
+        ],
+        [
+          2293,
+          191
+        ],
+        [
+          2355,
+          171
+        ],
+        [
+          2355,
+          191
+        ]
+      ],
+      "id": 106,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B25",
+      "isTextline": "true",
+      "confidence": 0.497,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 71,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2282,
+        138,
+        2370,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2293,
+          203
+        ],
+        [
+          2293,
+          223
+        ],
+        [
+          2355,
+          203
+        ],
+        [
+          2355,
+          223
+        ]
+      ],
+      "id": 107,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF25",
+      "isTextline": "true",
+      "confidence": 0.459,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 71,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2282,
+        138,
+        2370,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2384,
+          139
+        ],
+        [
+          2384,
+          158
+        ],
+        [
+          2445,
+          139
+        ],
+        [
+          2445,
+          158
+        ]
+      ],
+      "id": 108,
+      "isVertical": "false",
+      "text": "\u56F3\u781426",
+      "isTextline": "true",
+      "confidence": 0.361,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 72,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2372,
+        138,
+        2460,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2383,
+          171
+        ],
+        [
+          2383,
+          191
+        ],
+        [
+          2445,
+          171
+        ],
+        [
+          2445,
+          191
+        ]
+      ],
+      "id": 109,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B26",
+      "isTextline": "true",
+      "confidence": 0.424,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 72,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2372,
+        138,
+        2460,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2383,
+          203
+        ],
+        [
+          2383,
+          223
+        ],
+        [
+          2445,
+          203
+        ],
+        [
+          2445,
+          223
+        ]
+      ],
+      "id": 110,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF26",
+      "isTextline": "true",
+      "confidence": 0.37,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 72,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2372,
+        138,
+        2460,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2474,
+          139
+        ],
+        [
+          2474,
+          158
+        ],
+        [
+          2535,
+          139
+        ],
+        [
+          2535,
+          158
+        ]
+      ],
+      "id": 111,
+      "isVertical": "false",
+      "text": "\u56F3\u781427",
+      "isTextline": "true",
+      "confidence": 0.502,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 73,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2462,
+        138,
+        2550,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2473,
+          171
+        ],
+        [
+          2473,
+          191
+        ],
+        [
+          2535,
+          171
+        ],
+        [
+          2535,
+          191
+        ]
+      ],
+      "id": 112,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B27",
+      "isTextline": "true",
+      "confidence": 0.612,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 73,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2462,
+        138,
+        2550,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2473,
+          203
+        ],
+        [
+          2473,
+          223
+        ],
+        [
+          2535,
+          203
+        ],
+        [
+          2535,
+          223
+        ]
+      ],
+      "id": 113,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF27",
+      "isTextline": "true",
+      "confidence": 0.591,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 73,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2462,
+        138,
+        2550,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2564,
+          139
+        ],
+        [
+          2564,
+          158
+        ],
+        [
+          2625,
+          139
+        ],
+        [
+          2625,
+          158
+        ]
+      ],
+      "id": 114,
+      "isVertical": "false",
+      "text": "\u56F3\u781428",
+      "isTextline": "true",
+      "confidence": 0.319,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 74,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2552,
+        138,
+        2640,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2563,
+          171
+        ],
+        [
+          2563,
+          191
+        ],
+        [
+          2625,
+          171
+        ],
+        [
+          2625,
+          191
+        ]
+      ],
+      "id": 115,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B28",
+      "isTextline": "true",
+      "confidence": 0.406,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 74,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2552,
+        138,
+        2640,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2563,
+          203
+        ],
+        [
+          2563,
+          223
+        ],
+        [
+          2625,
+          203
+        ],
+        [
+          2625,
+          223
+        ]
+      ],
+      "id": 116,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF28",
+      "isTextline": "true",
+      "confidence": 0.348,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 74,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2552,
+        138,
+        2640,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2654,
+          139
+        ],
+        [
+          2654,
+          158
+        ],
+        [
+          2714,
+          139
+        ],
+        [
+          2714,
+          158
+        ]
+      ],
+      "id": 117,
+      "isVertical": "false",
+      "text": "\u56F3\u781429",
+      "isTextline": "true",
+      "confidence": 0.367,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 75,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          72,
+          1
+        ],
+        [
+          72,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2642,
+        138,
+        2730,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2653,
+          171
+        ],
+        [
+          2653,
+          191
+        ],
+        [
+          2715,
+          171
+        ],
+        [
+          2715,
+          191
+        ]
+      ],
+      "id": 118,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B29",
+      "isTextline": "true",
+      "confidence": 0.441,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 75,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2642,
+        138,
+        2730,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2653,
+          203
+        ],
+        [
+          2653,
+          223
+        ],
+        [
+          2715,
+          203
+        ],
+        [
+          2715,
+          223
+        ]
+      ],
+      "id": 119,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF29",
+      "isTextline": "true",
+      "confidence": 0.403,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 75,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2642,
+        138,
+        2730,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2744,
+          139
+        ],
+        [
+          2744,
+          158
+        ],
+        [
+          2805,
+          139
+        ],
+        [
+          2805,
+          158
+        ]
+      ],
+      "id": 120,
+      "isVertical": "false",
+      "text": "\u56F3\u781430",
+      "isTextline": "true",
+      "confidence": 0.254,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 76,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2732,
+        138,
+        2820,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2743,
+          171
+        ],
+        [
+          2743,
+          191
+        ],
+        [
+          2805,
+          171
+        ],
+        [
+          2805,
+          191
+        ]
+      ],
+      "id": 121,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B30",
+      "isTextline": "true",
+      "confidence": 0.334,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 76,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2732,
+        138,
+        2820,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2743,
+          203
+        ],
+        [
+          2743,
+          223
+        ],
+        [
+          2805,
+          203
+        ],
+        [
+          2805,
+          223
+        ]
+      ],
+      "id": 122,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF30",
+      "isTextline": "true",
+      "confidence": 0.297,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 76,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2732,
+        138,
+        2820,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2834,
+          139
+        ],
+        [
+          2834,
+          158
+        ],
+        [
+          2883,
+          139
+        ],
+        [
+          2883,
+          158
+        ]
+      ],
+      "id": 123,
+      "isVertical": "false",
+      "text": "\u56F3\u78143",
+      "isTextline": "true",
+      "confidence": 0.321,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 77,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          61,
+          1
+        ],
+        [
+          61,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2822,
+        138,
+        2910,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2833,
+          171
+        ],
+        [
+          2833,
+          191
+        ],
+        [
+          2895,
+          171
+        ],
+        [
+          2895,
+          191
+        ]
+      ],
+      "id": 124,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B31",
+      "isTextline": "true",
+      "confidence": 0.449,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 77,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2822,
+        138,
+        2910,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2833,
+          203
+        ],
+        [
+          2833,
+          223
+        ],
+        [
+          2895,
+          203
+        ],
+        [
+          2895,
+          223
+        ]
+      ],
+      "id": 125,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF31",
+      "isTextline": "true",
+      "confidence": 0.393,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 77,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2822,
+        138,
+        2910,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          2923,
+          171
+        ],
+        [
+          2923,
+          191
+        ],
+        [
+          2985,
+          171
+        ],
+        [
+          2985,
+          191
+        ]
+      ],
+      "id": 126,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B32",
+      "isTextline": "true",
+      "confidence": 0.298,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 78,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        2912,
+        138,
+        3000,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3014,
+          139
+        ],
+        [
+          3014,
+          158
+        ],
+        [
+          3075,
+          139
+        ],
+        [
+          3075,
+          158
+        ]
+      ],
+      "id": 127,
+      "isVertical": "false",
+      "text": "\u56F3\u781433",
+      "isTextline": "true",
+      "confidence": 0.322,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 79,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3002,
+        138,
+        3090,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3013,
+          171
+        ],
+        [
+          3013,
+          191
+        ],
+        [
+          3075,
+          171
+        ],
+        [
+          3075,
+          191
+        ]
+      ],
+      "id": 128,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B33",
+      "isTextline": "true",
+      "confidence": 0.39,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 79,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3002,
+        138,
+        3090,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3013,
+          203
+        ],
+        [
+          3013,
+          223
+        ],
+        [
+          3075,
+          203
+        ],
+        [
+          3075,
+          223
+        ]
+      ],
+      "id": 129,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF33",
+      "isTextline": "true",
+      "confidence": 0.311,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 79,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3002,
+        138,
+        3090,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3103,
+          171
+        ],
+        [
+          3103,
+          191
+        ],
+        [
+          3166,
+          171
+        ],
+        [
+          3166,
+          191
+        ]
+      ],
+      "id": 130,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B34",
+      "isTextline": "true",
+      "confidence": 0.361,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 80,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          74,
+          33
+        ],
+        [
+          74,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3092,
+        138,
+        3180,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3103,
+          203
+        ],
+        [
+          3103,
+          223
+        ],
+        [
+          3166,
+          203
+        ],
+        [
+          3166,
+          223
+        ]
+      ],
+      "id": 131,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF34",
+      "isTextline": "true",
+      "confidence": 0.291,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 80,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          74,
+          65
+        ],
+        [
+          74,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3092,
+        138,
+        3180,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3194,
+          139
+        ],
+        [
+          3194,
+          158
+        ],
+        [
+          3255,
+          139
+        ],
+        [
+          3255,
+          158
+        ]
+      ],
+      "id": 132,
+      "isVertical": "false",
+      "text": "\u56F3\u781435",
+      "isTextline": "true",
+      "confidence": 0.447,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 81,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3182,
+        138,
+        3270,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3193,
+          139
+        ],
+        [
+          3193,
+          223
+        ],
+        [
+          3255,
+          139
+        ],
+        [
+          3255,
+          223
+        ]
+      ],
+      "id": 133,
+      "isVertical": "true",
+      "text": "1,,,00000",
+      "isTextline": "true",
+      "confidence": 0.485,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 81,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          1
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3182,
+        138,
+        3270,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3193,
+          203
+        ],
+        [
+          3193,
+          223
+        ],
+        [
+          3255,
+          203
+        ],
+        [
+          3255,
+          223
+        ]
+      ],
+      "id": 134,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF35",
+      "isTextline": "true",
+      "confidence": 0.0,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 81,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3182,
+        138,
+        3270,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3284,
+          139
+        ],
+        [
+          3284,
+          158
+        ],
+        [
+          3345,
+          139
+        ],
+        [
+          3345,
+          158
+        ]
+      ],
+      "id": 135,
+      "isVertical": "false",
+      "text": "\u56F3\u781436",
+      "isTextline": "true",
+      "confidence": 0.322,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 82,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3272,
+        138,
+        3360,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3283,
+          171
+        ],
+        [
+          3283,
+          191
+        ],
+        [
+          3345,
+          171
+        ],
+        [
+          3345,
+          191
+        ]
+      ],
+      "id": 136,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B36",
+      "isTextline": "true",
+      "confidence": 0.398,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 82,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3272,
+        138,
+        3360,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3283,
+          203
+        ],
+        [
+          3283,
+          223
+        ],
+        [
+          3345,
+          203
+        ],
+        [
+          3345,
+          223
+        ]
+      ],
+      "id": 137,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF36",
+      "isTextline": "true",
+      "confidence": 0.333,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 82,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3272,
+        138,
+        3360,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3374,
+          139
+        ],
+        [
+          3374,
+          158
+        ],
+        [
+          3435,
+          139
+        ],
+        [
+          3435,
+          158
+        ]
+      ],
+      "id": 138,
+      "isVertical": "false",
+      "text": "\u56F3\u781437",
+      "isTextline": "true",
+      "confidence": 0.434,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 83,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3362,
+        138,
+        3450,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3373,
+          171
+        ],
+        [
+          3373,
+          191
+        ],
+        [
+          3435,
+          171
+        ],
+        [
+          3435,
+          191
+        ]
+      ],
+      "id": 139,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B37",
+      "isTextline": "true",
+      "confidence": 0.558,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 83,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3362,
+        138,
+        3450,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3373,
+          203
+        ],
+        [
+          3373,
+          223
+        ],
+        [
+          3435,
+          203
+        ],
+        [
+          3435,
+          223
+        ]
+      ],
+      "id": 140,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF37",
+      "isTextline": "true",
+      "confidence": 0.549,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 83,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3362,
+        138,
+        3450,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3464,
+          139
+        ],
+        [
+          3464,
+          158
+        ],
+        [
+          3525,
+          139
+        ],
+        [
+          3525,
+          158
+        ]
+      ],
+      "id": 141,
+      "isVertical": "false",
+      "text": "\u56F3\u781438",
+      "isTextline": "true",
+      "confidence": 0.36,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 84,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3452,
+        138,
+        3540,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3463,
+          171
+        ],
+        [
+          3463,
+          191
+        ],
+        [
+          3525,
+          171
+        ],
+        [
+          3525,
+          191
+        ]
+      ],
+      "id": 142,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B38",
+      "isTextline": "true",
+      "confidence": 0.418,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 84,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3452,
+        138,
+        3540,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3463,
+          203
+        ],
+        [
+          3463,
+          223
+        ],
+        [
+          3525,
+          203
+        ],
+        [
+          3525,
+          223
+        ]
+      ],
+      "id": 143,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF38",
+      "isTextline": "true",
+      "confidence": 0.361,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 84,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3452,
+        138,
+        3540,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3554,
+          139
+        ],
+        [
+          3554,
+          158
+        ],
+        [
+          3614,
+          139
+        ],
+        [
+          3614,
+          158
+        ]
+      ],
+      "id": 144,
+      "isVertical": "false",
+      "text": "\u56F3\u781439",
+      "isTextline": "true",
+      "confidence": 0.373,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 85,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          72,
+          1
+        ],
+        [
+          72,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3542,
+        138,
+        3630,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3553,
+          171
+        ],
+        [
+          3553,
+          191
+        ],
+        [
+          3615,
+          171
+        ],
+        [
+          3615,
+          191
+        ]
+      ],
+      "id": 145,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B39",
+      "isTextline": "true",
+      "confidence": 0.42,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 85,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3542,
+        138,
+        3630,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3553,
+          203
+        ],
+        [
+          3553,
+          223
+        ],
+        [
+          3615,
+          203
+        ],
+        [
+          3615,
+          223
+        ]
+      ],
+      "id": 146,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF39",
+      "isTextline": "true",
+      "confidence": 0.366,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 85,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3542,
+        138,
+        3630,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3644,
+          139
+        ],
+        [
+          3644,
+          158
+        ],
+        [
+          3705,
+          139
+        ],
+        [
+          3705,
+          158
+        ]
+      ],
+      "id": 147,
+      "isVertical": "false",
+      "text": "\u56F3\u781440",
+      "isTextline": "true",
+      "confidence": 0.342,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 86,
+      "originalNativeLocalBoundingBox": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          73,
+          20
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3632,
+        138,
+        3720,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3643,
+          171
+        ],
+        [
+          3643,
+          191
+        ],
+        [
+          3705,
+          171
+        ],
+        [
+          3705,
+          191
+        ]
+      ],
+      "id": 148,
+      "isVertical": "false",
+      "text": "\u8A66\u5E2B40",
+      "isTextline": "true",
+      "confidence": 0.449,
+      "class_index": 1,
+      "originalNativeID": 1,
+      "regionID": 86,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          33
+        ],
+        [
+          11,
+          53
+        ],
+        [
+          73,
+          33
+        ],
+        [
+          73,
+          53
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3632,
+        138,
+        3720,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          3643,
+          203
+        ],
+        [
+          3643,
+          223
+        ],
+        [
+          3705,
+          203
+        ],
+        [
+          3705,
+          223
+        ]
+      ],
+      "id": 149,
+      "isVertical": "false",
+      "text": "\u8A66\u57DF40",
+      "isTextline": "true",
+      "confidence": 0.376,
+      "class_index": 1,
+      "originalNativeID": 2,
+      "regionID": 86,
+      "originalNativeLocalBoundingBox": [
+        [
+          11,
+          65
+        ],
+        [
+          11,
+          85
+        ],
+        [
+          73,
+          65
+        ],
+        [
+          73,
+          85
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        3632,
+        138,
+        3720,
+        232
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          98,
+          13
+        ],
+        [
+          98,
+          33
+        ],
+        [
+          201,
+          13
+        ],
+        [
+          201,
+          33
+        ]
+      ],
+      "id": 150,
+      "isVertical": "false",
+      "text": "\u4EE4\u548C14\u5E74\u5EA6",
+      "isTextline": "true",
+      "confidence": 0.84,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 87,
+      "originalNativeLocalBoundingBox": [
+        [
+          20,
+          13
+        ],
+        [
+          20,
+          33
+        ],
+        [
+          123,
+          13
+        ],
+        [
+          123,
+          33
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        78,
+        0,
+        222,
+        53
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          351,
+          13
+        ],
+        [
+          351,
+          32
+        ],
+        [
+          388,
+          13
+        ],
+        [
+          388,
+          32
+        ]
+      ],
+      "id": 151,
+      "isVertical": "false",
+      "text": "\u524D\u671F",
+      "isTextline": "true",
+      "confidence": 0.534,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 88,
+      "originalNativeLocalBoundingBox": [
+        [
+          20,
+          13
+        ],
+        [
+          20,
+          32
+        ],
+        [
+          57,
+          13
+        ],
+        [
+          57,
+          32
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        331,
+        0,
+        409,
+        53
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    },
+    {
+      "boundingBox": [
+        [
+          551,
+          13
+        ],
+        [
+          551,
+          32
+        ],
+        [
+          608,
+          13
+        ],
+        [
+          608,
+          32
+        ]
+      ],
+      "id": 152,
+      "isVertical": "false",
+      "text": "\u6642\u9593\u5272",
+      "isTextline": "true",
+      "confidence": 0.831,
+      "class_index": 1,
+      "originalNativeID": 0,
+      "regionID": 89,
+      "originalNativeLocalBoundingBox": [
+        [
+          20,
+          13
+        ],
+        [
+          20,
+          32
+        ],
+        [
+          77,
+          13
+        ],
+        [
+          77,
+          32
+        ]
+      ],
+      "IDScope": "new adapter namespace; original nativeID/raw unchanged",
+      "parentRegionBox": [
+        531,
+        0,
+        629,
+        53
+      ],
+      "geometryScope": "pixel-derived recognition ROI with EXACT integer translation; no clipping or character subdivision"
+    }
+  ],
+  "adoptionEligible": false,
+  "downstreamDiagnosticOnly": true,
+  "strictError": {
+    "type": "PdfParseException",
+    "Message": "PDF\u306E\u6642\u9650\u306E\u898B\u51FA\u3057\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3067\u3057\u305F\uFF08P05\uFF09\u3002\u6B63\u5E38\u306A\u89E3\u6790\u7D50\u679C\u306F\u4FDD\u6301\u3057\u3066\u3044\u307E\u3059\u3002",
+    "stage": "P05"
+  },
+  "recoveryError": {
+    "type": "InvalidDataException",
+    "Message": "\u30AF\u30E9\u30B9\u30FB\u65E5\u4ED8\u30FB\u6642\u9650\u306E\u898B\u51FA\u3057\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002",
+    "stage": "builder",
+    "failureClass": "sourceContractRefusal"
+  },
+  "strictExact": false,
+  "formalExactPossible": false,
+  "recoveryFormalExact": false,
+  "actualRecoveryAccepted": false,
+  "providerCalls": 0
+}

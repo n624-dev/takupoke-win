@@ -1,0 +1,1706 @@
+{
+  "regions": [
+    {
+      "id": 0,
+      "kind": "closed-physical-cell",
+      "box": [
+        122,
+        72,
+        840,
+        104
+      ],
+      "physicalBox": [
+        120.5,
+        70.5,
+        840.5,
+        104.5
+      ],
+      "inkPixels": 565,
+      "originalRGBSHA256": "679a92c6e52bccc34e6e4b26a5ce040a5c163812859555da6c346bff91c32ee3",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 1,
+      "kind": "closed-physical-cell",
+      "box": [
+        842,
+        72,
+        1560,
+        104
+      ],
+      "physicalBox": [
+        840.5,
+        70.5,
+        1560.5,
+        104.5
+      ],
+      "inkPixels": 537,
+      "originalRGBSHA256": "4693b6ebbec025cd74b35bfc77f2be587e4acfb404ed8621e6d8f38757827116",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 2,
+      "kind": "closed-physical-cell",
+      "box": [
+        1562,
+        72,
+        2280,
+        104
+      ],
+      "physicalBox": [
+        1560.5,
+        70.5,
+        2280.5,
+        104.5
+      ],
+      "inkPixels": 563,
+      "originalRGBSHA256": "5a9d40f6a15568e3fcb624cbd7da4bc043f15eaeb051889628f264914a0669f8",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 3,
+      "kind": "closed-physical-cell",
+      "box": [
+        2282,
+        72,
+        3000,
+        104
+      ],
+      "physicalBox": [
+        2280.5,
+        70.5,
+        3000.5,
+        104.5
+      ],
+      "inkPixels": 547,
+      "originalRGBSHA256": "e9bd34723a33f70eeb2bc2e3f6a420405a11ccba94f19d7f0cebe09831b13ebe",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 4,
+      "kind": "closed-physical-cell",
+      "box": [
+        3002,
+        72,
+        3720,
+        104
+      ],
+      "physicalBox": [
+        3000.5,
+        70.5,
+        3720.5,
+        104.5
+      ],
+      "inkPixels": 594,
+      "originalRGBSHA256": "90948ffcefad9860d0c90a8796c8749d600826877fd1c2095d0a01fbd687a846",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 5,
+      "kind": "closed-physical-cell",
+      "box": [
+        122,
+        106,
+        210,
+        136
+      ],
+      "physicalBox": [
+        120.5,
+        104.5,
+        210.5,
+        136.5
+      ],
+      "inkPixels": 53,
+      "originalRGBSHA256": "bffbccaf782114f24ce3ae05131f139f0959a59883308a69a7ecf3aaccd0b964",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 6,
+      "kind": "closed-physical-cell",
+      "box": [
+        212,
+        106,
+        300,
+        136
+      ],
+      "physicalBox": [
+        210.5,
+        104.5,
+        300.5,
+        136.5
+      ],
+      "inkPixels": 82,
+      "originalRGBSHA256": "bd7840adb9a3e9ff03d1fefd142445a1f5fa58498bf33582d3153c326866ada7",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 7,
+      "kind": "closed-physical-cell",
+      "box": [
+        302,
+        106,
+        390,
+        136
+      ],
+      "physicalBox": [
+        300.5,
+        104.5,
+        390.5,
+        136.5
+      ],
+      "inkPixels": 85,
+      "originalRGBSHA256": "0a2de3f2e5e7428b0f0d04b703a5897b9e12d92921ca1d6576a35962c66ba1b4",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 8,
+      "kind": "closed-physical-cell",
+      "box": [
+        392,
+        106,
+        480,
+        136
+      ],
+      "physicalBox": [
+        390.5,
+        104.5,
+        480.5,
+        136.5
+      ],
+      "inkPixels": 84,
+      "originalRGBSHA256": "cb88431f70965af783824c1563cb123e0c934533ca385840b69d5d0a3b8484fa",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 9,
+      "kind": "closed-physical-cell",
+      "box": [
+        482,
+        106,
+        570,
+        136
+      ],
+      "physicalBox": [
+        480.5,
+        104.5,
+        570.5,
+        136.5
+      ],
+      "inkPixels": 82,
+      "originalRGBSHA256": "c4ea124d721b739e7dedbd8fa33710b598ec2005466b17d2827864fcb5ebfb29",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 10,
+      "kind": "closed-physical-cell",
+      "box": [
+        572,
+        106,
+        660,
+        136
+      ],
+      "physicalBox": [
+        570.5,
+        104.5,
+        660.5,
+        136.5
+      ],
+      "inkPixels": 96,
+      "originalRGBSHA256": "0b103f27a265b9b1e79a940904a64a727494595ce1d9d9e9b98bf0cc60f45fe3",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 11,
+      "kind": "closed-physical-cell",
+      "box": [
+        662,
+        106,
+        750,
+        136
+      ],
+      "physicalBox": [
+        660.5,
+        104.5,
+        750.5,
+        136.5
+      ],
+      "inkPixels": 59,
+      "originalRGBSHA256": "c1b6815329377a6c312b15d043ce3126e2d7427f7efaf4c014774bc6fa64e76f",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 12,
+      "kind": "closed-physical-cell",
+      "box": [
+        752,
+        106,
+        840,
+        136
+      ],
+      "physicalBox": [
+        750.5,
+        104.5,
+        840.5,
+        136.5
+      ],
+      "inkPixels": 103,
+      "originalRGBSHA256": "240ff698b87b31f80151d71f1af901cb087c53c956996aec6b6489d29c2b572a",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 13,
+      "kind": "closed-physical-cell",
+      "box": [
+        842,
+        106,
+        930,
+        136
+      ],
+      "physicalBox": [
+        840.5,
+        104.5,
+        930.5,
+        136.5
+      ],
+      "inkPixels": 53,
+      "originalRGBSHA256": "bffbccaf782114f24ce3ae05131f139f0959a59883308a69a7ecf3aaccd0b964",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 14,
+      "kind": "closed-physical-cell",
+      "box": [
+        932,
+        106,
+        1020,
+        136
+      ],
+      "physicalBox": [
+        930.5,
+        104.5,
+        1020.5,
+        136.5
+      ],
+      "inkPixels": 82,
+      "originalRGBSHA256": "bd7840adb9a3e9ff03d1fefd142445a1f5fa58498bf33582d3153c326866ada7",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 15,
+      "kind": "closed-physical-cell",
+      "box": [
+        1022,
+        106,
+        1110,
+        136
+      ],
+      "physicalBox": [
+        1020.5,
+        104.5,
+        1110.5,
+        136.5
+      ],
+      "inkPixels": 85,
+      "originalRGBSHA256": "0a2de3f2e5e7428b0f0d04b703a5897b9e12d92921ca1d6576a35962c66ba1b4",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 16,
+      "kind": "closed-physical-cell",
+      "box": [
+        1112,
+        106,
+        1200,
+        136
+      ],
+      "physicalBox": [
+        1110.5,
+        104.5,
+        1200.5,
+        136.5
+      ],
+      "inkPixels": 84,
+      "originalRGBSHA256": "cb88431f70965af783824c1563cb123e0c934533ca385840b69d5d0a3b8484fa",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 17,
+      "kind": "closed-physical-cell",
+      "box": [
+        1202,
+        106,
+        1290,
+        136
+      ],
+      "physicalBox": [
+        1200.5,
+        104.5,
+        1290.5,
+        136.5
+      ],
+      "inkPixels": 82,
+      "originalRGBSHA256": "c4ea124d721b739e7dedbd8fa33710b598ec2005466b17d2827864fcb5ebfb29",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 18,
+      "kind": "closed-physical-cell",
+      "box": [
+        1292,
+        106,
+        1380,
+        136
+      ],
+      "physicalBox": [
+        1290.5,
+        104.5,
+        1380.5,
+        136.5
+      ],
+      "inkPixels": 96,
+      "originalRGBSHA256": "0b103f27a265b9b1e79a940904a64a727494595ce1d9d9e9b98bf0cc60f45fe3",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 19,
+      "kind": "closed-physical-cell",
+      "box": [
+        1382,
+        106,
+        1470,
+        136
+      ],
+      "physicalBox": [
+        1380.5,
+        104.5,
+        1470.5,
+        136.5
+      ],
+      "inkPixels": 59,
+      "originalRGBSHA256": "c1b6815329377a6c312b15d043ce3126e2d7427f7efaf4c014774bc6fa64e76f",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 20,
+      "kind": "closed-physical-cell",
+      "box": [
+        1472,
+        106,
+        1560,
+        136
+      ],
+      "physicalBox": [
+        1470.5,
+        104.5,
+        1560.5,
+        136.5
+      ],
+      "inkPixels": 103,
+      "originalRGBSHA256": "240ff698b87b31f80151d71f1af901cb087c53c956996aec6b6489d29c2b572a",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 21,
+      "kind": "closed-physical-cell",
+      "box": [
+        1562,
+        106,
+        1650,
+        136
+      ],
+      "physicalBox": [
+        1560.5,
+        104.5,
+        1650.5,
+        136.5
+      ],
+      "inkPixels": 53,
+      "originalRGBSHA256": "bffbccaf782114f24ce3ae05131f139f0959a59883308a69a7ecf3aaccd0b964",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 22,
+      "kind": "closed-physical-cell",
+      "box": [
+        1652,
+        106,
+        1740,
+        136
+      ],
+      "physicalBox": [
+        1650.5,
+        104.5,
+        1740.5,
+        136.5
+      ],
+      "inkPixels": 82,
+      "originalRGBSHA256": "bd7840adb9a3e9ff03d1fefd142445a1f5fa58498bf33582d3153c326866ada7",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 23,
+      "kind": "closed-physical-cell",
+      "box": [
+        1742,
+        106,
+        1830,
+        136
+      ],
+      "physicalBox": [
+        1740.5,
+        104.5,
+        1830.5,
+        136.5
+      ],
+      "inkPixels": 85,
+      "originalRGBSHA256": "0a2de3f2e5e7428b0f0d04b703a5897b9e12d92921ca1d6576a35962c66ba1b4",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 24,
+      "kind": "closed-physical-cell",
+      "box": [
+        1832,
+        106,
+        1920,
+        136
+      ],
+      "physicalBox": [
+        1830.5,
+        104.5,
+        1920.5,
+        136.5
+      ],
+      "inkPixels": 84,
+      "originalRGBSHA256": "cb88431f70965af783824c1563cb123e0c934533ca385840b69d5d0a3b8484fa",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 25,
+      "kind": "closed-physical-cell",
+      "box": [
+        1922,
+        106,
+        2010,
+        136
+      ],
+      "physicalBox": [
+        1920.5,
+        104.5,
+        2010.5,
+        136.5
+      ],
+      "inkPixels": 82,
+      "originalRGBSHA256": "c4ea124d721b739e7dedbd8fa33710b598ec2005466b17d2827864fcb5ebfb29",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 26,
+      "kind": "closed-physical-cell",
+      "box": [
+        2012,
+        106,
+        2100,
+        136
+      ],
+      "physicalBox": [
+        2010.5,
+        104.5,
+        2100.5,
+        136.5
+      ],
+      "inkPixels": 96,
+      "originalRGBSHA256": "0b103f27a265b9b1e79a940904a64a727494595ce1d9d9e9b98bf0cc60f45fe3",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 27,
+      "kind": "closed-physical-cell",
+      "box": [
+        2102,
+        106,
+        2190,
+        136
+      ],
+      "physicalBox": [
+        2100.5,
+        104.5,
+        2190.5,
+        136.5
+      ],
+      "inkPixels": 59,
+      "originalRGBSHA256": "c1b6815329377a6c312b15d043ce3126e2d7427f7efaf4c014774bc6fa64e76f",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 28,
+      "kind": "closed-physical-cell",
+      "box": [
+        2192,
+        106,
+        2280,
+        136
+      ],
+      "physicalBox": [
+        2190.5,
+        104.5,
+        2280.5,
+        136.5
+      ],
+      "inkPixels": 103,
+      "originalRGBSHA256": "240ff698b87b31f80151d71f1af901cb087c53c956996aec6b6489d29c2b572a",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 29,
+      "kind": "closed-physical-cell",
+      "box": [
+        2282,
+        106,
+        2370,
+        136
+      ],
+      "physicalBox": [
+        2280.5,
+        104.5,
+        2370.5,
+        136.5
+      ],
+      "inkPixels": 53,
+      "originalRGBSHA256": "bffbccaf782114f24ce3ae05131f139f0959a59883308a69a7ecf3aaccd0b964",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 30,
+      "kind": "closed-physical-cell",
+      "box": [
+        2372,
+        106,
+        2460,
+        136
+      ],
+      "physicalBox": [
+        2370.5,
+        104.5,
+        2460.5,
+        136.5
+      ],
+      "inkPixels": 82,
+      "originalRGBSHA256": "bd7840adb9a3e9ff03d1fefd142445a1f5fa58498bf33582d3153c326866ada7",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 31,
+      "kind": "closed-physical-cell",
+      "box": [
+        2462,
+        106,
+        2550,
+        136
+      ],
+      "physicalBox": [
+        2460.5,
+        104.5,
+        2550.5,
+        136.5
+      ],
+      "inkPixels": 85,
+      "originalRGBSHA256": "0a2de3f2e5e7428b0f0d04b703a5897b9e12d92921ca1d6576a35962c66ba1b4",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 32,
+      "kind": "closed-physical-cell",
+      "box": [
+        2552,
+        106,
+        2640,
+        136
+      ],
+      "physicalBox": [
+        2550.5,
+        104.5,
+        2640.5,
+        136.5
+      ],
+      "inkPixels": 84,
+      "originalRGBSHA256": "cb88431f70965af783824c1563cb123e0c934533ca385840b69d5d0a3b8484fa",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 33,
+      "kind": "closed-physical-cell",
+      "box": [
+        2642,
+        106,
+        2730,
+        136
+      ],
+      "physicalBox": [
+        2640.5,
+        104.5,
+        2730.5,
+        136.5
+      ],
+      "inkPixels": 82,
+      "originalRGBSHA256": "c4ea124d721b739e7dedbd8fa33710b598ec2005466b17d2827864fcb5ebfb29",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 34,
+      "kind": "closed-physical-cell",
+      "box": [
+        2732,
+        106,
+        2820,
+        136
+      ],
+      "physicalBox": [
+        2730.5,
+        104.5,
+        2820.5,
+        136.5
+      ],
+      "inkPixels": 96,
+      "originalRGBSHA256": "0b103f27a265b9b1e79a940904a64a727494595ce1d9d9e9b98bf0cc60f45fe3",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 35,
+      "kind": "closed-physical-cell",
+      "box": [
+        2822,
+        106,
+        2910,
+        136
+      ],
+      "physicalBox": [
+        2820.5,
+        104.5,
+        2910.5,
+        136.5
+      ],
+      "inkPixels": 59,
+      "originalRGBSHA256": "c1b6815329377a6c312b15d043ce3126e2d7427f7efaf4c014774bc6fa64e76f",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 36,
+      "kind": "closed-physical-cell",
+      "box": [
+        2912,
+        106,
+        3000,
+        136
+      ],
+      "physicalBox": [
+        2910.5,
+        104.5,
+        3000.5,
+        136.5
+      ],
+      "inkPixels": 103,
+      "originalRGBSHA256": "240ff698b87b31f80151d71f1af901cb087c53c956996aec6b6489d29c2b572a",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 37,
+      "kind": "closed-physical-cell",
+      "box": [
+        3002,
+        106,
+        3090,
+        136
+      ],
+      "physicalBox": [
+        3000.5,
+        104.5,
+        3090.5,
+        136.5
+      ],
+      "inkPixels": 53,
+      "originalRGBSHA256": "bffbccaf782114f24ce3ae05131f139f0959a59883308a69a7ecf3aaccd0b964",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 38,
+      "kind": "closed-physical-cell",
+      "box": [
+        3092,
+        106,
+        3180,
+        136
+      ],
+      "physicalBox": [
+        3090.5,
+        104.5,
+        3180.5,
+        136.5
+      ],
+      "inkPixels": 82,
+      "originalRGBSHA256": "bd7840adb9a3e9ff03d1fefd142445a1f5fa58498bf33582d3153c326866ada7",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 39,
+      "kind": "closed-physical-cell",
+      "box": [
+        3182,
+        106,
+        3270,
+        136
+      ],
+      "physicalBox": [
+        3180.5,
+        104.5,
+        3270.5,
+        136.5
+      ],
+      "inkPixels": 85,
+      "originalRGBSHA256": "0a2de3f2e5e7428b0f0d04b703a5897b9e12d92921ca1d6576a35962c66ba1b4",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 40,
+      "kind": "closed-physical-cell",
+      "box": [
+        3272,
+        106,
+        3360,
+        136
+      ],
+      "physicalBox": [
+        3270.5,
+        104.5,
+        3360.5,
+        136.5
+      ],
+      "inkPixels": 84,
+      "originalRGBSHA256": "cb88431f70965af783824c1563cb123e0c934533ca385840b69d5d0a3b8484fa",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 41,
+      "kind": "closed-physical-cell",
+      "box": [
+        3362,
+        106,
+        3450,
+        136
+      ],
+      "physicalBox": [
+        3360.5,
+        104.5,
+        3450.5,
+        136.5
+      ],
+      "inkPixels": 82,
+      "originalRGBSHA256": "c4ea124d721b739e7dedbd8fa33710b598ec2005466b17d2827864fcb5ebfb29",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 42,
+      "kind": "closed-physical-cell",
+      "box": [
+        3452,
+        106,
+        3540,
+        136
+      ],
+      "physicalBox": [
+        3450.5,
+        104.5,
+        3540.5,
+        136.5
+      ],
+      "inkPixels": 96,
+      "originalRGBSHA256": "0b103f27a265b9b1e79a940904a64a727494595ce1d9d9e9b98bf0cc60f45fe3",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 43,
+      "kind": "closed-physical-cell",
+      "box": [
+        3542,
+        106,
+        3630,
+        136
+      ],
+      "physicalBox": [
+        3540.5,
+        104.5,
+        3630.5,
+        136.5
+      ],
+      "inkPixels": 59,
+      "originalRGBSHA256": "c1b6815329377a6c312b15d043ce3126e2d7427f7efaf4c014774bc6fa64e76f",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 44,
+      "kind": "closed-physical-cell",
+      "box": [
+        3632,
+        106,
+        3720,
+        136
+      ],
+      "physicalBox": [
+        3630.5,
+        104.5,
+        3720.5,
+        136.5
+      ],
+      "inkPixels": 103,
+      "originalRGBSHA256": "240ff698b87b31f80151d71f1af901cb087c53c956996aec6b6489d29c2b572a",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 45,
+      "kind": "closed-physical-cell",
+      "box": [
+        22,
+        138,
+        60,
+        232
+      ],
+      "physicalBox": [
+        20.5,
+        136.5,
+        60.5,
+        232.5
+      ],
+      "inkPixels": 53,
+      "originalRGBSHA256": "8c17cb70866ef81041682daf23bb56a365d8bfb75f13343eb843cd93642770a9",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 46,
+      "kind": "closed-physical-cell",
+      "box": [
+        62,
+        138,
+        120,
+        232
+      ],
+      "physicalBox": [
+        60.5,
+        136.5,
+        120.5,
+        232.5
+      ],
+      "inkPixels": 82,
+      "originalRGBSHA256": "fc2d8d07d86e7156ae4bc5505267b98c9fe238a18080d80059b30df95a51d36b",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 47,
+      "kind": "closed-physical-cell",
+      "box": [
+        122,
+        138,
+        210,
+        232
+      ],
+      "physicalBox": [
+        120.5,
+        136.5,
+        210.5,
+        232.5
+      ],
+      "inkPixels": 1781,
+      "originalRGBSHA256": "505502c74500a38bd8b4f728e9f42670f2dba12c7a3bc759757f815f7560d27b",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 48,
+      "kind": "closed-physical-cell",
+      "box": [
+        212,
+        138,
+        300,
+        232
+      ],
+      "physicalBox": [
+        210.5,
+        136.5,
+        300.5,
+        232.5
+      ],
+      "inkPixels": 1868,
+      "originalRGBSHA256": "9ec7c0a216f3d6b3ed96365b7fcdb716a90396e04272f1e3d0dbe136d96ed7fb",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 49,
+      "kind": "closed-physical-cell",
+      "box": [
+        302,
+        138,
+        390,
+        232
+      ],
+      "physicalBox": [
+        300.5,
+        136.5,
+        390.5,
+        232.5
+      ],
+      "inkPixels": 1877,
+      "originalRGBSHA256": "9c91ea041e15339bf0a8b3fe5830e9c83d922c3787fcd1bd7548d7747c1713ba",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 50,
+      "kind": "closed-physical-cell",
+      "box": [
+        392,
+        138,
+        480,
+        232
+      ],
+      "physicalBox": [
+        390.5,
+        136.5,
+        480.5,
+        232.5
+      ],
+      "inkPixels": 1874,
+      "originalRGBSHA256": "0e57fea31c134d801168255fdedb48f3ddd94e87272a9bdd936b0e4636ec8d20",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 51,
+      "kind": "closed-physical-cell",
+      "box": [
+        482,
+        138,
+        570,
+        232
+      ],
+      "physicalBox": [
+        480.5,
+        136.5,
+        570.5,
+        232.5
+      ],
+      "inkPixels": 1868,
+      "originalRGBSHA256": "5ea1f86966382c968b8949c88d91c0d126d808001e776eae805e269678b15557",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 52,
+      "kind": "closed-physical-cell",
+      "box": [
+        572,
+        138,
+        660,
+        232
+      ],
+      "physicalBox": [
+        570.5,
+        136.5,
+        660.5,
+        232.5
+      ],
+      "inkPixels": 1910,
+      "originalRGBSHA256": "2b1724d73f992f03d98eadba01e181ca3ce5ee680200669c27599a4da27e4271",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 53,
+      "kind": "closed-physical-cell",
+      "box": [
+        662,
+        138,
+        750,
+        232
+      ],
+      "physicalBox": [
+        660.5,
+        136.5,
+        750.5,
+        232.5
+      ],
+      "inkPixels": 1799,
+      "originalRGBSHA256": "d703ed5b863d8a3ba02b00e388753547993adc5b05f2028e9f3beb01774d8dc2",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 54,
+      "kind": "closed-physical-cell",
+      "box": [
+        752,
+        138,
+        840,
+        232
+      ],
+      "physicalBox": [
+        750.5,
+        136.5,
+        840.5,
+        232.5
+      ],
+      "inkPixels": 1931,
+      "originalRGBSHA256": "5d85de5fb51f07569f02b183ecb995ec0062c6c4cf63ed177ef9b426b1880a06",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 55,
+      "kind": "closed-physical-cell",
+      "box": [
+        842,
+        138,
+        930,
+        232
+      ],
+      "physicalBox": [
+        840.5,
+        136.5,
+        930.5,
+        232.5
+      ],
+      "inkPixels": 1904,
+      "originalRGBSHA256": "dac8d4b94a7f0f576a59350b132106c09c5fcbfecfd3ecaec38789e174afc9f8",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 56,
+      "kind": "closed-physical-cell",
+      "box": [
+        932,
+        138,
+        1020,
+        232
+      ],
+      "physicalBox": [
+        930.5,
+        136.5,
+        1020.5,
+        232.5
+      ],
+      "inkPixels": 1781,
+      "originalRGBSHA256": "3fb0676f43a09c7d64d5d39bb19b10cc0ee032e6451b05ab56071972ae050ae1",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 57,
+      "kind": "closed-physical-cell",
+      "box": [
+        1022,
+        138,
+        1110,
+        232
+      ],
+      "physicalBox": [
+        1020.5,
+        136.5,
+        1110.5,
+        232.5
+      ],
+      "inkPixels": 1679,
+      "originalRGBSHA256": "f9df22366dfbc02e06a274ce85e507208b5a6969c996f95010ca9f17d537a3d5",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 58,
+      "kind": "closed-physical-cell",
+      "box": [
+        1112,
+        138,
+        1200,
+        232
+      ],
+      "physicalBox": [
+        1110.5,
+        136.5,
+        1200.5,
+        232.5
+      ],
+      "inkPixels": 1766,
+      "originalRGBSHA256": "8627c9f2c409adb0a25c728bba2dc2860bb2d3ebc56a2fac1a216ce40bc84e14",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 59,
+      "kind": "closed-physical-cell",
+      "box": [
+        1202,
+        138,
+        1290,
+        232
+      ],
+      "physicalBox": [
+        1200.5,
+        136.5,
+        1290.5,
+        232.5
+      ],
+      "inkPixels": 1775,
+      "originalRGBSHA256": "483ce152c2d051d6f825c85e9702c341d816ec2606070c57025a1898f90b2724",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 60,
+      "kind": "closed-physical-cell",
+      "box": [
+        1292,
+        138,
+        1380,
+        232
+      ],
+      "physicalBox": [
+        1290.5,
+        136.5,
+        1380.5,
+        232.5
+      ],
+      "inkPixels": 1772,
+      "originalRGBSHA256": "9950420cca6e57129ba3c2062a799cbdd81e7b86c6f9294d196ab802250fe102",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 61,
+      "kind": "closed-physical-cell",
+      "box": [
+        1382,
+        138,
+        1470,
+        232
+      ],
+      "physicalBox": [
+        1380.5,
+        136.5,
+        1470.5,
+        232.5
+      ],
+      "inkPixels": 1766,
+      "originalRGBSHA256": "5e55a37150f892eba50157ecf7a0fe9c2ba0c9324999f15d292f707c82ebe8b0",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 62,
+      "kind": "closed-physical-cell",
+      "box": [
+        1472,
+        138,
+        1560,
+        232
+      ],
+      "physicalBox": [
+        1470.5,
+        136.5,
+        1560.5,
+        232.5
+      ],
+      "inkPixels": 1808,
+      "originalRGBSHA256": "d888c60a44f4473cb282c9bf346b82ad74125de88dfaef959f5b144da42ebf82",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 63,
+      "kind": "closed-physical-cell",
+      "box": [
+        1562,
+        138,
+        1650,
+        232
+      ],
+      "physicalBox": [
+        1560.5,
+        136.5,
+        1650.5,
+        232.5
+      ],
+      "inkPixels": 1697,
+      "originalRGBSHA256": "1eca0e516139d71e3d83ee9346252347503f6585dc0d8beb0e77c727b3063bcf",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 64,
+      "kind": "closed-physical-cell",
+      "box": [
+        1652,
+        138,
+        1740,
+        232
+      ],
+      "physicalBox": [
+        1650.5,
+        136.5,
+        1740.5,
+        232.5
+      ],
+      "inkPixels": 1829,
+      "originalRGBSHA256": "55cabecd62f22c754446c0789a45e9b4a179314a1a3f49fe558ff2c0b902a526",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 65,
+      "kind": "closed-physical-cell",
+      "box": [
+        1742,
+        138,
+        1830,
+        232
+      ],
+      "physicalBox": [
+        1740.5,
+        136.5,
+        1830.5,
+        232.5
+      ],
+      "inkPixels": 1802,
+      "originalRGBSHA256": "45bce58f3e184b8f06845363679357285f166298086bff1abfbdb9b143580db6",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 66,
+      "kind": "closed-physical-cell",
+      "box": [
+        1832,
+        138,
+        1920,
+        232
+      ],
+      "physicalBox": [
+        1830.5,
+        136.5,
+        1920.5,
+        232.5
+      ],
+      "inkPixels": 1868,
+      "originalRGBSHA256": "f7d473c84d921bc067a02b5df3ed29619a3b06f1ccb48541a6f63754d72ce391",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 67,
+      "kind": "closed-physical-cell",
+      "box": [
+        1922,
+        138,
+        2010,
+        232
+      ],
+      "physicalBox": [
+        1920.5,
+        136.5,
+        2010.5,
+        232.5
+      ],
+      "inkPixels": 1766,
+      "originalRGBSHA256": "5090fac624a7beee2664dfacdb6ee66d15c4414841f29072d2344af5e4526985",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 68,
+      "kind": "closed-physical-cell",
+      "box": [
+        2012,
+        138,
+        2100,
+        232
+      ],
+      "physicalBox": [
+        2010.5,
+        136.5,
+        2100.5,
+        232.5
+      ],
+      "inkPixels": 1853,
+      "originalRGBSHA256": "ef440d5c2891cbb82040bb0052f9d8d29ef160e8e8806f3267b4282673ea452b",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 69,
+      "kind": "closed-physical-cell",
+      "box": [
+        2102,
+        138,
+        2190,
+        232
+      ],
+      "physicalBox": [
+        2100.5,
+        136.5,
+        2190.5,
+        232.5
+      ],
+      "inkPixels": 1862,
+      "originalRGBSHA256": "186bd126cad6641bb495867a594368d231c2155b4cf676c9385796f73e9b83d6",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 70,
+      "kind": "closed-physical-cell",
+      "box": [
+        2192,
+        138,
+        2280,
+        232
+      ],
+      "physicalBox": [
+        2190.5,
+        136.5,
+        2280.5,
+        232.5
+      ],
+      "inkPixels": 1859,
+      "originalRGBSHA256": "6aa93e7802a1a2854a90e5d8de5a05bd1231e7b4eaf4259798d3ff13878e9639",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 71,
+      "kind": "closed-physical-cell",
+      "box": [
+        2282,
+        138,
+        2370,
+        232
+      ],
+      "physicalBox": [
+        2280.5,
+        136.5,
+        2370.5,
+        232.5
+      ],
+      "inkPixels": 1853,
+      "originalRGBSHA256": "bfc9588509c58e42eeb48de631f36659c9aa1223b3acd3befe69ebfda0589f07",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 72,
+      "kind": "closed-physical-cell",
+      "box": [
+        2372,
+        138,
+        2460,
+        232
+      ],
+      "physicalBox": [
+        2370.5,
+        136.5,
+        2460.5,
+        232.5
+      ],
+      "inkPixels": 1895,
+      "originalRGBSHA256": "aa6e8094081a75f8e886daab9e3381697866c144602e5cd24e1cd53cd00efa73",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 73,
+      "kind": "closed-physical-cell",
+      "box": [
+        2462,
+        138,
+        2550,
+        232
+      ],
+      "physicalBox": [
+        2460.5,
+        136.5,
+        2550.5,
+        232.5
+      ],
+      "inkPixels": 1784,
+      "originalRGBSHA256": "508c726ba827efa1a6a01e1a6129bf04d7976c1c355e379792de1f716e5b751a",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 74,
+      "kind": "closed-physical-cell",
+      "box": [
+        2552,
+        138,
+        2640,
+        232
+      ],
+      "physicalBox": [
+        2550.5,
+        136.5,
+        2640.5,
+        232.5
+      ],
+      "inkPixels": 1916,
+      "originalRGBSHA256": "3e7558848d8a3d27500191a409e9c3674b317ae24a39d44ff65ff29b208f3b4c",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 75,
+      "kind": "closed-physical-cell",
+      "box": [
+        2642,
+        138,
+        2730,
+        232
+      ],
+      "physicalBox": [
+        2640.5,
+        136.5,
+        2730.5,
+        232.5
+      ],
+      "inkPixels": 1889,
+      "originalRGBSHA256": "9dc788a00aa94ec792b184c85064b668c4f20e73341de208de1aced5aef8b323",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 76,
+      "kind": "closed-physical-cell",
+      "box": [
+        2732,
+        138,
+        2820,
+        232
+      ],
+      "physicalBox": [
+        2730.5,
+        136.5,
+        2820.5,
+        232.5
+      ],
+      "inkPixels": 1877,
+      "originalRGBSHA256": "c233a52a10688dce4f2fd09636e350f4768739c2903cea0769ffcaed8e41d376",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 77,
+      "kind": "closed-physical-cell",
+      "box": [
+        2822,
+        138,
+        2910,
+        232
+      ],
+      "physicalBox": [
+        2820.5,
+        136.5,
+        2910.5,
+        232.5
+      ],
+      "inkPixels": 1775,
+      "originalRGBSHA256": "0f9aad9f5bdbf94200d6866856b8ac08ae30cdbc03aab264b7a657a3a5573d73",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 78,
+      "kind": "closed-physical-cell",
+      "box": [
+        2912,
+        138,
+        3000,
+        232
+      ],
+      "physicalBox": [
+        2910.5,
+        136.5,
+        3000.5,
+        232.5
+      ],
+      "inkPixels": 1862,
+      "originalRGBSHA256": "2356faf2fdd178016fc8e86917b2f2780704165f13c576fea2f053d487046341",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 79,
+      "kind": "closed-physical-cell",
+      "box": [
+        3002,
+        138,
+        3090,
+        232
+      ],
+      "physicalBox": [
+        3000.5,
+        136.5,
+        3090.5,
+        232.5
+      ],
+      "inkPixels": 1871,
+      "originalRGBSHA256": "edba27706bad98da9b48f11a79f6ea31ee1b5805e8733912ad9e4041acdfe280",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 80,
+      "kind": "closed-physical-cell",
+      "box": [
+        3092,
+        138,
+        3180,
+        232
+      ],
+      "physicalBox": [
+        3090.5,
+        136.5,
+        3180.5,
+        232.5
+      ],
+      "inkPixels": 1868,
+      "originalRGBSHA256": "160a71c88a2827495f9ff35d7870aaccdf69f6049c2a38e27ea0a643bd47cdce",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 81,
+      "kind": "closed-physical-cell",
+      "box": [
+        3182,
+        138,
+        3270,
+        232
+      ],
+      "physicalBox": [
+        3180.5,
+        136.5,
+        3270.5,
+        232.5
+      ],
+      "inkPixels": 1862,
+      "originalRGBSHA256": "549776ee2ee539437e4ab5735cab9d7bcdec211bcb810c5cf9c2f250f180f9d6",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 82,
+      "kind": "closed-physical-cell",
+      "box": [
+        3272,
+        138,
+        3360,
+        232
+      ],
+      "physicalBox": [
+        3270.5,
+        136.5,
+        3360.5,
+        232.5
+      ],
+      "inkPixels": 1904,
+      "originalRGBSHA256": "55e8884b5a582b83c49e36b172a200479b6f950a03dceab70a56a05b1c859c92",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 83,
+      "kind": "closed-physical-cell",
+      "box": [
+        3362,
+        138,
+        3450,
+        232
+      ],
+      "physicalBox": [
+        3360.5,
+        136.5,
+        3450.5,
+        232.5
+      ],
+      "inkPixels": 1793,
+      "originalRGBSHA256": "a2fbeda208ac7237222cd75ea172e7abf373f7e735f47e55bbc13eae1ad80fc3",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 84,
+      "kind": "closed-physical-cell",
+      "box": [
+        3452,
+        138,
+        3540,
+        232
+      ],
+      "physicalBox": [
+        3450.5,
+        136.5,
+        3540.5,
+        232.5
+      ],
+      "inkPixels": 1925,
+      "originalRGBSHA256": "443bebf286c60537fb6415224acd31bb20953f9e8703d6661d4949f3519c4c31",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 85,
+      "kind": "closed-physical-cell",
+      "box": [
+        3542,
+        138,
+        3630,
+        232
+      ],
+      "physicalBox": [
+        3540.5,
+        136.5,
+        3630.5,
+        232.5
+      ],
+      "inkPixels": 1898,
+      "originalRGBSHA256": "218f98161a84a000a48f610d571291e0f0ee7b1d9a80df58b589fd722ff17fd1",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 86,
+      "kind": "closed-physical-cell",
+      "box": [
+        3632,
+        138,
+        3720,
+        232
+      ],
+      "physicalBox": [
+        3630.5,
+        136.5,
+        3720.5,
+        232.5
+      ],
+      "inkPixels": 1874,
+      "originalRGBSHA256": "b63ea147f7b6ee5a723c97c93f9103426b266d3d0213a79d821c26f40233f531",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 87,
+      "kind": "outside-pixel-row-whitespace-block",
+      "box": [
+        78,
+        0,
+        222,
+        53
+      ],
+      "physicalBox": null,
+      "inkPixels": 895,
+      "originalRGBSHA256": "5134154b840e877a4d0d7ac4179166d87a354f83425eec6bec3149ca6be17688",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 88,
+      "kind": "outside-pixel-row-whitespace-block",
+      "box": [
+        331,
+        0,
+        409,
+        53
+      ],
+      "physicalBox": null,
+      "inkPixels": 431,
+      "originalRGBSHA256": "b255905df1be0644a8ae3d22e06c661586924a0f0ded02440c10cde66c31c5c5",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    },
+    {
+      "id": 89,
+      "kind": "outside-pixel-row-whitespace-block",
+      "box": [
+        531,
+        0,
+        629,
+        53
+      ],
+      "physicalBox": null,
+      "inkPixels": 724,
+      "originalRGBSHA256": "07b852f2ec442bf97170b391f450e9ffd3a02673dfa7c2b5a8bb10653e22844d",
+      "coordinateTransform": "global=local+integerCropOrigin; no character subdivision or posthoc clipping"
+    }
+  ],
+  "nonRuleInkPixels": 81752,
+  "uniquelyOwnedNonRuleInkPixels": 81752,
+  "completeOriginalNonRuleInkOwnership": true,
+  "rulePixelsExcluded": 40599,
+  "scope": "Planning covers original non-rule pixels exactly once, NOT native OCR completeness/correctness or formal recovery; glyph touching/crossing unknown rails is not repaired.",
+  "maskScope": "Separately reviewed endpoint-source bug fix only; originalMask preserved. Original pixels/rules/boxes/gold unchanged.",
+  "correctedMaskSHA256": "f543e60beda570c920a70083388495aa4237ebcdc0e3262681558c4afa16150e"
+}

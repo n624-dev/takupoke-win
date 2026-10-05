@@ -1,0 +1,16 @@
+{
+  "engine": "trim",
+  "command": [
+    "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/env/bin/python",
+    "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/trim-only-candidate/run_trim.py"
+  ],
+  "exitCode": 0,
+  "stopReason": null,
+  "elapsedSeconds": 13.649715860010474,
+  "sampledOwnedProcessTreePeakRSSBytes": 784609280,
+  "RSSsamples": 88,
+  "memoryScope": "sampled sum current own process-tree RSS, shared pages may be double counted; not global RAM or physical-device minimum",
+  "rawBytes": 1659568,
+  "rawSHA256": "8c64a49f4e9d4195b09101ba920d53896ce18427b9e916c06f12da4684c2b460",
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

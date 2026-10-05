@@ -1,0 +1,543 @@
+{
+  "documentKind": "timetable",
+  "schoolYear": 2032,
+  "term": "前期",
+  "classes": [
+    "1_2"
+  ],
+  "days": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "requiredSlots": [
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 1
+    },
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 2
+    },
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 3
+    },
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 4
+    },
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 5
+    },
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 6
+    },
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 7
+    },
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 8
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 1
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 2
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 3
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 4
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 5
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 6
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 7
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 8
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 1
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 2
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 3
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 4
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 5
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 6
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 7
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 8
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 1
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 2
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 3
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 4
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 5
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 6
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 7
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 8
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 1
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 2
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 3
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 4
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 5
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 6
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 7
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 8
+    }
+  ],
+  "lessons": [
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 1,
+      "subject": "図研01",
+      "teacher": "試師01",
+      "room": "試域01"
+    },
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 2,
+      "subject": "図研02",
+      "teacher": "試師02",
+      "room": "試域02"
+    },
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 3,
+      "subject": "図研03",
+      "teacher": "試師03",
+      "room": "試域03"
+    },
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 4,
+      "subject": "図研04",
+      "teacher": "試師04",
+      "room": "試域04"
+    },
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 5,
+      "subject": "図研05",
+      "teacher": "試師05",
+      "room": "試域05"
+    },
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 6,
+      "subject": "図研06",
+      "teacher": "試師06",
+      "room": "試域06"
+    },
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 7,
+      "subject": "図研07",
+      "teacher": "試師07",
+      "room": "試域07"
+    },
+    {
+      "className": "1_2",
+      "day": "1",
+      "period": 8,
+      "subject": "図研08",
+      "teacher": "試師08",
+      "room": "試域08"
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 1,
+      "subject": "図研09",
+      "teacher": "試師09",
+      "room": "試域09"
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 2,
+      "subject": "図研10",
+      "teacher": "試師10",
+      "room": "試域10"
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 3,
+      "subject": "図研11",
+      "teacher": "試師11",
+      "room": "試域11"
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 4,
+      "subject": "図研12",
+      "teacher": "試師12",
+      "room": "試域12"
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 5,
+      "subject": "図研13",
+      "teacher": "試師13",
+      "room": "試域13"
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 6,
+      "subject": "図研14",
+      "teacher": "試師14",
+      "room": "試域14"
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 7,
+      "subject": "図研15",
+      "teacher": "試師15",
+      "room": "試域15"
+    },
+    {
+      "className": "1_2",
+      "day": "2",
+      "period": 8,
+      "subject": "図研16",
+      "teacher": "試師16",
+      "room": "試域16"
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 1,
+      "subject": "図研17",
+      "teacher": "試師17",
+      "room": "試域17"
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 2,
+      "subject": "図研18",
+      "teacher": "試師18",
+      "room": "試域18"
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 3,
+      "subject": "図研19",
+      "teacher": "試師19",
+      "room": "試域19"
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 4,
+      "subject": "図研20",
+      "teacher": "試師20",
+      "room": "試域20"
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 5,
+      "subject": "図研21",
+      "teacher": "試師21",
+      "room": "試域21"
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 6,
+      "subject": "図研22",
+      "teacher": "試師22",
+      "room": "試域22"
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 7,
+      "subject": "図研23",
+      "teacher": "試師23",
+      "room": "試域23"
+    },
+    {
+      "className": "1_2",
+      "day": "3",
+      "period": 8,
+      "subject": "図研24",
+      "teacher": "試師24",
+      "room": "試域24"
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 1,
+      "subject": "図研25",
+      "teacher": "試師25",
+      "room": "試域25"
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 2,
+      "subject": "図研26",
+      "teacher": "試師26",
+      "room": "試域26"
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 3,
+      "subject": "図研27",
+      "teacher": "試師27",
+      "room": "試域27"
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 4,
+      "subject": "図研28",
+      "teacher": "試師28",
+      "room": "試域28"
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 5,
+      "subject": "図研29",
+      "teacher": "試師29",
+      "room": "試域29"
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 6,
+      "subject": "図研30",
+      "teacher": "試師30",
+      "room": "試域30"
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 7,
+      "subject": "図研31",
+      "teacher": "試師31",
+      "room": "試域31"
+    },
+    {
+      "className": "1_2",
+      "day": "4",
+      "period": 8,
+      "subject": "図研32",
+      "teacher": "試師32",
+      "room": "試域32"
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 1,
+      "subject": "図研33",
+      "teacher": "試師33",
+      "room": "試域33"
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 2,
+      "subject": "図研34",
+      "teacher": "試師34",
+      "room": "試域34"
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 3,
+      "subject": "図研35",
+      "teacher": "試師35",
+      "room": "試域35"
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 4,
+      "subject": "図研36",
+      "teacher": "試師36",
+      "room": "試域36"
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 5,
+      "subject": "図研37",
+      "teacher": "試師37",
+      "room": "試域37"
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 6,
+      "subject": "図研38",
+      "teacher": "試師38",
+      "room": "試域38"
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 7,
+      "subject": "図研39",
+      "teacher": "試師39",
+      "room": "試域39"
+    },
+    {
+      "className": "1_2",
+      "day": "5",
+      "period": 8,
+      "subject": "図研40",
+      "teacher": "試師40",
+      "room": "試域40"
+    }
+  ],
+  "expectedLessonCount": 40,
+  "expectedSlots": 40,
+  "parallelCountPerCell": 1,
+  "semantics": "No label prefixes. Printed cell top/middle/bottom lines under existing trusted Strict template identify subject/teacher/room. Full formal proof depends on actual Builder preflight; no native/gold role assignment."
+}

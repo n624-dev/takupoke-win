@@ -1,0 +1,1222 @@
+{
+  "native0": true,
+  "selection": "ALL actual recognizer calls whose observed upstream height > width*.8 predicate is true, inside an already measured closed physical crop; no expected text or error outcome selection. Byte-identical OLD+NEW RGB/shape/model-index inputs share one diagnostic call only, mapped to every original occurrence; no evidence dedup/adoption.",
+  "originalPNG": "3bb95ebcce616cf24c6b4c431f6fe9b790491e5d22085f74e4430cfd5871b946",
+  "priorRawSHA256": "24e26b702d9f79e97bc5c8458e0dd08558f96054afae2fdacceebd9062fbbb47",
+  "controls": [
+    {
+      "id": 0,
+      "actualModelIndex": 2,
+      "oldInput": {
+        "shape": [
+          15,
+          9,
+          3
+        ],
+        "rgbSHA256": "2a8a8c884be3ca90a6912db5644969f94f7af25f4eb027b023c8cb62857f6527"
+      },
+      "contextInput": {
+        "shape": [
+          15,
+          88,
+          3
+        ],
+        "rgbSHA256": "01f06c3c42bb02b0c2c8805d63ed0818b6d6cc10f66bb59bd7e17d9b1da62598"
+      },
+      "oldUpstreamCCWPredicate": true,
+      "newUpstreamCCWPredicate": false,
+      "occurrences": [
+        {
+          "regionID": 5,
+          "originalRegionBox": [
+            122,
+            106,
+            210,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            38,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            88,
+            16
+          ],
+          "observedOldText": "11"
+        },
+        {
+          "regionID": 13,
+          "originalRegionBox": [
+            842,
+            106,
+            930,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            38,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            88,
+            16
+          ],
+          "observedOldText": "11"
+        },
+        {
+          "regionID": 21,
+          "originalRegionBox": [
+            1562,
+            106,
+            1650,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            38,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            88,
+            16
+          ],
+          "observedOldText": "11"
+        },
+        {
+          "regionID": 29,
+          "originalRegionBox": [
+            2282,
+            106,
+            2370,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            38,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            88,
+            16
+          ],
+          "observedOldText": "11"
+        },
+        {
+          "regionID": 37,
+          "originalRegionBox": [
+            3002,
+            106,
+            3090,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            38,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            88,
+            16
+          ],
+          "observedOldText": "11"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "actualModelIndex": 2,
+      "oldInput": {
+        "shape": [
+          15,
+          10,
+          3
+        ],
+        "rgbSHA256": "f937ecdeb61d373e6923a52f5e0a97f7e9be8d847ba7a3684c13e4728f38bb77"
+      },
+      "contextInput": {
+        "shape": [
+          15,
+          47,
+          3
+        ],
+        "rgbSHA256": "1baf41a6615c0eba01ecf5a36ebdc1e9cd6f805f2da036091c0195264f9d0b7b"
+      },
+      "oldUpstreamCCWPredicate": true,
+      "newUpstreamCCWPredicate": false,
+      "occurrences": [
+        {
+          "regionID": 6,
+          "originalRegionBox": [
+            212,
+            106,
+            300,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "2"
+        },
+        {
+          "regionID": 14,
+          "originalRegionBox": [
+            932,
+            106,
+            1020,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "2"
+        },
+        {
+          "regionID": 22,
+          "originalRegionBox": [
+            1652,
+            106,
+            1740,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "2"
+        },
+        {
+          "regionID": 30,
+          "originalRegionBox": [
+            2372,
+            106,
+            2460,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "2"
+        },
+        {
+          "regionID": 38,
+          "originalRegionBox": [
+            3092,
+            106,
+            3180,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "2"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "actualModelIndex": 2,
+      "oldInput": {
+        "shape": [
+          15,
+          9,
+          3
+        ],
+        "rgbSHA256": "4a066dc29ef89cb53606c018cf7361ad3049adcecad4119a5977c98d5d2a004e"
+      },
+      "contextInput": {
+        "shape": [
+          15,
+          46,
+          3
+        ],
+        "rgbSHA256": "87d09efd86332a769c02f177bf534b5921f2189e3ec62e2be4e5d9ae8e79c2c7"
+      },
+      "oldUpstreamCCWPredicate": true,
+      "newUpstreamCCWPredicate": false,
+      "occurrences": [
+        {
+          "regionID": 7,
+          "originalRegionBox": [
+            302,
+            106,
+            390,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            46,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            46,
+            16
+          ],
+          "observedOldText": "3)"
+        },
+        {
+          "regionID": 15,
+          "originalRegionBox": [
+            1022,
+            106,
+            1110,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            46,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            46,
+            16
+          ],
+          "observedOldText": "3)"
+        },
+        {
+          "regionID": 23,
+          "originalRegionBox": [
+            1742,
+            106,
+            1830,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            46,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            46,
+            16
+          ],
+          "observedOldText": "3)"
+        },
+        {
+          "regionID": 31,
+          "originalRegionBox": [
+            2462,
+            106,
+            2550,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            46,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            46,
+            16
+          ],
+          "observedOldText": "3)"
+        },
+        {
+          "regionID": 39,
+          "originalRegionBox": [
+            3182,
+            106,
+            3270,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            46,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            46,
+            16
+          ],
+          "observedOldText": "3)"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "actualModelIndex": 2,
+      "oldInput": {
+        "shape": [
+          15,
+          10,
+          3
+        ],
+        "rgbSHA256": "c69aa08ec4d13da2c3577ca8aa26cb8935f442eb0e502d9424e1b2b477c5c78f"
+      },
+      "contextInput": {
+        "shape": [
+          15,
+          47,
+          3
+        ],
+        "rgbSHA256": "58cdd59eceb7f0970948af9597da60adb7bebd59b175deb217f7e34f888a7ccd"
+      },
+      "oldUpstreamCCWPredicate": true,
+      "newUpstreamCCWPredicate": false,
+      "occurrences": [
+        {
+          "regionID": 8,
+          "originalRegionBox": [
+            392,
+            106,
+            480,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "4"
+        },
+        {
+          "regionID": 16,
+          "originalRegionBox": [
+            1112,
+            106,
+            1200,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "4"
+        },
+        {
+          "regionID": 24,
+          "originalRegionBox": [
+            1832,
+            106,
+            1920,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "4"
+        },
+        {
+          "regionID": 32,
+          "originalRegionBox": [
+            2552,
+            106,
+            2640,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "4"
+        },
+        {
+          "regionID": 40,
+          "originalRegionBox": [
+            3272,
+            106,
+            3360,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "4"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "actualModelIndex": 2,
+      "oldInput": {
+        "shape": [
+          15,
+          9,
+          3
+        ],
+        "rgbSHA256": "b969f662c85ef59be88e2619910f68eb12d66cfbbd75966c5669f6fecb2e1ae5"
+      },
+      "contextInput": {
+        "shape": [
+          15,
+          46,
+          3
+        ],
+        "rgbSHA256": "8a776403a31e95bf0edc5014622e5d8dc57cb5741d13a6fa13d4966b351e6aeb"
+      },
+      "oldUpstreamCCWPredicate": true,
+      "newUpstreamCCWPredicate": false,
+      "occurrences": [
+        {
+          "regionID": 9,
+          "originalRegionBox": [
+            482,
+            106,
+            570,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            46,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            46,
+            16
+          ],
+          "observedOldText": "5("
+        },
+        {
+          "regionID": 17,
+          "originalRegionBox": [
+            1202,
+            106,
+            1290,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            46,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            46,
+            16
+          ],
+          "observedOldText": "5("
+        },
+        {
+          "regionID": 25,
+          "originalRegionBox": [
+            1922,
+            106,
+            2010,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            46,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            46,
+            16
+          ],
+          "observedOldText": "5("
+        },
+        {
+          "regionID": 33,
+          "originalRegionBox": [
+            2642,
+            106,
+            2730,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            46,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            46,
+            16
+          ],
+          "observedOldText": "5("
+        },
+        {
+          "regionID": 41,
+          "originalRegionBox": [
+            3362,
+            106,
+            3450,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            46,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            46,
+            16
+          ],
+          "observedOldText": "5("
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "actualModelIndex": 2,
+      "oldInput": {
+        "shape": [
+          15,
+          9,
+          3
+        ],
+        "rgbSHA256": "8c7f62a4ca5eef0c2dbdfa8f548e9d5a3e1aa187aa20c6bc8586fb97ef675616"
+      },
+      "contextInput": {
+        "shape": [
+          15,
+          47,
+          3
+        ],
+        "rgbSHA256": "027bf65576b8b731aec638c7ae05fee7ab571d80cf7a55817dffd85867916078"
+      },
+      "oldUpstreamCCWPredicate": true,
+      "newUpstreamCCWPredicate": false,
+      "occurrences": [
+        {
+          "regionID": 10,
+          "originalRegionBox": [
+            572,
+            106,
+            660,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            38,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "6"
+        },
+        {
+          "regionID": 18,
+          "originalRegionBox": [
+            1292,
+            106,
+            1380,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            38,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "6"
+        },
+        {
+          "regionID": 26,
+          "originalRegionBox": [
+            2012,
+            106,
+            2100,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            38,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "6"
+        },
+        {
+          "regionID": 34,
+          "originalRegionBox": [
+            2732,
+            106,
+            2820,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            38,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "6"
+        },
+        {
+          "regionID": 42,
+          "originalRegionBox": [
+            3452,
+            106,
+            3540,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            38,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "6"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "actualModelIndex": 2,
+      "oldInput": {
+        "shape": [
+          15,
+          10,
+          3
+        ],
+        "rgbSHA256": "fbc34dc10bc7466433427da340d8889821307e135c310a2ddd157ccf14c184ca"
+      },
+      "contextInput": {
+        "shape": [
+          15,
+          47,
+          3
+        ],
+        "rgbSHA256": "ad4acb53dd414a9e844a0bcd919b0911b42b8f21affcce4a6e486563a6328bab"
+      },
+      "oldUpstreamCCWPredicate": true,
+      "newUpstreamCCWPredicate": false,
+      "occurrences": [
+        {
+          "regionID": 12,
+          "originalRegionBox": [
+            752,
+            106,
+            840,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "8"
+        },
+        {
+          "regionID": 20,
+          "originalRegionBox": [
+            1472,
+            106,
+            1560,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "8"
+        },
+        {
+          "regionID": 28,
+          "originalRegionBox": [
+            2192,
+            106,
+            2280,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "8"
+        },
+        {
+          "regionID": 36,
+          "originalRegionBox": [
+            2912,
+            106,
+            3000,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "8"
+        },
+        {
+          "regionID": 44,
+          "originalRegionBox": [
+            3632,
+            106,
+            3720,
+            136
+          ],
+          "originalActualRecognitionROI": [
+            37,
+            1,
+            47,
+            16
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            47,
+            16
+          ],
+          "observedOldText": "8"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "actualModelIndex": 2,
+      "oldInput": {
+        "shape": [
+          15,
+          9,
+          3
+        ],
+        "rgbSHA256": "2a8a8c884be3ca90a6912db5644969f94f7af25f4eb027b023c8cb62857f6527"
+      },
+      "contextInput": {
+        "shape": [
+          15,
+          38,
+          3
+        ],
+        "rgbSHA256": "07a368298841fcf82f2ce69a0ec6f2d072c9e308736ce50a1dcdaca0e735c72f"
+      },
+      "oldUpstreamCCWPredicate": true,
+      "newUpstreamCCWPredicate": false,
+      "occurrences": [
+        {
+          "regionID": 45,
+          "originalRegionBox": [
+            22,
+            138,
+            60,
+            232
+          ],
+          "originalActualRecognitionROI": [
+            13,
+            33,
+            22,
+            48
+          ],
+          "whiteContextROI": [
+            0,
+            33,
+            38,
+            48
+          ],
+          "observedOldText": "11"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "actualModelIndex": 2,
+      "oldInput": {
+        "shape": [
+          15,
+          10,
+          3
+        ],
+        "rgbSHA256": "f937ecdeb61d373e6923a52f5e0a97f7e9be8d847ba7a3684c13e4728f38bb77"
+      },
+      "contextInput": {
+        "shape": [
+          15,
+          32,
+          3
+        ],
+        "rgbSHA256": "c428467b1db735f995cc1c7aa0f617a94c70de445e38fbf653daaba608976990"
+      },
+      "oldUpstreamCCWPredicate": true,
+      "newUpstreamCCWPredicate": false,
+      "occurrences": [
+        {
+          "regionID": 46,
+          "originalRegionBox": [
+            62,
+            138,
+            120,
+            232
+          ],
+          "originalActualRecognitionROI": [
+            22,
+            33,
+            32,
+            48
+          ],
+          "whiteContextROI": [
+            0,
+            33,
+            32,
+            48
+          ],
+          "observedOldText": "2"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "actualModelIndex": 0,
+      "oldInput": {
+        "shape": [
+          52,
+          63,
+          3
+        ],
+        "rgbSHA256": "de28b7809edba34b6a315c96684b955db69fe0f074405e29c6dc1f1fed10e8f6"
+      },
+      "contextInput": {
+        "shape": [
+          52,
+          88,
+          3
+        ],
+        "rgbSHA256": "1522f527737bb1f31b97cb42de0ae7b33bdc5538ea6e2edf2575361a9cddabef"
+      },
+      "oldUpstreamCCWPredicate": true,
+      "newUpstreamCCWPredicate": false,
+      "occurrences": [
+        {
+          "regionID": 50,
+          "originalRegionBox": [
+            392,
+            138,
+            480,
+            232
+          ],
+          "originalActualRecognitionROI": [
+            11,
+            33,
+            74,
+            85
+          ],
+          "whiteContextROI": [
+            0,
+            33,
+            88,
+            85
+          ],
+          "observedOldText": "10.00"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "actualModelIndex": 0,
+      "oldInput": {
+        "shape": [
+          84,
+          63,
+          3
+        ],
+        "rgbSHA256": "db63b55cff17478f34453f21d792d56a96d1ca9f763bf466309c10a19846da49"
+      },
+      "contextInput": {
+        "shape": [
+          84,
+          88,
+          3
+        ],
+        "rgbSHA256": "18537a8a042e138109b0a6b6f95e3377b8d74f057dcd0c38f902e278ad4e2582"
+      },
+      "oldUpstreamCCWPredicate": true,
+      "newUpstreamCCWPredicate": true,
+      "occurrences": [
+        {
+          "regionID": 60,
+          "originalRegionBox": [
+            1292,
+            138,
+            1380,
+            232
+          ],
+          "originalActualRecognitionROI": [
+            11,
+            1,
+            74,
+            85
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            88,
+            85
+          ],
+          "observedOldText": "1,,00000000000000000"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "actualModelIndex": 2,
+      "oldInput": {
+        "shape": [
+          84,
+          63,
+          3
+        ],
+        "rgbSHA256": "2a41cb566c430de920177b23e90d448e20c6223cbbcfd15fdbf971cb1d7b6e77"
+      },
+      "contextInput": {
+        "shape": [
+          84,
+          88,
+          3
+        ],
+        "rgbSHA256": "46e84c8b34edfa9fc02587c4aeccf9952c2c4275d9651b5032dee17a631c94aa"
+      },
+      "oldUpstreamCCWPredicate": true,
+      "newUpstreamCCWPredicate": true,
+      "occurrences": [
+        {
+          "regionID": 70,
+          "originalRegionBox": [
+            2192,
+            138,
+            2280,
+            232
+          ],
+          "originalActualRecognitionROI": [
+            11,
+            1,
+            74,
+            85
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            88,
+            85
+          ],
+          "observedOldText": "0,0,,,00"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "actualModelIndex": 0,
+      "oldInput": {
+        "shape": [
+          84,
+          62,
+          3
+        ],
+        "rgbSHA256": "8d9a97e4ee230a0c2767d1818f57ad8781c171899f4386dbd72593a7cff2079a"
+      },
+      "contextInput": {
+        "shape": [
+          84,
+          73,
+          3
+        ],
+        "rgbSHA256": "a0b7983578a9d3aa1ac8925cb02235d24fbb8540c799799ea613054df92028f8"
+      },
+      "oldUpstreamCCWPredicate": true,
+      "newUpstreamCCWPredicate": true,
+      "occurrences": [
+        {
+          "regionID": 81,
+          "originalRegionBox": [
+            3182,
+            138,
+            3270,
+            232
+          ],
+          "originalActualRecognitionROI": [
+            11,
+            1,
+            73,
+            85
+          ],
+          "whiteContextROI": [
+            0,
+            1,
+            73,
+            85
+          ],
+          "observedOldText": "1,,,00000"
+        }
+      ]
+    }
+  ]
+}

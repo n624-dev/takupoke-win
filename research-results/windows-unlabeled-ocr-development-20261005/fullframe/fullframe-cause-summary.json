@@ -1,0 +1,99 @@
+{
+  "sourceFit": "40/40 Strict/Builder/Rules/Engine/V5/formal exact SOURCE geometry, no native inference; original global rulemask completeness not originally logged and remains investigation",
+  "nativeArms": [
+    {
+      "arm": "baseline",
+      "counts": {
+        "plannedBodyFields": 120,
+        "assessedBodyFields": 120,
+        "rawBodyConcatExact": 87,
+        "oneBodyCandidateRawExact": 88,
+        "bodyLiteralAndPositionExact": 0,
+        "plannedHeaderTargets": 50,
+        "rawHeaderConcatExact": 5,
+        "headerLiteralAndPositionExact": 0,
+        "rawThreeValueCellsExact": 15,
+        "threeValuePositionsExact": 0,
+        "formalExact": null,
+        "formalPlanned": 1,
+        "formalAssessed": 0,
+        "operationalErrors": 0,
+        "accepted": 0,
+        "incorrectValidatorAcceptances": 0,
+        "negativeDenominator": 0,
+        "localFieldPositionMeaning": "original draw diagnostic band only; actual role semantics depend on Strict+unchanged host proof",
+        "recoveryExact": 0,
+        "readablePositiveRecoveryFailure": 1,
+        "recoveryPositiveDenominator": 1
+      },
+      "host": {
+        "unrecognizedInk": true,
+        "adoptionEligible": false,
+        "downstreamDiagnosticOnly": true,
+        "strictError": {
+          "type": "PdfParseException",
+          "Message": "PDFの時限の見出しを確認できませんでした（P05）。正常な解析結果は保持しています。"
+        },
+        "recoveryError": {
+          "type": "InvalidDataException",
+          "Message": "年度の独立した見出しがありません。"
+        },
+        "strictExact": false,
+        "formalExactPossible": false,
+        "recoveryFormalExact": false,
+        "actualRecoveryAccepted": false,
+        "providerCalls": 0
+      }
+    },
+    {
+      "arm": "trim",
+      "counts": {
+        "plannedBodyFields": 120,
+        "assessedBodyFields": 120,
+        "rawBodyConcatExact": 92,
+        "oneBodyCandidateRawExact": 93,
+        "bodyLiteralAndPositionExact": 0,
+        "plannedHeaderTargets": 50,
+        "rawHeaderConcatExact": 5,
+        "headerLiteralAndPositionExact": 5,
+        "rawThreeValueCellsExact": 20,
+        "threeValuePositionsExact": 0,
+        "formalExact": null,
+        "formalPlanned": 1,
+        "formalAssessed": 0,
+        "operationalErrors": 0,
+        "accepted": 0,
+        "incorrectValidatorAcceptances": 0,
+        "negativeDenominator": 0,
+        "localFieldPositionMeaning": "original draw diagnostic band only; actual role semantics depend on Strict+unchanged host proof",
+        "recoveryExact": 0,
+        "readablePositiveRecoveryFailure": 1,
+        "recoveryPositiveDenominator": 1
+      },
+      "host": {
+        "unrecognizedInk": true,
+        "adoptionEligible": false,
+        "downstreamDiagnosticOnly": true,
+        "strictError": {
+          "type": "PdfParseException",
+          "Message": "PDFの時限の見出しを確認できませんでした（P05）。正常な解析結果は保持しています。"
+        },
+        "recoveryError": {
+          "type": "InvalidDataException",
+          "Message": "年度の独立した見出しがありません。"
+        },
+        "strictExact": false,
+        "formalExactPossible": false,
+        "recoveryFormalExact": false,
+        "actualRecoveryAccepted": false,
+        "providerCalls": 0
+      }
+    }
+  ],
+  "rootCause": "actual merged metadata and malformed/merged numeric headers block host extraction; actual cell-border intrusion and original RuleMask endpoint residue are separate concrete factors. Original fieldband crossings are posthoc position diagnostics, not automatic production role refusal. Generic model intrinsic capability unknown.",
+  "nextScope": "ONE geometry-only physicalcell/metadata candidate, after rule-mask border accounting; no original image reacquisition or source/gold tuning",
+  "rawHashes": {
+    "baseline": "a991a3c89290e8dedc5b07e598c5007b424be2e52487969b572adb18199925f9",
+    "trim": "8c64a49f4e9d4195b09101ba920d53896ce18427b9e916c06f12da4684c2b460"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "recipeSHA256": "916e6b4ae2670aa1b330bca6e8185c7474c5d41636f4a3cff91141c669126df0",
+  "command": [
+    "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/env/bin/python",
+    "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/grid-crop-candidate/rotation-only-control/run_rotation.py"
+  ],
+  "exitCode": 0,
+  "stopReason": null,
+  "elapsedSeconds": 4.893502762002754,
+  "sampledOwnedProcessTreePeakRSSBytes": 334323712,
+  "RSSsamples": 40,
+  "memoryScope": "sampled sum own process tree RSS; shared pages may double count; not device minimum or global RAM",
+  "rawBytes": 232872,
+  "rawSHA256": "fe9df294684df689297ecae371ad36fea95608f4de528011b28bdc455804162f",
+  "stderrBytes": 0,
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "inferenceScope": "11 unique unchanged tight RGB CCW-only bypass controls; zero detector calls; old outputs preserved"
+}

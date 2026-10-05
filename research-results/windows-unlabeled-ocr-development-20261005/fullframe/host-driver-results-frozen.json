@@ -1,0 +1,23 @@
+{
+  "root": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004",
+  "hostSource": "ae07e47fa68faeef210934b9f3688d6974587094",
+  "files": {
+    "formal-probe/Program.cs": "fb4d116befb84100f12b244306cb8b35f1e14ef694da2c4f99273bfe3d83ae28",
+    "formal-probe/FormalProbe.csproj": "23f53414d8554c1e98222026a19a5e283bbeeec7b698c35c7b5b40054e3eae12",
+    "formal-probe/build.log": "f380e4144ad5956adc08b4f02d16f276cccb87c5174db08c60df23a2233719f0",
+    "baseline-host-replay.json": "a515629be7633a379dab1bf4733e605e9b6eb09fe8966177d94bccad591eb20d",
+    "trim-host-replay.json": "991a68204960655f115fd539ecc57c618f7f4d8a1745d361ea0f9feaefd906cd",
+    "drawing-full-formal-preflight-current.log": "d5a697e1c26803f25e00a6cb400be24f6f8c064af1f9095ddfeb1cf1feff08c7",
+    "fullframe-host-results-summary.json": "89d03022ddaa4f8fcb1efc1b7bb0b61ba029ebbe49bef2e31fc6cc1a7a956925",
+    "raster-grid-probe/Program.cs": "84524d8843aa614f198ae2bb3dcdfe9c641bacd0d6efe610e7571bb0f0410c2c",
+    "raster-grid-probe/RasterGridProbe.csproj": "23f53414d8554c1e98222026a19a5e283bbeeec7b698c35c7b5b40054e3eae12",
+    "raster-measured-boxes.json": "ce70365b7108d1b14c35f99f9ea472110112a7f7e0a213ff40f94bc92c426e6b",
+    "drawing-pixel-coverage-residual.json": "a50b81b26fe1ff14c2dc6d1fb8a19a62429cde23f887d3c52a6cc154edde7d3a"
+  },
+  "nativeRaw": {
+    "baseline-raw.log": "a991a3c89290e8dedc5b07e598c5007b424be2e52487969b572adb18199925f9",
+    "trim-raw.log": "8c64a49f4e9d4195b09101ba920d53896ce18427b9e916c06f12da4684c2b460"
+  },
+  "sourceFreeze": "662e9ce3d99c66a48fa5979ce122c4d6ec359a6f59425c55c06482abfa9a9427",
+  "goldPostOnlySha256": "448d13ae7860890ed86b7211e226718c1d8068c41d913709d07e8a18e7868a69"
+}

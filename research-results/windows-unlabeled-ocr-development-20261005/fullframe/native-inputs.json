@@ -1,0 +1,14 @@
+{
+  "scope": "native pixel input only; no oracle/glyph roles provided to OCR",
+  "images": [
+    {
+      "id": "unlabeled-full40",
+      "pngPath": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/owned-images/unlabeled-baseline.png",
+      "pngSHA256": "3bb95ebcce616cf24c6b4c431f6fe9b790491e5d22085f74e4430cfd5871b946",
+      "bgraPath": "/workspace/recovery-research/windows-ndl-unlabeled-full40-20261004/owned-images/unlabeled-baseline.bgra",
+      "bgraSHA256": "1840402f64f9e0343c414fa23d1d27f7528f9b225a66cd93a35c57d2e102f0df",
+      "width": 3740,
+      "height": 800
+    }
+  ]
+}

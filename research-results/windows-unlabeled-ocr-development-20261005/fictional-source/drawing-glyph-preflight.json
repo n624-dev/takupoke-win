@@ -1,0 +1,11420 @@
+{
+  "width": 3740,
+  "height": 800,
+  "glyphs": [
+    {
+      "id": "year-0",
+      "text": "令",
+      "box": [
+        98,
+        13,
+        118,
+        39
+      ],
+      "fontSize": 20,
+      "sourceLine": 0,
+      "sourceOrder": 0,
+      "kind": "year"
+    },
+    {
+      "id": "year-1",
+      "text": "和",
+      "box": [
+        118,
+        13,
+        138,
+        39
+      ],
+      "fontSize": 20,
+      "sourceLine": 0,
+      "sourceOrder": 1,
+      "kind": "year"
+    },
+    {
+      "id": "year-2",
+      "text": "1",
+      "box": [
+        138,
+        13,
+        150,
+        39
+      ],
+      "fontSize": 20,
+      "sourceLine": 0,
+      "sourceOrder": 2,
+      "kind": "year"
+    },
+    {
+      "id": "year-3",
+      "text": "4",
+      "box": [
+        150,
+        13,
+        162,
+        39
+      ],
+      "fontSize": 20,
+      "sourceLine": 0,
+      "sourceOrder": 3,
+      "kind": "year"
+    },
+    {
+      "id": "year-4",
+      "text": "年",
+      "box": [
+        162,
+        13,
+        182,
+        39
+      ],
+      "fontSize": 20,
+      "sourceLine": 0,
+      "sourceOrder": 4,
+      "kind": "year"
+    },
+    {
+      "id": "year-5",
+      "text": "度",
+      "box": [
+        182,
+        13,
+        202,
+        39
+      ],
+      "fontSize": 20,
+      "sourceLine": 0,
+      "sourceOrder": 5,
+      "kind": "year"
+    },
+    {
+      "id": "term-0",
+      "text": "前",
+      "box": [
+        350,
+        13,
+        370,
+        39
+      ],
+      "fontSize": 20,
+      "sourceLine": 1,
+      "sourceOrder": 6,
+      "kind": "term"
+    },
+    {
+      "id": "term-1",
+      "text": "期",
+      "box": [
+        370,
+        13,
+        390,
+        39
+      ],
+      "fontSize": 20,
+      "sourceLine": 1,
+      "sourceOrder": 7,
+      "kind": "term"
+    },
+    {
+      "id": "title-0",
+      "text": "時",
+      "box": [
+        550,
+        13,
+        570,
+        39
+      ],
+      "fontSize": 20,
+      "sourceLine": 2,
+      "sourceOrder": 8,
+      "kind": "title"
+    },
+    {
+      "id": "title-1",
+      "text": "間",
+      "box": [
+        570,
+        13,
+        590,
+        39
+      ],
+      "fontSize": 20,
+      "sourceLine": 2,
+      "sourceOrder": 9,
+      "kind": "title"
+    },
+    {
+      "id": "title-2",
+      "text": "割",
+      "box": [
+        590,
+        13,
+        610,
+        39
+      ],
+      "fontSize": 20,
+      "sourceLine": 2,
+      "sourceOrder": 10,
+      "kind": "title"
+    },
+    {
+      "id": "grade-0",
+      "text": "1",
+      "box": [
+        34,
+        171,
+        46,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 3,
+      "sourceOrder": 11,
+      "kind": "grade"
+    },
+    {
+      "id": "class-0",
+      "text": "2",
+      "box": [
+        84,
+        171,
+        96,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 4,
+      "sourceOrder": 12,
+      "kind": "class"
+    },
+    {
+      "id": "day-0-0",
+      "text": "月",
+      "box": [
+        450,
+        74,
+        470,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 5,
+      "sourceOrder": 13,
+      "kind": "day"
+    },
+    {
+      "id": "day-0-1",
+      "text": "曜",
+      "box": [
+        470,
+        74,
+        490,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 5,
+      "sourceOrder": 14,
+      "kind": "day"
+    },
+    {
+      "id": "day-0-2",
+      "text": "日",
+      "box": [
+        490,
+        74,
+        510,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 5,
+      "sourceOrder": 15,
+      "kind": "day"
+    },
+    {
+      "id": "period-0-1-0",
+      "text": "1",
+      "box": [
+        159,
+        107,
+        171,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 6,
+      "sourceOrder": 16,
+      "kind": "period"
+    },
+    {
+      "id": "period-0-2-0",
+      "text": "2",
+      "box": [
+        249,
+        107,
+        261,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 7,
+      "sourceOrder": 17,
+      "kind": "period"
+    },
+    {
+      "id": "period-0-3-0",
+      "text": "3",
+      "box": [
+        339,
+        107,
+        351,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 8,
+      "sourceOrder": 18,
+      "kind": "period"
+    },
+    {
+      "id": "period-0-4-0",
+      "text": "4",
+      "box": [
+        429,
+        107,
+        441,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 9,
+      "sourceOrder": 19,
+      "kind": "period"
+    },
+    {
+      "id": "period-0-5-0",
+      "text": "5",
+      "box": [
+        519,
+        107,
+        531,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 10,
+      "sourceOrder": 20,
+      "kind": "period"
+    },
+    {
+      "id": "period-0-6-0",
+      "text": "6",
+      "box": [
+        609,
+        107,
+        621,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 11,
+      "sourceOrder": 21,
+      "kind": "period"
+    },
+    {
+      "id": "period-0-7-0",
+      "text": "7",
+      "box": [
+        699,
+        107,
+        711,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 12,
+      "sourceOrder": 22,
+      "kind": "period"
+    },
+    {
+      "id": "period-0-8-0",
+      "text": "8",
+      "box": [
+        789,
+        107,
+        801,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 13,
+      "sourceOrder": 23,
+      "kind": "period"
+    },
+    {
+      "id": "day-1-0",
+      "text": "火",
+      "box": [
+        1170,
+        74,
+        1190,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 14,
+      "sourceOrder": 24,
+      "kind": "day"
+    },
+    {
+      "id": "day-1-1",
+      "text": "曜",
+      "box": [
+        1190,
+        74,
+        1210,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 14,
+      "sourceOrder": 25,
+      "kind": "day"
+    },
+    {
+      "id": "day-1-2",
+      "text": "日",
+      "box": [
+        1210,
+        74,
+        1230,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 14,
+      "sourceOrder": 26,
+      "kind": "day"
+    },
+    {
+      "id": "period-1-1-0",
+      "text": "1",
+      "box": [
+        879,
+        107,
+        891,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 15,
+      "sourceOrder": 27,
+      "kind": "period"
+    },
+    {
+      "id": "period-1-2-0",
+      "text": "2",
+      "box": [
+        969,
+        107,
+        981,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 16,
+      "sourceOrder": 28,
+      "kind": "period"
+    },
+    {
+      "id": "period-1-3-0",
+      "text": "3",
+      "box": [
+        1059,
+        107,
+        1071,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 17,
+      "sourceOrder": 29,
+      "kind": "period"
+    },
+    {
+      "id": "period-1-4-0",
+      "text": "4",
+      "box": [
+        1149,
+        107,
+        1161,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 18,
+      "sourceOrder": 30,
+      "kind": "period"
+    },
+    {
+      "id": "period-1-5-0",
+      "text": "5",
+      "box": [
+        1239,
+        107,
+        1251,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 19,
+      "sourceOrder": 31,
+      "kind": "period"
+    },
+    {
+      "id": "period-1-6-0",
+      "text": "6",
+      "box": [
+        1329,
+        107,
+        1341,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 20,
+      "sourceOrder": 32,
+      "kind": "period"
+    },
+    {
+      "id": "period-1-7-0",
+      "text": "7",
+      "box": [
+        1419,
+        107,
+        1431,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 21,
+      "sourceOrder": 33,
+      "kind": "period"
+    },
+    {
+      "id": "period-1-8-0",
+      "text": "8",
+      "box": [
+        1509,
+        107,
+        1521,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 22,
+      "sourceOrder": 34,
+      "kind": "period"
+    },
+    {
+      "id": "day-2-0",
+      "text": "水",
+      "box": [
+        1890,
+        74,
+        1910,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 23,
+      "sourceOrder": 35,
+      "kind": "day"
+    },
+    {
+      "id": "day-2-1",
+      "text": "曜",
+      "box": [
+        1910,
+        74,
+        1930,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 23,
+      "sourceOrder": 36,
+      "kind": "day"
+    },
+    {
+      "id": "day-2-2",
+      "text": "日",
+      "box": [
+        1930,
+        74,
+        1950,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 23,
+      "sourceOrder": 37,
+      "kind": "day"
+    },
+    {
+      "id": "period-2-1-0",
+      "text": "1",
+      "box": [
+        1599,
+        107,
+        1611,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 24,
+      "sourceOrder": 38,
+      "kind": "period"
+    },
+    {
+      "id": "period-2-2-0",
+      "text": "2",
+      "box": [
+        1689,
+        107,
+        1701,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 25,
+      "sourceOrder": 39,
+      "kind": "period"
+    },
+    {
+      "id": "period-2-3-0",
+      "text": "3",
+      "box": [
+        1779,
+        107,
+        1791,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 26,
+      "sourceOrder": 40,
+      "kind": "period"
+    },
+    {
+      "id": "period-2-4-0",
+      "text": "4",
+      "box": [
+        1869,
+        107,
+        1881,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 27,
+      "sourceOrder": 41,
+      "kind": "period"
+    },
+    {
+      "id": "period-2-5-0",
+      "text": "5",
+      "box": [
+        1959,
+        107,
+        1971,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 28,
+      "sourceOrder": 42,
+      "kind": "period"
+    },
+    {
+      "id": "period-2-6-0",
+      "text": "6",
+      "box": [
+        2049,
+        107,
+        2061,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 29,
+      "sourceOrder": 43,
+      "kind": "period"
+    },
+    {
+      "id": "period-2-7-0",
+      "text": "7",
+      "box": [
+        2139,
+        107,
+        2151,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 30,
+      "sourceOrder": 44,
+      "kind": "period"
+    },
+    {
+      "id": "period-2-8-0",
+      "text": "8",
+      "box": [
+        2229,
+        107,
+        2241,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 31,
+      "sourceOrder": 45,
+      "kind": "period"
+    },
+    {
+      "id": "day-3-0",
+      "text": "木",
+      "box": [
+        2610,
+        74,
+        2630,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 32,
+      "sourceOrder": 46,
+      "kind": "day"
+    },
+    {
+      "id": "day-3-1",
+      "text": "曜",
+      "box": [
+        2630,
+        74,
+        2650,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 32,
+      "sourceOrder": 47,
+      "kind": "day"
+    },
+    {
+      "id": "day-3-2",
+      "text": "日",
+      "box": [
+        2650,
+        74,
+        2670,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 32,
+      "sourceOrder": 48,
+      "kind": "day"
+    },
+    {
+      "id": "period-3-1-0",
+      "text": "1",
+      "box": [
+        2319,
+        107,
+        2331,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 33,
+      "sourceOrder": 49,
+      "kind": "period"
+    },
+    {
+      "id": "period-3-2-0",
+      "text": "2",
+      "box": [
+        2409,
+        107,
+        2421,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 34,
+      "sourceOrder": 50,
+      "kind": "period"
+    },
+    {
+      "id": "period-3-3-0",
+      "text": "3",
+      "box": [
+        2499,
+        107,
+        2511,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 35,
+      "sourceOrder": 51,
+      "kind": "period"
+    },
+    {
+      "id": "period-3-4-0",
+      "text": "4",
+      "box": [
+        2589,
+        107,
+        2601,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 36,
+      "sourceOrder": 52,
+      "kind": "period"
+    },
+    {
+      "id": "period-3-5-0",
+      "text": "5",
+      "box": [
+        2679,
+        107,
+        2691,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 37,
+      "sourceOrder": 53,
+      "kind": "period"
+    },
+    {
+      "id": "period-3-6-0",
+      "text": "6",
+      "box": [
+        2769,
+        107,
+        2781,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 38,
+      "sourceOrder": 54,
+      "kind": "period"
+    },
+    {
+      "id": "period-3-7-0",
+      "text": "7",
+      "box": [
+        2859,
+        107,
+        2871,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 39,
+      "sourceOrder": 55,
+      "kind": "period"
+    },
+    {
+      "id": "period-3-8-0",
+      "text": "8",
+      "box": [
+        2949,
+        107,
+        2961,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 40,
+      "sourceOrder": 56,
+      "kind": "period"
+    },
+    {
+      "id": "day-4-0",
+      "text": "金",
+      "box": [
+        3330,
+        74,
+        3350,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 41,
+      "sourceOrder": 57,
+      "kind": "day"
+    },
+    {
+      "id": "day-4-1",
+      "text": "曜",
+      "box": [
+        3350,
+        74,
+        3370,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 41,
+      "sourceOrder": 58,
+      "kind": "day"
+    },
+    {
+      "id": "day-4-2",
+      "text": "日",
+      "box": [
+        3370,
+        74,
+        3390,
+        100
+      ],
+      "fontSize": 20,
+      "sourceLine": 41,
+      "sourceOrder": 59,
+      "kind": "day"
+    },
+    {
+      "id": "period-4-1-0",
+      "text": "1",
+      "box": [
+        3039,
+        107,
+        3051,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 42,
+      "sourceOrder": 60,
+      "kind": "period"
+    },
+    {
+      "id": "period-4-2-0",
+      "text": "2",
+      "box": [
+        3129,
+        107,
+        3141,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 43,
+      "sourceOrder": 61,
+      "kind": "period"
+    },
+    {
+      "id": "period-4-3-0",
+      "text": "3",
+      "box": [
+        3219,
+        107,
+        3231,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 44,
+      "sourceOrder": 62,
+      "kind": "period"
+    },
+    {
+      "id": "period-4-4-0",
+      "text": "4",
+      "box": [
+        3309,
+        107,
+        3321,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 45,
+      "sourceOrder": 63,
+      "kind": "period"
+    },
+    {
+      "id": "period-4-5-0",
+      "text": "5",
+      "box": [
+        3399,
+        107,
+        3411,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 46,
+      "sourceOrder": 64,
+      "kind": "period"
+    },
+    {
+      "id": "period-4-6-0",
+      "text": "6",
+      "box": [
+        3489,
+        107,
+        3501,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 47,
+      "sourceOrder": 65,
+      "kind": "period"
+    },
+    {
+      "id": "period-4-7-0",
+      "text": "7",
+      "box": [
+        3579,
+        107,
+        3591,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 48,
+      "sourceOrder": 66,
+      "kind": "period"
+    },
+    {
+      "id": "period-4-8-0",
+      "text": "8",
+      "box": [
+        3669,
+        107,
+        3681,
+        133
+      ],
+      "fontSize": 20,
+      "sourceLine": 49,
+      "sourceOrder": 67,
+      "kind": "period"
+    },
+    {
+      "id": "body-0-1-subject-0",
+      "text": "図",
+      "box": [
+        133,
+        139,
+        153,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 50,
+      "sourceOrder": 68,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-1-subject-1",
+      "text": "研",
+      "box": [
+        153,
+        139,
+        173,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 50,
+      "sourceOrder": 69,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-1-subject-2",
+      "text": "0",
+      "box": [
+        173,
+        139,
+        185,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 50,
+      "sourceOrder": 70,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-1-subject-3",
+      "text": "1",
+      "box": [
+        185,
+        139,
+        197,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 50,
+      "sourceOrder": 71,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-1-teacher-0",
+      "text": "試",
+      "box": [
+        133,
+        171,
+        153,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 51,
+      "sourceOrder": 72,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-1-teacher-1",
+      "text": "師",
+      "box": [
+        153,
+        171,
+        173,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 51,
+      "sourceOrder": 73,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-1-teacher-2",
+      "text": "0",
+      "box": [
+        173,
+        171,
+        185,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 51,
+      "sourceOrder": 74,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-1-teacher-3",
+      "text": "1",
+      "box": [
+        185,
+        171,
+        197,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 51,
+      "sourceOrder": 75,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-1-room-0",
+      "text": "試",
+      "box": [
+        133,
+        203,
+        153,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 52,
+      "sourceOrder": 76,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-1-room-1",
+      "text": "域",
+      "box": [
+        153,
+        203,
+        173,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 52,
+      "sourceOrder": 77,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-1-room-2",
+      "text": "0",
+      "box": [
+        173,
+        203,
+        185,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 52,
+      "sourceOrder": 78,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-1-room-3",
+      "text": "1",
+      "box": [
+        185,
+        203,
+        197,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 52,
+      "sourceOrder": 79,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-2-subject-0",
+      "text": "図",
+      "box": [
+        223,
+        139,
+        243,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 53,
+      "sourceOrder": 80,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-2-subject-1",
+      "text": "研",
+      "box": [
+        243,
+        139,
+        263,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 53,
+      "sourceOrder": 81,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-2-subject-2",
+      "text": "0",
+      "box": [
+        263,
+        139,
+        275,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 53,
+      "sourceOrder": 82,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-2-subject-3",
+      "text": "2",
+      "box": [
+        275,
+        139,
+        287,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 53,
+      "sourceOrder": 83,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-2-teacher-0",
+      "text": "試",
+      "box": [
+        223,
+        171,
+        243,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 54,
+      "sourceOrder": 84,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-2-teacher-1",
+      "text": "師",
+      "box": [
+        243,
+        171,
+        263,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 54,
+      "sourceOrder": 85,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-2-teacher-2",
+      "text": "0",
+      "box": [
+        263,
+        171,
+        275,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 54,
+      "sourceOrder": 86,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-2-teacher-3",
+      "text": "2",
+      "box": [
+        275,
+        171,
+        287,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 54,
+      "sourceOrder": 87,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-2-room-0",
+      "text": "試",
+      "box": [
+        223,
+        203,
+        243,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 55,
+      "sourceOrder": 88,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-2-room-1",
+      "text": "域",
+      "box": [
+        243,
+        203,
+        263,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 55,
+      "sourceOrder": 89,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-2-room-2",
+      "text": "0",
+      "box": [
+        263,
+        203,
+        275,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 55,
+      "sourceOrder": 90,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-2-room-3",
+      "text": "2",
+      "box": [
+        275,
+        203,
+        287,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 55,
+      "sourceOrder": 91,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-3-subject-0",
+      "text": "図",
+      "box": [
+        313,
+        139,
+        333,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 56,
+      "sourceOrder": 92,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-3-subject-1",
+      "text": "研",
+      "box": [
+        333,
+        139,
+        353,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 56,
+      "sourceOrder": 93,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-3-subject-2",
+      "text": "0",
+      "box": [
+        353,
+        139,
+        365,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 56,
+      "sourceOrder": 94,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-3-subject-3",
+      "text": "3",
+      "box": [
+        365,
+        139,
+        377,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 56,
+      "sourceOrder": 95,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-3-teacher-0",
+      "text": "試",
+      "box": [
+        313,
+        171,
+        333,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 57,
+      "sourceOrder": 96,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-3-teacher-1",
+      "text": "師",
+      "box": [
+        333,
+        171,
+        353,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 57,
+      "sourceOrder": 97,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-3-teacher-2",
+      "text": "0",
+      "box": [
+        353,
+        171,
+        365,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 57,
+      "sourceOrder": 98,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-3-teacher-3",
+      "text": "3",
+      "box": [
+        365,
+        171,
+        377,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 57,
+      "sourceOrder": 99,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-3-room-0",
+      "text": "試",
+      "box": [
+        313,
+        203,
+        333,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 58,
+      "sourceOrder": 100,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-3-room-1",
+      "text": "域",
+      "box": [
+        333,
+        203,
+        353,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 58,
+      "sourceOrder": 101,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-3-room-2",
+      "text": "0",
+      "box": [
+        353,
+        203,
+        365,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 58,
+      "sourceOrder": 102,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-3-room-3",
+      "text": "3",
+      "box": [
+        365,
+        203,
+        377,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 58,
+      "sourceOrder": 103,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-4-subject-0",
+      "text": "図",
+      "box": [
+        403,
+        139,
+        423,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 59,
+      "sourceOrder": 104,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-4-subject-1",
+      "text": "研",
+      "box": [
+        423,
+        139,
+        443,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 59,
+      "sourceOrder": 105,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-4-subject-2",
+      "text": "0",
+      "box": [
+        443,
+        139,
+        455,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 59,
+      "sourceOrder": 106,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-4-subject-3",
+      "text": "4",
+      "box": [
+        455,
+        139,
+        467,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 59,
+      "sourceOrder": 107,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-4-teacher-0",
+      "text": "試",
+      "box": [
+        403,
+        171,
+        423,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 60,
+      "sourceOrder": 108,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-4-teacher-1",
+      "text": "師",
+      "box": [
+        423,
+        171,
+        443,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 60,
+      "sourceOrder": 109,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-4-teacher-2",
+      "text": "0",
+      "box": [
+        443,
+        171,
+        455,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 60,
+      "sourceOrder": 110,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-4-teacher-3",
+      "text": "4",
+      "box": [
+        455,
+        171,
+        467,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 60,
+      "sourceOrder": 111,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-4-room-0",
+      "text": "試",
+      "box": [
+        403,
+        203,
+        423,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 61,
+      "sourceOrder": 112,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-4-room-1",
+      "text": "域",
+      "box": [
+        423,
+        203,
+        443,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 61,
+      "sourceOrder": 113,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-4-room-2",
+      "text": "0",
+      "box": [
+        443,
+        203,
+        455,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 61,
+      "sourceOrder": 114,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-4-room-3",
+      "text": "4",
+      "box": [
+        455,
+        203,
+        467,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 61,
+      "sourceOrder": 115,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-5-subject-0",
+      "text": "図",
+      "box": [
+        493,
+        139,
+        513,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 62,
+      "sourceOrder": 116,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-5-subject-1",
+      "text": "研",
+      "box": [
+        513,
+        139,
+        533,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 62,
+      "sourceOrder": 117,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-5-subject-2",
+      "text": "0",
+      "box": [
+        533,
+        139,
+        545,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 62,
+      "sourceOrder": 118,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-5-subject-3",
+      "text": "5",
+      "box": [
+        545,
+        139,
+        557,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 62,
+      "sourceOrder": 119,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-5-teacher-0",
+      "text": "試",
+      "box": [
+        493,
+        171,
+        513,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 63,
+      "sourceOrder": 120,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-5-teacher-1",
+      "text": "師",
+      "box": [
+        513,
+        171,
+        533,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 63,
+      "sourceOrder": 121,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-5-teacher-2",
+      "text": "0",
+      "box": [
+        533,
+        171,
+        545,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 63,
+      "sourceOrder": 122,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-5-teacher-3",
+      "text": "5",
+      "box": [
+        545,
+        171,
+        557,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 63,
+      "sourceOrder": 123,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-5-room-0",
+      "text": "試",
+      "box": [
+        493,
+        203,
+        513,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 64,
+      "sourceOrder": 124,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-5-room-1",
+      "text": "域",
+      "box": [
+        513,
+        203,
+        533,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 64,
+      "sourceOrder": 125,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-5-room-2",
+      "text": "0",
+      "box": [
+        533,
+        203,
+        545,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 64,
+      "sourceOrder": 126,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-5-room-3",
+      "text": "5",
+      "box": [
+        545,
+        203,
+        557,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 64,
+      "sourceOrder": 127,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-6-subject-0",
+      "text": "図",
+      "box": [
+        583,
+        139,
+        603,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 65,
+      "sourceOrder": 128,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-6-subject-1",
+      "text": "研",
+      "box": [
+        603,
+        139,
+        623,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 65,
+      "sourceOrder": 129,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-6-subject-2",
+      "text": "0",
+      "box": [
+        623,
+        139,
+        635,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 65,
+      "sourceOrder": 130,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-6-subject-3",
+      "text": "6",
+      "box": [
+        635,
+        139,
+        647,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 65,
+      "sourceOrder": 131,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-6-teacher-0",
+      "text": "試",
+      "box": [
+        583,
+        171,
+        603,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 66,
+      "sourceOrder": 132,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-6-teacher-1",
+      "text": "師",
+      "box": [
+        603,
+        171,
+        623,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 66,
+      "sourceOrder": 133,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-6-teacher-2",
+      "text": "0",
+      "box": [
+        623,
+        171,
+        635,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 66,
+      "sourceOrder": 134,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-6-teacher-3",
+      "text": "6",
+      "box": [
+        635,
+        171,
+        647,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 66,
+      "sourceOrder": 135,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-6-room-0",
+      "text": "試",
+      "box": [
+        583,
+        203,
+        603,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 67,
+      "sourceOrder": 136,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-6-room-1",
+      "text": "域",
+      "box": [
+        603,
+        203,
+        623,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 67,
+      "sourceOrder": 137,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-6-room-2",
+      "text": "0",
+      "box": [
+        623,
+        203,
+        635,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 67,
+      "sourceOrder": 138,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-6-room-3",
+      "text": "6",
+      "box": [
+        635,
+        203,
+        647,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 67,
+      "sourceOrder": 139,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-7-subject-0",
+      "text": "図",
+      "box": [
+        673,
+        139,
+        693,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 68,
+      "sourceOrder": 140,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-7-subject-1",
+      "text": "研",
+      "box": [
+        693,
+        139,
+        713,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 68,
+      "sourceOrder": 141,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-7-subject-2",
+      "text": "0",
+      "box": [
+        713,
+        139,
+        725,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 68,
+      "sourceOrder": 142,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-7-subject-3",
+      "text": "7",
+      "box": [
+        725,
+        139,
+        737,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 68,
+      "sourceOrder": 143,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-7-teacher-0",
+      "text": "試",
+      "box": [
+        673,
+        171,
+        693,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 69,
+      "sourceOrder": 144,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-7-teacher-1",
+      "text": "師",
+      "box": [
+        693,
+        171,
+        713,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 69,
+      "sourceOrder": 145,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-7-teacher-2",
+      "text": "0",
+      "box": [
+        713,
+        171,
+        725,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 69,
+      "sourceOrder": 146,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-7-teacher-3",
+      "text": "7",
+      "box": [
+        725,
+        171,
+        737,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 69,
+      "sourceOrder": 147,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-7-room-0",
+      "text": "試",
+      "box": [
+        673,
+        203,
+        693,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 70,
+      "sourceOrder": 148,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-7-room-1",
+      "text": "域",
+      "box": [
+        693,
+        203,
+        713,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 70,
+      "sourceOrder": 149,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-7-room-2",
+      "text": "0",
+      "box": [
+        713,
+        203,
+        725,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 70,
+      "sourceOrder": 150,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-7-room-3",
+      "text": "7",
+      "box": [
+        725,
+        203,
+        737,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 70,
+      "sourceOrder": 151,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-8-subject-0",
+      "text": "図",
+      "box": [
+        763,
+        139,
+        783,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 71,
+      "sourceOrder": 152,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-8-subject-1",
+      "text": "研",
+      "box": [
+        783,
+        139,
+        803,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 71,
+      "sourceOrder": 153,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-8-subject-2",
+      "text": "0",
+      "box": [
+        803,
+        139,
+        815,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 71,
+      "sourceOrder": 154,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-8-subject-3",
+      "text": "8",
+      "box": [
+        815,
+        139,
+        827,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 71,
+      "sourceOrder": 155,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-8-teacher-0",
+      "text": "試",
+      "box": [
+        763,
+        171,
+        783,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 72,
+      "sourceOrder": 156,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-8-teacher-1",
+      "text": "師",
+      "box": [
+        783,
+        171,
+        803,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 72,
+      "sourceOrder": 157,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-8-teacher-2",
+      "text": "0",
+      "box": [
+        803,
+        171,
+        815,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 72,
+      "sourceOrder": 158,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-8-teacher-3",
+      "text": "8",
+      "box": [
+        815,
+        171,
+        827,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 72,
+      "sourceOrder": 159,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-8-room-0",
+      "text": "試",
+      "box": [
+        763,
+        203,
+        783,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 73,
+      "sourceOrder": 160,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-8-room-1",
+      "text": "域",
+      "box": [
+        783,
+        203,
+        803,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 73,
+      "sourceOrder": 161,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-8-room-2",
+      "text": "0",
+      "box": [
+        803,
+        203,
+        815,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 73,
+      "sourceOrder": 162,
+      "kind": "body"
+    },
+    {
+      "id": "body-0-8-room-3",
+      "text": "8",
+      "box": [
+        815,
+        203,
+        827,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 73,
+      "sourceOrder": 163,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-1-subject-0",
+      "text": "図",
+      "box": [
+        853,
+        139,
+        873,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 74,
+      "sourceOrder": 164,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-1-subject-1",
+      "text": "研",
+      "box": [
+        873,
+        139,
+        893,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 74,
+      "sourceOrder": 165,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-1-subject-2",
+      "text": "0",
+      "box": [
+        893,
+        139,
+        905,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 74,
+      "sourceOrder": 166,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-1-subject-3",
+      "text": "9",
+      "box": [
+        905,
+        139,
+        917,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 74,
+      "sourceOrder": 167,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-1-teacher-0",
+      "text": "試",
+      "box": [
+        853,
+        171,
+        873,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 75,
+      "sourceOrder": 168,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-1-teacher-1",
+      "text": "師",
+      "box": [
+        873,
+        171,
+        893,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 75,
+      "sourceOrder": 169,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-1-teacher-2",
+      "text": "0",
+      "box": [
+        893,
+        171,
+        905,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 75,
+      "sourceOrder": 170,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-1-teacher-3",
+      "text": "9",
+      "box": [
+        905,
+        171,
+        917,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 75,
+      "sourceOrder": 171,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-1-room-0",
+      "text": "試",
+      "box": [
+        853,
+        203,
+        873,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 76,
+      "sourceOrder": 172,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-1-room-1",
+      "text": "域",
+      "box": [
+        873,
+        203,
+        893,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 76,
+      "sourceOrder": 173,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-1-room-2",
+      "text": "0",
+      "box": [
+        893,
+        203,
+        905,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 76,
+      "sourceOrder": 174,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-1-room-3",
+      "text": "9",
+      "box": [
+        905,
+        203,
+        917,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 76,
+      "sourceOrder": 175,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-2-subject-0",
+      "text": "図",
+      "box": [
+        943,
+        139,
+        963,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 77,
+      "sourceOrder": 176,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-2-subject-1",
+      "text": "研",
+      "box": [
+        963,
+        139,
+        983,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 77,
+      "sourceOrder": 177,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-2-subject-2",
+      "text": "1",
+      "box": [
+        983,
+        139,
+        995,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 77,
+      "sourceOrder": 178,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-2-subject-3",
+      "text": "0",
+      "box": [
+        995,
+        139,
+        1007,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 77,
+      "sourceOrder": 179,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-2-teacher-0",
+      "text": "試",
+      "box": [
+        943,
+        171,
+        963,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 78,
+      "sourceOrder": 180,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-2-teacher-1",
+      "text": "師",
+      "box": [
+        963,
+        171,
+        983,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 78,
+      "sourceOrder": 181,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-2-teacher-2",
+      "text": "1",
+      "box": [
+        983,
+        171,
+        995,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 78,
+      "sourceOrder": 182,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-2-teacher-3",
+      "text": "0",
+      "box": [
+        995,
+        171,
+        1007,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 78,
+      "sourceOrder": 183,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-2-room-0",
+      "text": "試",
+      "box": [
+        943,
+        203,
+        963,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 79,
+      "sourceOrder": 184,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-2-room-1",
+      "text": "域",
+      "box": [
+        963,
+        203,
+        983,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 79,
+      "sourceOrder": 185,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-2-room-2",
+      "text": "1",
+      "box": [
+        983,
+        203,
+        995,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 79,
+      "sourceOrder": 186,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-2-room-3",
+      "text": "0",
+      "box": [
+        995,
+        203,
+        1007,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 79,
+      "sourceOrder": 187,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-3-subject-0",
+      "text": "図",
+      "box": [
+        1033,
+        139,
+        1053,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 80,
+      "sourceOrder": 188,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-3-subject-1",
+      "text": "研",
+      "box": [
+        1053,
+        139,
+        1073,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 80,
+      "sourceOrder": 189,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-3-subject-2",
+      "text": "1",
+      "box": [
+        1073,
+        139,
+        1085,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 80,
+      "sourceOrder": 190,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-3-subject-3",
+      "text": "1",
+      "box": [
+        1085,
+        139,
+        1097,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 80,
+      "sourceOrder": 191,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-3-teacher-0",
+      "text": "試",
+      "box": [
+        1033,
+        171,
+        1053,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 81,
+      "sourceOrder": 192,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-3-teacher-1",
+      "text": "師",
+      "box": [
+        1053,
+        171,
+        1073,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 81,
+      "sourceOrder": 193,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-3-teacher-2",
+      "text": "1",
+      "box": [
+        1073,
+        171,
+        1085,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 81,
+      "sourceOrder": 194,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-3-teacher-3",
+      "text": "1",
+      "box": [
+        1085,
+        171,
+        1097,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 81,
+      "sourceOrder": 195,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-3-room-0",
+      "text": "試",
+      "box": [
+        1033,
+        203,
+        1053,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 82,
+      "sourceOrder": 196,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-3-room-1",
+      "text": "域",
+      "box": [
+        1053,
+        203,
+        1073,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 82,
+      "sourceOrder": 197,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-3-room-2",
+      "text": "1",
+      "box": [
+        1073,
+        203,
+        1085,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 82,
+      "sourceOrder": 198,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-3-room-3",
+      "text": "1",
+      "box": [
+        1085,
+        203,
+        1097,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 82,
+      "sourceOrder": 199,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-4-subject-0",
+      "text": "図",
+      "box": [
+        1123,
+        139,
+        1143,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 83,
+      "sourceOrder": 200,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-4-subject-1",
+      "text": "研",
+      "box": [
+        1143,
+        139,
+        1163,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 83,
+      "sourceOrder": 201,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-4-subject-2",
+      "text": "1",
+      "box": [
+        1163,
+        139,
+        1175,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 83,
+      "sourceOrder": 202,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-4-subject-3",
+      "text": "2",
+      "box": [
+        1175,
+        139,
+        1187,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 83,
+      "sourceOrder": 203,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-4-teacher-0",
+      "text": "試",
+      "box": [
+        1123,
+        171,
+        1143,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 84,
+      "sourceOrder": 204,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-4-teacher-1",
+      "text": "師",
+      "box": [
+        1143,
+        171,
+        1163,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 84,
+      "sourceOrder": 205,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-4-teacher-2",
+      "text": "1",
+      "box": [
+        1163,
+        171,
+        1175,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 84,
+      "sourceOrder": 206,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-4-teacher-3",
+      "text": "2",
+      "box": [
+        1175,
+        171,
+        1187,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 84,
+      "sourceOrder": 207,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-4-room-0",
+      "text": "試",
+      "box": [
+        1123,
+        203,
+        1143,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 85,
+      "sourceOrder": 208,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-4-room-1",
+      "text": "域",
+      "box": [
+        1143,
+        203,
+        1163,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 85,
+      "sourceOrder": 209,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-4-room-2",
+      "text": "1",
+      "box": [
+        1163,
+        203,
+        1175,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 85,
+      "sourceOrder": 210,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-4-room-3",
+      "text": "2",
+      "box": [
+        1175,
+        203,
+        1187,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 85,
+      "sourceOrder": 211,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-5-subject-0",
+      "text": "図",
+      "box": [
+        1213,
+        139,
+        1233,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 86,
+      "sourceOrder": 212,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-5-subject-1",
+      "text": "研",
+      "box": [
+        1233,
+        139,
+        1253,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 86,
+      "sourceOrder": 213,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-5-subject-2",
+      "text": "1",
+      "box": [
+        1253,
+        139,
+        1265,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 86,
+      "sourceOrder": 214,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-5-subject-3",
+      "text": "3",
+      "box": [
+        1265,
+        139,
+        1277,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 86,
+      "sourceOrder": 215,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-5-teacher-0",
+      "text": "試",
+      "box": [
+        1213,
+        171,
+        1233,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 87,
+      "sourceOrder": 216,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-5-teacher-1",
+      "text": "師",
+      "box": [
+        1233,
+        171,
+        1253,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 87,
+      "sourceOrder": 217,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-5-teacher-2",
+      "text": "1",
+      "box": [
+        1253,
+        171,
+        1265,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 87,
+      "sourceOrder": 218,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-5-teacher-3",
+      "text": "3",
+      "box": [
+        1265,
+        171,
+        1277,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 87,
+      "sourceOrder": 219,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-5-room-0",
+      "text": "試",
+      "box": [
+        1213,
+        203,
+        1233,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 88,
+      "sourceOrder": 220,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-5-room-1",
+      "text": "域",
+      "box": [
+        1233,
+        203,
+        1253,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 88,
+      "sourceOrder": 221,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-5-room-2",
+      "text": "1",
+      "box": [
+        1253,
+        203,
+        1265,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 88,
+      "sourceOrder": 222,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-5-room-3",
+      "text": "3",
+      "box": [
+        1265,
+        203,
+        1277,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 88,
+      "sourceOrder": 223,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-6-subject-0",
+      "text": "図",
+      "box": [
+        1303,
+        139,
+        1323,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 89,
+      "sourceOrder": 224,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-6-subject-1",
+      "text": "研",
+      "box": [
+        1323,
+        139,
+        1343,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 89,
+      "sourceOrder": 225,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-6-subject-2",
+      "text": "1",
+      "box": [
+        1343,
+        139,
+        1355,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 89,
+      "sourceOrder": 226,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-6-subject-3",
+      "text": "4",
+      "box": [
+        1355,
+        139,
+        1367,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 89,
+      "sourceOrder": 227,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-6-teacher-0",
+      "text": "試",
+      "box": [
+        1303,
+        171,
+        1323,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 90,
+      "sourceOrder": 228,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-6-teacher-1",
+      "text": "師",
+      "box": [
+        1323,
+        171,
+        1343,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 90,
+      "sourceOrder": 229,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-6-teacher-2",
+      "text": "1",
+      "box": [
+        1343,
+        171,
+        1355,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 90,
+      "sourceOrder": 230,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-6-teacher-3",
+      "text": "4",
+      "box": [
+        1355,
+        171,
+        1367,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 90,
+      "sourceOrder": 231,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-6-room-0",
+      "text": "試",
+      "box": [
+        1303,
+        203,
+        1323,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 91,
+      "sourceOrder": 232,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-6-room-1",
+      "text": "域",
+      "box": [
+        1323,
+        203,
+        1343,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 91,
+      "sourceOrder": 233,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-6-room-2",
+      "text": "1",
+      "box": [
+        1343,
+        203,
+        1355,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 91,
+      "sourceOrder": 234,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-6-room-3",
+      "text": "4",
+      "box": [
+        1355,
+        203,
+        1367,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 91,
+      "sourceOrder": 235,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-7-subject-0",
+      "text": "図",
+      "box": [
+        1393,
+        139,
+        1413,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 92,
+      "sourceOrder": 236,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-7-subject-1",
+      "text": "研",
+      "box": [
+        1413,
+        139,
+        1433,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 92,
+      "sourceOrder": 237,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-7-subject-2",
+      "text": "1",
+      "box": [
+        1433,
+        139,
+        1445,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 92,
+      "sourceOrder": 238,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-7-subject-3",
+      "text": "5",
+      "box": [
+        1445,
+        139,
+        1457,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 92,
+      "sourceOrder": 239,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-7-teacher-0",
+      "text": "試",
+      "box": [
+        1393,
+        171,
+        1413,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 93,
+      "sourceOrder": 240,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-7-teacher-1",
+      "text": "師",
+      "box": [
+        1413,
+        171,
+        1433,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 93,
+      "sourceOrder": 241,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-7-teacher-2",
+      "text": "1",
+      "box": [
+        1433,
+        171,
+        1445,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 93,
+      "sourceOrder": 242,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-7-teacher-3",
+      "text": "5",
+      "box": [
+        1445,
+        171,
+        1457,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 93,
+      "sourceOrder": 243,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-7-room-0",
+      "text": "試",
+      "box": [
+        1393,
+        203,
+        1413,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 94,
+      "sourceOrder": 244,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-7-room-1",
+      "text": "域",
+      "box": [
+        1413,
+        203,
+        1433,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 94,
+      "sourceOrder": 245,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-7-room-2",
+      "text": "1",
+      "box": [
+        1433,
+        203,
+        1445,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 94,
+      "sourceOrder": 246,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-7-room-3",
+      "text": "5",
+      "box": [
+        1445,
+        203,
+        1457,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 94,
+      "sourceOrder": 247,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-8-subject-0",
+      "text": "図",
+      "box": [
+        1483,
+        139,
+        1503,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 95,
+      "sourceOrder": 248,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-8-subject-1",
+      "text": "研",
+      "box": [
+        1503,
+        139,
+        1523,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 95,
+      "sourceOrder": 249,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-8-subject-2",
+      "text": "1",
+      "box": [
+        1523,
+        139,
+        1535,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 95,
+      "sourceOrder": 250,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-8-subject-3",
+      "text": "6",
+      "box": [
+        1535,
+        139,
+        1547,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 95,
+      "sourceOrder": 251,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-8-teacher-0",
+      "text": "試",
+      "box": [
+        1483,
+        171,
+        1503,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 96,
+      "sourceOrder": 252,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-8-teacher-1",
+      "text": "師",
+      "box": [
+        1503,
+        171,
+        1523,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 96,
+      "sourceOrder": 253,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-8-teacher-2",
+      "text": "1",
+      "box": [
+        1523,
+        171,
+        1535,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 96,
+      "sourceOrder": 254,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-8-teacher-3",
+      "text": "6",
+      "box": [
+        1535,
+        171,
+        1547,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 96,
+      "sourceOrder": 255,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-8-room-0",
+      "text": "試",
+      "box": [
+        1483,
+        203,
+        1503,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 97,
+      "sourceOrder": 256,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-8-room-1",
+      "text": "域",
+      "box": [
+        1503,
+        203,
+        1523,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 97,
+      "sourceOrder": 257,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-8-room-2",
+      "text": "1",
+      "box": [
+        1523,
+        203,
+        1535,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 97,
+      "sourceOrder": 258,
+      "kind": "body"
+    },
+    {
+      "id": "body-1-8-room-3",
+      "text": "6",
+      "box": [
+        1535,
+        203,
+        1547,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 97,
+      "sourceOrder": 259,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-1-subject-0",
+      "text": "図",
+      "box": [
+        1573,
+        139,
+        1593,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 98,
+      "sourceOrder": 260,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-1-subject-1",
+      "text": "研",
+      "box": [
+        1593,
+        139,
+        1613,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 98,
+      "sourceOrder": 261,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-1-subject-2",
+      "text": "1",
+      "box": [
+        1613,
+        139,
+        1625,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 98,
+      "sourceOrder": 262,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-1-subject-3",
+      "text": "7",
+      "box": [
+        1625,
+        139,
+        1637,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 98,
+      "sourceOrder": 263,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-1-teacher-0",
+      "text": "試",
+      "box": [
+        1573,
+        171,
+        1593,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 99,
+      "sourceOrder": 264,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-1-teacher-1",
+      "text": "師",
+      "box": [
+        1593,
+        171,
+        1613,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 99,
+      "sourceOrder": 265,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-1-teacher-2",
+      "text": "1",
+      "box": [
+        1613,
+        171,
+        1625,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 99,
+      "sourceOrder": 266,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-1-teacher-3",
+      "text": "7",
+      "box": [
+        1625,
+        171,
+        1637,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 99,
+      "sourceOrder": 267,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-1-room-0",
+      "text": "試",
+      "box": [
+        1573,
+        203,
+        1593,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 100,
+      "sourceOrder": 268,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-1-room-1",
+      "text": "域",
+      "box": [
+        1593,
+        203,
+        1613,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 100,
+      "sourceOrder": 269,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-1-room-2",
+      "text": "1",
+      "box": [
+        1613,
+        203,
+        1625,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 100,
+      "sourceOrder": 270,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-1-room-3",
+      "text": "7",
+      "box": [
+        1625,
+        203,
+        1637,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 100,
+      "sourceOrder": 271,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-2-subject-0",
+      "text": "図",
+      "box": [
+        1663,
+        139,
+        1683,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 101,
+      "sourceOrder": 272,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-2-subject-1",
+      "text": "研",
+      "box": [
+        1683,
+        139,
+        1703,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 101,
+      "sourceOrder": 273,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-2-subject-2",
+      "text": "1",
+      "box": [
+        1703,
+        139,
+        1715,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 101,
+      "sourceOrder": 274,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-2-subject-3",
+      "text": "8",
+      "box": [
+        1715,
+        139,
+        1727,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 101,
+      "sourceOrder": 275,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-2-teacher-0",
+      "text": "試",
+      "box": [
+        1663,
+        171,
+        1683,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 102,
+      "sourceOrder": 276,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-2-teacher-1",
+      "text": "師",
+      "box": [
+        1683,
+        171,
+        1703,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 102,
+      "sourceOrder": 277,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-2-teacher-2",
+      "text": "1",
+      "box": [
+        1703,
+        171,
+        1715,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 102,
+      "sourceOrder": 278,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-2-teacher-3",
+      "text": "8",
+      "box": [
+        1715,
+        171,
+        1727,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 102,
+      "sourceOrder": 279,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-2-room-0",
+      "text": "試",
+      "box": [
+        1663,
+        203,
+        1683,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 103,
+      "sourceOrder": 280,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-2-room-1",
+      "text": "域",
+      "box": [
+        1683,
+        203,
+        1703,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 103,
+      "sourceOrder": 281,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-2-room-2",
+      "text": "1",
+      "box": [
+        1703,
+        203,
+        1715,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 103,
+      "sourceOrder": 282,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-2-room-3",
+      "text": "8",
+      "box": [
+        1715,
+        203,
+        1727,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 103,
+      "sourceOrder": 283,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-3-subject-0",
+      "text": "図",
+      "box": [
+        1753,
+        139,
+        1773,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 104,
+      "sourceOrder": 284,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-3-subject-1",
+      "text": "研",
+      "box": [
+        1773,
+        139,
+        1793,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 104,
+      "sourceOrder": 285,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-3-subject-2",
+      "text": "1",
+      "box": [
+        1793,
+        139,
+        1805,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 104,
+      "sourceOrder": 286,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-3-subject-3",
+      "text": "9",
+      "box": [
+        1805,
+        139,
+        1817,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 104,
+      "sourceOrder": 287,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-3-teacher-0",
+      "text": "試",
+      "box": [
+        1753,
+        171,
+        1773,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 105,
+      "sourceOrder": 288,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-3-teacher-1",
+      "text": "師",
+      "box": [
+        1773,
+        171,
+        1793,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 105,
+      "sourceOrder": 289,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-3-teacher-2",
+      "text": "1",
+      "box": [
+        1793,
+        171,
+        1805,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 105,
+      "sourceOrder": 290,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-3-teacher-3",
+      "text": "9",
+      "box": [
+        1805,
+        171,
+        1817,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 105,
+      "sourceOrder": 291,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-3-room-0",
+      "text": "試",
+      "box": [
+        1753,
+        203,
+        1773,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 106,
+      "sourceOrder": 292,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-3-room-1",
+      "text": "域",
+      "box": [
+        1773,
+        203,
+        1793,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 106,
+      "sourceOrder": 293,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-3-room-2",
+      "text": "1",
+      "box": [
+        1793,
+        203,
+        1805,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 106,
+      "sourceOrder": 294,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-3-room-3",
+      "text": "9",
+      "box": [
+        1805,
+        203,
+        1817,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 106,
+      "sourceOrder": 295,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-4-subject-0",
+      "text": "図",
+      "box": [
+        1843,
+        139,
+        1863,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 107,
+      "sourceOrder": 296,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-4-subject-1",
+      "text": "研",
+      "box": [
+        1863,
+        139,
+        1883,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 107,
+      "sourceOrder": 297,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-4-subject-2",
+      "text": "2",
+      "box": [
+        1883,
+        139,
+        1895,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 107,
+      "sourceOrder": 298,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-4-subject-3",
+      "text": "0",
+      "box": [
+        1895,
+        139,
+        1907,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 107,
+      "sourceOrder": 299,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-4-teacher-0",
+      "text": "試",
+      "box": [
+        1843,
+        171,
+        1863,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 108,
+      "sourceOrder": 300,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-4-teacher-1",
+      "text": "師",
+      "box": [
+        1863,
+        171,
+        1883,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 108,
+      "sourceOrder": 301,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-4-teacher-2",
+      "text": "2",
+      "box": [
+        1883,
+        171,
+        1895,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 108,
+      "sourceOrder": 302,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-4-teacher-3",
+      "text": "0",
+      "box": [
+        1895,
+        171,
+        1907,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 108,
+      "sourceOrder": 303,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-4-room-0",
+      "text": "試",
+      "box": [
+        1843,
+        203,
+        1863,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 109,
+      "sourceOrder": 304,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-4-room-1",
+      "text": "域",
+      "box": [
+        1863,
+        203,
+        1883,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 109,
+      "sourceOrder": 305,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-4-room-2",
+      "text": "2",
+      "box": [
+        1883,
+        203,
+        1895,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 109,
+      "sourceOrder": 306,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-4-room-3",
+      "text": "0",
+      "box": [
+        1895,
+        203,
+        1907,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 109,
+      "sourceOrder": 307,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-5-subject-0",
+      "text": "図",
+      "box": [
+        1933,
+        139,
+        1953,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 110,
+      "sourceOrder": 308,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-5-subject-1",
+      "text": "研",
+      "box": [
+        1953,
+        139,
+        1973,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 110,
+      "sourceOrder": 309,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-5-subject-2",
+      "text": "2",
+      "box": [
+        1973,
+        139,
+        1985,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 110,
+      "sourceOrder": 310,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-5-subject-3",
+      "text": "1",
+      "box": [
+        1985,
+        139,
+        1997,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 110,
+      "sourceOrder": 311,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-5-teacher-0",
+      "text": "試",
+      "box": [
+        1933,
+        171,
+        1953,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 111,
+      "sourceOrder": 312,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-5-teacher-1",
+      "text": "師",
+      "box": [
+        1953,
+        171,
+        1973,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 111,
+      "sourceOrder": 313,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-5-teacher-2",
+      "text": "2",
+      "box": [
+        1973,
+        171,
+        1985,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 111,
+      "sourceOrder": 314,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-5-teacher-3",
+      "text": "1",
+      "box": [
+        1985,
+        171,
+        1997,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 111,
+      "sourceOrder": 315,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-5-room-0",
+      "text": "試",
+      "box": [
+        1933,
+        203,
+        1953,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 112,
+      "sourceOrder": 316,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-5-room-1",
+      "text": "域",
+      "box": [
+        1953,
+        203,
+        1973,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 112,
+      "sourceOrder": 317,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-5-room-2",
+      "text": "2",
+      "box": [
+        1973,
+        203,
+        1985,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 112,
+      "sourceOrder": 318,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-5-room-3",
+      "text": "1",
+      "box": [
+        1985,
+        203,
+        1997,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 112,
+      "sourceOrder": 319,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-6-subject-0",
+      "text": "図",
+      "box": [
+        2023,
+        139,
+        2043,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 113,
+      "sourceOrder": 320,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-6-subject-1",
+      "text": "研",
+      "box": [
+        2043,
+        139,
+        2063,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 113,
+      "sourceOrder": 321,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-6-subject-2",
+      "text": "2",
+      "box": [
+        2063,
+        139,
+        2075,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 113,
+      "sourceOrder": 322,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-6-subject-3",
+      "text": "2",
+      "box": [
+        2075,
+        139,
+        2087,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 113,
+      "sourceOrder": 323,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-6-teacher-0",
+      "text": "試",
+      "box": [
+        2023,
+        171,
+        2043,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 114,
+      "sourceOrder": 324,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-6-teacher-1",
+      "text": "師",
+      "box": [
+        2043,
+        171,
+        2063,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 114,
+      "sourceOrder": 325,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-6-teacher-2",
+      "text": "2",
+      "box": [
+        2063,
+        171,
+        2075,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 114,
+      "sourceOrder": 326,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-6-teacher-3",
+      "text": "2",
+      "box": [
+        2075,
+        171,
+        2087,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 114,
+      "sourceOrder": 327,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-6-room-0",
+      "text": "試",
+      "box": [
+        2023,
+        203,
+        2043,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 115,
+      "sourceOrder": 328,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-6-room-1",
+      "text": "域",
+      "box": [
+        2043,
+        203,
+        2063,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 115,
+      "sourceOrder": 329,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-6-room-2",
+      "text": "2",
+      "box": [
+        2063,
+        203,
+        2075,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 115,
+      "sourceOrder": 330,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-6-room-3",
+      "text": "2",
+      "box": [
+        2075,
+        203,
+        2087,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 115,
+      "sourceOrder": 331,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-7-subject-0",
+      "text": "図",
+      "box": [
+        2113,
+        139,
+        2133,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 116,
+      "sourceOrder": 332,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-7-subject-1",
+      "text": "研",
+      "box": [
+        2133,
+        139,
+        2153,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 116,
+      "sourceOrder": 333,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-7-subject-2",
+      "text": "2",
+      "box": [
+        2153,
+        139,
+        2165,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 116,
+      "sourceOrder": 334,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-7-subject-3",
+      "text": "3",
+      "box": [
+        2165,
+        139,
+        2177,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 116,
+      "sourceOrder": 335,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-7-teacher-0",
+      "text": "試",
+      "box": [
+        2113,
+        171,
+        2133,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 117,
+      "sourceOrder": 336,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-7-teacher-1",
+      "text": "師",
+      "box": [
+        2133,
+        171,
+        2153,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 117,
+      "sourceOrder": 337,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-7-teacher-2",
+      "text": "2",
+      "box": [
+        2153,
+        171,
+        2165,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 117,
+      "sourceOrder": 338,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-7-teacher-3",
+      "text": "3",
+      "box": [
+        2165,
+        171,
+        2177,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 117,
+      "sourceOrder": 339,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-7-room-0",
+      "text": "試",
+      "box": [
+        2113,
+        203,
+        2133,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 118,
+      "sourceOrder": 340,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-7-room-1",
+      "text": "域",
+      "box": [
+        2133,
+        203,
+        2153,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 118,
+      "sourceOrder": 341,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-7-room-2",
+      "text": "2",
+      "box": [
+        2153,
+        203,
+        2165,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 118,
+      "sourceOrder": 342,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-7-room-3",
+      "text": "3",
+      "box": [
+        2165,
+        203,
+        2177,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 118,
+      "sourceOrder": 343,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-8-subject-0",
+      "text": "図",
+      "box": [
+        2203,
+        139,
+        2223,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 119,
+      "sourceOrder": 344,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-8-subject-1",
+      "text": "研",
+      "box": [
+        2223,
+        139,
+        2243,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 119,
+      "sourceOrder": 345,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-8-subject-2",
+      "text": "2",
+      "box": [
+        2243,
+        139,
+        2255,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 119,
+      "sourceOrder": 346,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-8-subject-3",
+      "text": "4",
+      "box": [
+        2255,
+        139,
+        2267,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 119,
+      "sourceOrder": 347,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-8-teacher-0",
+      "text": "試",
+      "box": [
+        2203,
+        171,
+        2223,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 120,
+      "sourceOrder": 348,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-8-teacher-1",
+      "text": "師",
+      "box": [
+        2223,
+        171,
+        2243,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 120,
+      "sourceOrder": 349,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-8-teacher-2",
+      "text": "2",
+      "box": [
+        2243,
+        171,
+        2255,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 120,
+      "sourceOrder": 350,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-8-teacher-3",
+      "text": "4",
+      "box": [
+        2255,
+        171,
+        2267,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 120,
+      "sourceOrder": 351,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-8-room-0",
+      "text": "試",
+      "box": [
+        2203,
+        203,
+        2223,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 121,
+      "sourceOrder": 352,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-8-room-1",
+      "text": "域",
+      "box": [
+        2223,
+        203,
+        2243,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 121,
+      "sourceOrder": 353,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-8-room-2",
+      "text": "2",
+      "box": [
+        2243,
+        203,
+        2255,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 121,
+      "sourceOrder": 354,
+      "kind": "body"
+    },
+    {
+      "id": "body-2-8-room-3",
+      "text": "4",
+      "box": [
+        2255,
+        203,
+        2267,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 121,
+      "sourceOrder": 355,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-1-subject-0",
+      "text": "図",
+      "box": [
+        2293,
+        139,
+        2313,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 122,
+      "sourceOrder": 356,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-1-subject-1",
+      "text": "研",
+      "box": [
+        2313,
+        139,
+        2333,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 122,
+      "sourceOrder": 357,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-1-subject-2",
+      "text": "2",
+      "box": [
+        2333,
+        139,
+        2345,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 122,
+      "sourceOrder": 358,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-1-subject-3",
+      "text": "5",
+      "box": [
+        2345,
+        139,
+        2357,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 122,
+      "sourceOrder": 359,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-1-teacher-0",
+      "text": "試",
+      "box": [
+        2293,
+        171,
+        2313,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 123,
+      "sourceOrder": 360,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-1-teacher-1",
+      "text": "師",
+      "box": [
+        2313,
+        171,
+        2333,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 123,
+      "sourceOrder": 361,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-1-teacher-2",
+      "text": "2",
+      "box": [
+        2333,
+        171,
+        2345,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 123,
+      "sourceOrder": 362,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-1-teacher-3",
+      "text": "5",
+      "box": [
+        2345,
+        171,
+        2357,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 123,
+      "sourceOrder": 363,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-1-room-0",
+      "text": "試",
+      "box": [
+        2293,
+        203,
+        2313,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 124,
+      "sourceOrder": 364,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-1-room-1",
+      "text": "域",
+      "box": [
+        2313,
+        203,
+        2333,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 124,
+      "sourceOrder": 365,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-1-room-2",
+      "text": "2",
+      "box": [
+        2333,
+        203,
+        2345,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 124,
+      "sourceOrder": 366,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-1-room-3",
+      "text": "5",
+      "box": [
+        2345,
+        203,
+        2357,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 124,
+      "sourceOrder": 367,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-2-subject-0",
+      "text": "図",
+      "box": [
+        2383,
+        139,
+        2403,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 125,
+      "sourceOrder": 368,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-2-subject-1",
+      "text": "研",
+      "box": [
+        2403,
+        139,
+        2423,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 125,
+      "sourceOrder": 369,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-2-subject-2",
+      "text": "2",
+      "box": [
+        2423,
+        139,
+        2435,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 125,
+      "sourceOrder": 370,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-2-subject-3",
+      "text": "6",
+      "box": [
+        2435,
+        139,
+        2447,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 125,
+      "sourceOrder": 371,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-2-teacher-0",
+      "text": "試",
+      "box": [
+        2383,
+        171,
+        2403,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 126,
+      "sourceOrder": 372,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-2-teacher-1",
+      "text": "師",
+      "box": [
+        2403,
+        171,
+        2423,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 126,
+      "sourceOrder": 373,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-2-teacher-2",
+      "text": "2",
+      "box": [
+        2423,
+        171,
+        2435,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 126,
+      "sourceOrder": 374,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-2-teacher-3",
+      "text": "6",
+      "box": [
+        2435,
+        171,
+        2447,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 126,
+      "sourceOrder": 375,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-2-room-0",
+      "text": "試",
+      "box": [
+        2383,
+        203,
+        2403,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 127,
+      "sourceOrder": 376,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-2-room-1",
+      "text": "域",
+      "box": [
+        2403,
+        203,
+        2423,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 127,
+      "sourceOrder": 377,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-2-room-2",
+      "text": "2",
+      "box": [
+        2423,
+        203,
+        2435,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 127,
+      "sourceOrder": 378,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-2-room-3",
+      "text": "6",
+      "box": [
+        2435,
+        203,
+        2447,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 127,
+      "sourceOrder": 379,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-3-subject-0",
+      "text": "図",
+      "box": [
+        2473,
+        139,
+        2493,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 128,
+      "sourceOrder": 380,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-3-subject-1",
+      "text": "研",
+      "box": [
+        2493,
+        139,
+        2513,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 128,
+      "sourceOrder": 381,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-3-subject-2",
+      "text": "2",
+      "box": [
+        2513,
+        139,
+        2525,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 128,
+      "sourceOrder": 382,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-3-subject-3",
+      "text": "7",
+      "box": [
+        2525,
+        139,
+        2537,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 128,
+      "sourceOrder": 383,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-3-teacher-0",
+      "text": "試",
+      "box": [
+        2473,
+        171,
+        2493,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 129,
+      "sourceOrder": 384,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-3-teacher-1",
+      "text": "師",
+      "box": [
+        2493,
+        171,
+        2513,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 129,
+      "sourceOrder": 385,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-3-teacher-2",
+      "text": "2",
+      "box": [
+        2513,
+        171,
+        2525,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 129,
+      "sourceOrder": 386,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-3-teacher-3",
+      "text": "7",
+      "box": [
+        2525,
+        171,
+        2537,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 129,
+      "sourceOrder": 387,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-3-room-0",
+      "text": "試",
+      "box": [
+        2473,
+        203,
+        2493,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 130,
+      "sourceOrder": 388,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-3-room-1",
+      "text": "域",
+      "box": [
+        2493,
+        203,
+        2513,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 130,
+      "sourceOrder": 389,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-3-room-2",
+      "text": "2",
+      "box": [
+        2513,
+        203,
+        2525,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 130,
+      "sourceOrder": 390,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-3-room-3",
+      "text": "7",
+      "box": [
+        2525,
+        203,
+        2537,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 130,
+      "sourceOrder": 391,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-4-subject-0",
+      "text": "図",
+      "box": [
+        2563,
+        139,
+        2583,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 131,
+      "sourceOrder": 392,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-4-subject-1",
+      "text": "研",
+      "box": [
+        2583,
+        139,
+        2603,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 131,
+      "sourceOrder": 393,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-4-subject-2",
+      "text": "2",
+      "box": [
+        2603,
+        139,
+        2615,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 131,
+      "sourceOrder": 394,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-4-subject-3",
+      "text": "8",
+      "box": [
+        2615,
+        139,
+        2627,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 131,
+      "sourceOrder": 395,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-4-teacher-0",
+      "text": "試",
+      "box": [
+        2563,
+        171,
+        2583,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 132,
+      "sourceOrder": 396,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-4-teacher-1",
+      "text": "師",
+      "box": [
+        2583,
+        171,
+        2603,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 132,
+      "sourceOrder": 397,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-4-teacher-2",
+      "text": "2",
+      "box": [
+        2603,
+        171,
+        2615,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 132,
+      "sourceOrder": 398,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-4-teacher-3",
+      "text": "8",
+      "box": [
+        2615,
+        171,
+        2627,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 132,
+      "sourceOrder": 399,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-4-room-0",
+      "text": "試",
+      "box": [
+        2563,
+        203,
+        2583,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 133,
+      "sourceOrder": 400,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-4-room-1",
+      "text": "域",
+      "box": [
+        2583,
+        203,
+        2603,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 133,
+      "sourceOrder": 401,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-4-room-2",
+      "text": "2",
+      "box": [
+        2603,
+        203,
+        2615,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 133,
+      "sourceOrder": 402,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-4-room-3",
+      "text": "8",
+      "box": [
+        2615,
+        203,
+        2627,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 133,
+      "sourceOrder": 403,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-5-subject-0",
+      "text": "図",
+      "box": [
+        2653,
+        139,
+        2673,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 134,
+      "sourceOrder": 404,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-5-subject-1",
+      "text": "研",
+      "box": [
+        2673,
+        139,
+        2693,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 134,
+      "sourceOrder": 405,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-5-subject-2",
+      "text": "2",
+      "box": [
+        2693,
+        139,
+        2705,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 134,
+      "sourceOrder": 406,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-5-subject-3",
+      "text": "9",
+      "box": [
+        2705,
+        139,
+        2717,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 134,
+      "sourceOrder": 407,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-5-teacher-0",
+      "text": "試",
+      "box": [
+        2653,
+        171,
+        2673,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 135,
+      "sourceOrder": 408,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-5-teacher-1",
+      "text": "師",
+      "box": [
+        2673,
+        171,
+        2693,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 135,
+      "sourceOrder": 409,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-5-teacher-2",
+      "text": "2",
+      "box": [
+        2693,
+        171,
+        2705,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 135,
+      "sourceOrder": 410,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-5-teacher-3",
+      "text": "9",
+      "box": [
+        2705,
+        171,
+        2717,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 135,
+      "sourceOrder": 411,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-5-room-0",
+      "text": "試",
+      "box": [
+        2653,
+        203,
+        2673,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 136,
+      "sourceOrder": 412,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-5-room-1",
+      "text": "域",
+      "box": [
+        2673,
+        203,
+        2693,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 136,
+      "sourceOrder": 413,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-5-room-2",
+      "text": "2",
+      "box": [
+        2693,
+        203,
+        2705,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 136,
+      "sourceOrder": 414,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-5-room-3",
+      "text": "9",
+      "box": [
+        2705,
+        203,
+        2717,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 136,
+      "sourceOrder": 415,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-6-subject-0",
+      "text": "図",
+      "box": [
+        2743,
+        139,
+        2763,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 137,
+      "sourceOrder": 416,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-6-subject-1",
+      "text": "研",
+      "box": [
+        2763,
+        139,
+        2783,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 137,
+      "sourceOrder": 417,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-6-subject-2",
+      "text": "3",
+      "box": [
+        2783,
+        139,
+        2795,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 137,
+      "sourceOrder": 418,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-6-subject-3",
+      "text": "0",
+      "box": [
+        2795,
+        139,
+        2807,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 137,
+      "sourceOrder": 419,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-6-teacher-0",
+      "text": "試",
+      "box": [
+        2743,
+        171,
+        2763,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 138,
+      "sourceOrder": 420,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-6-teacher-1",
+      "text": "師",
+      "box": [
+        2763,
+        171,
+        2783,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 138,
+      "sourceOrder": 421,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-6-teacher-2",
+      "text": "3",
+      "box": [
+        2783,
+        171,
+        2795,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 138,
+      "sourceOrder": 422,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-6-teacher-3",
+      "text": "0",
+      "box": [
+        2795,
+        171,
+        2807,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 138,
+      "sourceOrder": 423,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-6-room-0",
+      "text": "試",
+      "box": [
+        2743,
+        203,
+        2763,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 139,
+      "sourceOrder": 424,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-6-room-1",
+      "text": "域",
+      "box": [
+        2763,
+        203,
+        2783,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 139,
+      "sourceOrder": 425,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-6-room-2",
+      "text": "3",
+      "box": [
+        2783,
+        203,
+        2795,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 139,
+      "sourceOrder": 426,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-6-room-3",
+      "text": "0",
+      "box": [
+        2795,
+        203,
+        2807,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 139,
+      "sourceOrder": 427,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-7-subject-0",
+      "text": "図",
+      "box": [
+        2833,
+        139,
+        2853,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 140,
+      "sourceOrder": 428,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-7-subject-1",
+      "text": "研",
+      "box": [
+        2853,
+        139,
+        2873,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 140,
+      "sourceOrder": 429,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-7-subject-2",
+      "text": "3",
+      "box": [
+        2873,
+        139,
+        2885,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 140,
+      "sourceOrder": 430,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-7-subject-3",
+      "text": "1",
+      "box": [
+        2885,
+        139,
+        2897,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 140,
+      "sourceOrder": 431,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-7-teacher-0",
+      "text": "試",
+      "box": [
+        2833,
+        171,
+        2853,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 141,
+      "sourceOrder": 432,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-7-teacher-1",
+      "text": "師",
+      "box": [
+        2853,
+        171,
+        2873,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 141,
+      "sourceOrder": 433,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-7-teacher-2",
+      "text": "3",
+      "box": [
+        2873,
+        171,
+        2885,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 141,
+      "sourceOrder": 434,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-7-teacher-3",
+      "text": "1",
+      "box": [
+        2885,
+        171,
+        2897,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 141,
+      "sourceOrder": 435,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-7-room-0",
+      "text": "試",
+      "box": [
+        2833,
+        203,
+        2853,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 142,
+      "sourceOrder": 436,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-7-room-1",
+      "text": "域",
+      "box": [
+        2853,
+        203,
+        2873,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 142,
+      "sourceOrder": 437,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-7-room-2",
+      "text": "3",
+      "box": [
+        2873,
+        203,
+        2885,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 142,
+      "sourceOrder": 438,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-7-room-3",
+      "text": "1",
+      "box": [
+        2885,
+        203,
+        2897,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 142,
+      "sourceOrder": 439,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-8-subject-0",
+      "text": "図",
+      "box": [
+        2923,
+        139,
+        2943,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 143,
+      "sourceOrder": 440,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-8-subject-1",
+      "text": "研",
+      "box": [
+        2943,
+        139,
+        2963,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 143,
+      "sourceOrder": 441,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-8-subject-2",
+      "text": "3",
+      "box": [
+        2963,
+        139,
+        2975,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 143,
+      "sourceOrder": 442,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-8-subject-3",
+      "text": "2",
+      "box": [
+        2975,
+        139,
+        2987,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 143,
+      "sourceOrder": 443,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-8-teacher-0",
+      "text": "試",
+      "box": [
+        2923,
+        171,
+        2943,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 144,
+      "sourceOrder": 444,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-8-teacher-1",
+      "text": "師",
+      "box": [
+        2943,
+        171,
+        2963,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 144,
+      "sourceOrder": 445,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-8-teacher-2",
+      "text": "3",
+      "box": [
+        2963,
+        171,
+        2975,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 144,
+      "sourceOrder": 446,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-8-teacher-3",
+      "text": "2",
+      "box": [
+        2975,
+        171,
+        2987,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 144,
+      "sourceOrder": 447,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-8-room-0",
+      "text": "試",
+      "box": [
+        2923,
+        203,
+        2943,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 145,
+      "sourceOrder": 448,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-8-room-1",
+      "text": "域",
+      "box": [
+        2943,
+        203,
+        2963,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 145,
+      "sourceOrder": 449,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-8-room-2",
+      "text": "3",
+      "box": [
+        2963,
+        203,
+        2975,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 145,
+      "sourceOrder": 450,
+      "kind": "body"
+    },
+    {
+      "id": "body-3-8-room-3",
+      "text": "2",
+      "box": [
+        2975,
+        203,
+        2987,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 145,
+      "sourceOrder": 451,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-1-subject-0",
+      "text": "図",
+      "box": [
+        3013,
+        139,
+        3033,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 146,
+      "sourceOrder": 452,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-1-subject-1",
+      "text": "研",
+      "box": [
+        3033,
+        139,
+        3053,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 146,
+      "sourceOrder": 453,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-1-subject-2",
+      "text": "3",
+      "box": [
+        3053,
+        139,
+        3065,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 146,
+      "sourceOrder": 454,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-1-subject-3",
+      "text": "3",
+      "box": [
+        3065,
+        139,
+        3077,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 146,
+      "sourceOrder": 455,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-1-teacher-0",
+      "text": "試",
+      "box": [
+        3013,
+        171,
+        3033,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 147,
+      "sourceOrder": 456,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-1-teacher-1",
+      "text": "師",
+      "box": [
+        3033,
+        171,
+        3053,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 147,
+      "sourceOrder": 457,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-1-teacher-2",
+      "text": "3",
+      "box": [
+        3053,
+        171,
+        3065,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 147,
+      "sourceOrder": 458,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-1-teacher-3",
+      "text": "3",
+      "box": [
+        3065,
+        171,
+        3077,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 147,
+      "sourceOrder": 459,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-1-room-0",
+      "text": "試",
+      "box": [
+        3013,
+        203,
+        3033,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 148,
+      "sourceOrder": 460,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-1-room-1",
+      "text": "域",
+      "box": [
+        3033,
+        203,
+        3053,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 148,
+      "sourceOrder": 461,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-1-room-2",
+      "text": "3",
+      "box": [
+        3053,
+        203,
+        3065,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 148,
+      "sourceOrder": 462,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-1-room-3",
+      "text": "3",
+      "box": [
+        3065,
+        203,
+        3077,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 148,
+      "sourceOrder": 463,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-2-subject-0",
+      "text": "図",
+      "box": [
+        3103,
+        139,
+        3123,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 149,
+      "sourceOrder": 464,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-2-subject-1",
+      "text": "研",
+      "box": [
+        3123,
+        139,
+        3143,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 149,
+      "sourceOrder": 465,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-2-subject-2",
+      "text": "3",
+      "box": [
+        3143,
+        139,
+        3155,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 149,
+      "sourceOrder": 466,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-2-subject-3",
+      "text": "4",
+      "box": [
+        3155,
+        139,
+        3167,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 149,
+      "sourceOrder": 467,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-2-teacher-0",
+      "text": "試",
+      "box": [
+        3103,
+        171,
+        3123,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 150,
+      "sourceOrder": 468,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-2-teacher-1",
+      "text": "師",
+      "box": [
+        3123,
+        171,
+        3143,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 150,
+      "sourceOrder": 469,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-2-teacher-2",
+      "text": "3",
+      "box": [
+        3143,
+        171,
+        3155,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 150,
+      "sourceOrder": 470,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-2-teacher-3",
+      "text": "4",
+      "box": [
+        3155,
+        171,
+        3167,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 150,
+      "sourceOrder": 471,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-2-room-0",
+      "text": "試",
+      "box": [
+        3103,
+        203,
+        3123,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 151,
+      "sourceOrder": 472,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-2-room-1",
+      "text": "域",
+      "box": [
+        3123,
+        203,
+        3143,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 151,
+      "sourceOrder": 473,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-2-room-2",
+      "text": "3",
+      "box": [
+        3143,
+        203,
+        3155,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 151,
+      "sourceOrder": 474,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-2-room-3",
+      "text": "4",
+      "box": [
+        3155,
+        203,
+        3167,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 151,
+      "sourceOrder": 475,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-3-subject-0",
+      "text": "図",
+      "box": [
+        3193,
+        139,
+        3213,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 152,
+      "sourceOrder": 476,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-3-subject-1",
+      "text": "研",
+      "box": [
+        3213,
+        139,
+        3233,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 152,
+      "sourceOrder": 477,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-3-subject-2",
+      "text": "3",
+      "box": [
+        3233,
+        139,
+        3245,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 152,
+      "sourceOrder": 478,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-3-subject-3",
+      "text": "5",
+      "box": [
+        3245,
+        139,
+        3257,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 152,
+      "sourceOrder": 479,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-3-teacher-0",
+      "text": "試",
+      "box": [
+        3193,
+        171,
+        3213,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 153,
+      "sourceOrder": 480,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-3-teacher-1",
+      "text": "師",
+      "box": [
+        3213,
+        171,
+        3233,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 153,
+      "sourceOrder": 481,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-3-teacher-2",
+      "text": "3",
+      "box": [
+        3233,
+        171,
+        3245,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 153,
+      "sourceOrder": 482,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-3-teacher-3",
+      "text": "5",
+      "box": [
+        3245,
+        171,
+        3257,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 153,
+      "sourceOrder": 483,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-3-room-0",
+      "text": "試",
+      "box": [
+        3193,
+        203,
+        3213,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 154,
+      "sourceOrder": 484,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-3-room-1",
+      "text": "域",
+      "box": [
+        3213,
+        203,
+        3233,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 154,
+      "sourceOrder": 485,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-3-room-2",
+      "text": "3",
+      "box": [
+        3233,
+        203,
+        3245,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 154,
+      "sourceOrder": 486,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-3-room-3",
+      "text": "5",
+      "box": [
+        3245,
+        203,
+        3257,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 154,
+      "sourceOrder": 487,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-4-subject-0",
+      "text": "図",
+      "box": [
+        3283,
+        139,
+        3303,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 155,
+      "sourceOrder": 488,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-4-subject-1",
+      "text": "研",
+      "box": [
+        3303,
+        139,
+        3323,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 155,
+      "sourceOrder": 489,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-4-subject-2",
+      "text": "3",
+      "box": [
+        3323,
+        139,
+        3335,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 155,
+      "sourceOrder": 490,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-4-subject-3",
+      "text": "6",
+      "box": [
+        3335,
+        139,
+        3347,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 155,
+      "sourceOrder": 491,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-4-teacher-0",
+      "text": "試",
+      "box": [
+        3283,
+        171,
+        3303,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 156,
+      "sourceOrder": 492,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-4-teacher-1",
+      "text": "師",
+      "box": [
+        3303,
+        171,
+        3323,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 156,
+      "sourceOrder": 493,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-4-teacher-2",
+      "text": "3",
+      "box": [
+        3323,
+        171,
+        3335,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 156,
+      "sourceOrder": 494,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-4-teacher-3",
+      "text": "6",
+      "box": [
+        3335,
+        171,
+        3347,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 156,
+      "sourceOrder": 495,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-4-room-0",
+      "text": "試",
+      "box": [
+        3283,
+        203,
+        3303,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 157,
+      "sourceOrder": 496,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-4-room-1",
+      "text": "域",
+      "box": [
+        3303,
+        203,
+        3323,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 157,
+      "sourceOrder": 497,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-4-room-2",
+      "text": "3",
+      "box": [
+        3323,
+        203,
+        3335,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 157,
+      "sourceOrder": 498,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-4-room-3",
+      "text": "6",
+      "box": [
+        3335,
+        203,
+        3347,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 157,
+      "sourceOrder": 499,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-5-subject-0",
+      "text": "図",
+      "box": [
+        3373,
+        139,
+        3393,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 158,
+      "sourceOrder": 500,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-5-subject-1",
+      "text": "研",
+      "box": [
+        3393,
+        139,
+        3413,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 158,
+      "sourceOrder": 501,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-5-subject-2",
+      "text": "3",
+      "box": [
+        3413,
+        139,
+        3425,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 158,
+      "sourceOrder": 502,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-5-subject-3",
+      "text": "7",
+      "box": [
+        3425,
+        139,
+        3437,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 158,
+      "sourceOrder": 503,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-5-teacher-0",
+      "text": "試",
+      "box": [
+        3373,
+        171,
+        3393,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 159,
+      "sourceOrder": 504,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-5-teacher-1",
+      "text": "師",
+      "box": [
+        3393,
+        171,
+        3413,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 159,
+      "sourceOrder": 505,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-5-teacher-2",
+      "text": "3",
+      "box": [
+        3413,
+        171,
+        3425,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 159,
+      "sourceOrder": 506,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-5-teacher-3",
+      "text": "7",
+      "box": [
+        3425,
+        171,
+        3437,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 159,
+      "sourceOrder": 507,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-5-room-0",
+      "text": "試",
+      "box": [
+        3373,
+        203,
+        3393,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 160,
+      "sourceOrder": 508,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-5-room-1",
+      "text": "域",
+      "box": [
+        3393,
+        203,
+        3413,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 160,
+      "sourceOrder": 509,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-5-room-2",
+      "text": "3",
+      "box": [
+        3413,
+        203,
+        3425,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 160,
+      "sourceOrder": 510,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-5-room-3",
+      "text": "7",
+      "box": [
+        3425,
+        203,
+        3437,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 160,
+      "sourceOrder": 511,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-6-subject-0",
+      "text": "図",
+      "box": [
+        3463,
+        139,
+        3483,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 161,
+      "sourceOrder": 512,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-6-subject-1",
+      "text": "研",
+      "box": [
+        3483,
+        139,
+        3503,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 161,
+      "sourceOrder": 513,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-6-subject-2",
+      "text": "3",
+      "box": [
+        3503,
+        139,
+        3515,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 161,
+      "sourceOrder": 514,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-6-subject-3",
+      "text": "8",
+      "box": [
+        3515,
+        139,
+        3527,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 161,
+      "sourceOrder": 515,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-6-teacher-0",
+      "text": "試",
+      "box": [
+        3463,
+        171,
+        3483,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 162,
+      "sourceOrder": 516,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-6-teacher-1",
+      "text": "師",
+      "box": [
+        3483,
+        171,
+        3503,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 162,
+      "sourceOrder": 517,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-6-teacher-2",
+      "text": "3",
+      "box": [
+        3503,
+        171,
+        3515,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 162,
+      "sourceOrder": 518,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-6-teacher-3",
+      "text": "8",
+      "box": [
+        3515,
+        171,
+        3527,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 162,
+      "sourceOrder": 519,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-6-room-0",
+      "text": "試",
+      "box": [
+        3463,
+        203,
+        3483,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 163,
+      "sourceOrder": 520,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-6-room-1",
+      "text": "域",
+      "box": [
+        3483,
+        203,
+        3503,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 163,
+      "sourceOrder": 521,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-6-room-2",
+      "text": "3",
+      "box": [
+        3503,
+        203,
+        3515,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 163,
+      "sourceOrder": 522,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-6-room-3",
+      "text": "8",
+      "box": [
+        3515,
+        203,
+        3527,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 163,
+      "sourceOrder": 523,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-7-subject-0",
+      "text": "図",
+      "box": [
+        3553,
+        139,
+        3573,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 164,
+      "sourceOrder": 524,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-7-subject-1",
+      "text": "研",
+      "box": [
+        3573,
+        139,
+        3593,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 164,
+      "sourceOrder": 525,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-7-subject-2",
+      "text": "3",
+      "box": [
+        3593,
+        139,
+        3605,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 164,
+      "sourceOrder": 526,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-7-subject-3",
+      "text": "9",
+      "box": [
+        3605,
+        139,
+        3617,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 164,
+      "sourceOrder": 527,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-7-teacher-0",
+      "text": "試",
+      "box": [
+        3553,
+        171,
+        3573,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 165,
+      "sourceOrder": 528,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-7-teacher-1",
+      "text": "師",
+      "box": [
+        3573,
+        171,
+        3593,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 165,
+      "sourceOrder": 529,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-7-teacher-2",
+      "text": "3",
+      "box": [
+        3593,
+        171,
+        3605,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 165,
+      "sourceOrder": 530,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-7-teacher-3",
+      "text": "9",
+      "box": [
+        3605,
+        171,
+        3617,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 165,
+      "sourceOrder": 531,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-7-room-0",
+      "text": "試",
+      "box": [
+        3553,
+        203,
+        3573,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 166,
+      "sourceOrder": 532,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-7-room-1",
+      "text": "域",
+      "box": [
+        3573,
+        203,
+        3593,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 166,
+      "sourceOrder": 533,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-7-room-2",
+      "text": "3",
+      "box": [
+        3593,
+        203,
+        3605,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 166,
+      "sourceOrder": 534,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-7-room-3",
+      "text": "9",
+      "box": [
+        3605,
+        203,
+        3617,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 166,
+      "sourceOrder": 535,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-8-subject-0",
+      "text": "図",
+      "box": [
+        3643,
+        139,
+        3663,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 167,
+      "sourceOrder": 536,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-8-subject-1",
+      "text": "研",
+      "box": [
+        3663,
+        139,
+        3683,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 167,
+      "sourceOrder": 537,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-8-subject-2",
+      "text": "4",
+      "box": [
+        3683,
+        139,
+        3695,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 167,
+      "sourceOrder": 538,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-8-subject-3",
+      "text": "0",
+      "box": [
+        3695,
+        139,
+        3707,
+        165
+      ],
+      "fontSize": 20,
+      "sourceLine": 167,
+      "sourceOrder": 539,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-8-teacher-0",
+      "text": "試",
+      "box": [
+        3643,
+        171,
+        3663,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 168,
+      "sourceOrder": 540,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-8-teacher-1",
+      "text": "師",
+      "box": [
+        3663,
+        171,
+        3683,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 168,
+      "sourceOrder": 541,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-8-teacher-2",
+      "text": "4",
+      "box": [
+        3683,
+        171,
+        3695,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 168,
+      "sourceOrder": 542,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-8-teacher-3",
+      "text": "0",
+      "box": [
+        3695,
+        171,
+        3707,
+        197
+      ],
+      "fontSize": 20,
+      "sourceLine": 168,
+      "sourceOrder": 543,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-8-room-0",
+      "text": "試",
+      "box": [
+        3643,
+        203,
+        3663,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 169,
+      "sourceOrder": 544,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-8-room-1",
+      "text": "域",
+      "box": [
+        3663,
+        203,
+        3683,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 169,
+      "sourceOrder": 545,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-8-room-2",
+      "text": "4",
+      "box": [
+        3683,
+        203,
+        3695,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 169,
+      "sourceOrder": 546,
+      "kind": "body"
+    },
+    {
+      "id": "body-4-8-room-3",
+      "text": "0",
+      "box": [
+        3695,
+        203,
+        3707,
+        229
+      ],
+      "fontSize": 20,
+      "sourceLine": 169,
+      "sourceOrder": 547,
+      "kind": "body"
+    }
+  ],
+  "rules": [
+    {
+      "x1": 20,
+      "y1": 70,
+      "x2": 3720,
+      "y2": 70
+    },
+    {
+      "x1": 20,
+      "y1": 136,
+      "x2": 3720,
+      "y2": 136
+    },
+    {
+      "x1": 20,
+      "y1": 232,
+      "x2": 3720,
+      "y2": 232
+    },
+    {
+      "x1": 120,
+      "y1": 104,
+      "x2": 3720,
+      "y2": 104
+    },
+    {
+      "x1": 20,
+      "y1": 70,
+      "x2": 20,
+      "y2": 232
+    },
+    {
+      "x1": 60,
+      "y1": 70,
+      "x2": 60,
+      "y2": 232
+    },
+    {
+      "x1": 120,
+      "y1": 70,
+      "x2": 120,
+      "y2": 232
+    },
+    {
+      "x1": 210,
+      "y1": 104,
+      "x2": 210,
+      "y2": 232
+    },
+    {
+      "x1": 300,
+      "y1": 104,
+      "x2": 300,
+      "y2": 232
+    },
+    {
+      "x1": 390,
+      "y1": 104,
+      "x2": 390,
+      "y2": 232
+    },
+    {
+      "x1": 480,
+      "y1": 104,
+      "x2": 480,
+      "y2": 232
+    },
+    {
+      "x1": 570,
+      "y1": 104,
+      "x2": 570,
+      "y2": 232
+    },
+    {
+      "x1": 660,
+      "y1": 104,
+      "x2": 660,
+      "y2": 232
+    },
+    {
+      "x1": 750,
+      "y1": 104,
+      "x2": 750,
+      "y2": 232
+    },
+    {
+      "x1": 840,
+      "y1": 70,
+      "x2": 840,
+      "y2": 232
+    },
+    {
+      "x1": 930,
+      "y1": 104,
+      "x2": 930,
+      "y2": 232
+    },
+    {
+      "x1": 1020,
+      "y1": 104,
+      "x2": 1020,
+      "y2": 232
+    },
+    {
+      "x1": 1110,
+      "y1": 104,
+      "x2": 1110,
+      "y2": 232
+    },
+    {
+      "x1": 1200,
+      "y1": 104,
+      "x2": 1200,
+      "y2": 232
+    },
+    {
+      "x1": 1290,
+      "y1": 104,
+      "x2": 1290,
+      "y2": 232
+    },
+    {
+      "x1": 1380,
+      "y1": 104,
+      "x2": 1380,
+      "y2": 232
+    },
+    {
+      "x1": 1470,
+      "y1": 104,
+      "x2": 1470,
+      "y2": 232
+    },
+    {
+      "x1": 1560,
+      "y1": 70,
+      "x2": 1560,
+      "y2": 232
+    },
+    {
+      "x1": 1650,
+      "y1": 104,
+      "x2": 1650,
+      "y2": 232
+    },
+    {
+      "x1": 1740,
+      "y1": 104,
+      "x2": 1740,
+      "y2": 232
+    },
+    {
+      "x1": 1830,
+      "y1": 104,
+      "x2": 1830,
+      "y2": 232
+    },
+    {
+      "x1": 1920,
+      "y1": 104,
+      "x2": 1920,
+      "y2": 232
+    },
+    {
+      "x1": 2010,
+      "y1": 104,
+      "x2": 2010,
+      "y2": 232
+    },
+    {
+      "x1": 2100,
+      "y1": 104,
+      "x2": 2100,
+      "y2": 232
+    },
+    {
+      "x1": 2190,
+      "y1": 104,
+      "x2": 2190,
+      "y2": 232
+    },
+    {
+      "x1": 2280,
+      "y1": 70,
+      "x2": 2280,
+      "y2": 232
+    },
+    {
+      "x1": 2370,
+      "y1": 104,
+      "x2": 2370,
+      "y2": 232
+    },
+    {
+      "x1": 2460,
+      "y1": 104,
+      "x2": 2460,
+      "y2": 232
+    },
+    {
+      "x1": 2550,
+      "y1": 104,
+      "x2": 2550,
+      "y2": 232
+    },
+    {
+      "x1": 2640,
+      "y1": 104,
+      "x2": 2640,
+      "y2": 232
+    },
+    {
+      "x1": 2730,
+      "y1": 104,
+      "x2": 2730,
+      "y2": 232
+    },
+    {
+      "x1": 2820,
+      "y1": 104,
+      "x2": 2820,
+      "y2": 232
+    },
+    {
+      "x1": 2910,
+      "y1": 104,
+      "x2": 2910,
+      "y2": 232
+    },
+    {
+      "x1": 3000,
+      "y1": 70,
+      "x2": 3000,
+      "y2": 232
+    },
+    {
+      "x1": 3090,
+      "y1": 104,
+      "x2": 3090,
+      "y2": 232
+    },
+    {
+      "x1": 3180,
+      "y1": 104,
+      "x2": 3180,
+      "y2": 232
+    },
+    {
+      "x1": 3270,
+      "y1": 104,
+      "x2": 3270,
+      "y2": 232
+    },
+    {
+      "x1": 3360,
+      "y1": 104,
+      "x2": 3360,
+      "y2": 232
+    },
+    {
+      "x1": 3450,
+      "y1": 104,
+      "x2": 3450,
+      "y2": 232
+    },
+    {
+      "x1": 3540,
+      "y1": 104,
+      "x2": 3540,
+      "y2": 232
+    },
+    {
+      "x1": 3630,
+      "y1": 104,
+      "x2": 3630,
+      "y2": 232
+    },
+    {
+      "x1": 3720,
+      "y1": 70,
+      "x2": 3720,
+      "y2": 232
+    }
+  ],
+  "paint": [
+    {
+      "id": "year",
+      "literal": "令和14年度",
+      "semanticBox": [
+        20,
+        2,
+        280,
+        50
+      ],
+      "actualInkBox": [
+        98,
+        13,
+        202,
+        33
+      ],
+      "kind": "year"
+    },
+    {
+      "id": "term",
+      "literal": "前期",
+      "semanticBox": [
+        310,
+        2,
+        430,
+        50
+      ],
+      "actualInkBox": [
+        351,
+        13,
+        389,
+        33
+      ],
+      "kind": "term"
+    },
+    {
+      "id": "title",
+      "literal": "時間割",
+      "semanticBox": [
+        480,
+        2,
+        680,
+        50
+      ],
+      "actualInkBox": [
+        551,
+        13,
+        609,
+        33
+      ],
+      "kind": "title"
+    },
+    {
+      "id": "grade",
+      "literal": "1",
+      "semanticBox": [
+        20,
+        136,
+        60,
+        232
+      ],
+      "actualInkBox": [
+        35,
+        171,
+        44,
+        186
+      ],
+      "kind": "grade"
+    },
+    {
+      "id": "class",
+      "literal": "2",
+      "semanticBox": [
+        60,
+        136,
+        120,
+        232
+      ],
+      "actualInkBox": [
+        84,
+        171,
+        95,
+        186
+      ],
+      "kind": "class"
+    },
+    {
+      "id": "day-0",
+      "literal": "月曜日",
+      "semanticBox": [
+        120,
+        70,
+        840,
+        104
+      ],
+      "actualInkBox": [
+        450,
+        74,
+        507,
+        93
+      ],
+      "kind": "day",
+      "day": "1"
+    },
+    {
+      "id": "period-0-1",
+      "literal": "1",
+      "semanticBox": [
+        120,
+        104,
+        210,
+        136
+      ],
+      "actualInkBox": [
+        160,
+        107,
+        169,
+        122
+      ],
+      "kind": "period",
+      "day": "1",
+      "period": 1
+    },
+    {
+      "id": "period-0-2",
+      "literal": "2",
+      "semanticBox": [
+        210,
+        104,
+        300,
+        136
+      ],
+      "actualInkBox": [
+        249,
+        107,
+        260,
+        122
+      ],
+      "kind": "period",
+      "day": "1",
+      "period": 2
+    },
+    {
+      "id": "period-0-3",
+      "literal": "3",
+      "semanticBox": [
+        300,
+        104,
+        390,
+        136
+      ],
+      "actualInkBox": [
+        339,
+        107,
+        349,
+        122
+      ],
+      "kind": "period",
+      "day": "1",
+      "period": 3
+    },
+    {
+      "id": "period-0-4",
+      "literal": "4",
+      "semanticBox": [
+        390,
+        104,
+        480,
+        136
+      ],
+      "actualInkBox": [
+        429,
+        107,
+        440,
+        122
+      ],
+      "kind": "period",
+      "day": "1",
+      "period": 4
+    },
+    {
+      "id": "period-0-5",
+      "literal": "5",
+      "semanticBox": [
+        480,
+        104,
+        570,
+        136
+      ],
+      "actualInkBox": [
+        519,
+        107,
+        530,
+        122
+      ],
+      "kind": "period",
+      "day": "1",
+      "period": 5
+    },
+    {
+      "id": "period-0-6",
+      "literal": "6",
+      "semanticBox": [
+        570,
+        104,
+        660,
+        136
+      ],
+      "actualInkBox": [
+        610,
+        107,
+        620,
+        122
+      ],
+      "kind": "period",
+      "day": "1",
+      "period": 6
+    },
+    {
+      "id": "period-0-7",
+      "literal": "7",
+      "semanticBox": [
+        660,
+        104,
+        750,
+        136
+      ],
+      "actualInkBox": [
+        699,
+        107,
+        710,
+        122
+      ],
+      "kind": "period",
+      "day": "1",
+      "period": 7
+    },
+    {
+      "id": "period-0-8",
+      "literal": "8",
+      "semanticBox": [
+        750,
+        104,
+        840,
+        136
+      ],
+      "actualInkBox": [
+        789,
+        107,
+        800,
+        122
+      ],
+      "kind": "period",
+      "day": "1",
+      "period": 8
+    },
+    {
+      "id": "day-1",
+      "literal": "火曜日",
+      "semanticBox": [
+        840,
+        70,
+        1560,
+        104
+      ],
+      "actualInkBox": [
+        1171,
+        74,
+        1227,
+        93
+      ],
+      "kind": "day",
+      "day": "2"
+    },
+    {
+      "id": "period-1-1",
+      "literal": "1",
+      "semanticBox": [
+        840,
+        104,
+        930,
+        136
+      ],
+      "actualInkBox": [
+        880,
+        107,
+        889,
+        122
+      ],
+      "kind": "period",
+      "day": "2",
+      "period": 1
+    },
+    {
+      "id": "period-1-2",
+      "literal": "2",
+      "semanticBox": [
+        930,
+        104,
+        1020,
+        136
+      ],
+      "actualInkBox": [
+        969,
+        107,
+        980,
+        122
+      ],
+      "kind": "period",
+      "day": "2",
+      "period": 2
+    },
+    {
+      "id": "period-1-3",
+      "literal": "3",
+      "semanticBox": [
+        1020,
+        104,
+        1110,
+        136
+      ],
+      "actualInkBox": [
+        1059,
+        107,
+        1069,
+        122
+      ],
+      "kind": "period",
+      "day": "2",
+      "period": 3
+    },
+    {
+      "id": "period-1-4",
+      "literal": "4",
+      "semanticBox": [
+        1110,
+        104,
+        1200,
+        136
+      ],
+      "actualInkBox": [
+        1149,
+        107,
+        1160,
+        122
+      ],
+      "kind": "period",
+      "day": "2",
+      "period": 4
+    },
+    {
+      "id": "period-1-5",
+      "literal": "5",
+      "semanticBox": [
+        1200,
+        104,
+        1290,
+        136
+      ],
+      "actualInkBox": [
+        1239,
+        107,
+        1250,
+        122
+      ],
+      "kind": "period",
+      "day": "2",
+      "period": 5
+    },
+    {
+      "id": "period-1-6",
+      "literal": "6",
+      "semanticBox": [
+        1290,
+        104,
+        1380,
+        136
+      ],
+      "actualInkBox": [
+        1330,
+        107,
+        1340,
+        122
+      ],
+      "kind": "period",
+      "day": "2",
+      "period": 6
+    },
+    {
+      "id": "period-1-7",
+      "literal": "7",
+      "semanticBox": [
+        1380,
+        104,
+        1470,
+        136
+      ],
+      "actualInkBox": [
+        1419,
+        107,
+        1430,
+        122
+      ],
+      "kind": "period",
+      "day": "2",
+      "period": 7
+    },
+    {
+      "id": "period-1-8",
+      "literal": "8",
+      "semanticBox": [
+        1470,
+        104,
+        1560,
+        136
+      ],
+      "actualInkBox": [
+        1509,
+        107,
+        1520,
+        122
+      ],
+      "kind": "period",
+      "day": "2",
+      "period": 8
+    },
+    {
+      "id": "day-2",
+      "literal": "水曜日",
+      "semanticBox": [
+        1560,
+        70,
+        2280,
+        104
+      ],
+      "actualInkBox": [
+        1890,
+        74,
+        1947,
+        94
+      ],
+      "kind": "day",
+      "day": "3"
+    },
+    {
+      "id": "period-2-1",
+      "literal": "1",
+      "semanticBox": [
+        1560,
+        104,
+        1650,
+        136
+      ],
+      "actualInkBox": [
+        1600,
+        107,
+        1609,
+        122
+      ],
+      "kind": "period",
+      "day": "3",
+      "period": 1
+    },
+    {
+      "id": "period-2-2",
+      "literal": "2",
+      "semanticBox": [
+        1650,
+        104,
+        1740,
+        136
+      ],
+      "actualInkBox": [
+        1689,
+        107,
+        1700,
+        122
+      ],
+      "kind": "period",
+      "day": "3",
+      "period": 2
+    },
+    {
+      "id": "period-2-3",
+      "literal": "3",
+      "semanticBox": [
+        1740,
+        104,
+        1830,
+        136
+      ],
+      "actualInkBox": [
+        1779,
+        107,
+        1789,
+        122
+      ],
+      "kind": "period",
+      "day": "3",
+      "period": 3
+    },
+    {
+      "id": "period-2-4",
+      "literal": "4",
+      "semanticBox": [
+        1830,
+        104,
+        1920,
+        136
+      ],
+      "actualInkBox": [
+        1869,
+        107,
+        1880,
+        122
+      ],
+      "kind": "period",
+      "day": "3",
+      "period": 4
+    },
+    {
+      "id": "period-2-5",
+      "literal": "5",
+      "semanticBox": [
+        1920,
+        104,
+        2010,
+        136
+      ],
+      "actualInkBox": [
+        1959,
+        107,
+        1970,
+        122
+      ],
+      "kind": "period",
+      "day": "3",
+      "period": 5
+    },
+    {
+      "id": "period-2-6",
+      "literal": "6",
+      "semanticBox": [
+        2010,
+        104,
+        2100,
+        136
+      ],
+      "actualInkBox": [
+        2050,
+        107,
+        2060,
+        122
+      ],
+      "kind": "period",
+      "day": "3",
+      "period": 6
+    },
+    {
+      "id": "period-2-7",
+      "literal": "7",
+      "semanticBox": [
+        2100,
+        104,
+        2190,
+        136
+      ],
+      "actualInkBox": [
+        2139,
+        107,
+        2150,
+        122
+      ],
+      "kind": "period",
+      "day": "3",
+      "period": 7
+    },
+    {
+      "id": "period-2-8",
+      "literal": "8",
+      "semanticBox": [
+        2190,
+        104,
+        2280,
+        136
+      ],
+      "actualInkBox": [
+        2229,
+        107,
+        2240,
+        122
+      ],
+      "kind": "period",
+      "day": "3",
+      "period": 8
+    },
+    {
+      "id": "day-3",
+      "literal": "木曜日",
+      "semanticBox": [
+        2280,
+        70,
+        3000,
+        104
+      ],
+      "actualInkBox": [
+        2610,
+        74,
+        2667,
+        94
+      ],
+      "kind": "day",
+      "day": "4"
+    },
+    {
+      "id": "period-3-1",
+      "literal": "1",
+      "semanticBox": [
+        2280,
+        104,
+        2370,
+        136
+      ],
+      "actualInkBox": [
+        2320,
+        107,
+        2329,
+        122
+      ],
+      "kind": "period",
+      "day": "4",
+      "period": 1
+    },
+    {
+      "id": "period-3-2",
+      "literal": "2",
+      "semanticBox": [
+        2370,
+        104,
+        2460,
+        136
+      ],
+      "actualInkBox": [
+        2409,
+        107,
+        2420,
+        122
+      ],
+      "kind": "period",
+      "day": "4",
+      "period": 2
+    },
+    {
+      "id": "period-3-3",
+      "literal": "3",
+      "semanticBox": [
+        2460,
+        104,
+        2550,
+        136
+      ],
+      "actualInkBox": [
+        2499,
+        107,
+        2509,
+        122
+      ],
+      "kind": "period",
+      "day": "4",
+      "period": 3
+    },
+    {
+      "id": "period-3-4",
+      "literal": "4",
+      "semanticBox": [
+        2550,
+        104,
+        2640,
+        136
+      ],
+      "actualInkBox": [
+        2589,
+        107,
+        2600,
+        122
+      ],
+      "kind": "period",
+      "day": "4",
+      "period": 4
+    },
+    {
+      "id": "period-3-5",
+      "literal": "5",
+      "semanticBox": [
+        2640,
+        104,
+        2730,
+        136
+      ],
+      "actualInkBox": [
+        2679,
+        107,
+        2690,
+        122
+      ],
+      "kind": "period",
+      "day": "4",
+      "period": 5
+    },
+    {
+      "id": "period-3-6",
+      "literal": "6",
+      "semanticBox": [
+        2730,
+        104,
+        2820,
+        136
+      ],
+      "actualInkBox": [
+        2770,
+        107,
+        2780,
+        122
+      ],
+      "kind": "period",
+      "day": "4",
+      "period": 6
+    },
+    {
+      "id": "period-3-7",
+      "literal": "7",
+      "semanticBox": [
+        2820,
+        104,
+        2910,
+        136
+      ],
+      "actualInkBox": [
+        2859,
+        107,
+        2870,
+        122
+      ],
+      "kind": "period",
+      "day": "4",
+      "period": 7
+    },
+    {
+      "id": "period-3-8",
+      "literal": "8",
+      "semanticBox": [
+        2910,
+        104,
+        3000,
+        136
+      ],
+      "actualInkBox": [
+        2949,
+        107,
+        2960,
+        122
+      ],
+      "kind": "period",
+      "day": "4",
+      "period": 8
+    },
+    {
+      "id": "day-4",
+      "literal": "金曜日",
+      "semanticBox": [
+        3000,
+        70,
+        3720,
+        104
+      ],
+      "actualInkBox": [
+        3330,
+        74,
+        3387,
+        93
+      ],
+      "kind": "day",
+      "day": "5"
+    },
+    {
+      "id": "period-4-1",
+      "literal": "1",
+      "semanticBox": [
+        3000,
+        104,
+        3090,
+        136
+      ],
+      "actualInkBox": [
+        3040,
+        107,
+        3049,
+        122
+      ],
+      "kind": "period",
+      "day": "5",
+      "period": 1
+    },
+    {
+      "id": "period-4-2",
+      "literal": "2",
+      "semanticBox": [
+        3090,
+        104,
+        3180,
+        136
+      ],
+      "actualInkBox": [
+        3129,
+        107,
+        3140,
+        122
+      ],
+      "kind": "period",
+      "day": "5",
+      "period": 2
+    },
+    {
+      "id": "period-4-3",
+      "literal": "3",
+      "semanticBox": [
+        3180,
+        104,
+        3270,
+        136
+      ],
+      "actualInkBox": [
+        3219,
+        107,
+        3229,
+        122
+      ],
+      "kind": "period",
+      "day": "5",
+      "period": 3
+    },
+    {
+      "id": "period-4-4",
+      "literal": "4",
+      "semanticBox": [
+        3270,
+        104,
+        3360,
+        136
+      ],
+      "actualInkBox": [
+        3309,
+        107,
+        3320,
+        122
+      ],
+      "kind": "period",
+      "day": "5",
+      "period": 4
+    },
+    {
+      "id": "period-4-5",
+      "literal": "5",
+      "semanticBox": [
+        3360,
+        104,
+        3450,
+        136
+      ],
+      "actualInkBox": [
+        3399,
+        107,
+        3410,
+        122
+      ],
+      "kind": "period",
+      "day": "5",
+      "period": 5
+    },
+    {
+      "id": "period-4-6",
+      "literal": "6",
+      "semanticBox": [
+        3450,
+        104,
+        3540,
+        136
+      ],
+      "actualInkBox": [
+        3490,
+        107,
+        3500,
+        122
+      ],
+      "kind": "period",
+      "day": "5",
+      "period": 6
+    },
+    {
+      "id": "period-4-7",
+      "literal": "7",
+      "semanticBox": [
+        3540,
+        104,
+        3630,
+        136
+      ],
+      "actualInkBox": [
+        3579,
+        107,
+        3590,
+        122
+      ],
+      "kind": "period",
+      "day": "5",
+      "period": 7
+    },
+    {
+      "id": "period-4-8",
+      "literal": "8",
+      "semanticBox": [
+        3630,
+        104,
+        3720,
+        136
+      ],
+      "actualInkBox": [
+        3669,
+        107,
+        3680,
+        122
+      ],
+      "kind": "period",
+      "day": "5",
+      "period": 8
+    },
+    {
+      "id": "body-0-1-subject",
+      "literal": "図研01",
+      "semanticBox": [
+        120,
+        136,
+        210,
+        168
+      ],
+      "actualInkBox": [
+        134,
+        139,
+        195,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 1,
+      "role": "subject"
+    },
+    {
+      "id": "body-0-1-teacher",
+      "literal": "試師01",
+      "semanticBox": [
+        120,
+        168,
+        210,
+        200
+      ],
+      "actualInkBox": [
+        133,
+        171,
+        195,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 1,
+      "role": "teacher"
+    },
+    {
+      "id": "body-0-1-room",
+      "literal": "試域01",
+      "semanticBox": [
+        120,
+        200,
+        210,
+        232
+      ],
+      "actualInkBox": [
+        133,
+        203,
+        195,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 1,
+      "role": "room"
+    },
+    {
+      "id": "body-0-2-subject",
+      "literal": "図研02",
+      "semanticBox": [
+        210,
+        136,
+        300,
+        168
+      ],
+      "actualInkBox": [
+        224,
+        139,
+        286,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 2,
+      "role": "subject"
+    },
+    {
+      "id": "body-0-2-teacher",
+      "literal": "試師02",
+      "semanticBox": [
+        210,
+        168,
+        300,
+        200
+      ],
+      "actualInkBox": [
+        223,
+        171,
+        286,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 2,
+      "role": "teacher"
+    },
+    {
+      "id": "body-0-2-room",
+      "literal": "試域02",
+      "semanticBox": [
+        210,
+        200,
+        300,
+        232
+      ],
+      "actualInkBox": [
+        223,
+        203,
+        286,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 2,
+      "role": "room"
+    },
+    {
+      "id": "body-0-3-subject",
+      "literal": "図研03",
+      "semanticBox": [
+        300,
+        136,
+        390,
+        168
+      ],
+      "actualInkBox": [
+        314,
+        139,
+        375,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 3,
+      "role": "subject"
+    },
+    {
+      "id": "body-0-3-teacher",
+      "literal": "試師03",
+      "semanticBox": [
+        300,
+        168,
+        390,
+        200
+      ],
+      "actualInkBox": [
+        313,
+        171,
+        375,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 3,
+      "role": "teacher"
+    },
+    {
+      "id": "body-0-3-room",
+      "literal": "試域03",
+      "semanticBox": [
+        300,
+        200,
+        390,
+        232
+      ],
+      "actualInkBox": [
+        313,
+        203,
+        375,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 3,
+      "role": "room"
+    },
+    {
+      "id": "body-0-4-subject",
+      "literal": "図研04",
+      "semanticBox": [
+        390,
+        136,
+        480,
+        168
+      ],
+      "actualInkBox": [
+        404,
+        139,
+        466,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 4,
+      "role": "subject"
+    },
+    {
+      "id": "body-0-4-teacher",
+      "literal": "試師04",
+      "semanticBox": [
+        390,
+        168,
+        480,
+        200
+      ],
+      "actualInkBox": [
+        403,
+        171,
+        466,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 4,
+      "role": "teacher"
+    },
+    {
+      "id": "body-0-4-room",
+      "literal": "試域04",
+      "semanticBox": [
+        390,
+        200,
+        480,
+        232
+      ],
+      "actualInkBox": [
+        403,
+        203,
+        466,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 4,
+      "role": "room"
+    },
+    {
+      "id": "body-0-5-subject",
+      "literal": "図研05",
+      "semanticBox": [
+        480,
+        136,
+        570,
+        168
+      ],
+      "actualInkBox": [
+        494,
+        139,
+        556,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 5,
+      "role": "subject"
+    },
+    {
+      "id": "body-0-5-teacher",
+      "literal": "試師05",
+      "semanticBox": [
+        480,
+        168,
+        570,
+        200
+      ],
+      "actualInkBox": [
+        493,
+        171,
+        556,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 5,
+      "role": "teacher"
+    },
+    {
+      "id": "body-0-5-room",
+      "literal": "試域05",
+      "semanticBox": [
+        480,
+        200,
+        570,
+        232
+      ],
+      "actualInkBox": [
+        493,
+        203,
+        556,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 5,
+      "role": "room"
+    },
+    {
+      "id": "body-0-6-subject",
+      "literal": "図研06",
+      "semanticBox": [
+        570,
+        136,
+        660,
+        168
+      ],
+      "actualInkBox": [
+        584,
+        139,
+        646,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 6,
+      "role": "subject"
+    },
+    {
+      "id": "body-0-6-teacher",
+      "literal": "試師06",
+      "semanticBox": [
+        570,
+        168,
+        660,
+        200
+      ],
+      "actualInkBox": [
+        583,
+        171,
+        646,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 6,
+      "role": "teacher"
+    },
+    {
+      "id": "body-0-6-room",
+      "literal": "試域06",
+      "semanticBox": [
+        570,
+        200,
+        660,
+        232
+      ],
+      "actualInkBox": [
+        583,
+        203,
+        646,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 6,
+      "role": "room"
+    },
+    {
+      "id": "body-0-7-subject",
+      "literal": "図研07",
+      "semanticBox": [
+        660,
+        136,
+        750,
+        168
+      ],
+      "actualInkBox": [
+        674,
+        139,
+        736,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 7,
+      "role": "subject"
+    },
+    {
+      "id": "body-0-7-teacher",
+      "literal": "試師07",
+      "semanticBox": [
+        660,
+        168,
+        750,
+        200
+      ],
+      "actualInkBox": [
+        673,
+        171,
+        736,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 7,
+      "role": "teacher"
+    },
+    {
+      "id": "body-0-7-room",
+      "literal": "試域07",
+      "semanticBox": [
+        660,
+        200,
+        750,
+        232
+      ],
+      "actualInkBox": [
+        673,
+        203,
+        736,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 7,
+      "role": "room"
+    },
+    {
+      "id": "body-0-8-subject",
+      "literal": "図研08",
+      "semanticBox": [
+        750,
+        136,
+        840,
+        168
+      ],
+      "actualInkBox": [
+        764,
+        139,
+        826,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 8,
+      "role": "subject"
+    },
+    {
+      "id": "body-0-8-teacher",
+      "literal": "試師08",
+      "semanticBox": [
+        750,
+        168,
+        840,
+        200
+      ],
+      "actualInkBox": [
+        763,
+        171,
+        826,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 8,
+      "role": "teacher"
+    },
+    {
+      "id": "body-0-8-room",
+      "literal": "試域08",
+      "semanticBox": [
+        750,
+        200,
+        840,
+        232
+      ],
+      "actualInkBox": [
+        763,
+        203,
+        826,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "1",
+      "period": 8,
+      "role": "room"
+    },
+    {
+      "id": "body-1-1-subject",
+      "literal": "図研09",
+      "semanticBox": [
+        840,
+        136,
+        930,
+        168
+      ],
+      "actualInkBox": [
+        854,
+        139,
+        915,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 1,
+      "role": "subject"
+    },
+    {
+      "id": "body-1-1-teacher",
+      "literal": "試師09",
+      "semanticBox": [
+        840,
+        168,
+        930,
+        200
+      ],
+      "actualInkBox": [
+        853,
+        171,
+        915,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 1,
+      "role": "teacher"
+    },
+    {
+      "id": "body-1-1-room",
+      "literal": "試域09",
+      "semanticBox": [
+        840,
+        200,
+        930,
+        232
+      ],
+      "actualInkBox": [
+        853,
+        203,
+        915,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 1,
+      "role": "room"
+    },
+    {
+      "id": "body-1-2-subject",
+      "literal": "図研10",
+      "semanticBox": [
+        930,
+        136,
+        1020,
+        168
+      ],
+      "actualInkBox": [
+        944,
+        139,
+        1006,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 2,
+      "role": "subject"
+    },
+    {
+      "id": "body-1-2-teacher",
+      "literal": "試師10",
+      "semanticBox": [
+        930,
+        168,
+        1020,
+        200
+      ],
+      "actualInkBox": [
+        943,
+        171,
+        1006,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 2,
+      "role": "teacher"
+    },
+    {
+      "id": "body-1-2-room",
+      "literal": "試域10",
+      "semanticBox": [
+        930,
+        200,
+        1020,
+        232
+      ],
+      "actualInkBox": [
+        943,
+        203,
+        1006,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 2,
+      "role": "room"
+    },
+    {
+      "id": "body-1-3-subject",
+      "literal": "図研11",
+      "semanticBox": [
+        1020,
+        136,
+        1110,
+        168
+      ],
+      "actualInkBox": [
+        1034,
+        139,
+        1095,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 3,
+      "role": "subject"
+    },
+    {
+      "id": "body-1-3-teacher",
+      "literal": "試師11",
+      "semanticBox": [
+        1020,
+        168,
+        1110,
+        200
+      ],
+      "actualInkBox": [
+        1033,
+        171,
+        1095,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 3,
+      "role": "teacher"
+    },
+    {
+      "id": "body-1-3-room",
+      "literal": "試域11",
+      "semanticBox": [
+        1020,
+        200,
+        1110,
+        232
+      ],
+      "actualInkBox": [
+        1033,
+        203,
+        1095,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 3,
+      "role": "room"
+    },
+    {
+      "id": "body-1-4-subject",
+      "literal": "図研12",
+      "semanticBox": [
+        1110,
+        136,
+        1200,
+        168
+      ],
+      "actualInkBox": [
+        1124,
+        139,
+        1186,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 4,
+      "role": "subject"
+    },
+    {
+      "id": "body-1-4-teacher",
+      "literal": "試師12",
+      "semanticBox": [
+        1110,
+        168,
+        1200,
+        200
+      ],
+      "actualInkBox": [
+        1123,
+        171,
+        1186,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 4,
+      "role": "teacher"
+    },
+    {
+      "id": "body-1-4-room",
+      "literal": "試域12",
+      "semanticBox": [
+        1110,
+        200,
+        1200,
+        232
+      ],
+      "actualInkBox": [
+        1123,
+        203,
+        1186,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 4,
+      "role": "room"
+    },
+    {
+      "id": "body-1-5-subject",
+      "literal": "図研13",
+      "semanticBox": [
+        1200,
+        136,
+        1290,
+        168
+      ],
+      "actualInkBox": [
+        1214,
+        139,
+        1275,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 5,
+      "role": "subject"
+    },
+    {
+      "id": "body-1-5-teacher",
+      "literal": "試師13",
+      "semanticBox": [
+        1200,
+        168,
+        1290,
+        200
+      ],
+      "actualInkBox": [
+        1213,
+        171,
+        1275,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 5,
+      "role": "teacher"
+    },
+    {
+      "id": "body-1-5-room",
+      "literal": "試域13",
+      "semanticBox": [
+        1200,
+        200,
+        1290,
+        232
+      ],
+      "actualInkBox": [
+        1213,
+        203,
+        1275,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 5,
+      "role": "room"
+    },
+    {
+      "id": "body-1-6-subject",
+      "literal": "図研14",
+      "semanticBox": [
+        1290,
+        136,
+        1380,
+        168
+      ],
+      "actualInkBox": [
+        1304,
+        139,
+        1366,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 6,
+      "role": "subject"
+    },
+    {
+      "id": "body-1-6-teacher",
+      "literal": "試師14",
+      "semanticBox": [
+        1290,
+        168,
+        1380,
+        200
+      ],
+      "actualInkBox": [
+        1303,
+        171,
+        1366,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 6,
+      "role": "teacher"
+    },
+    {
+      "id": "body-1-6-room",
+      "literal": "試域14",
+      "semanticBox": [
+        1290,
+        200,
+        1380,
+        232
+      ],
+      "actualInkBox": [
+        1303,
+        203,
+        1366,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 6,
+      "role": "room"
+    },
+    {
+      "id": "body-1-7-subject",
+      "literal": "図研15",
+      "semanticBox": [
+        1380,
+        136,
+        1470,
+        168
+      ],
+      "actualInkBox": [
+        1394,
+        139,
+        1456,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 7,
+      "role": "subject"
+    },
+    {
+      "id": "body-1-7-teacher",
+      "literal": "試師15",
+      "semanticBox": [
+        1380,
+        168,
+        1470,
+        200
+      ],
+      "actualInkBox": [
+        1393,
+        171,
+        1456,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 7,
+      "role": "teacher"
+    },
+    {
+      "id": "body-1-7-room",
+      "literal": "試域15",
+      "semanticBox": [
+        1380,
+        200,
+        1470,
+        232
+      ],
+      "actualInkBox": [
+        1393,
+        203,
+        1456,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 7,
+      "role": "room"
+    },
+    {
+      "id": "body-1-8-subject",
+      "literal": "図研16",
+      "semanticBox": [
+        1470,
+        136,
+        1560,
+        168
+      ],
+      "actualInkBox": [
+        1484,
+        139,
+        1546,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 8,
+      "role": "subject"
+    },
+    {
+      "id": "body-1-8-teacher",
+      "literal": "試師16",
+      "semanticBox": [
+        1470,
+        168,
+        1560,
+        200
+      ],
+      "actualInkBox": [
+        1483,
+        171,
+        1546,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 8,
+      "role": "teacher"
+    },
+    {
+      "id": "body-1-8-room",
+      "literal": "試域16",
+      "semanticBox": [
+        1470,
+        200,
+        1560,
+        232
+      ],
+      "actualInkBox": [
+        1483,
+        203,
+        1546,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "2",
+      "period": 8,
+      "role": "room"
+    },
+    {
+      "id": "body-2-1-subject",
+      "literal": "図研17",
+      "semanticBox": [
+        1560,
+        136,
+        1650,
+        168
+      ],
+      "actualInkBox": [
+        1574,
+        139,
+        1636,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 1,
+      "role": "subject"
+    },
+    {
+      "id": "body-2-1-teacher",
+      "literal": "試師17",
+      "semanticBox": [
+        1560,
+        168,
+        1650,
+        200
+      ],
+      "actualInkBox": [
+        1573,
+        171,
+        1636,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 1,
+      "role": "teacher"
+    },
+    {
+      "id": "body-2-1-room",
+      "literal": "試域17",
+      "semanticBox": [
+        1560,
+        200,
+        1650,
+        232
+      ],
+      "actualInkBox": [
+        1573,
+        203,
+        1636,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 1,
+      "role": "room"
+    },
+    {
+      "id": "body-2-2-subject",
+      "literal": "図研18",
+      "semanticBox": [
+        1650,
+        136,
+        1740,
+        168
+      ],
+      "actualInkBox": [
+        1664,
+        139,
+        1726,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 2,
+      "role": "subject"
+    },
+    {
+      "id": "body-2-2-teacher",
+      "literal": "試師18",
+      "semanticBox": [
+        1650,
+        168,
+        1740,
+        200
+      ],
+      "actualInkBox": [
+        1663,
+        171,
+        1726,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 2,
+      "role": "teacher"
+    },
+    {
+      "id": "body-2-2-room",
+      "literal": "試域18",
+      "semanticBox": [
+        1650,
+        200,
+        1740,
+        232
+      ],
+      "actualInkBox": [
+        1663,
+        203,
+        1726,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 2,
+      "role": "room"
+    },
+    {
+      "id": "body-2-3-subject",
+      "literal": "図研19",
+      "semanticBox": [
+        1740,
+        136,
+        1830,
+        168
+      ],
+      "actualInkBox": [
+        1754,
+        139,
+        1815,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 3,
+      "role": "subject"
+    },
+    {
+      "id": "body-2-3-teacher",
+      "literal": "試師19",
+      "semanticBox": [
+        1740,
+        168,
+        1830,
+        200
+      ],
+      "actualInkBox": [
+        1753,
+        171,
+        1815,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 3,
+      "role": "teacher"
+    },
+    {
+      "id": "body-2-3-room",
+      "literal": "試域19",
+      "semanticBox": [
+        1740,
+        200,
+        1830,
+        232
+      ],
+      "actualInkBox": [
+        1753,
+        203,
+        1815,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 3,
+      "role": "room"
+    },
+    {
+      "id": "body-2-4-subject",
+      "literal": "図研20",
+      "semanticBox": [
+        1830,
+        136,
+        1920,
+        168
+      ],
+      "actualInkBox": [
+        1844,
+        139,
+        1906,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 4,
+      "role": "subject"
+    },
+    {
+      "id": "body-2-4-teacher",
+      "literal": "試師20",
+      "semanticBox": [
+        1830,
+        168,
+        1920,
+        200
+      ],
+      "actualInkBox": [
+        1843,
+        171,
+        1906,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 4,
+      "role": "teacher"
+    },
+    {
+      "id": "body-2-4-room",
+      "literal": "試域20",
+      "semanticBox": [
+        1830,
+        200,
+        1920,
+        232
+      ],
+      "actualInkBox": [
+        1843,
+        203,
+        1906,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 4,
+      "role": "room"
+    },
+    {
+      "id": "body-2-5-subject",
+      "literal": "図研21",
+      "semanticBox": [
+        1920,
+        136,
+        2010,
+        168
+      ],
+      "actualInkBox": [
+        1934,
+        139,
+        1995,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 5,
+      "role": "subject"
+    },
+    {
+      "id": "body-2-5-teacher",
+      "literal": "試師21",
+      "semanticBox": [
+        1920,
+        168,
+        2010,
+        200
+      ],
+      "actualInkBox": [
+        1933,
+        171,
+        1995,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 5,
+      "role": "teacher"
+    },
+    {
+      "id": "body-2-5-room",
+      "literal": "試域21",
+      "semanticBox": [
+        1920,
+        200,
+        2010,
+        232
+      ],
+      "actualInkBox": [
+        1933,
+        203,
+        1995,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 5,
+      "role": "room"
+    },
+    {
+      "id": "body-2-6-subject",
+      "literal": "図研22",
+      "semanticBox": [
+        2010,
+        136,
+        2100,
+        168
+      ],
+      "actualInkBox": [
+        2024,
+        139,
+        2086,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 6,
+      "role": "subject"
+    },
+    {
+      "id": "body-2-6-teacher",
+      "literal": "試師22",
+      "semanticBox": [
+        2010,
+        168,
+        2100,
+        200
+      ],
+      "actualInkBox": [
+        2023,
+        171,
+        2086,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 6,
+      "role": "teacher"
+    },
+    {
+      "id": "body-2-6-room",
+      "literal": "試域22",
+      "semanticBox": [
+        2010,
+        200,
+        2100,
+        232
+      ],
+      "actualInkBox": [
+        2023,
+        203,
+        2086,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 6,
+      "role": "room"
+    },
+    {
+      "id": "body-2-7-subject",
+      "literal": "図研23",
+      "semanticBox": [
+        2100,
+        136,
+        2190,
+        168
+      ],
+      "actualInkBox": [
+        2114,
+        139,
+        2175,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 7,
+      "role": "subject"
+    },
+    {
+      "id": "body-2-7-teacher",
+      "literal": "試師23",
+      "semanticBox": [
+        2100,
+        168,
+        2190,
+        200
+      ],
+      "actualInkBox": [
+        2113,
+        171,
+        2175,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 7,
+      "role": "teacher"
+    },
+    {
+      "id": "body-2-7-room",
+      "literal": "試域23",
+      "semanticBox": [
+        2100,
+        200,
+        2190,
+        232
+      ],
+      "actualInkBox": [
+        2113,
+        203,
+        2175,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 7,
+      "role": "room"
+    },
+    {
+      "id": "body-2-8-subject",
+      "literal": "図研24",
+      "semanticBox": [
+        2190,
+        136,
+        2280,
+        168
+      ],
+      "actualInkBox": [
+        2204,
+        139,
+        2266,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 8,
+      "role": "subject"
+    },
+    {
+      "id": "body-2-8-teacher",
+      "literal": "試師24",
+      "semanticBox": [
+        2190,
+        168,
+        2280,
+        200
+      ],
+      "actualInkBox": [
+        2203,
+        171,
+        2266,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 8,
+      "role": "teacher"
+    },
+    {
+      "id": "body-2-8-room",
+      "literal": "試域24",
+      "semanticBox": [
+        2190,
+        200,
+        2280,
+        232
+      ],
+      "actualInkBox": [
+        2203,
+        203,
+        2266,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "3",
+      "period": 8,
+      "role": "room"
+    },
+    {
+      "id": "body-3-1-subject",
+      "literal": "図研25",
+      "semanticBox": [
+        2280,
+        136,
+        2370,
+        168
+      ],
+      "actualInkBox": [
+        2294,
+        139,
+        2356,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 1,
+      "role": "subject"
+    },
+    {
+      "id": "body-3-1-teacher",
+      "literal": "試師25",
+      "semanticBox": [
+        2280,
+        168,
+        2370,
+        200
+      ],
+      "actualInkBox": [
+        2293,
+        171,
+        2356,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 1,
+      "role": "teacher"
+    },
+    {
+      "id": "body-3-1-room",
+      "literal": "試域25",
+      "semanticBox": [
+        2280,
+        200,
+        2370,
+        232
+      ],
+      "actualInkBox": [
+        2293,
+        203,
+        2356,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 1,
+      "role": "room"
+    },
+    {
+      "id": "body-3-2-subject",
+      "literal": "図研26",
+      "semanticBox": [
+        2370,
+        136,
+        2460,
+        168
+      ],
+      "actualInkBox": [
+        2384,
+        139,
+        2446,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 2,
+      "role": "subject"
+    },
+    {
+      "id": "body-3-2-teacher",
+      "literal": "試師26",
+      "semanticBox": [
+        2370,
+        168,
+        2460,
+        200
+      ],
+      "actualInkBox": [
+        2383,
+        171,
+        2446,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 2,
+      "role": "teacher"
+    },
+    {
+      "id": "body-3-2-room",
+      "literal": "試域26",
+      "semanticBox": [
+        2370,
+        200,
+        2460,
+        232
+      ],
+      "actualInkBox": [
+        2383,
+        203,
+        2446,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 2,
+      "role": "room"
+    },
+    {
+      "id": "body-3-3-subject",
+      "literal": "図研27",
+      "semanticBox": [
+        2460,
+        136,
+        2550,
+        168
+      ],
+      "actualInkBox": [
+        2474,
+        139,
+        2536,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 3,
+      "role": "subject"
+    },
+    {
+      "id": "body-3-3-teacher",
+      "literal": "試師27",
+      "semanticBox": [
+        2460,
+        168,
+        2550,
+        200
+      ],
+      "actualInkBox": [
+        2473,
+        171,
+        2536,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 3,
+      "role": "teacher"
+    },
+    {
+      "id": "body-3-3-room",
+      "literal": "試域27",
+      "semanticBox": [
+        2460,
+        200,
+        2550,
+        232
+      ],
+      "actualInkBox": [
+        2473,
+        203,
+        2536,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 3,
+      "role": "room"
+    },
+    {
+      "id": "body-3-4-subject",
+      "literal": "図研28",
+      "semanticBox": [
+        2550,
+        136,
+        2640,
+        168
+      ],
+      "actualInkBox": [
+        2564,
+        139,
+        2626,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 4,
+      "role": "subject"
+    },
+    {
+      "id": "body-3-4-teacher",
+      "literal": "試師28",
+      "semanticBox": [
+        2550,
+        168,
+        2640,
+        200
+      ],
+      "actualInkBox": [
+        2563,
+        171,
+        2626,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 4,
+      "role": "teacher"
+    },
+    {
+      "id": "body-3-4-room",
+      "literal": "試域28",
+      "semanticBox": [
+        2550,
+        200,
+        2640,
+        232
+      ],
+      "actualInkBox": [
+        2563,
+        203,
+        2626,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 4,
+      "role": "room"
+    },
+    {
+      "id": "body-3-5-subject",
+      "literal": "図研29",
+      "semanticBox": [
+        2640,
+        136,
+        2730,
+        168
+      ],
+      "actualInkBox": [
+        2654,
+        139,
+        2715,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 5,
+      "role": "subject"
+    },
+    {
+      "id": "body-3-5-teacher",
+      "literal": "試師29",
+      "semanticBox": [
+        2640,
+        168,
+        2730,
+        200
+      ],
+      "actualInkBox": [
+        2653,
+        171,
+        2715,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 5,
+      "role": "teacher"
+    },
+    {
+      "id": "body-3-5-room",
+      "literal": "試域29",
+      "semanticBox": [
+        2640,
+        200,
+        2730,
+        232
+      ],
+      "actualInkBox": [
+        2653,
+        203,
+        2715,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 5,
+      "role": "room"
+    },
+    {
+      "id": "body-3-6-subject",
+      "literal": "図研30",
+      "semanticBox": [
+        2730,
+        136,
+        2820,
+        168
+      ],
+      "actualInkBox": [
+        2744,
+        139,
+        2806,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 6,
+      "role": "subject"
+    },
+    {
+      "id": "body-3-6-teacher",
+      "literal": "試師30",
+      "semanticBox": [
+        2730,
+        168,
+        2820,
+        200
+      ],
+      "actualInkBox": [
+        2743,
+        171,
+        2806,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 6,
+      "role": "teacher"
+    },
+    {
+      "id": "body-3-6-room",
+      "literal": "試域30",
+      "semanticBox": [
+        2730,
+        200,
+        2820,
+        232
+      ],
+      "actualInkBox": [
+        2743,
+        203,
+        2806,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 6,
+      "role": "room"
+    },
+    {
+      "id": "body-3-7-subject",
+      "literal": "図研31",
+      "semanticBox": [
+        2820,
+        136,
+        2910,
+        168
+      ],
+      "actualInkBox": [
+        2834,
+        139,
+        2895,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 7,
+      "role": "subject"
+    },
+    {
+      "id": "body-3-7-teacher",
+      "literal": "試師31",
+      "semanticBox": [
+        2820,
+        168,
+        2910,
+        200
+      ],
+      "actualInkBox": [
+        2833,
+        171,
+        2895,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 7,
+      "role": "teacher"
+    },
+    {
+      "id": "body-3-7-room",
+      "literal": "試域31",
+      "semanticBox": [
+        2820,
+        200,
+        2910,
+        232
+      ],
+      "actualInkBox": [
+        2833,
+        203,
+        2895,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 7,
+      "role": "room"
+    },
+    {
+      "id": "body-3-8-subject",
+      "literal": "図研32",
+      "semanticBox": [
+        2910,
+        136,
+        3000,
+        168
+      ],
+      "actualInkBox": [
+        2924,
+        139,
+        2986,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 8,
+      "role": "subject"
+    },
+    {
+      "id": "body-3-8-teacher",
+      "literal": "試師32",
+      "semanticBox": [
+        2910,
+        168,
+        3000,
+        200
+      ],
+      "actualInkBox": [
+        2923,
+        171,
+        2986,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 8,
+      "role": "teacher"
+    },
+    {
+      "id": "body-3-8-room",
+      "literal": "試域32",
+      "semanticBox": [
+        2910,
+        200,
+        3000,
+        232
+      ],
+      "actualInkBox": [
+        2923,
+        203,
+        2986,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "4",
+      "period": 8,
+      "role": "room"
+    },
+    {
+      "id": "body-4-1-subject",
+      "literal": "図研33",
+      "semanticBox": [
+        3000,
+        136,
+        3090,
+        168
+      ],
+      "actualInkBox": [
+        3014,
+        139,
+        3075,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 1,
+      "role": "subject"
+    },
+    {
+      "id": "body-4-1-teacher",
+      "literal": "試師33",
+      "semanticBox": [
+        3000,
+        168,
+        3090,
+        200
+      ],
+      "actualInkBox": [
+        3013,
+        171,
+        3075,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 1,
+      "role": "teacher"
+    },
+    {
+      "id": "body-4-1-room",
+      "literal": "試域33",
+      "semanticBox": [
+        3000,
+        200,
+        3090,
+        232
+      ],
+      "actualInkBox": [
+        3013,
+        203,
+        3075,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 1,
+      "role": "room"
+    },
+    {
+      "id": "body-4-2-subject",
+      "literal": "図研34",
+      "semanticBox": [
+        3090,
+        136,
+        3180,
+        168
+      ],
+      "actualInkBox": [
+        3104,
+        139,
+        3166,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 2,
+      "role": "subject"
+    },
+    {
+      "id": "body-4-2-teacher",
+      "literal": "試師34",
+      "semanticBox": [
+        3090,
+        168,
+        3180,
+        200
+      ],
+      "actualInkBox": [
+        3103,
+        171,
+        3166,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 2,
+      "role": "teacher"
+    },
+    {
+      "id": "body-4-2-room",
+      "literal": "試域34",
+      "semanticBox": [
+        3090,
+        200,
+        3180,
+        232
+      ],
+      "actualInkBox": [
+        3103,
+        203,
+        3166,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 2,
+      "role": "room"
+    },
+    {
+      "id": "body-4-3-subject",
+      "literal": "図研35",
+      "semanticBox": [
+        3180,
+        136,
+        3270,
+        168
+      ],
+      "actualInkBox": [
+        3194,
+        139,
+        3256,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 3,
+      "role": "subject"
+    },
+    {
+      "id": "body-4-3-teacher",
+      "literal": "試師35",
+      "semanticBox": [
+        3180,
+        168,
+        3270,
+        200
+      ],
+      "actualInkBox": [
+        3193,
+        171,
+        3256,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 3,
+      "role": "teacher"
+    },
+    {
+      "id": "body-4-3-room",
+      "literal": "試域35",
+      "semanticBox": [
+        3180,
+        200,
+        3270,
+        232
+      ],
+      "actualInkBox": [
+        3193,
+        203,
+        3256,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 3,
+      "role": "room"
+    },
+    {
+      "id": "body-4-4-subject",
+      "literal": "図研36",
+      "semanticBox": [
+        3270,
+        136,
+        3360,
+        168
+      ],
+      "actualInkBox": [
+        3284,
+        139,
+        3346,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 4,
+      "role": "subject"
+    },
+    {
+      "id": "body-4-4-teacher",
+      "literal": "試師36",
+      "semanticBox": [
+        3270,
+        168,
+        3360,
+        200
+      ],
+      "actualInkBox": [
+        3283,
+        171,
+        3346,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 4,
+      "role": "teacher"
+    },
+    {
+      "id": "body-4-4-room",
+      "literal": "試域36",
+      "semanticBox": [
+        3270,
+        200,
+        3360,
+        232
+      ],
+      "actualInkBox": [
+        3283,
+        203,
+        3346,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 4,
+      "role": "room"
+    },
+    {
+      "id": "body-4-5-subject",
+      "literal": "図研37",
+      "semanticBox": [
+        3360,
+        136,
+        3450,
+        168
+      ],
+      "actualInkBox": [
+        3374,
+        139,
+        3436,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 5,
+      "role": "subject"
+    },
+    {
+      "id": "body-4-5-teacher",
+      "literal": "試師37",
+      "semanticBox": [
+        3360,
+        168,
+        3450,
+        200
+      ],
+      "actualInkBox": [
+        3373,
+        171,
+        3436,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 5,
+      "role": "teacher"
+    },
+    {
+      "id": "body-4-5-room",
+      "literal": "試域37",
+      "semanticBox": [
+        3360,
+        200,
+        3450,
+        232
+      ],
+      "actualInkBox": [
+        3373,
+        203,
+        3436,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 5,
+      "role": "room"
+    },
+    {
+      "id": "body-4-6-subject",
+      "literal": "図研38",
+      "semanticBox": [
+        3450,
+        136,
+        3540,
+        168
+      ],
+      "actualInkBox": [
+        3464,
+        139,
+        3526,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 6,
+      "role": "subject"
+    },
+    {
+      "id": "body-4-6-teacher",
+      "literal": "試師38",
+      "semanticBox": [
+        3450,
+        168,
+        3540,
+        200
+      ],
+      "actualInkBox": [
+        3463,
+        171,
+        3526,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 6,
+      "role": "teacher"
+    },
+    {
+      "id": "body-4-6-room",
+      "literal": "試域38",
+      "semanticBox": [
+        3450,
+        200,
+        3540,
+        232
+      ],
+      "actualInkBox": [
+        3463,
+        203,
+        3526,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 6,
+      "role": "room"
+    },
+    {
+      "id": "body-4-7-subject",
+      "literal": "図研39",
+      "semanticBox": [
+        3540,
+        136,
+        3630,
+        168
+      ],
+      "actualInkBox": [
+        3554,
+        139,
+        3615,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 7,
+      "role": "subject"
+    },
+    {
+      "id": "body-4-7-teacher",
+      "literal": "試師39",
+      "semanticBox": [
+        3540,
+        168,
+        3630,
+        200
+      ],
+      "actualInkBox": [
+        3553,
+        171,
+        3615,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 7,
+      "role": "teacher"
+    },
+    {
+      "id": "body-4-7-room",
+      "literal": "試域39",
+      "semanticBox": [
+        3540,
+        200,
+        3630,
+        232
+      ],
+      "actualInkBox": [
+        3553,
+        203,
+        3615,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 7,
+      "role": "room"
+    },
+    {
+      "id": "body-4-8-subject",
+      "literal": "図研40",
+      "semanticBox": [
+        3630,
+        136,
+        3720,
+        168
+      ],
+      "actualInkBox": [
+        3644,
+        139,
+        3706,
+        158
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 8,
+      "role": "subject"
+    },
+    {
+      "id": "body-4-8-teacher",
+      "literal": "試師40",
+      "semanticBox": [
+        3630,
+        168,
+        3720,
+        200
+      ],
+      "actualInkBox": [
+        3643,
+        171,
+        3706,
+        191
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 8,
+      "role": "teacher"
+    },
+    {
+      "id": "body-4-8-room",
+      "literal": "試域40",
+      "semanticBox": [
+        3630,
+        200,
+        3720,
+        232
+      ],
+      "actualInkBox": [
+        3643,
+        203,
+        3706,
+        223
+      ],
+      "kind": "body",
+      "className": "1_2",
+      "day": "5",
+      "period": 8,
+      "role": "room"
+    }
+  ],
+  "glyphGeometryScope": "Actual source renderer advance/line boxes; original ink bounds separately retained. Not OCR charboxes."
+}
