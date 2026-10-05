@@ -58,7 +58,7 @@
   "processorChatTemplate": "Pinned runtime/bundle defaults; no custom template",
   "sourceRefusalMeaning": "Operational source UNASSESSED, no EMPTY or quality credit",
   "phoneSuitability": "UNASSESSED",
-  "nativeGrammarCompatibility": "uniqueItems elided uniformly; semantic decoder still rejects duplicate IDs",
+  "nativeGrammarCompatibility": "Scalar candidateID enum; no array uniqueItems in this schema. Semantic decoder rejects duplicate properties and multiple candidates.",
   "wholeDocumentFormalSlots": {
     "expected": 1270,
     "assessed": 0,
