@@ -3,6 +3,7 @@ using Takupoke.Core;
 using Takupoke.Core.Recovery;
 using Takupoke.Infrastructure.Parsing;
 using Takupoke.Infrastructure.Recovery;
+using Takupoke.Infrastructure.Storage;
 using Xunit;
 
 namespace Takupoke.Integration.Tests;
@@ -147,6 +148,12 @@ public sealed class RecoveryDateHeaderOwnershipTests
         Assert.Equal(RecoveryValidator.Version, run.Result!.Metadata.ValidatorVersion);
         Assert.Contains("versions", RecoveryValidator.Validate(document, run.Result with
             { Metadata = run.Result.Metadata with { ValidatorVersion = RecoveryValidator.Version - 1 } }).Errors);
+        // V7 could not accept the new composite class proof. A purported old
+        // acceptance must not gain consent just because V8 permits that input.
+        var oldResult = run.Result with { Metadata = run.Result.Metadata with { ValidatorVersion = 7 } };
+        var oldAudit = new RecoveryAudit(document, oldResult, new(document.PdfHash, RecoveryValidator.Fingerprint(oldResult),
+            RecoveryValidator.Fingerprint(document), oldResult.Metadata, DateTimeOffset.Parse("2035-10-01T00:00:00Z")));
+        Assert.Null(RecoveryAuditCertification.TryRecertify(oldAudit));
         var oldStructure = run.Result.Metadata with { ValidatorVersion = RecoveryValidator.Version - 1 };
         Assert.Contains("structureMetadata", RecoveryValidator.Validate(document with { StructureMetadata = oldStructure }, run.Result).Errors);
     }
@@ -180,6 +187,7 @@ public sealed class RecoveryDateHeaderOwnershipTests
     [InlineData("duplicate")]
     [InlineData("unowned")]
     [InlineData("missingCanonical")]
+    [InlineData("canonicalAlias")]
     [InlineData("missingGradeSuffix")]
     [InlineData("crossClass")]
     public void InvalidPrintedGradeNeverGetsIgnoredOrUsedAsAnAiClass(string mutation)
@@ -194,6 +202,7 @@ public sealed class RecoveryDateHeaderOwnershipTests
             case "duplicate": glyphs.Add(glyphs[grade] with { X = 200 }); break;
             case "unowned": glyphs[grade] = glyphs[grade] with { Y = 58 }; break;
             case "missingCanonical": glyphs.RemoveAt(canonical); break;
+            case "canonicalAlias": glyphs[canonical] = glyphs[canonical] with { Text = "AI-1" }; break;
             case "missingGradeSuffix": glyphs[grade] = glyphs[grade] with { Text = "1" }; break;
             case "crossClass": glyphs[grade] = glyphs[grade] with { X = glyphs[grade].X + 588 }; break;
         }

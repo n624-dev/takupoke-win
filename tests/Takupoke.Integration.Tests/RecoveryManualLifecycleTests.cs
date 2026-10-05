@@ -92,6 +92,43 @@ public sealed class RecoveryManualLifecycleTests
         Assert.Null(await c.Store.ReadAsync<RecoveryJob>(c.Lease, "recovery.Timetable"));
         await c.AssertLastGoodAsync();
     }
+    [Fact]
+    public async Task CertifiedV7ManualHistorySurvivesStoreDisplayRestartAndRejectsFreshOrChangedConsent()
+    {
+        await using var c = await Context.CreateAsync();
+        Assert.NotNull((await c.Coordinator.PrepareAsync(MaterialKind.Timetable, 2032)).ManualSession);
+        var failedStrict = Assert.IsType<MaterialAttempt>(await c.Store.ReadAsync<MaterialAttempt>(c.Lease, "attempt.Timetable"));
+        Assert.NotNull(failedStrict.Failure);
+        var old = RecoveryManualCertificationTests.Historical(true, c.Source.Digest);
+        var originalHash = RecoveryValidator.Fingerprint(old);
+        await c.Store.WriteAsync(c.Lease, "recovery.accepted.Timetable." + c.Source.Digest, old);
+        var prepared = await c.Coordinator.PrepareAsync(MaterialKind.Timetable, 2032);
+        Assert.True(prepared.ReusedAcceptance); Assert.Equal(RecoveryJobState.Adopted, prepared.State);
+        var formal = Assert.IsType<MaterialAnalysis>(await c.Store.ReadAsync<MaterialAnalysis>(c.Lease, "analysis.Timetable"));
+        var certified = formal.Recovery!;
+        Assert.NotNull(certified.CurrentCertification);
+        Assert.Equal(originalHash, RecoveryValidator.Fingerprint(certified with { CurrentCertification = null }));
+        Assert.True(RecoveryAnalysisConverter.MayDisplay(formal));
+        await c.RestartAsync();
+        var persisted = Assert.IsType<MaterialAnalysis>(await c.Store.ReadAsync<MaterialAnalysis>(c.Lease, "analysis.Timetable"));
+        Assert.Equal(RecoveryValidator.Fingerprint(formal), RecoveryValidator.Fingerprint(persisted));
+        Assert.True(RecoveryAnalysisConverter.MayDisplay(persisted));
+        Assert.True((await c.Coordinator.PrepareAsync(MaterialKind.Timetable,2032)).ReusedAcceptance);
+        await Assert.ThrowsAsync<InvalidDataException>(() => c.Store.SaveRecoveryAsync(c.Lease, c.Source, certified, c.Source.AcquiredAt));
+        var damaged = certified with { CurrentCertification = certified.CurrentCertification! with { AcceptanceHash = new string('b', 64) } };
+        await Assert.ThrowsAsync<InvalidDataException>(() => c.Store.SaveRecoveryAsync(c.Lease, c.Source, damaged, c.Source.AcquiredAt, reuseAccepted: true));
+        // Restore the real failed Strict attempt before exercising the stored
+        // consent transaction gate; a successful reuse cleared that attempt.
+        await c.Store.WriteAsync(c.Lease, "attempt.Timetable", failedStrict);
+        var changed = old with { Acceptance = old.Acceptance with { AcceptedAt = old.Acceptance.AcceptedAt.AddMinutes(1) } };
+        await c.Store.WriteAsync(c.Lease, "recovery.accepted.Timetable." + c.Source.Digest, changed);
+        await Assert.ThrowsAsync<InvalidDataException>(() => c.Store.SaveRecoveryAsync(c.Lease, c.Source, certified, c.Source.AcquiredAt, reuseAccepted: true));
+        var after = Assert.IsType<MaterialAnalysis>(await c.Store.ReadAsync<MaterialAnalysis>(c.Lease, "analysis.Timetable"));
+        Assert.Equal(RecoveryValidator.Fingerprint(formal), RecoveryValidator.Fingerprint(after));
+        Assert.True(RecoveryAnalysisConverter.MayDisplay(after));
+        await c.AssertHistoryAndBlobAsync();
+    }
+
     private sealed class Context : IAsyncDisposable
     {
         private readonly string _root = Path.Combine(Path.GetTempPath(), "takupoke-fictional-manual-" + Guid.NewGuid().ToString("N"));

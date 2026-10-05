@@ -20,7 +20,7 @@ public static class RecoveryAnalysisConverter
             // supplies persisted identity fields; no path or source is opened.
             var source = new SourceRecord(analysis.OriginalId, analysis.Kind, "", "", analysis.SourceName,
                 analysis.SourceDigest, 0, analysis.ParsedAt, analysis.ParsedAt, null);
-            var expected = Convert(source, audit.Document, audit.Result, analysis.ParsedAt, token);
+            var expected = ConvertCertified(source, audit, analysis.ParsedAt, token);
             token.ThrowIfCancellationRequested();
             return analysis.SchoolYear == expected.SchoolYear &&
                 RecoveryValidator.Fingerprint(new { analysis.Timetable, analysis.Changes, analysis.Special }) ==
@@ -34,6 +34,16 @@ public static class RecoveryAnalysisConverter
         token.ThrowIfCancellationRequested();
         if (source.Digest != document.PdfHash || RecoveryPolicy.Kind(source.Kind) != document.Kind || !RecoveryValidator.Validate(document, result, token).CanAdopt)
             throw new InvalidDataException("復旧結果を正式な解析結果へ変換できません。");
+        return ConvertCore(source, document, result, at, token);
+    }
+    internal static MaterialAnalysis ConvertCertified(SourceRecord source, RecoveryAudit audit, DateTimeOffset at, CancellationToken token = default)
+    {
+        if (source.Digest != audit.Document.PdfHash || RecoveryPolicy.Kind(source.Kind) != audit.Document.Kind || !RecoveryAuditCertification.IsCurrent(audit, token))
+            throw new InvalidDataException("復旧結果と現在の再検証証明を確認できません。");
+        return ConvertCore(source, audit.Document, audit.Result, at, token);
+    }
+    private static MaterialAnalysis ConvertCore(SourceRecord source, RecoveryDocument document, RecoveryResult result, DateTimeOffset at, CancellationToken token)
+    {
         token.ThrowIfCancellationRequested();
         var sources = document.Sources.ToDictionary(s => { token.ThrowIfCancellationRequested(); return s.Id; });
         var raw = new Dictionary<string, string>();

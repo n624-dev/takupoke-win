@@ -25,7 +25,28 @@ public static class RecoveryValidator
         catch (RecoveryWorkLimitException) { return new(["validationLimit"]); }
         catch (Exception e) when (e is NullReferenceException or ArgumentException or KeyNotFoundException or InvalidOperationException) { return new(["malformedInput"]); }
     }
-    private static RecoveryValidation ValidateCore(RecoveryDocument doc, RecoveryResult result, bool structurePreflight = false, CancellationToken token = default)
+    public static RecoveryValidation ValidateHistoricalManual(RecoveryDocument doc, RecoveryResult result,
+        RecoveryAcceptance acceptance, RecoveryAcceptance? previous, RecoverySemanticCertification certificate, CancellationToken token = default)
+    {
+        try
+        {
+            token.ThrowIfCancellationRequested();
+            // This adapter is solely for an immutable, explicitly accepted V7
+            // manual audit. Ordinary Validate/CanReuse keep their current gate.
+            if (Version != 8 || certificate.RecoverySchemaVersion != SchemaVersion || certificate.ValidatorVersion != Version ||
+                result.Metadata.ValidatorVersion != 7 || doc.StructureMetadata?.ValidatorVersion != 7 || result.HumanCorrections is not { Count: > 0 } ||
+                previous is not null || acceptance.AcceptedAt == default ||
+                acceptance.Metadata != result.Metadata || acceptance.PdfHash != doc.PdfHash || result.PdfHash != doc.PdfHash ||
+                certificate.ScopeHash != acceptance.ScopeHash || certificate.ResultHash != acceptance.ResultHash ||
+                certificate.ScopeHash != Fingerprint(doc) || certificate.ResultHash != Fingerprint(result) ||
+                certificate.AcceptanceHash != Fingerprint(acceptance) || certificate.PreviousAcceptanceHash != Fingerprint(previous)) return new(["historicalCertification"]);
+            token.ThrowIfCancellationRequested();
+            return ValidateCore(doc, result, token: token, historicalManual: true);
+        }
+        catch (RecoveryWorkLimitException) { return new(["validationLimit"]); }
+        catch (Exception e) when (e is NullReferenceException or ArgumentException or KeyNotFoundException or InvalidOperationException) { return new(["malformedInput"]); }
+    }
+    private static RecoveryValidation ValidateCore(RecoveryDocument doc, RecoveryResult result, bool structurePreflight = false, CancellationToken token = default, bool historicalManual = false)
     {
         var work = new RecoveryWorkBudget(token); work.Step();
         bool Contains(RecoveryBox outer, RecoveryBox inner) { work.Step(); return outer.Contains(inner); }
@@ -37,7 +58,7 @@ public static class RecoveryValidator
         Check(doc.Complete && doc.Cells.Count is > 0 and <= 20000 && doc.Sources.Count <= 100000, "incompleteDocument");
         Check(result.Kind == doc.Kind && result.SchoolYear == doc.SchoolYear && result.Term == doc.Term, "documentIdentity");
         Check(doc.SchoolYear is >= 1900 and <= 9998 && (doc.Kind != RecoveryDocumentKind.Timetable || doc.Term is "前期" or "後期"), "yearTerm");
-        bool ValidMetadata(RecoveryMetadata metadata) => metadata.RecoverySchemaVersion == SchemaVersion && metadata.ValidatorVersion == Version &&
+        bool ValidMetadata(RecoveryMetadata metadata) => metadata.RecoverySchemaVersion == SchemaVersion && (metadata.ValidatorVersion == Version || historicalManual && metadata.ValidatorVersion == 7) &&
             new[] { metadata.Provider, metadata.ModelId, metadata.ModelVersion, metadata.RuntimeVersion,
                 metadata.PromptVersion, metadata.OsVersion, metadata.RecoveryVersion }.All(v => !string.IsNullOrWhiteSpace(v));
         Check(ValidMetadata(result.Metadata), "versions");
@@ -133,7 +154,7 @@ public static class RecoveryValidator
         {
             if (!Evidence(ids, allowed) || !Ordered(ids)) return false;
             if (Header(ids, allowed, ClassLabels(cls), cell, cell?.ClassRegion)) return true;
-            if (doc.Kind != RecoveryDocumentKind.Exam || cls is not ("AI_1" or "AI_2")) return false;
+            if (historicalManual || doc.Kind != RecoveryDocumentKind.Exam || cls is not ("AI_1" or "AI_2")) return false;
             if (cell is null)
             {
                 work.Step(doc.Cells.Count + ids.Count);

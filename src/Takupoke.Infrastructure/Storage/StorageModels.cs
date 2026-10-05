@@ -13,6 +13,8 @@ public sealed record MaterialAnalysis(string OriginalId, MaterialKind Kind, int 
 public sealed record RecoveryAudit(RecoveryDocument Document, RecoveryResult Result, RecoveryAcceptance Acceptance)
 {
     public RecoveryAcceptance? PreviousAcceptance { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public RecoverySemanticCertification? CurrentCertification { get; init; }
 }
 public sealed record RecoveryPreview(string SourceId, SchoolLease Lease, RecoveryDocument Document, RecoveryResult Result, DateTimeOffset CreatedAt);
 public sealed record RecoveryManualSession(string SourceId, SchoolLease Lease, RecoveryManualPlan Plan, DateTimeOffset CreatedAt);

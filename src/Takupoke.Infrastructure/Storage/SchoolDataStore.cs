@@ -338,12 +338,14 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
     public Task SaveRecoveryAsync(SchoolLease lease, SourceRecord source, RecoveryAudit audit, DateTimeOffset adoptedAt,
         CancellationToken token = default, bool reuseAccepted = false) => WithConnectionAsync(lease, async connection =>
     {
+        if (audit.CurrentCertification is not null && !reuseAccepted)
+            throw new InvalidDataException("再検証証明は保存済みの明示的な確認にのみ適用できます。");
         if (!RecoveryPolicy.MatchesPeriod(audit.Document, lease.Period))
             throw new InvalidDataException("PDFの年度・学期が現在の保存期間と一致しません。");
         if (audit.Document.PdfHash != source.Digest || RecoveryPolicy.Kind(source.Kind) != audit.Document.Kind ||
             !await Task.Run(() => Takupoke.Infrastructure.Recovery.RecoveryAuditCertification.IsCurrent(audit, token), token).ConfigureAwait(false))
             throw new InvalidDataException("復旧結果と確認内容の対応を確認できません。");
-        var analysis = await Task.Run(() => Takupoke.Infrastructure.Recovery.RecoveryAnalysisConverter.Convert(source, audit.Document, audit.Result, adoptedAt, token), token).ConfigureAwait(false);
+        var analysis = await Task.Run(() => Takupoke.Infrastructure.Recovery.RecoveryAnalysisConverter.ConvertCertified(source, audit, adoptedAt, token), token).ConfigureAwait(false);
         using var transaction = connection.BeginTransaction();
         var key = "selection." + source.Kind;
         using (var read = connection.CreateCommand())

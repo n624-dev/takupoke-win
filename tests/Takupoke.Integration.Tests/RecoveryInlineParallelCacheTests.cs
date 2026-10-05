@@ -83,6 +83,10 @@ public sealed class RecoveryInlineParallelCacheTests
     [InlineData(true, 4)]
     [InlineData(false, 5)]
     [InlineData(true, 5)]
+    [InlineData(false, 6)]
+    [InlineData(true, 6)]
+    [InlineData(false, 7)]
+    [InlineData(true, 7)]
     public async Task PreviouslyAcceptedGoodAuditIsRecertifiedAndAutomaticallyReusedWithoutAnotherConfirmation(bool structureMetadata, int version)
     {
         await using var context = await Context.CreateAsync();
@@ -210,6 +214,53 @@ public sealed class RecoveryInlineParallelCacheTests
         Assert.Equal(0, context.BuildCalls);
         var tampered = current with { PreviousAcceptance = current.PreviousAcceptance! with { ScopeHash = new string('b',64) } };
         Assert.Null(RecoveryAuditCertification.Reusable(tampered));
+    }
+
+    [Theory]
+    [InlineData(4)]
+    [InlineData(5)]
+    [InlineData(6)]
+    public async Task ExactV7ChainRetainsEarliestConsentAndRejectsChangedAncestry(int earliest)
+    {
+        await using var context = await Context.CreateAsync();
+        var first = context.Audit(compound: false, version: earliest);
+        var metadata = first.Result.Metadata with { ValidatorVersion = 7 };
+        var result = first.Result with { Metadata = metadata };
+        var old = new RecoveryAudit(first.Document, result, new(first.Document.PdfHash,
+            RecoveryValidator.Fingerprint(result), RecoveryValidator.Fingerprint(first.Document), metadata, first.Acceptance.AcceptedAt))
+            { PreviousAcceptance = first.Acceptance };
+        var current = Assert.IsType<RecoveryAudit>(RecoveryAuditCertification.TryRecertify(old));
+        Assert.Equal(first.Acceptance, current.PreviousAcceptance);
+        Assert.Equal(first.Acceptance.AcceptedAt, current.Acceptance.AcceptedAt);
+        Assert.True(RecoveryAuditCertification.IsCurrent(current));
+        Assert.Null(RecoveryAuditCertification.Reusable(current with
+            { PreviousAcceptance = current.PreviousAcceptance! with { AcceptedAt = first.Acceptance.AcceptedAt.AddMinutes(1) } }));
+        Assert.Null(RecoveryAuditCertification.TryRecertify(old with
+            { PreviousAcceptance = first.Acceptance with { ScopeHash = new string('b', 64) } }));
+    }
+
+    [Fact]
+    public void V7ManualAuditPreservesOriginalCaptureSnapshotCorrectionsAndConsent()
+    {
+        var document = RecoveryManualAssistanceTests.Captured(1);
+        var plan = Assert.IsType<RecoveryManualPlan>(RecoveryManualAssistance.Prepare(document));
+        var correction = RecoveryManualAssistanceTests.Correction(plan, Assert.Single(plan.Targets), "架空訂正科目");
+        var result = RecoveryManualAssistance.Complete(plan, [correction], "host-control");
+        result = result with { Metadata = result.Metadata with { ValidatorVersion = 7 } };
+        var acceptedAt = DateTimeOffset.Parse("2032-04-01T00:00:00Z");
+        var old = new RecoveryAudit(document, result, new(document.PdfHash, RecoveryValidator.Fingerprint(result),
+            RecoveryValidator.Fingerprint(document), result.Metadata, acceptedAt));
+        var current = Assert.IsType<RecoveryAudit>(RecoveryAuditCertification.TryRecertify(old));
+        Assert.Equal(old.Acceptance, current.PreviousAcceptance);
+        Assert.Equal(acceptedAt, current.Acceptance.AcceptedAt);
+        Assert.Equal(RecoveryValidator.Fingerprint(document), RecoveryValidator.Fingerprint(current.Document));
+        Assert.Equal(RecoveryValidator.Fingerprint(result.HumanCorrections), RecoveryValidator.Fingerprint(current.Result.HumanCorrections));
+        Assert.True(RecoveryAuditCertification.IsCurrent(current));
+        var broken = result with { HumanCorrections = [correction with { DocumentSnapshot = new string('b', 64) }] };
+        Assert.Null(RecoveryAuditCertification.TryRecertify(old with { Result = broken,
+            Acceptance = old.Acceptance with { ResultHash = RecoveryValidator.Fingerprint(broken) } }));
+        Assert.Null(RecoveryAuditCertification.TryRecertify(old with { PreviousAcceptance = old.Acceptance with
+            { Metadata = old.Acceptance.Metadata with { ValidatorVersion = 6 } } }));
     }
 
     [Fact]
