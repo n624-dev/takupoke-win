@@ -6,14 +6,18 @@ namespace Takupoke.Core.Recovery;
 public enum RecoveryDocumentKind { Timetable, Exam, Return }
 public enum RecoveryValueState { Present, Empty, Unreadable, Missing, Ambiguous }
 public enum RecoveryInputState { Complete, Partial, RasterOnly }
-public enum RecoveryJobState { Pending, Preparing, AwaitingModel, Running, AwaitingConfirmation, Adopted, Failed, Superseded }
+public enum RecoveryJobState { Pending, Preparing, AwaitingModel, Running, AwaitingConfirmation, Adopted, Failed, Superseded, AwaitingManualCorrection }
 public enum LocalProviderState { Ready, NotReady, Disabled, Unsupported, DownloadRequired, InsufficientMemory }
 public sealed record RecoveryBox(double X, double Y, double Width, double Height)
 {
     public bool Valid => new[] { X, Y, Width, Height, X + Width, Y + Height }.All(double.IsFinite) && X >= 0 && Y >= 0 && Width > 0 && Height > 0;
     public bool Contains(RecoveryBox other) => Valid && other.Valid && other.X >= X && other.Y >= Y && other.X + other.Width <= X + Width && other.Y + other.Height <= Y + Height;
 }
-public sealed record RecoverySource(string Id, string CellId, int Page, string Text, RecoveryBox Box, bool FromOcr = false, int? SourceLine = null, int? SourceOrder = null);
+public sealed record RecoverySource(string Id, string CellId, int Page, string Text, RecoveryBox Box, bool FromOcr = false, int? SourceLine = null, int? SourceOrder = null)
+{
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public double? NativeConfidence { get; init; }
+}
 public sealed record RecoveryField(RecoveryValueState State, string Value, IReadOnlyList<string> Evidence);
 public sealed record RecoverySlot(string ClassName, string Day, int Period);
 public enum RecoveryHeaderAxis { Above, Left }
@@ -55,6 +59,8 @@ public sealed record RecoveryDocument(string PdfHash, RecoveryDocumentKind Kind,
     IReadOnlyDictionary<string, string> Times, IReadOnlyList<string> TimeEvidence,
     IReadOnlyList<string> NormalTimeNoteEvidence)
 {
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public RecoveryCaptureReceipt? Capture { get; init; }
     public RecoveryMetadata? StructureMetadata { get; init; }
     public IReadOnlyList<string> CommonClockEvidence { get; init; } = [];
     public IReadOnlyDictionary<string, RecoveryHeaderRegion> CommonClockRegions { get; init; } = new Dictionary<string, RecoveryHeaderRegion>();
@@ -70,9 +76,17 @@ public sealed record RecoveredCell(string CellId, RecoveryValueState State, IRea
 public sealed record RecoveryMetadata(string Provider, string ModelId, string ModelVersion, string RuntimeVersion,
     string PromptVersion, int RecoverySchemaVersion, int ValidatorVersion, string OsVersion, string RecoveryVersion = "2");
 public sealed record RecoveryResult(string PdfHash, RecoveryDocumentKind Kind, int SchoolYear, string? Term,
-    IReadOnlyList<RecoveredCell> Cells, RecoveryMetadata Metadata);
+    IReadOnlyList<RecoveredCell> Cells, RecoveryMetadata Metadata)
+{
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public IReadOnlyList<RecoveryHumanCorrection>? HumanCorrections { get; init; }
+}
 public sealed record RecoveryJob(string PdfHash, RecoveryDocumentKind Kind, RecoveryJobState State,
-    DateTimeOffset CreatedAt, string? ResultHash = null);
+    DateTimeOffset CreatedAt, string? ResultHash = null)
+{
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public RecoveryManualPlan? ManualPlan { get; init; }
+}
 public sealed record RecoveryAcceptance(string PdfHash, string ResultHash, string ScopeHash, RecoveryMetadata Metadata, DateTimeOffset AcceptedAt);
 public sealed record RecoveryValidation(IReadOnlyList<string> Errors)
 {

@@ -15,6 +15,7 @@ public sealed record RecoveryAudit(RecoveryDocument Document, RecoveryResult Res
     public RecoveryAcceptance? PreviousAcceptance { get; init; }
 }
 public sealed record RecoveryPreview(string SourceId, SchoolLease Lease, RecoveryDocument Document, RecoveryResult Result, DateTimeOffset CreatedAt);
+public sealed record RecoveryManualSession(string SourceId, SchoolLease Lease, RecoveryManualPlan Plan, DateTimeOffset CreatedAt);
 public sealed record MaterialAttempt(DateTimeOffset At, string? Failure, bool Parsing, string? SourceDigest = null,
     int? SchoolYear = null, ChangeErrorCode? ChangeError = null, int? ParserVersion = null, int? Page = null, PdfFailurePosition? Cell = null, bool RecoveryPending = false);
 public sealed record RetentionMarker(int SchemaVersion, int SchoolYear, int Half);

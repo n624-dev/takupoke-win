@@ -133,6 +133,40 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
         finally { CryptographicOperations.ZeroMemory(plain); }
         return true;
     }, token);
+    public Task SaveAcquisitionFailureAsync(SchoolLease lease, MaterialKind kind, MaterialAttempt attempt,
+        CancellationToken token = default) => WithConnectionAsync(lease, async connection =>
+    {
+        if (attempt.Failure is null) throw new InvalidDataException("原本の取得失敗記録ではありません。");
+        using var transaction = connection.BeginTransaction();
+        async Task<T?> Current<T>(string key)
+        {
+            using var read = connection.CreateCommand(); read.Transaction = transaction;
+            read.CommandText = "SELECT payload FROM entry WHERE key=$key"; read.Parameters.AddWithValue("$key", key);
+            if (await read.ExecuteScalarAsync(token) is not byte[] payload) return default;
+            var plain = _cipher!.Decrypt(payload, key);
+            try { return DataCodec.Decode<T>(plain); } finally { CryptographicOperations.ZeroMemory(plain); }
+        }
+        var job = await Current<RecoveryJob>("recovery." + kind);
+        var preview = await Current<RecoveryPreview>("recovery.preview." + kind);
+        var key = "acquisition." + kind; var bytes = DataCodec.Encode(attempt);
+        try
+        {
+            using var write = connection.CreateCommand(); write.Transaction = transaction;
+            write.CommandText = "INSERT INTO entry(key,payload) VALUES($key,$payload) ON CONFLICT(key) DO UPDATE SET payload=excluded.payload";
+            write.Parameters.AddWithValue("$key", key); write.Parameters.AddWithValue("$payload", _cipher!.Encrypt(bytes, key));
+            await write.ExecuteNonQueryAsync(token);
+            if (job?.ManualPlan is not null || preview?.Result.HumanCorrections is not null)
+            {
+                using var clear = connection.CreateCommand(); clear.Transaction = transaction;
+                clear.CommandText = "DELETE FROM entry WHERE key=$job OR key=$preview";
+                clear.Parameters.AddWithValue("$job", "recovery." + kind); clear.Parameters.AddWithValue("$preview", "recovery.preview." + kind);
+                await clear.ExecuteNonQueryAsync(token);
+            }
+            Verify(lease); await transaction.CommitAsync(token);
+        }
+        finally { CryptographicOperations.ZeroMemory(bytes); }
+        return true;
+    }, token);
     public Task SavePdfFailureAsync(SchoolLease lease, SourceRecord source, MaterialAttempt attempt, RecoveryJob? job,
         CancellationToken token = default) => WithConnectionAsync(lease, async connection =>
     {
@@ -257,6 +291,15 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
     public Task SaveRecoveryProgressAsync(SchoolLease lease, SourceRecord source, RecoveryJob job, RecoveryPreview? preview,
         CancellationToken token = default) => WithConnectionAsync(lease, async connection =>
     {
+        if (job.ManualPlan is { } manual)
+        {
+            var verified = await Task.Run(() => RecoveryManualAssistance.Prepare(manual.Document, token), token).ConfigureAwait(false);
+            if (job.State != RecoveryJobState.AwaitingManualCorrection || preview is not null || manual.Document.PdfHash != source.Digest ||
+                !RecoveryPolicy.MatchesPeriod(manual.Document, lease.Period) || verified is null ||
+                RecoveryValidator.Fingerprint(verified) != RecoveryValidator.Fingerprint(manual))
+                throw new InvalidDataException("補正待ちの原本・取得内容・対象を確認できません。");
+        }
+        else if (job.State == RecoveryJobState.AwaitingManualCorrection) throw new InvalidDataException("補正対象を確認できません。");
         if (preview is not null && !RecoveryPolicy.MatchesPeriod(preview.Document, lease.Period))
             throw new InvalidDataException("PDFの年度・学期が現在の保存期間と一致しません。");
         if (job.PdfHash != source.Digest || job.Kind != RecoveryPolicy.Kind(source.Kind) || preview is not null && (preview.SourceId != source.Id || preview.Lease != lease || preview.Document.PdfHash != source.Digest || !(await Task.Run(() => RecoveryValidator.Validate(preview.Document, preview.Result, token), token).ConfigureAwait(false)).CanAdopt))

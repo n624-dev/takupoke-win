@@ -199,6 +199,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
     private readonly InferenceSession _detector, _recognizer;
     private readonly string[] _dictionary;
     public IReadOnlyList<RecoveryBox> RecognizedBoxes { get; private set; } = [];
+    public IReadOnlyList<double> NativeConfidences { get; private set; } = [];
     // Opt-in local diagnostics only. No allocation/logging when unset; an
     // observer never supplies recognition values or bypasses safety guards.
     internal Action<OcrRecognitionObservation>? RecognitionObserver { get; set; }
@@ -218,8 +219,14 @@ public sealed class OnnxJapaneseOcr : IDisposable
         catch { recognizerSession?.Dispose(); _detector.Dispose(); throw; }
     }
     public IReadOnlyList<PdfGlyph> Read(RecoveryRaster image, CancellationToken token = default)
+        => ReadCore(image, token, retainUncertain: false);
+    // Full bounded capture for the app-owned last-resort route. Confidence is
+    // retained unchanged; this output is not authorized for automatic adoption.
+    public IReadOnlyList<PdfGlyph> ReadForManualCapture(RecoveryRaster image, CancellationToken token = default)
+        => ReadCore(image, token, retainUncertain: true);
+    private IReadOnlyList<PdfGlyph> ReadCore(RecoveryRaster image, CancellationToken token, bool retainUncertain)
     {
-        RecognizedBoxes = [];
+        RecognizedBoxes = []; NativeConfidences = [];
         if (!image.Valid) throw new InvalidDataException("OCR画像のサイズが不正です。");
         var ratio = Math.Min(1, 960d / Math.Max(image.Width, image.Height)); var dw = Math.Max(32, (int)Math.Round(image.Width * ratio / 32) * 32); var dh = Math.Max(32, (int)Math.Round(image.Height * ratio / 32) * 32);
         using var detection = _detector.Run([NamedOnnxValue.CreateFromTensor("x", OcrInputTransform.Detection(image, new(0, 0, image.Width, image.Height), dw, dh, token))]); token.ThrowIfCancellationRequested();
@@ -244,7 +251,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
         // Coverage and CTC geometry use this same crop, never a coverage-only
         // enlarged rectangle that could conceal omitted disconnected text.
         var recognitionBoxes = OcrCropCompleteness.Complete(image, boxes, token);
-        var output = new List<PdfGlyph>(); var order = 0; var line = 0;
+        var output = new List<PdfGlyph>(); var confidences = new List<double>(); var order = 0; var line = 0;
         foreach (var index in Enumerable.Range(0, recognitionBoxes.Count).OrderBy(i => recognitionBoxes[i].Y).ThenBy(i => recognitionBoxes[i].X))
         {
             var box = recognitionBoxes[index];
@@ -264,17 +271,17 @@ public sealed class OnnxJapaneseOcr : IDisposable
             // extra model call, alternate decoding or confidence adjustment.
             RecognitionObserver?.Invoke(new(boxes[index], box, input.ValidWidth, input.InputWidth, tCount,
                 Array.AsReadOnly(pieces.Select(p => new OcrRecognitionPiece(p.Text, p.Start, p.End, p.Confidence)).ToArray())));
-            if (pieces.Count == 0 || pieces.Any(p => p.Confidence < .8f)) throw new InvalidDataException("OCRで判読できない文字があります。空欄には置き換えません。");
+            if (pieces.Count == 0 || pieces.Any(p => p.Confidence < .8f && (!retainUncertain || string.IsNullOrWhiteSpace(p.Text)))) throw new InvalidDataException("OCRで判読できない文字があります。空欄には置き換えません。");
             // CTC time positions are retained as source geometry, never equally
             // spaced boxes inferred from a generated string.
             foreach (var piece in pieces)
             {
                 var source = input.SourceBox(piece.Start, piece.End, tCount);
-                if (!string.IsNullOrWhiteSpace(piece.Text)) output.Add(new(piece.Text, source.X, source.Y, source.Width, source.Height, line, order++));
+                if (!string.IsNullOrWhiteSpace(piece.Text)) { output.Add(new(piece.Text, source.X, source.Y, source.Width, source.Height, line, order++)); confidences.Add(piece.Confidence); }
             }
             line++;
         }
-        token.ThrowIfCancellationRequested(); RecognizedBoxes = recognitionBoxes; return output;
+        token.ThrowIfCancellationRequested(); RecognizedBoxes = recognitionBoxes; NativeConfidences = confidences.ToArray(); return output;
     }
     public void SmokeTest(CancellationToken token)
     {

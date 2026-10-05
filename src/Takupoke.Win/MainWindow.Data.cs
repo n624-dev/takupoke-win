@@ -51,8 +51,8 @@ public sealed partial class MainWindow
             attempts.Children.Add(OperationButton("最新を取得して再解析", () => _model.ReparseAsync(kind), "reparse-" + kind));
             if (kind != MaterialKind.Changes && snapshot?.ParseAttempt?.RecoveryPending == true && snapshot.ParseAttempt.SourceDigest == source.Digest)
             {
-                attempts.Children.Add(OperationButton("端末内でPDFを復旧", async () => { await _model.PrepareRecoveryAsync(kind); if (_model.Materials.GetValueOrDefault(kind)?.RecoveryPreview is not null) await OpenPage("recovery." + kind); }, "recover-pdf-" + kind));
-                if (snapshot.RecoveryPreview is not null) attempts.Children.Add(Button("復旧した内容を確認", () => OpenPage("recovery." + kind), "recovery-preview-" + kind));
+                attempts.Children.Add(OperationButton("端末内でPDFを復旧", async () => { await _model.PrepareRecoveryAsync(kind); if (_model.Materials.GetValueOrDefault(kind) is { } prepared && (prepared.RecoveryPreview is not null || prepared.ManualSession is not null)) await OpenPage("recovery." + kind); }, "recover-pdf-" + kind));
+                if (snapshot.RecoveryPreview is not null || snapshot.ManualSession is not null) attempts.Children.Add(Button(snapshot.ManualSession is not null ? "原本と照合して入力" : "復旧した内容を確認", () => OpenPage("recovery." + kind), "recovery-preview-" + kind));
                 attempts.Children.Add(Button("端末内モデルを管理", () => OpenPage("ai-models"), "recovery-models-" + kind));
             }
             if (kind != MaterialKind.Changes) attempts.Children.Add(Button("保存済みのPDFを見る", () => ShowPdf(kind, false), "view-pdf-" + kind));

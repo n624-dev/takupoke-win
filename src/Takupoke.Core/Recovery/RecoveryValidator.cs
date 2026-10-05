@@ -9,7 +9,7 @@ namespace Takupoke.Core.Recovery;
 public static class RecoveryValidator
 {
     public const int SchemaVersion = 2;
-    public const int Version = 6;
+    public const int Version = 7;
     public static string Fingerprint<T>(T value) => Convert.ToHexStringLower(SHA256.HashData(JsonSerializer.SerializeToUtf8Bytes(value)));
     private static string Text(string value) => Regex.Replace(value.Normalize(NormalizationForm.FormKC), @"\s+", "").Replace('~', '〜').Replace('～', '〜');
     public static IReadOnlyList<string> SpecialClasses { get; } = new[] { "1_1", "1_2", "1_3" }.Concat(Enumerable.Range(2, 4).SelectMany(y => new[] { "CN", "ES", "IT" }.Select(c => $"{y}_{c}"))).Concat(new[] { "AI_1", "AI_2" }).ToArray();
@@ -58,6 +58,14 @@ public static class RecoveryValidator
         if (doc.Sources.Any(s => { work.Step(); return s.Page < 1 || !s.Box.Valid || s.Text.Length > 4096; })) return new(["sourceLimit"]);
         var index = new RecoverySourceIndex(doc, work, spatial: true);
         var sources = index.ById;
+        var manual = RecoveryManualAssistance.Corrections(doc, result, work);
+        Check(result.HumanCorrections is null || manual is not null, "humanProof");
+        foreach (var source in doc.Sources)
+        {
+            work.Step();
+            Check(source.NativeConfidence is null || source.FromOcr && double.IsFinite(source.NativeConfidence.Value) && source.NativeConfidence.Value is >= 0 and <= 1, "nativeConfidence");
+            if (source.NativeConfidence is < .8) Check(manual is not null, "humanUnresolved");
+        }
         string Raw(IEnumerable<string> ids) => work.Concat(ids.Select(id => sources[id].Text));
         var cells = new Dictionary<string, RecoveredCell>(); foreach (var c in result.Cells) Check(cells.TryAdd(c.CellId, c), "duplicateCells");
         Check(cells.Count == doc.Cells.Count && doc.Cells.All(c => cells.ContainsKey(c.Id)), "resultCoverage");
@@ -341,6 +349,15 @@ public static class RecoveryValidator
                 foreach (var pair in new[] { ("subject", lesson.Subject), ("teacher", lesson.Teacher), ("room", lesson.Room) })
                 {
                     var field = pair.Item2;
+                    var fieldRole = pair.Item1 == "subject" ? RecoveryFieldRole.Subject : pair.Item1 == "teacher" ? RecoveryFieldRole.Teacher : RecoveryFieldRole.Room;
+                    if (manual?.GetValueOrDefault(new(cell.Id, lessonIndex, fieldRole)) is { } correction)
+                    {
+                        Check(field.State == RecoveryValueState.Present && field.Value == correction.CorrectedText &&
+                            field.Evidence.SequenceEqual(correction.OriginalParentIds), "humanField");
+                        // Keep checking original ownership/order/partition. Human text
+                        // is never rewritten into original OCR or provider evidence.
+                        if (field.Evidence.All(sources.ContainsKey)) field = field with { Value = Raw(field.Evidence) };
+                    }
                     Check(field.Value.Length <= 1024, "fieldLimit");
                     if (proposal)
                     {
@@ -367,7 +384,7 @@ public static class RecoveryValidator
         return new(errors);
     }
     public static IReadOnlyList<string> InputErrors(RecoveryDocument doc, CancellationToken token = default) => Validate(doc, new(doc.PdfHash, doc.Kind, doc.SchoolYear, doc.Term,
-        doc.Cells.Select(c => new RecoveredCell(c.Id, RecoveryValueState.Missing, [])).ToArray(), doc.StructureMetadata ?? new("rule", "rules", "1", "1", "1", SchemaVersion, Version, "preflight")), token).Errors.Where(e => e is not "cellState" and not "rolePartition").ToArray();
+        doc.Cells.Select(c => new RecoveredCell(c.Id, RecoveryValueState.Missing, [])).ToArray(), doc.StructureMetadata ?? new("rule", "rules", "1", "1", "1", SchemaVersion, Version, "preflight")), token).Errors.Where(e => e is not "cellState" and not "rolePartition" and not "humanUnresolved").ToArray();
     internal static IReadOnlyList<string> StructureInputErrors(RecoveryDocument doc, CancellationToken token = default)
     {
         try

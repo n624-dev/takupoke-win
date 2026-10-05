@@ -60,19 +60,19 @@ public sealed partial class MainWindow
         var browser = _browser; var window = _browserWindow; _browser = null; _browserWindow = null;
         browser?.Close(); window?.Close();
     }
-    private async Task ShowPdf(MaterialKind kind, bool accepted, RecoveryPreview? preview = null)
+    private async Task ShowPdf(MaterialKind kind, bool accepted, RecoveryPreview? preview = null, RecoveryManualSession? manual = null)
     {
         // Reserve before the first await. A second click must never own or clear
         // the first viewer's privacy references.
         if (_pdfOpening || _dialogOpen) return;
         _pdfOpening = true;
-        try { await ShowPdfCore(kind, accepted, preview); }
+        try { await ShowPdfCore(kind, accepted, preview, manual); }
         finally { _pdfOpening = false; }
     }
-    private async Task ShowPdfCore(MaterialKind kind, bool accepted, RecoveryPreview? preview)
+    private async Task ShowPdfCore(MaterialKind kind, bool accepted, RecoveryPreview? preview, RecoveryManualSession? manual)
     {
         var epoch = _model.PrivateEpoch;
-        var bytes = preview is null ? await _model.ReadPdfAsync(kind, accepted) : await _model.ReadRecoveryPdfAsync(kind, preview);
+        var bytes = manual is not null ? await _model.ReadManualPdfAsync(kind, manual) : preview is null ? await _model.ReadPdfAsync(kind, accepted) : await _model.ReadRecoveryPdfAsync(kind, preview);
         using var source = new InMemoryRandomAccessStream();
         try
         {

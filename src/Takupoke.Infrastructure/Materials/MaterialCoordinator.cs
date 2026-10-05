@@ -50,7 +50,7 @@ public sealed class MaterialCoordinator(SchoolDataStore store, FileSourceReader 
             catch (OperationCanceledException) { throw; }
             catch (SourceException failure)
             {
-                await store.WriteAsync(lease, "acquisition." + kind, new MaterialAttempt(_clock.GetUtcNow(), failure.Message, false), token);
+                await store.SaveAcquisitionFailureAsync(lease, kind, new MaterialAttempt(_clock.GetUtcNow(), failure.Message, false), token);
                 return new(kind, false, false, failure.Message);
             }
         }

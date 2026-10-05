@@ -12,7 +12,7 @@ using Takupoke.Win.Platform;
 
 namespace Takupoke.Win.ViewModels;
 
-public sealed record MaterialSnapshot(SourceRecord? Source, MaterialAnalysis? Analysis, MaterialAttempt? ParseAttempt, MaterialAttempt? AcquisitionAttempt, RecoveryJob? RecoveryJob = null, RecoveryPreview? RecoveryPreview = null, RecoveryPreviewDisplay? RecoveryDisplay = null)
+public sealed record MaterialSnapshot(SourceRecord? Source, MaterialAnalysis? Analysis, MaterialAttempt? ParseAttempt, MaterialAttempt? AcquisitionAttempt, RecoveryJob? RecoveryJob = null, RecoveryPreview? RecoveryPreview = null, RecoveryPreviewDisplay? RecoveryDisplay = null, RecoveryManualSession? ManualSession = null)
 {
     public string AnalysisStatus(MaterialKind kind)
     {
@@ -248,6 +248,18 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     {
         var result = await _recovery.PrepareAsync(kind, ParserYear, token); await ReloadAsync(token, notify: false); Status = result.Message;
     }, "端末内でPDFの内容を復旧しています。");
+    public Task CompleteManualRecoveryAsync(MaterialKind kind, RecoveryManualSession session, IReadOnlyDictionary<string,string> values) => RunAsync(async token =>
+    {
+        await _recovery.CompleteManualAsync(kind, session, values, token);
+        await ReloadAsync(token, notify: false);
+        Status = "入力内容を反映した資料全体を確認してから採用してください。";
+    }, "原本と入力内容を確認しています。");
+    public Task CancelManualRecoveryAsync(MaterialKind kind, RecoveryManualSession session) => RunAsync(async token =>
+    {
+        await _recovery.CancelManualAsync(kind, session, token);
+        await ReloadAsync(token, notify: false);
+        Status = "入力による補助を中止しました。前回の正常結果を保持しています。";
+    });
     public Task AdoptRecoveryAsync(MaterialKind kind, RecoveryPreview preview) => RunAsync(async token =>
     {
         await _recovery.AdoptAsync(kind, preview, token); await ReloadAsync(token); Status = "確認した復旧結果を保存しました。";
@@ -265,6 +277,26 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         FoundryModel = await _recoveryModels.Foundry.InstalledAsync(token); Status = "端末内AIモデルを準備しました。PDFの復旧を再度開始できます。";
     }, "端末内AIモデルを取得しています。学校資料は外部へ送信されません。");
     public Task DeleteFoundryModelAsync() => RunAsync(async token => { await _recoveryModels.Foundry.DeleteAsync(token); FoundryModel = null; Status = "端末内AIモデルを削除しました。"; });
+    public async Task<byte[]> ReadManualPdfAsync(MaterialKind kind, RecoveryManualSession session)
+    {
+        if (Locked) throw new OperationCanceledException();
+        // Refresh the selected path before presenting the PDF alongside retained crops.
+        try { await _materials.RefreshAsync(kind, session.Lease.Period.SchoolYear, _session.Token); }
+        finally { await ReloadAsync(_session.Token); } // Publish invalidation even when the viewer cannot open.
+        var lease = await _school.BeginAsync(_session.Token);
+        if (lease != session.Lease) throw new OperationCanceledException();
+        var acquisition = await _school.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, _session.Token);
+        var source = await _school.ReadAsync<SourceRecord>(lease, "selection." + kind, _session.Token);
+        var job = await _school.ReadAsync<RecoveryJob>(lease, "recovery." + kind, _session.Token);
+        if (acquisition?.Failure is not null || source?.Id != session.SourceId || source.Digest != session.Plan.Document.PdfHash ||
+            job?.State != RecoveryJobState.AwaitingManualCorrection || job.CreatedAt != session.CreatedAt || job.ManualPlan is null ||
+            RecoveryValidator.Fingerprint(job.ManualPlan) != RecoveryValidator.Fingerprint(session.Plan))
+            throw new OperationCanceledException("確認中のPDFが更新されました。原本を読み直してください。");
+        var bytes = await _school.ReadOriginalAsync(lease, session.SourceId, _session.Token);
+        if (NotificationDiff.Digest(bytes) != session.Plan.Document.PdfHash)
+        { System.Security.Cryptography.CryptographicOperations.ZeroMemory(bytes); throw new InvalidDataException("原本のハッシュを確認できません。"); }
+        return bytes;
+    }
     public async Task<byte[]> ReadRecoveryPdfAsync(MaterialKind kind, RecoveryPreview preview)
     {
         if (Locked) throw new OperationCanceledException();
@@ -366,6 +398,19 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             await _school.ReadAsync<SourceRecord>(lease, "selection." + kind, token), await _school.ReadAsync<MaterialAnalysis>(lease, "analysis." + kind, token),
             await _school.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token), await _school.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, token),
             await _school.ReadAsync<RecoveryJob>(lease, "recovery." + kind, token), await _school.ReadAsync<RecoveryPreview>(lease, "recovery.preview." + kind, token));
+        foreach (var kind in snapshots.Keys.ToArray())
+        {
+            var snapshot = snapshots[kind];
+            if (snapshot.AcquisitionAttempt?.Failure is null && snapshot.Source is { } source &&
+                snapshot.RecoveryJob is { State: RecoveryJobState.AwaitingManualCorrection, ManualPlan: { } plan } job &&
+                job.PdfHash == source.Digest && plan.Document.PdfHash == source.Digest &&
+                job.Kind == RecoveryPolicy.Kind(kind))
+            {
+                var verified = await Task.Run(() => RecoveryManualAssistance.Prepare(plan.Document, token), token);
+                if (verified is not null && RecoveryValidator.Fingerprint(verified) == RecoveryValidator.Fingerprint(plan))
+                    snapshots[kind] = snapshot with { ManualSession = new(source.Id, lease, plan, job.CreatedAt) };
+            }
+        }
         foreach (var kind in snapshots.Keys.ToArray())
             if (snapshots[kind].Analysis is { Recovery: not null } analysis &&
                 !await Task.Run(() => RecoveryAnalysisConverter.MayDisplay(analysis, token), token))

@@ -7,7 +7,8 @@ using Takupoke.Infrastructure.Storage;
 
 namespace Takupoke.Infrastructure.Recovery;
 
-public sealed record RecoveryPreparation(RecoveryJobState State, RecoveryPreview? Preview, string Message, bool ReusedAcceptance = false);
+public sealed record RecoveryPreparation(RecoveryJobState State, RecoveryPreview? Preview, string Message, bool ReusedAcceptance = false)
+{ public RecoveryManualSession? ManualSession { get; init; } }
 public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinator materials,
     Func<byte[], MaterialKind, string, RecoveryReadCapture, CancellationToken, Task<RecoveryDocument>> buildDocument,
     Func<CancellationToken, Task<IReadOnlyList<ILocalRecoveryProvider>>> providers, TimeProvider? clock = null)
@@ -43,7 +44,7 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
             var pendingJob = await store.ReadAsync<RecoveryJob>(lease, "recovery." + kind, token);
             if (pendingJob is null || pendingJob.PdfHash != source.Digest || pendingJob.Kind != RecoveryPolicy.Kind(kind))
                 throw new OperationCanceledException("復旧待ちの資料が更新されました。");
-            var job = pendingJob with { State = RecoveryJobState.Preparing, ResultHash = null };
+            var job = pendingJob with { State = RecoveryJobState.Preparing, ResultHash = null, ManualPlan = null };
             await store.SaveRecoveryProgressAsync(lease, source, job, null, token);
             var bytes = await store.ReadOriginalAsync(lease, source.Id, token);
             try
@@ -67,6 +68,16 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                     }
                 }
                 finally { foreach (var provider in localProviders.OfType<IAsyncDisposable>()) await provider.DisposeAsync(); }
+                if (run.Result is null && document.Sources.Any(s => s.NativeConfidence is < .8))
+                {
+                    var manual = await Task.Run(() => RecoveryManualAssistance.Prepare(document, token), token).ConfigureAwait(false);
+                    if (manual is not null)
+                    {
+                        var session = new RecoveryManualSession(source.Id, lease, manual, job.CreatedAt);
+                        await store.SaveRecoveryProgressAsync(lease, source, job with { State = RecoveryJobState.AwaitingManualCorrection, ManualPlan = manual }, null, token);
+                        return new(RecoveryJobState.AwaitingManualCorrection, null, $"原本と読み取り文字を確認して、資料全体の未確定{manual.Targets.Count}項目を補正できます。補正後に全体を確認してから採用してください。") { ManualSession = session };
+                    }
+                }
                 var preview = run.Result is not null ? new RecoveryPreview(source.Id, lease, document, run.Result, _clock.GetUtcNow()) : null;
                 await store.SaveRecoveryProgressAsync(lease, source, job with { State = run.State, ResultHash = run.Result is null ? null : RecoveryValidator.Fingerprint(run.Result) }, preview, token);
                 return new(run.State, preview, run.State switch {
@@ -81,6 +92,51 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                 return new(RecoveryJobState.Failed, null, "復旧できませんでした。" + failure.Message + " 前回の正常結果を保持しています。");
             }
             finally { CryptographicOperations.ZeroMemory(bytes); }
+        }
+        finally { _gate.Release(); }
+    }
+    public async Task<RecoveryPreview> CompleteManualAsync(MaterialKind kind, RecoveryManualSession session,
+        IReadOnlyDictionary<string, string> values, CancellationToken token = default)
+    {
+        await _gate.WaitAsync(token);
+        try
+        {
+            if (await store.BeginAsync(token) != session.Lease) throw new OperationCanceledException("保存期間または利用状態が変わりました。");
+            await materials.RefreshAsync(kind, session.Lease.Period.SchoolYear, token);
+            if (await store.BeginAsync(token) != session.Lease) throw new OperationCanceledException("保存期間または利用状態が変わりました。");
+            var acquisition = await store.ReadAsync<MaterialAttempt>(session.Lease, "acquisition." + kind, token);
+            if (acquisition?.Failure is not null) throw new InvalidDataException(acquisition.Failure);
+            var source = await store.ReadAsync<SourceRecord>(session.Lease, "selection." + kind, token);
+            var job = await store.ReadAsync<RecoveryJob>(session.Lease, "recovery." + kind, token);
+            if (source?.Id != session.SourceId || source.Digest != session.Plan.Document.PdfHash ||
+                job?.State != RecoveryJobState.AwaitingManualCorrection || job.CreatedAt != session.CreatedAt || job.ManualPlan is null ||
+                RecoveryValidator.Fingerprint(job.ManualPlan) != RecoveryValidator.Fingerprint(session.Plan))
+                throw new OperationCanceledException("確認中にPDFまたは補正対象が更新されました。現在の資料を読み直してください。");
+            var plan = job.ManualPlan;
+            if (values.Count != plan.Targets.Count || !values.Keys.ToHashSet().SetEquals(plan.Targets.Select(t => t.Target.Key)))
+                throw new InvalidRecoveryOutputException();
+            var now = _clock.GetUtcNow();
+            var corrections = plan.Targets.Select(t => new RecoveryHumanCorrection(t.Target, source.Digest,
+                RecoveryValidator.Fingerprint(plan.Document.Capture), plan.DocumentSnapshot, t.OriginalParentIds, t.Page, t.Crop,
+                values[t.Target.Key], false, now)).ToArray();
+            var result = await Task.Run(() => RecoveryManualAssistance.Complete(plan, corrections, "windows:" + Environment.OSVersion.Version.Major, token), token).ConfigureAwait(false);
+            var preview = new RecoveryPreview(source.Id, session.Lease, plan.Document, result, now);
+            await store.SaveRecoveryProgressAsync(session.Lease, source, job with { State = RecoveryJobState.AwaitingConfirmation, ManualPlan = null, ResultHash = RecoveryValidator.Fingerprint(result) }, preview, token);
+            return preview;
+        }
+        finally { _gate.Release(); }
+    }
+    public async Task CancelManualAsync(MaterialKind kind, RecoveryManualSession session, CancellationToken token = default)
+    {
+        await _gate.WaitAsync(token);
+        try
+        {
+            if (await store.BeginAsync(token) != session.Lease) throw new OperationCanceledException();
+            var source = await store.ReadAsync<SourceRecord>(session.Lease, "selection." + kind, token);
+            var job = await store.ReadAsync<RecoveryJob>(session.Lease, "recovery." + kind, token);
+            if (source?.Id != session.SourceId || source.Digest != session.Plan.Document.PdfHash || job?.CreatedAt != session.CreatedAt ||
+                job.ManualPlan is null || RecoveryValidator.Fingerprint(job.ManualPlan) != RecoveryValidator.Fingerprint(session.Plan)) throw new OperationCanceledException();
+            await store.SaveRecoveryProgressAsync(session.Lease, source, job with { State = RecoveryJobState.Failed, ManualPlan = null }, null, token);
         }
         finally { _gate.Release(); }
     }

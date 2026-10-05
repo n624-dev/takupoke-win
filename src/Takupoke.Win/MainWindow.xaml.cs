@@ -43,7 +43,7 @@ public sealed partial class MainWindow : Window
         _themeTimer.Start();
         RootGrid.ActualThemeChanged += (_, _) => { ApplyWindowChrome(); if (_ready) Render(); };
         _uiSettings.TextScaleFactorChanged += (_, _) => DispatcherQueue.TryEnqueue(() => { if (_ready) Render(); });
-        _model.SnapshotChanged += () => { Render(); OfferInitialSetup(); };
+        _model.SnapshotChanged += () => { if (KeepManualFormForSnapshot()) UpdateStatus(); else Render(); OfferInitialSetup(); };
         _model.ClockChanged += () =>
         {
             if (_model.OfflineTest)
@@ -135,6 +135,7 @@ public sealed partial class MainWindow : Window
         PageHost.IsEnabled = !_model.Locked;
         foreach (var control in _operationControls) control.IsEnabled = !_model.Busy && _model.PreferencesReady && !_model.Locked;
         foreach (var control in _preferenceControls) control.IsEnabled = _model.PreferencesReady && !_model.Locked;
+        UpdateManualSubmitStatus();
     }
     private void Render()
     {

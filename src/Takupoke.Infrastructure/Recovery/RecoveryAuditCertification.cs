@@ -3,7 +3,7 @@ using Takupoke.Infrastructure.Storage;
 
 namespace Takupoke.Infrastructure.Recovery;
 
-/// <summary>Revalidates an already confirmed v4/v5 audit without altering source content.</summary>
+/// <summary>Revalidates an already confirmed v4/v5/v6 audit without altering source content.</summary>
 internal static class RecoveryAuditCertification
 {
     internal static RecoveryAudit? Reusable(RecoveryAudit original, CancellationToken token = default)
@@ -22,7 +22,7 @@ internal static class RecoveryAuditCertification
         if (!RecoveryValidator.CanReuse(original.Acceptance, original.Document, original.Result, token)) return false;
         if (original.PreviousAcceptance is null) return true;
         var priorVersion = original.PreviousAcceptance.Metadata.ValidatorVersion;
-        if (priorVersion is not (4 or 5)) return false;
+        if (priorVersion is not (4 or 5 or 6)) return false;
         var metadata = original.Result.Metadata with { ValidatorVersion = priorVersion };
         var structure = original.Document.StructureMetadata;
         var old = new RecoveryAudit(original.Document with {
@@ -43,12 +43,13 @@ internal static class RecoveryAuditCertification
         var firstConfirmation = old;
         if (original.PreviousAcceptance is { } previous)
         {
-            // The only historical chain is the exact V4→V5 revalidation.
-            // V5 added no source proof and retained the original V4 consent.
-            if (metadata.ValidatorVersion != 5 || previous.Metadata?.ValidatorVersion != 4 || previous.AcceptedAt != old.AcceptedAt) return null;
+            // V5/V6 metadata recertification retained the earliest explicit
+            // confirmation. Reconstruct and verify it instead of inventing consent.
+            var previousVersion = previous.Metadata?.ValidatorVersion;
+            if (!(metadata.ValidatorVersion == 5 && previousVersion == 4 || metadata.ValidatorVersion == 6 && previousVersion is 4 or 5) || previous.AcceptedAt != old.AcceptedAt) return null;
             var predecessor = new RecoveryAudit(original.Document with {
-                StructureMetadata = structure is null ? null : structure with { ValidatorVersion = 4 }
-            }, original.Result with { Metadata = metadata with { ValidatorVersion = 4 } }, previous);
+                StructureMetadata = structure is null ? null : structure with { ValidatorVersion = previousVersion!.Value }
+            }, original.Result with { Metadata = metadata with { ValidatorVersion = previousVersion!.Value } }, previous);
             if (!HistoricalHashes(predecessor, token)) return null;
             firstConfirmation = previous;
         }
@@ -68,11 +69,15 @@ internal static class RecoveryAuditCertification
         token.ThrowIfCancellationRequested();
         var metadata = original.Result.Metadata; var acceptance = original.Acceptance; var structure = original.Document.StructureMetadata;
         if (original.Document.Cells.Count > 20000 || original.Document.Sources.Count > 100000) return false;
-        if (RecoveryValidator.Version != 6 || metadata.ValidatorVersion is not (4 or 5) ||
+        if (RecoveryValidator.Version != 7 || metadata.ValidatorVersion is not (4 or 5 or 6) ||
             metadata.RecoverySchemaVersion != RecoveryValidator.SchemaVersion || metadata.RecoveryVersion != "2" ||
             acceptance.PdfHash != original.Document.PdfHash || acceptance.PdfHash != original.Result.PdfHash || acceptance.Metadata != metadata ||
             structure is not null && (structure.ValidatorVersion != metadata.ValidatorVersion || metadata.ValidatorVersion == 4 && structure != metadata)) return false;
-        foreach (var cell in original.Document.Cells) { token.ThrowIfCancellationRequested(); if (cell.ParallelSeparators is not null) return false; }
+        // These proofs did not exist in V6 or earlier and cannot be injected
+        // while rehashing old metadata. V6's existing separator proof is retained.
+        if (original.Document.Capture is not null || original.Result.HumanCorrections is not null) return false;
+        foreach (var source in original.Document.Sources) { token.ThrowIfCancellationRequested(); if (source.NativeConfidence is not null) return false; }
+        foreach (var cell in original.Document.Cells) { token.ThrowIfCancellationRequested(); if (metadata.ValidatorVersion < 6 && cell.ParallelSeparators is not null) return false; }
         if (acceptance.ResultHash != RecoveryValidator.Fingerprint(original.Result)) return false;
         token.ThrowIfCancellationRequested();
         if (acceptance.ScopeHash != RecoveryValidator.Fingerprint(original.Document)) return false;
