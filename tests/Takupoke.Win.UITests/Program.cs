@@ -255,6 +255,12 @@ internal static partial class Program
             // Failure logs contain synthetic geometry only. Screen capture is
             // an explicit, isolated --capture mode with no production data.
             Console.Error.WriteLine("Windows UI check failed: " + error.GetType().Name + " — " + error.Message + " (step: " + _lastStep + ", passed: " + _checks + ")");
+            Console.Error.WriteLine("Windows UI exception stack: " + error.StackTrace);
+            if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
+            {
+                var exited = _process?.HasExited;
+                Console.Error.WriteLine($"Synthetic app process: hasExited={exited}, exitCode={(exited == true ? (int?)_process!.ExitCode : null)}");
+            }
             if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
                 Console.Error.WriteLine("Synthetic native window: " + _window?.Current.BoundingRectangle);
             if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
@@ -477,11 +483,35 @@ internal static partial class Program
     }
     private static void ShowPickerSummary()
     {
-        var page = WaitElement("page-scroller");
-        if (!page.TryGetCurrentPattern(ScrollPattern.Pattern, out var pattern) || !((ScrollPattern)pattern).Current.VerticallyScrollable) return;
-        for (var step = 0; step <= 10 && !Visible("material-summary-Exam"); step++)
+        var summaryVisible = false;
+        var scrollable = false;
+        Wait(() =>
         {
-            ((ScrollPattern)pattern).SetScrollPercent(ScrollPattern.NoScroll, step * 10);
+            if (_process is null || _process.HasExited) throw new InvalidOperationException("The app exited before showing the picker summary.");
+            summaryVisible = Visible("material-summary-Exam");
+            if (summaryVisible) return true;
+            var page = Find("page-scroller");
+            if (page is null || !page.TryGetCurrentPattern(ScrollPattern.Pattern, out var pattern)) return false;
+            scrollable = ((ScrollPattern)pattern).Current.VerticallyScrollable;
+            return true;
+        }, "Inspect picker summary visibility and page scrolling");
+        if (summaryVisible || !scrollable) return;
+        for (var step = 0; step <= 10; step++)
+        {
+            Wait(() =>
+            {
+                if (_process is null || _process.HasExited) throw new InvalidOperationException("The app exited while showing the picker summary.");
+                summaryVisible = Visible("material-summary-Exam");
+                if (summaryVisible) return true;
+                // Parsing can rebuild the page between scroll steps. Reacquire
+                // both providers inside Wait so only a stale operation retries.
+                var page = Find("page-scroller");
+                if (page is null || !page.TryGetCurrentPattern(ScrollPattern.Pattern, out var pattern)) return false;
+                var scrolling = (ScrollPattern)pattern;
+                scrolling.SetScrollPercent(ScrollPattern.NoScroll, step * 10);
+                return true;
+            }, "Scroll the current page to the picker summary at " + step * 10 + "%");
+            if (summaryVisible) return;
             System.Threading.Thread.Sleep(75);
         }
     }
