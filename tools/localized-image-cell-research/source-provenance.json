@@ -48,13 +48,6 @@
       "byteIdenticalToRetainedSource": true
     },
     {
-      "path": "contract.py",
-      "sourceCommit": "a3666ab690b5a522964335b433cd692329481a07",
-      "sourcePath": "tools/local-ai-single-field-research/contract.py",
-      "sha256": "7a355b81268e9de82d844b90697a443b232e2f90430a507928b6704c9d2d9ec8",
-      "byteIdenticalToRetainedSource": true
-    },
-    {
       "path": "source_contract.py",
       "sourceCommit": "a3666ab690b5a522964335b433cd692329481a07",
       "sourcePath": "tools/local-ai-single-field-research/source_contract.py",
@@ -69,13 +62,6 @@
       "byteIdenticalToRetainedSource": true
     },
     {
-      "path": "prompt.txt",
-      "sourceCommit": "a3666ab690b5a522964335b433cd692329481a07",
-      "sourcePath": "tools/local-ai-single-field-research/prompt.txt",
-      "sha256": "eafc546d3241ed7b09ece4444055620f98f9dadb71822eec228177369828dd07",
-      "byteIdenticalToRetainedSource": true
-    },
-    {
       "path": "runtime-identity.json",
       "sourceCommit": "a3666ab690b5a522964335b433cd692329481a07",
       "sourcePath": "tools/local-ai-single-field-research/runtime-identity.json",
@@ -83,5 +69,37 @@
       "byteIdenticalToRetainedSource": true
     }
   ],
-  "hostedControllerParent": "tools/local-ai-single-field-research/bootstrap_ci.py; adapted two models/eight calls to one model/two image stages"
+  "hostedControllerParent": "tools/local-ai-single-field-research/bootstrap_ci.py; adapted two models/eight calls to one model/two image stages",
+  "sharedRowProtocolCopies": [
+    {
+      "path": "contract.py",
+      "sourcePath": "/workspace/recovery-research/windows-local-ai-row-choice-preparation-20261006/tools/local-ai-single-field-research/contract.py",
+      "sha256": "59d2d4e1e45278cd993d5c812c3f87900bd6e445be1fa9a3e3abf21355eec3c9",
+      "byteIdenticalToSharedRowSource": true,
+      "modelRoleOracleReads": 0
+    },
+    {
+      "path": "acquisition.py",
+      "sourcePath": "/workspace/recovery-research/windows-local-ai-row-choice-preparation-20261006/tools/local-ai-single-field-research/acquisition.py",
+      "sha256": "cb34f8aa09a70dfab880e088c43f83a6f85811d20c13374993aabdf80a669804",
+      "byteIdenticalToSharedRowSource": true,
+      "modelRoleOracleReads": 0
+    },
+    {
+      "path": "prompt.txt",
+      "sourcePath": "/workspace/recovery-research/windows-local-ai-row-choice-preparation-20261006/tools/local-ai-single-field-research/prompt.txt",
+      "sha256": "cc206f4edaed79615d2f7c8edccd3e41b4b15f15ac6a8bb738ecedc3ca0546a9",
+      "byteIdenticalToSharedRowSource": true,
+      "modelRoleOracleReads": 0
+    },
+    {
+      "path": "source_contract.py",
+      "sourcePath": "/workspace/recovery-research/windows-local-ai-row-choice-preparation-20261006/tools/local-ai-single-field-research/source_contract.py",
+      "sha256": "44e6708a97b7c1b903d3e176c07637052bf16268d496895ee7ef07e131185c06",
+      "byteIdenticalToSharedRowSource": true,
+      "modelRoleOracleReads": 0
+    }
+  ],
+  "sharedRowProtocolMeaning": "Groups supplied native chunkID/retained source order only; candidate IDs are not roles; chosen row expands unchanged original IDs; estimated containment not ink certificate.",
+  "sourcePeerWhitespaceDelta": "Reject whitespace-only blind lines by validation; preserve every character of accepted lines; unusable image never opens OCR."
 }

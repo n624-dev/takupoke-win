@@ -11,6 +11,7 @@
   "qualifiedGenAIModels": [],
   "workflowSHA256": "c916477311505e871a30d6bbfdc56e54ca90fddc27c00d012bc85e75a3c5d782",
   "workerPinPaths": [
+    "acquisition.py",
     "comparison.py",
     "contract.py",
     "crops/t000466d2ba598e3e.png",
@@ -29,8 +30,13 @@
   "pins": [
     {
       "path": "README.md",
-      "bytes": 4986,
-      "sha256": "f658e770eb08675d3301a95f054e1be9d873e77c749244d9aadae2eee807fe19"
+      "bytes": 5292,
+      "sha256": "0931b81ad8099959122cfde234680e7e3cd541a015b1e4a739a52f438a68d2be"
+    },
+    {
+      "path": "acquisition.py",
+      "bytes": 2107,
+      "sha256": "cb34f8aa09a70dfab880e088c43f83a6f85811d20c13374993aabdf80a669804"
     },
     {
       "path": "baseline-provenance.json",
@@ -54,8 +60,8 @@
     },
     {
       "path": "contract.py",
-      "bytes": 9716,
-      "sha256": "7a355b81268e9de82d844b90697a443b232e2f90430a507928b6704c9d2d9ec8"
+      "bytes": 8466,
+      "sha256": "59d2d4e1e45278cd993d5c812c3f87900bd6e445be1fa9a3e3abf21355eec3c9"
     },
     {
       "path": "crops/t000466d2ba598e3e.png",
@@ -79,8 +85,8 @@
     },
     {
       "path": "image_protocol.py",
-      "bytes": 4356,
-      "sha256": "2dd242dda0f2b6acabc8546723257e71a64834afc2d877b3cbb946d859f2a080"
+      "bytes": 4594,
+      "sha256": "9496a38a7480c199493a93d655f187c2c99c7a3666680a1cc2470ede3a00e63f"
     },
     {
       "path": "inputs.json",
@@ -104,13 +110,13 @@
     },
     {
       "path": "prepare.py",
-      "bytes": 1824,
-      "sha256": "59f927460e63eec28884e0c5e9710843a9c096d7daa187f639f1333322e2d3fc"
+      "bytes": 1841,
+      "sha256": "0644ed6acb016686a8884a13a86aec232457b19e7f386fb5cacd24a4a4785e3e"
     },
     {
       "path": "prompt.txt",
-      "bytes": 1762,
-      "sha256": "eafc546d3241ed7b09ece4444055620f98f9dadb71822eec228177369828dd07"
+      "bytes": 674,
+      "sha256": "cc206f4edaed79615d2f7c8edccd3e41b4b15f15ac6a8bb738ecedc3ca0546a9"
     },
     {
       "path": "protocol.py",
@@ -124,8 +130,8 @@
     },
     {
       "path": "report_protocol.py",
-      "bytes": 2602,
-      "sha256": "e194f6592695ff03810d67c35db36d11401d90cd00c303b107ca10e0b8193604"
+      "bytes": 2755,
+      "sha256": "451e055a7f45a679048f5faf54a88409e6a3923349d566fd91f43ce96ac56664"
     },
     {
       "path": "retained-text-baseline.jsonl",
@@ -144,8 +150,8 @@
     },
     {
       "path": "source-provenance.json",
-      "bytes": 3969,
-      "sha256": "92f3a72522343054c3e961cc3f54d6c7663cd410dc790b593ffd0eeb0108c8a7"
+      "bytes": 5191,
+      "sha256": "87b21379248189b1c349209f69f7e468182d64c102c87c7623d44ec11314b5fd"
     },
     {
       "path": "source_contract.py",
@@ -154,8 +160,8 @@
     },
     {
       "path": "test_image_research.py",
-      "bytes": 7156,
-      "sha256": "b986671a604b7c03257ae56e55ce6e5cb81bdaf7c05f37a5c8c7cb46593f1d54"
+      "bytes": 8836,
+      "sha256": "d97a4ae4b3d0bf0051682cadc041241117e1f4d29d02debaa76d90ea916f1d25"
     },
     {
       "path": "worker.py",

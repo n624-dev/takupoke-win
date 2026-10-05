@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parent
 def main():
     paths=sorted(p for p in ROOT.rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.name!='packet-freeze.json')
     pins=[{'path':str(p.relative_to(ROOT)),'bytes':p.stat().st_size,'sha256':digest(p)} for p in paths]
-    worker_names={'worker.py','guard.py','network_guard.py','comparison.py','contract.py','source_contract.py','native_grammar.py','protocol.py','image_protocol.py','prompt.txt','runtime-identity.json','recipe.json','image-input.json','crops/t000466d2ba598e3e.png'}
+    worker_names={'worker.py','acquisition.py','guard.py','network_guard.py','comparison.py','contract.py','source_contract.py','native_grammar.py','protocol.py','image_protocol.py','prompt.txt','runtime-identity.json','recipe.json','image-input.json','crops/t000466d2ba598e3e.png'}
     recipe=json.loads((ROOT/'recipe.json').read_text())
     freeze={'version':1,'status':'SOURCE_PREPARED_REQUIRES_EXACT_ROOT_REVIEW','sourceBase':'a3666ab690b5a522964335b433cd692329481a07',
             'derivedFromSourcePacketSHA256':digest(ROOT.parents[0]/'local-ai-single-field-research/packet-freeze.json'),

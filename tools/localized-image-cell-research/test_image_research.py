@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 from comparison import validate_recipe
-from contract import decode
+from contract import decode, candidate_map
 from guard import verify_packet
 from hosted_support import verify_source
 from image_protocol import (BLIND_INSTRUCTION,BLIND_SCHEMA,decode_blind,validate_image,comparison_spec,execute_image_first)
@@ -38,7 +38,7 @@ class ImageProtocolTests(unittest.TestCase):
         self.assertEqual(decode_blind('{"state":"TRANSCRIBED","lines":["甲  Ω"]}')['lines'],['甲  Ω'])
         for state in ('UNKNOWN','NONE'):self.assertEqual(decode_blind(json.dumps({'state':state,'lines':[]}))['state'],state)
         for bad in ('{"state":"TRANSCRIBED","lines":[]}', '{"state":"UNKNOWN","lines":["甲"]}',
-                    '{"state":"UNKNOWN","state":"NONE","lines":[]}', '{"state":"UNKNOWN","lines":[],"ids":["p1s70"]}'):
+                    '{"state":"UNKNOWN","state":"NONE","lines":[]}', '{"state":"UNKNOWN","lines":[],"ids":["p1s70"]}', '{"state":"TRANSCRIBED","lines":["　"]}', '{"state":"TRANSCRIBED","lines":[" "]}'):
             with self.subTest(raw=bad),self.assertRaises(ValueError):decode_blind(bad)
 
     def test_ocr_open_order_bound_to_persisted_blind(self):
@@ -58,6 +58,17 @@ class ImageProtocolTests(unittest.TestCase):
             self.assertEqual(opened,[]);self.assertEqual(result['calls'],1)
             self.assertEqual(result['comparison'],'UNASSESSED_NO_USABLE_IMAGE')
 
+    def test_whitespace_transcription_is_rejected_and_never_opens_ocr(self):
+        opened=[]
+        def blind():
+            try:candidate=decode_blind('{"state":"TRANSCRIBED","lines":["　 "]}')
+            except ValueError:candidate=None
+            return {'candidate':candidate,'disposition':'SCHEMA_REJECTED'}
+        result=execute_image_first(blind,lambda row:'b'*64,
+            lambda:opened.append('ocr'),lambda *a:opened.append('compare'))
+        self.assertEqual(opened,[]);self.assertEqual(result['calls'],1)
+        self.assertEqual(result['comparison'],'UNASSESSED_NO_USABLE_IMAGE')
+
     def test_freeze_failure_cannot_open_ocr(self):
         opened=[]
         def failure(row):raise OSError('cannot persist')
@@ -67,12 +78,24 @@ class ImageProtocolTests(unittest.TestCase):
 
     def test_image_cannot_create_ids_or_empty_proof(self):
         spec=comparison_spec(self.task,{'state':'TRANSCRIBED','lines':['架空別転記Ω']})
-        with self.assertRaises(ValueError):decode('{"state":"PRESENT","ids":["IMAGE-ID"]}',self.task,spec['binding'])
-        with self.assertRaises(ValueError):decode('{"state":"EMPTY","ids":[]}',self.task,spec['binding'])
-        sid=spec['binding']['selectableFocalIds'][0]
-        value=decode(json.dumps({'state':'PRESENT','ids':[sid]}),self.task,spec['binding'])
+        with self.assertRaises(ValueError):decode('{"state":"PRESENT","candidateID":"IMAGE-ID"}',self.task,spec['binding'])
+        with self.assertRaises(ValueError):decode('{"state":"EMPTY","candidateID":"NONE"}',self.task,spec['binding'])
+        with self.assertRaises(ValueError):decode('{"state":"UNKNOWN","candidateID":"r0"}',self.task,spec['binding'])
+        value=decode('{"state":"PRESENT","candidateID":"r0"}',self.task,spec['binding'])
+        self.assertEqual(value['ids'],candidate_map(self.task)[0]['originalIDs'])
+        self.assertEqual(value['value'],candidate_map(self.task)[0]['text'])
         self.assertNotEqual(value['value'],'架空別転記Ω');self.assertFalse(value['productionAdoption'])
         self.assertEqual(value['assignmentCertificate'],'ABSENT')
+
+    def test_shared_short_rows_have_no_character_ids_or_floats(self):
+        spec=comparison_spec(self.task,{'state':'TRANSCRIBED','lines':['架空Ω']})
+        self.assertLess(len(spec['prompt'].encode()),2400)
+        self.assertEqual([c['candidateID'] for c in candidate_map(self.task)],['r0','r1','r2'])
+        for source in self.task['sources']:self.assertNotIn(source['id'],spec['prompt'])
+        self.assertNotIn('340.953',spec['prompt'])
+        self.assertEqual(spec['schema']['properties']['candidateID']['enum'],['r0','r1','r2','NONE'])
+        unknown=decode('{"state":"UNKNOWN","candidateID":"NONE"}',self.task,spec['binding'])
+        self.assertEqual(unknown['ids'],[]);self.assertFalse(unknown['productionAdoption'])
 
     def test_resources_fail_before_any_launch(self):
         launched=[]

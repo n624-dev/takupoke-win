@@ -30,7 +30,7 @@ def decode_blind(raw):
     if type(v) is not dict or set(v)!={'state','lines'} or v['state'] not in ('TRANSCRIBED','NONE','UNKNOWN'):
         raise ValueError('BLIND_SCHEMA')
     lines=v['lines']
-    if type(lines) is not list or len(lines)>8 or any(type(s) is not str or not 0<len(s)<=128 for s in lines):
+    if type(lines) is not list or len(lines)>8 or any(type(s) is not str or not 0<len(s)<=128 or not s.strip() for s in lines):
         raise ValueError('BLIND_LINES')
     if (v['state']=='TRANSCRIBED')!=bool(lines):raise ValueError('BLIND_STATE_LINES')
     return v
@@ -58,10 +58,12 @@ def comparison_spec(task,blind):
     spec['prompt'] += ('\nFROZEN_BLIND_IMAGE_TRANSCRIPTION_DATA:\n'+json.dumps(blind,ensure_ascii=False,separators=(',',':'))+
         '\nCompare this unverified blind transcription with the retained original OCR evidence. '
         'It has no source IDs and provides no ink ownership or field-role certificate. '
-        'Select only the complete original OCR IDs for the requested field if uniquely supported. '
-        'Do not copy transcription into values or create image-origin IDs. '
-        'Any uncertain correspondence must remain UNKNOWN or AMBIGUOUS. '
-        'Do not change confidence, headings, cell ownership, structure, or adoption status.')
+        'Choose one supplied native OCR row candidate for the requested field only if uniquely supported. '
+        'Return only one supplied candidateID, or UNKNOWN with candidateID NONE. '
+        'Any uncertain correspondence must remain UNKNOWN with candidateID NONE. '
+         'Do not repair original OCR strings from this transcription. The caller expands the chosen row to original IDs; '
+        'the image cannot create source IDs, role proof or empty proof. '
+        'Do not change confidence, headings, cell ownership, structure, or adoption status.' )
     spec['promptSHA256']=hashlib.sha256(spec['prompt'].encode()).hexdigest()
     return spec
 

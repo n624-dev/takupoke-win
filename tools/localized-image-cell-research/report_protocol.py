@@ -25,6 +25,7 @@ def report(root):
        'originalIDOCRComparisonCandidate':comparison.get('candidate') if comparison else None,
        'candidateIDsChangedFromRetainedTextBaseline':comparison['candidate']['ids']!=baseline['candidate']['ids'] if comparison and comparison.get('candidate') else 'UNASSESSED',
        'literalAgreementMeaning':'Agreement/disagreement only; OCR is not truth; image is not an ink or role certificate',
+       'comparisonContrast':'Image + shared short-row representation vs retained older atom-text condition; prompt differs, no image-only causal claim',
        'correctness':'UNASSESSED_NO_ORACLE_READ','coreValidatorActuallyInvoked':False,'productionAdoption':False,'qualifiedGenAIModels':[],
        'wholeDocumentFormalSlotsUNASSESSED':1270,'wholeDocumentFormalClocksUNASSESSED':70,'confidenceThresholdChanged':False,
        'newImageOriginIDs':0,'maximumManualBodyCorrectionsDocumentWide':3,'headerClassStructureManualCorrectionAllowed':False}
