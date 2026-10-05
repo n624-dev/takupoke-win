@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "status": "PREPARED_NOT_ROOT_APPROVED",
+  "sourceBase": "a97f575792903fc29135fb4366a94675a42c4e68",
+  "conditions": [
+    "gemma-single-field",
+    "qwen-single-field"
+  ],
+  "comparisonCondition": "gemma-single-field",
+  "maximumInferenceCalls": 8,
+  "maximumConcurrentEngines": 1,
+  "derivedFromSourcePacketSHA256": "aa6b18a9af6ff9704d81d0105e0f952c7b6fdd9159a1bdd36b1753a35b80607c",
+  "comparisonConfigurationSHA256": "422754c123a2c8d8fd32ec99d90f505ce82911454c96261d3c5445849176639b",
+  "originalInkOwnershipProof": "ABSENT",
+  "roleAssignmentProof": "ABSENT",
+  "qualifiedGenAIModels": [],
+  "productionAdoption": false,
+  "pins": [
+    {
+      "path": "README.md",
+      "bytes": 7080,
+      "sha256": "1b669338d5fcbbe5b513f6890926e59989c90e30450288080168bc44afa8e7e0"
+    },
+    {
+      "path": "caller-plan.json",
+      "bytes": 4234,
+      "sha256": "dfe29e5e34433e61084886b763424f94f2b916b01126a4c66e868d4fe950731c"
+    },
+    {
+      "path": "compare_once.py",
+      "bytes": 2870,
+      "sha256": "982081b341239b34dd8f54e68ffd7c549fb5dbbb9e5939792ec248dcdc0c44de"
+    },
+    {
+      "path": "comparison-config.json",
+      "bytes": 493,
+      "sha256": "422754c123a2c8d8fd32ec99d90f505ce82911454c96261d3c5445849176639b"
+    },
+    {
+      "path": "comparison.py",
+      "bytes": 2840,
+      "sha256": "9320ad7721a1e2f98fb1d58439ebc85c77bed5f58f94ea5c4d8bef3a0981ba8d"
+    },
+    {
+      "path": "contract.py",
+      "bytes": 9716,
+      "sha256": "7a355b81268e9de82d844b90697a443b232e2f90430a507928b6704c9d2d9ec8"
+    },
+    {
+      "path": "guard.py",
+      "bytes": 12084,
+      "sha256": "84bdb2304960aa18010da8964212fae17df8fd79bb38b38c336598071502e9de"
+    },
+    {
+      "path": "inputs.json",
+      "bytes": 134462,
+      "sha256": "54866e2784434e266c21e5d5257728c3cb63f657a092fa14c8b9083aa24183b7"
+    },
+    {
+      "path": "legal.json",
+      "bytes": 2053,
+      "sha256": "1ea669d5fa1c8affab263ff1c503f89e99c19fb07a6ccf6ca6c51997b2bc40d2"
+    },
+    {
+      "path": "native_grammar.py",
+      "bytes": 1324,
+      "sha256": "127a017965a1d81c1e09109ea167423169854b4f5e00e7eb64a0111e2e06b93e"
+    },
+    {
+      "path": "network_guard.py",
+      "bytes": 2171,
+      "sha256": "d07bde6a1fea19e11abd8b7b52a1c2f1ca3efb0a6500b5d71163397011e7f76a"
+    },
+    {
+      "path": "prepare.py",
+      "bytes": 947,
+      "sha256": "c6152b22ffddec5dc0ed916488e775c240565c9e938204520382149b6bbe266c"
+    },
+    {
+      "path": "prepare_condition.py",
+      "bytes": 2299,
+      "sha256": "6f714f4c695d11394003f555823e1fd0e2c329cfc0bc06bc70edf599639961d4"
+    },
+    {
+      "path": "prompt.txt",
+      "bytes": 1762,
+      "sha256": "eafc546d3241ed7b09ece4444055620f98f9dadb71822eec228177369828dd07"
+    },
+    {
+      "path": "protocol.py",
+      "bytes": 1845,
+      "sha256": "bcb3f90f10ffb3734cf5ce9b2e123cdb8397beffe0130d27611104eebaadb170"
+    },
+    {
+      "path": "recipe.json",
+      "bytes": 3040,
+      "sha256": "329d76a0d07acad41777e478b7989a345e8c2f32997244cd666102a82983f348"
+    },
+    {
+      "path": "report_protocol.py",
+      "bytes": 1247,
+      "sha256": "b7bed873650d52556f8d2bada5b392bc4aac743367deecfd3608ababe73093d9"
+    },
+    {
+      "path": "run_once.py",
+      "bytes": 9166,
+      "sha256": "014adefffc933a424d5a0d8fdb026fdbbed579baf1230932161d1ff54102801a"
+    },
+    {
+      "path": "runtime-identity.json",
+      "bytes": 2716,
+      "sha256": "e8ccc225cc8dcb15675d7d94e8171efd891dc723ec0ba26df169223ef015b011"
+    },
+    {
+      "path": "source-provenance.json",
+      "bytes": 597,
+      "sha256": "0a5e41aafcb4a2d6a06dc203decbd9903f440d731dfe4672923f07669fe53bab"
+    },
+    {
+      "path": "source_contract.py",
+      "bytes": 7802,
+      "sha256": "44e6708a97b7c1b903d3e176c07637052bf16268d496895ee7ef07e131185c06"
+    },
+    {
+      "path": "test_contract.py",
+      "bytes": 12169,
+      "sha256": "78ec135c07a84180d69a743beb3ea586070fb450f0eb46df37b52fe4757c892d"
+    },
+    {
+      "path": "worker.py",
+      "bytes": 5392,
+      "sha256": "e7c60f1ebac3033575b62a87f95aeddfb11131d0d7c8475ee16d9ad49d4f4219"
+    }
+  ],
+  "workerPinPaths": [
+    "caller-plan.json",
+    "comparison-config.json",
+    "comparison.py",
+    "contract.py",
+    "guard.py",
+    "inputs.json",
+    "legal.json",
+    "native_grammar.py",
+    "network_guard.py",
+    "prompt.txt",
+    "protocol.py",
+    "recipe.json",
+    "runtime-identity.json",
+    "source-provenance.json",
+    "source_contract.py",
+    "worker.py"
+  ]
+}

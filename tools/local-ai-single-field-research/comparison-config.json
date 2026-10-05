@@ -1,0 +1,14 @@
+{
+  "conditions": {
+    "gemma-single-field": {},
+    "qwen-single-field": {
+      "modelKey": "qwen",
+      "modelPath": "model/Qwen3-0.6B_dynamic_wi4b32_afp32.litertlm",
+      "modelBytes": 344671744,
+      "modelSHA256": "03e7da1eb1108b50dffaa9bb52cc7bcbad2eb0c66ca990267f480c1e545d2856",
+      "modelRepository": "litert-community/Qwen3-0.6B",
+      "modelRevision": "a3c5d805ae362dff7f580bc25f2dfb9a5a7eaa76",
+      "modelLicense": "Apache-2.0 per retained official metadata"
+    }
+  }
+}
