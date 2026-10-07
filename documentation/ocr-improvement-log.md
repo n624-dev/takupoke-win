@@ -1,5 +1,20 @@
 # OCR improvement log
 
+## Rejected: larger Tesseract Japanese model on fixed physical cells
+
+A separate Linux component probe used the already available 14,330,109-byte `tessdata_best` Japanese model at revision `e12c65a915945e4c28e237a9b52bc4a8f39a0cec`, SHA-256 `36bdf9ac823f5911e624c30d0553e890b8abc7c31a65b3ef14da943658c40b79`, with Tesseract 5.5.0, OEM 1 and PSM 6. Before inference, a hash of physical cell ordinals selected 32 cells per previously frozen fictional cohort. Every selected cell retained its three unlabelled body lines and all interior source pixels, with two pixels excluded at each ruled boundary. There was no scaling, answer-dependent selection, retry, new model download, or new Paddle inference.
+
+Exactly 64 calls completed with exit code zero in a 5.217-second transaction using at most four child processes and one OpenMP thread each. Each call retained the warning about the absent implicitly requested `jpn_vert` model. This is a dependency limitation, not a successful runtime qualification. Maximum single-child RSS was 105,268 KiB, not the combined process memory or a Windows device RAM requirement.
+
+| Frozen fictional cohort | Selected fields | Tesseract fields with complete unique original-glyph ownership | Tesseract exact owned word concatenations | Frozen tiled V5 exact fields |
+| --- | ---: | ---: | ---: | ---: |
+| Noto Sans 11 px | 96 | 94 | 62 | 91 |
+| Noto Serif 10 px, different literals | 96 | 72 | 0 | 68 |
+
+The first output-only scoring used fixed 30-pixel field bands and reported unassessed fields because Tesseract's complete returned line boxes extended beyond those bands. That original output remains unchanged. A separately identified audit made zero inference calls and checked each complete box against all independently painted glyph support and its physical cell, without clipping boxes or changing source text. It left two and 24 fields unassessed respectively. The exact comparison above concatenates returned native words without adding separators; native TXT and TSV are retained separately, including Tesseract's inserted spaces. Neither representation is treated as a production Evidence value.
+
+The second reader fixed none of the selected frozen V5 discrepancies and lost 29 and 68 previously correct fields, including unresolved ownership. It is not activated as a replacement or agreement-only acceptance policy. Confidence is retained on its native word scale and not compared numerically with Paddle's CTC scores. Complete document recovery, native Windows execution, and model qualification remain unassessed. Images and child outputs were owned scratch data and removed; shared pre-existing weights were preserved. Raw result SHA-256: `1c48badd4e1cbfba4e39518091d77bda7f75bb4549241d37d4e3c190ef3e1957`.
+
 All observations below use independently fictional timetable content. The uploaded school PDF is not an input, fixture, or repository asset. No PDF, image, model weight, or school subject/teacher/room text is included in this log.
 
 These are bounded Linux x64 CPU recognizer comparisons, not physical Windows qualification or application PDF-acquisition tests. The confidence floor remains 0.8. Literal comparisons preserve Unicode and do not normalize punctuation. Each experiment has one invocation, no retry, and an independently reviewed complete inventory of 4,016 recognizer results for 4,015 source rows.
