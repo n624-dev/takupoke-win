@@ -1,5 +1,7 @@
 name: Observe paired invented image PDF acquisition
 on:
+  push:
+    branches: [research/windows-ordered-raster-observation-20261007]
   workflow_dispatch:
 permissions:
   contents: read
