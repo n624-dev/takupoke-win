@@ -1,5 +1,22 @@
 # OCR improvement log
 
+## Direct font-source redraw: confidence improves, complete PDF quality unassessed
+
+A new independent fictional 40-cell table contains 120 unlabelled body fields. A fixed Linux .NET comparison calls the unchanged production PP-OCRv5 OCR implementation and ONNX Runtime 1.23.2 four times: Noto Sans 11 px at native 1x/2x font-source rendering, and different Noto Serif 10 px literals at 1x/2x. The larger image is drawn directly from the font and vector geometry; it is not a resized low-resolution image. Model files, confidence floor, source-padding guards, connected-ink ownership, and adoption policy are unchanged.
+
+| Render condition | Exact independently owned fields | Correct fields below the 0.8 floor | Incorrect fields above that floor | Read transaction |
+| --- | ---: | ---: | ---: | ---: |
+| Sans 1x, 940 × 680 | 120 / 120 | 7 | 0 | 4.462 s |
+| Sans 2x, 1,880 × 1,360 | 120 / 120 | 2 | 0 | 4.572 s |
+| Serif 1x, 940 × 680 | 120 / 120 | 32 | 0 | 4.103 s |
+| Serif 2x, 1,880 × 1,360 | 120 / 120 | 14 | 0 | 4.225 s |
+
+All four complete captures preserve 120 uniquely assigned fields and cover original non-rule ink. The output-only audit checks every native crop against independent original painted glyphs and the complete physical cell. It makes zero additional inference calls. Each 2x rendering has the same literal content as its paired 1x rendering; these are not four independent documents. Peak sampled process working set was 461,336,576 bytes. Cold session initialization and rendering size differ, so transaction times are not isolated model latency comparisons. Raw log SHA-256: `2124b5159bf131e7a712f19ad798744ec075d3d345f5a7f6c7dbdbaeb78f4dbe`.
+
+After that fixed comparison closed, a separately recorded development experiment rendered only the same Serif content at 3x/4x and made two new calls. Both retain 120/120 exact owned fields with no incorrect field above the floor, but nine and four correct fields remain below it. Transactions were 5.223/5.257 seconds; peak sampled working set was 550,580,224 bytes. This is tuning on previously measured content, not unseen holdout evidence. Raw log SHA-256: `f3f0a30e1c95fa40b7a966c3b981379404bf57e2abc523c37dc4d1747d5b9b98`.
+
+The 3x/4x whole images are 2,820 × 2,040 and 3,760 × 2,720: valid for this OCR component but beyond the current Windows PDF renderer's 2,400-pixel width limit. The experiment does not implement native original-PDF region rendering or prove that production PDF capture can supply these pixels. It also has no date/class/period/clock headers, merges, or parallel lessons. No formal Builder, Validator, or adoption is executed; no downloadable model is qualified. Four low-confidence fields remain above the document-wide maximum of three manual corrections, so that condition is not called a recovery success. Images, derived dictionaries, and build outputs are owned temporary data and removed after each experiment.
+
 ## Rejected: larger Tesseract Japanese model on fixed physical cells
 
 A separate Linux component probe used the already available 14,330,109-byte `tessdata_best` Japanese model at revision `e12c65a915945e4c28e237a9b52bc4a8f39a0cec`, SHA-256 `36bdf9ac823f5911e624c30d0553e890b8abc7c31a65b3ef14da943658c40b79`, with Tesseract 5.5.0, OEM 1 and PSM 6. Before inference, a hash of physical cell ordinals selected 32 cells per previously frozen fictional cohort. Every selected cell retained its three unlabelled body lines and all interior source pixels, with two pixels excluded at each ruled boundary. There was no scaling, answer-dependent selection, retry, new model download, or new Paddle inference.
@@ -17,7 +34,7 @@ The second reader fixed none of the selected frozen V5 discrepancies and lost 29
 
 All observations below use independently fictional timetable content. The uploaded school PDF is not an input, fixture, or repository asset. No PDF, image, model weight, or school subject/teacher/room text is included in this log.
 
-These are bounded Linux x64 CPU recognizer comparisons, not physical Windows qualification or application PDF-acquisition tests. The confidence floor remains 0.8. Literal comparisons preserve Unicode and do not normalize punctuation. Each experiment has one invocation, no retry, and an independently reviewed complete inventory of 4,016 recognizer results for 4,015 source rows.
+The first frozen recognizer comparisons in the following table are bounded Linux x64 CPU tests, not physical Windows qualification or application PDF-acquisition tests. The confidence floor remains 0.8. Literal comparisons preserve Unicode and do not normalize punctuation. Each of those comparisons has one invocation, no retry, and an independently reviewed complete inventory of 4,016 recognizer results for 4,015 source rows. Later component experiments have their separately stated inventories and limits.
 
 | Condition | Exact source rows | Regressions / fixes versus its baseline | Wrong rows passing the recognizer guard | Wall time | Peak process RSS | Decision |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
