@@ -33,6 +33,16 @@ for case in manifest["cases"]:
                 same_size=capture["Width"]==original.width and capture["Height"]==original.height
                 capture["opaque255BgraEncodingMatchesEmbedded"]=(same_size and capture["BgraSha256"]==hashlib.sha256(bgra).hexdigest())
                 capture["colourManagedRgbMatchesEmbedded"]=(same_size and capture["ColourManagedRgbSha256"]==hashlib.sha256(rgb).hexdigest())
+                if same_size:
+                    for endpoint in capture["RuleEndpoints"]:
+                        embedded_min=[]; embedded_mean=[]
+                        for y in range(endpoint["Y"],endpoint["Y"]+endpoint["Height"]):
+                            for x in range(endpoint["X"],endpoint["X"]+endpoint["Width"]):
+                                pixel=rgb[(y*original.width+x)*3:(y*original.width+x+1)*3]
+                                embedded_min.append(min(pixel)); embedded_mean.append(sum(pixel)//3)
+                        endpoint["embeddedMinimumChannels"]=embedded_min
+                        endpoint["inkClassificationChanges"]=sum((a!=255)!=(b!=255) for a,b in zip(endpoint["MinimumChannels"],embedded_min))
+                        endpoint["darkClassificationChanges"]=sum((a<160)!=(b<160) for a,b in zip(endpoint["MeanChannels"],embedded_mean))
     # The independently designed expected text is first inspected after return.
     gold = case["oracle"]
     table = actual.pop("formal")

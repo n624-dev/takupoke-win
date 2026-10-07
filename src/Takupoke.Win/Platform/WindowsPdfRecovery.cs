@@ -11,7 +11,8 @@ using Windows.Graphics.Imaging;
 using Windows.Storage.Streams;
 
 namespace Takupoke.Win.Platform;
-public sealed record RecoveryRasterCaptureInfo(int Page, int Width, int Height, string Method, string BgraSha256, string ColourManagedRgbSha256);
+public sealed record RecoveryRuleEndpointCapture(PdfRule Rule, int X, int Y, int Width, int Height, int[] MinimumChannels, int[] MeanChannels);
+public sealed record RecoveryRasterCaptureInfo(int Page, int Width, int Height, string Method, string BgraSha256, string ColourManagedRgbSha256, IReadOnlyList<RecoveryRuleEndpointCapture> RuleEndpoints);
 public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
 {
     public async Task<RecoveryDocument> BuildAsync(byte[] bytes, MaterialKind kind, string hash, RecoveryReadCapture capture, CancellationToken token, Action<RecoveryRasterCaptureInfo>? observer = null)
@@ -46,8 +47,8 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                     throw new InvalidDataException("元画像の描画寸法を確認できません。");
                 var pixels = await decoder.GetPixelDataAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore, new BitmapTransform(), ExifOrientationMode.IgnoreExifOrientation, colour).AsTask(token);
                 var raster = new RecoveryRaster(bitmap.PixelWidth, bitmap.PixelHeight, pixels.DetachPixelData()); rasters.Add(raster);
-                if (observer is not null) observer(new((int)i + 1, raster.Width, raster.Height, original is null ? "original-PDF-render" : "original-image-with-colour-profile", Convert.ToHexStringLower(SHA256.HashData(raster.Bgra)), RgbHash(raster, token)));
                 var rules = await Task.Run(() => raster.Rules(token), token); rasterRules.Add(rules);
+                if (observer is not null) observer(new((int)i + 1, raster.Width, raster.Height, original is null ? "original-PDF-render" : "original-image-with-colour-profile", Convert.ToHexStringLower(SHA256.HashData(raster.Bgra)), RgbHash(raster, token), CaptureRuleEndpoints(raster, rules, token)));
                 var captured = capture.Pages.FirstOrDefault(p => p.Page == i + 1);
                 var layout = captured?.State == RecoveryInputState.Complete ? captured.Layout : null;
                 if (layout is not null)
@@ -138,6 +139,34 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
         {
             await Task.Run(() => { ocr?.Dispose(); foreach (var raster in rasters) CryptographicOperations.ZeroMemory(raster.Bgra); });
         }
+    }
+    private static IReadOnlyList<RecoveryRuleEndpointCapture> CaptureRuleEndpoints(RecoveryRaster raster, IReadOnlyList<PdfRule> rules, CancellationToken token)
+    {
+        // Explicit research observer only: bounded physical endpoints, no text
+        // candidates, alternate crop, mask tolerance or acceptance changes.
+        var selected = new[] {
+            rules.Where(r => r.Horizontal).OrderBy(r => r.X1).ThenBy(r => r.Y1).FirstOrDefault(),
+            rules.Where(r => r.Horizontal).OrderByDescending(r => r.Y1).FirstOrDefault(),
+            rules.Where(r => r.Vertical).OrderBy(r => r.X1).FirstOrDefault()
+        }.OfType<PdfRule>().Distinct();
+        var output = new List<RecoveryRuleEndpointCapture>();
+        foreach (var rule in selected)
+        foreach (var (cx, cy) in new[] { (rule.X1, rule.Y1), (rule.X2, rule.Y2) })
+        {
+            token.ThrowIfCancellationRequested();
+            var left = Math.Max(0, (int)Math.Floor(cx) - 4); var top = Math.Max(0, (int)Math.Floor(cy) - 4);
+            var width = Math.Min(9, raster.Width - left); var height = Math.Min(9, raster.Height - top);
+            if (width < 1 || height < 1) continue;
+            var minimum = new int[width * height]; var mean = new int[width * height];
+            for (var y = 0; y < height; y++) for (var x = 0; x < width; x++)
+            {
+                var p = ((top + y) * raster.Width + left + x) * 4;
+                minimum[y * width + x] = Math.Min(raster.Bgra[p], Math.Min(raster.Bgra[p + 1], raster.Bgra[p + 2]));
+                mean[y * width + x] = (raster.Bgra[p] + raster.Bgra[p + 1] + raster.Bgra[p + 2]) / 3;
+            }
+            output.Add(new(rule, left, top, width, height, minimum, mean));
+        }
+        return output;
     }
     private static string RgbHash(RecoveryRaster raster, CancellationToken token)
     {
