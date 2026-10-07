@@ -350,7 +350,10 @@ public sealed class OnnxJapaneseOcr : IDisposable
     // Opt-in local diagnostics only. No allocation/logging when unset; an
     // observer never supplies recognition values or bypasses safety guards.
     internal Action<OcrRecognitionObservation>? RecognitionObserver { get; set; }
-    public OnnxJapaneseOcr(string detector, string recognizer, string dictionary)
+    public OnnxJapaneseOcr(string detector, string recognizer, string dictionary) : this(detector, recognizer, dictionary, 18385) { }
+    internal static OnnxJapaneseOcr OpenJapaneseResearch(string detector, string recognizer, string dictionary)
+        => new(detector, recognizer, dictionary, 4400);
+    private OnnxJapaneseOcr(string detector, string recognizer, string dictionary, int dictionaryLength)
     {
         Environment.SetEnvironmentVariable("ORT_TELEMETRY_DISABLED", "1");
         OrtEnv.Instance().DisableTelemetryEvents();
@@ -360,7 +363,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
         {
             recognizerSession = new(recognizer, options);
             _dictionary = JsonSerializer.Deserialize<string[]>(File.ReadAllBytes(dictionary)) ?? throw new InvalidDataException("OCR辞書がありません。");
-            if (_dictionary.Length != 18385 || _dictionary[0] != "" || _dictionary[^1] != " " || _detector.InputMetadata.Count != 1 || recognizerSession.InputMetadata.Count != 1 || _detector.InputMetadata["x"].Dimensions.Length != 4 || recognizerSession.InputMetadata["x"].Dimensions.Length != 4 || recognizerSession.InputMetadata["x"].Dimensions[1] != 3 || recognizerSession.InputMetadata["x"].Dimensions[2] != 48) throw new InvalidDataException("OCRモデルの形状が一致しません。");
+            if (_dictionary.Length != dictionaryLength || _dictionary[0] != "" || _dictionary[^1] != " " || _detector.InputMetadata.Count != 1 || recognizerSession.InputMetadata.Count != 1 || _detector.InputMetadata["x"].Dimensions.Length != 4 || recognizerSession.InputMetadata["x"].Dimensions.Length != 4 || recognizerSession.InputMetadata["x"].Dimensions[1] != 3 || recognizerSession.InputMetadata["x"].Dimensions[2] != 48) throw new InvalidDataException("OCRモデルの形状が一致しません。");
             _recognizer = recognizerSession;
         }
         catch { recognizerSession?.Dispose(); _detector.Dispose(); throw; }
@@ -420,7 +423,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
             token.ThrowIfCancellationRequested(); var input = OcrInputTransform.Recognition(image, box, token);
             VerifyRecognitionWidth(input.InputWidth);
             using var recognition = _recognizer.Run([NamedOnnxValue.CreateFromTensor("x", input.Tensor)]); token.ThrowIfCancellationRequested(); var logits = recognition.First().AsTensor<float>();
-            if (logits.Dimensions.Length != 3 || logits.Dimensions[0] != 1 || logits.Dimensions[1] <= 0 || logits.Dimensions[2] != 18385) throw new InvalidDataException("OCR認識モデルの出力形状が一致しません。");
+            if (logits.Dimensions.Length != 3 || logits.Dimensions[0] != 1 || logits.Dimensions[1] <= 0 || logits.Dimensions[2] != _dictionary.Length) throw new InvalidDataException("OCR認識モデルの出力形状が一致しません。");
             var checkedScores = 0;
             foreach (var score in logits)
             {
@@ -428,7 +431,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
                 if (!float.IsFinite(score) || score is < 0 or > 1) throw new InvalidDataException("OCR認識の確信度が不正です。");
             }
             var tCount = logits.Dimensions[1]; var previous = -1; var pieces = new List<(string Text, int Start, int End, float Confidence)>();
-            for (var t = 0; t < tCount; t++) { var best = 0; var score = logits[0, t, 0]; for (var c = 1; c < 18385; c++) if (logits[0, t, c] > score) { score = logits[0, t, c]; best = c; } if (best != 0 && best != previous) pieces.Add((_dictionary[best], t, t + 1, score)); else if (best != 0 && pieces.Count > 0) { var last = pieces[^1]; pieces[^1] = last with { End = t + 1, Confidence = Math.Max(last.Confidence, score) }; } previous = best; }
+            for (var t = 0; t < tCount; t++) { var best = 0; var score = logits[0, t, 0]; for (var c = 1; c < _dictionary.Length; c++) if (logits[0, t, c] > score) { score = logits[0, t, c]; best = c; } if (best != 0 && best != previous) pieces.Add((_dictionary[best], t, t + 1, score)); else if (best != 0 && pieces.Count > 0) { var last = pieces[^1]; pieces[^1] = last with { End = t + 1, Confidence = Math.Max(last.Confidence, score) }; } previous = best; }
             // Retain already-computed pieces before the existing refusal. No
             // extra model call, alternate decoding or confidence adjustment.
             RecognitionObserver?.Invoke(new(boxes[index], box, input.ValidWidth, input.InputWidth, tCount,
@@ -462,7 +465,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
         var image = new RecoveryRaster(64, 64, Enumerable.Repeat((byte)255, 64 * 64 * 4).ToArray()); Read(image, token);
         var input = OcrInputTransform.Recognition(image, new(0, 0, 64, 64), token); VerifyRecognitionWidth(input.InputWidth);
         using var output = _recognizer.Run([NamedOnnxValue.CreateFromTensor("x", input.Tensor)]);
-        var logits = output.First().AsTensor<float>(); if (logits.Dimensions.Length != 3 || logits.Dimensions[0] != 1 || logits.Dimensions[1] <= 0 || logits.Dimensions[2] != 18385) throw new InvalidDataException("OCRモデルの出力形状が一致しません。"); token.ThrowIfCancellationRequested();
+        var logits = output.First().AsTensor<float>(); if (logits.Dimensions.Length != 3 || logits.Dimensions[0] != 1 || logits.Dimensions[1] <= 0 || logits.Dimensions[2] != _dictionary.Length) throw new InvalidDataException("OCRモデルの出力形状が一致しません。"); token.ThrowIfCancellationRequested();
     }
     private void VerifyRecognitionWidth(int width)
     {

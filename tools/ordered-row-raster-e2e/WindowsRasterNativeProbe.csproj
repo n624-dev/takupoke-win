@@ -10,5 +10,6 @@
     <Compile Include="$(TakupokeRepositoryRoot)/src/Takupoke.Win/Platform/FoundryLocalRecoveryProvider.cs" Link="FoundryLocalRecoveryProvider.cs"/>
     <Content Include="$(TakupokeRepositoryRoot)/src/Takupoke.Win/Assets/Recovery/*.json" Link="Assets/Recovery/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"/>
     <None Update="fixtures/**/*" CopyToOutputDirectory="PreserveNewest"/>
+    <None Update="japanese-v3-dictionary.json" CopyToOutputDirectory="PreserveNewest"/>
   </ItemGroup>
 </Project>

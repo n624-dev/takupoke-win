@@ -83,7 +83,7 @@ finally
         if (Directory.Exists(ownedModelRoot) && originalImageSizes.Count is > 0 and <= 12)
         {
             using var reader=await new WindowsRecoveryModels(ownedModelRoot).OpenOcrAsync(token);
-            using var server=await OpenServerReader(ownedModelRoot,token);
+            using var japanese=await OpenJapaneseReader(ownedModelRoot,token);
             foreach(var page in originalImageSizes.Keys.Order())
             {
                 token.ThrowIfCancellationRequested();
@@ -102,14 +102,14 @@ finally
                     var pixelHash=Convert.ToHexStringLower(SHA256.HashData(raster.Bgra));
                     await Task.Run(()=>reader.ObserveAllRecognition(raster,token),token);
                     if(reader.RecognizedBoxes.Count!=0 || reader.NativeConfidences.Count!=0) throw new InvalidOperationException("Shadow cannot expose usable capture.");
-                    var serverRows=new List<object>();
-                    server.RecognitionObserver=o=>serverRows.Add(new {crop=o.RecognitionCrop,o.ValidWidth,o.InputWidth,o.TimeCount,pieces=o.Pieces,
+                    var japaneseRows=new List<object>();
+                    japanese.RecognitionObserver=o=>japaneseRows.Add(new {crop=o.RecognitionCrop,o.ValidWidth,o.InputWidth,o.TimeCount,pieces=o.Pieces,
                         paddingSupported=o.Pieces.All(piece=>piece.Start>=0 && piece.End>piece.Start && piece.End<=o.TimeCount && (long)piece.End*o.InputWidth<=(long)o.ValidWidth*o.TimeCount)});
-                    await Task.Run(()=>server.ObserveAllRecognition(raster,token),token);
-                    if(server.RecognizedBoxes.Count!=0 || server.NativeConfidences.Count!=0 || pixelHash!=Convert.ToHexStringLower(SHA256.HashData(raster.Bgra))) throw new InvalidOperationException("Shadow altered the original evidence.");
-                    shadowPages.Add(new {page,raster.Width,raster.Height,bgraSha256=pixelHash,rows,serverRows});
+                    await Task.Run(()=>japanese.ObserveAllRecognition(raster,token),token);
+                    if(japanese.RecognizedBoxes.Count!=0 || japanese.NativeConfidences.Count!=0 || pixelHash!=Convert.ToHexStringLower(SHA256.HashData(raster.Bgra))) throw new InvalidOperationException("Shadow altered the original evidence.");
+                    shadowPages.Add(new {page,raster.Width,raster.Height,bgraSha256=pixelHash,rows,japaneseRows});
                 }
-                finally {reader.RecognitionObserver=null;server.RecognitionObserver=null;CryptographicOperations.ZeroMemory(raster.Bgra);}
+                finally {reader.RecognitionObserver=null;japanese.RecognitionObserver=null;CryptographicOperations.ZeroMemory(raster.Bgra);}
             }
         }
     }
@@ -130,14 +130,14 @@ finally
     CryptographicOperations.ZeroMemory(bytes);
 }
 
-static async Task<OnnxJapaneseOcr> OpenServerReader(string owned,CancellationToken token)
+static async Task<OnnxJapaneseOcr> OpenJapaneseReader(string owned,CancellationToken token)
 {
     // Fixed model-only GET. PDF, image and OCR data never enter this request.
-    const int size=84503027;
-    const string sha="d9dc333c9c7b042c6dffb8e33d72b6f65c9c1d463d0a3c2f78174fea55e94752";
-    var path=Path.Combine(owned,"research-server-rec.onnx");
+    const int size=10089078;
+    const string sha="2e397c27461751befc82eca78c9b19e87322ebee34e7316468b21856f9977d64";
+    var path=Path.Combine(owned,"research-japanese-rec.onnx");
     using(var http=new HttpClient{Timeout=TimeSpan.FromSeconds(90)})
-    using(var input=await http.GetStreamAsync("https://huggingface.co/PaddlePaddle/PP-OCRv5_server_rec_onnx/resolve/b70df217f4fd99d14f970bad092cebe7d74cc4d1/inference.onnx",token))
+    using(var input=await http.GetStreamAsync("https://huggingface.co/tobiichioriguchi/japan_PP-OCRv3_mobile_rec_onnx/resolve/1c772b3dd782e6ac4e61aba8bfe9683bee3334fc/inference.onnx",token))
     await using(var output=new FileStream(path,FileMode.CreateNew,FileAccess.Write,FileShare.None))
     {
         var buffer=new byte[65536];var total=0;
@@ -146,5 +146,7 @@ static async Task<OnnxJapaneseOcr> OpenServerReader(string owned,CancellationTok
     }
     await using(var file=File.OpenRead(path))if(Convert.ToHexStringLower(await SHA256.HashDataAsync(file,token))!=sha)throw new InvalidDataException("Research model digest differs from its pin.");
     var installed=await new WindowsRecoveryModels(owned).OcrStateAsync(token) ?? throw new InvalidDataException("Pinned detector is unavailable.");
-    return new OnnxJapaneseOcr(Path.Combine(installed.Path,"det.onnx"),path,Path.Combine(AppContext.BaseDirectory,"Assets","Recovery","ocr-characters.json"));
+    var dictionary=Path.Combine(AppContext.BaseDirectory,"japanese-v3-dictionary.json");
+    if(Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(dictionary)))!="137be2712c276c2df9460d27994c6942caa2efc35574c1f9973fb98ff7ed23ac")throw new InvalidDataException("Research Japanese dictionary differs from its pin.");
+    return OnnxJapaneseOcr.OpenJapaneseResearch(Path.Combine(installed.Path,"det.onnx"),path,dictionary);
 }

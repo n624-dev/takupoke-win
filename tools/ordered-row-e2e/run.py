@@ -50,11 +50,11 @@ for case in manifest["cases"]:
         shadow=actual["shadow"]
         def crop_inputs(page, key):
             return [(row["crop"],row["ValidWidth"],row["InputWidth"]) for row in page[key]]
-        actual["shadow"] = {"mobile": summarize(shadow, gold), "server": summarize(shadow, gold,"serverRows"),
-                            "serverBytes":84503027,"serverSHA256":"d9dc333c9c7b042c6dffb8e33d72b6f65c9c1d463d0a3c2f78174fea55e94752",
+        actual["shadow"] = {"mobile": summarize(shadow, gold), "japanese": summarize(shadow, gold,"japaneseRows"),
+                            "japaneseBytes":10089078,"japaneseSHA256":"2e397c27461751befc82eca78c9b19e87322ebee34e7316468b21856f9977d64",
                             "completedPagesUseSameRaster":bool(shadow["pages"]),
                             "allSourcePagesCompleted":len(shadow["pages"])==len(case["embeddedPages"]) and shadow["error"] is None,
-                            "sameCropInputsOnCompletedPages":bool(shadow["pages"]) and all(crop_inputs(page,"rows")==crop_inputs(page,"serverRows") for page in shadow["pages"]),
+                            "sameCropInputsOnCompletedPages":bool(shadow["pages"]) and all(crop_inputs(page,"rows")==crop_inputs(page,"japaneseRows") for page in shadow["pages"]),
                             "qualifiedModels":[]}
     table = actual.pop("formal")
     accepted = table is not None

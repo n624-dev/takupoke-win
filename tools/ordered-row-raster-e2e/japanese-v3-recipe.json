@@ -1,0 +1,22 @@
+{
+  "modelId": "japan_PP-OCRv3_mobile_rec",
+  "officialRevision": "199d71fd22b19f6964075e6164a4cf8ca23d0178",
+  "officialConfigSHA256": "f7605e536bde4dd6c22e958534a23415ef73d21164bf346389f6a5d67cc05be7",
+  "onnxConversionOwner": "tobiichioriguchi",
+  "onnxRevision": "1c772b3dd782e6ac4e61aba8bfe9683bee3334fc",
+  "onnxSize": 10089078,
+  "onnxSHA256": "2e397c27461751befc82eca78c9b19e87322ebee34e7316468b21856f9977d64",
+  "license": "Apache-2.0",
+  "dictionaryClasses": 4400,
+  "dictionarySHA256": "137be2712c276c2df9460d27994c6942caa2efc35574c1f9973fb98ff7ed23ac",
+  "ctcBlank": 0,
+  "spaceIndex": 4399,
+  "channels": "BGR",
+  "height": 48,
+  "minimumWidth": 320,
+  "maximumWidth": 960,
+  "padding": "zero after normalization",
+  "recognitionFloor": 0.8,
+  "nativeRasterAndDetector": "unchanged PP-OCRv5 detector and original colour-managed raster",
+  "scope": "Non-adoptable diagnostics only; converted-model equivalence and model qualification unassessed"
+}
