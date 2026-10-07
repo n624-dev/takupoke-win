@@ -16,9 +16,9 @@ PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCR�
 
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版0.1.0-dev.10433のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10433)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。
+[開発確認版0.1.0-dev.10434のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10434)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。
 
-1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10433-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10433-arm64-Setup.exe`。
+1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10434-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10434-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
 3. スタートメニューの「たくポケ」から起動します。
 
@@ -106,6 +106,8 @@ GitHub Actionsの保存用キャッシュやartifactは作成しません。配�
 
 
 2026-10-03（日本時間）の追加修正は、コミット`4425bd1`の[push CI](https://github.com/n624-dev/takupoke-win/actions/runs/37081382640)全7ジョブと[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37081384250)全8ジョブが成功し、[開発確認版0.1.0-dev.7](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.7)として公開しました。学校行事の弱いETagによる再確認失敗を修正し、初回取得と繰り返しの304応答を検証しました。解析状態はiOSと同じ短い文言にそろえ、設定などの重複する説明文を整理しました。時間割は表全体の高さを確保して表内の縦スクロールを廃止し、未確定の時刻を非表示にしました。複数時限のカードに背後の罫線が透けないことを明暗テーマと文字拡大の実描画で確認しています。Core183件・Integration123件、Windows UI276項目以上、44画面の撮影、6つの導入状態と公開ファイルのSHA-256照合が成功しました。
+
+2026-10-08（日本時間）のAI・OCR設定とPDF文字再利用の修正は、コミット`73ef13b`の[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37648286055)全8ジョブが成功し、[開発確認版0.1.0-dev.10434](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10434)として公開しました。Core288件・Integration789件、通常のWindows UI642項目、6つの導入・更新・移動状態で642〜643項目の画面操作を確認しました。設定OFF時のStrict優先と復旧停止、設定切替後の未採用結果の無効化、完全に抽出済みのPDF文字・座標の再利用を含みます。公開6ファイルのうちSHA-256一覧が対象とする5ファイルをGitHub配布ハッシュと照合しました。追加AIモデルの品質合格、学校認証、ARM64実機の確認を示すものではありません。
 
 ## データの扱い
 

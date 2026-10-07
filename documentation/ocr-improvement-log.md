@@ -167,3 +167,45 @@ A bounded comparison retained the same four invented unlabelled 5 × 8 body-cell
 The small Serif condition stopped at the existing CTC-padding guard after 82 rows, including 14 incorrectly read teacher fields below the confidence floor. It is a failed read, not a complete 68/82 recovery. The paired 2× condition repaired those 14 observed mistakes and recognized the 38 previously unassessed fields; these are not 52 previously observed recognition mistakes. Every observed crop uniquely covered the complete original painted glyph support within its physical body cell.
 
 V5 had exact literals for all 120 fields in each of these same four rasters, but rejected more correct fields at its confidence floor. V6's better confidence in some conditions does not cancel its small-Serif regression or establish model quality. These same-content size variants are paired comparisons, not independent document successes. Windows native PDF rendering, headers, merges, parallel lessons, Builder/Validator, full-document adoption, and physical-device performance remain unassessed. Raw output SHA-256: `07b0c5c98b5c3ceda8db7de773dd59c818c9046b5b9646a32073486f18f456f0`. Generated images, derived dictionary and owned build files were removed; shared pinned models were preserved. No original school PDF or cloud inference was used.
+
+## Physical-cell crops and direct font redraw: held-out comparison
+
+A new invented one-day 17-class, eight-period table used unlabelled subject, teacher and room lines in Noto Serif CJK at 10 px. The 1,920 × 2,048 raster had 408 body fields and 28 headings. A fixed comparison made 273 native OCR transactions: one whole-page V5 read and 136 physical-cell reads for each of V5 and V6. Physical crops were 220 × 106 pixels, two pixels inside independently known grid boundaries. The existing detector, Linux .NET ONNX Runtime 1.23.2, confidence floor, component ownership and CTC-padding guards were unchanged. There were no retries or answer-based corrections.
+
+| Condition | Complete reads | Exact owned body fields | Correct above 0.8 | Incorrect above 0.8 | Unassessed body fields |
+|---|---:|---:|---:|---:|---:|
+| V5 whole page | 0/1 | 9/9 observed | 9 | 0 | 399 |
+| V5 physical cells | 136/136 | 407/408 | 382 | 0 | 0 |
+| V6 physical cells | 91/136 | 396/396 observed | 396 | 0 | 12 |
+
+The whole-page read and 45 V6 cell reads stopped at the unchanged padding guard. Rows returned before a failed transaction are diagnostic observations, not adoptable results. V5 cells had 26 below-floor fields, including one incorrect teacher field. Relative to the partial whole-page output, 398 previously unassessed body fields became exact; these are not 398 repaired observed errors. Read times were 1.999, 14.028 and 34.102 seconds, with sampled peak working set 461,627,392 bytes. Raw output SHA-256: `e71d3973472eaf10b640e71038534598f1f1ad46380b9d867f0fa3d937a5ccd2`.
+
+A separate paired condition repainted the same source text directly from the font at 20 px into a 3,840 × 4,096 raster and used 440 × 212 physical-cell crops. It did not upscale the previous bitmap. All 136 reads completed for each recognizer, and both had 408/408 uniquely owned exact body fields above the unchanged floor, with no incorrect or unassessed body fields. V5 took 23.521 seconds and V6 43.529 seconds; sampled peak working set was 437,698,560 bytes. Raw output SHA-256: `9039275ea77aa867adda019b6db35ffa8b6e9a38ac0d147209aac46ac7da5998`.
+
+Every observed crop was checked against complete original painted glyph support and physical-cell containment. These paired sizes are not independent document successes. Header recognition, native Windows PDF rendering, structure discovery, merges, parallel lessons, Builder/Validator and formal adoption remain unassessed. The exact 408-field result does not qualify either model or justify activating cell cropping globally. Generated images, derived dictionaries and owned build files were removed; pinned shared models were retained.
+
+## Physical-cell regression on independent confusable content
+
+A new held-out body-only table used 24 cells with 72 distinct subject/teacher/room fields, including similar Japanese glyphs and O/0, I/1 and lowercase l room codes. Noto Sans CJK and Noto Serif CJK were painted at 20 px with three fixed colours. The same contents in two fonts are paired conditions, not independent documents. Fifty V5 transactions compared a whole image with 24 physical crops per font; 48 additional V6 transactions used identical frozen crop pixels. Only the recognizer and matching dictionary changed in the latter comparison. No source correction, confidence change, retry or adoption operation was performed.
+
+| Font / condition | Exact owned fields | Correct above 0.8 | Incorrect above 0.8 | Below 0.8 | Read time |
+|---|---:|---:|---:|---:|---:|
+| Sans / V5 whole | 72/72 | 63 | 0 | 9 | 2.848 s |
+| Sans / V5 cells | 68/72 | 62 | 0 | 10 | 2.675 s |
+| Sans / V6 cells | 70/72 | 60 | 0 | 12 | 6.115 s |
+| Serif / V5 whole | 66/72 | 65 | 0 | 7 | 3.397 s |
+| Serif / V5 cells | 66/72 | 60 | 2 | 10 | 3.888 s |
+| Serif / V6 cells | 72/72 | 67 | 0 | 5 | 8.263 s |
+
+All transactions completed and all fields had unique complete original glyph support within their cells; there were no unassigned rows or unrecognized-ink reports. Nevertheless, V5 cell cropping destroyed four previously exact Sans fields. For Serif it repaired one field and destroyed another, and introduced two incorrect teacher readings above the confidence floor. V6 improved these cell conditions but retained two low-confidence O/0 room errors in Sans. Its Serif condition still rejected five correct fields, exceeding the three-field manual-correction limit.
+
+Thus physical-cell cropping is not a general production improvement, and V6 is not qualified by this comparison. Spatial coverage and high confidence cannot establish correct text. Full-document recovery, headers, structural ownership and formal adoption remain unassessed. Raw V5 output SHA-256: `e98714c516f1164aacd6d5d60a9fba54a4db6ba7a18730ac8bc28e70fe7fe917`; raw V6 output SHA-256: `76076188e14bdad3f78eb525c9bcdbaaa203230925c4be2ca3b7f1750f295ab5`. The V6 frozen recipe retained an outdated V5 descriptive caption and generic V5 dictionary hash; its executed `v6` arm, recognizer hash and separate `dictionary6SHA256` identify the actual matching V6 model/dictionary pair. Raw data was not rewritten. Generated rasters, dictionaries and build outputs were removed, and no school PDF or cloud inference was used.
+
+
+## Three-cell detector-strip refusal and model-free rule diagnosis
+
+A fixed tuning comparison used the same frozen confusable body images above, with eight 836 × 116 three-cell strips per font. It made 32 transactions across V5/V6 and Sans/Serif, without changing thresholds, margins or retries. All 32 were refused at original-ink crop ownership before recognition; zero recognizer calls were made. Consequently all 72 fields in each arm remain unassessed. This is a geometry failure, not a zero-percent recognition result. Sampled peak working set was 428,613,632 bytes. Native output SHA-256: `a5712da4c361eef6834b579163d2a1c072b95bcf651ebf1198becae993671268`.
+
+A separate model-free diagnostic reconstructed and hash-verified the same source pixels. The unchanged production rule graph certified 12 rules and 11,737 masked rule pixels in each complete parent image, but zero rules and zero rule-mask pixels in each strip. Cutting away horizontal borders leaves vertical strokes without the perpendicular endpoint support required by the rule validator. Those strokes are no longer certified separators. The refusal log does not retain component-level ownership, so it does not identify which particular component first triggered refusal.
+
+The strip condition is closed and is not retried with an answer-selected crop. Further detector-region research must keep the original page for rule certification, complete ink ownership and recognition input, translate regional detector proposals to page coordinates, and retain all rejected proposals and unowned ink. The previous overlapping-detector research already used full-page completion; the new comparison variable would be rule-aligned detector regions. No production guard or model was changed. Owned rasters, dictionaries and build outputs were removed; no school PDF was used.
