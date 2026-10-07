@@ -325,3 +325,9 @@ Run [37690188238](https://github.com/n624-dev/takupoke-win/actions/runs/37690188
 | Unseen / server | 524/2,040 | 742 | 103 | 86 |
 
 The server candidate regressed development literals and increased unsupported CTC intervals substantially despite an unseen-literal improvement. It is rejected as a production replacement and qualifies no model. These are occurrence diagnostics, not correct cell/role assignments, character accuracy or formal outputs. Both diagnostic arms remain incapable of adoption; the production document result remains0/2. Owned models and generated documents were removed by final CI cleanup. The next fixed candidate tests a Japanese-specific dictionary/model rather than another capacity increase, with its own pinned recipe and no threshold relaxation.
+
+## Japanese-specific recognizer: initial shape error, corrected condition pending
+
+Research run [37692819446](https://github.com/n624-dev/takupoke-win/actions/runs/37692819446), source `e1afa82`, did not complete its candidate measurement: the recognizer output had4,401 classes while the supplied dictionary had4,400. The shared shadow error prevented completed-page aggregation for both arms. This is a diagnostic execution error, not evidence of poor recognition or a correct refusal. The production arm independently retained its existing0/2 recovery result.
+
+The pinned graph was inspected locally and its4,401-class output verified. PaddleX v3.7.0's `BaseRecLabelDecode` appends a space to the supplied4,399-entry character list, even though that list already ends in a space; CTC also prepends blank. Research source `e471d78` preserves both space indices4,399/4,400 and fixes the dictionary to4,401 entries (SHA-256:`0cda0d37debec2f0481bb5bb7bf3223b159d8268d288781eef1668455a811f1d`). It does not remove spaces, merge tokens or relax confidence/geometry guards. The corrected candidate must be measured separately before any quality conclusion. No model is qualified.
