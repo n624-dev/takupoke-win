@@ -40,12 +40,14 @@ public sealed class PreferenceSnapshotTests
             Task<byte[]>? read = null;
             try
             {
-                read = Task.Run(() => PreferenceSnapshot.ReadBytes(path, error =>
+                // This worker deliberately blocks at the handoff. Keep it off
+                // the pool used by the concurrently running integration tests.
+                read = Task.Factory.StartNew(() => PreferenceSnapshot.ReadBytes(path, error =>
                 {
                     // Hold the first retry until the test releases the actual
                     // exclusive handle, even if its continuation is scheduled late.
                     if (retried.TrySetResult(error)) resumeRetry.Wait();
-                }));
+                }), CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
                 var error = await retried.Task.WaitAsync(TimeSpan.FromSeconds(5));
                 Assert.True(OperatingSystem.IsWindows() ? (error.HResult & 0xffff) is 32 or 33 : (error.HResult & 0xffff) == 11);
                 Assert.False(read.IsCompleted);
