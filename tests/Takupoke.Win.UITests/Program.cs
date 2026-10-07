@@ -57,13 +57,10 @@ internal static partial class Program
                 var second = Find("link-fake-second")?.Current.BoundingRectangle;
                 return first is { Height: > 0 } && second is { Height: > 0 } && first.Value.Top < second.Value.Top;
             }, "Link order follows the API array rather than sort-order metadata.");
-            SetSearch("存在しない架空検索語");
-            Wait(() => Find("link-fake-study") is null, "search excludes nonmatching links");
-            SetSearch("かくうがくしゅう");
-            Wait(() => Find("link-fake-study") is not null, "kana search finds saved link");
+            SetSearch("存在しない架空検索語", () => Find("link-fake-study") is null, "search excludes nonmatching links");
+            SetSearch("かくうがくしゅう", () => Find("link-fake-study") is not null, "kana search finds saved link");
             Require(Find("link-fake-study")!.Current.Name.Contains("架空カテゴリ", StringComparison.Ordinal), "Search results include the source category.");
-            SetSearch("!");
-            Wait(() => Find("link-fake-study") is not null && Find("link-fake-second") is not null, "A query empty after normalization shows the complete category list");
+            SetSearch("!", () => Find("link-fake-study") is not null && Find("link-fake-second") is not null, "A query empty after normalization shows the complete category list");
             Navigate("timetable"); Navigate("settings");
             Require(Find("material-summary-Exam") is null && Find("fetch-events") is null, "Root settings contains destinations rather than file and event details.");
             var preferences = Path.Combine(args[1], "preferences.json");
@@ -769,7 +766,7 @@ internal static partial class Program
         else Invoke(item);
         Wait(() => Find("page-" + page) is not null, page + " page");
     }
-    private static void SetSearch(string query)
+    private static void SetSearch(string query, Func<bool> resultsMatch, string label)
     {
         // The minute refresh can rebuild controls between consecutive inputs.
         Wait(() =>
@@ -779,8 +776,10 @@ internal static partial class Program
             var edit = search.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit)) ?? search;
             var value = (ValuePattern)edit.GetCurrentPattern(ValuePattern.Pattern);
             if (value.Current.Value != query) { value.SetValue(query); return false; }
-            return true;
-        }, "search input applied to current control");
+            // Observe input and filtering together; a page rebuild between
+            // separate waits must not certify input on a detached control.
+            return resultsMatch();
+        }, label);
     }
     private static int TextColor(string id)
     {

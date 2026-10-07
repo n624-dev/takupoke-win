@@ -173,6 +173,9 @@ public sealed partial class MainWindow : Window
         }
         foreach (var theme in new[] { "Light", "Dark" })
             ((SolidColorBrush)((ResourceDictionary)Navigation.Resources.ThemeDictionaries[theme])["NavigationViewSelectionIndicatorForeground"]).Color = MainAccentColor();
+        // TextChanged is queued: retain the current editor text before a
+        // snapshot/theme rebuild replaces its control and discards that event.
+        if (!pageChanged && _page == "links" && _linkSearch is { } currentSearch) _linkQuery = currentSearch.Text;
         PageContent.Children.Clear(); _operationControls.Clear(); _preferenceControls.Clear();
         UpdatePageLayout();
         PageContent.Spacing = 24;
