@@ -6,6 +6,19 @@ namespace Takupoke.Integration.Tests;
 
 public sealed class OcrInputTransformTests
 {
+    [Fact]
+    public void DecodedSpaceRemainsInEvidenceAtItsRealCtcPosition()
+    {
+        var input = OcrInputTransform.Recognition(Solid(50, 30, 255, 255, 255), new(10, 5, 30, 20));
+        var glyphs = new[] { input.SourceGlyph("架空", 0, 4, 80, 7, 10), input.SourceGlyph(" ", 4, 5, 80, 7, 11), input.SourceGlyph("教員", 5, 9, 80, 7, 12) };
+        Assert.Equal("架空 教員", string.Concat(glyphs.Select(g => g.Text)));
+        Assert.Equal(7, glyphs[1].SourceLine); Assert.Equal(11, glyphs[1].SourceOrder);
+        Assert.Equal(glyphs[0].X + glyphs[0].Width, glyphs[1].X, 10);
+        Assert.Equal(glyphs[1].X + glyphs[1].Width, glyphs[2].X, 10);
+        // Whitespace cannot bypass the same source-support/padding checks.
+        Assert.Throws<InvalidDataException>(() => input.SourceGlyph(" ", 18, 20, 80, 7, 13));
+        Assert.Throws<InvalidDataException>(() => input.SourceGlyph("", 4, 5, 80, 7, 11));
+    }
     [Theory]
     [InlineData(30, 20, 72, 320)]
     [InlineData(69, 10, 331, 331)]

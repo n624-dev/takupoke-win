@@ -1,5 +1,6 @@
 using Microsoft.ML.OnnxRuntime.Tensors;
 using Takupoke.Core.Recovery;
+using Takupoke.Infrastructure.Parsing;
 
 namespace Takupoke.Infrastructure.Recovery;
 
@@ -9,6 +10,14 @@ internal static class OcrInputTransform
 {
     internal sealed record RecognitionInput(DenseTensor<float> Tensor, RecoveryBox Crop, int ValidWidth, int InputWidth)
     {
+        public PdfGlyph SourceGlyph(string text, int start, int end, int timeCount, int sourceLine, int sourceOrder)
+        {
+            // A decoded space is evidence too. CTC blank is filtered during
+            // decoding and is never represented by a fabricated empty glyph.
+            if (string.IsNullOrEmpty(text)) throw new InvalidDataException("OCR文字列がありません。");
+            var box = SourceBox(start, end, timeCount);
+            return new(text, box.X, box.Y, box.Width, box.Height, sourceLine, sourceOrder);
+        }
         public RecoveryBox SourceBox(int start, int end, int timeCount)
         {
             if (timeCount <= 0 || start < 0 || end <= start || end > timeCount)

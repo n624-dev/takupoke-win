@@ -313,8 +313,8 @@ public sealed class OnnxJapaneseOcr : IDisposable
             // spaced boxes inferred from a generated string.
             foreach (var piece in pieces)
             {
-                var source = input.SourceBox(piece.Start, piece.End, tCount);
-                if (!string.IsNullOrWhiteSpace(piece.Text)) { output.Add(new(piece.Text, source.X, source.Y, source.Width, source.Height, line, order++)); confidences.Add(piece.Confidence); }
+                output.Add(input.SourceGlyph(piece.Text, piece.Start, piece.End, tCount, line, order++));
+                confidences.Add(piece.Confidence);
             }
             line++;
         }
