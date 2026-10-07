@@ -11,7 +11,7 @@ using Windows.Graphics.Imaging;
 using Windows.Storage.Streams;
 
 namespace Takupoke.Win.Platform;
-public sealed record RecoveryRasterCaptureInfo(int Page, int Width, int Height, string Method, string BgraSha256);
+public sealed record RecoveryRasterCaptureInfo(int Page, int Width, int Height, string Method, string BgraSha256, string ColourManagedRgbSha256);
 public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
 {
     public async Task<RecoveryDocument> BuildAsync(byte[] bytes, MaterialKind kind, string hash, RecoveryReadCapture capture, CancellationToken token, Action<RecoveryRasterCaptureInfo>? observer = null)
@@ -46,7 +46,7 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                     throw new InvalidDataException("元画像の描画寸法を確認できません。");
                 var pixels = await decoder.GetPixelDataAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore, new BitmapTransform(), ExifOrientationMode.IgnoreExifOrientation, colour).AsTask(token);
                 var raster = new RecoveryRaster(bitmap.PixelWidth, bitmap.PixelHeight, pixels.DetachPixelData()); rasters.Add(raster);
-                if (observer is not null) observer(new((int)i + 1, raster.Width, raster.Height, original is null ? "original-PDF-render" : "original-image-with-colour-profile", Convert.ToHexStringLower(SHA256.HashData(raster.Bgra))));
+                if (observer is not null) observer(new((int)i + 1, raster.Width, raster.Height, original is null ? "original-PDF-render" : "original-image-with-colour-profile", Convert.ToHexStringLower(SHA256.HashData(raster.Bgra)), RgbHash(raster, token)));
                 var rules = await Task.Run(() => raster.Rules(token), token); rasterRules.Add(rules);
                 var captured = capture.Pages.FirstOrDefault(p => p.Page == i + 1);
                 var layout = captured?.State == RecoveryInputState.Complete ? captured.Layout : null;
@@ -138,5 +138,27 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
         {
             await Task.Run(() => { ocr?.Dispose(); foreach (var raster in rasters) CryptographicOperations.ZeroMemory(raster.Bgra); });
         }
+    }
+    private static string RgbHash(RecoveryRaster raster, CancellationToken token)
+    {
+        using var digest = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
+        var row = new byte[checked(raster.Width * 3)];
+        try
+        {
+            for (var y = 0; y < raster.Height; y++)
+            {
+                token.ThrowIfCancellationRequested();
+                for (var x = 0; x < raster.Width; x++)
+                {
+                    var offset = (y * raster.Width + x) * 4;
+                    row[x * 3] = raster.Bgra[offset + 2];
+                    row[x * 3 + 1] = raster.Bgra[offset + 1];
+                    row[x * 3 + 2] = raster.Bgra[offset];
+                }
+                digest.AppendData(row);
+            }
+            return Convert.ToHexStringLower(digest.GetHashAndReset());
+        }
+        finally { CryptographicOperations.ZeroMemory(row); }
     }
 }

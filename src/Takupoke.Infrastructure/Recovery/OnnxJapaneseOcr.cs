@@ -308,7 +308,17 @@ public sealed class OnnxJapaneseOcr : IDisposable
             // extra model call, alternate decoding or confidence adjustment.
             RecognitionObserver?.Invoke(new(boxes[index], box, input.ValidWidth, input.InputWidth, tCount,
                 Array.AsReadOnly(pieces.Select(p => new OcrRecognitionPiece(p.Text, p.Start, p.End, p.Confidence)).ToArray())));
-            if (pieces.Count == 0 || pieces.Any(p => p.Confidence < .8f && (!retainUncertain || string.IsNullOrWhiteSpace(p.Text)))) throw new InvalidDataException("OCRで判読できない文字があります。空欄には置き換えません。");
+            if (pieces.Count == 0 || pieces.Any(p => p.Confidence < .8f && (!retainUncertain || string.IsNullOrWhiteSpace(p.Text))))
+            {
+                // Numeric diagnostics never contain source strings or images.
+                var failure = new InvalidDataException("OCRで判読できない文字があります。空欄には置き換えません。");
+                failure.Data["OcrRecognitionPieceCount"] = pieces.Count;
+                failure.Data["OcrRecognitionLowWhitespaceCount"] = pieces.Count(p => p.Confidence < .8f && string.IsNullOrWhiteSpace(p.Text));
+                failure.Data["OcrRecognitionLowBodyCount"] = pieces.Count(p => p.Confidence < .8f && !string.IsNullOrWhiteSpace(p.Text));
+                failure.Data["OcrRecognitionCrop"] = new double[] { box.X, box.Y, box.Width, box.Height };
+                failure.Data["OcrRecognitionInput"] = new[] { input.ValidWidth, input.InputWidth, tCount };
+                throw failure;
+            }
             // CTC time positions are retained as source geometry, never equally
             // spaced boxes inferred from a generated string.
             foreach (var piece in pieces)

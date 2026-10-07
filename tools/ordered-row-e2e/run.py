@@ -30,7 +30,9 @@ for case in manifest["cases"]:
                 bgra=bytearray(original.width*original.height*4)
                 for channel in range(3):bgra[channel::4]=rgb[2-channel::3]
                 bgra[3::4]=bytes([255])*(original.width*original.height)
-                capture["originalSamplesExact"]=(capture["Width"]==original.width and capture["Height"]==original.height and capture["BgraSha256"]==hashlib.sha256(bgra).hexdigest())
+                same_size=capture["Width"]==original.width and capture["Height"]==original.height
+                capture["opaque255BgraEncodingMatchesEmbedded"]=(same_size and capture["BgraSha256"]==hashlib.sha256(bgra).hexdigest())
+                capture["colourManagedRgbMatchesEmbedded"]=(same_size and capture["ColourManagedRgbSha256"]==hashlib.sha256(rgb).hexdigest())
     # The independently designed expected text is first inspected after return.
     gold = case["oracle"]
     table = actual.pop("formal")
