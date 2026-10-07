@@ -10,14 +10,24 @@ namespace Takupoke.Win;
 public sealed partial class MainWindow
 {
     private string _linkQuery = "";
+    private AutoSuggestBox? _linkSearch;
     private StackPanel? _linkResults;
     private void BuildLinks()
     {
         TitleText("一覧", "page-links");
         var search = new AutoSuggestBox { PlaceholderText = "リンク名を検索", Text = _linkQuery };
+        _linkSearch = search;
         AutomationProperties.SetAutomationId(search, "link-search");
         AutomationProperties.SetName(search, "リンクを検索");
-        search.TextChanged += (_, _) => { _linkQuery = search.Text; PopulateLinks(); }; Add(search);
+        search.TextChanged += (_, _) =>
+        {
+            // AutoSuggestBox queues TextChanged. A snapshot refresh can replace
+            // this control before that callback arrives; its old text must not
+            // overwrite input in the replacement or update a different page.
+            if (_page != "links" || !ReferenceEquals(_linkSearch, search)) return;
+            _linkQuery = search.Text;
+            PopulateLinks();
+        }; Add(search);
         Add(IconButton("非表示のリンクを管理", "settings", RestoreHiddenLinks));
         _linkResults = new StackPanel { Spacing = 24 }; Add(_linkResults); PopulateLinks();
     }

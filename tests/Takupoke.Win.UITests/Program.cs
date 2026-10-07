@@ -728,9 +728,15 @@ internal static partial class Program
     private static void SetSearch(string query)
     {
         // The minute refresh can rebuild controls between consecutive inputs.
-        var search = WaitElement("link-search");
-        var edit = search.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit)) ?? search;
-        ((ValuePattern)edit.GetCurrentPattern(ValuePattern.Pattern)).SetValue(query);
+        Wait(() =>
+        {
+            var search = Find("link-search");
+            if (search is null) return false;
+            var edit = search.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit)) ?? search;
+            var value = (ValuePattern)edit.GetCurrentPattern(ValuePattern.Pattern);
+            if (value.Current.Value != query) { value.SetValue(query); return false; }
+            return true;
+        }, "search input applied to current control");
     }
     private static int TextColor(string id)
     {
