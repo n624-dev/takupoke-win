@@ -1,5 +1,5 @@
 {
-  "status": "SOURCE_ONLY_NO_NATIVE",
+  "status": "SOURCE_INTERIOR_RULE_COMPARISON_NO_NATIVE",
   "parentProductionCommit": "c07e4e2d990be59d812776b6b82e2e1c056bbb45",
   "maximumDetectorCalls": 3,
   "recognizerCalls": 0,
@@ -43,13 +43,13 @@
     },
     {
       "path": "tools/original-pdf-roi-probe/native/ProductionRaster.cs",
-      "bytes": 13709,
-      "sha256": "5a552cc5b4208a63cfbb10aa9be938cd01c00df9c2372990ceda5124bee2c962"
+      "bytes": 15390,
+      "sha256": "e8d7d7fc05f8b6381704b80dd4c0d3bc8b270d0d8632ef59f5d5962247a7f41d"
     },
     {
       "path": "tools/original-pdf-roi-probe/native/Program.cs",
-      "bytes": 14074,
-      "sha256": "5bf68ad58e732c3597981e48f138a2043e86c81325660e2cfce71d52d58002ce"
+      "bytes": 14425,
+      "sha256": "80840717d6d8b0338fd65c0e78f987d010073d944199760d7a7ab81f346e26c0"
     },
     {
       "path": "tools/original-pdf-roi-probe/native/RecoveryBox.cs",
@@ -58,8 +58,8 @@
     },
     {
       "path": "tools/original-pdf-roi-probe/native/RoiGeometry.cs",
-      "bytes": 7809,
-      "sha256": "4ede8c933c49a60c3ba7a91fdbb2ab7b0eedfd43ce132c75eca99e54fe0a56d6"
+      "bytes": 8817,
+      "sha256": "29558e35b90a180df137d9c875baea80355d2c1a2271db8a8cca490ff355da5f"
     },
     {
       "path": "tools/original-pdf-roi-probe/native/RoiProbe.csproj",
@@ -103,8 +103,8 @@
     },
     {
       "path": ".github/workflows/original-pdf-geometry-native.yml",
-      "bytes": 3055,
-      "sha256": "16adcc19a3af593ebea8745f998c7b85ac9f5e82ba856e37eaeed19cdd789e35"
+      "bytes": 3238,
+      "sha256": "2b5502857613ad1ceda6e6d9e2fadb88c590d3ec5fd7cba789a2940e556f243b"
     }
   ],
   "derivedFromSourceCommit": "f6b5aa981e4fb9e6405dd0faeca476edd318a576",

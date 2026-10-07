@@ -37,6 +37,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           dotnet build tools/original-pdf-roi-probe/native/RoiProbe.csproj --no-restore -c Release
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet tools/original-pdf-roi-probe/native/bin/Release/net10.0-windows10.0.26100.0/win-x64/RoiProbe.dll --controls
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           $taskDir = Join-Path $env:RUNNER_TEMP "takupoke-geometry-$env:GITHUB_RUN_ID"
           New-Item -ItemType Directory -Path $taskDir | Out-Null
           $env:TAKUPOKE_GEOMETRY_DIR = $taskDir

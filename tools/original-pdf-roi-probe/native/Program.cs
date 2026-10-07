@@ -35,6 +35,10 @@ try
  if(geometryOnly)
  {
   Check.That(rules.Count<=2048,"pre-selection inventory cap");
+  var interior = whole.Rules(token, retainClosedInterior:true);
+  Check.That(interior.Count<=2048,"interior inventory cap");
+  Emit(new{type="interior-comparison",baselineRules=rules,interiorRules=interior,changedPixels=0,thresholdChanged=false,detectorCalls=0,modelSessions=0,qualityCredit=false});
+  rules=interior;mask=whole.RuleMask(rules,token);
   Emit(new{type="geometry-inventory",pdfSHA256=Sha(pdfBytes),pageNumber=1,totalPDFPages=pdf.PageCount,sourceCommit=Environment.GetEnvironmentVariable("GITHUB_SHA"),wholeRaster=new{whole.Width,whole.Height,sha256=Sha(whole.Bgra)},originalPDFSize=new{page.Size.Width,page.Size.Height},rules,horizontalRails=rules.Where(r=>r.Y1==r.Y2).Select(r=>r.Y1).Distinct().Order().ToArray(),verticalRails=rules.Where(r=>r.X1==r.X2).Select(r=>r.X1).Distinct().Order().ToArray(),totalProductionPixelWork=totalPixelWork,detectorCalls=0,recognizerCalls=0,modelSessions=0,wholePDFQuality="UNASSESSED"});
   try
   {

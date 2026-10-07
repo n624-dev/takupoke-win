@@ -53,6 +53,18 @@ internal static class RoiGeometry
   Reject(()=>Select(rules,900,600,_=>-1));scan=8_000_000;bool budget=false;try{Count(nonblank.ROI);}catch(InvalidDataException e){budget=RecoveryWorkLimits.IsExceeded(e);}Check.That(budget,"selection budget remains fatal");
   scan=0;using var cancel=new CancellationTokenSource();cancel.Cancel();bool cancelled=false;try{ObservedNonRuleInk(raster,mask,nonblank.ROI,ref scan,cancel.Token);}catch(OperationCanceledException){cancelled=true;}Check.That(cancelled,"selection cancellation");
   pixels[ink]=pixels[ink+1]=pixels[ink+2]=254;scan=0;Check.That(Count(nonblank.ROI)==1,"production exact nonwhite criterion unchanged");
-  Console.WriteLine("ROI_GEOMETRY_25_CONTROLS_PASS_NATIVE_CALLS_0");
+  var openPixels=Enumerable.Repeat((byte)255,900*600*4).ToArray();
+  void Dark(int x,int y){int p=(y*900+x)*4;openPixels[p]=openPixels[p+1]=openPixels[p+2]=0;}
+  foreach(int y in new[]{20,100,180})for(int x=20;x<900;x++)Dark(x,y);
+  foreach(int x in new[]{20,120,220})for(int y=20;y<=180;y++)Dark(x,y);
+  var open=new RecoveryRaster(900,600,openPixels);
+  Check.That(open.Rules().Count==0,"open outer stroke baseline refusal");
+  var interior=open.Rules(retainClosedInterior:true);
+  Check.That(interior.Count==6&&Select(interior,900,600).Cells==4,"closed interior survives open outer stroke");
+  Check.That(!open.RuleMask(interior)[100*900+800],"unsupported outer tail never masked as table rule");
+  var solitaryPixels=Enumerable.Repeat((byte)255,900*600*4).ToArray();
+  for(int x=20;x<=400;x++){int p=(80*900+x)*4;solitaryPixels[p]=solitaryPixels[p+1]=solitaryPixels[p+2]=0;}
+  Check.That(new RecoveryRaster(900,600,solitaryPixels).Rules(retainClosedInterior:true).Count==0,"isolated glyph remains ink");
+  Console.WriteLine("ROI_GEOMETRY_29_CONTROLS_PASS_NATIVE_CALLS_0");
  }
 }

@@ -144,8 +144,8 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         for (var i = 0; i < covered.Length; i++) { work.Step(); if (i % 4096 == 0) token.ThrowIfCancellationRequested(); if (!covered[i] && (Bgra[i * 4] != 255 || Bgra[i * 4 + 1] != 255 || Bgra[i * 4 + 2] != 255)) return true; }
         return false;
     }
-    public IReadOnlyList<PdfRule> Rules(CancellationToken token = default) => Rules(token, new PixelWork(token));
-    internal IReadOnlyList<PdfRule> Rules(CancellationToken token, PixelWork work)
+    public IReadOnlyList<PdfRule> Rules(CancellationToken token = default, bool retainClosedInterior = false) => Rules(token, new PixelWork(token), retainClosedInterior);
+    internal IReadOnlyList<PdfRule> Rules(CancellationToken token, PixelWork work, bool retainClosedInterior = false)
     {
         token.ThrowIfCancellationRequested();
         if (!Valid) throw new InvalidDataException("OCR画像のサイズが不正です。");
@@ -159,6 +159,34 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         // Long isolated character strokes (一 / I) are ink, not table borders.
         // A raster rule must connect to a perpendicular border at both ends.
         var connectedRules = merged; var comparisonWork = 0;
+        if (retainClosedInterior)
+        {
+            var clipped = new List<PdfRule>();
+            foreach (var line in merged)
+            {
+                token.ThrowIfCancellationRequested();
+                var positions = new List<double>();
+                foreach (var other in merged)
+                {
+                    if (++comparisonWork > 1_000_000) throw RecoveryWorkLimits.Exceeded("OCRの罫線比較数が上限を超えています。");
+                    if (comparisonWork % 128 == 0) token.ThrowIfCancellationRequested();
+                    if (line.Vertical == other.Vertical) continue;
+                    var position = line.Vertical ? other.Y1 : other.X1;
+                    var start = line.Vertical ? line.Y1 : line.X1;
+                    var end = line.Vertical ? line.Y2 : line.X2;
+                    var axis = line.Vertical ? line.X1 : line.Y1;
+                    var crossingStart = line.Vertical ? other.X1 : other.Y1;
+                    var crossingEnd = line.Vertical ? other.X2 : other.Y2;
+                    if (position >= start && position <= end && axis >= crossingStart - 3 && axis <= crossingEnd + 3)
+                        positions.Add(position);
+                }
+                if (positions.Count < 2) continue;
+                var first = positions.Min(); var last = positions.Max();
+                if (last - first < 40) continue;
+                clipped.Add(line.Vertical ? new(line.X1, first, line.X2, last) : new(first, line.Y1, last, line.Y2));
+            }
+            connectedRules = clipped.ToArray();
+        }
         for (var pass = 0; pass < 64; pass++)
         {
             token.ThrowIfCancellationRequested();
