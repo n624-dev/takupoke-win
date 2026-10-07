@@ -7,10 +7,9 @@
   "onnxSize": 10089078,
   "onnxSHA256": "2e397c27461751befc82eca78c9b19e87322ebee34e7316468b21856f9977d64",
   "license": "Apache-2.0",
-  "dictionaryClasses": 4400,
-  "dictionarySHA256": "137be2712c276c2df9460d27994c6942caa2efc35574c1f9973fb98ff7ed23ac",
+  "dictionaryClasses": 4401,
+  "dictionarySHA256": "0cda0d37debec2f0481bb5bb7bf3223b159d8268d288781eef1668455a811f1d",
   "ctcBlank": 0,
-  "spaceIndex": 4399,
   "channels": "BGR",
   "height": 48,
   "minimumWidth": 320,
@@ -18,5 +17,11 @@
   "padding": "zero after normalization",
   "recognitionFloor": 0.8,
   "nativeRasterAndDetector": "unchanged PP-OCRv5 detector and original colour-managed raster",
-  "scope": "Non-adoptable diagnostics only; converted-model equivalence and model qualification unassessed"
+  "scope": "Non-adoptable diagnostics only; converted-model equivalence and model qualification unassessed",
+  "spaceIndices": [
+    4399,
+    4400
+  ],
+  "postprocess": "PaddleX v3.7.0 BaseRecLabelDecode appends space to supplied character list even when it already ends in space; CTC prepends blank",
+  "postprocessSource": "https://github.com/PaddlePaddle/PaddleX/blob/v3.7.0/paddlex/inference/models/text_recognition/processors.py"
 }

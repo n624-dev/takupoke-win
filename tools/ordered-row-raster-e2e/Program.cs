@@ -147,6 +147,6 @@ static async Task<OnnxJapaneseOcr> OpenJapaneseReader(string owned,CancellationT
     await using(var file=File.OpenRead(path))if(Convert.ToHexStringLower(await SHA256.HashDataAsync(file,token))!=sha)throw new InvalidDataException("Research model digest differs from its pin.");
     var installed=await new WindowsRecoveryModels(owned).OcrStateAsync(token) ?? throw new InvalidDataException("Pinned detector is unavailable.");
     var dictionary=Path.Combine(AppContext.BaseDirectory,"japanese-v3-dictionary.json");
-    if(Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(dictionary)))!="137be2712c276c2df9460d27994c6942caa2efc35574c1f9973fb98ff7ed23ac")throw new InvalidDataException("Research Japanese dictionary differs from its pin.");
+    if(Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(dictionary)))!="0cda0d37debec2f0481bb5bb7bf3223b159d8268d288781eef1668455a811f1d")throw new InvalidDataException("Research Japanese dictionary differs from its pin.");
     return OnnxJapaneseOcr.OpenJapaneseResearch(Path.Combine(installed.Path,"det.onnx"),path,dictionary);
 }

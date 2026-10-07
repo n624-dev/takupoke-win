@@ -352,7 +352,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
     internal Action<OcrRecognitionObservation>? RecognitionObserver { get; set; }
     public OnnxJapaneseOcr(string detector, string recognizer, string dictionary) : this(detector, recognizer, dictionary, 18385) { }
     internal static OnnxJapaneseOcr OpenJapaneseResearch(string detector, string recognizer, string dictionary)
-        => new(detector, recognizer, dictionary, 4400);
+        => new(detector, recognizer, dictionary, 4401);
     private OnnxJapaneseOcr(string detector, string recognizer, string dictionary, int dictionaryLength)
     {
         Environment.SetEnvironmentVariable("ORT_TELEMETRY_DISABLED", "1");
