@@ -332,6 +332,7 @@ internal static partial class Program
         var previousValue = SavedIncludesChanges(preferences);
         Invoke("timetable-display-options");
         var option = ByName("時間割変更を反映", ControlType.MenuItem);
+        Require(Checked(option) == previousValue, "The original menu check matches the persisted display preference.");
         var menuId = option.GetRuntimeId();
         var previousGrid = WaitElement("timetable-grid-scroller").GetRuntimeId();
         var previousTick = ReadProbe(clockProbe);
@@ -343,20 +344,15 @@ internal static partial class Program
             "Periodic clock updates retain the original visible display menu item.");
         Require(WaitElement("timetable-grid-scroller").GetRuntimeId().SequenceEqual(previousGrid),
             "The timetable defers its periodic redraw while the display menu is open.");
-        option.SetFocus();
-        Wait(() => ByName("時間割変更を反映", ControlType.MenuItem).Current.HasKeyboardFocus,
-            "The retained display menu option receives keyboard focus");
-        System.Windows.Forms.SendKeys.SendWait("{ENTER}");
-        Wait(() => SavedIncludesChanges(preferences) != previousValue, "The retained display menu option remains selectable and saves its value");
+        EnterFocusedMenuOption("時間割変更を反映", "The retained display menu option receives keyboard focus");
+        try { Wait(() => SavedIncludesChanges(preferences) != previousValue, "The retained display menu option remains selectable and saves its value"); }
+        catch { DisplayMenuDiagnostic(previousValue, preferences); throw; }
         Wait(() => !WaitElement("timetable-grid-scroller").GetRuntimeId().SequenceEqual(previousGrid),
             "Selecting the menu option closes the popup and redraws the saved preference");
         Invoke("timetable-display-options");
         option = ByName("時間割変更を反映", ControlType.MenuItem);
         Require(Checked(option) != previousValue, "The reopened display menu reflects the saved preference.");
-        option.SetFocus();
-        Wait(() => ByName("時間割変更を反映", ControlType.MenuItem).Current.HasKeyboardFocus,
-            "The reopened display menu option receives keyboard focus");
-        System.Windows.Forms.SendKeys.SendWait("{ENTER}");
+        EnterFocusedMenuOption("時間割変更を反映", "The reopened display menu option receives keyboard focus");
         try
         {
             Wait(() => SavedIncludesChanges(preferences) == previousValue, "The menu regression restores the original display preference");
@@ -370,6 +366,36 @@ internal static partial class Program
             throw;
         }
     }
+    private static void DisplayMenuDiagnostic(bool previous, string preferences)
+    {
+        var remaining = _window!.FindFirst(TreeScope.Descendants,
+            new AndCondition(new PropertyCondition(AutomationElement.NameProperty, "時間割変更を反映"),
+                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.MenuItem)));
+        GetWindowThreadProcessId(GetForegroundWindow(), out var owner);
+        Console.Error.WriteLine($"Display-menu diagnostic: initial={previous}; saved={SavedIncludesChanges(preferences)}; menuExists={remaining is not null}; checked={(remaining is null ? "absent" : Checked(remaining).ToString())}; focused={remaining?.Current.HasKeyboardFocus}; foregroundOwner={owner}; appOwner={_window.Current.ProcessId}");
+    }
+    private static void EnterFocusedMenuOption(string name, string label)
+    {
+        // UIA can report item focus while another HWND receives SendKeys.
+        // Deliver exactly one Enter only after both native foreground ownership
+        // and the actual menu item's keyboard focus agree. Persistence and menu
+        // identity assertions remain unchanged; no programmatic toggle is used.
+        Wait(() =>
+        {
+            var foreground = GetForegroundWindow();
+            GetWindowThreadProcessId(foreground, out var owner);
+            if (owner != _window!.Current.ProcessId)
+            {
+                if (!SetForegroundWindow(_window.Current.NativeWindowHandle)) return false;
+            }
+            var item = ByName(name, ControlType.MenuItem); item.SetFocus();
+            GetWindowThreadProcessId(GetForegroundWindow(), out owner);
+            return owner == _window.Current.ProcessId && item.Current.HasKeyboardFocus;
+        }, label);
+        System.Windows.Forms.SendKeys.SendWait("{ENTER}");
+    }
+    [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern nint GetForegroundWindow();
+    [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool SetForegroundWindow(nint window);
     private static bool SavedIncludesChanges(string path)
     {
         using var document = JsonDocument.Parse(PreferenceSnapshot.ReadBytes(path));
