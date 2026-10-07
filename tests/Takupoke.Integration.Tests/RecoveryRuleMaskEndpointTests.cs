@@ -114,4 +114,26 @@ public sealed class RecoveryRuleMaskEndpointTests
         Assert.False(Masked(mask,92,91)); Assert.False(Masked(mask,93,91));
         Assert.True(r.HasUnrecognizedInk([],rules));
     }
+    [Fact] public void ContinuousStrokeIsNotSplitAtEndpointIntegerBucketBoundary()
+    {
+        var r=Border();
+        // Endpoints11 and12 straddle the old /3 buckets but are adjacent
+        // scanlines of one continuous physical border.
+        Ink(r,10,10,255); Ink(r,11,10,255); Ink(r,10,11,255);
+        var rules=r.Rules();
+        Assert.Single(rules,l=>l.Horizontal&&l.Y1<20);
+        Assert.Equal(10.5,rules.Single(l=>l.Horizontal&&l.Y1<20).Y1);
+    }
+    [Theory] [InlineData(false)] [InlineData(true)]
+    public void StaircaseEndpointChainCannotBePartitionedIntoConvenientProofs(bool end)
+    {
+        var r=Border();
+        for(var y=10;y<=13;y++)
+        {
+            for(var x=10;x<=90;x++) Ink(r,x,y,255);
+            var start=end?10:10+y-10; var last=end?90-(y-10):90;
+            for(var x=start;x<=last;x++) Ink(r,x,y);
+        }
+        Assert.Empty(r.Rules()); Assert.True(r.HasUnrecognizedInk([],r.Rules()));
+    }
 }

@@ -17,6 +17,30 @@ internal static class RecoveryWorkLimits
 }
 public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
 {
+    private sealed class PhysicalStroke(PdfRule first)
+    {
+        public List<PdfRule> Lanes { get; } = [first];
+        private double _minStart = first.Vertical ? first.Y1 : first.X1, _maxStart = first.Vertical ? first.Y1 : first.X1;
+        private double _minEnd = first.Vertical ? first.Y2 : first.X2, _maxEnd = first.Vertical ? first.Y2 : first.X2;
+        public bool CanAppend(PdfRule line)
+        {
+            var start = line.Vertical ? line.Y1 : line.X1; var end = line.Vertical ? line.Y2 : line.X2;
+            return Math.Max(_maxStart, start) - Math.Min(_minStart, start) <= 2 &&
+                Math.Max(_maxEnd, end) - Math.Min(_minEnd, end) <= 2;
+        }
+        public bool TouchesEndpointChain(PdfRule line)
+        {
+            var last = Lanes[^1];
+            return line.Vertical ? Math.Abs(last.Y1-line.Y1)<=2 && Math.Abs(last.Y2-line.Y2)<=2
+                : Math.Abs(last.X1-line.X1)<=2 && Math.Abs(last.X2-line.X2)<=2;
+        }
+        public void Append(PdfRule line)
+        {
+            var start = line.Vertical ? line.Y1 : line.X1; var end = line.Vertical ? line.Y2 : line.X2;
+            _minStart = Math.Min(_minStart, start); _maxStart = Math.Max(_maxStart, start);
+            _minEnd = Math.Min(_minEnd, end); _maxEnd = Math.Max(_maxEnd, end); Lanes.Add(line);
+        }
+    }
     // Only Rules can mint this inventory. Physical lanes retain their original
     // merged-border identity; callers cannot attach provenance to guessed lines.
     private sealed class PrintedRuleInventory(PdfRule[] rules, Dictionary<PdfRule, PdfRule[]> lanes,
@@ -200,11 +224,48 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         bool Dark(int x, int y) { work.Step(); var p = (y * Width + x) * 4; return (Bgra[p] + Bgra[p + 1] + Bgra[p + 2]) / 3 < 160; }
         for (var y = 0; y < Height; y++) { token.ThrowIfCancellationRequested(); var start = -1; for (var x = 0; x <= Width; x++) { if (x < Width && Dark(x, y)) { if (start < 0) start = x; } else if (start >= 0) { if (x - start >= Math.Max(40, Width / 40)) lines.Add(new(start, y, x - 1, y)); start = -1; } } }
         for (var x = 0; x < Width; x++) { token.ThrowIfCancellationRequested(); var start = -1; for (var y = 0; y <= Height; y++) { if (y < Height && Dark(x, y)) { if (start < 0) start = y; } else if (start >= 0) { if (y - start >= Math.Max(40, Height / 40)) lines.Add(new(x, start, x, y - 1)); start = -1; } } }
-        // Collapse adjacent scanlines from the same stroke to one centerline.
+        // Collapse only consecutive physical lanes with bounded endpoint spread.
+        // Integer coordinate buckets can split one stroke at an arbitrary /3
+        // boundary. A gap or competing assignment cannot certify one stroke.
         var rawLanes = new Dictionary<PdfRule, PdfRule[]>();
         PdfRule Remember(List<PdfRule> run) { var rule = Merge(run); rawLanes.Add(rule, run.ToArray()); return rule; }
-        var merged = lines.GroupBy(l => (l.Vertical, A: (int)(l.Vertical ? l.Y1 : l.X1) / 3, B: (int)(l.Vertical ? l.Y2 : l.X2) / 3))
-            .SelectMany(g => { var ordered = g.OrderBy(l => l.Vertical ? l.X1 : l.Y1).ToArray(); var result = new List<PdfRule>(); var run = new List<PdfRule>(); foreach (var line in ordered) { if (run.Count > 0 && (line.Vertical ? line.X1 - run[^1].X1 : line.Y1 - run[^1].Y1) > 2) { result.Add(Remember(run)); run.Clear(); } run.Add(line); } if (run.Count > 0) result.Add(Remember(run)); return result; }).ToArray();
+        var strokes = new List<PhysicalStroke>(); var mergeWork = 0; var ambiguousMerge = false;
+        foreach (var orientation in lines.GroupBy(line => line.Vertical))
+        {
+            var previous = new List<PhysicalStroke>(); var previousAxis = double.NegativeInfinity;
+            foreach (var lane in orientation.GroupBy(line => line.Vertical ? line.X1 : line.Y1).OrderBy(group => group.Key))
+            {
+                token.ThrowIfCancellationRequested(); var current = lane.ToArray();
+                var matches = current.Select(line => previousAxis + 1 == lane.Key ? previous.Where(stroke =>
+                {
+                    if (++mergeWork > 1_000_000) throw RecoveryWorkLimits.Exceeded("OCRの罫線比較数が上限を超えています。");
+                    if (mergeWork % 128 == 0) token.ThrowIfCancellationRequested();
+                    if (!stroke.TouchesEndpointChain(line)) return false;
+                    if (!stroke.CanAppend(line)) { ambiguousMerge = true; return false; }
+                    return true;
+                }).ToArray() : []).ToArray();
+                var claims = matches.SelectMany(items => items).GroupBy(stroke => stroke).ToDictionary(group => group.Key, group => group.Count());
+                if (ambiguousMerge || matches.Any(items => items.Length > 1) || claims.Values.Any(count => count > 1)) return [];
+                var next = new List<PhysicalStroke>();
+                for (var index = 0; index < current.Length; index++)
+                {
+                    if (matches[index].Length == 1 && claims[matches[index][0]] == 1)
+                    {
+                        var stroke = matches[index][0]; stroke.Append(current[index]); next.Add(stroke);
+                    }
+                    else { var stroke = new PhysicalStroke(current[index]); strokes.Add(stroke); next.Add(stroke); }
+                }
+                previous = next; previousAxis = lane.Key;
+            }
+        }
+        // Keep the established enumeration contract for unchanged borders.
+        // These buckets affect order only, never membership or pixel proof.
+        static (bool Vertical, int Start, int End) OrderKey(PdfRule line) =>
+            (line.Vertical, (int)(line.Vertical ? line.Y1 : line.X1)/3, (int)(line.Vertical ? line.Y2 : line.X2)/3);
+        var order = lines.GroupBy(OrderKey).Select((group,index) => (group.Key,index)).ToDictionary(item => item.Key,item => item.index);
+        var merged = strokes.OrderBy(stroke => stroke.Lanes.Min(line => order[OrderKey(line)]))
+            .ThenBy(stroke => stroke.Lanes[0].Vertical ? stroke.Lanes[0].X1 : stroke.Lanes[0].Y1)
+            .Select(stroke => Remember(stroke.Lanes)).ToArray();
         // Long isolated character strokes (一 / I) are ink, not table borders.
         // A raster rule must connect to a perpendicular border at both ends.
         var comparisonWork = 0;
