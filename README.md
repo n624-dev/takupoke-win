@@ -4,9 +4,11 @@
 
 現在は開発中です。ホーム・一覧・時間割・設定をWinUIで実装し、資料の選択・解析・保存・更新、授業や変更の詳細、リンクの検索・個人設定につないでいます。正式版はまだ公開していません。ビルド済みの開発確認版はGitHub Releasesから配布します。
 
+[OCRの実測と不採用にした比較](documentation/ocr-improvement-log.md)を記録しています。文書全体の合格とは分けて評価します。
+
 初回正式版は、iOS版の現行機能への対応、同じ入力に対する結果の比較、失敗時の動作確認、Windows実機での確認が揃ってから公開します。
 
-現在のソースからビルドする版は **Windows 11 24H2（build 26100）以降**が必要です。Setup・ZIPともに適用します。公開済み開発確認版の要件とは区別してください。
+現在のソースからビルドする版は **Windows 11 24H2（build 26100）以降**が必要です。Setup・ZIPともに適用します。旧開発確認版とは要件が異なります。
 
 PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCRとモデル管理を接続しています。追加生成AIモデルは精度評価が合格したものだけ配信します。現在のFoundry候補は未合格のため配信停止中です。[方針・実装状況・検証の限界](PDF_RECOVERY.md)を参照してください。未実装の共通方針は[方針専用文書](documentation/pdf-recovery-pending-policy.md)で管理します。
 
@@ -14,9 +16,9 @@ PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCR�
 
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版0.1.0-dev.7のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.7)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。
+[開発確認版0.1.0-dev.10432のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10432)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。
 
-1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.7-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.7-arm64-Setup.exe`。
+1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10432-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10432-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
 3. スタートメニューの「たくポケ」から起動します。
 
