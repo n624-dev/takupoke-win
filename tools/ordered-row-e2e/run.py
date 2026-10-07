@@ -45,6 +45,9 @@ for case in manifest["cases"]:
                         endpoint["darkClassificationChanges"]=sum((a<160)!=(b<160) for a,b in zip(endpoint["MeanChannels"],embedded_mean))
     # The independently designed expected text is first inspected after return.
     gold = case["oracle"]
+    if manifest.get('recipe') == 'readable-ordered-row-v1' and 'nativeSources' in actual:
+        from header_diagnostics import inspect
+        actual['sourcePositionTrace'] = inspect(args.fixtures, case, actual)
     if actual.get("shadow"):
         from shadow_metrics import summarize
         shadow=actual["shadow"]

@@ -13,9 +13,11 @@ using Windows.Storage.Streams;
 namespace Takupoke.Win.Platform;
 public sealed record RecoveryRuleEndpointCapture(PdfRule Rule, int X, int Y, int Width, int Height, int[] MinimumChannels, int[] MeanChannels);
 public sealed record RecoveryRasterCaptureInfo(int Page, int Width, int Height, string Method, string BgraSha256, string ColourManagedRgbSha256, IReadOnlyList<RecoveryRuleEndpointCapture> RuleEndpoints);
+public sealed record RecoveryNativeSourceCapture(string Id, int Page, PdfGlyph Glyph, double Confidence);
 public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
 {
-    public async Task<RecoveryDocument> BuildAsync(byte[] bytes, MaterialKind kind, string hash, RecoveryReadCapture capture, CancellationToken token, Action<RecoveryRasterCaptureInfo>? observer = null)
+    public async Task<RecoveryDocument> BuildAsync(byte[] bytes, MaterialKind kind, string hash, RecoveryReadCapture capture, CancellationToken token, Action<RecoveryRasterCaptureInfo>? observer = null,
+        Action<RecoveryNativeSourceCapture>? sourceObserver = null, Action<RecoveryBuilderTrace>? builderObserver = null)
     {
         var capturedDocument = await Task.Run(() => RecoveryCapturedLayoutBuilder.TryBuildWithoutRaster(hash, kind, capture, token), token);
         if (capturedDocument is not null) return capturedDocument;
@@ -75,7 +77,12 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                 if (glyphs is null) { ocr ??= await models.OpenOcrAsync(token); glyphs = await Task.Run(() => ocr.ReadForManualCapture(raster, token), token); recognizedBoxes = ocr.RecognizedBoxes; confidences = ocr.NativeConfidences; }
                 if (await Task.Run(() => raster.HasUnrecognizedInk(recognizedBoxes, rules, token), token)) throw new InvalidDataException("OCRが認識していない印字があります。読めなかった内容を省略できません。");
                 if (confidences is null || confidences.Count != glyphs.Count) throw new InvalidDataException("OCRの原文と確信度の対応を確認できません。");
-                for (var n = 0; n < glyphs.Count; n++) nativeConfidence.Add($"p{i + 1}s{n}", confidences[n]);
+                for (var n = 0; n < glyphs.Count; n++)
+                {
+                    var id = $"p{i + 1}s{n}";
+                    nativeConfidence.Add(id, confidences[n]);
+                    sourceObserver?.Invoke(new(id, (int)i + 1, glyphs[n], confidences[n]));
+                }
                 completeInk.Add(true);
                 ocrPages.Add((int)i + 1); pages.Add(new(raster.Width, raster.Height, glyphs, rules));
             }
@@ -91,7 +98,7 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
             {
                 var ruleMasks = rasters.Select((r, index) => r.RuleMask(rasterRules[index], token)).ToArray();
                 var blankScanners = rasters.Select((r, index) => r.InkFreeScanner(ruleMasks[index], token)).ToArray();
-                var document = RecoveryDocumentBuilder.Build(hash, kind, pages, (page, box) => blankScanners[page - 1](box), ocrPages, token, allowStructureProposal: true);
+                var document = RecoveryDocumentBuilder.Build(hash, kind, pages, (page, box) => blankScanners[page - 1](box), ocrPages, token, allowStructureProposal: true, observer: builderObserver);
                 var sources = document.Sources.Select(source => nativeConfidence.TryGetValue(source.Id, out var score) ? source with { NativeConfidence = score } : source).ToArray();
                 if (nativeConfidence.Count == 0) return document; // Keep the existing native-only acquisition contract.
                 var proof = rasters.Select((r, index) => new RecoveryCapturedPage(index + 1, r.Width, r.Height,

@@ -6,6 +6,11 @@ using Takupoke.Infrastructure.Parsing;
 
 namespace Takupoke.Infrastructure.Recovery;
 
+// Explicit research observation only. It has no path to candidates or adoption.
+public sealed record RecoveryObservedLabel(string Role, string Value, int Page, RecoveryBox Box, IReadOnlyList<string> Ids);
+public sealed record RecoveryObservedCell(string Id, IReadOnlyList<RecoverySlot> Slots, IReadOnlyList<string> SourceIds, IReadOnlyList<string> HeaderIds);
+public sealed record RecoveryBuilderTrace(string Stage, IReadOnlyList<RecoveryObservedLabel> Labels, IReadOnlyList<RecoveryObservedCell> Cells);
+
 /// Builds candidates from ruled tables and independently printed headers. Unknown
 /// role layouts, missing headers and ink with no recognized text fail closed.
 public static class RecoveryDocumentBuilder
@@ -175,7 +180,7 @@ public static class RecoveryDocumentBuilder
         try { return new DateOnly(y, month, int.Parse(m.Groups[3].Value)).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture); } catch (ArgumentOutOfRangeException) { return null; }
     }
     public static RecoveryDocument Build(string hash, MaterialKind materialKind, IReadOnlyList<PdfPageLayout> pages,
-        Func<int, RecoveryBox, bool> inkFree, IReadOnlySet<int>? ocrPages = null, CancellationToken token = default, bool allowStructureProposal = false)
+        Func<int, RecoveryBox, bool> inkFree, IReadOnlySet<int>? ocrPages = null, CancellationToken token = default, bool allowStructureProposal = false, Action<RecoveryBuilderTrace>? observer = null)
     {
         token.ThrowIfCancellationRequested(); var work = new Work(token);
         var kind = RecoveryPolicy.Kind(materialKind) ?? throw new InvalidDataException("PDF復旧の対象外です。");
@@ -191,6 +196,8 @@ public static class RecoveryDocumentBuilder
             var seen = labels.Select(Key).ToHashSet();
             labels = labels.Concat(OcrLineLabels(atoms, pages, ocrPages, work).Where(label => seen.Add(Key(label)))).ToArray();
         }
+        RecoveryObservedLabel ObserveLabel(Label label, string role) => new(role, label.Value, label.Page, label.Box, label.Ids.ToArray());
+        observer?.Invoke(new("extracted-labels", labels.Select(l => ObserveLabel(l, "candidate")).ToArray(), []));
         var years = labels.Where(l => Regex.IsMatch(l.Value, @"^(?:\d{4}|令和\d{1,2})年度$")).ToArray();
         var yearValues = years.Select(l => l.Value.StartsWith("令和", StringComparison.Ordinal) ? 2018 + int.Parse(l.Value[2..^2]) : int.Parse(l.Value[..4])).Distinct().ToArray();
         if (yearValues.Length != 1) throw new InvalidDataException("年度の独立した見出しがありません。");
@@ -285,6 +292,8 @@ public static class RecoveryDocumentBuilder
         work.Step(classLabels.Sum(l => (long)l.Ids.Count) + periodLabels.Length);
         var classHeaderIds = classLabels.SelectMany(l => l.Ids).ToHashSet(StringComparer.Ordinal);
         periodLabels = periodLabels.Where(l => !l.Ids.Any(classHeaderIds.Contains)).ToArray();
+        observer?.Invoke(new("semantic-headers", classLabels.Select(l => ObserveLabel(l, "class"))
+            .Concat(dayLabels.Select(l => ObserveLabel(l, "day"))).Concat(periodLabels.Select(l => ObserveLabel(l, "period"))).ToArray(), []));
         if (classLabels.Length == 0 || dayLabels.Length == 0 || periodLabels.Length == 0) throw new InvalidDataException("クラス・日付・時限の見出しを確認できません。");
         var trustedNormal = new Dictionary<int, TimetableAnalysis>(); SpecialAnalysis? trustedSpecial = null;
         if (kind == RecoveryDocumentKind.Timetable)
@@ -452,6 +461,8 @@ public static class RecoveryDocumentBuilder
         }
         var classes = usedClass.Keys.Order().ToArray(); var days = usedDay.Keys.Order().ToArray();
         var required = (from c in classes from d in days from p in Enumerable.Range(1, maxPeriod) select new RecoverySlot(c, d, p)).ToArray();
+        observer?.Invoke(new("built-cells", [], cells.Select(c => new RecoveryObservedCell(c.Id, c.Slots.ToArray(), c.SourceIds.ToArray(),
+            c.ClassHeaderIds.Concat(c.DayHeaderIds).Concat(c.PeriodHeaderIds).ToArray())).ToArray()));
         if (cells.Any(c=>c.OrderedRowProof is not null) && (!classes.ToHashSet().SetEquals(RecoveryValidator.SpecialClasses) ||
             !days.ToHashSet().SetEquals(new[]{"1","2","3","4","5"}) || required.Length!=680))
             throw new InvalidDataException("三行時間割の完全なクラス・曜日・時限を確認できません。");

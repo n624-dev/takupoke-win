@@ -25,6 +25,8 @@ string stage = "Reader", outcome = "unassessed"; string? strictFailure = null, f
 TimetableAnalysis? formal = null; RecoveryDocument? doc = null; IReadOnlyList<PdfPageLayout>? pages = null;
 Dictionary<string,object?>? cropFailure=null;
 var rasterCaptures=new List<RecoveryRasterCaptureInfo>();
+var nativeSources=new List<RecoveryNativeSourceCapture>();
+var builderTrace=new List<RecoveryBuilderTrace>();
 var shadowPages=new List<object>(); string? shadowError=null;
 try
 {
@@ -43,7 +45,7 @@ try
             var models=new WindowsRecoveryModels(ownedModelRoot);
             await models.InstallOcrAsync(null,token);
             stage = "Windows render/OCR/Builder";
-            doc = await new WindowsPdfRecovery(models).BuildAsync(bytes,MaterialKind.Timetable,hash,capture,token,rasterCaptures.Add);
+            doc = await new WindowsPdfRecovery(models).BuildAsync(bytes,MaterialKind.Timetable,hash,capture,token,rasterCaptures.Add,nativeSources.Add,builderTrace.Add);
             if (doc is null) outcome = "raster-evidence-required-refused";
             else
             {
@@ -127,9 +129,10 @@ finally
         nativeOcrCalls = (int?)null, llmCalls = 0, milliseconds = watch.ElapsedMilliseconds,
         cropFailure,
         rasterCaptures,
+        nativeSources, builderTrace,
         shadow=new {pages=shadowPages,error=shadowError,nonAdoptable=true,formalQuality="UNASSESSED",llmCalls=0},
         inspectedOriginalImageSizes=originalImageSizes.Select(pair=>new {page=pair.Key,width=pair.Value.Width,height=pair.Value.Height}).ToArray(),
-        nativeCallScope="Current production whole-page acquisition; native OCR calls are not instrumented and never reported as zero" }));
+        nativeCallScope="Linked research whole-page acquisition; native OCR calls are not instrumented and never reported as zero" }));
     if(Directory.Exists(ownedModelRoot))Directory.Delete(ownedModelRoot,true);
     CryptographicOperations.ZeroMemory(bytes);
 }
