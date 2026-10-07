@@ -1,5 +1,8 @@
 name: Inspect fictional PDF raster geometry without OCR models
 on:
+  push:
+    branches: [research/windows-original-pdf-roi-20261006]
+    paths: [.github/workflows/original-pdf-geometry-native.yml, tools/original-pdf-roi-probe/native/Program.cs]
   workflow_dispatch:
     inputs:
       source_commit:
@@ -12,6 +15,7 @@ permissions:
   contents: read
 jobs:
   geometry:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: windows-2025
     timeout-minutes: 10
     defaults:
