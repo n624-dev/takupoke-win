@@ -151,3 +151,19 @@ A new bounded comparison reused the two raster recipes above with the already do
 On the 11 px Sans cohort, both V6 detector conditions completed all 436 uniquely owned rows and had 366 exact literals. The whole-page condition had 65 incorrect literals above the floor, the overlapping condition 66. Thus the larger model did not reproduce the V5 overlapping condition's 417 exact literals and zero high-confidence literal errors. V6 read transactions took 47.680 and 34.286 seconds, including cold initialization in the first. Native output SHA-256: `6af7626eeb9f4ed69bfdffb1c67c27a449e40130abd590f6f084f29c80ba41fb`.
 
 On the 10 px Serif cohort, V6 stopped on the unchanged CTC-padding/source-position guard after 12 rows in the whole-page condition and 242 in the overlapping condition. The observed exact counts were 12/12 and 241/242; the remaining 424 and 194 source literals are unassessed. These partial rates cannot be presented as complete reading success. Native output SHA-256: `c8b61273243ee83c2c0d9fc9e9c2e6aec42568aac14a0026838e924be91c29ed`. The model/crop combination is not qualified, and the padding guard is not bypassed to manufacture completion. Images and owned build/dictionary files were removed; the previously owned shared models were preserved.
+
+
+## Fixed redraw comparison with the V6 recognizer
+
+A bounded comparison retained the same four invented unlabelled 5 × 8 body-cell rasters as the V5 redraw comparison, with matching input hashes. It used Linux .NET ONNX Runtime 1.23.2, the already downloaded 76,554,979-byte V6 recognizer (`9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba`) and its matching 18,710-entry dictionary. Detector preprocessing, original-component ownership, CTC-padding guards, and the 0.8 recognition floor were unchanged. No production model or qualification catalog was changed.
+
+| Font and redraw | Exact uniquely owned fields | Correct above the floor | Incorrect above the floor | Unassessed fields | Read time |
+|---|---:|---:|---:|---:|---:|
+| Sans 11 px, 1× | 120/120 | 120 | 0 | 0 | 9.508 s |
+| Sans 22 px, 2× | 120/120 | 120 | 0 | 0 | 8.579 s |
+| Serif 10 px, 1× | 68/82 observed | 55 | 0 | 38 | 5.608 s |
+| Serif 20 px, 2× | 120/120 | 120 | 0 | 0 | 9.155 s |
+
+The small Serif condition stopped at the existing CTC-padding guard after 82 rows, including 14 incorrectly read teacher fields below the confidence floor. It is a failed read, not a complete 68/82 recovery. The paired 2× condition repaired those 14 observed mistakes and recognized the 38 previously unassessed fields; these are not 52 previously observed recognition mistakes. Every observed crop uniquely covered the complete original painted glyph support within its physical body cell.
+
+V5 had exact literals for all 120 fields in each of these same four rasters, but rejected more correct fields at its confidence floor. V6's better confidence in some conditions does not cancel its small-Serif regression or establish model quality. These same-content size variants are paired comparisons, not independent document successes. Windows native PDF rendering, headers, merges, parallel lessons, Builder/Validator, full-document adoption, and physical-device performance remain unassessed. Raw output SHA-256: `07b0c5c98b5c3ceda8db7de773dd59c818c9046b5b9646a32073486f18f456f0`. Generated images, derived dictionary and owned build files were removed; shared pinned models were preserved. No original school PDF or cloud inference was used.

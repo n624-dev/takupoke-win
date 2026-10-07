@@ -21,6 +21,8 @@ internal static partial class Program
     // temporary input bytes; the global ink receipt is computed, never assumed.
     private static async Task<RecoveryManualSession> SeedManualRecoveryUiAsync(string root, int count)
     {
+        var preferences = new PreferencesStore(root);
+        await preferences.SaveAsync((await preferences.LoadAsync()) with { UseAiFeatures = true });
         await using var store = new SchoolDataStore(root, new WindowsDpapiProtector());
         var lease = await store.BeginAsync(); var (document, _) = RecoveryUiFixture(lease.Period);
         var cell = document.Cells[0];

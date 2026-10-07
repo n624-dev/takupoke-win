@@ -7,7 +7,7 @@ public sealed class AiFeaturePermissionTests
     public void OffOnOffRevokesOldOperationsWithoutRevivingThem()
     {
         var policy = new AiFeaturePermission(); Assert.False(policy.Enabled);
-        var initial = policy.Capture(); policy.Check(initial.Generation);
+        var initial = policy.Capture(); Assert.Throws<OperationCanceledException>(() => policy.Check(initial.Generation));
         Assert.Throws<OperationCanceledException>(() => policy.Check(initial.Generation, true));
         policy.SetEnabled(true); Assert.True(initial.Token.IsCancellationRequested);
         var enabled = policy.Capture(); policy.Check(enabled.Generation, true);

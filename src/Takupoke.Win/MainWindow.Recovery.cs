@@ -19,19 +19,19 @@ public sealed partial class MainWindow
     private bool _manualLifecycleBound;
     private Button? _manualSubmitButton;
     private void UpdateManualSubmitStatus()
-    { if (_manualSubmitButton is { } button) button.IsEnabled = _manualInput.Ready && !_model.Busy && !_model.Locked; }
+    { if (_manualSubmitButton is { } button) button.IsEnabled = _model.Preferences.UseAiFeatures && _manualInput.Ready && !_model.Busy && !_model.Locked; }
     private void SyncManualInput()
     {
         var snapshot = _manualKind is { } kind ? _model.Materials.GetValueOrDefault(kind) : null;
         var session = snapshot?.ManualSession;
-        if (_model.Locked || snapshot?.AcquisitionAttempt?.Failure is not null || session is null ||
+        if (!_model.Preferences.UseAiFeatures || _model.Locked || snapshot?.AcquisitionAttempt?.Failure is not null || session is null ||
             snapshot?.Source?.Id != session.SourceId || snapshot.Source.Digest != session.Plan.Document.PdfHash)
         { _manualInput.Clear(); return; }
         _manualInput.Bind(RecoveryValidator.Fingerprint(session), session.Plan.Targets.ToDictionary(t => t.Target.Key, t => t.OriginalOcr, StringComparer.Ordinal));
     }
     private bool KeepManualFormForSnapshot()
     {
-        if (_manualKind is not { } kind || _page != "recovery." + kind || _renderedPage != _page || _model.Locked)
+        if (!_model.Preferences.UseAiFeatures || _manualKind is not { } kind || _page != "recovery." + kind || _renderedPage != _page || _model.Locked)
             return false;
         var snapshot = _model.Materials.GetValueOrDefault(kind);
         var session = snapshot?.ManualSession;
@@ -59,7 +59,7 @@ public sealed partial class MainWindow
         var submit = Button("入力内容を確認して全体の結果へ", async () =>
         {
             SyncManualInput();
-            if (!_manualInput.IsBoundTo(identity) || !_manualInput.Ready || _model.Busy || _model.Locked) return;
+            if (!_model.Preferences.UseAiFeatures || !_manualInput.IsBoundTo(identity) || !_manualInput.Ready || _model.Busy || _model.Locked) return;
             await _model.CompleteManualRecoveryAsync(kind, session, _manualInput.Submission());
         }, "manual-submit-" + kind);
         _manualSubmitButton = submit;
@@ -120,6 +120,7 @@ public sealed partial class MainWindow
         _manualSubmitButton = null;
         TitleText("端末内で読み取った結果", "page-recovery-" + kind);
         Add(IconButton("資料の詳細に戻る", "back", () => OpenPage("material." + kind), "back-recovery"));
+        if (!_model.Preferences.UseAiFeatures) { _manualInput.Clear(); Add(Text("復旧はOFFです。")); return; }
         var snapshot = _model.Materials.GetValueOrDefault(kind); var preview = snapshot?.RecoveryPreview;
         if (snapshot?.AcquisitionAttempt?.Failure is not null)
         {
@@ -205,12 +206,13 @@ public sealed partial class MainWindow
         TitleText("端末内AIモデル", "page-ai-models"); BackToSettings();
         if (_model.RecoveryModelMessage is { } message) Add(Text(message));
         Add(Text("学校PDF・画像・OCR文字・科目・教員名・復旧結果は外部へ送信しません。モデルファイルの取得にだけインターネットを使用します。"));
+        var ocrAction = _model.OcrModelInstalled ? OperationButton("OCRモデルを削除", _model.DeleteOcrModelAsync, "delete-ocr-model") : OperationButton("日本語OCRモデルをダウンロード", _model.InstallOcrModelAsync, "download-ocr-model");
+        if (!_model.OcrModelInstalled) ocrAction.IsEnabled &= _model.Preferences.UseAiFeatures;
         Add(Card(Panel(SettingsSectionTitle("日本語OCR"), Text(_model.OcrModelReady ? "確認済みモデルを保存しています。" : _model.OcrModelInstalled ? "保存モデルを利用できません。削除して再取得してください。" : "画像PDF用のモデルは未ダウンロードです。"), Text($"約{WindowsRecoveryModels.OcrBundle.Size / 1024 / 1024} MB · {WindowsRecoveryModels.OcrBundle.License}"),
-            _model.OcrModelInstalled ? OperationButton("OCRモデルを削除", _model.DeleteOcrModelAsync, "delete-ocr-model") : OperationButton("日本語OCRモデルをダウンロード", _model.InstallOcrModelAsync, "download-ocr-model"))));
+            ocrAction)));
         if (_model.FoundryModel is { } installed)
             Add(Card(Panel(SettingsSectionTitle("保存した端末内AIモデル"), Text(installed.ModelId),
                 OperationButton("AIモデルを削除", _model.DeleteFoundryModelAsync, "delete-foundry-model"))));
-        if (!_model.Preferences.UseAiFeatures) Add(Text("生成AIを使用・ダウンロードするには、設定で「AI機能を使用する」をONにしてください。OCRはOFFでも利用できます。"));
         foreach (var model in _model.FoundryCandidates)
         {
             var content = Panel(SettingsSectionTitle("追加の端末内AIモデル"), Text(model.ModelId), Text($"約{model.Size / 1024 / 1024} MB · {model.License}"));

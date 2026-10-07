@@ -101,7 +101,7 @@ public sealed record RecoveryValidation(IReadOnlyList<string> Errors)
     public bool CanAdopt => Errors.Count == 0;
 }
 
-// Revokes only foreground recovery/model operations, never ordinary file monitoring.
+// OCR, rule recovery and AI require opt-in; ordinary Strict parsing/monitoring stays available.
 public sealed class AiFeaturePermission
 {
     private readonly object _gate = new();
@@ -120,9 +120,9 @@ public sealed class AiFeaturePermission
         }
         old.Cancel(); old.Dispose();
     }
-    public void Check(long generation, bool requireEnabled = false)
+    public void Check(long generation, bool requireEnabled = true)
     {
-        lock (_gate) if (_generation != generation || requireEnabled && !_enabled) throw new OperationCanceledException("AI機能の設定が変わりました。");
+        lock (_gate) if (_generation != generation || requireEnabled && !_enabled) throw new OperationCanceledException("読み取り設定が変わりました。");
     }
     public static bool UsesAi(RecoveryDocument document, RecoveryResult result) => result.Metadata.Provider != "rule" || document.StructureMetadata is { Provider: not "rule" };
 }

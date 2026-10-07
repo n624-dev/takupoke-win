@@ -121,23 +121,58 @@ public sealed class LatestSourceTests : IAsyncLifetime
         Assert.Equal(good.SourceDigest, (await _store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"))!.SourceDigest);
         Assert.Equal(previous.Id, (await _store.ReadAsync<SourceRecord>(lease, "selection.Exam"))!.Id);
     }
+    [Theory]
+    [InlineData(MaterialKind.Timetable)] [InlineData(MaterialKind.Exam)] [InlineData(MaterialKind.ExamReturn)]
+    public async Task RecoveryOffStillRetriesStrictButNeverAcquiresOcrOrInitializesProviders(MaterialKind kind)
+    {
+        var (lease, source, good) = await Seed(kind);
+        var permission = new AiFeaturePermission();
+        var coordinator = new RecoveryCoordinator(_store, Materials(), (_, _, _, _, _) => throw new Exception("OCR/candidate acquisition must not run when OFF"),
+            _ => throw new Exception("Providers must not initialize when OFF"), aiPermission: permission);
+        var preparation = await coordinator.PrepareAsync(kind, 2026);
+        Assert.Equal(RecoveryJobState.Failed, preparation.State); Assert.Null(preparation.Preview); Assert.Null(preparation.ManualSession);
+        Assert.Equal("latest-file", (await _store.ReadAsync<SourceRecord>(lease, "selection." + kind))!.FileIdentity);
+        Assert.NotNull(await _store.ReadAsync<MaterialAttempt>(lease, "attempt." + kind));
+        Assert.Equal(good.SourceDigest, (await _store.ReadAsync<MaterialAnalysis>(lease, "analysis." + kind))!.SourceDigest);
+        Assert.Null(await _store.ReadAsync<RecoveryPreview>(lease, "recovery.preview." + kind));
+    }
     [Fact]
-    public async Task AiDisabledStillRunsRuleRecoveryWithoutInitializingProviders()
+    public async Task RecoveryOnUsesRuleResultsAndRevokesTheirReviewWhenSwitchedOff()
     {
         var (lease, _, good) = await Seed(MaterialKind.Exam);
-        var permission = new AiFeaturePermission(); var captures = 0;
+        var permission = new AiFeaturePermission(); permission.SetEnabled(true); var captures = 0;
         var coordinator = new RecoveryCoordinator(_store, Materials(), (_, kind, hash, _, _) =>
         {
             captures++;
             return Task.FromResult(RecoveryDocumentBuilder.Build(hash, kind, [RecoveryPipelineTests.Layout(kind)], (_, _) => true));
-        }, _ => throw new Exception("AI provider factory must not run when OFF"), aiPermission: permission);
+        }, _ => Task.FromResult<IReadOnlyList<ILocalRecoveryProvider>>([]), aiPermission: permission);
         var preparation = await coordinator.PrepareAsync(MaterialKind.Exam, 2026);
         Assert.Equal(1, captures); Assert.Equal(RecoveryJobState.AwaitingConfirmation, preparation.State);
         var preview = Assert.IsType<RecoveryPreview>(preparation.Preview);
         Assert.Equal("rule", preview.Result.Metadata.Provider);
         Assert.Equal(good.SourceDigest, (await _store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"))!.SourceDigest);
+        permission.SetEnabled(false);
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => coordinator.AdoptAsync(MaterialKind.Exam, preview));
+        permission.SetEnabled(true);
+        coordinator.TrackRestoredRulePreview(preview);
+        Assert.False(coordinator.CanReview(preview.SourceId));
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => coordinator.AdoptAsync(MaterialKind.Exam, preview));
+        preview = (await coordinator.PrepareAsync(MaterialKind.Exam, 2026)).Preview!;
         await coordinator.AdoptAsync(MaterialKind.Exam, preview);
         Assert.NotNull(await _store.ReadAsync<RecoveryAudit>(lease, "recovery.accepted.Exam." + preview.Document.PdfHash));
+    }
+    [Fact]
+    public async Task OffOnCannotAuthorizeAnExistingRuleReviewFirstLoadedWhileOff()
+    {
+        var (lease, source, good) = await Seed(MaterialKind.Exam); var preview = await PendingPreview(lease, source);
+        var permission = new AiFeaturePermission();
+        var coordinator = new RecoveryCoordinator(_store, Materials(), (_, _, _, _, _) => throw new Exception("Unexpected acquisition"),
+            _ => throw new Exception("Unexpected providers"), aiPermission: permission);
+        coordinator.TrackRestoredRulePreview(preview); Assert.False(coordinator.CanReview(source.Id));
+        permission.SetEnabled(true); coordinator.TrackRestoredRulePreview(preview);
+        Assert.False(coordinator.CanReview(source.Id));
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => coordinator.AdoptAsync(MaterialKind.Exam, preview));
+        Assert.Equal(good.SourceDigest, (await _store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"))!.SourceDigest);
     }
     [Fact]
     public async Task SwitchingAiOffCancelsEvenAProviderFactoryThatIgnoresCancellation()

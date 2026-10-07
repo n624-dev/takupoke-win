@@ -12,7 +12,7 @@
 
 PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCRとモデル管理を接続しています。追加生成AIモデルは精度評価が合格したものだけ配信します。現在のFoundry候補は未合格のため配信停止中です。[方針・実装状況・検証の限界](PDF_RECOVERY.md)を参照してください。未実装の共通方針は[方針専用文書](documentation/pdf-recovery-pending-policy.md)で管理します。
 
-生成AIは[「AI機能を使用する」設定](documentation/ai-settings.md)で許可します（初期OFF）。OCRと通常解析はOFFでも利用できます。時間割変更XLSXの曜日不一致では、[日付からの曜日補正](documentation/weekday-correction.md)を明示承認でき、内容が更新されるまで同じ原本に適用します。
+[「AI・OCRを使用する」設定](documentation/ai-settings.md)は初期OFFで、OFF時は従来の厳格な解析のみを使用します。ON時も厳格な解析を優先し、失敗した資料だけ復旧します。時間割変更XLSXの曜日不一致では、[日付からの曜日補正](documentation/weekday-correction.md)を明示承認でき、内容が更新されるまで同じ原本に適用します。
 
 ## Windowsへの導入（ビルド不要）
 

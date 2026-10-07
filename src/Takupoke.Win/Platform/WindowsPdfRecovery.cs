@@ -15,6 +15,8 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
 {
     public async Task<RecoveryDocument> BuildAsync(byte[] bytes, MaterialKind kind, string hash, RecoveryReadCapture capture, CancellationToken token)
     {
+        var capturedDocument = await Task.Run(() => RecoveryCapturedLayoutBuilder.TryBuildWithoutRaster(hash, kind, capture, token), token);
+        if (capturedDocument is not null) return capturedDocument;
         using var input = new InMemoryRandomAccessStream();
         using (var writer = new DataWriter(input)) { writer.WriteBytes(bytes); await writer.StoreAsync().AsTask(token); writer.DetachStream(); }
         input.Seek(0); var pdf = await PdfDocument.LoadFromStreamAsync(input).AsTask(token);

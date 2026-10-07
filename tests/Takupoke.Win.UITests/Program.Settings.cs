@@ -14,7 +14,7 @@ internal static partial class Program
     {
         var initial = SavedSettings(preferences);
         var ai = _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, "use-ai-features"));
-        Require(ai is not null, "The generative AI opt-in toggle exists.");
+        Require(ai is not null && ai.Current.Name.Contains("OCR", StringComparison.Ordinal), "The OCR and AI opt-in toggle describes both engines.");
         ((TogglePattern)ai!.GetCurrentPattern(TogglePattern.Pattern)).Toggle();
         Wait(() => SavedSettings(preferences).UseAiFeatures != initial.UseAiFeatures, "AI opt-in persists the changed value.");
         ai = _window.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, "use-ai-features"));

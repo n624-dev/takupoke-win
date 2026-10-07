@@ -21,11 +21,11 @@ public sealed partial class MainWindow
             SettingsRow("学校行事", () => OpenPage("events"), "settings-events"),
             SettingsRow("リンク・名称・授業時刻", () => OpenPage("account"), "settings-account",
                 _model.RevisionFailures.Count > 0 ? "要確認" : _model.Revisions.Values.Any(value => value.Changed) ? "更新あり" : null)));
-        Add(SettingsSectionTitle("AI機能"));
-        var ai = new ToggleSwitch { Header = "AI機能を使用する", IsOn = _model.Preferences.UseAiFeatures };
+        Add(SettingsSectionTitle("AI・OCR"));
+        var ai = new ToggleSwitch { Header = "AI・OCRを使用する", IsOn = _model.Preferences.UseAiFeatures };
         AutomationProperties.SetAutomationId(ai, "use-ai-features");
         ai.Toggled += async (_, _) => { var enabled = ai.IsOn; await _model.SavePreferencesAsync(current => current with { UseAiFeatures = enabled }); };
-        Add(Card(Panel(ai, SettingsDescription("端末内の生成AIによるPDF復旧を許可します。初期設定はOFFです。OCRと通常解析はOFFでも利用できます。"))));
+        Add(Card(Panel(ai)));
         Add(SettingsSectionTitle("表示と操作"));
         var initialMainColor = _model.Preferences.MainColor;
         var requestedMainColor = initialMainColor;

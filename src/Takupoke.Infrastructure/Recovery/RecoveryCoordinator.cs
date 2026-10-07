@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using System.Collections.Concurrent;
 using Takupoke.Core;
 using Takupoke.Core.Recovery;
 using Takupoke.Infrastructure.Materials;
@@ -13,9 +14,29 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
     Func<byte[], MaterialKind, string, RecoveryReadCapture, CancellationToken, Task<RecoveryDocument>> buildDocument,
     Func<CancellationToken, Task<IReadOnlyList<ILocalRecoveryProvider>>> providers, TimeProvider? clock = null, AiFeaturePermission? aiPermission = null)
 {
-    private readonly Dictionary<string, long> _aiPreviewPermissions = new();
+    private readonly ConcurrentDictionary<string, long> _previewPermissions = new();
     private readonly SemaphoreSlim _gate = new(1, 1);
     private readonly TimeProvider _clock = clock ?? TimeProvider.System;
+    // Restore existing rule-only reviews without allowing an OFF/ON change to
+    // rebind a review already observed in this process. AI reviews need preparation.
+    public void TrackRestoredRulePreview(RecoveryPreview preview)
+    {
+        if (aiPermission is not null && !AiFeaturePermission.UsesAi(preview.Document, preview.Result))
+            _previewPermissions.TryAdd(preview.SourceId, aiPermission.Capture().Generation);
+    }
+    public void TrackRestoredRuleManual(RecoveryManualSession session)
+    {
+        if (aiPermission is not null && session.Plan.Document.StructureMetadata is not { Provider: not "rule" })
+            _previewPermissions.TryAdd(session.SourceId, aiPermission.Capture().Generation);
+    }
+    public bool CanReview(string sourceId)
+    {
+        if (aiPermission is null) return true;
+        var permission = aiPermission.Capture();
+        try { aiPermission.Check(permission.Generation); }
+        catch (OperationCanceledException) { return false; }
+        return _previewPermissions.TryGetValue(sourceId, out var prepared) && prepared == permission.Generation;
+    }
     public async Task<RecoveryPreparation> PrepareAsync(MaterialKind kind, int schoolYear, CancellationToken token = default)
     {
         var permission = aiPermission?.Capture();
@@ -28,6 +49,8 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
             // Explicit foreground requests still give Strict Parser the first opportunity.
             var strict = await materials.ReparseAsync(kind, schoolYear, token);
             if (strict.Parsed) return new(RecoveryJobState.Adopted, null, "通常の方法で解析できました。");
+            if (aiPermission?.Enabled == false) return new(RecoveryJobState.Failed, null, "復旧はOFFです。");
+            if (permission is { } strictCompleted) aiPermission!.Check(strictCompleted.Generation);
             var lease = await store.BeginAsync(token);
             var source = await store.ReadAsync<SourceRecord>(lease, "selection." + kind, token) ?? throw new InvalidDataException("選択したPDFがありません。");
             var acquisition = await store.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, token);
@@ -60,8 +83,10 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                 catch (OperationCanceledException) { throw; }
                 catch (PdfParseException failure) when (RecoveryPolicy.Eligible(kind, failure.Stage)) { }
                 var document = await buildDocument(bytes, kind, source.Digest, capture, token);
+                token.ThrowIfCancellationRequested();
+                if (permission is { } captured) aiPermission!.Check(captured.Generation);
                 if (!RecoveryPolicy.MatchesPeriod(document, lease.Period)) throw new InvalidDataException("PDFの年度・学期が現在の保存期間と一致しません。");
-                var localProviders = aiPermission?.Enabled == false ? Array.Empty<ILocalRecoveryProvider>() : await providers(token); RecoveryRun run;
+                var localProviders = await providers(token); RecoveryRun run;
                 try
                 {
                     var structure = await Task.Run(() => RecoveryStructure.ResolveAsync(document, "windows", Environment.OSVersion.Version.Major, localProviders, token), token).ConfigureAwait(false);
@@ -76,10 +101,8 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                 if (permission is { } completed)
                 {
                     aiPermission!.Check(completed.Generation);
-                    if (document.StructureMetadata is { Provider: not "rule" }) _aiPreviewPermissions[source.Id] = completed.Generation;
+                    _previewPermissions[source.Id] = completed.Generation;
                 }
-                if (run.Result is null && aiPermission?.Enabled == false && run.State == RecoveryJobState.AwaitingModel)
-                    run = new(RecoveryJobState.Failed, null, ["aiDisabled"]);
                 if (run.Result is null && document.Sources.Any(s => s.NativeConfidence is < .8))
                 {
                     var manual = await Task.Run(() => RecoveryManualAssistance.Prepare(document, token), token).ConfigureAwait(false);
@@ -90,11 +113,9 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                         return new(RecoveryJobState.AwaitingManualCorrection, null, $"原本と読み取り文字を確認して、資料全体の未確定{manual.Targets.Count}項目を補正できます。補正後に全体を確認してから採用してください。") { ManualSession = session };
                     }
                 }
-                if (permission is { } current && (document.StructureMetadata is { Provider: not "rule" } || run.Result is { } generated && AiFeaturePermission.UsesAi(document, generated)))
-                    _aiPreviewPermissions[source.Id] = current.Generation;
                 var preview = run.Result is not null ? new RecoveryPreview(source.Id, lease, document, run.Result, _clock.GetUtcNow()) : null;
                 await store.SaveRecoveryProgressAsync(lease, source, job with { State = run.State, ResultHash = run.Result is null ? null : RecoveryValidator.Fingerprint(run.Result) }, preview, token);
-                return new(run.State, preview, run.Errors.Contains("aiDisabled") ? "この資料の復旧には生成AIが必要です。設定で「AI機能を使用する」をONにしてください。" : run.State switch {
+                return new(run.State, preview, run.State switch {
                     RecoveryJobState.AwaitingConfirmation => "原本と読み取り結果を確認し、使用する場合は採用してください。",
                     RecoveryJobState.AwaitingModel => "利用できる端末内モデルがありません。AIモデルの準備を確認してください。",
                     _ => "内容の完全性を確認できませんでした。前回の正常結果を保持しています。" });
@@ -117,11 +138,11 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
         await _gate.WaitAsync(token);
         try
         {
-            if (permission is { } current && session.Plan.Document.StructureMetadata is { Provider: not "rule" })
+            if (permission is { } current)
             {
                 aiPermission!.Check(current.Generation, requireEnabled: true);
-                if (!_aiPreviewPermissions.TryGetValue(session.SourceId, out var preparedGeneration) || preparedGeneration != current.Generation)
-                    throw new OperationCanceledException("AIの確認結果は無効になっています。復旧をやり直してください。");
+                if (!_previewPermissions.TryGetValue(session.SourceId, out var preparedGeneration) || preparedGeneration != current.Generation)
+                    throw new OperationCanceledException("確認結果は無効になっています。復旧をやり直してください。");
             }
             if (await store.BeginAsync(token) != session.Lease) throw new OperationCanceledException("保存期間または利用状態が変わりました。");
             await materials.RefreshAsync(kind, session.Lease.Period.SchoolYear, token);
@@ -143,6 +164,7 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                 values[t.Target.Key], false, now)).ToArray();
             var result = await Task.Run(() => RecoveryManualAssistance.Complete(plan, corrections, "windows:" + Environment.OSVersion.Version.Major, token), token).ConfigureAwait(false);
             var preview = new RecoveryPreview(source.Id, session.Lease, plan.Document, result, now);
+            if (permission is { } final) aiPermission!.Check(final.Generation);
             await store.SaveRecoveryProgressAsync(session.Lease, source, job with { State = RecoveryJobState.AwaitingConfirmation, ManualPlan = null, ResultHash = RecoveryValidator.Fingerprint(result) }, preview, token);
             return preview;
         }
@@ -165,15 +187,15 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
     public async Task AdoptAsync(MaterialKind kind, RecoveryPreview preview, CancellationToken token = default)
     {
         var permission = aiPermission?.Capture();
-        if (permission is { } initial) aiPermission!.Check(initial.Generation, AiFeaturePermission.UsesAi(preview.Document, preview.Result));
+        if (permission is { } initial) aiPermission!.Check(initial.Generation);
         using var operation = CancellationTokenSource.CreateLinkedTokenSource(token, permission?.Token ?? CancellationToken.None);
         token = operation.Token;
         await _gate.WaitAsync(token);
         try
         {
-            if (permission is { } current && AiFeaturePermission.UsesAi(preview.Document, preview.Result) &&
-                (!_aiPreviewPermissions.TryGetValue(preview.SourceId, out var preparedGeneration) || preparedGeneration != current.Generation))
-                throw new OperationCanceledException("AIの確認結果は無効になっています。復旧をやり直してください。");
+            if (permission is { } current &&
+                (!_previewPermissions.TryGetValue(preview.SourceId, out var preparedGeneration) || preparedGeneration != current.Generation))
+                throw new OperationCanceledException("確認結果は無効になっています。復旧をやり直してください。");
             var lease = await store.BeginAsync(token);
             if (lease != preview.Lease) throw new OperationCanceledException("保存期間または学校データの利用状態が変わりました。");
             // Confirmation must still refer to the selected path's latest readable version.
@@ -188,7 +210,7 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
             if (persisted is null || persisted.SourceId != preview.SourceId || RecoveryValidator.Fingerprint(persisted.Document) != RecoveryValidator.Fingerprint(preview.Document) || RecoveryValidator.Fingerprint(persisted.Result) != RecoveryValidator.Fingerprint(preview.Result))
                 throw new InvalidDataException("現在の確認用結果との対応を確認できません。");
             var acceptance = new RecoveryAcceptance(source.Digest, RecoveryValidator.Fingerprint(preview.Result), RecoveryValidator.Fingerprint(preview.Document), preview.Result.Metadata, _clock.GetUtcNow());
-            if (permission is { } final) aiPermission!.Check(final.Generation, AiFeaturePermission.UsesAi(preview.Document, preview.Result));
+            if (permission is { } final) aiPermission!.Check(final.Generation);
             await store.SaveRecoveryAsync(lease, source, new(preview.Document, preview.Result, acceptance), acceptance.AcceptedAt, token);
             await store.CollectOriginalsAsync(lease, token);
         }

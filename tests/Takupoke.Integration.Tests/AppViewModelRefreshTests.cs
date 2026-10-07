@@ -16,6 +16,20 @@ public sealed class ViewModelOfflineCollection;
 [Collection("view-model-offline")]
 public sealed class AppViewModelRefreshTests
 {
+    [Fact]
+    public async Task RecoveryOffBlocksOcrModelDownloadAndPreservesLastGood()
+    {
+        await using var fixture = await Fixture.CreateAsync();
+        Assert.False(fixture.Model.Preferences.UseAiFeatures);
+        await fixture.Model.InstallOcrModelAsync();
+        // The offline runtime throws NotSupportedException if reached. Cancellation
+        // proves the preference gate ran before initializing the model download.
+        Assert.Contains("処理を中止", fixture.Model.Status);
+        Assert.False(fixture.Model.Busy);
+        Assert.Equal(fixture.Analysis.SourceDigest, fixture.Model.Materials[MaterialKind.Timetable].Analysis!.SourceDigest);
+        Assert.False(fixture.Model.Preferences.UseAiFeatures);
+    }
+
     [Theory]
     [InlineData(4, false, false, true)]
     [InlineData(5, false, false, true)]

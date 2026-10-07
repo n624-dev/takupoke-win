@@ -267,7 +267,10 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     }, "確認した結果を保存しています。");
     public Task InstallOcrModelAsync() => RunAsync(async token =>
     {
+        var permission = _aiPermission.Capture(); _aiPermission.Check(permission.Generation);
+        using var operation = CancellationTokenSource.CreateLinkedTokenSource(token, permission.Token); token = operation.Token;
         await _recoveryModels.InstallOcrAsync((done, total) => _dispatcher.TryEnqueue(() => OperationStatus = $"日本語OCRモデルを取得しています（{done / 1024 / 1024} / {total / 1024 / 1024} MB）。"), token);
+        _aiPermission.Check(permission.Generation);
         OcrModelInstalled = await _recoveryModels.OcrInstalledAsync(token) is not null;
         OcrModelReady = await _recoveryModels.OcrStateAsync(token) is not null; Status = "日本語OCRモデルを準備しました。資料の復旧を再度開始できます。";
     }, "日本語OCRモデルを取得しています。学校資料は外部へ送信されません。");
@@ -355,7 +358,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             // Apply just this edit to the latest preferences. Authentication and
             // file-provider waits never block local settings or lose another edit.
             var next = update(Preferences).Validated();
+            var recoveryChanged = next.UseAiFeatures != Preferences.UseAiFeatures;
             await _preferences.SaveAsync(next); Preferences = next; _aiPermission.SetEnabled(next.UseAiFeatures);
+            if (recoveryChanged) Materials = Materials.ToDictionary(p => p.Key, p => p.Value with { RecoveryPreview = null, RecoveryDisplay = null, ManualSession = null });
             if (!Locked && _displayPeriod is not null)
                 try { await CheckNotificationsAsync(_session.Token); }
                 catch (OperationCanceledException) { }
@@ -410,6 +415,14 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         foreach (var kind in snapshots.Keys.ToArray())
         {
             var snapshot = snapshots[kind];
+            if (snapshot.RecoveryPreview is { } restored) _recovery.TrackRestoredRulePreview(restored);
+            if (snapshot.Source is { } owner && snapshot.RecoveryJob is { ManualPlan: { } storedPlan } storedJob)
+                _recovery.TrackRestoredRuleManual(new(owner.Id, lease, storedPlan, storedJob.CreatedAt));
+            if (snapshot.Source is not { } reviewOwner || !_recovery.CanReview(reviewOwner.Id))
+            {
+                snapshots[kind] = snapshot with { RecoveryPreview = null, ManualSession = null };
+                continue;
+            }
             if (snapshot.AcquisitionAttempt?.Failure is null && snapshot.Source is { } source &&
                 snapshot.RecoveryJob is { State: RecoveryJobState.AwaitingManualCorrection, ManualPlan: { } plan } job &&
                 job.PdfHash == source.Digest && plan.Document.PdfHash == source.Digest &&

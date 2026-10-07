@@ -69,6 +69,8 @@ internal static partial class Program
     }
     private static async Task<string> SeedRecoveryUiAsync(string root, bool parallel = false)
     {
+        var preferences = new PreferencesStore(root);
+        await preferences.SaveAsync((await preferences.LoadAsync()) with { UseAiFeatures = true });
         await using var store = new SchoolDataStore(root, new WindowsDpapiProtector()); var lease = await store.BeginAsync();
         var bytes = RecoveryUiPdf(); var path = Path.Combine(root, "fictional-recovery-original.pdf"); await File.WriteAllBytesAsync(path, bytes);
         using var content = await new FileSourceReader(new WindowsFileIdentity()).ReadAsync(path, MaterialKind.Timetable, null);
@@ -94,6 +96,8 @@ internal static partial class Program
     private sealed record RecoveryUiSpecialFixture(RecoveryDocument Document, RecoveryResult Result);
     private static async Task SeedRecoverySpecialUiAsync(string root, MaterialKind kind)
     {
+        var preferences = new PreferencesStore(root);
+        await preferences.SaveAsync((await preferences.LoadAsync()) with { UseAiFeatures = true });
         await using var store = new SchoolDataStore(root, new WindowsDpapiProtector()); var lease = await store.BeginAsync();
         var name = kind == MaterialKind.Exam ? "exam" : "return";
         var json = await File.ReadAllTextAsync(Path.Combine(AppContext.BaseDirectory, "fixtures", "recovery-" + name + ".json"));

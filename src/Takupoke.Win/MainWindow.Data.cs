@@ -37,7 +37,7 @@ public sealed partial class MainWindow
         if (snapshot?.ParseAttempt is { } attempt)
         {
             if (attempt.RecoveryPending && attempt.SourceDigest == source?.Digest)
-                attempts.Children.Add(SettingsDescription("端末内AIによる復旧待ちです。新しい資料をまだ反映できていません。前回の正常結果を保持しています。"));
+                attempts.Children.Add(SettingsDescription("新しい資料は未反映です。"));
             attempts.Children.Add(DataField("最終解析の試行 · " + DisplayDateTime(attempt.At), attempt.Failure is { } failure
                 ? kind != MaterialKind.Changes ? new PdfParseException(failure, attempt.Page, attempt.Cell).Message : failure : "解析済み"));
             if (attempt.ChangeError is ChangeErrorCode.FormulaCache or ChangeErrorCode.WeekdayMismatch)
@@ -51,7 +51,7 @@ public sealed partial class MainWindow
         {
             attempts.Children.Add(OperationButton("同じファイルを再取得", () => _model.ReacquireAsync(kind), "reacquire-" + kind));
             attempts.Children.Add(OperationButton("最新を取得して再解析", () => _model.ReparseAsync(kind), "reparse-" + kind));
-            if (kind != MaterialKind.Changes && snapshot?.ParseAttempt?.RecoveryPending == true && snapshot.ParseAttempt.SourceDigest == source.Digest)
+            if (_model.Preferences.UseAiFeatures && kind != MaterialKind.Changes && snapshot?.ParseAttempt?.RecoveryPending == true && snapshot.ParseAttempt.SourceDigest == source.Digest)
             {
                 attempts.Children.Add(OperationButton("端末内でPDFを復旧", async () => { await _model.PrepareRecoveryAsync(kind); if (_model.Materials.GetValueOrDefault(kind) is { } prepared && (prepared.RecoveryPreview is not null || prepared.ManualSession is not null)) await OpenPage("recovery." + kind); }, "recover-pdf-" + kind));
                 if (snapshot.RecoveryPreview is not null || snapshot.ManualSession is not null) attempts.Children.Add(Button(snapshot.ManualSession is not null ? "原本と照合して入力" : "復旧した内容を確認", () => OpenPage("recovery." + kind), "recovery-preview-" + kind));
