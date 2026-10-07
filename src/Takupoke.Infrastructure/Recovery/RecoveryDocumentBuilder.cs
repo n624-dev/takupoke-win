@@ -310,6 +310,8 @@ public static class RecoveryDocumentBuilder
             token.ThrowIfCancellationRequested();
             var grid = new PdfGrid(page, token);
             var pageAtoms = atomsByPage.GetValueOrDefault(pi, []); var pageLabels = labelsByPage.GetValueOrDefault(pi, []);
+            var atomIndex = new RecoveryContainmentIndex<Atom>(pageAtoms, atom => atom.Box, work.Step);
+            var labelIndex = new RecoveryContainmentIndex<Label>(pageLabels, label => label.Box, work.Step);
             var pageClasses = classesByPage.GetValueOrDefault(pi, []); var pageDays = daysByPage.GetValueOrDefault(pi, []);
             var pagePeriods = periodsByPage.GetValueOrDefault(pi, []);
             work.Step(pageClasses.Length + pageDays.Length + pagePeriods.Length);
@@ -329,7 +331,7 @@ public static class RecoveryDocumentBuilder
             }
             foreach (var box in boxes.OrderBy(b => b.Y).ThenBy(b => b.X))
             {
-                work.Step(headers.Length + pageLabels.Length * 4L + pageAtoms.Length);
+                work.Step(headers.Length);
                 // Header cells are not timetable body cells.
                 if (headers.Any(l => box.Contains(l.Box))) continue;
                 Label? Closest(IEnumerable<Label> candidates) => candidates.Where(l => Region(l, box) is not null).OrderBy(l => Region(l, box)!.Axis == RecoveryHeaderAxis.Above ? box.Y - l.Box.Y - l.Box.Height : box.X - l.Box.X - l.Box.Width).FirstOrDefault();
@@ -344,7 +346,7 @@ public static class RecoveryDocumentBuilder
                 work.Step(slots.Length * 2L); // Membership and registration, not a scan of past cells.
                 if (slots.Any(usedSlots.Contains)) throw new InvalidDataException("時間割の同じ位置に複数のセル候補があります。");
                 var id = $"p{pi}c{cells.Count}";
-                var inside = pageAtoms.Where(a => box.Contains(a.Box)).ToArray();
+                var inside = atomIndex.Contained(box);
                 var empty = inside.Length == 0 && inkFree(pi, box);
                 if (inside.Length == 0 && !empty) throw new InvalidDataException("文字を読めなかったセルを空欄として扱えません。");
                 // Original OCR body markers are unresolved structure, not an
@@ -364,8 +366,9 @@ public static class RecoveryDocumentBuilder
                 IReadOnlyDictionary<string, string>? separators = null; var fixedBlanks = new HashSet<string>();
                 if (!empty)
                 {
-                    work.Step(pageLabels.Length * 3L + inside.Length * 24L);
-                    try { scopes = RoleScopes(id, pi, box, inside, pageLabels, inkFree); }
+                    var insideLabels = labelIndex.Contained(box);
+                    work.Step(insideLabels.Length * 3L + inside.Length * 24L);
+                    try { scopes = RoleScopes(id, pi, box, inside, insideLabels, inkFree); }
                     catch (InvalidDataException error) when (!RecoveryWorkLimits.IsExceeded(error))
                     {
                         LessonNames? trustedNames = null; IReadOnlyList<LessonNames>? trustedTuples = null;
