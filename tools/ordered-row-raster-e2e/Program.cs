@@ -67,7 +67,7 @@ catch (PdfParseException e) { outcome = "safe-refusal"; failure = e.Stage; }
 catch (InvalidDataException e) {
     outcome = stage=="OCR prerequisites" || e.Data.Contains("RecoveryWorkLimitExceeded") ? "execution-error":"safe-refusal"; failure = e.Message;
     var keys=new[]{"OcrCropConflict","OcrCropOwner","OcrCropAttachedRule","OcrCropTextPixels","OcrCropComponentPixels","OcrCropComponentBounds","OcrCropCandidateCount","OcrCropRuleCount","OcrCropRules","OcrCropUnmaskedRows","OcrCropUnmaskedColumns","OcrRecognitionPieceCount","OcrRecognitionLowWhitespaceCount","OcrRecognitionLowBodyCount","OcrRecognitionCrop","OcrRecognitionInput"};
-    cropFailure=keys.Where(key=>e.Data.Contains(key)).ToDictionary(key=>key,key=>e.Data[key]);
+    cropFailure=keys.Append("OcrRecognitionWhitespacePieces").Where(key=>e.Data.Contains(key)).ToDictionary(key=>key,key=>e.Data[key]);
 }
 catch (OperationCanceledException) { outcome = "execution-error"; failure = "cancelled-or-deadline"; }
 catch (Exception e) { outcome = "execution-error"; failure = e.GetType().Name+":"+e.Message; }

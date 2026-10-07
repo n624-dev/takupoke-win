@@ -52,7 +52,7 @@ for case in manifest["cases"]:
     disposition = ("correct-formal" if exact else "incorrect-formal") if accepted else ("execution-error" if actual["outcome"] == "execution-error" else "recovery-failure" if case["expect"] == "exact" else "correct-refusal")
     row = {"case": case["case"], "expected": case["expect"], "classification": disposition, "literalExact": exact,
            "slotObligations": 680, "bodyValueObligations": 2040, "slotErrors": mismatches, "bodyValueErrors": value_errors,
-           "extraKeys": extra_keys, "correctDecision": exact if case["expect"] == "exact" else not accepted and disposition != "execution-error", **actual}
+           "extraKeys": extra_keys, "correctDecision": bool(exact) if case["expect"] == "exact" else not accepted and disposition != "execution-error", **actual}
     observations.append(row)
     print(json.dumps({"orderedRowE2E": row}, ensure_ascii=False), flush=True)
 (args.fixtures/("observations-windows-image.json" if args.manifest=="raster-manifest.json" else "observations-windows.json")).write_text(json.dumps(observations, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")

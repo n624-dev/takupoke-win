@@ -317,14 +317,15 @@ public sealed class OnnxJapaneseOcr : IDisposable
                 failure.Data["OcrRecognitionLowBodyCount"] = pieces.Count(p => p.Confidence < .8f && !string.IsNullOrWhiteSpace(p.Text));
                 failure.Data["OcrRecognitionCrop"] = new double[] { box.X, box.Y, box.Width, box.Height };
                 failure.Data["OcrRecognitionInput"] = new[] { input.ValidWidth, input.InputWidth, tCount };
+                failure.Data["OcrRecognitionWhitespacePieces"] = pieces.Where(p => string.IsNullOrWhiteSpace(p.Text)).Select(p => new { Codes = p.Text.Select(c => (int)c).ToArray(), p.Start, p.End, p.Confidence }).ToArray();
                 throw failure;
             }
             // CTC time positions are retained as source geometry, never equally
             // spaced boxes inferred from a generated string.
             foreach (var piece in pieces)
             {
-                var source = input.SourceBox(piece.Start, piece.End, tCount);
-                if (!string.IsNullOrWhiteSpace(piece.Text)) { output.Add(new(piece.Text, source.X, source.Y, source.Width, source.Height, line, order++)); confidences.Add(piece.Confidence); }
+                output.Add(input.SourceGlyph(piece.Text, piece.Start, piece.End, tCount, line, order++));
+                confidences.Add(piece.Confidence);
             }
             line++;
         }
