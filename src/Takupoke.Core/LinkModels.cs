@@ -48,6 +48,7 @@ public sealed record UserPreferences
 {
     public string[] SelectedClasses { get; init; } = [];
     public string[] ChangeClasses { get; init; } = [];
+    public bool UseAiFeatures { get; init; }
     public bool International { get; init; }
     public bool IncludesChanges { get; init; } = true;
     public ChangeRange ChangeRange { get; init; } = ChangeRange.Today;

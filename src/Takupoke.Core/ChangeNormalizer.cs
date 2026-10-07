@@ -13,6 +13,9 @@ public sealed class ChangeParseException(ChangeErrorCode code, int? row = null) 
 {
     public ChangeErrorCode Code { get; } = code;
     public int? Row { get; } = row;
+    public string? PrintedWeekday { get; init; }
+    public string? CalculatedWeekday { get; init; }
+    public bool CanCorrectWeekday => Code == ChangeErrorCode.WeekdayMismatch && PrintedWeekday is not null && ChangeNormalizer.KnownWeekday(PrintedWeekday) && CalculatedWeekday is not null;
     public bool PermitsPreview => Code is ChangeErrorCode.FormulaCache or ChangeErrorCode.WeekdayMismatch;
     private static string MessageFor(ChangeErrorCode code, int? row) => (row is null ? "" : $"{row}行目：") + (code switch
     {
@@ -109,10 +112,13 @@ public static class ChangeNormalizer
         if (year is < 1900 or > 9999 || !SchoolDate.TryParse($"{year:D4}-{month:D2}-{day:D2}", out var date)) throw new ChangeParseException(ChangeErrorCode.Date);
         return date.Iso();
     }
+    public static bool KnownWeekday(string value) => "日月火水木金土".Any(day =>
+        new[] { day.ToString(), day + "曜", day + "曜日", "(" + day + ")" }.Contains(Text(value)));
+    public static string Weekday(string normalizedDate) => SchoolDate.TryParse(normalizedDate, out var day)
+        ? "日月火水木金土"[(int)day.DayOfWeek].ToString() : throw new ChangeParseException(ChangeErrorCode.Date);
     public static bool WeekdayMatches(string value, string normalizedDate)
     {
-        if (!SchoolDate.TryParse(normalizedDate, out var day)) return false;
-        var weekday = "日月火水木金土"[(int)day.DayOfWeek].ToString();
+        var weekday = Weekday(normalizedDate);
         return new[] { weekday, weekday + "曜", weekday + "曜日", "(" + weekday + ")" }.Contains(Text(value));
     }
     public static IReadOnlyList<ScheduleChange> Parse(IReadOnlyList<IReadOnlyList<string>> rows, int? defaultYear, CancellationToken cancellationToken = default)

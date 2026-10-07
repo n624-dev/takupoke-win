@@ -13,6 +13,13 @@ internal static partial class Program
     private static LinkOpeningMode CheckSettingsKeyboardRoundTrip(string preferences)
     {
         var initial = SavedSettings(preferences);
+        var ai = _window!.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, "use-ai-features"));
+        Require(ai is not null, "The generative AI opt-in toggle exists.");
+        ((TogglePattern)ai!.GetCurrentPattern(TogglePattern.Pattern)).Toggle();
+        Wait(() => SavedSettings(preferences).UseAiFeatures != initial.UseAiFeatures, "AI opt-in persists the changed value.");
+        ai = _window.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, "use-ai-features"));
+        ((TogglePattern)ai!.GetCurrentPattern(TogglePattern.Pattern)).Toggle();
+        Wait(() => SavedSettings(preferences).UseAiFeatures == initial.UseAiFeatures, "AI opt-in persists A to B to A.");
         var alternateColor = initial.MainColor == "green" ? "purple" : "green";
         SelectSettingsOptionWithKeyboard("main-color", UserPreferences.MainColorLabel(alternateColor),
             () => SavedSettings(preferences).MainColor == alternateColor);

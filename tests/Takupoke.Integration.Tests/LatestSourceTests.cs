@@ -121,6 +121,41 @@ public sealed class LatestSourceTests : IAsyncLifetime
         Assert.Equal(good.SourceDigest, (await _store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"))!.SourceDigest);
         Assert.Equal(previous.Id, (await _store.ReadAsync<SourceRecord>(lease, "selection.Exam"))!.Id);
     }
+    [Fact]
+    public async Task AiDisabledStillRunsRuleRecoveryWithoutInitializingProviders()
+    {
+        var (lease, _, good) = await Seed(MaterialKind.Exam);
+        var permission = new AiFeaturePermission(); var captures = 0;
+        var coordinator = new RecoveryCoordinator(_store, Materials(), (_, kind, hash, _, _) =>
+        {
+            captures++;
+            return Task.FromResult(RecoveryDocumentBuilder.Build(hash, kind, [RecoveryPipelineTests.Layout(kind)], (_, _) => true));
+        }, _ => throw new Exception("AI provider factory must not run when OFF"), aiPermission: permission);
+        var preparation = await coordinator.PrepareAsync(MaterialKind.Exam, 2026);
+        Assert.Equal(1, captures); Assert.Equal(RecoveryJobState.AwaitingConfirmation, preparation.State);
+        var preview = Assert.IsType<RecoveryPreview>(preparation.Preview);
+        Assert.Equal("rule", preview.Result.Metadata.Provider);
+        Assert.Equal(good.SourceDigest, (await _store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"))!.SourceDigest);
+        await coordinator.AdoptAsync(MaterialKind.Exam, preview);
+        Assert.NotNull(await _store.ReadAsync<RecoveryAudit>(lease, "recovery.accepted.Exam." + preview.Document.PdfHash));
+    }
+    [Fact]
+    public async Task SwitchingAiOffCancelsEvenAProviderFactoryThatIgnoresCancellation()
+    {
+        var (lease, _, good) = await Seed(MaterialKind.Exam);
+        var permission = new AiFeaturePermission(); permission.SetEnabled(true);
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var coordinator = new RecoveryCoordinator(_store, Materials(), (_, kind, hash, _, _) =>
+            Task.FromResult(RecoveryDocumentBuilder.Build(hash, kind, [RecoveryPipelineTests.Layout(kind)], (_, _) => true)),
+            async _ => { entered.SetResult(); await release.Task; return Array.Empty<ILocalRecoveryProvider>(); }, aiPermission: permission);
+        var pending = coordinator.PrepareAsync(MaterialKind.Exam, 2026);
+        await entered.Task.WaitAsync(TimeSpan.FromSeconds(10));
+        permission.SetEnabled(false); permission.SetEnabled(true); release.SetResult();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => pending);
+        Assert.Null(await _store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Exam"));
+        Assert.Equal(good.SourceDigest, (await _store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"))!.SourceDigest);
+    }
     private async Task<RecoveryPreview> PendingPreview(SchoolLease lease, SourceRecord previous)
     {
         var doc = RecoveryDocumentBuilder.Build(previous.Digest, MaterialKind.Exam, [RecoveryPipelineTests.Layout(MaterialKind.Exam)], (_, _) => true);

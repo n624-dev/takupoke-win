@@ -42,6 +42,8 @@ public sealed partial class MainWindow
                 ? kind != MaterialKind.Changes ? new PdfParseException(failure, attempt.Page, attempt.Cell).Message : failure : "解析済み"));
             if (attempt.ChangeError is ChangeErrorCode.FormulaCache or ChangeErrorCode.WeekdayMismatch)
                 attempts.Children.Add(Button("警告を確認して内容を見る", PreviewChanges, "preview-changes"));
+            if (attempt.ChangeError == ChangeErrorCode.WeekdayMismatch)
+                attempts.Children.Add(Button("日付から曜日を求めて読み込む", CorrectWeekdays, "correct-change-weekdays"));
         }
         if (source is null) attempts.Children.Add(SettingsDescription("未選択"));
         attempts.Children.Add(OperationButton(source is null ? "資料を選択" : "資料を選び直す", () => SelectMaterial(kind), "select-material-" + kind));
@@ -62,6 +64,8 @@ public sealed partial class MainWindow
             Add(Card(Panel(SettingsSectionTitle("ファイル情報"), DataField("ファイル名", source.OriginalName), DataField("サイズ", $"{source.ByteCount:N0}バイト"),
                 DataField("最終取得", DisplayDateTime(source.AcquiredAt)), DataField("最終確認", DisplayDateTime(source.LastCheckedAt)),
                 DataField("元ファイルの更新", source.SourceModifiedAt is { } modified ? DisplayDateTime(modified) : "未確認"))));
+        if (source?.WeekdayConsent?.Matches(source, _model.ParserYear, MaterialCoordinator.ParserVersion(kind)) == true)
+            Add(Card(Text("曜日は日付から計算しています。ファイルの内容が更新されると解除されます。")));
         var results = Panel(SettingsSectionTitle("保存済みの解析結果"));
         if (analysis is null)
         {
@@ -85,6 +89,17 @@ public sealed partial class MainWindow
         if (analysis.Recovery is { } recovery) results.Children.Add(TechnicalDetails(DataField("端末内復旧", recovery.Result.Metadata.Provider), DataField("モデル", recovery.Result.Metadata.ModelId + " · " + recovery.Result.Metadata.ModelVersion), DataField("確認日時", DisplayDateTime(recovery.Acceptance.AcceptedAt))));
         results.Children.Add(TechnicalDetails(DataField("解析版", analysis.ParserVersion.ToString())));
         Add(Card(results));
+    }
+    private async Task CorrectWeekdays()
+    {
+        var epoch = _model.PrivateEpoch; var preview = await _model.PreviewChangesAsync();
+        if (epoch != _model.PrivateEpoch || _model.Locked) return;
+        if (!preview.CanCorrectWeekdays) { await Message("曜日を補正できません", "日付と曜日の不一致以外の警告があります。元の資料を確認してください。"); return; }
+        var panel = Panel(Text("日付欄を基準に曜日を計算して、時間割変更へ反映します。ファイルの内容が更新されるまで自動的に適用します。"));
+        foreach (var warning in preview.Warnings) panel.Children.Add(Text($"{warning.Row}行目：{warning.PrintedWeekday} → {warning.CalculatedWeekday}曜日"));
+        if (await Dialog("日付から求めた曜日で読み込む", panel, "この曜日で読み込む", "キャンセル") == ContentDialogResult.Primary && epoch == _model.PrivateEpoch && !_model.Locked)
+            await _model.CorrectWeekdaysAsync(preview);
+        panel.Children.Clear();
     }
     private async Task PreviewChanges()
     {

@@ -210,12 +210,13 @@ public sealed partial class MainWindow
         if (_model.FoundryModel is { } installed)
             Add(Card(Panel(SettingsSectionTitle("保存した端末内AIモデル"), Text(installed.ModelId),
                 OperationButton("AIモデルを削除", _model.DeleteFoundryModelAsync, "delete-foundry-model"))));
+        if (!_model.Preferences.UseAiFeatures) Add(Text("生成AIを使用・ダウンロードするには、設定で「AI機能を使用する」をONにしてください。OCRはOFFでも利用できます。"));
         foreach (var model in _model.FoundryCandidates)
         {
             var content = Panel(SettingsSectionTitle("追加の端末内AIモデル"), Text(model.ModelId), Text($"約{model.Size / 1024 / 1024} MB · {model.License}"));
             if (!model.Validated) content.Children.Add(Text("この候補は読み取り精度の検証中です。検証が完了するまで配信しません。"));
             else if (_model.FoundryModel?.ModelId == model.ModelId) content.Children.Add(Text("このモデルを保存しています。"));
-            else content.Children.Add(OperationButton("端末内AIモデルをダウンロード", () => _model.InstallFoundryModelAsync(model), "download-foundry-model"));
+            else if (_model.Preferences.UseAiFeatures) content.Children.Add(OperationButton("端末内AIモデルをダウンロード", () => _model.InstallFoundryModelAsync(model), "download-foundry-model"));
             Add(Card(content));
         }
         Add(Card(Panel(SettingsSectionTitle("Windows標準の生成AI"), Text("対応端末で準備済みの場合に使用します。通常解析とルール復旧を優先し、自動的に大きなモデルをダウンロードしません。"))));

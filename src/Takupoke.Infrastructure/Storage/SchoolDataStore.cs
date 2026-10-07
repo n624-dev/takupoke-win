@@ -247,7 +247,7 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
         if (await command.ExecuteScalarAsync(token) is not byte[] cipher) throw new InvalidDataException("保存した原本を読み取れません。");
         return _cipher!.Decrypt(cipher, "content:" + id);
     }, token);
-    public Task SaveAnalysisAsync(SchoolLease lease, MaterialAnalysis analysis, CancellationToken token = default) => WithConnectionAsync(lease, async connection =>
+    public Task SaveAnalysisAsync(SchoolLease lease, MaterialAnalysis analysis, CancellationToken token = default, bool authorizeWeekdayCorrection = false) => WithConnectionAsync(lease, async connection =>
     {
         var selectionKey = "selection." + analysis.Kind;
         using var transaction = connection.BeginTransaction();
@@ -260,6 +260,21 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
             {
                 var source = DataCodec.Decode<SourceRecord>(bytes);
                 if (source.Id != analysis.OriginalId || source.Digest != analysis.SourceDigest) throw new OperationCanceledException("解析中に選択資料が変わりました。");
+                if (analysis.DateDerivedWeekdays)
+                {
+                    if (analysis.Kind != MaterialKind.Changes || analysis.Changes is not { Count: > 0 } ||
+                        (!authorizeWeekdayCorrection && source.WeekdayConsent?.Matches(source, analysis.SchoolYear, analysis.ParserVersion) != true))
+                        throw new InvalidDataException("曜日補正の許可を確認できません。");
+                    var updated = DataCodec.Encode(source with { WeekdayConsent = new(source.Digest, analysis.SchoolYear, analysis.ParserVersion) });
+                    try
+                    {
+                        using var consent = connection.CreateCommand(); consent.Transaction = transaction;
+                        consent.CommandText = "UPDATE entry SET payload=$payload WHERE key=$key";
+                        consent.Parameters.AddWithValue("$key", selectionKey); consent.Parameters.AddWithValue("$payload", _cipher.Encrypt(updated, selectionKey));
+                        await consent.ExecuteNonQueryAsync(token);
+                    }
+                    finally { CryptographicOperations.ZeroMemory(updated); }
+                }
             }
             finally { CryptographicOperations.ZeroMemory(bytes); }
         }

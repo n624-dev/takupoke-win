@@ -2,6 +2,7 @@ using System.Security.Cryptography;
 using Takupoke.Core;
 using Takupoke.Core.Recovery;
 using Takupoke.Infrastructure.Materials;
+using Takupoke.Infrastructure.Parsing;
 using Takupoke.Infrastructure.Storage;
 using Xunit;
 
@@ -17,6 +18,52 @@ public sealed class MaterialCoordinatorTests
         public byte[] Protect(byte[] key) => _cipher.Encrypt(key, "fake-key");
         public byte[] Unprotect(byte[] bytes) => _cipher.Decrypt(bytes, "fake-key");
         public void Dispose() => _cipher.Dispose();
+    }
+    [Fact]
+    public async Task WeekdayConsentSurvivesRestartButExpiresOnContentUpdateAndReselection()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-weekday-consent-" + Guid.NewGuid().ToString("N")); Directory.CreateDirectory(root); using var protector = new Protector();
+        try
+        {
+            var path = Path.Combine(root, "fictional.xlsx"); var bytes = XlsxChangeReaderTests.Workbook(formula: true, cache: "火"); await File.WriteAllBytesAsync(path, bytes);
+            await using var store = new SchoolDataStore(Path.Combine(root, "data"), protector); var coordinator = new MaterialCoordinator(store, new(new FakeIdentity()));
+            Assert.False((await coordinator.SelectAsync(MaterialKind.Changes, path, 2032)).Parsed);
+            var preview = await coordinator.PreviewChangesAsync(2032); Assert.True(preview.CanCorrectWeekdays);
+            Assert.True((await coordinator.CorrectWeekdaysAsync(preview, 2032)).Parsed);
+            var lease = await store.BeginAsync(); var source = (await store.ReadAsync<SourceRecord>(lease, "selection.Changes"))!;
+            Assert.NotNull(source.WeekdayConsent); Assert.True((await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes"))!.DateDerivedWeekdays);
+            Assert.Equal(bytes, await File.ReadAllBytesAsync(path));
+            coordinator = new(store, new(new FakeIdentity()));
+            Assert.True((await coordinator.ReparseAsync(MaterialKind.Changes, 2032)).Parsed);
+            Assert.True((await coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed);
+            Assert.Equal(source.Id, (await store.ReadAsync<SourceRecord>(lease, "selection.Changes"))!.Id);
+            await File.WriteAllBytesAsync(path, XlsxChangeReaderTests.Workbook(formula: true, cache: "木"));
+            Assert.False((await coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed);
+            Assert.Null((await store.ReadAsync<SourceRecord>(lease, "selection.Changes"))!.WeekdayConsent);
+            Assert.Equal(source.Id, (await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes"))!.OriginalId);
+            await File.WriteAllBytesAsync(path, bytes);
+            Assert.False((await coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed); // A -> B -> A never resurrects consent.
+            Assert.False((await coordinator.SelectAsync(MaterialKind.Changes, path, 2032)).Parsed);
+            Assert.Null((await store.ReadAsync<SourceRecord>(lease, "selection.Changes"))!.WeekdayConsent);
+            await Assert.ThrowsAsync<OperationCanceledException>(() => coordinator.CorrectWeekdaysAsync(preview, 2032));
+        }
+        finally { Directory.Delete(root, true); }
+    }
+    [Fact]
+    public async Task ChangedOriginalDuringWeekdayConfirmationCannotInstallConsent()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-weekday-race-" + Guid.NewGuid().ToString("N")); Directory.CreateDirectory(root); using var protector = new Protector();
+        try
+        {
+            var path = Path.Combine(root, "fictional.xlsx"); await File.WriteAllBytesAsync(path, XlsxChangeReaderTests.Workbook(formula: true, cache: "火"));
+            await using var store = new SchoolDataStore(Path.Combine(root, "data"), protector); var coordinator = new MaterialCoordinator(store, new(new FakeIdentity()));
+            await coordinator.SelectAsync(MaterialKind.Changes, path, 2032); var preview = await coordinator.PreviewChangesAsync(2032);
+            await File.WriteAllBytesAsync(path, XlsxChangeReaderTests.Workbook(formula: true, cache: "木"));
+            await Assert.ThrowsAsync<OperationCanceledException>(() => coordinator.CorrectWeekdaysAsync(preview, 2032));
+            var lease = await store.BeginAsync(); Assert.Null((await store.ReadAsync<SourceRecord>(lease, "selection.Changes"))!.WeekdayConsent);
+            Assert.Null(await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes"));
+        }
+        finally { Directory.Delete(root, true); }
     }
     [Theory] [InlineData(MaterialKind.Timetable)] [InlineData(MaterialKind.Exam)] [InlineData(MaterialKind.ExamReturn)]
     public async Task OlderParserSuccessForSameHashIsReparsedAndFailureKeepsPreviousFormalResult(MaterialKind kind)

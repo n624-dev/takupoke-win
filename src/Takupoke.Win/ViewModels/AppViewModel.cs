@@ -39,6 +39,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private readonly SharedDataUpdater _shared;
     private readonly MaterialCoordinator _materials;
     private readonly RecoveryCoordinator _recovery;
+    private readonly AiFeaturePermission _aiPermission = new();
     private readonly WindowsRecoveryModels _recoveryModels;
     public bool OcrModelReady { get; private set; }
     public bool OcrModelInstalled { get; private set; }
@@ -106,7 +107,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         _school = new(Root, new WindowsDpapiProtector()); _preferences = new(Root); _events = new(Root);
         _api = new(_http); _shared = new(_api, _school); _materials = new(_school, new(new WindowsFileIdentity()));
         _recoveryModels = new(Root);
-        _recovery = new(_school, _materials, new WindowsPdfRecovery(_recoveryModels).BuildAsync, _recoveryModels.ProvidersAsync);
+        _recovery = new(_school, _materials, new WindowsPdfRecovery(_recoveryModels).BuildAsync, _recoveryModels.ProvidersAsync, aiPermission: _aiPermission);
         _authentication = new(new OidcClient(_http), offline is null ? null : offline.OpenBrowser);
         _authentication.ProgressChanged += value => OperationStatus = value;
         NavigationAnchor = Today; WeekStart = Today.DisplayWeekStart();
@@ -152,7 +153,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     {
         await RunAsync(async token =>
         {
-            Preferences = await _preferences.LoadAsync(token); PreferencesReady = true;
+            Preferences = await _preferences.LoadAsync(token); _aiPermission.SetEnabled(Preferences.UseAiFeatures); PreferencesReady = true;
             InitializePlatform();
             try { await _recoveryModels.CleanupBeforeProvidersAsync(token); }
             catch (OperationCanceledException) { throw; }
@@ -172,7 +173,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         }
         if (!_notificationsInitialized) { _notificationSink.Initialize(); _notificationsInitialized = true; }
     }
-    private int ParserYear => int.TryParse(Preferences.DefaultSchoolYear, out var year) && year is >= 1900 and <= 9998 ? year : Today.SchoolYear();
+    public int ParserYear => int.TryParse(Preferences.DefaultSchoolYear, out var year) && year is >= 1900 and <= 9998 ? year : Today.SchoolYear();
     public Task RefreshAsync() => RefreshAsync(automatic: false);
     public Task RefreshAutomaticallyAsync(bool force = false)
     {
@@ -201,7 +202,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         if (Busy) { _pendingRefresh = true; return Task.CompletedTask; }
         return RunAsync(async token =>
     {
-        if (!PreferencesReady) { Preferences = await _preferences.LoadAsync(token); PreferencesReady = true; }
+        if (!PreferencesReady) { Preferences = await _preferences.LoadAsync(token); _aiPermission.SetEnabled(Preferences.UseAiFeatures); PreferencesReady = true; }
         InitializePlatform();
         // Checking the lease first invalidates expired data before reading originals or contacting the API.
         await _school.BeginAsync(token);
@@ -273,7 +274,10 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public Task DeleteOcrModelAsync() => RunAsync(async token => { await _recoveryModels.DeleteOcrAsync(token); OcrModelReady = false; OcrModelInstalled = false; Status = "日本語OCRモデルを削除しました。"; });
     public Task InstallFoundryModelAsync(FoundryPinnedManifest manifest) => RunAsync(async token =>
     {
+        var permission = _aiPermission.Capture(); _aiPermission.Check(permission.Generation, requireEnabled: true);
+        using var operation = CancellationTokenSource.CreateLinkedTokenSource(token, permission.Token); token = operation.Token;
         await _recoveryModels.Foundry.InstallAsync(manifest, progress => _dispatcher.TryEnqueue(() => OperationStatus = $"端末内AIモデルを取得しています（{progress:0}%）。"), token);
+        _aiPermission.Check(permission.Generation, requireEnabled: true);
         FoundryModel = await _recoveryModels.Foundry.InstalledAsync(token); Status = "端末内AIモデルを準備しました。PDFの復旧を再度開始できます。";
     }, "端末内AIモデルを取得しています。学校資料は外部へ送信されません。");
     public Task DeleteFoundryModelAsync() => RunAsync(async token => { await _recoveryModels.Foundry.DeleteAsync(token); FoundryModel = null; Status = "端末内AIモデルを削除しました。"; });
@@ -351,7 +355,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             // Apply just this edit to the latest preferences. Authentication and
             // file-provider waits never block local settings or lose another edit.
             var next = update(Preferences).Validated();
-            await _preferences.SaveAsync(next); Preferences = next;
+            await _preferences.SaveAsync(next); Preferences = next; _aiPermission.SetEnabled(next.UseAiFeatures);
             if (!Locked && _displayPeriod is not null)
                 try { await CheckNotificationsAsync(_session.Token); }
                 catch (OperationCanceledException) { }
@@ -367,6 +371,11 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         var source = accepted ? Materials.GetValueOrDefault(kind)?.Analysis?.OriginalId : Materials.GetValueOrDefault(kind)?.Source?.Id;
         return source is not null ? await _school.ReadOriginalAsync(lease, source) : throw new InvalidDataException("保存したPDFがありません。");
     }
+    public Task CorrectWeekdaysAsync(ChangePreview preview) => RunAsync(async token =>
+    {
+        var result = await _materials.CorrectWeekdaysAsync(preview, ParserYear, token); await ReloadAsync(token);
+        Status = result.Error ?? "日付から求めた曜日で読み込みました。ファイルの内容が更新されるまで適用します。";
+    });
     public Task<ChangePreview> PreviewChangesAsync() => _materials.PreviewChangesAsync(ParserYear, _session.Token);
     public Task ReacquireAsync(MaterialKind kind) => RunAsync(async token =>
     { ResumeFileMonitoring(); var result = await _materials.RefreshAsync(kind, ParserYear, token); await ReloadAsync(token); Status = result.Error ?? "同じ原本を確認しました。"; });

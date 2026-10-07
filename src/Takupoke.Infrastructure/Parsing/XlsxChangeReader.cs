@@ -11,14 +11,14 @@ public sealed record ChangeTable(IReadOnlyList<IReadOnlyList<string>> Rows, IRea
 
 public static class XlsxChangeReader
 {
-    public const int Version = 4;
+    public const int Version = 5;
     private const string SpreadsheetNamespace = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
     private const string RelationshipNamespace = "http://schemas.openxmlformats.org/package/2006/relationships";
     private const string DocumentRelationshipNamespace = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
-    public static IReadOnlyList<ScheduleChange> Parse(byte[] data, int schoolYear, CancellationToken cancellationToken = default)
+    public static IReadOnlyList<ScheduleChange> Parse(byte[] data, int schoolYear, CancellationToken cancellationToken = default, bool dateDerivedWeekdays = false)
     {
         var table = ReadForPreview(data, schoolYear, cancellationToken);
-        if (table.Warnings.FirstOrDefault() is { } warning) throw warning;
+        if (table.Warnings.FirstOrDefault(w => !dateDerivedWeekdays || !w.CanCorrectWeekday) is { } warning) throw warning;
         return ChangeNormalizer.Parse(table.Rows, schoolYear, cancellationToken);
     }
     public static ChangeTable ReadForPreview(byte[] data, int schoolYear, CancellationToken cancellationToken = default)
@@ -121,12 +121,27 @@ public static class XlsxChangeReader
             token.ThrowIfCancellationRequested();
             if (formula.Row < header) { ((List<string>)rows[formula.Row - 1])[formula.Column] = ""; continue; }
             if (formula.Row == header || formula.Column >= headers.Length || headers[formula.Column] is not "曜日" and not "曜") throw new ChangeParseException(ChangeErrorCode.Formula, formula.Row);
-            if (dateColumn >= rows[formula.Row - 1].Count) throw new ChangeParseException(ChangeErrorCode.Date, formula.Row);
-            string date;
-            try { date = ChangeNormalizer.Date(rows[formula.Row - 1][dateColumn], schoolYear); }
-            catch { throw new ChangeParseException(ChangeErrorCode.Date, formula.Row); }
-            if (!formula.HasCache) warnings.Add(new(ChangeErrorCode.FormulaCache, formula.Row));
-            else if (!ChangeNormalizer.WeekdayMatches(rows[formula.Row - 1][formula.Column], date)) warnings.Add(new(ChangeErrorCode.WeekdayMismatch, formula.Row));
+        }
+        var weekdayColumns = headers.Select((h, i) => (h, i)).Where(p => p.h is "曜日" or "曜").Select(p => p.i).ToArray();
+        if (weekdayColumns.Length > 1) throw new ChangeParseException(ChangeErrorCode.Headers, header);
+        if (weekdayColumns.Length == 1)
+        {
+            var column = weekdayColumns[0];
+            var weekdayFormulas = formulas.Where(f => f.Row > header && f.Column == column).ToDictionary(f => f.Row);
+            for (var number = header + 1; number <= rows.Count; number++)
+            {
+                token.ThrowIfCancellationRequested();
+                var row = rows[number - 1]; var printed = column < row.Count ? row[column] : "";
+                var hasFormula = weekdayFormulas.TryGetValue(number, out var formula);
+                if (!hasFormula && string.IsNullOrWhiteSpace(printed)) continue;
+                if (dateColumn >= row.Count) throw new ChangeParseException(ChangeErrorCode.Date, number);
+                string date;
+                try { date = ChangeNormalizer.Date(row[dateColumn], schoolYear); }
+                catch (ChangeParseException) { throw new ChangeParseException(ChangeErrorCode.Date, number); }
+                if (hasFormula && !formula.HasCache) warnings.Add(new(ChangeErrorCode.FormulaCache, number));
+                else if (!ChangeNormalizer.WeekdayMatches(printed, date)) warnings.Add(new(ChangeErrorCode.WeekdayMismatch, number)
+                    { PrintedWeekday = printed, CalculatedWeekday = ChangeNormalizer.Weekday(date) });
+            }
         }
         foreach (var merge in sheet.GetFirstChild<MergeCells>()?.Elements<MergeCell>() ?? [])
         {

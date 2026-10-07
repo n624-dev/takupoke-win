@@ -100,3 +100,29 @@ public sealed record RecoveryValidation(IReadOnlyList<string> Errors)
 {
     public bool CanAdopt => Errors.Count == 0;
 }
+
+// Revokes only foreground recovery/model operations, never ordinary file monitoring.
+public sealed class AiFeaturePermission
+{
+    private readonly object _gate = new();
+    private bool _enabled;
+    private long _generation;
+    private CancellationTokenSource _lifetime = new();
+    public bool Enabled { get { lock (_gate) return _enabled; } }
+    public (long Generation, CancellationToken Token) Capture() { lock (_gate) return (_generation, _lifetime.Token); }
+    public void SetEnabled(bool enabled)
+    {
+        CancellationTokenSource old;
+        lock (_gate)
+        {
+            if (_enabled == enabled) return;
+            _enabled = enabled; _generation++; old = _lifetime; _lifetime = new();
+        }
+        old.Cancel(); old.Dispose();
+    }
+    public void Check(long generation, bool requireEnabled = false)
+    {
+        lock (_gate) if (_generation != generation || requireEnabled && !_enabled) throw new OperationCanceledException("AI機能の設定が変わりました。");
+    }
+    public static bool UsesAi(RecoveryDocument document, RecoveryResult result) => result.Metadata.Provider != "rule" || document.StructureMetadata is { Provider: not "rule" };
+}
