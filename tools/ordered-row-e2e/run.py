@@ -8,11 +8,13 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--fixtures", required=True, type=Path)
 parser.add_argument("--dll", required=True, type=Path)
 parser.add_argument("--dotnet", default="dotnet")
+parser.add_argument("--manifest", default="manifest.json")
+parser.add_argument("--timeout", type=int, default=180)
 args = parser.parse_args()
-manifest = json.loads((args.fixtures/"manifest.json").read_text(encoding="utf-8"))
+manifest = json.loads((args.fixtures/args.manifest).read_text(encoding="utf-8"))
 observations = []
 for case in manifest["cases"]:
-    child = subprocess.run([args.dotnet, str(args.dll), str(args.fixtures/case["file"]), case["sha256"]], capture_output=True, text=True, encoding="utf-8", timeout=180)
+    child = subprocess.run([args.dotnet, str(args.dll), str(args.fixtures/case["file"]), case["sha256"]], capture_output=True, text=True, encoding="utf-8", timeout=args.timeout)
     assert child.returncode == 0, child.stderr[:2000]
     actual = json.loads(child.stdout)
     # The independently designed expected text is first inspected after return.
@@ -37,5 +39,5 @@ for case in manifest["cases"]:
            "extraKeys": extra_keys, "correctDecision": exact if case["expect"] == "exact" else not accepted and disposition != "execution-error", **actual}
     observations.append(row)
     print(json.dumps({"orderedRowE2E": row}, ensure_ascii=False), flush=True)
-(args.fixtures/"observations-windows.json").write_text(json.dumps(observations, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
-print(json.dumps({"summary": {"positiveDocuments": 2, "negativeDocuments": 4, "exactPositive": sum(r["classification"] == "correct-formal" and r["expected"] == "exact" for r in observations), "correctRefusals": sum(r["classification"] == "correct-refusal" for r in observations), "incorrectFormal": sum(r["classification"] == "incorrect-formal" or r["expected"] == "refuse" and r["literalExact"] is True for r in observations), "executionErrors": sum(r["classification"] == "execution-error" for r in observations)}}), flush=True)
+(args.fixtures/("observations-windows-image.json" if args.manifest=="raster-manifest.json" else "observations-windows.json")).write_text(json.dumps(observations, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
+print(json.dumps({"summary": {"positiveDocuments": sum(c["expect"]=="exact" for c in manifest["cases"]), "negativeDocuments": sum(c["expect"]=="refuse" for c in manifest["cases"]), "exactPositive": sum(r["classification"] == "correct-formal" and r["expected"] == "exact" for r in observations), "correctRefusals": sum(r["classification"] == "correct-refusal" for r in observations), "incorrectFormal": sum(r["classification"] == "incorrect-formal" or r["expected"] == "refuse" and r["literalExact"] is True for r in observations), "executionErrors": sum(r["classification"] == "execution-error" for r in observations)}}), flush=True)

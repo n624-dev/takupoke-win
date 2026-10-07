@@ -1,0 +1,46 @@
+name: Observe paired invented image PDF acquisition
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  observe:
+    runs-on: windows-2025
+    timeout-minutes: 25
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+      ORT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: '10.0.x'
+          cache: false
+      - run: python -m pip install --no-cache-dir --disable-pip-version-check -r tools/independent-wide-timetable/requirements.txt
+      - name: Generate paired invented image originals
+        shell: pwsh
+        run: |
+          $owned = Join-Path $env:RUNNER_TEMP 'ordered-row-raster-owned'
+          python -B tools/ordered-row-e2e/generate.py --output $owned
+          if ($LASTEXITCODE -ne 0) { throw 'Independent source generation failed' }
+          python -B tools/ordered-row-e2e/generate_raster.py --fixtures $owned
+          if ($LASTEXITCODE -ne 0) { throw 'Lossless image assembly failed' }
+      - name: Observe current production local OCR pipeline
+        shell: pwsh
+        run: |
+          dotnet build tools/ordered-row-raster-e2e/WindowsRasterNativeProbe.csproj --configuration Release --verbosity quiet
+          if ($LASTEXITCODE -ne 0) { throw 'Native runtime compilation failed' }
+          $owned = Join-Path $env:RUNNER_TEMP 'ordered-row-raster-owned'
+          python -B tools/ordered-row-e2e/run.py --fixtures $owned --manifest raster-manifest.json --timeout 420 --dll tools/ordered-row-raster-e2e/bin/Release/net10.0-windows10.0.26100.0/win-x64/WindowsRasterNativeProbe.dll
+          if ($LASTEXITCODE -ne 0) { throw 'Observation transport failed' }
+          Write-Output 'Measurement completion is separate from semantic quality; inspect exactPositive and incorrectFormal.'
+      - name: Remove owned image originals and downloaded models
+        if: always()
+        shell: pwsh
+        run: |
+          $owned = Join-Path $env:RUNNER_TEMP 'ordered-row-raster-owned'
+          if (Test-Path $owned) { Remove-Item -LiteralPath $owned -Recurse -Force }
+          Get-ChildItem ([IO.Path]::GetTempPath()) -Directory -Filter "takupoke-ordered-raster-models-$env:GITHUB_RUN_ID-*" | Remove-Item -Recurse -Force
