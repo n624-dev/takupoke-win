@@ -44,7 +44,7 @@ All three native acquisition protection gates were false. The outputs were shado
 
 The required pre-start disk reserve also failed: 1,727,135,744 bytes were available against a 2 GiB requirement. The operator incorrectly continued. This execution deviation is retained explicitly; the run receives no qualification credit and is not silently retried. It completed in 5,256 ms with 462,127,104 bytes peak process RSS.
 
-The next safety change under design is to refuse an original Latin middle dot in known-OCR body evidence rather than assume a parallel or single lesson. This must also cover cached historical results. It must preserve original evidence, acceptance history and first consent; no punctuation replacement, confidence-floor reduction or inferred empty teacher is authorized.
+Validator version 9 now refuses an original Latin middle dot in known-OCR body evidence rather than assuming a parallel or single lesson. Builder failure classification and cached historical-result certification use the same policy. Literal source text and acceptance history are preserved; no punctuation replacement, confidence-floor reduction, or inferred empty teacher is applied. The separate compatibility tests cover historical audits; this safety rejection is not a recognition improvement.
 
 Closed replay review SHA-256: `4a37134522b485a6823dbf6219ed36c55394ff213ba03a39c431a78c8ac6ae5b`. Independent complete-result review SHA-256: `64671f0b1c3723ef798861d5099961dc0af1ba5f16619d519d1e775d94a7f5bf`.
 
