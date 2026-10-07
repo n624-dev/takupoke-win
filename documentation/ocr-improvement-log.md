@@ -331,3 +331,16 @@ The server candidate regressed development literals and increased unsupported CT
 Research run [37692819446](https://github.com/n624-dev/takupoke-win/actions/runs/37692819446), source `e1afa82`, did not complete its candidate measurement: the recognizer output had4,401 classes while the supplied dictionary had4,400. The shared shadow error prevented completed-page aggregation for both arms. This is a diagnostic execution error, not evidence of poor recognition or a correct refusal. The production arm independently retained its existing0/2 recovery result.
 
 The pinned graph was inspected locally and its4,401-class output verified. PaddleX v3.7.0's `BaseRecLabelDecode` appends a space to the supplied4,399-entry character list, even though that list already ends in a space; CTC also prepends blank. Research source `e471d78` preserves both space indices4,399/4,400 and fixes the dictionary to4,401 entries (SHA-256:`0cda0d37debec2f0481bb5bb7bf3223b159d8268d288781eef1668455a811f1d`). It does not remove spaces, merge tokens or relax confidence/geometry guards. The corrected candidate must be measured separately before any quality conclusion. No model is qualified.
+
+## Japanese-specific recognizer on identical native rasters: rejected
+
+Corrected research run [37693682134](https://github.com/n624-dev/takupoke-win/actions/runs/37693682134), source `e471d78`, completed both5-page inputs without diagnostic errors. The pinned Japanese PP-OCRv3 conversion is10,089,078bytes. Both models received the same10 native raster hashes and identical crop/valid-width/input-width tuples, with2,175 recognizer calls per source per model.
+
+| Source / model | Exact body literal occurrences | Low nonwhitespace rows | Low whitespace rows | Unsupported-padding rows |
+| --- | ---: | ---: | ---: | ---: |
+| Development / mobile V5 | 466/2,040 | 879 | 81 | 6 |
+| Development / Japanese V3 | 307/2,040 | 747 | 39 | 13 |
+| Unseen / mobile V5 | 436/2,040 | 876 | 106 | 7 |
+| Unseen / Japanese V3 | 312/2,040 | 705 | 36 | 3 |
+
+The candidate regressed exact literals on both sources. Lower counts below0.8 do not establish higher accuracy: confidence has not been calibrated between these models. This fixed recipe is rejected as a production replacement. These are unowned occurrence diagnostics, not character/field accuracy or complete-document success. The production document result remains0/2; no candidate reached adoption and no model is qualified. Total native process times were121.176/118.148seconds. Final CI cleanup removed the owned generated image cohort and downloaded models. Further work should inspect recognition inputs and source ownership rather than repeatedly running this closed replacement condition.
