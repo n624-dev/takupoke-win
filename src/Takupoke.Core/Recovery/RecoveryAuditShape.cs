@@ -9,7 +9,7 @@ internal static class RecoveryAuditShape
     internal static void Check(RecoveryDocument doc, RecoveryResult result,
         RecoveryAcceptance acceptance, RecoveryAcceptance? previous,
         RecoverySemanticCertification? certificate, RecoverySemanticCertification? predecessor,
-        CancellationToken token)
+        CancellationToken token, IReadOnlyList<RecoverySemanticCertification>? history = null)
     {
         var work = new RecoveryWorkBudget(token);
         void Text(string? value) { work.Step(1L + (value?.Length ?? 0)); }
@@ -61,6 +61,12 @@ internal static class RecoveryAuditShape
         List(doc.Cells, cell =>
         {
             Text(cell.Id); Box(cell.Box); List(cell.Slots, Slot); Texts(cell.SourceIds); Texts(cell.BlankFields);
+            if(cell.OrderedRowProof is { } ordered)
+            {
+                if(ordered.Rows.Count!=3 || ordered.Rows.Any(row=>row.Count>256)) throw new RecoveryWorkLimitException();
+                Texts(ordered.SourceIds);
+                List(ordered.Rows,row=>List(row,piece=>{Text(piece.Text);Box(piece.Box);}));
+            }
             if (cell.ParallelSeparators is { } separators) Map(separators, Text);
             List(cell.RoleScopes, scope => { Box(scope.Box); Texts(scope.LabelSourceIds); Region(scope.LabelRegion); });
             Texts(cell.ClassHeaderIds); Texts(cell.DayHeaderIds); Texts(cell.PeriodHeaderIds);
@@ -91,5 +97,6 @@ internal static class RecoveryAuditShape
             Texts(correction.OriginalParentIds); Box(correction.Crop); Text(correction.CorrectedText); Text(correction.Provenance);
         });
         Acceptance(acceptance); Acceptance(previous); Certificate(certificate); Certificate(predecessor);
+        if(history is not null) { if(history.Count!=1)throw new RecoveryWorkLimitException();List(history,Certificate); }
     }
 }

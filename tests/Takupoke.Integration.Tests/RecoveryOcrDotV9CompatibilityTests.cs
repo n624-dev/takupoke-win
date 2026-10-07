@@ -18,9 +18,9 @@ public sealed class RecoveryOcrDotV9CompatibilityTests
     }
     private static RecoveryAudit Accepted(RecoveryDocument doc, RecoveryResult result) => new(doc, result,
         new(doc.PdfHash, RecoveryValidator.Fingerprint(result), RecoveryValidator.Fingerprint(doc), result.Metadata, DateTimeOffset.Parse("2032-04-01T00:00:00Z")));
-    private static RecoverySemanticCertification Certificate(RecoveryAudit audit, int version = 9, RecoverySemanticCertification? predecessor = null) =>
+    private static RecoverySemanticCertification Certificate(RecoveryAudit audit, int version = RecoveryValidator.Version, RecoverySemanticCertification? predecessor = null) =>
         new(2, version, audit.Acceptance.ScopeHash, audit.Acceptance.ResultHash, RecoveryValidator.Fingerprint(audit.Acceptance),
-            RecoveryValidator.Fingerprint(audit.PreviousAcceptance)) { PreviousCertificationHash = version == 9 ? RecoveryValidator.Fingerprint(predecessor) : null };
+            RecoveryValidator.Fingerprint(audit.PreviousAcceptance)) { PreviousCertificationHash = version == RecoveryValidator.Version ? RecoveryValidator.Fingerprint(predecessor) : null };
     private static RecoveryAudit Promoted8(int earliest, bool unsafeDot = false)
     {
         var current = Rule8(unsafeDot);

@@ -9,7 +9,7 @@ namespace Takupoke.Core.Recovery;
 public static class RecoveryValidator
 {
     public const int SchemaVersion = 2;
-    public const int Version = 9;
+    public const int Version = 10;
     public static string Fingerprint<T>(T value) => Convert.ToHexStringLower(SHA256.HashData(JsonSerializer.SerializeToUtf8Bytes(value)));
     private static string Text(string value) => Regex.Replace(value.Normalize(NormalizationForm.FormKC), @"\s+", "").Replace('~', '〜').Replace('～', '〜');
     public static IReadOnlyList<string> SpecialClasses { get; } = new[] { "1_1", "1_2", "1_3" }.Concat(Enumerable.Range(2, 4).SelectMany(y => new[] { "CN", "ES", "IT" }.Select(c => $"{y}_{c}"))).Concat(new[] { "AI_1", "AI_2" }).ToArray();
@@ -47,26 +47,26 @@ public static class RecoveryValidator
     public static bool AuditShapeWithinLimit(RecoveryDocument doc, RecoveryResult result,
         RecoveryAcceptance acceptance, RecoveryAcceptance? previous,
         RecoverySemanticCertification? certificate = null, RecoverySemanticCertification? predecessor = null,
-        CancellationToken token = default)
+        CancellationToken token = default, IReadOnlyList<RecoverySemanticCertification>? history = null)
     {
-        try { RecoveryAuditShape.Check(doc, result, acceptance, previous, certificate, predecessor, token); return true; }
+        try { RecoveryAuditShape.Check(doc, result, acceptance, previous, certificate, predecessor, token, history); return true; }
         catch (RecoveryWorkLimitException) { return false; }
         catch (Exception e) when (e is NullReferenceException or ArgumentException or KeyNotFoundException or InvalidOperationException) { return false; }
     }
 
     public static RecoveryValidation ValidateCertifiedAudit(RecoveryDocument doc, RecoveryResult result,
         RecoveryAcceptance acceptance, RecoveryAcceptance? previous, RecoverySemanticCertification certificate,
-        RecoverySemanticCertification? predecessor = null, CancellationToken token = default)
+        RecoverySemanticCertification? predecessor = null, CancellationToken token = default, IReadOnlyList<RecoverySemanticCertification>? history = null)
     {
         try
         {
             token.ThrowIfCancellationRequested();
-            RecoveryAuditShape.Check(doc, result, acceptance, previous, certificate, predecessor, token);
+            RecoveryAuditShape.Check(doc, result, acceptance, previous, certificate, predecessor, token, history);
             var origin = result.Metadata.ValidatorVersion;
             // Individual legacy shape caps and the complete envelope precede
             // every certification fingerprint as well as semantic context.
             if (!HistoricalAcceptanceEnvelopeValid(doc, result, acceptance, previous, token)) return new(["historicalCertification"]);
-            if (Version != 9 || origin is not (4 or 5 or 6 or 7 or 8) ||
+            if (Version != 10 || origin is not (4 or 5 or 6 or 7 or 8 or 9) ||
                 certificate.RecoverySchemaVersion != SchemaVersion || certificate.ValidatorVersion != Version ||
                 result.Metadata.RecoverySchemaVersion != SchemaVersion || doc.StructureMetadata is { } structure && structure.ValidatorVersion != origin ||
                 acceptance.AcceptedAt == default || acceptance.Metadata != result.Metadata ||
@@ -75,12 +75,20 @@ public static class RecoveryValidator
                 certificate.ScopeHash != Fingerprint(doc) || certificate.ResultHash != Fingerprint(result) ||
                 certificate.AcceptanceHash != Fingerprint(acceptance) || certificate.PreviousAcceptanceHash != Fingerprint(previous) ||
                 certificate.PreviousCertificationHash != Fingerprint(predecessor)) return new(["historicalCertification"]);
-            if (predecessor is not null &&
-                (origin != 7 || result.HumanCorrections is not { Count: > 0 } || previous is not null ||
-                 predecessor.RecoverySchemaVersion != SchemaVersion || predecessor.ValidatorVersion != 8 || predecessor.PreviousCertificationHash is not null ||
-                 predecessor.ScopeHash != certificate.ScopeHash || predecessor.ResultHash != certificate.ResultHash ||
-                 predecessor.AcceptanceHash != certificate.AcceptanceHash || predecessor.PreviousAcceptanceHash != Fingerprint(previous)))
-                return new(["historicalCertification"]);
+            bool SameEnvelope(RecoverySemanticCertification c) => c.RecoverySchemaVersion==SchemaVersion &&
+                c.ScopeHash==certificate.ScopeHash && c.ResultHash==certificate.ResultHash && c.AcceptanceHash==certificate.AcceptanceHash &&
+                c.PreviousAcceptanceHash==Fingerprint(previous);
+            bool Manual8(RecoverySemanticCertification c) => origin==7 && result.HumanCorrections is {Count:>0} && previous is null &&
+                c.ValidatorVersion==8 && c.PreviousCertificationHash is null && SameEnvelope(c);
+            var ancestryValid=predecessor is null ? history is null : predecessor.ValidatorVersion switch
+            {
+                8 => history is null && Manual8(predecessor),
+                9 => origin is >=4 and <=8 && SameEnvelope(predecessor) &&
+                    (history is null ? predecessor.PreviousCertificationHash==Fingerprint(null as RecoverySemanticCertification) :
+                     history.Count==1 && Manual8(history[0]) && predecessor.PreviousCertificationHash==Fingerprint(history[0])),
+                _ => false
+            };
+            if(!ancestryValid)return new(["historicalCertification"]);
             if (origin < 7 && (doc.Capture is not null || result.HumanCorrections is not null || doc.Sources.Any(s => s.NativeConfidence is not null)) ||
                 origin == 7 && result.HumanCorrections is { Count: > 0 } && previous is not null)
                 return new(["historicalCertification"]);
@@ -113,7 +121,7 @@ public static class RecoveryValidator
         var metadata = result.Metadata; var structure = doc.StructureMetadata;
         var version = previous.Metadata.ValidatorVersion;
         if (!(metadata.ValidatorVersion == 5 && version == 4 || metadata.ValidatorVersion == 6 && version is 4 or 5 ||
-            metadata.ValidatorVersion == 7 && version is 4 or 5 or 6 || metadata.ValidatorVersion == 8 && version is 4 or 5 or 6 or 7) ||
+            metadata.ValidatorVersion == 7 && version is 4 or 5 or 6 || metadata.ValidatorVersion == 8 && version is 4 or 5 or 6 or 7 || metadata.ValidatorVersion == 9 && version is 4 or 5 or 6 or 7 or 8) ||
             previous.AcceptedAt != acceptance.AcceptedAt || result.HumanCorrections is not null) return false;
         var oldDocument = doc with { StructureMetadata = structure is null ? null : structure with { ValidatorVersion = version } };
         var oldResult = result with { Metadata = metadata with { ValidatorVersion = version } };
@@ -129,7 +137,7 @@ public static class RecoveryValidator
         if (doc.Cells.Count > 20000 || doc.Sources.Count > 100000 || result.Cells.Count > 20000 ||
             doc.Cells.Any(c => c.SourceIds.Count > 100000 || c.RoleScopes.Count > 12 || c.LessonBindings.Count > 4 || c.Slots.Count > 8 || c.ParallelSeparators is { Count: > 3 }) ||
             result.Cells.Any(c => c.Lessons.Count > 4)) return false;
-        if (Version != 9 || metadata.ValidatorVersion is not (4 or 5 or 6 or 7 or 8) ||
+        if (doc.Cells.Any(c=>c.OrderedRowProof is not null) || Version != 10 || metadata.ValidatorVersion is not (4 or 5 or 6 or 7 or 8 or 9) ||
             metadata.RecoverySchemaVersion != SchemaVersion || metadata.RecoveryVersion != "2" || acceptance.AcceptedAt == default ||
             acceptance.PdfHash != doc.PdfHash || acceptance.PdfHash != result.PdfHash || acceptance.Metadata != metadata ||
             structure is not null && (structure.ValidatorVersion != metadata.ValidatorVersion || metadata.ValidatorVersion == 4 && structure != metadata)) return false;
@@ -384,6 +392,10 @@ public static class RecoveryValidator
             if (doc.Kind == RecoveryDocumentKind.Return) classified.UnionWith(doc.NormalTimeNoteEvidence);
         }
         classified.UnionWith(doc.Cells.Where(c => c.BindingMode == RecoveryBindingMode.RoleProposal).SelectMany(c => c.RoleScopes).SelectMany(s => s.LabelSourceIds));
+        // Complete native PDF capture can contain a literal separator space
+        // between year and term. Retain its source, but it has no semantic role.
+        // OCR spaces are not independent proof of absent original print.
+        classified.UnionWith(doc.Sources.Where(s=>!s.FromOcr && !string.IsNullOrEmpty(s.Text) && string.IsNullOrWhiteSpace(s.Text)).Select(s=>s.Id));
         Check(classified.SetEquals(doc.Sources.Select(s => s.Id)), "unclassifiedSource");
         var normalTimes = new[] { "08:50〜09:35", "09:35〜10:20", "10:30〜11:15", "11:15〜12:00", "12:50〜13:35", "13:35〜14:20", "14:30〜15:15", "15:15〜16:00" };
         if (doc.Kind != RecoveryDocumentKind.Timetable)
@@ -522,6 +534,50 @@ public static class RecoveryValidator
                         if (belongs) separatorIds.Add(id);
                     }
                 }
+            }
+            if (doc.Kind==RecoveryDocumentKind.Timetable && doc.Classes.Count==17 && doc.Days.Count==5 && doc.RequiredSlots.Count==680 &&
+                !proposal && !cell.ConfirmedEmpty && cell.Slots.Count==1 && cell.ParallelCount==1 && cell.LessonBindings.Count==1)
+            {
+                var binding=cell.LessonBindings[0];var roles=new[]{binding.Subject,binding.Teacher,binding.Room};
+                if(roles.All(ids=>ids.Count>0))
+                {
+                    work.Step(roles.Sum(ids=>(long)ids.Count)*4);
+                    var bounds=new List<RecoveryBox>();
+                    foreach(var ids in roles)
+                    {
+                        var original=ids.Where(sources.ContainsKey).Select(id=>sources[id].Box).ToArray();
+                        if(original.Length!=ids.Count)continue;
+                        bounds.Add(new(original.Min(b=>b.X),original.Min(b=>b.Y),original.Max(b=>b.X+b.Width)-original.Min(b=>b.X),original.Max(b=>b.Y+b.Height)-original.Min(b=>b.Y)));
+                    }
+                    Check(bounds.Count==3 && bounds.Zip(bounds.Skip(1)).All(p=>p.First.Y+p.First.Height<p.Second.Y),"orderedRowEvidence");
+                }
+            }
+            if (cell.OrderedRowProof is { } ordered)
+            {
+                work.Step(ordered.SourceIds.Count+ordered.Rows.Count);
+                var valid=ordered.Version==1 && doc.Kind==RecoveryDocumentKind.Timetable && doc.Classes.ToHashSet().SetEquals(SpecialClasses) &&
+                    doc.Days.ToHashSet().SetEquals(new[]{"1","2","3","4","5"}) && doc.RequiredSlots.Count==680 && !proposal &&
+                    !cell.ConfirmedEmpty && cell.Slots.Count==1 && cell.ParallelCount==1 && cell.LessonBindings.Count==1 &&
+                    cell.BlankFields.Count==0 && separatorIds.Count==0 && ordered.SourceIds.SequenceEqual(bindingIds) &&
+                    ordered.SourceIds.SequenceEqual(cell.SourceIds) && ordered.Rows.Count==3;
+                Check(valid,"orderedRowContract");
+                if(ordered.Rows.Count!=3 || ordered.Rows.Any(r=>r.Count>256))return new(["inputLimit"]);
+                var bounds=new List<RecoveryBox>();var binding=cell.LessonBindings.SingleOrDefault();
+                var roleIds=binding is null ? [] : new[]{binding.Subject,binding.Teacher,binding.Room};
+                for(var role=0;role<3;role++)
+                {
+                    var pieces=ordered.Rows[role];work.Step(pieces.Count*4L);
+                    var ids=roleIds.Length==3?roleIds[role]:[];
+                    var agrees=RecoveryOrderedRowProof.SingleRow(pieces) && ids.Count==pieces.Count &&
+                        !RecoveryRoleLabels.HasPrefix(string.Concat(pieces.Select(p=>p.Text))) &&
+                        !pieces.Any(p=>p.Text.Any(c=>"・･/／".Contains(c))) &&
+                        ids.Select((id,index)=>sources.TryGetValue(id,out var source) && source.CellId==cell.Id && source.Page==cell.Page &&
+                            source.Text==pieces[index].Text && source.Box==pieces[index].Box && source.SourceLine==pieces[index].SourceLine &&
+                            source.SourceOrder==pieces[index].SourceOrder && cell.Box.Contains(source.Box)).All(v=>v);
+                    Check(agrees,"orderedRowEvidence");
+                    if(pieces.Count>0)bounds.Add(new(pieces.Min(p=>p.Box.X),pieces.Min(p=>p.Box.Y),pieces.Max(p=>p.Box.X+p.Box.Width)-pieces.Min(p=>p.Box.X),pieces.Max(p=>p.Box.Y+p.Box.Height)-pieces.Min(p=>p.Box.Y)));
+                }
+                Check(bounds.Count==3 && bounds.Zip(bounds.Skip(1)).All(p=>p.First.Y+p.First.Height<p.Second.Y),"orderedRowEvidence");
             }
             Check(proposal || (cell.ConfirmedEmpty ? cell.LessonBindings.Count == 0 : cell.LessonBindings.Count == cell.ParallelCount && bindingIds.Distinct().Count() == bindingIds.Length && bindingIds.ToHashSet().SetEquals(cell.SourceIds.Where(id => !separatorIds.Contains(id)))), "lessonBinding");
             Check(cell.Slots.Count > 0 && cell.Slots.Select(s => (s.ClassName, s.Day)).Distinct().Count() == 1 &&

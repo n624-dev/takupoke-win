@@ -31,6 +31,11 @@ public sealed class PdfTextEngine(CancellationToken cancellationToken = default)
     private int _line, _order, _operations, _units;
     private readonly StringBuilder _drawn = new();
     private readonly List<PdfGlyph> _glyphs = [];
+    // Strict keeps its existing non-whitespace stream. Recovery additionally
+    // retains explicitly drawn whitespace; absent geometry makes capture partial.
+    private readonly List<PdfGlyph> _recoveryGlyphs = [];
+    internal IReadOnlyList<PdfGlyph> RecoveryGlyphs => _recoveryGlyphs;
+    internal bool RecoveryComplete { get; private set; } = true;
     private static readonly IReadOnlyDictionary<string, int> Counts = new Dictionary<string, int>
     { ["q"] = 0, ["Q"] = 0, ["cm"] = 6, ["BT"] = 0, ["ET"] = 0, ["Tm"] = 6, ["Td"] = 2, ["TD"] = 2, ["T*"] = 0,
         ["Tc"] = 1, ["Tw"] = 1, ["Tz"] = 1, ["TL"] = 1, ["Ts"] = 1, ["Tr"] = 1 };
@@ -83,10 +88,14 @@ public sealed class PdfTextEngine(CancellationToken cancellationToken = default)
             var total = _matrix.FollowedBy(_state.Ctm); var bottom = font.Descent / 1000 * _state.Size + _state.Rise; var top = font.Ascent / 1000 * _state.Size + _state.Rise;
             var points = new[] { total.Point(0, bottom), total.Point(width * _state.Scale, bottom), total.Point(0, top), total.Point(width * _state.Scale, top) };
             if (points.Any(p => !double.IsFinite(p.X) || !double.IsFinite(p.Y) || Math.Abs(p.X) >= 10_000_000 || Math.Abs(p.Y) >= 10_000_000)) throw new PdfParseException("P01");
+            var x = points.Min(p => p.X); var y = points.Min(p => p.Y); var right = points.Max(p => p.X); var upper = points.Max(p => p.Y);
+            var validGeometry = width > 0 && right > x && upper > y;
+            if (validGeometry)
+                _recoveryGlyphs.Add(new(text, x, y, right-x, upper-y, _line, _order));
+            else RecoveryComplete = false;
             if (!string.IsNullOrWhiteSpace(text))
             {
-                var x = points.Min(p => p.X); var y = points.Min(p => p.Y); var right = points.Max(p => p.X); var upper = points.Max(p => p.Y);
-                if (width <= 0 || right <= x || upper <= y) throw new PdfParseException("P01");
+                if (!validGeometry) throw new PdfParseException("P01");
                 _glyphs.Add(new(text, x, y, right - x, upper - y, _line, _order));
             }
             _drawn.Append(text); _units += text.Length; _order++;

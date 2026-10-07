@@ -10,6 +10,23 @@ namespace Takupoke.Integration.Tests;
 public sealed class PdfParsingTests
 {
     private static PdfFont Font => new(new(1, new Dictionary<int, string> { [65] = "架", [66] = "空", [32] = " " }), new Dictionary<int, double> { [65] = 500, [66] = 500, [32] = 250 }, 0, 800, -200);
+    [Theory]
+    [InlineData(250, true, 3)]
+    [InlineData(0, false, 2)]
+    public void RecoveryRetainsLiteralSpaceWithGeometryWithoutChangingStrictStream(double spaceWidth, bool complete, int count)
+    {
+        var text=new PdfTextEngine();text.Operation("BT");
+        text.SetFont(Font with {Widths=new Dictionary<int,double> {[65]=500,[66]=500,[32]=spaceWidth}},10);
+        text.Show("A B"u8);text.Operation("ET");
+        Assert.Equal("架空",string.Concat(text.Finish("架 空").Select(g=>g.Text)));
+        Assert.Equal(complete,text.RecoveryComplete);Assert.Equal(count,text.RecoveryGlyphs.Count);
+        if(complete)
+        {
+            Assert.Equal("架 空",string.Concat(text.RecoveryGlyphs.Select(g=>g.Text)));
+            Assert.Equal(new int?[]{0,1,2},text.RecoveryGlyphs.Select(g=>g.SourceOrder));
+            Assert.Equal(2.5,text.RecoveryGlyphs[1].Width);
+        }
+    }
     [Fact]
     public void StrictDrawingGeometryUsesMetricsSpacingAndVerifiedText()
     {

@@ -76,7 +76,7 @@ public sealed class RecoveryOcrDotV9Tests
         var old = Audit();
         Assert.False(RecoveryValidator.CanReuse(old.Acceptance, old.Document, old.Result));
         var current = Assert.IsType<RecoveryAudit>(RecoveryAuditCertification.Reusable(old));
-        Assert.Equal(9, current.CurrentCertification!.ValidatorVersion);
+        Assert.Equal(RecoveryValidator.Version, current.CurrentCertification!.ValidatorVersion);
         Assert.Equal(JsonSerializer.SerializeToUtf8Bytes(old.Document), JsonSerializer.SerializeToUtf8Bytes(current.Document));
         Assert.Equal(JsonSerializer.SerializeToUtf8Bytes(old.Result), JsonSerializer.SerializeToUtf8Bytes(current.Result));
         Assert.Equal(old.Acceptance, current.Acceptance);
@@ -94,7 +94,7 @@ public sealed class RecoveryOcrDotV9Tests
             RecoveryValidator.Fingerprint(old.Acceptance), RecoveryValidator.Fingerprint(old.PreviousAcceptance));
         var certified8 = old with { CurrentCertification = certificate8 };
         var current = Assert.IsType<RecoveryAudit>(RecoveryAuditCertification.Reusable(certified8));
-        Assert.Equal(9, current.CurrentCertification!.ValidatorVersion);
+        Assert.Equal(RecoveryValidator.Version, current.CurrentCertification!.ValidatorVersion);
         Assert.Equal(certificate8, PreviousCertificate(current));
         Assert.Equal(JsonSerializer.SerializeToUtf8Bytes(old.Document), JsonSerializer.SerializeToUtf8Bytes(current.Document));
         Assert.Equal(JsonSerializer.SerializeToUtf8Bytes(old.Result), JsonSerializer.SerializeToUtf8Bytes(current.Result));

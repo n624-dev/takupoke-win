@@ -363,6 +363,7 @@ public static class RecoveryDocumentBuilder
                     }
                 }
                 IReadOnlyList<RecoveryRoleScope> scopes = []; IReadOnlyList<RecoveryLessonBinding> fixedBindings = [];
+                RecoveryOrderedRowProof? orderedProof = null;
                 IReadOnlyDictionary<string, string>? separators = null; var fixedBlanks = new HashSet<string>();
                 if (!empty)
                 {
@@ -382,6 +383,18 @@ public static class RecoveryDocumentBuilder
                             foreach (var a in inside) byGlyph.Add(a.Glyph, a.Id);
                             var bindings = rows.Select(r => (IReadOnlyList<string>)r.Select(g => byGlyph[g]).ToArray()).ToArray();
                             fixedBindings = [new(bindings[0], bindings[1], bindings[2])];
+                        }
+                        else if (kind == RecoveryDocumentKind.Timetable && slots.Length == 1 && rows.Count == 3 &&
+                            rows.All(row => !RecoveryRoleLabels.HasPrefix(string.Concat(row.Select(g=>g.Text))) && !row.Any(g=>g.Text.Any(c=>"・･/／".Contains(c)))))
+                        {
+                            var byGlyph=new Dictionary<PdfGlyph,Atom>(ReferenceEqualityComparer.Instance);
+                            foreach(var atom in inside)byGlyph.Add(atom.Glyph,atom);
+                            var pieces=rows.Select(row=>(IReadOnlyList<RecoveryOrderedRowPiece>)row.Select(g=>new RecoveryOrderedRowPiece(g.Text,new(g.X,g.Y,g.Width,g.Height),g.SourceLine,g.SourceOrder)).ToArray()).ToArray();
+                            var rowBoxes=rows.Select(row=>Bounds(row.Select(g=>byGlyph[g]))).ToArray();
+                            if (!pieces.All(RecoveryOrderedRowProof.SingleRow) || rowBoxes.Zip(rowBoxes.Skip(1)).Any(p=>p.First.Y+p.First.Height>=p.Second.Y)) throw;
+                            var ids=rows.Select(row=>(IReadOnlyList<string>)row.Select(g=>byGlyph[g].Id).ToArray()).ToArray();
+                            fixedBindings=[new(ids[0],ids[1],ids[2])];
+                            orderedProof=new(1,ids.SelectMany(row=>row).ToArray(),pieces);
                         }
                         else if (trustedTuples is { Count: 2 } && rows.Count == 3)
                         {
@@ -430,7 +443,7 @@ public static class RecoveryDocumentBuilder
                 var blanks = scopes.Where(s => s.EmptyVerified).Select(s => s.Role.ToString().ToLowerInvariant()).Concat(fixedBlanks).Distinct().ToArray();
                 var parallelCount = fixedBindings.Count > 0 ? fixedBindings.Count : empty || scopes.Count == 0 ? 1 : scopes.Select(s => s.LessonIndex).Distinct().Count();
                 var cell = new RecoveryCell(id, pi, box, RecoveryInputState.Complete, slots, inside.Select(a => a.Id).ToArray(), blanks, empty, parallelCount)
-                { BindingMode = empty || fixedBindings.Count > 0 ? RecoveryBindingMode.Fixed : RecoveryBindingMode.RoleProposal, RoleScopes = scopes, LessonBindings = fixedBindings, ParallelSeparators = separators,
+                { BindingMode = empty || fixedBindings.Count > 0 ? RecoveryBindingMode.Fixed : RecoveryBindingMode.RoleProposal, RoleScopes = scopes, LessonBindings = fixedBindings, ParallelSeparators = separators, OrderedRowProof = orderedProof,
                     ClassHeaderIds = cls.Ids, DayHeaderIds = day.Ids, PeriodHeaderIds = chosenPeriods.SelectMany(l => l.Ids).ToArray(),
                     ClassRegion = Region(cls, box), DayRegion = Region(day, box), PeriodRegions = chosenPeriods.ToDictionary(l => l.Value, l => Region(l, box)!) };
                 cells.Add(cell); usedSlots.UnionWith(slots); Register(usedClass, cls.Value, cls.Ids); Register(usedDay, day.Value, day.Ids);
@@ -439,6 +452,9 @@ public static class RecoveryDocumentBuilder
         }
         var classes = usedClass.Keys.Order().ToArray(); var days = usedDay.Keys.Order().ToArray();
         var required = (from c in classes from d in days from p in Enumerable.Range(1, maxPeriod) select new RecoverySlot(c, d, p)).ToArray();
+        if (cells.Any(c=>c.OrderedRowProof is not null) && (!classes.ToHashSet().SetEquals(RecoveryValidator.SpecialClasses) ||
+            !days.ToHashSet().SetEquals(new[]{"1","2","3","4","5"}) || required.Length!=680))
+            throw new InvalidDataException("三行時間割の完全なクラス・曜日・時限を確認できません。");
         var titleLabels = kind switch { RecoveryDocumentKind.Timetable => new[] { "時間割", "通常時間割", "授業時間割" }, RecoveryDocumentKind.Exam => ["試験時間割", "定期試験時間割"], _ => ["試験返却時間割"] };
         var title = labels.Where(l => titleLabels.Contains(l.Value)).SelectMany(l => l.Ids).ToArray();
         IReadOnlyDictionary<string, IReadOnlyList<string>> Evidence(Dictionary<string, HashSet<string>> set) => set.ToDictionary(p => p.Key, p => (IReadOnlyList<string>)atoms.Where(a => p.Value.Contains(a.Id)).Select(a => a.Id).ToArray());
