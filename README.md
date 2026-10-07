@@ -16,9 +16,9 @@ PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCR�
 
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版0.1.0-dev.10432のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10432)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。
+[開発確認版0.1.0-dev.10433のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10433)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。
 
-1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10432-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10432-arm64-Setup.exe`。
+1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10433-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10433-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
 3. スタートメニューの「たくポケ」から起動します。
 
