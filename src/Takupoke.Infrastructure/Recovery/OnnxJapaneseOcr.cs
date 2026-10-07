@@ -155,7 +155,40 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
             .SelectMany(g => { var ordered = g.OrderBy(l => l.Vertical ? l.X1 : l.Y1).ToArray(); var result = new List<PdfRule>(); var run = new List<PdfRule>(); foreach (var line in ordered) { if (run.Count > 0 && (line.Vertical ? line.X1 - run[^1].X1 : line.Y1 - run[^1].Y1) > 2) { result.Add(Merge(run)); run.Clear(); } run.Add(line); } if (run.Count > 0) result.Add(Merge(run)); return result; }).ToArray();
         // Long isolated character strokes (一 / I) are ink, not table borders.
         // A raster rule must connect to a perpendicular border at both ends.
-        var connectedRules = merged; var comparisonWork = 0;
+        var comparisonWork = 0;
+        var certified = FilterConnectedRules(merged);
+        if (certified.Length > 0) return certified;
+        // Only a failed complete rule graph uses the interior fallback. Already
+        // certified stroke endpoints remain unchanged, including thick corners.
+        {
+            var clipped = new List<PdfRule>();
+            foreach (var line in merged)
+            {
+                token.ThrowIfCancellationRequested();
+                var positions = new List<double>();
+                foreach (var other in merged)
+                {
+                    if (++comparisonWork > 1_000_000) throw RecoveryWorkLimits.Exceeded("OCRの罫線比較数が上限を超えています。");
+                    if (comparisonWork % 128 == 0) token.ThrowIfCancellationRequested();
+                    if (line.Vertical == other.Vertical) continue;
+                    var position = line.Vertical ? other.Y1 : other.X1;
+                    var start = line.Vertical ? line.Y1 : line.X1;
+                    var end = line.Vertical ? line.Y2 : line.X2;
+                    var axis = line.Vertical ? line.X1 : line.Y1;
+                    var crossingStart = line.Vertical ? other.X1 : other.Y1;
+                    var crossingEnd = line.Vertical ? other.X2 : other.Y2;
+                    if (position >= start && position <= end && axis >= crossingStart - 3 && axis <= crossingEnd + 3)
+                        positions.Add(position);
+                }
+                if (positions.Count < 2) continue;
+                var first = positions.Min(); var last = positions.Max();
+                if (last - first < 39) continue;
+                clipped.Add(line.Vertical ? new(line.X1, first, line.X2, last) : new(first, line.Y1, last, line.Y2));
+            }
+            return FilterConnectedRules(clipped.ToArray());
+        }
+        PdfRule[] FilterConnectedRules(PdfRule[] connectedRules)
+        {
         for (var pass = 0; pass < 64; pass++)
         {
             token.ThrowIfCancellationRequested();
@@ -182,6 +215,7 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         }
         // An unstable candidate graph cannot establish a table boundary.
         return [];
+        }
         static PdfRule Merge(List<PdfRule> run) => run[0].Vertical ? new(run.Average(l => l.X1), run.Min(l => l.Y1), run.Average(l => l.X2), run.Max(l => l.Y2)) : new(run.Min(l => l.X1), run.Average(l => l.Y1), run.Max(l => l.X2), run.Average(l => l.Y2));
     }
 }

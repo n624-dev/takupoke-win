@@ -9,6 +9,27 @@ namespace Takupoke.Integration.Tests;
 public sealed class OcrCropCompletenessTests
 {
     [Fact]
+    public void OpenOuterBorderDoesNotEraseClosedInteriorCellsOrHideItsTail()
+    {
+        var image = White(900, 600); var before = image.Bgra.ToArray();
+        foreach (var y in new[] { 20, 100, 180 }) for (var x = 20; x < 900; x++) Ink(image, x, y);
+        foreach (var x in new[] { 20, 120, 220 }) for (var y = 20; y <= 180; y++) Ink(image, x, y);
+        before = image.Bgra.ToArray();
+        var rules = image.Rules();
+        Assert.Equal(6, rules.Count); Assert.Equal(before, image.Bgra);
+        Assert.All(rules.Where(r => r.Horizontal), r => { Assert.Equal(20, r.X1); Assert.Equal(220, r.X2); });
+        Assert.False(image.RuleMask(rules)[100 * image.Width + 800]);
+        Assert.True(image.HasUnrecognizedInk([], rules));
+    }
+    [Fact]
+    public void IsolatedLongGlyphAndHShapeDoNotBecomeClosedInteriorRules()
+    {
+        var image = White(200, 200);
+        for (var y = 20; y <= 180; y++) { Ink(image, 20, y); Ink(image, 180, y); }
+        for (var x = 20; x <= 180; x++) Ink(image, x, 100);
+        Assert.Empty(image.Rules()); Assert.True(image.HasUnrecognizedInk([], []));
+    }
+    [Fact]
     public void ConnectedClippedStrokeExpandsOnlyToItsMinimalUnion()
     {
         var image = White(32, 16);

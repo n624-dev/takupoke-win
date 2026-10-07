@@ -69,3 +69,9 @@ reporting unassessed with zero native calls. Archived exact-source results stay
 unchanged. Any future fixed-model measurement needs a separately pinned recipe
 and the independent original-PDF/full-formal oracle; it cannot reuse a historical
 recipe name or infer correctness from higher confidence alone.
+
+## 閉じた内部領域の罫線復旧
+
+元の接続検査で罫線を確定できる場合は、線の座標と端点をそのまま保持する。全候補が接続検査で消える場合だけ、観測した直交線との交点の間へ線を限定して再検査する。線の延長、画素やOCR文字の変更、検査上限の緩和はしない。孤立した文字線やH字型の開いた線は罫線にならず、交点外の線や灰色の印字も未読インクの検査対象に残る。
+
+この改善はセル境界候補の取得であり、科目・教員・教室の割り当てや文書全体の完全性を認可しない。既存Validatorと未読印字の検査を通してからプレビューへ進む。
