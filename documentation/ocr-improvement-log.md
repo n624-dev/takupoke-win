@@ -352,3 +352,27 @@ A local .NET10/CPU diagnostic regenerated only the public independently invented
 Twelve actual48px recognition tensors were inverse-displayed for inspection. The first two body samples had approximately32px text height, without visible neighbouring rows, table rules or clipped letters. One sample already confused Latin O with digit0 in raw CTC despite every returned token meeting0.8; another sample was literal-exact. This is a recognition-stage error, rather than an Evidence writer change. Public font outline/advance inspection showed that I/l/1 and O/0 are not identical outlines in the pinned font.
 
 Post-return coordinate-centre alignment uniquely paired all408 expected first-page body values with recognition crops. Exact literal values were88;320 differed, including169 wrong values whose returned tokens all met0.8. Of those320 differences,234 were confined to O/0 or I/l/1 confusion,24 additionally involved literal spaces, and62 included other errors. Confusion-neutral comparison was used only to classify diagnostics; it never changed raw strings, Evidence or adoption. These per-field diagnostics do not substitute for independent complete-document validation, and the all-lookalike stress cohort must not be treated as general Japanese OCR accuracy. The owned source PDFs, font, raster, tensors, raw outputs and diagnostic build were removed after inspection; shared pinned model files were retained.
+
+## Independent local image-language reader: fixed crop recipe rejected
+
+A local Linux CPU comparison used the official Apache-2.0 PaddleOCR-VL-1.5-GGUF0.9B export at revision `cc977c16989848c264d813ec1705cb181b7a21ee`. The language weights were935,768,992bytes (SHA-256:`299051d54faa065abc505cc39b8383ea338fd3020c775ea3e0ba514a7022328c`); its image projector was881,770,496bytes (SHA-256:`e7f1a72400fba517046f90d964e2fa0f4dac7781ee3b1bc5d2022f5f8cecbd87`), total1,817,539,488bytes. This is a separate image reader, not an additional invocation of the rejected PP-OCRv5-server or Japanese-v3 recognizer. No production provider or downloadable catalog changed.
+
+The complete435 native recognition crops from the invented development image's first page were submitted once each, including headings. Original RGB and the native detector crop geometry were shared with the existing V5 comparison; pixel-centre-supported crop bounds were retained without external resizing or extra margin. Linux original-RGB capture does not prove equivalence to Windows WIC colour management. The image reader received only the image and its official `OCR:` prompt, with no OCR answer, oracle, source filename, vocabulary or previous history. The oracle was inspected only after all435 calls returned. Output was compared literally without trimming, normalization, Markdown removal or inferred correction.
+
+Runtime was llama.cpp b11371 (`99b95488c`), four CPU threads, no GPU/projector offload, context4096, parallel1, local-loopback server with offline/cache-disabled flags. Generation was frozen at temperature0, top_p1, top_k1, seed0, repeat_penalty1 and max_tokens128, with60seconds per request and2700seconds total. The actual chat-template SHA-256 was `f11f768d708f15ed15e8c887830a4aca61954507587c8495c05181b40662fa59`; server executable SHA-256 was `67cc62bf21713881160b8ca69856d3899273ebe8924ae9aa8c99c2802967ee21`.
+
+| Assertion-only first-page body classification | Count |
+| --- | ---: |
+| Complete body fields compared |408|
+| Baseline V5 literal exact |88|
+| Image-reader literal exact |66|
+| Both readers correct |61|
+| Previously wrong, image reader correct |5|
+| Previously correct, image reader wrong |27|
+| Same wrong literal from both readers |193|
+| Different wrong literals |122|
+| Execution or truncated-output errors |0|
+
+Of169 baseline incorrect fields above its unchanged0.8 floor, the image reader disagreed with only25. Disagreement is a diagnostic, not a correction or permission to adopt. The cohort deliberately includes O/0 and I/l/1 lookalikes and spaces, so these field counts are not ordinary Japanese OCR accuracy or whole-document recovery rates. All435 requests completed in1685.728seconds; sampled server RSS peaked at2,052,050,944bytes, which is not Windows private footprint or iPhone memory. Raw output SHA-256:`ec58ec9dbd2023e4e69bef43bb1b98cfbd0e84240ca4c157d3b23995cae5d477`.
+
+This fixed recipe regressed literal accuracy and damaged27 already-correct fields. It is rejected rather than repeatedly retried or promoted. Full-document cell/role ownership, formal adoption and device qualification remain unassessed; no model is qualified. Owned models, generated PDFs/images, raw outputs and build files were removed after scoring; shared pre-existing models/runtimes were preserved. Only independent invented public-font material was used; inference was entirely local.
