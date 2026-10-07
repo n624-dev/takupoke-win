@@ -62,7 +62,20 @@ internal static class OcrCropCompleteness
             }
             if (textPixels == 0) continue; // Only proven physical rule ink.
             if (conflict || owner == 0 || attachedRule)
-                throw new InvalidDataException("OCR印字の切り出し範囲を一意に確認できません。");
+            {
+                var failure=new InvalidDataException("OCR印字の切り出し範囲を一意に確認できません。");
+                // Isolated research diagnostics: same component, work budget
+                // and refusal. No text, image or alternate ownership is added.
+                failure.Data["OcrCropConflict"]=conflict;
+                failure.Data["OcrCropOwner"]=owner;
+                failure.Data["OcrCropAttachedRule"]=attachedRule;
+                failure.Data["OcrCropTextPixels"]=textPixels;
+                failure.Data["OcrCropComponentPixels"]=pixels.Count;
+                failure.Data["OcrCropComponentBounds"]=new RecoveryBox(left,top,right-left+1,bottom-top+1);
+                failure.Data["OcrCropCandidateCount"]=crops.Count;
+                failure.Data["OcrCropRuleCount"]=rules.Count;
+                throw failure;
+            }
             foreach (var index in pixels) { work.Step(); componentOwners[index] = (short)owner; }
             var original = crops[owner - 1];
             if (left + .5 >= original.X && top + .5 >= original.Y && right + .5 <= original.X + original.Width && bottom + .5 <= original.Y + original.Height) continue;

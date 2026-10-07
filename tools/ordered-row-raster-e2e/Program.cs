@@ -20,6 +20,7 @@ var capture = new RecoveryReadCapture();
 var ownedModelRoot=Path.Combine(Path.GetTempPath(),"takupoke-ordered-raster-models-"+(Environment.GetEnvironmentVariable("GITHUB_RUN_ID") ?? "local")+"-"+Guid.NewGuid().ToString("N"));
 string stage = "Reader", outcome = "unassessed"; string? strictFailure = null, failure = null;
 TimetableAnalysis? formal = null; RecoveryDocument? doc = null; IReadOnlyList<PdfPageLayout>? pages = null;
+Dictionary<string,object?>? cropFailure=null;
 try
 {
     try
@@ -61,7 +62,11 @@ try
     }
 }
 catch (PdfParseException e) { outcome = "safe-refusal"; failure = e.Stage; }
-catch (InvalidDataException e) { outcome = stage=="OCR prerequisites" ? "execution-error":"safe-refusal"; failure = e.Message; }
+catch (InvalidDataException e) {
+    outcome = stage=="OCR prerequisites" ? "execution-error":"safe-refusal"; failure = e.Message;
+    var keys=new[]{"OcrCropConflict","OcrCropOwner","OcrCropAttachedRule","OcrCropTextPixels","OcrCropComponentPixels","OcrCropComponentBounds","OcrCropCandidateCount","OcrCropRuleCount"};
+    cropFailure=keys.Where(key=>e.Data.Contains(key)).ToDictionary(key=>key,key=>e.Data[key]);
+}
 catch (OperationCanceledException) { outcome = "execution-error"; failure = "cancelled-or-deadline"; }
 catch (Exception e) { outcome = "execution-error"; failure = e.GetType().Name+":"+e.Message; }
 finally
@@ -73,6 +78,7 @@ finally
         nativeLowConfidenceSources=doc?.Sources.Count(s=>s.NativeConfidence is < .8),
         manualTargetCount=doc?.Capture?.OriginalCrops?.Count,
         nativeOcrCalls = (int?)null, llmCalls = 0, milliseconds = watch.ElapsedMilliseconds,
+        cropFailure,
         nativeCallScope="Current production whole-page acquisition; native OCR calls are not instrumented and never reported as zero" }));
     if(Directory.Exists(ownedModelRoot))Directory.Delete(ownedModelRoot,true);
     CryptographicOperations.ZeroMemory(bytes);
