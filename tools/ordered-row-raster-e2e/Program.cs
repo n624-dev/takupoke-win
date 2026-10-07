@@ -7,6 +7,8 @@ using Takupoke.Infrastructure.Parsing;
 using Takupoke.Infrastructure.Recovery;
 using Takupoke.Infrastructure.Storage;
 using Takupoke.Win.Platform;
+using Windows.Graphics.Imaging;
+using Windows.Storage.Streams;
 
 // The only inputs are source bytes and their identity. No expected content,
 // roles, coordinates or cells enter the native acquisition/recovery process.
@@ -23,6 +25,7 @@ string stage = "Reader", outcome = "unassessed"; string? strictFailure = null, f
 TimetableAnalysis? formal = null; RecoveryDocument? doc = null; IReadOnlyList<PdfPageLayout>? pages = null;
 Dictionary<string,object?>? cropFailure=null;
 var rasterCaptures=new List<RecoveryRasterCaptureInfo>();
+var shadowPages=new List<object>(); string? shadowError=null;
 try
 {
     try
@@ -73,6 +76,37 @@ catch (OperationCanceledException) { outcome = "execution-error"; failure = "can
 catch (Exception e) { outcome = "execution-error"; failure = e.GetType().Name+":"+e.Message; }
 finally
 {
+    // This probe's measurement has no path to formal, Builder or adoption.
+    // Expected literals are still unknown; only source identity enters here.
+    try
+    {
+        if (Directory.Exists(ownedModelRoot) && originalImageSizes.Count is > 0 and <= 12)
+        {
+            using var reader=await new WindowsRecoveryModels(ownedModelRoot).OpenOcrAsync(token);
+            foreach(var page in originalImageSizes.Keys.Order())
+            {
+                token.ThrowIfCancellationRequested();
+                using var original=RecoveryPdfOriginalImage.TryRead(bytes,page,token);
+                if(original is null) throw new InvalidDataException("Original image is not available for diagnostic measurement.");
+                using var stream=new InMemoryRandomAccessStream();
+                using(var writer=new DataWriter(stream)) {writer.WriteBytes(original.Png);await writer.StoreAsync().AsTask(token);writer.DetachStream();}
+                stream.Seek(0); var decoder=await BitmapDecoder.CreateAsync(stream).AsTask(token);
+                var pixels=await decoder.GetPixelDataAsync(BitmapPixelFormat.Bgra8,BitmapAlphaMode.Ignore,new BitmapTransform(),ExifOrientationMode.IgnoreExifOrientation,ColorManagementMode.ColorManageToSRgb).AsTask(token);
+                var raster=new RecoveryRaster((int)decoder.PixelWidth,(int)decoder.PixelHeight,pixels.DetachPixelData());
+                try
+                {
+                    var rows=new List<object>();
+                    reader.RecognitionObserver=o=>rows.Add(new {crop=o.RecognitionCrop,o.ValidWidth,o.InputWidth,o.TimeCount,pieces=o.Pieces,
+                        paddingSupported=o.Pieces.All(piece=>piece.Start>=0 && piece.End>piece.Start && piece.End<=o.TimeCount && (long)piece.End*o.InputWidth<=(long)o.ValidWidth*o.TimeCount)});
+                    await Task.Run(()=>reader.ObserveAllRecognition(raster,token),token);
+                    if(reader.RecognizedBoxes.Count!=0 || reader.NativeConfidences.Count!=0) throw new InvalidOperationException("Shadow cannot expose usable capture.");
+                    shadowPages.Add(new {page,raster.Width,raster.Height,bgraSha256=Convert.ToHexStringLower(SHA256.HashData(raster.Bgra)),rows});
+                }
+                finally {reader.RecognitionObserver=null;CryptographicOperations.ZeroMemory(raster.Bgra);}
+            }
+        }
+    }
+    catch(Exception error) {shadowError=error.GetType().Name+":"+error.Message;}
     Console.WriteLine(JsonSerializer.Serialize(new { recipe = "ordered-row-e2e-v1", hash, stage, outcome, strictFailure, failure,
         readerComplete = capture.Complete, acquiredPages = capture.Pages.Count,
         acquiredGlyphs = capture.Pages.Sum(p => p.Layout?.Glyphs.Count ?? 0), builderCells = doc?.Cells.Count,
@@ -82,6 +116,7 @@ finally
         nativeOcrCalls = (int?)null, llmCalls = 0, milliseconds = watch.ElapsedMilliseconds,
         cropFailure,
         rasterCaptures,
+        shadow=new {pages=shadowPages,error=shadowError,nonAdoptable=true,formalQuality="UNASSESSED",llmCalls=0},
         inspectedOriginalImageSizes=originalImageSizes.Select(pair=>new {page=pair.Key,width=pair.Value.Width,height=pair.Value.Height}).ToArray(),
         nativeCallScope="Current production whole-page acquisition; native OCR calls are not instrumented and never reported as zero" }));
     if(Directory.Exists(ownedModelRoot))Directory.Delete(ownedModelRoot,true);

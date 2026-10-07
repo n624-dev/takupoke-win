@@ -371,7 +371,19 @@ public sealed class OnnxJapaneseOcr : IDisposable
     // retained unchanged; this output is not authorized for automatic adoption.
     public IReadOnlyList<PdfGlyph> ReadForManualCapture(RecoveryRaster image, CancellationToken token = default)
         => ReadCore(image, token, retainUncertain: true);
-    private IReadOnlyList<PdfGlyph> ReadCore(RecoveryRaster image, CancellationToken token, bool retainUncertain)
+    // Research measurement cannot produce usable glyphs or a recovery capture.
+    // Geometry, model-shape, numeric and cancellation guards remain mandatory.
+    internal void ObserveAllRecognition(RecoveryRaster image, CancellationToken token)
+    {
+        if (RecognitionObserver is null) throw new InvalidOperationException("A diagnostic observer is required.");
+        try
+        {
+            var discarded = ReadCore(image, token, retainUncertain: false, observationOnly: true);
+            if (discarded.Count != 0) throw new InvalidOperationException("Diagnostic recognition cannot return source glyphs.");
+        }
+        finally { RecognizedBoxes = []; NativeConfidences = []; }
+    }
+    private IReadOnlyList<PdfGlyph> ReadCore(RecoveryRaster image, CancellationToken token, bool retainUncertain, bool observationOnly = false)
     {
         RecognizedBoxes = []; NativeConfidences = [];
         if (!image.Valid) throw new InvalidDataException("OCR画像のサイズが不正です。");
@@ -421,6 +433,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
             // extra model call, alternate decoding or confidence adjustment.
             RecognitionObserver?.Invoke(new(boxes[index], box, input.ValidWidth, input.InputWidth, tCount,
                 Array.AsReadOnly(pieces.Select(p => new OcrRecognitionPiece(p.Text, p.Start, p.End, p.Confidence)).ToArray())));
+            if (observationOnly) continue;
             if (pieces.Count == 0 || pieces.Any(p => p.Confidence < .8f && (!retainUncertain || string.IsNullOrWhiteSpace(p.Text))))
             {
                 // Numeric diagnostics never contain source strings or images.

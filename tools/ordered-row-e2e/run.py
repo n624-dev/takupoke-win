@@ -45,6 +45,9 @@ for case in manifest["cases"]:
                         endpoint["darkClassificationChanges"]=sum((a<160)!=(b<160) for a,b in zip(endpoint["MeanChannels"],embedded_mean))
     # The independently designed expected text is first inspected after return.
     gold = case["oracle"]
+    if actual.get("shadow"):
+        from shadow_metrics import summarize
+        actual["shadow"] = summarize(actual["shadow"], gold)
     table = actual.pop("formal")
     accepted = table is not None
     exact = None; mismatches = None; value_errors = None; extra_keys = None
