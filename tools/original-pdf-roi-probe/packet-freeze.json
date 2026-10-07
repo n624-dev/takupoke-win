@@ -48,8 +48,8 @@
     },
     {
       "path": "tools/original-pdf-roi-probe/native/Program.cs",
-      "bytes": 12749,
-      "sha256": "23ef49363282a323a017574920eb5795007fb0bd88d68bd9ff27694e3172ac54"
+      "bytes": 14074,
+      "sha256": "5bf68ad58e732c3597981e48f138a2043e86c81325660e2cfce71d52d58002ce"
     },
     {
       "path": "tools/original-pdf-roi-probe/native/RecoveryBox.cs",
@@ -100,6 +100,11 @@
       "path": ".gitattributes",
       "bytes": 649,
       "sha256": "e2bd39a3814f96744a8dc9ca12c2ffff3b1cf68a6b93bebc3a49c8219a10678a"
+    },
+    {
+      "path": ".github/workflows/original-pdf-geometry-native.yml",
+      "bytes": 2827,
+      "sha256": "6965214cbefd53781185bd31b61eeb68bd668c6c5a4edaad3bc3e5594a9d87cb"
     }
   ],
   "derivedFromSourceCommit": "f6b5aa981e4fb9e6405dd0faeca476edd318a576",

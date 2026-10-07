@@ -1,0 +1,45 @@
+name: Inspect fictional PDF raster geometry without OCR models
+on:
+  workflow_dispatch:
+    inputs:
+      source_commit:
+        required: true
+        type: string
+      packet_sha256:
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  geometry:
+    runs-on: windows-2025
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {persist-credentials: false}
+      - name: Verify exact source and pinned packet
+        run: |
+          if ('${{ inputs.source_commit }}' -ne $env:GITHUB_SHA) { throw 'Unexpected source' }
+          python -c "import sys;sys.path.insert(0,'tools/original-pdf-roi-probe');import run_once as r;assert r.validate()=='${{ inputs.packet_sha256 }}'"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with: {dotnet-version: '10.0.x'}
+      - name: Build and inspect one existing fictional PDF with no models
+        run: |
+          dotnet restore tools/original-pdf-roi-probe/native/RoiProbe.csproj --locked-mode
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet build tools/original-pdf-roi-probe/native/RoiProbe.csproj --no-restore -c Release
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $taskDir = Join-Path $env:RUNNER_TEMP "takupoke-geometry-$env:GITHUB_RUN_ID"
+          New-Item -ItemType Directory -Path $taskDir | Out-Null
+          $env:TAKUPOKE_GEOMETRY_DIR = $taskDir
+          try {
+            python -c "import sys,os,json,hashlib,importlib.util;from pathlib import Path;sys.path.insert(0,'tools/original-pdf-roi-probe');import run_once as r;recipe=json.loads((r.D/'recipe.json').read_text(encoding='utf-8'));images=[r.ROOT/p['path'] for p in recipe['fictionalImagePins']];assert all(r.sha(p)==pin['sha256'] for p,pin in zip(images,recipe['fictionalImagePins']));spec=importlib.util.spec_from_file_location('a',r.ROOT/'tools/raster-acquisition-native-probe/fixtures/assemble.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);out=Path(os.environ['TAKUPOKE_GEOMETRY_DIR'])/'fictional.pdf';m.assemble(out,images);assert r.sha(out)==r.PDF_SHA"
+            if ($LASTEXITCODE -ne 0) { throw 'Fictional assembly failed' }
+            $env:TAKUPOKE_ROI_GO = 'ONE_FIXED_WINDOWS_PDF_MAX3_DETECTOR_CALLS'
+            dotnet tools/original-pdf-roi-probe/native/bin/Release/net10.0-windows10.0.26100.0/win-x64/RoiProbe.dll --geometry-only (Join-Path $taskDir 'fictional.pdf') '-' '932c9a783cae67b52d878bb4b7f090d9993cea0eb88f1171b4fd4c01a31696f1'
+            if ($LASTEXITCODE -ne 0) { throw 'Geometry inspection failed' }
+          } finally { Remove-Item -LiteralPath $taskDir -Recurse -Force }

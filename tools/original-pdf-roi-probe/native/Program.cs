@@ -12,13 +12,14 @@ using Windows.Graphics.Imaging;
 using Windows.Storage.Streams;
 
 if(args.Length==1&&args[0]=="--controls"){RoiGeometry.Controls();return;}
-if(args.Length!=4||args[0]!="--one-fixed-page"||Environment.GetEnvironmentVariable("TAKUPOKE_ROI_GO")!="ONE_FIXED_WINDOWS_PDF_MAX3_DETECTOR_CALLS")throw new InvalidDataException("Root-owned exact one packet authorization missing");
+bool geometryOnly=args.Length==4&&args[0]=="--geometry-only";
+if(args.Length!=4||(!geometryOnly&&args[0]!="--one-fixed-page")||Environment.GetEnvironmentVariable("TAKUPOKE_ROI_GO")!="ONE_FIXED_WINDOWS_PDF_MAX3_DETECTOR_CALLS")throw new InvalidDataException("Root-owned exact one packet authorization missing");
 string Sha(byte[] b)=>Convert.ToHexStringLower(SHA256.HashData(b));
 object NativeBox(Rect r)=>new{r.X,r.Y,r.Width,r.Height};
 void Emit(object value){var b=JsonSerializer.SerializeToUtf8Bytes(value);if(b.Length>4*1024*1024)throw new InvalidDataException("Individual JSON exceeds parent output cap");Console.WriteLine(System.Text.Encoding.UTF8.GetString(b));Console.Out.Flush();}
 using var cancellation=new CancellationTokenSource(TimeSpan.FromSeconds(120));var token=cancellation.Token;
 var pdfBytes=File.ReadAllBytes(args[1]);Check.That(pdfBytes.Length<=2_000_000&&Sha(pdfBytes)==args[3],"fixed fictional PDF identity");
-var model=File.ReadAllBytes(args[2]);Check.That(model.Length==4826518&&Sha(model)=="a431985659dc921974177a95adcfbb90fd9e51989a5e04d70d0b75f597b6e61d","existing detector identity");CryptographicOperations.ZeroMemory(model);
+if(!geometryOnly){var model=File.ReadAllBytes(args[2]);Check.That(model.Length==4826518&&Sha(model)=="a431985659dc921974177a95adcfbb90fd9e51989a5e04d70d0b75f597b6e61d","existing detector identity");CryptographicOperations.ZeroMemory(model);}
 using var input=new InMemoryRandomAccessStream();using(var writer=new DataWriter(input)){writer.WriteBytes(pdfBytes);await writer.StoreAsync().AsTask(token);writer.DetachStream();}input.Seek(0);
 var pdf=await PdfDocument.LoadFromStreamAsync(input).AsTask(token);Check.That(pdf.PageCount==5,"same existing five-page fictional PDF");using var page=pdf.GetPage(0);Check.That(page.Rotation==PdfPageRotation.Normal,"rotated coordinate system unsupported");
 async Task<RecoveryRaster> Render(int w,int h,RecoveryBox? nativeRect)
@@ -30,7 +31,21 @@ async Task<RecoveryRaster> Render(int w,int h,RecoveryBox? nativeRect)
 var shape=RoiGeometry.ProductShape(page.Size.Width,page.Size.Height);var whole=await Render(shape.W,shape.H,null);RecoveryRaster? local=null;
 try
 {
- long totalPixelWork=0;RecoveryRaster.PixelWork.GlobalWorkObserver=amount=>{totalPixelWork=checked(totalPixelWork+amount);if(totalPixelWork>256_000_000)throw RecoveryWorkLimits.Exceeded("ROI whole transaction pixel work limit");};var rules=whole.Rules(token);var mask=whole.RuleMask(rules,token);long selectionPixelWork=0;var selected=RoiGeometry.Select(rules,whole.Width,whole.Height,b=>RoiGeometry.ObservedNonRuleInk(whole,mask,b,ref selectionPixelWork,token));var roi=selected.ROI;var nr=RoiGeometry.NativeRect(roi,whole.Width,whole.Height,page.Size.Width,page.Size.Height);double density=960/Math.Max(roi.Width,roi.Height);int lw=Math.Max(32,(int)Math.Round(roi.Width*density)),lh=Math.Max(32,(int)Math.Round(roi.Height*density));Check.That(lw<=960&&lh<=960,"local render cap");
+ long totalPixelWork=0;RecoveryRaster.PixelWork.GlobalWorkObserver=amount=>{totalPixelWork=checked(totalPixelWork+amount);if(totalPixelWork>256_000_000)throw RecoveryWorkLimits.Exceeded("ROI whole transaction pixel work limit");};var rules=whole.Rules(token);var mask=whole.RuleMask(rules,token);long selectionPixelWork=0;
+ if(geometryOnly)
+ {
+  Check.That(rules.Count<=2048,"pre-selection inventory cap");
+  Emit(new{type="geometry-inventory",pdfSHA256=Sha(pdfBytes),pageNumber=1,totalPDFPages=pdf.PageCount,sourceCommit=Environment.GetEnvironmentVariable("GITHUB_SHA"),wholeRaster=new{whole.Width,whole.Height,sha256=Sha(whole.Bgra)},originalPDFSize=new{page.Size.Width,page.Size.Height},rules,horizontalRails=rules.Where(r=>r.Y1==r.Y2).Select(r=>r.Y1).Distinct().Order().ToArray(),verticalRails=rules.Where(r=>r.X1==r.X2).Select(r=>r.X1).Distinct().Order().ToArray(),totalProductionPixelWork=totalPixelWork,detectorCalls=0,recognizerCalls=0,modelSessions=0,wholePDFQuality="UNASSESSED"});
+  try
+  {
+   var cell=RoiGeometry.Select(rules,whole.Width,whole.Height,b=>RoiGeometry.ObservedNonRuleInk(whole,mask,b,ref selectionPixelWork,token));
+   Emit(new{type="geometry-selection",selected=cell.ROI,cell.Cells,cell.NonblankCells,cell.SelectedNonRuleInkPixels,selectionPixelWork,detectorCalls=0,modelSessions=0,qualityCredit=false});
+  }
+  catch(InvalidDataException e)when(!RecoveryWorkLimits.IsExceeded(e))
+  {Emit(new{type="geometry-refusal",reason=e.Message,selectionPixelWork,detectorCalls=0,modelSessions=0,qualityCredit=false});}
+  return;
+ }
+var selected=RoiGeometry.Select(rules,whole.Width,whole.Height,b=>RoiGeometry.ObservedNonRuleInk(whole,mask,b,ref selectionPixelWork,token));var roi=selected.ROI;var nr=RoiGeometry.NativeRect(roi,whole.Width,whole.Height,page.Size.Width,page.Size.Height);double density=960/Math.Max(roi.Width,roi.Height);int lw=Math.Max(32,(int)Math.Round(roi.Width*density)),lh=Math.Max(32,(int)Math.Round(roi.Height*density));Check.That(lw<=960&&lh<=960,"local render cap");
  Emit(new{type="render",osDescription=RuntimeInformation.OSDescription,architecture=RuntimeInformation.ProcessArchitecture.ToString(),runtimeVersion=Environment.Version.ToString(),sourceCommit=Environment.GetEnvironmentVariable("GITHUB_SHA"),pdfSHA256=Sha(pdfBytes),pageNumber=1,totalPDFPages=pdf.PageCount,originalPDFSize=new{page.Size.Width,page.Size.Height},nativePageDimensions=new{media=NativeBox(page.Dimensions.MediaBox),crop=NativeBox(page.Dimensions.CropBox),art=NativeBox(page.Dimensions.ArtBox),bleed=NativeBox(page.Dimensions.BleedBox),trim=NativeBox(page.Dimensions.TrimBox)},rotation=page.Rotation.ToString(),wholeRaster=new{whole.Width,whole.Height,bytes=whole.Bgra.Length,sha256=Sha(whole.Bgra)},selectedObservedClosedCell=roi,selected.Cells,selected.Work,selected.NonblankCells,selected.SelectedNonRuleInkPixels,selectionPixelWork,maximumSelectionPixelWork=8_000_000,sourceRectNativeWinRT=nr,requestedLocalRaster=new{width=lw,height=lh},originalRules=rules,roiSelection="SHA256 fixed geometry among closed cells with measured production non-rule nonwhite pixels; zero text/oracle/drawing/model input; one selected cell and no alternate retry",mapping="native SourceRect = selected actual whole raster XYWH * actual PdfPage.Size per axis; local boxes back by actual local BGRA width/height",wholepageQuality="UNASSESSED",physicalRoleProof="ABSENT",legacy4060ComparisonPooled=false});
  // Native local raster is rendered from the same original PDF, never resized from the whole BGRA.
  local=await Render(lw,lh,nr);Emit(new{type="local-render",local.Width,local.Height,bytes=local.Bgra.Length,sha256=Sha(local.Bgra),sourceRectNativeWinRT=nr,expectedCoordinateOwner="selected closed-rail region; no semantic role certificate",sameOriginalPDF=true});
