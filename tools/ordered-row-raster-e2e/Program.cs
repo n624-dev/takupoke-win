@@ -83,7 +83,7 @@ finally
         if (Directory.Exists(ownedModelRoot) && originalImageSizes.Count is > 0 and <= 12)
         {
             using var reader=await new WindowsRecoveryModels(ownedModelRoot).OpenOcrAsync(token);
-            using var japanese=await OpenJapaneseReader(ownedModelRoot,token);
+            using var japanese=Environment.GetEnvironmentVariable("TAKUPOKE_READABLE_COHORT") == "1" ? null : await OpenJapaneseReader(ownedModelRoot,token);
             foreach(var page in originalImageSizes.Keys.Order())
             {
                 token.ThrowIfCancellationRequested();
@@ -103,18 +103,22 @@ finally
                     await Task.Run(()=>reader.ObserveAllRecognition(raster,token),token);
                     if(reader.RecognizedBoxes.Count!=0 || reader.NativeConfidences.Count!=0) throw new InvalidOperationException("Shadow cannot expose usable capture.");
                     var japaneseRows=new List<object>();
-                    japanese.RecognitionObserver=o=>japaneseRows.Add(new {crop=o.RecognitionCrop,o.ValidWidth,o.InputWidth,o.TimeCount,pieces=o.Pieces,
-                        paddingSupported=o.Pieces.All(piece=>piece.Start>=0 && piece.End>piece.Start && piece.End<=o.TimeCount && (long)piece.End*o.InputWidth<=(long)o.ValidWidth*o.TimeCount)});
-                    await Task.Run(()=>japanese.ObserveAllRecognition(raster,token),token);
-                    if(japanese.RecognizedBoxes.Count!=0 || japanese.NativeConfidences.Count!=0 || pixelHash!=Convert.ToHexStringLower(SHA256.HashData(raster.Bgra))) throw new InvalidOperationException("Shadow altered the original evidence.");
+                    if(japanese is not null)
+                    {
+                        japanese.RecognitionObserver=o=>japaneseRows.Add(new {crop=o.RecognitionCrop,o.ValidWidth,o.InputWidth,o.TimeCount,pieces=o.Pieces,
+                            paddingSupported=o.Pieces.All(piece=>piece.Start>=0 && piece.End>piece.Start && piece.End<=o.TimeCount && (long)piece.End*o.InputWidth<=(long)o.ValidWidth*o.TimeCount)});
+                        await Task.Run(()=>japanese.ObserveAllRecognition(raster,token),token);
+                        if(japanese.RecognizedBoxes.Count!=0 || japanese.NativeConfidences.Count!=0) throw new InvalidOperationException("Shadow exposed usable capture.");
+                    }
+                    if(pixelHash!=Convert.ToHexStringLower(SHA256.HashData(raster.Bgra))) throw new InvalidOperationException("Shadow altered the original evidence.");
                     shadowPages.Add(new {page,raster.Width,raster.Height,bgraSha256=pixelHash,rows,japaneseRows});
                 }
-                finally {reader.RecognitionObserver=null;japanese.RecognitionObserver=null;CryptographicOperations.ZeroMemory(raster.Bgra);}
+                finally {reader.RecognitionObserver=null;if(japanese is not null)japanese.RecognitionObserver=null;CryptographicOperations.ZeroMemory(raster.Bgra);}
             }
         }
     }
     catch(Exception error) {shadowError=error.GetType().Name+":"+error.Message;}
-    Console.WriteLine(JsonSerializer.Serialize(new { recipe = "ordered-row-e2e-v1", hash, stage, outcome, strictFailure, failure,
+    Console.WriteLine(JsonSerializer.Serialize(new { recipe = Environment.GetEnvironmentVariable("TAKUPOKE_READABLE_COHORT") == "1" ? "readable-ordered-row-v1" : "ordered-row-e2e-v1", hash, stage, outcome, strictFailure, failure,
         readerComplete = capture.Complete, acquiredPages = capture.Pages.Count,
         acquiredGlyphs = capture.Pages.Sum(p => p.Layout?.Glyphs.Count ?? 0), builderCells = doc?.Cells.Count,
         originalOrderedProofs = doc?.Cells.Count(c => c.OrderedRowProof is not null), formal,

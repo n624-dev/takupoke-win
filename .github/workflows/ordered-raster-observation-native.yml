@@ -1,4 +1,4 @@
-name: Observe paired invented image PDF acquisition
+name: Observe independent readable unlabelled image PDFs
 on:
   push:
     branches: [research/windows-ordered-raster-observation-20261007]
@@ -13,6 +13,7 @@ jobs:
       PYTHONUTF8: '1'
       PYTHONIOENCODING: utf-8
       ORT_TELEMETRY_DISABLED: '1'
+      TAKUPOKE_READABLE_COHORT: '1'
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -22,15 +23,13 @@ jobs:
           dotnet-version: '10.0.x'
           cache: false
       - run: python -m pip install --no-cache-dir --disable-pip-version-check -r tools/independent-wide-timetable/requirements.txt
-      - name: Generate paired invented image originals
+      - name: Generate independent readable image originals
         shell: pwsh
         run: |
           $owned = Join-Path $env:RUNNER_TEMP 'ordered-row-raster-owned'
-          python -B tools/ordered-row-e2e/generate.py --output $owned
-          if ($LASTEXITCODE -ne 0) { throw 'Independent source generation failed' }
-          python -B tools/ordered-row-e2e/generate_raster.py --fixtures $owned
-          if ($LASTEXITCODE -ne 0) { throw 'Lossless image assembly failed' }
-      - name: Observe current production local OCR pipeline
+          python -B tools/ordered-row-e2e/generate_readable.py --output $owned
+          if ($LASTEXITCODE -ne 0) { throw 'Independent readable source generation failed' }
+      - name: Observe native linked OCR pipeline and separate shadow diagnostics
         shell: pwsh
         run: |
           dotnet build tools/ordered-row-raster-e2e/WindowsRasterNativeProbe.csproj --configuration Release --verbosity quiet

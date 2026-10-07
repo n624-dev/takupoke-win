@@ -50,12 +50,15 @@ for case in manifest["cases"]:
         shadow=actual["shadow"]
         def crop_inputs(page, key):
             return [(row["crop"],row["ValidWidth"],row["InputWidth"]) for row in page[key]]
-        actual["shadow"] = {"mobile": summarize(shadow, gold), "japanese": summarize(shadow, gold,"japaneseRows"),
-                            "japaneseBytes":10089078,"japaneseSHA256":"2e397c27461751befc82eca78c9b19e87322ebee34e7316468b21856f9977d64",
-                            "completedPagesUseSameRaster":bool(shadow["pages"]),
+        has_japanese=bool(shadow["pages"]) and all(page.get("japaneseRows") for page in shadow["pages"])
+        actual["shadow"] = {"mobile": summarize(shadow, gold),
                             "allSourcePagesCompleted":len(shadow["pages"])==len(case["embeddedPages"]) and shadow["error"] is None,
-                            "sameCropInputsOnCompletedPages":bool(shadow["pages"]) and all(crop_inputs(page,"rows")==crop_inputs(page,"japaneseRows") for page in shadow["pages"]),
                             "qualifiedModels":[]}
+        if has_japanese:
+            actual["shadow"].update({"japanese":summarize(shadow,gold,"japaneseRows"),
+                "japaneseBytes":10089078,"japaneseSHA256":"2e397c27461751befc82eca78c9b19e87322ebee34e7316468b21856f9977d64",
+                "completedPagesUseSameRaster":True,
+                "sameCropInputsOnCompletedPages":all(crop_inputs(page,"rows")==crop_inputs(page,"japaneseRows") for page in shadow["pages"])})
     table = actual.pop("formal")
     accepted = table is not None
     exact = None; mismatches = None; value_errors = None; extra_keys = None
