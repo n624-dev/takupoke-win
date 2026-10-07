@@ -312,3 +312,16 @@ Run [37688957535](https://github.com/n624-dev/takupoke-win/actions/runs/37688957
 | Unseen | 2,175 | 106 | 876 | 7 | 436/2,040 | 24 |
 
 There were0 empty recognizer outputs and0 diagnostic execution errors. Total source-process times were83.699 and86.674seconds. These are textual occurrence measurements, not character accuracy, correct field ownership, human correction target counts or formal document success. The whole cohort contains substantial nonwhitespace uncertainty, so removing the first whitespace refusal would not solve it. No threshold or manual-field limit changed. Raw diagnostic rows were reduced to aggregate counts after native return; the owned source cohort and models were removed by final CI cleanup.
+
+## Larger recognizer on identical native rasters: rejected
+
+Run [37690188238](https://github.com/n624-dev/takupoke-win/actions/runs/37690188238), research source `a939bd4`, compared the mobile recognizer with pinned PP-OCRv5 server recognition (84,503,027bytes, SHA-256:`d9dc333c9c7b042c6dffb8e33d72b6f65c9c1d463d0a3c2f78174fea55e94752`). All5 pages of each source completed for both models. All10 raster hashes and all recognition crop/valid-width/input-width tuples matched between arms; each model made2,175 recognizer calls per source. The model-only download carried no PDF, image or recognition content.
+
+| Source / model | Exact body literal occurrences | Low nonwhitespace rows | Low whitespace rows | Unsupported-padding rows |
+| --- | ---: | ---: | ---: | ---: |
+| Development / mobile | 466/2,040 | 879 | 81 | 6 |
+| Development / server | 446/2,040 | 855 | 71 | 132 |
+| Unseen / mobile | 436/2,040 | 876 | 106 | 7 |
+| Unseen / server | 524/2,040 | 742 | 103 | 86 |
+
+The server candidate regressed development literals and increased unsupported CTC intervals substantially despite an unseen-literal improvement. It is rejected as a production replacement and qualifies no model. These are occurrence diagnostics, not correct cell/role assignments, character accuracy or formal outputs. Both diagnostic arms remain incapable of adoption; the production document result remains0/2. Owned models and generated documents were removed by final CI cleanup. The next fixed candidate tests a Japanese-specific dictionary/model rather than another capacity increase, with its own pinned recipe and no threshold relaxation.
