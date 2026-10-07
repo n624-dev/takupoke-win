@@ -71,4 +71,47 @@ public sealed class RecoveryRuleMaskEndpointTests
         var r=Border();var rules=r.Rules();using var cancelled=new CancellationTokenSource();cancelled.Cancel();Assert.Throws<OperationCanceledException>(()=>r.RuleMask(rules,cancelled.Token));
         var work=new RecoveryRaster.PixelWork(default);work.Step(63_999_999);var error=Assert.Throws<InvalidDataException>(()=>r.RuleMask(rules,default,work));Assert.True(RecoveryWorkLimits.IsExceeded(error));
     }
+    private static RecoveryRaster UnevenCorner()
+    {
+        var r=Border(); Ink(r,10,91,255); Ink(r,11,91); return r;
+    }
+    [Fact] public void OriginalPhysicalIntersectionSurvivesAveragedCenterOutsideFringe()
+    {
+        var r=UnevenCorner(); var rules=r.Rules();
+        Assert.Contains(rules,l=>l.Vertical&&l.X1==10.5);
+        var mask=r.RuleMask(rules); Assert.True(Masked(mask,50,91));
+        Assert.False(Masked(mask,10,91)); Assert.False(r.HasUnrecognizedInk([],rules));
+    }
+    [Fact] public void PlainCopiedRulesCannotClaimOriginalPixelProvenance()
+    {
+        var r=UnevenCorner(); var rules=r.Rules();
+        Assert.False(Masked(r.RuleMask(rules.ToArray()),50,91));
+        var other=new RecoveryRaster(r.Width,r.Height,r.Bgra.ToArray());
+        Assert.False(Masked(other.RuleMask(rules),50,91));
+    }
+    [Fact] public void PixelMutationInvalidatesEvenUnchangedBorderInventory()
+    {
+        var r=UnevenCorner(); var rules=r.Rules(); Ink(r,50,50,254);
+        Assert.False(Masked(r.RuleMask(rules),50,91));
+        Assert.True(r.HasUnrecognizedInk([],rules));
+    }
+    [Theory] [InlineData(12,50)] [InlineData(92,50)]
+    public void FreshNearbyGlyphCannotBeOwnedByPhysicalCornerProof(int x,int y)
+    {
+        var r=UnevenCorner(); Ink(r,x,y,254); var rules=r.Rules(); var mask=r.RuleMask(rules);
+        Assert.False(Masked(mask,x,y)); Assert.True(r.HasUnrecognizedInk([],rules));
+    }
+    [Fact] public void FreshWhiteHoleCannotBeHiddenUsingAnotherPhysicalLane()
+    {
+        var r=UnevenCorner(); Ink(r,50,91,255); var rules=r.Rules();
+        var mask=r.RuleMask(rules); Assert.False(Masked(mask,49,91)); Assert.False(Masked(mask,51,91));
+        Assert.True(r.HasUnrecognizedInk([],rules));
+    }
+    [Fact] public void FreshAttachedTailOutsidePhysicalIntersectionStaysUnmasked()
+    {
+        var r=UnevenCorner(); Ink(r,92,91); Ink(r,93,91);
+        var rules=r.Rules(); var mask=r.RuleMask(rules);
+        Assert.False(Masked(mask,92,91)); Assert.False(Masked(mask,93,91));
+        Assert.True(r.HasUnrecognizedInk([],rules));
+    }
 }

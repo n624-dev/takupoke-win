@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Security.Cryptography;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
 using Takupoke.Core.Recovery;
@@ -16,6 +17,26 @@ internal static class RecoveryWorkLimits
 }
 public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
 {
+    // Only Rules can mint this inventory. Physical lanes retain their original
+    // merged-border identity; callers cannot attach provenance to guessed lines.
+    private sealed class PrintedRuleInventory(PdfRule[] rules, Dictionary<PdfRule, PdfRule[]> lanes,
+        RecoveryRaster owner, byte[] digest) : System.Collections.ObjectModel.ReadOnlyCollection<PdfRule>(rules)
+    {
+        public Dictionary<PdfRule, PdfRule[]> Lanes { get; } = lanes;
+        public bool Matches(RecoveryRaster raster, CancellationToken token, PixelWork work)
+            => ReferenceEquals(owner, raster) && CryptographicOperations.FixedTimeEquals(digest, raster.PixelDigest(token, work));
+    }
+    private byte[] PixelDigest(CancellationToken token, PixelWork work)
+    {
+        using var hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
+        const int chunk = 65536;
+        for (var offset = 0; offset < Bgra.Length; offset += chunk)
+        {
+            token.ThrowIfCancellationRequested(); var count = Math.Min(chunk, Bgra.Length - offset);
+            work.Step(count / 4); hash.AppendData(Bgra, offset, count);
+        }
+        return hash.GetHashAndReset();
+    }
     public bool Valid => Width is > 0 and <= 4096 && Height is > 0 and <= 4096 && Bgra.Length == checked(Width * Height * 4);
     internal sealed class PixelWork(CancellationToken token)
     {
@@ -51,6 +72,8 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         token.ThrowIfCancellationRequested();
         if (!Valid) throw new InvalidDataException("OCR画像のサイズが不正です。");
         var mask = new bool[Width * Height];
+        var inventory = rules as PrintedRuleInventory;
+        if (inventory is not null && !inventory.Matches(this, token, work)) inventory = null;
         bool Ink(int x, int y) { var p = (y * Width + x) * 4; return Bgra[p] != 255 || Bgra[p + 1] != 255 || Bgra[p + 2] != 255; }
         bool StrokeRange(bool horizontal, int lane, int first, int last, out int start, out int end)
         {
@@ -95,8 +118,35 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
             }
             // Pixel support is [start,end+1). No tolerance inflates it around
             // a measured perpendicular center, and competing rails fail closed.
-            return starts.Count == 1 && ends.Count == 1 && start <= starts.Single() && starts.Single() < end + 1 &&
-                start <= ends.Single() && ends.Single() < end + 1 && starts.Single() < ends.Single();
+            if (starts.Count != 1 || ends.Count != 1 || starts.Single() >= ends.Single()) return false;
+            if (start <= starts.Single() && starts.Single() < end + 1 && start <= ends.Single() && ends.Single() < end + 1) return true;
+            if (inventory is null || !inventory.Lanes.TryGetValue(rule, out var ownLanes) ||
+                !ownLanes.Any(raw => horizontal ? raw.Y1 == lane : raw.X1 == lane)) return false;
+            bool OnePhysicalStroke(PdfRule[] raw)
+            {
+                var axes = raw.Select(line => line.Vertical ? line.X1 : line.Y1).Distinct().Order().ToArray();
+                return axes.Zip(axes.Skip(1), (a, b) => b - a).All(gap => gap == 1);
+            }
+            if (!OnePhysicalStroke(ownLanes)) return false;
+            // A rounded center never proves ownership. Both ends must be actual
+            // intersections with continuous raw lanes of the unique peer border.
+            // Requiring the exact printed endpoints excludes an attached ink tail.
+            bool ActualEndpoint(double center, int endpoint)
+            {
+                var peers = rules.Where(peer => (horizontal ? peer.Vertical && peer.X1 == center : peer.Horizontal && peer.Y1 == center)).ToArray();
+                if (peers.Length != 1 || !inventory.Lanes.TryGetValue(peers[0], out var peerLanes) || !OnePhysicalStroke(peerLanes)) return false;
+                foreach (var raw in peerLanes)
+                {
+                    work.Step();
+                    var axis = horizontal ? raw.X1 : raw.Y1;
+                    var firstRaw = (int)(horizontal ? raw.Y1 : raw.X1); var lastRaw = (int)(horizontal ? raw.Y2 : raw.X2);
+                    if (axis != endpoint || lane < firstRaw || lane > lastRaw) continue;
+                    if (StrokeRange(!horizontal, endpoint, firstRaw, lastRaw, out var actualStart, out var actualEnd) &&
+                        actualStart == firstRaw && actualEnd == lastRaw) return true;
+                }
+                return false;
+            }
+            return ActualEndpoint(starts.Single(), start) && ActualEndpoint(ends.Single(), end);
         }
         // A neighborhood around a centerline is not evidence of a stroke.
         // Mask only physical rows/columns continuously printed along the rule;
@@ -151,13 +201,15 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         for (var y = 0; y < Height; y++) { token.ThrowIfCancellationRequested(); var start = -1; for (var x = 0; x <= Width; x++) { if (x < Width && Dark(x, y)) { if (start < 0) start = x; } else if (start >= 0) { if (x - start >= Math.Max(40, Width / 40)) lines.Add(new(start, y, x - 1, y)); start = -1; } } }
         for (var x = 0; x < Width; x++) { token.ThrowIfCancellationRequested(); var start = -1; for (var y = 0; y <= Height; y++) { if (y < Height && Dark(x, y)) { if (start < 0) start = y; } else if (start >= 0) { if (y - start >= Math.Max(40, Height / 40)) lines.Add(new(x, start, x, y - 1)); start = -1; } } }
         // Collapse adjacent scanlines from the same stroke to one centerline.
+        var rawLanes = new Dictionary<PdfRule, PdfRule[]>();
+        PdfRule Remember(List<PdfRule> run) { var rule = Merge(run); rawLanes.Add(rule, run.ToArray()); return rule; }
         var merged = lines.GroupBy(l => (l.Vertical, A: (int)(l.Vertical ? l.Y1 : l.X1) / 3, B: (int)(l.Vertical ? l.Y2 : l.X2) / 3))
-            .SelectMany(g => { var ordered = g.OrderBy(l => l.Vertical ? l.X1 : l.Y1).ToArray(); var result = new List<PdfRule>(); var run = new List<PdfRule>(); foreach (var line in ordered) { if (run.Count > 0 && (line.Vertical ? line.X1 - run[^1].X1 : line.Y1 - run[^1].Y1) > 2) { result.Add(Merge(run)); run.Clear(); } run.Add(line); } if (run.Count > 0) result.Add(Merge(run)); return result; }).ToArray();
+            .SelectMany(g => { var ordered = g.OrderBy(l => l.Vertical ? l.X1 : l.Y1).ToArray(); var result = new List<PdfRule>(); var run = new List<PdfRule>(); foreach (var line in ordered) { if (run.Count > 0 && (line.Vertical ? line.X1 - run[^1].X1 : line.Y1 - run[^1].Y1) > 2) { result.Add(Remember(run)); run.Clear(); } run.Add(line); } if (run.Count > 0) result.Add(Remember(run)); return result; }).ToArray();
         // Long isolated character strokes (一 / I) are ink, not table borders.
         // A raster rule must connect to a perpendicular border at both ends.
         var comparisonWork = 0;
         var certified = FilterConnectedRules(merged);
-        if (certified.Length > 0) return certified;
+        if (certified.Length > 0) return new PrintedRuleInventory(certified, rawLanes, this, PixelDigest(token, work));
         // Only a failed complete rule graph uses the interior fallback. Already
         // certified stroke endpoints remain unchanged, including thick corners.
         {
