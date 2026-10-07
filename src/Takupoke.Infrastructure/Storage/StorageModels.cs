@@ -27,6 +27,8 @@ public sealed record RecoveryAudit(RecoveryDocument Document, RecoveryResult Res
     public RecoverySemanticCertification? CurrentCertification { get; init; }
     [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
     public RecoverySemanticCertification? PreviousCertification { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public IReadOnlyList<RecoverySemanticCertification>? CertificationHistory { get; init; }
 }
 public sealed record RecoveryPreview(string SourceId, SchoolLease Lease, RecoveryDocument Document, RecoveryResult Result, DateTimeOffset CreatedAt);
 public sealed record RecoveryManualSession(string SourceId, SchoolLease Lease, RecoveryManualPlan Plan, DateTimeOffset CreatedAt);

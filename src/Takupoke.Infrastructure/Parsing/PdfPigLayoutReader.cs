@@ -100,12 +100,14 @@ public static class PdfPigLayoutReader
 
                 }
                 IReadOnlyList<PdfGlyph> glyphs = text is not null ? text.Finish(page.Text).Select(transform.Glyph).ToArray() : SpecialGlyphs(page, transform, token);
-                capture?.Record(number, RecoveryInputState.Partial, new PdfPageLayout(transform.Width, transform.Height, glyphs, []));
+                var recoveryGlyphs = text is not null ? text.RecoveryGlyphs.Select(transform.Glyph).ToArray() : glyphs;
+                capture?.Record(number, RecoveryInputState.Partial, new PdfPageLayout(transform.Width, transform.Height, recoveryGlyphs, []));
                 var layout = new PdfPageLayout(transform.Width, transform.Height, glyphs, paths.Finish());
                 layout.ValidateViewport(number);
                 if (RulesOverlapText(layout.Lines, glyphs, token))
                     throw new PdfParseException("P01", number);
-                capture?.Record(number, glyphs.Count == 0 ? RecoveryInputState.RasterOnly : RecoveryInputState.Complete, layout);
+                capture?.Record(number, glyphs.Count == 0 ? RecoveryInputState.RasterOnly : text is { RecoveryComplete: false } ? RecoveryInputState.Partial : RecoveryInputState.Complete,
+                    layout with { Glyphs = recoveryGlyphs });
                 layout.Validate(number); output.Add(layout);
             }
             capture?.Finish(); return output;

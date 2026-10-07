@@ -19,31 +19,32 @@ internal static class RecoveryAuditCertification
         if (original.CurrentCertification is { } certificate)
             return certificate.ValidatorVersion == RecoveryValidator.Version && HistoricalHashes(original, token) &&
                 RecoveryValidator.ValidateCertifiedAudit(original.Document, original.Result, original.Acceptance,
-                    original.PreviousAcceptance, certificate, original.PreviousCertification, token).CanAdopt;
+                    original.PreviousAcceptance, certificate, original.PreviousCertification, token, original.CertificationHistory).CanAdopt;
         // Current ordinary acceptances cannot smuggle an old certificate or a
         // metadata-only historical promotion into the fresh-validation path.
         return original.Result?.Metadata?.ValidatorVersion == RecoveryValidator.Version &&
-            original.PreviousCertification is null && original.PreviousAcceptance is null &&
+            original.PreviousCertification is null && original.CertificationHistory is null && original.PreviousAcceptance is null &&
             RecoveryValidator.CanReuse(original.Acceptance, original.Document, original.Result, token);
     }
     internal static RecoveryAudit? TryRecertify(RecoveryAudit original, CancellationToken token = default)
     {
         token.ThrowIfCancellationRequested();
         if (original.Document is null || original.Result?.Metadata is null || original.Acceptance is null ||
-            original.PreviousCertification is not null || !HistoricalHashes(original, token)) return null;
+            original.CertificationHistory is not null || original.PreviousCertification is not null && original.CurrentCertification?.ValidatorVersion!=9 || !HistoricalHashes(original, token)) return null;
         if (!RecoveryValidator.AuditShapeWithinLimit(original.Document, original.Result, original.Acceptance,
-            original.PreviousAcceptance, original.CurrentCertification, original.PreviousCertification, token)) return null;
+            original.PreviousAcceptance, original.CurrentCertification, original.PreviousCertification, token, original.CertificationHistory)) return null;
         var predecessor = original.CurrentCertification;
-        if (predecessor is not null && !GenuineManual7Certificate8(original, predecessor, token)) return null;
+        if (predecessor is not null && predecessor.ValidatorVersion!=9 && !GenuineManual7Certificate8(original, predecessor, token)) return null;
+        IReadOnlyList<RecoverySemanticCertification>? history=predecessor?.ValidatorVersion==9 && original.PreviousCertification is { } ancestor ? new[]{ancestor} : null;
         var old = original.Acceptance;
         var certificate = new RecoverySemanticCertification(RecoveryValidator.SchemaVersion, RecoveryValidator.Version,
             old.ScopeHash, old.ResultHash, RecoveryValidator.Fingerprint(old), RecoveryValidator.Fingerprint(original.PreviousAcceptance))
         { PreviousCertificationHash = RecoveryValidator.Fingerprint(predecessor) };
         if (!RecoveryValidator.ValidateCertifiedAudit(original.Document, original.Result, old,
-            original.PreviousAcceptance, certificate, predecessor, token).CanAdopt) return null;
+            original.PreviousAcceptance, certificate, predecessor, token, history).CanAdopt) return null;
         // No metadata, correction snapshot, original consent, ancestry or proof
         // object is rewritten. The old manual certificate remains available.
-        return original with { CurrentCertification = certificate, PreviousCertification = predecessor };
+        return original with { CurrentCertification = certificate, PreviousCertification = predecessor, CertificationHistory = history };
     }
     private static bool GenuineManual7Certificate8(RecoveryAudit original, RecoverySemanticCertification certificate, CancellationToken token)
     {

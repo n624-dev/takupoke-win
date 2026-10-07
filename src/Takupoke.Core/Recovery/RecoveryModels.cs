@@ -31,10 +31,26 @@ public enum RecoveryRoleProof { InlineLabel, ColumnHeader }
 public sealed record RecoveryRoleScope(int LessonIndex, RecoveryFieldRole Role, int Page, RecoveryBox Box,
     IReadOnlyList<string> LabelSourceIds, RecoveryHeaderRegion LabelRegion, RecoveryRoleProof Proof, bool EmptyVerified);
 public sealed record RecoveryLessonBinding(IReadOnlyList<string> Subject, IReadOnlyList<string> Teacher, IReadOnlyList<string> Room);
+// Original character geometry for a bounded, app-certified three-row family.
+// Never part of a model response, and null preserves historical audit JSON.
+public sealed record RecoveryOrderedRowPiece(string Text, RecoveryBox Box, int? SourceLine, int? SourceOrder);
+public sealed record RecoveryOrderedRowProof(int Version, IReadOnlyList<string> SourceIds, IReadOnlyList<IReadOnlyList<RecoveryOrderedRowPiece>> Rows)
+{
+    public static bool SingleRow(IReadOnlyList<RecoveryOrderedRowPiece> pieces)
+    {
+        if (pieces.Count is < 1 or > 256 || pieces.Any(p => p.Text.Length != 1 || !p.Box.Valid || p.SourceLine is null or < 0 || p.SourceOrder is null or < 0) ||
+            pieces.Select(p=>p.SourceLine).Distinct().Count()!=1 ||
+            pieces.Zip(pieces.Skip(1)).Any(p=>p.First.SourceOrder>=p.Second.SourceOrder || p.First.Box.X+p.First.Box.Width>p.Second.Box.X+0.1)) return false;
+        var ink=pieces.Where(p=>!string.IsNullOrWhiteSpace(p.Text)).ToArray();
+        return ink.Length>0 && ink.Zip(ink.Skip(1)).All(p=>p.Second.Box.X-p.First.Box.X-p.First.Box.Width<=Math.Max(p.First.Box.Height,p.Second.Box.Height)*1.5);
+    }
+}
 public sealed record RecoveryCell(string Id, int Page, RecoveryBox Box, RecoveryInputState InputState,
     IReadOnlyList<RecoverySlot> Slots, IReadOnlyList<string> SourceIds, IReadOnlyList<string> BlankFields,
     bool ConfirmedEmpty = false, int ParallelCount = 1)
 {
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public RecoveryOrderedRowProof? OrderedRowProof { get; init; }
     // App-generated original separator proof, never a model response field.
     // Null preserves the historical V4/V5 document JSON and scope fingerprint.
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

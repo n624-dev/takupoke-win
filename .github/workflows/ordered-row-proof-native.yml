@@ -1,0 +1,43 @@
+name: Verify ordered-row recovery and real fictional source acquisition
+on:
+  push:
+    branches: [research/windows-ordered-row-proof-20261007]
+permissions:
+  contents: read
+jobs:
+  native:
+    runs-on: windows-2025
+    timeout-minutes: 25
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: '10.0.x'
+      - run: python scripts/check-public-tree.py
+      - run: dotnet test tests/Takupoke.Core.Tests/Takupoke.Core.Tests.csproj --verbosity quiet
+      - run: dotnet test tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj --verbosity quiet
+      - run: python -m pip install --disable-pip-version-check -r tools/independent-wide-timetable/requirements.txt
+      - name: Generate and evaluate independent fictional source PDFs
+        shell: pwsh
+        run: |
+          $owned = Join-Path $env:RUNNER_TEMP 'ordered-row-e2e-owned'
+          python -B tools/ordered-row-e2e/generate.py --output $owned
+          if ($LASTEXITCODE -ne 0) { throw 'Fictional generation failed' }
+          dotnet build tools/ordered-row-e2e/Probe.csproj --verbosity quiet
+          if ($LASTEXITCODE -ne 0) { throw 'Source probe build failed' }
+          python -B tools/ordered-row-e2e/run.py --fixtures $owned --dll tools/ordered-row-e2e/bin/Debug/net10.0/Probe.dll
+          if ($LASTEXITCODE -ne 0) { throw 'Source probe transport failed' }
+          $rows = Get-Content (Join-Path $owned 'observations-windows.json') -Raw | ConvertFrom-Json
+          if (@($rows | Where-Object { -not $_.correctDecision }).Count -gt 0) { throw 'Source semantic gate failed' }
+      - name: Remove all owned generated PDFs and fonts
+        if: always()
+        shell: pwsh
+        run: |
+          $owned = Join-Path $env:RUNNER_TEMP 'ordered-row-e2e-owned'
+          if (Test-Path $owned) { Remove-Item -LiteralPath $owned -Recurse -Force }
+          if (Test-Path $owned) { throw 'Owned temporary files remain' }
