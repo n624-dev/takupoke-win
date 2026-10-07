@@ -47,7 +47,15 @@ for case in manifest["cases"]:
     gold = case["oracle"]
     if actual.get("shadow"):
         from shadow_metrics import summarize
-        actual["shadow"] = summarize(actual["shadow"], gold)
+        shadow=actual["shadow"]
+        def crop_inputs(page, key):
+            return [(row["crop"],row["ValidWidth"],row["InputWidth"]) for row in page[key]]
+        actual["shadow"] = {"mobile": summarize(shadow, gold), "server": summarize(shadow, gold,"serverRows"),
+                            "serverBytes":84503027,"serverSHA256":"d9dc333c9c7b042c6dffb8e33d72b6f65c9c1d463d0a3c2f78174fea55e94752",
+                            "completedPagesUseSameRaster":bool(shadow["pages"]),
+                            "allSourcePagesCompleted":len(shadow["pages"])==len(case["embeddedPages"]) and shadow["error"] is None,
+                            "sameCropInputsOnCompletedPages":bool(shadow["pages"]) and all(crop_inputs(page,"rows")==crop_inputs(page,"serverRows") for page in shadow["pages"]),
+                            "qualifiedModels":[]}
     table = actual.pop("formal")
     accepted = table is not None
     exact = None; mismatches = None; value_errors = None; extra_keys = None

@@ -2,11 +2,11 @@
 from collections import Counter
 
 
-def summarize(shadow, gold):
+def summarize(shadow, gold, row_key="rows"):
     expected = Counter(lesson[role] for slot in gold["slots"]
                        for lesson in slot["lessons"] for role in ("subject", "teacher", "room"))
     found, uncertain_spaces = Counter(), Counter()
-    rows = [row for page in shadow["pages"] for row in page["rows"]]
+    rows = [row for page in shadow["pages"] for row in page[row_key]]
     low_space = low_body = empty = unsupported = 0
     for row in rows:
         pieces = row["pieces"]
@@ -28,4 +28,6 @@ def summarize(shadow, gold):
             "exactBodyLiteralOccurrences": sum((found & expected).values()),
             "exactBodyLiteralsWithOnlyUncertainWhitespace": sum((uncertain_spaces & expected).values()),
             "documentBodyObligations": sum(expected.values()), "nonAdoptable": True,
+            "pixelHashes": [{"page": page["page"], "bgraSha256": page["bgraSha256"]}
+                            for page in shadow["pages"] if "bgraSha256" in page],
             "scope": "Literal occurrences only; no field ownership or complete document correctness"}
