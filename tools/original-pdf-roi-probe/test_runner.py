@@ -1,9 +1,29 @@
-import io,json,tempfile,sys,unittest
+import io,json,tempfile,sys,unittest,os
 from pathlib import Path
 from unittest.mock import patch
 from types import SimpleNamespace
 import run_once as r
 class RunnerControls(unittest.TestCase):
+ def test_utf8_event_gate_under_windows_cp1252_default(self):
+  with tempfile.TemporaryDirectory() as td:
+   event=Path(td)/'event.json';event.write_bytes(json.dumps({'inputs':{'packet_sha256':'packet','source_commit':'a'*40},'unrelatedMetadata':'日本語前観測'},ensure_ascii=False).encode('utf-8'))
+   with self.assertRaises(UnicodeDecodeError):event.read_text(encoding='cp1252')
+   original=Path.read_text
+   def windows_default(path,encoding=None,errors=None):return original(path,encoding=encoding or 'cp1252',errors=errors)
+   env={'GITHUB_EVENT_NAME':'workflow_dispatch','GITHUB_EVENT_PATH':str(event),'GITHUB_SHA':'a'*40,'GITHUB_RUN_ATTEMPT':'1','GITHUB_REF':'refs/heads/research/windows-original-pdf-roi-20261006'}
+   with patch.dict(r.os.environ,env,clear=True),patch.object(Path,'read_text',windows_default):r.event_gate('packet')
+ def test_native_json_read_uses_utf8_under_cp1252(self):
+  with tempfile.TemporaryDirectory() as td:
+   native=Path(td)/'native.jsonl';native.write_bytes(json.dumps({'type':'前'},ensure_ascii=False).encode('utf-8'))
+   original=Path.read_text
+   def windows_default(path,encoding=None,errors=None):return original(path,encoding=encoding or 'cp1252',errors=errors)
+   with patch.object(Path,'read_text',windows_default):
+    with self.assertRaisesRegex(ValueError,'complete exact stage inventory'):r.assess(native)
+ def test_invalid_utf8_event_remains_refusal(self):
+  with tempfile.TemporaryDirectory() as td:
+   event=Path(td)/'event.json';event.write_bytes(b'\xff')
+   with patch.dict(r.os.environ,{'GITHUB_EVENT_NAME':'workflow_dispatch','GITHUB_EVENT_PATH':str(event)},clear=True):
+    with self.assertRaises(UnicodeDecodeError):r.event_gate('packet')
  def test_prewrite_exact_boundary(self):
   f=io.BytesIO();self.assertEqual(r.write_capped(f,b'1234',0,4),4);self.assertEqual(f.getvalue(),b'1234')
  def test_prewrite_overflow_never_written(self):

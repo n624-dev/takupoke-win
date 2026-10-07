@@ -13,8 +13,8 @@
     },
     {
       "path": "tools/original-pdf-roi-probe/README.md",
-      "bytes": 4497,
-      "sha256": "557982cceb31f0321d2f54e0015c665db7196690c7de300ecad541bdc10c98be"
+      "bytes": 5490,
+      "sha256": "457bc15e7705dcc14b3cd24253e0b6791ae913882364da137bcd4968ef8aa578"
     },
     {
       "path": "tools/original-pdf-roi-probe/native/Geometry.cs",
@@ -48,8 +48,8 @@
     },
     {
       "path": "tools/original-pdf-roi-probe/native/Program.cs",
-      "bytes": 12470,
-      "sha256": "c23531b94d45c1f7cd4ac7299b434cd55427e2e82e8ac750a0e55d6f332b3168"
+      "bytes": 12749,
+      "sha256": "23ef49363282a323a017574920eb5795007fb0bd88d68bd9ff27694e3172ac54"
     },
     {
       "path": "tools/original-pdf-roi-probe/native/RecoveryBox.cs",
@@ -58,8 +58,8 @@
     },
     {
       "path": "tools/original-pdf-roi-probe/native/RoiGeometry.cs",
-      "bytes": 4645,
-      "sha256": "c68fbc23b29c9a5fcf1f5b372321365009ca0eaf8fa3b2694e1175d2935c74c5"
+      "bytes": 7809,
+      "sha256": "4ede8c933c49a60c3ba7a91fdbb2ab7b0eedfd43ce132c75eca99e54fe0a56d6"
     },
     {
       "path": "tools/original-pdf-roi-probe/native/RoiProbe.csproj",
@@ -78,8 +78,8 @@
     },
     {
       "path": "tools/original-pdf-roi-probe/read_closed_capture.py",
-      "bytes": 3391,
-      "sha256": "c316ff6293236e5db321e67c2aaab2f3bde0a5ed43d11b8c56e07336da416fb2"
+      "bytes": 3407,
+      "sha256": "5b3303767cc8e1e3e72853452ea5968e3a00f03e0a18cbb7f6a527e1e7fa7b02"
     },
     {
       "path": "tools/original-pdf-roi-probe/recipe.json",
@@ -88,13 +88,13 @@
     },
     {
       "path": "tools/original-pdf-roi-probe/run_once.py",
-      "bytes": 9365,
-      "sha256": "2f56db278ba8db057b3f709cfbf5183bef01f45abf83656d3199535dfc05d9c2"
+      "bytes": 9769,
+      "sha256": "db5c39b98d55fb4ccc4e550a260195967df59bc8c06899cddeac2bad8a34294b"
     },
     {
       "path": "tools/original-pdf-roi-probe/test_runner.py",
-      "bytes": 3767,
-      "sha256": "85191c7c40e3480d461cc3a76de20b8746b7b946714c821cdd01d46235c6a08b"
+      "bytes": 5473,
+      "sha256": "6cfa0fc412c89a66754cdd3850d60be4bb838744ccd0c65b4a4617003cf3ee5f"
     },
     {
       "path": ".gitattributes",

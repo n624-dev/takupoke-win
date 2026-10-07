@@ -8,14 +8,14 @@ def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def check(v,m):
  if not v:raise ValueError(m)
 def validate():
- f=D/'packet-freeze.json'; freeze=json.loads(f.read_text())
+ f=D/'packet-freeze.json'; freeze=json.loads(f.read_text(encoding="utf-8"))
  for pin in freeze['pins']:
   p=ROOT/pin['path'];check(p.stat().st_size==pin['bytes'] and sha(p)==pin['sha256'],'source pin '+pin['path'])
  print(json.dumps({'sourceValidation':'PASS','pins':len(freeze['pins']),'packetSHA256':sha(f),'downloads':0,'modelSessions':0,'detectorCalls':0}))
  return sha(f)
 def event_gate(packet):
  check(os.environ.get('GITHUB_EVENT_NAME')=='workflow_dispatch','actual requires manual exact dispatch')
- e=json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text());ins=e['inputs']
+ e=json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text(encoding="utf-8"));ins=e['inputs']
  check(ins.get('packet_sha256')==packet and ins.get('source_commit')==os.environ.get('GITHUB_SHA') and len(ins['source_commit'])==40,'exact root packet/source')
  check(os.environ.get('GITHUB_RUN_ATTEMPT')=='1','no retry')
  check(os.environ.get('GITHUB_REF')=='refs/heads/research/windows-original-pdf-roi-20261006','research ref only')
@@ -69,19 +69,21 @@ def emit_closed(name,path):
  for i,p in enumerate(parts):print(json.dumps({'closedCapturePart':name,'index':i,'base64':base64.b64encode(p).decode()}))
  print(json.dumps({'closedCaptureEnd':name,'sha256':hashlib.sha256(b).hexdigest()}))
 def assess(path):
- check(path.stat().st_size<=4*1024**2,'native output bound');rows=[json.loads(s) for s in path.read_text().splitlines()]
+ check(path.stat().st_size<=4*1024**2,'native output bound');rows=[json.loads(s) for s in path.read_text(encoding="utf-8").splitlines()]
  types=[r['type'] for r in rows];check(types==['render','local-render','runtime']+['detector-start','detector-map','detector']*3+['result'],'complete exact stage inventory')
  check(rows[-1]['actualDetectorCalls']==3 and rows[-1]['recognizerCalls']==0 and rows[-1]['modelSessions']==1 and rows[-1]['retry'] is False,'one exact detector transaction')
+ check(rows[0]['NonblankCells']>0 and rows[0]['SelectedNonRuleInkPixels']>0 and 0<rows[0]['selectionPixelWork']<=8_000_000,'observed nonblank selection evidence')
  arms=['whole-product-render','roi-existing-product-raster','roi-original-pdf-native-render']
  for i,arm in enumerate(arms):
   start,maprow,decoded=rows[3+i*3:6+i*3]
   check(all(r['calls']==i+1 and r['arm']==arm for r in (start,maprow,decoded)),'arm identity')
   check(start['inputSHA256']==decoded['inputSHA256'] and maprow['outputSHA256']==decoded['outputSHA256'] and decoded['rawPreserved'] is True,'native tensor/map provenance')
   check(maprow['elements']==maprow['finite'] and maprow['nonfinite']==maprow['below']==0 and maprow['above']==maprow['normalized'],'finite bounded map')
+  check(decoded['spatialCoverage']['selectedOriginalWholeRasterNonRuleInkPixels']==rows[0]['SelectedNonRuleInkPixels'],'common observed selected ink inventory')
   check(len(decoded['sourceBoxes'])==len(decoded['mappedWholeRasterBoxes'])==decoded['candidateCount']<=10000,'no partial box inventory')
  return {'status':'COMPLETE_MAX3_DETECTOR_ACQUISITION_DIAGNOSTIC_NO_QUALITY_CREDIT','detectorCalls':3,'recognizerCalls':0,'arms':[{'arm':r['arm'],'candidates':r['candidateCount'],'boundaryCandidates':r['boundaryTouchingCandidates'],'spatialCoverage':r['spatialCoverage'],'sourceClosure':r['unchangedSourceClosure']} for r in rows if r['type']=='detector'],'acquisitionAndRoleQuality':'UNASSESSED','previous4060LinuxOrTileResultsPooled':False,'qualifiedModels':[]}
 def actual(packet):
- recipe=json.loads((D/'recipe.json').read_text());check(sha(ROOT/'src/Takupoke.Win/Platform/WindowsPdfRecovery.cs')==recipe['productionRendererSHA256'],'production renderer source changed')
+ recipe=json.loads((D/'recipe.json').read_text(encoding="utf-8"));check(sha(ROOT/'src/Takupoke.Win/Platform/WindowsPdfRecovery.cs')==recipe['productionRendererSHA256'],'production renderer source changed')
  check(sys.platform=='win32','Windows native only');event_gate(packet)
  check(shutil.disk_usage(tempfile.gettempdir()).free>=3*1024**3,'host public prerequisite/owned output reserve')
  owned=Path(tempfile.mkdtemp(prefix='takupoke-original-pdf-roi-'));receipt={};status=1
@@ -92,7 +94,7 @@ def actual(packet):
   controls=subprocess.run(['dotnet',str(D/'native/bin/Release/net10.0-windows10.0.26100.0/win-x64/RoiProbe.dll'),'--controls'],timeout=30)
   check(controls.returncode==0,'model-free native geometry controls')
   model=owned/'det.onnx';download(model)
-  recipe=json.loads((D/'recipe.json').read_text()); fixture=ROOT/'tools/raster-acquisition-native-probe/fixtures/ExamReturn-clean'
+  recipe=json.loads((D/'recipe.json').read_text(encoding="utf-8")); fixture=ROOT/'tools/raster-acquisition-native-probe/fixtures/ExamReturn-clean'
   images=[]
   for pin in recipe['fictionalImagePins']:
    p=ROOT/pin['path'];check(p.stat().st_size==pin['bytes'] and sha(p)==pin['sha256'],'fictional image identity');images.append(p)

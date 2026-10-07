@@ -26,7 +26,7 @@ def decode(lines,source,run):
  result['receipt']=footer
  return result
 def main():
- p=argparse.ArgumentParser();p.add_argument('log');p.add_argument('--source',required=True);p.add_argument('--run',required=True);a=p.parse_args();log=Path(a.log);runner.check(log.stat().st_size<=12*1024**2,'bounded full host log');captured=decode(log.read_text().splitlines(),a.source,a.run)
+ p=argparse.ArgumentParser();p.add_argument('log');p.add_argument('--source',required=True);p.add_argument('--run',required=True);a=p.parse_args();log=Path(a.log);runner.check(log.stat().st_size<=12*1024**2,'bounded full host log');captured=decode(log.read_text(encoding="utf-8").splitlines(),a.source,a.run)
  with tempfile.TemporaryDirectory(prefix='takupoke-roi-readback-') as td:
   out=Path(td)/'native.jsonl';out.write_bytes(captured['native.jsonl']);report=runner.assess(out)
  report['nativeCaptureSHA256']=hashlib.sha256(captured['native.jsonl']).hexdigest();report['stderrSHA256']=hashlib.sha256(captured['native.stderr']).hexdigest();runner.check(captured['receipt']['packetSHA256']==runner.sha(runner.D/'packet-freeze.json'),'host packet receipt pin');report['executionReceipt']=captured['receipt']['executionReceipt'];report['sourceCommit']=a.source;report['runID']=a.run;print(json.dumps(report,indent=2))
