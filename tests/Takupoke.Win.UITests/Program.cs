@@ -362,7 +362,7 @@ internal static partial class Program
             var remaining = _window!.FindFirst(TreeScope.Descendants,
                 new AndCondition(new PropertyCondition(AutomationElement.NameProperty, "時間割変更を反映"),
                     new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.MenuItem)));
-            Console.Error.WriteLine($"Display-menu restore diagnostic: initial={previousValue}; saved={SavedIncludesChanges(preferences)}; menuExists={remaining is not null}; menuChecked={(remaining is null ? "absent" : Checked(remaining).ToString())}");
+            DisplayMenuDiagnostic(previousValue, preferences);
             throw;
         }
     }
@@ -376,7 +376,7 @@ internal static partial class Program
     }
     private static void EnterFocusedMenuOption(string name, string label)
     {
-        // UIA can report item focus while another HWND receives SendKeys.
+        // UIA can report item focus while another HWND receives keyboard input.
         // Deliver exactly one Enter only after both native foreground ownership
         // and the actual menu item's keyboard focus agree. Persistence and menu
         // identity assertions remain unchanged; no programmatic toggle is used.
@@ -392,8 +392,26 @@ internal static partial class Program
             GetWindowThreadProcessId(GetForegroundWindow(), out owner);
             return owner == _window.Current.ProcessId && item.Current.HasKeyboardFocus;
         }, label);
-        System.Windows.Forms.SendKeys.SendWait("{ENTER}");
+        var keys = new[] {
+            new NativeInput { Type = 1, Data = new NativeInputData { Keyboard = new NativeKeyboardInput { VirtualKey = 0x0D } } },
+            new NativeInput { Type = 1, Data = new NativeInputData { Keyboard = new NativeKeyboardInput { VirtualKey = 0x0D, Flags = 2 } } }
+        };
+        Require(SendInput((uint)keys.Length, keys, System.Runtime.InteropServices.Marshal.SizeOf<NativeInput>()) == keys.Length,
+            "The OS accepted one complete Enter key press and release.");
     }
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    private struct NativeKeyboardInput { public ushort VirtualKey, ScanCode; public uint Flags, Time; public nuint ExtraInfo; }
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    private struct NativeMouseInput { public int X, Y; public uint Data, Flags, Time; public nuint ExtraInfo; }
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Explicit)]
+    private struct NativeInputData {
+        [System.Runtime.InteropServices.FieldOffset(0)] public NativeKeyboardInput Keyboard;
+        [System.Runtime.InteropServices.FieldOffset(0)] public NativeMouseInput Mouse;
+    }
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    private struct NativeInput { public uint Type; public NativeInputData Data; }
+    [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+    private static extern uint SendInput(uint count, [System.Runtime.InteropServices.In] NativeInput[] inputs, int size);
     [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern nint GetForegroundWindow();
     [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool SetForegroundWindow(nint window);
     private static bool SavedIncludesChanges(string path)
