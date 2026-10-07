@@ -49,7 +49,14 @@ internal static partial class Program
             Invoke("link-menu-fake-study"); Invoke(ByName("お気に入りから外す", ControlType.MenuItem));
             Wait(() => Find("link-fake-study")?.Current.Name.Contains("お気に入り", StringComparison.Ordinal) == false, "Favorite editing can be undone");
             Wait(() => Find("link-fake-study") is not null && Find("link-fake-second") is not null, "saved links are displayed");
-            Require(Find("link-fake-study")!.Current.BoundingRectangle.Top < Find("link-fake-second")!.Current.BoundingRectangle.Top, "Link order follows the API array rather than sort-order metadata.");
+            // Favorite editing rebuilds the page. UIA nodes can appear before
+            // layout assigns their rectangles, so wait for the original order.
+            Wait(() =>
+            {
+                var first = Find("link-fake-study")?.Current.BoundingRectangle;
+                var second = Find("link-fake-second")?.Current.BoundingRectangle;
+                return first is { Height: > 0 } && second is { Height: > 0 } && first.Value.Top < second.Value.Top;
+            }, "Link order follows the API array rather than sort-order metadata.");
             SetSearch("存在しない架空検索語");
             Wait(() => Find("link-fake-study") is null, "search excludes nonmatching links");
             SetSearch("かくうがくしゅう");
