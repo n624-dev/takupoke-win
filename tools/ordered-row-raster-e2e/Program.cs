@@ -17,6 +17,7 @@ if (hash != args[1] || bytes.Length is < 1 or > 50*1024*1024) throw new InvalidD
 using var lifetime = new CancellationTokenSource(TimeSpan.FromMinutes(6));
 var token = lifetime.Token; var watch = Stopwatch.StartNew();
 var capture = new RecoveryReadCapture();
+var originalImageSizes=RecoveryPdfImageResolution.Inspect(bytes,token);
 var ownedModelRoot=Path.Combine(Path.GetTempPath(),"takupoke-ordered-raster-models-"+(Environment.GetEnvironmentVariable("GITHUB_RUN_ID") ?? "local")+"-"+Guid.NewGuid().ToString("N"));
 string stage = "Reader", outcome = "unassessed"; string? strictFailure = null, failure = null;
 TimetableAnalysis? formal = null; RecoveryDocument? doc = null; IReadOnlyList<PdfPageLayout>? pages = null;
@@ -79,6 +80,7 @@ finally
         manualTargetCount=doc?.Capture?.OriginalCrops?.Count,
         nativeOcrCalls = (int?)null, llmCalls = 0, milliseconds = watch.ElapsedMilliseconds,
         cropFailure,
+        inspectedOriginalImageSizes=originalImageSizes.Select(pair=>new {page=pair.Key,width=pair.Value.Width,height=pair.Value.Height}).ToArray(),
         nativeCallScope="Current production whole-page acquisition; native OCR calls are not instrumented and never reported as zero" }));
     if(Directory.Exists(ownedModelRoot))Directory.Delete(ownedModelRoot,true);
     CryptographicOperations.ZeroMemory(bytes);

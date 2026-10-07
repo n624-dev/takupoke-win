@@ -17,6 +17,7 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
     {
         var capturedDocument = await Task.Run(() => RecoveryCapturedLayoutBuilder.TryBuildWithoutRaster(hash, kind, capture, token), token);
         if (capturedDocument is not null) return capturedDocument;
+        var originalImageSizes = await Task.Run(() => RecoveryPdfImageResolution.Inspect(bytes, token), token);
         using var input = new InMemoryRandomAccessStream();
         using (var writer = new DataWriter(input)) { writer.WriteBytes(bytes); await writer.StoreAsync().AsTask(token); writer.DetachStream(); }
         input.Seek(0); var pdf = await PdfDocument.LoadFromStreamAsync(input).AsTask(token);
@@ -30,6 +31,7 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                 token.ThrowIfCancellationRequested(); using var page = pdf.GetPage(i); using var image = new InMemoryRandomAccessStream();
                 var width = (uint)Math.Clamp(Math.Round(page.Size.Width * 2), 640, 2400); var height = (uint)Math.Round(page.Size.Height / page.Size.Width * width);
                 if (height > 3200) { width = (uint)Math.Round(width * 3200d / height); height = 3200; }
+                if (originalImageSizes.TryGetValue((int)i + 1, out var originalSize)) { width = (uint)originalSize.Width; height = (uint)originalSize.Height; }
                 await page.RenderToStreamAsync(image, new PdfPageRenderOptions { DestinationWidth = width, DestinationHeight = height }).AsTask(token);
                 image.Seek(0); var decoder = await BitmapDecoder.CreateAsync(image).AsTask(token); using var bitmap = await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore).AsTask(token);
                 var pixels = await decoder.GetPixelDataAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore, new BitmapTransform(), ExifOrientationMode.IgnoreExifOrientation, ColorManagementMode.DoNotColorManage).AsTask(token);
