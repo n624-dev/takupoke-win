@@ -265,3 +265,19 @@ Two lossless image-only PDFs were assembled from the same independently invented
 Both positive documents were refused before Builder with `OCR印字の切り出し範囲を一意に確認できません。`. Document recovery was0/2; there were zero formal outputs and zero operational errors. Character accuracy and the 2,040 body values per document remain unassessed. Native OCR call counts were not instrumented and are null, never zero. A completed measurement workflow is not semantic quality PASS, and refusing a readable positive is recovery failure rather than successful negative rejection.
 
 No threshold, crop margin, decoder, model or acceptance rule was changed. A subsequent same-input diagnostic adds only bounded numeric component reasons at that unchanged refusal; it is a paired diagnosis, not a new independent document cohort. All Actions-owned PDFs, fonts and model directories were deleted by the final cleanup. No school original or copied private names were used.
+
+## Preserve original image density and colour interpretation: partial acquisition progress, not quality PASS
+
+The same two frozen image sources were measured without changing OCR models, confidence, completion or adoption guards. Numeric component diagnostics in runs [37673519507](https://github.com/n624-dev/takupoke-win/actions/runs/37673519507) and [37674584069](https://github.com/n624-dev/takupoke-win/actions/runs/37674584069) located unmatched rule-connected components rather than proving incorrect recognized characters. Both sources still refused before recognition.
+
+| Native acquisition condition | Run | Unowned text-support pixels, first failing component | Full document exact |
+| --- | --- | --- | ---: |
+| Current PDF renderer | 37674584069 | 43,927 / 44,676 | 0/2 |
+| PDF rendered at original full-page image dimensions | [37675921953](https://github.com/n624-dev/takupoke-win/actions/runs/37675921953) | 8 / 28,401 | 0/2 |
+| Bounded original RGB image, ICC preserved and native sRGB conversion | [37678319462](https://github.com/n624-dev/takupoke-win/actions/runs/37678319462) | first source passed crop completion / 7,312 | 0/2 |
+
+The last condition, research source `854f907`, advanced the first source into the recognizer, which refused unreadable content. It is not a recovered document. The second source still refused ambiguous support attached to physical rules. Original full-page dimensions were2,176×2,832 and2,396×3,036. All three conditions returned zero formal outputs, zero incorrect formal outputs and zero operational errors. OCR character accuracy remains unassessed; native OCR calls remain uninstrumented/null and LLM calls are0.
+
+The direct-image route accepts only a bounded opaque RGB8 full-page image with verified image operations, without annotations, forms, masks, optional content or unhandled page/colour interpretation. ICC is retained rather than silently discarded. A diagnostic comparison previously named `originalSamplesExact` compared opaque-alpha255 BGRA encoding after native colour conversion; this does not establish original RGB loss because ignored alpha encoding and valid colour conversion can differ. The following diagnostic separates post-colour-management RGB from BGRA encoding. No alpha or pixel-hash mismatch alone becomes a crop or quality decision.
+
+These are paired repeated conditions on two designs, not additional independent successes. Neither density nor the direct-image route is promoted as universally superior or merged as qualified recovery. Final Actions cleanup removed owned PDFs, fonts and downloaded model directories; no artifact, school data or external LLM was used.
