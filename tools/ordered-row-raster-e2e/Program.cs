@@ -64,7 +64,7 @@ try
 catch (PdfParseException e) { outcome = "safe-refusal"; failure = e.Stage; }
 catch (InvalidDataException e) {
     outcome = stage=="OCR prerequisites" ? "execution-error":"safe-refusal"; failure = e.Message;
-    var keys=new[]{"OcrCropConflict","OcrCropOwner","OcrCropAttachedRule","OcrCropTextPixels","OcrCropComponentPixels","OcrCropComponentBounds","OcrCropCandidateCount","OcrCropRuleCount"};
+    var keys=new[]{"OcrCropConflict","OcrCropOwner","OcrCropAttachedRule","OcrCropTextPixels","OcrCropComponentPixels","OcrCropComponentBounds","OcrCropCandidateCount","OcrCropRuleCount","OcrCropRules","OcrCropUnmaskedRows","OcrCropUnmaskedColumns"};
     cropFailure=keys.Where(key=>e.Data.Contains(key)).ToDictionary(key=>key,key=>e.Data[key]);
 }
 catch (OperationCanceledException) { outcome = "execution-error"; failure = "cancelled-or-deadline"; }

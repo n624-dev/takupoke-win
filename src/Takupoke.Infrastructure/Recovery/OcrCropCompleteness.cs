@@ -74,6 +74,13 @@ internal static class OcrCropCompleteness
                 failure.Data["OcrCropComponentBounds"]=new RecoveryBox(left,top,right-left+1,bottom-top+1);
                 failure.Data["OcrCropCandidateCount"]=crops.Count;
                 failure.Data["OcrCropRuleCount"]=rules.Count;
+                failure.Data["OcrCropRules"]=rules;
+                failure.Data["OcrCropUnmaskedRows"]=pixels.Where(index=>!ruleMask[index])
+                    .GroupBy(index=>index/image.Width).Select(group=>new { lane=group.Key,count=group.Count(),first=group.Min(index=>index%image.Width),last=group.Max(index=>index%image.Width) })
+                    .OrderByDescending(row=>row.count).Take(24).ToArray();
+                failure.Data["OcrCropUnmaskedColumns"]=pixels.Where(index=>!ruleMask[index])
+                    .GroupBy(index=>index%image.Width).Select(group=>new { lane=group.Key,count=group.Count(),first=group.Min(index=>index/image.Width),last=group.Max(index=>index/image.Width) })
+                    .OrderByDescending(column=>column.count).Take(24).ToArray();
                 throw failure;
             }
             foreach (var index in pixels) { work.Step(); componentOwners[index] = (short)owner; }
