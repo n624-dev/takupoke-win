@@ -209,3 +209,59 @@ A fixed tuning comparison used the same frozen confusable body images above, wit
 A separate model-free diagnostic reconstructed and hash-verified the same source pixels. The unchanged production rule graph certified 12 rules and 11,737 masked rule pixels in each complete parent image, but zero rules and zero rule-mask pixels in each strip. Cutting away horizontal borders leaves vertical strokes without the perpendicular endpoint support required by the rule validator. Those strokes are no longer certified separators. The refusal log does not retain component-level ownership, so it does not identify which particular component first triggered refusal.
 
 The strip condition is closed and is not retried with an answer-selected crop. Further detector-region research must keep the original page for rule certification, complete ink ownership and recognition input, translate regional detector proposals to page coordinates, and retain all rejected proposals and unowned ink. The previous overlapping-detector research already used full-page completion; the new comparison variable would be rule-aligned detector regions. No production guard or model was changed. Owned rasters, dictionaries and build outputs were removed; no school PDF was used.
+
+
+## Rule-aligned regional detector with full original-page ownership
+
+A new invented table contained 24 unlabelled three-field cells and three headings, with confusable room codes, two paired fonts at 22 px and fixed colours. The first research execution failed its regional preprocessing prerequisite: a full-width header tensor exceeded the existing 960-pixel detector-input limit. Four whole-page reads completed, while the four regional arms made zero native detector and zero recognizer calls. The old attempted-call counter was incremented before tensor creation; it is not an actual native-call count. That execution remains an operational/preprocessing failure, not regional recognition evidence.
+
+A separately recorded continuation capped every regional tensor at the unchanged 960-pixel limit and verified all 20 regions without any model call before inference. Original source pixels and all other conditions remained fixed. This is a paired continuation, not another independent corpus. Regions were derived from certified original-page rules in groups of three cells. All detector proposals were translated to original-page coordinates; the unchanged full-page connected-ink completion, white-overlap rejection and original-page recognition crops were retained. No local rule mask, inferred blank, content-based deduplication or confidence adjustment was used.
+
+| Font / recognizer / detector region | Exact owned rows, including headings | Correct above 0.8 | Incorrect above 0.8 | Below 0.8 |
+|---|---:|---:|---:|---:|
+| Sans / V5 / whole | 75/75 | 73 | 0 | 2 |
+| Sans / V5 / regions | 75/75 | 71 | 0 | 4 |
+| Sans / V6 / whole | 75/75 | 73 | 0 | 2 |
+| Sans / V6 / regions | 75/75 | 72 | 0 | 3 |
+| Serif / V5 / whole | 71/75 | 71 | 4 | 0 |
+| Serif / V5 / regions | 71/75 | 70 | 0 | 5 |
+| Serif / V6 / whole | 71/75 | 71 | 0 | 4 |
+| Serif / V6 / regions | 72/75 | 71 | 0 | 4 |
+
+All eight reads completed, with 600 uniquely owned source rows, complete original painted-glyph support, no duplicate owners and no unrecognized ink. The regional V6 condition repaired one observed Serif mistake without destroying a previously exact row. Regional V5 lowered four Serif mistakes below the floor, but did not correct their text; it also rejected one previously high-confidence correct teacher field. Four uncertain Serif fields still exceed the three-field document limit, and these are body-component rasters rather than complete timetable PDFs. No model or preprocessing condition is qualified or activated.
+
+The continuation made 44 detector calls and 600 recognizer calls, using Linux .NET ONNX Runtime 1.23.2. Sampled peak working set was 582,537,216 bytes. Timings are retained in the raw result but concurrent Swift compilation and cold initialization preclude a controlled speed comparison. Raw output SHA-256: `d0c3c7bb3a9a7790921d63e520ad85418976725629ad6f757602ca18d09c795f`. The independent paint audit reconstructed and hash-verified the original pixels without running models. Owned rasters, dictionaries and build outputs were removed; no school PDF, cloud AI or additional model download was used.
+
+
+## Fixed detector proposals with paired native-font redraw
+
+A separately fixed comparison retained every included regional detector proposal from the previous 22 px sample, scaled its original coordinates exactly 2×, and repainted the same font/vector text directly at 44 px into 3,680 × 1,320 rasters. It did not enlarge a bitmap and did not call a detector. The same V5/V6 recognizers, matching dictionaries, 48-pixel recognition height, padding, confidence floor and source-position guards were kept. Original-page Complete ran again, and each resulting crop was audited against complete independently painted glyph support and its physical cell.
+
+| Font / recognizer | Exact owned rows, including headings | Correct above 0.8 | Incorrect above 0.8 | Below 0.8 | Previously exact rows destroyed |
+|---|---:|---:|---:|---:|---:|
+| Sans / V5 | 73/75 | 71 | 0 | 4 | 2 |
+| Sans / V6 | 75/75 | 71 | 0 | 4 | 0 |
+| Serif / V5 | 70/75 | 69 | 4 | 2 | 1 |
+| Serif / V6 | 71/75 | 69 | 1 | 5 | 1 |
+
+All four reads completed, with 300 uniquely owned rows and no unrecognized ink, but none repaired an observed lower-density mistake. Higher density introduced previously absent errors, including wrong high-confidence readings in Serif. This redraw condition is rejected for production activation or model qualification.
+
+Completed recognition crops were paired by independently painted source identity, rather than native row index: completion can change Y ordering. Mapping them back to the original scale changed 72 crops per Sans arm and 73 per Serif arm, by up to 1.25 source pixels in a crop dimension. Consequently this comparison measures native-font repaint together with unchanged ink completion, not a perfectly isolated density effect with identical final crops. Complete crop deltas and original native output remain separate; correcting the diagnostic pairing did not rerun inference.
+
+There were zero detector calls and 300 recognizer calls, using Linux .NET ONNX Runtime 1.23.2, with sampled peak working set 632,954,880 bytes. This paired component comparison is not native Windows PDF acquisition or an independent document-success count. Raw output SHA-256: `cbdcdf70b77daf1291cc77f1a53cb00c715aa38bca5322b1edd789e26892aeb9`. Owned rasters, dictionaries and build outputs were removed, with no school PDF or cloud inference.
+
+
+## Fixed detector proposals with direct high-density font redraw: rejected
+
+A paired continuation froze the 22 px regional detector proposals, mapped their coordinates by exactly 2, and repainted the same invented grid and text directly from the font at 44 px. This is Linux font-source drawing, not native Windows PDF rendering and not enlargement of the old bitmap. Four conditions retained the recognizer, matching dictionary, original-component completion, confidence floor and padding guards. Exactly zero detector and 300 recognizer calls were made. All four reads completed with 75 uniquely owned source rows and zero unrecognized ink.
+
+| Font / recognizer | Exact owned rows | Correct above 0.8 | Incorrect above 0.8 | Below 0.8 | Previously exact rows destroyed |
+|---|---:|---:|---:|---:|---:|
+| Sans / V5 | 73/75 | 71 | 0 | 4 | 2 |
+| Sans / V6 | 75/75 | 71 | 0 | 4 | 0 |
+| Serif / V5 | 70/75 | 69 | 4 | 2 | 1 |
+| Serif / V6 | 71/75 | 69 | 1 | 5 | 1 |
+
+No previously observed literal error was corrected. Four Serif l/1 room confusions remained in each recognizer condition, and V5 additionally damaged a correct teacher reading. Original ink completion changed 72 of 75 recognition crops in each Sans arm and 73 in each Serif arm after scaling back to the old coordinates. Thus a pure density effect cannot be isolated from the changed completed crop. Higher density is not promoted as a general improvement; high-confidence literal errors increased in Serif. Spatial ownership and drawing density do not certify correct text.
+
+Raw output SHA-256: `49990dc06a5727eb845a7f452a73293fa03e67357f06bc3faf528e6d398bae91`. All rows were audited against the complete original painted glyph support; the audit reconstructed and hash-verified the source pixels without model calls. This is paired component evidence, not new independent document success, whole-document adoption or model qualification. Owned images, dictionaries and build files were removed. Existing models, confidence gates, renderer limits and production recipes were preserved.
