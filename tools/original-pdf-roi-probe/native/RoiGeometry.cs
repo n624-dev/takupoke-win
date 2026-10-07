@@ -12,7 +12,7 @@ internal static class RoiGeometry
  {Check.That(new RecoveryBox(0,0,w,h).Contains(roi)&&double.IsFinite(nw)&&double.IsFinite(nh)&&nw>0&&nh>0,"native coordinate source");return new(roi.X*nw/w,roi.Y*nh/h,roi.Width*nw/w,roi.Height*nh/h);}
  internal static RecoveryBox MapBack(RecoveryBox box,RecoveryBox roi,int w,int h)
  {Check.That(new RecoveryBox(0,0,w,h).Contains(box),"local actual raster coordinates");var mapped=new RecoveryBox(roi.X+box.X*roi.Width/w,roi.Y+box.Y*roi.Height/h,box.Width*roi.Width/w,box.Height*roi.Height/h);Check.That(roi.Contains(mapped),"mapped ROI bounds");return mapped;}
- internal static (RecoveryBox ROI,int Cells,int Work,int NonblankCells,int SelectedNonRuleInkPixels) Select(IReadOnlyList<PdfRule> rules,int w,int h,Func<RecoveryBox,int>? observedNonRuleInk=null)
+ internal static (RecoveryBox ROI,int Cells,int Work,int NonblankCells,int SelectedNonRuleInkPixels) Select(IReadOnlyList<PdfRule> rules,int w,int h,Func<RecoveryBox,int>? observedNonRuleInk=null,Func<RecoveryBox,bool>? eligibleRegion=null)
  {
   Check.That(rules.Count<=2048&&w>0&&h>0,"rule bound");var horizontal=new Dictionary<double,List<(double A,double B)>>();var vertical=new Dictionary<double,List<(double A,double B)>>();
   foreach(var r in rules){Check.That(new[]{r.X1,r.Y1,r.X2,r.Y2}.All(double.IsFinite)&&r.X1>=0&&r.Y1>=0&&r.X2<w&&r.Y2<h&&r.X1<=r.X2&&r.Y1<=r.Y2,"native raster rule bounds");if(r.Y1==r.Y2&&r.X1<r.X2){if(!horizontal.ContainsKey(r.Y1))horizontal[r.Y1]=[];horizontal[r.Y1].Add((r.X1,r.X2));}else if(r.X1==r.X2&&r.Y1<r.Y2){if(!vertical.ContainsKey(r.X1))vertical[r.X1]=[];vertical[r.X1].Add((r.Y1,r.Y2));}else throw new InvalidDataException("Non-axis observed rule");}
@@ -21,9 +21,16 @@ internal static class RoiGeometry
   var cells=new List<RecoveryBox>();for(int yi=0;yi+1<ys.Length;yi++)for(int xi=0;xi+1<xs.Length;xi++){double l=xs[xi],r=xs[xi+1],t=ys[yi],b=ys[yi+1];if(r-l<16||r-l>Math.Min(640,w/3d)||b-t<16||b-t>Math.Min(320,h/3d))continue;if(Supports(horizontal[t],l,r)&&Supports(horizontal[b],l,r)&&Supports(vertical[l],t,b)&&Supports(vertical[r],t,b)){cells.Add(new(l,t,r-l,b-t));Check.That(cells.Count<=4096,"cell cap");}}
   Check.That(cells.Count>0,"No bounded observed closed cell; no fallback/retry");string Key(RecoveryBox b)=>Convert.ToHexStringLower(SHA256.HashData(Encoding.ASCII.GetBytes("windows-original-pdf-roi-v1:"+string.Join(',',new[]{b.X,b.Y,b.Width,b.Height}.Select(v=>BitConverter.DoubleToInt64Bits(v).ToString("x16"))))));
   var measured=cells.Select(b=>(Box:b,Ink:observedNonRuleInk?.Invoke(b)??0)).ToArray();
-  Check.That(measured.All(c=>c.Ink>=0),"negative measured ink count");var eligible=observedNonRuleInk is null?measured:measured.Where(c=>c.Ink>0).ToArray();
+  Check.That(measured.All(c=>c.Ink>=0),"negative measured ink count");var eligible=measured.Where(c=>(observedNonRuleInk is null||c.Ink>0)&&(eligibleRegion is null||eligibleRegion(c.Box))).ToArray();
   Check.That(eligible.Length>0,"No nonblank bounded observed closed cell; no fallback/retry");var selected=eligible.OrderBy(c=>Key(c.Box),StringComparer.Ordinal).First();
   return(selected.Box,cells.Count,work,measured.Count(c=>c.Ink>0),selected.Ink);
+ }
+ internal static RecoveryBox SelectionInterior(RecoveryBox box)
+ {
+  // Selection only. The complete cell remains the detector input and coverage
+  // denominator; edge ink is never discarded or declared empty.
+  Check.That(box.Width>6&&box.Height>6,"interior selection bounds");
+  return new(box.X+3,box.Y+3,box.Width-6,box.Height-6);
  }
  internal static int ObservedNonRuleInk(RecoveryRaster raster,bool[] mask,RecoveryBox box,ref long pixelWork,CancellationToken token=default)
  {
@@ -47,6 +54,11 @@ internal static class RoiGeometry
   int Count(RecoveryBox b)=>ObservedNonRuleInk(raster,mask,b,ref scan);
   Reject(()=>Select(rules,900,600,Count));int ink=(90*900+150)*4;pixels[ink]=pixels[ink+1]=pixels[ink+2]=0;scan=0;
   var nonblank=Select(rules,900,600,Count);Check.That(nonblank.Cells==4&&nonblank.NonblankCells==1&&nonblank.SelectedNonRuleInkPixels==1&&nonblank.ROI==new RecoveryBox(100,60,100,60),"one measured nonblank cell");
+  scan=0;Check.That(Select(rules,900,600,Count,b=>Count(SelectionInterior(b))>0).ROI==nonblank.ROI,"interior ink selection retains complete cell");
+  pixels[ink]=pixels[ink+1]=pixels[ink+2]=255;int edgeInk=(62*900+150)*4;pixels[edgeInk]=pixels[edgeInk+1]=pixels[edgeInk+2]=254;scan=0;
+  Check.That(Count(nonblank.ROI)==1,"border residue remains source ink");
+  Reject(()=>Select(rules,900,600,Count,b=>Count(SelectionInterior(b))>0));
+  pixels[edgeInk]=pixels[edgeInk+1]=pixels[edgeInk+2]=255;pixels[ink]=pixels[ink+1]=pixels[ink+2]=0;
   scan=0;Check.That(Select(rules.AsEnumerable().Reverse().ToArray(),900,600,Count).ROI==nonblank.ROI,"nonblank ordering independence");
   mask[90*900+150]=true;scan=0;Reject(()=>Select(rules,900,600,Count));mask[90*900+150]=false;
   Reject(()=>ObservedNonRuleInk(raster,new bool[1],nonblank.ROI,ref scan));Reject(()=>ObservedNonRuleInk(raster,mask,new(899,0,2,1),ref scan));
@@ -65,6 +77,6 @@ internal static class RoiGeometry
   var solitaryPixels=Enumerable.Repeat((byte)255,900*600*4).ToArray();
   for(int x=20;x<=400;x++){int p=(80*900+x)*4;solitaryPixels[p]=solitaryPixels[p+1]=solitaryPixels[p+2]=0;}
   Check.That(new RecoveryRaster(900,600,solitaryPixels).Rules(retainClosedInterior:true).Count==0,"isolated glyph remains ink");
-  Console.WriteLine("ROI_GEOMETRY_29_CONTROLS_PASS_NATIVE_CALLS_0");
+  Console.WriteLine("ROI_GEOMETRY_32_CONTROLS_PASS_NATIVE_CALLS_0");
  }
 }

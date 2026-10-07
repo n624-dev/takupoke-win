@@ -48,8 +48,8 @@
     },
     {
       "path": "tools/original-pdf-roi-probe/native/Program.cs",
-      "bytes": 14425,
-      "sha256": "80840717d6d8b0338fd65c0e78f987d010073d944199760d7a7ab81f346e26c0"
+      "bytes": 14721,
+      "sha256": "58ab29006a272b2f07800fd0310102dd18f4e6deec34350cc9a628df16f6cf90"
     },
     {
       "path": "tools/original-pdf-roi-probe/native/RecoveryBox.cs",
@@ -58,8 +58,8 @@
     },
     {
       "path": "tools/original-pdf-roi-probe/native/RoiGeometry.cs",
-      "bytes": 8817,
-      "sha256": "29558e35b90a180df137d9c875baea80355d2c1a2271db8a8cca490ff355da5f"
+      "bytes": 9779,
+      "sha256": "4db84d4bd57c089619bcac8c55b20f26874c1568f6096fa9199b01c829f88625"
     },
     {
       "path": "tools/original-pdf-roi-probe/native/RoiProbe.csproj",
@@ -83,8 +83,8 @@
     },
     {
       "path": "tools/original-pdf-roi-probe/recipe.json",
-      "bytes": 1853,
-      "sha256": "f383bd485c483e7daadae525ccd432265bc80f649152755b9a5cd0818a6f9a4d"
+      "bytes": 1957,
+      "sha256": "7ee13c9017abf56128f00200f1eb91169a883f75b40f0d845790fcc6c3fc540a"
     },
     {
       "path": "tools/original-pdf-roi-probe/run_once.py",
@@ -107,7 +107,7 @@
       "sha256": "2b5502857613ad1ceda6e6d9e2fadb88c590d3ec5fd7cba789a2940e556f243b"
     }
   ],
-  "derivedFromSourceCommit": "f6b5aa981e4fb9e6405dd0faeca476edd318a576",
-  "derivedFromPacketSHA256": "716e07fa17ede29d0e0fc8e20328273865ab864fe29823c2420539e896490e4a",
-  "delta": "narrow exact LF checkout attributes only; no runtime/input/geometry/model changes"
+  "derivedFromSourceCommit": "f0492088698a1c902f05583b39e7b06ff63dbdd9",
+  "derivedFromPacketSHA256": "894bcf03fd93283749df0a1e621f7ffcc7f5a87bfc87d62f7c731b79d984f8b8",
+  "delta": "New fixed comparison: use closed interior only when baseline graph is empty; selection excludes border-only candidates using a 3-pixel interior test. Detector crops and coverage retain every complete-cell pixel. Same PDF/model/runtime, maximum 3 detector calls, no recognizer or quality credit."
 }
