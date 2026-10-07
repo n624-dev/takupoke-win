@@ -22,6 +22,7 @@ var ownedModelRoot=Path.Combine(Path.GetTempPath(),"takupoke-ordered-raster-mode
 string stage = "Reader", outcome = "unassessed"; string? strictFailure = null, failure = null;
 TimetableAnalysis? formal = null; RecoveryDocument? doc = null; IReadOnlyList<PdfPageLayout>? pages = null;
 Dictionary<string,object?>? cropFailure=null;
+var rasterCaptures=new List<RecoveryRasterCaptureInfo>();
 try
 {
     try
@@ -39,7 +40,7 @@ try
             var models=new WindowsRecoveryModels(ownedModelRoot);
             await models.InstallOcrAsync(null,token);
             stage = "Windows render/OCR/Builder";
-            doc = await new WindowsPdfRecovery(models).BuildAsync(bytes,MaterialKind.Timetable,hash,capture,token);
+            doc = await new WindowsPdfRecovery(models).BuildAsync(bytes,MaterialKind.Timetable,hash,capture,token,rasterCaptures.Add);
             if (doc is null) outcome = "raster-evidence-required-refused";
             else
             {
@@ -64,7 +65,7 @@ try
 }
 catch (PdfParseException e) { outcome = "safe-refusal"; failure = e.Stage; }
 catch (InvalidDataException e) {
-    outcome = stage=="OCR prerequisites" ? "execution-error":"safe-refusal"; failure = e.Message;
+    outcome = stage=="OCR prerequisites" || e.Data.Contains("RecoveryWorkLimitExceeded") ? "execution-error":"safe-refusal"; failure = e.Message;
     var keys=new[]{"OcrCropConflict","OcrCropOwner","OcrCropAttachedRule","OcrCropTextPixels","OcrCropComponentPixels","OcrCropComponentBounds","OcrCropCandidateCount","OcrCropRuleCount","OcrCropRules","OcrCropUnmaskedRows","OcrCropUnmaskedColumns"};
     cropFailure=keys.Where(key=>e.Data.Contains(key)).ToDictionary(key=>key,key=>e.Data[key]);
 }
@@ -80,6 +81,7 @@ finally
         manualTargetCount=doc?.Capture?.OriginalCrops?.Count,
         nativeOcrCalls = (int?)null, llmCalls = 0, milliseconds = watch.ElapsedMilliseconds,
         cropFailure,
+        rasterCaptures,
         inspectedOriginalImageSizes=originalImageSizes.Select(pair=>new {page=pair.Key,width=pair.Value.Width,height=pair.Value.Height}).ToArray(),
         nativeCallScope="Current production whole-page acquisition; native OCR calls are not instrumented and never reported as zero" }));
     if(Directory.Exists(ownedModelRoot))Directory.Delete(ownedModelRoot,true);

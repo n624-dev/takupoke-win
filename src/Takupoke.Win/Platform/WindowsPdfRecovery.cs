@@ -11,9 +11,10 @@ using Windows.Graphics.Imaging;
 using Windows.Storage.Streams;
 
 namespace Takupoke.Win.Platform;
+public sealed record RecoveryRasterCaptureInfo(int Page, int Width, int Height, string Method, string BgraSha256);
 public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
 {
-    public async Task<RecoveryDocument> BuildAsync(byte[] bytes, MaterialKind kind, string hash, RecoveryReadCapture capture, CancellationToken token)
+    public async Task<RecoveryDocument> BuildAsync(byte[] bytes, MaterialKind kind, string hash, RecoveryReadCapture capture, CancellationToken token, Action<RecoveryRasterCaptureInfo>? observer = null)
     {
         var capturedDocument = await Task.Run(() => RecoveryCapturedLayoutBuilder.TryBuildWithoutRaster(hash, kind, capture, token), token);
         if (capturedDocument is not null) return capturedDocument;
@@ -32,10 +33,20 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                 var width = (uint)Math.Clamp(Math.Round(page.Size.Width * 2), 640, 2400); var height = (uint)Math.Round(page.Size.Height / page.Size.Width * width);
                 if (height > 3200) { width = (uint)Math.Round(width * 3200d / height); height = 3200; }
                 if (originalImageSizes.TryGetValue((int)i + 1, out var originalSize)) { width = (uint)originalSize.Width; height = (uint)originalSize.Height; }
-                await page.RenderToStreamAsync(image, new PdfPageRenderOptions { DestinationWidth = width, DestinationHeight = height }).AsTask(token);
-                image.Seek(0); var decoder = await BitmapDecoder.CreateAsync(image).AsTask(token); using var bitmap = await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore).AsTask(token);
-                var pixels = await decoder.GetPixelDataAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore, new BitmapTransform(), ExifOrientationMode.IgnoreExifOrientation, ColorManagementMode.DoNotColorManage).AsTask(token);
+                using var original = originalImageSizes.ContainsKey((int)i + 1) ? await Task.Run(() => RecoveryPdfOriginalImage.TryRead(bytes, (int)i + 1, token), token) : null;
+                if (original is not null)
+                {
+                    using var writer = new DataWriter(image); writer.WriteBytes(original.Png); await writer.StoreAsync().AsTask(token); writer.DetachStream();
+                }
+                else await page.RenderToStreamAsync(image, new PdfPageRenderOptions { DestinationWidth = width, DestinationHeight = height }).AsTask(token);
+                var colour = original is null ? ColorManagementMode.DoNotColorManage : ColorManagementMode.ColorManageToSRgb;
+                image.Seek(0); var decoder = await BitmapDecoder.CreateAsync(image).AsTask(token);
+                using var bitmap = await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore, new BitmapTransform(), ExifOrientationMode.IgnoreExifOrientation, colour).AsTask(token);
+                if (originalImageSizes.ContainsKey((int)i + 1) && (bitmap.PixelWidth != width || bitmap.PixelHeight != height))
+                    throw new InvalidDataException("元画像の描画寸法を確認できません。");
+                var pixels = await decoder.GetPixelDataAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore, new BitmapTransform(), ExifOrientationMode.IgnoreExifOrientation, colour).AsTask(token);
                 var raster = new RecoveryRaster(bitmap.PixelWidth, bitmap.PixelHeight, pixels.DetachPixelData()); rasters.Add(raster);
+                if (observer is not null) observer(new((int)i + 1, raster.Width, raster.Height, original is null ? "original-PDF-render" : "original-image-with-colour-profile", Convert.ToHexStringLower(SHA256.HashData(raster.Bgra))));
                 var rules = await Task.Run(() => raster.Rules(token), token); rasterRules.Add(rules);
                 var captured = capture.Pages.FirstOrDefault(p => p.Page == i + 1);
                 var layout = captured?.State == RecoveryInputState.Complete ? captured.Layout : null;

@@ -3,6 +3,7 @@ import argparse
 import json
 from pathlib import Path
 import subprocess
+import hashlib
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--fixtures", required=True, type=Path)
@@ -17,6 +18,19 @@ for case in manifest["cases"]:
     child = subprocess.run([args.dotnet, str(args.dll), str(args.fixtures/case["file"]), case["sha256"]], capture_output=True, text=True, encoding="utf-8", timeout=args.timeout)
     assert child.returncode == 0, child.stderr[:2000]
     actual = json.loads(child.stdout)
+    if args.manifest == "raster-manifest.json" and actual.get("rasterCaptures"):
+        # Assertion-only original pixels, inspected after native return. These
+        # hashes do not enter detector, recognizer, crop or cell assignments.
+        import fitz
+        with fitz.open(args.fixtures/case["file"]) as source:
+            for capture in actual["rasterCaptures"]:
+                page=source[capture["Page"]-1]
+                original=fitz.Pixmap(source,page.get_images()[0][0])
+                rgb=original.samples
+                bgra=bytearray(original.width*original.height*4)
+                for channel in range(3):bgra[channel::4]=rgb[2-channel::3]
+                bgra[3::4]=bytes([255])*(original.width*original.height)
+                capture["originalSamplesExact"]=(capture["Width"]==original.width and capture["Height"]==original.height and capture["BgraSha256"]==hashlib.sha256(bgra).hexdigest())
     # The independently designed expected text is first inspected after return.
     gold = case["oracle"]
     table = actual.pop("formal")

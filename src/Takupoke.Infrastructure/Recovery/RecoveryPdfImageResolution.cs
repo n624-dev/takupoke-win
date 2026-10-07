@@ -18,6 +18,7 @@ public static class RecoveryPdfImageResolution
         {
             using var document = PdfDocument.Open(bytes, new ParsingOptions { UseLenientParsing = false, SkipMissingFonts = false, MaxStackDepth = 64 });
             if (document.IsEncrypted || document.NumberOfPages is < 1 or > 12) return output;
+            if (new[] { "OutputIntents", "OCProperties" }.Any(document.Structure.Catalog.CatalogDictionary.Data.ContainsKey)) return output;
             for (var number = 1; number <= document.NumberOfPages; number++)
             {
                 token.ThrowIfCancellationRequested();
@@ -26,15 +27,28 @@ public static class RecoveryPdfImageResolution
                 if (!page.Operations.Select(op => op.Operator).SequenceEqual(new[] { "q", "cm", "Do", "Q" })) continue;
                 // Walk inherited dictionaries conservatively. Visible overlays
                 // and altered units are not this narrow full-page-image family.
-                var current = page.Dictionary; var supported = true;
+                var current = page.Dictionary; var supported = true; DictionaryToken? resources = null;
                 for (var depth = 0; ; depth++)
                 {
                     token.ThrowIfCancellationRequested();
                     if (depth >= 64 || new[] { "Annots", "Group", "OC", "UserUnit" }.Any(current.Data.ContainsKey)) { supported = false; break; }
+                    if (resources is null && current.Data.TryGetValue("Resources", out var resourceToken) &&
+                        !DirectObjectFinder.TryGet<DictionaryToken>(resourceToken, document.Structure.TokenScanner, out resources)) { supported = false; break; }
                     if (!current.Data.TryGetValue("Parent", out var parent)) break;
                     if (!DirectObjectFinder.TryGet<DictionaryToken>(parent, document.Structure.TokenScanner, out current)) { supported = false; break; }
                 }
                 if (!supported) continue;
+                // GetImages also flattens Form XObjects. A form may paint over
+                // its image; only an actual direct Image invocation is eligible.
+                using var invocation = new MemoryStream(); page.Operations[2].Write(invocation);
+                var invoke = System.Text.Encoding.ASCII.GetString(invocation.ToArray()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
+                if (invoke.Length != 2 || !invoke[0].StartsWith('/') || invoke[1] != "Do" || resources is null ||
+                    resources.Data.ContainsKey("ColorSpace") || !resources.Data.TryGetValue("XObject", out var objectsToken) ||
+                    !DirectObjectFinder.TryGet<DictionaryToken>(objectsToken, document.Structure.TokenScanner, out var objects) ||
+                    !objects.Data.TryGetValue(invoke[0][1..], out var invokedToken) ||
+                    !DirectObjectFinder.TryGet<StreamToken>(invokedToken, document.Structure.TokenScanner, out var invoked) ||
+                    !invoked.StreamDictionary.Data.TryGetValue("Subtype", out var subtypeToken) ||
+                    !DirectObjectFinder.TryGet<NameToken>(subtypeToken, document.Structure.TokenScanner, out var subtype) || subtype.Data != "Image") continue;
                 using var serialized = new MemoryStream(); page.Operations[1].Write(serialized);
                 var parts = System.Text.Encoding.ASCII.GetString(serialized.ToArray()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
                 if (parts.Length != 7 || parts[6] != "cm") continue;
