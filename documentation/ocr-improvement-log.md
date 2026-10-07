@@ -384,3 +384,21 @@ After the rejected image-reader comparison, a separate model-free diagnostic dre
 The actual unchanged research `OcrInputTransform.Recognition` implementation normalized all128 images to48px height, valid width294 and padded input width320. Its source SHA-256 was `b13927678f0c5ed3f05d6e01c35f580647e228f969059bb003d4a47c2a6b7eaa`. All64 original pairs differed, and none became identical after normalization. Original different-pixel counts ranged34–150; normalized counts ranged80–360. Every normalized pair retained at least13 pixels with differences equivalent to32 or more byte levels.
 
 This isolates one preprocessing question: these controlled font differences survive the current resize/normalization. It does not prove human/model readability, reconstruction of already-missing detail, equivalence to the earlier real detector crops or correct recognition. No detector, recognizer or LLM ran; no confidence, model, adoption or three-field limit changed. Local .NET compilation passed with0warnings/errors. Numeric result SHA-256:`5cac7685a2e381b1ab28a02754589507ff62ad5db29e3ae5945dda1833b9576d`. Owned fonts, generated images, result and build outputs were removed. Next comparisons must separate ordinary Japanese fields from the deliberate lookalike stress set and retain independent full-document ownership tests.
+
+## New independent Japanese-body documents: raw text present, full recovery still fails
+
+Research source`8e8b169`, run[37701829513](https://github.com/n624-dev/takupoke-win/actions/runs/37701829513), completed native Windows acquisition, V5 OCR, Builder/Engine and nonadoptable shadow diagnostics on two newly designed10-page image-only sources. Each has17classes, five weekdays, eight periods and680slot/2,040body obligations. Class/day order, content seed, cell sizes and18/20px body size differ; both use the same pinned public Noto Sans JP font. Unlabelled three-line cells contain independent invented Japanese names and numbers. Year/term are separate printed atoms. Original source images fit within2,048pixels on either axis. The previous two readable lookalike stress positives remain positives and failures; this new easier content/layout does not replace or relabel them.
+
+Source image SHA-256:`dc161893dd91f26004ccc9ca7f99b9b762ee918b40c621b561c2d5366c533704` / `378abd58c74a23c397dc71b3091179d3196c4501a8eb64dad9c610130dcf6a5f`. Only the existing pinned V5 recognizer/detector ran; the rejected Japanese-v3 arm was skipped, with no additional model download. No expected values entered native acquisition, recognition, Builder or Engine. Assertion literals were inspected after native return.
+
+| Diagnostic | Development | Held-out content/layout |
+| --- | ---: | ---: |
+| Completed shadow pages |10|10|
+| Recognition crops in shadow |2,235|2,235|
+| Exact body-literal occurrences |2,040/2,040|2,040/2,040|
+| Low-confidence nonspace rows |26|24|
+| Low-confidence whitespace / zero pieces / unsupported padding |0/0/0|0/0/0|
+| Builder cells / ordered proofs |not returned|648/648|
+| Formal document returned |0|0|
+
+The development source stopped at complete class/day/period validation. Held-out content reached Engine but failed`coverage,unclassifiedSource`; it still lacked32of680required cells. These are recovery failures, with0incorrect formal outputs and0execution errors, not correct refusals of invalid documents. Exact text occurrences do not prove correct field/cell ownership or100%OCR accuracy. Native transaction times were88.307/86.543seconds. No model is qualified or promoted. Final CI cleanup removed generated originals and downloaded models; local generated font/PDF/image and compile outputs were also removed. Next diagnosis inspects unmodified header observations and where assignments disappear, without guessing I/1, underscores, class names or missing periods.
