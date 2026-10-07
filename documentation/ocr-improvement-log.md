@@ -233,24 +233,6 @@ All eight reads completed, with 600 uniquely owned source rows, complete origina
 The continuation made 44 detector calls and 600 recognizer calls, using Linux .NET ONNX Runtime 1.23.2. Sampled peak working set was 582,537,216 bytes. Timings are retained in the raw result but concurrent Swift compilation and cold initialization preclude a controlled speed comparison. Raw output SHA-256: `d0c3c7bb3a9a7790921d63e520ad85418976725629ad6f757602ca18d09c795f`. The independent paint audit reconstructed and hash-verified the original pixels without running models. Owned rasters, dictionaries and build outputs were removed; no school PDF, cloud AI or additional model download was used.
 
 
-## Fixed detector proposals with paired native-font redraw
-
-A separately fixed comparison retained every included regional detector proposal from the previous 22 px sample, scaled its original coordinates exactly 2×, and repainted the same font/vector text directly at 44 px into 3,680 × 1,320 rasters. It did not enlarge a bitmap and did not call a detector. The same V5/V6 recognizers, matching dictionaries, 48-pixel recognition height, padding, confidence floor and source-position guards were kept. Original-page Complete ran again, and each resulting crop was audited against complete independently painted glyph support and its physical cell.
-
-| Font / recognizer | Exact owned rows, including headings | Correct above 0.8 | Incorrect above 0.8 | Below 0.8 | Previously exact rows destroyed |
-|---|---:|---:|---:|---:|---:|
-| Sans / V5 | 73/75 | 71 | 0 | 4 | 2 |
-| Sans / V6 | 75/75 | 71 | 0 | 4 | 0 |
-| Serif / V5 | 70/75 | 69 | 4 | 2 | 1 |
-| Serif / V6 | 71/75 | 69 | 1 | 5 | 1 |
-
-All four reads completed, with 300 uniquely owned rows and no unrecognized ink, but none repaired an observed lower-density mistake. Higher density introduced previously absent errors, including wrong high-confidence readings in Serif. This redraw condition is rejected for production activation or model qualification.
-
-Completed recognition crops were paired by independently painted source identity, rather than native row index: completion can change Y ordering. Mapping them back to the original scale changed 72 crops per Sans arm and 73 per Serif arm, by up to 1.25 source pixels in a crop dimension. Consequently this comparison measures native-font repaint together with unchanged ink completion, not a perfectly isolated density effect with identical final crops. Complete crop deltas and original native output remain separate; correcting the diagnostic pairing did not rerun inference.
-
-There were zero detector calls and 300 recognizer calls, using Linux .NET ONNX Runtime 1.23.2, with sampled peak working set 632,954,880 bytes. This paired component comparison is not native Windows PDF acquisition or an independent document-success count. Raw output SHA-256: `cbdcdf70b77daf1291cc77f1a53cb00c715aa38bca5322b1edd789e26892aeb9`. Owned rasters, dictionaries and build outputs were removed, with no school PDF or cloud inference.
-
-
 ## Fixed detector proposals with direct high-density font redraw: rejected
 
 A paired continuation froze the 22 px regional detector proposals, mapped their coordinates by exactly 2, and repainted the same invented grid and text directly from the font at 44 px. This is Linux font-source drawing, not native Windows PDF rendering and not enlargement of the old bitmap. Four conditions retained the recognizer, matching dictionary, original-component completion, confidence floor and padding guards. Exactly zero detector and 300 recognizer calls were made. All four reads completed with 75 uniquely owned source rows and zero unrecognized ink.
