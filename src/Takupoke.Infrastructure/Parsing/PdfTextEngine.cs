@@ -14,6 +14,8 @@ public readonly record struct PdfMatrix(double A = 1, double B = 0, double C = 0
 }
 public sealed record PdfFont(PdfUnicodeMap Map, IReadOnlyDictionary<int, double> Widths, double DefaultWidth, double Ascent, double Descent)
 {
+    internal string Resource { get; init; } = "";
+    internal Func<int, Takupoke.Core.Recovery.RecoveryFontEvidence>? RecoveryEvidence { get; init; }
     public PdfFont Validate()
     {
         if (Map.CodeBytes is not 1 and not 2 || Map.Values.Count is < 1 or > 65536 || !new[] { DefaultWidth, Ascent, Descent }.All(double.IsFinite)
@@ -21,7 +23,7 @@ public sealed record PdfFont(PdfUnicodeMap Map, IReadOnlyDictionary<int, double>
         return this;
     }
 }
-public sealed class PdfTextEngine(CancellationToken cancellationToken = default)
+public sealed class PdfTextEngine(CancellationToken cancellationToken = default, bool traceForRecovery = false)
 {
     private sealed record State(PdfMatrix Ctm, PdfFont? Font = null, double Size = 0, double Spacing = 0, double WordSpacing = 0, double Scale = 1, double Leading = 0, double Rise = 0, Lazy<PdfFont>? DeferredFont = null);
     private State _state = new(PdfMatrix.Identity);
@@ -31,6 +33,8 @@ public sealed class PdfTextEngine(CancellationToken cancellationToken = default)
     private int _line, _order, _operations, _units;
     private readonly StringBuilder _drawn = new();
     private readonly List<PdfGlyph> _glyphs = [];
+    private readonly List<PdfNativeGlyphTrace> _drawingTrace = [];
+    internal bool HasFontRecovery => _recoveryGlyphs.Any(g => g.FontEvidence is not null);
     // Strict keeps its existing non-whitespace stream. Recovery additionally
     // retains explicitly drawn whitespace; absent geometry makes capture partial.
     private readonly List<PdfGlyph> _recoveryGlyphs = [];
@@ -90,18 +94,53 @@ public sealed class PdfTextEngine(CancellationToken cancellationToken = default)
             if (points.Any(p => !double.IsFinite(p.X) || !double.IsFinite(p.Y) || Math.Abs(p.X) >= 10_000_000 || Math.Abs(p.Y) >= 10_000_000)) throw new PdfParseException("P01");
             var x = points.Min(p => p.X); var y = points.Min(p => p.Y); var right = points.Max(p => p.X); var upper = points.Max(p => p.Y);
             var validGeometry = width > 0 && right > x && upper > y;
+            var evidence = font.RecoveryEvidence?.Invoke(cid);
+            if(traceForRecovery) {
+                UglyToad.PdfPig.Core.PdfPoint Point(double px, double py) { var p = total.Point(px, py); return new(p.X, p.Y); }
+                _drawingTrace.Add(new(font.Resource, cid, text, evidence is null, Point(0, _state.Rise),
+                    Point(_state.Size * _state.Scale, _state.Rise), Point(0, _state.Rise + _state.Size)));
+            }
             if (validGeometry)
-                _recoveryGlyphs.Add(new(text, x, y, right-x, upper-y, _line, _order));
+                _recoveryGlyphs.Add(new(text, x, y, right-x, upper-y, _line, _order) { FontEvidence = evidence });
             else RecoveryComplete = false;
             if (!string.IsNullOrWhiteSpace(text))
             {
                 if (!validGeometry) throw new PdfParseException("P01");
-                _glyphs.Add(new(text, x, y, right - x, upper - y, _line, _order));
+                _glyphs.Add(new(text, x, y, right - x, upper - y, _line, _order) { FontEvidence = evidence });
             }
             _drawn.Append(text); _units += text.Length; _order++;
             var word = font.Map.CodeBytes == 1 && cid == 32 ? _state.WordSpacing : 0;
             _matrix = _matrix.Translate((width + _state.Spacing + word) * _state.Scale, 0);
         }
+    }
+    internal IReadOnlyList<PdfGlyph> FinishRecovery(IReadOnlyList<PdfNativeGlyphTrace> native)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        if (!traceForRecovery || _inText || _stack.Count != 0 || _glyphs.Count == 0 || !RecoveryComplete || native.Count != _drawingTrace.Count)
+            throw new PdfParseException("P01");
+        static bool Same(UglyToad.PdfPig.Core.PdfPoint a, UglyToad.PdfPig.Core.PdfPoint b) =>
+            double.IsFinite(a.X) && double.IsFinite(a.Y) && double.IsFinite(b.X) && double.IsFinite(b.Y)
+            && Math.Abs(a.X-b.X) <= 1e-6 && Math.Abs(a.Y-b.Y) <= 1e-6;
+        for (var index=0; index<native.Count; index++)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            var actual=native[index]; var drawn=_drawingTrace[index];
+            if (actual.Resource != drawn.Resource || actual.Code != drawn.Code
+                || !drawn.UnicodeKnown && !string.IsNullOrWhiteSpace(drawn.Text) && !actual.Drawable
+                || (drawn.UnicodeKnown || actual.UnicodeKnown) && actual.Text != drawn.Text
+                || !Same(actual.Origin,drawn.Origin) || !Same(actual.Horizontal,drawn.Horizontal) || !Same(actual.Vertical,drawn.Vertical))
+                throw new PdfParseException("P01");
+            if(!drawn.UnicodeKnown && actual.InkBounds is {} ink)
+            {
+                var glyph=_recoveryGlyphs[index];
+                var corners=new[]{ink.BottomLeft,ink.TopLeft,ink.TopRight,ink.BottomRight};
+                if(corners.Any(p=>!double.IsFinite(p.X)||!double.IsFinite(p.Y)))throw new PdfParseException("P01");
+                var left=Math.Min(glyph.X,corners.Min(p=>p.X));var bottom=Math.Min(glyph.Y,corners.Min(p=>p.Y));
+                var right=Math.Max(glyph.X+glyph.Width,corners.Max(p=>p.X));var top=Math.Max(glyph.Y+glyph.Height,corners.Max(p=>p.Y));
+                _recoveryGlyphs[index]=glyph with { X=left,Y=bottom,Width=right-left,Height=top-bottom };
+            }
+        }
+        return _glyphs.Select(g=>g.FontEvidence is not null?_recoveryGlyphs[g.SourceOrder!.Value]:g).ToArray();
     }
     public IReadOnlyList<PdfGlyph> Finish(string expectedText)
     {

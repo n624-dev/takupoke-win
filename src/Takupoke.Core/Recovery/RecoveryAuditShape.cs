@@ -57,7 +57,10 @@ internal static class RecoveryAuditShape
             Text(receipt.PreviousAcceptanceHash); Text(receipt.PreviousCertificationHash);
         }
         work.Step(); Text(doc.PdfHash); Text(doc.Term); Texts(doc.Classes); Texts(doc.Days); List(doc.RequiredSlots, Slot);
-        List(doc.Sources, source => { Text(source.Id); Text(source.CellId); Text(source.Text); Box(source.Box); });
+        List(doc.Sources, source => {
+            Text(source.Id); Text(source.CellId); Text(source.Text); Box(source.Box);
+            if(source.FontEvidence is {} font) { work.Step(128); Text(font.Resource); Text(font.FontHash); Text(font.CidMapHash); }
+        });
         List(doc.Cells, cell =>
         {
             Text(cell.Id); Box(cell.Box); List(cell.Slots, Slot); Texts(cell.SourceIds); Texts(cell.BlankFields);

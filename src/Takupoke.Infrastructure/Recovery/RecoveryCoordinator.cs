@@ -82,6 +82,7 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                 try { await Task.Run(() => PdfPigLayoutReader.Read(bytes, kind, token, capture), token).ConfigureAwait(false); }
                 catch (OperationCanceledException) { throw; }
                 catch (PdfParseException failure) when (RecoveryPolicy.Eligible(kind, failure.Stage)) { }
+                await Task.Run(() => PdfPigLayoutReader.ImproveMissingUnicodeCapture(bytes, kind, capture, token), token).ConfigureAwait(false);
                 var document = await buildDocument(bytes, kind, source.Digest, capture, token);
                 token.ThrowIfCancellationRequested();
                 if (permission is { } captured) aiPermission!.Check(captured.Generation);

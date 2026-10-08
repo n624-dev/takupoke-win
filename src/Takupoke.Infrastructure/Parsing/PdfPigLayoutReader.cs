@@ -14,9 +14,13 @@ using UglyToad.PdfPig.Tokens;
 namespace Takupoke.Infrastructure.Parsing;
 
 /// <summary>Opens bytes locally. Ordinary timetables use a separate, strict drawing interpreter and verify its text against PdfPig.</summary>
-public static class PdfPigLayoutReader
+public static partial class PdfPigLayoutReader
 {
     public static IReadOnlyList<PdfPageLayout> Read(byte[] bytes, MaterialKind kind, CancellationToken token = default, RecoveryReadCapture? capture = null)
+        => ReadCore(bytes, kind, token, capture, null);
+
+    private static IReadOnlyList<PdfPageLayout> ReadCore(byte[] bytes, MaterialKind kind, CancellationToken token,
+        RecoveryReadCapture? capture, FontRecoveryContext? fontRecovery)
     {
         capture?.Reset();
         if (bytes.Length is < 1 or > 50 * 1024 * 1024 || !bytes.AsSpan(0, Math.Min(bytes.Length, 5)).SequenceEqual("%PDF-"u8) || kind == MaterialKind.Changes) throw new PdfParseException("unreadable");
@@ -24,6 +28,7 @@ public static class PdfPigLayoutReader
         {
             token.ThrowIfCancellationRequested();
             using var document = PdfDocument.Open(bytes, new ParsingOptions { UseLenientParsing = false, SkipMissingFonts = false, MaxStackDepth = 64, UseActualText = false });
+            if (fontRecovery is not null) document.AddPageFactory<PdfNativeTraceInputs, PdfNativeTraceFactory>();
             if (document.IsEncrypted || document.NumberOfPages < 1) throw new PdfParseException("unreadable");
             if (document.NumberOfPages > 12) throw new PdfParseException("limit");
             capture?.Begin(document.NumberOfPages);
@@ -39,7 +44,7 @@ public static class PdfPigLayoutReader
                 var transform = new PdfDisplayTransform(media.Left, media.Bottom, media.Width, media.Height, page.Rotation.Value);
                 var paths = new PdfPathEngine(transform, token);
                 var visibility = new VisibilityState();
-                var text = kind == MaterialKind.Timetable ? new PdfTextEngine(token) : null;
+                var text = kind == MaterialKind.Timetable || fontRecovery is not null ? new PdfTextEngine(token,traceForRecovery:fontRecovery is not null) : null;
                 var resources = Resources(document, page.Dictionary); var fonts = new Dictionary<string, Lazy<PdfFont>>();
                 foreach (var operation in page.Operations)
                 {
@@ -82,7 +87,7 @@ public static class PdfPigLayoutReader
                             {
                                 if (fonts.Count >= 128) throw new PdfParseException("limit", number);
                                 var dictionary = Resource(document, resources, "Font", font.Font.Data);
-                                decoded = new Lazy<PdfFont>(() => ReadFont(document, dictionary, token));
+                                decoded = new Lazy<PdfFont>(() => ReadFont(document, dictionary, token, fontRecovery, font.Font.Data));
                                 fonts.Add(font.Font.Data, decoded);
                             }
                             text.SelectFont(decoded, font.Size); break;
@@ -99,7 +104,33 @@ public static class PdfPigLayoutReader
                     }
 
                 }
-                IReadOnlyList<PdfGlyph> glyphs = text is not null ? text.Finish(page.Text).Select(transform.Glyph).ToArray() : SpecialGlyphs(page, transform, token);
+                IReadOnlyList<PdfGlyph> rawGlyphs;
+                if (text is { HasFontRecovery: true })
+                {
+                    // First bounded drawing pass above has already rejected forms,
+                    // clipping, hidden text, replacements and unsupported paint.
+                    var input = document.GetPage<PdfNativeTraceInputs>(number);
+                    input.Factory.ResourceStore.LoadResourceDictionary(resources);
+                    try
+                    {
+                        var native = new PdfNativeTraceProcessor(number, input, token, text.RecoveryGlyphs.Where(g=>g.FontEvidence is not null).Select(g=>g.FontEvidence!.Resource).ToHashSet()).Process(number, input.Operations);
+                        // Initial native page rotation/origin is undone before
+                        // comparing effective drawing bases in raw PDF space.
+                        UglyToad.PdfPig.Core.PdfPoint Raw(UglyToad.PdfPig.Core.PdfPoint p) => page.Rotation.Value switch
+                        {
+                            90 => new(media.Width-p.Y+media.Left,p.X+media.Bottom),
+                            180 => new(media.Width-p.X+media.Left,media.Height-p.Y+media.Bottom),
+                            270 => new(p.Y+media.Left,media.Height-p.X+media.Bottom),
+                            _ => new(p.X+media.Left,p.Y+media.Bottom)
+                        };
+                        rawGlyphs = text.FinishRecovery(native.Select(g => g with
+                            { Origin=Raw(g.Origin), Horizontal=Raw(g.Horizontal), Vertical=Raw(g.Vertical),
+                                InkBounds=g.InkBounds is {} ink?new UglyToad.PdfPig.Core.PdfRectangle(Raw(ink.TopLeft),Raw(ink.TopRight),Raw(ink.BottomLeft),Raw(ink.BottomRight)):null }).ToArray());
+                    }
+                    finally { input.Factory.ResourceStore.UnloadResourceDictionary(); }
+                }
+                else rawGlyphs = text is not null ? text.Finish(page.Text) : [];
+                IReadOnlyList<PdfGlyph> glyphs = text is not null ? rawGlyphs.Select(transform.Glyph).ToArray() : SpecialGlyphs(page, transform, token);
                 var recoveryGlyphs = text is not null ? text.RecoveryGlyphs.Select(transform.Glyph).ToArray() : glyphs;
                 capture?.Record(number, RecoveryInputState.Partial, new PdfPageLayout(transform.Width, transform.Height, recoveryGlyphs, []));
                 var layout = new PdfPageLayout(transform.Width, transform.Height, glyphs, paths.Finish());
@@ -293,8 +324,15 @@ public static class PdfPigLayoutReader
     }
     private static DictionaryToken Resource(PdfDocument document, DictionaryToken resources, string kind, string name) =>
         Resolve<DictionaryToken>(document, Get(Resolve<DictionaryToken>(document, Get(resources, kind)), name));
-    private static PdfFont ReadFont(PdfDocument document, DictionaryToken font, CancellationToken token)
+    private static PdfFont ReadFont(PdfDocument document, DictionaryToken font, CancellationToken token,
+        FontRecoveryContext? recovery = null, string resource = "")
     {
+        PdfUnicodeMap mapping;
+        Func<int, RecoveryFontEvidence>? fontEvidence = null;
+        if (recovery is not null && !font.Data.ContainsKey("ToUnicode"))
+            (mapping, fontEvidence) = MissingUnicodeMap(document, font, resource, recovery, token);
+        else
+        {
         var stream = Resolve<StreamToken>(document, Get(font, "ToUnicode"));
         var data = stream.Data;
         var filters = document.Structure.FilterProvider.GetFilters(stream.StreamDictionary, document.Structure.TokenScanner);
@@ -306,7 +344,9 @@ public static class PdfPigLayoutReader
             data = filters[index].Decode(data, stream.StreamDictionary, document.Structure.FilterProvider, index);
             if (data.Length > 2_000_000) throw new PdfParseException("limit");
         }
-        var mapping = PdfUnicodeMap.Read(data.ToArray(), token); var metrics = font;
+        mapping = PdfUnicodeMap.Read(data.ToArray(), token);
+        }
+        var metrics = font;
         var composite = Name(document, font, "Subtype") == "Type0";
         if (composite)
         {
@@ -355,6 +395,8 @@ public static class PdfPigLayoutReader
             for (var index = 0; index < array.Count; index++) Put((int)first + index, Resolve<NumericToken>(document, array[index]).Data);
             if (mapping.Values.Keys.Any(key => !widths.ContainsKey(key))) throw new PdfParseException("P01");
         }
-        return new PdfFont(mapping, widths, composite ? Number(document, metrics, "DW", 1000) : 0, Number(document, descriptor, "Ascent"), Number(document, descriptor, "Descent")).Validate();
+        return new PdfFont(mapping, widths, composite ? Number(document, metrics, "DW", 1000) : 0, Number(document, descriptor, "Ascent"), Number(document, descriptor, "Descent"))
+            { Resource = resource, RecoveryEvidence = fontEvidence }.Validate();
     }
+
 }

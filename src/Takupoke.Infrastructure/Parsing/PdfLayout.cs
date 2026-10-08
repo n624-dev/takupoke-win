@@ -20,7 +20,11 @@ public sealed class PdfParseException(string stage, int? page = null, PdfFailure
         "P19" => "並記された科目の空欄", "P20" => "文字断片の重なり", "P21" => "文字断片の位置", _ => "構造または入力上限" };
 }
 public sealed record PdfGlyph(string Text, double X, double Y, double Width, double Height, int? SourceLine = null, int? SourceOrder = null)
-{ public double Cx => X + Width / 2; public double Cy => Y + Height / 2; }
+{
+    public double Cx => X + Width / 2; public double Cy => Y + Height / 2;
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public Takupoke.Core.Recovery.RecoveryFontEvidence? FontEvidence { get; init; }
+}
 public sealed record PdfRule(double X1, double Y1, double X2, double Y2)
 { public bool Vertical => Math.Abs(X1 - X2) < 0.2; public bool Horizontal => Math.Abs(Y1 - Y2) < 0.2; }
 public readonly record struct PdfBox(double Left, double Top, double Right, double Bottom);

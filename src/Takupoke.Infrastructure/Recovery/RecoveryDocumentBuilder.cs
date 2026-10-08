@@ -292,7 +292,7 @@ public static class RecoveryDocumentBuilder
             foreach (var (page, index) in pages.Select((p, i) => (p, i + 1))) try { trustedNormal[index] = PdfScheduleParser.Timetable([page], token); } catch (PdfParseException error) when (error.Stage != "limit") { }
         }
         else try { trustedSpecial = PdfScheduleParser.Special(pages, materialKind, token, ocrPages); } catch (PdfParseException error) when (error.Stage != "limit") { }
-        var sources = atoms.ToDictionary(a => a.Id, a => new RecoverySource(a.Id, "header", a.Page, a.Glyph.Text, a.Box, ocrPages?.Contains(a.Page) == true, a.Glyph.SourceLine, a.Glyph.SourceOrder));
+        var sources = atoms.ToDictionary(a => a.Id, a => new RecoverySource(a.Id, "header", a.Page, a.Glyph.Text, a.Box, ocrPages?.Contains(a.Page) == true, a.Glyph.SourceLine, a.Glyph.SourceOrder) { FontEvidence = a.Glyph.FontEvidence });
         var cells = new List<RecoveryCell>();
         // Retain the original order within each page while avoiding repeated
         // comparisons with every other page's original text and headers.

@@ -27,6 +27,42 @@ internal sealed record PdfTrueTypeRecoveryMap(string FontHash,
         return (gid, char.ConvertFromUtf32(scalar));
     }
 
+    // Initial drawing recovery is deliberately limited to simple outlines.
+    // Composite glyphs need a separate bounded recursion contract before native
+    // path construction; absence of a path must never mean a blank source.
+    internal static IReadOnlySet<int> SimpleOutlineGlyphs(byte[] font, int glyphCount, CancellationToken token)
+    {
+        ReadOnlyMemory<byte> Table(string name)
+        {
+            var count=U16(font,4);
+            for(var i=0;i<count;i++)
+            {
+                token.ThrowIfCancellationRequested();var offset=12+i*16;
+                if(Encoding.ASCII.GetString(Slice(font,offset,4))!=name)continue;
+                var start=Size(U32(font,offset+8));var length=Size(U32(font,offset+12));
+                return font.AsMemory(start,CheckedLength(font,start,length));
+            }
+            throw new PdfParseException("P01");
+        }
+        var head=Table("head");var loca=Table("loca");var glyf=Table("glyf");
+        var format=U16(head.Span,50);if(format is not (0 or 1))throw new PdfParseException("P01");
+        var stride=format==0?2:4;Slice(loca.Span,0,checked((glyphCount+1)*stride));
+        int Offset(int index)=>format==0?U16(loca.Span,index*2)*2:Size(U32(loca.Span,index*4));
+        var simple=new HashSet<int>();var previous=Offset(0);
+        if(previous>glyf.Length)throw new PdfParseException("P01");
+        for(var gid=0;gid<glyphCount;gid++)
+        {
+            token.ThrowIfCancellationRequested();var next=Offset(gid+1);
+            if(next<previous || next>glyf.Length)throw new PdfParseException("P01");
+            if(next>previous) {
+                var entry=Slice(glyf.Span,previous,next-previous);Slice(entry,0,10);
+                var contours=unchecked((short)U16(entry,0));if(contours>0)simple.Add(gid);
+            }
+            previous=next;
+        }
+        return simple;
+    }
+
     internal static PdfTrueTypeRecoveryMap Read(byte[] font, CancellationToken token = default)
     {
         token.ThrowIfCancellationRequested();

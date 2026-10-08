@@ -30,6 +30,7 @@ public sealed class RecoveryAuditPreHashBoundTests
     [InlineData("metadata")] [InlineData("result")] [InlineData("certificate")] [InlineData("predecessor")]
     [InlineData("aggregateSources")] [InlineData("cropBytes")]
     [InlineData("evidenceCount")] [InlineData("bindingCount")] [InlineData("replicaCount")]
+    [InlineData("fontResource")] [InlineData("fontHash")] [InlineData("fontCidMap")]
     public void CompleteAuditBudgetPrecedesEveryCertificationHash(string kind)
     {
         var audit = Original8(); var cert = Certificate(audit); RecoverySemanticCertification? predecessor = null;
@@ -44,6 +45,13 @@ public sealed class RecoveryAuditPreHashBoundTests
             }
             if (kind == "certificate") cert = cert with { ScopeHash = huge };
             if (kind == "predecessor") predecessor = cert with { ValidatorVersion = 8, ScopeHash = huge };
+        }
+        if(kind is "fontResource" or "fontHash" or "fontCidMap") {
+            var huge=new string('x',20_000_001);
+            var proof=new RecoveryFontEvidence("F1",new string('a',64),"identity",1,1,1,65);
+            proof=kind switch { "fontResource"=>proof with { Resource=huge },"fontHash"=>proof with { FontHash=huge },_=>proof with { CidMapHash=huge } };
+            var sources=audit.Document.Sources.ToArray();sources[0]=sources[0] with { FontEvidence=proof };
+            audit=audit with { Document=audit.Document with { Sources=sources } };
         }
         if (kind == "aggregateSources") {
             var source = audit.Document.Sources[0] with { Text = new string('x', 4096) };

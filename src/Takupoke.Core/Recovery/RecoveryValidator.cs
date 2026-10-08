@@ -144,7 +144,7 @@ public static class RecoveryValidator
         foreach (var source in doc.Sources)
         {
             token.ThrowIfCancellationRequested();
-            if (source.Text.Length > 4096 || metadata.ValidatorVersion < 7 && source.NativeConfidence is not null) return false;
+            if (source.FontEvidence is not null || source.Text.Length > 4096 || metadata.ValidatorVersion < 7 && source.NativeConfidence is not null) return false;
         }
         if (metadata.ValidatorVersion < 7 && (doc.Capture is not null || result.HumanCorrections is not null)) return false;
         if (metadata.ValidatorVersion < 8)
@@ -207,6 +207,16 @@ public static class RecoveryValidator
         foreach (var source in doc.Sources)
         {
             work.Step();
+            if (source.FontEvidence is { } font)
+            {
+                work.Step(1L + (font.Resource?.Length ?? 0) + (font.FontHash?.Length ?? 0) + (font.CidMapHash?.Length ?? 0) + source.Text.Length);
+                static bool Hash(string? value) => value is { Length: 64 } && value.All(c => c is >= '0' and <= '9' or >= 'a' and <= 'f');
+                Check(!source.FromOcr && source.NativeConfidence is null && font.ReaderVersion == 1
+                    && font.Resource is { Length: > 0 and <= 128 } && !font.Resource.Any(char.IsControl)
+                    && Hash(font.FontHash) && (font.CidMapHash is "identity" or "identity-default" || Hash(font.CidMapHash))
+                    && font.Code is >= 0 and <= 65535 && font.Cid == font.Code && font.GlyphId is > 0 and < 65535
+                    && Rune.IsValid(font.Scalar) && !Rune.IsControl(new Rune(font.Scalar)) && source.Text == new Rune(font.Scalar).ToString(), "fontEvidence");
+            }
             Check(source.NativeConfidence is null || source.FromOcr && double.IsFinite(source.NativeConfidence.Value) && source.NativeConfidence.Value is >= 0 and <= 1, "nativeConfidence");
             if (source.NativeConfidence is < .8) Check(manual is not null, "humanUnresolved");
         }

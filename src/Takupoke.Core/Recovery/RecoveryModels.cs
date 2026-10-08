@@ -17,7 +17,11 @@ public sealed record RecoverySource(string Id, string CellId, int Page, string T
 {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public double? NativeConfidence { get; init; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public RecoveryFontEvidence? FontEvidence { get; init; }
 }
+public sealed record RecoveryFontEvidence(string Resource, string FontHash, string CidMapHash,
+    int Code, int Cid, int GlyphId, int Scalar, int ReaderVersion = 1);
 public sealed record RecoveryField(RecoveryValueState State, string Value, IReadOnlyList<string> Evidence);
 public sealed record RecoverySlot(string ClassName, string Day, int Period);
 public enum RecoveryHeaderAxis { Above, Left }
