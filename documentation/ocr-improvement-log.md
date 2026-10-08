@@ -1,5 +1,13 @@
 # OCR improvement log
 
+## 2026-10-08: A separate blind digit/letter error band
+
+Research source `a4a0cd31f0663334ba10b09ff7c327eef5fe5b5e`, native Windows Actions [37717855068](https://github.com/n624-dev/takupoke-win/actions/runs/37717855068), completed the fixed16-image comparison and owned input/model/build cleanup. A separately painted `4_Q7`/`A_Q7` minimal pair covers18/20 source-pixel text, two fixed phases and black/blue on a previously unused Inconsolata font. All8 pair images are pixel-distinct. Font347,180bytes SHA-256 `23ded25b447074d00659392bf9b1123d89df55cb07b0ad9bfef3366d199b5fcb`, SIL OFL SHA-256 `29bd0cfd0fb2a45f9b057c834a057724bae1f63b525a8ac83d3e7525706d9f80`, and Google Fonts revision `295d98a7a0c17c68f1341eaeea354e7960ea70d3` were verified before inference. The initially proposed Roboto Mono path returned404 during font preflight; no inference or qualification credit was assigned to that nonexistent condition.
+
+The reader receives only ordinal pixels, using the same official English V5 weights/alphabet, ONNX Runtime1.23.2, all original nonwhite pixels plus fixed4px margin, app recognition normalization and unchanged0.8 floor. Gold and the class list never enter recognition. Windows and Linux both returned16/16 exact complete literals, including8/8 digits and8/8 letters, with16 own-score results above the floor,0 wrong results above it,0 missing output and0 unsupported-padding rows.
+
+This is a closed comparison of one new error band, not16 independent documents, a calibrated confidence claim or a qualified model. Previous Sans AI low-score and blind I/l failures remain failures. No production provider, manifest, OCR recipe or adoption rule changes. Further margin tuning on these16 answers is not used as holdout evidence. Local owned font, generated PDFs/images, model, report and builds were removed after measurement.
+
 ## 2026-10-08: Original physical class crops isolate input normalization
 
 Two fixed recognition-only conditions use all18 ink-bearing class cells from the first pages of the same independent invented readable cohort. Observed original pixel rules select the full physical column before any literal answer is read. The reader receives ordinal BGRA inputs only, with no expected class list, vocabulary or formal adoption path. The official pinned English V5 weights remain7,848,423bytes, SHA-256`b5f833dfc5d0eb71da397b4efa06ebeee9b431b690a47d6af40d77d8eabc557f`, native438-symbol alphabet and unchanged CPU ONNX Runtime1.23.2 transform/padding guards.
