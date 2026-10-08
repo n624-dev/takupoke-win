@@ -47,6 +47,10 @@ def main(args):
         root=Path(__file__).resolve().parents[2]
         spec=importlib.util.spec_from_file_location('invented_readable',root/'tools/ordered-row-e2e/generate_readable.py')
         generator=importlib.util.module_from_spec(spec);spec.loader.exec_module(generator)
+        if args.printed_ell_control:
+            # A separate deliberately noncanonical glyph control. Neither the
+            # class list nor its expected answers enters the recognition child.
+            generator.CLASSES=[value.replace('AI_','Al_') for value in generator.CLASSES]
         manifest=generator.generate(args.owned/'cohort')
         inputs=[];inventory=[]
         for case in manifest['cases']:
@@ -115,12 +119,19 @@ def main(args):
                 assert result['Index']==original['index']
                 rows.append(dict(case=case['case'],**original,**result,expected=value,exact=result['text']==value))
         report=dict(recipe='physical-class-column-English-v5-original-pixels-v1',inputRegion='all nonwhite pixels plus fixed4px margin' if args.ink_crop else 'physical cell interior',
+            printedEllControl=args.printed_ell_control,
             calls=18,correct=sum(r['exact'] for r in rows),obligations=18,
             incorrectAboveNativeThreshold=sum(not r['exact'] and r['minimumConfidence'] is not None and r['minimumConfidence']>=.8 for r in rows),
             paddingUnsupported=sum(not r['paddingSupported'] for r in rows),
             modelBytes=args.model.stat().st_size,modelSHA256=sha(args.model.read_bytes()),
             runtime=native['runtime'],qualified=False,adoptionCalls=0,
             scope='Two first-page original class columns only; no full-document success or correction',outputs=rows)
+        if args.printed_ell_control:
+            controls=[row for row in rows if row['expected'].startswith('Al_')]
+            assert len(controls)==4
+            report['controlObligations']=len(controls)
+            report['correctPrintedEll']=sum(row['exact'] for row in controls)
+            report['printedEllReadAsCanonicalI']=sum(row['text']==row['expected'].replace('Al_','AI_') for row in controls)
         print('PHYSICAL_CLASS_READER '+json.dumps(report,ensure_ascii=False))
     finally:
         shutil.rmtree(args.owned)
@@ -133,5 +144,6 @@ if __name__=='__main__':
     parser.add_argument('--model',required=True,type=Path)
     parser.add_argument('--alphabet',required=True,type=Path)
     parser.add_argument('--ink-crop',action='store_true')
+    parser.add_argument('--printed-ell-control',action='store_true')
     parser.add_argument('--dotnet',default='dotnet')
     main(parser.parse_args())
