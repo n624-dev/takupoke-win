@@ -29,7 +29,7 @@ def digest_file(path):
     with path.open('rb') as source:return hashlib.file_digest(source,'sha256').hexdigest()
 
 def run(owned, tessdata, english_dll=None, english_model=None, dotnet='dotnet', ink_crop=False,
-        vl_endpoint=None,vl_model=None,vl_projector=None,vl_prompt_file=None,english_alphabet=None):
+        vl_endpoint=None,vl_model=None,vl_projector=None,vl_prompt_file=None,english_alphabet=None,pdf_scale=2):
     owned.mkdir(exist_ok=False)
     try:
         (owned/'.header-pair-owned').write_text('v1\n')
@@ -58,7 +58,7 @@ def run(owned, tessdata, english_dll=None, english_model=None, dotnet='dotnet', 
             c.setFont('IndependentJP', size); c.setFillColorRGB(*color)
             c.drawString(3+phase,11+phase,text); c.save()
             with fitz.open(pdf) as source:
-                image = source[0].get_pixmap(matrix=fitz.Matrix(2,2), alpha=False)
+                image = source[0].get_pixmap(matrix=fitz.Matrix(pdf_scale,pdf_scale), alpha=False)
                 pixel_hash = digest(image.samples)
                 original = image.samples
                 points = [(i//3 % image.width,i//3//image.width) for i in range(0,len(original),3)
@@ -66,9 +66,12 @@ def run(owned, tessdata, english_dll=None, english_model=None, dotnet='dotnet', 
                 ink_height=max(y for x,y in points)-min(y for x,y in points)+1
                 if ink_crop:
                     # Source-pixel operation only: include every nonwhite
-                    # painted pixel, plus fixed4px. No reader answer is used.
-                    x1=max(0,min(x for x,y in points)-4);x2=min(image.width,max(x for x,y in points)+5)
-                    y1=max(0,min(y for x,y in points)-4);y2=min(image.height,max(y for x,y in points)+5)
+                    # painted pixel, plus fixed2pt physical margin (4px at2x).
+                    # The4x condition renders the vector PDF directly, never
+                    # interpolates the preceding bitmap or sees its answer.
+                    margin=2*pdf_scale
+                    x1=max(0,min(x for x,y in points)-margin);x2=min(image.width,max(x for x,y in points)+margin+1)
+                    y1=max(0,min(y for x,y in points)-margin);y2=min(image.height,max(y for x,y in points)+margin+1)
                     stride=image.width*3
                     cropped=b''.join(original[y*stride+x1*3:y*stride+x2*3] for y in range(y1,y2))
                     image = fitz.Pixmap(fitz.csRGB,x2-x1,y2-y1,cropped,False)
@@ -78,7 +81,7 @@ def run(owned, tessdata, english_dll=None, english_model=None, dotnet='dotnet', 
                 for channel in range(3):bgra[channel::4]=rgb[2-channel::3]
                 bgra[3::4]=bytes([255])*(image.width*image.height)
                 pixels_only.append(dict(Index=index,Width=image.width,Height=image.height,Bgra=base64.b64encode(bgra).decode()))
-            records.append(dict(index=index, expected=text, letter=letter, pixels=size*2,
+            records.append(dict(index=index, expected=text, letter=letter, pixels=size*pdf_scale,
                                 phase=phase, color=color, rgbSHA256=pixel_hash,
                                 originalInkHeight=ink_height,normalizedInkHeight48=ink_height*48/image.height,
                                 inputWidth=image.width,inputHeight=image.height,inputRGBSHA256=digest(image.samples)))
@@ -134,7 +137,8 @@ def run(owned, tessdata, english_dll=None, english_model=None, dotnet='dotnet', 
                       engineSHA256=digest_file(english_dll) if english_dll else None if vl_endpoint else digest_file(Path(shutil.which('tesseract'))),
                       modelBytes=model.stat().st_size,modelSHA256=model_hash,publicFontSHA256=font.FONT_SHA,
                       calls=len(rows),correctCanonical=sum(r['exact'] for r in positives),canonicalObligations=len(positives),
-                      inputRegion='all original painted pixels plus fixed4px margin' if ink_crop else 'original80x52 frame',
+                      inputRegion='all original painted pixels plus fixed2pt physical margin' if ink_crop else 'original40x26pt frame',
+                      pdfRenderScale=pdf_scale,
                       exactNoncanonical=sum(r['exact'] for r in negatives),noncanonicalObligations=len(negatives),
                       invalidPrintedHeaderReadAsCanonical=sum(r['text'] in ('AI_1','AI_2') for r in negatives),
                       executionErrors=sum(r['error'] is not None for r in rows),qualified=False,
@@ -160,6 +164,7 @@ if __name__=='__main__':
     p.add_argument('--tessdata',type=Path,default=Path('/usr/share/tesseract-ocr/5/tessdata'))
     p.add_argument('--english-dll',type=Path);p.add_argument('--english-model',type=Path);p.add_argument('--dotnet',default='dotnet')
     p.add_argument('--english-alphabet',type=Path)
+    p.add_argument('--pdf-scale',type=int,choices=[2,4],default=2)
     p.add_argument('--ink-crop',action='store_true')
     p.add_argument('--vl-endpoint');p.add_argument('--vl-model',type=Path);p.add_argument('--vl-projector',type=Path)
     p.add_argument('--vl-prompt-file',type=Path)
@@ -169,4 +174,4 @@ if __name__=='__main__':
     if args.vl_endpoint and (args.english_dll or not args.vl_model or not args.vl_projector or not re.fullmatch(r'http://127\.0\.0\.1:[0-9]{1,5}',args.vl_endpoint)):
         p.error('A single localhost image runtime and both pinned image weights are required')
     if args.vl_prompt_file and not args.vl_endpoint:p.error('Image prompt requires the localhost image runtime')
-    run(args.owned,args.tessdata,args.english_dll,args.english_model,args.dotnet,args.ink_crop,args.vl_endpoint,args.vl_model,args.vl_projector,args.vl_prompt_file,args.english_alphabet)
+    run(args.owned,args.tessdata,args.english_dll,args.english_model,args.dotnet,args.ink_crop,args.vl_endpoint,args.vl_model,args.vl_projector,args.vl_prompt_file,args.english_alphabet,args.pdf_scale)

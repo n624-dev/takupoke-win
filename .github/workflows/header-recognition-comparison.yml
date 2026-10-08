@@ -36,12 +36,12 @@ jobs:
           if ((Get-Item $model).Length -ne 7848423 -or (Get-FileHash $model -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'b5f833dfc5d0eb71da397b4efa06ebeee9b431b690a47d6af40d77d8eabc557f') { throw 'Pinned model verification failed' }
           dotnet build tools/header-reader-probe/Probe.csproj --configuration Release --artifacts-path (Join-Path $owned 'build') --verbosity quiet
           if ($LASTEXITCODE -ne 0) { throw 'Native runtime compilation failed' }
-      - name: Measure fixed64 blind original glyph inputs without adoption
+      - name: Measure fixed64 blind vector glyphs at4x without adoption
         shell: pwsh
         run: |
           $owned = Join-Path $env:RUNNER_TEMP 'isolated-header-reader-owned'
           $dll = Join-Path $owned 'build/bin/Probe/release/WindowsRasterNativeProbe.dll'
-          python -B tools/ordered-row-e2e/compare_header_pairs.py --owned (Join-Path $owned 'pairs') --ink-crop --english-dll $dll --english-model (Join-Path $owned 'english-rec.onnx') --english-alphabet tools/header-reader-probe/english-v5-alphabet.json
+          python -B tools/ordered-row-e2e/compare_header_pairs.py --owned (Join-Path $owned 'pairs') --ink-crop --pdf-scale 4 --english-dll $dll --english-model (Join-Path $owned 'english-rec.onnx') --english-alphabet tools/header-reader-probe/english-v5-alphabet.json
           if ($LASTEXITCODE -ne 0) { throw 'Comparison transport failed' }
           Write-Output 'Measurement completion is separate from semantic quality; qualified remains false.'
       - name: Remove owned inputs, model and build outputs
