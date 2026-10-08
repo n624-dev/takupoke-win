@@ -6,12 +6,14 @@ using Takupoke.Infrastructure.Recovery;
 
 // Isolated recognition-only measurement: ordinal images, no literal answers,
 // class list, table coordinates, dictionary suggestions or adoption capability.
-if(args.Length is not (2 or 3))throw new ArgumentException("Expected pinned model, pixel input list and optional pinned native alphabet");
+if(args.Length is not (2 or 3 or 4))throw new ArgumentException("Expected pinned model, pixel input list, optional pinned native alphabet and explicit diagnostic mode");
+var physical=args.Length==4 && args[3]=="physical-class-crops-v1";
+if(args.Length==4 && !physical)throw new ArgumentException("Unknown diagnostic mode");
 var model=File.ReadAllBytes(args[0]);
 var hash=Convert.ToHexStringLower(SHA256.HashData(model));
 var v5=model.Length==7848423 && hash=="b5f833dfc5d0eb71da397b4efa06ebeee9b431b690a47d6af40d77d8eabc557f";
 var v3=model.Length==8967018 && hash=="ef7abd8bd3629ae57ea2c28b425c1bd258a871b93fd2fe7c433946ade9b5d9ea";
-if(!v3 && !v5 || v5 && args.Length!=3 || v3 && args.Length!=2)
+if(!v3 && !v5 || v5 && args.Length is not (3 or 4) || v3 && args.Length!=2)
     throw new InvalidDataException("Pinned English recognition weights differ");
 OrtEnv.Instance().DisableTelemetryEvents();
 using var options=new SessionOptions{IntraOpNumThreads=2,InterOpNumThreads=1,GraphOptimizationLevel=GraphOptimizationLevel.ORT_ENABLE_ALL};
@@ -33,13 +35,16 @@ if(v5)
 else dictionary=new[]{""}.Concat(reader.ModelMetadata.CustomMetadataMap["character"].TrimEnd('\n').Split('\n')).Append(" ").ToArray();
 if(dictionary.Length!=(v5 ? 438:97))throw new InvalidDataException("Model-native alphabet does not match output shape");
 var inputs=JsonSerializer.Deserialize<PixelInput[]>(File.ReadAllBytes(args[1])) ?? throw new InvalidDataException("Missing pixels");
-if(inputs.Length!=64)throw new InvalidDataException("Expected exactly the blind fixed64-input probe");
+if(inputs.Length!=(physical ? 18:64) || inputs.Select(p=>p.Index).Where((index,order)=>index!=order).Any())
+    throw new InvalidDataException("Expected the complete fixed ordinal input inventory");
 var output=new List<object>();
 foreach(var sample in inputs)
 {
     var bgra=Convert.FromBase64String(sample.Bgra);
     try
     {
+        if(sample.Width is <1 or >2048 || sample.Height is <1 or >2048 || bgra.Length!=checked(sample.Width*sample.Height*4))
+            throw new InvalidDataException("Invalid original pixel dimensions");
         var raster=new RecoveryRaster(sample.Width,sample.Height,bgra);
         var input=OcrInputTransform.Recognition(raster,new RecoveryBox(0,0,sample.Width,sample.Height));
         using var result=reader.Run([NamedOnnxValue.CreateFromTensor("x",input.Tensor)]);
