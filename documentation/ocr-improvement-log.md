@@ -514,3 +514,18 @@ The same64 invented2x NotoSansJP I/l crops were passed to the pinned English-v5 
 Gray improved13 outcomes, regressed0, left3 identical wrong literals and produced0Al→AI changes. Both arms had0incorrect rows at or above the unchanged0.8 diagnostic floor and0unsupported padding. Gray lost0nonwhite source pixels and changed0neutral pixels; all32black-image tensors and literal outputs remained identical. Complete numeric report digest:`faef6f774432f4cb6d55492222d83cd8c7b9499707c93777bd70de0591ebdb2a`.
 
 The important limit is unchanged: of29correct I literals in gray,25still had own confidence below0.8 (black12, blue13). Only4/32printed I obligations returned a correct literal above the existing floor. This is not whole-document qualification, a corrected colour-order bug or permission to borrow confidence/guess a class. No production OCR/provider/catalog/adoption rule changed. The next fixed negative controls are actual A1_1/A1_2 print paired with AI_1/AI_2 in an unused public font; native Windows reproducibility also remains unverified. Owned model/fonts/PDF/images/build and raw checkpoints were removed after scoring.
+
+## 2026-10-08: Unused-font I/1 negative controls on Linux
+
+The same fixed English-v5 model and BGR/gray recipes were evaluated on32 new isolated SourceSans3 controls:16 printed AI_1/AI_2 and16 printed A1_1/A1_2,9/10pt at2x, phases0/.25, black/blue. Public font revision295d98a7a0c17c68f1341eaeea354e7960ea70d3 is652,632bytes, SHA2568b95ef0061a8eb29ec83589c30e9c4cea279590782ac58963ab5edfca9a51493; the4,579byte OFL license hash is09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392. Regular weight400 was fixed before rendering. All64 planned calls completed before gold evaluation. The unused font supplies32 independent isolated controls, not a new whole-document qualification set.
+
+| Printed glyph and ink | BGR literal exact | Gray literal exact |
+| --- | ---: | ---: |
+| I, black |6/8|6/8|
+| I, blue |0/8|6/8|
+| 1, black |8/8|8/8|
+| 1, blue |8/8|8/8|
+
+Gray produced6 gains,0 regressions,4 unchanged wrong literals and0 A1→AI errors. The baseline had1 incorrect literal above0.8: blue AI_1 became Al_1 at0.8164708. Gray had0 incorrect literals above0.8, but all12 correct I literals were below0.8:0/16 printed I obligations returned a correct literal above the existing floor. Wrong gray scores overlapped correct scores. This rejects a threshold-lowering shortcut; literal improvement alone does not qualify the recipe. Both arms preserved all16 A1 literals. Gray changed0 neutral pixels, lost0 nonwhite pixels, and preserved all16 black-image tensors and literal outputs. Unsupported padding and execution errors were0.
+
+Complete numeric report digest56eccce902ef930148c237ce8fd8475eaf30a5128af7e6e4df674deb1a36fbd6. FontTools emitted an hmtx table warning, but rendering and all64 reader calls completed. Owned font/model/PDF/pixel/build/checkpoint files were removed on completion. Native Windows reproducibility remains unverified. Production OCR, provider catalog, thresholds and adoption conditions remain unchanged; this work does not create another intermediate release.
