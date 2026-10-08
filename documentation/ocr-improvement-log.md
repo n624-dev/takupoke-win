@@ -499,3 +499,18 @@ A model-free Linux audit invoked the unchanged production `OcrInputTransform.Rec
 At both scales,32/32 original glyph-region pairs differed and32/32 complete tensors differed. All32 normalized glyph-region pairs had different natural ROI dimensions; there were0 equal-size ROI pairs on which to compare stroke pixels. These results do not establish preserved distinguishing strokes or model readability. They provide no new independent accuracy items,0OCR calls and0model calls; qualification remains false. Source BGRA hashes were checked against each transform output, and full tensor hashes excluded any inference. Owned fonts, PDFs, pixel inputs and compile outputs were removed by the temporary-directory scope.
 
 The first diagnostic output failed JSON serialization because source `Height` and normalized `height` conflicted; it produced no completed audit result and made0reader calls. Explicit source-dimension names resolved that diagnostic failure. The subsequent complete128-input audit passed. This does not alter any production provider, preprocessing rule, confidence threshold or model catalog.
+
+## 2026-10-08: Fixed paired source-grayscale comparison on Linux
+
+The same64 invented2x NotoSansJP I/l crops were passed to the pinned English-v5 recognizer twice: unchanged production BGR, then one fixed source-pixel grayscale before the same actual48px resize. Grayscale uses`floor(.114*B+.587*G+.299*R+.5)` to uint8 and replicates that value to all three channels. All128 planned local CPU calls completed before expected literals were evaluated; this supplies0new independent accuracy items. Runtime/model/dictionary, crop, valid/padded width and CTC decoder were fixed.
+
+| Actual printed glyph and ink | BGR literal exact | Gray literal exact |
+| --- | ---: | ---: |
+| I, black |14/16|14/16|
+| I, blue |2/16|15/16|
+| l, black |16/16|16/16|
+| l, blue |16/16|16/16|
+
+Gray improved13 outcomes, regressed0, left3 identical wrong literals and produced0Al→AI changes. Both arms had0incorrect rows at or above the unchanged0.8 diagnostic floor and0unsupported padding. Gray lost0nonwhite source pixels and changed0neutral pixels; all32black-image tensors and literal outputs remained identical. Complete numeric report digest:`faef6f774432f4cb6d55492222d83cd8c7b9499707c93777bd70de0591ebdb2a`.
+
+The important limit is unchanged: of29correct I literals in gray,25still had own confidence below0.8 (black12, blue13). Only4/32printed I obligations returned a correct literal above the existing floor. This is not whole-document qualification, a corrected colour-order bug or permission to borrow confidence/guess a class. No production OCR/provider/catalog/adoption rule changed. The next fixed negative controls are actual A1_1/A1_2 print paired with AI_1/AI_2 in an unused public font; native Windows reproducibility also remains unverified. Owned model/fonts/PDF/images/build and raw checkpoints were removed after scoring.
