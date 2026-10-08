@@ -44,20 +44,20 @@ jobs:
           python -B tools/header-reader-probe/compare_digit_letter.py --owned (Join-Path $owned 'digit-letter') --dll $dll --model (Join-Path $owned 'english-rec.onnx') --alphabet tools/header-reader-probe/english-v5-alphabet.json
           if ($LASTEXITCODE -ne 0) { throw 'Comparison transport failed' }
           Write-Output 'Measurement completion is separate from semantic quality; qualified remains false.'
-      - name: Measure fixed source-grayscale paired I and ell readers
+      - name: Compare eight ink colors with fixed common I and ell crops
         shell: pwsh
         run: |
           $owned = Join-Path $env:RUNNER_TEMP 'isolated-header-reader-owned'
           $dll = Join-Path $owned 'build/bin/Probe/release/WindowsRasterNativeProbe.dll'
-          python -B tools/header-reader-probe/compare_il_grayscale.py --dotnet dotnet --model-file (Join-Path $owned 'english-rec.onnx') --dll-file $dll
+          python -B tools/header-reader-probe/compare_il_grayscale.py --dotnet dotnet --color-probe --model-file (Join-Path $owned 'english-rec.onnx') --dll-file $dll
           if ($LASTEXITCODE -ne 0) { throw 'Paired grayscale comparison transport failed' }
           Write-Output 'All planned reader calls completed before gold; production qualification remains false.'
-      - name: Measure unused-font printed I and digit-one negative controls
+      - name: Compare the same eight colors with printed I and digit-one controls
         shell: pwsh
         run: |
           $owned = Join-Path $env:RUNNER_TEMP 'isolated-header-reader-owned'
           $dll = Join-Path $owned 'build/bin/Probe/release/WindowsRasterNativeProbe.dll'
-          python -B tools/header-reader-probe/compare_il_grayscale.py --dotnet dotnet --control-i1 --model-file (Join-Path $owned 'english-rec.onnx') --dll-file $dll
+          python -B tools/header-reader-probe/compare_il_grayscale.py --dotnet dotnet --control-i1 --color-probe --model-file (Join-Path $owned 'english-rec.onnx') --dll-file $dll
           if ($LASTEXITCODE -ne 0) { throw 'Unused-font I/1 comparison transport failed' }
           Write-Output 'Independent isolated controls are separate from whole-document qualification; no production threshold change.'
       - name: Remove owned inputs, model and build outputs

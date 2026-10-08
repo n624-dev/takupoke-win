@@ -42,9 +42,10 @@ if(args.Length==2 && args[0]=="--audit-inputs-v1")
 if(args.Length is not (2 or 3 or 4))throw new ArgumentException("Expected pinned model, pixel input list, optional pinned native alphabet and explicit diagnostic mode");
 var physical=args.Length==4 && args[3]=="physical-class-crops-v1";
 var digitLetter=args.Length==4 && args[3]=="blind-digit-letter-v1";
-var i1Control=args.Length==4 && args[3] is "blind-i1-control-bgr-v1" or "blind-i1-control-grayscale-v1";
-var pairedBgr=args.Length==4 && args[3] is "blind-il-bgr-v1" or "blind-i1-control-bgr-v1";
-var pairedGray=args.Length==4 && args[3] is "blind-il-grayscale-v1" or "blind-i1-control-grayscale-v1";
+var i1Control=args.Length==4 && args[3] is "blind-i1-control-bgr-v1" or "blind-i1-control-grayscale-v1" or "blind-i1-color-bgr-v1" or "blind-i1-color-grayscale-v1";
+var colorProbe=args.Length==4 && args[3] is "blind-il-color-bgr-v1" or "blind-il-color-grayscale-v1" or "blind-i1-color-bgr-v1" or "blind-i1-color-grayscale-v1";
+var pairedBgr=args.Length==4 && args[3] is "blind-il-bgr-v1" or "blind-i1-control-bgr-v1" or "blind-il-color-bgr-v1" or "blind-i1-color-bgr-v1";
+var pairedGray=args.Length==4 && args[3] is "blind-il-grayscale-v1" or "blind-i1-control-grayscale-v1" or "blind-il-color-grayscale-v1" or "blind-i1-color-grayscale-v1";
 if(args.Length==4 && !physical && !digitLetter && !pairedBgr && !pairedGray)throw new ArgumentException("Unknown diagnostic mode");
 var model=File.ReadAllBytes(args[0]);
 var hash=Convert.ToHexStringLower(SHA256.HashData(model));
@@ -72,7 +73,7 @@ if(v5)
 else dictionary=new[]{""}.Concat(reader.ModelMetadata.CustomMetadataMap["character"].TrimEnd('\n').Split('\n')).Append(" ").ToArray();
 if(dictionary.Length!=(v5 ? 438:97))throw new InvalidDataException("Model-native alphabet does not match output shape");
 var inputs=JsonSerializer.Deserialize<PixelInput[]>(File.ReadAllBytes(args[1])) ?? throw new InvalidDataException("Missing pixels");
-if(inputs.Length!=(physical ? 18:digitLetter ? 16:i1Control ? 32:64) || inputs.Select(p=>p.Index).Where((index,order)=>index!=order).Any())
+if(inputs.Length!=(physical ? 18:digitLetter ? 16:colorProbe ? (i1Control ? 128:256):i1Control ? 32:64) || inputs.Select(p=>p.Index).Where((index,order)=>index!=order).Any())
     throw new InvalidDataException("Expected the complete fixed ordinal input inventory");
 var output=new List<object>();
 foreach(var sample in inputs)
