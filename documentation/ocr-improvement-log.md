@@ -13,7 +13,18 @@ The full-cell condition completed native Windows Actions[37715176812](https://gi
 
 The fixed all-ink condition completed native Actions[37715396620](https://github.com/n624-dev/takupoke-win/actions/runs/37715396620), source`5c03781c56520d85d661ddc91c4253210dddadd1`, and cleanup. It retains every painted pixel, including underscore and faint edges, with no resampling or answer-directed text bounds. Original18px ink occupies approximately33.23px after the same normalization. Linux and native Windows both returned18 exact literals. Four `AI_1`/`AI_2` observations have the reader's own minimum confidence0.71146655/0.6572601, below the unchanged0.8 floor. The other14 exceed0.99. No confidence is transferred from another reader, and these four remain unresolved for formal adoption.
 
-This is18 class observations on two first pages, not18 independent documents or100% timetable accuracy. Prior blind I/l failures remain in the qualification set. No production provider, threshold or model catalog changes; no model qualifies. A separate printed-ell control locally returned all4 actual `Al_1`/`Al_2` controls exactly, with0 reads as canonical `AI_1`/`AI_2`; its native run is pending. Other14 unchanged observations are repeat controls, not new independent successes. Unused font/condition evaluation remains required.
+This is18 class observations on two first pages, not18 independent documents or100% timetable accuracy. Prior blind I/l failures remain in the qualification set. No production provider, threshold or model catalog changes; no model qualifies. A separate printed-ell control returned all4 actual `Al_1`/`Al_2` controls exactly, with0 reads as canonical `AI_1`/`AI_2`, both locally and in native Actions[37715641731](https://github.com/n624-dev/takupoke-win/actions/runs/37715641731), source`12940e8c56be724700d5f289a45db8e25c93f03a`. Other14 unchanged observations are repeat controls, not new independent successes.
+
+## Frozen crop recipe on a separate serif font condition
+
+Native Windows Actions[37716005426](https://github.com/n624-dev/takupoke-win/actions/runs/37716005426), source`b7536c7321406fe56f71450585406fba6ce8dc70`, completed both fixed conditions and owned cleanup. The preceding all-nonwhite4px-margin recipe, original rendering density, geometry, model,438-symbol alphabet and confidence floor are unchanged. Only the independently pinned Noto Serif JP font changes. Google Fonts revision`295d98a7a0c17c68f1341eaeea354e7960ea70d3`, font59,955,380bytes SHA-256`4c6b4670b73d0843c7b2d30b9e2fbcfa596aef6fd3937f894929ab0b8d659d1e`, SIL OFL SHA-256`5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6` are verified before use. No school names, images or fonts are input.
+
+| Serif condition | Literal exact | Own confidence≥0.8 | Printed ell read as I | Incorrect confidence≥0.8 |
+|---|---:|---:|---:|---:|
+| All canonical physical headers |18/18|18/18|not an ell control|0|
+| Matched printed-ell control |4/4 changed glyphs;14/14 unchanged controls|18/18|0|0|
+
+Linux and native Windows returned the same literal outcomes, with0 unsupported-padding rows. The matched font/glyph conditions do not supply independent new document counts. The Sans four low-confidence AI headers and previous blind phase/colour failures remain unresolved; this fixed Serif condition does not qualify the weights, calibrate scores or prove complete timetable recovery. Keep the comparison nonadoptable. Local owned models, fonts, generated documents/images, results and builds were removed after measurement.
 
 ## Direct font-source redraw: confidence improves, complete PDF quality unassessed
 
