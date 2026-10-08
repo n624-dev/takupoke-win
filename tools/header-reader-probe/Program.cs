@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 using Microsoft.ML.OnnxRuntime;
 using Takupoke.Core.Recovery;
@@ -6,6 +7,38 @@ using Takupoke.Infrastructure.Recovery;
 
 // Isolated recognition-only measurement: ordinal images, no literal answers,
 // class list, table coordinates, dictionary suggestions or adoption capability.
+if(args.Length==2 && args[0]=="--audit-inputs-v1")
+{
+    // Pixel-only audit of the real app transform. No weights, ORT session,
+    // expected glyph bounds, reader output, confidence or adoption call.
+    var samples=JsonSerializer.Deserialize<PixelInput[]>(File.ReadAllBytes(args[1]))
+        ?? throw new InvalidDataException("Missing audit pixels");
+    if(samples.Length!=64 || samples.Where((p,i)=>p.Index!=i).Any())
+        throw new InvalidDataException("Expected the fixed 64 ordinal audit inputs");
+    var rows=new List<object>();
+    foreach(var sample in samples)
+    {
+        var bgra=Convert.FromBase64String(sample.Bgra);
+        try
+        {
+            if(sample.Width is <1 or >2048 || sample.Height is <1 or >2048 || bgra.Length!=checked(sample.Width*sample.Height*4))
+                throw new InvalidDataException("Invalid audit pixel dimensions");
+            var input=OcrInputTransform.Recognition(new RecoveryRaster(sample.Width,sample.Height,bgra),
+                new RecoveryBox(0,0,sample.Width,sample.Height));
+            var pixels=new byte[checked(input.ValidWidth*48*3)];
+            for(var y=0;y<48;y++)for(var x=0;x<input.ValidWidth;x++)for(var c=0;c<3;c++)
+                pixels[(y*input.ValidWidth+x)*3+c]=checked((byte)Math.Round(
+                    (input.Tensor[0,c,y,x]+1d)*127.5,MidpointRounding.AwayFromZero));
+            rows.Add(new{sample.Index,sourceWidth=sample.Width,sourceHeight=sample.Height,input.ValidWidth,input.InputWidth,
+                sourceBgraSHA256=Convert.ToHexStringLower(SHA256.HashData(bgra)),
+                tensorFloat32SHA256=Convert.ToHexStringLower(SHA256.HashData(MemoryMarshal.AsBytes(input.Tensor.Buffer.Span))),
+                validBgr=Convert.ToBase64String(pixels),height=48,channelOrder="BGR",paddingCompared=false});
+        }
+        finally{CryptographicOperations.ZeroMemory(bgra);}
+    }
+    Console.WriteLine(JsonSerializer.Serialize(new{recipe="actual-app-input-tensor-v1",calls=0,qualified=false,outputs=rows}));
+    return;
+}
 if(args.Length is not (2 or 3 or 4))throw new ArgumentException("Expected pinned model, pixel input list, optional pinned native alphabet and explicit diagnostic mode");
 var physical=args.Length==4 && args[3]=="physical-class-crops-v1";
 var digitLetter=args.Length==4 && args[3]=="blind-digit-letter-v1";
