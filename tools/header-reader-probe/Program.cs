@@ -8,7 +8,8 @@ using Takupoke.Infrastructure.Recovery;
 // class list, table coordinates, dictionary suggestions or adoption capability.
 if(args.Length is not (2 or 3 or 4))throw new ArgumentException("Expected pinned model, pixel input list, optional pinned native alphabet and explicit diagnostic mode");
 var physical=args.Length==4 && args[3]=="physical-class-crops-v1";
-if(args.Length==4 && !physical)throw new ArgumentException("Unknown diagnostic mode");
+var digitLetter=args.Length==4 && args[3]=="blind-digit-letter-v1";
+if(args.Length==4 && !physical && !digitLetter)throw new ArgumentException("Unknown diagnostic mode");
 var model=File.ReadAllBytes(args[0]);
 var hash=Convert.ToHexStringLower(SHA256.HashData(model));
 var v5=model.Length==7848423 && hash=="b5f833dfc5d0eb71da397b4efa06ebeee9b431b690a47d6af40d77d8eabc557f";
@@ -35,7 +36,7 @@ if(v5)
 else dictionary=new[]{""}.Concat(reader.ModelMetadata.CustomMetadataMap["character"].TrimEnd('\n').Split('\n')).Append(" ").ToArray();
 if(dictionary.Length!=(v5 ? 438:97))throw new InvalidDataException("Model-native alphabet does not match output shape");
 var inputs=JsonSerializer.Deserialize<PixelInput[]>(File.ReadAllBytes(args[1])) ?? throw new InvalidDataException("Missing pixels");
-if(inputs.Length!=(physical ? 18:64) || inputs.Select(p=>p.Index).Where((index,order)=>index!=order).Any())
+if(inputs.Length!=(physical ? 18:digitLetter ? 16:64) || inputs.Select(p=>p.Index).Where((index,order)=>index!=order).Any())
     throw new InvalidDataException("Expected the complete fixed ordinal input inventory");
 var output=new List<object>();
 foreach(var sample in inputs)

@@ -11,10 +11,6 @@ permissions:
   contents: read
 jobs:
   compare:
-    strategy:
-      fail-fast: false
-      matrix:
-        input: [canonical, printed-ell]
     runs-on: windows-2025
     timeout-minutes: 15
     env:
@@ -40,14 +36,12 @@ jobs:
           if ((Get-Item $model).Length -ne 7848423 -or (Get-FileHash $model -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'b5f833dfc5d0eb71da397b4efa06ebeee9b431b690a47d6af40d77d8eabc557f') { throw 'Pinned model verification failed' }
           dotnet build tools/header-reader-probe/Probe.csproj --configuration Release --artifacts-path (Join-Path $owned 'build') --verbosity quiet
           if ($LASTEXITCODE -ne 0) { throw 'Native runtime compilation failed' }
-      - name: Measure fixed serif canonical and printed ell conditions
+      - name: Measure fixed unseen-font digit and letter controls
         shell: pwsh
         run: |
           $owned = Join-Path $env:RUNNER_TEMP 'isolated-header-reader-owned'
           $dll = Join-Path $owned 'build/bin/Probe/release/WindowsRasterNativeProbe.dll'
-          $control = @()
-          if ('${{ matrix.input }}' -eq 'printed-ell') { $control = @('--printed-ell-control') }
-          python -B tools/header-reader-probe/compare_physical_classes.py --owned (Join-Path $owned 'physical') --ink-crop --font-family serif @control --dll $dll --model (Join-Path $owned 'english-rec.onnx') --alphabet tools/header-reader-probe/english-v5-alphabet.json
+          python -B tools/header-reader-probe/compare_digit_letter.py --owned (Join-Path $owned 'digit-letter') --dll $dll --model (Join-Path $owned 'english-rec.onnx') --alphabet tools/header-reader-probe/english-v5-alphabet.json
           if ($LASTEXITCODE -ne 0) { throw 'Comparison transport failed' }
           Write-Output 'Measurement completion is separate from semantic quality; qualified remains false.'
       - name: Remove owned inputs, model and build outputs
