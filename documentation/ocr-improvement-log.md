@@ -1,5 +1,18 @@
 # OCR improvement log
 
+## 2026-10-08: Existing blind I/l results audited without more inference
+
+The existing native reports from [37711605271](https://github.com/n624-dev/takupoke-win/actions/runs/37711605271) and [37711786954](https://github.com/n624-dev/takupoke-win/actions/runs/37711786954) were regrouped after measurement. No image, model, reader call, threshold change or adoption was added. Each colour group contains16 canonical-I observations under the previously fixed size/phase/suffix combinations, on the same Noto Sans JP font.
+
+| Original vector rendering | Canonical I exact, black | Canonical I exact, dark blue | Printed ell exact, black | Printed ell exact, dark blue |
+|---|---:|---:|---:|---:|
+|2x|14/16|2/16|16/16|16/16|
+|4x|12/16|6/16|14/16|16/16|
+
+Paired by original design ordinal, the64 observations contain8 improvements,8 regressions and8 errors shared by both render conditions. Thus the higher-density condition does not improve overall exactness: both have48/64 exact complete literals, with different failure membership. The two new printed-ell errors at4x are `Al_2` read as `AL_2`. At2x the18/20 source-pixel canonical groups have6/16 and10/16 exact; the corresponding fixed4x redraw has10/16 and8/16. Size alone is not a reliable explanation either.
+
+All incorrect native rows stay below the unchanged0.8 diagnostic floor: maximum0.78195155 at2x and0.56183517 at4x. The old public reports retain only mismatch rows, so correct-row score distributions cannot be reconstructed from them and no calibration claim is possible. Factor groups and repeated renderings are paired diagnostics, not independent document successes. The colour association motivates an input-channel/colour-transform audit; it does not prove that grayscale, black substitution or a model change fixes the problem. Previous whole-document and model qualifications remain failed.
+
 ## 2026-10-08: A separate blind digit/letter error band
 
 Research source `a4a0cd31f0663334ba10b09ff7c327eef5fe5b5e`, native Windows Actions [37717855068](https://github.com/n624-dev/takupoke-win/actions/runs/37717855068), completed the fixed16-image comparison and owned input/model/build cleanup. A separately painted `4_Q7`/`A_Q7` minimal pair covers18/20 source-pixel text, two fixed phases and black/blue on a previously unused Inconsolata font. All8 pair images are pixel-distinct. Font347,180bytes SHA-256 `23ded25b447074d00659392bf9b1123d89df55cb07b0ad9bfef3366d199b5fcb`, SIL OFL SHA-256 `29bd0cfd0fb2a45f9b057c834a057724bae1f63b525a8ac83d3e7525706d9f80`, and Google Fonts revision `295d98a7a0c17c68f1341eaeea354e7960ea70d3` were verified before inference. The initially proposed Roboto Mono path returned404 during font preflight; no inference or qualification credit was assigned to that nonexistent condition.
