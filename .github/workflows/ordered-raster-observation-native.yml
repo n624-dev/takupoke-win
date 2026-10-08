@@ -6,6 +6,8 @@ on:
       - tools/header-reader-probe/**
       - tools/ordered-row-e2e/compare_header_pairs.py
       - .github/workflows/header-recognition-comparison.yml
+      - .github/workflows/ordered-raster-observation-native.yml
+      - tools/recovery-prompt-contracts/prompts/image-literal-ocr-plain-v1.txt
   workflow_dispatch:
 permissions:
   contents: read

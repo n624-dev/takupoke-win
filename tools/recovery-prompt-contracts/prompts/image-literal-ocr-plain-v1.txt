@@ -1,0 +1,5 @@
+OCR:
+Read only the printed text in the image.
+Preserve uppercase and lowercase letters, digits, and punctuation exactly.
+Return plain text only. Do not add Markdown formatting or backslash escapes.
+If a backslash is actually printed, copy it literally.
