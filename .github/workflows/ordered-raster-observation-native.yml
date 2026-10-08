@@ -2,6 +2,10 @@ name: Observe independent readable unlabelled image PDFs
 on:
   push:
     branches: [research/windows-ordered-raster-observation-20261007]
+    paths-ignore:
+      - tools/header-reader-probe/**
+      - tools/ordered-row-e2e/compare_header_pairs.py
+      - .github/workflows/header-recognition-comparison.yml
   workflow_dispatch:
 permissions:
   contents: read
