@@ -80,13 +80,23 @@ def main(args):
                     if x2-x1<=8 or y2-y1<=8: continue
                     pixels=b''.join(rgb[(y*w+x1)*3:(y*w+x2)*3] for y in range(y1,y2))
                     if min(pixels)==255: continue
+                    physical_box=[x1,y1,x2-x1,y2-y1]
                     iw,ih=x2-x1,y2-y1
+                    painted=[(i//3 % iw,i//3//iw) for i in range(0,len(pixels),3) if min(pixels[i:i+3])<255]
+                    original_ink_height=max(y for x,y in painted)-min(y for x,y in painted)+1
+                    if args.ink_crop:
+                        # Fixed source-pixel margin, all painted pixels retained.
+                        # No recognition answer, character correction or resampling.
+                        a=max(0,min(x for x,y in painted)-4);b=min(iw,max(x for x,y in painted)+5)
+                        c=max(0,min(y for x,y in painted)-4);d=min(ih,max(y for x,y in painted)+5)
+                        pixels=b''.join(pixels[(y*iw+a)*3:(y*iw+b)*3] for y in range(c,d))
+                        x1+=a;y1+=c;iw=b-a;ih=d-c
                     bgra=bytearray(iw*ih*4)
                     for channel in range(3): bgra[channel::4]=pixels[2-channel::3]
                     bgra[3::4]=bytes([255])*(iw*ih)
                     index=len(inputs)
                     inputs.append(dict(Index=index,Width=iw,Height=ih,Bgra=base64.b64encode(bgra).decode()))
-                    captures.append(dict(index=index,cropBox=[x1,y1,iw,ih],sourceRGBSHA256=sha(rgb),inputRGBSHA256=sha(pixels)))
+                    captures.append(dict(index=index,cropBox=[x1,y1,iw,ih],physicalCellInterior=physical_box,originalInkHeight=original_ink_height,normalizedInkHeight48=original_ink_height*48/ih,sourceRGBSHA256=sha(rgb),inputRGBSHA256=sha(pixels)))
                 inventory.append((case,captures))
         assert len(inputs)==18, 'Physical inventory differs; never fill missing crops'
         pixels=args.owned/'pixels-only.json';pixels.write_text(json.dumps(inputs))
@@ -104,7 +114,7 @@ def main(args):
                 result=native['outputs'][original['index']]
                 assert result['Index']==original['index']
                 rows.append(dict(case=case['case'],**original,**result,expected=value,exact=result['text']==value))
-        report=dict(recipe='physical-class-column-English-v5-original-pixels-v1',
+        report=dict(recipe='physical-class-column-English-v5-original-pixels-v1',inputRegion='all nonwhite pixels plus fixed4px margin' if args.ink_crop else 'physical cell interior',
             calls=18,correct=sum(r['exact'] for r in rows),obligations=18,
             incorrectAboveNativeThreshold=sum(not r['exact'] and r['minimumConfidence'] is not None and r['minimumConfidence']>=.8 for r in rows),
             paddingUnsupported=sum(not r['paddingSupported'] for r in rows),
@@ -122,5 +132,6 @@ if __name__=='__main__':
     parser.add_argument('--dll',required=True,type=Path)
     parser.add_argument('--model',required=True,type=Path)
     parser.add_argument('--alphabet',required=True,type=Path)
+    parser.add_argument('--ink-crop',action='store_true')
     parser.add_argument('--dotnet',default='dotnet')
     main(parser.parse_args())

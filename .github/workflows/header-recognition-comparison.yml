@@ -36,12 +36,12 @@ jobs:
           if ((Get-Item $model).Length -ne 7848423 -or (Get-FileHash $model -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'b5f833dfc5d0eb71da397b4efa06ebeee9b431b690a47d6af40d77d8eabc557f') { throw 'Pinned model verification failed' }
           dotnet build tools/header-reader-probe/Probe.csproj --configuration Release --artifacts-path (Join-Path $owned 'build') --verbosity quiet
           if ($LASTEXITCODE -ne 0) { throw 'Native runtime compilation failed' }
-      - name: Measure all original physical class-column cells without adoption
+      - name: Measure fixed all-ink class crops without answer-directed correction
         shell: pwsh
         run: |
           $owned = Join-Path $env:RUNNER_TEMP 'isolated-header-reader-owned'
           $dll = Join-Path $owned 'build/bin/Probe/release/WindowsRasterNativeProbe.dll'
-          python -B tools/header-reader-probe/compare_physical_classes.py --owned (Join-Path $owned 'physical') --dll $dll --model (Join-Path $owned 'english-rec.onnx') --alphabet tools/header-reader-probe/english-v5-alphabet.json
+          python -B tools/header-reader-probe/compare_physical_classes.py --owned (Join-Path $owned 'physical') --ink-crop --dll $dll --model (Join-Path $owned 'english-rec.onnx') --alphabet tools/header-reader-probe/english-v5-alphabet.json
           if ($LASTEXITCODE -ne 0) { throw 'Comparison transport failed' }
           Write-Output 'Measurement completion is separate from semantic quality; qualified remains false.'
       - name: Remove owned inputs, model and build outputs
