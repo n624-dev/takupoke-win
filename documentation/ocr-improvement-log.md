@@ -1,5 +1,20 @@
 # OCR improvement log
 
+## 2026-10-08: Original physical class crops isolate input normalization
+
+Two fixed recognition-only conditions use all18 ink-bearing class cells from the first pages of the same independent invented readable cohort. Observed original pixel rules select the full physical column before any literal answer is read. The reader receives ordinal BGRA inputs only, with no expected class list, vocabulary or formal adoption path. The official pinned English V5 weights remain7,848,423bytes, SHA-256`b5f833dfc5d0eb71da397b4efa06ebeee9b431b690a47d6af40d77d8eabc557f`, native438-symbol alphabet and unchanged CPU ONNX Runtime1.23.2 transform/padding guards.
+
+| Fixed input condition | Literal exact /18 | Incorrect score≥0.8 | Unsupported padding |
+|---|---:|---:|---:|
+| Entire physical cell interior |0|2|0|
+| Every nonwhite original pixel plus fixed4px margin |18|0|0|
+
+The full-cell condition completed native Windows Actions[37715176812](https://github.com/n624-dev/takupoke-win/actions/runs/37715176812), source`415d37d764bb65b381d05b9a666aa1b809941434`, and cleanup. It passes183×119/127px cells to a48px-height recognizer, shrinking the18px painted letters along with large margins. This is an unsuitable input condition, not proof that the weights alone cannot read the original letters. The changed crop also changes margin, valid width and padding ratio, so size alone is not claimed as the proven cause.
+
+The fixed all-ink condition completed native Actions[37715396620](https://github.com/n624-dev/takupoke-win/actions/runs/37715396620), source`5c03781c56520d85d661ddc91c4253210dddadd1`, and cleanup. It retains every painted pixel, including underscore and faint edges, with no resampling or answer-directed text bounds. Original18px ink occupies approximately33.23px after the same normalization. Linux and native Windows both returned18 exact literals. Four `AI_1`/`AI_2` observations have the reader's own minimum confidence0.71146655/0.6572601, below the unchanged0.8 floor. The other14 exceed0.99. No confidence is transferred from another reader, and these four remain unresolved for formal adoption.
+
+This is18 class observations on two first pages, not18 independent documents or100% timetable accuracy. Prior blind I/l failures remain in the qualification set. No production provider, threshold or model catalog changes; no model qualifies. A separate printed-ell control locally returned all4 actual `Al_1`/`Al_2` controls exactly, with0 reads as canonical `AI_1`/`AI_2`; its native run is pending. Other14 unchanged observations are repeat controls, not new independent successes. Unused font/condition evaluation remains required.
+
 ## Direct font-source redraw: confidence improves, complete PDF quality unassessed
 
 A new independent fictional 40-cell table contains 120 unlabelled body fields. A fixed Linux .NET comparison calls the unchanged production PP-OCRv5 OCR implementation and ONNX Runtime 1.23.2 four times: Noto Sans 11 px at native 1x/2x font-source rendering, and different Noto Serif 10 px literals at 1x/2x. The larger image is drawn directly from the font and vector geometry; it is not a resized low-resolution image. Model files, confidence floor, source-padding guards, connected-ink ownership, and adoption policy are unchanged.
