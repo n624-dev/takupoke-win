@@ -42,7 +42,10 @@ if(args.Length==2 && args[0]=="--audit-inputs-v1")
 if(args.Length is not (2 or 3 or 4))throw new ArgumentException("Expected pinned model, pixel input list, optional pinned native alphabet and explicit diagnostic mode");
 var physical=args.Length==4 && args[3]=="physical-class-crops-v1";
 var digitLetter=args.Length==4 && args[3]=="blind-digit-letter-v1";
-if(args.Length==4 && !physical && !digitLetter)throw new ArgumentException("Unknown diagnostic mode");
+var i1Control=args.Length==4 && args[3] is "blind-i1-control-bgr-v1" or "blind-i1-control-grayscale-v1";
+var pairedBgr=args.Length==4 && args[3] is "blind-il-bgr-v1" or "blind-i1-control-bgr-v1";
+var pairedGray=args.Length==4 && args[3] is "blind-il-grayscale-v1" or "blind-i1-control-grayscale-v1";
+if(args.Length==4 && !physical && !digitLetter && !pairedBgr && !pairedGray)throw new ArgumentException("Unknown diagnostic mode");
 var model=File.ReadAllBytes(args[0]);
 var hash=Convert.ToHexStringLower(SHA256.HashData(model));
 var v5=model.Length==7848423 && hash=="b5f833dfc5d0eb71da397b4efa06ebeee9b431b690a47d6af40d77d8eabc557f";
@@ -69,7 +72,7 @@ if(v5)
 else dictionary=new[]{""}.Concat(reader.ModelMetadata.CustomMetadataMap["character"].TrimEnd('\n').Split('\n')).Append(" ").ToArray();
 if(dictionary.Length!=(v5 ? 438:97))throw new InvalidDataException("Model-native alphabet does not match output shape");
 var inputs=JsonSerializer.Deserialize<PixelInput[]>(File.ReadAllBytes(args[1])) ?? throw new InvalidDataException("Missing pixels");
-if(inputs.Length!=(physical ? 18:digitLetter ? 16:64) || inputs.Select(p=>p.Index).Where((index,order)=>index!=order).Any())
+if(inputs.Length!=(physical ? 18:digitLetter ? 16:i1Control ? 32:64) || inputs.Select(p=>p.Index).Where((index,order)=>index!=order).Any())
     throw new InvalidDataException("Expected the complete fixed ordinal input inventory");
 var output=new List<object>();
 foreach(var sample in inputs)
@@ -79,8 +82,27 @@ foreach(var sample in inputs)
     {
         if(sample.Width is <1 or >2048 || sample.Height is <1 or >2048 || bgra.Length!=checked(sample.Width*sample.Height*4))
             throw new InvalidDataException("Invalid original pixel dimensions");
+        var sourceHash=pairedBgr || pairedGray ? Convert.ToHexStringLower(SHA256.HashData(bgra)):null;
+        var nonwhiteBefore=0;var inkLost=0;var neutralChanged=0;
+        if(pairedBgr || pairedGray)for(var i=0;i<bgra.Length;i+=4)
+        {
+            if(bgra[i+3]!=255)throw new InvalidDataException("Paired source is not opaque");
+            var b=bgra[i];var g=bgra[i+1];var r=bgra[i+2];
+            if(Math.Min(b,Math.Min(g,r))<255)nonwhiteBefore++;
+            if(pairedGray)
+            {
+                // Fixed source-pixel grayscale BEFORE the unchanged actual
+                // app resize: uint8 nearest, replicate to all three channels.
+                var value=checked((byte)Math.Floor(.114*b+.587*g+.299*r+.5));
+                if(value==255 && Math.Min(b,Math.Min(g,r))<255)inkLost++;
+                if(b==g && g==r && value!=b)neutralChanged++;
+                bgra[i]=bgra[i+1]=bgra[i+2]=value;
+            }
+        }
         var raster=new RecoveryRaster(sample.Width,sample.Height,bgra);
         var input=OcrInputTransform.Recognition(raster,new RecoveryBox(0,0,sample.Width,sample.Height));
+        var tensorHash=pairedBgr || pairedGray ? Convert.ToHexStringLower(
+            SHA256.HashData(MemoryMarshal.AsBytes(input.Tensor.Buffer.Span))):null;
         using var result=reader.Run([NamedOnnxValue.CreateFromTensor("x",input.Tensor)]);
         var logits=result.First().AsTensor<float>();
         if(logits.Rank!=3 || logits.Dimensions[0]!=1 || logits.Dimensions[2]!=dictionary.Length)throw new InvalidDataException("Unexpected native output shape");
@@ -94,9 +116,17 @@ foreach(var sample in inputs)
             else if(best!=0 && pieces.Count>0){var p=pieces[^1];pieces[^1]=(p.Text,p.Start,t+1,Math.Max(p.Score,score));}
             previous=best;
         }
-        output.Add(new{sample.Index,text=string.Concat(pieces.Select(p=>p.Text)),minimumConfidence=pieces.Count==0 ? (float?)null:pieces.Min(p=>p.Score),
+        var text=string.Concat(pieces.Select(p=>p.Text));
+        var minimumConfidence=pieces.Count==0 ? (float?)null:pieces.Min(p=>p.Score);
+        var paddingSupported=pieces.All(p=>(long)p.End*input.InputWidth<=(long)input.ValidWidth*logits.Dimensions[1]);
+        if(pairedBgr || pairedGray)output.Add(new{sample.Index,text,minimumConfidence,input.ValidWidth,input.InputWidth,
+            timeCount=logits.Dimensions[1],paddingSupported,sourceBgraSHA256=sourceHash,tensorFloat32SHA256=tensorHash,
+            nonwhiteSourcePixels=nonwhiteBefore,nonwhitePixelsLost=inkLost,neutralPixelsChanged=neutralChanged,
+            preprocessing=pairedGray ? "source-BGR-gray-114-587-299-uint8-nearest-before-resize-v1":"unchanged-app-BGR-v1",
+            pieces=pieces.Select(p=>new{p.Text,p.Start,p.End,confidence=p.Score})});
+        else output.Add(new{sample.Index,text,minimumConfidence,
             input.ValidWidth,input.InputWidth,timeCount=logits.Dimensions[1],
-            paddingSupported=pieces.All(p=>(long)p.End*input.InputWidth<=(long)input.ValidWidth*logits.Dimensions[1]),
+            paddingSupported,
             pieces=pieces.Select(p=>new{p.Text,p.Start,p.End,confidence=p.Score})});
     }
     finally{CryptographicOperations.ZeroMemory(bgra);}
