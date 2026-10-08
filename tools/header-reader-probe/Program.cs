@@ -6,9 +6,12 @@ using Takupoke.Infrastructure.Recovery;
 
 // Isolated recognition-only measurement: ordinal images, no literal answers,
 // class list, table coordinates, dictionary suggestions or adoption capability.
-if(args.Length != 2)throw new ArgumentException("Expected pinned model and pixel input list");
+if(args.Length is not (2 or 3))throw new ArgumentException("Expected pinned model, pixel input list and optional pinned native alphabet");
 var model=File.ReadAllBytes(args[0]);
-if(model.Length!=8967018 || Convert.ToHexStringLower(SHA256.HashData(model))!="ef7abd8bd3629ae57ea2c28b425c1bd258a871b93fd2fe7c433946ade9b5d9ea")
+var hash=Convert.ToHexStringLower(SHA256.HashData(model));
+var v5=model.Length==7848423 && hash=="b5f833dfc5d0eb71da397b4efa06ebeee9b431b690a47d6af40d77d8eabc557f";
+var v3=model.Length==8967018 && hash=="ef7abd8bd3629ae57ea2c28b425c1bd258a871b93fd2fe7c433946ade9b5d9ea";
+if(!v3 && !v5 || v5 && args.Length!=3 || v3 && args.Length!=2)
     throw new InvalidDataException("Pinned English recognition weights differ");
 OrtEnv.Instance().DisableTelemetryEvents();
 using var options=new SessionOptions{IntraOpNumThreads=2,InterOpNumThreads=1,GraphOptimizationLevel=GraphOptimizationLevel.ORT_ENABLE_ALL};
@@ -17,8 +20,18 @@ CryptographicOperations.ZeroMemory(model);
 // RapidOCR f65c7da00e72c19c258245e8e0e5f33af14488be CTCLabelDecode
 // appends one space, then prepends CTC blank. The model-native metadata
 // already contains a space; preserve both distinct indices without deduping.
-var dictionary=new[]{""}.Concat(reader.ModelMetadata.CustomMetadataMap["character"].TrimEnd('\n').Split('\n')).Append(" ").ToArray();
-if(dictionary.Length!=97)throw new InvalidDataException("Model-native alphabet does not match output shape");
+string[] dictionary;
+if(v5)
+{
+    var alphabet=File.ReadAllBytes(args[2]);
+    // Official inference.yml character_dict in its original order, preceded
+    // by CTC blank and followed by the native space. No case folding/deduping.
+    if(Convert.ToHexStringLower(SHA256.HashData(alphabet))!="3a3e5abea6e7d403209043c8d67b052414ae59ece49922cc7e3ac205d59060a8")
+        throw new InvalidDataException("Pinned official alphabet differs");
+    dictionary=JsonSerializer.Deserialize<string[]>(alphabet) ?? throw new InvalidDataException("Missing alphabet");
+}
+else dictionary=new[]{""}.Concat(reader.ModelMetadata.CustomMetadataMap["character"].TrimEnd('\n').Split('\n')).Append(" ").ToArray();
+if(dictionary.Length!=(v5 ? 438:97))throw new InvalidDataException("Model-native alphabet does not match output shape");
 var inputs=JsonSerializer.Deserialize<PixelInput[]>(File.ReadAllBytes(args[1])) ?? throw new InvalidDataException("Missing pixels");
 if(inputs.Length!=64)throw new InvalidDataException("Expected exactly the blind fixed64-input probe");
 var output=new List<object>();
@@ -31,7 +44,7 @@ foreach(var sample in inputs)
         var input=OcrInputTransform.Recognition(raster,new RecoveryBox(0,0,sample.Width,sample.Height));
         using var result=reader.Run([NamedOnnxValue.CreateFromTensor("x",input.Tensor)]);
         var logits=result.First().AsTensor<float>();
-        if(logits.Rank!=3 || logits.Dimensions[0]!=1 || logits.Dimensions[2]!=97)throw new InvalidDataException("Unexpected native output shape");
+        if(logits.Rank!=3 || logits.Dimensions[0]!=1 || logits.Dimensions[2]!=dictionary.Length)throw new InvalidDataException("Unexpected native output shape");
         foreach(var score in logits)if(!float.IsFinite(score) || score is <0 or >1)throw new InvalidDataException("Invalid native probability");
         var pieces=new List<(string Text,int Start,int End,float Score)>();var previous=-1;
         for(var t=0;t<logits.Dimensions[1];t++)
@@ -49,5 +62,5 @@ foreach(var sample in inputs)
     }
     finally{CryptographicOperations.ZeroMemory(bgra);}
 }
-Console.WriteLine(JsonSerializer.Serialize(new{runtime="Microsoft.ML.OnnxRuntime1.23.2 CPU",calls=inputs.Length,qualified=false,outputs=output}));
+Console.WriteLine(JsonSerializer.Serialize(new{runtime="Microsoft.ML.OnnxRuntime1.23.2 CPU",modelId=v5 ? "en_PP-OCRv5_mobile_rec":"en_PP-OCRv3_rec",calls=inputs.Length,qualified=false,outputs=output}));
 sealed record PixelInput(int Index,int Width,int Height,string Bgra);

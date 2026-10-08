@@ -29,7 +29,7 @@ def digest_file(path):
     with path.open('rb') as source:return hashlib.file_digest(source,'sha256').hexdigest()
 
 def run(owned, tessdata, english_dll=None, english_model=None, dotnet='dotnet', ink_crop=False,
-        vl_endpoint=None,vl_model=None,vl_projector=None,vl_prompt_file=None):
+        vl_endpoint=None,vl_model=None,vl_projector=None,vl_prompt_file=None,english_alphabet=None):
     owned.mkdir(exist_ok=False)
     try:
         (owned/'.header-pair-owned').write_text('v1\n')
@@ -85,7 +85,9 @@ def run(owned, tessdata, english_dll=None, english_model=None, dotnet='dotnet', 
         outputs = []
         if english_dll:
             (owned/'pixels-only.json').write_text(json.dumps(pixels_only))
-            child=subprocess.run([dotnet,str(english_dll),str(english_model),str(owned/'pixels-only.json')],capture_output=True,text=True,timeout=120)
+            command=[dotnet,str(english_dll),str(english_model),str(owned/'pixels-only.json')]
+            if english_alphabet:command.append(str(english_alphabet))
+            child=subprocess.run(command,capture_output=True,text=True,timeout=120)
             assert child.returncode==0, child.stderr[:2000]
             native=json.loads(child.stdout)
             outputs=[dict(index=r.pop('Index'),error=None,**r) for r in native['outputs']]
@@ -127,7 +129,7 @@ def run(owned, tessdata, english_dll=None, english_model=None, dotnet='dotnet', 
         negatives = [r for r in rows if r['letter']=='l']
         pairs = {}
         for r in records:pairs.setdefault((r['pixels'],r['phase'],tuple(r['color']),r['expected'][-1]),{})[r['letter']]=r['rgbSHA256']
-        report = dict(recipe='isolated-header-pair-English-v3-native-normalization-v1' if english_dll else 'isolated-header-pair-PaddleOCR-VL1.5-official-prompt-v1' if vl_endpoint else 'isolated-header-pair-eng-psm7-v1', scope='isolated invented original glyph pairs; not native table recovery',
+        report = dict(recipe='isolated-header-pair-'+native['modelId']+'-native-normalization-v1' if english_dll else 'isolated-header-pair-PaddleOCR-VL1.5-official-prompt-v1' if vl_endpoint else 'isolated-header-pair-eng-psm7-v1', scope='isolated invented original glyph pairs; not native table recovery',
                       engine=native['runtime'] if english_dll else 'llama.cpp b11371 CPU local' if vl_endpoint else subprocess.check_output(['tesseract','--version'],text=True).splitlines()[0],
                       engineSHA256=digest_file(english_dll) if english_dll else None if vl_endpoint else digest_file(Path(shutil.which('tesseract'))),
                       modelBytes=model.stat().st_size,modelSHA256=model_hash,publicFontSHA256=font.FONT_SHA,
@@ -157,12 +159,14 @@ if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--owned',required=True,type=Path)
     p.add_argument('--tessdata',type=Path,default=Path('/usr/share/tesseract-ocr/5/tessdata'))
     p.add_argument('--english-dll',type=Path);p.add_argument('--english-model',type=Path);p.add_argument('--dotnet',default='dotnet')
+    p.add_argument('--english-alphabet',type=Path)
     p.add_argument('--ink-crop',action='store_true')
     p.add_argument('--vl-endpoint');p.add_argument('--vl-model',type=Path);p.add_argument('--vl-projector',type=Path)
     p.add_argument('--vl-prompt-file',type=Path)
     args=p.parse_args()
     if bool(args.english_dll)!=bool(args.english_model):p.error('Both English runtime and pinned model are required')
+    if args.english_alphabet and not args.english_dll:p.error('Native alphabet requires the pinned English reader')
     if args.vl_endpoint and (args.english_dll or not args.vl_model or not args.vl_projector or not re.fullmatch(r'http://127\.0\.0\.1:[0-9]{1,5}',args.vl_endpoint)):
         p.error('A single localhost image runtime and both pinned image weights are required')
     if args.vl_prompt_file and not args.vl_endpoint:p.error('Image prompt requires the localhost image runtime')
-    run(args.owned,args.tessdata,args.english_dll,args.english_model,args.dotnet,args.ink_crop,args.vl_endpoint,args.vl_model,args.vl_projector,args.vl_prompt_file)
+    run(args.owned,args.tessdata,args.english_dll,args.english_model,args.dotnet,args.ink_crop,args.vl_endpoint,args.vl_model,args.vl_projector,args.vl_prompt_file,args.english_alphabet)

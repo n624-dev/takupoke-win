@@ -32,8 +32,8 @@ jobs:
           $owned = Join-Path $env:RUNNER_TEMP 'isolated-header-reader-owned'
           New-Item -ItemType Directory -Path $owned -ErrorAction Stop | Out-Null
           $model = Join-Path $owned 'english-rec.onnx'
-          Invoke-WebRequest -Uri 'https://huggingface.co/SWHL/RapidOCR/resolve/1cfba2e90fc938db55889873735088de210cc173/PP-OCRv3/en_PP-OCRv3_rec_infer.onnx' -OutFile $model -TimeoutSec 180
-          if ((Get-Item $model).Length -ne 8967018 -or (Get-FileHash $model -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'ef7abd8bd3629ae57ea2c28b425c1bd258a871b93fd2fe7c433946ade9b5d9ea') { throw 'Pinned model verification failed' }
+          Invoke-WebRequest -Uri 'https://huggingface.co/PaddlePaddle/en_PP-OCRv5_mobile_rec_onnx/resolve/3fafbc3b5dcf93dd72add9f48368be8a3a2cd33b/inference.onnx' -OutFile $model -TimeoutSec 180
+          if ((Get-Item $model).Length -ne 7848423 -or (Get-FileHash $model -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'b5f833dfc5d0eb71da397b4efa06ebeee9b431b690a47d6af40d77d8eabc557f') { throw 'Pinned model verification failed' }
           dotnet build tools/header-reader-probe/Probe.csproj --configuration Release --artifacts-path (Join-Path $owned 'build') --verbosity quiet
           if ($LASTEXITCODE -ne 0) { throw 'Native runtime compilation failed' }
       - name: Measure fixed64 blind original glyph inputs without adoption
@@ -41,7 +41,7 @@ jobs:
         run: |
           $owned = Join-Path $env:RUNNER_TEMP 'isolated-header-reader-owned'
           $dll = Join-Path $owned 'build/bin/Probe/release/WindowsRasterNativeProbe.dll'
-          python -B tools/ordered-row-e2e/compare_header_pairs.py --owned (Join-Path $owned 'pairs') --ink-crop --english-dll $dll --english-model (Join-Path $owned 'english-rec.onnx')
+          python -B tools/ordered-row-e2e/compare_header_pairs.py --owned (Join-Path $owned 'pairs') --ink-crop --english-dll $dll --english-model (Join-Path $owned 'english-rec.onnx') --english-alphabet tools/header-reader-probe/english-v5-alphabet.json
           if ($LASTEXITCODE -ne 0) { throw 'Comparison transport failed' }
           Write-Output 'Measurement completion is separate from semantic quality; qualified remains false.'
       - name: Remove owned inputs, model and build outputs
