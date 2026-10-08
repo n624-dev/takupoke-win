@@ -535,3 +535,28 @@ Complete numeric report digest56eccce902ef930148c237ce8fd8475eaf30a5128af7e6e4df
 Research source9238ec8785896172e8d1c29d4ed2bacda0191cd7, Actions[37735004548](https://github.com/n624-dev/takupoke-win/actions/runs/37735004548), job113172433576, completed both planned comparisons on Windows2025:128 original-font calls and64 unused-font control calls. Literal counts,13/6 gains,0 regressions, negative controls, low-confidence counts and unsupported-padding counts reproduced the Linux results. Native report hashes are82111b996c9f5e5191b20c8e1aa129b614d0a2b36915a6d6ad3eb53da10714d3 anddd15d92625664c41d7d4064093d8d7496e3a991e67cc7644ad3b73d5ed750d24. Numeric CPU probabilities differ slightly from Linux; literal parity does not mean byte-identical reports.
 
 Native per-character records identify the minimum-confidence character as I in all29 correct gray I rows in the original font and all12 correct gray I rows in SourceSans3. The underscore or suffix is not causing their low minimum score. Wrong gray rows have l as the minimum-confidence character, with scores overlapping correct I. This closes the hypothesis that ignoring another character's score could resolve the header failures. Thresholds and character confidence are unchanged. All owned inputs, weights and compile outputs were removed by the completed unconditional cleanup step; no artifact or intermediate app release was created. Both comparisons remain unqualified.
+
+## 2026-10-08: Fixed 4x source-gray condition rejected locally
+
+The final scale/gray condition re-rendered the same vector sources at4x with the same2pt physical margin, without enlarging the2x bitmap. All128 original-font and64 I/1-control CPU calls completed; this supplied0 new independent accuracy cases. Noto I black remained12/16; blue improved6/16→12/16. Printed l black remained14/16 with2 l→L errors; blue stayed16/16. Every one of the24 correct gray I results had own confidence below0.8:0/32 correct I obligations above the unchanged floor, versus4/32 at2x gray. SourceSans3 I black stayed6/8, blue improved4/8→6/8, and printed1 remained16/16; all12 correct gray I scores stayed below0.8.
+
+Gray caused0 regressions relative to4x BGR and0 l/1→I substitutions, but did not improve valid I acceptance. Both arms had0 wrong results above0.8,0 padding errors and0 execution errors. Report hashes08f6562a90334b47b230c347a15353927b933176aed1733adf9b27e87e931fc2 and129fbf0896bd530b2bb2ee667220dc9c669b00257e134039a33664e16436848f. Owned files were removed. This recipe is closed as a production candidate; native4x confirmation was not required to reject the failed local condition. No production preprocessing or threshold changed.
+
+## 2026-10-08: Eight ink colors with invariant crop geometry
+
+User-requested color diagnosis fixes glyph, font, point size, subpixel phase, suffix, white background and source2x rendering. Each color uses the same crop: union of all eight planned source ink bounds for that same glyph/layout plus2pt margin. No recognition result chooses a crop. Colors are black, navy, red, green, dark gray, medium gray, light gray and very light gray. Original BGR and fixed luminance-gray readers receive the same crop dimensions; all neutral-color tensors and literal outputs stay identical between the two arms. These384 source variants provide0 new independent accuracy cases. Linux completed512 I/l calls and256 I/1 calls; Windows source2894ba6da8254c7dd63d1c026d20e59f67c5b990, Actions[37736479196](https://github.com/n624-dev/takupoke-win/actions/runs/37736479196), job113177055925, reproduced the same literal/floor counts and completed owned cleanup.
+
+| Printed color (actual minimum RGB) | Noto I exact, original / gray | SourceSans3 I exact, original / gray |
+| --- | ---: | ---: |
+| Black (0,0,0) |14/16 /14/16|6/8 /6/8|
+| Navy (12,25,76) |2/16 /15/16|0/8 /6/8|
+| Red (165,20,20) |9/16 /16/16|3/8 /6/8|
+| Green (12,89,12) |4/16 /15/16|1/8 /6/8|
+| Dark gray (28,28,28) |15/16 /15/16|6/8 /6/8|
+| Medium gray (89,89,89) |16/16 /16/16|6/8 /6/8|
+| Light gray (165,165,165) |15/16 /15/16|4/8 /4/8|
+| Very light gray (216,216,216) |0/16 /0/16|0/8 /0/8|
+
+The Noto gray arm gained31 literals and the SourceSans3 gray arm gained16, each with0 regressions relative to its original-color arm. This does not qualify a universal gray recipe. SourceSans3 still had0 correct I above0.8 in every color. Noto medium-gray I had5/16 correct above0.8, leaving11 below. Very light Noto l had0/16 exact and1 wrong literal above0.8 in both arms. SourceSans3 original navy and green each produced1 wrong literal above0.8. Printed l and1 controls are retained, not converted to I; no model/prior-class answer replaces image evidence.
+
+The first Linux diagnostic used independent per-color ink crops (768 calls). It was followed by the invariant common-crop condition (768 calls) to isolate color; their literal/floor counts matched. Initial calls are not counted as independent validation. Fixed-crop Linux report hashes2108705d0ba079de1fe38ae4bdad152adbaf21726f80b0c171e79a0cbd5d65f2 and9f34294550caae865166b154a17472005c99b1b2db38069cb8eae481c000616c; native hashes9596c0ee57a5093b086aa6bfd4f838dc08df02f9e92e33d6d84cc96b49c883f9 andd4e61ef1c13623130f1610e1778e49626b775e15fd4167254abf13fa4439251e. Literal improvements are not whole-document success or calibrated acceptance. Different RGB hues also have different luminance, so these counts do not isolate hue alone. No color transformation, threshold, provider or model catalog changed in the application, and no new intermediate release was published.
