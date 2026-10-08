@@ -13,6 +13,7 @@ import json
 from pathlib import Path
 import shutil
 import subprocess
+import urllib.request
 import fitz
 
 
@@ -47,6 +48,13 @@ def main(args):
         root=Path(__file__).resolve().parents[2]
         spec=importlib.util.spec_from_file_location('invented_readable',root/'tools/ordered-row-e2e/generate_readable.py')
         generator=importlib.util.module_from_spec(spec);spec.loader.exec_module(generator)
+        if args.font_family=='serif':
+            # New font condition, pinned before evaluating its recognition.
+            generator.public_font.FONT_URL='https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/notoserifjp/NotoSerifJP%5Bwght%5D.ttf'
+            generator.public_font.FONT_SHA='4c6b4670b73d0843c7b2d30b9e2fbcfa596aef6fd3937f894929ab0b8d659d1e'
+            license_bytes=urllib.request.urlopen('https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/notoserifjp/OFL.txt',timeout=60).read()
+            assert sha(license_bytes)=='5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6'
+            (args.owned/'serif-OFL.txt').write_bytes(license_bytes)
         if args.printed_ell_control:
             # A separate deliberately noncanonical glyph control. Neither the
             # class list nor its expected answers enters the recognition child.
@@ -120,6 +128,8 @@ def main(args):
                 rows.append(dict(case=case['case'],**original,**result,expected=value,exact=result['text']==value))
         report=dict(recipe='physical-class-column-English-v5-original-pixels-v1',inputRegion='all nonwhite pixels plus fixed4px margin' if args.ink_crop else 'physical cell interior',
             printedEllControl=args.printed_ell_control,
+            fontFamily=args.font_family,publicFontSHA256=generator.public_font.FONT_SHA,
+            fontLicenseSHA256='5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6' if args.font_family=='serif' else generator.public_font.LICENSE_SHA,
             calls=18,correct=sum(r['exact'] for r in rows),obligations=18,
             incorrectAboveNativeThreshold=sum(not r['exact'] and r['minimumConfidence'] is not None and r['minimumConfidence']>=.8 for r in rows),
             paddingUnsupported=sum(not r['paddingSupported'] for r in rows),
@@ -145,5 +155,6 @@ if __name__=='__main__':
     parser.add_argument('--alphabet',required=True,type=Path)
     parser.add_argument('--ink-crop',action='store_true')
     parser.add_argument('--printed-ell-control',action='store_true')
+    parser.add_argument('--font-family',choices=['sans','serif'],default='sans')
     parser.add_argument('--dotnet',default='dotnet')
     main(parser.parse_args())
