@@ -30,7 +30,9 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def run(dotnet, control_i1=False, model_file=None, dll_file=None):
+def run(dotnet, control_i1=False, model_file=None, dll_file=None, render_scale=2):
+    if render_scale not in (2, 4):
+        raise ValueError('Only the two fixed vector-render conditions are supported')
     root = Path(__file__).resolve().parents[2]
     with tempfile.TemporaryDirectory(prefix='takupoke-il-gray-comparison-') as directory:
         owned = Path(directory)
@@ -83,12 +85,15 @@ def run(dotnet, control_i1=False, model_file=None, dll_file=None):
             c.drawString(3+phase, 11+phase, f'A{letter}_{digit}')
             c.save()
             with fitz.open(pdf) as document:
-                image = document[0].get_pixmap(matrix=fitz.Matrix(2, 2), alpha=False)
+                image = document[0].get_pixmap(matrix=fitz.Matrix(render_scale, render_scale), alpha=False)
                 original = image.samples
                 points = [(i//3 % image.width, i//3//image.width) for i in range(0, len(original), 3)
                           if min(original[i:i+3]) < 255]
-                x1, x2 = max(0, min(x for x, _ in points)-4), min(image.width, max(x for x, _ in points)+5)
-                y1, y2 = max(0, min(y for _, y in points)-4), min(image.height, max(y for _, y in points)+5)
+                # Keep the same two-point physical margin at both scales.
+                # Re-render the original vector PDF, never enlarge a bitmap.
+                margin = 2 * render_scale
+                x1, x2 = max(0, min(x for x, _ in points)-margin), min(image.width, max(x for x, _ in points)+margin+1)
+                y1, y2 = max(0, min(y for _, y in points)-margin), min(image.height, max(y for _, y in points)+margin+1)
                 w, h = x2-x1, y2-y1
                 rgb = b''.join(original[(y*image.width+x1)*3:(y*image.width+x2)*3] for y in range(y1, y2))
                 bgra = bytearray(w*h*4)
@@ -136,8 +141,9 @@ def run(dotnet, control_i1=False, model_file=None, dll_file=None):
                         literalExact=sum(r['exact'] for r in selected),
                         incorrectAtOrAbove08=sum(not r['exact'] and r['output']['minimumConfidence'] is not None and r['output']['minimumConfidence'] >= .8 for r in selected),
                         correctBelow08=sum(r['exact'] and (r['output']['minimumConfidence'] is None or r['output']['minimumConfidence'] < .8) for r in selected)))
-        return dict(recipe='fixed-2x-source-grayscale-I1-control-v1' if control_i1 else 'fixed-2x-source-grayscale-paired-v1', modelBytes=7848423, modelSHA256=MODEL_SHA,
-            fontSHA256=font_sha, calls=count*2, newIndependentAccuracyItems=count if control_i1 else 0, qualified=False, adoptionCalls=0,
+        return dict(recipe=f'fixed-{render_scale}x-source-grayscale-I1-control-v1' if control_i1 else f'fixed-{render_scale}x-source-grayscale-paired-v1', modelBytes=7848423, modelSHA256=MODEL_SHA,
+            fontSHA256=font_sha, renderScale=render_scale, physicalMarginPoints=2,
+            calls=count*2, newIndependentAccuracyItems=count if control_i1 and render_scale == 2 else 0, qualified=False, adoptionCalls=0,
             grayscale='before-resize .114B+.587G+.299R; floor(value+.5) uint8; replicated three channels',
             summaries=summaries, gains=sum(not a['exact'] and b['exact'] for a, b in paired),
             regressions=sum(a['exact'] and not b['exact'] for a, b in paired),
@@ -153,7 +159,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--dotnet', required=True)
     parser.add_argument('--control-i1', action='store_true')
+    parser.add_argument('--render-scale', type=int, choices=(2, 4), default=2)
     parser.add_argument('--model-file', type=Path)
     parser.add_argument('--dll-file', type=Path)
     args = parser.parse_args()
-    print('IL_GRAYSCALE_PAIRED ' + json.dumps(run(args.dotnet, args.control_i1, args.model_file, args.dll_file), sort_keys=True))
+    print('IL_GRAYSCALE_PAIRED ' + json.dumps(run(args.dotnet, args.control_i1, args.model_file, args.dll_file, args.render_scale), sort_keys=True))
