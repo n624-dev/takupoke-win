@@ -12,9 +12,10 @@
 
 ソース5cc6794の[実行37892803031](https://github.com/n624-dev/takupoke-win/actions/runs/37892803031)は、
 実Windows画面348項目、LinuxとWindowsのCore183件・Integration139件、
-全3構成のビルド、公開ツリーが成功した。残るiOS参照比較は開始待ち。
+全3構成のビルド、公開ツリー、固定iOS参照比較が成功し、全7チェックが完了した。
 画面の確認・キャンセル・二段階確定・実保存・再起動後の保持が成功した。
-この時点では全7チェック成功やWindows実機確認とは扱わない。
+方針・ツール変更49aec3bの[実行37895254661](https://github.com/n624-dev/takupoke-win/actions/runs/37895254661)も成功した。
+Windows実機への新しい版の導入や学校資料との照合は未確認。
 
 
 対応ソースとテストの検索・更新手順は[テスト一覧](test-catalog.md)を参照する。
@@ -55,7 +56,7 @@ Windows UIテストは実ファイル取得・実解析から前回正常結果�
 操作はAutomationId・実際のコントロール状態・観測した表示領域に基づく。
 固定した画面座標や許可・解析結果の注入は使用しない。
 
-Windowsでのビルド・画面操作と、同じソースのActionsは確認中。
+Windowsでのビルド・画面操作と、ソース5cc6794の全7チェックは成功した。
 Windows実機の導入・学校ファイルとの照合は未確認。
 
 初回の[Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37887800013)は、
