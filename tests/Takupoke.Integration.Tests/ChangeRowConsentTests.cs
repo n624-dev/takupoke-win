@@ -137,7 +137,8 @@ public sealed class ChangeRowConsentTests : IAsyncLifetime
             source.Digest, source.OriginalName, DateTimeOffset.UtcNow, 2032, Changes: _previous.Changes,
             RowSkipConsent: new(source.Id, source.Digest, 2032, XlsxChangeReader.Version, [3, 4]));
         await Assert.ThrowsAsync<InvalidDataException>(() => _store.SaveAnalysisAsync(lease, unapproved));
-        await using (var connection = new SqliteConnection("Data Source=" + Path.Combine(DataRoot, "school", "school.sqlite")))
+        await using (var connection = new SqliteConnection(new SqliteConnectionStringBuilder
+        { DataSource = Path.Combine(DataRoot, "school", "school.sqlite"), Pooling = false }.ToString()))
         {
             await connection.OpenAsync();
             using var command = connection.CreateCommand();

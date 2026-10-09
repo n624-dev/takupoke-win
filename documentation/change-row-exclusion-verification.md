@@ -34,3 +34,17 @@ Windows UIテストは実ファイル取得・実解析から前回正常結果�
 
 Windowsでのビルド・画面操作と、同じソースのActionsは確認中。
 Windows実機の導入・学校ファイルとの照合は未確認。
+
+初回の[Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37887800013)は、
+x64 Debug・ReleaseとARM64 Releaseの製品ビルドが成功した。
+Windows Integrationは、テストだけで開いたSQLite接続の既定プールが削除を妨げて失敗した。
+この所有接続をPooling=falseにし、別処理の接続や保存条件は変更しない。
+UIテストは共有fixtureのSystem.IO import不足でコンパイルに失敗したため明示した。
+修正後のLinux Core 183件・Integration 139件と、Windows UIテストのクロスビルドが成功した。
+クロスビルドは画面操作の成功に数えない。
+
+691行の画面テスト本体を起動・一般操作・認証・インストーラー・fixture・時間割の補助に分割した。
+本体74行、追加の行除外131行、各分割ファイルは最大221行。
+既存のRequire 38・Wait 80・Toggle 7・Invoke 63・PointerClick 2・SetWindowPos 4は移動前後で一致する。
+補助メソッドの本文・入力・待機時間・検証順序は保持する。
+新しいソースで全Actionsを再実行し、途中の成功で代用しない。実行中のActionsはキャンセルしない。
