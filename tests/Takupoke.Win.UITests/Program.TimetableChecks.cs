@@ -60,7 +60,7 @@ internal static partial class Program
             "Periodic clock updates retain the original visible display menu item.");
         Require(WaitElement("timetable-grid-scroller").GetRuntimeId().SequenceEqual(previousGrid),
             "The timetable defers its periodic redraw while the display menu is open.");
-        Toggle(option);
+        ActivateDisplayMenuOption(option, previousValue);
         Wait(() => SavedIncludesChanges(preferences) != previousValue, "The retained display menu option remains selectable and saves its value");
         // Saving can precede the native close animation. Observe closure
         // before one new open operation; never invoke again to rescue it.
@@ -71,8 +71,21 @@ internal static partial class Program
             "The selected display menu closes before opening it to restore the preference");
         Console.WriteLine("Synthetic timetable menu: open-to-restore");
         Invoke("timetable-display-options");
-        Toggle(ByName("時間割変更を反映", ControlType.MenuItem));
+        ActivateDisplayMenuOption(ByName("時間割変更を反映", ControlType.MenuItem), !previousValue);
         Wait(() => SavedIncludesChanges(preferences) == previousValue, "The menu regression restores the original display preference");
+    }
+    private static void ActivateDisplayMenuOption(AutomationElement option, bool stored)
+    {
+        var before = Checked(option);
+        Console.WriteLine($"Synthetic display option before activation: checked={before};stored={stored}");
+        Require(before == stored && option.Current.IsEnabled && !option.Current.IsOffscreen,
+            "The visible display menu agrees with its saved preference before activation.");
+        option.SetFocus();
+        Wait(() => option.Current.HasKeyboardFocus,
+            "The retained display menu item receives real keyboard focus");
+        // One Enter on the observed, focused native item. Never retry the action
+        // or set its ToggleState; the existing Click handler must persist it.
+        System.Windows.Forms.SendKeys.SendWait("{ENTER}");
     }
     private static bool SavedIncludesChanges(string path)
     {

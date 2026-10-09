@@ -24,6 +24,25 @@ dev.5から別フォルダーへの更新は279検証後、時間割表示メニ
 
 ## ActionsのNode.js 24移行
 
+2b08bbaの通常CI37919126061は全7ジョブとUI380検証が成功した。
+配布37919127539も全7事前検査と作成が成功し、最初の新規導入はUI380検証が成功した。
+二つ目の移動後の導入は、277検証後、16秒の時計更新中のメニュー保持を通過したが、
+Toggle一回後に変更が保存されるという30秒の条件で失敗した。
+色の実選択・候補の閉鎖は両状態で成功した。新しい行除外検証への到達とは分ける。
+公開は実行せず、所有作業領域の削除は成功した。
+
+Microsoftの公開ToggleMenuFlyoutItemAutomationPeer実装ではToggleからInvokeへ進み、
+その後Clickを発生させるため、Toggleが一般にClickを発生させないとは説明しない。
+今回の失敗の配送先や保存失敗はまだ未確定。
+保存値と実メニューのチェック状態の一致を確認し、実項目へ一回フォーカスし、
+実キーボードフォーカスを観測した後にEnter一回で選択する比較へ変更する。
+位置の固定・チェックの設定・再操作はせず、元の保存・閉鎖・復元条件を維持する。
+この経路の動作成功も、次の実Windows検証前には未評価とする。
+LinuxのUIクロスビルドは警告0・エラー0。既存の検索一覧134ファイルと差分検査も成功した。
+
+参照：[MicrosoftのToggle peer](https://github.com/microsoft/microsoft-ui-xaml/blob/main/dxaml/xcp/dxaml/lib/ToggleMenuFlyoutItemAutomationPeer_Partial.cpp)、
+[項目のInvoke](https://github.com/microsoft/microsoft-ui-xaml/blob/main/dxaml/xcp/dxaml/lib/MenuFlyoutItem_Partial.cpp)。
+
 8636913の通常CI37916955485は全7ジョブ、実Windows UI381検証が成功した。
 同じソースの配布37916957363は全7事前検査とパッケージ作成が成功したが、
 最初の新規導入で42検証後、メインカラーの項目取得が30秒で切れた。
