@@ -25,13 +25,20 @@ public sealed partial class MainWindow
         var mainColor = PreferenceControl(new ComboBox { MinWidth = 155 });
         foreach (var key in UserPreferences.MainColors) mainColor.Items.Add(new ComboBoxItem { Content = UserPreferences.MainColorLabel(key), Tag = key });
         mainColor.SelectedIndex = UserPreferences.MainColors.ToList().IndexOf(initialMainColor);
+        var observedMainColor = initialMainColor;
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(mainColor, "main-color");
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(mainColor, "メインカラー");
         mainColor.SelectionChanged += async (_, _) =>
         {
-            if (mainColor.SelectedItem is ComboBoxItem { Tag: string value } && value != initialMainColor
-                && value != _model.Preferences.MainColor && mainColor.IsLoaded)
+            // Track actual selection changes before awaiting a serialized save.
+            // Returning to the original color remains an edit while a save or
+            // notification check is pending; initial/duplicate events are ignored.
+            if (mainColor.SelectedItem is ComboBoxItem { Tag: string value }
+                && value != observedMainColor && mainColor.IsLoaded)
+            {
+                observedMainColor = value;
                 await _model.SavePreferencesAsync(current => current with { MainColor = value });
+            }
         };
         var opening = PreferenceControl(new ComboBox { MinWidth = 155, ItemsSource = new[] { "アプリ内で開く", "既定のブラウザ" }, SelectedIndex = (int)_model.Preferences.OpeningMode });
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(opening, "link-opening-mode");

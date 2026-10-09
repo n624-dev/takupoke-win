@@ -58,6 +58,8 @@ internal static partial class Program
             Require(Find("operation-status")?.Current.Name.Contains("認証情報を確認", StringComparison.Ordinal) == true, "Progress identifies token verification rather than a stale refresh result.");
             Invoke("back-settings");
             Wait(() => Find("page-settings") is not null && Find("settings-materials")?.Current.IsEnabled == true && Find("settings-help")?.Current.IsEnabled == true, "Settings navigation stays usable during token exchange");
+            Require(SavedMainColor(Path.Combine(root, "preferences.json")) == "purple",
+                "The rapid color-return scenario starts from the previously saved purple.");
             SelectMainColor("green", Path.Combine(root, "preferences.json"));
             SelectMainColor("purple", Path.Combine(root, "preferences.json"));
             var pendingCancel = Find("cancel-operation");
