@@ -60,6 +60,9 @@ internal static partial class Program
             Wait(() => Find("page-settings") is not null && Find("settings-materials")?.Current.IsEnabled == true && Find("settings-help")?.Current.IsEnabled == true, "Settings navigation stays usable during token exchange");
             SelectMainColor("green", Path.Combine(root, "preferences.json"));
             SelectMainColor("purple", Path.Combine(root, "preferences.json"));
+            var pendingCancel = Find("cancel-operation");
+            Console.WriteLine($"Synthetic pending exchange: requests={ReadProbe(tokenRequests)}, "
+                + $"cancelExists={pendingCancel is not null}, cancelOffscreen={pendingCancel?.Current.IsOffscreen}");
             Require(ReadProbe(tokenRequests) == "2" && Visible("cancel-operation"), "Local preferences save without completing or canceling the pending token exchange.");
             Invoke("settings-help"); Wait(() => Find("page-help") is not null, "help is readable during token exchange");
             Invoke("back-settings"); Invoke("settings-account");

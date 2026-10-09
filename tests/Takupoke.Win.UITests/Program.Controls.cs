@@ -103,23 +103,28 @@ internal static partial class Program
     }
     private static void SelectMainColor(string color, string preferences)
     {
-        Wait(() =>
-        {
-            if (SavedMainColor(preferences) == color && Find("main-color")?.Current.IsEnabled == true) return true;
-            var combo = Find("main-color");
-            if (combo?.Current.IsEnabled != true) return false;
-            if (combo.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll)) ((ScrollItemPattern)scroll).ScrollIntoView();
-            var expansion = (ExpandCollapsePattern)combo.GetCurrentPattern(ExpandCollapsePattern.Pattern);
-            try
-            {
-                if (expansion.Current.ExpandCollapseState == ExpandCollapseState.Collapsed) expansion.Expand();
-                var option = _window!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.NameProperty, UserPreferences.MainColorLabel(color)), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem)));
-                if (option?.Current.IsEnabled != true) return false;
-                ((SelectionItemPattern)option.GetCurrentPattern(SelectionItemPattern.Pattern)).Select();
-                return false; // Saving and rendering are asynchronous; verify persisted state on the next pass.
-            }
-            catch (ElementNotEnabledException) { return false; }
-        }, "main color " + color + " is selectable and saved");
+        var combo = WaitElement("main-color");
+        Wait(() => combo.Current.IsEnabled, "main color is enabled");
+        if (combo.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll))
+            ((ScrollItemPattern)scroll).ScrollIntoView();
+        var expansion = (ExpandCollapsePattern)combo.GetCurrentPattern(ExpandCollapsePattern.Pattern);
+        if (expansion.Current.ExpandCollapseState == ExpandCollapseState.Collapsed) expansion.Expand();
+        AutomationElement? option = null;
+        Wait(() => (option = _window!.FindFirst(TreeScope.Descendants, new AndCondition(
+            new PropertyCondition(AutomationElement.NameProperty, UserPreferences.MainColorLabel(color)),
+            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem))))?.Current.IsEnabled == true,
+            "main color option is available");
+        // Select once. UIA selection can leave the native popup open, obscuring
+        // other controls; complete that interaction through the standard peer.
+        ((SelectionItemPattern)option!.GetCurrentPattern(SelectionItemPattern.Pattern)).Select();
+        var popup = expansion.Current.ExpandCollapseState;
+        Console.WriteLine($"Synthetic color popup after one selection: {popup}");
+        if (popup == ExpandCollapseState.Expanded) expansion.Collapse();
+        Wait(() => SavedMainColor(preferences) == color
+            && Find("main-color") is { } current && current.Current.IsEnabled
+            && ((ExpandCollapsePattern)current.GetCurrentPattern(ExpandCollapsePattern.Pattern))
+                .Current.ExpandCollapseState == ExpandCollapseState.Collapsed,
+            "main color " + color + " is saved and its popup is closed");
     }
 
     private static string? SavedMainColor(string path)
