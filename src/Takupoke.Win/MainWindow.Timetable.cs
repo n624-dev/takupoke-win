@@ -69,7 +69,14 @@ public sealed partial class MainWindow
         var classes = IconButton(classLabel, "people", ChooseClasses, "timetable-classes"); AutomationProperties.SetName(classes, classLabel); classes.HorizontalAlignment = HorizontalAlignment.Stretch; classes.HorizontalContentAlignment = HorizontalAlignment.Left;
         var displayMenu = new MenuFlyout();
         var included = PreferenceControl(new ToggleMenuFlyoutItem { Text = "時間割変更を反映", IsChecked = _model.Preferences.IncludesChanges });
-        included.Click += async (_, _) => { var enabled = included.IsChecked; if (enabled != _model.Preferences.IncludesChanges) await _model.SavePreferencesAsync(current => current with { IncludesChanges = enabled }); };
+        included.Click += async (_, _) =>
+        {
+            var enabled = included.IsChecked;
+            RecordOfflineDisplayClick(completed: false, selected: enabled);
+            if (enabled != _model.Preferences.IncludesChanges)
+                await _model.SavePreferencesAsync(current => current with { IncludesChanges = enabled });
+            RecordOfflineDisplayClick(completed: true, selected: enabled);
+        };
         var international = PreferenceControl(new ToggleMenuFlyoutItem { Text = "留学生向け授業を表示", IsChecked = _model.Preferences.International });
         international.Click += async (_, _) => { var enabled = international.IsChecked; if (enabled != _model.Preferences.International) await _model.SavePreferencesAsync(current => current with { International = enabled }); };
         displayMenu.Items.Add(included); displayMenu.Items.Add(international);

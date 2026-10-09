@@ -66,6 +66,15 @@ internal static partial class Program
             {
                 var diagnostic = Path.Combine(args[1], "ui-error.txt");
                 if (File.Exists(diagnostic)) foreach (var line in File.ReadLines(diagnostic).Take(30)) Console.Error.WriteLine(line);
+                var clickProbe = Path.Combine(args[1], "offline-display-clicks.txt");
+                if (File.Exists(clickProbe) && new FileInfo(clickProbe).Length <= 4096)
+                {
+                    foreach (var line in File.ReadLines(clickProbe).Take(12))
+                        if (System.Text.RegularExpressions.Regex.IsMatch(line,
+                            @"^completed=[01];selected=[01];current=[01]$"))
+                            Console.Error.WriteLine("Synthetic display click: " + line);
+                }
+                else Console.Error.WriteLine("Synthetic display click: missing or oversized");
             }
             return 1;
         }

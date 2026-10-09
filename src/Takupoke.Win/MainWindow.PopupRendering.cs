@@ -71,6 +71,19 @@ public sealed partial class MainWindow
         }
     }
     private void PopupOpened(object popup, Action close) => _activePopups[popup] = close;
+    private void RecordOfflineDisplayClick(bool completed, bool selected)
+    {
+        if (!_model.OfflineTest) return;
+        // Observe the existing Click/save path only in the fake-data app.
+        // The probe contains fixed Boolean fields, never school content.
+        try
+        {
+            System.IO.File.AppendAllText(System.IO.Path.Combine(_model.Root, "offline-display-clicks.txt"),
+                $"completed={(completed ? 1 : 0)};selected={(selected ? 1 : 0)};"
+                + $"current={(_model.Preferences.IncludesChanges ? 1 : 0)}\n");
+        }
+        catch { }
+    }
     private void PopupClosed(object popup)
     {
         _activePopups.Remove(popup);

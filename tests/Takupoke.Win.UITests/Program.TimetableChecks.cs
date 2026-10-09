@@ -83,10 +83,14 @@ internal static partial class Program
         option.SetFocus();
         Wait(() => option.Current.HasKeyboardFocus,
             "The retained display menu item receives real keyboard focus");
+        Wait(() => GetWindowThreadProcessId(GetForegroundWindow(), out var owner) != 0
+            && owner == _process!.Id, "The real foreground window belongs to the tested app before Enter");
         // One Enter on the observed, focused native item. Never retry the action
         // or set its ToggleState; the existing Click handler must persist it.
         System.Windows.Forms.SendKeys.SendWait("{ENTER}");
     }
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern nint GetForegroundWindow();
     private static bool SavedIncludesChanges(string path)
     {
         using var document = JsonDocument.Parse(File.ReadAllBytes(path));
