@@ -1,0 +1,318 @@
+{
+  "code_roots": [
+    "src",
+    "scripts",
+    "tests",
+    ".github",
+    "Directory.Build.props",
+    "global.json",
+    "Takupoke.slnx"
+  ],
+  "script": "scripts/test_catalog.py",
+  "index": "documentation/test-catalog.md",
+  "document_folder": "documentation/test-catalog",
+  "groups": [
+    {
+      "id": "xlsx",
+      "title": "時間割変更・曜日・行除外・原文保持",
+      "environment": "Linux／Windows .NET（WinUI操作はWindows限定）",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        "src/Takupoke.Core/ChangeNormalizer.cs",
+        "src/Takupoke.Infrastructure/Parsing/XlsxChangeReader.Review.cs",
+        "src/Takupoke.Infrastructure/Parsing/XlsxChangeReader.cs",
+        "src/Takupoke.Infrastructure/Storage/ChangeRowSkipConsent.cs",
+        "tests/Takupoke.Core.Tests/fixtures/normalization.json",
+        "tests/shared/FictionalChangeWorkbook.cs"
+      ],
+      "checks": [
+        "tests/Takupoke.Core.Tests/ChangeNormalizerTests.cs",
+        "tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs",
+        "tests/Takupoke.Integration.Tests/ChangeRowReaderTests.cs",
+        "tests/Takupoke.Integration.Tests/XlsxChangeReaderTests.cs"
+      ]
+    },
+    {
+      "id": "material",
+      "title": "原本取得・更新・保存・監視",
+      "environment": "Linux／Windows .NET（WinUI操作はWindows限定）",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        "src/Takupoke.Infrastructure/Materials/FileSourceReader.cs",
+        "src/Takupoke.Infrastructure/Materials/MaterialCoordinator.ChangeRows.cs",
+        "src/Takupoke.Infrastructure/Materials/MaterialCoordinator.cs",
+        "src/Takupoke.Infrastructure/Materials/SourceWatcher.cs",
+        "tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj"
+      ],
+      "checks": [
+        "tests/Takupoke.Integration.Tests/FileReadResponsivenessTests.cs",
+        "tests/Takupoke.Integration.Tests/MaterialCoordinatorTests.cs",
+        "tests/Takupoke.Integration.Tests/SourceWatcherTests.cs",
+        "tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs"
+      ]
+    },
+    {
+      "id": "storage",
+      "title": "暗号化DB・原子保存・設定・年度期限",
+      "environment": "Linux／Windows .NET（WinUI操作はWindows限定）",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        "src/Takupoke.Core/SchoolDataPeriod.cs",
+        "src/Takupoke.Infrastructure/Storage/DataCodec.cs",
+        "src/Takupoke.Infrastructure/Storage/DataDirectory.cs",
+        "src/Takupoke.Infrastructure/Storage/EnvelopeCipher.cs",
+        "src/Takupoke.Infrastructure/Storage/PreferencesStore.cs",
+        "src/Takupoke.Infrastructure/Storage/PublicEventsStore.cs",
+        "src/Takupoke.Infrastructure/Storage/SchoolDataStore.cs",
+        "src/Takupoke.Infrastructure/Storage/StorageModels.cs",
+        "src/Takupoke.Infrastructure/Storage/WindowsDpapiProtector.cs"
+      ],
+      "checks": [
+        "tests/Takupoke.Core.Tests/SchoolDataPeriodTests.cs",
+        "tests/Takupoke.Integration.Tests/DataDirectoryTests.cs",
+        "tests/Takupoke.Integration.Tests/PreferencesStoreTests.cs",
+        "tests/Takupoke.Integration.Tests/SchoolDataStoreTests.cs",
+        "tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs"
+      ]
+    },
+    {
+      "id": "api",
+      "title": "API・年度別行事・更新失敗",
+      "environment": "Linux／Windows .NET（WinUI操作はWindows限定）",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        "src/Takupoke.Infrastructure/Api/ApiClient.cs",
+        "src/Takupoke.Infrastructure/Api/ApiModels.cs",
+        "src/Takupoke.Infrastructure/Api/ApiPayloads.cs",
+        "src/Takupoke.Infrastructure/Api/EventSourceChecker.cs",
+        "src/Takupoke.Infrastructure/Api/SharedDataUpdater.cs"
+      ],
+      "checks": [
+        "tests/Takupoke.Integration.Tests/ApiClientTests.cs",
+        "tests/Takupoke.Integration.Tests/EventSourceCheckerTests.cs",
+        "tests/Takupoke.Integration.Tests/PublicEventsStoreTests.cs",
+        "tests/Takupoke.Integration.Tests/SharedDataUpdaterTests.cs"
+      ]
+    },
+    {
+      "id": "auth",
+      "title": "OIDC・実認証・取消",
+      "environment": "Linux／Windows .NET（WinUI操作はWindows限定）",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        "src/Takupoke.Infrastructure/Authentication/OidcClient.cs"
+      ],
+      "checks": [
+        "tests/Takupoke.Integration.Tests/OidcClientTests.cs"
+      ]
+    },
+    {
+      "id": "links",
+      "title": "リンク・検索・名称対応",
+      "environment": "Linux／Windows .NET（WinUI操作はWindows限定）",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        "src/Takupoke.Core/DisplayText.cs",
+        "src/Takupoke.Core/LinkModels.cs",
+        "src/Takupoke.Core/LinkSearch.cs",
+        "src/Takupoke.Core/MappingRules.cs"
+      ],
+      "checks": [
+        "tests/Takupoke.Core.Tests/LinkSearchTests.cs",
+        "tests/Takupoke.Core.Tests/MappingRulesTests.cs"
+      ]
+    },
+    {
+      "id": "notifications",
+      "title": "通知・差分・実配信",
+      "environment": "Linux／Windows .NET（WinUI操作はWindows限定）",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        "src/Takupoke.Core/NotificationDiff.cs",
+        "src/Takupoke.Infrastructure/Notifications/NotificationCoordinator.cs"
+      ],
+      "checks": [
+        "tests/Takupoke.Core.Tests/NotificationDiffTests.cs",
+        "tests/Takupoke.Integration.Tests/NotificationCoordinatorTests.cs"
+      ]
+    },
+    {
+      "id": "timetable",
+      "title": "時間割・授業名・時刻・日付",
+      "environment": "Linux／Windows .NET（WinUI操作はWindows限定）",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        "src/Takupoke.Core/ClassSelection.cs",
+        "src/Takupoke.Core/ScheduleModels.cs",
+        "src/Takupoke.Core/SchedulePresentation.cs",
+        "src/Takupoke.Core/ScheduleTimes.cs",
+        "src/Takupoke.Core/SchoolDate.cs",
+        "src/Takupoke.Core/TimetableEngine.cs"
+      ],
+      "checks": [
+        "tests/Takupoke.Core.Tests/SchedulePresentationTests.cs",
+        "tests/Takupoke.Core.Tests/TimetableEngineTests.cs"
+      ]
+    },
+    {
+      "id": "pdf",
+      "title": "Strict PDF・文字・罫線・試験・返却",
+      "environment": "Linux／Windows .NET（WinUI操作はWindows限定）",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        "src/Takupoke.Infrastructure/Parsing/BoundedXml.cs",
+        "src/Takupoke.Infrastructure/Parsing/BoundedZip.cs",
+        "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+        "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+        "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+        "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+        "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+        "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+        "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs"
+      ],
+      "checks": [
+        "tests/Takupoke.Integration.Tests/PdfParsingTests.cs"
+      ]
+    },
+    {
+      "id": "parity",
+      "title": "固定iOS参照・独立期待値",
+      "environment": "Linux／Windows .NET（WinUI操作はWindows限定）",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        "scripts/check-ios-parity.py",
+        "tests/Takupoke.Core.Tests/fixtures/ios-parity.json",
+        "tests/reference/ExportParity.swift",
+        "tests/reference/ios-source.json"
+      ],
+      "checks": [
+        "tests/Takupoke.Core.Tests/IosParityTests.cs",
+        "tests/Takupoke.Integration.Tests/IosPdfParityTests.cs",
+        "tests/Takupoke.Integration.Tests/SpecialPdfParityTests.cs"
+      ]
+    },
+    {
+      "id": "app-ui",
+      "title": "WinUI画面・行選択・表示領域・実操作・再起動",
+      "environment": "Windows WinUI x64。Linuxクロスビルドは操作成功に数えない",
+      "commands": [
+        "./tests/Takupoke.Win.UITests/startup-smoke.ps1"
+      ],
+      "sources": [
+        "src/Takupoke.Win/App.xaml",
+        "src/Takupoke.Win/App.xaml.cs",
+        "src/Takupoke.Win/Assets/FluentIcons.xaml",
+        "src/Takupoke.Win/Assets/FluentIcons/SOURCE.json",
+        "src/Takupoke.Win/MainWindow.Analysis.cs",
+        "src/Takupoke.Win/MainWindow.ChangePreview.cs",
+        "src/Takupoke.Win/MainWindow.Contrast.cs",
+        "src/Takupoke.Win/MainWindow.Data.cs",
+        "src/Takupoke.Win/MainWindow.Documents.cs",
+        "src/Takupoke.Win/MainWindow.Home.cs",
+        "src/Takupoke.Win/MainWindow.Links.cs",
+        "src/Takupoke.Win/MainWindow.PopupRendering.cs",
+        "src/Takupoke.Win/MainWindow.Presentation.cs",
+        "src/Takupoke.Win/MainWindow.Settings.cs",
+        "src/Takupoke.Win/MainWindow.Timetable.cs",
+        "src/Takupoke.Win/MainWindow.xaml",
+        "src/Takupoke.Win/MainWindow.xaml.cs",
+        "src/Takupoke.Win/Platform/BrowserAuthenticator.cs",
+        "src/Takupoke.Win/Platform/DesktopIntegration.cs",
+        "src/Takupoke.Win/Platform/OfflineTestNetwork.cs",
+        "src/Takupoke.Win/Platform/WindowsFileIdentity.cs",
+        "src/Takupoke.Win/Platform/WindowsNotifications.cs",
+        "src/Takupoke.Win/Program.cs",
+        "src/Takupoke.Win/ProtocolActivation.cs",
+        "src/Takupoke.Win/Takupoke.Win.csproj",
+        "src/Takupoke.Win/ViewModels/AppViewModel.cs",
+        "tests/Takupoke.Win.UITests/Program.Controls.cs",
+        "tests/Takupoke.Win.UITests/Program.Fixture.cs",
+        "tests/Takupoke.Win.UITests/Program.cs",
+        "tests/Takupoke.Win.UITests/ScreenReview.cs",
+        "tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj",
+        "tests/Takupoke.Win.UITests/startup-smoke.ps1"
+      ],
+      "checks": [
+        "tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs",
+        "tests/Takupoke.Win.UITests/Program.AuthenticationChecks.cs",
+        "tests/Takupoke.Win.UITests/Program.ChangeRows.cs",
+        "tests/Takupoke.Win.UITests/Program.InstallerChecks.cs",
+        "tests/Takupoke.Win.UITests/Program.TimetableChecks.cs",
+        "tests/Takupoke.Win.UITests/ShortcutReview.cs"
+      ]
+    },
+    {
+      "id": "release",
+      "title": "配布パッケージ・ライセンス・公開情報",
+      "environment": "Linux Python／Windows包装・導入検証",
+      "commands": [
+        "python3 -B tests/package-notices-tests.py",
+        "./scripts/test-development-package.ps1"
+      ],
+      "sources": [
+        ".github/workflows/development-package.yml",
+        "Directory.Build.props",
+        "Takupoke.slnx",
+        "global.json",
+        "scripts/build-development-package.ps1",
+        "scripts/check-public-tree.py",
+        "scripts/collect-package-notices.py",
+        "scripts/publish-development-release.ps1",
+        "scripts/test-development-package.ps1",
+        "src/Takupoke.Core/Takupoke.Core.csproj",
+        "src/Takupoke.Infrastructure/Takupoke.Infrastructure.csproj",
+        "tests/Takupoke.Core.Tests/Takupoke.Core.Tests.csproj"
+      ],
+      "checks": [
+        "tests/package-notices-tests.py"
+      ]
+    },
+    {
+      "id": "test-catalog",
+      "title": "テスト一覧・対象検索・更新強制・CI接続",
+      "environment": "Linux Python（隔離Gitリポジトリ）",
+      "commands": [
+        "python3 -B tests/test_test_catalog.py"
+      ],
+      "sources": [
+        ".github/workflows/ci.yml",
+        "scripts/test_catalog.py",
+        "scripts/test_catalog_inventory.py",
+        "tests/test-catalog.json"
+      ],
+      "checks": [
+        "tests/test_test_catalog.py"
+      ]
+    }
+  ]
+}

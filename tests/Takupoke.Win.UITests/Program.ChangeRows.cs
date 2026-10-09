@@ -114,7 +114,17 @@ internal static partial class Program
     private static System.Windows.Rect MeasuredDialogViewport(AutomationElement? scroller)
     {
         if (scroller is null) return System.Windows.Rect.Empty;
-        var match = System.Text.RegularExpressions.Regex.Match(scroller.Current.Name,
+        // The raw scroll peer can be an internal ScrollPresenter. The arranged
+        // viewport diagnostic belongs to its enclosing real ScrollViewer.
+        var viewportPeer = scroller;
+        for (var depth = 0; viewportPeer is not null && depth < 16; depth++)
+        {
+            if (viewportPeer.Current.Name.StartsWith("Synthetic dialog viewport: ",
+                StringComparison.Ordinal)) break;
+            viewportPeer = TreeWalker.RawViewWalker.GetParent(viewportPeer);
+        }
+        if (viewportPeer is null) return System.Windows.Rect.Empty;
+        var match = System.Text.RegularExpressions.Regex.Match(viewportPeer.Current.Name,
             @"^Synthetic dialog viewport: ([^,;]+),([^;]+); scale=(.+)$");
         bool Number(string text, out double value) => double.TryParse(text,
             System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture,
@@ -122,7 +132,7 @@ internal static partial class Program
         if (!match.Success || !Number(match.Groups[1].Value, out var width)
             || !Number(match.Groups[2].Value, out var height)
             || !Number(match.Groups[3].Value, out var scale)) return System.Windows.Rect.Empty;
-        var origin = scroller.Current.BoundingRectangle;
+        var origin = viewportPeer.Current.BoundingRectangle;
         if (origin.IsEmpty) return System.Windows.Rect.Empty;
         return System.Windows.Rect.Intersect(new(origin.Left, origin.Top, width * scale, height * scale),
             _window!.Current.BoundingRectangle);
@@ -177,6 +187,15 @@ internal static partial class Program
                 Console.Error.WriteLine($"Synthetic checkbox {id}: bounds={Find(id)?.Current.BoundingRectangle}, " +
                     $"offscreen={Find(id)?.Current.IsOffscreen}, scroller={scroller?.Current.ControlType}, " +
                     $"viewport={MeasuredDialogViewport(scroller)}, geometry={scroller?.Current.Name}, scrolls={scrolls}");
+            var ancestor = Find(id);
+            for (var depth = 0; ancestor is not null && depth < 12; depth++)
+            {
+                Console.Error.WriteLine($"Synthetic checkbox ancestor: id={ancestor.Current.AutomationId}, " +
+                    $"name={ancestor.Current.Name}, bounds={ancestor.Current.BoundingRectangle}");
+                ancestor = TreeWalker.RawViewWalker.GetParent(ancestor);
+                if (ancestor is not null && ancestor.GetRuntimeId().SequenceEqual(_window!.GetRuntimeId())) break;
+            }
+            Capture("change-checkbox-unresolved");
             throw;
         }
     }
