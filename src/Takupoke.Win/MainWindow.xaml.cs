@@ -245,8 +245,24 @@ public sealed partial class MainWindow : Window
         RegisterPopupTree(content);
         try
         {
+            var scroll = new ScrollViewer { Content = new Border { Child = content, Padding = new Thickness(0, 4, 12, 8) },
+                MaxHeight = 560, VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                HorizontalScrollMode = ScrollMode.Disabled, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled };
+            if (_model.OfflineTest)
+            {
+                void Measure(object? sender, object args)
+                {
+                    var width = Math.Min(scroll.ActualWidth, scroll.ViewportWidth);
+                    var height = Math.Min(scroll.ActualHeight, scroll.ViewportHeight);
+                    var geometry = FormattableString.Invariant(
+                        $"Synthetic dialog viewport: {width:R},{height:R}; scale={RootGrid.XamlRoot.RasterizationScale:R}");
+                    if (AutomationProperties.GetName(scroll) != geometry) AutomationProperties.SetName(scroll, geometry);
+                }
+                scroll.LayoutUpdated += Measure;
+                scroll.Unloaded += (_, _) => scroll.LayoutUpdated -= Measure;
+            }
             var dialog = new ContentDialog { XamlRoot = RootGrid.XamlRoot, Title = title,
-                Content = new ScrollViewer { Content = new Border { Child = content, Padding = new Thickness(0, 4, 12, 8) }, MaxHeight = 560, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollMode = ScrollMode.Disabled, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled },
+                Content = scroll,
                 PrimaryButtonText = primary, CloseButtonText = secondary ?? "", DefaultButton = ContentDialogButton.Primary };
             _activeDialog = dialog;
             configure?.Invoke(dialog);

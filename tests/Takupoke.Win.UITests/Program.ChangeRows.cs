@@ -103,32 +103,29 @@ internal static partial class Program
     {
         var control = WaitElement("change-skip-row-" + row);
         BringControlIntoView(control);
+        control = WaitElement("change-skip-row-" + row);
         Require(control.Current.IsEnabled && !Checked(control), "The actual checkbox starts unchecked.");
-        var point = ObservedCheckboxPoint(control, _window!.Current.BoundingRectangle)
-            ?? throw new InvalidOperationException("The visible checkbox has no verified native hit point.");
-        Require(SetCursorPos((int)Math.Round(point.X), (int)Math.Round(point.Y)),
-            "The pointer reaches the checkbox's observed native hit point.");
-        MouseEvent(0x0002, 0, 0, 0, 0);
-        MouseEvent(0x0004, 0, 0, 0, 0);
-        Wait(() => Checked(WaitElement("change-skip-row-" + row)), "One physical click selects row " + row);
+        // Toggle invokes the real native checkbox, including its Checked handler.
+        // It does not assign a persisted choice or bypass the dialog's confirmation.
+        Toggle(control);
+        Wait(() => Checked(WaitElement("change-skip-row-" + row)), "One native checkbox operation selects row " + row);
     }
 
-    private static System.Windows.Point? ObservedCheckboxPoint(AutomationElement control,
-        System.Windows.Rect viewport)
+    private static System.Windows.Rect MeasuredDialogViewport(AutomationElement? scroller)
     {
-        var bounds = control.Current.BoundingRectangle;
-        if (bounds.IsEmpty || !viewport.Contains(bounds) || control.Current.IsOffscreen) return null;
-        if (!control.TryGetClickablePoint(out var point) || !bounds.Contains(point))
-            point = new(bounds.Left + bounds.Width / 2, bounds.Top + bounds.Height / 2);
-        if (!viewport.Contains(point)) return null;
-        var actualHit = AutomationElement.FromPoint(point);
-        var expected = control.GetRuntimeId();
-        for (var depth = 0; actualHit is not null && depth < 16; depth++)
-        {
-            if (actualHit.GetRuntimeId().SequenceEqual(expected)) return point;
-            actualHit = TreeWalker.RawViewWalker.GetParent(actualHit);
-        }
-        return null;
+        if (scroller is null) return System.Windows.Rect.Empty;
+        var match = System.Text.RegularExpressions.Regex.Match(scroller.Current.Name,
+            @"^Synthetic dialog viewport: ([^,;]+),([^;]+); scale=(.+)$");
+        bool Number(string text, out double value) => double.TryParse(text,
+            System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture,
+            out value) && double.IsFinite(value) && value > 0;
+        if (!match.Success || !Number(match.Groups[1].Value, out var width)
+            || !Number(match.Groups[2].Value, out var height)
+            || !Number(match.Groups[3].Value, out var scale)) return System.Windows.Rect.Empty;
+        var origin = scroller.Current.BoundingRectangle;
+        if (origin.IsEmpty) return System.Windows.Rect.Empty;
+        return System.Windows.Rect.Intersect(new(origin.Left, origin.Top, width * scale, height * scale),
+            _window!.Current.BoundingRectangle);
     }
 
     private static void BringControlIntoView(AutomationElement control)
@@ -155,13 +152,9 @@ internal static partial class Program
                         && ((ScrollPattern)candidate).Current.VerticallyScrollable) break;
                     scroller = walker.GetParent(scroller);
                 }
-                var viewport = System.Windows.Rect.Intersect(
-                    scroller?.Current.BoundingRectangle ?? _window!.Current.BoundingRectangle,
-                    _window!.Current.BoundingRectangle);
-                if (ObservedCheckboxPoint(current, viewport) is not null) return true;
-                // A fully visible control with no verified native hit point needs layout settlement,
-                // not another scroll which would move it out of view.
-                if (!bounds.IsEmpty && viewport.Contains(bounds) && !current.Current.IsOffscreen) return false;
+                var viewport = MeasuredDialogViewport(scroller);
+                if (!bounds.IsEmpty && !viewport.IsEmpty && viewport.Contains(bounds)
+                    && !current.Current.IsOffscreen) return true;
                 if (bounds.IsEmpty || viewport.IsEmpty || scroller is null || scrolls >= 16) return false;
                 // Observe layout movement before requesting another scroll.
                 if (previousBounds == bounds) return false;
@@ -183,7 +176,7 @@ internal static partial class Program
             if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
                 Console.Error.WriteLine($"Synthetic checkbox {id}: bounds={Find(id)?.Current.BoundingRectangle}, " +
                     $"offscreen={Find(id)?.Current.IsOffscreen}, scroller={scroller?.Current.ControlType}, " +
-                    $"viewport={scroller?.Current.BoundingRectangle}, scrolls={scrolls}");
+                    $"viewport={MeasuredDialogViewport(scroller)}, geometry={scroller?.Current.Name}, scrolls={scrolls}");
             throw;
         }
     }
