@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応ソース・テストのSHA-256：
-`3ac3f742d53cc0030f525c8554f3f4e03f1dc51041b896ba25c3c335df4f85be`
+`ee1258f2c741bea4d077f2504bc8d848ca01e564cefeb0f98ec7f4a0765919ff`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 

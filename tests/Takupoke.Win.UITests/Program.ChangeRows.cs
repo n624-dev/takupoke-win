@@ -114,28 +114,12 @@ internal static partial class Program
     private static System.Windows.Rect MeasuredDialogViewport(AutomationElement? scroller)
     {
         if (scroller is null) return System.Windows.Rect.Empty;
-        // The raw scroll peer can be an internal ScrollPresenter. The arranged
-        // viewport diagnostic belongs to its enclosing real ScrollViewer.
-        var viewportPeer = scroller;
-        for (var depth = 0; viewportPeer is not null && depth < 16; depth++)
-        {
-            if (viewportPeer.Current.Name.StartsWith("Synthetic dialog viewport: ",
-                StringComparison.Ordinal)) break;
-            viewportPeer = TreeWalker.RawViewWalker.GetParent(viewportPeer);
-        }
-        if (viewportPeer is null) return System.Windows.Rect.Empty;
-        var match = System.Text.RegularExpressions.Regex.Match(viewportPeer.Current.Name,
-            @"^Synthetic dialog viewport: ([^,;]+),([^;]+); scale=(.+)$");
-        bool Number(string text, out double value) => double.TryParse(text,
-            System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture,
-            out value) && double.IsFinite(value) && value > 0;
-        if (!match.Success || !Number(match.Groups[1].Value, out var width)
-            || !Number(match.Groups[2].Value, out var height)
-            || !Number(match.Groups[3].Value, out var scale)) return System.Windows.Rect.Empty;
-        var origin = viewportPeer.Current.BoundingRectangle;
-        if (origin.IsEmpty) return System.Windows.Rect.Empty;
-        return System.Windows.Rect.Intersect(new(origin.Left, origin.Top, width * scale, height * scale),
-            _window!.Current.BoundingRectangle);
+        // Use the nearest actual scrolling peer, not the outer ContentDialog
+        // container which also includes the title and action area. Its bounds
+        // were independently compared with the failed fictional screen capture.
+        var bounds = scroller.Current.BoundingRectangle;
+        if (bounds.IsEmpty) return System.Windows.Rect.Empty;
+        return System.Windows.Rect.Intersect(bounds, _window!.Current.BoundingRectangle);
     }
 
     private static void BringControlIntoView(AutomationElement control)
