@@ -103,17 +103,31 @@ internal static partial class Program
     }
     private static void SelectMainColor(string color, string preferences)
     {
+        Console.WriteLine($"Synthetic color selection: requested={color}");
         var combo = WaitElement("main-color");
         Wait(() => combo.Current.IsEnabled, "main color is enabled");
         if (combo.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll))
             ((ScrollItemPattern)scroll).ScrollIntoView();
         var expansion = (ExpandCollapsePattern)combo.GetCurrentPattern(ExpandCollapsePattern.Pattern);
+        Console.WriteLine($"Synthetic color popup before opening: {expansion.Current.ExpandCollapseState}");
         if (expansion.Current.ExpandCollapseState == ExpandCollapseState.Collapsed) expansion.Expand();
         AutomationElement? option = null;
-        Wait(() => (option = _window!.FindFirst(TreeScope.Descendants, new AndCondition(
-            new PropertyCondition(AutomationElement.NameProperty, UserPreferences.MainColorLabel(color)),
-            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem))))?.Current.IsEnabled == true,
-            "main color option is available");
+        try
+        {
+            Wait(() => (option = _window!.FindFirst(TreeScope.Descendants, new AndCondition(
+                new PropertyCondition(AutomationElement.NameProperty, UserPreferences.MainColorLabel(color)),
+                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem))))
+                is { Current.IsEnabled: true, Current.IsOffscreen: false },
+                "main color option is available");
+        }
+        catch (TimeoutException)
+        {
+            var current = Find("main-color");
+            Console.Error.WriteLine("Synthetic color popup unresolved: "
+                + (current is null ? "missing" : ((ExpandCollapsePattern)current
+                    .GetCurrentPattern(ExpandCollapsePattern.Pattern)).Current.ExpandCollapseState.ToString()));
+            throw;
+        }
         // Select once. UIA selection can leave the native popup open, obscuring
         // other controls; complete that interaction through the standard peer.
         ((SelectionItemPattern)option!.GetCurrentPattern(SelectionItemPattern.Pattern)).Select();
@@ -123,8 +137,14 @@ internal static partial class Program
         Wait(() => SavedMainColor(preferences) == color
             && Find("main-color") is { } current && current.Current.IsEnabled
             && ((ExpandCollapsePattern)current.GetCurrentPattern(ExpandCollapsePattern.Pattern))
-                .Current.ExpandCollapseState == ExpandCollapseState.Collapsed,
-            "main color " + color + " is saved and its popup is closed");
+                .Current.ExpandCollapseState == ExpandCollapseState.Collapsed
+            && ((SelectionPattern)current.GetCurrentPattern(SelectionPattern.Pattern)).Current
+                .GetSelection() is [var selected] && selected.Current.Name == UserPreferences.MainColorLabel(color)
+            && !_window!.FindAll(TreeScope.Descendants,
+                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem))
+                .Cast<AutomationElement>().Any(item => !item.Current.IsOffscreen
+                    && UserPreferences.MainColors.Any(key => item.Current.Name == UserPreferences.MainColorLabel(key))),
+            "main color " + color + " is saved, displayed and its popup items are closed");
     }
 
     private static string? SavedMainColor(string path)
