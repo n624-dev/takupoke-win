@@ -15,12 +15,9 @@ Windowsでビルドせずに導入できる開発確認版です。初回正式�
 WebView2 Runtimeが未導入の場合はセットアップがMicrosoftの公式インストーラーを実行します（通信が必要です）。
 
 今回の更新
-- 学校行事の2回目以降の更新確認に失敗する不具合を修正しました。保存した弱いETagと、本文のない304応答を正しく扱います。
-- 資料の状態を「解析済み」「未解析」「取得失敗」「解析失敗」など、iOSと同じ短い表示に変更しました。古い結果が残っている場合は「前回結果あり」を示します。
-- 設定・一覧・初期設定などの重複する説明文を削除・短縮しました。
-- 時間割表は全体の高さを確保し、表内の縦スクロールを廃止しました。ページ全体と表の横方向は引き続きスクロールできます。
-- 時刻を確定できない時間割表の時刻欄は非表示にしました。授業カードの下地を不透明にし、背後の罫線がカードを透けて横切らないようにしました。
-- 定期更新時にもページの縦位置、表の横位置、授業フォーカスと操作中のメニューを保持します。
+- 時間割変更XLSXの曜日が間違った行や、曜日だけが残った行を、元の記載を確認して除外できます。確認は二段階で、ファイル内容が更新されるまで行ごとの除外を保持します。
+- 資料が更新された場合は除外の確認を無効にします。取得・解析に失敗した場合は前回正常結果を保持します。
+- 認証確認中にメインカラーを元の色へ戻した場合も、選択した色を保存するよう修正しました。
 
 未署名のためWindowsの警告や組織のポリシーで起動が制限される場合があります。
 学校アカウントでのログイン完了、実資料の解析、OneDrive同期、通知、ロック・復帰、アクセシビリティの実機確認は継続中です。
@@ -38,10 +35,16 @@ if ($assets.Count -ne 6) { throw 'Unexpected release asset count.' }
 gh release view $tag --repo $repo *> $null
 if ($LASTEXITCODE -eq 0) { throw 'This release version already exists; published assets will not be replaced.' }
 try {
-    gh release create $tag @assets --repo $repo --target $env:GITHUB_SHA --draft --prerelease --title "たくポケ $Version（開発確認版）" --notes-file $notes
+    gh release create $tag @assets --repo $repo --target $env:GITHUB_SHA --draft --prerelease=false --title "たくポケ $Version（開発確認版）" --notes-file $notes
     if ($LASTEXITCODE -ne 0) { throw 'Creating the development release failed.' }
-    gh release edit $tag --repo $repo --draft=false --prerelease --latest=false
+    gh release edit $tag --repo $repo --draft=false --prerelease=false --latest
     if ($LASTEXITCODE -ne 0) { throw 'Publishing the development release failed.' }
+    $publishedJson = gh release view $tag --repo $repo --json isDraft,isPrerelease,targetCommitish
+    if ($LASTEXITCODE -ne 0) { throw 'Reading the published release failed.' }
+    $published = $publishedJson | ConvertFrom-Json
+    if ($published.isDraft -or $published.isPrerelease -or $published.targetCommitish -ne $env:GITHUB_SHA) { throw 'The published release does not match the verified source or normal release status.' }
+    $latestTag = gh api "repos/$repo/releases/latest" --jq '.tag_name'
+    if ($LASTEXITCODE -ne 0 -or $latestTag -ne $tag) { throw 'The published release is not Latest.' }
 } catch {
     $releaseJson = gh release view $tag --repo $repo --json isDraft,body 2>$null
     if ($LASTEXITCODE -eq 0) {

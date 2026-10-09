@@ -1,5 +1,16 @@
 # 時間割変更XLSXの行除外
 
+## 通常ReleaseとLatest
+
+利用者の指定により、次のWindows公開はPre-releaseではなく通常Releaseにし、
+Latestへ設定する。開発版であることと未確認事項の記載は保持する。
+公開処理は一時draftの作成後に通常Releaseとして公開し、
+isDraft=false・isPrerelease=false・同じGITHUB_SHA・Latestのtag一致を実APIで確認する。
+既存版の差替えと公開済みReleaseの削除は行わない。
+更新内容は行除外・資料更新時の無効化・認証中の色往復修正へ書き換えた。
+対応する既存パッケージ検査を維持し、全7チェックと導入パッケージ検証を
+同じ配布ソースで再実行する。実公開の確認前には成功と記載しない。
+
 ## ActionsのNode.js 24移行
 
 3 workflowのcheckout5箇所を公式v7.0.1の
