@@ -75,6 +75,13 @@ internal static partial class Program
                             Console.Error.WriteLine("Synthetic display click: " + line);
                 }
                 else Console.Error.WriteLine("Synthetic display click: missing or oversized");
+                var lifecycleProbe = Path.Combine(args[1], "offline-display-lifecycle.txt");
+                if (File.Exists(lifecycleProbe) && new FileInfo(lifecycleProbe).Length <= 128)
+                {
+                    var line = ReadProbe(lifecycleProbe);
+                    if (System.Text.RegularExpressions.Regex.IsMatch(line, @"^pid=\d+;opened=\d+;closed=\d+$"))
+                        Console.Error.WriteLine("Synthetic display lifecycle: " + line);
+                }
             }
             return 1;
         }

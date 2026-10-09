@@ -68,6 +68,11 @@ public sealed partial class MainWindow
         var classLabel = "クラス：" + (_model.Preferences.SelectedClasses.Length == 0 ? "未選択" : string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display)));
         var classes = IconButton(classLabel, "people", ChooseClasses, "timetable-classes"); AutomationProperties.SetName(classes, classLabel); classes.HorizontalAlignment = HorizontalAlignment.Stretch; classes.HorizontalContentAlignment = HorizontalAlignment.Left;
         var displayMenu = new MenuFlyout();
+        if (_model.OfflineTest)
+        {
+            displayMenu.Opened += (_, _) => RecordOfflineDisplayLifecycle(opened: true);
+            displayMenu.Closed += (_, _) => RecordOfflineDisplayLifecycle(opened: false);
+        }
         var included = PreferenceControl(new ToggleMenuFlyoutItem { Text = "時間割変更を反映", IsChecked = _model.Preferences.IncludesChanges });
         included.Click += async (_, _) =>
         {

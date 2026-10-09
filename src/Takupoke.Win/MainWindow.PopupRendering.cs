@@ -16,6 +16,8 @@ public sealed partial class MainWindow
     private bool _popupRenderPending;
     private bool _popupRenderQueued;
     private bool _clearingPrivatePopups;
+    private int _offlineDisplayOpened;
+    private int _offlineDisplayClosed;
 
     private void RegisterPopupTree(UIElement root)
     {
@@ -71,6 +73,17 @@ public sealed partial class MainWindow
         }
     }
     private void PopupOpened(object popup, Action close) => _activePopups[popup] = close;
+    private void RecordOfflineDisplayLifecycle(bool opened)
+    {
+        if (!_model.OfflineTest) return;
+        if (opened) _offlineDisplayOpened++; else _offlineDisplayClosed++;
+        try
+        {
+            System.IO.File.WriteAllText(System.IO.Path.Combine(_model.Root, "offline-display-lifecycle.txt"),
+                $"pid={Environment.ProcessId};opened={_offlineDisplayOpened};closed={_offlineDisplayClosed}");
+        }
+        catch { }
+    }
     private void RecordOfflineDisplayClick(bool completed, bool selected)
     {
         if (!_model.OfflineTest) return;

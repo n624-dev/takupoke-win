@@ -47,7 +47,7 @@ internal static partial class Program
         Wait(() => File.Exists(clockProbe), "The isolated clock tick probe is available");
         var previousValue = SavedIncludesChanges(preferences);
         Console.WriteLine("Synthetic timetable menu: open-before-clock");
-        Invoke("timetable-display-options");
+        OpenDisplayMenu(root);
         var option = ByName("時間割変更を反映", ControlType.MenuItem);
         var menuId = option.GetRuntimeId();
         var previousGrid = WaitElement("timetable-grid-scroller").GetRuntimeId();
@@ -62,6 +62,8 @@ internal static partial class Program
             "The timetable defers its periodic redraw while the display menu is open.");
         ActivateDisplayMenuOption(option, previousValue);
         Wait(() => SavedIncludesChanges(preferences) != previousValue, "The retained display menu option remains selectable and saves its value");
+        Wait(() => DisplayMenuEvents(root) is var events && events.Opened > 0 && events.Opened == events.Closed,
+            "The real display flyout Closed event completes before the next open operation");
         // Saving can precede the native close animation. Observe closure
         // before one new open operation; never invoke again to rescue it.
         Wait(() => _window!.FindFirst(TreeScope.Descendants,
@@ -70,9 +72,32 @@ internal static partial class Program
             is not { } item || item.Current.IsOffscreen,
             "The selected display menu closes before opening it to restore the preference");
         Console.WriteLine("Synthetic timetable menu: open-to-restore");
-        Invoke("timetable-display-options");
+        OpenDisplayMenu(root);
         ActivateDisplayMenuOption(ByName("時間割変更を反映", ControlType.MenuItem), !previousValue);
         Wait(() => SavedIncludesChanges(preferences) == previousValue, "The menu regression restores the original display preference");
+    }
+    private static void OpenDisplayMenu(string root)
+    {
+        var before = (Opened: -1, Closed: -1);
+        Wait(() => (before = DisplayMenuEvents(root)) is var events
+            && events.Opened >= 0 && events.Opened == events.Closed,
+            "The previous display flyout is closed before opening it once.");
+        Invoke("timetable-display-options");
+        Wait(() => DisplayMenuEvents(root) == (before.Opened + 1, before.Closed),
+            "The real display flyout Opened event follows the one native open operation");
+    }
+    private static (int Opened, int Closed) DisplayMenuEvents(string root)
+    {
+        var path = Path.Combine(root, "offline-display-lifecycle.txt");
+        if (!File.Exists(path)) return (0, 0);
+        var text = ReadProbe(path);
+        if (text.Length == 0) return (-1, -1);
+        var match = System.Text.RegularExpressions.Regex.Match(text, @"^pid=(\d+);opened=(\d+);closed=(\d+)$");
+        if (!match.Success || !int.TryParse(match.Groups[1].Value, out var pid)) return (-1, -1);
+        // A prior process's probe cannot establish this process's readiness.
+        if (pid != _process!.Id) return (0, 0);
+        return int.TryParse(match.Groups[2].Value, out var opened)
+            && int.TryParse(match.Groups[3].Value, out var closed) ? (opened, closed) : (-1, -1);
     }
     private static void ActivateDisplayMenuOption(AutomationElement option, bool stored)
     {
