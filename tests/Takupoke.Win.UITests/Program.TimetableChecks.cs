@@ -105,14 +105,32 @@ internal static partial class Program
         Console.WriteLine($"Synthetic display option before activation: checked={before};stored={stored}");
         Require(before == stored && option.Current.IsEnabled && !option.Current.IsOffscreen,
             "The visible display menu agrees with its saved preference before activation.");
-        option.SetFocus();
-        Wait(() => option.Current.HasKeyboardFocus,
-            "The retained display menu item receives real keyboard focus");
         Wait(() => GetWindowThreadProcessId(GetForegroundWindow(), out var owner) != 0
-            && owner == _process!.Id, "The real foreground window belongs to the tested app before Enter");
-        // One Enter on the observed, focused native item. Never retry the action
+            && owner == _process!.Id, "The real foreground window belongs to the tested app before clicking");
+        var point = new System.Windows.Point();
+        Wait(() =>
+        {
+            var bounds = option.Current.BoundingRectangle;
+            if (option.Current.IsOffscreen || !option.Current.IsEnabled || bounds.IsEmpty
+                || bounds.Width <= 0 || bounds.Height <= 0 || Checked(option) != stored) return false;
+            point = new System.Windows.Point(bounds.Left + bounds.Width / 2, bounds.Top + bounds.Height / 2);
+            if (!double.IsFinite(point.X) || !double.IsFinite(point.Y)
+                || !System.Windows.Forms.SystemInformation.VirtualScreen.Contains((int)point.X, (int)point.Y)) return false;
+            var hit = AutomationElement.FromPoint(point);
+            for (var depth = 0; hit is not null && depth < 32; depth++)
+            {
+                if (hit.GetRuntimeId().SequenceEqual(option.GetRuntimeId())) return true;
+                hit = TreeWalker.RawViewWalker.GetParent(hit);
+            }
+            return false;
+        }, "The observed menu-item center hits the actual native item or its descendant");
+        Console.WriteLine($"Synthetic display click point: x={point.X};y={point.Y}");
+        if (!SetCursorPos((int)point.X, (int)point.Y))
+            throw new InvalidOperationException("The menu test pointer could not be positioned.");
+        // One physical click at the observed native item. Never retry the action
         // or set its ToggleState; the existing Click handler must persist it.
-        System.Windows.Forms.SendKeys.SendWait("{ENTER}");
+        MouseEvent(0x0002, 0, 0, 0, 0);
+        MouseEvent(0x0004, 0, 0, 0, 0);
     }
     [System.Runtime.InteropServices.DllImport("user32.dll")]
     private static extern nint GetForegroundWindow();
