@@ -238,7 +238,8 @@ public sealed partial class MainWindow : Window
     private static Border Card(UIElement content) => new() { Child = content, Padding = new Thickness(20), CornerRadius = new CornerRadius(12),
         Background = (Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"],
         BorderThickness = new Thickness(1), BorderBrush = (Brush)Application.Current.Resources["CardStrokeColorDefaultBrush"] };
-    private async Task<ContentDialogResult> Dialog(string title, UIElement content, string primary = "閉じる", string? secondary = null)
+    private async Task<ContentDialogResult> Dialog(string title, UIElement content, string primary = "閉じる",
+        string? secondary = null, Action<ContentDialog>? configure = null)
     {
         _dialogOpen = true;
         RegisterPopupTree(content);
@@ -248,6 +249,7 @@ public sealed partial class MainWindow : Window
                 Content = new ScrollViewer { Content = new Border { Child = content, Padding = new Thickness(0, 4, 12, 8) }, MaxHeight = 560, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollMode = ScrollMode.Disabled, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled },
                 PrimaryButtonText = primary, CloseButtonText = secondary ?? "", DefaultButton = ContentDialogButton.Primary };
             _activeDialog = dialog;
+            configure?.Invoke(dialog);
             return await dialog.ShowAsync();
         }
         finally { _activeDialog = null; _dialogOpen = false; Render(); }

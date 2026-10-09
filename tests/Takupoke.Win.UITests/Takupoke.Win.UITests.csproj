@@ -6,6 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../shared/FictionalChangeWorkbook.cs" Link="FictionalChangeWorkbook.cs" />
     <Compile Include="../../src/Takupoke.Win/Platform/WindowsFileIdentity.cs" Link="WindowsFileIdentity.cs" />
     <ProjectReference Include="../../src/Takupoke.Infrastructure/Takupoke.Infrastructure.csproj" />
   </ItemGroup>

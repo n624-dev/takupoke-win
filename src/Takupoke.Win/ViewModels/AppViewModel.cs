@@ -286,6 +286,12 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         return source is not null ? await _school.ReadOriginalAsync(lease, source) : throw new InvalidDataException("保存したPDFがありません。");
     }
     public Task<ChangePreview> PreviewChangesAsync() => _materials.PreviewChangesAsync(ParserYear, _session.Token);
+    public Task ApplyChangeRowSkipsAsync(ChangePreview preview, IReadOnlyList<int> rows) => RunAsync(async token =>
+    {
+        await _materials.ApplyRowSkipsAsync(preview, rows, ParserYear, token);
+        await ReloadAsync(token);
+        Status = "選んだ行を除外して読み込みました。";
+    });
     public Task ReacquireAsync(MaterialKind kind) => RunAsync(async token =>
     { ResumeFileMonitoring(); var result = await _materials.RefreshAsync(kind, ParserYear, token); await ReloadAsync(token); Status = result.Error ?? "同じ原本を確認しました。"; });
     public SavedLinks? LinksRecord { get; private set; }
