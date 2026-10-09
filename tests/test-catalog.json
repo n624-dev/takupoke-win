@@ -299,7 +299,7 @@
     },
     {
       "id": "test-catalog",
-      "title": "テスト一覧・対象検索・更新強制・CI接続",
+      "title": "テスト一覧・対象検索・宣言整合性・CI接続",
       "environment": "Linux Python（隔離Gitリポジトリ）",
       "commands": [
         "python3 -B tests/test_test_catalog.py"
@@ -308,7 +308,8 @@
         ".github/workflows/ci.yml",
         "scripts/test_catalog.py",
         "scripts/test_catalog_inventory.py",
-        "tests/test-catalog.json"
+        "tests/test-catalog.json",
+        ".github/workflows/test-tools.yml"
       ],
       "checks": [
         "tests/test_test_catalog.py"

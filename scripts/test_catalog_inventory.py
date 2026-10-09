@@ -41,16 +41,6 @@ def cases(path):
             for match in re.finditer(pattern, text)]
 
 
-def fingerprint(path, content):
-    """Ignore formatting and comments, retaining strings, identifiers and operators."""
-    text = content.decode("utf-8")
-    if Path(path).suffix == ".py":
-        return ast.dump(ast.parse(text), include_attributes=False)
-    tokens = re.findall(r'"""[\s\S]*?"""|@?"(?:\\.|""|[^"\\])*"|'
-                        r"'(?:\\.|[^'\\])*'|//[^\n]*|/\*[\s\S]*?\*/|\w+|[^\s]", text)
-    return json.dumps([token for token in tokens if not token.startswith(("//", "/*"))])
-
-
 def load(root, configuration):
     config = json.loads((root / configuration).read_text(encoding="utf-8"))
     found = paths(root)
@@ -95,12 +85,14 @@ def documents(root, config):
     folder = config["document_folder"]
     index = ["# テスト一覧と変更時の必須手順", "", "この一覧はソースの宣言と対応表から生成する。成功件数や品質合格の記録ではない。",
              "Theoryの入力展開・条件付きskip・CI実行件数は別の検証記録で確認する。",
+             "同じテストを複数分類から参照するため、分類別宣言数の合計は実行件数ではない。",
              "対応付けは変更時に確認すべきテストを示し、各ファイルの全動作を検証済みとは保証しない。", "",
              "1. 編集前に対象ファイル名・機能・ケース名で下記のsearchを実行する。",
-             "2. 対応するテストの入力・期待値・実操作を変更し、対象の検証を実行する。",
-             "3. writeで一覧を更新し、check --baseで実際の変更範囲を検査する。",
-             "4. 未登録コード、古い一覧、対応テストを変更していないコード変更はCIを失敗させる。",
-             "   コメントや整形だけのテスト編集ではコード変更の条件を満たさない。",
+             "2. 新仕様・未検出の不具合にはテストを更新する。既存ケースで十分なら不要な編集をしない。",
+             "3. 該当ケース・十分性の理由・実行環境・結果を検証記録へ残す。",
+             "4. 対応関係・宣言名・実行方法が変わったらwriteし、check --baseで対象を確認する。",
+             "   未登録コード・未登録テスト・古い一覧はCIを失敗させる。",
+             "   テスト本文の編集は一律に要求しない。十分性は変更内容と実行結果から確認する。",
              "   一覧の再生成はテスト実行の代わりにならない。", "",
              "```bash", f"python3 {config['script']} search 曜日",
              f"python3 {config['script']} write",
@@ -114,17 +106,18 @@ def documents(root, config):
         declarations = {path: cases(root / path) for path in group["checks"]}
         count = sum(len(items) for items in declarations.values())
         index.append(f"| [{group['title']}](test-catalog/{group['id']}.md) | {count} | {group['environment']} |")
-        files = sorted(group["sources"] + group["checks"])
-        digest = hashlib.sha256()
-        for path in files:
-            digest.update(path.encode() + b"\0" + (root / path).read_bytes() + b"\0")
-        lines = ["# " + group["title"], "", "対応ソース・テストのSHA-256：", "`" + digest.hexdigest() + "`", "",
+        # Hash the searchable structure, not source/test bodies or declaration
+        # line numbers. Existing sufficient tests need no mechanical edit.
+        structure = {**group, "declarations": {
+            path: [name for name, _ in items] for path, items in declarations.items()}}
+        digest = hashlib.sha256(json.dumps(structure, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+        lines = ["# " + group["title"], "", "対応関係・宣言名・実行方法のSHA-256：", "`" + digest + "`", "",
                  "環境：" + group["environment"], "", "```bash", *group["commands"], "```", "",
                  "## 変更時に確認するソース", ""]
         lines.extend(f"- [{path}](../../{path})" for path in group["sources"])
         for path, items in declarations.items():
             lines += ["", f"## [{path}](../../{path})", ""]
-            lines.extend(f"- `{name}`（宣言行 {number}）" for name, number in items)
+            lines.extend(f"- `{name}`" for name, _ in items)
         output[f"{folder}/{group['id']}.md"] = "\n".join(lines) + "\n"
     output[config["index"]] = "\n".join(index) + "\n"
     return output

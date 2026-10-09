@@ -1,7 +1,7 @@
 # 固定iOS参照・独立期待値
 
-対応ソース・テストのSHA-256：
-`c678767a6d13af61c3655375d8db2b0bb34a6148dc73d911d32672281903beba`
+対応関係・宣言名・実行方法のSHA-256：
+`565a05a1666cd84f41b3bfcb063abea5606f53562dcc44814304b3302e6d6138`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -19,17 +19,17 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Core.Tests/IosParityTests.cs](../../tests/Takupoke.Core.Tests/IosParityTests.cs)
 
-- `ScheduleMatchesOriginalSwift`（宣言行 16）
-- `XlsxNormalizationMatchesOriginalSwift`（宣言行 45）
-- `TextSearchClassesAndColorsMatchOriginalSwift`（宣言行 58）
+- `ScheduleMatchesOriginalSwift`
+- `XlsxNormalizationMatchesOriginalSwift`
+- `TextSearchClassesAndColorsMatchOriginalSwift`
 
 ## [tests/Takupoke.Integration.Tests/IosPdfParityTests.cs](../../tests/Takupoke.Integration.Tests/IosPdfParityTests.cs)
 
-- `IdenticalDrawingGeometryMatchesTheOriginalSwiftParser`（宣言行 10）
+- `IdenticalDrawingGeometryMatchesTheOriginalSwiftParser`
 
 ## [tests/Takupoke.Integration.Tests/SpecialPdfParityTests.cs](../../tests/Takupoke.Integration.Tests/SpecialPdfParityTests.cs)
 
-- `ExamMatchesIosCoveredClassesDatesTimesAndMergedLessons`（宣言行 10）
-- `ExamSeparatesSubjectTeacherAndRoom`（宣言行 20）
-- `ReturnMatchesIosSplitCellsAndDifferentTimesOnSubsequentDays`（宣言行 27）
-- `MissingSpecialTimeCannotBeReplacedByOrdinaryTime`（宣言行 44）
+- `ExamMatchesIosCoveredClassesDatesTimesAndMergedLessons`
+- `ExamSeparatesSubjectTeacherAndRoom`
+- `ReturnMatchesIosSplitCellsAndDifferentTimesOnSubsequentDays`
+- `MissingSpecialTimeCannotBeReplacedByOrdinaryTime`

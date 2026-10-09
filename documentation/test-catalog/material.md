@@ -1,7 +1,7 @@
 # 原本取得・更新・保存・監視
 
-対応ソース・テストのSHA-256：
-`585114da251eb33aace187128c4245095bf420aa472d14f54815fe3095c920dd`
+対応関係・宣言名・実行方法のSHA-256：
+`45b46d4231b7e6eefdd8f49eab8488f18ed7771bb397996e3a6d4c5d3fdcb4ed`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -20,27 +20,27 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/FileReadResponsivenessTests.cs](../../tests/Takupoke.Integration.Tests/FileReadResponsivenessTests.cs)
 
-- `OpeningAFileProviderCannotBlockTheCallingUiThread`（宣言行 20）
+- `OpeningAFileProviderCannotBlockTheCallingUiThread`
 
 ## [tests/Takupoke.Integration.Tests/MaterialCoordinatorTests.cs](../../tests/Takupoke.Integration.Tests/MaterialCoordinatorTests.cs)
 
-- `DeletedOriginalReportsUnavailableAndKeepsAcceptedDataAndSavedCopy`（宣言行 20）
-- `ChangedButInvalidXlsxRetainsPreviousAcceptedAnalysisAndBothOriginals`（宣言行 45）
-- `FirstSelectionAndOriginalSurviveRestartWhenPdfCannotBeParsed`（宣言行 69）
-- `ReplacedFileAtSamePathIsNotSilentlyAdopted`（宣言行 93）
-- `WeekdayPreviewIsReadOnlyAndRejectsDifferentYearOrSource`（宣言行 112）
-- `WrongExtensionAndExcelTemporaryFilesCannotReplaceSelection`（宣言行 138）
+- `DeletedOriginalReportsUnavailableAndKeepsAcceptedDataAndSavedCopy`
+- `ChangedButInvalidXlsxRetainsPreviousAcceptedAnalysisAndBothOriginals`
+- `FirstSelectionAndOriginalSurviveRestartWhenPdfCannotBeParsed`
+- `ReplacedFileAtSamePathIsNotSilentlyAdopted`
+- `WeekdayPreviewIsReadOnlyAndRejectsDifferentYearOrSource`
+- `WrongExtensionAndExcelTemporaryFilesCannotReplaceSelection`
 
 ## [tests/Takupoke.Integration.Tests/SourceWatcherTests.cs](../../tests/Takupoke.Integration.Tests/SourceWatcherTests.cs)
 
-- `UnavailableFolderDoesNotPreventOtherSelectedFilesFromReportingUpdates`（宣言行 8）
+- `UnavailableFolderDoesNotPreventOtherSelectedFilesFromReportingUpdates`
 
 ## [tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs](../../tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs)
 
-- `ExplicitApprovalPersistsWithAnalysisAndSurvivesRefreshReparseAndRestart`（宣言行 36）
-- `ContentChangeReselectionAndYearChangesInvalidateWithoutResurrection`（宣言行 60）
-- `OldParserConsentIsClearedEvenIfTheContentIsUnchanged`（宣言行 82）
-- `StalePreviewMissingSelectionCancellationAndReplacementCannotSave`（宣言行 94）
-- `ExcludingEveryChangeRefusesAndPreservesLastGood`（宣言行 112）
-- `StorageFailureRollsBackConsentAnalysisAndAttemptTogether`（宣言行 129）
-- `PreviousPayloadsWithoutOptionalConsentRemainReadable`（宣言行 155）
+- `ExplicitApprovalPersistsWithAnalysisAndSurvivesRefreshReparseAndRestart`
+- `ContentChangeReselectionAndYearChangesInvalidateWithoutResurrection`
+- `OldParserConsentIsClearedEvenIfTheContentIsUnchanged`
+- `StalePreviewMissingSelectionCancellationAndReplacementCannotSave`
+- `ExcludingEveryChangeRefusesAndPreservesLastGood`
+- `StorageFailureRollsBackConsentAnalysisAndAttemptTogether`
+- `PreviousPayloadsWithoutOptionalConsentRemainReadable`

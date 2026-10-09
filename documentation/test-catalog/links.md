@@ -1,7 +1,7 @@
 # リンク・検索・名称対応
 
-対応ソース・テストのSHA-256：
-`dc2ca942a0e82a6788554ea4c5144371c3f13620dbef39eecfe29795efea6577`
+対応関係・宣言名・実行方法のSHA-256：
+`ef43c9d9f6c39ac9e4a22cd47f301fead3991553f1547a506a85af37ea9febec`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -19,14 +19,14 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Core.Tests/LinkSearchTests.cs](../../tests/Takupoke.Core.Tests/LinkSearchTests.cs)
 
-- `NormalizesKanaLatinAndPunctuation`（宣言行 8）
-- `MatchesRomajiQueries`（宣言行 13）
-- `AcceptsOnlySupportedLinkTargets`（宣言行 18）
+- `NormalizesKanaLatinAndPunctuation`
+- `MatchesRomajiQueries`
+- `AcceptsOnlySupportedLinkTargets`
 
 ## [tests/Takupoke.Core.Tests/MappingRulesTests.cs](../../tests/Takupoke.Core.Tests/MappingRulesTests.cs)
 
-- `ClassSpecificRulesTakePriorityAndMetadataKeepsSeparators`（宣言行 12）
-- `ContextualTeacherRequiresMatchingYearClassAndCanonicalSubject`（宣言行 20）
-- `SeparatesOnlyConfirmedMetadata`（宣言行 27）
-- `ConflictingExplicitMetadataPreservesOriginalSubject`（宣言行 34）
-- `AmbiguousNormalizedAliasesAreNotGuessed`（宣言行 41）
+- `ClassSpecificRulesTakePriorityAndMetadataKeepsSeparators`
+- `ContextualTeacherRequiresMatchingYearClassAndCanonicalSubject`
+- `SeparatesOnlyConfirmedMetadata`
+- `ConflictingExplicitMetadataPreservesOriginalSubject`
+- `AmbiguousNormalizedAliasesAreNotGuessed`

@@ -11,7 +11,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import test_catalog as catalog
-from test_catalog_inventory import cases, fingerprint, load
+from test_catalog_inventory import cases
 
 
 class TestCatalogueTests(unittest.TestCase):
@@ -59,24 +59,24 @@ class TestCatalogueTests(unittest.TestCase):
     def update_source(self):
         self.write("src/Feature.swift", "struct Feature { let value = 2 }\n")
 
-    def test_changed_runtime_requires_corresponding_test_and_updated_document(self):
+    def test_changed_runtime_reports_existing_tests_without_forcing_edits(self):
+        before = (self.root / "docs/test-catalog/feature.md").read_text()
         self.update_source()
-        with self.assertRaisesRegex(ValueError, "Stale"):
-            self.run_mode("check", base=self.base)
+        output = self.run_mode("check", base=self.base)
+        self.assertIn("対象検索", output)
+        self.assertIn("FeatureTests.swift", output)
+        self.assertIn("fictional-check", output)
         self.run_mode("write")
-        with self.assertRaisesRegex(ValueError, "Change a corresponding test"):
-            self.run_mode("check", base=self.base)
-        self.write("tests/FeatureTests.swift", "func testRejectsUnknown() { XCTAssertEqual(2, 2) }\n")
-        self.run_mode("write")
-        self.assertIn("対象検索", self.run_mode("check", base=self.base))
+        self.assertEqual(before, (self.root / "docs/test-catalog/feature.md").read_text())
 
-    def test_comments_and_formatting_do_not_qualify_as_a_test_change(self):
+    def test_body_comments_and_line_changes_do_not_make_the_index_stale(self):
+        before = (self.root / "docs/test-catalog/feature.md").read_text()
         self.update_source()
         self.write("tests/FeatureTests.swift",
                    "// reviewed\nfunc testRejectsUnknown() {\n  XCTAssertEqual(1, 1)\n}\n")
+        self.run_mode("check", base=self.base)
         self.run_mode("write")
-        with self.assertRaisesRegex(ValueError, "Change a corresponding test"):
-            self.run_mode("check", base=self.base)
+        self.assertEqual(before, (self.root / "docs/test-catalog/feature.md").read_text())
 
     def test_new_source_without_mapping_is_rejected(self):
         self.write("src/NewFeature.swift", "struct NewFeature {}")
@@ -92,25 +92,23 @@ class TestCatalogueTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Missing registered file"):
             self.run_mode("check")
 
-    def test_deleting_tests_cannot_qualify_runtime_changes(self):
-        config, owners = load(self.root, catalog.CONFIG)
+    def test_deleting_a_registered_test_is_still_rejected(self):
         (self.root / "tests/FeatureTests.swift").unlink()
         self.update_source()
-        with contextlib.redirect_stdout(io.StringIO()), self.assertRaisesRegex(ValueError, "Change a corresponding"):
-            catalog.enforce(self.root, config, owners, self.base)
+        with self.assertRaisesRegex(ValueError, "Missing registered file"):
+            self.run_mode("check", base=self.base)
 
     def test_document_only_changes_do_not_require_test_edits(self):
         self.write("docs/verification.md", "架空の実測記録\n")
         self.run_mode("check", base=self.base)
 
-    def test_renamed_source_keeps_the_previous_test_requirement(self):
+    def test_renamed_source_reports_corresponding_tests_without_test_edits(self):
         (self.root / "src/Feature.swift").rename(self.root / "src/Renamed.swift")
         config = json.loads((self.root / catalog.CONFIG).read_text())
         config["groups"][0]["sources"][0] = "src/Renamed.swift"
         self.write(catalog.CONFIG, json.dumps(config))
         self.run_mode("write")
-        with self.assertRaisesRegex(ValueError, "Change a corresponding test"):
-            self.run_mode("check", base=self.base)
+        self.assertIn("FeatureTests.swift", self.run_mode("check", base=self.base))
 
     def test_new_corresponding_case_file_can_qualify_existing_runtime_changes(self):
         self.update_source()
@@ -149,10 +147,18 @@ class TestCatalogueTests(unittest.TestCase):
     def test_inventory_distinguishes_declarations_from_theory_expansions(self):
         self.write("example.cs", "[Theory]\n[InlineData(1)]\n[InlineData(2)]\npublic void Reject(int value) {}")
         self.assertEqual([("Reject", 1)], cases(self.root / "example.cs"))
-        self.assertEqual(fingerprint("check.py", b"def test_x():\n assert 1 == 1\n"),
-                         fingerprint("check.py", b"# comment\ndef test_x():\n    assert 1 == 1\n"))
-        self.assertNotEqual(fingerprint("check.cs", b'Assert.Equal("//a", value);'),
-                            fingerprint("check.cs", b'Assert.Equal("//b", value);'))
+
+    def test_renamed_case_and_changed_execution_command_require_index_update(self):
+        self.write("tests/FeatureTests.swift", "func testNewBoundary() {}\n")
+        with self.assertRaisesRegex(ValueError, "Stale"):
+            self.run_mode("check", base=self.base)
+        self.run_mode("write")
+        self.run_mode("check", base=self.base)
+        config = json.loads((self.root / catalog.CONFIG).read_text())
+        config["groups"][0]["commands"] = ["fictional-new-check"]
+        self.write(catalog.CONFIG, json.dumps(config))
+        with self.assertRaisesRegex(ValueError, "Stale"):
+            self.run_mode("check", base=self.base)
 
     def test_workflow_enforces_changed_code_against_event_base(self):
         workflow = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")

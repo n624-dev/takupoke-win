@@ -1,7 +1,7 @@
 # 暗号化DB・原子保存・設定・年度期限
 
-対応ソース・テストのSHA-256：
-`b858d6f8c31640ce640cfa2cddde3d658f3404ecbd605786fc3acc9db54838b9`
+対応関係・宣言名・実行方法のSHA-256：
+`53e48cda102920ea977ce9ffb0cb5e82b632f775e07d66ff017bdf961278cd42`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -24,36 +24,36 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Core.Tests/SchoolDataPeriodTests.cs](../../tests/Takupoke.Core.Tests/SchoolDataPeriodTests.cs)
 
-- `RetentionUsesJapanTimeAndSchoolYear`（宣言行 9）
-- `MidnightAtOctoberBoundaryInvalidatesPreviousPeriod`（宣言行 32）
-- `JanuaryDoesNotInvalidateOctoberPeriod`（宣言行 42）
+- `RetentionUsesJapanTimeAndSchoolYear`
+- `MidnightAtOctoberBoundaryInvalidatesPreviousPeriod`
+- `JanuaryDoesNotInvalidateOctoberPeriod`
 
 ## [tests/Takupoke.Integration.Tests/DataDirectoryTests.cs](../../tests/Takupoke.Integration.Tests/DataDirectoryTests.cs)
 
-- `MigrationPreservesKeysEncryptedDataOriginalsAndPreferences`（宣言行 24）
-- `ExistingDirectoriesAreNeverMergedOrOverwritten`（宣言行 57）
-- `FailedMoveKeepsExistingDataUsableAndDoesNotOverwriteDestination`（宣言行 69）
-- `EmptyLegacyDirectoryDoesNotHideCurrentData`（宣言行 81）
+- `MigrationPreservesKeysEncryptedDataOriginalsAndPreferences`
+- `ExistingDirectoriesAreNeverMergedOrOverwritten`
+- `FailedMoveKeepsExistingDataUsableAndDoesNotOverwriteDestination`
+- `EmptyLegacyDirectoryDoesNotHideCurrentData`
 
 ## [tests/Takupoke.Integration.Tests/PreferencesStoreTests.cs](../../tests/Takupoke.Integration.Tests/PreferencesStoreTests.cs)
 
-- `DefaultRemovesSavedColorAndPreservesOtherPersonalSettings`（宣言行 10）
+- `DefaultRemovesSavedColorAndPreservesOtherPersonalSettings`
 
 ## [tests/Takupoke.Integration.Tests/SchoolDataStoreTests.cs](../../tests/Takupoke.Integration.Tests/SchoolDataStoreTests.cs)
 
-- `SchoolPayloadIsEncryptedAndSurvivesRestart`（宣言行 30）
-- `PeriodRolloverClearsSchoolDataPreservesPreferencesAndRejectsOldLease`（宣言行 43）
-- `LockPreventsReadsAndOldOperationsCannotResumeAfterUnlock`（宣言行 58）
-- `ParseFailureKeepsNewSelectionAndLastSuccessfulAnalysisWithItsOwnOriginal`（宣言行 70）
-- `CorruptDatabaseDoesNotGetReinitializedWithinCurrentPeriod`（宣言行 90）
-- `CipherRejectsTamperingAndDifferentRecordPurpose`（宣言行 99）
+- `SchoolPayloadIsEncryptedAndSurvivesRestart`
+- `PeriodRolloverClearsSchoolDataPreservesPreferencesAndRejectsOldLease`
+- `LockPreventsReadsAndOldOperationsCannotResumeAfterUnlock`
+- `ParseFailureKeepsNewSelectionAndLastSuccessfulAnalysisWithItsOwnOriginal`
+- `CorruptDatabaseDoesNotGetReinitializedWithinCurrentPeriod`
+- `CipherRejectsTamperingAndDifferentRecordPurpose`
 
 ## [tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs](../../tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs)
 
-- `ExplicitApprovalPersistsWithAnalysisAndSurvivesRefreshReparseAndRestart`（宣言行 36）
-- `ContentChangeReselectionAndYearChangesInvalidateWithoutResurrection`（宣言行 60）
-- `OldParserConsentIsClearedEvenIfTheContentIsUnchanged`（宣言行 82）
-- `StalePreviewMissingSelectionCancellationAndReplacementCannotSave`（宣言行 94）
-- `ExcludingEveryChangeRefusesAndPreservesLastGood`（宣言行 112）
-- `StorageFailureRollsBackConsentAnalysisAndAttemptTogether`（宣言行 129）
-- `PreviousPayloadsWithoutOptionalConsentRemainReadable`（宣言行 155）
+- `ExplicitApprovalPersistsWithAnalysisAndSurvivesRefreshReparseAndRestart`
+- `ContentChangeReselectionAndYearChangesInvalidateWithoutResurrection`
+- `OldParserConsentIsClearedEvenIfTheContentIsUnchanged`
+- `StalePreviewMissingSelectionCancellationAndReplacementCannotSave`
+- `ExcludingEveryChangeRefusesAndPreservesLastGood`
+- `StorageFailureRollsBackConsentAnalysisAndAttemptTogether`
+- `PreviousPayloadsWithoutOptionalConsentRemainReadable`

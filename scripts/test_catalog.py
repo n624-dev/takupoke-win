@@ -1,10 +1,10 @@
-"""Search the test map, generate its documents and enforce updates against a Git base."""
+"""Search the test map, validate its declarations and report checks affected by a Git base."""
 import argparse
 from pathlib import Path
 import os
 import sys
 
-from test_catalog_inventory import cases, documents, fingerprint, git, load
+from test_catalog_inventory import cases, documents, git, load
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = "tests/test-catalog.json"
@@ -35,27 +35,11 @@ def enforce(root, config, owners, base):
                 if name in affected:
                     group = {**group, "checks": sorted(set(group["checks"] + affected[name]["checks"]))}
                 affected[name] = group
-    failures = []
     for name, group in sorted(affected.items()):
         print("対象検索:", group["title"], "=>", ", ".join(group["checks"]))
-        doc = f"{config['document_folder']}/{name}.md"
-        if doc not in modified:
-            failures.append("Update the affected catalogue: " + doc)
-        meaningful = False
-        for path in set(group["checks"]) & modified:
-            current = (root / path).read_bytes() if (root / path).exists() else None
-            if current is None:
-                continue  # Deleting tests alone cannot qualify a runtime change.
-            try:
-                old = git(root, "show", f"{base}:{path}")
-            except Exception:
-                old = b""
-            if fingerprint(path, current) != fingerprint(path, old):
-                meaningful = True
-        if not meaningful:
-            failures.append("Change a corresponding test, not only comments/formatting: " + name)
-    if failures:
-        raise ValueError("\n".join(failures))
+        print("対象検証:", " / ".join(group["commands"]))
+    if affected:
+        print("既存ケースの十分性と実行結果を検証記録へ残す。必要な場合だけテストを更新する。")
 
 
 def run(root, mode, query=None, base=None):

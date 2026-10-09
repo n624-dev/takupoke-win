@@ -1,7 +1,7 @@
 # OIDC・実認証・取消
 
-対応ソース・テストのSHA-256：
-`f293d2f75fe69a9b901fd198bbd80c9978595e3939c210f22173e3da3e860496`
+対応関係・宣言名・実行方法のSHA-256：
+`53d3b4df0e182036bbf8a87f6a9e68a1e8a6d334844efc2d909d4908051dfc78`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -16,8 +16,8 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/OidcClientTests.cs](../../tests/Takupoke.Integration.Tests/OidcClientTests.cs)
 
-- `AuthorizationUsesSeparateRandomStateNonceAndS256Verifier`（宣言行 14）
-- `CallbackRequiresCorrectProtocolPathUniqueStateAndCode`（宣言行 23）
-- `ValidEs256TokenIsVerifiedUsingJwksCoordinates`（宣言行 37）
-- `RejectsEachInvalidSecurityClaimAndSignature`（宣言行 43）
-- `ErrorCallbackMustMatchRedirectAndStateAndContainNoCode`（宣言行 81）
+- `AuthorizationUsesSeparateRandomStateNonceAndS256Verifier`
+- `CallbackRequiresCorrectProtocolPathUniqueStateAndCode`
+- `ValidEs256TokenIsVerifiedUsingJwksCoordinates`
+- `RejectsEachInvalidSecurityClaimAndSignature`
+- `ErrorCallbackMustMatchRedirectAndStateAndContainNoCode`

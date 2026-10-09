@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
-対応ソース・テストのSHA-256：
-`ee1258f2c741bea4d077f2504bc8d848ca01e564cefeb0f98ec7f4a0765919ff`
+対応関係・宣言名・実行方法のSHA-256：
+`beaa70ea20de9380a7979eead2b730f0e0de692d8c5905c1c418d260145dc833`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -46,25 +46,25 @@
 
 ## [tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs](../../tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs)
 
-- `CheckApplication`（宣言行 19）
+- `CheckApplication`
 
 ## [tests/Takupoke.Win.UITests/Program.AuthenticationChecks.cs](../../tests/Takupoke.Win.UITests/Program.AuthenticationChecks.cs)
 
-- `CheckAuthentication`（宣言行 23）
+- `CheckAuthentication`
 
 ## [tests/Takupoke.Win.UITests/Program.ChangeRows.cs](../../tests/Takupoke.Win.UITests/Program.ChangeRows.cs)
 
-- `CheckChangeRowSkips`（宣言行 13）
+- `CheckChangeRowSkips`
 
 ## [tests/Takupoke.Win.UITests/Program.InstallerChecks.cs](../../tests/Takupoke.Win.UITests/Program.InstallerChecks.cs)
 
-- `CheckInstallerDisplay`（宣言行 19）
+- `CheckInstallerDisplay`
 
 ## [tests/Takupoke.Win.UITests/Program.TimetableChecks.cs](../../tests/Takupoke.Win.UITests/Program.TimetableChecks.cs)
 
-- `CheckLessonFocusAcrossClock`（宣言行 23）
-- `CheckTimetableMenuAcrossClock`（宣言行 44）
+- `CheckLessonFocusAcrossClock`
+- `CheckTimetableMenuAcrossClock`
 
 ## [tests/Takupoke.Win.UITests/ShortcutReview.cs](../../tests/Takupoke.Win.UITests/ShortcutReview.cs)
 
-- `CheckShortcut`（宣言行 10）
+- `CheckShortcut`
