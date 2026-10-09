@@ -104,8 +104,31 @@ internal static partial class Program
         var control = WaitElement("change-skip-row-" + row);
         BringControlIntoView(control);
         Require(control.Current.IsEnabled && !Checked(control), "The actual checkbox starts unchecked.");
-        Toggle(control);
-        Wait(() => Checked(WaitElement("change-skip-row-" + row)), "One native toggle selects row " + row);
+        var point = ObservedCheckboxPoint(control, _window!.Current.BoundingRectangle)
+            ?? throw new InvalidOperationException("The visible checkbox has no verified native hit point.");
+        Require(SetCursorPos((int)Math.Round(point.X), (int)Math.Round(point.Y)),
+            "The pointer reaches the checkbox's observed native hit point.");
+        MouseEvent(0x0002, 0, 0, 0, 0);
+        MouseEvent(0x0004, 0, 0, 0, 0);
+        Wait(() => Checked(WaitElement("change-skip-row-" + row)), "One physical click selects row " + row);
+    }
+
+    private static System.Windows.Point? ObservedCheckboxPoint(AutomationElement control,
+        System.Windows.Rect viewport)
+    {
+        var bounds = control.Current.BoundingRectangle;
+        if (bounds.IsEmpty || !viewport.Contains(bounds) || control.Current.IsOffscreen) return null;
+        if (!control.TryGetClickablePoint(out var point) || !bounds.Contains(point))
+            point = new(bounds.Left + bounds.Width / 2, bounds.Top + bounds.Height / 2);
+        if (!viewport.Contains(point)) return null;
+        var actualHit = AutomationElement.FromPoint(point);
+        var expected = control.GetRuntimeId();
+        for (var depth = 0; actualHit is not null && depth < 16; depth++)
+        {
+            if (actualHit.GetRuntimeId().SequenceEqual(expected)) return point;
+            actualHit = TreeWalker.RawViewWalker.GetParent(actualHit);
+        }
+        return null;
     }
 
     private static void BringControlIntoView(AutomationElement control)
@@ -135,8 +158,10 @@ internal static partial class Program
                 var viewport = System.Windows.Rect.Intersect(
                     scroller?.Current.BoundingRectangle ?? _window!.Current.BoundingRectangle,
                     _window!.Current.BoundingRectangle);
-                if (!bounds.IsEmpty && viewport.Contains(bounds) && !current.Current.IsOffscreen
-                    && current.TryGetClickablePoint(out var point) && viewport.Contains(point)) return true;
+                if (ObservedCheckboxPoint(current, viewport) is not null) return true;
+                // A fully visible control with no verified native hit point needs layout settlement,
+                // not another scroll which would move it out of view.
+                if (!bounds.IsEmpty && viewport.Contains(bounds) && !current.Current.IsOffscreen) return false;
                 if (bounds.IsEmpty || viewport.IsEmpty || scroller is null || scrolls >= 16) return false;
                 // Observe layout movement before requesting another scroll.
                 if (previousBounds == bounds) return false;
