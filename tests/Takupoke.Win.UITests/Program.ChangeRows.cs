@@ -110,22 +110,56 @@ internal static partial class Program
 
     private static void BringControlIntoView(AutomationElement control)
     {
+        var id = control.Current.AutomationId;
         if (control.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var item))
             ((ScrollItemPattern)item).ScrollIntoView();
-        var walker = TreeWalker.ControlViewWalker;
-        var ancestor = walker.GetParent(control);
-        while (ancestor is not null && !ancestor.TryGetCurrentPattern(ScrollPattern.Pattern, out _))
-            ancestor = walker.GetParent(ancestor);
-        for (var attempt = 0; attempt < 16; attempt++)
+        var scrolls = 0;
+        System.Windows.Rect? previousBounds = null;
+        AutomationElement? scroller = null;
+        try
         {
-            var bounds = control.Current.BoundingRectangle;
-            var viewport = ancestor?.Current.BoundingRectangle ?? _window!.Current.BoundingRectangle;
-            if (!bounds.IsEmpty && bounds.Top >= viewport.Top && bounds.Bottom <= viewport.Bottom
-                && !control.Current.IsOffscreen) return;
-            if (ancestor is null) break;
-            ((ScrollPattern)ancestor.GetCurrentPattern(ScrollPattern.Pattern)).Scroll(ScrollAmount.NoAmount,
-                !bounds.IsEmpty && bounds.Top < viewport.Top ? ScrollAmount.SmallDecrement : ScrollAmount.SmallIncrement);
+            Wait(() =>
+            {
+                var current = Find(id);
+                if (current is null) return false;
+                var bounds = current.Current.BoundingRectangle;
+                // Raw view includes native scroll peers omitted from the control view.
+                var walker = TreeWalker.RawViewWalker;
+                scroller = walker.GetParent(current);
+                while (scroller is not null)
+                {
+                    if (scroller.TryGetCurrentPattern(ScrollPattern.Pattern, out var candidate)
+                        && ((ScrollPattern)candidate).Current.VerticallyScrollable) break;
+                    scroller = walker.GetParent(scroller);
+                }
+                var viewport = System.Windows.Rect.Intersect(
+                    scroller?.Current.BoundingRectangle ?? _window!.Current.BoundingRectangle,
+                    _window!.Current.BoundingRectangle);
+                if (!bounds.IsEmpty && viewport.Contains(bounds) && !current.Current.IsOffscreen
+                    && current.TryGetClickablePoint(out var point) && viewport.Contains(point)) return true;
+                if (bounds.IsEmpty || viewport.IsEmpty || scroller is null || scrolls >= 16) return false;
+                // Observe layout movement before requesting another scroll.
+                if (previousBounds == bounds) return false;
+                previousBounds = bounds;
+                var above = bounds.Top < viewport.Top;
+                var distance = above ? viewport.Top - bounds.Top : bounds.Bottom - viewport.Bottom;
+                var large = distance > viewport.Height / 2;
+                var amount = above
+                    ? large ? ScrollAmount.LargeDecrement : ScrollAmount.SmallDecrement
+                    : large ? ScrollAmount.LargeIncrement : ScrollAmount.SmallIncrement;
+                ((ScrollPattern)scroller.GetCurrentPattern(ScrollPattern.Pattern))
+                    .Scroll(ScrollAmount.NoAmount, amount);
+                scrolls++;
+                return false;
+            }, "reveal actual checkbox " + id);
         }
-        throw new InvalidOperationException("The actual checkbox could not be brought into the observed viewport.");
+        catch (TimeoutException)
+        {
+            if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
+                Console.Error.WriteLine($"Synthetic checkbox {id}: bounds={Find(id)?.Current.BoundingRectangle}, " +
+                    $"offscreen={Find(id)?.Current.IsOffscreen}, scroller={scroller?.Current.ControlType}, " +
+                    $"viewport={scroller?.Current.BoundingRectangle}, scrolls={scrolls}");
+            throw;
+        }
     }
 }
