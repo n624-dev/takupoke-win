@@ -108,22 +108,45 @@ internal static partial class Program
         Wait(() => GetWindowThreadProcessId(GetForegroundWindow(), out var owner) != 0
             && owner == _process!.Id, "The real foreground window belongs to the tested app before clicking");
         var point = new System.Windows.Point();
-        Wait(() =>
+        try
         {
-            var bounds = option.Current.BoundingRectangle;
-            if (option.Current.IsOffscreen || !option.Current.IsEnabled || bounds.IsEmpty
-                || bounds.Width <= 0 || bounds.Height <= 0 || Checked(option) != stored) return false;
-            point = new System.Windows.Point(bounds.Left + bounds.Width / 2, bounds.Top + bounds.Height / 2);
-            if (!double.IsFinite(point.X) || !double.IsFinite(point.Y)
-                || !System.Windows.Forms.SystemInformation.VirtualScreen.Contains((int)point.X, (int)point.Y)) return false;
-            var hit = AutomationElement.FromPoint(point);
-            for (var depth = 0; hit is not null && depth < 32; depth++)
+            Wait(() =>
             {
-                if (hit.GetRuntimeId().SequenceEqual(option.GetRuntimeId())) return true;
-                hit = TreeWalker.RawViewWalker.GetParent(hit);
+                var bounds = option.Current.BoundingRectangle;
+                if (option.Current.IsOffscreen || !option.Current.IsEnabled || bounds.IsEmpty
+                    || bounds.Width <= 0 || bounds.Height <= 0 || Checked(option) != stored) return false;
+                point = new System.Windows.Point(bounds.Left + bounds.Width / 2, bounds.Top + bounds.Height / 2);
+                if (!double.IsFinite(point.X) || !double.IsFinite(point.Y)
+                    || !System.Windows.Forms.SystemInformation.VirtualScreen.Contains((int)point.X, (int)point.Y)) return false;
+                var hit = AutomationElement.FromPoint(point);
+                for (var depth = 0; hit is not null && depth < 32; depth++)
+                {
+                    if (hit.GetRuntimeId().SequenceEqual(option.GetRuntimeId())) return true;
+                    hit = TreeWalker.RawViewWalker.GetParent(hit);
+                }
+                return false;
+            }, "The observed menu-item center hits the actual native item or its descendant");
+        }
+        catch (TimeoutException)
+        {
+            Console.Error.WriteLine($"Synthetic menu target: bounds={option.Current.BoundingRectangle};"
+                + $"point={point};screen={System.Windows.Forms.SystemInformation.VirtualScreen};"
+                + $"runtime={string.Join(',', option.GetRuntimeId())}");
+            if (double.IsFinite(point.X) && double.IsFinite(point.Y))
+            {
+                var hit = AutomationElement.FromPoint(point);
+                for (var depth = 0; hit is not null && depth < 12; depth++)
+                {
+                    Console.Error.WriteLine($"Synthetic menu hit: role={hit.Current.ControlType.ProgrammaticName};"
+                        + $"pid={hit.Current.ProcessId};bounds={hit.Current.BoundingRectangle};"
+                        + $"runtime={string.Join(',', hit.GetRuntimeId())}");
+                    hit = TreeWalker.RawViewWalker.GetParent(hit);
+                }
             }
-            return false;
-        }, "The observed menu-item center hits the actual native item or its descendant");
+            try { Capture("display-menu-unresolved"); }
+            catch (InvalidOperationException) { Console.Error.WriteLine("Synthetic menu capture: app outside capture bounds"); }
+            throw;
+        }
         Console.WriteLine($"Synthetic display click point: x={point.X};y={point.Y}");
         if (!SetCursorPos((int)point.X, (int)point.Y))
             throw new InvalidOperationException("The menu test pointer could not be positioned.");
