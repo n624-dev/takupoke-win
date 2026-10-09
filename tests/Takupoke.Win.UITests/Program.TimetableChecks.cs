@@ -46,6 +46,7 @@ internal static partial class Program
         var clockProbe = Path.Combine(root, "offline-clock-ticks.txt");
         Wait(() => File.Exists(clockProbe), "The isolated clock tick probe is available");
         var previousValue = SavedIncludesChanges(preferences);
+        Console.WriteLine("Synthetic timetable menu: open-before-clock");
         Invoke("timetable-display-options");
         var option = ByName("時間割変更を反映", ControlType.MenuItem);
         var menuId = option.GetRuntimeId();
@@ -61,7 +62,16 @@ internal static partial class Program
             "The timetable defers its periodic redraw while the display menu is open.");
         Toggle(option);
         Wait(() => SavedIncludesChanges(preferences) != previousValue, "The retained display menu option remains selectable and saves its value");
-        Invoke("timetable-display-options"); Toggle(ByName("時間割変更を反映", ControlType.MenuItem));
+        // Saving can precede the native close animation. Observe closure
+        // before one new open operation; never invoke again to rescue it.
+        Wait(() => _window!.FindFirst(TreeScope.Descendants,
+            new AndCondition(new PropertyCondition(AutomationElement.NameProperty, "時間割変更を反映"),
+                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.MenuItem)))
+            is not { } item || item.Current.IsOffscreen,
+            "The selected display menu closes before opening it to restore the preference");
+        Console.WriteLine("Synthetic timetable menu: open-to-restore");
+        Invoke("timetable-display-options");
+        Toggle(ByName("時間割変更を反映", ControlType.MenuItem));
         Wait(() => SavedIncludesChanges(preferences) == previousValue, "The menu regression restores the original display preference");
     }
     private static bool SavedIncludesChanges(string path)
