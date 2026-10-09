@@ -1,5 +1,31 @@
 # 時間割変更XLSXの行除外
 
+## 2026-10-09 通常Releaseの公開と匿名取得確認
+
+ソース`36ae4f84465c46e9285210fd75bde9e09fb4cdbe`の
+[通常CI](https://github.com/n624-dev/takupoke-win/actions/runs/37926053004)は全7ジョブが成功し、
+Windowsの実UIは391検証が成功した。
+[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37926424840)も全8ジョブが成功した。
+事前検査を同じソースで再実行し、導入済みx64アプリの六つの状態で
+391／392／391／391／392／392検証が成功した。
+対象は新規導入・導入先移動・再インストール・実際のdev.5から同じ／別フォルダーへの更新・
+無関係な自動起動の保護で、設定・無関係ファイル・ショートカット・アンインストールも確認した。
+一回の実クリック、観測した対象領域・PID・保存値・native閉鎖を確認し、固定画面座標は使わない。
+
+[0.1.0-dev.10436](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10436)を公開した。
+認証なしのAPIでdraft=false・prerelease=false・Latestのtag・配布元の完全SHAを照合した。
+全6添付を匿名取得し、GitHubのsize／digestとSHA256SUMS.txtを照合した。
+x64／ARM64 ZIPのmanifestは版・元コミット・構成・全ファイルのハッシュと一致した。
+学校資料やテスト用資料を配布物へ含めず、取得した所有一時領域は削除した。
+
+x64 Setupは70,782,852 bytes、SHA-256は
+`398e87e96f14345322b622f181138c404d67957b3b2ea3e83ce06e519fa3b01d`。
+ARM64 Setupは68,250,346 bytes、SHA-256は
+`0009ab76bc8b69dcfe8b19a14d9fa407a57a1f314fa9f8438c26c59b312bf982`。
+Actionsの保存用artifact・キャッシュは作っていない。配布ジョブの所有領域回収も成功した。
+Windows実機の導入・学校アカウントの取得・ARM64実機起動は未確認。
+自動検査の成功をPDF／OCR品質や実機確認へ加算しない。
+
 ## 通常ReleaseとLatest
 
 利用者の指定により、次のWindows公開はPre-releaseではなく通常Releaseにし、
