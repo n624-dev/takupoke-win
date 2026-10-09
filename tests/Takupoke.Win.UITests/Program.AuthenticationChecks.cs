@@ -62,6 +62,9 @@ internal static partial class Program
                 "The rapid color-return scenario starts from the previously saved purple.");
             SelectMainColor("green", Path.Combine(root, "preferences.json"));
             SelectMainColor("purple", Path.Combine(root, "preferences.json"));
+            Wait(() => ReadProbe(tokenRequests) == "2" && Visible("cancel-operation")
+                && Find("operation-status")?.Current.Name.Contains("認証情報を確認", StringComparison.Ordinal) == true,
+                "the pending token exchange is reflected after preference rendering");
             var pendingCancel = Find("cancel-operation");
             Console.WriteLine($"Synthetic pending exchange: requests={ReadProbe(tokenRequests)}, "
                 + $"cancelExists={pendingCancel is not null}, cancelOffscreen={pendingCancel?.Current.IsOffscreen}");
