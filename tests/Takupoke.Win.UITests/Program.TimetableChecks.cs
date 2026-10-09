@@ -119,6 +119,20 @@ internal static partial class Program
                 if (!double.IsFinite(point.X) || !double.IsFinite(point.Y)
                     || !System.Windows.Forms.SystemInformation.VirtualScreen.Contains((int)point.X, (int)point.Y)) return false;
                 var hit = AutomationElement.FromPoint(point);
+                if (hit.Current.ProcessId == _process!.Id && hit.Current.ControlType == ControlType.Pane
+                    && hit.Current.NativeWindowHandle != 0
+                    && GetAncestor((nint)hit.Current.NativeWindowHandle, 3) == _process.MainWindowHandle
+                    && hit.Current.BoundingRectangle.Contains(bounds))
+                {
+                    // WinUI's native popup bridge can be the FromPoint leaf.
+                    // Resolve the unique native menu item at this point within
+                    // our app, retaining identity, geometry and ownership checks.
+                    var items = _window!.FindAll(TreeScope.Descendants,
+                        new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.MenuItem))
+                        .Cast<AutomationElement>().Where(item => !item.Current.IsOffscreen
+                            && item.Current.IsEnabled && item.Current.BoundingRectangle.Contains(point)).ToArray();
+                    if (items is [var only] && only.GetRuntimeId().SequenceEqual(option.GetRuntimeId())) return true;
+                }
                 for (var depth = 0; hit is not null && depth < 32; depth++)
                 {
                     if (hit.GetRuntimeId().SequenceEqual(option.GetRuntimeId())) return true;
@@ -157,6 +171,8 @@ internal static partial class Program
     }
     [System.Runtime.InteropServices.DllImport("user32.dll")]
     private static extern nint GetForegroundWindow();
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern nint GetAncestor(nint window, uint flags);
     private static bool SavedIncludesChanges(string path)
     {
         using var document = JsonDocument.Parse(File.ReadAllBytes(path));
