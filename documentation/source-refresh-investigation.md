@@ -59,3 +59,23 @@ Windows専用2件はこの数字に含めない。一覧136登録、公開tree�
 新しい解析に対応する新原本の全byte一致を検証するよう、テストの責務を修正する。
 取得／解析失敗で前回正常結果と旧原本を保持する既存ケースはそのまま残す。
 changed=falseの実ID更新・解析再利用・再起動は成功した。公開ジョブは実行されていない。
+
+## 公開・配布物の確認完了
+
+ソース20d990f238fa536b1683b0e3d62ec6b28f432e5cの通常CI38061116648と
+配布検証38061117361・試行1は全て成功した。配布検証の7検査と公開ジョブの計8ジョブを確認した。
+Windows Core183件・Integration145件（実ファイルIDの2件を含む）は失敗0。
+Linux Core183件・Integration143件は失敗0で、Windows専用2件を加算していない。
+導入・移動・再導入・dev.5から同じ／別フォルダーへの更新・起動移行の実UIは
+406／406／407／406／406／406検証が成功し、ショートカット・アンインストールも確認した。
+ARM64はビルドと実行形式を検証し、ARM64実機の起動とは区別する。
+
+[0.1.0-dev.10438](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10438)は
+通常Releaseとして公開され、Latestに一致した。target_commitishも上記ソースに一致した。
+Setup.exe2種・ZIP2種・INSTALL.txt・SHA256SUMS.txtの6添付を認証なしで取得し、
+全サイズと公開チェックサム5件・API側digest6件の一致を確認した。バイナリは保存せずストリームで検証した。
+x64 Setupは70,782,093 bytes、SHA-256
+`680060aa304a3c9e6ef14bfabbfaa6824623bf90cc81e8a860ad3cd8369a0c90`。
+利用者のOneDrive更新操作・Windows25H2実機での確認は未実施であり、自動テストの成功とは区別する。
+
+[全検証・公開](https://github.com/n624-dev/takupoke-win/actions/runs/38061117361)
