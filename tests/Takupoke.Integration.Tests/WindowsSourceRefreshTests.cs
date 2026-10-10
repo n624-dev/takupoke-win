@@ -58,7 +58,7 @@ public sealed class WindowsSourceRefreshTests
                 {
                     Assert.NotEqual(selected.Id, refreshed.Id);
                     Assert.Equal("架空更新科目D", Assert.Single(analysis.Changes!).AfterSubject);
-                    Assert.Equal(original, await store.ReadOriginalAsync(lease, accepted.OriginalId));
+                    Assert.Equal(updated, await store.ReadOriginalAsync(lease, analysis.OriginalId));
                 }
                 else
                 {
