@@ -60,4 +60,14 @@ public static class FictionalChangeWorkbook
         sheet.Descendants(Namespace + "row").Where(row => (string?)row.Attribute("r") is "3" or "4")
             .ToArray().ToList().ForEach(row => row.Remove());
     });
+
+    public static byte[] WithWeekdayTail() => Create(sheet =>
+    {
+        var data = sheet.Descendants(Namespace + "sheetData").Single();
+        foreach (var row in Enumerable.Range(200, 101))
+            data.Add(new XElement(Namespace + "row", new XAttribute("r", row),
+                new XElement(Namespace + "c", new XAttribute("r", $"D{row}"),
+                    new XAttribute("t", "inlineStr"),
+                    new XElement(Namespace + "is", new XElement(Namespace + "t", "土")))));
+    });
 }

@@ -21,29 +21,35 @@ internal static partial class Program
             "Exclusion requires an explicit row selection.");
         SelectChangeRow(3);
         SelectChangeRow(4);
+        SelectChangeGroup();
         Invoke(ByName("キャンセル"));
         Require(!ReadChangeStateAsync(root).GetAwaiter().GetResult(),
             "Cancelling the preview leaves the previous result and no consent.");
 
         OpenChangePreview();
         Require(!Checked(WaitElement("change-skip-row-3"))
-            && !Checked(WaitElement("change-skip-row-4")),
+            && !Checked(WaitElement("change-skip-row-4"))
+            && !Checked(WaitElement("change-skip-group-200-300")),
             "Cancelled choices are not silently restored.");
         SelectChangeRow(3);
         SelectChangeRow(4);
+        SelectChangeGroup();
         Invoke(ByName("選んだ行を除外"));
         Require(!ReadChangeStateAsync(root).GetAwaiter().GetResult(),
             "Choosing rows alone does not save an analysis.");
+        Require(ByName("除外して読み込む").Current.IsEnabled,
+            "The final confirmation appears before any analysis is saved.");
         Invoke(ByName("除外して読み込む"));
-        Wait(() => Find("change-skipped-count")?.Current.Name.Contains("2行を除外中") == true,
+        Wait(() => Find("change-skipped-count")?.Current.Name.Contains("103行を除外中") == true,
             "The material details show the accepted exclusion count.");
         Require(ReadChangeStateAsync(root).GetAwaiter().GetResult(),
-            "The real parser atomically saved rows 3 and 4 with only A and C.");
+            "The real parser atomically saved 103 physical row IDs with only A and C.");
 
         Stop();
         Start(executable);
         OpenChangeDetails();
-        Wait(() => Find("change-skipped-count")?.Current.Name.Contains("3、4") == true,
+        Wait(() => Find("change-skipped-count")?.Current.Name
+            .Contains("103行を除外中（3〜4行目、200〜300行目）") == true,
             "The actual row exclusion survives application restart.");
         Require(ReadChangeStateAsync(root).GetAwaiter().GetResult(),
             "Restart preserves the saved analysis and matching consent.");
@@ -59,7 +65,7 @@ internal static partial class Program
         var coordinator = new MaterialCoordinator(store, new(new WindowsFileIdentity()));
         Require((await coordinator.SelectAsync(MaterialKind.Changes, path, 2032)).Parsed,
             "The actual file reader and parser accept the independent valid fixture.");
-        await File.WriteAllBytesAsync(path, FictionalChangeWorkbook.Create());
+        await File.WriteAllBytesAsync(path, FictionalChangeWorkbook.WithWeekdayTail());
         Require(!(await coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed,
             "The updated invalid file retains the previous valid result.");
     }
@@ -79,7 +85,7 @@ internal static partial class Program
                 "Without consent the previous normal result is retained.");
             return false;
         }
-        return source.RowSkipConsent.Rows.SequenceEqual(new[] { 3, 4 })
+        return source.RowSkipConsent.Rows.SequenceEqual(new[] { 3, 4 }.Concat(Enumerable.Range(200, 101)))
             && source.Id == analysis.OriginalId
             && source.RowSkipConsent.SameAs(analysis.RowSkipConsent);
     }
@@ -109,6 +115,19 @@ internal static partial class Program
         // It does not assign a persisted choice or bypass the dialog's confirmation.
         Toggle(control);
         Wait(() => Checked(WaitElement("change-skip-row-" + row)), "One native checkbox operation selects row " + row);
+    }
+
+    private static void SelectChangeGroup()
+    {
+        const string id = "change-skip-group-200-300";
+        var control = WaitElement(id);
+        BringControlIntoView(control);
+        control = WaitElement(id);
+        Require(control.Current.IsEnabled && !Checked(control)
+            && control.Current.Name == "この101行をまとめて除外する",
+            "The real grouped checkbox represents exactly rows 200 through 300 and starts unchecked.");
+        Toggle(control);
+        Wait(() => Checked(WaitElement(id)), "One native checkbox operation selects the full group.");
     }
 
     private static System.Windows.Rect MeasuredDialogViewport(AutomationElement? scroller)

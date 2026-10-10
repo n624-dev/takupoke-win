@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
+using Takupoke.Infrastructure.Parsing;
 
 namespace Takupoke.Win;
 
@@ -19,16 +20,26 @@ public sealed partial class MainWindow
                 ? "元の記載を確認し、除外する行を選んでください。ファイルの内容が更新されるまで適用します。"
                 : "閲覧のみです。正常結果の保存や時間割への反映は行いません。"));
             var controls = new List<CheckBox>();
-            foreach (var warning in preview.Warnings) panel.Children.Add(Text(warning.Message));
-            foreach (var row in preview.ReviewRows)
+            var groups = preview.ReviewGroups;
+            var warningsByRow = preview.Warnings.ToLookup(warning => warning.Row);
+            var groupedRows = preview.ReviewRows.Select(row => row.Row).ToHashSet();
+            foreach (var warning in preview.Warnings.Where(warning => !groupedRows.Contains(warning.Row ?? 0)))
+                panel.Children.Add(Text(warning.Message));
+            foreach (var group in groups)
             {
-                var fields = Panel(SettingsSectionTitle($"{row.Row}行目の元の記載"));
+                var row = group.Rows[0];
+                var fields = Panel(SettingsSectionTitle($"{group.RangeLabel}の元の記載"));
+                if (group.Rows.Count > 1)
+                    fields.Children.Add(Text($"{group.Rows.Count}行とも、曜日以外の値はありません。"));
+                else foreach (var warning in warningsByRow[row.Row])
+                    fields.Children.Add(Text(warning.Message));
                 foreach (var field in row.Fields) fields.Children.Add(DataField(field.Name, field.Value));
                 if (preview.CanSkipRows)
                 {
-                    var choice = new CheckBox { Content = "この行を除外する", Tag = row.Row,
-                        IsChecked = selected.Contains(row.Row) };
-                    AutomationProperties.SetAutomationId(choice, "change-skip-row-" + row.Row);
+                    var choice = new CheckBox { Content = group.Rows.Count == 1 ? "この行を除外する"
+                            : $"この{group.Rows.Count}行をまとめて除外する", Tag = group.RowIds,
+                        IsChecked = group.RowIds.All(selected.Contains) };
+                    AutomationProperties.SetAutomationId(choice, group.AutomationId);
                     controls.Add(choice);
                     fields.Children.Add(choice);
                 }
@@ -48,8 +59,8 @@ public sealed partial class MainWindow
                     void Changed(object sender, RoutedEventArgs args)
                     {
                         var choice = (CheckBox)sender;
-                        if (choice.IsChecked == true) selected.Add((int)choice.Tag);
-                        else selected.Remove((int)choice.Tag);
+                        if (choice.IsChecked == true) selected.UnionWith((int[])choice.Tag);
+                        else selected.ExceptWith((int[])choice.Tag);
                         dialog.IsPrimaryButtonEnabled = selected.Count > 0;
                     }
                     foreach (var control in controls)
@@ -59,7 +70,7 @@ public sealed partial class MainWindow
             if (!preview.CanSkipRows || result != ContentDialogResult.Primary
                 || epoch != _model.PrivateEpoch || _model.Locked) return;
             if (await Dialog("選んだ行を除外して読み込む",
-                Text($"{selected.Count}行を時間割変更から除外します。除外する行：{string.Join("、", selected)}。ファイルの内容が更新されるまで適用します。"),
+                Text($"{selected.Count}行を時間割変更から除外します。除外する行：{ChangeReviewGroup.DescribeRanges(selected)}。ファイルの内容が更新されるまで適用します。"),
                 "除外して読み込む", "キャンセル") != ContentDialogResult.Primary) continue;
             if (epoch != _model.PrivateEpoch || _model.Locked) return;
             await _model.ApplyChangeRowSkipsAsync(preview, selected.ToArray());

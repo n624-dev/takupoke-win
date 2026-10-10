@@ -5,6 +5,7 @@ using Takupoke.Core;
 using Takupoke.Infrastructure.Api;
 using Takupoke.Infrastructure.Materials;
 using Takupoke.Infrastructure.Parsing;
+using Takupoke.Infrastructure.Parsing;
 using Takupoke.Win.ViewModels;
 
 namespace Takupoke.Win;
@@ -71,7 +72,7 @@ public sealed partial class MainWindow
             && consent.ValidFor(source, analysis.SchoolYear, MaterialCoordinator.ParserVersion(kind))
             && consent.SameAs(analysis.RowSkipConsent))
         {
-            var excluded = Text($"{consent.Rows.Count}行を除外中（{string.Join("、", consent.Rows)}行目）");
+            var excluded = Text($"{consent.Rows.Count}行を除外中（{ChangeReviewGroup.DescribeRanges(consent.Rows)}）");
             AutomationProperties.SetAutomationId(excluded, "change-skipped-count");
             results.Children.Add(excluded);
         }

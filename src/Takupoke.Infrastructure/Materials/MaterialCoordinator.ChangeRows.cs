@@ -9,6 +9,7 @@ public sealed record ChangePreview(string SourceId, string Digest, int SchoolYea
     IReadOnlyList<ScheduleChange> Changes, IReadOnlyList<ChangeParseException> Warnings,
     IReadOnlyList<ChangeReviewRow> ReviewRows)
 {
+    public IReadOnlyList<ChangeReviewGroup> ReviewGroups => ChangeReviewGroup.Create(ReviewRows, Warnings);
     public bool CanSkipRows => ReviewRows.Count > 0 && Warnings.All(warning =>
         warning.Code is ChangeErrorCode.WeekdayMismatch or ChangeErrorCode.WeekdayOnly);
 }

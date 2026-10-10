@@ -11,6 +11,47 @@ public sealed class ChangeRowReaderTests
     private static readonly XNamespace Ns = FictionalChangeWorkbook.Namespace;
 
     [Fact]
+    public void IdenticalWeekdayTailGroupsPhysicalRowsButStillRequiresFullExplicitConsent()
+    {
+        var bytes = FictionalChangeWorkbook.WithWeekdayTail();
+        var preview = XlsxChangeReader.ReadForPreview(bytes, 2032);
+        var groups = ChangeReviewGroup.Create(preview.ReviewRows, preview.Warnings);
+        Assert.Equal(3, groups.Count);
+        Assert.Equal([3, 4], groups.Take(2).Select(group => group.Rows.Single().Row));
+        Assert.Equal(Enumerable.Range(200, 101), groups[2].RowIds);
+        Assert.Equal("200〜300行目", groups[2].RangeLabel);
+        Assert.Equal("change-skip-group-200-300", groups[2].AutomationId);
+        Assert.Equal(preview.ReviewRows, groups.SelectMany(group => group.Rows));
+        Reject(ChangeErrorCode.WeekdayOnly, bytes, [3, 4]);
+        Reject(ChangeErrorCode.WeekdayOnly, bytes, new[] { 3, 4 }.Concat(Enumerable.Range(200, 100)).ToArray());
+        var changes = XlsxChangeReader.Parse(bytes, 2032,
+            skippingRows: new[] { 3, 4 }.Concat(groups[2].RowIds).ToHashSet());
+        Assert.Equal(["架空科目A", "架空科目C"], changes.Select(change => change.AfterSubject));
+        Assert.Equal(["2032-07-10", "2032-07-12"], changes.Select(change => change.ChangeDate));
+    }
+
+    [Fact]
+    public void GroupingPreservesGapsDifferentWeekdaysAndPopulatedRows()
+    {
+        ChangeReviewRow Row(int id, string weekday, string other = "") => new(id,
+            [new("曜日", weekday), new("架空の他の欄", other)]);
+        var rows = new[] { Row(10, "土"), Row(11, "土"), Row(13, "土"), Row(14, "日"),
+            Row(15, "日", "架空値"), Row(16, "日"), Row(17, "日") };
+        var warnings = rows.Select(row => new ChangeParseException(ChangeErrorCode.WeekdayOnly, row.Row)).ToArray();
+        var groups = ChangeReviewGroup.Create(rows, warnings);
+        Assert.Equal(5, groups.Count);
+        Assert.Equal(rows, groups.SelectMany(group => group.Rows));
+        Assert.Equal([10, 11], groups[0].RowIds);
+        Assert.Equal([16, 17], groups[4].RowIds);
+        Assert.Equal(rows.Length, ChangeReviewGroup.Create(rows, rows.Select(row =>
+            new ChangeParseException(ChangeErrorCode.WeekdayMismatch, row.Row)).ToArray()).Count);
+        Assert.Equal("200〜201行目、203行目、300行目", ChangeReviewGroup.DescribeRanges([300, 200, 201, 203, 203]));
+        Assert.Equal("", ChangeReviewGroup.DescribeRanges([]));
+        Assert.Equal(2, ChangeReviewGroup.Create([Row(int.MaxValue, "土"), Row(int.MinValue, "土")],
+            [new(ChangeErrorCode.WeekdayOnly, int.MaxValue), new(ChangeErrorCode.WeekdayOnly, int.MinValue)]).Count);
+    }
+
+    [Fact]
     public void ExplicitSelectionPreservesOriginalFieldsAndExcludesWholeRows()
     {
         var bytes = FictionalChangeWorkbook.Create(sheet =>

@@ -22,6 +22,7 @@
       ],
       "sources": [
         "src/Takupoke.Core/ChangeNormalizer.cs",
+        "src/Takupoke.Infrastructure/Parsing/ChangeReviewGroup.cs",
         "src/Takupoke.Infrastructure/Parsing/XlsxChangeReader.Review.cs",
         "src/Takupoke.Infrastructure/Parsing/XlsxChangeReader.cs",
         "src/Takupoke.Infrastructure/Storage/ChangeRowSkipConsent.cs",

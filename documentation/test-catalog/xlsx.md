@@ -1,7 +1,7 @@
 # 時間割変更・曜日・行除外・原文保持
 
 対応関係・宣言名・実行方法のSHA-256：
-`fc048b9a90c638d517e6dbc68068adf5a5692589fc39c8c2fd59e0af4737c912`
+`d68467f36bfb5651eab04a3b9769317b43840619042de6400b46ed5e1b7537e5`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -13,6 +13,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 ## 変更時に確認するソース
 
 - [src/Takupoke.Core/ChangeNormalizer.cs](../../src/Takupoke.Core/ChangeNormalizer.cs)
+- [src/Takupoke.Infrastructure/Parsing/ChangeReviewGroup.cs](../../src/Takupoke.Infrastructure/Parsing/ChangeReviewGroup.cs)
 - [src/Takupoke.Infrastructure/Parsing/XlsxChangeReader.Review.cs](../../src/Takupoke.Infrastructure/Parsing/XlsxChangeReader.Review.cs)
 - [src/Takupoke.Infrastructure/Parsing/XlsxChangeReader.cs](../../src/Takupoke.Infrastructure/Parsing/XlsxChangeReader.cs)
 - [src/Takupoke.Infrastructure/Storage/ChangeRowSkipConsent.cs](../../src/Takupoke.Infrastructure/Storage/ChangeRowSkipConsent.cs)
@@ -39,6 +40,8 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/ChangeRowReaderTests.cs](../../tests/Takupoke.Integration.Tests/ChangeRowReaderTests.cs)
 
+- `IdenticalWeekdayTailGroupsPhysicalRowsButStillRequiresFullExplicitConsent`
+- `GroupingPreservesGapsDifferentWeekdaysAndPopulatedRows`
 - `ExplicitSelectionPreservesOriginalFieldsAndExcludesWholeRows`
 - `WeekdayOnlyFormulaIsInspectedWithoutEvaluationOrAutomaticSkipping`
 - `ExcludedPopulatedRowsStillRequireValidDateYearAndClasses`
