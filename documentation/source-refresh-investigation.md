@@ -1,0 +1,25 @@
+# 選択済み資料の更新調査
+
+## 2026-10-10 ファイル更新で再選択を要求するとの報告
+
+利用者から、更新時に「選択した原本とは別のファイルになっています。資料を選び直してください。」
+が表示されると報告された。調査時HEADは884c811で、製品コード・テストは変更していない。
+AGENTS.mdと共通pdf-recovery-pending-policy.mdはこのcheckoutには見つからなかった。
+テスト保守方針、一覧material分類、関連する既存ケースを読んだ。
+
+MaterialCoordinator.Runは再取得時に保存したSourceRecord.FileIdentityをFileSourceReaderへ渡す。
+FileSourceReaderは開いたハンドルのIDが保存IDと異なるとReplacedを投げ、SHA計算へ進まない。
+WindowsFileIdentityのIDはGetFileInformationByHandleのVolumeSerialNumberとFileIndexである。
+同じパスへのファイルの作り直しでもIDが変わるため、この条件で拒否される。
+利用者の更新処理が具体的にどの作り直しを行ったかは、実機で未測定である。
+
+SourceWatcherは変更・作成・削除・renameを監視し、2秒の通知集約後にAppViewModelの
+自動更新へ接続済み。監視がないための手動選択要求ではなく、再取得のID条件が直接の停止箇所である。
+既存ReplacedFileAtSamePathIsNotSilentlyAdoptedも、ID変更を拒否して再選択を要求する期待値を持つ。
+現在のReparseAsyncは保存コピーを読む経路なので、最新版の再取得の代替にはならない。
+
+読み取り中は初回ハンドルと終了時に開き直した同じパスのID・長さ・時刻を比較し、Changingを拒否する。
+この整合性確認と、以前の取得からIDが変わったことの拒否は分けて検討できる。
+前回正常Analysisと対応する原本の保持、行除外の採用直前のSHA確認も確認した。
+未実装の対応は[再取得方針](source-refresh-pending-policy.md)へ分離した。
+この調査では実行テスト・Windows実機測定・配布は行っていない。
