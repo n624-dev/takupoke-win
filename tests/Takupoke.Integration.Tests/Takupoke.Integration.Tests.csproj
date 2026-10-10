@@ -5,6 +5,8 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/Takupoke.Win/Platform/WindowsFileIdentity.cs" Link="Platform/WindowsFileIdentity.cs" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
+    <Compile Remove="WindowsSourceRefreshTests.cs" Condition="!$([MSBuild]::IsOSPlatform('Windows'))" />
     <Compile Include="../shared/FictionalChangeWorkbook.cs" Link="FictionalChangeWorkbook.cs" />
     <None Include="../Takupoke.Core.Tests/fixtures/ios-parity.json" Link="fixtures/ios-parity.json" CopyToOutputDirectory="PreserveNewest" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />

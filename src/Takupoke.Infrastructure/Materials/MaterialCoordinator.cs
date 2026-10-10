@@ -29,10 +29,15 @@ public sealed partial class MaterialCoordinator(SchoolDataStore store, FileSourc
             }
             try
             {
-                using var content = await reader.ReadAsync(selectedPath ?? source!.Path, kind, selecting ? null : source!.FileIdentity, token);
+                // The selection follows this exact path. Atomic saves and sync can
+                // replace its file ID between acquisitions. The reader still proves
+                // that the current handle and path stay identical during this read.
+                using var content = await reader.ReadAsync(selectedPath ?? source!.Path, kind,
+                    expectedIdentity: null, token);
                 var digest = NotificationDiff.Digest(content.Bytes); var now = _clock.GetUtcNow();
                 if (!selecting && digest == source!.Digest)
                 {
+                    source = source with { FileIdentity = content.Identity, SourceModifiedAt = content.ModifiedAt };
                     source = await ClearStaleRowSkipsAsync(lease, source, year, token);
                     await store.WriteAsync(lease, "selection." + kind, source with { LastCheckedAt = now }, token);
                     await store.WriteAsync(lease, "acquisition." + kind, new MaterialAttempt(now, null, false, digest), token);

@@ -1,7 +1,7 @@
 # 原本取得・更新・保存・監視
 
 対応関係・宣言名・実行方法のSHA-256：
-`45b46d4231b7e6eefdd8f49eab8488f18ed7771bb397996e3a6d4c5d3fdcb4ed`
+`ad8a2f8e631bf6e644077ad63384fc01ec9135c41f318bd2312c5a48163c527d`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -17,6 +17,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - [src/Takupoke.Infrastructure/Materials/MaterialCoordinator.cs](../../src/Takupoke.Infrastructure/Materials/MaterialCoordinator.cs)
 - [src/Takupoke.Infrastructure/Materials/SourceWatcher.cs](../../src/Takupoke.Infrastructure/Materials/SourceWatcher.cs)
 - [tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj](../../tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj)
+- [src/Takupoke.Win/Platform/WindowsFileIdentity.cs](../../src/Takupoke.Win/Platform/WindowsFileIdentity.cs)
 
 ## [tests/Takupoke.Integration.Tests/FileReadResponsivenessTests.cs](../../tests/Takupoke.Integration.Tests/FileReadResponsivenessTests.cs)
 
@@ -27,7 +28,9 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `DeletedOriginalReportsUnavailableAndKeepsAcceptedDataAndSavedCopy`
 - `ChangedButInvalidXlsxRetainsPreviousAcceptedAnalysisAndBothOriginals`
 - `FirstSelectionAndOriginalSurviveRestartWhenPdfCannotBeParsed`
-- `ReplacedFileAtSamePathIsNotSilentlyAdopted`
+- `SamePathReplacementWithIdenticalBytesRetainsAnalysisAndRefreshesIdentity`
+- `SamePathAtomicReplacementWithChangedBytesParsesAndSurvivesRestart`
+- `ReplacementDuringCurrentReadIsRejectedAndKeepsPreviousSourceAndAnalysis`
 - `WeekdayPreviewIsReadOnlyAndRejectsDifferentYearOrSource`
 - `WrongExtensionAndExcelTemporaryFilesCannotReplaceSelection`
 
@@ -44,3 +47,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `ExcludingEveryChangeRefusesAndPreservesLastGood`
 - `StorageFailureRollsBackConsentAnalysisAndAttemptTogether`
 - `PreviousPayloadsWithoutOptionalConsentRemainReadable`
+
+## [tests/Takupoke.Integration.Tests/WindowsSourceRefreshTests.cs](../../tests/Takupoke.Integration.Tests/WindowsSourceRefreshTests.cs)
+
+- `AtomicReplacementUsesNewNativeFileIdAndRefreshesWithoutReselection`

@@ -47,7 +47,10 @@ public sealed class ChangeRowConsentTests : IAsyncLifetime
         Assert.Equal((await Source()).Id, accepted.OriginalId);
         Assert.True(accepted.RowSkipConsent!.SameAs((await Source()).RowSkipConsent));
         Assert.Null((await _store.ReadAsync<MaterialAttempt>(await _store.BeginAsync(), "attempt.Changes"))!.Failure);
+        _identity.Value = "fake-same-content-replacement";
         Assert.True((await _coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed);
+        Assert.Equal(_identity.Value, (await Source()).FileIdentity);
+        Assert.Equal(accepted.OriginalId, (await Analysis())!.OriginalId);
         Assert.True((await _coordinator.ReparseAsync(MaterialKind.Changes, 2032)).Parsed);
         await _store.DisposeAsync();
         _store = new(DataRoot, _protector);
@@ -65,8 +68,10 @@ public sealed class ChangeRowConsentTests : IAsyncLifetime
         await File.WriteAllBytesAsync(FilePath, FictionalChangeWorkbook.Create(sheet =>
             sheet.Descendants(FictionalChangeWorkbook.Namespace + "t").First(text => text.Value == "架空科目C")
                 .Value = "架空更新科目D"));
+        _identity.Value = "fake-new-content-replacement";
         Assert.False((await _coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed);
         Assert.Null((await Source()).RowSkipConsent);
+        Assert.Equal(_identity.Value, (await Source()).FileIdentity);
         await File.WriteAllBytesAsync(FilePath, bytes);
         Assert.False((await _coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed);
         Assert.Null((await Source()).RowSkipConsent);

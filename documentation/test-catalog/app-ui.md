@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`beaa70ea20de9380a7979eead2b730f0e0de692d8c5905c1c418d260145dc833`
+`af2b94de02836122b58e70991f1412773c7b9b52abb809275b1a49873c7d27bf`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -31,7 +31,6 @@
 - [src/Takupoke.Win/Platform/BrowserAuthenticator.cs](../../src/Takupoke.Win/Platform/BrowserAuthenticator.cs)
 - [src/Takupoke.Win/Platform/DesktopIntegration.cs](../../src/Takupoke.Win/Platform/DesktopIntegration.cs)
 - [src/Takupoke.Win/Platform/OfflineTestNetwork.cs](../../src/Takupoke.Win/Platform/OfflineTestNetwork.cs)
-- [src/Takupoke.Win/Platform/WindowsFileIdentity.cs](../../src/Takupoke.Win/Platform/WindowsFileIdentity.cs)
 - [src/Takupoke.Win/Platform/WindowsNotifications.cs](../../src/Takupoke.Win/Platform/WindowsNotifications.cs)
 - [src/Takupoke.Win/Program.cs](../../src/Takupoke.Win/Program.cs)
 - [src/Takupoke.Win/ProtocolActivation.cs](../../src/Takupoke.Win/ProtocolActivation.cs)

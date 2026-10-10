@@ -9,7 +9,11 @@ namespace Takupoke.Integration.Tests;
 public sealed class MaterialCoordinatorTests
 {
     private sealed class FakeIdentity : IFileIdentityProvider
-    { public string Value { get; set; } = "fake-file-identity"; public string Identity(FileStream stream) => Value; }
+    {
+        public string Value { get; set; } = "fake-file-identity";
+        public Func<FileStream, string>? Resolve { get; set; }
+        public string Identity(FileStream stream) => Resolve?.Invoke(stream) ?? Value;
+    }
     private sealed class Protector : IKeyProtector, IDisposable
     {
         private readonly EnvelopeCipher _cipher = new(RandomNumberGenerator.GetBytes(32));
@@ -91,7 +95,7 @@ public sealed class MaterialCoordinatorTests
         finally { Directory.Delete(root, true); }
     }
     [Fact]
-    public async Task ReplacedFileAtSamePathIsNotSilentlyAdopted()
+    public async Task SamePathReplacementWithIdenticalBytesRetainsAnalysisAndRefreshesIdentity()
     {
         var root = Path.Combine(Path.GetTempPath(), "takupoke-material-tests-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root); using var protector = new Protector();
@@ -102,10 +106,81 @@ public sealed class MaterialCoordinatorTests
             var identity = new FakeIdentity(); var coordinator = new MaterialCoordinator(store, new(identity));
             await coordinator.SelectAsync(MaterialKind.Changes, path, 2032);
             var lease = await store.BeginAsync(); var source = await store.ReadAsync<SourceRecord>(lease, "selection.Changes");
+            var accepted = await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes");
             identity.Value = "fake-replacement-identity";
-            Assert.False((await coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed);
-            Assert.Equal(source!.Id, (await store.ReadAsync<SourceRecord>(lease, "selection.Changes"))!.Id);
+            var result = await coordinator.RefreshAsync(MaterialKind.Changes, 2032);
+            Assert.True(result.Parsed); Assert.False(result.Changed); Assert.Null(result.Error);
+            var refreshed = await store.ReadAsync<SourceRecord>(lease, "selection.Changes");
+            Assert.Equal(source!.Id, refreshed!.Id);
+            Assert.Equal(identity.Value, refreshed.FileIdentity);
+            Assert.Equal(source.Path, refreshed.Path);
+            Assert.Equal(DataCodec.Encode(accepted),
+                DataCodec.Encode(await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes")));
+        }
+        finally { Directory.Delete(root, true); }
+    }
+    [Fact]
+    public async Task SamePathAtomicReplacementWithChangedBytesParsesAndSurvivesRestart()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-material-tests-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root); using var protector = new Protector();
+        try
+        {
+            var path = Path.Combine(root, "fictional.xlsx");
+            var original = XlsxChangeReaderTests.Workbook();
+            await File.WriteAllBytesAsync(path, original);
+            var identity = new FakeIdentity();
+            await using (var store = new SchoolDataStore(Path.Combine(root, "data"), protector))
+            {
+                var coordinator = new MaterialCoordinator(store, new(identity));
+                Assert.True((await coordinator.SelectAsync(MaterialKind.Changes, path, 2032)).Parsed);
+                var updated = XlsxChangeReaderTests.Workbook(mutate: entries =>
+                    entries["xl/worksheets/sheet1.xml"] = entries["xl/worksheets/sheet1.xml"]
+                        .Replace("架空科目B", "架空更新科目D", StringComparison.Ordinal));
+                var pending = Path.Combine(root, "owned-update.xlsx");
+                await File.WriteAllBytesAsync(pending, updated);
+                File.Move(pending, path, overwrite: true);
+                identity.Value = "fake-atomic-replacement";
+                var result = await coordinator.RefreshAsync(MaterialKind.Changes, 2032);
+                Assert.True(result.Changed); Assert.True(result.Parsed); Assert.Null(result.Error);
+                var lease = await store.BeginAsync();
+                var analysis = await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes");
+                Assert.Equal("架空更新科目D", Assert.Single(analysis!.Changes!).AfterSubject);
+                Assert.Equal(NotificationDiff.Digest(updated), analysis.SourceDigest);
+            }
+            await using var reopened = new SchoolDataStore(Path.Combine(root, "data"), protector);
+            var restarted = new MaterialCoordinator(reopened, new(identity));
+            var again = await restarted.RefreshAsync(MaterialKind.Changes, 2032);
+            Assert.True(again.Parsed); Assert.False(again.Changed);
+            var selected = await reopened.ReadAsync<SourceRecord>(await reopened.BeginAsync(), "selection.Changes");
+            Assert.Equal(identity.Value, selected!.FileIdentity);
+            Assert.Equal(path, selected.Path);
+        }
+        finally { Directory.Delete(root, true); }
+    }
+    [Fact]
+    public async Task ReplacementDuringCurrentReadIsRejectedAndKeepsPreviousSourceAndAnalysis()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-material-tests-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root); using var protector = new Protector();
+        try
+        {
+            var path = Path.Combine(root, "fictional.xlsx");
+            await File.WriteAllBytesAsync(path, XlsxChangeReaderTests.Workbook());
+            await using var store = new SchoolDataStore(Path.Combine(root, "data"), protector);
+            var identity = new FakeIdentity(); var coordinator = new MaterialCoordinator(store, new(identity));
             Assert.True((await coordinator.SelectAsync(MaterialKind.Changes, path, 2032)).Parsed);
+            var lease = await store.BeginAsync();
+            var selected = await store.ReadAsync<SourceRecord>(lease, "selection.Changes");
+            var accepted = await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes");
+            var checks = 0;
+            identity.Resolve = _ => ++checks == 1 ? "fake-current-handle" : "fake-replaced-during-read";
+            var result = await coordinator.RefreshAsync(MaterialKind.Changes, 2032);
+            Assert.Equal(new SourceException(SourceFailure.Changing).Message, result.Error);
+            Assert.False(result.Changed); Assert.False(result.Parsed); Assert.Equal(2, checks);
+            Assert.Equal(selected, await store.ReadAsync<SourceRecord>(lease, "selection.Changes"));
+            Assert.Equal(DataCodec.Encode(accepted),
+                DataCodec.Encode(await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes")));
         }
         finally { Directory.Delete(root, true); }
     }

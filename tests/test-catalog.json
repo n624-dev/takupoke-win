@@ -49,13 +49,15 @@
         "src/Takupoke.Infrastructure/Materials/MaterialCoordinator.ChangeRows.cs",
         "src/Takupoke.Infrastructure/Materials/MaterialCoordinator.cs",
         "src/Takupoke.Infrastructure/Materials/SourceWatcher.cs",
-        "tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj"
+        "tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj",
+        "src/Takupoke.Win/Platform/WindowsFileIdentity.cs"
       ],
       "checks": [
         "tests/Takupoke.Integration.Tests/FileReadResponsivenessTests.cs",
         "tests/Takupoke.Integration.Tests/MaterialCoordinatorTests.cs",
         "tests/Takupoke.Integration.Tests/SourceWatcherTests.cs",
-        "tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs"
+        "tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs",
+        "tests/Takupoke.Integration.Tests/WindowsSourceRefreshTests.cs"
       ]
     },
     {
@@ -250,7 +252,6 @@
         "src/Takupoke.Win/Platform/BrowserAuthenticator.cs",
         "src/Takupoke.Win/Platform/DesktopIntegration.cs",
         "src/Takupoke.Win/Platform/OfflineTestNetwork.cs",
-        "src/Takupoke.Win/Platform/WindowsFileIdentity.cs",
         "src/Takupoke.Win/Platform/WindowsNotifications.cs",
         "src/Takupoke.Win/Program.cs",
         "src/Takupoke.Win/ProtocolActivation.cs",
