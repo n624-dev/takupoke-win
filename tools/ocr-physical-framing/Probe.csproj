@@ -5,7 +5,7 @@
     <AssemblyName>Takupoke.OcrComparison</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="windows-render/**;obj-render/**;bin-render/**" />
+    <Compile Remove="windows-render/**;source-image-tests/**;obj-render/**;bin-render/**" />
     <ProjectReference Include="../../src/Takupoke.Infrastructure/Takupoke.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

@@ -67,6 +67,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--acquisition-only', action='store_true')
+    parser.add_argument('--original-source', action='store_true')
     args = parser.parse_args()
     if os.name != 'nt':
         raise RuntimeError('Actual Windows renderer required')
@@ -93,14 +94,22 @@ def main():
         'gitHead': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=REPO, text=True).strip(),
         'sources': {str(p.relative_to(REPO)): sha(p) for p in [
             ROOT / 'Program.cs', ROOT / 'PhysicalCropFrame.cs', ROOT / 'run.py', ROOT / 'run_windows.py',
-            ROOT / 'prepare_pdf.py', ROOT / 'score.py', ROOT / 'windows-render/WindowsRender.cs',
+            ROOT / 'prepare_pdf.py', ROOT / 'score.py', ROOT / 'OriginalImageRead.cs', ROOT / 'windows-render/WindowsRender.cs',
             REPO / 'src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs']},
         'plannedConditions': ['production', 'physical-input-frame'],
         'scope': 'Consumed independent-at-origin drawing pixels; new PDF containers, zero new heldout credit'})
-    command(['dotnet', 'build', str(ROOT / 'windows-render/WindowsRender.csproj'), '-c', 'Release', '--verbosity', 'quiet'], env)
-    runtime = ROOT / 'windows-render/bin/Release/net10.0-windows10.0.26100.0/win-x64/WindowsRender.dll'
     safe = {k: v for k, v in env.items() if not any(x in k.upper() for x in ('TOKEN', 'SECRET', 'PASSWORD', 'CREDENTIAL'))}
-    command(['dotnet', str(runtime), str(owned / 'pdf-inputs.json')], safe)
+    if args.original_source:
+        if args.acquisition_only: raise ValueError('Choose one acquisition protocol')
+        command(['dotnet', 'build', str(ROOT / 'Probe.csproj'), '-c', 'Release', '--verbosity', 'quiet'], env)
+        command(['dotnet', str(ROOT / 'bin/Release/net10.0/Takupoke.OcrComparison.dll'),
+                 '--extract-original-images', str(owned / 'pdf-inputs.json')], safe)
+        native_manifest = owned / 'source-original-inputs.json'
+    else:
+        command(['dotnet', 'build', str(ROOT / 'windows-render/WindowsRender.csproj'), '-c', 'Release', '--verbosity', 'quiet'], env)
+        runtime = ROOT / 'windows-render/bin/Release/net10.0-windows10.0.26100.0/win-x64/WindowsRender.dll'
+        command(['dotnet', str(runtime), str(owned / 'pdf-inputs.json')], safe)
+        native_manifest = owned / 'native-inputs.json'
     if args.acquisition_only:
         # Reacquire the closed synthetic drawings to diagnose the observed
         # native ownership refusal; do not repeat OCR or add accuracy cases.
@@ -113,13 +122,14 @@ def main():
     command(['dotnet', 'build', str(ROOT / 'Probe.csproj'), '-c', 'Release', '--verbosity', 'quiet'], env)
     raw = owned / 'observations.jsonl'
     command(['dotnet', str(ROOT / 'bin/Release/net10.0/Takupoke.OcrComparison.dll'),
-             str(owned / 'native-inputs.json'), str(raw)], safe, timeout=1000, output=owned)
+             str(native_manifest), str(raw)], safe, timeout=1000, output=owned)
     write(owned / 'raw-receipt.json', {'exitCode': 0, 'rawSHA256': sha(raw), 'bytes': raw.stat().st_size})
     # Parent consults the oracle only after the native child has terminated.
     report = evaluate(raw, fixture)
     write(owned / 'report.json', report)
     print(json.dumps(report, ensure_ascii=False), flush=True)
-    emit_evidence(owned, ['inputs.json', 'pdf-inputs.json', 'native-inputs.json', 'native-render-receipt.json',
+    evidence = ['source-original-inputs.json', 'source-original-receipt.json'] if args.original_source else ['native-inputs.json', 'native-render-receipt.json']
+    emit_evidence(owned, ['inputs.json', 'pdf-inputs.json', *evidence,
         'source-freeze.json', 'raw-receipt.json', 'observations.jsonl', 'report.json', 'worker-stdout.txt', 'worker-stderr.txt'])
     if any(o['quality'] == 'unassessed' for o in report['observations']):
         raise RuntimeError('Incomplete native measurement; no quality claim')

@@ -18,3 +18,4 @@ tools/independent-vector-raster-probe/**/*.py text eol=lf
 
 # Preserve byte identity of closed native Windows research observations.
 research-results/ocr-physical-framing-windows-20261013/** -text
+research-results/ocr-physical-framing-native-ownership-20261013/** -text

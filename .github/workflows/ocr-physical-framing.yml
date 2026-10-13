@@ -4,7 +4,8 @@ on:
     branches: [codex/windows-local-ai-improvement-20261013]
     paths:
       - '.github/workflows/ocr-physical-framing.yml'
-      - 'tools/ocr-physical-framing/**'
+      - 'tools/ocr-physical-framing/run_windows.py'
+      - 'tools/ocr-physical-framing/windows-render/**'
 permissions:
   contents: read
 jobs:

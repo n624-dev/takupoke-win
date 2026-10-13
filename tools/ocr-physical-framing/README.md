@@ -50,3 +50,34 @@ The prototype currently creates a grid/work context per connected crop. Before
 any production integration it needs a shared page budget, fresh whole-document
 positive/refusal tests, native Windows measurements and any needed header model
 qualification. It is deliberately not wired into the application.
+
+The original-image acquisition alternative is `OriginalImageRead.cs`. It checks
+the real native PDF operations and source resource against the independent
+native image event. Only one upright, opaque, full-page DeviceRGB8 image with
+raw/Flate samples is supported. Additional paint, clipping, duplicate images,
+masks, decode substitutions, colour defaults, alternate page state and unknown
+resource/encoding paths refuse. Decompression is bounded by declared dimensions;
+original sample/channel identity is preserved. `--original-source` runs the
+paired closed-document experiment through that acquisition rather than OS
+resampling. It adds no new independent accuracy cases for reused drawings.
+
+`OwnershipInspect.cs` is a read-only connected-component diagnosis on actual
+Windows-rendered synthetic pixels, with zero recognizer calls. It shows faint
+unmasked rule edges without changing ink, ownership or acceptance.
+`prepare_development.py` prepares new invented ShipporiMincho/MPLUSRounded1c
+drawings: all17 classes,680 slots,2040 body values, plus missing-day and printed
+Al_1 controls. Those are development cases, not a final set. The first condition
+fails in both fonts; the negative pairs also have unrelated recognition failures
+and therefore receive no attributed refusal qualification.
+
+`InkCropFrame.cs` is a separately fixed research condition that retains every
+non-rule original pixel and restricts recognizer input to the whole-line ink
+bounds plus2 original pixels. It uses one page work allowance, never expected
+text or CTC output to choose a crop. Unknown-space failures and overlapping
+native line boxes motivate the condition; those failures remain immutable.
+The crop changes are not enabled in the application. Source acquisition and
+ink-frame contracts have dedicated original-sample/refusal/budget tests:
+
+```sh
+dotnet test tools/ocr-physical-framing/source-image-tests/SourceImageTests.csproj -c Release
+```

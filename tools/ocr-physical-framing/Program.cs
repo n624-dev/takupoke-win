@@ -13,11 +13,18 @@ if (args.Length == 3 && args[0] == "--replay")
     await Replay.Run(args[1], args[2]);
     return;
 }
+if (args.Length == 2 && args[0] == "--extract-original-images")
+{
+    OriginalImageRead.Run(args[1]);
+    return;
+}
+var diagnoseOwnership = args.Length == 3 && args[0] == "--diagnose-ownership";
+if (diagnoseOwnership) args = args[1..];
 if (args.Length != 2) throw new ArgumentException("Expected pixel/model manifest and raw observation path.");
 using var manifest = JsonDocument.Parse(File.ReadAllBytes(args[0]));
 var root = Path.GetDirectoryName(Path.GetFullPath(args[0]))!;
 var m = manifest.RootElement;
-if (m.GetProperty("recipe").GetString() != "physical-input-framing-consumed-originals-v1") throw new InvalidDataException("Recipe mismatch.");
+if (m.GetProperty("recipe").GetString() is not ("physical-input-framing-consumed-originals-v1" or "physical-input-framing-fresh-development-v1")) throw new InvalidDataException("Recipe mismatch.");
 var det = Verified(m.GetProperty("detector")); var rec = Verified(m.GetProperty("recognizer"));
 var dictionary = Verified(m.GetProperty("dictionary"));
 using var lifetime = new CancellationTokenSource(TimeSpan.FromMinutes(15));
@@ -30,8 +37,11 @@ var alphabet = JsonSerializer.Deserialize<string[]>(File.ReadAllBytes(dictionary
 if (alphabet.Length != 18385) throw new InvalidDataException("Native V5 alphabet required.");
 using var writer = new StreamWriter(new FileStream(args[1], FileMode.CreateNew, FileAccess.Write));
 foreach (var item in m.GetProperty("documents").EnumerateArray())
-foreach (var condition in new[] { "production", "physical-input-frame" })
+foreach (var condition in diagnoseOwnership ? new[] { "ownership-diagnosis" } :
+    item.TryGetProperty("plannedConditions", out var planned) ? planned.EnumerateArray().Select(p => p.GetString()!).ToArray() : new[] { "production", "physical-input-frame" })
 {
+    if (condition is not ("ownership-diagnosis" or "production" or "physical-input-frame" or "ink-input-frame"))
+        throw new InvalidDataException("Unplanned recognition condition.");
     var id = item.GetProperty("id").GetString()!; var watch = Stopwatch.StartNew();
     var layouts = new List<PdfPageLayout>(); var rasters = new List<RecoveryRaster>();
     var pageReports = new List<object>(); var confidences = new Dictionary<string, double>();
@@ -56,8 +66,16 @@ foreach (var condition in new[] { "production", "physical-input-frame" })
             else
             {
                 detectorCalls++; var boxes = Detect(raster, token);
+                if (diagnoseOwnership)
+                {
+                    pageReports.Add(new { number, raster.Width, raster.Height, rules, boxes,
+                        ownership = OwnershipInspect.Analyze(raster, boxes, mask, token) });
+                    continue;
+                }
                 var completed = OcrCropCompleteness.Complete(raster, boxes, token);
-                var framed = completed.Select(b => PhysicalCropFrame.Restrict(raster, b, rules, mask, token)).ToArray();
+                var inkFrame = new InkCropFrame(raster, mask, token);
+                var framed = completed.Select(b => condition == "ink-input-frame" ? inkFrame.Restrict(b) :
+                    PhysicalCropFrame.Restrict(raster, b, rules, mask, token)).ToArray();
                 var output = new List<PdfGlyph>(); var nativeScores = new List<double>(); var line = 0; var order = 0;
                 foreach (var index in Enumerable.Range(0, framed.Length).OrderBy(i => framed[i].Y).ThenBy(i => framed[i].X))
                 {
@@ -85,6 +103,7 @@ foreach (var condition in new[] { "production", "physical-input-frame" })
             for (var n = 0; n < glyphs.Count; n++) confidences.Add($"p{number}s{n}", scores[n]);
             layouts.Add(new(raster.Width, raster.Height, glyphs, rules));
         }
+        if (diagnoseOwnership) { outcome = "diagnosis-only-unassessed"; continue; }
         stage = "Builder";
         var scanners = rasters.Select((r, i) => r.InkFreeScanner(r.RuleMask(layouts[i].Lines, token), token)).ToArray();
         var hash = item.GetProperty("originalPDFSHA256").GetString()!;
@@ -122,7 +141,8 @@ foreach (var condition in new[] { "production", "physical-input-frame" })
             recognizerCountMeaning = condition == "production" ? "Validated native recognition observations" : "Returned native recognizer calls",
             unfinishedPageObservations = layouts.Count < rasters.Count ? lastObservations : null,
             processPeakWorkingSetBytes = Process.GetCurrentProcess().PeakWorkingSet64,
-            scope = m.TryGetProperty("renderer", out var renderer) ? renderer.GetString() + "; consumed original drawings, no independent document/qualification credit" : "Consumed full original image pages; Linux, no PDF reader/Windows renderer/new document or qualification credit" }));
+            scope = m.TryGetProperty("sourceScope", out var sourceScope) ? sourceScope.GetString() :
+                m.TryGetProperty("renderer", out var renderer) ? renderer.GetString() + "; consumed original drawings, no independent document/qualification credit" : "Consumed full original image pages; Linux, no PDF reader/Windows renderer/new document or qualification credit" }));
         writer.Flush(); foreach (var raster in rasters) CryptographicOperations.ZeroMemory(raster.Bgra);
     }
 }
