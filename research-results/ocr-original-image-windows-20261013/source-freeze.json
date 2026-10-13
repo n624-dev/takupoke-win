@@ -1,0 +1,19 @@
+{
+  "gitHead": "0ce2040fac9eddc0578cf0f4d04b19d5095ee727",
+  "sources": {
+    "tools\\ocr-physical-framing\\Program.cs": "c317dd431a24747bef88494b2edba619d7c9e0cc1dcd5fa828b240ee0b60972d",
+    "tools\\ocr-physical-framing\\PhysicalCropFrame.cs": "e845408816670972c57e564cae047a5d0fdcf4e95557c59b2427d6feee5b9e5b",
+    "tools\\ocr-physical-framing\\run.py": "dc4aa34acd72231f907599cc05e2d18c0992fddc72c430ec98180beddbd5a078",
+    "tools\\ocr-physical-framing\\run_windows.py": "0b8045404805bae96657378dbaff8d7e5e332d55e6d98432b821f6748802c4be",
+    "tools\\ocr-physical-framing\\prepare_pdf.py": "11395893bfafb8a5a11c93c815dbf855ad2c2a6608cb3a2643ae9375b0dbf140",
+    "tools\\ocr-physical-framing\\score.py": "b5bd13ed7a8472614beb7ab8faba7e115ad5cf53ad4233bd3f4759d65ac3ad16",
+    "tools\\ocr-physical-framing\\OriginalImageRead.cs": "3a51e5b489dfa68df703b5da4e84f58c70848b5fb81b73f230c09f278237e0df",
+    "tools\\ocr-physical-framing\\windows-render\\WindowsRender.cs": "06b3a797e03e3c5ce66f03b7f8f61091ae830a79dcaa00410cfcf59aa29497a4",
+    "src\\Takupoke.Infrastructure\\Recovery\\RecoveryDocumentBuilder.cs": "207e64c830ad75c768f3d2e788c447e8d8c5fdc3896b32c79e7883503f8bab8d"
+  },
+  "plannedConditions": [
+    "production",
+    "physical-input-frame"
+  ],
+  "scope": "Consumed independent-at-origin drawing pixels; new PDF containers, zero new heldout credit"
+}

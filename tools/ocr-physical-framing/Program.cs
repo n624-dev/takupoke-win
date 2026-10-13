@@ -18,6 +18,11 @@ if (args.Length == 2 && args[0] == "--extract-original-images")
     OriginalImageRead.Run(args[1]);
     return;
 }
+if (args.Length == 2 && args[0] == "--diagnose-role-labels")
+{
+    RoleLabelInspect.Run(args[1]);
+    return;
+}
 var diagnoseOwnership = args.Length == 3 && args[0] == "--diagnose-ownership";
 if (diagnoseOwnership) args = args[1..];
 if (args.Length != 2) throw new ArgumentException("Expected pixel/model manifest and raw observation path.");
@@ -29,12 +34,16 @@ var det = Verified(m.GetProperty("detector")); var rec = Verified(m.GetProperty(
 var dictionary = Verified(m.GetProperty("dictionary"));
 using var lifetime = new CancellationTokenSource(TimeSpan.FromMinutes(15));
 var token = lifetime.Token; OrtEnv.Instance().DisableTelemetryEvents();
-using var baseline = new OnnxJapaneseOcr(det, rec, dictionary);
+var needsBaseline = m.GetProperty("documents").EnumerateArray().Any(item =>
+    !item.TryGetProperty("plannedConditions", out var conditions) || conditions.EnumerateArray().Any(c => c.GetString() == "production"));
+using var baseline = needsBaseline ? new OnnxJapaneseOcr(det, rec, dictionary) : null;
 using var options = new SessionOptions { IntraOpNumThreads = 2, InterOpNumThreads = 1,
     GraphOptimizationLevel = GraphOptimizationLevel.ORT_ENABLE_ALL, LogSeverityLevel = OrtLoggingLevel.ORT_LOGGING_LEVEL_ERROR };
 using var detector = new InferenceSession(det, options); using var recognizer = new InferenceSession(rec, options);
 var alphabet = JsonSerializer.Deserialize<string[]>(File.ReadAllBytes(dictionary))!;
-if (alphabet.Length != 18385) throw new InvalidDataException("Native V5 alphabet required.");
+var expectedSymbols = m.TryGetProperty("researchSymbols", out var symbols) ? symbols.GetInt32() : 18385;
+if (expectedSymbols is not (18385 or 18710) || alphabet.Length != expectedSymbols || alphabet[0] != "" || alphabet[^1] != " ")
+    throw new InvalidDataException("Pinned native research alphabet required.");
 using var writer = new StreamWriter(new FileStream(args[1], FileMode.CreateNew, FileAccess.Write));
 foreach (var item in m.GetProperty("documents").EnumerateArray())
 foreach (var condition in diagnoseOwnership ? new[] { "ownership-diagnosis" } :
@@ -59,6 +68,7 @@ foreach (var condition in diagnoseOwnership ? new[] { "ownership-diagnosis" } :
             var observations = new List<object>(); lastObservations = observations; double[] scores;
             if (condition == "production")
             {
+                if (baseline is null) throw new InvalidDataException("Baseline was not planned.");
                 baseline.RecognitionObserver = o => { recognizerCalls++; observations.Add(o); };
                 detectorCalls++; glyphs = baseline.ReadForManualCapture(raster, token);
                 supported = baseline.RecognizedBoxes; scores = baseline.NativeConfidences.ToArray();

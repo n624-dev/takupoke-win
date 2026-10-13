@@ -709,3 +709,36 @@ The first invented Type0/Identity-H PDF fixture exposed an expected comparison f
 The alternate read is connected only after Strict failure and only while foreground recovery is permitted. It preserves complete earlier pages and never promotes a partial alternate page to complete. Normal/exam/return capture tests use independent invented in-memory fonts and PDF bytes; no school document, name, font or image is used. Optional source provenance stores resource, font/CID-map hashes, code/CID/GID/scalar and readerVersion1. Null provenance is omitted, preserving existing receipt fingerprints. Malformed provenance, OCR/provenance mixing and oversized pre-hash records refuse; historical receipts cannot acquire provenance they never contained. Existing adoption rules, thresholds, settings and published packages are unchanged.
 
 Local Linux tests passed39 native-reader/proof cases, all872 integration cases and288 core cases without skips. Public-tree checks and13 package-notice tests also passed. This is a bounded extraction contract, not whole-timetable OCR quality or a device-release result. Windows native CI remains a separate required check.
+
+
+## 2026-10-13: Native field prefix identity and literal OCR continuation
+
+A single printed role prefix could be observed both as its original word atoms
+and those identical atoms plus one original colon. Deduplicate only that exact
+ordered source-ID relationship, preserving the fuller explicit prefix. A complete
+independently validated native OCR row beginning with one explicit prefix can
+retain later bare role words as literal continuation atoms, preventing CTC peak
+gaps inside a teacher name from creating a second lesson. Original text, scores,
+positions and IDs remain unchanged. A second explicit prefix, separate native
+line, or corresponding physical column label in another role remains structural
+evidence. Mixed colon/bare parallel fields retain two lessons; incomplete paired
+columns refuse. Comparison work is charged to the existing bounded budget.
+
+The11 new overlap/literal/parallel cases and all923 integration/288 core tests
+pass locally. Zero-inference replay of frozen dense original-image observations
+now produces3 role scopes in all680 cells for both positives, but refuses both
+with humanUnresolved.529/306 low-confidence source atoms remain. A printed Al_1
+becoming AI_1 remains a recognition failure, masked by other refusal causes.
+This source-contract repair does not establish OCR qualification.
+
+Closed Windows original-image study38382110726 preserves all10 original BGRA
+hashes under independently verified source image events/resources. Physical input
+has1/2 exact sparse consumed documents; baseline0/2. No app activation/fresh final
+or production credit. See the original-image and dense-ink result directories.
+
+Official V5 server comparison completes384 calls on unchanged consumed pixels:
+BGR body44/72 Sans,49/72 Serif, with16/14 incorrect rows above0.8; headers21/21,
+20/21 with0 incorrect above floor, but all blank images hallucinate. Native CPU
+working set345,366,528bytes on Linux. It is not enabled as a whole-app replacement.
+The next fixed dense model comparisons retain full positive and paired negative
+PDF source evidence and keep all outputs, confidence and original crop ownership.

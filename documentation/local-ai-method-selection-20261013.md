@@ -34,6 +34,7 @@ VLMの生出力、学習済みHTML形式の解釈、別診断を混同しない�
 | 候補・固定条件 | Sans本文 | Serif本文 | 判定 |
 |---|---:|---:|---|
 | V5 mobile / BGR |46/72|44/72|現行基準。高信頼度誤読あり|
+| V5 server / BGR |44/72|49/72|見出し21/21・20/21。本文の高信頼度誤読16・14行、空画像全失敗|
 | V6 medium / BGR |54/72|57/72|改善あり。未合格|
 | V6 small / BGR |47/72|53/72|軽量。未合格|
 | GLM-OCR Q8 |48/72|56/72|先頭改行だけを除く0call診断。原exact0、空画像の幻覚あり|
@@ -58,6 +59,7 @@ GOTはLinuxで約5.24GiB・192行約44分を要した。見出し専用の研究
 [NDLOCR](../research-results/ndlocr-native-20261013/README.md) /
 [Tesseract](../research-results/tesseract-eng-best-20261013/README.md) /
 [GOT](../research-results/got-ocr2-20261013/README.md)。
+[V5 server](../research-results/ocr-v5-server-frozen-20261013/README.md)。
 
 ## 画像セルの取得と明示ラベルの別の改善
 
@@ -66,12 +68,24 @@ GOTはLinuxで約5.24GiB・192行約44分を要した。見出し専用の研究
 重ならない証明を必須とし、並列授業や重なる行の拒否は維持する。
 Integration912件、Core288件が通過。文字認識器・確率・座標を変更する修正ではない。
 
+同じ原文IDで観測されたラベルの語部分と「語＋コロン」を重複した授業として数える問題も
+修正した。独立して検証したOCR原行が明示ラベル＋コロンで始まる場合、氏名などの途中の
+裸の役割語は原行の続きとして保持する。他の役割行の対応する列ラベル、別の明示コロン、
+別の原行のラベルは統合しない。並記の完全／不完全対照を含めIntegration923・Core288通過。
+保存済み密帳票の0call再検証では、両字体の全680枠で3役割を確認できたが、529・306個の
+低信頼度原文字が残り、正式結果は返らない。構造修正を文字精度の合格とは扱わない。
+[密帳票の固定原画像と再検証](../research-results/ocr-dense-ink-development-20261013/README.md)。
+
 別の未有効化の研究では、元の文字画素をすべて残して認識入力を物理セル内に限定した。
 既消費2文書の原画ではセル30→40、保存済み出力の再検証で正式一致1/2。
 しかし実Windows PDF描画では画素寸法が変わり、両文書とも元の切り出し所属で拒否した。
 原画での一致をWindows上の成功へ換算できない。取得失敗の原因と新全文書を継続検証する。
+後続の実Windows研究では、対応範囲を厳しく限定した単一RGB画像の直接取得により、
+全10ページで原画素のハッシュが一致した。物理入力条件で疎な既消費文書1/2が完全一致し、
+もう1件は低信頼度見出しで拒否した。この研究経路はアプリに有効化していない。
 [原画の診断](../research-results/ocr-physical-framing-20261013/README.md) /
 [Windows実描画](../research-results/ocr-physical-framing-windows-20261013/README.md)。
+[Windows原画像取得](../research-results/ocr-original-image-windows-20261013/README.md)。
 
 ## 軽量認識器の追加学習という別の選択肢
 

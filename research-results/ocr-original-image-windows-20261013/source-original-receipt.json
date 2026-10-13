@@ -1,0 +1,108 @@
+{
+  "receipts": [
+    {
+      "id": "d0",
+      "actualPDFSHA256": "e94f50455183f6e573949448c38c4a5309604b3d8be9df4b3815edfc464dd25a",
+      "pages": [
+        {
+          "page": 1,
+          "Width": 1025,
+          "Height": 206,
+          "originalSourceSamplesSHA256": "61a64c898758f186500fd6772c584a3e6abfecb54b7a5d05e02c0df872c73f62",
+          "sourceStreamSHA256": "12d2b5ed91253340207de2ccb39f3b205e3e327b68e8527a3219be4fa09b7145",
+          "originalDrawingHash": "61a64c898758f186500fd6772c584a3e6abfecb54b7a5d05e02c0df872c73f62",
+          "sourceEqualsDrawing": true
+        },
+        {
+          "page": 2,
+          "Width": 1025,
+          "Height": 206,
+          "originalSourceSamplesSHA256": "d3df4c666936a233d8234e54a7fd97ecd2a8704c6b023869f85e3a5c4184de37",
+          "sourceStreamSHA256": "be76820c2ecab60e82c466f71deaa46e439e8069f8a0785ee252a8eefba9f84a",
+          "originalDrawingHash": "d3df4c666936a233d8234e54a7fd97ecd2a8704c6b023869f85e3a5c4184de37",
+          "sourceEqualsDrawing": true
+        },
+        {
+          "page": 3,
+          "Width": 1025,
+          "Height": 206,
+          "originalSourceSamplesSHA256": "1e8c0cd8d765e2fdb9393f17d78918af9f94c76fd558ba6d97a09165f1bab79d",
+          "sourceStreamSHA256": "569e48105b98dc02f48f1d2cecb62a7768bc6f040457e9c87ced32c57b1ff8e3",
+          "originalDrawingHash": "1e8c0cd8d765e2fdb9393f17d78918af9f94c76fd558ba6d97a09165f1bab79d",
+          "sourceEqualsDrawing": true
+        },
+        {
+          "page": 4,
+          "Width": 1025,
+          "Height": 206,
+          "originalSourceSamplesSHA256": "b641a03dd0f9094dec67895e2e80af5932d28c14138929af8e2ede3a46a4ef38",
+          "sourceStreamSHA256": "8196bef1aaa235ea382e10971af60b0f9660c6c12e00f3152554d38b754751d4",
+          "originalDrawingHash": "b641a03dd0f9094dec67895e2e80af5932d28c14138929af8e2ede3a46a4ef38",
+          "sourceEqualsDrawing": true
+        },
+        {
+          "page": 5,
+          "Width": 1025,
+          "Height": 206,
+          "originalSourceSamplesSHA256": "5c28abde5de89d0c880bf4fd9e22dfafe1282e7151fb1aa48b845e9c0a87095d",
+          "sourceStreamSHA256": "7d66f104dab2f74bf4af911222d6f3ede02e0536fb99f3f9807a495f23344150",
+          "originalDrawingHash": "5c28abde5de89d0c880bf4fd9e22dfafe1282e7151fb1aa48b845e9c0a87095d",
+          "sourceEqualsDrawing": true
+        }
+      ]
+    },
+    {
+      "id": "d1",
+      "actualPDFSHA256": "ce0627e908e3b84e26b3d47bd1310472009e08ae132f9a864280255b976c3c78",
+      "pages": [
+        {
+          "page": 1,
+          "Width": 1025,
+          "Height": 210,
+          "originalSourceSamplesSHA256": "551a25a29703c815632adbc2cb6049794e58f5f291a04095ad12dcc4bc2c6f64",
+          "sourceStreamSHA256": "8269f01c9f867e061919ee96a9d68b0bf14689d06175b77fd7cfecbb813b0acc",
+          "originalDrawingHash": "551a25a29703c815632adbc2cb6049794e58f5f291a04095ad12dcc4bc2c6f64",
+          "sourceEqualsDrawing": true
+        },
+        {
+          "page": 2,
+          "Width": 1025,
+          "Height": 210,
+          "originalSourceSamplesSHA256": "a5aa69994b7a8480bc93434ab27edb23a7449506a1edc9868c0e69f4c1cc658f",
+          "sourceStreamSHA256": "a7660922fb88b098240123b3ed6a01026948d0afaed67ae7236491af0db8a8c9",
+          "originalDrawingHash": "a5aa69994b7a8480bc93434ab27edb23a7449506a1edc9868c0e69f4c1cc658f",
+          "sourceEqualsDrawing": true
+        },
+        {
+          "page": 3,
+          "Width": 1025,
+          "Height": 210,
+          "originalSourceSamplesSHA256": "a5793b638e9f29472e9c95991e63d21ee266de8afff893b520c97b14e77b7f9f",
+          "sourceStreamSHA256": "2e9adcf1e65ec6d60c7e594e13f977ed6bdbaed8c8d7f033445c4f88a3dc39e0",
+          "originalDrawingHash": "a5793b638e9f29472e9c95991e63d21ee266de8afff893b520c97b14e77b7f9f",
+          "sourceEqualsDrawing": true
+        },
+        {
+          "page": 4,
+          "Width": 1025,
+          "Height": 210,
+          "originalSourceSamplesSHA256": "9102af5df60ca834639ef2c2a25713d43b02a752c89896cc209e2abefe01f144",
+          "sourceStreamSHA256": "1ad5005d6c8bac0c60c7f1677bd78979f99833a39c34dcb18a1db8206104fd17",
+          "originalDrawingHash": "9102af5df60ca834639ef2c2a25713d43b02a752c89896cc209e2abefe01f144",
+          "sourceEqualsDrawing": true
+        },
+        {
+          "page": 5,
+          "Width": 1025,
+          "Height": 210,
+          "originalSourceSamplesSHA256": "f81502f3a83c425cfc203978b2616f3e8730885490b4952c4701c6b9387926da",
+          "sourceStreamSHA256": "0406c3703190ee253e31704032c5f60b0cf56d8a41c695c4c1e3d6921a7e1d58",
+          "originalDrawingHash": "f81502f3a83c425cfc203978b2616f3e8730885490b4952c4701c6b9387926da",
+          "sourceEqualsDrawing": true
+        }
+      ]
+    }
+  ],
+  "modelCalls": 0,
+  "scope": "Single-image operation/resource/coverage proof only; no recognition or adoption credit"
+}

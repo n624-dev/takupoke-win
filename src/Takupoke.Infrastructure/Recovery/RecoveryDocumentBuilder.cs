@@ -14,7 +14,8 @@ public static class RecoveryDocumentBuilder
     {
         public RecoveryBox Box => new(Glyph.X, Glyph.Y, Glyph.Width, Glyph.Height);
     }
-    private sealed record Label(string Value, int Page, RecoveryBox Box, IReadOnlyList<string> Ids, RecoveryBox? OwnershipBox = null, bool WholeOcrRow = false);
+    private sealed record Label(string Value, int Page, RecoveryBox Box, IReadOnlyList<string> Ids, RecoveryBox? OwnershipBox = null, bool WholeOcrRow = false,
+        IReadOnlyList<string>? NativeValueIds = null);
     private static RecoveryBox Bounds(IEnumerable<Atom> atoms)
     {
         var a = atoms.ToArray(); var left = a.Min(x => x.Box.X); var top = a.Min(x => x.Box.Y);
@@ -127,6 +128,11 @@ public static class RecoveryDocumentBuilder
             {
                 var line = nativeRow.Select(g => byGlyph[g]).ToArray();
                 var raw = string.Concat(line.Select(a => a.Glyph.Text)); work.Step(raw.Length);
+                // A complete, independently validated native line beginning
+                // with exactly one explicit role prefix proves its remaining
+                // ORIGINAL atoms are that field's literal continuation. CTC
+                // peak gaps cannot turn a word inside it into another label.
+                var rolePrefixes = Regex.Matches(raw, "(?:" + RecoveryRoleLabels.Pattern + ")[：:]");
                 // Accept only complete existing day/class syntax; never infer
                 // a date or class from a substring or repair a native atom.
                 var key = PdfGrid.Key(raw);
@@ -140,7 +146,12 @@ public static class RecoveryDocumentBuilder
                     foreach (var atom in line)
                     { work.Step(); var end = offset + atom.Glyph.Text.Length; if (offset >= match.Index && end <= match.Index + match.Length) selected.Add(atom); offset = end; }
                     if (selected.Count > 0 && string.Concat(selected.Select(a => a.Glyph.Text)) == match.Value)
-                        yield return new(match.Value.TrimEnd(':', '：'), page.Key, Bounds(selected), selected.Select(a => a.Id).ToArray());
+                    {
+                        var valueIds = rolePrefixes.Count == 1 && rolePrefixes[0].Index == 0 && match.Index == 0 &&
+                            match.Value == rolePrefixes[0].Value ? line.Skip(selected.Count).Select(a => a.Id).ToArray() : null;
+                        work.Step(valueIds?.Length ?? 0);
+                        yield return new(match.Value.TrimEnd(':', '：'), page.Key, Bounds(selected), selected.Select(a => a.Id).ToArray(), NativeValueIds: valueIds);
+                    }
                 }
             }
         }
@@ -189,7 +200,10 @@ public static class RecoveryDocumentBuilder
             (int, string, string) Key(Label label)
             { work.Step(label.Ids.Count); return (label.Page, label.Value, string.Join(',', label.Ids)); }
             var seen = labels.Select(Key).ToHashSet();
-            labels = labels.Concat(OcrLineLabels(atoms, pages, ocrPages, work).Where(label => seen.Add(Key(label)))).ToArray();
+            var native = OcrLineLabels(atoms, pages, ocrPages, work).ToArray();
+            var contexts = native.Where(l => l.NativeValueIds is not null).ToDictionary(Key);
+            labels = labels.Select(l => contexts.TryGetValue(Key(l), out var context) ? l with { NativeValueIds = context.NativeValueIds } : l)
+                .Concat(native.Where(label => seen.Add(Key(label)))).ToArray();
         }
         var years = labels.Where(l => Regex.IsMatch(l.Value, @"^(?:\d{4}|令和\d{1,2})年度$")).ToArray();
         var yearValues = years.Select(l => l.Value.StartsWith("令和", StringComparison.Ordinal) ? 2018 + int.Parse(l.Value[2..^2]) : int.Parse(l.Value[..4])).Distinct().ToArray();
@@ -369,7 +383,7 @@ public static class RecoveryDocumentBuilder
                 {
                     var insideLabels = labelIndex.Contained(box);
                     work.Step(insideLabels.Length * 3L + inside.Length * 24L);
-                    try { scopes = RoleScopes(id, pi, box, inside, insideLabels, inkFree); }
+                    try { scopes = RoleScopes(id, pi, box, inside, insideLabels, inkFree, work); }
                     catch (InvalidDataException error) when (!RecoveryWorkLimits.IsExceeded(error))
                     {
                         LessonNames? trustedNames = null; IReadOnlyList<LessonNames>? trustedTuples = null;
@@ -462,14 +476,54 @@ public static class RecoveryDocumentBuilder
             years.SelectMany(l => l.Ids).Distinct().ToArray(), term is null ? [] : terms.SelectMany(l => l.Ids).Distinct().ToArray(), Evidence(usedDay), Evidence(usedClass), Evidence(usedPeriod), new Dictionary<string, string>(), [], []) { DocumentTitleEvidence = title };
         return AddTimes(document, labels, work);
     }
-    private static IReadOnlyList<RecoveryRoleScope> RoleScopes(string cellId, int page, RecoveryBox box, Atom[] body, Label[] labels, Func<int, RecoveryBox, bool> inkFree)
+    private static IReadOnlyList<RecoveryRoleScope> RoleScopes(string cellId, int page, RecoveryBox box, Atom[] body, Label[] labels, Func<int, RecoveryBox, bool> inkFree, Work work)
     {
         var result = new List<RecoveryRoleScope>(); double[]? columnAnchors = null;
         var shiftedSingleLabels = false;
+        work.Step(body.Length); var sourceAtoms = body.ToDictionary(a => a.Id);
+        var nativeValues = labels.Where(l => l.Page == page && box.Contains(l.Box) && l.NativeValueIds is { Count: > 0 }).ToArray();
+        var physicalRoles = labels.Where(l => l.Page == page && box.Contains(l.Box) &&
+            Enum.GetValues<RecoveryFieldRole>().Any(role => RecoveryRoleLabels.For(role).Contains(l.Value.TrimEnd(':', '：')))).ToArray();
+        bool LiteralContinuation(Label label)
+        {
+            work.Step(label.Ids.Count);
+            var raw = string.Concat(label.Ids.Select(id => sourceAtoms.TryGetValue(id, out var a) ? a.Glyph.Text : ""));
+            if (raw.Contains(':') || raw.Contains('：')) return false; // Another explicit prefix remains a label.
+            // Preserve the existing physical-column proof for mixed colon/bare
+            // parallel fields. A corresponding label in another role row is
+            // competing structural evidence, even inside one native OCR line.
+            foreach (var other in physicalRoles)
+            {
+                work.Step();
+                if (Enum.GetValues<RecoveryFieldRole>().Any(role =>
+                    RecoveryRoleLabels.For(role).Contains(label.Value.TrimEnd(':', '：')) &&
+                    RecoveryRoleLabels.For(role).Contains(other.Value.TrimEnd(':', '：')))) continue;
+                if (Math.Abs(label.Box.X - other.Box.X) <= 1) return false;
+            }
+            foreach (var context in nativeValues)
+            {
+                var ids = context.NativeValueIds!; work.Step(ids.Count + label.Ids.Count);
+                var start = ids.ToList().IndexOf(label.Ids[0]);
+                if (start >= 0 && ids.Skip(start).Take(label.Ids.Count).SequenceEqual(label.Ids)) return true;
+            }
+            return false;
+        }
         foreach (var role in Enum.GetValues<RecoveryFieldRole>())
         {
             var names = RecoveryRoleLabels.For(role);
-            var candidates = labels.Where(l => l.Page == page && box.Contains(l.Box) && names.Contains(l.Value.TrimEnd(':', '：'))).DistinctBy(l => string.Join(",", l.Ids)).OrderBy(l => l.Box.X).ToArray();
+            var printed = labels.Where(l => l.Page == page && box.Contains(l.Box) && names.Contains(l.Value.TrimEnd(':', '：')))
+                .Where(l => !LiteralContinuation(l)).DistinctBy(l => string.Join(",", l.Ids)).ToArray();
+            // At most four physical labels, each possibly observed both as its
+            // word prefix and with the SAME original atoms plus a colon. The
+            // latter is one fuller label, not a second parallel lesson.
+            if (printed.Length > 8) throw new InvalidDataException("科目・教員・教室の独立した原文ラベルを確認できません。");
+            var candidates = printed.Where(label => !printed.Any(other =>
+            {
+                work.Step(1L + label.Ids.Count + other.Ids.Count);
+                return other.Value.TrimEnd(':', '：') == label.Value.TrimEnd(':', '：') &&
+                    other.Ids.Count == label.Ids.Count + 1 && other.Ids.Take(label.Ids.Count).SequenceEqual(label.Ids) &&
+                    sourceAtoms.TryGetValue(other.Ids[^1], out var suffix) && suffix.Glyph.Text is ":" or "：";
+            })).OrderBy(l => l.Box.X).ToArray();
             if (candidates.Length is < 1 or > 4 || columnAnchors is not null && columnAnchors.Length != candidates.Length)
                 throw new InvalidDataException("科目・教員・教室の独立した原文ラベルを確認できません。");
             if (columnAnchors is not null && columnAnchors.Where((x, i) => Math.Abs(x - candidates[i].Box.X) > 1).Any())
