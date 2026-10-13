@@ -1,0 +1,48 @@
+{
+  "recipe": "post-worker-consumed-full-document-exact-v1",
+  "rawSHA256": "1cdcd0c32382fa0d379ce6d6262172b1b6d8d979f2bec17f82db73360d50262f",
+  "oraclePacketSHA256": "7a87ca9355ee2577fb3fab05cfc9dc86ab5d870a8e49f2119b54ef70d260a54c",
+  "scope": "Consumed original drawings only; no new heldout, production success rate or device qualification",
+  "observations": [
+    {
+      "id": "d0",
+      "condition": "production",
+      "outcome": "pipeline-refused",
+      "failure": "OCR印字の切り出し範囲を一意に確認できません。",
+      "exactDocument": false,
+      "positiveRefused": true,
+      "manualCorrections": 0,
+      "quality": "positive-failed"
+    },
+    {
+      "id": "d0",
+      "condition": "physical-input-frame",
+      "outcome": "pipeline-refused",
+      "failure": "OCR印字の切り出し範囲を一意に確認できません。",
+      "exactDocument": false,
+      "positiveRefused": true,
+      "manualCorrections": 0,
+      "quality": "positive-failed"
+    },
+    {
+      "id": "d1",
+      "condition": "production",
+      "outcome": "pipeline-refused",
+      "failure": "OCR印字の切り出し範囲を一意に確認できません。",
+      "exactDocument": false,
+      "positiveRefused": true,
+      "manualCorrections": 0,
+      "quality": "positive-failed"
+    },
+    {
+      "id": "d1",
+      "condition": "physical-input-frame",
+      "outcome": "pipeline-refused",
+      "failure": "OCR印字の切り出し範囲を一意に確認できません。",
+      "exactDocument": false,
+      "positiveRefused": true,
+      "manualCorrections": 0,
+      "quality": "positive-failed"
+    }
+  ]
+}

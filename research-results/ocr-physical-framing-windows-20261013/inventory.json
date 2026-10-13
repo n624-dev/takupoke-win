@@ -1,0 +1,46 @@
+{
+  "raw-receipt.json": {
+    "bytes": 120,
+    "sha256": "af9f9bd16ade08acf7cc73074f2e26cd2b39ce3252b035975ead9f2f1fbaf68a"
+  },
+  "source-freeze.json": {
+    "bytes": 1240,
+    "sha256": "2dcff70503bac7c79f7297d3eb7419622f59b6240c92abbb276c8812c4ef4a56"
+  },
+  "worker-stderr.txt": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "observations.jsonl": {
+    "bytes": 2963,
+    "sha256": "1cdcd0c32382fa0d379ce6d6262172b1b6d8d979f2bec17f82db73360d50262f"
+  },
+  "README.md": {
+    "bytes": 1356,
+    "sha256": "7791b0ee437ff31d0030667b4b004b9dd19af7cb5f678b23e87bfe83912db109"
+  },
+  "native-inputs.json": {
+    "bytes": 5299,
+    "sha256": "e4b1f1a0ee3d5706fb0a8b1ad655b0503bd7c3bd0058b01903e160d6ec075c6e"
+  },
+  "pdf-inputs.json": {
+    "bytes": 4954,
+    "sha256": "a30e91c283055ceda3586454c8420e93ea3f23b8651fce05d26f6a5c5260b1f8"
+  },
+  "inputs.json": {
+    "bytes": 4271,
+    "sha256": "44d2887937fc0c02c2d8a36ec35d17c561cb976fcb94f32461edd05bf6dc3903"
+  },
+  "report.json": {
+    "bytes": 1648,
+    "sha256": "5ee8cd195f8889c5cbb5d429b2dc86fdfd8a8e5c61edd3ff75d00a28e88d59b7"
+  },
+  "native-render-receipt.json": {
+    "bytes": 3981,
+    "sha256": "c607ccdfb8818015cd7ee0588535b8c9ba3b53b06f0cfb9f750fec6e673633c9"
+  },
+  "worker-stdout.txt": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

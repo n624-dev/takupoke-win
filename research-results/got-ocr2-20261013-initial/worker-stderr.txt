@@ -1,0 +1,29 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Traceback (most recent call last):
+  File "/workspace/scratch/takupoke-win/tools/ndlocr-comparison/got_worker.py", line 65, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/takupoke-win/tools/ndlocr-comparison/got_worker.py", line 31, in main
+    model=AutoModelForImageTextToText.from_pretrained(str(args.assets),local_files_only=True,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/ocr-training-runtime/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py", line 411, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/ocr-training-runtime/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4291, in from_pretrained
+    model = cls(config, *model_args, **model_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/ocr-training-runtime/lib/python3.12/site-packages/transformers/models/got_ocr2/modeling_got_ocr2.py", line 644, in __init__
+    super().__init__(config)
+  File "/workspace/scratch/ocr-training-runtime/lib/python3.12/site-packages/transformers/modeling_utils.py", line 1260, in __init__
+    self.config._attn_implementation_internal = self._check_and_adjust_attn_implementation(
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/ocr-training-runtime/lib/python3.12/site-packages/transformers/modeling_utils.py", line 1826, in _check_and_adjust_attn_implementation
+    applicable_attn_implementation = self.get_correct_attn_implementation(
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/ocr-training-runtime/lib/python3.12/site-packages/transformers/modeling_utils.py", line 1882, in get_correct_attn_implementation
+    raise e
+  File "/workspace/scratch/ocr-training-runtime/lib/python3.12/site-packages/transformers/modeling_utils.py", line 1879, in get_correct_attn_implementation
+    self._sdpa_can_dispatch(is_init_check)
+  File "/workspace/scratch/ocr-training-runtime/lib/python3.12/site-packages/transformers/modeling_utils.py", line 1667, in _sdpa_can_dispatch
+    raise ValueError(
+ValueError: GotOcr2ForConditionalGeneration does not support an attention implementation through torch.nn.functional.scaled_dot_product_attention yet. Please request the support for this architecture: https://github.com/huggingface/transformers/issues/28005. If you believe this error is a bug, please open an issue in Transformers GitHub repository and load your model with the argument `attn_implementation="eager"` meanwhile. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="eager")`

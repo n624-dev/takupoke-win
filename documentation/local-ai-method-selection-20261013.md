@@ -39,17 +39,39 @@ VLMの生出力、学習済みHTML形式の解釈、別診断を混同しない�
 | GLM-OCR Q8 |48/72|56/72|先頭改行だけを除く0call診断。原exact0、空画像の幻覚あり|
 | Qwen3-VL2B Q8 |45/72|39/72|原plain文字一致。教室の見分けが弱い|
 | Qwen3.5日本語OCR F16 |58/72|59/72|標準見出しタグの解釈修正による0call診断。教室/見出し誤読が残る|
+| NDLOCR-Lite PARSeq30/50/100 |46/44/46|47/45/46|公式入力・EOS復号。全空画像が幻覚。未合格|
+| GOT-OCR2公式 plain / CPU FP32 |21/72|28/72|見出し19/21・21/21だが、教室/空画像は全失敗。汎用置換に不採用|
 
 V5/V6/SmallのWindows/Linux出力・位置・判定は同じ原画素で一致した。
 灰色化は字体・内容をまたいで安定した改善にならず、アプリへ採用しない。
 日本語F16モデルはLinuxで約11.56GiBを占め、16GBのWindowsで主経路にするには
 メモリ余裕が小さい。Windows実測・原墨所属・役割・全文書は未合格。
 予測bboxや複数readerの一致だけを原文の証明にしない。
+Tesseract English bestの別見出し条件も9/21・8/21一致、空画像0/6で未合格。
+GOTはLinuxで約5.24GiB・192行約44分を要した。見出し専用の研究余地はあるが、
+確率校正・原位置・全文書・Windows実機の検証なしに採用しない。
 
 [V5/V6](../research-results/ocr-model-color-20261013/README.md) /
 [固定原画素](../research-results/ocr-model-color-frozen-20261013/README.md) /
 [VLM](../research-results/vision-ocr-frozen-20261013/README.md) /
 [日本語OCR](../research-results/vision-jp-ocr-frozen-20261013/README.md)。
+[NDLOCR](../research-results/ndlocr-native-20261013/README.md) /
+[Tesseract](../research-results/tesseract-eng-best-20261013/README.md) /
+[GOT](../research-results/got-ocr2-20261013/README.md)。
+
+## 画像セルの取得と明示ラベルの別の改善
+
+単一授業の科目・担当・教室ラベルが各1個で別行にある場合、わずかな横位置差だけで
+拒否していた構造判定を修正した。原ラベルのIDが独立し、3つの役割範囲が垂直に
+重ならない証明を必須とし、並列授業や重なる行の拒否は維持する。
+Integration912件、Core288件が通過。文字認識器・確率・座標を変更する修正ではない。
+
+別の未有効化の研究では、元の文字画素をすべて残して認識入力を物理セル内に限定した。
+既消費2文書の原画ではセル30→40、保存済み出力の再検証で正式一致1/2。
+しかし実Windows PDF描画では画素寸法が変わり、両文書とも元の切り出し所属で拒否した。
+原画での一致をWindows上の成功へ換算できない。取得失敗の原因と新全文書を継続検証する。
+[原画の診断](../research-results/ocr-physical-framing-20261013/README.md) /
+[Windows実描画](../research-results/ocr-physical-framing-windows-20261013/README.md)。
 
 ## 軽量認識器の追加学習という別の選択肢
 
