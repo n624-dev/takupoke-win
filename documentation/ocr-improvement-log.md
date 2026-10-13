@@ -1,5 +1,24 @@
 # OCR improvement log
 
+## 2026-10-13: Same-pixel V5/V6 comparison and single-scan CTC decoding
+
+Implementation `659aa1b` introduces a shared greedy CTC decoder which validates
+all probabilities while selecting each time-step maximum in one scan. First-token
+ties, CTC intervals, repeated-token maximum confidence, printed spaces and the
+production 0.8 guard are unchanged. Fourteen deterministic decoder regressions
+passed, with Core288/Integration886 and four independent comparison-scorer tests.
+
+The new fixed experiment completed768 Linux recognizer calls on192 newly painted
+ordinal rows across two fonts, with matching V5/V6 official dictionaries and the
+same source pixels in original BGR/fixed-gray conditions. Old/new decoding was
+identical for every native tensor. Mean-per-tensor timing sums were8361.10ms versus
+1642.71ms, a5.09× CTC-component improvement, not application-wide speed. V6 BGR
+BODY exactness improved46→54/72 on Sans and44→57/72 on Serif, but7/9 high-confidence
+wrong BODY rows remained. Gray did not provide a stable improvement. No model or
+preprocessing condition is activated. Source freezes, raw outputs, CER, errors,
+resources, Windows follow-up and limitations are in the
+[comparison record](../research-results/ocr-model-color-20261013/README.md).
+
 ## 2026-10-08: Existing blind I/l results audited without more inference
 
 The existing native reports from [37711605271](https://github.com/n624-dev/takupoke-win/actions/runs/37711605271) and [37711786954](https://github.com/n624-dev/takupoke-win/actions/runs/37711786954) were regrouped after measurement. No image, model, reader call, threshold change or adoption was added. Each colour group contains16 canonical-I observations under the previously fixed size/phase/suffix combinations, on the same Noto Sans JP font.

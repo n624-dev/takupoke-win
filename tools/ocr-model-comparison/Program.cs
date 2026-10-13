@@ -19,6 +19,7 @@ using var writer = new StreamWriter(output);
 var rows = manifest.RootElement.GetProperty("rows").EnumerateArray().ToArray();
 if (rows.Length != 192) throw new InvalidDataException("Frozen row count changed.");
 var completed = 0;
+var nativeIdentities = new HashSet<string>(StringComparer.Ordinal);
 foreach (var model in manifest.RootElement.GetProperty("models").EnumerateArray())
 {
     var name = model.GetProperty("id").GetString()!;
@@ -30,6 +31,13 @@ foreach (var model in manifest.RootElement.GetProperty("models").EnumerateArray(
     var load = Stopwatch.StartNew();
     using var session = new InferenceSession(modelPath, options);
     load.Stop();
+    // Keep the session alive while inspecting its native module. Windows can
+    // unload it when the final session is disposed; filename casing also varies.
+    var nativeName = OperatingSystem.IsWindows() ? "onnxruntime.dll" : "libonnxruntime.so";
+    var nativeModules = Process.GetCurrentProcess().Modules.Cast<ProcessModule>()
+        .Where(m => Path.GetFileName(m.FileName).Equals(nativeName, StringComparison.OrdinalIgnoreCase)).ToArray();
+    if (nativeModules.Length != 1) throw new InvalidDataException("Cannot uniquely identify the active ONNX runtime before recognition.");
+    nativeIdentities.Add(Sha(nativeModules[0].FileName));
     foreach (var row in rows)
     foreach (var condition in new[] { "bgr", "gray" })
     {
@@ -79,8 +87,7 @@ var process = Process.GetCurrentProcess(); process.Refresh();
 Console.WriteLine(JsonSerializer.Serialize(new { completed, actualModelCalls = completed, legacyComparisonAdditionalModelCalls = 0,
     processPeakWorkingSetBytes = process.PeakWorkingSet64, os = System.Runtime.InteropServices.RuntimeInformation.OSDescription,
     architecture = System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture.ToString(), dotnet = Environment.Version.ToString(),
-    nativeRuntimeSha256 = Sha(process.Modules.Cast<ProcessModule>().Single(m =>
-        Path.GetFileName(m.FileName) == (OperatingSystem.IsWindows() ? "onnxruntime.dll" : "libonnxruntime.so")).FileName),
+    nativeRuntimeSha256 = nativeIdentities.Single(),
     qualification = "unassessed", detectorCalls = 0, llmCalls = 0, formalAdoptions = 0 }));
 
 string Verified(JsonElement asset)

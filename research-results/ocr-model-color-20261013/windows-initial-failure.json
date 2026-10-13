@@ -1,0 +1,11 @@
+{
+  "runId": 38342832269,
+  "sourceCommit": "659aa1bcce02af8de705e3652f063f9b921ce0f5",
+  "conclusion": "failure",
+  "stage": "terminal native-runtime identity reporting after the recognition loops",
+  "error": "Sequence contains no matching element",
+  "qualityStatus": "unassessed",
+  "assessedQualityRows": 0,
+  "cleanupSucceeded": true,
+  "fix": "Capture native module identity case-insensitively while the session is alive, before recognition; no model/input/preprocessing/decoder/threshold change."
+}

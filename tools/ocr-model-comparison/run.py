@@ -151,6 +151,16 @@ def edit_distance(expected, actual):
     return previous[-1]
 
 
+def outcome_sha(rows):
+    # Compare text/time geometry and floor dispositions across OSes without
+    # pretending their floating-point probabilities or timings are byte-equal.
+    values = [{**{k: r[k] for k in ("id", "model", "condition", "text", "unsupportedPadding", "ValidWidth", "InputWidth", "timeSteps")},
+               "belowFloorOrEmpty": r["minimumConfidence"] is None or r["minimumConfidence"] < .8,
+               "pieces": [{k: p[k] for k in ("Text", "Start", "End")} for p in r["pieces"]]} for r in rows]
+    values.sort(key=lambda r: (r["id"], r["model"], r["condition"]))
+    return sha(json.dumps(values, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode())
+
+
 def score(raw, gold):
     expected = {r["id"]: r for r in gold}
     if len(expected) != 192:
@@ -210,6 +220,7 @@ def main():
         (out / "worker-stdout.txt").write_text(worker.stdout, encoding="utf-8")
         (out / "worker-stderr.txt").write_text(worker.stderr, encoding="utf-8")
         if worker.returncode:
+            print(worker.stdout[-4096:], flush=True)
             print(worker.stderr[-4096:], file=sys.stderr); raise RuntimeError("Recognition worker failed; missing calls unassessed")
         # Freeze all raw responses before opening the expected text for scoring.
         raw_path = out / "observations.jsonl"; raw_digest = sha(raw_path.read_bytes())
@@ -219,7 +230,7 @@ def main():
         if asset(out / "oracle.json", out) != freeze["oracle"]:
             raise ValueError("Oracle changed after freeze")
         report = {**freeze, "rawSha256": raw_digest, "worker": [json.loads(line) for line in worker.stdout.splitlines() if line.startswith("{")],
-                  "aggregates": score(observed, gold), "modelActivation": False}
+                  "aggregates": score(observed, gold), "outcomeSha256": outcome_sha(observed), "modelActivation": False}
         write_json(out / "report.json", report)
         print(json.dumps(report, ensure_ascii=False), flush=True)
     finally:

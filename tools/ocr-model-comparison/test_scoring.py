@@ -49,6 +49,18 @@ class ScoringTests(unittest.TestCase):
         self.assertTrue(all(bgr[i] == gray[i] == 255 for i in range(3, len(bgr), 4)))
         self.assertTrue(all(gray[i] == gray[i + 1] == gray[i + 2] for i in range(0, len(gray), 4)))
 
+    def test_outcome_digest_keeps_text_geometry_and_floor_decisions(self):
+        row = {"id": "n000", "model": "v5-mobile", "condition": "bgr", "text": "甲",
+               "unsupportedPadding": False, "ValidWidth": 72, "InputWidth": 320, "timeSteps": 80,
+               "minimumConfidence": .9, "pieces": [{"Text": "甲", "Start": 3, "End": 4, "Confidence": .9}]}
+        digest = run.outcome_sha([row])
+        row["minimumConfidence"] = .900001; row["pieces"][0]["Confidence"] = .900001
+        self.assertEqual(digest, run.outcome_sha([row]))
+        row["pieces"][0]["End"] = 5
+        self.assertNotEqual(digest, run.outcome_sha([row]))
+        row["pieces"][0]["End"] = 4; row["minimumConfidence"] = .79
+        self.assertNotEqual(digest, run.outcome_sha([row]))
+
 
 if __name__ == "__main__":
     unittest.main()
