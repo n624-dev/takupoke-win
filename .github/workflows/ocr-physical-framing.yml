@@ -1,4 +1,4 @@
-name: Measure physical OCR input framing on native Windows PDFs
+name: Diagnose native Windows synthetic PDF acquisition
 on:
   push:
     branches: [codex/windows-local-ai-improvement-20261013]
@@ -41,10 +41,10 @@ jobs:
           cache: false
       - run: python scripts/check-public-tree.py
       - run: python -B -m unittest discover -s tools/ocr-physical-framing -p 'test_*.py'
-      - name: Render image PDFs and close the paired whole-document comparison
+      - name: Reacquire native synthetic pixels without repeating model calls
         run: |
           $owned = Join-Path $env:TAKUPOKE_FRAME_TEMP 'study'
-          python -B tools/ocr-physical-framing/run_windows.py --output $owned
+          python -B tools/ocr-physical-framing/run_windows.py --output $owned --acquisition-only
           if ($LASTEXITCODE -ne 0) { throw 'Native acquisition or measurement failed; missing calls stay unassessed.' }
       - name: Remove all owned models, synthetic sources and packages
         if: always()

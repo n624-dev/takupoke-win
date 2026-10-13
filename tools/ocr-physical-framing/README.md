@@ -36,6 +36,9 @@ The scoped Windows workflow logs bounded compressed evidence consisting only of
 synthetic research JSON/text observations. It cleans all owned models, source
 pixels, PDFs and package caches unconditionally and uploads no Actions artifacts.
 Neither this tool nor a successful workflow qualifies a production model.
+`--acquisition-only` reacquires native synthetic pixels for diagnosis without
+repeating detector/recognizer calls. That mode logs the SHA-verified public
+synthetic pixel assets as well, never models, PDFs or school data.
 
 ```sh
 python -B -m unittest discover -s tools/ocr-physical-framing -p 'test_*.py'

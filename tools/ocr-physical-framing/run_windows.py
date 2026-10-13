@@ -43,8 +43,9 @@ def command(argv, env, timeout=300, output=None):
 
 
 def emit_evidence(root, files):
-    # Only the named synthetic public research observations are transported in
-    # logs. No models, images, PDFs, secrets, caches or original school data.
+    # Only named synthetic public research files are transported in logs.
+    # The acquisition-only diagnosis also preserves the native synthetic pixels.
+    # No models, PDFs, secrets, caches or original school data are transported.
     stream = io.BytesIO()
     with tarfile.open(fileobj=stream, mode='w') as archive:
         for name in files:
@@ -65,6 +66,7 @@ def emit_evidence(root, files):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--acquisition-only', action='store_true')
     args = parser.parse_args()
     if os.name != 'nt':
         raise RuntimeError('Actual Windows renderer required')
@@ -99,6 +101,15 @@ def main():
     runtime = ROOT / 'windows-render/bin/Release/net10.0-windows10.0.26100.0/win-x64/WindowsRender.dll'
     safe = {k: v for k, v in env.items() if not any(x in k.upper() for x in ('TOKEN', 'SECRET', 'PASSWORD', 'CREDENTIAL'))}
     command(['dotnet', str(runtime), str(owned / 'pdf-inputs.json')], safe)
+    if args.acquisition_only:
+        # Reacquire the closed synthetic drawings to diagnose the observed
+        # native ownership refusal; do not repeat OCR or add accuracy cases.
+        native = json.loads((owned / 'native-inputs.json').read_text(encoding='utf-8'))
+        pixels = [p['pixels']['file'] for d in native['documents'] for p in d['pages']]
+        emit_evidence(owned, ['inputs.json', 'pdf-inputs.json', 'native-inputs.json',
+            'native-render-receipt.json', 'source-freeze.json', *pixels])
+        print('Acquisition diagnosis only; detector/recognizer calls 0, no accuracy credit.', flush=True)
+        return
     command(['dotnet', 'build', str(ROOT / 'Probe.csproj'), '-c', 'Release', '--verbosity', 'quiet'], env)
     raw = owned / 'observations.jsonl'
     command(['dotnet', str(ROOT / 'bin/Release/net10.0/Takupoke.OcrComparison.dll'),
