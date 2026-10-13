@@ -1,0 +1,6 @@
+{
+  "scope": "Read-only provided whole-line development input comparison, no model or inference; no claim about other source densities/fonts",
+  "nativeTensorIdenticalPairedContrasts": 0,
+  "matches": [],
+  "limits": "If normalized inputs are exactly identical, a deterministic crop recognizer cannot distinguish those targets. A failure to find exact equality does not prove recoverability or complete-source/script ownership."
+}

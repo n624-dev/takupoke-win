@@ -4,9 +4,11 @@ using Takupoke.Infrastructure.Recovery;
 // New consumed-data research condition: trim only empty/proven-rule INPUT
 // margins after original connected ownership, before any recognition occurs.
 // One shared work allowance per page; no CTC/output-dependent crop choice.
-internal sealed class InkCropFrame(RecoveryRaster image, bool[] mask, CancellationToken token)
+internal sealed class InkCropFrame(RecoveryRaster image, bool[] mask, CancellationToken token, int originalPixelMargin = 2)
 {
     private readonly RecoveryRaster.PixelWork _work = new(token);
+    private readonly double _margin = originalPixelMargin is >= 0 and <= 8 ? originalPixelMargin :
+        throw new InvalidDataException("Declared original-pixel margin is outside the research bound.");
 
     internal RecoveryBox Restrict(RecoveryBox original)
     {
@@ -29,7 +31,7 @@ internal sealed class InkCropFrame(RecoveryRaster image, bool[] mask, Cancellati
             left = Math.Min(left, x); top = Math.Min(top, y); right = Math.Max(right, x); bottom = Math.Max(bottom, y);
         }
         if (right < left) return original; // Does not assert an empty field.
-        const double margin = 2; // Fixed original-pixel margin, never tuned per prediction/font.
+        var margin = _margin; // Fixed per measurement before inference, never per prediction/font.
         var bx = Math.Max(original.X, left - margin); var by = Math.Max(original.Y, top - margin);
         var ex = Math.Min(original.X + original.Width, right + 1 + margin);
         var ey = Math.Min(original.Y + original.Height, bottom + 1 + margin);

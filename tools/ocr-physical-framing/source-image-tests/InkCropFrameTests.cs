@@ -4,6 +4,25 @@ using Xunit;
 
 public sealed class InkCropFrameTests
 {
+    [Theory]
+    [InlineData(0)] [InlineData(2)] [InlineData(4)] [InlineData(8)]
+    public void EveryDeclaredMarginRetainsFaintInkAndOriginalBytes(int margin)
+    {
+        var image = White(40, 30); Paint(image, 10, 12, 0); Paint(image, 22, 17, 254);
+        var snapshot = image.Bgra.ToArray(); var original = new RecoveryBox(2, 3, 34, 23);
+        var box = new InkCropFrame(image, new bool[1200], CancellationToken.None, margin).Restrict(original);
+        Assert.True(box.Contains(new(10, 12, 1, 1))); Assert.True(box.Contains(new(22, 17, 1, 1)));
+        Assert.True(original.Contains(box)); Assert.Equal(snapshot, image.Bgra);
+    }
+
+    [Theory]
+    [InlineData(-1)] [InlineData(9)]
+    public void UnboundedDeclaredMarginsAreNotAccepted(int margin)
+    {
+        var image = White(40, 30);
+        Assert.Throws<InvalidDataException>(() => new InkCropFrame(image, new bool[1200], CancellationToken.None, margin));
+    }
+
     [Fact]
     public void FaintOriginalTextIsRetainedAndOnlyWhiteMarginsAreTrimmed()
     {

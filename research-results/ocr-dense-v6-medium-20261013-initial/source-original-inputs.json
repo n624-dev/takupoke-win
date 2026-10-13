@@ -1,0 +1,412 @@
+{
+  "recipe": "physical-input-framing-fresh-development-v1",
+  "documents": [
+    {
+      "id": "d0-positive",
+      "originalPDFSHA256": "a8303be75a84e43f71a61de6cfbdeb1f899069f8c0259e1b13d4cfee0a35d47c",
+      "pages": [
+        {
+          "page": 1,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-positive-source-p1.bgra",
+            "bytes": 11593800,
+            "sha256": "679ecc0f645ffae30faa2c46c1f6c86182f20d236d0dcd43f1b4a9924e7971df"
+          }
+        },
+        {
+          "page": 2,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-positive-source-p2.bgra",
+            "bytes": 11593800,
+            "sha256": "d1351ab7044f8b2a0b52208661f987f0f148517d010be877e3eac91369f89d3e"
+          }
+        },
+        {
+          "page": 3,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-positive-source-p3.bgra",
+            "bytes": 11593800,
+            "sha256": "27dd181d7b6f5a88bebd0fa1c351df637ca3f1754f9c91e3fcf1af1d337db58a"
+          }
+        },
+        {
+          "page": 4,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-positive-source-p4.bgra",
+            "bytes": 11593800,
+            "sha256": "1bab7711b98c46a670438c9b4f051c275477bc3a332743725e93d224ad9b9777"
+          }
+        },
+        {
+          "page": 5,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-positive-source-p5.bgra",
+            "bytes": 11593800,
+            "sha256": "1b5ddf01ca2ac5827331f2a1c15dd8d39f7b5901cf609106013d6c37d6728d01"
+          }
+        }
+      ],
+      "plannedConditions": [
+        "ink-input-frame"
+      ],
+      "originalDrawingPDFSHA256": "b6c466e93cc4b03993311acf40132a17e198a9f0079414438f1c694baeaf5a74",
+      "sourcePDF": {
+        "file": "d0-positive-lossless.pdf",
+        "bytes": 1239198,
+        "sha256": "a8303be75a84e43f71a61de6cfbdeb1f899069f8c0259e1b13d4cfee0a35d47c"
+      }
+    },
+    {
+      "id": "d0-missing-day",
+      "originalPDFSHA256": "64f984fc237f65280dc9bc82ea7340bc5c2d53c8b1a2bbff9581f123cfde474d",
+      "pages": [
+        {
+          "page": 1,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-missing-day-source-p1.bgra",
+            "bytes": 11593800,
+            "sha256": "e01c8335aecf45be8cebc299ee3e6373964af773be97900d92933e370e211466"
+          }
+        },
+        {
+          "page": 2,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-missing-day-source-p2.bgra",
+            "bytes": 11593800,
+            "sha256": "d1351ab7044f8b2a0b52208661f987f0f148517d010be877e3eac91369f89d3e"
+          }
+        },
+        {
+          "page": 3,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-missing-day-source-p3.bgra",
+            "bytes": 11593800,
+            "sha256": "27dd181d7b6f5a88bebd0fa1c351df637ca3f1754f9c91e3fcf1af1d337db58a"
+          }
+        },
+        {
+          "page": 4,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-missing-day-source-p4.bgra",
+            "bytes": 11593800,
+            "sha256": "1bab7711b98c46a670438c9b4f051c275477bc3a332743725e93d224ad9b9777"
+          }
+        },
+        {
+          "page": 5,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-missing-day-source-p5.bgra",
+            "bytes": 11593800,
+            "sha256": "1b5ddf01ca2ac5827331f2a1c15dd8d39f7b5901cf609106013d6c37d6728d01"
+          }
+        }
+      ],
+      "plannedConditions": [
+        "ink-input-frame"
+      ],
+      "originalDrawingPDFSHA256": "428f1f9f8823132e9816e3947ab7e852b43b5ab6280bf673a35330c059ba5acb",
+      "sourcePDF": {
+        "file": "d0-missing-day-lossless.pdf",
+        "bytes": 1238687,
+        "sha256": "64f984fc237f65280dc9bc82ea7340bc5c2d53c8b1a2bbff9581f123cfde474d"
+      }
+    },
+    {
+      "id": "d0-noncanonical-class",
+      "originalPDFSHA256": "f4142515d7b4747fcfc09480c50f0317d97c49165d92e7a477ed2301486e78d5",
+      "pages": [
+        {
+          "page": 1,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-noncanonical-class-source-p1.bgra",
+            "bytes": 11593800,
+            "sha256": "f6fb0b33b965f21d82487ae40ee6af8292c959408b564aebf2049f44d13fa267"
+          }
+        },
+        {
+          "page": 2,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-noncanonical-class-source-p2.bgra",
+            "bytes": 11593800,
+            "sha256": "8cf2c01acfb12af504da4477817da8fed8a463fb8c2931581110c5e8adcc6d95"
+          }
+        },
+        {
+          "page": 3,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-noncanonical-class-source-p3.bgra",
+            "bytes": 11593800,
+            "sha256": "5b08132a215c40c32d17bc1df34cf70ec82da2582bc80094db6190a3c01cec0e"
+          }
+        },
+        {
+          "page": 4,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-noncanonical-class-source-p4.bgra",
+            "bytes": 11593800,
+            "sha256": "f69df225650adc89bf1fbf2bfae9ed5ee7e623ebdcfff7011e3e4a347887f2b1"
+          }
+        },
+        {
+          "page": 5,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d0-noncanonical-class-source-p5.bgra",
+            "bytes": 11593800,
+            "sha256": "3eea58e17c582a677995aca6ef50139369a2f06c9b8b6692ff2a224444acded8"
+          }
+        }
+      ],
+      "plannedConditions": [
+        "ink-input-frame"
+      ],
+      "originalDrawingPDFSHA256": "fbefb31f2d5cd371caa0ded332e971674f7b6fcd6cd323d10252b5a9a4f9734c",
+      "sourcePDF": {
+        "file": "d0-noncanonical-class-lossless.pdf",
+        "bytes": 1239148,
+        "sha256": "f4142515d7b4747fcfc09480c50f0317d97c49165d92e7a477ed2301486e78d5"
+      }
+    },
+    {
+      "id": "d1-positive",
+      "originalPDFSHA256": "fde443a43225f0ad4725d6da6834ce432714e052b0a98d4366400dcc0788aa18",
+      "pages": [
+        {
+          "page": 1,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-positive-source-p1.bgra",
+            "bytes": 11593800,
+            "sha256": "ca249fce8280b41991f070332edbad5f0a5cc34d81bc7c94d99b77b84c873979"
+          }
+        },
+        {
+          "page": 2,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-positive-source-p2.bgra",
+            "bytes": 11593800,
+            "sha256": "d839087de3f232036d04ffb656d205664c60aec6b4772ee8c56771e01c7d7d06"
+          }
+        },
+        {
+          "page": 3,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-positive-source-p3.bgra",
+            "bytes": 11593800,
+            "sha256": "7a7776054e0f222d4fab91be26b0b8f25c604fd10e798f36aec9fbb19e2246dd"
+          }
+        },
+        {
+          "page": 4,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-positive-source-p4.bgra",
+            "bytes": 11593800,
+            "sha256": "859f2a2435f751e0c7cc10bc218f5268a72f8f6abbf294ed302c4203acaf7864"
+          }
+        },
+        {
+          "page": 5,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-positive-source-p5.bgra",
+            "bytes": 11593800,
+            "sha256": "a962de27040b4f617286cdaea4fcb77b5fca41e8d0a6e7d219546512dd9f11eb"
+          }
+        }
+      ],
+      "plannedConditions": [
+        "ink-input-frame"
+      ],
+      "originalDrawingPDFSHA256": "164b19abe99f26d17f106a94082f4f6670bbc8d52f8867272a359293abda902d",
+      "sourcePDF": {
+        "file": "d1-positive-lossless.pdf",
+        "bytes": 1276045,
+        "sha256": "fde443a43225f0ad4725d6da6834ce432714e052b0a98d4366400dcc0788aa18"
+      }
+    },
+    {
+      "id": "d1-missing-day",
+      "originalPDFSHA256": "d10cd71771fe2dd053b4bcf44cdb3435078e5141b6351baa548194d82bd85aa5",
+      "pages": [
+        {
+          "page": 1,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-missing-day-source-p1.bgra",
+            "bytes": 11593800,
+            "sha256": "d2356d3b06091e7ad37c2c99d0237aa11b97537c1ad929d8968d69daeba06a31"
+          }
+        },
+        {
+          "page": 2,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-missing-day-source-p2.bgra",
+            "bytes": 11593800,
+            "sha256": "d839087de3f232036d04ffb656d205664c60aec6b4772ee8c56771e01c7d7d06"
+          }
+        },
+        {
+          "page": 3,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-missing-day-source-p3.bgra",
+            "bytes": 11593800,
+            "sha256": "7a7776054e0f222d4fab91be26b0b8f25c604fd10e798f36aec9fbb19e2246dd"
+          }
+        },
+        {
+          "page": 4,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-missing-day-source-p4.bgra",
+            "bytes": 11593800,
+            "sha256": "859f2a2435f751e0c7cc10bc218f5268a72f8f6abbf294ed302c4203acaf7864"
+          }
+        },
+        {
+          "page": 5,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-missing-day-source-p5.bgra",
+            "bytes": 11593800,
+            "sha256": "a962de27040b4f617286cdaea4fcb77b5fca41e8d0a6e7d219546512dd9f11eb"
+          }
+        }
+      ],
+      "plannedConditions": [
+        "ink-input-frame"
+      ],
+      "originalDrawingPDFSHA256": "52971c553a7e32266ccfe236a1dc9fd230c18cd6f683f54273c3a56c373c5e51",
+      "sourcePDF": {
+        "file": "d1-missing-day-lossless.pdf",
+        "bytes": 1275681,
+        "sha256": "d10cd71771fe2dd053b4bcf44cdb3435078e5141b6351baa548194d82bd85aa5"
+      }
+    },
+    {
+      "id": "d1-noncanonical-class",
+      "originalPDFSHA256": "0b7cada6cc1bcc488bc7448195df8e0215bd62f139e349b5e2da1b1d3a8268da",
+      "pages": [
+        {
+          "page": 1,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-noncanonical-class-source-p1.bgra",
+            "bytes": 11593800,
+            "sha256": "0bac206027eb0dabcad4a513d6a14a27952a6bfd0331f2b3f93f371fef430f89"
+          }
+        },
+        {
+          "page": 2,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-noncanonical-class-source-p2.bgra",
+            "bytes": 11593800,
+            "sha256": "fd32535b3102c9b02d5f1ca5215279776c4a8052e8b4795c22a06451acf76096"
+          }
+        },
+        {
+          "page": 3,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-noncanonical-class-source-p3.bgra",
+            "bytes": 11593800,
+            "sha256": "fd8768f0e1300a8dcd331687fdd6fd23783bf23b018b3a2ac00348edf1a56f6b"
+          }
+        },
+        {
+          "page": 4,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-noncanonical-class-source-p4.bgra",
+            "bytes": 11593800,
+            "sha256": "711f4565a4cdb69f74f082441deac38e1cb42f3bd501db8ed940c64f170278c3"
+          }
+        },
+        {
+          "page": 5,
+          "width": 2034,
+          "height": 1425,
+          "pixels": {
+            "file": "d1-noncanonical-class-source-p5.bgra",
+            "bytes": 11593800,
+            "sha256": "8b9a0b84422683b55af0ecc3ba78ed0f216bb03d5626b04a6ea977681504bcaf"
+          }
+        }
+      ],
+      "plannedConditions": [
+        "ink-input-frame"
+      ],
+      "originalDrawingPDFSHA256": "9df98bb9ab40514ac85346f1c75580e900900b681c6fbd1724768c8fba339359",
+      "sourcePDF": {
+        "file": "d1-noncanonical-class-lossless.pdf",
+        "bytes": 1275986,
+        "sha256": "0b7cada6cc1bcc488bc7448195df8e0215bd62f139e349b5e2da1b1d3a8268da"
+      }
+    }
+  ],
+  "detector": {
+    "file": "det.onnx",
+    "bytes": 4826518,
+    "sha256": "a431985659dc921974177a95adcfbb90fd9e51989a5e04d70d0b75f597b6e61d"
+  },
+  "recognizer": {
+    "file": "recognizer.onnx",
+    "bytes": 76554979,
+    "sha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba"
+  },
+  "dictionary": {
+    "file": "dictionary.json",
+    "bytes": 112374,
+    "sha256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f"
+  },
+  "sourceScope": "Research-only actual PDF opaque whole-page source image acquisition; no OS resampling, consumed drawings where applicable; not production/final qualification",
+  "researchSymbols": 18710
+}

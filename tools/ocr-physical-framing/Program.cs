@@ -32,7 +32,9 @@ var m = manifest.RootElement;
 if (m.GetProperty("recipe").GetString() is not ("physical-input-framing-consumed-originals-v1" or "physical-input-framing-fresh-development-v1")) throw new InvalidDataException("Recipe mismatch.");
 var det = Verified(m.GetProperty("detector")); var rec = Verified(m.GetProperty("recognizer"));
 var dictionary = Verified(m.GetProperty("dictionary"));
-using var lifetime = new CancellationTokenSource(TimeSpan.FromMinutes(15));
+var deadline = m.TryGetProperty("researchDeadlineSeconds", out var declaredDeadline) ? declaredDeadline.GetInt32() : 900;
+if (deadline is < 1 or > 3600) throw new InvalidDataException("Research deadline exceeds its bound.");
+using var lifetime = new CancellationTokenSource(TimeSpan.FromSeconds(deadline));
 var token = lifetime.Token; OrtEnv.Instance().DisableTelemetryEvents();
 var needsBaseline = m.GetProperty("documents").EnumerateArray().Any(item =>
     !item.TryGetProperty("plannedConditions", out var conditions) || conditions.EnumerateArray().Any(c => c.GetString() == "production"));
@@ -42,6 +44,7 @@ using var options = new SessionOptions { IntraOpNumThreads = 2, InterOpNumThread
 using var detector = new InferenceSession(det, options); using var recognizer = new InferenceSession(rec, options);
 var alphabet = JsonSerializer.Deserialize<string[]>(File.ReadAllBytes(dictionary))!;
 var expectedSymbols = m.TryGetProperty("researchSymbols", out var symbols) ? symbols.GetInt32() : 18385;
+var originalInkMargin = m.TryGetProperty("researchInkMargin", out var declaredMargin) ? declaredMargin.GetInt32() : 2;
 if (expectedSymbols is not (18385 or 18710) || alphabet.Length != expectedSymbols || alphabet[0] != "" || alphabet[^1] != " ")
     throw new InvalidDataException("Pinned native research alphabet required.");
 using var writer = new StreamWriter(new FileStream(args[1], FileMode.CreateNew, FileAccess.Write));
@@ -83,7 +86,7 @@ foreach (var condition in diagnoseOwnership ? new[] { "ownership-diagnosis" } :
                     continue;
                 }
                 var completed = OcrCropCompleteness.Complete(raster, boxes, token);
-                var inkFrame = new InkCropFrame(raster, mask, token);
+                var inkFrame = new InkCropFrame(raster, mask, token, originalInkMargin);
                 var framed = completed.Select(b => condition == "ink-input-frame" ? inkFrame.Restrict(b) :
                     PhysicalCropFrame.Restrict(raster, b, rules, mask, token)).ToArray();
                 var output = new List<PdfGlyph>(); var nativeScores = new List<double>(); var line = 0; var order = 0;

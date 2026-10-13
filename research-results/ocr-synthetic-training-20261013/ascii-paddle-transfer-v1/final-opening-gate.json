@@ -1,0 +1,12 @@
+{
+  "scope": "Additional prospective research continuation gate recorded before the first epoch4 development checkpoint; does not change frozen training or model selection, and is not production qualification",
+  "timing": "Original full18710/reduced-untrained baselines known; training epoch2 in progress; no trained development checkpoint evaluated",
+  "selectedMustBeTrained": true,
+  "minimumPositiveRawExactFraction": 0.97,
+  "minimumCorrectAcceptedFraction": 0.90,
+  "maximumIncorrectAccepted": 0,
+  "maximumNegativeAccepted": 0,
+  "minimumPerDevelopmentFontRawExactFraction": 0.95,
+  "onFailure": "Keep Sawarabi final unopened and defer ONNX/CoreML exports; document relative changes and reasons, no activation",
+  "onPass": "Freeze selected weights and separate final protocol before rendering final fonts; standard ONNX/metadata and independent full-document evaluation are later stages, not guaranteed eligibility"
+}

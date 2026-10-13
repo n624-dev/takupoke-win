@@ -1,0 +1,183 @@
+{
+  "scope": "Independent development diagnostics; no final, activation or inference correction",
+  "selected": "epoch-8",
+  "diagnostics": [
+    {
+      "name": "original-full18710",
+      "fonts": {
+        "HinaMincho-Regular": {
+          "rows": 256,
+          "exact": 213,
+          "correctAccepted": 195,
+          "incorrectAccepted": 23
+        },
+        "KiwiMaru-Regular": {
+          "rows": 256,
+          "exact": 192,
+          "correctAccepted": 173,
+          "incorrectAccepted": 23
+        }
+      },
+      "improvementsVsOriginal": 0,
+      "regressionsVsOriginal": 0,
+      "improvementsVsReducedUntrained": 0,
+      "regressionsVsReducedUntrained": 4,
+      "maximumWrongAcceptedMinimumConfidence": 0.9990979433059692,
+      "wrongAcceptedIds": [
+        "development-00008",
+        "development-00060",
+        "development-00086",
+        "development-00137",
+        "development-00155",
+        "development-00224",
+        "development-00225",
+        "development-00258",
+        "development-00265",
+        "development-00278",
+        "development-00279",
+        "development-00286",
+        "development-00287",
+        "development-00293",
+        "development-00294",
+        "development-00295",
+        "development-00298",
+        "development-00299",
+        "development-00302",
+        "development-00303",
+        "development-00305",
+        "development-00306",
+        "development-00307",
+        "development-00314",
+        "development-00315",
+        "development-00324",
+        "development-00325",
+        "development-00336",
+        "development-00340",
+        "development-00348",
+        "development-00359",
+        "development-00364",
+        "development-00369",
+        "development-00380",
+        "development-00394",
+        "development-00396",
+        "development-00405",
+        "development-00418",
+        "development-00421",
+        "development-00432",
+        "development-00459",
+        "development-00468",
+        "development-00470",
+        "development-00489",
+        "development-00493",
+        "development-00497"
+      ]
+    },
+    {
+      "name": "epoch-4",
+      "fonts": {
+        "HinaMincho-Regular": {
+          "rows": 256,
+          "exact": 243,
+          "correctAccepted": 205,
+          "incorrectAccepted": 4
+        },
+        "KiwiMaru-Regular": {
+          "rows": 256,
+          "exact": 212,
+          "correctAccepted": 180,
+          "incorrectAccepted": 22
+        }
+      },
+      "improvementsVsOriginal": 73,
+      "regressionsVsOriginal": 23,
+      "improvementsVsReducedUntrained": 70,
+      "regressionsVsReducedUntrained": 24,
+      "maximumWrongAcceptedMinimumConfidence": 0.994658887386322,
+      "wrongAcceptedIds": [
+        "development-00008",
+        "development-00015",
+        "development-00035",
+        "development-00060",
+        "development-00086",
+        "development-00116",
+        "development-00163",
+        "development-00224",
+        "development-00225",
+        "development-00308",
+        "development-00312",
+        "development-00324",
+        "development-00325",
+        "development-00336",
+        "development-00337",
+        "development-00364",
+        "development-00365",
+        "development-00376",
+        "development-00377",
+        "development-00380",
+        "development-00381",
+        "development-00394",
+        "development-00421",
+        "development-00434",
+        "development-00448",
+        "development-00500"
+      ]
+    },
+    {
+      "name": "epoch-8",
+      "fonts": {
+        "HinaMincho-Regular": {
+          "rows": 256,
+          "exact": 251,
+          "correctAccepted": 224,
+          "incorrectAccepted": 2
+        },
+        "KiwiMaru-Regular": {
+          "rows": 256,
+          "exact": 221,
+          "correctAccepted": 208,
+          "incorrectAccepted": 21
+        }
+      },
+      "improvementsVsOriginal": 74,
+      "regressionsVsOriginal": 7,
+      "improvementsVsReducedUntrained": 70,
+      "regressionsVsReducedUntrained": 7,
+      "maximumWrongAcceptedMinimumConfidence": 0.9974006414413452,
+      "wrongAcceptedIds": [
+        "development-00035",
+        "development-00060",
+        "development-00086",
+        "development-00116",
+        "development-00224",
+        "development-00225",
+        "development-00308",
+        "development-00312",
+        "development-00324",
+        "development-00325",
+        "development-00336",
+        "development-00337",
+        "development-00364",
+        "development-00365",
+        "development-00369",
+        "development-00380",
+        "development-00381",
+        "development-00384",
+        "development-00394",
+        "development-00418",
+        "development-00421",
+        "development-00448",
+        "development-00500"
+      ]
+    }
+  ],
+  "continuationGate": {
+    "selectedTrained": true,
+    "rawExactAtLeast97percent": false,
+    "correctAcceptedAtLeast90percent": false,
+    "incorrectAcceptedZero": false,
+    "negativeAcceptedZero": true,
+    "eachDevFontExactAtLeast95percent": false
+  },
+  "mayPlanSeparateFinalAndPortableStage": false,
+  "limits": "Even passing a research continuation gate cannot qualify literal header/source ownership, contradictory source/script provenance or full-document correctness."
+}

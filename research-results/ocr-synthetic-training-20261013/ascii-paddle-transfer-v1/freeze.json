@@ -1,0 +1,94 @@
+{
+  "protocol": {
+    "namespace": "research-ascii-paddle-transfer-v1",
+    "scope": "Independent fictional bounded development; no production qualification or final credit",
+    "baseRevision": "fe049fb103f57443fe8840c54ed06b702f3c1de5",
+    "baseSha256": "f65a332afe5aa663f0b9d5706f4ae8457b5b4058a842d5c1eb22df505c27d642",
+    "dictionary": "blank0 + printableASCII U32..126 indices1..95 (space1) + UNK96; rows copied from original official dictionary",
+    "preprocessing": "All RGB!=255 whole-line bbox +2originalpx, no whitening/threshold/per-glyph crop; retain every original nonwhite sample/shared baseline/relative heights/internal gaps. Production BGR48 original-center bilinear uint8 round norm0padding width320..960.",
+    "train": {
+      "seed": 63190719,
+      "positiveRows": 4096,
+      "negativeRows": 1024,
+      "fonts": [
+        "NotoSansJP400",
+        "NotoSerifJP400",
+        "MPLUS1p-Regular",
+        "ZenKakuGothicNew-Regular",
+        "BIZUDPMincho-Regular"
+      ]
+    },
+    "development": {
+      "seed": 63190937,
+      "positiveRows": 512,
+      "negativeRows": 192,
+      "fonts": [
+        "KiwiMaru-Regular",
+        "HinaMincho-Regular"
+      ]
+    },
+    "positiveKinds": [
+      "code",
+      "case",
+      "confusable",
+      "printable"
+    ],
+    "negativeKinds": [
+      "cjk",
+      "mixed",
+      "clipped",
+      "multiline",
+      "noise",
+      "blank"
+    ],
+    "rendering": "font16..32logicalpx density2/4, common baseline, black/navy/gray/green; 10percent mild Gaussian blur, no JPEG; paired case/confusable strings use same rendering seed/font; framing all nonwhite after degradation",
+    "training": {
+      "seed": 63191151,
+      "threads": 2,
+      "epochs": 12,
+      "evaluateEpochs": [
+        4,
+        8,
+        12
+      ],
+      "batchSize": 32,
+      "encoderLearningRate": 0.0001,
+      "classifierLearningRate": 0.0003,
+      "rejectLearningRate": 0.0003,
+      "weightDecay": 0.0001,
+      "gradientClip": 5.0,
+      "rejectLossWeight": 0.5,
+      "teacherKlWeight": 0.05,
+      "maximumTrainingSeconds": 1800,
+      "rssLimitMiB": 4096,
+      "featurePolicy": "CNN weights and all BN fixed/eval; original SVTR encoder trainable lowLR; original copied head trainable; full-vocabulary frozen teacher projected by exact sum of excluded probabilities into UNK for KL. Negatives target UNK, never lost full text."
+    },
+    "acceptance": "Experimental only: nonempty printableASCII/noUNK, emitted minconfidence>=.8, rejectProbability<=.05 for trained models, and every CTC interval within validWidth. Baselines without trained reject use original same minconfidence/domain/padding gates. Native/full-source proof remains mandatory independently.",
+    "selection": "Include original full18710 base. A trained checkpoint may replace it only if positive exact>=original, incorrectAccepted<=original, negativeAccepted<=original. Eligible maximum correctAccepted, then exact, lower wrongAccepted, lower negativeAccepted, lower CER, earlier epoch; baseline wins exact ties. Reduced untrained baseline is diagnostic only, no probability inflation credit. No final opening unless development is promising and fixed model/conditions are frozen.",
+    "final": "Sawarabi Gothic/Mincho reserved, not rendered or inferred in this bounded stage; separate final protocol required if promising",
+    "exclusion": "Exact prior literals from official comparison oracle, PP manifests, scratch ASCII manifests, parent physical-frame-fresh-development oracle and existing repo research JSONs; exclusion only, never copied as targets. New train/dev mutually disjoint. No school originals.",
+    "sourceProofProbes": "Separate unscored pixel-alias and lost-whole-prefix contradiction probes; identical recognizer pixels with incompatible source/script provenance cannot be resolved by crop classifier. Never train on these contradictory targets.",
+    "portability": "If promising standard ONNX + BGR48/dictionary/reject/source metadata later; optional CoreML conversion without iOS edit or iPhone eligibility claim"
+  },
+  "protocolSha256": "306b85beb9904c7695cfa0261ee6edfc0d091ae7b563ce33cdf9b1efa6291054",
+  "sourceHashes": {
+    "data.py": "0d65aca80cdcafc635c6b0e1c1a7f8746fe9af83a0cc3e8e5faf991e323bae58",
+    "model.py": "de522d1ffe82d14b3853289f973e55a87e634841dfd7a5812e7540abc9e7738d",
+    "train.py": "2a2145f784ce6a798817250fd63fe72171626a0bf99cf9c5c3a1cce00d2081ae",
+    "protocol.json": "c3baa0e91961b03d622c1c0bc10b5869639b7d6535724af8db92f4a8c883c0fe"
+  },
+  "fontHashes": {
+    "NotoSansJP400": "54aba28468f275bc372eda5f29b202c0d9e7b9ba2bc18a53a4c72c481c75cf9f",
+    "NotoSerifJP400": "2b127545ad3dba023d255733015059e550d9dbcd04c980a80021dc8ea666e813",
+    "MPLUS1p-Regular": "2f294ad496432b1608f070d310e3aa2adcf1de4af429f4901df97ec4bd361ed1",
+    "ZenKakuGothicNew-Regular": "b840cd07a67d89cacca44249ae49aa99ee7640eb5ce623be8d8983d6aabac801",
+    "BIZUDPMincho-Regular": "02e07546c51503acb864004b663f1762f099d8fbe1af7d619b185568568101ef",
+    "KiwiMaru-Regular": "b0c3103b2639f690c1fcb44e060058383174bfd2eb72e6635bc9869b374dee87",
+    "HinaMincho-Regular": "8395fafa0c2721b4b5c274031e1336fea0f703d908b175ee21f8ba2f1ad566a0"
+  },
+  "fontPriorExposure": "Train fonts previously used. Dev KiwiMaru/HinaMincho parent confirmed unconsumed; ZenMaru previously consumed and downloaded only here, NOT used in new dev. Final Sawarabi reserved untouched.",
+  "exclusionReceiptSha256": "2fc6e69852f4d0990237e19875af6bf2293ee1e30113008a32338fb12c129c3a",
+  "oldRuntimeSourceHashes": {
+    "image_tensor.py": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098"
+  }
+}

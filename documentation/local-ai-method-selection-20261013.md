@@ -111,6 +111,24 @@ EasyOCR English G2の既存モデルは同じ調整画像で70行一致、全墨
 [新規CTC](../research-results/ocr-synthetic-training-20261013/ascii-line-ctc-v1/README.md) /
 [English G2](../research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/README.md)。
 
+別に凍結したV6 smallの英数字転移学習は、調整用512行で405→472行一致、誤採用46→23行に
+改善した。ただし入力の中間保存にFP16丸めがあり、production FP32との画素テンソル一致は
+未確認。全候補同条件での相対比較であり、native導入精度へは換算しない。
+事前の継続ゲート未達で最終字体・ONNX/CoreML出力を温存した。
+[小型転移と入力精度監査](../research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/README.md)。
+
+自然な教室原行には日本語と英数字が混在する。完了した密帳票1件のV6 medium診断では、
+科目・担当が各680/680一致した一方、教室は501/680で179行誤読、169行がnative0.8以上だった。
+取得／構造だけの改善や低信頼度の減少では合格できず、本文最大3訂正にも収まらない。
+初回の900秒上限で別字体が途中終了したため、未完了分を精度や欠落検出へ数えない。
+別の凍結条件で全6帳票を再測定し、日本語の元出力を保つ英数字改善を検討している。
+[初回密帳票の状態と本文診断](../research-results/ocr-dense-v6-medium-20261013-initial/README.md)。
+
+V5 serverの全6密帳票は、先頭の低信頼度空白またはセル候補重複で全正式結果が失敗した。
+TrOCR base printedの別見出し比較も25/42一致・誤診断採用9行・空白画像全幻覚で不採用。
+[V5 server全文書](../research-results/ocr-dense-v5-server-20261013/README.md) /
+[TrOCR](../research-results/trocr-printed-headers-20261013/README.md)。
+
 ## 配布・再利用時の範囲
 
 検証済みWindowsコードは研究/改善ブランチとPRへ反映する。
