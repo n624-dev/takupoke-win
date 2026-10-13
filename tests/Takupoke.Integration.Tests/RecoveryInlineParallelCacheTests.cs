@@ -134,7 +134,7 @@ public sealed class RecoveryInlineParallelCacheTests
         Assert.Equal(RecoveryValidator.Fingerprint(old.Document with { StructureMetadata = null }), RecoveryValidator.Fingerprint(current.Document with { StructureMetadata = null }));
         Assert.Equal(RecoveryValidator.Fingerprint(old.Result.Cells), RecoveryValidator.Fingerprint(current.Result.Cells));
         var formal = Assert.IsType<MaterialAnalysis>(await context.Store.ReadAsync<MaterialAnalysis>(context.Lease, "analysis.Timetable"));
-        Assert.Equal(25, formal.ParserVersion);
+        Assert.Equal(PdfScheduleParser.TimetableVersion, formal.ParserVersion);
         Assert.Equal("架空科目A", Assert.Single(formal.Timetable!.Lessons).Names.Subject);
         Assert.NotNull(formal.Recovery);
         Assert.Equal(current.Acceptance, formal.Recovery!.Acceptance);
@@ -434,7 +434,7 @@ public sealed class RecoveryInlineParallelCacheTests
         // A stale early return would say Parsed=true and leave the old attempt.
         Assert.False(refreshed.Parsed);
         var attempt = Assert.IsType<MaterialAttempt>(await context.Store.ReadAsync<MaterialAttempt>(context.Lease, "attempt.Timetable"));
-        Assert.Equal(25, attempt.ParserVersion);
+        Assert.Equal(PdfScheduleParser.TimetableVersion, attempt.ParserVersion);
         Assert.Equal(context.Source.Digest, attempt.SourceDigest);
         Assert.NotNull(attempt.Failure);
         Assert.True(attempt.RecoveryPending);

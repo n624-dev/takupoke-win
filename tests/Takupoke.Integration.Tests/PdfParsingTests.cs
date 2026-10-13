@@ -336,6 +336,65 @@ public sealed class PdfParsingTests
             Assert.True(capture.Complete);
         }
     }
+    [Theory]
+    [InlineData("0.4 g ")]
+    [InlineData("0.9 g ")]
+    [InlineData("1 0 0 rg ")]
+    [InlineData("0 0 1 rg ")]
+    [InlineData("0 .6 0 rg ")]
+    [InlineData(".9 .9 .9 rg ")]
+    [InlineData(".2 .3 .7 rg .2 .3 .7 RG ")]
+    [InlineData("q 1 g Q .7 .1 .1 rg ")]
+    public void OpaqueDeviceColourPreservesOriginalTextPositionAndCapture(string prefix)
+    {
+        foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
+        {
+            // Save/restore advances the source-line ID even without a colour
+            // change. Preserve those same operations in the black control.
+            var original = Assert.Single(PdfPigLayoutReader.Read(SyntheticPdf(
+                prefix: prefix.StartsWith("q ", StringComparison.Ordinal) ? "q 1 g Q 0 g " : null), kind));
+            var capture = new RecoveryReadCapture();
+            var coloured = Assert.Single(PdfPigLayoutReader.Read(SyntheticPdf(prefix: prefix), kind, capture: capture));
+            Assert.Equal(original.Glyphs, coloured.Glyphs);
+            Assert.Equal(original.Lines, coloured.Lines);
+            Assert.True(capture.Complete);
+        }
+    }
+    [Theory]
+    [InlineData(".91 g ", null)]
+    [InlineData(".91 .92 .93 rg ", null)]
+    [InlineData("-.1 0 0 rg ", null)]
+    [InlineData("0 0 1.1 rg ", null)]
+    [InlineData("0 0 1 rg ", "/ca 0.5")]
+    [InlineData("0 0 1 rg ", "/SMask /None")]
+    [InlineData("0 0 1 rg ", "/BM /Multiply")]
+    public void DeviceColourCannotBypassContrastRangeOrGraphicsState(string prefix, string? state)
+    {
+        foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
+        {
+            var capture = new RecoveryReadCapture();
+            Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(SyntheticPdf(prefix: prefix, graphicsState: state), kind, capture: capture));
+            Assert.False(capture.Complete);
+        }
+    }
+    [Theory]
+    [InlineData("DefaultRGB", "0 0 1 rg ", false)]
+    [InlineData("DefaultRGB", "0 g ", true)]
+    [InlineData("DefaultGray", "", false)]
+    [InlineData("DefaultGray", "0 0 1 rg 0 0 0 RG ", true)]
+    [InlineData("DefaultCMYK", "0 0 0 1 k ", false)]
+    public void OnlyTheUsedDeviceColourRequiresItsOwnUnsubstitutedSpace(string overridden, string prefix, bool allowed)
+    {
+        foreach (var kind in new[] { MaterialKind.Timetable, MaterialKind.Exam, MaterialKind.ExamReturn })
+        {
+            // An override is deliberately not interpreted as the source device
+            // space, even when the declared alternative has a familiar name.
+            var capture = new RecoveryReadCapture();
+            var bytes = SyntheticPdf(prefix: prefix, colourSpaces: $"/{overridden} /DeviceRGB");
+            if (allowed) { Assert.Single(PdfPigLayoutReader.Read(bytes, kind, capture: capture)); Assert.True(capture.Complete); }
+            else { Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(bytes, kind, capture: capture)); Assert.False(capture.Complete); }
+        }
+    }
     [Fact]
     public void GraphicsStateLineWidthCannotBypassTheOverpaintCheck()
     {
@@ -453,7 +512,7 @@ public sealed class PdfParsingTests
         for (var index = 0; index <= 40; index++) lines.Add(new(40 + index * 10, 60, 40 + index * 10, 140));
         return new(500, 500, glyphs, lines);
     }
-    internal static byte[] SyntheticPdf(bool removeMapping = false, bool formObject = false, string? graphicsState = null, string? prefix = null, string? suffix = null, string? cropBox = null)
+    internal static byte[] SyntheticPdf(bool removeMapping = false, bool formObject = false, string? graphicsState = null, string? prefix = null, string? suffix = null, string? cropBox = null, string? colourSpaces = null)
     {
         var cmap = "1 begincodespacerange <00> <ff> endcodespacerange 2 beginbfchar <41> <67b6> <42> <7a7a> endbfchar";
         var content = (prefix ?? "") + (graphicsState is null ? "" : "/Ghost gs ") + "BT /F1 10 Tf 1 0 0 1 20 100 Tm (AB) Tj ET 10 10 100 120 re S" + (suffix ?? "") + (formObject ? " /Fake Do" : "");
@@ -462,7 +521,7 @@ public sealed class PdfParsingTests
         {
             "<< /Type /Catalog /Pages 2 0 R >>",
             "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
-            "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 200 200] " + (cropBox ?? "") + " /Resources << /Font << /F1 4 0 R >> " + (graphicsState is null ? "" : "/ExtGState << /Ghost << /Type /ExtGState " + graphicsState + " >> >> ") + ">> /Contents 5 0 R >>",
+            "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 200 200] " + (cropBox ?? "") + " /Resources << /Font << /F1 4 0 R >> " + (graphicsState is null ? "" : "/ExtGState << /Ghost << /Type /ExtGState " + graphicsState + " >> >> ") + (colourSpaces is null ? "" : "/ColorSpace << " + colourSpaces + " >> ") + ">> /Contents 5 0 R >>",
             "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding /FirstChar 65 /LastChar 66 /Widths [500 500] /FontDescriptor 7 0 R" + (removeMapping ? "" : " /ToUnicode 6 0 R") + " >>",
             Stream(content), Stream(cmap),
             "<< /Type /FontDescriptor /FontName /Helvetica /Flags 32 /FontBBox [0 -200 1000 800] /ItalicAngle 0 /Ascent 800 /Descent -200 /CapHeight 700 /StemV 80 >>"

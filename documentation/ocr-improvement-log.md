@@ -1,5 +1,24 @@
 # OCR improvement log
 
+## 2026-10-13: Source-first colour compatibility on complete dense documents
+
+The iOS reference exposed the same black-only acquisition restriction in the
+Windows Reader. The candidate accepts bounded opaque unsubstituted DeviceGray/
+RGB colours, retaining unknown colour-space substitution, near-white, transparency,
+clipping, masks, overpaint and glyph/rule refusal contracts. CMYK keeps its former
+exact-black subset; no OCR/model/confidence setting changes. Parser versions26/24
+reconsider cached same-digest PDF outcomes and preserve previous good data.
+
+The same eleven frozen PDFs compare baselinef040bb6 and the candidate. Five
+positive colour counterparts each contain five pages,680 slots and2040 body
+values. Baseline returns one complete black formal result and four readable
+colour refusals; the candidate returns all five exact full formal results with680
+original ordered-row proofs each. All six scope/structure controls refuse,
+incorrect acceptance0, execution errors0, manual corrections/OCR/GenAI calls0.
+This reuses consumed content/geometry; it is not independent model-quality credit.
+Local integration906/906 passed. [Source evidence](../research-results/pdf-colour-acquisition-20261013/README.md)
+retains full observations. Native Windows/full CI remain separate required checks.
+
 ## 2026-10-13: Frozen cross-OS pixels, local VLM comparisons and iOS reference
 
 The frozen original-pixel packet removes platform font painting as a confounder.

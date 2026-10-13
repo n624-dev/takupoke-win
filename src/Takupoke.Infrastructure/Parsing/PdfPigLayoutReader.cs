@@ -43,9 +43,14 @@ public static partial class PdfPigLayoutReader
                 if (page.Letters.Count == 0) throw new PdfParseException("raster", number);
                 var transform = new PdfDisplayTransform(media.Left, media.Bottom, media.Width, media.Height, page.Rotation.Value);
                 var paths = new PdfPathEngine(transform, token);
-                var visibility = new VisibilityState();
+                var resources = Resources(document, page.Dictionary);
+                var colourSpaces = Get(resources, "ColorSpace") is { } colours ? Resolve<DictionaryToken>(document, colours) : null;
+                var visibility = new VisibilityState(
+                    colourSpaces?.Data.ContainsKey("DefaultGray") != true,
+                    colourSpaces?.Data.ContainsKey("DefaultRGB") != true,
+                    colourSpaces?.Data.ContainsKey("DefaultCMYK") != true);
                 var text = kind == MaterialKind.Timetable || fontRecovery is not null ? new PdfTextEngine(token,traceForRecovery:fontRecovery is not null) : null;
-                var resources = Resources(document, page.Dictionary); var fonts = new Dictionary<string, Lazy<PdfFont>>();
+                var fonts = new Dictionary<string, Lazy<PdfFont>>();
                 foreach (var operation in page.Operations)
                 {
                     token.ThrowIfCancellationRequested();
@@ -183,12 +188,12 @@ public static partial class PdfPigLayoutReader
         }
         return false;
     }
-    // Only reuse the supported black-text drawing subset. Unsupported colours
-    // or later paint can leave extractable text which is absent from the page.
-    private sealed class VisibilityState
+    // Reuse only opaque supported device colours on the white page. Unknown
+    // colour-space substitutions, near-white text and later paint stay refused.
+    private sealed class VisibilityState(bool deviceGray, bool deviceRgb, bool deviceCmyk)
     {
-        private readonly record struct State(bool FillBlack, bool FillWhite, bool StrokeBlack, int TextMode, double LineWidth, PdfMatrix Ctm);
-        private State _state = new(true, false, true, 0, 1, PdfMatrix.Identity);
+        private readonly record struct State(bool FillVisible, bool FillWhite, bool StrokeVisible, int TextMode, double LineWidth, PdfMatrix Ctm);
+        private State _state = new(deviceGray, false, deviceGray, 0, 1, PdfMatrix.Identity);
         private readonly Stack<State> _stack = new();
         private bool _shown;
         private bool _painted;
@@ -202,7 +207,7 @@ public static partial class PdfPigLayoutReader
             // right angles and their painted miter fits the collision margin.
             // Shear/nonuniform scaling can hide a much longer original miter.
             var tolerance = Math.Max(xLength, yLength) * 1e-12;
-            if (!_state.StrokeBlack || !double.IsFinite(scale) || scale <= 0 || Math.Abs(xLength - yLength) > tolerance || Math.Abs(xx * yx + xy * yy) > tolerance
+            if (!_state.StrokeVisible || !double.IsFinite(scale) || scale <= 0 || Math.Abs(xLength - yLength) > tolerance || Math.Abs(xx * yx + xy * yy) > tolerance
                 || _state.LineWidth * scale > 2 || !paths.PendingStrokeIsRules(closeLast)) throw new PdfParseException("P01", page);
         }
         public void SetLineWidth(double width, int page)
@@ -213,20 +218,26 @@ public static partial class PdfPigLayoutReader
         public void Operation(IGraphicsStateOperation operation, int page, PdfPathEngine paths)
         {
             var name = operation.Operator;
-            bool Black(double[] components) => name.ToLowerInvariant() switch
+            bool SupportedDevice() => name.ToLowerInvariant() switch
+            { "g" => deviceGray, "rg" => deviceRgb, "k" => deviceCmyk, _ => false };
+            bool Visible(double[] components) => SupportedDevice() && (name.ToLowerInvariant() switch
             {
-                "g" => components.Length == 1 && components[0] == 0,
-                "rg" => components.Length == 3 && components.All(v => v == 0),
+                // Require at least ten percent source contrast in a channel.
+                // This is a conservative colour bound, not OCR confidence.
+                "g" => components.Length == 1 && components[0] <= .9,
+                "rg" => components.Length == 3 && components.Min() <= .9,
+                // DeviceCMYK conversion is renderer-dependent. Keep the former
+                // exact-black subset until independent native colour evidence.
                 "k" => components.Length == 4 && components.Take(3).All(v => v == 0) && components[3] == 1,
                 _ => false
-            };
-            bool White(double[] components) => name switch
+            });
+            bool White(double[] components) => SupportedDevice() && (name switch
             {
                 "g" => components.Length == 1 && components[0] == 1,
                 "rg" => components.Length == 3 && components.All(v => v == 1),
                 "k" => components.Length == 4 && components.All(v => v == 0),
                 _ => false
-            };
+            });
             switch (name)
             {
                 case "d":
@@ -242,9 +253,12 @@ public static partial class PdfPigLayoutReader
                     _state = _state with { Ctm = PdfMatrix.From(Numbers(operation)).FollowedBy(_state.Ctm) }; break;
                 case "g": case "rg": case "k":
                     var colour = Numbers(operation);
-                    _state = _state with { FillBlack = Black(colour), FillWhite = White(colour) }; break;
+                    if (colour.Any(v => v is < 0 or > 1)) throw new PdfParseException("P01", page);
+                    _state = _state with { FillVisible = Visible(colour), FillWhite = White(colour) }; break;
                 case "G": case "RG": case "K":
-                    _state = _state with { StrokeBlack = Black(Numbers(operation)) }; break;
+                    var strokeColour = Numbers(operation);
+                    if (strokeColour.Any(v => v is < 0 or > 1)) throw new PdfParseException("P01", page);
+                    _state = _state with { StrokeVisible = Visible(strokeColour) }; break;
                 case "CS": case "cs": case "SC": case "SCN": case "sc": case "scn":
                 case "sh": case "BI": case "ID": case "EI":
                 case "c": case "v": case "y":
@@ -259,11 +273,11 @@ public static partial class PdfPigLayoutReader
                     if (mode.Length != 1 || mode[0] != 0) throw new PdfParseException("P01", page);
                     _state = _state with { TextMode = (int)mode[0] }; break;
                 case "Tj": case "TJ": case "'": case "\"":
-                    if (_state.TextMode is 0 or 2 && !_state.FillBlack || _state.TextMode is 1 or 2 && !_state.StrokeBlack)
+                    if (_state.TextMode is 0 or 2 && !_state.FillVisible || _state.TextMode is 1 or 2 && !_state.StrokeVisible)
                         throw new PdfParseException("P01", page);
                     _shown = true; break;
                 case "f": case "F": case "f*": case "B": case "B*": case "b": case "b*":
-                    if (_shown || _state.FillWhite && _painted || !_state.FillWhite && !(_state.FillBlack && paths.PendingFillIsThinRules)) throw new PdfParseException("P01", page);
+                    if (_shown || _state.FillWhite && _painted || !_state.FillWhite && !(_state.FillVisible && paths.PendingFillIsThinRules)) throw new PdfParseException("P01", page);
                     if (name is "B" or "B*" or "b" or "b*") { CheckStroke(page, paths, name is "b" or "b*"); _painted = true; }
                     else if (!_state.FillWhite) _painted = true;
                     break;
