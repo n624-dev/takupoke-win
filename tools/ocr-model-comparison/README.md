@@ -63,3 +63,10 @@ correction and saved adoption are not executed. Favorable character scores do
 not qualify a model or permit production grayscale preprocessing. The research
 workflow additionally checks native Windows reproducibility; Linux alone cannot
 establish Windows runtime or physical-device performance.
+
+`run_frozen.py` replaces per-OS painting in the next native comparison. It
+transports the exact original development pixels in the independently hashed
+fictional PNG packet, verifies decoded BGRA bytes and reconstructs the same fixed
+gray condition. All JSON input/oracle writes use canonical UTF-8/LF bytes. Model,
+sampler, preprocessing, floor and decoder remain unchanged. The measured variable
+is pixel transport; these consumed examples do not become new independent cases.

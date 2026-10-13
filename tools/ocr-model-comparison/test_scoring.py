@@ -1,9 +1,22 @@
 import unittest
 
 import run
+import run_frozen
 
 
 class ScoringTests(unittest.TestCase):
+    def test_frozen_transport_keeps_pixel_hashes_and_canonical_line_endings(self):
+        import json
+        from pathlib import Path
+        import tempfile
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); rows = run_frozen.prepare_rows(root)
+            self.assertEqual(192, len(rows))
+            source = json.loads(run_frozen.PIXELS.read_text(encoding='utf-8'))['rows']
+            self.assertEqual([r['bgraSha256'] for r in source], [r['bgr']['sha256'] for r in rows])
+            run_frozen.canonical_write(root / 'canonical.json', {'text': '架空\n文字'})
+            self.assertEqual(b'{"text":"\xe6\x9e\xb6\xe7\xa9\xba\\n\xe6\x96\x87\xe5\xad\x97"}\n', (root / 'canonical.json').read_bytes())
+
     @staticmethod
     def fixture():
         gold = [{"id": f"n{i:03d}", "cohort": "sans" if i < 96 else "serif", "kind": "room", "literal": "仮室I0"} for i in range(192)]

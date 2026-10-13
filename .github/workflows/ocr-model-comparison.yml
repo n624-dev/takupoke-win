@@ -4,7 +4,11 @@ on:
     branches: [codex/windows-local-ai-improvement-20261013]
     paths:
       - '.github/workflows/ocr-model-comparison.yml'
-      - 'tools/ocr-model-comparison/**'
+      - 'tools/ocr-model-comparison/Program.cs'
+      - 'tools/ocr-model-comparison/Probe.csproj'
+      - 'tools/ocr-model-comparison/run.py'
+      - 'tools/ocr-model-comparison/run_frozen.py'
+      - 'tools/vision-ocr-comparison/fictional-pixels.json'
       - 'src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs'
       - 'src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs'
       - 'src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs'
@@ -53,7 +57,7 @@ jobs:
       - name: Compare fixed models, pixels and decoder outputs
         run: |
           $owned = Join-Path $env:TAKUPOKE_OCR_TEMP 'measurement'
-          python -B tools/ocr-model-comparison/run.py --output $owned --cleanup
+          python -B tools/ocr-model-comparison/run_frozen.py --output $owned --cleanup
           if ($LASTEXITCODE -ne 0) { throw 'OCR comparison failed; missing calls remain unassessed.' }
       - name: Remove all owned models, fonts and caches
         if: always()
