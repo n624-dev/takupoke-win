@@ -465,11 +465,21 @@ public static class RecoveryDocumentBuilder
     private static IReadOnlyList<RecoveryRoleScope> RoleScopes(string cellId, int page, RecoveryBox box, Atom[] body, Label[] labels, Func<int, RecoveryBox, bool> inkFree)
     {
         var result = new List<RecoveryRoleScope>(); double[]? columnAnchors = null;
+        var shiftedSingleLabels = false;
         foreach (var role in Enum.GetValues<RecoveryFieldRole>())
         {
             var names = RecoveryRoleLabels.For(role);
             var candidates = labels.Where(l => l.Page == page && box.Contains(l.Box) && names.Contains(l.Value.TrimEnd(':', '：'))).DistinctBy(l => string.Join(",", l.Ids)).OrderBy(l => l.Box.X).ToArray();
-            if (candidates.Length is < 1 or > 4 || columnAnchors is not null && (columnAnchors.Length != candidates.Length || columnAnchors.Where((x, i) => Math.Abs(x - candidates[i].Box.X) > 1).Any())) throw new InvalidDataException("科目・教員・教室の独立した原文ラベルを確認できません。");
+            if (candidates.Length is < 1 or > 4 || columnAnchors is not null && columnAnchors.Length != candidates.Length)
+                throw new InvalidDataException("科目・教員・教室の独立した原文ラベルを確認できません。");
+            if (columnAnchors is not null && columnAnchors.Where((x, i) => Math.Abs(x - candidates[i].Box.X) > 1).Any())
+            {
+                // Parallel lessons still need corresponding physical columns.
+                // One unique explicit label per role has no tuple to choose;
+                // use the separate, nonoverlapping row proof below instead.
+                if (candidates.Length != 1) throw new InvalidDataException("科目・教員・教室の独立した原文ラベルを確認できません。");
+                shiftedSingleLabels = true;
+            }
             columnAnchors ??= candidates.Select(l => l.Box.X).ToArray();
             foreach (var (label, lessonIndex) in candidates.Select((l, i) => (l, i)))
             {
@@ -481,6 +491,15 @@ public static class RecoveryDocumentBuilder
                 result.Add(new(lessonIndex, role, page, scope, label.Ids, new(page, label.Box, RecoveryHeaderAxis.Left), RecoveryRoleProof.InlineLabel,
                     role != RecoveryFieldRole.Subject && values.Length == 0 && inkFree(page, scope)));
             }
+        }
+        if (shiftedSingleLabels)
+        {
+            var ordered = result.OrderBy(s => s.Box.Y).ToArray();
+            var labelIds = result.SelectMany(s => s.LabelSourceIds).ToArray();
+            if (result.Count != Enum.GetValues<RecoveryFieldRole>().Length || result.Any(s => s.LessonIndex != 0) ||
+                labelIds.Distinct().Count() != labelIds.Length ||
+                ordered.Zip(ordered.Skip(1)).Any(pair => pair.First.Box.Y + pair.First.Box.Height >= pair.Second.Box.Y))
+                throw new InvalidDataException("科目・教員・教室の独立した原文ラベルを確認できません。");
         }
         return result;
     }

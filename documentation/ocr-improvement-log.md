@@ -1,5 +1,30 @@
 # OCR improvement log
 
+## 2026-10-13: Separate-row role labels and physical OCR input research
+
+The production builder previously rejected explicit subject/teacher/room labels
+whose horizontal starts differed by more than one pixel, even with exactly one
+independent label per role on separate rows. The new bounded proof permits that
+case only when source IDs are distinct and the three role scopes are vertically
+disjoint. Parallel columns and overlapping rows still refuse. Original strings,
+boxes, confidence, coverage and validator requirements remain unchanged. Four
+new positive cases (including an empty teacher and all three document kinds)
+and two refusal cases pass; the complete local suites pass Integration912 and
+Core288. This is a source-contract regression fix, not OCR qualification.
+
+A separate, disabled research reader restricts native recognizer inputs to
+physical cells after connected-ink ownership, removing only white or verified
+rule pixels. On two consumed five-page drawings it produced40 cells instead of
+30. Before the builder fix both arms still failed formal recovery. A closed-raw
+zero-inference replay under the bounded fix produced one exact document with
+all40 slots, names and verified blanks; the other still refused four low-score
+period headers. This is consumed-data diagnosis, not new independent accuracy.
+The scoped Windows workflow will test actual PDF reading and native rendering
+of new lossless image-only containers from those same drawing pixels. Changing
+the container supplies no extra independent document credit. The input-framing
+prototype remains separate from the app while new-document and refusal work
+continues. [Research tool](../tools/ocr-physical-framing/README.md).
+
 ## 2026-10-13: Independent source final and optional portable OCR adaptation
 
 Native Windows38351289220 and Linux both passed two new independent complete
