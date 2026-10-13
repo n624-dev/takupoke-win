@@ -219,7 +219,6 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
         static PdfRule Merge(List<PdfRule> run) => run[0].Vertical ? new(run.Average(l => l.X1), run.Min(l => l.Y1), run.Average(l => l.X2), run.Max(l => l.Y2)) : new(run.Min(l => l.X1), run.Average(l => l.Y1), run.Max(l => l.X2), run.Average(l => l.Y2));
     }
 }
-internal sealed record OcrRecognitionPiece(string Text, int Start, int End, float Confidence);
 internal sealed record OcrRecognitionObservation(RecoveryBox DetectedCrop, RecoveryBox RecognitionCrop,
     int ValidWidth, int InputWidth, int TimeCount, IReadOnlyList<OcrRecognitionPiece> Pieces)
 {
@@ -295,19 +294,12 @@ public sealed class OnnxJapaneseOcr : IDisposable
             token.ThrowIfCancellationRequested(); var input = OcrInputTransform.Recognition(image, box, token);
             VerifyRecognitionWidth(input.InputWidth);
             using var recognition = _recognizer.Run([NamedOnnxValue.CreateFromTensor("x", input.Tensor)]); token.ThrowIfCancellationRequested(); var logits = recognition.First().AsTensor<float>();
-            if (logits.Dimensions.Length != 3 || logits.Dimensions[0] != 1 || logits.Dimensions[1] <= 0 || logits.Dimensions[2] != 18385) throw new InvalidDataException("OCR認識モデルの出力形状が一致しません。");
-            var checkedScores = 0;
-            foreach (var score in logits)
-            {
-                if (++checkedScores % 4096 == 0) token.ThrowIfCancellationRequested();
-                if (!float.IsFinite(score) || score is < 0 or > 1) throw new InvalidDataException("OCR認識の確信度が不正です。");
-            }
-            var tCount = logits.Dimensions[1]; var previous = -1; var pieces = new List<(string Text, int Start, int End, float Confidence)>();
-            for (var t = 0; t < tCount; t++) { var best = 0; var score = logits[0, t, 0]; for (var c = 1; c < 18385; c++) if (logits[0, t, c] > score) { score = logits[0, t, c]; best = c; } if (best != 0 && best != previous) pieces.Add((_dictionary[best], t, t + 1, score)); else if (best != 0 && pieces.Count > 0) { var last = pieces[^1]; pieces[^1] = last with { End = t + 1, Confidence = Math.Max(last.Confidence, score) }; } previous = best; }
+            var pieces = OcrCtcDecoder.Decode(logits, _dictionary, token);
+            var tCount = logits.Dimensions[1];
             // Retain already-computed pieces before the existing refusal. No
             // extra model call, alternate decoding or confidence adjustment.
             RecognitionObserver?.Invoke(new(boxes[index], box, input.ValidWidth, input.InputWidth, tCount,
-                Array.AsReadOnly(pieces.Select(p => new OcrRecognitionPiece(p.Text, p.Start, p.End, p.Confidence)).ToArray())));
+                Array.AsReadOnly(pieces.ToArray())));
             if (pieces.Count == 0 || pieces.Any(p => p.Confidence < .8f && (!retainUncertain || string.IsNullOrWhiteSpace(p.Text)))) throw new InvalidDataException("OCRで判読できない文字があります。空欄には置き換えません。");
             // CTC time positions are retained as source geometry, never equally
             // spaced boxes inferred from a generated string.
