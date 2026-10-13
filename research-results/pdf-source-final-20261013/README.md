@@ -19,8 +19,10 @@ fixed2GiB component envelope for CPU16GB. This does not measure an entire runnin
 Windows desktop or installer. Durations include native parsing/validation and
 formal serialization, and are not an isolated recognizer speed claim.
 
-This final supports the bounded source-first route for complete visible text
-PDFs with verified original roles/geometry. It does **not** qualify image-only
+This final verifies two specific fictional complete visible-text PDFs with
+original roles/geometry. Two positive documents do not establish a production
+success rate or fulfill the request for production-ready accuracy. Passing the
+study's fixed checks is not a general deployment qualification. It does **not** qualify image-only
 PDFs, arbitrary font/colour/paint formats, missing-ToUnicode semantics, the
 synthetically trained recognizer, a VLM, iPhone runtime or a device deployment.
 Prior good data and explicit preview/adoption requirements remain unchanged.
