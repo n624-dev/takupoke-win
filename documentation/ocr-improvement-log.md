@@ -18,6 +18,11 @@ wrong BODY rows remained. Gray did not provide a stable improvement. No model or
 preprocessing condition is activated. Source freezes, raw outputs, CER, errors,
 resources, Windows follow-up and limitations are in the
 [comparison record](../research-results/ocr-model-color-20261013/README.md).
+Corrected native Windows Actions38343383422 completed768 calls with old/new CTC
+pieces identical and6.22× decoder timing improvement. Application CI38343386065
+passed all7 jobs and639 UI checks. Cross-OS outcome hashes differ; separately
+painted source pixels and native probabilities must be isolated in a subsequent
+frozen-pixel transport comparison before recognition parity can be claimed.
 
 ## 2026-10-08: Existing blind I/l results audited without more inference
 

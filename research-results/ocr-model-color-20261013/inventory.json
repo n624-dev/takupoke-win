@@ -1,7 +1,15 @@
 {
+  "windows-report.json": {
+    "bytes": 23831,
+    "sha256": "8a201b0e228d10db4549231627cbf67c39840638159a88c5c0f65a3e94dfb000"
+  },
+  "windows-receipt.json": {
+    "bytes": 267,
+    "sha256": "7ac4307f8c0c2f38f39068edbfbd8442a10c9f5eeb1a62471cad680503f6324b"
+  },
   "README.md": {
-    "bytes": 4454,
-    "sha256": "507600a97def5c5c368a52f18446e26bdefe125cd7a544e57e284b6dba5191f7"
+    "bytes": 5978,
+    "sha256": "153fb6fad0eb3974a397398a415da3ba6bd3e70cb32474e539b3c8752e800345"
   },
   "linux-freeze.json": {
     "bytes": 1987,

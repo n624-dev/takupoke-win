@@ -68,7 +68,28 @@ package-notice tests passed. The cancellation regression uses a deterministic
 in-process cancellation point after the first decoded row; an initial timer-based
 test was replaced after its full-suite run exposed a thread-pool scheduling race.
 
-Windows reproduction and the full application CI are tracked separately. This
+The corrected native Windows comparison at `c158d11` completed all768 calls in
+[Actions38343383422](https://github.com/n624-dev/takupoke-win/actions/runs/38343383422).
+Every native tensor again produced identical old/new decoder pieces. Timing sums
+were8647.38ms former /1391.26ms new, about6.22× for CTC only. The Windows report
+retains native runtime identity and303,001,600-byte process peak working set.
+The initial Windows run38342832269 failed terminal runtime identification after
+the recognition loops and earns no quality credit; its refusal/cleanup receipt
+is retained. The corrected tool captures module identity before recognition while
+the session is alive, with case-insensitive Windows filenames.
+
+**Cross-OS recognition parity is not established.** The outcome digests and
+several literal/floor counts differ. Public font identities match, but source
+pixels are painted separately by each platform's Pillow/FreeType stack, and the
+native runtimes also differ. File hashes include platform newline representation.
+The retained evidence cannot isolate source rasterization from runtime probability
+differences. Do not pool either cohort or call these byte-identical cross-OS input
+measurements. A subsequent comparison must transport frozen original pixels and
+assert their exact hashes before either reader, rather than repainting per OS.
+
+The full application [CI38343386065](https://github.com/n624-dev/takupoke-win/actions/runs/38343386065)
+passed all seven jobs, including both hosts' Core288/Integration886, native x64
+Debug/Release and ARM64 builds and639 Windows UI checks. This
 experiment does not qualify actual-PDF recognition, detection/ownership, role
 binding, merges, parallel lessons, whole-document Validator or saved adoption.
 All source data and output here are invented; downloaded model/font/pixel assets

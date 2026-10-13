@@ -28,6 +28,12 @@ counted as confident transcription. Missing, duplicate or foreign observations
 make scoring fail rather than silently reducing a denominator. Two fonts and
 color arms do not provide independent document success counts.
 
+The outcome digest retains literal text, CTC intervals, padding/floor dispositions
+and input widths, while excluding OS-dependent float probabilities and timing.
+It supports a separate native Windows comparison of the same output contract.
+Native module identity is captured while a model session is alive, before the
+recognition calls, using a case-insensitive filename match on Windows.
+
 Run with .NET 10 and the pinned Python requirements:
 
 ```sh
