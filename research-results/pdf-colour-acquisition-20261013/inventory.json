@@ -1,7 +1,7 @@
 {
   "README.md": {
-    "bytes": 2231,
-    "sha256": "d9c3ab77caf3b2016bd7665c3d74d4af2b8d3a5bd9f0cf57f9bf81afc24a7b18"
+    "bytes": 2584,
+    "sha256": "772f555d90e1520b94bea32dd7fc0a750920d35658ba99d5b92f452b4f860986"
   },
   "linux-baseline-report.json": {
     "bytes": 8940,
@@ -14,5 +14,9 @@
   "source-receipt.json": {
     "bytes": 5102,
     "sha256": "b74fd645601a871c8785d64d5847100b08985ccec82782076d394cea21376b5b"
+  },
+  "windows-observations.json": {
+    "bytes": 17520,
+    "sha256": "97299a8337ce83105565333f7e7336c4f03280b8d1ae0003e7a1ab2372e5d4fe"
   }
 }

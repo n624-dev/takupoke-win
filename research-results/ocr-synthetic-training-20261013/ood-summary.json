@@ -1,0 +1,53 @@
+{
+  "status": "research-only; no selection or repair; not qualified",
+  "protocolSha256": "a95d59316e0b20a258aba4ca6c4a4e53772e03d389caf17f7013a6f385962164",
+  "poolCharacters": 6042,
+  "groups": {
+    "baseline": {
+      "all": {
+        "rows": 64,
+        "exact": 37,
+        "cer": 0.09399477806788512
+      },
+      "untrained-cjk": {
+        "rows": 64,
+        "exact": 37,
+        "cer": 0.09399477806788512
+      },
+      "BIZUDPMincho-Regular": {
+        "rows": 32,
+        "exact": 21,
+        "cer": 0.08290155440414508
+      },
+      "ZenKakuGothicNew-Regular": {
+        "rows": 32,
+        "exact": 16,
+        "cer": 0.10526315789473684
+      }
+    },
+    "selected": {
+      "all": {
+        "rows": 64,
+        "exact": 41,
+        "cer": 0.07571801566579635
+      },
+      "untrained-cjk": {
+        "rows": 64,
+        "exact": 41,
+        "cer": 0.07571801566579635
+      },
+      "BIZUDPMincho-Regular": {
+        "rows": 32,
+        "exact": 22,
+        "cer": 0.06735751295336788
+      },
+      "ZenKakuGothicNew-Regular": {
+        "rows": 32,
+        "exact": 19,
+        "cer": 0.08421052631578947
+      }
+    }
+  },
+  "improvements": 4,
+  "regressions": 0
+}

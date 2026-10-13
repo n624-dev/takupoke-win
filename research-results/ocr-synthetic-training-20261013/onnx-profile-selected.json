@@ -1,0 +1,6551 @@
+{
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "architecture": "x86_64",
+  "onnxruntime": "1.23.2",
+  "provider": [
+    "CPUExecutionProvider"
+  ],
+  "threads": 2,
+  "modelBytes": 21176440,
+  "modelSha256": "796b2eb06ed399a6799120b008a78da344f54dbe5151461b12f9bc9a1d1ec146",
+  "rows": 384,
+  "loadSeconds": 0.0654116489995431,
+  "medianInferenceMilliseconds": 16.062683499967534,
+  "maximumInferenceMilliseconds": 34.318506000090565,
+  "maxRssMiB": 132.29296875,
+  "timingLimit": "Concurrent CPU work; Linux measurement; no isolated-speed or native-Windows memory claim",
+  "records": [
+    {
+      "id": "final-0000",
+      "width": 320,
+      "validWidth": 207,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.598788999544922,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9613046646118164,
+      "referenceMinimumConfidence": 0.9613051414489746,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 4.76837158203125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0001",
+      "width": 320,
+      "validWidth": 265,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.935633000684902,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9978395700454712,
+      "referenceMinimumConfidence": 0.9978394508361816,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0002",
+      "width": 320,
+      "validWidth": 130,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.346079000461032,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999698400497437,
+      "referenceMinimumConfidence": 0.9999696016311646,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0003",
+      "width": 320,
+      "validWidth": 217,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.044766000050004,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9988822340965271,
+      "referenceMinimumConfidence": 0.9988821148872375,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0004",
+      "width": 320,
+      "validWidth": 191,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.920980999704625,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9939640164375305,
+      "referenceMinimumConfidence": 0.9939641356468201,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0005",
+      "width": 333,
+      "validWidth": 333,
+      "outputShape": [
+        1,
+        42,
+        18710
+      ],
+      "inferenceMilliseconds": 16.010684999855584,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9987903237342834,
+      "referenceMinimumConfidence": 0.9987906813621521,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 3.5762786865234375e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0006",
+      "width": 320,
+      "validWidth": 274,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 20.264559999304765,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.998976469039917,
+      "referenceMinimumConfidence": 0.9989765882492065,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0007",
+      "width": 320,
+      "validWidth": 176,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.86625899997307,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998379945755005,
+      "referenceMinimumConfidence": 0.9998379945755005,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0008",
+      "width": 320,
+      "validWidth": 174,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.26067100076034,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9888609051704407,
+      "referenceMinimumConfidence": 0.9888610243797302,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0009",
+      "width": 320,
+      "validWidth": 139,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.866782000259263,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9987738728523254,
+      "referenceMinimumConfidence": 0.9987738728523254,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0010",
+      "width": 320,
+      "validWidth": 179,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.50741100002051,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9980997443199158,
+      "referenceMinimumConfidence": 0.9980997443199158,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0011",
+      "width": 320,
+      "validWidth": 232,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.429003999292036,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.988956868648529,
+      "referenceMinimumConfidence": 0.9889569878578186,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0012",
+      "width": 320,
+      "validWidth": 67,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.539849000357208,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9940219521522522,
+      "referenceMinimumConfidence": 0.9940220713615417,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0013",
+      "width": 336,
+      "validWidth": 336,
+      "outputShape": [
+        1,
+        42,
+        18710
+      ],
+      "inferenceMilliseconds": 15.484257000025536,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9638649225234985,
+      "referenceMinimumConfidence": 0.9638650417327881,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0014",
+      "width": 320,
+      "validWidth": 222,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.267440000570787,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.992852509021759,
+      "referenceMinimumConfidence": 0.992852509021759,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0015",
+      "width": 320,
+      "validWidth": 214,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.980209999521321,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.963151216506958,
+      "referenceMinimumConfidence": 0.9631514549255371,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 4.76837158203125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0016",
+      "width": 320,
+      "validWidth": 194,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.052458000354818,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.997992753982544,
+      "referenceMinimumConfidence": 0.9979928731918335,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0017",
+      "width": 320,
+      "validWidth": 54,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.806749999683234,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999086856842041,
+      "referenceMinimumConfidence": 0.9999086856842041,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0018",
+      "width": 384,
+      "validWidth": 384,
+      "outputShape": [
+        1,
+        48,
+        18710
+      ],
+      "inferenceMilliseconds": 16.723925999940548,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996013045310974,
+      "referenceMinimumConfidence": 0.999601423740387,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0019",
+      "width": 320,
+      "validWidth": 136,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.243014000589028,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9824516177177429,
+      "referenceMinimumConfidence": 0.9824516177177429,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0020",
+      "width": 320,
+      "validWidth": 151,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.175002000432869,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9817072749137878,
+      "referenceMinimumConfidence": 0.9817072749137878,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 5.960464477539062e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0021",
+      "width": 320,
+      "validWidth": 123,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.040301000226464,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9976194500923157,
+      "referenceMinimumConfidence": 0.9976194500923157,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0022",
+      "width": 320,
+      "validWidth": 147,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.394171000480128,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998410940170288,
+      "referenceMinimumConfidence": 0.9998410940170288,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0023",
+      "width": 320,
+      "validWidth": 312,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.093989999309997,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997316002845764,
+      "referenceMinimumConfidence": 0.999731719493866,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0024",
+      "width": 320,
+      "validWidth": 146,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.624455000557646,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9954738020896912,
+      "referenceMinimumConfidence": 0.9954738020896912,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0025",
+      "width": 320,
+      "validWidth": 262,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.625468000303954,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9993091821670532,
+      "referenceMinimumConfidence": 0.9993091821670532,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0026",
+      "width": 320,
+      "validWidth": 155,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.960569999857398,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9989012479782104,
+      "referenceMinimumConfidence": 0.9989013671875,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0027",
+      "width": 320,
+      "validWidth": 154,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.486218000456574,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995315074920654,
+      "referenceMinimumConfidence": 0.9995315074920654,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0028",
+      "width": 320,
+      "validWidth": 191,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.975613000387966,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.741926908493042,
+      "referenceMinimumConfidence": 0.7419266104698181,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.980232238769531e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0029",
+      "width": 320,
+      "validWidth": 253,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.236103000257572,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9993602633476257,
+      "referenceMinimumConfidence": 0.9993602633476257,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0030",
+      "width": 320,
+      "validWidth": 148,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.669543999843881,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9990355968475342,
+      "referenceMinimumConfidence": 0.9990355968475342,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0031",
+      "width": 320,
+      "validWidth": 238,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.117487999916193,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998420476913452,
+      "referenceMinimumConfidence": 0.9998421669006348,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0032",
+      "width": 320,
+      "validWidth": 207,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.301811999961501,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9849468469619751,
+      "referenceMinimumConfidence": 0.9849468469619751,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0033",
+      "width": 320,
+      "validWidth": 249,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.358928000547166,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9429028630256653,
+      "referenceMinimumConfidence": 0.9429012537002563,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.6093254089355469e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0034",
+      "width": 320,
+      "validWidth": 284,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.326630000345176,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9942271709442139,
+      "referenceMinimumConfidence": 0.9942270517349243,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0035",
+      "width": 320,
+      "validWidth": 140,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.454039999691304,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998856782913208,
+      "referenceMinimumConfidence": 0.9998856782913208,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0036",
+      "width": 320,
+      "validWidth": 88,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.498456999717746,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998390674591064,
+      "referenceMinimumConfidence": 0.9998390674591064,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0037",
+      "width": 320,
+      "validWidth": 68,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.586047000193503,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999640703201294,
+      "referenceMinimumConfidence": 0.999640703201294,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0038",
+      "width": 320,
+      "validWidth": 117,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.122123000764987,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999738931655884,
+      "referenceMinimumConfidence": 0.9999738931655884,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0039",
+      "width": 320,
+      "validWidth": 281,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.412988999538356,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.569882869720459,
+      "referenceMinimumConfidence": 0.569887101650238,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 4.231929779052734e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0040",
+      "width": 320,
+      "validWidth": 207,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.317725999921095,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994655251502991,
+      "referenceMinimumConfidence": 0.9994655251502991,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0041",
+      "width": 320,
+      "validWidth": 288,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.648501000010583,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998055100440979,
+      "referenceMinimumConfidence": 0.9998053908348083,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0042",
+      "width": 320,
+      "validWidth": 187,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.596935000554367,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999542236328125,
+      "referenceMinimumConfidence": 0.9999542236328125,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0043",
+      "width": 320,
+      "validWidth": 225,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.236624999488413,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9993935823440552,
+      "referenceMinimumConfidence": 0.9993937015533447,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0044",
+      "width": 320,
+      "validWidth": 154,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.150195000387612,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9825824499130249,
+      "referenceMinimumConfidence": 0.9825831651687622,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 7.152557373046875e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0045",
+      "width": 320,
+      "validWidth": 255,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.521991000037815,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9644638895988464,
+      "referenceMinimumConfidence": 0.9644637703895569,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0046",
+      "width": 320,
+      "validWidth": 179,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.102763999493618,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997751116752625,
+      "referenceMinimumConfidence": 0.999775230884552,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0047",
+      "width": 320,
+      "validWidth": 251,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.670804999695974,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9939382076263428,
+      "referenceMinimumConfidence": 0.9939382076263428,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0048",
+      "width": 320,
+      "validWidth": 98,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.172938000228896,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9988017082214355,
+      "referenceMinimumConfidence": 0.9988017082214355,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0049",
+      "width": 320,
+      "validWidth": 212,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.544374999786669,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.99928879737854,
+      "referenceMinimumConfidence": 0.9992889165878296,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0050",
+      "width": 320,
+      "validWidth": 224,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.00024200019834,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9982666969299316,
+      "referenceMinimumConfidence": 0.9982666969299316,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0051",
+      "width": 320,
+      "validWidth": 225,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.616563000345195,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999071359634399,
+      "referenceMinimumConfidence": 0.9999071359634399,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0052",
+      "width": 320,
+      "validWidth": 69,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.996404000157781,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.6407341361045837,
+      "referenceMinimumConfidence": 0.6407176852226257,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.6450881958007812e-05,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0053",
+      "width": 320,
+      "validWidth": 127,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.046849000100337,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9979574680328369,
+      "referenceMinimumConfidence": 0.9979575872421265,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0054",
+      "width": 320,
+      "validWidth": 317,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.545999000802112,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9982293248176575,
+      "referenceMinimumConfidence": 0.9982292056083679,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0055",
+      "width": 320,
+      "validWidth": 176,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.193127999533317,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9992532134056091,
+      "referenceMinimumConfidence": 0.9992530941963196,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0056",
+      "width": 320,
+      "validWidth": 111,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.938857999368338,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.7372772097587585,
+      "referenceMinimumConfidence": 0.7372797131538391,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.5033950805664062e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0057",
+      "width": 320,
+      "validWidth": 50,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.802392000092368,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999675750732422,
+      "referenceMinimumConfidence": 0.9999675750732422,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0058",
+      "width": 332,
+      "validWidth": 332,
+      "outputShape": [
+        1,
+        41,
+        18710
+      ],
+      "inferenceMilliseconds": 16.20536800055561,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997667670249939,
+      "referenceMinimumConfidence": 0.9997667670249939,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0059",
+      "width": 320,
+      "validWidth": 191,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.41515199985588,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9923520684242249,
+      "referenceMinimumConfidence": 0.9923520684242249,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0060",
+      "width": 320,
+      "validWidth": 139,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.921231999323936,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.6487902998924255,
+      "referenceMinimumConfidence": 0.6487880945205688,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.205371856689453e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0061",
+      "width": 320,
+      "validWidth": 102,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.25796800039825,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994932413101196,
+      "referenceMinimumConfidence": 0.9994931221008301,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0062",
+      "width": 320,
+      "validWidth": 317,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.099579999921843,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999232292175293,
+      "referenceMinimumConfidence": 0.9999233484268188,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0063",
+      "width": 320,
+      "validWidth": 240,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.30062100048235,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9988787770271301,
+      "referenceMinimumConfidence": 0.9988788962364197,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0064",
+      "width": 320,
+      "validWidth": 84,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.723095000088506,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9596144556999207,
+      "referenceMinimumConfidence": 0.9596145749092102,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0065",
+      "width": 320,
+      "validWidth": 237,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.033458999823779,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9982890486717224,
+      "referenceMinimumConfidence": 0.9982890486717224,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0066",
+      "width": 320,
+      "validWidth": 179,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.613130000019737,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9985032081604004,
+      "referenceMinimumConfidence": 0.9985030889511108,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0067",
+      "width": 320,
+      "validWidth": 169,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.48752000053355,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9733754396438599,
+      "referenceMinimumConfidence": 0.9733754396438599,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0068",
+      "width": 320,
+      "validWidth": 162,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.290125000319676,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9988559484481812,
+      "referenceMinimumConfidence": 0.9988560676574707,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0069",
+      "width": 320,
+      "validWidth": 132,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.501251999921806,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9987174272537231,
+      "referenceMinimumConfidence": 0.9987174272537231,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0070",
+      "width": 320,
+      "validWidth": 158,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.491556999222666,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999613761901855,
+      "referenceMinimumConfidence": 0.9999614953994751,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0071",
+      "width": 320,
+      "validWidth": 269,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.136574000280234,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9982193112373352,
+      "referenceMinimumConfidence": 0.9982193112373352,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0072",
+      "width": 320,
+      "validWidth": 167,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.034451999985322,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9993056058883667,
+      "referenceMinimumConfidence": 0.9993056058883667,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0073",
+      "width": 320,
+      "validWidth": 122,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.706440000030852,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999451637268066,
+      "referenceMinimumConfidence": 0.9999451637268066,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0074",
+      "width": 320,
+      "validWidth": 147,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.54149299954588,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996939897537231,
+      "referenceMinimumConfidence": 0.9996939897537231,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0075",
+      "width": 320,
+      "validWidth": 162,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 20.539647999612498,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9892687201499939,
+      "referenceMinimumConfidence": 0.9892688393592834,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0076",
+      "width": 320,
+      "validWidth": 188,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.034951999950863,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9975576400756836,
+      "referenceMinimumConfidence": 0.9975576400756836,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0077",
+      "width": 320,
+      "validWidth": 299,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.760312000064005,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.955201268196106,
+      "referenceMinimumConfidence": 0.9552008509635925,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 4.172325134277344e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0078",
+      "width": 320,
+      "validWidth": 109,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 19.369325999832654,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999886155128479,
+      "referenceMinimumConfidence": 0.999886155128479,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0079",
+      "width": 320,
+      "validWidth": 153,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.916735999984667,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9650366306304932,
+      "referenceMinimumConfidence": 0.9650355577468872,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.0728836059570312e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0080",
+      "width": 320,
+      "validWidth": 215,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.83787500001199,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.7521472573280334,
+      "referenceMinimumConfidence": 0.7521458864212036,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.3709068298339844e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0081",
+      "width": 320,
+      "validWidth": 89,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.567651000106707,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9990726709365845,
+      "referenceMinimumConfidence": 0.9990726709365845,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0082",
+      "width": 320,
+      "validWidth": 219,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.191386000675266,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999688863754272,
+      "referenceMinimumConfidence": 0.9999688863754272,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0083",
+      "width": 320,
+      "validWidth": 208,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.278968000326131,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998830556869507,
+      "referenceMinimumConfidence": 0.9998831748962402,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0084",
+      "width": 320,
+      "validWidth": 184,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.200650000020687,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997894167900085,
+      "referenceMinimumConfidence": 0.9997894167900085,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0085",
+      "width": 320,
+      "validWidth": 316,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.909333000105107,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998739957809448,
+      "referenceMinimumConfidence": 0.9998738765716553,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0086",
+      "width": 336,
+      "validWidth": 336,
+      "outputShape": [
+        1,
+        42,
+        18710
+      ],
+      "inferenceMilliseconds": 14.940740000383812,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9920176267623901,
+      "referenceMinimumConfidence": 0.9920176267623901,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0087",
+      "width": 320,
+      "validWidth": 239,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.364867000243976,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995846152305603,
+      "referenceMinimumConfidence": 0.9995847344398499,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": true
+    },
+    {
+      "id": "final-0088",
+      "width": 320,
+      "validWidth": 95,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.112068000235013,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999279975891113,
+      "referenceMinimumConfidence": 0.9999279975891113,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0089",
+      "width": 320,
+      "validWidth": 203,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.266748999943957,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999494552612305,
+      "referenceMinimumConfidence": 0.9999494552612305,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0090",
+      "width": 320,
+      "validWidth": 226,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 21.345693000512256,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9938260912895203,
+      "referenceMinimumConfidence": 0.9938265681266785,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 4.76837158203125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0091",
+      "width": 320,
+      "validWidth": 165,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.280520000284014,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9978240728378296,
+      "referenceMinimumConfidence": 0.9978243112564087,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0092",
+      "width": 320,
+      "validWidth": 152,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.544547000194143,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9840534329414368,
+      "referenceMinimumConfidence": 0.9840534329414368,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0093",
+      "width": 320,
+      "validWidth": 152,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.567962000000989,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999362051486969,
+      "referenceMinimumConfidence": 0.999362051486969,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0094",
+      "width": 320,
+      "validWidth": 112,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.525337000122818,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999617338180542,
+      "referenceMinimumConfidence": 0.9999617338180542,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0095",
+      "width": 320,
+      "validWidth": 245,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.403094000044803,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9976170063018799,
+      "referenceMinimumConfidence": 0.9976168870925903,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0096",
+      "width": 320,
+      "validWidth": 153,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.452688000346825,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.994951605796814,
+      "referenceMinimumConfidence": 0.9949506521224976,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 9.5367431640625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0097",
+      "width": 320,
+      "validWidth": 212,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.06485299979977,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9919309020042419,
+      "referenceMinimumConfidence": 0.9919309020042419,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0098",
+      "width": 320,
+      "validWidth": 202,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.44156700039457,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999500513076782,
+      "referenceMinimumConfidence": 0.9999500513076782,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0099",
+      "width": 320,
+      "validWidth": 192,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 23.20206700005656,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.8847836256027222,
+      "referenceMinimumConfidence": 0.8847846388816833,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.0132789611816406e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0100",
+      "width": 320,
+      "validWidth": 184,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.320931999667664,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997020363807678,
+      "referenceMinimumConfidence": 0.9997020363807678,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0101",
+      "width": 374,
+      "validWidth": 374,
+      "outputShape": [
+        1,
+        47,
+        18710
+      ],
+      "inferenceMilliseconds": 24.77645900034986,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9934753775596619,
+      "referenceMinimumConfidence": 0.9934752583503723,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0102",
+      "width": 320,
+      "validWidth": 176,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.724396999961755,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998308420181274,
+      "referenceMinimumConfidence": 0.9998307228088379,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0103",
+      "width": 320,
+      "validWidth": 203,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.11515300010069,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9834766387939453,
+      "referenceMinimumConfidence": 0.9834762811660767,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 3.5762786865234375e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0104",
+      "width": 320,
+      "validWidth": 148,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.567240999393107,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999234676361084,
+      "referenceMinimumConfidence": 0.9999234676361084,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0105",
+      "width": 320,
+      "validWidth": 184,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.28950400006579,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995195865631104,
+      "referenceMinimumConfidence": 0.9995197057723999,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0106",
+      "width": 320,
+      "validWidth": 208,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 19.525464000253123,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998335838317871,
+      "referenceMinimumConfidence": 0.9998335838317871,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0107",
+      "width": 320,
+      "validWidth": 236,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.46050600065064,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9796756505966187,
+      "referenceMinimumConfidence": 0.9796756505966187,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0108",
+      "width": 320,
+      "validWidth": 195,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.359194000680873,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.8250184059143066,
+      "referenceMinimumConfidence": 0.8250189423561096,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 5.364418029785156e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0109",
+      "width": 320,
+      "validWidth": 254,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.367285999687738,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997517466545105,
+      "referenceMinimumConfidence": 0.999751627445221,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0110",
+      "width": 320,
+      "validWidth": 237,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.288827999953355,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.5934182405471802,
+      "referenceMinimumConfidence": 0.5934215188026428,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 3.2782554626464844e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0111",
+      "width": 320,
+      "validWidth": 182,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 19.818611000118835,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999597072601318,
+      "referenceMinimumConfidence": 0.9999597072601318,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0112",
+      "width": 320,
+      "validWidth": 58,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.478946999588516,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.47514069080352783,
+      "referenceMinimumConfidence": 0.4751434326171875,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 6.556510925292969e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0113",
+      "width": 320,
+      "validWidth": 282,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 21.542317000239564,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.934779167175293,
+      "referenceMinimumConfidence": 0.9347789287567139,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0114",
+      "width": 320,
+      "validWidth": 247,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.370371000259183,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996689558029175,
+      "referenceMinimumConfidence": 0.9996689558029175,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0115",
+      "width": 320,
+      "validWidth": 111,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.455619000036677,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999638557434082,
+      "referenceMinimumConfidence": 0.9996384382247925,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0116",
+      "width": 320,
+      "validWidth": 139,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.669700000231387,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995977282524109,
+      "referenceMinimumConfidence": 0.9995977282524109,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0117",
+      "width": 384,
+      "validWidth": 384,
+      "outputShape": [
+        1,
+        48,
+        18710
+      ],
+      "inferenceMilliseconds": 29.092968000441033,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9964540004730225,
+      "referenceMinimumConfidence": 0.9964538812637329,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0118",
+      "width": 320,
+      "validWidth": 216,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.386084999605373,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9912330508232117,
+      "referenceMinimumConfidence": 0.9912330508232117,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0119",
+      "width": 320,
+      "validWidth": 306,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.63027100020554,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999212384223938,
+      "referenceMinimumConfidence": 0.999212384223938,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0120",
+      "width": 320,
+      "validWidth": 70,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.386103999859188,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9944998025894165,
+      "referenceMinimumConfidence": 0.994499921798706,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0121",
+      "width": 320,
+      "validWidth": 292,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.80147099957685,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9023164510726929,
+      "referenceMinimumConfidence": 0.9023167490959167,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.980232238769531e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0122",
+      "width": 320,
+      "validWidth": 120,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.125477999390569,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994404911994934,
+      "referenceMinimumConfidence": 0.9994407296180725,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0123",
+      "width": 320,
+      "validWidth": 146,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.199878999737848,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9969156980514526,
+      "referenceMinimumConfidence": 0.9969155788421631,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0124",
+      "width": 320,
+      "validWidth": 232,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.62885300063499,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.990546464920044,
+      "referenceMinimumConfidence": 0.9905463457107544,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0125",
+      "width": 320,
+      "validWidth": 195,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.136455000174465,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9984157085418701,
+      "referenceMinimumConfidence": 0.9984155893325806,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0126",
+      "width": 320,
+      "validWidth": 183,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.898256999913428,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9982445240020752,
+      "referenceMinimumConfidence": 0.9982445240020752,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0127",
+      "width": 320,
+      "validWidth": 276,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.911817000211158,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9988784193992615,
+      "referenceMinimumConfidence": 0.9988784193992615,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0128",
+      "width": 320,
+      "validWidth": 96,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.659159000279033,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9982410669326782,
+      "referenceMinimumConfidence": 0.9982410669326782,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0129",
+      "width": 320,
+      "validWidth": 317,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.12694100003864,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9987150430679321,
+      "referenceMinimumConfidence": 0.9987150430679321,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0130",
+      "width": 320,
+      "validWidth": 252,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.043305000494,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9990221261978149,
+      "referenceMinimumConfidence": 0.9990220069885254,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0131",
+      "width": 320,
+      "validWidth": 249,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.997956000115664,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9757521748542786,
+      "referenceMinimumConfidence": 0.9757522940635681,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0132",
+      "width": 320,
+      "validWidth": 142,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.036373999464558,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.3943251371383667,
+      "referenceMinimumConfidence": 0.39432358741760254,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.5497207641601562e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0133",
+      "width": 320,
+      "validWidth": 66,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.345597999636084,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998703002929688,
+      "referenceMinimumConfidence": 0.9998704195022583,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0134",
+      "width": 336,
+      "validWidth": 336,
+      "outputShape": [
+        1,
+        42,
+        18710
+      ],
+      "inferenceMilliseconds": 16.894041999876208,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998156428337097,
+      "referenceMinimumConfidence": 0.9998155236244202,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0135",
+      "width": 320,
+      "validWidth": 243,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 30.851917999825673,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994869232177734,
+      "referenceMinimumConfidence": 0.9994869232177734,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0136",
+      "width": 320,
+      "validWidth": 156,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.448761999323324,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9974251985549927,
+      "referenceMinimumConfidence": 0.9974251985549927,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": true
+    },
+    {
+      "id": "final-0137",
+      "width": 320,
+      "validWidth": 228,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.91246899968246,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9954114556312561,
+      "referenceMinimumConfidence": 0.9954115748405457,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0138",
+      "width": 320,
+      "validWidth": 176,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.286469999613473,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997333884239197,
+      "referenceMinimumConfidence": 0.9997332692146301,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0139",
+      "width": 320,
+      "validWidth": 199,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.375333000520186,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998526573181152,
+      "referenceMinimumConfidence": 0.9998525381088257,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0140",
+      "width": 320,
+      "validWidth": 96,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 33.33359700081928,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9986513257026672,
+      "referenceMinimumConfidence": 0.9986513257026672,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0141",
+      "width": 436,
+      "validWidth": 436,
+      "outputShape": [
+        1,
+        54,
+        18710
+      ],
+      "inferenceMilliseconds": 32.90491000007023,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9990935325622559,
+      "referenceMinimumConfidence": 0.9990934133529663,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0142",
+      "width": 320,
+      "validWidth": 194,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.416240000391554,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9975357055664062,
+      "referenceMinimumConfidence": 0.9975357055664062,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0143",
+      "width": 320,
+      "validWidth": 221,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.581577999924775,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9992971420288086,
+      "referenceMinimumConfidence": 0.999297022819519,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0144",
+      "width": 320,
+      "validWidth": 79,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.397141999543237,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999725818634033,
+      "referenceMinimumConfidence": 0.9999725818634033,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0145",
+      "width": 320,
+      "validWidth": 227,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.863105999822437,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9941879510879517,
+      "referenceMinimumConfidence": 0.9941879510879517,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0146",
+      "width": 320,
+      "validWidth": 138,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.080600999885064,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998888969421387,
+      "referenceMinimumConfidence": 0.9998888969421387,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0147",
+      "width": 320,
+      "validWidth": 202,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.570015999604948,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998389482498169,
+      "referenceMinimumConfidence": 0.9998389482498169,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0148",
+      "width": 320,
+      "validWidth": 100,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 28.05933699983143,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999066591262817,
+      "referenceMinimumConfidence": 0.9999066591262817,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0149",
+      "width": 320,
+      "validWidth": 214,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 20.837069000663178,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9988526105880737,
+      "referenceMinimumConfidence": 0.9988526105880737,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0150",
+      "width": 336,
+      "validWidth": 336,
+      "outputShape": [
+        1,
+        42,
+        18710
+      ],
+      "inferenceMilliseconds": 24.649349999890546,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9964401125907898,
+      "referenceMinimumConfidence": 0.9964399933815002,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0151",
+      "width": 320,
+      "validWidth": 306,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 26.735471000392863,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9956120252609253,
+      "referenceMinimumConfidence": 0.9956119060516357,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0152",
+      "width": 320,
+      "validWidth": 115,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 23.61811300033878,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9992635846138,
+      "referenceMinimumConfidence": 0.9992634654045105,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0153",
+      "width": 320,
+      "validWidth": 125,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 21.09592800024984,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997935891151428,
+      "referenceMinimumConfidence": 0.9997934699058533,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0154",
+      "width": 320,
+      "validWidth": 233,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 22.239143000660988,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.7264459729194641,
+      "referenceMinimumConfidence": 0.7264460325241089,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0155",
+      "width": 320,
+      "validWidth": 236,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 21.866213000066637,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9976785778999329,
+      "referenceMinimumConfidence": 0.9976785778999329,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0156",
+      "width": 320,
+      "validWidth": 151,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 22.584151000046404,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9963704347610474,
+      "referenceMinimumConfidence": 0.9963704347610474,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0157",
+      "width": 339,
+      "validWidth": 339,
+      "outputShape": [
+        1,
+        42,
+        18710
+      ],
+      "inferenceMilliseconds": 26.464894999662647,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997116923332214,
+      "referenceMinimumConfidence": 0.9997115731239319,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0158",
+      "width": 320,
+      "validWidth": 237,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 22.287890999905358,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994093179702759,
+      "referenceMinimumConfidence": 0.9994094371795654,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0159",
+      "width": 320,
+      "validWidth": 226,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 23.7772810005481,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995444416999817,
+      "referenceMinimumConfidence": 0.9995445609092712,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0160",
+      "width": 320,
+      "validWidth": 88,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 22.919644000467088,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999945163726807,
+      "referenceMinimumConfidence": 0.9999946355819702,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0161",
+      "width": 320,
+      "validWidth": 118,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 21.709947999625,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998785257339478,
+      "referenceMinimumConfidence": 0.9998786449432373,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0162",
+      "width": 320,
+      "validWidth": 221,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 22.3905510001714,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994348883628845,
+      "referenceMinimumConfidence": 0.999434769153595,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0163",
+      "width": 320,
+      "validWidth": 99,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 21.65602700006275,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9993720650672913,
+      "referenceMinimumConfidence": 0.9993720650672913,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0164",
+      "width": 320,
+      "validWidth": 209,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 22.458712000116066,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.41261929273605347,
+      "referenceMinimumConfidence": 0.41261693835258484,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.3543834686279297e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0165",
+      "width": 320,
+      "validWidth": 191,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 22.492033000162337,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996029734611511,
+      "referenceMinimumConfidence": 0.9996029734611511,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0166",
+      "width": 384,
+      "validWidth": 384,
+      "outputShape": [
+        1,
+        48,
+        18710
+      ],
+      "inferenceMilliseconds": 26.71528000064427,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994567036628723,
+      "referenceMinimumConfidence": 0.9994567036628723,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0167",
+      "width": 320,
+      "validWidth": 176,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 22.062336999624677,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9975234866142273,
+      "referenceMinimumConfidence": 0.9975236058235168,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0168",
+      "width": 320,
+      "validWidth": 206,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.903638000665524,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9983674883842468,
+      "referenceMinimumConfidence": 0.9983673691749573,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0169",
+      "width": 321,
+      "validWidth": 321,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.079590000823373,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.996331512928009,
+      "referenceMinimumConfidence": 0.996331512928009,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0170",
+      "width": 320,
+      "validWidth": 258,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.044535999550135,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994713664054871,
+      "referenceMinimumConfidence": 0.9994713664054871,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0171",
+      "width": 320,
+      "validWidth": 228,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 20.184008000796894,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9991245865821838,
+      "referenceMinimumConfidence": 0.9991247057914734,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0172",
+      "width": 320,
+      "validWidth": 131,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.197286000329768,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9982276558876038,
+      "referenceMinimumConfidence": 0.9982276558876038,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0173",
+      "width": 320,
+      "validWidth": 137,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.293011000016122,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9960137605667114,
+      "referenceMinimumConfidence": 0.9960137605667114,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0174",
+      "width": 320,
+      "validWidth": 132,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.54479800072295,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995365142822266,
+      "referenceMinimumConfidence": 0.9995366334915161,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0175",
+      "width": 320,
+      "validWidth": 210,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.111105999494612,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9986935257911682,
+      "referenceMinimumConfidence": 0.9986934065818787,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0176",
+      "width": 320,
+      "validWidth": 204,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.267490999576694,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998582601547241,
+      "referenceMinimumConfidence": 0.9998583793640137,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0177",
+      "width": 320,
+      "validWidth": 304,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.060610999171331,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998151659965515,
+      "referenceMinimumConfidence": 0.9998151659965515,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0178",
+      "width": 320,
+      "validWidth": 167,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.54963599958137,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997689127922058,
+      "referenceMinimumConfidence": 0.9997687935829163,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0179",
+      "width": 320,
+      "validWidth": 274,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.726057999723707,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997628331184387,
+      "referenceMinimumConfidence": 0.9997628331184387,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0180",
+      "width": 320,
+      "validWidth": 249,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.739369000584702,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.5364152193069458,
+      "referenceMinimumConfidence": 0.5364142060279846,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.0132789611816406e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0181",
+      "width": 320,
+      "validWidth": 266,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.22283399956359,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9989277720451355,
+      "referenceMinimumConfidence": 0.998927891254425,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0182",
+      "width": 320,
+      "validWidth": 265,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.600241000356618,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996557235717773,
+      "referenceMinimumConfidence": 0.9996558427810669,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0183",
+      "width": 320,
+      "validWidth": 155,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.870345000417728,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999376535415649,
+      "referenceMinimumConfidence": 0.9999377727508545,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0184",
+      "width": 320,
+      "validWidth": 161,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.290467000042554,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9987974166870117,
+      "referenceMinimumConfidence": 0.9987974166870117,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0185",
+      "width": 320,
+      "validWidth": 296,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.180453000037232,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999852180480957,
+      "referenceMinimumConfidence": 0.999852180480957,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0186",
+      "width": 320,
+      "validWidth": 243,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.476934999947844,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999853253364563,
+      "referenceMinimumConfidence": 0.9998531341552734,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0187",
+      "width": 320,
+      "validWidth": 188,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.822334000607952,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9990965127944946,
+      "referenceMinimumConfidence": 0.9990965127944946,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0188",
+      "width": 320,
+      "validWidth": 200,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.797646999999415,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9987240433692932,
+      "referenceMinimumConfidence": 0.9987240433692932,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0189",
+      "width": 320,
+      "validWidth": 208,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.696415999329474,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995478987693787,
+      "referenceMinimumConfidence": 0.9995478987693787,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0190",
+      "width": 320,
+      "validWidth": 130,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.530124999510008,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999492168426514,
+      "referenceMinimumConfidence": 0.9999492168426514,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0191",
+      "width": 320,
+      "validWidth": 204,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.260460999343195,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9980400204658508,
+      "referenceMinimumConfidence": 0.9980397820472717,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0192",
+      "width": 320,
+      "validWidth": 211,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.752056999896013,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.99594646692276,
+      "referenceMinimumConfidence": 0.9959465861320496,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0193",
+      "width": 320,
+      "validWidth": 249,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.203243999872939,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996711015701294,
+      "referenceMinimumConfidence": 0.9996711015701294,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0194",
+      "width": 320,
+      "validWidth": 188,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 19.20243600034155,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9138354063034058,
+      "referenceMinimumConfidence": 0.9138342142105103,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0195",
+      "width": 320,
+      "validWidth": 189,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 20.980534999580414,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9974256157875061,
+      "referenceMinimumConfidence": 0.9974256157875061,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0196",
+      "width": 320,
+      "validWidth": 249,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 27.71099400069943,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9893306493759155,
+      "referenceMinimumConfidence": 0.9893306493759155,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0197",
+      "width": 320,
+      "validWidth": 259,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 22.390879999875324,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996592998504639,
+      "referenceMinimumConfidence": 0.9996592998504639,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0198",
+      "width": 320,
+      "validWidth": 299,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 22.08317900021939,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9313443303108215,
+      "referenceMinimumConfidence": 0.9313437938690186,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 5.364418029785156e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0199",
+      "width": 320,
+      "validWidth": 201,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.474336999446678,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996448755264282,
+      "referenceMinimumConfidence": 0.9996447563171387,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0200",
+      "width": 320,
+      "validWidth": 124,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 30.162182999447396,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995561242103577,
+      "referenceMinimumConfidence": 0.9995561242103577,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0201",
+      "width": 320,
+      "validWidth": 259,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 25.8116949999021,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.8280913829803467,
+      "referenceMinimumConfidence": 0.8280923962593079,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.0132789611816406e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0202",
+      "width": 320,
+      "validWidth": 228,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 23.61999500044476,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9985326528549194,
+      "referenceMinimumConfidence": 0.9985326528549194,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0203",
+      "width": 320,
+      "validWidth": 192,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 21.757731000434433,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9938892126083374,
+      "referenceMinimumConfidence": 0.9938890933990479,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0204",
+      "width": 320,
+      "validWidth": 155,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 21.333023999432044,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9908217191696167,
+      "referenceMinimumConfidence": 0.9908215999603271,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0205",
+      "width": 320,
+      "validWidth": 184,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 21.912002000135544,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9991779923439026,
+      "referenceMinimumConfidence": 0.9991779923439026,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0206",
+      "width": 320,
+      "validWidth": 313,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 28.027639999891107,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.997577965259552,
+      "referenceMinimumConfidence": 0.9975778460502625,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0207",
+      "width": 320,
+      "validWidth": 243,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 23.900705999949423,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.998503565788269,
+      "referenceMinimumConfidence": 0.9985036849975586,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0208",
+      "width": 320,
+      "validWidth": 117,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 21.99352400020871,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999902248382568,
+      "referenceMinimumConfidence": 0.9999903440475464,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0209",
+      "width": 320,
+      "validWidth": 90,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 22.063669999624835,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996277093887329,
+      "referenceMinimumConfidence": 0.9996277093887329,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0210",
+      "width": 320,
+      "validWidth": 294,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 23.482998999497795,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995219707489014,
+      "referenceMinimumConfidence": 0.9995218515396118,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0211",
+      "width": 320,
+      "validWidth": 164,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 27.42693800064444,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994698166847229,
+      "referenceMinimumConfidence": 0.9994698166847229,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0212",
+      "width": 320,
+      "validWidth": 191,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 23.54120200016041,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.724864661693573,
+      "referenceMinimumConfidence": 0.7248607873916626,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 3.874301910400391e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0213",
+      "width": 320,
+      "validWidth": 224,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.529033000348136,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998024106025696,
+      "referenceMinimumConfidence": 0.9998024106025696,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0214",
+      "width": 364,
+      "validWidth": 364,
+      "outputShape": [
+        1,
+        45,
+        18710
+      ],
+      "inferenceMilliseconds": 17.51405300001352,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.998880922794342,
+      "referenceMinimumConfidence": 0.9988810420036316,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0215",
+      "width": 320,
+      "validWidth": 288,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.895502000399574,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9984531402587891,
+      "referenceMinimumConfidence": 0.9984532594680786,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0216",
+      "width": 320,
+      "validWidth": 166,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.782922999984294,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9979985356330872,
+      "referenceMinimumConfidence": 0.9979985356330872,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0217",
+      "width": 320,
+      "validWidth": 319,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.721872999165498,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997022747993469,
+      "referenceMinimumConfidence": 0.9997021555900574,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0218",
+      "width": 320,
+      "validWidth": 307,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.176874999975553,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9990839958190918,
+      "referenceMinimumConfidence": 0.9990839958190918,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0219",
+      "width": 320,
+      "validWidth": 194,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.471556999727909,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.998961329460144,
+      "referenceMinimumConfidence": 0.998961329460144,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0220",
+      "width": 320,
+      "validWidth": 179,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.351607000411605,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.8380618095397949,
+      "referenceMinimumConfidence": 0.8380589485168457,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.86102294921875e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0221",
+      "width": 320,
+      "validWidth": 137,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.772879999531142,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.995555579662323,
+      "referenceMinimumConfidence": 0.995555579662323,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0222",
+      "width": 320,
+      "validWidth": 191,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.819828999861784,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997984766960144,
+      "referenceMinimumConfidence": 0.9997984766960144,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0223",
+      "width": 320,
+      "validWidth": 222,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.903335000075458,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999319314956665,
+      "referenceMinimumConfidence": 0.999932050704956,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0224",
+      "width": 320,
+      "validWidth": 139,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.725668999948539,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998607635498047,
+      "referenceMinimumConfidence": 0.9998608827590942,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0225",
+      "width": 320,
+      "validWidth": 189,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.72845400046208,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999479353427887,
+      "referenceMinimumConfidence": 0.9994792342185974,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0226",
+      "width": 320,
+      "validWidth": 212,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.525799999726587,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9985370635986328,
+      "referenceMinimumConfidence": 0.9985370635986328,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0227",
+      "width": 320,
+      "validWidth": 220,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.101613000500947,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994760155677795,
+      "referenceMinimumConfidence": 0.9994760155677795,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0228",
+      "width": 320,
+      "validWidth": 84,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.176204000454163,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9817088842391968,
+      "referenceMinimumConfidence": 0.9817091822624207,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.980232238769531e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0229",
+      "width": 320,
+      "validWidth": 116,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.753488999303954,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.7359415292739868,
+      "referenceMinimumConfidence": 0.7359407544136047,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 7.748603820800781e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0230",
+      "width": 320,
+      "validWidth": 266,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.027350000309525,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9993676543235779,
+      "referenceMinimumConfidence": 0.9993676543235779,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0231",
+      "width": 320,
+      "validWidth": 224,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.958556999772554,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999932050704956,
+      "referenceMinimumConfidence": 0.9999321699142456,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0232",
+      "width": 320,
+      "validWidth": 246,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.153739999732352,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9984726309776306,
+      "referenceMinimumConfidence": 0.9984725117683411,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0233",
+      "width": 329,
+      "validWidth": 329,
+      "outputShape": [
+        1,
+        41,
+        18710
+      ],
+      "inferenceMilliseconds": 15.98606999959884,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9991512298583984,
+      "referenceMinimumConfidence": 0.9991512298583984,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0234",
+      "width": 320,
+      "validWidth": 255,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.15126799990685,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995181560516357,
+      "referenceMinimumConfidence": 0.9995182752609253,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0235",
+      "width": 320,
+      "validWidth": 224,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.757625999664015,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.6988677978515625,
+      "referenceMinimumConfidence": 0.6988669037818909,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 8.940696716308594e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0236",
+      "width": 320,
+      "validWidth": 167,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.679959999943094,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9671657681465149,
+      "referenceMinimumConfidence": 0.9671653509140015,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 4.172325134277344e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0237",
+      "width": 320,
+      "validWidth": 227,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.596694999658212,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994297623634338,
+      "referenceMinimumConfidence": 0.9994297623634338,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0238",
+      "width": 320,
+      "validWidth": 170,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.574611999909393,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9988728165626526,
+      "referenceMinimumConfidence": 0.9988729357719421,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0239",
+      "width": 320,
+      "validWidth": 216,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.462706000515027,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995636343955994,
+      "referenceMinimumConfidence": 0.9995635151863098,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0240",
+      "width": 320,
+      "validWidth": 154,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.334544000026654,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.8813740611076355,
+      "referenceMinimumConfidence": 0.8813737034797668,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.4437904357910156e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0241",
+      "width": 320,
+      "validWidth": 216,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.096183999958157,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997310042381287,
+      "referenceMinimumConfidence": 0.9997310042381287,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0242",
+      "width": 320,
+      "validWidth": 251,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.127191000123275,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998732805252075,
+      "referenceMinimumConfidence": 0.999873161315918,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0243",
+      "width": 320,
+      "validWidth": 175,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.663481000250613,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996873140335083,
+      "referenceMinimumConfidence": 0.9996871948242188,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0244",
+      "width": 320,
+      "validWidth": 239,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.169844000411103,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9956607222557068,
+      "referenceMinimumConfidence": 0.9956607222557068,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0245",
+      "width": 320,
+      "validWidth": 197,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.356474999862257,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996366500854492,
+      "referenceMinimumConfidence": 0.9996366500854492,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0246",
+      "width": 320,
+      "validWidth": 207,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.310947999452765,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998382329940796,
+      "referenceMinimumConfidence": 0.9998382329940796,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0247",
+      "width": 320,
+      "validWidth": 247,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.858166000522033,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995037317276001,
+      "referenceMinimumConfidence": 0.9995037317276001,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0248",
+      "width": 320,
+      "validWidth": 155,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.728793000562291,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999607801437378,
+      "referenceMinimumConfidence": 0.9999607801437378,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0249",
+      "width": 320,
+      "validWidth": 284,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.89407399994525,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999291181564331,
+      "referenceMinimumConfidence": 0.9992913007736206,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0250",
+      "width": 320,
+      "validWidth": 179,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 23.824773000342248,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994530081748962,
+      "referenceMinimumConfidence": 0.9994531273841858,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0251",
+      "width": 320,
+      "validWidth": 171,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.809024999929534,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9608182311058044,
+      "referenceMinimumConfidence": 0.9608192443847656,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.0132789611816406e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0252",
+      "width": 320,
+      "validWidth": 78,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.917156000090472,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.8275285363197327,
+      "referenceMinimumConfidence": 0.8275287747383118,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0253",
+      "width": 320,
+      "validWidth": 200,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.49355099996319,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9116237759590149,
+      "referenceMinimumConfidence": 0.9116266369819641,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.86102294921875e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0254",
+      "width": 320,
+      "validWidth": 252,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 23.428297999998904,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.997191846370697,
+      "referenceMinimumConfidence": 0.997191846370697,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0255",
+      "width": 320,
+      "validWidth": 316,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.842068999532785,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9991021156311035,
+      "referenceMinimumConfidence": 0.9991021156311035,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0256",
+      "width": 320,
+      "validWidth": 187,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 28.43917700010934,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9971946477890015,
+      "referenceMinimumConfidence": 0.9971946477890015,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0257",
+      "width": 320,
+      "validWidth": 156,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.426825999398716,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9992110729217529,
+      "referenceMinimumConfidence": 0.9992109537124634,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0258",
+      "width": 320,
+      "validWidth": 191,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.52728600019327,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998931884765625,
+      "referenceMinimumConfidence": 0.9998931884765625,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0259",
+      "width": 320,
+      "validWidth": 246,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.396150000029593,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996978044509888,
+      "referenceMinimumConfidence": 0.9996978044509888,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0260",
+      "width": 320,
+      "validWidth": 135,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 29.210785000032047,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.986060619354248,
+      "referenceMinimumConfidence": 0.9860609769821167,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 3.5762786865234375e-07,
+      "unsupportedPadding": true
+    },
+    {
+      "id": "final-0261",
+      "width": 320,
+      "validWidth": 99,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.09469399995578,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999147891998291,
+      "referenceMinimumConfidence": 0.999147891998291,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0262",
+      "width": 320,
+      "validWidth": 192,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.39018800001213,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9957386255264282,
+      "referenceMinimumConfidence": 0.9957387447357178,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0263",
+      "width": 320,
+      "validWidth": 206,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 23.491842999646906,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998328685760498,
+      "referenceMinimumConfidence": 0.9998327493667603,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0264",
+      "width": 320,
+      "validWidth": 218,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 23.87507799994637,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9622673392295837,
+      "referenceMinimumConfidence": 0.9622674584388733,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0265",
+      "width": 320,
+      "validWidth": 291,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.976193999449606,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999723494052887,
+      "referenceMinimumConfidence": 0.999723494052887,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0266",
+      "width": 320,
+      "validWidth": 202,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 21.515997999813408,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9988040924072266,
+      "referenceMinimumConfidence": 0.998803973197937,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0267",
+      "width": 320,
+      "validWidth": 232,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.771553000391577,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998683929443359,
+      "referenceMinimumConfidence": 0.9998683929443359,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0268",
+      "width": 320,
+      "validWidth": 104,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.594436999905156,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.987034261226654,
+      "referenceMinimumConfidence": 0.9870346188545227,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 3.5762786865234375e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0269",
+      "width": 320,
+      "validWidth": 139,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.538423999729275,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995796084403992,
+      "referenceMinimumConfidence": 0.9995798468589783,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0270",
+      "width": 320,
+      "validWidth": 132,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.454848000459606,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999551773071289,
+      "referenceMinimumConfidence": 0.9999551773071289,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0271",
+      "width": 320,
+      "validWidth": 184,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.40779799962911,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995602965354919,
+      "referenceMinimumConfidence": 0.9995601773262024,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0272",
+      "width": 320,
+      "validWidth": 117,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.328079000639264,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9790807366371155,
+      "referenceMinimumConfidence": 0.9790816307067871,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 8.940696716308594e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0273",
+      "width": 320,
+      "validWidth": 69,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.05924900034006,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999306201934814,
+      "referenceMinimumConfidence": 0.999930739402771,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0274",
+      "width": 320,
+      "validWidth": 142,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.24922399969364,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997377991676331,
+      "referenceMinimumConfidence": 0.9997377991676331,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0275",
+      "width": 320,
+      "validWidth": 265,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.724246999729075,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9949775338172913,
+      "referenceMinimumConfidence": 0.9949775338172913,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0276",
+      "width": 320,
+      "validWidth": 278,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.394102000049315,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9990838766098022,
+      "referenceMinimumConfidence": 0.9990839958190918,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0277",
+      "width": 320,
+      "validWidth": 136,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.816515000755317,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999079704284668,
+      "referenceMinimumConfidence": 0.9999079704284668,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0278",
+      "width": 320,
+      "validWidth": 174,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.265217999716697,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9981581568717957,
+      "referenceMinimumConfidence": 0.9981581568717957,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0279",
+      "width": 320,
+      "validWidth": 188,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 31.296404999920924,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9983831644058228,
+      "referenceMinimumConfidence": 0.9983831644058228,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0280",
+      "width": 320,
+      "validWidth": 70,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.701307000214,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.99998939037323,
+      "referenceMinimumConfidence": 0.9999892711639404,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0281",
+      "width": 320,
+      "validWidth": 150,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.36177899926406,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999427795410156,
+      "referenceMinimumConfidence": 0.9999426603317261,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0282",
+      "width": 320,
+      "validWidth": 188,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.294928000017535,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9208906292915344,
+      "referenceMinimumConfidence": 0.920890212059021,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 4.172325134277344e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0283",
+      "width": 320,
+      "validWidth": 234,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 25.388765000570857,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996541738510132,
+      "referenceMinimumConfidence": 0.9996541738510132,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0284",
+      "width": 320,
+      "validWidth": 198,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.68273000067711,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9640825986862183,
+      "referenceMinimumConfidence": 0.9640824794769287,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0285",
+      "width": 320,
+      "validWidth": 264,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.776615999333444,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996211528778076,
+      "referenceMinimumConfidence": 0.9996210336685181,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0286",
+      "width": 320,
+      "validWidth": 135,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 34.318506000090565,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996261596679688,
+      "referenceMinimumConfidence": 0.9996262788772583,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0287",
+      "width": 320,
+      "validWidth": 288,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.3241019998095,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9433135390281677,
+      "referenceMinimumConfidence": 0.9433131217956543,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 4.172325134277344e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0288",
+      "width": 320,
+      "validWidth": 143,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.877197000416345,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9937158226966858,
+      "referenceMinimumConfidence": 0.9937158226966858,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0289",
+      "width": 320,
+      "validWidth": 54,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.681322999829717,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999390840530396,
+      "referenceMinimumConfidence": 0.9999390840530396,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 0.0,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0290",
+      "width": 320,
+      "validWidth": 243,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.525689000241982,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998619556427002,
+      "referenceMinimumConfidence": 0.9998620748519897,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0291",
+      "width": 320,
+      "validWidth": 235,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 21.899473999837937,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996175765991211,
+      "referenceMinimumConfidence": 0.9996175765991211,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0292",
+      "width": 320,
+      "validWidth": 167,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.689823999309738,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997654557228088,
+      "referenceMinimumConfidence": 0.9997654557228088,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0293",
+      "width": 320,
+      "validWidth": 261,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.116576000262285,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995456337928772,
+      "referenceMinimumConfidence": 0.9995456337928772,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0294",
+      "width": 320,
+      "validWidth": 168,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.081823000808072,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999665021896362,
+      "referenceMinimumConfidence": 0.9999665021896362,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0295",
+      "width": 320,
+      "validWidth": 224,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.02621000004001,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9957278966903687,
+      "referenceMinimumConfidence": 0.9957279562950134,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0296",
+      "width": 320,
+      "validWidth": 213,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.760632000317855,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9966205358505249,
+      "referenceMinimumConfidence": 0.9966205358505249,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0297",
+      "width": 320,
+      "validWidth": 216,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 21.907145000113815,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9948857426643372,
+      "referenceMinimumConfidence": 0.9948855042457581,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0298",
+      "width": 320,
+      "validWidth": 216,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.800493000322604,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9904460906982422,
+      "referenceMinimumConfidence": 0.9904462099075317,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0299",
+      "width": 320,
+      "validWidth": 212,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.819689000636572,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997406601905823,
+      "referenceMinimumConfidence": 0.9997405409812927,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0300",
+      "width": 320,
+      "validWidth": 175,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.966789999765751,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999595582485199,
+      "referenceMinimumConfidence": 0.999595582485199,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0301",
+      "width": 320,
+      "validWidth": 160,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.254892999313597,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9973996877670288,
+      "referenceMinimumConfidence": 0.9973996877670288,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0302",
+      "width": 320,
+      "validWidth": 118,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 20.668946000114374,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999617338180542,
+      "referenceMinimumConfidence": 0.9999618530273438,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0303",
+      "width": 320,
+      "validWidth": 256,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.128062999996473,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997981190681458,
+      "referenceMinimumConfidence": 0.9997981190681458,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0304",
+      "width": 320,
+      "validWidth": 137,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.694363000169687,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997748732566833,
+      "referenceMinimumConfidence": 0.9997748732566833,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0305",
+      "width": 320,
+      "validWidth": 78,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.468673999952443,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.619805097579956,
+      "referenceMinimumConfidence": 0.6197993159294128,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 5.781650543212891e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0306",
+      "width": 320,
+      "validWidth": 183,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.847362000589783,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998251795768738,
+      "referenceMinimumConfidence": 0.9998252987861633,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0307",
+      "width": 320,
+      "validWidth": 212,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.213511999420007,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9936995506286621,
+      "referenceMinimumConfidence": 0.9936995506286621,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0308",
+      "width": 320,
+      "validWidth": 208,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.742995000640803,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.436780720949173,
+      "referenceMinimumConfidence": 0.4367818534374237,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1324882507324219e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0309",
+      "width": 373,
+      "validWidth": 373,
+      "outputShape": [
+        1,
+        47,
+        18710
+      ],
+      "inferenceMilliseconds": 20.4634880001322,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9964350461959839,
+      "referenceMinimumConfidence": 0.9964350461959839,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0310",
+      "width": 320,
+      "validWidth": 238,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.0109670005113,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9993845224380493,
+      "referenceMinimumConfidence": 0.9993845224380493,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0311",
+      "width": 320,
+      "validWidth": 212,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.243725999629532,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9975367784500122,
+      "referenceMinimumConfidence": 0.9975368976593018,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0312",
+      "width": 320,
+      "validWidth": 205,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.267931999915163,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9744651317596436,
+      "referenceMinimumConfidence": 0.9744654893875122,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 3.5762786865234375e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0313",
+      "width": 320,
+      "validWidth": 298,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.181873999812524,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998683929443359,
+      "referenceMinimumConfidence": 0.9998683929443359,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0314",
+      "width": 320,
+      "validWidth": 137,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.383695000309672,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9874250292778015,
+      "referenceMinimumConfidence": 0.9874250292778015,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0315",
+      "width": 320,
+      "validWidth": 296,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.249946000243654,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9882912039756775,
+      "referenceMinimumConfidence": 0.9882916808128357,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 4.76837158203125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0316",
+      "width": 320,
+      "validWidth": 264,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.607681999630586,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9450417160987854,
+      "referenceMinimumConfidence": 0.9450408816337585,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 8.344650268554688e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0317",
+      "width": 320,
+      "validWidth": 183,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.650045000256796,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9863857626914978,
+      "referenceMinimumConfidence": 0.9863856434822083,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0318",
+      "width": 352,
+      "validWidth": 352,
+      "outputShape": [
+        1,
+        44,
+        18710
+      ],
+      "inferenceMilliseconds": 17.42676100002427,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9975910186767578,
+      "referenceMinimumConfidence": 0.9975911378860474,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0319",
+      "width": 320,
+      "validWidth": 214,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.03869799964741,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999605417251587,
+      "referenceMinimumConfidence": 0.9999606609344482,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0320",
+      "width": 320,
+      "validWidth": 60,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.255453999292513,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.802101731300354,
+      "referenceMinimumConfidence": 0.8021045327186584,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.8014183044433594e-06,
+      "unsupportedPadding": true
+    },
+    {
+      "id": "final-0321",
+      "width": 320,
+      "validWidth": 136,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.144456000598439,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999542236328125,
+      "referenceMinimumConfidence": 0.999954104423523,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0322",
+      "width": 320,
+      "validWidth": 190,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.897136999432405,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998146891593933,
+      "referenceMinimumConfidence": 0.9998146891593933,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0323",
+      "width": 320,
+      "validWidth": 179,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.846751000026416,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9993765950202942,
+      "referenceMinimumConfidence": 0.9993765950202942,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0324",
+      "width": 320,
+      "validWidth": 231,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.104105999853346,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.8418626189231873,
+      "referenceMinimumConfidence": 0.8418617844581604,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 8.344650268554688e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0325",
+      "width": 320,
+      "validWidth": 223,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.864107999434054,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9543425440788269,
+      "referenceMinimumConfidence": 0.9543417692184448,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 7.748603820800781e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0326",
+      "width": 320,
+      "validWidth": 229,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.179510000256414,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998451471328735,
+      "referenceMinimumConfidence": 0.9998451471328735,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0327",
+      "width": 320,
+      "validWidth": 189,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 18.88019199941482,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9923770427703857,
+      "referenceMinimumConfidence": 0.9923769235610962,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0328",
+      "width": 320,
+      "validWidth": 218,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.963945999828866,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9978824257850647,
+      "referenceMinimumConfidence": 0.9978824257850647,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0329",
+      "width": 320,
+      "validWidth": 55,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.209013999992749,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9048425555229187,
+      "referenceMinimumConfidence": 0.9048416614532471,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 8.940696716308594e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0330",
+      "width": 320,
+      "validWidth": 320,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.824307999944722,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9977827668190002,
+      "referenceMinimumConfidence": 0.9977827668190002,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0331",
+      "width": 320,
+      "validWidth": 236,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.03089699983684,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9847074747085571,
+      "referenceMinimumConfidence": 0.9847074747085571,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0332",
+      "width": 320,
+      "validWidth": 104,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.137465999941924,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9920260310173035,
+      "referenceMinimumConfidence": 0.9920259118080139,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0333",
+      "width": 386,
+      "validWidth": 386,
+      "outputShape": [
+        1,
+        48,
+        18710
+      ],
+      "inferenceMilliseconds": 19.168744999660703,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9863139390945435,
+      "referenceMinimumConfidence": 0.9863139390945435,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0334",
+      "width": 320,
+      "validWidth": 236,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.792078999969817,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9784018397331238,
+      "referenceMinimumConfidence": 0.9784018397331238,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0335",
+      "width": 320,
+      "validWidth": 134,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.211888000725594,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998617172241211,
+      "referenceMinimumConfidence": 0.9998617172241211,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0336",
+      "width": 320,
+      "validWidth": 152,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.029694999815547,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.7625247240066528,
+      "referenceMinimumConfidence": 0.762525737285614,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.430511474609375e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0337",
+      "width": 320,
+      "validWidth": 240,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.34898400061502,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9984322190284729,
+      "referenceMinimumConfidence": 0.9984320998191833,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0338",
+      "width": 320,
+      "validWidth": 158,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.33617399945797,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997712969779968,
+      "referenceMinimumConfidence": 0.9997714161872864,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0339",
+      "width": 320,
+      "validWidth": 122,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.269022999746085,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.998880922794342,
+      "referenceMinimumConfidence": 0.998880922794342,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0340",
+      "width": 320,
+      "validWidth": 261,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.014141000392556,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9989781379699707,
+      "referenceMinimumConfidence": 0.9989781379699707,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0341",
+      "width": 320,
+      "validWidth": 256,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 22.56118199966295,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9538482427597046,
+      "referenceMinimumConfidence": 0.953848123550415,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0342",
+      "width": 320,
+      "validWidth": 117,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.339163999684388,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999479055404663,
+      "referenceMinimumConfidence": 0.9999477863311768,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0343",
+      "width": 320,
+      "validWidth": 257,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.287255999297486,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9983988404273987,
+      "referenceMinimumConfidence": 0.9983988404273987,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0344",
+      "width": 320,
+      "validWidth": 210,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 24.353224999686063,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999756813049316,
+      "referenceMinimumConfidence": 0.9999755620956421,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0345",
+      "width": 345,
+      "validWidth": 345,
+      "outputShape": [
+        1,
+        43,
+        18710
+      ],
+      "inferenceMilliseconds": 26.487918999919202,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996050000190735,
+      "referenceMinimumConfidence": 0.999605119228363,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0346",
+      "width": 320,
+      "validWidth": 130,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.10197399986646,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999945163726807,
+      "referenceMinimumConfidence": 0.9999946355819702,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0347",
+      "width": 320,
+      "validWidth": 222,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 16.760451999289216,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9964415431022644,
+      "referenceMinimumConfidence": 0.996441662311554,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0348",
+      "width": 320,
+      "validWidth": 216,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.150064999943424,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9506753087043762,
+      "referenceMinimumConfidence": 0.9506750106811523,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.980232238769531e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0349",
+      "width": 376,
+      "validWidth": 376,
+      "outputShape": [
+        1,
+        47,
+        18710
+      ],
+      "inferenceMilliseconds": 16.697036000550725,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998056292533875,
+      "referenceMinimumConfidence": 0.9998058676719666,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0350",
+      "width": 320,
+      "validWidth": 197,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.596385000208102,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998489618301392,
+      "referenceMinimumConfidence": 0.9998489618301392,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0351",
+      "width": 320,
+      "validWidth": 248,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.690785999846412,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9964216947555542,
+      "referenceMinimumConfidence": 0.9964216947555542,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0352",
+      "width": 320,
+      "validWidth": 108,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.187822000370943,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9719436168670654,
+      "referenceMinimumConfidence": 0.9719433784484863,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0353",
+      "width": 320,
+      "validWidth": 247,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.617855999858875,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997430443763733,
+      "referenceMinimumConfidence": 0.9997430443763733,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0354",
+      "width": 320,
+      "validWidth": 102,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.082252000662265,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9993746876716614,
+      "referenceMinimumConfidence": 0.9993746876716614,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0355",
+      "width": 320,
+      "validWidth": 135,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.357596000081685,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999058187007904,
+      "referenceMinimumConfidence": 0.9990584254264832,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": true
+    },
+    {
+      "id": "final-0356",
+      "width": 320,
+      "validWidth": 116,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.004776000547281,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9999140501022339,
+      "referenceMinimumConfidence": 0.9999141693115234,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0357",
+      "width": 320,
+      "validWidth": 60,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.288040999417717,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9998923540115356,
+      "referenceMinimumConfidence": 0.9998922348022461,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0358",
+      "width": 320,
+      "validWidth": 143,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.077294999879086,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9937058091163635,
+      "referenceMinimumConfidence": 0.9937060475349426,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0359",
+      "width": 320,
+      "validWidth": 264,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.245698000195262,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.6523781418800354,
+      "referenceMinimumConfidence": 0.652377724647522,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 4.172325134277344e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0360",
+      "width": 320,
+      "validWidth": 168,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.022792999639933,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9958160519599915,
+      "referenceMinimumConfidence": 0.995816171169281,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0361",
+      "width": 320,
+      "validWidth": 120,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.298867999968934,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9995513558387756,
+      "referenceMinimumConfidence": 0.9995512366294861,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0362",
+      "width": 320,
+      "validWidth": 208,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.229533000616357,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9961052536964417,
+      "referenceMinimumConfidence": 0.9961052536964417,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0363",
+      "width": 320,
+      "validWidth": 135,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.760480999939318,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997701048851013,
+      "referenceMinimumConfidence": 0.9997699856758118,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0364",
+      "width": 320,
+      "validWidth": 96,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.82646900058171,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9655311703681946,
+      "referenceMinimumConfidence": 0.9655323624610901,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0365",
+      "width": 320,
+      "validWidth": 173,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.216083999599505,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9988173842430115,
+      "referenceMinimumConfidence": 0.9988173842430115,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0366",
+      "width": 320,
+      "validWidth": 228,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 15.260319999470084,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999134361743927,
+      "referenceMinimumConfidence": 0.999134361743927,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0367",
+      "width": 320,
+      "validWidth": 183,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.621442000134266,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9964098334312439,
+      "referenceMinimumConfidence": 0.9964098334312439,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0368",
+      "width": 320,
+      "validWidth": 135,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 17.422554999939166,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994226694107056,
+      "referenceMinimumConfidence": 0.9994227886199951,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0369",
+      "width": 340,
+      "validWidth": 340,
+      "outputShape": [
+        1,
+        42,
+        18710
+      ],
+      "inferenceMilliseconds": 16.725880000194593,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9901596903800964,
+      "referenceMinimumConfidence": 0.9901595711708069,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0370",
+      "width": 320,
+      "validWidth": 148,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.336373999867646,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997279047966003,
+      "referenceMinimumConfidence": 0.9997280240058899,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0371",
+      "width": 320,
+      "validWidth": 197,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.188772000125027,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.7825899124145508,
+      "referenceMinimumConfidence": 0.7825915217399597,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.6093254089355469e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0372",
+      "width": 320,
+      "validWidth": 147,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.345518000482116,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9754393696784973,
+      "referenceMinimumConfidence": 0.9754394888877869,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0373",
+      "width": 320,
+      "validWidth": 313,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.253158999963489,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.999545156955719,
+      "referenceMinimumConfidence": 0.999545156955719,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0374",
+      "width": 320,
+      "validWidth": 215,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.180509999278001,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9835385084152222,
+      "referenceMinimumConfidence": 0.9835386276245117,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0375",
+      "width": 320,
+      "validWidth": 219,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.142202000584803,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994730353355408,
+      "referenceMinimumConfidence": 0.9994729161262512,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0376",
+      "width": 320,
+      "validWidth": 199,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.180619999933697,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9781836867332458,
+      "referenceMinimumConfidence": 0.9781838059425354,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0377",
+      "width": 320,
+      "validWidth": 228,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.177234999806387,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9996953010559082,
+      "referenceMinimumConfidence": 0.9996951818466187,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0378",
+      "width": 334,
+      "validWidth": 334,
+      "outputShape": [
+        1,
+        42,
+        18710
+      ],
+      "inferenceMilliseconds": 15.641021000192268,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.907889723777771,
+      "referenceMinimumConfidence": 0.9078882932662964,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.430511474609375e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0379",
+      "width": 320,
+      "validWidth": 158,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.686479000374675,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9936803579330444,
+      "referenceMinimumConfidence": 0.9936802387237549,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": true
+    },
+    {
+      "id": "final-0380",
+      "width": 320,
+      "validWidth": 218,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.403193999896757,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9985219836235046,
+      "referenceMinimumConfidence": 0.9985218644142151,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0381",
+      "width": 320,
+      "validWidth": 252,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.496153999971284,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9994223117828369,
+      "referenceMinimumConfidence": 0.9994221925735474,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0382",
+      "width": 320,
+      "validWidth": 320,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 13.91429999966931,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9945144653320312,
+      "referenceMinimumConfidence": 0.9945144653320312,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0383",
+      "width": 320,
+      "validWidth": 223,
+      "outputShape": [
+        1,
+        40,
+        18710
+      ],
+      "inferenceMilliseconds": 14.693129000079352,
+      "exactTextAndIntervals": true,
+      "minimumConfidence": 0.9997912049293518,
+      "referenceMinimumConfidence": 0.9997912049293518,
+      "confidenceFloor08Agreement": true,
+      "maximumPieceConfidenceDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    }
+  ],
+  "exactTextAndIntervals": 384,
+  "confidenceFloor08Agreement": 384,
+  "maximumPieceConfidenceDifference": 1.6450881958007812e-05,
+  "selectedRowsTouchingPadding": 6
+}

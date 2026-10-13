@@ -1,0 +1,74 @@
+{
+  "README.md": {
+    "bytes": 5172,
+    "sha256": "2936ae822ca9e96afb134f857d7b5a9a0501bc1865545b663d2eb78cdcc18587"
+  },
+  "coreml-conversion.json": {
+    "bytes": 1495,
+    "sha256": "588b61cf8ba4ae99018fbb479cac03cba54df0bad6199c97b9afb9707ebeeee9"
+  },
+  "development-selection.json": {
+    "bytes": 4109,
+    "sha256": "229c22a54655e901683a6d8f78b5eb968cb3778269c3162320a37a337e44d3c6"
+  },
+  "final-baseline-controls.json": {
+    "bytes": 40174,
+    "sha256": "32a1835d64d0be429f331d258ac605d5bc9285e2239cd53915765376fdfcc317"
+  },
+  "final-baseline-records.json": {
+    "bytes": 469363,
+    "sha256": "119262b98104861a4ed9bb84eef164af4e26dd4ade3fc89ccbba3f7fb7052356"
+  },
+  "final-selected-controls.json": {
+    "bytes": 42014,
+    "sha256": "5dcce281f198e280669df4a64db6abbacd308313bc7705351d9d253ab834bfbb"
+  },
+  "final-selected-records.json": {
+    "bytes": 470093,
+    "sha256": "9fc16a6499e854be98ddb67ddfee385ec4b9c50bce22ff68e984fd8b46ac8871"
+  },
+  "final-summary.json": {
+    "bytes": 5533,
+    "sha256": "149084fd406c69d3a9e9de5a1b75b7ec63d9936feb807f565db82c91bb00b408"
+  },
+  "onnx-parity-invalid-torch-mode.json": {
+    "bytes": 60111,
+    "sha256": "94981ba274be36e1b722bc46f55c4bd76ccf48a9c4882b31cee42395541bd8fa"
+  },
+  "onnx-parity.json": {
+    "bytes": 75090,
+    "sha256": "6644ca07d4380d2373af38fa9238e8bca09330cebc7c2fba629f1ec9f2e77d0b"
+  },
+  "onnx-profile-baseline.json": {
+    "bytes": 186787,
+    "sha256": "34598e01aa89a9420bb5fa10952fc03d3b14d973f894925b785f841c3b670106"
+  },
+  "onnx-profile-selected.json": {
+    "bytes": 186816,
+    "sha256": "f5f2538eeff075c47b9866231d76137a2eb4e0a64e0442cee23d8c4cfd96cd11"
+  },
+  "ood-baseline-records.json": {
+    "bytes": 67336,
+    "sha256": "a2df3f636c6a9ad420555b3d13a40006cc3aa3438c2b8aaa6a374e5cbde91556"
+  },
+  "ood-selected-records.json": {
+    "bytes": 67334,
+    "sha256": "fda756ee36a903934f13bb5884b1bbf7db1f54a9f76e0e917c20c4452761367f"
+  },
+  "ood-summary.json": {
+    "bytes": 1188,
+    "sha256": "39c19889df7fa74002239735508b50edb428420cbf0f5ebee1efdce2813b7538"
+  },
+  "portable-archive-receipt.json": {
+    "bytes": 322,
+    "sha256": "1f412bcb9718628c071f1fa2f79ec541c7335d1b858c9f3e2bfebe239652e1fa"
+  },
+  "portable-package-receipt.json": {
+    "bytes": 12043,
+    "sha256": "2967c22010e51a8f0e41b2c0c161095cd81e2a6e112e0358f57dbe21de933ba5"
+  },
+  "reproduction-receipt.json": {
+    "bytes": 2642,
+    "sha256": "f4252e3a30e912fd6e8a203a6562f2acf0c6240d6fb6f5d6da6bf8e85486264b"
+  }
+}

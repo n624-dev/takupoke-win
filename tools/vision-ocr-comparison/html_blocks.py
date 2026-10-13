@@ -22,7 +22,7 @@ class Blocks(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         self.charge()
-        if tag not in {'div', 'p', 'span', 'b', 'strong', 'i', 'em', 'br'}:
+        if tag not in {'div', 'p', 'span', 'b', 'strong', 'i', 'em', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'}:
             raise Refusal('Unsupported native HTML tag')
         keys = [k for k, _ in attrs]
         if len(keys) != len(set(keys)) or any(k not in {'data-bbox', 'data-label', 'class'} for k in keys):

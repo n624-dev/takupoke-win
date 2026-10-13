@@ -12,6 +12,12 @@ class HtmlProtocolTests(unittest.TestCase):
     def test_native_text_spaces_and_breaks_remain(self):
         self.assertEqual(' 甲\n乙 ', html_blocks.decode('<p> 甲<br>乙 </p>')['text'])
 
+    def test_trained_heading_markup_keeps_literal_text_and_no_ownership_credit(self):
+        for tag in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6'):
+            result = html_blocks.decode(f'<div data-bbox="0 0 1000 1000"><{tag}>Al_1</{tag}></div>')
+            self.assertEqual('Al_1', result['text'])
+            self.assertEqual('ABSENT', result['originalOwnershipProof'])
+
     def test_malformed_or_active_markup_cannot_be_repaired_into_a_proposal(self):
         cases = ['<div>甲', '<div>甲</p>', 'answer<div>甲</div>', '<div>甲</div><div>乙</div>',
                  '<script>甲</script>', '<div style="color:white">甲</div>', '<div onclick="x">甲</div>',

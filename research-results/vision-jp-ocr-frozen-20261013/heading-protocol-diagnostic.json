@@ -1,0 +1,92 @@
+{
+  "diagnostic": "Zero-inference heading-tag protocol correction; original frozen reports/raw remain unchanged",
+  "rawSHA": "e4b92fed011f75c880afcaaac95d5db231eef6ab166a02debc4d19a4428e5d92",
+  "originalInterpreterSHA": "f86a5bbb4c3202e2c6151754f8cbf959727780c880e25bbe8c923f48c8311034",
+  "correctedInterpreterSHA": "80a09656f7612a5d5d80d098d2696641e7afb5e9479caedb7ceb951529b9f780",
+  "additionalModelCalls": 0,
+  "originalOwnershipProof": "ABSENT",
+  "qualification": false,
+  "aggregates": [
+    {
+      "cohort": "sans",
+      "kind": "blank",
+      "rows": 3,
+      "parsed": 3,
+      "literalExact": 3,
+      "refused": 0
+    },
+    {
+      "cohort": "sans",
+      "kind": "header",
+      "rows": 21,
+      "parsed": 21,
+      "literalExact": 20,
+      "refused": 0
+    },
+    {
+      "cohort": "sans",
+      "kind": "room",
+      "rows": 24,
+      "parsed": 24,
+      "literalExact": 10,
+      "refused": 0
+    },
+    {
+      "cohort": "sans",
+      "kind": "subject",
+      "rows": 24,
+      "parsed": 24,
+      "literalExact": 24,
+      "refused": 0
+    },
+    {
+      "cohort": "sans",
+      "kind": "teacher",
+      "rows": 24,
+      "parsed": 24,
+      "literalExact": 24,
+      "refused": 0
+    },
+    {
+      "cohort": "serif",
+      "kind": "blank",
+      "rows": 3,
+      "parsed": 3,
+      "literalExact": 3,
+      "refused": 0
+    },
+    {
+      "cohort": "serif",
+      "kind": "header",
+      "rows": 21,
+      "parsed": 21,
+      "literalExact": 20,
+      "refused": 0
+    },
+    {
+      "cohort": "serif",
+      "kind": "room",
+      "rows": 24,
+      "parsed": 24,
+      "literalExact": 14,
+      "refused": 0
+    },
+    {
+      "cohort": "serif",
+      "kind": "subject",
+      "rows": 24,
+      "parsed": 24,
+      "literalExact": 24,
+      "refused": 0
+    },
+    {
+      "cohort": "serif",
+      "kind": "teacher",
+      "rows": 24,
+      "parsed": 24,
+      "literalExact": 21,
+      "refused": 0
+    }
+  ],
+  "refusals": {}
+}

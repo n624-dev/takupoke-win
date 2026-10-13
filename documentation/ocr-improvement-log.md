@@ -1,5 +1,31 @@
 # OCR improvement log
 
+## 2026-10-13: Independent source final and optional portable OCR adaptation
+
+Native Windows38351289220 and Linux both passed two new independent complete
+source documents (Kosugi/Sawarabi, new literals/layout/paint order), with all680
+slots/2040 body values exact, four missing-source refusals, incorrect acceptance0,
+manual corrections/OCR/GenAI0. Windows peak118,427,648bytes; Linux131,772,416.
+Full Windows/Linux/UI CI38351294158 succeeded. This qualifies the measured
+source-only route, not image-only OCR, missing-font semantics or downloaded models.
+
+The user's explicitly designated GPT-6.1 Sol/High collaborator independently
+completed optional lightweight OCR adaptation. Final exact320→351/384, CER2.832→
+1.324%, high-confidence wrong41→23 and five regressions; clipped/multiline
+overconfidence remains. Standard ONNX and CoreML conversion are packaged for
+potential iOS evaluation, with no iOS code changes or Apple-runtime quality claim.
+[Training evidence](../research-results/ocr-synthetic-training-20261013/README.md)
+remains unqualified and does not activate a model.
+
+Japanese Qwen3.5 F16 completed192 consumed-crop calls. The first interpreter
+omitted standard heading tags and refused137 markup outputs; original raw/report
+remain frozen. A zero-call trained-tag correction gives BODY58/72 and59/72,
+headers20/21 each and empty controls3/3 each. Room errors, absent ownership proof
+and11.56GiB server memory still exclude activation.
+[Evidence](../research-results/vision-jp-ocr-frozen-20261013/README.md).
+The [method selection](local-ai-method-selection-20261013.md) separates these
+component results from the completed source-only final.
+
 ## 2026-10-13: Source-first colour compatibility on complete dense documents
 
 The iOS reference exposed the same black-only acquisition restriction in the

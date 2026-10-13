@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "frozenBeforeTraining": "2026-10-13",
+  "purpose": "Research only; component evaluation cannot qualify or activate production",
+  "base": "PaddlePaddle/PP-OCRv6_small_rec_safetensors@fe049fb103f57443fe8840c54ed06b702f3c1de5",
+  "baseSha256": "f65a332afe5aa663f0b9d5706f4ae8457b5b4058a842d5c1eb22df505c27d642",
+  "dictionarySize": 18710,
+  "train": {"seed": 671039, "rows": 1536, "fonts": ["NotoSansJP400", "NotoSerifJP400"]},
+  "development": {"seed": 829113, "rows": 192, "fonts": ["MPLUS1p-Regular"]},
+  "final": {"seed": 940727, "rows": 384, "fonts": ["ZenKakuGothicNew-Regular", "BIZUDPMincho-Regular"]},
+  "categories": ["confusable-code", "arbitrary-ascii", "japanese", "mixed"],
+  "categoryBalance": "equal; blank rows added separately",
+  "rendering": "font size 19..33, independent spacing/padding, 20% light blur, 20% mild JPEG, 10% gray foreground; original-pixel BGR48 transform",
+  "training": {"epochs": 3, "batchSize": 8, "seed": 130107, "threads": 2, "frozenBackbone": true, "freezeBatchNormStatistics": true, "encoderLearningRate": 0.00008, "classifierLearningRate": 0.00015, "optimizer": "AdamW", "weightDecay": 0.0001, "loss": "CTC + 0.1 mean time-step KL to frozen teacher", "gradientClip": 1.0},
+  "selection": "choose baseline or epoch checkpoint by highest development exact-match count; tie lowest development CER, then earliest. Final never selects a checkpoint or inference candidate.",
+  "finalOpen": "only after checkpoint choice and hash are persisted",
+  "safetyControls": "separate blank, clipped and multiline probes; damaged/multiline output is never accepted as complete truth from recognizer alone",
+  "limits": "No real school originals, subjects, people or rooms. No previous consumed comparison strings. No lexicon correction, beam oracle, gold candidate selection, manual output edits, header/structure reconstruction or production edits. CPU and local inference only. No commit/push.",
+  "adoption": "requires full-document integration with geometry/cell provenance, deterministic validator, <=3 body corrections per document, no hand-entered headers/structure, unseen arbitrary values and confidence/damage gates. Component exact match is insufficient."
+}

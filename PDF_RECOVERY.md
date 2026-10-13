@@ -12,6 +12,10 @@
 [全文書の色比較](research-results/pdf-colour-acquisition-20261013/README.md)で対応範囲を検証し、
 画像だけのPDFや追加モデルの品質とは区別します。
 
+[CPU・16GB向けの方式選定](documentation/local-ai-method-selection-20261013.md)に、
+直接取得の独立全文書評価、固定画像での認識器比較、任意の追加学習とiOS向け形式の範囲をまとめています。
+追加モデルは高信頼度誤読と所属・全文書の未合格が残るため、有効化していません。
+
 WindowsはWindows 11 24H2 / build 26100以上が必要です。Setup版とZIP版の両方で確認します。配布方式はunpackagedのままです。
 
 ## 復旧と確認

@@ -1,0 +1,2361 @@
+{
+  "rows": 384,
+  "exactTextAndIntervals": 384,
+  "maximumProbabilityDifference": 1.0,
+  "dynamicProbes": [
+    {
+      "width": 320,
+      "batch": 2,
+      "shape": [
+        2,
+        40,
+        18710
+      ],
+      "exactTextAndIntervals": false,
+      "maximumProbabilityDifference": 0.583357572555542
+    },
+    {
+      "width": 481,
+      "batch": 2,
+      "shape": [
+        2,
+        60,
+        18710
+      ],
+      "exactTextAndIntervals": false,
+      "maximumProbabilityDifference": 0.822586715221405
+    },
+    {
+      "width": 640,
+      "batch": 2,
+      "shape": [
+        2,
+        80,
+        18710
+      ],
+      "exactTextAndIntervals": false,
+      "maximumProbabilityDifference": 0.8855730295181274
+    },
+    {
+      "width": 960,
+      "batch": 2,
+      "shape": [
+        2,
+        120,
+        18710
+      ],
+      "exactTextAndIntervals": false,
+      "maximumProbabilityDifference": 0.9865943193435669
+    }
+  ],
+  "onnxBytes": 21176440,
+  "onnxSha256": "796b2eb06ed399a6799120b008a78da344f54dbe5151461b12f9bc9a1d1ec146",
+  "elapsedSecondsWithConcurrentWork": 122.6545826749998,
+  "records": [
+    {
+      "id": "final-0000",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.583358645439148
+    },
+    {
+      "id": "final-0001",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.16679245233535767
+    },
+    {
+      "id": "final-0002",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9966254830360413
+    },
+    {
+      "id": "final-0003",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.1944013237953186
+    },
+    {
+      "id": "final-0004",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9913694262504578
+    },
+    {
+      "id": "final-0005",
+      "width": 333,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999358654022217
+    },
+    {
+      "id": "final-0006",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999943971633911
+    },
+    {
+      "id": "final-0007",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999914169311523
+    },
+    {
+      "id": "final-0008",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999955296516418
+    },
+    {
+      "id": "final-0009",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.5079175233840942
+    },
+    {
+      "id": "final-0010",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999983906745911
+    },
+    {
+      "id": "final-0011",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999996423721313
+    },
+    {
+      "id": "final-0012",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.8650410771369934
+    },
+    {
+      "id": "final-0013",
+      "width": 336,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999895095825195
+    },
+    {
+      "id": "final-0014",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.17732477188110352
+    },
+    {
+      "id": "final-0015",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.8879285454750061
+    },
+    {
+      "id": "final-0016",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9997446537017822
+    },
+    {
+      "id": "final-0017",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999061226844788
+    },
+    {
+      "id": "final-0018",
+      "width": 384,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999898076057434
+    },
+    {
+      "id": "final-0019",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9992799162864685
+    },
+    {
+      "id": "final-0020",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999365210533142
+    },
+    {
+      "id": "final-0021",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999361634254456
+    },
+    {
+      "id": "final-0022",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9607343077659607
+    },
+    {
+      "id": "final-0023",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.999599277973175
+    },
+    {
+      "id": "final-0024",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.99910968542099
+    },
+    {
+      "id": "final-0025",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9980322122573853
+    },
+    {
+      "id": "final-0026",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.7817442417144775
+    },
+    {
+      "id": "final-0027",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.8233985304832458
+    },
+    {
+      "id": "final-0028",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.972496509552002
+    },
+    {
+      "id": "final-0029",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.12996959686279297
+    },
+    {
+      "id": "final-0030",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9989011883735657
+    },
+    {
+      "id": "final-0031",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999986290931702
+    },
+    {
+      "id": "final-0032",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.014827489852905273
+    },
+    {
+      "id": "final-0033",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.37016206979751587
+    },
+    {
+      "id": "final-0034",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9994284510612488
+    },
+    {
+      "id": "final-0035",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.8518145084381104
+    },
+    {
+      "id": "final-0036",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9325855374336243
+    },
+    {
+      "id": "final-0037",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9970617294311523
+    },
+    {
+      "id": "final-0038",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.4985423684120178
+    },
+    {
+      "id": "final-0039",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.24206259846687317
+    },
+    {
+      "id": "final-0040",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.002826690673828125
+    },
+    {
+      "id": "final-0041",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9912554025650024
+    },
+    {
+      "id": "final-0042",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9995769262313843
+    },
+    {
+      "id": "final-0043",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.006634771823883057
+    },
+    {
+      "id": "final-0044",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.6424157619476318
+    },
+    {
+      "id": "final-0045",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999803900718689
+    },
+    {
+      "id": "final-0046",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.037913739681243896
+    },
+    {
+      "id": "final-0047",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.5134438276290894
+    },
+    {
+      "id": "final-0048",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.989859402179718
+    },
+    {
+      "id": "final-0049",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999978542327881
+    },
+    {
+      "id": "final-0050",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.018780231475830078
+    },
+    {
+      "id": "final-0051",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999998211860657
+    },
+    {
+      "id": "final-0052",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9820275902748108
+    },
+    {
+      "id": "final-0053",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999085068702698
+    },
+    {
+      "id": "final-0054",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9925679564476013
+    },
+    {
+      "id": "final-0055",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.4915420413017273
+    },
+    {
+      "id": "final-0056",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.42781734466552734
+    },
+    {
+      "id": "final-0057",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999480843544006
+    },
+    {
+      "id": "final-0058",
+      "width": 332,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999994039535522
+    },
+    {
+      "id": "final-0059",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.4905712604522705
+    },
+    {
+      "id": "final-0060",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999945759773254
+    },
+    {
+      "id": "final-0061",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9993869066238403
+    },
+    {
+      "id": "final-0062",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999998807907104
+    },
+    {
+      "id": "final-0063",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.740898847579956
+    },
+    {
+      "id": "final-0064",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9688149690628052
+    },
+    {
+      "id": "final-0065",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999937415122986
+    },
+    {
+      "id": "final-0066",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.790447473526001
+    },
+    {
+      "id": "final-0067",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.5993491411209106
+    },
+    {
+      "id": "final-0068",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999802708625793
+    },
+    {
+      "id": "final-0069",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.42301976680755615
+    },
+    {
+      "id": "final-0070",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999111294746399
+    },
+    {
+      "id": "final-0071",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.8842200040817261
+    },
+    {
+      "id": "final-0072",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999578595161438
+    },
+    {
+      "id": "final-0073",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9986093044281006
+    },
+    {
+      "id": "final-0074",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999991655349731
+    },
+    {
+      "id": "final-0075",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999566078186035
+    },
+    {
+      "id": "final-0076",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999505877494812
+    },
+    {
+      "id": "final-0077",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999991059303284
+    },
+    {
+      "id": "final-0078",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9482471346855164
+    },
+    {
+      "id": "final-0079",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.026518046855926514
+    },
+    {
+      "id": "final-0080",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.30203408002853394
+    },
+    {
+      "id": "final-0081",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999986886978149
+    },
+    {
+      "id": "final-0082",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.0036407113075256348
+    },
+    {
+      "id": "final-0083",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.00037658214569091797
+    },
+    {
+      "id": "final-0084",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999943971633911
+    },
+    {
+      "id": "final-0085",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999983906745911
+    },
+    {
+      "id": "final-0086",
+      "width": 336,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9998633861541748
+    },
+    {
+      "id": "final-0087",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.13681882619857788
+    },
+    {
+      "id": "final-0088",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.1915227174758911
+    },
+    {
+      "id": "final-0089",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.0007966756820678711
+    },
+    {
+      "id": "final-0090",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9938390254974365
+    },
+    {
+      "id": "final-0091",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.24383825063705444
+    },
+    {
+      "id": "final-0092",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9796883463859558
+    },
+    {
+      "id": "final-0093",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.6262176036834717
+    },
+    {
+      "id": "final-0094",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.03919905424118042
+    },
+    {
+      "id": "final-0095",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.014493107795715332
+    },
+    {
+      "id": "final-0096",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999946355819702
+    },
+    {
+      "id": "final-0097",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999978542327881
+    },
+    {
+      "id": "final-0098",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999932050704956
+    },
+    {
+      "id": "final-0099",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999745488166809
+    },
+    {
+      "id": "final-0100",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.06434154510498047
+    },
+    {
+      "id": "final-0101",
+      "width": 374,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999713897705078
+    },
+    {
+      "id": "final-0102",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999982118606567
+    },
+    {
+      "id": "final-0103",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.5384923219680786
+    },
+    {
+      "id": "final-0104",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.4446898102760315
+    },
+    {
+      "id": "final-0105",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999820590019226
+    },
+    {
+      "id": "final-0106",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999992251396179
+    },
+    {
+      "id": "final-0107",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9983238577842712
+    },
+    {
+      "id": "final-0108",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.6004348993301392
+    },
+    {
+      "id": "final-0109",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999937415122986
+    },
+    {
+      "id": "final-0110",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9414313435554504
+    },
+    {
+      "id": "final-0111",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.03220421075820923
+    },
+    {
+      "id": "final-0112",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.998976469039917
+    },
+    {
+      "id": "final-0113",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999979734420776
+    },
+    {
+      "id": "final-0114",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.24877017736434937
+    },
+    {
+      "id": "final-0115",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9520413875579834
+    },
+    {
+      "id": "final-0116",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9984550476074219
+    },
+    {
+      "id": "final-0117",
+      "width": 384,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999951720237732
+    },
+    {
+      "id": "final-0118",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.01107168197631836
+    },
+    {
+      "id": "final-0119",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.8227462768554688
+    },
+    {
+      "id": "final-0120",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.99040687084198
+    },
+    {
+      "id": "final-0121",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999987483024597
+    },
+    {
+      "id": "final-0122",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.3540157675743103
+    },
+    {
+      "id": "final-0123",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999907612800598
+    },
+    {
+      "id": "final-0124",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.015025436878204346
+    },
+    {
+      "id": "final-0125",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9997853636741638
+    },
+    {
+      "id": "final-0126",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.0699845552444458
+    },
+    {
+      "id": "final-0127",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.6418246030807495
+    },
+    {
+      "id": "final-0128",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.8976736068725586
+    },
+    {
+      "id": "final-0129",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999978542327881
+    },
+    {
+      "id": "final-0130",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.5282367467880249
+    },
+    {
+      "id": "final-0131",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.010194599628448486
+    },
+    {
+      "id": "final-0132",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.99787437915802
+    },
+    {
+      "id": "final-0133",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999449849128723
+    },
+    {
+      "id": "final-0134",
+      "width": 336,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999991059303284
+    },
+    {
+      "id": "final-0135",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.5721595287322998
+    },
+    {
+      "id": "final-0136",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.26805418729782104
+    },
+    {
+      "id": "final-0137",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999623894691467
+    },
+    {
+      "id": "final-0138",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.5953315496444702
+    },
+    {
+      "id": "final-0139",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999856352806091
+    },
+    {
+      "id": "final-0140",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9971627593040466
+    },
+    {
+      "id": "final-0141",
+      "width": 436,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999898076057434
+    },
+    {
+      "id": "final-0142",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999970197677612
+    },
+    {
+      "id": "final-0143",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.043791353702545166
+    },
+    {
+      "id": "final-0144",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9998384714126587
+    },
+    {
+      "id": "final-0145",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.83348548412323
+    },
+    {
+      "id": "final-0146",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.011055823415517807
+    },
+    {
+      "id": "final-0147",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.5200426578521729
+    },
+    {
+      "id": "final-0148",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9997248649597168
+    },
+    {
+      "id": "final-0149",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999982118606567
+    },
+    {
+      "id": "final-0150",
+      "width": 336,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.999720573425293
+    },
+    {
+      "id": "final-0151",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999664425849915
+    },
+    {
+      "id": "final-0152",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.4376946687698364
+    },
+    {
+      "id": "final-0153",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.04622715711593628
+    },
+    {
+      "id": "final-0154",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.6210723519325256
+    },
+    {
+      "id": "final-0155",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.16047954559326172
+    },
+    {
+      "id": "final-0156",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9359128475189209
+    },
+    {
+      "id": "final-0157",
+      "width": 339,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9998239278793335
+    },
+    {
+      "id": "final-0158",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.999998152256012
+    },
+    {
+      "id": "final-0159",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999993443489075
+    },
+    {
+      "id": "final-0160",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9979169368743896
+    },
+    {
+      "id": "final-0161",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9995628595352173
+    },
+    {
+      "id": "final-0162",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.016716837882995605
+    },
+    {
+      "id": "final-0163",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.40023720264434814
+    },
+    {
+      "id": "final-0164",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999834299087524
+    },
+    {
+      "id": "final-0165",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9997466802597046
+    },
+    {
+      "id": "final-0166",
+      "width": 384,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999996423721313
+    },
+    {
+      "id": "final-0167",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.7983493804931641
+    },
+    {
+      "id": "final-0168",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999979734420776
+    },
+    {
+      "id": "final-0169",
+      "width": 321,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999774098396301
+    },
+    {
+      "id": "final-0170",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.34218716621398926
+    },
+    {
+      "id": "final-0171",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.38549357652664185
+    },
+    {
+      "id": "final-0172",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999952912330627
+    },
+    {
+      "id": "final-0173",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9974496364593506
+    },
+    {
+      "id": "final-0174",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999345541000366
+    },
+    {
+      "id": "final-0175",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999772310256958
+    },
+    {
+      "id": "final-0176",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.7126981019973755
+    },
+    {
+      "id": "final-0177",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.999987781047821
+    },
+    {
+      "id": "final-0178",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.10349130630493164
+    },
+    {
+      "id": "final-0179",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.05106073617935181
+    },
+    {
+      "id": "final-0180",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.5601544380187988
+    },
+    {
+      "id": "final-0181",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.3343619704246521
+    },
+    {
+      "id": "final-0182",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.14305156469345093
+    },
+    {
+      "id": "final-0183",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.36893075704574585
+    },
+    {
+      "id": "final-0184",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.018978893756866455
+    },
+    {
+      "id": "final-0185",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9927341341972351
+    },
+    {
+      "id": "final-0186",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.02631908655166626
+    },
+    {
+      "id": "final-0187",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.0
+    },
+    {
+      "id": "final-0188",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999997615814209
+    },
+    {
+      "id": "final-0189",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9675425291061401
+    },
+    {
+      "id": "final-0190",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.005910515785217285
+    },
+    {
+      "id": "final-0191",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.3063543438911438
+    },
+    {
+      "id": "final-0192",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999980330467224
+    },
+    {
+      "id": "final-0193",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999892115592957
+    },
+    {
+      "id": "final-0194",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999920129776001
+    },
+    {
+      "id": "final-0195",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.0029013752937316895
+    },
+    {
+      "id": "final-0196",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.45045626163482666
+    },
+    {
+      "id": "final-0197",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999710917472839
+    },
+    {
+      "id": "final-0198",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999972581863403
+    },
+    {
+      "id": "final-0199",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999956488609314
+    },
+    {
+      "id": "final-0200",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9996329545974731
+    },
+    {
+      "id": "final-0201",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9997332096099854
+    },
+    {
+      "id": "final-0202",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999814629554749
+    },
+    {
+      "id": "final-0203",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.05197721719741821
+    },
+    {
+      "id": "final-0204",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999966025352478
+    },
+    {
+      "id": "final-0205",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999909996986389
+    },
+    {
+      "id": "final-0206",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.6323438882827759
+    },
+    {
+      "id": "final-0207",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9224299192428589
+    },
+    {
+      "id": "final-0208",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.0851173996925354
+    },
+    {
+      "id": "final-0209",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9583949446678162
+    },
+    {
+      "id": "final-0210",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9997190237045288
+    },
+    {
+      "id": "final-0211",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999966621398926
+    },
+    {
+      "id": "final-0212",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.8217703700065613
+    },
+    {
+      "id": "final-0213",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9939526319503784
+    },
+    {
+      "id": "final-0214",
+      "width": 364,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999780058860779
+    },
+    {
+      "id": "final-0215",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999894499778748
+    },
+    {
+      "id": "final-0216",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.45491963624954224
+    },
+    {
+      "id": "final-0217",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999998211860657
+    },
+    {
+      "id": "final-0218",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999938607215881
+    },
+    {
+      "id": "final-0219",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999973177909851
+    },
+    {
+      "id": "final-0220",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.14860564470291138
+    },
+    {
+      "id": "final-0221",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9793245196342468
+    },
+    {
+      "id": "final-0222",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999875426292419
+    },
+    {
+      "id": "final-0223",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.6466724872589111
+    },
+    {
+      "id": "final-0224",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999883770942688
+    },
+    {
+      "id": "final-0225",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999917149543762
+    },
+    {
+      "id": "final-0226",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.22695475816726685
+    },
+    {
+      "id": "final-0227",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.009158909320831299
+    },
+    {
+      "id": "final-0228",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9867493510246277
+    },
+    {
+      "id": "final-0229",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999874234199524
+    },
+    {
+      "id": "final-0230",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.33909904956817627
+    },
+    {
+      "id": "final-0231",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.00022417306900024414
+    },
+    {
+      "id": "final-0232",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.999998927116394
+    },
+    {
+      "id": "final-0233",
+      "width": 329,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999982118606567
+    },
+    {
+      "id": "final-0234",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.23324710130691528
+    },
+    {
+      "id": "final-0235",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.999997615814209
+    },
+    {
+      "id": "final-0236",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.03254127502441406
+    },
+    {
+      "id": "final-0237",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.4986758828163147
+    },
+    {
+      "id": "final-0238",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9990888833999634
+    },
+    {
+      "id": "final-0239",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999980330467224
+    },
+    {
+      "id": "final-0240",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9996026158332825
+    },
+    {
+      "id": "final-0241",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.6530040502548218
+    },
+    {
+      "id": "final-0242",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.1276336908340454
+    },
+    {
+      "id": "final-0243",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9998822808265686
+    },
+    {
+      "id": "final-0244",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999950528144836
+    },
+    {
+      "id": "final-0245",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999962449073792
+    },
+    {
+      "id": "final-0246",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.027215123176574707
+    },
+    {
+      "id": "final-0247",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999997019767761
+    },
+    {
+      "id": "final-0248",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.1346529722213745
+    },
+    {
+      "id": "final-0249",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999808073043823
+    },
+    {
+      "id": "final-0250",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.02190983295440674
+    },
+    {
+      "id": "final-0251",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.148324117064476
+    },
+    {
+      "id": "final-0252",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9994697570800781
+    },
+    {
+      "id": "final-0253",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999548196792603
+    },
+    {
+      "id": "final-0254",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999696016311646
+    },
+    {
+      "id": "final-0255",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9723717570304871
+    },
+    {
+      "id": "final-0256",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999975562095642
+    },
+    {
+      "id": "final-0257",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999711513519287
+    },
+    {
+      "id": "final-0258",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.045782506465911865
+    },
+    {
+      "id": "final-0259",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999988079071045
+    },
+    {
+      "id": "final-0260",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.982749879360199
+    },
+    {
+      "id": "final-0261",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9719807505607605
+    },
+    {
+      "id": "final-0262",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9960245490074158
+    },
+    {
+      "id": "final-0263",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999982118606567
+    },
+    {
+      "id": "final-0264",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.8952950835227966
+    },
+    {
+      "id": "final-0265",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9864944815635681
+    },
+    {
+      "id": "final-0266",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.015105128288269043
+    },
+    {
+      "id": "final-0267",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.0039025545120239258
+    },
+    {
+      "id": "final-0268",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.38262730836868286
+    },
+    {
+      "id": "final-0269",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9994739294052124
+    },
+    {
+      "id": "final-0270",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999918937683105
+    },
+    {
+      "id": "final-0271",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.999995231628418
+    },
+    {
+      "id": "final-0272",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999890923500061
+    },
+    {
+      "id": "final-0273",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9985729455947876
+    },
+    {
+      "id": "final-0274",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.40753453969955444
+    },
+    {
+      "id": "final-0275",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9948199987411499
+    },
+    {
+      "id": "final-0276",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9995613098144531
+    },
+    {
+      "id": "final-0277",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.2026665210723877
+    },
+    {
+      "id": "final-0278",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999977946281433
+    },
+    {
+      "id": "final-0279",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.999994695186615
+    },
+    {
+      "id": "final-0280",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.48113954067230225
+    },
+    {
+      "id": "final-0281",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.012770414352416992
+    },
+    {
+      "id": "final-0282",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999909996986389
+    },
+    {
+      "id": "final-0283",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9987733960151672
+    },
+    {
+      "id": "final-0284",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999823570251465
+    },
+    {
+      "id": "final-0285",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.006552934646606445
+    },
+    {
+      "id": "final-0286",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999808073043823
+    },
+    {
+      "id": "final-0287",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999895691871643
+    },
+    {
+      "id": "final-0288",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999951124191284
+    },
+    {
+      "id": "final-0289",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999562501907349
+    },
+    {
+      "id": "final-0290",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.0010093450546264648
+    },
+    {
+      "id": "final-0291",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.06449520587921143
+    },
+    {
+      "id": "final-0292",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999964237213135
+    },
+    {
+      "id": "final-0293",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.999980628490448
+    },
+    {
+      "id": "final-0294",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.4157859683036804
+    },
+    {
+      "id": "final-0295",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.20634853839874268
+    },
+    {
+      "id": "final-0296",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.002669990062713623
+    },
+    {
+      "id": "final-0297",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9998059868812561
+    },
+    {
+      "id": "final-0298",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.4351944327354431
+    },
+    {
+      "id": "final-0299",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999997615814209
+    },
+    {
+      "id": "final-0300",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999979734420776
+    },
+    {
+      "id": "final-0301",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9921497702598572
+    },
+    {
+      "id": "final-0302",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.5240514278411865
+    },
+    {
+      "id": "final-0303",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999982714653015
+    },
+    {
+      "id": "final-0304",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999430179595947
+    },
+    {
+      "id": "final-0305",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9362108111381531
+    },
+    {
+      "id": "final-0306",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999955892562866
+    },
+    {
+      "id": "final-0307",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.1704055666923523
+    },
+    {
+      "id": "final-0308",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999901056289673
+    },
+    {
+      "id": "final-0309",
+      "width": 373,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999974966049194
+    },
+    {
+      "id": "final-0310",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.048116445541381836
+    },
+    {
+      "id": "final-0311",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.6535556316375732
+    },
+    {
+      "id": "final-0312",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999953508377075
+    },
+    {
+      "id": "final-0313",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9995021224021912
+    },
+    {
+      "id": "final-0314",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999696016311646
+    },
+    {
+      "id": "final-0315",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9212037920951843
+    },
+    {
+      "id": "final-0316",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.7447451949119568
+    },
+    {
+      "id": "final-0317",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.013369002379477024
+    },
+    {
+      "id": "final-0318",
+      "width": 352,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9975621104240417
+    },
+    {
+      "id": "final-0319",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.012906253337860107
+    },
+    {
+      "id": "final-0320",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999544620513916
+    },
+    {
+      "id": "final-0321",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9998764991760254
+    },
+    {
+      "id": "final-0322",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.03513294458389282
+    },
+    {
+      "id": "final-0323",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999967813491821
+    },
+    {
+      "id": "final-0324",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9960973262786865
+    },
+    {
+      "id": "final-0325",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9232625365257263
+    },
+    {
+      "id": "final-0326",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.017282843589782715
+    },
+    {
+      "id": "final-0327",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999851584434509
+    },
+    {
+      "id": "final-0328",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999780058860779
+    },
+    {
+      "id": "final-0329",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9989085793495178
+    },
+    {
+      "id": "final-0330",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999991655349731
+    },
+    {
+      "id": "final-0331",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.5659810900688171
+    },
+    {
+      "id": "final-0332",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9987894892692566
+    },
+    {
+      "id": "final-0333",
+      "width": 386,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999985694885254
+    },
+    {
+      "id": "final-0334",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999982714653015
+    },
+    {
+      "id": "final-0335",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999434351921082
+    },
+    {
+      "id": "final-0336",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999983906745911
+    },
+    {
+      "id": "final-0337",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9998306035995483
+    },
+    {
+      "id": "final-0338",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.05644720792770386
+    },
+    {
+      "id": "final-0339",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.443781316280365
+    },
+    {
+      "id": "final-0340",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9578942060470581
+    },
+    {
+      "id": "final-0341",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9635183215141296
+    },
+    {
+      "id": "final-0342",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.050136685371398926
+    },
+    {
+      "id": "final-0343",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.05204617977142334
+    },
+    {
+      "id": "final-0344",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999966621398926
+    },
+    {
+      "id": "final-0345",
+      "width": 345,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999950528144836
+    },
+    {
+      "id": "final-0346",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999982118606567
+    },
+    {
+      "id": "final-0347",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.11934584379196167
+    },
+    {
+      "id": "final-0348",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999939203262329
+    },
+    {
+      "id": "final-0349",
+      "width": 376,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.999997079372406
+    },
+    {
+      "id": "final-0350",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999622702598572
+    },
+    {
+      "id": "final-0351",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999801516532898
+    },
+    {
+      "id": "final-0352",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999828338623047
+    },
+    {
+      "id": "final-0353",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999688863754272
+    },
+    {
+      "id": "final-0354",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999862313270569
+    },
+    {
+      "id": "final-0355",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.27394425868988037
+    },
+    {
+      "id": "final-0356",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9980677366256714
+    },
+    {
+      "id": "final-0357",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999640583992004
+    },
+    {
+      "id": "final-0358",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.6441271305084229
+    },
+    {
+      "id": "final-0359",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999880194664001
+    },
+    {
+      "id": "final-0360",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.998820960521698
+    },
+    {
+      "id": "final-0361",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.3015543222427368
+    },
+    {
+      "id": "final-0362",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999962449073792
+    },
+    {
+      "id": "final-0363",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999788403511047
+    },
+    {
+      "id": "final-0364",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.841783344745636
+    },
+    {
+      "id": "final-0365",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9998645782470703
+    },
+    {
+      "id": "final-0366",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999980926513672
+    },
+    {
+      "id": "final-0367",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.5097857713699341
+    },
+    {
+      "id": "final-0368",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9169370532035828
+    },
+    {
+      "id": "final-0369",
+      "width": 340,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9998698234558105
+    },
+    {
+      "id": "final-0370",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999758005142212
+    },
+    {
+      "id": "final-0371",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.999962329864502
+    },
+    {
+      "id": "final-0372",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9989984631538391
+    },
+    {
+      "id": "final-0373",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999948740005493
+    },
+    {
+      "id": "final-0374",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9997125267982483
+    },
+    {
+      "id": "final-0375",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.052552878856658936
+    },
+    {
+      "id": "final-0376",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999978542327881
+    },
+    {
+      "id": "final-0377",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999654293060303
+    },
+    {
+      "id": "final-0378",
+      "width": 334,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999959468841553
+    },
+    {
+      "id": "final-0379",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999670386314392
+    },
+    {
+      "id": "final-0380",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999971985816956
+    },
+    {
+      "id": "final-0381",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.6464280486106873
+    },
+    {
+      "id": "final-0382",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.9999995231628418
+    },
+    {
+      "id": "final-0383",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.0035207271575927734
+    }
+  ],
+  "status": "INVALID post-export Torch mode comparison; retained for audit; original ONNX decoding vs pre-export eval text/intervals was valid"
+}

@@ -1,0 +1,48 @@
+{
+  "coremltools": "8.3.0",
+  "torch": "2.7.1+cpu",
+  "checkpointSha256": "8286b4fc102d5a398ae9a535872cb5223fd5369171dcec03f2af57725d06c046",
+  "torchTracingParity": [
+    {
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07
+    },
+    {
+      "width": 481,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07
+    },
+    {
+      "width": 640,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 4.423782229423523e-09
+    },
+    {
+      "width": 960,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07
+    }
+  ],
+  "deviceValidation": "not performed; Linux has no CoreML runtime/iPhone; no speed, memory or prediction fidelity claim",
+  "status": "converted-unqualified",
+  "format": "CoreML ML Program",
+  "minimumDeploymentTarget": "iOS16",
+  "computePrecision": "float32",
+  "inputShape": "[1,3,48,320..960]",
+  "files": {
+    "Data/com.apple.CoreML/model.mlmodel": {
+      "bytes": 115324,
+      "sha256": "8c8c18ad3e54510e72fc4b3be164de427b480ae97e6027daf0eb98b0202e9827"
+    },
+    "Data/com.apple.CoreML/weights/weight.bin": {
+      "bytes": 21076064,
+      "sha256": "d6863d4d7fa4ca1a4b5d04a7c8dda975bb2f457c5cd528a2daca1538345c3bb7"
+    },
+    "Manifest.json": {
+      "bytes": 617,
+      "sha256": "bb05abe1851202d4a036ac3da8bab6779aa0880e2f05261ce24836cc0e96c138"
+    }
+  },
+  "totalBytes": 21192005
+}

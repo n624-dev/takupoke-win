@@ -29,7 +29,11 @@ Local Linux integration906/906 passed, with20 new colour/default-space cases.
 The first targeted q/Q test incorrectly compared source-line IDs against a
 black control without q/Q. The control was corrected to preserve identical
 operations, and the original full text/position/source-ID assertions passed.
-Native Windows and the full CI are still required separately.
+Native Windows [38350126432](https://github.com/n624-dev/takupoke-win/actions/runs/38350126432)
+completed all22 baseline/candidate observations with the same5/6/0 outcomes.
+The same source's [full CI38350132131](https://github.com/n624-dev/takupoke-win/actions/runs/38350132131)
+passed all seven required jobs. Later replay38351289175 is unchanged-condition
+regression evidence, not new independent quality credit.
 
 Original source identities, both full outcome reports and observed durations
 are retained. Timing shares CPU with a local image-reader study; it is not an
