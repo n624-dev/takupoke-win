@@ -45,6 +45,7 @@ using var detector = new InferenceSession(det, options); using var recognizer = 
 var alphabet = JsonSerializer.Deserialize<string[]>(File.ReadAllBytes(dictionary))!;
 var expectedSymbols = m.TryGetProperty("researchSymbols", out var symbols) ? symbols.GetInt32() : 18385;
 var originalInkMargin = m.TryGetProperty("researchInkMargin", out var declaredMargin) ? declaredMargin.GetInt32() : 2;
+var minimumInputWidth = m.TryGetProperty("researchMinimumInputWidth", out var declaredWidth) ? declaredWidth.GetInt32() : 320;
 if (expectedSymbols is not (18385 or 18710) || alphabet.Length != expectedSymbols || alphabet[0] != "" || alphabet[^1] != " ")
     throw new InvalidDataException("Pinned native research alphabet required.");
 using var writer = new StreamWriter(new FileStream(args[1], FileMode.CreateNew, FileAccess.Write));
@@ -92,7 +93,7 @@ foreach (var condition in diagnoseOwnership ? new[] { "ownership-diagnosis" } :
                 var output = new List<PdfGlyph>(); var nativeScores = new List<double>(); var line = 0; var order = 0;
                 foreach (var index in Enumerable.Range(0, framed.Length).OrderBy(i => framed[i].Y).ThenBy(i => framed[i].X))
                 {
-                    var input = OcrInputTransform.Recognition(raster, framed[index], token);
+                    var input = InputPadding.Restrict(OcrInputTransform.Recognition(raster, framed[index], token), minimumInputWidth, token);
                     token.ThrowIfCancellationRequested();
                     using var result = recognizer.Run([NamedOnnxValue.CreateFromTensor("x", input.Tensor)]);
                     recognizerCalls++; token.ThrowIfCancellationRequested();

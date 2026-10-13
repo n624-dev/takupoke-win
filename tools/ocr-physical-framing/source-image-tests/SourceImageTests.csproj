@@ -8,6 +8,7 @@
   <ItemGroup>
     <Compile Include="../OriginalImageRead.cs" Link="OriginalImageRead.cs" />
     <Compile Include="../InkCropFrame.cs" Link="InkCropFrame.cs" />
+    <Compile Include="../InputPadding.cs" Link="InputPadding.cs" />
     <ProjectReference Include="../../../src/Takupoke.Infrastructure/Takupoke.Infrastructure.csproj" />
     <PackageReference Include="PdfPig" Version="0.1.16" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />

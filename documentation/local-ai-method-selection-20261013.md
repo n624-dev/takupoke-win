@@ -135,3 +135,22 @@ TrOCR base printedの別見出し比較も25/42一致・誤診断採用9行・�
 未合格モデルの配信、有効化、閾値の緩和、中間版の追加公開は行わない。
 画像PDFの一般的な読み取り精度は未達であり、今回の限定的な直接取得の成功で代替しない。
 実資料や利用者のWindows/iPhone実機の成功を、架空資料やCIから推定しない。
+
+
+## 後続の密帳票と学習方式の確認
+
+V6 mediumの余裕ある上限での全6件再測定は、全13048認識呼出しを完了した。
+別字体では600/680枠となり、見出しに基づく80枠が欠ける。両positiveとも正式採用は失敗。
+元のFP32値とvalidWidthを保って右paddingだけを減らす別条件も、265行で幅を変えたが
+文字列／低信頼度判定の改善0。入力幅だけでは今回の原因を解消しない。
+[全6件](../research-results/ocr-dense-v6-medium-20261013/README.md) /
+[余白0px](../research-results/ocr-dense-v6-medium-ink0-20261013/README.md) /
+[右padding](../research-results/ocr-dense-v6-medium-pad160-20261013/README.md)。
+
+共同担当はV6 mediumの全18710語彙を保ち、英数字95行だけを更新する別試験を終了した。
+調整用768行で一致434→最大472行に改善したが、正しい診断採用が358→最大313行へ減り、
+元モデルを選定した。日本語の元正解250/256と空白40/40の空出力は維持したが、
+誤採用と損傷への過信が残り、未使用最終評価と携帯形式の出力は温存する。
+[元特徴の一致検証](../research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/README.md) /
+[固定特徴・混在行学習](../research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/README.md)。
+次の終端SVTR層の適応は別の凍結条件で検証する。まだ導入資格はない。

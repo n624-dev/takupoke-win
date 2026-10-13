@@ -1,0 +1,43 @@
+{
+  "recipe": "consumed-dense-pretrained-ink-v1",
+  "model": "v6-medium",
+  "rawSHA256": "4342c15bb9c144594b2d4231af1ab2d7618987912ae61a9960f236f92556a958",
+  "readerBinaryIdentityStable": true,
+  "qualification": false,
+  "observations": [
+    {
+      "id": "d0-positive",
+      "condition": "ink-input-frame",
+      "outcome": "engine-refused",
+      "failure": "humanUnresolved",
+      "exactDocument": false,
+      "positiveRefused": true,
+      "manualCorrections": 0,
+      "quality": "positive-failed",
+      "requiredSlots": 680,
+      "cells": 680,
+      "lowConfidenceSources": 99,
+      "recognizerCalls": 2175,
+      "detectorCalls": 5,
+      "milliseconds": 260188,
+      "processPeakWorkingSetBytes": 742076416
+    },
+    {
+      "id": "d1-positive",
+      "condition": "ink-input-frame",
+      "outcome": "pipeline-refused",
+      "failure": "OCR文字の位置が入力画像の余白に重なっています。",
+      "exactDocument": false,
+      "positiveRefused": true,
+      "manualCorrections": 0,
+      "quality": "positive-failed",
+      "requiredSlots": null,
+      "cells": null,
+      "lowConfidenceSources": null,
+      "recognizerCalls": 52,
+      "detectorCalls": 1,
+      "milliseconds": 6137,
+      "processPeakWorkingSetBytes": 746774528
+    }
+  ]
+}

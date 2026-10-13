@@ -1,0 +1,101 @@
+{
+  "protocol": {
+    "namespace": "research-ascii-paddle-medium-features-v1/mixed-head-v1",
+    "scope": "Independent fictional fullhead mixed-line bounded development, no final or production qualification",
+    "modelSha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba",
+    "dictionary": "Original18710 order and full softmax, blank0. Only95 printableASCII rows receive zero-initialized trainable deltas. All nonASCII and blank matrix/bias rows remain unchanged.",
+    "train": {
+      "seed": 65311117,
+      "fonts": [
+        "NotoSansJP400",
+        "NotoSerifJP400",
+        "MPLUS1p-Regular",
+        "ZenKakuGothicNew-Regular",
+        "BIZUDPMincho-Regular"
+      ],
+      "positiveCounts": {
+        "mixed_code": 2048,
+        "mixed_confusable": 2048,
+        "ascii_short": 1024,
+        "japanese": 1024
+      },
+      "negativeRows": 1024
+    },
+    "development": {
+      "seed": 65314123,
+      "fonts": [
+        "BIZUDGothic-Regular",
+        "KaiseiTokumin-Regular"
+      ],
+      "positiveCounts": {
+        "mixed_code": 256,
+        "mixed_confusable": 256,
+        "ascii_short": 128,
+        "japanese": 128
+      },
+      "negativeRows": 192,
+      "retentionRows": 128
+    },
+    "source": "Natural independently generated nature-phrase Japanese+arbitraryASCII code whole lines, not school subjects/names/rooms or existing main/development/final labels. Common baseline/relative heights/internal gaps retained. No CJK裁断, glyph crop, output repair or class-name whitelist.",
+    "preprocessing": "All RGB!=255 bbox+2originalpx. Existing production BGR48 center bilinear uint8round normalized0padding width320..960. Input, feature and logit caches stay float32; no intermediate float16.",
+    "rendering": "font14..28logicalpx density1/2/4 probabilities.4/.4/.2, black/navy/gray/green, 10percent mild blur; paired mixed confusable/case share rendering seed/font/JPprefix",
+    "negatives": "Boundary clipping of20..40percent inkheight, interior glyph-region erasure with measured real ink removal, duplicated multiline, random strokes, and blank. Damaged/multiline/noise have no lost-fulltext CTC target; only reject BCE and teacher retention. Blank has empty CTC target to preserve empty decoding.",
+    "training": {
+      "seed": 65315131,
+      "threads": 2,
+      "batchSize": 64,
+      "epochs": 24,
+      "evaluateEpochs": [
+        4,
+        8,
+        16,
+        24
+      ],
+      "asciiDeltaLearningRate": 0.001,
+      "rejectLearningRate": 0.001,
+      "teacherKlWeight": 0.2,
+      "rejectBceWeight": 0.5,
+      "deltaL2Weight": 0.0001,
+      "weightDecay": 0.0001,
+      "gradientClip": 5.0,
+      "maximumTrainingSeconds": 1800,
+      "maximumCacheSeconds": 1800,
+      "maximumRssMiB": 4096,
+      "minimumFreeDiskGiB": 2,
+      "additionalDiskBudgetGiB": 1
+    },
+    "lossCompression": "Training only: all ASCII95/blank and every training-target char plus one exact logsumexp of all unchanged other logits. OTHER never a target or inference class. Full CTC/teacherKL/gradients verified against18710 objective; original full18710 inference remains unchanged.",
+    "rejectPooling": "Mean original frozen features whose temporal center lies within validWidth. Extra batch padding excluded. Real input padding is retained for CTC/teacherKL exactly as original. Source complete-ink/script proof remains independent and cannot be solved by crop head.",
+    "acceptance": "Uncalibrated research diagnostic only: nonempty output, min emitted CTCconfidence>=.8, trained rejectProbability<=.05, all intervals within validWidth; original fallback has no trained reject gate. All original18710 output scalars retained, no ASCII-only routing.",
+    "selection": "Original fallback included. Trained eligible only if mixed exact>=original, all-positive incorrectAccepted<=original, negativeAccepted<=original, and zero Japanese-retention regressions among original-correct rows. Maximum correctAccepted, then exact, lower incorrect/negativeAccepted, lower CER, earlier epoch. No test/oracle inference routing or repair.",
+    "continuationGate": "Before opening final/export: selected trained, >=97percent all-positive rawexact, >=90percent correctaccepted, wrongaccepted0, negativeaccepted0, >=95percent rawexact per devfont, zero original-correct Japanese-retention regressions. Passing is research continuation only, not qualification.",
+    "sourceProofControls": "Reuse64 already consumed exact-pixel alias/prefix-loss contradiction controls only after selection, unscored and never training/selection/final; cannot prove unsupported-script or complete-glyph provenance from identical crop pixels.",
+    "priorExclusion": "All prior comparison oracle/synthetic manifests/main fresh physical-frame oracle/repo research JSON strings used only as exact-target exclusion. New train/dev mutually disjoint. No school originals read.",
+    "final": "Sawarabi Gothic/Mincho reserved and unopened until prospective gate passes and a separate final/full-document protocol is frozen. iOS untouched; standard ONNX later if warranted."
+  },
+  "protocolSha256": "1906abc761277c0d6886819c749637421fd333bade5a81dfa7029ccb25133232",
+  "sources": {
+    "mixed_protocol.json": "3716d4461379f10414fe625837b15796e20a961a3ccf907fab6726ab4da4c6ec",
+    "mixed_data.py": "3e4670f59edba97743a6ce6ce47b91b17e2bbac463324151540bcc2578bbd257",
+    "mixed_model.py": "143103062aec9ba846b1c37b7466d0037a28ac27a7d12e1f1c6042d2ebfb30e1",
+    "mixed_train.py": "43b5ba6277c495019cf625c08f4fd6ec02e9473ff5d921146489880e5f87b6a6",
+    "loss_equivalence.py": "8df803ca8d8a9903b99c2f8ded0fa1f77902f808483cc2215e15a21878c63887"
+  },
+  "nativePreprocessingSha256": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098",
+  "trunkSha256": "3a9ee6f990a32ecee969ab3e50ca66d8332b398e12eec76d1e43cc5787aba7ab",
+  "headSha256": "ecb5c3c3889460b4f606007e0536bd2897bc4f716d9282e2aabff9dea9734bd2",
+  "dictionarySha256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f",
+  "fontHashes": {
+    "NotoSansJP400": "54aba28468f275bc372eda5f29b202c0d9e7b9ba2bc18a53a4c72c481c75cf9f",
+    "NotoSerifJP400": "2b127545ad3dba023d255733015059e550d9dbcd04c980a80021dc8ea666e813",
+    "MPLUS1p-Regular": "2f294ad496432b1608f070d310e3aa2adcf1de4af429f4901df97ec4bd361ed1",
+    "ZenKakuGothicNew-Regular": "b840cd07a67d89cacca44249ae49aa99ee7640eb5ce623be8d8983d6aabac801",
+    "BIZUDPMincho-Regular": "02e07546c51503acb864004b663f1762f099d8fbe1af7d619b185568568101ef",
+    "BIZUDGothic-Regular": "709fcd41e3209fb765da750472f55ccdf925653e9fa7e1eb007cb65c8f749c75",
+    "KaiseiTokumin-Regular": "3fbdbec539369aed11bb1fa0cdda1d19ea246e795107357383dfa561848a427d"
+  },
+  "exclusionReceiptSha256": "c4108d40cc072224416cbd0d2e723e86535e60a3619b54bfefb92898c352aaa3",
+  "devFontExposure": "BIZUDGothic/KaiseiTokumin parent confirmed unconsumed and reserved; downloaded pinned/OFL. Prior fonts train only. Sawarabi final not accessed.",
+  "diskFreeGiB": 7.999637603759766,
+  "status": "Research-only; protocol freeze before corpus/model selection/training"
+}

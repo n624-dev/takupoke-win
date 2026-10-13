@@ -28,6 +28,7 @@ def main():
     p.add_argument('--oracle',type=Path,required=True)
     p.add_argument('--ink-margin',type=int,choices=[0,2,4],default=2)
     p.add_argument('--positives-only',action='store_true')
+    p.add_argument('--minimum-input-width',type=int,choices=[160,320],default=320)
     p.add_argument('--dotnet',required=True)
     p.add_argument('--output',type=Path,required=True)
     a = p.parse_args(); expected=MODELS[a.model]; source=a.closed_development
@@ -56,6 +57,7 @@ def main():
     manifest['researchSymbols']=expected['symbols']
     manifest['researchDeadlineSeconds']=3300
     manifest['researchInkMargin']=a.ink_margin
+    manifest['researchMinimumInputWidth']=a.minimum_input_width
     manifest['sourceScope']='Consumed six dense development PDFs; fixed pretrained model comparison, no final/qualification credit'
     write(out/'inputs.json',manifest)
     env={**os.environ,'DOTNET_CLI_TELEMETRY_OPTOUT':'1','DOTNET_NOLOGO':'1','ORT_TELEMETRY_DISABLED':'1'}
@@ -64,11 +66,13 @@ def main():
     binaries={str(p.relative_to(reader)):{'bytes':p.stat().st_size,'sha256':sha(p)} for p in sorted(reader.rglob('*')) if p.is_file()}
     freeze={'recipe':'consumed-dense-pretrained-ink-v1','model':a.model,'modelIdentity':expected,
         'priorRawSHA256':closed['rawSHA256'],'inputsSHA256':sha(out/'inputs.json'),'oracleSHA256':sha(a.oracle),
-        'sourceSHA256':{str(p.relative_to(ROOT.parents[1])):sha(p) for p in [ROOT/'Program.cs',ROOT/'InkCropFrame.cs',ROOT/'OriginalImageRead.cs',Path(__file__),ROOT/'prepare_pdf.py',ROOT.parents[1]/'src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs']},
+        'sourceSHA256':{str(p.relative_to(ROOT.parents[1])):sha(p) for p in [ROOT/'Program.cs',ROOT/'InkCropFrame.cs',ROOT/'InputPadding.cs',ROOT/'OriginalImageRead.cs',Path(__file__),ROOT/'prepare_pdf.py',ROOT.parents[1]/'src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs']},
         'readerFiles':binaries,'plannedConditions':{d['id']:d['plannedConditions'] for d in manifest['documents']},'qualification':False,
         'nativeConfidenceFloor':.8,'originalInkMargin':a.ink_margin,'manualCorrections':0,
         'selection':'Both fixed complete positives, no negative qualification' if a.positives_only else 'All previously fixed positive and paired negative documents; no gold selection'}
     freeze['nativeGlobalDeadlineSeconds']=3300
+    freeze['minimumInputWidth']=a.minimum_input_width
+    freeze['paddingPolicy']='Keep original crop/validWidth and every resized FP32 sample; discard only excess normalized-zero right padding'
     write(out/'freeze.json',freeze)
     subprocess.run([sys.executable,'-B',str(ROOT/'prepare_pdf.py'),'--manifest',str(out/'inputs.json')],check=True,timeout=120)
     safe={k:v for k,v in env.items() if not any(s in k.upper() for s in ('TOKEN','SECRET','PASSWORD','CREDENTIAL'))}
