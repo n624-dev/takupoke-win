@@ -47,3 +47,21 @@ Official references: [GLM-OCR model/prompt/license](https://huggingface.co/zai-o
 [llama.cpp multimodal support](https://github.com/ggml-org/llama.cpp/blob/master/docs/multimodal.md).
 GLM-OCR uses MIT; Qwen's export uses Apache-2.0. Asset revisions and sizes are
 retained in the separately verified local download receipt and SHA pins in code.
+
+The separately frozen `--model-set japanese-html` condition runs only the
+Japanese-trained Qwen3.5-ocr-jp-2b F16 model and its matching F16 projector,
+not another pass of the closed base conditions. Its trained prompt is
+`OCR this image as HTML layout blocks with bbox and label.`; output is bounded
+to512 tokens, topP0.1, thinking disabled. Other CPU/sampling/image parameters
+stay fixed. Both raw HTML exactness and protocol-interpreted text exactness are
+reported. The bounded parser preserves text spaces, case and punctuation and
+refuses malformed markup instead of repairing it. Predicted boxes never become
+original glyph/ink ownership evidence. This consumed component comparison
+still cannot qualify a complete PDF or activate the application model.
+
+Original [Japanese model](https://huggingface.co/ebinan92/Qwen3.5-ocr-jp-2b)
+uses Apache-2.0. The pinned
+[community F16 export](https://huggingface.co/nakanishi08/Qwen3.5-ocr-jp-2b-GGUF)
+revision is `3f64928e34e6b619a7ea7a8b804d03f2ed01b978`. Full model/projector
+hashes are enforced before requests. F16 was selected before evaluation to
+measure this candidate without4-bit quantization loss within the CPU16GB budget.

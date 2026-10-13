@@ -1,0 +1,252 @@
+{
+  "recipe": "frozen-image-only-vision-ocr-v1",
+  "pixelsSHA": "6e54d6bc0cc2213dc51a6e0ff67f3551a736e4e75641ec00f96c7b9de87f14ff",
+  "serverSHA": "67cc62bf21713881160b8ca69856d3899273ebe8924ae9aa8c99c2802967ee21",
+  "sourceSHA": "6a22ef6a154f2f1871146e6a6e4383e32e255e198e5250f51eed1e71cb98a2d6",
+  "models": [
+    {
+      "id": "glm-ocr-q8",
+      "model": "GLM-OCR-Q8_0.gguf",
+      "modelSHA": "45bc244a6446aff850521dc41f18bc8d7105ad5f0c2c8c28af04e7cc4f4d50b1",
+      "projector": "mmproj-GLM-OCR-Q8_0.gguf",
+      "projectorSHA": "9c4b58e33e316ed142eb5dcb41abec3844d3e6e5dc361ffb782c3fa9d175141f",
+      "prompt": "Text Recognition:"
+    },
+    {
+      "id": "qwen3-vl-2b-q8",
+      "model": "Qwen3VL-2B-Instruct-Q8_0.gguf",
+      "modelSHA": "1e8db19207c8ce0733ddd78c2eff8a9e22c27c82f4443df94c25792ed8fe04f2",
+      "projector": "mmproj-Qwen3VL-2B-Instruct-Q8_0.gguf",
+      "projectorSHA": "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+      "prompt": "Read only the visible text in this image. Transcribe it exactly, preserving spaces, punctuation and case. Return plain text only, with no explanation or added formatting. Do not guess unclear text. If the image has no text, return an empty string."
+    }
+  ],
+  "callsPlanned": 384,
+  "cpuThreads": 4,
+  "contextTokens": 4096,
+  "maximumOutputTokens": 128,
+  "temperature": 0,
+  "topK": 1,
+  "topP": 1,
+  "seed": 17,
+  "oracleSHA": "1c5652c38a5d84691d5105bd4e851349bc1879d38b2a1cc2a2b6169c12683095",
+  "qualification": "unassessed",
+  "callsCompleted": 384,
+  "resources": [
+    {
+      "model": "glm-ocr-q8",
+      "VmHWM": 1949306880,
+      "VmRSS": 1949306880,
+      "rawSHA": "3c85cf852754f6535169563358e9fc152cf8f426ea00c2df18692f33e3baced2"
+    },
+    {
+      "model": "qwen3-vl-2b-q8",
+      "VmHWM": 4588318720,
+      "VmRSS": 4588318720,
+      "rawSHA": "f3e1dd4c0b7c99ba846a0edf483639c23e5123131d3c671d08d9121812e859b0"
+    }
+  ],
+  "aggregates": [
+    {
+      "model": "glm-ocr-q8",
+      "cohort": "sans",
+      "kind": "blank",
+      "rows": 3,
+      "rawLiteralExact": 0,
+      "singleFinalNewlineDiagnosticExact": 0,
+      "truncated": 0,
+      "seconds": 4.592352118000235
+    },
+    {
+      "model": "glm-ocr-q8",
+      "cohort": "sans",
+      "kind": "header",
+      "rows": 21,
+      "rawLiteralExact": 0,
+      "singleFinalNewlineDiagnosticExact": 0,
+      "truncated": 0,
+      "seconds": 31.806337057998917
+    },
+    {
+      "model": "glm-ocr-q8",
+      "cohort": "sans",
+      "kind": "room",
+      "rows": 24,
+      "rawLiteralExact": 0,
+      "singleFinalNewlineDiagnosticExact": 0,
+      "truncated": 0,
+      "seconds": 13.774895477998598
+    },
+    {
+      "model": "glm-ocr-q8",
+      "cohort": "sans",
+      "kind": "subject",
+      "rows": 24,
+      "rawLiteralExact": 0,
+      "singleFinalNewlineDiagnosticExact": 0,
+      "truncated": 0,
+      "seconds": 12.162480925000636
+    },
+    {
+      "model": "glm-ocr-q8",
+      "cohort": "sans",
+      "kind": "teacher",
+      "rows": 24,
+      "rawLiteralExact": 0,
+      "singleFinalNewlineDiagnosticExact": 0,
+      "truncated": 0,
+      "seconds": 13.296558640000512
+    },
+    {
+      "model": "glm-ocr-q8",
+      "cohort": "serif",
+      "kind": "blank",
+      "rows": 3,
+      "rawLiteralExact": 0,
+      "singleFinalNewlineDiagnosticExact": 0,
+      "truncated": 0,
+      "seconds": 1.6208738129998892
+    },
+    {
+      "model": "glm-ocr-q8",
+      "cohort": "serif",
+      "kind": "header",
+      "rows": 21,
+      "rawLiteralExact": 0,
+      "singleFinalNewlineDiagnosticExact": 0,
+      "truncated": 0,
+      "seconds": 16.50052566300019
+    },
+    {
+      "model": "glm-ocr-q8",
+      "cohort": "serif",
+      "kind": "room",
+      "rows": 24,
+      "rawLiteralExact": 0,
+      "singleFinalNewlineDiagnosticExact": 0,
+      "truncated": 0,
+      "seconds": 32.6024719940001
+    },
+    {
+      "model": "glm-ocr-q8",
+      "cohort": "serif",
+      "kind": "subject",
+      "rows": 24,
+      "rawLiteralExact": 0,
+      "singleFinalNewlineDiagnosticExact": 0,
+      "truncated": 0,
+      "seconds": 27.91707954000094
+    },
+    {
+      "model": "glm-ocr-q8",
+      "cohort": "serif",
+      "kind": "teacher",
+      "rows": 24,
+      "rawLiteralExact": 0,
+      "singleFinalNewlineDiagnosticExact": 0,
+      "truncated": 0,
+      "seconds": 31.676337221998438
+    },
+    {
+      "model": "qwen3-vl-2b-q8",
+      "cohort": "sans",
+      "kind": "blank",
+      "rows": 3,
+      "rawLiteralExact": 0,
+      "singleFinalNewlineDiagnosticExact": 0,
+      "truncated": 0,
+      "seconds": 3.9281923119997373
+    },
+    {
+      "model": "qwen3-vl-2b-q8",
+      "cohort": "sans",
+      "kind": "header",
+      "rows": 21,
+      "rawLiteralExact": 20,
+      "singleFinalNewlineDiagnosticExact": 20,
+      "truncated": 0,
+      "seconds": 21.84019090200036
+    },
+    {
+      "model": "qwen3-vl-2b-q8",
+      "cohort": "sans",
+      "kind": "room",
+      "rows": 24,
+      "rawLiteralExact": 3,
+      "singleFinalNewlineDiagnosticExact": 3,
+      "truncated": 0,
+      "seconds": 34.56913886300072
+    },
+    {
+      "model": "qwen3-vl-2b-q8",
+      "cohort": "sans",
+      "kind": "subject",
+      "rows": 24,
+      "rawLiteralExact": 20,
+      "singleFinalNewlineDiagnosticExact": 20,
+      "truncated": 0,
+      "seconds": 30.843360880999626
+    },
+    {
+      "model": "qwen3-vl-2b-q8",
+      "cohort": "sans",
+      "kind": "teacher",
+      "rows": 24,
+      "rawLiteralExact": 22,
+      "singleFinalNewlineDiagnosticExact": 22,
+      "truncated": 0,
+      "seconds": 32.068909946000986
+    },
+    {
+      "model": "qwen3-vl-2b-q8",
+      "cohort": "serif",
+      "kind": "blank",
+      "rows": 3,
+      "rawLiteralExact": 0,
+      "singleFinalNewlineDiagnosticExact": 0,
+      "truncated": 0,
+      "seconds": 3.5883785339997303
+    },
+    {
+      "model": "qwen3-vl-2b-q8",
+      "cohort": "serif",
+      "kind": "header",
+      "rows": 21,
+      "rawLiteralExact": 21,
+      "singleFinalNewlineDiagnosticExact": 21,
+      "truncated": 0,
+      "seconds": 22.185213830000976
+    },
+    {
+      "model": "qwen3-vl-2b-q8",
+      "cohort": "serif",
+      "kind": "room",
+      "rows": 24,
+      "rawLiteralExact": 5,
+      "singleFinalNewlineDiagnosticExact": 5,
+      "truncated": 0,
+      "seconds": 33.3424147339997
+    },
+    {
+      "model": "qwen3-vl-2b-q8",
+      "cohort": "serif",
+      "kind": "subject",
+      "rows": 24,
+      "rawLiteralExact": 19,
+      "singleFinalNewlineDiagnosticExact": 19,
+      "truncated": 0,
+      "seconds": 30.281270478000806
+    },
+    {
+      "model": "qwen3-vl-2b-q8",
+      "cohort": "serif",
+      "kind": "teacher",
+      "rows": 24,
+      "rawLiteralExact": 15,
+      "singleFinalNewlineDiagnosticExact": 15,
+      "truncated": 0,
+      "seconds": 32.157668441997885
+    }
+  ],
+  "scope": "Consumed development recognition components; no role/ink certification, PDF Validator, qualification or adoption"
+}

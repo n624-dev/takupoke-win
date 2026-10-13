@@ -1,5 +1,26 @@
 # OCR improvement log
 
+## 2026-10-13: Frozen cross-OS pixels, local VLM comparisons and iOS reference
+
+The frozen original-pixel packet removes platform font painting as a confounder.
+Native Windows Actions38344961198 and local Linux completed768 V5/V6 BGR/gray
+calls each, with identical input/oracle/outcome hashes and all quality aggregates.
+All original BODY errors remain; this is transport verification, not independent
+new-document credit. [Evidence](../research-results/ocr-model-color-frozen-20261013/README.md).
+
+GLM-OCR Q8 and Qwen3-VL-2B Q8 each made192 local CPU4 requests on those same
+consumed crops. GLM has an extra leading newline in every response; raw exactness
+is0, while a separately retained zero-call diagnostic gives48/72 and56/72 BODY
+matches. Qwen gives45/72 and39/72, and only3/24 and5/24 room literals.
+Both hallucinate text on white controls. No confidence calibration, source/role
+certification, PDF Validator or activation occurred. [Raw results](../research-results/vision-ocr-frozen-20261013/README.md).
+
+At the user's request, iOS main and research branches were cloned and read only.
+The [cross-reference](ios-ocr-research-reference-20261013.md) retains failed model
+instructions, native shared confusions, fragmented glyph ownership and font
+semantic counterexamples. iOS files/settings/remotes remain unchanged. Native
+drawing parity alone does not authenticate the meaning of an embedded cmap.
+
 ## 2026-10-13: Same-pixel V5/V6 comparison and single-scan CTC decoding
 
 Implementation `659aa1b` introduces a shared greedy CTC decoder which validates

@@ -1,0 +1,34 @@
+{
+  "recipe": "frozen-image-only-vision-ocr-v1",
+  "pixelsSHA": "6e54d6bc0cc2213dc51a6e0ff67f3551a736e4e75641ec00f96c7b9de87f14ff",
+  "serverSHA": "67cc62bf21713881160b8ca69856d3899273ebe8924ae9aa8c99c2802967ee21",
+  "sourceSHA": "6a22ef6a154f2f1871146e6a6e4383e32e255e198e5250f51eed1e71cb98a2d6",
+  "models": [
+    {
+      "id": "glm-ocr-q8",
+      "model": "GLM-OCR-Q8_0.gguf",
+      "modelSHA": "45bc244a6446aff850521dc41f18bc8d7105ad5f0c2c8c28af04e7cc4f4d50b1",
+      "projector": "mmproj-GLM-OCR-Q8_0.gguf",
+      "projectorSHA": "9c4b58e33e316ed142eb5dcb41abec3844d3e6e5dc361ffb782c3fa9d175141f",
+      "prompt": "Text Recognition:"
+    },
+    {
+      "id": "qwen3-vl-2b-q8",
+      "model": "Qwen3VL-2B-Instruct-Q8_0.gguf",
+      "modelSHA": "1e8db19207c8ce0733ddd78c2eff8a9e22c27c82f4443df94c25792ed8fe04f2",
+      "projector": "mmproj-Qwen3VL-2B-Instruct-Q8_0.gguf",
+      "projectorSHA": "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+      "prompt": "Read only the visible text in this image. Transcribe it exactly, preserving spaces, punctuation and case. Return plain text only, with no explanation or added formatting. Do not guess unclear text. If the image has no text, return an empty string."
+    }
+  ],
+  "callsPlanned": 384,
+  "cpuThreads": 4,
+  "contextTokens": 4096,
+  "maximumOutputTokens": 128,
+  "temperature": 0,
+  "topK": 1,
+  "topP": 1,
+  "seed": 17,
+  "oracleSHA": "1c5652c38a5d84691d5105bd4e851349bc1879d38b2a1cc2a2b6169c12683095",
+  "qualification": "unassessed"
+}
