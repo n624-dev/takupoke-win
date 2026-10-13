@@ -18,9 +18,12 @@ using var output = new FileStream(args[1], FileMode.CreateNew, FileAccess.Write,
 using var writer = new StreamWriter(output);
 var rows = manifest.RootElement.GetProperty("rows").EnumerateArray().ToArray();
 if (rows.Length != 192) throw new InvalidDataException("Frozen row count changed.");
+var models = manifest.RootElement.GetProperty("models").EnumerateArray().ToArray();
+if (models.Length is < 1 or > 4) throw new InvalidDataException("Bounded model count changed.");
+var expectedCalls = rows.Length * models.Length * 2;
 var completed = 0;
 var nativeIdentities = new HashSet<string>(StringComparer.Ordinal);
-foreach (var model in manifest.RootElement.GetProperty("models").EnumerateArray())
+foreach (var model in models)
 {
     var name = model.GetProperty("id").GetString()!;
     var modelPath = Verified(model.GetProperty("file"));
@@ -79,10 +82,11 @@ foreach (var model in manifest.RootElement.GetProperty("models").EnumerateArray(
             runtimeVersion = typeof(InferenceSession).Assembly.GetName().Version?.ToString() }));
         writer.Flush(); output.Flush(flushToDisk: true);
         CryptographicOperations.ZeroMemory(bytes);
-        if (++completed % 96 == 0) Console.WriteLine(JsonSerializer.Serialize(new { completed, total = 768 }));
+        if (++completed % 96 == 0) Console.WriteLine(JsonSerializer.Serialize(new { completed, total = expectedCalls }));
     }
 }
 writer.Flush(); output.Flush(flushToDisk: true);
+if (completed != expectedCalls) throw new InvalidDataException("Missing calls remain unassessed.");
 var process = Process.GetCurrentProcess(); process.Refresh();
 Console.WriteLine(JsonSerializer.Serialize(new { completed, actualModelCalls = completed, legacyComparisonAdditionalModelCalls = 0,
     processPeakWorkingSetBytes = process.PeakWorkingSet64, os = System.Runtime.InteropServices.RuntimeInformation.OSDescription,

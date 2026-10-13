@@ -53,6 +53,15 @@ class ScoringTests(unittest.TestCase):
         rows, gold = self.fixture(); rows[0]["decodeExact"] = False
         with self.assertRaises(ValueError): run.score(rows, gold)
 
+    def test_supplemental_model_set_requires_all_its_own_pairs(self):
+        rows, gold = self.fixture()
+        rows = [dict(r, model='v6-small') for r in rows if r['model'] == 'v5-mobile']
+        self.assertEqual(384, sum(s['observed'] for s in run.score(rows, gold, ['v6-small'])))
+        with self.assertRaises(ValueError): run.score(rows[:-1], gold, ['v6-small'])
+        with self.assertRaises(ValueError): run.score(rows, gold)
+        with self.assertRaises(ValueError): run.score(rows, gold, ['v6-small', 'v6-small'])
+        with self.assertRaises(ValueError): run.score(rows, gold, [])
+
     def test_color_arms_keep_identical_crop_and_opaque_original_pixels(self):
         from PIL import ImageFont
         font = ImageFont.load_default()

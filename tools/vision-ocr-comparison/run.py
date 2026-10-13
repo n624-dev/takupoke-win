@@ -78,7 +78,10 @@ def main():
     freeze = {"recipe": "frozen-image-only-vision-ocr-v1" if args.model_set == 'base' else 'frozen-japanese-html-ocr-v1', "pixelsSHA": PIXEL_SHA, "serverSHA": digest(args.server),
         "sourceSHA": digest(Path(__file__)), "models": assets, "callsPlanned": expected_calls, "cpuThreads": 4,
         "contextTokens": 4096, "maximumOutputTokens": maximum_tokens, "temperature": 0, "topK": 1, "topP": top_p,
-        "seed": 17, "oracleSHA": digest(ROOT / "oracle.json"), "qualification": "unassessed"}
+        "seed": 17, "oracleSHA": digest(ROOT / "oracle.json"), "qualification": "unassessed",
+        "htmlInterpreterSHA": digest(ROOT / 'html_blocks.py') if args.model_set == 'japanese-html' else None,
+        "thinkingEnabled": False if args.model_set == 'japanese-html' else 'native-template-default',
+        "gpuLayers": 0, "projectorOffload": False, "cachePrompt": False, "parallelSlots": 1}
     (args.output / "freeze.json").write_text(json.dumps(freeze, indent=2) + "\n")
     print(json.dumps({"freezeSHA": digest(args.output / 'freeze.json'), "callsPlanned": expected_calls}), flush=True)
     # Download/setup is complete; no remote endpoint or asset URL enters either

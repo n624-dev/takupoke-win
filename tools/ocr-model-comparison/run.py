@@ -161,14 +161,17 @@ def outcome_sha(rows):
     return sha(json.dumps(values, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode())
 
 
-def score(raw, gold):
+def score(raw, gold, model_ids=None):
+    model_ids = tuple(m['id'] for m in MODELS) if model_ids is None else tuple(model_ids)
+    if not model_ids or len(model_ids) != len(set(model_ids)):
+        raise ValueError('Expected model identities must be nonempty and unique')
     expected = {r["id"]: r for r in gold}
     if len(expected) != 192:
         raise ValueError("Duplicate or incomplete oracle rows")
     seen, summary = set(), {}
     for row in raw:
         key = (row["id"], row["model"], row["condition"])
-        if key in seen or row["id"] not in expected or row["model"] not in {m["id"] for m in MODELS} or row["condition"] not in ("bgr", "gray"):
+        if key in seen or row["id"] not in expected or row["model"] not in model_ids or row["condition"] not in ("bgr", "gray"):
             raise ValueError("Unexpected or duplicate observation")
         seen.add(key); oracle = expected[row["id"]]
         group = (oracle["cohort"], row["model"], row["condition"], oracle["kind"])
@@ -188,7 +191,7 @@ def score(raw, gold):
             aggregate[field] += row[field]
         if not row["decodeExact"]:
             raise ValueError("Changed decoder output")
-    if len(seen) != 768:
+    if len(seen) != 192 * len(model_ids) * 2:
         raise ValueError("Missing calls remain unassessed; no partial quality score")
     return [{"cohort": k[0], "model": k[1], "condition": k[2], "kind": k[3], **v,
              "cer": v["characterEdits"] / v["sourceCharacters"] if v["sourceCharacters"] else None} for k, v in sorted(summary.items())]

@@ -70,3 +70,15 @@ fictional PNG packet, verifies decoded BGRA bytes and reconstructs the same fixe
 gray condition. All JSON input/oracle writes use canonical UTF-8/LF bytes. Model,
 sampler, preprocessing, floor and decoder remain unchanged. The measured variable
 is pixel transport; these consumed examples do not become new independent cases.
+# Supplemental small model
+
+`run_small.py` evaluates only official PP-OCRv6 small (revision
+`b8f84f0b80c529de40b4fbb3544b84fa7233a513`) on the same192 consumed,
+losslessly frozen BGR crops and their fixed grayscale pairs.384 requests,
+no V5/medium rerun. Its own model/config/dictionary hashes are checked;
+dictionary18710 and48px BGR recognition preprocessing match the official
+configuration. Raw outputs close and hash before literal scoring. The Windows
+research workflow now selects this supplemental condition; the prior V5/medium
+runs and their failures remain in research-results. Production model selection
+is unchanged. V6 tiny's6906-symbol alphabet lacks required Japanese characters,
+so it is excluded before inference rather than given a mismatched dictionary.
