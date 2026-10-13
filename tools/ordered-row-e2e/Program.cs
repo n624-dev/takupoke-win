@@ -66,6 +66,7 @@ finally
         readerComplete = capture.Complete, acquiredPages = capture.Pages.Count,
         acquiredGlyphs = capture.Pages.Sum(p => p.Layout?.Glyphs.Count ?? 0), builderCells = doc?.Cells.Count,
         originalOrderedProofs = doc?.Cells.Count(c => c.OrderedRowProof is not null), formal,
-        nativeOcrCalls = 0, llmCalls = 0, milliseconds = watch.ElapsedMilliseconds }));
+        nativeOcrCalls = 0, llmCalls = 0, milliseconds = watch.ElapsedMilliseconds,
+        processPeakWorkingSetBytes = Process.GetCurrentProcess().PeakWorkingSet64 }));
     CryptographicOperations.ZeroMemory(bytes);
 }

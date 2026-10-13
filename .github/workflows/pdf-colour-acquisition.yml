@@ -4,7 +4,9 @@ on:
     branches: [codex/windows-local-ai-improvement-20261013]
     paths:
       - '.github/workflows/pdf-colour-acquisition.yml'
-      - 'tools/pdf-colour-acquisition/**'
+      - 'tools/pdf-colour-acquisition/generate.py'
+      - 'tools/pdf-colour-acquisition/run.py'
+      - 'tools/pdf-colour-acquisition/compare.py'
       - 'src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs'
       - 'src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs'
 permissions:
