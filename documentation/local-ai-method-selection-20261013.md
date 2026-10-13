@@ -103,6 +103,14 @@ Apple/iPhone上の推論は未評価。iOSコード・設定・リモートは�
 学習/調整/最終の答えを分離し、最終結果を使った再選定・出力補正はしていない。
 [学習と携帯形式の記録](../research-results/ocr-synthetic-training-20261013/README.md)。
 
+その後の英数字専用方式も、最終評価の字体を開く前に適性を確認した。
+小型CTCの新規学習は調整用384行で61行一致・誤採用57行となり、不採用。
+EasyOCR English G2の既存モデルは同じ調整画像で70行一致、全墨＋2px入力でも75行一致、
+誤採用76→80行となった。別の消費済み見出し42行も26行一致・誤採用13行で、
+このモデルへの追加学習は保留した。いずれも未使用の最終字体を温存し、アプリへ接続しない。
+[新規CTC](../research-results/ocr-synthetic-training-20261013/ascii-line-ctc-v1/README.md) /
+[English G2](../research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/README.md)。
+
 ## 配布・再利用時の範囲
 
 検証済みWindowsコードは研究/改善ブランチとPRへ反映する。

@@ -1,0 +1,339 @@
+{
+  "scope": "Consumed-development diagnostic only. Edit alignment is descriptive; no output repair, inference, training, threshold tuning, final opening or activation.",
+  "manifestSha256": "f44406401c3639376c09db77bc161542a1894dfd447cc8685a72bcacecbca5d4",
+  "conditions": {
+    "baseline": {
+      "rawSha256": "77fa949b30a4f10b9c23d00e80551d4a2e8d377c2332bc1b3b851dbe45ceb9e6",
+      "positiveGroups": {
+        "code": {
+          "exact": 23,
+          "correctAccepted": 15,
+          "incorrectAccepted": 20,
+          "caseMismatchRows": 10,
+          "confusableMismatchRows": 31,
+          "caseMismatchAccepted": 1,
+          "confusableMismatchAccepted": 11
+        },
+        "lookalike": {
+          "exact": 7,
+          "correctAccepted": 4,
+          "incorrectAccepted": 19,
+          "caseMismatchRows": 23,
+          "confusableMismatchRows": 53,
+          "caseMismatchAccepted": 5,
+          "confusableMismatchAccepted": 12
+        },
+        "natural": {
+          "exact": 35,
+          "correctAccepted": 27,
+          "incorrectAccepted": 20,
+          "caseMismatchRows": 8,
+          "confusableMismatchRows": 15,
+          "caseMismatchAccepted": 1,
+          "confusableMismatchAccepted": 4
+        },
+        "printable": {
+          "exact": 5,
+          "correctAccepted": 3,
+          "incorrectAccepted": 17,
+          "caseMismatchRows": 19,
+          "confusableMismatchRows": 17,
+          "caseMismatchAccepted": 2,
+          "confusableMismatchAccepted": 3
+        }
+      },
+      "maximumWrongAcceptedMinimumConfidence": 0.9996888637542725,
+      "mostCommonEdits": [
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 152,
+          "acceptedCount": 32
+        },
+        {
+          "gold": "",
+          "prediction": "~",
+          "count": 37,
+          "acceptedCount": 2
+        },
+        {
+          "gold": "0",
+          "prediction": "O",
+          "count": 37,
+          "acceptedCount": 9
+        },
+        {
+          "gold": "l",
+          "prediction": "I",
+          "count": 33,
+          "acceptedCount": 7
+        },
+        {
+          "gold": "1",
+          "prediction": "I",
+          "count": 25,
+          "acceptedCount": 10
+        },
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 25,
+          "acceptedCount": 5
+        },
+        {
+          "gold": "9",
+          "prediction": "g",
+          "count": 16,
+          "acceptedCount": 3
+        },
+        {
+          "gold": "l",
+          "prediction": "|",
+          "count": 16,
+          "acceptedCount": 1
+        },
+        {
+          "gold": "Y",
+          "prediction": "y",
+          "count": 15,
+          "acceptedCount": 5
+        },
+        {
+          "gold": "0",
+          "prediction": "o",
+          "count": 12,
+          "acceptedCount": 3
+        },
+        {
+          "gold": "I",
+          "prediction": "l",
+          "count": 12,
+          "acceptedCount": 3
+        },
+        {
+          "gold": "l",
+          "prediction": " ",
+          "count": 12,
+          "acceptedCount": 2
+        },
+        {
+          "gold": "W",
+          "prediction": "l",
+          "count": 12,
+          "acceptedCount": 1
+        },
+        {
+          "gold": "C",
+          "prediction": "c",
+          "count": 11,
+          "acceptedCount": 1
+        },
+        {
+          "gold": "Z",
+          "prediction": "z",
+          "count": 11,
+          "acceptedCount": 3
+        },
+        {
+          "gold": "$",
+          "prediction": "S",
+          "count": 11,
+          "acceptedCount": 1
+        },
+        {
+          "gold": "7",
+          "prediction": "Z",
+          "count": 10,
+          "acceptedCount": 2
+        },
+        {
+          "gold": "O",
+          "prediction": "o",
+          "count": 10,
+          "acceptedCount": 2
+        },
+        {
+          "gold": "M",
+          "prediction": "l",
+          "count": 10,
+          "acceptedCount": 2
+        },
+        {
+          "gold": "",
+          "prediction": "l",
+          "count": 9,
+          "acceptedCount": 2
+        }
+      ]
+    },
+    "framed": {
+      "rawSha256": "c79cdfe23e52a8f85864ffe42adec134475f3986bb7c3477482fef4f559e3553",
+      "positiveGroups": {
+        "code": {
+          "exact": 23,
+          "correctAccepted": 18,
+          "incorrectAccepted": 24,
+          "caseMismatchRows": 15,
+          "confusableMismatchRows": 32,
+          "caseMismatchAccepted": 5,
+          "confusableMismatchAccepted": 10
+        },
+        "lookalike": {
+          "exact": 6,
+          "correctAccepted": 3,
+          "incorrectAccepted": 20,
+          "caseMismatchRows": 16,
+          "confusableMismatchRows": 52,
+          "caseMismatchAccepted": 1,
+          "confusableMismatchAccepted": 12
+        },
+        "natural": {
+          "exact": 39,
+          "correctAccepted": 34,
+          "incorrectAccepted": 20,
+          "caseMismatchRows": 13,
+          "confusableMismatchRows": 12,
+          "caseMismatchAccepted": 4,
+          "confusableMismatchAccepted": 0
+        },
+        "printable": {
+          "exact": 7,
+          "correctAccepted": 4,
+          "incorrectAccepted": 16,
+          "caseMismatchRows": 13,
+          "confusableMismatchRows": 17,
+          "caseMismatchAccepted": 0,
+          "confusableMismatchAccepted": 5
+        }
+      },
+      "maximumWrongAcceptedMinimumConfidence": 0.9994932413101196,
+      "mostCommonEdits": [
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 195,
+          "acceptedCount": 42
+        },
+        {
+          "gold": "0",
+          "prediction": "O",
+          "count": 41,
+          "acceptedCount": 10
+        },
+        {
+          "gold": "1",
+          "prediction": "I",
+          "count": 29,
+          "acceptedCount": 13
+        },
+        {
+          "gold": "l",
+          "prediction": "I",
+          "count": 27,
+          "acceptedCount": 5
+        },
+        {
+          "gold": "l",
+          "prediction": " ",
+          "count": 15,
+          "acceptedCount": 3
+        },
+        {
+          "gold": "7",
+          "prediction": "Z",
+          "count": 15,
+          "acceptedCount": 5
+        },
+        {
+          "gold": "I",
+          "prediction": "l",
+          "count": 15,
+          "acceptedCount": 3
+        },
+        {
+          "gold": "l",
+          "prediction": "|",
+          "count": 14,
+          "acceptedCount": 2
+        },
+        {
+          "gold": "0",
+          "prediction": "o",
+          "count": 13,
+          "acceptedCount": 3
+        },
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 13,
+          "acceptedCount": 4
+        },
+        {
+          "gold": "",
+          "prediction": "|",
+          "count": 11,
+          "acceptedCount": 4
+        },
+        {
+          "gold": "O",
+          "prediction": "o",
+          "count": 11,
+          "acceptedCount": 1
+        },
+        {
+          "gold": "\\",
+          "prediction": "Y",
+          "count": 11,
+          "acceptedCount": 2
+        },
+        {
+          "gold": "W",
+          "prediction": "l",
+          "count": 10,
+          "acceptedCount": 2
+        },
+        {
+          "gold": "M",
+          "prediction": "l",
+          "count": 10,
+          "acceptedCount": 1
+        },
+        {
+          "gold": "$",
+          "prediction": "S",
+          "count": 10,
+          "acceptedCount": 1
+        },
+        {
+          "gold": "I",
+          "prediction": "|",
+          "count": 9,
+          "acceptedCount": 2
+        },
+        {
+          "gold": "Y",
+          "prediction": "y",
+          "count": 9,
+          "acceptedCount": 2
+        },
+        {
+          "gold": "I",
+          "prediction": "",
+          "count": 9,
+          "acceptedCount": 4
+        },
+        {
+          "gold": "X",
+          "prediction": "x",
+          "count": 9,
+          "acceptedCount": 0
+        }
+      ]
+    }
+  },
+  "framingComparison": {
+    "improvements": 26,
+    "regressions": 21
+  },
+  "limitations": "No dedicated AI/Al/A1 paired header set was evaluated here. Arbitrary-lookalike and case errors cannot establish success or failure on a particular parent fixture. Ambiguous minimum-edit alignments do not prove glyph localization."
+}

@@ -1,0 +1,60 @@
+{
+  "status": "research-only; unqualified/notactivated",
+  "scope": "Consumed ASCII-v1 development only; no independent final or qualification credit",
+  "positiveRows": 384,
+  "exact": 70,
+  "correctAccepted": 49,
+  "incorrectAccepted": 76,
+  "cer": 0.17114246700045516,
+  "negativeRows": 128,
+  "negativeAccepted": 8,
+  "groups": {
+    "cjk": {
+      "rows": 32,
+      "exact": 0,
+      "accepted": 0
+    },
+    "clipped": {
+      "rows": 32,
+      "exact": 0,
+      "accepted": 3
+    },
+    "code": {
+      "rows": 96,
+      "exact": 23,
+      "accepted": 35
+    },
+    "lookalike": {
+      "rows": 96,
+      "exact": 7,
+      "accepted": 23
+    },
+    "multiline": {
+      "rows": 32,
+      "exact": 0,
+      "accepted": 4
+    },
+    "natural": {
+      "rows": 96,
+      "exact": 35,
+      "accepted": 47
+    },
+    "printable": {
+      "rows": 96,
+      "exact": 5,
+      "accepted": 20
+    },
+    "unknown": {
+      "rows": 32,
+      "exact": 0,
+      "accepted": 1
+    }
+  },
+  "parameters": 3781345,
+  "weightsBytes": 15143997,
+  "elapsedSeconds": 13.245361139001034,
+  "maximumRssMiB": 391.5625,
+  "medianInferenceMilliseconds": 22.967622000578558,
+  "rawSha256": "77fa949b30a4f10b9c23d00e80551d4a2e8d377c2332bc1b3b851dbe45ceb9e6",
+  "limits": "English97 including Euro, no UNK/reject head. CJK/damage/unknown inference is deliberately tested but unsupported. Min-piece CTC score is uncalibrated; no full document/role/ink qualification. Timing under concurrent work; no native-Windows speed claim."
+}

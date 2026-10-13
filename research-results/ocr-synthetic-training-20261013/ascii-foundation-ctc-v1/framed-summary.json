@@ -1,0 +1,58 @@
+{
+  "status": "research-only; unqualified/notactivated",
+  "scope": "Second declared condition on consumed development. Not new held-out accuracy, final, output correction or activation.",
+  "positiveRows": 384,
+  "exact": 75,
+  "correctAccepted": 59,
+  "incorrectAccepted": 80,
+  "cer": 0.17205279927173417,
+  "negativeRows": 128,
+  "negativeAccepted": 12,
+  "allOriginalNonwhiteRetained": 512,
+  "groups": {
+    "cjk": {
+      "rows": 32,
+      "exact": 0,
+      "accepted": 0
+    },
+    "clipped": {
+      "rows": 32,
+      "exact": 0,
+      "accepted": 4
+    },
+    "code": {
+      "rows": 96,
+      "exact": 23,
+      "accepted": 42
+    },
+    "lookalike": {
+      "rows": 96,
+      "exact": 6,
+      "accepted": 23
+    },
+    "multiline": {
+      "rows": 32,
+      "exact": 0,
+      "accepted": 6
+    },
+    "natural": {
+      "rows": 96,
+      "exact": 39,
+      "accepted": 54
+    },
+    "printable": {
+      "rows": 96,
+      "exact": 7,
+      "accepted": 20
+    },
+    "unknown": {
+      "rows": 32,
+      "exact": 0,
+      "accepted": 2
+    }
+  },
+  "rawSha256": "c79cdfe23e52a8f85864ffe42adec134475f3986bb7c3477482fef4f559e3553",
+  "elapsedSeconds": 19.37524662299984,
+  "peakRssMiB": 396.109375,
+  "limits": "Crop-only unknown/damage/script rejection is not established. Original border/contact and full-line/cell provenance remain independent requirements. No formal headers, documents, nativeWindows/iOS or final credit."
+}
