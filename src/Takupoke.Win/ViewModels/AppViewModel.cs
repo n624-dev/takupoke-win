@@ -107,7 +107,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         _school = new(Root, new WindowsDpapiProtector()); _preferences = new(Root); _events = new(Root);
         _api = new(_http); _shared = new(_api, _school); _materials = new(_school, new(new WindowsFileIdentity()));
         _recoveryModels = new(Root);
-        _recovery = new(_school, _materials, new WindowsPdfRecovery(_recoveryModels).BuildAsync, _recoveryModels.ProvidersAsync, aiPermission: _aiPermission);
+        var pdfRecovery = new WindowsPdfRecovery(_recoveryModels);
+        _recovery = new(_school, _materials, pdfRecovery.BuildAsync, _recoveryModels.ProvidersAsync,
+            aiPermission: _aiPermission, captureForReview: pdfRecovery.CaptureForReviewAsync);
         _authentication = new(new OidcClient(_http), offline is null ? null : offline.OpenBrowser);
         _authentication.ProgressChanged += value => OperationStatus = value;
         NavigationAnchor = Today; WeekStart = Today.DisplayWeekStart();
@@ -255,6 +257,12 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         await ReloadAsync(token, notify: false);
         Status = "入力内容を反映した資料全体を確認してから採用してください。";
     }, "原本と入力内容を確認しています。");
+    public Task BeginRecoveryCorrectionAsync(MaterialKind kind, RecoveryPreview preview, RecoveryFieldTarget target) => RunAsync(async token =>
+    {
+        await _recovery.BeginCorrectionAsync(kind, preview, target, token);
+        await ReloadAsync(token, notify: false);
+        Status = "原画像と読み取り文字を照合してください。訂正は資料全体で3項目までです。";
+    }, "訂正対象の原画像を確認しています。");
     public Task CancelManualRecoveryAsync(MaterialKind kind, RecoveryManualSession session) => RunAsync(async token =>
     {
         await _recovery.CancelManualAsync(kind, session, token);

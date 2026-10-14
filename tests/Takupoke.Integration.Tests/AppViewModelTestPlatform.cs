@@ -113,5 +113,7 @@ namespace Takupoke.Win.Platform
     {
         public WindowsPdfRecovery(WindowsRecoveryModels models) { }
         public Task<RecoveryDocument> BuildAsync(byte[] bytes, MaterialKind kind, string hash, RecoveryReadCapture capture, CancellationToken token) => throw new NotSupportedException();
+        public Task<RecoveryDocument> CaptureForReviewAsync(byte[] bytes, RecoveryDocument document,
+            IReadOnlyList<RecoveryFieldTarget> selected, CancellationToken token) => throw new NotSupportedException();
     }
 }

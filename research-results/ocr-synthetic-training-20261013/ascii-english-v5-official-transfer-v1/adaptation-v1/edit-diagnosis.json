@@ -1,0 +1,503 @@
+{
+  "scope": "Savedraw independentdevelopment diagnosis only; no inference/correction/selection changes",
+  "conditions": [
+    {
+      "name": "official-baseline",
+      "groups": {
+        "code": {
+          "rows": 128,
+          "exact": 35,
+          "wrongAccepted": 29
+        },
+        "lookalike": {
+          "rows": 128,
+          "exact": 24,
+          "wrongAccepted": 41
+        },
+        "natural": {
+          "rows": 64,
+          "exact": 63,
+          "wrongAccepted": 0
+        },
+        "printable": {
+          "rows": 64,
+          "exact": 23,
+          "wrongAccepted": 24
+        }
+      },
+      "mostCommonEdits": [
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 185
+        },
+        {
+          "gold": "l",
+          "prediction": "1",
+          "count": 72
+        },
+        {
+          "gold": "l",
+          "prediction": "I",
+          "count": 49
+        },
+        {
+          "gold": "I",
+          "prediction": "1",
+          "count": 47
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 44
+        },
+        {
+          "gold": "I",
+          "prediction": "l",
+          "count": 30
+        },
+        {
+          "gold": "1",
+          "prediction": "l",
+          "count": 22
+        },
+        {
+          "gold": "0",
+          "prediction": "O",
+          "count": 20
+        },
+        {
+          "gold": "o",
+          "prediction": "0",
+          "count": 7
+        },
+        {
+          "gold": "`",
+          "prediction": " ",
+          "count": 5
+        },
+        {
+          "gold": "l",
+          "prediction": "",
+          "count": 3
+        },
+        {
+          "gold": "",
+          "prediction": "I",
+          "count": 3
+        },
+        {
+          "gold": "l",
+          "prediction": " ",
+          "count": 3
+        },
+        {
+          "gold": "\\",
+          "prediction": "#",
+          "count": 3
+        },
+        {
+          "gold": "I",
+          "prediction": " ",
+          "count": 2
+        },
+        {
+          "gold": "I",
+          "prediction": "|",
+          "count": 2
+        },
+        {
+          "gold": "k",
+          "prediction": "K",
+          "count": 1
+        },
+        {
+          "gold": "",
+          "prediction": "0",
+          "count": 1
+        },
+        {
+          "gold": "O",
+          "prediction": "l",
+          "count": 1
+        },
+        {
+          "gold": "",
+          "prediction": "l",
+          "count": 1
+        },
+        {
+          "gold": "`",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "~",
+          "prediction": "^",
+          "count": 1
+        },
+        {
+          "gold": "~",
+          "prediction": "",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "name": "epoch-2",
+      "groups": {
+        "code": {
+          "rows": 128,
+          "exact": 67,
+          "wrongAccepted": 17
+        },
+        "lookalike": {
+          "rows": 128,
+          "exact": 55,
+          "wrongAccepted": 34
+        },
+        "natural": {
+          "rows": 64,
+          "exact": 47,
+          "wrongAccepted": 11
+        },
+        "printable": {
+          "rows": 64,
+          "exact": 33,
+          "wrongAccepted": 14
+        }
+      },
+      "mostCommonEdits": [
+        {
+          "gold": "l",
+          "prediction": "I",
+          "count": 140
+        },
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 67
+        },
+        {
+          "gold": "-",
+          "prediction": "=",
+          "count": 41
+        },
+        {
+          "gold": "0",
+          "prediction": "O",
+          "count": 32
+        },
+        {
+          "gold": "l",
+          "prediction": "1",
+          "count": 7
+        },
+        {
+          "gold": "1",
+          "prediction": "l",
+          "count": 6
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 6
+        },
+        {
+          "gold": " ",
+          "prediction": "",
+          "count": 4
+        },
+        {
+          "gold": "q",
+          "prediction": "a",
+          "count": 3
+        },
+        {
+          "gold": "]",
+          "prediction": "J",
+          "count": 3
+        },
+        {
+          "gold": "l",
+          "prediction": "",
+          "count": 2
+        },
+        {
+          "gold": "q",
+          "prediction": "g",
+          "count": 2
+        },
+        {
+          "gold": "I",
+          "prediction": "L",
+          "count": 1
+        },
+        {
+          "gold": "~",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "\\",
+          "prediction": "#",
+          "count": 1
+        },
+        {
+          "gold": "`",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "\\",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "|",
+          "prediction": "I",
+          "count": 1
+        },
+        {
+          "gold": "\\",
+          "prediction": "*",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "name": "epoch-4",
+      "groups": {
+        "code": {
+          "rows": 128,
+          "exact": 57,
+          "wrongAccepted": 27
+        },
+        "lookalike": {
+          "rows": 128,
+          "exact": 42,
+          "wrongAccepted": 34
+        },
+        "natural": {
+          "rows": 64,
+          "exact": 43,
+          "wrongAccepted": 9
+        },
+        "printable": {
+          "rows": 64,
+          "exact": 37,
+          "wrongAccepted": 10
+        }
+      },
+      "mostCommonEdits": [
+        {
+          "gold": "l",
+          "prediction": "I",
+          "count": 104
+        },
+        {
+          "gold": "0",
+          "prediction": "O",
+          "count": 67
+        },
+        {
+          "gold": "1",
+          "prediction": "l",
+          "count": 66
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 62
+        },
+        {
+          "gold": "l",
+          "prediction": " ",
+          "count": 34
+        },
+        {
+          "gold": "",
+          "prediction": "I",
+          "count": 33
+        },
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 27
+        },
+        {
+          "gold": "D",
+          "prediction": "O",
+          "count": 19
+        },
+        {
+          "gold": "|",
+          "prediction": "I",
+          "count": 4
+        },
+        {
+          "gold": "]",
+          "prediction": "J",
+          "count": 4
+        },
+        {
+          "gold": "O",
+          "prediction": "I",
+          "count": 3
+        },
+        {
+          "gold": "l",
+          "prediction": "0",
+          "count": 2
+        },
+        {
+          "gold": "g",
+          "prediction": "8",
+          "count": 2
+        },
+        {
+          "gold": "",
+          "prediction": "0",
+          "count": 1
+        },
+        {
+          "gold": "\\",
+          "prediction": "#",
+          "count": 1
+        },
+        {
+          "gold": "\\",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "[",
+          "prediction": "l",
+          "count": 1
+        },
+        {
+          "gold": "\\",
+          "prediction": "*",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "name": "epoch-6",
+      "groups": {
+        "code": {
+          "rows": 128,
+          "exact": 67,
+          "wrongAccepted": 29
+        },
+        "lookalike": {
+          "rows": 128,
+          "exact": 62,
+          "wrongAccepted": 32
+        },
+        "natural": {
+          "rows": 64,
+          "exact": 53,
+          "wrongAccepted": 6
+        },
+        "printable": {
+          "rows": 64,
+          "exact": 38,
+          "wrongAccepted": 12
+        }
+      },
+      "mostCommonEdits": [
+        {
+          "gold": "l",
+          "prediction": "I",
+          "count": 129
+        },
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 65
+        },
+        {
+          "gold": "0",
+          "prediction": "O",
+          "count": 48
+        },
+        {
+          "gold": "1",
+          "prediction": "l",
+          "count": 25
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 23
+        },
+        {
+          "gold": "l",
+          "prediction": " ",
+          "count": 11
+        },
+        {
+          "gold": "",
+          "prediction": "I",
+          "count": 8
+        },
+        {
+          "gold": "]",
+          "prediction": "J",
+          "count": 4
+        },
+        {
+          "gold": "",
+          "prediction": "0",
+          "count": 3
+        },
+        {
+          "gold": "O",
+          "prediction": "I",
+          "count": 3
+        },
+        {
+          "gold": "\\",
+          "prediction": "#",
+          "count": 2
+        },
+        {
+          "gold": "|",
+          "prediction": "I",
+          "count": 2
+        },
+        {
+          "gold": "~",
+          "prediction": "`",
+          "count": 1
+        },
+        {
+          "gold": "=",
+          "prediction": "-",
+          "count": 1
+        },
+        {
+          "gold": "l",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "!",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "\\",
+          "prediction": "+",
+          "count": 1
+        },
+        {
+          "gold": "l",
+          "prediction": "1",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}

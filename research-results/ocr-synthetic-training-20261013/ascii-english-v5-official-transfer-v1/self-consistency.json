@@ -1,0 +1,77 @@
+{
+  "scope": "Official HF class/config/safetensors as independent foundation; no ONNX transplant/native parity claim, no quality/final/training",
+  "numeric": [
+    {
+      "batch": 1,
+      "width": 320,
+      "timeSteps": 40,
+      "exactByteSelfConsistency": true,
+      "finite": true
+    },
+    {
+      "batch": 1,
+      "width": 481,
+      "timeSteps": 60,
+      "exactByteSelfConsistency": true,
+      "finite": true
+    },
+    {
+      "batch": 1,
+      "width": 500,
+      "timeSteps": 62,
+      "exactByteSelfConsistency": true,
+      "finite": true
+    },
+    {
+      "batch": 1,
+      "width": 640,
+      "timeSteps": 80,
+      "exactByteSelfConsistency": true,
+      "finite": true
+    },
+    {
+      "batch": 1,
+      "width": 960,
+      "timeSteps": 120,
+      "exactByteSelfConsistency": true,
+      "finite": true
+    },
+    {
+      "batch": 2,
+      "width": 320,
+      "timeSteps": 40,
+      "exactByteSelfConsistency": true,
+      "finite": true
+    },
+    {
+      "batch": 2,
+      "width": 481,
+      "timeSteps": 60,
+      "exactByteSelfConsistency": true,
+      "finite": true
+    },
+    {
+      "batch": 2,
+      "width": 500,
+      "timeSteps": 62,
+      "exactByteSelfConsistency": true,
+      "finite": true
+    },
+    {
+      "batch": 2,
+      "width": 640,
+      "timeSteps": 80,
+      "exactByteSelfConsistency": true,
+      "finite": true
+    },
+    {
+      "batch": 2,
+      "width": 960,
+      "timeSteps": 120,
+      "exactByteSelfConsistency": true,
+      "finite": true
+    }
+  ],
+  "allExact": true,
+  "nativeOnnxParityClaim": false
+}

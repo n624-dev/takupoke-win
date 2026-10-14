@@ -1,0 +1,2003 @@
+{
+  "purpose": "Exact-target exclusion only; no school originals or prior-label training examples",
+  "files": [
+    {
+      "path": "/workspace/scratch/ascii-line-ctc-20261013-v1/development/manifest.json",
+      "sha256": "f44406401c3639376c09db77bc161542a1894dfd447cc8685a72bcacecbca5d4"
+    },
+    {
+      "path": "/workspace/scratch/ascii-line-ctc-20261013-v1/train/manifest.json",
+      "sha256": "ac0c184d04a7e8b3133f5f7bc855ee9d7c959c1b0b22c263312ce31f3c2f2033"
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-cnn-tail-20261014-v1/adaptation-v1/development/manifest.json",
+      "sha256": "e5a72ece8a56db684fb508c2970f830e48516047dab1bacd6d1c5d92b47ed003"
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-cnn-tail-20261014-v1/adaptation-v1/train/manifest.json",
+      "sha256": "78234f330c2314d0d9c96e597ec5463ae9ecaff9e70e5a2da541bb3c3dc6f95f"
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-features-20261013-v1/mixed-head-v1/development/manifest.json",
+      "sha256": "9857881de602bdbe97c70b5b280f53eaf313ce84d067efb9ee513527bddf1110"
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-features-20261013-v1/mixed-head-v1/train/manifest.json",
+      "sha256": "565908dad9634275a450106b7fa9378758ca4bc45f03afdfcd969ed394fcd7b8"
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-height-neck-20261013-v1/adaptation-v1/development/manifest.json",
+      "sha256": "4ad771dfb6a19d5e7c972364fbbc085e539b2466ff7dda9daf55ec7d043c8350"
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-height-neck-20261013-v1/adaptation-v1/train/manifest.json",
+      "sha256": "480957094fd20e19d924c2ae829ac76e4fa30959ed183a09e5f486bb58384ab5"
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-svtr-20261013-v1/adaptation-v1/development/manifest.json",
+      "sha256": "443409746eacabdf87a3c7a92cf950d83b96ebc9a62ad960dd98081035cf0ac8"
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-svtr-20261013-v1/adaptation-v1/train/manifest.json",
+      "sha256": "7891d1deae9dcc01d4b17b54ffe4d0fadb4c671b9b8f06856c4457fffa1995c8"
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-transfer-20261013-v1/development/manifest.json",
+      "sha256": "da46934bccc68b0f356d15b3632cc660ef4541acc423eac692841f2f625b0c6d"
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-transfer-20261013-v1/source-proof-probes/manifest.json",
+      "sha256": "ae2f562925634b1c154f30a71387ad83f83a9b0c639337d08f8f2697bc7f6cde"
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-transfer-20261013-v1/train/manifest.json",
+      "sha256": "5dc3bf288a397079d728ad92ea163d331bde16468819d22b6f8c2d7c74430194"
+    },
+    {
+      "path": "/workspace/scratch/ocr-finetune-20261013/development/manifest.json",
+      "sha256": "8c0194f9ba4e3b4a8907583c80d6d4e5a6cc55ac282d7e9d3d2fc675af23bb39"
+    },
+    {
+      "path": "/workspace/scratch/ocr-finetune-20261013/final/manifest.json",
+      "sha256": "e21daa803652624202d93b2e72e76e356d170b1a959a5fe2469993b562e80cdf"
+    },
+    {
+      "path": "/workspace/scratch/ocr-finetune-20261013/ood/manifest.json",
+      "sha256": "b647fa0272cc5b1e262272b18c05f37cc9aa21c94c944eb83a7067d5279889f3"
+    },
+    {
+      "path": "/workspace/scratch/ocr-finetune-20261013/train/manifest.json",
+      "sha256": "445f1213b7af4d6ad3b2c90952c825181a109c36c04a1df2c287a65fbb728616"
+    },
+    {
+      "path": "/workspace/scratch/physical-frame-fresh-development-20261013/oracle.json",
+      "sha256": "8bc4223a69e23d2f5b6ef596b3b3a23627d9cb49dc793a8f83b3a221a5bb9e1e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/english-v5-ascii-development-20261014/freeze.json",
+      "sha256": "10666c2359d288ffaf830dc2dbb2556f7f2d169aa6ebc124930842345eeec22b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/english-v5-ascii-development-20261014/inputs.json",
+      "sha256": "26b9d6fe081763aa36a740d2fa2f81990a04855095d97527544bc0c4b78340a8"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/english-v5-ascii-development-20261014/observations.jsonl",
+      "sha256": "e5bccac771e7c9cf54a47641f90c5d5b3087eeb4cf6bb7f182178b48d8816072"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/english-v5-ascii-development-20261014/raw-receipt.json",
+      "sha256": "ada7175982ab0ad29dbc9ee5d6849f1b3849da4e1399d9ba4a3349d368a65544"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/english-v5-ascii-development-20261014/report.json",
+      "sha256": "dae096063cf94aef86e6b3c802803125174a17645a60be9c356dbc22892c7974"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/english-v5-ascii-development-20261014/worker-report.json",
+      "sha256": "4a8f95df8753f533eeae56690533e9330835b9a4ae31f605c417d5dd5153c167"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/english438-whole-field-domain-audit-20261014/freeze.json",
+      "sha256": "fe573eb5e961ad1f58f325f2be554c96b72bfecfacb9077996cef098308e00a2"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/english438-whole-field-domain-audit-20261014/report.json",
+      "sha256": "c4d1415c48bd9e6d01f56187066556834a77b940c4091c102fb75a175b346c04"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/english438-whole-field-domain-audit-20261014/source-snapshot-audit.json",
+      "sha256": "a060b64d81fee4b2a8dfd8afc2b471a13621c7b88326a5b7ca18b85beebbf5e0"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/glm-ocr-fp32-clean-lines-20261014/asset-receipt.json",
+      "sha256": "17816dc23f3e0dabe4d03dc9d19f10e539bfbcb8bd2c5ebe4d7eea77347f4b74"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/glm-ocr-fp32-clean-lines-20261014/freeze.json",
+      "sha256": "285dc9e859ff3ec55da4fd3202014210f750a0ca40cc1d531920a44ba68c47ef"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/glm-ocr-fp32-clean-lines-20261014/model-load-report.json",
+      "sha256": "5145748ff67f52e26274a80efd9deab9ac20a947a7e934e00f5301d925c22080"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/glm-ocr-fp32-clean-lines-20261014/observations.jsonl",
+      "sha256": "d14c50341c89cf91cd10132ee7c506bc7a8330c257567e2f899df4c2cfdd6dd5"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/glm-ocr-fp32-clean-lines-20261014/post-worker-scope-audit.json",
+      "sha256": "b66de80d2ce589eafb533ec0ff5e75679ca965486a89b251cd0f24f8d34cc0a3"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/glm-ocr-fp32-clean-lines-20261014/raw-receipt.json",
+      "sha256": "d56af06716d6a77bdf56d39f96e7cbf5dc0d10502f698bda0c314ff647e5b152"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/glm-ocr-fp32-clean-lines-20261014/report.json",
+      "sha256": "607910c3d019cde577e091ca53c954c1e47692cb9c5f84dc185a3ae200daaeb1"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/glm-ocr-fp32-clean-lines-20261014/worker-report.json",
+      "sha256": "f8199147bf192af51eeb0320ac0d8c1647305c720eb821d5f1ab8e2de06c739b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/got-ocr2-20261013/freeze.json",
+      "sha256": "9ccfd991541519d3f313f531c5b8787f233d89c67842103a338f55936703bb7d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/got-ocr2-20261013/inventory.json",
+      "sha256": "ef89281a8020013a4a8bb8fb1a7511380ce8ffea7762352e5664a1f0ee566f36"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/got-ocr2-20261013/observations.jsonl",
+      "sha256": "ec643685925c7bb5945b5101de6cfbb554269b7ea0ec101a1f7f2f6df3870b6e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/got-ocr2-20261013/raw-receipt.json",
+      "sha256": "47dd5c778845d15266604a11c755e5c9282bb6eaa16c8eca4127abf8bfa36f29"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/got-ocr2-20261013/report.json",
+      "sha256": "1d1528da1448a331f5a2097c285139af564e693897985dd44237fe2db7e117ac"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/got-ocr2-20261013-initial/freeze.json",
+      "sha256": "0e73e224f8408dbae954cd2371d8758de708e1b03322376c9e8076281c982f93"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/got-ocr2-20261013-initial/inventory.json",
+      "sha256": "7e7da6a4b320d2d69440e5890ed2b3f6a8440cbe8e6d44e26ca27b46415187d0"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/got-ocr2-20261013-initial/raw-receipt.json",
+      "sha256": "e57cfb5e5eacf8e35d2979433a041636542be81b8e3bd032453798ddba70102b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/manga-ocr-clean-lines-20261014/closed-weight-cleanup-receipt.json",
+      "sha256": "865edfa054b9c06304f31a250f50d344ac48d29b95897566a739456d834cc80b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/manga-ocr-clean-lines-20261014/freeze.json",
+      "sha256": "cb6dad01f8fb561460b8aae6283546024556af3b3edf96a6a61ca166463a9df2"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/manga-ocr-clean-lines-20261014/observations.jsonl",
+      "sha256": "62c45b388f1041129fc881b71682841e3d5d56fdf36be8ec850ddcc1bc4d6de1"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/manga-ocr-clean-lines-20261014/raw-receipt.json",
+      "sha256": "ce6136a93623227449eea6f0b4e1df46dcc7bac7cfd8a018bab0353d75c5eeb8"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/manga-ocr-clean-lines-20261014/report.json",
+      "sha256": "ac6eac8081046c33a525fe47515d20abe3bd7dcf3e3a19420ceb6df873bf83cd"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/manga-ocr-clean-lines-20261014/worker-report.json",
+      "sha256": "633d3ceb7330c1f1e5119bcefd217f601122fd6a57d6c593162cb3a62040fcd2"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ndlocr-native-20261013/freeze.json",
+      "sha256": "e5e202464b987cf5fc6fdb0e1cef574868bf2fe72602367a59a393e830011782"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ndlocr-native-20261013/inventory.json",
+      "sha256": "f240567f71af5eb43dfe83b12a04d165239f250ca06fddd932701fe426cf501a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ndlocr-native-20261013/observations.jsonl",
+      "sha256": "ace78fe99c246ac14bfae6ccb22deaedb391918201f1d94c099b263459ab054a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ndlocr-native-20261013/raw-receipt.json",
+      "sha256": "952a83a11117b189629700ae3fae210cf0480153ec69b49396482913d7047324"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ndlocr-native-20261013/report.json",
+      "sha256": "aa2811d4822bba74348acbde5167d90791a31f9a0fa1ec41479ecd304688cd50"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-ink-development-20261013/inputs.json",
+      "sha256": "55162ece834f196a4a2970592624eb5682f5a076ea1ffde63d3ac0588db2d42e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-ink-development-20261013/pdf-inputs.json",
+      "sha256": "9635e5ba3f6be2671022367ee90f021436e8ead6782c5086e50e5285ce4d0cd4"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-ink-development-20261013/pre-inference-freeze.json",
+      "sha256": "2673faf53c3cb0734a4cd638b8e7c3cce907bb9ccc480ce03565cda7e3fa9a90"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-ink-development-20261013/raw-receipt.json",
+      "sha256": "e9ec85b514de15e0e3906c0be082b778869c530ab30bb320aead613d2bc9f17c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-ink-development-20261013/report.json",
+      "sha256": "5d65575a82ef1fa818d471255320696057c0858e29ed775ea2ea8cc5bf816416"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-ink-development-20261013/role-context-replay-summary.json",
+      "sha256": "4ca93472dddf6a1cf069287a60c1291c1880747af4ac598bddeaa609989dd8df"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-ink-development-20261013/source-original-inputs.json",
+      "sha256": "0470a2a6dfe8f860cecd4efa0bcbed6dcd233e28a160b1ba945de4d152b06ed5"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-ink-development-20261013/source-original-receipt.json",
+      "sha256": "f94fffe53128ffbd0b74bd778f95595e65c2f21acc41c76d913a95bb2a32d334"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-input-development-20261013/inputs.json",
+      "sha256": "b57bd6c92a59ce482a8cced1b64222407a5a5afc6a153f0d954fa8ec993b1cc7"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-input-development-20261013/inventory.json",
+      "sha256": "d4840c4908be49e85d5808d35b782ba196eb39dbe129143dbae6489073e9f76e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-input-development-20261013/pre-generation-freeze.json",
+      "sha256": "f53547017e5c1418c9993d23124a0f43c3070db8c8547c4ce128a275ddad88a6"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-input-development-20261013/report.json",
+      "sha256": "70094185d19f204bb9a645299c361a695349c5705b15e41c3b83486138f1ea74"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v5-server-20261013/freeze.json",
+      "sha256": "69a2c7d1ce459912aa09ac9179b244e238cf8be31005570b42702cefd7411021"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v5-server-20261013/inputs.json",
+      "sha256": "8af32c7714fb00971005fe1507cc9a30679010344798f973addab2f5efddd96f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v5-server-20261013/pdf-inputs.json",
+      "sha256": "bea5f7d87eeae59b47dd96915df49d05f6861ca43f8492da9e607de1783400cb"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v5-server-20261013/raw-receipt.json",
+      "sha256": "b2d51ee98691f9ccd38db52727990f608ee56fe5840bdad06cc30785e2382eda"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v5-server-20261013/report.json",
+      "sha256": "ef8e883c302c8b0c63cd30ff580ba7769749147b963772133871f70f417bcf18"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v5-server-20261013/source-original-inputs.json",
+      "sha256": "9c3154ef4d5b426307003f8aec33537a923f46c37adeb1ee3660ec51e68631c9"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v5-server-20261013/source-original-receipt.json",
+      "sha256": "f94fffe53128ffbd0b74bd778f95595e65c2f21acc41c76d913a95bb2a32d334"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013/body-audit-summary.json",
+      "sha256": "e7789de81107c0e71347db54767e2d0352b0182de753418d445ca50eb5599502"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013/freeze.json",
+      "sha256": "8bb7ecca74155ca996b24e400620799a11ddcc51b12bc78ce7e9c68de6bd91e6"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013/inputs.json",
+      "sha256": "a2b4387f8b5e5cd65f9d0a13d9a3da27906e7bc10cc1ae59e96b41d10b0375a8"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013/pdf-inputs.json",
+      "sha256": "45a2652ac215459f99e4e5ade18f9ac56c7d08c8a9c8a21d6679e1a451cb7114"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013/raw-receipt.json",
+      "sha256": "0437f6c06ab9e522ff1f40809cd5f6b1015516c8153a1ae44f3d167dee877804"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013/report.json",
+      "sha256": "5e7e604453a975847d957ac6738d1f0b79d93d1ff9a7e92fc60a33b90682f6d0"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013/source-original-inputs.json",
+      "sha256": "904e1399aca75114f7a22b0b842fecec122dc3fabc7c6c2295fd59417fd5e4c2"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013/source-original-receipt.json",
+      "sha256": "f94fffe53128ffbd0b74bd778f95595e65c2f21acc41c76d913a95bb2a32d334"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013-initial/body-audit-summary.json",
+      "sha256": "89b22085705e7447d5788248102b96db04308a8e2efad46ee5bfe3f8ad30ca12"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013-initial/freeze.json",
+      "sha256": "092288ffc7f1841bc3517c6bcb758a64cf4ce48ee2fcbae0004608903ebc517b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013-initial/inputs.json",
+      "sha256": "f769c8832ae3d426f05a3d59f07114c2a93bd34b459ef3f0e3ccb682176bb18d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013-initial/pdf-inputs.json",
+      "sha256": "2972e571bd147ae5fed92421fdc56e31cd70a785dd6170d972f6ebac43e61c47"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013-initial/post-worker-report-v2.json",
+      "sha256": "34f0f72510a4989029438c7f48ab1d01bc088f2b84a20396750cd0fe720fa998"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013-initial/raw-receipt.json",
+      "sha256": "c727c6cd94286b17198411eefea4ed694fc2b91e197cf3d5bf6f33905e6b5a6d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013-initial/report.json",
+      "sha256": "9a8d317c2a38777de175ad80c86d4c3185c078aab12f9f90c01652941607ed0d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013-initial/source-original-inputs.json",
+      "sha256": "1203e165ce95bc176867dd4ee7eb38e83e25e249c0930e16105111cdbad89f82"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-20261013-initial/source-original-receipt.json",
+      "sha256": "f94fffe53128ffbd0b74bd778f95595e65c2f21acc41c76d913a95bb2a32d334"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-ink0-20261013/body-audit-summary.json",
+      "sha256": "cb1abc41e3abddeb9ff88f2b71eacd3144b884347b0578bfe9dcabd4911dc953"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-ink0-20261013/freeze.json",
+      "sha256": "b8fec4617bbdfcb488fb80132644c612cd12e9f890cedd8fd195d389899cd2be"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-ink0-20261013/inputs.json",
+      "sha256": "35311d4dfb558df25edaa9839357c8a3af11a2ecc0acc6166310009c3808e24e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-ink0-20261013/pdf-inputs.json",
+      "sha256": "7dd92e497348a62aa1730452da73f1f970067f439664f30cb85f623d60d9fe91"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-ink0-20261013/raw-receipt.json",
+      "sha256": "e6174269c89f762828f101ceabba5c1ca7dc21f659cc874dc661d0a2c7592363"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-ink0-20261013/report.json",
+      "sha256": "704aa0fa2e53c31f031119756faa178d7ae6411194714a44eed7ac8b1ef78e87"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-ink0-20261013/source-original-inputs.json",
+      "sha256": "766afa35ab3bac48344bfc954026109199838fe2c75a5a9f925d241422e7fb6f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-ink0-20261013/source-original-receipt.json",
+      "sha256": "511554ae125d3bc7b4959ce89f347a985fb7d1dc97eade41fbb34e838f8f79d8"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-pad160-20261013/body-audit-summary.json",
+      "sha256": "af310e23c035d24faf0582e3c4360d735403bd1fe35e940656a4e9550e6eae70"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-pad160-20261013/freeze.json",
+      "sha256": "030f49c8845b008f619420660a80ce6c824e37efc579676896ad44cd722e64f4"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-pad160-20261013/inputs.json",
+      "sha256": "2b76b128c2f3d3bb69b4efd42420250db055f40e59a05ea2e3521ec457b2c1c5"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-pad160-20261013/padding-comparison-summary.json",
+      "sha256": "f8a3b07c199012f6ea90b546ac2f296351ca4e6e9409a8c0d0a8f7980b6c85bd"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-pad160-20261013/pdf-inputs.json",
+      "sha256": "84c7ca64db9db3f985e087d52fa81e4f3518bf2a9dd58e1f7619bff6f2df59b6"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-pad160-20261013/raw-receipt.json",
+      "sha256": "0f23a8a47ebdd027efb17e9995e5500e0ee31904127887028dc19de7736edf46"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-pad160-20261013/report.json",
+      "sha256": "51d6b3e6afffac93c2fb8e669b8f257dc17232bd12cec135ab306b6ef0de3506"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-pad160-20261013/source-original-inputs.json",
+      "sha256": "11aca271c23bf35d853c480044ed53dd76be16ee15a9203ec0b2e93679188154"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-dense-v6-medium-pad160-20261013/source-original-receipt.json",
+      "sha256": "511554ae125d3bc7b4959ce89f347a985fb7d1dc97eade41fbb34e838f8f79d8"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-easyocr-japanese-g1-20261014/freeze.json",
+      "sha256": "7de17f2e42dd0dad5faa91fd7776796c3f419d70393fa055377f0166ef28efde"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-easyocr-japanese-g1-20261014/observations.jsonl",
+      "sha256": "b3ed7a8af8844b66b8267afa90de723256b643175e3a2c41e77ed90c751046a5"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-easyocr-japanese-g1-20261014/raw-receipt.json",
+      "sha256": "f94b8d07d22aff6c24019af79982de28974b00f403061f894604b589c2ab1204"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-easyocr-japanese-g1-20261014/report.json",
+      "sha256": "69b235d4244a8001d3ec7b23e0e35ded2330b9fd848aae66b4225c12496634f5"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-easyocr-japanese-g1-20261014/worker-report.json",
+      "sha256": "0c48bd5c8ae594728d585c2d3145e27d41e32383675eb0b7a8d8c357047279af"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-easyocr-japanese-g2-20261014/freeze.json",
+      "sha256": "87e3ffd7a80159dcfd65fffc54a2755a9f27ea2814cf3720eadf8f44c083e60d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-easyocr-japanese-g2-20261014/observations.jsonl",
+      "sha256": "1dba012be60e89dc7d10e3c1353a487363eab4418998976e37d175f97a841859"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-easyocr-japanese-g2-20261014/raw-receipt.json",
+      "sha256": "3f26bcae60015edac28309921a7f1c6ed4931a8dd84bf0cd173b8b01c787dab1"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-easyocr-japanese-g2-20261014/report.json",
+      "sha256": "01860e393fb3202d4d7523e7009174cde4c0d707b981cd2eb416a764c2b2f265"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-easyocr-japanese-g2-20261014/worker-report.json",
+      "sha256": "da2c6198224c2e2fe61b42a3d5063a58df75c8ed407da433a5691b1f8ee30159"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-english-v5-clean-lines-20261014/freeze.json",
+      "sha256": "884f9d40df54a3edde3977c6b7ce2466aecc84d1db08bd5b7ea8b1b0a7788183"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-english-v5-clean-lines-20261014/observations.jsonl",
+      "sha256": "e99972160eeba5f445feb533a9e7ee032e4c071cb86b5dbac8d097a25055d1b7"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-english-v5-clean-lines-20261014/raw-receipt.json",
+      "sha256": "2d75ca037717d38fb3a0ed560531c2a0fc4912db445b49edd94e0ac8725336a1"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-english-v5-clean-lines-20261014/report.json",
+      "sha256": "3e81166159dcfa391942ca107b41cf5e2ccdb8a1b2476485a3589e65f6b22fbf"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-japanese-v3-clean-lines-20261013/freeze.json",
+      "sha256": "aeb7af57f8245943af9141c2d8dbc4c2e7d8b6d09f919e525aee25a41298f204"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-japanese-v3-clean-lines-20261013/observations.jsonl",
+      "sha256": "55ea9bf90a7f234b127fcf5b282a7d24e98d521cd819d5237262c856c94ba270"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-japanese-v3-clean-lines-20261013/raw-receipt.json",
+      "sha256": "c38f8695ae9473d97765c992bc0ebe971190d11992dfaa3aaf55783358baf9f0"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-japanese-v3-clean-lines-20261013/report.json",
+      "sha256": "f73c7b5f4d29895948083c79b5b8775cba550eb20b72e3c9af1dea2b2f69f607"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-model-color-20261013/inventory.json",
+      "sha256": "7c16e055ac571439ee7a4e6208a956a951e1e1120f5bd4b1bf4e5acea20b15c9"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-model-color-20261013/linux-freeze.json",
+      "sha256": "913d6fe1b5463d158cbb7bd3c94c12874a21a147e9ab6bc0f5222a60032e7385"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-model-color-20261013/linux-observations.jsonl",
+      "sha256": "3feda5fcee1f622a9ca59e662d8c6b3271308dc6e058be1cd0550a5406ed1eff"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-model-color-20261013/linux-outcome-audit.json",
+      "sha256": "630092fa80949b28bd99d7b4cccf7f2f5c3be54174ffb16cc450606d2f70ecbb"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-model-color-20261013/linux-report.json",
+      "sha256": "29de1c0e34adfc88a564f3c12dd07c9b69cc4e9b582f6d3b30a018deaa3723be"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-model-color-20261013/windows-initial-failure.json",
+      "sha256": "4f9bd2b0e937dfc9f982ed84a6e7c5e4eadeadbebc0cae620de563319e3318a0"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-model-color-20261013/windows-receipt.json",
+      "sha256": "7ac4307f8c0c2f38f39068edbfbd8442a10c9f5eeb1a62471cad680503f6324b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-model-color-20261013/windows-report.json",
+      "sha256": "8a201b0e228d10db4549231627cbf67c39840638159a88c5c0f65a3e94dfb000"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-model-color-frozen-20261013/inventory.json",
+      "sha256": "2c8922b019484bcc5fef88cffdf46dd8a72ba3be308ccec7a7bb81628703fd83"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-model-color-frozen-20261013/linux-freeze.json",
+      "sha256": "cce55a7c4daee0e9aea00a7df803740136a9243ce3ae30c805bbba4eb4afa701"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-model-color-frozen-20261013/linux-observations.jsonl",
+      "sha256": "7c62eea64639d393e22b7be57fe81e3382f9c42b484d5738ecb64c2dd3b323cf"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-model-color-frozen-20261013/linux-report.json",
+      "sha256": "66dac0512b42092b329206a91e8b1043c228b419cc683c95ea8f81e51c5449b7"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-model-color-frozen-20261013/receipt.json",
+      "sha256": "4da2205c3a75429ca013085aea8655cd116ca32e194419dbb755d87805aa9786"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-model-color-frozen-20261013/windows-report.json",
+      "sha256": "de7a46d13fccdfa0b5c74ac06f36ca96f70812dd0f1d5dd6290b2fc340b07013"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-original-image-windows-20261013/inputs.json",
+      "sha256": "74e1380164bfc437295494ab3c7d8e46438d00d3b5222265ee6a7d31f602ccc7"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-original-image-windows-20261013/inventory.json",
+      "sha256": "0bfcdc59757d1a23040b130f700f020a17bf91d2d02f7ab51b8013bb3e51c40b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-original-image-windows-20261013/observations.jsonl",
+      "sha256": "b5294f448d19935d89041371c161beab4995ef705e145f45c641d0e27a22c8d7"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-original-image-windows-20261013/pdf-inputs.json",
+      "sha256": "e9aeba135a93a6d9a9c05771024c2d2456791628e59e3f4ea04c5e6a8ec4b140"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-original-image-windows-20261013/raw-receipt.json",
+      "sha256": "8b6bff6e41ffcfc98aebb12859fa0e67c502c60c57bbe69c3a3ca15550102f86"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-original-image-windows-20261013/report.json",
+      "sha256": "bc46e17db2e23bfb5429675f9a25e96cb4337ae67cfc8e6882e890114455705d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-original-image-windows-20261013/source-freeze.json",
+      "sha256": "5e21ab892e6569404d84a0d8e3eb6f8caae6d7a7e0e701ef85d5a128bb8780fa"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-original-image-windows-20261013/source-original-inputs.json",
+      "sha256": "7e12d2d899fe4ca5a1cfa8e6b7bfd59b8ae86abdf8e9417d9831d1add125807a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-original-image-windows-20261013/source-original-receipt.json",
+      "sha256": "3a2c436caa032955b65f34f5ced203554c7725462bf130a0d91132d9ba4c0437"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-20261013/builder-replay-report.json",
+      "sha256": "619941739db476625a905a3f3198b2d6b944d01d046673eaca8acfb29b07f439"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-20261013/builder-replay.jsonl",
+      "sha256": "fdbe6e8be11c1ac7f542ca3eb6249f650adc1b3a9c8707ac267cd8e4d5ce227a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-20261013/inputs.json",
+      "sha256": "9c05cb431342e6b3f9c552473d50d4df2836eed9ca9fcf64aa6335afe9fd251b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-20261013/inventory.json",
+      "sha256": "e33efc9226c1f2d3ab1633f85c228563bc5458bdfea249c1b4421ece05eeff3c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-20261013/observations.jsonl",
+      "sha256": "b1382ddef35cc84a191eec3f9e2d2d3fa521393aea7f4d5fc01601cc14f3bb6b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-20261013/raw-receipt.json",
+      "sha256": "6a88cb6e64210fc48e6948bb218104684f32796544ab60430b031a5b7698af20"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-20261013/report.json",
+      "sha256": "6f57b3a3336b694c6413bdc3faf4e514fc42556414563785f3102c8c36a261fc"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-native-ownership-20261013/inventory.json",
+      "sha256": "db9b3d9ecca71916b00b213a64cae0b691875b400262894475c85742fe2d6d13"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-native-ownership-20261013/native-render-receipt.json",
+      "sha256": "c607ccdfb8818015cd7ee0588535b8c9ba3b53b06f0cfb9f750fec6e673633c9"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-native-ownership-20261013/ownership-diagnosis.jsonl",
+      "sha256": "e5dc666dd3d7ce2d57c669995ae61c26a0189d454c830a89b968a4514dd71a90"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-native-ownership-20261013/source-freeze.json",
+      "sha256": "f56097c1bf6c472c974350e0747aac6367ca8fc87614cd00e7b29a9fc2ed4e88"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-windows-20261013/inputs.json",
+      "sha256": "44d2887937fc0c02c2d8a36ec35d17c561cb976fcb94f32461edd05bf6dc3903"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-windows-20261013/inventory.json",
+      "sha256": "930f8dfb52e9dd05694b25319d4bd163dd03b8ba751f93cffb697e8ec782a229"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-windows-20261013/native-inputs.json",
+      "sha256": "e4b1f1a0ee3d5706fb0a8b1ad655b0503bd7c3bd0058b01903e160d6ec075c6e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-windows-20261013/native-render-receipt.json",
+      "sha256": "c607ccdfb8818015cd7ee0588535b8c9ba3b53b06f0cfb9f750fec6e673633c9"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-windows-20261013/observations.jsonl",
+      "sha256": "1cdcd0c32382fa0d379ce6d6262172b1b6d8d979f2bec17f82db73360d50262f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-windows-20261013/pdf-inputs.json",
+      "sha256": "a30e91c283055ceda3586454c8420e93ea3f23b8651fce05d26f6a5c5260b1f8"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-windows-20261013/raw-receipt.json",
+      "sha256": "af9f9bd16ade08acf7cc73074f2e26cd2b39ce3252b035975ead9f2f1fbaf68a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-windows-20261013/report.json",
+      "sha256": "5ee8cd195f8889c5cbb5d429b2dc86fdfd8a8e5c61edd3ff75d00a28e88d59b7"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-physical-framing-windows-20261013/source-freeze.json",
+      "sha256": "2dcff70503bac7c79f7297d3eb7419622f59b6240c92abbb276c8812c4ef4a56"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-reader-agreement-audit-20261014/freeze.json",
+      "sha256": "9112f3e6880794e1104ab8221825f1480dc193707fe3e8c9d08e6e750aa20728"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-reader-agreement-audit-20261014/report.json",
+      "sha256": "f6aa6a0c7f2f768f333897ea75af5821f77d29fb90d9cc2484ff77e082bff7fb"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/freeze.json",
+      "sha256": "5f24c4d773254ad3e052be244bc354fe535695201d0b291e1e221a07a287ceb0"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/partial-numeric-budget.json",
+      "sha256": "e0de534a4a3e89162a8e9813e55264a4ae58eefd7a32c2d08452de85d242e9d9"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/preflight.json",
+      "sha256": "dd733b136d8f03970326a8eb0f516df165cefc92bcd5394bedaa7780d12ef1df"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/self-consistency.json",
+      "sha256": "4c8909a68d67e39cd960482cc8e8d3e61d649a2e3790140f868c54c6e7f63bcb"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/asset-provenance.json",
+      "sha256": "ad5491a3a1d392143852e23680fffa2c4e57580c33d1ee42b70220b854636f49"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/closure.json",
+      "sha256": "738b3c4d0270487a252ebcf40038966cdfcd53c1178a6fc4077067ef6d938ed0"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/fidelity.json",
+      "sha256": "20c932b02351678a8d805100da072701b168f3ea7b582fdcc382a31d0cc4a587"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/freeze.json",
+      "sha256": "6725ab18ee56f0601a8a620a96a8c340cba98d0f7eb23c7338f5efaa4bddef79"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/fused-cnn-v2/fidelity.json",
+      "sha256": "f03b539b32f9e151f356b312848348fcdc84818a66becc27414909305dcdd578"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/fused-cnn-v2/freeze.json",
+      "sha256": "fa4577b3c852438f80376a080ef1fb75e7e3d6af48ef775af13c1598590a6044"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/fused-cnn-v2/unjudged.jsonl",
+      "sha256": "40e0b0e5fa8b19a46bec3dc41edba9895f5cee995c03bb2a0bc849ac338ca34d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/handoff-manifest.json",
+      "sha256": "f9827f6ccc1b16f05854c82cae5dab919b5715f6fdb770d8001a4655c3d32772"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/native-math-v3/fidelity.json",
+      "sha256": "d8fa91a2f6e0af50341eda46b40e022281e46c1ab44d1f4009cb225d929348e1"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/native-math-v3/freeze.json",
+      "sha256": "cb65ee64b5e5042e0be1b35244552f2be6651394a19fdee584076bd3fed83d8f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/native-math-v3/unjudged.jsonl",
+      "sha256": "f623f84d86a5fdaf1411131a6675fc7920d6f62b5278509bdc24fccb77ac110a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/numeric-budget/initial-budget-failure.json",
+      "sha256": "81a69be6a0449339c5b31d25bbc996cdfe489af4da20f0b22da10b9b22aa68da"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/numeric-budget-small/budget.json",
+      "sha256": "57fcd9d674113d8961b97356cf6858eeeaa96f9ce7402c2b894eb2a5afdcaff2"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/numeric-budget-small/measurements.json",
+      "sha256": "9d6c209396788692e8e244b7f95890f8b1b953bd2ca5db93a7b0add754229b26"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/numerical-trace/trace.json",
+      "sha256": "a840601f71b88450a13aa9f27f6dfb60d2555921d98836f326c91082e0ccae1e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/unjudged.jsonl",
+      "sha256": "d8d14ed4c08345506c45611d705f75c6ed719cf6cfc5e8f486a9839ce02988b4"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/baseline-freeze.json",
+      "sha256": "094427fb8d64c43d0f263054fb67092b3a77743e306b5e60e99f377a941879b8"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/baseline-summary.json",
+      "sha256": "81fe2583d80b0e5280f3a8630389eda073a5e9fbe16974afa49c3206354f133b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/baseline-unjudged.jsonl",
+      "sha256": "77fa949b30a4f10b9c23d00e80551d4a2e8d377c2332bc1b3b851dbe45ceb9e6"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/consumed-headers/freeze.json",
+      "sha256": "4aed6b4f431fec8783d03a1b9c7bd403b95f7cf8647555120fbf273794d73e5b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/consumed-headers/inference-complete.json",
+      "sha256": "1a682465f351c8e58557ebf683b1fdc42930820556c008dd577fe505ea2756f7"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/consumed-headers/judged.json",
+      "sha256": "dadca2478ffcf2fbd13da7e685713d1c72a8f6ed16ee5f1a38783b0d8fddb18c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/consumed-headers/native-confidence-diagnosis.json",
+      "sha256": "b86f487ce379e144aa73d758ca4fe68c91f080e7537ef43c8f8e3a6453d80a2b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/consumed-headers/summary.json",
+      "sha256": "87463eb042466cf666bed6a8c6b3dabf2a3b061fd0851145c2aee6e27f11b856"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/consumed-headers/unjudged.jsonl",
+      "sha256": "b6ee25c69aaa149abc75574086467f69fcb7a7f36ee49d615d5bc5a5902145ca"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/consumed-headers/verification.json",
+      "sha256": "7a323cf773c9356ac5b19685437cce9c3c475a12bcf9884271e90b005ba51192"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/development-diagnosis.json",
+      "sha256": "696d44a73494311c043fd6a755a1da7be53b9bbb7c07ccb21fd9f32dcd8f6034"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/framed-freeze.json",
+      "sha256": "539c0b68a8691bd6cfd928c6a81f1c6d9eff2b63118e8e8057764934ab15a215"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/framed-summary.json",
+      "sha256": "8f49f40c24491f186209c66f0548c259da346637ab1b27201d8b67485d4a2ac0"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-foundation-ctc-v1/framed-unjudged.jsonl",
+      "sha256": "c79cdfe23e52a8f85864ffe42adec134475f3986bb7c3477482fef4f559e3553"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-line-ctc-v1/development-decision.json",
+      "sha256": "2e73f0e8bd68fa3b93b6a8e446622c16213546d35bdde34e0c4d6d44e3229564"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-line-ctc-v1/pre-training-freeze.json",
+      "sha256": "e586dbf5b93178f02d3bcee7f9d283e314076e170d6b04eef232da5af0ccc488"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-line-ctc-v1/selection.json",
+      "sha256": "e4b6b91ea92fcc579e6355d4e88a0983207b2e5f6ce8d102862bcbbd3650f401"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/baseline-computation-audit.json",
+      "sha256": "7b6af066b28dd5ed95026fdb2620f79966a1dc0f955b49e2f582fbe744e404db"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/closure.json",
+      "sha256": "8897901c8787ac2679ccc232fdc360cee3c12bad69fc133b5f4cd3c448bae5e0"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/corpus-verification.json",
+      "sha256": "c05d8ec44d7a4011741d73eb6bf2251711fa13178e78ad5ba464280926d24391"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/development-diagnosis.json",
+      "sha256": "6f807b872eda316c16265a2d28f9a372dbc657639e93fcf6b3b7d15b03e1fecb"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/development-initialization-fidelity.json",
+      "sha256": "c4a9db76d7417c16a69a708f08ae0f6867ad44e0a7007859abcf5479394e2c1a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/edit-diagnosis.json",
+      "sha256": "002d00ab199b5e18ef81f833cc289aa0626ecfd0b3498b9f003680195d8fa969"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/epoch-2-summary.json",
+      "sha256": "d84a88ff9f26e9414507b7471c4e8498693dff6360e5a7eb696d8cf2e879a648"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/epoch-2-unjudged.jsonl",
+      "sha256": "f9443af28d74d034853902ecaa2ef59d0010014b2fc63893e8cf09dfbf484707"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/epoch-4-summary.json",
+      "sha256": "c27364bf0b041163e95b51dc976dc1f85ca9de2349f79dcd8eee24c9dd515d57"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/epoch-4-unjudged.jsonl",
+      "sha256": "bfc47b1196a3e6244295fe7489c709d0c085b17d49f6b24d121f54a1120235d2"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/epoch-8-summary.json",
+      "sha256": "55cb15912ad937067230ba70c86d6edec8ea8ddb5c443d02173ddd4be5453745"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/epoch-8-unjudged.jsonl",
+      "sha256": "35d685a8c0740c992bf6db4cc26ee63ec03b35954658a3f80ef9291457de2e4e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/exclusion-receipt.json",
+      "sha256": "9998ccbc9beaa6ceb1d757e30eae436d887c734f9e97b2cb891592bc373d327a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/freeze.json",
+      "sha256": "ce6ab1bfa8015a084124be39c8316587878fcc79b4551ae01a6cd760d55fa8d7"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/native-information-collision-audit.json",
+      "sha256": "f116444807f6727ff77b71f8c8645d838c382f726b5c6792655f85c5c6dd7f14"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/numerical-fidelity-scope-audit.json",
+      "sha256": "af504a7a87560d2265d9540b7fed7a48e5325b48e80aa884c1f0adbba2d5990c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/original-summary.json",
+      "sha256": "93a9db590cb54bae4a43ec351894dbf0104f8297e6acb645d2ab68d4035051db"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/original-unjudged.jsonl",
+      "sha256": "6f94a101a4de69fef0e3c416f9a803cd55d7f250d5f47d4fbc2d26998c5b96eb"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/precache-disk-estimate.json",
+      "sha256": "2ebe921aac65828b75419802128f83368cffddc767df2e3b736c64a7cb7403e9"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/pretraining-contradiction-audit.json",
+      "sha256": "d497051394ba13ed94a035cf9b8de31049a60bdb4a4b2510fdf7d4f8ed5655db"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/pretraining-font-balance-audit.json",
+      "sha256": "fe15835dc5297c53020805273f987ec5910f38b188938680e5671bb34bac3ab5"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/reconstructed-untrained-summary.json",
+      "sha256": "cc3ad875241a484845e923eedae3c60cd85f9feeec3092faa8c14e3a18d17ae7"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/reconstructed-untrained-unjudged.jsonl",
+      "sha256": "09a632bf7396ffc91a5e9a98644b3c517c541d8d2581c4b0a003d7f56cd3995a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/selection.json",
+      "sha256": "28d2afeaf5f6aef35cefd7243a7ab8af0ee909c4b133ae9f99240073fb5a53ea"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/source-proof-epoch-2-unjudged.jsonl",
+      "sha256": "a3b561f3a503c14c913d0738e3d9b58d288eb57c318fb06ef8a3edb22adc0c99"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/source-proof-epoch-4-unjudged.jsonl",
+      "sha256": "86e62ecea519e3bd837f3e499962b92eb4bf6f18e272749c4ec6fd7820acf11a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/source-proof-epoch-8-unjudged.jsonl",
+      "sha256": "e3b131e05bed33b45d7e770c19c220abd0292929af4d5823bc85317e7cc759e8"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/source-proof-original-unjudged.jsonl",
+      "sha256": "b6e3fac8c4609954e3b64419e0fe133eefee2e9d2f50242aa35afcfb1b65713a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/source-proof-probe-freeze.json",
+      "sha256": "653e9d7d0a68b596084b53d8dad338e4e725b677a46bdcb8a80da14861f5b36b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/source-proof-probe-summary.json",
+      "sha256": "0c12cc771116bc84a74b3e05f357e5fd78c42f4484b2d4eaaefae9312d488277"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/verification.json",
+      "sha256": "21f63f9ca0dc1d1da7089c7a3115cb6dec7eac365e0ae1f8db1a0b46ddab6425"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/backward-budget.json",
+      "sha256": "179bfcad8a629dbaf4975c27a74dbe2dd48bb3e56794ea889162ca2364997e31"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/fidelity.json",
+      "sha256": "1e3addc4f2ed0621daeac6558fe077dcbce6e0f76197b89608b65ac3c956e40e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/final-font-reservation-audit.json",
+      "sha256": "71f84eee4380359e9d7403ef0fc31d53c206c6fd6dcc8d235c5618df3a06fcdd"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/freeze.json",
+      "sha256": "5700c2462e7628003293d595976679bca6838da8183538bd3cdfa48939d40e9e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/handoff-manifest.json",
+      "sha256": "d2985c349a5ae46bd0339b13df3f6fe9ef924a97dfe38ed55524786c4abc2b1f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/initial-preflight-name-collision.json",
+      "sha256": "e6770c9e9e49975219d08c3a13872eadd894100c617742c3bc81dbadf05641fa"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/shared-source-audit.json",
+      "sha256": "d3efa3fe1cac204b0b376dabd5269a2c38f53172eb928f14275ced1f9e2c6a07"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/unjudged.jsonl",
+      "sha256": "a3ae182ef16a6ffae18af1e77f6b449993a463d389d33777d2a28e92bfcda0cd"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/fidelity.json",
+      "sha256": "26f80424469c169b92a80d0ce746a5b3ff4ce73c4d34332bba3b98055d0ba736"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/freeze.json",
+      "sha256": "f479a368c750e6df1c3f86afd819ed6940b8ec5a6d134ae5335f32da090fe765"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/loss-equivalence.json",
+      "sha256": "031c5b1a815d0289de0b468aa9b70fe3ca5493977e7ab51f4f3851ec7f030fa4"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/corpus-verification.json",
+      "sha256": "12e3c3bef5ade350e4f9b38d5f7281a9324e6fd0832e5271b32b101ae8e94bdf"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/development-diagnosis.json",
+      "sha256": "f3db84919501121de203f20782a1a54a0629c557089a5a18f805e4abbbb0c694"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/edit-diagnosis.json",
+      "sha256": "8f4f3ee6df5f86ccc48a39679b4098b4d06b20775aff056d816eda5364849133"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/epoch-16-summary.json",
+      "sha256": "d298c8f9a6c729f78129f0fa116b80fe4edbf7d67f6f227071a07027f35b0b12"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/epoch-16-unjudged.jsonl",
+      "sha256": "2de5a8ca9ae69d2742cf70521ba67695de652d8c3d200839e98cf7cc24f76459"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/epoch-24-summary.json",
+      "sha256": "cc09dda317f7286b1f45ead05946b5c060bb178b44f7a0565e60b0f617a5aebe"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/epoch-24-unjudged.jsonl",
+      "sha256": "01835de30b5fcd8b403eda03981bd48883aa12bbb4163f12693888a9fd108fa4"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/epoch-4-summary.json",
+      "sha256": "eab860acee687b895ea74b5d04085e9e8b636e7b4e52731b66be8d1b6f047295"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/epoch-4-unjudged.jsonl",
+      "sha256": "f2465889204173e66082bc0a62b18494cddfa12e4ae05e53c880dc87790943c8"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/epoch-8-summary.json",
+      "sha256": "2b8579878c73418120066cf6cc26d792050058683df2f923994aa2e7f2e38d03"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/epoch-8-unjudged.jsonl",
+      "sha256": "f7c0f3c76fcd30fd15ff1a90e55fdc691601a989d95b2922c851852270fea1e7"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/exclusion-receipt.json",
+      "sha256": "c4108d40cc072224416cbd0d2e723e86535e60a3619b54bfefb92898c352aaa3"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/freeze.json",
+      "sha256": "6f8990f6afbf8c99e8b63bd5c5198b4b304fe2e9ca124544024f6bd8eb87d79b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/original-summary.json",
+      "sha256": "82e003cbe2603a3515b9e8b8243dc3985c8013b2cbc1bd0c801e233e9b3e3a89"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/original-unjudged.jsonl",
+      "sha256": "9c18d3d2fa26248c9c5e8ab072734ee528e61748b6e6435612148e0d32e9fed1"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/selection.json",
+      "sha256": "98043207eb0350825b001cb9a09a2fad5f70ea878e3e949ddec2013b228cc788"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/source-proof-epoch-16-unjudged.jsonl",
+      "sha256": "3d684aaa3d8860aec726a691e6a30b718117c229ee2b1864428c963d694baf72"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/source-proof-epoch-24-unjudged.jsonl",
+      "sha256": "a0b4d8228e3ddfe9edc40feeb5f52d0c2545491eb2c81bc7740269996e124455"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/source-proof-epoch-4-unjudged.jsonl",
+      "sha256": "ec91e2de33982765b2ec6ad8df5592a9b4ed9a18548beb7297643f5e5b5e39e2"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/source-proof-epoch-8-unjudged.jsonl",
+      "sha256": "6aece97be76b2bc373dbd960d02adca702db8d7fef03332c40c5c76e45e8c79b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/source-proof-original-unjudged.jsonl",
+      "sha256": "b6e3fac8c4609954e3b64419e0fe133eefee2e9d2f50242aa35afcfb1b65713a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/source-proof-probe-freeze.json",
+      "sha256": "c900f33c757fb8cacd09af303cb4759e33d9941d53e6155bc6396127058380db"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/source-proof-probe-summary.json",
+      "sha256": "6c7ae9f9134a5f13017e760f1255121484ba6ac382e018792d1d291502b1f6f9"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/verification.json",
+      "sha256": "5aeb80cd6847f1bd6d48517093f2b705f41c2e4bc8e317a190e3e122bcefe877"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/unjudged.jsonl",
+      "sha256": "a05efc7523af78935bef24fdbbd8b6c15c3f8324f96d6316e764a4a3dd0128cc"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/corpus-verification.json",
+      "sha256": "9d49c49530c0188fc255f1d108228fe3e7d8ea504425ed3514622e7ffc547852"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/development-diagnosis.json",
+      "sha256": "dc981d0382e80c7ee920ea518210fb96e0a4e77d6d6b08c7495be59bd614f43a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/development-initialization-fidelity.json",
+      "sha256": "70c7c7391eaac19010d26fd1ef2bb644fe530fda28ba5f62ed89d918f2d9313c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/edit-diagnosis.json",
+      "sha256": "e7c01a61da2801def3849beec45457125b52dbfaf880edf38190b934d5000a97"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/epoch-2-summary.json",
+      "sha256": "14a92371129971852f3f18189a710e56d0bceccb616767218b63bbb8e2b39ea1"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/epoch-2-unjudged.jsonl",
+      "sha256": "2b5812542c5d2fe17d91321c18a1dd337f15117c55bf454291ac187056224814"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/epoch-4-summary.json",
+      "sha256": "aa5c7abfb63276f1eabc5a02c10a9ab5367a9eb246e2e0dc1c3c94f3e71f0b2b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/epoch-4-unjudged.jsonl",
+      "sha256": "6ce052d5aaec3a2c0a7d70c0b41c7ce13d52e2014b4b47caca60f58e2f2808e3"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/epoch-8-summary.json",
+      "sha256": "761a6fe1af63edadc148a6783173339b739343733c8a2f0d5711e938de14e757"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/epoch-8-unjudged.jsonl",
+      "sha256": "a45a79e9153c730675fc8176121f8bbad9976d87cc89cf4ce01609d0b619bd00"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/exclusion-receipt.json",
+      "sha256": "4349ae497f85ff4312ae3bad0399597e15b39aa624052f0534f3e357164716dc"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/font-metrics-diagnosis.json",
+      "sha256": "84d1ef447da8562405e687ec5860732d90951fee7ec906da9e295d4e419eb328"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/freeze.json",
+      "sha256": "982c08929468de36e9e8a5bea499d49d261230f8c89002d75ee47ca8e9b00566"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/input-ambiguity-diagnosis.json",
+      "sha256": "03241a738a4d82f8b47b42f260257000708f6ba626765582dc60b22bfd954aa7"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/original-summary.json",
+      "sha256": "b3083a76e5b025f81319a20022230979dddb79498c2273d414d2ccd2a0009b34"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/original-unjudged.jsonl",
+      "sha256": "fdf21989fefbaaa26456dc7d30796489c7845d3f475673cd6fad55c67f31c1c9"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/post-run-font-balance-audit.json",
+      "sha256": "c3198c1be22a924fc753c1fc7e832e6f362e290ece9fd36449b0ae31bae47fbd"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/pretraining-contradiction-audit.json",
+      "sha256": "d497051394ba13ed94a035cf9b8de31049a60bdb4a4b2510fdf7d4f8ed5655db"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/reconstructed-untrained-summary.json",
+      "sha256": "e290039f0b4ee82fed487fd094ae56d5cf6f51028d6d1053713a9cdefa8579df"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/reconstructed-untrained-unjudged.jsonl",
+      "sha256": "d0c5eb3816634caa5c4f86bdb8828974b04f6f7d6f7ea42742d1960ad182d626"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/selection.json",
+      "sha256": "a981021724e54ce3957b4aecc7b0aba4979445c1f0964aeda293dd31cecea871"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/source-proof-epoch-2-unjudged.jsonl",
+      "sha256": "1b15cfadc2e657cd48ac29c9f58333a2004b2f9d6bf5df359fd3bb574957a8a0"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/source-proof-epoch-4-unjudged.jsonl",
+      "sha256": "233ed93834ae44d233b965b9065491c2639735ec2c66f2567c88cb33aadab52f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/source-proof-epoch-8-unjudged.jsonl",
+      "sha256": "8bbd855f11b6f1572d8ace181a0274202097205cd03fce6e5d5244d4eda48c19"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/source-proof-original-unjudged.jsonl",
+      "sha256": "b6e3fac8c4609954e3b64419e0fe133eefee2e9d2f50242aa35afcfb1b65713a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/source-proof-probe-freeze.json",
+      "sha256": "7150982289f919e08d5bca21d35e4a461fb1a4ef53280c5f16b8d2c58833d8fe"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/source-proof-probe-summary.json",
+      "sha256": "248487c67c482784c6897a10c7c3aac8d49c09ddbe20f69a620e17c41216661b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/verification.json",
+      "sha256": "1ba85e39895714a774c0b7ab7ea4c21c5c0048de64bb976b6f81017f4edc3f11"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/backward-budget.json",
+      "sha256": "dfcf3668ec55b6e73ae2ac359866d0ddbb33c23b7a258cc80743bfffcaa62362"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/fidelity.json",
+      "sha256": "47184fedbe6a05cdd9ef2c3746b111894bc4eac2e34634161587907255511328"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/freeze.json",
+      "sha256": "af39eba15146e4235c4044db42c1f679d5e29c630246fa95f37b02ab5a17ca08"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/handoff-manifest.json",
+      "sha256": "926c5397da23ff9c3d352ab50584851d91cfac24ac6496ef747f0e7506cb67a3"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/preflight-path-error.json",
+      "sha256": "f8029e34a597f9f84f62a741a311231a9a762430c2aee9e9f4b72c533b633282"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/prior-font-coverage-audit.json",
+      "sha256": "af2deb0239337217d8f1fa70352dc85e26b5e3587da7ca1d39fb1c7a387be16a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/unjudged.jsonl",
+      "sha256": "a9a1d70d055d956451ef6375261446f673a9ac88d1f70d71264a2d3405c5e576"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/corpus-verification.json",
+      "sha256": "186b1cce09df5f06e288f08b192e854188caa4912457e49361618f14ae18b836"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/development-diagnosis.json",
+      "sha256": "7d7798729a81e046871e189350703b02ba275ff622fed3db5b56db7485843e72"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/development-initialization-fidelity.json",
+      "sha256": "5bff9b88995f8d4f7bc7d1b357b264e1b6df047bfa566a9758032cd6614c8fed"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/edit-diagnosis.json",
+      "sha256": "290c4daa863093e97c63b6b128b7c5352f04adb555e24ee7248a1d3ed1a5850f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/epoch-2-summary.json",
+      "sha256": "37eadfec812a50a8c2557728c8c244e8939294a8668657571c66a1916d477e9f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/epoch-2-unjudged.jsonl",
+      "sha256": "857a3a6325edbefdd23ec14c42beac4e21d76be463132751a87680700d2a5cfe"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/epoch-4-summary.json",
+      "sha256": "c29462064e67ba4929f9197dfaea0907941242f2f693d08b9f1ff26d4b7a35c1"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/epoch-4-unjudged.jsonl",
+      "sha256": "49bae68d48b44dc3dd249e02816353cd05b4712fd7bb7ba8151eb0e2ff769e3d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/epoch-8-summary.json",
+      "sha256": "f0c791d93518217f5868a26bf8929e642cde0240682fb5cb06fbf9b22ab37fe9"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/epoch-8-unjudged.jsonl",
+      "sha256": "83abd837a967362d7edbba40117caf8cf6e0aaadf72060b255452a31e5e49474"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/exclusion-receipt.json",
+      "sha256": "5781f6a891612bab2c4c87d32011042a192100fae4ebfa9d53e6b87409f195cf"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/feature-collision-diagnosis.json",
+      "sha256": "2efb504def5639ea2d8bd8719368a19e2d561546f9ca8b42366aede060817320"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/font-metrics-diagnosis.json",
+      "sha256": "150bd9007a7844cffb2d3379db3517cdf6fd3b51c5782de79c059117a6340a14"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/freeze.json",
+      "sha256": "58b17cc696d5f5b0a66b8e94bb1f865cee796588016988256813f8288f30b921"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/input-ambiguity-diagnosis.json",
+      "sha256": "4b382ed8ee1598d2e66ea32247945f6cb7dafa303f11f748c9e4589d0188121d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/original-summary.json",
+      "sha256": "0fec0549968c0ee8959cc7299ce669590d3a878516e7dca778f967aaffa138bd"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/original-unjudged.jsonl",
+      "sha256": "035bd4d833585c08680ca2914d1fe975fcf092d9811e0af0a4c6a34766f69e7c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/pretraining-contradiction-audit.json",
+      "sha256": "72222c7e953346da83f808c27b73ada47f144f7f1da4d0e22ee2422e4af608c1"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/reconstructed-untrained-summary.json",
+      "sha256": "ece6f88a762efca59a942414ed2d49aba3928a5d7de5bdd2d5860592b7de23f2"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/reconstructed-untrained-unjudged.jsonl",
+      "sha256": "9fe85547353536f970bea2451121f0147f6b3cdd4d0b62acf86787d7ab258f8a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/selection.json",
+      "sha256": "a7b310f4d8d1ba3f88bd0914746960019176ec178b3d32ed2c202a452475d79b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/source-proof-epoch-2-unjudged.jsonl",
+      "sha256": "9c6ff262e0b800840cfa96660b939c479fb091ff7a2e20e8f82e5627fa01ca4c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/source-proof-epoch-4-unjudged.jsonl",
+      "sha256": "a64fa9afe2ae7f6be05aa2824647b220d60746529694af6297690c0a613c155f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/source-proof-epoch-8-unjudged.jsonl",
+      "sha256": "46cea2dfe5d2f048ab9552e6e77de64a2059d4b0f075a2075cc10c0ccd1c2505"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/source-proof-original-unjudged.jsonl",
+      "sha256": "b6e3fac8c4609954e3b64419e0fe133eefee2e9d2f50242aa35afcfb1b65713a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/source-proof-probe-freeze.json",
+      "sha256": "c67fb8447619c77e49723ff6e49fdd9c6dad305e14c3b43b35f98485b208f470"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/source-proof-probe-summary.json",
+      "sha256": "1cf33f2af0ed2daf8a55534e3967b55b02fec9a586cf01f18c3132a68f048feb"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/verification.json",
+      "sha256": "58578df308108e80ce8692eaa1023ef7adf643ba54184dfa4efd9adab986a1df"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/corrected-epsilon-v2/backward-budget.json",
+      "sha256": "0d1fe9d8d17b127e9cd2ff6b94d8c00b71f3dc6e826b71ef00a7e6ed897271e7"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/corrected-epsilon-v2/fidelity.json",
+      "sha256": "d7fb9acd5a28fd832e84f6c57c8f5374cd880bc0dd1a022663d7a78004b1e62e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/corrected-epsilon-v2/freeze.json",
+      "sha256": "dd675b7c79105908d8860af272dd2858bce624c800a6a99ef6aec723f8c53e01"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/corrected-epsilon-v2/unjudged.jsonl",
+      "sha256": "781a6c9bda07a8f92b6bb6d939d8b0d40fdb3f8a91f41fe8edc1573cf061116e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/epsilon-correction-audit.json",
+      "sha256": "66d259da69e32670c5006cd0e9f02f43280e5cba058315c95d778e0444252892"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/fidelity.json",
+      "sha256": "095f8599732565036cb6074bfebb8bef3088760d4f863588746c4e9cdcca3e44"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/freeze.json",
+      "sha256": "223c8a11c9b5297ab271ee25585b910bb5586d2bed1a70e1c82eedc973413f9c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/handoff-manifest.json",
+      "sha256": "f361b4d00c5fc786a468cdc3ad98b0777f707be8b73c5abc4e51472ea7a1aed5"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/numeric-failure-diagnosis.json",
+      "sha256": "8e2f117523ac8002e6854ab9cac4f85e3739f2a219c964770e904ddf64983b1d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/unjudged.jsonl",
+      "sha256": "d23a43eaaf3c49fcb51839bda5daea9a109a2c387fe57e28bb61a65f63da178e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/corpus-receipt.json",
+      "sha256": "160acf2a4aa396e024857c586f77fb49fed64bbd27bfe1c69bb8a247631c27bd"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/corpus-verification.json",
+      "sha256": "2718f156a8c5c573518d973784a0f4d7409d26d01ca8eb3575944e74ba1c7ec9"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/development-diagnosis.json",
+      "sha256": "0868f1e82b4aa828b9abab322501f04b0d96bb4ddf4cb5dbcf27005b5eb849fe"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/epoch-4-summary.json",
+      "sha256": "b2e14c966d06c035e03071e1745a0b00403031181f6088a7bcdf2d82fd65b907"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/epoch-4-unjudged.jsonl",
+      "sha256": "1d57a9ac2d6943871f0fbb9fa193929c74027d85eb43e7018d04c985f8f93e8d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/epoch-8-summary.json",
+      "sha256": "4cbdd846c39a775eaa7b85ce3db43744b6a878c6f2ac858549933e47c4671491"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/epoch-8-unjudged.jsonl",
+      "sha256": "8971c234e24cd8e956ccc87203e761de21953c54f5b7619633f03bbf170270db"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/exclusion-receipt.json",
+      "sha256": "2fc6e69852f4d0990237e19875af6bf2293ee1e30113008a32338fb12c129c3a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/final-opening-gate.json",
+      "sha256": "67a630de24ddbada99267c18c6888161c1a5c8ec8864b3481a9d03b4aa2481e9"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/font-receipt.json",
+      "sha256": "0a7ae00efbca58dc9aaea01bb2fce9dbf247c369546a05893fba7206443e0264"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/freeze.json",
+      "sha256": "39783a112ec0c56748776465f4deb67f9ca4f630c67b50dffbf7adcaa859759d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/gate-registration.json",
+      "sha256": "657d3c8e5d965aa74fa26e946a785d23fddfc4fc1053bdc85e4c7f2688de2c70"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/initialization.json",
+      "sha256": "4beff0948491bbef60d806ccd42af01084a075dbe7c25c72a03122b2a16f2bd0"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/native-input-contradictions.json",
+      "sha256": "a20681850c3a0ca16f62a9f554a0b9931587cd8651c0082e7a69b748412c7902"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/original-full18710-summary.json",
+      "sha256": "2c017569b76fb16bcfef395879b4f21ace9ec98d869d0ecffb0ffa847d838d7c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/original-full18710-unjudged.jsonl",
+      "sha256": "297c8a346a7048444b7bd90481f708fe78d9e6aaa70312c4b3b08ba8af77b68e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/post-run-input-precision-audit.json",
+      "sha256": "dcd4b9fb1fcfb1a3c171932a98f7bafcf31ab4b8835ce02923135fad4c475828"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/reduced-untrained-summary.json",
+      "sha256": "44096a363781c51c0d6a4c36e9a0e725631e578ac502b6ee20869dd68b6753b8"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/reduced-untrained-unjudged.jsonl",
+      "sha256": "ac9a55d3e8876b90daf9765848b7840a1c8efa5d689e1841024ec4d0fa497987"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/selection.json",
+      "sha256": "25194f649e0628cd9ab1c46b4504ac1a7e4886047e04240acf1d31b215c99e58"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/source-proof-epoch-4-unjudged.jsonl",
+      "sha256": "aa6827f1489327db7a8209b0031009605d78b080009feadd7417362ab6f40094"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/source-proof-epoch-8-unjudged.jsonl",
+      "sha256": "208be7eb969c4e022f0966a02ae654c637cc84870059f4eb98b7ac79de75d404"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/source-proof-original-unjudged.jsonl",
+      "sha256": "ac227aadb0f5478721ff22589dd08a9381b6ec1f67757ef1bf5c13d45ad315fd"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/source-proof-probe-freeze.json",
+      "sha256": "ae2f562925634b1c154f30a71387ad83f83a9b0c639337d08f8f2697bc7f6cde"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/source-proof-probe-summary.json",
+      "sha256": "aff6322984045dc0f3cdb426288c801730a41bdab991690fd3e2cc92dc1127a9"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/source-proof-reduced-untrained-unjudged.jsonl",
+      "sha256": "c20e17de157aeaf5cada083a255ac2e226769a4199a9e006cfed289baaff4430"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ascii-paddle-transfer-v1/verification.json",
+      "sha256": "304b5fb25d659b59b5f377b328bbbe7a50f1fdda73d70ed2c76cb89e77c39294"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/coreml-conversion.json",
+      "sha256": "588b61cf8ba4ae99018fbb479cac03cba54df0bad6199c97b9afb9707ebeeee9"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/development-selection.json",
+      "sha256": "229c22a54655e901683a6d8f78b5eb968cb3778269c3162320a37a337e44d3c6"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/final-baseline-controls.json",
+      "sha256": "32a1835d64d0be429f331d258ac605d5bc9285e2239cd53915765376fdfcc317"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/final-baseline-records.json",
+      "sha256": "119262b98104861a4ed9bb84eef164af4e26dd4ade3fc89ccbba3f7fb7052356"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/final-selected-controls.json",
+      "sha256": "5dcce281f198e280669df4a64db6abbacd308313bc7705351d9d253ab834bfbb"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/final-selected-records.json",
+      "sha256": "9fc16a6499e854be98ddb67ddfee385ec4b9c50bce22ff68e984fd8b46ac8871"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/final-summary.json",
+      "sha256": "149084fd406c69d3a9e9de5a1b75b7ec63d9936feb807f565db82c91bb00b408"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/inventory.json",
+      "sha256": "f4a94d94b96b521f35981af803abb66606c7f6275c25d1eeae3c85b22cdef9f2"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/onnx-parity-invalid-torch-mode.json",
+      "sha256": "94981ba274be36e1b722bc46f55c4bd76ccf48a9c4882b31cee42395541bd8fa"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/onnx-parity.json",
+      "sha256": "6644ca07d4380d2373af38fa9238e8bca09330cebc7c2fba629f1ec9f2e77d0b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/onnx-profile-baseline.json",
+      "sha256": "34598e01aa89a9420bb5fa10952fc03d3b14d973f894925b785f841c3b670106"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/onnx-profile-selected.json",
+      "sha256": "f5f2538eeff075c47b9866231d76137a2eb4e0a64e0442cee23d8c4cfd96cd11"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ood-baseline-records.json",
+      "sha256": "a2df3f636c6a9ad420555b3d13a40006cc3aa3438c2b8aaa6a374e5cbde91556"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ood-selected-records.json",
+      "sha256": "fda756ee36a903934f13bb5884b1bbf7db1f54a9f76e0e917c20c4452761367f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/ood-summary.json",
+      "sha256": "39c19889df7fa74002239735508b50edb428420cbf0f5ebee1efdce2813b7538"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/portable-archive-receipt.json",
+      "sha256": "1f412bcb9718628c071f1fa2f79ec541c7335d1b858c9f3e2bfebe239652e1fa"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/portable-package-receipt.json",
+      "sha256": "2967c22010e51a8f0e41b2c0c161095cd81e2a6e112e0358f57dbe21de933ba5"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/reproduction-receipt.json",
+      "sha256": "f4252e3a30e912fd6e8a203a6562f2acf0c6240d6fb6f5d6da6bf8e85486264b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-synthetic-training-20261013/retraining-diagnosis.json",
+      "sha256": "b5cad364b3f7aade6c156d89a5729e50ab47de4d42015f6e215b755b0fe650d6"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-v5-server-frozen-20261013/freeze.json",
+      "sha256": "518c4ab9332d3a1561115be5ae3c4730fb91c794857670531add394fb6ac854a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-v5-server-frozen-20261013/inputs.json",
+      "sha256": "ac20c6ca0239b7162d8e3fe3b942e7ea753213b205110e259e5a200187c9a41a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-v5-server-frozen-20261013/observations.jsonl",
+      "sha256": "6cee821891f59da1858707283087e9b9314c5e1b278cb7f9fb3e8871d51d382e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-v5-server-frozen-20261013/raw-receipt.json",
+      "sha256": "08da138fb7c6bef0cd5642239a376d78edf081f37e4efd26c06c7e52decc03ac"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-v5-server-frozen-20261013/report.json",
+      "sha256": "fb7bb97abb4a571cb691b7c2085ddac9b1d3b43d38d61af873f8ded8acbfaf6a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-v6-medium-aspect2-20261014/freeze.json",
+      "sha256": "699555ec0ed1641981059b0df37c9d3cf089f2d903e7426bd6916094dddab56a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-v6-medium-aspect2-20261014/observations.jsonl",
+      "sha256": "c3a85382543d764d04a81ac72ca93dcdf334b98643de047c5446f86dfa1e6ee8"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-v6-medium-aspect2-20261014/raw-receipt.json",
+      "sha256": "fe5a743eeb2efee99126c960546e72634bf26eb55d166d7658c9393e41a11cc8"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-v6-medium-aspect2-20261014/report.json",
+      "sha256": "d92edce5ce85c42ba992714a1ca2e067efcf8dd7b14a63d3976608c2250569db"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-v6-small-frozen-20261013/inventory.json",
+      "sha256": "ae1fbe1612c14a0fcc6f07bfd27f2c6fa7d2cb0cf1889d6690e82ea9ae623a53"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-v6-small-frozen-20261013/linux-freeze.json",
+      "sha256": "d8414afbb0d21259a87958d66f7fa02f8c3810d7bd7c2f138383d5bce2498e38"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-v6-small-frozen-20261013/linux-observations.jsonl",
+      "sha256": "17fd346ddc35ee96e3df774662003acae5b10801869f54211e1398fb9c3519ac"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-v6-small-frozen-20261013/linux-report.json",
+      "sha256": "83a159f220e6262830669be458be4abb92b46d2da505a72e4f90f262cae28922"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/ocr-v6-small-frozen-20261013/windows-report.json",
+      "sha256": "8bfae4bcf7a68ad3a988b75c50480b8e52cf7f6c6c61eafaf546060293591c1b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/paddleocr-vl16-clean-lines-20261014/freeze.json",
+      "sha256": "9b91ff79df3149dba692ecc8cd0fa19766c4afa8fa069e17ed507ae026fe6f25"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/paddleocr-vl16-clean-lines-20261014/observations.jsonl",
+      "sha256": "eef35f17550cb9d8dc1eafd374eef61d6769f43418945b5e37dfe10a7eb59077"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/paddleocr-vl16-clean-lines-20261014/raw-receipt.json",
+      "sha256": "7a862b2d2831fd2fb8e1cb106641353621c436ee2e2bb5ad71d8c9e47c3a4aa8"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/paddleocr-vl16-clean-lines-20261014/report.json",
+      "sha256": "fe6c71f5b800763aec4cddceb5fe8ebf915a343d3f6683ea4ab58243af66f7e3"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/paddleocr-vl16-clean-lines-20261014/source-availability-audit.json",
+      "sha256": "c81203b041652e7daa684445dbec850b19144a27336bbbf6ae7fe361b6871138"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/pdf-colour-acquisition-20261013/inventory.json",
+      "sha256": "bd28bd791633ee5a4f1c90c7d87547523e12c8e01377a456f459efc46edd5c6c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/pdf-colour-acquisition-20261013/linux-baseline-report.json",
+      "sha256": "fe1a0609d379114aa1b308ca87c5833429e25e49c2932dc3da10a43810eda16c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/pdf-colour-acquisition-20261013/linux-candidate-report.json",
+      "sha256": "a9191ab6b57dad18dab5e2c9cd8d15b9b5f43cf1350d2a8397b508c748177b3c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/pdf-colour-acquisition-20261013/source-receipt.json",
+      "sha256": "b74fd645601a871c8785d64d5847100b08985ccec82782076d394cea21376b5b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/pdf-colour-acquisition-20261013/windows-observations.json",
+      "sha256": "97299a8337ce83105565333f7e7336c4f03280b8d1ae0003e7a1ab2372e5d4fe"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/pdf-source-final-20261013/inventory.json",
+      "sha256": "ed1bb7d30ce9f89977e1a4d89e5830f0ddd097744c0caf7c71b128670b783f46"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/pdf-source-final-20261013/linux-pre-generation-freeze.json",
+      "sha256": "ff3c232e72605a499c7d604ffe2c2d43e7bba607a259e6e38b056e92e94606c5"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/pdf-source-final-20261013/linux-report.json",
+      "sha256": "f7f966aa6ccf11e1317c51cc3681ca311eb6359a1d45a1bc5e4f9b9d6f119f40"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/pdf-source-final-20261013/source-receipt.json",
+      "sha256": "3f146a7d05a3b99a5eb9b74a809cd6dc4e1d746391d23fd6ddcd8e62adef8698"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/pdf-source-final-20261013/windows-observations.json",
+      "sha256": "8d65e7b1cccce4d17699ea240d9f8a8697e3222478af9e6f0d4eaaa8f99d8f64"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/physical-ink-column-audit-20261014/freeze.json",
+      "sha256": "dc51192c4fb93c8b47003f1c9a1d55d73e82b5d728bbcaffc88fba0bcc52f7f1"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/physical-ink-column-audit-20261014/report.json",
+      "sha256": "b03f2b0af7a481b486af3d4775c3e1509cc467ed555c097522832e5f33487626"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/physical-ink-column-audit-20261014/source-snapshot-audit.json",
+      "sha256": "0536db26dcd54ecbe4415e68b11aa974fce6a6437b48814b8d5056a6a0cbb632"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/physical-ink-column-audit-20261014/unjudged.jsonl",
+      "sha256": "2ad27e4092b7ef80204f44d6f9619b84cc846fa13aaf74480b83b211a2300b2c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/tesseract-eng-best-20261013/freeze.json",
+      "sha256": "8f0d2d30a7cd918acd70d79696b87ba7060f0630824f5884b870584a40c7bcf0"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/tesseract-eng-best-20261013/inventory.json",
+      "sha256": "18db720b98c32154f53270c7842e40f4f43e28bde1cf1b5dff130a43fb80de3e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/tesseract-eng-best-20261013/observations.jsonl",
+      "sha256": "f22a80821c75b59c7a01e8cca7702cfb6e79e9b5bc5364a22723e2ad9925e67a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/tesseract-eng-best-20261013/raw-receipt.json",
+      "sha256": "430f1a16d3cbf2c4ffe9eff99ef0a85bbfe28dd033ac2c85651fb9f52f3fe78d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/tesseract-eng-best-20261013/report.json",
+      "sha256": "4fc4ba1a53146e52f4937f9d046957585960b65e7007f7795185778275fa756d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/tesseract-eng-best-20261013-initial/freeze.json",
+      "sha256": "0369e65611ca0fcf574b83106b8470462feb93a64becb262bff202b8e21f0c22"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/tesseract-eng-best-20261013-initial/inventory.json",
+      "sha256": "f8f6dfad0a10b3d301292fb1e17c0c028f8a021291d585e271b21584ef66cee1"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/tesseract-eng-best-20261013-initial/observations.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/tesseract-eng-best-20261013-initial/raw-receipt.json",
+      "sha256": "be4fef76ee9752cc790593bc7d6083ab57fc2d0e0944bdd454b7e1c16bae5354"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/trocr-printed-headers-20261013/freeze.json",
+      "sha256": "2dfd0d556232a0a74cb2ffae672fccd042712ee9271ccfcd62b4fe13a778a77f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/trocr-printed-headers-20261013/load-compatibility-audit.json",
+      "sha256": "d0f5a81041169ed0ab4259ee67a3eff295f2a2c9b046694a941daf0e85a8697a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/trocr-printed-headers-20261013/observations.jsonl",
+      "sha256": "d370f67d8a089c845afd75586c30e135afba6feec54605fdde08f010f66997fe"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/trocr-printed-headers-20261013/raw-receipt.json",
+      "sha256": "bf29e83b57f292bed894a1d174c7d745459533d5e2f0e4b54be5803d1f480b8a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/trocr-printed-headers-20261013/report.json",
+      "sha256": "eefcb4dbf5def09193067cf7736f91a1459e40a39a9c1e99cbda071787564943"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/trocr-printed-headers-20261013-initial/freeze.json",
+      "sha256": "a1c3837d3cab8b8ac722862125da5a9c168e56245b9d1a6f1dcc9b581a6cc71b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/trocr-printed-headers-20261013-initial/observations.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/trocr-printed-headers-20261013-initial/raw-receipt.json",
+      "sha256": "c05a3a1fc772194b93c1f0d91c2719d57333b02c59de0febd99e69253dedf473"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/vision-jp-ocr-frozen-20261013/closed-assets-cleanup-receipt.json",
+      "sha256": "c0bd5b4ecb3414b8c0b05e1b69ac14ba84520b30de694bb176222f7352d5ec5e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/vision-jp-ocr-frozen-20261013/freeze.json",
+      "sha256": "2405d9c55ebb8c8e168569b468da8f966a6a38a02e41e6e222614be13f96820e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/vision-jp-ocr-frozen-20261013/heading-protocol-diagnostic.json",
+      "sha256": "fece54a49735b19a0bce33e94e7472e777ddd09d7b9eb66160d02bc6aeaabb69"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/vision-jp-ocr-frozen-20261013/inventory.json",
+      "sha256": "83b6b3b4625e2f74280e86166c26a875e1ab36ecae765dd8dd0a2b930553c5ad"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/vision-jp-ocr-frozen-20261013/qwen35-ocr-jp-f16-raw.jsonl",
+      "sha256": "e4b92fed011f75c880afcaaac95d5db231eef6ab166a02debc4d19a4428e5d92"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/vision-jp-ocr-frozen-20261013/report.json",
+      "sha256": "f4dfb4f932c9731dff4dfac66ecef92db859e574a495aba34af3da6ecd9a5171"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/vision-ocr-frozen-20261013/freeze.json",
+      "sha256": "22b09756c03aa2512e00920a5a556e5acdc4c14a343cc45e3f0c593800fb1731"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/vision-ocr-frozen-20261013/glm-leading-newline-audit.json",
+      "sha256": "78d36a0d295926c45a8e6c17835accbc52b96982f7656d81815e4bef323a0e5f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/vision-ocr-frozen-20261013/glm-ocr-q8-raw.jsonl",
+      "sha256": "3c85cf852754f6535169563358e9fc152cf8f426ea00c2df18692f33e3baced2"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/vision-ocr-frozen-20261013/inventory.json",
+      "sha256": "3786c15f115a6a186f6e245d1dc58c0e108f18d8edbdc34571a3a9a5f382fe57"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/vision-ocr-frozen-20261013/qwen3-vl-2b-q8-raw.jsonl",
+      "sha256": "f3e1dd4c0b7c99ba846a0edf483639c23e5123131d3c671d08d9121812e859b0"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/vision-ocr-frozen-20261013/report.json",
+      "sha256": "662309b30d9885436a7b221312d7f95386e0cd5ec460abac1856e36091aff81c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/whole-line-render-veto-20261014/freeze.json",
+      "sha256": "f3c5e8c08e42d64953cf62e2785c84b3625340f2b3757ade30d9367949ad0dc5"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/whole-line-render-veto-20261014/raw-receipt.json",
+      "sha256": "7a1c87cab6275cc0f57b243963cf29fd9cfaf6790cb78507e2d428ce2ff2ad5d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/whole-line-render-veto-20261014/report.json",
+      "sha256": "797d83a50cb81bb73c5201a5b4ff937e154cbec7fa7dbc089ca9cb3f03d9f823"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/whole-line-render-veto-20261014/unjudged.jsonl",
+      "sha256": "06fe0f94b6547b76f25dad3d4754f23b7b80e9c4b02889fb701b09994e3debb4"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/whole-line-render-veto-20261014/worker-report.json",
+      "sha256": "4e9dc491aa702d4f7b7e9e7a73288a971dc74a168d531c467d2b0209320ec92d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-independent-wide-vector-20261004/control-failure-cause.json",
+      "sha256": "5fe3f701c28745eacc23961bf83bff4ccccf8239beb9b0d0808216a3b322348f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-independent-wide-vector-20261004/initial-retention-unknown.json",
+      "sha256": "e62b324adc7a818150c244ec5f99cddc830dc2f7341e7429624473a701193d95"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-independent-wide-vector-20261004/inventory.json",
+      "sha256": "eb0dd11709239d7b4cd1bfd31ac48122cd4f3bbbab3e025b8a55370971b59dde"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-independent-wide-vector-20261004/native-results-public.json",
+      "sha256": "81e7b8c9d4472a464c18cc003ccf5138eae712332b6b94fa16809d011fbb394a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-independent-wide-vector-20261004/parallel-ambiguity-source-proof.json",
+      "sha256": "6a1b409c3c561cf1ec269375c51d8f7b17b573d66c7c2935623d124e7215355a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-independent-wide-vector-20261004/parallel-mismatch-before.json",
+      "sha256": "06e54040f195cce7884a1c3d6800d02a9390a73a599121e1dc9dc8bcfefc4a67"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-independent-wide-vector-20261004/source-ci.json",
+      "sha256": "59f1dadf1d1be08bce9915c4b88444ff6c4928f4d9bc4b21196b368dc9806027"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-independent-wide-vector-20261004/transport-proof.json",
+      "sha256": "2ce9d3bd50e1978196701a74eae16f997f4265ae2c30d2179ccc38a5c8a0f697"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-connected-crop-original-pixels-v3/ci-ui-proof.json",
+      "sha256": "7749b2abe9c07e45ba773ba7000dbc52aed7d18bfed5f3e9ee4b6413d2c69fd2"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-connected-crop-original-pixels-v3/ci.json",
+      "sha256": "16ef0035ae2ce1a2c1847612caefaf047340a77cdf660b882d8ad93a855e7581"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-connected-crop-original-pixels-v3/fixture-proof.json",
+      "sha256": "e46b3479327003b28cb7585600f1ed8a724355577c968e256efa5039dd86304d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-connected-crop-original-pixels-v3/geometry-causes.json",
+      "sha256": "fed7a1608586a4cc5a03447f4ad7342df347570d2572491b615cbf385a3a7570"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-connected-crop-original-pixels-v3/inputs.json",
+      "sha256": "aa81abc1a6d5bc4c2d0f3dad55191432683201108394cc91de286483abf841da"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-connected-crop-original-pixels-v3/inventory.json",
+      "sha256": "fa5284982e287f0565922cd6265a122c028cff1ecf3378647fde7fe7bde88f78"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-connected-crop-original-pixels-v3/native-console.json",
+      "sha256": "f5f55ae9611e6fa7f51f01af14609cf9bd7e051ababcf65586f4cd51a9e5c6a8"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-connected-crop-original-pixels-v3/native-results.json",
+      "sha256": "aba9d15af5dc156cb8126b39051a5670be3cce617e294cba2a8fdaf84802f533"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-connected-crop-original-pixels-v3/recipe.json",
+      "sha256": "8e5bd07f45d6f66c734dde3866982e7c8a3433392625285320a12eafdab069a0"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-connected-crop-original-pixels-v3/run-receipt.json",
+      "sha256": "f1dbe3a3e615ee2cb3b4cc766d0a68c48ac7ae5bc5d1cf6f4e823922b7708a9f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-connected-crop-original-pixels-v3/source-only-replay.json",
+      "sha256": "6f2b044445dc74f9dddebb590301eaa8dfa2c74104f40629de13d2aa857347db"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-preprocessing-original-pixels-v2/inputs.json",
+      "sha256": "aa81abc1a6d5bc4c2d0f3dad55191432683201108394cc91de286483abf841da"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-preprocessing-original-pixels-v2/inventory.json",
+      "sha256": "9e19f765721a23f7e8b54804ed5152fd6c66696421a2e421c53facc671f46e9e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-preprocessing-original-pixels-v2/native-console.json",
+      "sha256": "091128c3b6f1dd9160227ea27213888e0cb8ea4f8a7c19c5bd442bd94fb6a9c6"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-preprocessing-original-pixels-v2/native-results.json",
+      "sha256": "7f51f4999c5941a7646a99548076b891ba5a6df415d8be679df89a1e0053736f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-preprocessing-original-pixels-v2/posthoc-coverage.json",
+      "sha256": "3ace79c594720541c8b8121534c881d5f36ddc0c26c518eaf501460a04ece78b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-preprocessing-original-pixels-v2/recipe.json",
+      "sha256": "90a789ca7c5e1a57798a830095eec90fc6addb7918858b1ae2b588d91c5d7657"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-preprocessing-original-pixels-v2/run-receipt.json",
+      "sha256": "f7463a7c47c8515c607ab638759f07b55290d6efad3771aec0e038ef4ab7424d"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-ocr-preprocessing-original-pixels-v2/windows-app-dependencies.json",
+      "sha256": "02bcb41c8af83430fb40ed2aa820e8b280d08be32ee478ba2d5061caf8a77f4e"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-system-ocr-japanese-install-20261014/receipt.json",
+      "sha256": "ba85adcf46ce1a8635b2f3855ff5515b7978562d9f415173016659d94ba2630a"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-system-ocr-original-lines-20261014/freeze.json",
+      "sha256": "f3c6f3af1e1411ff2607159b6fb35d18c1f38cccc101e6c2eb15a3bbce7019cb"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-system-ocr-original-lines-20261014/observations.jsonl",
+      "sha256": "d0180f37ce303b5e2f95ce3b3e54790dbfc6b7bcab4dd1447fc56360944fd0a7"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-system-ocr-original-lines-20261014/raw-receipt.json",
+      "sha256": "b1ea9888c236175d565274d1850a417c7d8678bd3984a883be17d541804890db"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-system-ocr-original-lines-20261014/report.json",
+      "sha256": "8546e503576a3a3f2c25f03a82f4127c9164b6966c983e1319290c0984beeeaa"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-system-ocr-original-lines-20261014/source-line-ending-audit.json",
+      "sha256": "5ee6510a537e6a704172fc1361c16da0be92eca369c2262346ad6d043107998c"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-system-ocr-scaled-lines-20261014/freeze.json",
+      "sha256": "81977f22c3205865048f106b0ae2fffd2e093877837b3523fa4e43f380fe3f4b"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-system-ocr-scaled-lines-20261014/observations.jsonl",
+      "sha256": "e3e01bd04eb5501dc96364dd86e05a3bd9ee47085339807edfd1258f59c9dd65"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-system-ocr-scaled-lines-20261014/post-worker-original-pixel-audit.json",
+      "sha256": "0891b8aa4974b768bf0b80010890600a3157964e1ca211afa6a8b32b63c281dd"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-system-ocr-scaled-lines-20261014/raw-receipt.json",
+      "sha256": "9f51c712ecce772ba36e128be86c3de8ba36599a4780ba2af1156c24a2868b85"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/research-results/windows-system-ocr-scaled-lines-20261014/report.json",
+      "sha256": "b5ae6688a4cf917e925803c8878a0ab49d69672c2c7b7aa0749764a2ba84ca8f"
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/tools/vision-ocr-comparison/oracle.json",
+      "sha256": "1c5652c38a5d84691d5105bd4e851349bc1879d38b2a1cc2a2b6169c12683095"
+    }
+  ],
+  "excludedStringCount": 124642,
+  "setSha256": "a3b23542cc0f10b6ea12bf2a6e616665dcfe33be0abd561792399cd2815c92d3"
+}

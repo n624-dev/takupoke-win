@@ -1,0 +1,91 @@
+{
+  "namespace": "research-ascii-english-v5-official-transfer-v1/adaptation-v1",
+  "basis": "Independent unmodified official HF PPOCRV5MobileRecForTextRecognition/config/safetensors revision e4abce2bbd335f6c3eda0507b7f8e8abd5af3419. Old strict ONNX transplant remains failed; no nativeONNX identity/transplant claim. No epsilon replacement/fusedDAG replacement.",
+  "dictionary": "Full438 original dictionary/blank0/space final437 retained; all95ASCII present. No vocabulary probability renormalization/class whitelist/output repair.",
+  "parameters": "All officialCNN/encoder/full438classifier weights and affine params (5,510,778) train + reject121. Original architecture/config and norm epsilon stay unchanged. BNrunningstats frozen by evalmode for all optimization forwards; eval does not disable gradients. Japaneseprimary untouched/independentASCIIbranch only.",
+  "train": {
+    "seed": 845391,
+    "fonts": [
+      "NotoSansJP400",
+      "NotoSerifJP400",
+      "MPLUS1Code-Regular",
+      "BIZUDMincho-Regular"
+    ],
+    "positiveCounts": {
+      "code": 192,
+      "lookalike": 192,
+      "natural": 128,
+      "printable": 128
+    },
+    "negativeCounts": {
+      "clipped": 32,
+      "interior_damage": 32,
+      "multiline": 32,
+      "noise": 32,
+      "blank": 32,
+      "unknown_cjk": 32,
+      "unknown_mixed": 32
+    }
+  },
+  "development": {
+    "seed": 845411,
+    "fonts": [
+      "KosugiMaru-Regular",
+      "ZenAntique-Regular"
+    ],
+    "positiveCounts": {
+      "code": 128,
+      "lookalike": 128,
+      "natural": 64,
+      "printable": 64
+    },
+    "negativeCounts": {
+      "clipped": 32,
+      "interior_damage": 32,
+      "multiline": 32,
+      "noise": 32,
+      "blank": 32,
+      "unknown_cjk": 32,
+      "unknown_mixed": 32
+    }
+  },
+  "fontExposure": "All trainfonts previously consumed training; devKosugiMaru/ZenAntique consumeddevelopmentfaces/newliteral only/nevertrain. No unseen-font or final claim. Sawarabi reserved; priorSawarabiMincho source-only exposure disclosed separately.",
+  "fontBalance": "Eachpositivegroup equalcounts perfont before cache/optimizer; pairunit j//2 for code/lookalike, j for others. Trainmono50percent exactly. cmapcheck eachtarget; no fontfallback/tofulabel.",
+  "data": "Fresh arbitraryASCII code/case/Il1O0/digits/underscore/space, shuffledcomplete95printablecoverage and independent Englishnaturephrases. CJK/wholemixed lines are unknownnegative wholecrop, no oracleprefixcut/suffixscore wholefield. No realschooldata; previousliteraloracles/manifests onlyexclusion; newtrain/devdisjoint.",
+  "preprocessing": "All suppliedRGBink bbox+2originalpx/commonbaseline/relativeheight/internalgaps; nativeFP32BGR48 sampler centerbilinear/uint8round/zero-normalizedpadding width320..960, validWidth/sourceRect preserved. NoFP16. This fixes input condition for independentHFbasis and does not assert officialHFImageProcessor or Windowsbyteparity.",
+  "cache": "LosslessNPZ officialFP32input tensor, teacherfeature120 and official438probabilities from exactsame officialTorchforward; restoredbyte/dtype/shapeSHA. Baseline uses storedofficialprobabilities, not copied ONNXhead.",
+  "selfConsistencyNewDevGate": "Before optimizer everynewdev storedofficialbaseline vs initializedsameofficialAdapter exactFP32feature/probability byte equality and text/interval/floor/ASCII/validWidthdecision equality. Halt iffail.",
+  "contradictionAudit": "ExactprovidedPNG/FP32input with differentpositive target or positive-vs-negative conflict ->excludeallconflictingtrainrows from everyupdate, no targetrepair/falsedamage label. Dev unchanged. CTClength<=nativeframes.",
+  "training": {
+    "seed": 845431,
+    "threads": 2,
+    "batchSize": 2,
+    "epochs": 6,
+    "evaluateEpochs": [
+      2,
+      4,
+      6
+    ],
+    "cnnLearningRate": 3e-05,
+    "encoderLearningRate": 0.0001,
+    "headLearningRate": 0.0003,
+    "rejectLearningRate": 0.001,
+    "teacherKlWeight": 0.2,
+    "teacherFeatureMseWeight": 0.02,
+    "rejectBceWeight": 0.5,
+    "weightDecay": 0.0001,
+    "gradientClip": 5.0,
+    "maximumTrainingSeconds": 1800,
+    "maximumCacheSeconds": 1800,
+    "maximumRssMiB": 4096,
+    "additionalDiskBudgetGiB": 1.0,
+    "minimumFreeDiskGiB": 2
+  },
+  "loss": "Full438CTC on intactpositives/emptyblank; fullteacherKL+teacherfeatureMSE on allsamples; BCEreject on allsamples. Damage/multiline/noise/CJK/mixed receive no guessedCTClabel.",
+  "batching": "ExactFP32inputWidthbucket, no new image/temporalpadding/noattentionmask. Original outputT centers scaledbyinputWidth/validWidth onlydefine rejectmean; CTCSourceBox interval end pastvalidWidth alwaysrefused.",
+  "acceptance": "Baseline/trainednonempty/alltextprintableASCII/minemittedCTCconfidence>=.8/nointervalpastvalidWidth; trainedalso rejectProbability<=.05. Uncalibrateddiagnostic only; outputASCII cannotprove inputsource/domain.",
+  "selection": "OriginalofficialHFbaseline included. Trainedeligible only code+lookalike exact>=base/wrongAccepted<=base/negativeAccepted<=base. MaxcorrectAccepted thenrawexact/lowerwrongandnegative/CER/earlier complete2/4/6. Partialepochnevercandidate.",
+  "continuationGate": "Selectedtrained/rawexact>=97percent/correctAccepted>=90percent/wrongAccepted0/negativeAccepted0/everydevfont>=95percentrawexact; paddedunsupportedsource alwaysrefused. Onlypermits separate prospectivefinal/export, never standalonecomponentactivation/fullfield/full-documentqualification.",
+  "sourceProof": "Oldconsumed64samepixelscriptalias/missingprefixcontrols onlypostselection, never train/choose/final. Sourcecompleteness/script/cellgeometry provenance remains independent.",
+  "final": "Sawarabi2fonts notused for thistraining/dev/final; onlyafter unchangedgatepass+newfinal/full-documentprotocol. Japaneseprimary unchanged/iOS noedit/publicmodel/push none."
+}

@@ -1,0 +1,14 @@
+{
+  "recipe": "practical-character-error-and-review-burden-consumed-audit-v1",
+  "sourceSha256": "f082857f65cba8063f5fc49c5c777a8798e450ef7edd1d3488fdb94af19eb25d",
+  "oracleSha256": "1c5652c38a5d84691d5105bd4e851349bc1879d38b2a1cc2a2b6169c12683095",
+  "readers": {
+    "v5-mobile": "7c62eea64639d393e22b7be57fe81e3382f9c42b484d5738ecb64c2dd3b323cf",
+    "v6-medium": "7c62eea64639d393e22b7be57fe81e3382f9c42b484d5738ecb64c2dd3b323cf",
+    "glm-ocr-fp32": "d14c50341c89cf91cd10132ee7c506bc7a8330c257567e2f899df4c2cfdd6dd5"
+  },
+  "scope": "Posthoc consumed component comparison, zero inference. Raw literal exact and CER remain primary. Whitespace-only differences are a separate diagnostic, never value repair or acceptance. No perfect/zero-error deployment requirement is imposed.",
+  "confidenceScope": "CTC minimum .8 flags reported separately from GLM autoregressive tokens; neither is calibrated field accuracy. Not a user-edit count or whole-document completeness proof.",
+  "additionalModelCalls": 0,
+  "modelActivation": false
+}

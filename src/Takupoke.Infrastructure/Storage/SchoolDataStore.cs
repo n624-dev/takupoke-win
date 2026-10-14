@@ -308,10 +308,9 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
     {
         if (job.ManualPlan is { } manual)
         {
-            var verified = await Task.Run(() => RecoveryManualAssistance.Prepare(manual.Document, token), token).ConfigureAwait(false);
+            var verified = await Task.Run(() => RecoveryManualAssistance.VerifyPlan(manual, token), token).ConfigureAwait(false);
             if (job.State != RecoveryJobState.AwaitingManualCorrection || preview is not null || manual.Document.PdfHash != source.Digest ||
-                !RecoveryPolicy.MatchesPeriod(manual.Document, lease.Period) || verified is null ||
-                RecoveryValidator.Fingerprint(verified) != RecoveryValidator.Fingerprint(manual))
+                !RecoveryPolicy.MatchesPeriod(manual.Document, lease.Period) || !verified)
                 throw new InvalidDataException("補正待ちの原本・取得内容・対象を確認できません。");
         }
         else if (job.State == RecoveryJobState.AwaitingManualCorrection) throw new InvalidDataException("補正対象を確認できません。");

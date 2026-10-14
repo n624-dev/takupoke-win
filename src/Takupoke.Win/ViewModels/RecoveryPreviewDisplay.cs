@@ -15,6 +15,7 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
     public ImmutableArray<RecoveryDisplayCorrection> Corrections { get; init; } = [];
     public ImmutableArray<RecoveryDisplayChange> PreviousChanges { get; init; } = [];
     public bool PreviousComparable { get; init; }
+    public int ReviewedFieldCount { get; init; }
 
     public static RecoveryPreviewDisplay? Create(RecoveryPreview preview, CancellationToken token,
         MaterialAnalysis? previous = null)
@@ -22,6 +23,8 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
         token.ThrowIfCancellationRequested();
         if (!RecoveryValidator.Validate(preview.Document, preview.Result, token).CanAdopt) return null;
         var document = preview.Document;
+        var ocrIds = document.Sources.Where(s => { token.ThrowIfCancellationRequested(); return s.FromOcr; })
+            .Select(s => s.Id).ToHashSet(StringComparer.Ordinal);
         var recovered = preview.Result.Cells.ToDictionary(cell => { token.ThrowIfCancellationRequested(); return cell.CellId; }, StringComparer.Ordinal);
         var cells = ImmutableArray.CreateBuilder<RecoveryDisplayCell>(document.Cells.Count);
         foreach (var cell in document.Cells)
@@ -29,9 +32,15 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
             token.ThrowIfCancellationRequested();
             var result = recovered[cell.Id];
             cells.Add(new(cell.Slots.Select(slot => new RecoverySlot(slot.ClassName, slot.Day, slot.Period)).ToImmutableArray(),
-                result.State, result.Lessons.Select(lesson => new RecoveryDisplayLesson(lesson.Subject.Value,
+                result.State, result.Lessons.Select((lesson, index) => new RecoveryDisplayLesson(lesson.Subject.Value,
                     lesson.Teacher.Value, lesson.Teacher.State == RecoveryValueState.Empty,
-                    lesson.Room.Value, lesson.Room.State == RecoveryValueState.Empty)).ToImmutableArray()) { CellId = cell.Id });
+                    lesson.Room.Value, lesson.Room.State == RecoveryValueState.Empty) {
+                        EditableRoles = document.Capture is not null && cell.BindingMode == RecoveryBindingMode.Fixed
+                            ? new[] { (RecoveryFieldRole.Subject, cell.LessonBindings[index].Subject),
+                                (RecoveryFieldRole.Teacher, cell.LessonBindings[index].Teacher),
+                                (RecoveryFieldRole.Room, cell.LessonBindings[index].Room) }
+                                .Where(pair => pair.Item2.Any(ocrIds.Contains)).Select(pair => pair.Item1).ToImmutableArray() : []
+                    }).ToImmutableArray()) { CellId = cell.Id });
         }
         var display = new RecoveryPreviewDisplay(preview.SourceId, document.PdfHash,
             RecoveryValidator.Fingerprint(preview.Result), document.Kind, document.SchoolYear, document.Term,
@@ -45,7 +54,8 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
                 correction.Target.Role, cellsById[correction.Target.CellId].Slots,
                 string.Concat(correction.OriginalParentIds.Select(id => { token.ThrowIfCancellationRequested(); return sources[id].Text; })),
                 correction.CorrectedText, correction.Provenance);
-        }).ToImmutableArray();
+        }).Where(c => document.Capture?.ManualSchemaVersion != 2 ||
+            !string.Equals(c.OriginalOcr, c.UserText, StringComparison.Ordinal)).ToImmutableArray();
         // Only an actual certified formal projection of this identical source
         // document permits cell/parallel-position comparison. Updated PDFs,
         // Strict-only projections and unmatched topology are not guessed.
@@ -76,7 +86,8 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
             }
         }
         token.ThrowIfCancellationRequested();
-        return display with { Corrections = corrections, PreviousComparable = comparable, PreviousChanges = changes.ToImmutable() };
+        return display with { Corrections = corrections, ReviewedFieldCount = preview.Result.HumanCorrections?.Count ?? 0,
+            PreviousComparable = comparable, PreviousChanges = changes.ToImmutable() };
     }
 }
 
@@ -85,7 +96,10 @@ public sealed record RecoveryDisplayCell(ImmutableArray<RecoverySlot> Slots, Rec
 {
     public string CellId { get; init; } = "";
 }
-public sealed record RecoveryDisplayLesson(string Subject, string Teacher, bool TeacherEmpty, string Room, bool RoomEmpty);
+public sealed record RecoveryDisplayLesson(string Subject, string Teacher, bool TeacherEmpty, string Room, bool RoomEmpty)
+{
+    public ImmutableArray<RecoveryFieldRole> EditableRoles { get; init; } = [];
+}
 
 public sealed record RecoveryDisplayCorrection(string CellId, int LessonIndex, RecoveryFieldRole Role,
     ImmutableArray<RecoverySlot> Slots, string OriginalOcr, string UserText, string Provenance);

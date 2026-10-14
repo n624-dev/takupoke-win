@@ -13,6 +13,81 @@ using Windows.Storage.Streams;
 namespace Takupoke.Win.Platform;
 public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
 {
+    public async Task<RecoveryDocument> CaptureForReviewAsync(byte[] bytes, RecoveryDocument document,
+        IReadOnlyList<RecoveryFieldTarget> selected, CancellationToken token)
+    {
+        token.ThrowIfCancellationRequested();
+        if (Convert.ToHexStringLower(SHA256.HashData(bytes)) != document.PdfHash || document.Capture is not { } capture)
+            throw new InvalidDataException("訂正対象の原本を確認できません。");
+        var targets = await Task.Run(() => RecoveryManualAssistance.CaptureTargets(document, selected, token), token)
+            ?? throw new InvalidDataException("本文の訂正対象を確認できません。");
+        using var input = new InMemoryRandomAccessStream();
+        using (var writer = new DataWriter(input)) { writer.WriteBytes(bytes); await writer.StoreAsync().AsTask(token); writer.DetachStream(); }
+        input.Seek(0);
+        var pdf = await PdfDocument.LoadFromStreamAsync(input).AsTask(token);
+        if (pdf.PageCount != capture.PageCount) throw new InvalidDataException("原本のページが変わりました。");
+        var pages = new List<RecoveryCapturedPage>();
+        var crops = new List<RecoveryOriginalCrop>();
+        try
+        {
+            for (uint index = 0; index < pdf.PageCount; index++)
+            {
+                token.ThrowIfCancellationRequested();
+                var expected = capture.Pages.Single(p => p.Page == index + 1);
+                using var page = pdf.GetPage(index); using var image = new InMemoryRandomAccessStream();
+                await page.RenderToStreamAsync(image, new PdfPageRenderOptions {
+                    DestinationWidth = (uint)expected.Width, DestinationHeight = (uint)expected.Height }).AsTask(token);
+                image.Seek(0);
+                var decoder = await BitmapDecoder.CreateAsync(image).AsTask(token);
+                var pixels = await decoder.GetPixelDataAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore,
+                    new BitmapTransform(), ExifOrientationMode.IgnoreExifOrientation, ColorManagementMode.DoNotColorManage).AsTask(token);
+                var raster = new RecoveryRaster((int)decoder.PixelWidth, (int)decoder.PixelHeight, pixels.DetachPixelData());
+                try
+                {
+                    if (raster.Width != expected.Width || raster.Height != expected.Height ||
+                        Convert.ToHexStringLower(SHA256.HashData(raster.Bgra)) != expected.RasterHash)
+                        throw new InvalidDataException("原画像が確認時の内容と一致しません。資料を読み直してください。");
+                    if (!expected.InkCoverageVerified)
+                    {
+                        var rules = await Task.Run(() => raster.Rules(token), token);
+                        var boxes = document.Sources.Where(s => s.Page == index + 1).Select(s => s.Box).ToArray();
+                        if (await Task.Run(() => raster.HasUnrecognizedInk(boxes, rules, token), token))
+                            throw new InvalidDataException("原本の印字範囲を確認できません。");
+                    }
+                    pages.Add(expected with { InkCoverageVerified = true });
+                    foreach (var target in targets.Where(t => t.Page == index + 1))
+                    {
+                        token.ThrowIfCancellationRequested();
+                        var x = (int)Math.Floor(target.Crop.X); var y = (int)Math.Floor(target.Crop.Y);
+                        var width = (int)Math.Ceiling(target.Crop.X + target.Crop.Width) - x;
+                        var height = (int)Math.Ceiling(target.Crop.Y + target.Crop.Height) - y;
+                        if (x < 0 || y < 0 || width < 1 || height < 1 ||
+                            (long)width * height > RecoveryManualAssistance.MaximumCropPixels ||
+                            (long)x + width > raster.Width || (long)y + height > raster.Height)
+                            throw new InvalidDataException("本文の原画像範囲を確認できません。");
+                        var crop = new byte[checked(width * height * 4)];
+                        try
+                        {
+                            for (var row = 0; row < height; row++)
+                            {
+                                token.ThrowIfCancellationRequested();
+                                System.Buffer.BlockCopy(raster.Bgra, ((y + row) * raster.Width + x) * 4, crop, row * width * 4, width * 4);
+                            }
+                            crops.Add(new(target.Target, target.Page, x, y, width, height, expected.RasterHash,
+                                crop, Convert.ToHexStringLower(SHA256.HashData(crop))));
+                        }
+                        catch { CryptographicOperations.ZeroMemory(crop); throw; }
+                    }
+                }
+                finally { CryptographicOperations.ZeroMemory(raster.Bgra); }
+            }
+            var reviewed = document with { Capture = capture with { ManualSchemaVersion = 2, Pages = pages, OriginalCrops = crops } };
+            if (RecoveryManualAssistance.Prepare(reviewed, selected, token) is null)
+                throw new InvalidDataException("本文と原画像の対応を確認できません。");
+            return reviewed;
+        }
+        catch { foreach (var crop in crops) CryptographicOperations.ZeroMemory(crop.Bgra); throw; }
+    }
     public async Task<RecoveryDocument> BuildAsync(byte[] bytes, MaterialKind kind, string hash, RecoveryReadCapture capture, CancellationToken token)
     {
         var capturedDocument = await Task.Run(() => RecoveryCapturedLayoutBuilder.TryBuildWithoutRaster(hash, kind, capture, token), token);
@@ -83,10 +158,10 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                 var proof = rasters.Select((r, index) => new RecoveryCapturedPage(index + 1, r.Width, r.Height,
                     Convert.ToHexStringLower(SHA256.HashData(r.Bgra)), sources.Count(s => s.Page == index + 1), completeInk[index])).ToArray();
                 token.ThrowIfCancellationRequested();
-                document = document with { Sources = sources, Capture = new(hash, (int)pdf.PageCount, RecoveryValidator.Fingerprint(sources), proof) };
+                document = document with { Sources = sources, Capture = new(hash, (int)pdf.PageCount, RecoveryValidator.Fingerprint(sources), proof, ManualSchemaVersion: 2) };
                 var targets = document.Sources.Any(s => s.NativeConfidence is < .8)
                     ? RecoveryManualAssistance.CaptureTargets(document, token) : null;
-                if (targets is { Count: > 0 and <= RecoveryManualAssistance.MaximumFields })
+                if (targets is { Count: > 0 and <= RecoveryManualAssistance.MaximumReviewFields })
                 {
                     var crops = new List<RecoveryOriginalCrop>();
                     try

@@ -27,7 +27,9 @@ public sealed partial class MainWindow
         if (!_model.Preferences.UseAiFeatures || _model.Locked || snapshot?.AcquisitionAttempt?.Failure is not null || session is null ||
             snapshot?.Source?.Id != session.SourceId || snapshot.Source.Digest != session.Plan.Document.PdfHash)
         { _manualInput.Clear(); return; }
-        _manualInput.Bind(RecoveryValidator.Fingerprint(session), session.Plan.Targets.ToDictionary(t => t.Target.Key, t => t.OriginalOcr, StringComparer.Ordinal));
+        var native = session.Plan.Targets.ToDictionary(t => t.Target.Key, t => t.OriginalOcr, StringComparer.Ordinal);
+        _manualInput.Bind(RecoveryValidator.Fingerprint(session), session.Plan.InitialValues ?? native,
+            session.Plan.Document.Capture!.ManualSchemaVersion, native);
     }
     private bool KeepManualFormForSnapshot()
     {
@@ -54,7 +56,7 @@ public sealed partial class MainWindow
         { Add(Text("入力待ちの原本を確認できません。資料の詳細から読み直してください。")); return; }
         Add(Card(Panel(SettingsSectionTitle("原本と照合してください"),
             Text($"資料全体で確認が必要な{session.Plan.Targets.Count}項目です。入力だけでは採用されません。入力後に全クラスの結果を確認してください。"),
-            Text("科目・教員・教室の全文を原本から入力してください。読めない文字や印字がある箇所を空欄にはできません。"))));
+            Text("読み取り文字が原本と一致していれば、そのまま確認してください。違う箇所は科目・教員・教室の全文を訂正できます。文字の変更は資料全体で3項目までです。読めない文字や印字がある箇所を空欄にはできません。"))));
         Add(Button("対応する元PDFを確認", () => ShowPdf(kind, false, manual: session), "manual-original-" + kind));
         var submit = Button("入力内容を確認して全体の結果へ", async () =>
         {
@@ -138,6 +140,8 @@ public sealed partial class MainWindow
         { Add(Text("確認待ちの結果がありません。PDFが更新された場合は資料の詳細から復旧してください。")); return; }
         Add(Card(Panel(SettingsSectionTitle("原本を確認してから使用してください"), Text($"{document.SchoolYear}年度 {document.Term} · {AppViewModel.MaterialLabel(kind)}"), Text("表示中のクラスだけでなく、資料全体・全クラスの結果を採用します。採用するまで時間割には反映されません。学校の資料と読み取り結果は外部へ送信されません。"),
             Button("対応する元PDFを確認", () => ShowPdf(kind, false, preview), "recovery-original-" + kind))));
+        if (preview.Document.Capture?.ManualSchemaVersion == 2 && document.ReviewedFieldCount > 0)
+            Add(SettingsDescription($"原本と照合した項目: {document.ReviewedFieldCount} · 文字を訂正した項目: {document.Corrections.Length}"));
         if (!document.Corrections.IsEmpty)
         {
             Add(SettingsSectionTitle("原本と照合して入力した箇所"));
@@ -175,6 +179,12 @@ public sealed partial class MainWindow
                 var lesson = cell.Lessons[index];
                 var corrected = document.Corrections.Where(c => c.CellId == cell.CellId && c.LessonIndex == index).ToArray();
                 var lessonPanel = Panel(Text(lesson.Subject + " / " + (lesson.TeacherEmpty ? "教員記載なし" : lesson.Teacher) + " / " + (lesson.RoomEmpty ? "教室記載なし" : lesson.Room)));
+                foreach (var role in lesson.EditableRoles)
+                {
+                    var target = new RecoveryFieldTarget(cell.CellId, index, role);
+                    lessonPanel.Children.Add(OperationButton(RecoveryRoleLabel(role) + "を原本と照合・訂正",
+                        () => _model.BeginRecoveryCorrectionAsync(kind, preview, target), "recovery-edit-" + target.Key));
+                }
                 if (corrected.Length > 0)
                 {
                     lessonPanel.Children.Insert(0, SettingsDescription("原本と照合した利用者の入力を含む授業: " + string.Join("・", corrected.Select(c => RecoveryRoleLabel(c.Role)))));

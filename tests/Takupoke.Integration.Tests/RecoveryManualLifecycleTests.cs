@@ -12,6 +12,68 @@ namespace Takupoke.Integration.Tests;
 public sealed class RecoveryManualLifecycleTests
 {
     [Fact]
+    public async Task ConfidentPreviewCanBeExplicitlyCorrectedAndSavedOnlyAfterAdoption()
+    {
+        await using var c = await Context.CreateAsync(fields: 0);
+        var prepared = await c.Coordinator.PrepareAsync(MaterialKind.Timetable, 2032);
+        var original = Assert.IsType<RecoveryPreview>(prepared.Preview);
+        var cell = original.Document.Cells.First(x => x.LessonBindings.Count > 0);
+        var target = new RecoveryFieldTarget(cell.Id, 0, RecoveryFieldRole.Subject);
+        var session = await c.Coordinator.BeginCorrectionAsync(MaterialKind.Timetable, original, target);
+        Assert.Equal(.95, session.Plan.Document.Sources.Single(s => s.Id == cell.LessonBindings[0].Subject[0]).NativeConfidence);
+        var values = session.Plan.InitialValues!.ToDictionary(p => p.Key, p => p.Value);
+        values[target.Key] = "独立架空の明示訂正";
+        await c.AssertLastGoodAsync();
+        await c.RestartAsync();
+        var job = Assert.IsType<RecoveryJob>(await c.Store.ReadAsync<RecoveryJob>(c.Lease, "recovery.Timetable"));
+        var resumed = new RecoveryManualSession(c.Source.Id, c.Lease, job.ManualPlan!, job.CreatedAt);
+        var preview = await c.Coordinator.CompleteManualAsync(MaterialKind.Timetable, resumed, values);
+        Assert.True(RecoveryValidator.Validate(preview.Document, preview.Result).CanAdopt);
+        Assert.Equal("独立架空の明示訂正", preview.Result.Cells.Single(x => x.CellId == cell.Id).Lessons[0].Subject.Value);
+        await c.AssertLastGoodAsync();
+        await c.Coordinator.AdoptAsync(MaterialKind.Timetable, preview);
+        var saved = Assert.IsType<MaterialAnalysis>(await c.Store.ReadAsync<MaterialAnalysis>(c.Lease, "analysis.Timetable"));
+        Assert.Contains(saved.Timetable!.Lessons, x => x.Names.Subject == "独立架空の明示訂正");
+        Assert.Equal(2, Assert.Single(saved.Recovery!.Result.HumanCorrections!).ManualSchemaVersion);
+    }
+
+    [Fact]
+    public async Task CancelReturnsToOriginalPreviewAndAReopenedReviewInvalidatesPreviousSession()
+    {
+        await using var c = await Context.CreateAsync(fields: 0);
+        var original = Assert.IsType<RecoveryPreview>((await c.Coordinator.PrepareAsync(MaterialKind.Timetable, 2032)).Preview);
+        var cell = original.Document.Cells.First(x => x.LessonBindings.Count > 0);
+        var target = new RecoveryFieldTarget(cell.Id, 0, RecoveryFieldRole.Room);
+        var first = await c.Coordinator.BeginCorrectionAsync(MaterialKind.Timetable, original, target);
+        await c.Coordinator.CancelManualAsync(MaterialKind.Timetable, first);
+        var restored = Assert.IsType<RecoveryPreview>(await c.Store.ReadAsync<RecoveryPreview>(c.Lease, "recovery.preview.Timetable"));
+        Assert.Equal(RecoveryValidator.Fingerprint(original.Result), RecoveryValidator.Fingerprint(restored.Result));
+        var second = await c.Coordinator.BeginCorrectionAsync(MaterialKind.Timetable, restored, target);
+        Assert.NotEqual(first.Plan.ReviewToken, second.Plan.ReviewToken);
+        await Assert.ThrowsAsync<OperationCanceledException>(() => c.Coordinator.CompleteManualAsync(MaterialKind.Timetable,
+            first, first.Plan.InitialValues!));
+        await c.AssertLastGoodAsync();
+    }
+
+    [Theory]
+    [InlineData("sourceChanged")]
+    [InlineData("missingSource")]
+    [InlineData("previewChanged")]
+    public async Task AChangedOrUnreadableSourceCannotOpenAConfidentFieldCorrection(string fault)
+    {
+        await using var c = await Context.CreateAsync(fields: 0);
+        var original = Assert.IsType<RecoveryPreview>((await c.Coordinator.PrepareAsync(MaterialKind.Timetable, 2032)).Preview);
+        var cell = original.Document.Cells.First(x => x.LessonBindings.Count > 0);
+        var target = new RecoveryFieldTarget(cell.Id, 0, RecoveryFieldRole.Subject);
+        if (fault == "sourceChanged") await File.AppendAllTextAsync(c.Source.Path, "\n% independent update\n");
+        if (fault == "missingSource") File.Delete(c.Source.Path);
+        if (fault == "previewChanged") original = original with { CreatedAt = original.CreatedAt.AddMinutes(1) };
+        var failure = await Record.ExceptionAsync(() => c.Coordinator.BeginCorrectionAsync(MaterialKind.Timetable, original, target));
+        Assert.True(failure is InvalidDataException or InvalidRecoveryOutputException or OperationCanceledException, failure?.ToString());
+        await c.AssertLastGoodAsync();
+    }
+
+    [Fact]
     public async Task PendingDraftAndWholePreviewDoNotSaveUntilExplicitAdoptionAndSurviveRestart()
     {
         await using var c = await Context.CreateAsync();
@@ -172,7 +234,11 @@ public sealed class RecoveryManualLifecycleTests
             Coordinator = new(Store, materials, (_,_,hash,_,token) => {
                 token.ThrowIfCancellationRequested(); var doc = RecoveryManualAssistanceTests.Captured(_fields);
                 return Task.FromResult(doc with { PdfHash = hash, Capture = _completeCapture ? doc.Capture! with { PdfHash = hash } : null });
-            }, _ => Task.FromResult<IReadOnlyList<ILocalRecoveryProvider>>([]), _clock);
+            }, _ => Task.FromResult<IReadOnlyList<ILocalRecoveryProvider>>([]), _clock,
+                captureForReview: (_, document, selected, token) => {
+                    token.ThrowIfCancellationRequested();
+                    return Task.FromResult(RecoveryManualReviewBudgetTests.CaptureRequested(document, selected));
+                });
         }
         public Dictionary<string,string> Values(RecoveryManualSession session) => session.Plan.Targets.ToDictionary(t => t.Target.Key, _ => "架空訂正科目");
         public async Task RestartAsync() { await Store.DisposeAsync(); Store = new(Path.Combine(_root, "data"), _protector, _clock); Lease = await Store.BeginAsync(); Wire(); }

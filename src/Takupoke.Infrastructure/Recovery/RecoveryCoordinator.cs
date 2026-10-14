@@ -12,7 +12,8 @@ public sealed record RecoveryPreparation(RecoveryJobState State, RecoveryPreview
 { public RecoveryManualSession? ManualSession { get; init; } }
 public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinator materials,
     Func<byte[], MaterialKind, string, RecoveryReadCapture, CancellationToken, Task<RecoveryDocument>> buildDocument,
-    Func<CancellationToken, Task<IReadOnlyList<ILocalRecoveryProvider>>> providers, TimeProvider? clock = null, AiFeaturePermission? aiPermission = null)
+    Func<CancellationToken, Task<IReadOnlyList<ILocalRecoveryProvider>>> providers, TimeProvider? clock = null, AiFeaturePermission? aiPermission = null,
+    Func<byte[], RecoveryDocument, IReadOnlyList<RecoveryFieldTarget>, CancellationToken, Task<RecoveryDocument>>? captureForReview = null)
 {
     private readonly ConcurrentDictionary<string, long> _previewPermissions = new();
     private readonly SemaphoreSlim _gate = new(1, 1);
@@ -111,7 +112,7 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                     {
                         var session = new RecoveryManualSession(source.Id, lease, manual, job.CreatedAt);
                         await store.SaveRecoveryProgressAsync(lease, source, job with { State = RecoveryJobState.AwaitingManualCorrection, ManualPlan = manual }, null, token);
-                        return new(RecoveryJobState.AwaitingManualCorrection, null, $"原本と読み取り文字を確認して、資料全体の未確定{manual.Targets.Count}項目を補正できます。補正後に全体を確認してから採用してください。") { ManualSession = session };
+                        return new(RecoveryJobState.AwaitingManualCorrection, null, $"原本と読み取り文字を照合して、資料全体の未確定{manual.Targets.Count}項目を確認してください。文字の訂正は3項目までです。確認後に全体を見てから採用してください。") { ManualSession = session };
                     }
                 }
                 var preview = run.Result is not null ? new RecoveryPreview(source.Id, lease, document, run.Result, _clock.GetUtcNow()) : null;
@@ -128,6 +129,69 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                 return new(RecoveryJobState.Failed, null, "復旧できませんでした。" + failure.Message + " 前回の正常結果を保持しています。");
             }
             finally { CryptographicOperations.ZeroMemory(bytes); }
+        }
+        finally { _gate.Release(); }
+    }
+    public async Task<RecoveryManualSession> BeginCorrectionAsync(MaterialKind kind, RecoveryPreview preview,
+        RecoveryFieldTarget target, CancellationToken token = default)
+    {
+        if (captureForReview is null) throw new InvalidOperationException("原画像の確認経路を利用できません。");
+        var permission = aiPermission?.Capture();
+        using var operation = CancellationTokenSource.CreateLinkedTokenSource(token, permission?.Token ?? CancellationToken.None);
+        token = operation.Token;
+        await _gate.WaitAsync(token);
+        try
+        {
+            if (permission is { } current)
+            {
+                aiPermission!.Check(current.Generation, requireEnabled: true);
+                if (!_previewPermissions.TryGetValue(preview.SourceId, out var prepared) || prepared != current.Generation)
+                    throw new OperationCanceledException("確認結果は無効になっています。");
+            }
+            if (await store.BeginAsync(token) != preview.Lease) throw new OperationCanceledException("保存期間が変わりました。");
+            await materials.RefreshAsync(kind, preview.Lease.Period.SchoolYear, token);
+            if (await store.BeginAsync(token) != preview.Lease) throw new OperationCanceledException("保存期間が変わりました。");
+            var acquisition = await store.ReadAsync<MaterialAttempt>(preview.Lease, "acquisition." + kind, token);
+            if (acquisition?.Failure is not null) throw new InvalidDataException(acquisition.Failure);
+            var source = await store.ReadAsync<SourceRecord>(preview.Lease, "selection." + kind, token);
+            var job = await store.ReadAsync<RecoveryJob>(preview.Lease, "recovery." + kind, token);
+            var persisted = await store.ReadAsync<RecoveryPreview>(preview.Lease, "recovery.preview." + kind, token);
+            if (source?.Id != preview.SourceId || source.Digest != preview.Document.PdfHash || persisted is null ||
+                job?.State != RecoveryJobState.AwaitingConfirmation || job.ResultHash != RecoveryValidator.Fingerprint(preview.Result) ||
+                RecoveryValidator.Fingerprint(persisted) != RecoveryValidator.Fingerprint(preview))
+                throw new OperationCanceledException("訂正対象のPDFまたは確認結果が更新されました。");
+            if (!RecoveryValidator.Validate(preview.Document, preview.Result, token).CanAdopt)
+                throw new InvalidRecoveryOutputException();
+            var requested = (preview.Result.HumanCorrections ?? []).Select(c => c.Target).Append(target).Distinct().ToArray();
+            if (RecoveryManualAssistance.CaptureTargets(preview.Document, requested, token) is null)
+                throw new InvalidDataException("この箇所は本文の訂正対象ではありません。");
+            var originalScope = RecoveryValidator.Fingerprint(preview.Document);
+            var bytes = await store.ReadOriginalAsync(preview.Lease, source.Id, token);
+            RecoveryDocument reviewed;
+            try
+            {
+                if (NotificationDiff.Digest(bytes) != source.Digest) throw new InvalidDataException("原本のハッシュが一致しません。");
+                reviewed = await captureForReview(bytes, preview.Document, requested, token);
+            }
+            finally { CryptographicOperations.ZeroMemory(bytes); }
+            if (RecoveryValidator.Fingerprint(reviewed with { Capture = preview.Document.Capture }) != originalScope)
+                throw new InvalidRecoveryOutputException();
+            var plan = RecoveryManualAssistance.Prepare(reviewed, requested, token) ?? throw new InvalidRecoveryOutputException();
+            var previousCells = preview.Result.Cells.ToDictionary(c => c.CellId);
+            string PreviousValue(RecoveryManualTarget t)
+            {
+                var lesson = previousCells[t.Target.CellId].Lessons[t.Target.LessonIndex];
+                return t.Target.Role switch { RecoveryFieldRole.Subject => lesson.Subject.Value,
+                    RecoveryFieldRole.Teacher => lesson.Teacher.Value, _ => lesson.Room.Value };
+            }
+            plan = plan with { InitialValues = plan.Targets.ToDictionary(t => t.Target.Key, PreviousValue),
+                ReviewOriginalResult = preview.Result, ReviewOriginalCapture = preview.Document.Capture,
+                ReviewToken = Guid.NewGuid().ToString("N") };
+            var session = new RecoveryManualSession(source.Id, preview.Lease, plan, job.CreatedAt);
+            if (permission is { } final) aiPermission!.Check(final.Generation, requireEnabled: true);
+            await store.SaveRecoveryProgressAsync(preview.Lease, source, job with {
+                State = RecoveryJobState.AwaitingManualCorrection, ManualPlan = plan, ResultHash = null }, null, token);
+            return session;
         }
         finally { _gate.Release(); }
     }
@@ -162,7 +226,7 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
             var now = _clock.GetUtcNow();
             var corrections = plan.Targets.Select(t => new RecoveryHumanCorrection(t.Target, source.Digest,
                 RecoveryValidator.Fingerprint(plan.Document.Capture), plan.DocumentSnapshot, t.OriginalParentIds, t.Page, t.Crop,
-                values[t.Target.Key], false, now)).ToArray();
+                values[t.Target.Key], false, now, ManualSchemaVersion: plan.Document.Capture!.ManualSchemaVersion)).ToArray();
             var result = await Task.Run(() => RecoveryManualAssistance.Complete(plan, corrections, "windows:" + Environment.OSVersion.Version.Major, token), token).ConfigureAwait(false);
             var preview = new RecoveryPreview(source.Id, session.Lease, plan.Document, result, now);
             if (permission is { } final) aiPermission!.Check(final.Generation);
@@ -181,7 +245,16 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
             var job = await store.ReadAsync<RecoveryJob>(session.Lease, "recovery." + kind, token);
             if (source?.Id != session.SourceId || source.Digest != session.Plan.Document.PdfHash || job?.CreatedAt != session.CreatedAt ||
                 job.ManualPlan is null || RecoveryValidator.Fingerprint(job.ManualPlan) != RecoveryValidator.Fingerprint(session.Plan)) throw new OperationCanceledException();
-            await store.SaveRecoveryProgressAsync(session.Lease, source, job with { State = RecoveryJobState.Failed, ManualPlan = null }, null, token);
+            if (session.Plan.ReviewOriginalResult is { } prior && session.Plan.ReviewOriginalCapture is { } originalCapture)
+            {
+                var originalDocument = session.Plan.Document with { Capture = originalCapture };
+                if (source.Digest != originalDocument.PdfHash || !RecoveryValidator.Validate(originalDocument, prior, token).CanAdopt)
+                    throw new InvalidRecoveryOutputException();
+                var preview = new RecoveryPreview(source.Id, session.Lease, originalDocument, prior, _clock.GetUtcNow());
+                await store.SaveRecoveryProgressAsync(session.Lease, source, job with { State = RecoveryJobState.AwaitingConfirmation,
+                    ManualPlan = null, ResultHash = RecoveryValidator.Fingerprint(prior) }, preview, token);
+            }
+            else await store.SaveRecoveryProgressAsync(session.Lease, source, job with { State = RecoveryJobState.Failed, ManualPlan = null }, null, token);
         }
         finally { _gate.Release(); }
     }

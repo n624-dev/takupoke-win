@@ -1,0 +1,619 @@
+{
+  "selected": {
+    "name": "epoch-6",
+    "epoch": 6,
+    "path": "/workspace/scratch/ascii-english-v5-official-transfer-20261014-v1/adaptation-v1/epoch-6.safetensors",
+    "sha256": "ba57ed766369e9b6b321c87ad199ae2b420e702d926e08a10d6b47c831be6a25",
+    "metrics": {
+      "name": "epoch-6",
+      "positiveRows": 384,
+      "exact": 220,
+      "correctAccepted": 175,
+      "incorrectAccepted": 79,
+      "negativeRows": 224,
+      "negativeAccepted": 8,
+      "paddingRows": 14,
+      "cer": 0.09333333333333334,
+      "groups": {
+        "blank": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "clipped": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 31
+        },
+        "code": {
+          "rows": 128,
+          "exact": 67,
+          "correctAccepted": 54,
+          "incorrectAccepted": 29,
+          "accepted": 83,
+          "nonempty": 128
+        },
+        "interior_damage": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 8,
+          "nonempty": 32
+        },
+        "lookalike": {
+          "rows": 128,
+          "exact": 62,
+          "correctAccepted": 45,
+          "incorrectAccepted": 32,
+          "accepted": 77,
+          "nonempty": 128
+        },
+        "multiline": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 31
+        },
+        "natural": {
+          "rows": 64,
+          "exact": 53,
+          "correctAccepted": 51,
+          "incorrectAccepted": 6,
+          "accepted": 57,
+          "nonempty": 64
+        },
+        "noise": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 10
+        },
+        "printable": {
+          "rows": 64,
+          "exact": 38,
+          "correctAccepted": 25,
+          "incorrectAccepted": 12,
+          "accepted": 37,
+          "nonempty": 64
+        },
+        "unknown_cjk": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 20
+        },
+        "unknown_mixed": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 32
+        }
+      },
+      "rawSha256": "a7f43f94eb5981643aa8f8baf319e20b47fa0f388394ff267bfe221901b12871",
+      "scope": "Fresh independent literals on consumeddevelopmentfonts; standaloneASCIIbranch only, no newfinal/wholefield/full-document qualification"
+    }
+  },
+  "officialBaseline": {
+    "name": "official-baseline",
+    "epoch": 0,
+    "path": "/workspace/scratch/ascii-english-v5-transfer-20261014-v1/assets/model.safetensors",
+    "sha256": "9dab63fb9b819082f3f06e889a3af56dc2c27155d46d8409659c869a2aece2bc",
+    "metrics": {
+      "name": "official-baseline",
+      "positiveRows": 384,
+      "exact": 145,
+      "correctAccepted": 123,
+      "incorrectAccepted": 94,
+      "negativeRows": 224,
+      "negativeAccepted": 38,
+      "paddingRows": 32,
+      "cer": 0.14297872340425533,
+      "groups": {
+        "blank": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 2
+        },
+        "clipped": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 15,
+          "nonempty": 32
+        },
+        "code": {
+          "rows": 128,
+          "exact": 35,
+          "correctAccepted": 25,
+          "incorrectAccepted": 29,
+          "accepted": 54,
+          "nonempty": 128
+        },
+        "interior_damage": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 18,
+          "nonempty": 32
+        },
+        "lookalike": {
+          "rows": 128,
+          "exact": 24,
+          "correctAccepted": 14,
+          "incorrectAccepted": 41,
+          "accepted": 55,
+          "nonempty": 128
+        },
+        "multiline": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 32
+        },
+        "natural": {
+          "rows": 64,
+          "exact": 63,
+          "correctAccepted": 63,
+          "incorrectAccepted": 0,
+          "accepted": 63,
+          "nonempty": 64
+        },
+        "noise": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 3,
+          "nonempty": 19
+        },
+        "printable": {
+          "rows": 64,
+          "exact": 23,
+          "correctAccepted": 21,
+          "incorrectAccepted": 24,
+          "accepted": 45,
+          "nonempty": 64
+        },
+        "unknown_cjk": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 22
+        },
+        "unknown_mixed": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 2,
+          "nonempty": 32
+        }
+      },
+      "rawSha256": "c4d0ac3baff95a49818c57805e9f8ea9a501c42499b71938e11fa0ba27a2230f",
+      "scope": "Fresh independent literals on consumeddevelopmentfonts; standaloneASCIIbranch only, no newfinal/wholefield/full-document qualification"
+    }
+  },
+  "candidates": [
+    {
+      "name": "epoch-2",
+      "epoch": 2,
+      "path": "/workspace/scratch/ascii-english-v5-official-transfer-20261014-v1/adaptation-v1/epoch-2.safetensors",
+      "sha256": "33f219e0fd05879f41eae0fbfe150d4a276b60bd3a707514d95c74eeb178c8dd",
+      "metrics": {
+        "name": "epoch-2",
+        "positiveRows": 384,
+        "exact": 202,
+        "correctAccepted": 130,
+        "incorrectAccepted": 76,
+        "negativeRows": 224,
+        "negativeAccepted": 8,
+        "paddingRows": 2,
+        "cer": 0.09078014184397164,
+        "groups": {
+          "blank": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 0
+          },
+          "clipped": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 31
+          },
+          "code": {
+            "rows": 128,
+            "exact": 67,
+            "correctAccepted": 39,
+            "incorrectAccepted": 17,
+            "accepted": 56,
+            "nonempty": 128
+          },
+          "interior_damage": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 8,
+            "nonempty": 32
+          },
+          "lookalike": {
+            "rows": 128,
+            "exact": 55,
+            "correctAccepted": 29,
+            "incorrectAccepted": 34,
+            "accepted": 63,
+            "nonempty": 128
+          },
+          "multiline": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 26
+          },
+          "natural": {
+            "rows": 64,
+            "exact": 47,
+            "correctAccepted": 41,
+            "incorrectAccepted": 11,
+            "accepted": 52,
+            "nonempty": 64
+          },
+          "noise": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 4
+          },
+          "printable": {
+            "rows": 64,
+            "exact": 33,
+            "correctAccepted": 21,
+            "incorrectAccepted": 14,
+            "accepted": 35,
+            "nonempty": 64
+          },
+          "unknown_cjk": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 0
+          },
+          "unknown_mixed": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32
+          }
+        },
+        "rawSha256": "2b09ecb17455b63d6469f6d9a5ac0e05b8a8338dd6e33b933010326f6a931dda",
+        "scope": "Fresh independent literals on consumeddevelopmentfonts; standaloneASCIIbranch only, no newfinal/wholefield/full-document qualification"
+      }
+    },
+    {
+      "name": "epoch-4",
+      "epoch": 4,
+      "path": "/workspace/scratch/ascii-english-v5-official-transfer-20261014-v1/adaptation-v1/epoch-4.safetensors",
+      "sha256": "582167c4484523d3977b101aeed3dd3b7c928e614022593c94f01c4497f77290",
+      "metrics": {
+        "name": "epoch-4",
+        "positiveRows": 384,
+        "exact": 179,
+        "correctAccepted": 142,
+        "incorrectAccepted": 80,
+        "negativeRows": 224,
+        "negativeAccepted": 8,
+        "paddingRows": 11,
+        "cer": 0.1225531914893617,
+        "groups": {
+          "blank": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 0
+          },
+          "clipped": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 31
+          },
+          "code": {
+            "rows": 128,
+            "exact": 57,
+            "correctAccepted": 45,
+            "incorrectAccepted": 27,
+            "accepted": 72,
+            "nonempty": 128
+          },
+          "interior_damage": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 8,
+            "nonempty": 32
+          },
+          "lookalike": {
+            "rows": 128,
+            "exact": 42,
+            "correctAccepted": 28,
+            "incorrectAccepted": 34,
+            "accepted": 62,
+            "nonempty": 128
+          },
+          "multiline": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 28
+          },
+          "natural": {
+            "rows": 64,
+            "exact": 43,
+            "correctAccepted": 43,
+            "incorrectAccepted": 9,
+            "accepted": 52,
+            "nonempty": 64
+          },
+          "noise": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 8
+          },
+          "printable": {
+            "rows": 64,
+            "exact": 37,
+            "correctAccepted": 26,
+            "incorrectAccepted": 10,
+            "accepted": 36,
+            "nonempty": 64
+          },
+          "unknown_cjk": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 4
+          },
+          "unknown_mixed": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32
+          }
+        },
+        "rawSha256": "2275fd9dec13dbfec57a9d8512b53326f83464cea4eeabc6e496bd97a066358b",
+        "scope": "Fresh independent literals on consumeddevelopmentfonts; standaloneASCIIbranch only, no newfinal/wholefield/full-document qualification"
+      }
+    },
+    {
+      "name": "epoch-6",
+      "epoch": 6,
+      "path": "/workspace/scratch/ascii-english-v5-official-transfer-20261014-v1/adaptation-v1/epoch-6.safetensors",
+      "sha256": "ba57ed766369e9b6b321c87ad199ae2b420e702d926e08a10d6b47c831be6a25",
+      "metrics": {
+        "name": "epoch-6",
+        "positiveRows": 384,
+        "exact": 220,
+        "correctAccepted": 175,
+        "incorrectAccepted": 79,
+        "negativeRows": 224,
+        "negativeAccepted": 8,
+        "paddingRows": 14,
+        "cer": 0.09333333333333334,
+        "groups": {
+          "blank": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 0
+          },
+          "clipped": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 31
+          },
+          "code": {
+            "rows": 128,
+            "exact": 67,
+            "correctAccepted": 54,
+            "incorrectAccepted": 29,
+            "accepted": 83,
+            "nonempty": 128
+          },
+          "interior_damage": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 8,
+            "nonempty": 32
+          },
+          "lookalike": {
+            "rows": 128,
+            "exact": 62,
+            "correctAccepted": 45,
+            "incorrectAccepted": 32,
+            "accepted": 77,
+            "nonempty": 128
+          },
+          "multiline": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 31
+          },
+          "natural": {
+            "rows": 64,
+            "exact": 53,
+            "correctAccepted": 51,
+            "incorrectAccepted": 6,
+            "accepted": 57,
+            "nonempty": 64
+          },
+          "noise": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 10
+          },
+          "printable": {
+            "rows": 64,
+            "exact": 38,
+            "correctAccepted": 25,
+            "incorrectAccepted": 12,
+            "accepted": 37,
+            "nonempty": 64
+          },
+          "unknown_cjk": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 20
+          },
+          "unknown_mixed": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32
+          }
+        },
+        "rawSha256": "a7f43f94eb5981643aa8f8baf319e20b47fa0f388394ff267bfe221901b12871",
+        "scope": "Fresh independent literals on consumeddevelopmentfonts; standaloneASCIIbranch only, no newfinal/wholefield/full-document qualification"
+      }
+    }
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "meanLosses": [
+        0.17789595484655865,
+        0.37519371512474503,
+        1.0676257502901758,
+        0.27495781972001376
+      ],
+      "seconds": 258.58315829099956
+    },
+    {
+      "epoch": 2,
+      "meanLosses": [
+        0.08332134824106086,
+        0.2864854588398485,
+        0.845037092088343,
+        0.16315737178300987
+      ],
+      "seconds": 520.1405212220016
+    },
+    {
+      "epoch": 3,
+      "meanLosses": [
+        0.0603928664896847,
+        0.25375063313212204,
+        0.721279262644904,
+        0.15006907266065106
+      ],
+      "seconds": 834.5243956160011
+    },
+    {
+      "epoch": 4,
+      "meanLosses": [
+        0.04388448485841074,
+        0.22243035791984217,
+        0.6328312849605476,
+        0.11883584162249783
+      ],
+      "seconds": 1085.3950833130002
+    },
+    {
+      "epoch": 5,
+      "meanLosses": [
+        0.030526370975632825,
+        0.19500666896065513,
+        0.5672118940196195,
+        0.0993532753232892
+      ],
+      "seconds": 1379.8489243370022
+    },
+    {
+      "epoch": 6,
+      "meanLosses": [
+        0.025048286966601472,
+        0.17915926477001917,
+        0.5235974247638996,
+        0.06976122957760078
+      ],
+      "seconds": 1631.8599389560004
+    }
+  ],
+  "trainingSeconds": 1682.0615250949995,
+  "cacheSeconds": 207.5421083820038,
+  "peakRssMiB": 2011.01171875,
+  "budgetStopped": false,
+  "bnStatsAndConfigUnchanged": true,
+  "japanesePrimaryUnchanged": true,
+  "trainingStarted": true,
+  "status": "Researchonly/inactive/unqualified/finalunopened"
+}
