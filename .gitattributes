@@ -33,3 +33,4 @@ research-results/paddleocr-vl16-clean-lines-20261014/native-server.txt -text whi
 research-results/windows-system-ocr-scaled-lines-20261014/worker-stdout.txt -text whitespace=cr-at-eol
 research-results/windows-system-ocr-scaled-lines-20261014/worker-stderr.txt -text
 research-results/windows-system-ocr-japanese-install-20261014/installation-native-console.txt -text whitespace=-blank-at-eol
+research-results/glm-ocr-fp32-clean-lines-20261014/worker-stderr.txt -text whitespace=-blank-at-eol

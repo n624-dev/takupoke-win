@@ -65,3 +65,40 @@ uses Apache-2.0. The pinned
 revision is `3f64928e34e6b619a7ea7a8b804d03f2ed01b978`. Full model/projector
 hashes are enforced before requests. F16 was selected before evaluation to
 measure this candidate without4-bit quantization loss within the CPU16GB budget.
+
+
+## Official GLM-OCR FP32 condition
+
+`run_glm_ocr_fp32.py` is a separate, research-only condition using the official
+`zai-org/GLM-OCR` revision `2e85a62840ccac27daa451df36c736c4636b8628`.
+It does not replace the closed GGUF Q8 comparison. `model.safetensors` is
+2,650,579,464 bytes, SHA256
+`a16eb0de98d199293371c560f95f83130d2a2c9612449df16839f08ff9498815`,
+with the processor, tokenizer and chat template from the same revision. The
+MIT-declared upstream card's parameter count is not a measured memory budget.
+
+Provide a separately downloaded asset directory containing those files and an
+`assets.json` receipt with `repo`, `revision` and `assets` entries mapping filename
+to `bytes`/`sha256`. Payloads stay outside Git. In an isolated Python runtime with
+Torch, Transformers 5.19, Pillow and NumPy, run:
+
+```sh
+python tools/vision-ocr-comparison/run_glm_ocr_fp32.py \
+  --assets /absolute/path/to/pinned-official-assets \
+  --packet tools/vision-ocr-comparison/fictional-pixels.json \
+  --output /absolute/path/to/new-output-directory
+```
+
+The parent snapshots source and freezes assets before starting an offline worker.
+The worker receives original opaque PNGs and the official `Text Recognition:`
+prompt. CPU4/FP32/eager attention, official image processor, greedy128 tokens,
+2700 seconds total, 180 seconds per request and RSS10GiB are fixed conditions.
+It preserves generated IDs and native token probabilities; only known
+BOS/EOS/PAD IDs are removed from the reported literal. Other special/unknown
+tokens, leading newlines, whitespace and case are retained. No field confidence,
+CTC score, calibrated reliability or spatial glyph ownership is invented.
+
+A failed or partial run preserves logs/receipts and receives no precision credit.
+Scoring reads the oracle only after the worker exits. This remains a consumed
+component cohort, with no unused final fonts, Windows/iPhone qualification,
+model activation or production export.

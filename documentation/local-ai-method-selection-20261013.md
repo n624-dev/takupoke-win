@@ -233,3 +233,11 @@ raw／freezeを変えずに記録する。別v2 runnerは元studyの完全再現
 固定数値ゲートに届かず学習未開始で終了した。閾値を変えて学習へ進めず、元の失敗を保持する。
 これは学習後の精度結果ではなく、初期計算の一致を満たさなかった結果である。
 [英語基盤の初期忠実性](../research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/README.md)。
+
+
+GLM-OCRの公式非量子化FP32版はCPU4で192件を完了した。原文字の本文99/144、教室25/48、
+見出し40/42でV6 mediumの本文111/144を上回らない。高tokenスコアの誤読31本文行・
+空画像6件の空Markdown枠という形式差があり不採用。本文の捏造とは数えない。ピークRSS約4.67GiB、338.73秒（Linux同時負荷）。
+以前のGGUF Q8とtemplate/runtime等も異なるため、量子化だけの因果比較にはしない。
+[公式FP32基盤](../research-results/glm-ocr-fp32-clean-lines-20261014/README.md) /
+[現在地](local-ai-status-20261014.md)。

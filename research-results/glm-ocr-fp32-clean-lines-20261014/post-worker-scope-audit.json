@@ -1,0 +1,54 @@
+{
+  "scope": "Post-worker payload/load/source/raw identity, no new inference or quality selection",
+  "checkpointParameterCountReportedByHub": 1325258240,
+  "runtimeLoadedParameterCount": 1107405824,
+  "architectureContainsNextTokenPredictionConfig": true,
+  "reasonForParameterCountDifferenceNotFullyAudited": true,
+  "rawSha256": "d14c50341c89cf91cd10132ee7c506bc7a8330c257567e2f899df4c2cfdd6dd5",
+  "blankOutputs": [
+    {
+      "id": "n093",
+      "rawText": "```markdown\n\n```",
+      "minimumTokenProbability": 0.504638135433197
+    },
+    {
+      "id": "n094",
+      "rawText": "```markdown\n\n```",
+      "minimumTokenProbability": 0.504638135433197
+    },
+    {
+      "id": "n095",
+      "rawText": "```markdown\n\n```",
+      "minimumTokenProbability": 0.504638135433197
+    },
+    {
+      "id": "n189",
+      "rawText": "```markdown\n\n```",
+      "minimumTokenProbability": 0.504638135433197
+    },
+    {
+      "id": "n190",
+      "rawText": "```markdown\n\n```",
+      "minimumTokenProbability": 0.504638135433197
+    },
+    {
+      "id": "n191",
+      "rawText": "```markdown\n\n```",
+      "minimumTokenProbability": 0.504638135433197
+    }
+  ],
+  "previousQ8FormattingDifference": "Previous llama Q8 raw has a leading newline; this official Transformers condition does not use formatting repair. Do not infer a pure quantization effect: runtime/template/precision/revision conditions differ.",
+  "nativeGenerationConfig": {
+    "_from_model_config": true,
+    "do_sample": false,
+    "eos_token_id": [
+      59246,
+      59253
+    ],
+    "pad_token_id": 59246,
+    "transformers_version": "5.0.1dev0"
+  },
+  "modelActivation": false,
+  "blankRawFormatNote": "All six raw blank responses are canonical empty Markdown code fences: ```markdown\\n\\n```. Their content body is empty. They are raw-format mismatch, not invented nonempty text content. No parser or image/blank acceptance is enabled by this audit.",
+  "additionalModelCalls": 0
+}
