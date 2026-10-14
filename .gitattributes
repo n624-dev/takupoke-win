@@ -28,3 +28,4 @@ research-results/windows-system-ocr-original-lines-20261014/worker-stdout.txt -t
 research-results/windows-system-ocr-original-lines-20261014/worker-stderr.txt -text
 research-results/windows-system-ocr-original-lines-20261014/as-run-source/run.py -text whitespace=cr-at-eol
 tools/windows-system-ocr/*.py text eol=lf
+research-results/manga-ocr-clean-lines-20261014/worker-stderr.txt -text whitespace=-blank-at-eol

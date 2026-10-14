@@ -176,6 +176,11 @@ EasyOCR Japanese G2も本文36/72・35/72、教室6/48、教室の高スコア�
 [Japanese G1](../research-results/ocr-easyocr-japanese-g1-20261014/README.md) /
 [英語V5](../research-results/ocr-english-v5-clean-lines-20261014/README.md)。
 
+MangaOCRの日本語画像基盤も原行192件で本文30/72・37/72、教室3/48・高スコア誤読18行。
+測定前に辞書のliteral空白欠落を確認した。文字tokenと表示用decodeを別保存し、
+日本語・英数字の幅や原文の空白を後から補正しない。転移学習や導入候補に選定しない。
+[別の日本語画像基盤](../research-results/manga-ocr-clean-lines-20261014/README.md)。
+
 次にWindows標準OCRのインストール済み日本語／英語エンジンを、同じ原画で比較する研究を用意した。
 このAPIには認識信頼度がないため、スコアを捏造して現行アプリへ接続しない。
 初回Windows実測はen-USのみ導入済みで192呼出し完了、全186印字画像で検出0。
