@@ -144,13 +144,28 @@ public static class RecoveryManualAssistance
         }
         if (pages.Values.Any(p => sourceCounts.GetValueOrDefault(p.Page) != p.SourceCount)) return null;
         var assigned = new HashSet<string>(); var targets = new List<RecoveryManualTarget>();
+        RecoverySourceIndex? scopedSources = null;
         foreach (var cell in doc.Cells)
         {
             work.Step(cell.LessonBindings.Count);
-            if (cell.InputState != RecoveryInputState.Complete || cell.BindingMode != RecoveryBindingMode.Fixed) return null;
-            for (var lesson = 0; lesson < cell.LessonBindings.Count; lesson++)
+            if (cell.InputState != RecoveryInputState.Complete) return null;
+            IReadOnlyList<RecoveryLessonBinding> bindings;
+            if (cell.BindingMode == RecoveryBindingMode.Fixed) bindings = cell.LessonBindings;
+            else if (capture.ManualSchemaVersion == 2 && cell.BindingMode == RecoveryBindingMode.RoleProposal)
             {
-                var binding = cell.LessonBindings[lesson];
+                // Only existing deterministic role/ownership proofs authorize
+                // a review. No provider, user text or confidence edit assigns roles.
+                scopedSources ??= new RecoverySourceIndex(doc, work);
+                var recovered = RecoveryRules.Recover(doc, cell, scopedSources, work);
+                if (recovered is null) return null;
+                bindings = recovered.Lessons.Select(l => new RecoveryLessonBinding(
+                    l.Subject.Evidence, l.Teacher.Evidence, l.Room.Evidence)).ToArray();
+                work.Step(bindings.Count);
+            }
+            else return null;
+            for (var lesson = 0; lesson < bindings.Count; lesson++)
+            {
+                var binding = bindings[lesson];
                 foreach (var (role, ids) in new[] { (RecoveryFieldRole.Subject, binding.Subject), (RecoveryFieldRole.Teacher, binding.Teacher), (RecoveryFieldRole.Room, binding.Room) })
                 {
                     work.Step(ids.Count * 5L);

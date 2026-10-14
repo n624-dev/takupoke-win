@@ -186,7 +186,12 @@ internal static partial class Program
         Require(before.Document.Sources.Single(s => s.Id == "room").NativeConfidence == .95,
             "Selected room is intentionally high confidence; this is not an OCR accuracy measurement.");
         Invoke("recovery-edit-" + room);
-        Wait(() => Find("manual-submit-Timetable") is not null, "High-confidence preview field opens native original capture review");
+        try { Wait(() => Find("manual-submit-Timetable") is not null, "High-confidence preview field opens native original capture review"); }
+        catch (TimeoutException)
+        {
+            Console.Error.WriteLine("Selected-review operation status: " + Find("operation-status")?.Current.Name);
+            throw;
+        }
         Require(Find("manual-crop-" + room) is not null, "Native original room pixels are visible");
         Require(((ValuePattern)WaitElement("manual-value-" + subject).GetCurrentPattern(ValuePattern.Pattern)).Current.Value == previousValue,
             "Selecting another field retains the previous human input");

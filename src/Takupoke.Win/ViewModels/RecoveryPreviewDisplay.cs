@@ -35,10 +35,10 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
                 result.State, result.Lessons.Select((lesson, index) => new RecoveryDisplayLesson(lesson.Subject.Value,
                     lesson.Teacher.Value, lesson.Teacher.State == RecoveryValueState.Empty,
                     lesson.Room.Value, lesson.Room.State == RecoveryValueState.Empty) {
-                        EditableRoles = document.Capture is not null && cell.BindingMode == RecoveryBindingMode.Fixed
-                            ? new[] { (RecoveryFieldRole.Subject, cell.LessonBindings[index].Subject),
-                                (RecoveryFieldRole.Teacher, cell.LessonBindings[index].Teacher),
-                                (RecoveryFieldRole.Room, cell.LessonBindings[index].Room) }
+                        EditableRoles = document.Capture is not null && cell.BindingMode is RecoveryBindingMode.Fixed or RecoveryBindingMode.RoleProposal
+                            ? new[] { (RecoveryFieldRole.Subject, lesson.Subject.Evidence),
+                                (RecoveryFieldRole.Teacher, lesson.Teacher.Evidence),
+                                (RecoveryFieldRole.Room, lesson.Room.Evidence) }
                                 .Where(pair => pair.Item2.Any(ocrIds.Contains)).Select(pair => pair.Item1).ToImmutableArray() : []
                     }).ToImmutableArray()) { CellId = cell.Id });
         }

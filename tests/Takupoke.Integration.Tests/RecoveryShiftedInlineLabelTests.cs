@@ -35,6 +35,42 @@ public sealed class RecoveryShiftedInlineLabelTests
         Assert.Equal(snapshot, page.Glyphs);
     }
 
+    [Theory]
+    [InlineData(.4)]
+    [InlineData(.95)]
+    public void DeterministicallyProvedInlineBodyRolesCanUseSourceBoundSchemaTwoReview(double confidence)
+    {
+        var page = Layout(MaterialKind.Timetable);
+        var doc = RecoveryDocumentBuilder.Build(new string('a', 64), MaterialKind.Timetable, [page], (_, box) => InkFree(page, box));
+        var cell = Assert.Single(doc.Cells, c => !c.ConfirmedEmpty);
+        Assert.Equal(RecoveryBindingMode.RoleProposal, cell.BindingMode);
+        var raw = Assert.IsType<RecoveredCell>(RecoveryRules.Recover(doc, cell));
+        var ids = raw.Lessons[0].Room.Evidence.ToHashSet();
+        var sources = doc.Sources.Select(s => s with { FromOcr = true, NativeConfidence = ids.Contains(s.Id) ? confidence : .95 }).ToArray();
+        doc = doc with { Sources = sources, Capture = new(doc.PdfHash, 1, RecoveryValidator.Fingerprint(sources),
+            [new(1, (int)page.Width, (int)page.Height, new string('c', 64), sources.Length, true)], 2) };
+        var target = new RecoveryFieldTarget(cell.Id, 0, RecoveryFieldRole.Room);
+        doc = RecoveryManualReviewBudgetTests.CaptureRequested(doc, [target]);
+        var snapshot = RecoveryValidator.Fingerprint(doc);
+        var plan = Assert.IsType<RecoveryManualPlan>(RecoveryManualAssistance.Prepare(doc, [target]));
+        var correction = RecoveryManualAssistanceTests.Correction(plan, Assert.Single(plan.Targets), "独立架空訂正") with { ManualSchemaVersion = 2 };
+        var result = RecoveryManualAssistance.Complete(plan, [correction], "host-control");
+        Assert.True(RecoveryValidator.Validate(doc, result).CanAdopt);
+        Assert.Equal("独立架空訂正", result.Cells.Single(c => c.CellId == cell.Id).Lessons[0].Room.Value);
+        Assert.Equal(snapshot, RecoveryValidator.Fingerprint(doc));
+        Assert.All(ids, id => Assert.Equal(confidence, doc.Sources.Single(s => s.Id == id).NativeConfidence));
+        var preview = new Takupoke.Infrastructure.Storage.RecoveryPreview("fictional", new(1, new(2026, 1)), doc, result, DateTimeOffset.UtcNow);
+        var display = Assert.IsType<Takupoke.Win.ViewModels.RecoveryPreviewDisplay>(Takupoke.Win.ViewModels.RecoveryPreviewDisplay.Create(preview, CancellationToken.None));
+        Assert.Contains(RecoveryFieldRole.Room, display.Cells.Single(c => c.CellId == cell.Id).Lessons[0].EditableRoles);
+        Assert.Null(RecoveryManualAssistance.CaptureTargets(doc with { Capture = doc.Capture! with { ManualSchemaVersion = 1 } }));
+        var ambiguous = doc with { Cells = doc.Cells.Select(c => c.Id == cell.Id ? c with { RoleScopes = c.RoleScopes.Append(c.RoleScopes[0]).ToArray() } : c).ToArray() };
+        Assert.Null(RecoveryManualAssistance.CaptureTargets(ambiguous, [target]));
+        var labelId = cell.RoleScopes.Single(s => s.Role == RecoveryFieldRole.Room).LabelSourceIds[0];
+        var uncertainLabelSources = doc.Sources.Select(s => s.Id == labelId ? s with { NativeConfidence = .4 } : s).ToArray();
+        Assert.Null(RecoveryManualAssistance.CaptureTargets(doc with { Sources = uncertainLabelSources,
+            Capture = doc.Capture! with { SourceSnapshot = RecoveryValidator.Fingerprint(uncertainLabelSources) } }, [target]));
+    }
+
     [Fact]
     public void ShiftedParallelColumnsStillNeedIndependentCorrespondingAnchors()
     {
