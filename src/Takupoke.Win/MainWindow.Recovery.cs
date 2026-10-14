@@ -29,7 +29,8 @@ public sealed partial class MainWindow
         { _manualInput.Clear(); return; }
         var native = session.Plan.Targets.ToDictionary(t => t.Target.Key, t => t.OriginalOcr, StringComparer.Ordinal);
         _manualInput.Bind(RecoveryValidator.Fingerprint(session), session.Plan.InitialValues ?? native,
-            session.Plan.Document.Capture!.ManualSchemaVersion, native);
+            session.Plan.Document.Capture!.ManualSchemaVersion, native,
+            session.Plan.Targets.Where(t => t.HeaderProof is not null).Select(t => t.Target.Key).ToArray());
     }
     private bool KeepManualFormForSnapshot()
     {
@@ -69,6 +70,24 @@ public sealed partial class MainWindow
         foreach (var target in session.Plan.Targets)
         {
             var key = target.Target.Key;
+            if (target.HeaderProof is { } header)
+            {
+                var crop = session.Plan.Document.Capture!.OriginalCrops!.Single(c => c.Target == target.Target);
+                var pixels = new WriteableBitmap(crop.Width, crop.Height);
+                using (var stream = pixels.PixelBuffer.AsStream()) stream.Write(crop.Bgra);
+                pixels.Invalidate();
+                var sourceImage = new Image { Source = pixels, Stretch = Stretch.Uniform, MaxWidth = 520, MaxHeight = 360 };
+                AutomationProperties.SetAutomationId(sourceImage, "manual-crop-" + key);
+                AutomationProperties.SetName(sourceImage, "原本の見出し範囲");
+                var ack = OperationControl(new CheckBox { Content = "原画像の見出しと一致することを確認", IsChecked = _manualInput.IsAcknowledged(key) });
+                AutomationProperties.SetAutomationId(ack, "manual-ack-" + key);
+                ack.Checked += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Acknowledge(key, true); UpdateSubmit(); };
+                ack.Unchecked += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Acknowledge(key, false); UpdateSubmit(); };
+                Add(Card(Panel(SettingsSectionTitle(RecoveryHeaderReviewLabel(header.Role) + " · " + target.Page + "ページ"),
+                    sourceImage, Text("自動読取: " + target.OriginalOcr),
+                    SettingsDescription("見出しは原画像との照合で確認します。文字が一致している場合にチェックしてください。"), ack)));
+                continue;
+            }
             var cell = session.Plan.Document.Cells.Single(c => c.Id == target.Target.CellId);
             var slot = cell.Slots[0];
             var day = kind == MaterialKind.Timetable ? new[] { "", "月", "火", "水", "木", "金" }[int.Parse(slot.Day)] + "曜日" : slot.Day;
@@ -146,6 +165,10 @@ public sealed partial class MainWindow
             Button("対応する元PDFを確認", () => ShowPdf(kind, false, preview), "recovery-original-" + kind))));
         if (preview.Document.Capture?.ManualSchemaVersion == 2 && document.ReviewedFieldCount > 0)
             Add(SettingsDescription($"原本と照合した項目: {document.ReviewedFieldCount} · 文字を訂正した項目: {document.Corrections.Length}"));
+        foreach (var review in preview.Result.HumanCorrections ?? [])
+            if (review.HeaderProof is { } header)
+                Add(SettingsDescription("原本と照合した見出し: " + RecoveryHeaderReviewLabel(header.Role) + " · " + review.Page +
+                    "ページ · " + review.CorrectedText));
         if (!document.Corrections.IsEmpty)
         {
             Add(SettingsSectionTitle("原本と照合して入力した箇所"));
@@ -204,6 +227,9 @@ public sealed partial class MainWindow
         Add(OperationButton("資料全体を確認しました。全クラスの結果を使用", () => _model.AdoptRecoveryAsync(kind, preview), "adopt-recovery-" + kind));
         Add(TechnicalDetails(DataField("端末内Provider", document.Metadata.Provider), DataField("モデル", document.Metadata.ModelId + " " + document.Metadata.ModelVersion), DataField("検証版", document.Metadata.ValidatorVersion.ToString())));
     }
+    private static string RecoveryHeaderReviewLabel(RecoveryHeaderReviewRole role) => role switch
+    { RecoveryHeaderReviewRole.Year => "年度", RecoveryHeaderReviewRole.Term => "学期", RecoveryHeaderReviewRole.Class => "クラス",
+        RecoveryHeaderReviewRole.Day => "曜日・日付", _ => "時限" };
     private static string RecoveryRoleLabel(RecoveryFieldRole role) => role switch
     { RecoveryFieldRole.Subject => "科目", RecoveryFieldRole.Teacher => "教員", _ => "教室" };
     private static string RecoveryTargetLabel(MaterialKind kind, System.Collections.Immutable.ImmutableArray<RecoverySlot> slots,

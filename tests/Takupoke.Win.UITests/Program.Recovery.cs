@@ -217,6 +217,7 @@ internal static partial class Program
         CheckRecoveryLatestAcquisitionFailure(executable, root);
         CheckRecoveryParallelUi(executable, root);
         CheckManualRecoveryUi(executable, root);
+        CheckHeaderRecoveryUi(executable, root);
         Console.WriteLine("Recovery UI: original, empty fields/cells, whole-document scope, cancellation by leaving, restart, explicit adoption and independent model management passed.");
     }
     private static void CheckRecoveryLatestAcquisitionFailure(string executable, string root)

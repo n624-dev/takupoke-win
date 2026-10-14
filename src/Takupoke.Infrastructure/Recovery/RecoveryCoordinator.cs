@@ -180,6 +180,7 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
             var previousCells = preview.Result.Cells.ToDictionary(c => c.CellId);
             string PreviousValue(RecoveryManualTarget t)
             {
+                if (t.HeaderProof is not null) return t.OriginalOcr;
                 var lesson = previousCells[t.Target.CellId].Lessons[t.Target.LessonIndex];
                 return t.Target.Role switch { RecoveryFieldRole.Subject => lesson.Subject.Value,
                     RecoveryFieldRole.Teacher => lesson.Teacher.Value, _ => lesson.Room.Value };
@@ -227,7 +228,7 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
             var corrections = plan.Targets.Select(t => new RecoveryHumanCorrection(t.Target, source.Digest,
                 RecoveryValidator.Fingerprint(plan.Document.Capture), plan.DocumentSnapshot, t.OriginalParentIds, t.Page, t.Crop,
                 values[t.Target.Key], false, now, ManualSchemaVersion: plan.Document.Capture!.ManualSchemaVersion) {
-                    OriginalLabelIds = t.OriginalLabelIds }).ToArray();
+                    OriginalLabelIds = t.OriginalLabelIds, HeaderProof = t.HeaderProof }).ToArray();
             var result = await Task.Run(() => RecoveryManualAssistance.Complete(plan, corrections, "windows:" + Environment.OSVersion.Version.Major, token), token).ConfigureAwait(false);
             var preview = new RecoveryPreview(source.Id, session.Lease, plan.Document, result, now);
             if (permission is { } final) aiPermission!.Check(final.Generation);

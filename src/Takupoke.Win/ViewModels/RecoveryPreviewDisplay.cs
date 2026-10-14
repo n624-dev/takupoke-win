@@ -48,7 +48,7 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
             document.SpanTimes.ToImmutableDictionary(StringComparer.Ordinal), preview.Result.Metadata with { });
         var sources = document.Sources.ToDictionary(s => { token.ThrowIfCancellationRequested(); return s.Id; }, StringComparer.Ordinal);
         var cellsById = display.Cells.ToDictionary(c => c.CellId, StringComparer.Ordinal);
-        var corrections = (preview.Result.HumanCorrections ?? []).Select(correction => {
+        var corrections = (preview.Result.HumanCorrections ?? []).Where(c => c.HeaderProof is null).Select(correction => {
             token.ThrowIfCancellationRequested();
             return new RecoveryDisplayCorrection(correction.Target.CellId, correction.Target.LessonIndex,
                 correction.Target.Role, cellsById[correction.Target.CellId].Slots,

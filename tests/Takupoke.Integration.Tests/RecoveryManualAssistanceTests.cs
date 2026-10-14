@@ -33,7 +33,7 @@ public sealed class RecoveryManualAssistanceTests
     }
     internal static RecoveryHumanCorrection Correction(RecoveryManualPlan plan, RecoveryManualTarget target, string value) =>
         new(target.Target, plan.Document.PdfHash, RecoveryValidator.Fingerprint(plan.Document.Capture), plan.DocumentSnapshot,
-            target.OriginalParentIds, target.Page, target.Crop, value, false, DateTimeOffset.Parse("2032-04-01T00:00:00Z")) { OriginalLabelIds = target.OriginalLabelIds };
+            target.OriginalParentIds, target.Page, target.Crop, value, false, DateTimeOffset.Parse("2032-04-01T00:00:00Z")) { OriginalLabelIds = target.OriginalLabelIds, HeaderProof = target.HeaderProof };
 
     [Fact]
     public void IndependentOriginalV6ResultJsonAndRootHashesStayExactWithoutManualFields()

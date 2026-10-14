@@ -19,7 +19,7 @@ internal static partial class Program
     // Scripted confidence is a UI control, not a native OCR observation.
     // The independently drawn original bitmap/PDF and retained crops are real
     // temporary input bytes; the global ink receipt is computed, never assumed.
-    private static async Task<RecoveryManualSession> SeedManualRecoveryUiAsync(string root, int count)
+    private static async Task<RecoveryManualSession> SeedManualRecoveryUiAsync(string root, int count, bool reviewHeader = false)
     {
         var preferences = new PreferencesStore(root);
         await preferences.SaveAsync((await preferences.LoadAsync()) with { UseAiFeatures = true });
@@ -27,7 +27,7 @@ internal static partial class Program
         var lease = await store.BeginAsync(); var (document, _) = RecoveryUiFixture(lease.Period);
         var cell = document.Cells[0];
         var sources = document.Sources.Concat(new[] { new RecoverySource("teacher", cell.Id, 1, "架空教員A", new(110,125,60,10)) })
-            .Select(s => s with { FromOcr = true, NativeConfidence = new[] { "subject", "teacher", "room" }.Take(count).Contains(s.Id) ? .4 : .95 }).ToArray();
+            .Select(s => s with { FromOcr = true, NativeConfidence = new[] { "subject", "teacher", "room" }.Take(count).Contains(s.Id) || reviewHeader && s.Id == "class" ? .4 : .95 }).ToArray();
         document = document with { Sources = sources, Cells = document.Cells.Select((c,i) => i == 0 ? c with {
             SourceIds = ["subject","room","teacher"], BlankFields = [], LessonBindings = [new(["subject"],["teacher"],["room"])] } : c).ToArray() };
         const int width = 650, height = 950;
@@ -68,7 +68,7 @@ internal static partial class Program
         var source = new SourceRecord(Guid.NewGuid().ToString("N"),MaterialKind.Timetable,path,content.Identity,"fictional-manual-source.pdf",hash,bytes.Length,now,now,content.ModifiedAt);
         await store.SaveOriginalAsync(lease,source,bytes);
         document = document with { PdfHash = hash, Capture = new(hash,1,RecoveryValidator.Fingerprint(sources),
-            [new(1,width,height,NotificationDiff.Digest(bgra),sources.Length,true)]) };
+            [new(1,width,height,NotificationDiff.Digest(bgra),sources.Length,true)], reviewHeader ? 2 : 1) };
         var targets = RecoveryManualAssistance.CaptureTargets(document) ?? throw new InvalidDataException("Manual UI ownership control failed.");
         var crops = targets.Select(t => {
             var x=(int)Math.Floor(t.Crop.X);var y=(int)Math.Floor(t.Crop.Y);
@@ -78,7 +78,7 @@ internal static partial class Program
         }).ToArray();
         document = document with { Capture = document.Capture! with { OriginalCrops = crops } };
         var plan = RecoveryManualAssistance.Prepare(document) ?? throw new InvalidDataException("Manual UI input control refused.");
-        if (plan.Targets.Count != count) throw new InvalidDataException("Manual field count differs from control.");
+        if (plan.Targets.Count != count + (reviewHeader ? 1 : 0)) throw new InvalidDataException("Manual field count differs from control.");
         var job = new RecoveryJob(hash,RecoveryDocumentKind.Timetable,RecoveryJobState.AwaitingManualCorrection,now) { ManualPlan = plan };
         await store.WriteAsync(lease,"acquisition.Timetable",new MaterialAttempt(now,null,false,hash));
         await store.WriteAsync(lease,"attempt.Timetable",new MaterialAttempt(now,"P13",true,hash,lease.Period.SchoolYear,ParserVersion:PdfScheduleParser.TimetableVersion,RecoveryPending:true));
@@ -178,6 +178,29 @@ internal static partial class Program
             Stop();Start(executable);
             Require(RecoveryUiFormalAsync(root).GetAwaiter().GetResult()?.Recovery?.Result.HumanCorrections?.Count==expectedCount,"Manual correction audit persists across native app restart.");
         }
+    }
+    private static void CheckHeaderRecoveryUi(string executable, string root)
+    {
+        Stop(); var session = SeedManualRecoveryUiAsync(root, 0, reviewHeader: true).GetAwaiter().GetResult();
+        var target = session.Plan.Targets.Single(); Require(target.HeaderProof?.Role == RecoveryHeaderReviewRole.Class, "Native header review owns the class source");
+        var key = target.Target.Key; Start(executable); OpenRecoveryUiPreview();
+        Wait(() => Find("manual-submit-Timetable") is not null, "Header-only source review opens");
+        Require(Find("manual-crop-" + key) is not null && Find("manual-value-" + key) is null,
+            "Header review shows original pixels with no editable text input");
+        Require(!Find("manual-submit-Timetable")!.Current.IsEnabled, "Header reading is not automatically acknowledged");
+        Toggle(WaitElement("manual-ack-" + key));
+        Wait(() => Find("manual-submit-Timetable")?.Current.IsEnabled == true, "Unchanged header acknowledgement enables full preview");
+        Invoke("manual-submit-Timetable"); Wait(() => Find("adopt-recovery-Timetable") is not null, "Header confirmation returns to full preview");
+        var preview = RecoveryUiPendingAsync(root).GetAwaiter().GetResult();
+        var review = preview.Result.HumanCorrections!.Single();
+        Require(review.HeaderProof == target.HeaderProof && review.CorrectedText == target.OriginalOcr &&
+            preview.Document.Sources.Single(s => s.Id == "class").NativeConfidence == .4,
+            "Header text, native confidence and separate confirmation provenance are retained");
+        Invoke("adopt-recovery-Timetable"); Wait(() => Find("adopt-recovery-Timetable") is null, "Explicit adoption stores unchanged header confirmation");
+        Stop(); Start(executable);
+        Require(RecoveryUiFormalAsync(root).GetAwaiter().GetResult()?.Recovery?.Result.HumanCorrections?.Single().HeaderProof == target.HeaderProof,
+            "Read-only header review persists after native restart");
+        Console.WriteLine("Native read-only header review: original pixels, explicit acknowledgement, unchanged text/score, adoption and restart passed.");
     }
     private static void CheckConfidentRecoveryReviewUi(string root, string previousValue)
     {

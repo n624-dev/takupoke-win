@@ -16,11 +16,15 @@ public sealed record RecoveryFieldTarget(string CellId, int LessonIndex, Recover
 {
     public string Key => CellId + ":" + LessonIndex + ":" + Role;
 }
+public enum RecoveryHeaderReviewRole { Year, Term, Class, Day, Period }
+public sealed record RecoveryHeaderReviewProof(RecoveryHeaderReviewRole Role, string ScopeKey, int? SourceLine);
 public sealed record RecoveryManualTarget(RecoveryFieldTarget Target, int Page, RecoveryBox Crop,
     IReadOnlyList<string> OriginalParentIds, string OriginalOcr)
 {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public IReadOnlyList<string>? OriginalLabelIds { get; init; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public RecoveryHeaderReviewProof? HeaderProof { get; init; }
 }
 public sealed record RecoveryHumanCorrection(RecoveryFieldTarget Target, string PdfHash, string AcquisitionHash, string DocumentSnapshot,
     IReadOnlyList<string> OriginalParentIds, int Page, RecoveryBox Crop, string CorrectedText,
@@ -28,6 +32,8 @@ public sealed record RecoveryHumanCorrection(RecoveryFieldTarget Target, string 
 {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public IReadOnlyList<string>? OriginalLabelIds { get; init; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public RecoveryHeaderReviewProof? HeaderProof { get; init; }
 }
 public sealed record RecoveryManualPlan(RecoveryDocument Document, string DocumentSnapshot, IReadOnlyList<RecoveryManualTarget> Targets)
 {
@@ -104,6 +110,11 @@ public static class RecoveryManualAssistance
             foreach (var target in plan.Targets)
             {
                 token.ThrowIfCancellationRequested();
+                if (target.HeaderProof is not null)
+                {
+                    if (!plan.InitialValues.TryGetValue(target.Target.Key, out var headerValue) || headerValue != target.OriginalOcr) return false;
+                    continue;
+                }
                 var lesson = cells[target.Target.CellId].Lessons[target.Target.LessonIndex];
                 var value = target.Target.Role switch { RecoveryFieldRole.Subject => lesson.Subject.Value,
                     RecoveryFieldRole.Teacher => lesson.Teacher.Value, _ => lesson.Room.Value };
@@ -198,6 +209,37 @@ public static class RecoveryManualAssistance
                 }
             }
         }
+        if (capture.ManualSchemaVersion == 2)
+        {
+            // Read-only confirmation of an already proved literal header. This
+            // never assigns missing structure or accepts typed replacement text.
+            var headers = new List<(RecoveryHeaderReviewRole Role, string Scope, IReadOnlyList<string> Ids)> {
+                (RecoveryHeaderReviewRole.Year, doc.SchoolYear.ToString(System.Globalization.CultureInfo.InvariantCulture), doc.YearEvidence),
+                (RecoveryHeaderReviewRole.Term, doc.Term ?? "", doc.TermEvidence) };
+            headers.AddRange(doc.ClassEvidence.Select(p => (RecoveryHeaderReviewRole.Class, p.Key, p.Value)));
+            headers.AddRange(doc.DayEvidence.Select(p => (RecoveryHeaderReviewRole.Day, p.Key, p.Value)));
+            headers.AddRange(doc.PeriodEvidence.Select(p => (RecoveryHeaderReviewRole.Period, p.Key, p.Value)));
+            foreach (var (role, scope, ids) in headers)
+            {
+                work.Step(ids.Count * 4L);
+                if (ids.Any(id => !sources.ContainsKey(id))) return null;
+                foreach (var group in ids.Select(id => sources[id]).GroupBy(s => (s.Page, s.SourceLine)))
+                {
+                    var atoms = group.ToArray();
+                    if (!atoms.Any(s => uncertain.Contains(s.Id))) continue;
+                    foreach (var atom in atoms.Where(s => uncertain.Contains(s.Id))) if (!assigned.Add(atom.Id)) return null;
+                    var key = "$header:" + role + ":" + scope + ":p" + group.Key.Page + ":l" + group.Key.SourceLine;
+                    if (doc.Cells.Any(c => c.Id == key)) return null;
+                    var left = atoms.Min(s => s.Box.X); var top = atoms.Min(s => s.Box.Y);
+                    var box = new RecoveryBox(left, top, atoms.Max(s => s.Box.X + s.Box.Width) - left,
+                        atoms.Max(s => s.Box.Y + s.Box.Height) - top);
+                    targets.Add(new(new(key, 0, RecoveryFieldRole.Subject), group.Key.Page, box,
+                        atoms.Select(s => s.Id).ToArray(), work.Concat(atoms.Select(s => s.Text))) {
+                        HeaderProof = new(role, scope, group.Key.SourceLine) });
+                    if (targets.Count > reviewLimit) return null;
+                }
+            }
+        }
         work.Step(uncertain.Count);
         if (!assigned.SetEquals(uncertain)) return null;
         if (!requested.IsSubsetOf(targets.Select(t => t.Target))) return null;
@@ -251,6 +293,8 @@ public static class RecoveryManualAssistance
                 correction.Crop != target.Crop || !correction.OriginalParentIds.SequenceEqual(target.OriginalParentIds) ||
                 (correction.OriginalLabelIds is null) != (target.OriginalLabelIds is null) ||
                 !(correction.OriginalLabelIds ?? []).SequenceEqual(target.OriginalLabelIds ?? []) ||
+                correction.HeaderProof != target.HeaderProof ||
+                target.HeaderProof is not null && correction.CorrectedText != target.OriginalOcr ||
                 correction.EnteredAt == default || correction.Provenance != "user" || correction.CorrectedText.Length > 256) return null;
             // A low-confidence printed atom cannot become a proved empty field.
             // No new emptyVerified/white-pixel proof is created by user input.

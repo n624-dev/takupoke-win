@@ -98,6 +98,8 @@ internal static class RecoveryAuditShape
         {
             Target(correction.Target); Text(correction.PdfHash); Text(correction.AcquisitionHash); Text(correction.DocumentSnapshot);
             Texts(correction.OriginalParentIds); Box(correction.Crop); Text(correction.CorrectedText); Text(correction.Provenance);
+            if (correction.OriginalLabelIds is { } labels) Texts(labels);
+            if (correction.HeaderProof is { } header) { work.Step(32); Text(header.ScopeKey); }
         });
         Acceptance(acceptance); Acceptance(previous); Certificate(certificate); Certificate(predecessor);
         if(history is not null) { if(history.Count!=1)throw new RecoveryWorkLimitException();List(history,Certificate); }
