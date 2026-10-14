@@ -78,6 +78,47 @@ public sealed class AppViewModelRefreshTests
         Assert.Null(await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Timetable"));
     }
 
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task SelectedHighConfidenceManualPlanSurvivesSnapshotReloadAndRejectsDamagedReviewToken(bool damageToken)
+    {
+        await using var fixture = await Fixture.CreateAsync();
+        await fixture.Model.SavePreferencesAsync(p => p with { UseAiFeatures = true });
+        var store = Field<SchoolDataStore>(fixture.Model, "_school"); var lease = await store.BeginAsync();
+        var doc = RecoveryManualAssistanceTests.Captured(0);
+        var term = lease.Period.Half == 1 ? "前期" : "後期";
+        var sources = doc.Sources.Select(s => doc.YearEvidence.Contains(s.Id) ? s with { Text = lease.Period.SchoolYear + "年度" } :
+            doc.TermEvidence.Contains(s.Id) ? s with { Text = term } : s).ToArray();
+        doc = doc with { PdfHash = fixture.Source.Digest, SchoolYear = lease.Period.SchoolYear, Term = term, Sources = sources,
+            Capture = doc.Capture! with { PdfHash = fixture.Source.Digest, SourceSnapshot = RecoveryValidator.Fingerprint(sources), ManualSchemaVersion = 2 } };
+        var before = await RecoveryEngine.RunAsync(doc, "windows", 10, true, [], _ => null);
+        var prior = Assert.IsType<RecoveryResult>(before.Result);
+        var cell = doc.Cells.First(c => c.LessonBindings.Count > 0);
+        var target = new RecoveryFieldTarget(cell.Id, 0, RecoveryFieldRole.Subject);
+        var reviewed = RecoveryManualReviewBudgetTests.CaptureRequested(doc, [target]);
+        var plan = Assert.IsType<RecoveryManualPlan>(RecoveryManualAssistance.Prepare(reviewed, [target]));
+        plan = plan with { InitialValues = plan.Targets.ToDictionary(t => t.Target.Key, t => t.OriginalOcr),
+            ReviewOriginalResult = prior, ReviewOriginalCapture = doc.Capture, ReviewToken = Guid.NewGuid().ToString("N") };
+        Assert.True(RecoveryManualAssistance.VerifyPlan(plan));
+        Assert.Null(RecoveryManualAssistance.Prepare(plan.Document)); // The old automatic-target path drops this selection.
+        var now = DateTimeOffset.UtcNow;
+        await store.WriteAsync(lease, "attempt.Timetable", new MaterialAttempt(now, "P13", true, fixture.Source.Digest,
+            lease.Period.SchoolYear, ParserVersion: MaterialCoordinator.ParserVersion(MaterialKind.Timetable), RecoveryPending: true));
+        await store.WriteAsync(lease, "recovery.Timetable", new RecoveryJob(fixture.Source.Digest,
+            RecoveryDocumentKind.Timetable, RecoveryJobState.Pending, now));
+        await store.SaveRecoveryProgressAsync(lease, fixture.Source,
+            new(fixture.Source.Digest, RecoveryDocumentKind.Timetable, RecoveryJobState.AwaitingManualCorrection, now) { ManualPlan = plan }, null);
+        if (damageToken) await store.WriteAsync(lease, "recovery.Timetable", new RecoveryJob(fixture.Source.Digest,
+            RecoveryDocumentKind.Timetable, RecoveryJobState.AwaitingManualCorrection, now) { ManualPlan = plan with { ReviewToken = "damaged" } });
+        await (Task)typeof(AppViewModel).GetMethod("ReloadAsync", BindingFlags.Instance | BindingFlags.NonPublic)!
+            .Invoke(fixture.Model, [CancellationToken.None, false])!;
+        var restored = fixture.Model.Materials[MaterialKind.Timetable].ManualSession;
+        Assert.Equal(!damageToken, restored is not null);
+        if (restored is not null) Assert.Equal(RecoveryValidator.Fingerprint(plan), RecoveryValidator.Fingerprint(restored.Plan));
+        Assert.Equal(fixture.Analysis.SourceDigest, fixture.Model.Materials[MaterialKind.Timetable].Analysis!.SourceDigest);
+    }
+
     [Fact]
     public async Task KnownLatestAcquisitionFailureBlocksPendingPreviewPdfWithoutChangingLastGood()
     {
