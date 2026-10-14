@@ -226,7 +226,8 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
             var now = _clock.GetUtcNow();
             var corrections = plan.Targets.Select(t => new RecoveryHumanCorrection(t.Target, source.Digest,
                 RecoveryValidator.Fingerprint(plan.Document.Capture), plan.DocumentSnapshot, t.OriginalParentIds, t.Page, t.Crop,
-                values[t.Target.Key], false, now, ManualSchemaVersion: plan.Document.Capture!.ManualSchemaVersion)).ToArray();
+                values[t.Target.Key], false, now, ManualSchemaVersion: plan.Document.Capture!.ManualSchemaVersion) {
+                    OriginalLabelIds = t.OriginalLabelIds }).ToArray();
             var result = await Task.Run(() => RecoveryManualAssistance.Complete(plan, corrections, "windows:" + Environment.OSVersion.Version.Major, token), token).ConfigureAwait(false);
             var preview = new RecoveryPreview(source.Id, session.Lease, plan.Document, result, now);
             if (permission is { } final) aiPermission!.Check(final.Generation);

@@ -82,6 +82,10 @@ public sealed partial class MainWindow
             AutomationProperties.SetAutomationId(image, "manual-crop-" + key);
             AutomationProperties.SetName(image, "原本の訂正対象範囲");
             var cropPanel = Panel(SettingsDescription("原本の訂正対象範囲"), image, Text("自動読取: " + target.OriginalOcr));
+            if (target.OriginalLabelIds is { } labelIds)
+                cropPanel.Children.Add(SettingsDescription("原画像の項目の表示（" +
+                    string.Concat(labelIds.Select(id => session.Plan.Document.Sources.Single(s => s.Id == id).Text)) +
+                    "）と本文を合わせて確認してください。"));
             var cropBorder = new Border { Child = cropPanel, Padding = new Thickness(12), BorderThickness = new Thickness(2),
                 BorderBrush = (Brush)Application.Current.Resources["AccentFillColorDefaultBrush"] };
             var entryPanel = Panel();

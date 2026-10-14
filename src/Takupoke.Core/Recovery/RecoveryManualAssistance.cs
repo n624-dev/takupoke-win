@@ -17,10 +17,18 @@ public sealed record RecoveryFieldTarget(string CellId, int LessonIndex, Recover
     public string Key => CellId + ":" + LessonIndex + ":" + Role;
 }
 public sealed record RecoveryManualTarget(RecoveryFieldTarget Target, int Page, RecoveryBox Crop,
-    IReadOnlyList<string> OriginalParentIds, string OriginalOcr);
+    IReadOnlyList<string> OriginalParentIds, string OriginalOcr)
+{
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public IReadOnlyList<string>? OriginalLabelIds { get; init; }
+}
 public sealed record RecoveryHumanCorrection(RecoveryFieldTarget Target, string PdfHash, string AcquisitionHash, string DocumentSnapshot,
     IReadOnlyList<string> OriginalParentIds, int Page, RecoveryBox Crop, string CorrectedText,
-    bool ExplicitBlank, DateTimeOffset EnteredAt, string Provenance = "user", int ManualSchemaVersion = 1);
+    bool ExplicitBlank, DateTimeOffset EnteredAt, string Provenance = "user", int ManualSchemaVersion = 1)
+{
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public IReadOnlyList<string>? OriginalLabelIds { get; init; }
+}
 public sealed record RecoveryManualPlan(RecoveryDocument Document, string DocumentSnapshot, IReadOnlyList<RecoveryManualTarget> Targets)
 {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -170,15 +178,22 @@ public static class RecoveryManualAssistance
                 {
                     work.Step(ids.Count * 5L);
                     var target = new RecoveryFieldTarget(cell.Id, lesson, role);
-                    if (!ids.Any(uncertain.Contains) && !requested.Contains(target)) continue;
-                    if (ids.Count == 0 || ids.Any(id => !sources.ContainsKey(id))) return null;
-                    foreach (var id in ids.Where(uncertain.Contains)) if (!assigned.Add(id)) return null;
+                    var labels = capture.ManualSchemaVersion == 2 && cell.BindingMode == RecoveryBindingMode.RoleProposal
+                        ? cell.RoleScopes.Where(s => s.LessonIndex == lesson && s.Role == role && s.Proof == RecoveryRoleProof.InlineLabel)
+                            .SelectMany(s => s.LabelSourceIds).ToArray() : [];
+                    work.Step(labels.Length * 5L);
+                    var reviewLabels = labels.Any(uncertain.Contains) ? labels : [];
+                    if (!ids.Any(uncertain.Contains) && reviewLabels.Length == 0 && !requested.Contains(target)) continue;
+                    if (ids.Count == 0 || ids.Concat(reviewLabels).Any(id => !sources.ContainsKey(id))) return null;
+                    foreach (var id in ids.Concat(reviewLabels).Where(uncertain.Contains)) if (!assigned.Add(id)) return null;
                     var atoms = ids.Select(id => sources[id]).ToArray();
+                    var cropAtoms = atoms.Concat(reviewLabels.Select(id => sources[id])).ToArray();
                     if (requested.Contains(target) && !atoms.Any(s => s.FromOcr)) return null;
-                    if (atoms.Any(s => s.CellId != cell.Id || s.Page != cell.Page || !cell.Box.Contains(s.Box))) return null;
-                    var left = atoms.Min(s => s.Box.X); var top = atoms.Min(s => s.Box.Y);
-                    var box = new RecoveryBox(left, top, atoms.Max(s => s.Box.X + s.Box.Width) - left, atoms.Max(s => s.Box.Y + s.Box.Height) - top);
-                    targets.Add(new(target, cell.Page, box, ids.ToArray(), work.Concat(atoms.Select(s => s.Text))));
+                    if (cropAtoms.Any(s => s.CellId != cell.Id || s.Page != cell.Page || !cell.Box.Contains(s.Box))) return null;
+                    var left = cropAtoms.Min(s => s.Box.X); var top = cropAtoms.Min(s => s.Box.Y);
+                    var box = new RecoveryBox(left, top, cropAtoms.Max(s => s.Box.X + s.Box.Width) - left, cropAtoms.Max(s => s.Box.Y + s.Box.Height) - top);
+                    targets.Add(new(target, cell.Page, box, ids.ToArray(), work.Concat(atoms.Select(s => s.Text))) {
+                        OriginalLabelIds = reviewLabels.Length == 0 ? null : reviewLabels });
                     if (targets.Count > reviewLimit) return null;
                 }
             }
@@ -229,11 +244,13 @@ public static class RecoveryManualAssistance
         var output = new Dictionary<RecoveryFieldTarget, RecoveryHumanCorrection>();
         foreach (var correction in corrections)
         {
-            work.Step(correction.OriginalParentIds.Count + correction.CorrectedText.Length);
+            work.Step(correction.OriginalParentIds.Count + (correction.OriginalLabelIds?.Count ?? 0) + correction.CorrectedText.Length);
             if (!allowed.TryGetValue(correction.Target, out var target) || !output.TryAdd(correction.Target, correction) ||
                 correction.PdfHash != doc.PdfHash || correction.DocumentSnapshot != snapshot || correction.Page != target.Page ||
                 correction.AcquisitionHash != acquisitionHash || correction.ManualSchemaVersion != doc.Capture!.ManualSchemaVersion ||
                 correction.Crop != target.Crop || !correction.OriginalParentIds.SequenceEqual(target.OriginalParentIds) ||
+                (correction.OriginalLabelIds is null) != (target.OriginalLabelIds is null) ||
+                !(correction.OriginalLabelIds ?? []).SequenceEqual(target.OriginalLabelIds ?? []) ||
                 correction.EnteredAt == default || correction.Provenance != "user" || correction.CorrectedText.Length > 256) return null;
             // A low-confidence printed atom cannot become a proved empty field.
             // No new emptyVerified/white-pixel proof is created by user input.

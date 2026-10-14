@@ -436,8 +436,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
                 job.PdfHash == source.Digest && plan.Document.PdfHash == source.Digest &&
                 job.Kind == RecoveryPolicy.Kind(kind))
             {
-                var verified = await Task.Run(() => RecoveryManualAssistance.Prepare(plan.Document, token), token);
-                if (verified is not null && RecoveryValidator.Fingerprint(verified) == RecoveryValidator.Fingerprint(plan))
+                var verified = await Task.Run(() => RecoveryManualAssistance.VerifyPlan(plan, token), token);
+                if (verified)
                     snapshots[kind] = snapshot with { ManualSession = new(source.Id, lease, plan, job.CreatedAt) };
             }
         }

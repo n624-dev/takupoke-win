@@ -67,8 +67,25 @@ public sealed class RecoveryShiftedInlineLabelTests
         Assert.Null(RecoveryManualAssistance.CaptureTargets(ambiguous, [target]));
         var labelId = cell.RoleScopes.Single(s => s.Role == RecoveryFieldRole.Room).LabelSourceIds[0];
         var uncertainLabelSources = doc.Sources.Select(s => s.Id == labelId ? s with { NativeConfidence = .4 } : s).ToArray();
-        Assert.Null(RecoveryManualAssistance.CaptureTargets(doc with { Sources = uncertainLabelSources,
-            Capture = doc.Capture! with { SourceSnapshot = RecoveryValidator.Fingerprint(uncertainLabelSources) } }, [target]));
+        var uncertainLabel = doc with { Sources = uncertainLabelSources,
+            Capture = doc.Capture! with { SourceSnapshot = RecoveryValidator.Fingerprint(uncertainLabelSources) } };
+        uncertainLabel = RecoveryManualReviewBudgetTests.CaptureRequested(uncertainLabel, [target]);
+        var labelPlan = Assert.IsType<RecoveryManualPlan>(RecoveryManualAssistance.Prepare(uncertainLabel, [target]));
+        var labelTarget = Assert.Single(labelPlan.Targets);
+        Assert.Equal(new[] { labelId }, labelTarget.OriginalLabelIds);
+        Assert.True(labelTarget.Crop.Contains(uncertainLabel.Sources.Single(s => s.Id == labelId).Box));
+        var labelReview = RecoveryManualAssistanceTests.Correction(labelPlan, labelTarget, labelTarget.OriginalOcr) with { ManualSchemaVersion = 2 };
+        var unchanged = RecoveryManualAssistance.Complete(labelPlan, [labelReview], "host-control");
+        Assert.True(RecoveryValidator.Validate(uncertainLabel, unchanged).CanAdopt);
+        Assert.Equal(.4, uncertainLabel.Sources.Single(s => s.Id == labelId).NativeConfidence);
+        Assert.Equal(labelTarget.OriginalOcr, unchanged.Cells.Single(c => c.CellId == cell.Id).Lessons[0].Room.Value);
+        Assert.Throws<InvalidRecoveryOutputException>(() => RecoveryManualAssistance.Complete(labelPlan,
+            [labelReview with { OriginalLabelIds = null }], "host-control"));
+        Assert.Throws<InvalidRecoveryOutputException>(() => RecoveryManualAssistance.Complete(labelPlan,
+            [labelReview with { OriginalLabelIds = ids.ToArray() }], "host-control"));
+        var wrongLabels = uncertainLabel.Sources.Select(s => s.Id == labelId ? s with { Text = "項目不明" } : s).ToArray();
+        Assert.Null(RecoveryManualAssistance.CaptureTargets(uncertainLabel with { Sources = wrongLabels,
+            Capture = uncertainLabel.Capture! with { SourceSnapshot = RecoveryValidator.Fingerprint(wrongLabels) } }, [target]));
     }
 
     [Fact]
