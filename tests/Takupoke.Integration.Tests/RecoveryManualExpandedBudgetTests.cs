@@ -7,6 +7,51 @@ namespace Takupoke.Integration.Tests;
 
 public sealed class RecoveryManualExpandedBudgetTests
 {
+    [Theory]
+    [InlineData(128)]
+    [InlineData(129)]
+    public void WholeDocumentBudgetAppliesAcrossOwnedCells(int count)
+    {
+        // Wholly fictional fixed bindings and receipt pixels test the contract,
+        // without claiming recognition accuracy or a real PDF acquisition.
+        var doc = RecoveryManualAssistanceTests.Captured(0);
+        var sources = doc.Sources.ToList(); var cells = doc.Cells.ToArray(); var remaining = count;
+        for (var i = 0; i < cells.Length && remaining > 0; i++)
+        {
+            var cell = cells[i]; if (!cell.ConfirmedEmpty) continue;
+            var ids = new List<string[]>(); var blanks = new List<string>();
+            for (var role = 0; role < 3; role++)
+            {
+                if (remaining == 0) { ids.Add([]); blanks.Add(role == 1 ? "teacher" : "room"); continue; }
+                var id = "expanded-" + i + "-" + role; ids.Add([id]);
+                sources.Add(new(id, cell.Id, cell.Page, "架空原文" + role,
+                    new(cell.Box.X + 4, cell.Box.Y + 4 + role * 12, Math.Min(30, cell.Box.Width - 8), 8),
+                    true, 1000 + i * 3 + role, 1000 + i * 3 + role) { NativeConfidence = .4 });
+                remaining--;
+            }
+            cells[i] = cell with { ConfirmedEmpty = false, SourceIds = ids.SelectMany(a => a).ToArray(),
+                BlankFields = blanks, LessonBindings = [new(ids[0], ids[1], ids[2])] };
+        }
+        Assert.Equal(0, remaining);
+        doc = doc with { Sources = sources, Cells = cells, Capture = doc.Capture! with {
+            ManualSchemaVersion = 3, SourceSnapshot = RecoveryValidator.Fingerprint(sources),
+            Pages = doc.Capture.Pages.Select(p => p with { SourceCount = sources.Count(s => s.Page == p.Page) }).ToArray() } };
+        Assert.Empty(RecoveryValidator.InputErrors(doc));
+        if (count == 129)
+        {
+            Assert.Null(RecoveryManualAssistance.CaptureTargets(doc));
+            Assert.Null(RecoveryManualAssistance.Prepare(doc)); return;
+        }
+        doc = RecoveryManualReviewBudgetTests.CaptureRequested(doc, manualSchemaVersion: 3);
+        var plan = Assert.IsType<RecoveryManualPlan>(RecoveryManualAssistance.Prepare(doc));
+        Assert.Equal(128, plan.Targets.Count);
+        var corrections = plan.Targets.Select((t, i) => RecoveryManualAssistanceTests.Correction(plan, t, "架空訂正" + i)
+            with { ManualSchemaVersion = 3 }).ToArray();
+        var result = RecoveryManualAssistance.Complete(plan, corrections, "control");
+        Assert.Equal(128, result.HumanCorrections!.Count);
+        Assert.True(RecoveryValidator.Validate(doc, result).CanAdopt);
+    }
+
     [Fact]
     public void FourActualBodyCorrectionsUseNewContractAndPreserveAcquisition()
     {
