@@ -1,0 +1,32 @@
+{
+  "groups": {
+    "subject": {
+      "rows": 48,
+      "wholeLiteralRepresentable": 0,
+      "wholeLiteralUnrepresentable": 48
+    },
+    "teacher": {
+      "rows": 48,
+      "wholeLiteralRepresentable": 0,
+      "wholeLiteralUnrepresentable": 48
+    },
+    "room": {
+      "rows": 48,
+      "wholeLiteralRepresentable": 0,
+      "wholeLiteralUnrepresentable": 48
+    },
+    "header": {
+      "rows": 42,
+      "wholeLiteralRepresentable": 42,
+      "wholeLiteralUnrepresentable": 0
+    },
+    "blank": {
+      "rows": 6,
+      "wholeLiteralRepresentable": 6,
+      "wholeLiteralUnrepresentable": 0
+    }
+  },
+  "additionalModelCalls": 0,
+  "qualification": false,
+  "conclusion": "An English438 specialist cannot replace Japanese-containing whole-field acquisition. ASCII suffix scores are not whole-field correctness. A useful separate branch must preserve Japanese primary and prove field-domain/geometry independently; oracle strings cannot route or cut a source field."
+}

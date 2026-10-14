@@ -34,3 +34,8 @@ GLM-OCRは以前のGGUF Q8結果を保持し、公式非量子化版を別条件
 内部の作業方針Markdownは公開せず、iOSは参照だけで編集しない。
 
 [方式別の詳細と原記録](local-ai-method-selection-20261013.md)
+
+英語specialistだけでは、日本語を含むfield全体を表現できないことも辞書から確認した。
+[適用範囲の監査](../research-results/english438-whole-field-domain-audit-20261014/README.md)。
+次の公式Torch英語基盤は旧ONNXへの厳密移植とは別モデルとして学習可否を調べる。
+旧数値ゲートの失敗は変えず、日本語primaryと全文書の品質条件を維持する。
