@@ -46,6 +46,12 @@ internal static partial class Program
         if (raster.HasUnrecognizedInk(sources.Select(s => s.Box).ToArray(), []))
             throw new InvalidDataException("Fictional UI raster contains unaccounted ink.");
         var bytes = ManualRasterPdf(raster); var hash = NotificationDiff.Digest(bytes);
+        // The review callback compares native render bytes, not the pre-PDF bitmap.
+        // Compute this receipt independently with the same Windows PDF API.
+        raster = await RenderManualPdfAsync(bytes, width, height);
+        bgra = raster.Bgra;
+        if (raster.HasUnrecognizedInk(sources.Select(s => s.Box).ToArray(), raster.Rules()))
+            throw new InvalidDataException("Native fictional PDF contains unaccounted ink.");
         var path = Path.Combine(root,"fictional-manual-source.pdf"); await File.WriteAllBytesAsync(path,bytes);
         using var content = await new FileSourceReader(new WindowsFileIdentity()).ReadAsync(path,MaterialKind.Timetable,null);
         var now = DateTimeOffset.UtcNow;
@@ -69,6 +75,26 @@ internal static partial class Program
         await store.WriteAsync(lease,"recovery.Timetable",job with { State = RecoveryJobState.Pending, ManualPlan = null });
         await store.SaveRecoveryProgressAsync(lease,source,job,null);
         return new(source.Id,lease,plan,now);
+    }
+    private static async Task<RecoveryRaster> RenderManualPdfAsync(byte[] bytes, int width, int height)
+    {
+        using var input = new Windows.Storage.Streams.InMemoryRandomAccessStream();
+        using (var writer = new Windows.Storage.Streams.DataWriter(input))
+        { writer.WriteBytes(bytes); await writer.StoreAsync(); writer.DetachStream(); }
+        input.Seek(0);
+        var pdf = await Windows.Data.Pdf.PdfDocument.LoadFromStreamAsync(input);
+        using var page = pdf.GetPage(0);
+        using var image = new Windows.Storage.Streams.InMemoryRandomAccessStream();
+        await page.RenderToStreamAsync(image, new Windows.Data.Pdf.PdfPageRenderOptions {
+            DestinationWidth = (uint)width, DestinationHeight = (uint)height });
+        image.Seek(0);
+        var decoder = await Windows.Graphics.Imaging.BitmapDecoder.CreateAsync(image);
+        var data = await decoder.GetPixelDataAsync(Windows.Graphics.Imaging.BitmapPixelFormat.Bgra8,
+            Windows.Graphics.Imaging.BitmapAlphaMode.Ignore, new Windows.Graphics.Imaging.BitmapTransform(),
+            Windows.Graphics.Imaging.ExifOrientationMode.IgnoreExifOrientation,
+            Windows.Graphics.Imaging.ColorManagementMode.DoNotColorManage);
+        Require(decoder.PixelWidth == width && decoder.PixelHeight == height, "Native fixture render retains capture dimensions.");
+        return new(width, height, data.DetachPixelData());
     }
     private static byte[] ManualRasterPdf(RecoveryRaster raster)
     {
@@ -134,11 +160,72 @@ internal static partial class Program
             Require(((ValuePattern)WaitElement("manual-value-"+first).GetCurrentPattern(ValuePattern.Pattern)).Current.Value==typed && Checked(WaitElement("manual-ack-"+first)),"Same-source refresh preserves input and acknowledgement.");
             Invoke("manual-submit-Timetable");Wait(()=>Find("adopt-recovery-Timetable") is not null,"Manual completion opens whole-document preview");
             Require(RecoveryValidator.Fingerprint(RecoveryUiFormalAsync(root).GetAwaiter().GetResult())==RecoveryValidator.Fingerprint(before),"Completing fields preserves the entire lastgood analysis and audit before adoption.");
+            if (count == 1) CheckConfidentRecoveryReviewUi(root, typed);
+            var expectedCount = count == 1 ? 2 : count;
             Invoke("adopt-recovery-Timetable");Wait(()=>Find("adopt-recovery-Timetable") is null,"Explicit whole-document adoption commits manual provenance");
             var adopted=RecoveryUiFormalAsync(root).GetAwaiter().GetResult();
-            Require(adopted?.Recovery?.Result.HumanCorrections?.Count==count && adopted.SourceDigest==session.Plan.Document.PdfHash,"All corrections are stored separately and bound to original PDF.");
+            Require(adopted?.Recovery?.Result.HumanCorrections?.Count==expectedCount && adopted.SourceDigest==session.Plan.Document.PdfHash,"All corrections are stored separately and bound to original PDF.");
             Stop();Start(executable);
-            Require(RecoveryUiFormalAsync(root).GetAwaiter().GetResult()?.Recovery?.Result.HumanCorrections?.Count==count,"Manual correction audit persists across native app restart.");
+            Require(RecoveryUiFormalAsync(root).GetAwaiter().GetResult()?.Recovery?.Result.HumanCorrections?.Count==expectedCount,"Manual correction audit persists across native app restart.");
         }
+    }
+    private static void CheckConfidentRecoveryReviewUi(string root, string previousValue)
+    {
+        const string subject = "c0:0:Subject", room = "c0:0:Room";
+        var before = RecoveryUiPendingAsync(root).GetAwaiter().GetResult();
+        Require(before.Document.Sources.Single(s => s.Id == "room").NativeConfidence == .95,
+            "Selected room is intentionally high confidence; this is not an OCR accuracy measurement.");
+        Invoke("recovery-edit-" + room);
+        Wait(() => Find("manual-submit-Timetable") is not null, "High-confidence preview field opens native original capture review");
+        Require(Find("manual-crop-" + room) is not null, "Native original room pixels are visible");
+        Require(((ValuePattern)WaitElement("manual-value-" + subject).GetCurrentPattern(ValuePattern.Pattern)).Current.Value == previousValue,
+            "Selecting another field retains the previous human input");
+        var pending = RecoveryUiManualPlanAsync(root).GetAwaiter().GetResult();
+        Require(pending.Document.Capture?.ManualSchemaVersion == 2 && pending.Targets.Count == 2,
+            "Native review upgrades the receipt and includes previous reviewed targets");
+        var crop = pending.Document.Capture!.OriginalCrops!.Single(c => c.Target.Key == room);
+        var sourcePdf = File.ReadAllBytes(Path.Combine(root, "fictional-manual-source.pdf"));
+        var page = RenderManualPdfAsync(sourcePdf, 650, 950).GetAwaiter().GetResult();
+        var expected = new byte[crop.Width * crop.Height * 4];
+        for (var y = 0; y < crop.Height; y++)
+            Array.Copy(page.Bgra, ((crop.PixelY + y) * page.Width + crop.PixelX) * 4, expected, y * crop.Width * 4, crop.Width * 4);
+        Require(crop.Bgra.SequenceEqual(expected) && crop.Sha256 == NotificationDiff.Digest(expected) &&
+            crop.OriginalRasterHash == NotificationDiff.Digest(page.Bgra), "Selected crop is byte-for-byte native PDF source pixels");
+        Invoke("manual-cancel-Timetable");
+        Wait(() => Find("adopt-recovery-Timetable") is not null, "Cancel restores the prior valid preview");
+        Require(RecoveryValidator.Fingerprint(RecoveryUiPendingAsync(root).GetAwaiter().GetResult()) == RecoveryValidator.Fingerprint(before),
+            "Cancel restores all previous preview values and acquisition proof");
+        Invoke("recovery-edit-" + room);
+        Wait(() => Find("manual-submit-Timetable") is not null, "High-confidence selection can be reopened after cancellation");
+        var newPlan = RecoveryUiManualPlanAsync(root).GetAwaiter().GetResult();
+        Require(newPlan.ReviewToken != pending.ReviewToken, "Reopening creates a fresh review session");
+        ((ValuePattern)WaitElement("manual-value-" + room).GetCurrentPattern(ValuePattern.Pattern)).SetValue("架空訂正教室B");
+        foreach (var key in new[] { subject, room })
+        {
+            Toggle(WaitElement("manual-ack-" + key));
+            Wait(() => Checked(WaitElement("manual-ack-" + key)), "Explicit source acknowledgement for selected field");
+        }
+        Wait(() => Find("manual-submit-Timetable")?.Current.IsEnabled == true, "Prior correction plus selected field can be submitted");
+        Invoke("manual-submit-Timetable");
+        Wait(() => Find("adopt-recovery-Timetable") is not null, "Selected high-confidence correction returns to full preview");
+        var revised = RecoveryUiPendingAsync(root).GetAwaiter().GetResult();
+        Require(revised.Result.Cells.Single(c => c.CellId == "c0").Lessons[0].Room.Value == "架空訂正教室B" &&
+            revised.Document.Sources.Single(s => s.Id == "room").Text == "架空教室A" &&
+            revised.Document.Sources.Single(s => s.Id == "room").NativeConfidence == .95,
+            "Human room value is separate from unchanged original OCR text and score");
+        Require(RecoveryValidator.Validate(revised.Document, revised.Result).CanAdopt, "Selected correction retains full-document validation");
+        Console.WriteLine("Native confident-field review: source pixels, previous input, cancel, fresh session and corrected preview passed.");
+    }
+    private static async Task<RecoveryPreview> RecoveryUiPendingAsync(string root)
+    {
+        await using var store = new SchoolDataStore(root, new WindowsDpapiProtector()); var lease = await store.BeginAsync();
+        return await store.ReadAsync<RecoveryPreview>(lease, "recovery.preview.Timetable")
+            ?? throw new InvalidDataException("Pending preview missing.");
+    }
+    private static async Task<RecoveryManualPlan> RecoveryUiManualPlanAsync(string root)
+    {
+        await using var store = new SchoolDataStore(root, new WindowsDpapiProtector()); var lease = await store.BeginAsync();
+        return (await store.ReadAsync<RecoveryJob>(lease, "recovery.Timetable"))?.ManualPlan
+            ?? throw new InvalidDataException("Selected review plan missing.");
     }
 }
