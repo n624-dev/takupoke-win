@@ -1,6 +1,11 @@
 name: Compare installed Windows system OCR on fictional original lines
 on:
   workflow_dispatch:
+    inputs:
+      install_japanese:
+        description: Install the official Japanese OCR capability before measurement
+        type: boolean
+        default: false
   push:
     branches: [codex/windows-local-ai-improvement-20261013]
     paths:
@@ -36,6 +41,7 @@ jobs:
         run: |
           Get-WindowsCapability -Online | Where-Object { $_.Name -like 'Language.OCR*' } | Select-Object Name, State | ConvertTo-Json -Compress
       - name: Install public Japanese OCR language capability before inference
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.install_japanese }}
         timeout-minutes: 8
         run: |
           $capability = 'Language.OCR~~~ja-JP~0.0.1.0'
