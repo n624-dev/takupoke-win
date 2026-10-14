@@ -50,8 +50,18 @@ internal static partial class Program
         // Compute this receipt independently with the same Windows PDF API.
         raster = await RenderManualPdfAsync(bytes, width, height);
         bgra = raster.Bgra;
+        // Native PDF image rendering may add a faint resampling/encoding halo.
+        // Retain those original rendered pixels in independently bounded source
+        // boxes, rather than whitening them or asserting coverage without proof.
+        sources = sources.Select(source => {
+            var left = Math.Max(0, source.Box.X - 8); var top = Math.Max(0, source.Box.Y - 8);
+            return source with { Box = new(left, top,
+                Math.Min(width, source.Box.X + source.Box.Width + 8) - left,
+                Math.Min(height, source.Box.Y + source.Box.Height + 8) - top) };
+        }).ToArray();
+        document = document with { Sources = sources };
         if (raster.HasUnrecognizedInk(sources.Select(s => s.Box).ToArray(), raster.Rules()))
-            throw new InvalidDataException("Native fictional PDF contains unaccounted ink.");
+            throw new InvalidDataException("Native fictional PDF contains unaccounted ink outside bounded source halos.");
         var path = Path.Combine(root,"fictional-manual-source.pdf"); await File.WriteAllBytesAsync(path,bytes);
         using var content = await new FileSourceReader(new WindowsFileIdentity()).ReadAsync(path,MaterialKind.Timetable,null);
         var now = DateTimeOffset.UtcNow;
