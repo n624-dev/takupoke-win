@@ -208,13 +208,18 @@ internal static partial class Program
             crop.OriginalRasterHash == NotificationDiff.Digest(page.Bgra), "Selected crop is byte-for-byte native PDF source pixels");
         Invoke("manual-cancel-Timetable");
         Wait(() => Find("adopt-recovery-Timetable") is not null, "Cancel restores the prior valid preview");
-        Require(RecoveryValidator.Fingerprint(RecoveryUiPendingAsync(root).GetAwaiter().GetResult()) == RecoveryValidator.Fingerprint(before),
+        var restored = RecoveryUiPendingAsync(root).GetAwaiter().GetResult();
+        Require(restored.SourceId == before.SourceId && restored.Lease == before.Lease &&
+            RecoveryValidator.Fingerprint(restored.Document) == RecoveryValidator.Fingerprint(before.Document) &&
+            RecoveryValidator.Fingerprint(restored.Result) == RecoveryValidator.Fingerprint(before.Result),
             "Cancel restores all previous preview values and acquisition proof");
         Invoke("recovery-edit-" + room);
         Wait(() => Find("manual-submit-Timetable") is not null, "High-confidence selection can be reopened after cancellation");
         var newPlan = RecoveryUiManualPlanAsync(root).GetAwaiter().GetResult();
         Require(newPlan.ReviewToken != pending.ReviewToken, "Reopening creates a fresh review session");
         ((ValuePattern)WaitElement("manual-value-" + room).GetCurrentPattern(ValuePattern.Pattern)).SetValue("架空訂正教室B");
+        Wait(() => ((ValuePattern)WaitElement("manual-value-" + room).GetCurrentPattern(ValuePattern.Pattern)).Current.Value == "架空訂正教室B",
+            "Selected room edit is visible before acknowledgement");
         foreach (var key in new[] { subject, room })
         {
             Toggle(WaitElement("manual-ack-" + key));
