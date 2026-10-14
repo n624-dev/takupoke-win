@@ -52,6 +52,17 @@ public sealed class RecoveryHeaderReviewTests
         state.Acknowledge(target.Target.Key, true); Assert.True(state.Ready);
         Assert.Equal(target.OriginalOcr, state.Submission()[target.Target.Key]);
     }
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    public void EmptyReadOnlySelectionPreservesLegacyBodyInputBinding(int schema)
+    {
+        var state = new RecoveryManualInputState(); var values = new Dictionary<string,string> { ["body"] = "架空科目" };
+        state.Bind("source", values, schema, values, []);
+        Assert.Single(state.Values); Assert.False(state.Ready);
+        state.Acknowledge("body", true); Assert.True(state.Ready);
+    }
+
     [Fact]
     public void UnknownOrMissingStructuralHeaderCannotBeTypedIntoExistence()
     {

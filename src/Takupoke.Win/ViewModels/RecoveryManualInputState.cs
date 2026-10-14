@@ -26,7 +26,7 @@ internal sealed class RecoveryManualInputState
         _reviewLimit = manualSchemaVersion == 2 ? 128 : 3;
         if (identity is null || original is not { Count: > 0 } || original.Count > _reviewLimit) return;
         if (nativeOriginal is not null && !nativeOriginal.Keys.ToHashSet(StringComparer.Ordinal).SetEquals(original.Keys)) return;
-        if (readOnlyKeys is not null && (manualSchemaVersion != 2 || readOnlyKeys.Any(key => !original.ContainsKey(key)))) return;
+        if (readOnlyKeys is { Count: > 0 } && (manualSchemaVersion != 2 || readOnlyKeys.Any(key => !original.ContainsKey(key)))) return;
         _identity = identity;
         if (readOnlyKeys is not null) _readOnly.UnionWith(readOnlyKeys);
         foreach (var pair in original) { _values.Add(pair.Key, pair.Value); _original.Add(pair.Key, nativeOriginal?[pair.Key] ?? pair.Value); }
