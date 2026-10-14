@@ -1,0 +1,27 @@
+{
+  "repository": "PaddlePaddle/en_PP-OCRv5_mobile_rec_safetensors",
+  "revision": "e4abce2bbd335f6c3eda0507b7f8e8abd5af3419",
+  "declaredLicense": "Apache-2.0",
+  "files": {
+    "config.json": {
+      "bytes": 2086,
+      "sha256": "be52e23a259dc4838322115ee4c8f59197ce136a1aa0bd96574122b84f1fa4b7"
+    },
+    "model.safetensors": {
+      "bytes": 22465008,
+      "sha256": "9dab63fb9b819082f3f06e889a3af56dc2c27155d46d8409659c869a2aece2bc"
+    },
+    "inference.yml": {
+      "bytes": 3964,
+      "sha256": "49b7c9ccda20164cf42851995d235ab9ed11b7109e456d1cf911d42b71025858"
+    },
+    "preprocessor_config.json": {
+      "bytes": 4805,
+      "sha256": "66db0fbb4e009096e9a766845646dc34c3186892a1b76637dab2cb75a91edd4c"
+    },
+    "README.md": {
+      "bytes": 31,
+      "sha256": "4bcf87ecfbbb8e07a01b21415a970c8b53a5283bf6872b657040d3f45c9241f7"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "recipe": "english-v5-whole-ink-ascii-consumed-v1",
+  "modelSha256": "b5f833dfc5d0eb71da397b4efa06ebeee9b431b690a47d6af40d77d8eabc557f",
+  "dictionarySha256": "ef84489f927fb92b64714c7f110404e5bfb83c4067bd609fe4c41d5f23e25659",
+  "manifestSha256": "f44406401c3639376c09db77bc161542a1894dfd447cc8685a72bcacecbca5d4",
+  "inputsSha256": "26b9d6fe081763aa36a740d2fa2f81990a04855095d97527544bc0c4b78340a8",
+  "missingPrintableAscii": [],
+  "runtime": {
+    "onnxruntime": "1.23.2",
+    "numpy": "2.3.5",
+    "Pillow": "12.3.0"
+  },
+  "sources": {
+    "tools/ocr-model-comparison/run_english_ascii.py": "7b053bed6ebd0c42c9bac25c29ccbb7b0c50fee6bf58b350e669c54378622e69",
+    "tools/ocr-synthetic-training/image_tensor.py": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098"
+  },
+  "planned": 512,
+  "condition": "Whole original line ink +2 original px; no Japanese prefix removal; BGR48 uint8-rounded half-pixel emulation/min320/max960/normalized-zero padding, full438 greedy CTC, own min.8 and ASCII domain diagnostic",
+  "scope": "Consumed ASCII-v1 development, no unused-font/final/document/Windows qualification; Python FP32 sampler emulates app, does not claim native byte parity",
+  "qualification": false,
+  "modelActivation": false
+}

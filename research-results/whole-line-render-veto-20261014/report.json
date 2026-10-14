@@ -1,0 +1,104 @@
+{
+  "groups": {
+    "sans/subject": {
+      "rows": 24,
+      "nativeCorrectAbove": 19,
+      "nativeWrongAbove": 4,
+      "renderMatches": 20,
+      "retainedCorrect": 19,
+      "retainedWrong": 0,
+      "ambiguous": 0
+    },
+    "sans/teacher": {
+      "rows": 24,
+      "nativeCorrectAbove": 19,
+      "nativeWrongAbove": 2,
+      "renderMatches": 22,
+      "retainedCorrect": 19,
+      "retainedWrong": 0,
+      "ambiguous": 0
+    },
+    "sans/room": {
+      "rows": 24,
+      "nativeCorrectAbove": 8,
+      "nativeWrongAbove": 1,
+      "renderMatches": 12,
+      "retainedCorrect": 8,
+      "retainedWrong": 0,
+      "ambiguous": 0
+    },
+    "sans/header": {
+      "rows": 21,
+      "nativeCorrectAbove": 19,
+      "nativeWrongAbove": 2,
+      "renderMatches": 19,
+      "retainedCorrect": 19,
+      "retainedWrong": 0,
+      "ambiguous": 0
+    },
+    "sans/blank": {
+      "rows": 3,
+      "nativeCorrectAbove": 0,
+      "nativeWrongAbove": 0,
+      "renderMatches": 0,
+      "retainedCorrect": 0,
+      "retainedWrong": 0,
+      "ambiguous": 0
+    },
+    "serif/subject": {
+      "rows": 24,
+      "nativeCorrectAbove": 17,
+      "nativeWrongAbove": 1,
+      "renderMatches": 23,
+      "retainedCorrect": 17,
+      "retainedWrong": 0,
+      "ambiguous": 0
+    },
+    "serif/teacher": {
+      "rows": 24,
+      "nativeCorrectAbove": 19,
+      "nativeWrongAbove": 3,
+      "renderMatches": 21,
+      "retainedCorrect": 19,
+      "retainedWrong": 0,
+      "ambiguous": 0
+    },
+    "serif/room": {
+      "rows": 24,
+      "nativeCorrectAbove": 7,
+      "nativeWrongAbove": 5,
+      "renderMatches": 13,
+      "retainedCorrect": 7,
+      "retainedWrong": 0,
+      "ambiguous": 0
+    },
+    "serif/header": {
+      "rows": 21,
+      "nativeCorrectAbove": 20,
+      "nativeWrongAbove": 0,
+      "renderMatches": 21,
+      "retainedCorrect": 20,
+      "retainedWrong": 0,
+      "ambiguous": 0
+    },
+    "serif/blank": {
+      "rows": 3,
+      "nativeCorrectAbove": 0,
+      "nativeWrongAbove": 0,
+      "renderMatches": 0,
+      "retainedCorrect": 0,
+      "retainedWrong": 0,
+      "ambiguous": 0
+    }
+  },
+  "rawSha256": "06fe0f94b6547b76f25dad3d4754f23b7b80e9c4b02889fb701b09994e3debb4",
+  "worker": {
+    "rows": 192,
+    "seconds": 13.22588345099939,
+    "additionalModelCalls": 0,
+    "qualification": false
+  },
+  "qualification": false,
+  "modelActivation": false,
+  "limitations": "Already consumed clean lossless Noto Sans/Serif source fonts. Known-font diagnostic only; not scanned/unseen-font/document/Windows qualification or independent precision evidence. Single-character Il1/O0 replacements at each matching font/size only; ambiguity witnesses, never output correction. Other Unicode, invisible characters, ligatures, scripts and other fonts are NOT proven unique."
+}

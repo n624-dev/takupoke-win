@@ -1,0 +1,10 @@
+{
+  "scope": "Numeric no-update feasibility before any training protocol",
+  "sourceSha256": "9012abe2de32576f89b3367f34cad51bfcfc00d2be94cdf2fc51ab0cd8975479",
+  "logSha256": "283ecea099a15f19688bd627c07c92a00f496da08c00279faadc3ea348c8c841",
+  "error": "AssertionError at own peakRSS<4096MiB budget assertion",
+  "shapeAtFailure": "Initial script emitted rows only at end; failing shape and exactpeak not captured, so no individual-shape success/timing claim",
+  "optimizerUsed": false,
+  "trainingStarted": false,
+  "criterionNotRelaxed": true
+}

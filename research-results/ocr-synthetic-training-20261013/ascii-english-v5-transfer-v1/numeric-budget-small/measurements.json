@@ -1,0 +1,57 @@
+{
+  "rows": [
+    {
+      "batch": 1,
+      "inputWidth": 320,
+      "timeSteps": 40,
+      "seconds": [
+        0.1469693390026805,
+        0.09150165699975332,
+        0.0794362739979988
+      ],
+      "meanSeconds": 0.1059690900001442,
+      "gradientsFinite": true,
+      "peakRssMiB": 648.97265625
+    },
+    {
+      "batch": 2,
+      "inputWidth": 320,
+      "timeSteps": 40,
+      "seconds": [
+        0.19623779500034289,
+        0.1750774559986894,
+        0.21711748700181488
+      ],
+      "meanSeconds": 0.19614424600028238,
+      "gradientsFinite": true,
+      "peakRssMiB": 850.59765625
+    },
+    {
+      "batch": 1,
+      "inputWidth": 960,
+      "timeSteps": 120,
+      "seconds": [
+        0.4211275520028721,
+        0.2493127710004046,
+        0.2572864049980126
+      ],
+      "meanSeconds": 0.30924224266709643,
+      "gradientsFinite": true,
+      "peakRssMiB": 1052.24609375
+    },
+    {
+      "batch": 2,
+      "inputWidth": 960,
+      "timeSteps": 120,
+      "seconds": [
+        0.5306179330000305,
+        0.47361237399672973,
+        0.44484046599973226
+      ],
+      "meanSeconds": 0.4830235909988308,
+      "gradientsFinite": true,
+      "peakRssMiB": 1681.23046875
+    }
+  ],
+  "scope": "Numeric no-update batch1/2 only; nativefidelity gate stillfailed"
+}

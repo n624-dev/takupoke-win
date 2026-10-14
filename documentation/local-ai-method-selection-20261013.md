@@ -184,7 +184,52 @@ MangaOCRの日本語画像基盤も原行192件で本文30/72・37/72、教室3/
 次にWindows標準OCRのインストール済み日本語／英語エンジンを、同じ原画で比較する研究を用意した。
 このAPIには認識信頼度がないため、スコアを捏造して現行アプリへ接続しない。
 初回Windows実測はen-USのみ導入済みで192呼出し完了、全186印字画像で検出0。
-日本語の精度は未測定。日本語機能を導入し、全原画素の3倍反復＋固定白余白の別条件を測る。
+日本語の精度は未測定。その後、日本語機能の導入を試み、別実行で全原画素の3倍反復＋固定白余白を測った。
 初回のCI成功・空白出力を文字取得の成功には換算しない。導入資格はない。
 [初回の未検出](../research-results/windows-system-ocr-original-lines-20261014/README.md)。
 [研究条件](../tools/windows-system-ocr/README.md)。
+
+日本語のOS機能取得は8分上限で停止し0測定。別の導入済み英語エンジン測定は
+原画素3倍＋固定余白で非空出力88/192まで増えたが、印字186行の完全一致0。
+日本語機能の精度は未測定で、Windows利用者の日本語環境の結果へ一般化しない。
+[導入失敗](../research-results/windows-system-ocr-japanese-install-20261014/README.md) /
+[拡大英語入力](../research-results/windows-system-ocr-scaled-lines-20261014/README.md)。
+
+全8 CTC読取器・全28 pairの0call監査でも、V5 mobileとV6 mediumの同じ高スコア誤読が13行。
+model一致だけで文字を自動採用する方式は選ばない。横幅2倍の別入力でも本文54/72→53/72、
+57/72→52/72に下がり、原画素の反復だけでは教室コードを改善できなかった。
+[共通誤読](../research-results/ocr-reader-agreement-audit-20261014/README.md) /
+[横方向の別入力](../research-results/ocr-v6-medium-aspect2-20261014/README.md)。
+
+元CNNの最終depthwise filterだけを調整する新条件も終了した。384行一致228→240だが、
+正しい診断採用175→81、誤採用14・負例採用1が残り元モデルを選定。日本語128/128保持だけでは
+導入できず、同条件の延長を保留した。最終字体・追加形式への変換を温存する。
+[限定CNN適応](../research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/README.md)。
+
+公式PaddleOCR-VL1.6も原行192件を完了した。本文45/72・40/72、教室3/48、見出し40/42。
+教室の高tokenスコア誤読12行と、空白6画像の出力上限到達があり、不採用とする。
+CPU4のピークRSS約2.47GiBだが、実Windows精度／性能は未評価。
+親担当が未commitのrunnerを実行後に上書きし、元Pythonのbyte列を保持できなかった制限も
+raw／freezeを変えずに記録する。別v2 runnerは元studyの完全再現として扱わない。
+[公式VLMと保存監査](../research-results/paddleocr-vl16-clean-lines-20261014/README.md)。
+
+
+英語専用V5を元から英数字だけの既消費384正例で測ると223行一致したが、
+正しい診断採用191に対し誤採用75、負例128行の採用15が残った。lookalikeは30/96一致。
+日本語本文と組み合わせて導入できる精度ではなく、学習の可否は別に初期忠実性から調べる。
+[英数字だけの原行](../research-results/english-v5-ascii-development-20261014/README.md)。
+
+原インクを全て保持する白列分割も、384正例中99行で文字数と領域数が異なる。
+原画像保全だけを文字境界の証明へ換算しない。
+[画素列の診断](../research-results/physical-ink-column-audit-20261014/README.md)。
+
+既知の2字体で原文字列全体を描き直す照合では、V6 mediumの高スコア誤読18行を全て拒否し、
+正しい128行を保持した。ただし印字186行の取得128、教室15/48に留まる。
+未知字体やスキャンでの性能・Unicodeの一意性は未証明で、拒否による文字取得の改善とはしない。
+[全文字形の照合](../research-results/whole-line-render-veto-20261014/README.md)。
+
+
+英語V5の元ONNXからTorchへの学習準備は、512原行＋10動的形状の文字・判定が全て一致したものの、
+固定数値ゲートに届かず学習未開始で終了した。閾値を変えて学習へ進めず、元の失敗を保持する。
+これは学習後の精度結果ではなく、初期計算の一致を満たさなかった結果である。
+[英語基盤の初期忠実性](../research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/README.md)。

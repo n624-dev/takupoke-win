@@ -29,3 +29,7 @@ research-results/windows-system-ocr-original-lines-20261014/worker-stderr.txt -t
 research-results/windows-system-ocr-original-lines-20261014/as-run-source/run.py -text whitespace=cr-at-eol
 tools/windows-system-ocr/*.py text eol=lf
 research-results/manga-ocr-clean-lines-20261014/worker-stderr.txt -text whitespace=-blank-at-eol
+research-results/paddleocr-vl16-clean-lines-20261014/native-server.txt -text whitespace=-blank-at-eol
+research-results/windows-system-ocr-scaled-lines-20261014/worker-stdout.txt -text whitespace=cr-at-eol
+research-results/windows-system-ocr-scaled-lines-20261014/worker-stderr.txt -text
+research-results/windows-system-ocr-japanese-install-20261014/installation-native-console.txt -text whitespace=-blank-at-eol

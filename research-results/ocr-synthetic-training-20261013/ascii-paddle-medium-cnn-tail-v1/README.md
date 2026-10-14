@@ -1,0 +1,36 @@
+# PP-OCRv6 medium: final CNN spatial adaptation v1
+
+Research only; no model is qualified or active. Fixed development and selection are running; final Sawarabi fonts remain unopened. This experiment changes the last CNN spatial filter, not the previously closed head/SVTR/local-neck conditions.
+
+The official model and full 18,710-entry classifier remain the baseline. The original final CNN input `p2o.pd_op.add.65.0` is FP32 `[batch,768,3,localWidth]`. Reconstructed Conv128 is depthwise 3×3 with padding 1, copied weights and bias; Conv129/130 and exact ERF GELU/residual follow unchanged. Original AveragePool 3×2, local neck, SVTR and CTC head remain frozen. Only Conv128 weights/bias (7,680 parameters) and an independent diagnostic reject head (193) are trained. No ASCII dictionary reduction or class whitelist raises confidence.
+
+Native reconstruction passed all 48 previously consumed images and 10 batch/width cases (1/2 × 320/481/500/640/960), including odd local width 125. Text, CTC intervals, floor .8 and valid-width decisions all matched. These are initialization checks, not new quality evidence. The first constructor failed because buffer `half` collided with the existing Torch method; the failure is recorded and occurred before freezing or inference. Numeric CPU2 backward was finite, left state unchanged, and peaked at 1,642 MiB; B16 time was .549 seconds at T40 and 1.899 seconds at T120 under concurrent Linux load.
+
+Fresh seeds/literals use 640 training positives plus 160 negatives, and 384 development positives plus 64 additional Japanese retention and 128 negatives. Noto Sans/Serif and MPLUS1Code/BIZUDMincho train; KosugiMaru/ZenAntique are previously consumed development fonts used with new literals and never moved into training. Every positive group has exactly equal font counts, confirmed before cache or optimizer; training mono/proportional ratio is 50:50. Previous corpora/oracles are exclusion-only. All target glyphs must exist in font cmap; no fallback/tofu labels. The 95 printable ASCII characters have deterministic shuffled coverage alongside arbitrary random codes and case/confusable pairs, without a whitelist of valid outputs.
+
+Whole original RGB ink bbox plus two original pixels retains supplied ink, line baseline, relative character height, internal gaps and CJK prefix. Native BGR48 bilinear pixel-center/uint8 rounding/normalized-zero right padding retains width 320..960 and validWidth. Parent minimum-width160 research is separate. FP32 original input hashes and lossless NPZ CNN/teacher caches preserve bytes; no FP16. The filename `native-prepool-teacher-observer.onnx` is inherited but its first output is explicitly add.65, the final CNN input, rather than add.69 used in the older height-neck experiment.
+
+The protocol fixes 8 epochs, evaluation 2/4/8, CPU2, batch16, own RSS4GiB, cache/training each30minutes, total own added disk1.5GiB and free reserve2GiB. Full18710CTC, full teacher KL, feature MSE and reject BCE apply. Japanese retention, damaged/multiline/noise/blank safety, padding emissions and wrong accepts are reported separately. Original fallback participates in selection. Strict development gates retain raw exact97%, correct accepted90%, zero wrong/negative accepts, eachfont95% and zero original-correct Japanese regressions before any separate final/export stage. Component results never activate a model.
+
+Same-pixel source contradictions cannot be resolved by a crop-only reject head. Independent original ink/script/geometry/cell ownership proof remains mandatory. Postselection consumed source-proof controls never affect training or selection. iOS files are untouched; Windows/iPhone execution and portable export are not yet validated. All pixels/weights/checkpoints/caches live outside Git; only source, documentation and structured research records are integration material.
+
+Development baseline computes the copied full Torch classifier on native ONNX teacher features; all candidates use the same full classifier arithmetic. Its confidence is not bitwise original ONNX or native Windows confidence. The separate 48-image/10-shape pretraining comparison checks the complete original ONNX path. See `adaptation-v1/baseline-computation-audit.json` and `numerical-fidelity-scope-audit.json` for the distinct fidelity scopes.
+
+Final reservation refers to this candidate’s final corpus and OCR evaluation. Parent previously disclosed source-only use of SawarabiMincho for original-text/position acquisition; that is retained as prior exposure and is not an OCR-unseen whole-font-lineage claim. No Sawarabi final corpus or inference is opened here (`final-font-reservation-audit.json`).
+
+The fixed experiment completed with original fallback. No trained candidate passed the unchanged continuation gate; final/export/activation and whole-document qualification remain absent.
+
+|Condition|Raw exact /384|Correct accepted|Wrong accepted|Negative accepted /128|Japanese exact /128|
+|---|---:|---:|---:|---:|---:|
+|Original|228|175|64|25|128|
+|Epoch2|239|0|0|0|128|
+|Epoch4|237|71|13|0|128|
+|Epoch8|240|81|14|1|128|
+
+Epoch2 rejects all positives, so its zero wrong/negative accepts is not successful reading. Epoch8 gains33 exact rows but regresses21, giving only12 net; the highest wrong-accepted native-model confidence is .994595. KosugiMaru monospace remains94/192 exact while ZenAntique improves134→146/192. Japanese literal retention and28 empty controls stay intact, but correct acceptance is94 below original. The remaining accepted negative is interior damage. O→0 edits remain57; l→I rises to51, and colon/space errors persist. Per-font balance was actually50:50, not only intended.
+
+Training392.846seconds, cache181.382seconds, peak2,589.695MiB on CPU2; no budget stop. Both FP32cache sets total1,144,598,659bytes (1.066GiB), and all1,376 compressed/restored dtype/shape/byte hashes were verified. All54 fixed pointwise/pool/neck/SVTR/BN/scalar tensors stayed identical in every checkpoint. Fullhead matrices/bias were original buffers and not optimizer/checkpoint targets. Source/raw/checkpoint/UTF8LF and previous portable ZIP audits passed. These are concurrent Linux figures; no Windows or iPhone performance claim.
+
+Postselection32 same-pixel source pairs accepted both conflicting origins: original30, epoch2 zero, epoch4 ten, epoch8 nine. Rejecting both counterparts removes valid text too and cannot prove the source of identical pixels. These consumed controls never affect selection or final credit.
+
+The new final-CNN spatial adaptation is technically feasible within the budget but does not provide production accuracy. Repeating/extending this same DW-only condition is paused. Moving to more CNN parameters is not automatically justified by this small raw gain: the monospace weakness persists and high-confidence confusions remain. A future earlier-CNN study should first demonstrate fidelity and useful preserved vertical information before the stride2 height reduction (H6→H3), with its own fresh literal protocol and unchanged safeguards; this is a diagnostic option, not evidence that such training will succeed. No further training starts from this result. The parent continues acquisition/source/full-document and other-basis work; the overall production goal is still unmet.

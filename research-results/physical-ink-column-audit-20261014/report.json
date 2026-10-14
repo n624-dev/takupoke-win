@@ -1,0 +1,175 @@
+{
+  "rows": 512,
+  "allVisibleInkCovered": 512,
+  "positiveGroups": {
+    "code": {
+      "rows": 96,
+      "groupCountEqualsPrintedCharacters": 72,
+      "moreGroupsThanCharacters": 0,
+      "fewerGroupsThanCharacters": 24
+    },
+    "printable": {
+      "rows": 96,
+      "groupCountEqualsPrintedCharacters": 69,
+      "moreGroupsThanCharacters": 5,
+      "fewerGroupsThanCharacters": 22
+    },
+    "lookalike": {
+      "rows": 96,
+      "groupCountEqualsPrintedCharacters": 72,
+      "moreGroupsThanCharacters": 0,
+      "fewerGroupsThanCharacters": 24
+    },
+    "natural": {
+      "rows": 96,
+      "groupCountEqualsPrintedCharacters": 72,
+      "moreGroupsThanCharacters": 0,
+      "fewerGroupsThanCharacters": 24
+    }
+  },
+  "countMismatchExamples": [
+    {
+      "id": "development-00000",
+      "kind": "code",
+      "literal": "Cx1LpVbdhsH",
+      "printedCharacters": 11,
+      "proposedGroups": 2
+    },
+    {
+      "id": "development-00003",
+      "kind": "natural",
+      "literal": "blue silver 9km6",
+      "printedCharacters": 14,
+      "proposedGroups": 9
+    },
+    {
+      "id": "development-00008",
+      "kind": "code",
+      "literal": "nTFNf0",
+      "printedCharacters": 6,
+      "proposedGroups": 3
+    },
+    {
+      "id": "development-00011",
+      "kind": "natural",
+      "literal": "orbit stone UOAZ",
+      "printedCharacters": 14,
+      "proposedGroups": 8
+    },
+    {
+      "id": "development-00012",
+      "kind": "code",
+      "literal": "EcjKLMwpP03",
+      "printedCharacters": 11,
+      "proposedGroups": 1
+    },
+    {
+      "id": "development-00017",
+      "kind": "printable",
+      "literal": "qj`r$MC'\"6",
+      "printedCharacters": 10,
+      "proposedGroups": 11
+    },
+    {
+      "id": "development-00021",
+      "kind": "printable",
+      "literal": "9o\\_[{7G,H`tm%",
+      "printedCharacters": 14,
+      "proposedGroups": 2
+    },
+    {
+      "id": "development-00022",
+      "kind": "lookalike",
+      "literal": "K8X8IZ21-HCY",
+      "printedCharacters": 12,
+      "proposedGroups": 4
+    },
+    {
+      "id": "development-00026",
+      "kind": "lookalike",
+      "literal": "ZZXX_uRo",
+      "printedCharacters": 8,
+      "proposedGroups": 5
+    },
+    {
+      "id": "development-00027",
+      "kind": "natural",
+      "literal": "round river xeZl",
+      "printedCharacters": 14,
+      "proposedGroups": 12
+    },
+    {
+      "id": "development-00039",
+      "kind": "natural",
+      "literal": "bright quiet BirJ",
+      "printedCharacters": 15,
+      "proposedGroups": 13
+    },
+    {
+      "id": "development-00042",
+      "kind": "lookalike",
+      "literal": "P0YI w2w",
+      "printedCharacters": 7,
+      "proposedGroups": 3
+    },
+    {
+      "id": "development-00044",
+      "kind": "code",
+      "literal": "kSy3un9HNxm",
+      "printedCharacters": 11,
+      "proposedGroups": 10
+    },
+    {
+      "id": "development-00047",
+      "kind": "natural",
+      "literal": "breeze round dWm8",
+      "printedCharacters": 15,
+      "proposedGroups": 11
+    },
+    {
+      "id": "development-00051",
+      "kind": "natural",
+      "literal": "blue breeze EzK4",
+      "printedCharacters": 14,
+      "proposedGroups": 6
+    },
+    {
+      "id": "development-00053",
+      "kind": "printable",
+      "literal": "ddKK=qK",
+      "printedCharacters": 7,
+      "proposedGroups": 1
+    },
+    {
+      "id": "development-00054",
+      "kind": "lookalike",
+      "literal": "FY0lllI-VKl",
+      "printedCharacters": 11,
+      "proposedGroups": 7
+    },
+    {
+      "id": "development-00058",
+      "kind": "lookalike",
+      "literal": "TlZ21-4mc",
+      "printedCharacters": 9,
+      "proposedGroups": 4
+    },
+    {
+      "id": "development-00067",
+      "kind": "natural",
+      "literal": "shadow round wtHM",
+      "printedCharacters": 15,
+      "proposedGroups": 4
+    },
+    {
+      "id": "development-00069",
+      "kind": "printable",
+      "literal": "=/<\"",
+      "printedCharacters": 4,
+      "proposedGroups": 5
+    }
+  ],
+  "modelCalls": 0,
+  "qualification": false,
+  "conclusion": "Ink conservation alone cannot justify treating groups as complete characters or moving an ASCII boundary; semantic crop/repair is not activated."
+}

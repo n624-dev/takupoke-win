@@ -13,6 +13,8 @@ OrtEnv.Instance().DisableTelemetryEvents();
 var root = Path.GetDirectoryName(Path.GetFullPath(args[0]))!;
 using var manifest = JsonDocument.Parse(File.ReadAllBytes(args[0]));
 if (manifest.RootElement.GetProperty("recipe").GetString() != "independent-ocr-model-color-v1") throw new InvalidDataException("Recipe mismatch.");
+var researchAspectX = manifest.RootElement.TryGetProperty("researchAspectX", out var aspect) ? aspect.GetInt32() : 1;
+if (researchAspectX is not (1 or 2)) throw new InvalidDataException("Research aspect condition failed.");
 using var lifetime = new CancellationTokenSource(TimeSpan.FromMinutes(12));
 using var output = new FileStream(args[1], FileMode.CreateNew, FileAccess.Write, FileShare.None);
 using var writer = new StreamWriter(output);
@@ -49,7 +51,7 @@ foreach (var model in models)
         var bytes = File.ReadAllBytes(Verified(row.GetProperty(condition)));
         var width = row.GetProperty("width").GetInt32(); var height = row.GetProperty("height").GetInt32();
         var raster = new RecoveryRaster(width, height, bytes);
-        var input = OcrInputTransform.Recognition(raster, new(0, 0, width, height), lifetime.Token);
+        var input = ResearchAspect.Recognition(raster, researchAspectX, lifetime.Token);
         var infer = Stopwatch.StartNew();
         using var result = session.Run([NamedOnnxValue.CreateFromTensor("x", input.Tensor)]);
         infer.Stop(); lifetime.Token.ThrowIfCancellationRequested();
@@ -76,7 +78,7 @@ foreach (var model in models)
         writer.WriteLine(JsonSerializer.Serialize(new { id = ordinal, model = name, condition,
             text = string.Concat(pieces.Select(p => p.Text)), minimumConfidence = pieces.Count == 0 ? (double?)null : pieces.Min(p => p.Confidence),
             lowConfidencePieces = pieces.Count(p => p.Confidence < .8f), unsupportedPadding,
-            input.ValidWidth, input.InputWidth, symbols = dictionary.Length, timeSteps = probabilities.Dimensions[1],
+            input.ValidWidth, input.InputWidth, researchAspectX, symbols = dictionary.Length, timeSteps = probabilities.Dimensions[1],
             inferenceMilliseconds = infer.Elapsed.TotalMilliseconds, legacyDecodeMilliseconds = previousMs / 3, currentDecodeMilliseconds = currentMs / 3,
             decodeExact = true, pieces, modelLoadMilliseconds = load.Elapsed.TotalMilliseconds,
             runtimeVersion = typeof(InferenceSession).Assembly.GetName().Version?.ToString() }));

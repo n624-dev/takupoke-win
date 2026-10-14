@@ -1,0 +1,90 @@
+{
+  "timeUtc": "2026-10-14T04:56:28.169933+00:00",
+  "status": "Closed/no training protocol/new corpus/optimizer/model adoption/final/export/activation",
+  "reason": "Fixed initial native numerical fidelity bounds not met; no relaxation based on relative numeric size or identical consumed text outputs",
+  "fidelityConditions": [
+    {
+      "name": "hf-native-v1",
+      "counts": {
+        "textIntervals": 512,
+        "floor08AsciiValidDecisions": 512,
+        "sourceRectPreserved": 512
+      },
+      "maximumDifferences": {
+        "observerProbability": 0.0,
+        "feature": 0.00033485889434814453,
+        "logit": 0.0007457733154296875,
+        "probability": 9.918212890625e-05
+      },
+      "gatePassed": false,
+      "seconds": 63.33891643999959,
+      "peakRssMiB": 790.2734375,
+      "freezeSha256": "6725ab18ee56f0601a8a620a96a8c340cba98d0f7eb23c7338f5efaa4bddef79",
+      "rawSha256": "d8d14ed4c08345506c45611d705f75c6ed719cf6cfc5e8f486a9839ce02988b4"
+    },
+    {
+      "name": "fused-cnn-v2",
+      "counts": {
+        "textIntervals": 512,
+        "floor08AsciiValidDecisions": 512,
+        "sourceRectPreserved": 512
+      },
+      "maximumDifferences": {
+        "observerProbability": 0.0,
+        "feature": 0.0002785921096801758,
+        "logit": 0.00119781494140625,
+        "probability": 0.00011809170246124268
+      },
+      "gatePassed": false,
+      "seconds": 38.31068169300124,
+      "peakRssMiB": 655.015625,
+      "freezeSha256": "fa4577b3c852438f80376a080ef1fb75e7e3d6af48ef775af13c1598590a6044",
+      "rawSha256": "40e0b0e5fa8b19a46bec3dc41edba9895f5cee995c03bb2a0bc849ac338ca34d"
+    },
+    {
+      "name": "native-math-v3",
+      "counts": {
+        "textIntervals": 512,
+        "floor08AsciiValidDecisions": 512,
+        "sourceRectPreserved": 512
+      },
+      "maximumDifferences": {
+        "observerProbability": 0.0,
+        "feature": 0.0002840757369995117,
+        "logit": 0.0012226104736328125,
+        "probability": 0.00012002885341644287
+      },
+      "gatePassed": false,
+      "seconds": 38.21213793100105,
+      "peakRssMiB": 664.21875,
+      "freezeSha256": "cb65ee64b5e5042e0be1b35244552f2be6651394a19fdee584076bd3fed83d8f",
+      "rawSha256": "f623f84d86a5fdaf1411131a6675fc7920d6f62b5278509bdc24fccb77ac110a"
+    }
+  ],
+  "registeredNumericalLimits": {
+    "featureMaxAbsolute": 0.0001,
+    "logitMaxAbsolute": 0.001,
+    "probabilityMaxAbsolute": 0.0001
+  },
+  "allConditionsConsumedTextIntervalFloorAsciiValid512Identical": true,
+  "allConditionsNumericDynamicShapes": 10,
+  "headVocabularyRowsPreserved": 438,
+  "dictionaryReduction": false,
+  "finalSawarabiOpened": false,
+  "oracleOpenedByChild": false,
+  "safetensorsParams": 5510778,
+  "nativeFusedTrainableArchitectureParams": 1932342,
+  "nativeCnnParams": 1313184,
+  "numericBudgetSmallStateUnchanged": true,
+  "numericBudgetSmallPeakRssMiB": 1681.23046875,
+  "largerBatchBudgetFailurePreserved": true,
+  "largerBatchFailurePreciseShapeAndPeak": "Not captured; no successful measurement credit",
+  "numericDifferenceSource": "Largest two cases: nativeCNN->sameTorchencoder falls below initialfeature bound; TorchCNN->sameTorchencoder exceeds it. CNN floatingpoint computation path is primary difference locus; precise fusion/kernel cause not established. HeadConv/BN/classifier27parameter arrays exact zero difference.",
+  "newTrainDevelopmentFontPartition": "Not created; none moved into training",
+  "japanesePrimaryChanged": false,
+  "iosEdited": false,
+  "childCommitOrPush": false,
+  "ownAllScratchBytes": 91941841,
+  "freeDiskBytes": 6485794816,
+  "next": "Hold transfer; retain original model and failures; parent continues nonlearning/source/full-document comparisons."
+}

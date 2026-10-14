@@ -1,0 +1,12 @@
+{
+  "originalFrozenRunnerSha256": "79b9c836c3466cfc0b8bffff4a31f821d006597547a69940b7f675f765add17a",
+  "originalRunnerBytesAvailable": false,
+  "cause": "Parent overwrote uncommitted runner during post-run continuation; original frozen assets, native runtime and raw retained",
+  "rawOrFreezeRewritten": false,
+  "additionalModelCalls": 0,
+  "qualification": false,
+  "limits": "Exact original Python source reproduction is unavailable. Current runner is a separate unmeasured v2 profile; no source-hash identity claim for the first experiment.",
+  "replacementBeforeV2RenameSha256": "73539d6a14e2a3b826d26303b9cb46cc203a9f8362dc00b3dbbc327f75a12601",
+  "replacementV2Path": "tools/vision-ocr-comparison/run_paddle_vl_v2.py",
+  "replacementV2Sha256": "c76d216f004983cbb4a96482510c96891af228e5a889cf6fc596a0be12c65008"
+}

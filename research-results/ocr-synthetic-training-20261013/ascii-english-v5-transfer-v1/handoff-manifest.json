@@ -1,0 +1,124 @@
+{
+  "scope": "Source/docs/structured immutable research records only; no asset pixels/models/checkpoints or internalMD",
+  "sourceFiles": 10,
+  "artifactFiles": 18,
+  "utf8LfJsonAndSourceIoAuditPassed": true,
+  "trainingStarted": false,
+  "fidelityGatePassed": false,
+  "activation": false,
+  "finalOpened": false,
+  "files": {
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/README.md": {
+      "bytes": 4695,
+      "sha256": "23298daa22e3e620e1eed9e733d29d23a85c83e9d32d4217beb30059150850d9"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/asset-provenance.json": {
+      "bytes": 861,
+      "sha256": "ad5491a3a1d392143852e23680fffa2c4e57580c33d1ee42b70220b854636f49"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/closure.json": {
+      "bytes": 3707,
+      "sha256": "738b3c4d0270487a252ebcf40038966cdfcd53c1178a6fc4077067ef6d938ed0"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/fidelity.json": {
+      "bytes": 3746,
+      "sha256": "20c932b02351678a8d805100da072701b168f3ea7b582fdcc382a31d0cc4a587"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/freeze.json": {
+      "bytes": 1327,
+      "sha256": "6725ab18ee56f0601a8a620a96a8c340cba98d0f7eb23c7338f5efaa4bddef79"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/fused-cnn-v2/fidelity.json": {
+      "bytes": 3738,
+      "sha256": "f03b539b32f9e151f356b312848348fcdc84818a66becc27414909305dcdd578"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/fused-cnn-v2/freeze.json": {
+      "bytes": 1676,
+      "sha256": "fa4577b3c852438f80376a080ef1fb75e7e3d6af48ef775af13c1598590a6044"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/fused-cnn-v2/unjudged.jsonl": {
+      "bytes": 1165336,
+      "sha256": "40e0b0e5fa8b19a46bec3dc41edba9895f5cee995c03bb2a0bc849ac338ca34d"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/native-math-v3/fidelity.json": {
+      "bytes": 3741,
+      "sha256": "d8fa91a2f6e0af50341eda46b40e022281e46c1ab44d1f4009cb225d929348e1"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/native-math-v3/freeze.json": {
+      "bytes": 1853,
+      "sha256": "cb65ee64b5e5042e0be1b35244552f2be6651394a19fdee584076bd3fed83d8f"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/native-math-v3/unjudged.jsonl": {
+      "bytes": 1165331,
+      "sha256": "f623f84d86a5fdaf1411131a6675fc7920d6f62b5278509bdc24fccb77ac110a"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/numeric-budget/initial-budget-error.log": {
+      "bytes": 1840,
+      "sha256": "283ecea099a15f19688bd627c07c92a00f496da08c00279faadc3ea348c8c841"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/numeric-budget/initial-budget-failure.json": {
+      "bytes": 549,
+      "sha256": "81a69be6a0449339c5b31d25bbc996cdfe489af4da20f0b22da10b9b22aa68da"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/numeric-budget/initial-budget.py.txt": {
+      "bytes": 2466,
+      "sha256": "9012abe2de32576f89b3367f34cad51bfcfc00d2be94cdf2fc51ab0cd8975479"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/numeric-budget-small/budget.json": {
+      "bytes": 1728,
+      "sha256": "57fcd9d674113d8961b97356cf6858eeeaa96f9ce7402c2b894eb2a5afdcaff2"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/numeric-budget-small/measurements.json": {
+      "bytes": 1289,
+      "sha256": "9d6c209396788692e8e244b7f95890f8b1b953bd2ca5db93a7b0add754229b26"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/numerical-trace/trace.json": {
+      "bytes": 1554,
+      "sha256": "a840601f71b88450a13aa9f27f6dfb60d2555921d98836f326c91082e0ccae1e"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-transfer-v1/unjudged.jsonl": {
+      "bytes": 1165507,
+      "sha256": "d8d14ed4c08345506c45611d705f75c6ed719cf6cfc5e8f486a9839ce02988b4"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-transfer/README.md": {
+      "bytes": 1243,
+      "sha256": "db5ded57142d9b07f7a8892f791cfaa8647939fb33023f01b937cede6bfd695c"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-transfer/budget.py": {
+      "bytes": 2466,
+      "sha256": "9012abe2de32576f89b3367f34cad51bfcfc00d2be94cdf2fc51ab0cd8975479"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-transfer/budget_small.py": {
+      "bytes": 2626,
+      "sha256": "ba9b4e4d265e0ced5f7bd32e475b045d40dbbb83a6df69ddec234aa891d43368"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-transfer/fidelity_trace.py": {
+      "bytes": 3062,
+      "sha256": "cc66c3d814a0fa009c4b354258b658bfd8bccc79e05c91c711c54c9cec150067"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-transfer/native.py": {
+      "bytes": 804,
+      "sha256": "758f0a971d4f89d069e3097176a7267717cde043857fdd5a476e94612494d7f6"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-transfer/native_fused.py": {
+      "bytes": 3621,
+      "sha256": "2dd11c82040a6793436f18a77bbe99ac773587bc50161c9705498e525eb65f3c"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-transfer/native_math.py": {
+      "bytes": 1628,
+      "sha256": "45a0128244bb75993dd1f9d23a3821fa53f1dd1190d8ead8e54f9336ce9ea8e4"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-transfer/reproduce.py": {
+      "bytes": 6986,
+      "sha256": "114aacfcf8fc231efd02d16775363f809825a2a1a1c73bb3352128396e133ed6"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-transfer/reproduce_fused.py": {
+      "bytes": 7328,
+      "sha256": "40504531189e768b41a69c7fcbdc010cd1decfb24053c6f00183c2e6fa3d6837"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-transfer/reproduce_math.py": {
+      "bytes": 7458,
+      "sha256": "b3a74bc7398b8d273517d425f86c59fccb77ae3c9c82acd5d5f6a8389b5e0a28"
+    }
+  }
+}

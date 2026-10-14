@@ -1,0 +1,609 @@
+{
+  "selected": {
+    "name": "original",
+    "epoch": 0,
+    "path": "/workspace/scratch/ocr-frozen-20261013/v6-medium.onnx",
+    "sha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba",
+    "metrics": {
+      "name": "original",
+      "positiveRows": 384,
+      "exact": 228,
+      "correctAccepted": 175,
+      "incorrectAccepted": 64,
+      "negativeRows": 128,
+      "negativeAccepted": 25,
+      "retentionRows": 128,
+      "retentionExact": 128,
+      "paddingRows": 15,
+      "cer": 0.08404112650871703,
+      "groups": {
+        "ascii_short": {
+          "rows": 64,
+          "exact": 55,
+          "correctAccepted": 52,
+          "incorrectAccepted": 2,
+          "accepted": 54,
+          "nonempty": 64
+        },
+        "blank": {
+          "rows": 28,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "clipped": {
+          "rows": 25,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 11,
+          "nonempty": 25
+        },
+        "interior_damage": {
+          "rows": 25,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 14,
+          "nonempty": 25
+        },
+        "japanese": {
+          "rows": 64,
+          "exact": 64,
+          "correctAccepted": 64,
+          "incorrectAccepted": 0,
+          "accepted": 64,
+          "nonempty": 64
+        },
+        "mixed_code": {
+          "rows": 128,
+          "exact": 73,
+          "correctAccepted": 44,
+          "incorrectAccepted": 33,
+          "accepted": 77,
+          "nonempty": 128
+        },
+        "mixed_confusable": {
+          "rows": 128,
+          "exact": 36,
+          "correctAccepted": 15,
+          "incorrectAccepted": 29,
+          "accepted": 44,
+          "nonempty": 128
+        },
+        "multiline": {
+          "rows": 25,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 25
+        },
+        "noise": {
+          "rows": 25,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 6
+        },
+        "retention_japanese": {
+          "rows": 64,
+          "exact": 64,
+          "correctAccepted": 64,
+          "incorrectAccepted": 0,
+          "accepted": 64,
+          "nonempty": 64
+        }
+      },
+      "rawSha256": "6f94a101a4de69fef0e3c416f9a803cd55d7f250d5f47d4fbc2d26998c5b96eb",
+      "scope": "New independent fictional literal development on consumed KosugiMaru/ZenAntique fonts with new literals; not final or production qualification"
+    }
+  },
+  "original": {
+    "name": "original",
+    "epoch": 0,
+    "path": "/workspace/scratch/ocr-frozen-20261013/v6-medium.onnx",
+    "sha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba",
+    "metrics": {
+      "name": "original",
+      "positiveRows": 384,
+      "exact": 228,
+      "correctAccepted": 175,
+      "incorrectAccepted": 64,
+      "negativeRows": 128,
+      "negativeAccepted": 25,
+      "retentionRows": 128,
+      "retentionExact": 128,
+      "paddingRows": 15,
+      "cer": 0.08404112650871703,
+      "groups": {
+        "ascii_short": {
+          "rows": 64,
+          "exact": 55,
+          "correctAccepted": 52,
+          "incorrectAccepted": 2,
+          "accepted": 54,
+          "nonempty": 64
+        },
+        "blank": {
+          "rows": 28,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "clipped": {
+          "rows": 25,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 11,
+          "nonempty": 25
+        },
+        "interior_damage": {
+          "rows": 25,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 14,
+          "nonempty": 25
+        },
+        "japanese": {
+          "rows": 64,
+          "exact": 64,
+          "correctAccepted": 64,
+          "incorrectAccepted": 0,
+          "accepted": 64,
+          "nonempty": 64
+        },
+        "mixed_code": {
+          "rows": 128,
+          "exact": 73,
+          "correctAccepted": 44,
+          "incorrectAccepted": 33,
+          "accepted": 77,
+          "nonempty": 128
+        },
+        "mixed_confusable": {
+          "rows": 128,
+          "exact": 36,
+          "correctAccepted": 15,
+          "incorrectAccepted": 29,
+          "accepted": 44,
+          "nonempty": 128
+        },
+        "multiline": {
+          "rows": 25,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 25
+        },
+        "noise": {
+          "rows": 25,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 6
+        },
+        "retention_japanese": {
+          "rows": 64,
+          "exact": 64,
+          "correctAccepted": 64,
+          "incorrectAccepted": 0,
+          "accepted": 64,
+          "nonempty": 64
+        }
+      },
+      "rawSha256": "6f94a101a4de69fef0e3c416f9a803cd55d7f250d5f47d4fbc2d26998c5b96eb",
+      "scope": "New independent fictional literal development on consumed KosugiMaru/ZenAntique fonts with new literals; not final or production qualification"
+    }
+  },
+  "candidates": [
+    {
+      "name": "epoch-2",
+      "epoch": 2,
+      "path": "/workspace/scratch/ascii-paddle-medium-cnn-tail-20261014-v1/adaptation-v1/epoch-2-adapter.safetensors",
+      "sha256": "0120c8589ba96c39d278da945d34d714c91d8b441e7a6940942a3badb9ab4cbd",
+      "metrics": {
+        "name": "epoch-2",
+        "positiveRows": 384,
+        "exact": 239,
+        "correctAccepted": 0,
+        "incorrectAccepted": 0,
+        "negativeRows": 128,
+        "negativeAccepted": 0,
+        "retentionRows": 128,
+        "retentionExact": 128,
+        "paddingRows": 16,
+        "cer": 0.0735359856951274,
+        "groups": {
+          "ascii_short": {
+            "rows": 64,
+            "exact": 53,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 64
+          },
+          "blank": {
+            "rows": 28,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 0
+          },
+          "clipped": {
+            "rows": 25,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 25
+          },
+          "interior_damage": {
+            "rows": 25,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 25
+          },
+          "japanese": {
+            "rows": 64,
+            "exact": 64,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 64
+          },
+          "mixed_code": {
+            "rows": 128,
+            "exact": 79,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 128
+          },
+          "mixed_confusable": {
+            "rows": 128,
+            "exact": 43,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 128
+          },
+          "multiline": {
+            "rows": 25,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 25
+          },
+          "noise": {
+            "rows": 25,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 6
+          },
+          "retention_japanese": {
+            "rows": 64,
+            "exact": 64,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 64
+          }
+        },
+        "rawSha256": "f9443af28d74d034853902ecaa2ef59d0010014b2fc63893e8cf09dfbf484707",
+        "scope": "New independent fictional literal development on consumed KosugiMaru/ZenAntique fonts with new literals; not final or production qualification",
+        "retentionRegressions": 0
+      }
+    },
+    {
+      "name": "epoch-4",
+      "epoch": 4,
+      "path": "/workspace/scratch/ascii-paddle-medium-cnn-tail-20261014-v1/adaptation-v1/epoch-4-adapter.safetensors",
+      "sha256": "482202e47c75a0f6736ea6cd215edd38c31664b05f9b147503bf6c91ac981cdd",
+      "metrics": {
+        "name": "epoch-4",
+        "positiveRows": 384,
+        "exact": 237,
+        "correctAccepted": 71,
+        "incorrectAccepted": 13,
+        "negativeRows": 128,
+        "negativeAccepted": 0,
+        "retentionRows": 128,
+        "retentionExact": 128,
+        "paddingRows": 14,
+        "cer": 0.07085382208314707,
+        "groups": {
+          "ascii_short": {
+            "rows": 64,
+            "exact": 50,
+            "correctAccepted": 10,
+            "incorrectAccepted": 1,
+            "accepted": 11,
+            "nonempty": 64
+          },
+          "blank": {
+            "rows": 28,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 0
+          },
+          "clipped": {
+            "rows": 25,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 25
+          },
+          "interior_damage": {
+            "rows": 25,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 25
+          },
+          "japanese": {
+            "rows": 64,
+            "exact": 64,
+            "correctAccepted": 38,
+            "incorrectAccepted": 0,
+            "accepted": 38,
+            "nonempty": 64
+          },
+          "mixed_code": {
+            "rows": 128,
+            "exact": 78,
+            "correctAccepted": 6,
+            "incorrectAccepted": 0,
+            "accepted": 6,
+            "nonempty": 128
+          },
+          "mixed_confusable": {
+            "rows": 128,
+            "exact": 45,
+            "correctAccepted": 17,
+            "incorrectAccepted": 12,
+            "accepted": 29,
+            "nonempty": 128
+          },
+          "multiline": {
+            "rows": 25,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 25
+          },
+          "noise": {
+            "rows": 25,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 6
+          },
+          "retention_japanese": {
+            "rows": 64,
+            "exact": 64,
+            "correctAccepted": 41,
+            "incorrectAccepted": 0,
+            "accepted": 41,
+            "nonempty": 64
+          }
+        },
+        "rawSha256": "bfc47b1196a3e6244295fe7489c709d0c085b17d49f6b24d121f54a1120235d2",
+        "scope": "New independent fictional literal development on consumed KosugiMaru/ZenAntique fonts with new literals; not final or production qualification",
+        "retentionRegressions": 0
+      }
+    },
+    {
+      "name": "epoch-8",
+      "epoch": 8,
+      "path": "/workspace/scratch/ascii-paddle-medium-cnn-tail-20261014-v1/adaptation-v1/epoch-8-adapter.safetensors",
+      "sha256": "90969d08aab277d17b216a2575890c11cebcabc38837828aa0db6c89ba797295",
+      "metrics": {
+        "name": "epoch-8",
+        "positiveRows": 384,
+        "exact": 240,
+        "correctAccepted": 81,
+        "incorrectAccepted": 14,
+        "negativeRows": 128,
+        "negativeAccepted": 1,
+        "retentionRows": 128,
+        "retentionExact": 128,
+        "paddingRows": 14,
+        "cer": 0.06683057666517657,
+        "groups": {
+          "ascii_short": {
+            "rows": 64,
+            "exact": 50,
+            "correctAccepted": 10,
+            "incorrectAccepted": 1,
+            "accepted": 11,
+            "nonempty": 64
+          },
+          "blank": {
+            "rows": 28,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 0
+          },
+          "clipped": {
+            "rows": 25,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 25
+          },
+          "interior_damage": {
+            "rows": 25,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 1,
+            "nonempty": 25
+          },
+          "japanese": {
+            "rows": 64,
+            "exact": 64,
+            "correctAccepted": 44,
+            "incorrectAccepted": 0,
+            "accepted": 44,
+            "nonempty": 64
+          },
+          "mixed_code": {
+            "rows": 128,
+            "exact": 84,
+            "correctAccepted": 8,
+            "incorrectAccepted": 0,
+            "accepted": 8,
+            "nonempty": 128
+          },
+          "mixed_confusable": {
+            "rows": 128,
+            "exact": 42,
+            "correctAccepted": 19,
+            "incorrectAccepted": 13,
+            "accepted": 32,
+            "nonempty": 128
+          },
+          "multiline": {
+            "rows": 25,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 25
+          },
+          "noise": {
+            "rows": 25,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 6
+          },
+          "retention_japanese": {
+            "rows": 64,
+            "exact": 64,
+            "correctAccepted": 41,
+            "incorrectAccepted": 0,
+            "accepted": 41,
+            "nonempty": 64
+          }
+        },
+        "rawSha256": "35d685a8c0740c992bf6db4cc26ee63ec03b35954658a3f80ef9291457de2e4e",
+        "scope": "New independent fictional literal development on consumed KosugiMaru/ZenAntique fonts with new literals; not final or production qualification",
+        "retentionRegressions": 0
+      }
+    }
+  ],
+  "trainingSeconds": 392.84594946000107,
+  "cacheSeconds": 181.38226207500156,
+  "peakRssMiB": 2589.6953125,
+  "history": [
+    {
+      "epoch": 1,
+      "meanCtcKlMseBce": [
+        0.2419078669062074,
+        0.0004999314712701867,
+        0.004001093651625805,
+        0.529908543579208
+      ],
+      "seconds": 42.84284375000061
+    },
+    {
+      "epoch": 2,
+      "meanCtcKlMseBce": [
+        0.19652002460088183,
+        0.002340956179978093,
+        0.02173736337934015,
+        0.4252999793123273
+      ],
+      "seconds": 83.42117673800021
+    },
+    {
+      "epoch": 3,
+      "meanCtcKlMseBce": [
+        0.1796700809794044,
+        0.005741066918329752,
+        0.05722936448975674,
+        0.3448709488204382
+      ],
+      "seconds": 147.4394872060002
+    },
+    {
+      "epoch": 4,
+      "meanCtcKlMseBce": [
+        0.15475866645099867,
+        0.010447887382574619,
+        0.10603969182493617,
+        0.3071359589478923
+      ],
+      "seconds": 194.6315866970017
+    },
+    {
+      "epoch": 5,
+      "meanCtcKlMseBce": [
+        0.1334455633847929,
+        0.012593433930870887,
+        0.1544006188372964,
+        0.29219461031692123
+      ],
+      "seconds": 254.7271006940009
+    },
+    {
+      "epoch": 6,
+      "meanCtcKlMseBce": [
+        0.1407023409496794,
+        0.016300079972795166,
+        0.2125329473643627,
+        0.25037504971316715
+      ],
+      "seconds": 293.76425379100147
+    },
+    {
+      "epoch": 7,
+      "meanCtcKlMseBce": [
+        0.11718812495813642,
+        0.01991528126565701,
+        0.26643349129019434,
+        0.22860799982999136
+      ],
+      "seconds": 334.43107774800046
+    },
+    {
+      "epoch": 8,
+      "meanCtcKlMseBce": [
+        0.11720110247876875,
+        0.024888396853676012,
+        0.32171274186338034,
+        0.20770269704675212
+      ],
+      "seconds": 374.18061429200134
+    }
+  ],
+  "budgetStopped": false,
+  "status": "Research-only/unqualified/inactive, original fallback eligible, final unopened"
+}

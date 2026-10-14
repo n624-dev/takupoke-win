@@ -1,0 +1,230 @@
+{
+  "scope": "Source/documentation/structured research records only; all original pixels/fonts/models/checkpoints/features remain outside Git; internal policy excluded",
+  "sourceFiles": 12,
+  "artifactFiles": 42,
+  "frozenExecutableSourcesUnchanged": true,
+  "utf8LfAndJsonValidated": true,
+  "files": {
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/README.md": {
+      "bytes": 7308,
+      "sha256": "523fa45bcc2486b70a78214b618a24618f27b7f45663ad0547da9d382eed3d4e"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/README.md": {
+      "bytes": 197,
+      "sha256": "83c20c4cb4a4cfd7e16177991bd68799e452afc5aa8b77faa2f7acb0f97c75e0"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/baseline-computation-audit.json": {
+      "bytes": 1286,
+      "sha256": "7b6af066b28dd5ed95026fdb2620f79966a1dc0f955b49e2f582fbe744e404db"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/closure.json": {
+      "bytes": 1688,
+      "sha256": "8897901c8787ac2679ccc232fdc360cee3c12bad69fc133b5f4cd3c448bae5e0"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/corpus-verification.json": {
+      "bytes": 1711,
+      "sha256": "c05d8ec44d7a4011741d73eb6bf2251711fa13178e78ad5ba464280926d24391"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/development-diagnosis.json": {
+      "bytes": 5487,
+      "sha256": "6f807b872eda316c16265a2d28f9a372dbc657639e93fcf6b3b7d15b03e1fecb"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/development-initialization-fidelity.json": {
+      "bytes": 325,
+      "sha256": "c4a9db76d7417c16a69a708f08ae0f6867ad44e0a7007859abcf5479394e2c1a"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/edit-diagnosis.json": {
+      "bytes": 12753,
+      "sha256": "002d00ab199b5e18ef81f833cc289aa0626ecfd0b3498b9f003680195d8fa969"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/epoch-2-summary.json": {
+      "bytes": 2159,
+      "sha256": "d84a88ff9f26e9414507b7471c4e8498693dff6360e5a7eb696d8cf2e879a648"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/epoch-2-unjudged.jsonl": {
+      "bytes": 748387,
+      "sha256": "f9443af28d74d034853902ecaa2ef59d0010014b2fc63893e8cf09dfbf484707"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/epoch-4-summary.json": {
+      "bytes": 2171,
+      "sha256": "c27364bf0b041163e95b51dc976dc1f85ca9de2349f79dcd8eee24c9dd515d57"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/epoch-4-unjudged.jsonl": {
+      "bytes": 749769,
+      "sha256": "bfc47b1196a3e6244295fe7489c709d0c085b17d49f6b24d121f54a1120235d2"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/epoch-8-summary.json": {
+      "bytes": 2171,
+      "sha256": "55cb15912ad937067230ba70c86d6edec8ea8ddb5c443d02173ddd4be5453745"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/epoch-8-unjudged.jsonl": {
+      "bytes": 752375,
+      "sha256": "35d685a8c0740c992bf6db4cc26ee63ec03b35954658a3f80ef9291457de2e4e"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/exclusion-receipt.json": {
+      "bytes": 91650,
+      "sha256": "9998ccbc9beaa6ceb1d757e30eae436d887c734f9e97b2cb891592bc373d327a"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/freeze.json": {
+      "bytes": 8799,
+      "sha256": "ce6ab1bfa8015a084124be39c8316587878fcc79b4551ae01a6cd760d55fa8d7"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/native-information-collision-audit.json": {
+      "bytes": 788,
+      "sha256": "f116444807f6727ff77b71f8c8645d838c382f726b5c6792655f85c5c6dd7f14"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/numerical-fidelity-scope-audit.json": {
+      "bytes": 1271,
+      "sha256": "af504a7a87560d2265d9540b7fed7a48e5325b48e80aa884c1f0adbba2d5990c"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/original-summary.json": {
+      "bytes": 2179,
+      "sha256": "93a9db590cb54bae4a43ec351894dbf0104f8297e6acb645d2ab68d4035051db"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/original-unjudged.jsonl": {
+      "bytes": 738256,
+      "sha256": "6f94a101a4de69fef0e3c416f9a803cd55d7f250d5f47d4fbc2d26998c5b96eb"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/precache-disk-estimate.json": {
+      "bytes": 182,
+      "sha256": "2ebe921aac65828b75419802128f83368cffddc767df2e3b736c64a7cb7403e9"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/pretraining-contradiction-audit.json": {
+      "bytes": 337,
+      "sha256": "d497051394ba13ed94a035cf9b8de31049a60bdb4a4b2510fdf7d4f8ed5655db"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/pretraining-font-balance-audit.json": {
+      "bytes": 1210,
+      "sha256": "fe15835dc5297c53020805273f987ec5910f38b188938680e5671bb34bac3ab5"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/reconstructed-untrained-summary.json": {
+      "bytes": 2350,
+      "sha256": "cc3ad875241a484845e923eedae3c60cd85f9feeec3092faa8c14e3a18d17ae7"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/reconstructed-untrained-unjudged.jsonl": {
+      "bytes": 738302,
+      "sha256": "09a632bf7396ffc91a5e9a98644b3c517c541d8d2581c4b0a003d7f56cd3995a"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/selection.json": {
+      "bytes": 16752,
+      "sha256": "28d2afeaf5f6aef35cefd7243a7ab8af0ee909c4b133ae9f99240073fb5a53ea"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/source-proof-epoch-2-unjudged.jsonl": {
+      "bytes": 22590,
+      "sha256": "a3b561f3a503c14c913d0738e3d9b58d288eb57c318fb06ef8a3edb22adc0c99"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/source-proof-epoch-4-unjudged.jsonl": {
+      "bytes": 22592,
+      "sha256": "86e62ecea519e3bd837f3e499962b92eb4bf6f18e272749c4ec6fd7820acf11a"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/source-proof-epoch-8-unjudged.jsonl": {
+      "bytes": 22614,
+      "sha256": "e3b131e05bed33b45d7e770c19c220abd0292929af4d5823bc85317e7cc759e8"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/source-proof-original-unjudged.jsonl": {
+      "bytes": 21602,
+      "sha256": "b6e3fac8c4609954e3b64419e0fe133eefee2e9d2f50242aa35afcfb1b65713a"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/source-proof-probe-freeze.json": {
+      "bytes": 580,
+      "sha256": "653e9d7d0a68b596084b53d8dad338e4e725b677a46bdcb8a80da14861f5b36b"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/source-proof-probe-summary.json": {
+      "bytes": 2147,
+      "sha256": "0c12cc771116bc84a74b3e05f357e5fd78c42f4484b2d4eaaefae9312d488277"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/adaptation-v1/verification.json": {
+      "bytes": 1402,
+      "sha256": "21f63f9ca0dc1d1da7089c7a3115cb6dec7eac365e0ae1f8db1a0b46ddab6425"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/backward-budget.json": {
+      "bytes": 1925,
+      "sha256": "179bfcad8a629dbaf4975c27a74dbe2dd48bb3e56794ea889162ca2364997e31"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/fidelity.json": {
+      "bytes": 20817,
+      "sha256": "1e3addc4f2ed0621daeac6558fe077dcbce6e0f76197b89608b65ac3c956e40e"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/final-font-reservation-audit.json": {
+      "bytes": 812,
+      "sha256": "71f84eee4380359e9d7403ef0fc31d53c206c6fd6dcc8d235c5618df3a06fcdd"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/freeze.json": {
+      "bytes": 3043,
+      "sha256": "5700c2462e7628003293d595976679bca6838da8183538bd3cdfa48939d40e9e"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/initial-preflight-error.log": {
+      "bytes": 2536,
+      "sha256": "f511af00f2b761317cb8c1636797e66a7836337349568d3a18f3836331b1bbb5"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/initial-preflight-name-collision.json": {
+      "bytes": 467,
+      "sha256": "e6770c9e9e49975219d08c3a13872eadd894100c617742c3bc81dbadf05641fa"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/initial-preflight-tail.py.txt": {
+      "bytes": 1546,
+      "sha256": "6d154d206310e5985e6c4a48ceb8ef3dd7dd9cf2f0a9b3bddbbdaae484b26f1c"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/shared-source-audit.json": {
+      "bytes": 1178,
+      "sha256": "d3efa3fe1cac204b0b376dabd5269a2c38f53172eb928f14275ced1f9e2c6a07"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-cnn-tail-v1/unjudged.jsonl": {
+      "bytes": 71012,
+      "sha256": "a3ae182ef16a6ffae18af1e77f6b449993a463d389d33777d2a28e92bfcda0cd"
+    },
+    "tools/ocr-synthetic-training/ascii-paddle-medium-cnn-tail/README.md": {
+      "bytes": 1327,
+      "sha256": "2b2bea1e58741819784c6e8415e4ec806fb669b79ab1d199e3adb99ee16bee89"
+    },
+    "tools/ocr-synthetic-training/ascii-paddle-medium-cnn-tail/benchmark_backward.py": {
+      "bytes": 3525,
+      "sha256": "3c878dd37029a7003b6573140b512e8691714da42f50d52129b82a3cb2dbee2f"
+    },
+    "tools/ocr-synthetic-training/ascii-paddle-medium-cnn-tail/reproduce.py": {
+      "bytes": 10652,
+      "sha256": "77baad7a0af7443c8f56af9f607334a2222debff38865dfdd0caeb681395034d"
+    },
+    "tools/ocr-synthetic-training/ascii-paddle-medium-cnn-tail/tail.py": {
+      "bytes": 1570,
+      "sha256": "7eef5a46930503b907d4626b7b2a9d1482cca3b59b8ef88deed3a215d73485c1"
+    },
+    "tools/ocr-synthetic-training/ascii-paddle-medium-cnn-tail/tail_data.py": {
+      "bytes": 10543,
+      "sha256": "5fb667b13fc4ca5ab6390f2bbcb8a80b42a4c3fe6e4c43e7f54b20e55753810a"
+    },
+    "tools/ocr-synthetic-training/ascii-paddle-medium-cnn-tail/tail_errors.py": {
+      "bytes": 2177,
+      "sha256": "f385d2720d891552c79d4712878b240ecde0d36f5f5190aaeff43cb0ab87444e"
+    },
+    "tools/ocr-synthetic-training/ascii-paddle-medium-cnn-tail/tail_model.py": {
+      "bytes": 1403,
+      "sha256": "5cf7f2d6d4ef1c379e9075c23922f601f239f5946e0ff347f304fd5fb97d7b27"
+    },
+    "tools/ocr-synthetic-training/ascii-paddle-medium-cnn-tail/tail_probes.py": {
+      "bytes": 4752,
+      "sha256": "97f8fe3e1091a4f4efb5b6d6b430c0a1affba379c2751a30a586ba02818dc9cc"
+    },
+    "tools/ocr-synthetic-training/ascii-paddle-medium-cnn-tail/tail_protocol.json": {
+      "bytes": 6579,
+      "sha256": "48b1537c80d84031d51c96e8a3b7f1ff1e387b071af14113bf42675c7b8ed574"
+    },
+    "tools/ocr-synthetic-training/ascii-paddle-medium-cnn-tail/tail_reference.py": {
+      "bytes": 465,
+      "sha256": "452bfe524f132f070a5070519c4a5ced87046a73e8c1d79ded86c297f126dcc5"
+    },
+    "tools/ocr-synthetic-training/ascii-paddle-medium-cnn-tail/tail_report.py": {
+      "bytes": 6755,
+      "sha256": "f0f6f80ffa85ed824b7776266ddbe6f243076687147b14a3bfbd0fba05146484"
+    },
+    "tools/ocr-synthetic-training/ascii-paddle-medium-cnn-tail/tail_train.py": {
+      "bytes": 20696,
+      "sha256": "b40d6abf4256f9f83e6b57840993def1f2575589f090e0318a01bcd3a3a02a15"
+    }
+  },
+  "unqualified": true,
+  "selected": "original",
+  "finalOpened": false,
+  "iosEdited": false,
+  "childCommitOrPush": false
+}
