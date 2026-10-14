@@ -13,6 +13,8 @@ PNG・復号BGRA・原寸法のハッシュは全て一致。アプリやiOSに�
 閉じたraw33681 bytes、SHA256 `d0180f37ce303b5e2f95ce3b3e54790dbfc6b7bcab4dd1447fc56360944fd0a7`。
 Actionsの行単位JSONから元の改行とbyte数・SHAを検証して再構築した。
 空stderrも保存し、実行時のソースをGit固定commitからfreezeに照合した。
+PythonはWindows checkoutでCRLFになっていたため、GitのLFと実行時CRLFのハッシュを
+別の監査記録に残し、freezeに一致するCRLFのsnapshotを保存した。raw・freezeは変更しない。
 
 次条件は日本語のOS機能を導入し、全原画素を3x3反復・固定32px白余白へ変換して測定する。
 原入力の未検出を隠す再実行ではなく、別recipeの既消費開発条件として保存する。
