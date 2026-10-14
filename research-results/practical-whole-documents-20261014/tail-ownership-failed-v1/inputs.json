@@ -1,0 +1,23 @@
+{
+  "recipe": "consumed-primary-portable-ascii-tail-v1",
+  "primaryRaw": {
+    "file": "v6-observations.jsonl",
+    "bytes": 8111658,
+    "sha256": "6f11d816d978c9498c5db36148f412bd26ef5330dc94fe41dcdfc191c3ddfde7"
+  },
+  "primaryManifest": {
+    "file": "v6-inputs.json",
+    "bytes": 9082,
+    "sha256": "2cebf42cf7de5c3f563f664e2cf26ae3fefab4921a68ded1a6b24d9da8c1b474"
+  },
+  "model": {
+    "file": "model.onnx",
+    "bytes": 22183975,
+    "sha256": "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703"
+  },
+  "dictionary": {
+    "file": "dictionary.json",
+    "bytes": 3614,
+    "sha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368"
+  }
+}

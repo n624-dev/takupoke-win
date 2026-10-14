@@ -1,0 +1,53 @@
+{
+  "recipe": "practical-complete-three-class-v1",
+  "sourceSHA256": "0ab4045dc93d9b4fbc8158bf051edfbaf369e4017da1043a7b8daa142f5bdd44",
+  "fonts": [
+    [
+      "shipporimincho",
+      "ShipporiMincho-Regular.ttf",
+      8677284,
+      "769b5269f0f9bc6534b352c0e6bd856a566e03ff788f107191c2d835863570b2"
+    ],
+    [
+      "mplusrounded1c",
+      "MPLUSRounded1c-Regular.ttf",
+      3389792,
+      "b75708b53e45b06d17d470aeeca5b766e3d1b3999f03f13ec4eb863ca846c14c"
+    ]
+  ],
+  "seedBase": 2026101401,
+  "classes": [
+    "1_1",
+    "2_IT",
+    "AI_1"
+  ],
+  "days": 5,
+  "periods": 8,
+  "pages": 5,
+  "bodyFontPixels": 20,
+  "headerFontPixels": 24,
+  "width": 2237,
+  "height": 415,
+  "variants": [
+    "positive",
+    "missing-day"
+  ],
+  "plannedArms": [
+    "v5-production",
+    "v5-ink2",
+    "v6-medium-ink2"
+  ],
+  "scope": "New invented development content with previously consumed fonts; not heldout final or school-data success rate",
+  "metrics": [
+    "slot coverage",
+    "literal CER",
+    "field error count",
+    "uncertain field count",
+    "high-confidence wrong fields",
+    "runtime",
+    "RSS"
+  ],
+  "zeroErrorsRequired": false,
+  "manualTypingBudget": 3,
+  "reviewBudget": 128
+}

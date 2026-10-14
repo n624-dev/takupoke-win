@@ -1,0 +1,26 @@
+{
+  "condition": "shared-native-ascii-runtime-regression-v1",
+  "rows": 4,
+  "comparedFields": [
+    "id",
+    "stage",
+    "outcome",
+    "failure",
+    "document",
+    "formal",
+    "pageReports",
+    "decisions",
+    "lineage",
+    "requiredSlots",
+    "cells",
+    "detectorCalls",
+    "recognizerCalls",
+    "cachedPrimaryRecognizerCalls",
+    "primaryRawSHA256"
+  ],
+  "allEqual": true,
+  "additionalEnglishCalls": 1286,
+  "newPrimaryCalls": 0,
+  "newIndependentAccuracySamples": 0,
+  "excludedTimingAndRSS": true
+}
