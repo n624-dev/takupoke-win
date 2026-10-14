@@ -35,6 +35,16 @@ jobs:
       - name: Record installed OCR language capabilities
         run: |
           Get-WindowsCapability -Online | Where-Object { $_.Name -like 'Language.OCR*' } | Select-Object Name, State | ConvertTo-Json -Compress
+      - name: Install public Japanese OCR language capability before inference
+        timeout-minutes: 8
+        run: |
+          $capability = 'Language.OCR~~~ja-JP~0.0.1.0'
+          $before = Get-WindowsCapability -Online -Name $capability
+          $before | Select-Object Name, State | ConvertTo-Json -Compress
+          if ($before.State -ne 'Installed') { Add-WindowsCapability -Online -Name $capability | ConvertTo-Json -Compress }
+          $after = Get-WindowsCapability -Online -Name $capability
+          $after | Select-Object Name, State | ConvertTo-Json -Compress
+          if ($after.State -ne 'Installed') { throw 'Japanese OCR capability not installed; no Japanese precision measurement.' }
       - name: Measure installed local OCR engines
         run: |
           python -B tools/windows-system-ocr/run.py --output (Join-Path $env:TAKUPOKE_SYSTEM_OCR_TEMP 'study')

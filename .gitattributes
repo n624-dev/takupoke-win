@@ -24,3 +24,5 @@ research-results/ocr-original-image-windows-20261013/** -text
 # Preserve original model-loader console table padding in closed stderr.
 research-results/trocr-printed-headers-20261013/worker-stderr.txt -text whitespace=-blank-at-eol
 research-results/trocr-printed-headers-20261013-initial/worker-stderr.txt -text whitespace=-blank-at-eol
+research-results/windows-system-ocr-original-lines-20261014/worker-stdout.txt -text
+research-results/windows-system-ocr-original-lines-20261014/worker-stderr.txt -text

@@ -36,9 +36,9 @@ def main():
     subprocess.run(['dotnet','build',str(source/'Probe.csproj'),'-c','Release','--verbosity','quiet'], check=True, timeout=180)
     reader = a.output/'reader'; shutil.copytree(source/'bin/Release/net10.0-windows10.0.26100.0/win-x64', reader)
     binaries = {str(f.relative_to(reader)):sha(f) for f in reader.rglob('*') if f.is_file()}
-    freeze = {'recipe':'windows-system-ocr-consumed-original-lines-v1', 'pixelsSha256':sha(pixels),
+    freeze = {'recipe':'windows-system-ocr-integer3-white32-lines-v2', 'pixelsSha256':sha(pixels),
               'oracleSha256':sha(gold), 'readerFiles':binaries, 'sources':{f.name:sha(f) for f in [source/'Program.cs', source/'Probe.csproj', Path(__file__)]},
-              'condition':'Unchanged original BGRA pixels, explicit installed ja-JP/en-US engines, no resize/routing/retry or invented native confidence',
+              'condition':'Each unchanged original BGRA pixel replicated3x3 with32px white border, explicit installed ja-JP/en-US engines, no interpolation/routing/retry or invented native confidence',
               'qualification':False, 'modelActivation':False}
     write(a.output/'freeze.json', freeze)
     raw = a.output/'observations.jsonl'

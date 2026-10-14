@@ -11,6 +11,7 @@ using Windows.Storage.Streams;
 Console.OutputEncoding = new System.Text.UTF8Encoding(false);
 if (!OperatingSystem.IsWindows() || args.Length != 2)
     throw new ArgumentException("Expected fixed fictional pixel packet and new raw output on Windows.");
+const int scale = 3, padding = 32;
 var bytes = File.ReadAllBytes(args[0]);
 if (Sha(bytes) != "6e54d6bc0cc2213dc51a6e0ff67f3551a736e4e75641ec00f96c7b9de87f14ff")
     throw new InvalidDataException("Fixed original pixel packet changed.");
@@ -20,7 +21,7 @@ if (rows.Length != 192 || rows.Select(r => r.GetProperty("id").GetString()).Dist
     throw new InvalidDataException("Fixed rows changed.");
 var available = OcrEngine.AvailableRecognizerLanguages.Select(l => l.LanguageTag).ToArray();
 var selected = new[] { "ja-JP", "en-US" }.Where(tag => OcrEngine.IsLanguageSupported(new Language(tag))).ToArray();
-Console.WriteLine(JsonSerializer.Serialize(new { recipe = "windows-system-ocr-consumed-original-lines-v1",
+Console.WriteLine(JsonSerializer.Serialize(new { recipe = "windows-system-ocr-integer3-white32-lines-v2", scale, padding,
     available, selected, maxImageDimension = OcrEngine.MaxImageDimension, os = System.Runtime.InteropServices.RuntimeInformation.OSDescription,
     runtime = Environment.Version.ToString(), inputSha256 = Sha(bytes), plannedCalls = 192 * selected.Length,
     qualification = false, modelActivation = false, nativeConfidenceAvailable = false }));
@@ -46,15 +47,29 @@ foreach (var language in selected)
         var original = new byte[checked(bitmap.PixelWidth * bitmap.PixelHeight * 4)];
         bitmap.CopyToBuffer(original.AsBuffer());
         if (Sha(original) != row.GetProperty("bgraSha256").GetString()) throw new InvalidDataException("Windows original pixels changed.");
-        var timer = Stopwatch.StartNew(); var result = await engine.RecognizeAsync(bitmap); timer.Stop();
+        var targetWidth = checked(bitmap.PixelWidth * scale + 2 * padding);
+        var targetHeight = checked(bitmap.PixelHeight * scale + 2 * padding);
+        if (targetWidth > OcrEngine.MaxImageDimension || targetHeight > OcrEngine.MaxImageDimension)
+            throw new InvalidDataException("Fixed enlarged input exceeds native bounds.");
+        var enlarged = new byte[checked(targetWidth * targetHeight * 4)]; Array.Fill(enlarged, (byte)255);
+        // Each original BGRA pixel appears in a full3x3 block. No interpolation,
+        // discarded ink, contrast rewrite or prediction-dependent choice.
+        for (var y = 0; y < bitmap.PixelHeight; y++) for (var x = 0; x < bitmap.PixelWidth; x++)
+            for (var dy = 0; dy < scale; dy++) for (var dx = 0; dx < scale; dx++)
+                original.AsSpan((y * bitmap.PixelWidth + x) * 4, 4).CopyTo(enlarged.AsSpan(
+                    ((padding + y * scale + dy) * targetWidth + padding + x * scale + dx) * 4, 4));
+        using var input = SoftwareBitmap.CreateCopyFromBuffer(enlarged.AsBuffer(), BitmapPixelFormat.Bgra8,
+            targetWidth, targetHeight, BitmapAlphaMode.Ignore);
+        var timer = Stopwatch.StartNew(); var result = await engine.RecognizeAsync(input); timer.Stop();
         var lines = result.Lines.Select(l => new { l.Text, words = l.Words.Select(w => new { w.Text,
             box = new { w.BoundingRect.X, w.BoundingRect.Y, w.BoundingRect.Width, w.BoundingRect.Height } }).ToArray() }).ToArray();
         writer.WriteLine(JsonSerializer.Serialize(new { id = row.GetProperty("id").GetString(), language,
             fullText = result.Text, singleLineText = lines.Length == 1 ? lines[0].Text : null,
             lines, result.TextAngle, nativeConfidence = (double?)null, inferenceMilliseconds = timer.Elapsed.TotalMilliseconds,
-            width = bitmap.PixelWidth, height = bitmap.PixelHeight }));
+            width = bitmap.PixelWidth, height = bitmap.PixelHeight, scale, padding, targetWidth, targetHeight,
+            nativeInputBgraSha256 = Sha(enlarged), geometry = "Native boxes stay in enlarged input coordinates; source x/y=(native-32)/3; no output clamp." }));
         writer.Flush(); stream.Flush(flushToDisk: true);
-        Array.Clear(original); Array.Clear(png);
+        Array.Clear(original); Array.Clear(png); Array.Clear(enlarged);
         if (++calls % 48 == 0) Console.WriteLine(JsonSerializer.Serialize(new { completed = calls }));
     }
 }
