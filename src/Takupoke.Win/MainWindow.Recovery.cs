@@ -57,7 +57,7 @@ public sealed partial class MainWindow
         { Add(Text("入力待ちの原本を確認できません。資料の詳細から読み直してください。")); return; }
         Add(Card(Panel(SettingsSectionTitle("原本と照合してください"),
             Text($"資料全体で確認が必要な{session.Plan.Targets.Count}項目です。入力だけでは採用されません。入力後に全クラスの結果を確認してください。"),
-            Text("読み取り文字が原本と一致していれば、そのまま確認してください。違う箇所は科目・教員・教室の全文を訂正できます。文字の変更は資料全体で3項目までです。読めない文字や印字がある箇所を空欄にはできません。"))));
+            Text($"読み取り文字が原本と一致していれば、そのまま確認してください。違う箇所は科目・教員・教室の全文を訂正できます。文字の変更は資料全体で{RecoveryManualAssistance.CorrectionLimit(session.Plan.Document)}項目までです。読めない文字や印字がある箇所を空欄にはできません。"))));
         Add(Button("対応する元PDFを確認", () => ShowPdf(kind, false, manual: session), "manual-original-" + kind));
         var submit = Button("入力内容を確認して全体の結果へ", async () =>
         {
@@ -163,7 +163,7 @@ public sealed partial class MainWindow
         { Add(Text("確認待ちの結果がありません。PDFが更新された場合は資料の詳細から復旧してください。")); return; }
         Add(Card(Panel(SettingsSectionTitle("原本を確認してから使用してください"), Text($"{document.SchoolYear}年度 {document.Term} · {AppViewModel.MaterialLabel(kind)}"), Text("表示中のクラスだけでなく、資料全体・全クラスの結果を採用します。採用するまで時間割には反映されません。学校の資料と読み取り結果は外部へ送信されません。"),
             Button("対応する元PDFを確認", () => ShowPdf(kind, false, preview), "recovery-original-" + kind))));
-        if (preview.Document.Capture?.ManualSchemaVersion == 2 && document.ReviewedFieldCount > 0)
+        if (preview.Document.Capture?.ManualSchemaVersion is 2 or 3 && document.ReviewedFieldCount > 0)
             Add(SettingsDescription($"原本と照合した項目: {document.ReviewedFieldCount} · 文字を訂正した項目: {document.Corrections.Length}"));
         foreach (var review in preview.Result.HumanCorrections ?? [])
             if (review.HeaderProof is { } header)

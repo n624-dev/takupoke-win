@@ -54,7 +54,7 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
                 correction.Target.Role, cellsById[correction.Target.CellId].Slots,
                 string.Concat(correction.OriginalParentIds.Select(id => { token.ThrowIfCancellationRequested(); return sources[id].Text; })),
                 correction.CorrectedText, correction.Provenance);
-        }).Where(c => document.Capture?.ManualSchemaVersion != 2 ||
+        }).Where(c => document.Capture?.ManualSchemaVersion is not (2 or 3) ||
             !string.Equals(c.OriginalOcr, c.UserText, StringComparison.Ordinal)).ToImmutableArray();
         // Only an actual certified formal projection of this identical source
         // document permits cell/parallel-position comparison. Updated PDFs,

@@ -12,6 +12,30 @@ namespace Takupoke.Integration.Tests;
 public sealed class RecoveryManualLifecycleTests
 {
     [Fact]
+    public async Task FourNewContractEditsSurvivePendingRestartAndExplicitAdoption()
+    {
+        await using var c = await Context.CreateAsync(fields: 4, manualSchemaVersion: 3);
+        var prepared = await c.Coordinator.PrepareAsync(MaterialKind.Timetable, 2032);
+        var session = Assert.IsType<RecoveryManualSession>(prepared.ManualSession);
+        Assert.Equal(4, session.Plan.Targets.Count);
+        Assert.Equal(3, session.Plan.Document.Capture!.ManualSchemaVersion);
+        var values = c.Values(session); await c.AssertLastGoodAsync();
+        await c.RestartAsync();
+        var job = Assert.IsType<RecoveryJob>(await c.Store.ReadAsync<RecoveryJob>(c.Lease, "recovery.Timetable"));
+        var resumed = new RecoveryManualSession(c.Source.Id, c.Lease, job.ManualPlan!, job.CreatedAt);
+        var preview = await c.Coordinator.CompleteManualAsync(MaterialKind.Timetable, resumed, values);
+        Assert.True(RecoveryValidator.Validate(preview.Document, preview.Result).CanAdopt);
+        await c.AssertLastGoodAsync();
+        await c.Coordinator.AdoptAsync(MaterialKind.Timetable, preview);
+        await c.RestartAsync();
+        var saved = Assert.IsType<MaterialAnalysis>(await c.Store.ReadAsync<MaterialAnalysis>(c.Lease, "analysis.Timetable"));
+        Assert.Equal(4, saved.Recovery!.Result.HumanCorrections!.Count);
+        Assert.All(saved.Recovery.Result.HumanCorrections, correction => Assert.Equal(3, correction.ManualSchemaVersion));
+        Assert.Equal(4, saved.Recovery.Document.Sources.Count(s => s.NativeConfidence == .4));
+        Assert.True(RecoveryAnalysisConverter.MayDisplay(saved));
+    }
+
+    [Fact]
     public async Task ConfidentPreviewCanBeExplicitlyCorrectedAndSavedOnlyAfterAdoption()
     {
         await using var c = await Context.CreateAsync(fields: 0);
@@ -203,11 +227,11 @@ public sealed class RecoveryManualLifecycleTests
         public RecoveryCoordinator Coordinator { get; private set; } = null!;
         private byte[] _bytes = PdfParsingTests.SyntheticPdf();
         private string _historyHash = "", _lastGoodHash = "";
-        private int _fields = 1; private bool _completeCapture = true;
+        private int _fields = 1; private bool _completeCapture = true; private int _manualSchemaVersion = 1;
         private const string HistoryKey = "recovery.accepted.Timetable.independent-last-good";
-        public static async Task<Context> CreateAsync(int fields = 1, bool completeCapture = true)
+        public static async Task<Context> CreateAsync(int fields = 1, bool completeCapture = true, int manualSchemaVersion = 1)
         {
-            var c = new Context { _fields = fields, _completeCapture = completeCapture }; try { await c.InitializeAsync(); return c; } catch { await c.DisposeAsync(); throw; }
+            var c = new Context { _fields = fields, _completeCapture = completeCapture, _manualSchemaVersion = manualSchemaVersion }; try { await c.InitializeAsync(); return c; } catch { await c.DisposeAsync(); throw; }
         }
         private async Task InitializeAsync()
         {
@@ -233,11 +257,15 @@ public sealed class RecoveryManualLifecycleTests
             // source-only Builder seam. The minimal PDF is not an OCR/extraction truth fixture.
             Coordinator = new(Store, materials, (_,_,hash,_,token) => {
                 token.ThrowIfCancellationRequested(); var doc = RecoveryManualAssistanceTests.Captured(_fields);
-                return Task.FromResult(doc with { PdfHash = hash, Capture = _completeCapture ? doc.Capture! with { PdfHash = hash } : null });
+                doc = doc with { PdfHash = hash, Capture = _completeCapture ? doc.Capture! with { PdfHash = hash } : null };
+                if (_manualSchemaVersion == 3 && doc.Capture is not null)
+                    doc = RecoveryManualReviewBudgetTests.CaptureRequested(doc, manualSchemaVersion: 3);
+                return Task.FromResult(doc);
             }, _ => Task.FromResult<IReadOnlyList<ILocalRecoveryProvider>>([]), _clock,
                 captureForReview: (_, document, selected, token) => {
                     token.ThrowIfCancellationRequested();
-                    return Task.FromResult(RecoveryManualReviewBudgetTests.CaptureRequested(document, selected));
+                    return Task.FromResult(RecoveryManualReviewBudgetTests.CaptureRequested(document, selected,
+                        manualSchemaVersion: _manualSchemaVersion == 3 ? 3 : 2));
                 });
         }
         public Dictionary<string,string> Values(RecoveryManualSession session) => session.Plan.Targets.ToDictionary(t => t.Target.Key, _ => "架空訂正科目");

@@ -1,0 +1,20 @@
+{
+  "reason": "Repository public-tree policy excludes .log. Original handoff manifest and raw bytes are preserved; these three files use .txt in the public tree. Original ignored .log files remain local.",
+  "files": {
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/portable-v1/execution.log": {
+      "publicFile": "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/portable-v1/execution.txt",
+      "bytes": 7393,
+      "sha256": "e1be845383b15f43739760e293c2531fca07a58a8333830aadb1da28e4968512"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/preflight-execution.log": {
+      "publicFile": "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/preflight-execution.txt",
+      "bytes": 994,
+      "sha256": "d946b4aeae81643e6770c10647c22bfd274432950d324eeec897f7ee1561b2ba"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/training-execution.log": {
+      "publicFile": "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/training-execution.txt",
+      "bytes": 29413,
+      "sha256": "3c146e6eaa76dcecb57fde4964726c99b45c4f6626fa2de370d461a73f517c9f"
+    }
+  }
+}

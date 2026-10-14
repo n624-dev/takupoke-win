@@ -81,7 +81,7 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                 }
                 finally { CryptographicOperations.ZeroMemory(raster.Bgra); }
             }
-            var reviewed = document with { Capture = capture with { ManualSchemaVersion = 2, Pages = pages, OriginalCrops = crops } };
+            var reviewed = document with { Capture = capture with { ManualSchemaVersion = RecoveryManualAssistance.CurrentManualSchemaVersion, Pages = pages, OriginalCrops = crops } };
             if (RecoveryManualAssistance.Prepare(reviewed, selected, token) is null)
                 throw new InvalidDataException("本文と原画像の対応を確認できません。");
             return reviewed;
@@ -158,7 +158,7 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                 var proof = rasters.Select((r, index) => new RecoveryCapturedPage(index + 1, r.Width, r.Height,
                     Convert.ToHexStringLower(SHA256.HashData(r.Bgra)), sources.Count(s => s.Page == index + 1), completeInk[index])).ToArray();
                 token.ThrowIfCancellationRequested();
-                document = document with { Sources = sources, Capture = new(hash, (int)pdf.PageCount, RecoveryValidator.Fingerprint(sources), proof, ManualSchemaVersion: 2) };
+                document = document with { Sources = sources, Capture = new(hash, (int)pdf.PageCount, RecoveryValidator.Fingerprint(sources), proof, ManualSchemaVersion: RecoveryManualAssistance.CurrentManualSchemaVersion) };
                 var targets = document.Sources.Any(s => s.NativeConfidence is < .8)
                     ? RecoveryManualAssistance.CaptureTargets(document, token) : null;
                 if (targets is { Count: > 0 and <= RecoveryManualAssistance.MaximumReviewFields })

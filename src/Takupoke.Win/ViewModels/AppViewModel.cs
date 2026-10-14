@@ -261,7 +261,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     {
         await _recovery.BeginCorrectionAsync(kind, preview, target, token);
         await ReloadAsync(token, notify: false);
-        Status = "原画像と読み取り文字を照合してください。訂正は資料全体で3項目までです。";
+        Status = "原画像と読み取り文字を照合し、訂正後に資料全体を確認してください。";
     }, "訂正対象の原画像を確認しています。");
     public Task CancelManualRecoveryAsync(MaterialKind kind, RecoveryManualSession session) => RunAsync(async token =>
     {

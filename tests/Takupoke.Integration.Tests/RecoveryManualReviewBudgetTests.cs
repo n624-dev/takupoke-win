@@ -13,9 +13,9 @@ public sealed class RecoveryManualReviewBudgetTests
         var doc = RecoveryManualAssistanceTests.Captured(4);
         return CaptureRequested(doc);
     }
-    internal static RecoveryDocument CaptureRequested(RecoveryDocument doc, IReadOnlyList<RecoveryFieldTarget>? selected = null)
+    internal static RecoveryDocument CaptureRequested(RecoveryDocument doc, IReadOnlyList<RecoveryFieldTarget>? selected = null, int manualSchemaVersion = 2)
     {
-        doc = doc with { Capture = doc.Capture! with { ManualSchemaVersion = 2 } };
+        doc = doc with { Capture = doc.Capture! with { ManualSchemaVersion = manualSchemaVersion } };
         var targets = Assert.IsAssignableFrom<IReadOnlyList<RecoveryManualTarget>>(selected is null
             ? RecoveryManualAssistance.CaptureTargets(doc) : RecoveryManualAssistance.CaptureTargets(doc, selected));
         var crops = targets.Select(t =>

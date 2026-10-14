@@ -112,7 +112,7 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                     {
                         var session = new RecoveryManualSession(source.Id, lease, manual, job.CreatedAt);
                         await store.SaveRecoveryProgressAsync(lease, source, job with { State = RecoveryJobState.AwaitingManualCorrection, ManualPlan = manual }, null, token);
-                        return new(RecoveryJobState.AwaitingManualCorrection, null, $"原本と読み取り文字を照合して、資料全体の未確定{manual.Targets.Count}項目を確認してください。文字の訂正は3項目までです。確認後に全体を見てから採用してください。") { ManualSession = session };
+                        return new(RecoveryJobState.AwaitingManualCorrection, null, $"原本と読み取り文字を照合して、資料全体の未確定{manual.Targets.Count}項目を確認してください。文字の訂正は{RecoveryManualAssistance.CorrectionLimit(document)}項目までです。確認後に全体を見てから採用してください。") { ManualSession = session };
                     }
                 }
                 var preview = run.Result is not null ? new RecoveryPreview(source.Id, lease, document, run.Result, _clock.GetUtcNow()) : null;
