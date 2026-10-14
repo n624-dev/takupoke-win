@@ -1,0 +1,12 @@
+{
+  "scope": "Preflight source output-path typo, before fidelity freeze or inference; no training/selection/final",
+  "error": "onnx.save(observer,str(observer)) accidentally used ModelProto text as file path, raising OSError ENAMETOOLONG. Corrected to observer_path. No gate or numeric condition changed.",
+  "failedSourceSha256": "c6e685fd85a5d67933a104a36fed2cea05bd1f5b95b2ddce00cec81006b7a15b",
+  "correctedSourceSha256": "0cf0ca22b72718e8cd297ec2bea2c603375c7b722a254530ac11658466473a43",
+  "failedConsoleBytes": 275548545,
+  "failedConsoleSha256": "2d8f7e6ff343fae8de65892d0b5f551a3efb55d294138559af8cac72e0a0ff9b",
+  "fullConsoleRetention": "Removed own temporary tensor-text error dump after preserving hash and bounded traceback; original pinned model remains unchanged",
+  "fidelityStarted": false,
+  "trainingStarted": false,
+  "finalOpened": false
+}

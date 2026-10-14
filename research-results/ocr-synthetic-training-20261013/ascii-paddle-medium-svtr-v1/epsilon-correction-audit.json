@@ -1,0 +1,18 @@
+{
+  "scope": "Postfailure source/initializer audit, no threshold relaxation or quality credit",
+  "failureReason": "Initial manual implementation assigned all5norms epsilon1e-5. Original finalnorm uses1e-6; all4earliernorms1e-5. This was an implementation error, not a bad model checkpoint.",
+  "originalEpsilonInitializers": {
+    "helper.constant.48": 1e-05,
+    "helper.constant.61": 1e-05,
+    "helper.constant.68": 1e-05,
+    "helper.constant.81": 1e-05,
+    "helper.constant.88": 1e-06
+  },
+  "attempt1FrozenSourcesAndRawRetained": true,
+  "correctedSource": "svtr_exact.py",
+  "correctedSourceSha256": "2e63b78aae0a47288f63fcdabe2a17a9b7611faeb9414156812058ae0d686a52",
+  "sameRegisteredToleranceAndFixedInputs": true,
+  "utf8LfPathIoAudit": true,
+  "finalOpened": false,
+  "qualifiedOrActive": false
+}

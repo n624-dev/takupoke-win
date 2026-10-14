@@ -153,4 +153,30 @@ V6 mediumの余裕ある上限での全6件再測定は、全13048認識呼出�
 誤採用と損傷への過信が残り、未使用最終評価と携帯形式の出力は温存する。
 [元特徴の一致検証](../research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/README.md) /
 [固定特徴・混在行学習](../research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-features-v1/mixed-head-v1/README.md)。
-次の終端SVTR層の適応は別の凍結条件で検証する。まだ導入資格はない。
+終端SVTR層の適応も全8epochを終了した。768行一致418→480に増えたが、正しい診断採用は
+369→327、誤採用103行・損傷画像の採用8行が残り、元モデルを選定した。
+初期のLayerNorm epsilon不一致と修正後の数値一致は別記録として保持する。
+[SVTRの全結果](../research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-svtr-v1/adaptation-v1/README.md)。
+
+さらに元の高さ情報を残したpool/local-neck適応では、512行一致277→366、誤採用117→42。
+ただし正しい診断採用232→208、損傷採用11行で継続ゲートに届かなかった。
+入力保存はlossless FP32、登録時の字体比率と実際の比率のずれは事後監査へ記録した。
+日本語保持と空白拒否だけでは導入を判断しない。両試験とも最終字体・追加形式への変換を温存する。
+[高さ情報の適応](../research-results/ocr-synthetic-training-20261013/ascii-paddle-medium-height-neck-v1/adaptation-v1/README.md)。
+
+別系統の比較では、日本語PP-OCRv3の固定原行BGRで本文39/72・28/72、見出し8/42。
+EasyOCR Japanese G2も本文36/72・35/72、教室6/48、教室の高スコア誤読29行だった。
+既存の日本語モデルへ切り替えるだけでは改善できず、両方を不採用とする。
+[日本語V3原行](../research-results/ocr-japanese-v3-clean-lines-20261013/README.md) /
+[EasyOCR Japanese G2](../research-results/ocr-easyocr-japanese-g2-20261014/README.md)。
+
+同じEasyOCRの大型G1も本文38/72・41/72、教室0/48、教室の高スコア誤読24行で不採用。
+英語PP-OCRv5は見出しBGR40/42・Gray41/42まで改善したが、日本語の本文を読めず、
+教室の英数字suffixも各字体3/24しか一致しなかった。原文依存の切断や合成はしない。
+[Japanese G1](../research-results/ocr-easyocr-japanese-g1-20261014/README.md) /
+[英語V5](../research-results/ocr-english-v5-clean-lines-20261014/README.md)。
+
+次にWindows標準OCRのインストール済み日本語／英語エンジンを、同じ原画で比較する研究を用意した。
+このAPIには認識信頼度がないため、スコアを捏造して現行アプリへ接続しない。
+まずnative環境で実行できるか、完全一致が改善するかを測る。まだ実測・導入資格はない。
+[研究条件](../tools/windows-system-ocr/README.md)。

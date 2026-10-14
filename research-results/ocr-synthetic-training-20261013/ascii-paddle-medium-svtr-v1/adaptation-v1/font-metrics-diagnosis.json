@@ -1,0 +1,384 @@
+{
+  "scope": "Font source outline/advance audit, no rendered pixels or model inference; font metrics do not prove raster or CNN distinctions",
+  "fonts": [
+    {
+      "font": "NotoSansJP400",
+      "fontSha256": "54aba28468f275bc372eda5f29b202c0d9e7b9ba2bc18a53a4c72c481c75cf9f",
+      "asciiAdvanceDistinctValues": 59,
+      "OAdvance": 742,
+      "zeroAdvance": 555,
+      "IAdvance": 293,
+      "lAdvance": 284,
+      "oneAdvance": 555,
+      "outlineAndAdvanceIdentical": [
+        {
+          "left": "O",
+          "right": "0",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "I",
+          "right": "l",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "l",
+          "right": "1",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": ":",
+          "right": "：",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "-",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "–",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        }
+      ]
+    },
+    {
+      "font": "NotoSerifJP400",
+      "fontSha256": "2b127545ad3dba023d255733015059e550d9dbcd04c980a80021dc8ea666e813",
+      "asciiAdvanceDistinctValues": 74,
+      "OAdvance": 767,
+      "zeroAdvance": 557,
+      "IAdvance": 405,
+      "lAdvance": 334,
+      "oneAdvance": 471,
+      "outlineAndAdvanceIdentical": [
+        {
+          "left": "O",
+          "right": "0",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "I",
+          "right": "l",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "l",
+          "right": "1",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": ":",
+          "right": "：",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "-",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "–",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        }
+      ]
+    },
+    {
+      "font": "MPLUS1p-Regular",
+      "fontSha256": "2f294ad496432b1608f070d310e3aa2adcf1de4af429f4901df97ec4bd361ed1",
+      "asciiAdvanceDistinctValues": 68,
+      "OAdvance": 793,
+      "zeroAdvance": 620,
+      "IAdvance": 317,
+      "lAdvance": 307,
+      "oneAdvance": 620,
+      "outlineAndAdvanceIdentical": [
+        {
+          "left": "O",
+          "right": "0",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "I",
+          "right": "l",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "l",
+          "right": "1",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": ":",
+          "right": "：",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "-",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "–",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        }
+      ]
+    },
+    {
+      "font": "ZenKakuGothicNew-Regular",
+      "fontSha256": "b840cd07a67d89cacca44249ae49aa99ee7640eb5ce623be8d8983d6aabac801",
+      "asciiAdvanceDistinctValues": 76,
+      "OAdvance": 732,
+      "zeroAdvance": 504,
+      "IAdvance": 230,
+      "lAdvance": 210,
+      "oneAdvance": 383,
+      "outlineAndAdvanceIdentical": [
+        {
+          "left": "O",
+          "right": "0",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "I",
+          "right": "l",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "l",
+          "right": "1",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": ":",
+          "right": "：",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "-",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "–",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        }
+      ]
+    },
+    {
+      "font": "BIZUDPMincho-Regular",
+      "fontSha256": "02e07546c51503acb864004b663f1762f099d8fbe1af7d619b185568568101ef",
+      "asciiAdvanceDistinctValues": 42,
+      "OAdvance": 1720,
+      "zeroAdvance": 1393,
+      "IAdvance": 778,
+      "lAdvance": 676,
+      "oneAdvance": 1065,
+      "outlineAndAdvanceIdentical": [
+        {
+          "left": "O",
+          "right": "0",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "I",
+          "right": "l",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "l",
+          "right": "1",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": ":",
+          "right": "：",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "-",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "–",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        }
+      ]
+    },
+    {
+      "font": "BIZUDGothic-Regular",
+      "fontSha256": "709fcd41e3209fb765da750472f55ccdf925653e9fa7e1eb007cb65c8f749c75",
+      "asciiAdvanceDistinctValues": 1,
+      "OAdvance": 1024,
+      "zeroAdvance": 1024,
+      "IAdvance": 1024,
+      "lAdvance": 1024,
+      "oneAdvance": 1024,
+      "outlineAndAdvanceIdentical": [
+        {
+          "left": "O",
+          "right": "0",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": "I",
+          "right": "l",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": "l",
+          "right": "1",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": ":",
+          "right": "：",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "-",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": "—",
+          "right": "–",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        }
+      ]
+    },
+    {
+      "font": "KaiseiTokumin-Regular",
+      "fontSha256": "3fbdbec539369aed11bb1fa0cdda1d19ea246e795107357383dfa561848a427d",
+      "asciiAdvanceDistinctValues": 61,
+      "OAdvance": 820,
+      "zeroAdvance": 590,
+      "IAdvance": 413,
+      "lAdvance": 346,
+      "oneAdvance": 590,
+      "outlineAndAdvanceIdentical": [
+        {
+          "left": "O",
+          "right": "0",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "I",
+          "right": "l",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "l",
+          "right": "1",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": ":",
+          "right": "：",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "-",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "–",
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        }
+      ]
+    }
+  ],
+  "interpretation": "Training covers mainly proportional ASCII advances; BIZUDGothic dev has fixed ASCII advance while KaiseiTokumin differs O vs zero width. A width shortcut/domain-coverage gap is plausible, not proven cause. No devfont/label is moved into training and no frozen condition is changed."
+}

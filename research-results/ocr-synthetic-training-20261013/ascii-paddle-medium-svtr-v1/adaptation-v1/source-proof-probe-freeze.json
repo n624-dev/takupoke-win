@@ -1,0 +1,8 @@
+{
+  "scope": "Unscored contradiction controls only; not training targets, selection, independent final or production credit",
+  "priorConsumedProbeManifestSha256": "ae2f562925634b1c154f30a71387ad83f83a9b0c639337d08f8f2697bc7f6cde",
+  "selectionSha256": "a7b310f4d8d1ba3f88bd0914746960019176ec178b3d32ed2c202a452475d79b",
+  "sourceSha256": "49d3d1715990ba4f7b43328ce9f0cf5ff7dd973b3d9426462b9d7ae3b0e928a7",
+  "condition": "Existing provided PNGs only/direct native FP32 BGR48/full18710/fixed original and completed checkpoints; no thresholds or selection changes",
+  "rows": 64
+}

@@ -1,0 +1,109 @@
+{
+  "protocol": {
+    "namespace": "research-ascii-paddle-medium-height-neck-v1/adaptation-v1",
+    "scope": "Independent mono/proportional natural-line bounded early height/localneck adaptation; no final or production qualification",
+    "modelSha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba",
+    "initialization": "Native prepool768x3xlocalWidth -> original AveragePool3x2 plus zero-init groupedConv correction, original three neck convs+frozen BNmean/variance/affine, unchanged original twoSVTRblocks and all original18710head/dictionary/blank0. Registered native reconstruction before data/train.",
+    "parameters": "Original CNNprepool/frozenBN/SVTR/all18710matrix+bias stay frozen. Pooldelta4608 + neckConv296256=300864 plus zero-init ASCII95delta18335/reject193 ->319392trainable. Changes to features can alter all18710logits; Japanese retention/fullteacher regularization are empirical safeguards not guarantees.",
+    "train": {
+      "seed": 78421137,
+      "fonts": [
+        "NotoSansJP400",
+        "NotoSerifJP400",
+        "MPLUS1Code-Regular",
+        "BIZUDMincho-Regular"
+      ],
+      "positiveCounts": {
+        "mixed_code": 640,
+        "mixed_confusable": 640,
+        "ascii_short": 256,
+        "japanese": 512
+      },
+      "negativeRows": 512
+    },
+    "development": {
+      "seed": 78423141,
+      "fonts": [
+        "KosugiMaru-Regular",
+        "ZenAntique-Regular"
+      ],
+      "positiveCounts": {
+        "mixed_code": 192,
+        "mixed_confusable": 192,
+        "ascii_short": 64,
+        "japanese": 64
+      },
+      "retentionRows": 128,
+      "negativeRows": 192
+    },
+    "fontExposure": "Train50percent monoASCII advances and50percent proportional on positive groups. NotoSans/Serif consumed before. MPLUS1Code/BIZUDMincho are new font files but share broaderMPLUS/BIZproject lineage with consumed fonts; no entirefontlineage-unseen claim. KosugiMaru/ZenAntique reserved by own prior-record search and explicit parent notification; no usage record found. Kosugi-Regular had parent source-only exposure, distinctfile/face from KosugiMaru but sameprojectlineage, so fullfontlineage-unseen claim is not made. Sawarabi2fonts remain finalreserved/unopened.",
+    "source": "Fresh independent naturephrases and arbitrary ASCIIcodes/case/I-l-1/O-0/printable, not school original subjects/names/rooms or previous main/dev/final labels. Prior literal corpus/oracles exclusion-only; newtrain/devdisjoint; no class whitelist/output repair or oracle candidate routing.",
+    "preprocessing": "Whole original RGBnonwhite bbox+2originalpx/commonbaseline/relativeheights/internalgap/CJKprefix retained, native BGR48 original-center bilinear uint8round/norm0padding width320..960; parentminimum160 condition separate.",
+    "rendering": "font14..28logicalpixels/density1,2,4 probabilities.4,.4,.2;black/navy/gray/green/10percent mildblur. Pairedcase/confusables sharefont/renderseed/prefix.",
+    "negatives": "Boundary20..40percent inkheightclip/interior smallerasure actualinkloss measured, duplicatedmultiline/randomstrokes/blank; no guessedlosttext CTClabel fordamage/multi/noise; blank receivesemptyCTC.",
+    "cache": "Original standardONNX outputs FP32prepool map768x3xlocalWidth and native finalteacherfeatureTx192. Perrow losslessNPZ compression/decompression exactdtype/shape/bytesHash. No FP16/quantization. Raw inputFP32tensors verified viahash. No cache of staticOTHER logits.",
+    "batching": "Bucket exact native prepool width, not merely pooledT, including odd trailingnativecolumns; no addedCNN/timepadding. Original AvgPool/correction floorstride3x2 asnative, originalselfattention usesentireT without artificialmask. ValidWidth temporalcenter mask onlyrejectmean.",
+    "training": {
+      "seed": 78425147,
+      "threads": 2,
+      "batchSize": 16,
+      "epochs": 8,
+      "evaluateEpochs": [
+        2,
+        4,
+        8
+      ],
+      "poolLearningRate": 0.0003,
+      "neckLearningRate": 3e-05,
+      "asciiDeltaLearningRate": 0.0003,
+      "rejectLearningRate": 0.001,
+      "teacherKlWeight": 0.2,
+      "teacherFeatureMseWeight": 0.02,
+      "rejectBceWeight": 0.5,
+      "weightDecay": 0.0001,
+      "gradientClip": 5.0,
+      "maximumTrainingSeconds": 1800,
+      "maximumCacheSeconds": 1800,
+      "maximumRssMiB": 4096,
+      "minimumFreeDiskGiB": 2,
+      "additionalDiskBudgetGiB": 3.0
+    },
+    "loss": "Completefull18710CTC/fullteacherKL/teacherFeatureMSE+rejectBCE. Original teacherdistribution recomputedfromnative finalfeatures/fulloriginalhead. Frozenhead-stage staticOTHER compression not used.",
+    "acceptance": "Uncalibrateddiagnostic: nonempty/minemittedCTCconfidence>=.8/nointervalpastvalidWidth; trained additionallyrejectProbability<=.05. No clamp/correction. Source script/fullink/cellownership proofindependent.",
+    "initializationDevelopmentGate": "Before optimizer everynewdev original/reconstructed-untrained text/CTCinterval/floor+validWidthdecision mustagree; maxfloatdiff recorded. Halt ifgatefail, do not change thresholds.",
+    "contradictionAudit": "Beforeoptimizer sameprovidedPNG or sameFP32input differentpositiveCTCliteral -> excludeallcollidingrowsfrom everyupdate, no guessedlabel/falsedamage target. Keepnewdevunchanged. CheckCTCminimumframefeasibility.",
+    "selection": "Originalfallbackincluded. Trainedeligibleonly mixedexact>=original/wrongaccepted<=original/negativeaccepted<=original/zerooriginal-correctJapanese-retentionregression. MaxcorrectAccepted thenexact/lowerwrong+negative/CER/earlier. Onlycompletefixed2,4,8 checkpoints; partialepochsnevercandidate.",
+    "continuationGate": "Selectedtrained/rawexact>=97percent/correctaccepted>=90percent/wrongaccepted0/negativeaccepted0/perdevfont>=95percentrawexact/zerooriginal-correctJPregressions. This onlypermitsseparateprospectivefinal/export, nevercomponent-basedactivation.",
+    "sourceProof": "64consumed same-pixelscriptalias/wholeprefixloss controls onlypostselection/unscored/nottrainorselect. Identicalcrop cannotproveorigin/completeness; sourcegeometry/script/ownershipproofindependent.",
+    "final": "Sawarabi Gothic/Mincho reserved notrendered/inferred; onlyaftercontinuationgatepass andseparatefinal/full-documentprotocol. iOS noedit. StandardONNX/CoreML laterifwarranted.",
+    "fontCoverage": "Before render accept only synthetic literals whose everyUnicode scalar is in selectedfont bestCmap; unsupportedliteral rerolls without replacement, fontfallback or inferredtext. MPLUS1Code lacksfullwidthcolon andKosugiMaru lacksemdash, so those combinations are excluded prospectively. AllASCII95 arepresent. Recordcoverage for every acceptedrow."
+  },
+  "protocolSha256": "b42f2f952fb1622968b46ad2d60446310c672b6be8ec15176e51d954d04b79f7",
+  "sources": {
+    "height_protocol.json": "b42f2f952fb1622968b46ad2d60446310c672b6be8ec15176e51d954d04b79f7",
+    "height_data.py": "be4fadae4eccd5358eca261bc2d08df95ae8bdd1b684deaf98343005b0b09f51",
+    "height_model.py": "05906a3bffc19e5431f5afe14ea774a2a6037ff4fb81b5d8df0a527219d47069",
+    "height_train.py": "d61fba8a932076186683d6bb686af0ebb7c3478a12bdda8a5404012aa2a0a2a1",
+    "neck.py": "8889997581817beb7450fd067da70d6ff948b6ac697b1ab1bcb05f78a2287fa9",
+    "reproduce.py": "0cf0ca22b72718e8cd297ec2bea2c603375c7b722a254530ac11658466473a43",
+    "height_reference.py": "edf7e52a3e2b2d992322e89e796d6f4ea7062452e30eebd96168eb951bba7b0b"
+  },
+  "preprocessSha256": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098",
+  "modelSha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba",
+  "dictionarySha256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f",
+  "fidelitySha256": "47184fedbe6a05cdd9ef2c3746b111894bc4eac2e34634161587907255511328",
+  "originalHeightNeckStateSha256": "cfc4deccc25046eebcff9e8a1e71f6f948bf94668376f6610d2cb13debb66f8a",
+  "observerSha256": "70506acb02c51baf765769301f744c2d14f62924a97ee58cc3d1f7195be0b7df",
+  "fontHashes": {
+    "NotoSansJP400": "54aba28468f275bc372eda5f29b202c0d9e7b9ba2bc18a53a4c72c481c75cf9f",
+    "NotoSerifJP400": "2b127545ad3dba023d255733015059e550d9dbcd04c980a80021dc8ea666e813",
+    "MPLUS1Code-Regular": "c098c9fbdb9ede89a6769e33d590802d7bd2598051cae39f88199dc70c8341ee",
+    "BIZUDMincho-Regular": "a8c855817e5cfcc0366926070639f1dc2752693034ea19ddfc50f9a70ffddac2",
+    "KosugiMaru-Regular": "4b8d0022c8dadd090ef67cd1f71f130714767af7806cba2eb4ebe4b0271c1d68",
+    "ZenAntique-Regular": "8c5cf7a136837ee705d06bbc133ea18ac06b7dd284f38aace91f5de36725c315"
+  },
+  "exclusionSha256": "4349ae497f85ff4312ae3bad0399597e15b39aa624052f0534f3e357164716dc",
+  "freeDiskGiBBeforeCorpus": 5.477588653564453,
+  "trainableParameters": 319392,
+  "finalOpened": false
+}

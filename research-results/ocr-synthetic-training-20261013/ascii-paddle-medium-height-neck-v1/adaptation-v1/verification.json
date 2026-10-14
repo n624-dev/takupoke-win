@@ -1,0 +1,40 @@
+{
+  "scope": "Read-only source/raw/cache audit; no inference repeated",
+  "frozenSourceHashes": true,
+  "candidateRawHashes": true,
+  "losslessFp32InputFeatureCache": [
+    {
+      "split": "train",
+      "rows": 2560,
+      "floatType": "float32",
+      "encoding": "LosslessNPZallow_pickleFalse",
+      "compressedBytes": 2144041906,
+      "rawBytes": 2369008896,
+      "ratio": 0.9050375072968911,
+      "fileAndRestoredFp32HashesVerified": true
+    },
+    {
+      "split": "development",
+      "rows": 832,
+      "floatType": "float32",
+      "encoding": "LosslessNPZallow_pickleFalse",
+      "compressedBytes": 698254195,
+      "rawBytes": 770922240,
+      "ratio": 0.9057388135540103,
+      "fileAndRestoredFp32HashesVerified": true
+    }
+  ],
+  "frozenSvtrAndBatchNormCheckpointTensors": {
+    "count": 43,
+    "allCandidatesIdentical": true
+  },
+  "trainDevelopmentDisjoint": true,
+  "utf8LfPathIoAudit": true,
+  "finalDirectoryAbsent": true,
+  "previousPortableZipUnchanged": true,
+  "initializationNewdevSameDecodingDecisions": true,
+  "contradictoryOptimizerRowsExcluded": 0,
+  "noStaticLossCompression": true,
+  "inferenceDictionaryClasses": 18710,
+  "originalCnnSvtrBatchNormAndClassifierFrozen": "StandardONNXprepoolprefix/SVTR/BNbuffers/classifier not optimizer parameters; pool/localneck updates can still change full18710 logits, Japanese regressions quantified separately"
+}

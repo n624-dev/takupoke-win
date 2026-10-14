@@ -1,0 +1,97 @@
+{
+  "name": "epoch-4",
+  "positiveRows": 768,
+  "exact": 470,
+  "correctAccepted": 336,
+  "incorrectAccepted": 111,
+  "negativeRows": 192,
+  "negativeAccepted": 12,
+  "retentionRows": 256,
+  "retentionExact": 255,
+  "paddingRows": 31,
+  "cer": 0.05808225455378623,
+  "groups": {
+    "ascii_short": {
+      "rows": 128,
+      "exact": 115,
+      "correctAccepted": 106,
+      "incorrectAccepted": 6,
+      "accepted": 112,
+      "nonempty": 128
+    },
+    "blank": {
+      "rows": 40,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 0
+    },
+    "clipped": {
+      "rows": 38,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 38
+    },
+    "interior_damage": {
+      "rows": 38,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 12,
+      "nonempty": 38
+    },
+    "japanese": {
+      "rows": 128,
+      "exact": 128,
+      "correctAccepted": 126,
+      "incorrectAccepted": 0,
+      "accepted": 126,
+      "nonempty": 128
+    },
+    "mixed_code": {
+      "rows": 256,
+      "exact": 129,
+      "correctAccepted": 29,
+      "incorrectAccepted": 15,
+      "accepted": 44,
+      "nonempty": 256
+    },
+    "mixed_confusable": {
+      "rows": 256,
+      "exact": 98,
+      "correctAccepted": 75,
+      "incorrectAccepted": 90,
+      "accepted": 165,
+      "nonempty": 256
+    },
+    "multiline": {
+      "rows": 38,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 38
+    },
+    "noise": {
+      "rows": 38,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 18
+    },
+    "retention_japanese": {
+      "rows": 128,
+      "exact": 127,
+      "correctAccepted": 123,
+      "incorrectAccepted": 0,
+      "accepted": 123,
+      "nonempty": 128
+    }
+  },
+  "rawSha256": "49bae68d48b44dc3dd249e02816353cd05b4712fd7bb7ba8151eb0e2ff769e3d",
+  "scope": "New fictional literal development on previously consumed dev-font families; not unused-font final or production qualification"
+}

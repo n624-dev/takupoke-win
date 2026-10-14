@@ -1,0 +1,890 @@
+{
+  "scope": "Initialization/native reconstruction and lossless-cache size only; consumed48pixels plus numeric dynamicshapes; no oracle/quality/training/final/activation",
+  "matches": {
+    "textIntervals": 48,
+    "floor08Decisions": 48,
+    "allSourceInkRetained": 48
+  },
+  "maximumDifferences": {
+    "observerProbability": 0.0,
+    "prepool": 0.0,
+    "pooled": 0.0,
+    "context": 3.814697265625e-06,
+    "shortcut": 7.62939453125e-06,
+    "feature": 2.956390380859375e-05,
+    "logits": 5.7220458984375e-05,
+    "probability": 2.384185791015625e-06,
+    "emittedConfidence": 2.384185791015625e-06
+  },
+  "dynamicShapes": [
+    {
+      "batch": 1,
+      "inputWidth": 320,
+      "prepoolShape": [
+        1,
+        768,
+        3,
+        80
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "prepool": 0.0,
+        "pooled": 0.0,
+        "context": 1.9073486328125e-06,
+        "shortcut": 4.649162292480469e-06,
+        "feature": 1.71661376953125e-05,
+        "logits": 2.6702880859375e-05,
+        "probability": 8.940696716308594e-07,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 1,
+      "inputWidth": 481,
+      "prepoolShape": [
+        1,
+        768,
+        3,
+        121
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "prepool": 0.0,
+        "pooled": 0.0,
+        "context": 1.9073486328125e-06,
+        "shortcut": 3.039836883544922e-06,
+        "feature": 1.5735626220703125e-05,
+        "logits": 2.1457672119140625e-05,
+        "probability": 2.384185791015625e-07,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 1,
+      "inputWidth": 500,
+      "prepoolShape": [
+        1,
+        768,
+        3,
+        125
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "prepool": 0.0,
+        "pooled": 0.0,
+        "context": 1.6689300537109375e-06,
+        "shortcut": 3.6954879760742188e-06,
+        "feature": 2.5272369384765625e-05,
+        "logits": 3.62396240234375e-05,
+        "probability": 1.6093254089355469e-06,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 1,
+      "inputWidth": 640,
+      "prepoolShape": [
+        1,
+        768,
+        3,
+        160
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "prepool": 0.0,
+        "pooled": 0.0,
+        "context": 1.9073486328125e-06,
+        "shortcut": 3.6954879760742188e-06,
+        "feature": 2.0742416381835938e-05,
+        "logits": 3.4332275390625e-05,
+        "probability": 4.172325134277344e-07,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 1,
+      "inputWidth": 960,
+      "prepoolShape": [
+        1,
+        768,
+        3,
+        240
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "prepool": 0.0,
+        "pooled": 0.0,
+        "context": 1.9073486328125e-06,
+        "shortcut": 3.814697265625e-06,
+        "feature": 1.3828277587890625e-05,
+        "logits": 4.00543212890625e-05,
+        "probability": 1.0132789611816406e-06,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 2,
+      "inputWidth": 320,
+      "prepoolShape": [
+        2,
+        768,
+        3,
+        80
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "prepool": 0.0,
+        "pooled": 0.0,
+        "context": 1.9073486328125e-06,
+        "shortcut": 4.649162292480469e-06,
+        "feature": 1.33514404296875e-05,
+        "logits": 2.09808349609375e-05,
+        "probability": 1.0728836059570312e-06,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 2,
+      "inputWidth": 481,
+      "prepoolShape": [
+        2,
+        768,
+        3,
+        121
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "prepool": 0.0,
+        "pooled": 0.0,
+        "context": 1.9073486328125e-06,
+        "shortcut": 3.039836883544922e-06,
+        "feature": 1.5735626220703125e-05,
+        "logits": 2.2411346435546875e-05,
+        "probability": 6.556510925292969e-07,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 2,
+      "inputWidth": 500,
+      "prepoolShape": [
+        2,
+        768,
+        3,
+        125
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "prepool": 0.0,
+        "pooled": 0.0,
+        "context": 1.6689300537109375e-06,
+        "shortcut": 3.6954879760742188e-06,
+        "feature": 2.0503997802734375e-05,
+        "logits": 3.0517578125e-05,
+        "probability": 1.3709068298339844e-06,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 2,
+      "inputWidth": 640,
+      "prepoolShape": [
+        2,
+        768,
+        3,
+        160
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "prepool": 0.0,
+        "pooled": 0.0,
+        "context": 1.9073486328125e-06,
+        "shortcut": 3.6954879760742188e-06,
+        "feature": 2.0265579223632812e-05,
+        "logits": 3.0517578125e-05,
+        "probability": 3.5762786865234375e-07,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 2,
+      "inputWidth": 960,
+      "prepoolShape": [
+        2,
+        768,
+        3,
+        240
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "prepool": 0.0,
+        "pooled": 0.0,
+        "context": 1.9073486328125e-06,
+        "shortcut": 3.814697265625e-06,
+        "feature": 1.52587890625e-05,
+        "logits": 2.6702880859375e-05,
+        "probability": 1.0728836059570312e-06,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    }
+  ],
+  "fidelityGatePassed": true,
+  "compression": {
+    "rows": [
+      {
+        "id": "n072",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 448451,
+        "ratio": 0.5839205729166667,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n073",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 457171,
+        "ratio": 0.5952747395833333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n074",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 466348,
+        "ratio": 0.6072239583333333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n075",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 520294,
+        "ratio": 0.6774661458333333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n076",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 528613,
+        "ratio": 0.6882981770833333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n077",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 510710,
+        "ratio": 0.6649869791666667,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n078",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 520272,
+        "ratio": 0.6774375,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n079",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 528792,
+        "ratio": 0.68853125,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n080",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 510899,
+        "ratio": 0.6652330729166667,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n081",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 520297,
+        "ratio": 0.6774700520833333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n082",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 528708,
+        "ratio": 0.688421875,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n083",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 510830,
+        "ratio": 0.6651432291666667,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n084",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 520251,
+        "ratio": 0.67741015625,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n085",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 528787,
+        "ratio": 0.6885247395833334,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n086",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 510846,
+        "ratio": 0.6651640625,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n087",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 475254,
+        "ratio": 0.6188203125,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n088",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 502263,
+        "ratio": 0.65398828125,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n089",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 502562,
+        "ratio": 0.6543776041666667,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n090",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 484378,
+        "ratio": 0.6307005208333333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n091",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 528975,
+        "ratio": 0.68876953125,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n092",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 538042,
+        "ratio": 0.7005755208333333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n093",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 358360,
+        "ratio": 0.46661458333333333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n094",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 358360,
+        "ratio": 0.46661458333333333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n095",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 358360,
+        "ratio": 0.46661458333333333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n168",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 439125,
+        "ratio": 0.57177734375,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n169",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 466362,
+        "ratio": 0.6072421875,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n170",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 466371,
+        "ratio": 0.60725390625,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n171",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 546633,
+        "ratio": 0.71176171875,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n172",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 546719,
+        "ratio": 0.7118736979166667,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n173",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 538204,
+        "ratio": 0.7007864583333333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n174",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 546733,
+        "ratio": 0.7118919270833334,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n175",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 546709,
+        "ratio": 0.7118606770833333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n176",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 538218,
+        "ratio": 0.7008046875,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n177",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 546857,
+        "ratio": 0.7120533854166666,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n178",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 546786,
+        "ratio": 0.7119609375,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n179",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 538400,
+        "ratio": 0.7010416666666667,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n180",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 546674,
+        "ratio": 0.7118151041666667,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n181",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 546810,
+        "ratio": 0.7119921875,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n182",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 538229,
+        "ratio": 0.7008190104166667,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n183",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 520453,
+        "ratio": 0.6776731770833333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n184",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 528676,
+        "ratio": 0.6883802083333334,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n185",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 511085,
+        "ratio": 0.6654752604166667,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n186",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 511221,
+        "ratio": 0.66565234375,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n187",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 546877,
+        "ratio": 0.7120794270833334,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n188",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 556218,
+        "ratio": 0.7242421875,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n189",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 358360,
+        "ratio": 0.46661458333333333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n190",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 358360,
+        "ratio": 0.46661458333333333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      },
+      {
+        "id": "n191",
+        "rawFp32Bytes": 768000,
+        "losslessNpzBytes": 358360,
+        "ratio": 0.46661458333333333,
+        "decompressedBytesIdentical": true,
+        "prepoolShape": [
+          1,
+          768,
+          3,
+          80
+        ]
+      }
+    ],
+    "totalRawBytes": 36864000,
+    "totalLosslessBytes": 23866263,
+    "weightedRatio": 0.647413818359375
+  },
+  "rawSha256": "a9a1d70d055d956451ef6375261446f673a9ac88d1f70d71264a2d3405c5e576",
+  "seconds": 18.53935850199923,
+  "peakRssMiB": 1134.54296875,
+  "oracleOpened": false,
+  "trainingStarted": false,
+  "finalOpened": false,
+  "portability": "Original prefix isstandardONNXopset11; reconstructedheight/localneck andSVTR standardTorch primitives. Trainedexport/nativeWindows/CoreML/iPhone not validated."
+}
