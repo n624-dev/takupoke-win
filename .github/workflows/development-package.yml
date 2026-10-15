@@ -77,7 +77,7 @@ jobs:
       - name: Preserve verified installers for publication recovery
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: verified-development-installers-${{ inputs.version }}
+          name: verified-development-installers-${{ env.DISTRIBUTION_VERSION }}
           path: ${{ env.TAKUPOKE_CI_TEMP }}/release-assets/*
           if-no-files-found: error
           compression-level: 0

@@ -18,4 +18,4 @@
 
 ローカルの回帰検証はIntegration 1071件、Core 288件が通過した。[Windowsを含むCI](https://github.com/n624-dev/takupoke-win/actions/runs/38711108154)も全7ジョブ成功。Windowsの829 UI項目で、native原画像・本文訂正・見出しと注記の確認・明示採用・保存後の再起動を検証した。公開テストは独立した架空資料を使い、実資料の精度評価とは分ける。Node.js 20の警告は全7ジョブで0件だった。
 
-新しいインストーラーは配布用ワークフローの検証・インストール試験・公開ファイルの照合を経て公開する。既存の配布版10439には、この変更は含まれない。
+[導入確認版0.1.0-dev.10440](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10440)へ反映した。[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38712585333)全8ジョブが成功し、x64の新規導入・移動・再導入・旧dev.5更新など6状態で各829～830 UI項目を確認した。公開6ファイルを実際にダウンロードしてSHA-256を照合し、x64／ARM64のZIP内の版番号・ビルド元・全同梱ファイルのハッシュと主要実行形式も確認した。検証用ダウンロードは保持しない。ARM64実機は未検証。[配布確認の記録](../research-results/native-pdf-integration-20261015/installer-release-receipt.json)。

@@ -16,7 +16,7 @@ PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCR�
 
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版0.1.0-dev.10439のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10439)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。
+[開発確認版0.1.0-dev.10440のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10440)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。 この版にはPDF原文字の描画互換・原画像確認・本文訂正・原本の注記表示を含みます。[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38712585333)全8ジョブ、x64の6つの導入状態で各829～830 UI項目が通過し、公開6ファイルとZIP内の全同梱ファイルを照合済みです。[検証記録](research-results/native-pdf-integration-20261015/installer-release-receipt.json)。
 
 1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10439-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10439-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
