@@ -1,0 +1,136 @@
+{
+  "name": "distortion-candidate",
+  "positiveRows": 64,
+  "exact": 57,
+  "correctAccepted": 48,
+  "incorrectAccepted": 2,
+  "negativeRows": 0,
+  "negativeAccepted": 0,
+  "paddingRows": 0,
+  "cer": 0.021164021164021163,
+  "groups": {
+    "code": {
+      "rows": 32,
+      "exact": 32,
+      "correctAccepted": 27,
+      "incorrectAccepted": 0,
+      "accepted": 27,
+      "nonempty": 32,
+      "characters": 198,
+      "editErrors": 0,
+      "cer": 0.0,
+      "correctLowConfidence": 4,
+      "wrongHighConfidence": 0
+    },
+    "lookalike": {
+      "rows": 32,
+      "exact": 25,
+      "correctAccepted": 21,
+      "incorrectAccepted": 2,
+      "accepted": 23,
+      "nonempty": 32,
+      "characters": 180,
+      "editErrors": 8,
+      "cer": 0.044444444444444446,
+      "correctLowConfidence": 2,
+      "wrongHighConfidence": 3
+    }
+  },
+  "rawSha256": "8c49173b814b41e953b138b35b310f815d1d377d30fe2d80ccac49094de226bc",
+  "scope": "Fresh synthetic development unless separately labeled fresh; independent ASCII branch; no document qualification",
+  "fontMetrics": {
+    "SawarabiGothic": {
+      "rows": 16,
+      "characters": 103,
+      "editErrors": 4,
+      "cer": 0.038834951456310676,
+      "exact": 13,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 2,
+      "accepted": 13
+    },
+    "SawarabiMincho": {
+      "rows": 16,
+      "characters": 94,
+      "editErrors": 0,
+      "cer": 0.0,
+      "exact": 16,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0,
+      "accepted": 16
+    },
+    "KleeOne": {
+      "rows": 16,
+      "characters": 83,
+      "editErrors": 4,
+      "cer": 0.04819277108433735,
+      "exact": 12,
+      "correctLowConfidence": 5,
+      "wrongHighConfidence": 1,
+      "accepted": 7
+    },
+    "KaiseiTokumin": {
+      "rows": 16,
+      "characters": 98,
+      "editErrors": 0,
+      "cer": 0.0,
+      "exact": 16,
+      "correctLowConfidence": 1,
+      "wrongHighConfidence": 0,
+      "accepted": 14
+    }
+  },
+  "codeMetrics": {
+    "rows": 64,
+    "characters": 378,
+    "editErrors": 8,
+    "cer": 0.021164021164021163,
+    "exact": 57,
+    "correctLowConfidence": 6,
+    "wrongHighConfidence": 3,
+    "accepted": 50
+  },
+  "monoCodeMetrics": {
+    "rows": 0,
+    "characters": 0,
+    "editErrors": 0,
+    "cer": null,
+    "exact": 0,
+    "correctLowConfidence": 0,
+    "wrongHighConfidence": 0,
+    "accepted": 0
+  },
+  "fontCodeMetrics": {
+    "RedHatMono": {
+      "rows": 0,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "exact": 0,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0,
+      "accepted": 0
+    },
+    "OverpassMono": {
+      "rows": 0,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "exact": 0,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0,
+      "accepted": 0
+    }
+  },
+  "reviewMetrics": {
+    "rows": 64,
+    "characters": 378,
+    "editErrors": 8,
+    "cer": 0.021164021164021163,
+    "exact": 57,
+    "correctLowConfidence": 6,
+    "wrongHighConfidence": 3,
+    "accepted": 50
+  },
+  "allUnsupportedPaddingRefused": true
+}

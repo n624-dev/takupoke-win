@@ -1,0 +1,92 @@
+{
+  "namespace": "ascii-english-v5-japanese-fonts-v3/exploratory-epoch1-v3",
+  "basis": "Exploratory failed-gate epoch1 continuation of active font-balanced epoch4; original development FAIL; not selected; no fresh opened or adoption claim",
+  "selectedCheckpoint": "/workspace/scratch/ascii-english-v5-japanese-fonts-v3/adaptation-v3/epoch-1.safetensors",
+  "selectedCheckpointSha256": "ad78c3912e85bd6462a8817667da7404d0b905f4734303ee0859f6fe5d70fd05",
+  "trainingFreezeSha256": "65e67858717aed53106ddadc19b02d7bcde29c8420f73786d53df54eacf43d90",
+  "originalDevelopmentGatePassed": false,
+  "selectedForOriginalTrial": false,
+  "purpose": "Explicit parent-authorized consumed native-route exploratory assessment only",
+  "dictionarySha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368",
+  "numericSeed": 106601,
+  "numericShapes": [
+    [
+      1,
+      320
+    ],
+    [
+      1,
+      321
+    ],
+    [
+      1,
+      481
+    ],
+    [
+      1,
+      500
+    ],
+    [
+      1,
+      640
+    ],
+    [
+      1,
+      960
+    ],
+    [
+      2,
+      320
+    ],
+    [
+      2,
+      321
+    ],
+    [
+      2,
+      481
+    ],
+    [
+      2,
+      500
+    ],
+    [
+      2,
+      640
+    ],
+    [
+      2,
+      960
+    ]
+  ],
+  "numericInputs": "Random finite normalizedFP32; batch2 secondrow normalizedzero rightpadding validWidth=W-17. No gold/quality credit.",
+  "developmentRows": 496,
+  "developmentPrecision": "Lossless previouslyfrozen allFP32originalpixels from cache; no FP16/newresize/crop/oracle routing",
+  "inputs": {
+    "x": "FLOAT32[B,3,48,W], BGR, W320..960",
+    "valid_width": "INT64[B], integer1..W"
+  },
+  "outputs": {
+    "probabilities": "FLOAT32[B,T,438] fullCTCsoftmax",
+    "reject_probability": "FLOAT32[B] sigmoid; uncalibrated"
+  },
+  "mask": "(2*t+1)*inputWidth < 2*T*validWidth, exact integer originalpixel-center inequality",
+  "onnxOpset": 17,
+  "allowedNodeDomains": [
+    "",
+    "ai.onnx"
+  ],
+  "ortProvider": "CPUExecutionProvider",
+  "ortIntraThreads": 1,
+  "ortInterThreads": 1,
+  "maximumRssMiB": 4096,
+  "maximumStageSeconds": 1800,
+  "maximumOwnScratchGiB": 1,
+  "minimumFreeGiB": 0.5,
+  "fidelityAssessment": "Numeric finite/shape/domain checks mandatory; record allprob/reject absolute differences. Compare every fixeddev and numeric raw text/interval/confidence/padding/acceptance; any mismatch retained as limitation, no repair or gate relaxation. Fixeddev Torchwrapper must reproduce priorselected Torchraw decisions/intervals and confidence exactly. ONNX not qualification/activation evenifallmatch.",
+  "freshOpened": false,
+  "fullDocumentQualified": false,
+  "iosEdited": false,
+  "coreml": "Not attempted; Linux conversion is not iPhone validation",
+  "sourceSha256": "6bca07f43a2e9c6d2effee12ec58174679596de3ebef772062b3d2064d191699"
+}

@@ -1,0 +1,26 @@
+{
+  "scope": "Development only: all original primary line crops on first page of old native fictional font0 positive. No crop chosen using errors/gold. Not full-document evidence.",
+  "models": [
+    "v1",
+    "v2",
+    "equal-posterior-mean-v1-v2"
+  ],
+  "decoders": [
+    "greedy",
+    "prefixbeam8-frame8-with-forced-alignment"
+  ],
+  "lengthPolicies": [
+    "same-length",
+    "bounded-code"
+  ],
+  "fallback": "actual-current-v1-manual-route",
+  "rejection": "max for mean, original for individuals; <=.05",
+  "vocabulary": null,
+  "patternPrior": null,
+  "coefficients": [
+    0.5,
+    0.5
+  ],
+  "sourceConfidence": "original aligned frame probabilities, never clamped/promoted",
+  "goldAvailableToWorker": false
+}

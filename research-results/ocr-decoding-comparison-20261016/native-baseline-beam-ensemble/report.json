@@ -1,0 +1,324 @@
+{
+  "scope": "Development only: all original primary line crops on first page of old native fictional font0 positive. No crop chosen using errors/gold. Not full-document evidence.",
+  "kind": "native",
+  "rawSHA256": "74cb326eefa6a738d3c4441e51003ff7adcb3779082fda7bea0b0caf3b1c9389",
+  "frozenArms": [
+    [
+      "v1",
+      "greedy",
+      "same-length"
+    ],
+    [
+      "v1",
+      "greedy",
+      "bounded-code"
+    ],
+    [
+      "v1",
+      "beam8",
+      "same-length"
+    ],
+    [
+      "v1",
+      "beam8",
+      "bounded-code"
+    ],
+    [
+      "v2",
+      "greedy",
+      "same-length"
+    ],
+    [
+      "v2",
+      "greedy",
+      "bounded-code"
+    ],
+    [
+      "v2",
+      "beam8",
+      "same-length"
+    ],
+    [
+      "v2",
+      "beam8",
+      "bounded-code"
+    ],
+    [
+      "mean-v1-v2",
+      "greedy",
+      "same-length"
+    ],
+    [
+      "mean-v1-v2",
+      "greedy",
+      "bounded-code"
+    ],
+    [
+      "mean-v1-v2",
+      "beam8",
+      "same-length"
+    ],
+    [
+      "mean-v1-v2",
+      "beam8",
+      "bounded-code"
+    ]
+  ],
+  "scores": [
+    {
+      "arm": [
+        "v1",
+        "greedy",
+        "same-length"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 55,
+      "selectedCodeBelowNativeFloor": 2,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "v1",
+        "greedy",
+        "bounded-code"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 55,
+      "selectedCodeBelowNativeFloor": 2,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "v1",
+        "beam8",
+        "same-length"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 55,
+      "selectedCodeBelowNativeFloor": 2,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "v1",
+        "beam8",
+        "bounded-code"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 55,
+      "selectedCodeBelowNativeFloor": 2,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "v2",
+        "greedy",
+        "same-length"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 25,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "v2",
+        "greedy",
+        "bounded-code"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 25,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "v2",
+        "beam8",
+        "same-length"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 25,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "v2",
+        "beam8",
+        "bounded-code"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 25,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "mean-v1-v2",
+        "greedy",
+        "same-length"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 25,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "mean-v1-v2",
+        "greedy",
+        "bounded-code"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 25,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "mean-v1-v2",
+        "beam8",
+        "same-length"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 25,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "mean-v1-v2",
+        "beam8",
+        "bounded-code"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 25,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    }
+  ],
+  "eligibleCrops": 61,
+  "baselineNativeIdentity": true,
+  "limits": "Consumed component development, not new accuracy/whole-document credit. Native page outputs preserve all fields but do not rerun full acquisition/parser for each proposal. Confidence is uncalibrated; below-floor counts concern selected code pieces, not document review plans."
+}

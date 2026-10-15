@@ -1,0 +1,980 @@
+{
+  "scope": "Reproduction/decomposition of the exact already-registered 17 aliases; no new condition/model/quality credit",
+  "geometrySha256": "19cea2fcd0fe631e7d254891ed619034cee315bc4b21b5305be63e05f93e729e",
+  "aliases": 17,
+  "sourceRasterAliases": 7,
+  "aliasesIntroducedByBbox": 10,
+  "aliasesIntroducedByResizeAfterBbox": 0,
+  "rows": [
+    {
+      "font": "SawarabiGothic",
+      "context": "{}",
+      "size": 14,
+      "density": 1,
+      "a": "I",
+      "b": "l",
+      "advances": [
+        4.046875,
+        3.640625
+      ],
+      "sameOriginalCanvasRaster": false,
+      "originalDifferingPixels": 44,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        23,
+        23
+      ],
+      "sourceCrops": [
+        [
+          7,
+          11,
+          14,
+          26
+        ],
+        [
+          6,
+          11,
+          13,
+          26
+        ]
+      ],
+      "framedBaselines": [
+        13,
+        13
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": true,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          15,
+          7,
+          3
+        ],
+        [
+          15,
+          7,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "{}",
+      "size": 14,
+      "density": 4,
+      "a": "I",
+      "b": "l",
+      "advances": [
+        16.1875,
+        14.5625
+      ],
+      "sameOriginalCanvasRaster": false,
+      "originalDifferingPixels": 123,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        11,
+        11
+      ],
+      "sourceCrops": [
+        [
+          36,
+          52,
+          46,
+          97
+        ],
+        [
+          35,
+          52,
+          45,
+          97
+        ]
+      ],
+      "framedBaselines": [
+        43,
+        43
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": true,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          45,
+          10,
+          3
+        ],
+        [
+          45,
+          10,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "{}",
+      "size": 18,
+      "density": 1,
+      "a": "I",
+      "b": "l",
+      "advances": [
+        5.203125,
+        4.6875
+      ],
+      "sameOriginalCanvasRaster": true,
+      "originalDifferingPixels": 0,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        16,
+        16
+      ],
+      "sourceCrops": [
+        [
+          8,
+          12,
+          14,
+          30
+        ],
+        [
+          8,
+          12,
+          14,
+          30
+        ]
+      ],
+      "framedBaselines": [
+        16,
+        16
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": false,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          18,
+          6,
+          3
+        ],
+        [
+          18,
+          6,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "{}",
+      "size": 18,
+      "density": 2,
+      "a": "I",
+      "b": "l",
+      "advances": [
+        10.40625,
+        9.359375
+      ],
+      "sameOriginalCanvasRaster": false,
+      "originalDifferingPixels": 78,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        13,
+        13
+      ],
+      "sourceCrops": [
+        [
+          18,
+          28,
+          26,
+          58
+        ],
+        [
+          17,
+          28,
+          25,
+          58
+        ]
+      ],
+      "framedBaselines": [
+        28,
+        28
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": true,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          30,
+          8,
+          3
+        ],
+        [
+          30,
+          8,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "{}",
+      "size": 18,
+      "density": 4,
+      "a": "I",
+      "b": "l",
+      "advances": [
+        20.8125,
+        18.71875
+      ],
+      "sameOriginalCanvasRaster": false,
+      "originalDifferingPixels": 162,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        10,
+        10
+      ],
+      "sourceCrops": [
+        [
+          37,
+          56,
+          48,
+          114
+        ],
+        [
+          36,
+          56,
+          47,
+          114
+        ]
+      ],
+      "framedBaselines": [
+        56,
+        56
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": true,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          58,
+          11,
+          3
+        ],
+        [
+          58,
+          11,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "{}",
+      "size": 20,
+      "density": 1,
+      "a": "I",
+      "b": "l",
+      "advances": [
+        5.78125,
+        5.203125
+      ],
+      "sameOriginalCanvasRaster": true,
+      "originalDifferingPixels": 0,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        16,
+        16
+      ],
+      "sourceCrops": [
+        [
+          8,
+          14,
+          14,
+          33
+        ],
+        [
+          8,
+          14,
+          14,
+          33
+        ]
+      ],
+      "framedBaselines": [
+        17,
+        17
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": false,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          19,
+          6,
+          3
+        ],
+        [
+          19,
+          6,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "{}",
+      "size": 20,
+      "density": 2,
+      "a": "I",
+      "b": "l",
+      "advances": [
+        11.5625,
+        10.40625
+      ],
+      "sameOriginalCanvasRaster": false,
+      "originalDifferingPixels": 90,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        12,
+        12
+      ],
+      "sourceCrops": [
+        [
+          18,
+          29,
+          26,
+          63
+        ],
+        [
+          17,
+          29,
+          25,
+          63
+        ]
+      ],
+      "framedBaselines": [
+        32,
+        32
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": true,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          34,
+          8,
+          3
+        ],
+        [
+          34,
+          8,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "{}",
+      "size": 20,
+      "density": 4,
+      "a": "I",
+      "b": "l",
+      "advances": [
+        23.125,
+        20.796875
+      ],
+      "sameOriginalCanvasRaster": false,
+      "originalDifferingPixels": 177,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        10,
+        10
+      ],
+      "sourceCrops": [
+        [
+          38,
+          60,
+          50,
+          123
+        ],
+        [
+          37,
+          60,
+          49,
+          123
+        ]
+      ],
+      "framedBaselines": [
+        61,
+        61
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": true,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          63,
+          12,
+          3
+        ],
+        [
+          63,
+          12,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "{}",
+      "size": 22,
+      "density": 4,
+      "a": "I",
+      "b": "l",
+      "advances": [
+        25.4375,
+        22.875
+      ],
+      "sameOriginalCanvasRaster": false,
+      "originalDifferingPixels": 338,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        10,
+        10
+      ],
+      "sourceCrops": [
+        [
+          39,
+          64,
+          52,
+          133
+        ],
+        [
+          37,
+          63,
+          50,
+          132
+        ]
+      ],
+      "framedBaselines": [
+        66,
+        67
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": true,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          69,
+          13,
+          3
+        ],
+        [
+          69,
+          13,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "{}",
+      "size": 28,
+      "density": 2,
+      "a": "I",
+      "b": "l",
+      "advances": [
+        16.1875,
+        14.5625
+      ],
+      "sameOriginalCanvasRaster": false,
+      "originalDifferingPixels": 123,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        11,
+        11
+      ],
+      "sourceCrops": [
+        [
+          20,
+          36,
+          30,
+          81
+        ],
+        [
+          19,
+          36,
+          29,
+          81
+        ]
+      ],
+      "framedBaselines": [
+        43,
+        43
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": true,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          45,
+          10,
+          3
+        ],
+        [
+          45,
+          10,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "x{}x",
+      "size": 18,
+      "density": 1,
+      "a": "xIx",
+      "b": "xlx",
+      "advances": [
+        25.015625,
+        24.5
+      ],
+      "sameOriginalCanvasRaster": true,
+      "originalDifferingPixels": 0,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        78,
+        78
+      ],
+      "sourceCrops": [
+        [
+          6,
+          12,
+          35,
+          30
+        ],
+        [
+          6,
+          12,
+          35,
+          30
+        ]
+      ],
+      "framedBaselines": [
+        16,
+        16
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": false,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          18,
+          29,
+          3
+        ],
+        [
+          18,
+          29,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "A{}7",
+      "size": 18,
+      "density": 1,
+      "a": "AI7",
+      "b": "Al7",
+      "advances": [
+        28.34375,
+        27.828125
+      ],
+      "sameOriginalCanvasRaster": true,
+      "originalDifferingPixels": 0,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        83,
+        83
+      ],
+      "sourceCrops": [
+        [
+          6,
+          12,
+          37,
+          30
+        ],
+        [
+          6,
+          12,
+          37,
+          30
+        ]
+      ],
+      "framedBaselines": [
+        16,
+        16
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": false,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          18,
+          31,
+          3
+        ],
+        [
+          18,
+          31,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "A{}7",
+      "size": 20,
+      "density": 1,
+      "a": "AI7",
+      "b": "Al7",
+      "advances": [
+        31.484375,
+        30.90625
+      ],
+      "sameOriginalCanvasRaster": true,
+      "originalDifferingPixels": 0,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        86,
+        86
+      ],
+      "sourceCrops": [
+        [
+          6,
+          14,
+          40,
+          33
+        ],
+        [
+          6,
+          14,
+          40,
+          33
+        ]
+      ],
+      "framedBaselines": [
+        17,
+        17
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": false,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          19,
+          34,
+          3
+        ],
+        [
+          19,
+          34,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "88{}",
+      "size": 18,
+      "density": 1,
+      "a": "88I",
+      "b": "88l",
+      "advances": [
+        25.015625,
+        24.5
+      ],
+      "sameOriginalCanvasRaster": true,
+      "originalDifferingPixels": 0,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        72,
+        72
+      ],
+      "sourceCrops": [
+        [
+          7,
+          12,
+          34,
+          30
+        ],
+        [
+          7,
+          12,
+          34,
+          30
+        ]
+      ],
+      "framedBaselines": [
+        16,
+        16
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": false,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          18,
+          27,
+          3
+        ],
+        [
+          18,
+          27,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "88{}",
+      "size": 20,
+      "density": 1,
+      "a": "88I",
+      "b": "88l",
+      "advances": [
+        27.78125,
+        27.203125
+      ],
+      "sameOriginalCanvasRaster": true,
+      "originalDifferingPixels": 0,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        74,
+        74
+      ],
+      "sourceCrops": [
+        [
+          7,
+          14,
+          36,
+          33
+        ],
+        [
+          7,
+          14,
+          36,
+          33
+        ]
+      ],
+      "framedBaselines": [
+        17,
+        17
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": false,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          19,
+          29,
+          3
+        ],
+        [
+          19,
+          29,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "{}Qy",
+      "size": 14,
+      "density": 4,
+      "a": "IQy",
+      "b": "lQy",
+      "advances": [
+        90.0,
+        88.375
+      ],
+      "sameOriginalCanvasRaster": false,
+      "originalDifferingPixels": 905,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        70,
+        70
+      ],
+      "sourceCrops": [
+        [
+          36,
+          52,
+          123,
+          112
+        ],
+        [
+          35,
+          52,
+          122,
+          112
+        ]
+      ],
+      "framedBaselines": [
+        43,
+        43
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": true,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          60,
+          87,
+          3
+        ],
+        [
+          60,
+          87,
+          3
+        ]
+      ]
+    },
+    {
+      "font": "SawarabiGothic",
+      "context": "{}Qy",
+      "size": 28,
+      "density": 2,
+      "a": "IQy",
+      "b": "lQy",
+      "advances": [
+        90.0,
+        88.375
+      ],
+      "sameOriginalCanvasRaster": false,
+      "originalDifferingPixels": 905,
+      "sameNormalizedInput": true,
+      "normalizedDifferingPixels": 0,
+      "inputWidths": [
+        320,
+        320
+      ],
+      "validWidths": [
+        70,
+        70
+      ],
+      "sourceCrops": [
+        [
+          20,
+          36,
+          107,
+          96
+        ],
+        [
+          19,
+          36,
+          106,
+          96
+        ]
+      ],
+      "framedBaselines": [
+        43,
+        43
+      ],
+      "sameFramedRasterBeforeResize": true,
+      "aliasIntroducedByBboxFraming": true,
+      "aliasIntroducedByResizeAfterFraming": false,
+      "framedShapes": [
+        [
+          60,
+          87,
+          3
+        ],
+        [
+          60,
+          87,
+          3
+        ]
+      ]
+    }
+  ],
+  "sourceSha256": "8305cc15d30915d1d7adee98a75287aedf3880c4adbdb588762f4dd8e7516e60"
+}

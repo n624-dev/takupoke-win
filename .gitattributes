@@ -44,3 +44,7 @@ research-results/ocr-synthetic-training-20261013/ascii-english-v5-confusion-v2/*
 research-results/ocr-manual-tail-20261016/native-windows/** -text whitespace=cr-at-eol
 *.jsonl.gz -text
 research-results/ocr-manual-tail-20261016/*-OFL.txt -text whitespace=-blank-at-eol,cr-at-eol
+
+# Preserve exploratory package, source freezes and original license bytes.
+model-artifacts/ascii-english-v5-japanese-fonts-v3-epoch1-exploratory/** -text whitespace=-blank-at-eol,cr-at-eol
+research-results/ocr-decoding-comparison-20261016/** -text whitespace=-blank-at-eol,cr-at-eol

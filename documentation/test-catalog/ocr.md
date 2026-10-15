@@ -1,7 +1,7 @@
 # CPU OCR・文字位置・モデル・原画像切り出し
 
 対応関係・宣言名・実行方法のSHA-256：
-`65da2b89a4c71b6002284ea490ac8e960a88bcf0458f57f2c2984a2c6e8704d0`
+`6eb0ffea4ae3fa57c218dd293f66522b5d2d943a445389b0116d63fec02e00ca`
 
 環境：Linux／Windows .NET。Windows描画・実推論は対応workflowで検証
 
@@ -50,6 +50,8 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `NoncanonicalHeaderRetainsRawPrimaryAndItsNativeConfidence`
 - `LowConfidenceOrDifferentLengthTailIsNotSubstitutedAndPrefixIsUnchanged`
 - `UnrelatedAsciiDoesNotRouteAndMissingSourceCropRefuses`
+- `OptionalCodeExpertKeepsStrictHeadersAndProseAndPreservesManualNativeScores`
+- `InvalidExpertCodeOrFramedPaddingUsesCompleteOriginalSpecialistDecision`
 - `ManualCaptureRetainsSpecialistNativeUncertaintyWhileStrictRoutePreservesPrimary`
 - `StandaloneCodesUseSpecialistAndRetainPrimaryWhenNativeOutputFailsThreshold`
 
@@ -103,6 +105,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 ## [tests/Takupoke.Integration.Tests/OcrInkCropFrameTests.cs](../../tests/Takupoke.Integration.Tests/OcrInkCropFrameTests.cs)
 
 - `RetainsDisconnectedAndColoredOriginalInkWithFixedMargin`
+- `NoRuleMaskRetainsDisconnectedRuleLookingAndFaintColoredPixels`
 - `ProvenRulesDoNotWidenTextButNoEmptyFieldIsInvented`
 - `InvalidMaskBoundsAndCancellationAreNotAccepted`
 

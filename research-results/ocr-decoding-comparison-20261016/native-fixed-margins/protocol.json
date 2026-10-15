@@ -1,0 +1,36 @@
+{
+  "scope": "Consumed DEVELOPMENT only. New fixed0/4margin scale hypotheses after ink2 flat. No fresh/whole or default qualification.",
+  "models": [
+    "v1",
+    "v2",
+    "equal-posterior-mean-v1-v2"
+  ],
+  "decoders": [
+    "greedy",
+    "prefixbeam8-frame8-with-forced-alignment"
+  ],
+  "lengthPolicies": [
+    "same-length",
+    "bounded-code"
+  ],
+  "cropPolicies": [
+    "original",
+    "all-original-ink-bbox-plus2-within-original-crop"
+  ],
+  "fallback": "actual-current-v1-manual-route",
+  "rejection": "max for mean, original for individuals; <=.05",
+  "vocabulary": null,
+  "patternPrior": null,
+  "coefficients": [
+    0.5,
+    0.5
+  ],
+  "sourceConfidence": "original aligned frame probabilities, never clamped/promoted",
+  "goldAvailableToWorker": false,
+  "armFramings": [
+    "original",
+    "ink0",
+    "ink2",
+    "ink4"
+  ]
+}

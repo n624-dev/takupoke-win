@@ -1,0 +1,46 @@
+{
+  "scope": "Development only: all original primary line crops on first page of old native fictional font0 positive. No crop chosen using errors/gold. Not full-document evidence.",
+  "models": [
+    "official-english-v5",
+    "server-v5",
+    "japanese-v3"
+  ],
+  "decoders": [
+    "greedy",
+    "prefixbeam8-frame8-with-forced-alignment"
+  ],
+  "lengthPolicies": [
+    "same-length",
+    "bounded-code"
+  ],
+  "cropPolicies": [
+    "original",
+    "all-original-ink-bbox-plus2-within-original-crop"
+  ],
+  "fallback": "actual-current-v1-manual-route",
+  "rejection": "No auxiliary reject head: null, not fabricated zero.",
+  "vocabulary": null,
+  "patternPrior": null,
+  "coefficients": [
+    0.5,
+    0.5
+  ],
+  "sourceConfidence": "original aligned frame probabilities, never clamped/promoted",
+  "goldAvailableToWorker": false,
+  "armModels": [
+    "official-english-v5/native-floor",
+    "official-english-v5/manual-retain",
+    "server-v5/native-floor",
+    "server-v5/manual-retain",
+    "japanese-v3/native-floor",
+    "japanese-v3/manual-retain"
+  ],
+  "armDecoders": [
+    "greedy"
+  ],
+  "confidenceGates": [
+    "native original >=.8",
+    "manual-retain native probabilities unchanged"
+  ],
+  "tensorRetention": "Auxiliary full probabilities not retained; all decoded native probabilities and aligned glyphs retained with input/model hashes. No ensemble."
+}

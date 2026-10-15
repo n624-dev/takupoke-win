@@ -1,0 +1,62 @@
+[
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室I1l99",
+    "expected": "架空室I1l99",
+    "gain": true,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室I1l99",
+    "expected": "架空室I1l99",
+    "gain": true,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "beam8",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室I1l99",
+    "expected": "架空室I1l99",
+    "gain": true,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "beam8",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室I1l99",
+    "expected": "架空室I1l99",
+    "gain": true,
+    "loss": false
+  }
+]

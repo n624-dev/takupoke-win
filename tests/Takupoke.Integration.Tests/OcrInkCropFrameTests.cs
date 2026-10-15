@@ -17,6 +17,16 @@ public sealed class OcrInkCropFrameTests
     }
 
     [Fact]
+    public void NoRuleMaskRetainsDisconnectedRuleLookingAndFaintColoredPixels()
+    {
+        var bytes=Enumerable.Repeat((byte)255,40*20*4).ToArray();
+        bytes[0]=0; bytes[(11*40+28)*4+1]=254;
+        var original=bytes.ToArray();var image=new RecoveryRaster(40,20,bytes);
+        var frame=new OcrInkCropFrame(image,null,default).Restrict(new(0,0,40,20));
+        Assert.Equal(new RecoveryBox(0,0,31,14),frame);Assert.Equal(original,image.Bgra);
+    }
+
+    [Fact]
     public void ProvenRulesDoNotWidenTextButNoEmptyFieldIsInvented()
     {
         var bytes = Enumerable.Repeat((byte)255,40*20*4).ToArray(); var mask = new bool[800];

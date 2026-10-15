@@ -1,0 +1,75 @@
+{
+  "scores": [
+    {
+      "arm": [
+        "glm",
+        "raw",
+        "same-length"
+      ],
+      "selectedCrops": 61,
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 6,
+      "beforeEdits": 6,
+      "afterEdits": 12,
+      "characters": 452
+    },
+    {
+      "arm": [
+        "glm",
+        "raw",
+        "bounded-code"
+      ],
+      "selectedCrops": 61,
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 6,
+      "beforeEdits": 6,
+      "afterEdits": 12,
+      "characters": 452
+    },
+    {
+      "arm": [
+        "glm",
+        "transport",
+        "same-length"
+      ],
+      "selectedCrops": 61,
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 6,
+      "beforeEdits": 6,
+      "afterEdits": 12,
+      "characters": 452
+    },
+    {
+      "arm": [
+        "glm",
+        "transport",
+        "bounded-code"
+      ],
+      "selectedCrops": 61,
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 6,
+      "beforeEdits": 6,
+      "afterEdits": 12,
+      "characters": 452
+    }
+  ],
+  "rawSha256": "928a291d08bed01fd9c4eff58f0121b4b08d2d540857200d27934d4e3a973b68",
+  "calls": 61,
+  "scope": "Consumed fictional source-bound native firstpage only. All72bodyfields scored, no gold given to either reader. Research proposals are not full parser reruns or calibrated confidence/CTC evidence; no activation."
+}

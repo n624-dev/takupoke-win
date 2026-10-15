@@ -9,12 +9,16 @@ internal static class OcrAsciiRefinement
     internal sealed record Result(IReadOnlyList<PdfGlyph> Glyphs, IReadOnlyList<double> Confidences, int RecognizerCalls);
     public static Result Refine(RecoveryRaster raster, IReadOnlyList<PdfGlyph> primary,
         IReadOnlyList<double> scores, IReadOnlyDictionary<int, RecoveryBox> crops,
-        IReadOnlyList<PdfRule> rules, OnnxAsciiOcr ascii, CancellationToken token = default, bool retainUncertain = false)
+        IReadOnlyList<PdfRule> rules, OnnxAsciiOcr ascii, CancellationToken token = default, bool retainUncertain = false,
+        OnnxAsciiOcr? manualCodeAscii = null)
     {
         if (primary.Count != scores.Count) throw new InvalidDataException("OCRの文字と確信度が一致しません。");
         var right = rules.Where(l => l.Vertical && l.X1 > 2).Select(l => l.X1).DefaultIfEmpty(double.NaN).Min();
         var top = rules.Where(l => l.Vertical && l.X1 > 2).Select(l => Math.Min(l.Y1,l.Y2)).DefaultIfEmpty(double.NaN).Min();
         var glyphs = new List<PdfGlyph>(); var confidences = new List<double>(); var calls = 0;
+        // One bounded pixel-work counter for this page. A null mask preserves
+        // every original ink pixel, including anything resembling a table rule.
+        var codeFrame = retainUncertain && manualCodeAscii is not null ? new OcrInkCropFrame(raster, null, token) : null;
         foreach (var group in primary.Select((g,i) => (g,i)).GroupBy(x => x.g.SourceLine).OrderBy(g => g.Key))
         {
             token.ThrowIfCancellationRequested();
@@ -43,7 +47,23 @@ internal static class OcrAsciiRefinement
             var chosen = false;
             if (header || standaloneCode || tailCrop is not null)
             {
-                calls++; var observation = ascii.Read(raster, header || standaloneCode ? crop : tailCrop!, line, glyphs.Count, token);
+                var sourceCrop = header || standaloneCode ? crop : tailCrop!;
+                OnnxAsciiOcr.Observation? observation = null;
+                if (manualCode && manualCodeAscii is not null)
+                {
+                    calls++;
+                    var expert = manualCodeAscii.Read(raster, codeFrame!.Restrict(sourceCrop), line, glyphs.Count, token);
+                    if (expert.Pieces.Count > 0 && expert.RejectProbability <= .05f && expert.PaddingSupported &&
+                        expert.Text.Length == codeText.Length && expert.Text.Any(char.IsAsciiDigit) &&
+                        expert.Text.All(c => char.IsAsciiLetterOrDigit(c) || c is '_' or '-'))
+                        observation = expert;
+                }
+                if (observation is null)
+                {
+                    // Invalid expert output uses the complete original v1
+                    // decision, rather than falling straight back to Japanese.
+                    calls++; observation = ascii.Read(raster, sourceCrop, line, glyphs.Count, token);
+                }
                 chosen = observation.Pieces.Count > 0 && observation.RejectProbability <= .05f && observation.PaddingSupported &&
                     observation.Text.All(c => c is >= ' ' and <= '~') && (header
                         ? ClassSelection.Candidates.Contains(observation.Text)

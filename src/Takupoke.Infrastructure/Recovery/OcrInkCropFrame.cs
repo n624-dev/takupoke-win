@@ -5,7 +5,7 @@ namespace Takupoke.Infrastructure.Recovery;
 
 // Trim only original empty/proven-rule margins after connected ink ownership.
 // The fixed two-pixel margin is chosen before inference; no pixels are changed.
-internal sealed class OcrInkCropFrame(RecoveryRaster image, bool[] mask, CancellationToken token, int originalPixelMargin = 2)
+internal sealed class OcrInkCropFrame(RecoveryRaster image, bool[]? mask, CancellationToken token, int originalPixelMargin = 2)
 {
     private readonly RecoveryRaster.PixelWork _work = new(token);
     private readonly double _margin = originalPixelMargin is >= 0 and <= 8 ? originalPixelMargin :
@@ -13,7 +13,7 @@ internal sealed class OcrInkCropFrame(RecoveryRaster image, bool[] mask, Cancell
 
     public RecoveryBox Restrict(RecoveryBox original)
     {
-        if (!image.Valid || mask.Length != image.Width * image.Height ||
+        if (!image.Valid || mask is not null && mask.Length != image.Width * image.Height ||
             !new RecoveryBox(0, 0, image.Width, image.Height).Contains(original))
             throw new InvalidDataException("Original crop/mask identity failed.");
         var left = image.Width; var top = image.Height; var right = -1; var bottom = -1;
@@ -24,7 +24,7 @@ internal sealed class OcrInkCropFrame(RecoveryRaster image, bool[] mask, Cancell
         bool Text(int x, int y)
         {
             var index = y * image.Width + x; var p = index * 4;
-            return !mask[index] && (image.Bgra[p] != 255 || image.Bgra[p + 1] != 255 || image.Bgra[p + 2] != 255);
+            return mask?[index] != true && (image.Bgra[p] != 255 || image.Bgra[p + 1] != 255 || image.Bgra[p + 2] != 255);
         }
         for (var y = minY; y <= maxY; y++) for (var x = minX; x <= maxX; x++)
         {

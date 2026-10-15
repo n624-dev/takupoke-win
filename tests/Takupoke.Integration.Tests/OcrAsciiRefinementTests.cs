@@ -52,6 +52,62 @@ public sealed class OcrAsciiRefinementTests
 
     private static RecoveryRaster White() => new(320,120,Enumerable.Repeat((byte)255,320*120*4).ToArray());
     [Fact]
+    public void OptionalCodeExpertKeepsStrictHeadersAndProseAndPreservesManualNativeScores()
+    {
+        var dictionary = ManualDictionary();
+        try
+        {
+            using var baseline = new OnnxAsciiOcr(Path.Combine(AppContext.BaseDirectory,"fixtures/ascii-runtime-contract.onnx"),dictionary);
+            using var expert = new OnnxAsciiOcr(Path.Combine(AppContext.BaseDirectory,"fixtures/ascii-manual-contract.onnx"),dictionary);
+            var crops = new Dictionary<int,RecoveryBox> { [0]=new(0,20,320,48) };
+            PdfGlyph[] primary = [new("AI2",0,20,300,48,0,0)];
+            var strict = OcrAsciiRefinement.Refine(White(),primary,[.96],crops,[],baseline,manualCodeAscii:expert);
+            Assert.Equal(primary,strict.Glyphs); Assert.Equal(.96,Assert.Single(strict.Confidences)); Assert.Equal(1,strict.RecognizerCalls);
+            var manual = OcrAsciiRefinement.Refine(White(),primary,[.96],crops,[],baseline,retainUncertain:true,manualCodeAscii:expert);
+            Assert.Equal("A12",string.Concat(manual.Glyphs.Select(g=>g.Text)));
+            Assert.Equal((double).7f,manual.Confidences[1]); Assert.Equal(1,manual.RecognizerCalls);
+            PdfGlyph[] prefix = [new("教室",0,20,35,48,0,0),new("AI2",80,20,200,48,0,1)];
+            var prefixed = OcrAsciiRefinement.Refine(White(),prefix,[.95,.96],crops,[],baseline,retainUncertain:true,manualCodeAscii:expert);
+            Assert.Equal("教室A12",string.Concat(prefixed.Glyphs.Select(g=>g.Text)));
+            Assert.Equal(prefix[0],prefixed.Glyphs[0]); Assert.Equal(.95,prefixed.Confidences[0]); Assert.Equal((double).7f,prefixed.Confidences[2]);
+            PdfGlyph[] header = [new("Al_1",0,20,40,48,0,0)];
+            var held = OcrAsciiRefinement.Refine(White(),header,[.91],new Dictionary<int,RecoveryBox> { [0]=new(0,20,64,48) },[new(80,10,80,100)],baseline,retainUncertain:true,manualCodeAscii:expert);
+            Assert.Equal(header,held.Glyphs); Assert.Equal(1,held.RecognizerCalls);
+            PdfGlyph[] prose = [primary[0] with { Text="BIOLOGY" }];
+            var unchanged = OcrAsciiRefinement.Refine(White(),prose,[.96],crops,[],baseline,retainUncertain:true,manualCodeAscii:expert);
+            Assert.Equal(prose,unchanged.Glyphs); Assert.Equal(0,unchanged.RecognizerCalls);
+        }
+        finally { File.Delete(dictionary); }
+    }
+
+    [Theory]
+    [InlineData(false)] [InlineData(true)]
+    public void InvalidExpertCodeOrFramedPaddingUsesCompleteOriginalSpecialistDecision(bool unsupportedPadding)
+    {
+        var dictionary = ManualDictionary();
+        try
+        {
+            using var baseline = new OnnxAsciiOcr(Path.Combine(AppContext.BaseDirectory,"fixtures/ascii-manual-contract.onnx"),dictionary);
+            using var expert = new OnnxAsciiOcr(Path.Combine(AppContext.BaseDirectory,"fixtures/"+(unsupportedPadding ? "ascii-manual-contract.onnx" : "ascii-runtime-contract.onnx")),dictionary);
+            var image = White();
+            if (unsupportedPadding) for (var y=22;y<66;y++) image.Bgra[(y*image.Width+100)*4]=0;
+            var source = new RecoveryBox(0,20,320,48); PdfGlyph[] primary = [new("AI2",0,20,300,48,0,0)];
+            var expected = baseline.Read(image,source,0,0);
+            var result = OcrAsciiRefinement.Refine(image,primary,[.96],new Dictionary<int,RecoveryBox> { [0]=source },[],baseline,retainUncertain:true,manualCodeAscii:expert);
+            Assert.Equal("A12",string.Concat(result.Glyphs.Select(g=>g.Text)));
+            Assert.Equal(expected.Glyphs,result.Glyphs); Assert.Equal(expected.Pieces.Select(p=>(double)p.Confidence),result.Confidences);
+            Assert.Equal(2,result.RecognizerCalls);
+        }
+        finally { File.Delete(dictionary); }
+    }
+
+    private static string ManualDictionary()
+    {
+        var path=Path.Combine(Path.GetTempPath(),"ascii-expert-"+Guid.NewGuid().ToString("N")+".json");
+        var tokens=Enumerable.Repeat("x",438).ToArray();tokens[0]="";tokens[1]="A";tokens[2]="1";tokens[3]="2";tokens[^1]=" ";
+        File.WriteAllText(path,JsonSerializer.Serialize(tokens));return path;
+    }
+    [Fact]
     public void ManualCaptureRetainsSpecialistNativeUncertaintyWhileStrictRoutePreservesPrimary()
     {
         var dictionary = Path.Combine(Path.GetTempPath(), "ascii-manual-" + Guid.NewGuid().ToString("N") + ".json");

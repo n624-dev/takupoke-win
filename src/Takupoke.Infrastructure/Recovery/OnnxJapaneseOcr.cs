@@ -233,6 +233,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
     private readonly string[] _dictionary;
     private readonly int _symbols;
     private readonly OnnxAsciiOcr? _ascii;
+    private readonly OnnxAsciiOcr? _manualCodeAscii;
     private readonly bool _frameOriginalInk;
     public IReadOnlyList<RecoveryBox> RecognizedBoxes { get; private set; } = [];
     public IReadOnlyList<double> NativeConfidences { get; private set; } = [];
@@ -242,9 +243,11 @@ public sealed class OnnxJapaneseOcr : IDisposable
     internal Action<OcrRecognitionObservation>? RecognitionObserver { get; set; }
     internal Action<IReadOnlyList<RecoveryBox>>? DetectionObserver { get; set; }
     public OnnxJapaneseOcr(string detector, string recognizer, string dictionary,
-        int dictionarySymbols = 18385, string? asciiModel = null, string? asciiDictionary = null, bool frameOriginalInk = false)
+        int dictionarySymbols = 18385, string? asciiModel = null, string? asciiDictionary = null, bool frameOriginalInk = false,
+        string? manualCodeModel = null)
     {
-        if (dictionarySymbols is not (18385 or 18710) || (asciiModel is null) != (asciiDictionary is null))
+        if (dictionarySymbols is not (18385 or 18710) || (asciiModel is null) != (asciiDictionary is null) ||
+            manualCodeModel is not null && asciiModel is null)
             throw new InvalidDataException("OCRモデルの構成が不正です。");
         _symbols = dictionarySymbols; _frameOriginalInk = frameOriginalInk;
         Environment.SetEnvironmentVariable("ORT_TELEMETRY_DISABLED", "1");
@@ -257,9 +260,10 @@ public sealed class OnnxJapaneseOcr : IDisposable
             _dictionary = JsonSerializer.Deserialize<string[]>(File.ReadAllBytes(dictionary)) ?? throw new InvalidDataException("OCR辞書がありません。");
             if (_dictionary.Length != _symbols || _dictionary[0] != "" || _dictionary[^1] != " " || _detector.InputMetadata.Count != 1 || recognizerSession.InputMetadata.Count != 1 || _detector.InputMetadata["x"].Dimensions.Length != 4 || recognizerSession.InputMetadata["x"].Dimensions.Length != 4 || recognizerSession.InputMetadata["x"].Dimensions[1] != 3 || recognizerSession.InputMetadata["x"].Dimensions[2] != 48) throw new InvalidDataException("OCRモデルの形状が一致しません。");
             _ascii = asciiModel is not null ? new OnnxAsciiOcr(asciiModel, asciiDictionary!) : null;
+            _manualCodeAscii = manualCodeModel is not null ? new OnnxAsciiOcr(manualCodeModel, asciiDictionary!) : null;
             _recognizer = recognizerSession;
         }
-        catch { recognizerSession?.Dispose(); _detector.Dispose(); throw; }
+        catch { _manualCodeAscii?.Dispose(); _ascii?.Dispose(); recognizerSession?.Dispose(); _detector.Dispose(); throw; }
     }
     public IReadOnlyList<PdfGlyph> Read(RecoveryRaster image, CancellationToken token = default)
         => ReadCore(image, token, retainUncertain: false);
@@ -335,7 +339,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
         if (_ascii is not null)
         {
             var refined = OcrAsciiRefinement.Refine(image, output, confidences, lineCrops, rules, _ascii, token,
-                retainUncertain: retainUncertain);
+                retainUncertain: retainUncertain, manualCodeAscii: _manualCodeAscii);
             NativeConfidences = refined.Confidences; AsciiRecognitionCalls = refined.RecognizerCalls; return refined.Glyphs;
         }
         NativeConfidences = confidences.ToArray(); return output;
@@ -347,11 +351,12 @@ public sealed class OnnxJapaneseOcr : IDisposable
         using var output = _recognizer.Run([NamedOnnxValue.CreateFromTensor("x", input.Tensor)]);
         var logits = output.First().AsTensor<float>(); if (logits.Dimensions.Length != 3 || logits.Dimensions[0] != 1 || logits.Dimensions[1] <= 0 || logits.Dimensions[2] != _symbols) throw new InvalidDataException("OCRモデルの出力形状が一致しません。");
         _ascii?.Read(image, new(0, 0, 64, 64), 0, 0, token); token.ThrowIfCancellationRequested();
+        _manualCodeAscii?.Read(image, new(0, 0, 64, 64), 0, 0, token); token.ThrowIfCancellationRequested();
     }
     private void VerifyRecognitionWidth(int width)
     {
         var declared = _recognizer.InputMetadata["x"].Dimensions[3];
         if (declared > 0 && declared != width) throw new InvalidDataException("OCR認識モデルの入力幅が一致しません。");
     }
-    public void Dispose() { _ascii?.Dispose(); _detector.Dispose(); _recognizer.Dispose(); }
+    public void Dispose() { _manualCodeAscii?.Dispose(); _ascii?.Dispose(); _detector.Dispose(); _recognizer.Dispose(); }
 }
