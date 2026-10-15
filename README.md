@@ -21,11 +21,13 @@ PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCR�
 
 [iOS解析変更への追従内容](documentation/ios-followup-20261016.md)には、通常解析と復旧検証の分離、P/R診断、返却表・1年生所属、XLSX確認保持、モデル取得の実進捗を記録しています。
 
+復旧用の単独コード384画像は259→292一致（40改善・7退行）、日本語付きの別384画像は287→292一致でした。既存のWindows帳票は329/360・337/360のままで、確認対象が増えます。追加学習v2は実際の復旧経路で文字誤りが悪化したため既定に採用せず、従来モデルを維持しています。[比較・残る誤読・訂正支援](documentation/ocr-accuracy-20261016.md)。
+
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版0.1.0-dev.10444のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10444)からSetup.exeを取得してください。通常Release・Latestとして公開しています。正式版ではありません。通常解析・P/R診断・返却表と所属・XLSX確認保持・OCR取得進捗を修正しました。[今回の変更](documentation/ios-followup-20261016.md)・[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38761351598)全8ジョブとx64の6導入状態（各992 UI項目）が成功し、公開6ファイルと両ZIPの全同梱ファイルを照合済みです。[配布記録](research-results/ios-followup-20261016/installer-release-receipt.json)。
+[開発確認版0.1.0-dev.10445のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10445)からSetup.exeを取得してください。通常Release・Latestとして公開しています。正式版ではありません。iOS解析への追従、mainの行除外・一括除外を含み、復旧OCRの低スコア英数字保持と教室名の訂正候補を追加しました。[今回の変更・測定結果](documentation/ocr-accuracy-20261016.md)・[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38786397119)全8ジョブとx64の6導入状態が成功し、公開6ファイルと両ZIPの全同梱ファイルを照合済みです。[配布記録](research-results/ocr-accuracy-20261016/installer-release-receipt.json)。
 
-1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10444-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10444-arm64-Setup.exe`。
+1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10445-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10445-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
 3. スタートメニューの「たくポケ」から起動します。
 4. OCRを利用する場合は設定の「AI・OCRを使用する」をONにし、モデル管理で約99 MiBの日本語・英数字モデルを取得／更新します。復旧プレビューを原PDFと照合し、必要な欄を訂正してから明示採用してください。

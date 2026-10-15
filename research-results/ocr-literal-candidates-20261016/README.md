@@ -22,7 +22,7 @@ ASCII数字を含む2〜64文字、最大2置換、登録4096件・候補3件ま
 
 Core301件とWindows UIのクロスビルドが通過。日本語の文字違い、空白の違い、改行・先頭空白、
 接頭辞のない登録値を誤って候補にしないことを検証した。
-配布時の実Windows UIは日本語付き候補の選択、再確認、全体プレビュー、元OCR保持を検証する。
+実Windows UIは日本語付き候補の選択、再確認、全体プレビュー、元OCR保持を含む1027項目を通過した。配布時の6導入状態も成功した。[配布記録](../ocr-accuracy-20261016/installer-release-receipt.json)。
 [元ASCIIコードの独立試験](../ocr-room-candidates-20261016/README.md)も別記録として保持する。
 
 [結果](report.json)・[参照表](roster.json)・[固定](freeze.json)・[raw gzip](raw.jsonl.gz)・

@@ -1,9 +1,15 @@
 {
+  "scope": "All public records, explanatory README and source snapshots in this report except this self-referential inventory; gzip maps back to original bytes via the curation manifest.",
   "files": [
     {
       "file": "Baseline.cs",
       "bytes": 2020,
       "sha256": "df43bc61ccad4618ac181a0a6d1a0d32c7aab7a10105f9940b30f548d4799651"
+    },
+    {
+      "file": "README.md",
+      "bytes": 2757,
+      "sha256": "17f0026f9de7e0f3ab060152e41c12e0568303dc62f71edd8906b27c322dfa0e"
     },
     {
       "file": "as-run-source/src/Takupoke.Core/Recovery/RecoveryCodeCandidates.cs",
@@ -55,6 +61,5 @@
       "bytes": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
-  ],
-  "scope": "All curated records and source snapshots before the explanatory README. No private user documents."
+  ]
 }

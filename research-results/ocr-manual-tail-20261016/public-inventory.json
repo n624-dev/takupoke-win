@@ -1,5 +1,11 @@
 {
+  "scope": "All public records, explanatory README and source snapshots in this report except this self-referential inventory; gzip maps back to original bytes via the curation manifest.",
   "files": [
+    {
+      "file": "README.md",
+      "bytes": 4840,
+      "sha256": "11fc3b3e542db441b904135f98b978efd36132e3d2d3e7de86c7ea83673e0ba9"
+    },
     {
       "file": "as-run-source/src/Takupoke.Infrastructure/Recovery/OcrAsciiRefinement.cs",
       "bytes": 5345,
@@ -134,6 +140,11 @@
       "file": "native-windows/public-curation-manifest.json",
       "bytes": 21890,
       "sha256": "66af9360838c3d9a8d2a06094afe7b1b71b0dd2a2c29448b0fe3354b341d6f2e"
+    },
+    {
+      "file": "native-windows/release-source-identity.json",
+      "bytes": 8973,
+      "sha256": "05539fed609eb8d825dedca3be306317c996bfd6797d198118dbbbed87118b3e"
     },
     {
       "file": "native-windows/run/bundle.json",
@@ -425,6 +436,5 @@
       "bytes": 164,
       "sha256": "0c1b99a108d5e492f59566354cab68e1734df4776d9d2de36981b4a62e8831e4"
     }
-  ],
-  "scope": "All curated records and source snapshots before the explanatory README. No private user documents."
+  ]
 }
