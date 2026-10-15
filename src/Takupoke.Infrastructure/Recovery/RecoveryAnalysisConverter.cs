@@ -20,7 +20,9 @@ public static class RecoveryAnalysisConverter
             // supplies persisted identity fields; no path or source is opened.
             var source = new SourceRecord(analysis.OriginalId, analysis.Kind, "", "", analysis.SourceName,
                 analysis.SourceDigest, 0, analysis.ParsedAt, analysis.ParsedAt, null);
-            var expected = ConvertCertified(source, audit, analysis.ParsedAt, token);
+            var expected = ConvertCore(source, audit.Document, audit.Result, analysis.ParsedAt, token,
+                assignClasses: analysis.ClassAssignmentVersion == PdfClassAssignment.Version);
+            if (analysis.ClassAssignmentVersion is not (0 or PdfClassAssignment.Version)) return false;
             token.ThrowIfCancellationRequested();
             return analysis.SchoolYear == expected.SchoolYear &&
                 RecoveryValidator.Fingerprint(new { analysis.Timetable, analysis.Changes, analysis.Special }) ==
@@ -42,9 +44,10 @@ public static class RecoveryAnalysisConverter
             throw new InvalidDataException("復旧結果と現在の再検証証明を確認できません。");
         return ConvertCore(source, audit.Document, audit.Result, at, token);
     }
-    private static MaterialAnalysis ConvertCore(SourceRecord source, RecoveryDocument document, RecoveryResult result, DateTimeOffset at, CancellationToken token)
+    private static MaterialAnalysis ConvertCore(SourceRecord source, RecoveryDocument document, RecoveryResult result, DateTimeOffset at, CancellationToken token, bool assignClasses = true)
     {
         token.ThrowIfCancellationRequested();
+        MaterialAnalysis Project(MaterialAnalysis value) => assignClasses ? MaterialProjection.Assign(value) : value;
         var sources = document.Sources.ToDictionary(s => { token.ThrowIfCancellationRequested(); return s.Id; });
         var raw = new Dictionary<string, string>();
         var recovered = result.Cells.ToDictionary(c => c.CellId);
@@ -59,8 +62,8 @@ public static class RecoveryAnalysisConverter
         {
             var lessons = document.Cells.SelectMany(c => c.Slots.SelectMany(slot => recovered[c.Id].Lessons.Select(l =>
                 new NormalLesson(slot.ClassName, int.Parse(slot.Day, System.Globalization.CultureInfo.InvariantCulture), slot.Period, Names(l), Raw(c), c.Page)))).ToArray();
-            return new(source.Id, source.Kind, MaterialCoordinator.ParserVersion(source.Kind), source.Digest, source.OriginalName, at, document.SchoolYear,
-                Timetable: new(document.SchoolYear, document.Term, lessons));
+            return Project(new(source.Id, source.Kind, MaterialCoordinator.ParserVersion(source.Kind), source.Digest, source.OriginalName, at, document.SchoolYear,
+                Timetable: new(document.SchoolYear, document.Term, lessons)));
         }
         static TimeRange Clock(string text) { var p = text.Split('〜'); if (p.Length != 2) throw new InvalidDataException("時刻を確認できません。"); var t = new TimeRange(p[0], p[1]); if (!t.IsValid) throw new InvalidDataException("時刻を確認できません。"); return t; }
         var times = document.Times.ToDictionary(p => p.Key, p => Clock(p.Value));
@@ -74,6 +77,6 @@ public static class RecoveryAnalysisConverter
         var firstDay = document.Days.Order().First();
         var periodTimes = Enumerable.Range(1, source.Kind == MaterialKind.Exam ? 6 : 8).ToDictionary(p => p, p => times[firstDay + ":" + p]);
         var special = new SpecialAnalysis(source.Kind, document.SchoolYear, document.Days.Order().ToArray(), document.Classes, periodTimes, specialLessons) { DatePeriodTimes = times };
-        return new(source.Id, source.Kind, MaterialCoordinator.ParserVersion(source.Kind), source.Digest, source.OriginalName, at, document.SchoolYear, Special: special);
+        return Project(new(source.Id, source.Kind, MaterialCoordinator.ParserVersion(source.Kind), source.Digest, source.OriginalName, at, document.SchoolYear, Special: special));
     }
 }

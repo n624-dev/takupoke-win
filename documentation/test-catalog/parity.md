@@ -1,7 +1,7 @@
 # 固定iOS参照・独立期待値
 
 対応関係・宣言名・実行方法のSHA-256：
-`3632f2dbfc536f76fd071e2126c855757b2e451458c7c85c16e59f154eb9035a`
+`6e19af75d951200f6d909084a06d53515075abc8e109e44d9a266d9d9a811787`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -43,3 +43,5 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `AdjacentExamPeriodsMayShareAnEndpoint`
 - `SeventeenExamClassesMustMatchTheRequiredSet`
 - `SeventeenReturnClassesCannotReplaceAiTwoWithAiThree`
+- `LowerPeriodHeadingsAreSeparatedByTheirRealRuleWithoutFilteringLessonWords`
+- `OrdinarySpecialCellsPreserveExtraPrintedLinesWhileCertifiedRolesRemainStrict`

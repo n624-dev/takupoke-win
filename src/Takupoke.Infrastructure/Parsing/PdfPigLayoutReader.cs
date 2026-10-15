@@ -20,27 +20,29 @@ public static partial class PdfPigLayoutReader
         => ReadCore(bytes, kind, token, capture, null);
 
     private static IReadOnlyList<PdfPageLayout> ReadCore(byte[] bytes, MaterialKind kind, CancellationToken token,
-        RecoveryReadCapture? capture, FontRecoveryContext? fontRecovery, bool boundedVisibleUnicode = false)
+        RecoveryReadCapture? capture, FontRecoveryContext? fontRecovery, bool boundedVisibleUnicode = false, bool ordinary = false)
     {
+        int? activePage = null;
         capture?.Reset();
-        if (bytes.Length is < 1 or > 50 * 1024 * 1024 || !bytes.AsSpan(0, Math.Min(bytes.Length, 5)).SequenceEqual("%PDF-"u8) || kind == MaterialKind.Changes) throw new PdfParseException("unreadable");
+        if (bytes.Length is < 1 or > 50 * 1024 * 1024 || !bytes.AsSpan(0, Math.Min(bytes.Length, 5)).SequenceEqual("%PDF-"u8) || kind == MaterialKind.Changes) throw new PdfParseException("unreadable", branch:"R1062");
         try
         {
             token.ThrowIfCancellationRequested();
             using var document = PdfDocument.Open(bytes, new ParsingOptions { UseLenientParsing = false, SkipMissingFonts = false, MaxStackDepth = 64, UseActualText = false });
             if (fontRecovery is not null || boundedVisibleUnicode) document.AddPageFactory<PdfNativeTraceInputs, PdfNativeTraceFactory>();
-            if (document.IsEncrypted || document.NumberOfPages < 1) throw new PdfParseException("unreadable");
-            if (document.NumberOfPages > 12) throw new PdfParseException("limit");
+            if (document.IsEncrypted || document.NumberOfPages < 1) throw new PdfParseException("unreadable", branch:"R1063");
+            if (document.NumberOfPages > 12) throw new PdfParseException("limit", branch:"R1064");
             capture?.Begin(document.NumberOfPages);
             var output = new List<PdfPageLayout>();
             for (var number = 1; number <= document.NumberOfPages; number++)
             {
+                activePage = number;
                 token.ThrowIfCancellationRequested();
                 var page = document.GetPage(number); var media = page.MediaBox.Bounds;
-                if (page.CropBox.Bounds != media) throw new PdfParseException("P01", number);
-                if (page.Rotation.Value is not 0 and not 90 and not 180 and not 270) throw new PdfParseException("P02", number);
-                if (page.Operations.Count > 1_000_000 || page.Letters.Count > 100000 || page.Text.Length > 100000) throw new PdfParseException("limit", number);
-                if (page.Letters.Count == 0) throw new PdfParseException("raster", number);
+                if (!ordinary && page.CropBox.Bounds != media) throw new PdfParseException("P01", number, branch:"R1065");
+                if (page.Rotation.Value is not 0 and not 90 and not 180 and not 270) throw new PdfParseException("P02", number, branch:"R1066");
+                if (page.Operations.Count > 1_000_000 || page.Letters.Count > 100000 || page.Text.Length > 100000) throw new PdfParseException("limit", number, branch:"R1067");
+                if (page.Letters.Count == 0) throw new PdfParseException("raster", number, branch:"R1068");
                 var transform = new PdfDisplayTransform(media.Left, media.Bottom, media.Width, media.Height, page.Rotation.Value);
                 var paths = new PdfPathEngine(transform, token);
                 var resources = Resources(document, page.Dictionary);
@@ -49,6 +51,7 @@ public static partial class PdfPigLayoutReader
                     colourSpaces?.Data.ContainsKey("DefaultGray") != true,
                     colourSpaces?.Data.ContainsKey("DefaultRGB") != true,
                     colourSpaces?.Data.ContainsKey("DefaultCMYK") != true, boundedVisibleUnicode);
+                var ordinarySpecial = ordinary && kind != MaterialKind.Timetable;
                 var text = kind == MaterialKind.Timetable || fontRecovery is not null || boundedVisibleUnicode
                     ? new PdfTextEngine(token,traceForRecovery:fontRecovery is not null || boundedVisibleUnicode) : null;
                 var textPaint = new Dictionary<int,double>();
@@ -64,24 +67,24 @@ public static partial class PdfPigLayoutReader
                     token.ThrowIfCancellationRequested();
                     if (boundedVisibleUnicode) paths.SetOperationOrder(++operationOrder);
                     var name = operation.Operator;
-                    visibility.Operation(operation, number, paths);
-                    if (name == "Do") throw new PdfParseException("P12", number);
-                    if (name == "BDC")
+                    if (!ordinary) visibility.Operation(operation, number, paths);
+                    if (!ordinarySpecial && name == "Do") throw new PdfParseException("P12", number, branch:"R1069");
+                    if (!ordinarySpecial && name == "BDC")
                     {
                         if (!boundedVisibleUnicode || operation is not UglyToad.PdfPig.Graphics.Operations.MarkedContent.BeginMarkedContentWithProperties marked ||
-                            !SafeMarkedProperties(marked.Name,marked.PropertyDictionaryName,marked.Properties) || ++markedDepth>64) throw new PdfParseException("P01",number);
+                            !SafeMarkedProperties(marked.Name,marked.PropertyDictionaryName,marked.Properties) || ++markedDepth>64) throw new PdfParseException("P01",number, branch:"R1070");
                     }
-                    if (name == "BMC")
+                    if (!ordinarySpecial && name == "BMC")
                     {
                         // Plain Artifact marking changes no characters or visibility.
                         using var stream = new MemoryStream(); operation.Write(stream);
                         var words = Encoding.ASCII.GetString(stream.ToArray()).Split((char[]?)null,StringSplitOptions.RemoveEmptyEntries);
-                        if (!boundedVisibleUnicode || words is not ["/Artifact", "BMC"] || ++markedDepth>64) throw new PdfParseException("P01",number);
+                        if (!boundedVisibleUnicode || words is not ["/Artifact", "BMC"] || ++markedDepth>64) throw new PdfParseException("P01",number, branch:"R1071");
                     }
-                    if (name == "EMC" && boundedVisibleUnicode && --markedDepth<0) throw new PdfParseException("P01",number);
-                    if (name is "W" or "W*")
+                    if (name == "EMC" && boundedVisibleUnicode && --markedDepth<0) throw new PdfParseException("P01",number, branch:"R1072");
+                    if (!ordinarySpecial && name is "W" or "W*")
                     {
-                        if (!boundedVisibleUnicode) throw new PdfParseException("P01",number);
+                        if (!boundedVisibleUnicode) throw new PdfParseException("P01",number, branch:"R1073");
                         paths.IntersectPendingRectangleClip();
                     }
                     if (PdfPathEngine.Supports(name) || text is not null && PdfTextEngine.Supports(name))
@@ -98,27 +101,36 @@ public static partial class PdfPigLayoutReader
                         if (text is not null && PdfTextEngine.Supports(name)) text.Operation(name, numbers);
                     }
                     // Visibility-affecting graphics state applies to every document kind.
-                    if (name == "gs")
+                    if (!ordinarySpecial && name == "gs")
                     {
                         using var serialized = new MemoryStream(); operation.Write(serialized);
                         var items = Encoding.ASCII.GetString(serialized.ToArray()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
-                        if (items.Length != 2 || !items[0].StartsWith('/')) throw new PdfParseException("P01", number);
+                        if (items.Length != 2 || !items[0].StartsWith('/')) throw new PdfParseException("P01", number, branch:"R1074");
                         var state = Resource(document, resources, "ExtGState", items[0][1..]);
-                        if (boundedVisibleUnicode && state.Data.Keys.Any(k => k is not ("Type" or "Font" or "SMask" or "TR" or "TR2" or "BM" or "ca" or "CA" or "LW" or "D" or "LC" or "LJ" or "ML")))
-                            throw new PdfParseException("P01", number);
+                        if (boundedVisibleUnicode && state.Data.Keys.Any(k => k is not ("Type" or "Font" or "SMask" or "TR" or "TR2" or "BM" or "ca" or "CA" or "LW" or "D" or "LC" or "LJ" or "ML" or "OP" or "op" or "OPM")))
+                            throw new PdfParseException("P01", number, branch:"R1075");
                         if (boundedVisibleUnicode && (Number(document,state,"ML",10) is < 1 or > 10 ||
-                            Number(document,state,"LC",0) is not (0 or 1 or 2) || Number(document,state,"LJ",0) is not (0 or 1 or 2))) throw new PdfParseException("P01", number);
+                            Number(document,state,"LC",0) is not (0 or 1 or 2) || Number(document,state,"LJ",0) is not (0 or 1 or 2))) throw new PdfParseException("P01", number, branch:"R1076");
+                        if (boundedVisibleUnicode)
+                        {
+                            bool? Overprint(string key) => Get(state,key) is { } value &&
+                                DirectObjectFinder.TryGet<BooleanToken>(value, document.Structure.TokenScanner, out var boolean)
+                                ? boolean.Data : null;
+                            visibility.SetOverprint(state.Data.ContainsKey("OP"), Overprint("OP"),
+                                state.Data.ContainsKey("op"), Overprint("op"));
+                            if (Number(document,state,"OPM",0) is not (0 or 1)) throw new PdfParseException("P01",number, branch:"R1077");
+                        }
                         if (boundedVisibleUnicode) visibility.SetStrokeStyle(
                             state.Data.ContainsKey("LJ") ? (int)Number(document,state,"LJ") : null,
                             state.Data.ContainsKey("LC") ? (int)Number(document,state,"LC") : null,
                             state.Data.ContainsKey("ML") ? Number(document,state,"ML") : null);
-                        if (new[] { "Font", "SMask", "TR", "TR2" }.Any(state.Data.ContainsKey) || state.Data.ContainsKey("BM") && Name(document, state, "BM") != "Normal" || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1) throw new PdfParseException("P01", number);
+                        if (new[] { "Font", "SMask", "TR", "TR2" }.Any(state.Data.ContainsKey) || state.Data.ContainsKey("BM") && Name(document, state, "BM") != "Normal" || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1) throw new PdfParseException("P01", number, branch:"R1078");
                         if (state.Data.ContainsKey("LW")) visibility.SetLineWidth(Number(document, state, "LW"), number);
                         if (state.Data.ContainsKey("D"))
                         {
                             var dash = Resolve<ArrayToken>(document, Get(state, "D"));
                             if (dash.Length != 2 || Resolve<ArrayToken>(document, dash[0]).Length != 0 || !double.IsFinite(Resolve<NumericToken>(document, dash[1]).Data))
-                                throw new PdfParseException("P01", number);
+                                throw new PdfParseException("P01", number, branch:"R1079");
                         }
                     }
                     if (text is null) continue;
@@ -128,7 +140,7 @@ public static partial class PdfPigLayoutReader
                         case SetFontAndSize font:
                             if (!fonts.TryGetValue(font.Font.Data, out var decoded))
                             {
-                                if (fonts.Count >= 128) throw new PdfParseException("limit", number);
+                                if (fonts.Count >= 128) throw new PdfParseException("limit", number, branch:"R1080");
                                 var dictionary = Resource(document, resources, "Font", font.Font.Data);
                                 decoded = new Lazy<PdfFont>(() => ReadFont(document, dictionary, token, fontRecovery, font.Font.Data));
                                 fonts.Add(font.Font.Data, decoded);
@@ -136,10 +148,10 @@ public static partial class PdfPigLayoutReader
                             text.SelectFont(decoded, font.Size); break;
                         case ShowText show: text.Show(Bytes(show.Text, show.Bytes)); break;
                         case ShowTextsWithPositioning show:
-                            if (show.Array.Count > 100000) throw new PdfParseException("limit", number);
+                            if (show.Array.Count > 100000) throw new PdfParseException("limit", number, branch:"R1081");
                             foreach (var item in show.Array)
                                 switch (item)
-                                { case NumericToken adjust: text.Adjust(adjust.Data); break; case StringToken s: text.Show(s.GetBytes()); break; case HexToken h: text.Show(h.Bytes); break; default: throw new PdfParseException("P01", number); }
+                                { case NumericToken adjust: text.Adjust(adjust.Data); break; case StringToken s: text.Show(s.GetBytes()); break; case HexToken h: text.Show(h.Bytes); break; default: throw new PdfParseException("P01", number, branch:"R1082"); }
                             break;
                         case MoveToNextLineShowText show: text.Operation("T*"); text.Show(Bytes(show.Text, show.Bytes)); break;
                         case MoveToNextLineShowTextWithSpacing show:
@@ -155,7 +167,7 @@ public static partial class PdfPigLayoutReader
                         }
 
                 }
-                if (boundedVisibleUnicode && markedDepth!=0) throw new PdfParseException("P01",number);
+                if (boundedVisibleUnicode && markedDepth!=0) throw new PdfParseException("P01",number, branch:"R1083");
                 IReadOnlyList<PdfGlyph> rawGlyphs;
                 if (text is { HasFontRecovery: true } || boundedVisibleUnicode)
                 {
@@ -189,10 +201,10 @@ public static partial class PdfPigLayoutReader
                                 var order = glyph.SourceOrder!.Value;
                                 var trace = observed[order];
                                 if (!trace.UnicodeKnown || !trace.Drawable || trace.InkBounds is not { Width: > 0, Height: > 0 } bounds || !textPaint.TryGetValue(order,out var margin))
-                                    throw new PdfParseException("P01", number);
+                                    throw new PdfParseException("P01", number, branch:"R1084");
                                 var left = bounds.Left-margin; var bottom = bounds.Bottom-margin;
                                 var right = bounds.Right+margin; var top = bounds.Top+margin;
-                                if (!new[] { left,bottom,right,top }.All(double.IsFinite)) throw new PdfParseException("P01",number);
+                                if (!new[] { left,bottom,right,top }.All(double.IsFinite)) throw new PdfParseException("P01",number, branch:"R1085");
                                 var original=transform.Glyph(glyph with { X=bounds.Left,Y=bounds.Bottom,Width=bounds.Width,Height=bounds.Height });
                                 var bare=new PdfBox(original.X,original.Y,original.X+original.Width,original.Y+original.Height);
                                 var painted = transform.Glyph(glyph with { X=left,Y=bottom,Width=right-left,Height=top-bottom });
@@ -200,7 +212,7 @@ public static partial class PdfPigLayoutReader
                                 if (textClips[order] is {} clip)
                                 {
                                     var visible=new PdfBox(Math.Max(bare.Left,clip.Left),Math.Max(bare.Top,clip.Top),Math.Min(bare.Right,clip.Right),Math.Min(bare.Bottom,clip.Bottom));
-                                    if (visible.Right<=visible.Left || visible.Bottom<=visible.Top) throw new PdfParseException("P01",number);
+                                    if (visible.Right<=visible.Left || visible.Bottom<=visible.Top) throw new PdfParseException("P01",number, branch:"R1086");
                                     clipped=visible!=bare;bare=visible;
                                     var px=Math.Max(painted.X,clip.Left);var py=Math.Max(painted.Y,clip.Top);
                                     painted=painted with { X=px,Y=py,Width=Math.Min(painted.X+painted.Width,clip.Right)-px,Height=Math.Min(painted.Y+painted.Height,clip.Bottom)-py };
@@ -227,9 +239,9 @@ public static partial class PdfPigLayoutReader
                 (PdfBox Rule,PdfBox Ink,int? Order)? conflict=null;
                 var requiresReview = new HashSet<int>();
                 var hidden = new HashSet<int>();
-                if (paintedInk is not null ? PaintedRulesOverlapInk(paths.PaintedRuleBoxes,paintedInk,bareInk,textOperations,textColours,token,requiresReview,hidden,out conflict) : RulesOverlapText(layout.Lines,glyphs,token))
+                if (!ordinary && (paintedInk is not null ? PaintedRulesOverlapInk(paths.PaintedRuleBoxes,paintedInk,bareInk,textOperations,textColours,token,requiresReview,hidden,out conflict) : RulesOverlapText(layout.Lines,glyphs,token)))
                 {
-                    var error=new PdfParseException("P01", number);
+                    var error=new PdfParseException("P01", number, branch:"R1087");
                     if(conflict is {} c) { error.Data["VisibleRuleBox"]=c.Rule;error.Data["VisibleInkBox"]=c.Ink;error.Data["VisibleSourceOrder"]=c.Order;
                         error.Data["VisibleTextPaintMargin"]=textPaint.GetValueOrDefault(c.Order??-1); }
                     throw error;
@@ -252,12 +264,18 @@ public static partial class PdfPigLayoutReader
             }
             capture?.Finish(); return output;
         }
+        catch (PdfParseException error) when (error.Page is null && activePage is not null)
+        {
+            var positioned = new PdfParseException(error.Stage, activePage, error.Cell, branch:error.Branch);
+            foreach (System.Collections.DictionaryEntry entry in error.Data) positioned.Data[entry.Key] = entry.Value;
+            throw positioned;
+        }
         catch (PdfParseException) { throw; }
         catch (OperationCanceledException) { throw; }
-        catch { throw new PdfParseException("unreadable"); }
+        catch { throw new PdfParseException("unreadable", branch:"R1088"); }
     }
     private static byte[] Bytes(string? literal, ReadOnlyMemory<byte> bytes)
-    { if (literal is null) return bytes.ToArray(); if (literal.Any(c => c > 255)) throw new PdfParseException("P01"); return Encoding.Latin1.GetBytes(literal); }
+    { if (literal is null) return bytes.ToArray(); if (literal.Any(c => c > 255)) throw new PdfParseException("P01", branch:"R1089"); return Encoding.Latin1.GetBytes(literal); }
     private static bool RulesOverlapText(IReadOnlyList<PdfRule> rules, IReadOnlyList<PdfGlyph> glyphs, CancellationToken token)
     {
         // Search only rules crossing each glyph's coordinate interval, rather
@@ -283,7 +301,7 @@ public static partial class PdfPigLayoutReader
                 for (var index = LowerBound(items, minimum, isVertical); index < items.Length; index++)
                 {
                     var rule = items[index]; if ((isVertical ? rule.X1 : rule.Y1) >= maximum) break;
-                    if (++work > 1_000_000) throw new PdfParseException("limit");
+                    if (++work > 1_000_000) throw new PdfParseException("limit", branch:"R1090");
                     if (work % 128 == 0) token.ThrowIfCancellationRequested();
                     if (isVertical ? rule.Y1 - 1.5 < glyph.Y + glyph.Height && glyph.Y < rule.Y2 + 1.5
                         : rule.X1 - 1.5 < glyph.X + glyph.Width && glyph.X < rule.X2 + 1.5) return true;
@@ -297,7 +315,7 @@ public static partial class PdfPigLayoutReader
     private sealed class VisibilityState(bool deviceGray, bool deviceRgb, bool deviceCmyk, bool boundedVisibleUnicode = false)
     {
         private readonly record struct State(bool FillVisible, bool FillWhite, bool StrokeVisible, int TextMode, double LineWidth, PdfMatrix Ctm,
-            int LineJoin=0,int LineCap=0,double MiterLimit=10,double FillDarkness=1,bool SupportedBackground=false,PdfPathEngine.PaintColor FillColor=default);
+            int LineJoin=0,int LineCap=0,double MiterLimit=10,double FillDarkness=1,bool SupportedBackground=false,PdfPathEngine.PaintColor FillColor=default, bool? StrokeOverprint=false, bool? FillOverprint=false);
         private State _state = new(deviceGray, false, deviceGray, 0, 1, PdfMatrix.Identity);
         private readonly Stack<State> _stack = new();
         private bool _shown;
@@ -305,6 +323,11 @@ public static partial class PdfPigLayoutReader
         public bool FillWhite => _state.FillWhite;
         public bool SupportedBackground => _state.SupportedBackground;
         public PdfPathEngine.PaintColor FillColor => _state.FillColor;
+        public void SetOverprint(bool hasStroke, bool? stroke, bool hasFill, bool? fill)
+        {
+            if (hasStroke) _state = _state with { StrokeOverprint = stroke };
+            if (hasFill) _state = _state with { FillOverprint = fill };
+        }
         public void SetStrokeStyle(int? join=null,int? cap=null,double? miter=null) =>
             _state=_state with { LineJoin=join??_state.LineJoin,LineCap=cap??_state.LineCap,MiterLimit=miter??_state.MiterLimit };
         public double StrokePaintRadius(int page)
@@ -313,7 +336,7 @@ public static partial class PdfPigLayoutReader
             var xx=x.X-origin.X;var xy=x.Y-origin.Y;var yx=y.X-origin.X;var yy=y.Y-origin.Y;
             var scale=Math.Sqrt(Math.Max(xx*xx+xy*xy,yx*yx+yy*yy));
             var radius=_state.LineWidth*scale/2;
-            if (!double.IsFinite(radius) || radius<=0) throw new PdfParseException("P01",page);
+            if (!double.IsFinite(radius) || radius<=0) throw new PdfParseException("P01",page, branch:"R1091");
             return radius;
         }
         public double TextPaintMargin(int page)
@@ -324,7 +347,7 @@ public static partial class PdfPigLayoutReader
             var a=xx*xx+xy*xy;var b=yx*yx+yy*yy;var tolerance=Math.Max(a,b)*1e-12;
             var width=_state.LineWidth*Math.Sqrt(Math.Max(a,b));
             if (!boundedVisibleUnicode || _state.TextMode!=2 || !double.IsFinite(width) || width is <=0 or >.5 ||
-                Math.Abs(a-b)>tolerance || Math.Abs(xx*yx+xy*yy)>tolerance) throw new PdfParseException("P01",page);
+                Math.Abs(a-b)>tolerance || Math.Abs(xx*yx+xy*yy)>tolerance) throw new PdfParseException("P01",page, branch:"R1092");
             var join=_state.LineJoin==0?_state.MiterLimit:1;
             var cap=_state.LineCap==2?Math.Sqrt(2):1;
             return width/2*Math.Max(join,cap);
@@ -339,16 +362,19 @@ public static partial class PdfPigLayoutReader
             // Shear/nonuniform scaling can hide a much longer original miter.
             var tolerance = Math.Max(xLength, yLength) * 1e-12;
             if (!_state.StrokeVisible || !double.IsFinite(scale) || scale <= 0 || Math.Abs(xLength - yLength) > tolerance || Math.Abs(xx * yx + xy * yy) > tolerance
-                || _state.LineWidth * scale > 2 || !paths.PendingStrokeIsRules(closeLast)) throw new PdfParseException("P01", page);
+                || _state.LineWidth * scale > 2 || !paths.PendingStrokeIsRules(closeLast)) throw new PdfParseException("P01", page, branch:"R1093");
         }
         public void SetLineWidth(double width, int page)
         {
-            if (!double.IsFinite(width) || width < 0) throw new PdfParseException("P01", page);
+            if (!double.IsFinite(width) || width < 0) throw new PdfParseException("P01", page, branch:"R1094");
             _state = _state with { LineWidth = width };
         }
         public void Operation(IGraphicsStateOperation operation, int page, PdfPathEngine paths)
         {
             var name = operation.Operator;
+            if (boundedVisibleUnicode && (_state.StrokeOverprint != false || _state.FillOverprint != false) &&
+                name is "Tj" or "TJ" or "'" or "\"" or "f" or "F" or "f*" or "B" or "B*" or "b" or "b*" or "S" or "s")
+                throw new PdfParseException("P01", page, branch:"R1095");
             bool SupportedDevice() => name.ToLowerInvariant() switch
             { "g" => deviceGray, "rg" => deviceRgb, "k" => deviceCmyk, _ => false };
             bool Visible(double[] components) => SupportedDevice() && (name.ToLowerInvariant() switch
@@ -373,49 +399,49 @@ public static partial class PdfPigLayoutReader
             {
                 case "d":
                     // A dash pattern can paint no part of an extracted segment.
-                    if (operation is not SetLineDashPattern dash || dash.Pattern.Array.Count != 0) throw new PdfParseException("P01", page);
+                    if (operation is not SetLineDashPattern dash || dash.Pattern.Array.Count != 0) throw new PdfParseException("P01", page, branch:"R1096");
                     break;
                 case "q":
-                    if (_stack.Count >= 64) throw new PdfParseException("limit", page);
+                    if (_stack.Count >= 64) throw new PdfParseException("limit", page, branch:"R1097");
                     _stack.Push(_state); break;
                 case "Q":
-                    if (!_stack.TryPop(out _state)) throw new PdfParseException("P01", page); break;
+                    if (!_stack.TryPop(out _state)) throw new PdfParseException("P01", page, branch:"R1098"); break;
                 case "cm":
                     _state = _state with { Ctm = PdfMatrix.From(Numbers(operation)).FollowedBy(_state.Ctm) }; break;
                 case "g": case "rg": case "k":
                     var colour = Numbers(operation);
-                    if (colour.Any(v => v is < 0 or > 1)) throw new PdfParseException("P01", page);
+                    if (colour.Any(v => v is < 0 or > 1)) throw new PdfParseException("P01", page, branch:"R1099");
                     _state = _state with { FillVisible = Visible(colour), FillWhite = White(colour),
                         FillDarkness = name=="k" ? colour[3] : 1-colour.Min(),
                         FillColor = name=="g" ? new(colour[0],colour[0],colour[0]) : name=="rg" ? new(colour[0],colour[1],colour[2]) : new(1-colour[3],1-colour[3],1-colour[3]),
                         SupportedBackground = name=="g" && deviceGray || name=="rg" && deviceRgb }; break;
                 case "G": case "RG": case "K":
                     var strokeColour = Numbers(operation);
-                    if (strokeColour.Any(v => v is < 0 or > 1)) throw new PdfParseException("P01", page);
+                    if (strokeColour.Any(v => v is < 0 or > 1)) throw new PdfParseException("P01", page, branch:"R1100");
                     _state = _state with { StrokeVisible = Visible(strokeColour) }; break;
                 case "CS": case "cs": case "SC": case "SCN": case "sc": case "scn":
                 case "sh": case "BI": case "ID": case "EI":
                 case "c": case "v": case "y":
-                    throw new PdfParseException("P01", page);
+                    throw new PdfParseException("P01", page, branch:"R1101");
                 case "w":
                     var width = Numbers(operation);
-                    if (width.Length != 1 || width[0] < 0) throw new PdfParseException("P01", page);
+                    if (width.Length != 1 || width[0] < 0) throw new PdfParseException("P01", page, branch:"R1102");
                     SetLineWidth(width[0], page); break;
                 case "Tr":
                     var mode = Numbers(operation);
                     // Extracted glyph bounds do not include a painted outline.
-                    if (mode.Length != 1 || mode[0] != 0 && !(boundedVisibleUnicode && mode[0] == 2)) throw new PdfParseException("P01", page);
+                    if (mode.Length != 1 || mode[0] != 0 && !(boundedVisibleUnicode && mode[0] == 2)) throw new PdfParseException("P01", page, branch:"R1103");
                     _state = _state with { TextMode = (int)mode[0] }; break;
                 case "Tj": case "TJ": case "'": case "\"":
                     if (_state.TextMode is 0 or 2 && !_state.FillVisible || _state.TextMode is 1 or 2 && !_state.StrokeVisible)
-                        throw new PdfParseException("P01", page);
+                        throw new PdfParseException("P01", page, branch:"R1104");
                     _shown = true; break;
                 case "M":
-                    if (boundedVisibleUnicode && (Numbers(operation) is not [var miter] || miter is < 1 or > 10)) throw new PdfParseException("P01",page);
+                    if (boundedVisibleUnicode && (Numbers(operation) is not [var miter] || miter is < 1 or > 10)) throw new PdfParseException("P01",page, branch:"R1105");
                     if (boundedVisibleUnicode) SetStrokeStyle(miter:Numbers(operation)[0]);
                     break;
                 case "j": case "J":
-                    if (boundedVisibleUnicode && (Numbers(operation) is not [var style] || style is not (0 or 1 or 2))) throw new PdfParseException("P01",page);
+                    if (boundedVisibleUnicode && (Numbers(operation) is not [var style] || style is not (0 or 1 or 2))) throw new PdfParseException("P01",page, branch:"R1106");
                     if (boundedVisibleUnicode)
                     { if(name=="j")SetStrokeStyle(join:(int)Numbers(operation)[0]);else SetStrokeStyle(cap:(int)Numbers(operation)[0]); }
                     break;
@@ -424,7 +450,7 @@ public static partial class PdfPigLayoutReader
                         (_shown && !(boundedVisibleUnicode && _state.FillVisible && paths.PendingFillIsThinRules) ||
                         _state.FillWhite && _painted || !_state.FillWhite && !(_state.FillVisible && paths.PendingFillIsThinRules)))
                     {
-                        var failure=new PdfParseException("P01",page);
+                        var failure=new PdfParseException("P01",page, branch:"R1107");
                         failure.Data["NativeFillState"]=new { _state.FillWhite,_state.FillVisible,_state.FillDarkness,_state.SupportedBackground,
                             ThinRules=paths.PendingFillIsThinRules,Rectangles=paths.PendingFillIsRectangles,Shown=_shown };
                         throw failure;
@@ -440,10 +466,10 @@ public static partial class PdfPigLayoutReader
     private static double[] Numbers(IGraphicsStateOperation operation)
     {
         using var output = new MemoryStream(); operation.Write(output);
-        if (output.Length > 1024) throw new PdfParseException("limit");
+        if (output.Length > 1024) throw new PdfParseException("limit", branch:"R1108");
         var parts = Encoding.ASCII.GetString(output.ToArray()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
-        if (parts.Length == 0 || parts[^1] != operation.Operator) throw new PdfParseException("P01");
-        return parts[..^1].Select(part => double.TryParse(part, NumberStyles.Float, CultureInfo.InvariantCulture, out var value) && double.IsFinite(value) ? value : throw new PdfParseException("P01")).ToArray();
+        if (parts.Length == 0 || parts[^1] != operation.Operator) throw new PdfParseException("P01", branch:"R1109");
+        return parts[..^1].Select(part => double.TryParse(part, NumberStyles.Float, CultureInfo.InvariantCulture, out var value) && double.IsFinite(value) ? value : throw new PdfParseException("P01", branch:"R1110")).ToArray();
     }
     private static IReadOnlyList<PdfGlyph> SpecialGlyphs(Page page, PdfDisplayTransform display, CancellationToken token)
     {
@@ -456,24 +482,24 @@ public static partial class PdfPigLayoutReader
         {
             token.ThrowIfCancellationRequested();
             if (string.IsNullOrWhiteSpace(letter.Value)) { order++; continue; }
-            if ((int)letter.RenderingMode is < 0 or > 2 || letter.Value.Contains('\uFFFD') || letter.Value.Any(char.IsControl)) throw new PdfParseException("P01", page.Number);
+            if ((int)letter.RenderingMode is < 0 or > 2 || letter.Value.Contains('\uFFFD') || letter.Value.Any(char.IsControl)) throw new PdfParseException("P01", page.Number, branch:"R1111");
             var rect = letter.GlyphRectangleLoose;
             var corners = new[] { Raw(rect.Left, rect.Bottom), Raw(rect.Left, rect.Top), Raw(rect.Right, rect.Bottom), Raw(rect.Right, rect.Top) };
             var points = corners.Select(p => display.Point(p.X, p.Y)).ToArray();
             var x = points.Min(p => p.X); var y = points.Min(p => p.Y); var w = points.Max(p => p.X) - x; var h = points.Max(p => p.Y) - y;
-            if (!new[] { x, y, w, h }.All(double.IsFinite) || w <= 0 || h <= 0) throw new PdfParseException("P01", page.Number);
+            if (!new[] { x, y, w, h }.All(double.IsFinite) || w <= 0 || h <= 0) throw new PdfParseException("P01", page.Number, branch:"R1112");
             output.Add(new(letter.Value, x, y, w, h, letter.TextSequence, order++));
         }
         return output;
     }
-    private static T Resolve<T>(PdfDocument document, IToken? token) where T : class, IToken => DirectObjectFinder.TryGet<T>(token, document.Structure.TokenScanner, out var value) ? value : throw new PdfParseException("P01");
+    private static T Resolve<T>(PdfDocument document, IToken? token) where T : class, IToken => DirectObjectFinder.TryGet<T>(token, document.Structure.TokenScanner, out var value) ? value : throw new PdfParseException("P01", branch:"R1113");
     private static IToken? Get(DictionaryToken dictionary, string name) => dictionary.Data.GetValueOrDefault(name);
     private static double Number(PdfDocument document, DictionaryToken dict, string key, double? fallback = null)
     {
         var value = Get(dict, key);
         if (value is null && fallback is not null) return fallback.Value;
         var number = Resolve<NumericToken>(document, value).Data;
-        return double.IsFinite(number) ? number : throw new PdfParseException("P01");
+        return double.IsFinite(number) ? number : throw new PdfParseException("P01", branch:"R1114");
     }
     private static string Name(PdfDocument document, DictionaryToken dict, string key) => Resolve<NameToken>(document, Get(dict, key)).Data;
     private static DictionaryToken Resources(PdfDocument document, DictionaryToken page)
@@ -485,7 +511,7 @@ public static partial class PdfPigLayoutReader
             if (Get(current, "Parent") is not { } parent) break;
             current = Resolve<DictionaryToken>(document, parent);
         }
-        throw new PdfParseException("P01");
+        throw new PdfParseException("P01", branch:"R1115");
     }
     private static DictionaryToken Resource(PdfDocument document, DictionaryToken resources, string kind, string name) =>
         Resolve<DictionaryToken>(document, Get(Resolve<DictionaryToken>(document, Get(resources, kind)), name));
@@ -501,13 +527,13 @@ public static partial class PdfPigLayoutReader
         var stream = Resolve<StreamToken>(document, Get(font, "ToUnicode"));
         var data = stream.Data;
         var filters = document.Structure.FilterProvider.GetFilters(stream.StreamDictionary, document.Structure.TokenScanner);
-        if (filters.Count > 8 || data.Length > 2_000_000 || stream.StreamDictionary.Data.ContainsKey("UseCMap")) throw new PdfParseException("P01");
+        if (filters.Count > 8 || data.Length > 2_000_000 || stream.StreamDictionary.Data.ContainsKey("UseCMap")) throw new PdfParseException("P01", branch:"R1116");
         for (var index = 0; index < filters.Count; index++)
         {
             token.ThrowIfCancellationRequested();
-            if (!filters[index].IsSupported) throw new PdfParseException("P01");
+            if (!filters[index].IsSupported) throw new PdfParseException("P01", branch:"R1117");
             data = filters[index].Decode(data, stream.StreamDictionary, document.Structure.FilterProvider, index);
-            if (data.Length > 2_000_000) throw new PdfParseException("limit");
+            if (data.Length > 2_000_000) throw new PdfParseException("limit", branch:"R1118");
         }
         mapping = PdfUnicodeMap.Read(data.ToArray(), token);
         }
@@ -516,36 +542,36 @@ public static partial class PdfPigLayoutReader
         if (composite)
         {
             var descendants = Resolve<ArrayToken>(document, Get(font, "DescendantFonts"));
-            if (Name(document, font, "Encoding") != "Identity-H" || mapping.CodeBytes != 2 || descendants.Data.Count != 1) throw new PdfParseException("P01");
+            if (Name(document, font, "Encoding") != "Identity-H" || mapping.CodeBytes != 2 || descendants.Data.Count != 1) throw new PdfParseException("P01", branch:"R1119");
             metrics = Resolve<DictionaryToken>(document, descendants.Data[0]);
-            if (Name(document, metrics, "Subtype") is not "CIDFontType0" and not "CIDFontType2") throw new PdfParseException("P01");
+            if (Name(document, metrics, "Subtype") is not "CIDFontType0" and not "CIDFontType2") throw new PdfParseException("P01", branch:"R1120");
         }
-        else if (Name(document, font, "Subtype") is not "TrueType" and not "Type1" || mapping.CodeBytes != 1) throw new PdfParseException("P01");
+        else if (Name(document, font, "Subtype") is not "TrueType" and not "Type1" || mapping.CodeBytes != 1) throw new PdfParseException("P01", branch:"R1121");
         var descriptor = Resolve<DictionaryToken>(document, Get(metrics, "FontDescriptor")); var widths = new Dictionary<int, double>();
         int Integer(IToken value)
-        { var n = Resolve<NumericToken>(document, value).Data; return n == Math.Round(n) && n is >= 0 and <= 65535 ? (int)n : throw new PdfParseException("P01"); }
-        void Put(int code, double value) { if (code is < 0 or > 65535 || !double.IsFinite(value) || value < 0 || !widths.TryAdd(code, value)) throw new PdfParseException("P01"); }
+        { var n = Resolve<NumericToken>(document, value).Data; return n == Math.Round(n) && n is >= 0 and <= 65535 ? (int)n : throw new PdfParseException("P01", branch:"R1122"); }
+        void Put(int code, double value) { if (code is < 0 or > 65535 || !double.IsFinite(value) || value < 0 || !widths.TryAdd(code, value)) throw new PdfParseException("P01", branch:"R1123"); }
         if (composite)
         {
             if (Get(metrics, "W") is { } widthToken)
             {
                 var array = Resolve<ArrayToken>(document, widthToken).Data;
-                if (array.Count > 200000) throw new PdfParseException("limit");
+                if (array.Count > 200000) throw new PdfParseException("limit", branch:"R1124");
                 var cursor = 0;
                 while (cursor < array.Count)
                 {
                     token.ThrowIfCancellationRequested(); var first = Integer(array[cursor++]);
-                    if (cursor >= array.Count) throw new PdfParseException("P01");
+                    if (cursor >= array.Count) throw new PdfParseException("P01", branch:"R1125");
                     if (DirectObjectFinder.TryGet<ArrayToken>(array[cursor], document.Structure.TokenScanner, out var list))
                     {
-                        if (list.Data.Count is < 1 || list.Data.Count > 65536 - first) throw new PdfParseException("P01");
+                        if (list.Data.Count is < 1 || list.Data.Count > 65536 - first) throw new PdfParseException("P01", branch:"R1126");
                         for (var offset = 0; offset < list.Data.Count; offset++) Put(first + offset, Resolve<NumericToken>(document, list.Data[offset]).Data);
                         cursor++;
                     }
                     else
                     {
                         var last = Integer(array[cursor++]);
-                        if (last < first || cursor >= array.Count) throw new PdfParseException("P01");
+                        if (last < first || cursor >= array.Count) throw new PdfParseException("P01", branch:"R1127");
                         var width = Resolve<NumericToken>(document, array[cursor++]).Data;
                         for (var code = first; code <= last; code++) Put(code, width);
                     }
@@ -556,9 +582,9 @@ public static partial class PdfPigLayoutReader
         {
             var first = Number(document, font, "FirstChar"); var last = Number(document, font, "LastChar");
             var array = Resolve<ArrayToken>(document, Get(font, "Widths")).Data;
-            if (first != Math.Round(first) || last != Math.Round(last) || first < 0 || last > 255 || last < first || array.Count != last - first + 1) throw new PdfParseException("P01");
+            if (first != Math.Round(first) || last != Math.Round(last) || first < 0 || last > 255 || last < first || array.Count != last - first + 1) throw new PdfParseException("P01", branch:"R1128");
             for (var index = 0; index < array.Count; index++) Put((int)first + index, Resolve<NumericToken>(document, array[index]).Data);
-            if (mapping.Values.Keys.Any(key => !widths.ContainsKey(key))) throw new PdfParseException("P01");
+            if (mapping.Values.Keys.Any(key => !widths.ContainsKey(key))) throw new PdfParseException("P01", branch:"R1129");
         }
         return new PdfFont(mapping, widths, composite ? Number(document, metrics, "DW", 1000) : 0, Number(document, descriptor, "Ascent"), Number(document, descriptor, "Descent"))
             { Resource = resource, RecoveryEvidence = fontEvidence }.Validate();

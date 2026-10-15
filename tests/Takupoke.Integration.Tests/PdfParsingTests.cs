@@ -529,6 +529,38 @@ public sealed class PdfParsingTests
         Assert.Equal("P08", Assert.Throws<PdfParseException>(() => new PdfPageLayout(100, 100, [new("架", 10, 10, 10, 10)], []).Validate(1)).Stage);
         Assert.Equal("limit", Assert.Throws<PdfParseException>(() => new PdfPageLayout(double.NaN, 100, [], []).Validate(1)).Stage);
     }
+    [Fact]
+    public void OrdinaryAcceptanceDoesNotGrantCertifiedRecoveryCompleteness()
+    {
+        var bytes = SyntheticPdf(prefix:".5 g 30 30 40 20 re f 0 g ");
+        Assert.Single(PdfPigLayoutReader.ReadForImport(bytes, MaterialKind.Timetable));
+        var capture = new RecoveryReadCapture();
+        Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(bytes, MaterialKind.Timetable, capture:capture));
+        Assert.False(capture.Complete);
+    }
+
+    [Theory]
+    [InlineData(false)] [InlineData(true)]
+    public void OrdinaryTimetableAcceptsOmittedTrailingFieldsWithoutCertifyingRoles(bool teacherPresent)
+    {
+        var original = TimetableLayout("架空科目", "架空教員", "架空教室");
+        var page = original with { Glyphs = original.Glyphs.Where(g => g.SourceOrder != 44 && (teacherPresent || g.SourceOrder != 43)).ToArray() };
+        var lesson = Assert.Single(PdfScheduleParser.Timetable([page], ordinary:true).Lessons);
+        Assert.Equal("架空科目", lesson.Names.Subject); Assert.Equal(teacherPresent ? "架空教員" : "", lesson.Names.Teacher); Assert.Equal("", lesson.Names.Room);
+        Assert.Throws<PdfParseException>(() => PdfScheduleParser.Timetable([page]));
+    }
+
+    [Fact]
+    public void DistinctRejectionsRetainStableSitesWithoutSourceText()
+    {
+        var crop = Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(SyntheticPdf(cropBox:"/CropBox [0 150 200 200]"), MaterialKind.Timetable));
+        var font = Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(SyntheticPdf(removeMapping:true), MaterialKind.Timetable));
+        Assert.Equal("P01", crop.Stage); Assert.Equal("P01", font.Stage);
+        Assert.Matches("^R[0-9]{4,6}$", crop.Branch!); Assert.NotEqual(crop.Branch, font.Branch);
+        Assert.Equal(crop.Branch, Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(SyntheticPdf(cropBox:"/CropBox [0 150 200 200]"), MaterialKind.Timetable)).Branch);
+        Assert.DoesNotContain("架空", crop.Message); Assert.Contains(crop.Branch!, crop.UserCode);
+    }
+
     private static PdfPageLayout TimetableLayout(string subject, string teacher, string room)
     {
         var glyphs = new List<PdfGlyph> { new("令和14年度前期時間割", 30, 20, 100, 10, 0, 100) };

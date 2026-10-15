@@ -158,6 +158,43 @@ public sealed class SpecialPdfParityTests
         public void Line(double x1, double y1, double x2, double y2) => Lines.Add(new(x1, y1, x2, y2));
         public PdfPageLayout Page(double width, double pageHeight) => new(width, pageHeight, Glyphs, Lines);
     }
+    [Fact]
+    public void LowerPeriodHeadingsAreSeparatedByTheirRealRuleWithoutFilteringLessonWords()
+    {
+        var original = ReturnPage();
+        var page = original with
+        {
+            Lines = original.Lines.Select(line => line.Horizontal && line.Y1 == 120 ? line with { X1 = 140 } : line)
+                .Append(new(0, 110, 140, 110)).ToArray(),
+            Glyphs = original.Glyphs.Concat(new[]
+            {
+                new PdfGlyph("1コマ", 150, 112, 15, 3, 90001, 90001),
+                new PdfGlyph("2コマ目", 470, 112, 15, 3, 90002, 90002),
+                new PdfGlyph("1コマ", 1450, 122, 15, 3, 90003, 90003)
+            }).ToArray()
+        };
+        var recorder = new ReturnGeometryRecorder("2026-04-01", "1_1", 5);
+        var actual = PdfScheduleParser.Special([page], MaterialKind.ExamReturn, ordinary:true, geometry:recorder);
+        Assert.DoesNotContain(actual.Lessons, lesson => lesson.Lines.Contains("2コマ目"));
+        Assert.Contains(actual.Lessons, lesson => lesson.Lines.Contains("1コマ"));
+        var json = recorder.ToJson();
+        Assert.DoesNotContain("架空", json); Assert.DoesNotContain("コマ", json); Assert.DoesNotContain("2026-04", json);
+        Assert.Contains("SourceOrder", json); Assert.Contains("Rules", json);
+        using var parsed = System.Text.Json.JsonDocument.Parse(json);
+        Assert.All(parsed.RootElement.GetProperty("Cells").EnumerateArray(), cell =>
+            Assert.True(cell.GetProperty("Content").GetProperty("Top").GetDouble() >= 120));
+    }
+
+    [Fact]
+    public void OrdinarySpecialCellsPreserveExtraPrintedLinesWhileCertifiedRolesRemainStrict()
+    {
+        var original = ReturnPage();
+        var page = original with { Glyphs = original.Glyphs.Append(new("架空注記", 302, 137, 15, 2)).ToArray() };
+        var result = PdfScheduleParser.Special([page], MaterialKind.ExamReturn, ordinary:true);
+        Assert.Contains(result.Lessons, lesson => lesson.Lines.Contains("架空注記"));
+        Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special([page], MaterialKind.ExamReturn));
+    }
+
     private static PdfPageLayout ExamPage(int number, bool merged = false, bool metadata = false, bool omitLastTime = false, string? firstLabel = null, string[]? timingOverride = null, string titleYears = "令和8年度")
     {
         var b = new Builder(true, 8); var columns = number == 6 ? 2 : 3;

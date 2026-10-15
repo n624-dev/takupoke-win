@@ -48,6 +48,7 @@
         "src/Takupoke.Infrastructure/Materials/FileSourceReader.cs",
         "src/Takupoke.Infrastructure/Materials/MaterialCoordinator.ChangeRows.cs",
         "src/Takupoke.Infrastructure/Materials/MaterialCoordinator.cs",
+        "src/Takupoke.Infrastructure/Materials/MaterialProjection.cs",
         "src/Takupoke.Infrastructure/Materials/SourceWatcher.cs",
         "src/Takupoke.Win/Platform/WindowsFileIdentity.cs",
         "tests/Takupoke.Integration.Tests/AppViewModelTestPlatform.cs",
@@ -176,6 +177,7 @@
       ],
       "sources": [
         "src/Takupoke.Core/ClassSelection.cs",
+        "src/Takupoke.Core/PdfClassAssignment.cs",
         "src/Takupoke.Core/ScheduleModels.cs",
         "src/Takupoke.Core/SchedulePresentation.cs",
         "src/Takupoke.Core/ScheduleTimes.cs",
@@ -183,6 +185,7 @@
         "src/Takupoke.Core/TimetableEngine.cs"
       ],
       "checks": [
+        "tests/Takupoke.Core.Tests/PdfClassAssignmentTests.cs",
         "tests/Takupoke.Core.Tests/SchedulePresentationTests.cs",
         "tests/Takupoke.Core.Tests/TimetableEngineTests.cs"
       ]
@@ -201,6 +204,7 @@
         "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
         "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
         "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+        "src/Takupoke.Infrastructure/Parsing/PdfReturnGeometryDiagnostic.cs",
         "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
         "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
         "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",

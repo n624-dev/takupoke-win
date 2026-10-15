@@ -38,12 +38,14 @@ public sealed partial class MaterialCoordinator(SchoolDataStore store, FileSourc
                     }
                     throw new OperationCanceledException("確認中に資料または補完年度が変わりました。最新の資料を解析してください。");
                 }
-                if (!selecting && digest == source!.Digest)
+                if (source is not null && digest == source.Digest && (!selecting ||
+                    kind == MaterialKind.Changes && content.Identity == source.FileIdentity &&
+                    string.Equals(Path.GetFullPath(selectedPath!), Path.GetFullPath(source.Path),
+                        OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal)))
                 {
                     if (kind == MaterialKind.Changes && source.WeekdayConsent is not null && !source.WeekdayConsent.Matches(source, year, ParserVersion(kind)))
                         source = source with { WeekdayConsent = null };
                     source = source with { FileIdentity = content.Identity, LastCheckedAt = now, SourceModifiedAt = content.ModifiedAt };
-                    source = await ClearStaleRowSkipsAsync(lease, source, year, token);
                     await store.WriteAsync(lease, "selection." + kind, source, token);
                     await store.WriteAsync(lease, "acquisition." + kind, new MaterialAttempt(now, null, false, digest), token);
                     var analysis = await store.ReadAsync<MaterialAnalysis>(lease, "analysis." + kind, token);
@@ -70,7 +72,6 @@ public sealed partial class MaterialCoordinator(SchoolDataStore store, FileSourc
     }
     private async Task<MaterialResult> ParseAsync(SchoolLease lease, SourceRecord source, byte[] bytes, int year, bool changed, CancellationToken token, bool authorizeWeekdayCorrection = false)
     {
-        source = await ClearStaleRowSkipsAsync(lease, source, year, token);
         var now = _clock.GetUtcNow();
         try
         {
@@ -80,18 +81,22 @@ public sealed partial class MaterialCoordinator(SchoolDataStore store, FileSourc
                 if (source.Kind == MaterialKind.Changes)
                 {
                     var useDate = authorizeWeekdayCorrection || source.WeekdayConsent?.Matches(source, year, XlsxChangeReader.Version) == true;
-                    return new MaterialAnalysis(source.Id, source.Kind, XlsxChangeReader.Version, source.Digest, source.OriginalName, now, year, Changes: XlsxChangeReader.Parse(bytes, year, token, useDate, source.RowSkipConsent?.Rows.ToHashSet()), RowSkipConsent: source.RowSkipConsent) { DateDerivedWeekdays = useDate };
+                    var rows = source.RowSkipConsent?.Identifies(source, year, XlsxChangeReader.Version) == true
+                        ? source.RowSkipConsent with { ParserVersion = XlsxChangeReader.Version } : null;
+                    return new MaterialAnalysis(source.Id, source.Kind, XlsxChangeReader.Version, source.Digest, source.OriginalName, now, year, Changes: XlsxChangeReader.Parse(bytes, year, token, useDate, rows?.Rows.ToHashSet()), RowSkipConsent: rows) { DateDerivedWeekdays = useDate };
                 }
                 var pages = PdfPigLayoutReader.ReadForImport(bytes, source.Kind, token);
                 if (source.Kind == MaterialKind.Timetable)
                 {
-                    var timetable = PdfScheduleParser.Timetable(pages, token);
-                    return new MaterialAnalysis(source.Id, source.Kind, PdfScheduleParser.TimetableVersion, source.Digest, source.OriginalName, now, timetable.SchoolYear, Timetable: timetable);
+                    var timetable = PdfScheduleParser.Timetable(pages, token, ordinary:true);
+                    return new MaterialAnalysis(source.Id, source.Kind, PdfScheduleParser.TimetableVersion, source.Digest, source.OriginalName, now, timetable.SchoolYear, Timetable: timetable) { OrdinaryPdf = true };
                 }
-                var special = PdfScheduleParser.Special(pages, source.Kind, token,allowNativeTwoRowExam:pages.All(p=>p.Glyphs.All(g=>g.InkBounds is not null)));
-                return new MaterialAnalysis(source.Id, source.Kind, PdfScheduleParser.SpecialVersion, source.Digest, source.OriginalName, now, special.SchoolYear, Special: special);
+                var special = PdfScheduleParser.Special(pages, source.Kind, token,allowNativeTwoRowExam:pages.All(p=>p.Glyphs.All(g=>g.InkBounds is not null)), ordinary:true);
+                return new MaterialAnalysis(source.Id, source.Kind, PdfScheduleParser.SpecialVersion, source.Digest, source.OriginalName, now, special.SchoolYear, Special: special) { OrdinaryPdf = true };
             }, token);
-            await store.SaveAnalysisAsync(lease, parsed, token, authorizeWeekdayCorrection);
+            parsed = MaterialProjection.Assign(parsed);
+            await store.SaveAnalysisAsync(lease, parsed, token, authorizeWeekdayCorrection,
+                revalidateRowSkips: parsed.RowSkipConsent is not null && !parsed.RowSkipConsent.SameAs(source.RowSkipConsent));
             await store.CollectOriginalsAsync(lease, token);
             return new(source.Kind, changed, true);
         }
@@ -99,7 +104,7 @@ public sealed partial class MaterialCoordinator(SchoolDataStore store, FileSourc
         catch (PdfParseException error)
         {
             var eligible = RecoveryPolicy.Eligible(source.Kind, error.Stage);
-            var attempt = new MaterialAttempt(now, error.Stage, true, source.Digest, year, ParserVersion: ParserVersion(source.Kind), Page: error.Page, Cell: error.Cell, RecoveryPending: eligible);
+            var attempt = new MaterialAttempt(now, error.Stage, true, source.Digest, year, ParserVersion: ParserVersion(source.Kind), Page: error.Page, Cell: error.Cell, RecoveryPending: eligible, Branch: error.Branch);
             var job = eligible ? new RecoveryJob(source.Digest, RecoveryPolicy.Kind(source.Kind)!.Value, RecoveryJobState.Pending, now) : null;
             await store.SavePdfFailureAsync(lease, source, attempt, job, token);
             await store.CollectOriginalsAsync(lease, token);

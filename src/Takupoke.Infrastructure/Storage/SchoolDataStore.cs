@@ -121,6 +121,38 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
         try { return DataCodec.Decode<T>(plain); }
         finally { CryptographicOperations.ZeroMemory(plain); }
     }, token);
+    /// Revalidates legacy recovery projection before migrating class assignment.
+    /// The encrypted row is replaced under the same lease and transaction.
+    public Task<MaterialAnalysis?> ReadProjectedAnalysisAsync(SchoolLease lease, MaterialKind kind,
+        CancellationToken token = default) => WithConnectionAsync(lease, async connection =>
+    {
+        var key = "analysis." + kind;
+        using var transaction = connection.BeginTransaction();
+        using var read = connection.CreateCommand(); read.Transaction = transaction;
+        read.CommandText = "SELECT payload FROM entry WHERE key=$key"; read.Parameters.AddWithValue("$key", key);
+        if (await read.ExecuteScalarAsync(token) is not byte[] payload) return null;
+        var plain = _cipher!.Decrypt(payload, key);
+        try
+        {
+            var original = DataCodec.Decode<MaterialAnalysis>(plain);
+            var upgraded = Takupoke.Infrastructure.Materials.MaterialProjection.Upgrade(original, token);
+            if (!ReferenceEquals(upgraded, original))
+            {
+                var encoded = DataCodec.Encode(upgraded);
+                try
+                {
+                    using var write = connection.CreateCommand(); write.Transaction = transaction;
+                    write.CommandText = "UPDATE entry SET payload=$payload WHERE key=$key";
+                    write.Parameters.AddWithValue("$key", key); write.Parameters.AddWithValue("$payload", _cipher!.Encrypt(encoded, key));
+                    await write.ExecuteNonQueryAsync(token);
+                }
+                finally { CryptographicOperations.ZeroMemory(encoded); }
+            }
+            Verify(lease); await transaction.CommitAsync(token); return upgraded;
+        }
+        finally { CryptographicOperations.ZeroMemory(plain); }
+    }, token);
+
     public Task WriteAsync<T>(SchoolLease lease, string key, T value, CancellationToken token = default) => WithConnectionAsync(lease, async connection =>
     {
         var plain = DataCodec.Encode(value);
@@ -168,9 +200,22 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
         return true;
     }, token);
     public Task SavePdfFailureAsync(SchoolLease lease, SourceRecord source, MaterialAttempt attempt, RecoveryJob? job,
-        CancellationToken token = default) => WithConnectionAsync(lease, async connection =>
+        CancellationToken token = default)
     {
-        if (RecoveryPolicy.Kind(source.Kind) is null || attempt.SourceDigest != source.Digest || attempt.Failure is null ||
+        if (RecoveryPolicy.Kind(source.Kind) is null) throw new InvalidDataException("PDFの解析元ではありません。");
+        return SaveParseFailureAsync(lease, source, attempt, job, token);
+    }
+    public Task SaveChangeFailureAsync(SchoolLease lease, SourceRecord source, MaterialAttempt attempt,
+        CancellationToken token = default)
+    {
+        if (source.Kind != MaterialKind.Changes || attempt.ChangeError is null || !attempt.Parsing)
+            throw new InvalidDataException("XLSXの解析失敗記録ではありません。");
+        return SaveParseFailureAsync(lease, source, attempt, null, token);
+    }
+    private Task SaveParseFailureAsync(SchoolLease lease, SourceRecord source, MaterialAttempt attempt, RecoveryJob? job,
+        CancellationToken token) => WithConnectionAsync(lease, async connection =>
+    {
+        if (attempt.SourceDigest != source.Digest || attempt.Failure is null ||
             attempt.RecoveryPending != (job is not null) || job is not null && (job.PdfHash != source.Digest || job.Kind != RecoveryPolicy.Kind(source.Kind)))
             throw new InvalidDataException("復旧待ち記録と原本の対応を確認できません。");
         using var transaction = connection.BeginTransaction();
@@ -247,7 +292,7 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
         if (await command.ExecuteScalarAsync(token) is not byte[] cipher) throw new InvalidDataException("保存した原本を読み取れません。");
         return _cipher!.Decrypt(cipher, "content:" + id);
     }, token);
-    public Task SaveAnalysisAsync(SchoolLease lease, MaterialAnalysis analysis, CancellationToken token = default, bool authorizeWeekdayCorrection = false, bool authorizeRowSkips = false) => WithConnectionAsync(lease, async connection =>
+    public Task SaveAnalysisAsync(SchoolLease lease, MaterialAnalysis analysis, CancellationToken token = default, bool authorizeWeekdayCorrection = false, bool authorizeRowSkips = false, bool revalidateRowSkips = false) => WithConnectionAsync(lease, async connection =>
     {
         var selectionKey = "selection." + analysis.Kind;
         using var transaction = connection.BeginTransaction();
@@ -280,21 +325,28 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
             }
             finally { CryptographicOperations.ZeroMemory(bytes); }
         }
+        var retainedRows = revalidateRowSkips && analysis.Kind == MaterialKind.Changes
+            && analysis.ParserVersion == Takupoke.Infrastructure.Parsing.XlsxChangeReader.Version
+            && source.RowSkipConsent?.Identifies(source, analysis.SchoolYear, analysis.ParserVersion) == true
+            && analysis.RowSkipConsent is { } updatedRows
+            && (source.RowSkipConsent with { ParserVersion = analysis.ParserVersion }).SameAs(updatedRows);
+        if (revalidateRowSkips && !retainedRows)
+            throw new InvalidDataException("以前の行除外確認と再解析結果が一致しません。");
         if (analysis.RowSkipConsent is { } consent)
         {
             if (!consent.ValidFor(source, analysis.SchoolYear, analysis.ParserVersion)
                 || analysis.Changes is not { Count: > 0 }
-                || !authorizeRowSkips && !consent.SameAs(source.RowSkipConsent))
+                || !authorizeRowSkips && !retainedRows && !consent.SameAs(source.RowSkipConsent))
                 throw new InvalidDataException("行の除外許可と解析元の対応を確認できません。");
         }
-        else if (source.RowSkipConsent?.ValidFor(source, analysis.SchoolYear, analysis.ParserVersion) == true)
+        else if (source.RowSkipConsent?.Identifies(source, analysis.SchoolYear, analysis.ParserVersion) == true)
             throw new InvalidDataException("許可した行の除外を省いた結果は保存できません。");
         var writes = new List<(string, byte[])>
         {
             ("analysis." + analysis.Kind, DataCodec.Encode(analysis)),
             ("attempt." + analysis.Kind, DataCodec.Encode(new MaterialAttempt(analysis.ParsedAt, null, true, analysis.SourceDigest, analysis.SchoolYear, ParserVersion: analysis.ParserVersion)))
         };
-        if (authorizeRowSkips)
+        if (authorizeRowSkips || retainedRows || source.RowSkipConsent is not null && analysis.RowSkipConsent is null)
             writes.Add((selectionKey, DataCodec.Encode(source with { RowSkipConsent = analysis.RowSkipConsent })));
         foreach (var pair in writes)
         {

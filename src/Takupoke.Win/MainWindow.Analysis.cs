@@ -80,15 +80,49 @@ public sealed partial class MainWindow
         var arrow = FluentIcon("chevron-right", 14); arrow.VerticalAlignment = VerticalAlignment.Center; Grid.SetColumn(arrow, 1); grid.Children.Add(arrow);
         button.Content = grid; return button;
     }
-    private Task SpecialAnalysisDetail(SpecialAnalysis analysis, SpecialLesson lesson) => Dialog("特別時間割の授業詳細", Panel(
-        Card(Panel(SettingsSectionTitle(DisplayText.Continuous(lesson.Names.Subject)), SettingsDescription(lesson.Date + " · " + ClassSelection.Display(lesson.ClassName) + " · " + lesson.Period + "限"),
-            DataField("時刻", analysis.TimeFor(lesson)?.Display ?? "未確認"), DataField("教員", DisplayText.Continuous(lesson.Names.Teacher)), DataField("教室", DisplayText.Continuous(lesson.Names.Room)))),
-        new Expander { Header = "元のセルの記載", Content = Text(string.Join("\n", lesson.Lines)) }),
-        detailRevision: () => ScheduleDetailRevision(analysis.Kind, names: false));
+    private Task SpecialAnalysisDetail(SpecialAnalysis analysis, SpecialLesson lesson)
+    {
+        var panel = Panel(Card(Panel(SettingsSectionTitle(DisplayText.Continuous(lesson.Names.Subject)),
+            SettingsDescription(lesson.Date + " · " + ClassSelection.Display(lesson.ClassName) + " · " + lesson.Period + "限"),
+            DataField("原本のクラス", ClassSelection.Display(lesson.SourceClassName ?? lesson.ClassName)),
+            DataField("時刻", analysis.TimeFor(lesson)?.Display ?? "未確認"),
+            DataField("教員", DisplayText.Continuous(lesson.Names.Teacher)), DataField("教室", DisplayText.Continuous(lesson.Names.Room)))),
+            new Expander { Header = "元のセルの記載", Content = Text(string.Join("\n", lesson.Lines)) });
+        if (analysis.Kind == MaterialKind.ExamReturn)
+        {
+            var status = Text("本文・氏名・教室名を含まない座標と罫線の情報を取得できます。");
+            var output = new TextBox { IsReadOnly = true, AcceptsReturn = true, TextWrapping = TextWrapping.Wrap,
+                MaxHeight = 220, Visibility = Visibility.Collapsed };
+            var copy = Button("位置情報をコピー", () =>
+            {
+                var data = new Windows.ApplicationModel.DataTransfer.DataPackage(); data.SetText(output.Text);
+                Windows.ApplicationModel.DataTransfer.Clipboard.SetContentWithOptions(data,
+                    new Windows.ApplicationModel.DataTransfer.ClipboardContentOptions { IsAllowedInHistory = false, IsRoamable = false });
+                status.Text = "位置情報をコピーしました。本文や画像は含まれていません。";
+                return Task.CompletedTask;
+            }, "copy-return-geometry");
+            copy.IsEnabled = false;
+            var acquire = Button("位置情報を取得", async () =>
+            {
+                try
+                {
+                    output.Text = await _model.ReturnGeometryAsync(lesson);
+                    output.Visibility = Visibility.Visible; copy.IsEnabled = true;
+                    status.Text = "元のセル、本文範囲、文字の位置、罫線を取得しました。";
+                }
+                catch (OperationCanceledException) { status.Text = "取得を中止しました。"; }
+                catch { status.Text = "位置情報を取得できませんでした。元の解析結果は保持しています。"; }
+            }, "get-return-geometry");
+            panel.Children.Add(new Expander { Header = "位置情報の診断", Content = Panel(status, acquire, output, copy) });
+        }
+        return Dialog("特別時間割の授業詳細", panel,
+            detailRevision: () => ScheduleDetailRevision(analysis.Kind, names: false));
+    }
     private Task NormalAnalysisDetail(NormalLesson lesson)
     {
         var names = _model.Mappings?.Apply(lesson.Names, lesson.ClassName) ?? lesson.Names;
         return Dialog("授業詳細", Panel(Card(Panel(SettingsSectionTitle(DisplayText.Continuous(names.DetailSubject)), SettingsDescription(ClassSelection.Display(lesson.ClassName) + " · " + lesson.Period + "限"),
+            DataField("原本のクラス", ClassSelection.Display(lesson.SourceClassName ?? lesson.ClassName)),
             DataField("教員", DisplayText.Continuous(names.DetailTeacher)), DataField("教室", DisplayText.Continuous(names.DetailRoom)))),
             new Expander { Header = "PDFの記載名", Content = Text(lesson.Names.Subject + "\n" + lesson.Names.Teacher + "\n" + lesson.Names.Room) },
             new Expander { Header = "元のセルの記載", Content = Text(lesson.SourceText) }),

@@ -293,6 +293,53 @@ public sealed class SchoolDataStoreTests : IAsyncLifetime
         await Assert.ThrowsAnyAsync<OperationCanceledException>(() => store.SaveRecoveryAsync(lease, source, audit, _clock.Now));
         Assert.Null(await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam"));
     }
+    [Fact]
+    public async Task OldStrictClassAssignmentMigratesOnceAndPersistsOriginalCellKeys()
+    {
+        await using var store = Store(); var lease = await store.BeginAsync();
+        var old = new MaterialAnalysis("fictional-original", MaterialKind.Timetable, 27, new string('a',64),
+            "架空資料", _clock.Now, 2032, Timetable:new(2032,"前期",
+                [new("1_1",1,1,new("架空CN科目","架空教員","架空教室"),"原本の記載",1)]));
+        await store.WriteAsync(lease, "analysis.Timetable", old);
+        var migrated = (await store.ReadProjectedAnalysisAsync(lease, MaterialKind.Timetable))!;
+        var lesson = Assert.Single(migrated.Timetable!.Lessons);
+        Assert.Equal("1_CN", lesson.ClassName); Assert.Equal("1_1", lesson.SourceClassName);
+        Assert.Equal(old.ParserVersion, migrated.ParserVersion); Assert.Equal(old.SourceDigest,migrated.SourceDigest);
+        Assert.Equal(PdfClassAssignment.Version,migrated.ClassAssignmentVersion);
+        var again = await store.ReadProjectedAnalysisAsync(lease, MaterialKind.Timetable);
+        Assert.Equal(RecoveryValidator.Fingerprint(migrated),RecoveryValidator.Fingerprint(again));
+        Assert.Equal(RecoveryValidator.Fingerprint(migrated),RecoveryValidator.Fingerprint(await store.ReadAsync<MaterialAnalysis>(lease,"analysis.Timetable")));
+    }
+
+    [Fact]
+    public async Task OldRecoveryProjectionIsVerifiedBeforeAffiliationMigrationAndTamperingIsRejected()
+    {
+        await using var store = Store(); var lease = await store.BeginAsync();
+        var layout = RecoveryPipelineTests.Layout(MaterialKind.Timetable);
+        layout = layout with { Glyphs = layout.Glyphs.Select(g => g.Text == "3_CN" ? g with { Text = "1_1" } :
+            g.Text == "架空科目A" ? g with { Text = "架空CN科目" } : g).ToArray() };
+        var hash = new string('a',64);
+        var document = RecoveryDocumentBuilder.Build(hash, MaterialKind.Timetable, [layout], (_,_) => true);
+        var run = await RecoveryEngine.RunAsync(document, "windows", 10, true, [], _ => null);
+        var result = Assert.IsType<RecoveryResult>(run.Result);
+        var audit = new RecoveryAudit(document,result,new(hash,RecoveryValidator.Fingerprint(result),RecoveryValidator.Fingerprint(document),result.Metadata,_clock.Now));
+        var source = new SourceRecord("fictional-original",MaterialKind.Timetable,"","","架空資料",hash,0,_clock.Now,_clock.Now,null);
+        var current = RecoveryAnalysisConverter.Convert(source,document,result,_clock.Now) with { Recovery = audit };
+        var legacy = current with { ClassAssignmentVersion = 0, ParserVersion = 27,
+            Timetable = current.Timetable! with { Lessons = current.Timetable.Lessons.Select(l => l with
+                { ClassName = l.SourceClassName ?? l.ClassName, SourceClassName = null }).ToArray() } };
+        Assert.True(RecoveryAnalysisConverter.MayDisplay(legacy));
+        await store.WriteAsync(lease,"analysis.Timetable",legacy);
+        var migrated = (await store.ReadProjectedAnalysisAsync(lease,MaterialKind.Timetable))!;
+        Assert.Equal("1_CN",Assert.Single(migrated.Timetable!.Lessons).ClassName);
+        Assert.True(RecoveryAnalysisConverter.MayDisplay(migrated));
+        Assert.Equal(RecoveryValidator.Fingerprint(audit),RecoveryValidator.Fingerprint(migrated.Recovery));
+        var forged = legacy with { Timetable = legacy.Timetable with { Lessons = legacy.Timetable.Lessons.Select(l => l with { ClassName="1_2" }).ToArray() } };
+        await store.WriteAsync(lease,"analysis.Timetable",forged);
+        var refused = (await store.ReadProjectedAnalysisAsync(lease,MaterialKind.Timetable))!;
+        Assert.Equal(0,refused.ClassAssignmentVersion); Assert.False(RecoveryAnalysisConverter.MayDisplay(refused));
+    }
+
     private SourceRecord Source(string id, byte[] bytes) => new(id, MaterialKind.Timetable, Path.Combine(_root, "fake.pdf"), "fake-identity", "架空資料A.pdf",
         NotificationDiff.Digest(bytes), bytes.Length, _clock.Now, _clock.Now, null);
     private sealed class RecoveryIdentity : Takupoke.Infrastructure.Materials.IFileIdentityProvider

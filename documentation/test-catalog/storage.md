@@ -1,7 +1,7 @@
 # 暗号化DB・原子保存・設定・年度期限
 
 対応関係・宣言名・実行方法のSHA-256：
-`6c85b170a6dcedaca54cdbdaf46996ee8865b36621ea8a2b7e52ce1f394a725b`
+`355c63488c463a71e324987ca134fc35f643801848e276abe408268ef9d0de5c`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -32,12 +32,14 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 - `IndependentRowAndWeekdayApprovalsAreAtomicAndSurviveRefreshReparseAndRestart`
 - `ExplicitApprovalPersistsWithAnalysisAndSurvivesRefreshReparseAndRestart`
-- `ContentChangeReselectionAndYearChangesInvalidateWithoutResurrection`
-- `OldParserConsentIsClearedEvenIfTheContentIsUnchanged`
+- `ContentAndOriginalChangesInvalidateWhileFailedYearReparsePreservesPreviousDecision`
+- `OldParserConsentIsRevalidatedAndCommittedWithTheCurrentAnalysis`
 - `StalePreviewMissingSelectionCancellationAndReplacementCannotSave`
 - `ExcludingEveryChangeRefusesAndPreservesLastGood`
 - `StorageFailureRollsBackConsentAnalysisAndAttemptTogether`
 - `PreviousPayloadsWithoutOptionalConsentRemainReadable`
+- `FailedCurrentRevalidationPreservesOlderConfirmationAndLastGoodResult`
+- `ReselectingAnotherFileWithIdenticalBytesCannotInheritTheDecision`
 
 ## [tests/Takupoke.Integration.Tests/DataDirectoryTests.cs](../../tests/Takupoke.Integration.Tests/DataDirectoryTests.cs)
 
@@ -75,4 +77,6 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `OldStrictFailureCannotAuthorizePreviewAdoptionOrAcceptanceReuse`
 - `StrictSuccessInvalidatesOldPreviewAndCannotBeOverwrittenByRecovery`
 - `CancelledAdoptionPreservesPreviewAndSelectionChangeRejectsIt`
+- `OldStrictClassAssignmentMigratesOnceAndPersistsOriginalCellKeys`
+- `OldRecoveryProjectionIsVerifiedBeforeAffiliationMigrationAndTamperingIsRejected`
 - `ForegroundRecoveryPreservesPersistedJobStartWhileCreatingPreview`

@@ -1,7 +1,7 @@
 # 復旧解析・原画像・訂正・保存・取消
 
 対応関係・宣言名・実行方法のSHA-256：
-`0b2747f7f484b2e2cdaebc152acb9e7ab165187d7576c8d672abc87ce97e79f3`
+`a7d48ad971291155e6e184da8de5d18075fb19291e727f11e37b08a9c179cf46`
 
 環境：Linux／Windows .NET
 
@@ -71,6 +71,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `DisplayCorrectionsOwnTheirValuesAfterOriginalParentListMutates`
 - `OnlyActualValidatedIdenticalOriginalFormalProjectionAllowsDiff`
 - `SameVerifiedFormalResultHasNoInventedDiff`
+- `OrdinaryProjectionUsesOriginalClassKeysAfterDepartmentMigration`
 - `UnmatchedOrUnverifiedPreviousDataNeverGuessesAlignment`
 - `NewSourceEvenWithIdenticalValuesHasNoGuessedPreviousMapping`
 - `ResponsiveChoiceHasFiniteBoundaryWithoutInputStateChanges`
@@ -213,6 +214,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `SameBytesVersionChangeRemovesOldAndCleanupRetainsActiveAndLeasedModels`
 - `BundleStartupCleanupRetainsActiveAndLeasedAndUnrelatedDirectories`
 - `PartialBundleDeleteFailureKeepsIdentityAcrossRestartAndCanRetry`
+- `DownloadProgressCountsActualBytesAcrossArtifactsAndSeparatesCachedInitialization`
 
 ## [tests/Takupoke.Integration.Tests/RecoveryNativeExamTests.cs](../../tests/Takupoke.Integration.Tests/RecoveryNativeExamTests.cs)
 

@@ -72,6 +72,23 @@ public sealed class RecoveryCorrectionPreviewTests
         var p=Preview();var display=RecoveryPreviewDisplay.Create(p,CancellationToken.None,Formal(p))!;
         Assert.True(display.PreviousComparable);Assert.Empty(display.PreviousChanges);
     }
+    [Fact]
+    public void OrdinaryProjectionUsesOriginalClassKeysAfterDepartmentMigration()
+    {
+        var p = Preview(); var formal = Formal(p);
+        var sourceClass = formal.Timetable!.Lessons[0].SourceClassName ?? formal.Timetable.Lessons[0].ClassName;
+        // A proven ordinary result explicitly records its parsing route. Its
+        // projected class can differ while the PDF cell key remains unchanged.
+        var ordinary = formal with { Recovery = null, OrdinaryPdf = true,
+            Timetable = formal.Timetable! with { Lessons = formal.Timetable.Lessons.Select(l => l with
+                { ClassName = "1_CN", SourceClassName = l.SourceClassName ?? l.ClassName }).ToArray() } };
+        var display = RecoveryPreviewDisplay.Create(p, CancellationToken.None, ordinary)!;
+        Assert.True(display.PreviousComparable); Assert.Empty(display.PreviousChanges);
+        var changed = ordinary with { Timetable = ordinary.Timetable with { Lessons = ordinary.Timetable.Lessons.Select((l,i) =>
+            i == 0 ? l with { Names = l.Names with { Subject = "架空以前の科目" } } : l).ToArray() } };
+        Assert.Contains(RecoveryPreviewDisplay.Create(p,CancellationToken.None,changed)!.PreviousChanges,
+            change => change.PreviousText == "架空以前の科目" && change.Slots.Any(slot => slot.ClassName == sourceClass));
+    }
     [Theory][InlineData("missingAudit")][InlineData("differentOriginal")][InlineData("differentDigest")][InlineData("tamperedProjection")][InlineData("tamperedAudit")]
     public void UnmatchedOrUnverifiedPreviousDataNeverGuessesAlignment(string fault)
     {

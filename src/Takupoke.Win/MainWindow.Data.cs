@@ -40,8 +40,19 @@ public sealed partial class MainWindow
         {
             if (attempt.RecoveryPending && attempt.SourceDigest == source?.Digest)
                 attempts.Children.Add(SettingsDescription("新しい資料は未反映です。"));
-            attempts.Children.Add(DataField("最終解析の試行 · " + DisplayDateTime(attempt.At), attempt.Failure is { } failure
-                ? kind != MaterialKind.Changes ? new PdfParseException(failure, attempt.Page, attempt.Cell).Message : failure : "解析済み"));
+            attempts.Children.Add(DataField("最終解析の試行 · " + DisplayDateTime(attempt.At),
+                attempt.Failure is null ? "解析済み" : "解析失敗"));
+            if (attempt.Failure is { } failure)
+            {
+                if (kind != MaterialKind.Changes && attempt.Parsing)
+                {
+                    var error = new PdfParseException(failure, attempt.Page, attempt.Cell, attempt.Branch);
+                    attempts.Children.Add(Text(error.UserMessage));
+                    attempts.Children.Add(SettingsDescription(error.RetentionMessage));
+                    attempts.Children.Add(DataField("エラーコード", error.UserCode));
+                }
+                else attempts.Children.Add(Text(failure));
+            }
             if (attempt.ChangeError is ChangeErrorCode.FormulaCache or ChangeErrorCode.WeekdayMismatch or ChangeErrorCode.WeekdayOnly)
                 attempts.Children.Add(Button("警告を確認して内容を見る", PreviewChanges, "preview-changes"));
             if (attempt.ChangeError == ChangeErrorCode.WeekdayMismatch)

@@ -75,4 +75,26 @@ public sealed class RecoveryModelStoreTests : IAsyncLifetime
         Assert.Null(await restarted.InstalledAsync("windowsOcr")); Assert.False(Directory.Exists(path));
     }
 
+    [Fact]
+    public async Task DownloadProgressCountsActualBytesAcrossArtifactsAndSeparatesCachedInitialization()
+    {
+        var bytes = Enumerable.Range(0, 150001).Select(index => (byte)(index % 251)).ToArray();
+        var bundle = new RecoveryModelBundle("fictional-progress", "1", "windowsOcr", "10.0.26100", 1, "fictional", true,
+            new[] { "a.bin", "b.bin" }.Select(name => new RecoveryArtifact(name, "https://models.example.invalid/" + name, bytes.Length, NotificationDiff.Digest(bytes))).ToArray());
+        var progress = new List<RecoveryInstallProgress>(); var store = new RecoveryModelBundleStore(_root);
+        var path = await store.InstallAsync(bundle, (_, _) => Task.FromResult<Stream>(new MemoryStream(bytes)),
+            (directory, _) => { Assert.Equal(bytes.Length, new FileInfo(Path.Combine(directory,"b.bin")).Length); return Task.CompletedTask; }, progress:progress.Add);
+        var downloaded = progress.Where(p => p.Phase == RecoveryInstallPhase.Download).Select(p => p.DownloadedBytes).ToArray();
+        Assert.Contains(bytes.Length, downloaded); Assert.Equal(bundle.Size, downloaded[^1]);
+        Assert.Equal(downloaded.Order(), downloaded);
+        Assert.Contains(progress, p => p.Phase == RecoveryInstallPhase.Verify);
+        Assert.True(progress.FindIndex(p => p.Phase == RecoveryInstallPhase.Initialize) > progress.FindLastIndex(p => p.Phase == RecoveryInstallPhase.Download));
+        Assert.Equal(RecoveryInstallPhase.Complete, progress[^1].Phase);
+        progress.Clear();
+        Assert.Equal(path, await store.InstallAsync(bundle, (_, _) => throw new InvalidOperationException("Cache must not download"),
+            (_, _) => Task.CompletedTask, progress:progress.Add));
+        Assert.Equal(new[] { RecoveryInstallPhase.CachedVerification, RecoveryInstallPhase.Initialize, RecoveryInstallPhase.Complete }, progress.Select(p => p.Phase));
+        Assert.All(progress, p => Assert.Equal(0, p.DownloadedBytes));
+    }
+
 }

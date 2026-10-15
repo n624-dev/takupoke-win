@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using Takupoke.Core;
 using Takupoke.Core.Recovery;
 using Takupoke.Infrastructure.Storage;
 using Takupoke.Infrastructure.Recovery;
@@ -62,6 +63,7 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
                     return new RecoveryDisplayLesson(lesson.Subject.Value,
                     lesson.Teacher.Value, lesson.Teacher.State == RecoveryValueState.Empty,
                     lesson.Room.Value, lesson.Room.State == RecoveryValueState.Empty) {
+                        DestinationClasses = cell.Slots.Select(slot => PdfClassAssignment.Destination(slot.ClassName, lesson.Subject.Value)).Distinct().ToImmutableArray(),
                         EditableRoles = editable,
                         CodeReviewRoles = fields.Where(pair => editable.Contains(pair.Item1) &&
                             !reviewed.Contains(new(cell.Id, index, pair.Item1)) && RecoveryCodeReview.Describe(pair.Item2.Value) is not null)
@@ -85,7 +87,8 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
             !string.Equals(c.OriginalOcr, c.UserText, StringComparison.Ordinal)).ToImmutableArray();
         // Only an actual certified formal projection of this identical source
         // document permits cell/parallel-position comparison. Updated PDFs,
-        // Strict-only projections and unmatched topology are not guessed.
+        // Compare matching original cell keys. Projected department names never
+        // replace the PDF class key used for locating a previous Strict lesson.
         var comparable = previous is { Recovery: { } audit } && previous.OriginalId == preview.SourceId &&
             previous.SourceDigest == document.PdfHash && RecoveryAnalysisConverter.MayDisplay(previous, token) &&
             RecoveryValidator.Fingerprint(audit.Document) == RecoveryValidator.Fingerprint(document);
@@ -112,6 +115,35 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
                 }
             }
         }
+        else if (previous is { Recovery: null, OrdinaryPdf: true } && previous.OriginalId == preview.SourceId &&
+            previous.SourceDigest == document.PdfHash && previous.SchoolYear == document.SchoolYear &&
+            (document.Kind == RecoveryDocumentKind.Timetable ? previous.Timetable is not null : previous.Special is not null))
+        {
+            comparable = true;
+            foreach (var cell in display.Cells)
+            {
+                token.ThrowIfCancellationRequested();
+                LessonNames[] Prior(RecoverySlot slot) => previous.Timetable is { } timetable
+                    ? timetable.Lessons.Where(lesson => (lesson.SourceClassName ?? lesson.ClassName) == slot.ClassName &&
+                        lesson.Weekday.ToString(System.Globalization.CultureInfo.InvariantCulture) == slot.Day && lesson.Period == slot.Period)
+                        .Select(lesson => new LessonNames(lesson.Names.Subject, lesson.Names.Teacher, lesson.Names.Room)).ToArray()
+                    : previous.Special!.Lessons.Where(lesson => (lesson.SourceClassName ?? lesson.ClassName) == slot.ClassName &&
+                        lesson.Date == slot.Day && lesson.Period == slot.Period).Select(lesson => lesson.Names).ToArray();
+                var prior = Prior(cell.Slots[0]);
+                if (cell.Slots.Skip(1).Any(slot => !Prior(slot).SequenceEqual(prior)))
+                { comparable = false; changes.Clear(); break; }
+                for (var index = 0; index < Math.Max(prior.Length, cell.Lessons.Length); index++)
+                {
+                    var before = prior.ElementAtOrDefault(index) ?? new LessonNames("");
+                    var after = cell.Lessons.ElementAtOrDefault(index);
+                    var values = new[] { (RecoveryFieldRole.Subject, before.Subject, after?.Subject ?? ""),
+                        (RecoveryFieldRole.Teacher, before.Teacher, after?.Teacher ?? ""),
+                        (RecoveryFieldRole.Room, before.Room, after?.Room ?? "") };
+                    foreach (var (role, oldText, newText) in values)
+                        if (oldText != newText) changes.Add(new(cell.CellId, index, role, cell.Slots, oldText, newText));
+                }
+            }
+        }
         token.ThrowIfCancellationRequested();
         return display with { ReferenceNotes=(document.ReferenceNotes ?? []).Select(n=>new RecoveryDisplayReferenceNote(n.Page,string.Concat(n.SourceIds.Select(id=>sources[id].Text)))).ToImmutableArray(),Corrections = corrections, ReviewedFieldCount = preview.Result.HumanCorrections?.Count ?? 0,
             ReviewedTargets = (preview.Result.HumanCorrections ?? []).Select(c => c.Target).ToImmutableArray(),
@@ -126,6 +158,7 @@ public sealed record RecoveryDisplayCell(ImmutableArray<RecoverySlot> Slots, Rec
 }
 public sealed record RecoveryDisplayLesson(string Subject, string Teacher, bool TeacherEmpty, string Room, bool RoomEmpty)
 {
+    public ImmutableArray<string> DestinationClasses { get; init; } = [];
     public ImmutableArray<RecoveryFieldRole> EditableRoles { get; init; } = [];
     public ImmutableArray<RecoveryFieldRole> CodeReviewRoles { get; init; } = [];
 }

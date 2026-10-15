@@ -42,7 +42,7 @@ internal sealed class PdfNativeTraceProcessor(int number, PdfNativeTraceInputs i
     private int _outlineWork;
     public override IReadOnlyList<PdfNativeGlyphTrace> Process(int pageNumber, IReadOnlyList<IGraphicsStateOperation> operations)
     {
-        if (operations.Count > 1_000_000) throw new PdfParseException("limit");
+        if (operations.Count > 1_000_000) throw new PdfParseException("limit", branch:"R1017");
         CloneAllStates();
         // Keep native state between operations while checking cancellation.
         foreach (var operation in operations) { token.ThrowIfCancellationRequested(); ProcessOperations([operation]); }
@@ -53,10 +53,10 @@ internal sealed class PdfNativeTraceProcessor(int number, PdfNativeTraceInputs i
         in TransformationMatrix text, in TransformationMatrix transform, CharacterBoundingBox bounds)
     {
         token.ThrowIfCancellationRequested();
-        if (_glyphs.Count >= 100000) throw new PdfParseException("limit");
+        if (_glyphs.Count >= 100000) throw new PdfParseException("limit", branch:"R1018");
         var resource = state.FontState.FontName;
         if (state.FontState.FromExtendedGraphicsState || resource is null || font.IsVertical
-            || !ReferenceEquals(font, ResourceStore.GetFont(resource))) throw new PdfParseException("P01");
+            || !ReferenceEquals(font, ResourceStore.GetFont(resource))) throw new PdfParseException("P01", branch:"R1019");
         var matrix = rendering.Multiply(text).Multiply(transform);
         var known = font.TryGetUnicode(code, out var original);
         PdfRectangle? outline=null;
@@ -65,7 +65,7 @@ internal sealed class PdfNativeTraceProcessor(int number, PdfNativeTraceInputs i
             if(font.TryGetNormalisedPath(code,out var path)) {
                 foreach(var subpath in path) {
                     token.ThrowIfCancellationRequested();
-                    if(subpath.Commands.Count>1_000_000-_outlineWork)throw new PdfParseException("limit");
+                    if(subpath.Commands.Count>1_000_000-_outlineWork)throw new PdfParseException("limit", branch:"R1020");
                     _outlineWork+=subpath.Commands.Count;
                 }
                 outline=PdfSubpath.GetBoundingRectangle(path);
@@ -78,14 +78,14 @@ internal sealed class PdfNativeTraceProcessor(int number, PdfNativeTraceInputs i
     }
     // Geometry/paint is checked by PdfPathEngine and VisibilityState before this
     // observer runs. Unsupported secondary content still refuses explicitly.
-    protected override void RenderXObjectImage(XObjectContentRecord image) => throw new PdfParseException("P01");
-    protected override void RenderInlineImage(InlineImage image) => throw new PdfParseException("P01");
+    protected override void RenderXObjectImage(XObjectContentRecord image) => throw new PdfParseException("P01", branch:"R1021");
+    protected override void RenderInlineImage(InlineImage image) => throw new PdfParseException("P01", branch:"R1022");
     public override void BeginMarkedContent(NameToken name, NameToken? propertyName, DictionaryToken? properties)
-    { if (!includeKnownInk || !(name.Data=="Artifact" && propertyName is null && properties is null || PdfPigLayoutReader.SafeMarkedProperties(name,propertyName,properties))) throw new PdfParseException("P01"); }
-    public override void EndMarkedContent() { if (!includeKnownInk) throw new PdfParseException("P01"); }
-    public override void ModifyClippingIntersect(FillingRule rule) { if (!includeKnownInk) throw new PdfParseException("P01"); }
-    protected override void ClipToRectangle(PdfRectangle rectangle, FillingRule rule) => throw new PdfParseException("P01");
-    public override void PaintShading(NameToken name) => throw new PdfParseException("P01");
+    { if (!includeKnownInk || !(name.Data=="Artifact" && propertyName is null && properties is null || PdfPigLayoutReader.SafeMarkedProperties(name,propertyName,properties))) throw new PdfParseException("P01", branch:"R1023"); }
+    public override void EndMarkedContent() { if (!includeKnownInk) throw new PdfParseException("P01", branch:"R1024"); }
+    public override void ModifyClippingIntersect(FillingRule rule) { if (!includeKnownInk) throw new PdfParseException("P01", branch:"R1025"); }
+    protected override void ClipToRectangle(PdfRectangle rectangle, FillingRule rule) => throw new PdfParseException("P01", branch:"R1026");
+    public override void PaintShading(NameToken name) => throw new PdfParseException("P01", branch:"R1027");
     public override void BeginSubpath() { }
     public override PdfPoint? CloseSubpath() => null;
     public override void StrokePath(bool close) { }

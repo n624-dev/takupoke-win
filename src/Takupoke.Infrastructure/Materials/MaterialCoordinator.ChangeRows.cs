@@ -22,18 +22,6 @@ public sealed record ChangePreview(string SourceId, string Digest, int SchoolYea
 
 public sealed partial class MaterialCoordinator
 {
-    private async Task<SourceRecord> ClearStaleRowSkipsAsync(SchoolLease lease, SourceRecord source,
-        int year, CancellationToken token)
-    {
-        if (source.RowSkipConsent is not null &&
-            !source.RowSkipConsent.ValidFor(source, year, XlsxChangeReader.Version))
-        {
-            source = source with { RowSkipConsent = null };
-            await store.WriteAsync(lease, "selection." + source.Kind, source, token);
-        }
-        return source;
-    }
-
     private static bool RowSkipMatches(MaterialAnalysis analysis, SourceRecord source, int year) =>
         source.RowSkipConsent is null ? analysis.RowSkipConsent is null
         : source.RowSkipConsent.ValidFor(source, year, XlsxChangeReader.Version)
@@ -95,9 +83,19 @@ public sealed partial class MaterialCoordinator
                 throw new InvalidDataException("ファイルが更新されました。再取得して内容を確認し直してください。");
             var consent = new ChangeRowSkipConsent(source.Id, source.Digest, schoolYear,
                 XlsxChangeReader.Version, selectedRows.ToArray());
-            var changes = await Task.Run(() => XlsxChangeReader.Parse(content.Bytes, schoolYear,
-                token, source.WeekdayConsent?.Matches(source, schoolYear, XlsxChangeReader.Version) == true,
-                selectedRows.ToHashSet()), token);
+            IReadOnlyList<ScheduleChange> changes;
+            try
+            {
+                changes = await Task.Run(() => XlsxChangeReader.Parse(content.Bytes, schoolYear,
+                    token, source.WeekdayConsent?.Matches(source, schoolYear, XlsxChangeReader.Version) == true,
+                    selectedRows.ToHashSet()), token);
+            }
+            catch (ChangeParseException failure)
+            {
+                await store.SaveChangeFailureAsync(lease, source, new MaterialAttempt(_clock.GetUtcNow(),
+                    failure.Message, true, source.Digest, schoolYear, failure.Code, XlsxChangeReader.Version), token);
+                throw;
+            }
             var analysis = new MaterialAnalysis(source.Id, MaterialKind.Changes, XlsxChangeReader.Version,
                 source.Digest, source.OriginalName, _clock.GetUtcNow(), schoolYear,
                 Changes: changes, RowSkipConsent: consent)

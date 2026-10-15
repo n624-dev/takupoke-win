@@ -19,13 +19,12 @@ public sealed class WindowsRecoveryModels(string root)
         return active is { } value && RecoveryValidator.Fingerprint(value.Bundle) == RecoveryValidator.Fingerprint(OcrBundle) ? active : null;
     }
     private static OnnxJapaneseOcr OpenRuntime(string path) => RecoveryOcrModels.OpenRuntime(path, DictionaryPath);
-    public async Task InstallOcrAsync(Action<long, long>? progress, CancellationToken token)
+    public async Task InstallOcrAsync(Action<long, long>? progress, CancellationToken token, Action<RecoveryInstallProgress>? phase = null)
     {
         if (GC.GetGCMemoryInfo().TotalAvailableMemoryBytes < OcrBundle.MinimumMemory) throw new InvalidDataException("OCRを動かすためのメモリを確保できません。");
         await VerifyDictionary(token);
         using var http = new HttpClient(); http.Timeout = Timeout.InfiniteTimeSpan;
         Task<Stream> Download(string url, CancellationToken cancellation) => http.GetStreamAsync(url, cancellation);
-        progress?.Invoke(0, OcrBundle.Size);
         await _store.InstallAsync(OcrBundle, Download, async (path, cancellation) =>
         {
             await VerifyDictionary(cancellation);
@@ -34,8 +33,11 @@ public sealed class WindowsRecoveryModels(string root)
                 using var runtime = OpenRuntime(path);
                 cancellation.ThrowIfCancellationRequested(); runtime.SmokeTest(cancellation);
             }, cancellation);
-        }, token);
-        progress?.Invoke(OcrBundle.Size, OcrBundle.Size);
+        }, token, update =>
+        {
+            if (update.Phase == RecoveryInstallPhase.Download) progress?.Invoke(update.DownloadedBytes, update.TotalBytes);
+            phase?.Invoke(update);
+        });
     }
     public Task DeleteOcrAsync(CancellationToken token) => _store.DeleteAsync("windowsOcr", token);
     public async Task<OnnxJapaneseOcr> OpenOcrAsync(CancellationToken token)

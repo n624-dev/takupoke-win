@@ -1,7 +1,7 @@
 # PDF埋め込みフォント・可視文字・原本の描画照合
 
 対応関係・宣言名・実行方法のSHA-256：
-`c458f36797f94bb956c6652c44050bb5c2a1ddb08463cde46c345330b10d315e`
+`6760261c1f916a39bd317bb6f9f31dc5c34323287980bdddd15dcb039b25124b`
 
 環境：Linux／Windows .NET。Windows描画は対応workflowで検証
 
@@ -81,6 +81,8 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `InsufficientBackgroundContrastAndSemanticReplacementAreStillRefused`
 - `PartialOriginalRectangleClipRequiresReviewInsteadOfPretendingFullVisibility`
 - `EntirelyCoveredOriginalGlyphIsNotExposedAsVisibleSource`
-- `OrdinaryImportReusesOnlyCompletelyProvenVisibleNativeText`
+- `OrdinaryAcceptanceAndCertifiedVisibleInkHaveIndependentContracts`
 - `BoundedRecoveryCannotOverrideUnprovedVisibility`
 - `MissingUnicodeIsNotFilledByThisExplicitUnicodeEntry`
+- `OverprintCertificationTracksBothChannelsAndGraphicsStack`
+- `BackgroundCannotCertifyAHiddenEarlierGridEvenWhenAllTextIsDisjoint`

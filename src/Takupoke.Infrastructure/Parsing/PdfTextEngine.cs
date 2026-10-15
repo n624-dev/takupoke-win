@@ -10,7 +10,7 @@ public readonly record struct PdfMatrix(double A = 1, double B = 0, double C = 0
         next.A * Tx + next.C * Ty + next.Tx, next.B * Tx + next.D * Ty + next.Ty);
     public PdfMatrix Translate(double x, double y) => this with { Tx = Tx + A * x + C * y, Ty = Ty + B * x + D * y };
     public static PdfMatrix From(double[] numbers) => numbers.Length == 6 && numbers.All(double.IsFinite)
-        ? new(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5]) : throw new PdfParseException("P01");
+        ? new(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5]) : throw new PdfParseException("P01", branch:"R1188");
 }
 public sealed record PdfFont(PdfUnicodeMap Map, IReadOnlyDictionary<int, double> Widths, double DefaultWidth, double Ascent, double Descent)
 {
@@ -19,7 +19,7 @@ public sealed record PdfFont(PdfUnicodeMap Map, IReadOnlyDictionary<int, double>
     public PdfFont Validate()
     {
         if (Map.CodeBytes is not 1 and not 2 || Map.Values.Count is < 1 or > 65536 || !new[] { DefaultWidth, Ascent, Descent }.All(double.IsFinite)
-            || DefaultWidth < 0 || Ascent <= Descent || Widths.Values.Any(w => !double.IsFinite(w) || w < 0)) throw new PdfParseException("P01");
+            || DefaultWidth < 0 || Ascent <= Descent || Widths.Values.Any(w => !double.IsFinite(w) || w < 0)) throw new PdfParseException("P01", branch:"R1189");
         return this;
     }
 }
@@ -46,18 +46,18 @@ public sealed class PdfTextEngine(CancellationToken cancellationToken = default,
     public static bool Supports(string operation) => Counts.ContainsKey(operation);
     public void Operation(string operation, params double[] numbers)
     {
-        if (++_operations > 1_000_000) throw new PdfParseException("limit"); cancellationToken.ThrowIfCancellationRequested();
-        if (!Counts.TryGetValue(operation, out var count) || numbers.Length != count || !numbers.All(double.IsFinite)) throw new PdfParseException("P01");
+        if (++_operations > 1_000_000) throw new PdfParseException("limit", branch:"R1190"); cancellationToken.ThrowIfCancellationRequested();
+        if (!Counts.TryGetValue(operation, out var count) || numbers.Length != count || !numbers.All(double.IsFinite)) throw new PdfParseException("P01", branch:"R1191");
         switch (operation)
         {
-            case "q": if (_stack.Count >= 64) throw new PdfParseException("limit"); _stack.Push(_state); break;
-            case "Q": if (!_stack.TryPop(out var saved)) throw new PdfParseException("P01"); _state = saved; _line++; break;
+            case "q": if (_stack.Count >= 64) throw new PdfParseException("limit", branch:"R1192"); _stack.Push(_state); break;
+            case "Q": if (!_stack.TryPop(out var saved)) throw new PdfParseException("P01", branch:"R1193"); _state = saved; _line++; break;
             case "cm": _state = _state with { Ctm = PdfMatrix.From(numbers).FollowedBy(_state.Ctm) }; _line++; break;
-            case "BT": if (_inText) throw new PdfParseException("P01"); _inText = true; _matrix = PdfMatrix.Identity; _lineMatrix = _matrix; _line++; break;
-            case "ET": if (!_inText) throw new PdfParseException("P01"); _inText = false; break;
-            case "Tm": if (!_inText) throw new PdfParseException("P01"); _matrix = PdfMatrix.From(numbers); _lineMatrix = _matrix; _line++; break;
+            case "BT": if (_inText) throw new PdfParseException("P01", branch:"R1194"); _inText = true; _matrix = PdfMatrix.Identity; _lineMatrix = _matrix; _line++; break;
+            case "ET": if (!_inText) throw new PdfParseException("P01", branch:"R1195"); _inText = false; break;
+            case "Tm": if (!_inText) throw new PdfParseException("P01", branch:"R1196"); _matrix = PdfMatrix.From(numbers); _lineMatrix = _matrix; _line++; break;
             case "Td": case "TD": case "T*":
-                if (!_inText) throw new PdfParseException("P01");
+                if (!_inText) throw new PdfParseException("P01", branch:"R1197");
                 if (operation == "TD") _state = _state with { Leading = -numbers[1] };
                 _lineMatrix = _lineMatrix.Translate(operation == "T*" ? 0 : numbers[0], operation == "T*" ? -_state.Leading : numbers[1]); _matrix = _lineMatrix; _line++; break;
             case "Tc": _state = _state with { Spacing = numbers[0] }; break;
@@ -65,33 +65,33 @@ public sealed class PdfTextEngine(CancellationToken cancellationToken = default,
             case "Tz": _state = _state with { Scale = numbers[0] / 100 }; break;
             case "TL": _state = _state with { Leading = numbers[0] }; break;
             case "Ts": _state = _state with { Rise = numbers[0] }; _line++; break;
-            case "Tr": if (numbers[0] is not 0 and not 1 and not 2) throw new PdfParseException("P01"); break;
+            case "Tr": if (numbers[0] is not 0 and not 1 and not 2) throw new PdfParseException("P01", branch:"R1198"); break;
         }
     }
     public void SetFont(PdfFont font, double size)
-    { if (!double.IsFinite(size) || size <= 0) throw new PdfParseException("P01"); _state = _state with { Font = font.Validate(), DeferredFont = null, Size = size }; }
+    { if (!double.IsFinite(size) || size <= 0) throw new PdfParseException("P01", branch:"R1199"); _state = _state with { Font = font.Validate(), DeferredFont = null, Size = size }; }
     // Selecting an unused font need not supply text mapping. Every nonempty
     // showing operation still resolves and validates that exact selected font.
     internal void SelectFont(Lazy<PdfFont> font, double size)
-    { if (!double.IsFinite(size) || size <= 0) throw new PdfParseException("P01"); _state = _state with { Font = null, DeferredFont = font, Size = size }; }
+    { if (!double.IsFinite(size) || size <= 0) throw new PdfParseException("P01", branch:"R1200"); _state = _state with { Font = null, DeferredFont = font, Size = size }; }
     public void Adjust(double amount)
-    { if (!_inText || !double.IsFinite(amount)) throw new PdfParseException("P01"); _matrix = _matrix.Translate(-amount / 1000 * _state.Size * _state.Scale, 0); }
+    { if (!_inText || !double.IsFinite(amount)) throw new PdfParseException("P01", branch:"R1201"); _matrix = _matrix.Translate(-amount / 1000 * _state.Size * _state.Scale, 0); }
     public void Show(ReadOnlySpan<byte> bytes)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        if (!_inText || _state.Font is null && _state.DeferredFont is null || _state.Size <= 0 || _state.Scale <= 0) throw new PdfParseException("P01");
+        if (!_inText || _state.Font is null && _state.DeferredFont is null || _state.Size <= 0 || _state.Scale <= 0) throw new PdfParseException("P01", branch:"R1202");
         if (bytes.IsEmpty) return;
         var font = _state.Font ?? _state.DeferredFont!.Value;
-        if (bytes.Length % font.Map.CodeBytes != 0 || _order + bytes.Length / font.Map.CodeBytes > 100000) throw new PdfParseException("P01");
+        if (bytes.Length % font.Map.CodeBytes != 0 || _order + bytes.Length / font.Map.CodeBytes > 100000) throw new PdfParseException("P01", branch:"R1203");
         for (var offset = 0; offset < bytes.Length; offset += font.Map.CodeBytes)
         {
             cancellationToken.ThrowIfCancellationRequested();
             var cid = font.Map.CodeBytes == 1 ? bytes[offset] : bytes[offset] * 256 + bytes[offset + 1];
-            if (!font.Map.Values.TryGetValue(cid, out var text) || text.Length == 0 || text.Any(char.IsControl) || _units + text.Length > 100000) throw new PdfParseException("P01");
+            if (!font.Map.Values.TryGetValue(cid, out var text) || text.Length == 0 || text.Any(char.IsControl) || _units + text.Length > 100000) throw new PdfParseException("P01", branch:"R1204");
             var width = font.Widths.GetValueOrDefault(cid, font.DefaultWidth) / 1000 * _state.Size;
             var total = _matrix.FollowedBy(_state.Ctm); var bottom = font.Descent / 1000 * _state.Size + _state.Rise; var top = font.Ascent / 1000 * _state.Size + _state.Rise;
             var points = new[] { total.Point(0, bottom), total.Point(width * _state.Scale, bottom), total.Point(0, top), total.Point(width * _state.Scale, top) };
-            if (points.Any(p => !double.IsFinite(p.X) || !double.IsFinite(p.Y) || Math.Abs(p.X) >= 10_000_000 || Math.Abs(p.Y) >= 10_000_000)) throw new PdfParseException("P01");
+            if (points.Any(p => !double.IsFinite(p.X) || !double.IsFinite(p.Y) || Math.Abs(p.X) >= 10_000_000 || Math.Abs(p.Y) >= 10_000_000)) throw new PdfParseException("P01", branch:"R1205");
             var x = points.Min(p => p.X); var y = points.Min(p => p.Y); var right = points.Max(p => p.X); var upper = points.Max(p => p.Y);
             var validGeometry = width > 0 && right > x && upper > y;
             var evidence = font.RecoveryEvidence?.Invoke(cid);
@@ -105,7 +105,7 @@ public sealed class PdfTextEngine(CancellationToken cancellationToken = default,
             else RecoveryComplete = false;
             if (!string.IsNullOrWhiteSpace(text))
             {
-                if (!validGeometry) throw new PdfParseException("P01");
+                if (!validGeometry) throw new PdfParseException("P01", branch:"R1206");
                 _glyphs.Add(new(text, x, y, right - x, upper - y, _line, _order) { FontEvidence = evidence });
             }
             _drawn.Append(text); _units += text.Length; _order++;
@@ -117,7 +117,7 @@ public sealed class PdfTextEngine(CancellationToken cancellationToken = default,
     {
         cancellationToken.ThrowIfCancellationRequested();
         if (!traceForRecovery || _inText || _stack.Count != 0 || _glyphs.Count == 0 || !RecoveryComplete || native.Count != _drawingTrace.Count)
-            throw new PdfParseException("P01");
+            throw new PdfParseException("P01", branch:"R1207");
         static bool Same(UglyToad.PdfPig.Core.PdfPoint a, UglyToad.PdfPig.Core.PdfPoint b) =>
             double.IsFinite(a.X) && double.IsFinite(a.Y) && double.IsFinite(b.X) && double.IsFinite(b.Y)
             && Math.Abs(a.X-b.X) <= 1e-6 && Math.Abs(a.Y-b.Y) <= 1e-6;
@@ -129,12 +129,12 @@ public sealed class PdfTextEngine(CancellationToken cancellationToken = default,
                 || !drawn.UnicodeKnown && !string.IsNullOrWhiteSpace(drawn.Text) && !actual.Drawable
                 || (drawn.UnicodeKnown || actual.UnicodeKnown) && actual.Text != drawn.Text
                 || !Same(actual.Origin,drawn.Origin) || !Same(actual.Horizontal,drawn.Horizontal) || !Same(actual.Vertical,drawn.Vertical))
-                throw new PdfParseException("P01");
+                throw new PdfParseException("P01", branch:"R1208");
             if(!drawn.UnicodeKnown && actual.InkBounds is {} ink)
             {
                 var glyph=_recoveryGlyphs[index];
                 var corners=new[]{ink.BottomLeft,ink.TopLeft,ink.TopRight,ink.BottomRight};
-                if(corners.Any(p=>!double.IsFinite(p.X)||!double.IsFinite(p.Y)))throw new PdfParseException("P01");
+                if(corners.Any(p=>!double.IsFinite(p.X)||!double.IsFinite(p.Y)))throw new PdfParseException("P01", branch:"R1209");
                 var left=Math.Min(glyph.X,corners.Min(p=>p.X));var bottom=Math.Min(glyph.Y,corners.Min(p=>p.Y));
                 var right=Math.Max(glyph.X+glyph.Width,corners.Max(p=>p.X));var top=Math.Max(glyph.Y+glyph.Height,corners.Max(p=>p.Y));
                 _recoveryGlyphs[index]=glyph with { X=left,Y=bottom,Width=right-left,Height=top-bottom };
@@ -145,11 +145,11 @@ public sealed class PdfTextEngine(CancellationToken cancellationToken = default,
     public IReadOnlyList<PdfGlyph> Finish(string expectedText)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        if (_inText || _stack.Count != 0 || _glyphs.Count == 0 || expectedText.Length > 100000) throw new PdfParseException("P01");
+        if (_inText || _stack.Count != 0 || _glyphs.Count == 0 || expectedText.Length > 100000) throw new PdfParseException("P01", branch:"R1210");
         static Dictionary<int, int> Content(string text) => text.Normalize(NormalizationForm.FormC).EnumerateRunes().Where(r => !Rune.IsWhiteSpace(r))
             .GroupBy(r => r.Value).ToDictionary(g => g.Key, g => g.Count());
         var drawn = Content(_drawn.ToString()); var expected = Content(expectedText);
-        if (drawn.Count != expected.Count || drawn.Any(p => expected.GetValueOrDefault(p.Key) != p.Value)) throw new PdfParseException("P01");
+        if (drawn.Count != expected.Count || drawn.Any(p => expected.GetValueOrDefault(p.Key) != p.Value)) throw new PdfParseException("P01", branch:"R1211");
         return _glyphs.ToArray();
     }
 }

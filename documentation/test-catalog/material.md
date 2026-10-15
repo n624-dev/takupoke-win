@@ -1,7 +1,7 @@
 # 原本取得・更新・保存・監視
 
 対応関係・宣言名・実行方法のSHA-256：
-`5b8f03dc0affecb833cc94388bb26103724f571e97cfa230ecc33603908882d4`
+`fb4c4708283c53be7d968781a523145a826c77d6ae939a41a8e9e7e204912466`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -15,6 +15,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - [src/Takupoke.Infrastructure/Materials/FileSourceReader.cs](../../src/Takupoke.Infrastructure/Materials/FileSourceReader.cs)
 - [src/Takupoke.Infrastructure/Materials/MaterialCoordinator.ChangeRows.cs](../../src/Takupoke.Infrastructure/Materials/MaterialCoordinator.ChangeRows.cs)
 - [src/Takupoke.Infrastructure/Materials/MaterialCoordinator.cs](../../src/Takupoke.Infrastructure/Materials/MaterialCoordinator.cs)
+- [src/Takupoke.Infrastructure/Materials/MaterialProjection.cs](../../src/Takupoke.Infrastructure/Materials/MaterialProjection.cs)
 - [src/Takupoke.Infrastructure/Materials/SourceWatcher.cs](../../src/Takupoke.Infrastructure/Materials/SourceWatcher.cs)
 - [src/Takupoke.Win/Platform/WindowsFileIdentity.cs](../../src/Takupoke.Win/Platform/WindowsFileIdentity.cs)
 - [tests/Takupoke.Integration.Tests/AppViewModelTestPlatform.cs](../../tests/Takupoke.Integration.Tests/AppViewModelTestPlatform.cs)
@@ -36,12 +37,14 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 - `IndependentRowAndWeekdayApprovalsAreAtomicAndSurviveRefreshReparseAndRestart`
 - `ExplicitApprovalPersistsWithAnalysisAndSurvivesRefreshReparseAndRestart`
-- `ContentChangeReselectionAndYearChangesInvalidateWithoutResurrection`
-- `OldParserConsentIsClearedEvenIfTheContentIsUnchanged`
+- `ContentAndOriginalChangesInvalidateWhileFailedYearReparsePreservesPreviousDecision`
+- `OldParserConsentIsRevalidatedAndCommittedWithTheCurrentAnalysis`
 - `StalePreviewMissingSelectionCancellationAndReplacementCannotSave`
 - `ExcludingEveryChangeRefusesAndPreservesLastGood`
 - `StorageFailureRollsBackConsentAnalysisAndAttemptTogether`
 - `PreviousPayloadsWithoutOptionalConsentRemainReadable`
+- `FailedCurrentRevalidationPreservesOlderConfirmationAndLastGoodResult`
+- `ReselectingAnotherFileWithIdenticalBytesCannotInheritTheDecision`
 
 ## [tests/Takupoke.Integration.Tests/FileReadResponsivenessTests.cs](../../tests/Takupoke.Integration.Tests/FileReadResponsivenessTests.cs)
 

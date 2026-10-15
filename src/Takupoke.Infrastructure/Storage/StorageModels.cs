@@ -19,6 +19,10 @@ public sealed record MaterialAnalysis(string OriginalId, MaterialKind Kind, int 
     IReadOnlyList<ScheduleChange>? Changes = null, SpecialAnalysis? Special = null, RecoveryAudit? Recovery = null, ChangeRowSkipConsent? RowSkipConsent = null)
 {
     public bool DateDerivedWeekdays { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
+    public bool OrdinaryPdf { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
+    public int ClassAssignmentVersion { get; init; }
 }
 public sealed record RecoveryAudit(RecoveryDocument Document, RecoveryResult Result, RecoveryAcceptance Acceptance)
 {
@@ -33,7 +37,7 @@ public sealed record RecoveryAudit(RecoveryDocument Document, RecoveryResult Res
 public sealed record RecoveryPreview(string SourceId, SchoolLease Lease, RecoveryDocument Document, RecoveryResult Result, DateTimeOffset CreatedAt);
 public sealed record RecoveryManualSession(string SourceId, SchoolLease Lease, RecoveryManualPlan Plan, DateTimeOffset CreatedAt);
 public sealed record MaterialAttempt(DateTimeOffset At, string? Failure, bool Parsing, string? SourceDigest = null,
-    int? SchoolYear = null, ChangeErrorCode? ChangeError = null, int? ParserVersion = null, int? Page = null, PdfFailurePosition? Cell = null, bool RecoveryPending = false);
+    int? SchoolYear = null, ChangeErrorCode? ChangeError = null, int? ParserVersion = null, int? Page = null, PdfFailurePosition? Cell = null, bool RecoveryPending = false, string? Branch = null);
 public sealed record RetentionMarker(int SchemaVersion, int SchoolYear, int Half);
 public interface IKeyProtector
 {

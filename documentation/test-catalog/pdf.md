@@ -1,7 +1,7 @@
 # Strict PDF・文字・罫線・試験・返却
 
 対応関係・宣言名・実行方法のSHA-256：
-`cf09e700f45771ff2d0698b8ed3255e41c0d2df76b85c9073ab00c71b6ccb54c`
+`c243b363cfb0e3b19547ab4b54c8a4a15fe40ee3f8e230c651dd98dcd5d140ab`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -17,6 +17,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - [src/Takupoke.Infrastructure/Parsing/PdfLayout.cs](../../src/Takupoke.Infrastructure/Parsing/PdfLayout.cs)
 - [src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs](../../src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs)
 - [src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs](../../src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs)
+- [src/Takupoke.Infrastructure/Parsing/PdfReturnGeometryDiagnostic.cs](../../src/Takupoke.Infrastructure/Parsing/PdfReturnGeometryDiagnostic.cs)
 - [src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs](../../src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs)
 - [src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs](../../src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs)
 - [src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs](../../src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs)
@@ -100,6 +101,9 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `ReaderRejectsMissingMappingAndFormObjects`
 - `ReaderCaptureKeepsCompleteLayoutAndResetsForAnotherAttempt`
 - `ImageAndMissingRulesHaveRecoverableClassification`
+- `OrdinaryAcceptanceDoesNotGrantCertifiedRecoveryCompleteness`
+- `OrdinaryTimetableAcceptsOmittedTrailingFieldsWithoutCertifyingRoles`
+- `DistinctRejectionsRetainStableSitesWithoutSourceText`
 
 ## [tests/Takupoke.Integration.Tests/PdfTrueTypeRecoveryMapTests.cs](../../tests/Takupoke.Integration.Tests/PdfTrueTypeRecoveryMapTests.cs)
 
@@ -132,6 +136,8 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `InsufficientBackgroundContrastAndSemanticReplacementAreStillRefused`
 - `PartialOriginalRectangleClipRequiresReviewInsteadOfPretendingFullVisibility`
 - `EntirelyCoveredOriginalGlyphIsNotExposedAsVisibleSource`
-- `OrdinaryImportReusesOnlyCompletelyProvenVisibleNativeText`
+- `OrdinaryAcceptanceAndCertifiedVisibleInkHaveIndependentContracts`
 - `BoundedRecoveryCannotOverrideUnprovedVisibility`
 - `MissingUnicodeIsNotFilledByThisExplicitUnicodeEntry`
+- `OverprintCertificationTracksBothChannelsAndGraphicsStack`
+- `BackgroundCannotCertifyAHiddenEarlierGridEvenWhenAllTextIsDisjoint`

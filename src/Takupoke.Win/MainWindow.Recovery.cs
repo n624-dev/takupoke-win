@@ -265,6 +265,7 @@ public sealed partial class MainWindow
                 var lesson = cell.Lessons[index];
                 var corrected = document.Corrections.Where(c => c.CellId == cell.CellId && c.LessonIndex == index).ToArray();
                 var lessonPanel = Panel(Text(lesson.Subject + " / " + (lesson.TeacherEmpty ? "教員記載なし" : lesson.Teacher) + " / " + (lesson.RoomEmpty ? "教室記載なし" : lesson.Room)));
+                lessonPanel.Children.Add(DataField("保存先クラス", string.Join("・", lesson.DestinationClasses.Select(ClassSelection.Display))));
                 foreach (var role in lesson.CodeReviewRoles)
                 {
                     var value = role switch { RecoveryFieldRole.Subject => lesson.Subject, RecoveryFieldRole.Teacher => lesson.Teacher, _ => lesson.Room };
@@ -337,7 +338,7 @@ public sealed partial class MainWindow
             download.IsEnabled &= _model.Preferences.UseAiFeatures; ocrActions.Children.Add(download);
         }
         if (_model.OcrModelInstalled) ocrActions.Children.Add(OperationButton("OCRモデルを削除", _model.DeleteOcrModelAsync, "delete-ocr-model"));
-        Add(Card(Panel(SettingsSectionTitle("日本語・英数字OCR"), Text(_model.OcrModelReady ? "確認済みモデルを保存しています。" : _model.OcrModelInstalled ? "改善モデルへ更新できます。更新に失敗した場合は保存済みモデルを保持します。" : "画像PDF用のモデルは未ダウンロードです。"), Text($"約{Math.Ceiling(WindowsRecoveryModels.OcrBundle.Size / 1048576d)} MB · {WindowsRecoveryModels.OcrBundle.License}"),
+        Add(Card(Panel(SettingsSectionTitle("日本語・英数字OCR"), Text(_model.OcrModelReady ? "確認済みモデルを保存しています。" : _model.OcrModelInstalled ? "改善モデルへ更新できます。更新に失敗した場合は保存済みモデルを保持します。" : "画像PDF用のモデルは未ダウンロードです。"), Text($"約{WindowsRecoveryModels.OcrBundle.Size / 1048576d:F1} MiB · {WindowsRecoveryModels.OcrBundle.License}"),
             ocrActions)));
         if (_model.FoundryModel is { } installed)
             Add(Card(Panel(SettingsSectionTitle("保存した端末内AIモデル"), Text(installed.ModelId),

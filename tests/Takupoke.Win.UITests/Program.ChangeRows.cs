@@ -39,6 +39,8 @@ internal static partial class Program
             "Choosing rows alone does not save an analysis.");
         Require(ByName("除外して読み込む").Current.IsEnabled,
             "The final confirmation appears before any analysis is saved.");
+        Require(Checked(WaitElement("change-skip-row-3")) && Checked(WaitElement("change-skip-row-4")),
+            "The confirmation retains the original preview and selected rows until acceptance.");
         Invoke(ByName("除外して読み込む"));
         Wait(() => Find("change-skipped-count")?.Current.Name.Contains("103行を除外中") == true,
             "The material details show the accepted exclusion count.");

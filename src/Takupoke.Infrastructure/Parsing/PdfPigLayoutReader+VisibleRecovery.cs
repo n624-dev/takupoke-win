@@ -5,12 +5,13 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class PdfPigLayoutReader
 {
-    // Ordinary import can reuse an independently verified native drawing
+    // Ordinary import follows the template acceptance contract independently of
+    // recovery completeness. It can also reuse an independently verified native drawing
     // without OCR. Any unresolved visible source keeps the recovery/review
     // path; this entry can never silently adopt a flagged glyph.
     internal static IReadOnlyList<PdfPageLayout> ReadForImport(byte[] bytes,MaterialKind kind,CancellationToken token=default)
     {
-        try { return Read(bytes,kind,token); }
+        try { return ReadCore(bytes, kind, token, null, null, ordinary:true); }
         catch(PdfParseException original) when(RecoveryPolicy.Eligible(kind,original.Stage))
         {
             var capture=new RecoveryReadCapture();
@@ -39,7 +40,7 @@ public static partial class PdfPigLayoutReader
         foreach(var g in glyphs.OrderBy(g=>g.X))
         {
             token.ThrowIfCancellationRequested();
-            if(g.SourceOrder is not int order || !textOperations.TryGetValue(order,out var drawnAt) || !bareInk.TryGetValue(order,out var bare))throw new PdfParseException("P01");
+            if(g.SourceOrder is not int order || !textOperations.TryGetValue(order,out var drawnAt) || !bareInk.TryGetValue(order,out var bare))throw new PdfParseException("P01", branch:"R1058");
             while(next<ordered.Length && ordered[next].Box.Left<g.X+g.Width)active.Add(ordered[next++]);
             active.RemoveAll(b=>b.Box.Right<=g.X);
             PdfBox? intersecting=null;
@@ -48,7 +49,7 @@ public static partial class PdfPigLayoutReader
             // expose covered text as a recovered field or a review candidate.
             foreach (var paint in active)
             {
-                if (++work>1_000_000) throw new PdfParseException("limit");
+                if (++work>1_000_000) throw new PdfParseException("limit", branch:"R1059");
                 if(work%128==0)token.ThrowIfCancellationRequested();
                 if (paint.BackgroundColor is not null && paint.Operation>drawnAt && paint.Box.Left<=g.X && paint.Box.Top<=g.Y &&
                     paint.Box.Right>=g.X+g.Width && paint.Box.Bottom>=g.Y+g.Height) { hidden.Add(order);break; }
@@ -57,7 +58,7 @@ public static partial class PdfPigLayoutReader
             foreach(var paint in active)
             {
                 var b=paint.Box;
-                if(++work>1_000_000)throw new PdfParseException("limit");
+                if(++work>1_000_000)throw new PdfParseException("limit", branch:"R1060");
                 if(work%128==0)token.ThrowIfCancellationRequested();
                 if(b.Left<g.X+g.Width && g.X<b.Right && b.Top<g.Y+g.Height && g.Y<b.Bottom)
                 {
@@ -97,7 +98,7 @@ public static partial class PdfPigLayoutReader
         catch (PdfParseException failure) when (RecoveryPolicy.Eligible(kind,failure.Stage)) { }
         if (alternate.Pages.Count==0) return;
         if (capture.Pages.Count==0) capture.Begin(alternate.Pages.Count);
-        if (capture.Pages.Count!=alternate.Pages.Count) throw new PdfParseException("P01");
+        if (capture.Pages.Count!=alternate.Pages.Count) throw new PdfParseException("P01", branch:"R1061");
         foreach (var page in alternate.Pages)
         {
             token.ThrowIfCancellationRequested();

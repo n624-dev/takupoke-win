@@ -3,6 +3,9 @@ using System.Text.RegularExpressions;
 using Takupoke.Infrastructure.Storage;
 
 namespace Takupoke.Infrastructure.Recovery;
+public enum RecoveryInstallPhase { Download, Verify, Initialize, CachedVerification, Complete }
+public sealed record RecoveryInstallProgress(RecoveryInstallPhase Phase, long DownloadedBytes, long TotalBytes);
+
 public sealed record RecoveryArtifact(string Path, string Url, long Size, string Sha256);
 public sealed record RecoveryModelBundle(string Id, string Version, string Runtime, string MinimumOs, long MinimumMemory, string License, bool Validated, IReadOnlyList<RecoveryArtifact> Artifacts)
 {
@@ -16,12 +19,20 @@ public sealed class RecoveryModelBundleStore(string root, Action<string>? remove
     private readonly SemaphoreSlim _gate = new(1, 1);
     private static string DirectoryName(RecoveryModelBundle bundle) => bundle.Runtime + "-" + Regex.Replace(bundle.Id, "[^a-zA-Z0-9._-]", "_") + "-" + bundle.Version + "-" + Takupoke.Core.Recovery.RecoveryValidator.Fingerprint(bundle);
     public async Task<string> InstallAsync(RecoveryModelBundle bundle, Func<string, CancellationToken, Task<Stream>> download,
-        Func<string, CancellationToken, Task> smoke, CancellationToken token = default)
+        Func<string, CancellationToken, Task> smoke, CancellationToken token = default,
+        Action<RecoveryInstallProgress>? progress = null)
     {
         if (!bundle.Valid) throw new InvalidDataException("モデルManifestを確認できません。");
         await _gate.WaitAsync(token);
         var staging = Path.Combine(root, "staging-" + Guid.NewGuid().ToString("N"));
         var target = Path.Combine(root, DirectoryName(bundle)); var committed = false; var owns = false;
+        long downloaded = 0;
+        var lastReport = System.Diagnostics.Stopwatch.StartNew();
+        void Report(RecoveryInstallPhase phase, bool force = true)
+        {
+            if (!force && lastReport.ElapsedMilliseconds < 100) return;
+            progress?.Invoke(new(phase, downloaded, bundle.Size)); lastReport.Restart();
+        }
         try
         {
             Directory.CreateDirectory(root); var pointer = Path.Combine(root, "active." + bundle.Runtime + ".json");
@@ -29,21 +40,25 @@ public sealed class RecoveryModelBundleStore(string root, Action<string>? remove
             if (old is not null && !old.Valid) throw new InvalidDataException("既存モデルManifestを確認できません。");
             if (!Directory.Exists(target))
             {
-                Directory.CreateDirectory(staging);
+                Directory.CreateDirectory(staging); Report(RecoveryInstallPhase.Download);
                 foreach (var artifact in bundle.Artifacts)
                 {
-                    token.ThrowIfCancellationRequested(); var file = Path.Combine(staging, artifact.Path.Replace('/', Path.DirectorySeparatorChar)); Directory.CreateDirectory(Path.GetDirectoryName(file)!);
+                    token.ThrowIfCancellationRequested(); Report(RecoveryInstallPhase.Download); var file = Path.Combine(staging, artifact.Path.Replace('/', Path.DirectorySeparatorChar)); Directory.CreateDirectory(Path.GetDirectoryName(file)!);
                     await using var input = await download(artifact.Url, token); await using var output = new FileStream(file, FileMode.CreateNew, FileAccess.Write, FileShare.None, 65536, FileOptions.Asynchronous);
                     using var hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256); var buffer = new byte[65536]; long size = 0; int n;
-                    while ((n = await input.ReadAsync(buffer, token)) > 0) { size += n; if (size > artifact.Size) throw new InvalidDataException("モデルサイズが一致しません。"); hash.AppendData(buffer, 0, n); await output.WriteAsync(buffer.AsMemory(0, n), token); }
+                    while ((n = await input.ReadAsync(buffer, token)) > 0) { size += n; if (size > artifact.Size) throw new InvalidDataException("モデルサイズが一致しません。"); hash.AppendData(buffer, 0, n); await output.WriteAsync(buffer.AsMemory(0, n), token); downloaded += n; Report(RecoveryInstallPhase.Download, false); }
+                    Report(RecoveryInstallPhase.Download);
+                    Report(RecoveryInstallPhase.Verify);
                     await output.FlushAsync(token); output.Flush(true);
                     if (size != artifact.Size || Convert.ToHexStringLower(hash.GetHashAndReset()) != artifact.Sha256) throw new InvalidDataException("モデルSHA-256が一致しません。");
                 }
+                Report(RecoveryInstallPhase.Initialize);
                 await smoke(staging, token); token.ThrowIfCancellationRequested(); Directory.Move(staging, target); owns = true;
             }
-            else { if (!await VerifyAsync(bundle, target, token)) throw new InvalidDataException("保存モデルを確認できません。"); await smoke(target, token); }
+            else { Report(RecoveryInstallPhase.CachedVerification); if (!await VerifyAsync(bundle, target, token)) throw new InvalidDataException("保存モデルを確認できません。"); Report(RecoveryInstallPhase.Initialize); await smoke(target, token); }
             token.ThrowIfCancellationRequested(); await DataCodec.AtomicWriteAsync(pointer, DataCodec.Encode(bundle), token); committed = true;
             if (old is not null) { var oldPath = Path.Combine(root, DirectoryName(old)); if (oldPath != target) try { Directory.Delete(oldPath, true); } catch (IOException) { } }
+            Report(RecoveryInstallPhase.Complete);
             return target;
         }
         finally { try { if (Directory.Exists(staging)) Directory.Delete(staging, true); if (owns && !committed && Directory.Exists(target)) Directory.Delete(target, true); } finally { _gate.Release(); } }

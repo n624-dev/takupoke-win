@@ -19,6 +19,8 @@ PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCR�
 
 [「AI・OCRを使用する」設定](documentation/ai-settings.md)は初期OFFで、OFF時は従来の厳格な解析のみを使用します。ON時も厳格な解析を優先し、失敗した資料だけ復旧します。時間割変更XLSXの曜日不一致では、[日付からの曜日補正](documentation/weekday-correction.md)を明示承認でき、内容が更新されるまで同じ原本に適用します。
 
+[iOS解析変更への追従内容](documentation/ios-followup-20261016.md)には、通常解析と復旧検証の分離、P/R診断、返却表・1年生所属、XLSX確認保持、モデル取得の実進捗を記録しています。
+
 ## Windowsへの導入（ビルド不要）
 
 [開発確認版0.1.0-dev.10442のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10442)からSetup.exeを取得してください。GitHubでは通常Release・Latestとして公開しています。全機能の確認を終えた正式版ではありません。mainのXLSX行除外・同一行の一括除外と、PDF原文字の描画互換・原画像確認・本文訂正・注記表示を含みます。[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38728635572)全8ジョブ、x64の6導入状態で各989～990 UI項目が通過し、公開6ファイルとZIP内の全同梱ファイルを照合済みです。[統合・検証](documentation/main-integration-20261015.md)・[配布記録](research-results/main-integration-20261015/installer-release-receipt.json)。

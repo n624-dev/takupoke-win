@@ -169,12 +169,16 @@ public sealed class PdfVisibleUnicodeRecoveryTests
     }
 
     [Fact]
-    public void OrdinaryImportReusesOnlyCompletelyProvenVisibleNativeText()
+    public void OrdinaryAcceptanceAndCertifiedVisibleInkHaveIndependentContracts()
     {
         var bytes=Pdf(".1 w 2 Tr");
         Assert.Throws<PdfParseException>(()=>PdfPigLayoutReader.Read(bytes,MaterialKind.Timetable));
         Assert.Equal("AB",string.Concat(Assert.Single(PdfPigLayoutReader.ReadForImport(bytes,MaterialKind.Timetable)).Glyphs.Select(g=>g.Text)));
-        Assert.Throws<PdfParseException>(()=>PdfPigLayoutReader.ReadForImport(Pdf(suffix:"0 g 22 90 1 30 re f"),MaterialKind.Timetable));
+        var overlap = Pdf(suffix:"0 g 22 90 1 30 re f");
+        Assert.Single(PdfPigLayoutReader.ReadForImport(overlap, MaterialKind.Timetable));
+        var capture = new RecoveryReadCapture();
+        var certified = Assert.Single(PdfPigLayoutReader.ReadWithBoundedVisibleUnicode(overlap, MaterialKind.Timetable, default, capture));
+        Assert.Contains(certified.Glyphs, glyph => glyph.RequiresVisualReview);
     }
 
     [Theory]
@@ -197,4 +201,39 @@ public sealed class PdfVisibleUnicodeRecoveryTests
         Assert.Throws<PdfParseException>(()=>PdfPigLayoutReader.ReadWithBoundedVisibleUnicode(Pdf(".1 w 2 Tr",known:false),MaterialKind.Timetable,default,capture));
         Assert.False(capture.Complete);
     }
+    [Theory]
+    [InlineData("/Enabled gs /BothOff gs", true)]
+    [InlineData("/Enabled gs /StrokeOff gs /FillOff gs", true)]
+    [InlineData("/Enabled gs /StrokeOff gs", false)]
+    [InlineData("/Enabled gs /FillOff gs", false)]
+    [InlineData("q /Enabled gs Q", true)]
+    [InlineData("/Enabled gs q /BothOff gs Q", false)]
+    public void OverprintCertificationTracksBothChannelsAndGraphicsStack(string prefix, bool allowed)
+    {
+        var bytes = PdfMissingUnicodeRecoveryTests.Pdf(PdfMissingUnicodeRecoveryTests.Font(), prefix:prefix, toUnicode:Map,
+            graphicsStates:"/Enabled << /OP true /op true >> /BothOff << /OP false /op false >> /StrokeOff << /OP false >> /FillOff << /op false >>");
+        var capture = new RecoveryReadCapture();
+        if (allowed)
+        {
+            Assert.Single(PdfPigLayoutReader.ReadWithBoundedVisibleUnicode(bytes, MaterialKind.Timetable, default, capture));
+            Assert.True(capture.Complete);
+        }
+        else
+        {
+            Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.ReadWithBoundedVisibleUnicode(bytes, MaterialKind.Timetable, default, capture));
+            Assert.False(capture.Complete);
+        }
+    }
+
+    [Fact]
+    public void BackgroundCannotCertifyAHiddenEarlierGridEvenWhenAllTextIsDisjoint()
+    {
+        var bytes = Pdf(prefix:"0 g 60 30 1 100 re f 1 g 50 20 20 130 re f 0 g");
+        var capture = new RecoveryReadCapture();
+        var error = Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.ReadWithBoundedVisibleUnicode(bytes, MaterialKind.Timetable, default, capture));
+        Assert.Equal("R1263", error.Branch); Assert.Equal(1, error.Page); Assert.False(capture.Complete);
+        var disjoint = Pdf(prefix:"1 g 50 20 20 130 re f 0 g 60 30 1 100 re f");
+        Assert.Single(PdfPigLayoutReader.ReadWithBoundedVisibleUnicode(disjoint, MaterialKind.Timetable, default, new()));
+    }
+
 }

@@ -99,7 +99,7 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
         using var input = new InMemoryRandomAccessStream();
         using (var writer = new DataWriter(input)) { writer.WriteBytes(bytes); await writer.StoreAsync().AsTask(token); writer.DetachStream(); }
         input.Seek(0); var pdf = await PdfDocument.LoadFromStreamAsync(input).AsTask(token);
-        if (pdf.PageCount is < 1 or > 12) throw new PdfParseException("limit");
+        if (pdf.PageCount is < 1 or > 12) throw new PdfParseException("limit", branch:"R1262");
         var pages = new List<PdfPageLayout>(); var rasters = new List<RecoveryRaster>(); var rasterRules = new List<IReadOnlyList<PdfRule>>(); var ocrPages = new HashSet<int>(); OnnxJapaneseOcr? ocr = null;
         var nativeConfidence = new Dictionary<string, double>(); var completeInk = new List<bool>();
         var scales=new List<(double X,double Y)>();

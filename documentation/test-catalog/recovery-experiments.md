@@ -1,7 +1,7 @@
 # OCR・native PDFの比較用workflowと再現条件
 
 対応関係・宣言名・実行方法のSHA-256：
-`e79214435fc98b6b39c28b0959a972968ab1e66f30bd7b89213c60dcb11b5bed`
+`c5d7e22dde43b0cfb8493031705dc5f13d8597dbf92c94364b24e38d89994fcf`
 
 環境：Linux／Windows .NETと明示したWindows比較workflow
 
@@ -53,9 +53,11 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `InsufficientBackgroundContrastAndSemanticReplacementAreStillRefused`
 - `PartialOriginalRectangleClipRequiresReviewInsteadOfPretendingFullVisibility`
 - `EntirelyCoveredOriginalGlyphIsNotExposedAsVisibleSource`
-- `OrdinaryImportReusesOnlyCompletelyProvenVisibleNativeText`
+- `OrdinaryAcceptanceAndCertifiedVisibleInkHaveIndependentContracts`
 - `BoundedRecoveryCannotOverrideUnprovedVisibility`
 - `MissingUnicodeIsNotFilledByThisExplicitUnicodeEntry`
+- `OverprintCertificationTracksBothChannelsAndGraphicsStack`
+- `BackgroundCannotCertifyAHiddenEarlierGridEvenWhenAllTextIsDisjoint`
 
 ## [tests/Takupoke.Integration.Tests/RecoveryCapturedLayoutTests.cs](../../tests/Takupoke.Integration.Tests/RecoveryCapturedLayoutTests.cs)
 

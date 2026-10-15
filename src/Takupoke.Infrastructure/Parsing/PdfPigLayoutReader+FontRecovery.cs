@@ -25,7 +25,7 @@ public static partial class PdfPigLayoutReader
         catch (PdfParseException failure) when (Takupoke.Core.Recovery.RecoveryPolicy.Eligible(kind,failure.Stage)) { }
         if (recovered.Pages.Count==0) return;
         if (capture.Pages.Count==0) capture.Begin(recovered.Pages.Count);
-        if (capture.Pages.Count!=recovered.Pages.Count) throw new PdfParseException("P01");
+        if (capture.Pages.Count!=recovered.Pages.Count) throw new PdfParseException("P01", branch:"R1044");
         foreach(var page in recovered.Pages)
         {
             token.ThrowIfCancellationRequested();
@@ -49,18 +49,18 @@ public static partial class PdfPigLayoutReader
     {
         if (resource.Length is < 1 or > 128 || resource.Any(char.IsControl)
             || Name(document, font, "Subtype") != "Type0" || Name(document, font, "Encoding") != "Identity-H")
-            throw new PdfParseException("P01");
+            throw new PdfParseException("P01", branch:"R1045");
         var descendants = Resolve<ArrayToken>(document, Get(font, "DescendantFonts"));
-        if (descendants.Length != 1) throw new PdfParseException("P01");
+        if (descendants.Length != 1) throw new PdfParseException("P01", branch:"R1046");
         var metrics = Resolve<DictionaryToken>(document, descendants[0]);
-        if (Name(document, metrics, "Subtype") != "CIDFontType2") throw new PdfParseException("P01");
+        if (Name(document, metrics, "Subtype") != "CIDFontType2") throw new PdfParseException("P01", branch:"R1047");
         var descriptor = Resolve<DictionaryToken>(document, Get(metrics, "FontDescriptor"));
-        if (descriptor.Data.ContainsKey("FontFile") || descriptor.Data.ContainsKey("FontFile3")) throw new PdfParseException("P01");
+        if (descriptor.Data.ContainsKey("FontFile") || descriptor.Data.ContainsKey("FontFile3")) throw new PdfParseException("P01", branch:"R1048");
         var data = DecodeRecoveryStream(document, Resolve<StreamToken>(document, Get(descriptor, "FontFile2")), PdfTrueTypeRecoveryMap.MaximumFontBytes, token);
         var hash = Convert.ToHexStringLower(System.Security.Cryptography.SHA256.HashData(data));
         if (!context.Maps.TryGetValue(hash, out var fontMap))
         {
-            if (data.Length > PdfTrueTypeRecoveryMap.MaximumFontBytes - context.FontBytes) throw new PdfParseException("limit");
+            if (data.Length > PdfTrueTypeRecoveryMap.MaximumFontBytes - context.FontBytes) throw new PdfParseException("limit", branch:"R1049");
             context.FontBytes += data.Length;
             fontMap = PdfTrueTypeRecoveryMap.Read(data, token); context.Maps.Add(hash, fontMap);
             context.SimpleGlyphs.Add(hash,PdfTrueTypeRecoveryMap.SimpleOutlineGlyphs(data,fontMap.GlyphCount,token));
@@ -71,13 +71,13 @@ public static partial class PdfPigLayoutReader
             var value = Get(metrics, "CIDToGIDMap");
             if (DirectObjectFinder.TryGet<NameToken>(value, document.Structure.TokenScanner, out var identity))
             {
-                if (identity.Data != "Identity") throw new PdfParseException("P01");
+                if (identity.Data != "Identity") throw new PdfParseException("P01", branch:"R1050");
                 cidHash = "identity";
             }
             else
             {
                 cidMap = DecodeRecoveryStream(document, Resolve<StreamToken>(document, value), 131072, token);
-                if (cidMap.Length % 2 != 0) throw new PdfParseException("P01");
+                if (cidMap.Length % 2 != 0) throw new PdfParseException("P01", branch:"R1051");
                 cidHash = Convert.ToHexStringLower(System.Security.Cryptography.SHA256.HashData(cidMap));
             }
         }
@@ -94,8 +94,8 @@ public static partial class PdfPigLayoutReader
         }
         RecoveryFontEvidence Evidence(int code)
         {
-            if (!glyphs.TryGetValue(code, out var gid) || !fontMap.UniqueScalars.TryGetValue(gid, out var scalar)) throw new PdfParseException("P01");
-            if (!Rune.IsWhiteSpace(new Rune(scalar)) && !context.SimpleGlyphs[hash].Contains(gid)) throw new PdfParseException("P01");
+            if (!glyphs.TryGetValue(code, out var gid) || !fontMap.UniqueScalars.TryGetValue(gid, out var scalar)) throw new PdfParseException("P01", branch:"R1052");
+            if (!Rune.IsWhiteSpace(new Rune(scalar)) && !context.SimpleGlyphs[hash].Contains(gid)) throw new PdfParseException("P01", branch:"R1053");
             return new(resource, hash, cidHash, code, code, gid, scalar);
         }
         return (new PdfUnicodeMap(2, values), Evidence);
@@ -105,14 +105,14 @@ public static partial class PdfPigLayoutReader
     {
         var data = stream.Data;
         var filters = document.Structure.FilterProvider.GetFilters(stream.StreamDictionary, document.Structure.TokenScanner);
-        if (filters.Count > 8 || data.Length > limit) throw new PdfParseException("limit");
-        if (stream.StreamDictionary.Data.ContainsKey("UseCMap")) throw new PdfParseException("P01");
+        if (filters.Count > 8 || data.Length > limit) throw new PdfParseException("limit", branch:"R1054");
+        if (stream.StreamDictionary.Data.ContainsKey("UseCMap")) throw new PdfParseException("P01", branch:"R1055");
         for (var index = 0; index < filters.Count; index++)
         {
             token.ThrowIfCancellationRequested();
-            if (!filters[index].IsSupported) throw new PdfParseException("P01");
+            if (!filters[index].IsSupported) throw new PdfParseException("P01", branch:"R1056");
             data = filters[index].Decode(data, stream.StreamDictionary, document.Structure.FilterProvider, index);
-            if (data.Length > limit) throw new PdfParseException("limit");
+            if (data.Length > limit) throw new PdfParseException("limit", branch:"R1057");
         }
         token.ThrowIfCancellationRequested(); return data.ToArray();
     }

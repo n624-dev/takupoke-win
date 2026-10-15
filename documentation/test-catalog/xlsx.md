@@ -1,7 +1,7 @@
 # 時間割変更・曜日・行除外・原文保持
 
 対応関係・宣言名・実行方法のSHA-256：
-`5dbb8d8c40a64a93b58b8dd157c5d41692b27de7373b83c90eda559c5beaed24`
+`d4fc673beca3742a6871051d533ac40a1df2c9ee2f57a383da4e6c5505c30557`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -32,12 +32,14 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 - `IndependentRowAndWeekdayApprovalsAreAtomicAndSurviveRefreshReparseAndRestart`
 - `ExplicitApprovalPersistsWithAnalysisAndSurvivesRefreshReparseAndRestart`
-- `ContentChangeReselectionAndYearChangesInvalidateWithoutResurrection`
-- `OldParserConsentIsClearedEvenIfTheContentIsUnchanged`
+- `ContentAndOriginalChangesInvalidateWhileFailedYearReparsePreservesPreviousDecision`
+- `OldParserConsentIsRevalidatedAndCommittedWithTheCurrentAnalysis`
 - `StalePreviewMissingSelectionCancellationAndReplacementCannotSave`
 - `ExcludingEveryChangeRefusesAndPreservesLastGood`
 - `StorageFailureRollsBackConsentAnalysisAndAttemptTogether`
 - `PreviousPayloadsWithoutOptionalConsentRemainReadable`
+- `FailedCurrentRevalidationPreservesOlderConfirmationAndLastGoodResult`
+- `ReselectingAnotherFileWithIdenticalBytesCannotInheritTheDecision`
 
 ## [tests/Takupoke.Integration.Tests/ChangeRowReaderTests.cs](../../tests/Takupoke.Integration.Tests/ChangeRowReaderTests.cs)
 

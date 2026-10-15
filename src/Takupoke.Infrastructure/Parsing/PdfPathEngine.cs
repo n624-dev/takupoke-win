@@ -7,7 +7,7 @@ public sealed class PdfDisplayTransform(double left, double bottom, double width
     public (double X, double Y) Point(double sourceX, double sourceY)
     {
         var x = sourceX - left; var y = sourceY - bottom;
-        return rotation switch { 90 => (y, x), 180 => (width - x, y), 270 => (height - y, width - x), 0 => (x, height - y), _ => throw new PdfParseException("P02") };
+        return rotation switch { 90 => (y, x), 180 => (width - x, y), 270 => (height - y, width - x), 0 => (x, height - y), _ => throw new PdfParseException("P02", branch:"R1028") };
     }
     public PdfGlyph Glyph(PdfGlyph glyph)
     {
@@ -25,14 +25,14 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
     internal PdfBox? Clip => _clip;
     internal void IntersectPendingRectangleClip()
     {
-        if (_pendingClip is not null || _paths.Count != 1) throw new PdfParseException("P01");
+        if (_pendingClip is not null || _paths.Count != 1) throw new PdfParseException("P01", branch:"R1029");
         var path = _paths[0];
-        if (path.Count != 5 || path[0] != path[4] || path.Take(4).Distinct().Count() != 4) throw new PdfParseException("P01");
+        if (path.Count != 5 || path[0] != path[4] || path.Take(4).Distinct().Count() != 4) throw new PdfParseException("P01", branch:"R1030");
         var box = new PdfBox(path.Min(p=>p.X),path.Min(p=>p.Y),path.Max(p=>p.X),path.Max(p=>p.Y));
         if (path.Any(p=>p.X!=box.Left && p.X!=box.Right || p.Y!=box.Top && p.Y!=box.Bottom) ||
-            path.Zip(path.Skip(1)).Any(p=>p.First.X!=p.Second.X && p.First.Y!=p.Second.Y)) throw new PdfParseException("P01");
+            path.Zip(path.Skip(1)).Any(p=>p.First.X!=p.Second.X && p.First.Y!=p.Second.Y)) throw new PdfParseException("P01", branch:"R1031");
         _pendingClip = _clip is {} c ? new(Math.Max(c.Left,box.Left),Math.Max(c.Top,box.Top),Math.Min(c.Right,box.Right),Math.Min(c.Bottom,box.Bottom)) : box;
-        if (_pendingClip.Value.Right <= _pendingClip.Value.Left || _pendingClip.Value.Bottom <= _pendingClip.Value.Top) throw new PdfParseException("P01");
+        if (_pendingClip.Value.Right <= _pendingClip.Value.Left || _pendingClip.Value.Bottom <= _pendingClip.Value.Top) throw new PdfParseException("P01", branch:"R1032");
     }
     private void FinishClip()
     {
@@ -53,13 +53,13 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
     internal void SetOperationOrder(int order) => _operationOrder=order;
     internal void SetStrokePaintRadius(double radius)
     {
-        if (!double.IsFinite(radius) || radius <= 0) throw new PdfParseException("P01");
+        if (!double.IsFinite(radius) || radius <= 0) throw new PdfParseException("P01", branch:"R1033");
         _strokePaintRadius=radius;
     }
     private int _paintWork;
     private void ConsumePaintWork()
     {
-        if (++_paintWork > 1_000_000) throw new PdfParseException("limit");
+        if (++_paintWork > 1_000_000) throw new PdfParseException("limit", branch:"R1034");
         if (_paintWork % 128 == 0) token.ThrowIfCancellationRequested();
     }
     private static readonly IReadOnlyDictionary<string, int> Counts = new Dictionary<string, int>
@@ -101,15 +101,25 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
     }
     internal void RecordBackgroundFill(PaintColor colour)
     {
-        if (!PendingFillIsRectangles) throw new PdfParseException("P01");
+        if (!PendingFillIsRectangles) throw new PdfParseException("P01", branch:"R1035");
         foreach(var path in _paths)
         {
             ConsumePaintWork();
             var box=new PdfBox(path.Min(p=>p.X),path.Min(p=>p.Y),path.Max(p=>p.X),path.Max(p=>p.Y));
             if (_clip is {} c) box=new(Math.Max(box.Left,c.Left),Math.Max(box.Top,c.Top),Math.Min(box.Right,c.Right),Math.Min(box.Bottom,c.Bottom));
             if (box.Right<=box.Left || box.Bottom<=box.Top) continue;
+            // A later opaque fill must not certify an earlier grid segment
+            // which it conceals. Disjoint decoration remains supported.
+            foreach (var earlier in _paintedRuleBoxes)
+            {
+                ConsumePaintWork();
+                if (earlier.BackgroundColor is null && earlier.Operation < _operationOrder &&
+                    box.Left < earlier.Box.Right && earlier.Box.Left < box.Right &&
+                    box.Top < earlier.Box.Bottom && earlier.Box.Top < box.Bottom)
+                    throw new PdfParseException("P01", branch:"R1263");
+            }
             _paintedRuleBoxes.Add(new(box,_operationOrder,colour));
-            if(_paintedRuleBoxes.Count>100000) throw new PdfParseException("limit");
+            if(_paintedRuleBoxes.Count>100000) throw new PdfParseException("limit", branch:"R1036");
         }
     }
     public bool PendingStrokeIsRules(bool closeLast)
@@ -134,11 +144,11 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
     public void Operation(string operation, double[] numbers)
     {
         token.ThrowIfCancellationRequested();
-        if (!Counts.TryGetValue(operation, out var count) || numbers.Length != count || !numbers.All(double.IsFinite)) throw new PdfParseException("P12");
+        if (!Counts.TryGetValue(operation, out var count) || numbers.Length != count || !numbers.All(double.IsFinite)) throw new PdfParseException("P12", branch:"R1037");
         switch (operation)
         {
-            case "q": if (_stack.Count >= 64) throw new PdfParseException("limit"); _stack.Push((_ctm,_clip)); break;
-            case "Q": if (!_stack.TryPop(out var restored)) throw new PdfParseException("P12"); (_ctm,_clip)=restored; break;
+            case "q": if (_stack.Count >= 64) throw new PdfParseException("limit", branch:"R1038"); _stack.Push((_ctm,_clip)); break;
+            case "Q": if (!_stack.TryPop(out var restored)) throw new PdfParseException("P12", branch:"R1039"); (_ctm,_clip)=restored; break;
             case "cm": _ctm = PdfMatrix.From(numbers).FollowedBy(_ctm); break;
             case "m": _paths.Add([Point(numbers[0], numbers[1])]); break;
             case "l": if (_paths.Count > 0) _paths[^1].Add(Point(numbers[0], numbers[1])); break;
@@ -154,21 +164,21 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
             case "n": _paths.Clear(); FinishClip(); break;
             case "c": case "v": case "y": if (_paths.Count > 0) _paths[^1].Clear(); break;
         }
-        if (_paths.Count > 10000 || _paths.Count > 0 && _paths[^1].Count > 10000) throw new PdfParseException("limit");
+        if (_paths.Count > 10000 || _paths.Count > 0 && _paths[^1].Count > 10000) throw new PdfParseException("limit", branch:"R1040");
     }
     private void Line((double X, double Y) a, (double X, double Y) b)
     {
         // Clipped rules are not guessed. This bounded profile reuses only
         // paint fully contained by the effective original rectangle clip.
         if (_clip is {} c && (Math.Min(a.X,b.X)<c.Left || Math.Max(a.X,b.X)>c.Right || Math.Min(a.Y,b.Y)<c.Top || Math.Max(a.Y,b.Y)>c.Bottom))
-            throw new PdfParseException("P01");
+            throw new PdfParseException("P01", branch:"R1041");
         var before=_rules.Count;
         if (Math.Abs(a.X - b.X) < 0.2 && Math.Abs(a.Y - b.Y) > 0.1) _rules.Add(new((a.X + b.X) / 2, Math.Min(a.Y, b.Y), (a.X + b.X) / 2, Math.Max(a.Y, b.Y)));
         else if (Math.Abs(a.Y - b.Y) < 0.2 && Math.Abs(a.X - b.X) > 0.1) _rules.Add(new(Math.Min(a.X, b.X), (a.Y + b.Y) / 2, Math.Max(a.X, b.X), (a.Y + b.Y) / 2));
         if(_rules.Count!=before) _paintedRuleBoxes.Add(new(_filledRuleBox ?? new(
             Math.Min(a.X,b.X)-_strokePaintRadius,Math.Min(a.Y,b.Y)-_strokePaintRadius,
             Math.Max(a.X,b.X)+_strokePaintRadius,Math.Max(a.Y,b.Y)+_strokePaintRadius),_operationOrder));
-        if (_rules.Count > 100000) throw new PdfParseException("limit");
+        if (_rules.Count > 100000) throw new PdfParseException("limit", branch:"R1042");
     }
     private void Paint(bool fill, bool stroke)
     {
@@ -193,5 +203,5 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
         FinishClip();
     }
     public IReadOnlyList<PdfRule> Finish()
-    { token.ThrowIfCancellationRequested(); if (_stack.Count > 0 || _pendingClip is not null) throw new PdfParseException("P12"); return _rules.ToArray(); }
+    { token.ThrowIfCancellationRequested(); if (_stack.Count > 0 || _pendingClip is not null) throw new PdfParseException("P12", branch:"R1043"); return _rules.ToArray(); }
 }

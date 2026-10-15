@@ -14,16 +14,16 @@ internal sealed record PdfTrueTypeRecoveryMap(string FontHash,
 
     internal (int GlyphId, string Text) Resolve(int cid, ReadOnlyMemory<byte>? cidToGid)
     {
-        if (cid is < 0 or > 65535) throw new PdfParseException("P01");
+        if (cid is < 0 or > 65535) throw new PdfParseException("P01", branch:"R1212");
         var gid = cid;
         if (cidToGid is { } bytes)
         {
             if (bytes.Length > 131072 || bytes.Length % 2 != 0 || cid * 2 + 2 > bytes.Length)
-                throw new PdfParseException("P01");
+                throw new PdfParseException("P01", branch:"R1213");
             gid = BinaryPrimitives.ReadUInt16BigEndian(bytes.Span.Slice(cid * 2, 2));
         }
         if (gid <= 0 || gid >= GlyphCount || AmbiguousGlyphs.Contains(gid) || !UniqueScalars.TryGetValue(gid, out var scalar))
-            throw new PdfParseException("P01");
+            throw new PdfParseException("P01", branch:"R1214");
         return (gid, char.ConvertFromUtf32(scalar));
     }
 
@@ -42,18 +42,18 @@ internal sealed record PdfTrueTypeRecoveryMap(string FontHash,
                 var start=Size(U32(font,offset+8));var length=Size(U32(font,offset+12));
                 return font.AsMemory(start,CheckedLength(font,start,length));
             }
-            throw new PdfParseException("P01");
+            throw new PdfParseException("P01", branch:"R1215");
         }
         var head=Table("head");var loca=Table("loca");var glyf=Table("glyf");
-        var format=U16(head.Span,50);if(format is not (0 or 1))throw new PdfParseException("P01");
+        var format=U16(head.Span,50);if(format is not (0 or 1))throw new PdfParseException("P01", branch:"R1216");
         var stride=format==0?2:4;Slice(loca.Span,0,checked((glyphCount+1)*stride));
         int Offset(int index)=>format==0?U16(loca.Span,index*2)*2:Size(U32(loca.Span,index*4));
         var simple=new HashSet<int>();var previous=Offset(0);
-        if(previous>glyf.Length)throw new PdfParseException("P01");
+        if(previous>glyf.Length)throw new PdfParseException("P01", branch:"R1217");
         for(var gid=0;gid<glyphCount;gid++)
         {
             token.ThrowIfCancellationRequested();var next=Offset(gid+1);
-            if(next<previous || next>glyf.Length)throw new PdfParseException("P01");
+            if(next<previous || next>glyf.Length)throw new PdfParseException("P01", branch:"R1218");
             if(next>previous) {
                 var entry=Slice(glyf.Span,previous,next-previous);Slice(entry,0,10);
                 var contours=unchecked((short)U16(entry,0));if(contours>0)simple.Add(gid);
@@ -67,9 +67,9 @@ internal sealed record PdfTrueTypeRecoveryMap(string FontHash,
     {
         token.ThrowIfCancellationRequested();
         if (font.Length is < 12 or > MaximumFontBytes || U32(font, 0) != 0x00010000)
-            throw new PdfParseException("P01");
+            throw new PdfParseException("P01", branch:"R1219");
         var count = U16(font, 4);
-        if (count is < 1 or > 256) throw new PdfParseException("P01");
+        if (count is < 1 or > 256) throw new PdfParseException("P01", branch:"R1220");
         var directoryEnd = 12 + count * 16;
         Slice(font, 0, directoryEnd);
         var tables = new Dictionary<string, ReadOnlyMemory<byte>>(StringComparer.Ordinal);
@@ -81,19 +81,19 @@ internal sealed record PdfTrueTypeRecoveryMap(string FontHash,
             var tag = Encoding.ASCII.GetString(Slice(font, offset, 4));
             var start = Size(U32(font, offset + 8)); var length = Size(U32(font, offset + 12));
             if (start < directoryEnd || !tables.TryAdd(tag, font.AsMemory(start, CheckedLength(font, start, length))))
-                throw new PdfParseException("P01");
+                throw new PdfParseException("P01", branch:"R1221");
             if (length > 0) extents.Add((start, start + length));
         }
         extents.Sort((a, b) => a.Start.CompareTo(b.Start));
         for (var index = 1; index < extents.Count; index++)
-            if (extents[index - 1].End > extents[index].Start) throw new PdfParseException("P01");
-        if (!new[] { "cmap", "maxp", "glyf", "loca" }.All(tables.ContainsKey)) throw new PdfParseException("P01");
+            if (extents[index - 1].End > extents[index].Start) throw new PdfParseException("P01", branch:"R1222");
+        if (!new[] { "cmap", "maxp", "glyf", "loca" }.All(tables.ContainsKey)) throw new PdfParseException("P01", branch:"R1223");
         var glyphCount = U16(tables["maxp"].Span, 4);
-        if (glyphCount == 0) throw new PdfParseException("P01");
+        if (glyphCount == 0) throw new PdfParseException("P01", branch:"R1224");
         var cmap = tables["cmap"].Span;
-        if (U16(cmap, 0) != 0) throw new PdfParseException("P01");
+        if (U16(cmap, 0) != 0) throw new PdfParseException("P01", branch:"R1225");
         var maps = U16(cmap, 2);
-        if (maps is < 1 or > 64) throw new PdfParseException("P01");
+        if (maps is < 1 or > 64) throw new PdfParseException("P01", branch:"R1226");
         var recordsEnd = 4 + maps * 8;
         Slice(cmap, 0, recordsEnd);
         var seen = new HashSet<int>(); var unique = new Dictionary<int, int>(); var ambiguous = new HashSet<int>();
@@ -101,14 +101,14 @@ internal sealed record PdfTrueTypeRecoveryMap(string FontHash,
         void Consume(int units)
         {
             token.ThrowIfCancellationRequested();
-            if (units < 0 || units > MaximumWork - work) throw new PdfParseException("limit");
+            if (units < 0 || units > MaximumWork - work) throw new PdfParseException("limit", branch:"R1227");
             work += units;
         }
         void Add(int scalar, int gid)
         {
-            if (gid >= glyphCount) throw new PdfParseException("P01");
+            if (gid >= glyphCount) throw new PdfParseException("P01", branch:"R1228");
             if (gid == 0) return;
-            if (!Rune.IsValid(scalar)) throw new PdfParseException("P01");
+            if (!Rune.IsValid(scalar)) throw new PdfParseException("P01", branch:"R1229");
             if (ambiguous.Contains(gid)) return;
             if (!unique.TryAdd(gid, scalar) && unique[gid] != scalar)
             { unique.Remove(gid); ambiguous.Add(gid); }
@@ -119,23 +119,23 @@ internal sealed record PdfTrueTypeRecoveryMap(string FontHash,
             var record = 4 + index * 8; var platform = U16(cmap, record); var encoding = U16(cmap, record + 2);
             if (platform != 0 && !(platform == 3 && encoding is 1 or 10)) continue;
             var offset = Size(U32(cmap, record + 4));
-            if (offset < recordsEnd) throw new PdfParseException("P01");
+            if (offset < recordsEnd) throw new PdfParseException("P01", branch:"R1230");
             if (!seen.Add(offset)) continue;
             var format = U16(cmap, offset); supported++;
             if (format == 4)
             {
                 var sub = Slice(cmap, offset, U16(cmap, offset + 2)); var twice = U16(sub, 6);
-                if (twice == 0 || twice % 2 != 0 || twice > 8192) throw new PdfParseException("P01");
+                if (twice == 0 || twice % 2 != 0 || twice > 8192) throw new PdfParseException("P01", branch:"R1231");
                 var segments = twice / 2; var glyphStart = 16 + segments * 8;
                 Slice(sub, 0, glyphStart);
-                if (U16(sub, 14 + segments * 2) != 0) throw new PdfParseException("P01");
+                if (U16(sub, 14 + segments * 2) != 0) throw new PdfParseException("P01", branch:"R1232");
                 var previous = -1;
                 for (var segment = 0; segment < segments; segment++)
                 {
                     var end = U16(sub, 14 + segment * 2); var start = U16(sub, 16 + segments * 2 + segment * 2);
                     var delta = U16(sub, 16 + segments * 4 + segment * 2);
                     var rangePosition = 16 + segments * 6 + segment * 2; var range = U16(sub, rangePosition);
-                    if (start > end || start <= previous || range % 2 != 0) throw new PdfParseException("P01");
+                    if (start > end || start <= previous || range % 2 != 0) throw new PdfParseException("P01", branch:"R1233");
                     previous = end; Consume(end - start + 1);
                     for (var scalar = (int)start; scalar <= end; scalar++)
                     {
@@ -145,28 +145,28 @@ internal sealed record PdfTrueTypeRecoveryMap(string FontHash,
                         else
                         {
                             var position = rangePosition + range + 2 * (scalar - start);
-                            if (position < glyphStart) throw new PdfParseException("P01");
+                            if (position < glyphStart) throw new PdfParseException("P01", branch:"R1234");
                             gid = U16(sub, position);
                             if (gid != 0) gid = (gid + delta) & 65535;
                         }
                         Add(scalar, gid);
                     }
                 }
-                if (previous != 65535) throw new PdfParseException("P01");
+                if (previous != 65535) throw new PdfParseException("P01", branch:"R1235");
             }
             else if (format == 12)
             {
                 var sub = Slice(cmap, offset, Size(U32(cmap, offset + 4)));
-                if (U16(sub, 2) != 0) throw new PdfParseException("P01");
+                if (U16(sub, 2) != 0) throw new PdfParseException("P01", branch:"R1236");
                 var groups = Size(U32(sub, 12));
-                if (groups > 65536 || sub.Length != 16 + (long)groups * 12) throw new PdfParseException("P01");
+                if (groups > 65536 || sub.Length != 16 + (long)groups * 12) throw new PdfParseException("P01", branch:"R1237");
                 var previous = -1;
                 for (var group = 0; group < groups; group++)
                 {
                     var position = 16 + group * 12; var start = Size(U32(sub, position)); var end = Size(U32(sub, position + 4));
                     var firstGlyph = Size(U32(sub, position + 8));
                     if (start > end || start <= previous || end > 0x10ffff || start <= 0xdfff && end >= 0xd800
-                        || (long)firstGlyph + end - start >= glyphCount) throw new PdfParseException("P01");
+                        || (long)firstGlyph + end - start >= glyphCount) throw new PdfParseException("P01", branch:"R1238");
                     previous = end; Consume(end - start + 1);
                     for (var scalar = start; scalar <= end; scalar++)
                     {
@@ -175,16 +175,16 @@ internal sealed record PdfTrueTypeRecoveryMap(string FontHash,
                     }
                 }
             }
-            else throw new PdfParseException("P01"); // Do not ignore a potentially contradictory Unicode cmap.
+            else throw new PdfParseException("P01", branch:"R1239"); // Do not ignore a potentially contradictory Unicode cmap.
         }
-        if (supported == 0) throw new PdfParseException("P01");
+        if (supported == 0) throw new PdfParseException("P01", branch:"R1240");
         token.ThrowIfCancellationRequested();
         return new(Convert.ToHexStringLower(SHA256.HashData(font)), unique, ambiguous, glyphCount);
     }
 
-    private static int Size(uint number) => number <= int.MaxValue ? (int)number : throw new PdfParseException("P01");
+    private static int Size(uint number) => number <= int.MaxValue ? (int)number : throw new PdfParseException("P01", branch:"R1241");
     private static int CheckedLength(ReadOnlySpan<byte> data, int offset, int length)
-    { if (offset < 0 || length < 0 || offset > data.Length - length) throw new PdfParseException("P01"); return length; }
+    { if (offset < 0 || length < 0 || offset > data.Length - length) throw new PdfParseException("P01", branch:"R1242"); return length; }
     private static ReadOnlySpan<byte> Slice(ReadOnlySpan<byte> data, int offset, int length) => data.Slice(offset, CheckedLength(data, offset, length));
     private static ushort U16(ReadOnlySpan<byte> data, int offset) => BinaryPrimitives.ReadUInt16BigEndian(Slice(data, offset, 2));
     private static uint U32(ReadOnlySpan<byte> data, int offset) => BinaryPrimitives.ReadUInt32BigEndian(Slice(data, offset, 4));
