@@ -11,7 +11,7 @@ public static class RecoveryCodeCandidates
         IReadOnlyCollection<string> classes, CancellationToken token = default)
     {
         token.ThrowIfCancellationRequested();
-        if (!Code(original) || rooms.Count > MaximumRules || classes.Count == 0) return [];
+        if (!CodeLiteral(original) || rooms.Count > MaximumRules || classes.Count == 0) return [];
         var candidates = new Dictionary<string, int>(StringComparer.Ordinal);
         foreach (var rule in rooms)
         {
@@ -25,7 +25,7 @@ public static class RecoveryCodeCandidates
 
         void Add(string candidate)
         {
-            if (!Code(candidate) || candidate.Length != original.Length) return;
+            if (candidate.Length != original.Length || !CodeLiteral(candidate)) return;
             var changes = 0;
             for (var i = 0; i < original.Length; i++)
             {
@@ -36,8 +36,12 @@ public static class RecoveryCodeCandidates
         }
     }
 
-    private static bool Code(string value) => value.Length is >= 2 and <= 32 &&
-        value.Any(char.IsAsciiDigit) && value.All(c => char.IsAsciiLetterOrDigit(c) || c is '-' or '_');
+    // Japanese room-name text and literal spaces may surround a code. They
+    // must still match ordinally: only the two ASCII confusion sets below
+    // can differ. No prefix removal, normalization or name generation.
+    private static bool CodeLiteral(string value) => value.Length is >= 2 and <= 64 &&
+        value.Any(char.IsAsciiDigit) && value[0] != ' ' && value[^1] != ' ' &&
+        value.All(c => char.IsLetterOrDigit(c) || c is '-' or '_' or ' ');
 
     private static bool Confusable(char a, char b) =>
         "Il1".Contains(a) && "Il1".Contains(b) || "O0".Contains(a) && "O0".Contains(b);

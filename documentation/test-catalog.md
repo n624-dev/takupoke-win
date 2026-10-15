@@ -40,7 +40,7 @@ CIはpushのbefore、PRのbase、手動実行ではHEADの親を比較する。
 | [テスト一覧・対象検索・宣言整合性・CI接続](test-catalog/test-catalog.md) | 14 | Linux Python（隔離Gitリポジトリ） |
 | [復旧の証拠・採用・旧記録の契約](test-catalog/recovery-contracts.md) | 81 | Linux／Windows .NET |
 | [復旧解析・原画像・訂正・保存・取消](test-catalog/recovery-pipeline.md) | 219 | Linux／Windows .NET |
-| [CPU OCR・文字位置・モデル・原画像切り出し](test-catalog/ocr.md) | 91 | Linux／Windows .NET。Windows描画・実推論は対応workflowで検証 |
+| [CPU OCR・文字位置・モデル・原画像切り出し](test-catalog/ocr.md) | 92 | Linux／Windows .NET。Windows描画・実推論は対応workflowで検証 |
 | [PDF埋め込みフォント・可視文字・原本の描画照合](test-catalog/native-pdf.md) | 58 | Linux／Windows .NET。Windows描画は対応workflowで検証 |
 | [原画像確認・本文訂正・モデル設定・動的詳細](test-catalog/recovery-ui.md) | 12 | Windows WinUI x64。クロスビルドは操作成功に数えない |
 | [OCR・native PDFの比較用workflowと再現条件](test-catalog/recovery-experiments.md) | 26 | Linux／Windows .NETと明示したWindows比較workflow |

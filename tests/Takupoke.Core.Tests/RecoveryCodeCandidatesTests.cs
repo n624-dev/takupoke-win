@@ -6,6 +6,18 @@ namespace Takupoke.Core.Tests;
 public sealed class RecoveryCodeCandidatesTests
 {
     [Fact]
+    public void JapaneseRoomNamesKeepEveryNonconfusableCharacterAndLiteralSpace()
+    {
+        MappingRule[] rooms = [new("仮設室101", "別の表示名"), new("Alias", "仮設室I0I"),
+            new("他の室101", "Other"), new("仮設室 101", "Spaced")];
+        Assert.Equal(new[] { "仮設室101", "仮設室I0I" }, RecoveryCodeCandidates.Find("仮設室I01", rooms, ["1_1"]));
+        Assert.Equal(new[] { "仮設室 101" }, RecoveryCodeCandidates.Find("仮設室 I01", rooms, ["1_1"]));
+        Assert.Empty(RecoveryCodeCandidates.Find("仮設宝I01", rooms, ["1_1"]));
+        Assert.Empty(RecoveryCodeCandidates.Find("仮設室I01", [new("101", "Room")], ["1_1"]));
+        Assert.Empty(RecoveryCodeCandidates.Find("仮設室I01\n", rooms, ["1_1"]));
+        Assert.Empty(RecoveryCodeCandidates.Find("仮設室I01", [new(" 仮設室101", "Room")], ["1_1"]));
+    }
+    [Fact]
     public void KnownRosterSuppliesOnlyLiteralConfusionsAndKeepsMultipleAlternatives()
     {
         MappingRule[] rooms = [new("I01", "First"), new("101", "Second"), new("l01", "Third"),

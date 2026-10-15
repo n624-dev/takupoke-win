@@ -1,7 +1,7 @@
 # CPU OCR・文字位置・モデル・原画像切り出し
 
 対応関係・宣言名・実行方法のSHA-256：
-`e0731f2f60fd2b17c5071aa75c0c2889ecbd6c7f35d139f1eac6bab2def3e5dc`
+`65da2b89a4c71b6002284ea490ac8e960a88bcf0458f57f2c2984a2c6e8704d0`
 
 環境：Linux／Windows .NET。Windows描画・実推論は対応workflowで検証
 
@@ -30,6 +30,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Core.Tests/RecoveryCodeCandidatesTests.cs](../../tests/Takupoke.Core.Tests/RecoveryCodeCandidatesTests.cs)
 
+- `JapaneseRoomNamesKeepEveryNonconfusableCharacterAndLiteralSpace`
 - `KnownRosterSuppliesOnlyLiteralConfusionsAndKeepsMultipleAlternatives`
 - `UnrelatedNamesUnknownCodesCaseAndTooManyChangesAreNotInvented`
 - `EveryClassInMergedCellMustBeCoveredAndGlobalNamesRemainAvailable`

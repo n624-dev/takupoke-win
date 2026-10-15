@@ -29,7 +29,7 @@ internal static partial class Program
         if (roomCode is not null)
             await store.WriteAsync(lease, "api.mapping", new SavedMapping(new string('C',43), "fictional-codes", 1,
                 "\"fictional-codes\"", new string('c',64), "2032-04-01T00:00:00Z", DateTimeOffset.UtcNow,
-                new([], [], [new("I01O", "架空実習室"), new("l010", "別の架空室"), new("1010", "別学級限定", ["1_1"])])));
+                new([], [], [new("仮設室I01O", "架空実習室"), new("仮設室l010", "別の架空室"), new("仮設室1010", "別学級限定", ["1_1"])])));
         var cell = document.Cells[0];
         var extra = new List<RecoverySource> { new("teacher", cell.Id, 1, "架空教員A", new(110,125,60,10)) };
         if(nativeReview)extra.Add(new("native-note","header",1,"架空の原本注記",new(10,920,70,10)));
@@ -197,17 +197,17 @@ internal static partial class Program
     }
     private static void CheckRoomCandidatesUi(string executable, string root)
     {
-        Stop(); var session = SeedManualRecoveryUiAsync(root, 3, manualSchemaVersion: 3, roomCode: "I010").GetAwaiter().GetResult();
+        Stop(); var session = SeedManualRecoveryUiAsync(root, 3, manualSchemaVersion: 3, roomCode: "仮設室I010").GetAwaiter().GetResult();
         var before = RecoveryValidator.Fingerprint(RecoveryUiFormalAsync(root).GetAwaiter().GetResult());
         var room = session.Plan.Targets.Single(t => t.Target.Role == RecoveryFieldRole.Room).Target.Key;
         Start(executable); OpenRecoveryUiPreview();
         Wait(() => Find("manual-candidate-" + room + "-0") is not null, "Registered room-code alternatives appear beside the source image");
-        Require(WaitElement("manual-candidate-" + room + "-0").Current.Name == "候補を入力: I01O", "Candidate uses the literal room roster and class scope");
+        Require(WaitElement("manual-candidate-" + room + "-0").Current.Name == "候補を入力: 仮設室I01O", "Candidate preserves the literal Japanese room name and class scope");
         Require(Find("manual-candidate-" + room + "-2") is null, "Unrelated class does not supply a candidate");
-        Require(((ValuePattern)WaitElement("manual-value-" + room).GetCurrentPattern(ValuePattern.Pattern)).Current.Value == "I010",
+        Require(((ValuePattern)WaitElement("manual-value-" + room).GetCurrentPattern(ValuePattern.Pattern)).Current.Value == "仮設室I010",
             "Candidates never overwrite the original prefill automatically");
         Invoke("manual-candidate-" + room + "-0");
-        Wait(() => ((ValuePattern)WaitElement("manual-value-" + room).GetCurrentPattern(ValuePattern.Pattern)).Current.Value == "I01O",
+        Wait(() => ((ValuePattern)WaitElement("manual-value-" + room).GetCurrentPattern(ValuePattern.Pattern)).Current.Value == "仮設室I01O",
             "Explicit candidate click fills only this field");
         Require(!Checked(WaitElement("manual-ack-" + room)), "Selecting a candidate does not acknowledge the pixels");
         foreach (var target in session.Plan.Targets) Toggle(WaitElement("manual-ack-" + target.Target.Key));
@@ -219,8 +219,8 @@ internal static partial class Program
         Invoke("manual-submit-Timetable");
         Wait(() => Find("adopt-recovery-Timetable") is not null, "Candidate-assisted correction still opens a whole-document preview");
         var pending = RecoveryUiPendingAsync(root).GetAwaiter().GetResult();
-        Require(pending.Document.Sources.Single(s => s.Id == "room").Text == "I010" &&
-            pending.Result.HumanCorrections!.Single(c => c.Target.Role == RecoveryFieldRole.Room).CorrectedText == "I01O",
+        Require(pending.Document.Sources.Single(s => s.Id == "room").Text == "仮設室I010" &&
+            pending.Result.HumanCorrections!.Single(c => c.Target.Role == RecoveryFieldRole.Room).CorrectedText == "仮設室I01O",
             "Original OCR and independently confirmed correction remain separate");
         Require(RecoveryValidator.Fingerprint(RecoveryUiFormalAsync(root).GetAwaiter().GetResult()) == before,
             "Candidate selection and preview preserve the last adopted analysis");
