@@ -1,0 +1,48 @@
+name: Materialize verified OCR candidate blob
+on:
+  push:
+    branches: [model-publish/ocr-candidate-20261016]
+permissions:
+  contents: write
+jobs:
+  materialize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node24
+        with:
+          persist-credentials: false
+      - name: Verify every part and create the exact Git blob without changing any branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const crypto = require('crypto');
+          const root = 'model-upload/20261016-v2';
+          const manifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf8'));
+          const sha256 = data => crypto.createHash('sha256').update(data).digest('hex');
+          const parts = manifest.parts.map(part => {
+            if (!/^part-[0-9]{3}\.bin$/.test(part.file)) throw Error('Unexpected part name');
+            const data = fs.readFileSync(path.join(root, part.file));
+            if (data.length !== part.bytes || sha256(data) !== part.sha256) throw Error('Part verification failed');
+            return data;
+          });
+          const data = Buffer.concat(parts);
+          const gitSha = crypto.createHash('sha1').update(Buffer.from('blob ' + data.length + '\0')).update(data).digest('hex');
+          if (data.length !== manifest.bytes || sha256(data) !== manifest.sha256 || gitSha !== manifest.gitBlobSHA) throw Error('Complete model verification failed');
+          (async () => {
+            const response = await fetch(process.env.GITHUB_API_URL + '/repos/' + process.env.GITHUB_REPOSITORY + '/git/blobs', {
+              method: 'POST',
+              headers: { Authorization: 'Bearer ' + process.env.GH_TOKEN, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+              body: JSON.stringify({ encoding: 'base64', content: data.toString('base64') })
+            });
+            if (!response.ok) throw Error('Git blob API status ' + response.status);
+            const blob = await response.json();
+            if (blob.sha !== manifest.gitBlobSHA) throw Error('Returned blob SHA differs');
+            const receipt = { sourceCommit: process.env.GITHUB_SHA, blobSHA: blob.sha, sha256: manifest.sha256, bytes: data.length, verifiedParts: parts.length, branchUpdated: false };
+            console.log(JSON.stringify(receipt));
+            fs.writeFileSync(path.join(process.env.RUNNER_TEMP, 'model-blob-receipt.json'), JSON.stringify(receipt, null, 2));
+          })().catch(error => { console.error(error.message); process.exitCode = 1; });
+          NODE

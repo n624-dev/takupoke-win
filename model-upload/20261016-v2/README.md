@@ -1,0 +1,1 @@
+Temporary transport of a synthetic OCR research candidate, Apache-2.0 derivative of the existing font-balanced PP-OCRv5 model. This branch does not change the product model. Every part and complete SHA are verified before creating the standard ONNX Git blob. No school documents or personal data.
