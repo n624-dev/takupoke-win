@@ -1,7 +1,7 @@
 # OCR・native PDFの比較用workflowと再現条件
 
 対応関係・宣言名・実行方法のSHA-256：
-`5b2c4f15602ef510e62f8d5ef31bce342d75230ff76139611dcea7b3d9cf9cb2`
+`328d50893b286c193c2579505f386a21b52d9954951530c6805f6d173e0ec0fa`
 
 環境：Linux／Windows .NETと明示したWindows比較workflow
 
@@ -16,6 +16,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - [.github/workflows/label-selection-native-probe.yml](../../.github/workflows/label-selection-native-probe.yml)
 - [.github/workflows/native-grammar-error-probe.yml](../../.github/workflows/native-grammar-error-probe.yml)
 - [.github/workflows/native-model-batch-comparison.yml](../../.github/workflows/native-model-batch-comparison.yml)
+- [.github/workflows/ocr-acquisition-probe.yml](../../.github/workflows/ocr-acquisition-probe.yml)
 - [.github/workflows/ocr-model-comparison.yml](../../.github/workflows/ocr-model-comparison.yml)
 - [.github/workflows/ocr-original-image.yml](../../.github/workflows/ocr-original-image.yml)
 - [.github/workflows/ocr-physical-framing.yml](../../.github/workflows/ocr-physical-framing.yml)
