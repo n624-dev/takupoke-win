@@ -1,0 +1,16 @@
+{
+  "scope": "Post-result read-only artifact/source verification; no model reruns",
+  "counts": {
+    "python": 10,
+    "json": 29,
+    "jsonlRows": 4482
+  },
+  "explicitUtf8TextIO": true,
+  "freshAndPortableFrozenSourcesUnchanged": true,
+  "all40PortableFileHashesRechecked": true,
+  "initialFrozenTrainingSourcesVerifiedByClosure": true,
+  "binaryArtifactsUnderRepositoryNewNamespace": [],
+  "childCommitPush": false,
+  "iosEdited": false,
+  "activated": false
+}

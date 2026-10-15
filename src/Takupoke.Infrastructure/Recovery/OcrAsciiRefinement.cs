@@ -35,6 +35,11 @@ internal static class OcrAsciiRefinement
             if (!header && tailStart > 0 && tailText.Length is >= 2 and <= 32 && tailText.All(c => c is >= ' ' and <= '~'))
                 tailCrop = OcrWhiteGapPartition.Tail(raster, crop,
                     native.Take(tailStart).Max(x => x.g.X + x.g.Width), tail.Min(x => x.g.X), token);
+            var codeText = standaloneCode ? text : tailText;
+            var manualCode = retainUncertain && (standaloneCode || tailCrop is not null) &&
+                codeText.Length is >= 2 and <= 32 && codeText.Any(char.IsAsciiDigit) &&
+                codeText.All(c => char.IsAsciiLetterOrDigit(c) || c is '_' or '-') &&
+                !ClassSelection.Candidates.Contains(codeText) && (!double.IsFinite(top) || crop.Y >= top);
             var chosen = false;
             if (header || standaloneCode || tailCrop is not null)
             {
@@ -47,10 +52,11 @@ internal static class OcrAsciiRefinement
                                 // Manual capture already requires original-pixel review
                                 // for every native score below .8. Preserve these
                                 // scores instead of falling back to an often-wrong
-                                // high-confidence primary code. Prose/tails/headers
-                                // keep their existing selection conditions.
-                                retainUncertain && standaloneCode && !ClassSelection.Candidates.Contains(text) &&
-                                (!double.IsFinite(top) || crop.Y >= top) && observation.Text.Any(char.IsAsciiDigit) &&
+                                // high-confidence primary code. Japanese prefixes
+                                // stay untouched; a tail needs the existing
+                                // original white-gap partition. Prose/headers
+                                // retain their existing selection conditions.
+                                manualCode && observation.Text.Any(char.IsAsciiDigit) &&
                                 observation.Text.All(c => char.IsAsciiLetterOrDigit(c) || c is '_' or '-')));
                 if (chosen)
                 {

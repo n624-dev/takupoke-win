@@ -70,11 +70,16 @@ public sealed class OcrAsciiRefinementTests
             Assert.Equal((double).7f, manual.Confidences[1]); // Native score is not promoted to the primary's .96.
             Assert.All(manual.Glyphs, glyph => Assert.True(crops[0].Contains(new(glyph.X, glyph.Y, glyph.Width, glyph.Height))));
             Assert.Equal(1, manual.RecognizerCalls);
-            // A Japanese-prefix tail still uses the existing .8 condition.
+            // The prefix keeps its original literal/native score; only a
+            // bounded code tail from the original white band can change.
             PdfGlyph[] prefixed = [new("教室", 0, 20, 35, 48, 0, 0), new("AI2", 80, 20, 200, 48, 0, 1)];
-            var unchanged = OcrAsciiRefinement.Refine(White(), prefixed, [.95, .96], crops, [], runtime, retainUncertain: true);
-            Assert.Equal(prefixed, unchanged.Glyphs);
-            Assert.Equal(1, unchanged.RecognizerCalls);
+            var refined = OcrAsciiRefinement.Refine(White(), prefixed, [.95, .96], crops, [], runtime, retainUncertain: true);
+            Assert.Equal("教室A12", string.Concat(refined.Glyphs.Select(g => g.Text)));
+            Assert.Equal(prefixed[0], refined.Glyphs[0]); Assert.Equal(.95, refined.Confidences[0]);
+            Assert.Equal((double).7f, refined.Confidences[2]);
+            Assert.Equal(1, refined.RecognizerCalls);
+            PdfGlyph[] word = [prefixed[0], prefixed[1] with { Text = "III" }];
+            Assert.Equal(word, OcrAsciiRefinement.Refine(White(), word, [.95, .96], crops, [], runtime, retainUncertain: true).Glyphs);
             PdfGlyph[] classLabel = [new("1_1", 0, 20, 300, 48, 0, 0)];
             Assert.Equal(classLabel, OcrAsciiRefinement.Refine(White(), classLabel, [.96], crops, [], runtime, retainUncertain: true).Glyphs);
             // Above-grid numeric headings are not body-code uncertainty.

@@ -1,0 +1,23 @@
+{
+  "purpose": "Independent preoptimizer exclusion verification of prior/current code oracle literal values (not sampling or selection)",
+  "oracles": [
+    {
+      "path": "/workspace/scratch/ocr-code-comparison-20261015-v1/oracle.json",
+      "sha256": "1d57d6e8c6aaab1145dc8af7dbaef03d2c132f1db36591e0975d9d256ccfa09b"
+    },
+    {
+      "path": "/workspace/scratch/ocr-code-comparison-20261015-v2/oracle.json",
+      "sha256": "d0dff85938cc6c56a8b518403369648b57d5d8b25a4d7a4a19f6045c69b5fbd2"
+    },
+    {
+      "path": "/workspace/scratch/ocr-room-candidates-20261016-v1/oracle.json",
+      "sha256": "39f319b5d4a29454616546d9a37f0203519010e49c2f17bcbedf6aaaeb3868f5"
+    }
+  ],
+  "overlap": {
+    "train": [],
+    "development": []
+  },
+  "passed": true,
+  "optimizerStarted": false
+}

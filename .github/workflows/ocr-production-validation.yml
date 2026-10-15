@@ -1,4 +1,4 @@
-name: Validate deployed CPU OCR on fresh native Windows PDFs
+name: Validate deployed CPU OCR on reused native Windows PDFs
 on:
   push:
     branches: [codex/windows-local-ai-improvement-20261013]

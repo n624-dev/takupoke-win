@@ -32,7 +32,8 @@ def main():
         records.append({(row['id'], row['model']): row for row in rows})
     current, baseline = records
     oracle = json.loads((root/'oracle.json').read_text())
-    assert len(current) == len(oracle)*5 and len(baseline) == len(oracle)*4
+    baseline_route = 'actual-manual-code-route' if (oracle[0]['id'], 'actual-manual-code-route') in baseline else 'actual-code-route'
+    assert len(current) == len(oracle)*5 and len(baseline) == len(oracle)*(5 if baseline_route == 'actual-manual-code-route' else 4)
     identities = ['text', 'pieces', 'paddingSupported', 'glyphs', 'recognizerCalls', 'ValidWidth', 'InputWidth']
     for item in oracle:
         key = (item['id'], 'actual-code-route')
@@ -41,7 +42,7 @@ def main():
     examples = {'gains': [], 'losses': []}
     below = lambda row: any(piece['Confidence'] < .8 for piece in row['pieces'])
     for margin in [2, 6]:
-        items = [(item, baseline[item['id'], 'actual-code-route'], current[item['id'], 'actual-manual-code-route'])
+        items = [(item, baseline[item['id'], baseline_route], current[item['id'], 'actual-manual-code-route'])
                  for item in oracle if item['margin'] == margin]
         def summarize(index):
             return dict(exact=sum(row[index]['text'] == row[0]['value'] for row in items),
@@ -62,7 +63,7 @@ def main():
                 examples[label] = [dict(id=g['id'], expected=g['value'], before=a['text'], after=b['text'],
                     font=g['font'], size=g['size'], beforePieces=a['pieces'], afterPieces=b['pieces']) for g, a, b in changes]
     blank = [item for item in oracle if item['group'] == 'blank']
-    report = dict(scores=reports, defaultRouteIdentityImages=len(oracle),
+    report = dict(scores=reports, baselineRoute=baseline_route, defaultRouteIdentityImages=len(oracle),
         blankImages=len(blank), blankOutputsRemainEmpty=all(
             not current[item['id'], 'actual-manual-code-route']['text'] and not baseline[item['id'], 'actual-code-route']['text'] for item in blank),
         peakWorkingSetBytes=max(row['peakWorkingSetBytes'] for rows in records for row in rows.values()),

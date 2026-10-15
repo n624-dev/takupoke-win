@@ -37,3 +37,7 @@ research-results/glm-ocr-fp32-clean-lines-20261014/worker-stderr.txt -text white
 
 # Keep closed production observations and frozen sources byte-identical.
 research-results/ocr-production-integration-20261015/** -text whitespace=cr-at-eol
+
+# Preserve the closed candidate's provenance and original license bytes.
+model-artifacts/ascii-english-v5-confusion-v2/** -text whitespace=-blank-at-eol,cr-at-eol
+research-results/ocr-synthetic-training-20261013/ascii-english-v5-confusion-v2/** -text whitespace=cr-at-eol

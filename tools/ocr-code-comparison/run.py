@@ -55,9 +55,12 @@ def main():
     parser.add_argument('--font-assets', type=Path, help='Reuse SHA-pinned fonts and license receipts from a prior study')
     parser.add_argument('--room-candidates', action='store_true', help='Freeze a half-known room roster before inference')
     parser.add_argument('--manual-capture', action='store_true', help='Compare actual strict and manual-capture refinement paths')
+    parser.add_argument('--literal-prefix', default='', help='Fixed literal prefix, retained in whole-line scoring and original pixels')
     args = parser.parse_args()
     if args.manual_capture and not args.validation:
         raise ValueError('Manual comparison requires validation')
+    if args.literal_prefix and args.room_candidates:
+        raise ValueError('Room candidate study requires standalone codes')
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
     fonts = []
@@ -111,7 +114,7 @@ def main():
         metrics=['literal exact', 'CER', 'wrong above native .8', 'blank output', 'time', 'RSS'],
         scope='Isolated fictional code images. Paired margins are NOT independent samples. No PDF/detection/whole-document or production qualification.',
         noModelUpdate=True, noOracleRouting=True, noZeroErrorGate=True,
-        standaloneRefinement=args.validation, manualCaptureRefinement=args.manual_capture,
+        standaloneRefinement=args.validation, manualCaptureRefinement=args.manual_capture, literalPrefix=args.literal_prefix,
         exclusionOracleSHA256=sha(args.exclude_oracle) if args.exclude_oracle else None,
         manualCapturePolicy='Retain uncertain bounded standalone ASCII codes only in manual capture; preserve native scores/reject/padding/length. No change to .8 automatic route; every low-score field needs original-pixel acknowledgement.' if args.manual_capture else None,
         candidateRule='For separately detected ASCII codes with a digit, length 2..32, use deployed English only with native .8/.05/padding and same primary length; otherwise preserve primary.',
@@ -134,8 +137,9 @@ def main():
             for n in range(24):
                 def fresh(build):
                     for attempt in range(10000):
-                        value = build()
-                        if value not in excluded:
+                        base = build()
+                        value = args.literal_prefix + base
+                        if base not in excluded and value not in excluded:
                             return value
                     raise ValueError('Fresh code pool exhausted')
                 ordinary = lambda: rng.choice('ABCDEFGHJKLMNPQRSTUVWXYZ') + str(rng.randrange(200, 999)) + rng.choice(['', '-A', '-B'])
@@ -147,6 +151,9 @@ def main():
                 values.append(('confusable', fresh(lambda: ''.join(rng.choice('Il1O0') for _ in range(3)) + str(rng.randrange(20, 99)))))
             for group, value in values:
                 canvas = Image.new('RGB', (220, 80), 'white')
+                bounds_before = ImageDraw.Draw(canvas).textbbox((10, 5), value, font=font)
+                if bounds_before[0] < 6 or bounds_before[1] < 6 or bounds_before[2]+6 > canvas.width or bounds_before[3]+6 > canvas.height:
+                    raise ValueError('Whole literal would be clipped before framing')
                 ImageDraw.Draw(canvas).text((10, 5), value, font=font, fill='black')
                 bounds = ImageChops.invert(canvas).getbbox()
                 for margin in [2, 6]:

@@ -1,0 +1,4962 @@
+[
+  {
+    "id": "development-00000",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.3283064365386963e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00001",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 1.3969838619232178e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00002",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 6.030313670635223e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00003",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.1781382858753204e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00004",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-06,
+    "rejectAbsDifference": 3.119930624961853e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.7881393432617188e-06
+  },
+  {
+    "id": "development-00005",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.364418029785156e-07,
+    "rejectAbsDifference": 4.190951585769653e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.364418029785156e-07
+  },
+  {
+    "id": "development-00006",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.8870999813079834e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00007",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.0943040251731873e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00008",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.1245796233415604e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00009",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 3.183959051966667e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00010",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 9.546056389808655e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00011",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.650187186896801e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00012",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 9.5367431640625e-07,
+    "rejectAbsDifference": 1.2223608791828156e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 9.5367431640625e-07
+  },
+  {
+    "id": "development-00013",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.0728836059570312e-06,
+    "rejectAbsDifference": 3.562308847904205e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.0728836059570312e-06
+  },
+  {
+    "id": "development-00014",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539063e-08,
+    "rejectAbsDifference": 1.7229467630386353e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00015",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.0128132998943329e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00016",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 9.284121915698051e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00017",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.364418029785156e-07,
+    "rejectAbsDifference": 1.6210833564400673e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.364418029785156e-07
+  },
+  {
+    "id": "development-00018",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.152557373046875e-07,
+    "rejectAbsDifference": 6.612390279769897e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.152557373046875e-07
+  },
+  {
+    "id": "development-00019",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.0780134946107864e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00020",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.5762786865234375e-07,
+    "rejectAbsDifference": 1.3969838619232178e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00021",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 3.149034455418587e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00022",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 2.7939677238464355e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00023",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.76837158203125e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00024",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.562308847904205e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00025",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 2.0954757928848267e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00026",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.5762786865234375e-07,
+    "rejectAbsDifference": 1.2223608791828156e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00027",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.4563632905483246e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00028",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.0360963642597198e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.2516975402832031e-06
+  },
+  {
+    "id": "development-00029",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.6298145055770874e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.960464477539062e-07
+  },
+  {
+    "id": "development-00030",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 4.190951585769653e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00031",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.60770320892334e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1324882507324219e-06
+  },
+  {
+    "id": "development-00032",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.618172973394394e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00033",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.4202669262886047e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00034",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 4.656612873077393e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00035",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.76837158203125e-07,
+    "rejectAbsDifference": 9.313225746154785e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00036",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.364418029785156e-07,
+    "rejectAbsDifference": 1.594889909029007e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.364418029785156e-07
+  },
+  {
+    "id": "development-00037",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.8067810237407684e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00038",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.4437904357910156e-06,
+    "rejectAbsDifference": 7.683411240577698e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.4437904357910156e-06
+  },
+  {
+    "id": "development-00039",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539063e-08,
+    "rejectAbsDifference": 9.313225746154785e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00040",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.6542693376541138e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00041",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.3283064365386963e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00042",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.952300176024437e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00043",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.0728836059570312e-06,
+    "rejectAbsDifference": 3.8300640881061554e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.0728836059570312e-06
+  },
+  {
+    "id": "development-00044",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539062e-07,
+    "rejectAbsDifference": 1.6298145055770874e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.960464477539062e-07
+  },
+  {
+    "id": "development-00045",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 6.51925802230835e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00046",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 6.548361852765083e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00047",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.76837158203125e-07,
+    "rejectAbsDifference": 2.4709152057766914e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00048",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 2.9409420676529408e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00049",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.8044374883174896e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00050",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.430511474609375e-06,
+    "rejectAbsDifference": 5.471520125865936e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.430511474609375e-06
+  },
+  {
+    "id": "development-00051",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.841705620288849e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00052",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 5.8906152844429016e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00053",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.1816155165433884e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00054",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 9.89530235528946e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00055",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 2.9453076422214508e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00056",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.525040715932846e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00057",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 8.498318493366241e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00058",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.748603820800781e-07,
+    "rejectAbsDifference": 1.6763806343078613e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.748603820800781e-07
+  },
+  {
+    "id": "development-00059",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.748603820800781e-07,
+    "rejectAbsDifference": 3.058812581002712e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.748603820800781e-07
+  },
+  {
+    "id": "development-00060",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 2.8900103643536568e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00061",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539063e-08,
+    "rejectAbsDifference": 1.469743438065052e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00062",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 8.940696716308594e-07,
+    "rejectAbsDifference": 2.3632310330867767e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.940696716308594e-07
+  },
+  {
+    "id": "development-00063",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.152557373046875e-07,
+    "rejectAbsDifference": 3.958120942115784e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.152557373046875e-07
+  },
+  {
+    "id": "development-00064",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.7535057850182056e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00065",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.637978807091713e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00066",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 2.176966518163681e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.980232238769531e-07
+  },
+  {
+    "id": "development-00067",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 8.940696716308594e-07,
+    "rejectAbsDifference": 2.1245796233415604e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.940696716308594e-07
+  },
+  {
+    "id": "development-00068",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 3.818422555923462e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00069",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 4.423782229423523e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00070",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 8.344650268554688e-07,
+    "rejectAbsDifference": 2.3283064365386963e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.2516975402832031e-06
+  },
+  {
+    "id": "development-00071",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-06,
+    "rejectAbsDifference": 1.792795956134796e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-06
+  },
+  {
+    "id": "development-00072",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.0132789611816406e-06,
+    "rejectAbsDifference": 1.862645149230957e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.0132789611816406e-06
+  },
+  {
+    "id": "development-00073",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539063e-08,
+    "rejectAbsDifference": 8.614733815193176e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00074",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.0605511963367462e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00075",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 2.9569491744041443e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.7881393432617188e-07
+  },
+  {
+    "id": "development-00076",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539063e-08,
+    "rejectAbsDifference": 1.4435499906539917e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00077",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 1.7113052308559418e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.980232238769531e-07
+  },
+  {
+    "id": "development-00078",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.152557373046875e-07,
+    "rejectAbsDifference": 2.9103830456733704e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.7285346984863281e-06
+  },
+  {
+    "id": "development-00079",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.3709068298339844e-06,
+    "rejectAbsDifference": 1.0186340659856796e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.6093254089355469e-06
+  },
+  {
+    "id": "development-00080",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 1.6298145055770874e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.7881393432617188e-07
+  },
+  {
+    "id": "development-00081",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 5.238689482212067e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.980232238769531e-07
+  },
+  {
+    "id": "development-00082",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.30385160446167e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00083",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.725290298461914e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00084",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 6.379559636116028e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.7881393432617188e-07
+  },
+  {
+    "id": "development-00085",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.5762786865234375e-07,
+    "rejectAbsDifference": 1.3969838619232178e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00086",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.152557373046875e-07,
+    "rejectAbsDifference": 1.7258571460843086e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.152557373046875e-07
+  },
+  {
+    "id": "development-00087",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 8.940696716308594e-07,
+    "rejectAbsDifference": 6.752088665962219e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.940696716308594e-07
+  },
+  {
+    "id": "development-00088",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.852175384759903e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00089",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.6193447411060333e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00090",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 1.3969838619232178e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00091",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.7418136596679688e-06,
+    "rejectAbsDifference": 4.44706529378891e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.7418136596679688e-06
+  },
+  {
+    "id": "development-00092",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.5599653124809265e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00093",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.5762786865234375e-07,
+    "rejectAbsDifference": 2.0372681319713593e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00094",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 4.339381121098995e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00095",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.1694071367383e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00096",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.9598595574498177e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00097",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 4.20550350099802e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00098",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.364418029785156e-07,
+    "rejectAbsDifference": 1.6763806343078613e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.364418029785156e-07
+  },
+  {
+    "id": "development-00099",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 6.556510925292969e-07,
+    "rejectAbsDifference": 4.330649971961975e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.940696716308594e-07
+  },
+  {
+    "id": "development-00100",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.5762786865234375e-07,
+    "rejectAbsDifference": 4.1676685214042664e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00101",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 1.257285475730896e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00102",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.975583240389824e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00103",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 5.296897143125534e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00104",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 6.111804395914078e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00105",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.280568540096283e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00106",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 1.280568540096283e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00107",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 4.423782229423523e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00108",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.748603820800781e-07,
+    "rejectAbsDifference": 3.958120942115784e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.748603820800781e-07
+  },
+  {
+    "id": "development-00109",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 3.725290298461914e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00110",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.1457672119140625e-06,
+    "rejectAbsDifference": 2.5320332497358322e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.1457672119140625e-06
+  },
+  {
+    "id": "development-00111",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-06,
+    "rejectAbsDifference": 3.230525180697441e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-06
+  },
+  {
+    "id": "development-00112",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 9.778887033462524e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00113",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 5.99247869104147e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00114",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.4738255888223648e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00115",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.090826794505119e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00116",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 1.0826624929904938e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00117",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 4.109460860490799e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00118",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.364418029785156e-07,
+    "rejectAbsDifference": 8.381903171539307e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.364418029785156e-07
+  },
+  {
+    "id": "development-00119",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.682209014892578e-06,
+    "rejectAbsDifference": 3.1315721571445465e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.682209014892578e-06
+  },
+  {
+    "id": "development-00120",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 3.259629011154175e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00121",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 5.587935447692871e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00122",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 4.3655745685100555e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00123",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.76837158203125e-07,
+    "rejectAbsDifference": 1.8422724679112434e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00124",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.5133991837501526e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00125",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 6.565824151039124e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00126",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 2.7008354663848877e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00127",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 7.916241884231567e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00128",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.6298145055770874e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00129",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.9336661100387573e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00130",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.5762786865234375e-07,
+    "rejectAbsDifference": 1.955777406692505e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00131",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.748603820800781e-07,
+    "rejectAbsDifference": 4.284083843231201e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.748603820800781e-07
+  },
+  {
+    "id": "development-00132",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 8.344650268554688e-07,
+    "rejectAbsDifference": 1.8277205526828766e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.344650268554688e-07
+  },
+  {
+    "id": "development-00133",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 9.5367431640625e-07,
+    "rejectAbsDifference": 2.2351741790771484e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 9.5367431640625e-07
+  },
+  {
+    "id": "development-00134",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.658918336033821e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00135",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.205371856689453e-06,
+    "rejectAbsDifference": 2.5727786123752594e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.205371856689453e-06
+  },
+  {
+    "id": "development-00136",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 4.0512531995773315e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 9.5367431640625e-07
+  },
+  {
+    "id": "development-00137",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.748603820800781e-07,
+    "rejectAbsDifference": 2.3283064365386963e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.748603820800781e-07
+  },
+  {
+    "id": "development-00138",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 2.5873305276036263e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.980232238769531e-07
+  },
+  {
+    "id": "development-00139",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.8230715543031693e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00140",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.933906555175781e-06,
+    "rejectAbsDifference": 2.782326191663742e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.933906555175781e-06
+  },
+  {
+    "id": "development-00141",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.331371307373047e-06,
+    "rejectAbsDifference": 1.979060471057892e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.331371307373047e-06
+  },
+  {
+    "id": "development-00142",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 3.096647560596466e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.7881393432617188e-07
+  },
+  {
+    "id": "development-00143",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539062e-07,
+    "rejectAbsDifference": 3.67872416973114e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.960464477539062e-07
+  },
+  {
+    "id": "development-00144",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.7939677238464355e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00145",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 8.344650268554688e-07,
+    "rejectAbsDifference": 2.1420419216156006e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.344650268554688e-07
+  },
+  {
+    "id": "development-00146",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539063e-08,
+    "rejectAbsDifference": 8.527422323822975e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00147",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.76837158203125e-07,
+    "rejectAbsDifference": 5.2386894822120667e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00148",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.0442606657743454e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00149",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539062e-07,
+    "rejectAbsDifference": 2.7299392968416214e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.152557373046875e-07
+  },
+  {
+    "id": "development-00150",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.3760443329811096e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00151",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 4.045432433485985e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00152",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 4.190951585769653e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00153",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.210719347000122e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00154",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.247987478971481e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00155",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 5.704350769519806e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00156",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 8.207280188798904e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00157",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.7299392968416214e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00158",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.9511284083127975e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.960464477539063e-08
+  },
+  {
+    "id": "development-00159",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 6.556510925292969e-07,
+    "rejectAbsDifference": 6.344635039567947e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 6.556510925292969e-07
+  },
+  {
+    "id": "development-00160",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.641456037759781e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00161",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539063e-08,
+    "rejectAbsDifference": 8.280039764940739e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00162",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.5762786865234375e-07,
+    "rejectAbsDifference": 3.3927790354937315e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00163",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 3.082095645368099e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00164",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 2.9103830456733704e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00165",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.805325832217932e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00166",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539063e-08,
+    "rejectAbsDifference": 1.728767529129982e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00167",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.2439053282141685e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00168",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.14321368932724e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00169",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.1597876437008381e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00170",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.2427335605025291e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00171",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.7724232748150826e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00172",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 1.0099029168486595e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00173",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.949956640601158e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00174",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.2802851162850857e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00175",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.6689300537109375e-06,
+    "rejectAbsDifference": 2.5873305276036263e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.6689300537109375e-06
+  },
+  {
+    "id": "development-00176",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 3.1723175197839737e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00177",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 3.562308847904205e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00178",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 5.1513779908418655e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00179",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539062e-07,
+    "rejectAbsDifference": 6.402842700481415e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.960464477539062e-07
+  },
+  {
+    "id": "development-00180",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.364418029785156e-07,
+    "rejectAbsDifference": 5.76837919652462e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.364418029785156e-07
+  },
+  {
+    "id": "development-00181",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 6.55418261885643e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00182",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.9885192159563303e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00183",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.3113021850585938e-06,
+    "rejectAbsDifference": 1.960142981261015e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.3113021850585938e-06
+  },
+  {
+    "id": "development-00184",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.856257535517216e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00185",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 5.529727786779404e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00186",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.024171408265829e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00187",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 8.98417056305334e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00188",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.300374373793602e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00189",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 4.396133590489626e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00190",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.2118911147117615e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00191",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.748603820800781e-07,
+    "rejectAbsDifference": 1.8044374883174896e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.748603820800781e-07
+  },
+  {
+    "id": "development-00192",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.4581019058823586e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00193",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 8.344650268554688e-07,
+    "rejectAbsDifference": 3.338209353387356e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.344650268554688e-07
+  },
+  {
+    "id": "development-00194",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.6411726139485836e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00195",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.1757947504520416e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.940696716308594e-07
+  },
+  {
+    "id": "development-00196",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.0157236829400063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00197",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.3496901374310255e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00198",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 7.0140231400728226e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00199",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 4.43833414465189e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00200",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.1059455573558807e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00201",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.8856447897851467e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00202",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 7.4323907028883696e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00203",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.034357748925686e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00204",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.4901161193847656e-06,
+    "rejectAbsDifference": 3.2057869248092175e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.4901161193847656e-06
+  },
+  {
+    "id": "development-00205",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.5829649530351162e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00206",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 4.0279701352119446e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00207",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.76837158203125e-07,
+    "rejectAbsDifference": 6.686605047434568e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00208",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 6.373738870024681e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00209",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.5762786865234375e-07,
+    "rejectAbsDifference": 2.5393092073500156e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00210",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.76837158203125e-07,
+    "rejectAbsDifference": 1.0793883120641112e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00211",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.0728836059570312e-06,
+    "rejectAbsDifference": 3.026798367500305e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.0728836059570312e-06
+  },
+  {
+    "id": "development-00212",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 9.051291272044182e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00213",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 4.202593117952347e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00214",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.735760062932968e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00215",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 6.002665031701326e-11,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00216",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 2.3283064365386963e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00217",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 4.918547347187996e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00218",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.7075657271780074e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00219",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.152557373046875e-07,
+    "rejectAbsDifference": 4.220055416226387e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.152557373046875e-07
+  },
+  {
+    "id": "development-00220",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 2.4068867787718773e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.344650268554688e-07
+  },
+  {
+    "id": "development-00221",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.3709068298339844e-06,
+    "rejectAbsDifference": 2.9569491744041443e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.3709068298339844e-06
+  },
+  {
+    "id": "development-00222",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 9.498762665316463e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00223",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.405148163437843e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00224",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 3.841705620288849e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00225",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 4.751200322061777e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00226",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 8.032657206058502e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00227",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 6.599293556064367e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00228",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 4.650792106986046e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.980232238769531e-07
+  },
+  {
+    "id": "development-00229",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.015156835317612e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00230",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 6.741902325302362e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00231",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 6.501068128272891e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00232",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 5.5442797020077705e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00233",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 6.556510925292969e-07,
+    "rejectAbsDifference": 2.2962922230362892e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 6.556510925292969e-07
+  },
+  {
+    "id": "development-00234",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 1.851731212809682e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.980232238769531e-07
+  },
+  {
+    "id": "development-00235",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 8.440110832452774e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00236",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 6.365007720887661e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00237",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.6516423784196377e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00238",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 4.5693013817071915e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00239",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.364418029785156e-07,
+    "rejectAbsDifference": 1.9572325982153416e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.364418029785156e-07
+  },
+  {
+    "id": "development-00240",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.167224349454045e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00241",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.5279510989785194e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00242",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.748603820800781e-07,
+    "rejectAbsDifference": 1.3445969671010971e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.748603820800781e-07
+  },
+  {
+    "id": "development-00243",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 8.940696716308594e-07,
+    "rejectAbsDifference": 3.67872416973114e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.940696716308594e-07
+  },
+  {
+    "id": "development-00244",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 2.569868229329586e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00245",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.0666553862392902e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00246",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539063e-08,
+    "rejectAbsDifference": 2.48473952524364e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00247",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.4924596548080444e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00248",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 4.376488504931331e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00249",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 2.10275175049901e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00250",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 1.6370904631912708e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00251",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.9208528101444244e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00252",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 4.845787771046162e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00253",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.5087501853704453e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00254",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.189779818058014e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00255",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.735476639121771e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00256",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.152557373046875e-07,
+    "rejectAbsDifference": 2.718297764658928e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.152557373046875e-07
+  },
+  {
+    "id": "development-00257",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 4.408502718433738e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00258",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.419255906715989e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00259",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.2216332834213972e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00260",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.8335413187742233e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00261",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.364418029785156e-07,
+    "rejectAbsDifference": 1.4755642041563988e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.364418029785156e-07
+  },
+  {
+    "id": "development-00262",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 4.5838532969355583e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00263",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.1692463885992765e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00264",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.364418029785156e-07,
+    "rejectAbsDifference": 2.87545844912529e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.364418029785156e-07
+  },
+  {
+    "id": "development-00265",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 4.279718268662691e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00266",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 1.5053956303745508e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.980232238769531e-07
+  },
+  {
+    "id": "development-00267",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 5.656329449266195e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00268",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.6724592316895723e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00269",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.5762786865234375e-07,
+    "rejectAbsDifference": 6.228219717741013e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00270",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.5686964616179466e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00271",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.76837158203125e-07,
+    "rejectAbsDifference": 3.1170202419161797e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00272",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.342858351767063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00273",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.9514118321239948e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00274",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.5116605684161186e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00275",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 5.005858838558197e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00276",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.3245811462402344e-06,
+    "rejectAbsDifference": 4.540197551250458e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.3245811462402344e-06
+  },
+  {
+    "id": "development-00277",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.8568243831396103e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00278",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.3249518815428019e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00279",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 6.556510925292969e-07,
+    "rejectAbsDifference": 6.093614501878619e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 6.556510925292969e-07
+  },
+  {
+    "id": "development-00280",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 4.899629857391119e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00281",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.2543750926852226e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00282",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 2.066371962428093e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00283",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.16067598760128e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00284",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 1.206353772431612e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00285",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 1.877197064459324e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.980232238769531e-07
+  },
+  {
+    "id": "development-00286",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 2.523302100598812e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.7881393432617188e-07
+  },
+  {
+    "id": "development-00287",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.7721398510038853e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00288",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.5762786865234375e-07,
+    "rejectAbsDifference": 5.3551048040390015e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00289",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.7156708054244518e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00290",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.4415279515087605e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00291",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.2802851162850857e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00292",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 6.556510925292969e-07,
+    "rejectAbsDifference": 1.4726538211107254e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 6.556510925292969e-07
+  },
+  {
+    "id": "development-00293",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.779699232429266e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00294",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.3396645449101925e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00295",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.1202140487730503e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.364418029785156e-07
+  },
+  {
+    "id": "development-00296",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539062e-07,
+    "rejectAbsDifference": 1.1379597708582878e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.960464477539062e-07
+  },
+  {
+    "id": "development-00297",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 6.699701771140099e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00298",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.0521034710109234e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00299",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 9.93022695183754e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00300",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 6.920890882611275e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00301",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 7.275957614183426e-10,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00302",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.5762786865234375e-07,
+    "rejectAbsDifference": 3.2014213502407074e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00303",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.317836672067642e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00304",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.14321368932724e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00305",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 1.8277205526828766e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00306",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.7171259969472885e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00307",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.589557647705078e-06,
+    "rejectAbsDifference": 4.326648195274174e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.589557647705078e-06
+  },
+  {
+    "id": "development-00308",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.3355823941528797e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00309",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 1.1641532182693481e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.980232238769531e-07
+  },
+  {
+    "id": "development-00310",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.3603206500411034e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.0728836059570312e-06
+  },
+  {
+    "id": "development-00311",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 3.4633558243513107e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00312",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 1.3758835848420858e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00313",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539062e-07,
+    "rejectAbsDifference": 4.516914486885071e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.960464477539062e-07
+  },
+  {
+    "id": "development-00314",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.1267624106258154e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00315",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1324882507324219e-06,
+    "rejectAbsDifference": 1.2398231774568558e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.2516975402832031e-06
+  },
+  {
+    "id": "development-00316",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 6.556510925292969e-07,
+    "rejectAbsDifference": 8.70932126417756e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 6.556510925292969e-07
+  },
+  {
+    "id": "development-00317",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 9.5367431640625e-07,
+    "rejectAbsDifference": 2.606248017400503e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 9.5367431640625e-07
+  },
+  {
+    "id": "development-00318",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 2.5560439098626375e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.7881393432617188e-07
+  },
+  {
+    "id": "development-00319",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.5142875276505947e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00320",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 5.286710802465677e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00321",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 5.296897143125534e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00322",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 2.9467628337442875e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00323",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 2.0969309844076633e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00324",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 7.677590474486351e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00325",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.686283551156521e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00326",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.841989044100046e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00327",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 6.556510925292969e-07,
+    "rejectAbsDifference": 3.9959559217095375e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 6.556510925292969e-07
+  },
+  {
+    "id": "development-00328",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.323657438158989e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00329",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.055902197957039e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00330",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 3.0209776014089584e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00331",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 3.211607690900564e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00332",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.1141098588705063e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00333",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.8951035346835852e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00334",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.648448571562767e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00335",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 6.556510925292969e-07,
+    "rejectAbsDifference": 2.444721758365631e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.748603820800781e-07
+  },
+  {
+    "id": "development-00336",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.5762786865234375e-07,
+    "rejectAbsDifference": 1.983426045626402e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00337",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 4.118192009627819e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00338",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.219167072325945e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00339",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.4406396076083183e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00340",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 2.916203811764717e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00341",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 1.3387762010097504e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00342",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 7.229391485452652e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00343",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 8.032657206058502e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00344",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.2188836485147476e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00345",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.4207110982388258e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00346",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 2.9809598345309496e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.980232238769531e-07
+  },
+  {
+    "id": "development-00347",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.916203811764717e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00348",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 4.096364136785269e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00349",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.3707904145121574e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00350",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 2.7284841053187847e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00351",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.3035681806504726e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00352",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.9354047253727913e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00353",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539063e-08,
+    "rejectAbsDifference": 3.731111064553261e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00354",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-06,
+    "rejectAbsDifference": 5.293986760079861e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-06
+  },
+  {
+    "id": "development-00355",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 9.5367431640625e-07,
+    "rejectAbsDifference": 2.278829924762249e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 9.5367431640625e-07
+  },
+  {
+    "id": "development-00356",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.41096892952919e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00357",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.573950380086899e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00358",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.2613676264882088e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00359",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.993511199951172e-06,
+    "rejectAbsDifference": 5.388574209064245e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.993511199951172e-06
+  },
+  {
+    "id": "development-00360",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.9819708541035652e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00361",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.76837158203125e-07,
+    "rejectAbsDifference": 9.845825843513012e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00362",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 4.44706529378891e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00363",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 3.073364496231079e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00364",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.61643435806036e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00365",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 2.837623469531536e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00366",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 2.695014700293541e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00367",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.0531158447265625e-06,
+    "rejectAbsDifference": 8.11705831438303e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.0531158447265625e-06
+  },
+  {
+    "id": "development-00368",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.4901161193847656e-06,
+    "rejectAbsDifference": 5.238689482212067e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.4901161193847656e-06
+  },
+  {
+    "id": "development-00369",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 1.705484464764595e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00370",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 2.246815711259842e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00371",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 2.204615157097578e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.980232238769531e-07
+  },
+  {
+    "id": "development-00372",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.9249349609017372e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00373",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.748603820800781e-07,
+    "rejectAbsDifference": 2.2904714569449425e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.748603820800781e-07
+  },
+  {
+    "id": "development-00374",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.862645149230957e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00375",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 4.353933036327362e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00376",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 5.0640664994716644e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00377",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 6.556510925292969e-07,
+    "rejectAbsDifference": 2.0052539184689522e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 6.556510925292969e-07
+  },
+  {
+    "id": "development-00378",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.4086253941059113e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00379",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 4.773028194904327e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.7881393432617188e-07
+  },
+  {
+    "id": "development-00380",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.0637450031936169e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00381",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 7.974449545145035e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00382",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 3.055902197957039e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00383",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 2.270098775625229e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.7881393432617188e-07
+  },
+  {
+    "id": "development-00384",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-06,
+    "rejectAbsDifference": 4.76837158203125e-07,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.7881393432617188e-06
+  },
+  {
+    "id": "development-00385",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.2351741790771484e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00386",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.9669532775878906e-06,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.9669532775878906e-06
+  },
+  {
+    "id": "development-00387",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.5033950805664062e-06,
+    "rejectAbsDifference": 1.6689300537109375e-06,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.337860107421875e-06
+  },
+  {
+    "id": "development-00388",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.0728836059570312e-06,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.0728836059570312e-06
+  },
+  {
+    "id": "development-00389",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.519918441772461e-06,
+    "rejectAbsDifference": 1.0132789611816406e-06,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.519918441772461e-06
+  },
+  {
+    "id": "development-00390",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 7.35744833946228e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00391",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.980232238769531e-07
+  },
+  {
+    "id": "development-00392",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.662441253662109e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.3113021850585938e-06
+  },
+  {
+    "id": "development-00393",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.0265579223632812e-06,
+    "rejectAbsDifference": 8.344650268554688e-07,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.6226043701171875e-06
+  },
+  {
+    "id": "development-00394",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.960464477539062e-07
+  },
+  {
+    "id": "development-00395",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.9802322387695312e-08,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.9802322387695312e-08
+  },
+  {
+    "id": "development-00396",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 6.854534149169922e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.2814998626708984e-06
+  },
+  {
+    "id": "development-00397",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.152557373046875e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.152557373046875e-07
+  },
+  {
+    "id": "development-00398",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 5.364418029785156e-07,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1324882507324219e-06
+  },
+  {
+    "id": "development-00399",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.5762786865234375e-07,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.470348358154297e-07
+  },
+  {
+    "id": "development-00400",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.5497207641601562e-06,
+    "rejectAbsDifference": 1.210719347000122e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.5497207641601562e-06
+  },
+  {
+    "id": "development-00401",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.5497207641601562e-06,
+    "rejectAbsDifference": 6.2282197177410126e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.5497207641601562e-06
+  },
+  {
+    "id": "development-00402",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 2.5727786123752594e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.0132789611816406e-06
+  },
+  {
+    "id": "development-00403",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 5.2852556109428406e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00404",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.086162567138672e-06,
+    "rejectAbsDifference": 7.101334631443024e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.086162567138672e-06
+  },
+  {
+    "id": "development-00405",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 4.284083843231201e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00406",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.6689300537109375e-06,
+    "rejectAbsDifference": 3.620516508817673e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.6689300537109375e-06
+  },
+  {
+    "id": "development-00407",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0.0,
+    "rejectAbsDifference": 5.5995769798755646e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00408",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 1.0477378964424133e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00409",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 3.5762786865234375e-07
+  },
+  {
+    "id": "development-00410",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 1.3969838619232178e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00411",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.152557373046875e-07,
+    "rejectAbsDifference": 6.28642737865448e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.152557373046875e-07
+  },
+  {
+    "id": "development-00412",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.76837158203125e-07,
+    "rejectAbsDifference": 1.4901161193847656e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00413",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 8.940696716308594e-07,
+    "rejectAbsDifference": 2.980232238769531e-07,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.940696716308594e-07
+  },
+  {
+    "id": "development-00414",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.152557373046875e-07,
+    "rejectAbsDifference": 4.190951585769653e-09,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.152557373046875e-07
+  },
+  {
+    "id": "development-00415",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539063e-08,
+    "rejectAbsDifference": 5.587935447692871e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1920928955078125e-07
+  },
+  {
+    "id": "development-00416",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.046627044677734e-07
+  },
+  {
+    "id": "development-00417",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539062e-07,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.960464477539062e-07
+  },
+  {
+    "id": "development-00418",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.980232238769531e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.980232238769531e-07
+  },
+  {
+    "id": "development-00419",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1026859283447266e-06,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1026859283447266e-06
+  },
+  {
+    "id": "development-00420",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.344650268554688e-07
+  },
+  {
+    "id": "development-00421",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 8.344650268554688e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.344650268554688e-07
+  },
+  {
+    "id": "development-00422",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.2351741790771484e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.642673492431641e-07
+  },
+  {
+    "id": "development-00423",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00424",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.2516975402832031e-06,
+    "rejectAbsDifference": 4.172325134277344e-07,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.2516975402832031e-06
+  },
+  {
+    "id": "development-00425",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.7881393432617188e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.7881393432617188e-07
+  },
+  {
+    "id": "development-00426",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.152557373046875e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.152557373046875e-07
+  },
+  {
+    "id": "development-00427",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00428",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.129243850708008e-07,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.364418029785156e-07
+  },
+  {
+    "id": "development-00429",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.76837158203125e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00430",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.430511474609375e-06,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.430511474609375e-06
+  },
+  {
+    "id": "development-00431",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.76837158203125e-07,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.76837158203125e-07
+  },
+  {
+    "id": "development-00432",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00433",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00434",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00435",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00436",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00437",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00438",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00439",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 1.1920928955078125e-07,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00440",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00441",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00442",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00443",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00444",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00445",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00446",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00447",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00448",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00449",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00450",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00451",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00452",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00453",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00454",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00455",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 1.1920928955078125e-07,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00456",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00457",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00458",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00459",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00460",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00461",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00462",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00463",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00464",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 1.1920928955078125e-07,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00465",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00466",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00467",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00468",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00469",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00470",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00471",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00472",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00473",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00474",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00475",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.682209014892578e-07,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.682209014892578e-07
+  },
+  {
+    "id": "development-00476",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00477",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00478",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 0,
+    "rejectAbsDifference": 1.1920928955078125e-07,
+    "maximumAlignedPieceConfidenceAbsDifference": 0
+  },
+  {
+    "id": "development-00479",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.4901161193847656e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.046627044677734e-07
+  },
+  {
+    "id": "development-00480",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539062e-07,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.960464477539062e-07
+  },
+  {
+    "id": "development-00481",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1026859283447266e-06,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1026859283447266e-06
+  },
+  {
+    "id": "development-00482",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.0563602447509766e-06,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.0563602447509766e-06
+  },
+  {
+    "id": "development-00483",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.364418029785156e-07
+  },
+  {
+    "id": "development-00484",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 8.940696716308594e-08,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  },
+  {
+    "id": "development-00485",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-07
+  },
+  {
+    "id": "development-00486",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539063e-08,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.364418029785156e-07
+  },
+  {
+    "id": "development-00487",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.066394805908203e-07,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 5.066394805908203e-07
+  },
+  {
+    "id": "development-00488",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 3.8743019104003906e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.152557373046875e-07
+  },
+  {
+    "id": "development-00489",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 7.152557373046875e-07,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.152557373046875e-07
+  },
+  {
+    "id": "development-00490",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.384185791015625e-07,
+    "rejectAbsDifference": 5.960464477539063e-08,
+    "maximumAlignedPieceConfidenceAbsDifference": 1.1324882507324219e-06
+  },
+  {
+    "id": "development-00491",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 2.086162567138672e-07,
+    "rejectAbsDifference": 1.1920928955078125e-07,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.748603820800781e-07
+  },
+  {
+    "id": "development-00492",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 1.1920928955078125e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 7.152557373046875e-07
+  },
+  {
+    "id": "development-00493",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 5.960464477539062e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 8.940696716308594e-07
+  },
+  {
+    "id": "development-00494",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.470348358154297e-07,
+    "rejectAbsDifference": 1.1920928955078125e-07,
+    "maximumAlignedPieceConfidenceAbsDifference": 2.384185791015625e-06
+  },
+  {
+    "id": "development-00495",
+    "textEqual": true,
+    "ctcIntervalsEqual": true,
+    "paddingSupportedEqual": true,
+    "acceptedEqual": true,
+    "minimumConfidenceAbsDifference": 4.172325134277344e-07,
+    "rejectAbsDifference": 0.0,
+    "maximumAlignedPieceConfidenceAbsDifference": 4.172325134277344e-07
+  }
+]
