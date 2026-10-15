@@ -12,7 +12,7 @@ public static class RecoveryDocumentBuilder
 {
     private sealed record Atom(string Id, int Page, PdfGlyph Glyph)
     {
-        public RecoveryBox Box => new(Glyph.X, Glyph.Y, Glyph.Width, Glyph.Height);
+        public RecoveryBox Box => Glyph.InkBounds is {} b ? new(b.Left,b.Top,b.Right-b.Left,b.Bottom-b.Top) : new(Glyph.X, Glyph.Y, Glyph.Width, Glyph.Height);
     }
     private sealed record Label(string Value, int Page, RecoveryBox Box, IReadOnlyList<string> Ids, RecoveryBox? OwnershipBox = null, bool WholeOcrRow = false,
         IReadOnlyList<string>? NativeValueIds = null);
@@ -80,10 +80,31 @@ public static class RecoveryDocumentBuilder
         }
         return false;
     }
-    private static IEnumerable<Label> Labels(IReadOnlyList<Atom> atoms, Work work)
+    private static IEnumerable<Label> Labels(IReadOnlyList<Atom> atoms, IReadOnlyList<PdfPageLayout> pages,
+        IReadOnlySet<int>? ocrPages, Work work,CancellationToken token)
     {
         foreach (var row in atoms.GroupBy(a => a.Page))
         {
+            var grid=ocrPages?.Contains(row.Key)==true ? null : new PdfGrid(pages[row.Key-1],token);
+            var vertical=grid is null ? [] : pages[row.Key-1].Lines.Where(l=>l.Vertical).OrderBy(l=>l.X1).ToArray();
+            bool Boundary(PdfGlyph previous,PdfGlyph current)
+            {
+                var lo=0;var hi=vertical.Length;
+                while(lo<hi) {work.Step();var mid=lo+(hi-lo)/2;if(vertical[mid].X1<=previous.Cx)lo=mid+1;else hi=mid;}
+                for(var i=lo;i<vertical.Length && vertical[i].X1<current.Cx;i++)
+                { work.Step();if(vertical[i].Y1<=Math.Min(previous.Cy,current.Cy) && vertical[i].Y2>=Math.Max(previous.Cy,current.Cy))return true; }
+                return false;
+            }
+            var owners=new Dictionary<PdfGlyph,PdfBox?>(ReferenceEqualityComparer.Instance);
+            PdfBox? Owner(PdfGlyph glyph)
+            {
+                if(grid is null) return null;
+                if(owners.TryGetValue(glyph,out var owner))return owner;
+                work.Step(pages[row.Key-1].Lines.Count*4L);
+                try { owner=grid.Box(glyph.Cx,glyph.Cy); }
+                catch(PdfParseException failure) when(failure.Stage!="limit") { owner=null; }
+                owners.Add(glyph,owner);return owner;
+            }
             var byGlyph = new Dictionary<PdfGlyph, Atom>(ReferenceEqualityComparer.Instance);
             foreach (var atom in row)
             {
@@ -96,7 +117,8 @@ public static class RecoveryDocumentBuilder
                 foreach (var glyph in band)
                 {
                     work.Step(); var atom = byGlyph[glyph];
-                    if (pieces.Count == 0 || glyph.X - (pieces[^1][^1].Box.X + pieces[^1][^1].Box.Width) > Math.Max(2, glyph.Height * .7)) pieces.Add([]);
+                    if (pieces.Count == 0 || glyph.X - (pieces[^1][^1].Box.X + pieces[^1][^1].Box.Width) > Math.Max(2, glyph.Height * .7) ||
+                        Boundary(pieces[^1][^1].Glyph,glyph) && Owner(pieces[^1][^1].Glyph) is {} previous && Owner(glyph) is {} current && previous!=current) pieces.Add([]);
                     pieces[^1].Add(atom);
                 }
                 foreach (var piece in pieces)
@@ -157,6 +179,31 @@ public static class RecoveryDocumentBuilder
             }
         }
     }
+    private static IEnumerable<Label> NativeHeaderLabels(IReadOnlyList<Atom> atoms,Work work)
+    {
+        foreach(var group in atoms.Where(a=>a.Glyph.SourceLine is not null).GroupBy(a=>(a.Page,a.Glyph.SourceLine)))
+        {
+            var original=group.OrderBy(a=>a.Glyph.SourceOrder).ToArray();
+            work.Step(original.Length+original.Sum(a=>(long)a.Glyph.Text.Length));
+            var pieces=original.Select(a=>(Atom:a,Text:PdfGrid.Key(a.Glyph.Text))).ToArray();
+            var text=string.Concat(pieces.Select(p=>p.Text));
+            // Match normalized syntax while retaining complete ORIGINAL atoms.
+            // Never create a sub-glyph rectangle or normalize source text.
+            if(text!=PdfGrid.Key(string.Concat(original.Select(a=>a.Glyph.Text))))continue;
+            foreach(System.Text.RegularExpressions.Match match in Regex.Matches(text,HeaderPattern))
+            {
+                var selected=new List<Atom>();var at=0;
+                foreach(var piece in pieces)
+                {
+                    work.Step();var end=at+piece.Text.Length;
+                    if(at>=match.Index && end<=match.Index+match.Length && piece.Text.Length>0)selected.Add(piece.Atom);
+                    at=end;
+                }
+                if(selected.Count>0 && string.Concat(selected.Select(a=>PdfGrid.Key(a.Glyph.Text)))==match.Value)
+                    yield return new(match.Value,group.Key.Page,Bounds(selected),selected.Select(a=>a.Id).ToArray());
+            }
+        }
+    }
     private static RecoveryHeaderRegion? Region(Label label, RecoveryBox target)
     {
         if (label.OwnershipBox is { } ownership)
@@ -179,15 +226,22 @@ public static class RecoveryDocumentBuilder
     }
     private static string? Day(string value, RecoveryDocumentKind kind, int year)
     {
+        value=PdfGrid.Key(value);
+        if (kind == RecoveryDocumentKind.Timetable && value.StartsWith('(') && value.EndsWith(')')) value=value[1..^1];
         if (kind == RecoveryDocumentKind.Timetable) return value switch { "月" or "月曜" or "月曜日" => "1", "火" or "火曜" or "火曜日" => "2", "水" or "水曜" or "水曜日" => "3", "木" or "木曜" or "木曜日" => "4", "金" or "金曜" or "金曜日" => "5", _ => null };
-        var m = Regex.Match(value, @"^(?:(\d{4})[-/])?(\d{1,2})[-/](\d{1,2})$");
-        if (!m.Success) m = Regex.Match(value, @"^(?:(\d{4})年)?(\d{1,2})月(\d{1,2})日$");
+        const string weekday=@"(?:\(([日月火水木金土])(?:曜(?:日)?)?\))?$";
+        var m = Regex.Match(value, @"^(?:([0-9]{4})[-/])?([0-9]{1,2})[-/]([0-9]{1,2})"+weekday);
+        if (!m.Success) m = Regex.Match(value, @"^(?:([0-9]{4})年)?([0-9]{1,2})月([0-9]{1,2})日"+weekday);
         if (!m.Success) return null;
         var month = int.Parse(m.Groups[2].Value); var y = m.Groups[1].Success ? int.Parse(m.Groups[1].Value) : year + (month < 4 ? 1 : 0);
-        try { return new DateOnly(y, month, int.Parse(m.Groups[3].Value)).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture); } catch (ArgumentOutOfRangeException) { return null; }
+        try {
+            var date=new DateOnly(y,month,int.Parse(m.Groups[3].Value));
+            if(m.Groups[4].Success && m.Groups[4].Value!="日月火水木金土"[(int)date.DayOfWeek].ToString()) return null;
+            return date.ToString("yyyy-MM-dd",CultureInfo.InvariantCulture);
+        } catch (ArgumentOutOfRangeException) { return null; }
     }
     public static RecoveryDocument Build(string hash, MaterialKind materialKind, IReadOnlyList<PdfPageLayout> pages,
-        Func<int, RecoveryBox, bool> inkFree, IReadOnlySet<int>? ocrPages = null, CancellationToken token = default, bool allowStructureProposal = false)
+        Func<int, RecoveryBox, bool> inkFree, IReadOnlySet<int>? ocrPages = null, CancellationToken token = default, bool allowStructureProposal = false,bool allowNativeReferences = false)
     {
         token.ThrowIfCancellationRequested(); var work = new Work(token);
         var kind = RecoveryPolicy.Kind(materialKind) ?? throw new InvalidDataException("PDF復旧の対象外です。");
@@ -195,7 +249,13 @@ public static class RecoveryDocumentBuilder
         var atoms = pages.SelectMany((p, i) => p.Glyphs.Select((g, n) => new Atom($"p{i + 1}s{n}", i + 1, g))).ToArray();
         if (atoms.Length > 100000 || atoms.Any(a => !a.Box.Valid)) throw new InvalidDataException("文字の位置を確認できません。");
         atoms = atoms.OrderBy(a => a.Page).ThenBy(a => Math.Round(a.Glyph.Cy / 2)).ThenBy(a => a.Glyph.Cx).ToArray();
-        var labels = Labels(atoms, work).ToArray();
+        var labels = Labels(atoms,pages,ocrPages,work,token).ToArray();
+        if(allowNativeReferences && ocrPages is not {Count:>0})
+        {
+            (int,string,string) Key(Label label) => (label.Page,PdfGrid.Key(label.Value),string.Join(',',label.Ids));
+            var seen=labels.Select(Key).ToHashSet();
+            labels=labels.Concat(NativeHeaderLabels(atoms,work).Where(label=>seen.Add(Key(label)))).ToArray();
+        }
         if (ocrPages is { Count: > 0 })
         {
             (int, string, string) Key(Label label)
@@ -206,8 +266,8 @@ public static class RecoveryDocumentBuilder
             labels = labels.Select(l => contexts.TryGetValue(Key(l), out var context) ? l with { NativeValueIds = context.NativeValueIds } : l)
                 .Concat(native.Where(label => seen.Add(Key(label)))).ToArray();
         }
-        var years = labels.Where(l => Regex.IsMatch(l.Value, @"^(?:\d{4}|令和\d{1,2})年度$")).ToArray();
-        var yearValues = years.Select(l => l.Value.StartsWith("令和", StringComparison.Ordinal) ? 2018 + int.Parse(l.Value[2..^2]) : int.Parse(l.Value[..4])).Distinct().ToArray();
+        var years = labels.Where(l => Regex.IsMatch(PdfGrid.Key(l.Value), @"^(?:[0-9]{4}|令和[0-9]{1,2})年度$")).ToArray();
+        var yearValues = years.Select(l=>PdfGrid.Key(l.Value)).Select(value => value.StartsWith("令和", StringComparison.Ordinal) ? 2018 + int.Parse(value[2..^2]) : int.Parse(value[..4])).Distinct().ToArray();
         if (yearValues.Length != 1) throw new InvalidDataException("年度の独立した見出しがありません。");
         var year = yearValues[0];
         var terms = labels.Where(l => l.Value is "前期" or "後期").ToArray();
@@ -232,10 +292,14 @@ public static class RecoveryDocumentBuilder
                 var gradeAtoms = atoms.Where(a => a.Page == dept.Page && a.Glyph.Cx > gradeBox.Left && a.Glyph.Cx < gradeBox.Right && a.Glyph.Cy > gradeBox.Top && a.Glyph.Cy < gradeBox.Bottom).ToArray();
                 var grade = PdfGrid.Key(string.Concat(gradeAtoms.Select(a => a.Glyph.Text))); var cls = grade + "_" + dept.Value;
                 if (!ClassSelection.Candidates.Contains(cls)) continue;
+                // A merged class rail can begin at a small grouping-header
+                // row. Its body ownership begins at the actual period cell
+                // containing this independently printed class label.
+                var bodyTop=grid.Box(periodRows[0][0].Cx,dept.Box.Y+dept.Box.Height/2).Top;
                 var ids = gradeAtoms.Select(a => a.Id).Concat(dept.Ids).ToHashSet();
                 var box = new RecoveryBox(gradeBox.Left, Math.Min(gradeBox.Top, classBox.Top), classBox.Right - gradeBox.Left, Math.Max(gradeBox.Bottom, classBox.Bottom) - Math.Min(gradeBox.Top, classBox.Top));
                 legacyClassLabels.Add(new(cls, dept.Page, box, atoms.Where(a => ids.Contains(a.Id)).Select(a => a.Id).ToArray(),
-                    new(classBox.Left, classBox.Top, classBox.Right - classBox.Left, classBox.Bottom - classBox.Top)));
+                    new(classBox.Left, Math.Max(classBox.Top,bodyTop), classBox.Right - classBox.Left, classBox.Bottom - Math.Max(classBox.Top,bodyTop))));
             }
             catch (PdfParseException error) when (error.Stage != "limit") { }
         }
@@ -279,6 +343,15 @@ public static class RecoveryDocumentBuilder
             var ids = header.Ids.Concat(grades[0].Ids).ToHashSet(StringComparer.Ordinal);
             return header with { Ids = atoms.Where(a => ids.Contains(a.Id)).Select(a => a.Id).ToArray() };
         }
+        if(allowNativeReferences && kind==RecoveryDocumentKind.Exam && pages.Count==6)
+        {
+            var regular=printedClasses.Select(l=>l.Value.Replace('-','_')).ToHashSet();
+            var expected=RecoveryValidator.SpecialClasses.Where(c=>!c.StartsWith("AI_",StringComparison.Ordinal)).ToHashSet();
+            var grades=labels.Where(l=>l.Value is "1年" or "2年").ToArray();
+            if(regular.SetEquals(expected) && grades.Length==2 && grades.Select(l=>l.Page).Distinct().Count()==1 && grades.Select(l=>l.Value).Distinct().Count()==2 &&
+                grades.SelectMany(l=>l.Ids).All(id=>atoms.Single(a=>a.Id==id).Glyph.InkBounds is not null))
+                legacyClassLabels.AddRange(grades.Select(l=>Expand(l) with {Value="AI_"+l.Value[0]}));
+        }
         var classLabels = printedClasses.Where(l => !l.Ids.Any(ambiguousDateHeaders.Contains)).Select(l => BindAiGrade(Expand(l) with { Value = l.Value.Replace('-', '_') })).Concat(legacyClassLabels).ToArray();
         var dayLabels = labels.Where(l => !l.Ids.Any(ambiguousClassHeaders.Contains)).Select(l => (Label: l, Day: Day(l.Value, kind, year))).Where(p => p.Day is not null).Select(p => Expand(p.Label) with { Value = p.Day! }).ToArray();
         // A gap-split weekday such as 月 must not hide the intact 月曜日 from
@@ -300,14 +373,19 @@ public static class RecoveryDocumentBuilder
         work.Step(classLabels.Sum(l => (long)l.Ids.Count) + periodLabels.Length);
         var classHeaderIds = classLabels.SelectMany(l => l.Ids).ToHashSet(StringComparer.Ordinal);
         periodLabels = periodLabels.Where(l => !l.Ids.Any(classHeaderIds.Contains)).ToArray();
-        if (classLabels.Length == 0 || dayLabels.Length == 0 || periodLabels.Length == 0) throw new InvalidDataException("クラス・日付・時限の見出しを確認できません。");
+        if (classLabels.Length == 0 || dayLabels.Length == 0 || periodLabels.Length == 0)
+        {
+            var failure=new InvalidDataException("クラス・日付・時限の見出しを確認できません。");
+            failure.Data["RecoveryHeaderCounts"]=new { Classes=classLabels.Length,Days=dayLabels.Length,Periods=periodLabels.Length };
+            throw failure;
+        }
         var trustedNormal = new Dictionary<int, TimetableAnalysis>(); SpecialAnalysis? trustedSpecial = null;
         if (kind == RecoveryDocumentKind.Timetable)
         {
             foreach (var (page, index) in pages.Select((p, i) => (p, i + 1))) try { trustedNormal[index] = PdfScheduleParser.Timetable([page], token); } catch (PdfParseException error) when (error.Stage != "limit") { }
         }
-        else try { trustedSpecial = PdfScheduleParser.Special(pages, materialKind, token, ocrPages); } catch (PdfParseException error) when (error.Stage != "limit") { }
-        var sources = atoms.ToDictionary(a => a.Id, a => new RecoverySource(a.Id, "header", a.Page, a.Glyph.Text, a.Box, ocrPages?.Contains(a.Page) == true, a.Glyph.SourceLine, a.Glyph.SourceOrder) { FontEvidence = a.Glyph.FontEvidence });
+        else try { trustedSpecial = PdfScheduleParser.Special(pages, materialKind, token, ocrPages,allowNativeTwoRowExam:allowNativeReferences); } catch (PdfParseException error) when (error.Stage != "limit") { }
+        var sources = atoms.ToDictionary(a => a.Id, a => new RecoverySource(a.Id, "header", a.Page, a.Glyph.Text, a.Box, ocrPages?.Contains(a.Page) == true, a.Glyph.SourceLine, a.Glyph.SourceOrder) { FontEvidence = a.Glyph.FontEvidence, RequiresVisualReview = a.Glyph.RequiresVisualReview,NativeLayoutBox=a.Glyph.InkBounds is null ? null : new(a.Glyph.X,a.Glyph.Y,a.Glyph.Width,a.Glyph.Height) });
         var cells = new List<RecoveryCell>();
         // Retain the original order within each page while avoiding repeated
         // comparisons with every other page's original text and headers.
@@ -350,7 +428,8 @@ public static class RecoveryDocumentBuilder
                 // Header cells are not timetable body cells.
                 if (headers.Any(l => box.Contains(l.Box))) continue;
                 Label? Closest(IEnumerable<Label> candidates) => candidates.Where(l => Region(l, box) is not null).OrderBy(l => Region(l, box)!.Axis == RecoveryHeaderAxis.Above ? box.Y - l.Box.Y - l.Box.Height : box.X - l.Box.X - l.Box.Width).FirstOrDefault();
-                var cls = Closest(pageClasses); var day = Closest(pageDays);
+                var cls = Closest(allowNativeReferences ? pageClasses.Where(l=>Region(l,box)?.Axis==(kind==RecoveryDocumentKind.Exam ? RecoveryHeaderAxis.Above : RecoveryHeaderAxis.Left)) : pageClasses);
+                var day = Closest(allowNativeReferences ? pageDays.Where(l=>Region(l,box)?.Axis==(kind==RecoveryDocumentKind.Exam ? RecoveryHeaderAxis.Left : RecoveryHeaderAxis.Above)) : pageDays);
                 if (cls is null || day is null) continue;
                 var period = pagePeriods.Where(l => Region(l, box) is not null).GroupBy(l => l.Value).Select(g => Closest(g)!).Where(l => l is not null).ToArray();
                 if (period.Length == 0) continue;
@@ -359,7 +438,20 @@ public static class RecoveryDocumentBuilder
                 if (chosenPeriods.Length == 0) chosenPeriods = [Closest(period)!];
                 var slots = chosenPeriods.OrderBy(l => int.Parse(l.Value)).Select(l => new RecoverySlot(cls.Value, day.Value, int.Parse(l.Value))).ToArray();
                 work.Step(slots.Length * 2L); // Membership and registration, not a scan of past cells.
-                if (slots.Any(usedSlots.Contains)) throw new InvalidDataException("時間割の同じ位置に複数のセル候補があります。");
+                RecoveryCell? priorSlice=null;
+                if (slots.Any(usedSlots.Contains))
+                {
+                    var overlapping=cells.Where(c=>c.Slots.Any(slots.Contains)).ToArray();
+                    if(allowNativeReferences && overlapping.Length==1 && overlapping[0].Page==pi && overlapping[0].Slots.SequenceEqual(slots) &&
+                        overlapping[0].Box.X==box.X && overlapping[0].Box.Width==box.Width && Math.Abs(overlapping[0].Box.Y+overlapping[0].Box.Height-box.Y)<1e-7)
+                        priorSlice=overlapping[0];
+                    else {
+                    var failure=new InvalidDataException("時間割の同じ位置に複数のセル候補があります。");
+                    failure.Data["CurrentCandidateBox"]=box;
+                    failure.Data["PreviousCandidateBox"]=cells.First(c=>c.Slots.Any(slots.Contains)).Box;
+                    throw failure;
+                    }
+                }
                 var id = $"p{pi}c{cells.Count}";
                 var inside = atomIndex.Contained(box);
                 var empty = inside.Length == 0 && inkFree(pi, box);
@@ -378,7 +470,7 @@ public static class RecoveryDocumentBuilder
                     }
                 }
                 IReadOnlyList<RecoveryRoleScope> scopes = []; IReadOnlyList<RecoveryLessonBinding> fixedBindings = [];
-                RecoveryOrderedRowProof? orderedProof = null;
+                RecoveryOrderedRowProof? orderedProof = null;var nativeMapped=false;
                 IReadOnlyDictionary<string, string>? separators = null; var fixedBlanks = new HashSet<string>();
                 if (!empty)
                 {
@@ -392,7 +484,32 @@ public static class RecoveryDocumentBuilder
                         else if (trustedSpecial is not null) { var matched = trustedSpecial.Lessons.Where(l => l.Page == pi && l.ClassName == cls.Value && l.Date == day.Value && l.Period == slots.Min(s => s.Period)).ToArray(); if (matched.Length == 1) trustedNames = matched[0].Names; }
                         var rows = PdfGrid.Rows(inside.Select(a => a.Glyph));
                         var text = rows.Select(r => PdfGrid.Key(string.Concat(r.Select(g => g.Text)))).ToArray();
-                        if (trustedNames is not null && rows.Count == 3 && text.SequenceEqual(new[] { trustedNames.Subject, trustedNames.Teacher, trustedNames.Room }.Select(PdfGrid.Key)))
+                        var nativeRows=allowNativeReferences ? grid.TimetableRows(new(box.X,box.Y,box.X+box.Width,box.Y+box.Height)) : [];
+                        var nativeTexts=nativeRows.Select(row=>PdfGrid.Key(string.Concat(row.Select(g=>g.Text)))).ToArray();
+                        var known=trustedTuples ?? (trustedSpecial is null ? [] : trustedSpecial.Lessons.Where(l=>l.Page==pi && l.ClassName==cls.Value && l.Date==day.Value && l.Period==slots.Min(s=>s.Period)).Select(l=>l.Names).ToArray());
+                        var matching=known.Where(n=> {
+                            var values=new[]{n.Subject,n.Teacher,n.Room};var roles=Enumerable.Range(0,3).Where(role=>values[role].Length>0).ToArray();
+                            return roles.Length==nativeRows.Count && roles.Select((role,index)=> {
+                                var raw=string.Concat(nativeRows[index].Select(g=>g.Text));
+                                return PdfGrid.Key(role==2 ? PdfScheduleParser.CollapseRoomMarks(raw) : raw)==PdfGrid.Key(values[role]);
+                            }).All(same=>same);
+                        }).Distinct().ToArray();
+                        if(allowNativeReferences && matching.Length==1 && nativeRows.SelectMany(row=>row).ToHashSet(ReferenceEqualityComparer.Instance).SetEquals(inside.Select(a=>a.Glyph)))
+                        {
+                            var byGlyph=new Dictionary<PdfGlyph,string>(ReferenceEqualityComparer.Instance);
+                            foreach(var atom in inside)byGlyph.Add(atom.Glyph,atom.Id);
+                            var names=new[]{matching[0].Subject,matching[0].Teacher,matching[0].Room};var at=0;
+                            var ids=names.Select((value,role)=> {
+                                if(value.Length>0)return (IReadOnlyList<string>)nativeRows[at++].Select(g=>byGlyph[g]).ToArray();
+                                if(role==0)throw new InvalidDataException("科目の原文を確認できません。");
+                                fixedBlanks.Add(role==1 ? "teacher" : "room");return (IReadOnlyList<string>)Array.Empty<string>();
+                            }).ToArray();
+                            fixedBindings=[new(ids[0],ids[1],ids[2])];nativeMapped=true;
+                            var room=string.Concat(ids[2].Select(sourceId=>sources[sourceId].Text));
+                            if(room!=PdfScheduleParser.CollapseRoomMarks(room))
+                                foreach(var sourceId in ids[2])sources[sourceId]=sources[sourceId] with {RequiresVisualReview=true};
+                        }
+                        else if (trustedNames is not null && rows.Count == 3 && text.SequenceEqual(new[] { trustedNames.Subject, trustedNames.Teacher, trustedNames.Room }.Select(PdfGrid.Key)))
                         {
                             var byGlyph = new Dictionary<PdfGlyph, string>(ReferenceEqualityComparer.Instance);
                             foreach (var a in inside) byGlyph.Add(a.Glyph, a.Id);
@@ -458,9 +575,25 @@ public static class RecoveryDocumentBuilder
                 var blanks = scopes.Where(s => s.EmptyVerified).Select(s => s.Role.ToString().ToLowerInvariant()).Concat(fixedBlanks).Distinct().ToArray();
                 var parallelCount = fixedBindings.Count > 0 ? fixedBindings.Count : empty || scopes.Count == 0 ? 1 : scopes.Select(s => s.LessonIndex).Distinct().Count();
                 var cell = new RecoveryCell(id, pi, box, RecoveryInputState.Complete, slots, inside.Select(a => a.Id).ToArray(), blanks, empty, parallelCount)
-                { BindingMode = empty || fixedBindings.Count > 0 ? RecoveryBindingMode.Fixed : RecoveryBindingMode.RoleProposal, RoleScopes = scopes, LessonBindings = fixedBindings, ParallelSeparators = separators, OrderedRowProof = orderedProof,
+                { BindingMode = empty || fixedBindings.Count > 0 ? RecoveryBindingMode.Fixed : RecoveryBindingMode.RoleProposal, RoleScopes = scopes, LessonBindings = fixedBindings, ParallelSeparators = separators, OrderedRowProof = orderedProof,NativeLayoutProof=nativeMapped ? new(1,hash) : null,
                     ClassHeaderIds = cls.Ids, DayHeaderIds = day.Ids, PeriodHeaderIds = chosenPeriods.SelectMany(l => l.Ids).ToArray(),
                     ClassRegion = Region(cls, box), DayRegion = Region(day, box), PeriodRegions = chosenPeriods.ToDictionary(l => l.Value, l => Region(l, box)!) };
+                if(priorSlice is not null)
+                {
+                    if(cell.BindingMode!=RecoveryBindingMode.Fixed || priorSlice.BindingMode!=RecoveryBindingMode.Fixed ||
+                        cell.OrderedRowProof is not null || priorSlice.OrderedRowProof is not null || cell.ParallelSeparators is not null || priorSlice.ParallelSeparators is not null ||
+                        cell.LessonBindings.Count+priorSlice.LessonBindings.Count>2 || cell.ClassRegion!=priorSlice.ClassRegion || cell.DayRegion!=priorSlice.DayRegion ||
+                        !cell.ClassHeaderIds.SequenceEqual(priorSlice.ClassHeaderIds) || !cell.DayHeaderIds.SequenceEqual(priorSlice.DayHeaderIds) || !cell.PeriodHeaderIds.SequenceEqual(priorSlice.PeriodHeaderIds))
+                        throw new InvalidDataException("縦に分割された授業欄の対応を確認できません。");
+                    var bindings=priorSlice.LessonBindings.Concat(cell.LessonBindings).ToArray();
+                    var combinedIds=priorSlice.SourceIds.Concat(cell.SourceIds).ToArray();
+                    foreach(var sourceId in combinedIds)sources[sourceId]=sources[sourceId] with {CellId=priorSlice.Id};
+                    cell=priorSlice with {Box=priorSlice.Box with {Height=box.Y+box.Height-priorSlice.Box.Y},SourceIds=combinedIds,
+                        ConfirmedEmpty=bindings.Length==0,ParallelCount=Math.Max(1,bindings.Length),LessonBindings=bindings,
+                        BlankFields=priorSlice.BlankFields.Concat(cell.BlankFields).Distinct().ToArray(),
+                        NativeLayoutProof=(priorSlice.ConfirmedEmpty || priorSlice.NativeLayoutProof is not null) && (cell.ConfirmedEmpty || cell.NativeLayoutProof is not null) ? new(1,hash) : null};
+                    cells.Remove(priorSlice);
+                }
                 cells.Add(cell); usedSlots.UnionWith(slots); Register(usedClass, cls.Value, cls.Ids); Register(usedDay, day.Value, day.Ids);
                 foreach (var p in chosenPeriods) Register(usedPeriod, p.Value, p.Ids);
             }
@@ -475,7 +608,38 @@ public static class RecoveryDocumentBuilder
         IReadOnlyDictionary<string, IReadOnlyList<string>> Evidence(Dictionary<string, HashSet<string>> set) => set.ToDictionary(p => p.Key, p => (IReadOnlyList<string>)atoms.Where(a => p.Value.Contains(a.Id)).Select(a => a.Id).ToArray());
         var document = new RecoveryDocument(hash, kind, year, term, classes, days, required, cells, atoms.Select(a => sources[a.Id]).ToArray(), true,
             years.SelectMany(l => l.Ids).Distinct().ToArray(), term is null ? [] : terms.SelectMany(l => l.Ids).Distinct().ToArray(), Evidence(usedDay), Evidence(usedClass), Evidence(usedPeriod), new Dictionary<string, string>(), [], []) { DocumentTitleEvidence = title };
-        return AddTimes(document, labels, work);
+        document=AddTimes(document,labels,work);
+        if(allowNativeReferences && ocrPages is not {Count:>0})
+        {
+            var semantic=RecoverySourceCoverage.SemanticIds(document);
+            var extra=atoms.Where(a=>!semantic.Contains(a.Id) && !string.IsNullOrWhiteSpace(a.Glyph.Text)).ToArray();
+            var notes=new List<RecoveryReferenceNote>();
+            var noteGroups=extra.GroupBy(a=>(a.Page,Line:a.Glyph.SourceLine?.ToString(CultureInfo.InvariantCulture) ?? a.Id)).SelectMany(group=> {
+                var original=group.OrderBy(a=>a.Glyph.SourceOrder).ThenBy(a=>a.Glyph.X).ToArray();
+                // One native drawing line can repeat a weekday in several
+                // separate gutters. Its enclosing box is not a body source;
+                // retain each original atom rather than bridge class columns.
+                return RecoverySourceCoverage.OutsideSchedule(document,group.Key.Page,Bounds(original))
+                    ? new[]{original} : original.Select(a=>new[]{a}).ToArray();
+            });
+            foreach(var original in noteGroups)
+            {
+                var notePage=original[0].Page;
+                work.Step(original.Length+document.Cells.Count);
+                var box=Bounds(original);
+                if(!RecoverySourceCoverage.OutsideSchedule(document,notePage,box))
+                {
+                    var failure=new InvalidDataException("表の内部に役割を確認できない印字があります。");
+                    failure.Data["UnassignedNativeSourceIds"]=original.Select(a=>a.Id).ToArray();
+                    failure.Data["UnassignedNativeBox"]=box;
+                    throw failure;
+                }
+                notes.Add(new(notePage,box,original.Select(a=>a.Id).ToArray()));
+                if(notes.Count>512)throw new InvalidDataException("注記の件数が上限を超えています。");
+            }
+            if(notes.Count>0)document=document with {ReferenceNotes=notes};
+        }
+        return document;
     }
     private static IReadOnlyList<RecoveryRoleScope> RoleScopes(string cellId, int page, RecoveryBox box, Atom[] body, Label[] labels, Func<int, RecoveryBox, bool> inkFree, Work work)
     {
@@ -589,11 +753,19 @@ public static class RecoveryDocumentBuilder
         var firstNoteKeys = firstNote.Select(l => string.Join(",", l.Ids)).ToHashSet(StringComparer.Ordinal);
         var noteIdSet = firstNote.SelectMany(l => l.Ids).Concat(normalNote.SelectMany(l => l.Ids)).ToHashSet();
         var normalIds = document.Sources.Where(s => noteIdSet.Contains(s.Id)).Select(s => s.Id).ToArray();
+        var sourceById=document.Sources.ToDictionary(s=>s.Id);
+        bool SameNativeClockRow(Label label,Label clock)
+        {
+            if(label.Ids.Count==0 || clock.Ids.Count==0 || sourceById[clock.Ids[0]].SourceLine is not int line)return false;
+            work.Step(label.Ids.Count+clock.Ids.Count);
+            return label.Ids.Concat(clock.Ids).All(id=>sourceById[id] is {FromOcr:false,NativeLayoutBox:not null} s && s.SourceLine==line);
+        }
         foreach (var clock in labels.Where(l => Regex.IsMatch(l.Value, @"^\d{1,2}:\d{2}[~〜～]\d{1,2}:\d{2}$")))
         {
             work.Step(labels.Length * 10L + document.Cells.Count * 8L);
             var explicitDays = labels.Where(l => l.Page == clock.Page && document.Days.Contains(Day(l.Value, document.Kind, document.SchoolYear) ?? "") && Region(l, clock.Box) is not null).OrderBy(l => clock.Box.Y - l.Box.Y + clock.Box.X - l.Box.X).ToArray();
-            var periods = labels.Where(l => l.Page == clock.Page && Regex.IsMatch(l.Value, @"^[1-8](?:限|時限|時限目)?$|^[1-8][・〜-][1-8](?:時限連続|時限|限)$") && Region(l, clock.Box) is not null).OrderBy(l => clock.Box.Y - l.Box.Y + clock.Box.X - l.Box.X).ToArray();
+            var periods = labels.Where(l => l.Page == clock.Page && Regex.IsMatch(l.Value, @"^[1-8](?:限|時限|時限目)?$|^[1-8][・〜-][1-8](?:時限連続|時限|限)$") && Region(l, clock.Box) is not null)
+                .OrderByDescending(l=>SameNativeClockRow(l,clock)).ThenBy(l => clock.Box.Y - l.Box.Y + clock.Box.X - l.Box.X).ToArray();
             if (periods.Length == 0) continue;
             var periodLabel = periods[0]; var range = Regex.Match(periodLabel.Value, @"^([1-8])(?:[・〜-]([1-8]))?");
             var start = int.Parse(range.Groups[1].Value); var end = range.Groups[2].Success ? int.Parse(range.Groups[2].Value) : start;

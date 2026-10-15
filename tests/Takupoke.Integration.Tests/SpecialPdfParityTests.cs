@@ -7,6 +7,34 @@ namespace Takupoke.Integration.Tests;
 /// <summary>Fictional ruled tables with intact role baselines, empty fields and merged lessons.</summary>
 public sealed class SpecialPdfParityTests
 {
+    [Fact]
+    public void OffCenterMergedGradeLabelOwnsItsPhysicalRowsInsteadOfTheNearestGrade()
+    {
+        var page=ReturnPage();
+        page=page with { Glyphs=page.Glyphs.Select(g=>g.X<110 && g.Y>450 && g.Text is "A" or "I" ? g with { Y=500 } : g).ToArray(),
+            Lines=page.Lines.Select(l=>l.Horizontal && l.X1==0 && l.Y1>=120 && l.Y1<=545 ? l with { X1=110 } : l)
+                .Append(new(0,120,0,545)).Concat(new[]{0,3,6,9,12,15,17}.Select(row=>new PdfRule(0,120+row*25,110,120+row*25))).ToArray() };
+        var result=PdfScheduleParser.Special([page],MaterialKind.ExamReturn);
+        Assert.Equal(17,result.CoveredClasses.Count);
+        Assert.Equal(Takupoke.Core.Recovery.RecoveryValidator.SpecialClasses.Order(),result.CoveredClasses.Order());
+    }
+
+    [Theory]
+    [InlineData(MaterialKind.Exam)][InlineData(MaterialKind.ExamReturn)]
+    public void MergedRowLabelHeaderDoesNotEnterTheLessonCalibrationArea(MaterialKind kind)
+    {
+        var pages=kind==MaterialKind.Exam ? Enumerable.Range(1,6).Select(i=>ExamPage(i)).ToArray() : [ReturnPage()];
+        var expected=PdfScheduleParser.Special(pages,kind);
+        pages=pages.Select(p=> {
+            var top=kind==MaterialKind.Exam ? 110 : 120;var left=kind==MaterialKind.Exam ? 100 : 140;
+            return p with { Lines=p.Lines.Select(l=>l.Horizontal && l.Y1==top ? l with { X1=left } : l)
+                .Append(new(0,top-10,left,top-10)).ToArray() };
+        }).ToArray();
+        var actual=PdfScheduleParser.Special(pages,kind);
+        Assert.Equal(System.Text.Json.JsonSerializer.Serialize(expected.Lessons),System.Text.Json.JsonSerializer.Serialize(actual.Lessons));
+        Assert.Equal(expected.CoveredClasses,actual.CoveredClasses);
+    }
+
     [Theory]
     [InlineData(MaterialKind.Exam, "令和8年度令和9年度")]
     [InlineData(MaterialKind.ExamReturn, "令和8年度2027年度")]

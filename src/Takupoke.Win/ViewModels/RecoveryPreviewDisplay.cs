@@ -12,6 +12,7 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
     ImmutableArray<RecoveryDisplayCell> Cells, ImmutableDictionary<string, string> Times,
     ImmutableDictionary<string, string> SpanTimes, RecoveryMetadata Metadata)
 {
+    public ImmutableArray<RecoveryDisplayReferenceNote> ReferenceNotes { get; init; } = [];
     public ImmutableArray<RecoveryDisplayCorrection> Corrections { get; init; } = [];
     public ImmutableArray<RecoveryDisplayChange> PreviousChanges { get; init; } = [];
     public bool PreviousComparable { get; init; }
@@ -42,7 +43,7 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
         token.ThrowIfCancellationRequested();
         if (!RecoveryValidator.Validate(preview.Document, preview.Result, token).CanAdopt) return null;
         var document = preview.Document;
-        var ocrIds = document.Sources.Where(s => { token.ThrowIfCancellationRequested(); return s.FromOcr; })
+        var ocrIds = document.Sources.Where(s => { token.ThrowIfCancellationRequested(); return s.FromOcr || s.RequiresVisualReview; })
             .Select(s => s.Id).ToHashSet(StringComparer.Ordinal);
         var recovered = preview.Result.Cells.ToDictionary(cell => { token.ThrowIfCancellationRequested(); return cell.CellId; }, StringComparer.Ordinal);
         var reviewed = (preview.Result.HumanCorrections ?? []).Where(c => c.HeaderProof is null)
@@ -80,7 +81,7 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
                 correction.Target.Role, cellsById[correction.Target.CellId].Slots,
                 string.Concat(correction.OriginalParentIds.Select(id => { token.ThrowIfCancellationRequested(); return sources[id].Text; })),
                 correction.CorrectedText, correction.Provenance);
-        }).Where(c => document.Capture?.ManualSchemaVersion is not (2 or 3) ||
+        }).Where(c => document.Capture?.ManualSchemaVersion is not (2 or 3 or 4) ||
             !string.Equals(c.OriginalOcr, c.UserText, StringComparison.Ordinal)).ToImmutableArray();
         // Only an actual certified formal projection of this identical source
         // document permits cell/parallel-position comparison. Updated PDFs,
@@ -112,7 +113,7 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
             }
         }
         token.ThrowIfCancellationRequested();
-        return display with { Corrections = corrections, ReviewedFieldCount = preview.Result.HumanCorrections?.Count ?? 0,
+        return display with { ReferenceNotes=(document.ReferenceNotes ?? []).Select(n=>new RecoveryDisplayReferenceNote(n.Page,string.Concat(n.SourceIds.Select(id=>sources[id].Text)))).ToImmutableArray(),Corrections = corrections, ReviewedFieldCount = preview.Result.HumanCorrections?.Count ?? 0,
             ReviewedTargets = (preview.Result.HumanCorrections ?? []).Select(c => c.Target).ToImmutableArray(),
             PreviousComparable = comparable, PreviousChanges = changes.ToImmutable() };
     }
@@ -157,3 +158,5 @@ public sealed record RecoveryDisplayCorrection(string CellId, int LessonIndex, R
     ImmutableArray<RecoverySlot> Slots, string OriginalOcr, string UserText, string Provenance);
 public sealed record RecoveryDisplayChange(string CellId, int LessonIndex, RecoveryFieldRole Role,
     ImmutableArray<RecoverySlot> Slots, string PreviousText, string CurrentText);
+
+public sealed record RecoveryDisplayReferenceNote(int Page,string Text);

@@ -105,7 +105,7 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                     aiPermission!.Check(completed.Generation);
                     _previewPermissions[source.Id] = completed.Generation;
                 }
-                if (run.Result is null && document.Sources.Any(s => s.NativeConfidence is < .8))
+                if (run.Result is null && document.Sources.Any(s => s.NativeConfidence is < .8 || s.RequiresVisualReview))
                 {
                     var manual = await Task.Run(() => RecoveryManualAssistance.Prepare(document, token), token).ConfigureAwait(false);
                     if (manual is not null)

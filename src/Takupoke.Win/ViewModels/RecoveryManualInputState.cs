@@ -23,12 +23,12 @@ internal sealed class RecoveryManualInputState
     {
         if (identity == _identity && identity is not null) return;
         Clear();
-        if (manualSchemaVersion is not (1 or 2 or 3)) return;
-        _reviewLimit = manualSchemaVersion is 2 or 3 ? 128 : 3;
-        _editLimit = manualSchemaVersion == 3 ? 128 : 3;
+        if (manualSchemaVersion is not (1 or 2 or 3 or 4)) return;
+        _reviewLimit = manualSchemaVersion is 2 or 3 or 4 ? 128 : 3;
+        _editLimit = manualSchemaVersion is 3 or 4 ? 128 : 3;
         if (identity is null || original is not { Count: > 0 } || original.Count > _reviewLimit) return;
         if (nativeOriginal is not null && !nativeOriginal.Keys.ToHashSet(StringComparer.Ordinal).SetEquals(original.Keys)) return;
-        if (readOnlyKeys is { Count: > 0 } && (manualSchemaVersion is not (2 or 3) || readOnlyKeys.Any(key => !original.ContainsKey(key)))) return;
+        if (readOnlyKeys is { Count: > 0 } && (manualSchemaVersion is not (2 or 3 or 4) || readOnlyKeys.Any(key => !original.ContainsKey(key)))) return;
         _identity = identity;
         if (readOnlyKeys is not null) _readOnly.UnionWith(readOnlyKeys);
         foreach (var pair in original) { _values.Add(pair.Key, pair.Value); _original.Add(pair.Key, nativeOriginal?[pair.Key] ?? pair.Value); }

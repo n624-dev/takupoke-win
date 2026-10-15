@@ -209,6 +209,32 @@ public sealed class PdfParsingTests
         cancellation.Cancel();
         Assert.Throws<OperationCanceledException>(() => grid.LessonFields(boxes[1]));
     }
+    [Theory]
+    [InlineData(false)][InlineData(true)]
+    public void ShortCellUsesOnlyMatchingCompleteNeighborsWhenOtherFontsHaveDifferentBaselines(bool reverse)
+    {
+        var glyphs = new List<PdfGlyph> { new("架空科目",10,5,20,4),new("架空教員",10,15,20,4) };
+        var references = reverse ? new[] { 8d,5d } : new[] { 5d,8d };
+        for(var i=0;i<references.Length;i++)
+            for(var role=0;role<3;role++) glyphs.Add(new("架空基準"+role,110+i*100,references[i]+role*10,20,4));
+        var grid = new PdfGrid(new(300,40,glyphs,[]));
+        grid.SetLessonArea(new(0,0,300,40));
+        grid.SetLessonCells([new(0,0,100,40),new(100,0,200,40),new(200,0,300,40)]);
+        Assert.Equal(new[] { "架空科目","架空教員","" },grid.LessonFields(new(0,0,100,40)));
+    }
+    [Theory]
+    [InlineData(false)][InlineData(true)]
+    public void ShortCellStillRefusesWhenDifferentMatchingNeighborsDisagreeOnFieldRoles(bool reverse)
+    {
+        var glyphs = new List<PdfGlyph> { new("架空値一",10,15,20,4),new("架空値二",10,25,20,4) };
+        var references = reverse ? new[] { 15d,5d } : new[] { 5d,15d };
+        for(var i=0;i<references.Length;i++)
+            for(var role=0;role<3;role++) glyphs.Add(new("架空基準"+role,110+i*100,references[i]+role*10,20,4));
+        var grid = new PdfGrid(new(300,50,glyphs,[]));
+        grid.SetLessonArea(new(0,0,300,50));
+        grid.SetLessonCells([new(0,0,100,50),new(100,0,200,50),new(200,0,300,50)]);
+        Assert.Equal("P17",Assert.Throws<PdfParseException>(()=>grid.LessonFields(new(0,0,100,50))).Stage);
+    }
     [Fact]
     public void GridRuleWorkHasASharedLimitAcrossRepeatedQueries()
     {

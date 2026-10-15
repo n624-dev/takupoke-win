@@ -20,7 +20,7 @@ public static partial class PdfPigLayoutReader
         => ReadCore(bytes, kind, token, capture, null);
 
     private static IReadOnlyList<PdfPageLayout> ReadCore(byte[] bytes, MaterialKind kind, CancellationToken token,
-        RecoveryReadCapture? capture, FontRecoveryContext? fontRecovery)
+        RecoveryReadCapture? capture, FontRecoveryContext? fontRecovery, bool boundedVisibleUnicode = false)
     {
         capture?.Reset();
         if (bytes.Length is < 1 or > 50 * 1024 * 1024 || !bytes.AsSpan(0, Math.Min(bytes.Length, 5)).SequenceEqual("%PDF-"u8) || kind == MaterialKind.Changes) throw new PdfParseException("unreadable");
@@ -28,7 +28,7 @@ public static partial class PdfPigLayoutReader
         {
             token.ThrowIfCancellationRequested();
             using var document = PdfDocument.Open(bytes, new ParsingOptions { UseLenientParsing = false, SkipMissingFonts = false, MaxStackDepth = 64, UseActualText = false });
-            if (fontRecovery is not null) document.AddPageFactory<PdfNativeTraceInputs, PdfNativeTraceFactory>();
+            if (fontRecovery is not null || boundedVisibleUnicode) document.AddPageFactory<PdfNativeTraceInputs, PdfNativeTraceFactory>();
             if (document.IsEncrypted || document.NumberOfPages < 1) throw new PdfParseException("unreadable");
             if (document.NumberOfPages > 12) throw new PdfParseException("limit");
             capture?.Begin(document.NumberOfPages);
@@ -48,22 +48,51 @@ public static partial class PdfPigLayoutReader
                 var visibility = new VisibilityState(
                     colourSpaces?.Data.ContainsKey("DefaultGray") != true,
                     colourSpaces?.Data.ContainsKey("DefaultRGB") != true,
-                    colourSpaces?.Data.ContainsKey("DefaultCMYK") != true);
-                var text = kind == MaterialKind.Timetable || fontRecovery is not null ? new PdfTextEngine(token,traceForRecovery:fontRecovery is not null) : null;
+                    colourSpaces?.Data.ContainsKey("DefaultCMYK") != true, boundedVisibleUnicode);
+                var text = kind == MaterialKind.Timetable || fontRecovery is not null || boundedVisibleUnicode
+                    ? new PdfTextEngine(token,traceForRecovery:fontRecovery is not null || boundedVisibleUnicode) : null;
+                var textPaint = new Dictionary<int,double>();
+                var textColours = new Dictionary<int,PdfPathEngine.PaintColor>();
+                var textOperations = new Dictionary<int,int>();var operationOrder=0;
+                var bareInk = new Dictionary<int,PdfBox>();
+                var textClips = new Dictionary<int,PdfBox?>();
+                var markedDepth = 0;
+                IReadOnlyList<PdfGlyph>? paintedInk = null;
                 var fonts = new Dictionary<string, Lazy<PdfFont>>();
                 foreach (var operation in page.Operations)
                 {
                     token.ThrowIfCancellationRequested();
+                    if (boundedVisibleUnicode) paths.SetOperationOrder(++operationOrder);
                     var name = operation.Operator;
                     visibility.Operation(operation, number, paths);
                     if (name == "Do") throw new PdfParseException("P12", number);
-                    if (name is "BDC" or "BMC" or "W" or "W*") throw new PdfParseException("P01", number);
+                    if (name == "BDC")
+                    {
+                        if (!boundedVisibleUnicode || operation is not UglyToad.PdfPig.Graphics.Operations.MarkedContent.BeginMarkedContentWithProperties marked ||
+                            !SafeMarkedProperties(marked.Name,marked.PropertyDictionaryName,marked.Properties) || ++markedDepth>64) throw new PdfParseException("P01",number);
+                    }
+                    if (name == "BMC")
+                    {
+                        // Plain Artifact marking changes no characters or visibility.
+                        using var stream = new MemoryStream(); operation.Write(stream);
+                        var words = Encoding.ASCII.GetString(stream.ToArray()).Split((char[]?)null,StringSplitOptions.RemoveEmptyEntries);
+                        if (!boundedVisibleUnicode || words is not ["/Artifact", "BMC"] || ++markedDepth>64) throw new PdfParseException("P01",number);
+                    }
+                    if (name == "EMC" && boundedVisibleUnicode && --markedDepth<0) throw new PdfParseException("P01",number);
+                    if (name is "W" or "W*")
+                    {
+                        if (!boundedVisibleUnicode) throw new PdfParseException("P01",number);
+                        paths.IntersectPendingRectangleClip();
+                    }
                     if (PdfPathEngine.Supports(name) || text is not null && PdfTextEngine.Supports(name))
                     {
                         var numbers = Numbers(operation);
+                        if (boundedVisibleUnicode && name is "S" or "s" or "B" or "B*" or "b" or "b*")
+                            paths.SetStrokePaintRadius(visibility.StrokePaintRadius(number));
                         if (PdfPathEngine.Supports(name))
                         {
-                            var paint = visibility.FillWhite ? name switch { "f" or "F" or "f*" => "n", "B" or "B*" => "S", "b" or "b*" => "s", _ => name } : name;
+                            if (boundedVisibleUnicode && (visibility.FillWhite || visibility.SupportedBackground && !paths.PendingFillIsThinRules) && name is "f" or "F" or "f*" or "B" or "B*" or "b" or "b*") paths.RecordBackgroundFill(visibility.FillColor);
+                            var paint = (visibility.FillWhite || boundedVisibleUnicode && visibility.SupportedBackground && !paths.PendingFillIsThinRules) ? name switch { "f" or "F" or "f*" => "n", "B" or "B*" => "S", "b" or "b*" => "s", _ => name } : name;
                             paths.Operation(paint, numbers);
                         }
                         if (text is not null && PdfTextEngine.Supports(name)) text.Operation(name, numbers);
@@ -75,6 +104,14 @@ public static partial class PdfPigLayoutReader
                         var items = Encoding.ASCII.GetString(serialized.ToArray()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
                         if (items.Length != 2 || !items[0].StartsWith('/')) throw new PdfParseException("P01", number);
                         var state = Resource(document, resources, "ExtGState", items[0][1..]);
+                        if (boundedVisibleUnicode && state.Data.Keys.Any(k => k is not ("Type" or "Font" or "SMask" or "TR" or "TR2" or "BM" or "ca" or "CA" or "LW" or "D" or "LC" or "LJ" or "ML")))
+                            throw new PdfParseException("P01", number);
+                        if (boundedVisibleUnicode && (Number(document,state,"ML",10) is < 1 or > 10 ||
+                            Number(document,state,"LC",0) is not (0 or 1 or 2) || Number(document,state,"LJ",0) is not (0 or 1 or 2))) throw new PdfParseException("P01", number);
+                        if (boundedVisibleUnicode) visibility.SetStrokeStyle(
+                            state.Data.ContainsKey("LJ") ? (int)Number(document,state,"LJ") : null,
+                            state.Data.ContainsKey("LC") ? (int)Number(document,state,"LC") : null,
+                            state.Data.ContainsKey("ML") ? Number(document,state,"ML") : null);
                         if (new[] { "Font", "SMask", "TR", "TR2" }.Any(state.Data.ContainsKey) || state.Data.ContainsKey("BM") && Name(document, state, "BM") != "Normal" || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1) throw new PdfParseException("P01", number);
                         if (state.Data.ContainsKey("LW")) visibility.SetLineWidth(Number(document, state, "LW"), number);
                         if (state.Data.ContainsKey("D"))
@@ -85,6 +122,7 @@ public static partial class PdfPigLayoutReader
                         }
                     }
                     if (text is null) continue;
+                    var beforeText = text.RecoveryGlyphs.Count;
                     switch (operation)
                     {
                         case SetFontAndSize font:
@@ -107,10 +145,19 @@ public static partial class PdfPigLayoutReader
                         case MoveToNextLineShowTextWithSpacing show:
                             text.Operation("Tw", show.WordSpacing); text.Operation("Tc", show.CharacterSpacing); text.Operation("T*"); text.Show(Bytes(show.Text, show.Bytes)); break;
                     }
+                    if (boundedVisibleUnicode)
+                        for (var index = beforeText; index < text.RecoveryGlyphs.Count; index++)
+                        {
+                            textPaint.Add(text.RecoveryGlyphs[index].SourceOrder!.Value, visibility.TextPaintMargin(number));
+                            textColours.Add(text.RecoveryGlyphs[index].SourceOrder!.Value,visibility.FillColor);
+                            textOperations.Add(text.RecoveryGlyphs[index].SourceOrder!.Value,operationOrder);
+                            textClips.Add(text.RecoveryGlyphs[index].SourceOrder!.Value,paths.Clip);
+                        }
 
                 }
+                if (boundedVisibleUnicode && markedDepth!=0) throw new PdfParseException("P01",number);
                 IReadOnlyList<PdfGlyph> rawGlyphs;
-                if (text is { HasFontRecovery: true })
+                if (text is { HasFontRecovery: true } || boundedVisibleUnicode)
                 {
                     // First bounded drawing pass above has already rejected forms,
                     // clipping, hidden text, replacements and unsupported paint.
@@ -118,7 +165,8 @@ public static partial class PdfPigLayoutReader
                     input.Factory.ResourceStore.LoadResourceDictionary(resources);
                     try
                     {
-                        var native = new PdfNativeTraceProcessor(number, input, token, text.RecoveryGlyphs.Where(g=>g.FontEvidence is not null).Select(g=>g.FontEvidence!.Resource).ToHashSet()).Process(number, input.Operations);
+                        var native = new PdfNativeTraceProcessor(number, input, token, text!.RecoveryGlyphs.Where(g=>g.FontEvidence is not null).Select(g=>g.FontEvidence!.Resource).ToHashSet(),
+                            includeKnownInk: boundedVisibleUnicode).Process(number, input.Operations);
                         // Initial native page rotation/origin is undone before
                         // comparing effective drawing bases in raw PDF space.
                         UglyToad.PdfPig.Core.PdfPoint Raw(UglyToad.PdfPig.Core.PdfPoint p) => page.Rotation.Value switch
@@ -128,22 +176,78 @@ public static partial class PdfPigLayoutReader
                             270 => new(p.Y+media.Left,media.Height-p.X+media.Bottom),
                             _ => new(p.X+media.Left,p.Y+media.Bottom)
                         };
-                        rawGlyphs = text.FinishRecovery(native.Select(g => g with
+                        var observed = native.Select(g => g with
                             { Origin=Raw(g.Origin), Horizontal=Raw(g.Horizontal), Vertical=Raw(g.Vertical),
-                                InkBounds=g.InkBounds is {} ink?new UglyToad.PdfPig.Core.PdfRectangle(Raw(ink.TopLeft),Raw(ink.TopRight),Raw(ink.BottomLeft),Raw(ink.BottomRight)):null }).ToArray());
+                                InkBounds=g.InkBounds is {} ink?new UglyToad.PdfPig.Core.PdfRectangle(Raw(ink.TopLeft),Raw(ink.TopRight),Raw(ink.BottomLeft),Raw(ink.BottomRight)):null }).ToArray();
+                        rawGlyphs = text.FinishRecovery(observed);
+                        if (boundedVisibleUnicode)
+                        {
+                            var ink = new List<PdfGlyph>(); var enlarged = new List<PdfGlyph>();
+                            foreach (var glyph in rawGlyphs)
+                            {
+                                token.ThrowIfCancellationRequested();
+                                var order = glyph.SourceOrder!.Value;
+                                var trace = observed[order];
+                                if (!trace.UnicodeKnown || !trace.Drawable || trace.InkBounds is not { Width: > 0, Height: > 0 } bounds || !textPaint.TryGetValue(order,out var margin))
+                                    throw new PdfParseException("P01", number);
+                                var left = bounds.Left-margin; var bottom = bounds.Bottom-margin;
+                                var right = bounds.Right+margin; var top = bounds.Top+margin;
+                                if (!new[] { left,bottom,right,top }.All(double.IsFinite)) throw new PdfParseException("P01",number);
+                                var original=transform.Glyph(glyph with { X=bounds.Left,Y=bounds.Bottom,Width=bounds.Width,Height=bounds.Height });
+                                var bare=new PdfBox(original.X,original.Y,original.X+original.Width,original.Y+original.Height);
+                                var painted = transform.Glyph(glyph with { X=left,Y=bottom,Width=right-left,Height=top-bottom });
+                                var clipped=false;
+                                if (textClips[order] is {} clip)
+                                {
+                                    var visible=new PdfBox(Math.Max(bare.Left,clip.Left),Math.Max(bare.Top,clip.Top),Math.Min(bare.Right,clip.Right),Math.Min(bare.Bottom,clip.Bottom));
+                                    if (visible.Right<=visible.Left || visible.Bottom<=visible.Top) throw new PdfParseException("P01",number);
+                                    clipped=visible!=bare;bare=visible;
+                                    var px=Math.Max(painted.X,clip.Left);var py=Math.Max(painted.Y,clip.Top);
+                                    painted=painted with { X=px,Y=py,Width=Math.Min(painted.X+painted.Width,clip.Right)-px,Height=Math.Min(painted.Y+painted.Height,clip.Bottom)-py };
+                                }
+                                bareInk.Add(order,bare);
+                                ink.Add(painted);
+                                enlarged.Add(glyph with {RequiresVisualReview=clipped});
+                            }
+                            rawGlyphs=enlarged; paintedInk=ink;
+                        }
                     }
                     finally { input.Factory.ResourceStore.UnloadResourceDictionary(); }
                 }
                 else rawGlyphs = text is not null ? text.Finish(page.Text) : [];
                 IReadOnlyList<PdfGlyph> glyphs = text is not null ? rawGlyphs.Select(transform.Glyph).ToArray() : SpecialGlyphs(page, transform, token);
-                var recoveryGlyphs = text is not null ? text.RecoveryGlyphs.Select(transform.Glyph).ToArray() : glyphs;
+                var physicalInk=paintedInk?.ToDictionary(g=>g.SourceOrder!.Value,g=>new PdfBox(g.X,g.Y,g.X+g.Width,g.Y+g.Height));
+                if(physicalInk is not null)glyphs=glyphs.Select(g=>g with {InkBounds=physicalInk.TryGetValue(g.SourceOrder!.Value,out var box) ? box : null}).ToArray();
+                var expandedGlyphs = boundedVisibleUnicode ? rawGlyphs.ToDictionary(g => g.SourceOrder!.Value) : null;
+                var recoveryGlyphs = text is not null ? text.RecoveryGlyphs.Select(g => transform.Glyph(
+                    expandedGlyphs?.GetValueOrDefault(g.SourceOrder!.Value) ?? g)).Select(g=>g with {InkBounds=physicalInk is not null && physicalInk.TryGetValue(g.SourceOrder!.Value,out var box) ? box : null}).ToArray() : glyphs;
                 capture?.Record(number, RecoveryInputState.Partial, new PdfPageLayout(transform.Width, transform.Height, recoveryGlyphs, []));
                 var layout = new PdfPageLayout(transform.Width, transform.Height, glyphs, paths.Finish());
                 layout.ValidateViewport(number);
-                if (RulesOverlapText(layout.Lines, glyphs, token))
-                    throw new PdfParseException("P01", number);
+                (PdfBox Rule,PdfBox Ink,int? Order)? conflict=null;
+                var requiresReview = new HashSet<int>();
+                var hidden = new HashSet<int>();
+                if (paintedInk is not null ? PaintedRulesOverlapInk(paths.PaintedRuleBoxes,paintedInk,bareInk,textOperations,textColours,token,requiresReview,hidden,out conflict) : RulesOverlapText(layout.Lines,glyphs,token))
+                {
+                    var error=new PdfParseException("P01", number);
+                    if(conflict is {} c) { error.Data["VisibleRuleBox"]=c.Rule;error.Data["VisibleInkBox"]=c.Ink;error.Data["VisibleSourceOrder"]=c.Order;
+                        error.Data["VisibleTextPaintMargin"]=textPaint.GetValueOrDefault(c.Order??-1); }
+                    throw error;
+                }
+                if (hidden.Count>0)
+                {
+                    bool Visible(PdfGlyph g) => g.SourceOrder is not int order || !hidden.Contains(order);
+                    recoveryGlyphs=recoveryGlyphs.Where(Visible).ToArray();
+                    glyphs=glyphs.Where(Visible).ToArray();layout=layout with { Glyphs=layout.Glyphs.Where(Visible).ToArray() };
+                }
+                if (requiresReview.Count > 0)
+                {
+                    PdfGlyph Mark(PdfGlyph g) => g with { RequiresVisualReview = g.RequiresVisualReview || g.SourceOrder is int order && requiresReview.Contains(order) };
+                    recoveryGlyphs = recoveryGlyphs.Select(Mark).ToArray();
+                    layout = layout with { Glyphs = layout.Glyphs.Select(Mark).ToArray() };
+                }
                 capture?.Record(number, glyphs.Count == 0 ? RecoveryInputState.RasterOnly : text is { RecoveryComplete: false } ? RecoveryInputState.Partial : RecoveryInputState.Complete,
-                    layout with { Glyphs = recoveryGlyphs });
+                    layout with { Glyphs = recoveryGlyphs }, boundedVisibleUnicode);
                 layout.Validate(number); output.Add(layout);
             }
             capture?.Finish(); return output;
@@ -190,14 +294,41 @@ public static partial class PdfPigLayoutReader
     }
     // Reuse only opaque supported device colours on the white page. Unknown
     // colour-space substitutions, near-white text and later paint stay refused.
-    private sealed class VisibilityState(bool deviceGray, bool deviceRgb, bool deviceCmyk)
+    private sealed class VisibilityState(bool deviceGray, bool deviceRgb, bool deviceCmyk, bool boundedVisibleUnicode = false)
     {
-        private readonly record struct State(bool FillVisible, bool FillWhite, bool StrokeVisible, int TextMode, double LineWidth, PdfMatrix Ctm);
+        private readonly record struct State(bool FillVisible, bool FillWhite, bool StrokeVisible, int TextMode, double LineWidth, PdfMatrix Ctm,
+            int LineJoin=0,int LineCap=0,double MiterLimit=10,double FillDarkness=1,bool SupportedBackground=false,PdfPathEngine.PaintColor FillColor=default);
         private State _state = new(deviceGray, false, deviceGray, 0, 1, PdfMatrix.Identity);
         private readonly Stack<State> _stack = new();
         private bool _shown;
         private bool _painted;
         public bool FillWhite => _state.FillWhite;
+        public bool SupportedBackground => _state.SupportedBackground;
+        public PdfPathEngine.PaintColor FillColor => _state.FillColor;
+        public void SetStrokeStyle(int? join=null,int? cap=null,double? miter=null) =>
+            _state=_state with { LineJoin=join??_state.LineJoin,LineCap=cap??_state.LineCap,MiterLimit=miter??_state.MiterLimit };
+        public double StrokePaintRadius(int page)
+        {
+            var origin=_state.Ctm.Point(0,0);var x=_state.Ctm.Point(1,0);var y=_state.Ctm.Point(0,1);
+            var xx=x.X-origin.X;var xy=x.Y-origin.Y;var yx=y.X-origin.X;var yy=y.Y-origin.Y;
+            var scale=Math.Sqrt(Math.Max(xx*xx+xy*xy,yx*yx+yy*yy));
+            var radius=_state.LineWidth*scale/2;
+            if (!double.IsFinite(radius) || radius<=0) throw new PdfParseException("P01",page);
+            return radius;
+        }
+        public double TextPaintMargin(int page)
+        {
+            if (_state.TextMode == 0) return 0;
+            var origin=_state.Ctm.Point(0,0);var x=_state.Ctm.Point(1,0);var y=_state.Ctm.Point(0,1);
+            var xx=x.X-origin.X;var xy=x.Y-origin.Y;var yx=y.X-origin.X;var yy=y.Y-origin.Y;
+            var a=xx*xx+xy*xy;var b=yx*yx+yy*yy;var tolerance=Math.Max(a,b)*1e-12;
+            var width=_state.LineWidth*Math.Sqrt(Math.Max(a,b));
+            if (!boundedVisibleUnicode || _state.TextMode!=2 || !double.IsFinite(width) || width is <=0 or >.5 ||
+                Math.Abs(a-b)>tolerance || Math.Abs(xx*yx+xy*yy)>tolerance) throw new PdfParseException("P01",page);
+            var join=_state.LineJoin==0?_state.MiterLimit:1;
+            var cap=_state.LineCap==2?Math.Sqrt(2):1;
+            return width/2*Math.Max(join,cap);
+        }
         private void CheckStroke(int page, PdfPathEngine paths, bool closeLast)
         {
             var origin = _state.Ctm.Point(0, 0); var x = _state.Ctm.Point(1, 0); var y = _state.Ctm.Point(0, 1);
@@ -254,7 +385,10 @@ public static partial class PdfPigLayoutReader
                 case "g": case "rg": case "k":
                     var colour = Numbers(operation);
                     if (colour.Any(v => v is < 0 or > 1)) throw new PdfParseException("P01", page);
-                    _state = _state with { FillVisible = Visible(colour), FillWhite = White(colour) }; break;
+                    _state = _state with { FillVisible = Visible(colour), FillWhite = White(colour),
+                        FillDarkness = name=="k" ? colour[3] : 1-colour.Min(),
+                        FillColor = name=="g" ? new(colour[0],colour[0],colour[0]) : name=="rg" ? new(colour[0],colour[1],colour[2]) : new(1-colour[3],1-colour[3],1-colour[3]),
+                        SupportedBackground = name=="g" && deviceGray || name=="rg" && deviceRgb }; break;
                 case "G": case "RG": case "K":
                     var strokeColour = Numbers(operation);
                     if (strokeColour.Any(v => v is < 0 or > 1)) throw new PdfParseException("P01", page);
@@ -270,14 +404,31 @@ public static partial class PdfPigLayoutReader
                 case "Tr":
                     var mode = Numbers(operation);
                     // Extracted glyph bounds do not include a painted outline.
-                    if (mode.Length != 1 || mode[0] != 0) throw new PdfParseException("P01", page);
+                    if (mode.Length != 1 || mode[0] != 0 && !(boundedVisibleUnicode && mode[0] == 2)) throw new PdfParseException("P01", page);
                     _state = _state with { TextMode = (int)mode[0] }; break;
                 case "Tj": case "TJ": case "'": case "\"":
                     if (_state.TextMode is 0 or 2 && !_state.FillVisible || _state.TextMode is 1 or 2 && !_state.StrokeVisible)
                         throw new PdfParseException("P01", page);
                     _shown = true; break;
+                case "M":
+                    if (boundedVisibleUnicode && (Numbers(operation) is not [var miter] || miter is < 1 or > 10)) throw new PdfParseException("P01",page);
+                    if (boundedVisibleUnicode) SetStrokeStyle(miter:Numbers(operation)[0]);
+                    break;
+                case "j": case "J":
+                    if (boundedVisibleUnicode && (Numbers(operation) is not [var style] || style is not (0 or 1 or 2))) throw new PdfParseException("P01",page);
+                    if (boundedVisibleUnicode)
+                    { if(name=="j")SetStrokeStyle(join:(int)Numbers(operation)[0]);else SetStrokeStyle(cap:(int)Numbers(operation)[0]); }
+                    break;
                 case "f": case "F": case "f*": case "B": case "B*": case "b": case "b*":
-                    if (_shown || _state.FillWhite && _painted || !_state.FillWhite && !(_state.FillVisible && paths.PendingFillIsThinRules)) throw new PdfParseException("P01", page);
+                    if (!(boundedVisibleUnicode && (_state.SupportedBackground || _state.FillWhite) && paths.PendingFillIsRectangles) &&
+                        (_shown && !(boundedVisibleUnicode && _state.FillVisible && paths.PendingFillIsThinRules) ||
+                        _state.FillWhite && _painted || !_state.FillWhite && !(_state.FillVisible && paths.PendingFillIsThinRules)))
+                    {
+                        var failure=new PdfParseException("P01",page);
+                        failure.Data["NativeFillState"]=new { _state.FillWhite,_state.FillVisible,_state.FillDarkness,_state.SupportedBackground,
+                            ThinRules=paths.PendingFillIsThinRules,Rectangles=paths.PendingFillIsRectangles,Shown=_shown };
+                        throw failure;
+                    }
                     if (name is "B" or "B*" or "b" or "b*") { CheckStroke(page, paths, name is "b" or "b*"); _painted = true; }
                     else if (!_state.FillWhite) _painted = true;
                     break;

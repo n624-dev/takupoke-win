@@ -31,7 +31,8 @@ internal sealed class PdfNativeTraceFactory(IPdfTokenScanner scanner, IResourceS
         => new(this, crop, unit, rotation, initial, operations);
 }
 
-internal sealed class PdfNativeTraceProcessor(int number, PdfNativeTraceInputs input, CancellationToken token, IReadOnlySet<string> recoveryResources)
+internal sealed class PdfNativeTraceProcessor(int number, PdfNativeTraceInputs input, CancellationToken token, IReadOnlySet<string> recoveryResources,
+    bool includeKnownInk = false)
     : BaseStreamProcessor<IReadOnlyList<PdfNativeGlyphTrace>>(number, input.Factory.ResourceStore,
         input.Factory.PdfScanner, input.Factory.PageContentParser, input.Factory.FilterProvider,
         input.Crop, input.Unit, input.Rotation, input.Initial, input.Factory.ParsingOptions)
@@ -59,7 +60,7 @@ internal sealed class PdfNativeTraceProcessor(int number, PdfNativeTraceInputs i
         var matrix = rendering.Multiply(text).Multiply(transform);
         var known = font.TryGetUnicode(code, out var original);
         PdfRectangle? outline=null;
-        if(recoveryResources.Contains(resource.Data) && !_outlines.TryGetValue((font,code),out outline))
+        if((includeKnownInk || recoveryResources.Contains(resource.Data)) && !_outlines.TryGetValue((font,code),out outline))
         {
             if(font.TryGetNormalisedPath(code,out var path)) {
                 foreach(var subpath in path) {
@@ -71,7 +72,7 @@ internal sealed class PdfNativeTraceProcessor(int number, PdfNativeTraceInputs i
             }
             _outlines.Add((font,code),outline);
         }
-        var drawable=!recoveryResources.Contains(resource.Data) || outline is { Width: > 0,Height: > 0 };
+        var drawable=!(includeKnownInk || recoveryResources.Contains(resource.Data)) || outline is { Width: > 0,Height: > 0 };
         _glyphs.Add(new(resource.Data, code, known ? original! : unicode, known,
             matrix.Transform(new PdfPoint(0, 0)), matrix.Transform(new PdfPoint(1, 0)), matrix.Transform(new PdfPoint(0, 1)),drawable,outline is {} box?matrix.Transform(box):null));
     }
@@ -79,9 +80,10 @@ internal sealed class PdfNativeTraceProcessor(int number, PdfNativeTraceInputs i
     // observer runs. Unsupported secondary content still refuses explicitly.
     protected override void RenderXObjectImage(XObjectContentRecord image) => throw new PdfParseException("P01");
     protected override void RenderInlineImage(InlineImage image) => throw new PdfParseException("P01");
-    public override void BeginMarkedContent(NameToken name, NameToken? propertyName, DictionaryToken? properties) => throw new PdfParseException("P01");
-    public override void EndMarkedContent() => throw new PdfParseException("P01");
-    public override void ModifyClippingIntersect(FillingRule rule) => throw new PdfParseException("P01");
+    public override void BeginMarkedContent(NameToken name, NameToken? propertyName, DictionaryToken? properties)
+    { if (!includeKnownInk || !(name.Data=="Artifact" && propertyName is null && properties is null || PdfPigLayoutReader.SafeMarkedProperties(name,propertyName,properties))) throw new PdfParseException("P01"); }
+    public override void EndMarkedContent() { if (!includeKnownInk) throw new PdfParseException("P01"); }
+    public override void ModifyClippingIntersect(FillingRule rule) { if (!includeKnownInk) throw new PdfParseException("P01"); }
     protected override void ClipToRectangle(PdfRectangle rectangle, FillingRule rule) => throw new PdfParseException("P01");
     public override void PaintShading(NameToken name) => throw new PdfParseException("P01");
     public override void BeginSubpath() { }

@@ -277,7 +277,7 @@ public sealed class RecoveryDateHeaderOwnershipTests
     // the source's physical rails and original atoms, never parser output or gold.
     // Six pages contain all 17 classes, five dates and six periods; the final
     // period of each page's final class is blank on every date (30 of 510 slots).
-    private static PdfPageLayout[] ExamPages(bool january = false, bool inlineRoles = false)
+    internal static PdfPageLayout[] ExamPages(bool january = false, bool inlineRoles = false)
     {
         var classes = new[] { "1_1", "1_2", "1_3", "2_CN", "2_ES", "2_IT", "3_CN", "3_ES", "3_IT", "4_CN", "4_ES", "4_IT", "5_CN", "5_ES", "5_IT", "AI_1", "AI_2" };
         var clocks = new[] { "08:40〜09:25", "09:35〜10:20", "10:30〜11:15", "11:25〜12:10", "12:50〜13:35", "13:45〜14:30" };
@@ -342,7 +342,7 @@ public sealed class RecoveryDateHeaderOwnershipTests
         return pages.ToArray();
     }
 
-    private static PdfPageLayout ReturnPage()
+    internal static PdfPageLayout ReturnPage()
     {
         const int left = 120, right = 4040, bodyTop = 194, bottom = bodyTop + 17 * 96;
         var glyphs = new List<PdfGlyph>(); var rules = new List<PdfRule>();

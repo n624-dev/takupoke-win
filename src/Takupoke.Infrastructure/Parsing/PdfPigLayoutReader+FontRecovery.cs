@@ -18,6 +18,8 @@ public static partial class PdfPigLayoutReader
     {
         token.ThrowIfCancellationRequested();
         if (capture.Complete || kind is not (MaterialKind.Timetable or MaterialKind.Exam or MaterialKind.ExamReturn)) return;
+        ImproveVisibleUnicodeCapture(bytes,kind,capture,token);
+        if (capture.Complete) return;
         var recovered=new RecoveryReadCapture();
         try { ReadWithMissingUnicodeRecovery(bytes,kind,token,recovered); }
         catch (PdfParseException failure) when (Takupoke.Core.Recovery.RecoveryPolicy.Eligible(kind,failure.Stage)) { }

@@ -7,7 +7,7 @@ public static partial class PdfScheduleParser
 {
     private sealed record ParsedSpecialPage(IReadOnlyList<string> Dates, IReadOnlyList<string> Classes, IReadOnlyList<SpecialLesson> Lessons);
     public static SpecialAnalysis Special(IReadOnlyList<PdfPageLayout> pages, MaterialKind kind, CancellationToken token = default,
-        IReadOnlySet<int>? ocrPages = null)
+        IReadOnlySet<int>? ocrPages = null,bool allowNativeTwoRowExam = false)
     {
         if (kind is not MaterialKind.Exam and not MaterialKind.ExamReturn || pages.Count != (kind == MaterialKind.Exam ? 6 : 1)) throw new PdfParseException("P04");
         int? year = null; string[]? expectedDates = null; PdfTimes? expectedTimes = null;
@@ -24,7 +24,7 @@ public static partial class PdfScheduleParser
             if (expectedTimes is not null && !expectedTimes.Same(times)) throw new PdfParseException("P05", index + 1);
             expectedTimes = times;
             var fromOcr = ocrPages?.Contains(index + 1) == true;
-            var parsed = kind == MaterialKind.Exam ? ExamPage(page, currentYear, index + 1, times, token, fromOcr) : ReturnPage(page, currentYear, times, token, fromOcr);
+            var parsed = kind == MaterialKind.Exam ? ExamPage(page, currentYear, index + 1, times, token, fromOcr,allowNativeTwoRowExam) : ReturnPage(page, currentYear, times, token, fromOcr);
             var dates = parsed.Dates.Order(StringComparer.Ordinal).ToArray();
             if (expectedDates is not null && !expectedDates.SequenceEqual(dates)) throw new PdfParseException("P10", index + 1);
             expectedDates = dates;
@@ -36,7 +36,7 @@ public static partial class PdfScheduleParser
         return new(kind, year.Value, expectedDates, classes.Order(StringComparer.Ordinal).ToArray(), expectedTimes.Single,
             lessons.OrderBy(l => l.Date, StringComparer.Ordinal).ThenBy(l => l.ClassName, StringComparer.Ordinal).ThenBy(l => l.Period).ThenBy(l => l.Page).ToArray());
     }
-    private static ParsedSpecialPage ExamPage(PdfPageLayout page, int year, int number, PdfTimes times, CancellationToken token, bool fromOcr)
+    private static ParsedSpecialPage ExamPage(PdfPageLayout page, int year, int number, PdfTimes times, CancellationToken token, bool fromOcr,bool allowNativeTwoRowExam = false)
     {
         var columns = number == 6 ? 2 : 3; var periods = PeriodHeader(page, "123456", columns, 0.25); var headerY = periods[0].Cy;
         var names = ExamClasses(page, periods, number, fromOcr, token);
@@ -47,7 +47,10 @@ public static partial class PdfScheduleParser
         var grid = new PdfGrid(page, token); var lessons = new List<SpecialLesson>();
         var firstBox = grid.Box(periods[0].Cx, dates[0].Run.Cy); var lastBox = grid.Box(periods[^1].Cx, dates[^1].Run.Cy);
         grid.SetLessonArea(new(firstBox.Left, firstBox.Top, lastBox.Right, lastBox.Bottom));
-        var lessonRows = dates.Select(pair => { token.ThrowIfCancellationRequested(); return grid.Box(pair.Run.Cx, pair.Run.Cy); }).ToArray();
+        var lessonRows = dates.Select(pair => {
+            token.ThrowIfCancellationRequested(); var row=grid.Box(pair.Run.Cx,pair.Run.Cy);
+            return row with { Top=Math.Max(row.Top,grid.Box(periods[0].Cx,pair.Run.Cy).Top) };
+        }).ToArray();
         grid.SetLessonCells(lessonRows.SelectMany(row => periods.SelectMany(period => grid.Slices(row, period.Cx))));
         foreach (var (pair, row) in dates.Zip(lessonRows))
         {
@@ -58,7 +61,7 @@ public static partial class PdfScheduleParser
                     foreach (var box in grid.Slices(row, xs[period - 1]))
                     {
                         token.ThrowIfCancellationRequested();
-                        if (SpecialCell(grid, box, pair.Day!.Value, names[column], period, xs, times, number) is { } lesson) lessons.Add(lesson);
+                        if (SpecialCell(grid, box, pair.Day!.Value, names[column], period, xs, times, number,allowNativeTwoRowExam) is { } lesson) lessons.Add(lesson);
                     }
             }
         }
@@ -183,11 +186,22 @@ public static partial class PdfScheduleParser
         var classes = new HashSet<string>(); var lessons = new List<SpecialLesson>(); var grid = new PdfGrid(page, token);
         var firstBox = grid.Box(periods[0].Cx, classRuns[0].Cy); var lastBox = grid.Box(periods[^1].Cx, classRuns[^1].Cy);
         grid.SetLessonArea(new(firstBox.Left, firstBox.Top, lastBox.Right, lastBox.Bottom));
-        var lessonRows = classRuns.Select(run => { token.ThrowIfCancellationRequested(); return grid.Box(run.Cx, run.Cy); }).ToArray();
+        var lessonRows = classRuns.Select(run => {
+            token.ThrowIfCancellationRequested(); var row=grid.Box(run.Cx,run.Cy);
+            return row with { Top=Math.Max(row.Top,grid.Box(periods[0].Cx,run.Cy).Top) };
+        }).ToArray();
         grid.SetLessonCells(lessonRows.SelectMany(row => periods.SelectMany(period => grid.Slices(row, period.Cx))));
+        var gradeOwners = new List<(Run Grade,PdfBox Box)>();
+        foreach (var grade in grades)
+        {
+            try { gradeOwners.Add((grade,grid.Box(grade.Cx,grade.Cy))); }
+            catch(PdfParseException failure) when(failure.Stage!="limit") { gradeOwners.Clear();break; }
+        }
         foreach (var (run, row) in classRuns.Zip(lessonRows))
         {
-            var grade = grades.MinBy(g => Math.Abs(g.Cy - run.Cy))!;
+            var owners=gradeOwners.Where(g=>g.Box.Right<=row.Left && g.Box.Top<run.Cy && run.Cy<g.Box.Bottom).ToArray();
+            if (gradeOwners.Count>0 && owners.Length!=1) throw new PdfParseException("P15",1);
+            var grade = owners.Length==1 ? owners[0].Grade : grades.MinBy(g => Math.Abs(g.Cy - run.Cy))!;
             if (Math.Abs(grade.Cy - run.Cy) >= step * 2.5) throw new PdfParseException("P15", 1);
             var name = grade.Text == "AI" ? "AI_" + run.Text : grade.Text + "_" + run.Text;
             if (!classes.Add(name)) throw new PdfParseException("P16", 1);

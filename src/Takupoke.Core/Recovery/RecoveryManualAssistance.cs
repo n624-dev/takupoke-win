@@ -20,7 +20,7 @@ public sealed record RecoveryFieldTarget(string CellId, int LessonIndex, Recover
 {
     public string Key => CellId + ":" + LessonIndex + ":" + Role;
 }
-public enum RecoveryHeaderReviewRole { Year, Term, Class, Day, Period }
+public enum RecoveryHeaderReviewRole { Year, Term, Class, Day, Period, Reference }
 public sealed record RecoveryHeaderReviewProof(RecoveryHeaderReviewRole Role, string ScopeKey, int? SourceLine);
 public sealed record RecoveryManualTarget(RecoveryFieldTarget Target, int Page, RecoveryBox Crop,
     IReadOnlyList<string> OriginalParentIds, string OriginalOcr)
@@ -57,11 +57,12 @@ public static class RecoveryManualAssistance
 {
     public const int MaximumFields = 3;
     public const int MaximumReviewFields = 128;
-    // Schema 3 gives explicitly reviewed body corrections the full bounded
+    // Schema 4 also requires original-pixel acknowledgement for native text
+    // partially intersected by later grid paint. Schema 3 gives body corrections the full bounded
     // review budget. Older captures retain their original three-edit contract.
-    public const int CurrentManualSchemaVersion = 3;
+    public const int CurrentManualSchemaVersion = 4;
     public static int CorrectionLimit(RecoveryDocument doc) =>
-        doc.Capture?.ManualSchemaVersion == 3 ? MaximumReviewFields : MaximumFields;
+        doc.Capture?.ManualSchemaVersion is 3 or 4 ? MaximumReviewFields : MaximumFields;
     public const int MaximumCropPixels = 262144;
     // Acquisition-only geometry request. This cannot authorize correction without original pixel receipts.
     public static IReadOnlyList<RecoveryManualTarget>? CaptureTargets(RecoveryDocument doc, CancellationToken token = default)
@@ -93,7 +94,7 @@ public static class RecoveryManualAssistance
         IReadOnlyList<RecoveryFieldTarget> selected, CancellationToken token = default)
     {
         token.ThrowIfCancellationRequested();
-        if (doc.Capture?.ManualSchemaVersion is not (2 or 3) || RecoveryValidator.InputErrors(doc, token).Count != 0) return null;
+        if (doc.Capture?.ManualSchemaVersion is not (2 or 3 or 4) || RecoveryValidator.InputErrors(doc, token).Count != 0) return null;
         try
         {
             var targets = Targets(doc, new RecoveryWorkBudget(token), selected: selected);
@@ -101,7 +102,7 @@ public static class RecoveryManualAssistance
         }
         catch (Exception error) when (error is RecoveryWorkLimitException or NullReferenceException or ArgumentException or KeyNotFoundException or InvalidOperationException) { return null; }
     }
-    private static int ReviewLimit(RecoveryDocument doc) => doc.Capture?.ManualSchemaVersion is 2 or 3 ? MaximumReviewFields : MaximumFields;
+    private static int ReviewLimit(RecoveryDocument doc) => doc.Capture?.ManualSchemaVersion is 2 or 3 or 4 ? MaximumReviewFields : MaximumFields;
     public static bool VerifyPlan(RecoveryManualPlan plan, CancellationToken token = default)
     {
         token.ThrowIfCancellationRequested();
@@ -141,7 +142,7 @@ public static class RecoveryManualAssistance
         work.Step();
         var capture = doc.Capture;
         if (!doc.Complete || doc.Cells.Count > 20000 || doc.Sources.Count > 100000 || capture is null ||
-            capture.PdfHash != doc.PdfHash || capture.ManualSchemaVersion is not (1 or 2 or 3) || capture.PageCount is < 1 or > 12 || capture.Pages.Count != capture.PageCount) return null;
+            capture.PdfHash != doc.PdfHash || capture.ManualSchemaVersion is not (1 or 2 or 3 or 4) || capture.PageCount is < 1 or > 12 || capture.Pages.Count != capture.PageCount) return null;
         var requested = selected?.ToHashSet() ?? [];
         if (selected is not null && (selected.Count is < 1 or > MaximumReviewFields || requested.Count != selected.Count || selected.Any(t => t is null))) return null;
         var reviewLimit = selected is null ? ReviewLimit(doc) : MaximumReviewFields;
@@ -169,6 +170,11 @@ public static class RecoveryManualAssistance
                 if (confidence < .8) uncertain.Add(s.Id);
             }
             else if (s.NativeConfidence is not null) return null;
+            if (s.RequiresVisualReview)
+            {
+                if (capture.ManualSchemaVersion != 4 || s.FromOcr) return null;
+                uncertain.Add(s.Id);
+            }
         }
         if (pages.Values.Any(p => sourceCounts.GetValueOrDefault(p.Page) != p.SourceCount)) return null;
         var assigned = new HashSet<string>(); var targets = new List<RecoveryManualTarget>();
@@ -179,7 +185,7 @@ public static class RecoveryManualAssistance
             if (cell.InputState != RecoveryInputState.Complete) return null;
             IReadOnlyList<RecoveryLessonBinding> bindings;
             if (cell.BindingMode == RecoveryBindingMode.Fixed) bindings = cell.LessonBindings;
-            else if (capture.ManualSchemaVersion is 2 or 3 && cell.BindingMode == RecoveryBindingMode.RoleProposal)
+            else if (capture.ManualSchemaVersion is 2 or 3 or 4 && cell.BindingMode == RecoveryBindingMode.RoleProposal)
             {
                 // Only existing deterministic role/ownership proofs authorize
                 // a review. No provider, user text or confidence edit assigns roles.
@@ -198,7 +204,7 @@ public static class RecoveryManualAssistance
                 {
                     work.Step(ids.Count * 5L);
                     var target = new RecoveryFieldTarget(cell.Id, lesson, role);
-                    var labels = capture.ManualSchemaVersion is 2 or 3 && cell.BindingMode == RecoveryBindingMode.RoleProposal
+                    var labels = capture.ManualSchemaVersion is 2 or 3 or 4 && cell.BindingMode == RecoveryBindingMode.RoleProposal
                         ? cell.RoleScopes.Where(s => s.LessonIndex == lesson && s.Role == role && s.Proof == RecoveryRoleProof.InlineLabel)
                             .SelectMany(s => s.LabelSourceIds).ToArray() : [];
                     work.Step(labels.Length * 5L);
@@ -208,7 +214,7 @@ public static class RecoveryManualAssistance
                     foreach (var id in ids.Concat(reviewLabels).Where(uncertain.Contains)) if (!assigned.Add(id)) return null;
                     var atoms = ids.Select(id => sources[id]).ToArray();
                     var cropAtoms = atoms.Concat(reviewLabels.Select(id => sources[id])).ToArray();
-                    if (requested.Contains(target) && !atoms.Any(s => s.FromOcr)) return null;
+                    if (requested.Contains(target) && !atoms.Any(s => s.FromOcr || s.RequiresVisualReview)) return null;
                     if (cropAtoms.Any(s => s.CellId != cell.Id || s.Page != cell.Page || !cell.Box.Contains(s.Box))) return null;
                     var left = cropAtoms.Min(s => s.Box.X); var top = cropAtoms.Min(s => s.Box.Y);
                     var box = new RecoveryBox(left, top, cropAtoms.Max(s => s.Box.X + s.Box.Width) - left, cropAtoms.Max(s => s.Box.Y + s.Box.Height) - top);
@@ -218,7 +224,7 @@ public static class RecoveryManualAssistance
                 }
             }
         }
-        if (capture.ManualSchemaVersion is 2 or 3)
+        if (capture.ManualSchemaVersion is 2 or 3 or 4)
         {
             // Read-only confirmation of an already proved literal header. This
             // never assigns missing structure or accepts typed replacement text.
@@ -228,6 +234,8 @@ public static class RecoveryManualAssistance
             headers.AddRange(doc.ClassEvidence.Select(p => (RecoveryHeaderReviewRole.Class, p.Key, p.Value)));
             headers.AddRange(doc.DayEvidence.Select(p => (RecoveryHeaderReviewRole.Day, p.Key, p.Value)));
             headers.AddRange(doc.PeriodEvidence.Select(p => (RecoveryHeaderReviewRole.Period, p.Key, p.Value)));
+            if(capture.ManualSchemaVersion==4)
+                headers.AddRange((doc.ReferenceNotes ?? []).Select((note,index)=>(RecoveryHeaderReviewRole.Reference,index.ToString(System.Globalization.CultureInfo.InvariantCulture),note.SourceIds)));
             foreach (var (role, scope, ids) in headers)
             {
                 work.Step(ids.Count * 4L);
@@ -283,10 +291,10 @@ public static class RecoveryManualAssistance
     {
         var corrections = result.HumanCorrections;
         if (corrections is null) return null;
-        if (doc.Capture?.ManualSchemaVersion is 2 or 3 && result.Metadata.ValidatorVersion < 10) return null;
+        if (doc.Capture?.ManualSchemaVersion is 2 or 3 or 4 && result.Metadata.ValidatorVersion < 10) return null;
         work.Step(corrections.Count);
         if (corrections.Count < 1 || corrections.Count > ReviewLimit(doc)) return null;
-        var selected = doc.Capture?.ManualSchemaVersion is 2 or 3 ? corrections.Select(c => c.Target).ToArray() : null;
+        var selected = doc.Capture?.ManualSchemaVersion is 2 or 3 or 4 ? corrections.Select(c => c.Target).ToArray() : null;
         var targets = Targets(doc, work, selected: selected);
         if (targets is null || targets.Count != corrections.Count) return null;
         var snapshot = RecoveryValidator.Fingerprint(doc);
@@ -312,7 +320,7 @@ public static class RecoveryManualAssistance
         // Schemas 2 and 3 distinguish checking uncertain OCR from actually editing it.
         // Every reviewed field retains its own source/crop/user acknowledgement;
         // only ordinal text changes consume the document-wide correction budget.
-        if (doc.Capture!.ManualSchemaVersion is 2 or 3 && output.Values.Count(c =>
+        if (doc.Capture!.ManualSchemaVersion is 2 or 3 or 4 && output.Values.Count(c =>
             !string.Equals(c.CorrectedText, allowed[c.Target].OriginalOcr, StringComparison.Ordinal)) > CorrectionLimit(doc)) return null;
         return output;
     }

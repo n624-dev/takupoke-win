@@ -209,12 +209,21 @@ public sealed partial class MainWindow
         }
         Add(Card(Panel(SettingsSectionTitle("原本を確認してから使用してください"), Text($"{document.SchoolYear}年度 {document.Term} · {AppViewModel.MaterialLabel(kind)}"), Text("表示中のクラスだけでなく、資料全体・全クラスの結果を採用します。採用するまで時間割には反映されません。学校の資料と読み取り結果は外部へ送信されません。"),
             Button("対応する元PDFを確認", () => ShowPdf(kind, false, preview), "recovery-original-" + kind))));
-        if (preview.Document.Capture?.ManualSchemaVersion is 2 or 3 && document.ReviewedFieldCount > 0)
+        if (preview.Document.Capture?.ManualSchemaVersion is 2 or 3 or 4 && document.ReviewedFieldCount > 0)
             Add(SettingsDescription($"原本と照合した項目: {document.ReviewedFieldCount} · 文字を訂正した項目: {document.Corrections.Length}"));
         foreach (var review in preview.Result.HumanCorrections ?? [])
             if (review.HeaderProof is { } header)
                 Add(SettingsDescription("原本と照合した見出し: " + RecoveryHeaderReviewLabel(header.Role) + " · " + review.Page +
                     "ページ · " + review.CorrectedText));
+        if(!document.ReferenceNotes.IsEmpty)
+        {
+            var notes=Panel();
+            foreach(var note in document.ReferenceNotes)
+                notes.Children.Add(SettingsDescription(note.Page+"ページ · "+note.Text));
+            var expander=new Expander {Header="原本の注記（"+document.ReferenceNotes.Length+"件）",Content=notes,HorizontalAlignment=HorizontalAlignment.Stretch};
+            AutomationProperties.SetAutomationId(expander,"recovery-reference-notes-"+kind);
+            Add(expander);
+        }
         if (!document.Corrections.IsEmpty)
         {
             Add(SettingsSectionTitle("原本と照合して入力した箇所"));
@@ -303,7 +312,7 @@ public sealed partial class MainWindow
     }
     private static string RecoveryHeaderReviewLabel(RecoveryHeaderReviewRole role) => role switch
     { RecoveryHeaderReviewRole.Year => "年度", RecoveryHeaderReviewRole.Term => "学期", RecoveryHeaderReviewRole.Class => "クラス",
-        RecoveryHeaderReviewRole.Day => "曜日・日付", _ => "時限" };
+        RecoveryHeaderReviewRole.Day => "曜日・日付", RecoveryHeaderReviewRole.Reference => "原本の注記", _ => "時限" };
     private static string RecoveryRoleLabel(RecoveryFieldRole role) => role switch
     { RecoveryFieldRole.Subject => "科目", RecoveryFieldRole.Teacher => "教員", _ => "教室" };
     private static string RecoveryTargetLabel(MaterialKind kind, System.Collections.Immutable.ImmutableArray<RecoverySlot> slots,

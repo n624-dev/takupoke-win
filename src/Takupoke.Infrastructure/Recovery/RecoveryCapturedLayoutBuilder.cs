@@ -13,7 +13,7 @@ public static class RecoveryCapturedLayoutBuilder
         RecoveryReadCapture capture, CancellationToken token = default)
     {
         token.ThrowIfCancellationRequested();
-        if (!capture.Complete || capture.Pages.Any(p => p.Layout is null)) return null;
+        if (!capture.Complete || capture.Pages.Any(p => p.NativeInkAccounted || p.Layout is null || p.Layout.Glyphs.Any(g => g.RequiresVisualReview))) return null;
         var pages = capture.Pages.Select(p => p.Layout!).ToArray();
         for (var i = 0; i < pages.Length; i++)
         {

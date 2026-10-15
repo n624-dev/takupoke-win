@@ -102,6 +102,7 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
         if (pdf.PageCount is < 1 or > 12) throw new PdfParseException("limit");
         var pages = new List<PdfPageLayout>(); var rasters = new List<RecoveryRaster>(); var rasterRules = new List<IReadOnlyList<PdfRule>>(); var ocrPages = new HashSet<int>(); OnnxJapaneseOcr? ocr = null;
         var nativeConfidence = new Dictionary<string, double>(); var completeInk = new List<bool>();
+        var scales=new List<(double X,double Y)>();
         try
         {
             for (uint i = 0; i < pdf.PageCount; i++)
@@ -121,10 +122,9 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                 var layout = captured?.State == RecoveryInputState.Complete ? captured.Layout : null;
                 if (layout is not null)
                 {
-                    var sx = raster.Width / layout.Width; var sy = raster.Height / layout.Height;
-                    pages.Add(new(raster.Width, raster.Height, layout.Glyphs.Select(g => g with { X = g.X * sx, Y = g.Y * sy, Width = g.Width * sx, Height = g.Height * sy }).ToArray(),
-                        layout.Lines.Select(l => new PdfRule(l.X1 * sx, l.Y1 * sy, l.X2 * sx, l.Y2 * sy)).Concat(rules).ToArray()));
-                    completeInk.Add(false); // Manual coverage is checked only if low-confidence OCR needs it.
+                    scales.Add((raster.Width/layout.Width,raster.Height/layout.Height));
+                    pages.Add(layout);
+                    completeInk.Add(captured!.NativeInkAccounted); // Otherwise original raster coverage is verified before manual review.
                     continue;
                 }
                 IReadOnlyList<PdfGlyph>? glyphs = null; IReadOnlyList<RecoveryBox> recognizedBoxes = []; IReadOnlyList<double>? confidences = null;
@@ -145,13 +145,14 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                 if (confidences is null || confidences.Count != glyphs.Count) throw new InvalidDataException("OCRの原文と確信度の対応を確認できません。");
                 for (var n = 0; n < glyphs.Count; n++) nativeConfidence.Add($"p{i + 1}s{n}", confidences[n]);
                 completeInk.Add(true);
+                scales.Add((1,1));
                 ocrPages.Add((int)i + 1); pages.Add(new(raster.Width, raster.Height, glyphs, rules));
             }
             if (nativeConfidence.Values.Any(score => score < .8))
                 for (var index = 0; index < pages.Count; index++)
-                    if (!ocrPages.Contains(index + 1))
+                    if (!ocrPages.Contains(index + 1) && !completeInk[index])
                     {
-                        var nativeBoxes = pages[index].Glyphs.Select(g => new RecoveryBox(g.X, g.Y, g.Width, g.Height)).ToArray();
+                        var nativeBoxes = pages[index].Glyphs.Select(g => RecoveryLayoutGeometry.Scale(new(g.X,g.Y,g.Width,g.Height),scales[index].X,scales[index].Y)).ToArray();
                         try { completeInk[index] = !await Task.Run(() => rasters[index].HasUnrecognizedInk(nativeBoxes, rasterRules[index], token), token); }
                         catch (InvalidDataException) { completeInk[index] = false; } // This document remains ineligible for manual correction.
                     }
@@ -159,15 +160,20 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
             {
                 var ruleMasks = rasters.Select((r, index) => r.RuleMask(rasterRules[index], token)).ToArray();
                 var blankScanners = rasters.Select((r, index) => r.InkFreeScanner(ruleMasks[index], token)).ToArray();
-                var document = RecoveryDocumentBuilder.Build(hash, kind, pages, (page, box) => blankScanners[page - 1](box), ocrPages, token, allowStructureProposal: true);
+                var nativeBlankScanners=pages.Select(p=>RecoveryLayoutGeometry.NativeBlankScanner(p,token)).ToArray();
+                var document = RecoveryDocumentBuilder.Build(hash, kind, pages, (page, box) =>
+                    capture.Pages[page-1].NativeInkAccounted
+                        ? nativeBlankScanners[page-1](box)
+                        : blankScanners[page-1](RecoveryLayoutGeometry.Scale(box,scales[page-1].X,scales[page-1].Y)), ocrPages, token, allowStructureProposal: true,allowNativeReferences:capture.Pages.All(p=>p.NativeInkAccounted));
+                document=RecoveryLayoutGeometry.Project(document,scales,token);
                 var sources = document.Sources.Select(source => nativeConfidence.TryGetValue(source.Id, out var score) ? source with { NativeConfidence = score } : source).ToArray();
-                if (nativeConfidence.Count == 0) return document; // Keep the existing native-only acquisition contract.
+                if (nativeConfidence.Count == 0 && !sources.Any(s => s.RequiresVisualReview) && document.ReferenceNotes is null && !document.Cells.Any(c=>c.NativeLayoutProof is not null) && !sources.Any(s=>s.NativeLayoutBox is not null)) return document; // Keep the existing native-only acquisition contract.
                 var proof = rasters.Select((r, index) => new RecoveryCapturedPage(index + 1, r.Width, r.Height,
                     Convert.ToHexStringLower(SHA256.HashData(r.Bgra)), sources.Count(s => s.Page == index + 1), completeInk[index])
                     { RenderProfile = "windows-pdf-png-v1" }).ToArray();
                 token.ThrowIfCancellationRequested();
                 document = document with { Sources = sources, Capture = new(hash, (int)pdf.PageCount, RecoveryValidator.Fingerprint(sources), proof, ManualSchemaVersion: RecoveryManualAssistance.CurrentManualSchemaVersion) };
-                var targets = document.Sources.Any(s => s.NativeConfidence is < .8)
+                var targets = document.Sources.Any(s => s.NativeConfidence is < .8 || s.RequiresVisualReview)
                     ? RecoveryManualAssistance.CaptureTargets(document, token) : null;
                 if (targets is { Count: > 0 and <= RecoveryManualAssistance.MaximumReviewFields })
                 {

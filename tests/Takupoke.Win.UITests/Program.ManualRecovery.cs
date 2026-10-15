@@ -19,7 +19,7 @@ internal static partial class Program
     // Scripted confidence is a UI control, not a native OCR observation.
     // The independently drawn original bitmap/PDF and retained crops are real
     // temporary input bytes; the global ink receipt is computed, never assumed.
-    private static async Task<RecoveryManualSession> SeedManualRecoveryUiAsync(string root, int count, bool reviewHeader = false, int manualSchemaVersion = 1, bool confusableRoom = false)
+    private static async Task<RecoveryManualSession> SeedManualRecoveryUiAsync(string root, int count, bool reviewHeader = false, int manualSchemaVersion = 1, bool confusableRoom = false,bool nativeReview = false)
     {
         var preferences = new PreferencesStore(root);
         await preferences.SaveAsync((await preferences.LoadAsync()) with { UseAiFeatures = true });
@@ -27,10 +27,13 @@ internal static partial class Program
         var lease = await store.BeginAsync(); var (document, _) = RecoveryUiFixture(lease.Period);
         var cell = document.Cells[0];
         var extra = new List<RecoverySource> { new("teacher", cell.Id, 1, "架空教員A", new(110,125,60,10)) };
+        if(nativeReview)extra.Add(new("native-note","header",1,"架空の原本注記",new(10,920,70,10)));
         if (count == 4) extra.Add(new("subject-second", document.Cells[1].Id, 1, "架空科目B", new(110,210,60,10)));
         var sources = document.Sources.Concat(extra)
             .Select(s => confusableRoom && s.Id == "room" ? s with { Text = "架空室I1O0" } : s)
             .Select(s => s with { FromOcr = true, NativeConfidence = new[] { "subject", "teacher", "room", "subject-second" }.Take(count).Contains(s.Id) || reviewHeader && s.Id == "class" ? .4 : .95 }).ToArray();
+        if(nativeReview)sources=sources.Select(source=>source with {FromOcr=false,NativeConfidence=null,
+            RequiresVisualReview=source.NativeConfidence is <.8 || source.Id=="native-note"}).ToArray();
         document = document with { Sources = sources, Cells = document.Cells.Select((c,i) => i == 0 ? c with {
             SourceIds = ["subject","room","teacher"], BlankFields = [], LessonBindings = [new(["subject"],["teacher"],["room"])] } : c).ToArray() };
         if (count == 4) document = document with { Cells = document.Cells.Select((c,i) => i == 1 ? c with {
@@ -74,7 +77,8 @@ internal static partial class Program
         var source = new SourceRecord(Guid.NewGuid().ToString("N"),MaterialKind.Timetable,path,content.Identity,"fictional-manual-source.pdf",hash,bytes.Length,now,now,content.ModifiedAt);
         await store.SaveOriginalAsync(lease,source,bytes);
         document = document with { PdfHash = hash, Capture = new(hash,1,RecoveryValidator.Fingerprint(sources),
-            [new(1,width,height,NotificationDiff.Digest(bgra),sources.Length,true)], reviewHeader ? 2 : manualSchemaVersion) };
+            [new(1,width,height,NotificationDiff.Digest(bgra),sources.Length,true)], nativeReview ? 4 : reviewHeader ? 2 : manualSchemaVersion),
+            ReferenceNotes=nativeReview ? [new(1,sources.Single(s=>s.Id=="native-note").Box,["native-note"])] : null };
         var targets = RecoveryManualAssistance.CaptureTargets(document) ?? throw new InvalidDataException("Manual UI ownership control failed.");
         var crops = targets.Select(t => {
             var x=(int)Math.Floor(t.Crop.X);var y=(int)Math.Floor(t.Crop.Y);
@@ -84,7 +88,7 @@ internal static partial class Program
         }).ToArray();
         document = document with { Capture = document.Capture! with { OriginalCrops = crops } };
         var plan = RecoveryManualAssistance.Prepare(document) ?? throw new InvalidDataException("Manual UI input control refused.");
-        if (plan.Targets.Count != count + (reviewHeader ? 1 : 0)) throw new InvalidDataException("Manual field count differs from control.");
+        if (plan.Targets.Count != count + (reviewHeader ? 1 : 0) + (nativeReview ? 1 : 0)) throw new InvalidDataException("Manual field count differs from control.");
         var job = new RecoveryJob(hash,RecoveryDocumentKind.Timetable,RecoveryJobState.AwaitingManualCorrection,now) { ManualPlan = plan };
         await store.WriteAsync(lease,"acquisition.Timetable",new MaterialAttempt(now,null,false,hash));
         await store.WriteAsync(lease,"attempt.Timetable",new MaterialAttempt(now,"P13",true,hash,lease.Period.SchoolYear,ParserVersion:PdfScheduleParser.TimetableVersion,RecoveryPending:true));
@@ -208,6 +212,37 @@ internal static partial class Program
             "Read-only header review persists after native restart");
         Console.WriteLine("Native read-only header review: original pixels, explicit acknowledgement, unchanged text/score, adoption and restart passed.");
     }
+    private static void CheckNativeSourceRecoveryUi(string executable,string root)
+    {
+        // Scripted native uncertainty tests UI/provenance, not acquisition or
+        // OCR accuracy. Original crops are independently rendered PDF pixels.
+        Stop();var session=SeedManualRecoveryUiAsync(root,1,reviewHeader:true,nativeReview:true).GetAwaiter().GetResult();
+        var header=session.Plan.Targets.Single(t=>t.HeaderProof?.Role==RecoveryHeaderReviewRole.Class);
+        var note=session.Plan.Targets.Single(t=>t.HeaderProof?.Role==RecoveryHeaderReviewRole.Reference);
+        var body=session.Plan.Targets.Single(t=>t.HeaderProof is null);
+        Start(executable);OpenRecoveryUiPreview();
+        Wait(()=>Find("manual-submit-Timetable") is not null,"Native uncertainty opens original-pixel review");
+        Require(Find("manual-value-"+header.Target.Key) is null && Find("manual-value-"+note.Target.Key) is null,"Native header and reference remain read only");
+        Require(!WaitElement("manual-submit-Timetable").Current.IsEnabled,"Native text is not automatically acknowledged");
+        Require(Find("manual-crop-"+body.Target.Key) is not null && Find("manual-crop-"+header.Target.Key) is not null,"Native body/header retain original pixel crops");
+        var input=(ValuePattern)WaitElement("manual-value-"+body.Target.Key).GetCurrentPattern(ValuePattern.Pattern);
+        input.SetValue("架空ネイティブ訂正");
+        Wait(()=>input.Current.Value=="架空ネイティブ訂正","Native source correction is visible before acknowledgement");
+        Toggle(WaitElement("manual-ack-"+body.Target.Key));Toggle(WaitElement("manual-ack-"+header.Target.Key));Toggle(WaitElement("manual-ack-"+note.Target.Key));
+        Wait(()=>Find("manual-submit-Timetable")?.Current.IsEnabled==true,"All native sources require explicit acknowledgement");
+        Invoke("manual-submit-Timetable");Wait(()=>Find("adopt-recovery-Timetable") is not null,"Native review returns to whole-document preview");
+        ((ExpandCollapsePattern)WaitElement("recovery-reference-notes-Timetable").GetCurrentPattern(ExpandCollapsePattern.Pattern)).Expand();
+        Wait(()=>RecoveryUiText("架空の原本注記"),"Original native reference note is visible in preview");
+        var preview=RecoveryUiPendingAsync(root).GetAwaiter().GetResult();
+        Require(preview.Document.Sources.All(s=>!s.FromOcr && s.NativeConfidence is null) && preview.Result.HumanCorrections?.Count==3,
+            "Native source is never relabelled OCR or assigned a fabricated confidence");
+        Invoke("adopt-recovery-Timetable");Wait(()=>Find("adopt-recovery-Timetable") is null,"Explicit native adoption commits the checked result");
+        Stop();Start(executable);
+        var formal=RecoveryUiFormalAsync(root).GetAwaiter().GetResult();
+        Require(formal?.Timetable?.Lessons.Any(l=>l.Names.Subject=="架空ネイティブ訂正")==true && formal.Recovery?.Document.ReferenceNotes?.Count==1 &&
+            formal.Recovery.Result.HumanCorrections?.Count==3,"Native correction, read-only header provenance and reference notes survive restart");
+        Console.WriteLine("Native source review: source pixels, header/body acknowledgement, correction, original note, explicit adoption and restart passed.");
+    }
     private static async Task SeedBatchRecoveryPreviewAsync(string root)
     {
         var session=await SeedManualRecoveryUiAsync(root,1,confusableRoom:true);
@@ -245,7 +280,7 @@ internal static partial class Program
         Invoke("recovery-edit-selected-Timetable");
         Wait(() => Find("manual-submit-Timetable") is not null,"Batch selection opens original-image review");
         var plan=RecoveryUiManualPlanAsync(root).GetAwaiter().GetResult();
-        Require(plan.Document.Capture?.ManualSchemaVersion==3 && plan.Targets.Count==3,"Batch retains prior reviewed field and adds both confident fields");
+        Require(plan.Document.Capture?.ManualSchemaVersion==RecoveryManualAssistance.CurrentManualSchemaVersion && plan.Targets.Count==3,"Batch retains prior reviewed field and adds both confident fields");
         foreach(var target in plan.Targets)
         {
             if(target.Target.Role!=RecoveryFieldRole.Subject)
@@ -283,7 +318,7 @@ internal static partial class Program
         Require(((ValuePattern)WaitElement("manual-value-" + subject).GetCurrentPattern(ValuePattern.Pattern)).Current.Value == previousValue,
             "Selecting another field retains the previous human input");
         var pending = RecoveryUiManualPlanAsync(root).GetAwaiter().GetResult();
-        Require(pending.Document.Capture?.ManualSchemaVersion == 3 && pending.Targets.Count == 2,
+        Require(pending.Document.Capture?.ManualSchemaVersion == RecoveryManualAssistance.CurrentManualSchemaVersion && pending.Targets.Count == 2,
             "Native review upgrades the receipt and includes previous reviewed targets");
         var crop = pending.Document.Capture!.OriginalCrops!.Single(c => c.Target.Key == room);
         var sourcePdf = File.ReadAllBytes(Path.Combine(root, "fictional-manual-source.pdf"));

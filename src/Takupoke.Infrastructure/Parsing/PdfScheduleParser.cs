@@ -8,8 +8,8 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class PdfScheduleParser
 {
-    public const int TimetableVersion = 26;
-    public const int SpecialVersion = 24;
+    public const int TimetableVersion = 27;
+    public const int SpecialVersion = 25;
     private const int MaximumRecords = 10000;
     private static string Joined(IEnumerable<PdfGlyph> glyphs) => string.Concat(glyphs.Select(g => g.Text));
     private static string Heading(PdfPageLayout page, double fraction) => string.Concat(PdfGrid.Rows(page.Glyphs.Where(g => g.Cy < page.Height * fraction)).Select(Joined));
@@ -209,9 +209,21 @@ public static partial class PdfScheduleParser
         var month = int.Parse(match.Groups[1].Value); var day = int.Parse(match.Groups[2].Value);
         try { return new(month >= 4 ? schoolYear : schoolYear + 1, month, day); } catch (ArgumentOutOfRangeException) { return null; }
     }
-    private static SpecialLesson? SpecialCell(PdfGrid grid, PdfBox box, DateOnly day, string cls, int period, double[] xs, PdfTimes times, int page)
+    private static SpecialLesson? SpecialCell(PdfGrid grid, PdfBox box, DateOnly day, string cls, int period, double[] xs, PdfTimes times, int page,bool allowNativeTwoRowExam = false)
     {
-        var lines = grid.LessonFields(box).Select(l => l.Trim()).ToArray();
+        IReadOnlyList<string> nativeFields;
+        try { nativeFields=grid.LessonFields(box); }
+        catch(PdfParseException failure) when(allowNativeTwoRowExam && failure.Stage=="P17")
+        {
+            var rows=grid.TimetableRows(box);var height=box.Bottom-box.Top;
+            // A separately opted-in complete native exam family prints its
+            // subject in the top third and teacher in the middle third. A
+            // missing subject or a room in the bottom third cannot shift roles.
+            if(rows.Count!=2 || rows.Any(r=>r.Count==0) || rows[0].Average(g=>g.Cy)>=box.Top+height/3 ||
+                rows[1].Average(g=>g.Cy)<box.Top+height/3 || rows[1].Average(g=>g.Cy)>=box.Top+height*2/3)throw;
+            nativeFields=[string.Concat(rows[0].Select(g=>g.Text)),string.Concat(rows[1].Select(g=>g.Text)),""];
+        }
+        var lines = nativeFields.Select(l => l.Trim()).ToArray();
         if (lines.Length > 0 && lines.Length != 3 || lines.Sum(l => Encoding.UTF8.GetByteCount(l)) > 4096) throw new PdfParseException("P17", page);
         if (lines.Length == 0) return null;
         if (lines.Any(RecoveryRoleLabels.HasPrefix)) throw new PdfParseException("P17", page);

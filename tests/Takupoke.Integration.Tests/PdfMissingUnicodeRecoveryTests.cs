@@ -251,7 +251,7 @@ public sealed class PdfMissingUnicodeRecoveryTests
         }
         var output = result.ToArray(); directory.CopyTo(output, 0); return output;
     }
-    private static byte[] Pdf(byte[] font, string prefix = "", string shown = "00010002", string? toUnicode = null, byte[]? cidMap = null, int rotation=0, string options="", string matrix="1 0 0 1 20 100", string? showing=null, string suffix="")
+    internal static byte[] Pdf(byte[] font, string prefix = "", string shown = "00010002", string? toUnicode = null, byte[]? cidMap = null, int rotation=0, string options="", string matrix="1 0 0 1 20 100", string? showing=null, string suffix="",string beforeRules="")
     {
         byte[] Ascii(string value) => Encoding.ASCII.GetBytes(value);
         byte[] Stream(byte[] value)
@@ -260,7 +260,7 @@ public sealed class PdfMissingUnicodeRecoveryTests
             Ascii("<< /Type /Catalog /Pages 2 0 R >>"), Ascii("<< /Type /Pages /Kids [3 0 R] /Count 1 >>"),
             Ascii($"<< /Type /Page /Parent 2 0 R /Rotate {rotation} /MediaBox [0 0 200 200] /Resources << /Font << /F1 4 0 R /F2 4 0 R >> >> /Contents 5 0 R >>"),
             Ascii("<< /Type /Font /Subtype /Type0 /BaseFont /InventedExtractionFont /Encoding /Identity-H /DescendantFonts [6 0 R] " + (toUnicode is null ? "" : "/ToUnicode 9 0 R ") + ">>"),
-            Stream(Ascii(prefix + $"BT /F1 10 Tf {options} {matrix} Tm " + (showing ?? $"<{shown}> Tj") + $" ET 10 10 100 120 re S {suffix}")),
+            Stream(Ascii(prefix + $" BT /F1 10 Tf {options} {matrix} Tm " + (showing ?? $"<{shown}> Tj") + $" ET {beforeRules} 10 10 100 120 re S {suffix}")),
             Ascii("<< /Type /Font /Subtype /CIDFontType2 /BaseFont /InventedExtractionFont /CIDSystemInfo << /Registry (Adobe) /Ordering (Identity) /Supplement 0 >> /FontDescriptor 7 0 R /DW 600 " + (cidMap is null ? "" : "/CIDToGIDMap 10 0 R ") + ">>"),
             Ascii("<< /Type /FontDescriptor /FontName /InventedExtractionFont /Flags 32 /FontBBox [0 -200 600 800] /ItalicAngle 0 /Ascent 800 /Descent -200 /CapHeight 700 /StemV 80 /FontFile2 8 0 R >>"),
             Stream(font), Stream(Ascii(toUnicode ?? "")), Stream(cidMap ?? []) };

@@ -106,8 +106,8 @@ public sealed class RecoveryManualExpandedBudgetTests
     public void UnknownFutureSchemaDoesNotAuthorizeReview()
     {
         var doc = RecoveryManualAssistanceTests.Captured(1);
-        Assert.Null(RecoveryManualAssistance.Prepare(doc with { Capture = doc.Capture! with { ManualSchemaVersion = 4 } }));
-        var state = new RecoveryManualInputState(); state.Bind("future", new Dictionary<string,string> { ["field"] = "架空" }, 4);
+        Assert.Null(RecoveryManualAssistance.Prepare(doc with { Capture = doc.Capture! with { ManualSchemaVersion = RecoveryManualAssistance.CurrentManualSchemaVersion + 1 } }));
+        var state = new RecoveryManualInputState(); state.Bind("future", new Dictionary<string,string> { ["field"] = "架空" }, RecoveryManualAssistance.CurrentManualSchemaVersion + 1);
         Assert.Empty(state.Values); Assert.False(state.Ready);
     }
 }

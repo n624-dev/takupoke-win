@@ -21,6 +21,10 @@ public sealed class PdfParseException(string stage, int? page = null, PdfFailure
 }
 public sealed record PdfGlyph(string Text, double X, double Y, double Width, double Height, int? SourceLine = null, int? SourceOrder = null)
 {
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
+    public bool RequiresVisualReview { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public PdfBox? InkBounds { get; init; }
     public double Cx => X + Width / 2; public double Cy => Y + Height / 2;
     [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
     public Takupoke.Core.Recovery.RecoveryFontEvidence? FontEvidence { get; init; }
@@ -32,7 +36,7 @@ public sealed record PdfPageLayout(double Width, double Height, IReadOnlyList<Pd
 {
     public void ValidateViewport(int page)
     {
-        if (Glyphs.Any(g => !new[] { g.X, g.Y, g.Width, g.Height }.All(double.IsFinite) || g.X < 0 || g.Y < 0 || g.X + g.Width > Width || g.Y + g.Height > Height)
+        if (Glyphs.Any(g=>g.InkBounds is {} b && (!new[]{b.Left,b.Top,b.Right,b.Bottom}.All(double.IsFinite) || b.Left<0 || b.Top<0 || b.Right>Width || b.Bottom>Height || b.Left>=b.Right || b.Top>=b.Bottom)) || Glyphs.Any(g => !new[] { g.X, g.Y, g.Width, g.Height }.All(double.IsFinite) || g.X < 0 || g.Y < 0 || g.X + g.Width > Width || g.Y + g.Height > Height)
             || Lines.Any(l => !new[] { l.X1, l.Y1, l.X2, l.Y2 }.All(double.IsFinite) || l.X1 < 0 || l.X2 < 0 || l.Y1 < 0 || l.Y2 < 0 || l.X1 > Width || l.X2 > Width || l.Y1 > Height || l.Y2 > Height))
             throw new PdfParseException("P01", page);
     }
@@ -187,12 +191,13 @@ public sealed class PdfGrid(PdfPageLayout page, CancellationToken token = defaul
             return Left < next.Left && Right < next.Right && end.SourceOrder < start.SourceOrder && end.X < start.X && end.X + end.Width < start.X + start.Width;
         }
     }
-    public IReadOnlyList<string> TimetableText(PdfBox box)
+    public IReadOnlyList<string> TimetableText(PdfBox box) => TimetableRows(box).Select(row=>string.Concat(row.Select(g=>g.Text))).ToArray();
+    internal IReadOnlyList<IReadOnlyList<PdfGlyph>> TimetableRows(PdfBox box)
     {
         var input = Glyphs(box);
         if (input.Sum(g => Encoding.UTF8.GetByteCount(g.Text)) > 4096) throw new PdfParseException("limit");
         var rows = ContentRows(input);
-        if (!input.Any(g => g.SourceLine is not null)) return rows.Select(r => string.Concat(r.Select(g => g.Text))).ToArray();
+        if (!input.Any(g => g.SourceLine is not null)) return rows;
         var fragments = rows.Select(r => new Fragment(r)).OrderBy(f => f.Top).ThenBy(f => f.Left);
         var bands = new List<List<Fragment>>();
         foreach (var fragment in fragments)
@@ -206,7 +211,7 @@ public sealed class PdfGrid(PdfPageLayout page, CancellationToken token = defaul
             }
             else bands.Add([fragment]);
         }
-        return bands.Select(band => string.Concat(band.OrderBy(f => f.Left).SelectMany(f => f.Glyphs).Select(g => g.Text))).ToArray();
+        return bands.Select(band => (IReadOnlyList<PdfGlyph>)band.OrderBy(f => f.Left).SelectMany(f => f.Glyphs).ToArray()).ToArray();
     }
     /// Known Strict template roles are calibrated using intact neighboring cells.
     /// A short cell must occupy the same printed subject/teacher/room baselines;
@@ -226,7 +231,7 @@ public sealed class PdfGrid(PdfPageLayout page, CancellationToken token = defaul
             { try { var candidate = Box(glyph.Cx, glyph.Cy); if (candidate.Left >= area.Left && candidate.Right <= area.Right && candidate.Top >= area.Top && candidate.Bottom <= area.Bottom) candidates.Add(candidate); } catch (PdfParseException error) when (error.Stage != "limit") { } }
             _calibrationBoxes = candidates.ToArray();
         }
-        var assignments = new List<string[]>(); double[]? reference = null;
+        var assignments = new List<string[]>();
         foreach (var candidate in _calibrationBoxes)
         {
             Step();
@@ -244,8 +249,10 @@ public sealed class PdfGrid(PdfPageLayout page, CancellationToken token = defaul
                 _baselineCache[candidate] = baseline;
             }
             if (baseline is null) continue;
-            if (reference is not null && baseline.Where((value, i) => Math.Abs(reference[i] - value) > .75).Any()) throw new PdfParseException("P17");
-            reference ??= baseline;
+            // Different fonts/vertical alignment can give complete neighboring
+            // cells different baselines. Only templates matching this short
+            // cell's actual rows contribute an assignment. All matching
+            // assignments must still agree below; ambiguity never fills a role.
             var gap = baseline.Zip(baseline.Skip(1)).Min(p => p.Second - p.First); if (gap <= 2) continue;
             var tolerance = Math.Min(.75, gap / 3); var fields = new[] { "", "", "" }; var matched = true;
             foreach (var (row, i) in rows.Select((r, i) => (r, i)))
@@ -269,7 +276,11 @@ public sealed class PdfGrid(PdfPageLayout page, CancellationToken token = defaul
 }
 
 /// Ephemeral intermediate data, confined to a single reader attempt.
-public sealed record RecoveryReadPage(int Page, Takupoke.Core.Recovery.RecoveryInputState State, PdfPageLayout? Layout);
+public sealed record RecoveryReadPage(int Page, Takupoke.Core.Recovery.RecoveryInputState State, PdfPageLayout? Layout)
+{
+    // Ephemeral proof: every glyph/paint command was accounted for by the bounded native reader.
+    public bool NativeInkAccounted { get; init; }
+}
 public sealed class RecoveryReadCapture
 {
     public IReadOnlyList<RecoveryReadPage> Pages { get; private set; } = [];
@@ -277,6 +288,6 @@ public sealed class RecoveryReadCapture
     public bool Complete => ReaderCompleted && Pages.Count > 0 && Pages.All(p => p.State == Takupoke.Core.Recovery.RecoveryInputState.Complete);
     public void Reset() { Pages = []; ReaderCompleted = false; }
     public void Begin(int pageCount) { if (pageCount is < 1 or > 12) throw new ArgumentOutOfRangeException(nameof(pageCount)); Pages = Enumerable.Range(1, pageCount).Select(p => new RecoveryReadPage(p, Takupoke.Core.Recovery.RecoveryInputState.RasterOnly, null)).ToArray(); ReaderCompleted = false; }
-    public void Record(int page, Takupoke.Core.Recovery.RecoveryInputState state, PdfPageLayout layout) { if (page < 1 || page > Pages.Count) throw new ArgumentOutOfRangeException(nameof(page)); Pages = Pages.Select(p => p.Page == page ? new RecoveryReadPage(page, state, layout with { Glyphs = layout.Glyphs.ToArray(), Lines = layout.Lines.ToArray() }) : p).ToArray(); }
+    public void Record(int page, Takupoke.Core.Recovery.RecoveryInputState state, PdfPageLayout layout, bool nativeInkAccounted = false) { if (page < 1 || page > Pages.Count) throw new ArgumentOutOfRangeException(nameof(page)); Pages = Pages.Select(p => p.Page == page ? new RecoveryReadPage(page, state, layout with { Glyphs = layout.Glyphs.ToArray(), Lines = layout.Lines.ToArray() }) { NativeInkAccounted = nativeInkAccounted } : p).ToArray(); }
     public void Finish() => ReaderCompleted = true;
 }

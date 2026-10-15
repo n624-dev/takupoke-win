@@ -87,13 +87,13 @@ public sealed class MaterialCoordinator(SchoolDataStore store, FileSourceReader 
                     var useDate = authorizeWeekdayCorrection || source.WeekdayConsent?.Matches(source, year, XlsxChangeReader.Version) == true;
                     return new MaterialAnalysis(source.Id, source.Kind, XlsxChangeReader.Version, source.Digest, source.OriginalName, now, year, Changes: XlsxChangeReader.Parse(bytes, year, token, useDate)) { DateDerivedWeekdays = useDate };
                 }
-                var pages = PdfPigLayoutReader.Read(bytes, source.Kind, token);
+                var pages = PdfPigLayoutReader.ReadForImport(bytes, source.Kind, token);
                 if (source.Kind == MaterialKind.Timetable)
                 {
                     var timetable = PdfScheduleParser.Timetable(pages, token);
                     return new MaterialAnalysis(source.Id, source.Kind, PdfScheduleParser.TimetableVersion, source.Digest, source.OriginalName, now, timetable.SchoolYear, Timetable: timetable);
                 }
-                var special = PdfScheduleParser.Special(pages, source.Kind, token);
+                var special = PdfScheduleParser.Special(pages, source.Kind, token,allowNativeTwoRowExam:pages.All(p=>p.Glyphs.All(g=>g.InkBounds is not null)));
                 return new MaterialAnalysis(source.Id, source.Kind, PdfScheduleParser.SpecialVersion, source.Digest, source.OriginalName, now, special.SchoolYear, Special: special);
             }, token);
             await store.SaveAnalysisAsync(lease, parsed, token, authorizeWeekdayCorrection);

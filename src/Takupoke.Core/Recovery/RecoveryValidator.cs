@@ -15,9 +15,11 @@ public static class RecoveryValidator
     public static IReadOnlyList<string> SpecialClasses { get; } = new[] { "1_1", "1_2", "1_3" }.Concat(Enumerable.Range(2, 4).SelectMany(y => new[] { "CN", "ES", "IT" }.Select(c => $"{y}_{c}"))).Concat(new[] { "AI_1", "AI_2" }).ToArray();
     private static IReadOnlyList<string> DayLabels(string day, RecoveryDocumentKind kind)
     {
-        if (kind == RecoveryDocumentKind.Timetable) { var label = day switch { "1" => "月", "2" => "火", "3" => "水", "4" => "木", "5" => "金", _ => "?" }; return [label, label + "曜", label + "曜日"]; }
+        if (kind == RecoveryDocumentKind.Timetable) { var label = day switch { "1" => "月", "2" => "火", "3" => "水", "4" => "木", "5" => "金", _ => "?" }; return [label, label + "曜", label + "曜日", "("+label+")", "("+label+"曜)", "("+label+"曜日)"]; }
         if (!DateOnly.TryParseExact(day, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var d)) return [];
-        return [day, $"{d.Year}/{d.Month}/{d.Day}", $"{d.Month}/{d.Day}", $"{d.Month}月{d.Day}日"];
+        var weekday="日月火水木金土"[(int)d.DayOfWeek];
+        return (from value in new[]{day,$"{d.Year}/{d.Month}/{d.Day}",$"{d.Month}/{d.Day}",$"{d.Month}月{d.Day}日"}
+            from suffix in new[]{"",$"({weekday})",$"({weekday}曜)",$"({weekday}曜日)"} select value+suffix).ToArray();
     }
     public static RecoveryValidation Validate(RecoveryDocument doc, RecoveryResult result, CancellationToken token = default)
     {
@@ -137,14 +139,14 @@ public static class RecoveryValidator
         if (doc.Cells.Count > 20000 || doc.Sources.Count > 100000 || result.Cells.Count > 20000 ||
             doc.Cells.Any(c => c.SourceIds.Count > 100000 || c.RoleScopes.Count > 12 || c.LessonBindings.Count > 4 || c.Slots.Count > 8 || c.ParallelSeparators is { Count: > 3 }) ||
             result.Cells.Any(c => c.Lessons.Count > 4)) return false;
-        if (doc.Cells.Any(c=>c.OrderedRowProof is not null) || Version != 10 || metadata.ValidatorVersion is not (4 or 5 or 6 or 7 or 8 or 9) ||
+        if (doc.ReferenceNotes is not null || doc.Cells.Any(c=>c.OrderedRowProof is not null || c.NativeLayoutProof is not null) || Version != 10 || metadata.ValidatorVersion is not (4 or 5 or 6 or 7 or 8 or 9) ||
             metadata.RecoverySchemaVersion != SchemaVersion || metadata.RecoveryVersion != "2" || acceptance.AcceptedAt == default ||
             acceptance.PdfHash != doc.PdfHash || acceptance.PdfHash != result.PdfHash || acceptance.Metadata != metadata ||
             structure is not null && (structure.ValidatorVersion != metadata.ValidatorVersion || metadata.ValidatorVersion == 4 && structure != metadata)) return false;
         foreach (var source in doc.Sources)
         {
             token.ThrowIfCancellationRequested();
-            if (source.FontEvidence is not null || source.Text.Length > 4096 || metadata.ValidatorVersion < 7 && source.NativeConfidence is not null) return false;
+            if (source.NativeLayoutBox is not null || source.RequiresVisualReview || source.FontEvidence is not null || source.Text.Length > 4096 || metadata.ValidatorVersion < 7 && source.NativeConfidence is not null) return false;
         }
         if (metadata.ValidatorVersion < 7 && (doc.Capture is not null || result.HumanCorrections is not null)) return false;
         if (metadata.ValidatorVersion < 8)
@@ -194,6 +196,31 @@ public static class RecoveryValidator
         if (doc.Sources.Any(s => { work.Step(); return s.Page < 1 || !s.Box.Valid || s.Text.Length > 4096; })) return new(["sourceLimit"]);
         var index = new RecoverySourceIndex(doc, work, spatial: true);
         var sources = index.ById;
+        var nativePages=doc.Sources.Where(s=>s.NativeLayoutBox is not null || s.RequiresVisualReview).Select(s=>s.Page)
+            .Concat(doc.Cells.Where(c=>c.NativeLayoutProof is not null).Select(c=>c.Page)).Concat((doc.ReferenceNotes ?? []).Select(n=>n.Page)).ToHashSet();
+        if(nativePages.Count>0)
+        {
+            work.Step(doc.Sources.Sum(s=>(long)s.Text.Length+256));
+            var capture=doc.Capture;
+            if(capture is null || capture.ManualSchemaVersion!=4 || capture.PdfHash!=doc.PdfHash || capture.PageCount is <1 or >12 ||
+                capture.Pages.Count!=capture.PageCount || capture.SourceSnapshot!=Fingerprint(doc.Sources)) return new(["nativeCapture"]);
+            var pages=new Dictionary<int,RecoveryCapturedPage>();var counts=doc.Sources.GroupBy(s=>s.Page).ToDictionary(g=>g.Key,g=>g.Count());
+            foreach(var page in capture.Pages)
+            {
+                work.Step();
+                Check(page.Page>=1 && page.Page<=capture.PageCount && pages.TryAdd(page.Page,page) && page.Width is >=1 and <=4096 && page.Height is >=1 and <=4096 &&
+                    page.RasterHash.Length==64 && page.RasterHash.All(char.IsAsciiHexDigit) && page.SourceCount==counts.GetValueOrDefault(page.Page) &&
+                    (!nativePages.Contains(page.Page) || page.InkCoverageVerified),"nativeCapture");
+            }
+            Check(nativePages.IsSubsetOf(pages.Keys),"nativeCapture");
+            foreach(var source in doc.Sources)
+            {
+                work.Step();
+                if(!pages.TryGetValue(source.Page,out var page)) {Check(false,"nativeCapture");continue;}
+                Check(source.Box.X+source.Box.Width<=page.Width && source.Box.Y+source.Box.Height<=page.Height &&
+                    (source.NativeLayoutBox is not {} layout || layout.X+layout.Width<=page.Width && layout.Y+layout.Height<=page.Height),"nativeCapture");
+            }
+        }
         foreach (var cell in doc.Cells)
         foreach (var id in cell.SourceIds)
         {
@@ -217,8 +244,10 @@ public static class RecoveryValidator
                     && font.Code is >= 0 and <= 65535 && font.Cid == font.Code && font.GlyphId is > 0 and < 65535
                     && Rune.IsValid(font.Scalar) && !Rune.IsControl(new Rune(font.Scalar)) && source.Text == new Rune(font.Scalar).ToString(), "fontEvidence");
             }
+            Check(source.NativeLayoutBox is null || !source.FromOcr && source.NativeConfidence is null && source.NativeLayoutBox.Valid && doc.Capture?.ManualSchemaVersion==4 && historical is null,"nativeLayoutSource");
             Check(source.NativeConfidence is null || source.FromOcr && double.IsFinite(source.NativeConfidence.Value) && source.NativeConfidence.Value is >= 0 and <= 1, "nativeConfidence");
-            if (source.NativeConfidence is < .8) Check(manual is not null, "humanUnresolved");
+            Check(!source.RequiresVisualReview || !source.FromOcr && source.NativeConfidence is null && doc.Capture?.ManualSchemaVersion == 4 && historical is null, "nativeVisualReview");
+            if (source.NativeConfidence is < .8 || source.RequiresVisualReview) Check(manual is not null, "humanUnresolved");
         }
         string Raw(IEnumerable<string> ids) => work.Concat(ids.Select(id => sources[id].Text));
         var cells = new Dictionary<string, RecoveredCell>(); foreach (var c in result.Cells) Check(cells.TryAdd(c.CellId, c), "duplicateCells");
@@ -295,6 +324,15 @@ public static class RecoveryValidator
                 return owners.Length > 0 && ids.ToHashSet().SetEquals(owners.SelectMany(c => c.ClassHeaderIds)) &&
                     owners.All(c => ClassHeader(c.ClassHeaderIds, allowed, cls, c));
             }
+            // The complete native six-page family may identify the two grade
+            // columns by its independently printed fifteen regular classes.
+            // This is unavailable to OCR, incomplete scopes or historical data.
+            var regular=SpecialClasses.Where(c=>!c.StartsWith("AI_",StringComparison.Ordinal)).ToArray();
+            if(historical is null && doc.Capture is {ManualSchemaVersion:4,PageCount:6} &&
+                cell.ClassRegion is {Axis:RecoveryHeaderAxis.Above} nativeRegion &&
+                ids.All(id=>sources[id].NativeLayoutBox is not null && !sources[id].FromOcr) &&
+                Header(ids,allowed,[cls[^1]+"年"],cell,nativeRegion) && AiOwner(cls,nativeRegion) &&
+                regular.All(name=>doc.ClassEvidence.TryGetValue(name,out var original) && original.All(id=>sources[id] is {FromOcr:false,NativeLayoutBox:not null}) && Header(original,original,ClassLabels(name)))) return true;
             // Both complete literals, in original reading order, must belong to
             // one physical class rail above a complete adjacent six-period band.
             var grade = cls[^1] + "年";
@@ -387,21 +425,28 @@ public static class RecoveryValidator
         var titleLabels = doc.Kind switch { RecoveryDocumentKind.Timetable => new[] { "時間割", "通常時間割", "授業時間割" }, RecoveryDocumentKind.Exam => ["試験時間割", "定期試験時間割"], _ => ["試験返却時間割"] };
         Check(doc.DocumentTitleEvidence.Count == 0 || Header(doc.DocumentTitleEvidence, doc.DocumentTitleEvidence, titleLabels), "documentTitle");
         Check(commonPages.Count > 0 || doc.CommonClockEvidence.Count == 0 && doc.CommonClockRegions.Count == 0, "unusedCommonClockProof");
-        var classified = doc.Cells.SelectMany(c => c.SourceIds).Concat(doc.CommonClockEvidence).Concat(doc.YearEvidence).Concat(doc.DocumentTitleEvidence).Concat(doc.Term is null ? [] : doc.TermEvidence).ToHashSet();
-        foreach (var cls in doc.Classes) classified.UnionWith(doc.ClassEvidence.GetValueOrDefault(cls) ?? []);
-        foreach (var day in doc.Days) classified.UnionWith(doc.DayEvidence.GetValueOrDefault(day) ?? []);
-        foreach (var period in Enumerable.Range(1, maxPeriod)) classified.UnionWith(doc.PeriodEvidence.GetValueOrDefault(period.ToString(CultureInfo.InvariantCulture)) ?? []);
-        if (doc.Kind != RecoveryDocumentKind.Timetable)
+        var classified=RecoverySourceCoverage.SemanticIds(doc);
+        if (doc.ReferenceNotes is {} notes)
         {
-            foreach (var key in doc.Times.Keys.Concat(doc.SpanTimes.Keys).Distinct())
+            Check(notes.Count is >0 and <=512 && doc.Capture?.ManualSchemaVersion==4 && historical is null,"referenceProof");
+            var noteIds=new HashSet<string>();var characters=0;
+            foreach(var note in notes)
             {
-                classified.UnionWith(doc.ClockEvidence.GetValueOrDefault(key) ?? []);
-                classified.UnionWith(doc.ClockBindings.GetValueOrDefault(key)?.PeriodHeaderIds ?? []);
-                classified.UnionWith((doc.ClockReplicas.GetValueOrDefault(key) ?? []).SelectMany(b => b.PeriodHeaderIds));
+                work.Step(note.SourceIds.Count+doc.Cells.Count);
+                var body=RecoverySourceCoverage.BodyBounds(doc,note.Page);
+                Check(note.Box.Valid && RecoverySourceCoverage.OutsideSchedule(doc,note.Page,note.Box),"referenceRegion");
+                Check(note.SourceIds.Count is >0 and <=4096,"referenceSources");
+                foreach(var id in note.SourceIds)
+                {
+                    work.Step();
+                    if(!sources.TryGetValue(id,out var source)) {Check(false,"referenceSources");continue;}
+                    characters+=source.Text.Length;
+                    Check(!source.FromOcr && source.NativeConfidence is null && source.Page==note.Page && note.Box.Contains(source.Box) &&
+                        !classified.Contains(id) && noteIds.Add(id),"referenceSources");
+                }
             }
-            if (doc.Kind == RecoveryDocumentKind.Return) classified.UnionWith(doc.NormalTimeNoteEvidence);
+            Check(characters<=32768,"referenceSize");classified.UnionWith(noteIds);
         }
-        classified.UnionWith(doc.Cells.Where(c => c.BindingMode == RecoveryBindingMode.RoleProposal).SelectMany(c => c.RoleScopes).SelectMany(s => s.LabelSourceIds));
         // Complete native PDF capture can contain a literal separator space
         // between year and term. Retain its source, but it has no semantic role.
         // OCR spaces are not independent proof of absent original print.
@@ -497,6 +542,21 @@ public static class RecoveryValidator
                     Math.Min(p.a.Box.X + p.a.Box.Width, p.b.Box.X + p.b.Box.Width) > Math.Max(p.a.Box.X, p.b.Box.X) && Math.Min(p.a.Box.Y + p.a.Box.Height, p.b.Box.Y + p.b.Box.Height) > Math.Max(p.a.Box.Y, p.b.Box.Y)), "roleScopeOverlap");
                 Check(structurePreflight && RecoveryStructure.Pending(cell) || bodyIds.All(id => cell.RoleScopes.Count(s => Contains(s.Box, sources[id].Box)) == 1), "roleBodyCoverage");
             }
+            var nativeLayout=cell.NativeLayoutProof is {ReaderVersion:1} native && native.PdfHash==doc.PdfHash && doc.Capture?.ManualSchemaVersion==4 && historical is null &&
+                !proposal && cell.OrderedRowProof is null && cell.ParallelSeparators is null && cell.SourceIds.All(id=>sources.TryGetValue(id,out var s) && !s.FromOcr && s.NativeConfidence is null);
+            Check(cell.NativeLayoutProof is null || nativeLayout,"nativeLayoutProof");
+            if(nativeLayout)foreach(var binding in cell.LessonBindings)
+            {
+                var previous=double.NegativeInfinity;
+                foreach(var ids in new[]{binding.Subject,binding.Teacher,binding.Room})
+                {
+                    work.Step(ids.Count);
+                    if(ids.Count==0)continue;
+                    var original=ids.Where(sources.ContainsKey).Select(id=>sources[id]).ToArray();
+                    var y=original.Length==0 ? double.NegativeInfinity : original.Average(s=>s.Box.Y+s.Box.Height/2);
+                    Check(original.Length==ids.Count && y>previous,"nativeRoleOrder");previous=y;
+                }
+            }
             var bindingIds = cell.LessonBindings.SelectMany(b => b.Subject.Concat(b.Teacher).Concat(b.Room)).ToArray();
             foreach (var binding in cell.LessonBindings)
             {
@@ -507,7 +567,7 @@ public static class RecoveryValidator
                     var raw = Raw(ids.Where(sources.ContainsKey)); work.Step(raw.Length * 3L);
                     if (raw.Replace('･', '・').Split('・').Length > 1) pluralRoles++;
                 }
-                Check(pluralRoles < 2, "fixedParallelEvidence");
+                Check(pluralRoles < 2 || nativeLayout, "fixedParallelEvidence");
             }
             var separatorIds = new HashSet<string>();
             if (cell.ParallelSeparators is { } proof)
@@ -526,7 +586,7 @@ public static class RecoveryValidator
                     {
                         var id = proof[role];
                         if (!sources.TryGetValue(id, out var separator)) { Check(false, "parallelEvidence"); continue; }
-                        work.Step(); var y = separator.Box.Y + separator.Box.Height / 2;
+                        work.Step(); var y = (separator.NativeLayoutBox ?? separator.Box).Y + (separator.NativeLayoutBox ?? separator.Box).Height / 2;
                         var belongs = separator.Text is "・" or "･" && separator.CellId == cell.Id && separator.Page == cell.Page &&
                             cellIds.Contains(id) && Contains(cell.Box, separator.Box) && !bindingSet.Contains(id) && (previousY is null || y > previousY + 4);
                         previousY = y;
@@ -534,7 +594,7 @@ public static class RecoveryValidator
                         bool Side(IReadOnlyList<string> ids, bool left) => ids.All(sourceId => {
                             work.Step();
                             return sources.TryGetValue(sourceId, out var source) && source.CellId == cell.Id && source.Page == cell.Page &&
-                                Math.Abs(source.Box.Y + source.Box.Height / 2 - y) <= 2 &&
+                                Math.Abs((source.NativeLayoutBox ?? source.Box).Y + (source.NativeLayoutBox ?? source.Box).Height / 2 - y) <= 2 &&
                                 (left ? source.Box.X + source.Box.Width <= separator.Box.X : source.Box.X >= separator.Box.X + separator.Box.Width);
                         });
                         belongs &= Side(Ids(cell.LessonBindings[0]), true) && Side(Ids(cell.LessonBindings[1]), false);
@@ -546,7 +606,7 @@ public static class RecoveryValidator
                 }
             }
             if (doc.Kind==RecoveryDocumentKind.Timetable && doc.Classes.Count==17 && doc.Days.Count==5 && doc.RequiredSlots.Count==680 &&
-                !proposal && !cell.ConfirmedEmpty && cell.Slots.Count==1 && cell.ParallelCount==1 && cell.LessonBindings.Count==1)
+                !proposal && !nativeLayout && !cell.ConfirmedEmpty && cell.Slots.Count==1 && cell.ParallelCount==1 && cell.LessonBindings.Count==1)
             {
                 var binding=cell.LessonBindings[0];var roles=new[]{binding.Subject,binding.Teacher,binding.Room};
                 if(roles.All(ids=>ids.Count>0))

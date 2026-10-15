@@ -15,13 +15,19 @@ public sealed record RecoveryBox(double X, double Y, double Width, double Height
 }
 public sealed record RecoverySource(string Id, string CellId, int Page, string Text, RecoveryBox Box, bool FromOcr = false, int? SourceLine = null, int? SourceOrder = null)
 {
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
+    public bool RequiresVisualReview { get; init; }
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public double? NativeConfidence { get; init; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public RecoveryBox? NativeLayoutBox { get; init; }
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public RecoveryFontEvidence? FontEvidence { get; init; }
 }
 public sealed record RecoveryFontEvidence(string Resource, string FontHash, string CidMapHash,
     int Code, int Cid, int GlyphId, int Scalar, int ReaderVersion = 1);
+public sealed record RecoveryNativeLayoutProof(int ReaderVersion,string PdfHash);
+public sealed record RecoveryReferenceNote(int Page,RecoveryBox Box,IReadOnlyList<string> SourceIds);
 public sealed record RecoveryField(RecoveryValueState State, string Value, IReadOnlyList<string> Evidence);
 public sealed record RecoverySlot(string ClassName, string Day, int Period);
 public enum RecoveryHeaderAxis { Above, Left }
@@ -55,6 +61,8 @@ public sealed record RecoveryCell(string Id, int Page, RecoveryBox Box, Recovery
 {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public RecoveryOrderedRowProof? OrderedRowProof { get; init; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public RecoveryNativeLayoutProof? NativeLayoutProof { get; init; }
     // App-generated original separator proof, never a model response field.
     // Null preserves the historical V4/V5 document JSON and scope fingerprint.
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -81,6 +89,8 @@ public sealed record RecoveryDocument(string PdfHash, RecoveryDocumentKind Kind,
 {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public RecoveryCaptureReceipt? Capture { get; init; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public IReadOnlyList<RecoveryReferenceNote>? ReferenceNotes { get; init; }
     public RecoveryMetadata? StructureMetadata { get; init; }
     public IReadOnlyList<string> CommonClockEvidence { get; init; } = [];
     public IReadOnlyDictionary<string, RecoveryHeaderRegion> CommonClockRegions { get; init; } = new Dictionary<string, RecoveryHeaderRegion>();
