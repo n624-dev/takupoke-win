@@ -54,7 +54,10 @@ def main():
     parser.add_argument('--seed', type=int, help='Fresh-string study seed; never changes an existing study')
     parser.add_argument('--font-assets', type=Path, help='Reuse SHA-pinned fonts and license receipts from a prior study')
     parser.add_argument('--room-candidates', action='store_true', help='Freeze a half-known room roster before inference')
+    parser.add_argument('--manual-capture', action='store_true', help='Compare actual strict and manual-capture refinement paths')
     args = parser.parse_args()
+    if args.manual_capture and not args.validation:
+        raise ValueError('Manual comparison requires validation')
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
     fonts = []
@@ -108,7 +111,9 @@ def main():
         metrics=['literal exact', 'CER', 'wrong above native .8', 'blank output', 'time', 'RSS'],
         scope='Isolated fictional code images. Paired margins are NOT independent samples. No PDF/detection/whole-document or production qualification.',
         noModelUpdate=True, noOracleRouting=True, noZeroErrorGate=True,
-        standaloneRefinement=args.validation, exclusionOracleSHA256=sha(args.exclude_oracle) if args.exclude_oracle else None,
+        standaloneRefinement=args.validation, manualCaptureRefinement=args.manual_capture,
+        exclusionOracleSHA256=sha(args.exclude_oracle) if args.exclude_oracle else None,
+        manualCapturePolicy='Retain uncertain bounded standalone ASCII codes only in manual capture; preserve native scores/reject/padding/length. No change to .8 automatic route; every low-score field needs original-pixel acknowledgement.' if args.manual_capture else None,
         candidateRule='For separately detected ASCII codes with a digit, length 2..32, use deployed English only with native .8/.05/padding and same primary length; otherwise preserve primary.',
         validationScope='Fresh strings in already observed fonts; no new-font/blind-layout claim' if args.validation else 'Exploratory model and margin comparison'))
     rows, oracle, ambiguity = [], [], []
@@ -175,6 +180,8 @@ def main():
             selection='SHA256(value) even, before inference; other half intentionally absent; 64 independent unused codes',
             source='Independent fictional reference roster; no production school mapping'))
     manifest = dict(recipe='independent-code-images-v1', models=models, rows=rows, standaloneRefinement=args.validation)
+    if args.manual_capture:
+        manifest['manualCaptureRefinement'] = True
     if roster is not None:
         manifest['roomRoster'] = roster
     write(out / 'inputs.json', manifest)
@@ -203,7 +210,7 @@ def main():
             raise ValueError('Inference asset changed')
     gold = {v['id']: v for v in json.loads((out/'oracle.json').read_text())}
     observations = [json.loads(line) for line in (out/'raw.jsonl').read_text().splitlines()]
-    if len(observations) != len(rows)*(len(models)+int(args.validation)) or len({(v['id'], v['model']) for v in observations}) != len(observations):
+    if len(observations) != len(rows)*(len(models)+int(args.validation)+int(args.manual_capture)) or len({(v['id'], v['model']) for v in observations}) != len(observations):
         raise ValueError('Missing/duplicate observations')
     groups = collections.defaultdict(list)
     for observation in observations:

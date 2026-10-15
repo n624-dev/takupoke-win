@@ -77,6 +77,7 @@ foreach (var input in m.GetProperty("documents").EnumerateArray())
         writer.WriteLine(JsonSerializer.Serialize(new { id=input.GetProperty("id").GetString(),condition=args[2],stage,outcome,failure,document,formal,pageReports,
             requiredSlots=document?.RequiredSlots.Count,cells=document?.Cells.Count,recognizerCalls=calls,asciiRecognizerCalls=asciiCalls,detectorCalls=detections,
             milliseconds=watch.ElapsedMilliseconds,processPeakWorkingSetBytes=Process.GetCurrentProcess().PeakWorkingSet64,
+            manualCaptureCodeRefinement = args[2] == "hybrid",
             scope="Actual production runtime, unchanged original page pixels; no gold, user input, score raising or source omission. Primary calls exclude specialist and smoke calls." }));
         writer.Flush(); foreach (var raster in rasters) CryptographicOperations.ZeroMemory(raster.Bgra);
     }

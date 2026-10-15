@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Native Windows final: pinned public models/fonts, fresh fictional PDFs only."""
+"""Native Windows regression: pinned models/fonts, previously consumed fictional PDFs."""
 import argparse,hashlib,json,subprocess,sys,urllib.request,shutil
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prospective invented, readable three-class complete development pages."""
+"""Reused invented three-class regression pages; never new heldout credit."""
 import argparse, hashlib, json, random, sys, shutil
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
@@ -21,7 +21,7 @@ for family,file,size,digest in FONTS:
 write(a.output/'generation-freeze.json',{'recipe':'production-complete-three-class-final-v1','sourceSHA256':sha(Path(__file__)),
  'fonts':FONTS,'seedBase':20261015017,'classes':['1_1','2_IT','AI_1'],'days':5,'periods':8,'pages':5,
  'bodyFontPixels':20,'headerFontPixels':24,'width':2237,'height':415,'variants':['positive','missing-day','missing-class'],
- 'plannedArms':['v5-production','hybrid-production'], 'prospectiveCriteria':{'allPositiveSlotsAndFields':True,'maximumCERPerFont':.03,'maximumCorrectionsAndReviewUnion':128,'negativeDocumentsRefused':True,'maximumRSSBytes':6*1024**3,'zeroErrorsRequired':False},'scope':'Fresh fictional final OCR content, Sawarabi fonts previously unused for OCR training/development. Windows-rendered PDFs required; no real school success-rate claim',
+ 'plannedArms':['v5-production','hybrid-production'], 'prospectiveCriteria':{'allPositiveSlotsAndFields':True,'maximumCERPerFont':.03,'maximumCorrectionsAndReviewUnion':128,'negativeDocumentsRefused':True,'maximumRSSBytes':6*1024**3,'zeroErrorsRequired':False},'scope':'Previously consumed fictional layout/content/fonts, repeated for regression. Historical bounds retained, not new heldout or real-school qualification. Windows-rendered PDFs required.',
  'metrics':['slot coverage','literal CER','field error count','uncertain field count','high-confidence wrong fields','runtime','RSS'],
  'zeroErrorsRequired':False,'manualTypingBudget':128,'reviewBudget':128})
 for name,digest in [('det.onnx','a431985659dc921974177a95adcfbb90fd9e51989a5e04d70d0b75f597b6e61d'),('rec.onnx','da72dc72ca4dc220df0dfde68c1dedc31c58d3e76a25871122e5056227d50092'),('alphabet.json','d858428fbe0ada92b439a5f277b51bc1b318fd985d80946a3ce859d7f2446a92')]:

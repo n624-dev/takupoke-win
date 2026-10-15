@@ -1,7 +1,7 @@
 # CPU OCR・文字位置・モデル・原画像切り出し
 
 対応関係・宣言名・実行方法のSHA-256：
-`d787f1c3866b508078f078599d12c744c5af223873e024bb25154ffdf65bcdd3`
+`e0731f2f60fd2b17c5071aa75c0c2889ecbd6c7f35d139f1eac6bab2def3e5dc`
 
 環境：Linux／Windows .NET。Windows描画・実推論は対応workflowで検証
 
@@ -49,6 +49,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `NoncanonicalHeaderRetainsRawPrimaryAndItsNativeConfidence`
 - `LowConfidenceOrDifferentLengthTailIsNotSubstitutedAndPrefixIsUnchanged`
 - `UnrelatedAsciiDoesNotRouteAndMissingSourceCropRefuses`
+- `ManualCaptureRetainsSpecialistNativeUncertaintyWhileStrictRoutePreservesPrimary`
 - `StandaloneCodesUseSpecialistAndRetainPrimaryWhenNativeOutputFailsThreshold`
 
 ## [tests/Takupoke.Integration.Tests/OcrCropCompletenessTests.cs](../../tests/Takupoke.Integration.Tests/OcrCropCompletenessTests.cs)

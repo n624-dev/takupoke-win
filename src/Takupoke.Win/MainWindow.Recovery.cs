@@ -149,13 +149,15 @@ public sealed partial class MainWindow
                     {
                         var suggestion = OperationButton("候補を入力: " + candidate, () => {
                             SyncManualInput();
-                            if (!_manualInput.IsBoundTo(identity)) return;
+                            if (!_manualInput.IsBoundTo(identity)) return Task.CompletedTask;
                             _manualInput.Edit(key, candidate);
                             _manualInput.Acknowledge(key, false);
                             input.Text = candidate;
                             acknowledgement.IsChecked = false;
                             UpdateSubmit();
+                            return Task.CompletedTask;
                         }, "manual-candidate-" + key + "-" + candidateIndex);
+                        suggestion.FontFamily = new FontFamily("Consolas");
                         entryPanel.Children.Add(suggestion);
                     }
                 }

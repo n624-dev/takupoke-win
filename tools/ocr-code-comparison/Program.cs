@@ -16,6 +16,7 @@ OrtEnv.Instance().DisableTelemetryEvents();
 using var deadline = new CancellationTokenSource(TimeSpan.FromMinutes(10));
 using var writer = new StreamWriter(new FileStream(args[1], FileMode.CreateNew, FileAccess.Write));
 var refineCodes = input.RootElement.TryGetProperty("standaloneRefinement", out var refine) && refine.GetBoolean();
+var manualComparison = input.RootElement.TryGetProperty("manualCaptureRefinement", out var manualFlag) && manualFlag.GetBoolean();
 var specialistModel = input.RootElement.GetProperty("models").EnumerateArray().Single(m => m.GetProperty("id").GetString() == "deployed-trained-english-v5");
 using var specialist = refineCodes ? new OnnxAsciiOcr(Verify(specialistModel.GetProperty("model")), Verify(specialistModel.GetProperty("dictionary"))) : null;
 var roster = input.RootElement.TryGetProperty("roomRoster", out var codes)
@@ -68,6 +69,22 @@ foreach (var model in input.RootElement.GetProperty("models").EnumerateArray())
                 glyphs = result?.Glyphs, peakWorkingSetBytes = Process.GetCurrentProcess().PeakWorkingSet64,
                 scope = "Actual production OcrAsciiRefinement on independently generated isolated code pixels and fresh Japanese source glyphs; no detection/whole-document credit." }));
             writer.Flush();
+            if (manualComparison)
+            {
+                var manualWatch = Stopwatch.StartNew();
+                var manualResult = supported ? OcrAsciiRefinement.Refine(raster, glyphs,
+                    pieces.Select(p => (double)p.Confidence).ToArray(),
+                    new Dictionary<int, RecoveryBox> { [0] = new(0, 0, raster.Width, raster.Height) }, [], specialist!,
+                    deadline.Token, retainUncertain: true) : null;
+                writer.WriteLine(JsonSerializer.Serialize(new { id = row.GetProperty("id").GetString(), model = "actual-manual-code-route",
+                    text = manualResult is null ? string.Concat(pieces.Select(p => p.Text)) : string.Concat(manualResult.Glyphs.Select(g => g.Text)),
+                    pieces = manualResult is null ? pieces.Select(p => new { p.Text, p.Confidence }) : manualResult.Glyphs.Select((g, n) => new { g.Text, Confidence = (float)manualResult.Confidences[n] }),
+                    reject = (float?)null, paddingSupported = supported, recognizerCalls = manualResult?.RecognizerCalls ?? 0,
+                    transformed.ValidWidth, transformed.InputWidth, milliseconds = manualWatch.Elapsed.TotalMilliseconds,
+                    glyphs = manualResult?.Glyphs, peakWorkingSetBytes = Process.GetCurrentProcess().PeakWorkingSet64,
+                    scope = "Manual capture only: native scores below .8 require original-pixel review; no automatic adoption credit." }));
+                writer.Flush();
+            }
         }
         CryptographicOperations.ZeroMemory(raster.Bgra);
     }

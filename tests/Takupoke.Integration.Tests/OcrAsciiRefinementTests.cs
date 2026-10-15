@@ -51,6 +51,38 @@ public sealed class OcrAsciiRefinementTests
     }
 
     private static RecoveryRaster White() => new(320,120,Enumerable.Repeat((byte)255,320*120*4).ToArray());
+    [Fact]
+    public void ManualCaptureRetainsSpecialistNativeUncertaintyWhileStrictRoutePreservesPrimary()
+    {
+        var dictionary = Path.Combine(Path.GetTempPath(), "ascii-manual-" + Guid.NewGuid().ToString("N") + ".json");
+        var tokens = Enumerable.Repeat("x", 438).ToArray();
+        tokens[0] = ""; tokens[1] = "A"; tokens[2] = "1"; tokens[3] = "2"; tokens[^1] = " ";
+        File.WriteAllText(dictionary, JsonSerializer.Serialize(tokens));
+        try
+        {
+            using var runtime = new OnnxAsciiOcr(Path.Combine(AppContext.BaseDirectory, "fixtures/ascii-manual-contract.onnx"), dictionary);
+            PdfGlyph[] primary = [new("AI2", 0, 20, 300, 48, 0, 0)];
+            var crops = new Dictionary<int, RecoveryBox> { [0] = new(0, 20, 320, 48) };
+            var strict = OcrAsciiRefinement.Refine(White(), primary, [.96], crops, [], runtime);
+            Assert.Equal(primary, strict.Glyphs); Assert.Equal(.96, Assert.Single(strict.Confidences));
+            var manual = OcrAsciiRefinement.Refine(White(), primary, [.96], crops, [], runtime, retainUncertain: true);
+            Assert.Equal("A12", string.Concat(manual.Glyphs.Select(g => g.Text)));
+            Assert.Equal((double).7f, manual.Confidences[1]); // Native score is not promoted to the primary's .96.
+            Assert.All(manual.Glyphs, glyph => Assert.True(crops[0].Contains(new(glyph.X, glyph.Y, glyph.Width, glyph.Height))));
+            Assert.Equal(1, manual.RecognizerCalls);
+            // A Japanese-prefix tail still uses the existing .8 condition.
+            PdfGlyph[] prefixed = [new("教室", 0, 20, 35, 48, 0, 0), new("AI2", 80, 20, 200, 48, 0, 1)];
+            var unchanged = OcrAsciiRefinement.Refine(White(), prefixed, [.95, .96], crops, [], runtime, retainUncertain: true);
+            Assert.Equal(prefixed, unchanged.Glyphs);
+            Assert.Equal(1, unchanged.RecognizerCalls);
+            PdfGlyph[] classLabel = [new("1_1", 0, 20, 300, 48, 0, 0)];
+            Assert.Equal(classLabel, OcrAsciiRefinement.Refine(White(), classLabel, [.96], crops, [], runtime, retainUncertain: true).Glyphs);
+            // Above-grid numeric headings are not body-code uncertainty.
+            PdfGlyph[] year = [new("203", 0, 20, 300, 48, 0, 0)];
+            Assert.Equal(year, OcrAsciiRefinement.Refine(White(), year, [.96], crops, [new(80, 80, 80, 110)], runtime, retainUncertain: true).Glyphs);
+        }
+        finally { File.Delete(dictionary); }
+    }
     [Theory]
     [InlineData("A21",1)][InlineData("101",1)][InlineData("B-2_3",1)]
     [InlineData("1",0)][InlineData("BIOLOGY",0)][InlineData("A?21",0)][InlineData("2029年度",0)]

@@ -9,7 +9,7 @@ internal static class OcrAsciiRefinement
     internal sealed record Result(IReadOnlyList<PdfGlyph> Glyphs, IReadOnlyList<double> Confidences, int RecognizerCalls);
     public static Result Refine(RecoveryRaster raster, IReadOnlyList<PdfGlyph> primary,
         IReadOnlyList<double> scores, IReadOnlyDictionary<int, RecoveryBox> crops,
-        IReadOnlyList<PdfRule> rules, OnnxAsciiOcr ascii, CancellationToken token = default)
+        IReadOnlyList<PdfRule> rules, OnnxAsciiOcr ascii, CancellationToken token = default, bool retainUncertain = false)
     {
         if (primary.Count != scores.Count) throw new InvalidDataException("OCRの文字と確信度が一致しません。");
         var right = rules.Where(l => l.Vertical && l.X1 > 2).Select(l => l.X1).DefaultIfEmpty(double.NaN).Min();
@@ -42,7 +42,16 @@ internal static class OcrAsciiRefinement
                 chosen = observation.Pieces.Count > 0 && observation.RejectProbability <= .05f && observation.PaddingSupported &&
                     observation.Text.All(c => c is >= ' ' and <= '~') && (header
                         ? ClassSelection.Candidates.Contains(observation.Text)
-                        : observation.Pieces.All(p => p.Confidence >= .8f) && observation.Text.Length == (standaloneCode ? text.Length : tailText.Length));
+                        : observation.Text.Length == (standaloneCode ? text.Length : tailText.Length) &&
+                            (observation.Pieces.All(p => p.Confidence >= .8f) ||
+                                // Manual capture already requires original-pixel review
+                                // for every native score below .8. Preserve these
+                                // scores instead of falling back to an often-wrong
+                                // high-confidence primary code. Prose/tails/headers
+                                // keep their existing selection conditions.
+                                retainUncertain && standaloneCode && !ClassSelection.Candidates.Contains(text) &&
+                                (!double.IsFinite(top) || crop.Y >= top) && observation.Text.Any(char.IsAsciiDigit) &&
+                                observation.Text.All(c => char.IsAsciiLetterOrDigit(c) || c is '_' or '-')));
                 if (chosen)
                 {
                     if (!header && !standaloneCode) foreach (var (glyph,index) in native.Take(tailStart)) Add(glyph, scores[index]);

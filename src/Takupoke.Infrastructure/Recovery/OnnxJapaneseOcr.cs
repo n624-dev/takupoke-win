@@ -334,7 +334,8 @@ public sealed class OnnxJapaneseOcr : IDisposable
         token.ThrowIfCancellationRequested(); RecognizedBoxes = recognitionBoxes;
         if (_ascii is not null)
         {
-            var refined = OcrAsciiRefinement.Refine(image, output, confidences, lineCrops, rules, _ascii, token);
+            var refined = OcrAsciiRefinement.Refine(image, output, confidences, lineCrops, rules, _ascii, token,
+                retainUncertain: retainUncertain);
             NativeConfidences = refined.Confidences; AsciiRecognitionCalls = refined.RecognizerCalls; return refined.Glyphs;
         }
         NativeConfidences = confidences.ToArray(); return output;
