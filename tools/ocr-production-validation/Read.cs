@@ -7,6 +7,7 @@ using Takupoke.Infrastructure.Parsing;
 using Takupoke.Infrastructure.Recovery;
 
 // No reference/oracle input. This invokes the same deployed runtime factory.
+// Native comparison includes literal role labels when their OCR colon is omitted.
 if (args.Length == 2 && args[0] == "--bundle")
 {
     File.WriteAllText(args[1], JsonSerializer.Serialize(RecoveryOcrModels.Bundle)); return;

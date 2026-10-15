@@ -178,8 +178,12 @@ public sealed partial class MainWindow
             batch.IsEnabled = selected.Count > 0 && !_model.Busy && !_model.Locked && _model.PreferencesReady && _model.Preferences.UseAiFeatures;
         }
         _updateRecoveryBatchStatus=UpdateBatch;
-        UpdateBatch(); Add(batch);
-        Add(SettingsDescription("訂正する項目を選択すると、クラスや曜日をまたいで原画像をまとめて確認できます。"));
+        UpdateBatch();
+        if (document.Cells.Any(c=>c.Lessons.Any(l=>!l.EditableRoles.IsEmpty)))
+        {
+            Add(batch);
+            Add(SettingsDescription("訂正する項目を選択すると、クラスや曜日をまたいで原画像をまとめて確認できます。"));
+        }
         Add(Card(Panel(SettingsSectionTitle("原本を確認してから使用してください"), Text($"{document.SchoolYear}年度 {document.Term} · {AppViewModel.MaterialLabel(kind)}"), Text("表示中のクラスだけでなく、資料全体・全クラスの結果を採用します。採用するまで時間割には反映されません。学校の資料と読み取り結果は外部へ送信されません。"),
             Button("対応する元PDFを確認", () => ShowPdf(kind, false, preview), "recovery-original-" + kind))));
         if (preview.Document.Capture?.ManualSchemaVersion is 2 or 3 && document.ReviewedFieldCount > 0)
@@ -228,9 +232,9 @@ public sealed partial class MainWindow
                 foreach (var role in lesson.EditableRoles)
                 {
                     var target = new RecoveryFieldTarget(cell.CellId, index, role);
-                    lessonPanel.Children.Add(OperationButton(RecoveryRoleLabel(role) + "を原本と照合・訂正",
-                        () => _model.BeginRecoveryCorrectionAsync(kind, preview, target), "recovery-edit-" + target.Key));
-                    var choose = OperationControl(new CheckBox { Content = RecoveryRoleLabel(role)+"をまとめて訂正する項目に追加", IsChecked = selected.Contains(target) });
+                    var edit = OperationButton(RecoveryRoleLabel(role) + "を原本と照合・訂正",
+                        () => _model.BeginRecoveryCorrectionAsync(kind, preview, target), "recovery-edit-" + target.Key);
+                    var choose = OperationControl(new CheckBox { Content = "まとめて選択", IsChecked = selected.Contains(target) });
                     AutomationProperties.SetAutomationId(choose,"recovery-select-"+target.Key);
                     choose.Checked += (_,_) => {
                         if (_correctionSelections.GetValueOrDefault(kind).Identity != selectionIdentity) return;
@@ -241,7 +245,11 @@ public sealed partial class MainWindow
                         if (_correctionSelections.GetValueOrDefault(kind).Identity != selectionIdentity) return;
                         selected.Remove(target); UpdateBatch();
                     };
-                    lessonPanel.Children.Add(choose);
+                    var row = new Grid { ColumnSpacing=8 };
+                    row.ColumnDefinitions.Add(new() { Width=new GridLength(1,GridUnitType.Star) });
+                    row.ColumnDefinitions.Add(new() { Width=GridLength.Auto });
+                    row.Children.Add(edit); row.Children.Add(choose); Grid.SetColumn(choose,1);
+                    lessonPanel.Children.Add(row);
                 }
                 if (corrected.Length > 0)
                 {

@@ -59,7 +59,8 @@ public static class RecoveryDocumentBuilder
     }
     private const string HeaderPattern = @"[1-8]時限目|[1-8][・〜-][1-8]時限連続|\d{1,2}:\d{2}[~〜～]\d{1,2}:\d{2}|(?:令和\d{1,2}|\d{4})年度|前期|後期|試験返却時間割|定期試験時間割|試験時間割|通常時間割|授業時間割|時間割";
     private const string OcrWholeLabelPattern = @"^(?:[月火水木金](?:曜(?:日)?)?|(?:(?:\d{4})年)?\d{1,2}月\d{1,2}日|(?:(?:\d{4})[-/])?\d{1,2}[-/]\d{1,2}|[1-5][_-](?:[1-3]|[A-Z]{2})|AI[_-][12]|[12]年)$";
-    private static string OcrPublicLabelPattern => "(?:" + HeaderPattern + ")[：:]?|(?:" + RecoveryRoleLabels.Pattern + ")[：:]";
+    private static string OcrRolePrefixPattern => "(?:" + RecoveryRoleLabels.Pattern + ")[：:]|^(?:" + RecoveryRoleLabels.Pattern + ")(?=[^：:])";
+    private static string OcrPublicLabelPattern => "(?:" + HeaderPattern + ")[：:]?|" + OcrRolePrefixPattern;
     private static bool CanEmitOcrLabel(IReadOnlyList<PdfGlyph> row, Action<long> charge)
     {
         var raw = string.Concat(row.Select(g => g.Text)); charge(row.Count + raw.Length);
@@ -132,7 +133,7 @@ public static class RecoveryDocumentBuilder
                 // with exactly one explicit role prefix proves its remaining
                 // ORIGINAL atoms are that field's literal continuation. CTC
                 // peak gaps cannot turn a word inside it into another label.
-                var rolePrefixes = Regex.Matches(raw, "(?:" + RecoveryRoleLabels.Pattern + ")[：:]");
+                var rolePrefixes = Regex.Matches(raw, OcrRolePrefixPattern);
                 // Accept only complete existing day/class syntax; never infer
                 // a date or class from a substring or repair a native atom.
                 var key = PdfGrid.Key(raw);

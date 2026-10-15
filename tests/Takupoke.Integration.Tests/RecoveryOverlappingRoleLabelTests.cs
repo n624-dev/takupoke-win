@@ -8,6 +8,25 @@ namespace Takupoke.Integration.Tests;
 
 public sealed class RecoveryOverlappingRoleLabelTests
 {
+    [Fact]
+    public void CompleteNativeRolePrefixWithoutRecognizedColonKeepsItsValueAtoms()
+    {
+        var page=Layout(MaterialKind.Timetable,":");
+        page=page with { Glyphs=page.Glyphs.Where(g => g.Text!=":").SelectMany(g =>
+            g.SourceLine is >=100 and <=102 && g.X==102 ? g.Text.Select((c,i)=>g with { Text=c.ToString(),X=84+i*3,Width=3 }).ToArray()
+                : new[]{g}).Select((g,i)=>g.SourceLine is not null ? g with { SourceOrder=i } : g).ToArray() };
+        var original=page.Glyphs.ToArray(); var doc=Build(page,MaterialKind.Timetable);
+        var cell=Assert.Single(doc.Cells,c=>!c.ConfirmedEmpty);
+        Assert.Null(cell.OrderedRowProof); Assert.Equal(3,cell.RoleScopes.Count);
+        foreach(var scope in cell.RoleScopes)
+        {
+            Assert.Equal(2,scope.LabelSourceIds.Count);
+            Assert.Equal(scope.Role switch { RecoveryFieldRole.Subject=>"科甲",RecoveryFieldRole.Teacher=>"教甲",_=>"室甲" },
+                string.Concat(doc.Sources.Where(s=>cell.SourceIds.Contains(s.Id) && scope.Box.Contains(s.Box)).Select(s=>s.Text)));
+        }
+        Assert.Equal(original,page.Glyphs);
+    }
+
     [Theory]
     [InlineData(MaterialKind.Timetable, ":")]
     [InlineData(MaterialKind.Timetable, "：")]
