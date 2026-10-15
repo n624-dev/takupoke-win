@@ -232,7 +232,7 @@ internal static partial class Program
         Wait(()=>Find("manual-submit-Timetable")?.Current.IsEnabled==true,"All native sources require explicit acknowledgement");
         Invoke("manual-submit-Timetable");Wait(()=>Find("adopt-recovery-Timetable") is not null,"Native review returns to whole-document preview");
         ((ExpandCollapsePattern)WaitElement("recovery-reference-notes-Timetable").GetCurrentPattern(ExpandCollapsePattern.Pattern)).Expand();
-        Wait(()=>RecoveryUiText("架空の原本注記"),"Original native reference note is visible in preview");
+        Wait(()=>RecoveryUiText("1ページ · 架空の原本注記"),"Original native reference note is visible in preview");
         var preview=RecoveryUiPendingAsync(root).GetAwaiter().GetResult();
         Require(preview.Document.Sources.All(s=>!s.FromOcr && s.NativeConfidence is null) && preview.Result.HumanCorrections?.Count==3,
             "Native source is never relabelled OCR or assigned a fabricated confidence");
