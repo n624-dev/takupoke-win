@@ -49,11 +49,14 @@ foreach ($arch in @('x64', 'arm64')) {
     if (-not $crt) { throw "No redistributable CRT for $arch in runtime version $($redist.Name)." }
     Write-Output "Native runtime: $($redist.Name) / $arch / $($crt.Name)"
     Get-ChildItem -LiteralPath $crt.FullName -Filter '*.dll' | Copy-Item -Destination $payload -Force
-    foreach ($required in @('takupoke.exe', 'Assets/takupoke.ico', 'Assets/takupoke.png', 'Assets/FluentIcons/LICENSE.txt', 'App.xbf', 'MainWindow.xbf', 'Legal/terms.txt', 'Legal/privacy.txt', 'coreclr.dll', 'hostfxr.dll', 'hostpolicy.dll', 'Microsoft.UI.Xaml.dll', 'vcruntime140.dll', 'msvcp140.dll')) {
+    foreach ($required in @('takupoke.exe', 'Assets/takupoke.ico', 'Assets/takupoke.png', 'Assets/FluentIcons/LICENSE.txt', 'App.xbf', 'MainWindow.xbf', 'Legal/terms.txt', 'Legal/privacy.txt', 'Legal/paddle-ocr.txt', 'Assets/Recovery/ocr-characters-v6.json', 'onnxruntime.dll', 'coreclr.dll', 'hostfxr.dll', 'hostpolicy.dll', 'Microsoft.UI.Xaml.dll', 'vcruntime140.dll', 'msvcp140.dll')) {
         if (-not (Test-Path -LiteralPath (Join-Path $payload $required))) { throw "Published $arch payload is missing $required." }
     }
+    $dictionary = 'Assets/Recovery/ocr-characters-v6.json'
+    if ((Get-FileHash -LiteralPath (Join-Path $payload $dictionary)).Hash -cne
+        (Get-FileHash -LiteralPath (Join-Path 'src/Takupoke.Win' $dictionary)).Hash) { throw 'Published OCR dictionary changed.' }
     $expectedMachine = if ($arch -eq 'x64') { 0x8664 } else { 0xaa64 }
-    foreach ($binary in @('takupoke.exe', 'coreclr.dll', 'Microsoft.UI.Xaml.dll')) {
+    foreach ($binary in @('takupoke.exe', 'coreclr.dll', 'Microsoft.UI.Xaml.dll', 'onnxruntime.dll')) {
         if ((Get-PeMachine (Join-Path $payload $binary)) -ne $expectedMachine) { throw "Wrong architecture in $binary." }
     }
     $runtime = Get-Content -LiteralPath (Join-Path $payload 'takupoke.runtimeconfig.json') -Raw | ConvertFrom-Json
