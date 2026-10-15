@@ -1,0 +1,154 @@
+{
+  "scores": [
+    {
+      "route": "actual-code-route",
+      "margin": 2,
+      "rows": 384,
+      "characters": 1871,
+      "before": {
+        "exact": 259,
+        "edits": 180,
+        "belowNativeFloor": 55,
+        "wrongAboveNativeFloor": 82,
+        "ordinaryExact": 191
+      },
+      "after": {
+        "exact": 285,
+        "edits": 139,
+        "belowNativeFloor": 39,
+        "wrongAboveNativeFloor": 66,
+        "ordinaryExact": 191
+      },
+      "gains": 31,
+      "losses": 5,
+      "addedPixelReview": 6,
+      "removedPixelReview": 22
+    },
+    {
+      "route": "actual-code-route",
+      "margin": 6,
+      "rows": 384,
+      "characters": 1871,
+      "before": {
+        "exact": 255,
+        "edits": 190,
+        "belowNativeFloor": 60,
+        "wrongAboveNativeFloor": 78,
+        "ordinaryExact": 192
+      },
+      "after": {
+        "exact": 267,
+        "edits": 160,
+        "belowNativeFloor": 45,
+        "wrongAboveNativeFloor": 77,
+        "ordinaryExact": 191
+      },
+      "gains": 15,
+      "losses": 3,
+      "addedPixelReview": 3,
+      "removedPixelReview": 18
+    },
+    {
+      "route": "actual-manual-code-route",
+      "margin": 2,
+      "rows": 384,
+      "characters": 1871,
+      "before": {
+        "exact": 292,
+        "edits": 106,
+        "belowNativeFloor": 143,
+        "wrongAboveNativeFloor": 24,
+        "ordinaryExact": 190
+      },
+      "after": {
+        "exact": 292,
+        "edits": 123,
+        "belowNativeFloor": 81,
+        "wrongAboveNativeFloor": 36,
+        "ordinaryExact": 189
+      },
+      "gains": 16,
+      "losses": 16,
+      "addedPixelReview": 14,
+      "removedPixelReview": 76
+    },
+    {
+      "route": "actual-manual-code-route",
+      "margin": 6,
+      "rows": 384,
+      "characters": 1871,
+      "before": {
+        "exact": 276,
+        "edits": 138,
+        "belowNativeFloor": 157,
+        "wrongAboveNativeFloor": 22,
+        "ordinaryExact": 189
+      },
+      "after": {
+        "exact": 276,
+        "edits": 140,
+        "belowNativeFloor": 89,
+        "wrongAboveNativeFloor": 46,
+        "ordinaryExact": 188
+      },
+      "gains": 13,
+      "losses": 13,
+      "addedPixelReview": 8,
+      "removedPixelReview": 76
+    },
+    {
+      "route": "deployed-trained-english-v5",
+      "margin": 2,
+      "rows": 384,
+      "characters": 1871,
+      "before": {
+        "exact": 289,
+        "edits": 115,
+        "belowNativeFloor": 150,
+        "wrongAboveNativeFloor": 21,
+        "ordinaryExact": 187
+      },
+      "after": {
+        "exact": 297,
+        "edits": 104,
+        "belowNativeFloor": 94,
+        "wrongAboveNativeFloor": 28,
+        "ordinaryExact": 186
+      },
+      "gains": 20,
+      "losses": 12,
+      "addedPixelReview": 13,
+      "removedPixelReview": 69
+    },
+    {
+      "route": "deployed-trained-english-v5",
+      "margin": 6,
+      "rows": 384,
+      "characters": 1871,
+      "before": {
+        "exact": 270,
+        "edits": 144,
+        "belowNativeFloor": 166,
+        "wrongAboveNativeFloor": 20,
+        "ordinaryExact": 185
+      },
+      "after": {
+        "exact": 275,
+        "edits": 136,
+        "belowNativeFloor": 116,
+        "wrongAboveNativeFloor": 35,
+        "ordinaryExact": 185
+      },
+      "gains": 14,
+      "losses": 9,
+      "addedPixelReview": 15,
+      "removedPixelReview": 65
+    }
+  ],
+  "unchangedJapaneseObservations": 772,
+  "blankOutputsRemainEmpty": true,
+  "peakWorkingSetBytes": 435376128,
+  "rawSHA256": "9489007c55c4e14b0b73f2c90c4493067a89b56ed388a71c906002fde7554415",
+  "baselineSHA256": "903523626ae52742df6248d4ecd6263ac2f053cf07e42e7ce75959e6d6c8c514",
+  "scope": "Same isolated fictional images previously used for manual-route assessment, with checkpoint selected on different fonts before this comparison. No new-image/new-layout credit; separate fresh-font model evaluation exists. No user-review-time or full-document claim."
+}

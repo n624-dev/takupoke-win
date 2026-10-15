@@ -2,7 +2,9 @@
 
 A trained candidate passed the frozen development comparison. The architecture foundation is official PP-OCRv5 English full438. Actual initialization **and teacher** are the previously adapted active font-balanced epoch-4 checkpoint SHA `7313bee5dabf17998010c6f47844fe80649744b03c0366af05c627fc47314547`, matching active ONNX SHA `9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703`; the unadapted official weights are not this trial’s initializer or teacher.
 
-This is a fictional synthetic crop experiment. It does not measure real timetable, complete-document, or native combined-route accuracy. No product model was replaced or published, and iOS was not edited.
+This is a fictional synthetic crop experiment. It does not measure real timetable, complete-document, or native combined-route accuracy. At the original training handoff no product model was replaced or published, and iOS was not edited.
+
+Subsequent parent assessment: the [portable v2 artifact](../../../model-artifacts/ascii-english-v5-confusion-v2/README.md) is now published for research, but **not activated in the application**. The [actual manual-route comparison](../../ocr-model-routing-20261016/README.md) stayed292/384 exact while edits worsened106→123 and high-score errors24→36. Product default remains v1; no further training or checkpoint reselection follows this result. The crop findings and retained failures below remain unchanged.
 
 | Comparison | Raw exact | Whole CER | Code CER | Natural CER | Correct/wrong accepted | Negative accepted |
 | --- | --- | --- | --- | --- | --- | --- |

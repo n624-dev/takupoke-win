@@ -1,0 +1,8569 @@
+[
+  {
+    "route": "actual-code-route",
+    "id": "code-0030",
+    "expected": "IOO41",
+    "before": "IO041",
+    "after": "IOO41",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9831564
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.49995798
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.5050464
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99999666
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99999213
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.8330353
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9245554
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.97046375
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99978894
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999213
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0042",
+    "expected": "ll029",
+    "before": "II029",
+    "after": "Il029",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.8252348
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.8560626
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9990466
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99999213
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99995124
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.86883897
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.8798575
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.95574194
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9987471
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99855334
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0078",
+    "expected": "0l028",
+    "before": "0I028",
+    "after": "01028",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.90180004
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.8916558
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9634694
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9997918
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9999479
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.99999607
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9560172
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99999833
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99999976
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.99999857
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0126",
+    "expected": "I0I52",
+    "before": "I0I52",
+    "after": "10152",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.8339694
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9876907
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.8308086
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9996278
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9994104
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.8972623
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99998045
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99648476
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99999774
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99999785
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0134",
+    "expected": "0IO37",
+    "before": "01O37",
+    "after": "0IO37",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9999248
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.54492617
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.6451407
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99999523
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999962
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9548538
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.8971451
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.94275844
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9975745
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9905815
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0158",
+    "expected": "I1l76",
+    "before": "I1I76",
+    "after": "11176",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.90852463
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999292
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.8982875
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99947315
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99991846
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.59739435
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.999864
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.8704109
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99999774
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999981
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0178",
+    "expected": "I1I27",
+    "before": "I1I27",
+    "after": "I1127",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9129443
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9998078
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9359865
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9998186
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99946064
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.56285733
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9997956
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.68586785
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99999833
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999968
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0259",
+    "expected": "IlO33",
+    "before": "I1O33",
+    "after": "IlO33",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9930276
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.5809376
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9587899
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9998425
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99989974
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9983375
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.9628315
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9408563
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.983344
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99923337
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0271",
+    "expected": "1Il21",
+    "before": "1I121",
+    "after": "1Il21",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9999347
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9613205
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.73064274
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9999534
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.999961
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9967355
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9919904
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.9157812
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9885605
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9989484
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0299",
+    "expected": "lOl97",
+    "before": "1O197",
+    "after": "lO197",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9927175
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.83571273
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99923146
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99999666
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999969
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.91062796
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.91387546
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.98839104
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9981542
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9998783
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0307",
+    "expected": "l1063",
+    "before": "11063",
+    "after": "l1063",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9999678
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999918
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99999917
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999981
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999982
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.81177306
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99970216
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99902
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99979204
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.999985
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0319",
+    "expected": "IlO98",
+    "before": "I1O98",
+    "after": "IlO98",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9966949
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.69591165
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.92169863
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99999225
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9999963
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9996125
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.9805802
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.90777
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99861777
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9998615
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0323",
+    "expected": "ll153",
+    "before": "11153",
+    "after": "ll153",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9970567
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9991117
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999975
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9999989
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99999905
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.983107
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.90832466
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999473
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99866223
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99992645
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0339",
+    "expected": "lO041",
+    "before": "1O041",
+    "after": "lO041",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.98664296
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.86593467
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99999535
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9999982
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999938
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.9343015
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.91394055
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9427834
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9999249
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99845374
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0343",
+    "expected": "lO169",
+    "before": "1O169",
+    "after": "lO169",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.89835364
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9788311
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999913
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99999714
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99999845
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.9190298
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9409612
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99975985
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999778
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9952348
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0371",
+    "expected": "0lO91",
+    "before": "01O91",
+    "after": "0lO91",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.99998593
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9769381
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.92644906
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99999833
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999949
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9988888
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.81402284
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9165217
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9981001
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9990664
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0388",
+    "expected": "01193",
+    "before": "01193",
+    "after": "O1193",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.99999666
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99998784
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999975
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9999851
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999968
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.8246034
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9997576
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99841046
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.95952326
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9995384
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0392",
+    "expected": "lOl54",
+    "before": "I0154",
+    "after": "IOI54",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.6711445
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.8147052
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9933041
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99999547
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99999666
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.91025925
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.938267
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9412943
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9998442
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99772865
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0420",
+    "expected": "1Ol84",
+    "before": "10184",
+    "after": "1OI84",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.99997854
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9570635
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9561122
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9999974
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99999833
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9994312
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.94527173
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.965744
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.99975663
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.999819
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0432",
+    "expected": "I1l56",
+    "before": "I1I56",
+    "after": "11156",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9150369
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999305
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9252329
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99962413
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9995048
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.59408224
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99939156
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.95527166
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99999475
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999944
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0444",
+    "expected": "1OI89",
+    "before": "10189",
+    "after": "1OI89",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9999778
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99563956
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9949108
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.99998593
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9999629
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.99954766
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9252772
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9272323
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9998878
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.83845073
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0448",
+    "expected": "l0O34",
+    "before": "10034",
+    "after": "I0O34",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.7500259
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9999263
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9395451
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99999654
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9999988
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.8516373
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.97162306
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9231153
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999285
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99975544
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0452",
+    "expected": "0OO83",
+    "before": "00083",
+    "after": "0OO83",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9999713
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9935138
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9910953
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9999896
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999964
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9786902
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.91374934
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.87683356
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9999217
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999589
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0460",
+    "expected": "O1O52",
+    "before": "01052",
+    "after": "O1O52",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.7848106
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99997306
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.6807556
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99999774
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9999995
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.9813162
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99998116
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.91000026
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99932027
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9989986
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0472",
+    "expected": "00O40",
+    "before": "00040",
+    "after": "00O40",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.99997747
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99999464
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.80643076
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99999905
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99998045
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.8402619
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.96839017
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.92439276
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99974257
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.8889501
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0480",
+    "expected": "OIO85",
+    "before": "01085",
+    "after": "OIO85",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.84769094
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.7368711
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9079086
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9999951
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9999981
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.97695917
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.94387203
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9038243
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9998704
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99994993
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0516",
+    "expected": "OOl72",
+    "before": "00172",
+    "after": "OOI72",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.6703529
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.7369559
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.91259354
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99997616
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9999988
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.9247136
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.8993325
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9056915
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9998964
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9998671
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0520",
+    "expected": "lOO65",
+    "before": "I0065",
+    "after": "IOO65",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.81208193
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.8695559
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.93161756
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99999404
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9999956
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.807964
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.94731456
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9429586
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99077094
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9911254
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0540",
+    "expected": "l1I22",
+    "before": "I1I22",
+    "after": "11122",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.8946441
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9996942
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.8119821
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99964166
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.999137
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.68565285
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99968266
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.92217135
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9999957
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99999547
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0542",
+    "expected": "939",
+    "before": "q39",
+    "after": "939",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "q",
+        "Confidence": 0.94122344
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9993278
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.823836
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "9",
+        "Confidence": 0.9999832
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999938
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9999902
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0544",
+    "expected": "l0156",
+    "before": "I0156",
+    "after": "10156",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.85442126
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.82441425
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.999711
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99050903
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9993967
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.5556322
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9999908
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99999595
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.999997
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99999833
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0556",
+    "expected": "0lO92",
+    "before": "01092",
+    "after": "0IO92",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.99997735
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99216014
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9790258
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9999912
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9999994
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.92461324
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.86267096
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.91819036
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.8617621
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99983823
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0568",
+    "expected": "1O070",
+    "before": "1O070",
+    "after": "10070",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9981945
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.83716553
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9413766
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99923754
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.8451405
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9999924
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.84356225
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9999963
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.999992
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9999963
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0574",
+    "expected": "Q780",
+    "before": "Q780",
+    "after": "Q78O",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "Q",
+        "Confidence": 0.9999958
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99999726
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.99999905
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99999917
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "Q",
+        "Confidence": 0.9985885
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99974114
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.99979895
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.8506895
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0585",
+    "expected": "I0l34",
+    "before": "I0134",
+    "after": "I0l34",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.91657376
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99993145
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.97506726
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999927
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9999976
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9989967
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99997795
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.8423367
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99993575
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9989827
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0605",
+    "expected": "OIl33",
+    "before": "Oll33",
+    "after": "OIl33",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.96644574
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.8138726
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.9808972
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9998498
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999788
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.9332479
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.99273336
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.9882387
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.90018624
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999032
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0621",
+    "expected": "IOl85",
+    "before": "IO185",
+    "after": "IOl85",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9956197
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9774934
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.8464498
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.99999535
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9999963
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.99877197
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.87344587
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.9137724
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.99914134
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99998283
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0629",
+    "expected": "10O25",
+    "before": "10025",
+    "after": "10O25",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9999949
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9999969
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.72562474
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99999964
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9999988
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9987804
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9999269
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9012878
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9999672
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99998593
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0633",
+    "expected": "0OO97",
+    "before": "00097",
+    "after": "0OO97",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9999912
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.86395097
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.82718444
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99999833
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99999297
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9984969
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.84295464
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.8720224
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9983719
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9998603
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0637",
+    "expected": "00l83",
+    "before": "00183",
+    "after": "00l83",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9999392
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99992335
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.95150155
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9999975
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999949
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.99946123
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9999497
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.90533346
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9999496
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99988866
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0641",
+    "expected": "I1l40",
+    "before": "I1140",
+    "after": "I1l40",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.91348505
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999317
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9889389
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9999988
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9999956
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.99954337
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999845
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.9450743
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99989164
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9996132
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0645",
+    "expected": "1lI96",
+    "before": "11I96",
+    "after": "1lI96",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.99972194
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.8881347
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9396319
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9999975
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999958
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9999404
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.8856767
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9360446
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9544579
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9998969
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0649",
+    "expected": "1O059",
+    "before": "10059",
+    "after": "1O059",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9999888
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9533417
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99999833
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99999845
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9999995
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9996792
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.90033484
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99986553
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.999619
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99890757
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0665",
+    "expected": "l1O96",
+    "before": "11096",
+    "after": "l1O96",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9987741
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999888
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.86227936
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99999845
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999982
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.99313205
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99992704
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.87916166
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99127215
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9990909
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0673",
+    "expected": "l0O66",
+    "before": "10066",
+    "after": "l0O66",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9993143
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9999956
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9115232
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999908
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99999654
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.98629236
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9999244
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9305706
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999145
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999155
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0701",
+    "expected": "OIl68",
+    "before": "OI168",
+    "after": "OIl68",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.98484784
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9214859
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.52606297
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999964
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.99999857
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.9176601
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9937278
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.8706274
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999306
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9999491
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0705",
+    "expected": "llI91",
+    "before": "l1I91",
+    "after": "llI91",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.64701605
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.538452
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9776715
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99999666
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999896
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.9720461
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.89308786
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.988025
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9813906
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99997854
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0713",
+    "expected": "0OO41",
+    "before": "00O41",
+    "after": "0OO41",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9999857
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.8052446
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.5299783
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9999988
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99999785
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.99978346
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.8818239
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.88502514
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9995115
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99998295
+      }
+    ]
+  },
+  {
+    "route": "actual-code-route",
+    "id": "code-0745",
+    "expected": "0O174",
+    "before": "00174",
+    "after": "0O174",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9999714
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.50221
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999975
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999968
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99999857
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9995141
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9093094
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999857
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99978644
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.998038
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0014",
+    "expected": "0lI79",
+    "before": "0II79",
+    "after": "01179",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.7619349
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.6150435
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.7164335
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99807286
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.991888
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9999894
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.92251307
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.8195387
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999944
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9999931
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0034",
+    "expected": "11120",
+    "before": "11120",
+    "after": "1112O",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.99882466
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9995832
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9998807
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9999224
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.66972506
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9997267
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9998559
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999583
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99995196
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.60267794
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0046",
+    "expected": "00126",
+    "before": "00126",
+    "after": "O0126",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.61168116
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9756035
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99983513
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99896395
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999218
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.63141257
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9148234
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999634
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99931216
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99989855
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0070",
+    "expected": "01I49",
+    "before": "01I49",
+    "after": "O1I49",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.6544293
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99996686
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.5586999
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99943215
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.98372203
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.6611629
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.999987
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.61911106
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9998573
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9973699
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0074",
+    "expected": "0ll88",
+    "before": "0II88",
+    "after": "0Il88",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.94473755
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.7735899
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.42878258
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.999818
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9997062
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9223299
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.8406086
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.6193743
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9998996
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9998066
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0094",
+    "expected": "0O197",
+    "before": "0O197",
+    "after": "OO197",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.6880831
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.7688071
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9998344
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9889548
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99977297
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.5134226
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9601885
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999608
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99703133
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999145
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0102",
+    "expected": "0OO77",
+    "before": "0OO77",
+    "after": "00077",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9650118
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.69688666
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.6924926
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9992042
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9991679
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9999093
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.8891381
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.75553524
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99999547
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.999997
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0106",
+    "expected": "11l20",
+    "before": "11I20",
+    "after": "11I2O",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9996207
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99992573
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9420674
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99426043
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.701107
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.99987626
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99997485
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9639223
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99957794
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.64205533
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0126",
+    "expected": "I0I52",
+    "before": "I0I52",
+    "after": "10152",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.8339694
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9876907
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.8308086
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9996278
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9994104
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.8972623
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99998045
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99648476
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99999774
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99999785
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0146",
+    "expected": "Oll79",
+    "before": "OIl79",
+    "after": "OII79",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.7529893
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.553103
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.66777116
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99429977
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9894372
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.98525745
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.6437457
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.5400374
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999951
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9999939
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0158",
+    "expected": "I1l76",
+    "before": "I1I76",
+    "after": "11176",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.90852463
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999292
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.8982875
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99947315
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99991846
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.59739435
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.999864
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.8704109
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99999774
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999981
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0174",
+    "expected": "I1O77",
+    "before": "I1O77",
+    "after": "I1077",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9057632
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99986565
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.7990505
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9994343
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99960965
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.68055487
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99983704
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.8716191
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999975
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99999833
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0178",
+    "expected": "I1I27",
+    "before": "I1I27",
+    "after": "I1127",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9129443
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9998078
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9359865
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9998186
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99946064
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.56285733
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9997956
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.68586785
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99999833
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999968
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0182",
+    "expected": "IIO81",
+    "before": "IlO81",
+    "after": "IIO81",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.8945626
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.5040079
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.7994615
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9986833
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99967766
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9289675
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.52599156
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9510981
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.999244
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999132
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0186",
+    "expected": "I1170",
+    "before": "I117O",
+    "after": "I1170",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9189865
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9998018
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999422
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99895906
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.65433216
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.7343403
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999645
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.999997
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999975
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9999989
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0215",
+    "expected": "llI30",
+    "before": "l1I30",
+    "after": "11I30",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.6731763
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.7896581
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9278299
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.98548603
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9359603
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9556358
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9366938
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9981292
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99998415
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.999997
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0239",
+    "expected": "OIl44",
+    "before": "OI144",
+    "after": "OIl44",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.8421226
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9931543
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.56517386
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.8982153
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9907602
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.9729211
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9990087
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.7688563
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.93229204
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99742246
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0255",
+    "expected": "Ol094",
+    "before": "O1094",
+    "after": "Ol094",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.8902427
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.7219421
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99893683
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99528486
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.93899024
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.98354983
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.5871538
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99968946
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99928635
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.98255837
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0267",
+    "expected": "llO59",
+    "before": "l1O59",
+    "after": "llO59",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.85809493
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.5086761
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.6579021
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9920948
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9920059
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.97337645
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.7118549
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.924827
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9991295
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9980028
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0311",
+    "expected": "0lI83",
+    "before": "01I83",
+    "after": "0lI83",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.99089545
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.6243003
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.96005994
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9996989
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9997986
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.99197125
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.533611
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.99272704
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9998373
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999331
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0359",
+    "expected": "0lO87",
+    "before": "01O87",
+    "after": "0lO87",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9965894
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.5374031
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.60732883
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9998061
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9944857
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9983779
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.7129997
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9136638
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9998933
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9991327
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0367",
+    "expected": "ll064",
+    "before": "l1064",
+    "after": "11064",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.92458326
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.6697191
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9985905
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9946307
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.998588
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9977308
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9994485
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99999607
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99999595
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99999905
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0375",
+    "expected": "lIO24",
+    "before": "1IO24",
+    "after": "lIO24",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.55683106
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.936287
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.66799325
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9997521
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.995732
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.71950793
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.98739225
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9360412
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9995338
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9987507
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0396",
+    "expected": "OII40",
+    "before": "OI140",
+    "after": "O1140",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.8907872
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.76706034
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.47675684
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.96473366
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.823707
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.77513766
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.97168016
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.98512864
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.999998
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99995196
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0404",
+    "expected": "0O192",
+    "before": "0O192",
+    "after": "OO192",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.7321275
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.7149172
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99996483
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.8573802
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9999367
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.5182456
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.93237555
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999875
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9501942
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99989605
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0408",
+    "expected": "lO063",
+    "before": "IO063",
+    "after": "10063",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.81378955
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.7819639
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.971032
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99898046
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9998933
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.6486513
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.98758197
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9999901
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999925
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999968
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0412",
+    "expected": "1l095",
+    "before": "11095",
+    "after": "1I095",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.99996495
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9840209
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99989724
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9999751
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9999962
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9997273
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9581955
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.767808
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9441474
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99984396
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0414",
+    "expected": "R-810",
+    "before": "R-810",
+    "after": "R-81O",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "R",
+        "Confidence": 0.9997236
+      },
+      {
+        "Text": "-",
+        "Confidence": 0.9987476
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9999647
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99992144
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.6570008
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "R",
+        "Confidence": 0.99988544
+      },
+      {
+        "Text": "-",
+        "Confidence": 0.9997634
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.99998283
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999802
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.57352984
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0432",
+    "expected": "I1l56",
+    "before": "I1I56",
+    "after": "11156",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9150369
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999305
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9252329
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99962413
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9995048
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.59408224
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99939156
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.95527166
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99999475
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999944
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0468",
+    "expected": "OOl68",
+    "before": "OOI68",
+    "after": "00168",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.7966852
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.50080377
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.75057435
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99949765
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9997037
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.98604566
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.98137075
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9882159
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9999957
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.99999845
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0500",
+    "expected": "0O121",
+    "before": "0O121",
+    "after": "OO121",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.7331682
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.69842166
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99994373
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99991107
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9997969
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.689306
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.9459702
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.999984
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99992514
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999443
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0508",
+    "expected": "OOI76",
+    "before": "OOI76",
+    "after": "00176",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.7679768
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.62855476
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.7937812
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9976464
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.9998878
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.70486474
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.75477326
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.926878
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999814
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99999833
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0524",
+    "expected": "0Il22",
+    "before": "01I22",
+    "after": "01122",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.9460903
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.54935735
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.62140936
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9998964
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99990046
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.99991035
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9903812
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9445386
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99999714
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9999989
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0532",
+    "expected": "01l98",
+    "before": "01I98",
+    "after": "O1I98",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.6232437
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999807
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.8785265
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9167718
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.99990356
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.7752316
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99999094
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.95189595
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9208419
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.99989605
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0540",
+    "expected": "l1I22",
+    "before": "I1I22",
+    "after": "11122",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.8946441
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9996942
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.8119821
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99964166
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.999137
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.68565285
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99968266
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.92217135
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.9999957
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99999547
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0542",
+    "expected": "939",
+    "before": "q39",
+    "after": "939",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "q",
+        "Confidence": 0.94122344
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9993278
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.823836
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "9",
+        "Confidence": 0.9999832
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999938
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.9999902
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0546",
+    "expected": "Rm-750",
+    "before": "Rm-750",
+    "after": "Rm-75O",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "R",
+        "Confidence": 0.99975795
+      },
+      {
+        "Text": "m",
+        "Confidence": 0.9998497
+      },
+      {
+        "Text": "-",
+        "Confidence": 0.9993742
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99932706
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9999007
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.69215184
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "R",
+        "Confidence": 0.99991095
+      },
+      {
+        "Text": "m",
+        "Confidence": 0.9999281
+      },
+      {
+        "Text": "-",
+        "Confidence": 0.9997749
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999064
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9999832
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.6664634
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0552",
+    "expected": "l1O90",
+    "before": "I1O90",
+    "after": "11090",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.8500898
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9986117
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.7766331
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.7723248
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.5931079
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.8388555
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99989164
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.90222
+      },
+      {
+        "Text": "9",
+        "Confidence": 0.99995947
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9999727
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0560",
+    "expected": "I1077",
+    "before": "I1077",
+    "after": "11077",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.88670725
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99962604
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.5756665
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99932337
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9992286
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.8439926
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99999404
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99999654
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999926
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999926
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0564",
+    "expected": "01138",
+    "before": "01138",
+    "after": "O1138",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.77874374
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999502
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999293
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99670875
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9999033
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.6555975
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999814
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99997485
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99884474
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9999018
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0572",
+    "expected": "0Il46",
+    "before": "01I46",
+    "after": "01146",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.92367494
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.54491144
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.38441083
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9982558
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99964786
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.999964
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99666625
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9868456
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99999833
+      },
+      {
+        "Text": "6",
+        "Confidence": 0.99999785
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0576",
+    "expected": "10133",
+    "before": "10133",
+    "after": "1O133",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9981623
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.8065241
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99899405
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99983335
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999162
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.9995957
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.55770826
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9997278
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9999471
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99995446
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0585",
+    "expected": "I0l34",
+    "before": "I0134",
+    "after": "I0l34",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.99378854
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99992645
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.5215588
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9998851
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99651164
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9989967
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.99997795
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.8423367
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99993575
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9989827
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0621",
+    "expected": "IOl85",
+    "before": "I0l85",
+    "after": "IOl85",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9935595
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.55593306
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.69607896
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.997264
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9999467
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.99877197
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.87344587
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.9137724
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.99914134
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99998283
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0625",
+    "expected": "Ill73",
+    "before": "Il173",
+    "after": "Ill73",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9919002
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.98294616
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.78731525
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9996557
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.9978327
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Confidence": 0.9970186
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.9951507
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.51750904
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9999062
+      },
+      {
+        "Text": "3",
+        "Confidence": 0.99828964
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0657",
+    "expected": "OOO48",
+    "before": "O0O48",
+    "after": "OOO48",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.63410944
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.5176349
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.5722207
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9763098
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9999471
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.86953557
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.7660671
+      },
+      {
+        "Text": "O",
+        "Confidence": 0.85939026
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99716765
+      },
+      {
+        "Text": "8",
+        "Confidence": 0.9999672
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0693",
+    "expected": "0l072",
+    "before": "01072",
+    "after": "0l072",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.99897885
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.64961046
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9995148
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9990282
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99993765
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Confidence": 0.99948704
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.58561987
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.9998229
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99976784
+      },
+      {
+        "Text": "2",
+        "Confidence": 0.99998045
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0709",
+    "expected": "llO77",
+    "before": "l1077",
+    "after": "1l077",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.76842964
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.53094494
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.54034865
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9993067
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.9996306
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Confidence": 0.5078581
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.62522805
+      },
+      {
+        "Text": "0",
+        "Confidence": 0.775474
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99999535
+      },
+      {
+        "Text": "7",
+        "Confidence": 0.99999607
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0757",
+    "expected": "llI51",
+    "before": "l1I51",
+    "after": "llI51",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.76951265
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.5151977
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.8581251
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99987996
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.99995553
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Confidence": 0.92062837
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.7232196
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9730747
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99997437
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.9999802
+      }
+    ]
+  },
+  {
+    "route": "actual-manual-code-route",
+    "id": "code-0761",
+    "expected": "OIl54",
+    "before": "OI154",
+    "after": "OIl54",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.6195802
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.96332455
+      },
+      {
+        "Text": "1",
+        "Confidence": 0.68784523
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.99984
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.9981165
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Confidence": 0.89244545
+      },
+      {
+        "Text": "I",
+        "Confidence": 0.9931958
+      },
+      {
+        "Text": "l",
+        "Confidence": 0.6850229
+      },
+      {
+        "Text": "5",
+        "Confidence": 0.9999645
+      },
+      {
+        "Text": "4",
+        "Confidence": 0.99968016
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0018",
+    "expected": "lI147",
+    "before": "II147",
+    "after": "Il147",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Start": 0,
+        "End": 1,
+        "Confidence": 0.78449833
+      },
+      {
+        "Text": "I",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.5199525
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9989874
+      },
+      {
+        "Text": "4",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9942234
+      },
+      {
+        "Text": "7",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9899143
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Start": 0,
+        "End": 1,
+        "Confidence": 0.84618145
+      },
+      {
+        "Text": "l",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.35703552
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9995447
+      },
+      {
+        "Text": "4",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9982253
+      },
+      {
+        "Text": "7",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9973997
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0034",
+    "expected": "11120",
+    "before": "11120",
+    "after": "1112O",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.99882466
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9995832
+      },
+      {
+        "Text": "1",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9998807
+      },
+      {
+        "Text": "2",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9999224
+      },
+      {
+        "Text": "0",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.66972506
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.9997267
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9998559
+      },
+      {
+        "Text": "1",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9999583
+      },
+      {
+        "Text": "2",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.99995196
+      },
+      {
+        "Text": "O",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.60267794
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0046",
+    "expected": "00126",
+    "before": "00126",
+    "after": "O0126",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.61168116
+      },
+      {
+        "Text": "0",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9756035
+      },
+      {
+        "Text": "1",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.99983513
+      },
+      {
+        "Text": "2",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.99896395
+      },
+      {
+        "Text": "6",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.9999218
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.63141257
+      },
+      {
+        "Text": "0",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9148234
+      },
+      {
+        "Text": "1",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9999634
+      },
+      {
+        "Text": "2",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.99931216
+      },
+      {
+        "Text": "6",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.99989855
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0062",
+    "expected": "Oll37",
+    "before": "Ol37",
+    "after": "Oll37",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.8575579
+      },
+      {
+        "Text": "l",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.4070024
+      },
+      {
+        "Text": "3",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.99883145
+      },
+      {
+        "Text": "7",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.99814546
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.9629972
+      },
+      {
+        "Text": "l",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.58848363
+      },
+      {
+        "Text": "l",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.39017007
+      },
+      {
+        "Text": "3",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.99974364
+      },
+      {
+        "Text": "7",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.9990113
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0070",
+    "expected": "01I49",
+    "before": "01I49",
+    "after": "O1I49",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.6544293
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.99996686
+      },
+      {
+        "Text": "I",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.5586999
+      },
+      {
+        "Text": "4",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.99943215
+      },
+      {
+        "Text": "9",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.98372203
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.6611629
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.999987
+      },
+      {
+        "Text": "I",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.61911106
+      },
+      {
+        "Text": "4",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.9998573
+      },
+      {
+        "Text": "9",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.9973699
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0074",
+    "expected": "0ll88",
+    "before": "0II88",
+    "after": "0Il88",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.94473755
+      },
+      {
+        "Text": "I",
+        "Start": 4,
+        "End": 5,
+        "Confidence": 0.7735899
+      },
+      {
+        "Text": "I",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.42878258
+      },
+      {
+        "Text": "8",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.999818
+      },
+      {
+        "Text": "8",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9997062
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.9223299
+      },
+      {
+        "Text": "I",
+        "Start": 4,
+        "End": 5,
+        "Confidence": 0.8406086
+      },
+      {
+        "Text": "l",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.6193743
+      },
+      {
+        "Text": "8",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9998996
+      },
+      {
+        "Text": "8",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9998066
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0094",
+    "expected": "0O197",
+    "before": "0O197",
+    "after": "OO197",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.6880831
+      },
+      {
+        "Text": "O",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.7688071
+      },
+      {
+        "Text": "1",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.9998344
+      },
+      {
+        "Text": "9",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.9889548
+      },
+      {
+        "Text": "7",
+        "Start": 16,
+        "End": 17,
+        "Confidence": 0.99977297
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.5134226
+      },
+      {
+        "Text": "O",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.9601885
+      },
+      {
+        "Text": "1",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.9999608
+      },
+      {
+        "Text": "9",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.99703133
+      },
+      {
+        "Text": "7",
+        "Start": 16,
+        "End": 17,
+        "Confidence": 0.9999145
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0106",
+    "expected": "11l20",
+    "before": "11I20",
+    "after": "11I2O",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.9996207
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.99992573
+      },
+      {
+        "Text": "I",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9420674
+      },
+      {
+        "Text": "2",
+        "Start": 10,
+        "End": 12,
+        "Confidence": 0.99426043
+      },
+      {
+        "Text": "0",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.701107
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.99987626
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.99997485
+      },
+      {
+        "Text": "I",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9639223
+      },
+      {
+        "Text": "2",
+        "Start": 10,
+        "End": 12,
+        "Confidence": 0.99957794
+      },
+      {
+        "Text": "O",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.64205533
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0110",
+    "expected": "ll175",
+    "before": "II175",
+    "after": "Il175",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Start": 0,
+        "End": 1,
+        "Confidence": 0.8243549
+      },
+      {
+        "Text": "I",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.3796821
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.99963593
+      },
+      {
+        "Text": "7",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.9969855
+      },
+      {
+        "Text": "5",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.81489754
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Start": 0,
+        "End": 1,
+        "Confidence": 0.819573
+      },
+      {
+        "Text": "l",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.44311836
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9998325
+      },
+      {
+        "Text": "7",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.9987184
+      },
+      {
+        "Text": "5",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.94076586
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0146",
+    "expected": "Oll79",
+    "before": "OIl79",
+    "after": "Oll79",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.7529893
+      },
+      {
+        "Text": "I",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.553103
+      },
+      {
+        "Text": "l",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.66777116
+      },
+      {
+        "Text": "7",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.99429977
+      },
+      {
+        "Text": "9",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.9894372
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.926644
+      },
+      {
+        "Text": "l",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.5749969
+      },
+      {
+        "Text": "l",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.8021174
+      },
+      {
+        "Text": "7",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9978103
+      },
+      {
+        "Text": "9",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.99685776
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0154",
+    "expected": "OlI42",
+    "before": "OII2",
+    "after": "OII42",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.7498476
+      },
+      {
+        "Text": "I",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.629186
+      },
+      {
+        "Text": "I",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.7032829
+      },
+      {
+        "Text": "2",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.9998287
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.9328542
+      },
+      {
+        "Text": "I",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.5623507
+      },
+      {
+        "Text": "I",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.71263117
+      },
+      {
+        "Text": "4",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.66506284
+      },
+      {
+        "Text": "2",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.9999461
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0182",
+    "expected": "IIO81",
+    "before": "IlO81",
+    "after": "IIO81",
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Start": 0,
+        "End": 1,
+        "Confidence": 0.8945626
+      },
+      {
+        "Text": "l",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.5040079
+      },
+      {
+        "Text": "O",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.7994615
+      },
+      {
+        "Text": "8",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.9986833
+      },
+      {
+        "Text": "1",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.99967766
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Start": 0,
+        "End": 1,
+        "Confidence": 0.9289675
+      },
+      {
+        "Text": "I",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.52599156
+      },
+      {
+        "Text": "O",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.9510981
+      },
+      {
+        "Text": "8",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.999244
+      },
+      {
+        "Text": "1",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.9999132
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0203",
+    "expected": "1ll55",
+    "before": "11155",
+    "after": "1l155",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.9878373
+      },
+      {
+        "Text": "1",
+        "Start": 4,
+        "End": 5,
+        "Confidence": 0.6984323
+      },
+      {
+        "Text": "1",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.94649553
+      },
+      {
+        "Text": "5",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9991074
+      },
+      {
+        "Text": "5",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9994734
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.99666506
+      },
+      {
+        "Text": "l",
+        "Start": 4,
+        "End": 5,
+        "Confidence": 0.57969415
+      },
+      {
+        "Text": "1",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.87349606
+      },
+      {
+        "Text": "5",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9998273
+      },
+      {
+        "Text": "5",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9998963
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0223",
+    "expected": "OlI66",
+    "before": "O1I 66",
+    "after": "OlI 66",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.8943822
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.6102228
+      },
+      {
+        "Text": "I",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.91844505
+      },
+      {
+        "Text": " ",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.73650175
+      },
+      {
+        "Text": "6",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.9999188
+      },
+      {
+        "Text": "6",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.9990164
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.9828295
+      },
+      {
+        "Text": "l",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.7159327
+      },
+      {
+        "Text": "I",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9817583
+      },
+      {
+        "Text": " ",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.54526407
+      },
+      {
+        "Text": "6",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.9999479
+      },
+      {
+        "Text": "6",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.9995609
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0239",
+    "expected": "OIl44",
+    "before": "OI144",
+    "after": "OIl44",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.8421226
+      },
+      {
+        "Text": "I",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.9931543
+      },
+      {
+        "Text": "1",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.56517386
+      },
+      {
+        "Text": "4",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.8982153
+      },
+      {
+        "Text": "4",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.9907602
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.9729211
+      },
+      {
+        "Text": "I",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.9990087
+      },
+      {
+        "Text": "l",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.7688563
+      },
+      {
+        "Text": "4",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.93229204
+      },
+      {
+        "Text": "4",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.99742246
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0255",
+    "expected": "Ol094",
+    "before": "O1094",
+    "after": "Ol094",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.8902427
+      },
+      {
+        "Text": "1",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.7219421
+      },
+      {
+        "Text": "0",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.99893683
+      },
+      {
+        "Text": "9",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.99528486
+      },
+      {
+        "Text": "4",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.93899024
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.98354983
+      },
+      {
+        "Text": "l",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.5871538
+      },
+      {
+        "Text": "0",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.99968946
+      },
+      {
+        "Text": "9",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.99928635
+      },
+      {
+        "Text": "4",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.98255837
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0267",
+    "expected": "llO59",
+    "before": "l1O59",
+    "after": "llO59",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "l",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.85809493
+      },
+      {
+        "Text": "1",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.5086761
+      },
+      {
+        "Text": "O",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.6579021
+      },
+      {
+        "Text": "5",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.9920948
+      },
+      {
+        "Text": "9",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.9920059
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.97337645
+      },
+      {
+        "Text": "l",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.7118549
+      },
+      {
+        "Text": "O",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.924827
+      },
+      {
+        "Text": "5",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.9991295
+      },
+      {
+        "Text": "9",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.9980028
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0311",
+    "expected": "0lI83",
+    "before": "01I83",
+    "after": "0lI83",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.99089545
+      },
+      {
+        "Text": "1",
+        "Start": 4,
+        "End": 5,
+        "Confidence": 0.6243003
+      },
+      {
+        "Text": "I",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.96005994
+      },
+      {
+        "Text": "8",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.9996989
+      },
+      {
+        "Text": "3",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.9997986
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.99197125
+      },
+      {
+        "Text": "l",
+        "Start": 4,
+        "End": 5,
+        "Confidence": 0.533611
+      },
+      {
+        "Text": "I",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.99272704
+      },
+      {
+        "Text": "8",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.9998373
+      },
+      {
+        "Text": "3",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.9999331
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0359",
+    "expected": "0lO87",
+    "before": "01O87",
+    "after": "0lO87",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.9965894
+      },
+      {
+        "Text": "1",
+        "Start": 4,
+        "End": 5,
+        "Confidence": 0.5374031
+      },
+      {
+        "Text": "O",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.60732883
+      },
+      {
+        "Text": "8",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.9998061
+      },
+      {
+        "Text": "7",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.9944857
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.9983779
+      },
+      {
+        "Text": "l",
+        "Start": 4,
+        "End": 5,
+        "Confidence": 0.7129997
+      },
+      {
+        "Text": "O",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9136638
+      },
+      {
+        "Text": "8",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.9998933
+      },
+      {
+        "Text": "7",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.9991327
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0367",
+    "expected": "ll064",
+    "before": "l1064",
+    "after": "ll064",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "l",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.92458326
+      },
+      {
+        "Text": "1",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.6697191
+      },
+      {
+        "Text": "0",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9985905
+      },
+      {
+        "Text": "6",
+        "Start": 8,
+        "End": 10,
+        "Confidence": 0.9946307
+      },
+      {
+        "Text": "4",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.998588
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.97194326
+      },
+      {
+        "Text": "l",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.53178906
+      },
+      {
+        "Text": "0",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9987851
+      },
+      {
+        "Text": "6",
+        "Start": 8,
+        "End": 10,
+        "Confidence": 0.9964992
+      },
+      {
+        "Text": "4",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.9996123
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0375",
+    "expected": "lIO24",
+    "before": "1IO24",
+    "after": "lIO24",
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.55683106
+      },
+      {
+        "Text": "I",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.936287
+      },
+      {
+        "Text": "O",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.66799325
+      },
+      {
+        "Text": "2",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9997521
+      },
+      {
+        "Text": "4",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.995732
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.71950793
+      },
+      {
+        "Text": "I",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.98739225
+      },
+      {
+        "Text": "O",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.9360412
+      },
+      {
+        "Text": "2",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9995338
+      },
+      {
+        "Text": "4",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.9987507
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0396",
+    "expected": "OII40",
+    "before": "OI140",
+    "after": "OII40",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.8907872
+      },
+      {
+        "Text": "I",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.76706034
+      },
+      {
+        "Text": "1",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.47675684
+      },
+      {
+        "Text": "4",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.96473366
+      },
+      {
+        "Text": "0",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.823707
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.9675469
+      },
+      {
+        "Text": "I",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.8068802
+      },
+      {
+        "Text": "I",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.64353514
+      },
+      {
+        "Text": "4",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.99003756
+      },
+      {
+        "Text": "0",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.80527467
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0404",
+    "expected": "0O192",
+    "before": "0O192",
+    "after": "OO192",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.7321275
+      },
+      {
+        "Text": "O",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.7149172
+      },
+      {
+        "Text": "1",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.99996483
+      },
+      {
+        "Text": "9",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.8573802
+      },
+      {
+        "Text": "2",
+        "Start": 18,
+        "End": 19,
+        "Confidence": 0.9999367
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.5182456
+      },
+      {
+        "Text": "O",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.93237555
+      },
+      {
+        "Text": "1",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.9999875
+      },
+      {
+        "Text": "9",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.9501942
+      },
+      {
+        "Text": "2",
+        "Start": 18,
+        "End": 19,
+        "Confidence": 0.99989605
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0410",
+    "expected": "145",
+    "before": "15",
+    "after": "145",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.99294645
+      },
+      {
+        "Text": "5",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.9992993
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.99719846
+      },
+      {
+        "Text": "4",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.92028475
+      },
+      {
+        "Text": "5",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.999819
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0412",
+    "expected": "1l095",
+    "before": "1 I095",
+    "after": "1I095",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.9991265
+      },
+      {
+        "Text": " ",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.58684576
+      },
+      {
+        "Text": "I",
+        "Start": 4,
+        "End": 5,
+        "Confidence": 0.91275954
+      },
+      {
+        "Text": "0",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.87682754
+      },
+      {
+        "Text": "9",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.91059697
+      },
+      {
+        "Text": "5",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.9995944
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.9997273
+      },
+      {
+        "Text": "I",
+        "Start": 4,
+        "End": 5,
+        "Confidence": 0.9581955
+      },
+      {
+        "Text": "0",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.767808
+      },
+      {
+        "Text": "9",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9441474
+      },
+      {
+        "Text": "5",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.99984396
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0414",
+    "expected": "R-810",
+    "before": "R-810",
+    "after": "R-81O",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "R",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.9997236
+      },
+      {
+        "Text": "-",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9987476
+      },
+      {
+        "Text": "8",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9999647
+      },
+      {
+        "Text": "1",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.99992144
+      },
+      {
+        "Text": "0",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.6570008
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "R",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.99988544
+      },
+      {
+        "Text": "-",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9997634
+      },
+      {
+        "Text": "8",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.99998283
+      },
+      {
+        "Text": "1",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.9999802
+      },
+      {
+        "Text": "O",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.57352984
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0416",
+    "expected": "I1052",
+    "before": "I1052",
+    "after": "I1O52",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.9323994
+      },
+      {
+        "Text": "1",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.999936
+      },
+      {
+        "Text": "0",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.6091485
+      },
+      {
+        "Text": "5",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9995716
+      },
+      {
+        "Text": "2",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.99955255
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.92494947
+      },
+      {
+        "Text": "1",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.9999739
+      },
+      {
+        "Text": "O",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.6068565
+      },
+      {
+        "Text": "5",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.99992967
+      },
+      {
+        "Text": "2",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.9981013
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0436",
+    "expected": "11l66",
+    "before": "1 1 I66",
+    "after": "1 1I66",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.9969201
+      },
+      {
+        "Text": " ",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.51065826
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9998417
+      },
+      {
+        "Text": " ",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.6315512
+      },
+      {
+        "Text": "I",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.7375351
+      },
+      {
+        "Text": "6",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9988256
+      },
+      {
+        "Text": "6",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.97710115
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.9988959
+      },
+      {
+        "Text": " ",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.50731564
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9999279
+      },
+      {
+        "Text": "I",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.6843356
+      },
+      {
+        "Text": "6",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.99752885
+      },
+      {
+        "Text": "6",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.9691655
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0476",
+    "expected": "II150",
+    "before": "II1 50",
+    "after": "II1 5O",
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Start": 0,
+        "End": 1,
+        "Confidence": 0.8329323
+      },
+      {
+        "Text": "I",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.87871253
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9996828
+      },
+      {
+        "Text": " ",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.6737319
+      },
+      {
+        "Text": "5",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.771916
+      },
+      {
+        "Text": "0",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.59044826
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Start": 0,
+        "End": 1,
+        "Confidence": 0.8812516
+      },
+      {
+        "Text": "I",
+        "Start": 2,
+        "End": 4,
+        "Confidence": 0.91020584
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.9998777
+      },
+      {
+        "Text": " ",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.70753646
+      },
+      {
+        "Text": "5",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.9373218
+      },
+      {
+        "Text": "O",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.5112465
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0494",
+    "expected": "993",
+    "before": "q93",
+    "after": "qq3",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "q",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.9386138
+      },
+      {
+        "Text": "9",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.51238656
+      },
+      {
+        "Text": "3",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.9995819
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "q",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.9517342
+      },
+      {
+        "Text": "q",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.4871149
+      },
+      {
+        "Text": "3",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.9993894
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0500",
+    "expected": "0O121",
+    "before": "0O121",
+    "after": "OO121",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.7331682
+      },
+      {
+        "Text": "O",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.69842166
+      },
+      {
+        "Text": "1",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.99994373
+      },
+      {
+        "Text": "2",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.99991107
+      },
+      {
+        "Text": "1",
+        "Start": 19,
+        "End": 20,
+        "Confidence": 0.9997969
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.689306
+      },
+      {
+        "Text": "O",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.9459702
+      },
+      {
+        "Text": "1",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.999984
+      },
+      {
+        "Text": "2",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.99992514
+      },
+      {
+        "Text": "1",
+        "Start": 19,
+        "End": 20,
+        "Confidence": 0.9999443
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0524",
+    "expected": "0Il22",
+    "before": "01I22",
+    "after": "0II22",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.9460903
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.54935735
+      },
+      {
+        "Text": "I",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.62140936
+      },
+      {
+        "Text": "2",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.9998964
+      },
+      {
+        "Text": "2",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.99990046
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.8611337
+      },
+      {
+        "Text": "I",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.47326654
+      },
+      {
+        "Text": "I",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.70084
+      },
+      {
+        "Text": "2",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.9998698
+      },
+      {
+        "Text": "2",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.9998951
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0532",
+    "expected": "01l98",
+    "before": "01I98",
+    "after": "O1I98",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.6232437
+      },
+      {
+        "Text": "1",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.9999807
+      },
+      {
+        "Text": "I",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.8785265
+      },
+      {
+        "Text": "9",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.9167718
+      },
+      {
+        "Text": "8",
+        "Start": 16,
+        "End": 17,
+        "Confidence": 0.99990356
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.7752316
+      },
+      {
+        "Text": "1",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.99999094
+      },
+      {
+        "Text": "I",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.95189595
+      },
+      {
+        "Text": "9",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.9208419
+      },
+      {
+        "Text": "8",
+        "Start": 16,
+        "End": 17,
+        "Confidence": 0.99989605
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0546",
+    "expected": "Rm-750",
+    "before": "Rm-750",
+    "after": "Rm-75O",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "R",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.99975795
+      },
+      {
+        "Text": "m",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.9998497
+      },
+      {
+        "Text": "-",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9993742
+      },
+      {
+        "Text": "7",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.99932706
+      },
+      {
+        "Text": "5",
+        "Start": 18,
+        "End": 19,
+        "Confidence": 0.9999007
+      },
+      {
+        "Text": "0",
+        "Start": 22,
+        "End": 23,
+        "Confidence": 0.69215184
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "R",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.99991095
+      },
+      {
+        "Text": "m",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.9999281
+      },
+      {
+        "Text": "-",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9997749
+      },
+      {
+        "Text": "7",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.9999064
+      },
+      {
+        "Text": "5",
+        "Start": 18,
+        "End": 19,
+        "Confidence": 0.9999832
+      },
+      {
+        "Text": "O",
+        "Start": 22,
+        "End": 23,
+        "Confidence": 0.6664634
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0552",
+    "expected": "l1O90",
+    "before": "I1O90",
+    "after": "I1O9O",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.8500898
+      },
+      {
+        "Text": "1",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.9986117
+      },
+      {
+        "Text": "O",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.7766331
+      },
+      {
+        "Text": "9",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.7723248
+      },
+      {
+        "Text": "0",
+        "Start": 16,
+        "End": 17,
+        "Confidence": 0.5931079
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.78496695
+      },
+      {
+        "Text": "1",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.99934524
+      },
+      {
+        "Text": "O",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9380068
+      },
+      {
+        "Text": "9",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.82729423
+      },
+      {
+        "Text": "O",
+        "Start": 16,
+        "End": 17,
+        "Confidence": 0.64002556
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0560",
+    "expected": "I1077",
+    "before": "I1077",
+    "after": "I1O77",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.88670725
+      },
+      {
+        "Text": "1",
+        "Start": 4,
+        "End": 5,
+        "Confidence": 0.99962604
+      },
+      {
+        "Text": "0",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.5756665
+      },
+      {
+        "Text": "7",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.99932337
+      },
+      {
+        "Text": "7",
+        "Start": 16,
+        "End": 17,
+        "Confidence": 0.9992286
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.8538185
+      },
+      {
+        "Text": "1",
+        "Start": 4,
+        "End": 5,
+        "Confidence": 0.9997763
+      },
+      {
+        "Text": "O",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.7637842
+      },
+      {
+        "Text": "7",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.99971575
+      },
+      {
+        "Text": "7",
+        "Start": 16,
+        "End": 17,
+        "Confidence": 0.9996213
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0564",
+    "expected": "01138",
+    "before": "01138",
+    "after": "O1138",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.77874374
+      },
+      {
+        "Text": "1",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.9999502
+      },
+      {
+        "Text": "1",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.9999293
+      },
+      {
+        "Text": "3",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.99670875
+      },
+      {
+        "Text": "8",
+        "Start": 18,
+        "End": 19,
+        "Confidence": 0.9999033
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.6555975
+      },
+      {
+        "Text": "1",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.9999814
+      },
+      {
+        "Text": "1",
+        "Start": 10,
+        "End": 11,
+        "Confidence": 0.99997485
+      },
+      {
+        "Text": "3",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.99884474
+      },
+      {
+        "Text": "8",
+        "Start": 18,
+        "End": 19,
+        "Confidence": 0.9999018
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0576",
+    "expected": "10133",
+    "before": "10133",
+    "after": "1O133",
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.9981623
+      },
+      {
+        "Text": "0",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.8065241
+      },
+      {
+        "Text": "1",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.99899405
+      },
+      {
+        "Text": "3",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.99983335
+      },
+      {
+        "Text": "3",
+        "Start": 18,
+        "End": 19,
+        "Confidence": 0.9999162
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "1",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.9995957
+      },
+      {
+        "Text": "O",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.55770826
+      },
+      {
+        "Text": "1",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.9997278
+      },
+      {
+        "Text": "3",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.9999471
+      },
+      {
+        "Text": "3",
+        "Start": 18,
+        "End": 19,
+        "Confidence": 0.99995446
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0585",
+    "expected": "I0l34",
+    "before": "I0134",
+    "after": "I0l34",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.99378854
+      },
+      {
+        "Text": "0",
+        "Start": 4,
+        "End": 5,
+        "Confidence": 0.99992645
+      },
+      {
+        "Text": "1",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.5215588
+      },
+      {
+        "Text": "3",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.9998851
+      },
+      {
+        "Text": "4",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.99651164
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.9989967
+      },
+      {
+        "Text": "0",
+        "Start": 4,
+        "End": 5,
+        "Confidence": 0.99997795
+      },
+      {
+        "Text": "l",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.8423367
+      },
+      {
+        "Text": "3",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.99993575
+      },
+      {
+        "Text": "4",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.9989827
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0621",
+    "expected": "IOl85",
+    "before": "I0l85",
+    "after": "IOl85",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.9935595
+      },
+      {
+        "Text": "0",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.55593306
+      },
+      {
+        "Text": "l",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.69607896
+      },
+      {
+        "Text": "8",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.997264
+      },
+      {
+        "Text": "5",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.9999467
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.99877197
+      },
+      {
+        "Text": "O",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.87344587
+      },
+      {
+        "Text": "l",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9137724
+      },
+      {
+        "Text": "8",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.99914134
+      },
+      {
+        "Text": "5",
+        "Start": 14,
+        "End": 15,
+        "Confidence": 0.99998283
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0625",
+    "expected": "Ill73",
+    "before": "Il173",
+    "after": "Ill73",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "I",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.9919002
+      },
+      {
+        "Text": "l",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.98294616
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.78731525
+      },
+      {
+        "Text": "7",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9996557
+      },
+      {
+        "Text": "3",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.9978327
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "I",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.9970186
+      },
+      {
+        "Text": "l",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.9951507
+      },
+      {
+        "Text": "l",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.51750904
+      },
+      {
+        "Text": "7",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9999062
+      },
+      {
+        "Text": "3",
+        "Start": 11,
+        "End": 12,
+        "Confidence": 0.99828964
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0657",
+    "expected": "OOO48",
+    "before": "O0O48",
+    "after": "OOO48",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.63410944
+      },
+      {
+        "Text": "0",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.5176349
+      },
+      {
+        "Text": "O",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.5722207
+      },
+      {
+        "Text": "4",
+        "Start": 16,
+        "End": 17,
+        "Confidence": 0.9763098
+      },
+      {
+        "Text": "8",
+        "Start": 20,
+        "End": 21,
+        "Confidence": 0.9999471
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.86953557
+      },
+      {
+        "Text": "O",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.7660671
+      },
+      {
+        "Text": "O",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.85939026
+      },
+      {
+        "Text": "4",
+        "Start": 16,
+        "End": 17,
+        "Confidence": 0.99716765
+      },
+      {
+        "Text": "8",
+        "Start": 20,
+        "End": 21,
+        "Confidence": 0.9999672
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0693",
+    "expected": "0l072",
+    "before": "01072",
+    "after": "0l072",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.99897885
+      },
+      {
+        "Text": "1",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.64961046
+      },
+      {
+        "Text": "0",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9995148
+      },
+      {
+        "Text": "7",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.9990282
+      },
+      {
+        "Text": "2",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.99993765
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "0",
+        "Start": 2,
+        "End": 3,
+        "Confidence": 0.99948704
+      },
+      {
+        "Text": "l",
+        "Start": 5,
+        "End": 6,
+        "Confidence": 0.58561987
+      },
+      {
+        "Text": "0",
+        "Start": 8,
+        "End": 9,
+        "Confidence": 0.9998229
+      },
+      {
+        "Text": "7",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.99976784
+      },
+      {
+        "Text": "2",
+        "Start": 15,
+        "End": 16,
+        "Confidence": 0.99998045
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0709",
+    "expected": "llO77",
+    "before": "l1077",
+    "after": "llO77",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "l",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.76842964
+      },
+      {
+        "Text": "1",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.53094494
+      },
+      {
+        "Text": "0",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.54034865
+      },
+      {
+        "Text": "7",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.9993067
+      },
+      {
+        "Text": "7",
+        "Start": 16,
+        "End": 17,
+        "Confidence": 0.9996306
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.93094134
+      },
+      {
+        "Text": "l",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.7945752
+      },
+      {
+        "Text": "O",
+        "Start": 7,
+        "End": 8,
+        "Confidence": 0.8174363
+      },
+      {
+        "Text": "7",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.9998516
+      },
+      {
+        "Text": "7",
+        "Start": 16,
+        "End": 17,
+        "Confidence": 0.9998987
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0757",
+    "expected": "llI51",
+    "before": "l1I51",
+    "after": "llI51",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "l",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.76951265
+      },
+      {
+        "Text": "1",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.5151977
+      },
+      {
+        "Text": "I",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.8581251
+      },
+      {
+        "Text": "5",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.99987996
+      },
+      {
+        "Text": "1",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.99995553
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "l",
+        "Start": 1,
+        "End": 2,
+        "Confidence": 0.92062837
+      },
+      {
+        "Text": "l",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.7232196
+      },
+      {
+        "Text": "I",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.9730747
+      },
+      {
+        "Text": "5",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.99997437
+      },
+      {
+        "Text": "1",
+        "Start": 13,
+        "End": 14,
+        "Confidence": 0.9999802
+      }
+    ]
+  },
+  {
+    "route": "deployed-trained-english-v5",
+    "id": "code-0761",
+    "expected": "OIl54",
+    "before": "OI154",
+    "after": "OIl54",
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 26,
+    "beforePieces": [
+      {
+        "Text": "O",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.6195802
+      },
+      {
+        "Text": "I",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.96332455
+      },
+      {
+        "Text": "1",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.68784523
+      },
+      {
+        "Text": "5",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.99984
+      },
+      {
+        "Text": "4",
+        "Start": 16,
+        "End": 17,
+        "Confidence": 0.9981165
+      }
+    ],
+    "afterPieces": [
+      {
+        "Text": "O",
+        "Start": 3,
+        "End": 4,
+        "Confidence": 0.89244545
+      },
+      {
+        "Text": "I",
+        "Start": 6,
+        "End": 7,
+        "Confidence": 0.9931958
+      },
+      {
+        "Text": "l",
+        "Start": 9,
+        "End": 10,
+        "Confidence": 0.6850229
+      },
+      {
+        "Text": "5",
+        "Start": 12,
+        "End": 13,
+        "Confidence": 0.9999645
+      },
+      {
+        "Text": "4",
+        "Start": 16,
+        "End": 17,
+        "Confidence": 0.99968016
+      }
+    ]
+  }
+]

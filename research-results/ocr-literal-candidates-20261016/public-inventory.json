@@ -1,0 +1,60 @@
+{
+  "files": [
+    {
+      "file": "Baseline.cs",
+      "bytes": 2020,
+      "sha256": "df43bc61ccad4618ac181a0a6d1a0d32c7aab7a10105f9940b30f548d4799651"
+    },
+    {
+      "file": "as-run-source/src/Takupoke.Core/Recovery/RecoveryCodeCandidates.cs",
+      "bytes": 2303,
+      "sha256": "c85a7af03f9d5fac0f1d874872638bfd52e21c77b4a246d6589ca109edfe8c1f"
+    },
+    {
+      "file": "curation-manifest.json",
+      "bytes": 3446,
+      "sha256": "e04ccb16e61021bdf8209aef69652e4ce6cd415f9f0a60a001d779f14d53c5d6"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 1927,
+      "sha256": "5f090b9ec7c4e6f1d2d42d6c64f39347579cd773f9a38663fb92f45d982b36df"
+    },
+    {
+      "file": "inputs.json",
+      "bytes": 58680,
+      "sha256": "254e80505740b28b643b235197f3088695f4772667d1e688b3dbe64dcf047852"
+    },
+    {
+      "file": "raw.jsonl.gz",
+      "bytes": 4602,
+      "sha256": "8c731a11b9ee90e011e779a1f3bedfde5def3c0e435b77e4b10610a3266fbd2d"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 162,
+      "sha256": "7a4a9f2b0a592a402dd70d9391dcf12f3bc210a290e9e3b680b646b562a549a2"
+    },
+    {
+      "file": "report.json",
+      "bytes": 1413,
+      "sha256": "eedbcab01da67f5fabe61cb5a4e8667776c5d0056d95da8857f1a1519848b69d"
+    },
+    {
+      "file": "roster.json",
+      "bytes": 7127,
+      "sha256": "db9b4a5d5cbc688e6c5616ef394d400f6a36c6fc64f31308d05750141b6b4b41"
+    },
+    {
+      "file": "stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "scope": "All curated records and source snapshots before the explanatory README. No private user documents."
+}

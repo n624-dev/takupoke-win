@@ -22,7 +22,9 @@ Wrong accepted13→7; negative accepted11→11, including cut/damaged images. Fr
 [Full training/fresh/fidelity report and retained failures](../../research-results/ocr-synthetic-training-20261013/ascii-english-v5-confusion-v2/README.md).
 These are crop results, not complete-document or real-school accuracy.
 
-Publication of these bytes does not itself activate them in the application. Actual application routing and full-document
-validation are separate. Metadata's inactive status describes the original research handoff.
+**Not selected as the product default.** Actual manual-capture routing stayed292/384 exact,
+but character edits worsened106→123 and high-score errors24→36. The application retains v1.
+[Paired application routing and every regression](../../research-results/ocr-model-routing-20261016/README.md).
+Metadata's inactive status describes the original research handoff and remains applicable.
 The standard ONNX/dictionary can also be evaluated on iOS with a compatible runtime.
 CoreML conversion and iPhone execution are unverified; iOS source has not been edited.

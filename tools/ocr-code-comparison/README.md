@@ -39,3 +39,17 @@ PythonはPillow 12.3.0、.NETは10を使用した。字体は固定したGoogle 
 `python compare_manual.py --study /path/to/study`で通常経路の同一性・改善・退行・低スコアによる追加確認を採点する。
 低confidenceの選択を、confidenceの昇格や自動採用とは扱わない。
 [2026-10-16の結果](../../research-results/ocr-manual-capture-20261016/README.md)。
+
+`--literal-prefix 仮設室`は、日本語部分を含む文字列全体を生成・採点する。切り出しには正解を渡さず、
+同じ実製品の原画像白帯処理を使う。[末尾比較とWindows帳票全体](../../research-results/ocr-manual-tail-20261016/README.md)。
+`compare_model_routes.py --study /path/to/study`は選定済み候補モデルと旧モデルの実経路を比較する。
+[v2を既定へ切り替えなかった結果](../../research-results/ocr-model-routing-20261016/README.md)。
+
+```sh
+python tools/ocr-code-comparison/review_literals.py --study /path/to/closed-tail-study --output /path/to/new-literal-review --dotnet /path/to/dotnet
+```
+
+`review_literals.py`は閉じた架空OCRの文字列と事後固定した参照表だけを使う。再認識しない。
+旧関数は固定コミット469e499のsourceをクラス名だけ変更して比較readerへ含める。
+日本語付き候補の網羅率・誤誘導を測り、OCR正解率や人による訂正済み数へ加算しない。
+[候補比較](../../research-results/ocr-literal-candidates-20261016/README.md)。
