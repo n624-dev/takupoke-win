@@ -774,7 +774,10 @@ internal static partial class Program
             var search = Find("link-search");
             if (search is null) return false;
             var edit = search.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit)) ?? search;
-            var value = (ValuePattern)edit.GetCurrentPattern(ValuePattern.Pattern);
+            // A rebuilding AutoSuggestBox can be present before its edit
+            // provider supports input. Retry the same input/results check.
+            if (!edit.Current.IsEnabled || !edit.TryGetCurrentPattern(ValuePattern.Pattern, out var pattern)) return false;
+            var value = (ValuePattern)pattern;
             if (value.Current.Value != query) { value.SetValue(query); return false; }
             // Observe input and filtering together; a page rebuild between
             // separate waits must not certify input on a detached control.
