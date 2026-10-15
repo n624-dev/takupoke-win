@@ -257,9 +257,11 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         await ReloadAsync(token, notify: false);
         Status = "入力内容を反映した資料全体を確認してから採用してください。";
     }, "原本と入力内容を確認しています。");
-    public Task BeginRecoveryCorrectionAsync(MaterialKind kind, RecoveryPreview preview, RecoveryFieldTarget target) => RunAsync(async token =>
+    public Task BeginRecoveryCorrectionAsync(MaterialKind kind, RecoveryPreview preview, RecoveryFieldTarget target)
+        => BeginRecoveryCorrectionsAsync(kind, preview, [target]);
+    public Task BeginRecoveryCorrectionsAsync(MaterialKind kind, RecoveryPreview preview, IReadOnlyList<RecoveryFieldTarget> targets) => RunAsync(async token =>
     {
-        await _recovery.BeginCorrectionAsync(kind, preview, target, token);
+        await _recovery.BeginCorrectionsAsync(kind, preview, targets, token);
         await ReloadAsync(token, notify: false);
         Status = "原画像と読み取り文字を照合し、訂正後に資料全体を確認してください。";
     }, "訂正対象の原画像を確認しています。");

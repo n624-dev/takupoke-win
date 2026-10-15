@@ -136,6 +136,7 @@ public sealed partial class MainWindow : Window
         foreach (var control in _operationControls) control.IsEnabled = !_model.Busy && _model.PreferencesReady && !_model.Locked;
         foreach (var control in _preferenceControls) control.IsEnabled = _model.PreferencesReady && !_model.Locked;
         UpdateManualSubmitStatus();
+        _updateRecoveryBatchStatus?.Invoke();
     }
     private void Render()
     {
@@ -176,7 +177,7 @@ public sealed partial class MainWindow : Window
         // TextChanged is queued: retain the current editor text before a
         // snapshot/theme rebuild replaces its control and discards that event.
         if (!pageChanged && _page == "links" && _linkSearch is { } currentSearch) _linkQuery = currentSearch.Text;
-        PageContent.Children.Clear(); _operationControls.Clear(); _preferenceControls.Clear();
+        PageContent.Children.Clear(); _operationControls.Clear(); _preferenceControls.Clear(); _updateRecoveryBatchStatus=null;
         UpdatePageLayout();
         PageContent.Spacing = 24;
         if (_page.StartsWith("material.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var material)) BuildMaterialDetails(material);

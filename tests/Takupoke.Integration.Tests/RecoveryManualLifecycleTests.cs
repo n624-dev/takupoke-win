@@ -12,6 +12,30 @@ namespace Takupoke.Integration.Tests;
 public sealed class RecoveryManualLifecycleTests
 {
     [Fact]
+    public async Task ConfidentFieldsCanBeSelectedAsOneBoundedBatchWithoutWritingEarly()
+    {
+        await using var c = await Context.CreateAsync(fields:0,manualSchemaVersion:3);
+        var original = Assert.IsType<RecoveryPreview>((await c.Coordinator.PrepareAsync(MaterialKind.Timetable,2032)).Preview);
+        var targets=original.Document.Cells.Where(cell => cell.LessonBindings.Count>0).SelectMany(cell =>
+            Enumerable.Range(0,cell.LessonBindings.Count).SelectMany(i => new[] {
+                new RecoveryFieldTarget(cell.Id,i,RecoveryFieldRole.Subject),new RecoveryFieldTarget(cell.Id,i,RecoveryFieldRole.Teacher),
+                new RecoveryFieldTarget(cell.Id,i,RecoveryFieldRole.Room) })).Take(4).ToArray();
+        await Assert.ThrowsAsync<InvalidDataException>(() => c.Coordinator.BeginCorrectionsAsync(MaterialKind.Timetable,original,[]));
+        await Assert.ThrowsAsync<InvalidDataException>(() => c.Coordinator.BeginCorrectionsAsync(MaterialKind.Timetable,original,[targets[0],targets[0]]));
+        await Assert.ThrowsAsync<InvalidDataException>(() => c.Coordinator.BeginCorrectionsAsync(MaterialKind.Timetable,original,Enumerable.Repeat(targets[0],129).ToArray()));
+        var session=await c.Coordinator.BeginCorrectionsAsync(MaterialKind.Timetable,original,targets);
+        Assert.Equal(4,session.Plan.Targets.Count); Assert.Equal(targets,session.Plan.RequestedTargets);
+        Assert.All(session.Plan.Targets,t => Assert.All(t.OriginalParentIds,id =>
+            Assert.Equal(.95,session.Plan.Document.Sources.Single(s => s.Id==id).NativeConfidence)));
+        await c.AssertLastGoodAsync();
+        var preview=await c.Coordinator.CompleteManualAsync(MaterialKind.Timetable,session,c.Values(session));
+        Assert.Equal(4,preview.Result.HumanCorrections!.Count); await c.AssertLastGoodAsync();
+        await c.Coordinator.AdoptAsync(MaterialKind.Timetable,preview); await c.RestartAsync();
+        var saved=Assert.IsType<MaterialAnalysis>(await c.Store.ReadAsync<MaterialAnalysis>(c.Lease,"analysis.Timetable"));
+        Assert.Equal(4,saved.Recovery!.Result.HumanCorrections!.Count); Assert.True(RecoveryAnalysisConverter.MayDisplay(saved));
+    }
+
+    [Fact]
     public async Task FourNewContractEditsSurvivePendingRestartAndExplicitAdoption()
     {
         await using var c = await Context.CreateAsync(fields: 4, manualSchemaVersion: 3);
@@ -259,7 +283,8 @@ public sealed class RecoveryManualLifecycleTests
                 token.ThrowIfCancellationRequested(); var doc = RecoveryManualAssistanceTests.Captured(_fields);
                 doc = doc with { PdfHash = hash, Capture = _completeCapture ? doc.Capture! with { PdfHash = hash } : null };
                 if (_manualSchemaVersion == 3 && doc.Capture is not null)
-                    doc = RecoveryManualReviewBudgetTests.CaptureRequested(doc, manualSchemaVersion: 3);
+                    doc = _fields>0 ? RecoveryManualReviewBudgetTests.CaptureRequested(doc, manualSchemaVersion: 3)
+                        : doc with { Capture=doc.Capture with { ManualSchemaVersion=3 } };
                 return Task.FromResult(doc);
             }, _ => Task.FromResult<IReadOnlyList<ILocalRecoveryProvider>>([]), _clock,
                 captureForReview: (_, document, selected, token) => {

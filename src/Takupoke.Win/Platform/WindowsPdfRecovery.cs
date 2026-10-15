@@ -107,7 +107,9 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
             for (uint i = 0; i < pdf.PageCount; i++)
             {
                 token.ThrowIfCancellationRequested(); using var page = pdf.GetPage(i); using var image = new InMemoryRandomAccessStream();
-                var width = (uint)Math.Clamp(Math.Round(page.Size.Width * 2), 640, 2400); var height = (uint)Math.Round(page.Size.Height / page.Size.Width * width);
+                // PdfPage.Size uses 96-DPI DIPs, not 72-DPI PDF points.
+                // 1.5 pixels per DIP gives the intended 144-DPI OCR raster.
+                var width = (uint)Math.Clamp(Math.Round(page.Size.Width * 1.5), 640, 2400); var height = (uint)Math.Round(page.Size.Height / page.Size.Width * width);
                 if (height > 3200) { width = (uint)Math.Round(width * 3200d / height); height = 3200; }
                 await page.RenderToStreamAsync(image, new PdfPageRenderOptions { DestinationWidth = width, DestinationHeight = height,
                     BitmapEncoderId = BitmapEncoder.PngEncoderId }).AsTask(token);

@@ -240,6 +240,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
     // Opt-in local diagnostics only. No allocation/logging when unset; an
     // observer never supplies recognition values or bypasses safety guards.
     internal Action<OcrRecognitionObservation>? RecognitionObserver { get; set; }
+    internal Action<IReadOnlyList<RecoveryBox>>? DetectionObserver { get; set; }
     public OnnxJapaneseOcr(string detector, string recognizer, string dictionary,
         int dictionarySymbols = 18385, string? asciiModel = null, string? asciiDictionary = null, bool frameOriginalInk = false)
     {
@@ -295,6 +296,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
         // Complete ORIGINAL connected ink support before recognizer input.
         // Coverage and CTC geometry use this same crop, never a coverage-only
         // enlarged rectangle that could conceal omitted disconnected text.
+        DetectionObserver?.Invoke(boxes.AsReadOnly());
         var recognitionBoxes = OcrCropCompleteness.Complete(image, boxes, token);
         IReadOnlyList<PdfRule> rules = [];
         if (_frameOriginalInk || _ascii is not null) rules = image.Rules(token);

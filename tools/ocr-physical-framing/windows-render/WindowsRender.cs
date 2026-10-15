@@ -35,8 +35,8 @@ foreach (var item in manifest["documents"]!.AsArray())
     for (uint i = 0; i < pdf.PageCount; i++)
     {
         token.ThrowIfCancellationRequested(); using var page = pdf.GetPage(i); using var image = new InMemoryRandomAccessStream();
-        // Same dimensions and colour/alpha choices as WindowsPdfRecovery.
-        var width = (uint)Math.Clamp(Math.Round(page.Size.Width * 2), 640, 2400);
+        // PdfPage.Size is in 96-DPI DIPs. Match production's 144-DPI raster.
+        var width = (uint)Math.Clamp(Math.Round(page.Size.Width * 1.5), 640, 2400);
         var height = (uint)Math.Round(page.Size.Height / page.Size.Width * width);
         if (height > 3200) { width = (uint)Math.Round(width * 3200d / height); height = 3200; }
         await page.RenderToStreamAsync(image, new PdfPageRenderOptions { DestinationWidth = width, DestinationHeight = height,

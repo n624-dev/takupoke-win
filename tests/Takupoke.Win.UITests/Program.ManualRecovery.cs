@@ -207,6 +207,54 @@ internal static partial class Program
             "Read-only header review persists after native restart");
         Console.WriteLine("Native read-only header review: original pixels, explicit acknowledgement, unchanged text/score, adoption and restart passed.");
     }
+    private static async Task SeedBatchRecoveryPreviewAsync(string root)
+    {
+        var session=await SeedManualRecoveryUiAsync(root,1);
+        var target=session.Plan.Targets.Single();
+        var correction=new RecoveryHumanCorrection(target.Target,session.Plan.Document.PdfHash,
+            RecoveryValidator.Fingerprint(session.Plan.Document.Capture),session.Plan.DocumentSnapshot,
+            target.OriginalParentIds,target.Page,target.Crop,target.OriginalOcr,false,DateTimeOffset.UtcNow);
+        var result=RecoveryManualAssistance.Complete(session.Plan,[correction],"native-ui-control");
+        await using var store=new SchoolDataStore(root,new WindowsDpapiProtector());
+        var source=(await store.ReadAsync<SourceRecord>(session.Lease,"selection.Timetable"))!;
+        var job=(await store.ReadAsync<RecoveryJob>(session.Lease,"recovery.Timetable"))!;
+        await store.SaveRecoveryProgressAsync(session.Lease,source,job with {
+            State=RecoveryJobState.AwaitingConfirmation,ManualPlan=null,ResultHash=RecoveryValidator.Fingerprint(result) },
+            new RecoveryPreview(source.Id,session.Lease,session.Plan.Document,result,DateTimeOffset.UtcNow));
+    }
+    private static void CheckBatchRecoveryUi(string executable,string root)
+    {
+        Stop(); SeedBatchRecoveryPreviewAsync(root).GetAwaiter().GetResult();
+        Start(executable);OpenRecoveryUiPreview();
+        var original=RecoveryUiPendingAsync(root).GetAwaiter().GetResult();
+        var cell=original.Document.Cells.First(c => c.LessonBindings.Count>0);
+        var targets=new[] { new RecoveryFieldTarget(cell.Id,0,RecoveryFieldRole.Teacher),new RecoveryFieldTarget(cell.Id,0,RecoveryFieldRole.Room) };
+        Require(!WaitElement("recovery-edit-selected-Timetable").Current.IsEnabled,"Empty batch selection is disabled");
+        foreach(var target in targets) Toggle(WaitElement("recovery-select-"+target.Key));
+        Wait(() => Find("recovery-edit-selected-Timetable")?.Current.IsEnabled==true,"Two selected fields enable one batch review");
+        Invoke("recovery-edit-selected-Timetable");
+        Wait(() => Find("manual-submit-Timetable") is not null,"Batch selection opens original-image review");
+        var plan=RecoveryUiManualPlanAsync(root).GetAwaiter().GetResult();
+        Require(plan.Document.Capture?.ManualSchemaVersion==3 && plan.Targets.Count==3,"Batch retains prior reviewed field and adds both confident fields");
+        foreach(var target in plan.Targets)
+        {
+            if(target.Target.Role!=RecoveryFieldRole.Subject)
+            {
+                ((ValuePattern)WaitElement("manual-value-"+target.Target.Key).GetCurrentPattern(ValuePattern.Pattern)).SetValue("架空まとめ訂正"+target.Target.Role);
+                Wait(() => ((ValuePattern)WaitElement("manual-value-"+target.Target.Key).GetCurrentPattern(ValuePattern.Pattern)).Current.Value=="架空まとめ訂正"+target.Target.Role,
+                    "Batch edit is visible before acknowledgement");
+            }
+            Toggle(WaitElement("manual-ack-"+target.Target.Key));
+        }
+        Wait(() => Find("manual-submit-Timetable")?.Current.IsEnabled==true,"Every batch field is explicitly acknowledged");
+        Invoke("manual-submit-Timetable");Wait(() => Find("adopt-recovery-Timetable") is not null,"Batch result returns to whole-document preview");
+        Invoke("adopt-recovery-Timetable");Wait(() => Find("adopt-recovery-Timetable") is null,"Explicit adoption commits batch values");
+        Stop();Start(executable);
+        var saved=RecoveryUiFormalAsync(root).GetAwaiter().GetResult();
+        Require(saved?.Recovery?.Result.HumanCorrections?.Count==3 && saved.Timetable!.Lessons.Any(l => l.Names.Teacher=="架空まとめ訂正Teacher" && l.Names.Room=="架空まとめ訂正Room"),
+            "Batch values and independent provenance survive native app restart");
+        Console.WriteLine("Native batch correction: selection, previous value, two confident fields, explicit adoption and restart passed.");
+    }
     private static void CheckConfidentRecoveryReviewUi(string root, string previousValue)
     {
         const string subject = "c0:0:Subject", room = "c0:0:Room";

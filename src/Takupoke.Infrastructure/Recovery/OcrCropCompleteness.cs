@@ -62,7 +62,17 @@ internal static class OcrCropCompleteness
             }
             if (textPixels == 0) continue; // Only proven physical rule ink.
             if (conflict || owner == 0 || attachedRule)
-                throw new InvalidDataException("OCR印字の切り出し範囲を一意に確認できません。");
+            {
+                var error = new InvalidDataException("OCR印字の切り出し範囲を一意に確認できません。");
+                error.Data["OcrOwnershipConflict"] = conflict;
+                error.Data["OcrOwnershipSeed"] = owner;
+                error.Data["OcrAttachedRule"] = attachedRule;
+                error.Data["OcrComponentBox"] = new RecoveryBox(left,top,right-left+1,bottom-top+1);
+                error.Data["OcrTextPixelCount"] = textPixels;
+                error.Data["OcrUnmaskedSamples"] = pixels.Where(i => !ruleMask[i]).Take(64)
+                    .Select(i => new { X=i%image.Width,Y=i/image.Width,B=image.Bgra[i*4] }).ToArray();
+                throw error;
+            }
             foreach (var index in pixels) { work.Step(); componentOwners[index] = (short)owner; }
             var original = crops[owner - 1];
             if (left + .5 >= original.X && top + .5 >= original.Y && right + .5 <= original.X + original.Width && bottom + .5 <= original.Y + original.Height) continue;

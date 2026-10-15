@@ -18,6 +18,9 @@ public sealed partial class MainWindow
     private MaterialKind? _manualKind;
     private bool _manualLifecycleBound;
     private Button? _manualSubmitButton;
+    private readonly Dictionary<MaterialKind,(string Identity,HashSet<RecoveryFieldTarget> Targets)> _correctionSelections = [];
+    private bool _selectionLifecycleBound;
+    private Action? _updateRecoveryBatchStatus;
     private void UpdateManualSubmitStatus()
     { if (_manualSubmitButton is { } button) button.IsEnabled = _model.Preferences.UseAiFeatures && _manualInput.Ready && !_model.Busy && !_model.Locked; }
     private void SyncManualInput()
@@ -145,7 +148,7 @@ public sealed partial class MainWindow
         _manualSubmitButton = null;
         TitleText("端末内で読み取った結果", "page-recovery-" + kind);
         Add(IconButton("資料の詳細に戻る", "back", () => OpenPage("material." + kind), "back-recovery"));
-        if (!_model.Preferences.UseAiFeatures) { _manualInput.Clear(); Add(Text("復旧はOFFです。")); return; }
+        if (!_model.Preferences.UseAiFeatures) { _manualInput.Clear(); _correctionSelections.Clear(); Add(Text("復旧はOFFです。")); return; }
         var snapshot = _model.Materials.GetValueOrDefault(kind); var preview = snapshot?.RecoveryPreview;
         if (snapshot?.AcquisitionAttempt?.Failure is not null)
         {
@@ -161,6 +164,22 @@ public sealed partial class MainWindow
             snapshot.RecoveryJob?.State != RecoveryJobState.AwaitingConfirmation || snapshot.RecoveryJob.PdfHash != document.PdfHash ||
             snapshot.RecoveryJob.Kind != document.Kind || snapshot.RecoveryJob.ResultHash != document.ResultHash)
         { Add(Text("確認待ちの結果がありません。PDFが更新された場合は資料の詳細から復旧してください。")); return; }
+        if (!_selectionLifecycleBound)
+        { _selectionLifecycleBound = true; _model.PrivateDataCleared += () => { _correctionSelections.Clear(); _updateRecoveryBatchStatus=null; }; }
+        var selectionIdentity = RecoveryValidator.Fingerprint(new { preview.SourceId,preview.Lease,preview.Document,preview.Result });
+        if (!_correctionSelections.TryGetValue(kind,out var selection) || selection.Identity != selectionIdentity)
+            _correctionSelections[kind] = selection = (selectionIdentity,[]);
+        var selected = selection.Targets;
+        var batch = Button("選択した項目をまとめて照合・訂正", () =>
+            _model.BeginRecoveryCorrectionsAsync(kind,preview,selected.ToArray()),"recovery-edit-selected-"+kind);
+        void UpdateBatch()
+        {
+            batch.Content = $"選択した{selected.Count}項目をまとめて照合・訂正";
+            batch.IsEnabled = selected.Count > 0 && !_model.Busy && !_model.Locked && _model.PreferencesReady && _model.Preferences.UseAiFeatures;
+        }
+        _updateRecoveryBatchStatus=UpdateBatch;
+        UpdateBatch(); Add(batch);
+        Add(SettingsDescription("訂正する項目を選択すると、クラスや曜日をまたいで原画像をまとめて確認できます。"));
         Add(Card(Panel(SettingsSectionTitle("原本を確認してから使用してください"), Text($"{document.SchoolYear}年度 {document.Term} · {AppViewModel.MaterialLabel(kind)}"), Text("表示中のクラスだけでなく、資料全体・全クラスの結果を採用します。採用するまで時間割には反映されません。学校の資料と読み取り結果は外部へ送信されません。"),
             Button("対応する元PDFを確認", () => ShowPdf(kind, false, preview), "recovery-original-" + kind))));
         if (preview.Document.Capture?.ManualSchemaVersion is 2 or 3 && document.ReviewedFieldCount > 0)
@@ -211,6 +230,18 @@ public sealed partial class MainWindow
                     var target = new RecoveryFieldTarget(cell.CellId, index, role);
                     lessonPanel.Children.Add(OperationButton(RecoveryRoleLabel(role) + "を原本と照合・訂正",
                         () => _model.BeginRecoveryCorrectionAsync(kind, preview, target), "recovery-edit-" + target.Key));
+                    var choose = OperationControl(new CheckBox { Content = RecoveryRoleLabel(role)+"をまとめて訂正する項目に追加", IsChecked = selected.Contains(target) });
+                    AutomationProperties.SetAutomationId(choose,"recovery-select-"+target.Key);
+                    choose.Checked += (_,_) => {
+                        if (_correctionSelections.GetValueOrDefault(kind).Identity != selectionIdentity) return;
+                        if (selected.Count >= RecoveryManualAssistance.MaximumReviewFields && !selected.Contains(target)) { choose.IsChecked=false; return; }
+                        selected.Add(target); UpdateBatch();
+                    };
+                    choose.Unchecked += (_,_) => {
+                        if (_correctionSelections.GetValueOrDefault(kind).Identity != selectionIdentity) return;
+                        selected.Remove(target); UpdateBatch();
+                    };
+                    lessonPanel.Children.Add(choose);
                 }
                 if (corrected.Length > 0)
                 {

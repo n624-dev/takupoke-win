@@ -132,9 +132,17 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
         }
         finally { _gate.Release(); }
     }
-    public async Task<RecoveryManualSession> BeginCorrectionAsync(MaterialKind kind, RecoveryPreview preview,
+    public Task<RecoveryManualSession> BeginCorrectionAsync(MaterialKind kind, RecoveryPreview preview,
         RecoveryFieldTarget target, CancellationToken token = default)
+        => BeginCorrectionsAsync(kind, preview, [target], token);
+    public async Task<RecoveryManualSession> BeginCorrectionsAsync(MaterialKind kind, RecoveryPreview preview,
+        IReadOnlyList<RecoveryFieldTarget> targets, CancellationToken token = default)
     {
+        ArgumentNullException.ThrowIfNull(targets);
+        var selected = targets.ToArray();
+        if (selected.Length is < 1 or > RecoveryManualAssistance.MaximumReviewFields ||
+            selected.Any(t => t is null) || selected.Distinct().Count() != selected.Length)
+            throw new InvalidDataException("訂正する項目を1〜128項目選択してください。");
         if (captureForReview is null) throw new InvalidOperationException("原画像の確認経路を利用できません。");
         var permission = aiPermission?.Capture();
         using var operation = CancellationTokenSource.CreateLinkedTokenSource(token, permission?.Token ?? CancellationToken.None);
@@ -162,7 +170,7 @@ public sealed class RecoveryCoordinator(SchoolDataStore store, MaterialCoordinat
                 throw new OperationCanceledException("訂正対象のPDFまたは確認結果が更新されました。");
             if (!RecoveryValidator.Validate(preview.Document, preview.Result, token).CanAdopt)
                 throw new InvalidRecoveryOutputException();
-            var requested = (preview.Result.HumanCorrections ?? []).Select(c => c.Target).Append(target).Distinct().ToArray();
+            var requested = (preview.Result.HumanCorrections ?? []).Select(c => c.Target).Concat(selected).Distinct().ToArray();
             if (RecoveryManualAssistance.CaptureTargets(preview.Document, requested, token) is null)
                 throw new InvalidDataException("この箇所は本文の訂正対象ではありません。");
             var originalScope = RecoveryValidator.Fingerprint(preview.Document);
