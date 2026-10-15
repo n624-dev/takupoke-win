@@ -23,9 +23,9 @@ PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCR�
 
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版0.1.0-dev.10442のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10442)からSetup.exeを取得してください。GitHubでは通常Release・Latestとして公開しています。全機能の確認を終えた正式版ではありません。mainのXLSX行除外・同一行の一括除外と、PDF原文字の描画互換・原画像確認・本文訂正・注記表示を含みます。[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38728635572)全8ジョブ、x64の6導入状態で各989～990 UI項目が通過し、公開6ファイルとZIP内の全同梱ファイルを照合済みです。[統合・検証](documentation/main-integration-20261015.md)・[配布記録](research-results/main-integration-20261015/installer-release-receipt.json)。
+[開発確認版0.1.0-dev.10444のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10444)からSetup.exeを取得してください。通常Release・Latestとして公開しています。正式版ではありません。通常解析・P/R診断・返却表と所属・XLSX確認保持・OCR取得進捗を修正しました。[今回の変更](documentation/ios-followup-20261016.md)・[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38761351598)全8ジョブとx64の6導入状態（各992 UI項目）が成功し、公開6ファイルと両ZIPの全同梱ファイルを照合済みです。[配布記録](research-results/ios-followup-20261016/installer-release-receipt.json)。
 
-1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10442-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10442-arm64-Setup.exe`。
+1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10444-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10444-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
 3. スタートメニューの「たくポケ」から起動します。
 4. OCRを利用する場合は設定の「AI・OCRを使用する」をONにし、モデル管理で約99 MiBの日本語・英数字モデルを取得／更新します。復旧プレビューを原PDFと照合し、必要な欄を訂正してから明示採用してください。
