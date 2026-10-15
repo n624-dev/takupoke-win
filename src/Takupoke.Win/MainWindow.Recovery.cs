@@ -246,10 +246,16 @@ public sealed partial class MainWindow
         TitleText("端末内AIモデル", "page-ai-models"); BackToSettings();
         if (_model.RecoveryModelMessage is { } message) Add(Text(message));
         Add(Text("学校PDF・画像・OCR文字・科目・教員名・復旧結果は外部へ送信しません。モデルファイルの取得にだけインターネットを使用します。"));
-        var ocrAction = _model.OcrModelInstalled ? OperationButton("OCRモデルを削除", _model.DeleteOcrModelAsync, "delete-ocr-model") : OperationButton("日本語OCRモデルをダウンロード", _model.InstallOcrModelAsync, "download-ocr-model");
-        if (!_model.OcrModelInstalled) ocrAction.IsEnabled &= _model.Preferences.UseAiFeatures;
-        Add(Card(Panel(SettingsSectionTitle("日本語OCR"), Text(_model.OcrModelReady ? "確認済みモデルを保存しています。" : _model.OcrModelInstalled ? "保存モデルを利用できません。削除して再取得してください。" : "画像PDF用のモデルは未ダウンロードです。"), Text($"約{WindowsRecoveryModels.OcrBundle.Size / 1024 / 1024} MB · {WindowsRecoveryModels.OcrBundle.License}"),
-            ocrAction)));
+        var ocrActions = Panel();
+        if (!_model.OcrModelReady)
+        {
+            var download = OperationButton(_model.OcrModelInstalled ? "OCRモデルを更新" : "日本語・英数字OCRモデルをダウンロード",
+                _model.InstallOcrModelAsync, "download-ocr-model");
+            download.IsEnabled &= _model.Preferences.UseAiFeatures; ocrActions.Children.Add(download);
+        }
+        if (_model.OcrModelInstalled) ocrActions.Children.Add(OperationButton("OCRモデルを削除", _model.DeleteOcrModelAsync, "delete-ocr-model"));
+        Add(Card(Panel(SettingsSectionTitle("日本語・英数字OCR"), Text(_model.OcrModelReady ? "確認済みモデルを保存しています。" : _model.OcrModelInstalled ? "改善モデルへ更新できます。更新に失敗した場合は保存済みモデルを保持します。" : "画像PDF用のモデルは未ダウンロードです。"), Text($"約{Math.Ceiling(WindowsRecoveryModels.OcrBundle.Size / 1048576d)} MB · {WindowsRecoveryModels.OcrBundle.License}"),
+            ocrActions)));
         if (_model.FoundryModel is { } installed)
             Add(Card(Panel(SettingsSectionTitle("保存した端末内AIモデル"), Text(installed.ModelId),
                 OperationButton("AIモデルを削除", _model.DeleteFoundryModelAsync, "delete-foundry-model"))));

@@ -1,12 +1,14 @@
-PaddlePaddle PP-OCRv5 mobile ONNX models and recognition dictionary
+PaddlePaddle PP-OCRv5 detector, PP-OCRv6 medium Japanese recognizer, and adapted English PP-OCRv5 specialist
 Copyright (c) PaddlePaddle Authors
 Licensed under Apache License, Version 2.0.
 
-The bundled recognition dictionary is derived from the official recognition inference.yml; detector and recognizer weights are downloaded only on explicit user request.
+The bundled Japanese recognition dictionaries are derived from official inference.yml. Model weights and the English dictionary are downloaded only on explicit user request. The English specialist is modified by the takupoke-win project (2026): synthetic font-balanced four-epoch adaptation, added reject head, standard ONNX FP32 export. Training used public fonts and fictional strings, no school data.
 Official sources:
 https://github.com/PaddlePaddle/PaddleOCR
 https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_det_onnx
-https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec_onnx
+https://huggingface.co/PaddlePaddle/PP-OCRv6_medium_rec_onnx
+https://huggingface.co/PaddlePaddle/en_PP-OCRv5_mobile_rec_safetensors
+https://github.com/n624-dev/takupoke-win/tree/5826ffe2f1f2717deaf5ca03e2506996d4b3241c/model-artifacts/ascii-english-v5-font-balanced-v1
 
 
                                  Apache License

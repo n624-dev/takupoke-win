@@ -231,13 +231,21 @@ public sealed class OnnxJapaneseOcr : IDisposable
 {
     private readonly InferenceSession _detector, _recognizer;
     private readonly string[] _dictionary;
+    private readonly int _symbols;
+    private readonly OnnxAsciiOcr? _ascii;
+    private readonly bool _frameOriginalInk;
     public IReadOnlyList<RecoveryBox> RecognizedBoxes { get; private set; } = [];
     public IReadOnlyList<double> NativeConfidences { get; private set; } = [];
+    internal int AsciiRecognitionCalls { get; private set; }
     // Opt-in local diagnostics only. No allocation/logging when unset; an
     // observer never supplies recognition values or bypasses safety guards.
     internal Action<OcrRecognitionObservation>? RecognitionObserver { get; set; }
-    public OnnxJapaneseOcr(string detector, string recognizer, string dictionary)
+    public OnnxJapaneseOcr(string detector, string recognizer, string dictionary,
+        int dictionarySymbols = 18385, string? asciiModel = null, string? asciiDictionary = null, bool frameOriginalInk = false)
     {
+        if (dictionarySymbols is not (18385 or 18710) || (asciiModel is null) != (asciiDictionary is null))
+            throw new InvalidDataException("OCRモデルの構成が不正です。");
+        _symbols = dictionarySymbols; _frameOriginalInk = frameOriginalInk;
         Environment.SetEnvironmentVariable("ORT_TELEMETRY_DISABLED", "1");
         OrtEnv.Instance().DisableTelemetryEvents();
         using var options = new SessionOptions { IntraOpNumThreads = 2, InterOpNumThreads = 1, GraphOptimizationLevel = GraphOptimizationLevel.ORT_ENABLE_ALL, LogSeverityLevel = OrtLoggingLevel.ORT_LOGGING_LEVEL_ERROR };
@@ -246,7 +254,8 @@ public sealed class OnnxJapaneseOcr : IDisposable
         {
             recognizerSession = new(recognizer, options);
             _dictionary = JsonSerializer.Deserialize<string[]>(File.ReadAllBytes(dictionary)) ?? throw new InvalidDataException("OCR辞書がありません。");
-            if (_dictionary.Length != 18385 || _dictionary[0] != "" || _dictionary[^1] != " " || _detector.InputMetadata.Count != 1 || recognizerSession.InputMetadata.Count != 1 || _detector.InputMetadata["x"].Dimensions.Length != 4 || recognizerSession.InputMetadata["x"].Dimensions.Length != 4 || recognizerSession.InputMetadata["x"].Dimensions[1] != 3 || recognizerSession.InputMetadata["x"].Dimensions[2] != 48) throw new InvalidDataException("OCRモデルの形状が一致しません。");
+            if (_dictionary.Length != _symbols || _dictionary[0] != "" || _dictionary[^1] != " " || _detector.InputMetadata.Count != 1 || recognizerSession.InputMetadata.Count != 1 || _detector.InputMetadata["x"].Dimensions.Length != 4 || recognizerSession.InputMetadata["x"].Dimensions.Length != 4 || recognizerSession.InputMetadata["x"].Dimensions[1] != 3 || recognizerSession.InputMetadata["x"].Dimensions[2] != 48) throw new InvalidDataException("OCRモデルの形状が一致しません。");
+            _ascii = asciiModel is not null ? new OnnxAsciiOcr(asciiModel, asciiDictionary!) : null;
             _recognizer = recognizerSession;
         }
         catch { recognizerSession?.Dispose(); _detector.Dispose(); throw; }
@@ -259,7 +268,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
         => ReadCore(image, token, retainUncertain: true);
     private IReadOnlyList<PdfGlyph> ReadCore(RecoveryRaster image, CancellationToken token, bool retainUncertain)
     {
-        RecognizedBoxes = []; NativeConfidences = [];
+        RecognizedBoxes = []; NativeConfidences = []; AsciiRecognitionCalls = 0;
         if (!image.Valid) throw new InvalidDataException("OCR画像のサイズが不正です。");
         var ratio = Math.Min(1, 960d / Math.Max(image.Width, image.Height)); var dw = Math.Max(32, (int)Math.Round(image.Width * ratio / 32) * 32); var dh = Math.Max(32, (int)Math.Round(image.Height * ratio / 32) * 32);
         using var detection = _detector.Run([NamedOnnxValue.CreateFromTensor("x", OcrInputTransform.Detection(image, new(0, 0, image.Width, image.Height), dw, dh, token))]); token.ThrowIfCancellationRequested();
@@ -287,10 +296,20 @@ public sealed class OnnxJapaneseOcr : IDisposable
         // Coverage and CTC geometry use this same crop, never a coverage-only
         // enlarged rectangle that could conceal omitted disconnected text.
         var recognitionBoxes = OcrCropCompleteness.Complete(image, boxes, token);
+        IReadOnlyList<PdfRule> rules = [];
+        if (_frameOriginalInk || _ascii is not null) rules = image.Rules(token);
+        if (_frameOriginalInk)
+        {
+            var frame = new OcrInkCropFrame(image, image.RuleMask(rules, token), token);
+            recognitionBoxes = recognitionBoxes.Select(frame.Restrict).ToArray();
+            if (image.HasUnrecognizedInk(recognitionBoxes, rules, token))
+                throw new InvalidDataException("OCRの原印字を切り出せません。");
+        }
+        var lineCrops = new Dictionary<int, RecoveryBox>();
         var output = new List<PdfGlyph>(); var confidences = new List<double>(); var order = 0; var line = 0;
         foreach (var index in Enumerable.Range(0, recognitionBoxes.Count).OrderBy(i => recognitionBoxes[i].Y).ThenBy(i => recognitionBoxes[i].X))
         {
-            var box = recognitionBoxes[index];
+            var box = recognitionBoxes[index]; lineCrops.Add(line, box);
             token.ThrowIfCancellationRequested(); var input = OcrInputTransform.Recognition(image, box, token);
             VerifyRecognitionWidth(input.InputWidth);
             using var recognition = _recognizer.Run([NamedOnnxValue.CreateFromTensor("x", input.Tensor)]); token.ThrowIfCancellationRequested(); var logits = recognition.First().AsTensor<float>();
@@ -310,19 +329,26 @@ public sealed class OnnxJapaneseOcr : IDisposable
             }
             line++;
         }
-        token.ThrowIfCancellationRequested(); RecognizedBoxes = recognitionBoxes; NativeConfidences = confidences.ToArray(); return output;
+        token.ThrowIfCancellationRequested(); RecognizedBoxes = recognitionBoxes;
+        if (_ascii is not null)
+        {
+            var refined = OcrAsciiRefinement.Refine(image, output, confidences, lineCrops, rules, _ascii, token);
+            NativeConfidences = refined.Confidences; AsciiRecognitionCalls = refined.RecognizerCalls; return refined.Glyphs;
+        }
+        NativeConfidences = confidences.ToArray(); return output;
     }
     public void SmokeTest(CancellationToken token)
     {
         var image = new RecoveryRaster(64, 64, Enumerable.Repeat((byte)255, 64 * 64 * 4).ToArray()); Read(image, token);
         var input = OcrInputTransform.Recognition(image, new(0, 0, 64, 64), token); VerifyRecognitionWidth(input.InputWidth);
         using var output = _recognizer.Run([NamedOnnxValue.CreateFromTensor("x", input.Tensor)]);
-        var logits = output.First().AsTensor<float>(); if (logits.Dimensions.Length != 3 || logits.Dimensions[0] != 1 || logits.Dimensions[1] <= 0 || logits.Dimensions[2] != 18385) throw new InvalidDataException("OCRモデルの出力形状が一致しません。"); token.ThrowIfCancellationRequested();
+        var logits = output.First().AsTensor<float>(); if (logits.Dimensions.Length != 3 || logits.Dimensions[0] != 1 || logits.Dimensions[1] <= 0 || logits.Dimensions[2] != _symbols) throw new InvalidDataException("OCRモデルの出力形状が一致しません。");
+        _ascii?.Read(image, new(0, 0, 64, 64), 0, 0, token); token.ThrowIfCancellationRequested();
     }
     private void VerifyRecognitionWidth(int width)
     {
         var declared = _recognizer.InputMetadata["x"].Dimensions[3];
         if (declared > 0 && declared != width) throw new InvalidDataException("OCR認識モデルの入力幅が一致しません。");
     }
-    public void Dispose() { _detector.Dispose(); _recognizer.Dispose(); }
+    public void Dispose() { _ascii?.Dispose(); _detector.Dispose(); _recognizer.Dispose(); }
 }

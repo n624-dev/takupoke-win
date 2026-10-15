@@ -123,7 +123,7 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                 IReadOnlyList<PdfGlyph>? glyphs = null; IReadOnlyList<RecoveryBox> recognizedBoxes = []; IReadOnlyList<double>? confidences = null;
                 try
                 {
-                    if (TextRecognizer.GetReadyState() == AIFeatureReadyState.Ready)
+                    if (await models.OcrStateAsync(token) is null && TextRecognizer.GetReadyState() == AIFeatureReadyState.Ready)
                     {
                         using var recognizer = await TextRecognizer.CreateAsync().AsTask(token); using var buffer = ImageBuffer.CreateForSoftwareBitmap(bitmap);
                         var recognized = await recognizer.RecognizeTextFromImageAsync(buffer).AsTask(token); var output = new List<PdfGlyph>(); var scores = new List<double>(); var order = 0; var line = 0;
