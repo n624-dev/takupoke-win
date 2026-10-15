@@ -45,6 +45,7 @@ UninstallDisplayIcon={app}\takupoke.exe
 CloseApplications=yes
 RestartApplications=no
 SetupLogging=yes
+ChangesAssociations=yes
 
 [Languages]
 Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"

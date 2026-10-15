@@ -429,6 +429,7 @@ internal static partial class Program
         var previous = existing?.GetValue("") as string;
         using (var command = Registry.CurrentUser.CreateSubKey(commandPath)) command.SetValue("", "\"" + Path.GetFullPath(executable) + "\" \"----ms-protocol:%1\"");
         using (var scheme = Registry.CurrentUser.CreateSubKey(@"Software\Classes\jp.n624.takupoke.win")) scheme.SetValue("URL Protocol", "");
+        SHChangeNotify(0x08000000, 0, 0, 0); // Notify the shell after changing its cached protocol handler.
         try
         {
             File.Delete(tokenRequests); File.Delete(privateRequests);
@@ -514,8 +515,11 @@ internal static partial class Program
             File.Delete(mode); File.Delete(state); File.Delete(Path.Combine(root, "offline-auth-revision.txt"));
             if (previous is not null) { using var command = Registry.CurrentUser.CreateSubKey(commandPath); command.SetValue("", previous); }
             else Registry.CurrentUser.DeleteSubKeyTree(@"Software\Classes\jp.n624.takupoke.win", false);
+            SHChangeNotify(0x08000000, 0, 0, 0);
         }
     }
+    [System.Runtime.InteropServices.DllImport("shell32.dll")]
+    private static extern void SHChangeNotify(uint eventId, uint flags, nint item1, nint item2);
     private static async Task<bool> SavedAuthenticationRevisionsAsync(string root)
     {
         await using var store = new SchoolDataStore(root, new WindowsDpapiProtector()); var lease = await store.BeginAsync();
