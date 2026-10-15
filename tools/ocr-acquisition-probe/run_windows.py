@@ -41,14 +41,14 @@ subprocess.run([sys.executable,str(ROOT/'tools/ocr-whole-model-comparison/prepar
 shutil.move(models,study/'models')
 m=json.loads((study/'inputs.json').read_text())
 dictionary=study/'hybrid-dictionary.json';shutil.copyfile(ROOT/'src/Takupoke.Win/Assets/Recovery/ocr-characters-v6.json',dictionary);m['hybridDictionary']=asset(dictionary)
-spec=json.loads(ROOT/'tools/ocr-whole-model-comparison/candidate.json'.read_text())
+spec=json.loads((ROOT/'tools/ocr-whole-model-comparison/candidate.json').read_text())
 candidate=ROOT/spec['file']
 if candidate.stat().st_size!=spec['bytes'] or sha(candidate)!=spec['sha256']:raise ValueError('Selected candidate does not match frozen model')
 target=study/'candidate-rec.onnx';shutil.copyfile(candidate,target);m['candidateRecognizer']=asset(target)
 write(study/'candidate-model-receipt.json',spec)
 write(study/'inputs.json',m)
 subprocess.run([sys.executable,str(ROOT/'tools/ocr-physical-framing/prepare_pdf.py'),'--manifest',str(study/'inputs.json')],check=True)
-pdf_manifest=json.loads((study/'pdf-inputs.json').read_text());pdf_manifest['sourceScope']='Two consumed regression fonts and two unused fresh fonts/new fictional literals. Lossless PDF containers do not add extra independent samples. Both arms consume identical native Windows-rendered source pages.';write(study/'pdf-inputs.json',pdf_manifest)
+pdf_manifest=json.loads((study/'pdf-inputs.json').read_text());pdf_manifest['sourceScope']='All four font/literal cohorts are consumed from original run38824053198; acquisition diagnosis only. Lossless PDF containers do not add extra independent samples. Both arms consume identical native Windows-rendered source pages.';write(study/'pdf-inputs.json',pdf_manifest)
 subprocess.run([a.dotnet,'build',str(ROOT/'tools/ocr-physical-framing/windows-render/WindowsRender.csproj'),'-c','Release','--nologo'],check=True)
 renderer=ROOT/'tools/ocr-physical-framing/windows-render/bin/Release/net10.0-windows10.0.26100.0/win-x64/WindowsRender.dll'
 sources=[*[p for p in (ROOT/'src/Takupoke.Infrastructure/Recovery').glob('*.cs')],ROOT/'tools/ocr-whole-model-comparison/Read.cs',ROOT/'tools/ocr-whole-model-comparison/Inspect.cs',ROOT/'tools/ocr-whole-model-comparison/run.py',ROOT/'tools/ocr-whole-model-comparison/collect.py',Path(__file__),Path(__file__).with_name('Probe.cs'),Path(__file__).with_name('Probe.csproj'),Path(__file__).with_name('expected-native-pages.json'),ROOT/'tools/ocr-whole-model-comparison/prepare.py',ROOT/'tools/ocr-whole-model-comparison/score.py',ROOT/'tools/ocr-physical-framing/windows-render/WindowsRender.cs']
