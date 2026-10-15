@@ -34,3 +34,6 @@ research-results/windows-system-ocr-scaled-lines-20261014/worker-stdout.txt -tex
 research-results/windows-system-ocr-scaled-lines-20261014/worker-stderr.txt -text
 research-results/windows-system-ocr-japanese-install-20261014/installation-native-console.txt -text whitespace=-blank-at-eol
 research-results/glm-ocr-fp32-clean-lines-20261014/worker-stderr.txt -text whitespace=-blank-at-eol
+
+# Keep closed production observations and frozen sources byte-identical.
+research-results/ocr-production-integration-20261015/** -text whitespace=cr-at-eol

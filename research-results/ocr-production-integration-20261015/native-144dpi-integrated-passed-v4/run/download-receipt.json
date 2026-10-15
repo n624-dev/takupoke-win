@@ -1,0 +1,38 @@
+[
+  {
+    "Path": "det.onnx",
+    "Url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_det_onnx/resolve/e6f4fa85f00e168c862bc462aebca69eef9b3d3d/inference.onnx",
+    "Size": 4826518,
+    "Sha256": "a431985659dc921974177a95adcfbb90fd9e51989a5e04d70d0b75f597b6e61d"
+  },
+  {
+    "Path": "rec.onnx",
+    "Url": "https://huggingface.co/PaddlePaddle/PP-OCRv6_medium_rec_onnx/resolve/50c7eacafc52fa7bcf4194e8cd08e46f8558504b/inference.onnx",
+    "Size": 76554979,
+    "Sha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba"
+  },
+  {
+    "Path": "ascii-rec.onnx",
+    "Url": "https://raw.githubusercontent.com/n624-dev/takupoke-win/5826ffe2f1f2717deaf5ca03e2506996d4b3241c/model-artifacts/ascii-english-v5-font-balanced-v1/model.onnx",
+    "Size": 22183975,
+    "Sha256": "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703"
+  },
+  {
+    "Path": "ascii-dictionary.json",
+    "Url": "https://raw.githubusercontent.com/n624-dev/takupoke-win/5826ffe2f1f2717deaf5ca03e2506996d4b3241c/model-artifacts/ascii-english-v5-font-balanced-v1/dictionary.json",
+    "Size": 3614,
+    "Sha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368"
+  },
+  {
+    "Path": "SawarabiGothic-Regular.ttf",
+    "Url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/sawarabigothic/SawarabiGothic-Regular.ttf",
+    "Size": 1902848,
+    "Sha256": "04f2f9111bb69cb8d3706c27b44879c2c0fac593a11edf5cfe8cec1efc92c789"
+  },
+  {
+    "Path": "SawarabiMincho-Regular.ttf",
+    "Url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/sawarabimincho/SawarabiMincho-Regular.ttf",
+    "Size": 1084300,
+    "Sha256": "86373c619710d1528aac3a4d47ce96834101bb38b057235b39e47b61ba143c6d"
+  }
+]
