@@ -247,10 +247,11 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
         if (await command.ExecuteScalarAsync(token) is not byte[] cipher) throw new InvalidDataException("保存した原本を読み取れません。");
         return _cipher!.Decrypt(cipher, "content:" + id);
     }, token);
-    public Task SaveAnalysisAsync(SchoolLease lease, MaterialAnalysis analysis, CancellationToken token = default, bool authorizeWeekdayCorrection = false) => WithConnectionAsync(lease, async connection =>
+    public Task SaveAnalysisAsync(SchoolLease lease, MaterialAnalysis analysis, CancellationToken token = default, bool authorizeWeekdayCorrection = false, bool authorizeRowSkips = false) => WithConnectionAsync(lease, async connection =>
     {
         var selectionKey = "selection." + analysis.Kind;
         using var transaction = connection.BeginTransaction();
+        SourceRecord source;
         using (var read = connection.CreateCommand())
         {
             read.Transaction = transaction; read.CommandText = "SELECT payload FROM entry WHERE key=$key"; read.Parameters.AddWithValue("$key", selectionKey);
@@ -258,31 +259,44 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
             var bytes = _cipher!.Decrypt(payload, selectionKey);
             try
             {
-                var source = DataCodec.Decode<SourceRecord>(bytes);
+                source = DataCodec.Decode<SourceRecord>(bytes);
                 if (source.Id != analysis.OriginalId || source.Digest != analysis.SourceDigest) throw new OperationCanceledException("解析中に選択資料が変わりました。");
                 if (analysis.DateDerivedWeekdays)
                 {
                     if (analysis.Kind != MaterialKind.Changes || analysis.Changes is not { Count: > 0 } ||
                         (!authorizeWeekdayCorrection && source.WeekdayConsent?.Matches(source, analysis.SchoolYear, analysis.ParserVersion) != true))
                         throw new InvalidDataException("曜日補正の許可を確認できません。");
-                    var updated = DataCodec.Encode(source with { WeekdayConsent = new(source.Digest, analysis.SchoolYear, analysis.ParserVersion) });
+                    source = source with { WeekdayConsent = new(source.Digest, analysis.SchoolYear, analysis.ParserVersion) };
+                    var updated = DataCodec.Encode(source);
                     try
                     {
-                        using var consent = connection.CreateCommand(); consent.Transaction = transaction;
-                        consent.CommandText = "UPDATE entry SET payload=$payload WHERE key=$key";
-                        consent.Parameters.AddWithValue("$key", selectionKey); consent.Parameters.AddWithValue("$payload", _cipher.Encrypt(updated, selectionKey));
-                        await consent.ExecuteNonQueryAsync(token);
+                        using var weekdayWrite = connection.CreateCommand(); weekdayWrite.Transaction = transaction;
+                        weekdayWrite.CommandText = "UPDATE entry SET payload=$payload WHERE key=$key";
+                        weekdayWrite.Parameters.AddWithValue("$key", selectionKey); weekdayWrite.Parameters.AddWithValue("$payload", _cipher.Encrypt(updated, selectionKey));
+                        await weekdayWrite.ExecuteNonQueryAsync(token);
                     }
                     finally { CryptographicOperations.ZeroMemory(updated); }
                 }
             }
             finally { CryptographicOperations.ZeroMemory(bytes); }
         }
-        foreach (var pair in new[]
+        if (analysis.RowSkipConsent is { } consent)
+        {
+            if (!consent.ValidFor(source, analysis.SchoolYear, analysis.ParserVersion)
+                || analysis.Changes is not { Count: > 0 }
+                || !authorizeRowSkips && !consent.SameAs(source.RowSkipConsent))
+                throw new InvalidDataException("行の除外許可と解析元の対応を確認できません。");
+        }
+        else if (source.RowSkipConsent?.ValidFor(source, analysis.SchoolYear, analysis.ParserVersion) == true)
+            throw new InvalidDataException("許可した行の除外を省いた結果は保存できません。");
+        var writes = new List<(string, byte[])>
         {
             ("analysis." + analysis.Kind, DataCodec.Encode(analysis)),
             ("attempt." + analysis.Kind, DataCodec.Encode(new MaterialAttempt(analysis.ParsedAt, null, true, analysis.SourceDigest, analysis.SchoolYear, ParserVersion: analysis.ParserVersion)))
-        })
+        };
+        if (authorizeRowSkips)
+            writes.Add((selectionKey, DataCodec.Encode(source with { RowSkipConsent = analysis.RowSkipConsent })));
+        foreach (var pair in writes)
         {
             try
             {

@@ -25,6 +25,9 @@ Windowsでビルドせずに導入できる開発確認版です。初回正式�
 WebView2 Runtimeが未導入の場合はセットアップがMicrosoftの公式インストーラーを実行します（通信が必要です）。
 
 今回の更新
+- 選択済み資料が同じ場所で更新されたとき、ファイルを選び直さずに最新版を再取得します。
+- 内容が変わらない更新では解析結果と行除外の確認を維持し、内容が変わった場合は再解析します。取得や解析の失敗時は前回正常結果を保持します。
+
 - 文字情報のあるPDFの縁取り文字・色付き背景・罫線・矩形の表示範囲に対応しました。元の文字・字体・位置・字形を照合し、未確認箇所がない場合はOCRなしで通常取り込みします。
 - 部分的な切れや重なりが残るnative文字は、原画像を確認してから採用します。架空のOCRスコアは付けず、見出し・注記は書き換えません。原本の注記もプレビューから開けます。
 - 学年の物理的な所属、短い欄、上下に分かれた授業、既知native試験表の2行形式と全角時刻を改善しました。
@@ -62,10 +65,16 @@ if ($assets.Count -ne 6) { throw 'Unexpected release asset count.' }
 gh release view $tag --repo $repo *> $null
 if ($LASTEXITCODE -eq 0) { throw 'This release version already exists; published assets will not be replaced.' }
 try {
-    gh release create $tag @assets --repo $repo --verify-tag --target $env:GITHUB_SHA --draft --prerelease --title "たくポケ $Version（開発確認版）" --notes-file $notes
+    gh release create $tag @assets --repo $repo --verify-tag --target $env:GITHUB_SHA --draft --prerelease=false --title "たくポケ $Version（開発確認版）" --notes-file $notes
     if ($LASTEXITCODE -ne 0) { throw 'Creating the development release failed.' }
-    gh release edit $tag --repo $repo --draft=false --prerelease --latest=false
+    gh release edit $tag --repo $repo --draft=false --prerelease=false --latest
     if ($LASTEXITCODE -ne 0) { throw 'Publishing the development release failed.' }
+    $publishedJson = gh release view $tag --repo $repo --json isDraft,isPrerelease,targetCommitish
+    if ($LASTEXITCODE -ne 0) { throw 'Reading the published release failed.' }
+    $published = $publishedJson | ConvertFrom-Json
+    if ($published.isDraft -or $published.isPrerelease -or $published.targetCommitish -ne $env:GITHUB_SHA) { throw 'The published release does not match the verified source or normal release status.' }
+    $latestTag = gh api "repos/$repo/releases/latest" --jq '.tag_name'
+    if ($LASTEXITCODE -ne 0 -or $latestTag -ne $tag) { throw 'The published release is not Latest.' }
 } catch {
     $releaseJson = gh release view $tag --repo $repo --json isDraft,body 2>$null
     if ($LASTEXITCODE -eq 0) {

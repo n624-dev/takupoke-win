@@ -7,20 +7,33 @@ using Takupoke.Core;
 
 namespace Takupoke.Infrastructure.Parsing;
 
-public sealed record ChangeTable(IReadOnlyList<IReadOnlyList<string>> Rows, IReadOnlyList<ChangeParseException> Warnings);
-
-public static class XlsxChangeReader
+public static partial class XlsxChangeReader
 {
-    public const int Version = 5;
+    public const int Version = 6;
     private const string SpreadsheetNamespace = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
     private const string RelationshipNamespace = "http://schemas.openxmlformats.org/package/2006/relationships";
     private const string DocumentRelationshipNamespace = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
-    public static IReadOnlyList<ScheduleChange> Parse(byte[] data, int schoolYear, CancellationToken cancellationToken = default, bool dateDerivedWeekdays = false)
+    public static IReadOnlyList<ScheduleChange> Parse(byte[] data, int schoolYear,
+        CancellationToken cancellationToken = default, bool dateDerivedWeekdays = false,
+        IReadOnlySet<int>? skippingRows = null)
     {
         var table = ReadForPreview(data, schoolYear, cancellationToken);
-        if (table.Warnings.FirstOrDefault(w => !dateDerivedWeekdays || !w.CanCorrectWeekday) is { } warning) throw warning;
-        return ChangeNormalizer.Parse(table.Rows, schoolYear, cancellationToken);
+        if (skippingRows is { Count: > 0 })
+        {
+            if (!skippingRows.IsSubsetOf(table.ReviewRows.Select(row => row.Row).ToHashSet()))
+                throw new ChangeParseException(ChangeErrorCode.Unsupported);
+            _ = ChangeNormalizer.Parse(table.WithoutWeekdayOnlyRows(), schoolYear, cancellationToken,
+                allowEmptyPreview: true);
+        }
+        if (table.Warnings.FirstOrDefault(warning =>
+            (warning.Row is null || skippingRows?.Contains(warning.Row.Value) != true)
+            && (!dateDerivedWeekdays || !warning.CanCorrectWeekday)) is { } failure) throw failure;
+        return ChangeNormalizer.Parse(table.Excluding(skippingRows ?? new HashSet<int>()), schoolYear,
+            cancellationToken);
     }
+    public static IReadOnlyList<ScheduleChange> Parse(byte[] data, int schoolYear,
+        CancellationToken cancellationToken, IReadOnlySet<int>? excludedRows) =>
+        Parse(data, schoolYear, cancellationToken, dateDerivedWeekdays: false, skippingRows: excludedRows);
     public static ChangeTable ReadForPreview(byte[] data, int schoolYear, CancellationToken cancellationToken = default)
     {
         try { return Read(data, schoolYear, cancellationToken); }
@@ -122,27 +135,7 @@ public static class XlsxChangeReader
             if (formula.Row < header) { ((List<string>)rows[formula.Row - 1])[formula.Column] = ""; continue; }
             if (formula.Row == header || formula.Column >= headers.Length || headers[formula.Column] is not "曜日" and not "曜") throw new ChangeParseException(ChangeErrorCode.Formula, formula.Row);
         }
-        var weekdayColumns = headers.Select((h, i) => (h, i)).Where(p => p.h is "曜日" or "曜").Select(p => p.i).ToArray();
-        if (weekdayColumns.Length > 1) throw new ChangeParseException(ChangeErrorCode.Headers, header);
-        if (weekdayColumns.Length == 1)
-        {
-            var column = weekdayColumns[0];
-            var weekdayFormulas = formulas.Where(f => f.Row > header && f.Column == column).ToDictionary(f => f.Row);
-            for (var number = header + 1; number <= rows.Count; number++)
-            {
-                token.ThrowIfCancellationRequested();
-                var row = rows[number - 1]; var printed = column < row.Count ? row[column] : "";
-                var hasFormula = weekdayFormulas.TryGetValue(number, out var formula);
-                if (!hasFormula && string.IsNullOrWhiteSpace(printed)) continue;
-                if (dateColumn >= row.Count) throw new ChangeParseException(ChangeErrorCode.Date, number);
-                string date;
-                try { date = ChangeNormalizer.Date(row[dateColumn], schoolYear); }
-                catch (ChangeParseException) { throw new ChangeParseException(ChangeErrorCode.Date, number); }
-                if (hasFormula && !formula.HasCache) warnings.Add(new(ChangeErrorCode.FormulaCache, number));
-                else if (!ChangeNormalizer.WeekdayMatches(printed, date)) warnings.Add(new(ChangeErrorCode.WeekdayMismatch, number)
-                    { PrintedWeekday = printed, CalculatedWeekday = ChangeNormalizer.Weekday(date) });
-            }
-        }
+        CollectWeekdayWarnings(rows, formulas, header, headers, dateColumn, schoolYear, warnings, token);
         foreach (var merge in sheet.GetFirstChild<MergeCells>()?.Elements<MergeCell>() ?? [])
         {
             var bounds = merge.Reference?.Value?.Split(':') ?? [];
@@ -150,7 +143,7 @@ public static class XlsxChangeReader
             var end = Coordinate(bounds[^1]);
             if (end.Row >= header) throw new ChangeParseException(ChangeErrorCode.MergedCells, end.Row);
         }
-        return new(rows, warnings);
+        return new(rows, warnings, ReviewRows(rows, rows[header - 1], warnings));
     }
     private static string RichText(DocumentFormat.OpenXml.OpenXmlElement node)
     {

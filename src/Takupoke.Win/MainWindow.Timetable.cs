@@ -68,9 +68,24 @@ public sealed partial class MainWindow
         var classLabel = "クラス：" + (_model.Preferences.SelectedClasses.Length == 0 ? "未選択" : string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display)));
         var classes = IconButton(classLabel, "people", ChooseClasses, "timetable-classes"); AutomationProperties.SetName(classes, classLabel); classes.HorizontalAlignment = HorizontalAlignment.Stretch; classes.HorizontalContentAlignment = HorizontalAlignment.Left;
         var displayMenu = new MenuFlyout();
+        if (_model.OfflineTest)
+        {
+            displayMenu.Opened += (_, _) => RecordOfflineDisplayLifecycle(opened: true);
+            displayMenu.Closed += (_, _) => RecordOfflineDisplayLifecycle(opened: false);
+        }
         var included = PreferenceControl(new ToggleMenuFlyoutItem { Text = "時間割変更を反映", IsChecked = _model.Preferences.IncludesChanges });
         var requestedIncludesChanges = included.IsChecked;
-        included.Click += async (_, _) => { var enabled = included.IsChecked; if (enabled != requestedIncludesChanges) { requestedIncludesChanges = enabled; await _model.SavePreferencesAsync(current => current with { IncludesChanges = enabled }); } };
+        included.Click += async (_, _) =>
+        {
+            var enabled = included.IsChecked;
+            RecordOfflineDisplayClick(completed: false, selected: enabled);
+            if (enabled != requestedIncludesChanges)
+            {
+                requestedIncludesChanges = enabled;
+                await _model.SavePreferencesAsync(current => current with { IncludesChanges = enabled });
+            }
+            RecordOfflineDisplayClick(completed: true, selected: enabled);
+        };
         var international = PreferenceControl(new ToggleMenuFlyoutItem { Text = "留学生向け授業を表示", IsChecked = _model.Preferences.International });
         var requestedInternational = international.IsChecked;
         international.Click += async (_, _) => { var enabled = international.IsChecked; if (enabled != requestedInternational) { requestedInternational = enabled; await _model.SavePreferencesAsync(current => current with { International = enabled }); } };

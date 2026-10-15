@@ -6,7 +6,7 @@ namespace Takupoke.Infrastructure.Storage;
 
 public readonly record struct SchoolLease(long Generation, SchoolDataPeriod Period);
 public sealed record SourceRecord(string Id, MaterialKind Kind, string Path, string FileIdentity, string OriginalName,
-    string Digest, long ByteCount, DateTimeOffset AcquiredAt, DateTimeOffset LastCheckedAt, DateTimeOffset? SourceModifiedAt)
+    string Digest, long ByteCount, DateTimeOffset AcquiredAt, DateTimeOffset LastCheckedAt, DateTimeOffset? SourceModifiedAt, ChangeRowSkipConsent? RowSkipConsent = null)
 {
     public ChangeWeekdayConsent? WeekdayConsent { get; init; }
 }
@@ -16,7 +16,7 @@ public sealed record ChangeWeekdayConsent(string Digest, int SchoolYear, int Par
 }
 public sealed record MaterialAnalysis(string OriginalId, MaterialKind Kind, int ParserVersion, string SourceDigest,
     string SourceName, DateTimeOffset ParsedAt, int SchoolYear, TimetableAnalysis? Timetable = null,
-    IReadOnlyList<ScheduleChange>? Changes = null, SpecialAnalysis? Special = null, RecoveryAudit? Recovery = null)
+    IReadOnlyList<ScheduleChange>? Changes = null, SpecialAnalysis? Special = null, RecoveryAudit? Recovery = null, ChangeRowSkipConsent? RowSkipConsent = null)
 {
     public bool DateDerivedWeekdays { get; init; }
 }

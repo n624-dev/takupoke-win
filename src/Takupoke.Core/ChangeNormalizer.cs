@@ -7,7 +7,8 @@ namespace Takupoke.Core;
 public enum ChangeErrorCode
 {
     InvalidArchive, Limit, InvalidXml, MissingSheet, Unsupported, Headers, Date, Year, Classes,
-    UnknownAll, Empty, Cancelled, Storage, Formula, FormulaCache, WeekdayMismatch, MergedCells, DateSystem, CellType
+    UnknownAll, Empty, Cancelled, Storage, Formula, FormulaCache, WeekdayMismatch, MergedCells, DateSystem, CellType,
+    WeekdayOnly
 }
 public sealed class ChangeParseException(ChangeErrorCode code, int? row = null) : Exception(MessageFor(code, row))
 {
@@ -16,7 +17,7 @@ public sealed class ChangeParseException(ChangeErrorCode code, int? row = null) 
     public string? PrintedWeekday { get; init; }
     public string? CalculatedWeekday { get; init; }
     public bool CanCorrectWeekday => Code == ChangeErrorCode.WeekdayMismatch && PrintedWeekday is not null && ChangeNormalizer.KnownWeekday(PrintedWeekday) && CalculatedWeekday is not null;
-    public bool PermitsPreview => Code is ChangeErrorCode.FormulaCache or ChangeErrorCode.WeekdayMismatch;
+    public bool PermitsPreview => Code is ChangeErrorCode.FormulaCache or ChangeErrorCode.WeekdayMismatch or ChangeErrorCode.WeekdayOnly;
     private static string MessageFor(ChangeErrorCode code, int? row) => (row is null ? "" : $"{row}行目：") + (code switch
     {
         ChangeErrorCode.MissingSheet => "「時間割変更」シートが見つからないか、重複しています。",
@@ -29,6 +30,7 @@ public sealed class ChangeParseException(ChangeErrorCode code, int? row = null) 
         ChangeErrorCode.Formula => "見出し、または曜日以外の列に数式があります。",
         ChangeErrorCode.FormulaCache => "曜日の計算結果が保存されていません。",
         ChangeErrorCode.WeekdayMismatch => "曜日と月日が一致しないか、曜日の表記を確認できません。",
+        ChangeErrorCode.WeekdayOnly => "曜日だけが残り、変更内容がありません。",
         ChangeErrorCode.MergedCells => "見出しや表の行に結合セルがあります。",
         ChangeErrorCode.DateSystem => "1904年起点の日付を使用するXLSXは未対応です。",
         ChangeErrorCode.CellType => "表に未対応のセル形式やExcelのエラー値があります。",
@@ -121,7 +123,8 @@ public static class ChangeNormalizer
         var weekday = Weekday(normalizedDate);
         return new[] { weekday, weekday + "曜", weekday + "曜日", "(" + weekday + ")" }.Contains(Text(value));
     }
-    public static IReadOnlyList<ScheduleChange> Parse(IReadOnlyList<IReadOnlyList<string>> rows, int? defaultYear, CancellationToken cancellationToken = default)
+    public static IReadOnlyList<ScheduleChange> Parse(IReadOnlyList<IReadOnlyList<string>> rows, int? defaultYear,
+        CancellationToken cancellationToken = default, bool allowEmptyPreview = false)
     {
         if (rows.Count > MaximumRows || rows.Any(r => r.Count > MaximumColumns || r.Any(c => Encoding.UTF8.GetByteCount(c) > 4096))
             || rows.Sum(r => r.Sum(c => (long)Encoding.UTF8.GetByteCount(c))) > MaximumTextBytes) throw new ChangeParseException(ChangeErrorCode.Limit);
@@ -196,7 +199,7 @@ public static class ChangeNormalizer
                 }
             }
         }
-        if (output.Count == 0) throw new ChangeParseException(ChangeErrorCode.Empty);
+        if (output.Count == 0 && !allowEmptyPreview) throw new ChangeParseException(ChangeErrorCode.Empty);
         return output;
     }
 }

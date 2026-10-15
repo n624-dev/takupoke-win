@@ -12,6 +12,9 @@
     <Compile Include="../../src/Takupoke.Win/ViewModels/AppViewModel.cs" Link="AppViewModel.cs" />
     <Compile Include="../../src/Takupoke.Win/Platform/OfflineTestNetwork.cs" Link="OfflineTestNetwork.cs" />
     <None Include="../Takupoke.Core.Tests/fixtures/recovery-exam.json" Link="fixtures/recovery-exam.json" CopyToOutputDirectory="PreserveNewest" />
+    <Compile Include="../../src/Takupoke.Win/Platform/WindowsFileIdentity.cs" Link="Platform/WindowsFileIdentity.cs" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
+    <Compile Remove="WindowsSourceRefreshTests.cs" Condition="!$([MSBuild]::IsOSPlatform('Windows'))" />
+    <Compile Include="../shared/FictionalChangeWorkbook.cs" Link="FictionalChangeWorkbook.cs" />
     <None Include="../Takupoke.Core.Tests/fixtures/ios-parity.json" Link="fixtures/ios-parity.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="fixtures/recovery-historical-v5-vector.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="fixtures/recovery-historical-v6-result.json" CopyToOutputDirectory="PreserveNewest" />

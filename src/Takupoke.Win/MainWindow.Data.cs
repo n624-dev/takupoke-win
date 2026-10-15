@@ -1,9 +1,11 @@
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
 using Takupoke.Core;
 using Takupoke.Core.Recovery;
 using Takupoke.Infrastructure.Api;
 using Takupoke.Infrastructure.Materials;
+using Takupoke.Infrastructure.Parsing;
 using Takupoke.Infrastructure.Parsing;
 using Takupoke.Win.ViewModels;
 
@@ -40,7 +42,7 @@ public sealed partial class MainWindow
                 attempts.Children.Add(SettingsDescription("新しい資料は未反映です。"));
             attempts.Children.Add(DataField("最終解析の試行 · " + DisplayDateTime(attempt.At), attempt.Failure is { } failure
                 ? kind != MaterialKind.Changes ? new PdfParseException(failure, attempt.Page, attempt.Cell).Message : failure : "解析済み"));
-            if (attempt.ChangeError is ChangeErrorCode.FormulaCache or ChangeErrorCode.WeekdayMismatch)
+            if (attempt.ChangeError is ChangeErrorCode.FormulaCache or ChangeErrorCode.WeekdayMismatch or ChangeErrorCode.WeekdayOnly)
                 attempts.Children.Add(Button("警告を確認して内容を見る", PreviewChanges, "preview-changes"));
             if (attempt.ChangeError == ChangeErrorCode.WeekdayMismatch)
                 attempts.Children.Add(Button("日付から曜日を求めて読み込む", CorrectWeekdays, "correct-change-weekdays"));
@@ -78,6 +80,14 @@ public sealed partial class MainWindow
         results.Children.Add(DataField("解析した資料", analysis.SourceName));
         results.Children.Add(DataField("学校年度", analysis.SchoolYear + "年度"));
         results.Children.Add(DataField("件数", count + "件"));
+        if (source is not null && source.RowSkipConsent is { } consent
+            && consent.ValidFor(source, analysis.SchoolYear, MaterialCoordinator.ParserVersion(kind))
+            && consent.SameAs(analysis.RowSkipConsent))
+        {
+            var excluded = Text($"{consent.Rows.Count}行を除外中（{ChangeReviewGroup.DescribeRanges(consent.Rows)}）");
+            AutomationProperties.SetAutomationId(excluded, "change-skipped-count");
+            results.Children.Add(excluded);
+        }
         if (analysis.Timetable is { } timetable) results.Children.Add(DataField("学期", timetable.Term ?? "未確認"));
         if (analysis.Special is { } special)
         {
@@ -96,21 +106,9 @@ public sealed partial class MainWindow
         if (epoch != _model.PrivateEpoch || _model.Locked) return;
         if (!preview.CanCorrectWeekdays) { await Message("曜日を補正できません", "日付と曜日の不一致以外の警告があります。元の資料を確認してください。"); return; }
         var panel = Panel(Text("日付欄を基準に曜日を計算して、時間割変更へ反映します。ファイルの内容が更新されるまで自動的に適用します。"));
-        foreach (var warning in preview.Warnings) panel.Children.Add(Text($"{warning.Row}行目：{warning.PrintedWeekday} → {warning.CalculatedWeekday}曜日"));
+        foreach (var warning in preview.CorrectableWarnings) panel.Children.Add(Text($"{warning.Row}行目：{warning.PrintedWeekday} → {warning.CalculatedWeekday}曜日"));
         if (await Dialog("日付から求めた曜日で読み込む", panel, "この曜日で読み込む", "キャンセル") == ContentDialogResult.Primary && epoch == _model.PrivateEpoch && !_model.Locked)
             await _model.CorrectWeekdaysAsync(preview);
-        panel.Children.Clear();
-    }
-    private async Task PreviewChanges()
-    {
-        if (await Dialog("解析の警告", Text("日付・曜日や数式の保存値を確認できない部分があります。警告を確認して内容を閲覧できます。正常結果の保存や時間割への反映は行いません。"), "確認して表示", "キャンセル") != ContentDialogResult.Primary) return;
-        var epoch = _model.PrivateEpoch;
-        var preview = await _model.PreviewChangesAsync();
-        if (epoch != _model.PrivateEpoch || _model.Locked) return;
-        var panel = Panel(Card(Panel(SettingsSectionTitle("確認用の表示"), Text("閲覧のみです。正常結果の保存や時間割への反映は行いません。"))));
-        foreach (var warning in preview.Warnings) panel.Children.Add(Text(warning.Message));
-        foreach (var change in preview.Changes) panel.Children.Add(Card(Panel(Text(change.BeforeSubject + " → " + change.AfterSubject, 16), SettingsDescription(change.ChangeDate + " · " + ClassSelection.Display(change.DisplayClassName) + " · " + change.DisplayPeriod), Text(change.RawText))));
-        await Dialog("時間割変更のプレビュー", panel);
         panel.Children.Clear();
     }
     private void BuildAccountData()
