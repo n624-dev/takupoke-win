@@ -26,21 +26,26 @@ internal static class OcrAsciiRefinement
                 text.Length > 0 && text.All(c => c <= 127);
             var tailStart = Array.FindLastIndex(native, x => x.g.Text.Any(c => c > 127)) + 1;
             var tail = native.Skip(tailStart).ToArray(); var tailText = string.Concat(tail.Select(x => x.g.Text));
+            // Separately detected room/course codes can have no Japanese prefix.
+            // Route bounded literal alphanumeric/numeric codes; one-digit period
+            // headings, prose and punctuation retain the primary observation.
+            var standaloneCode = !header && tailStart == 0 && text.Length is >= 2 and <= 32 &&
+                text.Any(char.IsAsciiDigit) && text.All(c => char.IsAsciiLetterOrDigit(c) || c is '_' or '-');
             RecoveryBox? tailCrop = null;
             if (!header && tailStart > 0 && tailText.Length is >= 2 and <= 32 && tailText.All(c => c is >= ' ' and <= '~'))
                 tailCrop = OcrWhiteGapPartition.Tail(raster, crop,
                     native.Take(tailStart).Max(x => x.g.X + x.g.Width), tail.Min(x => x.g.X), token);
             var chosen = false;
-            if (header || tailCrop is not null)
+            if (header || standaloneCode || tailCrop is not null)
             {
-                calls++; var observation = ascii.Read(raster, header ? crop : tailCrop!, line, glyphs.Count, token);
+                calls++; var observation = ascii.Read(raster, header || standaloneCode ? crop : tailCrop!, line, glyphs.Count, token);
                 chosen = observation.Pieces.Count > 0 && observation.RejectProbability <= .05f && observation.PaddingSupported &&
                     observation.Text.All(c => c is >= ' ' and <= '~') && (header
                         ? ClassSelection.Candidates.Contains(observation.Text)
-                        : observation.Pieces.All(p => p.Confidence >= .8f) && observation.Text.Length == tailText.Length);
+                        : observation.Pieces.All(p => p.Confidence >= .8f) && observation.Text.Length == (standaloneCode ? text.Length : tailText.Length));
                 if (chosen)
                 {
-                    if (!header) foreach (var (glyph,index) in native.Take(tailStart)) Add(glyph, scores[index]);
+                    if (!header && !standaloneCode) foreach (var (glyph,index) in native.Take(tailStart)) Add(glyph, scores[index]);
                     for (var n = 0; n < observation.Glyphs.Count; n++) Add(observation.Glyphs[n], observation.Pieces[n].Confidence);
                 }
             }

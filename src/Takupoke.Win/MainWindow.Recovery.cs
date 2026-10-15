@@ -104,6 +104,8 @@ public sealed partial class MainWindow
             AutomationProperties.SetAutomationId(image, "manual-crop-" + key);
             AutomationProperties.SetName(image, "原本の訂正対象範囲");
             var cropPanel = Panel(SettingsDescription("原本の訂正対象範囲"), image, Text("自動読取: " + target.OriginalOcr));
+            if (RecoveryCodeReview.Describe(target.OriginalOcr) is { } codeHint)
+                cropPanel.Children.Add(SettingsDescription(codeHint));
             if (target.OriginalLabelIds is { } labelIds)
                 cropPanel.Children.Add(SettingsDescription("原画像の項目の表示（" +
                     string.Concat(labelIds.Select(id => session.Plan.Document.Sources.Single(s => s.Id == id).Text)) +
@@ -125,7 +127,8 @@ public sealed partial class MainWindow
                 comparison.RowDefinitions[1].Height = wide ? new GridLength(0) : GridLength.Auto;
             }
             comparison.SizeChanged += (_, _) => Reflow(); Reflow();
-            var input = OperationControl(new TextBox { Text = _manualInput.Values[key], Header = "PDFに記載された全文", AcceptsReturn = true, TextWrapping = TextWrapping.Wrap, MaxLength = 256 });
+            var input = OperationControl(new TextBox { Text = _manualInput.Values[key], Header = "PDFに記載された全文", AcceptsReturn = true, TextWrapping = TextWrapping.Wrap, MaxLength = 256,
+                FontFamily = new Microsoft.UI.Xaml.Media.FontFamily("Consolas") });
             AutomationProperties.SetAutomationId(input, "manual-value-" + key);
             var acknowledgement = OperationControl(new CheckBox { Content = "原本と一致することを確認", IsChecked = _manualInput.IsAcknowledged(key) });
             AutomationProperties.SetAutomationId(acknowledgement, "manual-ack-" + key);
@@ -170,13 +173,33 @@ public sealed partial class MainWindow
         if (!_correctionSelections.TryGetValue(kind,out var selection) || selection.Identity != selectionIdentity)
             _correctionSelections[kind] = selection = (selectionIdentity,[]);
         var selected = selection.Targets;
+        if (_recoveryClass is null || !document.Classes.Contains(_recoveryClass)) _recoveryClass = document.Classes.FirstOrDefault(c => _model.Preferences.SelectedClasses.Contains(c)) ?? document.Classes[0];
+        var displayedClass = _recoveryClass;
+        var roomTargets = document.RoomTargets(displayedClass);
+        var selectionBoxes = new Dictionary<RecoveryFieldTarget, CheckBox>();
+        Button? selectRooms = null; Button? clearSelection = null;
         var batch = Button("選択した項目をまとめて照合・訂正", () =>
             _model.BeginRecoveryCorrectionsAsync(kind,preview,selected.ToArray()),"recovery-edit-selected-"+kind);
         void UpdateBatch()
         {
+            var enabled = !_model.Busy && !_model.Locked && _model.PreferencesReady && _model.Preferences.UseAiFeatures;
             batch.Content = $"選択した{selected.Count}項目をまとめて照合・訂正";
-            batch.IsEnabled = selected.Count > 0 && !_model.Busy && !_model.Locked && _model.PreferencesReady && _model.Preferences.UseAiFeatures;
+            batch.IsEnabled = selected.Count > 0 && enabled && document.SelectionFits(selected);
+            if (selectRooms is not null) selectRooms.IsEnabled = enabled && roomTargets.Any(t => !selected.Contains(t)) &&
+                document.SelectionFits(selected.Concat(roomTargets));
+            if (clearSelection is not null) clearSelection.IsEnabled = enabled && selected.Count > 0;
         }
+        selectRooms = Button("表示中のクラスの教室欄をまとめて選択", () => {
+            if (_correctionSelections.GetValueOrDefault(kind).Identity != selectionIdentity) return Task.CompletedTask;
+            if (document.SelectRooms(displayedClass, selected))
+                foreach (var (target, box) in selectionBoxes) box.IsChecked = selected.Contains(target);
+            UpdateBatch(); return Task.CompletedTask;
+        }, "recovery-select-rooms-" + kind);
+        clearSelection = Button("項目の選択をすべて解除", () => {
+            if (_correctionSelections.GetValueOrDefault(kind).Identity != selectionIdentity) return Task.CompletedTask;
+            selected.Clear(); foreach (var box in selectionBoxes.Values) box.IsChecked = false;
+            UpdateBatch(); return Task.CompletedTask;
+        }, "recovery-clear-selection-" + kind);
         _updateRecoveryBatchStatus=UpdateBatch;
         UpdateBatch();
         if (document.Cells.Any(c=>c.Lessons.Any(l=>!l.EditableRoles.IsEmpty)))
@@ -209,12 +232,16 @@ public sealed partial class MainWindow
                     Text("前回: " + change.PreviousText), Text("今回: " + change.CurrentText))));
         }
         else Add(SettingsDescription("対応を確認できる前回の正式な結果がないため、変更の比較は表示していません。"));
-        if (_recoveryClass is null || !document.Classes.Contains(_recoveryClass)) _recoveryClass = document.Classes.FirstOrDefault(c => _model.Preferences.SelectedClasses.Contains(c)) ?? document.Classes[0];
         Add(Button("表示するクラス：" + ClassSelection.Display(_recoveryClass), async () =>
         {
             var panel = Panel(); foreach (var cls in document.Classes) panel.Children.Add(Button(ClassSelection.Display(cls), () => { _recoveryClass = cls; _activeDialog?.Hide(); Render(); return Task.CompletedTask; }));
             await Dialog("確認するクラス", panel);
         }, "recovery-class"));
+        if (roomTargets.Length > 0)
+        {
+            Add(selectRooms); Add(clearSelection);
+            Add(SettingsDescription($"表示中のクラスの教室{roomTargets.Length}項目を選択します。確認済みの項目も含め全クラス合計{RecoveryManualAssistance.MaximumReviewFields}項目まで、原画像と照合できます。"));
+        }
         var firstDay = document.Days.Min();
         foreach (var cell in document.Cells.Where(c => c.Slots.Any(s => s.ClassName == _recoveryClass)).OrderBy(c => c.Slots[0].Day).ThenBy(c => c.Slots[0].Period))
         {
@@ -229,6 +256,13 @@ public sealed partial class MainWindow
                 var lesson = cell.Lessons[index];
                 var corrected = document.Corrections.Where(c => c.CellId == cell.CellId && c.LessonIndex == index).ToArray();
                 var lessonPanel = Panel(Text(lesson.Subject + " / " + (lesson.TeacherEmpty ? "教員記載なし" : lesson.Teacher) + " / " + (lesson.RoomEmpty ? "教室記載なし" : lesson.Room)));
+                foreach (var role in lesson.CodeReviewRoles)
+                {
+                    var value = role switch { RecoveryFieldRole.Subject => lesson.Subject, RecoveryFieldRole.Teacher => lesson.Teacher, _ => lesson.Room };
+                    var hint = SettingsDescription(RecoveryRoleLabel(role) + " · " + RecoveryCodeReview.Describe(value));
+                    AutomationProperties.SetAutomationId(hint, "recovery-code-hint-" + new RecoveryFieldTarget(cell.CellId, index, role).Key);
+                    lessonPanel.Children.Add(hint);
+                }
                 foreach (var role in lesson.EditableRoles)
                 {
                     var target = new RecoveryFieldTarget(cell.CellId, index, role);
@@ -236,9 +270,10 @@ public sealed partial class MainWindow
                         () => _model.BeginRecoveryCorrectionAsync(kind, preview, target), "recovery-edit-" + target.Key);
                     var choose = OperationControl(new CheckBox { Content = "まとめて選択", IsChecked = selected.Contains(target) });
                     AutomationProperties.SetAutomationId(choose,"recovery-select-"+target.Key);
+                    selectionBoxes.Add(target, choose);
                     choose.Checked += (_,_) => {
                         if (_correctionSelections.GetValueOrDefault(kind).Identity != selectionIdentity) return;
-                        if (selected.Count >= RecoveryManualAssistance.MaximumReviewFields && !selected.Contains(target)) { choose.IsChecked=false; return; }
+                        if (!document.SelectionFits(selected.Append(target))) { choose.IsChecked=false; return; }
                         selected.Add(target); UpdateBatch();
                     };
                     choose.Unchecked += (_,_) => {

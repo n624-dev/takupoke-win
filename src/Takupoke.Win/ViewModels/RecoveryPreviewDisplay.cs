@@ -16,6 +16,25 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
     public ImmutableArray<RecoveryDisplayChange> PreviousChanges { get; init; } = [];
     public bool PreviousComparable { get; init; }
     public int ReviewedFieldCount { get; init; }
+    public ImmutableArray<RecoveryFieldTarget> ReviewedTargets { get; init; } = [];
+
+    public bool SelectionFits(IEnumerable<RecoveryFieldTarget> targets) =>
+        ReviewedTargets.Concat(targets).Distinct().Count() <= RecoveryManualAssistance.MaximumReviewFields;
+
+    public ImmutableArray<RecoveryFieldTarget> RoomTargets(string className) => Cells
+        .Where(c => c.Slots.Any(s => s.ClassName == className))
+        .SelectMany(c => c.Lessons.Select((lesson, index) => (lesson, index))
+            .Where(x => x.lesson.EditableRoles.Contains(RecoveryFieldRole.Room))
+            .Select(x => new RecoveryFieldTarget(c.CellId, x.index, RecoveryFieldRole.Room)))
+        .Distinct().ToImmutableArray();
+
+    public bool SelectRooms(string className, ISet<RecoveryFieldTarget> selected)
+    {
+        var targets = RoomTargets(className);
+        if (targets.Length == 0 || !SelectionFits(selected.Concat(targets))) return false;
+        foreach (var target in targets) selected.Add(target);
+        return true;
+    }
 
     public static RecoveryPreviewDisplay? Create(RecoveryPreview preview, CancellationToken token,
         MaterialAnalysis? previous = null)
@@ -26,21 +45,28 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
         var ocrIds = document.Sources.Where(s => { token.ThrowIfCancellationRequested(); return s.FromOcr; })
             .Select(s => s.Id).ToHashSet(StringComparer.Ordinal);
         var recovered = preview.Result.Cells.ToDictionary(cell => { token.ThrowIfCancellationRequested(); return cell.CellId; }, StringComparer.Ordinal);
+        var reviewed = (preview.Result.HumanCorrections ?? []).Where(c => c.HeaderProof is null)
+            .Select(c => c.Target).ToHashSet();
         var cells = ImmutableArray.CreateBuilder<RecoveryDisplayCell>(document.Cells.Count);
         foreach (var cell in document.Cells)
         {
             token.ThrowIfCancellationRequested();
             var result = recovered[cell.Id];
             cells.Add(new(cell.Slots.Select(slot => new RecoverySlot(slot.ClassName, slot.Day, slot.Period)).ToImmutableArray(),
-                result.State, result.Lessons.Select((lesson, index) => new RecoveryDisplayLesson(lesson.Subject.Value,
+                result.State, result.Lessons.Select((lesson, index) => {
+                    var fields = new[] { (RecoveryFieldRole.Subject, lesson.Subject),
+                        (RecoveryFieldRole.Teacher, lesson.Teacher), (RecoveryFieldRole.Room, lesson.Room) };
+                    var editable = document.Capture is not null && cell.BindingMode is RecoveryBindingMode.Fixed or RecoveryBindingMode.RoleProposal
+                        ? fields.Where(pair => pair.Item2.Evidence.Any(ocrIds.Contains)).Select(pair => pair.Item1).ToImmutableArray() : [];
+                    return new RecoveryDisplayLesson(lesson.Subject.Value,
                     lesson.Teacher.Value, lesson.Teacher.State == RecoveryValueState.Empty,
                     lesson.Room.Value, lesson.Room.State == RecoveryValueState.Empty) {
-                        EditableRoles = document.Capture is not null && cell.BindingMode is RecoveryBindingMode.Fixed or RecoveryBindingMode.RoleProposal
-                            ? new[] { (RecoveryFieldRole.Subject, lesson.Subject.Evidence),
-                                (RecoveryFieldRole.Teacher, lesson.Teacher.Evidence),
-                                (RecoveryFieldRole.Room, lesson.Room.Evidence) }
-                                .Where(pair => pair.Item2.Any(ocrIds.Contains)).Select(pair => pair.Item1).ToImmutableArray() : []
-                    }).ToImmutableArray()) { CellId = cell.Id });
+                        EditableRoles = editable,
+                        CodeReviewRoles = fields.Where(pair => editable.Contains(pair.Item1) &&
+                            !reviewed.Contains(new(cell.Id, index, pair.Item1)) && RecoveryCodeReview.Describe(pair.Item2.Value) is not null)
+                            .Select(pair => pair.Item1).ToImmutableArray()
+                    };
+                }).ToImmutableArray()) { CellId = cell.Id });
         }
         var display = new RecoveryPreviewDisplay(preview.SourceId, document.PdfHash,
             RecoveryValidator.Fingerprint(preview.Result), document.Kind, document.SchoolYear, document.Term,
@@ -87,6 +113,7 @@ public sealed record RecoveryPreviewDisplay(string SourceId, string PdfHash, str
         }
         token.ThrowIfCancellationRequested();
         return display with { Corrections = corrections, ReviewedFieldCount = preview.Result.HumanCorrections?.Count ?? 0,
+            ReviewedTargets = (preview.Result.HumanCorrections ?? []).Select(c => c.Target).ToImmutableArray(),
             PreviousComparable = comparable, PreviousChanges = changes.ToImmutable() };
     }
 }
@@ -99,6 +126,31 @@ public sealed record RecoveryDisplayCell(ImmutableArray<RecoverySlot> Slots, Rec
 public sealed record RecoveryDisplayLesson(string Subject, string Teacher, bool TeacherEmpty, string Room, bool RoomEmpty)
 {
     public ImmutableArray<RecoveryFieldRole> EditableRoles { get; init; } = [];
+    public ImmutableArray<RecoveryFieldRole> CodeReviewRoles { get; init; } = [];
+}
+
+// Display advice only. It neither changes OCR/native scores nor authorizes adoption.
+public static class RecoveryCodeReview
+{
+    public static string? Describe(string value)
+    {
+        var found = new HashSet<char>();
+        for (var start = 0; start < value.Length;)
+        {
+            if (!Code(value[start])) { start++; continue; }
+            var end = start + 1;
+            while (end < value.Length && Code(value[end])) end++;
+            var part = value.AsSpan(start, end - start);
+            var letter = false; var digit = false;
+            foreach (var c in part) { letter |= char.IsAsciiLetter(c); digit |= char.IsAsciiDigit(c); }
+            if (letter && digit) foreach (var c in part) if (c is 'I' or 'l' or '1' or 'O' or '0') found.Add(c);
+            start = end;
+        }
+        var names = new[] { ('I', "I（大文字アイ）"), ('l', "l（小文字エル）"), ('1', "1（数字のいち）"),
+            ('O', "O（大文字オー）"), ('0', "0（数字のゼロ）") }.Where(p => found.Contains(p.Item1)).Select(p => p.Item2);
+        return found.Count == 0 ? null : "文字種を原本で確認: " + string.Join("、", names);
+        static bool Code(char c) => char.IsAsciiLetterOrDigit(c) || c is '_' or '-';
+    }
 }
 
 public sealed record RecoveryDisplayCorrection(string CellId, int LessonIndex, RecoveryFieldRole Role,

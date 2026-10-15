@@ -19,7 +19,7 @@ internal static partial class Program
     // Scripted confidence is a UI control, not a native OCR observation.
     // The independently drawn original bitmap/PDF and retained crops are real
     // temporary input bytes; the global ink receipt is computed, never assumed.
-    private static async Task<RecoveryManualSession> SeedManualRecoveryUiAsync(string root, int count, bool reviewHeader = false, int manualSchemaVersion = 1)
+    private static async Task<RecoveryManualSession> SeedManualRecoveryUiAsync(string root, int count, bool reviewHeader = false, int manualSchemaVersion = 1, bool confusableRoom = false)
     {
         var preferences = new PreferencesStore(root);
         await preferences.SaveAsync((await preferences.LoadAsync()) with { UseAiFeatures = true });
@@ -29,6 +29,7 @@ internal static partial class Program
         var extra = new List<RecoverySource> { new("teacher", cell.Id, 1, "架空教員A", new(110,125,60,10)) };
         if (count == 4) extra.Add(new("subject-second", document.Cells[1].Id, 1, "架空科目B", new(110,210,60,10)));
         var sources = document.Sources.Concat(extra)
+            .Select(s => confusableRoom && s.Id == "room" ? s with { Text = "架空室I1O0" } : s)
             .Select(s => s with { FromOcr = true, NativeConfidence = new[] { "subject", "teacher", "room", "subject-second" }.Take(count).Contains(s.Id) || reviewHeader && s.Id == "class" ? .4 : .95 }).ToArray();
         document = document with { Sources = sources, Cells = document.Cells.Select((c,i) => i == 0 ? c with {
             SourceIds = ["subject","room","teacher"], BlankFields = [], LessonBindings = [new(["subject"],["teacher"],["room"])] } : c).ToArray() };
@@ -209,7 +210,7 @@ internal static partial class Program
     }
     private static async Task SeedBatchRecoveryPreviewAsync(string root)
     {
-        var session=await SeedManualRecoveryUiAsync(root,1);
+        var session=await SeedManualRecoveryUiAsync(root,1,confusableRoom:true);
         var target=session.Plan.Targets.Single();
         var correction=new RecoveryHumanCorrection(target.Target,session.Plan.Document.PdfHash,
             RecoveryValidator.Fingerprint(session.Plan.Document.Capture),session.Plan.DocumentSnapshot,
@@ -230,7 +231,16 @@ internal static partial class Program
         var cell=original.Document.Cells.First(c => c.LessonBindings.Count>0);
         var targets=new[] { new RecoveryFieldTarget(cell.Id,0,RecoveryFieldRole.Teacher),new RecoveryFieldTarget(cell.Id,0,RecoveryFieldRole.Room) };
         Require(!WaitElement("recovery-edit-selected-Timetable").Current.IsEnabled,"Empty batch selection is disabled");
-        foreach(var target in targets) Toggle(WaitElement("recovery-select-"+target.Key));
+        Require(WaitElement("recovery-code-hint-"+targets[1].Key).Current.Name.Contains("大文字アイ"),"Confident unreviewed room code spells out confusing character types");
+        Invoke("recovery-select-rooms-Timetable");
+        Require(((TogglePattern)WaitElement("recovery-select-"+targets[1].Key).GetCurrentPattern(TogglePattern.Pattern)).Current.ToggleState==ToggleState.On,
+            "Bulk room selection selects the actual room checkbox");
+        Require(((TogglePattern)WaitElement("recovery-select-"+targets[0].Key).GetCurrentPattern(TogglePattern.Pattern)).Current.ToggleState==ToggleState.Off,
+            "Bulk room selection leaves teacher unchecked");
+        Invoke("recovery-clear-selection-Timetable");
+        Require(!WaitElement("recovery-edit-selected-Timetable").Current.IsEnabled,"Clearing bulk selection disables review");
+        Toggle(WaitElement("recovery-select-"+targets[0].Key));
+        Invoke("recovery-select-rooms-Timetable");
         Wait(() => Find("recovery-edit-selected-Timetable")?.Current.IsEnabled==true,"Two selected fields enable one batch review");
         Invoke("recovery-edit-selected-Timetable");
         Wait(() => Find("manual-submit-Timetable") is not null,"Batch selection opens original-image review");
@@ -248,6 +258,7 @@ internal static partial class Program
         }
         Wait(() => Find("manual-submit-Timetable")?.Current.IsEnabled==true,"Every batch field is explicitly acknowledged");
         Invoke("manual-submit-Timetable");Wait(() => Find("adopt-recovery-Timetable") is not null,"Batch result returns to whole-document preview");
+        Require(Find("recovery-code-hint-"+targets[1].Key) is null,"Explicitly reviewed room no longer repeats the code advice");
         Invoke("adopt-recovery-Timetable");Wait(() => Find("adopt-recovery-Timetable") is null,"Explicit adoption commits batch values");
         Stop();Start(executable);
         var saved=RecoveryUiFormalAsync(root).GetAwaiter().GetResult();

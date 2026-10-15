@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Collections.Immutable;
 using Takupoke.Core;
 using Takupoke.Core.Recovery;
 using Takupoke.Infrastructure.Recovery;
@@ -97,5 +98,71 @@ public sealed class RecoveryCorrectionPreviewTests
     {
         var p=Preview();Assert.Null(RecoveryPreviewDisplay.Create(p with {Result=p.Result with {PdfHash=new string('b',64)}},CancellationToken.None));
         using var c=new CancellationTokenSource();c.Cancel();Assert.Throws<OperationCanceledException>(()=>RecoveryPreviewDisplay.Create(p,c.Token));
+    }
+
+    [Fact]
+    public void ConfidentCodeAdviceIsDisplayOnlyAndDisappearsAfterActualSourceOwnedReview()
+    {
+        var doc = RecoveryManualAssistanceTests.Captured(0);
+        var cell = doc.Cells.First(c => c.LessonBindings.Count > 0);
+        var target = new RecoveryFieldTarget(cell.Id, 0, RecoveryFieldRole.Room);
+        var roomId = Assert.Single(cell.LessonBindings[0].Room);
+        var sources = doc.Sources.Select(s => s.Id == roomId ? s with { Text = "架空室I1O0" } : s).ToArray();
+        doc = doc with { Sources = sources, Capture = doc.Capture! with { SourceSnapshot = RecoveryValidator.Fingerprint(sources) } };
+        doc = RecoveryManualReviewBudgetTests.CaptureRequested(doc, [target], 3);
+        var plan = Assert.IsType<RecoveryManualPlan>(RecoveryManualAssistance.Prepare(doc, [target]));
+        var review = RecoveryManualAssistanceTests.Correction(plan, Assert.Single(plan.Targets), plan.Targets[0].OriginalOcr) with { ManualSchemaVersion = 3 };
+        var confirmed = RecoveryManualAssistance.Complete(plan, [review], "fictional-host");
+        var raw = confirmed with { HumanCorrections = null };
+        Assert.True(RecoveryValidator.Validate(doc, raw).CanAdopt);
+        var preview = new RecoveryPreview("fictional-source", new(1,new(2032,1)), doc, raw, DateTimeOffset.UtcNow);
+        var before = JsonSerializer.SerializeToUtf8Bytes(preview);
+        var display = Assert.IsType<RecoveryPreviewDisplay>(RecoveryPreviewDisplay.Create(preview,CancellationToken.None));
+        Assert.Contains(RecoveryFieldRole.Room, display.Cells.Single(c => c.CellId == cell.Id).Lessons[0].CodeReviewRoles);
+        Assert.All(plan.Targets[0].OriginalParentIds, id => Assert.Equal(.95, doc.Sources.Single(s => s.Id == id).NativeConfidence));
+        Assert.Equal(before, JsonSerializer.SerializeToUtf8Bytes(preview));
+        display = Assert.IsType<RecoveryPreviewDisplay>(RecoveryPreviewDisplay.Create(preview with { Result = confirmed },CancellationToken.None));
+        Assert.DoesNotContain(RecoveryFieldRole.Room, display.Cells.Single(c => c.CellId == cell.Id).Lessons[0].CodeReviewRoles);
+        Assert.Empty(display.Corrections); Assert.Equal(1,display.ReviewedFieldCount);
+    }
+
+    [Theory]
+    [InlineData("架空室I1lO0",true)][InlineData("架空室A301",true)]
+    [InlineData("架空室A237",false)][InlineData("架空室101",false)][InlineData("架空教員",false)][InlineData("BIOLOGY",false)]
+    public void CodeAdviceSpellsCharacterTypesWithoutNormalizingOrInventingWarnings(string value, bool expected)
+    {
+        var description = RecoveryCodeReview.Describe(value);
+        Assert.Equal(expected, description is not null);
+        if (value == "架空室I1lO0")
+            foreach (var label in new[] { "I（大文字アイ）", "l（小文字エル）", "1（数字のいち）", "O（大文字オー）", "0（数字のゼロ）" })
+                Assert.Contains(label, description);
+    }
+
+    [Fact]
+    public void RoomSelectionDeduplicatesMergedSlotsKeepsOtherClassesAndFailsAtomicallyAtBudget()
+    {
+        var display = RecoveryPreviewDisplay.Create(Preview(3,"parallelMerged"),CancellationToken.None)!;
+        var cls = display.Classes[0];
+        var room = new RecoveryDisplayLesson("架空科", "架空員", false, "架空室A201", false) { EditableRoles = [RecoveryFieldRole.Room] };
+        var other = new RecoveryFieldTarget("other-class",0,RecoveryFieldRole.Teacher);
+        var selected = new HashSet<RecoveryFieldTarget> { other };
+        display = display with { Cells = [
+            new([new(cls,"1",1), new(cls,"1",2)],RecoveryValueState.Present,[room,room]) { CellId="merged" },
+            new([new("other","1",1)],RecoveryValueState.Present,[room]) { CellId="other" },
+            new([new(cls,"1",3)],RecoveryValueState.Present,[room with { EditableRoles=[] }]) { CellId="vector" }] };
+        Assert.True(display.SelectRooms(cls,selected));
+        Assert.Equal(3,selected.Count); Assert.Contains(other,selected);
+        Assert.Equal(new[] { 0,1 }, display.RoomTargets(cls).Select(t => t.LessonIndex));
+        Assert.DoesNotContain(selected,t => t.CellId is "other" or "vector");
+        Assert.True(display.SelectRooms(cls,selected)); Assert.Equal(3,selected.Count);
+        selected = Enumerable.Range(0,127).Select(i => new RecoveryFieldTarget("prior"+i,0,RecoveryFieldRole.Subject)).ToHashSet();
+        var before = selected.ToHashSet();
+        Assert.False(display.SelectRooms(cls,selected)); Assert.True(before.SetEquals(selected));
+        Assert.False(display.SelectRooms("unknown",selected)); Assert.True(before.SetEquals(selected));
+        display = display with { ReviewedTargets = before.Append(new("already-reviewed",0,RecoveryFieldRole.Room)).ToImmutableArray() };
+        selected.Clear();
+        Assert.False(display.SelectRooms(cls,selected)); Assert.Empty(selected);
+        Assert.True(display.SelectionFits(display.ReviewedTargets));
+        Assert.False(display.SelectionFits([new("new-field",0,RecoveryFieldRole.Room)]));
     }
 }
