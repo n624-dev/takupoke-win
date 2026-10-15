@@ -1,7 +1,7 @@
 # 原本取得・更新・保存・監視
 
 対応関係・宣言名・実行方法のSHA-256：
-`26adf8eefb7319ffbd949698f3ee29c1f232f3133456408c2506bb99933c35df`
+`5b8f03dc0affecb833cc94388bb26103724f571e97cfa230ecc33603908882d4`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -19,6 +19,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - [src/Takupoke.Win/Platform/WindowsFileIdentity.cs](../../src/Takupoke.Win/Platform/WindowsFileIdentity.cs)
 - [tests/Takupoke.Integration.Tests/AppViewModelTestPlatform.cs](../../tests/Takupoke.Integration.Tests/AppViewModelTestPlatform.cs)
 - [tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj](../../tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj)
+- [tests/Takupoke.Integration.Tests/ViewModelFileIdentity.cs](../../tests/Takupoke.Integration.Tests/ViewModelFileIdentity.cs)
 
 ## [tests/Takupoke.Integration.Tests/AppViewModelRefreshTests.cs](../../tests/Takupoke.Integration.Tests/AppViewModelRefreshTests.cs)
 

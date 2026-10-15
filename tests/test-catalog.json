@@ -51,7 +51,8 @@
         "src/Takupoke.Infrastructure/Materials/SourceWatcher.cs",
         "src/Takupoke.Win/Platform/WindowsFileIdentity.cs",
         "tests/Takupoke.Integration.Tests/AppViewModelTestPlatform.cs",
-        "tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj"
+        "tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj",
+        "tests/Takupoke.Integration.Tests/ViewModelFileIdentity.cs"
       ],
       "checks": [
         "tests/Takupoke.Integration.Tests/AppViewModelRefreshTests.cs",

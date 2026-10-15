@@ -1,6 +1,7 @@
 // Compile the real AppViewModel scheduler on both CI hosts. Only WinUI dispatch,
-// Windows identity/protection/notifications/authentication and model runtimes are
-// substituted; persistence, material refresh and file watchers remain production.
+// protection/notifications/authentication and model runtimes are substituted;
+// Windows links the real file identity provider; Linux uses its separate substitute.
+// Persistence, material refresh and file watchers remain production.
 // This does not verify native DPAPI, WinUI dispatch or inference behavior.
 global using WindowsDpapiProtector = Takupoke.Integration.Tests.ViewModelTestProtector;
 
@@ -64,10 +65,6 @@ namespace Takupoke.Win
 }
 namespace Takupoke.Win.Platform
 {
-    public sealed class WindowsFileIdentity : IFileIdentityProvider
-    {
-        public string Identity(FileStream stream) => "fictional-viewmodel-source";
-    }
     public sealed class BrowserAuthenticator
     {
         public BrowserAuthenticator(OidcClient client, Action<Uri>? openBrowser) { }
