@@ -9,6 +9,9 @@ Windowsの物理2／論理4CPU・約16GiB RAMで、Sawarabi Gothic／Minchoの�
 CERは31/2257文字＝1.3735%／23/2242文字＝1.0259%。4つの曜日・クラス欠落負例を拒否した。
 5ページのOCR・解析は51.279／42.697秒、reader全6文書の最大working set約459MB。モデル取得・初期smoke・人の照合時間は含まない。
 
+この架空資料の科目・担当は各120/120一致し、誤読31／23項目は全て教室欄だった（教室89/120／97/120一致）。
+実資料でも科目・担当を誤読しないという意味ではない。
+
 残る本文誤読31／23項目は、原画像を見て訂正する。必須確認を含むunionも31／23で128項目以内。
 高信頼度の誤読27／23項目があるため、confidenceだけで全資料の確認を省略できない。
 この数は参照正解による事後診断で、利用者の照合負担や訂正所要時間を測定したものではない。
@@ -76,8 +79,10 @@ GLM公式FP32・CPU4の比較は本文99/144、CER4.39%、教室25/48で候補�
 [以前のCER診断](../research-results/practical-ocr-metrics-20261014/README.md)、
 [GLM原記録](../research-results/glm-ocr-fp32-clean-lines-20261014/README.md)。
 
-コードと閉じた研究記録は[PR#1](https://github.com/n624-dev/takupoke-win/pull/1)へ反映する。
+コードと閉じた研究記録は[PR#1](https://github.com/n624-dev/takupoke-win/pull/1)へ反映済み。
 内部の作業方針Markdownは公開・プッシュしない。
 
 追加学習の3個の実行logは公開ルールに合わせ、原バイトを保ったtxtとして保存する。
 [原handoffのパス対応](../research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/public-handoff-paths.json)を残し、凍結済みmanifestは変更しない。
+
+[導入版0.1.0-dev.10439](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10439)を公開した。Windows 11 24H2以降向けのx64／ARM64 Setup・ZIPを配布し、x64では新規導入・移動・再導入・旧dev.5更新など6状態で各788～789 UI項目を確認した。配布Actions全8ジョブ成功、公開6ファイルのハッシュとビルド元を照合済み。ARM64実機の起動・精度は未検証。[配布確認の記録](../research-results/ocr-production-integration-20261015/installer-release-receipt.json)。

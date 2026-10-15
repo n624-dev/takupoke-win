@@ -16,11 +16,12 @@ PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCR�
 
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版0.1.0-dev.10435のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10435)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。
+[開発確認版0.1.0-dev.10439のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10439)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。
 
-1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10435-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10435-arm64-Setup.exe`。
+1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10439-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10439-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
 3. スタートメニューの「たくポケ」から起動します。
+4. OCRを利用する場合は設定の「AI・OCRを使用する」をONにし、モデル管理で約99 MiBの日本語・英数字モデルを取得／更新します。復旧プレビューを原PDFと照合し、必要な欄を訂正してから明示採用してください。
 
 .NET・Windows App SDK・VCランタイムを同梱しているため、Visual StudioやSDKのインストール、ソースのビルドは不要です。アプリ内ブラウザ用のWebView2 Runtimeが未導入の場合は、セットアップがMicrosoftの公式インストーラーを実行します（インターネット接続が必要です）。
 
@@ -90,9 +91,13 @@ GitHub Actionsはpush・pull request・手動実行に対応します。現在�
 - x64 Release版をUI Automationで操作し、階層化した設定・時間割・クラス制約・設定保存・再起動後の保持・キーボードフォーカスを確認。架空のWindows URI起動から認証コールバック受信・トークン署名検証・3種類の保存、失敗・キャンセル後の操作復帰も確認します。学校認証は使用しません。
 - 内部文書・資料などの追跡禁止ファイルと、GitHub noreplyのコミット作者情報。
 
+配布元コミットに版番号と同じ`v0.1.0-dev.N`タグを作成してpushしてから、導入パッケージ用Actionsを実行します。開始時にタグとビルド元コミットの一致を検査します。検証済みインストーラーは公開処理の再試行に備えてActionsへ1日保持します。
+
 導入パッケージ用の手動Actionsでは、全テスト成功後にx64・ARM64の自己完結型アプリとSetup.exeを作成します。x64は作ったSetup.exeを実行し、新規導入・別フォルダーへの移動・同じフォルダーへの再インストールに加え、実際に配布したdev.5から同じ／別フォルダーへの更新、無関係な自動起動の保護を確認します。各状態の画面操作、設定・無関係ファイルの保持、アンインストール、ネイティブショートカットの起動先とアイコンを確認してから開発確認版として配布します。
 
-GitHub Actionsの保存用キャッシュやartifactは作成しません。配布用の完成ファイルだけをGitHub Releasesへ置きます。NuGet・CLIの作業用キャッシュはジョブ専用の一時領域へ置き、成功・失敗時とも終了処理で削除します。runner終了後も残るキャッシュを利用者が手動削除する運用にはしません。
+GitHub Actionsの保存用キャッシュは作成しません。架空資料の検証記録と検証済み配布物は、workflowで指定した期限だけartifactとして保持します。配布用の完成ファイルはGitHub Releasesへ置きます。NuGet・CLIの作業用キャッシュはジョブ専用の一時領域へ置き、成功・失敗時とも終了処理で削除します。runner終了後も残るキャッシュを利用者が手動削除する運用にはしません。
+
+2026-10-15の[開発確認版0.1.0-dev.10439](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10439)は、[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/38670666404)全8ジョブと6つの導入状態の検証を通過しました。各状態でWindows UI788～789項目を確認し、公開6ファイルのハッシュを照合しています。[導入・配布確認の記録](research-results/ocr-production-integration-20261015/installer-release-receipt.json)。全42か所の外部Actions参照をNode.js 24対応の固定SHAにそろえ、配布ジョブでもNode.js 20警告0件を確認しました。
 
 テストは実装に合わせて追加します。CIでの確認と、学校アカウント認証・OneDrive同期・OS通知・ロックや復帰・アクセシビリティ・インストールや更新の実機確認は別に扱います。
 
@@ -109,7 +114,7 @@ GitHub Actionsの保存用キャッシュやartifactは作成しません。配�
 
 2026-10-08（日本時間）のAI・OCR設定とPDF文字再利用の修正は、コミット`73ef13b`の[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37648286055)全8ジョブが成功し、[開発確認版0.1.0-dev.10434](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10434)として公開しました。Core288件・Integration789件、通常のWindows UI642項目、6つの導入・更新・移動状態で642〜643項目の画面操作を確認しました。設定OFF時のStrict優先と復旧停止、設定切替後の未採用結果の無効化、完全に抽出済みのPDF文字・座標の再利用を含みます。公開6ファイルのうちSHA-256一覧が対象とする5ファイルをGitHub配布ハッシュと照合しました。追加AIモデルの品質合格、学校認証、ARM64実機の確認を示すものではありません。
 
-2026-10-08（日本時間）の追加修正は、コミット`37d0aff`の[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37693717181)全8ジョブが成功し、[開発確認版0.1.0-dev.10435](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10435)として公開しました。OCRが認識した空白の保持と、定期再描画で検索欄の入力が失われる問題を修正しました。Core288件・Integration805件、x64／ARM64ビルド、6つの導入・更新・移動状態で639〜640項目のWindows画面操作、実dev.5からの更新と無関係ファイル・設定・自動起動の保持を確認しました。公開6ファイル中、SHA-256一覧の対象5ファイルを実際に取得して照合しました。追加AIモデルは未合格のため配信対象に追加していません。ARM64実機、学校認証、実資料の品質確認は含みません。
+2026-10-08（日本時間）の追加修正は、コミット`37d0aff`の[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37693717181)全8ジョブが成功し、[開発確認版0.1.0-dev.10439](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10439)として公開しました。OCRが認識した空白の保持と、定期再描画で検索欄の入力が失われる問題を修正しました。Core288件・Integration805件、x64／ARM64ビルド、6つの導入・更新・移動状態で639〜640項目のWindows画面操作、実dev.5からの更新と無関係ファイル・設定・自動起動の保持を確認しました。公開6ファイル中、SHA-256一覧の対象5ファイルを実際に取得して照合しました。追加AIモデルは未合格のため配信対象に追加していません。ARM64実機、学校認証、実資料の品質確認は含みません。
 
 ## データの扱い
 

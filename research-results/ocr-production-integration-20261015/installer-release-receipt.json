@@ -1,0 +1,70 @@
+{
+  "version": "0.1.0-dev.10439",
+  "sourceCommit": "b999f7ff74f5e2ffd28712b73601b2166a188cbd",
+  "run": 38670666404,
+  "runUrl": "https://github.com/n624-dev/takupoke-win/actions/runs/38670666404",
+  "releaseUrl": "https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10439",
+  "allEightJobsSucceeded": true,
+  "publishedPrerelease": true,
+  "tagMatchesBuildSource": true,
+  "checksumTextDownloadedAndHashed": true,
+  "allFivePublishedAssetDigestsMatchChecksumText": true,
+  "assets": [
+    {
+      "name": "INSTALL.txt",
+      "size": 4092,
+      "digest": "sha256:858981daad019f771c1c6a96fef6ce4c9ee1a8fc768f6a69d1b8468830b03be6",
+      "browser_download_url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10439/INSTALL.txt"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "size": 495,
+      "digest": "sha256:53f4ab17d746cc9e16b9c4f7b326ad64a7f0ace3db9260ea989ede6fcf5c5253",
+      "browser_download_url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10439/SHA256SUMS.txt"
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10439-arm64-Setup.exe",
+      "size": 77411634,
+      "digest": "sha256:b9304f08b1080aa5f421a70247e697646db19750b5e7333441dc5158285aa623",
+      "browser_download_url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10439/takupoke-0.1.0-dev.10439-arm64-Setup.exe"
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10439-arm64.zip",
+      "size": 114839444,
+      "digest": "sha256:0a68dd9d819129ac35179316824a374e7c0c39413dc725faced8e57d413988e7",
+      "browser_download_url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10439/takupoke-0.1.0-dev.10439-arm64.zip"
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10439-x64-Setup.exe",
+      "size": 80010806,
+      "digest": "sha256:fdedb58e5cf7e2f14c89ad10c9bbc5131b01a9a79b7f4f8ab295b12ab3844d03",
+      "browser_download_url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10439/takupoke-0.1.0-dev.10439-x64-Setup.exe"
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10439-x64.zip",
+      "size": 117681980,
+      "digest": "sha256:001b8fd2dd76a29b406cb85a0838a97daacbc5513445412af50a4f423355bf43",
+      "browser_download_url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10439/takupoke-0.1.0-dev.10439-x64.zip"
+    }
+  ],
+  "scope": "Published metadata and downloaded checksum text; installer binaries verified by the native installation workflow.",
+  "allSixInstallationScenariosSucceeded": true,
+  "nativeUiChecksPerInstallation": [
+    788,
+    789,
+    789,
+    788,
+    788,
+    789
+  ],
+  "installationScenarios": [
+    "new",
+    "move-current-installation",
+    "same-folder-reinstall",
+    "released-dev5-same-folder",
+    "released-dev5-different-folder",
+    "unrelated-startup-preservation"
+  ],
+  "nodeJs20Warnings": 0,
+  "arm64PhysicalExecutionVerified": false
+}

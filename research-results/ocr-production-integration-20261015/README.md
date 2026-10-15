@@ -61,6 +61,10 @@ SHA・サイズはコピー時に全件確認し、原manifestはWindowsパス�
 | 製品OCR・解析時間 | 51.279秒 | 42.697秒 |
 | 結果 | 原画像付き4項目確認へ進める | 未採用の検証済みプレビュー |
 
+事後に保存済みrawと参照を項目別に照合すると、各字体の科目・担当はそれぞれ120/120一致し、
+誤読31／23項目は全て教室欄だった（教室89/120／97/120一致）。年度2029・前期・3クラスの見出しも一致した。
+これは同じ架空資料の内訳であり、新しい独立評価や実資料での科目・担当の無誤読保証ではない。
+
 両正例は登録したCER3%／全枠・全本文／128項目／RSS6GiB条件を通過し、曜日欠落・クラス欠落の計4負例は全て拒否した。
 CPU推論thread2、最大プロセスworking set459,378,688bytes（約459MB／438MiB、同reader全6文書）。
 時間はダウンロード・初期smoke・利用者の照合時間を含まない。画像は実際のWindows APIでPNG・144DPIへ描画した。
@@ -75,3 +79,10 @@ CPU推論thread2、最大プロセスworking set459,378,688bytes（約459MB／43
 この条件の成功は、原画像を確認・訂正して明示採用するWindowsの導入構成の検証である。
 スキャン・未知の書式・実学校資料・ARM64実機の品質保証とは扱わない。現在のUI操作手順は
 [AI・OCRの設定](../../documentation/ai-settings.md)を参照。
+
+## 導入版の配布
+
+[0.1.0-dev.10439](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10439)を公開した。
+[配布実行38670666404](https://github.com/n624-dev/takupoke-win/actions/runs/38670666404)の全8ジョブが成功し、x64の6導入状態で各788～789 UI checksを通過した。新規導入・現行版の移動／再導入・実dev.5から同じ／別フォルダーへの更新・無関係な自動起動の保護を含み、正式結果・設定の保持と削除を確認した。公開6ファイルのハッシュ・タグ・ビルド元b999f7fの一致は[配布確認記録](installer-release-receipt.json)に保存した。ARM64はビルド／PE確認のみで、実機の起動・精度には加点しない。
+
+全workflowの外部Actions42参照をNode.js 24対応の固定SHAに統一した。更新後の[CI38669350609](https://github.com/n624-dev/takupoke-win/actions/runs/38669350609)全7ジョブ、[Windows OCR38669344134](https://github.com/n624-dev/takupoke-win/actions/runs/38669344134)、配布実行はNode.js 20警告0件。新upload-artifactのZIP全体SHAと49ファイルのサイズ・SHAを取得後に照合し、既存の全文書条件の再現も確認した。これはworkflowの互換確認で、未見資料による新しい精度評価とは数えない。
