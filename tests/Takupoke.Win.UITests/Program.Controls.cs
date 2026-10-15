@@ -108,6 +108,14 @@ internal static partial class Program
         Wait(() => combo.Current.IsEnabled, "main color is enabled");
         if (combo.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll))
             ((ScrollItemPattern)scroll).ScrollIntoView();
+        // ExpandCollapse does not focus the control. After a native callback or
+        // asynchronous preference render, give this actual control focus before
+        // opening it once; never reopen a dismissed popup to rescue selection.
+        combo.SetFocus();
+        Wait(() => combo.Current.HasKeyboardFocus && !combo.Current.IsOffscreen
+            && Find("main-color") is { } current
+            && current.GetRuntimeId().SequenceEqual(combo.GetRuntimeId()),
+            "the current main color control has native keyboard focus before opening");
         var expansion = (ExpandCollapsePattern)combo.GetCurrentPattern(ExpandCollapsePattern.Pattern);
         Console.WriteLine($"Synthetic color popup before opening: {expansion.Current.ExpandCollapseState}");
         if (expansion.Current.ExpandCollapseState == ExpandCollapseState.Collapsed) expansion.Expand();
