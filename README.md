@@ -21,9 +21,9 @@ PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCR�
 
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版0.1.0-dev.10440のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10440)からSetup.exeを取得してください。全機能の確認を終えた正式版ではありません。 この版にはPDF原文字の描画互換・原画像確認・本文訂正・原本の注記表示を含みます。[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38712585333)全8ジョブ、x64の6つの導入状態で各829～830 UI項目が通過し、公開6ファイルとZIP内の全同梱ファイルを照合済みです。[検証記録](research-results/native-pdf-integration-20261015/installer-release-receipt.json)。
+[開発確認版0.1.0-dev.10442のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10442)からSetup.exeを取得してください。GitHubでは通常Release・Latestとして公開しています。全機能の確認を終えた正式版ではありません。mainのXLSX行除外・同一行の一括除外と、PDF原文字の描画互換・原画像確認・本文訂正・注記表示を含みます。[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38728635572)全8ジョブ、x64の6導入状態で各989～990 UI項目が通過し、公開6ファイルとZIP内の全同梱ファイルを照合済みです。[統合・検証](documentation/main-integration-20261015.md)・[配布記録](research-results/main-integration-20261015/installer-release-receipt.json)。
 
-1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10440-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10440-arm64-Setup.exe`。
+1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10442-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10442-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
 3. スタートメニューの「たくポケ」から起動します。
 4. OCRを利用する場合は設定の「AI・OCRを使用する」をONにし、モデル管理で約99 MiBの日本語・英数字モデルを取得／更新します。復旧プレビューを原PDFと照合し、必要な欄を訂正してから明示採用してください。
@@ -117,28 +117,12 @@ GitHub Actionsの保存用キャッシュは作成しません。架空資料の
 独立した4名が重複する範囲で全コード・文言・配布経路を確認しました。Windowsネイティブの最終44画面では、明暗テーマ、通常幅と680幅、150／200%文字拡大を確認しています。指摘された日付選択、コントラスト、フォーム配置、警告件数の見切れ、年度不足・破損キャッシュ、削除案内は修正確認済みです。公開テストは架空入力のみで、ARM64実機・学校認証・実資料・OneDrive同期・OS通知・ロック／復帰・High Contrastの実画面確認は含みません。
 
 
-2026-10-03（日本時間）の追加修正は、コミット`4425bd1`の[push CI](https://github.com/n624-dev/takupoke-win/actions/runs/37081382640)全7ジョブと[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37081384250)全8ジョブが成功し、[開発確認版0.1.0-dev.7](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.7)として公開しました。学校行事の弱いETagによる再確認失敗を修正し、初回取得と繰り返しの304応答を検証しました。解析状態はiOSと同じ短い文言にそろえ、設定などの重複する説明文を整理しました。時間割は表全体の高さを確保して表内の縦スクロールを廃止し、未確定の時刻を非表示にしました。複数時限のカードに背後の罫線が透けないことを明暗テーマと文字拡大の実描画で確認しています。Core183件・Integration123件、Windows UI276項目以上、44画面の撮影、6つの導入状態と公開ファイルのSHA-256照合が成功しました。
+2026-10-03（日本時間）の追加修正は、コミット`4425bd1`の[push CI](https://github.com/n624-dev/takupoke-win/actions/runs/37081382640)全7ジョブと[配布Actions](https://github.com/n624-dev/takupok…2204 tokens truncated…ん。文字抽出が不完全なページ、画像PDF、空欄の独立した確認が必要な領域などでは画像を使用します。取得途中の文字を完全なページとして扱いません。
 
-2026-10-08（日本時間）のAI・OCR設定とPDF文字再利用の修正は、コミット`73ef13b`の[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37648286055)全8ジョブが成功し、[開発確認版0.1.0-dev.10434](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10434)として公開しました。Core288件・Integration789件、通常のWindows UI642項目、6つの導入・更新・移動状態で642〜643項目の画面操作を確認しました。設定OFF時のStrict優先と復旧停止、設定切替後の未採用結果の無効化、完全に抽出済みのPDF文字・座標の再利用を含みます。公開6ファイルのうちSHA-256一覧が対象とする5ファイルをGitHub配布ハッシュと照合しました。追加AIモデルの品質合格、学校認証、ARM64実機の確認を示すものではありません。
+CPU用OCRモデルは設定から約99 MiBを取得／更新します。日本語PP-OCRv6 mediumと学習済み英数字PP-OCRv5を使い、モデルのサイズ・SHAと辞書を確認してから切り替えます。旧モデルの更新に失敗しても以前のファイルを保持します。原画像はPNG・144DPIで取得し、訂正時は保存した寸法と描画方式で再取得します。
 
-2026-10-08（日本時間）の追加修正は、コミット`37d0aff`の[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37693717181)全8ジョブが成功し、[開発確認版0.1.0-dev.10439](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10439)として公開しました。OCRが認識した空白の保持と、定期再描画で検索欄の入力が失われる問題を修正しました。Core288件・Integration805件、x64／ARM64ビルド、6つの導入・更新・移動状態で639〜640項目のWindows画面操作、実dev.5からの更新と無関係ファイル・設定・自動起動の保持を確認しました。公開6ファイル中、SHA-256一覧の対象5ファイルを実際に取得して照合しました。追加AIモデルは未合格のため配信対象に追加していません。ARM64実機、学校認証、実資料の品質確認は含みません。
+復旧プレビューの本文は高信頼度の欄も訂正できます。複数欄の「まとめて選択」から一度に確認へ進めます。原画像と照合し、各項目の確認、訂正後のプレビュー、最後の明示採用が必要です。新規記録は確認と本文訂正を合計128項目まで扱い、以前の記録の上限は変更しません。
 
-## データの扱い
+配布版0.1.0-dev.10442では「表示中のクラスの教室欄をまとめて選択」と選択解除を追加しました。確認済みの対象も128項目の上限に含みます。未確認の英数字コードにI・l・1・O・0がある場合は文字種を表示し、訂正入力は等幅フォントを使います。これは照合の補助で、注意表示のない欄にも誤読はあり得ます。PDF原文字の拡張経路・注記確認も同じ0.1.0-dev.10442に含みます。
 
-学校資料は端末内で解析し、OneDriveの同期フォルダーから利用者が選んだファイルを読み取ります。再読み取りの成功は、クラウド上の最新版との同期完了を示すものではありません。個人設定は端末内に保存します。
-
-学校の実資料、個人情報、認証情報、署名鍵、内部用の文書は公開ソースに含めません。公開テストには完全に架空の入力・期待結果を使用します。
-
-## コミット設定
-
-このGitHubアカウントで開発する場合、clone後にリポジトリ内で設定します。
-
-```sh
-git config --local user.name "n624-dev"
-git config --local user.email "91827902+n624-dev@users.noreply.github.com"
-git config --local user.useConfigOnly true
-```
-
-## ライセンス
-
-プロジェクト自体のライセンスは未選定です。
+文字情報を使う拡張経路では、新規の記録をschema4にし、原本の注記も確認画面から開けます。注記・見出しは元の文字列の確認だけができ、本文の訂正とは区別されます。以前のschema1／2／3の記録は変更しません。[native PDFの検証範囲](native-pdf-compatibility-20261015.md)。
