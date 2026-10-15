@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Automation;
 using Takupoke.Core;
 using Takupoke.Core.Recovery;
+using Takupoke.Infrastructure.Api;
 using Takupoke.Infrastructure.Materials;
 using Takupoke.Infrastructure.Parsing;
 using Takupoke.Infrastructure.Recovery;

@@ -33,3 +33,9 @@ PythonはPillow 12.3.0、.NETは10を使用した。字体は固定したGoogle 
 製品の候補関数を同じ画像の実際のroute出力へ適用する。正候補の提示、未知コードへの候補、
 既に正しい出力への誤誘導を別記する。先頭候補の自動採用は比較上の危険性の診断だけで、製品へ適用しない。
 [2026-10-16の結果](../../research-results/ocr-room-candidates-20261016/README.md)。
+
+`--validation --manual-capture`は、同じ日本語原観測から通常・復旧用の実際のC#経路を比較する。
+事前に固定した旧readerも同じ入力で実行し、native subprocessの終了コードとraw SHAを記録してから、
+`python compare_manual.py --study /path/to/study`で通常経路の同一性・改善・退行・低スコアによる追加確認を採点する。
+低confidenceの選択を、confidenceの昇格や自動採用とは扱わない。
+[2026-10-16の結果](../../research-results/ocr-manual-capture-20261016/README.md)。
