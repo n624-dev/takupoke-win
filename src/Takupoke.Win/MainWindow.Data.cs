@@ -50,6 +50,9 @@ public sealed partial class MainWindow
                     attempts.Children.Add(Text(error.UserMessage));
                     attempts.Children.Add(SettingsDescription(error.RetentionMessage));
                     attempts.Children.Add(DataField("エラーコード", error.UserCode));
+                    if (error.Cell is { } cell)
+                        attempts.Children.Add(DataField("セル位置", $"クラス位置{cell.ClassRow}・曜日{cell.Weekday}・{cell.Period}限" +
+                            (cell.DetectedLines is { } lines ? $"・{lines}行" : "")));
                 }
                 else attempts.Children.Add(Text(failure));
             }
