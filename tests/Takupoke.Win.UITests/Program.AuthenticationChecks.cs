@@ -115,6 +115,22 @@ internal static partial class Program
         var info = shell ? new ProcessStartInfo(callback) { UseShellExecute = true } : new ProcessStartInfo(Path.GetFullPath(executable)) { UseShellExecute = false };
         if (!shell) info.ArgumentList.Add(callback);
         using var redirect = Process.Start(info);
-        if (!shell && (redirect is null || !redirect.WaitForExit(10000) || redirect.ExitCode != 0)) throw new InvalidOperationException("The synthetic callback process did not redirect successfully.");
+        if (shell) return;
+        if (redirect is null) throw new InvalidOperationException("The synthetic callback process did not start.");
+        var elapsed = Stopwatch.StartNew();
+        try
+        {
+            if (!redirect.WaitForExit(10000))
+                throw new InvalidOperationException($"The synthetic callback process did not exit after {elapsed.ElapsedMilliseconds}ms (pid={redirect.Id}).");
+            if (redirect.ExitCode != 0)
+                throw new InvalidOperationException($"The synthetic callback process exited with 0x{redirect.ExitCode:X8}.");
+            Console.WriteLine($"Synthetic raw callback exited successfully after {elapsed.ElapsedMilliseconds}ms.");
+        }
+        finally
+        {
+            // Dispose alone leaves a timed-out child holding the installed
+            // runtime open. Reap only this process started by the test.
+            if (!redirect.HasExited) { redirect.Kill(true); redirect.WaitForExit(5000); }
+        }
     }
 }
