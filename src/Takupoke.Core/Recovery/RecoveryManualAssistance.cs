@@ -4,7 +4,11 @@ using System.Text.Json.Serialization;
 namespace Takupoke.Core.Recovery;
 
 // App-owned acquisition/provenance only. These records are never provider wire fields.
-public sealed record RecoveryCapturedPage(int Page, int Width, int Height, string RasterHash, int SourceCount, bool InkCoverageVerified);
+public sealed record RecoveryCapturedPage(int Page, int Width, int Height, string RasterHash, int SourceCount, bool InkCoverageVerified)
+{
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? RenderProfile { get; init; }
+}
 public sealed record RecoveryCaptureReceipt(string PdfHash, int PageCount, string SourceSnapshot, IReadOnlyList<RecoveryCapturedPage> Pages, int ManualSchemaVersion = 1)
 {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

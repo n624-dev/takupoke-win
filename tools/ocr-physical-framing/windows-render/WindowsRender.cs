@@ -39,7 +39,8 @@ foreach (var item in manifest["documents"]!.AsArray())
         var width = (uint)Math.Clamp(Math.Round(page.Size.Width * 2), 640, 2400);
         var height = (uint)Math.Round(page.Size.Height / page.Size.Width * width);
         if (height > 3200) { width = (uint)Math.Round(width * 3200d / height); height = 3200; }
-        await page.RenderToStreamAsync(image, new PdfPageRenderOptions { DestinationWidth = width, DestinationHeight = height }).AsTask(token);
+        await page.RenderToStreamAsync(image, new PdfPageRenderOptions { DestinationWidth = width, DestinationHeight = height,
+            BitmapEncoderId = BitmapEncoder.PngEncoderId }).AsTask(token);
         image.Seek(0); var decoder = await BitmapDecoder.CreateAsync(image).AsTask(token);
         using var bitmap = await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore).AsTask(token);
         var data = await decoder.GetPixelDataAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore, new BitmapTransform(),
@@ -50,14 +51,14 @@ foreach (var item in manifest["documents"]!.AsArray())
         File.WriteAllBytes(Path.Combine(root, name), pixels);
         original["width"] = bitmap.PixelWidth; original["height"] = bitmap.PixelHeight;
         original["pixels"] = new JsonObject { ["file"] = name, ["bytes"] = pixels.Length, ["sha256"] = pixelHash };
-        pageReceipts.Add(new { page = i + 1, bitmap.PixelWidth, bitmap.PixelHeight, pixelHash,
+        pageReceipts.Add(new { page = i + 1, bitmap.PixelWidth, bitmap.PixelHeight, pixelHash, decoderCodecId = decoder.DecoderInformation.CodecId,
             originalLosslessPixelHash = oldHash, nativeEqualsOriginal = pixelHash == oldHash });
     }
     receipts.Add(new { id = item["id"]!.GetValue<string>(), sourcePDFHash = hash, strictFailure,
         capturedComplete = capture.Complete, renderedPages = pageReceipts });
     CryptographicOperations.ZeroMemory(bytes);
 }
-manifest["renderer"] = "Actual native Windows PDF renderer; production dimensions and Bgra8/Ignore/DoNotColorManage";
+manifest["renderer"] = "Actual native Windows PDF renderer; lossless PNG; production dimensions and Bgra8/Ignore/DoNotColorManage";
 File.WriteAllText(Path.Combine(root, "native-inputs.json"), manifest.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
 File.WriteAllText(Path.Combine(root, "native-render-receipt.json"), JsonSerializer.Serialize(new { receipts, modelCalls = 0 }, new JsonSerializerOptions { WriteIndented = true }));
 Console.WriteLine(JsonSerializer.Serialize(new { renderedDocuments = receipts.Count, modelCalls = 0, scope = "Actual native acquisition only; recognition and qualification remain separate" }));

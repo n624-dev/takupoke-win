@@ -84,7 +84,7 @@ internal static class RecoveryAuditShape
         if (doc.Capture is { } capture)
         {
             work.Step(); Text(capture.PdfHash); Text(capture.SourceSnapshot);
-            List(capture.Pages, page => Text(page.RasterHash));
+            List(capture.Pages, page => { Text(page.RasterHash); Text(page.RenderProfile); });
             if (capture.OriginalCrops is { } crops) List(crops, crop =>
             { Target(crop.Target); Text(crop.OriginalRasterHash); work.Step(crop.Bgra.LongLength); Text(crop.Sha256); });
         }

@@ -51,7 +51,8 @@ foreach (var input in m.GetProperty("documents").EnumerateArray())
         document = RecoveryDocumentBuilder.Build(hash, MaterialKind.Timetable, pages, (p,b) => scanners[p-1](b), Enumerable.Range(1,pages.Count).ToHashSet(), token, allowStructureProposal: true);
         var sources = document.Sources.Select(s => s with { NativeConfidence = scores[s.Id] }).ToArray();
         document = document with { Sources = sources, Capture = new(hash,pages.Count,RecoveryValidator.Fingerprint(sources),
-            rasters.Select((s,i) => new RecoveryCapturedPage(i+1,s.Width,s.Height,Sha(s.Bgra),sources.Count(x => x.Page == i+1),true)).ToArray(),3) };
+            rasters.Select((s,i) => new RecoveryCapturedPage(i+1,s.Width,s.Height,Sha(s.Bgra),sources.Count(x => x.Page == i+1),true)
+                { RenderProfile = m.TryGetProperty("renderer",out _) ? "windows-pdf-png-v1" : null }).ToArray(),3) };
         var targets = RecoveryManualAssistance.CaptureTargets(document, token);
         if (targets is { Count: > 0 })
         {

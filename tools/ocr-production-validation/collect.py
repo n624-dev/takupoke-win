@@ -12,6 +12,11 @@ for folder in [a.run,a.run/'study']:
         target=out/('study' if folder.name=='study' else 'run')/source.name;target.parent.mkdir(exist_ok=True);shutil.copyfile(source,target)
         data=target.read_bytes();assert data==source.read_bytes();files[str(target.relative_to(out))]={'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}
 freeze=a.run/'study/freeze.json'
+debug=a.run/'study/final-0-positive-native-p1.bgra'
+if debug.exists():
+    target=out/'diagnostic-fictional-page.bgra';shutil.copyfile(debug,target)
+    files[target.name]={'bytes':target.stat().st_size,'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),
+                        'scope':'One wholly fictional native page for acquisition failure diagnosis; exclude from public source curation.'}
 if freeze.exists():
     for relative,digest in json.loads(freeze.read_text(encoding='utf-8'))['sourceSHA256'].items():
         source=ROOT/relative;data=source.read_bytes();assert hashlib.sha256(data).hexdigest()==digest

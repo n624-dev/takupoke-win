@@ -35,8 +35,12 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                 token.ThrowIfCancellationRequested();
                 var expected = capture.Pages.Single(p => p.Page == index + 1);
                 using var page = pdf.GetPage(index); using var image = new InMemoryRandomAccessStream();
-                await page.RenderToStreamAsync(image, new PdfPageRenderOptions {
-                    DestinationWidth = (uint)expected.Width, DestinationHeight = (uint)expected.Height }).AsTask(token);
+                if (expected.RenderProfile is not null and not "windows-pdf-png-v1")
+                    throw new InvalidDataException("原画像の描画方式を確認できません。");
+                var renderOptions = new PdfPageRenderOptions {
+                    DestinationWidth = (uint)expected.Width, DestinationHeight = (uint)expected.Height };
+                if (expected.RenderProfile == "windows-pdf-png-v1") renderOptions.BitmapEncoderId = BitmapEncoder.PngEncoderId;
+                await page.RenderToStreamAsync(image, renderOptions).AsTask(token);
                 image.Seek(0);
                 var decoder = await BitmapDecoder.CreateAsync(image).AsTask(token);
                 var pixels = await decoder.GetPixelDataAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore,
@@ -105,7 +109,8 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                 token.ThrowIfCancellationRequested(); using var page = pdf.GetPage(i); using var image = new InMemoryRandomAccessStream();
                 var width = (uint)Math.Clamp(Math.Round(page.Size.Width * 2), 640, 2400); var height = (uint)Math.Round(page.Size.Height / page.Size.Width * width);
                 if (height > 3200) { width = (uint)Math.Round(width * 3200d / height); height = 3200; }
-                await page.RenderToStreamAsync(image, new PdfPageRenderOptions { DestinationWidth = width, DestinationHeight = height }).AsTask(token);
+                await page.RenderToStreamAsync(image, new PdfPageRenderOptions { DestinationWidth = width, DestinationHeight = height,
+                    BitmapEncoderId = BitmapEncoder.PngEncoderId }).AsTask(token);
                 image.Seek(0); var decoder = await BitmapDecoder.CreateAsync(image).AsTask(token); using var bitmap = await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore).AsTask(token);
                 var pixels = await decoder.GetPixelDataAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore, new BitmapTransform(), ExifOrientationMode.IgnoreExifOrientation, ColorManagementMode.DoNotColorManage).AsTask(token);
                 var raster = new RecoveryRaster(bitmap.PixelWidth, bitmap.PixelHeight, pixels.DetachPixelData()); rasters.Add(raster);
@@ -156,7 +161,8 @@ public sealed class WindowsPdfRecovery(WindowsRecoveryModels models)
                 var sources = document.Sources.Select(source => nativeConfidence.TryGetValue(source.Id, out var score) ? source with { NativeConfidence = score } : source).ToArray();
                 if (nativeConfidence.Count == 0) return document; // Keep the existing native-only acquisition contract.
                 var proof = rasters.Select((r, index) => new RecoveryCapturedPage(index + 1, r.Width, r.Height,
-                    Convert.ToHexStringLower(SHA256.HashData(r.Bgra)), sources.Count(s => s.Page == index + 1), completeInk[index])).ToArray();
+                    Convert.ToHexStringLower(SHA256.HashData(r.Bgra)), sources.Count(s => s.Page == index + 1), completeInk[index])
+                    { RenderProfile = "windows-pdf-png-v1" }).ToArray();
                 token.ThrowIfCancellationRequested();
                 document = document with { Sources = sources, Capture = new(hash, (int)pdf.PageCount, RecoveryValidator.Fingerprint(sources), proof, ManualSchemaVersion: RecoveryManualAssistance.CurrentManualSchemaVersion) };
                 var targets = document.Sources.Any(s => s.NativeConfidence is < .8)
