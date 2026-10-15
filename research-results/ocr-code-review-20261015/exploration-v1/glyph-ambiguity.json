@@ -1,0 +1,458 @@
+[
+  {
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 18,
+    "glyphs": {
+      "I": {
+        "advance": 5.203125,
+        "inkBox": [
+          20,
+          6,
+          22,
+          20
+        ],
+        "inkSHA256": "cb142a945373403297f3b8e68ba0d1aca614d4b6e00f494a5883c336f6a1595c"
+      },
+      "l": {
+        "advance": 4.6875,
+        "inkBox": [
+          20,
+          6,
+          22,
+          20
+        ],
+        "inkSHA256": "cb142a945373403297f3b8e68ba0d1aca614d4b6e00f494a5883c336f6a1595c"
+      },
+      "1": {
+        "advance": 9.90625,
+        "inkBox": [
+          20,
+          6,
+          25,
+          20
+        ],
+        "inkSHA256": "5e6c01f16f752bdd45937a6d4010d94c905804b31868762be854cf6789d273f3"
+      },
+      "O": {
+        "advance": 13.546875,
+        "inkBox": [
+          19,
+          6,
+          31,
+          20
+        ],
+        "inkSHA256": "ff7b25b0aca4b3b6055a7a0a6945a080c90f1022df7830946de95a154994826b"
+      },
+      "0": {
+        "advance": 9.90625,
+        "inkBox": [
+          19,
+          6,
+          27,
+          20
+        ],
+        "inkSHA256": "0f46b84f303e74e918b3241687a7b05cf4baa58e1ad9295a7e51590b37b66ef8"
+      }
+    },
+    "scope": "Same standalone ink is a counterexample; it does not prove whole strings or spacing are indistinguishable."
+  },
+  {
+    "font": "SawarabiGothic-Regular.ttf",
+    "size": 26,
+    "glyphs": {
+      "I": {
+        "advance": 7.515625,
+        "inkBox": [
+          29,
+          10,
+          32,
+          29
+        ],
+        "inkSHA256": "88a6080347aa87bbd091468afe6dfb7f197df1386e72345714ef012574960787"
+      },
+      "l": {
+        "advance": 6.765625,
+        "inkBox": [
+          28,
+          10,
+          31,
+          29
+        ],
+        "inkSHA256": "88a6080347aa87bbd091468afe6dfb7f197df1386e72345714ef012574960787"
+      },
+      "1": {
+        "advance": 14.296875,
+        "inkBox": [
+          29,
+          10,
+          36,
+          29
+        ],
+        "inkSHA256": "4b5e3d43465d3a58445de348c8158e3533ad553b28ca0f7a8164ddbf4baf0b20"
+      },
+      "O": {
+        "advance": 19.578125,
+        "inkBox": [
+          27,
+          10,
+          45,
+          29
+        ],
+        "inkSHA256": "1239f5ca088a6e7e226f55c0cb1e49ca5c879a03ecd8be56a3f2612e1de6e306"
+      },
+      "0": {
+        "advance": 14.296875,
+        "inkBox": [
+          27,
+          10,
+          39,
+          29
+        ],
+        "inkSHA256": "1c02a9a3a8dfb397fbbbe8ee63c3b9b0f147d098417fa5fc09f583789dffd86c"
+      }
+    },
+    "scope": "Same standalone ink is a counterexample; it does not prove whole strings or spacing are indistinguishable."
+  },
+  {
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 18,
+    "glyphs": {
+      "I": {
+        "advance": 7.15625,
+        "inkBox": [
+          18,
+          6,
+          25,
+          20
+        ],
+        "inkSHA256": "de438e93a40bba17b519f9a475a37ee6b455b9a4be9d36d3c4303c77a85454fe"
+      },
+      "l": {
+        "advance": 4.8125,
+        "inkBox": [
+          18,
+          6,
+          23,
+          20
+        ],
+        "inkSHA256": "83a609f3c86220b47f4770b1e03ff2ede437a8a2647767a39db41321114698e9"
+      },
+      "1": {
+        "advance": 9.90625,
+        "inkBox": [
+          19,
+          7,
+          26,
+          20
+        ],
+        "inkSHA256": "d2318d23c1f35dd7f75f3cfe70d8b05bf899ee9397448c0c73c12fbcbaebd684"
+      },
+      "O": {
+        "advance": 14.65625,
+        "inkBox": [
+          18,
+          6,
+          33,
+          21
+        ],
+        "inkSHA256": "7a053566ab29b628a78a2c846a4a67c084693768714ae97e79e6925230336f2b"
+      },
+      "0": {
+        "advance": 9.90625,
+        "inkBox": [
+          18,
+          6,
+          28,
+          21
+        ],
+        "inkSHA256": "5d5d77100a665d6f7bcd8407079d546771b6fed6e89aa1f2197b00dbdef5dbdc"
+      }
+    },
+    "scope": "Same standalone ink is a counterexample; it does not prove whole strings or spacing are indistinguishable."
+  },
+  {
+    "font": "SawarabiMincho-Regular.ttf",
+    "size": 26,
+    "glyphs": {
+      "I": {
+        "advance": 10.34375,
+        "inkBox": [
+          27,
+          9,
+          36,
+          28
+        ],
+        "inkSHA256": "2e523bc97c0a55e923dcd4e386d6df5383dfdf3cdd8bc325ceecf263e236f41c"
+      },
+      "l": {
+        "advance": 6.9375,
+        "inkBox": [
+          26,
+          8,
+          33,
+          28
+        ],
+        "inkSHA256": "bcb0666641d380e36859b6568a6319836a4361ab2753b2d1f3d7404fe3342d8a"
+      },
+      "1": {
+        "advance": 14.296875,
+        "inkBox": [
+          28,
+          9,
+          38,
+          28
+        ],
+        "inkSHA256": "a1614dfce995b561232b4b32bac193db032d96c7d752d7662ce5eb54b6546547"
+      },
+      "O": {
+        "advance": 21.15625,
+        "inkBox": [
+          26,
+          8,
+          47,
+          29
+        ],
+        "inkSHA256": "9042c785694d8461877e1271c9494d14a77be551045a6a37733c1d4692086ae4"
+      },
+      "0": {
+        "advance": 14.296875,
+        "inkBox": [
+          27,
+          9,
+          40,
+          29
+        ],
+        "inkSHA256": "3ff95629d0c950fa828ca2fb6426544a47d7cd36c246a7bac508e915b5ba6bf8"
+      }
+    },
+    "scope": "Same standalone ink is a counterexample; it does not prove whole strings or spacing are indistinguishable."
+  },
+  {
+    "font": "KleeOne-Regular.ttf",
+    "size": 18,
+    "glyphs": {
+      "I": {
+        "advance": 5.46875,
+        "inkBox": [
+          20,
+          8,
+          21,
+          21
+        ],
+        "inkSHA256": "b322cf450e46eec288a2d50d4cb471dbb223431932ac75d76f2958ca204a6839"
+      },
+      "l": {
+        "advance": 4.734375,
+        "inkBox": [
+          20,
+          8,
+          21,
+          21
+        ],
+        "inkSHA256": "b59e449ffe4ed3e5bea72bf2801e469767cf5548c867b7a87472c877386e4695"
+      },
+      "1": {
+        "advance": 10.796875,
+        "inkBox": [
+          20,
+          8,
+          24,
+          21
+        ],
+        "inkSHA256": "1942a77808a1b6f8e41695e76b7057f08921de5703befba6a4e9bbe5255f3992"
+      },
+      "O": {
+        "advance": 13.40625,
+        "inkBox": [
+          19,
+          8,
+          30,
+          21
+        ],
+        "inkSHA256": "6008a58ea7325113498ab654191495e56854dd7cd434dc4ca54532baea5b9fcf"
+      },
+      "0": {
+        "advance": 10.796875,
+        "inkBox": [
+          19,
+          8,
+          27,
+          21
+        ],
+        "inkSHA256": "b82c0c61021feb87cb3612c2b81cc38a00aecd1978eba03c03ad2a059e0327ee"
+      }
+    },
+    "scope": "Same standalone ink is a counterexample; it does not prove whole strings or spacing are indistinguishable."
+  },
+  {
+    "font": "KleeOne-Regular.ttf",
+    "size": 26,
+    "glyphs": {
+      "I": {
+        "advance": 7.90625,
+        "inkBox": [
+          28,
+          12,
+          31,
+          31
+        ],
+        "inkSHA256": "0d2a02c8409aaa2c66118c1bea147f419c38ed5f53d43ab9832aa4b20fa9e548"
+      },
+      "l": {
+        "advance": 6.84375,
+        "inkBox": [
+          28,
+          12,
+          31,
+          31
+        ],
+        "inkSHA256": "784861ef95a28c9296d8b375e3dee0d9ddf5a42e526bf8d362ec5fbe1aa5ad92"
+      },
+      "1": {
+        "advance": 15.59375,
+        "inkBox": [
+          29,
+          12,
+          36,
+          31
+        ],
+        "inkSHA256": "8565ce64087d8be01802992846219a4057d7b0782d8bfb554a5c752217c10fc3"
+      },
+      "O": {
+        "advance": 19.375,
+        "inkBox": [
+          27,
+          12,
+          45,
+          31
+        ],
+        "inkSHA256": "6a816cfb6d7e8e62932293a72ccf8ca446288a00d6c967999528efe4a2922dd9"
+      },
+      "0": {
+        "advance": 15.59375,
+        "inkBox": [
+          27,
+          12,
+          40,
+          31
+        ],
+        "inkSHA256": "d6839abcec57bf3031cb31467e1f4d3f9ffabd18f5913efb72ffab01260fc71e"
+      }
+    },
+    "scope": "Same standalone ink is a counterexample; it does not prove whole strings or spacing are indistinguishable."
+  },
+  {
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 18,
+    "glyphs": {
+      "I": {
+        "advance": 7.4375,
+        "inkBox": [
+          19,
+          7,
+          25,
+          21
+        ],
+        "inkSHA256": "7b3edc2cd8a5d14d5047dcbf369f36cd7ca175f0cc0238860c11be8960c223c3"
+      },
+      "l": {
+        "advance": 6.234375,
+        "inkBox": [
+          18,
+          6,
+          24,
+          21
+        ],
+        "inkSHA256": "045b5695213e47ee6c9d592b2ea523531d09eee40a8cb77fd4a1fb49aabab9f6"
+      },
+      "1": {
+        "advance": 10.625,
+        "inkBox": [
+          20,
+          7,
+          27,
+          21
+        ],
+        "inkSHA256": "95b25e448e1b349f2e06ffbade09c88b590d3125c5923f3cf1847f4991d8ef8b"
+      },
+      "O": {
+        "advance": 14.765625,
+        "inkBox": [
+          19,
+          7,
+          32,
+          21
+        ],
+        "inkSHA256": "b9f8d578a3ba38e88547c0aadcd94e2e0b5a905e91168f00ad0d9dc286307bca"
+      },
+      "0": {
+        "advance": 10.625,
+        "inkBox": [
+          19,
+          7,
+          28,
+          21
+        ],
+        "inkSHA256": "b28f8c47a1281eb72de9f3f812e181ef5a544fbb8a3293fdef739b9d84125885"
+      }
+    },
+    "scope": "Same standalone ink is a counterexample; it does not prove whole strings or spacing are indistinguishable."
+  },
+  {
+    "font": "KaiseiTokumin-Regular.ttf",
+    "size": 26,
+    "glyphs": {
+      "I": {
+        "advance": 10.734375,
+        "inkBox": [
+          27,
+          12,
+          36,
+          31
+        ],
+        "inkSHA256": "db3d441b952d9ecc1230f1bd18f956e3c4a8e934827cb1caf2f048e423b6ec03"
+      },
+      "l": {
+        "advance": 9.0,
+        "inkBox": [
+          26,
+          11,
+          34,
+          31
+        ],
+        "inkSHA256": "921aecc3be687634b9bab119fcf243b706553bcfcf3b0af2eba3aea07f018a57"
+      },
+      "1": {
+        "advance": 15.34375,
+        "inkBox": [
+          28,
+          11,
+          39,
+          31
+        ],
+        "inkSHA256": "e59a338e2e1951bf36a518ba0d8f3b574355709b25bf2ffe4aa06bdcce1add1c"
+      },
+      "O": {
+        "advance": 21.3125,
+        "inkBox": [
+          27,
+          12,
+          45,
+          31
+        ],
+        "inkSHA256": "c29c913904af6b8175d81fb9957e3b5ec81896ea18b10ae746e2dc3407798108"
+      },
+      "0": {
+        "advance": 15.34375,
+        "inkBox": [
+          27,
+          12,
+          40,
+          31
+        ],
+        "inkSHA256": "6dbc5c4797c17398697cf5d3cd0aaa1269f22780eaad641ad6a8925faf049a13"
+      }
+    },
+    "scope": "Same standalone ink is a counterexample; it does not prove whole strings or spacing are indistinguishable."
+  }
+]
