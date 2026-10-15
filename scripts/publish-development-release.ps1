@@ -1,10 +1,20 @@
-param([Parameter(Mandatory)][string]$Version)
+param([Parameter(Mandatory)][string]$Version, [switch]$ValidateTagOnly)
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 if ($Version -notmatch '^\d+\.\d+\.\d+-dev\.\d+$') { throw 'Only a development release can be published by this workflow.' }
 $repo = $env:GITHUB_REPOSITORY
 if ($repo -ne 'n624-dev/takupoke-win') { throw 'Unexpected release repository.' }
 $tag = "v$Version"
+$tagJson = gh api "repos/$repo/git/ref/tags/$tag" 2>$null
+if ($LASTEXITCODE -ne 0) { throw "Push tag $tag at the build commit before dispatching this workflow." }
+$target = ($tagJson | ConvertFrom-Json).object
+for ($depth = 0; $target.type -eq 'tag' -and $depth -lt 4; $depth++) {
+    $tagObject = gh api "repos/$repo/git/tags/$($target.sha)"
+    if ($LASTEXITCODE -ne 0) { throw 'The release tag could not be resolved.' }
+    $target = ($tagObject | ConvertFrom-Json).object
+}
+if ($target.type -ne 'commit' -or $target.sha -cne $env:GITHUB_SHA) { throw 'The release tag must identify exactly the build commit.' }
+if ($ValidateTagOnly) { Write-Output "Verified $tag at $env:GITHUB_SHA."; return }
 $runUrl = "https://github.com/$repo/actions/runs/$env:GITHUB_RUN_ID"
 $notes = Join-Path $env:TAKUPOKE_CI_TEMP 'release-notes.txt'
 @"
@@ -48,7 +58,7 @@ if ($assets.Count -ne 6) { throw 'Unexpected release asset count.' }
 gh release view $tag --repo $repo *> $null
 if ($LASTEXITCODE -eq 0) { throw 'This release version already exists; published assets will not be replaced.' }
 try {
-    gh release create $tag @assets --repo $repo --target $env:GITHUB_SHA --draft --prerelease --title "たくポケ $Version（開発確認版）" --notes-file $notes
+    gh release create $tag @assets --repo $repo --verify-tag --target $env:GITHUB_SHA --draft --prerelease --title "たくポケ $Version（開発確認版）" --notes-file $notes
     if ($LASTEXITCODE -ne 0) { throw 'Creating the development release failed.' }
     gh release edit $tag --repo $repo --draft=false --prerelease --latest=false
     if ($LASTEXITCODE -ne 0) { throw 'Publishing the development release failed.' }
@@ -56,7 +66,7 @@ try {
     $releaseJson = gh release view $tag --repo $repo --json isDraft,body 2>$null
     if ($LASTEXITCODE -eq 0) {
         $release = $releaseJson | ConvertFrom-Json
-        if ($release.isDraft -and $release.body.Contains($runUrl)) { gh release delete $tag --repo $repo --yes --cleanup-tag }
+        if ($release.isDraft -and $release.body.Contains($runUrl)) { gh release delete $tag --repo $repo --yes }
     }
     throw
 }
