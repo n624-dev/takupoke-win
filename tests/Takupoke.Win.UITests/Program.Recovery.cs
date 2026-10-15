@@ -217,6 +217,7 @@ internal static partial class Program
         CheckRecoveryLatestAcquisitionFailure(executable, root);
         CheckRecoveryParallelUi(executable, root);
         CheckManualRecoveryUi(executable, root);
+        CheckRoomCandidatesUi(executable, root);
         CheckBatchRecoveryUi(executable, root);
         CheckHeaderRecoveryUi(executable, root);
         CheckNativeSourceRecoveryUi(executable,root);

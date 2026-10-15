@@ -1,0 +1,90 @@
+{
+  "wrong-with-correct-candidate": [
+    {
+      "id": "code-0018",
+      "expected": "OOI65",
+      "raw": "00I65",
+      "candidates": [
+        "OOI65"
+      ],
+      "font": "SawarabiGothic-Regular.ttf"
+    },
+    {
+      "id": "code-0038",
+      "expected": "IlO49",
+      "raw": "IIO49",
+      "candidates": [
+        "IlO49"
+      ],
+      "font": "SawarabiGothic-Regular.ttf"
+    },
+    {
+      "id": "code-0054",
+      "expected": "Ol142",
+      "raw": "OI142",
+      "candidates": [
+        "Ol142",
+        "0II42"
+      ],
+      "font": "SawarabiGothic-Regular.ttf"
+    }
+  ],
+  "already-correct-with-misleading-alternative": [
+    {
+      "id": "code-0026",
+      "expected": "11I45",
+      "raw": "11I45",
+      "candidates": [
+        "11145"
+      ],
+      "font": "SawarabiGothic-Regular.ttf"
+    },
+    {
+      "id": "code-0034",
+      "expected": "OII24",
+      "raw": "OII24",
+      "candidates": [
+        "Oll24"
+      ],
+      "font": "SawarabiGothic-Regular.ttf"
+    },
+    {
+      "id": "code-0082",
+      "expected": "OII24",
+      "raw": "OII24",
+      "candidates": [
+        "Oll24"
+      ],
+      "font": "SawarabiGothic-Regular.ttf"
+    }
+  ],
+  "unknown-code-with-suggestions": [
+    {
+      "id": "code-0062",
+      "expected": "Ill53",
+      "raw": "III53",
+      "candidates": [
+        "IIl53"
+      ],
+      "font": "SawarabiGothic-Regular.ttf"
+    },
+    {
+      "id": "code-0251",
+      "expected": "lI145",
+      "raw": "1I145",
+      "candidates": [
+        "11145"
+      ],
+      "font": "SawarabiMincho-Regular.ttf"
+    },
+    {
+      "id": "code-0315",
+      "expected": "OIl86",
+      "raw": "OI186",
+      "candidates": [
+        "O1186"
+      ],
+      "font": "SawarabiMincho-Regular.ttf"
+    }
+  ]
+}

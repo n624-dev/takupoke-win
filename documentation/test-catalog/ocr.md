@@ -1,7 +1,7 @@
 # CPU OCR・文字位置・モデル・原画像切り出し
 
 対応関係・宣言名・実行方法のSHA-256：
-`79f88738d2773f30fa8cfd881d4e36ed179716579bbf253d1cf006d53f6ef923`
+`d787f1c3866b508078f078599d12c744c5af223873e024bb25154ffdf65bcdd3`
 
 環境：Linux／Windows .NET。Windows描画・実推論は対応workflowで検証
 
@@ -12,6 +12,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## 変更時に確認するソース
 
+- [src/Takupoke.Core/Recovery/RecoveryCodeCandidates.cs](../../src/Takupoke.Core/Recovery/RecoveryCodeCandidates.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrAsciiRefinement.cs](../../src/Takupoke.Infrastructure/Recovery/OcrAsciiRefinement.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs](../../src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs](../../src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs)
@@ -26,6 +27,13 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - [src/Takupoke.Win/Assets/Recovery/ocr-characters.json](../../src/Takupoke.Win/Assets/Recovery/ocr-characters.json)
 - [tests/Takupoke.Integration.Tests/CapturedOcrHeaderFixture.cs](../../tests/Takupoke.Integration.Tests/CapturedOcrHeaderFixture.cs)
 - [tests/Takupoke.Integration.Tests/OcrHeaderGoldenSnapshots.cs](../../tests/Takupoke.Integration.Tests/OcrHeaderGoldenSnapshots.cs)
+
+## [tests/Takupoke.Core.Tests/RecoveryCodeCandidatesTests.cs](../../tests/Takupoke.Core.Tests/RecoveryCodeCandidatesTests.cs)
+
+- `KnownRosterSuppliesOnlyLiteralConfusionsAndKeepsMultipleAlternatives`
+- `UnrelatedNamesUnknownCodesCaseAndTooManyChangesAreNotInvented`
+- `EveryClassInMergedCellMustBeCoveredAndGlobalNamesRemainAvailable`
+- `FullNameMayBeCodeButWorkAndCancellationStayBounded`
 
 ## [tests/Takupoke.Integration.Tests/ExamCompositeOcrHeaderTests.cs](../../tests/Takupoke.Integration.Tests/ExamCompositeOcrHeaderTests.cs)
 

@@ -137,7 +137,30 @@ public sealed partial class MainWindow
             input.TextChanging += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Edit(key, input.Text); acknowledgement.IsChecked = _manualInput.IsAcknowledged(key); UpdateSubmit(); };
             acknowledgement.Checked += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Acknowledge(key, true); UpdateSubmit(); };
             acknowledgement.Unchecked += (_, _) => { if (!_manualInput.IsBoundTo(identity)) return; _manualInput.Acknowledge(key, false); UpdateSubmit(); };
-            entryPanel.Children.Add(input); entryPanel.Children.Add(acknowledgement); panel.Children.Add(comparison); Add(Card(panel));
+            entryPanel.Children.Add(input);
+            if (target.Target.Role == RecoveryFieldRole.Room && _model.Mappings is { } mappings)
+            {
+                var candidates = RecoveryCodeCandidates.Find(target.OriginalOcr, mappings.Rooms,
+                    cell.Slots.Select(s => s.ClassName).Distinct(StringComparer.Ordinal).ToArray());
+                if (candidates.Count > 0)
+                {
+                    entryPanel.Children.Add(SettingsDescription("名称対応表の似たコード（最大3件）。候補を選んだ後も原画像との照合が必要です。"));
+                    foreach (var (candidate, candidateIndex) in candidates.Select((value, index) => (value, index)))
+                    {
+                        var suggestion = OperationButton("候補を入力: " + candidate, () => {
+                            SyncManualInput();
+                            if (!_manualInput.IsBoundTo(identity)) return;
+                            _manualInput.Edit(key, candidate);
+                            _manualInput.Acknowledge(key, false);
+                            input.Text = candidate;
+                            acknowledgement.IsChecked = false;
+                            UpdateSubmit();
+                        }, "manual-candidate-" + key + "-" + candidateIndex);
+                        entryPanel.Children.Add(suggestion);
+                    }
+                }
+            }
+            entryPanel.Children.Add(acknowledgement); panel.Children.Add(comparison); Add(Card(panel));
         }
         UpdateSubmit(); Add(submit);
         Add(OperationButton("入力による補助を中止", async () => {

@@ -19,18 +19,23 @@ internal static partial class Program
     // Scripted confidence is a UI control, not a native OCR observation.
     // The independently drawn original bitmap/PDF and retained crops are real
     // temporary input bytes; the global ink receipt is computed, never assumed.
-    private static async Task<RecoveryManualSession> SeedManualRecoveryUiAsync(string root, int count, bool reviewHeader = false, int manualSchemaVersion = 1, bool confusableRoom = false,bool nativeReview = false)
+    private static async Task<RecoveryManualSession> SeedManualRecoveryUiAsync(string root, int count, bool reviewHeader = false, int manualSchemaVersion = 1, bool confusableRoom = false,bool nativeReview = false, string? roomCode = null)
     {
         var preferences = new PreferencesStore(root);
         await preferences.SaveAsync((await preferences.LoadAsync()) with { UseAiFeatures = true });
         await using var store = new SchoolDataStore(root, new WindowsDpapiProtector());
         var lease = await store.BeginAsync(); var (document, _) = RecoveryUiFixture(lease.Period);
+        if (roomCode is not null)
+            await store.WriteAsync(lease, "api.mapping", new SavedMapping(new string('C',43), "fictional-codes", 1,
+                "\"fictional-codes\"", new string('c',64), "2032-04-01T00:00:00Z", DateTimeOffset.UtcNow,
+                new([], [], [new("I01O", "架空実習室"), new("l010", "別の架空室"), new("1010", "別学級限定", ["1_1"])])));
         var cell = document.Cells[0];
         var extra = new List<RecoverySource> { new("teacher", cell.Id, 1, "架空教員A", new(110,125,60,10)) };
         if(nativeReview)extra.Add(new("native-note","header",1,"架空の原本注記",new(10,920,70,10)));
         if (count == 4) extra.Add(new("subject-second", document.Cells[1].Id, 1, "架空科目B", new(110,210,60,10)));
         var sources = document.Sources.Concat(extra)
             .Select(s => confusableRoom && s.Id == "room" ? s with { Text = "架空室I1O0" } : s)
+            .Select(s => roomCode is not null && s.Id == "room" ? s with { Text = roomCode } : s)
             .Select(s => s with { FromOcr = true, NativeConfidence = new[] { "subject", "teacher", "room", "subject-second" }.Take(count).Contains(s.Id) || reviewHeader && s.Id == "class" ? .4 : .95 }).ToArray();
         if(nativeReview)sources=sources.Select(source=>source with {FromOcr=false,NativeConfidence=null,
             RequiresVisualReview=source.NativeConfidence is <.8 || source.Id=="native-note"}).ToArray();
@@ -188,6 +193,36 @@ internal static partial class Program
             Stop();Start(executable);
             Require(RecoveryUiFormalAsync(root).GetAwaiter().GetResult()?.Recovery?.Result.HumanCorrections?.Count==expectedCount,"Manual correction audit persists across native app restart.");
         }
+    }
+    private static void CheckRoomCandidatesUi(string executable, string root)
+    {
+        Stop(); var session = SeedManualRecoveryUiAsync(root, 3, manualSchemaVersion: 3, roomCode: "I010").GetAwaiter().GetResult();
+        var before = RecoveryValidator.Fingerprint(RecoveryUiFormalAsync(root).GetAwaiter().GetResult());
+        var room = session.Plan.Targets.Single(t => t.Target.Role == RecoveryFieldRole.Room).Target.Key;
+        Start(executable); OpenRecoveryUiPreview();
+        Wait(() => Find("manual-candidate-" + room + "-0") is not null, "Registered room-code alternatives appear beside the source image");
+        Require(WaitElement("manual-candidate-" + room + "-0").Current.Name == "候補を入力: I01O", "Candidate uses the literal room roster and class scope");
+        Require(Find("manual-candidate-" + room + "-2") is null, "Unrelated class does not supply a candidate");
+        Require(((ValuePattern)WaitElement("manual-value-" + room).GetCurrentPattern(ValuePattern.Pattern)).Current.Value == "I010",
+            "Candidates never overwrite the original prefill automatically");
+        Invoke("manual-candidate-" + room + "-0");
+        Wait(() => ((ValuePattern)WaitElement("manual-value-" + room).GetCurrentPattern(ValuePattern.Pattern)).Current.Value == "I01O",
+            "Explicit candidate click fills only this field");
+        Require(!Checked(WaitElement("manual-ack-" + room)), "Selecting a candidate does not acknowledge the pixels");
+        foreach (var target in session.Plan.Targets) Toggle(WaitElement("manual-ack-" + target.Target.Key));
+        Wait(() => WaitElement("manual-submit-Timetable").Current.IsEnabled, "Independent image acknowledgements enable preview");
+        Invoke("manual-candidate-" + room + "-0");
+        Wait(() => !Checked(WaitElement("manual-ack-" + room)) && !WaitElement("manual-submit-Timetable").Current.IsEnabled,
+            "Choosing even the same candidate revokes previous acknowledgement");
+        Toggle(WaitElement("manual-ack-" + room));
+        Invoke("manual-submit-Timetable");
+        Wait(() => Find("adopt-recovery-Timetable") is not null, "Candidate-assisted correction still opens a whole-document preview");
+        var pending = RecoveryUiPendingAsync(root).GetAwaiter().GetResult();
+        Require(pending.Document.Sources.Single(s => s.Id == "room").Text == "I010" &&
+            pending.Result.HumanCorrections!.Single(c => c.Target.Role == RecoveryFieldRole.Room).CorrectedText == "I01O",
+            "Original OCR and independently confirmed correction remain separate");
+        Require(RecoveryValidator.Fingerprint(RecoveryUiFormalAsync(root).GetAwaiter().GetResult()) == before,
+            "Candidate selection and preview preserve the last adopted analysis");
     }
     private static void CheckHeaderRecoveryUi(string executable, string root)
     {

@@ -1,0 +1,105 @@
+{
+  "files": [
+    {
+      "file": "as-run-source/CodeProbe.csproj",
+      "bytes": 413,
+      "sha256": "4f203ba334465239e68ede01538f9cb8b091869b5a4b23217ceccb11896304cd"
+    },
+    {
+      "file": "as-run-source/OcrAsciiRefinement.cs",
+      "bytes": 4078,
+      "sha256": "16f596485bac4d1f8f6d610e6bdbddc2ff71c74315ba9b6ab5e2a5f1899f6974"
+    },
+    {
+      "file": "as-run-source/Program.cs",
+      "bytes": 6272,
+      "sha256": "1a2432a3b5c7fbfa4c674f4854b6866783679291d726b525013d69e99ae4d289"
+    },
+    {
+      "file": "as-run-source/README.md",
+      "bytes": 2548,
+      "sha256": "6d9fe1515e9530bc32be4ff00cc6702567a17acdac0c8e6e7146bf8a3479b89f"
+    },
+    {
+      "file": "as-run-source/RecoveryCodeCandidates.cs",
+      "bytes": 2010,
+      "sha256": "6fecc6a29dfaca0794b16c6e1022a78da4d1ea233d99c7f3291561d416100043"
+    },
+    {
+      "file": "as-run-source/compare_routes.py",
+      "bytes": 4189,
+      "sha256": "726ce53aa4ae5ff7d502c83fb371ca2027d4525f8a1c0f825764d82e3ecaa34e"
+    },
+    {
+      "file": "as-run-source/run.py",
+      "bytes": 15897,
+      "sha256": "b06b1f95a242a141c70fac9f9ef12fe61d6d3a956b13fb0827872e56746773bc"
+    },
+    {
+      "file": "examples.json",
+      "bytes": 1749,
+      "sha256": "dbcdb34dc23aef64ba9769c96724fbaba9918724a87dbe73c94dae8ccfd02b58"
+    },
+    {
+      "file": "font-downloads.json",
+      "bytes": 1119,
+      "sha256": "d3727064973c24a1c27bd026c6c83583687ef96123cd76deffb5cf11d2bcac4c"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 12629,
+      "sha256": "2b4f1f616b021221043d2cac5c41548ba182d5fc8571bc485a12cbe53e56c3d2"
+    },
+    {
+      "file": "glyph-ambiguity.json",
+      "bytes": 10632,
+      "sha256": "dbbfba4154ac4d701eb75a663f3a493e15f0f129d78999258330c9f6c025ddf9"
+    },
+    {
+      "file": "inputs.json",
+      "bytes": 194229,
+      "sha256": "83110e1a3b22ac93cdd6efccb2f7eca1eea2c2480ef641438874c25b035ef60e"
+    },
+    {
+      "file": "oracle.json",
+      "bytes": 141979,
+      "sha256": "39f319b5d4a29454616546d9a37f0203519010e49c2f17bcbedf6aaaeb3868f5"
+    },
+    {
+      "file": "protocol.json",
+      "bytes": 1777,
+      "sha256": "d63da645150edcd548f7e6401d93afaeb73d82d9359696cf61501770fe52392d"
+    },
+    {
+      "file": "raw.jsonl",
+      "bytes": 2083923,
+      "sha256": "bda40a1fb585b98452f9ad7eb2295a0412bcd6df03e92f329cba85c80fa38791"
+    },
+    {
+      "file": "report.json",
+      "bytes": 25518,
+      "sha256": "fb76e036037126d9d75f13076aed21bd43128675487aaa282d1b24d71d505cec"
+    },
+    {
+      "file": "room-candidates-report.json",
+      "bytes": 1340,
+      "sha256": "76e0d67003495c5ba029f9f684ba666858c3fa4bc1bb3a54e87d48bc3a5b217d"
+    },
+    {
+      "file": "room-roster.json",
+      "bytes": 4596,
+      "sha256": "38b303b23ffda5d99f177f33a6d53be1e7df937d3d376beda04f996152ff9aa1"
+    },
+    {
+      "file": "worker-receipt.json",
+      "bytes": 164,
+      "sha256": "0c5fbdcffc19ddc9578ae42855435ac02cf839f5fc9644b05d07754fed86fbd9"
+    }
+  ],
+  "workerExitCode": 0,
+  "privateData": false,
+  "modelsChanged": false,
+  "trainingPerformedByThisStudy": false,
+  "sourceNote": "As-run comparison tool hashes verified against pre-inference freeze; current source only changes font cohort/report wording after run start. Original as-run source retained. Core helper/runtime source snapshots added at closure; frozen reader binaries identify executed runtime.",
+  "scope": "Previously observed fonts; fresh fictional strings. Paired margins not independent. No human-time or full-document accuracy credit."
+}

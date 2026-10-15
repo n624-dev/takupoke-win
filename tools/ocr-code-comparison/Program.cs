@@ -4,6 +4,7 @@ using System.Text.Json;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
 using Takupoke.Core.Recovery;
+using Takupoke.Core;
 using Takupoke.Infrastructure.Recovery;
 
 // Pixel/model manifest only. The oracle is read after this process closes.
@@ -17,6 +18,8 @@ using var writer = new StreamWriter(new FileStream(args[1], FileMode.CreateNew, 
 var refineCodes = input.RootElement.TryGetProperty("standaloneRefinement", out var refine) && refine.GetBoolean();
 var specialistModel = input.RootElement.GetProperty("models").EnumerateArray().Single(m => m.GetProperty("id").GetString() == "deployed-trained-english-v5");
 using var specialist = refineCodes ? new OnnxAsciiOcr(Verify(specialistModel.GetProperty("model")), Verify(specialistModel.GetProperty("dictionary"))) : null;
+var roster = input.RootElement.TryGetProperty("roomRoster", out var codes)
+    ? codes.EnumerateArray().Select(c => new MappingRule(c.GetString()!, c.GetString()!)).ToArray() : [];
 foreach (var model in input.RootElement.GetProperty("models").EnumerateArray())
 {
     var id = model.GetProperty("id").GetString();
@@ -55,8 +58,10 @@ foreach (var model in input.RootElement.GetProperty("models").EnumerateArray())
                 probabilities.Dimensions[1], 0, n)).ToArray() : [];
             var result = supported ? OcrAsciiRefinement.Refine(raster, glyphs, pieces.Select(p => (double)p.Confidence).ToArray(),
                 new Dictionary<int,RecoveryBox> { [0] = new(0,0,raster.Width,raster.Height) }, [], specialist!, deadline.Token) : null;
+            var resultText = result is null ? string.Concat(pieces.Select(p => p.Text)) : string.Concat(result.Glyphs.Select(g => g.Text));
             writer.WriteLine(JsonSerializer.Serialize(new { id = row.GetProperty("id").GetString(), model = "actual-code-route",
-                text = result is null ? string.Concat(pieces.Select(p => p.Text)) : string.Concat(result.Glyphs.Select(g => g.Text)),
+                text = resultText,
+                roomCandidates = RecoveryCodeCandidates.Find(resultText, roster, ["1_1"], deadline.Token),
                 pieces = result is null ? pieces.Select(p => new { p.Text, p.Confidence }) : result.Glyphs.Select((g,n) => new { g.Text, Confidence = (float)result.Confidences[n] }),
                 reject = (float?)null, paddingSupported = supported, recognizerCalls = result?.RecognizerCalls ?? 0,
                 transformed.ValidWidth, transformed.InputWidth, milliseconds = routeWatch.Elapsed.TotalMilliseconds,

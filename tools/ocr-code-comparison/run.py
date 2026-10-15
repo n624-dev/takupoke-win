@@ -51,6 +51,9 @@ def main():
     parser.add_argument('--dotnet', required=True)
     parser.add_argument('--validation', action='store_true')
     parser.add_argument('--exclude-oracle', type=Path)
+    parser.add_argument('--seed', type=int, help='Fresh-string study seed; never changes an existing study')
+    parser.add_argument('--font-assets', type=Path, help='Reuse SHA-pinned fonts and license receipts from a prior study')
+    parser.add_argument('--room-candidates', action='store_true', help='Freeze a half-known room roster before inference')
     args = parser.parse_args()
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
@@ -67,9 +70,16 @@ def main():
         base = f'https://raw.githubusercontent.com/google/fonts/{FONT_REV}/ofl/{folder}/'
         for filename in (name, 'OFL.txt'):
             target = out / (name if filename == name else folder + '-OFL.txt')
-            target.write_bytes(urllib.request.urlopen(base + filename, timeout=40).read())
+            if args.font_assets:
+                prior = args.font_assets / (name if filename == name else folder + '-OFL.txt')
+                expected = next(r for r in json.loads((args.font_assets/'font-downloads.json').read_text()) if r['url'] == base + filename)
+                if sha(prior) != expected['sha256']:
+                    raise ValueError('Pinned font asset changed')
+                shutil.copyfile(prior, target)
+            else:
+                target.write_bytes(urllib.request.urlopen(base + filename, timeout=40).read())
             downloads.append(dict(url=base + filename, **asset(target, out)))
-        fonts.append((out / name, 'new-font-evaluation'))
+        fonts.append((out / name, 'previously-observed-font' if args.validation else 'new-font-evaluation'))
     write(out / 'font-downloads.json', downloads)
     models = []
     specs = [
@@ -88,7 +98,7 @@ def main():
             shutil.copyfile(source, target)
             paths.append(asset(target, out))
         models.append(dict(id=name, model=paths[0], dictionary=paths[1]))
-    seed = 202610151117 if args.validation else 202610150913
+    seed = args.seed if args.seed is not None else (202610151117 if args.validation else 202610150913)
     excluded = set()
     if args.exclude_oracle:
         excluded = {g['value'] for g in json.loads(args.exclude_oracle.read_text())}
@@ -148,7 +158,26 @@ def main():
         rows.append(dict(id=ordinal, width=80, height=30, pixels=asset(path, out)))
         oracle.append(dict(id=ordinal, value='', font=font_path.name, split=split, size=0, group='blank', margin=0))
     write(out / 'glyph-ambiguity.json', ambiguity)
-    write(out / 'inputs.json', dict(recipe='independent-code-images-v1', models=models, rows=rows, standaloneRefinement=args.validation))
+    roster = None
+    if args.room_candidates:
+        if not args.validation:
+            raise ValueError('Room candidates require the actual production route')
+        literals = {row['value'] for row in oracle if row['value']}
+        known = {value for value in literals if int(hashlib.sha256(value.encode()).hexdigest(), 16) % 2 == 0}
+        unused = set()
+        roster_rng = random.Random(seed + 1)
+        while len(unused) < 64:
+            value = ''.join(roster_rng.choice('Il1O0') for _ in range(3)) + str(roster_rng.randrange(20, 99))
+            if value not in literals:
+                unused.add(value)
+        roster = sorted(known | unused)
+        write(out/'room-roster.json', dict(codes=roster, unusedCodes=sorted(unused),
+            selection='SHA256(value) even, before inference; other half intentionally absent; 64 independent unused codes',
+            source='Independent fictional reference roster; no production school mapping'))
+    manifest = dict(recipe='independent-code-images-v1', models=models, rows=rows, standaloneRefinement=args.validation)
+    if roster is not None:
+        manifest['roomRoster'] = roster
+    write(out / 'inputs.json', manifest)
     write(out / 'oracle.json', oracle)
     env = {k: v for k, v in os.environ.items() if not any(s in k.upper() for s in ['TOKEN', 'SECRET', 'PASSWORD', 'CREDENTIAL'])}
     env.update(DOTNET_CLI_TELEMETRY_OPTOUT='1', ORT_TELEMETRY_DISABLED='1')
@@ -191,10 +220,26 @@ def main():
             milliseconds=sum(v['milliseconds'] for v,_ in items)))
     report = dict(rows=len(rows), distinctCodeRenderings=384, calls=len(observations), scores=scores,
         raw=asset(out/'raw.jsonl', out), peakWorkingSetBytes=max(v['peakWorkingSetBytes'] for v in observations),
-        scope='New code images; independent font evaluation only for KleeOne and KaiseiTokumin. Isolated recognition, not whole PDF or human correction time.',
+        scope='Fresh strings in observed fonts' if args.validation else 'New code images; independent font evaluation only for KleeOne and KaiseiTokumin. Isolated recognition, not whole PDF or human correction time.',
         productModelChanged=False, productionCodeRouteEvaluated=args.validation,
         validationScope='Fresh strings, previously observed fonts' if args.validation else 'Exploratory new-font comparison')
     write(out/'report.json', report)
+    if roster is not None:
+        candidate_scores = []
+        for margin in [2, 6]:
+            items = [(v, gold[v['id']]) for v in observations if v['model'] == 'actual-code-route' and gold[v['id']]['margin'] == margin]
+            wrong = [(v, g) for v, g in items if v['text'] != g['value']]
+            correct = [(v, g) for v, g in items if v['text'] == g['value']]
+            candidate_scores.append(dict(margin=margin, rows=len(items), baselineExact=len(correct),
+                wrong=len(wrong), wrongWithReference=sum(g['value'] in roster for v, g in wrong),
+                wrongWithCorrectCandidate=sum(g['value'] in v['roomCandidates'] for v, g in wrong),
+                wrongWithCorrectFirstCandidate=sum(bool(v['roomCandidates']) and g['value'] == v['roomCandidates'][0] for v, g in wrong),
+                alreadyCorrectWithAlternativeCandidates=sum(bool(v['roomCandidates']) for v, g in correct),
+                unknownCodeWithCandidates=sum(g['value'] not in roster and bool(v['roomCandidates']) for v, g in items),
+                candidateCount=dict(collections.Counter(len(v['roomCandidates']) for v, g in items)),
+                naiveFirstCandidateExact=sum((v['roomCandidates'][0] if v['roomCandidates'] else v['text']) == g['value'] for v, g in items)))
+        write(out/'room-candidates-report.json', dict(scores=candidate_scores, raw=asset(out/'raw.jsonl', out),
+            roster=asset(out/'room-roster.json', out), scope='Candidate recall and risks only. No automatic replacement; no human review-time or final accepted accuracy measurement.'))
     print(json.dumps(report, ensure_ascii=False), flush=True)
 
 

@@ -1,7 +1,7 @@
 # 原画像確認・本文訂正・モデル設定・動的詳細
 
 対応関係・宣言名・実行方法のSHA-256：
-`3d0ef50d19f31504e1b86ff402c8109852462e07e04fa9d4442f1a23f9510ca5`
+`91a062ea825f5fb15a3b78b5fcc97ce3d458180815fe89353166acf5c05d3434`
 
 環境：Windows WinUI x64。クロスビルドは操作成功に数えない
 
@@ -31,6 +31,7 @@ pwsh ./tests/Takupoke.Win.UITests/startup-smoke.ps1
 ## [tests/Takupoke.Win.UITests/Program.ManualRecovery.cs](../../tests/Takupoke.Win.UITests/Program.ManualRecovery.cs)
 
 - `CheckManualRecoveryUi`
+- `CheckRoomCandidatesUi`
 - `CheckHeaderRecoveryUi`
 - `CheckNativeSourceRecoveryUi`
 - `CheckBatchRecoveryUi`

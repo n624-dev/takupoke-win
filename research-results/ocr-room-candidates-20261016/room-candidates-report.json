@@ -1,0 +1,51 @@
+{
+  "scores": [
+    {
+      "margin": 2,
+      "rows": 384,
+      "baselineExact": 275,
+      "wrong": 109,
+      "wrongWithReference": 65,
+      "wrongWithCorrectCandidate": 58,
+      "wrongWithCorrectFirstCandidate": 56,
+      "alreadyCorrectWithAlternativeCandidates": 15,
+      "unknownCodeWithCandidates": 17,
+      "candidateCount": {
+        "0": 302,
+        "1": 76,
+        "2": 5,
+        "3": 1
+      },
+      "naiveFirstCandidateExact": 316
+    },
+    {
+      "margin": 6,
+      "rows": 384,
+      "baselineExact": 264,
+      "wrong": 120,
+      "wrongWithReference": 66,
+      "wrongWithCorrectCandidate": 60,
+      "wrongWithCorrectFirstCandidate": 58,
+      "alreadyCorrectWithAlternativeCandidates": 12,
+      "unknownCodeWithCandidates": 16,
+      "candidateCount": {
+        "0": 301,
+        "1": 79,
+        "2": 3,
+        "3": 1
+      },
+      "naiveFirstCandidateExact": 310
+    }
+  ],
+  "raw": {
+    "file": "raw.jsonl",
+    "bytes": 2083923,
+    "sha256": "bda40a1fb585b98452f9ad7eb2295a0412bcd6df03e92f329cba85c80fa38791"
+  },
+  "roster": {
+    "file": "room-roster.json",
+    "bytes": 4596,
+    "sha256": "38b303b23ffda5d99f177f33a6d53be1e7df937d3d376beda04f996152ff9aa1"
+  },
+  "scope": "Candidate recall and risks only. No automatic replacement; no human review-time or final accepted accuracy measurement."
+}
