@@ -1,0 +1,35 @@
+{
+  "parent": "819550e4d40d6fdb4ef9c8e713d5ab951d83f3c0",
+  "baseTree": "76e0070b9eb20e3f492fa2be06945fd949318225",
+  "expectedTree": "3c1e452d8b0a3622c269fd9e00102d37aed7bd2c",
+  "payloadBytes": 18375279,
+  "compressedBytes": 3249077,
+  "compressedSha256": "f1e96a368b3e24206264c21c0941cb5271acb251ddbfd096a36ff04306148e51",
+  "payloadSha256": "30c802750f923b6a083c0afbcd3c3874b548710bc4c1506ec497ba452848d9ac",
+  "parts": [
+    {
+      "file": "part-000.bin",
+      "bytes": 1048576,
+      "sha256": "950e076ca08b4b3623c6f32eec48c2d0b3209574c731b46a511a2922ac37c7c9",
+      "gitBlobSHA": "013502e40a87ca13c67633d49c970a59586a28fd"
+    },
+    {
+      "file": "part-001.bin",
+      "bytes": 1048576,
+      "sha256": "6967c6c2d18480c108844aab88cd06472c8dc97fdbaff8ed21a2676e8020142c",
+      "gitBlobSHA": "1ac6bfa360109818a4a25aaba12cf05c2800e85d"
+    },
+    {
+      "file": "part-002.bin",
+      "bytes": 1048576,
+      "sha256": "174f1e0702ff20a734d70b088f6ace45e5c7024cf6c1cea5f5d64e879052f8f1",
+      "gitBlobSHA": "60897bb70324ce337e610ccef274c1efe20b1f63"
+    },
+    {
+      "file": "part-003.bin",
+      "bytes": 103349,
+      "sha256": "fafea2e41c00862407872fd5d1b4f7a478810d428e5b6473e86e4c51847a47ce",
+      "gitBlobSHA": "38eb390f78af9481bc8c22e54a4ae3038be756b5"
+    }
+  ]
+}

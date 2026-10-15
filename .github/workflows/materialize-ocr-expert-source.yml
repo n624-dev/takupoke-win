@@ -1,0 +1,80 @@
+name: Materialize exact reviewed OCR expert source tree
+on:
+  push:
+    branches: [source-publish/ocr-manual-expert-20261016]
+permissions:
+  contents: write
+jobs:
+  materialize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node24
+        with:
+          persist-credentials: false
+      - name: Verify source payload and create exact Git objects without changing product refs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node <<'NODE'
+          const fs = require('fs'), crypto = require('crypto'), zlib = require('zlib');
+          const root = 'source-upload/ocr-expert-20261016';
+          const manifest = JSON.parse(fs.readFileSync(root + '/manifest.json', 'utf8'));
+          const sha256 = data => crypto.createHash('sha256').update(data).digest('hex');
+          const gitSHA = data => crypto.createHash('sha1').update(Buffer.from('blob ' + data.length + '\0')).update(data).digest('hex');
+          const parts = manifest.parts.map(p => {
+            if (!/^part-[0-9]{3}\.bin$/.test(p.file)) throw Error('Invalid part path');
+            const data = fs.readFileSync(root + '/' + p.file);
+            if (data.length !== p.bytes || sha256(data) !== p.sha256 || gitSHA(data) !== p.gitBlobSHA) throw Error('Part identity mismatch');
+            return data;
+          });
+          const compressed = Buffer.concat(parts);
+          if (compressed.length !== manifest.compressedBytes || sha256(compressed) !== manifest.compressedSha256) throw Error('Compressed payload identity mismatch');
+          const raw = zlib.gunzipSync(compressed, { maxOutputLength: 64 * 1024 * 1024 });
+          if (raw.length !== manifest.payloadBytes || sha256(raw) !== manifest.payloadSha256) throw Error('Source payload identity mismatch');
+          const payload = JSON.parse(raw.toString('utf8'));
+          if (payload.parent !== manifest.parent || payload.baseTree !== manifest.baseTree || payload.expectedTree !== manifest.expectedTree) throw Error('Expected source identity mismatch');
+          const paths = new Set();
+          for (const entry of payload.entries) {
+            if (!entry.path || entry.path.startsWith('/') || entry.path.split('/').some(p => ['..','internal','private','secrets','local-data','bin','obj'].includes(p.toLowerCase())) || /\.(pdf|xlsx?|zip|bgra)$/i.test(entry.path) || paths.has(entry.path)) throw Error('Unreviewed or duplicate path');
+            if (entry.mode !== '100644' || entry.type !== 'blob') throw Error('Unexpected source mode');
+            paths.add(entry.path);
+          }
+          async function post(route, value) {
+            const response = await fetch(process.env.GITHUB_API_URL + '/repos/' + process.env.GITHUB_REPOSITORY + '/git/' + route, {
+              method: 'POST', headers: { Authorization: 'Bearer ' + process.env.GH_TOKEN, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' }, body: JSON.stringify(value)
+            });
+            if (!response.ok) throw Error('Git data API ' + route + ' status ' + response.status);
+            return await response.json();
+          }
+          (async () => {
+            for (const blob of payload.blobs) {
+              const data = Buffer.from(blob.base64, 'base64');
+              if (gitSHA(data) !== blob.sha) throw Error('Binary source identity mismatch');
+              const result = await post('blobs', { encoding: 'base64', content: blob.base64 });
+              if (result.sha !== blob.sha) throw Error('Returned binary source SHA mismatch');
+            }
+            const entries = [];
+            for (const original of payload.entries) {
+              let entry = { ...original };
+              if (typeof entry.content === 'string' && Buffer.byteLength(entry.content, 'utf8') > 500000) {
+                const data = Buffer.from(entry.content, 'utf8'), expected = gitSHA(data);
+                const result = await post('blobs', { encoding: 'base64', content: data.toString('base64') });
+                if (result.sha !== expected) throw Error('Large UTF8 source SHA mismatch');
+                delete entry.content; entry.sha = expected;
+              }
+              entries.push(entry);
+            }
+            let tree = payload.baseTree, batch = [], size = 0;
+            for (const entry of entries) {
+              const n = Buffer.byteLength(JSON.stringify(entry), 'utf8');
+              if (batch.length && size + n > 1000000) { tree = (await post('trees', { base_tree: tree, tree: batch })).sha; batch = []; size = 0; }
+              batch.push(entry); size += n;
+            }
+            if (batch.length) tree = (await post('trees', { base_tree: tree, tree: batch })).sha;
+            if (tree !== manifest.expectedTree) throw Error('Remote tree differs from reviewed local Git index');
+            const receipt = { sourceCommit: process.env.GITHUB_SHA, parent: manifest.parent, baseTree: manifest.baseTree, treeSHA: tree, expectedTreeMatched: true, files: paths.size, binarySources: payload.blobs.length, knownModelGitBlobSHA: payload.knownModelGitBlobSHA, payloadSha256: manifest.payloadSha256, branchUpdated: false };
+            console.log(JSON.stringify(receipt));
+            fs.writeFileSync(process.env.RUNNER_TEMP + '/exact-source-tree-receipt.json', JSON.stringify(receipt, null, 2));
+          })().catch(error => { console.error(error.message); process.exitCode = 1; });
+          NODE
