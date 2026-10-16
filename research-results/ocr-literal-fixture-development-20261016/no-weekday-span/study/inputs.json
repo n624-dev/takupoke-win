@@ -1,0 +1,133 @@
+{
+  "documents": [
+    {
+      "id": "literalfresh-0-positive",
+      "originalPDFSHA256": "647f57bfd5dc99aabad7ac8b85858f16101df40b7efb7bb1d69d45dea6e1a6c5",
+      "pages": [
+        {
+          "page": 1,
+          "width": 2238,
+          "height": 416,
+          "pixels": {
+            "file": "literalfresh-0-positive-p1.bgra",
+            "bytes": 3724032,
+            "sha256": "e46eed17045707f7e0c6da6d04731c2e16b95ed0a0f22fbbc4c4d4b2f482f607"
+          }
+        },
+        {
+          "page": 2,
+          "width": 2238,
+          "height": 416,
+          "pixels": {
+            "file": "literalfresh-0-positive-p2.bgra",
+            "bytes": 3724032,
+            "sha256": "0db61462a336a4d0632f17167d13ca8c19edf130bdff9ec38fec8916683cb26b"
+          }
+        },
+        {
+          "page": 3,
+          "width": 2238,
+          "height": 416,
+          "pixels": {
+            "file": "literalfresh-0-positive-p3.bgra",
+            "bytes": 3724032,
+            "sha256": "360fb8a309c85c75feb4637e3efd0271d978cfcc687c80dd2390901ecf88e69d"
+          }
+        },
+        {
+          "page": 4,
+          "width": 2238,
+          "height": 416,
+          "pixels": {
+            "file": "literalfresh-0-positive-p4.bgra",
+            "bytes": 3724032,
+            "sha256": "9a9ce62fa96603c750bd3420767579f1254caa89754294f1e454909d519ef7b4"
+          }
+        },
+        {
+          "page": 5,
+          "width": 2238,
+          "height": 416,
+          "pixels": {
+            "file": "literalfresh-0-positive-p5.bgra",
+            "bytes": 3724032,
+            "sha256": "585af82f7b472b87851156e2db486faafadec297def45ecfe3c9cd7de69636ab"
+          }
+        }
+      ]
+    },
+    {
+      "id": "literalfresh-1-positive",
+      "originalPDFSHA256": "c99f8329c4fedf89667ad382d23e9618967fad2920ab7a3ac672f7ef19ef994c",
+      "pages": [
+        {
+          "page": 1,
+          "width": 2238,
+          "height": 416,
+          "pixels": {
+            "file": "literalfresh-1-positive-p1.bgra",
+            "bytes": 3724032,
+            "sha256": "66047405de07284acbee1951b94a0fa8bed525257f86106ef66d9c7e7be1727f"
+          }
+        },
+        {
+          "page": 2,
+          "width": 2238,
+          "height": 416,
+          "pixels": {
+            "file": "literalfresh-1-positive-p2.bgra",
+            "bytes": 3724032,
+            "sha256": "9cd05b85a25683cae2dd19f4cc97d7d8f3c529f1ab5489a0629b00ce186d252d"
+          }
+        },
+        {
+          "page": 3,
+          "width": 2238,
+          "height": 416,
+          "pixels": {
+            "file": "literalfresh-1-positive-p3.bgra",
+            "bytes": 3724032,
+            "sha256": "4bc858b874b82650dc77f4897984f37e60da5b2d3f241c1108a885a474263d5d"
+          }
+        },
+        {
+          "page": 4,
+          "width": 2238,
+          "height": 416,
+          "pixels": {
+            "file": "literalfresh-1-positive-p4.bgra",
+            "bytes": 3724032,
+            "sha256": "8ed5b49a13a27deac072644fa5a2cc6dd012b10cb352043fb6e7adae9b7bdf71"
+          }
+        },
+        {
+          "page": 5,
+          "width": 2238,
+          "height": 416,
+          "pixels": {
+            "file": "literalfresh-1-positive-p5.bgra",
+            "bytes": 3724032,
+            "sha256": "184573b9d07ed913a81471c32f3b5215c7bb34070492d708706e8ae0e34bf91b"
+          }
+        }
+      ]
+    }
+  ],
+  "recipe": "conditional-literal-retry-native-v1",
+  "researchDeadlineSeconds": 1500,
+  "hybridDictionary": {
+    "file": "japaneseDictionary.json",
+    "bytes": 112374,
+    "sha256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f"
+  },
+  "japaneseAlternative": {
+    "file": "japaneseAlternative.onnx",
+    "bytes": 10089078,
+    "sha256": "2e397c27461751befc82eca78c9b19e87322ebee34e7316468b21856f9977d64"
+  },
+  "japaneseAlternativeDictionary": {
+    "file": "japaneseAlternativeDictionary.json",
+    "bytes": 26140,
+    "sha256": "0cda0d37debec2f0481bb5bb7bf3223b159d8268d288781eef1668455a811f1d"
+  }
+}

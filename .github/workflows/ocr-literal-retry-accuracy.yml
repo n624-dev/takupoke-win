@@ -1,5 +1,9 @@
 name: Validate conditional literal retries on new native Windows documents
 on:
+  push:
+    branches: [codex/windows-local-ai-improvement-20261013]
+    paths:
+      - 'tools/ocr-literal-retry-accuracy/protocol.json'
   workflow_dispatch:
 permissions:
   contents: read

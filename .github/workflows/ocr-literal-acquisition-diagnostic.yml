@@ -1,10 +1,5 @@
 name: Diagnose consumed literal-cohort acquisition ownership
 on:
-  push:
-    branches: [codex/windows-local-ai-improvement-20261013]
-    paths:
-      - '.github/workflows/ocr-literal-acquisition-diagnostic.yml'
-      - 'tools/ocr-literal-retry-study/restore_literal.py'
   workflow_dispatch:
 permissions:
   contents: read

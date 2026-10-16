@@ -3,9 +3,9 @@
   "baseBytes": 3708,
   "baseSHA256": "ae7ac01631a407d7b2c44b60810c588ddbdf9a5205578112b3ef2c65db5029c0",
   "extraFile": "tools/ocr-literal-retry-accuracy/exclusions-extra.json",
-  "extraBytes": 128803,
-  "extraSHA256": "ddb959e75201879b3c10836ad1ac375370dde26dc3f1c738f6c8911be1a1045b",
+  "extraBytes": 275873,
+  "extraSHA256": "3013e8d8d7dfd8ed5aed862f6f971206626ee1faaae1b7ca1f2518b2beccd730",
   "priorExcludedCount": 28486,
-  "totalExcludedCount": 30326,
-  "scope": "Allprior28486literalledger plus prior2nativeoracle/components/observedfieldvalues, allsupplementarydevelopmentoutputs and320negative-control expected literals; development corpora consumed. Fixed role/header words are not a newliteral claim."
+  "totalExcludedCount": 32427,
+  "scope": "Allprior28486literalledger plus prior2nativeoracle/components/observedfieldvalues, allsupplementarydevelopmentoutputs and320negative-control expected literals; development corpora consumed. Fixed role/header words are not a newliteral claim. Includes every firstfailedv1 oracle value and ASCII/numeric component; its corrected development uses identical consumed values. Also every observed row/retry/body and alphanumeric component from both closed-fixture development runs (all original values already excluded)."
 }

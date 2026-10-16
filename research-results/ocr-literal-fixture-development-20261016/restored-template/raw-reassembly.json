@@ -1,0 +1,24 @@
+{
+  "study/candidate-observations.jsonl": {
+    "bytes": 4817238,
+    "sha256": "fc5e500ea2bf6ce9f9b02c274e7b96d8e89ebc549a6d4e6c9af1fb632761fc6a",
+    "parts": [
+      {
+        "path": "raw/candidate-observations/00-literalfresh-0-positive.jsonl.gz",
+        "id": "literalfresh-0-positive",
+        "rawBytes": 2439034,
+        "rawSHA256": "a437904e45d03a2447bc1bf040078ef3673c6c5162a2e179ec31595946b1316f",
+        "compressedBytes": 344506,
+        "compressedSHA256": "ac2029f87470760285f02af974fdbd29085a5a9683d46726dac99d302f126011"
+      },
+      {
+        "path": "raw/candidate-observations/01-literalfresh-1-positive.jsonl.gz",
+        "id": "literalfresh-1-positive",
+        "rawBytes": 2378204,
+        "rawSHA256": "f52eac3104c09d589cbda845b8f3fd63eb6d039d927f04a2902bf5d36af02555",
+        "compressedBytes": 335979,
+        "compressedSHA256": "5821ada142622a7c3822f7115d09ab67b3a7479ae66146c024d4666bb3eca3e6"
+      }
+    ]
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "scope": "Exact closed fictional outputs and source snapshots; JSONL reassembles original bytes; full-page rasters/PDFs/models/binaries/private/internal policy excluded.",
+  "copied": {
+    "as-run-recipe/Read.cs": {
+      "bytes": 8897,
+      "sha256": "20fa8c4613d833efe2e720d97be982d00390b572e3620fdefa1c3891d771f458"
+    },
+    "as-run-recipe/Read.csproj": {
+      "bytes": 485,
+      "sha256": "a27b6a8a84698ef9eb040a2effc81522d9b177fbc050f73029c28d70e9de7653"
+    },
+    "as-run-recipe/exclusions-extra.json": {
+      "bytes": 128803,
+      "sha256": "ddb959e75201879b3c10836ad1ac375370dde26dc3f1c738f6c8911be1a1045b"
+    },
+    "as-run-recipe/exclusions.json": {
+      "bytes": 673,
+      "sha256": "cfe3036541412f4031376a717b4ea0be1ac72a0db3e863c3e1cfa61c55f6c189"
+    },
+    "as-run-recipe/prepare.py": {
+      "bytes": 11232,
+      "sha256": "40c33bc507fd25c59bb2804da83544c7885e824ab75cad880907f4d81cb28ae6"
+    },
+    "as-run-recipe/protocol.json": {
+      "bytes": 8362,
+      "sha256": "bcd34ffde9cbb8ecda6ae092875a16521ff22bdf18e88cf508f371062cecb0d3"
+    },
+    "execution-freeze.json": {
+      "bytes": 3676,
+      "sha256": "589f006ec969c86195e7ab152f90868a035eecb9e4c681cf374a68ef5e60e664"
+    },
+    "pre-generation-freeze.json": {
+      "bytes": 7409,
+      "sha256": "8dd355f514e7af8463f6f5a9135829feb32a2ec8b2fd621e601e01a0c9c68e0e"
+    },
+    "study/candidate-inspection.jsonl": {
+      "bytes": 183901,
+      "sha256": "fc9168ea9bdd12b3166d071305288d8dd3bed95de55a8b6d5b1872d341820a25"
+    },
+    "study/development-assessment.json": {
+      "bytes": 1725,
+      "sha256": "0abb5369907ee23c6b4422e4ce26591480ef080559fa4deac72f7a75a8f7691e"
+    },
+    "study/generation-freeze.json": {
+      "bytes": 2470,
+      "sha256": "668815188f07d94e157b70c822fac342bd4f0f5bc429ac12db19519a74b6ff08"
+    },
+    "study/inputs.json": {
+      "bytes": 3991,
+      "sha256": "e63941b6210798b7ecf0ea5a3405abfff897c8c8663f1d18de438f1bf5468018"
+    },
+    "study/japaneseAlternativeDictionary.json": {
+      "bytes": 26140,
+      "sha256": "0cda0d37debec2f0481bb5bb7bf3223b159d8268d288781eef1668455a811f1d"
+    },
+    "study/japaneseDictionary.json": {
+      "bytes": 112374,
+      "sha256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f"
+    },
+    "study/models/ascii-dictionary.json": {
+      "bytes": 3614,
+      "sha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368"
+    },
+    "study/oracle.json": {
+      "bytes": 117528,
+      "sha256": "54b07dbeb835d31068d79440e29c633d83107152598b48d498fb1b221db9df42"
+    },
+    "worker-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker-stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "rawStreams": {
+    "study/candidate-observations.jsonl": {
+      "bytes": 4817238,
+      "sha256": "fc5e500ea2bf6ce9f9b02c274e7b96d8e89ebc549a6d4e6c9af1fb632761fc6a",
+      "parts": [
+        {
+          "path": "raw/candidate-observations/00-literalfresh-0-positive.jsonl.gz",
+          "id": "literalfresh-0-positive",
+          "rawBytes": 2439034,
+          "rawSHA256": "a437904e45d03a2447bc1bf040078ef3673c6c5162a2e179ec31595946b1316f",
+          "compressedBytes": 344506,
+          "compressedSHA256": "ac2029f87470760285f02af974fdbd29085a5a9683d46726dac99d302f126011"
+        },
+        {
+          "path": "raw/candidate-observations/01-literalfresh-1-positive.jsonl.gz",
+          "id": "literalfresh-1-positive",
+          "rawBytes": 2378204,
+          "rawSHA256": "f52eac3104c09d589cbda845b8f3fd63eb6d039d927f04a2902bf5d36af02555",
+          "compressedBytes": 335979,
+          "compressedSHA256": "5821ada142622a7c3822f7115d09ab67b3a7479ae66146c024d4666bb3eca3e6"
+        }
+      ]
+    }
+  },
+  "excluded": [
+    "as-run-recipe/__pycache__/prepare.cpython-312.pyc",
+    "study/japaneseAlternative.onnx",
+    "study/literalfresh-0-positive-p1.bgra",
+    "study/literalfresh-0-positive-p2.bgra",
+    "study/literalfresh-0-positive-p3.bgra",
+    "study/literalfresh-0-positive-p4.bgra",
+    "study/literalfresh-0-positive-p5.bgra",
+    "study/literalfresh-1-positive-p1.bgra",
+    "study/literalfresh-1-positive-p2.bgra",
+    "study/literalfresh-1-positive-p3.bgra",
+    "study/literalfresh-1-positive-p4.bgra",
+    "study/literalfresh-1-positive-p5.bgra",
+    "study/models/ascii-rec.onnx",
+    "study/models/det.onnx",
+    "study/models/manual-code-rec.onnx",
+    "study/models/rec.onnx"
+  ]
+}

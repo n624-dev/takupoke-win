@@ -63,10 +63,15 @@ def main():
                 sampled.extend(parts)
                 return value
         raise ValueError('Literal generation could not avoid frozen exclusions')
-    documents, oracle = [], []
+    documents, oracle, font_coverage = [], [], []
     for index, spec in enumerate(fonts):
         font = a.fonts / spec['file']
         cmap = TTFont(font).getBestCmap()
+        rare_names = ['渡邊', '渡邉', '高﨑', '髙崎', '鄭', '劉', '賈', '祁']
+        supported_rare_names = [name for name in rare_names if all(ord(c) in cmap for c in name)]
+        assert supported_rare_names, 'Font must support uncommon Japanese names'
+        font_coverage.append(dict(font=spec['file'], supportedRareNames=supported_rare_names,
+                                  unsupportedRareNames=[name for name in rare_names if name not in supported_rare_names]))
         face = ImageFont.truetype(str(font), protocol['facesize'])
         header = ImageFont.truetype(str(font), protocol['headersize'])
         rng = random.Random(protocol['seedBase'] + index)
@@ -94,7 +99,7 @@ def main():
                         teacher_tag = 'english-name'
                     else:
                         rare = pick < .3
-                        names = ['渡邊', '渡邉', '高﨑', '髙崎', '鄭', '劉', '賈', '祁'] if rare else ['伊藤', '渡辺', '山本', '中村', '小林', '加藤', '佐々木']
+                        names = supported_rare_names if rare else ['伊藤', '渡辺', '山本', '中村', '小林', '加藤', '佐々木']
                         teacher = unique(lambda: '仮想' + rng.choice(names) + number())
                         teacher_tag = 'rare-japanese-name' if rare else 'japanese-name'
                     pick = rng.random()
@@ -125,15 +130,21 @@ def main():
             id = f'literalfresh-{index}-{variant}'
             pages = []
             for day in range(1, 6):
-                label, col, top, row = 133, 263, 100, 105
-                width, height = label + col * 8, top + row * 3
+                # Retain the previously exercised physical timetable template:
+                # the weekday has one printed header spanning all eight periods.
+                label, col, top, row = 100, 267, 108, 102
+                # Both outer rules are inclusive coordinates. Reserve their
+                # pixels instead of silently drawing them beyond the canvas.
+                width, height = label + col * 8 + 1, top + row * 3 + 1
+                assert label + col * 8 < width and top + row * 3 < height
                 image = Image.new('RGB', (width, height), 'white')
                 pen = ImageDraw.Draw(image)
                 def text(value, x, y, font=face):
                     if any(ord(c) not in cmap for c in value):
                         raise ValueError('Font lacks a requested literal; no tofu/fallback substitution')
-                    pen.text((x, y), value, font=font, fill='black', anchor='lt')
-                text('2034年度前期', 10, 7, header)
+                    pen.text((x, y), value, font=font, fill='black')
+                text('2034年度 前期', 8, 0, header)
+                pen.rectangle((label, 36, width - 1, 70), outline='black', width=1)
                 if not (variant == 'missing-day' and day == 1):
                     text(['月', '火', '水', '木', '金'][day - 1], label + 4 * col, 36, header)
                 for y in [70, top] + [top + n * row for n in range(1, 4)]:
@@ -166,7 +177,8 @@ def main():
     write(out / 'generation-freeze.json', dict(recipe=protocol['recipe'], sourceSHA256=sha(Path(__file__)),
         protocolSHA256=sha(Path(__file__).with_name('protocol.json')), seed=protocol['seedBase'], exclusionsAvoided=True,
         excludedLiteralCount=len(excluded), sampledLiteralComponentCount=len(set(sampled)), modelCalls=0,
-        fontPins=fonts, fontExposure=protocol['fontExposure'], prospectiveCriteria=protocol['criteria']))
+        fontPins=fonts, fontExposure=protocol['fontExposure'], fontCoverage=font_coverage,
+        prospectiveCriteria=protocol['criteria']))
     print(json.dumps(dict(documents=len(documents), positiveDocuments=2, fieldsPerPositive=360, modelCalls=0)), flush=True)
 
 

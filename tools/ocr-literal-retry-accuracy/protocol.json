@@ -1,39 +1,39 @@
 {
-  "recipe": "conditional-literal-retry-native-v1",
+  "recipe": "conditional-literal-retry-native-v2",
   "baselineCommit": "70ba342a9e6ecba7f5aff2febccc593eaea2e320",
   "baselineProfile": "20261016-v2",
   "fontPins": [
     {
-      "family": "zenkakugothicantique",
-      "file": "ZenKakuGothicAntique-Regular.ttf",
-      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/zenkakugothicantique/ZenKakuGothicAntique-Regular.ttf",
-      "bytes": 2370412,
-      "sha256": "e79b874ef1ae0cfe5b9d750f5990d408874300b17c7a02cb6e86e73a14a33005"
+      "file": "KaiseiOpti-Regular.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/kaiseiopti/KaiseiOpti-Regular.ttf",
+      "bytes": 4503024,
+      "sha256": "990cfb1fb00f311c8975c2c5f4778b2fe5462fd5eabf0884828a323dad3f18c0",
+      "family": "kaiseiopti"
     },
     {
-      "family": "zenkakugothicantique",
+      "file": "kaiseiopti-OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/kaiseiopti/OFL.txt",
+      "bytes": 4383,
+      "sha256": "6c5445d4febbf6d84025b874a85c51e7e4bfa7495279eccdb4c317a6de857b46",
+      "family": "kaiseiopti"
+    },
+    {
+      "file": "ZenKakuGothicAntique-Medium.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/zenkakugothicantique/ZenKakuGothicAntique-Medium.ttf",
+      "bytes": 2337952,
+      "sha256": "02bdc45744fd357b04c1a8fb0f2392a8c31b3a9250acb9899252a933ec66f4b6",
+      "family": "zenkakugothicantique"
+    },
+    {
       "file": "zenkakugothicantique-OFL.txt",
       "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/zenkakugothicantique/OFL.txt",
       "bytes": 4401,
-      "sha256": "0fac78a235c98d640cb06332eb5362c211d86fa03c011df438c35005d22ad2c7"
-    },
-    {
-      "family": "shipporiminchob1",
-      "file": "ShipporiMinchoB1-Regular.ttf",
-      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/shipporiminchob1/ShipporiMinchoB1-Regular.ttf",
-      "bytes": 15230032,
-      "sha256": "89403e4b2a9ca0db9f832b893cfbfd90506c7c674cd640ba8a0ee128c34de7a4"
-    },
-    {
-      "family": "shipporiminchob1",
-      "file": "shipporiminchob1-OFL.txt",
-      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/shipporiminchob1/OFL.txt",
-      "bytes": 4399,
-      "sha256": "41fba056279be5f45ff9a99e44b7b53897b42732f5806d8e666e0ab49ac6bd38"
+      "sha256": "0fac78a235c98d640cb06332eb5362c211d86fa03c011df438c35005d22ad2c7",
+      "family": "zenkakugothicantique"
     }
   ],
-  "fontExposure": "Two locally unused font files, related to previously consumed ZenKakuGothicNew/ShipporiMincho families. No family/pretraining-unseen claim. Geometric template is consumed; new literals/font files/case mix only.",
-  "seedBase": 20261016317,
+  "fontExposure": "New local font FILES only; ZenKakuGothicAntique Regular was consumed in failed fixture/development and other Kaisei families were consumed earlier. No family/pretraining-unseen claim. Fixed previously exercised physical template, new literal values and case mix. Neither new file drawn/inferred before this prospective registration.",
+  "seedBase": 20261016373,
   "facesize": 20,
   "headersize": 24,
   "classes": [
@@ -66,8 +66,8 @@
     "20% legitimate uncommon Japanese variants",
     "10% English alphabetic"
   ],
-  "excludeLiteralCount": 30326,
-  "exclusionsSHA256": "cfe3036541412f4031376a717b4ea0be1ac72a0db3e863c3e1cfa61c55f6c189",
+  "excludeLiteralCount": 32427,
+  "exclusionsSHA256": "1b60daafc5e77ac275569def02af3fa713096bf8d2f2c52ca5429955471d5725",
   "selectedMethod": {
     "literal": "V3actual code retry also for alphabetic source hypotheses; changed length requires same supported actualv1 text; no symbol normalization",
     "japanese": "Japanesev3 retry only already observed role+uncertain Japanese body, all other literals agree except observed colon variant, same count/full padding support, oldp<.8/newp>=.8; no character mapping",
@@ -154,5 +154,7 @@
   "freshDrawsBeforeProtocol": 0,
   "freshModelCallsBeforeProtocol": 0,
   "zeroErrorsRequired": false,
-  "scope": "Fresh actual Windows full OCR and current-schema4 downstream, separate immutable10446 baseline/currentcandidate binaries, no oracle/roster/modeloutput repair. Preserve every failed arm. Never private school data. Registration precedes new drawing/inference."
+  "scope": "Fresh actual Windows full OCR and current-schema4 downstream, separate immutable10446 baseline/currentcandidate binaries, no oracle/roster/modeloutput repair. Preserve every failed arm. Never private school data. Registration precedes new drawing/inference.",
+  "fixture": "Original source-order exercised template: inclusive2237x415; label100,col267,top108,row102; explicit printed weekday band x100..2236 y36..70 spanning all periods; all grid endpoints inside image. Firstv1 failed fixture lacked right/bottom borders and day-span band; preserved asFAIL, excluded from qualification.",
+  "fontCoverage": "Before random sampling, rare Japanese names are limited to the font native cmap: KaiseiOpti supports7/8 (lacks高﨑), ZenKakuGothicAntiqueMedium supports8/8. Record pool; still test all other rare variants. No missing glyphs/tofu/fallback."
 }

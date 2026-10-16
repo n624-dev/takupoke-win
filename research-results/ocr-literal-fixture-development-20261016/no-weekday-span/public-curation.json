@@ -1,0 +1,119 @@
+{
+  "scope": "Exact closed fictional outputs and source snapshots; JSONL reassembles original bytes; full-page rasters/PDFs/models/binaries/private/internal policy excluded.",
+  "copied": {
+    "as-run-recipe/Read.cs": {
+      "bytes": 8897,
+      "sha256": "20fa8c4613d833efe2e720d97be982d00390b572e3620fdefa1c3891d771f458"
+    },
+    "as-run-recipe/Read.csproj": {
+      "bytes": 485,
+      "sha256": "a27b6a8a84698ef9eb040a2effc81522d9b177fbc050f73029c28d70e9de7653"
+    },
+    "as-run-recipe/exclusions-extra.json": {
+      "bytes": 128803,
+      "sha256": "ddb959e75201879b3c10836ad1ac375370dde26dc3f1c738f6c8911be1a1045b"
+    },
+    "as-run-recipe/exclusions.json": {
+      "bytes": 673,
+      "sha256": "cfe3036541412f4031376a717b4ea0be1ac72a0db3e863c3e1cfa61c55f6c189"
+    },
+    "as-run-recipe/prepare.py": {
+      "bytes": 10508,
+      "sha256": "692d8f70324fd37f6eece881c6ee96596e3ae37614ffb42fefa77a176521aca9"
+    },
+    "as-run-recipe/protocol.json": {
+      "bytes": 8362,
+      "sha256": "bcd34ffde9cbb8ecda6ae092875a16521ff22bdf18e88cf508f371062cecb0d3"
+    },
+    "execution-freeze.json": {
+      "bytes": 3676,
+      "sha256": "1afe4536a8de961bb351c5293017bd219b1c8f119a7f222a658143c93e848c8c"
+    },
+    "pre-generation-freeze.json": {
+      "bytes": 7409,
+      "sha256": "ebece04b7b7ed7349d80831e577d618a7b93dcd6a5f28a19530d60d5194c5e89"
+    },
+    "study/candidate-inspection.jsonl": {
+      "bytes": 23456,
+      "sha256": "245ba8b8a8c5bd2d02287ef260b7d61c5b2d84eee450d07dd2ac3a8ed2a2a3db"
+    },
+    "study/development-assessment.json": {
+      "bytes": 1737,
+      "sha256": "723f88635ad7180f0c9912a1a981b2a94c2d0eeded474d49e1de24a915ffdafb"
+    },
+    "study/generation-freeze.json": {
+      "bytes": 1918,
+      "sha256": "eb3ab587fc22915c2cb5f7ae39933be2d53431760b29c36f33ed20637bf8ba6a"
+    },
+    "study/inputs.json": {
+      "bytes": 3991,
+      "sha256": "fc82b0952e6d51dd428f74fe1c4ba89f77dea24af86098f7a965c590773e83b3"
+    },
+    "study/japaneseAlternativeDictionary.json": {
+      "bytes": 26140,
+      "sha256": "0cda0d37debec2f0481bb5bb7bf3223b159d8268d288781eef1668455a811f1d"
+    },
+    "study/japaneseDictionary.json": {
+      "bytes": 112374,
+      "sha256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f"
+    },
+    "study/models/ascii-dictionary.json": {
+      "bytes": 3614,
+      "sha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368"
+    },
+    "study/oracle.json": {
+      "bytes": 117528,
+      "sha256": "54b07dbeb835d31068d79440e29c633d83107152598b48d498fb1b221db9df42"
+    },
+    "worker-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker-stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "rawStreams": {
+    "study/candidate-observations.jsonl": {
+      "bytes": 4317123,
+      "sha256": "2e6b659f18c4ddd190299857b247d66be27e979a7e3f5d6501af5186a686e635",
+      "parts": [
+        {
+          "path": "raw/candidate-observations/00-literalfresh-0-positive.jsonl.gz",
+          "id": "literalfresh-0-positive",
+          "rawBytes": 2169928,
+          "rawSHA256": "573b1128569643f2b0e1af7b697c51cd7290b2fa8084ea9552ce1268ca44d56e",
+          "compressedBytes": 303787,
+          "compressedSHA256": "df91f37e234acdd68000bdeb1a445ad1b0955a795fed89225a643603bc74b7d3"
+        },
+        {
+          "path": "raw/candidate-observations/01-literalfresh-1-positive.jsonl.gz",
+          "id": "literalfresh-1-positive",
+          "rawBytes": 2147195,
+          "rawSHA256": "0008f8eddb1f8e71e9f7d8e7a69f552245b5c45abb09f144287fb39b5071f9ec",
+          "compressedBytes": 308869,
+          "compressedSHA256": "8bb4811a1bfaf758f09991ac6102be1e4587f00281c533655b4e46b9c96471f4"
+        }
+      ]
+    }
+  },
+  "excluded": [
+    "as-run-recipe/__pycache__/prepare.cpython-312.pyc",
+    "study/japaneseAlternative.onnx",
+    "study/literalfresh-0-positive-p1.bgra",
+    "study/literalfresh-0-positive-p2.bgra",
+    "study/literalfresh-0-positive-p3.bgra",
+    "study/literalfresh-0-positive-p4.bgra",
+    "study/literalfresh-0-positive-p5.bgra",
+    "study/literalfresh-1-positive-p1.bgra",
+    "study/literalfresh-1-positive-p2.bgra",
+    "study/literalfresh-1-positive-p3.bgra",
+    "study/literalfresh-1-positive-p4.bgra",
+    "study/literalfresh-1-positive-p5.bgra",
+    "study/models/ascii-rec.onnx",
+    "study/models/det.onnx",
+    "study/models/manual-code-rec.onnx",
+    "study/models/rec.onnx"
+  ]
+}
