@@ -539,6 +539,7 @@
         ".github/workflows/native-model-batch-comparison.yml",
         ".github/workflows/ocr-acquisition-accuracy.yml",
         ".github/workflows/ocr-acquisition-probe.yml",
+        ".github/workflows/ocr-literal-retry-native.yml",
         ".github/workflows/ocr-model-comparison.yml",
         ".github/workflows/ocr-original-image.yml",
         ".github/workflows/ocr-physical-framing.yml",
