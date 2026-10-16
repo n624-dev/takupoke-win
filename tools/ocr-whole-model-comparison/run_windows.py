@@ -21,7 +21,7 @@ subprocess.run([a.dotnet,'build',str(ROOT/'tools/ocr-whole-model-comparison/Read
 read=ROOT/'tools/ocr-whole-model-comparison/bin/Release/net10.0/Takupoke.OcrComparison.dll'
 subprocess.run([a.dotnet,str(read),'--bundle',str(out/'bundle.json')],check=True)
 bundle=json.loads((out/'bundle.json').read_text());models=out/'models';models.mkdir()
-if next(v for v in bundle['Artifacts'] if v['Path']=='ascii-rec.onnx')['Sha256']!='9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703':raise ValueError('Historical v1 baseline required; changed defaults need a new comparison protocol')
+if bundle['Version']!='20261014-v1' or len(bundle['Artifacts'])!=4 or next(v for v in bundle['Artifacts'] if v['Path']=='ascii-rec.onnx')['Sha256']!='9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703':raise ValueError('Historical v1 baseline required; changed defaults need a new comparison protocol')
 downloads=[]
 for item in bundle['Artifacts']:
     path=models/item['Path'];download(item['Url'],path,item['Size'],item['Sha256']);downloads.append(item)

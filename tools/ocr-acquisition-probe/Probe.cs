@@ -43,7 +43,7 @@ foreach (var doc in m.GetProperty("documents").EnumerateArray())
    catch(InvalidDataException e){framingFailure=e.Message;foreach(DictionaryEntry entry in e.Data)framingData[entry.Key.ToString()!]=entry.Value;}
    framedSeedDiagnostic=new{framed,completed,failure=framingFailure,data=framingData,inferenceCalls=0};
   }
-  output.WriteLine(JsonSerializer.Serialize(new{id,page=number,candidateAcquisitionRepair=candidate,manualCodeExpert=expert is not null,asciiRecognizerCalls=ocr.AsciiRecognitionCalls,sourceSha256=Convert.ToHexStringLower(SHA256.HashData(raster.Bgra)),raster.Width,raster.Height,failure,data,detected,observations,glyphs,confidences=ocr.NativeConfidences,recognizedBoxes=ocr.RecognizedBoxes,framedSeedDiagnostic,
+  output.WriteLine(JsonSerializer.Serialize(new{id,page=number,explicitCandidateConstructor=candidate,explicitManualCodeExpertArgument=expert is not null,route=candidate?"explicit-candidate":"factory-default",asciiRecognizerCalls=ocr.AsciiRecognitionCalls,sourceSha256=Convert.ToHexStringLower(SHA256.HashData(raster.Bgra)),raster.Width,raster.Height,failure,data,detected,observations,glyphs,confidences=ocr.NativeConfidences,recognizedBoxes=ocr.RecognizedBoxes,framedSeedDiagnostic,
    scope="All pages of two consumed wholly fictional positive documents. Actual manual acquisition with explicitly recorded optional repairs/expert, unchanged original pixels. No reference labels read. Preserve failed observations and original exception diagnostics."}));output.Flush();CryptographicOperations.ZeroMemory(raster.Bgra);
  }
 }

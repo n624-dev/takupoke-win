@@ -17,7 +17,8 @@ if (args.Length != 3 || args[2] is not ("baseline" or "candidate")) throw new Ar
 var root = Path.GetDirectoryName(Path.GetFullPath(args[0]))!;
 using var manifest = JsonDocument.Parse(File.ReadAllBytes(args[0])); var m = manifest.RootElement;
 var modelRoot = Path.Combine(root, "models");
-if (RecoveryOcrModels.Bundle.Artifacts.Single(a => a.Path == "ascii-rec.onnx").Sha256 != "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703")
+if (RecoveryOcrModels.Bundle.Version != "20261014-v1" || RecoveryOcrModels.Bundle.Artifacts.Count != 4 ||
+    RecoveryOcrModels.Bundle.Artifacts.Single(a => a.Path == "ascii-rec.onnx").Sha256 != "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703")
     throw new InvalidDataException("This frozen comparison requires the historical v1 baseline factory; do not silently compare a later default against itself.");
 if (!await RecoveryModelBundleStore.VerifyAsync(RecoveryOcrModels.Bundle, modelRoot)) throw new InvalidDataException("Pinned model bundle differs.");
 var dictionary = Verify(m.GetProperty("hybridDictionary")); await RecoveryOcrModels.VerifyDictionaryAsync(dictionary, default);

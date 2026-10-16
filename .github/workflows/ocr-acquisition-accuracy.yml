@@ -1,10 +1,5 @@
 name: Validate repaired OCR on historical and new native Windows PDFs
 on:
-  push:
-    branches: [codex/windows-local-ai-improvement-20261013]
-    paths:
-      - '.github/workflows/ocr-acquisition-accuracy.yml'
-      - 'tools/ocr-acquisition-accuracy/**'
   workflow_dispatch:
 permissions:
   contents: read

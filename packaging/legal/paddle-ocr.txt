@@ -1,14 +1,16 @@
-PaddlePaddle PP-OCRv5 detector, PP-OCRv6 medium Japanese recognizer, and adapted English PP-OCRv5 specialist
+PaddlePaddle PP-OCRv5 detector, PP-OCRv6 medium Japanese recognizer, and adapted English PP-OCRv5 specialists
 Copyright (c) PaddlePaddle Authors
 Licensed under Apache License, Version 2.0.
 
 The bundled Japanese recognition dictionaries are derived from official inference.yml. Model weights and the English dictionary are downloaded only on explicit user request. The English specialist is modified by the takupoke-win project (2026): synthetic font-balanced four-epoch adaptation, added reject head, standard ONNX FP32 export. Training used public fonts and fictional strings, no school data.
+A second manual-code specialist continues the v1 epoch4 initializer/teacher with fictional Japanese-font code adaptation (V3 epoch1), retaining the original v1 fallback. It is a standard ONNX FP32 model; no school data was used. Original standalone trial gates remain documented separately from later full-route validation.
 Official sources:
 https://github.com/PaddlePaddle/PaddleOCR
 https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_det_onnx
 https://huggingface.co/PaddlePaddle/PP-OCRv6_medium_rec_onnx
 https://huggingface.co/PaddlePaddle/en_PP-OCRv5_mobile_rec_safetensors
 https://github.com/n624-dev/takupoke-win/tree/5826ffe2f1f2717deaf5ca03e2506996d4b3241c/model-artifacts/ascii-english-v5-font-balanced-v1
+https://github.com/n624-dev/takupoke-win/tree/4ff7d2c4c894c8748d9c6c4182d15dde2e962904/model-artifacts/ascii-english-v5-japanese-fonts-v3-epoch1-exploratory
 
 
                                  Apache License

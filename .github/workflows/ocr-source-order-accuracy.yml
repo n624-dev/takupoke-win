@@ -1,10 +1,5 @@
 name: Validate original OCR row ordering on fresh native Windows PDFs
 on:
-  push:
-    branches: [codex/windows-local-ai-improvement-20261013]
-    paths:
-      - '.github/workflows/ocr-source-order-accuracy.yml'
-      - 'tools/ocr-source-order-accuracy/**'
   workflow_dispatch:
 permissions:
   contents: read

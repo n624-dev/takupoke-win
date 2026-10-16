@@ -15,7 +15,7 @@ def download(url,path,size,digest):
             output.write(block)
     if path.stat().st_size!=size or sha(path)!=digest:raise ValueError('Pinned public artifact differs')
 
-p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--dotnet',default='dotnet');a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--dotnet',default='dotnet');p.add_argument('--factory-default',action='store_true');a=p.parse_args()
 out=a.output.resolve();out.mkdir(parents=True,exist_ok=False);assets=out/'assets';assets.mkdir();fonts=out/'fonts';fonts.mkdir()
 subprocess.run([a.dotnet,'build',str(ROOT/'tools/ocr-whole-model-comparison/Read.csproj'),'-c','Release','--nologo'],check=True)
 read=ROOT/'tools/ocr-whole-model-comparison/bin/Release/net10.0/Takupoke.OcrComparison.dll'
@@ -51,7 +51,7 @@ subprocess.run([sys.executable,str(ROOT/'tools/ocr-physical-framing/prepare_pdf.
 pdf_manifest=json.loads((study/'pdf-inputs.json').read_text());pdf_manifest['sourceScope']='All four font/literal cohorts are consumed from original run38824053198; acquisition diagnosis only. Lossless PDF containers do not add extra independent samples. Both arms consume identical native Windows-rendered source pages.';write(study/'pdf-inputs.json',pdf_manifest)
 subprocess.run([a.dotnet,'build',str(ROOT/'tools/ocr-physical-framing/windows-render/WindowsRender.csproj'),'-c','Release','--nologo'],check=True)
 renderer=ROOT/'tools/ocr-physical-framing/windows-render/bin/Release/net10.0-windows10.0.26100.0/win-x64/WindowsRender.dll'
-sources=[*[p for p in (ROOT/'src/Takupoke.Infrastructure/Recovery').glob('*.cs')],ROOT/'tools/ocr-whole-model-comparison/Read.cs',ROOT/'tools/ocr-whole-model-comparison/Inspect.cs',ROOT/'tools/ocr-whole-model-comparison/run.py',ROOT/'tools/ocr-whole-model-comparison/collect.py',Path(__file__),Path(__file__).with_name('Probe.cs'),Path(__file__).with_name('Probe.csproj'),Path(__file__).with_name('expected-native-pages.json'),ROOT/'tools/ocr-whole-model-comparison/prepare.py',ROOT/'tools/ocr-whole-model-comparison/score.py',ROOT/'tools/ocr-physical-framing/windows-render/WindowsRender.cs',ROOT/'tools/ocr-acquisition-replay/Replay.cs',ROOT/'tools/ocr-acquisition-replay/Replay.csproj']
+sources=[*[p for p in (ROOT/'src/Takupoke.Infrastructure/Recovery').glob('*.cs')],ROOT/'tools/ocr-whole-model-comparison/Read.cs',ROOT/'tools/ocr-whole-model-comparison/Inspect.cs',ROOT/'tools/ocr-whole-model-comparison/run.py',ROOT/'tools/ocr-whole-model-comparison/collect.py',Path(__file__),Path(__file__).with_name('Probe.cs'),Path(__file__).with_name('Probe.csproj'),Path(__file__).with_name('expected-native-pages.json'),ROOT/'tools/ocr-whole-model-comparison/prepare.py',ROOT/'tools/ocr-whole-model-comparison/score.py',ROOT/'tools/ocr-physical-framing/windows-render/WindowsRender.cs',ROOT/'tools/ocr-acquisition-replay/Replay.cs',ROOT/'tools/ocr-acquisition-replay/Replay.csproj',ROOT/'tools/ocr-acquisition-replay/InspectAppSchema.cs',ROOT/'tools/ocr-acquisition-replay/InspectAppSchema.csproj',Path(__file__).with_name('compare_factory.py'),Path(__file__).with_name('expected-candidate-route.json')]
 write(study/'freeze.json',{'recipe':'consumed-native-acquisition-repair-v3','inputSHA256':sha(study/'pdf-inputs.json'),'oracleSHA256':sha(study/'oracle.json'),
  'generationSHA256':sha(study/'generation-freeze.json'),'sourceSHA256':{str(p.relative_to(ROOT)):sha(p) for p in sources},'readDllSHA256':sha(read),'rendererSHA256':sha(renderer),'zeroErrorsRequired':False})
 subprocess.run([a.dotnet,str(renderer),str(study/'pdf-inputs.json')],check=True)
@@ -65,26 +65,31 @@ for doc in native['documents']:
 subprocess.run([a.dotnet,'build',str(Path(__file__).with_name('Probe.csproj')),'-c','Release','--nologo'],check=True)
 probe=Path(__file__).parent/'bin/Release/net10.0/Takupoke.OcrComparison.dll'
 write(study/'probe-execution-freeze.json',{'inputSHA256':sha(study/'native-inputs.json'),'files':{str(p.relative_to(probe.parent)):asset(p) for p in probe.parent.rglob('*') if p.is_file()},'oracleReadByWorker':False})
-subprocess.run([a.dotnet,str(probe),str(study/'native-inputs.json'),str(study/'models'),str(study/'acquisition-observations.jsonl'),'candidate',str(study/'candidate-rec.onnx')],check=True)
+probe_command=[a.dotnet,str(probe),str(study/'native-inputs.json'),str(study/'models'),str(study/'acquisition-observations.jsonl')]
+if not a.factory_default:probe_command+=['candidate',str(study/'candidate-rec.onnx')]
+subprocess.run(probe_command,check=True)
+if a.factory_default:
+    subprocess.run([sys.executable,str(Path(__file__).with_name('compare_factory.py')),'--actual',str(study/'acquisition-observations.jsonl'),'--expected',str(Path(__file__).with_name('expected-candidate-route.json')),'--output',str(study/'factory-equivalence.json')],check=True)
 # Close recognition before deterministic downstream capture/parser inspection.
 m=json.loads((study/'native-inputs.json').read_text());m['capturedObservations']=asset(study/'acquisition-observations.jsonl');write(study/'replay-inputs.json',m)
 subprocess.run([a.dotnet,'build',str(ROOT/'tools/ocr-acquisition-replay/Replay.csproj'),'-c','Release','--nologo'],check=True)
 replay=ROOT/'tools/ocr-acquisition-replay/bin/Release/net10.0/Takupoke.OcrComparison.dll'
-subprocess.run([a.dotnet,'build',str(ROOT/'tools/ocr-whole-model-comparison/Inspect.csproj'),'-c','Release','--nologo'],check=True)
-inspect=ROOT/'tools/ocr-whole-model-comparison/bin/Release/net10.0/Inspect.dll'
+subprocess.run([a.dotnet,'build',str(ROOT/'tools/ocr-acquisition-replay/InspectAppSchema.csproj'),'-c','Release','--nologo'],check=True)
+inspect=ROOT/'tools/ocr-acquisition-replay/bin/Release/net10.0/InspectAppSchema.dll'
 write(study/'downstream-execution-freeze.json',{'capturedSHA256':sha(study/'acquisition-observations.jsonl'),'manifestSHA256':sha(study/'replay-inputs.json'),'replayFiles':{str(p.relative_to(replay.parent)):asset(p) for p in replay.parent.rglob('*') if p.is_file()},'inspectFiles':{str(p.relative_to(inspect.parent)):asset(p) for p in inspect.parent.rglob('*') if p.is_file()},'oracleReadByWorkers':False})
 subprocess.run([a.dotnet,str(replay),str(study/'replay-inputs.json'),str(study/'replay-observations.jsonl'),'candidate'],check=True)
 subprocess.run([a.dotnet,str(inspect),str(study/'replay-observations.jsonl'),str(study/'replay-inputs.json'),str(study/'replay-inspection.jsonl')],check=True)
 acquisition=[json.loads(line) for line in (study/'acquisition-observations.jsonl').read_text().splitlines()]
 inspection=[json.loads(line) for line in (study/'replay-inspection.jsonl').read_text().splitlines()]
-write(study/'closed-route-summary.json',{'acquisitionPages':len(acquisition),'acquisitionFailures':sum(r['failure'] is not None for r in acquisition),'documents':[{'id':r['id'],'fields':len(r['fields']),'reviewPlanEligible':r['reviewPlanEligible'],'reviewTargets':len(r.get('reviewTargets') or [])} for r in inspection],'scope':'All10consumed exact native pages, full current capture/parser/review route; no oracle/user acknowledgement/default activation/independent qualification.'})
+write(study/'closed-route-summary.json',{'acquisitionPages':len(acquisition),'acquisitionFailures':sum(r['failure'] is not None for r in acquisition),'documents':[{'id':r['id'],'fields':len(r['fields']),'reviewPlanEligible':r['reviewPlanEligible'],'reviewTargets':len(r.get('reviewTargets') or [])} for r in inspection],'factoryDefault':a.factory_default,'independentAccuracyCredit':False,'scope':'All10consumed exact native pages, full current capture/parser/review route; no oracle/user acknowledgement/default activation/independent qualification.'})
 records=out/'diagnostic-records';records.mkdir()
+if (study/'factory-equivalence.json').exists():shutil.copyfile(study/'factory-equivalence.json',records/'factory-equivalence.json')
 for name in ['acquisition-observations.jsonl','probe-execution-freeze.json','native-render-receipt.json','native-inputs.json','generation-freeze.json','freeze.json','downstream-execution-freeze.json','replay-inputs.json','replay-observations.jsonl','replay-inspection.jsonl','closed-route-summary.json']:
     shutil.copyfile(study/name,records/name)
 for doc in native['documents']:
     if doc['id'] not in expected['pages']:continue
     for page in doc['pages']:shutil.copyfile(study/page['pixels']['file'],records/page['pixels']['file'])
-write(records/'scope.json',{'scope':'All10consumed native pages from 2 wholly fictional positive documents, exactpreviousrun38824053198 rasterhashes; includes fullpage BGRA for diagnosis only, exclude frompublicsourcecuration. No private data, oracle-fed inference or productdefault activation.', 'files':{p.name:asset(p) for p in records.iterdir() if p.is_file()}})
+write(records/'scope.json',{'factoryDefault':a.factory_default,'independentAccuracyCredit':False,'scope':'All10consumed native pages from 2 wholly fictional positive documents, exactpreviousrun38824053198 rasterhashes; includes fullpage BGRA for diagnosis only, exclude frompublicsourcecuration. No private data, oracle-fed inference or automatic human adoption.', 'files':{p.name:asset(p) for p in records.iterdir() if p.is_file()}})
 print(json.dumps({'closed':True,'consumedOnly':True,'records':str(records)}),flush=True)
 assert len(acquisition)==10 and all(r['failure'] is None for r in acquisition), 'Incomplete acquisition; retain all pages and failures'
 assert len(inspection)==2 and all(len(r['fields'])==360 and r['reviewPlanEligible'] for r in inspection), 'Full source-bound correction unavailable; retain all outputs'

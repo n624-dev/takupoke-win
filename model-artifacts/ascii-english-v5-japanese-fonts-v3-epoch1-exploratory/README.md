@@ -37,3 +37,15 @@ Standard ONNX and its dictionary can be evaluated on iOS with a compatible
 runtime. CoreML conversion and execution on an iPhone are unverified. iOS source
 has not been edited. Original packaging metadata describes its historical
 research handoff, including inactive/unpublished status at packaging time.
+
+## Subsequent separate document-route decision
+
+The original standalone gate above remains FAIL. A later, fixed full-route trial,
+[38836313175](https://github.com/n624-dev/takupoke-win/actions/runs/38836313175),
+passed its registered practical quality/nonregression criteria after a generic
+proved-row ordering bug was fixed. Two new font-file/literal cohorts produced
+344/360 and355/360 exact body fields. Six earlier font corpora were explicitly
+consumed source-only regression. This does not retroactively change the original
+training selection or failed preceding whole-route trial. The Windows source
+factory now includes this fixed manual-code expert with complete original-v1
+fallback. Distribution checks are linked from the current release notes. [Full scope](../../documentation/ocr-source-order-accuracy-20261016.md).

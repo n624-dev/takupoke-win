@@ -16,10 +16,6 @@ if (args.Length == 2 && args[0] == "--bundle")
 if (args.Length != 3 || args[2] is not ("baseline" or "candidate")) throw new ArgumentException("manifest output arm");
 var root = Path.GetDirectoryName(Path.GetFullPath(args[0]))!;
 using var manifest = JsonDocument.Parse(File.ReadAllBytes(args[0])); var m = manifest.RootElement;
-var modelRoot = Path.Combine(root, "models");
-if (RecoveryOcrModels.Bundle.Artifacts.Single(a => a.Path == "ascii-rec.onnx").Sha256 != "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703")
-    throw new InvalidDataException("This frozen comparison requires the historical v1 baseline factory; do not silently compare a later default against itself.");
-
 var dictionary = Verify(m.GetProperty("hybridDictionary")); await RecoveryOcrModels.VerifyDictionaryAsync(dictionary, default);
 var captured = File.ReadLines(Verify(m.GetProperty("capturedObservations"))).Select(l => JsonDocument.Parse(l))
     .ToDictionary(d => (d.RootElement.GetProperty("id").GetString()!,d.RootElement.GetProperty("page").GetInt32()));
@@ -63,7 +59,7 @@ foreach (var input in m.GetProperty("documents").EnumerateArray())
         var sources = document.Sources.Select(s => s with { NativeConfidence = scores[s.Id] }).ToArray();
         document = document with { Sources = sources, Capture = new(hash,pages.Count,RecoveryValidator.Fingerprint(sources),
             rasters.Select((s,i) => new RecoveryCapturedPage(i+1,s.Width,s.Height,Sha(s.Bgra),sources.Count(x => x.Page == i+1),true)
-                { RenderProfile = m.TryGetProperty("renderer",out _) ? "windows-pdf-png-v1" : null }).ToArray(),3) };
+                { RenderProfile = m.TryGetProperty("renderer",out _) ? "windows-pdf-png-v1" : null }).ToArray(),RecoveryManualAssistance.CurrentManualSchemaVersion) };
         var targets = RecoveryManualAssistance.CaptureTargets(document, token);
         if (targets is { Count: > 0 })
         {

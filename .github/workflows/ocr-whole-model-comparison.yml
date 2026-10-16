@@ -1,10 +1,5 @@
 name: Compare specialist accuracy on paired fresh native Windows PDFs
 on:
-  push:
-    branches: [codex/windows-local-ai-improvement-20261013]
-    paths:
-      - '.github/workflows/ocr-whole-model-comparison.yml'
-      - 'tools/ocr-whole-model-comparison/**'
   workflow_dispatch:
 permissions:
   contents: read
