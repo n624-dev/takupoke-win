@@ -8,6 +8,20 @@ namespace Takupoke.Integration.Tests;
 
 public sealed class OcrCropCompletenessTests
 {
+    [Theory]
+    [InlineData(6,3)]
+    [InlineData(24,3)]
+    [InlineData(43,3)]
+    public void HeaderContextCannotHideFaintInkInAddedFringeFarFromCtcPeak(int x,int y)
+    {
+        var image=White(50,30);var physical=new RecoveryBox(5,5,40,20);
+        var evidence=new RecoveryBox(23,2,3,12);var snapshot=image.Bgra.ToArray();
+        Assert.Equal(new RecoveryBox(5,2,40,23),OcrHeaderContext.Extend(physical,evidence,image.InkFreeScanner()));
+        image.Bgra[(y*image.Width+x)*4]=254;
+        Assert.Null(OcrHeaderContext.Extend(physical,evidence,image.InkFreeScanner()));
+        image.Bgra[(y*image.Width+x)*4]=255;Assert.Equal(snapshot,image.Bgra);
+    }
+
     [Fact]
     public void OpenOuterBorderDoesNotEraseClosedInteriorCellsOrHideItsTail()
     {
@@ -114,6 +128,28 @@ public sealed class OcrCropCompletenessTests
         Assert.True(image.RuleMask(rules)[5 * image.Width + 15]);
 
         Assert.Throws<InvalidDataException>(() => OcrCropCompleteness.Complete(image, [new(14, 8, 3, 3)], default));
+    }
+
+    [Fact]
+    public void ManualContainedRuleContactRetainsOriginalPixelsAndStillRejectsClippedStroke()
+    {
+        var image=RuledRectangle();for(var y=6;y<=12;y++)Ink(image,15,y);
+        var original=new RecoveryBox(14,4,3,10);var before=image.Bgra.ToArray();var contacts=new HashSet<int>();
+        Assert.Throws<InvalidDataException>(()=>OcrCropCompleteness.Complete(image,[original],default));
+        Assert.Equal(original,Assert.Single(OcrCropCompleteness.Complete(image,[original],default,true,contacts)));
+        Assert.Equal(new[]{0},contacts);Assert.Equal(before,image.Bgra);
+        var framed=new OcrInkCropFrame(image,null,default).Restrict(original);
+        Assert.True(framed.Y<=5); // Preserve the physical contact, not just the unmasked stem.
+        Assert.False(image.HasUnrecognizedInk([framed],image.Rules()));
+        Assert.Throws<InvalidDataException>(()=>OcrCropCompleteness.Complete(image,[new(14,8,3,3)],default,true,new HashSet<int>()));
+    }
+
+    [Fact]
+    public void ManualRuleContactCannotCombineOwnersOrHideUnownedAttachedText()
+    {
+        var image=RuledRectangle();for(var y=6;y<=12;y++){Ink(image,15,y);Ink(image,25,y);}
+        Assert.Throws<InvalidDataException>(()=>OcrCropCompleteness.Complete(image,[new(14,4,3,10)],default,true,new HashSet<int>()));
+        Assert.Throws<InvalidDataException>(()=>OcrCropCompleteness.Complete(image,[new(14,4,3,10),new(24,4,3,10)],default,true,new HashSet<int>()));
     }
 
     [Fact]

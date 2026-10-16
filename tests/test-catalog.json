@@ -445,8 +445,10 @@
         "src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs",
         "src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs",
         "src/Takupoke.Infrastructure/Recovery/OcrDetectorProbability.cs",
+        "src/Takupoke.Infrastructure/Recovery/OcrHeaderContext.cs",
         "src/Takupoke.Infrastructure/Recovery/OcrInkCropFrame.cs",
         "src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs",
+        "src/Takupoke.Infrastructure/Recovery/OcrRoleLabelRetry.cs",
         "src/Takupoke.Infrastructure/Recovery/OcrWhiteGapPartition.cs",
         "src/Takupoke.Infrastructure/Recovery/OnnxAsciiOcr.cs",
         "src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs",
@@ -467,6 +469,7 @@
         "tests/Takupoke.Integration.Tests/OcrInkCropFrameTests.cs",
         "tests/Takupoke.Integration.Tests/OcrInputTransformTests.cs",
         "tests/Takupoke.Integration.Tests/OcrNativeLineHeaderTests.cs",
+        "tests/Takupoke.Integration.Tests/OcrRoleLabelRetryTests.cs",
         "tests/Takupoke.Integration.Tests/OcrSourceRowExtractionTests.cs",
         "tests/Takupoke.Integration.Tests/OcrWhiteGapPartitionTests.cs",
         "tests/Takupoke.Integration.Tests/OnnxAsciiOcrTests.cs"

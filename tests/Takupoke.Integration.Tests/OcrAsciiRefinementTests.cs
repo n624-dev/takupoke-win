@@ -101,6 +101,31 @@ public sealed class OcrAsciiRefinementTests
         finally { File.Delete(dictionary); }
     }
 
+    [Theory]
+    [InlineData(false)] [InlineData(true)]
+    public void NumericOnlyTailKeepsPrimaryWhenSpecialistUncertain(bool prefixed)
+    {
+        var dictionary = ManualDictionary();
+        try
+        {
+            var tokens = JsonSerializer.Deserialize<string[]>(File.ReadAllBytes(dictionary))!;
+            tokens[1] = "1"; tokens[2] = "2"; tokens[3] = "3";
+            File.WriteAllText(dictionary, JsonSerializer.Serialize(tokens));
+            using var ascii = new OnnxAsciiOcr(Path.Combine(AppContext.BaseDirectory, "fixtures/ascii-manual-contract.onnx"), dictionary);
+            var numeric = new PdfGlyph("123", 80, 20, 200, 48, 0, prefixed ? 1 : 0);
+            PdfGlyph[] primary = prefixed ? [new("担当", 0, 20, 35, 48, 0, 0), numeric] : [numeric];
+            var scores = primary.Select(_ => .96).ToArray();
+            var crops = new Dictionary<int,RecoveryBox> { [0] = new(0,20,320,48) };
+            var previous = OcrAsciiRefinement.Refine(White(), primary, scores, crops, [], ascii, retainUncertain:true);
+            Assert.Contains((double).7f, previous.Confidences);
+            var guarded = OcrAsciiRefinement.Refine(White(), primary, scores, crops, [], ascii, retainUncertain:true,
+                manualCodeAscii:ascii, manualCodeRequiresLetter:true);
+            Assert.Equal(primary, guarded.Glyphs); Assert.Equal(scores, guarded.Confidences);
+            Assert.Equal(1, guarded.RecognizerCalls); // No mixed-code expert on pure digits.
+        }
+        finally { File.Delete(dictionary); }
+    }
+
     private static string ManualDictionary()
     {
         var path=Path.Combine(Path.GetTempPath(),"ascii-expert-"+Guid.NewGuid().ToString("N")+".json");

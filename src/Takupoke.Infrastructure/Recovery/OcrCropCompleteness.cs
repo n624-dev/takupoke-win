@@ -4,7 +4,8 @@ namespace Takupoke.Infrastructure.Recovery;
 
 internal static class OcrCropCompleteness
 {
-    public static IReadOnlyList<RecoveryBox> Complete(RecoveryRaster image, IReadOnlyList<RecoveryBox> crops, CancellationToken token)
+    public static IReadOnlyList<RecoveryBox> Complete(RecoveryRaster image, IReadOnlyList<RecoveryBox> crops, CancellationToken token,
+        bool allowContainedRuleContact = false, ISet<int>? containedRuleContacts = null)
     {
         token.ThrowIfCancellationRequested();
         if (!image.Valid || crops.Count > 10000 || crops.Any(b => !new RecoveryBox(0, 0, image.Width, image.Height).Contains(b)))
@@ -61,6 +62,27 @@ internal static class OcrCropCompleteness
                 }
             }
             if (textPixels == 0) continue; // Only proven physical rule ink.
+            // Manual capture may keep a fully contained glyph touching a
+            // proven physical rule. Keep its original crop and ALL original
+            // rule/contact pixels in recognition, rather than expanding to the
+            // entire connected table or removing the contact as background.
+            // A partial stroke, competing owner or unowned ink still refuses.
+            if (allowContainedRuleContact && attachedRule && !conflict && owner > 0)
+            {
+                var source = crops[owner - 1]; var contained = true;
+                foreach (var index in pixels)
+                {
+                    work.Step(); if (ruleMask[index]) continue;
+                    var x = index % image.Width + .5; var y = index / image.Width + .5;
+                    if (x < source.X || x >= source.X + source.Width || y < source.Y || y >= source.Y + source.Height)
+                    { contained = false; break; }
+                }
+                if (contained)
+                {
+                    foreach (var index in pixels) { work.Step(); if (!ruleMask[index]) componentOwners[index] = (short)owner; }
+                    containedRuleContacts?.Add(owner - 1); continue;
+                }
+            }
             if (conflict || owner == 0 || attachedRule)
             {
                 var error = new InvalidDataException("OCR印字の切り出し範囲を一意に確認できません。");

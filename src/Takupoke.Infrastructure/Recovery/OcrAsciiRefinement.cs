@@ -10,7 +10,7 @@ internal static class OcrAsciiRefinement
     public static Result Refine(RecoveryRaster raster, IReadOnlyList<PdfGlyph> primary,
         IReadOnlyList<double> scores, IReadOnlyDictionary<int, RecoveryBox> crops,
         IReadOnlyList<PdfRule> rules, OnnxAsciiOcr ascii, CancellationToken token = default, bool retainUncertain = false,
-        OnnxAsciiOcr? manualCodeAscii = null)
+        OnnxAsciiOcr? manualCodeAscii = null, bool manualCodeRequiresLetter = false)
     {
         if (primary.Count != scores.Count) throw new InvalidDataException("OCRの文字と確信度が一致しません。");
         var right = rules.Where(l => l.Vertical && l.X1 > 2).Select(l => l.X1).DefaultIfEmpty(double.NaN).Min();
@@ -42,6 +42,7 @@ internal static class OcrAsciiRefinement
             var codeText = standaloneCode ? text : tailText;
             var manualCode = retainUncertain && (standaloneCode || tailCrop is not null) &&
                 codeText.Length is >= 2 and <= 32 && codeText.Any(char.IsAsciiDigit) &&
+                (!manualCodeRequiresLetter || codeText.Any(char.IsAsciiLetter)) &&
                 codeText.All(c => char.IsAsciiLetterOrDigit(c) || c is '_' or '-') &&
                 !ClassSelection.Candidates.Contains(codeText) && (!double.IsFinite(top) || crop.Y >= top);
             var chosen = false;

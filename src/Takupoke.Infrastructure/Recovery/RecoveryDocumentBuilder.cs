@@ -170,6 +170,30 @@ public static class RecoveryDocumentBuilder
                     { work.Step(); var end = offset + atom.Glyph.Text.Length; if (offset >= match.Index && end <= match.Index + match.Length) selected.Add(atom); offset = end; }
                     if (selected.Count > 0 && string.Concat(selected.Select(a => a.Glyph.Text)) == match.Value)
                     {
+                        // A decoded original whitespace gap between two
+                        // independently present public headers belongs to the
+                        // preceding literal header. Keep its source atom and
+                        // native score so existing header review can confirm it.
+                        // A body gap, unknown suffix or isolated space gains no
+                        // header meaning from this rule.
+                        if (Regex.IsMatch(match.Value, "^(?:" + HeaderPattern + ")[：:]?$"))
+                        {
+                            var offsetAfter = match.Index + match.Length;
+                            var gap = new List<Atom>(); var offsetInLine = 0;
+                            foreach (var atom in line)
+                            {
+                                work.Step(); var end = offsetInLine + atom.Glyph.Text.Length;
+                                if (offsetInLine >= offsetAfter)
+                                {
+                                    if (string.IsNullOrEmpty(atom.Glyph.Text) || !string.IsNullOrWhiteSpace(atom.Glyph.Text)) break;
+                                    gap.Add(atom); offsetAfter = end;
+                                }
+                                offsetInLine = end;
+                            }
+                            if (gap.Count > 0 && offsetAfter < raw.Length &&
+                                Regex.IsMatch(raw[offsetAfter..], "^(?:" + HeaderPattern + ")(?:[：:]|$)"))
+                                selected.AddRange(gap);
+                        }
                         var valueIds = rolePrefixes.Count == 1 && rolePrefixes[0].Index == 0 && match.Index == 0 &&
                             match.Value == rolePrefixes[0].Value ? line.Skip(selected.Count).Select(a => a.Id).ToArray() : null;
                         work.Step(valueIds?.Length ?? 0);
@@ -275,7 +299,21 @@ public static class RecoveryDocumentBuilder
         if (kind == RecoveryDocumentKind.Timetable && term is null) throw new InvalidDataException("学期の見出しを確認できません。");
         Label Expand(Label label)
         {
-            try { work.Step(pages[label.Page - 1].Lines.Count * 4L); var b = new PdfGrid(pages[label.Page - 1], token).Box(label.Box.X + label.Box.Width / 2, label.Box.Y + label.Box.Height / 2); return label with { Box = new(b.Left, b.Top, b.Right - b.Left, b.Bottom - b.Top) }; }
+            try
+            {
+                work.Step(pages[label.Page - 1].Lines.Count * 4L);
+                var b = new PdfGrid(pages[label.Page - 1], token).Box(label.Box.X + label.Box.Width / 2, label.Box.Y + label.Box.Height / 2);
+                var physical = new RecoveryBox(b.Left, b.Top, b.Right-b.Left, b.Bottom-b.Top);
+                if (ocrPages?.Contains(label.Page) == true && !physical.Contains(label.Box))
+                {
+                    // CTC preserves original recognition context outside a
+                    // physical header. Prove its fringe empty from original
+                    // pixels, retaining source geometry and physical ownership.
+                    var context=OcrHeaderContext.Extend(physical,label.Box,f=>{work.Step();return inkFree(label.Page,f);});
+                    if(context is not null)return label with{Box=context,OwnershipBox=label.OwnershipBox??physical};
+                }
+                return label with { Box = physical };
+            }
             catch (PdfParseException error) when (error.Stage != "limit") { return label; }
         }
         var legacyClassLabels = new List<Label>();

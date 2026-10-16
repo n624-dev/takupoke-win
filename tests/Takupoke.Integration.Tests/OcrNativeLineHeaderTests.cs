@@ -25,7 +25,9 @@ public sealed class OcrNativeLineHeaderTests
         Assert.Same(document, structure.Document);
         Assert.Empty(structure.Errors);
         Assert.DoesNotContain(document.Cells, RecoveryStructure.Pending);
-        var expectedErrors = new[] { "coverage", "periodEvidence", "unclassifiedSource", "dayBinding" };
+        // Verified blank CTC context now resolves day ownership; incomplete
+        // fixture body evidence still prevents both adoption and manual preparation.
+        var expectedErrors = new[] { "coverage", "periodEvidence", "unclassifiedSource", "unassignedCellText" };
         Assert.Equal(expectedErrors, RecoveryValidator.InputErrors(document));
         var run = await RecoveryEngine.RunAsync(document, "windows", 10, true, [], _ => null);
         Assert.Equal(RecoveryJobState.Failed, run.State);
@@ -48,6 +50,36 @@ public sealed class OcrNativeLineHeaderTests
         Assert.Equal(Enumerable.Range(1, 5).SelectMany(page => Enumerable.Range(3, 6).Select(atom => $"p{page}s{atom}")), document.YearEvidence);
         Assert.Equal(Enumerable.Range(1, 5).SelectMany(page => new[] { $"p{page}s9", $"p{page}s10" }), document.TermEvidence);
         Assert.Equal(document.YearEvidence.Count, document.YearEvidence.Distinct().Count());
+    }
+
+    [Fact]
+    public void OriginalWhitespaceBetweenExplicitYearAndTermKeepsItsHeaderOwnership()
+    {
+        var (pages,rasters,hash)=CapturedOcrHeaderFixture.Load();
+        var originalCount=pages.Sum(p=>p.Glyphs.Count);
+        pages=EachPage(pages,InsertTitleGap);
+        var document=CapturedOcrHeaderFixture.Build(pages,rasters,hash,OcrPages);
+        var spaces=document.Sources.Where(s=>s.Text==" ").ToArray();
+        Assert.Equal(5,spaces.Length);Assert.Equal(originalCount+5,document.Sources.Count);
+        Assert.All(spaces,space=>{Assert.True(space.FromOcr);Assert.Contains(space.Id,document.YearEvidence);});
+        Assert.Equal(2027,document.SchoolYear);Assert.Equal("前期",document.Term);
+        Assert.DoesNotContain("yearEvidenceText",RecoveryValidator.InputErrors(document));
+    }
+
+    private static PdfPageLayout InsertTitleGap(PdfPageLayout page)
+    {
+        var line=YearLine(page);var next=line.First(g=>g.Text=="前");
+        var previous=line.Last(g=>g.SourceOrder<next.SourceOrder);
+        var left=previous.X+previous.Width;var gap=next.X-left;
+        Assert.True(gap>0);
+        var space=new PdfGlyph(" ",left+gap/4,next.Y,gap/2,next.Height,next.SourceLine,next.SourceOrder);
+        var glyphs=new List<PdfGlyph>();
+        foreach(var glyph in page.Glyphs)
+        {
+            if(ReferenceEquals(glyph,next))glyphs.Add(space);
+            glyphs.Add(glyph.SourceOrder>=next.SourceOrder ? glyph with{SourceOrder=glyph.SourceOrder+1}:glyph);
+        }
+        return page with{Glyphs=glyphs};
     }
 
     [Theory]

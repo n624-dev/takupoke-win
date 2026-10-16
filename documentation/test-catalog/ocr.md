@@ -1,7 +1,7 @@
 # CPU OCR・文字位置・モデル・原画像切り出し
 
 対応関係・宣言名・実行方法のSHA-256：
-`6eb0ffea4ae3fa57c218dd293f66522b5d2d943a445389b0116d63fec02e00ca`
+`9e7a6c4375b631c0b4c57ee1f482d208e34e4bf059c3fa845f5c897ecd583c7b`
 
 環境：Linux／Windows .NET。Windows描画・実推論は対応workflowで検証
 
@@ -17,8 +17,10 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - [src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs](../../src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs](../../src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrDetectorProbability.cs](../../src/Takupoke.Infrastructure/Recovery/OcrDetectorProbability.cs)
+- [src/Takupoke.Infrastructure/Recovery/OcrHeaderContext.cs](../../src/Takupoke.Infrastructure/Recovery/OcrHeaderContext.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrInkCropFrame.cs](../../src/Takupoke.Infrastructure/Recovery/OcrInkCropFrame.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs](../../src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs)
+- [src/Takupoke.Infrastructure/Recovery/OcrRoleLabelRetry.cs](../../src/Takupoke.Infrastructure/Recovery/OcrRoleLabelRetry.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrWhiteGapPartition.cs](../../src/Takupoke.Infrastructure/Recovery/OcrWhiteGapPartition.cs)
 - [src/Takupoke.Infrastructure/Recovery/OnnxAsciiOcr.cs](../../src/Takupoke.Infrastructure/Recovery/OnnxAsciiOcr.cs)
 - [src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs](../../src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs)
@@ -52,11 +54,13 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `UnrelatedAsciiDoesNotRouteAndMissingSourceCropRefuses`
 - `OptionalCodeExpertKeepsStrictHeadersAndProseAndPreservesManualNativeScores`
 - `InvalidExpertCodeOrFramedPaddingUsesCompleteOriginalSpecialistDecision`
+- `NumericOnlyTailKeepsPrimaryWhenSpecialistUncertain`
 - `ManualCaptureRetainsSpecialistNativeUncertaintyWhileStrictRoutePreservesPrimary`
 - `StandaloneCodesUseSpecialistAndRetainPrimaryWhenNativeOutputFailsThreshold`
 
 ## [tests/Takupoke.Integration.Tests/OcrCropCompletenessTests.cs](../../tests/Takupoke.Integration.Tests/OcrCropCompletenessTests.cs)
 
+- `HeaderContextCannotHideFaintInkInAddedFringeFarFromCtcPeak`
 - `OpenOuterBorderDoesNotEraseClosedInteriorCellsOrHideItsTail`
 - `IsolatedLongGlyphAndHShapeDoNotBecomeClosedInteriorRules`
 - `ConnectedClippedStrokeExpandsOnlyToItsMinimalUnion`
@@ -66,6 +70,8 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `ExpandedBoundingRectangleCannotEncloseAnotherOwnedFragment`
 - `OneConnectedComponentCannotBelongToTwoOriginalCrops`
 - `StrokePhysicallyJoinedToProvenRectangularRuleIsRejected`
+- `ManualContainedRuleContactRetainsOriginalPixelsAndStillRejectsClippedStroke`
+- `ManualRuleContactCannotCombineOwnersOrHideUnownedAttachedText`
 - `ProvenPhysicalRulePixelsAloneDoNotRequireTextCrop`
 - `OriginalWhiteCropOverlapIsRejected`
 - `ExpansionCannotOverlapEvenWhiteSupportOfAnotherCrop`
@@ -113,6 +119,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 - `DecodedSpaceRemainsInEvidenceAtItsRealCtcPosition`
 - `ReferenceWidthsAndNormalizedZeroPadding`
+- `UnpaddedRetryPreservesEverySampleAndRequiresNewTimeCoordinates`
 - `RecognitionMatchesIndependentOpenCvLinearSamplesWithinOneByte`
 - `DetectionUsesBgrLinearSamplingAndExistingNormalization`
 - `CtcTimeCoordinatesInvertPaddingAndRejectUnsupportedIntervals`
@@ -123,6 +130,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 ## [tests/Takupoke.Integration.Tests/OcrNativeLineHeaderTests.cs](../../tests/Takupoke.Integration.Tests/OcrNativeLineHeaderTests.cs)
 
 - `CapturedNativeLineRetainsOriginalAtomsAndFailsDownstreamAfterOwnedHeaderSelection`
+- `OriginalWhitespaceBetweenExplicitYearAndTermKeepsItsHeaderOwnership`
 - `NativeMetadataCannotEnableSupplementalHeadersForVectorPages`
 - `YearSuffixOnAnotherNativeLineIsNotJoined`
 - `NativeLineIdentityReusedOnDifferentRowsIsRejected`
@@ -135,6 +143,12 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `ObservedWrongYearStaysWrongWithoutFixtureGoldRepair`
 - `DifferentObservedYearsRemainAmbiguous`
 - `LegacyAndSupplementalHeadersDoNotDuplicateEvidenceAtoms`
+
+## [tests/Takupoke.Integration.Tests/OcrRoleLabelRetryTests.cs](../../tests/Takupoke.Integration.Tests/OcrRoleLabelRetryTests.cs)
+
+- `RetryRequiresAnAlreadyObservedRoleLabel`
+- `NewNativeObservationMustMatchEveryLabelLetter`
+- `PrefixBoundaryNeedsACompletelyWhiteOriginalColumn`
 
 ## [tests/Takupoke.Integration.Tests/OcrSourceRowExtractionTests.cs](../../tests/Takupoke.Integration.Tests/OcrSourceRowExtractionTests.cs)
 

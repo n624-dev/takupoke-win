@@ -10,6 +10,22 @@ internal static class OcrInputTransform
 {
     internal sealed record RecognitionInput(DenseTensor<float> Tensor, RecoveryBox Crop, int ValidWidth, int InputWidth)
     {
+        // Re-run inference on the exact same sampled source pixels without
+        // normalized-zero right padding. CTC positions must come from that new
+        // inference; existing intervals are never clamped into the source.
+        public RecognitionInput? WithoutRightPadding(CancellationToken token)
+        {
+            if (ValidWidth < 32 || ValidWidth == InputWidth) return null;
+            var unpadded = new DenseTensor<float>([1, 3, 48, ValidWidth]);
+            for (var c = 0; c < 3; c++) for (var y = 0; y < 48; y++)
+            {
+                token.ThrowIfCancellationRequested();
+                Tensor.Buffer.Span.Slice((c * 48 + y) * InputWidth, ValidWidth)
+                    .CopyTo(unpadded.Buffer.Span.Slice((c * 48 + y) * ValidWidth, ValidWidth));
+            }
+            return new(unpadded, Crop, ValidWidth, ValidWidth);
+        }
+
         public PdfGlyph SourceGlyph(string text, int start, int end, int timeCount, int sourceLine, int sourceOrder)
         {
             // A decoded space is evidence too. CTC blank is filtered during

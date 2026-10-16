@@ -222,6 +222,7 @@ public sealed record RecoveryRaster(int Width, int Height, byte[] Bgra)
 internal sealed record OcrRecognitionObservation(RecoveryBox DetectedCrop, RecoveryBox RecognitionCrop,
     int ValidWidth, int InputWidth, int TimeCount, IReadOnlyList<OcrRecognitionPiece> Pieces)
 {
+    public string Purpose { get; init; } = "line";
     public bool ZeroPieces => Pieces.Count == 0;
     public bool BelowConfidence => Pieces.Any(p => p.Confidence < .8f);
 }
@@ -234,6 +235,11 @@ public sealed class OnnxJapaneseOcr : IDisposable
     private readonly int _symbols;
     private readonly OnnxAsciiOcr? _ascii;
     private readonly OnnxAsciiOcr? _manualCodeAscii;
+    private readonly bool _retryUnpaddedInput;
+    private readonly bool _allowContainedRuleContact;
+    private readonly bool _retainVerifiedWhitespace;
+    private readonly bool _retryRoleLabels;
+    private readonly bool _manualCodeRequiresLetter;
     private readonly bool _frameOriginalInk;
     public IReadOnlyList<RecoveryBox> RecognizedBoxes { get; private set; } = [];
     public IReadOnlyList<double> NativeConfidences { get; private set; } = [];
@@ -244,12 +250,13 @@ public sealed class OnnxJapaneseOcr : IDisposable
     internal Action<IReadOnlyList<RecoveryBox>>? DetectionObserver { get; set; }
     public OnnxJapaneseOcr(string detector, string recognizer, string dictionary,
         int dictionarySymbols = 18385, string? asciiModel = null, string? asciiDictionary = null, bool frameOriginalInk = false,
-        string? manualCodeModel = null)
+        string? manualCodeModel = null, bool retryUnpaddedInput = false, bool allowContainedRuleContact = false, bool retainVerifiedWhitespace = false, bool retryRoleLabels = false, bool manualCodeRequiresLetter = false)
     {
         if (dictionarySymbols is not (18385 or 18710) || (asciiModel is null) != (asciiDictionary is null) ||
             manualCodeModel is not null && asciiModel is null)
             throw new InvalidDataException("OCRモデルの構成が不正です。");
         _symbols = dictionarySymbols; _frameOriginalInk = frameOriginalInk;
+        _retryUnpaddedInput = retryUnpaddedInput; _allowContainedRuleContact = allowContainedRuleContact; _retainVerifiedWhitespace = retainVerifiedWhitespace; _retryRoleLabels = retryRoleLabels; _manualCodeRequiresLetter = manualCodeRequiresLetter;
         Environment.SetEnvironmentVariable("ORT_TELEMETRY_DISABLED", "1");
         OrtEnv.Instance().DisableTelemetryEvents();
         using var options = new SessionOptions { IntraOpNumThreads = 2, InterOpNumThreads = 1, GraphOptimizationLevel = GraphOptimizationLevel.ORT_ENABLE_ALL, LogSeverityLevel = OrtLoggingLevel.ORT_LOGGING_LEVEL_ERROR };
@@ -301,37 +308,73 @@ public sealed class OnnxJapaneseOcr : IDisposable
         // Coverage and CTC geometry use this same crop, never a coverage-only
         // enlarged rectangle that could conceal omitted disconnected text.
         DetectionObserver?.Invoke(boxes.AsReadOnly());
-        var recognitionBoxes = OcrCropCompleteness.Complete(image, boxes, token);
+        var ruleContacts = new HashSet<int>();
+        var recognitionBoxes = OcrCropCompleteness.Complete(image, boxes, token,
+            allowContainedRuleContact: retainUncertain && _allowContainedRuleContact, containedRuleContacts: ruleContacts);
         IReadOnlyList<PdfRule> rules = [];
         if (_frameOriginalInk || _ascii is not null) rules = image.Rules(token);
         if (_frameOriginalInk)
         {
             var frame = new OcrInkCropFrame(image, image.RuleMask(rules, token), token);
-            recognitionBoxes = recognitionBoxes.Select(frame.Restrict).ToArray();
+            var originalFrame = new OcrInkCropFrame(image, null, token);
+            recognitionBoxes = recognitionBoxes.Select((b,i) => ruleContacts.Contains(i)
+                ? originalFrame.Restrict(b) : frame.Restrict(b)).ToArray();
             if (image.HasUnrecognizedInk(recognitionBoxes, rules, token))
                 throw new InvalidDataException("OCRの原印字を切り出せません。");
         }
         var lineCrops = new Dictionary<int, RecoveryBox>();
+        var originalWhitespace = image.InkFreeScanner(token: token);
+        var labelFrame = new OcrInkCropFrame(image, null, token);
         var output = new List<PdfGlyph>(); var confidences = new List<double>(); var order = 0; var line = 0;
         foreach (var index in Enumerable.Range(0, recognitionBoxes.Count).OrderBy(i => recognitionBoxes[i].Y).ThenBy(i => recognitionBoxes[i].X))
         {
             var box = recognitionBoxes[index]; lineCrops.Add(line, box);
             token.ThrowIfCancellationRequested(); var input = OcrInputTransform.Recognition(image, box, token);
             VerifyRecognitionWidth(input.InputWidth);
-            using var recognition = _recognizer.Run([NamedOnnxValue.CreateFromTensor("x", input.Tensor)]); token.ThrowIfCancellationRequested(); var logits = recognition.First().AsTensor<float>();
-            var pieces = OcrCtcDecoder.Decode(logits, _dictionary, token);
-            var tCount = logits.Dimensions[1];
-            // Retain already-computed pieces before the existing refusal. No
-            // extra model call, alternate decoding or confidence adjustment.
-            RecognitionObserver?.Invoke(new(boxes[index], box, input.ValidWidth, input.InputWidth, tCount,
-                Array.AsReadOnly(pieces.ToArray())));
-            if (pieces.Count == 0 || pieces.Any(p => p.Confidence < .8f && (!retainUncertain || string.IsNullOrWhiteSpace(p.Text)))) throw new InvalidDataException("OCRで判読できない文字があります。空欄には置き換えません。");
-            // CTC time positions are retained as source geometry, never equally
-            // spaced boxes inferred from a generated string.
-            foreach (var piece in pieces)
+            (IReadOnlyList<OcrRecognitionPiece> Pieces, int TimeCount) Infer(OcrInputTransform.RecognitionInput current, string purpose = "line")
             {
-                output.Add(input.SourceGlyph(piece.Text, piece.Start, piece.End, tCount, line, order++));
-                confidences.Add(piece.Confidence);
+                VerifyRecognitionWidth(current.InputWidth);
+                using var recognition = _recognizer.Run([NamedOnnxValue.CreateFromTensor("x", current.Tensor)]);
+                token.ThrowIfCancellationRequested(); var logits = recognition.First().AsTensor<float>();
+                var decoded = OcrCtcDecoder.Decode(logits, _dictionary, token); var times = logits.Dimensions[1];
+                RecognitionObserver?.Invoke(new(boxes[index], current.Crop, current.ValidWidth, current.InputWidth, times,
+                    Array.AsReadOnly(decoded.ToArray())) { Purpose = purpose });
+                return (decoded, times);
+            }
+            var (pieces, tCount) = Infer(input);
+            if (_retryUnpaddedInput && pieces.Any(p => (long)p.End * input.InputWidth > (long)input.ValidWidth * tCount) &&
+                input.WithoutRightPadding(token) is { } unpadded)
+            {
+                input = unpadded; (pieces, tCount) = Infer(input, "unpadded-line");
+            }
+            if (pieces.Count == 0 || pieces.Any(p => p.Confidence < .8f && (!retainUncertain ||
+                string.IsNullOrWhiteSpace(p.Text) && !(_retainVerifiedWhitespace &&
+                    originalWhitespace(input.SourceBox(p.Start, p.End, tCount))))))
+                throw new InvalidDataException("OCRで判読できない文字があります。空欄には置き換えません。");
+            // Validate every original interval before considering a retry.
+            var originalGlyphs = pieces.Select((p, n) => input.SourceGlyph(p.Text, p.Start, p.End, tCount, line, n)).ToArray();
+            IReadOnlyList<PdfGlyph>? labelGlyphs = null;
+            IReadOnlyList<OcrRecognitionPiece>? labelPieces = null;
+            if (retainUncertain && _retryRoleLabels && OcrRoleLabelRetry.Eligible(pieces) &&
+                OcrRoleLabelRetry.PrefixCrop(image, box, originalGlyphs, token) is { } labelCrop)
+            {
+                var labelInput = OcrInputTransform.Recognition(image, labelFrame.Restrict(labelCrop), token);
+                var (retry, retryTimes) = Infer(labelInput, "inline-role-label");
+                if (OcrRoleLabelRetry.Matches(pieces, retry) &&
+                    retry.All(p => (long)p.End * labelInput.InputWidth <= (long)labelInput.ValidWidth * retryTimes))
+                {
+                    labelGlyphs = retry.Select((p, n) => labelInput.SourceGlyph(p.Text, p.Start, p.End, retryTimes, line, n)).ToArray();
+                    labelPieces = retry;
+                }
+            }
+            // A supported, matching retry contributes its OWN native atoms.
+            // Every remaining original atom and native probability is retained.
+            for (var n = 0; n < pieces.Count; n++)
+            {
+                var retried = labelGlyphs is not null && n < labelGlyphs.Count;
+                var glyph = retried ? labelGlyphs![n] : originalGlyphs[n];
+                output.Add(glyph with { SourceOrder = order++ });
+                confidences.Add(retried ? labelPieces![n].Confidence : pieces[n].Confidence);
             }
             line++;
         }
@@ -339,7 +382,7 @@ public sealed class OnnxJapaneseOcr : IDisposable
         if (_ascii is not null)
         {
             var refined = OcrAsciiRefinement.Refine(image, output, confidences, lineCrops, rules, _ascii, token,
-                retainUncertain: retainUncertain, manualCodeAscii: _manualCodeAscii);
+                retainUncertain: retainUncertain, manualCodeAscii: _manualCodeAscii, manualCodeRequiresLetter: _manualCodeRequiresLetter);
             NativeConfidences = refined.Confidences; AsciiRecognitionCalls = refined.RecognizerCalls; return refined.Glyphs;
         }
         NativeConfidences = confidences.ToArray(); return output;

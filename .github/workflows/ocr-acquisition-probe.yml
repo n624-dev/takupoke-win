@@ -1,10 +1,11 @@
-name: Diagnose consumed native OCR acquisition failures
+name: Verify consumed native OCR acquisition repairs and correction
 on:
   push:
     branches: [codex/windows-local-ai-improvement-20261013]
     paths:
       - '.github/workflows/ocr-acquisition-probe.yml'
       - 'tools/ocr-acquisition-probe/**'
+      - 'tools/ocr-acquisition-replay/**'
   workflow_dispatch:
 permissions:
   contents: read
@@ -36,7 +37,7 @@ jobs:
           New-Item -ItemType Directory -Path $studyRoot | Out-Null
           @{ processors = @(Get-CimInstance Win32_Processor | Select-Object Name, NumberOfCores, NumberOfLogicalProcessors); physicalMemoryBytes = [long](Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory; sourceCommit = $env:GITHUB_SHA } | ConvertTo-Json -Depth 5 | Out-File (Join-Path $studyRoot 'hardware.json') -Encoding utf8
       - run: python -m pip install --disable-pip-version-check Pillow==12.3.0
-      - name: Capture consumed original pages and failed recognition observations
+      - name: Verify repaired acquisition on consumed original native pages
         run: |
           python tools/ocr-acquisition-probe/run_windows.py --output (Join-Path $env:TAKUPOKE_PRODUCTION_TEMP 'run')
           if ($LASTEXITCODE -ne 0) { throw 'Consumed acquisition diagnostic failed; retain available records.' }
