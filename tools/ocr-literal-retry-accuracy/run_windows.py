@@ -32,6 +32,8 @@ def main():
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     protocol = json.loads((HERE / 'protocol.json').read_text())
+    from prepare import excluded_literals
+    assert len(excluded_literals()) == protocol['excludeLiteralCount'], 'Validate the full exclusion union before downloading/building'
     for relative, digest in protocol['candidateRuntimeSources'].items():
         assert sha(ROOT / relative) == digest, 'Candidate changed after prospective registration'
     fonts = output / 'fonts'

@@ -1,0 +1,16 @@
+{
+  "sourceCommit": "acf43353719cb8a9a1c4e3c883746e6d030fa489",
+  "run": 38862572777,
+  "job": 116848000343,
+  "artifact": 12030160910,
+  "outcome": "SETUP FAILURE before generation or worker model execution",
+  "failure": "excluded_literals total-count assertion: five extra hashes overlapped the base ledger",
+  "incorrectAdditiveCount": 32427,
+  "actualSetUnionCount": 32422,
+  "literalMembershipChanged": false,
+  "methodFontsSeedChanged": false,
+  "newHoldoutImagesDrawn": 0,
+  "newHoldoutModelCalls": 0,
+  "independentAccuracyCredit": false,
+  "correction": "Count the actual base/extra hash set union; validate it before build/download. Keep original source and failed run."
+}

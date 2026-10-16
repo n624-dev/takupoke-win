@@ -66,8 +66,8 @@
     "20% legitimate uncommon Japanese variants",
     "10% English alphabetic"
   ],
-  "excludeLiteralCount": 32427,
-  "exclusionsSHA256": "1b60daafc5e77ac275569def02af3fa713096bf8d2f2c52ca5429955471d5725",
+  "excludeLiteralCount": 32422,
+  "exclusionsSHA256": "f0458af3f4740e0898a9a12734e75575c95de8c9acdec5764a53f340a5f028d4",
   "selectedMethod": {
     "literal": "V3actual code retry also for alphabetic source hypotheses; changed length requires same supported actualv1 text; no symbol normalization",
     "japanese": "Japanesev3 retry only already observed role+uncertain Japanese body, all other literals agree except observed colon variant, same count/full padding support, oldp<.8/newp>=.8; no character mapping",
@@ -156,5 +156,6 @@
   "zeroErrorsRequired": false,
   "scope": "Fresh actual Windows full OCR and current-schema4 downstream, separate immutable10446 baseline/currentcandidate binaries, no oracle/roster/modeloutput repair. Preserve every failed arm. Never private school data. Registration precedes new drawing/inference.",
   "fixture": "Original source-order exercised template: inclusive2237x415; label100,col267,top108,row102; explicit printed weekday band x100..2236 y36..70 spanning all periods; all grid endpoints inside image. Firstv1 failed fixture lacked right/bottom borders and day-span band; preserved asFAIL, excluded from qualification.",
-  "fontCoverage": "Before random sampling, rare Japanese names are limited to the font native cmap: KaiseiOpti supports7/8 (lacks高﨑), ZenKakuGothicAntiqueMedium supports8/8. Record pool; still test all other rare variants. No missing glyphs/tofu/fallback."
+  "fontCoverage": "Before random sampling, rare Japanese names are limited to the font native cmap: KaiseiOpti supports7/8 (lacks高﨑), ZenKakuGothicAntiqueMedium supports8/8. Record pool; still test all other rare variants. No missing glyphs/tofu/fallback.",
+  "registrationCorrection": "V2 first attempt38862572777 stopped at exclusion-ledger cardinality assertion before any generation or model execution. Extra-hash cardinality incorrectly counted overlaps with the base ledger. Literal hash membership, method, fonts and seed unchanged; true set union count now used. No holdout exposure."
 }
