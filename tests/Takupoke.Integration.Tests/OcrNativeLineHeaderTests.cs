@@ -1,11 +1,28 @@
 using Takupoke.Core.Recovery;
 using Takupoke.Infrastructure.Parsing;
+using Takupoke.Infrastructure.Recovery;
 using Xunit;
 
 namespace Takupoke.Integration.Tests;
 
 public sealed class OcrNativeLineHeaderTests
 {
+    [Fact]
+    public void RepeatedNativeTermHeadersFollowActualSourceOrderAcrossBothDiscoveryPaths()
+    {
+        using var fixture = System.Text.Json.JsonDocument.Parse(File.ReadAllBytes(
+            Path.Combine(AppContext.BaseDirectory, "fixtures", "ocr-repeated-header-order.json")));
+        var pages = System.Text.Json.JsonSerializer.Deserialize<PdfPageLayout[]>(fixture.RootElement.GetProperty("Pages").GetRawText())!;
+        var unchanged = System.Text.Json.JsonSerializer.Serialize(pages);
+        var document = RecoveryDocumentBuilder.Build(new string('a', 64), Takupoke.Core.MaterialKind.Timetable,
+            pages, (_, _) => true, Enumerable.Range(1, 5).ToHashSet(), allowStructureProposal: true);
+        Assert.Equal("前期", document.Term);
+        Assert.Equal(Enumerable.Range(1, 5).SelectMany(p => new[] { $"p{p}s6", $"p{p}s7" }), document.TermEvidence);
+        Assert.Equal(Enumerable.Range(1, 5).SelectMany(p => Enumerable.Range(0, 6).Select(s => $"p{p}s{s}")), document.YearEvidence);
+        Assert.Equal(pages.Sum(p => p.Glyphs.Count), document.Sources.Count);
+        Assert.Equal(unchanged, System.Text.Json.JsonSerializer.Serialize(pages));
+    }
+
     private const string MissingYear = "年度の独立した見出しがありません。";
     private static HashSet<int> OcrPages => Enumerable.Range(1, 5).ToHashSet();
 

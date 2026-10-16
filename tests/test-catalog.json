@@ -459,7 +459,8 @@
         "src/Takupoke.Win/Assets/Recovery/ocr-characters-v6.json",
         "src/Takupoke.Win/Assets/Recovery/ocr-characters.json",
         "tests/Takupoke.Integration.Tests/CapturedOcrHeaderFixture.cs",
-        "tests/Takupoke.Integration.Tests/OcrHeaderGoldenSnapshots.cs"
+        "tests/Takupoke.Integration.Tests/OcrHeaderGoldenSnapshots.cs",
+        "tests/Takupoke.Integration.Tests/fixtures/ocr-repeated-header-order.json"
       ],
       "checks": [
         "tests/Takupoke.Core.Tests/RecoveryCodeCandidatesTests.cs",

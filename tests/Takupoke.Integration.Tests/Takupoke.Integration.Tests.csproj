@@ -20,6 +20,7 @@
     <None Update="fixtures/recovery-historical-v5-vector.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="fixtures/recovery-historical-v6-result.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="fixtures/recovery-fictional-v3-header-rows.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="fixtures/ocr-repeated-header-order.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="fixtures/ascii-runtime-contract.onnx" CopyToOutputDirectory="PreserveNewest" />
     <None Update="fixtures/ascii-manual-contract.onnx" CopyToOutputDirectory="PreserveNewest" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />

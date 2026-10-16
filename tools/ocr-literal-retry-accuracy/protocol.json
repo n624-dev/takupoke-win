@@ -1,5 +1,5 @@
 {
-  "recipe": "conditional-literal-retry-native-v2",
+  "recipe": "conditional-literal-retry-native-v3",
   "baselineCommit": "70ba342a9e6ecba7f5aff2febccc593eaea2e320",
   "baselineProfile": "20261016-v2",
   "fontPins": [
@@ -32,8 +32,8 @@
       "family": "zenkakugothicantique"
     }
   ],
-  "fontExposure": "New local font FILES only; ZenKakuGothicAntique Regular was consumed in failed fixture/development and other Kaisei families were consumed earlier. No family/pretraining-unseen claim. Fixed previously exercised physical template, new literal values and case mix. Neither new file drawn/inferred before this prospective registration.",
-  "seedBase": 20261016373,
+  "fontExposure": "Both font FILES are now consumed by native V2 trial38862878122; this is a prospectively fixed NEW-LITERAL holdout in observed fonts, not an unseen-font/family/pretraining claim. Selection fixed before its generation/inference.",
+  "seedBase": 20261016411,
   "facesize": 20,
   "headersize": 24,
   "classes": [
@@ -66,8 +66,8 @@
     "20% legitimate uncommon Japanese variants",
     "10% English alphabetic"
   ],
-  "excludeLiteralCount": 32422,
-  "exclusionsSHA256": "f0458af3f4740e0898a9a12734e75575c95de8c9acdec5764a53f340a5f028d4",
+  "excludeLiteralCount": 34490,
+  "exclusionsSHA256": "f0fac8ea11d1f30974e56df3a024f309053b5bd1dae06b2d7af7d572220f3670",
   "selectedMethod": {
     "literal": "V3actual code retry also for alphabetic source hypotheses; changed length requires same supported actualv1 text; no symbol normalization",
     "japanese": "Japanesev3 retry only already observed role+uncertain Japanese body, all other literals agree except observed colon variant, same count/full padding support, oldp<.8/newp>=.8; no character mapping",
@@ -99,7 +99,7 @@
     "src/Takupoke.Infrastructure/Recovery/RecoveryContainmentIndex.cs": "eb1b98d93b697abd2eba187ab4f3cea3da5c717a6d16b49ea4e0f6f215baad53",
     "src/Takupoke.Infrastructure/Recovery/RecoveryOutputDecoder.cs": "4b0da14cef205b426ca06c8bb8453663bde0aba76d16b7fb637f960e5aee3849",
     "src/Takupoke.Infrastructure/Recovery/OcrWhiteGapPartition.cs": "62eb957afb2b527303643d037829363abbc02776f266d069d8bc06c082c193b6",
-    "src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs": "15e6d3f9eb9fc56c569290eedf21e962bd24317ee32129cf5252b8104cf9c91b",
+    "src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs": "0fc4aa380e487bcecc268fe2f7c6b008f8a2947fb6b75eae53ede2d8c54e7108",
     "src/Takupoke.Infrastructure/Recovery/OcrInkCropFrame.cs": "683cb76baebc602b0c2fde5a1ca3b6ae35a3ff72bf2d86b6236a9f8bf3bc5069",
     "src/Takupoke.Infrastructure/Recovery/OcrAsciiRefinement.cs": "59ba219f4969f29980bbc08140ccf226e1e33a8ecf8e22b4a2fc68df674e76e2",
     "src/Takupoke.Infrastructure/Recovery/RecoveryCoordinator.cs": "006460ae8e2459e57bf5a426d1d2db5e25c60f7f1af9b6d7350db800138774c1",
@@ -157,5 +157,26 @@
   "scope": "Fresh actual Windows full OCR and current-schema4 downstream, separate immutable10446 baseline/currentcandidate binaries, no oracle/roster/modeloutput repair. Preserve every failed arm. Never private school data. Registration precedes new drawing/inference.",
   "fixture": "Original source-order exercised template: inclusive2237x415; label100,col267,top108,row102; explicit printed weekday band x100..2236 y36..70 spanning all periods; all grid endpoints inside image. Firstv1 failed fixture lacked right/bottom borders and day-span band; preserved asFAIL, excluded from qualification.",
   "fontCoverage": "Before random sampling, rare Japanese names are limited to the font native cmap: KaiseiOpti supports7/8 (lacks高﨑), ZenKakuGothicAntiqueMedium supports8/8. Record pool; still test all other rare variants. No missing glyphs/tofu/fallback.",
-  "registrationCorrection": "V2 first attempt38862572777 stopped at exclusion-ledger cardinality assertion before any generation or model execution. Extra-hash cardinality incorrectly counted overlaps with the base ledger. Literal hash membership, method, fonts and seed unchanged; true set union count now used. No holdout exposure."
+  "registrationCorrection": "Previous V2 setup failure and actual V2 quality failure remain immutable public records. New-literal V3 is fixed only after the generic source-order repair and regression tests.",
+  "sourceEvidenceFix": "Preserve exactly the selected original year/term/title source IDs in actual Sources order after the geometric-label and complete-native-line discovery passes; no literals/positions/scores/validator thresholds are changed. Native V2 had correct front-term text but failed solely on discovery order on one positive font.",
+  "failedNativeV2": {
+    "run": 38862878122,
+    "source": "65a23a7cfea42219b83ae5239bf952e7f8b520aa",
+    "exactFieldsBefore": [
+      346,
+      341
+    ],
+    "exactFieldsAfter": [
+      347,
+      341
+    ],
+    "characterErrorsAfter": [
+      13,
+      20
+    ],
+    "gains": 1,
+    "losses": 0,
+    "qualityCriteriaMet": false,
+    "reason": "Secondfont positive termEvidence order prevented manual confirmation; no activation/qualification credit."
+  }
 }

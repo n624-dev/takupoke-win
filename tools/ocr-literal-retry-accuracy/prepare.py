@@ -169,7 +169,7 @@ def main():
             original = hashlib.sha256(json.dumps(pages, sort_keys=True).encode()).hexdigest()
             documents.append(dict(id=id, originalPDFSHA256=original, pages=pages))
             oracle.append(dict(id=id, expect='exact' if variant == 'positive' else 'refuse', variant=variant,
-                               schoolYear=2034, font=spec['file'], cohort='new-local-font-file', allOtherSlotsBlank=True,
+                               schoolYear=2034, font=spec['file'], cohort='new-literals-consumed-font-files', allOtherSlotsBlank=True,
                                requiredSlotSet=[dict(className=v['className'], day=str(v['weekday']), period=v['period']) for v in lessons],
                                timetable=dict(term='前期', lessons=lessons)))
     write(out / 'inputs.json', dict(documents=documents, recipe=protocol['recipe'], researchDeadlineSeconds=1500))

@@ -1,0 +1,69 @@
+{
+  "recipe": "conditional-literal-retry-native-v2",
+  "sourceSHA256": "bd97fbe82d358a50d1cf7b448fce73e9e190966f0a36ef6190265e881b3a929e",
+  "protocolSHA256": "e6ccb62249166e9f977d6c0982d18a14657f78885674e58b2c873f8ceed1de2c",
+  "seed": 20261016373,
+  "exclusionsAvoided": true,
+  "excludedLiteralCount": 32422,
+  "sampledLiteralComponentCount": 1309,
+  "modelCalls": 0,
+  "fontPins": [
+    {
+      "file": "KaiseiOpti-Regular.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/kaiseiopti/KaiseiOpti-Regular.ttf",
+      "bytes": 4503024,
+      "sha256": "990cfb1fb00f311c8975c2c5f4778b2fe5462fd5eabf0884828a323dad3f18c0",
+      "family": "kaiseiopti"
+    },
+    {
+      "file": "ZenKakuGothicAntique-Medium.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/zenkakugothicantique/ZenKakuGothicAntique-Medium.ttf",
+      "bytes": 2337952,
+      "sha256": "02bdc45744fd357b04c1a8fb0f2392a8c31b3a9250acb9899252a933ec66f4b6",
+      "family": "zenkakugothicantique"
+    }
+  ],
+  "fontExposure": "New local font FILES only; ZenKakuGothicAntique Regular was consumed in failed fixture/development and other Kaisei families were consumed earlier. No family/pretraining-unseen claim. Fixed previously exercised physical template, new literal values and case mix. Neither new file drawn/inferred before this prospective registration.",
+  "fontCoverage": [
+    {
+      "font": "KaiseiOpti-Regular.ttf",
+      "supportedRareNames": [
+        "渡邊",
+        "渡邉",
+        "髙崎",
+        "鄭",
+        "劉",
+        "賈",
+        "祁"
+      ],
+      "unsupportedRareNames": [
+        "高﨑"
+      ]
+    },
+    {
+      "font": "ZenKakuGothicAntique-Medium.ttf",
+      "supportedRareNames": [
+        "渡邊",
+        "渡邉",
+        "高﨑",
+        "髙崎",
+        "鄭",
+        "劉",
+        "賈",
+        "祁"
+      ],
+      "unsupportedRareNames": []
+    }
+  ],
+  "prospectiveCriteria": {
+    "minimumExactFieldRate": 0.9,
+    "maximumCERPerFont": 0.03,
+    "maximumReviewUnion": 128,
+    "maximumRSSBytes": 6442450944,
+    "completeFieldsAndSlots": true,
+    "allFourNegativeAcquisitionCompleteAndRefused": true,
+    "eachFreshFontExactNondecreaseAndCoverageEditsNonincrease": true,
+    "eachControlSubgroupExactNondecreaseAndEditsNonincrease": true,
+    "strictImprovement": "Combined consumed development plus fresh paired fields must strictly improve; disclose fresh gains separately, never relabel development fresh"
+  }
+}

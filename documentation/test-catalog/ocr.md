@@ -1,7 +1,7 @@
 # CPU OCR・文字位置・モデル・原画像切り出し
 
 対応関係・宣言名・実行方法のSHA-256：
-`4b8f0bbf9d10043d831897c8392800c7b1da55c44fbbf04b39e170158aecd1f5`
+`1ec6bb90274999ad2d68054192743eeee8d1748136dbf6df81739193e0483eab`
 
 環境：Linux／Windows .NET。Windows描画・実推論は対応workflowで検証
 
@@ -32,6 +32,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - [src/Takupoke.Win/Assets/Recovery/ocr-characters.json](../../src/Takupoke.Win/Assets/Recovery/ocr-characters.json)
 - [tests/Takupoke.Integration.Tests/CapturedOcrHeaderFixture.cs](../../tests/Takupoke.Integration.Tests/CapturedOcrHeaderFixture.cs)
 - [tests/Takupoke.Integration.Tests/OcrHeaderGoldenSnapshots.cs](../../tests/Takupoke.Integration.Tests/OcrHeaderGoldenSnapshots.cs)
+- [tests/Takupoke.Integration.Tests/fixtures/ocr-repeated-header-order.json](../../tests/Takupoke.Integration.Tests/fixtures/ocr-repeated-header-order.json)
 
 ## [tests/Takupoke.Core.Tests/RecoveryCodeCandidatesTests.cs](../../tests/Takupoke.Core.Tests/RecoveryCodeCandidatesTests.cs)
 
@@ -147,6 +148,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/OcrNativeLineHeaderTests.cs](../../tests/Takupoke.Integration.Tests/OcrNativeLineHeaderTests.cs)
 
+- `RepeatedNativeTermHeadersFollowActualSourceOrderAcrossBothDiscoveryPaths`
 - `CapturedNativeLineRetainsOriginalAtomsAndFailsDownstreamAfterOwnedHeaderSelection`
 - `ShortCodeCropCannotMoveBeforeItsProvedOriginalJapaneseContinuation`
 - `OriginalWhitespaceBetweenExplicitYearAndTermKeepsItsHeaderOwnership`

@@ -107,7 +107,7 @@ def main():
                   observations=rows, development=development, developmentIndependentAccuracyCredit=False,
                   freshGainFields=sum(v['gain'] for v in changes), freshLossFields=sum(v['loss'] for v in changes),
                   rawSHA256={arm: sha(root / (arm + '-observations.jsonl')) for arm in ['baseline', 'candidate']},
-                  limits='Fresh font-file/literal/case-mix trial with consumed geometry and related prior font families; no family/pretraining-unseen, general real-school accuracy, human-time or unattended-adoption claim.')
+                  limits='Prospectively fixed new-literal holdout in consumed font files and geometry; no unseen-font/family/pretraining, general real-school accuracy, human-time or unattended-adoption claim.')
     write(root / 'field-changes.json', changes)
     write(root / 'report.json', report)
     print(json.dumps(dict(qualityCriteriaMet=quality, perFontNonregressionMet=nonregression, perSubgroupNonregressionMet=subgroup,

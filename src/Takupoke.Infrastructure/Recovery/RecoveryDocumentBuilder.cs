@@ -675,10 +675,21 @@ public static class RecoveryDocumentBuilder
             !days.ToHashSet().SetEquals(new[]{"1","2","3","4","5"}) || required.Length!=680))
             throw new InvalidDataException("三行時間割の完全なクラス・曜日・時限を確認できません。");
         var titleLabels = kind switch { RecoveryDocumentKind.Timetable => new[] { "時間割", "通常時間割", "授業時間割" }, RecoveryDocumentKind.Exam => ["試験時間割", "定期試験時間割"], _ => ["試験返却時間割"] };
-        var title = labels.Where(l => titleLabels.Contains(l.Value)).SelectMany(l => l.Ids).ToArray();
+        // Geometry labels and complete native-line labels are discovered in
+        // separate passes. Their discovery order is not the document's source
+        // order, particularly when only some repeated headers need the latter.
+        // Keep exactly the selected original IDs, ordered like Sources below.
+        IReadOnlyList<string> HeaderEvidence(IEnumerable<Label> selected)
+        {
+            var ids = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var label in selected) { work.Step(label.Ids.Count); ids.UnionWith(label.Ids); }
+            work.Step(atoms.Length);
+            return atoms.Where(a => ids.Contains(a.Id)).Select(a => a.Id).ToArray();
+        }
+        var title = HeaderEvidence(labels.Where(l => titleLabels.Contains(l.Value)));
         IReadOnlyDictionary<string, IReadOnlyList<string>> Evidence(Dictionary<string, HashSet<string>> set) => set.ToDictionary(p => p.Key, p => (IReadOnlyList<string>)atoms.Where(a => p.Value.Contains(a.Id)).Select(a => a.Id).ToArray());
         var document = new RecoveryDocument(hash, kind, year, term, classes, days, required, cells, atoms.Select(a => sources[a.Id]).ToArray(), true,
-            years.SelectMany(l => l.Ids).Distinct().ToArray(), term is null ? [] : terms.SelectMany(l => l.Ids).Distinct().ToArray(), Evidence(usedDay), Evidence(usedClass), Evidence(usedPeriod), new Dictionary<string, string>(), [], []) { DocumentTitleEvidence = title };
+            HeaderEvidence(years), term is null ? [] : HeaderEvidence(terms), Evidence(usedDay), Evidence(usedClass), Evidence(usedPeriod), new Dictionary<string, string>(), [], []) { DocumentTitleEvidence = title };
         document=AddTimes(document,labels,work);
         if(allowNativeReferences && ocrPages is not {Count:>0})
         {
