@@ -264,6 +264,38 @@ public static class RecoveryDocumentBuilder
             return date.ToString("yyyy-MM-dd",CultureInfo.InvariantCulture);
         } catch (ArgumentOutOfRangeException) { return null; }
     }
+    // Preserve the complete ORIGINAL order of an independently proved inline
+    // role row. A shorter specialist crop can have a different vertical centre;
+    // rounding those centres must not move its tail before the Japanese prefix.
+    // Raw SourceLine metadata alone never authorizes this ordering.
+    private static void PreserveProvedOcrContinuationOrder(Atom[] atoms, IEnumerable<Label> native, Work work)
+    {
+        work.Step(atoms.Length * 2L);
+        var positions = atoms.Select((atom,index)=>(atom.Id,index)).ToDictionary(p=>p.Id,p=>p.index);
+        var original = atoms.ToDictionary(a=>a.Id);
+        foreach (var label in native.Where(l=>l.NativeValueIds is not null))
+        {
+            var ids = label.Ids.Concat(label.NativeValueIds!).ToArray();
+            work.Step(ids.Length * 3L);
+            var slots = ids.Select(id=>positions[id]).Order().ToArray();
+            for (var i=0;i<slots.Length;i++) atoms[slots[i]]=original[ids[i]];
+        }
+    }
+
+    // Diagnostic source-only replay of the SAME ordering proof used by Build.
+    // No pixels, recognition, lookup values or source edits enter this helper.
+    internal static IReadOnlyList<string> OriginalOcrSourceOrder(IReadOnlyList<PdfPageLayout> pages,
+        CancellationToken token = default)
+    {
+        var work = new Work(token);
+        var atoms = pages.SelectMany((p,i)=>p.Glyphs.Select((g,n)=>new Atom($"p{i+1}s{n}",i+1,g)))
+            .OrderBy(a=>a.Page).ThenBy(a=>Math.Round(a.Glyph.Cy/2)).ThenBy(a=>a.Glyph.Cx).ToArray();
+        if (atoms.Length>100000) throw RecoveryWorkLimits.Exceeded("OCR原文の順序比較数が上限を超えています。");
+        var native = OcrLineLabels(atoms,pages,Enumerable.Range(1,pages.Count).ToHashSet(),work).ToArray();
+        PreserveProvedOcrContinuationOrder(atoms,native,work);
+        return atoms.Select(a=>a.Id).ToArray();
+    }
+
     public static RecoveryDocument Build(string hash, MaterialKind materialKind, IReadOnlyList<PdfPageLayout> pages,
         Func<int, RecoveryBox, bool> inkFree, IReadOnlySet<int>? ocrPages = null, CancellationToken token = default, bool allowStructureProposal = false,bool allowNativeReferences = false)
     {
@@ -286,6 +318,7 @@ public static class RecoveryDocumentBuilder
             { work.Step(label.Ids.Count); return (label.Page, label.Value, string.Join(',', label.Ids)); }
             var seen = labels.Select(Key).ToHashSet();
             var native = OcrLineLabels(atoms, pages, ocrPages, work).ToArray();
+            PreserveProvedOcrContinuationOrder(atoms,native,work);
             var contexts = native.Where(l => l.NativeValueIds is not null).ToDictionary(Key);
             labels = labels.Select(l => contexts.TryGetValue(Key(l), out var context) ? l with { NativeValueIds = context.NativeValueIds } : l)
                 .Concat(native.Where(label => seen.Add(Key(label)))).ToArray();

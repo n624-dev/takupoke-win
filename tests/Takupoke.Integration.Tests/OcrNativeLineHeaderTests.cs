@@ -52,6 +52,31 @@ public sealed class OcrNativeLineHeaderTests
         Assert.Equal(document.YearEvidence.Count, document.YearEvidence.Distinct().Count());
     }
 
+    [Theory]
+    [InlineData("valid", true)]
+    [InlineData("reverseOrder", false)]
+    [InlineData("crossRow", false)]
+    [InlineData("crossRule", false)]
+    [InlineData("foreignOverlap", false)]
+    [InlineData("notRoleLabel", false)]
+    public void ShortCodeCropCannotMoveBeforeItsProvedOriginalJapaneseContinuation(string mutation, bool proved)
+    {
+        PdfGlyph[] row = [new("教室：",10,179,30,24.7,0,0),new("架空室",70,179,50,24.7,0,1),
+            new("3",130,180,4,21,0,2),new("B",140,180,4,21,0,3)];
+        if(mutation=="reverseOrder")row[2]=row[2] with{SourceOrder=9};
+        if(mutation=="crossRow")row[2]=row[2] with{Y=210};
+        if(mutation=="notRoleLabel")row[0]=row[0] with{Text="説明："};
+        if(mutation=="foreignOverlap")row=[..row,new("X",90,180,4,21,1,4)];
+        PdfRule[] rules=mutation=="crossRule" ? [new(125,170,125,230)] : [];
+        var page=new PdfPageLayout(300,250,row,rules);
+        var ids=Takupoke.Infrastructure.Recovery.RecoveryDocumentBuilder.OriginalOcrSourceOrder([page]);
+        var observed=ids.Select(id=>row[int.Parse(id.AsSpan(id.IndexOf('s')+1))]).ToArray();
+        if(proved)Assert.Equal("教室：架空室3B",string.Concat(observed.Select(g=>g.Text)));
+        else Assert.Equal(row.OrderBy(g=>Math.Round(g.Cy/2)).ThenBy(g=>g.Cx),observed);
+        Assert.Equal(row.Length,ids.Distinct().Count());
+        Assert.All(row,g=>Assert.Contains(g,observed)); // Original geometry/metadata untouched.
+    }
+
     [Fact]
     public void OriginalWhitespaceBetweenExplicitYearAndTermKeepsItsHeaderOwnership()
     {

@@ -1,7 +1,7 @@
 # CPU OCR・文字位置・モデル・原画像切り出し
 
 対応関係・宣言名・実行方法のSHA-256：
-`9e7a6c4375b631c0b4c57ee1f482d208e34e4bf059c3fa845f5c897ecd583c7b`
+`d19a2386b26775bf397fdf67bc6bab7ef40b84556488546f40d46a5fe13c0976`
 
 環境：Linux／Windows .NET。Windows描画・実推論は対応workflowで検証
 
@@ -130,6 +130,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 ## [tests/Takupoke.Integration.Tests/OcrNativeLineHeaderTests.cs](../../tests/Takupoke.Integration.Tests/OcrNativeLineHeaderTests.cs)
 
 - `CapturedNativeLineRetainsOriginalAtomsAndFailsDownstreamAfterOwnedHeaderSelection`
+- `ShortCodeCropCannotMoveBeforeItsProvedOriginalJapaneseContinuation`
 - `OriginalWhitespaceBetweenExplicitYearAndTermKeepsItsHeaderOwnership`
 - `NativeMetadataCannotEnableSupplementalHeadersForVectorPages`
 - `YearSuffixOnAnotherNativeLineIsNotJoined`

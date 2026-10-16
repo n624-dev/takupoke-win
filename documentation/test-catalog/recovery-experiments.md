@@ -1,7 +1,7 @@
 # OCR・native PDFの比較用workflowと再現条件
 
 対応関係・宣言名・実行方法のSHA-256：
-`13a04491b077fe39164a282f8f2c885cf1b3b7f85fb27689159ce35a963d3fa2`
+`3f8c605ef665b0974e02e7faf7d6fafc76b87dedd52a3f07add646a2047a7c64`
 
 環境：Linux／Windows .NETと明示したWindows比較workflow
 
@@ -22,6 +22,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - [.github/workflows/ocr-original-image.yml](../../.github/workflows/ocr-original-image.yml)
 - [.github/workflows/ocr-physical-framing.yml](../../.github/workflows/ocr-physical-framing.yml)
 - [.github/workflows/ocr-production-validation.yml](../../.github/workflows/ocr-production-validation.yml)
+- [.github/workflows/ocr-source-order-accuracy.yml](../../.github/workflows/ocr-source-order-accuracy.yml)
 - [.github/workflows/ocr-whole-model-comparison.yml](../../.github/workflows/ocr-whole-model-comparison.yml)
 - [.github/workflows/ordered-row-proof-native.yml](../../.github/workflows/ordered-row-proof-native.yml)
 - [.github/workflows/pdf-colour-acquisition.yml](../../.github/workflows/pdf-colour-acquisition.yml)
