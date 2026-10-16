@@ -235,6 +235,8 @@ public sealed class OnnxJapaneseOcr : IDisposable
     private readonly int _symbols;
     private readonly OnnxAsciiOcr? _ascii;
     private readonly OnnxAsciiOcr? _manualCodeAscii;
+    private readonly OnnxJapaneseAlternative? _uncertainJapanese;
+    private readonly bool _retryLiteralCodes;
     private readonly bool _retryUnpaddedInput;
     private readonly bool _allowContainedRuleContact;
     private readonly bool _retainVerifiedWhitespace;
@@ -250,12 +252,14 @@ public sealed class OnnxJapaneseOcr : IDisposable
     internal Action<IReadOnlyList<RecoveryBox>>? DetectionObserver { get; set; }
     public OnnxJapaneseOcr(string detector, string recognizer, string dictionary,
         int dictionarySymbols = 18385, string? asciiModel = null, string? asciiDictionary = null, bool frameOriginalInk = false,
-        string? manualCodeModel = null, bool retryUnpaddedInput = false, bool allowContainedRuleContact = false, bool retainVerifiedWhitespace = false, bool retryRoleLabels = false, bool manualCodeRequiresLetter = false)
+        string? manualCodeModel = null, bool retryUnpaddedInput = false, bool allowContainedRuleContact = false, bool retainVerifiedWhitespace = false, bool retryRoleLabels = false, bool manualCodeRequiresLetter = false,
+        bool retryLiteralCodes = false, string? uncertainJapaneseModel = null, string? uncertainJapaneseDictionary = null)
     {
         if (dictionarySymbols is not (18385 or 18710) || (asciiModel is null) != (asciiDictionary is null) ||
-            manualCodeModel is not null && asciiModel is null)
+            manualCodeModel is not null && asciiModel is null || (uncertainJapaneseModel is null) != (uncertainJapaneseDictionary is null))
             throw new InvalidDataException("OCRモデルの構成が不正です。");
         _symbols = dictionarySymbols; _frameOriginalInk = frameOriginalInk;
+        _retryLiteralCodes = retryLiteralCodes;
         _retryUnpaddedInput = retryUnpaddedInput; _allowContainedRuleContact = allowContainedRuleContact; _retainVerifiedWhitespace = retainVerifiedWhitespace; _retryRoleLabels = retryRoleLabels; _manualCodeRequiresLetter = manualCodeRequiresLetter;
         Environment.SetEnvironmentVariable("ORT_TELEMETRY_DISABLED", "1");
         OrtEnv.Instance().DisableTelemetryEvents();
@@ -268,9 +272,10 @@ public sealed class OnnxJapaneseOcr : IDisposable
             if (_dictionary.Length != _symbols || _dictionary[0] != "" || _dictionary[^1] != " " || _detector.InputMetadata.Count != 1 || recognizerSession.InputMetadata.Count != 1 || _detector.InputMetadata["x"].Dimensions.Length != 4 || recognizerSession.InputMetadata["x"].Dimensions.Length != 4 || recognizerSession.InputMetadata["x"].Dimensions[1] != 3 || recognizerSession.InputMetadata["x"].Dimensions[2] != 48) throw new InvalidDataException("OCRモデルの形状が一致しません。");
             _ascii = asciiModel is not null ? new OnnxAsciiOcr(asciiModel, asciiDictionary!) : null;
             _manualCodeAscii = manualCodeModel is not null ? new OnnxAsciiOcr(manualCodeModel, asciiDictionary!) : null;
+            _uncertainJapanese = uncertainJapaneseModel is null ? null : new(uncertainJapaneseModel, uncertainJapaneseDictionary!);
             _recognizer = recognizerSession;
         }
-        catch { _manualCodeAscii?.Dispose(); _ascii?.Dispose(); recognizerSession?.Dispose(); _detector.Dispose(); throw; }
+        catch { _uncertainJapanese?.Dispose(); _manualCodeAscii?.Dispose(); _ascii?.Dispose(); recognizerSession?.Dispose(); _detector.Dispose(); throw; }
     }
     public IReadOnlyList<PdfGlyph> Read(RecoveryRaster image, CancellationToken token = default)
         => ReadCore(image, token, retainUncertain: false);
@@ -369,12 +374,22 @@ public sealed class OnnxJapaneseOcr : IDisposable
             }
             // A supported, matching retry contributes its OWN native atoms.
             // Every remaining original atom and native probability is retained.
+            OnnxJapaneseAlternative.Observation? japaneseRetry = null;
+            IReadOnlyList<int> japaneseReplacements = [];
+            if (retainUncertain && _uncertainJapanese is not null && OcrConditionalJapaneseRetry.Eligible(pieces))
+            {
+                japaneseRetry = _uncertainJapanese.Read(input, line, token);
+                RecognitionObserver?.Invoke(new(boxes[index], input.Crop, input.ValidWidth, input.InputWidth,
+                    japaneseRetry.TimeCount, japaneseRetry.Pieces) { Purpose = "uncertain-japanese-v3" });
+                japaneseReplacements = OcrConditionalJapaneseRetry.Replacements(pieces, japaneseRetry.Pieces, japaneseRetry.PaddingSupported);
+            }
             for (var n = 0; n < pieces.Count; n++)
             {
                 var retried = labelGlyphs is not null && n < labelGlyphs.Count;
-                var glyph = retried ? labelGlyphs![n] : originalGlyphs[n];
+                var alternate = japaneseReplacements.Contains(n);
+                var glyph = retried ? labelGlyphs![n] : alternate ? japaneseRetry!.Glyphs[n] : originalGlyphs[n];
                 output.Add(glyph with { SourceOrder = order++ });
-                confidences.Add(retried ? labelPieces![n].Confidence : pieces[n].Confidence);
+                confidences.Add(retried ? labelPieces![n].Confidence : alternate ? japaneseRetry!.Pieces[n].Confidence : pieces[n].Confidence);
             }
             line++;
         }
@@ -382,7 +397,8 @@ public sealed class OnnxJapaneseOcr : IDisposable
         if (_ascii is not null)
         {
             var refined = OcrAsciiRefinement.Refine(image, output, confidences, lineCrops, rules, _ascii, token,
-                retainUncertain: retainUncertain, manualCodeAscii: _manualCodeAscii, manualCodeRequiresLetter: _manualCodeRequiresLetter);
+                retainUncertain: retainUncertain, manualCodeAscii: _manualCodeAscii, manualCodeRequiresLetter: _manualCodeRequiresLetter,
+                retryLiteralCodes: _retryLiteralCodes);
             NativeConfidences = refined.Confidences; AsciiRecognitionCalls = refined.RecognizerCalls; return refined.Glyphs;
         }
         NativeConfidences = confidences.ToArray(); return output;
@@ -395,11 +411,12 @@ public sealed class OnnxJapaneseOcr : IDisposable
         var logits = output.First().AsTensor<float>(); if (logits.Dimensions.Length != 3 || logits.Dimensions[0] != 1 || logits.Dimensions[1] <= 0 || logits.Dimensions[2] != _symbols) throw new InvalidDataException("OCRモデルの出力形状が一致しません。");
         _ascii?.Read(image, new(0, 0, 64, 64), 0, 0, token); token.ThrowIfCancellationRequested();
         _manualCodeAscii?.Read(image, new(0, 0, 64, 64), 0, 0, token); token.ThrowIfCancellationRequested();
+        _uncertainJapanese?.Read(input, 0, token); token.ThrowIfCancellationRequested();
     }
     private void VerifyRecognitionWidth(int width)
     {
         var declared = _recognizer.InputMetadata["x"].Dimensions[3];
         if (declared > 0 && declared != width) throw new InvalidDataException("OCR認識モデルの入力幅が一致しません。");
     }
-    public void Dispose() { _manualCodeAscii?.Dispose(); _ascii?.Dispose(); _detector.Dispose(); _recognizer.Dispose(); }
+    public void Dispose() { _uncertainJapanese?.Dispose(); _manualCodeAscii?.Dispose(); _ascii?.Dispose(); _detector.Dispose(); _recognizer.Dispose(); }
 }

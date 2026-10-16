@@ -10,12 +10,20 @@ internal static class OcrAsciiRefinement
     public static Result Refine(RecoveryRaster raster, IReadOnlyList<PdfGlyph> primary,
         IReadOnlyList<double> scores, IReadOnlyDictionary<int, RecoveryBox> crops,
         IReadOnlyList<PdfRule> rules, OnnxAsciiOcr ascii, CancellationToken token = default, bool retainUncertain = false,
-        OnnxAsciiOcr? manualCodeAscii = null, bool manualCodeRequiresLetter = false)
+        OnnxAsciiOcr? manualCodeAscii = null, bool manualCodeRequiresLetter = false, bool retryLiteralCodes = false)
     {
         if (primary.Count != scores.Count) throw new InvalidDataException("OCRの文字と確信度が一致しません。");
         var right = rules.Where(l => l.Vertical && l.X1 > 2).Select(l => l.X1).DefaultIfEmpty(double.NaN).Min();
         var top = rules.Where(l => l.Vertical && l.X1 > 2).Select(l => Math.Min(l.Y1,l.Y2)).DefaultIfEmpty(double.NaN).Min();
         var glyphs = new List<PdfGlyph>(); var confidences = new List<double>(); var calls = 0;
+        var cache = retryLiteralCodes && retainUncertain && manualCodeAscii is not null
+            ? new Dictionary<(OnnxAsciiOcr Model, RecoveryBox Crop, int Line), OnnxAsciiOcr.Observation>() : null;
+        OnnxAsciiOcr.Observation Read(OnnxAsciiOcr model, RecoveryBox crop, int line)
+        {
+            if (cache is not null && cache.TryGetValue((model, crop, line), out var previous)) return previous;
+            calls++; var observed = model.Read(raster, crop, line, glyphs.Count, token);
+            cache?.Add((model, crop, line), observed); return observed;
+        }
         // One bounded pixel-work counter for this page. A null mask preserves
         // every original ink pixel, including anything resembling a table rule.
         var codeFrame = retainUncertain && manualCodeAscii is not null ? new OcrInkCropFrame(raster, null, token) : null;
@@ -52,8 +60,7 @@ internal static class OcrAsciiRefinement
                 OnnxAsciiOcr.Observation? observation = null;
                 if (manualCode && manualCodeAscii is not null)
                 {
-                    calls++;
-                    var expert = manualCodeAscii.Read(raster, codeFrame!.Restrict(sourceCrop), line, glyphs.Count, token);
+                    var expert = Read(manualCodeAscii, codeFrame!.Restrict(sourceCrop), line);
                     if (expert.Pieces.Count > 0 && expert.RejectProbability <= .05f && expert.PaddingSupported &&
                         expert.Text.Length == codeText.Length && expert.Text.Any(char.IsAsciiDigit) &&
                         expert.Text.All(c => char.IsAsciiLetterOrDigit(c) || c is '_' or '-'))
@@ -63,7 +70,7 @@ internal static class OcrAsciiRefinement
                 {
                     // Invalid expert output uses the complete original v1
                     // decision, rather than falling straight back to Japanese.
-                    calls++; observation = ascii.Read(raster, sourceCrop, line, glyphs.Count, token);
+                    observation = Read(ascii, sourceCrop, line);
                 }
                 chosen = observation.Pieces.Count > 0 && observation.RejectProbability <= .05f && observation.PaddingSupported &&
                     observation.Text.All(c => c is >= ' ' and <= '~') && (header
@@ -87,7 +94,14 @@ internal static class OcrAsciiRefinement
             }
             if (!chosen) foreach (var (glyph,index) in native) Add(glyph, scores[index]);
         }
-        return new(glyphs.ToArray(), confidences.ToArray(), calls);
+        var result = new Result(glyphs.ToArray(), confidences.ToArray(), calls);
+        if (cache is not null)
+        {
+            result = OcrLiteralCodeRetry.Refine(raster, primary, scores, crops, rules, result, codeFrame!,
+                (expert, crop, line) => Read(expert ? manualCodeAscii! : ascii, crop, line), token);
+            result = result with { RecognizerCalls = calls };
+        }
+        return result;
         void Add(PdfGlyph glyph, double confidence)
         {
             glyphs.Add(glyph with { SourceOrder = glyphs.Count }); confidences.Add(confidence);

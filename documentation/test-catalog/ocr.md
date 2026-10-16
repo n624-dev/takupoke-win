@@ -1,7 +1,7 @@
 # CPU OCR・文字位置・モデル・原画像切り出し
 
 対応関係・宣言名・実行方法のSHA-256：
-`d19a2386b26775bf397fdf67bc6bab7ef40b84556488546f40d46a5fe13c0976`
+`4b8f0bbf9d10043d831897c8392800c7b1da55c44fbbf04b39e170158aecd1f5`
 
 環境：Linux／Windows .NET。Windows描画・実推論は対応workflowで検証
 
@@ -14,15 +14,18 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 - [src/Takupoke.Core/Recovery/RecoveryCodeCandidates.cs](../../src/Takupoke.Core/Recovery/RecoveryCodeCandidates.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrAsciiRefinement.cs](../../src/Takupoke.Infrastructure/Recovery/OcrAsciiRefinement.cs)
+- [src/Takupoke.Infrastructure/Recovery/OcrConditionalJapaneseRetry.cs](../../src/Takupoke.Infrastructure/Recovery/OcrConditionalJapaneseRetry.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs](../../src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs](../../src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrDetectorProbability.cs](../../src/Takupoke.Infrastructure/Recovery/OcrDetectorProbability.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrHeaderContext.cs](../../src/Takupoke.Infrastructure/Recovery/OcrHeaderContext.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrInkCropFrame.cs](../../src/Takupoke.Infrastructure/Recovery/OcrInkCropFrame.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs](../../src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs)
+- [src/Takupoke.Infrastructure/Recovery/OcrLiteralCodeRetry.cs](../../src/Takupoke.Infrastructure/Recovery/OcrLiteralCodeRetry.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrRoleLabelRetry.cs](../../src/Takupoke.Infrastructure/Recovery/OcrRoleLabelRetry.cs)
 - [src/Takupoke.Infrastructure/Recovery/OcrWhiteGapPartition.cs](../../src/Takupoke.Infrastructure/Recovery/OcrWhiteGapPartition.cs)
 - [src/Takupoke.Infrastructure/Recovery/OnnxAsciiOcr.cs](../../src/Takupoke.Infrastructure/Recovery/OnnxAsciiOcr.cs)
+- [src/Takupoke.Infrastructure/Recovery/OnnxJapaneseAlternative.cs](../../src/Takupoke.Infrastructure/Recovery/OnnxJapaneseAlternative.cs)
 - [src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs](../../src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs)
 - [src/Takupoke.Win/Assets/Recovery/foundry-candidates.json](../../src/Takupoke.Win/Assets/Recovery/foundry-candidates.json)
 - [src/Takupoke.Win/Assets/Recovery/ocr-characters-v6.json](../../src/Takupoke.Win/Assets/Recovery/ocr-characters-v6.json)
@@ -57,6 +60,13 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `NumericOnlyTailKeepsPrimaryWhenSpecialistUncertain`
 - `ManualCaptureRetainsSpecialistNativeUncertaintyWhileStrictRoutePreservesPrimary`
 - `StandaloneCodesUseSpecialistAndRetainPrimaryWhenNativeOutputFailsThreshold`
+
+## [tests/Takupoke.Integration.Tests/OcrConditionalJapaneseRetryTests.cs](../../tests/Takupoke.Integration.Tests/OcrConditionalJapaneseRetryTests.cs)
+
+- `SelectsOnlyUncertainJapaneseAndKeepsObservedLabelColon`
+- `DisagreementOutsideUncertainJapaneseNeverRewritesBody`
+- `UnsupportedPaddingAndNonfiniteScoresNeverProduceReplacement`
+- `PunctuationAndAsciiUncertaintyDoNotInvokeJapaneseExpert`
 
 ## [tests/Takupoke.Integration.Tests/OcrCropCompletenessTests.cs](../../tests/Takupoke.Integration.Tests/OcrCropCompletenessTests.cs)
 
@@ -126,6 +136,14 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `UnpaddedCtcCoordinatesKeepOriginalFractionalCrop`
 - `FractionalCropNeverSamplesNeighborPixelCentres`
 - `CapacityAndCancellationFailBeforeReturningInput`
+
+## [tests/Takupoke.Integration.Tests/OcrLiteralCodeRetryTests.cs](../../tests/Takupoke.Integration.Tests/OcrLiteralCodeRetryTests.cs)
+
+- `MisreadLettersCanReachActualDigitObservationWithoutChangingItsScore`
+- `LengthChangesRequireCompleteMatchingIndependentObservation`
+- `NumericOnlyOrNoncodeInputCannotUseThisExtension`
+- `RejectAndPaddingGuardsKeepAllRawObservationsOutOfEvidence`
+- `NoOriginalWhiteBandKeepsCompleteBaselineAndNeverCallsModel`
 
 ## [tests/Takupoke.Integration.Tests/OcrNativeLineHeaderTests.cs](../../tests/Takupoke.Integration.Tests/OcrNativeLineHeaderTests.cs)
 
