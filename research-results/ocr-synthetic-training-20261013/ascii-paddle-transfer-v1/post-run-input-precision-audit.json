@@ -1,0 +1,20 @@
+{
+  "scope": "Post-run source-only precision audit. No inference/training/model selection repeated; frozen protocol/raw/artifacts unchanged.",
+  "sourceSha256": "0d65aca80cdcafc635c6b0e1c1a7f8746fe9af83a0cc3e8e5faf991e323bae58",
+  "pipeline": [
+    "Production-compatible image_tensor.tensor builds normalized FP32 BGR48 values",
+    "data.arrays converts normalized values to numpy.float16 for RAM storage",
+    "train.py converts each stored development array back to float32 before every original/reduced/trained evaluation",
+    "Training batch assignment converts stored float16 values into float32"
+  ],
+  "candidateInputPolicy": "All original-full18710, reduced-untrained, epoch4 and epoch8 development candidates receive the same stored FP16-rounded values. Relative comparisons are valid for that declared-by-source input condition.",
+  "originalPixelsAndGeometryChanged": false,
+  "originalRgbAndCropHashesRetained": true,
+  "normalizedTensorValuesQuantized": true,
+  "productionFp32InputByteParityEstablished": false,
+  "nativeWindowsQualityEstablished": false,
+  "originalProtocolExplicitlyMentionedIntermediateFp16Storage": false,
+  "qualificationDecisionChanged": false,
+  "finalOrExportsOpened": false,
+  "nextMediumPolicy": "Native preprocessing input and cached feature/logit values remain float32 throughout; medium initialization fidelity already used float32."
+}

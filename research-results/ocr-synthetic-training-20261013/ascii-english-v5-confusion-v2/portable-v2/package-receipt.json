@@ -1,0 +1,171 @@
+{
+  "root": "/workspace/scratch/ascii-english-v5-confusion-20261016-v2/portable-v2",
+  "files": {
+    "model-APACHE-2.0.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "README.md": {
+      "bytes": 727,
+      "sha256": "e97d97cd8fb8e9ad5cc9466131f23770095b47dd60b84a5850159a04091f25c6"
+    },
+    "dictionary.json": {
+      "bytes": 3614,
+      "sha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368"
+    },
+    "model.py": {
+      "bytes": 515,
+      "sha256": "499be516a853d5396c6bc44aaae20811510d4f79542c19e3071b4636155cc573"
+    },
+    "format-contract.json": {
+      "bytes": 2121,
+      "sha256": "129d6ec201113745692e121ec75b74c300f3381bc4974c6e4e0b966344f5dc12"
+    },
+    "model.onnx": {
+      "bytes": 22183975,
+      "sha256": "3271bfaa22d895a0d5d085346cfdd865c3eeb5a6542ae9c45f66fc48a254dc44"
+    },
+    "official-config.json": {
+      "bytes": 2086,
+      "sha256": "be52e23a259dc4838322115ee4c8f59197ce136a1aa0bd96574122b84f1fa4b7"
+    },
+    "metadata.json": {
+      "bytes": 1033,
+      "sha256": "9ec1d099509ec227bf32504fa16be3035292e511129a79c5e54a1aa68dd9f6fa"
+    },
+    "foundation-model-card.md": {
+      "bytes": 31,
+      "sha256": "4bcf87ecfbbb8e07a01b21415a970c8b53a5283bf6872b657040d3f45c9241f7"
+    },
+    "adapter-state.safetensors": {
+      "bytes": 22500900,
+      "sha256": "99d7adc48be98da4d7038103cbc0b64b3a66c27905c20024ba37f17f58a8b7be"
+    },
+    "protocol.json": {
+      "bytes": 2572,
+      "sha256": "b72b7d8efcbfcb1858b645132240a1280d7f59bbe3537e572eb0e92f4885f2c1"
+    },
+    "training-protocol.json": {
+      "bytes": 6229,
+      "sha256": "47924ed9a3a0f53275442ff11b9f37d6006572940ea388207ed20769b511dd5b"
+    },
+    "official-inference.yml": {
+      "bytes": 3964,
+      "sha256": "49b7c9ccda20164cf42851995d235ab9ed11b7109e456d1cf911d42b71025858"
+    },
+    "image_tensor.py": {
+      "bytes": 2117,
+      "sha256": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098"
+    },
+    "adapter.py": {
+      "bytes": 553,
+      "sha256": "563a8734c3b5830d8bc8f5742c9eca772bd8c889976cb188e97216a1651fa697"
+    },
+    "receipts/foundation-download-receipt.json": {
+      "bytes": 861,
+      "sha256": "ad5491a3a1d392143852e23680fffa2c4e57580c33d1ee42b70220b854636f49"
+    },
+    "receipts/fresh-freeze.json": {
+      "bytes": 1661,
+      "sha256": "fa0fe413737759470b3146280f9bcc89dc88015e92436aeb11c9b100dac31f6a"
+    },
+    "receipts/onnx-fidelity.json": {
+      "bytes": 9482,
+      "sha256": "686be1cd52b0b25bf2dfa8a14403771c04fe4d43559f644e95cb0cc103ace400"
+    },
+    "receipts/fresh-comparison.json": {
+      "bytes": 136209,
+      "sha256": "2482d5ebd76de690a129e7edb173495e5f6619898583c6abab3e0145f04bb246"
+    },
+    "receipts/font-download-receipt.json": {
+      "bytes": 5487,
+      "sha256": "aeaf529e2eda4b361b64da6858ec9539ef2b824c7db41cffd258564d1679b38d"
+    },
+    "receipts/selection.json": {
+      "bytes": 26014,
+      "sha256": "535416aa79115ee1a460a107df0291185a46d69f26cc68366351b6e591ebec18"
+    },
+    "receipts/training-freeze.json": {
+      "bytes": 18366,
+      "sha256": "0d7d7a41bf43ebb82aabc7861717d36c8dac311b75c2b1c187ae00d1e382ce98"
+    },
+    "font-licenses/RedHatMono-OFL.txt": {
+      "bytes": 4394,
+      "sha256": "435fbfb7e66988b2a06686a4cb966faec733f35d8fe100a1601573c27f3e0bb8"
+    },
+    "font-licenses/IBMPlexMono-OFL.txt": {
+      "bytes": 4456,
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+    },
+    "font-licenses/OverpassMono-OFL.txt": {
+      "bytes": 4392,
+      "sha256": "86e5ff25c701ec446d20b1a85b02ee6d36de8503a7288a4c948f5459809af1f0"
+    },
+    "font-licenses/SplineSansMono-OFL.txt": {
+      "bytes": 4403,
+      "sha256": "4abb88162e4c0c5f9fc6c2f15d7085f7b7e27fd89f541a13488e1bcb829bde3f"
+    },
+    "font-licenses/PTSerif-OFL.txt": {
+      "bytes": 4434,
+      "sha256": "ddf311c28ddf5a5ad9747649837346b67bed9d356789c3072bb27dbce49e514d"
+    },
+    "font-licenses/Lora-OFL.txt": {
+      "bytes": 4423,
+      "sha256": "1d9a970809ac804b582a6ce7f0ebc4e7fefcbfd7ff6299cad35ee656a21be716"
+    },
+    "font-licenses/CrimsonText-OFL.txt": {
+      "bytes": 4393,
+      "sha256": "50fd67cddc097377a5c871e8452b778bc5aedfa3480a705cb27c5e3a078218df"
+    },
+    "font-licenses/Fraunces-OFL.txt": {
+      "bytes": 4391,
+      "sha256": "bdf4c22802eaf804f998195871c6b8938aac2ac14b2d78a8bd66a6f1eced833b"
+    },
+    "font-licenses/SpaceMono-OFL.txt": {
+      "bytes": 4444,
+      "sha256": "4664e83780a263c53dbab95d3590a5a9db914aeb9a3c78f7e7ad451f9151c998"
+    },
+    "font-licenses/Alegreya-OFL.txt": {
+      "bytes": 4395,
+      "sha256": "f6f60d5d4cf4f4b1fc4e41353c897a2f5a16e6396c0cd8fa8bdfd2f4586a9a68"
+    },
+    "font-licenses/MartianMono-OFL.txt": {
+      "bytes": 4390,
+      "sha256": "ddafd2c3f37ef1d83ef284ca63e159befd3820850c5e9eded14ca52eee92c256"
+    },
+    "font-licenses/Inconsolata-OFL.txt": {
+      "bytes": 4350,
+      "sha256": "29bd0cfd0fb2a45f9b057c834a057724bae1f63b525a8ac83d3e7525706d9f80"
+    },
+    "font-licenses/LibreBaskerville-OFL.txt": {
+      "bytes": 4602,
+      "sha256": "de719ceea028324610230b3573688949768aa30c0b693fb5661691cf36f6ae89"
+    },
+    "font-licenses/LibreCaslonText-OFL.txt": {
+      "bytes": 4404,
+      "sha256": "a294245c822c5aa9fd9a9f3189418e99415428be5fecadf797793d5d8f6a3ad3"
+    },
+    "font-licenses/Literata-OFL.txt": {
+      "bytes": 4389,
+      "sha256": "8742963604cd89dc81437811a850018fc03b2bfad686d7422c8235967c87614e"
+    },
+    "font-licenses/FiraMono-OFL.txt": {
+      "bytes": 4371,
+      "sha256": "d1829ff3455bbf3b9d13dfb0a57758a863107c9108aab48558f26f37f1094180"
+    },
+    "font-licenses/Newsreader-OFL.txt": {
+      "bytes": 4394,
+      "sha256": "fdfad38143ec470553cae82a1e45320bdd1b9ec70415d37bd0171051d8a4ded8"
+    },
+    "font-licenses/SourceSerif4-OFL.txt": {
+      "bytes": 4400,
+      "sha256": "5f94c3fd3a23131a417ab5a0c8452de57e70c3cfb9f604d88241f7065ebf9fd9"
+    }
+  },
+  "totalBytes": 44999300,
+  "fileCount": 40,
+  "allFilesVerified": true,
+  "iosEdited": false,
+  "activated": false,
+  "published": false
+}

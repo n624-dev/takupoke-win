@@ -1,0 +1,918 @@
+{
+  "scope": "Consumed final diagnostics only; no new final, inference, training, threshold tuning, checkpoint choice or production qualification",
+  "existingResults": {
+    "rows": 384,
+    "incorrectRows": 33,
+    "incorrectRowsAtUnchangedFloor08": 23,
+    "maximumIncorrectMinimumConfidence": 0.9998058676719666,
+    "regressions": [
+      "final-0033",
+      "final-0059",
+      "final-0107",
+      "final-0298",
+      "final-0358"
+    ],
+    "failureRowsByFont": {
+      "ZenKakuGothicNew-Regular": 25,
+      "BIZUDPMincho-Regular": 8
+    },
+    "substitutions": {
+      "l→I": 26,
+      "0→O": 1,
+      "タ→夕": 1,
+      "I→l": 1,
+      "ソ→ン": 1,
+      "l→1": 3,
+      "へ→ヘ": 2,
+      "_→ ": 1
+    },
+    "rowsContainingSubstitution": {
+      "l→I": 23,
+      "0→O": 1,
+      "タ→夕": 1,
+      "I→l": 1,
+      "ソ→ン": 1,
+      "l→1": 3,
+      "へ→ヘ": 2,
+      "_→ ": 1
+    },
+    "differentLengthRows": [],
+    "clippedControls": {
+      "rows": 16,
+      "nonemptyOutputs": 16,
+      "outputsWithAnyCharacterConfidenceAtLeast099": 16,
+      "nonemptyOutputsWithMinimumConfidenceAtLeast08": 11
+    },
+    "multilineControls": {
+      "rows": 16,
+      "nonemptyOutputs": 16,
+      "outputsWithAnyCharacterConfidenceAtLeast099": 8,
+      "nonemptyOutputsWithMinimumConfidenceAtLeast08": 3
+    }
+  },
+  "fontDiagnostics": [
+    {
+      "font": "NotoSansJP400",
+      "fontSha256": "54aba28468f275bc372eda5f29b202c0d9e7b9ba2bc18a53a4c72c481c75cf9f",
+      "pairs": [
+        {
+          "characters": [
+            "I",
+            "l"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              101,
+              0,
+              193,
+              733
+            ],
+            [
+              92,
+              -13,
+              241,
+              796
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              293,
+              101
+            ],
+            [
+              284,
+              92
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "l",
+            "1"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              92,
+              -13,
+              241,
+              796
+            ],
+            [
+              88,
+              0,
+              490,
+              733
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              284,
+              92
+            ],
+            [
+              555,
+              88
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "O",
+            "0"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              58,
+              -13,
+              684,
+              746
+            ],
+            [
+              50,
+              -13,
+              506,
+              746
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              742,
+              58
+            ],
+            [
+              555,
+              50
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "へ",
+            "ヘ"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              56,
+              37,
+              951,
+              635.4545454545455
+            ],
+            [
+              62,
+              46,
+              948,
+              635.0550458715596
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              1000,
+              56
+            ],
+            [
+              1000,
+              62
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "タ",
+            "夕"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              92,
+              -44,
+              873,
+              814
+            ],
+            [
+              77,
+              -85,
+              892,
+              841
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              1000,
+              92
+            ],
+            [
+              1000,
+              77
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        }
+      ],
+      "limits": "Tight-trim equality is an isolated-glyph observation. It does not prove complete line pixels, advance widths, positions or context are identical. Fonts and results are already consumed; no new accuracy item."
+    },
+    {
+      "font": "NotoSerifJP400",
+      "fontSha256": "2b127545ad3dba023d255733015059e550d9dbcd04c980a80021dc8ea666e813",
+      "pairs": [
+        {
+          "characters": [
+            "I",
+            "l"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              53,
+              0,
+              352,
+              728
+            ],
+            [
+              35,
+              0,
+              301,
+              805
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              405,
+              53
+            ],
+            [
+              334,
+              35
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "l",
+            "1"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              35,
+              0,
+              301,
+              805
+            ],
+            [
+              70,
+              -1,
+              427,
+              738
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              334,
+              35
+            ],
+            [
+              471,
+              70
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "O",
+            "0"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              56,
+              -16,
+              710,
+              745
+            ],
+            [
+              47,
+              -15,
+              509,
+              743
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              767,
+              56
+            ],
+            [
+              557,
+              47
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "へ",
+            "ヘ"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              47,
+              93,
+              943,
+              593
+            ],
+            [
+              56,
+              95,
+              935,
+              588
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              1000,
+              47
+            ],
+            [
+              1000,
+              56
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "タ",
+            "夕"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              136,
+              -46,
+              846,
+              777
+            ],
+            [
+              74,
+              -78,
+              933,
+              839
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              1000,
+              136
+            ],
+            [
+              1000,
+              74
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        }
+      ],
+      "limits": "Tight-trim equality is an isolated-glyph observation. It does not prove complete line pixels, advance widths, positions or context are identical. Fonts and results are already consumed; no new accuracy item."
+    },
+    {
+      "font": "MPLUS1p-Regular",
+      "fontSha256": "2f294ad496432b1608f070d310e3aa2adcf1de4af429f4901df97ec4bd361ed1",
+      "pairs": [
+        {
+          "characters": [
+            "I",
+            "l"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              115,
+              0,
+              202,
+              730
+            ],
+            [
+              115,
+              0,
+              192,
+              750
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              317,
+              115
+            ],
+            [
+              307,
+              115
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "l",
+            "1"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              115,
+              0,
+              192,
+              750
+            ],
+            [
+              81,
+              0,
+              391,
+              730
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              307,
+              115
+            ],
+            [
+              620,
+              81
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "O",
+            "0"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              40.0,
+              -10.0,
+              753.0,
+              740.0
+            ],
+            [
+              46.0,
+              -10,
+              573.0,
+              740
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              793,
+              40
+            ],
+            [
+              620,
+              46
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "へ",
+            "ヘ"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              38,
+              82,
+              961,
+              597
+            ],
+            [
+              38,
+              57,
+              961,
+              627
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              1000,
+              38
+            ],
+            [
+              1000,
+              38
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "タ",
+            "夕"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              109,
+              -37,
+              847,
+              787
+            ],
+            [
+              70,
+              -73,
+              915,
+              820
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              1000,
+              109
+            ],
+            [
+              1000,
+              70
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        }
+      ],
+      "limits": "Tight-trim equality is an isolated-glyph observation. It does not prove complete line pixels, advance widths, positions or context are identical. Fonts and results are already consumed; no new accuracy item."
+    },
+    {
+      "font": "ZenKakuGothicNew-Regular",
+      "fontSha256": "b840cd07a67d89cacca44249ae49aa99ee7640eb5ce623be8d8983d6aabac801",
+      "pairs": [
+        {
+          "characters": [
+            "I",
+            "l"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              84,
+              0,
+              145,
+              700
+            ],
+            [
+              74,
+              0,
+              135,
+              722
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              230,
+              84
+            ],
+            [
+              210,
+              74
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": [
+            19,
+            20,
+            21,
+            22,
+            23,
+            26,
+            27
+          ]
+        },
+        {
+          "characters": [
+            "l",
+            "1"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              74,
+              0,
+              135,
+              722
+            ],
+            [
+              10,
+              0,
+              243,
+              702
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              210,
+              74
+            ],
+            [
+              383,
+              10
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "O",
+            "0"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              47,
+              -13,
+              686,
+              715
+            ],
+            [
+              56,
+              -11,
+              447,
+              712
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              732,
+              47
+            ],
+            [
+              504,
+              56
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "へ",
+            "ヘ"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              73,
+              151,
+              942,
+              559.2727272727273
+            ],
+            [
+              83,
+              132,
+              921,
+              552.0
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              1000,
+              73
+            ],
+            [
+              1000,
+              83
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "タ",
+            "夕"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              138,
+              -25,
+              811,
+              781
+            ],
+            [
+              74,
+              -76,
+              883,
+              833
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              1000,
+              138
+            ],
+            [
+              1000,
+              74
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        }
+      ],
+      "limits": "Tight-trim equality is an isolated-glyph observation. It does not prove complete line pixels, advance widths, positions or context are identical. Fonts and results are already consumed; no new accuracy item."
+    },
+    {
+      "font": "BIZUDPMincho-Regular",
+      "fontSha256": "02e07546c51503acb864004b663f1762f099d8fbe1af7d619b185568568101ef",
+      "pairs": [
+        {
+          "characters": [
+            "I",
+            "l"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              84,
+              0,
+              694,
+              1556
+            ],
+            [
+              90,
+              0,
+              613,
+              1598
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              778,
+              84
+            ],
+            [
+              676,
+              90
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "l",
+            "1"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              90,
+              0,
+              613,
+              1598
+            ],
+            [
+              248,
+              0,
+              858,
+              1610
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              676,
+              90
+            ],
+            [
+              1065,
+              248
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "O",
+            "0"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              135,
+              -39,
+              1585,
+              1596
+            ],
+            [
+              156,
+              -39,
+              1237,
+              1596
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              1720,
+              135
+            ],
+            [
+              1393,
+              156
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "へ",
+            "ヘ"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              68,
+              254,
+              1872,
+              1284
+            ],
+            [
+              111,
+              293,
+              1874,
+              1315
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              1966,
+              68
+            ],
+            [
+              1966,
+              111
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        },
+        {
+          "characters": [
+            "タ",
+            "夕"
+          ],
+          "sameUnshiftedVectorOutline": false,
+          "vectorBounds": [
+            [
+              154,
+              -68,
+              1536,
+              1630
+            ],
+            [
+              180,
+              -170,
+              1824,
+              1651
+            ]
+          ],
+          "advanceAndLeftBearing": [
+            [
+              1720,
+              154
+            ],
+            [
+              2048,
+              180
+            ]
+          ],
+          "sameTightlyTrimmedRasterSizes": []
+        }
+      ],
+      "limits": "Tight-trim equality is an isolated-glyph observation. It does not prove complete line pixels, advance widths, positions or context are identical. Fonts and results are already consumed; no new accuracy item."
+    }
+  ],
+  "decision": "Do not start another synthetic-training run now. Prioritize full-document acquisition/provenance and independent untried recognizers; reconsider only after a reproducible, visibly distinguishable glyph error remains in correctly acquired complete lines.",
+  "reasons": [
+    "Additional identical-distribution epochs already plateaued: development149 baseline,162 epoch1,161 epochs2/3.",
+    "Most residual errors concern font-specific I/l geometry, with isolated raster ambiguity at small sizes; extra font exposure might improve context use but is not evidence of safe source reconstruction.",
+    "Training reduced crop errors but increased high-confidence output on clipped/multiline probes. CTC confidence cannot certify complete original support.",
+    "The <=3 corrections requirement applies to actual complete documents and their headers/structure, not crop exact-match averages."
+  ],
+  "illustrativeCorrectionBudget": {
+    "bodyFields": 400,
+    "minimumExactWithAtMostThreeCorrections": 397,
+    "requiredPercent": 99.25,
+    "limits": "Arithmetic illustration only. It is not an independence assumption, prediction of real-document error rates, or a crop-based qualification rule."
+  },
+  "possibleNextConditionNotFrozenOrStarted": {
+    "prerequisites": "Parent obtains complete-line original pixels at sufficient source density, verifies cell membership and damage/blank/padding rejection, and compares existing fixed trained model with untried CPU recognizers on new documents.",
+    "ifTrainingBecomesJustified": "Use a new protocol with independently generated train/dev/document-final, expanded public font/style/source-density coverage, preserved full line baselines and positions, broad vocabulary retention, and a very low learning rate only for the last backbone stage. Existing final pixels/literals never enter training or count as fresh final.",
+    "selection": "Base and previous fixed model remain candidates on new dev; freeze one checkpoint and any confidence/rejection policy before generating a new unused-font whole-document final.",
+    "safety": "Include independent fully visible near-lookalikes and clipped/multiline/blank/ownership controls. No manual headers, no gold repair, <=3 actual body corrections per full document.",
+    "portability": "Retain standard ONNX, dictionary/BGR48/CTC interval contracts and optional CoreML conversion; no iOS source edits or Apple-device qualification claim."
+  }
+}

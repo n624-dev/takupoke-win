@@ -1,0 +1,272 @@
+{
+  "recipe": "independent-source-colour-final-v1",
+  "candidateCommit": "c064ea2a1a0d57516baf9bdc12125a0705e7ae9f",
+  "generatorSHA": "d7552ece660555e08d77378d35fe37a2a1da95a7713a5a7d846d8c5342b6f416",
+  "fonts": [
+    [
+      "kosugi",
+      "apache/kosugi/Kosugi-Regular.ttf",
+      "f5e81d6a6b865d9b88c54d2d3c16bcaa3b239dfcefaf2a62976ac9dc7574bab7",
+      771409
+    ],
+    [
+      "sawarabi",
+      "ofl/sawarabimincho/SawarabiMincho-Regular.ttf",
+      "86373c619710d1528aac3a4d47ce96834101bb38b057235b39e47b61ba143c6d",
+      590317
+    ]
+  ],
+  "colours": [
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ],
+    [
+      0.15,
+      0.5,
+      0.2
+    ],
+    [
+      0.4,
+      0.4,
+      0.4
+    ]
+  ],
+  "variants": [
+    "positive",
+    "missing-day",
+    "missing-body"
+  ],
+  "qualification": "source-only; no OCR/model activation",
+  "scope": "Independent unused source contents/fonts/layout/order; full source-only final, not trained OCR final",
+  "obligationsPerPositive": {
+    "pages": 5,
+    "slots": 680,
+    "bodyValues": 2040
+  },
+  "cases": [
+    {
+      "case": "kosugi-positive",
+      "file": "kosugi-positive.pdf",
+      "sha256": "059580fde607569609b2e8b2ea6b42b1c3c73383275ee206c1563fbd1a5d396a",
+      "bytes": 38760,
+      "expect": "exact",
+      "seed": 771409,
+      "font": "kosugi",
+      "variant": "positive",
+      "pageOrder": [
+        4,
+        2,
+        5,
+        3,
+        1
+      ],
+      "classOrder": [
+        "4_CN",
+        "1_3",
+        "2_ES",
+        "1_1",
+        "5_ES",
+        "5_CN",
+        "AI_2",
+        "1_2",
+        "3_IT",
+        "4_IT",
+        "2_CN",
+        "AI_1",
+        "3_ES",
+        "3_CN",
+        "2_IT",
+        "4_ES",
+        "5_IT"
+      ]
+    },
+    {
+      "case": "kosugi-missing-day",
+      "file": "kosugi-missing-day.pdf",
+      "sha256": "5879abdc705f2e5b19b97a8d04826ff07af8e8db482fed0f6803ff7c0c34b385",
+      "bytes": 38634,
+      "expect": "refuse",
+      "seed": 771409,
+      "font": "kosugi",
+      "variant": "missing-day",
+      "pageOrder": [
+        4,
+        2,
+        5,
+        3,
+        1
+      ],
+      "classOrder": [
+        "4_CN",
+        "1_3",
+        "2_ES",
+        "1_1",
+        "5_ES",
+        "5_CN",
+        "AI_2",
+        "1_2",
+        "3_IT",
+        "4_IT",
+        "2_CN",
+        "AI_1",
+        "3_ES",
+        "3_CN",
+        "2_IT",
+        "4_ES",
+        "5_IT"
+      ]
+    },
+    {
+      "case": "kosugi-missing-body",
+      "file": "kosugi-missing-body.pdf",
+      "sha256": "018b4ed3ce627f10acbc4c2963466e14c1ec605f44d09d10f336141ee2a3e454",
+      "bytes": 38741,
+      "expect": "refuse",
+      "seed": 771409,
+      "font": "kosugi",
+      "variant": "missing-body",
+      "pageOrder": [
+        4,
+        2,
+        5,
+        3,
+        1
+      ],
+      "classOrder": [
+        "4_CN",
+        "1_3",
+        "2_ES",
+        "1_1",
+        "5_ES",
+        "5_CN",
+        "AI_2",
+        "1_2",
+        "3_IT",
+        "4_IT",
+        "2_CN",
+        "AI_1",
+        "3_ES",
+        "3_CN",
+        "2_IT",
+        "4_ES",
+        "5_IT"
+      ]
+    },
+    {
+      "case": "sawarabi-positive",
+      "file": "sawarabi-positive.pdf",
+      "sha256": "95c27fdf2e01d70b2eb91433f4ce64c8ac285e1c33b9ae3ebacd82780ed7bbf8",
+      "bytes": 41676,
+      "expect": "exact",
+      "seed": 590317,
+      "font": "sawarabi",
+      "variant": "positive",
+      "pageOrder": [
+        1,
+        4,
+        5,
+        3,
+        2
+      ],
+      "classOrder": [
+        "1_2",
+        "4_CN",
+        "4_ES",
+        "4_IT",
+        "2_ES",
+        "5_ES",
+        "3_CN",
+        "3_ES",
+        "1_3",
+        "AI_2",
+        "5_CN",
+        "2_IT",
+        "2_CN",
+        "AI_1",
+        "5_IT",
+        "3_IT",
+        "1_1"
+      ]
+    },
+    {
+      "case": "sawarabi-missing-day",
+      "file": "sawarabi-missing-day.pdf",
+      "sha256": "6cf86a098a5bdb5c4b7df6908d8309d4ac8ef4872a70873b9fb57b404e7d1f0b",
+      "bytes": 41543,
+      "expect": "refuse",
+      "seed": 590317,
+      "font": "sawarabi",
+      "variant": "missing-day",
+      "pageOrder": [
+        1,
+        4,
+        5,
+        3,
+        2
+      ],
+      "classOrder": [
+        "1_2",
+        "4_CN",
+        "4_ES",
+        "4_IT",
+        "2_ES",
+        "5_ES",
+        "3_CN",
+        "3_ES",
+        "1_3",
+        "AI_2",
+        "5_CN",
+        "2_IT",
+        "2_CN",
+        "AI_1",
+        "5_IT",
+        "3_IT",
+        "1_1"
+      ]
+    },
+    {
+      "case": "sawarabi-missing-body",
+      "file": "sawarabi-missing-body.pdf",
+      "sha256": "14173f2682366f34cc7b81261370f741c764b4d56a908ea13f92e534c0daded3",
+      "bytes": 41669,
+      "expect": "refuse",
+      "seed": 590317,
+      "font": "sawarabi",
+      "variant": "missing-body",
+      "pageOrder": [
+        1,
+        4,
+        5,
+        3,
+        2
+      ],
+      "classOrder": [
+        "1_2",
+        "4_CN",
+        "4_ES",
+        "4_IT",
+        "2_ES",
+        "5_ES",
+        "3_CN",
+        "3_ES",
+        "1_3",
+        "AI_2",
+        "5_CN",
+        "2_IT",
+        "2_CN",
+        "AI_1",
+        "5_IT",
+        "3_IT",
+        "1_1"
+      ]
+    }
+  ],
+  "manifestSHA": "e11814eb6082e98324ea0fd24fff6aa0d9a0e271f71646156b111c1c060e9353"
+}

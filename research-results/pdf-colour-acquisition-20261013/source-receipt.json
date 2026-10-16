@@ -1,0 +1,223 @@
+{
+  "recipe": "complete-source-colour-v1",
+  "generatorSHA": "9ce9ad2c577adabcba572a509fc85e8c175e156fd0a16db295e3d5eb39ff7d87",
+  "sourceGeneratorSHA": "312cd3c5f6470f6509b60537fbc37f1bfdc94de11aa54f941b631603f5b0dfc3",
+  "fontSHA": "c2f3b4d463500a2ddcd3849cded1fceeb9fd6d1c32e6cbecd568453ba50fc68f",
+  "scope": "Consumed content, unchanged geometry; colour compatibility, not new recognition/model qualification",
+  "obligationsPerPositive": {
+    "pages": 5,
+    "slots": 680,
+    "bodyValues": 2040
+  },
+  "manifestSHA": "a7ac5109df7331f5c1fd1d66552b05854d59becf67d923a71193b3efad76b599",
+  "cases": [
+    {
+      "case": "black",
+      "sha256": "e864af0e05f79d35a4fa063b29667bdd236719a4ec443003cd75427853fb764a",
+      "bytes": 36562,
+      "expect": "exact",
+      "colourProtocol": {
+        "rgb": [
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "transparent": false,
+        "covered": false,
+        "sourceVariant": "positive"
+      }
+    },
+    {
+      "case": "red",
+      "sha256": "2eca7ead89cf037a8d5778ea99719484a7e3b0b06c4b21631780706bede1a6f9",
+      "bytes": 36550,
+      "expect": "exact",
+      "colourProtocol": {
+        "rgb": [
+          [
+            1,
+            0,
+            0
+          ]
+        ],
+        "transparent": false,
+        "covered": false,
+        "sourceVariant": "positive"
+      }
+    },
+    {
+      "case": "blue",
+      "sha256": "e2969faeec12c59cd486fc3090d874686aa206162e534ac2b00493c5b5df2f30",
+      "bytes": 36545,
+      "expect": "exact",
+      "colourProtocol": {
+        "rgb": [
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "transparent": false,
+        "covered": false,
+        "sourceVariant": "positive"
+      }
+    },
+    {
+      "case": "gray",
+      "sha256": "882535bcbf29cd606855c368188d991a7d4d3d6e475de923cec7c45fc735ce6e",
+      "bytes": 36900,
+      "expect": "exact",
+      "colourProtocol": {
+        "rgb": [
+          [
+            0.55,
+            0.55,
+            0.55
+          ]
+        ],
+        "transparent": false,
+        "covered": false,
+        "sourceVariant": "positive"
+      }
+    },
+    {
+      "case": "mixed",
+      "sha256": "7758c40c63c82ad3fbd08e0500119c2f3acc17888633158a64d7a7c7fb65908c",
+      "bytes": 38472,
+      "expect": "exact",
+      "colourProtocol": {
+        "rgb": [
+          [
+            0.6,
+            0.1,
+            0.1
+          ],
+          [
+            0.1,
+            0.2,
+            0.6
+          ],
+          [
+            0.1,
+            0.55,
+            0.1
+          ]
+        ],
+        "transparent": false,
+        "covered": false,
+        "sourceVariant": "positive"
+      }
+    },
+    {
+      "case": "near-white",
+      "sha256": "af7c939841f44c4e769a4d0d4ce279ad459b574b5f2b5679704ead866749681d",
+      "bytes": 36923,
+      "expect": "refuse",
+      "colourProtocol": {
+        "rgb": [
+          [
+            0.96,
+            0.96,
+            0.96
+          ]
+        ],
+        "transparent": false,
+        "covered": false,
+        "sourceVariant": "positive"
+      }
+    },
+    {
+      "case": "white",
+      "sha256": "e5fd3406853579478a4562de134205511386033b6fb56ef47be654f4db86cf7d",
+      "bytes": 36528,
+      "expect": "refuse",
+      "colourProtocol": {
+        "rgb": [
+          [
+            1,
+            1,
+            1
+          ]
+        ],
+        "transparent": false,
+        "covered": false,
+        "sourceVariant": "positive"
+      }
+    },
+    {
+      "case": "transparent",
+      "sha256": "fb4ebc1485c5396d38c4a6eef71df05ff7cf40fb873e9f5c6bfa9c55f5161f60",
+      "bytes": 36854,
+      "expect": "refuse",
+      "colourProtocol": {
+        "rgb": [
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "transparent": true,
+        "covered": false,
+        "sourceVariant": "positive"
+      }
+    },
+    {
+      "case": "covered",
+      "sha256": "ea4d8b59143196fbb87ef4fd49e29207218dd60626ddabb584d8a46fb6370007",
+      "bytes": 36691,
+      "expect": "refuse",
+      "colourProtocol": {
+        "rgb": [
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "transparent": false,
+        "covered": true,
+        "sourceVariant": "positive"
+      }
+    },
+    {
+      "case": "missing-class",
+      "sha256": "18a0d0e17bc05b3413bc04364c51211b32b8e8718ef408696eda5abe20d67e6e",
+      "bytes": 36523,
+      "expect": "refuse",
+      "colourProtocol": {
+        "rgb": [
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "transparent": false,
+        "covered": false,
+        "sourceVariant": "missing-class"
+      }
+    },
+    {
+      "case": "missing-body",
+      "sha256": "f3090f3ff907ec94bc485ca9cc66bfba7cf9c26901bbf4ffd77a1f31f3c329ec",
+      "bytes": 36578,
+      "expect": "refuse",
+      "colourProtocol": {
+        "rgb": [
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "transparent": false,
+        "covered": false,
+        "sourceVariant": "missing-body"
+      }
+    }
+  ]
+}

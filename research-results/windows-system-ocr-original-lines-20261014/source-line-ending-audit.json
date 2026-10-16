@@ -1,0 +1,9 @@
+{
+  "cause": "Windows checkout autocrlf for Python source not covered by explicit eol=lf; C# and csproj hashes already agree",
+  "gitCommit": "bcfbb38998a3cd265b7b1c58f640a1ef5fee0d5e",
+  "gitPythonLfSha256": "86ee40a6e9302487c97e7fffec22d8a2c37f7100cdb12a59a7f0d873da651cdc",
+  "runtimePythonCrlfSha256": "17be228370c39ccf02f12aec652fba54f5cf86aaad314c733e2437d2c468dd85",
+  "matchesFrozenRuntimeSource": true,
+  "rawOrFreezeChanged": false,
+  "additionalModelCalls": 0
+}

@@ -1,0 +1,10 @@
+{
+  "scope": "Metadata-only read-only correction; no rerun and originalfont-audit unchanged",
+  "initialReportedFontToolsVersion": "4.61.0",
+  "actualInstalledFontToolsVersion": "4.61.1",
+  "initialSourceSha256": "2f9e8520b6fdcf2539ab6d957a6d4d59f8a6869e7aaa903a15f9d8b08bd1cc0a",
+  "correctedSourceSha256": "7752aec58fd8486aa95844b8febdfd04a1e8d880dd0ec7f87610672c1d4de359",
+  "initialAuditSha256": "58da71a50831b8a01112a4a8e0b54ddc2d38e2e1e515ee2e4d74da2497107bca",
+  "all12ByteReproductionChecksStillValid": true,
+  "frozenTrainingSourceProtocolAndRawUnchanged": true
+}

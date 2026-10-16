@@ -1,0 +1,6 @@
+{"recipe":"windows-system-ocr-consumed-original-lines-v1","available":["en-US"],"selected":["en-US"],"maxImageDimension":10000,"os":"Microsoft Windows 10.0.26100","runtime":"10.0.13","inputSha256":"6e54d6bc0cc2213dc51a6e0ff67f3551a736e4e75641ec00f96c7b9de87f14ff","plannedCalls":192,"qualification":false,"modelActivation":false,"nativeConfidenceAvailable":false}
+{"completed":48}
+{"completed":96}
+{"completed":144}
+{"completed":192}
+{"completed":192,"available":["en-US"],"selected":["en-US"],"status":"closed-component-comparison; unqualified","processPeakWorkingSetBytes":54681600,"qualification":false,"limits":"Windows OCR exposes no per-word native confidence. No score invented, no calibration or whole-document qualification."}

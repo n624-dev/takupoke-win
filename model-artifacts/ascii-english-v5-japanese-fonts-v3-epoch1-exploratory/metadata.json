@@ -1,0 +1,26 @@
+{
+  "status": "FAILED original development gate; exploratory epoch1 only; original selection remains active baseline; original fresh never opened",
+  "actualInitializerAndTeacherCheckpointSha256": "7313bee5dabf17998010c6f47844fe80649744b03c0366af05c627fc47314547",
+  "activeBaselineOnnxSha256": "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703",
+  "evaluatedEpoch": 1,
+  "evaluatedCheckpointSha256": "ad78c3912e85bd6462a8817667da7404d0b905f4734303ee0859f6fe5d70fd05",
+  "onnxSha256": "95bab179e0d6cc75269419078d68696cd4679661f94f6128b858b7a074fe2971",
+  "dictionarySha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368",
+  "foundation": "Official HF PP-OCRv5 English full438 architecture, revision e4abce2bbd335f6c3eda0507b7f8e8abd5af3419; foundation download receipt/model card included. Actual initializer is adapted v1, not unmodified official weights. Rejected Latin v2 unused.",
+  "dependencies": {
+    "torch": "2.7.1+cpu",
+    "transformers": "5.19.0",
+    "onnx": "1.20.1",
+    "onnxruntime": "1.23.2",
+    "numpy": "2.3.5",
+    "Pillow": "12.3.0",
+    "safetensors": "0.8.0",
+    "fonttools": "4.61.1"
+  },
+  "originalGatePassed": false,
+  "freshOpened": false,
+  "activated": false,
+  "publishedAtPackaging": false,
+  "iosEdited": false,
+  "coremlAttempted": false
+}

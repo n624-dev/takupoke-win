@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "expectedSha256": "efdcb749420be6b000bf172f41102fd6c98b4e6b600dd22d07b41168788ce191",
+  "artifacts": [
+    {
+      "variant": "unlabeled",
+      "file": "unlabeled.pdf",
+      "bytes": 38164,
+      "sha256": "a90ed8be04c058789a354ab7a2ad78c2e598b75433fc1152df2584bd00f4223a",
+      "expectedDisposition": "complete680"
+    },
+    {
+      "variant": "unlabeled-raster",
+      "file": "unlabeled-raster.pdf",
+      "bytes": 216604,
+      "sha256": "76031ea7e14447bdb647513b34e49141812eba5fe120fc42b97346edb8bd8c5d",
+      "expectedDisposition": "complete680-ocrUnmeasured"
+    },
+    {
+      "variant": "labeled-control",
+      "file": "labeled-control.pdf",
+      "bytes": 39246,
+      "sha256": "4ad4bed500a8b1b1112e1a918225353bf9db84eab784f577d49e08257307b0bc",
+      "expectedDisposition": "complete680"
+    },
+    {
+      "variant": "labeled-control-raster",
+      "file": "labeled-control-raster.pdf",
+      "bytes": 234060,
+      "sha256": "f2b4bed473fdaad896f2d842ce4b60c80516cfc46d2c61a9d95ba5a3698337f5",
+      "expectedDisposition": "complete680-ocrUnmeasured"
+    },
+    {
+      "variant": "missing-class",
+      "file": "missing-class.pdf",
+      "bytes": 37539,
+      "sha256": "37e32b4400b67bc903548db2975f103132f790dce54e3c1476bbf62545b1c89a",
+      "expectedDisposition": "subset16ClassScopeNotInvalidByItself"
+    },
+    {
+      "variant": "parallel-mismatch",
+      "file": "parallel-mismatch.pdf",
+      "bytes": 38202,
+      "sha256": "eece294ddd4d96f82228b01f528585f9cf3a00b4179d6a8662377c6db79f3ee0",
+      "expectedDisposition": "diagnosticNegative"
+    },
+    {
+      "variant": "unreadable-body",
+      "file": "unreadable-body.pdf",
+      "bytes": 38215,
+      "sha256": "aadd33eb9883dfc4db358a6200c6daf5e2cb38753b12afe8ef22caed8375e81e",
+      "expectedDisposition": "diagnosticNegative"
+    },
+    {
+      "variant": "unlabeled-no-unused-font",
+      "file": "unlabeled-no-unused-font.pdf",
+      "bytes": 38009,
+      "sha256": "bd8a441ef33903ff8e01a9c7f6f4f7715f453afafb7130cae1499914eba54c6a",
+      "expectedDisposition": "complete680-diagnosticSetupDifferenceOnly"
+    },
+    {
+      "variant": "labeled-control-no-unused-font",
+      "file": "labeled-control-no-unused-font.pdf",
+      "bytes": 39091,
+      "sha256": "dfa4266abaed7aae5a1f3430eedf566193e62ade376a4768250f1091d4fbabed",
+      "expectedDisposition": "complete680-diagnosticSetupDifferenceOnly"
+    }
+  ],
+  "requirements": {
+    "reportlab": "4.4.9",
+    "fonttools": "4.61.1",
+    "PyMuPDF": "1.26.6",
+    "Pillow": "12.3.0"
+  }
+}

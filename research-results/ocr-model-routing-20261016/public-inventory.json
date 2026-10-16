@@ -1,0 +1,80 @@
+{
+  "scope": "All public records, explanatory README and source snapshots in this report except this self-referential inventory; gzip maps back to original bytes via the curation manifest.",
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 2661,
+      "sha256": "1daeb40fce979d8e18ea7303519b034d3ce532b098d800bc09d3732cac2fbf86"
+    },
+    {
+      "file": "as-run-source/src/Takupoke.Infrastructure/Recovery/OcrAsciiRefinement.cs",
+      "bytes": 4899,
+      "sha256": "4e7b399f269afa234a1d50d06709bdf09b49aac9f79fc84a944427516e5dbabe"
+    },
+    {
+      "file": "as-run-source/src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs",
+      "bytes": 6239,
+      "sha256": "b13927678f0c5ed3f05d6e01c35f580647e228f969059bb003d4a47c2a6b7eaa"
+    },
+    {
+      "file": "as-run-source/src/Takupoke.Infrastructure/Recovery/OnnxAsciiOcr.cs",
+      "bytes": 4826,
+      "sha256": "212be449861c5b9329d89b5584af1b95868ae3c42b81e04ef8f2740f1c6309e1"
+    },
+    {
+      "file": "as-run-source/tools/ocr-code-comparison/Program.cs",
+      "bytes": 7905,
+      "sha256": "d8b000c514ab54879ae9168ca4fb0487d90cd18d11ffaef97b4a2098eb1b6524"
+    },
+    {
+      "file": "curation-manifest.json",
+      "bytes": 3512,
+      "sha256": "73960ad1de674e6b2772835f7f68eba688223c1c266a9bc14491495acb9a6cd2"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 8671,
+      "sha256": "7c53e5f8e863b8e98bcd81c7fd64b92b0f288250a2cc89deab6afd28705d44b2"
+    },
+    {
+      "file": "inputs.json",
+      "bytes": 190701,
+      "sha256": "140c5ff342145ec748b423b1986ed004f06f89818532d35726406562c9e5fa1d"
+    },
+    {
+      "file": "model-route-changes.json",
+      "bytes": 155514,
+      "sha256": "e10586d3c2dc74a21b79254ee08f3d4cfe109368fbfb087a443dd3ee9e3a8545"
+    },
+    {
+      "file": "oracle.json",
+      "bytes": 143843,
+      "sha256": "8d41900182c7a78dc8339f406b5dfa160ae4dbc30de40bdc479c1a8c342fe3dd"
+    },
+    {
+      "file": "paired-model-routes.json",
+      "bytes": 3915,
+      "sha256": "80377ef5398b1819c7c718442f4ac8bb9b8312f7339a690f0de4c0fb6fa65c05"
+    },
+    {
+      "file": "raw.jsonl.gz",
+      "bytes": 236692,
+      "sha256": "1727eec490bc587f4264393f24a3b2726feb8fe286a9faa922d0f132f2a52107"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 122,
+      "sha256": "5a3d6800776f48e6163445207811c93f0481f5469a75d3c0b25f892dfc0577b3"
+    },
+    {
+      "file": "stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

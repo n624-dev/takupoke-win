@@ -1,0 +1,98 @@
+{
+  "scope": "Official HF class/config/safetensors as independent foundation; no ONNX transplant/native parity claim, no quality/final/training",
+  "repository": "PaddlePaddle/en_PP-OCRv5_mobile_rec_safetensors",
+  "revision": "e4abce2bbd335f6c3eda0507b7f8e8abd5af3419",
+  "assets": {
+    "config.json": {
+      "bytes": 2086,
+      "sha256": "be52e23a259dc4838322115ee4c8f59197ce136a1aa0bd96574122b84f1fa4b7"
+    },
+    "model.safetensors": {
+      "bytes": 22465008,
+      "sha256": "9dab63fb9b819082f3f06e889a3af56dc2c27155d46d8409659c869a2aece2bc"
+    },
+    "inference.yml": {
+      "bytes": 3964,
+      "sha256": "49b7c9ccda20164cf42851995d235ab9ed11b7109e456d1cf911d42b71025858"
+    },
+    "preprocessor_config.json": {
+      "bytes": 4805,
+      "sha256": "66db0fbb4e009096e9a766845646dc34c3186892a1b76637dab2cb75a91edd4c"
+    },
+    "README.md": {
+      "bytes": 31,
+      "sha256": "4bcf87ecfbbb8e07a01b21415a970c8b53a5283bf6872b657040d3f45c9241f7"
+    }
+  },
+  "parameters": 5510778,
+  "headRows": 438,
+  "normEpsilon": "All five unchanged official1e-6",
+  "sources": {
+    "preflight.py": "5be570299aff74b708b140d8f81f94f56ce5c8f691126a2ac69a2a48dd752ea8",
+    "model.py": "499be516a853d5396c6bc44aaae20811510d4f79542c19e3071b4636155cc573"
+  },
+  "cpuThreads": 2,
+  "seed": 845371,
+  "maximumRssMiB": 4096,
+  "numericShapes": [
+    [
+      1,
+      320
+    ],
+    [
+      1,
+      481
+    ],
+    [
+      1,
+      500
+    ],
+    [
+      1,
+      640
+    ],
+    [
+      1,
+      960
+    ],
+    [
+      2,
+      320
+    ],
+    [
+      2,
+      481
+    ],
+    [
+      2,
+      500
+    ],
+    [
+      2,
+      640
+    ],
+    [
+      2,
+      960
+    ]
+  ],
+  "backwardShapes": [
+    [
+      1,
+      320
+    ],
+    [
+      2,
+      320
+    ],
+    [
+      1,
+      960
+    ],
+    [
+      2,
+      960
+    ]
+  ],
+  "selfConsistencyGate": "Same unmodified model/direct official forward vs explicit backbone+encoder+full438linear softmax has exactFP32outputbytes at every registeredshape; repeatedinference exact; config/weights/state unchanged; no tolerance weakening"
+}

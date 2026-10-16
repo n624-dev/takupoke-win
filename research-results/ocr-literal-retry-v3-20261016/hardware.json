@@ -1,0 +1,11 @@
+{
+  "physicalMemoryBytes": 17174360064,
+  "sourceCommit": "231fe87203b9c92a0c79993dc8649a6f990f25dc",
+  "processors": [
+    {
+      "Name": "AMD EPYC 9V45 96-Core Processor                ",
+      "NumberOfCores": 2,
+      "NumberOfLogicalProcessors": 4
+    }
+  ]
+}

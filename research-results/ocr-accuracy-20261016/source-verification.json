@@ -1,0 +1,16 @@
+{
+  "sourceCommit": "810f40e0023b81eb9054fbaa61a4c7797c690582",
+  "sourceTree": "e3d5895b7f5bceab7ee604c76c3c028c6b629c29",
+  "prepackageRun": 38786397119,
+  "allSevenPrechecksSucceeded": true,
+  "coreTests": 301,
+  "linuxIntegrationTests": 1113,
+  "windowsIntegrationTests": 1115,
+  "nativeWindowsUiChecks": 1027,
+  "arm64HardwareExecutionVerified": false,
+  "scope": "Builds and real Windows UI, not recognition accuracy.",
+  "sourceCiRun": 38786384528,
+  "sourceCiAllSevenSuccess": true,
+  "sourceCiNativeUiChecks": 1027,
+  "node20WarningCount": 0
+}

@@ -1,0 +1,13 @@
+{
+  "sourceCommit": "5bc03ac6032759960966458b936e4854af27e4a2",
+  "workflowRun": 38503900381,
+  "initialCapability": {
+    "name": "Language.OCR~~~ja-JP~0.0.1.0",
+    "state": "NotPresent"
+  },
+  "result": "timeout after8minutes",
+  "nativeCalls": 0,
+  "precision": "unassessed",
+  "cleanup": "success",
+  "consoleSha256": "5011f30807e972cf1a823a41e9ee007b973745e61c33ab5c5733c0d54a8b95b5"
+}

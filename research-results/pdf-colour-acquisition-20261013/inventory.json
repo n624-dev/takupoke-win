@@ -1,0 +1,22 @@
+{
+  "README.md": {
+    "bytes": 2584,
+    "sha256": "772f555d90e1520b94bea32dd7fc0a750920d35658ba99d5b92f452b4f860986"
+  },
+  "linux-baseline-report.json": {
+    "bytes": 8940,
+    "sha256": "fe1a0609d379114aa1b308ca87c5833429e25e49c2932dc3da10a43810eda16c"
+  },
+  "linux-candidate-report.json": {
+    "bytes": 9012,
+    "sha256": "a9191ab6b57dad18dab5e2c9cd8d15b9b5f43cf1350d2a8397b508c748177b3c"
+  },
+  "source-receipt.json": {
+    "bytes": 5102,
+    "sha256": "b74fd645601a871c8785d64d5847100b08985ccec82782076d394cea21376b5b"
+  },
+  "windows-observations.json": {
+    "bytes": 17520,
+    "sha256": "97299a8337ce83105565333f7e7336c4f03280b8d1ae0003e7a1ab2372e5d4fe"
+  }
+}

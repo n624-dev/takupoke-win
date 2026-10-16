@@ -19,6 +19,9 @@ public sealed partial class MainWindow
             var panel = Panel(Text(preview.CanSkipRows
                 ? "元の記載を確認し、除外する行を選んでください。ファイルの内容が更新されるまで適用します。"
                 : "閲覧のみです。正常結果の保存や時間割への反映は行いません。"));
+            var confirmation = Text(""); confirmation.Visibility = Visibility.Collapsed;
+            panel.Children.Add(confirmation);
+            var confirming = false;
             var controls = new List<CheckBox>();
             var groups = preview.ReviewGroups;
             var warningsByRow = preview.Warnings.ToLookup(warning => warning.Row);
@@ -55,9 +58,49 @@ public sealed partial class MainWindow
                 preview.CanSkipRows ? "選んだ行を除外" : "閉じる", preview.CanSkipRows ? "キャンセル" : null,
                 configure: dialog =>
                 {
+                    bool Current() => epoch == _model.PrivateEpoch && !_model.Locked &&
+                        _model.ParserYear == preview.SchoolYear && preview.ParserVersion == XlsxChangeReader.Version &&
+                        _model.Materials.GetValueOrDefault(Takupoke.Core.MaterialKind.Changes)?.Source is { } source &&
+                        source.Id == preview.SourceId && source.Digest == preview.Digest;
                     dialog.IsPrimaryButtonEnabled = !preview.CanSkipRows || selected.Count > 0;
+                    dialog.PrimaryButtonClick += async (_, args) =>
+                    {
+                        if (!preview.CanSkipRows) return;
+                        args.Cancel = true;
+                        confirmation.Visibility = Visibility.Visible;
+                        if (!Current())
+                        {
+                            confirmation.Text = "資料または補完年度が変わりました。プレビューを開き直してください。";
+                            dialog.IsPrimaryButtonEnabled = false; return;
+                        }
+                        if (!confirming)
+                        {
+                            confirming = true;
+                            confirmation.Text = $"{selected.Count}行を除外します（{ChangeReviewGroup.DescribeRanges(selected)}）。内容を確認して読み込んでください。";
+                            dialog.PrimaryButtonText = "除外して読み込む"; return;
+                        }
+                        var deferral = args.GetDeferral();
+                        dialog.IsPrimaryButtonEnabled = false;
+                        foreach (var control in controls) control.IsEnabled = false;
+                        try
+                        {
+                            var accepted = await _model.ApplyChangeRowSkipsAsync(preview, selected.ToArray());
+                            args.Cancel = !accepted;
+                            if (!accepted && epoch == _model.PrivateEpoch && !_model.Locked)
+                                confirmation.Text = _model.Status;
+                        }
+                        finally
+                        {
+                            var current = Current();
+                            dialog.IsPrimaryButtonEnabled = current && selected.Count > 0;
+                            foreach (var control in controls) control.IsEnabled = current;
+                            deferral.Complete();
+                        }
+                    };
                     void Changed(object sender, RoutedEventArgs args)
                     {
+                        confirming = false; dialog.PrimaryButtonText = "選んだ行を除外";
+                        confirmation.Visibility = Visibility.Collapsed;
                         var choice = (CheckBox)sender;
                         if (choice.IsChecked == true) selected.UnionWith((int[])choice.Tag);
                         else selected.ExceptWith((int[])choice.Tag);
@@ -67,13 +110,6 @@ public sealed partial class MainWindow
                     { control.Checked += Changed; control.Unchecked += Changed; }
                 });
             panel.Children.Clear();
-            if (!preview.CanSkipRows || result != ContentDialogResult.Primary
-                || epoch != _model.PrivateEpoch || _model.Locked) return;
-            if (await Dialog("選んだ行を除外して読み込む",
-                Text($"{selected.Count}行を時間割変更から除外します。除外する行：{ChangeReviewGroup.DescribeRanges(selected)}。ファイルの内容が更新されるまで適用します。"),
-                "除外して読み込む", "キャンセル") != ContentDialogResult.Primary) continue;
-            if (epoch != _model.PrivateEpoch || _model.Locked) return;
-            await _model.ApplyChangeRowSkipsAsync(preview, selected.ToArray());
             return;
         }
     }

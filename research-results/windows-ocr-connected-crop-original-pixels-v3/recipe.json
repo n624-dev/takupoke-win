@@ -1,0 +1,92 @@
+{
+  "recipe": "pinned-ocr-connected-crop-original-pixels-v3",
+  "sourceCommit": "3dd01c5a56e869afb1d331309d6e988413798c76",
+  "pins": [
+    {
+      "path": "/workspace/recovery-research/windows-ocr-crop-completion-development-v3-20261004/inputs.json",
+      "sha256": "aa81abc1a6d5bc4c2d0f3dad55191432683201108394cc91de286483abf841da"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ocr-crop-completion-development-v3-20261004/Program.cs",
+      "sha256": "4afad7647af1291cdbf465375ca8e34aff3059b60b457245597e4a0ecb0e6849"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/prepare.py",
+      "sha256": "5c3c257ec8fea2bd00ab3fd5e64253ced295ad29898a7c586fe5577882261505"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ocr-crop-completion-development-v3-20261004/Probe.csproj",
+      "sha256": "a2981662ebc46d875c2d460d57be027c09b065798e051a2a43cee78c5f055f2c"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ocr-crop-completion-development-v3-20261004/IndependentFormalOracle.cs",
+      "sha256": "5efb5d12e238ff9ca4929dec22da6c45702bc62029d1a303baf22efc6604e774"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-crop-completion-20261004/src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs",
+      "sha256": "cba2dab6892802b94b38487c736ecb21d1a4a7d256ac7cb61b1d05fd076571b6"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-crop-completion-20261004/src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs",
+      "sha256": "5242f91554c370d135b00e4e6cde00d9ec2a826ee85a5306d4aa0a29bd8951df"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-crop-completion-20261004/src/Takupoke.Infrastructure/Takupoke.Infrastructure.csproj",
+      "sha256": "975a0e80bb17e435421f5f492ee2492f12630b7a1518e753c572aa291227135f"
+    },
+    {
+      "path": "/workspace/recovery-research/artifacts/ocr-det.onnx",
+      "sha256": "a431985659dc921974177a95adcfbb90fd9e51989a5e04d70d0b75f597b6e61d"
+    },
+    {
+      "path": "/workspace/recovery-research/artifacts/ocr-rec.onnx",
+      "sha256": "da72dc72ca4dc220df0dfde68c1dedc31c58d3e76a25871122e5056227d50092"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-crop-completion-20261004/src/Takupoke.Win/Assets/Recovery/ocr-characters.json",
+      "sha256": "d858428fbe0ada92b439a5f277b51bc1b318fd985d80946a3ce859d7f2446a92"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-crop-completion-20261004/src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs",
+      "sha256": "cd2ca77d976855da1eb80739d040b11b6e311e85a4104c5477ddc1005f4bd182"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-crop-completion-20261004/src/Takupoke.Core/Recovery/RecoveryEngine.cs",
+      "sha256": "b0c2a87006b2515ceed7e1bcea6221aa1b9748ac427d7ca6dc2fcc9f1dc13007"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-crop-completion-20261004/src/Takupoke.Core/Recovery/RecoveryStructure.cs",
+      "sha256": "945c27fd5a88d1c4ca85fdc32d605170cac0cdb96d896659e359150c89daa276"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-crop-completion-20261004/src/Takupoke.Core/Recovery/RecoveryValidator.cs",
+      "sha256": "376fd80e23f1678e67f297c1abb873df9b200eb00ca9db1bf43fcd0f9b98e1ca"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-crop-completion-20261004/src/Takupoke.Core/Recovery/RecoveryModels.cs",
+      "sha256": "8c7ec813aab415a77c2dfe20499f3ba983064c09c9fbf49bd8c8cac490878d32"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-crop-completion-20261004/src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs",
+      "sha256": "6a2b93b13e6ef250fdf1a0a43b0a9b8a76b16442bffc9d5babfececc0a8acabb"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-crop-completion-20261004/src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "sha256": "d8e7bb95855785ce472a6f374a21768a41b0a23c15ffc9348e3f6f94c11fe9c6"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-crop-completion-20261004/src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "sha256": "1770b3727e2cfc38cd7459d6c4791a8d0daf5e68244ab2e7306910bff7e48f7b"
+    }
+  ],
+  "plannedDocuments": 2,
+  "plannedOcrReadCalls": 10,
+  "tensorInferenceCalls": "not separately instrumented; each Read includes detector and recognizer",
+  "newModelDownload": false,
+  "presets": [
+    "currentProductionOnly"
+  ],
+  "runtime": "actual1.23.2required",
+  "scope": "Consumed development originals, original lossless pixels; physical connected crop support and existing full formal/literal oracle. Linux ORT1.23.2, not Windows deploy OCR compatibility.",
+  "diagnostics": "Default-null internal observer enabled only for fictional run; emits already-computed CTC pieces before existing zero/low-confidence refusal; no additional inference."
+}

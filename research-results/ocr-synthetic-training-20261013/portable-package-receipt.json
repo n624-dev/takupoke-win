@@ -1,0 +1,358 @@
+{
+  "status": "research-only; unqualified, not activated, iOS code untouched",
+  "selected": {
+    "name": "epoch-1",
+    "epoch": 1,
+    "exact": 162,
+    "cer": 0.02872670807453416,
+    "path": "/workspace/scratch/ocr-finetune-20261013/epoch-1",
+    "sha256": "8286b4fc102d5a398ae9a535872cb5223fd5369171dcec03f2af57725d06c046"
+  },
+  "base": {
+    "repo": "PaddlePaddle/PP-OCRv6_small_rec_safetensors",
+    "revision": "fe049fb103f57443fe8840c54ed06b702f3c1de5",
+    "files": {
+      "config.json": {
+        "bytes": 1083,
+        "sha256": "8693fd8485e8543e13d0f6dde3891a3f4af9a47fc4e3a391fbed71f8015c899e"
+      },
+      "model.safetensors": {
+        "bytes": 21204736,
+        "sha256": "f65a332afe5aa663f0b9d5706f4ae8457b5b4058a842d5c1eb22df505c27d642"
+      },
+      "inference.yml": {
+        "bytes": 150579,
+        "sha256": "ab078671bb49f06228eadccd34f1bb501e157f7a047095ffb943ba81512c77d1"
+      },
+      "preprocessor_config.json": {
+        "bytes": 206177,
+        "sha256": "2b24fa36f548893f26a931cf44f1a1a6b2b14ed7e2f8f8e28e6848801a8278db"
+      }
+    }
+  },
+  "onnxDomains": [
+    ""
+  ],
+  "onnxOpsets": [
+    {
+      "domain": "",
+      "version": 17
+    }
+  ],
+  "preprocessingSha256": "0c47bc869ca25a22c7a022fce580f7906e31ec8ddf9e6bcac86d198f0eb5cf2c",
+  "dictionarySha256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f",
+  "platformNotes": "ONNX uses standard operators and can be evaluated with ONNX Runtime Windows/mobile. CoreML if present is conversion-only on Linux; iPhone prediction fidelity, dynamic shapes, deployment, speed, memory and document safety remain untested. No iOS repository write.",
+  "finalSummary": {
+    "status": "research-only; not qualified, not activated",
+    "selection": {
+      "name": "epoch-1",
+      "epoch": 1,
+      "exact": 162,
+      "cer": 0.02872670807453416,
+      "path": "/workspace/scratch/ocr-finetune-20261013/epoch-1",
+      "sha256": "8286b4fc102d5a398ae9a535872cb5223fd5369171dcec03f2af57725d06c046"
+    },
+    "protocolSha256": "0b7ddb2b90065d56ce4060d34118d70cbccb159ca61f9f8dd496f64a9833dc6a",
+    "trainRows": 1536,
+    "developmentRows": 192,
+    "finalGroups": {
+      "baseline": {
+        "all": {
+          "rows": 384,
+          "exact": 320,
+          "cer": 0.02831923501287238,
+          "correctAtFloor08": 295,
+          "incorrectAtFloor08": 41,
+          "belowFloor08OrEmpty": 48
+        },
+        "arbitrary-ascii": {
+          "rows": 96,
+          "exact": 87,
+          "cer": 0.010273972602739725,
+          "correctAtFloor08": 85,
+          "incorrectAtFloor08": 7,
+          "belowFloor08OrEmpty": 4
+        },
+        "confusable-code": {
+          "rows": 96,
+          "exact": 65,
+          "cer": 0.06799336650082918,
+          "correctAtFloor08": 59,
+          "incorrectAtFloor08": 18,
+          "belowFloor08OrEmpty": 19
+        },
+        "japanese": {
+          "rows": 96,
+          "exact": 82,
+          "cer": 0.02973977695167286,
+          "correctAtFloor08": 78,
+          "incorrectAtFloor08": 9,
+          "belowFloor08OrEmpty": 9
+        },
+        "mixed": {
+          "rows": 96,
+          "exact": 86,
+          "cer": 0.01566951566951567,
+          "correctAtFloor08": 73,
+          "incorrectAtFloor08": 7,
+          "belowFloor08OrEmpty": 16
+        },
+        "BIZUDPMincho-Regular": {
+          "rows": 192,
+          "exact": 163,
+          "cer": 0.025544703230653644,
+          "correctAtFloor08": 151,
+          "incorrectAtFloor08": 17,
+          "belowFloor08OrEmpty": 24
+        },
+        "ZenKakuGothicNew-Regular": {
+          "rows": 192,
+          "exact": 157,
+          "cer": 0.030979827089337175,
+          "correctAtFloor08": 144,
+          "incorrectAtFloor08": 24,
+          "belowFloor08OrEmpty": 24
+        }
+      },
+      "selected": {
+        "all": {
+          "rows": 384,
+          "exact": 351,
+          "cer": 0.013240161824200073,
+          "correctAtFloor08": 341,
+          "incorrectAtFloor08": 23,
+          "belowFloor08OrEmpty": 20
+        },
+        "arbitrary-ascii": {
+          "rows": 96,
+          "exact": 89,
+          "cer": 0.007990867579908675,
+          "correctAtFloor08": 88,
+          "incorrectAtFloor08": 6,
+          "belowFloor08OrEmpty": 2
+        },
+        "confusable-code": {
+          "rows": 96,
+          "exact": 80,
+          "cer": 0.03150912106135987,
+          "correctAtFloor08": 73,
+          "incorrectAtFloor08": 11,
+          "belowFloor08OrEmpty": 12
+        },
+        "japanese": {
+          "rows": 96,
+          "exact": 92,
+          "cer": 0.007434944237918215,
+          "correctAtFloor08": 92,
+          "incorrectAtFloor08": 2,
+          "belowFloor08OrEmpty": 2
+        },
+        "mixed": {
+          "rows": 96,
+          "exact": 90,
+          "cer": 0.008547008547008548,
+          "correctAtFloor08": 88,
+          "incorrectAtFloor08": 4,
+          "belowFloor08OrEmpty": 4
+        },
+        "BIZUDPMincho-Regular": {
+          "rows": 192,
+          "exact": 184,
+          "cer": 0.006010518407212622,
+          "correctAtFloor08": 177,
+          "incorrectAtFloor08": 3,
+          "belowFloor08OrEmpty": 12
+        },
+        "ZenKakuGothicNew-Regular": {
+          "rows": 192,
+          "exact": 167,
+          "cer": 0.020172910662824207,
+          "correctAtFloor08": 164,
+          "incorrectAtFloor08": 20,
+          "belowFloor08OrEmpty": 8
+        }
+      }
+    },
+    "improvements": 36,
+    "regressions": 5,
+    "onnxParity": {
+      "rows": 384,
+      "exactTextAndIntervals": 384,
+      "maximumProbabilityDifference": 0.0008983314037322998,
+      "dynamicProbes": [
+        {
+          "width": 320,
+          "batch": 2,
+          "shape": [
+            2,
+            40,
+            18710
+          ],
+          "exactTextAndIntervals": true,
+          "maximumProbabilityDifference": 3.5762786865234375e-07
+        },
+        {
+          "width": 481,
+          "batch": 2,
+          "shape": [
+            2,
+            60,
+            18710
+          ],
+          "exactTextAndIntervals": true,
+          "maximumProbabilityDifference": 8.940696716308594e-07
+        },
+        {
+          "width": 640,
+          "batch": 2,
+          "shape": [
+            2,
+            80,
+            18710
+          ],
+          "exactTextAndIntervals": true,
+          "maximumProbabilityDifference": 2.384185791015625e-07
+        },
+        {
+          "width": 960,
+          "batch": 2,
+          "shape": [
+            2,
+            120,
+            18710
+          ],
+          "exactTextAndIntervals": true,
+          "maximumProbabilityDifference": 2.384185791015625e-07
+        }
+      ],
+      "onnxBytes": 21176440,
+      "onnxSha256": "796b2eb06ed399a6799120b008a78da344f54dbe5151461b12f9bc9a1d1ec146",
+      "elapsedSecondsWithConcurrentWork": 46.43565130600018,
+      "torchEvaluationModeVerified": true,
+      "selectedRowsTouchingPadding": 6,
+      "comparisonCorrection": "Fresh eval-only Torch reload. Prior post-export Torch probability comparison invalid because legacy exporter restored a train-mode wrapper recursively. Model and checkpoint selection unchanged; no gold used."
+    },
+    "trainingMaxRssMiB": 1409.34765625,
+    "evaluationMaxRssMiB": 900.046875,
+    "finalPixelManifestSha256": "e21daa803652624202d93b2e72e76e356d170b1a959a5fe2469993b562e80cdf",
+    "limits": "Synthetic crop evaluation cannot establish full-document OCR, position/cell membership, validator safety, damage rejection, <=3 corrections, arbitrary school-independent unknown words, or broad 18,710-class regression coverage."
+  },
+  "files": {
+    "README.md": {
+      "bytes": 5172,
+      "sha256": "2936ae822ca9e96afb134f857d7b5a9a0501bc1865545b663d2eb78cdcc18587"
+    },
+    "dictionary.json": {
+      "bytes": 112374,
+      "sha256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f"
+    },
+    "evaluation/coreml-conversion.json": {
+      "bytes": 1495,
+      "sha256": "588b61cf8ba4ae99018fbb479cac03cba54df0bad6199c97b9afb9707ebeeee9"
+    },
+    "evaluation/corpus-provenance.json": {
+      "bytes": 1531,
+      "sha256": "84dabc0bfb0d638a4bef89452929041244f997be6e38f2f8514e9a0e845d4389"
+    },
+    "evaluation/development-selection.json": {
+      "bytes": 4109,
+      "sha256": "229c22a54655e901683a6d8f78b5eb968cb3778269c3162320a37a337e44d3c6"
+    },
+    "evaluation/final-summary.json": {
+      "bytes": 5533,
+      "sha256": "149084fd406c69d3a9e9de5a1b75b7ec63d9936feb807f565db82c91bb00b408"
+    },
+    "evaluation/onnx-profile-baseline.json": {
+      "bytes": 186787,
+      "sha256": "34598e01aa89a9420bb5fa10952fc03d3b14d973f894925b785f841c3b670106"
+    },
+    "evaluation/onnx-profile-selected.json": {
+      "bytes": 186816,
+      "sha256": "f5f2538eeff075c47b9866231d76137a2eb4e0a64e0442cee23d8c4cfd96cd11"
+    },
+    "evaluation/ood-protocol.json": {
+      "bytes": 691,
+      "sha256": "2509a86e4e4dc8ee17c9cee4b32f28b7c5872d2049f83eed17fcdd58de62f60b"
+    },
+    "evaluation/ood-summary.json": {
+      "bytes": 1188,
+      "sha256": "39c19889df7fa74002239735508b50edb428420cbf0f5ebee1efdce2813b7538"
+    },
+    "evaluation/protocol.json": {
+      "bytes": 2217,
+      "sha256": "b30cb7f87239f99de5e73fe67e83226e2060cc03cb395c970c37ecf886786b6b"
+    },
+    "evaluation/reproduction-receipt.json": {
+      "bytes": 2642,
+      "sha256": "f4252e3a30e912fd6e8a203a6562f2acf0c6240d6fb6f5d6da6bf8e85486264b"
+    },
+    "preprocessing.json": {
+      "bytes": 1430,
+      "sha256": "0c47bc869ca25a22c7a022fce580f7906e31ec8ddf9e6bcac86d198f0eb5cf2c"
+    },
+    "recognizer.mlpackage/Data/com.apple.CoreML/model.mlmodel": {
+      "bytes": 115324,
+      "sha256": "8c8c18ad3e54510e72fc4b3be164de427b480ae97e6027daf0eb98b0202e9827"
+    },
+    "recognizer.mlpackage/Data/com.apple.CoreML/weights/weight.bin": {
+      "bytes": 21076064,
+      "sha256": "d6863d4d7fa4ca1a4b5d04a7c8dda975bb2f457c5cd528a2daca1538345c3bb7"
+    },
+    "recognizer.mlpackage/Manifest.json": {
+      "bytes": 617,
+      "sha256": "bb05abe1851202d4a036ac3da8bab6779aa0880e2f05261ce24836cc0e96c138"
+    },
+    "recognizer.onnx": {
+      "bytes": 21176440,
+      "sha256": "796b2eb06ed399a6799120b008a78da344f54dbe5151461b12f9bc9a1d1ec146"
+    },
+    "reference_preprocessing_ctc.py": {
+      "bytes": 2117,
+      "sha256": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098"
+    },
+    "source-licenses/base-model-card.md": {
+      "bytes": 23785,
+      "sha256": "ac3debb5e615b1297a69c34e6c5c5930c3a17382462b91e8784d731a604ab0f9"
+    },
+    "source-licenses/base-model-license-receipt.json": {
+      "bytes": 322,
+      "sha256": "57306d14111f22e55c53b061356b312a42e3de1f39174bb37702892c2472b5fd"
+    },
+    "source-licenses/bizudpmincho-OFL.txt": {
+      "bytes": 4408,
+      "sha256": "ef0ed524b3bd012f37015e986809eed6f67905456ebfc1ebd7fcc2765282ee01"
+    },
+    "source-licenses/mplus1p-OFL.txt": {
+      "bytes": 4389,
+      "sha256": "da15da6b1496d4de18f97e2ad1b722ef8a1c121149c2c93b2cf7eac6ac27b35c"
+    },
+    "source-licenses/notosansjp-OFL.txt": {
+      "bytes": 4388,
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+    },
+    "source-licenses/notoserifjp-OFL.txt": {
+      "bytes": 4350,
+      "sha256": "5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6"
+    },
+    "source-licenses/receipt.json": {
+      "bytes": 1405,
+      "sha256": "a58097023252cdab2b7b0d56f31d9c199bf97a19e19f09fae88f87bf59b264b3"
+    },
+    "source-licenses/zenkakugothicnew-OFL.txt": {
+      "bytes": 4401,
+      "sha256": "0fac78a235c98d640cb06332eb5362c211d86fa03c011df438c35005d22ad2c7"
+    },
+    "torch/config.json": {
+      "bytes": 2555,
+      "sha256": "c2db3b8b41fc5ff77ca54ad44e000b468286dc33d87bfe5dd21af641811f21bf"
+    },
+    "torch/inference.yml": {
+      "bytes": 150579,
+      "sha256": "ab078671bb49f06228eadccd34f1bb501e157f7a047095ffb943ba81512c77d1"
+    },
+    "torch/model.safetensors": {
+      "bytes": 21210016,
+      "sha256": "8286b4fc102d5a398ae9a535872cb5223fd5369171dcec03f2af57725d06c046"
+    }
+  }
+}

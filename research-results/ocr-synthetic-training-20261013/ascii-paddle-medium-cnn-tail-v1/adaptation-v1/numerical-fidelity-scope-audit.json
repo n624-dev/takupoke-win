@@ -1,0 +1,19 @@
+{
+  "scope": "Supplemental numerical fidelity interpretation; no threshold/source/protocol/raw/model changed or inference repeated",
+  "initialConsumed48And10DynamicShapesRegisteredStrictGate": "Passed feature<=1e-4/logit<=1e-3/probability<=1e-4 and all text/interval/floor decisions",
+  "newDevelopmentPreOptimizerGate": "Protocol separately fixes all text/CTCinterval/floor+validWidth decisions identical and records float maxima; it does not impose the initial feature scalar bound on this different corpus",
+  "newDevelopmentRows": 576,
+  "newDevelopment": {
+    "scope": "Before optimizer; newdev same native original input maps, no quality selection or correction",
+    "rows": 576,
+    "allTextIntervalsAndFloorDecisionsIdentical": true,
+    "maximumDifferences": {
+      "feature": 0.0001354217529296875,
+      "logit": 0.000209808349609375,
+      "probability": 2.1278858184814453e-05
+    }
+  },
+  "newDevelopmentFeatureExceedsInitialCorpusFeatureTolerance": true,
+  "productionBitwiseFp32ParityClaim": false,
+  "interpretation": "Native input and cached maps retain exact FP32bytes; Torch copiedCNN and latermatrix arithmetic is numerically close, not bitwiseoriginal feature/logit identity. New development decoding/floor matched before any optimizer step."
+}

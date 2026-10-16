@@ -1,0 +1,1 @@
+static let specialClasses = ["1_1", "1_2", "1_3"] + (2...5).flatMap { year in ["CN", "ES", "IT"].map { "\(year)_\($0)" } } + ["AI_1", "AI_2"]

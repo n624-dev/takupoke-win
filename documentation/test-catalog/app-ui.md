@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`af2b94de02836122b58e70991f1412773c7b9b52abb809275b1a49873c7d27bf`
+`e3b75f2eb38520de61daa88dbe8e6b6ba7c691861fbaed8fa084ac0d667b6276`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -54,6 +54,7 @@
 ## [tests/Takupoke.Win.UITests/Program.ChangeRows.cs](../../tests/Takupoke.Win.UITests/Program.ChangeRows.cs)
 
 - `CheckChangeRowSkips`
+- `CheckDateDerivedWeekdays`
 
 ## [tests/Takupoke.Win.UITests/Program.InstallerChecks.cs](../../tests/Takupoke.Win.UITests/Program.InstallerChecks.cs)
 

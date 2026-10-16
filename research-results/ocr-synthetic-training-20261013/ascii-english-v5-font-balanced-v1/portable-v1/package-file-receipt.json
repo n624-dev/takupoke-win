@@ -1,0 +1,31 @@
+{
+  "scope": "External inactive package, models remain outsideGit",
+  "files": {
+    "README.md": {
+      "bytes": 1576,
+      "sha256": "1e3268e2e44f32dbffed8d883654d332019a019a9bdf7dde1681eef381687d98"
+    },
+    "dictionary.json": {
+      "bytes": 3614,
+      "sha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368"
+    },
+    "image_tensor.py": {
+      "bytes": 2117,
+      "sha256": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098"
+    },
+    "metadata.json": {
+      "bytes": 15785,
+      "sha256": "5173d286a389bfc03c10244eb22cc65a2df21a97f241b9c507a0d55b9a2a7417"
+    },
+    "model.onnx": {
+      "bytes": 22183975,
+      "sha256": "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703"
+    },
+    "protocol.json": {
+      "bytes": 2559,
+      "sha256": "797831fbba58490c0a0d2d772b1348e9d89e3f733738f2e67f664d73fa1534a7"
+    }
+  },
+  "allDevelopmentRawDecisionsMatch": true,
+  "selectedCheckpointUnchanged": true
+}

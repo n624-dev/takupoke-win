@@ -1,0 +1,6 @@
+{
+  "stage": "TSV file collection first request",
+  "callsCompleted": 0,
+  "cause": "Custom tessdata directory has model only, CLI config txt/tsv lookup does not use system config directory; return0 without TSV",
+  "noAccuracyCredit": true
+}

@@ -1,0 +1,108 @@
+{
+  "name": "initialized-adapter",
+  "positiveRows": 384,
+  "exact": 145,
+  "correctAccepted": 123,
+  "incorrectAccepted": 94,
+  "negativeRows": 224,
+  "negativeAccepted": 38,
+  "paddingRows": 32,
+  "cer": 0.14297872340425533,
+  "groups": {
+    "blank": {
+      "rows": 32,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 2
+    },
+    "clipped": {
+      "rows": 32,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 15,
+      "nonempty": 32
+    },
+    "code": {
+      "rows": 128,
+      "exact": 35,
+      "correctAccepted": 25,
+      "incorrectAccepted": 29,
+      "accepted": 54,
+      "nonempty": 128
+    },
+    "interior_damage": {
+      "rows": 32,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 18,
+      "nonempty": 32
+    },
+    "lookalike": {
+      "rows": 128,
+      "exact": 24,
+      "correctAccepted": 14,
+      "incorrectAccepted": 41,
+      "accepted": 55,
+      "nonempty": 128
+    },
+    "multiline": {
+      "rows": 32,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 32
+    },
+    "natural": {
+      "rows": 64,
+      "exact": 63,
+      "correctAccepted": 63,
+      "incorrectAccepted": 0,
+      "accepted": 63,
+      "nonempty": 64
+    },
+    "noise": {
+      "rows": 32,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 3,
+      "nonempty": 19
+    },
+    "printable": {
+      "rows": 64,
+      "exact": 23,
+      "correctAccepted": 21,
+      "incorrectAccepted": 24,
+      "accepted": 45,
+      "nonempty": 64
+    },
+    "unknown_cjk": {
+      "rows": 32,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 22
+    },
+    "unknown_mixed": {
+      "rows": 32,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 2,
+      "nonempty": 32
+    }
+  },
+  "rawSha256": "c4d0ac3baff95a49818c57805e9f8ea9a501c42499b71938e11fa0ba27a2230f",
+  "scope": "Fresh independent literals on consumeddevelopmentfonts; standaloneASCIIbranch only, no newfinal/wholefield/full-document qualification",
+  "exactFp32SelfConsistency": true,
+  "maximumDifferences": {
+    "feature": 0.0,
+    "probability": 0.0
+  }
+}

@@ -1,0 +1,502 @@
+{
+  "protocol": {
+    "namespace": "research-ascii-english-v5-font-balanced-v1/adaptation-v1",
+    "basis": "Independent unmodified official HF PPOCRV5MobileRecForTextRecognition/config/safetensors revision e4abce2bbd335f6c3eda0507b7f8e8abd5af3419. Old strict ONNX transplant remains failed; no nativeONNX identity/transplant claim. No epsilon replacement/fusedDAG replacement.",
+    "dictionary": "Full438 original dictionary/blank0/space final437 retained; all95ASCII present. No vocabulary probability renormalization/class whitelist/output repair.",
+    "parameters": "All officialCNN/encoder/full438classifier weights and affine params (5,510,778) train + reject121. Original architecture/config and norm epsilon stay unchanged. BNrunningstats frozen by evalmode for all optimization forwards; eval does not disable gradients. Japaneseprimary untouched/independentASCIIbranch only.",
+    "train": {
+      "seed": 965321,
+      "fonts": [
+        "IBMPlexMono",
+        "Inconsolata",
+        "FiraMono",
+        "SpaceMono",
+        "CrimsonText",
+        "LibreBaskerville",
+        "Lora",
+        "Alegreya"
+      ],
+      "positiveCounts": {
+        "code": 160,
+        "lookalike": 96,
+        "natural": 320,
+        "printable": 64
+      },
+      "negativeCounts": {
+        "clipped": 16,
+        "interior_damage": 16,
+        "multiline": 16,
+        "noise": 16,
+        "blank": 16,
+        "unknown_cjk": 16,
+        "unknown_mixed": 16
+      }
+    },
+    "development": {
+      "seed": 965341,
+      "fonts": [
+        "Cousine",
+        "UbuntuMono",
+        "PTSerif",
+        "LibreCaslonText"
+      ],
+      "positiveCounts": {
+        "code": 96,
+        "lookalike": 64,
+        "natural": 192,
+        "printable": 32
+      },
+      "negativeCounts": {
+        "clipped": 16,
+        "interior_damage": 16,
+        "multiline": 16,
+        "noise": 16,
+        "blank": 16,
+        "unknown_cjk": 16,
+        "unknown_mixed": 16
+      }
+    },
+    "fontExposure": "Newly obtained pinned public Latin fonts; no previous OCR research use found in parent history/search. Train8/dev4 family-disjoint; pergroup mono50:50; no previousdev font moved to train. CJK unknown negatives alone use previously consumed NotoSansJP train/NotoSerifJP dev (not heldout-Japanese quality). No school data.",
+    "fontBalance": "Each positivegroup equal perfont; 4mono+4proportional train /2mono+2proportional dev. cmapcheck everyrenderedtarget; unknownCJK/mixed negativeonly uses designated CJKfont, not Latin fallback.",
+    "data": "New arbitrary ASCII and natural 2-5-word sentences/fragments with casing/spacing/punctuation; half positives natural, 40percent code/lookalike, 10percent printable. Fresh seeds/literals; previous corpora only exclusion. Paired code/case and confusables samefont/renderseed. CJK/wholemixed unknown negatives never split.",
+    "preprocessing": "All suppliedRGBink bbox+2originalpx/commonbaseline/relativeheight/internalgaps; nativeFP32BGR48 sampler centerbilinear/uint8round/zero-normalizedpadding width320..960, validWidth/sourceRect preserved. NoFP16. This fixes input condition for independentHFbasis and does not assert officialHFImageProcessor or Windowsbyteparity.",
+    "cache": "LosslessNPZ officialFP32input tensor, teacherfeature120 and official438probabilities from exactsame officialTorchforward; restoredbyte/dtype/shapeSHA. Baseline uses storedofficialprobabilities, not copied ONNXhead.",
+    "selfConsistencyNewDevGate": "Before optimizer everynewdev storedofficialbaseline vs initializedsameofficialAdapter exactFP32feature/probability byte equality and text/interval/floor/ASCII/validWidthdecision equality. Halt iffail.",
+    "contradictionAudit": "ExactprovidedPNG/FP32input with differentpositive target or positive-vs-negative conflict ->excludeallconflictingtrainrows from everyupdate, no targetrepair/falsedamage label. Dev unchanged. CTClength<=nativeframes.",
+    "training": {
+      "seed": 965361,
+      "threads": 2,
+      "batchSize": 2,
+      "epochs": 4,
+      "evaluateEpochs": [
+        2,
+        4
+      ],
+      "cnnLearningRate": 3e-05,
+      "encoderLearningRate": 0.0001,
+      "headLearningRate": 0.0003,
+      "rejectLearningRate": 0.001,
+      "teacherKlWeight": 0.4,
+      "teacherFeatureMseWeight": 0.02,
+      "rejectBceWeight": 0.5,
+      "weightDecay": 0.0001,
+      "gradientClip": 5.0,
+      "maximumTrainingSeconds": 1800,
+      "maximumCacheSeconds": 1800,
+      "maximumRssMiB": 4096,
+      "additionalDiskBudgetGiB": 1.0,
+      "minimumFreeDiskGiB": 2
+    },
+    "loss": "Full438CTC on intactpositives/emptyblank; fullteacherKL+teacherfeatureMSE on allsamples; BCEreject on allsamples. Damage/multiline/noise/CJK/mixed receive no guessedCTClabel.",
+    "batching": "ExactFP32inputWidthbucket, no new image/temporalpadding/noattentionmask. Original outputT centers scaledbyinputWidth/validWidth onlydefine rejectmean; CTCSourceBox interval end pastvalidWidth alwaysrefused.",
+    "acceptance": "Baseline/trainednonempty/alltextprintableASCII/minemittedCTCconfidence>=.8/nointervalpastvalidWidth; trainedalso rejectProbability<=.05. Uncalibrateddiagnostic only; outputASCII cannotprove inputsource/domain.",
+    "selection": "Original officialHF baseline included. Trainedeligible if whole-positiveCER<=0.90*baseline, code+lookalikeCER<=0.90*baseline, naturalCER<=baseline+0.01 absolute, eachmono-font code+lookalike aggregateCER<=baseline, negativeAccepted<=baseline, unsupportedpadding allrefused. No zeroerror gate. Amongeligible minimize wholeCER then codeCER then naturalCER then maximize exact then earlier epoch; partialepochnevercandidate. If none originalfallback.",
+    "continuationGate": "Same selectedtrained eligibility is research usefulness only, not activation/final permission. Report CER, exactlines, natural regressions, perfont/mono/codeCER, correct/wrong accepted, wrong highconfidence, lowconfidence correct reviewcount and negatives. No zero wrongaccept requirement. Any final/export requires later separateprotocol; Sawarabi unopen.",
+    "sourceProof": "Oldconsumed64samepixelscriptalias/missingprefixcontrols onlypostselection, never train/choose/final. Sourcecompleteness/script/cellgeometry provenance remains independent.",
+    "final": "Sawarabi reserved and notused. No final-generation/inference, portableexport or productactivation in thisexperiment. Japaneseprimary/iOS unchanged. Older frozen zeroerror trials preserved byteforbyte."
+  },
+  "protocolSha256": "ff7611adf18b20cab76c93b5ec28144d02a9ba2590dac7162fdc43f4258da52b",
+  "sources": {
+    "protocol.json": "ff7611adf18b20cab76c93b5ec28144d02a9ba2590dac7162fdc43f4258da52b",
+    "data.py": "a3afd1e322a5c8bca0c47e9a55d1529660ae67edf8d093f128c2becc1c0c70ec",
+    "model.py": "499be516a853d5396c6bc44aaae20811510d4f79542c19e3071b4636155cc573",
+    "adapter.py": "563a8734c3b5830d8bc8f5742c9eca772bd8c889976cb188e97216a1651fa697",
+    "train.py": "18fcd2311c977743deefa93ccfb10704845eab3b87e3cd3cb64c36fe20585300"
+  },
+  "assetReceipt": {
+    "repository": "PaddlePaddle/en_PP-OCRv5_mobile_rec_safetensors",
+    "revision": "e4abce2bbd335f6c3eda0507b7f8e8abd5af3419",
+    "declaredLicense": "Apache-2.0",
+    "files": {
+      "config.json": {
+        "bytes": 2086,
+        "sha256": "be52e23a259dc4838322115ee4c8f59197ce136a1aa0bd96574122b84f1fa4b7"
+      },
+      "model.safetensors": {
+        "bytes": 22465008,
+        "sha256": "9dab63fb9b819082f3f06e889a3af56dc2c27155d46d8409659c869a2aece2bc"
+      },
+      "inference.yml": {
+        "bytes": 3964,
+        "sha256": "49b7c9ccda20164cf42851995d235ab9ed11b7109e456d1cf911d42b71025858"
+      },
+      "preprocessor_config.json": {
+        "bytes": 4805,
+        "sha256": "66db0fbb4e009096e9a766845646dc34c3186892a1b76637dab2cb75a91edd4c"
+      },
+      "README.md": {
+        "bytes": 31,
+        "sha256": "4bcf87ecfbbb8e07a01b21415a970c8b53a5283bf6872b657040d3f45c9241f7"
+      }
+    }
+  },
+  "dictionarySha256": "30068d4c87b2f94e4f3e8a4f962e41da42d5f29a750dd59a2a8fcac31ed8e70d",
+  "fontHashes": {
+    "IBMPlexMono": "0999682c7625d3cfbc3f738dc5d72946f5463653c32c1fd15b5dd1ce16924958",
+    "Inconsolata": "dd9cd4b73c413b1ea316cf431b234e7ec992d6ca8a35b796c02cb8a04881f7ce",
+    "FiraMono": "bbb4b5b5f42273547250df8a38a7120d6e09b81bebab3342c59aa93526447ffd",
+    "SpaceMono": "9f69849cea853c9d9493bf1af6d5311a7f8a5f7baf84c6ac44abd6b370ed7fe8",
+    "CrimsonText": "79e8efa2151d6e5f9d6390e28ed74b0f731014589410821e3ef7c02d0a996939",
+    "LibreBaskerville": "b866c047482768c14688ae79bae5e248ceed7a8313d385efa512166747b02884",
+    "Lora": "66f89eaf0b220e3a3196456b0daa4fdd2f2b81942aec2bcc1528f4c7f132968a",
+    "Alegreya": "e7726c1c75d746d38d5d84dddfea1013f09b529926ad9bedb697c8df5dbbeac4",
+    "Cousine": "6ee2a9e3b552802557617c6e03c5748e28f6c6f0798c121bf1eb8aafc0f474fb",
+    "UbuntuMono": "cabed306bd465181f2c288837ab0c3e804d53386769060270d7a52f68beb0112",
+    "PTSerif": "99a33268fc94d3dc07e13e39eb204ffcaa24e586700a73249731ac1b4b83c986",
+    "LibreCaslonText": "e182f76cb7fab0a5b513ced165fdad424a290d1fb945032584f038c8f3daa572",
+    "NotoSansJP400": "54aba28468f275bc372eda5f29b202c0d9e7b9ba2bc18a53a4c72c481c75cf9f",
+    "NotoSerifJP400": "2b127545ad3dba023d255733015059e550d9dbcd04c980a80021dc8ea666e813"
+  },
+  "newFontReceipt": {
+    "repository": "google/fonts",
+    "revision": "295d98a7a0c17c68f1341eaeea354e7960ea70d3",
+    "files": {
+      "IBMPlexMono": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/ibmplexmono/IBMPlexMono-Regular.ttf",
+        "originalBytes": 111428,
+        "originalSha256": "9ff9ab66aaa412874bd24bdfa7be5c1d600abb9937eb7f931bfd409fe6217936",
+        "staticAxes": {},
+        "bytes": 111428,
+        "sha256": "0999682c7625d3cfbc3f738dc5d72946f5463653c32c1fd15b5dd1ce16924958",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/ibmplexmono/OFL.txt",
+        "licenseSha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+      },
+      "Inconsolata": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/inconsolata/Inconsolata%5Bwdth%2Cwght%5D.ttf",
+        "originalBytes": 347180,
+        "originalSha256": "23ded25b447074d00659392bf9b1123d89df55cb07b0ad9bfef3366d199b5fcb",
+        "staticAxes": {
+          "wght": 400,
+          "wdth": 100.0
+        },
+        "bytes": 98268,
+        "sha256": "dd9cd4b73c413b1ea316cf431b234e7ec992d6ca8a35b796c02cb8a04881f7ce",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/inconsolata/OFL.txt",
+        "licenseSha256": "29bd0cfd0fb2a45f9b057c834a057724bae1f63b525a8ac83d3e7525706d9f80"
+      },
+      "FiraMono": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/firamono/FiraMono-Regular.ttf",
+        "originalBytes": 174596,
+        "originalSha256": "2e00b0cf3106a3d792f35711b7722740b76c02ee7300ea8c60f940584b7a8ac9",
+        "staticAxes": {},
+        "bytes": 174596,
+        "sha256": "bbb4b5b5f42273547250df8a38a7120d6e09b81bebab3342c59aa93526447ffd",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/firamono/OFL.txt",
+        "licenseSha256": "d1829ff3455bbf3b9d13dfb0a57758a863107c9108aab48558f26f37f1094180"
+      },
+      "SpaceMono": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/spacemono/SpaceMono-Regular.ttf",
+        "originalBytes": 93136,
+        "originalSha256": "fa5802bba20311cca2673d3cdc1e89b34b7d44fe6f2d730bd6c5d4229199ae39",
+        "staticAxes": {},
+        "bytes": 93136,
+        "sha256": "9f69849cea853c9d9493bf1af6d5311a7f8a5f7baf84c6ac44abd6b370ed7fe8",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/spacemono/OFL.txt",
+        "licenseSha256": "4664e83780a263c53dbab95d3590a5a9db914aeb9a3c78f7e7ad451f9151c998"
+      },
+      "CrimsonText": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/crimsontext/CrimsonText-Regular.ttf",
+        "originalBytes": 107200,
+        "originalSha256": "48e6c5d5ad1d01599d374ecb817e15890d1feb3b8a3a88e527d44c90389e1f06",
+        "staticAxes": {},
+        "bytes": 107200,
+        "sha256": "79e8efa2151d6e5f9d6390e28ed74b0f731014589410821e3ef7c02d0a996939",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/crimsontext/OFL.txt",
+        "licenseSha256": "50fd67cddc097377a5c871e8452b778bc5aedfa3480a705cb27c5e3a078218df"
+      },
+      "Lora": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/lora/Lora%5Bwght%5D.ttf",
+        "originalBytes": 213416,
+        "originalSha256": "98396d24933af1589c8b0558b747c0ef28279bde36081b6c11748946329f4ac6",
+        "staticAxes": {
+          "wght": 400
+        },
+        "bytes": 136108,
+        "sha256": "66f89eaf0b220e3a3196456b0daa4fdd2f2b81942aec2bcc1528f4c7f132968a",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/lora/OFL.txt",
+        "licenseSha256": "1d9a970809ac804b582a6ce7f0ebc4e7fefcbfd7ff6299cad35ee656a21be716"
+      },
+      "Alegreya": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/alegreya/Alegreya%5Bwght%5D.ttf",
+        "originalBytes": 425288,
+        "originalSha256": "ba5564634b93a8f8ba57b48cd4f1ae7417d2b4656fbac779028679b00de3cf12",
+        "staticAxes": {
+          "wght": 400
+        },
+        "bytes": 267976,
+        "sha256": "e7726c1c75d746d38d5d84dddfea1013f09b529926ad9bedb697c8df5dbbeac4",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/alegreya/OFL.txt",
+        "licenseSha256": "f6f60d5d4cf4f4b1fc4e41353c897a2f5a16e6396c0cd8fa8bdfd2f4586a9a68"
+      },
+      "Cousine": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/apache/cousine/Cousine-Regular.ttf",
+        "originalBytes": 308360,
+        "originalSha256": "69e1ea59eb770014204e5174f805750f9a793db4a2531e6516b30b7460d470b3",
+        "staticAxes": {},
+        "bytes": 308360,
+        "sha256": "6ee2a9e3b552802557617c6e03c5748e28f6c6f0798c121bf1eb8aafc0f474fb",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/apache/cousine/LICENSE.txt",
+        "licenseSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "UbuntuMono": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ufl/ubuntumono/UbuntuMono-Regular.ttf",
+        "originalBytes": 205748,
+        "originalSha256": "b35dd9d2131d5d83a9b87fe9ad22c6288fa3d17688d43302c14da29812417d63",
+        "staticAxes": {},
+        "bytes": 205748,
+        "sha256": "cabed306bd465181f2c288837ab0c3e804d53386769060270d7a52f68beb0112",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ufl/ubuntumono/UFL.txt",
+        "licenseSha256": "2f0015108d68627bd788d313f529c21ff4da2c2c42a5e1f3883acc83480f9002"
+      },
+      "LibreBaskerville": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/librebaskerville/LibreBaskerville-Regular.ttf",
+        "originalBytes": 160364,
+        "originalSha256": "fd64409c4238f4c90eafc8900e41924bbc3e86a86f48aaca66f6b4d01b0aceb7",
+        "staticAxes": {},
+        "bytes": 160364,
+        "sha256": "b866c047482768c14688ae79bae5e248ceed7a8313d385efa512166747b02884",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/librebaskerville/OFL.txt",
+        "licenseSha256": "de719ceea028324610230b3573688949768aa30c0b693fb5661691cf36f6ae89"
+      },
+      "PTSerif": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/ptserif/PT_Serif-Web-Regular.ttf",
+        "originalBytes": 359048,
+        "originalSha256": "a4951fade06ff8f09b7673aa81ffb65a8cd409e24d3289a6dc670bc4dda2557a",
+        "staticAxes": {},
+        "bytes": 359048,
+        "sha256": "99a33268fc94d3dc07e13e39eb204ffcaa24e586700a73249731ac1b4b83c986",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/ptserif/OFL.txt",
+        "licenseSha256": "ddf311c28ddf5a5ad9747649837346b67bed9d356789c3072bb27dbce49e514d"
+      },
+      "LibreCaslonText": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/librecaslontext/LibreCaslonText%5Bwght%5D.ttf",
+        "originalBytes": 126876,
+        "originalSha256": "c11809dbfd5445886293d89b32bfc2584075c80e77750cf1c284113e36b8b3f4",
+        "staticAxes": {
+          "wght": 400
+        },
+        "bytes": 79120,
+        "sha256": "e182f76cb7fab0a5b513ced165fdad424a290d1fb945032584f038c8f3daa572",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/librecaslontext/OFL.txt",
+        "licenseSha256": "a294245c822c5aa9fd9a9f3189418e99415428be5fecadf797793d5d8f6a3ad3"
+      }
+    }
+  },
+  "preprocessSha256": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098",
+  "initialStateSha256": "3b15ae52d891dcad13f832924304d237f746280dace8c93d82ad7ac39b8c6927",
+  "preflightSha256": "e7f7f9d586f081ae53bb0dc99a08f782b47d116281b0a8f697c3963c5e728b7e",
+  "japanesePrimarySha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba",
+  "trainableParameters": 5510899,
+  "officialConfig": {
+    "transformers_version": "5.19.0",
+    "architectures": null,
+    "output_hidden_states": false,
+    "return_dict": true,
+    "dtype": "float32",
+    "chunk_size_feed_forward": 0,
+    "is_encoder_decoder": false,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "problem_type": null,
+    "hidden_act": "silu",
+    "backbone_config": {
+      "architectures": null,
+      "output_hidden_states": false,
+      "return_dict": true,
+      "dtype": "float32",
+      "chunk_size_feed_forward": 0,
+      "is_encoder_decoder": false,
+      "id2label": {
+        "0": "LABEL_0",
+        "1": "LABEL_1"
+      },
+      "label2id": {
+        "LABEL_0": 0,
+        "LABEL_1": 1
+      },
+      "problem_type": null,
+      "scale": 0.95,
+      "block_configs": [
+        [
+          [
+            3,
+            16,
+            32,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            3,
+            32,
+            64,
+            1,
+            false
+          ],
+          [
+            3,
+            64,
+            64,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            3,
+            64,
+            128,
+            [
+              2,
+              1
+            ],
+            false
+          ],
+          [
+            3,
+            128,
+            128,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            3,
+            128,
+            256,
+            [
+              1,
+              2
+            ],
+            false
+          ],
+          [
+            5,
+            256,
+            256,
+            1,
+            false
+          ],
+          [
+            5,
+            256,
+            256,
+            1,
+            false
+          ],
+          [
+            5,
+            256,
+            256,
+            1,
+            false
+          ],
+          [
+            5,
+            256,
+            256,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            5,
+            256,
+            512,
+            [
+              2,
+              1
+            ],
+            true
+          ],
+          [
+            5,
+            512,
+            512,
+            1,
+            true
+          ],
+          [
+            5,
+            512,
+            512,
+            [
+              2,
+              1
+            ],
+            false
+          ],
+          [
+            5,
+            512,
+            512,
+            1,
+            false
+          ]
+        ]
+      ],
+      "stem_channels": 16,
+      "stem_stride": 2,
+      "reduction": 4,
+      "divisor": 16,
+      "hidden_act": "hardswish",
+      "conv_symmetric_num": 4,
+      "depths": [
+        1,
+        2,
+        2,
+        5,
+        4
+      ],
+      "stage_names": [
+        "stem",
+        "stage1",
+        "stage2",
+        "stage3",
+        "stage4",
+        "stage5"
+      ],
+      "_name_or_path": "",
+      "model_type": "pp_lcnet_v3",
+      "output_attentions": false,
+      "out_features": [
+        "stage2",
+        "stage3",
+        "stage4",
+        "stage5"
+      ],
+      "out_indices": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "hidden_size": 120,
+    "mlp_ratio": 2.0,
+    "depth": 2,
+    "head_out_channels": 438,
+    "conv_kernel_size": [
+      1,
+      3
+    ],
+    "qkv_bias": true,
+    "num_attention_heads": 8,
+    "attention_dropout": 0.0,
+    "layer_norm_eps": 1e-06,
+    "_name_or_path": "/workspace/scratch/ascii-english-v5-transfer-20261014-v1/assets",
+    "model_type": "pp_ocrv5_mobile_rec",
+    "output_attentions": false
+  },
+  "selfConsistencySourceFreezeSha256": "10b813fe9e0b33bc2d07b7d7e4a952adcac24ad6b0c7b1e743fa86b6cafb7f02",
+  "finalOpened": false
+}

@@ -1,0 +1,413 @@
+{
+  "scope": "PDF-free isolated-code recognition. Fresh strings in four previously observed fonts. Paired margins are separate conditions, never independent sample counts.",
+  "baselineSourceCommit": "e9518eeef1b6bee02f7899916d3ee70c55251eff",
+  "currentRawSHA256": "73bb5484d43dd62d6b77b3a30f4f9f571ab27c19387b85b0155a2e6b31febb62",
+  "baselineRawSHA256": "a13e5f4385cc3bb4dde3c868b0eea7c6b0c1757d1447252a7d7109af6329a5d1",
+  "fieldsPerMargin": 384,
+  "blankImages": 4,
+  "scores": [
+    {
+      "font": "KaiseiTokumin-Regular.ttf",
+      "group": "blank",
+      "margin": 0,
+      "count": 1,
+      "before": {
+        "exact": 1,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 1,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "gains": 0,
+      "regressions": 0
+    },
+    {
+      "font": "KaiseiTokumin-Regular.ttf",
+      "group": "confusable",
+      "margin": 2,
+      "count": 48,
+      "before": {
+        "exact": 21,
+        "edits": 40,
+        "wrongAbovePoint8": 16,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 25,
+        "edits": 36,
+        "wrongAbovePoint8": 13,
+        "specialistCalls": 48
+      },
+      "gains": 4,
+      "regressions": 0
+    },
+    {
+      "font": "KaiseiTokumin-Regular.ttf",
+      "group": "confusable",
+      "margin": 6,
+      "count": 48,
+      "before": {
+        "exact": 20,
+        "edits": 45,
+        "wrongAbovePoint8": 17,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 20,
+        "edits": 45,
+        "wrongAbovePoint8": 17,
+        "specialistCalls": 48
+      },
+      "gains": 0,
+      "regressions": 0
+    },
+    {
+      "font": "KaiseiTokumin-Regular.ttf",
+      "group": "ordinary",
+      "margin": 2,
+      "count": 48,
+      "before": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 48
+      },
+      "gains": 0,
+      "regressions": 0
+    },
+    {
+      "font": "KaiseiTokumin-Regular.ttf",
+      "group": "ordinary",
+      "margin": 6,
+      "count": 48,
+      "before": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 48
+      },
+      "gains": 0,
+      "regressions": 0
+    },
+    {
+      "font": "KleeOne-Regular.ttf",
+      "group": "blank",
+      "margin": 0,
+      "count": 1,
+      "before": {
+        "exact": 1,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 1,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "gains": 0,
+      "regressions": 0
+    },
+    {
+      "font": "KleeOne-Regular.ttf",
+      "group": "confusable",
+      "margin": 2,
+      "count": 48,
+      "before": {
+        "exact": 7,
+        "edits": 67,
+        "wrongAbovePoint8": 14,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 13,
+        "edits": 57,
+        "wrongAbovePoint8": 15,
+        "specialistCalls": 47
+      },
+      "gains": 6,
+      "regressions": 0
+    },
+    {
+      "font": "KleeOne-Regular.ttf",
+      "group": "confusable",
+      "margin": 6,
+      "count": 48,
+      "before": {
+        "exact": 8,
+        "edits": 65,
+        "wrongAbovePoint8": 16,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 12,
+        "edits": 60,
+        "wrongAbovePoint8": 18,
+        "specialistCalls": 48
+      },
+      "gains": 4,
+      "regressions": 0
+    },
+    {
+      "font": "KleeOne-Regular.ttf",
+      "group": "ordinary",
+      "margin": 2,
+      "count": 48,
+      "before": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 47,
+        "edits": 1,
+        "wrongAbovePoint8": 1,
+        "specialistCalls": 48
+      },
+      "gains": 0,
+      "regressions": 1
+    },
+    {
+      "font": "KleeOne-Regular.ttf",
+      "group": "ordinary",
+      "margin": 6,
+      "count": 48,
+      "before": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 48
+      },
+      "gains": 0,
+      "regressions": 0
+    },
+    {
+      "font": "SawarabiGothic-Regular.ttf",
+      "group": "blank",
+      "margin": 0,
+      "count": 1,
+      "before": {
+        "exact": 1,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 1,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "gains": 0,
+      "regressions": 0
+    },
+    {
+      "font": "SawarabiGothic-Regular.ttf",
+      "group": "confusable",
+      "margin": 2,
+      "count": 48,
+      "before": {
+        "exact": 12,
+        "edits": 48,
+        "wrongAbovePoint8": 20,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 15,
+        "edits": 43,
+        "wrongAbovePoint8": 20,
+        "specialistCalls": 48
+      },
+      "gains": 3,
+      "regressions": 0
+    },
+    {
+      "font": "SawarabiGothic-Regular.ttf",
+      "group": "confusable",
+      "margin": 6,
+      "count": 48,
+      "before": {
+        "exact": 11,
+        "edits": 50,
+        "wrongAbovePoint8": 24,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 15,
+        "edits": 44,
+        "wrongAbovePoint8": 23,
+        "specialistCalls": 48
+      },
+      "gains": 4,
+      "regressions": 0
+    },
+    {
+      "font": "SawarabiGothic-Regular.ttf",
+      "group": "ordinary",
+      "margin": 2,
+      "count": 48,
+      "before": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 48
+      },
+      "gains": 0,
+      "regressions": 0
+    },
+    {
+      "font": "SawarabiGothic-Regular.ttf",
+      "group": "ordinary",
+      "margin": 6,
+      "count": 48,
+      "before": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 48
+      },
+      "gains": 0,
+      "regressions": 0
+    },
+    {
+      "font": "SawarabiMincho-Regular.ttf",
+      "group": "blank",
+      "margin": 0,
+      "count": 1,
+      "before": {
+        "exact": 1,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 1,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "gains": 0,
+      "regressions": 0
+    },
+    {
+      "font": "SawarabiMincho-Regular.ttf",
+      "group": "confusable",
+      "margin": 2,
+      "count": 48,
+      "before": {
+        "exact": 28,
+        "edits": 29,
+        "wrongAbovePoint8": 16,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 28,
+        "edits": 30,
+        "wrongAbovePoint8": 17,
+        "specialistCalls": 48
+      },
+      "gains": 1,
+      "regressions": 1
+    },
+    {
+      "font": "SawarabiMincho-Regular.ttf",
+      "group": "confusable",
+      "margin": 6,
+      "count": 48,
+      "before": {
+        "exact": 28,
+        "edits": 32,
+        "wrongAbovePoint8": 16,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 28,
+        "edits": 32,
+        "wrongAbovePoint8": 16,
+        "specialistCalls": 48
+      },
+      "gains": 0,
+      "regressions": 0
+    },
+    {
+      "font": "SawarabiMincho-Regular.ttf",
+      "group": "ordinary",
+      "margin": 2,
+      "count": 48,
+      "before": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 48
+      },
+      "gains": 0,
+      "regressions": 0
+    },
+    {
+      "font": "SawarabiMincho-Regular.ttf",
+      "group": "ordinary",
+      "margin": 6,
+      "count": 48,
+      "before": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 0
+      },
+      "after": {
+        "exact": 48,
+        "edits": 0,
+        "wrongAbovePoint8": 0,
+        "specialistCalls": 48
+      },
+      "gains": 0,
+      "regressions": 0
+    }
+  ],
+  "humanCorrectionTimeMeasured": false,
+  "productionQualification": false,
+  "modelWeightsChanged": false
+}

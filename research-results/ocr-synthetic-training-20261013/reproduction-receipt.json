@@ -1,0 +1,51 @@
+{
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "python": "3.12.14",
+  "dependencies": {
+    "torch": "2.7.1+cpu",
+    "torchvision": "0.22.1+cpu",
+    "transformers": "5.19.0",
+    "safetensors": "0.8.0",
+    "onnx": "1.20.1",
+    "onnxruntime": "1.23.2",
+    "Pillow": "12.3.0",
+    "fonttools": "4.61.1",
+    "PyYAML": "6.0.3",
+    "numpy": "2.3.5",
+    "coremltools": "8.3.0"
+  },
+  "sources": {
+    "tools/ocr-synthetic-training/README.md": "0ea104daa63c59ba177844e720d3b411be82a96b4c870602207b1cc088d1d3fa",
+    "tools/ocr-synthetic-training/check_checkpoint.py": "2dfc758f40e3c8639b93a36752a9343712b985648288eb7cde50a71b3f325a63",
+    "tools/ocr-synthetic-training/convert_coreml.py": "7cf5c779ab4d853829013a573096219501d4f16a01ffde300184fc1ab40f3978",
+    "tools/ocr-synthetic-training/corpus.py": "81e173c9aa122f3e9789948cdd05f65dbcb8438720655d719f363031289089fc",
+    "tools/ocr-synthetic-training/final_evaluate.py": "1e77d7593528c4affefa5830d0da05834f718cfcccb73c7cc106f93117cd1f68",
+    "tools/ocr-synthetic-training/image_tensor.py": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098",
+    "tools/ocr-synthetic-training/ood-protocol.json": "2509a86e4e4dc8ee17c9cee4b32f28b7c5872d2049f83eed17fcdd58de62f60b",
+    "tools/ocr-synthetic-training/ood_evaluate.py": "51803f3c9be74f1bea9eccec65356c291b15ae9308390d38a4eb1b238791997e",
+    "tools/ocr-synthetic-training/package.py": "28bf491002ffb368486c8842adad66ac67489c97cbf6578f904ed0b616beb255",
+    "tools/ocr-synthetic-training/profile_onnx.py": "9611576b5ebfc8a07f5e2ed9b44647e7238e7ad1b938e5a0b1837bf01885b968",
+    "tools/ocr-synthetic-training/protocol.json": "b30cb7f87239f99de5e73fe67e83226e2060cc03cb395c970c37ecf886786b6b",
+    "tools/ocr-synthetic-training/train.py": "6801fe35c985ddf775e8cb0143aa966fa6ce988727ee562d55354ffd64e58d0c",
+    "tools/ocr-synthetic-training/verify_export.py": "92f7dc4ef8bc41df43fe68af7ea216e9e753ee0554ff8fa1072517166fd450d0"
+  },
+  "pixelManifests": {
+    "train": {
+      "bytes": 521703,
+      "sha256": "445f1213b7af4d6ad3b2c90952c825181a109c36c04a1df2c287a65fbb728616"
+    },
+    "development": {
+      "bytes": 77954,
+      "sha256": "8c0194f9ba4e3b4a8907583c80d6d4e5a6cc55ac282d7e9d3d2fc675af23bb39"
+    },
+    "final": {
+      "bytes": 143557,
+      "sha256": "e21daa803652624202d93b2e72e76e356d170b1a959a5fe2469993b562e80cdf"
+    },
+    "ood": {
+      "bytes": 16662,
+      "sha256": "b647fa0272cc5b1e262272b18c05f37cc9aa21c94c944eb83a7067d5279889f3"
+    }
+  },
+  "scope": "research-only; no production/iOS edits, no checkpoint reselection after final opening; assets outside Git; no worker commit/push"
+}

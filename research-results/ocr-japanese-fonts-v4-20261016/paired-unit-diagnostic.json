@@ -1,0 +1,191 @@
+{
+  "active-baseline": {
+    "split": "development",
+    "sameContextBalancedUnits": {
+      "Il1": {
+        "units": 20,
+        "allMembersCorrect": 1,
+        "allMembersCorrectAndAccepted": 0,
+        "unitsWithPhysicalInputAliases": 6,
+        "unitsWithDistinctInputsButPredictionCollision": 10
+      },
+      "O0": {
+        "units": 34,
+        "allMembersCorrect": 14,
+        "allMembersCorrectAndAccepted": 3,
+        "unitsWithPhysicalInputAliases": 0,
+        "unitsWithDistinctInputsButPredictionCollision": 18
+      }
+    },
+    "allMembersRetained": true,
+    "noSelectionOrModelExecution": true
+  },
+  "epoch-1": {
+    "split": "development",
+    "sameContextBalancedUnits": {
+      "Il1": {
+        "units": 20,
+        "allMembersCorrect": 2,
+        "allMembersCorrectAndAccepted": 0,
+        "unitsWithPhysicalInputAliases": 6,
+        "unitsWithDistinctInputsButPredictionCollision": 11
+      },
+      "O0": {
+        "units": 34,
+        "allMembersCorrect": 20,
+        "allMembersCorrectAndAccepted": 7,
+        "unitsWithPhysicalInputAliases": 0,
+        "unitsWithDistinctInputsButPredictionCollision": 12
+      }
+    },
+    "allMembersRetained": true,
+    "noSelectionOrModelExecution": true
+  },
+  "epoch-2": {
+    "split": "development",
+    "sameContextBalancedUnits": {
+      "Il1": {
+        "units": 20,
+        "allMembersCorrect": 2,
+        "allMembersCorrectAndAccepted": 0,
+        "unitsWithPhysicalInputAliases": 6,
+        "unitsWithDistinctInputsButPredictionCollision": 10
+      },
+      "O0": {
+        "units": 34,
+        "allMembersCorrect": 19,
+        "allMembersCorrectAndAccepted": 7,
+        "unitsWithPhysicalInputAliases": 0,
+        "unitsWithDistinctInputsButPredictionCollision": 14
+      }
+    },
+    "allMembersRetained": true,
+    "noSelectionOrModelExecution": true
+  },
+  "epoch-3": {
+    "split": "development",
+    "sameContextBalancedUnits": {
+      "Il1": {
+        "units": 20,
+        "allMembersCorrect": 1,
+        "allMembersCorrectAndAccepted": 1,
+        "unitsWithPhysicalInputAliases": 6,
+        "unitsWithDistinctInputsButPredictionCollision": 12
+      },
+      "O0": {
+        "units": 34,
+        "allMembersCorrect": 18,
+        "allMembersCorrectAndAccepted": 6,
+        "unitsWithPhysicalInputAliases": 0,
+        "unitsWithDistinctInputsButPredictionCollision": 14
+      }
+    },
+    "allMembersRetained": true,
+    "noSelectionOrModelExecution": true
+  },
+  "epoch-4": {
+    "split": "development",
+    "sameContextBalancedUnits": {
+      "Il1": {
+        "units": 20,
+        "allMembersCorrect": 2,
+        "allMembersCorrectAndAccepted": 1,
+        "unitsWithPhysicalInputAliases": 6,
+        "unitsWithDistinctInputsButPredictionCollision": 10
+      },
+      "O0": {
+        "units": 34,
+        "allMembersCorrect": 16,
+        "allMembersCorrectAndAccepted": 5,
+        "unitsWithPhysicalInputAliases": 0,
+        "unitsWithDistinctInputsButPredictionCollision": 15
+      }
+    },
+    "allMembersRetained": true,
+    "noSelectionOrModelExecution": true
+  },
+  "trainfit-active": {
+    "split": "train",
+    "sameContextBalancedUnits": {
+      "Il1": {
+        "units": 80,
+        "allMembersCorrect": 33,
+        "allMembersCorrectAndAccepted": 19,
+        "unitsWithPhysicalInputAliases": 0,
+        "unitsWithDistinctInputsButPredictionCollision": 38
+      },
+      "O0": {
+        "units": 120,
+        "allMembersCorrect": 72,
+        "allMembersCorrectAndAccepted": 47,
+        "unitsWithPhysicalInputAliases": 0,
+        "unitsWithDistinctInputsButPredictionCollision": 35
+      }
+    },
+    "allMembersRetained": true,
+    "noSelectionOrModelExecution": true
+  },
+  "trainfit-candidate": {
+    "split": "train",
+    "sameContextBalancedUnits": {
+      "Il1": {
+        "units": 80,
+        "allMembersCorrect": 40,
+        "allMembersCorrectAndAccepted": 27,
+        "unitsWithPhysicalInputAliases": 0,
+        "unitsWithDistinctInputsButPredictionCollision": 34
+      },
+      "O0": {
+        "units": 120,
+        "allMembersCorrect": 87,
+        "allMembersCorrectAndAccepted": 60,
+        "unitsWithPhysicalInputAliases": 0,
+        "unitsWithDistinctInputsButPredictionCollision": 28
+      }
+    },
+    "allMembersRetained": true,
+    "noSelectionOrModelExecution": true
+  },
+  "fresh-active": {
+    "split": "fresh",
+    "sameContextBalancedUnits": {
+      "Il1": {
+        "units": 20,
+        "allMembersCorrect": 7,
+        "allMembersCorrectAndAccepted": 4,
+        "unitsWithPhysicalInputAliases": 1,
+        "unitsWithDistinctInputsButPredictionCollision": 9
+      },
+      "O0": {
+        "units": 34,
+        "allMembersCorrect": 11,
+        "allMembersCorrectAndAccepted": 4,
+        "unitsWithPhysicalInputAliases": 0,
+        "unitsWithDistinctInputsButPredictionCollision": 18
+      }
+    },
+    "allMembersRetained": true,
+    "noSelectionOrModelExecution": true
+  },
+  "fresh-candidate": {
+    "split": "fresh",
+    "sameContextBalancedUnits": {
+      "Il1": {
+        "units": 20,
+        "allMembersCorrect": 6,
+        "allMembersCorrectAndAccepted": 4,
+        "unitsWithPhysicalInputAliases": 1,
+        "unitsWithDistinctInputsButPredictionCollision": 10
+      },
+      "O0": {
+        "units": 34,
+        "allMembersCorrect": 8,
+        "allMembersCorrectAndAccepted": 4,
+        "unitsWithPhysicalInputAliases": 0,
+        "unitsWithDistinctInputsButPredictionCollision": 22
+      }
+    },
+    "allMembersRetained": true,
+    "noSelectionOrModelExecution": true
+  }
+}

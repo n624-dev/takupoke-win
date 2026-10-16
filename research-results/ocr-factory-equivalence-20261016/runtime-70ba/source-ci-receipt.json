@@ -1,0 +1,65 @@
+{
+  "run": 38839354676,
+  "sourceCommit": "70ba342a9e6ecba7f5aff2febccc593eaea2e320",
+  "allSevenJobsSucceeded": true,
+  "node20WarningCount": 0,
+  "checks": [
+    {
+      "jobId": 116775614349,
+      "name": "Public files and commit identity",
+      "node20Warnings": 0,
+      "tests": [],
+      "nativeWindowsUiChecks": []
+    },
+    {
+      "jobId": 116775702198,
+      "name": "Original iOS reference comparison",
+      "node20Warnings": 0,
+      "tests": [],
+      "nativeWindowsUiChecks": []
+    },
+    {
+      "jobId": 116775702235,
+      "name": "Core tests (Windows)",
+      "node20Warnings": 0,
+      "tests": [
+        301,
+        1145
+      ],
+      "nativeWindowsUiChecks": []
+    },
+    {
+      "jobId": 116775702251,
+      "name": "WinUI x64 Release build and launch",
+      "node20Warnings": 0,
+      "tests": [],
+      "nativeWindowsUiChecks": [
+        1026
+      ]
+    },
+    {
+      "jobId": 116775702275,
+      "name": "WinUI x64 Debug build",
+      "node20Warnings": 0,
+      "tests": [],
+      "nativeWindowsUiChecks": []
+    },
+    {
+      "jobId": 116775702280,
+      "name": "WinUI ARM64 Release build",
+      "node20Warnings": 0,
+      "tests": [],
+      "nativeWindowsUiChecks": []
+    },
+    {
+      "jobId": 116775702305,
+      "name": "Core tests (Linux)",
+      "node20Warnings": 0,
+      "tests": [
+        301,
+        1143
+      ],
+      "nativeWindowsUiChecks": []
+    }
+  ]
+}

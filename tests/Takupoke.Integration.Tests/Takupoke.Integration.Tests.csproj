@@ -5,10 +5,24 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../Takupoke.Win.UITests/PreferenceSnapshot.cs" Link="PreferenceSnapshot.cs" />
+    <Compile Include="../../src/Takupoke.Win/ViewModels/RecoveryPreviewDisplay.cs" Link="RecoveryPreviewDisplay.cs" />
+    <Compile Include="../../src/Takupoke.Win/ViewModels/RecoveryCorrectionLayout.cs" Link="RecoveryCorrectionLayout.cs" />
+    <Compile Include="../../src/Takupoke.Win/ViewModels/RecoveryManualInputState.cs" Link="RecoveryManualInputState.cs" />
+    <Compile Include="../../src/Takupoke.Win/ViewModels/AppViewModel.cs" Link="AppViewModel.cs" />
+    <Compile Include="../../src/Takupoke.Win/Platform/OfflineTestNetwork.cs" Link="OfflineTestNetwork.cs" />
+    <None Include="../Takupoke.Core.Tests/fixtures/recovery-exam.json" Link="fixtures/recovery-exam.json" CopyToOutputDirectory="PreserveNewest" />
     <Compile Include="../../src/Takupoke.Win/Platform/WindowsFileIdentity.cs" Link="Platform/WindowsFileIdentity.cs" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
+    <Compile Remove="ViewModelFileIdentity.cs" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
     <Compile Remove="WindowsSourceRefreshTests.cs" Condition="!$([MSBuild]::IsOSPlatform('Windows'))" />
     <Compile Include="../shared/FictionalChangeWorkbook.cs" Link="FictionalChangeWorkbook.cs" />
     <None Include="../Takupoke.Core.Tests/fixtures/ios-parity.json" Link="fixtures/ios-parity.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="fixtures/recovery-historical-v5-vector.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="fixtures/recovery-historical-v6-result.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="fixtures/recovery-fictional-v3-header-rows.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="fixtures/ocr-repeated-header-order.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="fixtures/ascii-runtime-contract.onnx" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="fixtures/ascii-manual-contract.onnx" CopyToOutputDirectory="PreserveNewest" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
     <PackageReference Include="xunit" Version="2.9.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="4.0.0" PrivateAssets="all" />

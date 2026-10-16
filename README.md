@@ -7,17 +7,30 @@
 
 現在は開発中です。ホーム・一覧・時間割・設定をWinUIで実装し、資料の選択・解析・保存・更新、授業や変更の詳細、リンクの検索・個人設定につないでいます。正式版はまだ公開していません。ビルド済みの開発確認版はGitHub Releasesから配布します。
 
+[現在のOCR構成・精度・訂正方法](documentation/local-ai-status-20261014.md)と、[過去の比較・不採用結果](documentation/ocr-improvement-log.md)を記録しています。ソースの既定構成は日本語PP-OCRv6 medium、英数字PP-OCRv5の補助2種、日本語PP-OCRv3の条件付き補助で約130 MiBです。[新しい全文書比較と使用方法](documentation/ocr-literal-retry-accuracy-20261016.md)。[開発確認版10447](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10447)から利用できます。プレビューで高信頼度の誤読も複数選択し、原画像を見ながら訂正できます。
+
 選択済み資料は登録した同じパスから再取得します。同じ場所でファイルが作り直されても、安定した最新版を読み取ります。読み取り中の書換えや取得・解析の失敗時には前回正常結果を保持します。別の場所へ移動した資料は再選択してください。
 
 初回正式版は、iOS版の現行機能への対応、同じ入力に対する結果の比較、失敗時の動作確認、Windows実機での確認が揃ってから公開します。
 
+現在のソースからビルドする版は **Windows 11 24H2（build 26100）以降**が必要です。Setup・ZIPともに適用します。旧開発確認版とは要件が異なります。
+
+PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCRとモデル管理を接続しています。追加生成AIモデルは精度評価が合格したものだけ配信します。現在のFoundry候補は未合格のため配信停止中です。[方針・実装状況・検証の限界](PDF_RECOVERY.md)を参照してください。未実装の共通方針は[方針専用文書](documentation/pdf-recovery-pending-policy.md)で管理します。
+
+[「AI・OCRを使用する」設定](documentation/ai-settings.md)は初期OFFで、OFF時は従来の厳格な解析のみを使用します。ON時も厳格な解析を優先し、失敗した資料だけ復旧します。時間割変更XLSXの曜日不一致では、[日付からの曜日補正](documentation/weekday-correction.md)を明示承認でき、内容が更新されるまで同じ原本に適用します。
+
+[iOS解析変更への追従内容](documentation/ios-followup-20261016.md)には、通常解析と復旧検証の分離、P/R診断、返却表・1年生所属、XLSX確認保持、モデル取得の実進捗を記録しています。
+
+10445までの比較では単独コード259→292/384、日本語付き287→292/384でした。追加学習v2の不採用結果と当時の全文書結果は[過去の比較記録](documentation/ocr-accuracy-20261016.md)へ保存しています。現在の追加学習V3を含む構成と全文書の比較は[10446の測定結果](documentation/ocr-source-order-accuracy-20261016.md)を参照してください。
+
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版0.1.0-dev.10438のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10438)からSetup.exeを取得してください。GitHubでは通常Releaseとして公開し、Latestに指定しています。全機能の確認を終えた正式版ではありません。
+[開発確認版0.1.0-dev.10446のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10446)からSetup.exeを取得してください。通常Release・Latestとして公開しています。正式版ではありません。iOS解析への追従、mainの行除外・一括除外を含み、罫線付近の切り出し・再認識・本文の文字順序を修正し、英数字用の追加学習モデルを組み込みました。[今回の変更・測定結果](documentation/ocr-source-order-accuracy-20261016.md)・[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38839386958)全8ジョブとx64の6導入状態が成功し、公開6ファイルと両ZIPの全同梱ファイルを照合済みです。[配布記録](research-results/ocr-source-order-native-20261016/installer-release-receipt.json)。
 
-1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10438-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10438-arm64-Setup.exe`。
+1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10446-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10446-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
 3. スタートメニューの「たくポケ」から起動します。
+4. OCRを利用する場合は設定の「AI・OCRを使用する」をONにし、モデル管理で約130 MiBの日本語・英数字モデルを取得／更新します。復旧プレビューを原PDFと照合し、必要な欄を訂正してから明示採用してください。
 
 .NET・Windows App SDK・VCランタイムを同梱しているため、Visual StudioやSDKのインストール、ソースのビルドは不要です。アプリ内ブラウザ用のWebView2 Runtimeが未導入の場合は、セットアップがMicrosoftの公式インストーラーを実行します（インターネット接続が必要です）。
 
@@ -31,6 +44,7 @@ ZIPも配布します。全ファイルを展開して`takupoke.exe`を起動し
 
 C# / .NET 10 / WinUI 3によるWindowsネイティブアプリとして開発します。
 時間割の構成規則を画面から分離し、ホームと時間割で共用します。
+ホームの科目名も時間割カードと同じ中黒の表示を使い、教員・教室は通常・変更の表示用の括弧除去と試験・返却の元の記載を使い分けます。ホームの幅や折り返しは維持します。
 
 ```text
 src/
@@ -88,9 +102,13 @@ GitHub Actionsはpush・pull request・手動実行に対応します。現在�
 - x64 Release版をUI Automationで操作し、階層化した設定・時間割・クラス制約・設定保存・再起動後の保持・キーボードフォーカスを確認。架空のWindows URI起動から認証コールバック受信・トークン署名検証・3種類の保存、失敗・キャンセル後の操作復帰も確認します。学校認証は使用しません。
 - 内部文書・資料などの追跡禁止ファイルと、GitHub noreplyのコミット作者情報。
 
+配布元コミットに版番号と同じ`v0.1.0-dev.N`タグを作成してpushしてから、導入パッケージ用Actionsを実行します。開始時にタグとビルド元コミットの一致を検査します。 CLIを使わずに開始する場合は、配布元コミットから`release/development/0.1.0-dev.N`ブランチを作成します。この専用ブランチでは全テスト成功後にタグを新規作成し、同じ版番号の既存タグを移動せず、ビルド元との一致を検査します。どちらの方法も同じインストール試験と公開処理を使います。検証済みインストーラーは公開処理の再試行に備えてActionsへ1日保持します。
+
 導入パッケージ用の手動Actionsでは、全テスト成功後にx64・ARM64の自己完結型アプリとSetup.exeを作成します。x64は作ったSetup.exeを実行し、新規導入・別フォルダーへの移動・同じフォルダーへの再インストールに加え、実際に配布したdev.5から同じ／別フォルダーへの更新、無関係な自動起動の保護を確認します。各状態の画面操作、設定・無関係ファイルの保持、アンインストール、ネイティブショートカットの起動先とアイコンを確認してから開発確認版として配布します。
 
-GitHub Actionsの保存用キャッシュやartifactは作成しません。配布用の完成ファイルだけをGitHub Releasesへ置きます。NuGet・CLIの作業用キャッシュはジョブ専用の一時領域へ置き、成功・失敗時とも終了処理で削除します。runner終了後も残るキャッシュを利用者が手動削除する運用にはしません。
+GitHub Actionsの保存用キャッシュは作成しません。架空資料の検証記録と検証済み配布物は、workflowで指定した期限だけartifactとして保持します。配布用の完成ファイルはGitHub Releasesへ置きます。NuGet・CLIの作業用キャッシュはジョブ専用の一時領域へ置き、成功・失敗時とも終了処理で削除します。runner終了後も残るキャッシュを利用者が手動削除する運用にはしません。
+
+2026-10-15の[開発確認版0.1.0-dev.10439](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10439)は、[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/38670666404)全8ジョブと6つの導入状態の検証を通過しました。各状態でWindows UI788～789項目を確認し、公開6ファイルのハッシュを照合しています。[導入・配布確認の記録](research-results/ocr-production-integration-20261015/installer-release-receipt.json)。全42か所の外部Actions参照をNode.js 24対応の固定SHAにそろえ、配布ジョブでもNode.js 20警告0件を確認しました。
 
 テストは実装に合わせて追加します。CIでの確認と、学校アカウント認証・OneDrive同期・OS通知・ロックや復帰・アクセシビリティ・インストールや更新の実機確認は別に扱います。
 
@@ -104,6 +122,10 @@ GitHub Actionsの保存用キャッシュやartifactは作成しません。配�
 
 
 2026-10-03（日本時間）の追加修正は、コミット`4425bd1`の[push CI](https://github.com/n624-dev/takupoke-win/actions/runs/37081382640)全7ジョブと[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37081384250)全8ジョブが成功し、[開発確認版0.1.0-dev.7](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.7)として公開しました。学校行事の弱いETagによる再確認失敗を修正し、初回取得と繰り返しの304応答を検証しました。解析状態はiOSと同じ短い文言にそろえ、設定などの重複する説明文を整理しました。時間割は表全体の高さを確保して表内の縦スクロールを廃止し、未確定の時刻を非表示にしました。複数時限のカードに背後の罫線が透けないことを明暗テーマと文字拡大の実描画で確認しています。Core183件・Integration123件、Windows UI276項目以上、44画面の撮影、6つの導入状態と公開ファイルのSHA-256照合が成功しました。
+
+2026-10-08（日本時間）のAI・OCR設定とPDF文字再利用の修正は、コミット`73ef13b`の[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37648286055)全8ジョブが成功し、[開発確認版0.1.0-dev.10434](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10434)として公開しました。Core288件・Integration789件、通常のWindows UI642項目、6つの導入・更新・移動状態で642〜643項目の画面操作を確認しました。設定OFF時のStrict優先と復旧停止、設定切替後の未採用結果の無効化、完全に抽出済みのPDF文字・座標の再利用を含みます。公開6ファイルのうちSHA-256一覧が対象とする5ファイルをGitHub配布ハッシュと照合しました。追加AIモデルの品質合格、学校認証、ARM64実機の確認を示すものではありません。
+
+2026-10-08（日本時間）の追加修正は、コミット`37d0aff`の[配布Actions](https://github.com/n624-dev/takupoke-win/actions/runs/37693717181)全8ジョブが成功し、[開発確認版0.1.0-dev.10439](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10439)として公開しました。OCRが認識した空白の保持と、定期再描画で検索欄の入力が失われる問題を修正しました。Core288件・Integration805件、x64／ARM64ビルド、6つの導入・更新・移動状態で639〜640項目のWindows画面操作、実dev.5からの更新と無関係ファイル・設定・自動起動の保持を確認しました。公開6ファイル中、SHA-256一覧の対象5ファイルを実際に取得して照合しました。追加AIモデルは未合格のため配信対象に追加していません。ARM64実機、学校認証、実資料の品質確認は含みません。
 
 ## データの扱い
 

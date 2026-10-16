@@ -1,0 +1,11 @@
+{
+  "sourceCommit": "fad0717ef25f507632cb13ed7da1f0abab0c994a",
+  "processors": [
+    {
+      "Name": "AMD EPYC 7763 64-Core Processor                ",
+      "NumberOfCores": 2,
+      "NumberOfLogicalProcessors": 4
+    }
+  ],
+  "physicalMemoryBytes": 17174360064
+}

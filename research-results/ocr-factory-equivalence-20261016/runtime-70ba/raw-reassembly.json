@@ -1,0 +1,110 @@
+{
+  "acquisition-observations.jsonl": {
+    "bytes": 2464632,
+    "sha256": "e6d73fe40b3c931d3d81b26333b4f3d856c7a2fdde29b7bc37e9245a702e442b",
+    "parts": [
+      {
+        "path": "raw/acquisition-observations/00-fresh-0-positive.jsonl.gz",
+        "id": "fresh-0-positive",
+        "rawBytes": 262342,
+        "rawSHA256": "7597ba43c1b5de1c5bf73f3843cbf202f2ac1e4fa39925661bd4b836c455497c",
+        "compressedBytes": 39535,
+        "compressedSHA256": "591802f8c7842ae4a15b0e5398ccdeea32d5d4d79b22c3d406df7f41609f6f39"
+      },
+      {
+        "path": "raw/acquisition-observations/01-fresh-0-positive.jsonl.gz",
+        "id": "fresh-0-positive",
+        "rawBytes": 258272,
+        "rawSHA256": "ea26763b7e540e89f04ce47ad937ab73aeca298bbd4fa78e8e88ef1f30e1cbc7",
+        "compressedBytes": 39514,
+        "compressedSHA256": "13dd44d2d965559b32cc62091aa4a3d666095ee9ebe7b865facdb904094c5b34"
+      },
+      {
+        "path": "raw/acquisition-observations/02-fresh-0-positive.jsonl.gz",
+        "id": "fresh-0-positive",
+        "rawBytes": 262242,
+        "rawSHA256": "48c9dc5fa49f96629772fe096bd9c5af03276f3e3e7862be4f6086a7e4eb226f",
+        "compressedBytes": 38934,
+        "compressedSHA256": "e68fe77ffcabdcba2126712057fc58383e58ca279ce9eaa399fc4d5f8505f372"
+      },
+      {
+        "path": "raw/acquisition-observations/03-fresh-0-positive.jsonl.gz",
+        "id": "fresh-0-positive",
+        "rawBytes": 256710,
+        "rawSHA256": "6086e2c259bbbea0513d7b49886d6dd180a72f749aece89aac3a5678314a1b4e",
+        "compressedBytes": 39207,
+        "compressedSHA256": "7617bcbc6274bf79edefb4cbe0617ec29fafc47f175edb346a7cc898a1f28756"
+      },
+      {
+        "path": "raw/acquisition-observations/04-fresh-0-positive.jsonl.gz",
+        "id": "fresh-0-positive",
+        "rawBytes": 264563,
+        "rawSHA256": "589609574ebe85adc6f7eed1361470eef2f6af5235f74562d36870038d833e29",
+        "compressedBytes": 39537,
+        "compressedSHA256": "e7bef14c5a9aef01ee7b51b1207a9b9cad4c0fb38cd26aa7f251494e68c4c4af"
+      },
+      {
+        "path": "raw/acquisition-observations/05-fresh-1-positive.jsonl.gz",
+        "id": "fresh-1-positive",
+        "rawBytes": 232252,
+        "rawSHA256": "02a9dd3d657f971fded103a46ff6d349cf98b3aec2af1ce3ca051a584edab2bf",
+        "compressedBytes": 35590,
+        "compressedSHA256": "e1b0c2f89c21ec0abd8d29004d3e062947a14944119ed51b5b002ba241b9395a"
+      },
+      {
+        "path": "raw/acquisition-observations/06-fresh-1-positive.jsonl.gz",
+        "id": "fresh-1-positive",
+        "rawBytes": 233334,
+        "rawSHA256": "6f5884565314cc0a7e20e06dd0485603bd676c39795ab88ed64049e002084f06",
+        "compressedBytes": 35828,
+        "compressedSHA256": "6891443d8f14aa55df32b1fa43f11294e755022a8bcea488e9ff857850632ddd"
+      },
+      {
+        "path": "raw/acquisition-observations/07-fresh-1-positive.jsonl.gz",
+        "id": "fresh-1-positive",
+        "rawBytes": 234880,
+        "rawSHA256": "507611cc5b69b72576adb8acea8e387a8b58c752f8a6876b4064c3e5eaa571f2",
+        "compressedBytes": 35977,
+        "compressedSHA256": "b0a67a1d51cd5643f26b527f10d6e0a28f04df41037cee0e52706fb62b7aa4fd"
+      },
+      {
+        "path": "raw/acquisition-observations/08-fresh-1-positive.jsonl.gz",
+        "id": "fresh-1-positive",
+        "rawBytes": 235313,
+        "rawSHA256": "1f102b3dfd0c8fb94e7e9fbdcb0e7088d20e3d4921b42bee603795d1802f9e19",
+        "compressedBytes": 35746,
+        "compressedSHA256": "c7f0c0bf2bff9392a56c21767da1c882dc9341e9f8e55d6992491a85a5915b98"
+      },
+      {
+        "path": "raw/acquisition-observations/09-fresh-1-positive.jsonl.gz",
+        "id": "fresh-1-positive",
+        "rawBytes": 224724,
+        "rawSHA256": "88a3684a9e5e7f0a31773504aca93f5c9e6f9a072b8795def223e08ada94c1fc",
+        "compressedBytes": 34333,
+        "compressedSHA256": "34c54c5c9a208e51cb68fd4e3053e8b4566c290f74880b6926d9b758d87844ff"
+      }
+    ]
+  },
+  "replay-observations.jsonl": {
+    "bytes": 5463035,
+    "sha256": "daa861b35e593a70cbfd4893ffcc429c9cda69cb6d820c62d298140677c0891b",
+    "parts": [
+      {
+        "path": "raw/replay-observations/00-fresh-0-positive.jsonl.gz",
+        "id": "fresh-0-positive",
+        "rawBytes": 3113230,
+        "rawSHA256": "f1e0c8ddd58e3560678515693ec54f27016acda952a31ab355c3ac4bfb126351",
+        "compressedBytes": 449830,
+        "compressedSHA256": "cbf4a4fd534b4d4dba6c2a231b9fa2d0ec228651a23ec4f209374e97e2cbe066"
+      },
+      {
+        "path": "raw/replay-observations/01-fresh-1-positive.jsonl.gz",
+        "id": "fresh-1-positive",
+        "rawBytes": 2349805,
+        "rawSHA256": "0f92975b2055f05f3b45e9cb1f8602254dcaad6d03ec023e193bb1f418bbd67a",
+        "compressedBytes": 323265,
+        "compressedSHA256": "247d05bcb334f4cb71361a89327924f3689f12e442006caf0da443af570d28ef"
+      }
+    ]
+  }
+}

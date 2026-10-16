@@ -1,0 +1,8 @@
+{
+  "scope": "Post-run savedoutput diagnostic before inference/modelchanges; not frozen training source",
+  "error": "data.py prepends parent namespace; from train resolved earlier general train.py instead of current namespace",
+  "diagnosticSourceSha256": "72c13a048bc581b2ad7ad1af5a53dcfbe9b8432a382678e75db56819545258f1",
+  "logSha256": "6fcf6b3aad65a8c8764ca189b336b86679aa360345c4aa6e630f9622ff1f9792",
+  "resolution": "Import shared edits and greedy directly from their explicit helper namespace; no train import",
+  "trainingRawCheckpointOrSelectionChanged": false
+}

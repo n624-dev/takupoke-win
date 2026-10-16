@@ -1,0 +1,198 @@
+{
+  "scope": "Source/docs/structured research only; pixels/fonts/models/checkpoints/caches/internalMD external and excluded",
+  "sourceFiles": 11,
+  "artifactFiles": 35,
+  "frozenSourcesUnchanged": true,
+  "compileUtf8LfJsonIoAuditPassed": true,
+  "researchSelected": "epoch-6",
+  "qualified": false,
+  "modelActive": false,
+  "finalOpened": false,
+  "publicModelRelease": false,
+  "files": {
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/README.md": {
+      "bytes": 6887,
+      "sha256": "268a0ede23ef897f244488e9843619ecabc998756ce6fc546d7bf00cfa55efa6"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/README.md": {
+      "bytes": 195,
+      "sha256": "4e13a072277808e5de03484ffc30214da4cf9c8292973a0c8e50dac6e24be220"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/closure.json": {
+      "bytes": 2009,
+      "sha256": "b36bf5d64bc58859537f34c1235ab89189ba4ad5a824d25b442645a29035c768"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/development-diagnosis.json": {
+      "bytes": 12434,
+      "sha256": "cef5232f7888e16c8132b97b7ed2a86695ed06a80f1c62f6881c0501f3ef8496"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/edit-diagnosis.json": {
+      "bytes": 9601,
+      "sha256": "8645c43fa948d8ddb74d5c8d6b1e15776f375e325296b3a31551b9e1be778f20"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/epoch-2-summary.json": {
+      "bytes": 2258,
+      "sha256": "f485c84422350c2731203a9a0ad2baec69507e72ae917524c0a24054056cbd51"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/epoch-2-unjudged.jsonl": {
+      "bytes": 673355,
+      "sha256": "2b09ecb17455b63d6469f6d9a5ac0e05b8a8338dd6e33b933010326f6a931dda"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/epoch-4-summary.json": {
+      "bytes": 2257,
+      "sha256": "e78d64c55b895284cd2ad2942633637bf9ff5e1bde35b87c1a7c26ddd6e8e962"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/epoch-4-unjudged.jsonl": {
+      "bytes": 681362,
+      "sha256": "2275fd9dec13dbfec57a9d8512b53326f83464cea4eeabc6e496bd97a066358b"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/epoch-6-summary.json": {
+      "bytes": 2260,
+      "sha256": "5a45454aea9d6a09bbf4c2e102e2be2f9f0450519793774b04ca79a1895cb393"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/epoch-6-unjudged.jsonl": {
+      "bytes": 682114,
+      "sha256": "a7f43f94eb5981643aa8f8baf319e20b47fa0f388394ff267bfe221901b12871"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/exclusion-receipt.json": {
+      "bytes": 115814,
+      "sha256": "73379e53783693e3449ce2aeae62448798bbfabf828538e711e1e3166d0d58a6"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/font-information-audit.json": {
+      "bytes": 32339,
+      "sha256": "bfd5f533c0adc5fd1d39fccd3fe8700cf001fae75b8bedfd49ace6fc56ff518d"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/freeze.json": {
+      "bytes": 12382,
+      "sha256": "c543b5f284c74af553b298358381c1341ca25dc6e8e74ede9018fbcb0d55e04b"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/initial-diagnostic-import-error.json": {
+      "bytes": 574,
+      "sha256": "51077cca6910d74abc8129a5b302de6a53b5a0dc7ea5b4bbcc4c60f491ff606f"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/initialized-adapter-summary.json": {
+      "bytes": 2385,
+      "sha256": "100e20963c017cf8ea5680e97a8465ec90ae42e80770f5373a0609cc3cc87be8"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/initialized-adapter-unjudged.jsonl": {
+      "bytes": 693476,
+      "sha256": "c4d0ac3baff95a49818c57805e9f8ea9a501c42499b71938e11fa0ba27a2230f"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/newdev-initialization-self-consistency.json": {
+      "bytes": 154,
+      "sha256": "8dcae769f87d0fd6e1c08b6693a80d5c53daefe5ce71cb0234317a5d193d4d6a"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/official-baseline-summary.json": {
+      "bytes": 2273,
+      "sha256": "e0c40e905cb5da9106312ae68357d356fa2fa51eb71c9925d47b0924a372b661"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/official-baseline-unjudged.jsonl": {
+      "bytes": 693476,
+      "sha256": "c4d0ac3baff95a49818c57805e9f8ea9a501c42499b71938e11fa0ba27a2230f"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/pretraining-contradiction-audit.json": {
+      "bytes": 105,
+      "sha256": "cfb73954df868c91f5f0a0c9b2c5c74a4a7892776ed474a071c6c3795c23864a"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/pretraining-corpus-audit.json": {
+      "bytes": 2854,
+      "sha256": "a50cd65ec327e976239df66131581df0e53bf327e04572f052e2a82c1a06b5f5"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/selection.json": {
+      "bytes": 16935,
+      "sha256": "e4f5a157053a18fa5edf7023f17b99e468faf6f7ac4d335e8fdf26fc099dd6f8"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/source-proof-epoch-2-unjudged.jsonl": {
+      "bytes": 20650,
+      "sha256": "e767b637b331dec3382e972d8fd030e6f7fa04c1206336369ab304453a2eb3f1"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/source-proof-epoch-4-unjudged.jsonl": {
+      "bytes": 20618,
+      "sha256": "e640e37bcbc852c57853efc4a715febc2f2f48f190766fe3200fba5956fd4604"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/source-proof-epoch-6-unjudged.jsonl": {
+      "bytes": 20466,
+      "sha256": "03f5549629aeffbe47509ce49835220abd806910ecc2af24018ed4f29a9748f8"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/source-proof-freeze.json": {
+      "bytes": 411,
+      "sha256": "0bc5b2d71a3ebb8b0285ad638d6e1c409328e714535695a1509cb4955f479d73"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/source-proof-official-baseline-unjudged.jsonl": {
+      "bytes": 19680,
+      "sha256": "47e0dc9ec817c4eec02e4998b1c7499fa618a5055d4a2e9958d003919053fe23"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/source-proof-summary.json": {
+      "bytes": 1384,
+      "sha256": "a498c4f8c13769756c52558146d97652d3caec0f26caaecfd23043ec45808331"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/adaptation-v1/verification.json": {
+      "bytes": 877,
+      "sha256": "35a3594a9d7183d3995174dafcaba02ed9e36343a7c322ed3d54684302598ed0"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/freeze.json": {
+      "bytes": 2075,
+      "sha256": "5f24c4d773254ad3e052be244bc354fe535695201d0b291e1e221a07a287ceb0"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/method-rationale.json": {
+      "bytes": 1676,
+      "sha256": "c77e2805eda74dfd1886e57b2d1a0f50708e4bbf91b861f78be2abddc5cea2fb"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/partial-numeric-budget.json": {
+      "bytes": 1125,
+      "sha256": "e0de534a4a3e89162a8e9813e55264a4ae58eefd7a32c2d08452de85d242e9d9"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/preflight.json": {
+      "bytes": 1333,
+      "sha256": "dd733b136d8f03970326a8eb0f516df165cefc92bcd5394bedaa7780d12ef1df"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/self-consistency.json": {
+      "bytes": 1572,
+      "sha256": "4c8909a68d67e39cd960482cc8e8d3e61d649a2e3790140f868c54c6e7f63bcb"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-official-transfer/README.md": {
+      "bytes": 1503,
+      "sha256": "97d1cbcaf26e0d16eba5f86c6abd5b14ea90b08036659e87007c57792b2d248a"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-official-transfer/adapter.py": {
+      "bytes": 553,
+      "sha256": "563a8734c3b5830d8bc8f5742c9eca772bd8c889976cb188e97216a1651fa697"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-official-transfer/data.py": {
+      "bytes": 11107,
+      "sha256": "b056d23c9bfc702faaf018b839a9a80e623a6c72ef310e00d1abf5e6af0315d6"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-official-transfer/errors.py": {
+      "bytes": 1432,
+      "sha256": "f67446839736efe4ea333ffcf7d73d344bd1a86ddf58461e69f977d4ee64c10e"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-official-transfer/font_ambiguity.py": {
+      "bytes": 3257,
+      "sha256": "bac09a2727a2e10d34ffa22fdf1f7f83301167eadb02d3e45c4ee8d6233115a8"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-official-transfer/model.py": {
+      "bytes": 515,
+      "sha256": "499be516a853d5396c6bc44aaae20811510d4f79542c19e3071b4636155cc573"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-official-transfer/preflight.py": {
+      "bytes": 4892,
+      "sha256": "95a79572f65d8b4264ef57c7fc8b02f9e9f87f163430a5614908f546a05164fc"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-official-transfer/probes.py": {
+      "bytes": 3909,
+      "sha256": "08f5656ea1b60007477e2917f88134be871dbcaaab985ca1dfa331d2eaa435f3"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-official-transfer/protocol.json": {
+      "bytes": 5801,
+      "sha256": "12609be771f8779a4a70a40a30a97e01e7a89fc3f421fdc9e538b6901e715d18"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-official-transfer/report.py": {
+      "bytes": 5948,
+      "sha256": "739ad6774b29a93e699a27ed9679d54654b55f5bec0f4660dc5e015c6826ea37"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-official-transfer/train.py": {
+      "bytes": 16987,
+      "sha256": "28f54fdd6875717e8c21760b0ec8c365ccaa1583e6ab77ddad8b7b7fdc41cccb"
+    }
+  }
+}

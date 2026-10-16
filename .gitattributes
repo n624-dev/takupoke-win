@@ -9,4 +9,62 @@
 *.md text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf
+tools/recovery-prompt-contracts/prompts/*.txt text eol=lf
 *.ps1 text eol=crlf
+
+tools/independent-wide-timetable/**/*.py text eol=lf
+tools/independent-wide-timetable/*.txt text eol=lf
+tools/independent-vector-raster-probe/**/*.py text eol=lf
+
+# Preserve byte identity of closed native Windows research observations.
+research-results/ocr-physical-framing-windows-20261013/** -text
+research-results/ocr-physical-framing-native-ownership-20261013/** -text
+research-results/ocr-original-image-windows-20261013/** -text
+
+# Preserve original model-loader console table padding in closed stderr.
+research-results/trocr-printed-headers-20261013/worker-stderr.txt -text whitespace=-blank-at-eol
+research-results/trocr-printed-headers-20261013-initial/worker-stderr.txt -text whitespace=-blank-at-eol
+research-results/windows-system-ocr-original-lines-20261014/worker-stdout.txt -text whitespace=cr-at-eol
+research-results/windows-system-ocr-original-lines-20261014/worker-stderr.txt -text
+research-results/windows-system-ocr-original-lines-20261014/as-run-source/run.py -text whitespace=cr-at-eol
+tools/windows-system-ocr/*.py text eol=lf
+research-results/manga-ocr-clean-lines-20261014/worker-stderr.txt -text whitespace=-blank-at-eol
+research-results/paddleocr-vl16-clean-lines-20261014/native-server.txt -text whitespace=-blank-at-eol
+research-results/windows-system-ocr-scaled-lines-20261014/worker-stdout.txt -text whitespace=cr-at-eol
+research-results/windows-system-ocr-scaled-lines-20261014/worker-stderr.txt -text
+research-results/windows-system-ocr-japanese-install-20261014/installation-native-console.txt -text whitespace=-blank-at-eol
+research-results/glm-ocr-fp32-clean-lines-20261014/worker-stderr.txt -text whitespace=-blank-at-eol
+
+# Keep closed production observations and frozen sources byte-identical.
+research-results/ocr-production-integration-20261015/** -text whitespace=cr-at-eol
+
+# Preserve the closed candidate's provenance and original license bytes.
+model-artifacts/ascii-english-v5-confusion-v2/** -text whitespace=-blank-at-eol,cr-at-eol
+research-results/ocr-synthetic-training-20261013/ascii-english-v5-confusion-v2/** -text whitespace=cr-at-eol
+research-results/ocr-manual-tail-20261016/native-windows/** -text whitespace=cr-at-eol
+*.jsonl.gz -text
+research-results/ocr-manual-tail-20261016/*-OFL.txt -text whitespace=-blank-at-eol,cr-at-eol
+
+# Preserve exploratory package, source freezes and original license bytes.
+model-artifacts/ascii-english-v5-japanese-fonts-v3-epoch1-exploratory/** -text whitespace=-blank-at-eol,cr-at-eol
+research-results/ocr-decoding-comparison-20261016/** -text whitespace=-blank-at-eol,cr-at-eol
+
+# Closed native acquisition and unchanged trial evidence, byte-preserved.
+research-results/ocr-paired-native-whole-v3-20261016/** -text whitespace=cr-at-eol
+research-results/ocr-acquisition-repair-20261016/** -text whitespace=cr-at-eol
+research-results/ocr-japanese-fonts-v4-20261016/** -text whitespace=cr-at-eol
+
+# Keep the closed V4 helper byte-identical to its recorded source hash.
+tools/ocr-synthetic-training/ascii-english-v5-japanese-fonts-v4/metrics.py whitespace=-blank-at-eof
+
+# Preserve failed native trial and ordering development bytes.
+research-results/ocr-acquisition-accuracy-20261016/** -text whitespace=cr-at-eol
+research-results/ocr-source-order-development-20261016/** -text whitespace=cr-at-eol
+
+research-results/ocr-source-order-native-20261016/** -text whitespace=cr-at-eol
+research-results/ocr-factory-equivalence-20261016/** -text whitespace=cr-at-eol
+research-results/ocr-literal-retry-first-20261016/** -text whitespace=cr-at-eol
+research-results/ocr-literal-fixture-development-20261016/** -text whitespace=cr-at-eol
+research-results/ocr-literal-retry-v2-20261016/** -text whitespace=cr-at-eol
+research-results/ocr-literal-retry-v3-20261016/** -text whitespace=cr-at-eol
+research-results/ocr-literal-factory-20261016/** -text whitespace=cr-at-eol

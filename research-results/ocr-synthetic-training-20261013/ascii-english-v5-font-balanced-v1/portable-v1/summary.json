@@ -1,0 +1,307 @@
+{
+  "status": "Inactive new-model ONNX export; no final/document/iPhone qualification",
+  "onnxBytes": 22183975,
+  "onnxSha256": "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703",
+  "opset": 17,
+  "domains": [
+    ""
+  ],
+  "numericShapes": [
+    {
+      "batch": 1,
+      "width": 320,
+      "timeSteps": 40,
+      "maximumProbabilityAbsDifference": 3.5762786865234375e-07,
+      "maximumRejectAbsDifference": 5.960464477539063e-08,
+      "rows": [
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 5.960464477539063e-08,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "width": 321,
+      "timeSteps": 40,
+      "maximumProbabilityAbsDifference": 4.76837158203125e-07,
+      "maximumRejectAbsDifference": 1.1920928955078125e-07,
+      "rows": [
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 1.1920928955078125e-07,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "width": 481,
+      "timeSteps": 60,
+      "maximumProbabilityAbsDifference": 2.980232238769531e-07,
+      "maximumRejectAbsDifference": 5.960464477539063e-08,
+      "rows": [
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 5.960464477539063e-08,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "width": 500,
+      "timeSteps": 62,
+      "maximumProbabilityAbsDifference": 3.5762786865234375e-07,
+      "maximumRejectAbsDifference": 1.1920928955078125e-07,
+      "rows": [
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 1.1920928955078125e-07,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "width": 640,
+      "timeSteps": 80,
+      "maximumProbabilityAbsDifference": 3.5762786865234375e-07,
+      "maximumRejectAbsDifference": 0.0,
+      "rows": [
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 0.0,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "width": 960,
+      "timeSteps": 120,
+      "maximumProbabilityAbsDifference": 2.980232238769531e-07,
+      "maximumRejectAbsDifference": 0.0,
+      "rows": [
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 0.0,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        }
+      ]
+    },
+    {
+      "batch": 2,
+      "width": 320,
+      "timeSteps": 40,
+      "maximumProbabilityAbsDifference": 2.980232238769531e-07,
+      "maximumRejectAbsDifference": 0.0,
+      "rows": [
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 0.0,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        },
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 0.0,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        }
+      ]
+    },
+    {
+      "batch": 2,
+      "width": 321,
+      "timeSteps": 40,
+      "maximumProbabilityAbsDifference": 3.5762786865234375e-07,
+      "maximumRejectAbsDifference": 0.0,
+      "rows": [
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 0.0,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        },
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 0.0,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        }
+      ]
+    },
+    {
+      "batch": 2,
+      "width": 481,
+      "timeSteps": 60,
+      "maximumProbabilityAbsDifference": 3.5762786865234375e-07,
+      "maximumRejectAbsDifference": 0.0,
+      "rows": [
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 0.0,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        },
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 0.0,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        }
+      ]
+    },
+    {
+      "batch": 2,
+      "width": 500,
+      "timeSteps": 62,
+      "maximumProbabilityAbsDifference": 3.5762786865234375e-07,
+      "maximumRejectAbsDifference": 0.0,
+      "rows": [
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 0.0,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        },
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 0.0,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        }
+      ]
+    },
+    {
+      "batch": 2,
+      "width": 640,
+      "timeSteps": 80,
+      "maximumProbabilityAbsDifference": 5.364418029785156e-07,
+      "maximumRejectAbsDifference": 0.0,
+      "rows": [
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 0.0,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        },
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 0.0,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        }
+      ]
+    },
+    {
+      "batch": 2,
+      "width": 960,
+      "timeSteps": 120,
+      "maximumProbabilityAbsDifference": 4.76837158203125e-07,
+      "maximumRejectAbsDifference": 1.1920928955078125e-07,
+      "rows": [
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 1.1920928955078125e-07,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        },
+        {
+          "textEqual": true,
+          "ctcIntervalsEqual": true,
+          "paddingSupportedEqual": true,
+          "acceptedEqual": true,
+          "minimumConfidenceAbsDifference": 0,
+          "rejectAbsDifference": 0.0,
+          "maximumAlignedPieceConfidenceAbsDifference": 0
+        }
+      ]
+    }
+  ],
+  "developmentRows": 496,
+  "developmentEqualCounts": {
+    "textEqual": 496,
+    "ctcIntervalsEqual": 496,
+    "paddingSupportedEqual": 496,
+    "acceptedEqual": 496
+  },
+  "allDevelopmentTextIntervalPaddingAcceptEqual": true,
+  "maximumDevelopmentAbsDifferences": {
+    "probability": 1.7762184143066406e-05,
+    "reject": 1.2516975402832031e-06,
+    "confidence": 1.4960765838623047e-05
+  },
+  "priorSelectedTorchRawReproducedExactly": true,
+  "numpyHostVsIntegerFrameCenterMaskAllEqual": true,
+  "checkpointWeightsUnchanged": true,
+  "stageSeconds": 103.47452123799985,
+  "peakRssMiB": 855.1484375,
+  "dictionarySha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368",
+  "torchRawSha256": "324a7b36e14dd5476379f6cd711d2b6b79ed201eca0804c2b170f38c8cbb2db1",
+  "onnxRawSha256": "d098a41754d4b3de5ddbccb184e56d07ef075b9872c99cdcca7ba3203d7d2473",
+  "numericRawSha256": "6587271a5b33933e69e5d01293227f6f95a1f7b1cfdeea81c653f66328d77f92",
+  "onnxOutsideGit": "/workspace/scratch/ascii-english-v5-font-balanced-20261014-v1/portable-v1/model.onnx",
+  "coremlAttempted": false,
+  "iosRepoEdited": false,
+  "activated": false
+}

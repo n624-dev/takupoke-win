@@ -1,0 +1,1253 @@
+{
+  "sourceCommit": "ea2e82d53e5e7b7497ea6d6ad872bf60792c8e54",
+  "runId": 37198104939,
+  "reviewedResultSha256": "90cf143527830ee6aa0922517f846f235861108ed072b0f9bc844553ee892953",
+  "fullLogSha256": "d926bf7ef734c06d75ad64f877883f2940ab2ba80fe8cad866cf34045ae69ab7",
+  "comparisonSourceMappingEvidenceSha256": "060199d04f055afd41cb52bbbb8c32b0f30e5119c6e70c06a936b10d9085acc9",
+  "scope": "Independent saved actual results review; no inference, no code mutation. Only current result and necessary protocol/decoder/source fixture context.",
+  "aggregates": {
+    "nativeStarted": 36,
+    "nativeReturned": 36,
+    "operationalErrors": 0,
+    "singleRoleJsonDecode": 36,
+    "allFirstIdG0": 36,
+    "positiveRoleExact": 6,
+    "positiveRoleAssessed": 18,
+    "positiveDocumentExact": 0,
+    "positiveDocumentAssessed": 6,
+    "negativeSafelyRejected": 6,
+    "negativeAssessed": 6,
+    "mergedCrossRoleOwnershipRejected": 12,
+    "incorrectValidatorAcceptances": 0,
+    "usefulAIDenominator": 0
+  },
+  "semanticDistinction": "strictSelectionsDecoded=0 is whole merged ownership acceptance, not per-role JSON decode failure; every role JSON passed independently. No certificate or formal converter reached in these12 outputs.",
+  "geometryCorrelation": "Three material kinds repeat two source geometries, not six independent layouts. All current controls Rules-solvable.",
+  "historicalComparison": {
+    "positiveExact": 3,
+    "eligible": 6,
+    "priorNativeCalls": 12,
+    "currentNativeCalls": 36,
+    "improvementDemonstrated": false,
+    "causalConfounds": "Different task decomposition/prompt/native call count; this result cannot establish underlying model capability or runtime grammar enforcement"
+  },
+  "runtimeHardGrammarEnforcementProven": false,
+  "qualification": "Not qualified; no useful AI recovery demonstrated; no catalog activation or further model repetitions justified by this result alone",
+  "cases": [
+    {
+      "case": "Timetable-folded-0",
+      "positive": true,
+      "sourceHash": "b0cc74a5748cdde17598602c3fbe8414fe51eb33d3eaa7637744e4383de1771e",
+      "perRoleJsonDecoded": 3,
+      "crossRoleCollisions": {
+        "g0": [
+          "subject",
+          "teacher",
+          "room"
+        ]
+      },
+      "failureStage": "merged-id-ownership-decoder",
+      "productionCertificateReached": false,
+      "previewed": false,
+      "formalConversionReached": false,
+      "observedStrength": "confirmed raw cross-role duplicate and exact adapter source path",
+      "safeNegativeRejected": false,
+      "negativeLimit": "All positives fail at the same ownership gate; safe negatives do not establish discrimination quality"
+    },
+    {
+      "case": "Timetable-missing-colon-0",
+      "positive": false,
+      "sourceHash": "b875dc2988141ed26e9b6fd8864eae2591206d5e260b591271ca8b5726de1d8c",
+      "perRoleJsonDecoded": 3,
+      "crossRoleCollisions": {
+        "g0": [
+          "subject",
+          "teacher",
+          "room"
+        ]
+      },
+      "failureStage": "merged-id-ownership-decoder",
+      "productionCertificateReached": false,
+      "previewed": false,
+      "formalConversionReached": false,
+      "observedStrength": "confirmed raw cross-role duplicate and exact adapter source path",
+      "safeNegativeRejected": true,
+      "negativeLimit": "All positives fail at the same ownership gate; safe negatives do not establish discrimination quality"
+    },
+    {
+      "case": "Timetable-folded-1",
+      "positive": true,
+      "sourceHash": "5ef36a640902a80a96b0298eef4f25bcc2006d553e4207c57a2b4b1ea0a9e2ce",
+      "perRoleJsonDecoded": 3,
+      "crossRoleCollisions": {
+        "g0": [
+          "subject",
+          "teacher",
+          "room"
+        ]
+      },
+      "failureStage": "merged-id-ownership-decoder",
+      "productionCertificateReached": false,
+      "previewed": false,
+      "formalConversionReached": false,
+      "observedStrength": "confirmed raw cross-role duplicate and exact adapter source path",
+      "safeNegativeRejected": false,
+      "negativeLimit": "All positives fail at the same ownership gate; safe negatives do not establish discrimination quality"
+    },
+    {
+      "case": "Timetable-missing-colon-1",
+      "positive": false,
+      "sourceHash": "3f85651aad619948d1237bc95cc6e189ebfeeb0cfdefdc78e23d2b605ee20fa7",
+      "perRoleJsonDecoded": 3,
+      "crossRoleCollisions": {
+        "g0": [
+          "subject",
+          "teacher",
+          "room"
+        ],
+        "g2": [
+          "subject",
+          "teacher"
+        ]
+      },
+      "failureStage": "merged-id-ownership-decoder",
+      "productionCertificateReached": false,
+      "previewed": false,
+      "formalConversionReached": false,
+      "observedStrength": "confirmed raw cross-role duplicate and exact adapter source path",
+      "safeNegativeRejected": true,
+      "negativeLimit": "All positives fail at the same ownership gate; safe negatives do not establish discrimination quality"
+    },
+    {
+      "case": "Exam-folded-0",
+      "positive": true,
+      "sourceHash": "c0e24a35459aba6f1512eaa3ea1dc01180cf8f7395fdfedf22dcd34dbd58195e",
+      "perRoleJsonDecoded": 3,
+      "crossRoleCollisions": {
+        "g0": [
+          "subject",
+          "teacher",
+          "room"
+        ]
+      },
+      "failureStage": "merged-id-ownership-decoder",
+      "productionCertificateReached": false,
+      "previewed": false,
+      "formalConversionReached": false,
+      "observedStrength": "confirmed raw cross-role duplicate and exact adapter source path",
+      "safeNegativeRejected": false,
+      "negativeLimit": "All positives fail at the same ownership gate; safe negatives do not establish discrimination quality"
+    },
+    {
+      "case": "Exam-missing-colon-0",
+      "positive": false,
+      "sourceHash": "123ea7ca980f7b50dbecf2e5c588903e90d587ce3e3a8687892b725415e45502",
+      "perRoleJsonDecoded": 3,
+      "crossRoleCollisions": {
+        "g0": [
+          "subject",
+          "teacher",
+          "room"
+        ]
+      },
+      "failureStage": "merged-id-ownership-decoder",
+      "productionCertificateReached": false,
+      "previewed": false,
+      "formalConversionReached": false,
+      "observedStrength": "confirmed raw cross-role duplicate and exact adapter source path",
+      "safeNegativeRejected": true,
+      "negativeLimit": "All positives fail at the same ownership gate; safe negatives do not establish discrimination quality"
+    },
+    {
+      "case": "Exam-folded-1",
+      "positive": true,
+      "sourceHash": "2e1033cbbd9b2b1114f5f122112e7e490c5eea3ba102f868be28e7f2b7ee2802",
+      "perRoleJsonDecoded": 3,
+      "crossRoleCollisions": {
+        "g0": [
+          "subject",
+          "teacher",
+          "room"
+        ]
+      },
+      "failureStage": "merged-id-ownership-decoder",
+      "productionCertificateReached": false,
+      "previewed": false,
+      "formalConversionReached": false,
+      "observedStrength": "confirmed raw cross-role duplicate and exact adapter source path",
+      "safeNegativeRejected": false,
+      "negativeLimit": "All positives fail at the same ownership gate; safe negatives do not establish discrimination quality"
+    },
+    {
+      "case": "Exam-missing-colon-1",
+      "positive": false,
+      "sourceHash": "dea618e72e78d7bd95461b9600fb88dcbcdb40fccc629e78bd6c5a040d106eb1",
+      "perRoleJsonDecoded": 3,
+      "crossRoleCollisions": {
+        "g0": [
+          "subject",
+          "teacher",
+          "room"
+        ],
+        "g2": [
+          "subject",
+          "teacher"
+        ],
+        "g4": [
+          "subject",
+          "teacher"
+        ],
+        "g6": [
+          "subject",
+          "teacher"
+        ]
+      },
+      "failureStage": "merged-id-ownership-decoder",
+      "productionCertificateReached": false,
+      "previewed": false,
+      "formalConversionReached": false,
+      "observedStrength": "confirmed raw cross-role duplicate and exact adapter source path",
+      "safeNegativeRejected": true,
+      "negativeLimit": "All positives fail at the same ownership gate; safe negatives do not establish discrimination quality"
+    },
+    {
+      "case": "Return-folded-0",
+      "positive": true,
+      "sourceHash": "8ef646c8e61a7eb797783bd4a139704d5e449463cc1431aceb6a05e2bded2573",
+      "perRoleJsonDecoded": 3,
+      "crossRoleCollisions": {
+        "g0": [
+          "subject",
+          "teacher",
+          "room"
+        ]
+      },
+      "failureStage": "merged-id-ownership-decoder",
+      "productionCertificateReached": false,
+      "previewed": false,
+      "formalConversionReached": false,
+      "observedStrength": "confirmed raw cross-role duplicate and exact adapter source path",
+      "safeNegativeRejected": false,
+      "negativeLimit": "All positives fail at the same ownership gate; safe negatives do not establish discrimination quality"
+    },
+    {
+      "case": "Return-missing-colon-0",
+      "positive": false,
+      "sourceHash": "c2f42602bdfd6e95bed0f473156ae3e8a7adf59dde8632a1c4f1adf74c3dd010",
+      "perRoleJsonDecoded": 3,
+      "crossRoleCollisions": {
+        "g0": [
+          "subject",
+          "teacher",
+          "room"
+        ]
+      },
+      "failureStage": "merged-id-ownership-decoder",
+      "productionCertificateReached": false,
+      "previewed": false,
+      "formalConversionReached": false,
+      "observedStrength": "confirmed raw cross-role duplicate and exact adapter source path",
+      "safeNegativeRejected": true,
+      "negativeLimit": "All positives fail at the same ownership gate; safe negatives do not establish discrimination quality"
+    },
+    {
+      "case": "Return-folded-1",
+      "positive": true,
+      "sourceHash": "54aaf2cb033865f9275f412d452164495f77143c5caea9e010c29ec1c8158e1a",
+      "perRoleJsonDecoded": 3,
+      "crossRoleCollisions": {
+        "g0": [
+          "subject",
+          "teacher",
+          "room"
+        ]
+      },
+      "failureStage": "merged-id-ownership-decoder",
+      "productionCertificateReached": false,
+      "previewed": false,
+      "formalConversionReached": false,
+      "observedStrength": "confirmed raw cross-role duplicate and exact adapter source path",
+      "safeNegativeRejected": false,
+      "negativeLimit": "All positives fail at the same ownership gate; safe negatives do not establish discrimination quality"
+    },
+    {
+      "case": "Return-missing-colon-1",
+      "positive": false,
+      "sourceHash": "df5accf43ca0bec8d6ec86eff056c07c3af741c6511a502253d188776e2467c8",
+      "perRoleJsonDecoded": 3,
+      "crossRoleCollisions": {
+        "g0": [
+          "subject",
+          "teacher",
+          "room"
+        ],
+        "g2": [
+          "subject",
+          "teacher"
+        ],
+        "g4": [
+          "subject",
+          "teacher"
+        ],
+        "g6": [
+          "subject",
+          "teacher"
+        ]
+      },
+      "failureStage": "merged-id-ownership-decoder",
+      "productionCertificateReached": false,
+      "previewed": false,
+      "formalConversionReached": false,
+      "observedStrength": "confirmed raw cross-role duplicate and exact adapter source path",
+      "safeNegativeRejected": true,
+      "negativeLimit": "All positives fail at the same ownership gate; safe negatives do not establish discrimination quality"
+    }
+  ],
+  "roles": [
+    {
+      "case": "Timetable-folded-0",
+      "role": "subject",
+      "positive": true,
+      "sourceHash": "b0cc74a5748cdde17598602c3fbe8414fe51eb33d3eaa7637744e4383de1771e",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g0"
+      ],
+      "exactPositiveRole": true,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Timetable-folded-0",
+      "role": "teacher",
+      "positive": true,
+      "sourceHash": "b0cc74a5748cdde17598602c3fbe8414fe51eb33d3eaa7637744e4383de1771e",
+      "rawSha256": "f7ead97ad041dec13095e4292e4e0f474e2ef08d78e4c58cb3647b6b152cd038",
+      "raw": "{\n  \"ids\": [\"g0\", \"g2\", \"g4\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g2",
+        "g4"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g2",
+        "g4"
+      ],
+      "exactPositiveRole": false,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Timetable-folded-0",
+      "role": "room",
+      "positive": true,
+      "sourceHash": "b0cc74a5748cdde17598602c3fbe8414fe51eb33d3eaa7637744e4383de1771e",
+      "rawSha256": "842a85f85fc8adc02fed66239810511561c8c3314e1204eb4069e5b65f4e1c97",
+      "raw": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g5"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g5"
+      ],
+      "exactPositiveRole": false,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Timetable-missing-colon-0",
+      "role": "subject",
+      "positive": false,
+      "sourceHash": "b875dc2988141ed26e9b6fd8864eae2591206d5e260b591271ca8b5726de1d8c",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Timetable-missing-colon-0",
+      "role": "teacher",
+      "positive": false,
+      "sourceHash": "b875dc2988141ed26e9b6fd8864eae2591206d5e260b591271ca8b5726de1d8c",
+      "rawSha256": "f7ead97ad041dec13095e4292e4e0f474e2ef08d78e4c58cb3647b6b152cd038",
+      "raw": "{\n  \"ids\": [\"g0\", \"g2\", \"g4\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g2",
+        "g4"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Timetable-missing-colon-0",
+      "role": "room",
+      "positive": false,
+      "sourceHash": "b875dc2988141ed26e9b6fd8864eae2591206d5e260b591271ca8b5726de1d8c",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Timetable-folded-1",
+      "role": "subject",
+      "positive": true,
+      "sourceHash": "5ef36a640902a80a96b0298eef4f25bcc2006d553e4207c57a2b4b1ea0a9e2ce",
+      "rawSha256": "db2bf8d353c44db06bc3d1c38beacb4033bf77d95b940a0a0a760336e835a931",
+      "raw": "{\n  \"ids\": [\"g0\", \"g2\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g2"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g2"
+      ],
+      "exactPositiveRole": false,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Timetable-folded-1",
+      "role": "teacher",
+      "positive": true,
+      "sourceHash": "5ef36a640902a80a96b0298eef4f25bcc2006d553e4207c57a2b4b1ea0a9e2ce",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g4",
+        "g6"
+      ],
+      "exactPositiveRole": false,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Timetable-folded-1",
+      "role": "room",
+      "positive": true,
+      "sourceHash": "5ef36a640902a80a96b0298eef4f25bcc2006d553e4207c57a2b4b1ea0a9e2ce",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g0"
+      ],
+      "exactPositiveRole": true,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Timetable-missing-colon-1",
+      "role": "subject",
+      "positive": false,
+      "sourceHash": "3f85651aad619948d1237bc95cc6e189ebfeeb0cfdefdc78e23d2b605ee20fa7",
+      "rawSha256": "db2bf8d353c44db06bc3d1c38beacb4033bf77d95b940a0a0a760336e835a931",
+      "raw": "{\n  \"ids\": [\"g0\", \"g2\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g2"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Timetable-missing-colon-1",
+      "role": "teacher",
+      "positive": false,
+      "sourceHash": "3f85651aad619948d1237bc95cc6e189ebfeeb0cfdefdc78e23d2b605ee20fa7",
+      "rawSha256": "27d49674b8d6f0b0e741cc23f71dd3edc480bbfc574ca1c5477efcc8636a5207",
+      "raw": "{\n  \"ids\": [\"g0\", \"g1\", \"g2\", \"g3\", \"g4\", \"g5\", \"g6\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5",
+        "g6"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [
+        "g1",
+        "g3",
+        "g5"
+      ],
+      "foreignRoleIdsSelected": [
+        "g0",
+        "g1",
+        "g2",
+        "g3"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Timetable-missing-colon-1",
+      "role": "room",
+      "positive": false,
+      "sourceHash": "3f85651aad619948d1237bc95cc6e189ebfeeb0cfdefdc78e23d2b605ee20fa7",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Exam-folded-0",
+      "role": "subject",
+      "positive": true,
+      "sourceHash": "c0e24a35459aba6f1512eaa3ea1dc01180cf8f7395fdfedf22dcd34dbd58195e",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g0"
+      ],
+      "exactPositiveRole": true,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Exam-folded-0",
+      "role": "teacher",
+      "positive": true,
+      "sourceHash": "c0e24a35459aba6f1512eaa3ea1dc01180cf8f7395fdfedf22dcd34dbd58195e",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g2",
+        "g4"
+      ],
+      "exactPositiveRole": false,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Exam-folded-0",
+      "role": "room",
+      "positive": true,
+      "sourceHash": "c0e24a35459aba6f1512eaa3ea1dc01180cf8f7395fdfedf22dcd34dbd58195e",
+      "rawSha256": "842a85f85fc8adc02fed66239810511561c8c3314e1204eb4069e5b65f4e1c97",
+      "raw": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g5"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g5"
+      ],
+      "exactPositiveRole": false,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Exam-missing-colon-0",
+      "role": "subject",
+      "positive": false,
+      "sourceHash": "123ea7ca980f7b50dbecf2e5c588903e90d587ce3e3a8687892b725415e45502",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Exam-missing-colon-0",
+      "role": "teacher",
+      "positive": false,
+      "sourceHash": "123ea7ca980f7b50dbecf2e5c588903e90d587ce3e3a8687892b725415e45502",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Exam-missing-colon-0",
+      "role": "room",
+      "positive": false,
+      "sourceHash": "123ea7ca980f7b50dbecf2e5c588903e90d587ce3e3a8687892b725415e45502",
+      "rawSha256": "842a85f85fc8adc02fed66239810511561c8c3314e1204eb4069e5b65f4e1c97",
+      "raw": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g5"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Exam-folded-1",
+      "role": "subject",
+      "positive": true,
+      "sourceHash": "2e1033cbbd9b2b1114f5f122112e7e490c5eea3ba102f868be28e7f2b7ee2802",
+      "rawSha256": "db2bf8d353c44db06bc3d1c38beacb4033bf77d95b940a0a0a760336e835a931",
+      "raw": "{\n  \"ids\": [\"g0\", \"g2\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g2"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g2"
+      ],
+      "exactPositiveRole": false,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Exam-folded-1",
+      "role": "teacher",
+      "positive": true,
+      "sourceHash": "2e1033cbbd9b2b1114f5f122112e7e490c5eea3ba102f868be28e7f2b7ee2802",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g4",
+        "g6"
+      ],
+      "exactPositiveRole": false,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Exam-folded-1",
+      "role": "room",
+      "positive": true,
+      "sourceHash": "2e1033cbbd9b2b1114f5f122112e7e490c5eea3ba102f868be28e7f2b7ee2802",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g0"
+      ],
+      "exactPositiveRole": true,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Exam-missing-colon-1",
+      "role": "subject",
+      "positive": false,
+      "sourceHash": "dea618e72e78d7bd95461b9600fb88dcbcdb40fccc629e78bd6c5a040d106eb1",
+      "rawSha256": "9bf03b4044829c4514437d1d94e4b1b5d277861ba5dd4f692427b54e5f20f29b",
+      "raw": "{\n  \"ids\": [\"g0\", \"g2\", \"g4\", \"g6\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g2",
+        "g4",
+        "g6"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0",
+        "g4",
+        "g6"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Exam-missing-colon-1",
+      "role": "teacher",
+      "positive": false,
+      "sourceHash": "dea618e72e78d7bd95461b9600fb88dcbcdb40fccc629e78bd6c5a040d106eb1",
+      "rawSha256": "27d49674b8d6f0b0e741cc23f71dd3edc480bbfc574ca1c5477efcc8636a5207",
+      "raw": "{\n  \"ids\": [\"g0\", \"g1\", \"g2\", \"g3\", \"g4\", \"g5\", \"g6\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5",
+        "g6"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [
+        "g1",
+        "g3",
+        "g5"
+      ],
+      "foreignRoleIdsSelected": [
+        "g0",
+        "g1",
+        "g2",
+        "g3"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Exam-missing-colon-1",
+      "role": "room",
+      "positive": false,
+      "sourceHash": "dea618e72e78d7bd95461b9600fb88dcbcdb40fccc629e78bd6c5a040d106eb1",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Return-folded-0",
+      "role": "subject",
+      "positive": true,
+      "sourceHash": "8ef646c8e61a7eb797783bd4a139704d5e449463cc1431aceb6a05e2bded2573",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g0"
+      ],
+      "exactPositiveRole": true,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Return-folded-0",
+      "role": "teacher",
+      "positive": true,
+      "sourceHash": "8ef646c8e61a7eb797783bd4a139704d5e449463cc1431aceb6a05e2bded2573",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g2",
+        "g4"
+      ],
+      "exactPositiveRole": false,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Return-folded-0",
+      "role": "room",
+      "positive": true,
+      "sourceHash": "8ef646c8e61a7eb797783bd4a139704d5e449463cc1431aceb6a05e2bded2573",
+      "rawSha256": "842a85f85fc8adc02fed66239810511561c8c3314e1204eb4069e5b65f4e1c97",
+      "raw": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g5"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g5"
+      ],
+      "exactPositiveRole": false,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Return-missing-colon-0",
+      "role": "subject",
+      "positive": false,
+      "sourceHash": "c2f42602bdfd6e95bed0f473156ae3e8a7adf59dde8632a1c4f1adf74c3dd010",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Return-missing-colon-0",
+      "role": "teacher",
+      "positive": false,
+      "sourceHash": "c2f42602bdfd6e95bed0f473156ae3e8a7adf59dde8632a1c4f1adf74c3dd010",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Return-missing-colon-0",
+      "role": "room",
+      "positive": false,
+      "sourceHash": "c2f42602bdfd6e95bed0f473156ae3e8a7adf59dde8632a1c4f1adf74c3dd010",
+      "rawSha256": "842a85f85fc8adc02fed66239810511561c8c3314e1204eb4069e5b65f4e1c97",
+      "raw": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g5"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Return-folded-1",
+      "role": "subject",
+      "positive": true,
+      "sourceHash": "54aaf2cb033865f9275f412d452164495f77143c5caea9e010c29ec1c8158e1a",
+      "rawSha256": "db2bf8d353c44db06bc3d1c38beacb4033bf77d95b940a0a0a760336e835a931",
+      "raw": "{\n  \"ids\": [\"g0\", \"g2\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g2"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g2"
+      ],
+      "exactPositiveRole": false,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Return-folded-1",
+      "role": "teacher",
+      "positive": true,
+      "sourceHash": "54aaf2cb033865f9275f412d452164495f77143c5caea9e010c29ec1c8158e1a",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g4",
+        "g6"
+      ],
+      "exactPositiveRole": false,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Return-folded-1",
+      "role": "room",
+      "positive": true,
+      "sourceHash": "54aaf2cb033865f9275f412d452164495f77143c5caea9e010c29ec1c8158e1a",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": [
+        "g0"
+      ],
+      "exactPositiveRole": true,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Return-missing-colon-1",
+      "role": "subject",
+      "positive": false,
+      "sourceHash": "df5accf43ca0bec8d6ec86eff056c07c3af741c6511a502253d188776e2467c8",
+      "rawSha256": "9bf03b4044829c4514437d1d94e4b1b5d277861ba5dd4f692427b54e5f20f29b",
+      "raw": "{\n  \"ids\": [\"g0\", \"g2\", \"g4\", \"g6\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g2",
+        "g4",
+        "g6"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [
+        "g0",
+        "g4",
+        "g6"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Return-missing-colon-1",
+      "role": "teacher",
+      "positive": false,
+      "sourceHash": "df5accf43ca0bec8d6ec86eff056c07c3af741c6511a502253d188776e2467c8",
+      "rawSha256": "27d49674b8d6f0b0e741cc23f71dd3edc480bbfc574ca1c5477efcc8636a5207",
+      "raw": "{\n  \"ids\": [\"g0\", \"g1\", \"g2\", \"g3\", \"g4\", \"g5\", \"g6\"]\n}",
+      "parsedIds": [
+        "g0",
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5",
+        "g6"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [
+        "g1",
+        "g3",
+        "g5"
+      ],
+      "foreignRoleIdsSelected": [
+        "g0",
+        "g1",
+        "g2",
+        "g3"
+      ],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    },
+    {
+      "case": "Return-missing-colon-1",
+      "role": "room",
+      "positive": false,
+      "sourceHash": "df5accf43ca0bec8d6ec86eff056c07c3af741c6511a502253d188776e2467c8",
+      "rawSha256": "a08c5c98384e4d3d911358365db7e447984baaf7b18409ed620c473958915daf",
+      "raw": "{\n  \"ids\": [\"g0\"]\n}",
+      "parsedIds": [
+        "g0"
+      ],
+      "independentSingleRoleDecode": true,
+      "expectedPositiveHeadIds": null,
+      "exactPositiveRole": null,
+      "firstId": "g0",
+      "bodyIdsSelected": [],
+      "foreignRoleIdsSelected": [],
+      "nativeStarted": 1,
+      "nativeReturned": 1,
+      "failureMechanism": "First-source selection appears in all roles; exact IDs differ from required target HEAD where shown",
+      "observedStrength": "confirmed raw/strict JSON/source comparison",
+      "causalModelVsPromptVsRuntime": "undetermined"
+    }
+  ],
+  "disposition": "No blocker in observed scoring/counts. Publication must retain ownership-vs-per-role JSON distinction and observed-vs-causal limitations."
+}

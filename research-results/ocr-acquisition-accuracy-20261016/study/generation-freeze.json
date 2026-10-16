@@ -1,0 +1,91 @@
+{
+  "recipe": "paired-native-acquisition-accuracy-v1",
+  "sourceSHA256": "99e4e03eede911dda7e7ab171974295bd77917e852fd186b0cefefac1a8850cb",
+  "fonts": [
+    [
+      "BIZUDPMincho-Regular.ttf",
+      6156436,
+      "02e07546c51503acb864004b663f1762f099d8fbe1af7d619b185568568101ef"
+    ],
+    [
+      "MPLUS2-Variable.ttf",
+      4141232,
+      "837dd9cc8ee812e541025f602362ae17d57a5942ab81bea5cc60242e8f6d3f66"
+    ]
+  ],
+  "seedBase": 20261016093,
+  "exclusionsSHA256": "68767f94c1922b552bee796dfe454a6be407c98d15d6f862c1851b638b9dff49",
+  "exclusionProvenance": [
+    {
+      "file": "excluded-values.json",
+      "bytes": 13747437,
+      "sha256": "292006a01c6ccb56771250d2be7b088f4c94b5e072289dc5003d365241312dcf"
+    },
+    {
+      "file": "train/manifest.json",
+      "bytes": 1588668,
+      "sha256": "96ab7536234f693959e246c26fae30dab2f45fe65722246a6c383d9fcd4ec22f"
+    },
+    {
+      "file": "development/manifest.json",
+      "bytes": 568421,
+      "sha256": "e4beaa18de3a0f705dd97079ed60d5fa13a0f090436b109b07e25391bb01afa4"
+    },
+    {
+      "file": "closed-native-v3/oracle.json",
+      "bytes": 488463,
+      "sha256": "2ea4e1ad6d999c95c23aa958307cee8ca7ccf46b06897d91c0f32285b260061a"
+    },
+    {
+      "file": "v4/fresh/manifest.json",
+      "bytes": 775648,
+      "sha256": "9ebfa74191925d0949055ff1daf4c5347c1142cad85d33ced3a5fb0582ee106c"
+    },
+    {
+      "file": "v4/train/manifest.json",
+      "bytes": 2647159,
+      "sha256": "3953682a34d48fa540de11edf6144e897536690680ba744de5ef138f7a1ab976"
+    },
+    {
+      "file": "v4/development/manifest.json",
+      "bytes": 781209,
+      "sha256": "cc2702244018eadb3e9bba0e8f15cd5de4196ad7ec718276f1a3dfe2f7aef736"
+    }
+  ],
+  "classes": [
+    "1_1",
+    "2_IT",
+    "AI_1"
+  ],
+  "days": 5,
+  "periods": 8,
+  "positiveDocuments": 6,
+  "negativeDocuments": 12,
+  "bodyFieldsPerPositive": 360,
+  "variants": [
+    "positive",
+    "missing-day",
+    "missing-class"
+  ],
+  "roomDistribution": [
+    "60% Japanese prefix plus arbitrary 2..8 ASCII code containing digit",
+    "20% code alone",
+    "20% Japanese descriptive room plus four digits"
+  ],
+  "priorPatternNotAssumed": true,
+  "plannedArms": [
+    "historical-4ff-v1",
+    "source-repairs-role-label-retry-mixed-code-v3expert-fallback-v1"
+  ],
+  "prospectiveCriteria": {
+    "maximumCERPerFont": 0.03,
+    "minimumExactFieldRate": 0.9,
+    "maximumRSSBytes": 6442450944,
+    "maximumReviewUnion": 128,
+    "completeFieldsAndSlots": true,
+    "negativeDocumentsRefused": true,
+    "pairedLiteralImprovement": "Every positive font nondecreasing exact fields and nonincreasing edits; fresh nonregression and quality, all-positive total exact strictly improves"
+  },
+  "zeroErrorsRequired": false,
+  "scope": "Four consumed fonts/corpora plus two unused fonts/new literal sets. BIZUDPMincho and MPLUS2 excluded from all training and prior modelcalls. All new subjects/teachers use four-digit suffixes to avoid exhausted consumed three-digit literal population. First fresh result cannot select algorithm/checkpoint."
+}

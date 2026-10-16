@@ -1,0 +1,70 @@
+{
+  "rawSha256": "e5bccac771e7c9cf54a47641f90c5d5b3087eeb4cf6bb7f182178b48d8816072",
+  "callsCompleted": 512,
+  "groups": {
+    "code": {
+      "rows": 96,
+      "exactPositive": 64,
+      "correctAccepted": 56,
+      "wrongAcceptedPositive": 16,
+      "acceptedNegative": 0
+    },
+    "printable": {
+      "rows": 96,
+      "exactPositive": 44,
+      "correctAccepted": 37,
+      "wrongAcceptedPositive": 16,
+      "acceptedNegative": 0
+    },
+    "lookalike": {
+      "rows": 96,
+      "exactPositive": 30,
+      "correctAccepted": 22,
+      "wrongAcceptedPositive": 39,
+      "acceptedNegative": 0
+    },
+    "natural": {
+      "rows": 96,
+      "exactPositive": 85,
+      "correctAccepted": 76,
+      "wrongAcceptedPositive": 4,
+      "acceptedNegative": 0
+    },
+    "cjk": {
+      "rows": 32,
+      "exactPositive": 0,
+      "correctAccepted": 0,
+      "wrongAcceptedPositive": 0,
+      "acceptedNegative": 1
+    },
+    "clipped": {
+      "rows": 32,
+      "exactPositive": 0,
+      "correctAccepted": 0,
+      "wrongAcceptedPositive": 0,
+      "acceptedNegative": 12
+    },
+    "multiline": {
+      "rows": 32,
+      "exactPositive": 0,
+      "correctAccepted": 0,
+      "wrongAcceptedPositive": 0,
+      "acceptedNegative": 0
+    },
+    "unknown": {
+      "rows": 32,
+      "exactPositive": 0,
+      "correctAccepted": 0,
+      "wrongAcceptedPositive": 0,
+      "acceptedNegative": 2
+    }
+  },
+  "worker": {
+    "callsCompleted": 512,
+    "elapsedSeconds": 10.099640587999602,
+    "peakRssBytes": 93114368,
+    "qualification": false
+  },
+  "qualification": false,
+  "modelActivation": false
+}

@@ -25,16 +25,22 @@ CIはpushのbefore、PRのbase、手動実行ではHEADの親を比較する。
 
 | 対象 | 宣言数 | 検証する環境 |
 |---|---:|---|
-| [時間割変更・曜日・行除外・原文保持](test-catalog/xlsx.md) | 26 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [原本取得・更新・保存・監視](test-catalog/material.md) | 18 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [暗号化DB・原子保存・設定・年度期限](test-catalog/storage.md) | 21 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [時間割変更・曜日・行除外・原文保持](test-catalog/xlsx.md) | 32 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [原本取得・更新・保存・監視](test-catalog/material.md) | 59 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [暗号化DB・原子保存・設定・年度期限](test-catalog/storage.md) | 41 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [API・年度別行事・更新失敗](test-catalog/api.md) | 22 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [OIDC・実認証・取消](test-catalog/auth.md) | 5 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [リンク・検索・名称対応](test-catalog/links.md) | 8 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [通知・差分・実配信](test-catalog/notifications.md) | 16 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [時間割・授業名・時刻・日付](test-catalog/timetable.md) | 23 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [Strict PDF・文字・罫線・試験・返却](test-catalog/pdf.md) | 13 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [固定iOS参照・独立期待値](test-catalog/parity.md) | 8 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [WinUI画面・行選択・表示領域・実操作・再起動](test-catalog/app-ui.md) | 7 | Windows WinUI x64。Linuxクロスビルドは操作成功に数えない |
+| [時間割・授業名・時刻・日付](test-catalog/timetable.md) | 25 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [Strict PDF・文字・罫線・試験・返却](test-catalog/pdf.md) | 104 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [固定iOS参照・独立期待値](test-catalog/parity.md) | 20 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [WinUI画面・行選択・表示領域・実操作・再起動](test-catalog/app-ui.md) | 8 | Windows WinUI x64。Linuxクロスビルドは操作成功に数えない |
 | [配布パッケージ・ライセンス・公開情報](test-catalog/release.md) | 13 | Linux Python／Windows包装・導入検証 |
 | [テスト一覧・対象検索・宣言整合性・CI接続](test-catalog/test-catalog.md) | 14 | Linux Python（隔離Gitリポジトリ） |
+| [復旧の証拠・採用・旧記録の契約](test-catalog/recovery-contracts.md) | 81 | Linux／Windows .NET |
+| [復旧解析・原画像・訂正・保存・取消](test-catalog/recovery-pipeline.md) | 219 | Linux／Windows .NET |
+| [CPU OCR・文字位置・モデル・原画像切り出し](test-catalog/ocr.md) | 115 | Linux／Windows .NET。Windows描画・実推論は対応workflowで検証 |
+| [PDF埋め込みフォント・可視文字・原本の描画照合](test-catalog/native-pdf.md) | 58 | Linux／Windows .NET。Windows描画は対応workflowで検証 |
+| [原画像確認・本文訂正・モデル設定・動的詳細](test-catalog/recovery-ui.md) | 12 | Windows WinUI x64。クロスビルドは操作成功に数えない |
+| [OCR・native PDFの比較用workflowと再現条件](test-catalog/recovery-experiments.md) | 26 | Linux／Windows .NETと明示したWindows比較workflow |

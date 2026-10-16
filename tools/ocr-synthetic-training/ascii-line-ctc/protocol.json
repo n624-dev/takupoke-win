@@ -1,0 +1,87 @@
+{
+  "namespace": "research-ascii-line-ctc-v1",
+  "status": "frozen before training; research-only; no activation",
+  "seed": 884213,
+  "dictionary": {
+    "blank": 0,
+    "printableAscii": "U+0020..U+007E in ascending codepoint order",
+    "space": 1,
+    "unknown": 96,
+    "unknownDisplay": "�",
+    "classes": 97,
+    "controlCharacters": "not renderable and unsupported"
+  },
+  "input": {
+    "name": "x",
+    "height": 64,
+    "channels": "BGR",
+    "layout": "NCHW",
+    "dtype": "float32",
+    "minimumWidth": 320,
+    "maximumWidth": 960,
+    "batch": 1,
+    "resize": "original-pixel-center bilinear + floor(channel+.5) uint8, then (value/255-.5)/.5",
+    "validWidth": "min(inputWidth,ceil(64*sourceWidth/sourceHeight))",
+    "inputWidth": "floor(64*max(320/64,sourceWidth/sourceHeight)); reject >960",
+    "padding": "zero after normalization"
+  },
+  "coordinates": "Preserve greedy CTC Start/End. Reject End*inputWidth > validWidth*timeSteps; sourceX=Crop.X+step*inputWidth/(timeSteps*validWidth)*Crop.Width, sourceY/height=Crop.Y/height. No clamping or fabrication.",
+  "model": "3 small Conv-BN-SiLU blocks, strides(2,2),(2,1),(1,2), channels16/32/64; flatten vertical16 positions; linear96; one BiLSTM64; CTC97 and independent sigmoid reject head",
+  "train": {
+    "seed": 771329,
+    "positiveRows": 4096,
+    "negativeRows": 1280,
+    "fonts": [
+      "NotoSansJP400",
+      "NotoSerifJP400",
+      "MPLUS1p-Regular",
+      "ZenKakuGothicNew-Regular",
+      "BIZUDPMincho-Regular"
+    ]
+  },
+  "development": {
+    "seed": 927461,
+    "positiveRows": 384,
+    "negativeRows": 128,
+    "fonts": [
+      "Kosugi-Regular"
+    ]
+  },
+  "final": {
+    "seed": 1151087,
+    "positiveRows": 512,
+    "negativeRows": 160,
+    "fonts": [
+      "SawarabiGothic-Regular",
+      "SawarabiMincho-Regular"
+    ],
+    "wholeRasterPages": 8,
+    "fieldsPerPage": 32,
+    "qualification": "Standalone ASCII grid pages do not establish production timetable/header/role qualification; parent native full-document integration required."
+  },
+  "fontConsumption": "Train fonts previously consumed. Kosugi and SawarabiMincho had prior source-only PDF extraction use, never recognizer input. SawarabiGothic never rendered/inferred. Final recognizer fonts reserved by parent; download/license inspection only before checkpoint selection.",
+  "positiveBalance": "Equal arbitrary alphanumeric codes, arbitrary printable ASCII punctuation/internal spaces, I/l/1/O/0-rich arbitrary codes, natural generic non-school English lines with random code suffix. All printable characters covered; no leading/trailing whitespace labels.",
+  "rendering": "16..34 logical px, source density2 or4 (actual font32..136px), shared whole-line baseline/ascent/descent and margins; black/navy/gray/green;15% light blur,15% JPEG; no glyph-tight resizing; low-density aliases only separate contradiction probes;50% full canvas and50% whole-line vertical ink crop with2..12 logical px margins, all glyphs share baseline/resize and original ink preserved;clipped controls remove20..40% of actual ink height",
+  "negativeBalance": "Equal CJK-only/mixed lines, top/bottom clipping, multiline, visibly non-ASCII/noise. Negative labels are UNK/reject, never reconstructed full missing text. Blanks are separate controls, not proof of empty source.",
+  "contradictionProbe": "Independent Latin/Cyrillic or valid/removed-stroke aliases. Pixel-identical known/unknown or complete/damaged inputs cannot be distinguished by crop-only OCR; report separately and require original-source proof, never claim universal rejection.",
+  "training": {
+    "epochs": 24,
+    "batchSize": 32,
+    "threads": 2,
+    "optimizer": "AdamW",
+    "learningRate": 0.001,
+    "weightDecay": 0.0001,
+    "clip": 5.0,
+    "loss": "CTC + 0.5 BCE reject loss",
+    "developmentEpochs": [
+      8,
+      16,
+      24
+    ]
+  },
+  "selection": "Highest harmonic mean of positive exact fraction and negative rejected fraction; tie positive exact count, lower CER, earliest epoch. One checkpoint hash fixed before final rendering; final never selects, repairs or changes threshold.",
+  "acceptance": "No UNK, nonempty text, all character minconfidence>=0.8, rejectProbability<=0.01, all CTC intervals supported. Uncalibrated model policy is experimental, requires original ink/cell/complete-source/validator proof and <=3 actual body corrections per document.",
+  "portability": "Standard ONNX x -> probabilities/rejectProbability, dictionary/preprocessing/source intervals/provenance; optional CoreML on Linux conversion only, no Apple inference qualification. No iOS edits.",
+  "dataProhibition": "No real school subjects/names/rooms/originals. All previous literal strings excluded. No old pixels or model-corrected text as targets. No oracle output repair, inference candidate selection, manually supplied document headers or structure. No worker commit/push.",
+  "resourceLimit": "CPU2threads, own process target<4GiB, max address space12GiB; no speed claims under concurrent work"
+}

@@ -1,0 +1,65 @@
+{
+  "recipe": "physical-input-framing-consumed-originals-v1",
+  "exitCode": 0,
+  "rawSHA": "b1382ddef35cc84a191eec3f9e2d2d3fa521393aea7f4d5fc01601cc14f3bb6b",
+  "observations": [
+    {
+      "id": "d0",
+      "condition": "production",
+      "stage": "Engine",
+      "outcome": "engine-refused",
+      "failure": "coverage,periodEvidence,unclassifiedSource,dayBinding",
+      "requiredSlots": 40,
+      "cells": 30,
+      "lowConfidenceSources": 0,
+      "detectorCalls": 5,
+      "recognizerCalls": 63,
+      "milliseconds": 2075,
+      "processPeakWorkingSetBytes": 296124416
+    },
+    {
+      "id": "d0",
+      "condition": "physical-input-frame",
+      "stage": "Engine",
+      "outcome": "engine-refused",
+      "failure": "roleScopeCount,roleBodyCoverage",
+      "requiredSlots": 40,
+      "cells": 40,
+      "lowConfidenceSources": 0,
+      "detectorCalls": 5,
+      "recognizerCalls": 63,
+      "milliseconds": 1584,
+      "processPeakWorkingSetBytes": 359337984
+    },
+    {
+      "id": "d1",
+      "condition": "production",
+      "stage": "Engine",
+      "outcome": "engine-refused",
+      "failure": "coverage,periodEvidence,unclassifiedSource,dayBinding",
+      "requiredSlots": 40,
+      "cells": 30,
+      "lowConfidenceSources": 8,
+      "detectorCalls": 5,
+      "recognizerCalls": 63,
+      "milliseconds": 1763,
+      "processPeakWorkingSetBytes": 359727104
+    },
+    {
+      "id": "d1",
+      "condition": "physical-input-frame",
+      "stage": "Engine",
+      "outcome": "engine-refused",
+      "failure": "roleScopeCount,roleBodyCoverage",
+      "requiredSlots": 40,
+      "cells": 40,
+      "lowConfidenceSources": 4,
+      "detectorCalls": 5,
+      "recognizerCalls": 63,
+      "milliseconds": 1860,
+      "processPeakWorkingSetBytes": 359727104
+    }
+  ],
+  "quality": "unassessed",
+  "scope": "No new heldout/document/device qualification; no oracle correction"
+}

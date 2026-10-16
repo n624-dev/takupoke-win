@@ -1,0 +1,161 @@
+{
+  "protocolSha256": "0b7ddb2b90065d56ce4060d34118d70cbccb159ca61f9f8dd496f64a9833dc6a",
+  "candidates": [
+    {
+      "name": "baseline",
+      "epoch": 0,
+      "exact": 149,
+      "cer": 0.04114906832298137,
+      "path": "/workspace/scratch/ocr-training-assets",
+      "sha256": "f65a332afe5aa663f0b9d5706f4ae8457b5b4058a842d5c1eb22df505c27d642"
+    },
+    {
+      "name": "epoch-1",
+      "epoch": 1,
+      "exact": 162,
+      "cer": 0.02872670807453416,
+      "path": "/workspace/scratch/ocr-finetune-20261013/epoch-1",
+      "sha256": "8286b4fc102d5a398ae9a535872cb5223fd5369171dcec03f2af57725d06c046"
+    },
+    {
+      "name": "epoch-2",
+      "epoch": 2,
+      "exact": 161,
+      "cer": 0.02872670807453416,
+      "path": "/workspace/scratch/ocr-finetune-20261013/epoch-2",
+      "sha256": "09cb7f1720e3f3525ac5ff2e3e03d31f0b06c199900b441807b47045d24e35ec"
+    },
+    {
+      "name": "epoch-3",
+      "epoch": 3,
+      "exact": 161,
+      "cer": 0.02872670807453416,
+      "path": "/workspace/scratch/ocr-finetune-20261013/epoch-3",
+      "sha256": "377d0279d002d380482925957cf8a8ed1e58df27fd457f1ac1766cb13653e02f"
+    }
+  ],
+  "selected": {
+    "name": "epoch-1",
+    "epoch": 1,
+    "exact": 162,
+    "cer": 0.02872670807453416,
+    "path": "/workspace/scratch/ocr-finetune-20261013/epoch-1",
+    "sha256": "8286b4fc102d5a398ae9a535872cb5223fd5369171dcec03f2af57725d06c046"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "meanCtc": 0.016736814402103544,
+      "meanTeacherKl": 0.017103563187497936,
+      "groups": {
+        "all": {
+          "rows": 192,
+          "exact": 162,
+          "cer": 0.02872670807453416
+        },
+        "arbitrary-ascii": {
+          "rows": 48,
+          "exact": 43,
+          "cer": 0.017902813299232736
+        },
+        "confusable-code": {
+          "rows": 48,
+          "exact": 27,
+          "cer": 0.0896551724137931
+        },
+        "japanese": {
+          "rows": 48,
+          "exact": 46,
+          "cer": 0.007042253521126761
+        },
+        "mixed": {
+          "rows": 48,
+          "exact": 46,
+          "cer": 0.006191950464396285
+        },
+        "MPLUS1p-Regular": {
+          "rows": 192,
+          "exact": 162,
+          "cer": 0.02872670807453416
+        }
+      }
+    },
+    {
+      "epoch": 2,
+      "meanCtc": 0.0034453766254500806,
+      "meanTeacherKl": 0.02469617232782184,
+      "groups": {
+        "all": {
+          "rows": 192,
+          "exact": 161,
+          "cer": 0.02872670807453416
+        },
+        "arbitrary-ascii": {
+          "rows": 48,
+          "exact": 42,
+          "cer": 0.017902813299232736
+        },
+        "confusable-code": {
+          "rows": 48,
+          "exact": 27,
+          "cer": 0.0896551724137931
+        },
+        "japanese": {
+          "rows": 48,
+          "exact": 46,
+          "cer": 0.007042253521126761
+        },
+        "mixed": {
+          "rows": 48,
+          "exact": 46,
+          "cer": 0.006191950464396285
+        },
+        "MPLUS1p-Regular": {
+          "rows": 192,
+          "exact": 161,
+          "cer": 0.02872670807453416
+        }
+      }
+    },
+    {
+      "epoch": 3,
+      "meanCtc": 0.001601716365219848,
+      "meanTeacherKl": 0.024915601984503155,
+      "groups": {
+        "all": {
+          "rows": 192,
+          "exact": 161,
+          "cer": 0.02872670807453416
+        },
+        "arbitrary-ascii": {
+          "rows": 48,
+          "exact": 42,
+          "cer": 0.017902813299232736
+        },
+        "confusable-code": {
+          "rows": 48,
+          "exact": 27,
+          "cer": 0.0896551724137931
+        },
+        "japanese": {
+          "rows": 48,
+          "exact": 46,
+          "cer": 0.007042253521126761
+        },
+        "mixed": {
+          "rows": 48,
+          "exact": 46,
+          "cer": 0.006191950464396285
+        },
+        "MPLUS1p-Regular": {
+          "rows": 192,
+          "exact": 161,
+          "cer": 0.02872670807453416
+        }
+      }
+    }
+  ],
+  "maxRssMiB": 1409.34765625,
+  "elapsedSeconds": 327.3862970219998,
+  "status": "research-only; final not yet opened; not qualified or activated"
+}

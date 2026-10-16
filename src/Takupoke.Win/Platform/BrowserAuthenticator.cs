@@ -17,9 +17,13 @@ public sealed class BrowserAuthenticator(OidcClient oidc, Action<Uri>? openBrows
     {
         ActivationRegistrationManager.RegisterForProtocolActivation("jp.n624.takupoke.win", "", "たくポケ", Environment.ProcessPath!);
         // Repair the direct command left by older installers as well as the SDK association.
-        using var command = Registry.CurrentUser.CreateSubKey(@"Software\Classes\jp.n624.takupoke.win\shell\open\command");
-        command.SetValue("", "\"" + Environment.ProcessPath! + "\" \"----ms-protocol:%1\"");
+        using (var command = Registry.CurrentUser.CreateSubKey(@"Software\Classes\jp.n624.takupoke.win\shell\open\command"))
+            command.SetValue("", "\"" + Environment.ProcessPath! + "\" \"----ms-protocol:%1\"");
+        // The shell caches protocol handlers across moves and reinstalls.
+        SHChangeNotify(0x08000000, 0, 0, 0); // SHCNE_ASSOCCHANGED, SHCNF_IDLIST
     }
+    [System.Runtime.InteropServices.DllImport("shell32.dll")]
+    private static extern void SHChangeNotify(uint eventId, uint flags, nint item1, nint item2);
     public void HandleCallback(Uri uri)
     {
         lock (_callbackGate)

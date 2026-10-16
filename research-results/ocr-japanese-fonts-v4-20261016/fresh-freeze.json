@@ -1,0 +1,19 @@
+{
+  "selectedCheckpointSha256": "8298dff5e2f302edb10645c2a8636497d29664db25e3e75d5ced659ee2593a45",
+  "selectionSha256": "d4a74294d9f33a7ab2edaa9cca1bd75e25b92fbf1a143c822d4aaaff75c5b48f",
+  "protocolSha256": "de322cfc6b9db44e338d1d75236df7159e7ff4d72697b3d573343eddd59b94a2",
+  "sourceSha256": "7950e6d216e0beecb8f14876addae38a52f726c9614a7b1c72b9d2316155db16",
+  "fontSha256": {
+    "ShipporiAntique": "9425fbf218e07b435aa0550724beddc0ba1f8bd85d32446ff9f75f6b50b40673",
+    "ZenAntiqueSoft": "7dffd1aadb84adba0ca93d68110d00f975c5064a9d21ad484ad6ab3bc88248b8",
+    "SplineSansMono": "0b5feaa2e46cf75db715af845fdd6410c3e8ee774156891f755e00ff83612c77",
+    "MartianMono": "eb482db4c711cf46dc250f193e96498a530960e882776fa0cdc1b0b9d0880203",
+    "Newsreader": "b303d063781c50c34ee81b3fe7b194d6b2fb7216cc26a278792b018fcdfc483f",
+    "Fraunces": "58562d845da603f38c5c47d61cefc4e911f2720714827ae5441c8dd39c6f733a"
+  },
+  "allPositiveRowsRemainMainDenominator": true,
+  "aliasDiagnosticAfterScoringOnly": true,
+  "noPostFreshReselectionOrOptimization": true,
+  "guard": "Same relative conditions as full-dev eligibility; descriptive qualification, no model selection",
+  "scope": "Synthetic crops only; parent independently qualifies C# and full documents"
+}

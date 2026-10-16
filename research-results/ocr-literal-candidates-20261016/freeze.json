@@ -1,0 +1,57 @@
+{
+  "inputs": {
+    "file": "inputs.json",
+    "bytes": 58680,
+    "sha256": "254e80505740b28b643b235197f3088695f4772667d1e688b3dbe64dcf047852"
+  },
+  "roster": {
+    "file": "roster.json",
+    "bytes": 7127,
+    "sha256": "db9b4a5d5cbc688e6c5616ef394d400f6a36c6fc64f31308d05750141b6b4b41"
+  },
+  "originalRawSHA256": "6e4d0a1c20393957796139e0eda519153f21dfc13dcff5ddc3de56c0168fd4b1",
+  "oracleSHA256": "5ef7e73cdaf71d387347a87bb326b455bb93d2bdba28b12a8095c1cd48968c8c",
+  "baselineSource": {
+    "file": "Baseline.cs",
+    "bytes": 2020,
+    "sha256": "df43bc61ccad4618ac181a0a6d1a0d32c7aab7a10105f9940b30f548d4799651"
+  },
+  "currentSourceSHA256": "c85a7af03f9d5fac0f1d874872638bfd52e21c77b4a246d6589ca109edfe8c1f",
+  "reader": [
+    {
+      "file": "reader/Takupoke.CandidateReview",
+      "bytes": 78256,
+      "sha256": "27686513f29aae4ade95ebdcb12d382f8e5f2512f8e37cc2411e562c9f15a75e"
+    },
+    {
+      "file": "reader/Takupoke.CandidateReview.deps.json",
+      "bytes": 819,
+      "sha256": "9778b20b2d4a43fd4db4035ef752860d9cb99a5d39e1e5c328c9e51c9f902ea9"
+    },
+    {
+      "file": "reader/Takupoke.CandidateReview.dll",
+      "bytes": 15872,
+      "sha256": "1f2ea7e194eeb13f3a8e7d67a133256b9ed5cf2e57dca2c9a9215b776ec13d07"
+    },
+    {
+      "file": "reader/Takupoke.CandidateReview.pdb",
+      "bytes": 13740,
+      "sha256": "1f4b68a418e0a397b09b4ba9c441f76767d70ed3d9a1c4e2315773f378346219"
+    },
+    {
+      "file": "reader/Takupoke.CandidateReview.runtimeconfig.json",
+      "bytes": 330,
+      "sha256": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f"
+    },
+    {
+      "file": "reader/Takupoke.Core.dll",
+      "bytes": 412672,
+      "sha256": "b2f3a1aa89daa8192cd2bc4a74ef2e2151c640843f867bf56e07f52e9695dfed"
+    },
+    {
+      "file": "reader/Takupoke.Core.pdb",
+      "bytes": 90404,
+      "sha256": "cd2568ab94ff633cd68c2308615b132c00b18e06f074a5efb32a0f806c59b4b6"
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "recipe": "physical-input-framing-consumed-originals-v1",
+  "sourcePacketSHA": "7a87ca9355ee2577fb3fab05cfc9dc86ab5d870a8e49f2119b54ef70d260a54c",
+  "detector": {
+    "file": "det.onnx",
+    "bytes": 4826518,
+    "sha256": "a431985659dc921974177a95adcfbb90fd9e51989a5e04d70d0b75f597b6e61d"
+  },
+  "recognizer": {
+    "file": "rec.onnx",
+    "bytes": 16534782,
+    "sha256": "da72dc72ca4dc220df0dfde68c1dedc31c58d3e76a25871122e5056227d50092"
+  },
+  "dictionary": {
+    "file": "alphabet.json",
+    "bytes": 110788,
+    "sha256": "d858428fbe0ada92b439a5f277b51bc1b318fd985d80946a3ce859d7f2446a92"
+  },
+  "documents": [
+    {
+      "id": "d0",
+      "originalPDFSHA256": "e94f50455183f6e573949448c38c4a5309604b3d8be9df4b3815edfc464dd25a",
+      "pages": [
+        {
+          "page": 1,
+          "width": 1367,
+          "height": 275,
+          "pixels": {
+            "file": "d0-native-p1.bgra",
+            "bytes": 1503700,
+            "sha256": "bd0904264e72b3b7ce697be6236421e7f924bd850ac8e448638ac78bac92c91a"
+          }
+        },
+        {
+          "page": 2,
+          "width": 1367,
+          "height": 275,
+          "pixels": {
+            "file": "d0-native-p2.bgra",
+            "bytes": 1503700,
+            "sha256": "4f668d7b47b0c4c5b54bedf203b030e61800591f9247ce8332580fb890c61609"
+          }
+        },
+        {
+          "page": 3,
+          "width": 1367,
+          "height": 275,
+          "pixels": {
+            "file": "d0-native-p3.bgra",
+            "bytes": 1503700,
+            "sha256": "f0c116b3e4a1ffb898212bee115616b67de4ea5675b9f9da0188d9489d2c2229"
+          }
+        },
+        {
+          "page": 4,
+          "width": 1367,
+          "height": 275,
+          "pixels": {
+            "file": "d0-native-p4.bgra",
+            "bytes": 1503700,
+            "sha256": "41c564d97305dbe58423e28930422bc11aa7a711cea8fa69611cebfc89595f0b"
+          }
+        },
+        {
+          "page": 5,
+          "width": 1367,
+          "height": 275,
+          "pixels": {
+            "file": "d0-native-p5.bgra",
+            "bytes": 1503700,
+            "sha256": "d2a38add3298c3661a8aaaf0e96b2afcfc9a78858f1f4a9fc020780ec8127d81"
+          }
+        }
+      ],
+      "originalDrawingPDFSHA256": "233dec852ec7e43c93c70c42d8f88238a0c2e8aef146445c4b94d674bb6cc187",
+      "sourcePDF": {
+        "file": "d0-lossless.pdf",
+        "bytes": 40989,
+        "sha256": "e94f50455183f6e573949448c38c4a5309604b3d8be9df4b3815edfc464dd25a"
+      }
+    },
+    {
+      "id": "d1",
+      "originalPDFSHA256": "ce0627e908e3b84e26b3d47bd1310472009e08ae132f9a864280255b976c3c78",
+      "pages": [
+        {
+          "page": 1,
+          "width": 1367,
+          "height": 280,
+          "pixels": {
+            "file": "d1-native-p1.bgra",
+            "bytes": 1531040,
+            "sha256": "cb4dbfbc5d04991c695780cfdb17506f7cdbe41d1ad7473626846cb73cb90334"
+          }
+        },
+        {
+          "page": 2,
+          "width": 1367,
+          "height": 280,
+          "pixels": {
+            "file": "d1-native-p2.bgra",
+            "bytes": 1531040,
+            "sha256": "65d6917bff4364cec2ebe30501929a6031829a0238818acc1214e64095b8bc77"
+          }
+        },
+        {
+          "page": 3,
+          "width": 1367,
+          "height": 280,
+          "pixels": {
+            "file": "d1-native-p3.bgra",
+            "bytes": 1531040,
+            "sha256": "69a7af3e715d9cacfa391ecb763f0e3abf5a18dc2d06a3f69ce09960da6dbbff"
+          }
+        },
+        {
+          "page": 4,
+          "width": 1367,
+          "height": 280,
+          "pixels": {
+            "file": "d1-native-p4.bgra",
+            "bytes": 1531040,
+            "sha256": "0a4a09811870030ca5b35a3dacfccd596c8cd908bfb9e8cdf91f85c939162110"
+          }
+        },
+        {
+          "page": 5,
+          "width": 1367,
+          "height": 280,
+          "pixels": {
+            "file": "d1-native-p5.bgra",
+            "bytes": 1531040,
+            "sha256": "8e411d0a8e238cb277323991ca23d895427b9a698725526a190922155a52716a"
+          }
+        }
+      ],
+      "originalDrawingPDFSHA256": "2625bf49044d59088b53109fc15ba7813073fdedac71bde5eb82925c297050f8",
+      "sourcePDF": {
+        "file": "d1-lossless.pdf",
+        "bytes": 41746,
+        "sha256": "ce0627e908e3b84e26b3d47bd1310472009e08ae132f9a864280255b976c3c78"
+      }
+    }
+  ],
+  "sources": {
+    "run.py": "dc4aa34acd72231f907599cc05e2d18c0992fddc72c430ec98180beddbd5a078",
+    "Program.cs": "15a306b0f3e22daa7018657d268afd9c2351462b1dc88c650f8b30872bf2c2b9",
+    "PhysicalCropFrame.cs": "e845408816670972c57e564cae047a5d0fdcf4e95557c59b2427d6feee5b9e5b"
+  },
+  "inputFrame": "Connected ownership first; physical cell intersection removes only white/proven-rule pixels; no output clipping",
+  "plannedConditions": [
+    "production",
+    "physical-input-frame"
+  ],
+  "scope": "Consumed full original pixels; zero new independent documents",
+  "sourceScope": "New lossless image-only PDF containers; consumed original drawing pixels, no extra independent document credit",
+  "renderer": "Actual native Windows PDF renderer; production dimensions and Bgra8/Ignore/DoNotColorManage"
+}

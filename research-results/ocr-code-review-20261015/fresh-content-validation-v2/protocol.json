@@ -1,0 +1,56 @@
+{
+  "recipe": "independent-code-images-v1",
+  "seed": 202610151117,
+  "fonts": [
+    {
+      "split": "development",
+      "file": "SawarabiGothic-Regular.ttf",
+      "bytes": 1902848,
+      "sha256": "04f2f9111bb69cb8d3706c27b44879c2c0fac593a11edf5cfe8cec1efc92c789"
+    },
+    {
+      "split": "development",
+      "file": "SawarabiMincho-Regular.ttf",
+      "bytes": 1084300,
+      "sha256": "86373c619710d1528aac3a4d47ce96834101bb38b057235b39e47b61ba143c6d"
+    },
+    {
+      "split": "new-font-evaluation",
+      "file": "KleeOne-Regular.ttf",
+      "bytes": 8724204,
+      "sha256": "bf4063f030cc2ae6adf0a11424a1888e5c0eb4438f1f6d02f52294af868e9b3a"
+    },
+    {
+      "split": "new-font-evaluation",
+      "file": "KaiseiTokumin-Regular.ttf",
+      "bytes": 4581732,
+      "sha256": "3fbdbec539369aed11bb1fa0cdda1d19ea246e795107357383dfa561848a427d"
+    }
+  ],
+  "sizes": [
+    18,
+    26
+  ],
+  "cleanCodesPerFontAndSize": 24,
+  "confusableCodesPerFontAndSize": 24,
+  "margins": [
+    2,
+    6
+  ],
+  "metrics": [
+    "literal exact",
+    "CER",
+    "wrong above native .8",
+    "blank output",
+    "time",
+    "RSS"
+  ],
+  "scope": "Isolated fictional code images. Paired margins are NOT independent samples. No PDF/detection/whole-document or production qualification.",
+  "noModelUpdate": true,
+  "noOracleRouting": true,
+  "noZeroErrorGate": true,
+  "standaloneRefinement": true,
+  "exclusionOracleSHA256": "1d57d6e8c6aaab1145dc8af7dbaef03d2c132f1db36591e0975d9d256ccfa09b",
+  "candidateRule": "For separately detected ASCII codes with a digit, length 2..32, use deployed English only with native .8/.05/padding and same primary length; otherwise preserve primary.",
+  "validationScope": "Fresh strings in already observed fonts; no new-font/blind-layout claim"
+}

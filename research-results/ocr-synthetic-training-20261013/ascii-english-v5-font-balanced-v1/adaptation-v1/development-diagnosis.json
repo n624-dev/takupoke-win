@@ -1,0 +1,200 @@
+{
+  "conditions": [
+    {
+      "name": "official-baseline",
+      "fonts": {
+        "Cousine": {
+          "positive": 96,
+          "exact": 64,
+          "correctAccepted": 57,
+          "wrongAccepted": 18
+        },
+        "UbuntuMono": {
+          "positive": 96,
+          "exact": 69,
+          "correctAccepted": 67,
+          "wrongAccepted": 14
+        },
+        "PTSerif": {
+          "positive": 96,
+          "exact": 72,
+          "correctAccepted": 66,
+          "wrongAccepted": 6
+        },
+        "LibreCaslonText": {
+          "positive": 96,
+          "exact": 66,
+          "correctAccepted": 58,
+          "wrongAccepted": 11
+        }
+      },
+      "improvementsVsBaseline": 0,
+      "regressionsVsBaseline": 0,
+      "maximumWrongAcceptedConfidence": 0.9993658661842346,
+      "wrongAcceptedIds": [
+        "development-00002",
+        "development-00003",
+        "development-00008",
+        "development-00009",
+        "development-00016",
+        "development-00025",
+        "development-00030",
+        "development-00037",
+        "development-00040",
+        "development-00041",
+        "development-00043",
+        "development-00065",
+        "development-00074",
+        "development-00075",
+        "development-00081",
+        "development-00082",
+        "development-00083",
+        "development-00088",
+        "development-00104",
+        "development-00105",
+        "development-00106",
+        "development-00107",
+        "development-00110",
+        "development-00111",
+        "development-00112",
+        "development-00113",
+        "development-00116",
+        "development-00117",
+        "development-00120",
+        "development-00127",
+        "development-00128",
+        "development-00129",
+        "development-00130",
+        "development-00133",
+        "development-00137",
+        "development-00141",
+        "development-00147",
+        "development-00150",
+        "development-00151",
+        "development-00154",
+        "development-00155",
+        "development-00178",
+        "development-00179",
+        "development-00195",
+        "development-00353",
+        "development-00355",
+        "development-00367",
+        "development-00368",
+        "development-00379"
+      ],
+      "allUnsupportedPaddingRefused": true,
+      "unsupportedPaddingRows": 17
+    },
+    {
+      "name": "epoch-2",
+      "fonts": {
+        "Cousine": {
+          "positive": 96,
+          "exact": 87,
+          "correctAccepted": 62,
+          "wrongAccepted": 2
+        },
+        "UbuntuMono": {
+          "positive": 96,
+          "exact": 88,
+          "correctAccepted": 56,
+          "wrongAccepted": 4
+        },
+        "PTSerif": {
+          "positive": 96,
+          "exact": 87,
+          "correctAccepted": 47,
+          "wrongAccepted": 3
+        },
+        "LibreCaslonText": {
+          "positive": 96,
+          "exact": 78,
+          "correctAccepted": 35,
+          "wrongAccepted": 6
+        }
+      },
+      "improvementsVsBaseline": 90,
+      "regressionsVsBaseline": 21,
+      "maximumWrongAcceptedConfidence": 0.9933924078941345,
+      "wrongAcceptedIds": [
+        "development-00029",
+        "development-00067",
+        "development-00068",
+        "development-00120",
+        "development-00133",
+        "development-00179",
+        "development-00215",
+        "development-00235",
+        "development-00244",
+        "development-00245",
+        "development-00255",
+        "development-00261",
+        "development-00287",
+        "development-00367",
+        "development-00373"
+      ],
+      "allUnsupportedPaddingRefused": true,
+      "unsupportedPaddingRows": 4
+    },
+    {
+      "name": "epoch-4",
+      "fonts": {
+        "Cousine": {
+          "positive": 96,
+          "exact": 90,
+          "correctAccepted": 73,
+          "wrongAccepted": 2
+        },
+        "UbuntuMono": {
+          "positive": 96,
+          "exact": 94,
+          "correctAccepted": 78,
+          "wrongAccepted": 0
+        },
+        "PTSerif": {
+          "positive": 96,
+          "exact": 88,
+          "correctAccepted": 69,
+          "wrongAccepted": 2
+        },
+        "LibreCaslonText": {
+          "positive": 96,
+          "exact": 83,
+          "correctAccepted": 65,
+          "wrongAccepted": 7
+        }
+      },
+      "improvementsVsBaseline": 93,
+      "regressionsVsBaseline": 9,
+      "maximumWrongAcceptedConfidence": 0.9969498515129089,
+      "wrongAcceptedIds": [
+        "development-00120",
+        "development-00121",
+        "development-00167",
+        "development-00183",
+        "development-00259",
+        "development-00343",
+        "development-00355",
+        "development-00359",
+        "development-00362",
+        "development-00374",
+        "development-00379"
+      ],
+      "allUnsupportedPaddingRefused": true,
+      "unsupportedPaddingRows": 8
+    }
+  ],
+  "continuationGate": {
+    "selectedTrained": true,
+    "wholeCer10percentRelativeImprovement": true,
+    "codeCer10percentRelativeImprovement": true,
+    "naturalCerAtMost1ppRegression": true,
+    "eachMonoCodeCerNoRegression": true,
+    "negativeAcceptNotIncreased": true,
+    "allInsufficientPaddingSourceRefused": true
+  },
+  "researchUsefulnessGatePassed": true,
+  "automaticFinalOrPortableStage": false,
+  "zeroWrongAcceptRequired": false,
+  "wholeFieldOrDocumentQualification": false
+}

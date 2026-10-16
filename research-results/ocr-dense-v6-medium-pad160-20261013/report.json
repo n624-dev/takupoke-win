@@ -1,0 +1,43 @@
+{
+  "recipe": "consumed-dense-pretrained-ink-v1",
+  "model": "v6-medium",
+  "rawSHA256": "20ef707d7cfa221a1845f9da051be443a05522ab0f0f80a98226a11b77bcdb99",
+  "readerBinaryIdentityStable": true,
+  "qualification": false,
+  "observations": [
+    {
+      "id": "d0-positive",
+      "condition": "ink-input-frame",
+      "outcome": "engine-refused",
+      "failure": "humanUnresolved",
+      "exactDocument": false,
+      "positiveRefused": true,
+      "manualCorrections": 0,
+      "quality": "positive-failed",
+      "requiredSlots": 680,
+      "cells": 680,
+      "lowConfidenceSources": 134,
+      "recognizerCalls": 2175,
+      "detectorCalls": 5,
+      "milliseconds": 197898,
+      "processPeakWorkingSetBytes": 743399424
+    },
+    {
+      "id": "d1-positive",
+      "condition": "ink-input-frame",
+      "outcome": "engine-refused",
+      "failure": "unclassifiedSource",
+      "exactDocument": false,
+      "positiveRefused": true,
+      "manualCorrections": 0,
+      "quality": "positive-failed",
+      "requiredSlots": 600,
+      "cells": 600,
+      "lowConfidenceSources": 318,
+      "recognizerCalls": 2175,
+      "detectorCalls": 5,
+      "milliseconds": 236479,
+      "processPeakWorkingSetBytes": 778878976
+    }
+  ]
+}

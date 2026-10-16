@@ -1,0 +1,52 @@
+{
+  "scope": "Largest numerical difference case diagnosis only, derived from unjudged512 numeric differences; no oracle/quality/modelselection/newfinal",
+  "parameterMaximumDifferences": {
+    "conv0": 0.0,
+    "bn0.weight": 0.0,
+    "bn0.bias": 0.0,
+    "bn0.running_mean": 0.0,
+    "bn0.running_var": 0.0,
+    "conv1": 0.0,
+    "bn1.weight": 0.0,
+    "bn1.bias": 0.0,
+    "bn1.running_mean": 0.0,
+    "bn1.running_var": 0.0,
+    "conv2": 0.0,
+    "bn2.weight": 0.0,
+    "bn2.bias": 0.0,
+    "bn2.running_mean": 0.0,
+    "bn2.running_var": 0.0,
+    "conv3": 0.0,
+    "bn3.weight": 0.0,
+    "bn3.bias": 0.0,
+    "bn3.running_mean": 0.0,
+    "bn3.running_var": 0.0,
+    "conv4": 0.0,
+    "bn4.weight": 0.0,
+    "bn4.bias": 0.0,
+    "bn4.running_mean": 0.0,
+    "bn4.running_var": 0.0,
+    "headWeight": 0.0,
+    "headBias": 0.0
+  },
+  "rows": [
+    {
+      "id": "development-00055",
+      "cnnMaxAbsolute": 0.0005035400390625,
+      "encoderOnNativeCnnFeatureMaxAbsolute": 5.996227264404297e-05,
+      "encoderOnTorchCnnFeatureMaxAbsolute": 0.0001327991485595703,
+      "nativeCnnMagnitude": 306.587890625,
+      "nativeFeatureMagnitude": 9.055848121643066
+    },
+    {
+      "id": "development-00366",
+      "cnnMaxAbsolute": 0.000232696533203125,
+      "encoderOnNativeCnnFeatureMaxAbsolute": 3.916025161743164e-05,
+      "encoderOnTorchCnnFeatureMaxAbsolute": 0.0002840757369995117,
+      "nativeCnnMagnitude": 227.78160095214844,
+      "nativeFeatureMagnitude": 5.883023262023926
+    }
+  ],
+  "frozenGateChanged": false,
+  "trainingStarted": false
+}

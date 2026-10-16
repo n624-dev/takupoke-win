@@ -1,0 +1,11 @@
+{
+  "trainPositiveTargets": 6144,
+  "devPositiveAndRetentionTargets": 896,
+  "exactOverlap": 0,
+  "all95AsciiCovered": true,
+  "minimumAsciiOccurrences": 12,
+  "damageRowsWithMeasuredInkRemoval": 484,
+  "allProvidedOriginalNonwhiteRetained": true,
+  "inputDtype": "float32, no intermediate float16",
+  "scope": "Corpus/source verification only, no inference or label-directed repair"
+}

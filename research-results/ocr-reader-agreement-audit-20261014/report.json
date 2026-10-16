@@ -1,0 +1,5309 @@
+{
+  "pairs": [
+    {
+      "left": "easyocr-japanese-g1",
+      "right": "easyocr-japanese-g2",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 17,
+          "agreementWrong": 1,
+          "correctBothAbove": 15,
+          "wrongBothAbove": 0
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 17,
+          "agreementCorrect": 13,
+          "agreementWrong": 4,
+          "correctBothAbove": 13,
+          "wrongBothAbove": 0
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 6,
+          "agreementCorrect": 0,
+          "agreementWrong": 6,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 5
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 14,
+          "agreementCorrect": 11,
+          "agreementWrong": 3,
+          "correctBothAbove": 8,
+          "wrongBothAbove": 1
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 15,
+          "agreementWrong": 0,
+          "correctBothAbove": 3,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 13,
+          "agreementCorrect": 13,
+          "agreementWrong": 0,
+          "correctBothAbove": 4,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 13,
+          "agreementCorrect": 0,
+          "agreementWrong": 13,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 8
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 14,
+          "agreementCorrect": 14,
+          "agreementWrong": 0,
+          "correctBothAbove": 10,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n020",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O08022",
+          "sharedRawText": "仮室008022",
+          "leftOwnMinimum": 0.9949018955230713,
+          "rightOwnMinimum": 0.9282552003860474
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.999466598033905,
+          "rightOwnMinimum": 0.8636259436607361
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.9995529055595398,
+          "rightOwnMinimum": 0.9601780772209167
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.9993823766708374,
+          "rightOwnMinimum": 0.984973669052124
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.998462438583374,
+          "rightOwnMinimum": 0.9782426953315735
+        },
+        {
+          "id": "n090",
+          "cohort": "sans",
+          "kind": "header",
+          "literal": "Al_2",
+          "sharedRawText": "AL2",
+          "leftOwnMinimum": 0.9988658428192139,
+          "rightOwnMinimum": 0.9801211357116699
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.9989761114120483,
+          "rightOwnMinimum": 0.9955170750617981
+        },
+        {
+          "id": "n122",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05902",
+          "sharedRawText": "仮室005902",
+          "leftOwnMinimum": 0.9988877177238464,
+          "rightOwnMinimum": 0.9991356730461121
+        },
+        {
+          "id": "n125",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O06397",
+          "sharedRawText": "仮室006397",
+          "leftOwnMinimum": 0.9987398982048035,
+          "rightOwnMinimum": 0.9982380867004395
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9986597299575806,
+          "rightOwnMinimum": 0.9918352365493774
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.998769223690033,
+          "rightOwnMinimum": 0.9855833053588867
+        },
+        {
+          "id": "n152",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05063",
+          "sharedRawText": "仮室005063",
+          "leftOwnMinimum": 0.9974472522735596,
+          "rightOwnMinimum": 0.9976320266723633
+        },
+        {
+          "id": "n164",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05961",
+          "sharedRawText": "仮室005961",
+          "leftOwnMinimum": 0.9974675178527832,
+          "rightOwnMinimum": 0.997990608215332
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.9986249208450317,
+          "rightOwnMinimum": 0.9972388744354248
+        }
+      ]
+    },
+    {
+      "left": "easyocr-japanese-g1",
+      "right": "english-v5",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 14,
+          "agreementCorrect": 13,
+          "agreementWrong": 1,
+          "correctBothAbove": 9,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 17,
+          "agreementCorrect": 17,
+          "agreementWrong": 0,
+          "correctBothAbove": 11,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": []
+    },
+    {
+      "left": "easyocr-japanese-g1",
+      "right": "japanese-v3",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 11,
+          "agreementCorrect": 11,
+          "agreementWrong": 0,
+          "correctBothAbove": 11,
+          "wrongBothAbove": 0
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 17,
+          "agreementCorrect": 17,
+          "agreementWrong": 0,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 0
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 8,
+          "agreementCorrect": 0,
+          "agreementWrong": 8,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 7
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 2,
+          "agreementCorrect": 2,
+          "agreementWrong": 0,
+          "correctBothAbove": 1,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 10,
+          "agreementCorrect": 10,
+          "agreementWrong": 0,
+          "correctBothAbove": 7,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 14,
+          "agreementCorrect": 14,
+          "agreementWrong": 0,
+          "correctBothAbove": 10,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 10,
+          "agreementCorrect": 0,
+          "agreementWrong": 10,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 5
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 2,
+          "agreementCorrect": 2,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n020",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O08022",
+          "sharedRawText": "仮室008022",
+          "leftOwnMinimum": 0.9949018955230713,
+          "rightOwnMinimum": 0.9970353841781616
+        },
+        {
+          "id": "n023",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O5215",
+          "sharedRawText": "仮室005215",
+          "leftOwnMinimum": 0.9994080066680908,
+          "rightOwnMinimum": 0.9993939399719238
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.999466598033905,
+          "rightOwnMinimum": 0.9996352195739746
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.9995529055595398,
+          "rightOwnMinimum": 0.9993708729743958
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.9993823766708374,
+          "rightOwnMinimum": 0.9994720816612244
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.998462438583374,
+          "rightOwnMinimum": 0.9970223307609558
+        },
+        {
+          "id": "n068",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O01131",
+          "sharedRawText": "仮室001131",
+          "leftOwnMinimum": 0.9844204783439636,
+          "rightOwnMinimum": 0.9980397820472717
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.9989761114120483,
+          "rightOwnMinimum": 0.998953104019165
+        },
+        {
+          "id": "n122",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05902",
+          "sharedRawText": "仮室005902",
+          "leftOwnMinimum": 0.9988877177238464,
+          "rightOwnMinimum": 0.9990463852882385
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.998769223690033,
+          "rightOwnMinimum": 0.999369204044342
+        },
+        {
+          "id": "n152",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05063",
+          "sharedRawText": "仮室005063",
+          "leftOwnMinimum": 0.9974472522735596,
+          "rightOwnMinimum": 0.9814429879188538
+        },
+        {
+          "id": "n164",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05961",
+          "sharedRawText": "仮室005961",
+          "leftOwnMinimum": 0.9974675178527832,
+          "rightOwnMinimum": 0.9269744753837585
+        }
+      ]
+    },
+    {
+      "left": "easyocr-japanese-g1",
+      "right": "v5-mobile",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 17,
+          "agreementCorrect": 16,
+          "agreementWrong": 1,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 0
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 16,
+          "agreementCorrect": 15,
+          "agreementWrong": 1,
+          "correctBothAbove": 15,
+          "wrongBothAbove": 1
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 7,
+          "agreementCorrect": 0,
+          "agreementWrong": 7,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 7
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 13,
+          "agreementWrong": 2,
+          "correctBothAbove": 9,
+          "wrongBothAbove": 1
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 16,
+          "agreementCorrect": 16,
+          "agreementWrong": 0,
+          "correctBothAbove": 13,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 20,
+          "agreementCorrect": 19,
+          "agreementWrong": 1,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 1
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 9,
+          "agreementCorrect": 0,
+          "agreementWrong": 9,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 8
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 17,
+          "agreementCorrect": 17,
+          "agreementWrong": 0,
+          "correctBothAbove": 9,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n020",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O08022",
+          "sharedRawText": "仮室008022",
+          "leftOwnMinimum": 0.9949018955230713,
+          "rightOwnMinimum": 0.9048429131507874
+        },
+        {
+          "id": "n023",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O5215",
+          "sharedRawText": "仮室005215",
+          "leftOwnMinimum": 0.9994080066680908,
+          "rightOwnMinimum": 0.9515503644943237
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.999466598033905,
+          "rightOwnMinimum": 0.9553235173225403
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.9995529055595398,
+          "rightOwnMinimum": 0.9736040830612183
+        },
+        {
+          "id": "n046",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 7328",
+          "sharedRawText": "空想指導7328",
+          "leftOwnMinimum": 0.9062002897262573,
+          "rightOwnMinimum": 0.9917294383049011
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.9993823766708374,
+          "rightOwnMinimum": 0.9445494413375854
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.998462438583374,
+          "rightOwnMinimum": 0.9578562378883362
+        },
+        {
+          "id": "n068",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O01131",
+          "sharedRawText": "仮室001131",
+          "leftOwnMinimum": 0.9844204783439636,
+          "rightOwnMinimum": 0.9536460041999817
+        },
+        {
+          "id": "n090",
+          "cohort": "sans",
+          "kind": "header",
+          "literal": "Al_2",
+          "sharedRawText": "AL2",
+          "leftOwnMinimum": 0.9988658428192139,
+          "rightOwnMinimum": 0.861352801322937
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.9989761114120483,
+          "rightOwnMinimum": 0.903263509273529
+        },
+        {
+          "id": "n122",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05902",
+          "sharedRawText": "仮室005902",
+          "leftOwnMinimum": 0.9988877177238464,
+          "rightOwnMinimum": 0.8831571340560913
+        },
+        {
+          "id": "n125",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O06397",
+          "sharedRawText": "仮室006397",
+          "leftOwnMinimum": 0.9987398982048035,
+          "rightOwnMinimum": 0.9149428606033325
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9986597299575806,
+          "rightOwnMinimum": 0.9194843173027039
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.998769223690033,
+          "rightOwnMinimum": 0.8835886716842651
+        },
+        {
+          "id": "n152",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05063",
+          "sharedRawText": "仮室005063",
+          "leftOwnMinimum": 0.9974472522735596,
+          "rightOwnMinimum": 0.8973201513290405
+        },
+        {
+          "id": "n157",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 7657",
+          "sharedRawText": "模擬教員7657",
+          "leftOwnMinimum": 0.9992935657501221,
+          "rightOwnMinimum": 0.9603059887886047
+        },
+        {
+          "id": "n164",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05961",
+          "sharedRawText": "仮室005961",
+          "leftOwnMinimum": 0.9974675178527832,
+          "rightOwnMinimum": 0.9155870676040649
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.9986249208450317,
+          "rightOwnMinimum": 0.9365358948707581
+        }
+      ]
+    },
+    {
+      "left": "easyocr-japanese-g1",
+      "right": "v5-server",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 17,
+          "agreementCorrect": 16,
+          "agreementWrong": 1,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 0
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 17,
+          "agreementCorrect": 16,
+          "agreementWrong": 1,
+          "correctBothAbove": 12,
+          "wrongBothAbove": 1
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 8,
+          "agreementCorrect": 0,
+          "agreementWrong": 8,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 7
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 13,
+          "agreementCorrect": 13,
+          "agreementWrong": 0,
+          "correctBothAbove": 9,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 18,
+          "agreementWrong": 0,
+          "correctBothAbove": 13,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 20,
+          "agreementCorrect": 19,
+          "agreementWrong": 1,
+          "correctBothAbove": 7,
+          "wrongBothAbove": 1
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 10,
+          "agreementCorrect": 0,
+          "agreementWrong": 10,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 5
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 17,
+          "agreementWrong": 1,
+          "correctBothAbove": 11,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n020",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O08022",
+          "sharedRawText": "仮室008022",
+          "leftOwnMinimum": 0.9949018955230713,
+          "rightOwnMinimum": 0.8217055797576904
+        },
+        {
+          "id": "n023",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O5215",
+          "sharedRawText": "仮室005215",
+          "leftOwnMinimum": 0.9994080066680908,
+          "rightOwnMinimum": 0.8937437534332275
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.999466598033905,
+          "rightOwnMinimum": 0.8237989544868469
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.9995529055595398,
+          "rightOwnMinimum": 0.8711639046669006
+        },
+        {
+          "id": "n046",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 7328",
+          "sharedRawText": "空想指導7328",
+          "leftOwnMinimum": 0.9062002897262573,
+          "rightOwnMinimum": 0.9994117021560669
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.9993823766708374,
+          "rightOwnMinimum": 0.8635419607162476
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.998462438583374,
+          "rightOwnMinimum": 0.8521154522895813
+        },
+        {
+          "id": "n068",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O01131",
+          "sharedRawText": "仮室001131",
+          "leftOwnMinimum": 0.9844204783439636,
+          "rightOwnMinimum": 0.8667611479759216
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.9989761114120483,
+          "rightOwnMinimum": 0.8131940364837646
+        },
+        {
+          "id": "n128",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O 8761",
+          "sharedRawText": "仮室00 8761",
+          "leftOwnMinimum": 0.8689360022544861,
+          "rightOwnMinimum": 0.871807336807251
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9986597299575806,
+          "rightOwnMinimum": 0.9345365762710571
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.998769223690033,
+          "rightOwnMinimum": 0.8398748636245728
+        },
+        {
+          "id": "n157",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 7657",
+          "sharedRawText": "模擬教員7657",
+          "leftOwnMinimum": 0.9992935657501221,
+          "rightOwnMinimum": 0.8599240183830261
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.9986249208450317,
+          "rightOwnMinimum": 0.9209021329879761
+        }
+      ]
+    },
+    {
+      "left": "easyocr-japanese-g1",
+      "right": "v6-medium",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 17,
+          "agreementWrong": 1,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 0
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 19,
+          "agreementCorrect": 18,
+          "agreementWrong": 1,
+          "correctBothAbove": 15,
+          "wrongBothAbove": 1
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 8,
+          "agreementCorrect": 0,
+          "agreementWrong": 8,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 1
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 13,
+          "agreementWrong": 2,
+          "correctBothAbove": 9,
+          "wrongBothAbove": 1
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 19,
+          "agreementCorrect": 19,
+          "agreementWrong": 0,
+          "correctBothAbove": 13,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 21,
+          "agreementCorrect": 20,
+          "agreementWrong": 1,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 1
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 9,
+          "agreementCorrect": 0,
+          "agreementWrong": 9,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 4
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 17,
+          "agreementCorrect": 17,
+          "agreementWrong": 0,
+          "correctBothAbove": 11,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n046",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 7328",
+          "sharedRawText": "空想指導7328",
+          "leftOwnMinimum": 0.9062002897262573,
+          "rightOwnMinimum": 0.9996079802513123
+        },
+        {
+          "id": "n068",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O01131",
+          "sharedRawText": "仮室001131",
+          "leftOwnMinimum": 0.9844204783439636,
+          "rightOwnMinimum": 0.8478849530220032
+        },
+        {
+          "id": "n087",
+          "cohort": "sans",
+          "kind": "header",
+          "literal": "AI_1",
+          "sharedRawText": "Al_1",
+          "leftOwnMinimum": 0.9792264699935913,
+          "rightOwnMinimum": 0.9375467896461487
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.9989761114120483,
+          "rightOwnMinimum": 0.9385693669319153
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9986597299575806,
+          "rightOwnMinimum": 0.9083577990531921
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.998769223690033,
+          "rightOwnMinimum": 0.8751375079154968
+        },
+        {
+          "id": "n157",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 7657",
+          "sharedRawText": "模擬教員7657",
+          "leftOwnMinimum": 0.9992935657501221,
+          "rightOwnMinimum": 0.99974125623703
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.9986249208450317,
+          "rightOwnMinimum": 0.8823288083076477
+        }
+      ]
+    },
+    {
+      "left": "easyocr-japanese-g1",
+      "right": "v6-small",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 17,
+          "agreementWrong": 1,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 0
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 19,
+          "agreementCorrect": 18,
+          "agreementWrong": 1,
+          "correctBothAbove": 15,
+          "wrongBothAbove": 1
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 8,
+          "agreementCorrect": 0,
+          "agreementWrong": 8,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 5
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 13,
+          "agreementWrong": 2,
+          "correctBothAbove": 9,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 20,
+          "agreementCorrect": 20,
+          "agreementWrong": 0,
+          "correctBothAbove": 15,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 22,
+          "agreementCorrect": 21,
+          "agreementWrong": 1,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 1
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 14,
+          "agreementCorrect": 0,
+          "agreementWrong": 14,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 6
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 16,
+          "agreementCorrect": 16,
+          "agreementWrong": 0,
+          "correctBothAbove": 10,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n023",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O5215",
+          "sharedRawText": "仮室005215",
+          "leftOwnMinimum": 0.9994080066680908,
+          "rightOwnMinimum": 0.9573742747306824
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.999466598033905,
+          "rightOwnMinimum": 0.9194689989089966
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.9995529055595398,
+          "rightOwnMinimum": 0.9266632795333862
+        },
+        {
+          "id": "n046",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 7328",
+          "sharedRawText": "空想指導7328",
+          "leftOwnMinimum": 0.9062002897262573,
+          "rightOwnMinimum": 0.9999690055847168
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.9993823766708374,
+          "rightOwnMinimum": 0.9477154016494751
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.998462438583374,
+          "rightOwnMinimum": 0.9226271510124207
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.9989761114120483,
+          "rightOwnMinimum": 0.9731719493865967
+        },
+        {
+          "id": "n122",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05902",
+          "sharedRawText": "仮室005902",
+          "leftOwnMinimum": 0.9988877177238464,
+          "rightOwnMinimum": 0.8498244881629944
+        },
+        {
+          "id": "n128",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O 8761",
+          "sharedRawText": "仮室00 8761",
+          "leftOwnMinimum": 0.8689360022544861,
+          "rightOwnMinimum": 0.933612048625946
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9986597299575806,
+          "rightOwnMinimum": 0.9524517059326172
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.998769223690033,
+          "rightOwnMinimum": 0.9421401023864746
+        },
+        {
+          "id": "n157",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 7657",
+          "sharedRawText": "模擬教員7657",
+          "leftOwnMinimum": 0.9992935657501221,
+          "rightOwnMinimum": 0.9985542893409729
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.9986249208450317,
+          "rightOwnMinimum": 0.9491662383079529
+        }
+      ]
+    },
+    {
+      "left": "easyocr-japanese-g2",
+      "right": "english-v5",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 14,
+          "agreementWrong": 1,
+          "correctBothAbove": 12,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 15,
+          "agreementWrong": 0,
+          "correctBothAbove": 15,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": []
+    },
+    {
+      "left": "easyocr-japanese-g2",
+      "right": "japanese-v3",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 13,
+          "agreementWrong": 2,
+          "correctBothAbove": 11,
+          "wrongBothAbove": 0
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 14,
+          "agreementCorrect": 13,
+          "agreementWrong": 1,
+          "correctBothAbove": 13,
+          "wrongBothAbove": 1
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 13,
+          "agreementCorrect": 3,
+          "agreementWrong": 10,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 10
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 2,
+          "agreementCorrect": 2,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 8,
+          "agreementCorrect": 8,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 9,
+          "agreementCorrect": 9,
+          "agreementWrong": 0,
+          "correctBothAbove": 3,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 2,
+          "agreementWrong": 16,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 13
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 2,
+          "agreementCorrect": 1,
+          "agreementWrong": 1,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 1
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n005",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室B2O39353",
+          "sharedRawText": "仮室B2039353",
+          "leftOwnMinimum": 0.9956356883049011,
+          "rightOwnMinimum": 0.9744883179664612
+        },
+        {
+          "id": "n014",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室B2O39083",
+          "sharedRawText": "仮室B2039083",
+          "leftOwnMinimum": 0.9947068095207214,
+          "rightOwnMinimum": 0.9627970457077026
+        },
+        {
+          "id": "n016",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "模擬教員 1120",
+          "sharedRawText": "模擬教員1120",
+          "leftOwnMinimum": 0.9941039681434631,
+          "rightOwnMinimum": 0.981767475605011
+        },
+        {
+          "id": "n020",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O08022",
+          "sharedRawText": "仮室008022",
+          "leftOwnMinimum": 0.9282552003860474,
+          "rightOwnMinimum": 0.9970353841781616
+        },
+        {
+          "id": "n029",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室B2O32702",
+          "sharedRawText": "仮室B2032702",
+          "leftOwnMinimum": 0.9959179759025574,
+          "rightOwnMinimum": 0.9773877263069153
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.8636259436607361,
+          "rightOwnMinimum": 0.9996352195739746
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.9601780772209167,
+          "rightOwnMinimum": 0.9993708729743958
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.984973669052124,
+          "rightOwnMinimum": 0.9994720816612244
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.9782426953315735,
+          "rightOwnMinimum": 0.9970223307609558
+        },
+        {
+          "id": "n059",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室B2O37505",
+          "sharedRawText": "仮室B2037505",
+          "leftOwnMinimum": 0.9930811524391174,
+          "rightOwnMinimum": 0.9902980923652649
+        },
+        {
+          "id": "n065",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室B2O32349",
+          "sharedRawText": "仮室B2032349",
+          "leftOwnMinimum": 0.9954909682273865,
+          "rightOwnMinimum": 0.9637446403503418
+        },
+        {
+          "id": "n098",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室B2O3 6100",
+          "sharedRawText": "仮室B2036100",
+          "leftOwnMinimum": 0.991472065448761,
+          "rightOwnMinimum": 0.9228967428207397
+        },
+        {
+          "id": "n101",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室B2O37621",
+          "sharedRawText": "仮室B2037621",
+          "leftOwnMinimum": 0.9930779337882996,
+          "rightOwnMinimum": 0.9882307052612305
+        },
+        {
+          "id": "n110",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室B2O35787",
+          "sharedRawText": "仮室B2035787",
+          "leftOwnMinimum": 0.9914340972900391,
+          "rightOwnMinimum": 0.9956537485122681
+        },
+        {
+          "id": "n116",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O1398",
+          "sharedRawText": "仮室001398",
+          "leftOwnMinimum": 0.986939549446106,
+          "rightOwnMinimum": 0.9986554384231567
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.9955170750617981,
+          "rightOwnMinimum": 0.998953104019165
+        },
+        {
+          "id": "n122",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05902",
+          "sharedRawText": "仮室005902",
+          "leftOwnMinimum": 0.9991356730461121,
+          "rightOwnMinimum": 0.9990463852882385
+        },
+        {
+          "id": "n131",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室B2O39832",
+          "sharedRawText": "仮室B2039832",
+          "leftOwnMinimum": 0.9918904304504395,
+          "rightOwnMinimum": 0.9926226139068604
+        },
+        {
+          "id": "n134",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室B2O34759",
+          "sharedRawText": "仮室B2034759",
+          "leftOwnMinimum": 0.990250825881958,
+          "rightOwnMinimum": 0.9923754334449768
+        },
+        {
+          "id": "n140",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室B2O33421",
+          "sharedRawText": "仮室B2033421",
+          "leftOwnMinimum": 0.9936434030532837,
+          "rightOwnMinimum": 0.9948293566703796
+        },
+        {
+          "id": "n146",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室l1I1237",
+          "sharedRawText": "仮室1111237",
+          "leftOwnMinimum": 0.8654453158378601,
+          "rightOwnMinimum": 0.9575262665748596
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.9855833053588867,
+          "rightOwnMinimum": 0.999369204044342
+        },
+        {
+          "id": "n152",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05063",
+          "sharedRawText": "仮室005063",
+          "leftOwnMinimum": 0.9976320266723633,
+          "rightOwnMinimum": 0.9814429879188538
+        },
+        {
+          "id": "n164",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05961",
+          "sharedRawText": "仮室005961",
+          "leftOwnMinimum": 0.997990608215332,
+          "rightOwnMinimum": 0.9269744753837585
+        },
+        {
+          "id": "n169",
+          "cohort": "serif",
+          "kind": "header",
+          "literal": "1_2",
+          "sharedRawText": "12",
+          "leftOwnMinimum": 0.9948909282684326,
+          "rightOwnMinimum": 0.9810370206832886
+        }
+      ]
+    },
+    {
+      "left": "easyocr-japanese-g2",
+      "right": "v5-mobile",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 21,
+          "agreementCorrect": 18,
+          "agreementWrong": 3,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 1
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 13,
+          "agreementCorrect": 12,
+          "agreementWrong": 1,
+          "correctBothAbove": 12,
+          "wrongBothAbove": 1
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 8,
+          "agreementCorrect": 3,
+          "agreementWrong": 5,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 5
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 13,
+          "agreementWrong": 2,
+          "correctBothAbove": 8,
+          "wrongBothAbove": 1
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 14,
+          "agreementCorrect": 14,
+          "agreementWrong": 0,
+          "correctBothAbove": 4,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 11,
+          "agreementCorrect": 11,
+          "agreementWrong": 0,
+          "correctBothAbove": 4,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 14,
+          "agreementCorrect": 2,
+          "agreementWrong": 12,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 10
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 14,
+          "agreementWrong": 1,
+          "correctBothAbove": 10,
+          "wrongBothAbove": 1
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n016",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "模擬教員 1120",
+          "sharedRawText": "模擬教員1120",
+          "leftOwnMinimum": 0.9941039681434631,
+          "rightOwnMinimum": 0.9715429544448853
+        },
+        {
+          "id": "n020",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O08022",
+          "sharedRawText": "仮室008022",
+          "leftOwnMinimum": 0.9282552003860474,
+          "rightOwnMinimum": 0.9048429131507874
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.8636259436607361,
+          "rightOwnMinimum": 0.9553235173225403
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.9601780772209167,
+          "rightOwnMinimum": 0.9736040830612183
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.984973669052124,
+          "rightOwnMinimum": 0.9445494413375854
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.9782426953315735,
+          "rightOwnMinimum": 0.9578562378883362
+        },
+        {
+          "id": "n060",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "模擬研究 1598",
+          "sharedRawText": "模擬研究1598",
+          "leftOwnMinimum": 0.9944480657577515,
+          "rightOwnMinimum": 0.9917421340942383
+        },
+        {
+          "id": "n090",
+          "cohort": "sans",
+          "kind": "header",
+          "literal": "Al_2",
+          "sharedRawText": "AL2",
+          "leftOwnMinimum": 0.9801211357116699,
+          "rightOwnMinimum": 0.861352801322937
+        },
+        {
+          "id": "n116",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O1398",
+          "sharedRawText": "仮室001398",
+          "leftOwnMinimum": 0.986939549446106,
+          "rightOwnMinimum": 0.8735915422439575
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.9955170750617981,
+          "rightOwnMinimum": 0.903263509273529
+        },
+        {
+          "id": "n122",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05902",
+          "sharedRawText": "仮室005902",
+          "leftOwnMinimum": 0.9991356730461121,
+          "rightOwnMinimum": 0.8831571340560913
+        },
+        {
+          "id": "n125",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O06397",
+          "sharedRawText": "仮室006397",
+          "leftOwnMinimum": 0.9982380867004395,
+          "rightOwnMinimum": 0.9149428606033325
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9918352365493774,
+          "rightOwnMinimum": 0.9194843173027039
+        },
+        {
+          "id": "n143",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O0 1146",
+          "sharedRawText": "仮室001146",
+          "leftOwnMinimum": 0.9472140073776245,
+          "rightOwnMinimum": 0.9505845308303833
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.9855833053588867,
+          "rightOwnMinimum": 0.8835886716842651
+        },
+        {
+          "id": "n152",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05063",
+          "sharedRawText": "仮室005063",
+          "leftOwnMinimum": 0.9976320266723633,
+          "rightOwnMinimum": 0.8973201513290405
+        },
+        {
+          "id": "n164",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05961",
+          "sharedRawText": "仮室005961",
+          "leftOwnMinimum": 0.997990608215332,
+          "rightOwnMinimum": 0.9155870676040649
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.9972388744354248,
+          "rightOwnMinimum": 0.9365358948707581
+        },
+        {
+          "id": "n169",
+          "cohort": "serif",
+          "kind": "header",
+          "literal": "1_2",
+          "sharedRawText": "12",
+          "leftOwnMinimum": 0.9948909282684326,
+          "rightOwnMinimum": 0.9894277453422546
+        }
+      ]
+    },
+    {
+      "left": "easyocr-japanese-g2",
+      "right": "v5-server",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 21,
+          "agreementCorrect": 18,
+          "agreementWrong": 3,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 1
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 13,
+          "agreementCorrect": 12,
+          "agreementWrong": 1,
+          "correctBothAbove": 9,
+          "wrongBothAbove": 1
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 12,
+          "agreementCorrect": 3,
+          "agreementWrong": 9,
+          "correctBothAbove": 1,
+          "wrongBothAbove": 5
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 14,
+          "agreementCorrect": 14,
+          "agreementWrong": 0,
+          "correctBothAbove": 12,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 15,
+          "agreementWrong": 0,
+          "correctBothAbove": 4,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 11,
+          "agreementCorrect": 11,
+          "agreementWrong": 0,
+          "correctBothAbove": 4,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 16,
+          "agreementCorrect": 3,
+          "agreementWrong": 13,
+          "correctBothAbove": 1,
+          "wrongBothAbove": 6
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 15,
+          "agreementWrong": 0,
+          "correctBothAbove": 15,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n016",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "模擬教員 1120",
+          "sharedRawText": "模擬教員1120",
+          "leftOwnMinimum": 0.9941039681434631,
+          "rightOwnMinimum": 0.8662265539169312
+        },
+        {
+          "id": "n020",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O08022",
+          "sharedRawText": "仮室008022",
+          "leftOwnMinimum": 0.9282552003860474,
+          "rightOwnMinimum": 0.8217055797576904
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.8636259436607361,
+          "rightOwnMinimum": 0.8237989544868469
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.9601780772209167,
+          "rightOwnMinimum": 0.8711639046669006
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.984973669052124,
+          "rightOwnMinimum": 0.8635419607162476
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.9782426953315735,
+          "rightOwnMinimum": 0.8521154522895813
+        },
+        {
+          "id": "n060",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "模擬研究 1598",
+          "sharedRawText": "模擬研究1598",
+          "leftOwnMinimum": 0.9944480657577515,
+          "rightOwnMinimum": 0.9778543710708618
+        },
+        {
+          "id": "n116",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O1398",
+          "sharedRawText": "仮室001398",
+          "leftOwnMinimum": 0.986939549446106,
+          "rightOwnMinimum": 0.8393173217773438
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.9955170750617981,
+          "rightOwnMinimum": 0.8131940364837646
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9918352365493774,
+          "rightOwnMinimum": 0.9345365762710571
+        },
+        {
+          "id": "n146",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室l1I1237",
+          "sharedRawText": "仮室1111237",
+          "leftOwnMinimum": 0.8654453158378601,
+          "rightOwnMinimum": 0.9052855968475342
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.9855833053588867,
+          "rightOwnMinimum": 0.8398748636245728
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.9972388744354248,
+          "rightOwnMinimum": 0.9209021329879761
+        }
+      ]
+    },
+    {
+      "left": "easyocr-japanese-g2",
+      "right": "v6-medium",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 22,
+          "agreementCorrect": 19,
+          "agreementWrong": 3,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 1
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 13,
+          "agreementCorrect": 13,
+          "agreementWrong": 0,
+          "correctBothAbove": 12,
+          "wrongBothAbove": 0
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 8,
+          "agreementCorrect": 3,
+          "agreementWrong": 5,
+          "correctBothAbove": 3,
+          "wrongBothAbove": 0
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 16,
+          "agreementCorrect": 14,
+          "agreementWrong": 2,
+          "correctBothAbove": 12,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 15,
+          "agreementWrong": 0,
+          "correctBothAbove": 4,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 13,
+          "agreementCorrect": 13,
+          "agreementWrong": 0,
+          "correctBothAbove": 4,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 11,
+          "agreementCorrect": 3,
+          "agreementWrong": 8,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 4
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 15,
+          "agreementWrong": 0,
+          "correctBothAbove": 15,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n060",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "模擬研究 1598",
+          "sharedRawText": "模擬研究1598",
+          "leftOwnMinimum": 0.9944480657577515,
+          "rightOwnMinimum": 0.999414324760437
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.9955170750617981,
+          "rightOwnMinimum": 0.9385693669319153
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9918352365493774,
+          "rightOwnMinimum": 0.9083577990531921
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.9855833053588867,
+          "rightOwnMinimum": 0.8751375079154968
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.9972388744354248,
+          "rightOwnMinimum": 0.8823288083076477
+        }
+      ]
+    },
+    {
+      "left": "easyocr-japanese-g2",
+      "right": "v6-small",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 21,
+          "agreementCorrect": 19,
+          "agreementWrong": 2,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 1
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 14,
+          "agreementCorrect": 13,
+          "agreementWrong": 1,
+          "correctBothAbove": 12,
+          "wrongBothAbove": 1
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 13,
+          "agreementCorrect": 3,
+          "agreementWrong": 10,
+          "correctBothAbove": 3,
+          "wrongBothAbove": 4
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 16,
+          "agreementCorrect": 14,
+          "agreementWrong": 2,
+          "correctBothAbove": 12,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 16,
+          "agreementCorrect": 16,
+          "agreementWrong": 0,
+          "correctBothAbove": 4,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 14,
+          "agreementCorrect": 14,
+          "agreementWrong": 0,
+          "correctBothAbove": 4,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 17,
+          "agreementCorrect": 3,
+          "agreementWrong": 14,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 6
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 14,
+          "agreementCorrect": 14,
+          "agreementWrong": 0,
+          "correctBothAbove": 13,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n016",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "模擬教員 1120",
+          "sharedRawText": "模擬教員1120",
+          "leftOwnMinimum": 0.9941039681434631,
+          "rightOwnMinimum": 0.9996204376220703
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.8636259436607361,
+          "rightOwnMinimum": 0.9194689989089966
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.9601780772209167,
+          "rightOwnMinimum": 0.9266632795333862
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.984973669052124,
+          "rightOwnMinimum": 0.9477154016494751
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.9782426953315735,
+          "rightOwnMinimum": 0.9226271510124207
+        },
+        {
+          "id": "n060",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "模擬研究 1598",
+          "sharedRawText": "模擬研究1598",
+          "leftOwnMinimum": 0.9944480657577515,
+          "rightOwnMinimum": 0.9998955726623535
+        },
+        {
+          "id": "n116",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O1398",
+          "sharedRawText": "仮室001398",
+          "leftOwnMinimum": 0.986939549446106,
+          "rightOwnMinimum": 0.8801507949829102
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.9955170750617981,
+          "rightOwnMinimum": 0.9731719493865967
+        },
+        {
+          "id": "n122",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05902",
+          "sharedRawText": "仮室005902",
+          "leftOwnMinimum": 0.9991356730461121,
+          "rightOwnMinimum": 0.8498244881629944
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9918352365493774,
+          "rightOwnMinimum": 0.9524517059326172
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.9855833053588867,
+          "rightOwnMinimum": 0.9421401023864746
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.9972388744354248,
+          "rightOwnMinimum": 0.9491662383079529
+        }
+      ]
+    },
+    {
+      "left": "english-v5",
+      "right": "japanese-v3",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 5,
+          "agreementCorrect": 5,
+          "agreementWrong": 0,
+          "correctBothAbove": 1,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 3,
+          "agreementCorrect": 3,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": []
+    },
+    {
+      "left": "english-v5",
+      "right": "v5-mobile",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 19,
+          "agreementCorrect": 18,
+          "agreementWrong": 1,
+          "correctBothAbove": 9,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 19,
+          "agreementCorrect": 19,
+          "agreementWrong": 0,
+          "correctBothAbove": 15,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": []
+    },
+    {
+      "left": "english-v5",
+      "right": "v5-server",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 19,
+          "agreementCorrect": 19,
+          "agreementWrong": 0,
+          "correctBothAbove": 18,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 20,
+          "agreementCorrect": 20,
+          "agreementWrong": 0,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": []
+    },
+    {
+      "left": "english-v5",
+      "right": "v6-medium",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 19,
+          "agreementCorrect": 18,
+          "agreementWrong": 1,
+          "correctBothAbove": 18,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 21,
+          "agreementCorrect": 21,
+          "agreementWrong": 0,
+          "correctBothAbove": 20,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": []
+    },
+    {
+      "left": "english-v5",
+      "right": "v6-small",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 20,
+          "agreementCorrect": 18,
+          "agreementWrong": 2,
+          "correctBothAbove": 18,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 20,
+          "agreementCorrect": 20,
+          "agreementWrong": 0,
+          "correctBothAbove": 18,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": []
+    },
+    {
+      "left": "japanese-v3",
+      "right": "v5-mobile",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 14,
+          "agreementWrong": 4,
+          "correctBothAbove": 14,
+          "wrongBothAbove": 2
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 21,
+          "agreementCorrect": 19,
+          "agreementWrong": 2,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 2
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 12,
+          "agreementCorrect": 3,
+          "agreementWrong": 9,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 8
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 5,
+          "agreementCorrect": 5,
+          "agreementWrong": 0,
+          "correctBothAbove": 1,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 12,
+          "agreementCorrect": 11,
+          "agreementWrong": 1,
+          "correctBothAbove": 7,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 16,
+          "agreementCorrect": 14,
+          "agreementWrong": 2,
+          "correctBothAbove": 13,
+          "wrongBothAbove": 2
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 13,
+          "agreementCorrect": 2,
+          "agreementWrong": 11,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 8
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 5,
+          "agreementCorrect": 3,
+          "agreementWrong": 2,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 2
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n000",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "空想設計 4698",
+          "sharedRawText": "空想設計4698",
+          "leftOwnMinimum": 0.9857573509216309,
+          "rightOwnMinimum": 0.995959460735321
+        },
+        {
+          "id": "n016",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "模擬教員 1120",
+          "sharedRawText": "模擬教員1120",
+          "leftOwnMinimum": 0.981767475605011,
+          "rightOwnMinimum": 0.9715429544448853
+        },
+        {
+          "id": "n020",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O08022",
+          "sharedRawText": "仮室008022",
+          "leftOwnMinimum": 0.9970353841781616,
+          "rightOwnMinimum": 0.9048429131507874
+        },
+        {
+          "id": "n023",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O5215",
+          "sharedRawText": "仮室005215",
+          "leftOwnMinimum": 0.9993939399719238,
+          "rightOwnMinimum": 0.9515503644943237
+        },
+        {
+          "id": "n030",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "空想設計 4895",
+          "sharedRawText": "空想設計4895",
+          "leftOwnMinimum": 0.9502939581871033,
+          "rightOwnMinimum": 0.9936203360557556
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.9996352195739746,
+          "rightOwnMinimum": 0.9553235173225403
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.9993708729743958,
+          "rightOwnMinimum": 0.9736040830612183
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.9994720816612244,
+          "rightOwnMinimum": 0.9445494413375854
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.9970223307609558,
+          "rightOwnMinimum": 0.9578562378883362
+        },
+        {
+          "id": "n061",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 1598",
+          "sharedRawText": "空想指導1598",
+          "leftOwnMinimum": 0.9988939166069031,
+          "rightOwnMinimum": 0.9877469539642334
+        },
+        {
+          "id": "n062",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O 1598",
+          "sharedRawText": "仮室001598",
+          "leftOwnMinimum": 0.9974428415298462,
+          "rightOwnMinimum": 0.9705221056938171
+        },
+        {
+          "id": "n068",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O01131",
+          "sharedRawText": "仮室001131",
+          "leftOwnMinimum": 0.9980397820472717,
+          "rightOwnMinimum": 0.9536460041999817
+        },
+        {
+          "id": "n112",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 1987",
+          "sharedRawText": "模擬教員1987",
+          "leftOwnMinimum": 0.8991618156433105,
+          "rightOwnMinimum": 0.96028733253479
+        },
+        {
+          "id": "n113",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室B203 1987",
+          "sharedRawText": "仮室B2031987",
+          "leftOwnMinimum": 0.9960474371910095,
+          "rightOwnMinimum": 0.89285808801651
+        },
+        {
+          "id": "n116",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O1398",
+          "sharedRawText": "仮室001398",
+          "leftOwnMinimum": 0.9986554384231567,
+          "rightOwnMinimum": 0.8735915422439575
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.998953104019165,
+          "rightOwnMinimum": 0.903263509273529
+        },
+        {
+          "id": "n122",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05902",
+          "sharedRawText": "仮室005902",
+          "leftOwnMinimum": 0.9990463852882385,
+          "rightOwnMinimum": 0.8831571340560913
+        },
+        {
+          "id": "n127",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "架空講師 8761",
+          "sharedRawText": "架空講師8761",
+          "leftOwnMinimum": 0.8559771180152893,
+          "rightOwnMinimum": 0.9875500798225403
+        },
+        {
+          "id": "n128",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O 8761",
+          "sharedRawText": "仮室008761",
+          "leftOwnMinimum": 0.9874985814094543,
+          "rightOwnMinimum": 0.916635274887085
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.999369204044342,
+          "rightOwnMinimum": 0.8835886716842651
+        },
+        {
+          "id": "n152",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05063",
+          "sharedRawText": "仮室005063",
+          "leftOwnMinimum": 0.9814429879188538,
+          "rightOwnMinimum": 0.8973201513290405
+        },
+        {
+          "id": "n164",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05961",
+          "sharedRawText": "仮室005961",
+          "leftOwnMinimum": 0.9269744753837585,
+          "rightOwnMinimum": 0.9155870676040649
+        },
+        {
+          "id": "n168",
+          "cohort": "serif",
+          "kind": "header",
+          "literal": "1_1",
+          "sharedRawText": "11",
+          "leftOwnMinimum": 0.9976248145103455,
+          "rightOwnMinimum": 0.9891758561134338
+        },
+        {
+          "id": "n169",
+          "cohort": "serif",
+          "kind": "header",
+          "literal": "1_2",
+          "sharedRawText": "12",
+          "leftOwnMinimum": 0.9810370206832886,
+          "rightOwnMinimum": 0.9894277453422546
+        }
+      ]
+    },
+    {
+      "left": "japanese-v3",
+      "right": "v5-server",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 14,
+          "agreementWrong": 4,
+          "correctBothAbove": 14,
+          "wrongBothAbove": 4
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 22,
+          "agreementCorrect": 20,
+          "agreementWrong": 2,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 2
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 17,
+          "agreementCorrect": 3,
+          "agreementWrong": 14,
+          "correctBothAbove": 1,
+          "wrongBothAbove": 8
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 5,
+          "agreementCorrect": 5,
+          "agreementWrong": 0,
+          "correctBothAbove": 1,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 13,
+          "agreementCorrect": 12,
+          "agreementWrong": 1,
+          "correctBothAbove": 8,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 16,
+          "agreementCorrect": 14,
+          "agreementWrong": 2,
+          "correctBothAbove": 8,
+          "wrongBothAbove": 1
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 12,
+          "agreementCorrect": 2,
+          "agreementWrong": 10,
+          "correctBothAbove": 1,
+          "wrongBothAbove": 4
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 2,
+          "agreementCorrect": 2,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n000",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "空想設計 4698",
+          "sharedRawText": "空想設計4698",
+          "leftOwnMinimum": 0.9857573509216309,
+          "rightOwnMinimum": 0.9416205286979675
+        },
+        {
+          "id": "n015",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "架空演習 1120",
+          "sharedRawText": "架空演習1120",
+          "leftOwnMinimum": 0.9290911555290222,
+          "rightOwnMinimum": 0.9710714817047119
+        },
+        {
+          "id": "n016",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "模擬教員 1120",
+          "sharedRawText": "模擬教員1120",
+          "leftOwnMinimum": 0.981767475605011,
+          "rightOwnMinimum": 0.8662265539169312
+        },
+        {
+          "id": "n020",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O08022",
+          "sharedRawText": "仮室008022",
+          "leftOwnMinimum": 0.9970353841781616,
+          "rightOwnMinimum": 0.8217055797576904
+        },
+        {
+          "id": "n023",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O5215",
+          "sharedRawText": "仮室005215",
+          "leftOwnMinimum": 0.9993939399719238,
+          "rightOwnMinimum": 0.8937437534332275
+        },
+        {
+          "id": "n030",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "空想設計 4895",
+          "sharedRawText": "空想設計4895",
+          "leftOwnMinimum": 0.9502939581871033,
+          "rightOwnMinimum": 0.885057806968689
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.9996352195739746,
+          "rightOwnMinimum": 0.8237989544868469
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.9993708729743958,
+          "rightOwnMinimum": 0.8711639046669006
+        },
+        {
+          "id": "n045",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "架空演習 7328",
+          "sharedRawText": "架空演習7328",
+          "leftOwnMinimum": 0.9344860911369324,
+          "rightOwnMinimum": 0.9700334668159485
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.9994720816612244,
+          "rightOwnMinimum": 0.8635419607162476
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.9970223307609558,
+          "rightOwnMinimum": 0.8521154522895813
+        },
+        {
+          "id": "n061",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 1598",
+          "sharedRawText": "空想指導1598",
+          "leftOwnMinimum": 0.9988939166069031,
+          "rightOwnMinimum": 0.9995802044868469
+        },
+        {
+          "id": "n062",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O 1598",
+          "sharedRawText": "仮室001598",
+          "leftOwnMinimum": 0.9974428415298462,
+          "rightOwnMinimum": 0.8740882873535156
+        },
+        {
+          "id": "n068",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O01131",
+          "sharedRawText": "仮室001131",
+          "leftOwnMinimum": 0.9980397820472717,
+          "rightOwnMinimum": 0.8667611479759216
+        },
+        {
+          "id": "n116",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O1398",
+          "sharedRawText": "仮室001398",
+          "leftOwnMinimum": 0.9986554384231567,
+          "rightOwnMinimum": 0.8393173217773438
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.998953104019165,
+          "rightOwnMinimum": 0.8131940364837646
+        },
+        {
+          "id": "n127",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "架空講師 8761",
+          "sharedRawText": "架空講師8761",
+          "leftOwnMinimum": 0.8559771180152893,
+          "rightOwnMinimum": 0.995987594127655
+        },
+        {
+          "id": "n146",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室l1I1237",
+          "sharedRawText": "仮室1111237",
+          "leftOwnMinimum": 0.9575262665748596,
+          "rightOwnMinimum": 0.9052855968475342
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.999369204044342,
+          "rightOwnMinimum": 0.8398748636245728
+        }
+      ]
+    },
+    {
+      "left": "japanese-v3",
+      "right": "v6-medium",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 17,
+          "agreementCorrect": 14,
+          "agreementWrong": 3,
+          "correctBothAbove": 14,
+          "wrongBothAbove": 3
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 22,
+          "agreementCorrect": 21,
+          "agreementWrong": 1,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 1
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 10,
+          "agreementCorrect": 3,
+          "agreementWrong": 7,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 1
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 5,
+          "agreementCorrect": 5,
+          "agreementWrong": 0,
+          "correctBothAbove": 1,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 12,
+          "agreementCorrect": 12,
+          "agreementWrong": 0,
+          "correctBothAbove": 7,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 14,
+          "agreementWrong": 1,
+          "correctBothAbove": 13,
+          "wrongBothAbove": 1
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 8,
+          "agreementCorrect": 2,
+          "agreementWrong": 6,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 2
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 3,
+          "agreementCorrect": 3,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n015",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "架空演習 1120",
+          "sharedRawText": "架空演習1120",
+          "leftOwnMinimum": 0.9290911555290222,
+          "rightOwnMinimum": 0.9993763566017151
+        },
+        {
+          "id": "n030",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "空想設計 4895",
+          "sharedRawText": "空想設計4895",
+          "leftOwnMinimum": 0.9502939581871033,
+          "rightOwnMinimum": 0.9990028738975525
+        },
+        {
+          "id": "n045",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "架空演習 7328",
+          "sharedRawText": "架空演習7328",
+          "leftOwnMinimum": 0.9344860911369324,
+          "rightOwnMinimum": 0.999380350112915
+        },
+        {
+          "id": "n061",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 1598",
+          "sharedRawText": "空想指導1598",
+          "leftOwnMinimum": 0.9988939166069031,
+          "rightOwnMinimum": 0.9997285008430481
+        },
+        {
+          "id": "n068",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O01131",
+          "sharedRawText": "仮室001131",
+          "leftOwnMinimum": 0.9980397820472717,
+          "rightOwnMinimum": 0.8478849530220032
+        },
+        {
+          "id": "n112",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 1987",
+          "sharedRawText": "模擬教員1987",
+          "leftOwnMinimum": 0.8991618156433105,
+          "rightOwnMinimum": 0.9994217157363892
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.998953104019165,
+          "rightOwnMinimum": 0.9385693669319153
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.999369204044342,
+          "rightOwnMinimum": 0.8751375079154968
+        }
+      ]
+    },
+    {
+      "left": "japanese-v3",
+      "right": "v6-small",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 16,
+          "agreementCorrect": 14,
+          "agreementWrong": 2,
+          "correctBothAbove": 14,
+          "wrongBothAbove": 2
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 22,
+          "agreementCorrect": 21,
+          "agreementWrong": 1,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 1
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 16,
+          "agreementCorrect": 3,
+          "agreementWrong": 13,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 6
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 5,
+          "agreementCorrect": 5,
+          "agreementWrong": 0,
+          "correctBothAbove": 1,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 12,
+          "agreementCorrect": 12,
+          "agreementWrong": 0,
+          "correctBothAbove": 9,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 14,
+          "agreementCorrect": 14,
+          "agreementWrong": 0,
+          "correctBothAbove": 13,
+          "wrongBothAbove": 0
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 12,
+          "agreementCorrect": 2,
+          "agreementWrong": 10,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 4
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 2,
+          "agreementCorrect": 2,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n015",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "架空演習 1120",
+          "sharedRawText": "架空演習1120",
+          "leftOwnMinimum": 0.9290911555290222,
+          "rightOwnMinimum": 0.9990043044090271
+        },
+        {
+          "id": "n016",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "模擬教員 1120",
+          "sharedRawText": "模擬教員1120",
+          "leftOwnMinimum": 0.981767475605011,
+          "rightOwnMinimum": 0.9996204376220703
+        },
+        {
+          "id": "n023",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O5215",
+          "sharedRawText": "仮室005215",
+          "leftOwnMinimum": 0.9993939399719238,
+          "rightOwnMinimum": 0.9573742747306824
+        },
+        {
+          "id": "n030",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "空想設計 4895",
+          "sharedRawText": "空想設計4895",
+          "leftOwnMinimum": 0.9502939581871033,
+          "rightOwnMinimum": 0.9936203360557556
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.9996352195739746,
+          "rightOwnMinimum": 0.9194689989089966
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.9993708729743958,
+          "rightOwnMinimum": 0.9266632795333862
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.9994720816612244,
+          "rightOwnMinimum": 0.9477154016494751
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.9970223307609558,
+          "rightOwnMinimum": 0.9226271510124207
+        },
+        {
+          "id": "n062",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O 1598",
+          "sharedRawText": "仮室001598",
+          "leftOwnMinimum": 0.9974428415298462,
+          "rightOwnMinimum": 0.9299338459968567
+        },
+        {
+          "id": "n116",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O1398",
+          "sharedRawText": "仮室001398",
+          "leftOwnMinimum": 0.9986554384231567,
+          "rightOwnMinimum": 0.8801507949829102
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.998953104019165,
+          "rightOwnMinimum": 0.9731719493865967
+        },
+        {
+          "id": "n122",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05902",
+          "sharedRawText": "仮室005902",
+          "leftOwnMinimum": 0.9990463852882385,
+          "rightOwnMinimum": 0.8498244881629944
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.999369204044342,
+          "rightOwnMinimum": 0.9421401023864746
+        }
+      ]
+    },
+    {
+      "left": "v5-mobile",
+      "right": "v5-server",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 24,
+          "agreementCorrect": 19,
+          "agreementWrong": 5,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 3
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 23,
+          "agreementCorrect": 19,
+          "agreementWrong": 4,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 3
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 13,
+          "agreementCorrect": 4,
+          "agreementWrong": 9,
+          "correctBothAbove": 1,
+          "wrongBothAbove": 8
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 18,
+          "agreementWrong": 0,
+          "correctBothAbove": 9,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 22,
+          "agreementCorrect": 18,
+          "agreementWrong": 4,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 2
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 24,
+          "agreementCorrect": 19,
+          "agreementWrong": 5,
+          "correctBothAbove": 10,
+          "wrongBothAbove": 4
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 7,
+          "agreementWrong": 11,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 5
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 18,
+          "agreementWrong": 0,
+          "correctBothAbove": 14,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n000",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "空想設計 4698",
+          "sharedRawText": "空想設計4698",
+          "leftOwnMinimum": 0.995959460735321,
+          "rightOwnMinimum": 0.9416205286979675
+        },
+        {
+          "id": "n016",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "模擬教員 1120",
+          "sharedRawText": "模擬教員1120",
+          "leftOwnMinimum": 0.9715429544448853,
+          "rightOwnMinimum": 0.8662265539169312
+        },
+        {
+          "id": "n020",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O08022",
+          "sharedRawText": "仮室008022",
+          "leftOwnMinimum": 0.9048429131507874,
+          "rightOwnMinimum": 0.8217055797576904
+        },
+        {
+          "id": "n023",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O5215",
+          "sharedRawText": "仮室005215",
+          "leftOwnMinimum": 0.9515503644943237,
+          "rightOwnMinimum": 0.8937437534332275
+        },
+        {
+          "id": "n030",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "空想設計 4895",
+          "sharedRawText": "空想設計4895",
+          "leftOwnMinimum": 0.9936203360557556,
+          "rightOwnMinimum": 0.885057806968689
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.9553235173225403,
+          "rightOwnMinimum": 0.8237989544868469
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.9736040830612183,
+          "rightOwnMinimum": 0.8711639046669006
+        },
+        {
+          "id": "n046",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 7328",
+          "sharedRawText": "空想指導7328",
+          "leftOwnMinimum": 0.9917294383049011,
+          "rightOwnMinimum": 0.9994117021560669
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.9445494413375854,
+          "rightOwnMinimum": 0.8635419607162476
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.9578562378883362,
+          "rightOwnMinimum": 0.8521154522895813
+        },
+        {
+          "id": "n060",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "模擬研究 1598",
+          "sharedRawText": "模擬研究1598",
+          "leftOwnMinimum": 0.9917421340942383,
+          "rightOwnMinimum": 0.9778543710708618
+        },
+        {
+          "id": "n061",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 1598",
+          "sharedRawText": "空想指導1598",
+          "leftOwnMinimum": 0.9877469539642334,
+          "rightOwnMinimum": 0.9995802044868469
+        },
+        {
+          "id": "n062",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O 1598",
+          "sharedRawText": "仮室001598",
+          "leftOwnMinimum": 0.9705221056938171,
+          "rightOwnMinimum": 0.8740882873535156
+        },
+        {
+          "id": "n068",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O01131",
+          "sharedRawText": "仮室001131",
+          "leftOwnMinimum": 0.9536460041999817,
+          "rightOwnMinimum": 0.8667611479759216
+        },
+        {
+          "id": "n096",
+          "cohort": "serif",
+          "kind": "subject",
+          "literal": "空想設計 6100",
+          "sharedRawText": "空想設計6100",
+          "leftOwnMinimum": 0.9817008376121521,
+          "rightOwnMinimum": 0.9015483260154724
+        },
+        {
+          "id": "n097",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 6100",
+          "sharedRawText": "模擬教員6100",
+          "leftOwnMinimum": 0.9481522440910339,
+          "rightOwnMinimum": 0.8411368131637573
+        },
+        {
+          "id": "n111",
+          "cohort": "serif",
+          "kind": "subject",
+          "literal": "空想設計 1987",
+          "sharedRawText": "空想設計1987",
+          "leftOwnMinimum": 0.9965103268623352,
+          "rightOwnMinimum": 0.9497557282447815
+        },
+        {
+          "id": "n116",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O1398",
+          "sharedRawText": "仮室001398",
+          "leftOwnMinimum": 0.8735915422439575,
+          "rightOwnMinimum": 0.8393173217773438
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.903263509273529,
+          "rightOwnMinimum": 0.8131940364837646
+        },
+        {
+          "id": "n127",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "架空講師 8761",
+          "sharedRawText": "架空講師8761",
+          "leftOwnMinimum": 0.9875500798225403,
+          "rightOwnMinimum": 0.995987594127655
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9194843173027039,
+          "rightOwnMinimum": 0.9345365762710571
+        },
+        {
+          "id": "n142",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "架空講師 1146",
+          "sharedRawText": "架空講師1146",
+          "leftOwnMinimum": 0.9795289039611816,
+          "rightOwnMinimum": 0.9971774816513062
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.8835886716842651,
+          "rightOwnMinimum": 0.8398748636245728
+        },
+        {
+          "id": "n157",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 7657",
+          "sharedRawText": "模擬教員7657",
+          "leftOwnMinimum": 0.9603059887886047,
+          "rightOwnMinimum": 0.8599240183830261
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.9365358948707581,
+          "rightOwnMinimum": 0.9209021329879761
+        }
+      ]
+    },
+    {
+      "left": "v5-mobile",
+      "right": "v6-medium",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 23,
+          "agreementCorrect": 19,
+          "agreementWrong": 4,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 2
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 21,
+          "agreementCorrect": 19,
+          "agreementWrong": 2,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 2
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 8,
+          "agreementWrong": 7,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 1
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 17,
+          "agreementWrong": 1,
+          "correctBothAbove": 9,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 19,
+          "agreementCorrect": 18,
+          "agreementWrong": 1,
+          "correctBothAbove": 17,
+          "wrongBothAbove": 1
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 22,
+          "agreementCorrect": 19,
+          "agreementWrong": 3,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 3
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 16,
+          "agreementCorrect": 7,
+          "agreementWrong": 9,
+          "correctBothAbove": 7,
+          "wrongBothAbove": 4
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 19,
+          "agreementCorrect": 19,
+          "agreementWrong": 0,
+          "correctBothAbove": 15,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n030",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "空想設計 4895",
+          "sharedRawText": "空想設計4895",
+          "leftOwnMinimum": 0.9936203360557556,
+          "rightOwnMinimum": 0.9990028738975525
+        },
+        {
+          "id": "n046",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 7328",
+          "sharedRawText": "空想指導7328",
+          "leftOwnMinimum": 0.9917294383049011,
+          "rightOwnMinimum": 0.9996079802513123
+        },
+        {
+          "id": "n060",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "模擬研究 1598",
+          "sharedRawText": "模擬研究1598",
+          "leftOwnMinimum": 0.9917421340942383,
+          "rightOwnMinimum": 0.999414324760437
+        },
+        {
+          "id": "n061",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 1598",
+          "sharedRawText": "空想指導1598",
+          "leftOwnMinimum": 0.9877469539642334,
+          "rightOwnMinimum": 0.9997285008430481
+        },
+        {
+          "id": "n068",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O01131",
+          "sharedRawText": "仮室001131",
+          "leftOwnMinimum": 0.9536460041999817,
+          "rightOwnMinimum": 0.8478849530220032
+        },
+        {
+          "id": "n097",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 6100",
+          "sharedRawText": "模擬教員6100",
+          "leftOwnMinimum": 0.9481522440910339,
+          "rightOwnMinimum": 0.999679684638977
+        },
+        {
+          "id": "n112",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 1987",
+          "sharedRawText": "模擬教員1987",
+          "leftOwnMinimum": 0.96028733253479,
+          "rightOwnMinimum": 0.9994217157363892
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.903263509273529,
+          "rightOwnMinimum": 0.9385693669319153
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9194843173027039,
+          "rightOwnMinimum": 0.9083577990531921
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.8835886716842651,
+          "rightOwnMinimum": 0.8751375079154968
+        },
+        {
+          "id": "n156",
+          "cohort": "serif",
+          "kind": "subject",
+          "literal": "架空演習 7657",
+          "sharedRawText": "架空演習7657",
+          "leftOwnMinimum": 0.9850721955299377,
+          "rightOwnMinimum": 0.9968518614768982
+        },
+        {
+          "id": "n157",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 7657",
+          "sharedRawText": "模擬教員7657",
+          "leftOwnMinimum": 0.9603059887886047,
+          "rightOwnMinimum": 0.99974125623703
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.9365358948707581,
+          "rightOwnMinimum": 0.8823288083076477
+        }
+      ]
+    },
+    {
+      "left": "v5-mobile",
+      "right": "v6-small",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 22,
+          "agreementCorrect": 19,
+          "agreementWrong": 3,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 2
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 21,
+          "agreementCorrect": 19,
+          "agreementWrong": 2,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 2
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 11,
+          "agreementCorrect": 3,
+          "agreementWrong": 8,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 6
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 17,
+          "agreementWrong": 1,
+          "correctBothAbove": 9,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 18,
+          "agreementWrong": 0,
+          "correctBothAbove": 17,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 21,
+          "agreementCorrect": 19,
+          "agreementWrong": 2,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 2
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 4,
+          "agreementWrong": 11,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 8
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 18,
+          "agreementWrong": 0,
+          "correctBothAbove": 14,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n016",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "模擬教員 1120",
+          "sharedRawText": "模擬教員1120",
+          "leftOwnMinimum": 0.9715429544448853,
+          "rightOwnMinimum": 0.9996204376220703
+        },
+        {
+          "id": "n023",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O5215",
+          "sharedRawText": "仮室005215",
+          "leftOwnMinimum": 0.9515503644943237,
+          "rightOwnMinimum": 0.9573742747306824
+        },
+        {
+          "id": "n030",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "空想設計 4895",
+          "sharedRawText": "空想設計4895",
+          "leftOwnMinimum": 0.9936203360557556,
+          "rightOwnMinimum": 0.9936203360557556
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.9553235173225403,
+          "rightOwnMinimum": 0.9194689989089966
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.9736040830612183,
+          "rightOwnMinimum": 0.9266632795333862
+        },
+        {
+          "id": "n046",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 7328",
+          "sharedRawText": "空想指導7328",
+          "leftOwnMinimum": 0.9917294383049011,
+          "rightOwnMinimum": 0.9999690055847168
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.9445494413375854,
+          "rightOwnMinimum": 0.9477154016494751
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.9578562378883362,
+          "rightOwnMinimum": 0.9226271510124207
+        },
+        {
+          "id": "n060",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "模擬研究 1598",
+          "sharedRawText": "模擬研究1598",
+          "leftOwnMinimum": 0.9917421340942383,
+          "rightOwnMinimum": 0.9998955726623535
+        },
+        {
+          "id": "n062",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O 1598",
+          "sharedRawText": "仮室001598",
+          "leftOwnMinimum": 0.9705221056938171,
+          "rightOwnMinimum": 0.9299338459968567
+        },
+        {
+          "id": "n107",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室I1l3475",
+          "sharedRawText": "仮室I113475",
+          "leftOwnMinimum": 0.87043696641922,
+          "rightOwnMinimum": 0.9376754760742188
+        },
+        {
+          "id": "n116",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O1398",
+          "sharedRawText": "仮室001398",
+          "leftOwnMinimum": 0.8735915422439575,
+          "rightOwnMinimum": 0.8801507949829102
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.903263509273529,
+          "rightOwnMinimum": 0.9731719493865967
+        },
+        {
+          "id": "n122",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室O05902",
+          "sharedRawText": "仮室005902",
+          "leftOwnMinimum": 0.8831571340560913,
+          "rightOwnMinimum": 0.8498244881629944
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9194843173027039,
+          "rightOwnMinimum": 0.9524517059326172
+        },
+        {
+          "id": "n142",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "架空講師 1146",
+          "sharedRawText": "架空講師1146",
+          "leftOwnMinimum": 0.9795289039611816,
+          "rightOwnMinimum": 0.999413013458252
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.8835886716842651,
+          "rightOwnMinimum": 0.9421401023864746
+        },
+        {
+          "id": "n155",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室I1l3293",
+          "sharedRawText": "仮室I113293",
+          "leftOwnMinimum": 0.9534539580345154,
+          "rightOwnMinimum": 0.9664002060890198
+        },
+        {
+          "id": "n157",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 7657",
+          "sharedRawText": "模擬教員7657",
+          "leftOwnMinimum": 0.9603059887886047,
+          "rightOwnMinimum": 0.9985542893409729
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.9365358948707581,
+          "rightOwnMinimum": 0.9491662383079529
+        }
+      ]
+    },
+    {
+      "left": "v5-server",
+      "right": "v6-medium",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 23,
+          "agreementCorrect": 19,
+          "agreementWrong": 4,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 4
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 22,
+          "agreementCorrect": 20,
+          "agreementWrong": 2,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 2
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 11,
+          "agreementCorrect": 4,
+          "agreementWrong": 7,
+          "correctBothAbove": 1,
+          "wrongBothAbove": 1
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 19,
+          "agreementCorrect": 19,
+          "agreementWrong": 0,
+          "correctBothAbove": 17,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 19,
+          "agreementCorrect": 19,
+          "agreementWrong": 0,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 22,
+          "agreementCorrect": 19,
+          "agreementWrong": 3,
+          "correctBothAbove": 10,
+          "wrongBothAbove": 2
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 10,
+          "agreementWrong": 8,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 4
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 20,
+          "agreementCorrect": 20,
+          "agreementWrong": 0,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n015",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "架空演習 1120",
+          "sharedRawText": "架空演習1120",
+          "leftOwnMinimum": 0.9710714817047119,
+          "rightOwnMinimum": 0.9993763566017151
+        },
+        {
+          "id": "n030",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "空想設計 4895",
+          "sharedRawText": "空想設計4895",
+          "leftOwnMinimum": 0.885057806968689,
+          "rightOwnMinimum": 0.9990028738975525
+        },
+        {
+          "id": "n045",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "架空演習 7328",
+          "sharedRawText": "架空演習7328",
+          "leftOwnMinimum": 0.9700334668159485,
+          "rightOwnMinimum": 0.999380350112915
+        },
+        {
+          "id": "n046",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 7328",
+          "sharedRawText": "空想指導7328",
+          "leftOwnMinimum": 0.9994117021560669,
+          "rightOwnMinimum": 0.9996079802513123
+        },
+        {
+          "id": "n060",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "模擬研究 1598",
+          "sharedRawText": "模擬研究1598",
+          "leftOwnMinimum": 0.9778543710708618,
+          "rightOwnMinimum": 0.999414324760437
+        },
+        {
+          "id": "n061",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 1598",
+          "sharedRawText": "空想指導1598",
+          "leftOwnMinimum": 0.9995802044868469,
+          "rightOwnMinimum": 0.9997285008430481
+        },
+        {
+          "id": "n068",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O01131",
+          "sharedRawText": "仮室001131",
+          "leftOwnMinimum": 0.8667611479759216,
+          "rightOwnMinimum": 0.8478849530220032
+        },
+        {
+          "id": "n097",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 6100",
+          "sharedRawText": "模擬教員6100",
+          "leftOwnMinimum": 0.8411368131637573,
+          "rightOwnMinimum": 0.999679684638977
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.8131940364837646,
+          "rightOwnMinimum": 0.9385693669319153
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9345365762710571,
+          "rightOwnMinimum": 0.9083577990531921
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.8398748636245728,
+          "rightOwnMinimum": 0.8751375079154968
+        },
+        {
+          "id": "n157",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 7657",
+          "sharedRawText": "模擬教員7657",
+          "leftOwnMinimum": 0.8599240183830261,
+          "rightOwnMinimum": 0.99974125623703
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.9209021329879761,
+          "rightOwnMinimum": 0.8823288083076477
+        }
+      ]
+    },
+    {
+      "left": "v5-server",
+      "right": "v6-small",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 22,
+          "agreementCorrect": 19,
+          "agreementWrong": 3,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 3
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 22,
+          "agreementCorrect": 20,
+          "agreementWrong": 2,
+          "correctBothAbove": 16,
+          "wrongBothAbove": 2
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 16,
+          "agreementCorrect": 3,
+          "agreementWrong": 13,
+          "correctBothAbove": 1,
+          "wrongBothAbove": 6
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 18,
+          "agreementCorrect": 18,
+          "agreementWrong": 0,
+          "correctBothAbove": 17,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 20,
+          "agreementCorrect": 20,
+          "agreementWrong": 0,
+          "correctBothAbove": 17,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 21,
+          "agreementCorrect": 19,
+          "agreementWrong": 2,
+          "correctBothAbove": 10,
+          "wrongBothAbove": 2
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 15,
+          "agreementCorrect": 5,
+          "agreementWrong": 10,
+          "correctBothAbove": 1,
+          "wrongBothAbove": 6
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 19,
+          "agreementCorrect": 19,
+          "agreementWrong": 0,
+          "correctBothAbove": 17,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n015",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "架空演習 1120",
+          "sharedRawText": "架空演習1120",
+          "leftOwnMinimum": 0.9710714817047119,
+          "rightOwnMinimum": 0.9990043044090271
+        },
+        {
+          "id": "n016",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "模擬教員 1120",
+          "sharedRawText": "模擬教員1120",
+          "leftOwnMinimum": 0.8662265539169312,
+          "rightOwnMinimum": 0.9996204376220703
+        },
+        {
+          "id": "n023",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O5215",
+          "sharedRawText": "仮室005215",
+          "leftOwnMinimum": 0.8937437534332275,
+          "rightOwnMinimum": 0.9573742747306824
+        },
+        {
+          "id": "n030",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "空想設計 4895",
+          "sharedRawText": "空想設計4895",
+          "leftOwnMinimum": 0.885057806968689,
+          "rightOwnMinimum": 0.9936203360557556
+        },
+        {
+          "id": "n035",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O02925",
+          "sharedRawText": "仮室002925",
+          "leftOwnMinimum": 0.8237989544868469,
+          "rightOwnMinimum": 0.9194689989089966
+        },
+        {
+          "id": "n041",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O05676",
+          "sharedRawText": "仮室005676",
+          "leftOwnMinimum": 0.8711639046669006,
+          "rightOwnMinimum": 0.9266632795333862
+        },
+        {
+          "id": "n046",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 7328",
+          "sharedRawText": "空想指導7328",
+          "leftOwnMinimum": 0.9994117021560669,
+          "rightOwnMinimum": 0.9999690055847168
+        },
+        {
+          "id": "n050",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O06854",
+          "sharedRawText": "仮室006854",
+          "leftOwnMinimum": 0.8635419607162476,
+          "rightOwnMinimum": 0.9477154016494751
+        },
+        {
+          "id": "n056",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室O07932",
+          "sharedRawText": "仮室007932",
+          "leftOwnMinimum": 0.8521154522895813,
+          "rightOwnMinimum": 0.9226271510124207
+        },
+        {
+          "id": "n060",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "模擬研究 1598",
+          "sharedRawText": "模擬研究1598",
+          "leftOwnMinimum": 0.9778543710708618,
+          "rightOwnMinimum": 0.9998955726623535
+        },
+        {
+          "id": "n062",
+          "cohort": "sans",
+          "kind": "room",
+          "literal": "仮室0O 1598",
+          "sharedRawText": "仮室001598",
+          "leftOwnMinimum": 0.8740882873535156,
+          "rightOwnMinimum": 0.9299338459968567
+        },
+        {
+          "id": "n116",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O1398",
+          "sharedRawText": "仮室001398",
+          "leftOwnMinimum": 0.8393173217773438,
+          "rightOwnMinimum": 0.8801507949829102
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.8131940364837646,
+          "rightOwnMinimum": 0.9731719493865967
+        },
+        {
+          "id": "n128",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O 8761",
+          "sharedRawText": "仮室00 8761",
+          "leftOwnMinimum": 0.871807336807251,
+          "rightOwnMinimum": 0.933612048625946
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9345365762710571,
+          "rightOwnMinimum": 0.9524517059326172
+        },
+        {
+          "id": "n142",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "架空講師 1146",
+          "sharedRawText": "架空講師1146",
+          "leftOwnMinimum": 0.9971774816513062,
+          "rightOwnMinimum": 0.999413013458252
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.8398748636245728,
+          "rightOwnMinimum": 0.9421401023864746
+        },
+        {
+          "id": "n157",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 7657",
+          "sharedRawText": "模擬教員7657",
+          "leftOwnMinimum": 0.8599240183830261,
+          "rightOwnMinimum": 0.9985542893409729
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.9209021329879761,
+          "rightOwnMinimum": 0.9491662383079529
+        }
+      ]
+    },
+    {
+      "left": "v6-medium",
+      "right": "v6-small",
+      "groups": {
+        "sans/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 23,
+          "agreementCorrect": 20,
+          "agreementWrong": 3,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 3
+        },
+        "sans/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 22,
+          "agreementCorrect": 21,
+          "agreementWrong": 1,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 1
+        },
+        "sans/room": {
+          "rows": 24,
+          "nonemptyAgreements": 11,
+          "agreementCorrect": 4,
+          "agreementWrong": 7,
+          "correctBothAbove": 3,
+          "wrongBothAbove": 0
+        },
+        "sans/header": {
+          "rows": 21,
+          "nonemptyAgreements": 20,
+          "agreementCorrect": 18,
+          "agreementWrong": 2,
+          "correctBothAbove": 18,
+          "wrongBothAbove": 0
+        },
+        "sans/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        },
+        "serif/subject": {
+          "rows": 24,
+          "nonemptyAgreements": 23,
+          "agreementCorrect": 23,
+          "agreementWrong": 0,
+          "correctBothAbove": 17,
+          "wrongBothAbove": 0
+        },
+        "serif/teacher": {
+          "rows": 24,
+          "nonemptyAgreements": 21,
+          "agreementCorrect": 20,
+          "agreementWrong": 1,
+          "correctBothAbove": 19,
+          "wrongBothAbove": 1
+        },
+        "serif/room": {
+          "rows": 24,
+          "nonemptyAgreements": 16,
+          "agreementCorrect": 6,
+          "agreementWrong": 10,
+          "correctBothAbove": 2,
+          "wrongBothAbove": 4
+        },
+        "serif/header": {
+          "rows": 21,
+          "nonemptyAgreements": 20,
+          "agreementCorrect": 20,
+          "agreementWrong": 0,
+          "correctBothAbove": 17,
+          "wrongBothAbove": 0
+        },
+        "serif/blank": {
+          "rows": 3,
+          "nonemptyAgreements": 0,
+          "agreementCorrect": 0,
+          "agreementWrong": 0,
+          "correctBothAbove": 0,
+          "wrongBothAbove": 0
+        }
+      },
+      "wrongBothAbove": [
+        {
+          "id": "n015",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "架空演習 1120",
+          "sharedRawText": "架空演習1120",
+          "leftOwnMinimum": 0.9993763566017151,
+          "rightOwnMinimum": 0.9990043044090271
+        },
+        {
+          "id": "n030",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "空想設計 4895",
+          "sharedRawText": "空想設計4895",
+          "leftOwnMinimum": 0.9990028738975525,
+          "rightOwnMinimum": 0.9936203360557556
+        },
+        {
+          "id": "n046",
+          "cohort": "sans",
+          "kind": "teacher",
+          "literal": "空想指導 7328",
+          "sharedRawText": "空想指導7328",
+          "leftOwnMinimum": 0.9996079802513123,
+          "rightOwnMinimum": 0.9999690055847168
+        },
+        {
+          "id": "n060",
+          "cohort": "sans",
+          "kind": "subject",
+          "literal": "模擬研究 1598",
+          "sharedRawText": "模擬研究1598",
+          "leftOwnMinimum": 0.999414324760437,
+          "rightOwnMinimum": 0.9998955726623535
+        },
+        {
+          "id": "n119",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O5895",
+          "sharedRawText": "仮室005895",
+          "leftOwnMinimum": 0.9385693669319153,
+          "rightOwnMinimum": 0.9731719493865967
+        },
+        {
+          "id": "n137",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6806",
+          "sharedRawText": "仮室006806",
+          "leftOwnMinimum": 0.9083577990531921,
+          "rightOwnMinimum": 0.9524517059326172
+        },
+        {
+          "id": "n149",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O3397",
+          "sharedRawText": "仮室003397",
+          "leftOwnMinimum": 0.8751375079154968,
+          "rightOwnMinimum": 0.9421401023864746
+        },
+        {
+          "id": "n157",
+          "cohort": "serif",
+          "kind": "teacher",
+          "literal": "模擬教員 7657",
+          "sharedRawText": "模擬教員7657",
+          "leftOwnMinimum": 0.99974125623703,
+          "rightOwnMinimum": 0.9985542893409729
+        },
+        {
+          "id": "n167",
+          "cohort": "serif",
+          "kind": "room",
+          "literal": "仮室0O6716",
+          "sharedRawText": "仮室006716",
+          "leftOwnMinimum": 0.8823288083076477,
+          "rightOwnMinimum": 0.9491662383079529
+        }
+      ]
+    }
+  ],
+  "additionalModelCalls": 0,
+  "qualification": false,
+  "modelActivation": false,
+  "limits": "Agreement of correlated OCR readers does not establish original text or ink ownership. MinCTC scores are uncalibrated and not transferred between readers."
+}

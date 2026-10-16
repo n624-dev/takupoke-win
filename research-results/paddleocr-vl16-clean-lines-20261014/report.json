@@ -1,0 +1,95 @@
+{
+  "callsCompleted": 192,
+  "readerExitCode": 0,
+  "readerStopped": true,
+  "failure": null,
+  "rawSha256": "eef35f17550cb9d8dc1eafd374eef61d6769f43418945b5e37dfe10a7eb59077",
+  "rawBytes": 586679,
+  "peakServerRssBytes": 2654212096,
+  "elapsedSeconds": 748.2788608920018,
+  "qualification": false,
+  "groups": {
+    "sans/subject": {
+      "rows": 24,
+      "rawLiteralExact": 19,
+      "wrongAboveDiagnosticFloor": 3,
+      "correctAboveDiagnosticFloor": 19,
+      "noNativeProbability": 0,
+      "truncated": 0
+    },
+    "sans/teacher": {
+      "rows": 24,
+      "rawLiteralExact": 23,
+      "wrongAboveDiagnosticFloor": 0,
+      "correctAboveDiagnosticFloor": 20,
+      "noNativeProbability": 0,
+      "truncated": 0
+    },
+    "sans/room": {
+      "rows": 24,
+      "rawLiteralExact": 3,
+      "wrongAboveDiagnosticFloor": 1,
+      "correctAboveDiagnosticFloor": 3,
+      "noNativeProbability": 0,
+      "truncated": 0
+    },
+    "sans/header": {
+      "rows": 21,
+      "rawLiteralExact": 20,
+      "wrongAboveDiagnosticFloor": 0,
+      "correctAboveDiagnosticFloor": 13,
+      "noNativeProbability": 0,
+      "truncated": 0
+    },
+    "sans/blank": {
+      "rows": 3,
+      "rawLiteralExact": 0,
+      "wrongAboveDiagnosticFloor": 0,
+      "correctAboveDiagnosticFloor": 0,
+      "noNativeProbability": 0,
+      "truncated": 3
+    },
+    "serif/subject": {
+      "rows": 24,
+      "rawLiteralExact": 21,
+      "wrongAboveDiagnosticFloor": 0,
+      "correctAboveDiagnosticFloor": 19,
+      "noNativeProbability": 0,
+      "truncated": 0
+    },
+    "serif/teacher": {
+      "rows": 24,
+      "rawLiteralExact": 19,
+      "wrongAboveDiagnosticFloor": 0,
+      "correctAboveDiagnosticFloor": 19,
+      "noNativeProbability": 0,
+      "truncated": 0
+    },
+    "serif/room": {
+      "rows": 24,
+      "rawLiteralExact": 0,
+      "wrongAboveDiagnosticFloor": 11,
+      "correctAboveDiagnosticFloor": 0,
+      "noNativeProbability": 0,
+      "truncated": 0
+    },
+    "serif/header": {
+      "rows": 21,
+      "rawLiteralExact": 20,
+      "wrongAboveDiagnosticFloor": 0,
+      "correctAboveDiagnosticFloor": 11,
+      "noNativeProbability": 0,
+      "truncated": 0
+    },
+    "serif/blank": {
+      "rows": 3,
+      "rawLiteralExact": 0,
+      "wrongAboveDiagnosticFloor": 0,
+      "correctAboveDiagnosticFloor": 0,
+      "noNativeProbability": 0,
+      "truncated": 3
+    }
+  },
+  "modelActivation": false,
+  "limits": "Raw assistant content is scored literally; no trim/Unicode/space/case repair. Token scores are uncalibrated, not CTC source evidence. LinuxCPU performance under concurrent work is not Windows/iPhone qualification."
+}

@@ -1,0 +1,77 @@
+{
+  "recipe": "got-ocr2-official-plain-consumed-pixels-v1",
+  "repository": "stepfun-ai/GOT-OCR-2.0-hf",
+  "revision": "d3017ef2c2c1395888c8d635c5e0508bcb0ac78d",
+  "modelFiles": [
+    {
+      "file": "README.md",
+      "bytes": 12077,
+      "sha256": "706d6fe217d2f047ca68f47bdcf44ace4a0832491da396972c2c917944e84c18"
+    },
+    {
+      "file": "config.json",
+      "bytes": 608,
+      "sha256": "cbe8aacd6cd84a2d58eafcd0045c6ac40e02e3a448f24b8cee51cc81d8bdccf2"
+    },
+    {
+      "file": "generation_config.json",
+      "bytes": 74,
+      "sha256": "31915c5a692f43c5765a20cfc5f9403bcd250f5721a0d931bb703169c08993b4"
+    },
+    {
+      "file": "model.safetensors",
+      "bytes": 1121114488,
+      "sha256": "6175ac7868a4e75735f5d59f78c465081ad3427eb4f312d072a0f1d16b333ba4"
+    },
+    {
+      "file": "preprocessor_config.json",
+      "bytes": 439,
+      "sha256": "ef9a0dc0935cac11f4230ca30d00a52bedfa52b6633e409e9fbd2ea56373aa7e"
+    },
+    {
+      "file": "special_tokens_map.json",
+      "bytes": 213,
+      "sha256": "7c2368a3889fdfb37c24cabeb031b53f47934f357b54e56e8e389909a338ea47"
+    },
+    {
+      "file": "tokenizer.json",
+      "bytes": 18702549,
+      "sha256": "36b382a3c48c9a143c30139dac6c8230ddfb0b46a3dc43082af6052abe99d9de"
+    },
+    {
+      "file": "tokenizer_config.json",
+      "bytes": 39228,
+      "sha256": "8b0542937d32a67da8ea2d1288b870e325be383a962c65d201864299560a2b8e"
+    }
+  ],
+  "pixelsSHA": "6e54d6bc0cc2213dc51a6e0ff67f3551a736e4e75641ec00f96c7b9de87f14ff",
+  "oracleSHA": "1c5652c38a5d84691d5105bd4e851349bc1879d38b2a1cc2a2b6169c12683095",
+  "sources": {
+    "run_got.py": "028a8468e074567996ea4fbbbaa0db4bd16f29b89a34f6e4a44f0b87f6dcd17c",
+    "got_worker.py": "5d4835b756dde18336c872b60edeeeefbced98ae0f108fce828539172a1b14db"
+  },
+  "runtime": {
+    "torch": "2.7.1+cpu",
+    "transformers": "5.19.0",
+    "Pillow": "12.3.0",
+    "safetensors": "0.8.0"
+  },
+  "callsPlanned": 192,
+  "device": "cpu",
+  "dtype": "float32",
+  "threads": 2,
+  "interopThreads": 1,
+  "attention": "eager",
+  "processor": "Native AutoProcessor PIL backend; format=False; no custom prompt or remote code",
+  "generation": {
+    "do_sample": false,
+    "stop_strings": "<|im_end|>",
+    "max_new_tokens": 128,
+    "seed": 17,
+    "use_cache": true
+  },
+  "memoryEnvelopeBytes": 8589934592,
+  "globalDeadlineSeconds": 5100,
+  "qualification": "unassessed",
+  "scope": "Consumed development pixels; raw exact literals, no source geometry or full-document credit"
+}

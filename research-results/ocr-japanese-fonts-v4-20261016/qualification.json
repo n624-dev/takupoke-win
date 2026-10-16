@@ -1,0 +1,24 @@
+{
+  "originalTrial": "FAIL; active baseline fallback",
+  "developmentSelected": "epoch-2",
+  "developmentSelectedSha256": "8298dff5e2f302edb10645c2a8636497d29664db25e3e75d5ced659ee2593a45",
+  "freshOpened": true,
+  "freshGuards": {
+    "codeCerImproves": false,
+    "wholeCerImproves": true,
+    "eachJpFontEditsNonincrease": false,
+    "naturalRetention": true,
+    "rawHighCtcWrong": true,
+    "incorrectAccepted": true,
+    "negativeAccepted": true,
+    "unsupportedPaddingRefused": true,
+    "activeTorchOnnxDecisionsEqual": true
+  },
+  "activeBaselineFallback": true,
+  "activeBaselineOnnxSha256": "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703",
+  "standardPortableAuthorizedByOriginalGate": false,
+  "wholeDocumentQualified": false,
+  "defaultSwitched": false,
+  "postFreshReselectionOrTraining": false,
+  "separateExploratoryRouteAssessmentCannotChangeThisResult": true
+}

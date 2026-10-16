@@ -1,0 +1,258 @@
+{
+  "name": "trainfit-candidate",
+  "positiveRows": 1280,
+  "exact": 1211,
+  "correctAccepted": 1146,
+  "incorrectAccepted": 23,
+  "negativeRows": 112,
+  "negativeAccepted": 12,
+  "paddingRows": 30,
+  "cer": 0.004754659566375047,
+  "groups": {
+    "blank": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 0
+    },
+    "clipped": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 2,
+      "nonempty": 16
+    },
+    "code": {
+      "rows": 384,
+      "exact": 354,
+      "correctAccepted": 326,
+      "incorrectAccepted": 10,
+      "accepted": 336,
+      "nonempty": 384,
+      "characters": 2142,
+      "editErrors": 33,
+      "cer": 0.015406162464985995,
+      "correctLowConfidence": 24,
+      "wrongHighConfidence": 13
+    },
+    "interior_damage": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 10,
+      "nonempty": 16
+    },
+    "lookalike": {
+      "rows": 256,
+      "exact": 218,
+      "correctAccepted": 199,
+      "incorrectAccepted": 13,
+      "accepted": 212,
+      "nonempty": 256,
+      "characters": 1446,
+      "editErrors": 41,
+      "cer": 0.028354080221300138,
+      "correctLowConfidence": 17,
+      "wrongHighConfidence": 15
+    },
+    "multiline": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 14
+    },
+    "natural": {
+      "rows": 576,
+      "exact": 576,
+      "correctAccepted": 564,
+      "incorrectAccepted": 0,
+      "accepted": 564,
+      "nonempty": 576,
+      "characters": 11482,
+      "editErrors": 0,
+      "cer": 0.0,
+      "correctLowConfidence": 12,
+      "wrongHighConfidence": 0
+    },
+    "noise": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 0
+    },
+    "printable": {
+      "rows": 64,
+      "exact": 63,
+      "correctAccepted": 57,
+      "incorrectAccepted": 0,
+      "accepted": 57,
+      "nonempty": 64,
+      "characters": 704,
+      "editErrors": 1,
+      "cer": 0.0014204545454545455,
+      "correctLowConfidence": 6,
+      "wrongHighConfidence": 0
+    },
+    "unknown_cjk": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 1
+    },
+    "unknown_mixed": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 16
+    }
+  },
+  "rawSha256": "96f6fd96fd0f09503c8c4ff1969e78dbd61e4064bcf1afe9033b9a86f4ec0856",
+  "scope": "Fresh synthetic development unless separately labeled fresh; independent ASCII branch; no document qualification",
+  "fontMetrics": {
+    "SawarabiGothic": {
+      "rows": 160,
+      "characters": 906,
+      "editErrors": 37,
+      "cer": 0.04083885209713024,
+      "exact": 124,
+      "correctLowConfidence": 10,
+      "wrongHighConfidence": 19,
+      "accepted": 129
+    },
+    "SawarabiMincho": {
+      "rows": 160,
+      "characters": 898,
+      "editErrors": 0,
+      "cer": 0.0,
+      "exact": 160,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0,
+      "accepted": 160
+    },
+    "KleeOne": {
+      "rows": 160,
+      "characters": 906,
+      "editErrors": 37,
+      "cer": 0.04083885209713024,
+      "exact": 128,
+      "correctLowConfidence": 28,
+      "wrongHighConfidence": 9,
+      "accepted": 103
+    },
+    "KaiseiTokumin": {
+      "rows": 160,
+      "characters": 878,
+      "editErrors": 0,
+      "cer": 0.0,
+      "exact": 160,
+      "correctLowConfidence": 3,
+      "wrongHighConfidence": 0,
+      "accepted": 156
+    },
+    "IBMPlexMono": {
+      "rows": 160,
+      "characters": 3035,
+      "editErrors": 0,
+      "cer": 0.0,
+      "exact": 160,
+      "correctLowConfidence": 5,
+      "wrongHighConfidence": 0,
+      "accepted": 155
+    },
+    "Inconsolata": {
+      "rows": 160,
+      "characters": 3103,
+      "editErrors": 0,
+      "cer": 0.0,
+      "exact": 160,
+      "correctLowConfidence": 1,
+      "wrongHighConfidence": 0,
+      "accepted": 159
+    },
+    "CrimsonText": {
+      "rows": 160,
+      "characters": 3002,
+      "editErrors": 1,
+      "cer": 0.00033311125916055963,
+      "exact": 159,
+      "correctLowConfidence": 4,
+      "wrongHighConfidence": 0,
+      "accepted": 155
+    },
+    "Alegreya": {
+      "rows": 160,
+      "characters": 3046,
+      "editErrors": 0,
+      "cer": 0.0,
+      "exact": 160,
+      "correctLowConfidence": 8,
+      "wrongHighConfidence": 0,
+      "accepted": 152
+    }
+  },
+  "codeMetrics": {
+    "rows": 640,
+    "characters": 3588,
+    "editErrors": 74,
+    "cer": 0.020624303232998884,
+    "exact": 572,
+    "correctLowConfidence": 41,
+    "wrongHighConfidence": 28,
+    "accepted": 548
+  },
+  "monoCodeMetrics": {
+    "rows": 0,
+    "characters": 0,
+    "editErrors": 0,
+    "cer": null,
+    "exact": 0,
+    "correctLowConfidence": 0,
+    "wrongHighConfidence": 0,
+    "accepted": 0
+  },
+  "fontCodeMetrics": {
+    "RedHatMono": {
+      "rows": 0,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "exact": 0,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0,
+      "accepted": 0
+    },
+    "OverpassMono": {
+      "rows": 0,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "exact": 0,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0,
+      "accepted": 0
+    }
+  },
+  "reviewMetrics": {
+    "rows": 1280,
+    "characters": 15774,
+    "editErrors": 75,
+    "cer": 0.004754659566375047,
+    "exact": 1211,
+    "correctLowConfidence": 59,
+    "wrongHighConfidence": 28,
+    "accepted": 1169
+  },
+  "allUnsupportedPaddingRefused": true
+}

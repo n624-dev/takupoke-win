@@ -1,0 +1,7262 @@
+[
+  {
+    "id": "practical-0-positive",
+    "expect": "exact",
+    "variant": "positive",
+    "schoolYear": 2029,
+    "font": "shipporimincho-ShipporiMincho-Regular.ttf",
+    "allOtherSlotsBlank": true,
+    "requiredSlotSet": [
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 8
+      }
+    ],
+    "timetable": {
+      "term": "前期",
+      "lessons": [
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 1,
+          "names": {
+            "subject": "架空理科92",
+            "teacher": "仮想高橋92",
+            "room": "架空室A92"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 2,
+          "names": {
+            "subject": "架空英語94",
+            "teacher": "仮想田中94",
+            "room": "架空室A94"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 3,
+          "names": {
+            "subject": "架空国語58",
+            "teacher": "仮想高橋58",
+            "room": "架空室B58"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 4,
+          "names": {
+            "subject": "架空理科19",
+            "teacher": "仮想高橋19",
+            "room": "架空室I1l19"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 5,
+          "names": {
+            "subject": "架空国語60",
+            "teacher": "仮想佐藤60",
+            "room": "架空室I1l60"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 6,
+          "names": {
+            "subject": "架空数学72",
+            "teacher": "仮想高橋72",
+            "room": "架空室B72"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 7,
+          "names": {
+            "subject": "架空理科52",
+            "teacher": "仮想高橋52",
+            "room": "架空室B52"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 8,
+          "names": {
+            "subject": "架空国語49",
+            "teacher": "仮想佐藤49",
+            "room": "架空室O049"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 1,
+          "names": {
+            "subject": "架空国語13",
+            "teacher": "仮想田中13",
+            "room": "架空室O013"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 2,
+          "names": {
+            "subject": "架空英語17",
+            "teacher": "仮想佐藤17",
+            "room": "架空室O017"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 3,
+          "names": {
+            "subject": "架空国語61",
+            "teacher": "仮想田中61",
+            "room": "架空室O061"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 4,
+          "names": {
+            "subject": "架空国語28",
+            "teacher": "仮想田中28",
+            "room": "架空室I1l28"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 5,
+          "names": {
+            "subject": "架空英語19",
+            "teacher": "仮想高橋19",
+            "room": "架空室O019"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 6,
+          "names": {
+            "subject": "架空数学69",
+            "teacher": "仮想田中69",
+            "room": "架空室B69"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 7,
+          "names": {
+            "subject": "架空理科29",
+            "teacher": "仮想佐藤29",
+            "room": "架空室B29"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 8,
+          "names": {
+            "subject": "架空英語60",
+            "teacher": "仮想佐藤60",
+            "room": "架空室I1l60"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 1,
+          "names": {
+            "subject": "架空理科28",
+            "teacher": "仮想田中28",
+            "room": "架空室B28"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 2,
+          "names": {
+            "subject": "架空数学31",
+            "teacher": "仮想田中31",
+            "room": "架空室B31"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 3,
+          "names": {
+            "subject": "架空国語67",
+            "teacher": "仮想田中67",
+            "room": "架空室O067"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 4,
+          "names": {
+            "subject": "架空数学71",
+            "teacher": "仮想田中71",
+            "room": "架空室A71"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 5,
+          "names": {
+            "subject": "架空理科13",
+            "teacher": "仮想佐藤13",
+            "room": "架空室B13"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 6,
+          "names": {
+            "subject": "架空理科80",
+            "teacher": "仮想佐藤80",
+            "room": "架空室A80"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 7,
+          "names": {
+            "subject": "架空理科97",
+            "teacher": "仮想佐藤97",
+            "room": "架空室A97"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 8,
+          "names": {
+            "subject": "架空数学62",
+            "teacher": "仮想佐藤62",
+            "room": "架空室A62"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 1,
+          "names": {
+            "subject": "架空英語40",
+            "teacher": "仮想佐藤40",
+            "room": "架空室A40"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 2,
+          "names": {
+            "subject": "架空英語67",
+            "teacher": "仮想佐藤67",
+            "room": "架空室A67"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 3,
+          "names": {
+            "subject": "架空数学59",
+            "teacher": "仮想田中59",
+            "room": "架空室A59"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 4,
+          "names": {
+            "subject": "架空英語92",
+            "teacher": "仮想高橋92",
+            "room": "架空室I1l92"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 5,
+          "names": {
+            "subject": "架空理科67",
+            "teacher": "仮想高橋67",
+            "room": "架空室O067"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 6,
+          "names": {
+            "subject": "架空数学28",
+            "teacher": "仮想佐藤28",
+            "room": "架空室O028"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 7,
+          "names": {
+            "subject": "架空数学34",
+            "teacher": "仮想佐藤34",
+            "room": "架空室I1l34"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 8,
+          "names": {
+            "subject": "架空理科16",
+            "teacher": "仮想佐藤16",
+            "room": "架空室B16"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 1,
+          "names": {
+            "subject": "架空英語40",
+            "teacher": "仮想佐藤40",
+            "room": "架空室O040"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 2,
+          "names": {
+            "subject": "架空理科77",
+            "teacher": "仮想佐藤77",
+            "room": "架空室A77"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 3,
+          "names": {
+            "subject": "架空英語81",
+            "teacher": "仮想高橋81",
+            "room": "架空室A81"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 4,
+          "names": {
+            "subject": "架空数学87",
+            "teacher": "仮想高橋87",
+            "room": "架空室O087"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 5,
+          "names": {
+            "subject": "架空国語58",
+            "teacher": "仮想佐藤58",
+            "room": "架空室B58"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 6,
+          "names": {
+            "subject": "架空理科78",
+            "teacher": "仮想高橋78",
+            "room": "架空室B78"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 7,
+          "names": {
+            "subject": "架空数学97",
+            "teacher": "仮想田中97",
+            "room": "架空室B97"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 8,
+          "names": {
+            "subject": "架空数学33",
+            "teacher": "仮想佐藤33",
+            "room": "架空室B33"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 1,
+          "names": {
+            "subject": "架空国語82",
+            "teacher": "仮想佐藤82",
+            "room": "架空室O082"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 2,
+          "names": {
+            "subject": "架空国語73",
+            "teacher": "仮想田中73",
+            "room": "架空室O073"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 3,
+          "names": {
+            "subject": "架空数学58",
+            "teacher": "仮想高橋58",
+            "room": "架空室B58"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 4,
+          "names": {
+            "subject": "架空国語63",
+            "teacher": "仮想高橋63",
+            "room": "架空室B63"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 5,
+          "names": {
+            "subject": "架空英語11",
+            "teacher": "仮想田中11",
+            "room": "架空室B11"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 6,
+          "names": {
+            "subject": "架空数学95",
+            "teacher": "仮想高橋95",
+            "room": "架空室B95"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 7,
+          "names": {
+            "subject": "架空理科12",
+            "teacher": "仮想高橋12",
+            "room": "架空室A12"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 8,
+          "names": {
+            "subject": "架空英語66",
+            "teacher": "仮想高橋66",
+            "room": "架空室A66"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 1,
+          "names": {
+            "subject": "架空数学51",
+            "teacher": "仮想佐藤51",
+            "room": "架空室A51"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 2,
+          "names": {
+            "subject": "架空国語94",
+            "teacher": "仮想高橋94",
+            "room": "架空室O094"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 3,
+          "names": {
+            "subject": "架空数学30",
+            "teacher": "仮想田中30",
+            "room": "架空室A30"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 4,
+          "names": {
+            "subject": "架空数学66",
+            "teacher": "仮想佐藤66",
+            "room": "架空室I1l66"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 5,
+          "names": {
+            "subject": "架空国語81",
+            "teacher": "仮想田中81",
+            "room": "架空室A81"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 6,
+          "names": {
+            "subject": "架空国語85",
+            "teacher": "仮想田中85",
+            "room": "架空室I1l85"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 7,
+          "names": {
+            "subject": "架空英語44",
+            "teacher": "仮想田中44",
+            "room": "架空室I1l44"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 8,
+          "names": {
+            "subject": "架空国語17",
+            "teacher": "仮想佐藤17",
+            "room": "架空室O017"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 1,
+          "names": {
+            "subject": "架空理科36",
+            "teacher": "仮想高橋36",
+            "room": "架空室O036"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 2,
+          "names": {
+            "subject": "架空国語65",
+            "teacher": "仮想佐藤65",
+            "room": "架空室I1l65"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 3,
+          "names": {
+            "subject": "架空英語71",
+            "teacher": "仮想田中71",
+            "room": "架空室I1l71"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 4,
+          "names": {
+            "subject": "架空国語15",
+            "teacher": "仮想田中15",
+            "room": "架空室O015"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 5,
+          "names": {
+            "subject": "架空数学30",
+            "teacher": "仮想高橋30",
+            "room": "架空室A30"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 6,
+          "names": {
+            "subject": "架空数学54",
+            "teacher": "仮想佐藤54",
+            "room": "架空室O054"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 7,
+          "names": {
+            "subject": "架空英語39",
+            "teacher": "仮想田中39",
+            "room": "架空室I1l39"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 8,
+          "names": {
+            "subject": "架空英語80",
+            "teacher": "仮想田中80",
+            "room": "架空室O080"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 1,
+          "names": {
+            "subject": "架空理科27",
+            "teacher": "仮想田中27",
+            "room": "架空室I1l27"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 2,
+          "names": {
+            "subject": "架空国語43",
+            "teacher": "仮想佐藤43",
+            "room": "架空室I1l43"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 3,
+          "names": {
+            "subject": "架空数学46",
+            "teacher": "仮想田中46",
+            "room": "架空室O046"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 4,
+          "names": {
+            "subject": "架空国語35",
+            "teacher": "仮想佐藤35",
+            "room": "架空室B35"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 5,
+          "names": {
+            "subject": "架空数学89",
+            "teacher": "仮想佐藤89",
+            "room": "架空室I1l89"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 6,
+          "names": {
+            "subject": "架空数学52",
+            "teacher": "仮想田中52",
+            "room": "架空室B52"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 7,
+          "names": {
+            "subject": "架空英語71",
+            "teacher": "仮想田中71",
+            "room": "架空室A71"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 8,
+          "names": {
+            "subject": "架空数学94",
+            "teacher": "仮想高橋94",
+            "room": "架空室B94"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 1,
+          "names": {
+            "subject": "架空英語23",
+            "teacher": "仮想田中23",
+            "room": "架空室B23"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 2,
+          "names": {
+            "subject": "架空数学45",
+            "teacher": "仮想高橋45",
+            "room": "架空室A45"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 3,
+          "names": {
+            "subject": "架空英語37",
+            "teacher": "仮想佐藤37",
+            "room": "架空室I1l37"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 4,
+          "names": {
+            "subject": "架空理科33",
+            "teacher": "仮想高橋33",
+            "room": "架空室A33"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 5,
+          "names": {
+            "subject": "架空理科56",
+            "teacher": "仮想田中56",
+            "room": "架空室I1l56"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 6,
+          "names": {
+            "subject": "架空国語18",
+            "teacher": "仮想田中18",
+            "room": "架空室I1l18"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 7,
+          "names": {
+            "subject": "架空国語75",
+            "teacher": "仮想高橋75",
+            "room": "架空室O075"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 8,
+          "names": {
+            "subject": "架空国語14",
+            "teacher": "仮想田中14",
+            "room": "架空室O014"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 1,
+          "names": {
+            "subject": "架空国語10",
+            "teacher": "仮想高橋10",
+            "room": "架空室A10"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 2,
+          "names": {
+            "subject": "架空国語45",
+            "teacher": "仮想佐藤45",
+            "room": "架空室I1l45"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 3,
+          "names": {
+            "subject": "架空数学32",
+            "teacher": "仮想佐藤32",
+            "room": "架空室O032"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 4,
+          "names": {
+            "subject": "架空英語86",
+            "teacher": "仮想田中86",
+            "room": "架空室O086"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 5,
+          "names": {
+            "subject": "架空国語15",
+            "teacher": "仮想高橋15",
+            "room": "架空室A15"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 6,
+          "names": {
+            "subject": "架空数学65",
+            "teacher": "仮想佐藤65",
+            "room": "架空室A65"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 7,
+          "names": {
+            "subject": "架空理科59",
+            "teacher": "仮想高橋59",
+            "room": "架空室I1l59"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 8,
+          "names": {
+            "subject": "架空数学43",
+            "teacher": "仮想高橋43",
+            "room": "架空室A43"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 1,
+          "names": {
+            "subject": "架空理科45",
+            "teacher": "仮想佐藤45",
+            "room": "架空室O045"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 2,
+          "names": {
+            "subject": "架空英語55",
+            "teacher": "仮想高橋55",
+            "room": "架空室B55"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 3,
+          "names": {
+            "subject": "架空国語99",
+            "teacher": "仮想高橋99",
+            "room": "架空室B99"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 4,
+          "names": {
+            "subject": "架空国語96",
+            "teacher": "仮想佐藤96",
+            "room": "架空室I1l96"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 5,
+          "names": {
+            "subject": "架空英語82",
+            "teacher": "仮想田中82",
+            "room": "架空室A82"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 6,
+          "names": {
+            "subject": "架空国語98",
+            "teacher": "仮想田中98",
+            "room": "架空室A98"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 7,
+          "names": {
+            "subject": "架空国語31",
+            "teacher": "仮想高橋31",
+            "room": "架空室A31"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 8,
+          "names": {
+            "subject": "架空理科49",
+            "teacher": "仮想佐藤49",
+            "room": "架空室B49"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 1,
+          "names": {
+            "subject": "架空国語69",
+            "teacher": "仮想田中69",
+            "room": "架空室B69"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 2,
+          "names": {
+            "subject": "架空国語62",
+            "teacher": "仮想高橋62",
+            "room": "架空室B62"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 3,
+          "names": {
+            "subject": "架空理科12",
+            "teacher": "仮想佐藤12",
+            "room": "架空室O012"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 4,
+          "names": {
+            "subject": "架空国語77",
+            "teacher": "仮想田中77",
+            "room": "架空室A77"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 5,
+          "names": {
+            "subject": "架空国語22",
+            "teacher": "仮想高橋22",
+            "room": "架空室I1l22"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 6,
+          "names": {
+            "subject": "架空数学51",
+            "teacher": "仮想田中51",
+            "room": "架空室I1l51"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 7,
+          "names": {
+            "subject": "架空理科24",
+            "teacher": "仮想高橋24",
+            "room": "架空室A24"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 8,
+          "names": {
+            "subject": "架空国語61",
+            "teacher": "仮想佐藤61",
+            "room": "架空室A61"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 1,
+          "names": {
+            "subject": "架空英語98",
+            "teacher": "仮想佐藤98",
+            "room": "架空室A98"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 2,
+          "names": {
+            "subject": "架空英語30",
+            "teacher": "仮想田中30",
+            "room": "架空室B30"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 3,
+          "names": {
+            "subject": "架空数学82",
+            "teacher": "仮想佐藤82",
+            "room": "架空室A82"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 4,
+          "names": {
+            "subject": "架空数学33",
+            "teacher": "仮想佐藤33",
+            "room": "架空室O033"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 5,
+          "names": {
+            "subject": "架空数学80",
+            "teacher": "仮想田中80",
+            "room": "架空室I1l80"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 6,
+          "names": {
+            "subject": "架空理科60",
+            "teacher": "仮想佐藤60",
+            "room": "架空室B60"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 7,
+          "names": {
+            "subject": "架空国語76",
+            "teacher": "仮想高橋76",
+            "room": "架空室I1l76"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 8,
+          "names": {
+            "subject": "架空国語71",
+            "teacher": "仮想佐藤71",
+            "room": "架空室A71"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 1,
+          "names": {
+            "subject": "架空国語43",
+            "teacher": "仮想佐藤43",
+            "room": "架空室A43"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 2,
+          "names": {
+            "subject": "架空英語79",
+            "teacher": "仮想高橋79",
+            "room": "架空室I1l79"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 3,
+          "names": {
+            "subject": "架空数学87",
+            "teacher": "仮想高橋87",
+            "room": "架空室I1l87"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 4,
+          "names": {
+            "subject": "架空英語17",
+            "teacher": "仮想田中17",
+            "room": "架空室I1l17"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 5,
+          "names": {
+            "subject": "架空国語92",
+            "teacher": "仮想高橋92",
+            "room": "架空室B92"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 6,
+          "names": {
+            "subject": "架空国語24",
+            "teacher": "仮想高橋24",
+            "room": "架空室I1l24"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 7,
+          "names": {
+            "subject": "架空数学76",
+            "teacher": "仮想田中76",
+            "room": "架空室I1l76"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 8,
+          "names": {
+            "subject": "架空英語31",
+            "teacher": "仮想高橋31",
+            "room": "架空室A31"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "practical-0-missing-day",
+    "expect": "refuse",
+    "variant": "missing-day",
+    "schoolYear": 2029,
+    "font": "shipporimincho-ShipporiMincho-Regular.ttf",
+    "allOtherSlotsBlank": true,
+    "requiredSlotSet": [
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 8
+      }
+    ],
+    "timetable": {
+      "term": "前期",
+      "lessons": [
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 1,
+          "names": {
+            "subject": "架空理科92",
+            "teacher": "仮想高橋92",
+            "room": "架空室A92"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 2,
+          "names": {
+            "subject": "架空英語94",
+            "teacher": "仮想田中94",
+            "room": "架空室A94"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 3,
+          "names": {
+            "subject": "架空国語58",
+            "teacher": "仮想高橋58",
+            "room": "架空室B58"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 4,
+          "names": {
+            "subject": "架空理科19",
+            "teacher": "仮想高橋19",
+            "room": "架空室I1l19"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 5,
+          "names": {
+            "subject": "架空国語60",
+            "teacher": "仮想佐藤60",
+            "room": "架空室I1l60"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 6,
+          "names": {
+            "subject": "架空数学72",
+            "teacher": "仮想高橋72",
+            "room": "架空室B72"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 7,
+          "names": {
+            "subject": "架空理科52",
+            "teacher": "仮想高橋52",
+            "room": "架空室B52"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 8,
+          "names": {
+            "subject": "架空国語49",
+            "teacher": "仮想佐藤49",
+            "room": "架空室O049"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 1,
+          "names": {
+            "subject": "架空国語13",
+            "teacher": "仮想田中13",
+            "room": "架空室O013"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 2,
+          "names": {
+            "subject": "架空英語17",
+            "teacher": "仮想佐藤17",
+            "room": "架空室O017"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 3,
+          "names": {
+            "subject": "架空国語61",
+            "teacher": "仮想田中61",
+            "room": "架空室O061"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 4,
+          "names": {
+            "subject": "架空国語28",
+            "teacher": "仮想田中28",
+            "room": "架空室I1l28"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 5,
+          "names": {
+            "subject": "架空英語19",
+            "teacher": "仮想高橋19",
+            "room": "架空室O019"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 6,
+          "names": {
+            "subject": "架空数学69",
+            "teacher": "仮想田中69",
+            "room": "架空室B69"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 7,
+          "names": {
+            "subject": "架空理科29",
+            "teacher": "仮想佐藤29",
+            "room": "架空室B29"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 8,
+          "names": {
+            "subject": "架空英語60",
+            "teacher": "仮想佐藤60",
+            "room": "架空室I1l60"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 1,
+          "names": {
+            "subject": "架空理科28",
+            "teacher": "仮想田中28",
+            "room": "架空室B28"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 2,
+          "names": {
+            "subject": "架空数学31",
+            "teacher": "仮想田中31",
+            "room": "架空室B31"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 3,
+          "names": {
+            "subject": "架空国語67",
+            "teacher": "仮想田中67",
+            "room": "架空室O067"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 4,
+          "names": {
+            "subject": "架空数学71",
+            "teacher": "仮想田中71",
+            "room": "架空室A71"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 5,
+          "names": {
+            "subject": "架空理科13",
+            "teacher": "仮想佐藤13",
+            "room": "架空室B13"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 6,
+          "names": {
+            "subject": "架空理科80",
+            "teacher": "仮想佐藤80",
+            "room": "架空室A80"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 7,
+          "names": {
+            "subject": "架空理科97",
+            "teacher": "仮想佐藤97",
+            "room": "架空室A97"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 8,
+          "names": {
+            "subject": "架空数学62",
+            "teacher": "仮想佐藤62",
+            "room": "架空室A62"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 1,
+          "names": {
+            "subject": "架空英語40",
+            "teacher": "仮想佐藤40",
+            "room": "架空室A40"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 2,
+          "names": {
+            "subject": "架空英語67",
+            "teacher": "仮想佐藤67",
+            "room": "架空室A67"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 3,
+          "names": {
+            "subject": "架空数学59",
+            "teacher": "仮想田中59",
+            "room": "架空室A59"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 4,
+          "names": {
+            "subject": "架空英語92",
+            "teacher": "仮想高橋92",
+            "room": "架空室I1l92"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 5,
+          "names": {
+            "subject": "架空理科67",
+            "teacher": "仮想高橋67",
+            "room": "架空室O067"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 6,
+          "names": {
+            "subject": "架空数学28",
+            "teacher": "仮想佐藤28",
+            "room": "架空室O028"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 7,
+          "names": {
+            "subject": "架空数学34",
+            "teacher": "仮想佐藤34",
+            "room": "架空室I1l34"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 8,
+          "names": {
+            "subject": "架空理科16",
+            "teacher": "仮想佐藤16",
+            "room": "架空室B16"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 1,
+          "names": {
+            "subject": "架空英語40",
+            "teacher": "仮想佐藤40",
+            "room": "架空室O040"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 2,
+          "names": {
+            "subject": "架空理科77",
+            "teacher": "仮想佐藤77",
+            "room": "架空室A77"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 3,
+          "names": {
+            "subject": "架空英語81",
+            "teacher": "仮想高橋81",
+            "room": "架空室A81"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 4,
+          "names": {
+            "subject": "架空数学87",
+            "teacher": "仮想高橋87",
+            "room": "架空室O087"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 5,
+          "names": {
+            "subject": "架空国語58",
+            "teacher": "仮想佐藤58",
+            "room": "架空室B58"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 6,
+          "names": {
+            "subject": "架空理科78",
+            "teacher": "仮想高橋78",
+            "room": "架空室B78"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 7,
+          "names": {
+            "subject": "架空数学97",
+            "teacher": "仮想田中97",
+            "room": "架空室B97"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 8,
+          "names": {
+            "subject": "架空数学33",
+            "teacher": "仮想佐藤33",
+            "room": "架空室B33"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 1,
+          "names": {
+            "subject": "架空国語82",
+            "teacher": "仮想佐藤82",
+            "room": "架空室O082"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 2,
+          "names": {
+            "subject": "架空国語73",
+            "teacher": "仮想田中73",
+            "room": "架空室O073"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 3,
+          "names": {
+            "subject": "架空数学58",
+            "teacher": "仮想高橋58",
+            "room": "架空室B58"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 4,
+          "names": {
+            "subject": "架空国語63",
+            "teacher": "仮想高橋63",
+            "room": "架空室B63"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 5,
+          "names": {
+            "subject": "架空英語11",
+            "teacher": "仮想田中11",
+            "room": "架空室B11"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 6,
+          "names": {
+            "subject": "架空数学95",
+            "teacher": "仮想高橋95",
+            "room": "架空室B95"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 7,
+          "names": {
+            "subject": "架空理科12",
+            "teacher": "仮想高橋12",
+            "room": "架空室A12"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 8,
+          "names": {
+            "subject": "架空英語66",
+            "teacher": "仮想高橋66",
+            "room": "架空室A66"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 1,
+          "names": {
+            "subject": "架空数学51",
+            "teacher": "仮想佐藤51",
+            "room": "架空室A51"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 2,
+          "names": {
+            "subject": "架空国語94",
+            "teacher": "仮想高橋94",
+            "room": "架空室O094"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 3,
+          "names": {
+            "subject": "架空数学30",
+            "teacher": "仮想田中30",
+            "room": "架空室A30"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 4,
+          "names": {
+            "subject": "架空数学66",
+            "teacher": "仮想佐藤66",
+            "room": "架空室I1l66"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 5,
+          "names": {
+            "subject": "架空国語81",
+            "teacher": "仮想田中81",
+            "room": "架空室A81"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 6,
+          "names": {
+            "subject": "架空国語85",
+            "teacher": "仮想田中85",
+            "room": "架空室I1l85"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 7,
+          "names": {
+            "subject": "架空英語44",
+            "teacher": "仮想田中44",
+            "room": "架空室I1l44"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 8,
+          "names": {
+            "subject": "架空国語17",
+            "teacher": "仮想佐藤17",
+            "room": "架空室O017"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 1,
+          "names": {
+            "subject": "架空理科36",
+            "teacher": "仮想高橋36",
+            "room": "架空室O036"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 2,
+          "names": {
+            "subject": "架空国語65",
+            "teacher": "仮想佐藤65",
+            "room": "架空室I1l65"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 3,
+          "names": {
+            "subject": "架空英語71",
+            "teacher": "仮想田中71",
+            "room": "架空室I1l71"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 4,
+          "names": {
+            "subject": "架空国語15",
+            "teacher": "仮想田中15",
+            "room": "架空室O015"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 5,
+          "names": {
+            "subject": "架空数学30",
+            "teacher": "仮想高橋30",
+            "room": "架空室A30"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 6,
+          "names": {
+            "subject": "架空数学54",
+            "teacher": "仮想佐藤54",
+            "room": "架空室O054"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 7,
+          "names": {
+            "subject": "架空英語39",
+            "teacher": "仮想田中39",
+            "room": "架空室I1l39"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 8,
+          "names": {
+            "subject": "架空英語80",
+            "teacher": "仮想田中80",
+            "room": "架空室O080"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 1,
+          "names": {
+            "subject": "架空理科27",
+            "teacher": "仮想田中27",
+            "room": "架空室I1l27"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 2,
+          "names": {
+            "subject": "架空国語43",
+            "teacher": "仮想佐藤43",
+            "room": "架空室I1l43"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 3,
+          "names": {
+            "subject": "架空数学46",
+            "teacher": "仮想田中46",
+            "room": "架空室O046"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 4,
+          "names": {
+            "subject": "架空国語35",
+            "teacher": "仮想佐藤35",
+            "room": "架空室B35"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 5,
+          "names": {
+            "subject": "架空数学89",
+            "teacher": "仮想佐藤89",
+            "room": "架空室I1l89"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 6,
+          "names": {
+            "subject": "架空数学52",
+            "teacher": "仮想田中52",
+            "room": "架空室B52"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 7,
+          "names": {
+            "subject": "架空英語71",
+            "teacher": "仮想田中71",
+            "room": "架空室A71"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 8,
+          "names": {
+            "subject": "架空数学94",
+            "teacher": "仮想高橋94",
+            "room": "架空室B94"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 1,
+          "names": {
+            "subject": "架空英語23",
+            "teacher": "仮想田中23",
+            "room": "架空室B23"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 2,
+          "names": {
+            "subject": "架空数学45",
+            "teacher": "仮想高橋45",
+            "room": "架空室A45"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 3,
+          "names": {
+            "subject": "架空英語37",
+            "teacher": "仮想佐藤37",
+            "room": "架空室I1l37"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 4,
+          "names": {
+            "subject": "架空理科33",
+            "teacher": "仮想高橋33",
+            "room": "架空室A33"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 5,
+          "names": {
+            "subject": "架空理科56",
+            "teacher": "仮想田中56",
+            "room": "架空室I1l56"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 6,
+          "names": {
+            "subject": "架空国語18",
+            "teacher": "仮想田中18",
+            "room": "架空室I1l18"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 7,
+          "names": {
+            "subject": "架空国語75",
+            "teacher": "仮想高橋75",
+            "room": "架空室O075"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 8,
+          "names": {
+            "subject": "架空国語14",
+            "teacher": "仮想田中14",
+            "room": "架空室O014"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 1,
+          "names": {
+            "subject": "架空国語10",
+            "teacher": "仮想高橋10",
+            "room": "架空室A10"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 2,
+          "names": {
+            "subject": "架空国語45",
+            "teacher": "仮想佐藤45",
+            "room": "架空室I1l45"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 3,
+          "names": {
+            "subject": "架空数学32",
+            "teacher": "仮想佐藤32",
+            "room": "架空室O032"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 4,
+          "names": {
+            "subject": "架空英語86",
+            "teacher": "仮想田中86",
+            "room": "架空室O086"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 5,
+          "names": {
+            "subject": "架空国語15",
+            "teacher": "仮想高橋15",
+            "room": "架空室A15"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 6,
+          "names": {
+            "subject": "架空数学65",
+            "teacher": "仮想佐藤65",
+            "room": "架空室A65"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 7,
+          "names": {
+            "subject": "架空理科59",
+            "teacher": "仮想高橋59",
+            "room": "架空室I1l59"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 8,
+          "names": {
+            "subject": "架空数学43",
+            "teacher": "仮想高橋43",
+            "room": "架空室A43"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 1,
+          "names": {
+            "subject": "架空理科45",
+            "teacher": "仮想佐藤45",
+            "room": "架空室O045"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 2,
+          "names": {
+            "subject": "架空英語55",
+            "teacher": "仮想高橋55",
+            "room": "架空室B55"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 3,
+          "names": {
+            "subject": "架空国語99",
+            "teacher": "仮想高橋99",
+            "room": "架空室B99"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 4,
+          "names": {
+            "subject": "架空国語96",
+            "teacher": "仮想佐藤96",
+            "room": "架空室I1l96"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 5,
+          "names": {
+            "subject": "架空英語82",
+            "teacher": "仮想田中82",
+            "room": "架空室A82"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 6,
+          "names": {
+            "subject": "架空国語98",
+            "teacher": "仮想田中98",
+            "room": "架空室A98"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 7,
+          "names": {
+            "subject": "架空国語31",
+            "teacher": "仮想高橋31",
+            "room": "架空室A31"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 8,
+          "names": {
+            "subject": "架空理科49",
+            "teacher": "仮想佐藤49",
+            "room": "架空室B49"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 1,
+          "names": {
+            "subject": "架空国語69",
+            "teacher": "仮想田中69",
+            "room": "架空室B69"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 2,
+          "names": {
+            "subject": "架空国語62",
+            "teacher": "仮想高橋62",
+            "room": "架空室B62"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 3,
+          "names": {
+            "subject": "架空理科12",
+            "teacher": "仮想佐藤12",
+            "room": "架空室O012"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 4,
+          "names": {
+            "subject": "架空国語77",
+            "teacher": "仮想田中77",
+            "room": "架空室A77"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 5,
+          "names": {
+            "subject": "架空国語22",
+            "teacher": "仮想高橋22",
+            "room": "架空室I1l22"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 6,
+          "names": {
+            "subject": "架空数学51",
+            "teacher": "仮想田中51",
+            "room": "架空室I1l51"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 7,
+          "names": {
+            "subject": "架空理科24",
+            "teacher": "仮想高橋24",
+            "room": "架空室A24"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 8,
+          "names": {
+            "subject": "架空国語61",
+            "teacher": "仮想佐藤61",
+            "room": "架空室A61"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 1,
+          "names": {
+            "subject": "架空英語98",
+            "teacher": "仮想佐藤98",
+            "room": "架空室A98"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 2,
+          "names": {
+            "subject": "架空英語30",
+            "teacher": "仮想田中30",
+            "room": "架空室B30"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 3,
+          "names": {
+            "subject": "架空数学82",
+            "teacher": "仮想佐藤82",
+            "room": "架空室A82"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 4,
+          "names": {
+            "subject": "架空数学33",
+            "teacher": "仮想佐藤33",
+            "room": "架空室O033"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 5,
+          "names": {
+            "subject": "架空数学80",
+            "teacher": "仮想田中80",
+            "room": "架空室I1l80"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 6,
+          "names": {
+            "subject": "架空理科60",
+            "teacher": "仮想佐藤60",
+            "room": "架空室B60"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 7,
+          "names": {
+            "subject": "架空国語76",
+            "teacher": "仮想高橋76",
+            "room": "架空室I1l76"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 8,
+          "names": {
+            "subject": "架空国語71",
+            "teacher": "仮想佐藤71",
+            "room": "架空室A71"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 1,
+          "names": {
+            "subject": "架空国語43",
+            "teacher": "仮想佐藤43",
+            "room": "架空室A43"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 2,
+          "names": {
+            "subject": "架空英語79",
+            "teacher": "仮想高橋79",
+            "room": "架空室I1l79"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 3,
+          "names": {
+            "subject": "架空数学87",
+            "teacher": "仮想高橋87",
+            "room": "架空室I1l87"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 4,
+          "names": {
+            "subject": "架空英語17",
+            "teacher": "仮想田中17",
+            "room": "架空室I1l17"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 5,
+          "names": {
+            "subject": "架空国語92",
+            "teacher": "仮想高橋92",
+            "room": "架空室B92"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 6,
+          "names": {
+            "subject": "架空国語24",
+            "teacher": "仮想高橋24",
+            "room": "架空室I1l24"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 7,
+          "names": {
+            "subject": "架空数学76",
+            "teacher": "仮想田中76",
+            "room": "架空室I1l76"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 8,
+          "names": {
+            "subject": "架空英語31",
+            "teacher": "仮想高橋31",
+            "room": "架空室A31"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "practical-1-positive",
+    "expect": "exact",
+    "variant": "positive",
+    "schoolYear": 2029,
+    "font": "mplusrounded1c-MPLUSRounded1c-Regular.ttf",
+    "allOtherSlotsBlank": true,
+    "requiredSlotSet": [
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 8
+      }
+    ],
+    "timetable": {
+      "term": "前期",
+      "lessons": [
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 1,
+          "names": {
+            "subject": "架空数学35",
+            "teacher": "仮想田中35",
+            "room": "架空室I1l35"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 2,
+          "names": {
+            "subject": "架空数学45",
+            "teacher": "仮想高橋45",
+            "room": "架空室I1l45"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 3,
+          "names": {
+            "subject": "架空理科10",
+            "teacher": "仮想田中10",
+            "room": "架空室B10"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 4,
+          "names": {
+            "subject": "架空理科45",
+            "teacher": "仮想佐藤45",
+            "room": "架空室O045"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 5,
+          "names": {
+            "subject": "架空数学63",
+            "teacher": "仮想高橋63",
+            "room": "架空室O063"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 6,
+          "names": {
+            "subject": "架空国語55",
+            "teacher": "仮想田中55",
+            "room": "架空室O055"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 7,
+          "names": {
+            "subject": "架空数学53",
+            "teacher": "仮想佐藤53",
+            "room": "架空室B53"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 8,
+          "names": {
+            "subject": "架空英語39",
+            "teacher": "仮想高橋39",
+            "room": "架空室B39"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 1,
+          "names": {
+            "subject": "架空理科90",
+            "teacher": "仮想佐藤90",
+            "room": "架空室O090"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 2,
+          "names": {
+            "subject": "架空英語38",
+            "teacher": "仮想佐藤38",
+            "room": "架空室B38"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 3,
+          "names": {
+            "subject": "架空数学43",
+            "teacher": "仮想高橋43",
+            "room": "架空室A43"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 4,
+          "names": {
+            "subject": "架空数学35",
+            "teacher": "仮想田中35",
+            "room": "架空室O035"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 5,
+          "names": {
+            "subject": "架空数学23",
+            "teacher": "仮想高橋23",
+            "room": "架空室B23"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 6,
+          "names": {
+            "subject": "架空英語71",
+            "teacher": "仮想佐藤71",
+            "room": "架空室I1l71"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 7,
+          "names": {
+            "subject": "架空英語70",
+            "teacher": "仮想田中70",
+            "room": "架空室I1l70"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 8,
+          "names": {
+            "subject": "架空数学88",
+            "teacher": "仮想佐藤88",
+            "room": "架空室I1l88"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 1,
+          "names": {
+            "subject": "架空理科35",
+            "teacher": "仮想高橋35",
+            "room": "架空室B35"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 2,
+          "names": {
+            "subject": "架空国語26",
+            "teacher": "仮想田中26",
+            "room": "架空室O026"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 3,
+          "names": {
+            "subject": "架空英語34",
+            "teacher": "仮想高橋34",
+            "room": "架空室A34"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 4,
+          "names": {
+            "subject": "架空国語25",
+            "teacher": "仮想田中25",
+            "room": "架空室B25"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 5,
+          "names": {
+            "subject": "架空数学55",
+            "teacher": "仮想佐藤55",
+            "room": "架空室O055"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 6,
+          "names": {
+            "subject": "架空理科42",
+            "teacher": "仮想佐藤42",
+            "room": "架空室O042"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 7,
+          "names": {
+            "subject": "架空国語11",
+            "teacher": "仮想田中11",
+            "room": "架空室A11"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 8,
+          "names": {
+            "subject": "架空英語91",
+            "teacher": "仮想高橋91",
+            "room": "架空室I1l91"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 1,
+          "names": {
+            "subject": "架空英語36",
+            "teacher": "仮想田中36",
+            "room": "架空室I1l36"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 2,
+          "names": {
+            "subject": "架空数学76",
+            "teacher": "仮想田中76",
+            "room": "架空室I1l76"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 3,
+          "names": {
+            "subject": "架空英語35",
+            "teacher": "仮想田中35",
+            "room": "架空室O035"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 4,
+          "names": {
+            "subject": "架空国語76",
+            "teacher": "仮想高橋76",
+            "room": "架空室I1l76"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 5,
+          "names": {
+            "subject": "架空理科87",
+            "teacher": "仮想佐藤87",
+            "room": "架空室I1l87"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 6,
+          "names": {
+            "subject": "架空理科61",
+            "teacher": "仮想佐藤61",
+            "room": "架空室B61"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 7,
+          "names": {
+            "subject": "架空国語96",
+            "teacher": "仮想佐藤96",
+            "room": "架空室O096"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 8,
+          "names": {
+            "subject": "架空数学10",
+            "teacher": "仮想田中10",
+            "room": "架空室I1l10"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 1,
+          "names": {
+            "subject": "架空理科58",
+            "teacher": "仮想田中58",
+            "room": "架空室I1l58"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 2,
+          "names": {
+            "subject": "架空理科43",
+            "teacher": "仮想高橋43",
+            "room": "架空室O043"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 3,
+          "names": {
+            "subject": "架空理科57",
+            "teacher": "仮想高橋57",
+            "room": "架空室B57"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 4,
+          "names": {
+            "subject": "架空英語78",
+            "teacher": "仮想田中78",
+            "room": "架空室O078"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 5,
+          "names": {
+            "subject": "架空数学34",
+            "teacher": "仮想田中34",
+            "room": "架空室I1l34"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 6,
+          "names": {
+            "subject": "架空数学63",
+            "teacher": "仮想佐藤63",
+            "room": "架空室O063"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 7,
+          "names": {
+            "subject": "架空数学58",
+            "teacher": "仮想高橋58",
+            "room": "架空室A58"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 8,
+          "names": {
+            "subject": "架空数学84",
+            "teacher": "仮想佐藤84",
+            "room": "架空室I1l84"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 1,
+          "names": {
+            "subject": "架空数学82",
+            "teacher": "仮想佐藤82",
+            "room": "架空室B82"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 2,
+          "names": {
+            "subject": "架空英語33",
+            "teacher": "仮想田中33",
+            "room": "架空室A33"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 3,
+          "names": {
+            "subject": "架空理科29",
+            "teacher": "仮想佐藤29",
+            "room": "架空室B29"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 4,
+          "names": {
+            "subject": "架空国語56",
+            "teacher": "仮想佐藤56",
+            "room": "架空室O056"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 5,
+          "names": {
+            "subject": "架空理科29",
+            "teacher": "仮想佐藤29",
+            "room": "架空室O029"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 6,
+          "names": {
+            "subject": "架空数学17",
+            "teacher": "仮想佐藤17",
+            "room": "架空室O017"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 7,
+          "names": {
+            "subject": "架空英語21",
+            "teacher": "仮想佐藤21",
+            "room": "架空室B21"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 8,
+          "names": {
+            "subject": "架空国語63",
+            "teacher": "仮想田中63",
+            "room": "架空室A63"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 1,
+          "names": {
+            "subject": "架空国語43",
+            "teacher": "仮想高橋43",
+            "room": "架空室O043"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 2,
+          "names": {
+            "subject": "架空理科63",
+            "teacher": "仮想高橋63",
+            "room": "架空室B63"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 3,
+          "names": {
+            "subject": "架空理科54",
+            "teacher": "仮想田中54",
+            "room": "架空室A54"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 4,
+          "names": {
+            "subject": "架空数学84",
+            "teacher": "仮想佐藤84",
+            "room": "架空室B84"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 5,
+          "names": {
+            "subject": "架空国語39",
+            "teacher": "仮想高橋39",
+            "room": "架空室O039"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 6,
+          "names": {
+            "subject": "架空英語58",
+            "teacher": "仮想佐藤58",
+            "room": "架空室A58"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 7,
+          "names": {
+            "subject": "架空英語48",
+            "teacher": "仮想田中48",
+            "room": "架空室B48"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 8,
+          "names": {
+            "subject": "架空英語67",
+            "teacher": "仮想佐藤67",
+            "room": "架空室A67"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 1,
+          "names": {
+            "subject": "架空国語50",
+            "teacher": "仮想高橋50",
+            "room": "架空室I1l50"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 2,
+          "names": {
+            "subject": "架空理科62",
+            "teacher": "仮想高橋62",
+            "room": "架空室I1l62"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 3,
+          "names": {
+            "subject": "架空英語49",
+            "teacher": "仮想佐藤49",
+            "room": "架空室O049"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 4,
+          "names": {
+            "subject": "架空理科48",
+            "teacher": "仮想佐藤48",
+            "room": "架空室I1l48"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 5,
+          "names": {
+            "subject": "架空理科98",
+            "teacher": "仮想高橋98",
+            "room": "架空室I1l98"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 6,
+          "names": {
+            "subject": "架空数学23",
+            "teacher": "仮想佐藤23",
+            "room": "架空室I1l23"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 7,
+          "names": {
+            "subject": "架空数学67",
+            "teacher": "仮想高橋67",
+            "room": "架空室A67"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 8,
+          "names": {
+            "subject": "架空英語54",
+            "teacher": "仮想佐藤54",
+            "room": "架空室O054"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 1,
+          "names": {
+            "subject": "架空国語87",
+            "teacher": "仮想高橋87",
+            "room": "架空室I1l87"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 2,
+          "names": {
+            "subject": "架空国語47",
+            "teacher": "仮想高橋47",
+            "room": "架空室B47"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 3,
+          "names": {
+            "subject": "架空英語58",
+            "teacher": "仮想田中58",
+            "room": "架空室O058"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 4,
+          "names": {
+            "subject": "架空国語49",
+            "teacher": "仮想高橋49",
+            "room": "架空室A49"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 5,
+          "names": {
+            "subject": "架空理科78",
+            "teacher": "仮想高橋78",
+            "room": "架空室B78"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 6,
+          "names": {
+            "subject": "架空国語35",
+            "teacher": "仮想田中35",
+            "room": "架空室B35"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 7,
+          "names": {
+            "subject": "架空数学46",
+            "teacher": "仮想佐藤46",
+            "room": "架空室B46"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 8,
+          "names": {
+            "subject": "架空英語38",
+            "teacher": "仮想佐藤38",
+            "room": "架空室A38"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 1,
+          "names": {
+            "subject": "架空英語67",
+            "teacher": "仮想高橋67",
+            "room": "架空室I1l67"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 2,
+          "names": {
+            "subject": "架空国語18",
+            "teacher": "仮想高橋18",
+            "room": "架空室I1l18"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 3,
+          "names": {
+            "subject": "架空国語52",
+            "teacher": "仮想佐藤52",
+            "room": "架空室I1l52"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 4,
+          "names": {
+            "subject": "架空数学80",
+            "teacher": "仮想高橋80",
+            "room": "架空室I1l80"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 5,
+          "names": {
+            "subject": "架空英語78",
+            "teacher": "仮想高橋78",
+            "room": "架空室A78"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 6,
+          "names": {
+            "subject": "架空数学26",
+            "teacher": "仮想田中26",
+            "room": "架空室B26"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 7,
+          "names": {
+            "subject": "架空数学15",
+            "teacher": "仮想田中15",
+            "room": "架空室I1l15"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 8,
+          "names": {
+            "subject": "架空理科25",
+            "teacher": "仮想佐藤25",
+            "room": "架空室A25"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 1,
+          "names": {
+            "subject": "架空数学26",
+            "teacher": "仮想佐藤26",
+            "room": "架空室B26"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 2,
+          "names": {
+            "subject": "架空理科10",
+            "teacher": "仮想佐藤10",
+            "room": "架空室A10"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 3,
+          "names": {
+            "subject": "架空理科71",
+            "teacher": "仮想高橋71",
+            "room": "架空室I1l71"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 4,
+          "names": {
+            "subject": "架空国語65",
+            "teacher": "仮想田中65",
+            "room": "架空室I1l65"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 5,
+          "names": {
+            "subject": "架空数学19",
+            "teacher": "仮想高橋19",
+            "room": "架空室I1l19"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 6,
+          "names": {
+            "subject": "架空国語21",
+            "teacher": "仮想田中21",
+            "room": "架空室O021"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 7,
+          "names": {
+            "subject": "架空数学39",
+            "teacher": "仮想高橋39",
+            "room": "架空室O039"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 8,
+          "names": {
+            "subject": "架空英語74",
+            "teacher": "仮想田中74",
+            "room": "架空室B74"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 1,
+          "names": {
+            "subject": "架空国語89",
+            "teacher": "仮想田中89",
+            "room": "架空室B89"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 2,
+          "names": {
+            "subject": "架空理科29",
+            "teacher": "仮想高橋29",
+            "room": "架空室O029"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 3,
+          "names": {
+            "subject": "架空英語21",
+            "teacher": "仮想佐藤21",
+            "room": "架空室A21"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 4,
+          "names": {
+            "subject": "架空数学69",
+            "teacher": "仮想田中69",
+            "room": "架空室B69"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 5,
+          "names": {
+            "subject": "架空数学18",
+            "teacher": "仮想佐藤18",
+            "room": "架空室B18"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 6,
+          "names": {
+            "subject": "架空国語96",
+            "teacher": "仮想田中96",
+            "room": "架空室I1l96"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 7,
+          "names": {
+            "subject": "架空英語11",
+            "teacher": "仮想高橋11",
+            "room": "架空室I1l11"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 8,
+          "names": {
+            "subject": "架空数学52",
+            "teacher": "仮想田中52",
+            "room": "架空室A52"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 1,
+          "names": {
+            "subject": "架空英語70",
+            "teacher": "仮想田中70",
+            "room": "架空室B70"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 2,
+          "names": {
+            "subject": "架空英語13",
+            "teacher": "仮想田中13",
+            "room": "架空室I1l13"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 3,
+          "names": {
+            "subject": "架空国語21",
+            "teacher": "仮想田中21",
+            "room": "架空室B21"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 4,
+          "names": {
+            "subject": "架空理科58",
+            "teacher": "仮想佐藤58",
+            "room": "架空室B58"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 5,
+          "names": {
+            "subject": "架空理科26",
+            "teacher": "仮想田中26",
+            "room": "架空室I1l26"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 6,
+          "names": {
+            "subject": "架空国語37",
+            "teacher": "仮想高橋37",
+            "room": "架空室B37"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 7,
+          "names": {
+            "subject": "架空英語10",
+            "teacher": "仮想高橋10",
+            "room": "架空室A10"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 8,
+          "names": {
+            "subject": "架空数学21",
+            "teacher": "仮想高橋21",
+            "room": "架空室A21"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 1,
+          "names": {
+            "subject": "架空英語24",
+            "teacher": "仮想佐藤24",
+            "room": "架空室I1l24"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 2,
+          "names": {
+            "subject": "架空英語32",
+            "teacher": "仮想高橋32",
+            "room": "架空室I1l32"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 3,
+          "names": {
+            "subject": "架空英語81",
+            "teacher": "仮想高橋81",
+            "room": "架空室A81"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 4,
+          "names": {
+            "subject": "架空国語89",
+            "teacher": "仮想田中89",
+            "room": "架空室B89"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 5,
+          "names": {
+            "subject": "架空国語75",
+            "teacher": "仮想田中75",
+            "room": "架空室B75"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 6,
+          "names": {
+            "subject": "架空英語76",
+            "teacher": "仮想高橋76",
+            "room": "架空室O076"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 7,
+          "names": {
+            "subject": "架空理科48",
+            "teacher": "仮想高橋48",
+            "room": "架空室B48"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 8,
+          "names": {
+            "subject": "架空国語84",
+            "teacher": "仮想田中84",
+            "room": "架空室A84"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 1,
+          "names": {
+            "subject": "架空理科98",
+            "teacher": "仮想佐藤98",
+            "room": "架空室I1l98"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 2,
+          "names": {
+            "subject": "架空理科95",
+            "teacher": "仮想田中95",
+            "room": "架空室I1l95"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 3,
+          "names": {
+            "subject": "架空数学67",
+            "teacher": "仮想田中67",
+            "room": "架空室B67"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 4,
+          "names": {
+            "subject": "架空英語37",
+            "teacher": "仮想高橋37",
+            "room": "架空室A37"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 5,
+          "names": {
+            "subject": "架空国語82",
+            "teacher": "仮想田中82",
+            "room": "架空室A82"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 6,
+          "names": {
+            "subject": "架空国語46",
+            "teacher": "仮想佐藤46",
+            "room": "架空室B46"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 7,
+          "names": {
+            "subject": "架空国語52",
+            "teacher": "仮想佐藤52",
+            "room": "架空室A52"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 8,
+          "names": {
+            "subject": "架空数学73",
+            "teacher": "仮想高橋73",
+            "room": "架空室I1l73"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "practical-1-missing-day",
+    "expect": "refuse",
+    "variant": "missing-day",
+    "schoolYear": 2029,
+    "font": "mplusrounded1c-MPLUSRounded1c-Regular.ttf",
+    "allOtherSlotsBlank": true,
+    "requiredSlotSet": [
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "1",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "1",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "1",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "2",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "2",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "2",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "3",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "3",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "3",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "4",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "4",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "4",
+        "period": 8
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 1
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 2
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 3
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 4
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 5
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 6
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 7
+      },
+      {
+        "className": "1_1",
+        "day": "5",
+        "period": 8
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 1
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 2
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 3
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 4
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 5
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 6
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 7
+      },
+      {
+        "className": "2_IT",
+        "day": "5",
+        "period": 8
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 1
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 2
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 3
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 4
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 5
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 6
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 7
+      },
+      {
+        "className": "AI_1",
+        "day": "5",
+        "period": 8
+      }
+    ],
+    "timetable": {
+      "term": "前期",
+      "lessons": [
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 1,
+          "names": {
+            "subject": "架空数学35",
+            "teacher": "仮想田中35",
+            "room": "架空室I1l35"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 2,
+          "names": {
+            "subject": "架空数学45",
+            "teacher": "仮想高橋45",
+            "room": "架空室I1l45"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 3,
+          "names": {
+            "subject": "架空理科10",
+            "teacher": "仮想田中10",
+            "room": "架空室B10"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 4,
+          "names": {
+            "subject": "架空理科45",
+            "teacher": "仮想佐藤45",
+            "room": "架空室O045"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 5,
+          "names": {
+            "subject": "架空数学63",
+            "teacher": "仮想高橋63",
+            "room": "架空室O063"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 6,
+          "names": {
+            "subject": "架空国語55",
+            "teacher": "仮想田中55",
+            "room": "架空室O055"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 7,
+          "names": {
+            "subject": "架空数学53",
+            "teacher": "仮想佐藤53",
+            "room": "架空室B53"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 1,
+          "period": 8,
+          "names": {
+            "subject": "架空英語39",
+            "teacher": "仮想高橋39",
+            "room": "架空室B39"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 1,
+          "names": {
+            "subject": "架空理科90",
+            "teacher": "仮想佐藤90",
+            "room": "架空室O090"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 2,
+          "names": {
+            "subject": "架空英語38",
+            "teacher": "仮想佐藤38",
+            "room": "架空室B38"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 3,
+          "names": {
+            "subject": "架空数学43",
+            "teacher": "仮想高橋43",
+            "room": "架空室A43"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 4,
+          "names": {
+            "subject": "架空数学35",
+            "teacher": "仮想田中35",
+            "room": "架空室O035"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 5,
+          "names": {
+            "subject": "架空数学23",
+            "teacher": "仮想高橋23",
+            "room": "架空室B23"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 6,
+          "names": {
+            "subject": "架空英語71",
+            "teacher": "仮想佐藤71",
+            "room": "架空室I1l71"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 7,
+          "names": {
+            "subject": "架空英語70",
+            "teacher": "仮想田中70",
+            "room": "架空室I1l70"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 1,
+          "period": 8,
+          "names": {
+            "subject": "架空数学88",
+            "teacher": "仮想佐藤88",
+            "room": "架空室I1l88"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 1,
+          "names": {
+            "subject": "架空理科35",
+            "teacher": "仮想高橋35",
+            "room": "架空室B35"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 2,
+          "names": {
+            "subject": "架空国語26",
+            "teacher": "仮想田中26",
+            "room": "架空室O026"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 3,
+          "names": {
+            "subject": "架空英語34",
+            "teacher": "仮想高橋34",
+            "room": "架空室A34"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 4,
+          "names": {
+            "subject": "架空国語25",
+            "teacher": "仮想田中25",
+            "room": "架空室B25"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 5,
+          "names": {
+            "subject": "架空数学55",
+            "teacher": "仮想佐藤55",
+            "room": "架空室O055"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 6,
+          "names": {
+            "subject": "架空理科42",
+            "teacher": "仮想佐藤42",
+            "room": "架空室O042"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 7,
+          "names": {
+            "subject": "架空国語11",
+            "teacher": "仮想田中11",
+            "room": "架空室A11"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 1,
+          "period": 8,
+          "names": {
+            "subject": "架空英語91",
+            "teacher": "仮想高橋91",
+            "room": "架空室I1l91"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 1,
+          "names": {
+            "subject": "架空英語36",
+            "teacher": "仮想田中36",
+            "room": "架空室I1l36"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 2,
+          "names": {
+            "subject": "架空数学76",
+            "teacher": "仮想田中76",
+            "room": "架空室I1l76"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 3,
+          "names": {
+            "subject": "架空英語35",
+            "teacher": "仮想田中35",
+            "room": "架空室O035"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 4,
+          "names": {
+            "subject": "架空国語76",
+            "teacher": "仮想高橋76",
+            "room": "架空室I1l76"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 5,
+          "names": {
+            "subject": "架空理科87",
+            "teacher": "仮想佐藤87",
+            "room": "架空室I1l87"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 6,
+          "names": {
+            "subject": "架空理科61",
+            "teacher": "仮想佐藤61",
+            "room": "架空室B61"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 7,
+          "names": {
+            "subject": "架空国語96",
+            "teacher": "仮想佐藤96",
+            "room": "架空室O096"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 2,
+          "period": 8,
+          "names": {
+            "subject": "架空数学10",
+            "teacher": "仮想田中10",
+            "room": "架空室I1l10"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 1,
+          "names": {
+            "subject": "架空理科58",
+            "teacher": "仮想田中58",
+            "room": "架空室I1l58"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 2,
+          "names": {
+            "subject": "架空理科43",
+            "teacher": "仮想高橋43",
+            "room": "架空室O043"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 3,
+          "names": {
+            "subject": "架空理科57",
+            "teacher": "仮想高橋57",
+            "room": "架空室B57"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 4,
+          "names": {
+            "subject": "架空英語78",
+            "teacher": "仮想田中78",
+            "room": "架空室O078"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 5,
+          "names": {
+            "subject": "架空数学34",
+            "teacher": "仮想田中34",
+            "room": "架空室I1l34"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 6,
+          "names": {
+            "subject": "架空数学63",
+            "teacher": "仮想佐藤63",
+            "room": "架空室O063"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 7,
+          "names": {
+            "subject": "架空数学58",
+            "teacher": "仮想高橋58",
+            "room": "架空室A58"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 2,
+          "period": 8,
+          "names": {
+            "subject": "架空数学84",
+            "teacher": "仮想佐藤84",
+            "room": "架空室I1l84"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 1,
+          "names": {
+            "subject": "架空数学82",
+            "teacher": "仮想佐藤82",
+            "room": "架空室B82"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 2,
+          "names": {
+            "subject": "架空英語33",
+            "teacher": "仮想田中33",
+            "room": "架空室A33"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 3,
+          "names": {
+            "subject": "架空理科29",
+            "teacher": "仮想佐藤29",
+            "room": "架空室B29"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 4,
+          "names": {
+            "subject": "架空国語56",
+            "teacher": "仮想佐藤56",
+            "room": "架空室O056"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 5,
+          "names": {
+            "subject": "架空理科29",
+            "teacher": "仮想佐藤29",
+            "room": "架空室O029"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 6,
+          "names": {
+            "subject": "架空数学17",
+            "teacher": "仮想佐藤17",
+            "room": "架空室O017"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 7,
+          "names": {
+            "subject": "架空英語21",
+            "teacher": "仮想佐藤21",
+            "room": "架空室B21"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 2,
+          "period": 8,
+          "names": {
+            "subject": "架空国語63",
+            "teacher": "仮想田中63",
+            "room": "架空室A63"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 1,
+          "names": {
+            "subject": "架空国語43",
+            "teacher": "仮想高橋43",
+            "room": "架空室O043"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 2,
+          "names": {
+            "subject": "架空理科63",
+            "teacher": "仮想高橋63",
+            "room": "架空室B63"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 3,
+          "names": {
+            "subject": "架空理科54",
+            "teacher": "仮想田中54",
+            "room": "架空室A54"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 4,
+          "names": {
+            "subject": "架空数学84",
+            "teacher": "仮想佐藤84",
+            "room": "架空室B84"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 5,
+          "names": {
+            "subject": "架空国語39",
+            "teacher": "仮想高橋39",
+            "room": "架空室O039"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 6,
+          "names": {
+            "subject": "架空英語58",
+            "teacher": "仮想佐藤58",
+            "room": "架空室A58"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 7,
+          "names": {
+            "subject": "架空英語48",
+            "teacher": "仮想田中48",
+            "room": "架空室B48"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 3,
+          "period": 8,
+          "names": {
+            "subject": "架空英語67",
+            "teacher": "仮想佐藤67",
+            "room": "架空室A67"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 1,
+          "names": {
+            "subject": "架空国語50",
+            "teacher": "仮想高橋50",
+            "room": "架空室I1l50"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 2,
+          "names": {
+            "subject": "架空理科62",
+            "teacher": "仮想高橋62",
+            "room": "架空室I1l62"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 3,
+          "names": {
+            "subject": "架空英語49",
+            "teacher": "仮想佐藤49",
+            "room": "架空室O049"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 4,
+          "names": {
+            "subject": "架空理科48",
+            "teacher": "仮想佐藤48",
+            "room": "架空室I1l48"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 5,
+          "names": {
+            "subject": "架空理科98",
+            "teacher": "仮想高橋98",
+            "room": "架空室I1l98"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 6,
+          "names": {
+            "subject": "架空数学23",
+            "teacher": "仮想佐藤23",
+            "room": "架空室I1l23"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 7,
+          "names": {
+            "subject": "架空数学67",
+            "teacher": "仮想高橋67",
+            "room": "架空室A67"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 3,
+          "period": 8,
+          "names": {
+            "subject": "架空英語54",
+            "teacher": "仮想佐藤54",
+            "room": "架空室O054"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 1,
+          "names": {
+            "subject": "架空国語87",
+            "teacher": "仮想高橋87",
+            "room": "架空室I1l87"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 2,
+          "names": {
+            "subject": "架空国語47",
+            "teacher": "仮想高橋47",
+            "room": "架空室B47"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 3,
+          "names": {
+            "subject": "架空英語58",
+            "teacher": "仮想田中58",
+            "room": "架空室O058"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 4,
+          "names": {
+            "subject": "架空国語49",
+            "teacher": "仮想高橋49",
+            "room": "架空室A49"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 5,
+          "names": {
+            "subject": "架空理科78",
+            "teacher": "仮想高橋78",
+            "room": "架空室B78"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 6,
+          "names": {
+            "subject": "架空国語35",
+            "teacher": "仮想田中35",
+            "room": "架空室B35"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 7,
+          "names": {
+            "subject": "架空数学46",
+            "teacher": "仮想佐藤46",
+            "room": "架空室B46"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 3,
+          "period": 8,
+          "names": {
+            "subject": "架空英語38",
+            "teacher": "仮想佐藤38",
+            "room": "架空室A38"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 1,
+          "names": {
+            "subject": "架空英語67",
+            "teacher": "仮想高橋67",
+            "room": "架空室I1l67"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 2,
+          "names": {
+            "subject": "架空国語18",
+            "teacher": "仮想高橋18",
+            "room": "架空室I1l18"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 3,
+          "names": {
+            "subject": "架空国語52",
+            "teacher": "仮想佐藤52",
+            "room": "架空室I1l52"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 4,
+          "names": {
+            "subject": "架空数学80",
+            "teacher": "仮想高橋80",
+            "room": "架空室I1l80"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 5,
+          "names": {
+            "subject": "架空英語78",
+            "teacher": "仮想高橋78",
+            "room": "架空室A78"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 6,
+          "names": {
+            "subject": "架空数学26",
+            "teacher": "仮想田中26",
+            "room": "架空室B26"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 7,
+          "names": {
+            "subject": "架空数学15",
+            "teacher": "仮想田中15",
+            "room": "架空室I1l15"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 4,
+          "period": 8,
+          "names": {
+            "subject": "架空理科25",
+            "teacher": "仮想佐藤25",
+            "room": "架空室A25"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 1,
+          "names": {
+            "subject": "架空数学26",
+            "teacher": "仮想佐藤26",
+            "room": "架空室B26"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 2,
+          "names": {
+            "subject": "架空理科10",
+            "teacher": "仮想佐藤10",
+            "room": "架空室A10"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 3,
+          "names": {
+            "subject": "架空理科71",
+            "teacher": "仮想高橋71",
+            "room": "架空室I1l71"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 4,
+          "names": {
+            "subject": "架空国語65",
+            "teacher": "仮想田中65",
+            "room": "架空室I1l65"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 5,
+          "names": {
+            "subject": "架空数学19",
+            "teacher": "仮想高橋19",
+            "room": "架空室I1l19"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 6,
+          "names": {
+            "subject": "架空国語21",
+            "teacher": "仮想田中21",
+            "room": "架空室O021"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 7,
+          "names": {
+            "subject": "架空数学39",
+            "teacher": "仮想高橋39",
+            "room": "架空室O039"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 4,
+          "period": 8,
+          "names": {
+            "subject": "架空英語74",
+            "teacher": "仮想田中74",
+            "room": "架空室B74"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 1,
+          "names": {
+            "subject": "架空国語89",
+            "teacher": "仮想田中89",
+            "room": "架空室B89"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 2,
+          "names": {
+            "subject": "架空理科29",
+            "teacher": "仮想高橋29",
+            "room": "架空室O029"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 3,
+          "names": {
+            "subject": "架空英語21",
+            "teacher": "仮想佐藤21",
+            "room": "架空室A21"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 4,
+          "names": {
+            "subject": "架空数学69",
+            "teacher": "仮想田中69",
+            "room": "架空室B69"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 5,
+          "names": {
+            "subject": "架空数学18",
+            "teacher": "仮想佐藤18",
+            "room": "架空室B18"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 6,
+          "names": {
+            "subject": "架空国語96",
+            "teacher": "仮想田中96",
+            "room": "架空室I1l96"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 7,
+          "names": {
+            "subject": "架空英語11",
+            "teacher": "仮想高橋11",
+            "room": "架空室I1l11"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 4,
+          "period": 8,
+          "names": {
+            "subject": "架空数学52",
+            "teacher": "仮想田中52",
+            "room": "架空室A52"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 1,
+          "names": {
+            "subject": "架空英語70",
+            "teacher": "仮想田中70",
+            "room": "架空室B70"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 2,
+          "names": {
+            "subject": "架空英語13",
+            "teacher": "仮想田中13",
+            "room": "架空室I1l13"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 3,
+          "names": {
+            "subject": "架空国語21",
+            "teacher": "仮想田中21",
+            "room": "架空室B21"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 4,
+          "names": {
+            "subject": "架空理科58",
+            "teacher": "仮想佐藤58",
+            "room": "架空室B58"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 5,
+          "names": {
+            "subject": "架空理科26",
+            "teacher": "仮想田中26",
+            "room": "架空室I1l26"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 6,
+          "names": {
+            "subject": "架空国語37",
+            "teacher": "仮想高橋37",
+            "room": "架空室B37"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 7,
+          "names": {
+            "subject": "架空英語10",
+            "teacher": "仮想高橋10",
+            "room": "架空室A10"
+          }
+        },
+        {
+          "className": "1_1",
+          "weekday": 5,
+          "period": 8,
+          "names": {
+            "subject": "架空数学21",
+            "teacher": "仮想高橋21",
+            "room": "架空室A21"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 1,
+          "names": {
+            "subject": "架空英語24",
+            "teacher": "仮想佐藤24",
+            "room": "架空室I1l24"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 2,
+          "names": {
+            "subject": "架空英語32",
+            "teacher": "仮想高橋32",
+            "room": "架空室I1l32"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 3,
+          "names": {
+            "subject": "架空英語81",
+            "teacher": "仮想高橋81",
+            "room": "架空室A81"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 4,
+          "names": {
+            "subject": "架空国語89",
+            "teacher": "仮想田中89",
+            "room": "架空室B89"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 5,
+          "names": {
+            "subject": "架空国語75",
+            "teacher": "仮想田中75",
+            "room": "架空室B75"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 6,
+          "names": {
+            "subject": "架空英語76",
+            "teacher": "仮想高橋76",
+            "room": "架空室O076"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 7,
+          "names": {
+            "subject": "架空理科48",
+            "teacher": "仮想高橋48",
+            "room": "架空室B48"
+          }
+        },
+        {
+          "className": "2_IT",
+          "weekday": 5,
+          "period": 8,
+          "names": {
+            "subject": "架空国語84",
+            "teacher": "仮想田中84",
+            "room": "架空室A84"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 1,
+          "names": {
+            "subject": "架空理科98",
+            "teacher": "仮想佐藤98",
+            "room": "架空室I1l98"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 2,
+          "names": {
+            "subject": "架空理科95",
+            "teacher": "仮想田中95",
+            "room": "架空室I1l95"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 3,
+          "names": {
+            "subject": "架空数学67",
+            "teacher": "仮想田中67",
+            "room": "架空室B67"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 4,
+          "names": {
+            "subject": "架空英語37",
+            "teacher": "仮想高橋37",
+            "room": "架空室A37"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 5,
+          "names": {
+            "subject": "架空国語82",
+            "teacher": "仮想田中82",
+            "room": "架空室A82"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 6,
+          "names": {
+            "subject": "架空国語46",
+            "teacher": "仮想佐藤46",
+            "room": "架空室B46"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 7,
+          "names": {
+            "subject": "架空国語52",
+            "teacher": "仮想佐藤52",
+            "room": "架空室A52"
+          }
+        },
+        {
+          "className": "AI_1",
+          "weekday": 5,
+          "period": 8,
+          "names": {
+            "subject": "架空数学73",
+            "teacher": "仮想高橋73",
+            "room": "架空室I1l73"
+          }
+        }
+      ]
+    }
+  }
+]

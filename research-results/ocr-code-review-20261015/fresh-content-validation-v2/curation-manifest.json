@@ -1,0 +1,115 @@
+{
+  "scope": "Byte-exact closed fictional code images research records only. No images, fonts, model weights, binaries or real school data.",
+  "files": [
+    {
+      "file": "font-downloads.json",
+      "bytes": 1119,
+      "sha256": "d3727064973c24a1c27bd026c6c83583687ef96123cd76deffb5cf11d2bcac4c"
+    },
+    {
+      "file": "protocol.json",
+      "bytes": 1777,
+      "sha256": "435524c20215377bdd58cd76f8065fef5cbb7c44fa5fb483c4497c83643ba7d8"
+    },
+    {
+      "file": "glyph-ambiguity.json",
+      "bytes": 10632,
+      "sha256": "dbbfba4154ac4d701eb75a663f3a493e15f0f129d78999258330c9f6c025ddf9"
+    },
+    {
+      "file": "inputs.json",
+      "bytes": 190679,
+      "sha256": "ef5508817eba9c263de8d043b179422290cfd221cb858f5faac6b68b26b7d823"
+    },
+    {
+      "file": "oracle.json",
+      "bytes": 141981,
+      "sha256": "d0dff85938cc6c56a8b518403369648b57d5d8b25a4d7a4a19f6045c69b5fbd2"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 12451,
+      "sha256": "a83adb1e79f48d9870525e8d55a4c0e899e592a507c1e6b7b7fb5c231c510bae"
+    },
+    {
+      "file": "worker-receipt.json",
+      "bytes": 164,
+      "sha256": "e2f58d2b2921f053dd9553726819c72c862d6ad7051c6c0bf2c4ff1ad8497985"
+    },
+    {
+      "file": "raw.jsonl",
+      "bytes": 2069853,
+      "sha256": "73bb5484d43dd62d6b77b3a30f4f9f571ab27c19387b85b0155a2e6b31febb62"
+    },
+    {
+      "file": "report.json",
+      "bytes": 25535,
+      "sha256": "a4d98ada61336108bc487ab3211380ca66c7ebeebc31a9c9b4f69e765de8fd5a"
+    },
+    {
+      "file": "stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "baseline-freeze.json",
+      "bytes": 7811,
+      "sha256": "f6ab267af421ec50097fcb5deb3dc1d3e783e3a58a994877b24c417e027d5ed8"
+    },
+    {
+      "file": "baseline-receipt.json",
+      "bytes": 103,
+      "sha256": "588aee8676c75126223fb7417e0b2ee9d95dfe327fc66a012133c77ed627ae58"
+    },
+    {
+      "file": "baseline-raw.jsonl",
+      "bytes": 2068740,
+      "sha256": "a13e5f4385cc3bb4dde3c868b0eea7c6b0c1757d1447252a7d7109af6329a5d1"
+    },
+    {
+      "file": "baseline-stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "baseline-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "paired-routes.json",
+      "bytes": 8956,
+      "sha256": "91bfc9f9ebbcddad26cd32e9dac2f5e55f6118e3e7971f5ed62301a7d6c52aef"
+    },
+    {
+      "file": "as-run-source/baseline-OcrAsciiRefinement.cs",
+      "bytes": 3541,
+      "sha256": "01fa23c046b2be430b9cd0b5c9efa78fadca9f47c0005d3cc5bf66cfe8f0454b"
+    },
+    {
+      "file": "as-run-source/CodeProbe.csproj",
+      "bytes": 413,
+      "sha256": "4f203ba334465239e68ede01538f9cb8b091869b5a4b23217ceccb11896304cd"
+    },
+    {
+      "file": "as-run-source/candidate-OcrAsciiRefinement.cs",
+      "bytes": 4078,
+      "sha256": "16f596485bac4d1f8f6d610e6bdbddc2ff71c74315ba9b6ab5e2a5f1899f6974"
+    },
+    {
+      "file": "as-run-source/run.py",
+      "bytes": 12406,
+      "sha256": "3f0b6cac563cbbe2060e534c860bb348a35c63a607e904a6c6271ccf46c324f9"
+    },
+    {
+      "file": "as-run-source/Program.cs",
+      "bytes": 5922,
+      "sha256": "1881b6448d32de2740809cf5df5811b92228b01d5707a5c37972e769f5409507"
+    }
+  ]
+}

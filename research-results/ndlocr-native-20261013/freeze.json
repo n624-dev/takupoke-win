@@ -1,0 +1,52 @@
+{
+  "recipe": "ndlocr-native-parseq-consumed-pixels-v1",
+  "upstreamRevision": "d001dad2013ceabb5736ff8d637474e443eb73c2",
+  "pixelsSHA": "6e54d6bc0cc2213dc51a6e0ff67f3551a736e4e75641ec00f96c7b9de87f14ff",
+  "oracleSHA": "1c5652c38a5d84691d5105bd4e851349bc1879d38b2a1cc2a2b6169c12683095",
+  "models": [
+    {
+      "id": "ndl-30",
+      "filename": "parseq-ndl-24x256-30-tiny-189epoch-tegaki3-r8data-202604.onnx",
+      "sha256": "9e651bae4c1a4d5254da1127e86e82e21ef62d5339b37e62d4a3d3d30831772d",
+      "bytes": 36457393,
+      "width": 256,
+      "maximumCharacters": 30
+    },
+    {
+      "id": "ndl-50",
+      "filename": "parseq-ndl-24x384-50-tiny-300epoch-tegaki3-r8data-202604.onnx",
+      "sha256": "49cea9db4552f19eb05c8ee202fcf74714977749b2f4c9376b127fde41b07a99",
+      "bytes": 37808553,
+      "width": 384,
+      "maximumCharacters": 50
+    },
+    {
+      "id": "ndl-100",
+      "filename": "parseq-ndl-24x768-100-tiny-153epoch-tegaki3-r8data-202604.onnx",
+      "sha256": "06462b0dbd5b0b8508545c8c3d485cf20dbf4ffa652fe145e69c9e7457080602",
+      "bytes": 42588187,
+      "width": 768,
+      "maximumCharacters": 100
+    }
+  ],
+  "upstreamSources": {
+    "src/parseq.py": "638066d19ded10e63046e7448fe956ba25a97d0d143f9ba6f1bbaaea0c3ba6a7",
+    "src/config/NDLmoji.yaml": "f6ad5a2de444b495155866af811cf1a98309dcae3225db802767ea531a2dc529",
+    "LICENCE": "12538e73c4a1e05fc0c0b75d9d4de657f139d94ebc5f44b03a84cc1f793358f0"
+  },
+  "sources": {
+    "run.py": "63ccac10036d3ad212f8984c0345f689d7fef2dcc15404c8ca1ab80c661e7fc7",
+    "worker.py": "9ca321fc9ad80d2c94d88a246b323d1f7f56082b2c8417e564e24617eaa95d02"
+  },
+  "callsPlanned": 576,
+  "providers": [
+    "CPUExecutionProvider"
+  ],
+  "threads": 1,
+  "preprocessing": "Native PARSEQ.preprocess, RGB input as upstream PIL; rotation, cv2 bilinear, BGR [-1,1]",
+  "decode": "Native first-EOS autoregressive argmax, no CTC repeat merging; exact raw literal",
+  "candidateSelection": "none; three independent fixed arms, no gold or agreement routing",
+  "confidence": "Uncalibrated PARSeq token softmax including EOS; not a Paddle CTC floor",
+  "qualification": "unassessed",
+  "scope": "Consumed recognition-only development pixels; zero new independent document credit"
+}

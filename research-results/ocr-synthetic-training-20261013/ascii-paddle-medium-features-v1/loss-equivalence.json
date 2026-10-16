@@ -1,0 +1,16 @@
+{
+  "scope": "Synthetic numeric feature/objective equivalence only; no image, oracle, optimizer step, training or quality claim",
+  "originalClasses": 18710,
+  "lossClasses": 99,
+  "exactPrinciple": "All trainable ASCII rows and every CTC target class are retained. Remaining unmodified rows enter one exact logsumexp OTHER scalar. OTHER is never a target. CTC paths and denominator are unchanged. Every omitted teacher/student logit is identical, so their teacher-KL probability ratios share the same normalization shift and aggregate exactly. Inference still uses full18710 rows/dictionary.",
+  "differences": {
+    "ctc": 0.0,
+    "fullTeacherKl": 3.587920218706131e-07,
+    "total": 0.0,
+    "weightGradientMax": 9.268522262573242e-06,
+    "biasGradientMax": 3.9637088775634766e-06
+  },
+  "sourceSha256": "8df803ca8d8a9903b99c2f8ded0fa1f77902f808483cc2215e15a21878c63887",
+  "threshold": 1e-05,
+  "floatType": "float32"
+}

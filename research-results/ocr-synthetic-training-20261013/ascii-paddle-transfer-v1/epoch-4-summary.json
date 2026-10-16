@@ -1,0 +1,107 @@
+{
+  "name": "epoch-4",
+  "positiveRows": 512,
+  "exact": 455,
+  "correctAccepted": 385,
+  "incorrectAccepted": 26,
+  "negativeRows": 192,
+  "negativeAccepted": 0,
+  "cer": 0.02666666666666667,
+  "paddingRows": 13,
+  "caseMismatchAccepted": 0,
+  "confusableMismatchAccepted": 20,
+  "groups": {
+    "blank": {
+      "rows": 32,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 32,
+      "asciiNonempty": 0
+    },
+    "case": {
+      "rows": 128,
+      "exact": 120,
+      "correctAccepted": 109,
+      "incorrectAccepted": 3,
+      "accepted": 112,
+      "nonempty": 128,
+      "asciiNonempty": 125
+    },
+    "cjk": {
+      "rows": 32,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 32,
+      "asciiNonempty": 0
+    },
+    "clipped": {
+      "rows": 32,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 32,
+      "asciiNonempty": 2
+    },
+    "code": {
+      "rows": 128,
+      "exact": 111,
+      "correctAccepted": 91,
+      "incorrectAccepted": 6,
+      "accepted": 97,
+      "nonempty": 128,
+      "asciiNonempty": 123
+    },
+    "confusable": {
+      "rows": 128,
+      "exact": 108,
+      "correctAccepted": 85,
+      "incorrectAccepted": 12,
+      "accepted": 97,
+      "nonempty": 128,
+      "asciiNonempty": 128
+    },
+    "mixed": {
+      "rows": 32,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 32,
+      "asciiNonempty": 0
+    },
+    "multiline": {
+      "rows": 32,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 32,
+      "asciiNonempty": 0
+    },
+    "noise": {
+      "rows": 32,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 32,
+      "asciiNonempty": 0
+    },
+    "printable": {
+      "rows": 128,
+      "exact": 116,
+      "correctAccepted": 100,
+      "incorrectAccepted": 5,
+      "accepted": 105,
+      "nonempty": 128,
+      "asciiNonempty": 127
+    }
+  },
+  "rawSha256": "1d57a9ac2d6943871f0fbb9fa193929c74027d85eb43e7018d04c985f8f93e8d",
+  "status": "research-only/unqualified/inactive; independent development, final unopened"
+}

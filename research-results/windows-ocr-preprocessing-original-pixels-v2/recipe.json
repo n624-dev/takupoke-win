@@ -1,0 +1,59 @@
+{
+  "recipe": "pinned-ocr-preprocess-original-pixels-v2",
+  "sourceCommit": "c2fcdb5c5abd76592b474d75ff0eaf6089deab28",
+  "pins": [
+    {
+      "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/inputs.json",
+      "sha256": "aa81abc1a6d5bc4c2d0f3dad55191432683201108394cc91de286483abf841da"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/Program.cs",
+      "sha256": "60924d259fc49f1d6a3e38bc480227aa5d80f442ec6dce10aee1b326909edbd4"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/prepare.py",
+      "sha256": "5c3c257ec8fea2bd00ab3fd5e64253ced295ad29898a7c586fe5577882261505"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/Probe.csproj",
+      "sha256": "61176b5b34c9c1c8d3c8d8144390118b27b3f888eec6eb9b50518b7bc55c29b8"
+    },
+    {
+      "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/IndependentFormalOracle.cs",
+      "sha256": "5efb5d12e238ff9ca4929dec22da6c45702bc62029d1a303baf22efc6604e774"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-preprocess-20261004/src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs",
+      "sha256": "0b6a9c5294f42056b191d3756254857a4edfc9a7490cb130aeb1f4051d50046c"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-preprocess-20261004/src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs",
+      "sha256": "5242f91554c370d135b00e4e6cde00d9ec2a826ee85a5306d4aa0a29bd8951df"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-preprocess-20261004/src/Takupoke.Infrastructure/Takupoke.Infrastructure.csproj",
+      "sha256": "975a0e80bb17e435421f5f492ee2492f12630b7a1518e753c572aa291227135f"
+    },
+    {
+      "path": "/workspace/recovery-research/artifacts/ocr-det.onnx",
+      "sha256": "a431985659dc921974177a95adcfbb90fd9e51989a5e04d70d0b75f597b6e61d"
+    },
+    {
+      "path": "/workspace/recovery-research/artifacts/ocr-rec.onnx",
+      "sha256": "da72dc72ca4dc220df0dfde68c1dedc31c58d3e76a25871122e5056227d50092"
+    },
+    {
+      "path": "/tmp/takupoke-windows-ocr-preprocess-20261004/src/Takupoke.Win/Assets/Recovery/ocr-characters.json",
+      "sha256": "d858428fbe0ada92b439a5f277b51bc1b318fd985d80946a3ce859d7f2446a92"
+    }
+  ],
+  "plannedDocuments": 2,
+  "plannedOcrReadCalls": 10,
+  "tensorInferenceCalls": "not separately instrumented; each Read includes detector and recognizer",
+  "newModelDownload": false,
+  "presets": [
+    "currentProductionOnly"
+  ],
+  "runtime": "actual1.23.2required",
+  "scope": "Development original embedded pixels, not Windows rendering"
+}

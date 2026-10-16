@@ -1,0 +1,195 @@
+{
+  "scope": "Initialization/graph reconstruction only on consumed48pixels and numeric dynamic shapes; no oracle, training, independent-final or production credit",
+  "matches": {
+    "textIntervals": 48,
+    "floor08Decisions": 48,
+    "allSourceInkRetained": 48
+  },
+  "maximumDifferences": {
+    "observerProbability": 0.0,
+    "context": 0.0,
+    "shortcut": 0.0,
+    "feature": 2.6702880859375e-05,
+    "logits": 4.57763671875e-05,
+    "probability": 1.7881393432617188e-06,
+    "emittedConfidence": 1.7881393432617188e-06
+  },
+  "dynamicShapes": [
+    {
+      "batch": 1,
+      "inputWidth": 320,
+      "contextShape": [
+        1,
+        192,
+        1,
+        40
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "context": 0.0,
+        "shortcut": 0.0,
+        "feature": 2.288818359375e-05,
+        "logits": 2.86102294921875e-05,
+        "probability": 1.0728836059570312e-06,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 1,
+      "inputWidth": 481,
+      "contextShape": [
+        1,
+        192,
+        1,
+        60
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "context": 0.0,
+        "shortcut": 0.0,
+        "feature": 1.33514404296875e-05,
+        "logits": 2.09808349609375e-05,
+        "probability": 3.5762786865234375e-07,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 1,
+      "inputWidth": 640,
+      "contextShape": [
+        1,
+        192,
+        1,
+        80
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "context": 0.0,
+        "shortcut": 0.0,
+        "feature": 1.52587890625e-05,
+        "logits": 3.0517578125e-05,
+        "probability": 4.76837158203125e-07,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 1,
+      "inputWidth": 960,
+      "contextShape": [
+        1,
+        192,
+        1,
+        120
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "context": 0.0,
+        "shortcut": 0.0,
+        "feature": 1.239776611328125e-05,
+        "logits": 2.86102294921875e-05,
+        "probability": 5.364418029785156e-07,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 2,
+      "inputWidth": 320,
+      "contextShape": [
+        2,
+        192,
+        1,
+        40
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "context": 0.0,
+        "shortcut": 0.0,
+        "feature": 1.621246337890625e-05,
+        "logits": 2.09808349609375e-05,
+        "probability": 1.0132789611816406e-06,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 2,
+      "inputWidth": 481,
+      "contextShape": [
+        2,
+        192,
+        1,
+        60
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "context": 0.0,
+        "shortcut": 0.0,
+        "feature": 1.33514404296875e-05,
+        "logits": 2.193450927734375e-05,
+        "probability": 1.0728836059570312e-06,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 2,
+      "inputWidth": 640,
+      "contextShape": [
+        2,
+        192,
+        1,
+        80
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "context": 0.0,
+        "shortcut": 0.0,
+        "feature": 1.71661376953125e-05,
+        "logits": 3.0517578125e-05,
+        "probability": 2.384185791015625e-07,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    },
+    {
+      "batch": 2,
+      "inputWidth": 960,
+      "contextShape": [
+        2,
+        192,
+        1,
+        120
+      ],
+      "differences": {
+        "observerProbability": 0.0,
+        "context": 0.0,
+        "shortcut": 0.0,
+        "feature": 1.52587890625e-05,
+        "logits": 2.09808349609375e-05,
+        "probability": 5.960464477539062e-07,
+        "emittedConfidence": 0
+      },
+      "sameTextIntervals": true,
+      "sameFloor08Decision": true
+    }
+  ],
+  "fidelityGatePassed": true,
+  "rawSha256": "781a6c9bda07a8f92b6bb6d939d8b0d40fdb3f8a91f41fe8edc1573cf061116e",
+  "seconds": 17.103438874997664,
+  "peakRssMiB": 1094.53125,
+  "oracleOpened": false,
+  "trainingStarted": false,
+  "finalOpened": false,
+  "portability": "Original prefix standard ONNX opset11; reconstructed Torch uses standard primitives. Trained ONNX/CoreML export and Windows/iPhone execution not attempted."
+}

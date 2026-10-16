@@ -1,0 +1,58 @@
+{
+  "recipe": "independent-ocr-model-color-v1",
+  "inputs": {
+    "path": "inputs.json",
+    "bytes": 79027,
+    "sha256": "2b82061843c8ca1071e20b11a3ed644a4dd7293ac6148ebd68578d54165d683b"
+  },
+  "oracle": {
+    "path": "oracle.json",
+    "bytes": 19532,
+    "sha256": "1c5652c38a5d84691d5105bd4e851349bc1879d38b2a1cc2a2b6169c12683095"
+  },
+  "fonts": {
+    "sans": {
+      "source": {
+        "path": "sans-font.ttf",
+        "bytes": 9589900,
+        "sha256": "c2f3b4d463500a2ddcd3849cded1fceeb9fd6d1c32e6cbecd568453ba50fc68f"
+      },
+      "static": {
+        "path": "sans-static.ttf",
+        "bytes": 5766900,
+        "sha256": "54aba28468f275bc372eda5f29b202c0d9e7b9ba2bc18a53a4c72c481c75cf9f"
+      }
+    },
+    "serif": {
+      "source": {
+        "path": "serif-font.ttf",
+        "bytes": 59955380,
+        "sha256": "4c6b4670b73d0843c7b2d30b9e2fbcfa596aef6fd3937f894929ab0b8d659d1e"
+      },
+      "static": {
+        "path": "serif-static.ttf",
+        "bytes": 35530148,
+        "sha256": "2b127545ad3dba023d255733015059e550d9dbcd04c980a80021dc8ea666e813"
+      }
+    }
+  },
+  "pythonVersion": "3.12.14",
+  "pythonPackages": {
+    "Pillow": "12.3.0",
+    "fonttools": "4.61.1",
+    "PyYAML": "6.0.3"
+  },
+  "source": {
+    "Probe.csproj": "48a6a20aadb4ccea27220f4206de4bb629fb48804e7522843091d1449a3074f0",
+    "run.py": "d5c73bd031726d4af13e143fc0cdae36f707f9f96e159abb226fcd1b786833a1",
+    "test_scoring.py": "5474516ff50e3c56a5f151d0193a6952cb0c4244141d0f7722c8fd6589de9e9f",
+    "Program.cs": "b1c3b108b7b9bd6aa23ebd45ea4bfa96c3b8ceb65f4bd493e1d9d374c60bcda2"
+  },
+  "productionDecoderSha256": "9a95f142408a60de47965b91aa81f47a4a34e9274700d283148efea1fc927126",
+  "preprocessingSha256": "b13927678f0c5ed3f05d6e01c35f580647e228f969059bb003d4a47c2a6b7eaa",
+  "callsPlanned": 768,
+  "seedSans": 924113,
+  "seedSerif": 570683,
+  "qualification": "unassessed",
+  "scope": "Recognition components; no detector, PDF, role binding, whole-document validation or adoption"
+}

@@ -1,0 +1,8 @@
+{
+  "sourceSha256": "a2af8bfbe38abcc85b5c516b3a926423d03156f20e68e9a61a489c801972d07d",
+  "selectionSha256": "d4a74294d9f33a7ab2edaa9cca1bd75e25b92fbf1a143c822d4aaaff75c5b48f",
+  "evaluatedCheckpointSha256": "8298dff5e2f302edb10645c2a8636497d29664db25e3e75d5ced659ee2593a45",
+  "checkpointRule": "Selected candidate after fresh, otherwise fixed final epoch4",
+  "trainResubstitutionOnly": true,
+  "noFurtherOptimizationOrSelection": true
+}

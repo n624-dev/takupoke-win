@@ -1,0 +1,1903 @@
+{
+  "groups": {
+    "all": {
+      "rows": 48
+    },
+    "blank": {
+      "rows": 16,
+      "nonemptyOutputs": 0,
+      "outputsWithAnyCharacterConfidenceAtLeast099": 0,
+      "nonemptyOutputsWithMinimumConfidenceAtLeast08": 0
+    },
+    "clipped": {
+      "rows": 16,
+      "nonemptyOutputs": 16,
+      "outputsWithAnyCharacterConfidenceAtLeast099": 16,
+      "nonemptyOutputsWithMinimumConfidenceAtLeast08": 11
+    },
+    "multiline": {
+      "rows": 16,
+      "nonemptyOutputs": 16,
+      "outputsWithAnyCharacterConfidenceAtLeast099": 8,
+      "nonemptyOutputsWithMinimumConfidenceAtLeast08": 3
+    },
+    "BIZUDPMincho-Regular": {
+      "rows": 24
+    },
+    "ZenKakuGothicNew-Regular": {
+      "rows": 24
+    }
+  },
+  "elapsedSecondsWithConcurrentWork": 1.9685074249991885,
+  "records": [
+    {
+      "id": "final-blank-00",
+      "category": "blank",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-01",
+      "category": "blank",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-02",
+      "category": "blank",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-03",
+      "category": "blank",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-04",
+      "category": "blank",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-05",
+      "category": "blank",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-06",
+      "category": "blank",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-07",
+      "category": "blank",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-08",
+      "category": "blank",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-09",
+      "category": "blank",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-10",
+      "category": "blank",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-11",
+      "category": "blank",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-12",
+      "category": "blank",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-13",
+      "category": "blank",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-14",
+      "category": "blank",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-blank-15",
+      "category": "blank",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "",
+      "prediction": "",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": []
+    },
+    {
+      "id": "final-clipped-00",
+      "category": "clipped",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "X59l",
+      "prediction": "X59I",
+      "exact": false,
+      "editDistance": 1,
+      "pieces": [
+        {
+          "Text": "X",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.9995452761650085
+        },
+        {
+          "Text": "5",
+          "Start": 7,
+          "End": 8,
+          "Confidence": 0.9999974966049194
+        },
+        {
+          "Text": "9",
+          "Start": 11,
+          "End": 12,
+          "Confidence": 0.9999384880065918
+        },
+        {
+          "Text": "I",
+          "Start": 14,
+          "End": 15,
+          "Confidence": 0.9738919734954834
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-01",
+      "category": "clipped",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "FWa30/yd/2rY4E8",
+      "prediction": "Fwa30/yd/2rY4E8",
+      "exact": false,
+      "editDistance": 1,
+      "pieces": [
+        {
+          "Text": "F",
+          "Start": 2,
+          "End": 3,
+          "Confidence": 0.9952256679534912
+        },
+        {
+          "Text": "w",
+          "Start": 8,
+          "End": 9,
+          "Confidence": 0.6567416787147522
+        },
+        {
+          "Text": "a",
+          "Start": 13,
+          "End": 14,
+          "Confidence": 0.996322512626648
+        },
+        {
+          "Text": "3",
+          "Start": 17,
+          "End": 18,
+          "Confidence": 0.9999805688858032
+        },
+        {
+          "Text": "0",
+          "Start": 21,
+          "End": 22,
+          "Confidence": 0.9807073473930359
+        },
+        {
+          "Text": "/",
+          "Start": 25,
+          "End": 26,
+          "Confidence": 0.7836156487464905
+        },
+        {
+          "Text": "y",
+          "Start": 28,
+          "End": 29,
+          "Confidence": 0.9990583062171936
+        },
+        {
+          "Text": "d",
+          "Start": 33,
+          "End": 34,
+          "Confidence": 0.9503884315490723
+        },
+        {
+          "Text": "/",
+          "Start": 36,
+          "End": 37,
+          "Confidence": 0.9999592304229736
+        },
+        {
+          "Text": "2",
+          "Start": 40,
+          "End": 41,
+          "Confidence": 0.999230146408081
+        },
+        {
+          "Text": "r",
+          "Start": 43,
+          "End": 44,
+          "Confidence": 0.999116837978363
+        },
+        {
+          "Text": "Y",
+          "Start": 47,
+          "End": 48,
+          "Confidence": 0.9999871253967285
+        },
+        {
+          "Text": "4",
+          "Start": 51,
+          "End": 52,
+          "Confidence": 0.9999942779541016
+        },
+        {
+          "Text": "E",
+          "Start": 55,
+          "End": 56,
+          "Confidence": 0.9998574256896973
+        },
+        {
+          "Text": "8",
+          "Start": 60,
+          "End": 61,
+          "Confidence": 0.9999957084655762
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-02",
+      "category": "clipped",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "い湖果面光",
+      "prediction": "い湖果面光",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": [
+        {
+          "Text": "い",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.999964714050293
+        },
+        {
+          "Text": "湖",
+          "Start": 11,
+          "End": 12,
+          "Confidence": 0.999998927116394
+        },
+        {
+          "Text": "果",
+          "Start": 17,
+          "End": 18,
+          "Confidence": 0.9997648596763611
+        },
+        {
+          "Text": "面",
+          "Start": 24,
+          "End": 25,
+          "Confidence": 0.9999995231628418
+        },
+        {
+          "Text": "光",
+          "Start": 31,
+          "End": 32,
+          "Confidence": 0.9999911785125732
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-03",
+      "category": "clipped",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "古鍵-zM3",
+      "prediction": "古鍵-zM3",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": [
+        {
+          "Text": "古",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.9992628693580627
+        },
+        {
+          "Text": "鍵",
+          "Start": 10,
+          "End": 11,
+          "Confidence": 0.9944471120834351
+        },
+        {
+          "Text": "-",
+          "Start": 15,
+          "End": 16,
+          "Confidence": 0.9997290968894958
+        },
+        {
+          "Text": "z",
+          "Start": 19,
+          "End": 20,
+          "Confidence": 0.9963441491127014
+        },
+        {
+          "Text": "M",
+          "Start": 22,
+          "End": 24,
+          "Confidence": 0.999916672706604
+        },
+        {
+          "Text": "3",
+          "Start": 28,
+          "End": 29,
+          "Confidence": 0.9999953508377075
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-04",
+      "category": "clipped",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "A2Y6",
+      "prediction": "A2Y6",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": [
+        {
+          "Text": "A",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.9999730587005615
+        },
+        {
+          "Text": "2",
+          "Start": 8,
+          "End": 9,
+          "Confidence": 0.9999953508377075
+        },
+        {
+          "Text": "Y",
+          "Start": 11,
+          "End": 12,
+          "Confidence": 0.999991774559021
+        },
+        {
+          "Text": "6",
+          "Start": 15,
+          "End": 16,
+          "Confidence": 0.9999911785125732
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-05",
+      "category": "clipped",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "CzEOMG_pJ",
+      "prediction": "CzEOMG pJ",
+      "exact": false,
+      "editDistance": 1,
+      "pieces": [
+        {
+          "Text": "C",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.9999163150787354
+        },
+        {
+          "Text": "z",
+          "Start": 9,
+          "End": 10,
+          "Confidence": 0.9341466426849365
+        },
+        {
+          "Text": "E",
+          "Start": 13,
+          "End": 14,
+          "Confidence": 0.9999457597732544
+        },
+        {
+          "Text": "O",
+          "Start": 19,
+          "End": 20,
+          "Confidence": 0.9996097683906555
+        },
+        {
+          "Text": "M",
+          "Start": 25,
+          "End": 26,
+          "Confidence": 0.9999089241027832
+        },
+        {
+          "Text": "G",
+          "Start": 32,
+          "End": 33,
+          "Confidence": 0.9998961687088013
+        },
+        {
+          "Text": " ",
+          "Start": 36,
+          "End": 38,
+          "Confidence": 0.9663888812065125
+        },
+        {
+          "Text": "p",
+          "Start": 40,
+          "End": 41,
+          "Confidence": 0.9975161552429199
+        },
+        {
+          "Text": "J",
+          "Start": 44,
+          "End": 45,
+          "Confidence": 0.9998390674591064
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-06",
+      "category": "clipped",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "金ち中続岸平",
+      "prediction": "金ち中続岸平",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": [
+        {
+          "Text": "金",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.9999854564666748
+        },
+        {
+          "Text": "ち",
+          "Start": 8,
+          "End": 9,
+          "Confidence": 0.9984673857688904
+        },
+        {
+          "Text": "中",
+          "Start": 13,
+          "End": 14,
+          "Confidence": 0.9977230429649353
+        },
+        {
+          "Text": "続",
+          "Start": 19,
+          "End": 20,
+          "Confidence": 0.9999746084213257
+        },
+        {
+          "Text": "岸",
+          "Start": 24,
+          "End": 25,
+          "Confidence": 0.9999693632125854
+        },
+        {
+          "Text": "平",
+          "Start": 29,
+          "End": 30,
+          "Confidence": 0.9999947547912598
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-07",
+      "category": "clipped",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "短火 Bw5L",
+      "prediction": "短火 Bw5L",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": [
+        {
+          "Text": "短",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.9999990463256836
+        },
+        {
+          "Text": "火",
+          "Start": 11,
+          "End": 12,
+          "Confidence": 0.9998530149459839
+        },
+        {
+          "Text": " ",
+          "Start": 16,
+          "End": 18,
+          "Confidence": 0.9992513060569763
+        },
+        {
+          "Text": "B",
+          "Start": 20,
+          "End": 21,
+          "Confidence": 0.9999934434890747
+        },
+        {
+          "Text": "w",
+          "Start": 26,
+          "End": 27,
+          "Confidence": 0.9999749660491943
+        },
+        {
+          "Text": "5",
+          "Start": 32,
+          "End": 33,
+          "Confidence": 0.9999972581863403
+        },
+        {
+          "Text": "L",
+          "Start": 37,
+          "End": 38,
+          "Confidence": 0.9999356269836426
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-08",
+      "category": "clipped",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "621BZlX5",
+      "prediction": "621BZIX5",
+      "exact": false,
+      "editDistance": 1,
+      "pieces": [
+        {
+          "Text": "6",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.9999839067459106
+        },
+        {
+          "Text": "2",
+          "Start": 7,
+          "End": 8,
+          "Confidence": 0.999998927116394
+        },
+        {
+          "Text": "1",
+          "Start": 10,
+          "End": 11,
+          "Confidence": 0.9999479055404663
+        },
+        {
+          "Text": "B",
+          "Start": 14,
+          "End": 15,
+          "Confidence": 0.9999871253967285
+        },
+        {
+          "Text": "Z",
+          "Start": 19,
+          "End": 20,
+          "Confidence": 0.98680579662323
+        },
+        {
+          "Text": "I",
+          "Start": 22,
+          "End": 23,
+          "Confidence": 0.9928511381149292
+        },
+        {
+          "Text": "X",
+          "Start": 25,
+          "End": 26,
+          "Confidence": 0.9999605417251587
+        },
+        {
+          "Text": "5",
+          "Start": 29,
+          "End": 30,
+          "Confidence": 0.9999959468841553
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-09",
+      "category": "clipped",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "Q4 iMixkD hw7W",
+      "prediction": "Q4 iMixkD hw7W",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": [
+        {
+          "Text": "Q",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.9998714923858643
+        },
+        {
+          "Text": "4",
+          "Start": 10,
+          "End": 11,
+          "Confidence": 0.9999960660934448
+        },
+        {
+          "Text": " ",
+          "Start": 14,
+          "End": 16,
+          "Confidence": 0.9839285612106323
+        },
+        {
+          "Text": "i",
+          "Start": 18,
+          "End": 19,
+          "Confidence": 0.9381464123725891
+        },
+        {
+          "Text": "M",
+          "Start": 22,
+          "End": 23,
+          "Confidence": 0.9999037981033325
+        },
+        {
+          "Text": "i",
+          "Start": 29,
+          "End": 30,
+          "Confidence": 0.9898443222045898
+        },
+        {
+          "Text": "x",
+          "Start": 33,
+          "End": 34,
+          "Confidence": 0.997136116027832
+        },
+        {
+          "Text": "k",
+          "Start": 38,
+          "End": 39,
+          "Confidence": 0.9993937015533447
+        },
+        {
+          "Text": "D",
+          "Start": 44,
+          "End": 45,
+          "Confidence": 0.9999604225158691
+        },
+        {
+          "Text": " ",
+          "Start": 49,
+          "End": 51,
+          "Confidence": 0.9765356183052063
+        },
+        {
+          "Text": "h",
+          "Start": 53,
+          "End": 54,
+          "Confidence": 0.9997127652168274
+        },
+        {
+          "Text": "w",
+          "Start": 60,
+          "End": 61,
+          "Confidence": 0.9999412298202515
+        },
+        {
+          "Text": "7",
+          "Start": 67,
+          "End": 68,
+          "Confidence": 0.9999974966049194
+        },
+        {
+          "Text": "W",
+          "Start": 73,
+          "End": 74,
+          "Confidence": 0.9936610460281372
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-10",
+      "category": "clipped",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "言岩番",
+      "prediction": "言石番",
+      "exact": false,
+      "editDistance": 1,
+      "pieces": [
+        {
+          "Text": "言",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.9994887113571167
+        },
+        {
+          "Text": "石",
+          "Start": 10,
+          "End": 11,
+          "Confidence": 0.7705543041229248
+        },
+        {
+          "Text": "番",
+          "Start": 17,
+          "End": 18,
+          "Confidence": 0.8954651951789856
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-11",
+      "category": "clipped",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "森森-oXn",
+      "prediction": "森森-oXn",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": [
+        {
+          "Text": "森",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.9999973773956299
+        },
+        {
+          "Text": "森",
+          "Start": 10,
+          "End": 11,
+          "Confidence": 0.9999979734420776
+        },
+        {
+          "Text": "-",
+          "Start": 16,
+          "End": 17,
+          "Confidence": 0.9955769777297974
+        },
+        {
+          "Text": "o",
+          "Start": 20,
+          "End": 21,
+          "Confidence": 0.9998722076416016
+        },
+        {
+          "Text": "X",
+          "Start": 25,
+          "End": 26,
+          "Confidence": 0.999931812286377
+        },
+        {
+          "Text": "n",
+          "Start": 30,
+          "End": 31,
+          "Confidence": 0.9999276399612427
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-12",
+      "category": "clipped",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "1lZZXl8",
+      "prediction": "hZZXI8",
+      "exact": false,
+      "editDistance": 3,
+      "pieces": [
+        {
+          "Text": "h",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.5242180228233337
+        },
+        {
+          "Text": "Z",
+          "Start": 7,
+          "End": 8,
+          "Confidence": 0.9862321019172668
+        },
+        {
+          "Text": "Z",
+          "Start": 11,
+          "End": 12,
+          "Confidence": 0.9809483289718628
+        },
+        {
+          "Text": "X",
+          "Start": 15,
+          "End": 16,
+          "Confidence": 0.9921643733978271
+        },
+        {
+          "Text": "I",
+          "Start": 18,
+          "End": 19,
+          "Confidence": 0.8978403806686401
+        },
+        {
+          "Text": "8",
+          "Start": 20,
+          "End": 21,
+          "Confidence": 0.6733331084251404
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-13",
+      "category": "clipped",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "tl3",
+      "prediction": "t13",
+      "exact": false,
+      "editDistance": 1,
+      "pieces": [
+        {
+          "Text": "t",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.9913461804389954
+        },
+        {
+          "Text": "1",
+          "Start": 6,
+          "End": 7,
+          "Confidence": 0.9051716923713684
+        },
+        {
+          "Text": "3",
+          "Start": 9,
+          "End": 10,
+          "Confidence": 0.9998923540115356
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-14",
+      "category": "clipped",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "テ聞走鳥言言ら笑林",
+      "prediction": "テ聞走鳥言言ち吴林",
+      "exact": false,
+      "editDistance": 2,
+      "pieces": [
+        {
+          "Text": "テ",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.8998156785964966
+        },
+        {
+          "Text": "聞",
+          "Start": 10,
+          "End": 11,
+          "Confidence": 0.9896935820579529
+        },
+        {
+          "Text": "走",
+          "Start": 17,
+          "End": 18,
+          "Confidence": 0.952103316783905
+        },
+        {
+          "Text": "鳥",
+          "Start": 23,
+          "End": 24,
+          "Confidence": 0.81593918800354
+        },
+        {
+          "Text": "言",
+          "Start": 30,
+          "End": 31,
+          "Confidence": 0.9999289512634277
+        },
+        {
+          "Text": "言",
+          "Start": 36,
+          "End": 37,
+          "Confidence": 0.9998175501823425
+        },
+        {
+          "Text": "ち",
+          "Start": 43,
+          "End": 44,
+          "Confidence": 0.5857645869255066
+        },
+        {
+          "Text": "吴",
+          "Start": 49,
+          "End": 50,
+          "Confidence": 0.5724031925201416
+        },
+        {
+          "Text": "林",
+          "Start": 56,
+          "End": 57,
+          "Confidence": 0.9948073029518127
+        }
+      ]
+    },
+    {
+      "id": "final-clipped-15",
+      "category": "clipped",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "空集種 qufIR",
+      "prediction": "空集種 qurIR",
+      "exact": false,
+      "editDistance": 1,
+      "pieces": [
+        {
+          "Text": "空",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.9996325969696045
+        },
+        {
+          "Text": "集",
+          "Start": 10,
+          "End": 11,
+          "Confidence": 0.8982771635055542
+        },
+        {
+          "Text": "種",
+          "Start": 16,
+          "End": 17,
+          "Confidence": 0.9943307638168335
+        },
+        {
+          "Text": " ",
+          "Start": 20,
+          "End": 22,
+          "Confidence": 0.9981465339660645
+        },
+        {
+          "Text": "q",
+          "Start": 24,
+          "End": 25,
+          "Confidence": 0.9977790713310242
+        },
+        {
+          "Text": "u",
+          "Start": 28,
+          "End": 29,
+          "Confidence": 0.9924623966217041
+        },
+        {
+          "Text": "r",
+          "Start": 31,
+          "End": 32,
+          "Confidence": 0.5386564135551453
+        },
+        {
+          "Text": "I",
+          "Start": 34,
+          "End": 35,
+          "Confidence": 0.853399932384491
+        },
+        {
+          "Text": "R",
+          "Start": 37,
+          "End": 38,
+          "Confidence": 0.9999773502349854
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-00",
+      "category": "multiline",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "lOA2",
+      "prediction": "IOA2",
+      "exact": false,
+      "editDistance": 1,
+      "pieces": [
+        {
+          "Text": "I",
+          "Start": 0,
+          "End": 1,
+          "Confidence": 0.8740739226341248
+        },
+        {
+          "Text": "O",
+          "Start": 2,
+          "End": 3,
+          "Confidence": 0.7745472192764282
+        },
+        {
+          "Text": "A",
+          "Start": 3,
+          "End": 5,
+          "Confidence": 0.9133752584457397
+        },
+        {
+          "Text": "2",
+          "Start": 5,
+          "End": 7,
+          "Confidence": 0.9383034110069275
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-01",
+      "category": "multiline",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "284/omU",
+      "prediction": "284/omU",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": [
+        {
+          "Text": "2",
+          "Start": 0,
+          "End": 2,
+          "Confidence": 0.9720036387443542
+        },
+        {
+          "Text": "8",
+          "Start": 2,
+          "End": 4,
+          "Confidence": 0.8105133175849915
+        },
+        {
+          "Text": "4",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.8643108606338501
+        },
+        {
+          "Text": "/",
+          "Start": 5,
+          "End": 7,
+          "Confidence": 0.9810264706611633
+        },
+        {
+          "Text": "o",
+          "Start": 7,
+          "End": 8,
+          "Confidence": 0.6679028272628784
+        },
+        {
+          "Text": "m",
+          "Start": 8,
+          "End": 10,
+          "Confidence": 0.8678486943244934
+        },
+        {
+          "Text": "U",
+          "Start": 11,
+          "End": 12,
+          "Confidence": 0.9884510040283203
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-02",
+      "category": "multiline",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "犬右海静羽ス礼",
+      "prediction": "犬右海静羽ス礼",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": [
+        {
+          "Text": "犬",
+          "Start": 1,
+          "End": 2,
+          "Confidence": 0.8208896517753601
+        },
+        {
+          "Text": "右",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.9479498267173767
+        },
+        {
+          "Text": "海",
+          "Start": 5,
+          "End": 7,
+          "Confidence": 0.9993129968643188
+        },
+        {
+          "Text": "静",
+          "Start": 7,
+          "End": 9,
+          "Confidence": 0.9983797073364258
+        },
+        {
+          "Text": "羽",
+          "Start": 10,
+          "End": 11,
+          "Confidence": 0.9034534096717834
+        },
+        {
+          "Text": "ス",
+          "Start": 12,
+          "End": 13,
+          "Confidence": 0.9645811319351196
+        },
+        {
+          "Text": "礼",
+          "Start": 14,
+          "End": 16,
+          "Confidence": 0.9999655485153198
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-03",
+      "category": "multiline",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "内輪 F09Y",
+      "prediction": "内輪 F9YY",
+      "exact": false,
+      "editDistance": 2,
+      "pieces": [
+        {
+          "Text": "内",
+          "Start": 0,
+          "End": 2,
+          "Confidence": 0.9520204067230225
+        },
+        {
+          "Text": "輪",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.8762684464454651
+        },
+        {
+          "Text": " ",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.9663622379302979
+        },
+        {
+          "Text": "F",
+          "Start": 5,
+          "End": 7,
+          "Confidence": 0.7581110596656799
+        },
+        {
+          "Text": "9",
+          "Start": 8,
+          "End": 9,
+          "Confidence": 0.5532162189483643
+        },
+        {
+          "Text": "Y",
+          "Start": 10,
+          "End": 11,
+          "Confidence": 0.6127498745918274
+        },
+        {
+          "Text": "Y",
+          "Start": 38,
+          "End": 39,
+          "Confidence": 0.9667108058929443
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-04",
+      "category": "multiline",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "119089B",
+      "prediction": "119089B ",
+      "exact": false,
+      "editDistance": 1,
+      "pieces": [
+        {
+          "Text": "1",
+          "Start": 0,
+          "End": 1,
+          "Confidence": 0.9897323250770569
+        },
+        {
+          "Text": "1",
+          "Start": 2,
+          "End": 3,
+          "Confidence": 0.941382110118866
+        },
+        {
+          "Text": "9",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.849030077457428
+        },
+        {
+          "Text": "0",
+          "Start": 4,
+          "End": 6,
+          "Confidence": 0.6235136985778809
+        },
+        {
+          "Text": "8",
+          "Start": 6,
+          "End": 7,
+          "Confidence": 0.8044688105583191
+        },
+        {
+          "Text": "9",
+          "Start": 7,
+          "End": 9,
+          "Confidence": 0.7407233715057373
+        },
+        {
+          "Text": "B",
+          "Start": 9,
+          "End": 10,
+          "Confidence": 0.821916401386261
+        },
+        {
+          "Text": " ",
+          "Start": 10,
+          "End": 11,
+          "Confidence": 0.33211877942085266
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-05",
+      "category": "multiline",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "ej lkIK Cq0r",
+      "prediction": "ej k aOar",
+      "exact": false,
+      "editDistance": 6,
+      "pieces": [
+        {
+          "Text": "e",
+          "Start": 0,
+          "End": 1,
+          "Confidence": 0.599127471446991
+        },
+        {
+          "Text": "j",
+          "Start": 1,
+          "End": 3,
+          "Confidence": 0.8169715404510498
+        },
+        {
+          "Text": " ",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.9361792802810669
+        },
+        {
+          "Text": "k",
+          "Start": 4,
+          "End": 8,
+          "Confidence": 0.6782673597335815
+        },
+        {
+          "Text": " ",
+          "Start": 8,
+          "End": 11,
+          "Confidence": 0.8678674697875977
+        },
+        {
+          "Text": "a",
+          "Start": 11,
+          "End": 12,
+          "Confidence": 0.2989657521247864
+        },
+        {
+          "Text": "O",
+          "Start": 12,
+          "End": 13,
+          "Confidence": 0.40251287817955017
+        },
+        {
+          "Text": "a",
+          "Start": 34,
+          "End": 35,
+          "Confidence": 0.4496467411518097
+        },
+        {
+          "Text": "r",
+          "Start": 37,
+          "End": 40,
+          "Confidence": 0.6727288961410522
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-06",
+      "category": "multiline",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "礼カ眠",
+      "prediction": "礼力眠",
+      "exact": false,
+      "editDistance": 1,
+      "pieces": [
+        {
+          "Text": "礼",
+          "Start": 1,
+          "End": 3,
+          "Confidence": 0.9999805688858032
+        },
+        {
+          "Text": "力",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.7591666579246521
+        },
+        {
+          "Text": "眠",
+          "Start": 6,
+          "End": 8,
+          "Confidence": 0.9877983927726746
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-07",
+      "category": "multiline",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "新集-naU",
+      "prediction": "新集 -naUnaUU",
+      "exact": false,
+      "editDistance": 5,
+      "pieces": [
+        {
+          "Text": "新",
+          "Start": 0,
+          "End": 3,
+          "Confidence": 0.9985585808753967
+        },
+        {
+          "Text": "集",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.5472063422203064
+        },
+        {
+          "Text": " ",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.6855185031890869
+        },
+        {
+          "Text": "-",
+          "Start": 5,
+          "End": 6,
+          "Confidence": 0.7121115326881409
+        },
+        {
+          "Text": "n",
+          "Start": 6,
+          "End": 7,
+          "Confidence": 0.9154883623123169
+        },
+        {
+          "Text": "a",
+          "Start": 7,
+          "End": 9,
+          "Confidence": 0.7901013493537903
+        },
+        {
+          "Text": "U",
+          "Start": 9,
+          "End": 10,
+          "Confidence": 0.9789174795150757
+        },
+        {
+          "Text": "n",
+          "Start": 31,
+          "End": 33,
+          "Confidence": 0.5136371850967407
+        },
+        {
+          "Text": "a",
+          "Start": 33,
+          "End": 35,
+          "Confidence": 0.40108200907707214
+        },
+        {
+          "Text": "U",
+          "Start": 36,
+          "End": 37,
+          "Confidence": 0.7099106311798096
+        },
+        {
+          "Text": "U",
+          "Start": 38,
+          "End": 39,
+          "Confidence": 0.7930991649627686
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-08",
+      "category": "multiline",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "B2Y",
+      "prediction": "B2Y",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": [
+        {
+          "Text": "B",
+          "Start": 0,
+          "End": 2,
+          "Confidence": 0.9992081522941589
+        },
+        {
+          "Text": "2",
+          "Start": 2,
+          "End": 4,
+          "Confidence": 0.993375837802887
+        },
+        {
+          "Text": "Y",
+          "Start": 4,
+          "End": 6,
+          "Confidence": 0.9917362332344055
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-09",
+      "category": "multiline",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "25v",
+      "prediction": "25vV",
+      "exact": false,
+      "editDistance": 1,
+      "pieces": [
+        {
+          "Text": "2",
+          "Start": 0,
+          "End": 2,
+          "Confidence": 0.9861289858818054
+        },
+        {
+          "Text": "5",
+          "Start": 2,
+          "End": 4,
+          "Confidence": 0.952041506767273
+        },
+        {
+          "Text": "v",
+          "Start": 4,
+          "End": 5,
+          "Confidence": 0.6773794889450073
+        },
+        {
+          "Text": "V",
+          "Start": 5,
+          "End": 6,
+          "Confidence": 0.5548800826072693
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-10",
+      "category": "multiline",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "棚輪灯頁雨起川晴鈴",
+      "prediction": "棚輪 灯頁雨起川晴鈴",
+      "exact": false,
+      "editDistance": 1,
+      "pieces": [
+        {
+          "Text": "棚",
+          "Start": 1,
+          "End": 2,
+          "Confidence": 0.28912630677223206
+        },
+        {
+          "Text": "輪",
+          "Start": 3,
+          "End": 5,
+          "Confidence": 0.9481167197227478
+        },
+        {
+          "Text": " ",
+          "Start": 5,
+          "End": 6,
+          "Confidence": 0.48853904008865356
+        },
+        {
+          "Text": "灯",
+          "Start": 6,
+          "End": 7,
+          "Confidence": 0.9157525300979614
+        },
+        {
+          "Text": "頁",
+          "Start": 8,
+          "End": 9,
+          "Confidence": 0.3370973765850067
+        },
+        {
+          "Text": "雨",
+          "Start": 10,
+          "End": 12,
+          "Confidence": 0.9333019852638245
+        },
+        {
+          "Text": "起",
+          "Start": 13,
+          "End": 14,
+          "Confidence": 0.9989339709281921
+        },
+        {
+          "Text": "川",
+          "Start": 15,
+          "End": 16,
+          "Confidence": 0.9246984124183655
+        },
+        {
+          "Text": "晴",
+          "Start": 18,
+          "End": 19,
+          "Confidence": 0.49596136808395386
+        },
+        {
+          "Text": "鈴",
+          "Start": 20,
+          "End": 21,
+          "Confidence": 0.8249333500862122
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-11",
+      "category": "multiline",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "強起草-UTY1",
+      "prediction": "強起草-UTY1",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": [
+        {
+          "Text": "強",
+          "Start": 1,
+          "End": 2,
+          "Confidence": 0.9326549172401428
+        },
+        {
+          "Text": "起",
+          "Start": 3,
+          "End": 5,
+          "Confidence": 0.9995627999305725
+        },
+        {
+          "Text": "草",
+          "Start": 6,
+          "End": 7,
+          "Confidence": 0.9281551837921143
+        },
+        {
+          "Text": "-",
+          "Start": 8,
+          "End": 9,
+          "Confidence": 0.9807697534561157
+        },
+        {
+          "Text": "U",
+          "Start": 9,
+          "End": 10,
+          "Confidence": 0.9830428957939148
+        },
+        {
+          "Text": "T",
+          "Start": 11,
+          "End": 12,
+          "Confidence": 0.9868952631950378
+        },
+        {
+          "Text": "Y",
+          "Start": 13,
+          "End": 14,
+          "Confidence": 0.980340838432312
+        },
+        {
+          "Text": "1",
+          "Start": 15,
+          "End": 16,
+          "Confidence": 0.9951789379119873
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-12",
+      "category": "multiline",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "8XA9YO",
+      "prediction": "8XA9YO",
+      "exact": true,
+      "editDistance": 0,
+      "pieces": [
+        {
+          "Text": "8",
+          "Start": 0,
+          "End": 1,
+          "Confidence": 0.6004763841629028
+        },
+        {
+          "Text": "X",
+          "Start": 2,
+          "End": 3,
+          "Confidence": 0.9259402751922607
+        },
+        {
+          "Text": "A",
+          "Start": 3,
+          "End": 5,
+          "Confidence": 0.9152528643608093
+        },
+        {
+          "Text": "9",
+          "Start": 5,
+          "End": 6,
+          "Confidence": 0.911040723323822
+        },
+        {
+          "Text": "Y",
+          "Start": 6,
+          "End": 8,
+          "Confidence": 0.8377501368522644
+        },
+        {
+          "Text": "O",
+          "Start": 8,
+          "End": 10,
+          "Confidence": 0.7396432757377625
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-13",
+      "category": "multiline",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "NPhi8.pYsDMp",
+      "prediction": "NPhi8.DYsDMp",
+      "exact": false,
+      "editDistance": 1,
+      "pieces": [
+        {
+          "Text": "N",
+          "Start": 1,
+          "End": 2,
+          "Confidence": 0.9020270705223083
+        },
+        {
+          "Text": "P",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.8723993301391602
+        },
+        {
+          "Text": "h",
+          "Start": 5,
+          "End": 6,
+          "Confidence": 0.6364533305168152
+        },
+        {
+          "Text": "i",
+          "Start": 6,
+          "End": 7,
+          "Confidence": 0.6727636456489563
+        },
+        {
+          "Text": "8",
+          "Start": 7,
+          "End": 8,
+          "Confidence": 0.858642578125
+        },
+        {
+          "Text": ".",
+          "Start": 9,
+          "End": 10,
+          "Confidence": 0.9292718172073364
+        },
+        {
+          "Text": "D",
+          "Start": 10,
+          "End": 11,
+          "Confidence": 0.43398019671440125
+        },
+        {
+          "Text": "Y",
+          "Start": 12,
+          "End": 13,
+          "Confidence": 0.9517921805381775
+        },
+        {
+          "Text": "s",
+          "Start": 13,
+          "End": 14,
+          "Confidence": 0.7667587995529175
+        },
+        {
+          "Text": "D",
+          "Start": 15,
+          "End": 16,
+          "Confidence": 0.7915877103805542
+        },
+        {
+          "Text": "M",
+          "Start": 17,
+          "End": 18,
+          "Confidence": 0.9385108351707458
+        },
+        {
+          "Text": "p",
+          "Start": 20,
+          "End": 21,
+          "Confidence": 0.7375271320343018
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-14",
+      "category": "multiline",
+      "font": "ZenKakuGothicNew-Regular",
+      "gold": "豆西左写み角へ",
+      "prediction": "豆西左写角ヘ",
+      "exact": false,
+      "editDistance": 2,
+      "pieces": [
+        {
+          "Text": "豆",
+          "Start": 1,
+          "End": 2,
+          "Confidence": 0.9968301653862
+        },
+        {
+          "Text": "西",
+          "Start": 2,
+          "End": 4,
+          "Confidence": 0.9943247437477112
+        },
+        {
+          "Text": "左",
+          "Start": 4,
+          "End": 6,
+          "Confidence": 0.9715896844863892
+        },
+        {
+          "Text": "写",
+          "Start": 6,
+          "End": 7,
+          "Confidence": 0.4069141149520874
+        },
+        {
+          "Text": "角",
+          "Start": 10,
+          "End": 11,
+          "Confidence": 0.9972442388534546
+        },
+        {
+          "Text": "ヘ",
+          "Start": 12,
+          "End": 13,
+          "Confidence": 0.41161972284317017
+        }
+      ]
+    },
+    {
+      "id": "final-multiline-15",
+      "category": "multiline",
+      "font": "BIZUDPMincho-Regular",
+      "gold": "川頁 xT5U",
+      "prediction": "川順 XT5U",
+      "exact": false,
+      "editDistance": 2,
+      "pieces": [
+        {
+          "Text": "川",
+          "Start": 1,
+          "End": 2,
+          "Confidence": 0.9969064593315125
+        },
+        {
+          "Text": "順",
+          "Start": 3,
+          "End": 4,
+          "Confidence": 0.6123985052108765
+        },
+        {
+          "Text": " ",
+          "Start": 6,
+          "End": 7,
+          "Confidence": 0.8028138875961304
+        },
+        {
+          "Text": "X",
+          "Start": 7,
+          "End": 8,
+          "Confidence": 0.9374243021011353
+        },
+        {
+          "Text": "T",
+          "Start": 9,
+          "End": 10,
+          "Confidence": 0.8823087811470032
+        },
+        {
+          "Text": "5",
+          "Start": 11,
+          "End": 12,
+          "Confidence": 0.7273309230804443
+        },
+        {
+          "Text": "U",
+          "Start": 13,
+          "End": 14,
+          "Confidence": 0.980459988117218
+        }
+      ]
+    }
+  ],
+  "interpretation": "Recognizer alone cannot establish damage/multiline rejection. Clipped/multiline records are probes, never scored as fully recoverable text."
+}

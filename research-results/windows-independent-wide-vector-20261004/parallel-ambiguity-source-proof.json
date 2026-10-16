@@ -1,0 +1,20 @@
+{
+  "sourceFiles": {
+    "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs": "7007c3e209976f0b55e66a204335020ebd0c23c0394eab46026700ebad0ca278",
+    "tests/Takupoke.Integration.Tests/PdfParsingTests.cs": "5169e7eadae548afe4ad1d834c6d05c39388df55ec0a011314005c694d0c9be7"
+  },
+  "focusedTests": 10,
+  "integrationTests": 418,
+  "mainActualSlotsExact": 680,
+  "mainActualLessonRows": 658,
+  "negativeActualStrictBefore": "returned",
+  "negativeActualStrictAfter": "P18",
+  "missingBlankProofRecoveryAfter": "refused, no source-only blank proof",
+  "nativeOcrCalls": 0,
+  "fixtureScope": "Wholly invented seed20320819 PDFs only; no original private PDF read",
+  "testLogs": [
+    "windows-parallel-ambiguity-focused-tests.log",
+    "windows-parallel-ambiguity-integration-tests.log"
+  ],
+  "semantics": "Two or more separator-bearing role fields with inconsistent pairing are ambiguous; single compound field preserved; no teacher duplication/inference"
+}

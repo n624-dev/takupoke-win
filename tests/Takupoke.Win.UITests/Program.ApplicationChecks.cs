@@ -31,19 +31,24 @@ internal static partial class Program
         Invoke("link-menu-fake-study"); Invoke(ByName("お気に入りから外す", ControlType.MenuItem));
         Wait(() => Find("link-fake-study")?.Current.Name.Contains("お気に入り", StringComparison.Ordinal) == false, "Favorite editing can be undone");
         Wait(() => Find("link-fake-study") is not null && Find("link-fake-second") is not null, "saved links are displayed");
-        Require(Find("link-fake-study")!.Current.BoundingRectangle.Top < Find("link-fake-second")!.Current.BoundingRectangle.Top, "Link order follows the API array rather than sort-order metadata.");
-        SetSearch("存在しない架空検索語");
-        Wait(() => Find("link-fake-study") is null, "search excludes nonmatching links");
-        SetSearch("かくうがくしゅう");
-        Wait(() => Find("link-fake-study") is not null, "kana search finds saved link");
+        // Favorite editing rebuilds the page. UIA nodes can appear before
+        // layout assigns their rectangles, so wait for the original order.
+        Wait(() =>
+        {
+            var first = Find("link-fake-study")?.Current.BoundingRectangle;
+            var second = Find("link-fake-second")?.Current.BoundingRectangle;
+            return first is { Height: > 0 } && second is { Height: > 0 } && first.Value.Top < second.Value.Top;
+        }, "Link order follows the API array rather than sort-order metadata.");
+        SetSearch("存在しない架空検索語", () => Find("link-fake-study") is null, "search excludes nonmatching links");
+        SetSearch("かくうがくしゅう", () => Find("link-fake-study") is not null, "kana search finds saved link");
         Require(Find("link-fake-study")!.Current.Name.Contains("架空カテゴリ", StringComparison.Ordinal), "Search results include the source category.");
-        SetSearch("!");
-        Wait(() => Find("link-fake-study") is not null && Find("link-fake-second") is not null, "A query empty after normalization shows the complete category list");
+        SetSearch("!", () => Find("link-fake-study") is not null && Find("link-fake-second") is not null, "A query empty after normalization shows the complete category list");
         Navigate("timetable"); Navigate("settings");
         Require(Find("material-summary-Exam") is null && Find("fetch-events") is null, "Root settings contains destinations rather than file and event details.");
         var preferences = Path.Combine(args[1], "preferences.json");
         Wait(() => !Visible("status-bar"), "idle footer is hidden");
         var bodyColor = TextColor("page-settings");
+        var initialOpeningMode = CheckSettingsKeyboardRoundTrip(preferences);
         foreach (var color in new[] { "green", "yellow", "orange", "red", "pink", "blue", "default", "purple" })
         {
             SelectMainColor(color, preferences);
@@ -74,6 +79,7 @@ internal static partial class Program
         Wait(() => Find("page-material-Timetable") is not null, "normal material detail screen");
         Invoke("analysis-Timetable");
         Wait(() => Find("page-analysis-Timetable") is not null && Find("analysis-weekday") is not null, "normal analysis and independent weekday filter");
+        CheckAnalysisFilterKeyboardRoundTrip(preferences);
         Invoke(ByName("資料の詳細に戻る")); Invoke("back-materials");
         Invoke("material-details-Exam");
         Wait(() => Find("page-material-Exam") is not null, "material detail screen");
@@ -95,12 +101,46 @@ internal static partial class Program
         Invoke(ByName("閉じる"));
         Wait(() => _window!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.NameProperty, "閉じる"), new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button))) is null, "product document closes before opening the picker");
         Invoke("back-settings"); Invoke("settings-materials");
-        var selectedPdf = Path.Combine(args[1], "fictional-selection.pdf");
+        var selectedName = "fictional-selection-" + Guid.NewGuid().ToString("N") + ".pdf";
+        var selectedPdf = Path.Combine(args[1], selectedName);
         File.WriteAllText(selectedPdf, "%PDF-1.7\n% Entirely synthetic malformed PDF for selection persistence.\n", Encoding.ASCII);
-        PickMaterial(selectedPdf);
-        Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "picker selection is saved even when parsing fails");
-        PickMaterial(null);
-        Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "canceling the picker preserves the previous selection");
+        var previousSelection = ReadPickerSelectionAsync(args[1]).GetAwaiter().GetResult();
+        SourceRecord? selected = null;
+        try
+        {
+            PickMaterial(selectedPdf);
+            var expectedDigest = NotificationDiff.Digest(File.ReadAllBytes(selectedPdf));
+            Wait(() => (selected = ReadPickerSelectionAsync(args[1]).GetAwaiter().GetResult()) is { } current
+                && current.Id != previousSelection?.Id && current.Kind == MaterialKind.Exam
+                && string.Equals(Path.GetFullPath(current.Path), Path.GetFullPath(selectedPdf), StringComparison.OrdinalIgnoreCase)
+                && current.Digest == expectedDigest, "This picker invocation commits its unique original and digest");
+            Wait(() => Find("select-material-Exam")?.Current.IsEnabled == true, "The new selection finishes parsing and reloading before cancel is tested");
+            ShowPickerSummary();
+            Wait(() => Visible("material-summary-Exam") && Find("material-summary-Exam")?.Current.Name.Contains(selectedName, StringComparison.Ordinal) == true, "picker selection is saved even when parsing fails");
+            PickMaterial(null);
+            Wait(() => Find("select-material-Exam")?.Current.IsEnabled == true, "The cancelled picker returns to its completed material page");
+            var afterCancel = ReadPickerSelectionAsync(args[1]).GetAwaiter().GetResult();
+            Require(afterCancel is not null && selected is not null && afterCancel.Id == selected.Id && afterCancel.Kind == selected.Kind
+                && afterCancel.Path == selected.Path && afterCancel.Digest == selected.Digest && afterCancel.FileIdentity == selected.FileIdentity,
+                "Cancel preserves the exact committed source identity, kind, path and digest");
+            ShowPickerSummary();
+            Wait(() => Visible("material-summary-Exam") && Find("material-summary-Exam")?.Current.Name.Contains(selectedName, StringComparison.Ordinal) == true, "canceling the picker preserves the previous selection");
+        }
+        catch
+        {
+            try
+            {
+                Console.Error.WriteLine("Fictional picker diagnostic: " + JsonSerializer.Serialize(new { expectedName = selectedName, committed = selected,
+                    actual = ReadPickerSelectionAsync(args[1]).GetAwaiter().GetResult(), summary = Find("material-summary-Exam")?.Current.Name,
+                    summaryVisible = Visible("material-summary-Exam"), operationReady = Find("select-material-Exam")?.Current.IsEnabled,
+                    activeDialogs = _window!.FindAll(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window),
+                        new PropertyCondition(AutomationElement.ClassNameProperty, "#32770"))).Cast<AutomationElement>().Take(5)
+                        .Select(e => new { handle = e.Current.NativeWindowHandle, title = e.Current.Name, enabled = e.Current.IsEnabled }).ToArray() }));
+                Capture("fictional-picker-persistence-failure");
+            }
+            catch (Exception diagnosticFailure) { Console.Error.WriteLine("Picker diagnostic unavailable: " + diagnosticFailure.GetType().Name); }
+            throw;
+        }
         Invoke("back-settings");
         Invoke("settings-materials");
         Wait(() => Find("material-summary-Timetable")?.Current.Name.EndsWith("取得失敗（前回結果あり）", StringComparison.Ordinal) == true, "An unavailable source retains its accepted analysis and shows the same failure state as iOS");
@@ -186,9 +226,13 @@ internal static partial class Program
         Wait(() => FindLessons("架空科目甲").Length > 0, "accepted timetable remains after source is unavailable");
         Navigate("settings");
         Require(SavedMainColor(preferences) == "purple", "Main color survives app restart.");
+        Require(SavedSettings(preferences).OpeningMode == initialOpeningMode, "A to B to A link-opening choice survives app restart.");
         Require(TextColor("page-settings") == bodyColor, "Restart retains theme text color.");
         Invoke("settings-materials");
-        Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "file selected through the native picker survives restart");
+        ShowPickerSummary();
+        Wait(() => Find("material-summary-Exam")?.Current.Name.Contains(selectedName, StringComparison.Ordinal) == true, "file selected through the native picker survives restart");
+        CheckRecoveryUi(args[0], args[1]);
+        CheckDetailSnapshotUpdates(args[0], args[1]);
         CheckChangeRowSkips(args[0], args[1]);
     }
 }

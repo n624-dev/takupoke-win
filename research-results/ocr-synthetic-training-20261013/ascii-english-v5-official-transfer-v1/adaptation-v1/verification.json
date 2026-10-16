@@ -1,0 +1,31 @@
+{
+  "scope": "Completed-output read-only audit, no re-inference/retraining/selection changes",
+  "frozenSources": true,
+  "rawAndCheckpointHashes": true,
+  "cachePrecision": [
+    {
+      "split": "train",
+      "rows": 864,
+      "bytes": 75328301,
+      "allRestoredFp32DtypeShapeBytesHashesVerified": true
+    },
+    {
+      "split": "development",
+      "rows": 608,
+      "bytes": 53865238,
+      "allRestoredFp32DtypeShapeBytesHashesVerified": true
+    }
+  ],
+  "bnRunningStatsAndCountsFixed": {
+    "tensors": 453,
+    "allCheckpointsIdentical": true
+  },
+  "officialArchitectureConfigNormEpsilonPreserved": true,
+  "full438HeadRetained": true,
+  "newdevExactByteSelfConsistency": true,
+  "japanesePrimaryUnchanged": true,
+  "closedOldTransplantAllHandoffFilesUnchanged": true,
+  "utf8LfSourceIoPassed": true,
+  "finalDirectoryAbsent": true,
+  "modelQualified": false
+}

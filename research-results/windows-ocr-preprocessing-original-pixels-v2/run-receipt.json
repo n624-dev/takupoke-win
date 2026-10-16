@@ -1,0 +1,146 @@
+{
+  "measurementRecipe": "pinned-ocr-preprocess-original-pixels-v2",
+  "productionSourceCommit": "c2fcdb5c5abd76592b474d75ff0eaf6089deab28",
+  "measurementCompleted": true,
+  "nativeMeasurements": 1,
+  "newModelsDownloaded": 0,
+  "ocrReadCallsStarted": 10,
+  "ocrReadCallsReturned": 5,
+  "tensorInferenceCalls": "not separately instrumented",
+  "runtimeActual": {
+    "nativeVersion": "1.23.2",
+    "managedVersion": "1.23.2.0",
+    "managedSha256": "4c6985df4aa2f810ba8a2b37c3c791e619d8fe126954a6bd28cffd3f4adeba95",
+    "native": [
+      {
+        "path": "/workspace/recovery-research/windows-ocr-preprocess-development-v2-20261004/bin/Debug/net10.0/runtimes/linux-x64/native/libonnxruntime.so",
+        "sha256": "13ab8084954fa4a47c777880180b90810d6020f021441395712b48a75b74c68b"
+      }
+    ],
+    "pipelineAssemblies": [
+      {
+        "name": "Takupoke.Infrastructure",
+        "sha256": "e317887dd0cdeb74ae1a5e70c1662c1844e314b1c328c797f29ad731ecda8d53"
+      },
+      {
+        "name": "Takupoke.Core",
+        "sha256": "842ddeba4da185e3ba9a72a16aeea29753d554a9ce73ad7906fc75fa1adbd5e4"
+      }
+    ],
+    "os": "Debian GNU/Linux 13 (trixie)",
+    "architecture": "X64",
+    "cpuModel": "model name\t: INTEL(R) XEON(R) PLATINUM 8573C",
+    "availableMemoryLimitBytes": 12884901888
+  },
+  "originalPdfHashes": [
+    "233dec852ec7e43c93c70c42d8f88238a0c2e8aef146445c4b94d674bb6cc187",
+    "2625bf49044d59088b53109fc15ba7813073fdedac71bde5eb82925c297050f8"
+  ],
+  "normalCI": {
+    "runId": 37211245937,
+    "headSha": "c2fcdb5c5abd76592b474d75ff0eaf6089deab28",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 111462731517,
+        "name": "Public files and commit identity",
+        "conclusion": "success"
+      },
+      {
+        "id": 111462752536,
+        "name": "Original iOS reference comparison",
+        "conclusion": "success"
+      },
+      {
+        "id": 111462752575,
+        "name": "Core tests (Windows)",
+        "conclusion": "success"
+      },
+      {
+        "id": 111462752586,
+        "name": "WinUI ARM64 Release build",
+        "conclusion": "success"
+      },
+      {
+        "id": 111462752589,
+        "name": "WinUI x64 Debug build",
+        "conclusion": "success"
+      },
+      {
+        "id": 111462752617,
+        "name": "WinUI x64 Release build and launch",
+        "conclusion": "success"
+      },
+      {
+        "id": 111462752622,
+        "name": "Core tests (Linux)",
+        "conclusion": "success"
+      }
+    ],
+    "actualCoreTestsPerOS": 270,
+    "actualIntegrationTestsPerOS": 357,
+    "actualWinUIChecks": 537,
+    "fetchedDecodedLogs": [
+      {
+        "jobId": 111462752575,
+        "bytes": 127618,
+        "sha256": "eac4754733989fc22751a57d2dd92882d1c8e6f802c0478ced785a72a533d554"
+      },
+      {
+        "jobId": 111462752622,
+        "bytes": 127175,
+        "sha256": "61a4b80718613dcac39c59bf0ea0a0ad0a299923c7034611211f3c6241dac27e"
+      },
+      {
+        "jobId": 111462752617,
+        "bytes": 4154355,
+        "sha256": "1c10092a38b30223e965a6e4a7775c6acdfaf76925ad96fbb15e12b9b75181d5"
+      }
+    ]
+  },
+  "scoring": {
+    "developmentOriginals": 2,
+    "fullLiteralFormalExact": 0,
+    "readablePositiveRefusals": 2,
+    "incorrectValidatorAcceptances": 0,
+    "operationalUnassessed": 0,
+    "BuilderReached": 0,
+    "ValidatorReached": 0,
+    "formalReached": 0,
+    "negativeDocuments": 0,
+    "modelQualification": false,
+    "savedAdoptions": 0
+  },
+  "limits": [
+    "Embedded original pixels, not Windows PDF-rendered pixels",
+    "actualLinuxORT1.23.2 is distinct from historical WindowsFoundry linked1.26 runtime",
+    "no paired same-runtime/source baseline: cannot causally attribute improvement",
+    "returned5pages glyphs retained; failed5pages internal CTC locals not exposed",
+    "protected ink failure never repaired or ignored",
+    "no further native/model/preset sweep",
+    "evaluator-only process memory is not minimum hardware qualification"
+  ],
+  "nativeRawSha256": "a866106518376f739f4e75453dd2839d9afb88516e1cb99d2f1750ce804a498f",
+  "scope": "Finite developer evidence and original-source refusal diagnosis, not model qualification or Windows deployment evidence",
+  "windowsAppDependencyGraph": {
+    "sourceCommit": "c2fcdb5c5abd76592b474d75ff0eaf6089deab28",
+    "sourceProject": "src/Takupoke.Win/Takupoke.Win.csproj",
+    "restoreOverrides": [
+      "EnableWindowsTargeting=true",
+      "Platform=x64",
+      "WindowsAppSDKSelfContained=false (restore/compile context only, no Windows native run)"
+    ],
+    "assetsSha256": "afb311f99b0cabd933b8ecde8731649015b7af6eac639f7eb713ec323db0fe88",
+    "onnxLibraries": [
+      "Microsoft.ML.OnnxRuntime/1.23.2",
+      "Microsoft.ML.OnnxRuntime.Foundry/1.26.0",
+      "Microsoft.ML.OnnxRuntime.Gpu.Linux/1.26.0",
+      "Microsoft.ML.OnnxRuntime.Managed/1.26.0",
+      "Microsoft.ML.OnnxRuntimeGenAI.Foundry/0.14.1",
+      "Microsoft.ML.OnnxRuntimeGenAI.Managed/0.14.1"
+    ],
+    "runtimeDistinction": "Infrastructure standalone declaredandloaded1.23.2 for this Linux measurement; Windows app resolves OnnxRuntime.Managed1.26.0 and Foundry1.26.0. Resolved dependency graph is not fresh Windows OCR execution proof. Historical Windows actual loaded1.26 provides separate evidence only.",
+    "additionalModelInference": 0
+  }
+}

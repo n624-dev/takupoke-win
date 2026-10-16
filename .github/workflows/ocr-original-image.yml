@@ -1,0 +1,60 @@
+name: Verify original opaque source images on Windows
+on:
+  push:
+    branches: [codex/windows-local-ai-improvement-20261013]
+    paths:
+      - '.github/workflows/ocr-original-image.yml'
+      - 'tools/ocr-physical-framing/OriginalImageRead.cs'
+      - 'tools/ocr-physical-framing/source-image-tests/**'
+permissions:
+  contents: read
+jobs:
+  native:
+    runs-on: windows-2025
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+      DOTNET_NOLOGO: '1'
+      DOTNET_CLI_USE_MSBUILD_SERVER: '0'
+      MSBUILDDISABLENODEREUSE: '1'
+      ORT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Use owned model, fixture and package paths
+        run: |
+          $taskRoot = Join-Path $env:RUNNER_TEMP "takupoke-original-image-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          @(
+            "TAKUPOKE_FRAME_TEMP=$taskRoot"
+            "DOTNET_CLI_HOME=$(Join-Path $taskRoot 'dotnet')"
+            "NUGET_PACKAGES=$(Join-Path $taskRoot 'nuget')"
+            "NUGET_HTTP_CACHE_PATH=$(Join-Path $taskRoot 'nuget-http')"
+          ) | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: '10.0.x'
+          cache: false
+      - run: python scripts/check-public-tree.py
+      - run: python -B -m unittest discover -s tools/ocr-physical-framing -p 'test_*.py'
+      - name: Verify source image contracts and paired whole-document outcomes
+        run: |
+          $owned = Join-Path $env:TAKUPOKE_FRAME_TEMP 'study'
+          dotnet test tools/ocr-physical-framing/source-image-tests/SourceImageTests.csproj -c Release --verbosity quiet
+          if ($LASTEXITCODE -ne 0) { throw 'Original image source contract failed.' }
+          python -B tools/ocr-physical-framing/run_windows.py --output $owned --original-source
+          if ($LASTEXITCODE -ne 0) { throw 'Native acquisition or measurement failed; missing calls stay unassessed.' }
+      - name: Remove all owned models, synthetic sources and packages
+        if: always()
+        run: |
+          $expected = Join-Path $env:RUNNER_TEMP "takupoke-original-image-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          if ($env:TAKUPOKE_FRAME_TEMP -and [IO.Path]::GetFullPath($env:TAKUPOKE_FRAME_TEMP) -ne [IO.Path]::GetFullPath($expected)) { throw 'Unexpected cleanup path.' }
+          if (Get-Command dotnet -ErrorAction SilentlyContinue) { dotnet build-server shutdown }
+          if (Test-Path -LiteralPath $expected) { Remove-Item -LiteralPath $expected -Recurse -Force }
+          if (Test-Path -LiteralPath $expected) { throw 'Owned temporary files remain.' }
+          Write-Output 'Owned models, sources and packages removed; no Actions artifacts or caches uploaded.'

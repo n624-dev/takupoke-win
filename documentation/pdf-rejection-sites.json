@@ -1,0 +1,1322 @@
+{
+  "schemaVersion": 1,
+  "platform": "Windows",
+  "policy": "Fixed call-site IDs. Never renumber or reuse an ID. Wrappers preserve the originating Branch. siteLine is an initial location hint only. No PDF text is recorded. iOS IDs belong to a separate implementation.",
+  "sites": [
+    {
+      "id": "R1001",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 49
+    },
+    {
+      "id": "R1002",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 56
+    },
+    {
+      "id": "R1003",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 58
+    },
+    {
+      "id": "R1004",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 59
+    },
+    {
+      "id": "R1005",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 71
+    },
+    {
+      "id": "R1006",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 78
+    },
+    {
+      "id": "R1007",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 80
+    },
+    {
+      "id": "R1008",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 93
+    },
+    {
+      "id": "R1009",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 186
+    },
+    {
+      "id": "R1010",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 206
+    },
+    {
+      "id": "R1011",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 214
+    },
+    {
+      "id": "R1012",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 217
+    },
+    {
+      "id": "R1013",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 231
+    },
+    {
+      "id": "R1014",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 232
+    },
+    {
+      "id": "R1015",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 233
+    },
+    {
+      "id": "R1016",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
+      "siteLine": 274
+    },
+    {
+      "id": "R1017",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfNativeGlyphTrace.cs",
+      "siteLine": 45
+    },
+    {
+      "id": "R1018",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfNativeGlyphTrace.cs",
+      "siteLine": 56
+    },
+    {
+      "id": "R1019",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfNativeGlyphTrace.cs",
+      "siteLine": 59
+    },
+    {
+      "id": "R1020",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfNativeGlyphTrace.cs",
+      "siteLine": 68
+    },
+    {
+      "id": "R1021",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfNativeGlyphTrace.cs",
+      "siteLine": 81
+    },
+    {
+      "id": "R1022",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfNativeGlyphTrace.cs",
+      "siteLine": 82
+    },
+    {
+      "id": "R1023",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfNativeGlyphTrace.cs",
+      "siteLine": 84
+    },
+    {
+      "id": "R1024",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfNativeGlyphTrace.cs",
+      "siteLine": 85
+    },
+    {
+      "id": "R1025",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfNativeGlyphTrace.cs",
+      "siteLine": 86
+    },
+    {
+      "id": "R1026",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfNativeGlyphTrace.cs",
+      "siteLine": 87
+    },
+    {
+      "id": "R1027",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfNativeGlyphTrace.cs",
+      "siteLine": 88
+    },
+    {
+      "id": "R1028",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 10
+    },
+    {
+      "id": "R1029",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 28
+    },
+    {
+      "id": "R1030",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 30
+    },
+    {
+      "id": "R1031",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 33
+    },
+    {
+      "id": "R1032",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 35
+    },
+    {
+      "id": "R1033",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 56
+    },
+    {
+      "id": "R1034",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 62
+    },
+    {
+      "id": "R1035",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 104
+    },
+    {
+      "id": "R1036",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 112
+    },
+    {
+      "id": "R1037",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 137
+    },
+    {
+      "id": "R1038",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 140
+    },
+    {
+      "id": "R1039",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 141
+    },
+    {
+      "id": "R1040",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 157
+    },
+    {
+      "id": "R1041",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 164
+    },
+    {
+      "id": "R1042",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 171
+    },
+    {
+      "id": "R1043",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 196
+    },
+    {
+      "id": "R1044",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+      "siteLine": 28
+    },
+    {
+      "id": "R1045",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+      "siteLine": 52
+    },
+    {
+      "id": "R1046",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+      "siteLine": 54
+    },
+    {
+      "id": "R1047",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+      "siteLine": 56
+    },
+    {
+      "id": "R1048",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+      "siteLine": 58
+    },
+    {
+      "id": "R1049",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+      "siteLine": 63
+    },
+    {
+      "id": "R1050",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+      "siteLine": 74
+    },
+    {
+      "id": "R1051",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+      "siteLine": 80
+    },
+    {
+      "id": "R1052",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+      "siteLine": 97
+    },
+    {
+      "id": "R1053",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+      "siteLine": 98
+    },
+    {
+      "id": "R1054",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+      "siteLine": 108
+    },
+    {
+      "id": "R1055",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+      "siteLine": 109
+    },
+    {
+      "id": "R1056",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+      "siteLine": 113
+    },
+    {
+      "id": "R1057",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+      "siteLine": 115
+    },
+    {
+      "id": "R1058",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+VisibleRecovery.cs",
+      "siteLine": 43
+    },
+    {
+      "id": "R1059",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+VisibleRecovery.cs",
+      "siteLine": 52
+    },
+    {
+      "id": "R1060",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+VisibleRecovery.cs",
+      "siteLine": 61
+    },
+    {
+      "id": "R1061",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+VisibleRecovery.cs",
+      "siteLine": 101
+    },
+    {
+      "id": "R1062",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 26
+    },
+    {
+      "id": "R1063",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 32
+    },
+    {
+      "id": "R1064",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 33
+    },
+    {
+      "id": "R1065",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 40
+    },
+    {
+      "id": "R1066",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 41
+    },
+    {
+      "id": "R1067",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 42
+    },
+    {
+      "id": "R1068",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 43
+    },
+    {
+      "id": "R1069",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 69
+    },
+    {
+      "id": "R1070",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 73
+    },
+    {
+      "id": "R1071",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 80
+    },
+    {
+      "id": "R1072",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 82
+    },
+    {
+      "id": "R1073",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 85
+    },
+    {
+      "id": "R1074",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 106
+    },
+    {
+      "id": "R1075",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 109
+    },
+    {
+      "id": "R1076",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 111
+    },
+    {
+      "id": "R1077",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 119
+    },
+    {
+      "id": "R1078",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 125
+    },
+    {
+      "id": "R1079",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 131
+    },
+    {
+      "id": "R1080",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 141
+    },
+    {
+      "id": "R1081",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 149
+    },
+    {
+      "id": "R1082",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 152
+    },
+    {
+      "id": "R1083",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 168
+    },
+    {
+      "id": "R1084",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 202
+    },
+    {
+      "id": "R1085",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 205
+    },
+    {
+      "id": "R1086",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 213
+    },
+    {
+      "id": "R1087",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 242
+    },
+    {
+      "id": "R1088",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 267
+    },
+    {
+      "id": "R1089",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 270
+    },
+    {
+      "id": "R1090",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 296
+    },
+    {
+      "id": "R1091",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 331
+    },
+    {
+      "id": "R1092",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 342
+    },
+    {
+      "id": "R1093",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 357
+    },
+    {
+      "id": "R1094",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 361
+    },
+    {
+      "id": "R1095",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 369
+    },
+    {
+      "id": "R1096",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 394
+    },
+    {
+      "id": "R1097",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 397
+    },
+    {
+      "id": "R1098",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 400
+    },
+    {
+      "id": "R1099",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 405
+    },
+    {
+      "id": "R1100",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 412
+    },
+    {
+      "id": "R1101",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 417
+    },
+    {
+      "id": "R1102",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 420
+    },
+    {
+      "id": "R1103",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 425
+    },
+    {
+      "id": "R1104",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 429
+    },
+    {
+      "id": "R1105",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 432
+    },
+    {
+      "id": "R1106",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 436
+    },
+    {
+      "id": "R1107",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 445
+    },
+    {
+      "id": "R1108",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 461
+    },
+    {
+      "id": "R1109",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 463
+    },
+    {
+      "id": "R1110",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 464
+    },
+    {
+      "id": "R1111",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 477
+    },
+    {
+      "id": "R1112",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 482
+    },
+    {
+      "id": "R1113",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 487
+    },
+    {
+      "id": "R1114",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 494
+    },
+    {
+      "id": "R1115",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 506
+    },
+    {
+      "id": "R1116",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 522
+    },
+    {
+      "id": "R1117",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 526
+    },
+    {
+      "id": "R1118",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 528
+    },
+    {
+      "id": "R1119",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 537
+    },
+    {
+      "id": "R1120",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 539
+    },
+    {
+      "id": "R1121",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 541
+    },
+    {
+      "id": "R1122",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 544
+    },
+    {
+      "id": "R1123",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 545
+    },
+    {
+      "id": "R1124",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 551
+    },
+    {
+      "id": "R1125",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 556
+    },
+    {
+      "id": "R1126",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 559
+    },
+    {
+      "id": "R1127",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 566
+    },
+    {
+      "id": "R1128",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 577
+    },
+    {
+      "id": "R1129",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+      "siteLine": 579
+    },
+    {
+      "id": "R1130",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfReturnGeometryDiagnostic.cs",
+      "siteLine": 21
+    },
+    {
+      "id": "R1131",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfReturnGeometryDiagnostic.cs",
+      "siteLine": 23
+    },
+    {
+      "id": "R1132",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfReturnGeometryDiagnostic.cs",
+      "siteLine": 28
+    },
+    {
+      "id": "R1133",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfReturnGeometryDiagnostic.cs",
+      "siteLine": 40
+    },
+    {
+      "id": "R1134",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfReturnGeometryDiagnostic.cs",
+      "siteLine": 49
+    },
+    {
+      "id": "R1135",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 12
+    },
+    {
+      "id": "R1136",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 20
+    },
+    {
+      "id": "R1137",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 21
+    },
+    {
+      "id": "R1138",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 24
+    },
+    {
+      "id": "R1139",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 29
+    },
+    {
+      "id": "R1140",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 31
+    },
+    {
+      "id": "R1141",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 33
+    },
+    {
+      "id": "R1142",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 35
+    },
+    {
+      "id": "R1143",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 46
+    },
+    {
+      "id": "R1144",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 86
+    },
+    {
+      "id": "R1145",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 101
+    },
+    {
+      "id": "R1146",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 112
+    },
+    {
+      "id": "R1147",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 115
+    },
+    {
+      "id": "R1148",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 136
+    },
+    {
+      "id": "R1149",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 143
+    },
+    {
+      "id": "R1150",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 148
+    },
+    {
+      "id": "R1151",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 155
+    },
+    {
+      "id": "R1152",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 158
+    },
+    {
+      "id": "R1153",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 165
+    },
+    {
+      "id": "R1154",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 171
+    },
+    {
+      "id": "R1155",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 174
+    },
+    {
+      "id": "R1156",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 175
+    },
+    {
+      "id": "R1157",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 179
+    },
+    {
+      "id": "R1158",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 185
+    },
+    {
+      "id": "R1159",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 204
+    },
+    {
+      "id": "R1160",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 206
+    },
+    {
+      "id": "R1161",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
+      "siteLine": 208
+    },
+    {
+      "id": "R1162",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 19
+    },
+    {
+      "id": "R1163",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 35
+    },
+    {
+      "id": "R1164",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 36
+    },
+    {
+      "id": "R1165",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 64
+    },
+    {
+      "id": "R1166",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 69
+    },
+    {
+      "id": "R1167",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 72
+    },
+    {
+      "id": "R1168",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 76
+    },
+    {
+      "id": "R1169",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 92
+    },
+    {
+      "id": "R1170",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 95
+    },
+    {
+      "id": "R1171",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 97
+    },
+    {
+      "id": "R1172",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 109
+    },
+    {
+      "id": "R1173",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 110
+    },
+    {
+      "id": "R1174",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 114
+    },
+    {
+      "id": "R1175",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 115
+    },
+    {
+      "id": "R1176",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 121
+    },
+    {
+      "id": "R1177",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 124
+    },
+    {
+      "id": "R1178",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 149
+    },
+    {
+      "id": "R1179",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 183
+    },
+    {
+      "id": "R1180",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 184
+    },
+    {
+      "id": "R1181",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 192
+    },
+    {
+      "id": "R1182",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 197
+    },
+    {
+      "id": "R1183",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 200
+    },
+    {
+      "id": "R1184",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 202
+    },
+    {
+      "id": "R1185",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 228
+    },
+    {
+      "id": "R1186",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 230
+    },
+    {
+      "id": "R1187",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
+      "siteLine": 232
+    },
+    {
+      "id": "R1188",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 13
+    },
+    {
+      "id": "R1189",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 22
+    },
+    {
+      "id": "R1190",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 49
+    },
+    {
+      "id": "R1191",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 50
+    },
+    {
+      "id": "R1192",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 53
+    },
+    {
+      "id": "R1193",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 54
+    },
+    {
+      "id": "R1194",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 56
+    },
+    {
+      "id": "R1195",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 57
+    },
+    {
+      "id": "R1196",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 58
+    },
+    {
+      "id": "R1197",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 60
+    },
+    {
+      "id": "R1198",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 68
+    },
+    {
+      "id": "R1199",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 72
+    },
+    {
+      "id": "R1200",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 76
+    },
+    {
+      "id": "R1201",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 78
+    },
+    {
+      "id": "R1202",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 82
+    },
+    {
+      "id": "R1203",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 85
+    },
+    {
+      "id": "R1204",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 90
+    },
+    {
+      "id": "R1205",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 94
+    },
+    {
+      "id": "R1206",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 108
+    },
+    {
+      "id": "R1207",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 120
+    },
+    {
+      "id": "R1208",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 132
+    },
+    {
+      "id": "R1209",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 137
+    },
+    {
+      "id": "R1210",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 148
+    },
+    {
+      "id": "R1211",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
+      "siteLine": 152
+    },
+    {
+      "id": "R1212",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 17
+    },
+    {
+      "id": "R1213",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 22
+    },
+    {
+      "id": "R1214",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 26
+    },
+    {
+      "id": "R1215",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 45
+    },
+    {
+      "id": "R1216",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 48
+    },
+    {
+      "id": "R1217",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 52
+    },
+    {
+      "id": "R1218",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 56
+    },
+    {
+      "id": "R1219",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 70
+    },
+    {
+      "id": "R1220",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 72
+    },
+    {
+      "id": "R1221",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 84
+    },
+    {
+      "id": "R1222",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 89
+    },
+    {
+      "id": "R1223",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 90
+    },
+    {
+      "id": "R1224",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 92
+    },
+    {
+      "id": "R1225",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 94
+    },
+    {
+      "id": "R1226",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 96
+    },
+    {
+      "id": "R1227",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 104
+    },
+    {
+      "id": "R1228",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 109
+    },
+    {
+      "id": "R1229",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 111
+    },
+    {
+      "id": "R1230",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 122
+    },
+    {
+      "id": "R1231",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 128
+    },
+    {
+      "id": "R1232",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 131
+    },
+    {
+      "id": "R1233",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 138
+    },
+    {
+      "id": "R1234",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 148
+    },
+    {
+      "id": "R1235",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 155
+    },
+    {
+      "id": "R1236",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 160
+    },
+    {
+      "id": "R1237",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 162
+    },
+    {
+      "id": "R1238",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 169
+    },
+    {
+      "id": "R1239",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 178
+    },
+    {
+      "id": "R1240",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 180
+    },
+    {
+      "id": "R1241",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 185
+    },
+    {
+      "id": "R1242",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs",
+      "siteLine": 187
+    },
+    {
+      "id": "R1243",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 12
+    },
+    {
+      "id": "R1244",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 15
+    },
+    {
+      "id": "R1245",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 17
+    },
+    {
+      "id": "R1246",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 20
+    },
+    {
+      "id": "R1247",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 22
+    },
+    {
+      "id": "R1248",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 26
+    },
+    {
+      "id": "R1249",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 30
+    },
+    {
+      "id": "R1250",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 32
+    },
+    {
+      "id": "R1251",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 33
+    },
+    {
+      "id": "R1252",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 39
+    },
+    {
+      "id": "R1253",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 41
+    },
+    {
+      "id": "R1254",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 48
+    },
+    {
+      "id": "R1255",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 50
+    },
+    {
+      "id": "R1256",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 54
+    },
+    {
+      "id": "R1257",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 61
+    },
+    {
+      "id": "R1258",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 66
+    },
+    {
+      "id": "R1259",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 78
+    },
+    {
+      "id": "R1260",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 83
+    },
+    {
+      "id": "R1261",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+      "siteLine": 85
+    },
+    {
+      "id": "R1262",
+      "file": "src/Takupoke.Win/Platform/WindowsPdfRecovery.cs",
+      "siteLine": 102
+    },
+    {
+      "id": "R1263",
+      "file": "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
+      "siteLine": 123
+    }
+  ]
+}

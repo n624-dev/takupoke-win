@@ -29,6 +29,7 @@ internal static partial class Program
         var previous = existing?.GetValue("") as string;
         using (var command = Registry.CurrentUser.CreateSubKey(commandPath)) command.SetValue("", "\"" + Path.GetFullPath(executable) + "\" \"----ms-protocol:%1\"");
         using (var scheme = Registry.CurrentUser.CreateSubKey(@"Software\Classes\jp.n624.takupoke.win")) scheme.SetValue("URL Protocol", "");
+        SHChangeNotify(0x08000000, 0, 0, 0); // Notify the shell after changing its cached protocol handler.
         try
         {
             File.Delete(tokenRequests); File.Delete(privateRequests);
@@ -74,7 +75,19 @@ internal static partial class Program
             WriteProbe(mode, "success");
             Wait(() => Find("update-account")?.Current.IsEnabled == true && !Visible("cancel-operation"), "Validated fake authentication completes downloads and releases the UI");
             Require(ReadProbe(privateRequests) == "3", "All three datasets require the verified token and download once.");
-            foreach (var kind in Enum.GetValues<DataSet>()) Require(Find("shared-status-" + kind)?.Current.Name == "取得済み", "Each independently saved dataset shows acquired status.");
+            Wait(() => SavedAuthenticationRevisionsAsync(root).GetAwaiter().GetResult(), "All three verified downloads commit the expected fictional revision");
+            try
+            {
+                // Operation controls can re-enable before the new UIA subtree is arranged.
+                foreach (var kind in Enum.GetValues<DataSet>())
+                    Wait(() => Find("shared-status-" + kind)?.Current.Name == "取得済み", "Each independently saved dataset shows acquired status: " + kind);
+            }
+            catch
+            {
+                Console.Error.WriteLine("Fictional acquisition status diagnostic: " + string.Join("; ", Enum.GetValues<DataSet>().Select(kind => kind + "=" + (Find("shared-status-" + kind)?.Current.Name ?? "<missing>"))));
+                Capture("fictional-acquisition-status-failure");
+                throw;
+            }
             Wait(() => !Visible("status-bar"), "success footer automatically hides");
             WriteProbe(Path.Combine(root, "offline-auth-revision.txt"), new string('C', 43));
             WriteProbe(mode, "hold"); File.Delete(state);
@@ -94,6 +107,7 @@ internal static partial class Program
             File.Delete(mode); File.Delete(state); File.Delete(Path.Combine(root, "offline-auth-revision.txt"));
             if (previous is not null) { using var command = Registry.CurrentUser.CreateSubKey(commandPath); command.SetValue("", previous); }
             else Registry.CurrentUser.DeleteSubKeyTree(@"Software\Classes\jp.n624.takupoke.win", false);
+            SHChangeNotify(0x08000000, 0, 0, 0);
         }
     }
     private static void SendCallback(string executable, string callback, bool shell)
@@ -101,6 +115,22 @@ internal static partial class Program
         var info = shell ? new ProcessStartInfo(callback) { UseShellExecute = true } : new ProcessStartInfo(Path.GetFullPath(executable)) { UseShellExecute = false };
         if (!shell) info.ArgumentList.Add(callback);
         using var redirect = Process.Start(info);
-        if (!shell && (redirect is null || !redirect.WaitForExit(10000) || redirect.ExitCode != 0)) throw new InvalidOperationException("The synthetic callback process did not redirect successfully.");
+        if (shell) return;
+        if (redirect is null) throw new InvalidOperationException("The synthetic callback process did not start.");
+        var elapsed = Stopwatch.StartNew();
+        try
+        {
+            if (!redirect.WaitForExit(10000))
+                throw new InvalidOperationException($"The synthetic callback process did not exit after {elapsed.ElapsedMilliseconds}ms (pid={redirect.Id}).");
+            if (redirect.ExitCode != 0)
+                throw new InvalidOperationException($"The synthetic callback process exited with 0x{redirect.ExitCode:X8}.");
+            Console.WriteLine($"Synthetic raw callback exited successfully after {elapsed.ElapsedMilliseconds}ms.");
+        }
+        finally
+        {
+            // Dispose alone leaves a timed-out child holding the installed
+            // runtime open. Reap only this process started by the test.
+            if (!redirect.HasExited) { redirect.Kill(true); redirect.WaitForExit(5000); }
+        }
     }
 }

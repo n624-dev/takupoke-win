@@ -1,0 +1,46 @@
+{
+  "models": [
+    {
+      "name": "official-baseline",
+      "pairs": 32,
+      "acceptedBothConflictingSources": 30,
+      "rawSha256": "47e0dc9ec817c4eec02e4998b1c7499fa618a5055d4a2e9958d003919053fe23",
+      "groups": {
+        "scriptAlias": 26,
+        "wholePrefixRemoved": 4
+      }
+    },
+    {
+      "name": "epoch-2",
+      "pairs": 32,
+      "acceptedBothConflictingSources": 0,
+      "rawSha256": "e767b637b331dec3382e972d8fd030e6f7fa04c1206336369ab304453a2eb3f1",
+      "groups": {
+        "scriptAlias": 0,
+        "wholePrefixRemoved": 0
+      }
+    },
+    {
+      "name": "epoch-4",
+      "pairs": 32,
+      "acceptedBothConflictingSources": 0,
+      "rawSha256": "e640e37bcbc852c57853efc4a715febc2f2f48f190766fe3200fba5956fd4604",
+      "groups": {
+        "scriptAlias": 0,
+        "wholePrefixRemoved": 0
+      }
+    },
+    {
+      "name": "epoch-6",
+      "pairs": 32,
+      "acceptedBothConflictingSources": 1,
+      "rawSha256": "03f5549629aeffbe47509ce49835220abd806910ecc2af24018ed4f29a9748f8",
+      "groups": {
+        "scriptAlias": 0,
+        "wholePrefixRemoved": 1
+      }
+    }
+  ],
+  "seconds": 18.79174559400053,
+  "scope": "Consumed unscored postselection controls; identical suppliedpixels cannot establishscriptorigin, completeness or wholeprefix. Refusingboth losesvalidcounterpart; independent originalsource/geometry/inkownership required."
+}

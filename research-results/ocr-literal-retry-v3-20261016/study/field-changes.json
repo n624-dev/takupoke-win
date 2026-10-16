@@ -1,0 +1,100 @@
+[
+  {
+    "id": "literalfresh-0-positive",
+    "key": [
+      "1_1",
+      "1",
+      4,
+      "room"
+    ],
+    "expected": "架空室e2t1p_",
+    "before": "架空室e2t1p",
+    "after": "架空室e2t1p_",
+    "gain": true,
+    "loss": false
+  },
+  {
+    "id": "literalfresh-0-positive",
+    "key": [
+      "AI_1",
+      "1",
+      2,
+      "room"
+    ],
+    "expected": "z513IR9_",
+    "before": "z513IR9",
+    "after": "z513IR9_",
+    "gain": true,
+    "loss": false
+  },
+  {
+    "id": "literalfresh-0-positive",
+    "key": [
+      "2_IT",
+      "2",
+      4,
+      "room"
+    ],
+    "expected": "T6oLm0_",
+    "before": "T6oLm0",
+    "after": "T6oLm0_",
+    "gain": true,
+    "loss": false
+  },
+  {
+    "id": "literalfresh-0-positive",
+    "key": [
+      "1_1",
+      "5",
+      3,
+      "room"
+    ],
+    "expected": "tjJy1_",
+    "before": "tjJy1",
+    "after": "tjJy1_",
+    "gain": true,
+    "loss": false
+  },
+  {
+    "id": "literalfresh-0-positive",
+    "key": [
+      "2_IT",
+      "5",
+      6,
+      "room"
+    ],
+    "expected": "fb6T_",
+    "before": "fb6T",
+    "after": "fb6T_",
+    "gain": true,
+    "loss": false
+  },
+  {
+    "id": "literalfresh-1-positive",
+    "key": [
+      "1_1",
+      "4",
+      4,
+      "room"
+    ],
+    "expected": "架空室ik1_",
+    "before": "架空室ik1",
+    "after": "架空室ik1_",
+    "gain": true,
+    "loss": false
+  },
+  {
+    "id": "literalfresh-1-positive",
+    "key": [
+      "AI_1",
+      "4",
+      3,
+      "room"
+    ],
+    "expected": "8QZ_",
+    "before": "8QZ",
+    "after": "8QZ_",
+    "gain": true,
+    "loss": false
+  }
+]

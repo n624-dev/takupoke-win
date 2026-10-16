@@ -1,0 +1,75 @@
+{
+  "scope": "Byte-exact closed fictional code images research records only. No images, fonts, model weights, binaries or real school data.",
+  "files": [
+    {
+      "file": "font-downloads.json",
+      "bytes": 1119,
+      "sha256": "d3727064973c24a1c27bd026c6c83583687ef96123cd76deffb5cf11d2bcac4c"
+    },
+    {
+      "file": "protocol.json",
+      "bytes": 1362,
+      "sha256": "93377c790c698285bfc56c56f65f3ef7bb47b2a64944f3e5ff3855eaa120e6bd"
+    },
+    {
+      "file": "glyph-ambiguity.json",
+      "bytes": 10632,
+      "sha256": "dbbfba4154ac4d701eb75a663f3a493e15f0f129d78999258330c9f6c025ddf9"
+    },
+    {
+      "file": "inputs.json",
+      "bytes": 190691,
+      "sha256": "b791979bccc87b4fe3301ee6fd34e55dd24b2e8d2f090a68ab99da4ca5e32e09"
+    },
+    {
+      "file": "oracle.json",
+      "bytes": 142199,
+      "sha256": "1d57d6e8c6aaab1145dc8af7dbaef03d2c132f1db36591e0975d9d256ccfa09b"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 12451,
+      "sha256": "6f8c989b5acea4061b4e4f56146f7a7d7560f7d2c287133528704a6de78f87b6"
+    },
+    {
+      "file": "worker-receipt.json",
+      "bytes": 164,
+      "sha256": "aa9a731eafff9a9c82419c4c837e001509c3d7e8517efe1fa59b2eb88301b094"
+    },
+    {
+      "file": "raw.jsonl",
+      "bytes": 1140994,
+      "sha256": "fd99f182c8c23b6c90edf6509c8a5f32b54d939e95e45893ba3f02fbd57c3357"
+    },
+    {
+      "file": "report.json",
+      "bytes": 19181,
+      "sha256": "730e3e7bbb6165f3ff748902ffb1c1ec00e865b7dfc13d72bbe525627e032bfa"
+    },
+    {
+      "file": "stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "as-run-source/CodeProbe.csproj",
+      "bytes": 413,
+      "sha256": "4f203ba334465239e68ede01538f9cb8b091869b5a4b23217ceccb11896304cd"
+    },
+    {
+      "file": "as-run-source/run.py",
+      "bytes": 10786,
+      "sha256": "fad02cca3368b4b741c9a70d779110cbcc426e4865ef87d54a0ff54eef029994"
+    },
+    {
+      "file": "as-run-source/Program.cs",
+      "bytes": 3924,
+      "sha256": "04e2c48d137c4a4d2579568dde0d9168e1266ddd10f15e22b5a04a9489259c1c"
+    }
+  ]
+}

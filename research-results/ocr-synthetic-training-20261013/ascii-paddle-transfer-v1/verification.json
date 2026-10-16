@@ -1,0 +1,13 @@
+{
+  "frozenTrainingSourceHashes": true,
+  "allCandidateRawHashes": true,
+  "trainingDevelopmentDisjoint": true,
+  "unchangedPriorLiteralExclusionIntersection": 0,
+  "unchangedExclusionFiles": 157,
+  "exclusionFilesChangedAfterSnapshot": [],
+  "gateRegisteredBeforeFirstTrainedDevelopmentCheckpoint": true,
+  "utf8LfSourceIoAudit": true,
+  "finalDirectoryAbsent": true,
+  "previousPortableZipUnchanged": true,
+  "scope": "Source and saved-artifact verification only, no inference repeated"
+}

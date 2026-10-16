@@ -1,0 +1,835 @@
+{
+  "scope": "Read-only saved-output diagnosis; minimum edit tie order can change descriptive attribution. No inference, candidate selection or output correction.",
+  "conditions": [
+    {
+      "name": "original",
+      "groups": {
+        "mixed_code": {
+          "rows": 256,
+          "wrongRows": 134,
+          "rowsWithAsciiMismatch": 127,
+          "rowsWithNonAsciiMismatch": 105,
+          "rowsWithSpaceMismatch": 63,
+          "asciiMismatchAccepted": 66,
+          "nonAsciiMismatchAccepted": 48
+        },
+        "mixed_confusable": {
+          "rows": 256,
+          "wrongRows": 189,
+          "rowsWithAsciiMismatch": 189,
+          "rowsWithNonAsciiMismatch": 78,
+          "rowsWithSpaceMismatch": 85,
+          "asciiMismatchAccepted": 84,
+          "nonAsciiMismatchAccepted": 29
+        },
+        "ascii_short": {
+          "rows": 128,
+          "wrongRows": 9,
+          "rowsWithAsciiMismatch": 9,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 4,
+          "asciiMismatchAccepted": 6,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "japanese": {
+          "rows": 128,
+          "wrongRows": 2,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 2,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 1
+        },
+        "retention_japanese": {
+          "rows": 128,
+          "wrongRows": 4,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 4,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 3
+        }
+      },
+      "mostCommonEdits": [
+        {
+          "gold": " ",
+          "prediction": "",
+          "count": 106
+        },
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 103
+        },
+        {
+          "gold": "l",
+          "prediction": "1",
+          "count": 67
+        },
+        {
+          "gold": "—",
+          "prediction": "-",
+          "count": 62
+        },
+        {
+          "gold": ":",
+          "prediction": "",
+          "count": 59
+        },
+        {
+          "gold": " ",
+          "prediction": "：",
+          "count": 58
+        },
+        {
+          "gold": ":",
+          "prediction": "：",
+          "count": 45
+        },
+        {
+          "gold": "_",
+          "prediction": " ",
+          "count": 16
+        },
+        {
+          "gold": "—",
+          "prediction": "",
+          "count": 9
+        },
+        {
+          "gold": " ",
+          "prediction": "一",
+          "count": 9
+        },
+        {
+          "gold": "0",
+          "prediction": "O",
+          "count": 6
+        },
+        {
+          "gold": "日",
+          "prediction": "曰",
+          "count": 6
+        },
+        {
+          "gold": "l",
+          "prediction": "L",
+          "count": 5
+        },
+        {
+          "gold": "—",
+          "prediction": "–",
+          "count": 4
+        },
+        {
+          "gold": "緑",
+          "prediction": "綠",
+          "count": 4
+        },
+        {
+          "gold": "",
+          "prediction": "I",
+          "count": 4
+        },
+        {
+          "gold": "o",
+          "prediction": "0",
+          "count": 3
+        },
+        {
+          "gold": "l",
+          "prediction": "",
+          "count": 3
+        },
+        {
+          "gold": "l",
+          "prediction": "I",
+          "count": 3
+        },
+        {
+          "gold": "—",
+          "prediction": "－",
+          "count": 2
+        },
+        {
+          "gold": " ",
+          "prediction": "0",
+          "count": 2
+        },
+        {
+          "gold": "l",
+          "prediction": "[",
+          "count": 2
+        },
+        {
+          "gold": " ",
+          "prediction": "1",
+          "count": 2
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 2
+        }
+      ],
+      "rawSha256": "9c18d3d2fa26248c9c5e8ab072734ee528e61748b6e6435612148e0d32e9fed1"
+    },
+    {
+      "name": "epoch-4",
+      "groups": {
+        "mixed_code": {
+          "rows": 256,
+          "wrongRows": 138,
+          "rowsWithAsciiMismatch": 120,
+          "rowsWithNonAsciiMismatch": 122,
+          "rowsWithSpaceMismatch": 47,
+          "asciiMismatchAccepted": 7,
+          "nonAsciiMismatchAccepted": 6
+        },
+        "mixed_confusable": {
+          "rows": 256,
+          "wrongRows": 148,
+          "rowsWithAsciiMismatch": 140,
+          "rowsWithNonAsciiMismatch": 82,
+          "rowsWithSpaceMismatch": 43,
+          "asciiMismatchAccepted": 47,
+          "nonAsciiMismatchAccepted": 30
+        },
+        "ascii_short": {
+          "rows": 128,
+          "wrongRows": 12,
+          "rowsWithAsciiMismatch": 12,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 4,
+          "asciiMismatchAccepted": 7,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "japanese": {
+          "rows": 128,
+          "wrongRows": 2,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 2,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 1
+        },
+        "retention_japanese": {
+          "rows": 128,
+          "wrongRows": 4,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 4,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 3
+        }
+      },
+      "mostCommonEdits": [
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 118
+        },
+        {
+          "gold": ":",
+          "prediction": "：",
+          "count": 67
+        },
+        {
+          "gold": ":",
+          "prediction": "",
+          "count": 58
+        },
+        {
+          "gold": " ",
+          "prediction": "：",
+          "count": 58
+        },
+        {
+          "gold": "—",
+          "prediction": "-",
+          "count": 43
+        },
+        {
+          "gold": "l",
+          "prediction": "1",
+          "count": 38
+        },
+        {
+          "gold": " ",
+          "prediction": "",
+          "count": 21
+        },
+        {
+          "gold": "_",
+          "prediction": " ",
+          "count": 16
+        },
+        {
+          "gold": "—",
+          "prediction": "–",
+          "count": 15
+        },
+        {
+          "gold": "—",
+          "prediction": "－",
+          "count": 10
+        },
+        {
+          "gold": "—",
+          "prediction": "一",
+          "count": 9
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 6
+        },
+        {
+          "gold": "日",
+          "prediction": "曰",
+          "count": 6
+        },
+        {
+          "gold": "緑",
+          "prediction": "綠",
+          "count": 4
+        },
+        {
+          "gold": "l",
+          "prediction": "L",
+          "count": 3
+        },
+        {
+          "gold": "",
+          "prediction": "I",
+          "count": 2
+        },
+        {
+          "gold": "l",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "",
+          "prediction": "_",
+          "count": 1
+        },
+        {
+          "gold": "!",
+          "prediction": "|",
+          "count": 1
+        },
+        {
+          "gold": "`",
+          "prediction": "",
+          "count": 1
+        }
+      ],
+      "rawSha256": "f2465889204173e66082bc0a62b18494cddfa12e4ae05e53c880dc87790943c8"
+    },
+    {
+      "name": "epoch-8",
+      "groups": {
+        "mixed_code": {
+          "rows": 256,
+          "wrongRows": 136,
+          "rowsWithAsciiMismatch": 118,
+          "rowsWithNonAsciiMismatch": 121,
+          "rowsWithSpaceMismatch": 47,
+          "asciiMismatchAccepted": 7,
+          "nonAsciiMismatchAccepted": 6
+        },
+        "mixed_confusable": {
+          "rows": 256,
+          "wrongRows": 147,
+          "rowsWithAsciiMismatch": 140,
+          "rowsWithNonAsciiMismatch": 82,
+          "rowsWithSpaceMismatch": 55,
+          "asciiMismatchAccepted": 52,
+          "nonAsciiMismatchAccepted": 32
+        },
+        "ascii_short": {
+          "rows": 128,
+          "wrongRows": 11,
+          "rowsWithAsciiMismatch": 11,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 4,
+          "asciiMismatchAccepted": 9,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "japanese": {
+          "rows": 128,
+          "wrongRows": 2,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 2,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 1
+        },
+        "retention_japanese": {
+          "rows": 128,
+          "wrongRows": 4,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 4,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 3
+        }
+      },
+      "mostCommonEdits": [
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 113
+        },
+        {
+          "gold": ":",
+          "prediction": "：",
+          "count": 66
+        },
+        {
+          "gold": ":",
+          "prediction": "",
+          "count": 58
+        },
+        {
+          "gold": " ",
+          "prediction": "：",
+          "count": 58
+        },
+        {
+          "gold": "—",
+          "prediction": "-",
+          "count": 47
+        },
+        {
+          "gold": "l",
+          "prediction": "1",
+          "count": 26
+        },
+        {
+          "gold": " ",
+          "prediction": "",
+          "count": 24
+        },
+        {
+          "gold": "_",
+          "prediction": " ",
+          "count": 16
+        },
+        {
+          "gold": "—",
+          "prediction": "–",
+          "count": 11
+        },
+        {
+          "gold": "—",
+          "prediction": "－",
+          "count": 10
+        },
+        {
+          "gold": "—",
+          "prediction": "一",
+          "count": 9
+        },
+        {
+          "gold": "日",
+          "prediction": "曰",
+          "count": 6
+        },
+        {
+          "gold": " ",
+          "prediction": "_",
+          "count": 5
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 5
+        },
+        {
+          "gold": "O",
+          "prediction": "",
+          "count": 5
+        },
+        {
+          "gold": " ",
+          "prediction": "0",
+          "count": 5
+        },
+        {
+          "gold": "緑",
+          "prediction": "綠",
+          "count": 4
+        },
+        {
+          "gold": "",
+          "prediction": "I",
+          "count": 2
+        },
+        {
+          "gold": "l",
+          "prediction": "L",
+          "count": 2
+        },
+        {
+          "gold": "l",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "",
+          "prediction": "_",
+          "count": 1
+        },
+        {
+          "gold": "!",
+          "prediction": "|",
+          "count": 1
+        }
+      ],
+      "rawSha256": "f7c0f3c76fcd30fd15ff1a90e55fdc691601a989d95b2922c851852270fea1e7"
+    },
+    {
+      "name": "epoch-16",
+      "groups": {
+        "mixed_code": {
+          "rows": 256,
+          "wrongRows": 138,
+          "rowsWithAsciiMismatch": 121,
+          "rowsWithNonAsciiMismatch": 120,
+          "rowsWithSpaceMismatch": 48,
+          "asciiMismatchAccepted": 10,
+          "nonAsciiMismatchAccepted": 9
+        },
+        "mixed_confusable": {
+          "rows": 256,
+          "wrongRows": 151,
+          "rowsWithAsciiMismatch": 143,
+          "rowsWithNonAsciiMismatch": 83,
+          "rowsWithSpaceMismatch": 53,
+          "asciiMismatchAccepted": 50,
+          "nonAsciiMismatchAccepted": 31
+        },
+        "ascii_short": {
+          "rows": 128,
+          "wrongRows": 10,
+          "rowsWithAsciiMismatch": 10,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 3,
+          "asciiMismatchAccepted": 7,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "japanese": {
+          "rows": 128,
+          "wrongRows": 2,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 2,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 1
+        },
+        "retention_japanese": {
+          "rows": 128,
+          "wrongRows": 4,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 4,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 3
+        }
+      },
+      "mostCommonEdits": [
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 113
+        },
+        {
+          "gold": ":",
+          "prediction": "：",
+          "count": 66
+        },
+        {
+          "gold": ":",
+          "prediction": "",
+          "count": 58
+        },
+        {
+          "gold": " ",
+          "prediction": "：",
+          "count": 58
+        },
+        {
+          "gold": "—",
+          "prediction": "-",
+          "count": 46
+        },
+        {
+          "gold": "l",
+          "prediction": "1",
+          "count": 34
+        },
+        {
+          "gold": " ",
+          "prediction": "",
+          "count": 20
+        },
+        {
+          "gold": "_",
+          "prediction": " ",
+          "count": 15
+        },
+        {
+          "gold": "—",
+          "prediction": "–",
+          "count": 14
+        },
+        {
+          "gold": "—",
+          "prediction": "一",
+          "count": 9
+        },
+        {
+          "gold": "—",
+          "prediction": "－",
+          "count": 8
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 6
+        },
+        {
+          "gold": " ",
+          "prediction": "_",
+          "count": 6
+        },
+        {
+          "gold": "日",
+          "prediction": "曰",
+          "count": 6
+        },
+        {
+          "gold": "O",
+          "prediction": "",
+          "count": 5
+        },
+        {
+          "gold": " ",
+          "prediction": "0",
+          "count": 5
+        },
+        {
+          "gold": "緑",
+          "prediction": "綠",
+          "count": 4
+        },
+        {
+          "gold": "",
+          "prediction": "I",
+          "count": 2
+        },
+        {
+          "gold": "l",
+          "prediction": "L",
+          "count": 2
+        },
+        {
+          "gold": "L",
+          "prediction": "l",
+          "count": 1
+        },
+        {
+          "gold": "l",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "",
+          "prediction": "_",
+          "count": 1
+        },
+        {
+          "gold": "!",
+          "prediction": "|",
+          "count": 1
+        }
+      ],
+      "rawSha256": "2de5a8ca9ae69d2742cf70521ba67695de652d8c3d200839e98cf7cc24f76459"
+    },
+    {
+      "name": "epoch-24",
+      "groups": {
+        "mixed_code": {
+          "rows": 256,
+          "wrongRows": 140,
+          "rowsWithAsciiMismatch": 124,
+          "rowsWithNonAsciiMismatch": 125,
+          "rowsWithSpaceMismatch": 47,
+          "asciiMismatchAccepted": 10,
+          "nonAsciiMismatchAccepted": 8
+        },
+        "mixed_confusable": {
+          "rows": 256,
+          "wrongRows": 144,
+          "rowsWithAsciiMismatch": 135,
+          "rowsWithNonAsciiMismatch": 88,
+          "rowsWithSpaceMismatch": 52,
+          "asciiMismatchAccepted": 55,
+          "nonAsciiMismatchAccepted": 34
+        },
+        "ascii_short": {
+          "rows": 128,
+          "wrongRows": 12,
+          "rowsWithAsciiMismatch": 12,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 4,
+          "asciiMismatchAccepted": 7,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "japanese": {
+          "rows": 128,
+          "wrongRows": 2,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 2,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 1
+        },
+        "retention_japanese": {
+          "rows": 128,
+          "wrongRows": 4,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 4,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 3
+        }
+      },
+      "mostCommonEdits": [
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 112
+        },
+        {
+          "gold": ":",
+          "prediction": "：",
+          "count": 76
+        },
+        {
+          "gold": ":",
+          "prediction": "",
+          "count": 58
+        },
+        {
+          "gold": " ",
+          "prediction": "：",
+          "count": 58
+        },
+        {
+          "gold": "—",
+          "prediction": "-",
+          "count": 50
+        },
+        {
+          "gold": "l",
+          "prediction": "1",
+          "count": 22
+        },
+        {
+          "gold": " ",
+          "prediction": "",
+          "count": 17
+        },
+        {
+          "gold": "_",
+          "prediction": " ",
+          "count": 16
+        },
+        {
+          "gold": "—",
+          "prediction": "–",
+          "count": 12
+        },
+        {
+          "gold": "—",
+          "prediction": "一",
+          "count": 9
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 8
+        },
+        {
+          "gold": "—",
+          "prediction": "－",
+          "count": 6
+        },
+        {
+          "gold": "O",
+          "prediction": "",
+          "count": 6
+        },
+        {
+          "gold": " ",
+          "prediction": "0",
+          "count": 6
+        },
+        {
+          "gold": "日",
+          "prediction": "曰",
+          "count": 6
+        },
+        {
+          "gold": "緑",
+          "prediction": "綠",
+          "count": 4
+        },
+        {
+          "gold": " ",
+          "prediction": "_",
+          "count": 4
+        },
+        {
+          "gold": "",
+          "prediction": "I",
+          "count": 2
+        },
+        {
+          "gold": "L",
+          "prediction": "l",
+          "count": 1
+        },
+        {
+          "gold": "l",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "l",
+          "prediction": "L",
+          "count": 1
+        },
+        {
+          "gold": "",
+          "prediction": "_",
+          "count": 1
+        },
+        {
+          "gold": "!",
+          "prediction": "|",
+          "count": 1
+        },
+        {
+          "gold": "o",
+          "prediction": "0",
+          "count": 1
+        }
+      ],
+      "rawSha256": "01835de30b5fcd8b403eda03981bd48883aa12bbb4163f12693888a9fd108fa4"
+    }
+  ]
+}

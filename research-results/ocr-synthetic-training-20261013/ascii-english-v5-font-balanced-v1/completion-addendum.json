@@ -1,0 +1,91 @@
+{
+  "status": "Completed one bounded training trial and separately authorized standardONNX export; no further training/activation/final",
+  "selectedCheckpoint": "/workspace/scratch/ascii-english-v5-font-balanced-20261014-v1/adaptation-v1/epoch-4.safetensors",
+  "selectedCheckpointSha256": "7313bee5dabf17998010c6f47844fe80649744b03c0366af05c627fc47314547",
+  "onnxSha256": "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703",
+  "portableExportCompleted": true,
+  "onnxStandardDomainsOnly": true,
+  "dynamicShapes": 12,
+  "devTextIntervalPaddingAcceptEqual": 496,
+  "confidenceNotBitwiseEqual": true,
+  "naturalGainRegression": {
+    "gains": 4,
+    "regressions": 4
+  },
+  "negativeAcceptedCanonical": {
+    "clipped": {
+      "rows": 16,
+      "accepted": 2,
+      "nonempty": 16
+    },
+    "interior_damage": {
+      "rows": 16,
+      "accepted": 11,
+      "nonempty": 16
+    },
+    "multiline": {
+      "rows": 16,
+      "accepted": 0,
+      "nonempty": 12
+    },
+    "noise": {
+      "rows": 16,
+      "accepted": 0,
+      "nonempty": 0
+    },
+    "blank": {
+      "rows": 16,
+      "accepted": 0,
+      "nonempty": 0
+    },
+    "unknown_cjk": {
+      "rows": 16,
+      "accepted": 0,
+      "nonempty": 1
+    },
+    "unknown_mixed": {
+      "rows": 16,
+      "accepted": 0,
+      "nonempty": 16
+    }
+  },
+  "old46BytesShaUnchanged": true,
+  "registeredSourcesUnchanged": true,
+  "allJsonAndJsonlUtf8Parse": true,
+  "sourceAstEncodingAndLf": true,
+  "extraScratchBytes": 243634951,
+  "freeDiskBytes": 4029046784,
+  "logs": {
+    "report": {
+      "bytes": 8262,
+      "sha256": "f9d62b1db61d4b1eee4cbc6dac35230cfa8502acd444f0d32134ceeac7b5930e"
+    },
+    "diagnosis": {
+      "bytes": 4528,
+      "sha256": "69df632548d784de17b27f74d9b930eb6fe90c15b93cf66feca56976d577a474"
+    },
+    "summary-audit": {
+      "bytes": 1764,
+      "sha256": "7b4846a935b1001a69729ae21583623d8a31351989985cd2ed588f805a542401"
+    },
+    "probes": {
+      "bytes": 1328,
+      "sha256": "18262005c4b1747abb9caf26d0a144ddcc40ef234207095c25a5df19bc0ef93d"
+    },
+    "closure": {
+      "bytes": 10226,
+      "sha256": "f3c8c83c11f4ece126abba2f38e409fa67b5bf9a1c9100ce086fdb9bc050532a"
+    },
+    "portable": {
+      "bytes": 7393,
+      "sha256": "e1be845383b15f43739760e293c2531fca07a58a8333830aadb1da28e4968512"
+    }
+  },
+  "finalGeneratedOrOpened": false,
+  "coremlAttempted": false,
+  "iosEdited": false,
+  "activated": false,
+  "publicModel": false,
+  "childCommitPush": false,
+  "completedUtc": "2026-10-14T23:13:30.243635+00:00"
+}

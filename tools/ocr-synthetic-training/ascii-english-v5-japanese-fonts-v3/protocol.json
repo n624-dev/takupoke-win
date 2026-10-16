@@ -1,0 +1,196 @@
+{
+  "namespace": "research-ascii-english-v5-japanese-fonts-v3",
+  "basis": "Independent unmodified official HF PPOCRV5MobileRecForTextRecognition/config/safetensors revision e4abce2bbd335f6c3eda0507b7f8e8abd5af3419. Old strict ONNX transplant remains failed; no nativeONNX identity/transplant claim. No epsilon replacement/fusedDAG replacement.",
+  "dictionary": "Full438 original dictionary/blank0/space final437 retained; all95ASCII present. No vocabulary probability renormalization/class whitelist/output repair.",
+  "parameters": "All officialCNN/encoder/full438classifier weights and affine params (5,510,778) train + reject121. Original architecture/config and norm epsilon stay unchanged. BNrunningstats frozen by evalmode for all optimization forwards; eval does not disable gradients. Japaneseprimary untouched/independentASCIIbranch only.",
+  "train": {
+    "seed": 107531,
+    "fonts": [
+      "SawarabiGothic",
+      "SawarabiMincho",
+      "KleeOne",
+      "KaiseiTokumin",
+      "IBMPlexMono",
+      "Inconsolata",
+      "CrimsonText",
+      "Alegreya"
+    ],
+    "positiveCounts": {
+      "code": 384,
+      "lookalike": 256,
+      "natural": 576,
+      "printable": 64
+    },
+    "negativeCounts": {
+      "clipped": 16,
+      "interior_damage": 16,
+      "multiline": 16,
+      "noise": 16,
+      "blank": 16,
+      "unknown_cjk": 16,
+      "unknown_mixed": 16
+    },
+    "kindFonts": {
+      "code": [
+        "SawarabiGothic",
+        "SawarabiMincho",
+        "KleeOne",
+        "KaiseiTokumin"
+      ],
+      "lookalike": [
+        "SawarabiGothic",
+        "SawarabiMincho",
+        "KleeOne",
+        "KaiseiTokumin"
+      ],
+      "natural": [
+        "IBMPlexMono",
+        "Inconsolata",
+        "CrimsonText",
+        "Alegreya"
+      ],
+      "printable": [
+        "IBMPlexMono",
+        "Inconsolata",
+        "CrimsonText",
+        "Alegreya"
+      ]
+    }
+  },
+  "development": {
+    "seed": 107541,
+    "fonts": [
+      "ZenOldMincho",
+      "YuseiMagic",
+      "IBMPlexMono",
+      "Inconsolata",
+      "CrimsonText",
+      "Alegreya"
+    ],
+    "positiveCounts": {
+      "code": 96,
+      "lookalike": 96,
+      "natural": 160,
+      "printable": 32
+    },
+    "negativeCounts": {
+      "clipped": 16,
+      "interior_damage": 16,
+      "multiline": 16,
+      "noise": 16,
+      "blank": 16,
+      "unknown_cjk": 16,
+      "unknown_mixed": 16
+    },
+    "kindFonts": {
+      "code": [
+        "ZenOldMincho",
+        "YuseiMagic"
+      ],
+      "lookalike": [
+        "ZenOldMincho",
+        "YuseiMagic"
+      ],
+      "natural": [
+        "IBMPlexMono",
+        "Inconsolata",
+        "CrimsonText",
+        "Alegreya"
+      ],
+      "printable": [
+        "IBMPlexMono",
+        "Inconsolata",
+        "CrimsonText",
+        "Alegreya"
+      ]
+    }
+  },
+  "fontExposure": "JP4 code training families have been consumed in prior tests; no holdout claim. New JP2dev/JP2fresh families remain disjoint. Latin4 retention fonts intentionally reused with disjoint literals/images/tensors.",
+  "fontBalance": "Every positive kind balanced within its registered kindFonts; code and lookalike only JP, natural and printable only Latin. Negative kinds use registered union except designated CJK.",
+  "data": "Arbitrary new 2..10-character codes with upper/lower letters/digits and separators, confusables at random positions; paired single-glyph alternatives. No fixed school-room prefix or A/B/O0/I1l-two-digit grammar. All previous corpora only exclusions.",
+  "preprocessing": "All suppliedRGBink bbox+2originalpx/commonbaseline/relativeheight/internalgaps; nativeFP32BGR48 sampler centerbilinear/uint8round/zero-normalizedpadding width320..960, validWidth/sourceRect preserved. NoFP16. This fixes input condition for independentHFbasis and does not assert officialHFImageProcessor or Windowsbyteparity.",
+  "cache": "Lossless FP32 tensor/features/full438 probabilities from active teacher; no giant feature cache; old caches preserved.",
+  "selfConsistencyNewDevGate": "Before optimizer everynewdev storedofficialbaseline vs initializedsameofficialAdapter exactFP32feature/probability byte equality and text/interval/floor/ASCII/validWidthdecision equality. Halt iffail.",
+  "contradictionAudit": "Prior literal/PNG/normalizedFP32 hashes excluded for all nonblank samples; blank exact normalized duplicates intentional physical controls, never positive-vs-negative. All train contradictions excluded. Prior negative blank pixels cannot be made novel by literal changes.",
+  "training": {
+    "seed": 107561,
+    "threads": 2,
+    "batchSize": 2,
+    "epochs": 3,
+    "evaluateEpochs": [
+      1,
+      2,
+      3
+    ],
+    "cnnLearningRate": 3e-06,
+    "encoderLearningRate": 1e-05,
+    "headLearningRate": 3e-05,
+    "rejectLearningRate": 0.0001,
+    "teacherKlWeight": 0.8,
+    "teacherFeatureMseWeight": 0.02,
+    "rejectBceWeight": 0.5,
+    "weightDecay": 0.0001,
+    "gradientClip": 5.0,
+    "maximumTrainingSeconds": 5400,
+    "maximumCacheSeconds": 2400,
+    "maximumRssMiB": 4096,
+    "additionalDiskBudgetGiB": 1.3,
+    "minimumFreeDiskGiB": 0.5
+  },
+  "loss": "Full438CTC on intactpositives/emptyblank; fullteacherKL+teacherfeatureMSE on allsamples; BCEreject on allsamples. Damage/multiline/noise/CJK/mixed receive no guessedCTClabel.",
+  "batching": "ExactFP32inputWidthbucket, no new image/temporalpadding/noattentionmask. Original outputT centers scaledbyinputWidth/validWidth onlydefine rejectmean; CTCSourceBox interval end pastvalidWidth alwaysrefused.",
+  "acceptance": "Baseline/trainednonempty/alltextprintableASCII/minemittedCTCconfidence>=.8/nointervalpastvalidWidth; trainedalso rejectProbability<=.05. Uncalibrateddiagnostic only; outputASCII cannotprove inputsource/domain.",
+  "selection": "Active fallback. Eligible if whole CER strictly improves, JP code/lookalike CER <=.90*active, natural CER <=active+.002, wrongAccepted<=active+2, negativeAccepted<=active+2, all unsupported padding refused. Rank codeCER/wholeCER/-exact/earliestepoch. No zero error gate.",
+  "continuationGate": "Fresh independent assessment after selectedhash frozen. No parameter/threshold/checkpoint change after fresh. Parent product decision.",
+  "sourceProof": "Oldconsumed64samepixelscriptalias/missingprefixcontrols onlypostselection, never train/choose/final. Sourcecompleteness/script/cellgeometry provenance remains independent.",
+  "final": "New JP ShipporiAntique/ZenAntiqueSoft code-font fresh plus Latin retention, fresh496 after selection. No re-selection after fresh.",
+  "initialization": "font-balanced epoch4 SHA7313bee5dabf17998010c6f47844fe80649744b03c0366af05c627fc47314547; teacher same active selected official438 weights; active ONNX SHA9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703",
+  "fresh": {
+    "seed": 107591,
+    "fonts": [
+      "ShipporiAntique",
+      "ZenAntiqueSoft",
+      "IBMPlexMono",
+      "Inconsolata",
+      "CrimsonText",
+      "Alegreya"
+    ],
+    "positiveCounts": {
+      "code": 96,
+      "lookalike": 96,
+      "natural": 160,
+      "printable": 32
+    },
+    "negativeCounts": {
+      "clipped": 16,
+      "interior_damage": 16,
+      "multiline": 16,
+      "noise": 16,
+      "blank": 16,
+      "unknown_cjk": 16,
+      "unknown_mixed": 16
+    },
+    "kindFonts": {
+      "code": [
+        "ShipporiAntique",
+        "ZenAntiqueSoft"
+      ],
+      "lookalike": [
+        "ShipporiAntique",
+        "ZenAntiqueSoft"
+      ],
+      "natural": [
+        "IBMPlexMono",
+        "Inconsolata",
+        "CrimsonText",
+        "Alegreya"
+      ],
+      "printable": [
+        "IBMPlexMono",
+        "Inconsolata",
+        "CrimsonText",
+        "Alegreya"
+      ]
+    }
+  }
+}

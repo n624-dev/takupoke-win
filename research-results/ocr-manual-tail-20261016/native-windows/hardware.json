@@ -1,0 +1,11 @@
+{
+  "processors": [
+    {
+      "Name": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "NumberOfCores": 2,
+      "NumberOfLogicalProcessors": 4
+    }
+  ],
+  "sourceCommit": "469e49960b4b24ee48322b551baced32d4dae07b",
+  "physicalMemoryBytes": 17174360064
+}

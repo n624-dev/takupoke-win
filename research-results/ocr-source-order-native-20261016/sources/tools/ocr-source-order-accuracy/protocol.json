@@ -1,0 +1,59 @@
+{
+  "recipe": "source-order-native-fresh-v1",
+  "modelSelection": "Unchanged V3epoch1fixedmanualexpert+v1fallback; no newtraining/checkpoint/threshold selection",
+  "expertSha256": "95bab179e0d6cc75269419078d68696cd4679661f94f6128b858b7a074fe2971",
+  "bugFix": "Only original atom sequence within complete original inline-role rows independently verified by existing OcrHeaderRowsWhere proof; actual glyph literals/native probabilities/CTC/boxes unchanged",
+  "builderSHA256": "15e6d3f9eb9fc56c569290eedf21e962bd24317ee32129cf5252b8104cf9c91b",
+  "fontPins": [
+    {
+      "family": "zenkurenaido",
+      "file": "ZenKurenaido-Regular.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/zenkurenaido/ZenKurenaido-Regular.ttf",
+      "bytes": 4303112,
+      "sha256": "58b8d930d9fc10c8a5810c085bae378dacb98d0779073ee6d53d919f19ee6a4f"
+    },
+    {
+      "family": "zenkurenaido",
+      "file": "zenkurenaido-OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/zenkurenaido/OFL.txt",
+      "bytes": 4398,
+      "sha256": "fdfcb596ac910b447e482f42d4d1e5df3cfcb71c681a9f10e7f2d0126b274111"
+    },
+    {
+      "family": "kaiseidecol",
+      "file": "KaiseiDecol-Regular.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/kaiseidecol/KaiseiDecol-Regular.ttf",
+      "bytes": 4503152,
+      "sha256": "fb9202b97944fa00b5f145ad4701def5c306bcd0d26407917baef9e01b042056"
+    },
+    {
+      "family": "kaiseidecol",
+      "file": "kaiseidecol-OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/kaiseidecol/OFL.txt",
+      "bytes": 4383,
+      "sha256": "6c5445d4febbf6d84025b874a85c51e7e4bfa7495279eccdb4c317a6de857b46"
+    }
+  ],
+  "fontExposure": "Neither newfontfile loaded by local training/previous OCR; KaiseiDecol related to KaiseiTokumin, so no family-unseen/pretraining-unseen claim",
+  "seedBase": 20261016113,
+  "exclusionsSha256": "ae7ac01631a407d7b2c44b60810c588ddbdf9a5205578112b3ef2c65db5029c0",
+  "consumedRegressionSha256": "8cd66ea57e82b221c6d8367b00e9a00088b915b01aba82b221f1d3124994694c",
+  "freshDocuments": 6,
+  "freshPositiveDocuments": 2,
+  "freshNegativeDocuments": 4,
+  "pagesPerDocument": 5,
+  "bodyFieldsPerPositive": 360,
+  "criteria": {
+    "minimumExactFieldRate": 0.9,
+    "maximumCERPerFont": 0.03,
+    "maximumReviewUnion": 128,
+    "maximumRSSBytes": 6442450944,
+    "allFieldsAndSlots": true,
+    "allNegativeAcquisitionCompleteAndRefused": true,
+    "eachFreshFontExactNondecreaseAndCoverageEditsNonincrease": true,
+    "oldAndNewCombinedStrictExactGain": true
+  },
+  "zeroErrorsRequired": false,
+  "freshCallsBeforeFreeze": 0,
+  "scope": "Old6font/18docs are explicitly consumed source-only regression, new2font/6docs use actual both-arm Windows modelcalls and full schema4 candidate capture/parser/review. Every raw outcome retained; failed previous38831256353 trial remainsFAIL."
+}

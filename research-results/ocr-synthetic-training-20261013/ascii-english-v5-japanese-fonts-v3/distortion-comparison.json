@@ -1,0 +1,278 @@
+{
+  "active": {
+    "name": "distortion-active",
+    "positiveRows": 64,
+    "exact": 50,
+    "correctAccepted": 33,
+    "incorrectAccepted": 4,
+    "negativeRows": 0,
+    "negativeAccepted": 0,
+    "paddingRows": 0,
+    "cer": 0.04497354497354497,
+    "groups": {
+      "code": {
+        "rows": 32,
+        "exact": 27,
+        "correctAccepted": 22,
+        "incorrectAccepted": 1,
+        "accepted": 23,
+        "nonempty": 32,
+        "characters": 198,
+        "editErrors": 5,
+        "cer": 0.025252525252525252,
+        "correctLowConfidence": 3,
+        "wrongHighConfidence": 1
+      },
+      "lookalike": {
+        "rows": 32,
+        "exact": 23,
+        "correctAccepted": 11,
+        "incorrectAccepted": 3,
+        "accepted": 14,
+        "nonempty": 32,
+        "characters": 180,
+        "editErrors": 12,
+        "cer": 0.06666666666666667,
+        "correctLowConfidence": 12,
+        "wrongHighConfidence": 4
+      }
+    },
+    "rawSha256": "2c1fc7d52670dcf5b81446e37b9a4ebe6254b04ee7200e9e2d4e7ff285d75df5",
+    "scope": "Fresh synthetic development unless separately labeled fresh; independent ASCII branch; no document qualification",
+    "fontMetrics": {
+      "SawarabiGothic": {
+        "rows": 16,
+        "characters": 103,
+        "editErrors": 4,
+        "cer": 0.038834951456310676,
+        "exact": 12,
+        "correctLowConfidence": 4,
+        "wrongHighConfidence": 2,
+        "accepted": 9
+      },
+      "SawarabiMincho": {
+        "rows": 16,
+        "characters": 94,
+        "editErrors": 1,
+        "cer": 0.010638297872340425,
+        "exact": 15,
+        "correctLowConfidence": 3,
+        "wrongHighConfidence": 1,
+        "accepted": 13
+      },
+      "KleeOne": {
+        "rows": 16,
+        "characters": 83,
+        "editErrors": 9,
+        "cer": 0.10843373493975904,
+        "exact": 9,
+        "correctLowConfidence": 5,
+        "wrongHighConfidence": 2,
+        "accepted": 5
+      },
+      "KaiseiTokumin": {
+        "rows": 16,
+        "characters": 98,
+        "editErrors": 3,
+        "cer": 0.030612244897959183,
+        "exact": 14,
+        "correctLowConfidence": 3,
+        "wrongHighConfidence": 0,
+        "accepted": 10
+      }
+    },
+    "codeMetrics": {
+      "rows": 64,
+      "characters": 378,
+      "editErrors": 17,
+      "cer": 0.04497354497354497,
+      "exact": 50,
+      "correctLowConfidence": 15,
+      "wrongHighConfidence": 5,
+      "accepted": 37
+    },
+    "monoCodeMetrics": {
+      "rows": 0,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "exact": 0,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0,
+      "accepted": 0
+    },
+    "fontCodeMetrics": {
+      "RedHatMono": {
+        "rows": 0,
+        "characters": 0,
+        "editErrors": 0,
+        "cer": null,
+        "exact": 0,
+        "correctLowConfidence": 0,
+        "wrongHighConfidence": 0,
+        "accepted": 0
+      },
+      "OverpassMono": {
+        "rows": 0,
+        "characters": 0,
+        "editErrors": 0,
+        "cer": null,
+        "exact": 0,
+        "correctLowConfidence": 0,
+        "wrongHighConfidence": 0,
+        "accepted": 0
+      }
+    },
+    "reviewMetrics": {
+      "rows": 64,
+      "characters": 378,
+      "editErrors": 17,
+      "cer": 0.04497354497354497,
+      "exact": 50,
+      "correctLowConfidence": 15,
+      "wrongHighConfidence": 5,
+      "accepted": 37
+    },
+    "allUnsupportedPaddingRefused": true
+  },
+  "candidate": {
+    "name": "distortion-candidate",
+    "positiveRows": 64,
+    "exact": 57,
+    "correctAccepted": 48,
+    "incorrectAccepted": 2,
+    "negativeRows": 0,
+    "negativeAccepted": 0,
+    "paddingRows": 0,
+    "cer": 0.021164021164021163,
+    "groups": {
+      "code": {
+        "rows": 32,
+        "exact": 32,
+        "correctAccepted": 27,
+        "incorrectAccepted": 0,
+        "accepted": 27,
+        "nonempty": 32,
+        "characters": 198,
+        "editErrors": 0,
+        "cer": 0.0,
+        "correctLowConfidence": 4,
+        "wrongHighConfidence": 0
+      },
+      "lookalike": {
+        "rows": 32,
+        "exact": 25,
+        "correctAccepted": 21,
+        "incorrectAccepted": 2,
+        "accepted": 23,
+        "nonempty": 32,
+        "characters": 180,
+        "editErrors": 8,
+        "cer": 0.044444444444444446,
+        "correctLowConfidence": 2,
+        "wrongHighConfidence": 3
+      }
+    },
+    "rawSha256": "8c49173b814b41e953b138b35b310f815d1d377d30fe2d80ccac49094de226bc",
+    "scope": "Fresh synthetic development unless separately labeled fresh; independent ASCII branch; no document qualification",
+    "fontMetrics": {
+      "SawarabiGothic": {
+        "rows": 16,
+        "characters": 103,
+        "editErrors": 4,
+        "cer": 0.038834951456310676,
+        "exact": 13,
+        "correctLowConfidence": 0,
+        "wrongHighConfidence": 2,
+        "accepted": 13
+      },
+      "SawarabiMincho": {
+        "rows": 16,
+        "characters": 94,
+        "editErrors": 0,
+        "cer": 0.0,
+        "exact": 16,
+        "correctLowConfidence": 0,
+        "wrongHighConfidence": 0,
+        "accepted": 16
+      },
+      "KleeOne": {
+        "rows": 16,
+        "characters": 83,
+        "editErrors": 4,
+        "cer": 0.04819277108433735,
+        "exact": 12,
+        "correctLowConfidence": 5,
+        "wrongHighConfidence": 1,
+        "accepted": 7
+      },
+      "KaiseiTokumin": {
+        "rows": 16,
+        "characters": 98,
+        "editErrors": 0,
+        "cer": 0.0,
+        "exact": 16,
+        "correctLowConfidence": 1,
+        "wrongHighConfidence": 0,
+        "accepted": 14
+      }
+    },
+    "codeMetrics": {
+      "rows": 64,
+      "characters": 378,
+      "editErrors": 8,
+      "cer": 0.021164021164021163,
+      "exact": 57,
+      "correctLowConfidence": 6,
+      "wrongHighConfidence": 3,
+      "accepted": 50
+    },
+    "monoCodeMetrics": {
+      "rows": 0,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "exact": 0,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0,
+      "accepted": 0
+    },
+    "fontCodeMetrics": {
+      "RedHatMono": {
+        "rows": 0,
+        "characters": 0,
+        "editErrors": 0,
+        "cer": null,
+        "exact": 0,
+        "correctLowConfidence": 0,
+        "wrongHighConfidence": 0,
+        "accepted": 0
+      },
+      "OverpassMono": {
+        "rows": 0,
+        "characters": 0,
+        "editErrors": 0,
+        "cer": null,
+        "exact": 0,
+        "correctLowConfidence": 0,
+        "wrongHighConfidence": 0,
+        "accepted": 0
+      }
+    },
+    "reviewMetrics": {
+      "rows": 64,
+      "characters": 378,
+      "editErrors": 8,
+      "cer": 0.021164021164021163,
+      "exact": 57,
+      "correctLowConfidence": 6,
+      "wrongHighConfidence": 3,
+      "accepted": 50
+    },
+    "allUnsupportedPaddingRefused": true
+  },
+  "evaluatedCheckpointSha256": "1156d01fe612237db59591d18aa58bd04c9562eb83fdf5bc5714faa41b6c7de3",
+  "selectedForDevelopment": false,
+  "noFurtherSelectionOrOptimization": true,
+  "scope": "Consumed training fonts, new literals/mildshear only; not independent fresh credit or document qualification"
+}

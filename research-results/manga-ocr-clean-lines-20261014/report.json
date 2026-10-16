@@ -1,0 +1,81 @@
+{
+  "rawSha256": "62c45b388f1041129fc881b71682841e3d5d56fdf36be8ec850ddcc1bc4d6de1",
+  "groups": {
+    "sans/subject": {
+      "rows": 24,
+      "exact": 12,
+      "correctAboveDiagnosticFloor": 9,
+      "incorrectAboveDiagnosticFloor": 6,
+      "budgetOrNoEos": 0
+    },
+    "sans/teacher": {
+      "rows": 24,
+      "exact": 17,
+      "correctAboveDiagnosticFloor": 16,
+      "incorrectAboveDiagnosticFloor": 5,
+      "budgetOrNoEos": 0
+    },
+    "sans/room": {
+      "rows": 24,
+      "exact": 1,
+      "correctAboveDiagnosticFloor": 1,
+      "incorrectAboveDiagnosticFloor": 8,
+      "budgetOrNoEos": 0
+    },
+    "sans/header": {
+      "rows": 21,
+      "exact": 4,
+      "correctAboveDiagnosticFloor": 0,
+      "incorrectAboveDiagnosticFloor": 1,
+      "budgetOrNoEos": 0
+    },
+    "sans/blank": {
+      "rows": 3,
+      "exact": 0,
+      "correctAboveDiagnosticFloor": 0,
+      "incorrectAboveDiagnosticFloor": 0,
+      "budgetOrNoEos": 0
+    },
+    "serif/subject": {
+      "rows": 24,
+      "exact": 16,
+      "correctAboveDiagnosticFloor": 12,
+      "incorrectAboveDiagnosticFloor": 5,
+      "budgetOrNoEos": 0
+    },
+    "serif/teacher": {
+      "rows": 24,
+      "exact": 19,
+      "correctAboveDiagnosticFloor": 14,
+      "incorrectAboveDiagnosticFloor": 4,
+      "budgetOrNoEos": 0
+    },
+    "serif/room": {
+      "rows": 24,
+      "exact": 2,
+      "correctAboveDiagnosticFloor": 2,
+      "incorrectAboveDiagnosticFloor": 10,
+      "budgetOrNoEos": 0
+    },
+    "serif/header": {
+      "rows": 21,
+      "exact": 6,
+      "correctAboveDiagnosticFloor": 0,
+      "incorrectAboveDiagnosticFloor": 0,
+      "budgetOrNoEos": 0
+    },
+    "serif/blank": {
+      "rows": 3,
+      "exact": 0,
+      "correctAboveDiagnosticFloor": 0,
+      "incorrectAboveDiagnosticFloor": 0,
+      "budgetOrNoEos": 0
+    }
+  },
+  "callsCompleted": 192,
+  "totalInferenceSeconds": 82.46375707801053,
+  "peakRssBytes": 943648768,
+  "qualification": false,
+  "modelActivation": false,
+  "confidence": "Uncalibrated autoregressive beam-path probabilities including EOS, not CTC scores or source ownership"
+}

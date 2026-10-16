@@ -1,0 +1,60 @@
+{
+  "scores": [
+    {
+      "margin": 2,
+      "images": 384,
+      "characters": 3013,
+      "before": {
+        "exact": 287,
+        "edits": 135,
+        "belowNativeFloor": 64,
+        "wrongAboveNativeFloor": 51
+      },
+      "after": {
+        "exact": 292,
+        "edits": 120,
+        "belowNativeFloor": 121,
+        "wrongAboveNativeFloor": 29
+      },
+      "gains": 15,
+      "losses": 10,
+      "changed": 38,
+      "addedPixelReview": 57,
+      "removedPixelReview": 0,
+      "ordinaryBefore": 192,
+      "ordinaryAfter": 189
+    },
+    {
+      "margin": 6,
+      "images": 384,
+      "characters": 3013,
+      "before": {
+        "exact": 269,
+        "edits": 158,
+        "belowNativeFloor": 94,
+        "wrongAboveNativeFloor": 45
+      },
+      "after": {
+        "exact": 257,
+        "edits": 163,
+        "belowNativeFloor": 154,
+        "wrongAboveNativeFloor": 23
+      },
+      "gains": 12,
+      "losses": 24,
+      "changed": 56,
+      "addedPixelReview": 60,
+      "removedPixelReview": 0,
+      "ordinaryBefore": 191,
+      "ordinaryAfter": 189
+    }
+  ],
+  "baselineRoute": "actual-manual-code-route",
+  "defaultRouteIdentityImages": 772,
+  "blankImages": 4,
+  "blankOutputsRemainEmpty": true,
+  "peakWorkingSetBytes": 440057856,
+  "rawSHA256": "6e4d0a1c20393957796139e0eda519153f21dfc13dcff5ddc3de56c0168fd4b1",
+  "baselineSHA256": "f7589ee2b2a2ee768f76d6079c3e4ea985fa6bec94933f74a5df01fad47c8120",
+  "scope": "Fresh fictional strings in observed fonts, isolated recognition only. Extra low-score images need pixel review; these 384 images are not one document and are not compared to the 128-field document cap. No human correction-time or full-document qualification."
+}

@@ -1,0 +1,72 @@
+{
+  "kind": "Timetable",
+  "profile": "blank-values",
+  "schoolYear": 2026,
+  "term": "前期",
+  "classes": [
+    "3_CN"
+  ],
+  "days": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "maxPeriod": 8,
+  "requiredSlots": 40,
+  "lessons": [
+    {
+      "class": "3_CN",
+      "day": "1",
+      "periods": [
+        1
+      ],
+      "subject": "架空科目A",
+      "teacher": "",
+      "room": ""
+    }
+  ],
+  "allOtherSlotsBlank": true,
+  "periodClocks": [],
+  "expectedSafeRejection": false,
+  "pdfFile": "fictional.pdf",
+  "pdfSha256": "d86f56336d6f1b47ab54e6d5ec20bbdcecfc30afbbed13c574430c11520c6fe0",
+  "pages": [
+    {
+      "page": 1,
+      "imageFile": "page-1.png",
+      "imageSha256": "03df02719abc130e8d4e1486e1a03ce6092f860d2700ae6f089dfa8937a0217a",
+      "width": 1024,
+      "height": 200
+    },
+    {
+      "page": 2,
+      "imageFile": "page-2.png",
+      "imageSha256": "ec4820dc9b4078e718ee3ede0f8b91bfcf396d602f6af9ff534e3fe177528f1d",
+      "width": 1024,
+      "height": 200
+    },
+    {
+      "page": 3,
+      "imageFile": "page-3.png",
+      "imageSha256": "139cff199e1c41181ea7f2aea3c6295bdfee31d6e10a6a4e0f35594b756bfeed",
+      "width": 1024,
+      "height": 200
+    },
+    {
+      "page": 4,
+      "imageFile": "page-4.png",
+      "imageSha256": "d0cb4b912ca450843b9eb51ada1a51b271ff9c2276dc400edb5bb2034cf687a2",
+      "width": 1024,
+      "height": 200
+    },
+    {
+      "page": 5,
+      "imageFile": "page-5.png",
+      "imageSha256": "9040aeec9b54026ef7079968e7f249a1d014dc610ef810844f40002f7353b5eb",
+      "width": 1024,
+      "height": 200
+    }
+  ]
+}

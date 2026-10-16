@@ -1,0 +1,24 @@
+{
+  "source": "fce8bb496bd997cf1bb4c48ecb91b222cd00abf8",
+  "run": 38868196099,
+  "job": 116867947524,
+  "installedWindowsUiChecks": [
+    1027,
+    1026,
+    1026,
+    1026,
+    1026,
+    1027
+  ],
+  "node20Warnings": 0,
+  "installedScenarios": [
+    "fresh install",
+    "move installation preserving unrelated files/settings/startup",
+    "same-folder reinstall",
+    "legacy dev5 same-folder update",
+    "legacy dev5 different-folder update",
+    "legacy dev5 update preserving unrelated startup"
+  ],
+  "success": true,
+  "verifiedInstalledUiAndBranding": true
+}

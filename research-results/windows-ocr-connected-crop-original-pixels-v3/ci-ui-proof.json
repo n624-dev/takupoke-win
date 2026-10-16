@@ -1,0 +1,11 @@
+{
+  "runId": 37216822510,
+  "jobId": 111478929817,
+  "sourceCommit": "5810599e751ca28eb30abbc4c37bc4a8e8e5c987",
+  "url": "https://github.com/n624-dev/takupoke-win/actions/runs/37216822510/job/111478929817",
+  "retrievedGhConsoleBytes": 4225487,
+  "retrievedGhConsoleSha256": "0a799a98f2505f22e497b5f208ae2373e3d6864245102553141e8523fb64bc3f",
+  "actualSummaryLine": "WinUI x64 Release build and launch\tCheck native UI navigation and saved settings\t2026-10-04T16:31:03.1197883Z Passed 537 Windows UI checks: hierarchical settings, desktop timetable geometry, raw and OS URI callbacks, fake OIDC verification and three datasets, failure/cancellation recovery, transient footer, persistence, colors, pointer and keyboard operations.",
+  "windowsUiChecksPassed": 537,
+  "scope": "Actual final source native UI navigation checks; not OCR quality or new OCR inference."
+}

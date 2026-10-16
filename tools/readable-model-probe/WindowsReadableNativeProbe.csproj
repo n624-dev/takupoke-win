@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TakupokeRepositoryRoot Condition="'$(TakupokeRepositoryRoot)' == ''">$(MSBuildThisFileDirectory)../../</TakupokeRepositoryRoot><OutputType>Exe</OutputType><TargetFramework>net10.0-windows10.0.26100.0</TargetFramework><RuntimeIdentifier>win-x64</RuntimeIdentifier><EnableWindowsTargeting>true</EnableWindowsTargeting><Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings><WindowsPackageType>None</WindowsPackageType><AppxGeneratePriEnabled>false</AppxGeneratePriEnabled><AppxGeneratePrisForPortableLibrariesEnabled>false</AppxGeneratePrisForPortableLibrariesEnabled></PropertyGroup>
+  <ItemGroup><PackageReference Include="Microsoft.AI.Foundry.Local.WinML" Version="1.2.4"/><PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0"/></ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(TakupokeRepositoryRoot)/tools/model-evaluation/QualificationCorpus.cs" Link="QualificationCorpus.cs" />
+    <ProjectReference Include="$(TakupokeRepositoryRoot)/src/Takupoke.Infrastructure/Takupoke.Infrastructure.csproj" />
+    <None Include="$(TakupokeRepositoryRoot)/tests/Takupoke.Core.Tests/fixtures/recovery-*.json" Link="fixtures/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

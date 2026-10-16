@@ -1,0 +1,257 @@
+{
+  "run": 38839386958,
+  "sourceCommit": "70ba342a9e6ecba7f5aff2febccc593eaea2e320",
+  "annotationsVerified": true,
+  "jobs": [
+    {
+      "id": 116775718611,
+      "name": "checks / Public files and commit identity",
+      "annotations": []
+    },
+    {
+      "id": 116775766397,
+      "name": "checks / Original iOS reference comparison",
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.",
+          "raw_details": ""
+        }
+      ]
+    },
+    {
+      "id": 116775766468,
+      "name": "checks / Core tests (Windows)",
+      "annotations": []
+    },
+    {
+      "id": 116775766477,
+      "name": "checks / Core tests (Linux)",
+      "annotations": []
+    },
+    {
+      "id": 116775766489,
+      "name": "checks / WinUI x64 Release build and launch",
+      "annotations": [
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        },
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        },
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        },
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        }
+      ]
+    },
+    {
+      "id": 116775766511,
+      "name": "checks / WinUI x64 Debug build",
+      "annotations": [
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        },
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        },
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        },
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        }
+      ]
+    },
+    {
+      "id": 116775766530,
+      "name": "checks / WinUI ARM64 Release build",
+      "annotations": [
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        },
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        },
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        },
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        }
+      ]
+    },
+    {
+      "id": 116777090914,
+      "name": "Build and test downloadable installers",
+      "annotations": [
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        },
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        },
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        },
+        {
+          "path": "src/Takupoke.Win/MainWindow.Data.cs",
+          "blob_href": "https://github.com/n624-dev/takupoke-win/blob/70ba342a9e6ecba7f5aff2febccc593eaea2e320/src/Takupoke.Win/MainWindow.Data.cs",
+          "start_line": 9,
+          "start_column": 7,
+          "end_line": 9,
+          "end_column": 7,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "The using directive for 'Takupoke.Infrastructure.Parsing' appeared previously in this namespace",
+          "raw_details": ""
+        }
+      ]
+    }
+  ],
+  "node20WarningCount": 0
+}

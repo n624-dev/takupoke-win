@@ -1,0 +1,47 @@
+{
+  "scope": "Post-inference read-only identity audit; no selection/training/output repair",
+  "freshRows": 496,
+  "oldAndTrainDevRootOracleOverlaps": {
+    "literal": [],
+    "png": [],
+    "normalizedInput": []
+  },
+  "freshInternalNormalizedInputDuplicates": [
+    {
+      "ids": [
+        "fresh-00451",
+        "fresh-00463"
+      ],
+      "kinds": [
+        "blank",
+        "blank"
+      ],
+      "positiveLabels": []
+    },
+    {
+      "ids": [
+        "fresh-00452",
+        "fresh-00454"
+      ],
+      "kinds": [
+        "blank",
+        "blank"
+      ],
+      "positiveLabels": []
+    },
+    {
+      "ids": [
+        "fresh-00457",
+        "fresh-00459"
+      ],
+      "kinds": [
+        "blank",
+        "blank"
+      ],
+      "positiveLabels": []
+    }
+  ],
+  "freshPositiveInputContradictions": 0,
+  "passedExternalDisjointness": true,
+  "freshManifestSha256": "e53bbedf898457ce7e470a7cb8a4c9e9b60c855f3df4e937b7f7db9dd707b048"
+}

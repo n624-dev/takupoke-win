@@ -1,0 +1,11 @@
+{
+  "processors": [
+    {
+      "Name": "AMD EPYC 9V74 80-Core Processor                ",
+      "NumberOfCores": 2,
+      "NumberOfLogicalProcessors": 4
+    }
+  ],
+  "sourceCommit": "c3bed2e6eae32f68b1f90fb5c944a1ed8a98d223",
+  "physicalMemoryBytes": 17174360064
+}

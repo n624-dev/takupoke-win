@@ -1,0 +1,467 @@
+{
+  "protocol": {
+    "namespace": "research-ascii-english-v5-confusion-v2",
+    "basis": "Independent unmodified official HF PPOCRV5MobileRecForTextRecognition/config/safetensors revision e4abce2bbd335f6c3eda0507b7f8e8abd5af3419. Old strict ONNX transplant remains failed; no nativeONNX identity/transplant claim. No epsilon replacement/fusedDAG replacement.",
+    "dictionary": "Full438 original dictionary/blank0/space final437 retained; all95ASCII present. No vocabulary probability renormalization/class whitelist/output repair.",
+    "parameters": "All officialCNN/encoder/full438classifier weights and affine params (5,510,778) train + reject121. Original architecture/config and norm epsilon stay unchanged. BNrunningstats frozen by evalmode for all optimization forwards; eval does not disable gradients. Japaneseprimary untouched/independentASCIIbranch only.",
+    "train": {
+      "seed": 106531,
+      "fonts": [
+        "IBMPlexMono",
+        "Inconsolata",
+        "FiraMono",
+        "SpaceMono",
+        "CrimsonText",
+        "LibreBaskerville",
+        "Lora",
+        "Alegreya"
+      ],
+      "positiveCounts": {
+        "code": 192,
+        "lookalike": 128,
+        "natural": 384,
+        "printable": 64
+      },
+      "negativeCounts": {
+        "clipped": 16,
+        "interior_damage": 16,
+        "multiline": 16,
+        "noise": 16,
+        "blank": 16,
+        "unknown_cjk": 16,
+        "unknown_mixed": 16
+      }
+    },
+    "development": {
+      "seed": 106541,
+      "fonts": [
+        "RedHatMono",
+        "OverpassMono",
+        "SourceSerif4",
+        "Literata"
+      ],
+      "positiveCounts": {
+        "code": 96,
+        "lookalike": 64,
+        "natural": 192,
+        "printable": 32
+      },
+      "negativeCounts": {
+        "clipped": 16,
+        "interior_damage": 16,
+        "multiline": 16,
+        "noise": 16,
+        "blank": 16,
+        "unknown_cjk": 16,
+        "unknown_mixed": 16
+      }
+    },
+    "fontExposure": "Train only previous train8 fonts; newdev/newfresh Latin families; 50% natural retention. All old literals/images excluded.",
+    "fontBalance": "Each positivegroup equal perfont; 4mono+4proportional train /2mono+2proportional dev. cmapcheck everyrenderedtarget; unknownCJK/mixed negativeonly uses designated CJKfont, not Latin fallback.",
+    "data": "New arbitrary ASCII and natural 2-5-word sentences/fragments with casing/spacing/punctuation; half positives natural, 40percent code/lookalike, 10percent printable. Fresh seeds/literals; previous corpora only exclusion. Paired code/case and confusables samefont/renderseed. CJK/wholemixed unknown negatives never split.",
+    "preprocessing": "All suppliedRGBink bbox+2originalpx/commonbaseline/relativeheight/internalgaps; nativeFP32BGR48 sampler centerbilinear/uint8round/zero-normalizedpadding width320..960, validWidth/sourceRect preserved. NoFP16. This fixes input condition for independentHFbasis and does not assert officialHFImageProcessor or Windowsbyteparity.",
+    "cache": "Lossless FP32 tensor/features/full438 probabilities from active teacher; no giant feature cache; old caches preserved.",
+    "selfConsistencyNewDevGate": "Before optimizer everynewdev storedofficialbaseline vs initializedsameofficialAdapter exactFP32feature/probability byte equality and text/interval/floor/ASCII/validWidthdecision equality. Halt iffail.",
+    "contradictionAudit": "ExactprovidedPNG/FP32input with differentpositive target or positive-vs-negative conflict ->excludeallconflictingtrainrows from everyupdate, no targetrepair/falsedamage label. Dev unchanged. CTClength<=nativeframes.",
+    "training": {
+      "seed": 106561,
+      "threads": 2,
+      "batchSize": 2,
+      "epochs": 2,
+      "evaluateEpochs": [
+        1,
+        2
+      ],
+      "cnnLearningRate": 3e-06,
+      "encoderLearningRate": 1e-05,
+      "headLearningRate": 3e-05,
+      "rejectLearningRate": 0.0001,
+      "teacherKlWeight": 0.8,
+      "teacherFeatureMseWeight": 0.02,
+      "rejectBceWeight": 0.5,
+      "weightDecay": 0.0001,
+      "gradientClip": 5.0,
+      "maximumTrainingSeconds": 1800,
+      "maximumCacheSeconds": 1800,
+      "maximumRssMiB": 4096,
+      "additionalDiskBudgetGiB": 1.0,
+      "minimumFreeDiskGiB": 1.5
+    },
+    "loss": "Full438CTC on intactpositives/emptyblank; fullteacherKL+teacherfeatureMSE on allsamples; BCEreject on allsamples. Damage/multiline/noise/CJK/mixed receive no guessedCTClabel.",
+    "batching": "ExactFP32inputWidthbucket, no new image/temporalpadding/noattentionmask. Original outputT centers scaledbyinputWidth/validWidth onlydefine rejectmean; CTCSourceBox interval end pastvalidWidth alwaysrefused.",
+    "acceptance": "Baseline/trainednonempty/alltextprintableASCII/minemittedCTCconfidence>=.8/nointervalpastvalidWidth; trainedalso rejectProbability<=.05. Uncalibrateddiagnostic only; outputASCII cannotprove inputsource/domain.",
+    "selection": "Active fallback included. Eligible if whole CER strictly improves, code/lookalike CER <=.95*active, natural CER <=active+.002, wrongAccepted<=active+2, negativeAccepted<=active+2, allUnsupportedPaddingRefused. Rank wholeCER/codeCER/-exact/epoch. No zero-error gate.",
+    "continuationGate": "Fresh independent assessment after selectedhash frozen. No parameter/threshold/checkpoint change after fresh. Parent product decision.",
+    "sourceProof": "Oldconsumed64samepixelscriptalias/missingprefixcontrols onlypostselection, never train/choose/final. Sourcecompleteness/script/cellgeometry provenance remains independent.",
+    "final": "New fonts SplineSansMono/MartianMono/Newsreader/Fraunces fresh496 after selection; no Sawarabi/KleeOne/KaiseiTokumin use. Japanese primary unchanged; no iOS edits/activation/publication.",
+    "initialization": "font-balanced epoch4 SHA7313bee5dabf17998010c6f47844fe80649744b03c0366af05c627fc47314547; teacher same active selected official438 weights; active ONNX SHA9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703",
+    "fresh": {
+      "seed": 106591,
+      "fonts": [
+        "SplineSansMono",
+        "MartianMono",
+        "Newsreader",
+        "Fraunces"
+      ],
+      "positiveCounts": {
+        "code": 96,
+        "lookalike": 64,
+        "natural": 192,
+        "printable": 32
+      },
+      "negativeCounts": {
+        "clipped": 16,
+        "interior_damage": 16,
+        "multiline": 16,
+        "noise": 16,
+        "blank": 16,
+        "unknown_cjk": 16,
+        "unknown_mixed": 16
+      }
+    }
+  },
+  "protocolSha256": "47924ed9a3a0f53275442ff11b9f37d6006572940ea388207ed20769b511dd5b",
+  "sources": {
+    "data.py": "74672b953b27a00f10066f10c778d21a6f630b13d02e5bc496e947a0bbae4da9",
+    "model.py": "499be516a853d5396c6bc44aaae20811510d4f79542c19e3071b4636155cc573",
+    "train.py": "0378581afde50afb02722321e03f393869be8b001d487cdec41fa223adb4f9dd",
+    "adapter.py": "563a8734c3b5830d8bc8f5742c9eca772bd8c889976cb188e97216a1651fa697",
+    "download_fonts.py": "54494dda6b37c486dd8a408ee3bc270d342eda9a7a6b32ee01013f17505a6fc2"
+  },
+  "fontHashes": {
+    "IBMPlexMono": "0999682c7625d3cfbc3f738dc5d72946f5463653c32c1fd15b5dd1ce16924958",
+    "Inconsolata": "dd9cd4b73c413b1ea316cf431b234e7ec992d6ca8a35b796c02cb8a04881f7ce",
+    "FiraMono": "bbb4b5b5f42273547250df8a38a7120d6e09b81bebab3342c59aa93526447ffd",
+    "SpaceMono": "9f69849cea853c9d9493bf1af6d5311a7f8a5f7baf84c6ac44abd6b370ed7fe8",
+    "CrimsonText": "79e8efa2151d6e5f9d6390e28ed74b0f731014589410821e3ef7c02d0a996939",
+    "LibreBaskerville": "b866c047482768c14688ae79bae5e248ceed7a8313d385efa512166747b02884",
+    "Lora": "66f89eaf0b220e3a3196456b0daa4fdd2f2b81942aec2bcc1528f4c7f132968a",
+    "Alegreya": "e7726c1c75d746d38d5d84dddfea1013f09b529926ad9bedb697c8df5dbbeac4",
+    "RedHatMono": "742f970434917561d84fa057d56f803ca97cdb1c69b997f04365c91c19578a00",
+    "OverpassMono": "97d479019c06bf7b0d7a3974bf68a5b116a91f8204dc42fc7f709caa96357d26",
+    "SourceSerif4": "aaebccd72e145f2c3befa72f49b5283c5f1dfea821eb1e727232545727d55bc0",
+    "Literata": "e78ca0bb62257b54021e96ea13f11b65f97f20e7716ebfa213f5241bb9e5d7a9",
+    "SplineSansMono": "0b5feaa2e46cf75db715af845fdd6410c3e8ee774156891f755e00ff83612c77",
+    "MartianMono": "eb482db4c711cf46dc250f193e96498a530960e882776fa0cdc1b0b9d0880203",
+    "Newsreader": "b303d063781c50c34ee81b3fe7b194d6b2fb7216cc26a278792b018fcdfc483f",
+    "Fraunces": "58562d845da603f38c5c47d61cefc4e911f2720714827ae5441c8dd39c6f733a",
+    "NotoSansJP400": "54aba28468f275bc372eda5f29b202c0d9e7b9ba2bc18a53a4c72c481c75cf9f",
+    "NotoSerifJP400": "2b127545ad3dba023d255733015059e550d9dbcd04c980a80021dc8ea666e813"
+  },
+  "newFontReceipt": {
+    "repository": "google/fonts",
+    "revision": "94301472b4d809299b4775bc6502592b83dd6934",
+    "files": {
+      "RedHatMono": {
+        "url": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/redhatmono/RedHatMono%5Bwght%5D.ttf",
+        "originalSha256": "253377ac29ccce89cb1b5fb297c69812ffe993b0c436322b3656323ff30fd14f",
+        "staticAxes": {
+          "wght": 400
+        },
+        "bytes": 35100,
+        "sha256": "742f970434917561d84fa057d56f803ca97cdb1c69b997f04365c91c19578a00",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/redhatmono/OFL.txt",
+        "licenseSha256": "435fbfb7e66988b2a06686a4cb966faec733f35d8fe100a1601573c27f3e0bb8"
+      },
+      "OverpassMono": {
+        "url": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/overpassmono/OverpassMono%5Bwght%5D.ttf",
+        "originalSha256": "49f230e10251608f0ae1a2ce46be768d7b9ddcbe5cdca2e9f6b762fcbce1ae4f",
+        "staticAxes": {
+          "wght": 400
+        },
+        "bytes": 180932,
+        "sha256": "97d479019c06bf7b0d7a3974bf68a5b116a91f8204dc42fc7f709caa96357d26",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/overpassmono/OFL.txt",
+        "licenseSha256": "86e5ff25c701ec446d20b1a85b02ee6d36de8503a7288a4c948f5459809af1f0"
+      },
+      "SourceSerif4": {
+        "url": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/sourceserif4/SourceSerif4%5Bopsz%2Cwght%5D.ttf",
+        "originalSha256": "97b2d4da6e3cb494b5a1e66ae176914d852ccabef49e0c02c0df25f3e39aca0b",
+        "staticAxes": {
+          "wght": 400,
+          "opsz": 20.0
+        },
+        "bytes": 330284,
+        "sha256": "aaebccd72e145f2c3befa72f49b5283c5f1dfea821eb1e727232545727d55bc0",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/sourceserif4/OFL.txt",
+        "licenseSha256": "5f94c3fd3a23131a417ab5a0c8452de57e70c3cfb9f604d88241f7065ebf9fd9"
+      },
+      "Literata": {
+        "url": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/literata/Literata%5Bopsz%2Cwght%5D.ttf",
+        "originalSha256": "b41138c9373112f32abb589cc22e8674b06ed4048b0c513be922bdd26f274440",
+        "staticAxes": {
+          "opsz": 12.0,
+          "wght": 400
+        },
+        "bytes": 270788,
+        "sha256": "e78ca0bb62257b54021e96ea13f11b65f97f20e7716ebfa213f5241bb9e5d7a9",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/literata/OFL.txt",
+        "licenseSha256": "8742963604cd89dc81437811a850018fc03b2bfad686d7422c8235967c87614e"
+      },
+      "SplineSansMono": {
+        "url": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/splinesansmono/SplineSansMono%5Bwght%5D.ttf",
+        "originalSha256": "e20c1df32aa2f886e828cfcc81ca5c405d3f3b160990f6b892923e2e449bf525",
+        "staticAxes": {
+          "wght": 400
+        },
+        "bytes": 50960,
+        "sha256": "0b5feaa2e46cf75db715af845fdd6410c3e8ee774156891f755e00ff83612c77",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/splinesansmono/OFL.txt",
+        "licenseSha256": "4abb88162e4c0c5f9fc6c2f15d7085f7b7e27fd89f541a13488e1bcb829bde3f"
+      },
+      "MartianMono": {
+        "url": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/martianmono/MartianMono%5Bwdth%2Cwght%5D.ttf",
+        "originalSha256": "c3467843ec1c2574b05fbcfd7147c7bfbcf63ddca8fc2bcb9d117f1bfb1b22e7",
+        "staticAxes": {
+          "wght": 400,
+          "wdth": 112.5
+        },
+        "bytes": 49272,
+        "sha256": "eb482db4c711cf46dc250f193e96498a530960e882776fa0cdc1b0b9d0880203",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/martianmono/OFL.txt",
+        "licenseSha256": "ddafd2c3f37ef1d83ef284ca63e159befd3820850c5e9eded14ca52eee92c256"
+      },
+      "Newsreader": {
+        "url": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/newsreader/Newsreader%5Bopsz%2Cwght%5D.ttf",
+        "originalSha256": "8a08d13f8a6c0d51be379a60af84f945f65369a67e509ee3c3bdcc421254d7c1",
+        "staticAxes": {
+          "wght": 400,
+          "opsz": 18.0
+        },
+        "bytes": 118144,
+        "sha256": "b303d063781c50c34ee81b3fe7b194d6b2fb7216cc26a278792b018fcdfc483f",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/newsreader/OFL.txt",
+        "licenseSha256": "fdfad38143ec470553cae82a1e45320bdd1b9ec70415d37bd0171051d8a4ded8"
+      },
+      "Fraunces": {
+        "url": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/fraunces/Fraunces%5BSOFT%2CWONK%2Copsz%2Cwght%5D.ttf",
+        "originalSha256": "177ff6c0f14e5550a3c624247cd1189611d4eb65d000b14944c63d967958abbb",
+        "staticAxes": {
+          "opsz": 9.0,
+          "wght": 400,
+          "SOFT": 0.0,
+          "WONK": 1.0
+        },
+        "bytes": 72992,
+        "sha256": "58562d845da603f38c5c47d61cefc4e911f2720714827ae5441c8dd39c6f733a",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/fraunces/OFL.txt",
+        "licenseSha256": "bdf4c22802eaf804f998195871c6b8938aac2ac14b2d78a8bd66a6f1eced833b"
+      }
+    }
+  },
+  "preprocessSha256": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098",
+  "initialStateSha256": "7313bee5dabf17998010c6f47844fe80649744b03c0366af05c627fc47314547",
+  "japanesePrimarySha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba",
+  "trainableParameters": 5510899,
+  "officialConfig": {
+    "transformers_version": "5.19.0",
+    "architectures": null,
+    "output_hidden_states": false,
+    "return_dict": true,
+    "dtype": "float32",
+    "chunk_size_feed_forward": 0,
+    "is_encoder_decoder": false,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "problem_type": null,
+    "hidden_act": "silu",
+    "backbone_config": {
+      "architectures": null,
+      "output_hidden_states": false,
+      "return_dict": true,
+      "dtype": "float32",
+      "chunk_size_feed_forward": 0,
+      "is_encoder_decoder": false,
+      "id2label": {
+        "0": "LABEL_0",
+        "1": "LABEL_1"
+      },
+      "label2id": {
+        "LABEL_0": 0,
+        "LABEL_1": 1
+      },
+      "problem_type": null,
+      "scale": 0.95,
+      "block_configs": [
+        [
+          [
+            3,
+            16,
+            32,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            3,
+            32,
+            64,
+            1,
+            false
+          ],
+          [
+            3,
+            64,
+            64,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            3,
+            64,
+            128,
+            [
+              2,
+              1
+            ],
+            false
+          ],
+          [
+            3,
+            128,
+            128,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            3,
+            128,
+            256,
+            [
+              1,
+              2
+            ],
+            false
+          ],
+          [
+            5,
+            256,
+            256,
+            1,
+            false
+          ],
+          [
+            5,
+            256,
+            256,
+            1,
+            false
+          ],
+          [
+            5,
+            256,
+            256,
+            1,
+            false
+          ],
+          [
+            5,
+            256,
+            256,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            5,
+            256,
+            512,
+            [
+              2,
+              1
+            ],
+            true
+          ],
+          [
+            5,
+            512,
+            512,
+            1,
+            true
+          ],
+          [
+            5,
+            512,
+            512,
+            [
+              2,
+              1
+            ],
+            false
+          ],
+          [
+            5,
+            512,
+            512,
+            1,
+            false
+          ]
+        ]
+      ],
+      "stem_channels": 16,
+      "stem_stride": 2,
+      "reduction": 4,
+      "divisor": 16,
+      "hidden_act": "hardswish",
+      "conv_symmetric_num": 4,
+      "depths": [
+        1,
+        2,
+        2,
+        5,
+        4
+      ],
+      "stage_names": [
+        "stem",
+        "stage1",
+        "stage2",
+        "stage3",
+        "stage4",
+        "stage5"
+      ],
+      "_name_or_path": "",
+      "model_type": "pp_lcnet_v3",
+      "output_attentions": false,
+      "out_features": [
+        "stage2",
+        "stage3",
+        "stage4",
+        "stage5"
+      ],
+      "out_indices": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "hidden_size": 120,
+    "mlp_ratio": 2.0,
+    "depth": 2,
+    "head_out_channels": 438,
+    "conv_kernel_size": [
+      1,
+      3
+    ],
+    "qkv_bias": true,
+    "num_attention_heads": 8,
+    "attention_dropout": 0.0,
+    "layer_norm_eps": 1e-06,
+    "_name_or_path": "/workspace/scratch/ascii-english-v5-transfer-20261014-v1/assets",
+    "model_type": "pp_ocrv5_mobile_rec",
+    "output_attentions": false
+  },
+  "freshOpened": false
+}

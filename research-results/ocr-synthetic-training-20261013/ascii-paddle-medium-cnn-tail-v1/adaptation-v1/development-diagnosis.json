@@ -1,0 +1,197 @@
+{
+  "scope": "Completed independent-development saved-output diagnosis only; no inference repair/heldoutfinal/production qualification",
+  "conditions": [
+    {
+      "name": "original",
+      "fonts": {
+        "KosugiMaru-Regular": {
+          "positive": 192,
+          "exact": 94,
+          "correctAccepted": 76,
+          "incorrectAccepted": 49
+        },
+        "ZenAntique-Regular": {
+          "positive": 192,
+          "exact": 134,
+          "correctAccepted": 99,
+          "incorrectAccepted": 15
+        }
+      },
+      "improvementsVsOriginal": 0,
+      "regressionsVsOriginal": 0,
+      "japaneseRetentionRegressions": 0,
+      "maximumWrongAcceptedConfidence": 0.9998492002487183,
+      "wrongAcceptedIds": [
+        "development-00000",
+        "development-00001",
+        "development-00009",
+        "development-00012",
+        "development-00013",
+        "development-00020",
+        "development-00032",
+        "development-00040",
+        "development-00041",
+        "development-00044",
+        "development-00045",
+        "development-00048",
+        "development-00049",
+        "development-00050",
+        "development-00051",
+        "development-00063",
+        "development-00073",
+        "development-00080",
+        "development-00081",
+        "development-00082",
+        "development-00086",
+        "development-00087",
+        "development-00088",
+        "development-00102",
+        "development-00104",
+        "development-00105",
+        "development-00109",
+        "development-00116",
+        "development-00117",
+        "development-00118",
+        "development-00119",
+        "development-00124",
+        "development-00125",
+        "development-00132",
+        "development-00133",
+        "development-00140",
+        "development-00141",
+        "development-00142",
+        "development-00144",
+        "development-00145",
+        "development-00156",
+        "development-00157",
+        "development-00160",
+        "development-00161",
+        "development-00162",
+        "development-00163",
+        "development-00180",
+        "development-00181",
+        "development-00201",
+        "development-00204",
+        "development-00205",
+        "development-00208",
+        "development-00209",
+        "development-00224",
+        "development-00225",
+        "development-00226",
+        "development-00240",
+        "development-00241",
+        "development-00250",
+        "development-00251",
+        "development-00252",
+        "development-00253",
+        "development-00260",
+        "development-00316"
+      ]
+    },
+    {
+      "name": "epoch-2",
+      "fonts": {
+        "KosugiMaru-Regular": {
+          "positive": 192,
+          "exact": 93,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0
+        },
+        "ZenAntique-Regular": {
+          "positive": 192,
+          "exact": 146,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0
+        }
+      },
+      "improvementsVsOriginal": 19,
+      "regressionsVsOriginal": 8,
+      "japaneseRetentionRegressions": 0,
+      "maximumWrongAcceptedConfidence": null,
+      "wrongAcceptedIds": []
+    },
+    {
+      "name": "epoch-4",
+      "fonts": {
+        "KosugiMaru-Regular": {
+          "positive": 192,
+          "exact": 91,
+          "correctAccepted": 21,
+          "incorrectAccepted": 12
+        },
+        "ZenAntique-Regular": {
+          "positive": 192,
+          "exact": 146,
+          "correctAccepted": 50,
+          "incorrectAccepted": 1
+        }
+      },
+      "improvementsVsOriginal": 25,
+      "regressionsVsOriginal": 16,
+      "japaneseRetentionRegressions": 0,
+      "maximumWrongAcceptedConfidence": 0.9945540428161621,
+      "wrongAcceptedIds": [
+        "development-00132",
+        "development-00133",
+        "development-00172",
+        "development-00173",
+        "development-00185",
+        "development-00200",
+        "development-00201",
+        "development-00210",
+        "development-00216",
+        "development-00217",
+        "development-00252",
+        "development-00253",
+        "development-00260"
+      ]
+    },
+    {
+      "name": "epoch-8",
+      "fonts": {
+        "KosugiMaru-Regular": {
+          "positive": 192,
+          "exact": 94,
+          "correctAccepted": 22,
+          "incorrectAccepted": 13
+        },
+        "ZenAntique-Regular": {
+          "positive": 192,
+          "exact": 146,
+          "correctAccepted": 59,
+          "incorrectAccepted": 1
+        }
+      },
+      "improvementsVsOriginal": 33,
+      "regressionsVsOriginal": 21,
+      "japaneseRetentionRegressions": 0,
+      "maximumWrongAcceptedConfidence": 0.9945951104164124,
+      "wrongAcceptedIds": [
+        "development-00132",
+        "development-00133",
+        "development-00172",
+        "development-00173",
+        "development-00178",
+        "development-00200",
+        "development-00201",
+        "development-00204",
+        "development-00216",
+        "development-00220",
+        "development-00221",
+        "development-00252",
+        "development-00253",
+        "development-00260"
+      ]
+    }
+  ],
+  "continuationGate": {
+    "selectedTrained": false,
+    "rawExactAtLeast97percent": false,
+    "correctAcceptedAtLeast90percent": false,
+    "wrongAcceptedZero": false,
+    "negativeAcceptedZero": false,
+    "eachFontRawExactAtLeast95percent": false,
+    "japaneseRetentionRegressionsZero": true
+  },
+  "mayPlanSeparateFinalAndPortableStage": false
+}

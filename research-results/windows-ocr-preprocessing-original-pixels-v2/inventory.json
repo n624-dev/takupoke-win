@@ -1,0 +1,70 @@
+{
+  "files": [
+    {
+      "path": "IndependentFormalOracle.cs.txt",
+      "bytes": 3326,
+      "sha256": "5efb5d12e238ff9ca4929dec22da6c45702bc62029d1a303baf22efc6604e774"
+    },
+    {
+      "path": "Probe.csproj.txt",
+      "bytes": 376,
+      "sha256": "61176b5b34c9c1c8d3c8d8144390118b27b3f888eec6eb9b50518b7bc55c29b8"
+    },
+    {
+      "path": "Program.cs.txt",
+      "bytes": 12005,
+      "sha256": "60924d259fc49f1d6a3e38bc480227aa5d80f442ec6dce10aee1b326909edbd4"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3589,
+      "sha256": "76e9f2e5905cc9248028cf6aac74eeba5f275c8eba09a205dac7c588b277d9df"
+    },
+    {
+      "path": "inputs.json",
+      "bytes": 5702,
+      "sha256": "aa81abc1a6d5bc4c2d0f3dad55191432683201108394cc91de286483abf841da"
+    },
+    {
+      "path": "native-console.json",
+      "bytes": 114780,
+      "sha256": "091128c3b6f1dd9160227ea27213888e0cb8ea4f8a7c19c5bd442bd94fb6a9c6"
+    },
+    {
+      "path": "native-results.json",
+      "bytes": 79106,
+      "sha256": "7f51f4999c5941a7646a99548076b891ba5a6df415d8be679df89a1e0053736f"
+    },
+    {
+      "path": "posthoc-coverage.json",
+      "bytes": 7168,
+      "sha256": "3ace79c594720541c8b8121534c881d5f36ddc0c26c518eaf501460a04ece78b"
+    },
+    {
+      "path": "posthoc-coverage.py",
+      "bytes": 3083,
+      "sha256": "fe7ea7c2f504aa86e6a4b9a34050478b8e461ccff6dffeb6434ff0c083e8e00f"
+    },
+    {
+      "path": "prepare.py",
+      "bytes": 2905,
+      "sha256": "5c3c257ec8fea2bd00ab3fd5e64253ced295ad29898a7c586fe5577882261505"
+    },
+    {
+      "path": "recipe.json",
+      "bytes": 2691,
+      "sha256": "90a789ca7c5e1a57798a830095eec90fc6addb7918858b1ae2b588d91c5d7657"
+    },
+    {
+      "path": "run-receipt.json",
+      "bytes": 5327,
+      "sha256": "f7463a7c47c8515c607ab638759f07b55290d6efad3771aec0e038ef4ab7424d"
+    },
+    {
+      "path": "windows-app-dependencies.json",
+      "bytes": 1040,
+      "sha256": "02bcb41c8af83430fb40ed2aa820e8b280d08be32ee478ba2d5061caf8a77f4e"
+    }
+  ],
+  "nativeInferenceAdditionalToRecordedRun": 0
+}

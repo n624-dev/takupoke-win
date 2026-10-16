@@ -11,6 +11,25 @@ public sealed class ChangeRowReaderTests
     private static readonly XNamespace Ns = FictionalChangeWorkbook.Namespace;
 
     [Fact]
+    public void WeekdayCorrectionCannotSilentlyExcludeRowsAndExplicitExclusionPreservesRemainingText()
+    {
+        var bytes = FictionalChangeWorkbook.Create();
+        Assert.Equal(ChangeErrorCode.WeekdayOnly, Assert.Throws<ChangeParseException>(() =>
+            XlsxChangeReader.Parse(bytes, 2032, dateDerivedWeekdays: true)).Code);
+        var changes = XlsxChangeReader.Parse(bytes, 2032, dateDerivedWeekdays: true,
+            skippingRows: new HashSet<int> { 4 });
+        Assert.Equal(["架空科目A", "架空除外科目B", "架空科目C"], changes.Select(change => change.AfterSubject));
+        Assert.Equal(["2032-07-10", "2032-07-11", "2032-07-12"], changes.Select(change => change.ChangeDate));
+        var warnings = XlsxChangeReader.ReadForPreview(bytes, 2032).Warnings;
+        Assert.Equal([ChangeErrorCode.WeekdayMismatch, ChangeErrorCode.WeekdayOnly], warnings.Select(w => w.Code));
+        Assert.Equal("月", warnings[0].PrintedWeekday);
+        Assert.Equal("日", warnings[0].CalculatedWeekday);
+        Assert.Equal(ChangeErrorCode.Unsupported, Assert.Throws<ChangeParseException>(() =>
+            XlsxChangeReader.Parse(bytes, 2032, dateDerivedWeekdays: true,
+                skippingRows: new HashSet<int> { 2, 4 })).Code);
+    }
+
+    [Fact]
     public void IdenticalWeekdayTailGroupsPhysicalRowsButStillRequiresFullExplicitConsent()
     {
         var bytes = FictionalChangeWorkbook.WithWeekdayTail();

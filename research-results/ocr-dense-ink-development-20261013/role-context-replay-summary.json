@@ -1,0 +1,158 @@
+{
+  "recipe": "consumed-original-ctc-role-context-no-inference-replay-v1",
+  "rawSourceSHA256": "f4606f40ab90a954f9db1e7c24277ab4ec39f09754b12cbfc646eacd056f86e8",
+  "replayRawSHA256": "01343d1a54e5861c3b37aefc7e35b991977dfd8622bbbe4fca07d882b5d62102",
+  "replayRawBytes": 56471156,
+  "builderSHA256": "6622945599f8a3d62f7ac983b898fa8c8304be4ef4b5b9f70ed139c74e5621b7",
+  "fullRawRetainedLocally": true,
+  "newDocumentCredit": 0,
+  "qualification": false,
+  "observations": [
+    {
+      "id": "d0-positive",
+      "condition": "production",
+      "outcome": "pipeline-refused",
+      "stage": "Pixels",
+      "failure": "Source acquisition was incomplete.",
+      "nativeCalls": 0,
+      "manualCorrections": 0,
+      "cells": null,
+      "roleScopeCounts": {},
+      "formalReturned": false,
+      "lowConfidenceSources": null
+    },
+    {
+      "id": "d0-positive",
+      "condition": "physical-input-frame",
+      "outcome": "pipeline-refused",
+      "stage": "Pixels",
+      "failure": "Source acquisition was incomplete.",
+      "nativeCalls": 0,
+      "manualCorrections": 0,
+      "cells": null,
+      "roleScopeCounts": {},
+      "formalReturned": false,
+      "lowConfidenceSources": null
+    },
+    {
+      "id": "d0-positive",
+      "condition": "ink-input-frame",
+      "outcome": "engine-refused",
+      "stage": "Engine",
+      "failure": "humanUnresolved",
+      "nativeCalls": 0,
+      "manualCorrections": 0,
+      "cells": 680,
+      "roleScopeCounts": {
+        "3": 680
+      },
+      "formalReturned": false,
+      "lowConfidenceSources": 529
+    },
+    {
+      "id": "d0-missing-day",
+      "condition": "ink-input-frame",
+      "outcome": "engine-refused",
+      "stage": "Engine",
+      "failure": "weekdays,unclassifiedSource",
+      "nativeCalls": 0,
+      "manualCorrections": 0,
+      "cells": 544,
+      "roleScopeCounts": {
+        "3": 544
+      },
+      "formalReturned": false,
+      "lowConfidenceSources": 529
+    },
+    {
+      "id": "d0-noncanonical-class",
+      "condition": "ink-input-frame",
+      "outcome": "engine-refused",
+      "stage": "Engine",
+      "failure": "unclassifiedSource",
+      "nativeCalls": 0,
+      "manualCorrections": 0,
+      "cells": 640,
+      "roleScopeCounts": {
+        "3": 640
+      },
+      "formalReturned": false,
+      "lowConfidenceSources": 529
+    },
+    {
+      "id": "d1-positive",
+      "condition": "production",
+      "outcome": "engine-refused",
+      "stage": "Engine",
+      "failure": "unclassifiedSource,dayBinding",
+      "nativeCalls": 0,
+      "manualCorrections": 0,
+      "cells": 560,
+      "roleScopeCounts": {
+        "3": 560
+      },
+      "formalReturned": false,
+      "lowConfidenceSources": 348
+    },
+    {
+      "id": "d1-positive",
+      "condition": "physical-input-frame",
+      "outcome": "engine-refused",
+      "stage": "Engine",
+      "failure": "unclassifiedSource",
+      "nativeCalls": 0,
+      "manualCorrections": 0,
+      "cells": 560,
+      "roleScopeCounts": {
+        "3": 560
+      },
+      "formalReturned": false,
+      "lowConfidenceSources": 348
+    },
+    {
+      "id": "d1-positive",
+      "condition": "ink-input-frame",
+      "outcome": "engine-refused",
+      "stage": "Engine",
+      "failure": "humanUnresolved",
+      "nativeCalls": 0,
+      "manualCorrections": 0,
+      "cells": 680,
+      "roleScopeCounts": {
+        "3": 680
+      },
+      "formalReturned": false,
+      "lowConfidenceSources": 306
+    },
+    {
+      "id": "d1-missing-day",
+      "condition": "ink-input-frame",
+      "outcome": "engine-refused",
+      "stage": "Engine",
+      "failure": "weekdays,unclassifiedSource",
+      "nativeCalls": 0,
+      "manualCorrections": 0,
+      "cells": 544,
+      "roleScopeCounts": {
+        "3": 544
+      },
+      "formalReturned": false,
+      "lowConfidenceSources": 306
+    },
+    {
+      "id": "d1-noncanonical-class",
+      "condition": "ink-input-frame",
+      "outcome": "engine-refused",
+      "stage": "Engine",
+      "failure": "humanUnresolved",
+      "nativeCalls": 0,
+      "manualCorrections": 0,
+      "cells": 680,
+      "roleScopeCounts": {
+        "3": 680
+      },
+      "formalReturned": false,
+      "lowConfidenceSources": 311
+    }
+  ]
+}

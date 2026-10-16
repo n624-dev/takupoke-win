@@ -1,0 +1,17 @@
+{
+  "format": "Standard ONNX opset17, FP32; domains empty/ai.onnx only",
+  "inputs": {
+    "x": "float32[B,3,48,W] BGR, W320..960, batch1/2 validated",
+    "valid_width": "int64[B] actualresampledwidth1..W"
+  },
+  "outputs": {
+    "probabilities": "float32[B,T,438] full originalsoftmax, no renormalization",
+    "reject_probability": "float32[B] uncalibratedsigmoid"
+  },
+  "dictionary": "blank0, official character_dict then finalspace437; dictionary.json438",
+  "preprocess": "Exact included image_tensor.tensor: external whole-line nonwhite bbox+2 originalpixels; originalpixel-center bilinear then uint8round before BGR normalization; normalized0 padding. Preserve source croporigin/baseline/relativeheight/internalgaps and all suppliedink. Unsupported widths fail; no hiddenstretch. Some physical glyph contrasts become aliases after bbox framing; source context is not recoverable from model confidence.",
+  "ctc": "greedy argmax, blankremoved, adjacent sameclassrun collapse; piececonfidence=max emittedclass probability over run. Full source time coordinates derive from inputWidth/T, with originalcropoffset. End*inputWidth>validWidth*T is unsupportedpadding and refused, neverclamped.",
+  "rejectMask": "(2*t+1)*inputWidth<2*T*validWidth exactintegercenters",
+  "diagnosticAcceptance": "nonempty printableASCII/minpieceCTC>=.8/reject<=.05/no unsupportedpadding. These uncalibrated diagnostics never prove correctness, inputcompleteness/script/cellownership or authority to autoaccept.",
+  "qualification": "Linux export fidelity only; original trial failed developmentgate and fresh remains unopened. Parent consumes separate native product evidence; no default activation/publication, CoreML/iPhone execution or nativeWindows speed claim."
+}

@@ -1,0 +1,96 @@
+{
+  "recipe": "source-order-native-fresh-v1",
+  "sourceSHA256": "a8a3f436f67d68ebe7152c040cdcc467273c76b9853b3ce3cbccb13ea9630677",
+  "fonts": [
+    [
+      "ZenKurenaido-Regular.ttf",
+      4303112,
+      "58b8d930d9fc10c8a5810c085bae378dacb98d0779073ee6d53d919f19ee6a4f"
+    ],
+    [
+      "KaiseiDecol-Regular.ttf",
+      4503152,
+      "fb9202b97944fa00b5f145ad4701def5c306bcd0d26407917baef9e01b042056"
+    ]
+  ],
+  "seedBase": 20261016113,
+  "exclusionsSHA256": "ae7ac01631a407d7b2c44b60810c588ddbdf9a5205578112b3ef2c65db5029c0",
+  "exclusionProvenance": [
+    {
+      "file": "excluded-values.json",
+      "bytes": 13747437,
+      "sha256": "292006a01c6ccb56771250d2be7b088f4c94b5e072289dc5003d365241312dcf"
+    },
+    {
+      "file": "train/manifest.json",
+      "bytes": 1588668,
+      "sha256": "96ab7536234f693959e246c26fae30dab2f45fe65722246a6c383d9fcd4ec22f"
+    },
+    {
+      "file": "development/manifest.json",
+      "bytes": 568421,
+      "sha256": "e4beaa18de3a0f705dd97079ed60d5fa13a0f090436b109b07e25391bb01afa4"
+    },
+    {
+      "file": "closed-native-v3/oracle.json",
+      "bytes": 488463,
+      "sha256": "2ea4e1ad6d999c95c23aa958307cee8ca7ccf46b06897d91c0f32285b260061a"
+    },
+    {
+      "file": "v4/fresh/manifest.json",
+      "bytes": 775648,
+      "sha256": "9ebfa74191925d0949055ff1daf4c5347c1142cad85d33ced3a5fb0582ee106c"
+    },
+    {
+      "file": "v4/train/manifest.json",
+      "bytes": 2647159,
+      "sha256": "3953682a34d48fa540de11edf6144e897536690680ba744de5ef138f7a1ab976"
+    },
+    {
+      "file": "v4/development/manifest.json",
+      "bytes": 781209,
+      "sha256": "cc2702244018eadb3e9bba0e8f15cd5de4196ad7ec718276f1a3dfe2f7aef736"
+    },
+    {
+      "file": "closed-native38831256353/oracle.json",
+      "bytes": 768215,
+      "sha256": "ec57957497a676c0c1c8d2674658fb87a912f9db80512ba9a71d3c3404a3ffd8"
+    }
+  ],
+  "classes": [
+    "1_1",
+    "2_IT",
+    "AI_1"
+  ],
+  "days": 5,
+  "periods": 8,
+  "positiveDocuments": 2,
+  "negativeDocuments": 4,
+  "bodyFieldsPerPositive": 360,
+  "variants": [
+    "positive",
+    "missing-day",
+    "missing-class"
+  ],
+  "roomDistribution": [
+    "60% Japanese prefix plus arbitrary 2..8 ASCII code containing digit",
+    "20% code alone",
+    "20% Japanese descriptive room plus four digits"
+  ],
+  "priorPatternNotAssumed": true,
+  "plannedArms": [
+    "historical-4ff-v1",
+    "source-repairs-role-label-retry-mixed-code-v3expert-fallback-v1"
+  ],
+  "prospectiveCriteria": {
+    "maximumCERPerFont": 0.03,
+    "minimumExactFieldRate": 0.9,
+    "maximumRSSBytes": 6442450944,
+    "maximumReviewUnion": 128,
+    "completeFieldsAndSlots": true,
+    "negativeDocumentsRefused": true,
+    "pairedLiteralImprovement": "Every positive font nondecreasing exact fields and nonincreasing edits; fresh nonregression and quality, all-positive total exact strictly improves"
+  },
+  "zeroErrorsRequired": false,
+  "scope": "Two locallyunusedfontfiles/newliteralsets; sixearlierfontcorpora are separate consumed source-only regression. KaiseiDecol is related to previously trained KaiseiTokumin; no family/pretraining-unseen claim. Fixed model/route before fresh, no fresh selection."
+}

@@ -82,13 +82,13 @@ function Check-InstalledBranding {
     if (-not (Test-Path -LiteralPath $iconLicense)) { throw 'The original icon license is missing.' }
     if ((Get-FileHash -LiteralPath $iconLicense).Hash -ne (Get-FileHash -LiteralPath 'src/Takupoke.Win/Assets/FluentIcons/LICENSE.txt').Hash) { throw 'The published icon license was changed.' }
     if (-not (Test-Path -LiteralPath (Join-Path $installDir 'Licenses/FluentSystemIcons-source.json'))) { throw 'The pinned icon source provenance is missing.' }
-    dotnet exec tests/Takupoke.Win.UITests/bin/Release/net10.0-windows/Takupoke.Win.UITests.dll --shortcut $shortcut $exe $installDir $icon
+    dotnet exec tests/Takupoke.Win.UITests/bin/Release/net10.0-windows10.0.19041.0/Takupoke.Win.UITests.dll --shortcut $shortcut $exe $installDir $icon
     if ($LASTEXITCODE -ne 0) { throw 'Installed native shortcut validation failed.' }
 }
 function Run-UiChecks {
     dotnet build tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj --configuration Release
     if ($LASTEXITCODE -ne 0) { throw 'UI test helper did not build.' }
-    dotnet exec tests/Takupoke.Win.UITests/bin/Release/net10.0-windows/Takupoke.Win.UITests.dll $exe $env:TAKUPOKE_DATA_ROOT
+    dotnet exec tests/Takupoke.Win.UITests/bin/Release/net10.0-windows10.0.19041.0/Takupoke.Win.UITests.dll $exe $env:TAKUPOKE_DATA_ROOT
     if ($LASTEXITCODE -ne 0) { throw 'Installed app UI tests failed.' }
 }
 dotnet build tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj --configuration Release
@@ -100,12 +100,12 @@ try {
     Check-InstalledBranding
     Run-UiChecks
     $installedVersion = (Get-ItemProperty -LiteralPath $uninstallKey).DisplayVersion
-    dotnet exec tests/Takupoke.Win.UITests/bin/Release/net10.0-windows/Takupoke.Win.UITests.dll --check-installer $setup '再インストール'
+    dotnet exec tests/Takupoke.Win.UITests/bin/Release/net10.0-windows10.0.19041.0/Takupoke.Win.UITests.dll --check-installer $setup '再インストール'
     if ($LASTEXITCODE -ne 0) { throw 'Reinstall wizard display was not verified.' }
     try {
         # Simulate an older installed version only in this runner-owned installation.
         Set-ItemProperty -LiteralPath $uninstallKey -Name DisplayVersion -Value '0.0.0-dev.0'
-        dotnet exec tests/Takupoke.Win.UITests/bin/Release/net10.0-windows/Takupoke.Win.UITests.dll --check-installer $setup '更新'
+        dotnet exec tests/Takupoke.Win.UITests/bin/Release/net10.0-windows10.0.19041.0/Takupoke.Win.UITests.dll --check-installer $setup '更新'
         if ($LASTEXITCODE -ne 0) { throw 'Upgrade wizard display was not verified.' }
     } finally { Set-ItemProperty -LiteralPath $uninstallKey -Name DisplayVersion -Value $installedVersion }
     $preferences = Join-Path $env:TAKUPOKE_DATA_ROOT 'preferences.json'
@@ -117,6 +117,8 @@ try {
     if (-not (Test-Path -LiteralPath $runKey)) { New-Item -Path $runKey | Out-Null }
     New-ItemProperty -LiteralPath $runKey -Name takupoke -Value $currentStartup -PropertyType String -Force | Out-Null
     $before = (Get-FileHash -LiteralPath $preferences).Hash
+    $schoolDatabase = Join-Path $env:TAKUPOKE_DATA_ROOT 'school/school.sqlite'
+    $schoolBefore = (Get-FileHash -LiteralPath $schoolDatabase).Hash
     # Exercise a registered installation moving to the new folder. The old
     # uninstaller owns its payload, but must leave unrelated files and app data.
     $previousInstallDir = $installDir
@@ -137,11 +139,14 @@ try {
     if ((Get-FileHash -LiteralPath $unrelated).Hash -ne $unrelatedHash) { throw 'Moving the installation changed an unrelated file.' }
     Check-InstalledBranding
     if ((Get-FileHash -LiteralPath $preferences).Hash -ne $before) { throw 'Moving the installation changed personal settings.' }
+    if ((Get-FileHash -LiteralPath $schoolDatabase).Hash -ne $schoolBefore) { throw 'Moving the installation changed saved school data.' }
     Run-UiChecks
     $before = (Get-FileHash -LiteralPath $preferences).Hash
+    $schoolBefore = (Get-FileHash -LiteralPath $schoolDatabase).Hash
     Run-Installer $setup @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', "/DIR=`"$installDir`"", "/LOG=`"$(Join-Path $taskRoot 'setup-update.log')`"")
     if ((Get-StartupValue 'takupoke') -cne $currentStartup) { throw 'Same-folder reinstall lost startup before the app was launched.' }
     if ((Get-FileHash -LiteralPath $preferences).Hash -ne $before) { throw 'Reinstallation changed personal settings.' }
+    if ((Get-FileHash -LiteralPath $schoolDatabase).Hash -ne $schoolBefore) { throw 'Reinstallation changed saved school data.' }
     Check-InstalledBranding
     Run-UiChecks
     Uninstall-RegisteredApp $installDir

@@ -1,0 +1,15 @@
+{
+  "scope": "Read-only fixed corpus diagnosis; never removes development rows or repairs any prediction/score",
+  "splits": [
+    {
+      "split": "train",
+      "scope": "Known synthetic corpus pixel/hash impossibility audit, not model selection or heldout final",
+      "collisions": []
+    },
+    {
+      "split": "development",
+      "scope": "Known synthetic corpus pixel/hash impossibility audit, not model selection or heldout final",
+      "collisions": []
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "runId": 38830511004,
+  "source": "f9cd35ad1424c542fdcb01ab60a8e08accb2041c",
+  "allSevenJobsSucceeded": true,
+  "logsLineEndingsNormalized": true,
+  "files": [
+    {
+      "jobId": 116748087895,
+      "bytes": 17945,
+      "sha256": "f7772a4603c618ccb1dc4990cd5d08e6532a0aa98c5cac35c4faf4e942b2bb2b",
+      "node20Warnings": 0,
+      "tests": [],
+      "ui": []
+    },
+    {
+      "jobId": 116748088120,
+      "bytes": 33106,
+      "sha256": "2cf9fb964db5ff953d000cd9ad5668ef72584649a437e3283a453391ecd73fdd",
+      "node20Warnings": 0,
+      "tests": [],
+      "ui": []
+    },
+    {
+      "jobId": 116748087991,
+      "bytes": 30874,
+      "sha256": "a37c04a8892b81b7cca5bdc1b15351ca167bc3b41f5c93fbb67edd894d32d7e7",
+      "node20Warnings": 0,
+      "tests": [],
+      "ui": []
+    },
+    {
+      "jobId": 116747968857,
+      "bytes": 36737,
+      "sha256": "254dd6fe800326dd9a9cc9cc9b36d66391485a289d3cef895e0987e1935af7e6",
+      "node20Warnings": 0,
+      "tests": [],
+      "ui": []
+    },
+    {
+      "jobId": 116748088061,
+      "bytes": 281428,
+      "sha256": "f2716cd4c89e431ce7a4a00c793f22c7e18094ca06de110d79708fffb0da56de",
+      "node20Warnings": 0,
+      "tests": [
+        "301",
+        "1139"
+      ],
+      "ui": []
+    },
+    {
+      "jobId": 116748088163,
+      "bytes": 4161715,
+      "sha256": "dfe0159b30466fa3bd5b351cc2594dadac1d19cf44bf25dc962a3c421b0e73cf",
+      "node20Warnings": 0,
+      "tests": [],
+      "ui": []
+    },
+    {
+      "jobId": 116748088017,
+      "bytes": 279288,
+      "sha256": "d3179f92cfa9cccde80b98529d43fbb3a206458d34160af41f2293e42cfecbc9",
+      "node20Warnings": 0,
+      "tests": [
+        "301",
+        "1137"
+      ],
+      "ui": []
+    }
+  ],
+  "nativeWindowsUiChecks": 1027,
+  "node20WarningCount": 0
+}

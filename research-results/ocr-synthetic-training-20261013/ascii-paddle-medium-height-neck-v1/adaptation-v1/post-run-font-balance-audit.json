@@ -1,0 +1,128 @@
+{
+  "scope": "Postrun source/manifest audit only, no frozen protocol/raw/training/model-selection changes",
+  "protocolIntention": "50percentmonospace/50percentproportional training positivegroups",
+  "actual": [
+    {
+      "split": "train",
+      "selectionPositiveRows": 2048,
+      "positiveFontCounts": {
+        "NotoSansJP400": 512,
+        "MPLUS1Code-Regular": 672,
+        "BIZUDMincho-Regular": 512,
+        "NotoSerifJP400": 352
+      },
+      "positiveMonospaceRows": 1184,
+      "positiveMonospaceFraction": 0.578125,
+      "groups": {
+        "ascii_short": {
+          "NotoSansJP400": 64,
+          "NotoSerifJP400": 64,
+          "MPLUS1Code-Regular": 64,
+          "BIZUDMincho-Regular": 64
+        },
+        "blank": {
+          "NotoSansJP400": 26,
+          "NotoSerifJP400": 26,
+          "MPLUS1Code-Regular": 26,
+          "BIZUDMincho-Regular": 26
+        },
+        "clipped": {
+          "NotoSansJP400": 26,
+          "NotoSerifJP400": 26,
+          "MPLUS1Code-Regular": 25,
+          "BIZUDMincho-Regular": 25
+        },
+        "interior_damage": {
+          "NotoSansJP400": 26,
+          "NotoSerifJP400": 26,
+          "MPLUS1Code-Regular": 25,
+          "BIZUDMincho-Regular": 25
+        },
+        "japanese": {
+          "NotoSansJP400": 128,
+          "NotoSerifJP400": 128,
+          "MPLUS1Code-Regular": 128,
+          "BIZUDMincho-Regular": 128
+        },
+        "mixed_code": {
+          "NotoSansJP400": 160,
+          "MPLUS1Code-Regular": 320,
+          "BIZUDMincho-Regular": 160
+        },
+        "mixed_confusable": {
+          "NotoSansJP400": 160,
+          "NotoSerifJP400": 160,
+          "MPLUS1Code-Regular": 160,
+          "BIZUDMincho-Regular": 160
+        },
+        "multiline": {
+          "NotoSansJP400": 26,
+          "NotoSerifJP400": 26,
+          "MPLUS1Code-Regular": 25,
+          "BIZUDMincho-Regular": 25
+        },
+        "noise": {
+          "NotoSansJP400": 26,
+          "NotoSerifJP400": 26,
+          "MPLUS1Code-Regular": 25,
+          "BIZUDMincho-Regular": 25
+        }
+      }
+    },
+    {
+      "split": "development",
+      "selectionPositiveRows": 512,
+      "positiveFontCounts": {
+        "KosugiMaru-Regular": 304,
+        "ZenAntique-Regular": 208
+      },
+      "positiveMonospaceRows": 304,
+      "positiveMonospaceFraction": 0.59375,
+      "groups": {
+        "ascii_short": {
+          "KosugiMaru-Regular": 32,
+          "ZenAntique-Regular": 32
+        },
+        "blank": {
+          "KosugiMaru-Regular": 20,
+          "ZenAntique-Regular": 20
+        },
+        "clipped": {
+          "KosugiMaru-Regular": 19,
+          "ZenAntique-Regular": 19
+        },
+        "interior_damage": {
+          "KosugiMaru-Regular": 19,
+          "ZenAntique-Regular": 19
+        },
+        "japanese": {
+          "KosugiMaru-Regular": 32,
+          "ZenAntique-Regular": 32
+        },
+        "mixed_code": {
+          "KosugiMaru-Regular": 144,
+          "ZenAntique-Regular": 48
+        },
+        "mixed_confusable": {
+          "KosugiMaru-Regular": 96,
+          "ZenAntique-Regular": 96
+        },
+        "multiline": {
+          "KosugiMaru-Regular": 19,
+          "ZenAntique-Regular": 19
+        },
+        "noise": {
+          "KosugiMaru-Regular": 19,
+          "ZenAntique-Regular": 19
+        },
+        "retention_japanese": {
+          "KosugiMaru-Regular": 64,
+          "ZenAntique-Regular": 64
+        }
+      }
+    }
+  ],
+  "cause": "Inherited deterministic font assignment uses j//2 for paired examples and j for unpaired. mixed_code pairing is enabled for j%4<2, so four-font cycles bias unpaired rows to indices2/3 and pairedrows to0/2. Intended50:50 is not the emitted ratio.",
+  "limitation": "Training positives actually57.8125percentmono, developmental selection positives59.375percentmono. Relative candidate comparisons still use identical immutable pixels. No exact50:50 balance claim or resampling after scoring. Perfont results remain separate.",
+  "futureFixOnly": "In a separately frozen futuregenerator, selectfonts with independent explicitgroup balancing or shuffled pair units, never repair this frozen run."
+}

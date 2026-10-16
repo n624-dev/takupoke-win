@@ -1,0 +1,61 @@
+{
+  "recipe": "official-glm-ocr-fp32-cpu4-native-tails-v1",
+  "repo": "zai-org/GLM-OCR",
+  "revision": "2e85a62840ccac27daa451df36c736c4636b8628",
+  "assets": {
+    "README.md": {
+      "bytes": 6795,
+      "sha256": "172334449c3df98650bc9a42781c254c64c9d466b440e2ca8ce31f99829212b2"
+    },
+    "chat_template.jinja": {
+      "bytes": 4606,
+      "sha256": "062e7ee4cc8defa88a5938b5d456dc60366ffd80647f918946ee747bf09ddc7c"
+    },
+    "config.json": {
+      "bytes": 1737,
+      "sha256": "ad537817b2becde827cbb23569a1dd83a352ee64cc34ce751a4ef000ecce4b5f"
+    },
+    "generation_config.json": {
+      "bytes": 165,
+      "sha256": "4e2a3412f65b2a21d315d928986c55723d3e60dfb92c3982a5b9fd56835b0aa5"
+    },
+    "model.safetensors": {
+      "bytes": 2650579464,
+      "sha256": "a16eb0de98d199293371c560f95f83130d2a2c9612449df16839f08ff9498815"
+    },
+    "preprocessor_config.json": {
+      "bytes": 367,
+      "sha256": "02cc50c36240882ae35e8cd4077a25a379664108185d728d261cb785aefeccff"
+    },
+    "processor_config.json": {
+      "bytes": 1334,
+      "sha256": "a56fbd559186fefd6c22a3acc6a393a18a9fe52c264692a122a143d24042112b"
+    },
+    "tokenizer.json": {
+      "bytes": 6838609,
+      "sha256": "aa0fd058c73a5718bb191f6672dc16d122ee0147b20c123d1726514298f9968a"
+    },
+    "tokenizer_config.json": {
+      "bytes": 1138,
+      "sha256": "95abd49942be9cdc6e2653528aed7b4c1cb9e180828421d3488ab38da3057016"
+    }
+  },
+  "packetSha256": "e8b7441ecc95c5a17672b895adbf0c6fdc6cdef964f38d774647cd099b155811",
+  "oracleSha256": "5d473a94abd87a5d416d9653406047abd0c79d023e9fe2bc5a721ff7583e0e17",
+  "sourceSha256": "4d105715ce45c9500990467c42857d4ebc08243972f6090d722235d9da2dd6cc",
+  "runtime": {
+    "torch": "2.7.1+cpu",
+    "transformers": "5.19.0",
+    "Pillow": "12.3.0",
+    "numpy": "2.3.5"
+  },
+  "condition": "Official unquantized weights converted to CPU FP32, eager attention, official processor/template, Text Recognition:, greedy128tokens, seed17. Only known BOS/EOS/PAD removed, no Unicode/case/space/format repair.",
+  "scope": "All eligible original native fictional crops, consumed development only; not new full Windows/iPhone qualification.",
+  "budgets": {
+    "seconds": 2700,
+    "requestSeconds": 180,
+    "rssBytes": 10737418240
+  },
+  "qualification": false,
+  "modelActivation": false
+}

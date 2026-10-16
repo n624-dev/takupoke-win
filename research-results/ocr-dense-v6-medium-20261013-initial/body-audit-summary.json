@@ -1,0 +1,59 @@
+{
+  "recipe": "closed-native-literal-body-diagnostic-v1",
+  "rawSHA256": "a0a18795367a9183c323a47576801fd1ece165d308f818e62a378644e507aef1",
+  "oracleSHA256": "8bc4223a69e23d2f5b6ef596b3b3a23627d9cb49dc793a8f83b3a221a5bb9e1e",
+  "sourceSHA256": "2e756247196ca4c2a911fe417fc0255a91a1213c63c476a58eedec3bdbfe925a",
+  "nativeCalls": 0,
+  "qualification": false,
+  "observations": [
+    {
+      "id": "d0-positive",
+      "condition": "ink-input-frame",
+      "nativeCalls": 0,
+      "formalReturned": false,
+      "quality": "posthoc-body-diagnostic",
+      "qualification": false,
+      "scope": "Literal diagnostics of already consumed development; no repair, adoption or full-document qualification",
+      "completeUniqueSlotSet": true,
+      "expectedBodyFields": 2040,
+      "assessedFields": 2040,
+      "unassessedFields": 0,
+      "aggregates": [
+        {
+          "role": "subject",
+          "assessed": 680,
+          "exact": 680,
+          "incorrectAboveDiagnosticFloor": 0,
+          "belowFloorOrEmpty": 0
+        },
+        {
+          "role": "teacher",
+          "assessed": 680,
+          "exact": 680,
+          "incorrectAboveDiagnosticFloor": 0,
+          "belowFloorOrEmpty": 0
+        },
+        {
+          "role": "room",
+          "assessed": 680,
+          "exact": 501,
+          "incorrectAboveDiagnosticFloor": 169,
+          "belowFloorOrEmpty": 74
+        }
+      ],
+      "wrongFields": 179,
+      "belowFloorFields": 74,
+      "allBodyLiteralExact": false
+    },
+    {
+      "id": "d1-positive",
+      "condition": "ink-input-frame",
+      "nativeCalls": 0,
+      "formalReturned": false,
+      "quality": "unassessed",
+      "qualification": false,
+      "scope": "Literal diagnostics of already consumed development; no repair, adoption or full-document qualification",
+      "failure": "Incomplete native source execution/document"
+    }
+  ]
+}

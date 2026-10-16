@@ -1,0 +1,352 @@
+{
+  "registeredUtc": "2026-10-14T22:38:36.036761+00:00",
+  "protocolSha256": "ff7611adf18b20cab76c93b5ec28144d02a9ba2590dac7162fdc43f4258da52b",
+  "sources": {
+    "data.py": "a3afd1e322a5c8bca0c47e9a55d1529660ae67edf8d093f128c2becc1c0c70ec",
+    "README.md": "6c9c71e42f902c9dee60053cbea6f5de8b2e5abdca33bbf662bef23371387b18",
+    "preflight.py": "5be570299aff74b708b140d8f81f94f56ce5c8f691126a2ac69a2a48dd752ea8",
+    "model.py": "499be516a853d5396c6bc44aaae20811510d4f79542c19e3071b4636155cc573",
+    "train.py": "18fcd2311c977743deefa93ccfb10704845eab3b87e3cd3cb64c36fe20585300",
+    "protocol.json": "ff7611adf18b20cab76c93b5ec28144d02a9ba2590dac7162fdc43f4258da52b",
+    "report.py": "66df282275c80c0605e63fb2828df359df3c6eaab7bfae33eb5409aa8877abe5",
+    "adapter.py": "563a8734c3b5830d8bc8f5742c9eca772bd8c889976cb188e97216a1651fa697",
+    "download_fonts.py": "c2ac6c7c4ced4e5c1ff03936415c8d8d61ad08c09758fee85b8693821d108c79"
+  },
+  "fontAudit": [
+    {
+      "font": "IBMPlexMono",
+      "mono": true,
+      "probeAdvances": {
+        "I": 28.796875,
+        "M": 28.796875,
+        "W": 28.796875,
+        "i": 28.796875,
+        "l": 28.796875,
+        "o": 28.796875,
+        "0": 28.796875,
+        "1": 28.796875
+      },
+      "all95AsciiCmapCovered": true,
+      "sha256": "0999682c7625d3cfbc3f738dc5d72946f5463653c32c1fd15b5dd1ce16924958"
+    },
+    {
+      "font": "Inconsolata",
+      "mono": true,
+      "probeAdvances": {
+        "I": 24.0,
+        "M": 24.0,
+        "W": 24.0,
+        "i": 24.0,
+        "l": 24.0,
+        "o": 24.0,
+        "0": 24.0,
+        "1": 24.0
+      },
+      "all95AsciiCmapCovered": true,
+      "sha256": "dd9cd4b73c413b1ea316cf431b234e7ec992d6ca8a35b796c02cb8a04881f7ce"
+    },
+    {
+      "font": "FiraMono",
+      "mono": true,
+      "probeAdvances": {
+        "I": 28.796875,
+        "M": 28.796875,
+        "W": 28.796875,
+        "i": 28.796875,
+        "l": 28.796875,
+        "o": 28.796875,
+        "0": 28.796875,
+        "1": 28.796875
+      },
+      "all95AsciiCmapCovered": true,
+      "sha256": "bbb4b5b5f42273547250df8a38a7120d6e09b81bebab3342c59aa93526447ffd"
+    },
+    {
+      "font": "SpaceMono",
+      "mono": true,
+      "probeAdvances": {
+        "I": 29.375,
+        "M": 29.375,
+        "W": 29.375,
+        "i": 29.375,
+        "l": 29.375,
+        "o": 29.375,
+        "0": 29.375,
+        "1": 29.375
+      },
+      "all95AsciiCmapCovered": true,
+      "sha256": "9f69849cea853c9d9493bf1af6d5311a7f8a5f7baf84c6ac44abd6b370ed7fe8"
+    },
+    {
+      "font": "CrimsonText",
+      "mono": false,
+      "probeAdvances": {
+        "I": 14.90625,
+        "M": 42.65625,
+        "W": 50.4375,
+        "i": 13.21875,
+        "l": 11.765625,
+        "o": 23.90625,
+        "0": 24.1875,
+        "1": 17.71875
+      },
+      "all95AsciiCmapCovered": true,
+      "sha256": "79e8efa2151d6e5f9d6390e28ed74b0f731014589410821e3ef7c02d0a996939"
+    },
+    {
+      "font": "Lora",
+      "mono": false,
+      "probeAdvances": {
+        "I": 16.078125,
+        "M": 44.0625,
+        "W": 47.765625,
+        "i": 13.484375,
+        "l": 13.0625,
+        "o": 28.078125,
+        "0": 29.8125,
+        "1": 17.46875
+      },
+      "all95AsciiCmapCovered": true,
+      "sha256": "66f89eaf0b220e3a3196456b0daa4fdd2f2b81942aec2bcc1528f4c7f132968a"
+    },
+    {
+      "font": "Alegreya",
+      "mono": false,
+      "probeAdvances": {
+        "I": 17.328125,
+        "M": 40.65625,
+        "W": 44.734375,
+        "i": 13.53125,
+        "l": 11.71875,
+        "o": 23.90625,
+        "0": 25.578125,
+        "1": 16.421875
+      },
+      "all95AsciiCmapCovered": true,
+      "sha256": "e7726c1c75d746d38d5d84dddfea1013f09b529926ad9bedb697c8df5dbbeac4"
+    },
+    {
+      "font": "Cousine",
+      "mono": true,
+      "probeAdvances": {
+        "I": 28.8125,
+        "M": 28.8125,
+        "W": 28.8125,
+        "i": 28.8125,
+        "l": 28.8125,
+        "o": 28.8125,
+        "0": 28.8125,
+        "1": 28.8125
+      },
+      "all95AsciiCmapCovered": true,
+      "sha256": "6ee2a9e3b552802557617c6e03c5748e28f6c6f0798c121bf1eb8aafc0f474fb"
+    },
+    {
+      "font": "UbuntuMono",
+      "mono": true,
+      "probeAdvances": {
+        "I": 24.0,
+        "M": 24.0,
+        "W": 24.0,
+        "i": 24.0,
+        "l": 24.0,
+        "o": 24.0,
+        "0": 24.0,
+        "1": 24.0
+      },
+      "all95AsciiCmapCovered": true,
+      "sha256": "cabed306bd465181f2c288837ab0c3e804d53386769060270d7a52f68beb0112"
+    },
+    {
+      "font": "LibreBaskerville",
+      "mono": false,
+      "probeAdvances": {
+        "I": 19.921875,
+        "M": 52.3125,
+        "W": 56.453125,
+        "i": 16.375,
+        "l": 15.59375,
+        "o": 31.390625,
+        "0": 34.265625,
+        "1": 21.40625
+      },
+      "all95AsciiCmapCovered": true,
+      "sha256": "b866c047482768c14688ae79bae5e248ceed7a8313d385efa512166747b02884"
+    },
+    {
+      "font": "PTSerif",
+      "mono": false,
+      "probeAdvances": {
+        "I": 16.890625,
+        "M": 41.609375,
+        "W": 44.828125,
+        "i": 14.453125,
+        "l": 14.453125,
+        "o": 26.546875,
+        "0": 25.578125,
+        "1": 25.578125
+      },
+      "all95AsciiCmapCovered": true,
+      "sha256": "99a33268fc94d3dc07e13e39eb204ffcaa24e586700a73249731ac1b4b83c986"
+    },
+    {
+      "font": "LibreCaslonText",
+      "mono": false,
+      "probeAdvances": {
+        "I": 18.078125,
+        "M": 48.453125,
+        "W": 52.53125,
+        "i": 14.609375,
+        "l": 14.25,
+        "o": 29.421875,
+        "0": 30.4375,
+        "1": 20.1875
+      },
+      "all95AsciiCmapCovered": true,
+      "sha256": "e182f76cb7fab0a5b513ced165fdad424a290d1fb945032584f038c8f3daa572"
+    }
+  ],
+  "fontDownloadReceipt": {
+    "repository": "google/fonts",
+    "revision": "295d98a7a0c17c68f1341eaeea354e7960ea70d3",
+    "files": {
+      "IBMPlexMono": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/ibmplexmono/IBMPlexMono-Regular.ttf",
+        "originalBytes": 111428,
+        "originalSha256": "9ff9ab66aaa412874bd24bdfa7be5c1d600abb9937eb7f931bfd409fe6217936",
+        "staticAxes": {},
+        "bytes": 111428,
+        "sha256": "0999682c7625d3cfbc3f738dc5d72946f5463653c32c1fd15b5dd1ce16924958",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/ibmplexmono/OFL.txt",
+        "licenseSha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+      },
+      "Inconsolata": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/inconsolata/Inconsolata%5Bwdth%2Cwght%5D.ttf",
+        "originalBytes": 347180,
+        "originalSha256": "23ded25b447074d00659392bf9b1123d89df55cb07b0ad9bfef3366d199b5fcb",
+        "staticAxes": {
+          "wght": 400,
+          "wdth": 100.0
+        },
+        "bytes": 98268,
+        "sha256": "dd9cd4b73c413b1ea316cf431b234e7ec992d6ca8a35b796c02cb8a04881f7ce",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/inconsolata/OFL.txt",
+        "licenseSha256": "29bd0cfd0fb2a45f9b057c834a057724bae1f63b525a8ac83d3e7525706d9f80"
+      },
+      "FiraMono": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/firamono/FiraMono-Regular.ttf",
+        "originalBytes": 174596,
+        "originalSha256": "2e00b0cf3106a3d792f35711b7722740b76c02ee7300ea8c60f940584b7a8ac9",
+        "staticAxes": {},
+        "bytes": 174596,
+        "sha256": "bbb4b5b5f42273547250df8a38a7120d6e09b81bebab3342c59aa93526447ffd",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/firamono/OFL.txt",
+        "licenseSha256": "d1829ff3455bbf3b9d13dfb0a57758a863107c9108aab48558f26f37f1094180"
+      },
+      "SpaceMono": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/spacemono/SpaceMono-Regular.ttf",
+        "originalBytes": 93136,
+        "originalSha256": "fa5802bba20311cca2673d3cdc1e89b34b7d44fe6f2d730bd6c5d4229199ae39",
+        "staticAxes": {},
+        "bytes": 93136,
+        "sha256": "9f69849cea853c9d9493bf1af6d5311a7f8a5f7baf84c6ac44abd6b370ed7fe8",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/spacemono/OFL.txt",
+        "licenseSha256": "4664e83780a263c53dbab95d3590a5a9db914aeb9a3c78f7e7ad451f9151c998"
+      },
+      "CrimsonText": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/crimsontext/CrimsonText-Regular.ttf",
+        "originalBytes": 107200,
+        "originalSha256": "48e6c5d5ad1d01599d374ecb817e15890d1feb3b8a3a88e527d44c90389e1f06",
+        "staticAxes": {},
+        "bytes": 107200,
+        "sha256": "79e8efa2151d6e5f9d6390e28ed74b0f731014589410821e3ef7c02d0a996939",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/crimsontext/OFL.txt",
+        "licenseSha256": "50fd67cddc097377a5c871e8452b778bc5aedfa3480a705cb27c5e3a078218df"
+      },
+      "Lora": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/lora/Lora%5Bwght%5D.ttf",
+        "originalBytes": 213416,
+        "originalSha256": "98396d24933af1589c8b0558b747c0ef28279bde36081b6c11748946329f4ac6",
+        "staticAxes": {
+          "wght": 400
+        },
+        "bytes": 136108,
+        "sha256": "66f89eaf0b220e3a3196456b0daa4fdd2f2b81942aec2bcc1528f4c7f132968a",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/lora/OFL.txt",
+        "licenseSha256": "1d9a970809ac804b582a6ce7f0ebc4e7fefcbfd7ff6299cad35ee656a21be716"
+      },
+      "Alegreya": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/alegreya/Alegreya%5Bwght%5D.ttf",
+        "originalBytes": 425288,
+        "originalSha256": "ba5564634b93a8f8ba57b48cd4f1ae7417d2b4656fbac779028679b00de3cf12",
+        "staticAxes": {
+          "wght": 400
+        },
+        "bytes": 267976,
+        "sha256": "e7726c1c75d746d38d5d84dddfea1013f09b529926ad9bedb697c8df5dbbeac4",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/alegreya/OFL.txt",
+        "licenseSha256": "f6f60d5d4cf4f4b1fc4e41353c897a2f5a16e6396c0cd8fa8bdfd2f4586a9a68"
+      },
+      "Cousine": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/apache/cousine/Cousine-Regular.ttf",
+        "originalBytes": 308360,
+        "originalSha256": "69e1ea59eb770014204e5174f805750f9a793db4a2531e6516b30b7460d470b3",
+        "staticAxes": {},
+        "bytes": 308360,
+        "sha256": "6ee2a9e3b552802557617c6e03c5748e28f6c6f0798c121bf1eb8aafc0f474fb",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/apache/cousine/LICENSE.txt",
+        "licenseSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "UbuntuMono": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ufl/ubuntumono/UbuntuMono-Regular.ttf",
+        "originalBytes": 205748,
+        "originalSha256": "b35dd9d2131d5d83a9b87fe9ad22c6288fa3d17688d43302c14da29812417d63",
+        "staticAxes": {},
+        "bytes": 205748,
+        "sha256": "cabed306bd465181f2c288837ab0c3e804d53386769060270d7a52f68beb0112",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ufl/ubuntumono/UFL.txt",
+        "licenseSha256": "2f0015108d68627bd788d313f529c21ff4da2c2c42a5e1f3883acc83480f9002"
+      },
+      "LibreBaskerville": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/librebaskerville/LibreBaskerville-Regular.ttf",
+        "originalBytes": 160364,
+        "originalSha256": "fd64409c4238f4c90eafc8900e41924bbc3e86a86f48aaca66f6b4d01b0aceb7",
+        "staticAxes": {},
+        "bytes": 160364,
+        "sha256": "b866c047482768c14688ae79bae5e248ceed7a8313d385efa512166747b02884",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/librebaskerville/OFL.txt",
+        "licenseSha256": "de719ceea028324610230b3573688949768aa30c0b693fb5661691cf36f6ae89"
+      },
+      "PTSerif": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/ptserif/PT_Serif-Web-Regular.ttf",
+        "originalBytes": 359048,
+        "originalSha256": "a4951fade06ff8f09b7673aa81ffb65a8cd409e24d3289a6dc670bc4dda2557a",
+        "staticAxes": {},
+        "bytes": 359048,
+        "sha256": "99a33268fc94d3dc07e13e39eb204ffcaa24e586700a73249731ac1b4b83c986",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/ptserif/OFL.txt",
+        "licenseSha256": "ddf311c28ddf5a5ad9747649837346b67bed9d356789c3072bb27dbce49e514d"
+      },
+      "LibreCaslonText": {
+        "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/librecaslontext/LibreCaslonText%5Bwght%5D.ttf",
+        "originalBytes": 126876,
+        "originalSha256": "c11809dbfd5445886293d89b32bfc2584075c80e77750cf1c284113e36b8b3f4",
+        "staticAxes": {
+          "wght": 400
+        },
+        "bytes": 79120,
+        "sha256": "e182f76cb7fab0a5b513ced165fdad424a290d1fb945032584f038c8f3daa572",
+        "licenseUrl": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/librecaslontext/OFL.txt",
+        "licenseSha256": "a294245c822c5aa9fd9a9f3189418e99415428be5fecadf797793d5d8f6a3ad3"
+      }
+    }
+  },
+  "fontAcquisitionFailuresBeforeExecution": [
+    "Initial static/variable paths for LibreBaskerville/PTSerif/LibreCaslonText returned404; pinned directory listing resolved before fontselection/corpus/inference. No modelquality condition changed."
+  ],
+  "freeDiskBytes": 4879626240,
+  "trainingStarted": false,
+  "oldZeroWrongGatesUnchanged": true,
+  "newZeroWrongRequired": false,
+  "finalOpened": false
+}

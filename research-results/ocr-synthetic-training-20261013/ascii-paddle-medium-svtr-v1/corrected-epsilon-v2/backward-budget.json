@@ -1,0 +1,67 @@
+{
+  "scope": "Numeric random pre-SVTR tensors only, full18710 CTC plus full18710 teacherKL backward; no optimizer update, rendering, model selection or quality claim",
+  "sourceSha256": "36bee968c20c29ec1120b38a889feec3d837c411a0bdbd03f11a30e695adb352",
+  "stateUnchanged": true,
+  "seed": 749193,
+  "threads": 2,
+  "parameters": 890112,
+  "measurements": [
+    {
+      "batch": 8,
+      "frames": 40,
+      "inputWidthEquivalent": 320,
+      "seconds": [
+        0.18022241899598157,
+        0.1521210249993601,
+        0.1567901919988799
+      ],
+      "meanSeconds": 0.1630445453314072,
+      "gradientsFinite": true,
+      "maximumGradient": 3.0874485969543457,
+      "peakRssMiB": 537.5546875
+    },
+    {
+      "batch": 16,
+      "frames": 40,
+      "inputWidthEquivalent": 320,
+      "seconds": [
+        0.3207942969966098,
+        0.30028362699522404,
+        0.2819814249960473
+      ],
+      "meanSeconds": 0.3010197829959604,
+      "gradientsFinite": true,
+      "maximumGradient": 3.0594937801361084,
+      "peakRssMiB": 628.9609375
+    },
+    {
+      "batch": 8,
+      "frames": 120,
+      "inputWidthEquivalent": 960,
+      "seconds": [
+        0.45626809899840737,
+        0.5193419839997659,
+        0.5087385299993912
+      ],
+      "meanSeconds": 0.49478287099918816,
+      "gradientsFinite": true,
+      "maximumGradient": 11.65347957611084,
+      "peakRssMiB": 793.7265625
+    },
+    {
+      "batch": 16,
+      "frames": 120,
+      "inputWidthEquivalent": 960,
+      "seconds": [
+        0.7858148290033569,
+        0.9028003369967337,
+        0.886266865003563
+      ],
+      "meanSeconds": 0.8582940103345512,
+      "gradientsFinite": true,
+      "maximumGradient": 12.001227378845215,
+      "peakRssMiB": 1167.11328125
+    }
+  ],
+  "limits": "Concurrent Linux workload. Only3 numeric repeats per shape, no isolated speed/nativeWindows/iPhone claim. Feature cache time, rejection head and development eval are additional."
+}

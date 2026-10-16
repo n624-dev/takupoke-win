@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "referenceRun": 38865270712,
+  "referenceSource": "231fe87203b9c92a0c79993dc8649a6f990f25dc",
+  "pages": 10,
+  "documents": [
+    {
+      "id": "literalfresh-0-positive",
+      "passed": true,
+      "sameLiteralsGeometryCallsDocumentAndNativeFloor": true,
+      "maximumNativeProbabilityDifference": 0.0
+    },
+    {
+      "id": "literalfresh-1-positive",
+      "passed": true,
+      "sameLiteralsGeometryCallsDocumentAndNativeFloor": true,
+      "maximumNativeProbabilityDifference": 0.0
+    }
+  ],
+  "actualRawSHA256": "c666297cf948e1f6d496ec286ae7e58013ada9dcb3d8dff02049ad4bb7272acb",
+  "independentAccuracyCredit": false,
+  "scope": "Actual default factory versus qualified optional path on the exact consumed native originals; probabilities compared without changing them. No new accuracy/human adoption claim."
+}

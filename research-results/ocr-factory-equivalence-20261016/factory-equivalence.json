@@ -1,0 +1,120 @@
+{
+  "passed": true,
+  "complete": true,
+  "referenceRun": 38830503118,
+  "referenceRawSHA256": "af33a4d7d444e5dd488001604f3952b539a5c605e36e40bc705d887ae24ddbdd",
+  "actualRawSHA256": "a182b140f6932c339c58e0cc960732c7f0623b8156d59e764025cc080ecdd8f5",
+  "scope": "Factory wiring equivalence to fixed already-qualified optional candidate on consumed native10pages. Raw native probabilities are compared without changes; tolerance is numerical parity only. No new independent accuracy credit.",
+  "pages": [
+    {
+      "id": "fresh-0-positive",
+      "page": 1,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 5.602836608886719e-06,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-0-positive",
+      "page": 2,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 3.7550926208496094e-06,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-0-positive",
+      "page": 3,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 5.125999450683594e-06,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-0-positive",
+      "page": 4,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 4.649162292480469e-06,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-0-positive",
+      "page": 5,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 5.245208740234375e-06,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-1-positive",
+      "page": 1,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 9.298324584960938e-06,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-1-positive",
+      "page": 2,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 8.52346420288086e-06,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-1-positive",
+      "page": 3,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 9.119510650634766e-06,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-1-positive",
+      "page": 4,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 8.702278137207031e-06,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-1-positive",
+      "page": 5,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 9.953975677490234e-06,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "recipe": "physical-white-column-proposals-consumed-v1",
+  "inputsSha256": "26b9d6fe081763aa36a740d2fa2f81990a04855095d97527544bc0c4b78340a8",
+  "oracleSha256": "f44406401c3639376c09db77bc161542a1894dfd447cc8685a72bcacecbca5d4",
+  "sourceSha256": "36353d7e66619a58be597afb968170e3b503c39a94a5183031da194df7684208",
+  "rule": "Every RGB component unequal255 is visible ink. Propose full-height groups separated by completely white columns. Keep gaps, absolute dimensions, baseline and all original ink. No character/space inference.",
+  "scope": "Source-shape diagnosis only, consumed development, no recognition/model/pair selection",
+  "modelCalls": 0,
+  "qualification": false
+}

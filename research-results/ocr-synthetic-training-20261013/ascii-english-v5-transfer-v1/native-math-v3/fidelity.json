@@ -1,0 +1,143 @@
+{
+  "scope": "Consumed parent512 providedPNG/nativeinitialization and10numericshape checks only; no oracle/quality/training/final/activation",
+  "counts": {
+    "textIntervals": 512,
+    "floor08AsciiValidDecisions": 512,
+    "sourceRectPreserved": 512
+  },
+  "maximumDifferences": {
+    "observerProbability": 0.0,
+    "feature": 0.0002840757369995117,
+    "logit": 0.0012226104736328125,
+    "probability": 0.00012002885341644287
+  },
+  "dynamic": [
+    {
+      "batch": 1,
+      "width": 320,
+      "differences": {
+        "observerProbability": 0.0,
+        "feature": 5.5789947509765625e-05,
+        "logit": 0.00014019012451171875,
+        "probability": 4.410743713378906e-06
+      },
+      "sameIntervals": true,
+      "sameDecisions": true
+    },
+    {
+      "batch": 1,
+      "width": 481,
+      "differences": {
+        "observerProbability": 0.0,
+        "feature": 4.982948303222656e-05,
+        "logit": 0.00011873245239257812,
+        "probability": 4.76837158203125e-06
+      },
+      "sameIntervals": true,
+      "sameDecisions": true
+    },
+    {
+      "batch": 1,
+      "width": 500,
+      "differences": {
+        "observerProbability": 0.0,
+        "feature": 5.078315734863281e-05,
+        "logit": 0.00012111663818359375,
+        "probability": 5.245208740234375e-06
+      },
+      "sameIntervals": true,
+      "sameDecisions": true
+    },
+    {
+      "batch": 1,
+      "width": 640,
+      "differences": {
+        "observerProbability": 0.0,
+        "feature": 5.733966827392578e-05,
+        "logit": 0.00011444091796875,
+        "probability": 4.410743713378906e-06
+      },
+      "sameIntervals": true,
+      "sameDecisions": true
+    },
+    {
+      "batch": 1,
+      "width": 960,
+      "differences": {
+        "observerProbability": 0.0,
+        "feature": 5.030632019042969e-05,
+        "logit": 8.916854858398438e-05,
+        "probability": 6.079673767089844e-06
+      },
+      "sameIntervals": true,
+      "sameDecisions": true
+    },
+    {
+      "batch": 2,
+      "width": 320,
+      "differences": {
+        "observerProbability": 0.0,
+        "feature": 5.364418029785156e-05,
+        "logit": 0.00013685226440429688,
+        "probability": 4.827976226806641e-06
+      },
+      "sameIntervals": true,
+      "sameDecisions": true
+    },
+    {
+      "batch": 2,
+      "width": 481,
+      "differences": {
+        "observerProbability": 0.0,
+        "feature": 5.698204040527344e-05,
+        "logit": 0.000141143798828125,
+        "probability": 4.887580871582031e-06
+      },
+      "sameIntervals": true,
+      "sameDecisions": true
+    },
+    {
+      "batch": 2,
+      "width": 500,
+      "differences": {
+        "observerProbability": 0.0,
+        "feature": 5.328655242919922e-05,
+        "logit": 0.00012445449829101562,
+        "probability": 4.887580871582031e-06
+      },
+      "sameIntervals": true,
+      "sameDecisions": true
+    },
+    {
+      "batch": 2,
+      "width": 640,
+      "differences": {
+        "observerProbability": 0.0,
+        "feature": 5.513429641723633e-05,
+        "logit": 0.00010776519775390625,
+        "probability": 4.410743713378906e-06
+      },
+      "sameIntervals": true,
+      "sameDecisions": true
+    },
+    {
+      "batch": 2,
+      "width": 960,
+      "differences": {
+        "observerProbability": 0.0,
+        "feature": 4.863739013671875e-05,
+        "logit": 0.00010347366333007812,
+        "probability": 6.377696990966797e-06
+      },
+      "sameIntervals": true,
+      "sameDecisions": true
+    }
+  ],
+  "fidelityGatePassed": false,
+  "seconds": 38.21213793100105,
+  "peakRssMiB": 664.21875,
+  "rawSha256": "f623f84d86a5fdaf1411131a6675fc7920d6f62b5278509bdc24fccb77ac110a",
+  "oracleOpened": false,
+  "trainingStarted": false,
+  "finalOpened": false
+}

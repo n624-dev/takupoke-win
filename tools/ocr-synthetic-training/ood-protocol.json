@@ -1,0 +1,11 @@
+{
+  "frozenBeforeFinalOpening": "2026-10-13",
+  "seed": 5018832,
+  "rows": 64,
+  "length": [4, 8],
+  "fonts": ["ZenKakuGothicNew-Regular", "BIZUDPMincho-Regular"],
+  "purpose": "Supplemental unknown-character regression challenge; never used for checkpoint selection or inference repair",
+  "pool": "Official dictionary CJK characters U+4E00..U+9FAF, excluding every train/development character, present in both reserved font Unicode cmaps, sorted by code point; uniform deterministic draw",
+  "rendering": "Same fixed synthetic rendering as main protocol; independent RNG and strings",
+  "limits": "Does not certify all 18,710 classes. Crop recognition alone never qualifies production."
+}

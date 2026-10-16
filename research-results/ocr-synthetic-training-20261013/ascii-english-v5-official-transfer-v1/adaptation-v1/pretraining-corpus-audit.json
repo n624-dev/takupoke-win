@@ -1,0 +1,160 @@
+{
+  "rows": {
+    "train": 864,
+    "development": 608
+  },
+  "trainDevLiteralDisjoint": true,
+  "priorLiteralExcluded": true,
+  "all95PrintableCovered": {
+    " ": 158,
+    "!": 11,
+    "\"": 11,
+    "#": 11,
+    "$": 10,
+    "%": 11,
+    "&": 11,
+    "'": 11,
+    "(": 11,
+    ")": 10,
+    "*": 11,
+    "+": 11,
+    ",": 11,
+    "-": 188,
+    ".": 11,
+    "/": 11,
+    "0": 389,
+    "1": 355,
+    "2": 24,
+    "3": 28,
+    "4": 25,
+    "5": 28,
+    "6": 22,
+    "7": 27,
+    "8": 27,
+    "9": 32,
+    ":": 10,
+    ";": 11,
+    "<": 10,
+    "=": 11,
+    ">": 11,
+    "?": 10,
+    "@": 11,
+    "A": 56,
+    "B": 77,
+    "C": 69,
+    "D": 66,
+    "E": 85,
+    "F": 48,
+    "G": 42,
+    "H": 37,
+    "I": 379,
+    "J": 42,
+    "K": 33,
+    "L": 91,
+    "M": 69,
+    "N": 62,
+    "O": 369,
+    "P": 51,
+    "Q": 41,
+    "R": 69,
+    "S": 96,
+    "T": 67,
+    "U": 55,
+    "V": 40,
+    "W": 54,
+    "X": 36,
+    "Y": 40,
+    "Z": 31,
+    "[": 11,
+    "\\": 11,
+    "]": 11,
+    "^": 11,
+    "_": 199,
+    "`": 11,
+    "a": 58,
+    "b": 53,
+    "c": 68,
+    "d": 70,
+    "e": 154,
+    "f": 34,
+    "g": 39,
+    "h": 53,
+    "i": 112,
+    "j": 40,
+    "k": 30,
+    "l": 417,
+    "m": 45,
+    "n": 70,
+    "o": 135,
+    "p": 54,
+    "q": 32,
+    "r": 101,
+    "s": 85,
+    "t": 88,
+    "u": 60,
+    "v": 36,
+    "w": 73,
+    "x": 53,
+    "y": 45,
+    "z": 52,
+    "{": 11,
+    "|": 10,
+    "}": 11,
+    "~": 11
+  },
+  "eachPositiveGroupFontsEqual": true,
+  "trainMonoRatio": 0.5,
+  "counts": {
+    "train": {
+      "code": {
+        "NotoSansJP400": 48,
+        "NotoSerifJP400": 48,
+        "MPLUS1Code-Regular": 48,
+        "BIZUDMincho-Regular": 48
+      },
+      "lookalike": {
+        "NotoSansJP400": 48,
+        "NotoSerifJP400": 48,
+        "MPLUS1Code-Regular": 48,
+        "BIZUDMincho-Regular": 48
+      },
+      "natural": {
+        "NotoSansJP400": 32,
+        "NotoSerifJP400": 32,
+        "MPLUS1Code-Regular": 32,
+        "BIZUDMincho-Regular": 32
+      },
+      "printable": {
+        "NotoSansJP400": 32,
+        "NotoSerifJP400": 32,
+        "MPLUS1Code-Regular": 32,
+        "BIZUDMincho-Regular": 32
+      }
+    },
+    "development": {
+      "code": {
+        "KosugiMaru-Regular": 64,
+        "ZenAntique-Regular": 64
+      },
+      "lookalike": {
+        "KosugiMaru-Regular": 64,
+        "ZenAntique-Regular": 64
+      },
+      "natural": {
+        "KosugiMaru-Regular": 32,
+        "ZenAntique-Regular": 32
+      },
+      "printable": {
+        "KosugiMaru-Regular": 32,
+        "ZenAntique-Regular": 32
+      }
+    }
+  },
+  "fontsNeverMovedFromDevToTrain": true,
+  "allProvidedInkRetained": true,
+  "wholeUnknownCjkAndMixedNeverCut": true,
+  "manifestSha256": {
+    "train": "5689349f1c0d3aa6ca2d73d89f5b4c562d6dfd1ebc4fd850b3a0dd5404cd2e3e",
+    "development": "60dc3dfa08bbfbd9989183be4f60356374392f85252fb0fb61a0c9bc9b084547"
+  }
+}

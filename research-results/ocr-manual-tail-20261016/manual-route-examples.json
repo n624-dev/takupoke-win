@@ -1,0 +1,1954 @@
+{
+  "gains": [
+    {
+      "id": "code-0042",
+      "expected": "仮設室OOI75",
+      "before": "仮設室00175",
+      "after": "仮設室OOI75",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99794
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9996977
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999858
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.721891
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.6109016
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.51796246
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9999937
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.9999963
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99794
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9996977
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999858
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.7516929
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.7341053
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.92111886
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9942667
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.9982919
+        }
+      ]
+    },
+    {
+      "id": "code-0074",
+      "expected": "仮設室OOO76",
+      "before": "仮設室00076",
+      "after": "仮設室OOO76",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9976036
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9996258
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99998426
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.8810818
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.8677008
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.8865788
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9999918
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.99999857
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9976036
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9996258
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99998426
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.71341544
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.6260163
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.5852868
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.99803394
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.99993217
+        }
+      ]
+    },
+    {
+      "id": "code-0182",
+      "expected": "仮設室OIl89",
+      "before": "仮設室OII89",
+      "after": "仮設室OIl89",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9992149
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9998778
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999963
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.9876124
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.49628857
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.61305183
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9999945
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.99998975
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9992149
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9998778
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999963
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.84687024
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.545018
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.5396411
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9996468
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.99663514
+        }
+      ]
+    },
+    {
+      "id": "code-0432",
+      "expected": "仮設室O0I82",
+      "before": "仮設室00182",
+      "after": "仮設室O0I82",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9933223
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99835604
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999894
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9599585
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99999344
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9786365
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99999857
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.99999964
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9933223
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99835604
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999894
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.8067391
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.981587
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.67300874
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9995041
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.9951486
+        }
+      ]
+    },
+    {
+      "id": "code-0436",
+      "expected": "仮設室0IO55",
+      "before": "仮設室0I055",
+      "after": "仮設室0IO55",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9936837
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99915767
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.999992
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999951
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.5366777
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.7802857
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.99999785
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.9999958
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9936837
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99915767
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.999992
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9524091
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.82334477
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.7727907
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.9993886
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.9992574
+        }
+      ]
+    },
+    {
+      "id": "code-0468",
+      "expected": "仮設室IO023",
+      "before": "仮設室I0023",
+      "after": "仮設室IO023",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.992059
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99851924
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999945
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.9836029
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.79228276
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999933
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.99999917
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.99999857
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.992059
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99851924
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999945
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.8572793
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.79455376
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.961964
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.99935776
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9998217
+        }
+      ]
+    },
+    {
+      "id": "code-0492",
+      "expected": "仮設室0I038",
+      "before": "仮設室01038",
+      "after": "仮設室0I038",
+      "font": "KleeOne-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99420327
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9984848
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999607
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999871
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.76759475
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999924
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.99999857
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9999989
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99420327
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9984848
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999607
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.6969426
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.79730284
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.933043
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9998196
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9999454
+        }
+      ]
+    },
+    {
+      "id": "code-0496",
+      "expected": "仮設室I0O83",
+      "before": "仮設室I0083",
+      "after": "仮設室I0O83",
+      "font": "KleeOne-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9948531
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9977437
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999595
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.8783426
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99999523
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.67779994
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99999726
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.99999857
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9948531
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9977437
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999595
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.9334213
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.992722
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.82518137
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.788398
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9999609
+        }
+      ]
+    },
+    {
+      "id": "code-0552",
+      "expected": "仮設室1OO34",
+      "before": "仮設室10034",
+      "after": "仮設室1OO34",
+      "font": "KleeOne-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99312544
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99362516
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999607
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999937
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.8870665
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.94849926
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9999987
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9999988
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99312544
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99362516
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999607
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99987125
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.7732976
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.7694033
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9998479
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9997776
+        }
+      ]
+    },
+    {
+      "id": "code-0645",
+      "expected": "仮設室1Ol49",
+      "before": "仮設室10149",
+      "after": "仮設室1Ol49",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9954399
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9996543
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99998236
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99996245
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.67187583
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.72727627
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9999981
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999995
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9954399
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9996543
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99998236
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99972457
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.67765206
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.923033
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.99821365
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9972825
+        }
+      ]
+    },
+    {
+      "id": "code-0709",
+      "expected": "仮設室Ol192",
+      "before": "仮設室O1192",
+      "after": "仮設室Ol192",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.997401
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99893004
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999862
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.9942009
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.98532885
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999974
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999995
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.9999994
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.997401
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99893004
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999862
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.81468105
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.6375691
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9998665
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9983975
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.99997985
+        }
+      ]
+    },
+    {
+      "id": "code-0713",
+      "expected": "仮設室1O068",
+      "before": "仮設室10068",
+      "after": "仮設室1O068",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99773216
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99871564
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999154
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99998593
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.80140936
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.999998
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.9999994
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9999994
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99773216
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99871564
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999154
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9998153
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.6257805
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99976593
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.99979025
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9998443
+        }
+      ]
+    },
+    {
+      "id": "code-0737",
+      "expected": "仮設室0Il98",
+      "before": "仮設室0I198",
+      "after": "仮設室0Il98",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.997747
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99900705
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999875
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999906
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.93405026
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.91551244
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999987
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99999905
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.997747
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99900705
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999875
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99893445
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.98591554
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.51156515
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.99617416
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9999746
+        }
+      ]
+    },
+    {
+      "id": "code-0765",
+      "expected": "仮設室l0l60",
+      "before": "仮設室10160",
+      "after": "仮設室l0l60",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99768996
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9989697
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999875
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9538489
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999913
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9870991
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.9999987
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999994
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99768996
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9989697
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999875
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.8040337
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99903417
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.530654
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.99874866
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9991511
+        }
+      ]
+    },
+    {
+      "id": "code-0769",
+      "expected": "仮設室lI041",
+      "before": "仮設室II041",
+      "after": "仮設室lI041",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99701536
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9987908
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99998
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.3562772
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.9913078
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9994981
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9999988
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999931
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99701536
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9987908
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99998
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.76133347
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.86039734
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9998209
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9994566
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999565
+        }
+      ]
+    }
+  ],
+  "losses": [
+    {
+      "id": "code-0106",
+      "expected": "仮設室IIO22",
+      "before": "仮設室IIO22",
+      "after": "仮設室IlO22",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99845994
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9998086
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999535
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.94621336
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.99405944
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.99819356
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.99999106
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.999998
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99845994
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9998086
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999535
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.72581583
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.5620584
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.8292148
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.9984079
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.9999573
+        }
+      ]
+    },
+    {
+      "id": "code-0138",
+      "expected": "仮設室IIO86",
+      "before": "仮設室IIO86",
+      "after": "仮設室IlO86",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9988286
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99984014
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999547
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.9801308
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.9892218
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.9961164
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9999968
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.99999774
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9988286
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99984014
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999547
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.798747
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.62132025
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.8525951
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9996145
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.9998591
+        }
+      ]
+    },
+    {
+      "id": "code-0388",
+      "expected": "仮設室10070",
+      "before": "仮設室10070",
+      "after": "仮設室1007O",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99127907
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9987109
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999958
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999969
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999994
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999994
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9999988
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99999964
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99127907
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9987109
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999958
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9994429
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.59810376
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.76267546
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9976624
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.56183344
+        }
+      ]
+    },
+    {
+      "id": "code-0402",
+      "expected": "仮設室Lab-599",
+      "before": "仮設室Lab-599",
+      "after": "仮設室Lab-59q",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99313027
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9971105
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999356
+        },
+        {
+          "Text": "L",
+          "Confidence": 0.99998844
+        },
+        {
+          "Text": "a",
+          "Confidence": 0.99999046
+        },
+        {
+          "Text": "b",
+          "Confidence": 0.999998
+        },
+        {
+          "Text": "-",
+          "Confidence": 0.9999459
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.99999845
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999826
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999627
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.99313027
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9971105
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999356
+        },
+        {
+          "Text": "L",
+          "Confidence": 0.999684
+        },
+        {
+          "Text": "a",
+          "Confidence": 0.9998605
+        },
+        {
+          "Text": "b",
+          "Confidence": 0.99988794
+        },
+        {
+          "Text": "-",
+          "Confidence": 0.9980824
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.999703
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9605478
+        },
+        {
+          "Text": "q",
+          "Confidence": 0.47347572
+        }
+      ]
+    },
+    {
+      "id": "code-0414",
+      "expected": "仮設室Lab-899",
+      "before": "仮設室Lab-899",
+      "after": "仮設室Lab-89q",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9935041
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9962835
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999926
+        },
+        {
+          "Text": "L",
+          "Confidence": 0.99998784
+        },
+        {
+          "Text": "a",
+          "Confidence": 0.9999882
+        },
+        {
+          "Text": "b",
+          "Confidence": 0.9999968
+        },
+        {
+          "Text": "-",
+          "Confidence": 0.9999397
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99999833
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999908
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.99997926
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9935041
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9962835
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999926
+        },
+        {
+          "Text": "L",
+          "Confidence": 0.9996314
+        },
+        {
+          "Text": "a",
+          "Confidence": 0.9998677
+        },
+        {
+          "Text": "b",
+          "Confidence": 0.99987745
+        },
+        {
+          "Text": "-",
+          "Confidence": 0.9978903
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99922824
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9422153
+        },
+        {
+          "Text": "q",
+          "Confidence": 0.6179096
+        }
+      ]
+    },
+    {
+      "id": "code-0440",
+      "expected": "仮設室01084",
+      "before": "仮設室01084",
+      "after": "仮設室O1084",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9925442
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9981351
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999225
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999943
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999988
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999993
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99999964
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9999993
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9925442
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9981351
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99999225
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.57293344
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999436
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.7022946
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9998543
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9805438
+        }
+      ]
+    },
+    {
+      "id": "code-0474",
+      "expected": "仮設室Lab-820",
+      "before": "仮設室Lab-820",
+      "after": "仮設室Lab-82o",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9905042
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99212587
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999888
+        },
+        {
+          "Text": "L",
+          "Confidence": 0.99999094
+        },
+        {
+          "Text": "a",
+          "Confidence": 0.9999907
+        },
+        {
+          "Text": "b",
+          "Confidence": 0.99999785
+        },
+        {
+          "Text": "-",
+          "Confidence": 0.999974
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.999998
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.99999964
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99999905
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9905042
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99212587
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999888
+        },
+        {
+          "Text": "L",
+          "Confidence": 0.99973816
+        },
+        {
+          "Text": "a",
+          "Confidence": 0.99992716
+        },
+        {
+          "Text": "b",
+          "Confidence": 0.99992645
+        },
+        {
+          "Text": "-",
+          "Confidence": 0.9970987
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9994679
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.999801
+        },
+        {
+          "Text": "o",
+          "Confidence": 0.49530095
+        }
+      ]
+    },
+    {
+      "id": "code-0653",
+      "expected": "仮設室IOO32",
+      "before": "仮設室IOO32",
+      "after": "仮設室I0O32",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9958001
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9997037
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999726
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.99978846
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.99631965
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.9804849
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9999944
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.99999785
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9958001
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9997037
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.9999726
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.99329656
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.59874517
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.5361299
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.99985766
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.99994814
+        }
+      ]
+    },
+    {
+      "id": "code-0673",
+      "expected": "仮設室OO130",
+      "before": "仮設室OO130",
+      "after": "仮設室O0130",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9962131
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9995857
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99995816
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.98216313
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.97608644
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99999607
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9999976
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999987
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9962131
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.9995857
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99995816
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.6796385
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.5427823
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9998833
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.99921334
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9950045
+        }
+      ]
+    },
+    {
+      "id": "code-0677",
+      "expected": "仮設室1OI94",
+      "before": "仮設室1OI94",
+      "after": "仮設室10I94",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9976096
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99911743
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99998796
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99996746
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.7219346
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.78915256
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.999998
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9999987
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "仮",
+          "Confidence": 0.9976096
+        },
+        {
+          "Text": "設",
+          "Confidence": 0.99911743
+        },
+        {
+          "Text": "室",
+          "Confidence": 0.99998796
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99983263
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.54473084
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.9536265
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9897884
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.999474
+        }
+      ]
+    }
+  ]
+}

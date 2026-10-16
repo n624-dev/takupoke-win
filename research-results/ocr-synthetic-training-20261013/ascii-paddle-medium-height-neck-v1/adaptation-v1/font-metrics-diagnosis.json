@@ -1,0 +1,366 @@
+{
+  "scope": "Font source outline/advance audit, no rendered pixels or model inference; font metrics do not prove raster or CNN distinctions",
+  "fonts": [
+    {
+      "font": "NotoSansJP400",
+      "fontSha256": "54aba28468f275bc372eda5f29b202c0d9e7b9ba2bc18a53a4c72c481c75cf9f",
+      "asciiAdvanceDistinctValues": 59,
+      "OAdvance": 742,
+      "zeroAdvance": 555,
+      "IAdvance": 293,
+      "lAdvance": 284,
+      "oneAdvance": 555,
+      "outlineAndAdvanceIdentical": [
+        {
+          "left": "O",
+          "right": "0",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "I",
+          "right": "l",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "l",
+          "right": "1",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": ":",
+          "right": "：",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "-",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "–",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        }
+      ]
+    },
+    {
+      "font": "NotoSerifJP400",
+      "fontSha256": "2b127545ad3dba023d255733015059e550d9dbcd04c980a80021dc8ea666e813",
+      "asciiAdvanceDistinctValues": 74,
+      "OAdvance": 767,
+      "zeroAdvance": 557,
+      "IAdvance": 405,
+      "lAdvance": 334,
+      "oneAdvance": 471,
+      "outlineAndAdvanceIdentical": [
+        {
+          "left": "O",
+          "right": "0",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "I",
+          "right": "l",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "l",
+          "right": "1",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": ":",
+          "right": "：",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "-",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "–",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        }
+      ]
+    },
+    {
+      "font": "MPLUS1Code-Regular",
+      "fontSha256": "c098c9fbdb9ede89a6769e33d590802d7bd2598051cae39f88199dc70c8341ee",
+      "asciiAdvanceDistinctValues": 1,
+      "OAdvance": 500,
+      "zeroAdvance": 500,
+      "IAdvance": 500,
+      "lAdvance": 500,
+      "oneAdvance": 500,
+      "outlineAndAdvanceIdentical": [
+        {
+          "left": "O",
+          "right": "0",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": "I",
+          "right": "l",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": "l",
+          "right": "1",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": ":",
+          "right": "：",
+          "bothGlyphsPresent": false,
+          "identical": null,
+          "outlineIdentical": null,
+          "advanceIdentical": null
+        },
+        {
+          "left": "—",
+          "right": "-",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": "—",
+          "right": "–",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        }
+      ]
+    },
+    {
+      "font": "BIZUDMincho-Regular",
+      "fontSha256": "a8c855817e5cfcc0366926070639f1dc2752693034ea19ddfc50f9a70ffddac2",
+      "asciiAdvanceDistinctValues": 1,
+      "OAdvance": 1024,
+      "zeroAdvance": 1024,
+      "IAdvance": 1024,
+      "lAdvance": 1024,
+      "oneAdvance": 1024,
+      "outlineAndAdvanceIdentical": [
+        {
+          "left": "O",
+          "right": "0",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": "I",
+          "right": "l",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": "l",
+          "right": "1",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": ":",
+          "right": "：",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "-",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": "—",
+          "right": "–",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        }
+      ]
+    },
+    {
+      "font": "KosugiMaru-Regular",
+      "fontSha256": "4b8d0022c8dadd090ef67cd1f71f130714767af7806cba2eb4ebe4b0271c1d68",
+      "asciiAdvanceDistinctValues": 1,
+      "OAdvance": 512,
+      "zeroAdvance": 512,
+      "IAdvance": 512,
+      "lAdvance": 512,
+      "oneAdvance": 512,
+      "outlineAndAdvanceIdentical": [
+        {
+          "left": "O",
+          "right": "0",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": "I",
+          "right": "l",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": "l",
+          "right": "1",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": true
+        },
+        {
+          "left": ":",
+          "right": "：",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "-",
+          "bothGlyphsPresent": false,
+          "identical": null,
+          "outlineIdentical": null,
+          "advanceIdentical": null
+        },
+        {
+          "left": "—",
+          "right": "–",
+          "bothGlyphsPresent": false,
+          "identical": null,
+          "outlineIdentical": null,
+          "advanceIdentical": null
+        }
+      ]
+    },
+    {
+      "font": "ZenAntique-Regular",
+      "fontSha256": "8c5cf7a136837ee705d06bbc133ea18ac06b7dd284f38aace91f5de36725c315",
+      "asciiAdvanceDistinctValues": 79,
+      "OAdvance": 778,
+      "zeroAdvance": 597,
+      "IAdvance": 413,
+      "lAdvance": 331,
+      "oneAdvance": 500,
+      "outlineAndAdvanceIdentical": [
+        {
+          "left": "O",
+          "right": "0",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "I",
+          "right": "l",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "l",
+          "right": "1",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": ":",
+          "right": "：",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "-",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        },
+        {
+          "left": "—",
+          "right": "–",
+          "bothGlyphsPresent": true,
+          "identical": false,
+          "outlineIdentical": false,
+          "advanceIdentical": false
+        }
+      ]
+    }
+  ],
+  "interpretation": "Training covers monospace/proportional fonts on independent newliterals; actual emitted ratios are separately audited. Fontoutline differences alone do not prove lowresolution raster/model identifiability; no frozen condition changes."
+}

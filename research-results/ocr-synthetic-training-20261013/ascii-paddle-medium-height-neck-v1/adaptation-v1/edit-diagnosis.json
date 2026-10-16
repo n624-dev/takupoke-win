@@ -1,0 +1,517 @@
+{
+  "scope": "Read-only saved-output diagnosis; minimum edit tie order can change descriptive attribution. No inference, candidate selection or output correction.",
+  "conditions": [
+    {
+      "name": "original",
+      "groups": {
+        "mixed_code": {
+          "rows": 192,
+          "wrongRows": 70,
+          "rowsWithAsciiMismatch": 70,
+          "rowsWithNonAsciiMismatch": 42,
+          "rowsWithSpaceMismatch": 48,
+          "asciiMismatchAccepted": 56,
+          "nonAsciiMismatchAccepted": 35
+        },
+        "mixed_confusable": {
+          "rows": 192,
+          "wrongRows": 148,
+          "rowsWithAsciiMismatch": 148,
+          "rowsWithNonAsciiMismatch": 36,
+          "rowsWithSpaceMismatch": 54,
+          "asciiMismatchAccepted": 50,
+          "nonAsciiMismatchAccepted": 10
+        },
+        "ascii_short": {
+          "rows": 64,
+          "wrongRows": 17,
+          "rowsWithAsciiMismatch": 17,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 4,
+          "asciiMismatchAccepted": 11,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "japanese": {
+          "rows": 64,
+          "wrongRows": 0,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "retention_japanese": {
+          "rows": 128,
+          "wrongRows": 0,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 0
+        }
+      },
+      "mostCommonEdits": [
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 134
+        },
+        {
+          "gold": "l",
+          "prediction": "1",
+          "count": 74
+        },
+        {
+          "gold": ":",
+          "prediction": "",
+          "count": 59
+        },
+        {
+          "gold": " ",
+          "prediction": "：",
+          "count": 59
+        },
+        {
+          "gold": " ",
+          "prediction": "",
+          "count": 59
+        },
+        {
+          "gold": "l",
+          "prediction": "I",
+          "count": 50
+        },
+        {
+          "gold": "I",
+          "prediction": "l",
+          "count": 31
+        },
+        {
+          "gold": "I",
+          "prediction": "1",
+          "count": 22
+        },
+        {
+          "gold": "1",
+          "prediction": "l",
+          "count": 15
+        },
+        {
+          "gold": ":",
+          "prediction": "：",
+          "count": 12
+        },
+        {
+          "gold": "—",
+          "prediction": "",
+          "count": 7
+        },
+        {
+          "gold": " ",
+          "prediction": "一",
+          "count": 7
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 4
+        },
+        {
+          "gold": "`",
+          "prediction": "",
+          "count": 2
+        },
+        {
+          "gold": "0",
+          "prediction": "O",
+          "count": 1
+        },
+        {
+          "gold": "O",
+          "prediction": "o",
+          "count": 1
+        },
+        {
+          "gold": "|",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "^",
+          "prediction": "",
+          "count": 1
+        }
+      ],
+      "rawSha256": "fdf21989fefbaaa26456dc7d30796489c7845d3f475673cd6fad55c67f31c1c9"
+    },
+    {
+      "name": "epoch-2",
+      "groups": {
+        "mixed_code": {
+          "rows": 192,
+          "wrongRows": 27,
+          "rowsWithAsciiMismatch": 27,
+          "rowsWithNonAsciiMismatch": 3,
+          "rowsWithSpaceMismatch": 5,
+          "asciiMismatchAccepted": 5,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "mixed_confusable": {
+          "rows": 192,
+          "wrongRows": 115,
+          "rowsWithAsciiMismatch": 115,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 17,
+          "asciiMismatchAccepted": 19,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "ascii_short": {
+          "rows": 64,
+          "wrongRows": 17,
+          "rowsWithAsciiMismatch": 17,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 4,
+          "asciiMismatchAccepted": 9,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "japanese": {
+          "rows": 64,
+          "wrongRows": 0,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "retention_japanese": {
+          "rows": 128,
+          "wrongRows": 0,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 0
+        }
+      },
+      "mostCommonEdits": [
+        {
+          "gold": "l",
+          "prediction": "I",
+          "count": 120
+        },
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 88
+        },
+        {
+          "gold": " ",
+          "prediction": "",
+          "count": 24
+        },
+        {
+          "gold": "0",
+          "prediction": "O",
+          "count": 22
+        },
+        {
+          "gold": "1",
+          "prediction": "l",
+          "count": 18
+        },
+        {
+          "gold": "I",
+          "prediction": "l",
+          "count": 14
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 6
+        },
+        {
+          "gold": "l",
+          "prediction": "1",
+          "count": 4
+        },
+        {
+          "gold": ":",
+          "prediction": "：",
+          "count": 2
+        },
+        {
+          "gold": "`",
+          "prediction": "",
+          "count": 2
+        },
+        {
+          "gold": ":",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": " ",
+          "prediction": "：",
+          "count": 1
+        },
+        {
+          "gold": "^",
+          "prediction": "",
+          "count": 1
+        }
+      ],
+      "rawSha256": "2b5812542c5d2fe17d91321c18a1dd337f15117c55bf454291ac187056224814"
+    },
+    {
+      "name": "epoch-4",
+      "groups": {
+        "mixed_code": {
+          "rows": 192,
+          "wrongRows": 25,
+          "rowsWithAsciiMismatch": 25,
+          "rowsWithNonAsciiMismatch": 1,
+          "rowsWithSpaceMismatch": 6,
+          "asciiMismatchAccepted": 2,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "mixed_confusable": {
+          "rows": 192,
+          "wrongRows": 113,
+          "rowsWithAsciiMismatch": 113,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 16,
+          "asciiMismatchAccepted": 14,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "ascii_short": {
+          "rows": 64,
+          "wrongRows": 15,
+          "rowsWithAsciiMismatch": 15,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 4,
+          "asciiMismatchAccepted": 11,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "japanese": {
+          "rows": 64,
+          "wrongRows": 0,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "retention_japanese": {
+          "rows": 128,
+          "wrongRows": 0,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 0
+        }
+      },
+      "mostCommonEdits": [
+        {
+          "gold": "l",
+          "prediction": "I",
+          "count": 123
+        },
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 56
+        },
+        {
+          "gold": "0",
+          "prediction": "O",
+          "count": 39
+        },
+        {
+          "gold": " ",
+          "prediction": "",
+          "count": 23
+        },
+        {
+          "gold": "1",
+          "prediction": "l",
+          "count": 15
+        },
+        {
+          "gold": "I",
+          "prediction": "l",
+          "count": 6
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 5
+        },
+        {
+          "gold": "l",
+          "prediction": "1",
+          "count": 4
+        },
+        {
+          "gold": ":",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": " ",
+          "prediction": "：",
+          "count": 1
+        },
+        {
+          "gold": "",
+          "prediction": "0",
+          "count": 1
+        },
+        {
+          "gold": "O",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "`",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "`",
+          "prediction": "~",
+          "count": 1
+        },
+        {
+          "gold": "^",
+          "prediction": "",
+          "count": 1
+        }
+      ],
+      "rawSha256": "6ce052d5aaec3a2c0a7d70c0b41c7ce13d52e2014b4b47caca60f58e2f2808e3"
+    },
+    {
+      "name": "epoch-8",
+      "groups": {
+        "mixed_code": {
+          "rows": 192,
+          "wrongRows": 18,
+          "rowsWithAsciiMismatch": 18,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 2,
+          "asciiMismatchAccepted": 5,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "mixed_confusable": {
+          "rows": 192,
+          "wrongRows": 111,
+          "rowsWithAsciiMismatch": 111,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 11,
+          "asciiMismatchAccepted": 27,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "ascii_short": {
+          "rows": 64,
+          "wrongRows": 17,
+          "rowsWithAsciiMismatch": 17,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 5,
+          "asciiMismatchAccepted": 10,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "japanese": {
+          "rows": 64,
+          "wrongRows": 0,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 0
+        },
+        "retention_japanese": {
+          "rows": 128,
+          "wrongRows": 0,
+          "rowsWithAsciiMismatch": 0,
+          "rowsWithNonAsciiMismatch": 0,
+          "rowsWithSpaceMismatch": 0,
+          "asciiMismatchAccepted": 0,
+          "nonAsciiMismatchAccepted": 0
+        }
+      },
+      "mostCommonEdits": [
+        {
+          "gold": "l",
+          "prediction": "I",
+          "count": 121
+        },
+        {
+          "gold": "0",
+          "prediction": "O",
+          "count": 54
+        },
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 44
+        },
+        {
+          "gold": " ",
+          "prediction": "",
+          "count": 14
+        },
+        {
+          "gold": "1",
+          "prediction": "l",
+          "count": 12
+        },
+        {
+          "gold": "I",
+          "prediction": "l",
+          "count": 8
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 6
+        },
+        {
+          "gold": "l",
+          "prediction": "1",
+          "count": 5
+        },
+        {
+          "gold": "",
+          "prediction": "I",
+          "count": 1
+        },
+        {
+          "gold": "l",
+          "prediction": " ",
+          "count": 1
+        },
+        {
+          "gold": "`",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "q",
+          "prediction": "g",
+          "count": 1
+        },
+        {
+          "gold": "`",
+          "prediction": "~",
+          "count": 1
+        },
+        {
+          "gold": "^",
+          "prediction": "",
+          "count": 1
+        }
+      ],
+      "rawSha256": "a45a79e9153c730675fc8176121f8bbad9976d87cc89cf4ce01609d0b619bd00"
+    }
+  ]
+}

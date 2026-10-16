@@ -1,0 +1,121 @@
+{
+  "namespace": "research-ascii-english-v5-confusion-v2",
+  "basis": "Independent unmodified official HF PPOCRV5MobileRecForTextRecognition/config/safetensors revision e4abce2bbd335f6c3eda0507b7f8e8abd5af3419. Old strict ONNX transplant remains failed; no nativeONNX identity/transplant claim. No epsilon replacement/fusedDAG replacement.",
+  "dictionary": "Full438 original dictionary/blank0/space final437 retained; all95ASCII present. No vocabulary probability renormalization/class whitelist/output repair.",
+  "parameters": "All officialCNN/encoder/full438classifier weights and affine params (5,510,778) train + reject121. Original architecture/config and norm epsilon stay unchanged. BNrunningstats frozen by evalmode for all optimization forwards; eval does not disable gradients. Japaneseprimary untouched/independentASCIIbranch only.",
+  "train": {
+    "seed": 106531,
+    "fonts": [
+      "IBMPlexMono",
+      "Inconsolata",
+      "FiraMono",
+      "SpaceMono",
+      "CrimsonText",
+      "LibreBaskerville",
+      "Lora",
+      "Alegreya"
+    ],
+    "positiveCounts": {
+      "code": 192,
+      "lookalike": 128,
+      "natural": 384,
+      "printable": 64
+    },
+    "negativeCounts": {
+      "clipped": 16,
+      "interior_damage": 16,
+      "multiline": 16,
+      "noise": 16,
+      "blank": 16,
+      "unknown_cjk": 16,
+      "unknown_mixed": 16
+    }
+  },
+  "development": {
+    "seed": 106541,
+    "fonts": [
+      "RedHatMono",
+      "OverpassMono",
+      "SourceSerif4",
+      "Literata"
+    ],
+    "positiveCounts": {
+      "code": 96,
+      "lookalike": 64,
+      "natural": 192,
+      "printable": 32
+    },
+    "negativeCounts": {
+      "clipped": 16,
+      "interior_damage": 16,
+      "multiline": 16,
+      "noise": 16,
+      "blank": 16,
+      "unknown_cjk": 16,
+      "unknown_mixed": 16
+    }
+  },
+  "fontExposure": "Train only previous train8 fonts; newdev/newfresh Latin families; 50% natural retention. All old literals/images excluded.",
+  "fontBalance": "Each positivegroup equal perfont; 4mono+4proportional train /2mono+2proportional dev. cmapcheck everyrenderedtarget; unknownCJK/mixed negativeonly uses designated CJKfont, not Latin fallback.",
+  "data": "New arbitrary ASCII and natural 2-5-word sentences/fragments with casing/spacing/punctuation; half positives natural, 40percent code/lookalike, 10percent printable. Fresh seeds/literals; previous corpora only exclusion. Paired code/case and confusables samefont/renderseed. CJK/wholemixed unknown negatives never split.",
+  "preprocessing": "All suppliedRGBink bbox+2originalpx/commonbaseline/relativeheight/internalgaps; nativeFP32BGR48 sampler centerbilinear/uint8round/zero-normalizedpadding width320..960, validWidth/sourceRect preserved. NoFP16. This fixes input condition for independentHFbasis and does not assert officialHFImageProcessor or Windowsbyteparity.",
+  "cache": "Lossless FP32 tensor/features/full438 probabilities from active teacher; no giant feature cache; old caches preserved.",
+  "selfConsistencyNewDevGate": "Before optimizer everynewdev storedofficialbaseline vs initializedsameofficialAdapter exactFP32feature/probability byte equality and text/interval/floor/ASCII/validWidthdecision equality. Halt iffail.",
+  "contradictionAudit": "ExactprovidedPNG/FP32input with differentpositive target or positive-vs-negative conflict ->excludeallconflictingtrainrows from everyupdate, no targetrepair/falsedamage label. Dev unchanged. CTClength<=nativeframes.",
+  "training": {
+    "seed": 106561,
+    "threads": 2,
+    "batchSize": 2,
+    "epochs": 2,
+    "evaluateEpochs": [
+      1,
+      2
+    ],
+    "cnnLearningRate": 3e-06,
+    "encoderLearningRate": 1e-05,
+    "headLearningRate": 3e-05,
+    "rejectLearningRate": 0.0001,
+    "teacherKlWeight": 0.8,
+    "teacherFeatureMseWeight": 0.02,
+    "rejectBceWeight": 0.5,
+    "weightDecay": 0.0001,
+    "gradientClip": 5.0,
+    "maximumTrainingSeconds": 1800,
+    "maximumCacheSeconds": 1800,
+    "maximumRssMiB": 4096,
+    "additionalDiskBudgetGiB": 1.0,
+    "minimumFreeDiskGiB": 1.5
+  },
+  "loss": "Full438CTC on intactpositives/emptyblank; fullteacherKL+teacherfeatureMSE on allsamples; BCEreject on allsamples. Damage/multiline/noise/CJK/mixed receive no guessedCTClabel.",
+  "batching": "ExactFP32inputWidthbucket, no new image/temporalpadding/noattentionmask. Original outputT centers scaledbyinputWidth/validWidth onlydefine rejectmean; CTCSourceBox interval end pastvalidWidth alwaysrefused.",
+  "acceptance": "Baseline/trainednonempty/alltextprintableASCII/minemittedCTCconfidence>=.8/nointervalpastvalidWidth; trainedalso rejectProbability<=.05. Uncalibrateddiagnostic only; outputASCII cannotprove inputsource/domain.",
+  "selection": "Active fallback included. Eligible if whole CER strictly improves, code/lookalike CER <=.95*active, natural CER <=active+.002, wrongAccepted<=active+2, negativeAccepted<=active+2, allUnsupportedPaddingRefused. Rank wholeCER/codeCER/-exact/epoch. No zero-error gate.",
+  "continuationGate": "Fresh independent assessment after selectedhash frozen. No parameter/threshold/checkpoint change after fresh. Parent product decision.",
+  "sourceProof": "Oldconsumed64samepixelscriptalias/missingprefixcontrols onlypostselection, never train/choose/final. Sourcecompleteness/script/cellgeometry provenance remains independent.",
+  "final": "New fonts SplineSansMono/MartianMono/Newsreader/Fraunces fresh496 after selection; no Sawarabi/KleeOne/KaiseiTokumin use. Japanese primary unchanged; no iOS edits/activation/publication.",
+  "initialization": "font-balanced epoch4 SHA7313bee5dabf17998010c6f47844fe80649744b03c0366af05c627fc47314547; teacher same active selected official438 weights; active ONNX SHA9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703",
+  "fresh": {
+    "seed": 106591,
+    "fonts": [
+      "SplineSansMono",
+      "MartianMono",
+      "Newsreader",
+      "Fraunces"
+    ],
+    "positiveCounts": {
+      "code": 96,
+      "lookalike": 64,
+      "natural": 192,
+      "printable": 32
+    },
+    "negativeCounts": {
+      "clipped": 16,
+      "interior_damage": 16,
+      "multiline": 16,
+      "noise": 16,
+      "blank": 16,
+      "unknown_cjk": 16,
+      "unknown_mixed": 16
+    }
+  }
+}

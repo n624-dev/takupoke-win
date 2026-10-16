@@ -1,0 +1,238 @@
+{
+  "name": "active-baseline",
+  "positiveRows": 384,
+  "exact": 304,
+  "correctAccepted": 247,
+  "incorrectAccepted": 34,
+  "negativeRows": 112,
+  "negativeAccepted": 11,
+  "paddingRows": 6,
+  "cer": 0.019452757588713124,
+  "groups": {
+    "blank": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 0
+    },
+    "clipped": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 2,
+      "nonempty": 16
+    },
+    "code": {
+      "rows": 96,
+      "exact": 59,
+      "correctAccepted": 44,
+      "incorrectAccepted": 15,
+      "accepted": 59,
+      "nonempty": 96,
+      "characters": 480,
+      "editErrors": 43,
+      "cer": 0.08958333333333333,
+      "correctLowConfidence": 13,
+      "wrongHighConfidence": 16
+    },
+    "interior_damage": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 9,
+      "nonempty": 16
+    },
+    "lookalike": {
+      "rows": 96,
+      "exact": 65,
+      "correctAccepted": 51,
+      "incorrectAccepted": 9,
+      "accepted": 60,
+      "nonempty": 96,
+      "characters": 548,
+      "editErrors": 36,
+      "cer": 0.06569343065693431,
+      "correctLowConfidence": 14,
+      "wrongHighConfidence": 9
+    },
+    "multiline": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 13
+    },
+    "natural": {
+      "rows": 160,
+      "exact": 156,
+      "correctAccepted": 133,
+      "incorrectAccepted": 4,
+      "accepted": 137,
+      "nonempty": 160,
+      "characters": 3298,
+      "editErrors": 4,
+      "cer": 0.001212856276531231,
+      "correctLowConfidence": 23,
+      "wrongHighConfidence": 4
+    },
+    "noise": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 0
+    },
+    "printable": {
+      "rows": 32,
+      "exact": 24,
+      "correctAccepted": 19,
+      "incorrectAccepted": 6,
+      "accepted": 25,
+      "nonempty": 32,
+      "characters": 352,
+      "editErrors": 8,
+      "cer": 0.022727272727272728,
+      "correctLowConfidence": 5,
+      "wrongHighConfidence": 6
+    },
+    "unknown_cjk": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 0
+    },
+    "unknown_mixed": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 16
+    }
+  },
+  "rawSha256": "d522f0d558ee5f61dda305d510897725e9bc0061d678901ef686f33c49646121",
+  "scope": "Fresh synthetic development unless separately labeled fresh; independent ASCII branch; no document qualification",
+  "fontMetrics": {
+    "ZenOldMincho": {
+      "rows": 96,
+      "characters": 528,
+      "editErrors": 24,
+      "cer": 0.045454545454545456,
+      "exact": 74,
+      "correctLowConfidence": 19,
+      "wrongHighConfidence": 8,
+      "accepted": 63
+    },
+    "YuseiMagic": {
+      "rows": 96,
+      "characters": 500,
+      "editErrors": 55,
+      "cer": 0.11,
+      "exact": 50,
+      "correctLowConfidence": 8,
+      "wrongHighConfidence": 17,
+      "accepted": 56
+    },
+    "IBMPlexMono": {
+      "rows": 48,
+      "characters": 891,
+      "editErrors": 0,
+      "cer": 0.0,
+      "exact": 48,
+      "correctLowConfidence": 4,
+      "wrongHighConfidence": 0,
+      "accepted": 44
+    },
+    "Inconsolata": {
+      "rows": 48,
+      "characters": 900,
+      "editErrors": 3,
+      "cer": 0.0033333333333333335,
+      "exact": 45,
+      "correctLowConfidence": 5,
+      "wrongHighConfidence": 3,
+      "accepted": 43
+    },
+    "CrimsonText": {
+      "rows": 48,
+      "characters": 927,
+      "editErrors": 2,
+      "cer": 0.002157497303128371,
+      "exact": 46,
+      "correctLowConfidence": 8,
+      "wrongHighConfidence": 2,
+      "accepted": 40
+    },
+    "Alegreya": {
+      "rows": 48,
+      "characters": 932,
+      "editErrors": 7,
+      "cer": 0.0075107296137339056,
+      "exact": 41,
+      "correctLowConfidence": 11,
+      "wrongHighConfidence": 5,
+      "accepted": 35
+    }
+  },
+  "codeMetrics": {
+    "rows": 192,
+    "characters": 1028,
+    "editErrors": 79,
+    "cer": 0.07684824902723736,
+    "exact": 124,
+    "correctLowConfidence": 27,
+    "wrongHighConfidence": 25,
+    "accepted": 119
+  },
+  "monoCodeMetrics": {
+    "rows": 0,
+    "characters": 0,
+    "editErrors": 0,
+    "cer": null,
+    "exact": 0,
+    "correctLowConfidence": 0,
+    "wrongHighConfidence": 0,
+    "accepted": 0
+  },
+  "fontCodeMetrics": {
+    "RedHatMono": {
+      "rows": 0,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "exact": 0,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0,
+      "accepted": 0
+    },
+    "OverpassMono": {
+      "rows": 0,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "exact": 0,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0,
+      "accepted": 0
+    }
+  },
+  "reviewMetrics": {
+    "rows": 384,
+    "characters": 4678,
+    "editErrors": 91,
+    "cer": 0.019452757588713124,
+    "exact": 304,
+    "correctLowConfidence": 55,
+    "wrongHighConfidence": 35,
+    "accepted": 281
+  },
+  "allUnsupportedPaddingRefused": true
+}

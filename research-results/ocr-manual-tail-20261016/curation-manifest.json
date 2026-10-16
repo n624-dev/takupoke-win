@@ -1,0 +1,194 @@
+{
+  "scope": "Closed fictional-study records. Images, fonts, models and executable binaries excluded. JSONL losslessly gzip compressed with mtime=0. Every original and published byte hash retained.",
+  "files": [
+    {
+      "originalFile": "baseline-freeze.json",
+      "originalBytes": 7598,
+      "originalSHA256": "093a9230d83d8aad2e4d2dea494538d8ca3b1fac4234304bffa00b78c1f576f6",
+      "publicFile": "baseline-freeze.json",
+      "publicBytes": 7598,
+      "publicSHA256": "093a9230d83d8aad2e4d2dea494538d8ca3b1fac4234304bffa00b78c1f576f6",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "baseline-verified-raw.jsonl",
+      "originalBytes": 3993356,
+      "originalSHA256": "f7589ee2b2a2ee768f76d6079c3e4ea985fa6bec94933f74a5df01fad47c8120",
+      "publicFile": "baseline-verified-raw.jsonl.gz",
+      "publicBytes": 307787,
+      "publicSHA256": "3d8923b658308adee24cd9d3faf1cab01bc303e236db35e9f6b36d7ab56a526a",
+      "encoding": "gzip, decompress to original bytes"
+    },
+    {
+      "originalFile": "baseline-verified-receipt.json",
+      "originalBytes": 142,
+      "originalSHA256": "7f10ef17097670f0f6d1f737c891632004cdd21175acfd44e5caa2574ad611fa",
+      "publicFile": "baseline-verified-receipt.json",
+      "publicBytes": 142,
+      "publicSHA256": "7f10ef17097670f0f6d1f737c891632004cdd21175acfd44e5caa2574ad611fa",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "baseline-verified-stderr.txt",
+      "originalBytes": 0,
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "publicFile": "baseline-verified-stderr.txt",
+      "publicBytes": 0,
+      "publicSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "baseline-verified-stdout.txt",
+      "originalBytes": 0,
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "publicFile": "baseline-verified-stdout.txt",
+      "publicBytes": 0,
+      "publicSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "font-downloads.json",
+      "originalBytes": 1119,
+      "originalSHA256": "d3727064973c24a1c27bd026c6c83583687ef96123cd76deffb5cf11d2bcac4c",
+      "publicFile": "font-downloads.json",
+      "publicBytes": 1119,
+      "publicSHA256": "d3727064973c24a1c27bd026c6c83583687ef96123cd76deffb5cf11d2bcac4c",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "freeze.json",
+      "originalBytes": 12919,
+      "originalSHA256": "314680f1d21c562671e140971c51598cfd7cca1ec430a686efe9b102967dd99e",
+      "publicFile": "freeze.json",
+      "publicBytes": 12919,
+      "publicSHA256": "314680f1d21c562671e140971c51598cfd7cca1ec430a686efe9b102967dd99e",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "glyph-ambiguity.json",
+      "originalBytes": 10632,
+      "originalSHA256": "dbbfba4154ac4d701eb75a663f3a493e15f0f129d78999258330c9f6c025ddf9",
+      "publicFile": "glyph-ambiguity.json",
+      "publicBytes": 10632,
+      "publicSHA256": "dbbfba4154ac4d701eb75a663f3a493e15f0f129d78999258330c9f6c025ddf9",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "inputs.json",
+      "originalBytes": 191823,
+      "originalSHA256": "13673728499183c58c52f540a7c90ab983a69c307582973a375f77f9e113e6d9",
+      "publicFile": "inputs.json",
+      "publicBytes": 191823,
+      "publicSHA256": "13673728499183c58c52f540a7c90ab983a69c307582973a375f77f9e113e6d9",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "kaiseitokumin-OFL.txt",
+      "originalBytes": 4383,
+      "originalSHA256": "6c5445d4febbf6d84025b874a85c51e7e4bfa7495279eccdb4c317a6de857b46",
+      "publicFile": "kaiseitokumin-OFL.txt",
+      "publicBytes": 4383,
+      "publicSHA256": "6c5445d4febbf6d84025b874a85c51e7e4bfa7495279eccdb4c317a6de857b46",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "kleeone-OFL.txt",
+      "originalBytes": 4479,
+      "originalSHA256": "e376b0df8e8a2345a9533db6f0a5333a1107975569ad9d1973a7ee557161ca38",
+      "publicFile": "kleeone-OFL.txt",
+      "publicBytes": 4479,
+      "publicSHA256": "e376b0df8e8a2345a9533db6f0a5333a1107975569ad9d1973a7ee557161ca38",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "manual-route-examples.json",
+      "originalBytes": 39157,
+      "originalSHA256": "54cd5ae54d1c14cf8c191731490d685cb3aa1f83607f3a9fcd7bed79bf254ad2",
+      "publicFile": "manual-route-examples.json",
+      "publicBytes": 39157,
+      "publicSHA256": "54cd5ae54d1c14cf8c191731490d685cb3aa1f83607f3a9fcd7bed79bf254ad2",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "oracle.json",
+      "originalBytes": 150735,
+      "originalSHA256": "5ef7e73cdaf71d387347a87bb326b455bb93d2bdba28b12a8095c1cd48968c8c",
+      "publicFile": "oracle.json",
+      "publicBytes": 150735,
+      "publicSHA256": "5ef7e73cdaf71d387347a87bb326b455bb93d2bdba28b12a8095c1cd48968c8c",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "paired-manual-routes.json",
+      "originalBytes": 1708,
+      "originalSHA256": "578925afd2d8c157c7b6ebb7f942901c6f3370120c75834986285b264da369c7",
+      "publicFile": "paired-manual-routes.json",
+      "publicBytes": 1708,
+      "publicSHA256": "578925afd2d8c157c7b6ebb7f942901c6f3370120c75834986285b264da369c7",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "policy-clarification.json",
+      "originalBytes": 671,
+      "originalSHA256": "cd4b06b9adec83e8fecafa17a06a7a7dafd6c2279f910855ad07aecb16186be9",
+      "publicFile": "policy-clarification.json",
+      "publicBytes": 671,
+      "publicSHA256": "cd4b06b9adec83e8fecafa17a06a7a7dafd6c2279f910855ad07aecb16186be9",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "protocol.json",
+      "originalBytes": 2093,
+      "originalSHA256": "7559e45d278aadd0143b3d5e557394048ec56bd1dbaf7faf9d57aecbdbb61d54",
+      "publicFile": "protocol.json",
+      "publicBytes": 2093,
+      "publicSHA256": "7559e45d278aadd0143b3d5e557394048ec56bd1dbaf7faf9d57aecbdbb61d54",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "raw.jsonl",
+      "originalBytes": 3991510,
+      "originalSHA256": "6e4d0a1c20393957796139e0eda519153f21dfc13dcff5ddc3de56c0168fd4b1",
+      "publicFile": "raw.jsonl.gz",
+      "publicBytes": 327831,
+      "publicSHA256": "c2d7bc78ebf3130e29f2955ae9a0e3b6a6f88041118e0383335b6fa219072f7a",
+      "encoding": "gzip, decompress to original bytes"
+    },
+    {
+      "originalFile": "report.json",
+      "originalBytes": 32107,
+      "originalSHA256": "82cb728326015c6645cd25e15d67eeb0667ae95b0aa8c6b3ba28169911792cdd",
+      "publicFile": "report.json",
+      "publicBytes": 32107,
+      "publicSHA256": "82cb728326015c6645cd25e15d67eeb0667ae95b0aa8c6b3ba28169911792cdd",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "stderr.txt",
+      "originalBytes": 0,
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "publicFile": "stderr.txt",
+      "publicBytes": 0,
+      "publicSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "stdout.txt",
+      "originalBytes": 0,
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "publicFile": "stdout.txt",
+      "publicBytes": 0,
+      "publicSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "worker-receipt.json",
+      "originalBytes": 164,
+      "originalSHA256": "0c1b99a108d5e492f59566354cab68e1734df4776d9d2de36981b4a62e8831e4",
+      "publicFile": "worker-receipt.json",
+      "publicBytes": 164,
+      "publicSHA256": "0c1b99a108d5e492f59566354cab68e1734df4776d9d2de36981b4a62e8831e4",
+      "encoding": "original bytes"
+    }
+  ]
+}

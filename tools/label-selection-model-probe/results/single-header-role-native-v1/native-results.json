@@ -1,0 +1,1463 @@
+[
+  {
+    "modelId": "qwen3.5-4b-generic-cpu:3",
+    "runtimeVersion": "Foundry.Local.WinML:1.2.4",
+    "backend": "Windows CPU",
+    "osVersion": "Microsoft Windows NT 10.0.26100.0",
+    "artifactBytes": 3235313679,
+    "artifacts": [
+      {
+        "Path": "chat_template.jinja",
+        "Size": 7756,
+        "Sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+      },
+      {
+        "Path": "config.json",
+        "Size": 2806,
+        "Sha256": "e5b8be4e7e4dbeefaec0f68faf38679bbaddac904cc22fa14864fe7cc8f4e409"
+      },
+      {
+        "Path": "embedding.onnx",
+        "Size": 2919,
+        "Sha256": "ec0a294340582c4b65e1328ad095a316aad1907eed389a3542bf3b17cbee425a"
+      },
+      {
+        "Path": "embedding.onnx.data",
+        "Size": 337772544,
+        "Sha256": "d6427c285368509a451d787edca822cad77d454f43459694f851261091306602"
+      },
+      {
+        "Path": "genai_config.json",
+        "Size": 2690,
+        "Sha256": "e2e93c21c59e36632bd1b17b175e0f861f965ba329199b4a1206bbc782acf989"
+      },
+      {
+        "Path": "inference_model.json",
+        "Size": 415,
+        "Sha256": "6d18e092c515e1225a5f0e7af6d4dc27aba9b8abcb5085760c2f0fd39839865b"
+      },
+      {
+        "Path": "model_config.json",
+        "Size": 400,
+        "Sha256": "b0305cbd976f1e5e1bb67a4de2edc8dfef8e950616bd71cf3a993aaf66293e8d"
+      },
+      {
+        "Path": "processor_config.json",
+        "Size": 1531,
+        "Sha256": "1bca2f93340fc1c68ff545a776ea6870628b8e11c16042f43a24f09bf96f7286"
+      },
+      {
+        "Path": "text.onnx",
+        "Size": 652982,
+        "Sha256": "5a2647b12e4909944aa2b8aeee25b5a22d81f8f0867868863513c6381f5c66ca"
+      },
+      {
+        "Path": "text.onnx.data",
+        "Size": 2698962944,
+        "Sha256": "423cb859c1730ea6434e34d7b525059b48796376d41ae3f7f202b309850c9d4c"
+      },
+      {
+        "Path": "tokenizer.json",
+        "Size": 11071259,
+        "Sha256": "fb6b03d625b6fcc3d21d6afafe37da9910694c89cef30b9363e259ceeff9e489"
+      },
+      {
+        "Path": "tokenizer_config.json",
+        "Size": 1124,
+        "Sha256": "eae0b680a277b7a210259360b8a1c2351160fb55e87f3dc38dfb32c59f29a1b2"
+      },
+      {
+        "Path": "vision.onnx",
+        "Size": 3005829,
+        "Sha256": "ba47728406207cc5a3a283425b4d1fcd86f0034c30fe99040c4c3049a0dfb608"
+      },
+      {
+        "Path": "vision.onnx.data",
+        "Size": 183828480,
+        "Sha256": "7c0d319183204d2c36e318507639f07171d9f658d62658902b558b9b9cc46497"
+      }
+    ],
+    "corpus": "fictional-folded-structure-v1-label-selection-pilot-variants-0-1",
+    "inferenceRecipe": "single-header-role-original-ids-native-v1",
+    "inputEncoding": "Japanese-readable label-selection JSON",
+    "sampler": {
+      "temperature": 0,
+      "randomSeed": 17,
+      "maxTokens": 512,
+      "responseFormat": "lark_grammar",
+      "toolChoice": "none",
+      "maxLabelIdsPerRole": 48
+    },
+    "positiveCases": 6,
+    "negativeCases": 6,
+    "systemInstructionSha256": "4827fa46956a14d375792000e9bdba62a7c0bc153a19ceb4c6202063877debc7",
+    "positiveExact": 0,
+    "negativeRejected": 6,
+    "incorrectValidatorAcceptances": 0,
+    "errors": 0,
+    "modelCalls": 36,
+    "providerCellCalls": 12,
+    "nativeCallsEligible": 36,
+    "positiveLabelRolesExact": 6,
+    "positiveLabelRolesWrong": 12,
+    "positiveLabelRolesAssessed": 18,
+    "positiveLabelRolesEligible": 18,
+    "positiveLabelRolesUnassessed": 0,
+    "positiveCasesAssessed": 6,
+    "positiveCasesUnassessed": 0,
+    "negativeCasesAssessed": 6,
+    "negativeCasesUnassessed": 0,
+    "positiveCasesRejected": 6,
+    "singleRoleScores": [
+      {
+        "Id": "Timetable-folded-0",
+        "role": "subject",
+        "assessed": true,
+        "exact": true,
+        "expectedIds": [
+          "g0"
+        ],
+        "actualIds": [
+          "g0"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Timetable-folded-0",
+        "role": "teacher",
+        "assessed": true,
+        "exact": false,
+        "expectedIds": [
+          "g2",
+          "g4"
+        ],
+        "actualIds": [
+          "g0",
+          "g2",
+          "g4"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Timetable-folded-0",
+        "role": "room",
+        "assessed": true,
+        "exact": false,
+        "expectedIds": [
+          "g5"
+        ],
+        "actualIds": [
+          "g0",
+          "g5"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Timetable-folded-1",
+        "role": "subject",
+        "assessed": true,
+        "exact": false,
+        "expectedIds": [
+          "g2"
+        ],
+        "actualIds": [
+          "g0",
+          "g2"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Timetable-folded-1",
+        "role": "teacher",
+        "assessed": true,
+        "exact": false,
+        "expectedIds": [
+          "g4",
+          "g6"
+        ],
+        "actualIds": [
+          "g0"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Timetable-folded-1",
+        "role": "room",
+        "assessed": true,
+        "exact": true,
+        "expectedIds": [
+          "g0"
+        ],
+        "actualIds": [
+          "g0"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Exam-folded-0",
+        "role": "subject",
+        "assessed": true,
+        "exact": true,
+        "expectedIds": [
+          "g0"
+        ],
+        "actualIds": [
+          "g0"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Exam-folded-0",
+        "role": "teacher",
+        "assessed": true,
+        "exact": false,
+        "expectedIds": [
+          "g2",
+          "g4"
+        ],
+        "actualIds": [
+          "g0"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Exam-folded-0",
+        "role": "room",
+        "assessed": true,
+        "exact": false,
+        "expectedIds": [
+          "g5"
+        ],
+        "actualIds": [
+          "g0",
+          "g5"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Exam-folded-1",
+        "role": "subject",
+        "assessed": true,
+        "exact": false,
+        "expectedIds": [
+          "g2"
+        ],
+        "actualIds": [
+          "g0",
+          "g2"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Exam-folded-1",
+        "role": "teacher",
+        "assessed": true,
+        "exact": false,
+        "expectedIds": [
+          "g4",
+          "g6"
+        ],
+        "actualIds": [
+          "g0"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Exam-folded-1",
+        "role": "room",
+        "assessed": true,
+        "exact": true,
+        "expectedIds": [
+          "g0"
+        ],
+        "actualIds": [
+          "g0"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Return-folded-0",
+        "role": "subject",
+        "assessed": true,
+        "exact": true,
+        "expectedIds": [
+          "g0"
+        ],
+        "actualIds": [
+          "g0"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Return-folded-0",
+        "role": "teacher",
+        "assessed": true,
+        "exact": false,
+        "expectedIds": [
+          "g2",
+          "g4"
+        ],
+        "actualIds": [
+          "g0"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Return-folded-0",
+        "role": "room",
+        "assessed": true,
+        "exact": false,
+        "expectedIds": [
+          "g5"
+        ],
+        "actualIds": [
+          "g0",
+          "g5"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Return-folded-1",
+        "role": "subject",
+        "assessed": true,
+        "exact": false,
+        "expectedIds": [
+          "g2"
+        ],
+        "actualIds": [
+          "g0",
+          "g2"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Return-folded-1",
+        "role": "teacher",
+        "assessed": true,
+        "exact": false,
+        "expectedIds": [
+          "g4",
+          "g6"
+        ],
+        "actualIds": [
+          "g0"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      },
+      {
+        "Id": "Return-folded-1",
+        "role": "room",
+        "assessed": true,
+        "exact": true,
+        "expectedIds": [
+          "g0"
+        ],
+        "actualIds": [
+          "g0"
+        ],
+        "scope": "Per-role completed output correctness; runtime/no-return roles unassessed even when other roles returned correctly"
+      }
+    ],
+    "nativeCompletionsStarted": 36,
+    "nativeCompletionsReturned": 36,
+    "strictSelectionsDecoded": 0,
+    "strictSelectionScope": "Strict object/arrays and source-ID order/uniqueness decoding only; not native hard grammar enforcement or semantic correctness",
+    "labelRoleScoring": "Per-role strict decoding retains partial role selections; malformed completed roles are wrong, runtime/no-return roles are unassessed while good returned roles remain assessed. Whole cases with any execution error stay unassessed. Whole-document acceptance still requires merged ownership decoder and unchanged certificate.",
+    "evaluationStatus": "completed",
+    "developmentCorpusStatus": "failed",
+    "evaluatorProcessPeakWorkingSetBytes": 5478637568,
+    "evaluatorProcessTerminalPrivateMemoryBytes": 5036351488,
+    "memoryScope": "Evaluator process only; peak cumulative within process and A/B recipes, excludes any child runtime processes; no minimum-device claim",
+    "historicalBaseline": {
+      "sourceCommit": "6fe643347e48af676d4a74c5a4d99c47fa474b5e",
+      "runId": 37192022036,
+      "inferenceRecipe": "label-selection-lark-bounded-native-v4-clear-ja",
+      "positiveExact": 3,
+      "positiveEligible": 6,
+      "negativeRejected": 6,
+      "negativeEligible": 6,
+      "incorrectValidatorAcceptances": 0,
+      "nativeCalls": 12,
+      "scope": "Existing historical full-RecoveryResult comparison; no formal-converter evidence claimed retroactively, no rerun"
+    },
+    "microtaskScope": "Three fixed-order subject/teacher/room native calls per cell, all full sources, same sampler. 180-second cooperative deadline per role; 600-second cell deadline; 85-minute evaluator cancellation budget with 10-minute CI grace. Every completed role is streamed before the final report. Role latency excludes shared cell artifact-readiness verification; total cell latency includes it.",
+    "promptComparison": "Historical clear-JA baseline compared with new single-role task; separate runner/start time, no randomized latency claim",
+    "sourceCommit": "ea2e82d53e5e7b7497ea6d6ad872bf60792c8e54",
+    "executionScope": "Full frozen development corpus",
+    "pipelineStage": "Isolated one-HEADER-role ID correctness controls; three scheduled calls merged then unchanged measured cuts/certificate/Engine/Validator and full formal conversion equality against the same frozen expected RecoveryResult converted before inference. No original PDF/Reader/OCR/Builder or useful AI benefit.",
+    "rawOutputScope": "Observed roles retain bounded 16384-character text with original length/truncation and native counts. Global cancellation can leave current-role raw only at case level, unassessed; unsupported choice counts may omit raw. No retry or substitution.",
+    "caseResults": [
+      {
+        "Id": "Timetable-folded-0",
+        "ShouldAdopt": true,
+        "previewed": false,
+        "targetCellExact": false,
+        "wholeResultExact": false,
+        "formalExact": null,
+        "actualFormalHash": null,
+        "expectedFormalHash": "f1e8eefff2264f3906de69e2f0865c63eac07a78191730744a6de8a76aa25864",
+        "calls": 1,
+        "nativeCompletionsStarted": 3,
+        "nativeCompletionsReturned": 3,
+        "preflightRejected": false,
+        "labelRolesExact": 1,
+        "rawLabelSelection": {
+          "subject": [
+            "g0"
+          ],
+          "teacher": [
+            "g0",
+            "g2",
+            "g4"
+          ],
+          "room": [
+            "g0",
+            "g5"
+          ]
+        },
+        "rawModelOutput": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+        "rawOriginalLength": 25,
+        "rawTruncated": false,
+        "singleRoleCalls": [
+          {
+            "Role": "subject",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 46244
+          },
+          {
+            "Role": "teacher",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g2\", \"g4\"]\n}",
+            "OriginalLength": 31,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g2",
+              "g4"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 46519
+          },
+          {
+            "Role": "room",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+            "OriginalLength": 25,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g5"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 46637
+          }
+        ],
+        "allRoleSelectionsDecoded": false,
+        "adapterStage": "merged-id-ownership-decoder",
+        "sourceHash": "b0cc74a5748cdde17598602c3fbe8414fe51eb33d3eaa7637744e4383de1771e",
+        "milliseconds": 158293,
+        "errors": [
+          "invalidStructureOutput"
+        ]
+      },
+      {
+        "Id": "Timetable-missing-colon-0",
+        "ShouldAdopt": false,
+        "previewed": false,
+        "targetCellExact": false,
+        "wholeResultExact": false,
+        "formalExact": null,
+        "actualFormalHash": null,
+        "expectedFormalHash": null,
+        "calls": 1,
+        "nativeCompletionsStarted": 3,
+        "nativeCompletionsReturned": 3,
+        "preflightRejected": false,
+        "labelRolesExact": null,
+        "rawLabelSelection": {
+          "subject": [
+            "g0"
+          ],
+          "teacher": [
+            "g0",
+            "g2",
+            "g4"
+          ],
+          "room": [
+            "g0"
+          ]
+        },
+        "rawModelOutput": "{\n  \"ids\": [\"g0\"]\n}",
+        "rawOriginalLength": 19,
+        "rawTruncated": false,
+        "singleRoleCalls": [
+          {
+            "Role": "subject",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 46758
+          },
+          {
+            "Role": "teacher",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g2\", \"g4\"]\n}",
+            "OriginalLength": 31,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g2",
+              "g4"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 46387
+          },
+          {
+            "Role": "room",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 45419
+          }
+        ],
+        "allRoleSelectionsDecoded": false,
+        "adapterStage": "merged-id-ownership-decoder",
+        "sourceHash": "b875dc2988141ed26e9b6fd8864eae2591206d5e260b591271ca8b5726de1d8c",
+        "milliseconds": 309026,
+        "errors": [
+          "invalidStructureOutput"
+        ]
+      },
+      {
+        "Id": "Timetable-folded-1",
+        "ShouldAdopt": true,
+        "previewed": false,
+        "targetCellExact": false,
+        "wholeResultExact": false,
+        "formalExact": null,
+        "actualFormalHash": null,
+        "expectedFormalHash": "dc2964bbdc27fc7211ca29433793534de1cbd83f4b45f1aa5194cb4c8bbe748f",
+        "calls": 1,
+        "nativeCompletionsStarted": 3,
+        "nativeCompletionsReturned": 3,
+        "preflightRejected": false,
+        "labelRolesExact": 1,
+        "rawLabelSelection": {
+          "subject": [
+            "g0",
+            "g2"
+          ],
+          "teacher": [
+            "g0"
+          ],
+          "room": [
+            "g0"
+          ]
+        },
+        "rawModelOutput": "{\n  \"ids\": [\"g0\"]\n}",
+        "rawOriginalLength": 19,
+        "rawTruncated": false,
+        "singleRoleCalls": [
+          {
+            "Role": "subject",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g2\"]\n}",
+            "OriginalLength": 25,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g2"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 45694
+          },
+          {
+            "Role": "teacher",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 44318
+          },
+          {
+            "Role": "room",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 44393
+          }
+        ],
+        "allRoleSelectionsDecoded": false,
+        "adapterStage": "merged-id-ownership-decoder",
+        "sourceHash": "5ef36a640902a80a96b0298eef4f25bcc2006d553e4207c57a2b4b1ea0a9e2ce",
+        "milliseconds": 316162,
+        "errors": [
+          "invalidStructureOutput"
+        ]
+      },
+      {
+        "Id": "Timetable-missing-colon-1",
+        "ShouldAdopt": false,
+        "previewed": false,
+        "targetCellExact": false,
+        "wholeResultExact": false,
+        "formalExact": null,
+        "actualFormalHash": null,
+        "expectedFormalHash": null,
+        "calls": 1,
+        "nativeCompletionsStarted": 3,
+        "nativeCompletionsReturned": 3,
+        "preflightRejected": false,
+        "labelRolesExact": null,
+        "rawLabelSelection": {
+          "subject": [
+            "g0",
+            "g2"
+          ],
+          "teacher": [
+            "g0",
+            "g1",
+            "g2",
+            "g3",
+            "g4",
+            "g5",
+            "g6"
+          ],
+          "room": [
+            "g0"
+          ]
+        },
+        "rawModelOutput": "{\n  \"ids\": [\"g0\"]\n}",
+        "rawOriginalLength": 19,
+        "rawTruncated": false,
+        "singleRoleCalls": [
+          {
+            "Role": "subject",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g2\"]\n}",
+            "OriginalLength": 25,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g2"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 46602
+          },
+          {
+            "Role": "teacher",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g1\", \"g2\", \"g3\", \"g4\", \"g5\", \"g6\"]\n}",
+            "OriginalLength": 55,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g1",
+              "g2",
+              "g3",
+              "g4",
+              "g5",
+              "g6"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 48036
+          },
+          {
+            "Role": "room",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 45195
+          }
+        ],
+        "allRoleSelectionsDecoded": false,
+        "adapterStage": "merged-id-ownership-decoder",
+        "sourceHash": "3f85651aad619948d1237bc95cc6e189ebfeeb0cfdefdc78e23d2b605ee20fa7",
+        "milliseconds": 322342,
+        "errors": [
+          "invalidStructureOutput"
+        ]
+      },
+      {
+        "Id": "Exam-folded-0",
+        "ShouldAdopt": true,
+        "previewed": false,
+        "targetCellExact": false,
+        "wholeResultExact": false,
+        "formalExact": null,
+        "actualFormalHash": null,
+        "expectedFormalHash": "1a444fd6b964e356d50a759ba63d4233aa275af4fba3a7881f89f97f548c8b87",
+        "calls": 1,
+        "nativeCompletionsStarted": 3,
+        "nativeCompletionsReturned": 3,
+        "preflightRejected": false,
+        "labelRolesExact": 1,
+        "rawLabelSelection": {
+          "subject": [
+            "g0"
+          ],
+          "teacher": [
+            "g0"
+          ],
+          "room": [
+            "g0",
+            "g5"
+          ]
+        },
+        "rawModelOutput": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+        "rawOriginalLength": 25,
+        "rawTruncated": false,
+        "singleRoleCalls": [
+          {
+            "Role": "subject",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 54605
+          },
+          {
+            "Role": "teacher",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 52682
+          },
+          {
+            "Role": "room",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+            "OriginalLength": 25,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g5"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 53146
+          }
+        ],
+        "allRoleSelectionsDecoded": false,
+        "adapterStage": "merged-id-ownership-decoder",
+        "sourceHash": "c0e24a35459aba6f1512eaa3ea1dc01180cf8f7395fdfedf22dcd34dbd58195e",
+        "milliseconds": 346161,
+        "errors": [
+          "invalidStructureOutput"
+        ]
+      },
+      {
+        "Id": "Exam-missing-colon-0",
+        "ShouldAdopt": false,
+        "previewed": false,
+        "targetCellExact": false,
+        "wholeResultExact": false,
+        "formalExact": null,
+        "actualFormalHash": null,
+        "expectedFormalHash": null,
+        "calls": 1,
+        "nativeCompletionsStarted": 3,
+        "nativeCompletionsReturned": 3,
+        "preflightRejected": false,
+        "labelRolesExact": null,
+        "rawLabelSelection": {
+          "subject": [
+            "g0"
+          ],
+          "teacher": [
+            "g0"
+          ],
+          "room": [
+            "g0",
+            "g5"
+          ]
+        },
+        "rawModelOutput": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+        "rawOriginalLength": 25,
+        "rawTruncated": false,
+        "singleRoleCalls": [
+          {
+            "Role": "subject",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 54994
+          },
+          {
+            "Role": "teacher",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 52204
+          },
+          {
+            "Role": "room",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+            "OriginalLength": 25,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g5"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 52952
+          }
+        ],
+        "allRoleSelectionsDecoded": false,
+        "adapterStage": "merged-id-ownership-decoder",
+        "sourceHash": "123ea7ca980f7b50dbecf2e5c588903e90d587ce3e3a8687892b725415e45502",
+        "milliseconds": 353475,
+        "errors": [
+          "invalidStructureOutput"
+        ]
+      },
+      {
+        "Id": "Exam-folded-1",
+        "ShouldAdopt": true,
+        "previewed": false,
+        "targetCellExact": false,
+        "wholeResultExact": false,
+        "formalExact": null,
+        "actualFormalHash": null,
+        "expectedFormalHash": "885a5c77a6bcaebfdb8a4b2b0cf357c272ac480fb6fbbe2a3a009f2b6331da10",
+        "calls": 1,
+        "nativeCompletionsStarted": 3,
+        "nativeCompletionsReturned": 3,
+        "preflightRejected": false,
+        "labelRolesExact": 1,
+        "rawLabelSelection": {
+          "subject": [
+            "g0",
+            "g2"
+          ],
+          "teacher": [
+            "g0"
+          ],
+          "room": [
+            "g0"
+          ]
+        },
+        "rawModelOutput": "{\n  \"ids\": [\"g0\"]\n}",
+        "rawOriginalLength": 19,
+        "rawTruncated": false,
+        "singleRoleCalls": [
+          {
+            "Role": "subject",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g2\"]\n}",
+            "OriginalLength": 25,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g2"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 54569
+          },
+          {
+            "Role": "teacher",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 52315
+          },
+          {
+            "Role": "room",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 52255
+          }
+        ],
+        "allRoleSelectionsDecoded": false,
+        "adapterStage": "merged-id-ownership-decoder",
+        "sourceHash": "2e1033cbbd9b2b1114f5f122112e7e490c5eea3ba102f868be28e7f2b7ee2802",
+        "milliseconds": 355496,
+        "errors": [
+          "invalidStructureOutput"
+        ]
+      },
+      {
+        "Id": "Exam-missing-colon-1",
+        "ShouldAdopt": false,
+        "previewed": false,
+        "targetCellExact": false,
+        "wholeResultExact": false,
+        "formalExact": null,
+        "actualFormalHash": null,
+        "expectedFormalHash": null,
+        "calls": 1,
+        "nativeCompletionsStarted": 3,
+        "nativeCompletionsReturned": 3,
+        "preflightRejected": false,
+        "labelRolesExact": null,
+        "rawLabelSelection": {
+          "subject": [
+            "g0",
+            "g2",
+            "g4",
+            "g6"
+          ],
+          "teacher": [
+            "g0",
+            "g1",
+            "g2",
+            "g3",
+            "g4",
+            "g5",
+            "g6"
+          ],
+          "room": [
+            "g0"
+          ]
+        },
+        "rawModelOutput": "{\n  \"ids\": [\"g0\"]\n}",
+        "rawOriginalLength": 19,
+        "rawTruncated": false,
+        "singleRoleCalls": [
+          {
+            "Role": "subject",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g2\", \"g4\", \"g6\"]\n}",
+            "OriginalLength": 37,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g2",
+              "g4",
+              "g6"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 55782
+          },
+          {
+            "Role": "teacher",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g1\", \"g2\", \"g3\", \"g4\", \"g5\", \"g6\"]\n}",
+            "OriginalLength": 55,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g1",
+              "g2",
+              "g3",
+              "g4",
+              "g5",
+              "g6"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 56357
+          },
+          {
+            "Role": "room",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 52547
+          }
+        ],
+        "allRoleSelectionsDecoded": false,
+        "adapterStage": "merged-id-ownership-decoder",
+        "sourceHash": "dea618e72e78d7bd95461b9600fb88dcbcdb40fccc629e78bd6c5a040d106eb1",
+        "milliseconds": 351401,
+        "errors": [
+          "invalidStructureOutput"
+        ]
+      },
+      {
+        "Id": "Return-folded-0",
+        "ShouldAdopt": true,
+        "previewed": false,
+        "targetCellExact": false,
+        "wholeResultExact": false,
+        "formalExact": null,
+        "actualFormalHash": null,
+        "expectedFormalHash": "d594916968e2e9a1c717540866b6ca948ee3c2e8ef24d9047f8f17d75afbda37",
+        "calls": 1,
+        "nativeCompletionsStarted": 3,
+        "nativeCompletionsReturned": 3,
+        "preflightRejected": false,
+        "labelRolesExact": 1,
+        "rawLabelSelection": {
+          "subject": [
+            "g0"
+          ],
+          "teacher": [
+            "g0"
+          ],
+          "room": [
+            "g0",
+            "g5"
+          ]
+        },
+        "rawModelOutput": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+        "rawOriginalLength": 25,
+        "rawTruncated": false,
+        "singleRoleCalls": [
+          {
+            "Role": "subject",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 54151
+          },
+          {
+            "Role": "teacher",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 52778
+          },
+          {
+            "Role": "room",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+            "OriginalLength": 25,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g5"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 53373
+          }
+        ],
+        "allRoleSelectionsDecoded": false,
+        "adapterStage": "merged-id-ownership-decoder",
+        "sourceHash": "8ef646c8e61a7eb797783bd4a139704d5e449463cc1431aceb6a05e2bded2573",
+        "milliseconds": 345568,
+        "errors": [
+          "invalidStructureOutput"
+        ]
+      },
+      {
+        "Id": "Return-missing-colon-0",
+        "ShouldAdopt": false,
+        "previewed": false,
+        "targetCellExact": false,
+        "wholeResultExact": false,
+        "formalExact": null,
+        "actualFormalHash": null,
+        "expectedFormalHash": null,
+        "calls": 1,
+        "nativeCompletionsStarted": 3,
+        "nativeCompletionsReturned": 3,
+        "preflightRejected": false,
+        "labelRolesExact": null,
+        "rawLabelSelection": {
+          "subject": [
+            "g0"
+          ],
+          "teacher": [
+            "g0"
+          ],
+          "room": [
+            "g0",
+            "g5"
+          ]
+        },
+        "rawModelOutput": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+        "rawOriginalLength": 25,
+        "rawTruncated": false,
+        "singleRoleCalls": [
+          {
+            "Role": "subject",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 53519
+          },
+          {
+            "Role": "teacher",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 52696
+          },
+          {
+            "Role": "room",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g5\"]\n}",
+            "OriginalLength": 25,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g5"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 53240
+          }
+        ],
+        "allRoleSelectionsDecoded": false,
+        "adapterStage": "merged-id-ownership-decoder",
+        "sourceHash": "c2f42602bdfd6e95bed0f473156ae3e8a7adf59dde8632a1c4f1adf74c3dd010",
+        "milliseconds": 343808,
+        "errors": [
+          "invalidStructureOutput"
+        ]
+      },
+      {
+        "Id": "Return-folded-1",
+        "ShouldAdopt": true,
+        "previewed": false,
+        "targetCellExact": false,
+        "wholeResultExact": false,
+        "formalExact": null,
+        "actualFormalHash": null,
+        "expectedFormalHash": "f3474f6047f617c54a48dc847f639a845a8bd102828759342baaf536edd47681",
+        "calls": 1,
+        "nativeCompletionsStarted": 3,
+        "nativeCompletionsReturned": 3,
+        "preflightRejected": false,
+        "labelRolesExact": 1,
+        "rawLabelSelection": {
+          "subject": [
+            "g0",
+            "g2"
+          ],
+          "teacher": [
+            "g0"
+          ],
+          "room": [
+            "g0"
+          ]
+        },
+        "rawModelOutput": "{\n  \"ids\": [\"g0\"]\n}",
+        "rawOriginalLength": 19,
+        "rawTruncated": false,
+        "singleRoleCalls": [
+          {
+            "Role": "subject",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g2\"]\n}",
+            "OriginalLength": 25,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g2"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 53109
+          },
+          {
+            "Role": "teacher",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 51951
+          },
+          {
+            "Role": "room",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 52321
+          }
+        ],
+        "allRoleSelectionsDecoded": false,
+        "adapterStage": "merged-id-ownership-decoder",
+        "sourceHash": "54aaf2cb033865f9275f412d452164495f77143c5caea9e010c29ec1c8158e1a",
+        "milliseconds": 344730,
+        "errors": [
+          "invalidStructureOutput"
+        ]
+      },
+      {
+        "Id": "Return-missing-colon-1",
+        "ShouldAdopt": false,
+        "previewed": false,
+        "targetCellExact": false,
+        "wholeResultExact": false,
+        "formalExact": null,
+        "actualFormalHash": null,
+        "expectedFormalHash": null,
+        "calls": 1,
+        "nativeCompletionsStarted": 3,
+        "nativeCompletionsReturned": 3,
+        "preflightRejected": false,
+        "labelRolesExact": null,
+        "rawLabelSelection": {
+          "subject": [
+            "g0",
+            "g2",
+            "g4",
+            "g6"
+          ],
+          "teacher": [
+            "g0",
+            "g1",
+            "g2",
+            "g3",
+            "g4",
+            "g5",
+            "g6"
+          ],
+          "room": [
+            "g0"
+          ]
+        },
+        "rawModelOutput": "{\n  \"ids\": [\"g0\"]\n}",
+        "rawOriginalLength": 19,
+        "rawTruncated": false,
+        "singleRoleCalls": [
+          {
+            "Role": "subject",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g2\", \"g4\", \"g6\"]\n}",
+            "OriginalLength": 37,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g2",
+              "g4",
+              "g6"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 56461
+          },
+          {
+            "Role": "teacher",
+            "RawOutput": "{\n  \"ids\": [\"g0\", \"g1\", \"g2\", \"g3\", \"g4\", \"g5\", \"g6\"]\n}",
+            "OriginalLength": 55,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0",
+              "g1",
+              "g2",
+              "g3",
+              "g4",
+              "g5",
+              "g6"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 56204
+          },
+          {
+            "Role": "room",
+            "RawOutput": "{\n  \"ids\": [\"g0\"]\n}",
+            "OriginalLength": 19,
+            "Truncated": false,
+            "SelectedIds": [
+              "g0"
+            ],
+            "ErrorType": null,
+            "ErrorMessage": null,
+            "OperationalError": false,
+            "NativeStarted": 1,
+            "NativeReturned": 1,
+            "Milliseconds": 53224
+          }
+        ],
+        "allRoleSelectionsDecoded": false,
+        "adapterStage": "merged-id-ownership-decoder",
+        "sourceHash": "df5accf43ca0bec8d6ec86eff056c07c3af741c6511a502253d188776e2467c8",
+        "milliseconds": 348435,
+        "errors": [
+          "invalidStructureOutput"
+        ]
+      }
+    ],
+    "qualification": "candidate evidence only; independent held-out validation required before activation"
+  }
+]

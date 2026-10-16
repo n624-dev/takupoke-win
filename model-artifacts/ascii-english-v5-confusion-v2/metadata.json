@@ -1,0 +1,23 @@
+{
+  "status": "Research-only portable model, inactive/unpublished",
+  "activeBaselineOnnxSha256": "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703",
+  "initializerAndTeacherCheckpointSha256": "7313bee5dabf17998010c6f47844fe80649744b03c0366af05c627fc47314547",
+  "selectedCheckpointSha256": "99d7adc48be98da4d7038103cbc0b64b3a66c27905c20024ba37f17f58a8b7be",
+  "onnxSha256": "3271bfaa22d895a0d5d085346cfdd865c3eeb5a6542ae9c45f66fc48a254dc44",
+  "dictionarySha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368",
+  "dependencies": {
+    "torch": "2.7.1+cpu",
+    "transformers": "5.19.0",
+    "onnx": "1.20.1",
+    "onnxruntime": "1.23.2",
+    "numpy": "2.3.5",
+    "Pillow": "12.3.0",
+    "safetensors": "0.8.0",
+    "fonttools": "4.61.1"
+  },
+  "foundationLicense": "PP-OCRv5 official foundation Apache-2.0, pinned provenance in foundation-download-receipt/model card; fonts OFL copies are bundled",
+  "iosEdited": false,
+  "coremlAttempted": false,
+  "activated": false,
+  "published": false
+}

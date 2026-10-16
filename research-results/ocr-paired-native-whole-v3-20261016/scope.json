@@ -1,0 +1,12 @@
+{
+  "sourceCommit": "4ff7d2c4c894c8748d9c6c4182d15dde2e962904",
+  "runId": 38824053198,
+  "conclusion": "FAIL",
+  "nativeWindows": true,
+  "criteriaMet": false,
+  "pairedLiteralImprovementMet": false,
+  "allFourFontsNowConsumed": true,
+  "originalFreshLabelsRetainedAsRun": true,
+  "zeroErrorsRequired": false,
+  "scope": "Full failed paired actual Windows route; old positives329\u2192330 and337unchanged, new fonts both acquisition failure with all360fields missing each. No default activation. Every raw line retained byte-exact through gzip segments; concatenate decompressed ordered parts to reproduce full raw hash. No PDFs/full-page BGRA/model binaries/private data/internal policy/iOS edits."
+}

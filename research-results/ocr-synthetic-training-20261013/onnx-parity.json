@@ -1,0 +1,2747 @@
+{
+  "rows": 384,
+  "exactTextAndIntervals": 384,
+  "maximumProbabilityDifference": 0.0008983314037322998,
+  "dynamicProbes": [
+    {
+      "width": 320,
+      "batch": 2,
+      "shape": [
+        2,
+        40,
+        18710
+      ],
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.5762786865234375e-07
+    },
+    {
+      "width": 481,
+      "batch": 2,
+      "shape": [
+        2,
+        60,
+        18710
+      ],
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 8.940696716308594e-07
+    },
+    {
+      "width": 640,
+      "batch": 2,
+      "shape": [
+        2,
+        80,
+        18710
+      ],
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07
+    },
+    {
+      "width": 960,
+      "batch": 2,
+      "shape": [
+        2,
+        120,
+        18710
+      ],
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07
+    }
+  ],
+  "onnxBytes": 21176440,
+  "onnxSha256": "796b2eb06ed399a6799120b008a78da344f54dbe5151461b12f9bc9a1d1ec146",
+  "elapsedSecondsWithConcurrentWork": 46.43565130600018,
+  "records": [
+    {
+      "id": "final-0000",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 4.76837158203125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0001",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0002",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0003",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.2649765014648438e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0004",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0005",
+      "width": 333,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.0008983314037322998,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0006",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.6003847122192383e-05,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0007",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0008",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0009",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0010",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0011",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 4.172325134277344e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0012",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0013",
+      "width": 336,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0014",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0015",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 4.76837158203125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0016",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0017",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0018",
+      "width": 384,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0019",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 5.796551704406738e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0020",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 5.960464477539062e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0021",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.2312084436416626e-05,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0022",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0023",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0024",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 4.807370714843273e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0025",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0026",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.5664845705032349e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0027",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0028",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.5762786865234375e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0029",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0030",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0031",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0032",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0033",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.6093254089355469e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0034",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0035",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0036",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0037",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0038",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0039",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 4.231929779052734e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0040",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0041",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0042",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0043",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0044",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 7.152557373046875e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0045",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.8477439880371094e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0046",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0047",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0048",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 7.152557373046875e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0049",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 5.781650543212891e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0050",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0051",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0052",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.6450881958007812e-05,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0053",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0054",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0055",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0056",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.6226043701171875e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0057",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0058",
+      "width": 332,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0059",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.8477439880371094e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0060",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.8908252716064453e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0061",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0062",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0063",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.0281801223754883e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0064",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0065",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0066",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0067",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.905726432800293e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0068",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0069",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0070",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0071",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0072",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0073",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0074",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0075",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.4603137969970703e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0076",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0077",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 4.172325134277344e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0078",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0079",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.087784767150879e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0080",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.3709068298339844e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0081",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0082",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0083",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0084",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0085",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0086",
+      "width": 336,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0087",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": true
+    },
+    {
+      "id": "final-0088",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0089",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0090",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0091",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0092",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0093",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0094",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0095",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0096",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 0.00010561943054199219,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0097",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0098",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0099",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.0132789611816406e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0100",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0101",
+      "width": 374,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0102",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0103",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.5762786865234375e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0104",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0105",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0106",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0107",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0108",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 5.364418029785156e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0109",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0110",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.2782554626464844e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0111",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0112",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 6.556510925292969e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0113",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 4.112720489501953e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0114",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0115",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0116",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0117",
+      "width": 384,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.3113021850585938e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0118",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0119",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0120",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.6530975699424744e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0121",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.427267074584961e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0122",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0123",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0124",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0125",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0126",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0127",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 4.3511390686035156e-05,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0128",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0129",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.561137080192566e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0130",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0131",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 5.960464477539062e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0132",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.5497207641601562e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0133",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0134",
+      "width": 336,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0135",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.346932888031006e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0136",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": true
+    },
+    {
+      "id": "final-0137",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.6891863197088242e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0138",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0139",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0140",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0141",
+      "width": 436,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0142",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0143",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0144",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0145",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0146",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0147",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0148",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0149",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0150",
+      "width": 336,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0151",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0152",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0153",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0154",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.086162567138672e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0155",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0156",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0157",
+      "width": 339,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.5762786865234375e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0158",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0159",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0160",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0161",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0162",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0163",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0164",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.9637088775634766e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0165",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0166",
+      "width": 384,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0167",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.0265579223632812e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0168",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0169",
+      "width": 321,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0170",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0171",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1436641216278076e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0172",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0173",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0174",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0175",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0176",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0177",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0178",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0179",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0180",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.0132789611816406e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0181",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0182",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0183",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0184",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0185",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0186",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0187",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0188",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0189",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0190",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0191",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 4.5299530029296875e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0192",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0193",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0194",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0195",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0196",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.6093254089355469e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0197",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0198",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 5.438923835754395e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0199",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0200",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.9709190130233765e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0201",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.0132789611816406e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0202",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0203",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0204",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0205",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 5.543231964111328e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0206",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0207",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.4437904357910156e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0208",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0209",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0210",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0211",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0212",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.874301910400391e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0213",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0214",
+      "width": 364,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0215",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0216",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0217",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0218",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0219",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0220",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.069639205932617e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0221",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0222",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0223",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0224",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0225",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0226",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0227",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0228",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.980232238769531e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0229",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.8924474716186523e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0230",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0231",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0232",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0233",
+      "width": 329,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 8.937716484069824e-05,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0234",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0235",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 8.940696716308594e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0236",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 4.172325134277344e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0237",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0238",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0239",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0240",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.081560134887695e-05,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0241",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.1010637283325195e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0242",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.2118835002183914e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0243",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0244",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0245",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1116266250610352e-05,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0246",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0247",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0248",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0249",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0250",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0251",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.086162567138672e-05,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0252",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 7.82310962677002e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0253",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.9206275939941406e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0254",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0255",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.0174851417541504e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0256",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0257",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.039836883544922e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0258",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0259",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0260",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.5762786865234375e-07,
+      "unsupportedPadding": true
+    },
+    {
+      "id": "final-0261",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0262",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0263",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0264",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.0116567611694336e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0265",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1324882507324219e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0266",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0267",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0268",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.939494490623474e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0269",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0270",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0271",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0272",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 9.10833477973938e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0273",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0274",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0275",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.3902783393859863e-05,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0276",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0277",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0278",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0279",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.3813376426696777e-05,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0280",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0281",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0282",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 4.172325134277344e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0283",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0284",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0285",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0286",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0287",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.2814998626708984e-05,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0288",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0289",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0290",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0291",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0292",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0293",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0294",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0295",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.8775463104248047e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0296",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0297",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 4.76837158203125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0298",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0299",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0300",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0301",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.6987323760986328e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0302",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0303",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0304",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0305",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 5.811452865600586e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0306",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0307",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0308",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.175569534301758e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0309",
+      "width": 373,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.2177042663097382e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0310",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0311",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.0489096641540527e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0312",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.5762786865234375e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0313",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0314",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0315",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 4.2691826820373535e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0316",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 8.344650268554688e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0317",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0318",
+      "width": 352,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0319",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0320",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.8014183044433594e-06,
+      "unsupportedPadding": true
+    },
+    {
+      "id": "final-0321",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.0132789611816406e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0322",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0323",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0324",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 8.344650268554688e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0325",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 7.748603820800781e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0326",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0327",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.430511474609375e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0328",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0329",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 8.940696716308594e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0330",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0331",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.0547380447387695e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0332",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0333",
+      "width": 386,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0334",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0335",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0336",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.4826655387878418e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0337",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 6.771087646484375e-05,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0338",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0339",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0340",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0341",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0342",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0343",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0344",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0345",
+      "width": 345,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0346",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0347",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0348",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 7.152557373046875e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0349",
+      "width": 376,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 5.3942203521728516e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0350",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0351",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 5.364418029785156e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0352",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0353",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 8.344650268554688e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0354",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0355",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": true
+    },
+    {
+      "id": "final-0356",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0357",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0358",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0359",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0360",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 3.1047966331243515e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0361",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0362",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0363",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 9.5367431640625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0364",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0365",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0366",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0367",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0368",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0369",
+      "width": 340,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0370",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0371",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.6093254089355469e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0372",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.4994293451309204e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0373",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0374",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.7508864402770996e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0375",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0376",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 2.384185791015625e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0377",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0378",
+      "width": 334,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.430511474609375e-06,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0379",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 9.5367431640625e-07,
+      "unsupportedPadding": true
+    },
+    {
+      "id": "final-0380",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0381",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 5.960464477539062e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0382",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    },
+    {
+      "id": "final-0383",
+      "width": 320,
+      "exactTextAndIntervals": true,
+      "maximumProbabilityDifference": 1.1920928955078125e-07,
+      "unsupportedPadding": false
+    }
+  ],
+  "torchEvaluationModeVerified": true,
+  "selectedRowsTouchingPadding": 6,
+  "comparisonCorrection": "Fresh eval-only Torch reload. Prior post-export Torch probability comparison invalid because legacy exporter restored a train-mode wrapper recursively. Model and checkpoint selection unchanged; no gold used."
+}

@@ -1,0 +1,144 @@
+{
+  "root": "/workspace/scratch/ascii-english-v5-japanese-fonts-v3/exploratory-epoch1-v3",
+  "files": {
+    "model-APACHE-2.0.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "README.md": {
+      "bytes": 950,
+      "sha256": "ee487d845ffdcccb24c85309c22d47f170ff564e630fef82327fda199e5548de"
+    },
+    "original-selection.json": {
+      "bytes": 35323,
+      "sha256": "4f2ead865ebff7327ba9028b9d8a06fcbde25706da5f1cf053f35d2f9951228f"
+    },
+    "foundation-download-receipt.json": {
+      "bytes": 861,
+      "sha256": "ad5491a3a1d392143852e23680fffa2c4e57580c33d1ee42b70220b854636f49"
+    },
+    "dictionary.json": {
+      "bytes": 3614,
+      "sha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368"
+    },
+    "format-contract.json": {
+      "bytes": 1754,
+      "sha256": "bd97fafc372f747cb5039279b1ce0763202e210530d39351f1c2fe5ed04f9926"
+    },
+    "model.onnx": {
+      "bytes": 22183975,
+      "sha256": "95bab179e0d6cc75269419078d68696cd4679661f94f6128b858b7a074fe2971"
+    },
+    "onnx-export-protocol.json": {
+      "bytes": 2809,
+      "sha256": "b46d866e469a0eb690ff4458592127bea1710e9539be336857b3a865377f5c10"
+    },
+    "onnx-fidelity.json": {
+      "bytes": 9756,
+      "sha256": "671011c4680f9c937d89770b72074ad24ddfdbf7644880ace2ff2483e86a624e"
+    },
+    "official-config.json": {
+      "bytes": 2086,
+      "sha256": "be52e23a259dc4838322115ee4c8f59197ce136a1aa0bd96574122b84f1fa4b7"
+    },
+    "metadata.json": {
+      "bytes": 1315,
+      "sha256": "9a27e3943125029a333c67bf47efd5c7b63caf459340c80b9bc40c96142b7d97"
+    },
+    "foundation-model-card.md": {
+      "bytes": 31,
+      "sha256": "4bcf87ecfbbb8e07a01b21415a970c8b53a5283bf6872b657040d3f45c9241f7"
+    },
+    "adapter-state.safetensors": {
+      "bytes": 22500900,
+      "sha256": "ad78c3912e85bd6462a8817667da7404d0b905f4734303ee0859f6fe5d70fd05"
+    },
+    "protocol.json": {
+      "bytes": 2809,
+      "sha256": "b46d866e469a0eb690ff4458592127bea1710e9539be336857b3a865377f5c10"
+    },
+    "training-protocol.json": {
+      "bytes": 7680,
+      "sha256": "6e7c1255e504467bb8c8a9f721b99e1eb8c4caa44b2ba4b3309e8b373726917b"
+    },
+    "font-download-receipt.json": {
+      "bytes": 5122,
+      "sha256": "9945a170fa01bdda1b53285e2a010cbbac7966c3d7b94b6f7481c54c8a6a7a0f"
+    },
+    "official-inference.yml": {
+      "bytes": 3964,
+      "sha256": "49b7c9ccda20164cf42851995d235ab9ed11b7109e456d1cf911d42b71025858"
+    },
+    "image_tensor.py": {
+      "bytes": 2117,
+      "sha256": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098"
+    },
+    "training-freeze.json": {
+      "bytes": 19495,
+      "sha256": "65e67858717aed53106ddadc19b02d7bcde29c8420f73786d53df54eacf43d90"
+    },
+    "font-licenses/KaiseiTokumin-OFL.txt": {
+      "bytes": 4383,
+      "sha256": "6c5445d4febbf6d84025b874a85c51e7e4bfa7495279eccdb4c317a6de857b46"
+    },
+    "font-licenses/KleeOne-OFL.txt": {
+      "bytes": 4479,
+      "sha256": "e376b0df8e8a2345a9533db6f0a5333a1107975569ad9d1973a7ee557161ca38"
+    },
+    "font-licenses/IBMPlexMono-OFL.txt": {
+      "bytes": 4456,
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+    },
+    "font-licenses/notosansjp-OFL.txt": {
+      "bytes": 4388,
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+    },
+    "font-licenses/ZenOldMincho-OFL.txt": {
+      "bytes": 4399,
+      "sha256": "469d214f9842809659c827b7f2adaf40ec0df6efdd5fe18b7127665c32aafaec"
+    },
+    "font-licenses/YuseiMagic-OFL.txt": {
+      "bytes": 4393,
+      "sha256": "c74e8c47951ddd9c902f07097761cfa0457993e28d8e1e946e273c0250be77c9"
+    },
+    "font-licenses/SawarabiGothic-OFL.txt": {
+      "bytes": 4355,
+      "sha256": "5f247fad3e8a86b6c0779dff09277047c1ce2b0b7580a1093347a8af755352ba"
+    },
+    "font-licenses/CrimsonText-OFL.txt": {
+      "bytes": 4393,
+      "sha256": "50fd67cddc097377a5c871e8452b778bc5aedfa3480a705cb27c5e3a078218df"
+    },
+    "font-licenses/SawarabiMincho-OFL.txt": {
+      "bytes": 4405,
+      "sha256": "23a49d3198c9ffd233f73208c5e39c4ed893783cece36b954c0a65ee9aa7ef29"
+    },
+    "font-licenses/Alegreya-OFL.txt": {
+      "bytes": 4395,
+      "sha256": "f6f60d5d4cf4f4b1fc4e41353c897a2f5a16e6396c0cd8fa8bdfd2f4586a9a68"
+    },
+    "font-licenses/notoserifjp-OFL.txt": {
+      "bytes": 4350,
+      "sha256": "5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6"
+    },
+    "font-licenses/Inconsolata-OFL.txt": {
+      "bytes": 4350,
+      "sha256": "29bd0cfd0fb2a45f9b057c834a057724bae1f63b525a8ac83d3e7525706d9f80"
+    },
+    "font-licenses/ZenAntiqueSoft-OFL.txt": {
+      "bytes": 4394,
+      "sha256": "c76594cc8f4af2ea35d1e05278b1911b22cc6227bc3b0ad404f68be03fe3f107"
+    },
+    "font-licenses/ShipporiAntique-OFL.txt": {
+      "bytes": 4400,
+      "sha256": "9ad629515fb62dfc2a831187b260bb53b4fcae1494dd4cb94c2b30da2466da51"
+    }
+  },
+  "fileCount": 33,
+  "totalBytes": 44857459,
+  "originalGatePassed": false,
+  "originalFreshUnopened": true,
+  "iosEdited": false,
+  "activated": false,
+  "publishedAtPackaging": false
+}

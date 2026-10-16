@@ -1,0 +1,53 @@
+{
+  "measurements": [
+    {
+      "batch": 1,
+      "width": 320,
+      "meanSeconds": 0.24759564966492084,
+      "seconds": [
+        0.30742885699874023,
+        0.21808710799814435,
+        0.21727098399787792
+      ],
+      "peakRssMiB": 765.54296875,
+      "finiteGradients": true
+    },
+    {
+      "batch": 2,
+      "width": 320,
+      "meanSeconds": 0.4074848013333394,
+      "seconds": [
+        0.44967209600145,
+        0.388178674998926,
+        0.3846036329996423
+      ],
+      "peakRssMiB": 1061.16796875,
+      "finiteGradients": true
+    },
+    {
+      "batch": 1,
+      "width": 960,
+      "meanSeconds": 0.6990244813326475,
+      "seconds": [
+        0.6657349630004319,
+        0.8036089459965297,
+        0.6277295350009808
+      ],
+      "peakRssMiB": 1351.16796875,
+      "finiteGradients": true
+    },
+    {
+      "batch": 2,
+      "width": 960,
+      "meanSeconds": 1.5779450626675195,
+      "seconds": [
+        1.784058986002492,
+        1.6258943479988375,
+        1.323881854001229
+      ],
+      "peakRssMiB": 2172.66796875,
+      "finiteGradients": true
+    }
+  ],
+  "trainingStarted": false
+}

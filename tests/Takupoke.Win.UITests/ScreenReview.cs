@@ -69,6 +69,10 @@ internal static partial class Program
                 Capture(theme + "-settings-narrow"); Navigate("timetable"); Capture(theme + "-timetable-narrow");
             }
             finally { Stop(); }
+            SeedRecoveryUiAsync(root).GetAwaiter().GetResult();
+            Start(executable);
+            try { CaptureRecoveryUi(theme); }
+            finally { Stop(); }
         }
         foreach (var (theme, percent) in new[] { ("Light", 200), ("Dark", 150) })
         {
@@ -93,8 +97,25 @@ internal static partial class Program
                 Invoke(WaitElement("settings-materials")); Capture(theme + "-" + percent + "-materials");
                 var window = _window!.Current.BoundingRectangle;
                 Require(SetWindowPos(_process!.MainWindowHandle, 0, (int)window.Left, (int)window.Top, 680, 680, 0x0044), "Resize the enlarged review window");
+                Navigate("settings"); Invoke(WaitElement("settings-materials")); Invoke(WaitElement("material-details-Timetable"));
+                var reparse = WaitElement("reparse-Timetable");
+                Require(reparse.Current.Name == "最新を取得して再解析", "Latest reparse remains discoverable at enlarged text sizes");
+                var bounds = _window!.Current.BoundingRectangle;
+                var scrolling = (ScrollPattern)WaitElement("page-scroller").GetCurrentPattern(ScrollPattern.Pattern);
+                for (var step = 0; step <= 10; step++)
+                {
+                    scrolling.SetScrollPercent(ScrollPattern.NoScroll, step * 10);
+                    System.Threading.Thread.Sleep(75);
+                    var visible = WaitElement("reparse-Timetable").Current.BoundingRectangle;
+                    if (visible.Width > 0 && visible.Top >= bounds.Top + 48 && visible.Bottom <= bounds.Bottom) break;
+                }
+                var button = WaitElement("reparse-Timetable").Current.BoundingRectangle;
+                Require(button.Width > 0 && button.Left >= bounds.Left && button.Right <= bounds.Right && button.Top >= bounds.Top + 48 && button.Bottom <= bounds.Bottom,
+                    "Latest reparse control stays within the 680px enlarged-text window");
+                Capture(theme + "-" + percent + "-material-details-narrow");
                 Navigate("settings"); Capture(theme + "-" + percent + "-settings-narrow");
                 Navigate("timetable"); Capture(theme + "-" + percent + "-timetable-narrow");
+                OpenRecoveryUiPreview(); Capture(theme + "-" + percent + "-recovery-narrow");
             }
             finally { Stop(); }
         }
@@ -134,7 +155,7 @@ internal static partial class Program
         await new PublicEventsStore(root).SaveAsync(new(now, new("v1", lease.Period.SchoolYear, new string('a', 64), null, [new($"{lease.Period.SchoolYear + 1}-03-10", $"{lease.Period.SchoolYear + 1}-03-10", "架空の行事メモ", "行事メモ")]), "\"fake-api-etag\""));
     }
 
-    private static void Capture(string name)
+    private static void Capture(string name, string marker = "TAKUPOKE_UI_IMAGE")
     {
         // The mode is reachable only through the offline fixture command. Capture
         // only our own visible app window; never the surrounding desktop or pickers.
@@ -150,11 +171,11 @@ internal static partial class Program
             graphics.CopyFromScreen((int)bounds.Left, (int)bounds.Top, 0, 0, image.Size, CopyPixelOperation.SourceCopy);
         using var stream = new MemoryStream(); image.Save(stream, ImageFormat.Png);
         var bytes = stream.ToArray(); var encoded = Convert.ToBase64String(bytes);
-        Console.WriteLine($"TAKUPOKE_UI_IMAGE BEGIN {name} {Convert.ToHexStringLower(SHA256.HashData(bytes))} {bytes.Length}");
+        Console.WriteLine($"{marker} BEGIN {name} {Convert.ToHexStringLower(SHA256.HashData(bytes))} {bytes.Length}");
         const int chunkLength = 6000;
         var chunks = (encoded.Length + chunkLength - 1) / chunkLength;
         for (var index = 0; index < chunks; index++)
-            Console.WriteLine($"TAKUPOKE_UI_IMAGE DATA {name} {index} {encoded.Substring(index * chunkLength, Math.Min(chunkLength, encoded.Length - index * chunkLength))}");
-        Console.WriteLine($"TAKUPOKE_UI_IMAGE END {name} {chunks}");
+            Console.WriteLine($"{marker} DATA {name} {index} {encoded.Substring(index * chunkLength, Math.Min(chunkLength, encoded.Length - index * chunkLength))}");
+        Console.WriteLine($"{marker} END {name} {chunks}");
     }
 }

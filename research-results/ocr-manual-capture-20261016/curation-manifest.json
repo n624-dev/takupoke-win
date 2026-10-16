@@ -1,0 +1,138 @@
+{
+  "files": [
+    {
+      "file": "as-run-source/CodeProbe.csproj",
+      "bytes": 413,
+      "sha256": "4f203ba334465239e68ede01538f9cb8b091869b5a4b23217ceccb11896304cd"
+    },
+    {
+      "file": "as-run-source/OcrAsciiRefinement.cs",
+      "bytes": 4778,
+      "sha256": "41a44a475c8e5e501259426dd86ceb1596c6006aee80a88ca2850ae30c4bb107"
+    },
+    {
+      "file": "as-run-source/OnnxJapaneseOcr.cs",
+      "bytes": 26308,
+      "sha256": "029e7783c00a67457262494f650df06efd019b7eed6f4171543682a0d983cea6"
+    },
+    {
+      "file": "as-run-source/Program.cs",
+      "bytes": 7905,
+      "sha256": "d8b000c514ab54879ae9168ca4fb0487d90cd18d11ffaef97b4a2098eb1b6524"
+    },
+    {
+      "file": "as-run-source/README.md",
+      "bytes": 3230,
+      "sha256": "f644c89e905ceb8f61827db71ca80e26e323057fd2a981f7aa31ecbf70556530"
+    },
+    {
+      "file": "as-run-source/compare_routes.py",
+      "bytes": 4189,
+      "sha256": "726ce53aa4ae5ff7d502c83fb371ca2027d4525f8a1c0f825764d82e3ecaa34e"
+    },
+    {
+      "file": "as-run-source/make_manual_fixture.py",
+      "bytes": 1344,
+      "sha256": "394e73a69069d1a7d70448b7ceea86c487c2de40b54deac096aba6afe8746e50"
+    },
+    {
+      "file": "as-run-source/run.py",
+      "bytes": 16687,
+      "sha256": "de8c2e5277eadc6d31a031c42c7d44cb2c5e7263a06a08c564f8a72533af3a2c"
+    },
+    {
+      "file": "baseline-OcrAsciiRefinement.cs",
+      "bytes": 4078,
+      "sha256": "16f596485bac4d1f8f6d610e6bdbddc2ff71c74315ba9b6ab5e2a5f1899f6974"
+    },
+    {
+      "file": "baseline-freeze.json",
+      "bytes": 7820,
+      "sha256": "fd889067fb5d9644afcd0ed8786f5d471d061d47e3197b2c307b6212454d0394"
+    },
+    {
+      "file": "baseline-verified-raw.jsonl",
+      "bytes": 2062504,
+      "sha256": "4ce3248034eb1f65d880e83dc10e78393653b58aab06db1e359f87011af015a3"
+    },
+    {
+      "file": "baseline-verified-receipt.json",
+      "bytes": 244,
+      "sha256": "d9f64169518903959a76210ef13256d264f65cbe42f27a77ebf68945717dd8dd"
+    },
+    {
+      "file": "excluded-oracle.json",
+      "bytes": 385082,
+      "sha256": "d687e6909943a03006b87ca2d27844834f73b7357ae4101228fa7229a402f5ca"
+    },
+    {
+      "file": "font-downloads.json",
+      "bytes": 1119,
+      "sha256": "d3727064973c24a1c27bd026c6c83583687ef96123cd76deffb5cf11d2bcac4c"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 12727,
+      "sha256": "321b91b9ee68e2cfc368338a349ce0864504bb3649ce8297d32264077181d8f3"
+    },
+    {
+      "file": "glyph-ambiguity.json",
+      "bytes": 10632,
+      "sha256": "dbbfba4154ac4d701eb75a663f3a493e15f0f129d78999258330c9f6c025ddf9"
+    },
+    {
+      "file": "inputs.json",
+      "bytes": 190701,
+      "sha256": "a2aa1a174bd547ef43f76270df5fdf2c5af758d623347ef773c6ec01809e0059"
+    },
+    {
+      "file": "manual-route-examples.json",
+      "bytes": 47795,
+      "sha256": "cf21447c72228adaa3077eaf622296253c9158b5806831e2a674e15dc06a34c6"
+    },
+    {
+      "file": "oracle.json",
+      "bytes": 143843,
+      "sha256": "8d41900182c7a78dc8339f406b5dfa160ae4dbc30de40bdc479c1a8c342fe3dd"
+    },
+    {
+      "file": "paired-manual-routes.json",
+      "bytes": 1660,
+      "sha256": "a89aea3d65b515e42858fe64c3ca01bdb9f3a7ba814b1675205471fd359b7ea0"
+    },
+    {
+      "file": "post-study-source/OcrAsciiRefinement.cs",
+      "bytes": 4899,
+      "sha256": "4e7b399f269afa234a1d50d06709bdf09b49aac9f79fc84a944427516e5dbabe"
+    },
+    {
+      "file": "post-study-source/compare_manual.py",
+      "bytes": 4769,
+      "sha256": "61593128149c463c162ca92a680fbe8621698296de318fe941b58e3b29c32081"
+    },
+    {
+      "file": "protocol.json",
+      "bytes": 2061,
+      "sha256": "0be7538759615dd13dd25b4a5af9940480263f93167bb4df80a0f6352c472242"
+    },
+    {
+      "file": "raw.jsonl",
+      "bytes": 2984976,
+      "sha256": "903523626ae52742df6248d4ecd6263ac2f053cf07e42e7ce75959e6d6c8c514"
+    },
+    {
+      "file": "report.json",
+      "bytes": 31898,
+      "sha256": "48a0084c4b2c3ffe4d9fcd84f9216a5207d8d849d4dfaec38644f89c8474f1d0"
+    },
+    {
+      "file": "worker-receipt.json",
+      "bytes": 164,
+      "sha256": "e7ec30eb93321f8098f66319f92eed3d6cf6d2201b154833a897929e004666e6"
+    }
+  ],
+  "privateData": false,
+  "modelsChanged": false,
+  "sourceNote": "Comparison tool sources exactly match pre-inference freeze. Runtime as-run source predates added canonical-class and above-grid guards; final guard source retained separately. Guard conditions do not occur in this isolated corpus and get no extra accuracy credit. Reader inventories identify actual executed binaries. Only directly verified native baseline subprocess included; an excluded redundant preflight is not used.",
+  "qualification": "Independent fictional strings in previously observed fonts; component evaluation, no new-font, full-document or user-time qualification."
+}

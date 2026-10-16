@@ -1,0 +1,99 @@
+{
+  "fontToolsVersion": "4.61.0",
+  "scope": "Read-only originalfont-to-static reproduction, no image/model call. TTFont default recalcTimestamp can change headmodified bytes; restore recorded modified timestamp with recalcTimestampFalse. All external font assets/receipts left unchanged.",
+  "fonts": [
+    {
+      "font": "IBMPlexMono",
+      "headModified": 3874862174,
+      "reproducedStaticByteSha256": "0999682c7625d3cfbc3f738dc5d72946f5463653c32c1fd15b5dd1ce16924958",
+      "sameBytes": true,
+      "axes": {}
+    },
+    {
+      "font": "Inconsolata",
+      "headModified": 3874862175,
+      "reproducedStaticByteSha256": "dd9cd4b73c413b1ea316cf431b234e7ec992d6ca8a35b796c02cb8a04881f7ce",
+      "sameBytes": true,
+      "axes": {
+        "wght": 400,
+        "wdth": 100.0
+      }
+    },
+    {
+      "font": "FiraMono",
+      "headModified": 3874862176,
+      "reproducedStaticByteSha256": "bbb4b5b5f42273547250df8a38a7120d6e09b81bebab3342c59aa93526447ffd",
+      "sameBytes": true,
+      "axes": {}
+    },
+    {
+      "font": "SpaceMono",
+      "headModified": 3874862176,
+      "reproducedStaticByteSha256": "9f69849cea853c9d9493bf1af6d5311a7f8a5f7baf84c6ac44abd6b370ed7fe8",
+      "sameBytes": true,
+      "axes": {}
+    },
+    {
+      "font": "CrimsonText",
+      "headModified": 3874862177,
+      "reproducedStaticByteSha256": "79e8efa2151d6e5f9d6390e28ed74b0f731014589410821e3ef7c02d0a996939",
+      "sameBytes": true,
+      "axes": {}
+    },
+    {
+      "font": "Lora",
+      "headModified": 3874862178,
+      "reproducedStaticByteSha256": "66f89eaf0b220e3a3196456b0daa4fdd2f2b81942aec2bcc1528f4c7f132968a",
+      "sameBytes": true,
+      "axes": {
+        "wght": 400
+      }
+    },
+    {
+      "font": "Alegreya",
+      "headModified": 3874862180,
+      "reproducedStaticByteSha256": "e7726c1c75d746d38d5d84dddfea1013f09b529926ad9bedb697c8df5dbbeac4",
+      "sameBytes": true,
+      "axes": {
+        "wght": 400
+      }
+    },
+    {
+      "font": "Cousine",
+      "headModified": 3874862180,
+      "reproducedStaticByteSha256": "6ee2a9e3b552802557617c6e03c5748e28f6c6f0798c121bf1eb8aafc0f474fb",
+      "sameBytes": true,
+      "axes": {}
+    },
+    {
+      "font": "UbuntuMono",
+      "headModified": 3874862181,
+      "reproducedStaticByteSha256": "cabed306bd465181f2c288837ab0c3e804d53386769060270d7a52f68beb0112",
+      "sameBytes": true,
+      "axes": {}
+    },
+    {
+      "font": "LibreBaskerville",
+      "headModified": 3874862248,
+      "reproducedStaticByteSha256": "b866c047482768c14688ae79bae5e248ceed7a8313d385efa512166747b02884",
+      "sameBytes": true,
+      "axes": {}
+    },
+    {
+      "font": "PTSerif",
+      "headModified": 3874862249,
+      "reproducedStaticByteSha256": "99a33268fc94d3dc07e13e39eb204ffcaa24e586700a73249731ac1b4b83c986",
+      "sameBytes": true,
+      "axes": {}
+    },
+    {
+      "font": "LibreCaslonText",
+      "headModified": 3874862250,
+      "reproducedStaticByteSha256": "e182f76cb7fab0a5b513ced165fdad424a290d1fb945032584f038c8f3daa572",
+      "sameBytes": true,
+      "axes": {
+        "wght": 400
+      }
+    }
+  ]
+}

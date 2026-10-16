@@ -48,15 +48,21 @@
         "src/Takupoke.Infrastructure/Materials/FileSourceReader.cs",
         "src/Takupoke.Infrastructure/Materials/MaterialCoordinator.ChangeRows.cs",
         "src/Takupoke.Infrastructure/Materials/MaterialCoordinator.cs",
+        "src/Takupoke.Infrastructure/Materials/MaterialProjection.cs",
         "src/Takupoke.Infrastructure/Materials/SourceWatcher.cs",
+        "src/Takupoke.Win/Platform/WindowsFileIdentity.cs",
+        "tests/Takupoke.Integration.Tests/AppViewModelTestPlatform.cs",
         "tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj",
-        "src/Takupoke.Win/Platform/WindowsFileIdentity.cs"
+        "tests/Takupoke.Integration.Tests/ViewModelFileIdentity.cs"
       ],
       "checks": [
-        "tests/Takupoke.Integration.Tests/FileReadResponsivenessTests.cs",
-        "tests/Takupoke.Integration.Tests/MaterialCoordinatorTests.cs",
-        "tests/Takupoke.Integration.Tests/SourceWatcherTests.cs",
+        "tests/Takupoke.Integration.Tests/AppViewModelRefreshTests.cs",
         "tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs",
+        "tests/Takupoke.Integration.Tests/FileReadResponsivenessTests.cs",
+        "tests/Takupoke.Integration.Tests/LatestSourceTests.cs",
+        "tests/Takupoke.Integration.Tests/MaterialCoordinatorTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryManualLifecycleTests.cs",
+        "tests/Takupoke.Integration.Tests/SourceWatcherTests.cs",
         "tests/Takupoke.Integration.Tests/WindowsSourceRefreshTests.cs"
       ]
     },
@@ -81,10 +87,11 @@
       ],
       "checks": [
         "tests/Takupoke.Core.Tests/SchoolDataPeriodTests.cs",
+        "tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs",
         "tests/Takupoke.Integration.Tests/DataDirectoryTests.cs",
+        "tests/Takupoke.Integration.Tests/PreferenceSnapshotTests.cs",
         "tests/Takupoke.Integration.Tests/PreferencesStoreTests.cs",
-        "tests/Takupoke.Integration.Tests/SchoolDataStoreTests.cs",
-        "tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs"
+        "tests/Takupoke.Integration.Tests/SchoolDataStoreTests.cs"
       ]
     },
     {
@@ -170,6 +177,7 @@
       ],
       "sources": [
         "src/Takupoke.Core/ClassSelection.cs",
+        "src/Takupoke.Core/PdfClassAssignment.cs",
         "src/Takupoke.Core/ScheduleModels.cs",
         "src/Takupoke.Core/SchedulePresentation.cs",
         "src/Takupoke.Core/ScheduleTimes.cs",
@@ -177,6 +185,7 @@
         "src/Takupoke.Core/TimetableEngine.cs"
       ],
       "checks": [
+        "tests/Takupoke.Core.Tests/PdfClassAssignmentTests.cs",
         "tests/Takupoke.Core.Tests/SchedulePresentationTests.cs",
         "tests/Takupoke.Core.Tests/TimetableEngineTests.cs"
       ]
@@ -195,13 +204,18 @@
         "src/Takupoke.Infrastructure/Parsing/PdfLayout.cs",
         "src/Takupoke.Infrastructure/Parsing/PdfPathEngine.cs",
         "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader.cs",
+        "src/Takupoke.Infrastructure/Parsing/PdfReturnGeometryDiagnostic.cs",
         "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
         "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
         "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
         "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs"
       ],
       "checks": [
-        "tests/Takupoke.Integration.Tests/PdfParsingTests.cs"
+        "tests/Takupoke.Integration.Tests/PdfFontUseTests.cs",
+        "tests/Takupoke.Integration.Tests/PdfMissingUnicodeRecoveryTests.cs",
+        "tests/Takupoke.Integration.Tests/PdfParsingTests.cs",
+        "tests/Takupoke.Integration.Tests/PdfTrueTypeRecoveryMapTests.cs",
+        "tests/Takupoke.Integration.Tests/PdfVisibleUnicodeRecoveryTests.cs"
       ]
     },
     {
@@ -308,13 +322,253 @@
       ],
       "sources": [
         ".github/workflows/ci.yml",
+        ".github/workflows/test-tools.yml",
         "scripts/test_catalog.py",
         "scripts/test_catalog_inventory.py",
-        "tests/test-catalog.json",
-        ".github/workflows/test-tools.yml"
+        "tests/test-catalog.json"
       ],
       "checks": [
         "tests/test_test_catalog.py"
+      ]
+    },
+    {
+      "id": "recovery-contracts",
+      "title": "復旧の証拠・採用・旧記録の契約",
+      "environment": "Linux／Windows .NET",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        "src/Takupoke.Core/Recovery/RecoveryAuditShape.cs",
+        "src/Takupoke.Core/Recovery/RecoveryEngine.cs",
+        "src/Takupoke.Core/Recovery/RecoveryManualAssistance.cs",
+        "src/Takupoke.Core/Recovery/RecoveryModelManifest.cs",
+        "src/Takupoke.Core/Recovery/RecoveryModels.cs",
+        "src/Takupoke.Core/Recovery/RecoveryPolicy.cs",
+        "src/Takupoke.Core/Recovery/RecoveryPromptInstructions.cs",
+        "src/Takupoke.Core/Recovery/RecoveryRoleLabels.cs",
+        "src/Takupoke.Core/Recovery/RecoverySourceCoverage.cs",
+        "src/Takupoke.Core/Recovery/RecoverySourceIndex.cs",
+        "src/Takupoke.Core/Recovery/RecoveryStructure.cs",
+        "src/Takupoke.Core/Recovery/RecoveryValidator.cs",
+        "tests/Takupoke.Core.Tests/fixtures/recovery-exam.json",
+        "tests/Takupoke.Core.Tests/fixtures/recovery-return.json"
+      ],
+      "checks": [
+        "tests/Takupoke.Core.Tests/AiFeaturePermissionTests.cs",
+        "tests/Takupoke.Core.Tests/RecoveryIndexTests.cs",
+        "tests/Takupoke.Core.Tests/RecoveryInlineParallelTests.cs",
+        "tests/Takupoke.Core.Tests/RecoveryPromptInstructionsTests.cs",
+        "tests/Takupoke.Core.Tests/RecoveryStructureTests.cs",
+        "tests/Takupoke.Core.Tests/RecoveryTests.cs"
+      ]
+    },
+    {
+      "id": "recovery-pipeline",
+      "title": "復旧解析・原画像・訂正・保存・取消",
+      "environment": "Linux／Windows .NET",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        "src/Takupoke.Infrastructure/Recovery/RecoveryAnalysisConverter.cs",
+        "src/Takupoke.Infrastructure/Recovery/RecoveryAuditCertification.cs",
+        "src/Takupoke.Infrastructure/Recovery/RecoveryCapturedLayoutBuilder.cs",
+        "src/Takupoke.Infrastructure/Recovery/RecoveryContainmentIndex.cs",
+        "src/Takupoke.Infrastructure/Recovery/RecoveryCoordinator.cs",
+        "src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs",
+        "src/Takupoke.Infrastructure/Recovery/RecoveryLayoutGeometry.cs",
+        "src/Takupoke.Infrastructure/Recovery/RecoveryModelBundleStore.cs",
+        "src/Takupoke.Infrastructure/Recovery/RecoveryModelStore.cs",
+        "src/Takupoke.Infrastructure/Recovery/RecoveryOcrModels.cs",
+        "src/Takupoke.Infrastructure/Recovery/RecoveryOutputDecoder.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryBuilderBudgetFixture.cs",
+        "tests/Takupoke.Integration.Tests/fixtures/recovery-fictional-v3-header-rows.json",
+        "tests/Takupoke.Integration.Tests/fixtures/recovery-historical-v5-vector.json",
+        "tests/Takupoke.Integration.Tests/fixtures/recovery-historical-v6-result.json"
+      ],
+      "checks": [
+        "tests/Takupoke.Integration.Tests/RecoveryAuditCacheCallOrderTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryAuditPreHashBoundTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryBuilderBudgetTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryCapturedLayoutTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryClockOrderTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryContainmentIndexTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryCorrectionPreviewTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryDateHeaderOwnershipTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryFontEvidenceTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryHeaderReviewTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryInlineParallelCacheTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryInlineParallelTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryManualAssistanceTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryManualCertificationTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryManualExpandedBudgetTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryManualInputStateTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryManualLifecycleTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryManualReviewBudgetTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryManualUnchangedInputTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryMergedSlotTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryModelStoreTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryNativeExamTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryNativeHeadingTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryNativeReferenceTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryNativeVisualReviewTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryOcrDotFailureClassificationTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryOcrDotV9CompatibilityTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryOcrDotV9Tests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryOrderedRowsCertificationTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryOrderedRowsTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryOutputDecoderTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryOverlappingRoleLabelTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryParallelProofTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryPerformanceTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryPipelineTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryPreviewDisplayTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryRenderProfileTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryRuleMaskEndpointTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryShiftedInlineLabelTests.cs"
+      ]
+    },
+    {
+      "id": "ocr",
+      "title": "CPU OCR・文字位置・モデル・原画像切り出し",
+      "environment": "Linux／Windows .NET。Windows描画・実推論は対応workflowで検証",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        "src/Takupoke.Core/Recovery/RecoveryCodeCandidates.cs",
+        "src/Takupoke.Infrastructure/Recovery/OcrAsciiRefinement.cs",
+        "src/Takupoke.Infrastructure/Recovery/OcrConditionalJapaneseRetry.cs",
+        "src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs",
+        "src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs",
+        "src/Takupoke.Infrastructure/Recovery/OcrDetectorProbability.cs",
+        "src/Takupoke.Infrastructure/Recovery/OcrHeaderContext.cs",
+        "src/Takupoke.Infrastructure/Recovery/OcrInkCropFrame.cs",
+        "src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs",
+        "src/Takupoke.Infrastructure/Recovery/OcrLiteralCodeRetry.cs",
+        "src/Takupoke.Infrastructure/Recovery/OcrRoleLabelRetry.cs",
+        "src/Takupoke.Infrastructure/Recovery/OcrWhiteGapPartition.cs",
+        "src/Takupoke.Infrastructure/Recovery/OnnxAsciiOcr.cs",
+        "src/Takupoke.Infrastructure/Recovery/OnnxJapaneseAlternative.cs",
+        "src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs",
+        "src/Takupoke.Win/Assets/Recovery/foundry-candidates.json",
+        "src/Takupoke.Win/Assets/Recovery/ocr-characters-v6.json",
+        "src/Takupoke.Win/Assets/Recovery/ocr-characters.json",
+        "tests/Takupoke.Integration.Tests/CapturedOcrHeaderFixture.cs",
+        "tests/Takupoke.Integration.Tests/OcrHeaderGoldenSnapshots.cs",
+        "tests/Takupoke.Integration.Tests/fixtures/ocr-repeated-header-order.json"
+      ],
+      "checks": [
+        "tests/Takupoke.Core.Tests/RecoveryCodeCandidatesTests.cs",
+        "tests/Takupoke.Integration.Tests/ExamCompositeOcrHeaderTests.cs",
+        "tests/Takupoke.Integration.Tests/OcrAsciiRefinementTests.cs",
+        "tests/Takupoke.Integration.Tests/OcrConditionalJapaneseRetryTests.cs",
+        "tests/Takupoke.Integration.Tests/OcrCropCompletenessTests.cs",
+        "tests/Takupoke.Integration.Tests/OcrCtcDecoderTests.cs",
+        "tests/Takupoke.Integration.Tests/OcrDetectorProbabilityTests.cs",
+        "tests/Takupoke.Integration.Tests/OcrHeaderPrescreenTests.cs",
+        "tests/Takupoke.Integration.Tests/OcrInkCropFrameTests.cs",
+        "tests/Takupoke.Integration.Tests/OcrInputTransformTests.cs",
+        "tests/Takupoke.Integration.Tests/OcrLiteralCodeRetryTests.cs",
+        "tests/Takupoke.Integration.Tests/OcrNativeLineHeaderTests.cs",
+        "tests/Takupoke.Integration.Tests/OcrRoleLabelRetryTests.cs",
+        "tests/Takupoke.Integration.Tests/OcrSourceRowExtractionTests.cs",
+        "tests/Takupoke.Integration.Tests/OcrWhiteGapPartitionTests.cs",
+        "tests/Takupoke.Integration.Tests/OnnxAsciiOcrTests.cs"
+      ]
+    },
+    {
+      "id": "native-pdf",
+      "title": "PDF埋め込みフォント・可視文字・原本の描画照合",
+      "environment": "Linux／Windows .NET。Windows描画は対応workflowで検証",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        "src/Takupoke.Infrastructure/Parsing/PdfNativeGlyphTrace.cs",
+        "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+FontRecovery.cs",
+        "src/Takupoke.Infrastructure/Parsing/PdfPigLayoutReader+VisibleRecovery.cs",
+        "src/Takupoke.Infrastructure/Parsing/PdfTrueTypeRecoveryMap.cs"
+      ],
+      "checks": [
+        "tests/Takupoke.Integration.Tests/PdfFontUseTests.cs",
+        "tests/Takupoke.Integration.Tests/PdfMissingUnicodeRecoveryTests.cs",
+        "tests/Takupoke.Integration.Tests/PdfTrueTypeRecoveryMapTests.cs",
+        "tests/Takupoke.Integration.Tests/PdfVisibleUnicodeRecoveryTests.cs"
+      ]
+    },
+    {
+      "id": "recovery-ui",
+      "title": "原画像確認・本文訂正・モデル設定・動的詳細",
+      "environment": "Windows WinUI x64。クロスビルドは操作成功に数えない",
+      "commands": [
+        "pwsh ./tests/Takupoke.Win.UITests/startup-smoke.ps1"
+      ],
+      "sources": [
+        "src/Takupoke.Win/MainWindow.DetailRevision.cs",
+        "src/Takupoke.Win/MainWindow.Recovery.cs",
+        "src/Takupoke.Win/Platform/FoundryLocalRecoveryProvider.cs",
+        "src/Takupoke.Win/Platform/FoundryPinnedModelStore.cs",
+        "src/Takupoke.Win/Platform/WindowsLanguageRecoveryProvider.cs",
+        "src/Takupoke.Win/Platform/WindowsPdfRecovery.cs",
+        "src/Takupoke.Win/Platform/WindowsRecoveryModels.cs",
+        "src/Takupoke.Win/ViewModels/RecoveryCorrectionLayout.cs",
+        "src/Takupoke.Win/ViewModels/RecoveryManualInputState.cs",
+        "src/Takupoke.Win/ViewModels/RecoveryPreviewDisplay.cs",
+        "tests/Takupoke.Win.UITests/PreferenceSnapshot.cs",
+        "tests/Takupoke.Win.UITests/Program.LocalAiShared.cs"
+      ],
+      "checks": [
+        "tests/Takupoke.Win.UITests/Program.DetailUpdates.cs",
+        "tests/Takupoke.Win.UITests/Program.ManualRecovery.cs",
+        "tests/Takupoke.Win.UITests/Program.Recovery.cs",
+        "tests/Takupoke.Win.UITests/Program.Settings.cs"
+      ]
+    },
+    {
+      "id": "recovery-experiments",
+      "title": "OCR・native PDFの比較用workflowと再現条件",
+      "environment": "Linux／Windows .NETと明示したWindows比較workflow",
+      "commands": [
+        "dotnet test tests/Takupoke.Core.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+      ],
+      "sources": [
+        ".github/workflows/independent-wide-vector-native.yml",
+        ".github/workflows/label-selection-native-probe.yml",
+        ".github/workflows/native-grammar-error-probe.yml",
+        ".github/workflows/native-model-batch-comparison.yml",
+        ".github/workflows/ocr-acquisition-accuracy.yml",
+        ".github/workflows/ocr-acquisition-probe.yml",
+        ".github/workflows/ocr-literal-acquisition-diagnostic.yml",
+        ".github/workflows/ocr-literal-factory-validation.yml",
+        ".github/workflows/ocr-literal-retry-accuracy.yml",
+        ".github/workflows/ocr-literal-retry-native.yml",
+        ".github/workflows/ocr-model-comparison.yml",
+        ".github/workflows/ocr-original-image.yml",
+        ".github/workflows/ocr-physical-framing.yml",
+        ".github/workflows/ocr-production-validation.yml",
+        ".github/workflows/ocr-source-order-accuracy.yml",
+        ".github/workflows/ocr-whole-model-comparison.yml",
+        ".github/workflows/ordered-row-proof-native.yml",
+        ".github/workflows/pdf-colour-acquisition.yml",
+        ".github/workflows/pdf-source-final.yml",
+        ".github/workflows/raster-acquisition-native-probe.yml",
+        ".github/workflows/readable-native-probe.yml",
+        ".github/workflows/recovery-model-evaluation.yml",
+        ".github/workflows/single-header-role-native-probe.yml",
+        ".github/workflows/windows-fictional-benchmark.yml",
+        ".github/workflows/windows-system-ocr.yml"
+      ],
+      "checks": [
+        "tests/Takupoke.Integration.Tests/OnnxAsciiOcrTests.cs",
+        "tests/Takupoke.Integration.Tests/PdfVisibleUnicodeRecoveryTests.cs",
+        "tests/Takupoke.Integration.Tests/RecoveryCapturedLayoutTests.cs"
       ]
     }
   ]

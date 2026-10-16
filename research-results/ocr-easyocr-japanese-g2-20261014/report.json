@@ -1,0 +1,87 @@
+{
+  "freezeSha256": "87e3ffd7a80159dcfd65fffc54a2755a9f27ea2814cf3720eadf8f44c083e60d",
+  "rawSha256": "1dba012be60e89dc7d10e3c1353a487363eab4418998976e37d175f97a841859",
+  "callsCompleted": 192,
+  "groups": {
+    "sans/subject": {
+      "rows": 24,
+      "exact": 20,
+      "correctAboveFloor": 16,
+      "incorrectAboveFloor": 1,
+      "unsupportedPadding": 0
+    },
+    "sans/teacher": {
+      "rows": 24,
+      "exact": 13,
+      "correctAboveFloor": 13,
+      "incorrectAboveFloor": 4,
+      "unsupportedPadding": 0
+    },
+    "sans/room": {
+      "rows": 24,
+      "exact": 3,
+      "correctAboveFloor": 3,
+      "incorrectAboveFloor": 12,
+      "unsupportedPadding": 0
+    },
+    "sans/header": {
+      "rows": 21,
+      "exact": 14,
+      "correctAboveFloor": 12,
+      "incorrectAboveFloor": 4,
+      "unsupportedPadding": 0
+    },
+    "sans/blank": {
+      "rows": 3,
+      "exact": 0,
+      "correctAboveFloor": 0,
+      "incorrectAboveFloor": 0,
+      "unsupportedPadding": 0
+    },
+    "serif/subject": {
+      "rows": 24,
+      "exact": 16,
+      "correctAboveFloor": 5,
+      "incorrectAboveFloor": 0,
+      "unsupportedPadding": 0
+    },
+    "serif/teacher": {
+      "rows": 24,
+      "exact": 16,
+      "correctAboveFloor": 7,
+      "incorrectAboveFloor": 0,
+      "unsupportedPadding": 0
+    },
+    "serif/room": {
+      "rows": 24,
+      "exact": 3,
+      "correctAboveFloor": 2,
+      "incorrectAboveFloor": 17,
+      "unsupportedPadding": 0
+    },
+    "serif/header": {
+      "rows": 21,
+      "exact": 15,
+      "correctAboveFloor": 15,
+      "incorrectAboveFloor": 4,
+      "unsupportedPadding": 0
+    },
+    "serif/blank": {
+      "rows": 3,
+      "exact": 0,
+      "correctAboveFloor": 0,
+      "incorrectAboveFloor": 0,
+      "unsupportedPadding": 0
+    }
+  },
+  "worker": {
+    "callsCompleted": 192,
+    "elapsedSeconds": 4.096381299999848,
+    "peakRssBytes": 387411968,
+    "parameters": 4325671,
+    "qualification": false
+  },
+  "qualification": false,
+  "modelActivation": false,
+  "limits": "CTC min-piece confidence is uncalibrated; scores do not establish source ownership or document acceptance. Timing is Linux CPU under concurrent work."
+}

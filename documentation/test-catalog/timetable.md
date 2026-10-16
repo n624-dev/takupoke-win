@@ -1,7 +1,7 @@
 # 時間割・授業名・時刻・日付
 
 対応関係・宣言名・実行方法のSHA-256：
-`703f2fb2337e0e32b5a784103887624414ab29484f4e51402b573d33ae60db74`
+`7b109639f1bf4594cac3c5973da450cd5e082942b51d9c35b027fd2f37458568`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -13,11 +13,17 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 ## 変更時に確認するソース
 
 - [src/Takupoke.Core/ClassSelection.cs](../../src/Takupoke.Core/ClassSelection.cs)
+- [src/Takupoke.Core/PdfClassAssignment.cs](../../src/Takupoke.Core/PdfClassAssignment.cs)
 - [src/Takupoke.Core/ScheduleModels.cs](../../src/Takupoke.Core/ScheduleModels.cs)
 - [src/Takupoke.Core/SchedulePresentation.cs](../../src/Takupoke.Core/SchedulePresentation.cs)
 - [src/Takupoke.Core/ScheduleTimes.cs](../../src/Takupoke.Core/ScheduleTimes.cs)
 - [src/Takupoke.Core/SchoolDate.cs](../../src/Takupoke.Core/SchoolDate.cs)
 - [src/Takupoke.Core/TimetableEngine.cs](../../src/Takupoke.Core/TimetableEngine.cs)
+
+## [tests/Takupoke.Core.Tests/PdfClassAssignmentTests.cs](../../tests/Takupoke.Core.Tests/PdfClassAssignmentTests.cs)
+
+- `OnlyOneStandaloneDepartmentChangesFirstYearAffiliation`
+- `EmptyFirstYearSpecialTableSuppressesDepartmentOrdinaryLessonWithoutInventingAnExam`
 
 ## [tests/Takupoke.Core.Tests/SchedulePresentationTests.cs](../../tests/Takupoke.Core.Tests/SchedulePresentationTests.cs)
 
@@ -26,7 +32,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `SpecialNamesUseMappingOnlyOnHomeWhileWeekAndDetailRetainPdfSpelling`
 - `InternationalChangesAreFilteredFromListAsWellAsGrid`
 - `HomeWeekContainsTodayOnWeekendWhileInitialWeekCanAdvance`
-- `GridTransformsNeverChangeHomeTextOrPersistedSource`
+- `CardDisplayTransformsKeepStoredSourceAndKanaPoliciesSeparate`
 - `ChangeCardKeepsLastUnambiguousShortSpellingWhenNoneFits`
 
 ## [tests/Takupoke.Core.Tests/TimetableEngineTests.cs](../../tests/Takupoke.Core.Tests/TimetableEngineTests.cs)

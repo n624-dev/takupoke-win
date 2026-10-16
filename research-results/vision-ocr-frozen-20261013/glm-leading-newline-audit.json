@@ -1,0 +1,77 @@
+{
+  "scope": "Post-run formatting diagnosis only. Primary raw scores unchanged; no inference, output repair, Evidence or adoption.",
+  "rawSHA": "3c85cf852754f6535169563358e9fc152cf8f426ea00c2df18692f33e3baced2",
+  "additionalInferenceCalls": 0,
+  "diagnostics": [
+    {
+      "cohort": "sans",
+      "kind": "subject",
+      "rows": 24,
+      "rawLiteralExact": 0,
+      "singleLeadingNewlineDiagnosticExact": 16
+    },
+    {
+      "cohort": "sans",
+      "kind": "teacher",
+      "rows": 24,
+      "rawLiteralExact": 0,
+      "singleLeadingNewlineDiagnosticExact": 20
+    },
+    {
+      "cohort": "sans",
+      "kind": "room",
+      "rows": 24,
+      "rawLiteralExact": 0,
+      "singleLeadingNewlineDiagnosticExact": 12
+    },
+    {
+      "cohort": "sans",
+      "kind": "header",
+      "rows": 21,
+      "rawLiteralExact": 0,
+      "singleLeadingNewlineDiagnosticExact": 21
+    },
+    {
+      "cohort": "sans",
+      "kind": "blank",
+      "rows": 3,
+      "rawLiteralExact": 0,
+      "singleLeadingNewlineDiagnosticExact": 0
+    },
+    {
+      "cohort": "serif",
+      "kind": "subject",
+      "rows": 24,
+      "rawLiteralExact": 0,
+      "singleLeadingNewlineDiagnosticExact": 21
+    },
+    {
+      "cohort": "serif",
+      "kind": "teacher",
+      "rows": 24,
+      "rawLiteralExact": 0,
+      "singleLeadingNewlineDiagnosticExact": 22
+    },
+    {
+      "cohort": "serif",
+      "kind": "room",
+      "rows": 24,
+      "rawLiteralExact": 0,
+      "singleLeadingNewlineDiagnosticExact": 13
+    },
+    {
+      "cohort": "serif",
+      "kind": "header",
+      "rows": 21,
+      "rawLiteralExact": 0,
+      "singleLeadingNewlineDiagnosticExact": 20
+    },
+    {
+      "cohort": "serif",
+      "kind": "blank",
+      "rows": 3,
+      "rawLiteralExact": 0,
+      "singleLeadingNewlineDiagnosticExact": 0
+    }
+  ]
+}

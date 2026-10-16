@@ -1,0 +1,166 @@
+{
+  "scope": "BEFOREsource-onlyALL18closedactualcandidate documents; no originalraster/model/goldinput; only validatedfullnativeRoleRowordering. Alloriginals immutable.",
+  "inputSHA256": "62546f542fdd972990d1b64c3833e0cd6b8712bf52a01dcad0f4ea4fa0519dda",
+  "files": [
+    {
+      "file": "reader/UglyToad.PdfPig.Fonts.dll",
+      "bytes": 1095680,
+      "sha256": "30521d2aa02252c0097cd3a9b12832368d5c925e1ccb4bc3a5735671bd3d2e1e"
+    },
+    {
+      "file": "reader/SQLitePCLRaw.batteries_v2.dll",
+      "bytes": 5120,
+      "sha256": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b"
+    },
+    {
+      "file": "reader/Takupoke.OcrComparison.dll",
+      "bytes": 13824,
+      "sha256": "7ccb1c03df3e04ca8fb5a2ecdb70c7b64249a1f3ade89ef95e6f42211a2597fc"
+    },
+    {
+      "file": "reader/UglyToad.PdfPig.Tokens.dll",
+      "bytes": 48128,
+      "sha256": "d6fbd73a520bb961ffcc98030ab686f43c88b03f5b059ba11e3781e0f091433d"
+    },
+    {
+      "file": "reader/DocumentFormat.OpenXml.Framework.dll",
+      "bytes": 478688,
+      "sha256": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae"
+    },
+    {
+      "file": "reader/Takupoke.Core.dll",
+      "bytes": 412672,
+      "sha256": "a9da5a10f9e024dca9fda8dfee8bc4e28532547d867ededd020f7f91627820a9"
+    },
+    {
+      "file": "reader/Takupoke.OcrComparison.pdb",
+      "bytes": 13756,
+      "sha256": "4f96674eff22b8a4f35aca3e010ff6a1ff23c500356b50c764335bab6ebdfc4d"
+    },
+    {
+      "file": "reader/UglyToad.PdfPig.Tokenization.dll",
+      "bytes": 23040,
+      "sha256": "539d0ca2c7981b9eaf8541e17434911042f7cc73d3abc24962994bb99472ed3c"
+    },
+    {
+      "file": "reader/Takupoke.Core.pdb",
+      "bytes": 90404,
+      "sha256": "a2c9926dc5ea91613f673064486e47f9ab24c6ed89f39aee2c425a102db5cc76"
+    },
+    {
+      "file": "reader/UglyToad.PdfPig.Package.dll",
+      "bytes": 4608,
+      "sha256": "3227f79347329b57e50745d2ade1deb7ccdfe57da1d382796283832aae6ea41a"
+    },
+    {
+      "file": "reader/Takupoke.OcrComparison.runtimeconfig.json",
+      "bytes": 330,
+      "sha256": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f"
+    },
+    {
+      "file": "reader/System.Security.Cryptography.ProtectedData.dll",
+      "bytes": 39760,
+      "sha256": "b61a1445b99a1486a5d9abbd45d766497f136270f5b04862defee1fc054ded14"
+    },
+    {
+      "file": "reader/SQLitePCLRaw.core.dll",
+      "bytes": 51200,
+      "sha256": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84"
+    },
+    {
+      "file": "reader/System.Numerics.Tensors.dll",
+      "bytes": 410936,
+      "sha256": "9d96dc759fdb54cbc3c26ee65cfd78ff32e3745f418119cc0811e63d3f29ecb9"
+    },
+    {
+      "file": "reader/Takupoke.OcrComparison.deps.json",
+      "bytes": 17536,
+      "sha256": "bcceab924604fe4f0ff96fde99c77b3a01ab7ed9bda01edac2a626ec4619cc42"
+    },
+    {
+      "file": "reader/DocumentFormat.OpenXml.dll",
+      "bytes": 7985120,
+      "sha256": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499"
+    },
+    {
+      "file": "reader/Microsoft.ML.OnnxRuntime.dll",
+      "bytes": 232480,
+      "sha256": "4c6985df4aa2f810ba8a2b37c3c791e619d8fe126954a6bd28cffd3f4adeba95"
+    },
+    {
+      "file": "reader/Takupoke.Infrastructure.pdb",
+      "bytes": 158108,
+      "sha256": "d1422617b902477ab01273d3b2f8115990f3faa187b83f1c63f7e384b0c8cce3"
+    },
+    {
+      "file": "reader/UglyToad.PdfPig.DocumentLayoutAnalysis.dll",
+      "bytes": 248320,
+      "sha256": "c0d1e237eabcb2c741fc7ab7b26c255af6f5751d1cd7e86d7ae613611f79bc88"
+    },
+    {
+      "file": "reader/System.IO.Packaging.dll",
+      "bytes": 159504,
+      "sha256": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+    },
+    {
+      "file": "reader/UglyToad.PdfPig.dll",
+      "bytes": 4251648,
+      "sha256": "c47abebdffebb6e48a1d40f4c22ce5f673c57558ecdb3187841b728112dea279"
+    },
+    {
+      "file": "reader/Takupoke.Infrastructure.dll",
+      "bytes": 738304,
+      "sha256": "7a90d767ecf415682d4584337b9a98ffce798fefa2eab176a73c30c1930f74db"
+    },
+    {
+      "file": "reader/Microsoft.Data.Sqlite.dll",
+      "bytes": 177464,
+      "sha256": "b98d957462be432895b00dccca012d3c127e118d3d4262418014b92c7bbd66cf"
+    },
+    {
+      "file": "reader/UglyToad.PdfPig.Core.dll",
+      "bytes": 50176,
+      "sha256": "cbdd1809ee0f4ba617900845d182e5e67183377fe5848a8d9d1222b3c395116b"
+    },
+    {
+      "file": "reader/SQLitePCLRaw.provider.e_sqlite3.dll",
+      "bytes": 36864,
+      "sha256": "df996bcae63c2cabcfe8d4b9c5110eb39a2a4706178b07d875665391c6eb3995"
+    },
+    {
+      "file": "reader/Takupoke.OcrComparison",
+      "bytes": 78256,
+      "sha256": "229ca1d7fbfb862f639b906929248b7c133781fe7a3471d6ea99ed4c904c9b2f"
+    },
+    {
+      "file": "reader/runtimes/linux-x64/native/libe_sqlite3.so",
+      "bytes": 1470784,
+      "sha256": "b0f5c48026fedcf9f05cf31c6fadf9e1e001ca59cd85aa68b8b6814e52c18a07"
+    },
+    {
+      "file": "reader/runtimes/linux-x64/native/libonnxruntime_providers_shared.so",
+      "bytes": 14632,
+      "sha256": "086ec1d5388f64153d9c63470d126693db9a182c8ce236d3a1119068471b8a0d"
+    },
+    {
+      "file": "reader/runtimes/linux-x64/native/libonnxruntime.so",
+      "bytes": 22326072,
+      "sha256": "13ab8084954fa4a47c777880180b90810d6020f021441395712b48a75b74c68b"
+    },
+    {
+      "file": "as-run/tools/ocr-source-order-replay/OrderReplay.csproj",
+      "bytes": 407,
+      "sha256": "66bb077042373a581668718a88b98728ee1adfb2472e3fcf77e984eeb69967a0"
+    },
+    {
+      "file": "as-run/tools/ocr-source-order-replay/OrderReplay.cs",
+      "bytes": 3280,
+      "sha256": "9806540df2694549a5f900a0cc7d676b6f02ec8df60adfd8fb286dcd73c15a7d"
+    },
+    {
+      "file": "as-run/src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs",
+      "bytes": 72874,
+      "sha256": "15e6d3f9eb9fc56c569290eedf21e962bd24317ee32129cf5252b8104cf9c91b"
+    }
+  ]
+}

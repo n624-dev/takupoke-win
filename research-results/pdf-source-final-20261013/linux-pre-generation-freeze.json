@@ -1,0 +1,47 @@
+{
+  "recipe": "independent-source-colour-final-v1",
+  "candidateCommit": "c064ea2a1a0d57516baf9bdc12125a0705e7ae9f",
+  "generatorSHA": "d7552ece660555e08d77378d35fe37a2a1da95a7713a5a7d846d8c5342b6f416",
+  "fonts": [
+    [
+      "kosugi",
+      "apache/kosugi/Kosugi-Regular.ttf",
+      "f5e81d6a6b865d9b88c54d2d3c16bcaa3b239dfcefaf2a62976ac9dc7574bab7",
+      771409
+    ],
+    [
+      "sawarabi",
+      "ofl/sawarabimincho/SawarabiMincho-Regular.ttf",
+      "86373c619710d1528aac3a4d47ce96834101bb38b057235b39e47b61ba143c6d",
+      590317
+    ]
+  ],
+  "colours": [
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ],
+    [
+      0.15,
+      0.5,
+      0.2
+    ],
+    [
+      0.4,
+      0.4,
+      0.4
+    ]
+  ],
+  "variants": [
+    "positive",
+    "missing-day",
+    "missing-body"
+  ],
+  "qualification": "source-only; no OCR/model activation"
+}

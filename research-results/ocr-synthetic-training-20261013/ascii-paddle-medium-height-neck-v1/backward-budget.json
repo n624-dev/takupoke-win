@@ -1,0 +1,68 @@
+{
+  "scope": "Numeric random prepool maps only; full18710CTC/fullteacherKL/teacherfeatureMSE backward; no optimizer/render/quality/model selection",
+  "sourceSha256": "abeb6fba9d8a86929015886590f6d375ab578e5c239416f6a77a9bd18cb2cefa",
+  "stateUnchanged": true,
+  "svtrParametersFrozen": true,
+  "trainableParameters": 300864,
+  "threads": 2,
+  "seed": 773711,
+  "measurements": [
+    {
+      "batch": 8,
+      "localWidth": 80,
+      "frames": 40,
+      "seconds": [
+        0.14701980199606624,
+        0.13702196499798447,
+        0.12908725600573234
+      ],
+      "meanSeconds": 0.137709674333261,
+      "gradientsFinite": true,
+      "maximumGradient": 3.4983842372894287,
+      "peakRssMiB": 555.0
+    },
+    {
+      "batch": 16,
+      "localWidth": 80,
+      "frames": 40,
+      "seconds": [
+        0.2206778299951111,
+        0.25614777399459854,
+        0.2091760199982673
+      ],
+      "meanSeconds": 0.2286672079959923,
+      "gradientsFinite": true,
+      "maximumGradient": 2.623745918273926,
+      "peakRssMiB": 646.640625
+    },
+    {
+      "batch": 8,
+      "localWidth": 240,
+      "frames": 120,
+      "seconds": [
+        0.354479285000707,
+        0.39518977199622896,
+        0.3773783770011505
+      ],
+      "meanSeconds": 0.37568247799936216,
+      "gradientsFinite": true,
+      "maximumGradient": 16.052146911621094,
+      "peakRssMiB": 811.3984375
+    },
+    {
+      "batch": 16,
+      "localWidth": 240,
+      "frames": 120,
+      "seconds": [
+        0.8433070749961189,
+        0.9854962270037504,
+        1.0458139710026444
+      ],
+      "meanSeconds": 0.9582057576675046,
+      "gradientsFinite": true,
+      "maximumGradient": 13.250423431396484,
+      "peakRssMiB": 1232.24609375
+    }
+  ],
+  "limits": "Three numeric repeats per shape under concurrent Linux workload. Lossless map decompression/rejecthead/cache/dev inference additional; nativeWindows/iPhone not measured."
+}

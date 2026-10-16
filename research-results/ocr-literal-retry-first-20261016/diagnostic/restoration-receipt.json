@@ -1,0 +1,100 @@
+{
+  "sourceCommit": "8b2fa2ade00967221286934c2e054f46128d8154",
+  "referenceRun": 38859980186,
+  "all10OriginalNativePixelHashesExact": true,
+  "modelCalls": 0,
+  "independentAccuracyCredit": false,
+  "pages": [
+    {
+      "id": "literalfresh-0-positive",
+      "page": 1,
+      "file": "literalfresh-0-positive-native-p1.bgra",
+      "bytes": 3713420,
+      "sha256": "dee053bd2d8593b16abdefbc578db27aa78001188561b4a05a4458c4ae67d8fc",
+      "expectedSHA256": "dee053bd2d8593b16abdefbc578db27aa78001188561b4a05a4458c4ae67d8fc",
+      "exact": true
+    },
+    {
+      "id": "literalfresh-0-positive",
+      "page": 2,
+      "file": "literalfresh-0-positive-native-p2.bgra",
+      "bytes": 3713420,
+      "sha256": "28c528ccfd0c5c05fe633f1332afc352cc02dd827d8c34aef1f6cee14e8c7adb",
+      "expectedSHA256": "28c528ccfd0c5c05fe633f1332afc352cc02dd827d8c34aef1f6cee14e8c7adb",
+      "exact": true
+    },
+    {
+      "id": "literalfresh-0-positive",
+      "page": 3,
+      "file": "literalfresh-0-positive-native-p3.bgra",
+      "bytes": 3713420,
+      "sha256": "2928d0dbe863140bff20969b8e66c82b293f82e3db351c43934c4198913ec2d4",
+      "expectedSHA256": "2928d0dbe863140bff20969b8e66c82b293f82e3db351c43934c4198913ec2d4",
+      "exact": true
+    },
+    {
+      "id": "literalfresh-0-positive",
+      "page": 4,
+      "file": "literalfresh-0-positive-native-p4.bgra",
+      "bytes": 3713420,
+      "sha256": "e367c4d58955605587093483af07fe8bd060c5b94a9821cf78cccbe364f205e8",
+      "expectedSHA256": "e367c4d58955605587093483af07fe8bd060c5b94a9821cf78cccbe364f205e8",
+      "exact": true
+    },
+    {
+      "id": "literalfresh-0-positive",
+      "page": 5,
+      "file": "literalfresh-0-positive-native-p5.bgra",
+      "bytes": 3713420,
+      "sha256": "7b7130800cc515e121945b6ba48ba4257fef3d0e817c0807e29150bc3ec50444",
+      "expectedSHA256": "7b7130800cc515e121945b6ba48ba4257fef3d0e817c0807e29150bc3ec50444",
+      "exact": true
+    },
+    {
+      "id": "literalfresh-1-positive",
+      "page": 1,
+      "file": "literalfresh-1-positive-native-p1.bgra",
+      "bytes": 3713420,
+      "sha256": "c6693557be58fd3130e27544279d0c365b75060186b4b0eff7caa6bf0ecebaaf",
+      "expectedSHA256": "c6693557be58fd3130e27544279d0c365b75060186b4b0eff7caa6bf0ecebaaf",
+      "exact": true
+    },
+    {
+      "id": "literalfresh-1-positive",
+      "page": 2,
+      "file": "literalfresh-1-positive-native-p2.bgra",
+      "bytes": 3713420,
+      "sha256": "31f2ff5c1109eb85e1352f4d4e377e5b92676de0e52757bff56f5d1ccb477836",
+      "expectedSHA256": "31f2ff5c1109eb85e1352f4d4e377e5b92676de0e52757bff56f5d1ccb477836",
+      "exact": true
+    },
+    {
+      "id": "literalfresh-1-positive",
+      "page": 3,
+      "file": "literalfresh-1-positive-native-p3.bgra",
+      "bytes": 3713420,
+      "sha256": "09c4eae0f66f9fdd21bd9ab28dfb7150df5be57c5c6657482a4cc2ebf87d0054",
+      "expectedSHA256": "09c4eae0f66f9fdd21bd9ab28dfb7150df5be57c5c6657482a4cc2ebf87d0054",
+      "exact": true
+    },
+    {
+      "id": "literalfresh-1-positive",
+      "page": 4,
+      "file": "literalfresh-1-positive-native-p4.bgra",
+      "bytes": 3713420,
+      "sha256": "a352de56927ab353ef977f7c0f8c39417a8d24b2b89316dfa2166cf9193756f8",
+      "expectedSHA256": "a352de56927ab353ef977f7c0f8c39417a8d24b2b89316dfa2166cf9193756f8",
+      "exact": true
+    },
+    {
+      "id": "literalfresh-1-positive",
+      "page": 5,
+      "file": "literalfresh-1-positive-native-p5.bgra",
+      "bytes": 3713420,
+      "sha256": "f278c1026bf44a04ea2cb7afe91767930355f183432b4dda2760c15ab2bc906b",
+      "expectedSHA256": "f278c1026bf44a04ea2cb7afe91767930355f183432b4dda2760c15ab2bc906b",
+      "exact": true
+    }
+  ],
+  "scope": "Consumed fictional originals only. Restore exact Windows pixels for development; full-page BGRA stays outside public source. No private documents or training."
+}

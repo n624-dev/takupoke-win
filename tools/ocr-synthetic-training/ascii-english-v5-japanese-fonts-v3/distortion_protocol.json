@@ -1,0 +1,11 @@
+{
+  "purpose": "Once-only post-selection robustness monitoring, never training/checkpoint/threshold selection or fresh quality credit",
+  "seed": 107621,
+  "fonts": ["SawarabiGothic", "SawarabiMincho", "KleeOne", "KaiseiTokumin"],
+  "rows": 64,
+  "anglesDegrees": [-10, -6, 6, 10],
+  "labels": "New generic ASCII code literals; half confusable-rich; previous corpora/train/dev/fresh literals and tensor hashes excluded",
+  "transform": "PIL affine BICUBIC horizontal shear on expanded white canvas, x'=x+tan(angle)*y+padX; complete original canvas support retained; whole resulting ink bbox+2 only. Includes resampling and is not a source-identical product path.",
+  "assessment": "Compare active and frozen selected exact/CER/confidence/reject/padding; valid labels are retained because mild shear does not inherently make text unknowable. No automatic negative/reject requirement based on angle.",
+  "activation": false
+}

@@ -1,0 +1,38 @@
+{
+  "recipe": "conditional-literal-retry-native-v1",
+  "sourceSHA256": "4a3f9c0c652438146653c8eea947fc502b558a57452a925045ba4f326441aa5f",
+  "protocolSHA256": "b48a3ce452c17a967236c8ab5ed7697b345e5271ae3dfe03064a10066cd4ce22",
+  "seed": 20261016317,
+  "exclusionsAvoided": true,
+  "excludedLiteralCount": 30326,
+  "sampledLiteralComponentCount": 1334,
+  "modelCalls": 0,
+  "fontPins": [
+    {
+      "family": "zenkakugothicantique",
+      "file": "ZenKakuGothicAntique-Regular.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/zenkakugothicantique/ZenKakuGothicAntique-Regular.ttf",
+      "bytes": 2370412,
+      "sha256": "e79b874ef1ae0cfe5b9d750f5990d408874300b17c7a02cb6e86e73a14a33005"
+    },
+    {
+      "family": "shipporiminchob1",
+      "file": "ShipporiMinchoB1-Regular.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/shipporiminchob1/ShipporiMinchoB1-Regular.ttf",
+      "bytes": 15230032,
+      "sha256": "89403e4b2a9ca0db9f832b893cfbfd90506c7c674cd640ba8a0ee128c34de7a4"
+    }
+  ],
+  "fontExposure": "Two locally unused font files, related to previously consumed ZenKakuGothicNew/ShipporiMincho families. No family/pretraining-unseen claim. Geometric template is consumed; new literals/font files/case mix only.",
+  "prospectiveCriteria": {
+    "minimumExactFieldRate": 0.9,
+    "maximumCERPerFont": 0.03,
+    "maximumReviewUnion": 128,
+    "maximumRSSBytes": 6442450944,
+    "completeFieldsAndSlots": true,
+    "allFourNegativeAcquisitionCompleteAndRefused": true,
+    "eachFreshFontExactNondecreaseAndCoverageEditsNonincrease": true,
+    "eachControlSubgroupExactNondecreaseAndEditsNonincrease": true,
+    "strictImprovement": "Combined consumed development plus fresh paired fields must strictly improve; disclose fresh gains separately, never relabel development fresh"
+  }
+}

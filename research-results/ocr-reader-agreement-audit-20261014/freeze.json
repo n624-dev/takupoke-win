@@ -1,0 +1,29 @@
+{
+  "recipe": "all-fixed-ctc-pair-agreement-consumed-audit-v1",
+  "files": {
+    "ocr-model-color-frozen-20261013/linux-observations.jsonl": "7c62eea64639d393e22b7be57fe81e3382f9c42b484d5738ecb64c2dd3b323cf",
+    "ocr-v6-small-frozen-20261013/linux-observations.jsonl": "17fd346ddc35ee96e3df774662003acae5b10801869f54211e1398fb9c3519ac",
+    "ocr-v5-server-frozen-20261013/observations.jsonl": "6cee821891f59da1858707283087e9b9314c5e1b278cb7f9fb3e8871d51d382e",
+    "ocr-japanese-v3-clean-lines-20261013/observations.jsonl": "55ea9bf90a7f234b127fcf5b282a7d24e98d521cd819d5237262c856c94ba270",
+    "ocr-english-v5-clean-lines-20261014/observations.jsonl": "e99972160eeba5f445feb533a9e7ee032e4c071cb86b5dbac8d097a25055d1b7",
+    "ocr-easyocr-japanese-g1-20261014/observations.jsonl": "b3ed7a8af8844b66b8267afa90de723256b643175e3a2c41e77ed90c751046a5",
+    "ocr-easyocr-japanese-g2-20261014/observations.jsonl": "1dba012be60e89dc7d10e3c1353a487363eab4418998976e37d175f97a841859"
+  },
+  "oracleSha256": "1c5652c38a5d84691d5105bd4e851349bc1879d38b2a1cc2a2b6169c12683095",
+  "sourceSha256": "6984755007bc1000855a2479f0d44f5ff7a2b7dc75989af2f934577ab0ea774f",
+  "models": [
+    "easyocr-japanese-g1",
+    "easyocr-japanese-g2",
+    "english-v5",
+    "japanese-v3",
+    "v5-mobile",
+    "v5-server",
+    "v6-medium",
+    "v6-small"
+  ],
+  "rule": "All28 unordered pairs; entire raw literal equality, nonempty, both own minCTC>=.8, both supported intervals; no correction/normalization/role/oracle routing",
+  "condition": "Paddle BGR arm and EasyOCR own Gray64 firstpass from identical original192PNG corpus",
+  "scope": "Posthoc diagnosis of consumed development only. No model/pair selection, new model calls, independent qualification or production activation",
+  "additionalModelCalls": 0,
+  "qualification": false
+}

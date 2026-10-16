@@ -1,0 +1,7 @@
+# Independent officialHF EnglishV5 fullCNN transfer tools
+
+Closed/unqualified, researchselectedepoch6. See [research report](../../../research-results/ocr-synthetic-training-20261013/ascii-english-v5-official-transfer-v1/README.md). No live Japaneseprimary or application model is changed.
+
+`model.py` loads the explicit official local-only class/config/weights unchanged, without native norm replacement/fusedDAG. `preflight.py` checks directforward/selfconsistency and numeric no-update budgets. `protocol.json` freezes data/hyperparameters/selection/gates. `data.py` generates independent fictional ASCII/unknown controls with font/cmap/balance audits. `adapter.py` adds reject121 while retaining438head. `train.py` is once-only and refuses an existing freeze. `report.py` verifies completed raw/checkpoints/allFP32caches/BN/config and oldfailednamespace hashes. `errors.py`, `probes.py`, `font_ambiguity.py` diagnose saved errors, consumed postselection sourcecounterparts and zero-call font information. They never correct predictions or relax selection gates.
+
+Python3.12/transformers5.19.0/torch2.7.1CPU/onnxruntime1.23.2/numpy2.3.5/safetensors0.8/Pillow12.3/fonttools4.61/PyYAML6.0.3. External assets, checkpoint/caches and fictional pixels are not repository payload. Unicode metadata I/O is explicitUTF8/LF. No trained portable export, CoreML/iPhone or nativeWindows execution is qualified. Old nativeONNX transplant remains failed and unchanged; this class is a distinct independentbaseline.

@@ -9,6 +9,12 @@ public sealed record ChangePreview(string SourceId, string Digest, int SchoolYea
     IReadOnlyList<ScheduleChange> Changes, IReadOnlyList<ChangeParseException> Warnings,
     IReadOnlyList<ChangeReviewRow> ReviewRows)
 {
+    public string SourceDigest => Digest;
+    public IReadOnlyList<int> PreviouslyExcludedRows { get; init; } = [];
+    public IReadOnlyList<ChangeParseException> CorrectableWarnings => Warnings
+        .Where(warning => warning.Row is null || !PreviouslyExcludedRows.Contains(warning.Row.Value)).ToArray();
+    public bool CanCorrectWeekdays => SourceId.Length > 0 && Digest.Length > 0
+        && CorrectableWarnings.Count > 0 && CorrectableWarnings.All(warning => warning.CanCorrectWeekday);
     public IReadOnlyList<ChangeReviewGroup> ReviewGroups => ChangeReviewGroup.Create(ReviewRows, Warnings);
     public bool CanSkipRows => ReviewRows.Count > 0 && Warnings.All(warning =>
         warning.Code is ChangeErrorCode.WeekdayMismatch or ChangeErrorCode.WeekdayOnly);
@@ -16,18 +22,6 @@ public sealed record ChangePreview(string SourceId, string Digest, int SchoolYea
 
 public sealed partial class MaterialCoordinator
 {
-    private async Task<SourceRecord> ClearStaleRowSkipsAsync(SchoolLease lease, SourceRecord source,
-        int year, CancellationToken token)
-    {
-        if (source.RowSkipConsent is not null &&
-            !source.RowSkipConsent.ValidFor(source, year, XlsxChangeReader.Version))
-        {
-            source = source with { RowSkipConsent = null };
-            await store.WriteAsync(lease, "selection." + source.Kind, source, token);
-        }
-        return source;
-    }
-
     private static bool RowSkipMatches(MaterialAnalysis analysis, SourceRecord source, int year) =>
         source.RowSkipConsent is null ? analysis.RowSkipConsent is null
         : source.RowSkipConsent.ValidFor(source, year, XlsxChangeReader.Version)
@@ -57,7 +51,9 @@ public sealed partial class MaterialCoordinator
                     var changes = ChangeNormalizer.Parse(table.WithoutWeekdayOnlyRows(), schoolYear,
                         token, allowEmptyPreview: true);
                     return new ChangePreview(source.Id, source.Digest, schoolYear, XlsxChangeReader.Version,
-                        changes, table.Warnings, table.ReviewRows);
+                        changes, table.Warnings, table.ReviewRows)
+                    { PreviouslyExcludedRows = source.RowSkipConsent?.ValidFor(source, schoolYear, XlsxChangeReader.Version) == true
+                        ? source.RowSkipConsent.Rows : [] };
                 }, token);
                 if (await store.BeginAsync(token) != lease) throw new OperationCanceledException();
                 return preview;
@@ -87,11 +83,23 @@ public sealed partial class MaterialCoordinator
                 throw new InvalidDataException("ファイルが更新されました。再取得して内容を確認し直してください。");
             var consent = new ChangeRowSkipConsent(source.Id, source.Digest, schoolYear,
                 XlsxChangeReader.Version, selectedRows.ToArray());
-            var changes = await Task.Run(() => XlsxChangeReader.Parse(content.Bytes, schoolYear,
-                token, selectedRows.ToHashSet()), token);
+            IReadOnlyList<ScheduleChange> changes;
+            try
+            {
+                changes = await Task.Run(() => XlsxChangeReader.Parse(content.Bytes, schoolYear,
+                    token, source.WeekdayConsent?.Matches(source, schoolYear, XlsxChangeReader.Version) == true,
+                    selectedRows.ToHashSet()), token);
+            }
+            catch (ChangeParseException failure)
+            {
+                await store.SaveChangeFailureAsync(lease, source, new MaterialAttempt(_clock.GetUtcNow(),
+                    failure.Message, true, source.Digest, schoolYear, failure.Code, XlsxChangeReader.Version), token);
+                throw;
+            }
             var analysis = new MaterialAnalysis(source.Id, MaterialKind.Changes, XlsxChangeReader.Version,
                 source.Digest, source.OriginalName, _clock.GetUtcNow(), schoolYear,
-                Changes: changes, RowSkipConsent: consent);
+                Changes: changes, RowSkipConsent: consent)
+            { DateDerivedWeekdays = source.WeekdayConsent?.Matches(source, schoolYear, XlsxChangeReader.Version) == true };
             await store.SaveAnalysisAsync(lease, analysis, token, authorizeRowSkips: true);
             await store.CollectOriginalsAsync(lease, token);
         }
