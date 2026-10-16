@@ -7,7 +7,7 @@
 
 現在は開発中です。ホーム・一覧・時間割・設定をWinUIで実装し、資料の選択・解析・保存・更新、授業や変更の詳細、リンクの検索・個人設定につないでいます。正式版はまだ公開していません。ビルド済みの開発確認版はGitHub Releasesから配布します。
 
-[現在のOCR構成・精度・訂正方法](documentation/local-ai-status-20261014.md)と、[過去の比較・不採用結果](documentation/ocr-improvement-log.md)を記録しています。ソースの既定構成は日本語PP-OCRv6 medium、英数字PP-OCRv5の補助2種、日本語PP-OCRv3の条件付き補助で約130 MiBです。[新しい全文書比較と使用方法](documentation/ocr-literal-retry-accuracy-20261016.md)。新しい配布版は検証中で、[公開済み10446](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10446)は前構成です。プレビューで高信頼度の誤読も複数選択し、原画像を見ながら訂正できます。
+[現在のOCR構成・精度・訂正方法](documentation/local-ai-status-20261014.md)と、[過去の比較・不採用結果](documentation/ocr-improvement-log.md)を記録しています。ソースの既定構成は日本語PP-OCRv6 medium、英数字PP-OCRv5の補助2種、日本語PP-OCRv3の条件付き補助で約130 MiBです。[新しい全文書比較と使用方法](documentation/ocr-literal-retry-accuracy-20261016.md)。[開発確認版10447](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10447)から利用できます。プレビューで高信頼度の誤読も複数選択し、原画像を見ながら訂正できます。
 
 選択済み資料は登録した同じパスから再取得します。同じ場所でファイルが作り直されても、安定した最新版を読み取ります。読み取り中の書換えや取得・解析の失敗時には前回正常結果を保持します。別の場所へ移動した資料は再選択してください。
 
