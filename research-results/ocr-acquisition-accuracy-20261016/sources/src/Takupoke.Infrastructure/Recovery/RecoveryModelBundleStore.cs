@@ -1,0 +1,139 @@
+using System.Security.Cryptography;
+using System.Text.RegularExpressions;
+using Takupoke.Infrastructure.Storage;
+
+namespace Takupoke.Infrastructure.Recovery;
+public enum RecoveryInstallPhase { Download, Verify, Initialize, CachedVerification, Complete }
+public sealed record RecoveryInstallProgress(RecoveryInstallPhase Phase, long DownloadedBytes, long TotalBytes);
+
+public sealed record RecoveryArtifact(string Path, string Url, long Size, string Sha256);
+public sealed record RecoveryModelBundle(string Id, string Version, string Runtime, string MinimumOs, long MinimumMemory, string License, bool Validated, IReadOnlyList<RecoveryArtifact> Artifacts)
+{
+    public long Size => Artifacts.Sum(a => a.Size);
+    public bool Valid => Validated && Regex.IsMatch(Id, "^[a-zA-Z0-9._-]{1,100}(?::[0-9]{1,8})?$") && Regex.IsMatch(Version, "^[a-zA-Z0-9._-]{1,100}$") && Runtime is "windowsOcr" or "foundryLocal" && Artifacts.Count is > 0 and <= 128 && Artifacts.Select(a => a.Path).Distinct(StringComparer.OrdinalIgnoreCase).Count() == Artifacts.Count && !string.IsNullOrWhiteSpace(License) && MinimumMemory > 0 && Artifacts.All(a => a.Size is > 0 and <= 8L * 1024 * 1024 * 1024 && Regex.IsMatch(a.Sha256, "^[a-f0-9]{64}$") && Uri.TryCreate(a.Url, UriKind.Absolute, out var uri) && uri.Scheme == "https" && uri.UserInfo.Length == 0 && a.Path.Length < 240 && !a.Path.Split('/').Any(p => p is "." or ".." or "" || !Regex.IsMatch(p, "^[a-zA-Z0-9._-]+$")));
+}
+/// Owns pinned, verified artifact directories. A failed download or smoke test
+/// leaves the old active directory intact; no SDK catalog auto-update is used.
+public sealed class RecoveryModelBundleStore(string root, Action<string>? removeDirectory = null)
+{
+    private readonly SemaphoreSlim _gate = new(1, 1);
+    private static string DirectoryName(RecoveryModelBundle bundle) => bundle.Runtime + "-" + Regex.Replace(bundle.Id, "[^a-zA-Z0-9._-]", "_") + "-" + bundle.Version + "-" + Takupoke.Core.Recovery.RecoveryValidator.Fingerprint(bundle);
+    public async Task<string> InstallAsync(RecoveryModelBundle bundle, Func<string, CancellationToken, Task<Stream>> download,
+        Func<string, CancellationToken, Task> smoke, CancellationToken token = default,
+        Action<RecoveryInstallProgress>? progress = null)
+    {
+        if (!bundle.Valid) throw new InvalidDataException("モデルManifestを確認できません。");
+        await _gate.WaitAsync(token);
+        var staging = Path.Combine(root, "staging-" + Guid.NewGuid().ToString("N"));
+        var target = Path.Combine(root, DirectoryName(bundle)); var committed = false; var owns = false;
+        long downloaded = 0;
+        var lastReport = System.Diagnostics.Stopwatch.StartNew();
+        void Report(RecoveryInstallPhase phase, bool force = true)
+        {
+            if (!force && lastReport.ElapsedMilliseconds < 100) return;
+            progress?.Invoke(new(phase, downloaded, bundle.Size)); lastReport.Restart();
+        }
+        try
+        {
+            Directory.CreateDirectory(root); var pointer = Path.Combine(root, "active." + bundle.Runtime + ".json");
+            var old = File.Exists(pointer) ? DataCodec.Decode<RecoveryModelBundle>(await File.ReadAllBytesAsync(pointer, token)) : null;
+            if (old is not null && !old.Valid) throw new InvalidDataException("既存モデルManifestを確認できません。");
+            if (!Directory.Exists(target))
+            {
+                Directory.CreateDirectory(staging); Report(RecoveryInstallPhase.Download);
+                foreach (var artifact in bundle.Artifacts)
+                {
+                    token.ThrowIfCancellationRequested(); Report(RecoveryInstallPhase.Download); var file = Path.Combine(staging, artifact.Path.Replace('/', Path.DirectorySeparatorChar)); Directory.CreateDirectory(Path.GetDirectoryName(file)!);
+                    await using var input = await download(artifact.Url, token); await using var output = new FileStream(file, FileMode.CreateNew, FileAccess.Write, FileShare.None, 65536, FileOptions.Asynchronous);
+                    using var hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256); var buffer = new byte[65536]; long size = 0; int n;
+                    while ((n = await input.ReadAsync(buffer, token)) > 0) { size += n; if (size > artifact.Size) throw new InvalidDataException("モデルサイズが一致しません。"); hash.AppendData(buffer, 0, n); await output.WriteAsync(buffer.AsMemory(0, n), token); downloaded += n; Report(RecoveryInstallPhase.Download, false); }
+                    Report(RecoveryInstallPhase.Download);
+                    Report(RecoveryInstallPhase.Verify);
+                    await output.FlushAsync(token); output.Flush(true);
+                    if (size != artifact.Size || Convert.ToHexStringLower(hash.GetHashAndReset()) != artifact.Sha256) throw new InvalidDataException("モデルSHA-256が一致しません。");
+                }
+                Report(RecoveryInstallPhase.Initialize);
+                await smoke(staging, token); token.ThrowIfCancellationRequested(); Directory.Move(staging, target); owns = true;
+            }
+            else { Report(RecoveryInstallPhase.CachedVerification); if (!await VerifyAsync(bundle, target, token)) throw new InvalidDataException("保存モデルを確認できません。"); Report(RecoveryInstallPhase.Initialize); await smoke(target, token); }
+            token.ThrowIfCancellationRequested(); await DataCodec.AtomicWriteAsync(pointer, DataCodec.Encode(bundle), token); committed = true;
+            if (old is not null) { var oldPath = Path.Combine(root, DirectoryName(old)); if (oldPath != target) try { Directory.Delete(oldPath, true); } catch (IOException) { } }
+            Report(RecoveryInstallPhase.Complete);
+            return target;
+        }
+        finally { try { if (Directory.Exists(staging)) Directory.Delete(staging, true); if (owns && !committed && Directory.Exists(target)) Directory.Delete(target, true); } finally { _gate.Release(); } }
+    }
+    public static async Task<bool> VerifyAsync(RecoveryModelBundle bundle, string path, CancellationToken token = default)
+    {
+        if (!bundle.Valid) return false;
+        foreach (var artifact in bundle.Artifacts) { var file = Path.Combine(path, artifact.Path.Replace('/', Path.DirectorySeparatorChar)); if (!File.Exists(file)) return false; await using var input = File.OpenRead(file); if (input.Length != artifact.Size || Convert.ToHexStringLower(await SHA256.HashDataAsync(input, token)) != artifact.Sha256) return false; }
+        return true;
+    }
+    private async Task<(RecoveryModelBundle Bundle, string Path)?> StoredCoreAsync(string runtime, CancellationToken token)
+    {
+        var pointer = Path.Combine(root, "active." + runtime + ".json"); if (!File.Exists(pointer)) return null;
+        var bundle = DataCodec.Decode<RecoveryModelBundle>(await File.ReadAllBytesAsync(pointer, token));
+        if (!bundle.Valid || bundle.Runtime != runtime) throw new InvalidDataException("保存モデルManifestを確認できません。");
+        return (bundle, Path.Combine(root, DirectoryName(bundle)));
+    }
+    public async Task<(RecoveryModelBundle Bundle, string Path)?> InstalledAsync(string runtime, CancellationToken token = default)
+    {
+        if (runtime is not "windowsOcr" and not "foundryLocal") throw new ArgumentException("Unknown runtime.");
+        await _gate.WaitAsync(token); try { return await StoredCoreAsync(runtime, token); } finally { _gate.Release(); }
+    }
+    public async Task<(RecoveryModelBundle Bundle, string Path)?> ActiveAsync(string runtime, CancellationToken token = default)
+    {
+        if (runtime is not "windowsOcr" and not "foundryLocal") throw new ArgumentException("Unknown runtime.");
+        await _gate.WaitAsync(token);
+        try { var stored = await StoredCoreAsync(runtime, token); return stored is { } value && await VerifyAsync(value.Bundle, value.Path, token) ? stored : null; }
+        finally { _gate.Release(); }
+    }
+    /// Run before providers start. Retain active and explicitly leased bundle
+    /// directories; remove only this store's owned crash leftovers.
+    public async Task CleanupAbandonedDirectoriesAsync(IReadOnlySet<string> inUse, CancellationToken token = default)
+    {
+        await _gate.WaitAsync(token);
+        try
+        {
+            if (!Directory.Exists(root)) return;
+            var retained = inUse.Select(Path.GetFullPath).ToHashSet(StringComparer.OrdinalIgnoreCase);
+            foreach (var runtime in new[] { "windowsOcr", "foundryLocal" })
+            {
+                var pointer = Path.Combine(root, "active." + runtime + ".json");
+                if (!File.Exists(pointer)) continue;
+                var bundle = DataCodec.Decode<RecoveryModelBundle>(await File.ReadAllBytesAsync(pointer, token));
+                if (!bundle.Valid || bundle.Runtime != runtime) throw new InvalidDataException("保存モデルManifestを確認できません。");
+                retained.Add(Path.GetFullPath(Path.Combine(root, DirectoryName(bundle))));
+            }
+            foreach (var directory in Directory.EnumerateDirectories(root))
+            {
+                token.ThrowIfCancellationRequested();
+                var name = Path.GetFileName(directory);
+                var owned = Regex.IsMatch(name, @"^(?:staging-[a-f0-9]{32}|(?:windowsOcr|foundryLocal)-[A-Za-z0-9._-]{1,100}-[A-Za-z0-9._-]{1,100}-[a-f0-9]{64})$");
+                if (owned && !retained.Contains(Path.GetFullPath(directory)) && (File.GetAttributes(directory) & FileAttributes.ReparsePoint) == 0)
+                    try { Directory.Delete(directory, true); } catch (IOException) { } catch (UnauthorizedAccessException) { }
+            }
+            foreach (var file in Directory.EnumerateFiles(root))
+            {
+                token.ThrowIfCancellationRequested();
+                if (Regex.IsMatch(Path.GetFileName(file), @"^active\.(?:windowsOcr|foundryLocal)\.json\.[a-f0-9]{32}\.tmp$") && (File.GetAttributes(file) & FileAttributes.ReparsePoint) == 0)
+                    try { File.Delete(file); } catch (IOException) { } catch (UnauthorizedAccessException) { }
+            }
+        }
+        finally { _gate.Release(); }
+    }
+    public async Task DeleteAsync(string runtime, CancellationToken token = default)
+    {
+        if (runtime is not "windowsOcr" and not "foundryLocal") throw new ArgumentException("Unknown runtime.");
+        await _gate.WaitAsync(token);
+        try
+        {
+            var installed = await StoredCoreAsync(runtime, token); if (installed is not { } value) return;
+            token.ThrowIfCancellationRequested();
+            if (Directory.Exists(value.Path))
+            { if (removeDirectory is null) Directory.Delete(value.Path, true); else removeDirectory(value.Path); }
+            File.Delete(Path.Combine(root, "active." + runtime + ".json"));
+        }
+        finally { _gate.Release(); }
+    }
+}

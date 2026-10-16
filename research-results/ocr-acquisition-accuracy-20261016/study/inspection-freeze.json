@@ -1,0 +1,27 @@
+{
+  "sources": {
+    "src\\Takupoke.Core\\Recovery\\RecoveryAuditShape.cs": "01f890573e5735cd7067567ffa88b378776ded98b0d2ba688f85b8e415b6a7e6",
+    "src\\Takupoke.Core\\Recovery\\RecoveryCodeCandidates.cs": "c85a7af03f9d5fac0f1d874872638bfd52e21c77b4a246d6589ca109edfe8c1f",
+    "src\\Takupoke.Core\\Recovery\\RecoveryEngine.cs": "b0c2a87006b2515ceed7e1bcea6221aa1b9748ac427d7ca6dc2fcc9f1dc13007",
+    "src\\Takupoke.Core\\Recovery\\RecoveryManualAssistance.cs": "6e94ec78a89c54d90d56f344f32a529aaee9d27620665f042f526978b8da9a53",
+    "src\\Takupoke.Core\\Recovery\\RecoveryModelManifest.cs": "b24245f93beebece14587dd52c131446d42133d37ece61f62539e6bb6946f958",
+    "src\\Takupoke.Core\\Recovery\\RecoveryModels.cs": "afe5b68f714d6efc25032c6e25e427984516be013ac3966b118438c70b38ecb3",
+    "src\\Takupoke.Core\\Recovery\\RecoveryPolicy.cs": "bb3820fa070207dc230dfc4a15deb3b4113ff693efd671092d0f74af05d9810b",
+    "src\\Takupoke.Core\\Recovery\\RecoveryPromptInstructions.cs": "cb8e32e555973bc6bf6343e52fe702b1e81afc7eaaf0f37ec401665bed9d9476",
+    "src\\Takupoke.Core\\Recovery\\RecoveryRoleLabels.cs": "ebbd8b0c4364ed25e0d7d4fb40466f7f2949398cc550f1d39521cee5032951ac",
+    "src\\Takupoke.Core\\Recovery\\RecoverySourceCoverage.cs": "d8ca7e039579184dd52a85d56a81bf44a7e9dd1c59c3144f8fe9a332f1d10141",
+    "src\\Takupoke.Core\\Recovery\\RecoverySourceIndex.cs": "da180d39222caa222fefc884803fa49a0085d69b0e0df83b5efc34ac4ebfc3aa",
+    "src\\Takupoke.Core\\Recovery\\RecoveryStructure.cs": "945c27fd5a88d1c4ca85fdc32d605170cac0cdb96d896659e359150c89daa276",
+    "src\\Takupoke.Core\\Recovery\\RecoveryValidator.cs": "5981dd6670577e0ddf00eae44e84dc0f6d52e3880032df1be40aab7cd975ca4b"
+  },
+  "files": {
+    "Inspect.deps.json": "7dec71a8f57b68eb5e889feeb7f96dfb8436ef47aadb98cccbc4187172f7b633",
+    "Inspect.dll": "1491b56b00dfcda926eaeca3e4e91f19b9d298ec71d6c5fa0c0c67839697f9f4",
+    "Inspect.exe": "39fb67c7bed40d2dabe41cedebb89ec7b99f08d7e74704e15806e85ff5826621",
+    "Inspect.pdb": "ef92b69bfccfad979f88c1911c44c24036da68516b4ba1735aecc1b4bda9b1b3",
+    "Inspect.runtimeconfig.json": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097",
+    "Takupoke.Core.dll": "2bf1ddf1412f61a2ec87a57cf114ce1cd26d2c7a66243aa072782bf1867781fd",
+    "Takupoke.Core.pdb": "dbf43a96a9cfc510ec37a3250c8a8783fee2e1946c5e6d12b0b211a537f56148"
+  },
+  "oracleReadByInspector": false
+}

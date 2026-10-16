@@ -1,0 +1,44 @@
+{
+  "recipe": "paired-native-acquisition-accuracy-v1",
+  "selectedFrom": "Consumed development only; selected before newfont drawing/inference",
+  "historicalBaselineCommit": "4ff7d2c4c894c8748d9c6c4182d15dde2e962904",
+  "candidateProductCommit": "f9cd35ad1424c542fdcb01ab60a8e08accb2041c",
+  "candidateExpertSha256": "95bab179e0d6cc75269419078d68696cd4679661f94f6128b858b7a074fe2971",
+  "originalExpertComponentTrial": "FAIL originally; full-route candidate judged separately, no retroactive component PASS",
+  "fixedFlags": [
+    "retryUnpaddedInput",
+    "allowContainedRuleContact-manual-only",
+    "retainVerifiedWhitespace-manual-only",
+    "retryRoleLabels-manual-only",
+    "manualCodeRequiresLetter"
+  ],
+  "newFonts": [
+    "BIZUDPMincho",
+    "MPLUS2"
+  ],
+  "newFontModelCallsBeforeFreeze": 0,
+  "newLiteralSeedBase": 20261016093,
+  "exclusionsSha256": "68767f94c1922b552bee796dfe454a6be407c98d15d6f862c1851b638b9dff49",
+  "positiveDocuments": 6,
+  "negativeDocuments": 12,
+  "pagesPerDocument": 5,
+  "fieldsPerPositive": 360,
+  "source": "Same original native Windows PDF pixels; actual separate historical/candidate binaries, full capture/parser/review route",
+  "confidence": "Every selected source literal, CTC interval and probability from actual native model call; no clamp, source omission or typed replacement",
+  "criteria": {
+    "maximumCERPerFont": 0.03,
+    "maximumRSSBytes": 6442450944,
+    "maximumReviewUnion": 128,
+    "completeFieldsAndSlots": true,
+    "allCandidateNegativeAcquisitionCompleteAndRefused": true,
+    "perFontNonregressionOnCoveredFields": true,
+    "freshCompleteAndNonregressing": true,
+    "allPositiveExactStrictlyImproves": true,
+    "minimumExactFieldRate": 0.9
+  },
+  "zeroErrorsRequired": false,
+  "noFreshReselection": true,
+  "criteriaRationale": "Frozen before new-font drawing/inference: a perfect historical fresh-font reading may remain perfect. Require independent fresh quality/nonregression and a strict aggregate improvement across all positives; do not require an impossible gain above a perfect fresh result.",
+  "fontWeight": "Regular static fonts; MPLUS2 variable wght fixed400 before first drawing (native variable default100 is not Regular).",
+  "exclusionRepresentation": "Hash-verified immutable historical base plus eight additional hash parts; EXACT same27089literal set as generation-only precheck, no inference or dataset change."
+}
