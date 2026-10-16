@@ -3,7 +3,7 @@
 新しい2フォントファイル・各5ページの架空時間割で、本文344/360項目と355/360項目が一致した。
 文字誤り率は16/2906＝0.5506%と7/2895＝0.2418%。両方とも120/120枠、本文360項目を保持し、欠落・余分・重複0。
 [Windows実行38836313175](https://github.com/n624-dev/takupoke-win/actions/runs/38836313175)で旧処理との比較と訂正経路を確認した。
-ソースの既定経路へ接続した。配布状況と導入検証は[最新Release](https://github.com/n624-dev/takupoke-win/releases/latest)とREADMEの配布記録を参照。
+[配布版0.1.0-dev.10446](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10446)の既定経路へ接続した。
 
 CPU・メモリ16GBを想定し、日本語PP-OCRv6 medium＋英数字PP-OCRv5 font-balanced v1を基礎に、
 日本語フォントで調整したV3 epoch1を復旧の英数字コード補助へ追加する。合計125,753,061バイト、約120 MiB。
@@ -61,3 +61,9 @@ KaiseiDecolは学習済みKaiseiTokuminと関連する書体であり、書体�
 比較試験の個別構成と実際の既定構成で、旧資料10ページの文字・位置・native判定が一致し、
 数値差は最大0.000009954。現行schema4の原画像確認へ両資料とも進めた。
 これは接続の再現確認で、独立したOCR正解数には加算しない。
+
+配布元は`70ba342a9e6ecba7f5aff2febccc593eaea2e320`。[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38839386958)全8ジョブ成功。
+x64の6導入・更新・再インストール状態は各1026／1026／1027／1026／1026／1027 UI項目が成功した。Core301、Linux Integration1143、Windows Integration1145も成功。
+公開6ファイルのSHA-256、両ZIPのsource・版・アーキテクチャ・全同梱ファイルを照合した。Node.js20警告0件。
+ARM64実機は未確認。操作・配布試験件数はOCR正解率には加算しない。
+[導入・公開ファイルの記録](../research-results/ocr-source-order-native-20261016/installer-release-receipt.json)。

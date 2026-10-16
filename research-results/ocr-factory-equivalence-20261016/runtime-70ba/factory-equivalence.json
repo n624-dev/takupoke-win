@@ -1,0 +1,120 @@
+{
+  "passed": true,
+  "complete": true,
+  "referenceRun": 38830503118,
+  "referenceRawSHA256": "af33a4d7d444e5dd488001604f3952b539a5c605e36e40bc705d887ae24ddbdd",
+  "actualRawSHA256": "e6d73fe40b3c931d3d81b26333b4f3d856c7a2fdde29b7bc37e9245a702e442b",
+  "scope": "Factory wiring equivalence to fixed already-qualified optional candidate on consumed native10pages. Raw native probabilities are compared without changes; tolerance is numerical parity only. No new independent accuracy credit.",
+  "pages": [
+    {
+      "id": "fresh-0-positive",
+      "page": 1,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 0.0,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-0-positive",
+      "page": 2,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 0.0,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-0-positive",
+      "page": 3,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 0.0,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-0-positive",
+      "page": 4,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 0.0,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-0-positive",
+      "page": 5,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 0.0,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-1-positive",
+      "page": 1,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 0.0,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-1-positive",
+      "page": 2,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 0.0,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-1-positive",
+      "page": 3,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 0.0,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-1-positive",
+      "page": 4,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 0.0,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    },
+    {
+      "id": "fresh-1-positive",
+      "page": 5,
+      "failure": null,
+      "sameOriginalPixels": true,
+      "allLiteralSourceGeometryExact": true,
+      "nativeProbabilitiesFinite": true,
+      "maximumNativeProbabilityDifference": 0.0,
+      "sameNativeFloorDecisions": true,
+      "sameActualRecognitionPurposes": true
+    }
+  ]
+}

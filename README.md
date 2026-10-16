@@ -7,7 +7,7 @@
 
 現在は開発中です。ホーム・一覧・時間割・設定をWinUIで実装し、資料の選択・解析・保存・更新、授業や変更の詳細、リンクの検索・個人設定につないでいます。正式版はまだ公開していません。ビルド済みの開発確認版はGitHub Releasesから配布します。
 
-[現在のOCR構成・精度・訂正方法](documentation/local-ai-status-20261014.md)と、[過去の比較・不採用結果](documentation/ocr-improvement-log.md)を記録しています。ソースの新しいOCR構成は日本語PP-OCRv6 mediumと英数字PP-OCRv5の補助2種、約120 MiBです。[新しい全文書比較と使用方法](documentation/ocr-source-order-accuracy-20261016.md)。新配布版は検証中で、公開10445は旧99 MiB構成です。プレビューで高信頼度の誤読も複数選択し、原画像を見ながら訂正できます。
+[現在のOCR構成・精度・訂正方法](documentation/local-ai-status-20261014.md)と、[過去の比較・不採用結果](documentation/ocr-improvement-log.md)を記録しています。現在のOCR構成は日本語PP-OCRv6 mediumと英数字PP-OCRv5の補助2種、約120 MiBです。[新しい全文書比較と使用方法](documentation/ocr-source-order-accuracy-20261016.md)。[開発確認版10446](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10446)から利用できます。プレビューで高信頼度の誤読も複数選択し、原画像を見ながら訂正できます。
 
 選択済み資料は登録した同じパスから再取得します。同じ場所でファイルが作り直されても、安定した最新版を読み取ります。読み取り中の書換えや取得・解析の失敗時には前回正常結果を保持します。別の場所へ移動した資料は再選択してください。
 
@@ -21,16 +21,16 @@ PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCR�
 
 [iOS解析変更への追従内容](documentation/ios-followup-20261016.md)には、通常解析と復旧検証の分離、P/R診断、返却表・1年生所属、XLSX確認保持、モデル取得の実進捗を記録しています。
 
-復旧用の単独コード384画像は259→292一致（40改善・7退行）、日本語付きの別384画像は287→292一致でした。既存のWindows帳票は329/360・337/360のままで、確認対象が増えます。追加学習v2は実際の復旧経路で文字誤りが悪化したため既定に採用せず、従来モデルを維持しています。[比較・残る誤読・訂正支援](documentation/ocr-accuracy-20261016.md)。
+10445までの比較では単独コード259→292/384、日本語付き287→292/384でした。追加学習v2の不採用結果と当時の全文書結果は[過去の比較記録](documentation/ocr-accuracy-20261016.md)へ保存しています。現在の追加学習V3を含む構成と全文書の比較は[10446の測定結果](documentation/ocr-source-order-accuracy-20261016.md)を参照してください。
 
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版0.1.0-dev.10445のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10445)からSetup.exeを取得してください。通常Release・Latestとして公開しています。正式版ではありません。iOS解析への追従、mainの行除外・一括除外を含み、復旧OCRの低スコア英数字保持と教室名の訂正候補を追加しました。[今回の変更・測定結果](documentation/ocr-accuracy-20261016.md)・[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38786397119)全8ジョブとx64の6導入状態が成功し、公開6ファイルと両ZIPの全同梱ファイルを照合済みです。[配布記録](research-results/ocr-accuracy-20261016/installer-release-receipt.json)。
+[開発確認版0.1.0-dev.10446のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10446)からSetup.exeを取得してください。通常Release・Latestとして公開しています。正式版ではありません。iOS解析への追従、mainの行除外・一括除外を含み、罫線付近の切り出し・再認識・本文の文字順序を修正し、英数字用の追加学習モデルを組み込みました。[今回の変更・測定結果](documentation/ocr-source-order-accuracy-20261016.md)・[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38839386958)全8ジョブとx64の6導入状態が成功し、公開6ファイルと両ZIPの全同梱ファイルを照合済みです。[配布記録](research-results/ocr-source-order-native-20261016/installer-release-receipt.json)。
 
-1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10445-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10445-arm64-Setup.exe`。
+1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10446-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10446-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
 3. スタートメニューの「たくポケ」から起動します。
-4. OCRを利用する場合は設定の「AI・OCRを使用する」をONにし、モデル管理で約99 MiBの日本語・英数字モデルを取得／更新します。復旧プレビューを原PDFと照合し、必要な欄を訂正してから明示採用してください。
+4. OCRを利用する場合は設定の「AI・OCRを使用する」をONにし、モデル管理で約120 MiBの日本語・英数字モデルを取得／更新します。復旧プレビューを原PDFと照合し、必要な欄を訂正してから明示採用してください。
 
 .NET・Windows App SDK・VCランタイムを同梱しているため、Visual StudioやSDKのインストール、ソースのビルドは不要です。アプリ内ブラウザ用のWebView2 Runtimeが未導入の場合は、セットアップがMicrosoftの公式インストーラーを実行します（インターネット接続が必要です）。
 

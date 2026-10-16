@@ -4,8 +4,9 @@
 両方とも120/120枠・本文360項目を保持し、欠落・余分・重複0、原画像確認と本文訂正へ進む。
 [測定範囲・残る誤読・使用方法](ocr-source-order-accuracy-20261016.md)。
 
-日本語PP-OCRv6 medium＋英数字PP-OCRv5 v1にV3の復旧コード補助を加え、約120 MiBの新構成をソースへ接続した。
-新しい配布版は検証中。現在公開されている[10445](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10445)は約99 MiBの旧構成。
+日本語PP-OCRv6 medium＋英数字PP-OCRv5 v1にV3の復旧コード補助を加え、約120 MiBの構成を配布版へ接続した。
+[配布版10446](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10446)を公開した。全8配布ジョブ、6導入状態、公開6ファイル・両ZIPの全同梱ファイルの照合が成功した。
+[導入・配布記録](../research-results/ocr-source-order-native-20261016/installer-release-receipt.json)。
 新構成を使う際は設定からモデルを更新し、資料を読み直す必要がある。
 
 旧6フォントの閉じた実認識結果も、元文字・native confidence・位置・原画像cropを保持して再検証した。
