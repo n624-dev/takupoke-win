@@ -53,3 +53,6 @@ research-results/ocr-decoding-comparison-20261016/** -text whitespace=-blank-at-
 research-results/ocr-paired-native-whole-v3-20261016/** -text whitespace=cr-at-eol
 research-results/ocr-acquisition-repair-20261016/** -text whitespace=cr-at-eol
 research-results/ocr-japanese-fonts-v4-20261016/** -text whitespace=cr-at-eol
+
+# Keep the closed V4 helper byte-identical to its recorded source hash.
+tools/ocr-synthetic-training/ascii-english-v5-japanese-fonts-v4/metrics.py whitespace=-blank-at-eof
