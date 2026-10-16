@@ -60,3 +60,6 @@ tools/ocr-synthetic-training/ascii-english-v5-japanese-fonts-v4/metrics.py white
 # Preserve failed native trial and ordering development bytes.
 research-results/ocr-acquisition-accuracy-20261016/** -text whitespace=cr-at-eol
 research-results/ocr-source-order-development-20261016/** -text whitespace=cr-at-eol
+
+research-results/ocr-source-order-native-20261016/** -text whitespace=cr-at-eol
+research-results/ocr-factory-equivalence-20261016/** -text whitespace=cr-at-eol

@@ -83,6 +83,7 @@ acquisition=[json.loads(line) for line in (study/'acquisition-observations.jsonl
 inspection=[json.loads(line) for line in (study/'replay-inspection.jsonl').read_text().splitlines()]
 write(study/'closed-route-summary.json',{'acquisitionPages':len(acquisition),'acquisitionFailures':sum(r['failure'] is not None for r in acquisition),'documents':[{'id':r['id'],'fields':len(r['fields']),'reviewPlanEligible':r['reviewPlanEligible'],'reviewTargets':len(r.get('reviewTargets') or [])} for r in inspection],'factoryDefault':a.factory_default,'independentAccuracyCredit':False,'scope':'All10consumed exact native pages, full current capture/parser/review route; no oracle/user acknowledgement/default activation/independent qualification.'})
 records=out/'diagnostic-records';records.mkdir()
+for name in ['bundle.json','download-receipt.json']:shutil.copyfile(out/name,records/name)
 if (study/'factory-equivalence.json').exists():shutil.copyfile(study/'factory-equivalence.json',records/'factory-equivalence.json')
 for name in ['acquisition-observations.jsonl','probe-execution-freeze.json','native-render-receipt.json','native-inputs.json','generation-freeze.json','freeze.json','downstream-execution-freeze.json','replay-inputs.json','replay-observations.jsonl','replay-inspection.jsonl','closed-route-summary.json']:
     shutil.copyfile(study/name,records/name)
