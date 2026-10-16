@@ -1,0 +1,53 @@
+name: Diagnose consumed literal-cohort acquisition ownership
+on:
+  push:
+    branches: [codex/windows-local-ai-improvement-20261013]
+    paths:
+      - '.github/workflows/ocr-literal-acquisition-diagnostic.yml'
+      - 'tools/ocr-literal-retry-study/restore_literal.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  restore:
+    runs-on: windows-2025
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+      ORT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set owned paths
+        run: |
+          $taskRoot = Join-Path $env:RUNNER_TEMP "takupoke-literal-acquisition-$env:GITHUB_RUN_ID"
+          @("TAKUPOKE_STUDY_TEMP=$taskRoot", "DOTNET_CLI_HOME=$(Join-Path $taskRoot 'dotnet-home')", "NUGET_PACKAGES=$(Join-Path $taskRoot 'nuget-packages')", "NUGET_HTTP_CACHE_PATH=$(Join-Path $taskRoot 'nuget-http')", "NUGET_PLUGINS_CACHE_PATH=$(Join-Path $taskRoot 'nuget-plugins')") | Out-File $env:GITHUB_ENV -Encoding utf8 -Append
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: '10.0.x'
+          cache: false
+      - run: python -m pip install --disable-pip-version-check Pillow==12.3.0 fonttools==4.61.1
+      - name: Reproduce all ten consumed native pages without inference
+        run: |
+          python scripts/check-public-tree.py
+          python tools/ocr-literal-retry-study/restore_literal.py --output (Join-Path $env:TAKUPOKE_STUDY_TEMP 'run')
+          if ($LASTEXITCODE -ne 0) { throw 'Original Windows pixel identity was not restored.' }
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: consumed-literal-acquisition-diagnostics
+          path: ${{ env.TAKUPOKE_STUDY_TEMP }}/run/records
+          retention-days: 7
+      - name: Remove owned work and caches
+        if: always()
+        run: |
+          $expected = Join-Path $env:RUNNER_TEMP "takupoke-literal-acquisition-$env:GITHUB_RUN_ID"
+          if ($env:TAKUPOKE_STUDY_TEMP -ne $expected) { throw 'Unexpected cleanup path.' }
+          if (Get-Command dotnet -ErrorAction SilentlyContinue) { dotnet build-server shutdown }
+          if (Test-Path $expected) { Remove-Item -LiteralPath $expected -Recurse -Force }

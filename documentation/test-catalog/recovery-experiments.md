@@ -1,7 +1,7 @@
 # OCR・native PDFの比較用workflowと再現条件
 
 対応関係・宣言名・実行方法のSHA-256：
-`d9b041e5bc66ce3c65aad8f481457f65d858f0ec0cb5c45add177c3201353682`
+`5e7a707e6725fc9b5df0475152167a1a3e744a1112bb8c981372b0b4a460e3ae`
 
 環境：Linux／Windows .NETと明示したWindows比較workflow
 
@@ -18,6 +18,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - [.github/workflows/native-model-batch-comparison.yml](../../.github/workflows/native-model-batch-comparison.yml)
 - [.github/workflows/ocr-acquisition-accuracy.yml](../../.github/workflows/ocr-acquisition-accuracy.yml)
 - [.github/workflows/ocr-acquisition-probe.yml](../../.github/workflows/ocr-acquisition-probe.yml)
+- [.github/workflows/ocr-literal-acquisition-diagnostic.yml](../../.github/workflows/ocr-literal-acquisition-diagnostic.yml)
 - [.github/workflows/ocr-literal-retry-accuracy.yml](../../.github/workflows/ocr-literal-retry-accuracy.yml)
 - [.github/workflows/ocr-literal-retry-native.yml](../../.github/workflows/ocr-literal-retry-native.yml)
 - [.github/workflows/ocr-model-comparison.yml](../../.github/workflows/ocr-model-comparison.yml)

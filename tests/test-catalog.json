@@ -544,6 +544,7 @@
         ".github/workflows/native-model-batch-comparison.yml",
         ".github/workflows/ocr-acquisition-accuracy.yml",
         ".github/workflows/ocr-acquisition-probe.yml",
+        ".github/workflows/ocr-literal-acquisition-diagnostic.yml",
         ".github/workflows/ocr-literal-retry-accuracy.yml",
         ".github/workflows/ocr-literal-retry-native.yml",
         ".github/workflows/ocr-model-comparison.yml",
