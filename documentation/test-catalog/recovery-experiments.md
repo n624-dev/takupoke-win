@@ -1,7 +1,7 @@
 # OCR・native PDFの比較用workflowと再現条件
 
 対応関係・宣言名・実行方法のSHA-256：
-`328d50893b286c193c2579505f386a21b52d9954951530c6805f6d173e0ec0fa`
+`13a04491b077fe39164a282f8f2c885cf1b3b7f85fb27689159ce35a963d3fa2`
 
 環境：Linux／Windows .NETと明示したWindows比較workflow
 
@@ -16,6 +16,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - [.github/workflows/label-selection-native-probe.yml](../../.github/workflows/label-selection-native-probe.yml)
 - [.github/workflows/native-grammar-error-probe.yml](../../.github/workflows/native-grammar-error-probe.yml)
 - [.github/workflows/native-model-batch-comparison.yml](../../.github/workflows/native-model-batch-comparison.yml)
+- [.github/workflows/ocr-acquisition-accuracy.yml](../../.github/workflows/ocr-acquisition-accuracy.yml)
 - [.github/workflows/ocr-acquisition-probe.yml](../../.github/workflows/ocr-acquisition-probe.yml)
 - [.github/workflows/ocr-model-comparison.yml](../../.github/workflows/ocr-model-comparison.yml)
 - [.github/workflows/ocr-original-image.yml](../../.github/workflows/ocr-original-image.yml)

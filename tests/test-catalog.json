@@ -537,6 +537,7 @@
         ".github/workflows/label-selection-native-probe.yml",
         ".github/workflows/native-grammar-error-probe.yml",
         ".github/workflows/native-model-batch-comparison.yml",
+        ".github/workflows/ocr-acquisition-accuracy.yml",
         ".github/workflows/ocr-acquisition-probe.yml",
         ".github/workflows/ocr-model-comparison.yml",
         ".github/workflows/ocr-original-image.yml",
