@@ -1,0 +1,685 @@
+{
+  "splits": {
+    "development": {
+      "positiveRows": 512,
+      "jpRows": 256,
+      "counterfactualAliases": [
+        {
+          "id": "development-00004",
+          "target": "ivH-l",
+          "alternative": "ivH-I",
+          "font": "Murecho",
+          "inputSha256": "1bb7a11042f828ff21ee799e2f49c357c1ee78a8570473deed8a63adae7e2507",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 28.5625,
+          "advanceAlternative": 28.625,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00012",
+          "target": "s 4xhokWIu",
+          "alternative": "s 4xhokWlu",
+          "font": "Murecho",
+          "inputSha256": "84209b08706da69be90de7eca630377ca02da94fdf8afd8e1817179fa6baeb80",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 70.40625,
+          "advanceAlternative": 70.34375,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00019",
+          "target": "IchHc",
+          "alternative": "lchHc",
+          "font": "Murecho",
+          "inputSha256": "b72f04a9f13e3cef5e3d440b7b3110aeef0a44b76893fd04921f242dff87ae46",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 48.609375,
+          "advanceAlternative": 48.53125,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00052",
+          "target": "hxc50Bu5-l",
+          "alternative": "hxc50Bu5-I",
+          "font": "Murecho",
+          "inputSha256": "f6c98a32f521109b4ae84cff90b084ba253fa4f8a016b2d46e0ae64e65583d29",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 178.375,
+          "advanceAlternative": 178.515625,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00053",
+          "target": "hxC50Bu5-l",
+          "alternative": "hxC50Bu5-I",
+          "font": "Murecho",
+          "inputSha256": "ee1cb4ef73c800ba07942833c42e0e3468a4e8940023455a97127400ff61c527",
+          "originalRasterIdentical": false,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 183.125,
+          "advanceAlternative": 183.265625,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00064",
+          "target": "XrI",
+          "alternative": "Xrl",
+          "font": "Murecho",
+          "inputSha256": "b89b9c34cd99b89e00d3c9ddaa6f7187e03b5a6bb7565ab215ebc91a74b35f32",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 20.953125,
+          "advanceAlternative": 20.875,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00065",
+          "target": "Xrl",
+          "alternative": "XrI",
+          "font": "Murecho",
+          "inputSha256": "b89b9c34cd99b89e00d3c9ddaa6f7187e03b5a6bb7565ab215ebc91a74b35f32",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 20.875,
+          "advanceAlternative": 20.953125,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00068",
+          "target": "X5 IDli",
+          "alternative": "X5 lDli",
+          "font": "Murecho",
+          "inputSha256": "6816bf013f2a80609c45842cc4bec51686fc26c05ad71760cd028d521bcb0b65",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 108.546875,
+          "advanceAlternative": 108.375,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00069",
+          "target": "X5 ID1i",
+          "alternative": "X5 lD1i",
+          "font": "Murecho",
+          "inputSha256": "3b88da7cdb847c9e7a23ba149bda7c736b80926cf97f0f50380fffed15505294",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 118.625,
+          "advanceAlternative": 118.453125,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00073",
+          "target": "y3MCScRwI8",
+          "alternative": "y3MCScRwl8",
+          "font": "Murecho",
+          "inputSha256": "cb5d67b6ed5a7c2999259ba725d44fb3c8bbb0904615f139f3853a484e4c7587",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 201.765625,
+          "advanceAlternative": 201.625,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00074",
+          "target": "y3MCScRwl8",
+          "alternative": "y3MCScRwI8",
+          "font": "Murecho",
+          "inputSha256": "cb5d67b6ed5a7c2999259ba725d44fb3c8bbb0904615f139f3853a484e4c7587",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 201.625,
+          "advanceAlternative": 201.765625,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00079",
+          "target": "WWeKI5YM5",
+          "alternative": "WWeKl5YM5",
+          "font": "Murecho",
+          "inputSha256": "a2f8dc960e5400397322ca402e789d57265431e1220a225fe44e0ab35e988a66",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 99.484375,
+          "advanceAlternative": 99.40625,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00080",
+          "target": "WWeKl5YM5",
+          "alternative": "WWeKI5YM5",
+          "font": "Murecho",
+          "inputSha256": "a2f8dc960e5400397322ca402e789d57265431e1220a225fe44e0ab35e988a66",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 99.40625,
+          "advanceAlternative": 99.484375,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00085",
+          "target": "PIsYhdI-5",
+          "alternative": "PIsYhdl-5",
+          "font": "Murecho",
+          "inputSha256": "710ba704f097c6d5584c004e21d50c45fd9af081d64630e064e4f3c3cc884df3",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 114.640625,
+          "advanceAlternative": 114.53125,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00086",
+          "target": "PIsYhdl-5",
+          "alternative": "PIsYhdI-5",
+          "font": "Murecho",
+          "inputSha256": "710ba704f097c6d5584c004e21d50c45fd9af081d64630e064e4f3c3cc884df3",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 114.53125,
+          "advanceAlternative": 114.640625,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00088",
+          "target": "gY3AIkMbG",
+          "alternative": "gY3AlkMbG",
+          "font": "Murecho",
+          "inputSha256": "95d5c5d49a7e80dd658dfd8b2450416c2f614bf198bad65f57246e575137722a",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 140.984375,
+          "advanceAlternative": 140.875,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00089",
+          "target": "gY3AlkMbG",
+          "alternative": "gY3AIkMbG",
+          "font": "Murecho",
+          "inputSha256": "95d5c5d49a7e80dd658dfd8b2450416c2f614bf198bad65f57246e575137722a",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 140.875,
+          "advanceAlternative": 140.984375,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00091",
+          "target": "bvT0I",
+          "alternative": "bvT0l",
+          "font": "Murecho",
+          "inputSha256": "a21278158eef5033f0ebf5bcc6280391a7601fecee4b10bebcb5d1099b635d2a",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 56.78125,
+          "advanceAlternative": 56.6875,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00092",
+          "target": "bvT0l",
+          "alternative": "bvT0I",
+          "font": "Murecho",
+          "inputSha256": "a21278158eef5033f0ebf5bcc6280391a7601fecee4b10bebcb5d1099b635d2a",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 56.6875,
+          "advanceAlternative": 56.78125,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00096",
+          "target": "y6I6HZEHO",
+          "alternative": "y6l6HZEHO",
+          "font": "Murecho",
+          "inputSha256": "a880f0fbcbf4b9a2af5934c99a29847638bc43d0c88fc8366e5a5b11960120e5",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 139.015625,
+          "advanceAlternative": 138.90625,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00097",
+          "target": "y6I6HZEH0",
+          "alternative": "y6l6HZEH0",
+          "font": "Murecho",
+          "inputSha256": "4fc714b0abfe002b4dd4d11686e6ecf5a7f05e9f329f8f61ecb6c6c27b207769",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 135.65625,
+          "advanceAlternative": 135.546875,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00102",
+          "target": "R8Oclm9",
+          "alternative": "R8OcIm9",
+          "font": "Murecho",
+          "inputSha256": "bb32029d2e92b06065d56f6013ef584ee0eceb6ba03caa220389e71e09677feb",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 111.96875,
+          "advanceAlternative": 112.078125,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00103",
+          "target": "R80clm9",
+          "alternative": "R80cIm9",
+          "font": "Murecho",
+          "inputSha256": "45437a8f608ee0b7e6632478f55b3e08a59d1c6734eda40b6e3a5682270c92dc",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 108.609375,
+          "advanceAlternative": 108.71875,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00104",
+          "target": "eK_ICLYO",
+          "alternative": "eK_lCLYO",
+          "font": "Murecho",
+          "inputSha256": "4cdaaed0ca62e01226ec17e30b3a74279c09e76c6657a5c8b42611f2791072fa",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 74.765625,
+          "advanceAlternative": 74.6875,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "development-00105",
+          "target": "eK_ICLY0",
+          "alternative": "eK_lCLY0",
+          "font": "Murecho",
+          "inputSha256": "d8da1b72bf5b0f4a7a2748cc479f983ae7a974122c2ab52f63e4c23c93a35e6f",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 72.953125,
+          "advanceAlternative": 72.875,
+          "allOriginalInkRetained": true
+        }
+      ],
+      "aliasRows": 25,
+      "observedContradictoryGroups": [
+        {
+          "inputSha256": "b89b9c34cd99b89e00d3c9ddaa6f7187e03b5a6bb7565ab215ebc91a74b35f32",
+          "ids": [
+            "development-00064",
+            "development-00065"
+          ],
+          "targets": {
+            "XrI": 1,
+            "Xrl": 1
+          },
+          "maximumPossibleExactRows": 1
+        },
+        {
+          "inputSha256": "cb5d67b6ed5a7c2999259ba725d44fb3c8bbb0904615f139f3853a484e4c7587",
+          "ids": [
+            "development-00073",
+            "development-00074"
+          ],
+          "targets": {
+            "y3MCScRwI8": 1,
+            "y3MCScRwl8": 1
+          },
+          "maximumPossibleExactRows": 1
+        },
+        {
+          "inputSha256": "a2f8dc960e5400397322ca402e789d57265431e1220a225fe44e0ab35e988a66",
+          "ids": [
+            "development-00079",
+            "development-00080"
+          ],
+          "targets": {
+            "WWeKI5YM5": 1,
+            "WWeKl5YM5": 1
+          },
+          "maximumPossibleExactRows": 1
+        },
+        {
+          "inputSha256": "710ba704f097c6d5584c004e21d50c45fd9af081d64630e064e4f3c3cc884df3",
+          "ids": [
+            "development-00085",
+            "development-00086"
+          ],
+          "targets": {
+            "PIsYhdI-5": 1,
+            "PIsYhdl-5": 1
+          },
+          "maximumPossibleExactRows": 1
+        },
+        {
+          "inputSha256": "95d5c5d49a7e80dd658dfd8b2450416c2f614bf198bad65f57246e575137722a",
+          "ids": [
+            "development-00088",
+            "development-00089"
+          ],
+          "targets": {
+            "gY3AIkMbG": 1,
+            "gY3AlkMbG": 1
+          },
+          "maximumPossibleExactRows": 1
+        },
+        {
+          "inputSha256": "a21278158eef5033f0ebf5bcc6280391a7601fecee4b10bebcb5d1099b635d2a",
+          "ids": [
+            "development-00091",
+            "development-00092"
+          ],
+          "targets": {
+            "bvT0I": 1,
+            "bvT0l": 1
+          },
+          "maximumPossibleExactRows": 1
+        }
+      ],
+      "observedInputLabelExactUpperBoundRows": 506,
+      "observedInputLabelExactUpperBoundFraction": 0.98828125,
+      "upperBoundScope": "Only actual generated positive labels sharing identical normalized input; counterfactual missing labels do not reduce denominator or assert impossibility",
+      "allModelScores": {
+        "active-baseline": {
+          "all": {
+            "rows": 512,
+            "exact": 432,
+            "characters": 6475,
+            "editErrors": 88,
+            "cer": 0.013590733590733591,
+            "wrongHighCtc": 34,
+            "incorrectAccepted": 32
+          },
+          "counterfactualOrObservedAlias": {
+            "rows": 25,
+            "exact": 11,
+            "characters": 192,
+            "editErrors": 15,
+            "cer": 0.078125,
+            "wrongHighCtc": 6,
+            "incorrectAccepted": 6
+          },
+          "remaining": {
+            "rows": 487,
+            "exact": 421,
+            "characters": 6283,
+            "editErrors": 73,
+            "cer": 0.011618653509469999,
+            "wrongHighCtc": 28,
+            "incorrectAccepted": 26
+          }
+        },
+        "epoch-1": {
+          "all": {
+            "rows": 512,
+            "exact": 445,
+            "characters": 6475,
+            "editErrors": 73,
+            "cer": 0.011274131274131275,
+            "wrongHighCtc": 36,
+            "incorrectAccepted": 35
+          },
+          "counterfactualOrObservedAlias": {
+            "rows": 25,
+            "exact": 14,
+            "characters": 192,
+            "editErrors": 12,
+            "cer": 0.0625,
+            "wrongHighCtc": 8,
+            "incorrectAccepted": 8
+          },
+          "remaining": {
+            "rows": 487,
+            "exact": 431,
+            "characters": 6283,
+            "editErrors": 61,
+            "cer": 0.009708737864077669,
+            "wrongHighCtc": 28,
+            "incorrectAccepted": 27
+          }
+        },
+        "epoch-2": {
+          "all": {
+            "rows": 512,
+            "exact": 448,
+            "characters": 6475,
+            "editErrors": 69,
+            "cer": 0.010656370656370656,
+            "wrongHighCtc": 35,
+            "incorrectAccepted": 32
+          },
+          "counterfactualOrObservedAlias": {
+            "rows": 25,
+            "exact": 14,
+            "characters": 192,
+            "editErrors": 12,
+            "cer": 0.0625,
+            "wrongHighCtc": 7,
+            "incorrectAccepted": 6
+          },
+          "remaining": {
+            "rows": 487,
+            "exact": 434,
+            "characters": 6283,
+            "editErrors": 57,
+            "cer": 0.00907209931561356,
+            "wrongHighCtc": 28,
+            "incorrectAccepted": 26
+          }
+        },
+        "epoch-3": {
+          "all": {
+            "rows": 512,
+            "exact": 442,
+            "characters": 6475,
+            "editErrors": 76,
+            "cer": 0.011737451737451738,
+            "wrongHighCtc": 37,
+            "incorrectAccepted": 35
+          },
+          "counterfactualOrObservedAlias": {
+            "rows": 25,
+            "exact": 14,
+            "characters": 192,
+            "editErrors": 12,
+            "cer": 0.0625,
+            "wrongHighCtc": 5,
+            "incorrectAccepted": 5
+          },
+          "remaining": {
+            "rows": 487,
+            "exact": 428,
+            "characters": 6283,
+            "editErrors": 64,
+            "cer": 0.010186216775425753,
+            "wrongHighCtc": 32,
+            "incorrectAccepted": 30
+          }
+        },
+        "epoch-4": {
+          "all": {
+            "rows": 512,
+            "exact": 441,
+            "characters": 6475,
+            "editErrors": 76,
+            "cer": 0.011737451737451738,
+            "wrongHighCtc": 32,
+            "incorrectAccepted": 30
+          },
+          "counterfactualOrObservedAlias": {
+            "rows": 25,
+            "exact": 14,
+            "characters": 192,
+            "editErrors": 12,
+            "cer": 0.0625,
+            "wrongHighCtc": 4,
+            "incorrectAccepted": 4
+          },
+          "remaining": {
+            "rows": 487,
+            "exact": 427,
+            "characters": 6283,
+            "editErrors": 64,
+            "cer": 0.010186216775425753,
+            "wrongHighCtc": 28,
+            "incorrectAccepted": 26
+          }
+        }
+      },
+      "removedFromMainEvaluationRows": 0
+    },
+    "fresh": {
+      "positiveRows": 512,
+      "jpRows": 256,
+      "counterfactualAliases": [
+        {
+          "id": "fresh-00044",
+          "target": "IN",
+          "alternative": "lN",
+          "font": "ShipporiAntique",
+          "inputSha256": "ee4ec170b5ff7cbc4c95ac51bf422d8a6565e766aeb96d26ddfc29446026e12d",
+          "originalRasterIdentical": false,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 43.921875,
+          "advanceAlternative": 43.078125,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "fresh-00054",
+          "target": "Isb lt",
+          "alternative": "Isb It",
+          "font": "ShipporiAntique",
+          "inputSha256": "8bcdd3786d367c5f1cd3d0a577fc36c54e32b868136181ef0717846d36726ba3",
+          "originalRasterIdentical": true,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 46.9375,
+          "advanceAlternative": 47.359375,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "fresh-00055",
+          "target": "Isb lT",
+          "alternative": "Isb IT",
+          "font": "ShipporiAntique",
+          "inputSha256": "c23f31a3f390adee4317d2e34f0a9a7279f30a302c2b4f375c5977fabdb23b3c",
+          "originalRasterIdentical": false,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 53.21875,
+          "advanceAlternative": 53.640625,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "fresh-00067",
+          "target": "ICI2",
+          "alternative": "lCI2",
+          "font": "ShipporiAntique",
+          "inputSha256": "0479d4da26394bf92198c3876e8225dbe9b61eb001fa7acd349782b08ef7ad89",
+          "originalRasterIdentical": false,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 55.1875,
+          "advanceAlternative": 54.609375,
+          "allOriginalInkRetained": true
+        },
+        {
+          "id": "fresh-00068",
+          "target": "lCI2",
+          "alternative": "ICI2",
+          "font": "ShipporiAntique",
+          "inputSha256": "0479d4da26394bf92198c3876e8225dbe9b61eb001fa7acd349782b08ef7ad89",
+          "originalRasterIdentical": false,
+          "framedRasterIdentical": true,
+          "advanceOriginal": 54.609375,
+          "advanceAlternative": 55.1875,
+          "allOriginalInkRetained": true
+        }
+      ],
+      "aliasRows": 5,
+      "observedContradictoryGroups": [
+        {
+          "inputSha256": "0479d4da26394bf92198c3876e8225dbe9b61eb001fa7acd349782b08ef7ad89",
+          "ids": [
+            "fresh-00067",
+            "fresh-00068"
+          ],
+          "targets": {
+            "ICI2": 1,
+            "lCI2": 1
+          },
+          "maximumPossibleExactRows": 1
+        }
+      ],
+      "observedInputLabelExactUpperBoundRows": 511,
+      "observedInputLabelExactUpperBoundFraction": 0.998046875,
+      "upperBoundScope": "Only actual generated positive labels sharing identical normalized input; counterfactual missing labels do not reduce denominator or assert impossibility",
+      "allModelScores": {
+        "fresh-active": {
+          "all": {
+            "rows": 512,
+            "exact": 432,
+            "characters": 6249,
+            "editErrors": 90,
+            "cer": 0.014402304368698993,
+            "wrongHighCtc": 41,
+            "incorrectAccepted": 41
+          },
+          "counterfactualOrObservedAlias": {
+            "rows": 5,
+            "exact": 2,
+            "characters": 22,
+            "editErrors": 5,
+            "cer": 0.22727272727272727,
+            "wrongHighCtc": 2,
+            "incorrectAccepted": 2
+          },
+          "remaining": {
+            "rows": 507,
+            "exact": 430,
+            "characters": 6227,
+            "editErrors": 85,
+            "cer": 0.013650232856913441,
+            "wrongHighCtc": 39,
+            "incorrectAccepted": 39
+          }
+        },
+        "fresh-candidate": {
+          "all": {
+            "rows": 512,
+            "exact": 438,
+            "characters": 6249,
+            "editErrors": 82,
+            "cer": 0.013122099535925748,
+            "wrongHighCtc": 26,
+            "incorrectAccepted": 23
+          },
+          "counterfactualOrObservedAlias": {
+            "rows": 5,
+            "exact": 2,
+            "characters": 22,
+            "editErrors": 5,
+            "cer": 0.22727272727272727,
+            "wrongHighCtc": 0,
+            "incorrectAccepted": 0
+          },
+          "remaining": {
+            "rows": 507,
+            "exact": 436,
+            "characters": 6227,
+            "editErrors": 77,
+            "cer": 0.012365505058615707,
+            "wrongHighCtc": 26,
+            "incorrectAccepted": 23
+          }
+        }
+      },
+      "removedFromMainEvaluationRows": 0
+    }
+  },
+  "noSelectionChange": true,
+  "noModelExecution": true,
+  "allRowsRetained": true,
+  "scope": "Post-scoring explanation, no font-domain impossibility claim"
+}

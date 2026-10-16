@@ -48,3 +48,8 @@ research-results/ocr-manual-tail-20261016/*-OFL.txt -text whitespace=-blank-at-e
 # Preserve exploratory package, source freezes and original license bytes.
 model-artifacts/ascii-english-v5-japanese-fonts-v3-epoch1-exploratory/** -text whitespace=-blank-at-eol,cr-at-eol
 research-results/ocr-decoding-comparison-20261016/** -text whitespace=-blank-at-eol,cr-at-eol
+
+# Closed native acquisition and unchanged trial evidence, byte-preserved.
+research-results/ocr-paired-native-whole-v3-20261016/** -text whitespace=cr-at-eol
+research-results/ocr-acquisition-repair-20261016/** -text whitespace=cr-at-eol
+research-results/ocr-japanese-fonts-v4-20261016/** -text whitespace=cr-at-eol

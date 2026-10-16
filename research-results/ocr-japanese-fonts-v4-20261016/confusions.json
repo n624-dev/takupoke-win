@@ -1,0 +1,950 @@
+{
+  "active-baseline": [
+    {
+      "target": "l",
+      "prediction": "1",
+      "count": 17
+    },
+    {
+      "target": "0",
+      "prediction": "O",
+      "count": 14
+    },
+    {
+      "target": "I",
+      "prediction": "l",
+      "count": 13
+    },
+    {
+      "target": "O",
+      "prediction": "0",
+      "count": 9
+    },
+    {
+      "target": "l",
+      "prediction": "I",
+      "count": 7
+    },
+    {
+      "target": ",",
+      "prediction": "",
+      "count": 5
+    },
+    {
+      "target": "`",
+      "prediction": "'",
+      "count": 5
+    },
+    {
+      "target": "q",
+      "prediction": "a",
+      "count": 3
+    },
+    {
+      "target": "",
+      "prediction": " ",
+      "count": 3
+    },
+    {
+      "target": "w",
+      "prediction": "W",
+      "count": 2
+    },
+    {
+      "target": "7",
+      "prediction": "T",
+      "count": 2
+    },
+    {
+      "target": "I",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "l",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "0",
+      "prediction": "o",
+      "count": 1
+    },
+    {
+      "target": "x",
+      "prediction": "X",
+      "count": 1
+    },
+    {
+      "target": "j",
+      "prediction": "i",
+      "count": 1
+    },
+    {
+      "target": "}",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "c",
+      "prediction": "C",
+      "count": 1
+    },
+    {
+      "target": "5",
+      "prediction": "",
+      "count": 1
+    }
+  ],
+  "epoch-1": [
+    {
+      "target": "I",
+      "prediction": "l",
+      "count": 21
+    },
+    {
+      "target": "O",
+      "prediction": "0",
+      "count": 16
+    },
+    {
+      "target": "l",
+      "prediction": "1",
+      "count": 15
+    },
+    {
+      "target": ",",
+      "prediction": "",
+      "count": 5
+    },
+    {
+      "target": "l",
+      "prediction": "I",
+      "count": 3
+    },
+    {
+      "target": "0",
+      "prediction": "O",
+      "count": 3
+    },
+    {
+      "target": "q",
+      "prediction": "a",
+      "count": 3
+    },
+    {
+      "target": "V",
+      "prediction": "v",
+      "count": 2
+    },
+    {
+      "target": " ",
+      "prediction": "",
+      "count": 2
+    },
+    {
+      "target": "X",
+      "prediction": "x",
+      "count": 1
+    },
+    {
+      "target": "j",
+      "prediction": "i",
+      "count": 1
+    },
+    {
+      "target": "c",
+      "prediction": "C",
+      "count": 1
+    }
+  ],
+  "epoch-2": [
+    {
+      "target": "I",
+      "prediction": "l",
+      "count": 20
+    },
+    {
+      "target": "l",
+      "prediction": "1",
+      "count": 15
+    },
+    {
+      "target": "O",
+      "prediction": "0",
+      "count": 14
+    },
+    {
+      "target": ",",
+      "prediction": "",
+      "count": 5
+    },
+    {
+      "target": "0",
+      "prediction": "O",
+      "count": 4
+    },
+    {
+      "target": "l",
+      "prediction": "I",
+      "count": 3
+    },
+    {
+      "target": "q",
+      "prediction": "a",
+      "count": 3
+    },
+    {
+      "target": " ",
+      "prediction": "",
+      "count": 2
+    },
+    {
+      "target": "j",
+      "prediction": "i",
+      "count": 1
+    },
+    {
+      "target": "c",
+      "prediction": "C",
+      "count": 1
+    },
+    {
+      "target": "w",
+      "prediction": "W",
+      "count": 1
+    }
+  ],
+  "epoch-3": [
+    {
+      "target": "I",
+      "prediction": "l",
+      "count": 20
+    },
+    {
+      "target": "O",
+      "prediction": "0",
+      "count": 19
+    },
+    {
+      "target": "l",
+      "prediction": "1",
+      "count": 17
+    },
+    {
+      "target": ",",
+      "prediction": "",
+      "count": 5
+    },
+    {
+      "target": "l",
+      "prediction": "I",
+      "count": 3
+    },
+    {
+      "target": "q",
+      "prediction": "a",
+      "count": 3
+    },
+    {
+      "target": "0",
+      "prediction": "O",
+      "count": 2
+    },
+    {
+      "target": "V",
+      "prediction": "v",
+      "count": 2
+    },
+    {
+      "target": " ",
+      "prediction": "",
+      "count": 2
+    },
+    {
+      "target": "X",
+      "prediction": "x",
+      "count": 1
+    },
+    {
+      "target": "j",
+      "prediction": "i",
+      "count": 1
+    },
+    {
+      "target": "c",
+      "prediction": "C",
+      "count": 1
+    }
+  ],
+  "epoch-4": [
+    {
+      "target": "I",
+      "prediction": "l",
+      "count": 18
+    },
+    {
+      "target": "O",
+      "prediction": "0",
+      "count": 18
+    },
+    {
+      "target": "l",
+      "prediction": "1",
+      "count": 16
+    },
+    {
+      "target": "l",
+      "prediction": "I",
+      "count": 8
+    },
+    {
+      "target": ",",
+      "prediction": "",
+      "count": 5
+    },
+    {
+      "target": "0",
+      "prediction": "O",
+      "count": 3
+    },
+    {
+      "target": "q",
+      "prediction": "a",
+      "count": 3
+    },
+    {
+      "target": " ",
+      "prediction": "",
+      "count": 2
+    },
+    {
+      "target": "X",
+      "prediction": "x",
+      "count": 1
+    },
+    {
+      "target": "j",
+      "prediction": "i",
+      "count": 1
+    },
+    {
+      "target": "c",
+      "prediction": "C",
+      "count": 1
+    }
+  ],
+  "trainfit-active": [
+    {
+      "target": "0",
+      "prediction": "O",
+      "count": 75
+    },
+    {
+      "target": "l",
+      "prediction": "I",
+      "count": 46
+    },
+    {
+      "target": "",
+      "prediction": " ",
+      "count": 34
+    },
+    {
+      "target": "l",
+      "prediction": "1",
+      "count": 15
+    },
+    {
+      "target": "I",
+      "prediction": "l",
+      "count": 12
+    },
+    {
+      "target": "`",
+      "prediction": "'",
+      "count": 12
+    },
+    {
+      "target": " ",
+      "prediction": "",
+      "count": 10
+    },
+    {
+      "target": "1",
+      "prediction": "l",
+      "count": 8
+    },
+    {
+      "target": "O",
+      "prediction": "0",
+      "count": 7
+    },
+    {
+      "target": "4",
+      "prediction": "l",
+      "count": 7
+    },
+    {
+      "target": "|",
+      "prediction": "I",
+      "count": 6
+    },
+    {
+      "target": "#",
+      "prediction": "",
+      "count": 6
+    },
+    {
+      "target": "q",
+      "prediction": "a",
+      "count": 4
+    },
+    {
+      "target": "w",
+      "prediction": "W",
+      "count": 4
+    },
+    {
+      "target": "",
+      "prediction": "I",
+      "count": 4
+    },
+    {
+      "target": "K",
+      "prediction": "",
+      "count": 4
+    },
+    {
+      "target": "`",
+      "prediction": "",
+      "count": 4
+    },
+    {
+      "target": "]",
+      "prediction": "J",
+      "count": 4
+    },
+    {
+      "target": "j",
+      "prediction": "",
+      "count": 3
+    },
+    {
+      "target": "4",
+      "prediction": "L",
+      "count": 3
+    },
+    {
+      "target": "k",
+      "prediction": "l",
+      "count": 3
+    },
+    {
+      "target": "0",
+      "prediction": "o",
+      "count": 3
+    },
+    {
+      "target": "[",
+      "prediction": "L",
+      "count": 3
+    },
+    {
+      "target": "9",
+      "prediction": "q",
+      "count": 2
+    },
+    {
+      "target": "D",
+      "prediction": "",
+      "count": 2
+    },
+    {
+      "target": "-",
+      "prediction": "_",
+      "count": 2
+    },
+    {
+      "target": "a",
+      "prediction": "o",
+      "count": 2
+    },
+    {
+      "target": "y",
+      "prediction": "Y",
+      "count": 2
+    },
+    {
+      "target": "4",
+      "prediction": "",
+      "count": 2
+    },
+    {
+      "target": "N",
+      "prediction": "",
+      "count": 2
+    },
+    {
+      "target": "^",
+      "prediction": "",
+      "count": 2
+    },
+    {
+      "target": "%",
+      "prediction": "9",
+      "count": 2
+    },
+    {
+      "target": "%",
+      "prediction": "",
+      "count": 2
+    },
+    {
+      "target": "",
+      "prediction": "'",
+      "count": 1
+    },
+    {
+      "target": "o",
+      "prediction": "0",
+      "count": 1
+    },
+    {
+      "target": "x",
+      "prediction": "X",
+      "count": 1
+    },
+    {
+      "target": "i",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "i",
+      "prediction": "I",
+      "count": 1
+    },
+    {
+      "target": "t",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "n",
+      "prediction": "r",
+      "count": 1
+    },
+    {
+      "target": "l",
+      "prediction": " ",
+      "count": 1
+    },
+    {
+      "target": "c",
+      "prediction": "C",
+      "count": 1
+    },
+    {
+      "target": "C",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "D",
+      "prediction": "I",
+      "count": 1
+    },
+    {
+      "target": "",
+      "prediction": "l",
+      "count": 1
+    },
+    {
+      "target": "r",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "F",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "e",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "|",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "l",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": ",",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "9",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "=",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "*",
+      "prediction": "\"",
+      "count": 1
+    },
+    {
+      "target": "[",
+      "prediction": " ",
+      "count": 1
+    },
+    {
+      "target": "#",
+      "prediction": "[",
+      "count": 1
+    },
+    {
+      "target": ".",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "!",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "#",
+      "prediction": "3",
+      "count": 1
+    },
+    {
+      "target": "7",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "~",
+      "prediction": "-",
+      "count": 1
+    },
+    {
+      "target": "V",
+      "prediction": "v",
+      "count": 1
+    },
+    {
+      "target": "%",
+      "prediction": "I",
+      "count": 1
+    }
+  ],
+  "trainfit-candidate": [
+    {
+      "target": "0",
+      "prediction": "O",
+      "count": 49
+    },
+    {
+      "target": "l",
+      "prediction": "I",
+      "count": 29
+    },
+    {
+      "target": "I",
+      "prediction": "l",
+      "count": 24
+    },
+    {
+      "target": "O",
+      "prediction": "0",
+      "count": 10
+    },
+    {
+      "target": " ",
+      "prediction": "",
+      "count": 10
+    },
+    {
+      "target": "1",
+      "prediction": "l",
+      "count": 9
+    },
+    {
+      "target": "",
+      "prediction": " ",
+      "count": 4
+    },
+    {
+      "target": "4",
+      "prediction": "l",
+      "count": 3
+    },
+    {
+      "target": "0",
+      "prediction": "o",
+      "count": 3
+    },
+    {
+      "target": "#",
+      "prediction": "",
+      "count": 3
+    },
+    {
+      "target": "l",
+      "prediction": "1",
+      "count": 2
+    },
+    {
+      "target": "`",
+      "prediction": "",
+      "count": 2
+    },
+    {
+      "target": "%",
+      "prediction": "",
+      "count": 2
+    },
+    {
+      "target": "9",
+      "prediction": "q",
+      "count": 1
+    },
+    {
+      "target": "o",
+      "prediction": "0",
+      "count": 1
+    },
+    {
+      "target": "-",
+      "prediction": "_",
+      "count": 1
+    },
+    {
+      "target": "j",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "i",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "c",
+      "prediction": "C",
+      "count": 1
+    },
+    {
+      "target": "w",
+      "prediction": "W",
+      "count": 1
+    },
+    {
+      "target": "",
+      "prediction": "I",
+      "count": 1
+    },
+    {
+      "target": "[",
+      "prediction": "L",
+      "count": 1
+    },
+    {
+      "target": "l",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "*",
+      "prediction": "\"",
+      "count": 1
+    },
+    {
+      "target": "|",
+      "prediction": "I",
+      "count": 1
+    },
+    {
+      "target": ".",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "!",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "%",
+      "prediction": "9",
+      "count": 1
+    },
+    {
+      "target": "~",
+      "prediction": "-",
+      "count": 1
+    },
+    {
+      "target": "V",
+      "prediction": "v",
+      "count": 1
+    }
+  ],
+  "fresh-active": [
+    {
+      "target": "0",
+      "prediction": "O",
+      "count": 23
+    },
+    {
+      "target": "I",
+      "prediction": "l",
+      "count": 13
+    },
+    {
+      "target": "1",
+      "prediction": "l",
+      "count": 12
+    },
+    {
+      "target": "l",
+      "prediction": "I",
+      "count": 10
+    },
+    {
+      "target": "O",
+      "prediction": "0",
+      "count": 10
+    },
+    {
+      "target": "",
+      "prediction": " ",
+      "count": 7
+    },
+    {
+      "target": "`",
+      "prediction": "'",
+      "count": 5
+    },
+    {
+      "target": "&",
+      "prediction": "8",
+      "count": 2
+    },
+    {
+      "target": "f",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "",
+      "prediction": "O",
+      "count": 1
+    },
+    {
+      "target": "o",
+      "prediction": "0",
+      "count": 1
+    },
+    {
+      "target": "k",
+      "prediction": "l",
+      "count": 1
+    },
+    {
+      "target": "{",
+      "prediction": "}",
+      "count": 1
+    },
+    {
+      "target": "|",
+      "prediction": "l",
+      "count": 1
+    },
+    {
+      "target": "]",
+      "prediction": "j",
+      "count": 1
+    },
+    {
+      "target": "$",
+      "prediction": "S",
+      "count": 1
+    }
+  ],
+  "fresh-candidate": [
+    {
+      "target": "0",
+      "prediction": "O",
+      "count": 23
+    },
+    {
+      "target": "I",
+      "prediction": "l",
+      "count": 19
+    },
+    {
+      "target": "O",
+      "prediction": "0",
+      "count": 13
+    },
+    {
+      "target": "1",
+      "prediction": "l",
+      "count": 11
+    },
+    {
+      "target": "l",
+      "prediction": "I",
+      "count": 7
+    },
+    {
+      "target": "",
+      "prediction": " ",
+      "count": 3
+    },
+    {
+      "target": "f",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "i",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "o",
+      "prediction": "0",
+      "count": 1
+    },
+    {
+      "target": "|",
+      "prediction": "l",
+      "count": 1
+    },
+    {
+      "target": "'",
+      "prediction": "",
+      "count": 1
+    },
+    {
+      "target": "&",
+      "prediction": "8",
+      "count": 1
+    }
+  ]
+}

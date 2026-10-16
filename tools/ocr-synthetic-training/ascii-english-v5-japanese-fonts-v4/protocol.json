@@ -1,0 +1,210 @@
+{
+  "status": "FIXED V4 protocol before any model execution; parent hold explicitly released",
+  "namespace": "ascii-english-v5-japanese-fonts-v4",
+  "evidence": {
+    "v3TrainCode": "465→572/640; edits208→74; known font adaptation is possible",
+    "v3DevelopmentCode": "124→130/192; edits79→69, but raw highCTC wrong25→37/wrongAccepted34→40/negative11→14; original trial FAIL",
+    "geometry": "SawarabiGothic17/360 normalized aliases, seven source-raster aliases and ten introduced by bbox framing; zero introduced by48pxresize after framing. Other five tested train/dev families0/360 aliases. Limited source diagnostic, not a universal impossibility or heldout claim",
+    "hypothesis": "Broader JP font diversity and full ambiguous equivalence-group exclusion can reduce font memorization and accidental label priors. Freeze CNN to reduce feature drift while adapting encoder/classifier; this is a hypothesis, not a proven cause from v3."
+  },
+  "initializerAndTeacher": {
+    "checkpointSha256": "7313bee5dabf17998010c6f47844fe80649744b03c0366af05c627fc47314547",
+    "name": "font-balanced-v1 epoch4, NOT failed v3 nor rejected v2",
+    "activeOnnxSha256": "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703",
+    "foundation": "Official HF PP-OCRv5 English, pinned e4abce2bbd335f6c3eda0507b7f8e8abd5af3419, architecture/full438 unchanged"
+  },
+  "reservedRootFonts": [
+    "BIZUDPGothic",
+    "ZenMaruGothic",
+    "BIZUDPMincho"
+  ],
+  "train": {
+    "seed": 108531,
+    "positiveCounts": {
+      "code": 480,
+      "lookalike": 480,
+      "natural": 768,
+      "printable": 192
+    },
+    "negativeCounts": {
+      "clipped": 32,
+      "interior_damage": 32,
+      "multiline": 32,
+      "noise": 32,
+      "blank": 32,
+      "unknown_cjk": 32,
+      "unknown_mixed": 32
+    },
+    "fontBalance": "48ordinary+48confusable per JP family; natural192+printable48 per Latin family",
+    "fontExposure": "JP families are disclosed consumed research fonts, including v3development, never called new holdouts; all target strings/images/tensors new",
+    "jpFonts": [
+      "SawarabiGothic",
+      "SawarabiMincho",
+      "KleeOne",
+      "KaiseiTokumin",
+      "ZenOldMincho",
+      "YuseiMagic",
+      "KosugiMaru",
+      "KiwiMaru",
+      "HinaMincho",
+      "ShipporiMincho"
+    ],
+    "latinFonts": [
+      "IBMPlexMono",
+      "Inconsolata",
+      "CrimsonText",
+      "Alegreya"
+    ],
+    "fonts": [
+      "SawarabiGothic",
+      "SawarabiMincho",
+      "KleeOne",
+      "KaiseiTokumin",
+      "ZenOldMincho",
+      "YuseiMagic",
+      "KosugiMaru",
+      "KiwiMaru",
+      "HinaMincho",
+      "ShipporiMincho",
+      "IBMPlexMono",
+      "Inconsolata",
+      "CrimsonText",
+      "Alegreya"
+    ]
+  },
+  "development": {
+    "seed": 108541,
+    "positiveCounts": {
+      "code": 128,
+      "lookalike": 128,
+      "natural": 192,
+      "printable": 64
+    },
+    "negativeCounts": {
+      "clipped": 16,
+      "interior_damage": 16,
+      "multiline": 16,
+      "noise": 16,
+      "blank": 16,
+      "unknown_cjk": 16,
+      "unknown_mixed": 16
+    },
+    "exposure": "NewJP Murecho/NewTegomin files/license/hash/cmap verified without rendering/model before freeze. Latin retention families consumed research fonts, separate from current train.",
+    "jpFonts": [
+      "Murecho",
+      "NewTegomin"
+    ],
+    "latinFonts": [
+      "Cousine",
+      "PTSerif",
+      "RedHatMono",
+      "Literata"
+    ],
+    "fonts": [
+      "Murecho",
+      "NewTegomin",
+      "Cousine",
+      "PTSerif",
+      "RedHatMono",
+      "Literata"
+    ]
+  },
+  "fresh": {
+    "seed": 108591,
+    "jpFonts": [
+      "ShipporiAntique",
+      "ZenAntiqueSoft"
+    ],
+    "positiveCounts": {
+      "code": 128,
+      "lookalike": 128,
+      "natural": 192,
+      "printable": 64
+    },
+    "negativeCounts": {
+      "clipped": 16,
+      "interior_damage": 16,
+      "multiline": 16,
+      "noise": 16,
+      "blank": 16,
+      "unknown_cjk": 16,
+      "unknown_mixed": 16
+    },
+    "exposure": "JP fonts were downloaded for v3 but never drawn/recognized; original v3fresh manifest must remain absent. No foundation-pretraining novelty claim. Latin families are previously consumed retention families with new literals/images/tensors. Open once only after newdev selected hash.",
+    "latinFonts": [
+      "SplineSansMono",
+      "MartianMono",
+      "Newsreader",
+      "Fraunces"
+    ],
+    "fonts": [
+      "ShipporiAntique",
+      "ZenAntiqueSoft",
+      "SplineSansMono",
+      "MartianMono",
+      "Newsreader",
+      "Fraunces"
+    ]
+  },
+  "ordinaryCode": "Arbitrary2..10characters, upper/lower/digits and separators at arbitrary positions; perfont24independent samples plus12casepairs (48rows). No room prefix/leading letter/two-digit school grammar or lookup repair.",
+  "hardPairUnits": "PerJPfont8Il1 triple units +12O0 pair units =48rows. All variants share exact font/render condition and full context. Every member is a new registered target with no prior literal/image/tensor overlap.",
+  "equivalenceAudit": "TRAIN ONLY: all single-position Il1/O0 counterfactuals rendered in same condition; any normalizedinput alias rejects entire atomic unit before admission. Global PNG/input/CNN-feature contradiction audit excludes entire conflicting train units before updates. DEV/FRESH: ordinary generation keeps all admitted atomic members, including identical input/differentlabel; no oracle alias filter, all rows are main evaluation denominator. Alias diagnostic only after model scoring/selection; never used in rank.",
+  "sourceRendering": {
+    "sharedGeometry": "common baseline/relative glyphheight/font advance/kerning/internal gaps, all source ink preserved; no perglyph scaling or position reset",
+    "sizesPx": [
+      14,
+      18,
+      20,
+      24,
+      28
+    ],
+    "densities": [
+      1,
+      2,
+      4
+    ],
+    "trackingEm": [
+      -0.015,
+      0,
+      0.015,
+      0.03
+    ],
+    "trackingRule": "Global typesetting tracking, same in all variants; preserve each font glyphadvance/kerning contrast, do not normalize internal gap by target.",
+    "strokeExpansionOriginalPixels": "0 or1 only at density>=2;0 at density1. Physical rendered targetweight augmentation; not arbitrary erosion/cutout labelled intact.",
+    "preprocess": "Exact unchanged bbox+2/native BGR48 FP32/originalpixel center bilinear and uint8round/normalizedzero padding, W320..960/validWidth/CTC source intervals; no new frame or output repair",
+    "shaping": "PIL RAQM with ligatures disabled, pair kerning/font advances retained; globally uniform tracking. Same seed/size/density/tracking/stroke/color in each atomic unit. Renderseed and exact sourcegeometry stored."
+  },
+  "postSelection": "Selectedhash then fixedfresh once; retain every regression, no fresh reselect/retrain. Only promising artifact standardONNX full438/dictionary/geometryCTC/license; actual C# routes and every document/page remain root criteria.",
+  "exclusion": "Exact target literal/NFKC+strip/fulltarget UTF8SHA exclusion from all prior manifests/cache/public synthetic research/root oracles; root room/code ASCII suffix/numeric/CJK components included, legacy21201hashes included. No casefold or arbitrary substring/character prohibition. Root reserved3fonts never loaded/rendered/evaluated; old user PDFs/derivatives never reacquired.",
+  "training": {
+    "frozen": "All official CNN parameters/BNstats byte unchanged from v1; all BN runningstats fixed in evalmode throughout. Japanese primary untouched.",
+    "trainable": "Official encoder/full438classifier and independent reject head only, original architecture/config/normeps unchanged",
+    "cache": "Lossless FP32 CNN/teacherfeatures/full438probabilities. Train input tensor regenerated only for pixel evaluations from hashed PNG; dev/fresh keep FP32input too. All tensor hashes recorded, no FP16. Original full model vs cachedCNN bytes/decoder/reject equality on everynewdev before optimizer.",
+    "threads": 2,
+    "batchSize": 4,
+    "epochs": 4,
+    "evaluateEpochs": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "encoderLearningRate": 1e-05,
+    "headLearningRate": 3e-05,
+    "rejectLearningRate": 0.0001,
+    "teacherKlWeight": 0.8,
+    "teacherFeatureMseWeight": 0.02,
+    "rejectBceWeight": 0.5,
+    "weightDecay": 0.0001,
+    "gradientClip": 5,
+    "loss": "Standard full438CTC for intact positives/empty blanks, no guessedCTC on other controls; full teacherKL/featureMSE +BCE. No new contrast loss or arbitrary output boost.",
+    "maximumRssMiB": 4096,
+    "maximumOwnScratchGiB": 1.3,
+    "minimumFreeMiB": 1024,
+    "watchdogTrainingSeconds": 5400,
+    "seed": 108561,
+    "maximumCacheSeconds": 2400
+  },
+  "selection": "Baseline fallback. Eligible only if codeCER and wholeCER strictly improve, every JPdevfont codeedits do not increase, naturalCER <=baseline+.002, raw highCTC wrong<=baseline+1, wrongAccepted<=baseline+1, negativeAccepted<=baseline+1, unsupportedpadding alwaysrefused. Rank codeCER/wholeCER/-exact/earliestepoch. This relative gate does not require zero errors; parent product qualification remains separate. Fixed before model execution.",
+  "fontExposure": "All train JP families consumed in prior research; v3dev now disclosed train. New JPdev Murecho/NewTegomin verified download/license/hash before execution. JPfresh ShipporiAntique/ZenAntiqueSoft remains unrendered from v3. Latin dev/fresh are consumed retention families, separate from currenttrain; newliteral/image/tensor only. Foundation pretraining exposure unknown."
+}

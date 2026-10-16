@@ -1,0 +1,20 @@
+{
+  "originalArtifactIndexSha256": "d97bdd84d94989cbfc68981edd0745247633b53254f9dc376e827922f951d84b",
+  "allOriginalResearchAndSourceHashesUnchanged": true,
+  "originalQualificationFailUnchanged": true,
+  "allBundleFilesHashVerified": 52,
+  "bundleBytes": 22639933,
+  "onnxSha256": "a4001cfad16e7c7876ae949a939d9c9a8bac0a707faa8f50c62f83a8028ba0b5",
+  "dictionarySha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368",
+  "fixedDevDecisionRows": 624,
+  "numericShapes": 12,
+  "numericRows": 18,
+  "allNumericDecisionsEqual": true,
+  "freshReinferred": false,
+  "newOptimizerStarted": false,
+  "ownScratchBytes": 601114705,
+  "freeBytes": 1278087168,
+  "iosEditedOrExecuted": false,
+  "defaultSwitched": false,
+  "committedOrPushed": false
+}

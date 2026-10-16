@@ -1,0 +1,7 @@
+# Exploratory V4 epoch2 for actual-route investigation
+
+Original V4 trial remains **FAIL with active v1 baseline fallback**. Original dev uniquely selected epoch2 before fresh; independent fresh code190→185/256 and edits75→79 failed both JP-font/code guards. This additional export was explicitly requested for consumed actual Windows manual-document route comparison. No new optimizer, epoch/threshold choice, fresh inference, default switch or iOS operation occurred.
+
+ONNX SHA256 `a4001cfad16e7c7876ae949a939d9c9a8bac0a707faa8f50c62f83a8028ba0b5`,22,183,975bytes; full438 dictionary SHA256 `fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368`. Bundle is at `/workspace/scratch/ascii-english-v5-japanese-fonts-v4/exploratory-epoch2-v4`,52files/22,639,933bytes. Foundation is pinned official PP-OCRv5 English architecture; actual initializer/teacher are adapted font-balanced-v1 epoch4; chosen epoch2 SF is referenced without duplication.
+
+All624dev text/CTC/source-padding/accept decisions match; selected Torchraw confidence/reject replay is exact. Twelve dynamic numerical shapes (18rows) match decisions. Max fullprob absolute difference2.1562e-5/reject1.6987e-6. Standard FP32/opset17/empty node domain; raw CTC run-max confidence and original pixel/source intervals are preserved without dictionary correction. All limitations and Apache/OFL licenses are bundled. LinuxORT numerical fidelity is the scope; actual Windows/full-document and iOS qualification remain absent.

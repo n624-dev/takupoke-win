@@ -1,0 +1,19 @@
+{
+  "acquisitionPages": 10,
+  "acquisitionFailures": 0,
+  "documents": [
+    {
+      "id": "fresh-0-positive",
+      "fields": 360,
+      "reviewPlanEligible": true,
+      "reviewTargets": 37
+    },
+    {
+      "id": "fresh-1-positive",
+      "fields": 360,
+      "reviewPlanEligible": true,
+      "reviewTargets": 4
+    }
+  ],
+  "scope": "All10consumed exact native pages, full current capture/parser/review route; no oracle/user acknowledgement/default activation/independent qualification."
+}

@@ -1,0 +1,74 @@
+{
+  "development": {
+    "completeBalancedMatchedContextUnits": {
+      "Il1": 20,
+      "O0": 34
+    },
+    "allUnitsBalancedAtVaryingPosition": true,
+    "wholeCorpusAmbiguousCharacterCounts": {
+      "code": {
+        "I": 47,
+        "l": 47,
+        "1": 40,
+        "O": 56,
+        "0": 53
+      },
+      "allPositive": {
+        "I": 162,
+        "l": 166,
+        "1": 47,
+        "O": 156,
+        "0": 59
+      }
+    },
+    "interpretation": "Matched varying position is exactly balanced; arbitrary surrounding context and natural English are not artificially forced to equal class frequencies. Descriptive only, no causal prior claim or selection change."
+  },
+  "train": {
+    "completeBalancedMatchedContextUnits": {
+      "Il1": 80,
+      "O0": 120
+    },
+    "allUnitsBalancedAtVaryingPosition": true,
+    "wholeCorpusAmbiguousCharacterCounts": {
+      "code": {
+        "I": 156,
+        "l": 172,
+        "1": 149,
+        "O": 191,
+        "0": 226
+      },
+      "allPositive": {
+        "I": 437,
+        "l": 544,
+        "1": 178,
+        "O": 714,
+        "0": 251
+      }
+    },
+    "interpretation": "Matched varying position is exactly balanced; arbitrary surrounding context and natural English are not artificially forced to equal class frequencies. Descriptive only, no causal prior claim or selection change."
+  },
+  "fresh": {
+    "completeBalancedMatchedContextUnits": {
+      "Il1": 20,
+      "O0": 34
+    },
+    "allUnitsBalancedAtVaryingPosition": true,
+    "wholeCorpusAmbiguousCharacterCounts": {
+      "code": {
+        "I": 50,
+        "l": 38,
+        "1": 50,
+        "O": 55,
+        "0": 49
+      },
+      "allPositive": {
+        "I": 136,
+        "l": 171,
+        "1": 55,
+        "O": 148,
+        "0": 57
+      }
+    },
+    "interpretation": "Matched varying position is exactly balanced; arbitrary surrounding context and natural English are not artificially forced to equal class frequencies. Descriptive only, no causal prior claim or selection change."
+  }
+}

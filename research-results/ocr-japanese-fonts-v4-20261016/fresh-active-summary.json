@@ -1,0 +1,238 @@
+{
+  "name": "fresh-active",
+  "positiveRows": 512,
+  "exact": 432,
+  "correctAccepted": 367,
+  "incorrectAccepted": 41,
+  "negativeRows": 112,
+  "negativeAccepted": 15,
+  "paddingRows": 14,
+  "cer": 0.014402304368698993,
+  "groups": {
+    "blank": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 0
+    },
+    "clipped": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 2,
+      "nonempty": 16
+    },
+    "code": {
+      "rows": 128,
+      "exact": 106,
+      "correctAccepted": 91,
+      "incorrectAccepted": 13,
+      "accepted": 104,
+      "nonempty": 128,
+      "characters": 793,
+      "editErrors": 26,
+      "cer": 0.03278688524590164,
+      "correctLowConfidence": 12,
+      "wrongHighConfidence": 13
+    },
+    "interior_damage": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 13,
+      "nonempty": 16
+    },
+    "lookalike": {
+      "rows": 128,
+      "exact": 84,
+      "correctAccepted": 61,
+      "incorrectAccepted": 19,
+      "accepted": 80,
+      "nonempty": 128,
+      "characters": 862,
+      "editErrors": 49,
+      "cer": 0.0568445475638051,
+      "correctLowConfidence": 23,
+      "wrongHighConfidence": 19
+    },
+    "multiline": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 16
+    },
+    "natural": {
+      "rows": 192,
+      "exact": 190,
+      "correctAccepted": 172,
+      "incorrectAccepted": 2,
+      "accepted": 174,
+      "nonempty": 192,
+      "characters": 3826,
+      "editErrors": 2,
+      "cer": 0.0005227391531625719,
+      "correctLowConfidence": 18,
+      "wrongHighConfidence": 2
+    },
+    "noise": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 1
+    },
+    "printable": {
+      "rows": 64,
+      "exact": 52,
+      "correctAccepted": 43,
+      "incorrectAccepted": 7,
+      "accepted": 50,
+      "nonempty": 64,
+      "characters": 768,
+      "editErrors": 13,
+      "cer": 0.016927083333333332,
+      "correctLowConfidence": 9,
+      "wrongHighConfidence": 7
+    },
+    "unknown_cjk": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 3
+    },
+    "unknown_mixed": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 15
+    }
+  },
+  "rawSha256": "09d6c915b67d7b00526a6494b5002f98df189f5c52c3dee86a960eced538471d",
+  "scope": "Fresh synthetic development unless separately labeled fresh; independent ASCII branch; no document qualification",
+  "fontMetrics": {
+    "ShipporiAntique": {
+      "rows": 128,
+      "characters": 809,
+      "editErrors": 48,
+      "cer": 0.059332509270704575,
+      "exact": 86,
+      "correctLowConfidence": 14,
+      "wrongHighConfidence": 18,
+      "accepted": 88
+    },
+    "ZenAntiqueSoft": {
+      "rows": 128,
+      "characters": 846,
+      "editErrors": 27,
+      "cer": 0.031914893617021274,
+      "exact": 104,
+      "correctLowConfidence": 21,
+      "wrongHighConfidence": 14,
+      "accepted": 96
+    },
+    "SplineSansMono": {
+      "rows": 64,
+      "characters": 1162,
+      "editErrors": 9,
+      "cer": 0.00774526678141136,
+      "exact": 56,
+      "correctLowConfidence": 4,
+      "wrongHighConfidence": 4,
+      "accepted": 56
+    },
+    "MartianMono": {
+      "rows": 64,
+      "characters": 1117,
+      "editErrors": 0,
+      "cer": 0.0,
+      "exact": 64,
+      "correctLowConfidence": 5,
+      "wrongHighConfidence": 0,
+      "accepted": 59
+    },
+    "Newsreader": {
+      "rows": 64,
+      "characters": 1168,
+      "editErrors": 2,
+      "cer": 0.0017123287671232876,
+      "exact": 62,
+      "correctLowConfidence": 12,
+      "wrongHighConfidence": 2,
+      "accepted": 52
+    },
+    "Fraunces": {
+      "rows": 64,
+      "characters": 1147,
+      "editErrors": 4,
+      "cer": 0.0034873583260680036,
+      "exact": 60,
+      "correctLowConfidence": 6,
+      "wrongHighConfidence": 3,
+      "accepted": 57
+    }
+  },
+  "codeMetrics": {
+    "rows": 256,
+    "characters": 1655,
+    "editErrors": 75,
+    "cer": 0.045317220543806644,
+    "exact": 190,
+    "correctLowConfidence": 35,
+    "wrongHighConfidence": 32,
+    "accepted": 184
+  },
+  "monoCodeMetrics": {
+    "rows": 0,
+    "characters": 0,
+    "editErrors": 0,
+    "cer": null,
+    "exact": 0,
+    "correctLowConfidence": 0,
+    "wrongHighConfidence": 0,
+    "accepted": 0
+  },
+  "fontCodeMetrics": {
+    "RedHatMono": {
+      "rows": 0,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "exact": 0,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0,
+      "accepted": 0
+    },
+    "OverpassMono": {
+      "rows": 0,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "exact": 0,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0,
+      "accepted": 0
+    }
+  },
+  "reviewMetrics": {
+    "rows": 512,
+    "characters": 6249,
+    "editErrors": 90,
+    "cer": 0.014402304368698993,
+    "exact": 432,
+    "correctLowConfidence": 62,
+    "wrongHighConfidence": 41,
+    "accepted": 408
+  },
+  "allUnsupportedPaddingRefused": true
+}
