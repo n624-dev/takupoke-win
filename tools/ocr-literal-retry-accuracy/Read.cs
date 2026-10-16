@@ -17,11 +17,18 @@ if (args.Length != 3 || args[2] is not ("baseline" or "candidate")) throw new Ar
 var root = Path.GetDirectoryName(Path.GetFullPath(args[0]))!;
 using var manifest = JsonDocument.Parse(File.ReadAllBytes(args[0])); var m = manifest.RootElement;
 var modelRoot = Path.Combine(root, "models");
+#if !LITERAL_RETRY_FACTORY
 if (RecoveryOcrModels.Bundle.Version != "20261016-v2" || RecoveryOcrModels.Bundle.Artifacts.Count != 5 ||
     RecoveryOcrModels.Bundle.Artifacts.Single(a => a.Path == "manual-code-rec.onnx").Sha256 != "95bab179e0d6cc75269419078d68696cd4679661f94f6128b858b7a074fe2971")
     throw new InvalidDataException("This paired trial requires deployed10446 factory baseline, before activating a different profile.");
+#endif
 if (!await RecoveryModelBundleStore.VerifyAsync(RecoveryOcrModels.Bundle, modelRoot)) throw new InvalidDataException("Pinned original model bundle differs.");
 var dictionary = Verify(m.GetProperty("hybridDictionary")); await RecoveryOcrModels.VerifyDictionaryAsync(dictionary, default);
+#if LITERAL_RETRY_FACTORY
+const bool FactoryBuild = true;
+#else
+const bool FactoryBuild = false;
+#endif
 #if LITERAL_RETRY_CANDIDATE
 const bool CandidateBuild = true;
 using var ocr = new OnnxJapaneseOcr(Path.Combine(modelRoot, "det.onnx"), Path.Combine(modelRoot, "rec.onnx"), dictionary, 18710,
@@ -30,7 +37,11 @@ using var ocr = new OnnxJapaneseOcr(Path.Combine(modelRoot, "det.onnx"), Path.Co
     retainVerifiedWhitespace: true, retryRoleLabels: true, manualCodeRequiresLetter: true, retryLiteralCodes: true,
     uncertainJapaneseModel: Verify(m.GetProperty("japaneseAlternative")), uncertainJapaneseDictionary: Verify(m.GetProperty("japaneseAlternativeDictionary")));
 #else
+#if LITERAL_RETRY_FACTORY
+const bool CandidateBuild = true;
+#else
 const bool CandidateBuild = false;
+#endif
 using var ocr = RecoveryOcrModels.OpenRuntime(modelRoot, dictionary);
 #endif
 if ((args[2] == "candidate") != CandidateBuild) throw new InvalidDataException("Worker arm does not match its separately compiled source.");
@@ -94,7 +105,7 @@ foreach (var input in m.GetProperty("documents").EnumerateArray())
             manualCaptureCodeRefinement = true,
             manualCodeTailRefinement = true,
             manualCodeExpert = true,
-            literalCodeRetry = CandidateBuild, conditionalJapaneseExpert = CandidateBuild,
+            literalCodeRetry = CandidateBuild, conditionalJapaneseExpert = CandidateBuild, factoryDefault = FactoryBuild,
             acquisitionRepairs = true,
             uncertainManualCodeRequiresLetter = true,
             scope="Actual production runtime, unchanged original page pixels; no gold, user input, score raising or source omission. Primary calls include actual label/unpadded retries and exclude specialist/smoke calls." }));

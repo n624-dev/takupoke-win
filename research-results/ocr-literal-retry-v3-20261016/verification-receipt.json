@@ -1,0 +1,15 @@
+{
+  "source": "231fe87203b9c92a0c79993dc8649a6f990f25dc",
+  "run": 38865270712,
+  "artifact": 12030748817,
+  "zipBytes": 4695906,
+  "zipSHA256": "c672abff77ba64a8a4a8fad9167a21857ba676ce4006e4480c93861e4687542a",
+  "all78OriginalManifestFilesVerified": true,
+  "qualityCriteriaMet": true,
+  "perFontNonregressionMet": true,
+  "perSubgroupNonregressionMet": true,
+  "combinedStrictImprovementMet": true,
+  "newLiteralGains": 7,
+  "newLiteralLosses": 0,
+  "scope": "Closed actual native Windows new-literal qualification in consumed fonts; no source correction or installer/factory/human-time credit"
+}

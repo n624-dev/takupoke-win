@@ -1,0 +1,11 @@
+{
+  "baseFile": "tools/ocr-source-order-accuracy/exclusions.json",
+  "baseBytes": 3708,
+  "baseSHA256": "ae7ac01631a407d7b2c44b60810c588ddbdf9a5205578112b3ef2c65db5029c0",
+  "extraFile": "tools/ocr-literal-retry-accuracy/exclusions-extra.json",
+  "extraBytes": 420703,
+  "extraSHA256": "53e094878fbd5d863c755f5774768d1cef14183089295ad3b1ef50a938213818",
+  "priorExcludedCount": 28486,
+  "totalExcludedCount": 34490,
+  "scope": "Allprior28486literalledger plus prior2nativeoracle/components/observedfieldvalues, allsupplementarydevelopmentoutputs and320negative-control expected literals; development corpora consumed. Fixed role/header words are not a newliteral claim. Includes every firstfailedv1 oracle value and ASCII/numeric component; its corrected development uses identical consumed values. Also every observed row/retry/body and alphanumeric component from both closed-fixture development runs (all original values already excluded). All expected, observed complete fields/rows/retries and ASCII/numeric components of both native V2 arms are consumed and excluded."
+}
