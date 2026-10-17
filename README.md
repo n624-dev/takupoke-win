@@ -23,6 +23,8 @@ PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCR�
 
 10445までの比較では単独コード259→292/384、日本語付き287→292/384でした。追加学習v2の不採用結果と当時の全文書結果は[過去の比較記録](documentation/ocr-accuracy-20261016.md)へ保存しています。現在の追加学習V3を含む構成と全文書の比較は[10446の測定結果](documentation/ocr-source-order-accuracy-20261016.md)を参照してください。
 
+時間割変更一覧は、変更前・変更後とも名称対応表の正式名称を優先します。変更前が空欄なら元の通常授業を表示だけ補い、対応表がなければ元の記載を使います。
+
 ## Windowsへの導入（ビルド不要）
 
 [開発確認版0.1.0-dev.10446のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10446)からSetup.exeを取得してください。通常Release・Latestとして公開しています。正式版ではありません。iOS解析への追従、mainの行除外・一括除外を含み、罫線付近の切り出し・再認識・本文の文字順序を修正し、英数字用の追加学習モデルを組み込みました。[今回の変更・測定結果](documentation/ocr-source-order-accuracy-20261016.md)・[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38839386958)全8ジョブとx64の6導入状態が成功し、公開6ファイルと両ZIPの全同梱ファイルを照合済みです。[配布記録](research-results/ocr-source-order-native-20261016/installer-release-receipt.json)。

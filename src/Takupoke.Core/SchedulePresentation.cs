@@ -32,7 +32,11 @@ public sealed class SchedulePresentation(ScheduleData data, MappingRules? mappin
             var names = ChangeNames(change).Before;
             return detail ? names.DetailSubject : names.Subject.Trim();
         }
-        var namesFromNormal = NormalOriginals(change).Select(l => l.Names.Subject.Trim()).Where(n => n.Length > 0).Distinct().ToArray();
+        var namesFromNormal = NormalOriginals(change).Select(l =>
+        {
+            var names = mappings?.Apply(l.Names, l.ClassName) ?? l.Names;
+            return detail ? names.DetailSubject : names.Subject.Trim();
+        }).Where(n => n.Length > 0).Distinct().ToArray();
         return namesFromNormal.Length == 0 ? "記載なし" : string.Join("・", namesFromNormal);
     }
 }

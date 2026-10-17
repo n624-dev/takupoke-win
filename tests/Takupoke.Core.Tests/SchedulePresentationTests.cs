@@ -18,10 +18,16 @@ public sealed class SchedulePresentationTests
         Assert.IsType<ChangeContent>(Assert.Single(presentation.Engine(preferences, home: true).Blocks(Day, "1_CN")).Content);
     }
     [Fact]
-    public void EmptyBeforeSubjectUsesOnlyNormalSourceNamesAndNeverSpecialsOrFullNames()
+    public void EmptyBeforeSubjectUsesMappedNormalNamesForDetailsAndNeverSpecials()
     {
         var presentation = new SchedulePresentation(new(new(2032, "前期", [Normal])), Mapping);
-        Assert.Equal("架空科目A", presentation.BeforeSubject(Change(), detail: true));
+        Assert.Equal("架空正式科目A", presentation.BeforeSubject(Change(), detail: true));
+        Assert.Equal("架空科目A", presentation.BeforeSubject(Change()));
+        Assert.Equal("架空科目A", new SchedulePresentation(new(new(2032, "前期", [Normal])), null)
+            .BeforeSubject(Change(), detail: true));
+        Assert.Equal("架空正式科目A", presentation.BeforeSubject(Change(before: "架空科目A"), detail: true));
+        Assert.Equal("架空正式科目B", presentation.ChangeNames(Change()).After.DetailSubject);
+        Assert.Equal("架空未登録科目", presentation.ChangeNames(Change(after: "架空未登録科目")).After.DetailSubject);
         var special = new SpecialAnalysis(MaterialKind.Exam, 2032, [Day.Iso()], ["1_CN"], new Dictionary<int, TimeRange>(),
             [new(Day.Iso(), "1_CN", 1, 1, 1, null, ["架空科目B"], 1)]);
         var duringExam = new SchedulePresentation(new(new(2032, "前期", [Normal]), Specials: [special]), Mapping);

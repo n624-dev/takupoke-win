@@ -1,7 +1,7 @@
 # 時間割・授業名・時刻・日付
 
 対応関係・宣言名・実行方法のSHA-256：
-`7b109639f1bf4594cac3c5973da450cd5e082942b51d9c35b027fd2f37458568`
+`74b20820b930af3e3226d402e39ef031390e6bcb79bd7849571d6a16da8bd09b`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -28,7 +28,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 ## [tests/Takupoke.Core.Tests/SchedulePresentationTests.cs](../../tests/Takupoke.Core.Tests/SchedulePresentationTests.cs)
 
 - `HomeAlwaysIncludesChangesWhenWeekViewIsSetToNormal`
-- `EmptyBeforeSubjectUsesOnlyNormalSourceNamesAndNeverSpecialsOrFullNames`
+- `EmptyBeforeSubjectUsesMappedNormalNamesForDetailsAndNeverSpecials`
 - `SpecialNamesUseMappingOnlyOnHomeWhileWeekAndDetailRetainPdfSpelling`
 - `InternationalChangesAreFilteredFromListAsWellAsGrid`
 - `HomeWeekContainsTodayOnWeekendWhileInitialWeekCanAdvance`

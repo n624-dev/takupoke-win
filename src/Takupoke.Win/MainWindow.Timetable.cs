@@ -125,7 +125,7 @@ public sealed partial class MainWindow
     }
     private Button ChangeListButton(ScheduleChange change, int index)
     {
-        var before = ScheduleValue(_model.Presentation.BeforeSubject(change)); var after = ScheduleValue(_model.Presentation.ChangeNames(change).After.Subject);
+        var before = ScheduleValue(_model.Presentation.BeforeSubject(change, detail: true)); var after = ScheduleValue(_model.Presentation.ChangeNames(change).After.DetailSubject);
         var date = SchoolDate.TryParse(change.ChangeDate, out var day) ? day.ToString("M月d日（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP")) : change.ChangeDate;
         var heading = Text(date + " · " + ClassSelection.Display(change.DisplayClassName) + " · " + change.DisplayPeriod, 14);
         var kind = Text(change.KindLabel, 14); kind.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold; kind.Foreground = WarningBrush;
