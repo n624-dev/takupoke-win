@@ -62,7 +62,7 @@ def run(root, mode, query=None, base=None):
             target.write_text(expected, encoding="utf-8")
         elif not target.exists() or target.read_text(encoding="utf-8") != expected:
             raise ValueError("Stale test catalogue; run write: " + path)
-    extras = {str(path.relative_to(root)) for path in (root / config["document_folder"]).glob("*.md")} - generated.keys()
+    extras = {path.relative_to(root).as_posix() for path in (root / config["document_folder"]).glob("*.md")} - generated.keys()
     if extras:
         raise ValueError("Remove obsolete generated catalogue files: " + ", ".join(sorted(extras)))
     if mode == "check" and base:

@@ -2,11 +2,12 @@
 import contextlib
 import io
 import json
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -127,6 +128,18 @@ class TestCatalogueTests(unittest.TestCase):
         self.write("docs/test-catalog/obsolete.md", "未登録の一覧\n")
         with self.assertRaisesRegex(ValueError, "obsolete"):
             self.run_mode("check")
+
+    def test_windows_document_paths_accept_known_and_reject_obsolete_catalogues(self):
+        native_relative_to = type(self.root).relative_to
+
+        def windows_relative_to(path, *parents, **kwargs):
+            return PureWindowsPath(native_relative_to(path, *parents, **kwargs))
+
+        with mock.patch.object(type(self.root), "relative_to", windows_relative_to):
+            self.run_mode("check")
+            self.write("docs/test-catalog/obsolete.md", "未登録の一覧\n")
+            with self.assertRaisesRegex(ValueError, "obsolete"):
+                self.run_mode("check")
 
     def test_integration_case_can_cover_two_sources_without_duplicate_source_ownership(self):
         self.write("src/Storage.swift", "struct Storage {}\n")

@@ -1,7 +1,7 @@
 # テスト一覧・対象検索・宣言整合性・CI接続
 
 対応関係・宣言名・実行方法のSHA-256：
-`f72e1444c552143f98df44f57e04b073e1dc749483897127414afc2e61977caf`
+`ad1cd59fae1f0633a9fbd06f68108ac953c2732a0e3b4f211f56ef078952b020`
 
 環境：Linux Python（隔離Gitリポジトリ）
 
@@ -28,6 +28,7 @@ python3 -B tests/test_test_catalog.py
 - `test_renamed_source_reports_corresponding_tests_without_test_edits`
 - `test_new_corresponding_case_file_can_qualify_existing_runtime_changes`
 - `test_stale_or_obsolete_generated_documents_are_rejected`
+- `test_windows_document_paths_accept_known_and_reject_obsolete_catalogues`
 - `test_integration_case_can_cover_two_sources_without_duplicate_source_ownership`
 - `test_search_finds_case_and_source_names`
 - `test_inventory_distinguishes_declarations_from_theory_expansions`

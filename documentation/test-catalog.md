@@ -37,7 +37,7 @@ CIはpushのbefore、PRのbase、手動実行ではHEADの親を比較する。
 | [固定iOS参照・独立期待値](test-catalog/parity.md) | 20 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [WinUI画面・行選択・表示領域・実操作・再起動](test-catalog/app-ui.md) | 9 | Windows WinUI x64。Linuxクロスビルドは操作成功に数えない |
 | [配布パッケージ・ライセンス・公開情報](test-catalog/release.md) | 13 | Linux Python／Windows包装・導入検証 |
-| [テスト一覧・対象検索・宣言整合性・CI接続](test-catalog/test-catalog.md) | 14 | Linux Python（隔離Gitリポジトリ） |
+| [テスト一覧・対象検索・宣言整合性・CI接続](test-catalog/test-catalog.md) | 15 | Linux Python（隔離Gitリポジトリ） |
 | [復旧の証拠・採用・旧記録の契約](test-catalog/recovery-contracts.md) | 81 | Linux／Windows .NET |
 | [復旧解析・原画像・訂正・保存・取消](test-catalog/recovery-pipeline.md) | 219 | Linux／Windows .NET |
 | [CPU OCR・文字位置・モデル・原画像切り出し](test-catalog/ocr.md) | 115 | Linux／Windows .NET。Windows描画・実推論は対応workflowで検証 |
