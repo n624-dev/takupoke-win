@@ -46,14 +46,16 @@ internal static partial class Program
         void Close(AutomationElement page) => ((WindowPattern)page.GetCurrentPattern(WindowPattern.Pattern)).Close();
         using var playwright = Microsoft.Playwright.Playwright.CreateAsync().GetAwaiter().GetResult();
         Microsoft.Playwright.IBrowser? browser = null;
+        var clients = new List<Microsoft.Playwright.IBrowser>();
         void Attach()
         {
-            if (browser?.IsConnected != true)
-            {
-                Console.WriteLine("Browser fixture stage: attach to the actual WebView2 controller");
-                browser = playwright.Chromium.ConnectOverCDPAsync($"http://127.0.0.1:{debugPort}", new() { Timeout = 30000 }).GetAwaiter().GetResult();
-                Console.WriteLine("Browser fixture stage: actual WebView2 controller attached");
-            }
+            // WebView2 can expose a later native controller in /json/list without
+            // notifying an existing CDP client. Discover its existing targets once;
+            // keep earlier clients alive so the original opener remains observable.
+            Console.WriteLine("Browser fixture stage: attach to the actual WebView2 controller");
+            browser = playwright.Chromium.ConnectOverCDPAsync($"http://127.0.0.1:{debugPort}", new() { Timeout = 30000 }).GetAwaiter().GetResult();
+            clients.Add(browser);
+            Console.WriteLine("Browser fixture stage: actual WebView2 controller attached");
         }
         Microsoft.Playwright.IPage Content(Uri address, string heading)
         {
@@ -81,6 +83,9 @@ internal static partial class Program
                 AutomationElement? child = null;
                 Wait(() => (child = Pages().SingleOrDefault(page => !page.GetRuntimeId().SequenceEqual(first.GetRuntimeId()))) is not null,
                     "A distinct native popup window opens from the actual page control");
+                Wait(() => Text(child!, "ページを表示しました。") is not null,
+                    "The native popup navigation completes before attaching its test client");
+                Attach();
                 var popup = Content(new Uri(http.Address, path), heading);
                 Require(!ReferenceEquals(popup, opener) && opener.Url == http.Address.AbsoluteUri,
                     "The popup has a distinct real page and preserves its opener address");
@@ -162,7 +167,10 @@ internal static partial class Program
             catch (Exception diagnosticError) { Console.Error.WriteLine("Synthetic browser diagnostic unavailable: " + diagnosticError.GetType().Name); }
             throw;
         }
-        finally { if (browser?.IsConnected == true) browser.CloseAsync().GetAwaiter().GetResult(); }
+        finally
+        {
+            Task.WhenAll(clients.Where(client => client.IsConnected).Select(client => client.CloseAsync())).GetAwaiter().GetResult();
+        }
     }
     private static async Task SeedBrowserLinksAsync(string root, Uri[] addresses)
     {

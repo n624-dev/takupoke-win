@@ -1,3 +1,12 @@
+## W21 第10焦点CIがfailure終端（2026-10-19）
+
+- sourcec05747993cad4d635ef71bb67e0ddd9aec8be57e、run39155800972/attempt1、job117758654308。18:47:50Z開始・18:50:43Z failure、実ブラウザstep失敗。target診断追加後の初回。完了ログ取得前でどのtargetが見えるかは未確定。対処前に事実を記録し、W20と新しい実測・コードを照合する。
+
+- 完了ログSHAaea00e53e992314be79c671eff26cd6723c2272710d83313b2306978ac3858f3。最初のpopupでHTTP4requests/native2窓表示完了、所有/json/listにはpage targetが/targetと/の2件存在するが、接続済みPlaywrightは/の1件のみ。実childのbrowser target自体が消えている症状ではなく、継続中のCDP接続で後発controllerを発見できない条件を確認した。
+- W20の未確定点と[Playwright公式接続実装](https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/server/chromium/crBrowser.ts)を照合。新しいnative controllerが作成された後、同じ実WebView2 endpointへ新しい検査clientを一度接続し、既存targetの可視本文を取得する候補とする。元client/openerは保持し、実UIの押し直し・再navigation・別browser起動・結果注入はしない。30秒/別page/親本文保持/child閉鎖とTLS期待は不変。各検査clientはfinallyで全てdisconnectする。
+
+- 開始前レビュー64で、native窓の出現はEnsureCoreWebView2Asyncより前なので一度の接続が早過ぎる競合を検出した。次のActionsは未開始。子窓自身のnavigation完了を実観測してから接続するよう修正し、DOM本文検査は保持する。finallyは全clientのdisconnectを開始して全完了を待つ。cross build0警告/0エラー（最終6.65秒）、catalog整合成功。同じ未開始Actionsのレビュー64再確認でblockingなし。
+
 ## W20 第9焦点CIがfailure終端（2026-10-19）
 
 - sourcef9e9616d78ae610142dc3d53e4b46f6b9a7846b4、run39155230852/attempt1、job117756970761。18:40:28Z開始・18:43:34Z failure、実ブラウザstepで失敗。HKLM所有policy比較の初回。完了ログ取得前で接続/本文/popup/TLSの段階未確定。対処前に記録し、W19と新しい実測・コードを照合する。
