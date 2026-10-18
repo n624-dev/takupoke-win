@@ -6,7 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FlaUI.UIA3" Version="5.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Playwright" Version="1.63.0" PrivateAssets="all" />
     <Compile Include="../shared/FictionalChangeWorkbook.cs" Link="FictionalChangeWorkbook.cs" />
     <Compile Include="../../src/Takupoke.Win/Platform/WindowsFileIdentity.cs" Link="WindowsFileIdentity.cs" />
     <ProjectReference Include="../../src/Takupoke.Infrastructure/Takupoke.Infrastructure.csproj" />

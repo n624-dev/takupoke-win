@@ -1,3 +1,13 @@
+## W18 第7焦点CIがfailure終端（2026-10-19）
+
+- source76b54294a66224f97039c3ecff15699cef00ebfc、run39154118138/attempt1、job117753670643。18:25:57Z開始・18:28:33Z failure。UIA3比較版の初回結果、実ブラウザstepで失敗。完了ログ取得前で段階/原因未確定。W17以前と実コード/ログを照合し、同条件無変更の再試行や検査緩和をしない。
+
+- 完了ログSHA84656497b3699219bdbb6a41b9028b60c85519f8ae76b7e978fc7739cc67187b。UIA3でもHTTP2requests・status表示完了/error空、本文見出し30秒timeout/6checks。WinUI provider境界を越えてDOMを取得できない条件が残り、UIA2→3比較はこの症状を解消していない。既定flagなしの追加試行は根拠を失ったため行わない。
+- 次の方針前にWebView2公式のWebDriver/CDPによる実browser自動化を確認する。特定のUIA tree取得を前提にせず実DOM/実popup/TLSを検証し、statusだけの成功には置換しない。
+
+- [Microsoft Playwright公式WebView2手順](https://playwright.dev/dotnet/docs/webview2)のCDP接続で、起動済み実アプリのWebView2へloopback接続し、実DOMの可視見出し/クリック/実popupを検査する。失敗したUIA3依存とaccessibility強制flagは外し、Playwright1.63.0をtest-onlyへ固定。通常起動と製品にdebug接続を追加しない。
+- 実popupは異なるnative windowと実CDP page、openerの元URL/本文保持、native child閉鎖後の同page終了まで照合する。TLS検証無効化/通信route差替え/Evaluate/期待値注入/別Chromium起動はしない。実クリック後の必須条件を各30秒で独立観測する。local cross buildは0警告/0エラー（最終6.90秒）、catalog整合成功。fresh61のnullable指摘も修正し、同じ開始前レビューのv2はblockingなし。
+
 ## W17 第6焦点CIがfailure終端（2026-10-19）
 
 - sourcec9840de08dbea0ccd7264fff4ec6417a49b97df6、run39153660970/attempt1、job117752293411。18:19:53Z開始・18:22:05Z failure、実ブラウザstepで失敗。accessibility flag比較の初回結果。完了ログ取得前でHTTP/Popup/TLSどの段階かは未確定。W16と実コード/ログを照合し、期待・期限を緩めない。
