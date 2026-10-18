@@ -1,3 +1,22 @@
+## W08 ブラウザ架空サーバーのcross buildでSystem.IO import不足（2026-10-19）
+
+- Linux/.NET10.0.402、BrowserFixtureServer.cs追加後のUIテストcross buildがCS0246(Stream/StreamReader)・CS0103(IOException)で停止。実ブラウザは未実行。既存ファイルはSystem.IOを明示importしており、このファイルで不足していた。
+- 同じビルドを無変更で繰り返さず、System.IOの明示import追加を比較する。期待条件や本体のPDF経路は変更しない。
+
+## W07 Issue #2 ローカルブラウザの無言拒否（2026-10-19）
+
+- 利用者の追加依頼でopen Issue #2を読んだ。現行HEADでもURL検証・内部/外部選択・WebView2遷移・popupはHTTPS限定で、HTTPを無言で取り消す。HTTPSの実際のWebViewエラーは未採取、証明書エラーとpopupは候補。
+- 過去の索引にはWebView2ローカル遷移の該当記録なし。DocumentsのPDF表示メソッドは対象外。ローカルHTTPの範囲を限定した共通policy、拒否/完了/証明書の可視化、別WebViewでのpopupを検証候補とする。TLSを無条件許可しない。
+
+## W06 公開前レビューでcache期限の起点を検出（2026-10-19）
+
+- レビュー49: expires_inをJWKS検証後の時刻へ加算しており、JWKS待ち時間だけ期限を延長する。発行300秒・待ち60秒の場合、310秒後も再利用できる。Actions未開始。token要求前の時刻を起点とする候補と遅延時計の実交換検査で確認する。iOSと同様、新規の不足権限認証開始時には前cacheも破棄する。
+
+## W05 本番OIDC認可開始の環境HTTP403（2026-10-19）
+
+- 認証506278c本番反映後、iOS/Windowsのlinks-only standard認可開始GETが各1回ともHTTP403。秘密値・学校資料は送っていない。登録の成否やログイン成功の証拠にはならない。
+- 同条件を反復せず、サーバーのCI/production成功、過去の登録確認、実機未確認を分ける。詳細はiOS N45と今回の検証記録。
+
 # 今回の検証失敗の記録
 
 ## W04 所有の境界照合スクリプトがbytesリテラルで構文停止（2026-10-18）

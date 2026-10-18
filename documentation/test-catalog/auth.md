@@ -1,7 +1,7 @@
 # OIDC・実認証・取消
 
 対応関係・宣言名・実行方法のSHA-256：
-`53d3b4df0e182036bbf8a87f6a9e68a1e8a6d334844efc2d909d4908051dfc78`
+`83081ddb448dfb044c3c9a14fc7235ca95f08f82d184ea1957da7dcd4ef04090`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -16,6 +16,9 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/OidcClientTests.cs](../../tests/Takupoke.Integration.Tests/OidcClientTests.cs)
 
+- `NetworkTokenCacheIsScopeBoundExpiresAndCannotSurviveCancellationDuringExchange`
+- `TokenCacheDoesNotExtendExpiryWhileFetchingKeys`
+- `AllResourceCombinationsSelectOneAuthenticationBeforeAnyUpdate`
 - `AuthorizationUsesSeparateRandomStateNonceAndS256Verifier`
 - `CallbackRequiresCorrectProtocolPathUniqueStateAndCode`
 - `ValidEs256TokenIsVerifiedUsingJwksCoordinates`

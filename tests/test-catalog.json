@@ -143,11 +143,13 @@
         "src/Takupoke.Core/DisplayText.cs",
         "src/Takupoke.Core/LinkModels.cs",
         "src/Takupoke.Core/LinkSearch.cs",
-        "src/Takupoke.Core/MappingRules.cs"
+        "src/Takupoke.Core/MappingRules.cs",
+        "src/Takupoke.Core/BrowserNavigationPolicy.cs"
       ],
       "checks": [
         "tests/Takupoke.Core.Tests/LinkSearchTests.cs",
-        "tests/Takupoke.Core.Tests/MappingRulesTests.cs"
+        "tests/Takupoke.Core.Tests/MappingRulesTests.cs",
+        "tests/Takupoke.Core.Tests/BrowserNavigationPolicyTests.cs"
       ]
     },
     {
@@ -276,7 +278,9 @@
         "tests/Takupoke.Win.UITests/Program.cs",
         "tests/Takupoke.Win.UITests/ScreenReview.cs",
         "tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj",
-        "tests/Takupoke.Win.UITests/startup-smoke.ps1"
+        "tests/Takupoke.Win.UITests/startup-smoke.ps1",
+        "src/Takupoke.Win/MainWindow.Browser.cs",
+        "tests/Takupoke.Win.UITests/BrowserFixtureServer.cs"
       ],
       "checks": [
         "tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs",
@@ -284,7 +288,8 @@
         "tests/Takupoke.Win.UITests/Program.ChangeRows.cs",
         "tests/Takupoke.Win.UITests/Program.InstallerChecks.cs",
         "tests/Takupoke.Win.UITests/Program.TimetableChecks.cs",
-        "tests/Takupoke.Win.UITests/ShortcutReview.cs"
+        "tests/Takupoke.Win.UITests/ShortcutReview.cs",
+        "tests/Takupoke.Win.UITests/Program.BrowserChecks.cs"
       ]
     },
     {

@@ -82,7 +82,7 @@ public sealed partial class MainWindow
         var menu = new MenuFlyout();
         void Item(string label, string iconName, Func<Task> action) { var item = new MenuFlyoutItem { Text = label, Icon = FluentIcon(iconName) }; item.Click += async (_, _) => await action(); menu.Items.Add(item); }
         Item("開く", "open", () => OpenLink(link));
-        if (Uri.TryCreate(link.Href, UriKind.Absolute, out var address) && address.Scheme == "https") Item(_model.Preferences.OpeningMode == LinkOpeningMode.External ? "今回だけアプリ内で開く" : "今回だけ既定のブラウザで開く", "globe", () => OpenLink(link, true));
+        if (BrowserNavigationPolicy.IsWebUrl(link.Href)) Item(_model.Preferences.OpeningMode == LinkOpeningMode.External ? "今回だけアプリ内で開く" : "今回だけ既定のブラウザで開く", "globe", () => OpenLink(link, true));
         Item(favorite ? "お気に入りから外す" : "お気に入りに追加", "star", async () =>
         { await _model.SavePreferencesAsync(current => { var ids = current.FavoriteIds.ToHashSet(); if (favorite) ids.Remove(link.Id); else ids.Add(link.Id); return current with { FavoriteIds = ids }; }); });
         Item("アイコンの色を変更", "palette", async () =>
@@ -138,10 +138,10 @@ public sealed partial class MainWindow
     private async Task OpenLink(LinkItem link, bool opposite = false)
     {
         if (!LinksPayload.ValidUrl(link.Href)) { await Message("リンクを開けません", "リンクの形式を確認できませんでした。"); return; }
-        var uri = new Uri(link.Href);
+        var uri = new Uri(SyllabusLinkPolicy.Resolve(link, _model.Preferences.SyllabusDepartmentId, _model.Today.Year));
         var external = _model.Preferences.OpeningMode == LinkOpeningMode.External;
         if (opposite) external = !external;
-        if (uri.Scheme != "https" || external)
+        if (!BrowserNavigationPolicy.IsWebUrl(uri.AbsoluteUri) || external)
         { if (!await Launcher.LaunchUriAsync(uri)) await Message("リンクを開けません", "このリンクに対応するWindowsアプリが見つかりませんでした。"); }
         else await OpenBrowser(uri, link.Label);
     }

@@ -34,8 +34,7 @@ public sealed record LinksPayload(string Version, string LinksVersion, IReadOnly
     {
         if (Encoding.UTF8.GetByteCount(value) > 2048 || value.Any(c => char.IsWhiteSpace(c) || char.IsControl(c) || c == '\\')
             || !Uri.TryCreate(value, UriKind.Absolute, out var uri)) return false;
-        return uri.Scheme == "jrshikoku" || uri.Scheme == "https" && value.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
-            && uri.Host.Length > 0 && uri.UserInfo.Length == 0;
+        return uri.Scheme == "jrshikoku" || BrowserNavigationPolicy.IsWebUrl(value);
     }
     public IEnumerable<LinkItem> Recommendations(IReadOnlySet<string> hidden) => Items.Where(i => i.Visible && i.Recommended && !hidden.Contains(i.Id))
         .OrderBy(i => i.RecommendationOrder).ThenBy(i => i.SortOrder).ThenBy(i => i.Label, StringComparer.Create(CultureInfo.GetCultureInfo("ja-JP"), false));
@@ -46,6 +45,7 @@ public sealed record LinksPayload(string Version, string LinksVersion, IReadOnly
 
 public sealed record UserPreferences
 {
+    public string? SyllabusDepartmentId { get; init; }
     public string[] SelectedClasses { get; init; } = [];
     public string[] ChangeClasses { get; init; } = [];
     public bool UseAiFeatures { get; init; }
@@ -72,8 +72,28 @@ public sealed record UserPreferences
     { "default" => "デフォルト", "blue" => "青", "green" => "緑", "yellow" => "黄色", "orange" => "オレンジ", "red" => "赤", "pink" => "ピンク", "purple" => "紫", _ => "デフォルト" };
     public UserPreferences Validated()
     {
+        if (SyllabusDepartmentId is not null && !SyllabusLinkPolicy.Departments.Any(d => d.Id == SyllabusDepartmentId))
+            throw new InvalidDataException("シラバスの学科を確認できません。");
         if (TimetableAnalysisWeekday is < 0 or > 5 || SelectedClasses.Length > 2 || ChangeClasses.Length > 30 || !MainColors.Contains(MainColor)
             || LinkColors.Values.Any(c => !LinksPayload.Colors.Contains(c))) throw new InvalidDataException("個人設定の形式を確認できません。");
         return this;
+    }
+}
+
+public static class SyllabusLinkPolicy
+{
+    public sealed record Department(string Id, string Name);
+    public static IReadOnlyList<Department> Departments { get; } = [
+        new("49", "通信ネットワーク工学科（2026年度以降入学者）"), new("50", "電子システム工学科（2026年度以降入学者）"), new("51", "情報工学科（2026年度以降入学者）"),
+        new("35", "通信ネットワーク工学科（2019〜2025年度入学者）"), new("36", "電子システム工学科（2019〜2025年度入学者）"), new("37", "情報工学科（2019〜2025年度入学者）"),
+        new("38", "電子情報通信工学専攻（2024年度以降入学者）"), new("27", "電子情報通信工学専攻（2023年度以前入学者）"),
+        new("17", "通信ネットワーク工学科（2018年度以前入学者）"), new("18", "電子システム工学科（2018年度以前入学者）"), new("19", "情報工学科（2018年度以前入学者）")
+    ];
+    public static string Resolve(LinkItem link, string? departmentId, int year)
+    {
+        if (link.Label != "高専Webシラバス" || !Uri.TryCreate(link.Href, UriKind.Absolute, out var uri)
+            || uri.Scheme != "https" || uri.Host != "l.n624.jp" || !uri.IsDefaultPort || uri.UserInfo.Length != 0
+            || uri.AbsolutePath is not ("/gSBBt" or "/KCWgd") || !Departments.Any(d => d.Id == departmentId) || year is < 1900 or > 9999) return link.Href;
+        return $"https://l.n624.jp/KCWgd?department_id={departmentId}&year={year}";
     }
 }

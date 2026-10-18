@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`e3b75f2eb38520de61daa88dbe8e6b6ba7c691861fbaed8fa084ac0d667b6276`
+`cb44a499c40435c52d15a13a1edac2746fdc8c9918f450688c2d2d8449b68874`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -42,6 +42,8 @@
 - [tests/Takupoke.Win.UITests/ScreenReview.cs](../../tests/Takupoke.Win.UITests/ScreenReview.cs)
 - [tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj](../../tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj)
 - [tests/Takupoke.Win.UITests/startup-smoke.ps1](../../tests/Takupoke.Win.UITests/startup-smoke.ps1)
+- [src/Takupoke.Win/MainWindow.Browser.cs](../../src/Takupoke.Win/MainWindow.Browser.cs)
+- [tests/Takupoke.Win.UITests/BrowserFixtureServer.cs](../../tests/Takupoke.Win.UITests/BrowserFixtureServer.cs)
 
 ## [tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs](../../tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs)
 
@@ -68,3 +70,7 @@
 ## [tests/Takupoke.Win.UITests/ShortcutReview.cs](../../tests/Takupoke.Win.UITests/ShortcutReview.cs)
 
 - `CheckShortcut`
+
+## [tests/Takupoke.Win.UITests/Program.BrowserChecks.cs](../../tests/Takupoke.Win.UITests/Program.BrowserChecks.cs)
+
+- `CheckBrowser`

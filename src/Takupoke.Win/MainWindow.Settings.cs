@@ -52,10 +52,25 @@ public sealed partial class MainWindow
                 && opening.SelectedIndex != requestedOpeningMode)
                 { requestedOpeningMode = opening.SelectedIndex; var value = (LinkOpeningMode)requestedOpeningMode; await _model.SavePreferencesAsync(current => current with { OpeningMode = value }); }
         };
+        var syllabus = PreferenceControl(new ComboBox { MinWidth = 155 });
+        syllabus.Items.Add(new ComboBoxItem { Content = "学科を選択しない", Tag = "" });
+        foreach (var department in SyllabusLinkPolicy.Departments)
+            syllabus.Items.Add(new ComboBoxItem { Content = department.Name, Tag = department.Id });
+        syllabus.SelectedItem = syllabus.Items.Cast<ComboBoxItem>().First(item => (string)item.Tag == (_model.Preferences.SyllabusDepartmentId ?? ""));
+        AutomationProperties.SetAutomationId(syllabus, "syllabus-department");
+        var requestedDepartment = _model.Preferences.SyllabusDepartmentId ?? "";
+        syllabus.SelectionChanged += async (_, _) =>
+        {
+            if (syllabus.IsLoaded && syllabus.SelectedItem is ComboBoxItem { Tag: string value } && value != requestedDepartment)
+            {
+                requestedDepartment = value;
+                await _model.SavePreferencesAsync(current => current with { SyllabusDepartmentId = value.Length == 0 ? null : value });
+            }
+        };
         Add(SettingsGroup(
             SettingsRow("クラス", ChooseClasses, "settings-class", _model.Preferences.SelectedClasses.Length == 0 ? "未選択" : string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display))),
             SettingsRow("通知・バックグラウンド", () => OpenPage("notifications"), "settings-notifications"),
-            SettingField("メインカラー", mainColor), SettingField("リンクの開き方", opening)));
+            SettingField("メインカラー", mainColor), SettingField("リンクの開き方", opening), SettingField("シラバスの学科", syllabus)));
         Add(SettingsSectionTitle("サポート"));
         Add(SettingsGroup(SettingsRow("初期設定", InitialSetup, "settings-setup"),
             SettingsRow("使い方", () => OpenPage("help"), "settings-help"),
@@ -220,7 +235,7 @@ public sealed partial class MainWindow
     private Border MaterialCard(MaterialKind kind)
     {
         var snapshot = _model.Materials.GetValueOrDefault(kind); var source = snapshot?.Source;
-        var state = snapshot?.AnalysisStatus(kind) ?? "未選択";
+        var state = snapshot?.AnalysisStatus(kind, _model.ParserYear) ?? "未選択";
         var summary = SettingsDescription(source is null ? state : source.OriginalName + "\n" + state);
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(summary, "material-summary-" + kind);
         if (snapshot?.AcquisitionAttempt?.Failure is not null || snapshot?.ParseAttempt?.Failure is not null) summary.Foreground = WarningBrush;

@@ -1,0 +1,38 @@
+# 2026-10-19 一覧認証・ホーム・シラバス・現在資料の状態
+
+開始時点はソース1f50bc5・公開10449。今回のソースは実装済み、配布前。既存10449のCI/公開物検証を今回の結果へ合算しない。
+
+## 実装
+
+- ホームの通常・変更・試験・返却の科目は現在の名称対応表の正式名称を優先。未対応・曖昧な照合は原名。週時間割・原文・解析結果・教員と教室の規則は維持。
+- 設定でシラバスの学科・入学年度区分11候補を選ぶ。既知のシラバスだけ開く直前に学科・JSTの当年を適用し、未選択は原URL。一覧・お気に入り・おすすめ・ブラウザ切替で共通。解析用年度とは独立し、半期切替でも個人設定を保持。
+- 一覧L・名称M・時刻Tの選択全8組合せを操作開始時に固定。なしは取得/認証なし。Lだけは学内standard、M/Tを含む場合はMicrosoft/strictを一回。初期選択は全種類で二重認証を起こさない。
+- 権限と期限を満たすtokenをメモリ内だけで再利用。取消・再起動・保存期間切替で破棄。交換途中で取消された応答はcacheを復活させない。各種類のrevision・保存・失敗は独立。
+- standardは一覧専用で本人確認ではない。学内確認はサーバー側、最終同意時にも再確認。学外・判定不能はMicrosoft。発行済みtokenは最大10分有効で、学外への移動時に即時失効はしない。リンク先サイト自身の認証は別。
+- XLSXの解析済み判定は現在SHA・年度・Parser・原本識別・確認内容を照合。古い失敗を現在資料へ表示せず、前回正常結果を保持した現在の再解析失敗は区別する。既存の原本再取得・全体再解析・失敗時選択保持は維持。
+
+PDF Strictの本文・入口・通過経路、認識器・モデル・採用条件は変更しない。学校資料を再取得せず、生成AIの品質合格や未知PDFの正読率を今回の成果として追加しない。
+
+## 検査
+
+Issue対応前のCoreは302件・失敗0。Integrationの選択全8組合せ、scope/assurance否定例、現在年度と確認内容の状態を実処理で検査。token交換・ES256署名・JWKSを通したmemory cacheの権限/期限/取消検査は17件・失敗0。追加後のIntegration全1166件・失敗0（41秒）。Python配布検査と一覧検査14件も失敗0。
+WinUIでは既存の実キーボード操作でシラバス設定A→B→Aと保存を追加し、認証済みtokenの再利用を確認する。取消テストは実再起動でmemory cacheを消してから継続し、token/結果注入で認証待ちを作らない。
+Issue #2の追加前ローカル検証と実ブラウザCIを区別する。全必須CI・全6導入状態・公開添付照合はこれから同じcommitで確認する。ARM64実機、学校アカウントの本番ログイン、実資料、通知・ロックはCIで代用しない。
+
+## サーバー
+
+認証506278c: main CI39147649729・Cloudflare本番成功。API1f9cbcb: main CI39148300682・本番確認39148341401・Cloudflare本番成功。links専用以外のstandardや追加scope・audience・別clientを拒否し、mapping/timesのMicrosoft条件を保持。
+両nativeクライアントの本番認可開始GETはこの環境からHTTP403。登録済みの過去記録を消さず、今回の実機認証成功にも数えない。
+
+## Issue #2 ローカルHTTP/HTTPS・popup
+
+HTTPはlocalhost/.localhost・loopback・RFC1918・link-local・IPv6 ULA・.local/.home.arpaだけを受理する。任意の外部HTTPや、ローカルと確定できない単一ラベル名は許可しない。取得データのValidUrl、通常/一時ブラウザ選択、WebView2のナビゲーション、外部ブラウザ操作で共通policyを使用する。
+公開ページからLANへの遷移・リソース要求は拒否。明示的に開いたローカルサイトでも他のホストへ無断移動させず、HTTP→HTTPSと同一ホストのポート切替だけ許可する。HTTPSにDNSでprivate IPを割り当てる挙動はローカルURL文字列だけで網羅できず、WebView2側のネットワーク保護も適用される。
+
+popupは元のWebViewへURLを代入せず、同じenvironment/profileの別WebViewをNewWindowへ割り当て、openerとabout:blank起点の文脈を保持する。上限4ページ。ブロック・初期化失敗は画面に表示する。ファイルダウンロードは既存どおり禁止。半期消去・ロック・アプリ終了では開いた全ページを閉じる。
+NavigationCompleted/ServerCertificateErrorDetected/ProcessFailedを表示し、DNS・接続・HTTP応答・証明書・アプリ拒否を分ける。診断は固定コードのみでURLクエリやtokenを記録しない。証明書はCancelを明示し、AlwaysAllowや恒久的な例外を導入しない。
+
+Windows必須UIジョブに実WebView2の追加検査を接続した。所有loopbackサーバー・架空HTML・一時CAだけを使用し、HTTP/localhost、正しいHTTPS、自己署名とホスト名不一致の拒否、target=_blank、window.open(about:blank)からの遷移、外部HTTPの拒否を実コントロールから操作する。CAはこのテストだけのCurrentUser Rootへ追加し、finallyで同じ証明書を削除する。学校サイト・外部サイトへ通信せず、OfflineTestではWebViewの全外部HTTP(S)要求も遮断する。
+本番の特定サイトの空白画面原因は、実URL/端末のエラー未採取のため断定しない。PDF表示メソッドのbytesは変更しない。
+
+公開前レビュー49でcache期限の起点を修正し、追加のブラウザ差分も同じ開始前レビューでblockingなし。Core335件・失敗0、UIテストのLinux cross buildは0警告/0エラー。ただしWebView2の本体・実動作はWindowsで確認する。DocumentsのShowPdf以降は旧HEADとbytes一致（SHA256 b63dbc1db4c8a94c99560e3e0bcac8e5f290630891d051a11d0a3c42571e1841）、MaterialCoordinator.cs全体もbytes一致。

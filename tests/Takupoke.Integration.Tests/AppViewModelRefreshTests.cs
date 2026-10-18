@@ -16,6 +16,21 @@ public sealed class ViewModelOfflineCollection;
 [Collection("view-model-offline")]
 public sealed class AppViewModelRefreshTests
 {
+    [Fact]
+    public void ChangeStatusRequiresCurrentYearSourceParserAndConsentsAndIgnoresOldFailure()
+    {
+        var date = DateTimeOffset.UtcNow;
+        var source = new SourceRecord("fictional-id", MaterialKind.Changes, "fictional.xlsx", "fictional-identity", "fictional.xlsx", "hash", 10, date, date, null);
+        var version = MaterialCoordinator.ParserVersion(MaterialKind.Changes);
+        var analysis = new MaterialAnalysis(source.Id, MaterialKind.Changes, version, source.Digest, source.OriginalName, date, 2032, Changes: []);
+        var failed = new MaterialAttempt(date, "synthetic failure", true, "old-hash", 2031, ParserVersion: version);
+        var snapshot = new MaterialSnapshot(source, analysis, failed, null);
+        Assert.Equal("解析済み", snapshot.AnalysisStatus(MaterialKind.Changes, 2032));
+        Assert.Equal("未解析（前回結果あり）", snapshot.AnalysisStatus(MaterialKind.Changes, 2033));
+        Assert.Equal("未解析（前回結果あり）", (snapshot with { Source = source with { WeekdayConsent = new(source.Digest, 2032, version) } }).AnalysisStatus(MaterialKind.Changes, 2032));
+        Assert.Equal("解析失敗（前回結果あり）", (snapshot with { Analysis = analysis with { SchoolYear = 2031 }, ParseAttempt = failed with { SourceDigest = source.Digest, SchoolYear = 2032 } }).AnalysisStatus(MaterialKind.Changes, 2032));
+        Assert.Equal("解析済み（再解析は失敗）", (snapshot with { ParseAttempt = failed with { SourceDigest = source.Digest, SchoolYear = 2032 } }).AnalysisStatus(MaterialKind.Changes, 2032));
+    }
     [Theory]
     [InlineData(false)]
     [InlineData(true)]

@@ -72,6 +72,7 @@ namespace Takupoke.Win.Platform
         public static void RegisterProtocol() => throw new NotSupportedException();
         public void HandleCallback(Uri uri) => throw new NotSupportedException();
         public Task<string> AuthenticateAsync(CancellationToken token) => throw new NotSupportedException();
+        public Task<string> AuthenticateAsync(IReadOnlyCollection<Takupoke.Infrastructure.Api.DataSet> requested, CancellationToken token) => throw new NotSupportedException();
         public void Cancel() { }
         public void Dispose() { }
     }

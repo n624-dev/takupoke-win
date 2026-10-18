@@ -17,4 +17,7 @@ $env:TAKUPOKE_DATA_ROOT = Join-Path $env:TAKUPOKE_CI_TEMP 'synthetic-screen-revi
 dotnet run --project (Join-Path $PSScriptRoot 'Takupoke.Win.UITests.csproj') --configuration Release --no-build -- --capture $executable $env:TAKUPOKE_DATA_ROOT
 if ($LASTEXITCODE -ne 0) { throw 'Isolated synthetic screen review failed.' }
 
-if (!$navigationPassed) { throw 'Windows UI automation checks failed.' }
+$env:TAKUPOKE_DATA_ROOT = Join-Path $env:TAKUPOKE_CI_TEMP 'synthetic-browser-review'
+dotnet run --project (Join-Path $PSScriptRoot 'Takupoke.Win.UITests.csproj') --configuration Release --no-build -- --browser-check $executable $env:TAKUPOKE_DATA_ROOT
+$browserPassed = $LASTEXITCODE -eq 0
+if (!$navigationPassed -or !$browserPassed) { throw 'Windows UI automation or real WebView2 browser checks failed.' }

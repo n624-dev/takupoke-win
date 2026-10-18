@@ -10,6 +10,32 @@ namespace Takupoke.Integration.Tests;
 
 public sealed class SharedDataUpdaterTests
 {
+    [Fact]
+    public async Task SelectedResourceCombinationsNeverAuthenticateTwiceOrFetchUnselectedData()
+    {
+        for (var mask = 0; mask < 8; mask++)
+        {
+            var root = Path.Combine(Path.GetTempPath(), "takupoke-selection-tests-" + Guid.NewGuid().ToString("N"));
+            using var protector = new Protector();
+            try
+            {
+                await using var store = new SchoolDataStore(root, protector);
+                var handler = new Handler(); using var http = new HttpClient(handler);
+                var updater = new SharedDataUpdater(new(http, new("https://example.invalid/")), store);
+                var selected = Enum.GetValues<DataSet>().Where((_, i) => (mask & (1 << i)) != 0).ToArray();
+                var authentications = 0;
+                var results = await updater.UpdateAsync(selected, (requested, _) =>
+                {
+                    authentications++; Assert.Equal(selected, requested); return Task.FromResult("fake-token");
+                });
+                Assert.Equal(mask == 0 ? 0 : 1, authentications);
+                Assert.Equal(selected.Length, handler.PublicRequests);
+                Assert.Equal(selected.Length, handler.AuthenticatedRequests);
+                Assert.Equal(selected.Order(), results.Select(r => r.Kind).Order());
+            }
+            finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+        }
+    }
     private const string Revision = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
     private sealed class Protector : IKeyProtector, IDisposable
     {

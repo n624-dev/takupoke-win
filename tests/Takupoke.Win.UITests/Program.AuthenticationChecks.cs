@@ -90,13 +90,23 @@ internal static partial class Program
             }
             Wait(() => !Visible("status-bar"), "success footer automatically hides");
             WriteProbe(Path.Combine(root, "offline-auth-revision.txt"), new string('C', 43));
+            File.Delete(state);
+            Invoke("update-account");
+            Wait(() => Find("update-account")?.Current.IsEnabled == true && !Visible("cancel-operation")
+                && ReadProbe(privateRequests) == "6", "A valid in-memory token updates all three changed datasets without a second login");
+            Require(!File.Exists(state) && ReadProbe(tokenRequests) == "2", "Token reuse opens no browser and exchanges no additional code.");
+            Wait(() => SavedAuthenticationRevisionsAsync(root, 'C').GetAwaiter().GetResult(), "Cached authentication still validates and commits all three new revisions");
+            // Real relaunch clears the transient token. Keep the existing
+            // token-exchange cancellation scenario; do not inject cache state.
             WriteProbe(mode, "hold"); File.Delete(state);
+            WriteProbe(Path.Combine(root, "offline-auth-revision.txt"), new string('D', 43));
+            Stop(); Start(executable); Navigate("settings"); Invoke("settings-account");
             Invoke("update-account"); Wait(() => File.Exists(state) && Visible("cancel-operation"), "another update is cancellable");
             SendCallback(executable, OidcClient.RedirectUri + "?code=fake-code&state=" + ReadProbe(state), shell: true);
-            Wait(() => ReadProbe(tokenRequests) == "3", "cancellation test reaches token exchange");
+            Wait(() => ReadProbe(tokenRequests) == "1", "cancellation test reaches a new process's token exchange");
             Invoke("cancel-operation");
             Wait(() => Find("update-account")?.Current.IsEnabled == true && !Visible("cancel-operation"), "canceling token exchange releases the UI");
-            Require(ReadProbe(privateRequests) == "3", "Cancellation preserves previous data and starts no private downloads.");
+            Require(ReadProbe(privateRequests) == "6", "Cancellation preserves previous data and starts no private downloads.");
             foreach (var kind in Enum.GetValues<DataSet>()) Require(Find("shared-status-" + kind)?.Current.Name == "取得済み", "Canceled authentication retains all prior datasets.");
             if (Visible("dismiss-status")) Invoke("dismiss-status");
             Require(!Visible("status-bar"), "The result footer can be dismissed immediately.");

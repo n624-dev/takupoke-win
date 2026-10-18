@@ -32,10 +32,13 @@ internal static partial class Program
                 return CheckInstallerDisplay(installer, caption);
             if (args is ["--shortcut", var shortcut, var target, var directory, var icon])
                 return CheckShortcut(shortcut, target, directory, icon);
+            var browserChecks = args is ["--browser-check", _, _];
+            if (browserChecks) args = args.Skip(1).ToArray();
             if (args.Length != 2 || Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") != "1")
                 throw new InvalidOperationException("An executable and isolated offline test data root are required.");
             // UI Automation returns physical pixels. Match the tested app's per-monitor context.
             if (SetThreadDpiAwarenessContext((nint)(-4)) == 0) throw new InvalidOperationException("Per-monitor coordinates could not be enabled for the test.");
+            if (browserChecks) { CheckBrowser(args[0], args[1]); return 0; }
             CheckApplication(args);
             Console.WriteLine($"Passed {_checks} Windows UI checks: hierarchical settings, desktop timetable geometry, raw and OS URI callbacks, fake OIDC verification and three datasets, failure/cancellation recovery, transient footer, persistence, colors, pointer and keyboard operations.");
             return 0;

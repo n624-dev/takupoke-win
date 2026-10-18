@@ -65,10 +65,10 @@ internal static partial class Program
     [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool SetForegroundWindow(nint window);
     [System.Runtime.InteropServices.DllImport("shell32.dll")]
     private static extern void SHChangeNotify(uint eventId, uint flags, nint item1, nint item2);
-    private static async Task<bool> SavedAuthenticationRevisionsAsync(string root)
+    private static async Task<bool> SavedAuthenticationRevisionsAsync(string root, char revision = 'B')
     {
         await using var store = new SchoolDataStore(root, new WindowsDpapiProtector()); var lease = await store.BeginAsync();
-        var expected = new string('B', 43);
+        var expected = new string(revision, 43);
         return (await store.ReadAsync<SavedLinks>(lease, "api.links"))?.Revision == expected
             && (await store.ReadAsync<SavedMapping>(lease, "api.mapping"))?.Revision == expected
             && (await store.ReadAsync<SavedTimes>(lease, "api.times"))?.Revision == expected;

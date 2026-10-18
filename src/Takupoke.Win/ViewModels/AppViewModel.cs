@@ -14,14 +14,21 @@ namespace Takupoke.Win.ViewModels;
 
 public sealed record MaterialSnapshot(SourceRecord? Source, MaterialAnalysis? Analysis, MaterialAttempt? ParseAttempt, MaterialAttempt? AcquisitionAttempt, RecoveryJob? RecoveryJob = null, RecoveryPreview? RecoveryPreview = null, RecoveryPreviewDisplay? RecoveryDisplay = null, RecoveryManualSession? ManualSession = null)
 {
-    public string AnalysisStatus(MaterialKind kind)
+    public string AnalysisStatus(MaterialKind kind, int? schoolYear = null)
     {
         if (Source is null) return "未選択";
         var previous = Analysis is null ? "" : "（前回結果あり）";
         if (AcquisitionAttempt?.Failure is not null) return "取得失敗" + previous;
-        if (ParseAttempt?.Failure is not null) return "解析失敗" + previous;
-        return Analysis is not null && Analysis.SourceDigest == Source.Digest && Analysis.ParserVersion == MaterialCoordinator.ParserVersion(kind)
-            ? "解析済み" : "未解析" + previous;
+        var current = Analysis is not null && Analysis.SourceDigest == Source.Digest && Analysis.ParserVersion == MaterialCoordinator.ParserVersion(kind)
+            && (kind != MaterialKind.Changes || Analysis.SchoolYear == schoolYear &&
+                Analysis.OriginalId == Source.Id && Analysis.DateDerivedWeekdays == (Source.WeekdayConsent?.Matches(Source, schoolYear ?? 0, Analysis.ParserVersion) == true) &&
+                (Analysis.RowSkipConsent is null ? Source.RowSkipConsent is null : Analysis.RowSkipConsent.SameAs(Source.RowSkipConsent)))
+            ;
+        if (ParseAttempt?.Failure is not null && (kind != MaterialKind.Changes ||
+            ParseAttempt.SourceDigest == Source.Digest && ParseAttempt.SchoolYear == schoolYear &&
+            ParseAttempt.ParserVersion == MaterialCoordinator.ParserVersion(kind)))
+            return kind == MaterialKind.Changes && current ? "解析済み（再解析は失敗）" : "解析失敗" + previous;
+        return current ? "解析済み" : "未解析" + previous;
     }
 }
 
@@ -336,20 +343,23 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         if (NotificationDiff.Digest(bytes) != preview.Document.PdfHash) { System.Security.Cryptography.CryptographicOperations.ZeroMemory(bytes); throw new InvalidDataException("原本のハッシュを確認できません。"); }
         return bytes;
     }
-    public Task UpdateSharedAsync() => RunAsync(async token =>
+    public Task UpdateSharedAsync() => UpdateSharedAsync(Enum.GetValues<DataSet>());
+    public Task UpdateSharedAsync(IReadOnlyCollection<DataSet> requested) => requested.Count == 0
+        ? Task.CompletedTask : UpdateSelectedSharedAsync(requested.Distinct().ToArray());
+    private Task UpdateSelectedSharedAsync(IReadOnlyCollection<DataSet> requested) => RunAsync(async token =>
     {
-        SharedUpdateResults = []; SharedUpdateMessage = null;
+        SharedUpdateResults = SharedUpdateResults.Where(result => !requested.Contains(result.Kind)).ToArray(); SharedUpdateMessage = null;
         InitializePlatform();
         if (!OfflineTest && !_protocolRegistered)
         { SharedUpdateMessage = PlatformMessage; Status = PlatformMessage!; return; }
         IReadOnlyList<UpdateResult> results;
-        try { results = await _shared.UpdateAsync(_authentication.AuthenticateAsync, token); }
+        try { results = await _shared.UpdateAsync(requested, _authentication.AuthenticateAsync, token); }
         catch (ApiException error) { SharedUpdateMessage = error.Message; throw; }
         catch (OperationCanceledException) { SharedUpdateMessage = "取得を中止しました。"; throw; }
         finally { if (!Locked) await ReloadAsync(CancellationToken.None); }
-        SharedUpdateResults = results;
+        SharedUpdateResults = SharedUpdateResults.Concat(results).ToArray();
         OperationStatus = "取得結果を確認しています。";
-        ApplyRevisionCheck(await _shared.CheckDetailedAsync(token), clearPreviousUpdateFailures: false);
+        ApplyRevisionCheck(await _shared.CheckDetailedAsync(requested, token), clearPreviousUpdateFailures: false);
         Status = string.Join(" / ", results.Select(r => DataSetLabel(r.Kind) + "：" + (r.Updated ? "更新しました" : r.Failure is { } failure ? new ApiException(failure).Message : "保持しています")));
     }, "更新情報を確認しています。");
     public IReadOnlyList<UpdateResult> SharedUpdateResults { get; private set; } = [];

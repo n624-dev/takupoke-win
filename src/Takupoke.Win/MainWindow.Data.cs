@@ -36,7 +36,8 @@ public sealed partial class MainWindow
         var attempts = Panel(SettingsSectionTitle("取得と解析の状況"));
         if (snapshot?.AcquisitionAttempt is { } acquisition)
             attempts.Children.Add(DataField("最終取得の試行 · " + DisplayDateTime(acquisition.At), acquisition.Failure ?? "取得済み"));
-        if (snapshot?.ParseAttempt is { } attempt)
+        if (snapshot?.ParseAttempt is { } attempt && (kind != MaterialKind.Changes ||
+            attempt.SourceDigest == source?.Digest && attempt.SchoolYear == _model.ParserYear && attempt.ParserVersion == MaterialCoordinator.ParserVersion(kind)))
         {
             if (attempt.RecoveryPending && attempt.SourceDigest == source?.Digest)
                 attempts.Children.Add(SettingsDescription("新しい資料は未反映です。"));
@@ -87,7 +88,8 @@ public sealed partial class MainWindow
         {
             results.Children.Add(SettingsDescription("未解析")); Add(Card(results)); return;
         }
-        if (analysis.SourceDigest != source?.Digest || analysis.ParserVersion != MaterialCoordinator.ParserVersion(kind))
+        if (analysis.SourceDigest != source?.Digest || analysis.ParserVersion != MaterialCoordinator.ParserVersion(kind)
+            || kind == MaterialKind.Changes && snapshot?.AnalysisStatus(kind, _model.ParserYear) != "解析済み")
             results.Children.Add(SettingsDescription("前回の正常な解析結果を表示しています。選択中の原本と異なる場合があります。"));
         var count = analysis.Timetable?.Lessons.Count ?? analysis.Changes?.Count ?? analysis.Special?.Lessons.Count ?? 0;
         results.Children.Add(DataField("最終解析成功", DisplayDateTime(analysis.ParsedAt)));
@@ -125,6 +127,7 @@ public sealed partial class MainWindow
             await _model.CorrectWeekdaysAsync(preview);
         panel.Children.Clear();
     }
+    private readonly HashSet<DataSet> _requestedSharedData = Enum.GetValues<DataSet>().ToHashSet();
     private void BuildAccountData()
     {
         TitleText("リンク・名称・授業時刻", "page-account"); BackToSettings();
@@ -137,13 +140,18 @@ public sealed partial class MainWindow
             var status = Text(failure is not null ? "要確認" : !saved ? "未取得" : state is null ? "取得済み" : state.Changed ? "更新あり" : "取得済み");
             Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(status, "shared-status-" + kind);
             if (failure is not null) status.Foreground = WarningBrush;
-            var panel = Panel(SettingsSectionTitle(AppViewModel.DataSetLabel(kind)), status,
+            var selected = OperationControl(new CheckBox { Content = AppViewModel.DataSetLabel(kind) + "を取得", IsChecked = _requestedSharedData.Contains(kind) });
+            AutomationProperties.SetAutomationId(selected, "shared-select-" + kind);
+            selected.Checked += (_, _) => _requestedSharedData.Add(kind);
+            selected.Unchecked += (_, _) => _requestedSharedData.Remove(kind);
+            var panel = Panel(SettingsSectionTitle(AppViewModel.DataSetLabel(kind)), selected, status,
                 Button("詳細を見る", () => SharedDetails(kind), "shared-details-" + kind));
             if (failure is { } value) panel.Children.Add(Text(new ApiException(value).Message));
             Add(Card(panel));
         }
         if (_model.SharedUpdateMessage is { } message) { var error = Text(message); error.Foreground = WarningBrush; Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(error, "account-update-error"); Add(error); }
-        Add(Card(Panel(OperationButton("更新を確認・取得", _model.UpdateSharedAsync, "update-account"))));
+        Add(Card(Panel(SettingsDescription("一覧だけなら学内ネットワークでMicrosoft認証を省略できます。名称データ・授業時刻を含む場合は、1回の学校アカウント認証でまとめて取得します。"),
+            OperationButton("更新を確認・取得", () => _model.UpdateSharedAsync(_requestedSharedData.ToArray()), "update-account"))));
     }
     private Task SharedDetails(DataSet kind)
     {

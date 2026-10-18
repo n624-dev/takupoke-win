@@ -1,7 +1,7 @@
 # API・年度別行事・更新失敗
 
 対応関係・宣言名・実行方法のSHA-256：
-`301e3753816061829658036846e70b08c285f80c5fbbe683ba385f69cb037272`
+`5e25dd9bb3d85512beab2bbb46b7a9b8df46a6ed7720eb9841030220a589af09`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -46,6 +46,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/SharedDataUpdaterTests.cs](../../tests/Takupoke.Integration.Tests/SharedDataUpdaterTests.cs)
 
+- `SelectedResourceCombinationsNeverAuthenticateTwiceOrFetchUnselectedData`
 - `SingleAuthenticationAndFailureOfOneDatasetDoesNotRollBackOthers`
 - `AuthenticationCancellationLeavesPreviouslySavedDataUntouched`
 - `CurrentRevisionsRequireNeitherAuthenticationNorDownloads`

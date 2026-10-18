@@ -25,13 +25,14 @@ public sealed partial class MainWindow
             _ => "normal"
         };
         var id = $"lesson-{(home ? "home" : "week")}-{day.Iso()}-{Uri.EscapeDataString(cls)}-{block.StartPeriod}-{block.EndPeriod}-{contentKind}-{lane}-{index}";
-        var button = Button(names.Subject, () => LessonDetail(day, cls, block), id);
+        var displaySubject = home ? names.DetailSubject : names.Subject;
+        var button = Button(displaySubject, () => LessonDetail(day, cls, block), id);
         var content = new StackPanel { Spacing = home ? 6 : 4, HorizontalAlignment = home ? HorizontalAlignment.Stretch : HorizontalAlignment.Center };
         if (change is not null) { var kind = Text(change.KindLabel, home ? 13 : 12); kind.Foreground = WarningBrush; content.Children.Add(kind); }
         if (inProgress) { var progress = Text("授業中", 12); progress.Foreground = ActionBrush; content.Children.Add(progress); }
         if (change?.IsCancellation != true)
         {
-            var source = names.Subject.Trim().Length == 0 ? "変更を確認" : names.Subject.Trim();
+            var source = displaySubject.Trim().Length == 0 ? "変更を確認" : displaySubject.Trim();
             var subject = Text(DisplayText.CellSubject(source), home ? 20 : 14);
             if (!home) { subject.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold; subject.MaxLines = 2; subject.TextTrimming = TextTrimming.CharacterEllipsis; }
             if (change is not null && !home)
@@ -114,8 +115,9 @@ public sealed partial class MainWindow
     private void AddMaterialWarnings()
     {
         var stale = _model.Materials.Where(item => item.Value.AcquisitionAttempt?.Failure is not null
-            || item.Value.ParseAttempt?.Failure is not null
-            || item.Value.Source is { } source && item.Value.Analysis is { } analysis && (source.Digest != analysis.SourceDigest || analysis.ParserVersion != MaterialCoordinator.ParserVersion(item.Key)))
+            || (item.Key == MaterialKind.Changes ? item.Value.Source is not null && item.Value.AnalysisStatus(item.Key, _model.ParserYear) != "解析済み" :
+                item.Value.ParseAttempt?.Failure is not null
+                || item.Value.Source is { } source && item.Value.Analysis is { } analysis && (source.Digest != analysis.SourceDigest || analysis.ParserVersion != MaterialCoordinator.ParserVersion(item.Key))))
             .ToArray();
         if (stale.Length == 0) return;
         var warnings = Panel(ScheduleHeading("時間割ファイルの確認が必要です", "info"));

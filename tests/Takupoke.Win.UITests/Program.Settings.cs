@@ -30,6 +30,13 @@ internal static partial class Program
             () => SavedSettings(preferences).OpeningMode == alternateOpening);
         SelectSettingsOptionWithKeyboard("link-opening-mode", OpeningLabel(initial.OpeningMode),
             () => SavedSettings(preferences).OpeningMode == initial.OpeningMode);
+        var departments = new[] { "学科を選択しない" }.Concat(SyllabusLinkPolicy.Departments.Select(d => d.Name)).ToArray();
+        var alternateDepartment = initial.SyllabusDepartmentId == "49" ? "50" : "49";
+        SelectSettingsOptionWithKeyboard("syllabus-department", SyllabusLinkPolicy.Departments.Single(d => d.Id == alternateDepartment).Name,
+            () => SavedSettings(preferences).SyllabusDepartmentId == alternateDepartment, departments);
+        var originalDepartment = SyllabusLinkPolicy.Departments.FirstOrDefault(d => d.Id == initial.SyllabusDepartmentId)?.Name ?? "学科を選択しない";
+        SelectSettingsOptionWithKeyboard("syllabus-department", originalDepartment,
+            () => SavedSettings(preferences).SyllabusDepartmentId == initial.SyllabusDepartmentId, departments);
         Require(SavedSettings(preferences).MainColor == initial.MainColor && SavedSettings(preferences).OpeningMode == initial.OpeningMode,
             "Both settings persist A to B to A on the same settings page.");
         return initial.OpeningMode;

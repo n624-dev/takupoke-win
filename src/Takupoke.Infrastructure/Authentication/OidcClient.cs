@@ -7,7 +7,8 @@ using Takupoke.Infrastructure.Api;
 
 namespace Takupoke.Infrastructure.Authentication;
 
-public sealed record AuthorizationAttempt(string Verifier, string State, string Nonce, Uri AuthorizationUri);
+public sealed record AuthorizationAttempt(string Verifier, string State, string Nonce, Uri AuthorizationUri,
+    string RequestedScopes = "openid mapping.read links.read", bool AllowSchoolNetwork = false);
 
 public sealed class OidcClient(HttpClient http, TimeProvider? timeProvider = null)
 {
@@ -16,18 +17,41 @@ public sealed class OidcClient(HttpClient http, TimeProvider? timeProvider = nul
     public const string RedirectUri = "jp.n624.takupoke.win:/oauth/callback";
     public const string Scopes = "openid mapping.read links.read";
     private readonly TimeProvider _clock = timeProvider ?? TimeProvider.System;
+    private readonly object _cacheGate = new();
+    private long _cacheGeneration;
+    private (string Token, HashSet<string> Scopes, DateTimeOffset Expires)? _cached;
+    public static string RequestedScopes(IReadOnlyCollection<DataSet> requested)
+    {
+        if (requested.Count == 0 || requested.Any(kind => !Enum.IsDefined(kind))) throw new ArgumentException("取得対象を選択してください。");
+        return "openid" + (requested.Any(kind => kind is DataSet.Mapping or DataSet.Times) ? " mapping.read" : "")
+            + (requested.Contains(DataSet.Links) ? " links.read" : "");
+    }
+    public bool TryCached(IReadOnlyCollection<DataSet> requested, out string token)
+    {
+        lock (_cacheGate)
+        {
+            if (_cached is { } cached && cached.Expires > _clock.GetUtcNow().AddSeconds(30)
+                && RequestedScopes(requested).Split(' ').All(cached.Scopes.Contains)) { token = cached.Token; return true; }
+            token = ""; return false;
+        }
+    }
+    public void ClearCache() { lock (_cacheGate) { _cacheGeneration++; _cached = null; } }
     public static string Base64Url(ReadOnlySpan<byte> data) => Convert.ToBase64String(data).TrimEnd('=').Replace('+', '-').Replace('/', '_');
     private static string RandomToken() => Base64Url(RandomNumberGenerator.GetBytes(32));
-    public static AuthorizationAttempt CreateAttempt()
+    public static AuthorizationAttempt CreateAttempt(IReadOnlyCollection<DataSet>? requested = null)
     {
+        requested ??= Enum.GetValues<DataSet>();
+        var scopes = RequestedScopes(requested);
+        var network = requested.All(kind => kind == DataSet.Links);
         var verifier = RandomToken(); var state = RandomToken(); var nonce = RandomToken();
         var fields = new Dictionary<string, string>
         {
-            ["response_type"] = "code", ["client_id"] = ClientId, ["redirect_uri"] = RedirectUri, ["scope"] = Scopes,
+            ["response_type"] = "code", ["client_id"] = ClientId, ["redirect_uri"] = RedirectUri, ["scope"] = scopes,
             ["state"] = state, ["nonce"] = nonce, ["code_challenge"] = Base64Url(SHA256.HashData(Encoding.ASCII.GetBytes(verifier))), ["code_challenge_method"] = "S256"
         };
+        if (network) fields["acr_values"] = "urn:takunin:assurance:standard";
         var query = string.Join("&", fields.Select(p => Uri.EscapeDataString(p.Key) + "=" + Uri.EscapeDataString(p.Value)));
-        return new(verifier, state, nonce, new(Issuer + "/oauth/authorize?" + query));
+        return new(verifier, state, nonce, new(Issuer + "/oauth/authorize?" + query), scopes, network);
     }
     public static string ValidateCallback(Uri callback, AuthorizationAttempt attempt)
     {
@@ -59,6 +83,7 @@ public sealed class OidcClient(HttpClient http, TimeProvider? timeProvider = nul
     }
     public async Task<string> ExchangeAsync(Uri callback, AuthorizationAttempt attempt, CancellationToken token = default)
     {
+        long generation; lock (_cacheGate) generation = _cacheGeneration;
         try
         {
             var code = ValidateCallback(callback, attempt);
@@ -71,6 +96,7 @@ public sealed class OidcClient(HttpClient http, TimeProvider? timeProvider = nul
                 })
             };
             request.Headers.Accept.ParseAdd("application/json");
+            var tokenRequestedAt = _clock.GetUtcNow();
             using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token);
             if (response.StatusCode != HttpStatusCode.OK) throw new ApiException(ApiFailure.Authentication);
             var bytes = await ApiClient.ReadBoundedAsync(response, 64 * 1024, token);
@@ -79,18 +105,24 @@ public sealed class OidcClient(HttpClient http, TimeProvider? timeProvider = nul
             var expires = data.GetProperty("expires_in").GetInt32();
             var scope = data.GetProperty("scope").GetString()!.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             var accessToken = data.GetProperty("access_token").GetString()!;
-            if (data.GetProperty("token_type").GetString() != "Bearer" || expires is < 1 or > 600 || !scope.Contains("mapping.read") || !scope.Contains("links.read")
+            if (data.GetProperty("token_type").GetString() != "Bearer" || expires is < 1 or > 600 || !scope.ToHashSet().SetEquals(attempt.RequestedScopes.Split(' '))
                 || string.IsNullOrEmpty(accessToken) || accessToken.Any(char.IsControl)) throw new ApiException(ApiFailure.Authentication);
             using var jwksRequest = new HttpRequestMessage(HttpMethod.Get, Issuer + "/oauth/jwks"); jwksRequest.Headers.Accept.ParseAdd("application/json");
             using var jwksResponse = await http.SendAsync(jwksRequest, HttpCompletionOption.ResponseHeadersRead, token);
             if (jwksResponse.StatusCode != HttpStatusCode.OK) throw new ApiException(ApiFailure.Authentication);
-            ValidateIdToken(data.GetProperty("id_token").GetString()!, await ApiClient.ReadBoundedAsync(jwksResponse, 64 * 1024, token), attempt.Nonce, _clock.GetUtcNow());
+            ValidateIdToken(data.GetProperty("id_token").GetString()!, await ApiClient.ReadBoundedAsync(jwksResponse, 64 * 1024, token), attempt.Nonce, _clock.GetUtcNow(), attempt.AllowSchoolNetwork);
+            token.ThrowIfCancellationRequested();
+            lock (_cacheGate)
+            {
+                if (_cacheGeneration != generation) throw new OperationCanceledException();
+                _cached = (accessToken, scope.ToHashSet(), tokenRequestedAt.AddSeconds(expires));
+            }
             return accessToken;
         }
         catch (OperationCanceledException) { throw; }
         catch { throw new ApiException(ApiFailure.Authentication); }
     }
-    public static void ValidateIdToken(string jwt, byte[] jwksBytes, string expectedNonce, DateTimeOffset now)
+    public static void ValidateIdToken(string jwt, byte[] jwksBytes, string expectedNonce, DateTimeOffset now, bool allowSchoolNetwork = false)
     {
         try
         {
@@ -104,10 +136,12 @@ public sealed class OidcClient(HttpClient http, TimeProvider? timeProvider = nul
             var kid = header.GetProperty("kid").GetString()!;
             var exp = claims.GetProperty("exp").GetDouble(); var iat = claims.GetProperty("iat").GetDouble();
             var amr = claims.GetProperty("amr").EnumerateArray().Select(e => e.GetString()).ToArray();
+            var acr = claims.GetProperty("acr").GetString();
+            var acceptedAssurance = amr.Length == 1 && (acr == "urn:takunin:assurance:strict" && amr[0] == "microsoft"
+                || allowSchoolNetwork && acr == "urn:takunin:assurance:standard" && amr[0] == "school_network");
             if (header.GetProperty("alg").GetString() != "ES256" || header.GetProperty("typ").GetString() != "JWT" || string.IsNullOrEmpty(kid)
                 || header.TryGetProperty("crit", out _) || claims.GetProperty("iss").GetString() != Issuer || claims.GetProperty("aud").GetString() != ClientId
-                || claims.GetProperty("nonce").GetString() != expectedNonce || claims.GetProperty("acr").GetString() != "urn:takunin:assurance:strict"
-                || amr.Length != 1 || amr[0] != "microsoft" || string.IsNullOrEmpty(claims.GetProperty("sub").GetString())
+                || claims.GetProperty("nonce").GetString() != expectedNonce || !acceptedAssurance || string.IsNullOrEmpty(claims.GetProperty("sub").GetString())
                 || !double.IsFinite(exp) || !double.IsFinite(iat) || exp <= now.ToUnixTimeSeconds() || iat > now.ToUnixTimeSeconds() + 30 || exp <= iat || exp - iat > 600)
                 throw new ApiException(ApiFailure.Authentication);
             var matches = keysDocument.RootElement.GetProperty("keys").EnumerateArray().Where(key =>

@@ -31,7 +31,7 @@ public sealed class SharedDataUpdater(ApiClient api, SchoolDataStore store)
         => CheckDetailedAsync(Enum.GetValues<DataSet>(), token);
     public Task<RevisionCheckResult> CheckDetailedAsync(DataSet kind, CancellationToken token = default)
         => CheckDetailedAsync([kind], token);
-    private async Task<RevisionCheckResult> CheckDetailedAsync(IEnumerable<DataSet> kinds, CancellationToken token)
+    public async Task<RevisionCheckResult> CheckDetailedAsync(IEnumerable<DataSet> kinds, CancellationToken token)
     {
         await _gate.WaitAsync(token);
         try
@@ -55,15 +55,21 @@ public sealed class SharedDataUpdater(ApiClient api, SchoolDataStore store)
         DataSet.Mapping => (await store.ReadAsync<SavedMapping>(lease, "api.mapping", token))?.Revision,
         _ => (await store.ReadAsync<SavedTimes>(lease, "api.times", token))?.Revision
     };
-    public async Task<IReadOnlyList<UpdateResult>> UpdateAsync(Func<CancellationToken, Task<string>> authenticate, CancellationToken token = default)
+    public Task<IReadOnlyList<UpdateResult>> UpdateAsync(Func<CancellationToken, Task<string>> authenticate, CancellationToken token = default)
+        => UpdateAsync(Enum.GetValues<DataSet>(), (_, cancellation) => authenticate(cancellation), token);
+    public async Task<IReadOnlyList<UpdateResult>> UpdateAsync(IReadOnlyCollection<DataSet> requested,
+        Func<IReadOnlyCollection<DataSet>, CancellationToken, Task<string>> authenticate, CancellationToken token = default)
     {
+        var selected = requested.Distinct().Order().ToArray();
+        if (selected.Any(kind => !Enum.IsDefined(kind))) throw new ArgumentException("取得対象を確認してください。");
+        if (selected.Length == 0) return [];
         await _gate.WaitAsync(token);
         try
         {
             var lease = await store.BeginAsync(token);
             var revisions = new Dictionary<DataSet, string>();
             var results = new List<UpdateResult>();
-            foreach (var kind in Enum.GetValues<DataSet>())
+            foreach (var kind in selected)
             {
                 try
                 {
@@ -75,7 +81,7 @@ public sealed class SharedDataUpdater(ApiClient api, SchoolDataStore store)
             }
             if (revisions.Count == 0) return results;
             // The token is transient and is never passed to storage.
-            var accessToken = await authenticate(token);
+            var accessToken = await authenticate(selected, token);
             foreach (var pair in revisions)
             {
                 token.ThrowIfCancellationRequested();

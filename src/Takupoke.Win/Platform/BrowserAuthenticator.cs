@@ -35,14 +35,18 @@ public sealed class BrowserAuthenticator(OidcClient oidc, Action<Uri>? openBrows
             catch (ApiException) { /* An unrelated or forged protocol activation cannot finish the current request. */ }
         }
     }
-    public void Cancel() { lock (_callbackGate) _callback?.TrySetCanceled(); }
-    public async Task<string> AuthenticateAsync(CancellationToken token)
+    public void Cancel() { oidc.ClearCache(); lock (_callbackGate) _callback?.TrySetCanceled(); }
+    public Task<string> AuthenticateAsync(CancellationToken token) => AuthenticateAsync(Enum.GetValues<DataSet>(), token);
+    public async Task<string> AuthenticateAsync(IReadOnlyCollection<DataSet> requested, CancellationToken token)
     {
         await _gate.WaitAsync(token);
         try
         {
+            token.ThrowIfCancellationRequested();
+            if (oidc.TryCached(requested, out var cached)) return cached;
+            oidc.ClearCache();
             using var deadline = CancellationTokenSource.CreateLinkedTokenSource(token); deadline.CancelAfter(TimeSpan.FromMinutes(10));
-            var attempt = OidcClient.CreateAttempt(); var completion = new TaskCompletionSource<Uri>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var attempt = OidcClient.CreateAttempt(requested); var completion = new TaskCompletionSource<Uri>(TaskCreationOptions.RunContinuationsAsynchronously);
             lock (_callbackGate) { _attempt = attempt; _callback = completion; }
             using var registration = deadline.Token.Register(() => completion.TrySetCanceled(deadline.Token));
             ProgressChanged?.Invoke("ブラウザでの認証を待っています。");
