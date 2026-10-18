@@ -103,13 +103,13 @@ internal sealed class BrowserFixtureCertificates : IDisposable
         request.CertificateExtensions.Add(new X509BasicConstraintsExtension(true, false, 0, true));
         request.CertificateExtensions.Add(new X509KeyUsageExtension(X509KeyUsageFlags.KeyCertSign, true));
         _root = request.CreateSelfSigned(DateTimeOffset.UtcNow.AddMinutes(-5), DateTimeOffset.UtcNow.AddDays(1));
-        Trusted = Leaf("127.0.0.1", true); Mismatched = Leaf("fictional.invalid", true); Untrusted = Leaf("127.0.0.1", false);
         // User Root import can wait for system consent, including certutil -f.
         // The disposable elevated CI runner uses its machine Root for this one
         // synthetic CA; normal browser TLS verification remains enabled.
         var file = Path.Combine(Path.GetTempPath(), "takupoke-browser-root-" + Guid.NewGuid().ToString("N") + ".cer");
         try
         {
+            Trusted = Leaf("127.0.0.1", true); Mismatched = Leaf("fictional.invalid", true); Untrusted = Leaf("127.0.0.1", false);
             File.WriteAllBytes(file, _root.Export(X509ContentType.Cert));
             Console.WriteLine("Browser fixture stage: import synthetic root certificate");
             CertUtil("-addstore", "Root", file);
@@ -129,9 +129,22 @@ internal sealed class BrowserFixtureCertificates : IDisposable
         request.CertificateExtensions.Add(san.Build());
         request.CertificateExtensions.Add(new X509BasicConstraintsExtension(false, false, 0, true));
         request.CertificateExtensions.Add(new X509EnhancedKeyUsageExtension(new System.Security.Cryptography.OidCollection { new("1.3.6.1.5.5.7.3.1") }, true));
-        if (!trusted) return request.CreateSelfSigned(DateTimeOffset.UtcNow.AddMinutes(-2), DateTimeOffset.UtcNow.AddHours(1));
-        using var signed = request.Create(_root, DateTimeOffset.UtcNow.AddMinutes(-2), DateTimeOffset.UtcNow.AddHours(1), RandomNumberGenerator.GetBytes(16));
-        return signed.CopyWithPrivateKey(key);
+        X509Certificate2 leaf;
+        if (!trusted) leaf = request.CreateSelfSigned(DateTimeOffset.UtcNow.AddMinutes(-2), DateTimeOffset.UtcNow.AddHours(1));
+        else
+        {
+            using var signed = request.Create(_root, DateTimeOffset.UtcNow.AddMinutes(-2), DateTimeOffset.UtcNow.AddHours(1), RandomNumberGenerator.GetBytes(16));
+            leaf = signed.CopyWithPrivateKey(key);
+        }
+        using (leaf)
+        {
+            // Windows SChannel cannot use the generated ephemeral private key.
+            // UserKeySet without PersistKeySet gives it an OS key container that
+            // X509Certificate2 deletes on Dispose. The PKCS12 never goes to a file.
+            var pkcs12 = leaf.Export(X509ContentType.Pkcs12);
+            try { return X509CertificateLoader.LoadPkcs12(pkcs12, null, X509KeyStorageFlags.UserKeySet); }
+            finally { CryptographicOperations.ZeroMemory(pkcs12); }
+        }
     }
     public void Dispose()
     {
@@ -144,7 +157,7 @@ internal sealed class BrowserFixtureCertificates : IDisposable
             if (verified.Certificates.Find(X509FindType.FindByThumbprint, _root.Thumbprint, false).Count != 0)
                 throw new InvalidOperationException("The owned synthetic root was not removed.");
         }
-        finally { Trusted.Dispose(); Mismatched.Dispose(); Untrusted.Dispose(); _root.Dispose(); _rootKey.Dispose(); }
+        finally { Trusted?.Dispose(); Mismatched?.Dispose(); Untrusted?.Dispose(); _root.Dispose(); _rootKey.Dispose(); }
     }
     private static void CertUtil(params string[] arguments)
     {

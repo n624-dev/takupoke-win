@@ -1,3 +1,20 @@
+## W24 ローカルcross buildのMSBuild child node終了（2026-10-19）
+
+- 6a756e9の未コミットTLS fixture修正に対するLinux .NET10.0.402 cross buildでMSB4166、child node2が途中終了。compileのC#エラーではなく追加の失敗ファイル先は/tmp/MSBuildTempM5EYFV。1.46秒でbuild failure、0警告/1エラー。修正v1は同環境で17.16秒/0エラーだった。Actionsはまだ開始していない。対処を決める前に記録し、診断と既存ビルド条件を照合する。
+
+- 指定のfailure一時ディレクトリは既に存在せず、追加詳細は取得できなかった。観測時の使用可能メモリ約17GiB、残存dotnet childなし。OOMや製品エラーとは断定しない。CIは既にnode reuseを無効化するがローカルの短いbuildは同条件を明示していなかった。次は同じソースを単一node・node reuse/共有compiler無効でbuildし、診断先を所有領域へ固定する。C#検査・期待値は省略せず、ソースを変更しない。単一nodeの同ソースbuildは8.08秒、0警告/0エラーで成功した。
+
+## W23 第12焦点CIがfailure終端（2026-10-19）
+
+- source6a756e91bc4c38c56727347aadb40cadd313faa1、run39156611230/attempt1、job117761039853。18:58:36Z開始・19:01:12Z failure、実ブラウザstep失敗。TLS server診断追加の初回。完了ログ取得前で握手のnativecode未確定。W22と過去・実コードを照合し、検査やTLS条件を緩めず次の候補を決める。
+
+- 完了ログSHA2d5aa107d0d758fe803c0e1aea8c8fd8e9a4ba3b34c5b3c7e3bce5bb00090b6a。35checks後のtrustedTLSでserver側AuthenticationException / Win32Exception / native8009030E（SEC_E_NO_CREDENTIALS）が反復し、HTTP受信0。製品の証明書拒否前に、検証用SslStreamがserver資格情報を取得できていない。
+- [公式.NET Windows SslStream実装](https://github.com/dotnet/runtime/blob/main/src/libraries/System.Net.Security/src/System/Net/Security/SslStreamPal.Windows.cs)はNoCredentialsとephemeral private keyの非対応を明示する。今回Leafは生成したephemeral鍵をCopyWithPrivateKeyのまま渡しており条件が一致する。次は同じ一時leaf証明書をメモリ内PKCS12からUserKeySetとして読み込み、SChannelが利用できる短命key handleを渡す。PersistKeySetは使わず、[公式Loader](https://github.com/dotnet/runtime/blob/main/src/libraries/System.Security.Cryptography/src/System/Security/Cryptography/X509Certificates/X509CertificateLoader.Windows.cs)のdeleteKeyContainer経路と既存Disposeで回収する。PKCS12 bytesはfinallyでzero化し、ファイル出力/恒久的な鍵保存/製品変更/TLS検証回避をしない。CA・SAN・署名・期限・本文とinvalidTLS期待は維持する。
+
+- 開始前レビュー66でも、Leaf2/3件目の生成失敗が既存tryの前にあり、先に生成したOS鍵の即時回収が抜ける点を指摘。Actions未開始。全leaf生成を既存try内へ移し、Disposeは未生成propertyを安全に飛ばして既存の所有CA・鍵を回収する。新しい期待値やTLS例外を追加しない。
+
+- 同じ未開始Actionsのfresh66再レビューはblockingなし。部分生成cleanup修正を含む最終cross buildはW24の実行環境切分け後、8.08秒/0警告/0エラーで成功。catalog整合成功。次はこのfixtureで正しいTLSと拒否TLSの実WebView2条件を検証する。
+
 ## W22 第11焦点CIがfailure終端（2026-10-19）
 
 - source10bcca9723f9ab5d462ad08ea83f1df1663c589c、run39156249911/attempt1、job117759965026。18:53:44Z開始・18:56:33Z failure、実ブラウザstep失敗。既存targetへの追加client接続候補の初回。完了ログ取得前で新しい失敗段階未確定。W21・コード・新しい実測を照合してから候補を決める。
