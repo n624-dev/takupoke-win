@@ -40,8 +40,9 @@ Windowsの配布は0.xの開発中の版も通常Releaseとして公開し、Lat
 Pre-releaseにはしない。版番号の開発中表記と未確認事項は保持する。
 公開後に通常Releaseの状態・Latest・ビルド元コミットをAPIで照合する。
 
-旧開発検証の置換は、利用者が許可した未開始pendingだけを対象にする。
-実行中のActionsと公開処理はキャンセルせず、自動cancel-in-progressは有効化しない。
+Actionsは失敗後もキャンセルせず、残りの終端を確認する。以前の未開始pending取消の許可も撤回済み。
+公開処理もキャンセルせず、自動cancel-in-progressは有効化しない。
+同じconcurrency groupにpendingがある間は第三の実行を追加せず、GitHubによるpending置換も避ける。
 
 最初の改修対象は、一律テスト編集義務の撤廃、手動訂正UIの整理、
 同じジョブ内の準備・ビルド再利用とする。

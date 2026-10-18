@@ -1,3 +1,17 @@
+## W15 第4焦点CIが実ブラウザstepでfailure終端（2026-10-19）
+
+- source5042ecf7e3a23f47b1a1d2273d07a3d5d67ef4cb、run39152709117/attempt1、job117749448846。18:07:29Z開始・18:10:18Z failure。登録/WinUI build成功、実ブラウザstep失敗。完了ログ取得前でCA準備か実画面かは未確定。対処前に記録しW13/W10・コードを照合する。
+
+- 完了ログSHA315274e02532160a9591f52431b8305524207b16250e7d4fc2ac7c8235a8a67e。CAは18:09:33Zに登録成功、loopback起動・app起動・実link0操作後、HTTP見出しの30秒待機がtimeout（6checks）。CA準備停止を通過したがHTTP本文の描画は未確認。UIAが本文を取得できないのかnavigation/initialization/networkなのか未確定。
+- W07/W13・旧Documentsと新Browser/fixture/Waitを照合。完了ログはmain windowの診断だけで、別browser windowのstatus/code/実UIA subtreeとserver到達数を記録していない。次は失敗時だけ所有架空browserのbounded診断とHTTP/TLS到達数を記録する。成功条件・30秒・実DOM操作・本体は変更せず、未観測を推測で修正しない。診断中の例外も元の失敗を覆わず、型のみ出力する。ローカルcross buildは0警告/0エラー（最終7.30秒）、fresh58はblockingなし。
+
+## W14 先に待機済みだった10451もUI上限で終了（2026-10-19）
+
+- sourcecef764862c49e7a8188bc24ca21793d0ea281af2、run39150336346/attempt1、job117744932870。17:47:08Z開始・18:07:17Z cancelled終端、主担当は取消していない。前段6成功・package依存skip、公開なし。
+- W10失敗判明前に既にpendingだった同じ旧fixture版であり、W10後の無変更再試行ではない。完了ログ取得前で停止段階は未確定。新しい焦点4は別修正source5042ecfを検査する。前後結果を合算せず、実ブラウザ成功後も正式全8を行う。
+
+- 完了ログSHA c328b63a54c50bc8b8996da086bccba4700f30a8b640bb6315f26c6ebe255d40。17:52:13Zに通常UI1058チェック成功、その後captureを経てbrowser準備で無出力、18:07:09Z job上限停止。W10と同じ旧Root準備候補で、製品の通常UI失敗ではない。focus4はLocalMachineの明示importと段階記録で比較する。
+
 ## W13 第3焦点CIが実ブラウザstepでfailure終端（2026-10-19）
 
 - source19c715df917dcea2271b42a391602989b30c801d、run39152378034/attempt1、job117748477969。18:03:13Z開始・18:05:36Z failure。公開登録・WinUI buildは成功、実WebView2検査stepが失敗。完了ログ取得前で停止操作/原因は未確定。W10/W11/W12・実fixture/appコードと照合してから候補を決める。

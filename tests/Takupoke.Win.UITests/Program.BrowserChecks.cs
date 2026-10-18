@@ -34,38 +34,61 @@ internal static partial class Program
         AutomationElement? Text(AutomationElement page, string name) => page.FindFirst(TreeScope.Descendants,
             new PropertyCondition(AutomationElement.NameProperty, name));
         void Close(AutomationElement page) => ((WindowPattern)page.GetCurrentPattern(WindowPattern.Pattern)).Close();
-        var first = Open(0);
-        Wait(() => Text(first, "架空ローカルページ到達") is not null, "Actual HTTP loopback response appears inside WebView2");
-        foreach (var (label, heading) in new[] { ("架空新規リンク", "架空新規ページ到達"), ("架空空白から開く", "架空空白からの遷移到達") })
+        try
         {
-            Console.WriteLine("Browser fixture stage: popup " + label);
-            var button = Text(first, label); Require(button is not null, "The served popup control is present");
-            Invoke(button!);
-            AutomationElement? child = null;
-            Wait(() => (child = Pages().FirstOrDefault(p => !p.GetRuntimeId().SequenceEqual(first.GetRuntimeId()) && Text(p, heading) is not null)) is not null,
-                "The real popup retains its new-window context and reaches the served page");
-            Close(child!); Wait(() => Pages().Length == 1, "Closing the popup retains its opener");
+            var first = Open(0);
+            Wait(() => Text(first, "架空ローカルページ到達") is not null, "Actual HTTP loopback response appears inside WebView2");
+            foreach (var (label, heading) in new[] { ("架空新規リンク", "架空新規ページ到達"), ("架空空白から開く", "架空空白からの遷移到達") })
+            {
+                Console.WriteLine("Browser fixture stage: popup " + label);
+                var button = Text(first, label); Require(button is not null, "The served popup control is present");
+                Invoke(button!);
+                AutomationElement? child = null;
+                Wait(() => (child = Pages().FirstOrDefault(p => !p.GetRuntimeId().SequenceEqual(first.GetRuntimeId()) && Text(p, heading) is not null)) is not null,
+                    "The real popup retains its new-window context and reaches the served page");
+                Close(child!); Wait(() => Pages().Length == 1, "Closing the popup retains its opener");
+            }
+            Invoke(Text(first, "架空外部HTTP拒否")!);
+            Wait(() => Text(first, "BlockedNavigation") is not null, "Disallowed external HTTP navigation reports a reason");
+            Close(first); Wait(() => Pages().Length == 0, "The first local browser closes");
+            var named = Open(1); Wait(() => Text(named, "架空ローカルページ到達") is not null, "Localhost HTTP reaches the same real test server"); Close(named);
+            Wait(() => Pages().Length == 0, "The localhost browser closes");
+            var trusted = Open(2); Wait(() => Text(trusted, "架空ローカルページ到達") is not null, "A valid trusted HTTPS certificate renders normally"); Close(trusted);
+            Wait(() => Pages().Length == 0, "The valid HTTPS browser closes");
+            foreach (var index in new[] { 3, 4 })
+            {
+                var invalid = Open(index);
+                Wait(() => invalid.FindFirst(TreeScope.Descendants, new AndCondition(
+                    new PropertyCondition(AutomationElement.AutomationIdProperty, "browser-error-code"),
+                    new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Text)))?.Current.Name.Contains("Certificate", StringComparison.Ordinal) == true,
+                    "An invalid HTTPS certificate is rejected with its actual WebView2 error code");
+                Require(Text(invalid, "架空ローカルページ到達") is null, "Certificate errors never bypass verification or render the protected page");
+                Close(invalid); Wait(() => Pages().Length == 0, "The rejected HTTPS browser closes");
+            }
+            Require(http.Requests > 0 && https.Requests > 0 && mismatched.Requests == 0 && untrusted.Requests == 0,
+                "HTTP and trusted HTTPS reach the server; invalid TLS stops before any HTTP request");
+            Console.WriteLine($"Passed {_checks} real WebView2 browser checks: HTTP, localhost, trusted TLS, rejected TLS and new-window contexts.");
         }
-        Invoke(Text(first, "架空外部HTTP拒否")!);
-        Wait(() => Text(first, "BlockedNavigation") is not null, "Disallowed external HTTP navigation reports a reason");
-        Close(first); Wait(() => Pages().Length == 0, "The first local browser closes");
-        var named = Open(1); Wait(() => Text(named, "架空ローカルページ到達") is not null, "Localhost HTTP reaches the same real test server"); Close(named);
-        Wait(() => Pages().Length == 0, "The localhost browser closes");
-        var trusted = Open(2); Wait(() => Text(trusted, "架空ローカルページ到達") is not null, "A valid trusted HTTPS certificate renders normally"); Close(trusted);
-        Wait(() => Pages().Length == 0, "The valid HTTPS browser closes");
-        foreach (var index in new[] { 3, 4 })
+        catch
         {
-            var invalid = Open(index);
-            Wait(() => invalid.FindFirst(TreeScope.Descendants, new AndCondition(
-                new PropertyCondition(AutomationElement.AutomationIdProperty, "browser-error-code"),
-                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Text)))?.Current.Name.Contains("Certificate", StringComparison.Ordinal) == true,
-                "An invalid HTTPS certificate is rejected with its actual WebView2 error code");
-            Require(Text(invalid, "架空ローカルページ到達") is null, "Certificate errors never bypass verification or render the protected page");
-            Close(invalid); Wait(() => Pages().Length == 0, "The rejected HTTPS browser closes");
+            Console.Error.WriteLine($"Synthetic browser requests: http={http.Requests};https={https.Requests};mismatched={mismatched.Requests};untrusted={untrusted.Requests}");
+            try
+            {
+                foreach (var page in Pages())
+                {
+                    Console.Error.WriteLine("Synthetic browser window: " + page.Current.BoundingRectangle);
+                    foreach (var element in page.FindAll(TreeScope.Descendants, Condition.TrueCondition).Cast<AutomationElement>().Take(60))
+                    {
+                        var current = element.Current;
+                        var name = current.Name.Replace('\r', ' ').Replace('\n', ' ');
+                        if (name.Length > 300) name = name[..300];
+                        Console.Error.WriteLine($"Synthetic browser element: type={current.ControlType.ProgrammaticName};id={current.AutomationId};name={name};offscreen={current.IsOffscreen};bounds={current.BoundingRectangle}");
+                    }
+                }
+            }
+            catch (Exception diagnosticError) { Console.Error.WriteLine("Synthetic browser diagnostic unavailable: " + diagnosticError.GetType().Name); }
+            throw;
         }
-        Require(http.Requests > 0 && https.Requests > 0 && mismatched.Requests == 0 && untrusted.Requests == 0,
-            "HTTP and trusted HTTPS reach the server; invalid TLS stops before any HTTP request");
-        Console.WriteLine($"Passed {_checks} real WebView2 browser checks: HTTP, localhost, trusted TLS, rejected TLS and new-window contexts.");
     }
     private static async Task SeedBrowserLinksAsync(string root, Uri[] addresses)
     {
