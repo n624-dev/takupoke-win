@@ -40,6 +40,7 @@ public sealed class ApiClient(HttpClient http, Uri? baseUri = null, TimeProvider
             request.Headers.Authorization = new("Bearer", accessToken);
         }
         if (accept is not null) request.Headers.Accept.Add(new(accept));
+        if (path is "links" or "links-revision") request.Headers.Add("X-Takupoke-Link-Capabilities", "local-http-v1");
         return request;
     }
     private static void Success(HttpResponseMessage response, string contentType)

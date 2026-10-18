@@ -98,6 +98,30 @@ public sealed class ApiClientTests
         Assert.Equal(ApiFailure.Changed, (await Assert.ThrowsAsync<ApiException>(() => Client(http).DownloadLinksAsync("fake-token", Revision))).Failure);
     }
     [Fact]
+    public async Task LocalHttpCapabilityUsesTheSameRepresentationForRevisionAndDownloadOnly()
+    {
+        var payload = new LinksPayload("v1", "sha256-" + new string('b', 64),
+            [new("fake-category", "架空カテゴリ", 1, [new("fake-local", "fake-category", "架空ローカル", "http://127.0.0.1:4321/fictional", "blue", true, 1, false, 0, [], "架空ローカル")])]);
+        var paths = new List<string>();
+        using var http = new HttpClient(new Handler(request =>
+        {
+            var path = request.RequestUri!.AbsolutePath; paths.Add(path);
+            Assert.Equal(path is "/links" or "/links-revision", request.Headers.Contains("X-Takupoke-Link-Capabilities"));
+            if (path is "/links" or "/links-revision") Assert.Equal("local-http-v1", Assert.Single(request.Headers.GetValues("X-Takupoke-Link-Capabilities")));
+            return path switch {
+                "/links-revision" => Response(HttpStatusCode.OK, headers: [("ETag", '"' + Revision + '"')]),
+                "/links" => Response(HttpStatusCode.OK, Encoding.UTF8.GetString(DataCodec.Encode(payload)), headers: [("X-Links-Revision", Revision), ("ETag", "\"fictional-local\"")]),
+                _ => Response(HttpStatusCode.OK, headers: [("ETag", '"' + Revision + '"')])
+            };
+        }));
+        var client = Client(http);
+        var revision = await client.CheckRevisionAsync(DataSet.Links, null);
+        Assert.Equal("http://127.0.0.1:4321/fictional", Assert.Single((await client.DownloadLinksAsync("fictional-token", revision.Revision)).Payload.Items).Href);
+        await client.CheckRevisionAsync(DataSet.Mapping, null);
+        await client.CheckRevisionAsync(DataSet.Times, null);
+        Assert.Equal(new[] { "/links-revision", "/links", "/mapping-revision", "/timetable-times-revision" }, paths);
+    }
+    [Fact]
     public async Task ValidLinksAreDecodedOnlyAfterHeadersAndContentTypeMatch()
     {
         var payload = new LinksPayload("v1", "sha256-" + new string('a', 64),

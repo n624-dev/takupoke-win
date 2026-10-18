@@ -1,3 +1,8 @@
+## W09 HTTPリンクの配信側拒否を追加確認（2026-10-19）
+
+- Issue #2のcross-repo照合で、API src/links.tsもHTTPを拒否していることを確認。アプリだけのURL受理変更では直接HTTPリンクを配信できない。
+- APIを単純に許可へ変えると旧iOS/Webが一覧全体を拒否し得るため、対応Windowsが明示するcapabilityで表現を分ける。revision確認と本文取得は同じ表現へ結び付ける。10450のCIは取消さず、追加修正の同一commit検査と10451配布へ進む。
+
 ## W08 ブラウザ架空サーバーのcross buildでSystem.IO import不足（2026-10-19）
 
 - Linux/.NET10.0.402、BrowserFixtureServer.cs追加後のUIテストcross buildがCS0246(Stream/StreamReader)・CS0103(IOException)で停止。実ブラウザは未実行。既存ファイルはSystem.IOを明示importしており、このファイルで不足していた。

@@ -1,7 +1,7 @@
 # API・年度別行事・更新失敗
 
 対応関係・宣言名・実行方法のSHA-256：
-`5e25dd9bb3d85512beab2bbb46b7a9b8df46a6ed7720eb9841030220a589af09`
+`1377a29fe76fd18261c4ab566935d84d09047f49fcfa2d79d5b6f2aebd057e90`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -25,6 +25,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `PublicRevisionNeverSendsAuthenticationAndUsesInstalledRevision`
 - `RejectsRevisionBodyOrMalformedIdentifier`
 - `ChangedDuringDownloadDoesNotProduceNewPayload`
+- `LocalHttpCapabilityUsesTheSameRepresentationForRevisionAndDownloadOnly`
 - `ValidLinksAreDecodedOnlyAfterHeadersAndContentTypeMatch`
 - `MatchingWeakEventsEtagReusesSavedPayload`
 - `EventsFirstDownloadThenRepeatedWeakEtagChecksReachTheServer`
