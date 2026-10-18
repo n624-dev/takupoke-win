@@ -20,7 +20,7 @@ internal static partial class Program
         SeedBrowserLinksAsync(root, [http.Address, new UriBuilder(http.Address) { Host = "localhost" }.Uri,
             https.Address, mismatched.Address, untrusted.Address]).GetAwaiter().GetResult();
         Console.WriteLine("Browser fixture stage: launch app with fictional local links");
-        Start(executable); Navigate("links");
+        Start(executable, browserAccessibility: true); Navigate("links");
         AutomationElement[] Pages() => AutomationElement.RootElement.FindAll(TreeScope.Children,
             new AndCondition(new PropertyCondition(AutomationElement.ProcessIdProperty, _process!.Id),
                 new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window)))
@@ -48,6 +48,12 @@ internal static partial class Program
                     "The real popup retains its new-window context and reaches the served page");
                 Close(child!); Wait(() => Pages().Length == 1, "Closing the popup retains its opener");
             }
+            var external = first.FindFirst(TreeScope.Descendants,
+                new PropertyCondition(AutomationElement.AutomationIdProperty, "外部ブラウザで開く"));
+            Require(external is not null && external.Current.IsEnabled, "The native external-browser control accepts the local HTTP destination");
+            Invoke(external!);
+            Wait(() => Text(first, "OfflineExternalLaunchBlocked") is not null,
+                "The real external-browser operation reaches the offline launch guard without starting an external process");
             Invoke(Text(first, "架空外部HTTP拒否")!);
             Wait(() => Text(first, "BlockedNavigation") is not null, "Disallowed external HTTP navigation reports a reason");
             Close(first); Wait(() => Pages().Length == 0, "The first local browser closes");

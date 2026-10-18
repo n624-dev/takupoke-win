@@ -16,9 +16,13 @@ namespace Takupoke.Win.UITests;
 
 internal static partial class Program
 {
-    private static void Start(string executable)
+    private static void Start(string executable, bool browserAccessibility = false)
     {
-        _process = Process.Start(new ProcessStartInfo(Path.GetFullPath(executable)) { UseShellExecute = false }) ?? throw new InvalidOperationException("App did not start.");
+        var start = new ProcessStartInfo(Path.GetFullPath(executable)) { UseShellExecute = false };
+        // Chromium exposes its renderer tree on demand. Enable that real tree
+        // for this isolated browser automation, without changing normal starts.
+        if (browserAccessibility) start.Environment["WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS"] = "--force-renderer-accessibility";
+        _process = Process.Start(start) ?? throw new InvalidOperationException("App did not start.");
         Wait(() =>
         {
             _process.Refresh();

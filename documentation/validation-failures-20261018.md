@@ -1,3 +1,13 @@
+## W16 第5焦点CIがfailure終端（2026-10-19）
+
+- source6edbb90c30fd32fabcef0e1e7128570a0dab9978、run39153263397/attempt1、job117751121648。18:14:45Z開始・18:16:49Z failure。診断追加版の初回結果。完了ログ取得前で詳細未確定。W15のHTTP見出し失敗と同じか、画面/サーバーの実測を照合してから対処する。
+
+- 完了ログSHA6d38fe62d26ac61fae6d0a7c9803039815188fff73b41ef17a563e2cdde1f35b。CA成功後HTTP serverは2 requests到達、ブラウザstatusは「ページを表示しました。」、error空。実browser frame768×519、WebView相当pane752×355はoffscreen=falseだがDOM childがUIAへ現れず、HTTP見出し30秒timeout（6checks）。network/初期化エラーを示す証拠ではない。
+- W15の推測修正をせずbrowser状態を追加観測した結果。次の方針前にWebView2/Chromium accessibilityの公式資料と実UIA取得条件を照合する。実本文/実popup操作の検査をstatusだけの成功へ置換しない。
+
+- Microsoftの[WebView2 browser flags](https://learn.microsoft.com/microsoft-edge/webview2/concepts/webview-features-flags)とChromiumの[実装](https://chromium.googlesource.com/chromium/src/+/HEAD/ui/accessibility/accessibility_switches.cc)を照合。rendererのaccessibility treeはscreen reader検出時に有効化され、検査用force-renderer-accessibilityで明示有効化できる。今回のUIA空paneと整合する候補であり、描画失敗とは断定しない。
+- 次はbrowser-checkで起動する所有app子processだけに同flagを与え、実HTMLの見出し/リンク/popupを元どおりUIA操作する。既定の通常UI起動・製品コード・TLS検証・成功条件・30秒は変えない。HTTP到達/statusだけを本文検査の代用にしない。外部ブラウザbuttonも実有効状態と一回操作を確認し、offlineの外部起動拒否に到達することを検査する。クラウド/学校通信はしない。catalog整合・cross buildが成功し、fresh59にblockingなし。
+
 ## W15 第4焦点CIが実ブラウザstepでfailure終端（2026-10-19）
 
 - source5042ecf7e3a23f47b1a1d2273d07a3d5d67ef4cb、run39152709117/attempt1、job117749448846。18:07:29Z開始・18:10:18Z failure。登録/WinUI build成功、実ブラウザstep失敗。完了ログ取得前でCA準備か実画面かは未確定。対処前に記録しW13/W10・コードを照合する。
