@@ -1,3 +1,9 @@
+## W12 第2焦点CIも登録検査でfailure終端（2026-10-19）
+
+- sourcec23138c6d8d2bdee006c2d02238f368ce7ac01ce、run39152217286/attempt1、job117748003013。18:01:09Z開始・18:02:07Z failure。公開ファイル／登録stepで失敗、build/browserは未到達。完了ログ取得前で詳細未確定。W11とコードを照合してから対処し、検査を省略しない。
+
+- 完了ログSHA3ecbcae4f122639cc9131039b1e395a4d821118afb2a58389373c08be99eeaa0。公開履歴は成功、catalogの日本語対象検索printでcharmap codec encode error。W11のobsolete判定は通過したがWindows既定出力encodingで止まった。既存Linux側CIとworkflowを照合し、焦点jobへPYTHONUTF8=1を明示する。登録判定・日本語出力内容は維持する。
+
 ## W11 ブラウザ焦点CIが1分以内にfailure終端（2026-10-19）
 
 - source8b36c72ea0bd4be43ed698516f0f68cbe2cb7451、run39151749175/attempt1、job117746647779。17:55:00Z開始、17:55:59Z failure終端。初回メタデータ確認17:56:19Z。
