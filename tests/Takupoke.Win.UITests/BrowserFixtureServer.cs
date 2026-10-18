@@ -66,7 +66,15 @@ internal sealed class BrowserFixtureServer : IDisposable
                 await stream.WriteAsync(Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\nContent-Length: {body.Length}\r\nConnection: close\r\n\r\n"), deadline.Token);
                 await stream.WriteAsync(body, deadline.Token); await stream.FlushAsync(deadline.Token);
             }
-            catch (Exception error) when (error is IOException or AuthenticationException or OperationCanceledException) { }
+            catch (Exception error) when (error is IOException or AuthenticationException or OperationCanceledException)
+            {
+                if (_certificate is not null && error is not OperationCanceledException)
+                {
+                    var inner = error.InnerException;
+                    var native = inner is System.ComponentModel.Win32Exception windows ? windows.NativeErrorCode.ToString("X8") : "none";
+                    Console.Error.WriteLine($"Synthetic TLS server failure: type={error.GetType().Name};hresult={error.HResult:X8};inner={inner?.GetType().Name ?? "none"};native={native}");
+                }
+            }
         }
     }
     public void Dispose()

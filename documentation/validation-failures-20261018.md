@@ -1,3 +1,12 @@
+## W22 第11焦点CIがfailure終端（2026-10-19）
+
+- source10bcca9723f9ab5d462ad08ea83f1df1663c589c、run39156249911/attempt1、job117759965026。18:53:44Z開始・18:56:33Z failure、実ブラウザstep失敗。既存targetへの追加client接続候補の初回。完了ログ取得前で新しい失敗段階未確定。W21・コード・新しい実測を照合してから候補を決める。
+
+- 完了ログSHAf6b1cdfe9b981e281081f5c6ff27e0f75b6c56cbe7243c6f402f386fc64ee591。35checksまで成功し、両popupの実本文/親保持/子close、外部button/外部HTTP拒否、localhostも通過。次のtrusted HTTPSでserver受信0・native ConnectionAborted、本文30秒timeoutとなった。popup取得修正はこの実行で通過したが一般的な恒常解消とは断定しない。
+- BrowserFixtureServerはSslStream.AuthenticateAsServerAsyncのAuthenticationException/IOExceptionを無出力で終了しており、正常TLSがserver側の資格情報で失敗したのかclient側検証なのか切分けられない。製品は変更せず、所有TLS fixtureの失敗type/HResult/inner typeとWin32 native errorだけを出す。入力URL・証明書本文・秘密鍵・tokenは出さず、TLS検証と本文条件を保持する。過去W13はRoot追加の停止で別段階、W21はpopup discoveryなので今回のConnectionAbortedの直接原因には流用しない。
+
+- local cross build0警告/0エラー23.49秒、catalog整合成功。fresh65コード差分レビューにblockingなし。製品不変の診断比較を次の焦点CIで実行する。
+
 ## W21 第10焦点CIがfailure終端（2026-10-19）
 
 - sourcec05747993cad4d635ef71bb67e0ddd9aec8be57e、run39155800972/attempt1、job117758654308。18:47:50Z開始・18:50:43Z failure、実ブラウザstep失敗。target診断追加後の初回。完了ログ取得前でどのtargetが見えるかは未確定。対処前に事実を記録し、W20と新しい実測・コードを照合する。

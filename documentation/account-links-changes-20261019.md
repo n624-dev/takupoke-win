@@ -27,7 +27,7 @@ Issue #2の追加前ローカル検証と実ブラウザCIを区別する。全�
 ## Issue #2 ローカルHTTP/HTTPS・popup
 
 HTTPはlocalhost/.localhost・loopback・RFC1918・link-local・IPv6 ULA・.local/.home.arpaだけを受理する。任意の外部HTTPや、ローカルと確定できない単一ラベル名は許可しない。取得データのValidUrl、通常/一時ブラウザ選択、WebView2のナビゲーション、外部ブラウザ操作で共通policyを使用する。
-公開ページからLANへの遷移・リソース要求は拒否。明示的に開いたローカルサイトでも他のホストへ無断移動させず、HTTP→HTTPSと同一ホストのポート切替だけ許可する。HTTPSにDNSでprivate IPを割り当てる挙動はローカルURL文字列だけで網羅できず、WebView2側のネットワーク保護も適用される。
+公開ページからLANへの遷移・リソース要求は拒否。明示的に開いたローカルサイトでも他のホストへ無断移動させず、同一ホストのHTTP/HTTPS間とポート切替を許可する。HTTPSにDNSでprivate IPを割り当てる挙動はローカルURL文字列だけで網羅できず、WebView2側のネットワーク保護も適用される。
 
 popupは元のWebViewへURLを代入せず、同じenvironment/profileの別WebViewをNewWindowへ割り当て、openerとabout:blank起点の文脈を保持する。上限4ページ。ブロック・初期化失敗は画面に表示する。ファイルダウンロードは既存どおり禁止。半期消去・ロック・アプリ終了では開いた全ページを閉じる。
 NavigationCompleted/ServerCertificateErrorDetected/ProcessFailedを表示し、DNS・接続・HTTP応答・証明書・アプリ拒否を分ける。診断は固定コードのみでURLクエリやtokenを記録しない。証明書はCancelを明示し、AlwaysAllowや恒久的な例外を導入しない。
