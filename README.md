@@ -27,9 +27,9 @@ PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCR�
 
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版0.1.0-dev.10448のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10448)からSetup.exeを取得してください。通常Release・Latestとして公開しています。正式版ではありません。iOS解析への追従、mainの行除外・一括除外を含み、罫線付近の切り出し・再認識・本文の文字順序を修正し、英数字用の追加学習モデルを組み込みました。[今回の変更・測定結果](documentation/ocr-source-order-accuracy-20261016.md)・[配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/38839386958)全8ジョブとx64の6導入状態が成功し、公開6ファイルと両ZIPの全同梱ファイルを照合済みです。[配布記録](research-results/ocr-source-order-native-20261016/installer-release-receipt.json)。
+[開発確認版0.1.0-dev.10449のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10449)からSetup.exeを取得してください。通常Release・Latestとして公開しています。正式版ではありません。AI・OCRがOFFでもモデル取得ボタンを押せて「中止」となる問題を修正し、ONにする案内を追加しました。時間割変更の正式名称表示・行除外・OCR復旧等の既存機能は維持しています。[今回の修正・検証](documentation/ocr-model-opt-in-20261018.md)・[同一ソースの配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/39102835131)全8チェックとx64の6導入状態が成功し、公開6ファイルと両ZIPの全同梱ファイルを照合済みです。OCR自体の研究結果は[既存の測定記録](documentation/ocr-source-order-accuracy-20261016.md)を参照してください。
 
-1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10448-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10448-arm64-Setup.exe`。
+1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10449-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10449-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
 3. スタートメニューの「たくポケ」から起動します。
 4. OCRを利用する場合は設定の「AI・OCRを使用する」をONにし、モデル管理で約130 MiBの日本語・英数字モデルを取得／更新します。復旧プレビューを原PDFと照合し、必要な欄を訂正してから明示採用してください。
