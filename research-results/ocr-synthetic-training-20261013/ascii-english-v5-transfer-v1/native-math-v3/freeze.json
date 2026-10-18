@@ -1,0 +1,34 @@
+{
+  "scope": "Consumed parent512 providedPNG/nativeinitialization and10numericshape checks only; no oracle/quality/training/final/activation",
+  "originalModelSha256": "b5f833dfc5d0eb71da397b4efa06ebeee9b431b690a47d6af40d77d8eabc557f",
+  "dictionarySha256": "ef84489f927fb92b64714c7f110404e5bfb83c4067bd609fe4c41d5f23e25659",
+  "checkpointSha256": "9dab63fb9b819082f3f06e889a3af56dc2c27155d46d8409659c869a2aece2bc",
+  "inputsSha256": "26b9d6fe081763aa36a740d2fa2f81990a04855095d97527544bc0c4b78340a8",
+  "sources": {
+    "reproduce_math.py": "b3a74bc7398b8d273517d425f86c59fccb77ae3c9c82acd5d5f6a8389b5e0a28",
+    "native.py": "758f0a971d4f89d069e3097176a7267717cde043857fdd5a476e94612494d7f6",
+    "native_fused.py": "2dd11c82040a6793436f18a77bbe99ac773587bc50161c9705498e525eb65f3c",
+    "native_math.py": "45a0128244bb75993dd1f9d23a3821fa53f1dd1190d8ead8e54f9336ce9ea8e4"
+  },
+  "headClasses": 438,
+  "normalizationAudit": {
+    "hfClassDefaultAllFive": 1e-06,
+    "originalOnnxScalars": [
+      9.999999747378752e-06,
+      9.999999747378752e-06,
+      9.999999747378752e-06,
+      9.999999747378752e-06,
+      9.999999974752427e-07
+    ],
+    "nativeTorchSetFromOriginalScalars": true,
+    "weightsUnmodified": true
+  },
+  "registeredTolerances": {
+    "feature": 0.0001,
+    "logit": 0.001,
+    "probability": 0.0001
+  },
+  "parameters": 1932342,
+  "cnnImplementation": "Native ONNX fused weights/bias/affine copied directly to differentiable Torch CNN whitelist DAG; HF classifier/encoder original weights retained, explicit ONNX mean-subtract-squaremean LayerNorm and query-first scaling before attentionMatMul, all epsilon copiedfromnative; no handwrittenweightfusion or retraining",
+  "fp32Inputs": "Whole original ink+2 supplied by parent, BGR48 centerbilinear/uint8round/norm0rightpad width320..960; parentvalidWidth/sourceRect unchanged"
+}

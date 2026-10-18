@@ -1,0 +1,100 @@
+{
+  "version": "0.1.0-dev.10447",
+  "sourceCommit": "fce8bb496bd997cf1bb4c48ecb91b222cd00abf8",
+  "integratedMain": "944662b277f7d8eb31e3ce66f6a447c822144561",
+  "mainIsAncestorOfBuildSource": true,
+  "run": 38868196099,
+  "runUrl": "https://github.com/n624-dev/takupoke-win/actions/runs/38868196099",
+  "releaseUrl": "https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10447",
+  "allEightJobsSucceeded": true,
+  "publishedNormalRelease": true,
+  "verifiedAsLatest": true,
+  "tagMatchesBuildSource": true,
+  "allSixPublishedAssetsDownloadedAndHashed": true,
+  "bothZipManifestsAndAllListedPayloadHashesVerified": true,
+  "bothZipArchivesContainExactlyTheManifestPayloads": true,
+  "arm64HardwareExecutionVerified": false,
+  "publicAssets": [
+    {
+      "name": "SHA256SUMS.txt",
+      "size": 495,
+      "sha256": "302c2ba6834e31b3b002ccd6735e97ee51d2dd45a6ccf5d1d575da3835a6f282",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10447/SHA256SUMS.txt",
+      "package": null
+    },
+    {
+      "name": "INSTALL.txt",
+      "size": 4092,
+      "sha256": "858981daad019f771c1c6a96fef6ce4c9ee1a8fc768f6a69d1b8468830b03be6",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10447/INSTALL.txt",
+      "package": null
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10447-arm64-Setup.exe",
+      "size": 77463002,
+      "sha256": "df94dffe0f1bf3842ada9328de1bda08f69228e396f5ebed2de8831d72d7029d",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10447/takupoke-0.1.0-dev.10447-arm64-Setup.exe",
+      "package": null
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10447-arm64.zip",
+      "size": 114909701,
+      "sha256": "dc3c3167c9d8c270c9dd0f8deedf742c88c166b7e710b84ff82bdb11b75d2b01",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10447/takupoke-0.1.0-dev.10447-arm64.zip",
+      "package": {
+        "architecture": "arm64",
+        "commit": "fce8bb496bd997cf1bb4c48ecb91b222cd00abf8",
+        "version": "0.1.0-dev.10447",
+        "verifiedPayloadFiles": 585,
+        "peArchitecturesVerified": true
+      }
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10447-x64-Setup.exe",
+      "size": 80069258,
+      "sha256": "2296793f7423b620ef7bbefca910a0a2d7b5ca7be3dedf171e303fefe5eb621f",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10447/takupoke-0.1.0-dev.10447-x64-Setup.exe",
+      "package": null
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10447-x64.zip",
+      "size": 117752270,
+      "sha256": "973f8c20a2b0a797becf5e7aa3bb12652e930c5385eb4a7fefcea8674fd0e293",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10447/takupoke-0.1.0-dev.10447-x64.zip",
+      "package": {
+        "architecture": "x64",
+        "commit": "fce8bb496bd997cf1bb4c48ecb91b222cd00abf8",
+        "version": "0.1.0-dev.10447",
+        "verifiedPayloadFiles": 589,
+        "peArchitecturesVerified": true
+      }
+    }
+  ],
+  "temporaryDownloadedPayloadsRemoved": true,
+  "scope": "Public distribution bytes, exact main-integrated source, full ZIP manifest hashes and PE architectures. Native installed-state UI checks are provided by the linked Windows workflow; not recognition-accuracy measurements.",
+  "qualificationRun": 38865270712,
+  "qualifiedSource": "231fe87203b9c92a0c79993dc8649a6f990f25dc",
+  "defaultFactoryRun": 38867331239,
+  "defaultFactoryOriginal10PixelsExact": true,
+  "defaultFactoryMaximumNativeProbabilityDifference": 0,
+  "installedWindowsUiChecks": [
+    1027,
+    1026,
+    1026,
+    1026,
+    1026,
+    1027
+  ],
+  "releaseNode20Warnings": 0,
+  "sourceCiRun": 38867340526,
+  "sourceCiAllSevenSuccess": true,
+  "sourceCiNativeUiChecks": 1026,
+  "coreTests": 301,
+  "linuxIntegrationTests": 1161,
+  "windowsIntegrationTests": 1163,
+  "modelProfile": "20261016-v3",
+  "modelArtifacts": 7,
+  "modelBytes": 135868279,
+  "iosEdited": false,
+  "privateSchoolMaterialUsedInThisTrialOrTrainingOrPublication": false
+}

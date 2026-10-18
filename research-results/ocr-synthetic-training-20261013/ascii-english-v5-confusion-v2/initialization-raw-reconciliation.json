@@ -1,0 +1,10 @@
+{
+  "scope": "Read-only initialization raw reconciliation; no new model calls or threshold changes",
+  "rows": 496,
+  "rawTextPieceIntervalsAndConfidenceIdentical": true,
+  "sourcePaddingAsciiDecisionsIdentical": true,
+  "sameWithoutRejectAcceptance": true,
+  "rejectExplicitlyDisabledOnlyInInitializedDiagnostic": true,
+  "canonicalComparisonBaseline": "active-baseline mode trained, includes unchanged active reject head",
+  "initializedAcceptedDifferenceExpected": 3
+}

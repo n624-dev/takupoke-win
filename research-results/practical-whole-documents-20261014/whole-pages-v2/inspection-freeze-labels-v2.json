@@ -1,0 +1,32 @@
+{
+  "scoreSHA256": "4d8c7626f132d26a388a737b61095e6d04f30469f29bd8baee62ed67d57523dc",
+  "inspectorSHA256": "1cc6e56ab8d6795132662961604b4207a93d5e0083f0297801fc472465145031",
+  "coreSourceSHA256": {
+    "src/Takupoke.Core/Recovery/RecoveryPromptInstructions.cs": "cb8e32e555973bc6bf6343e52fe702b1e81afc7eaaf0f37ec401665bed9d9476",
+    "src/Takupoke.Core/Recovery/RecoveryAuditShape.cs": "4cf7a625b096547ee8cc25501f2b32d28c13caa69e0fe3d2253314f5115a2c59",
+    "src/Takupoke.Core/Recovery/RecoveryValidator.cs": "bcb72209f47524aadb4ed5e897219fc5e3adb91bffa26d78d46a8f39e67383f8",
+    "src/Takupoke.Core/Recovery/RecoveryPolicy.cs": "bb3820fa070207dc230dfc4a15deb3b4113ff693efd671092d0f74af05d9810b",
+    "src/Takupoke.Core/Recovery/RecoveryStructure.cs": "945c27fd5a88d1c4ca85fdc32d605170cac0cdb96d896659e359150c89daa276",
+    "src/Takupoke.Core/Recovery/RecoveryManualAssistance.cs": "a1e74166ae6da0a6d0dd1975874d82fcd9b2b3d0abf52195dc156d5e6310da56",
+    "src/Takupoke.Core/Recovery/RecoveryModelManifest.cs": "b24245f93beebece14587dd52c131446d42133d37ece61f62539e6bb6946f958",
+    "src/Takupoke.Core/Recovery/RecoverySourceIndex.cs": "da180d39222caa222fefc884803fa49a0085d69b0e0df83b5efc34ac4ebfc3aa",
+    "src/Takupoke.Core/Recovery/RecoveryRoleLabels.cs": "ebbd8b0c4364ed25e0d7d4fb40466f7f2949398cc550f1d39521cee5032951ac",
+    "src/Takupoke.Core/Recovery/RecoveryModels.cs": "d0b2655769638023f8ce9270478ece4e907f6cb19c1c035e2e19a86d7127e109",
+    "src/Takupoke.Core/Recovery/RecoveryEngine.cs": "b0c2a87006b2515ceed7e1bcea6221aa1b9748ac427d7ca6dc2fcc9f1dc13007"
+  },
+  "binaryFiles": {
+    "Inspect": "17cbcb6e0e709d3a0b9241b5f8a9cc60e44d9c9d349f96409a7dae214c57c544",
+    "Takupoke.Core.dll": "90458995d7ca3f9fd12cb1d573a00dba7fcbc4a73bf021f6e9913c60811087c0",
+    "Inspect.dll": "6c383dd5f61828430c420325110dff499b56ea5a4910f369b2d2a244f8a67ccc",
+    "Takupoke.Core.pdb": "b30f6c8442c24f52e864ca92945186ef414d62a08a52c1e6fba1550909f96446",
+    "Inspect.pdb": "4ca020e1352fc28ba61e565a08592cab167d0c52aa8cd64ba91bc3184bd03853",
+    "Inspect.deps.json": "1ca7c30631506fc88f099cf738d2b96d0a260b467f1098e495fede412b69459f",
+    "Inspect.runtimeconfig.json": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f"
+  },
+  "nativeCalls": 0,
+  "rawSHA256": {
+    "v5": "61c581797aea133b1f3b67d68d6b2ecfb7c184ac228ae8d51b35b3d98f7d0e99",
+    "v6": "6f11d816d978c9498c5db36148f412bd26ef5330dc94fe41dcdfc191c3ddfde7"
+  },
+  "automaticUserConfirmation": false
+}

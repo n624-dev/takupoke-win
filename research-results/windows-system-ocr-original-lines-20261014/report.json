@@ -1,0 +1,72 @@
+{
+  "exitCode": 0,
+  "rawSha256": "d0180f37ce303b5e2f95ce3b3e54790dbfc6b7bcab4dd1447fc56360944fd0a7",
+  "rawBytes": 33681,
+  "groups": {
+    "en-US/sans/subject": {
+      "rows": 24,
+      "singleLineExact": 0,
+      "emptyBlank": 0,
+      "multipleLines": 0
+    },
+    "en-US/sans/teacher": {
+      "rows": 24,
+      "singleLineExact": 0,
+      "emptyBlank": 0,
+      "multipleLines": 0
+    },
+    "en-US/sans/room": {
+      "rows": 24,
+      "singleLineExact": 0,
+      "emptyBlank": 0,
+      "multipleLines": 0
+    },
+    "en-US/sans/header": {
+      "rows": 21,
+      "singleLineExact": 0,
+      "emptyBlank": 0,
+      "multipleLines": 0
+    },
+    "en-US/sans/blank": {
+      "rows": 3,
+      "singleLineExact": 0,
+      "emptyBlank": 3,
+      "multipleLines": 0
+    },
+    "en-US/serif/subject": {
+      "rows": 24,
+      "singleLineExact": 0,
+      "emptyBlank": 0,
+      "multipleLines": 0
+    },
+    "en-US/serif/teacher": {
+      "rows": 24,
+      "singleLineExact": 0,
+      "emptyBlank": 0,
+      "multipleLines": 0
+    },
+    "en-US/serif/room": {
+      "rows": 24,
+      "singleLineExact": 0,
+      "emptyBlank": 0,
+      "multipleLines": 0
+    },
+    "en-US/serif/header": {
+      "rows": 21,
+      "singleLineExact": 0,
+      "emptyBlank": 0,
+      "multipleLines": 0
+    },
+    "en-US/serif/blank": {
+      "rows": 3,
+      "singleLineExact": 0,
+      "emptyBlank": 3,
+      "multipleLines": 0
+    }
+  },
+  "languages": [
+    "en-US"
+  ],
+  "qualification": false,
+  "nativeConfidenceAvailable": false
+}

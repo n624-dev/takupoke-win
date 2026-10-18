@@ -1,0 +1,310 @@
+{
+  "scope": "Exact closed fictional outputs and source snapshots; JSONL reassembles original bytes; full-page rasters/PDFs/models/binaries/private/internal policy excluded.",
+  "copied": {
+    "curation-manifest.json": {
+      "bytes": 12818,
+      "sha256": "8d61fbcb42a07b19a8c79c3e058d1c35f4c8ddcec52d9ac3874d9d3fc63c3762"
+    },
+    "hardware.json": {
+      "bytes": 275,
+      "sha256": "9703f8841695d9df279d18609a48af654a1b8d89426fc82d1d3a63b413a3052f"
+    },
+    "sources/src/Takupoke.Core/Recovery/RecoveryAuditShape.cs": {
+      "bytes": 6593,
+      "sha256": "01f890573e5735cd7067567ffa88b378776ded98b0d2ba688f85b8e415b6a7e6"
+    },
+    "sources/src/Takupoke.Core/Recovery/RecoveryCodeCandidates.cs": {
+      "bytes": 2303,
+      "sha256": "c85a7af03f9d5fac0f1d874872638bfd52e21c77b4a246d6589ca109edfe8c1f"
+    },
+    "sources/src/Takupoke.Core/Recovery/RecoveryEngine.cs": {
+      "bytes": 11941,
+      "sha256": "b0c2a87006b2515ceed7e1bcea6221aa1b9748ac427d7ca6dc2fcc9f1dc13007"
+    },
+    "sources/src/Takupoke.Core/Recovery/RecoveryManualAssistance.cs": {
+      "bytes": 26207,
+      "sha256": "6e94ec78a89c54d90d56f344f32a529aaee9d27620665f042f526978b8da9a53"
+    },
+    "sources/src/Takupoke.Core/Recovery/RecoveryModelManifest.cs": {
+      "bytes": 1912,
+      "sha256": "b24245f93beebece14587dd52c131446d42133d37ece61f62539e6bb6946f958"
+    },
+    "sources/src/Takupoke.Core/Recovery/RecoveryModels.cs": {
+      "bytes": 11010,
+      "sha256": "afe5b68f714d6efc25032c6e25e427984516be013ac3966b118438c70b38ecb3"
+    },
+    "sources/src/Takupoke.Core/Recovery/RecoveryPolicy.cs": {
+      "bytes": 1975,
+      "sha256": "bb3820fa070207dc230dfc4a15deb3b4113ff693efd671092d0f74af05d9810b"
+    },
+    "sources/src/Takupoke.Core/Recovery/RecoveryPromptInstructions.cs": {
+      "bytes": 2073,
+      "sha256": "cb8e32e555973bc6bf6343e52fe702b1e81afc7eaaf0f37ec401665bed9d9476"
+    },
+    "sources/src/Takupoke.Core/Recovery/RecoveryRoleLabels.cs": {
+      "bytes": 1294,
+      "sha256": "ebbd8b0c4364ed25e0d7d4fb40466f7f2949398cc550f1d39521cee5032951ac"
+    },
+    "sources/src/Takupoke.Core/Recovery/RecoverySourceCoverage.cs": {
+      "bytes": 3145,
+      "sha256": "d8ca7e039579184dd52a85d56a81bf44a7e9dd1c59c3144f8fe9a332f1d10141"
+    },
+    "sources/src/Takupoke.Core/Recovery/RecoverySourceIndex.cs": {
+      "bytes": 5346,
+      "sha256": "da180d39222caa222fefc884803fa49a0085d69b0e0df83b5efc34ac4ebfc3aa"
+    },
+    "sources/src/Takupoke.Core/Recovery/RecoveryStructure.cs": {
+      "bytes": 19332,
+      "sha256": "945c27fd5a88d1c4ca85fdc32d605170cac0cdb96d896659e359150c89daa276"
+    },
+    "sources/src/Takupoke.Core/Recovery/RecoveryValidator.cs": {
+      "bytes": 64632,
+      "sha256": "5981dd6670577e0ddf00eae44e84dc0f6d52e3880032df1be40aab7cd975ca4b"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrAsciiRefinement.cs": {
+      "bytes": 7620,
+      "sha256": "59ba219f4969f29980bbc08140ccf226e1e33a8ecf8e22b4a2fc68df674e76e2"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrConditionalJapaneseRetry.cs": {
+      "bytes": 1596,
+      "sha256": "d00138a1b415e09f0543596c5b5a95e42e061fd902241ef2860bb638dc12f164"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs": {
+      "bytes": 7930,
+      "sha256": "341cc6d874d95cd9dfd333e447677cf289564cc7c34ccf973eb27b63aa63c3e8"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs": {
+      "bytes": 2589,
+      "sha256": "9a95f142408a60de47965b91aa81f47a4a34e9274700d283148efea1fc927126"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrDetectorProbability.cs": {
+      "bytes": 1386,
+      "sha256": "f221a38e197b8a7f2d9a922219077ceb0adc97950366d093e5c9503cf0b65c71"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrHeaderContext.cs": {
+      "bytes": 1298,
+      "sha256": "9d7e324f1e97b7331b18670dcbc1a5e77c477ba35f0918dcaa85018857fe35b6"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrInkCropFrame.cs": {
+      "bytes": 2805,
+      "sha256": "683cb76baebc602b0c2fde5a1ca3b6ae35a3ff72bf2d86b6236a9f8bf3bc5069"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs": {
+      "bytes": 7110,
+      "sha256": "cd2924d80b844dc9ad5a21efec8b6af42f940358a8c437b1d01705b9a0c88b85"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrLiteralCodeRetry.cs": {
+      "bytes": 4271,
+      "sha256": "dc80c1ee82abb076d9926db0b5232b2920675d622b98bfff51162d74225fd3b1"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrRoleLabelRetry.cs": {
+      "bytes": 1734,
+      "sha256": "2513f067ddc67162b1fc15efca139346758b0a46bbbab3085c8292f04c1c8d10"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrWhiteGapPartition.cs": {
+      "bytes": 2266,
+      "sha256": "62eb957afb2b527303643d037829363abbc02776f266d069d8bc06c082c193b6"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OnnxAsciiOcr.cs": {
+      "bytes": 4826,
+      "sha256": "212be449861c5b9329d89b5584af1b95868ae3c42b81e04ef8f2740f1c6309e1"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OnnxJapaneseAlternative.cs": {
+      "bytes": 3108,
+      "sha256": "b1f4ff2eebc2e43ea0f140bea65dd66e9078231ca0ff24b6a5dd4dcec700cbfd"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs": {
+      "bytes": 31608,
+      "sha256": "272ded7940fa28dac1b624660211b160df1f860ea922c932e8ff0862df2cde25"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryAnalysisConverter.cs": {
+      "bytes": 6356,
+      "sha256": "12cc992411fefbe6db50f70b1d0b27f07fed5221de9c649d1ae463b7efc03354"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryAuditCertification.cs": {
+      "bytes": 4888,
+      "sha256": "226fea751cffb21b86165de6690bc5072bf524a6181b4d76281fcb1a06c6f904"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryCapturedLayoutBuilder.cs": {
+      "bytes": 1369,
+      "sha256": "30b1750c3d8718ba2499282b3763fa0fe5477402a2ddc635e427e04099798882"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryContainmentIndex.cs": {
+      "bytes": 2320,
+      "sha256": "eb1b98d93b697abd2eba187ab4f3cea3da5c717a6d16b49ea4e0f6f215baad53"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryCoordinator.cs": {
+      "bytes": 24755,
+      "sha256": "006460ae8e2459e57bf5a426d1d2db5e25c60f7f1af9b6d7350db800138774c1"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs": {
+      "bytes": 73501,
+      "sha256": "0fc4aa380e487bcecc268fe2f7c6b008f8a2947fb6b75eae53ede2d8c54e7108"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryLayoutGeometry.cs": {
+      "bytes": 4662,
+      "sha256": "079d6f1f1469b51a638c85b48962d67eecd6d619a5b91e6fc04a61ffca953ee2"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryModelBundleStore.cs": {
+      "bytes": 10968,
+      "sha256": "03faa06f766c0f8ae79425a109aea502b6e54f64a939cee03b15ac32a86a2125"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryModelStore.cs": {
+      "bytes": 6942,
+      "sha256": "ad370251951dc72467268bd8eceeaeccbddcfcb69465c841e47df9a9e825bc61"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryOcrModels.cs": {
+      "bytes": 3428,
+      "sha256": "477c5b7775b5afbc617dc2405366b4fd0a9e40280b3c219256a758a86982f992"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryOutputDecoder.cs": {
+      "bytes": 2235,
+      "sha256": "4b0da14cef205b426ca06c8bb8453663bde0aba76d16b7fb637f960e5aee3849"
+    },
+    "sources/tools/ocr-literal-retry-accuracy/Baseline.csproj": {
+      "bytes": 408,
+      "sha256": "ac3676d707fe8cc477701401203866b39b9b21a063f063c78da14c77dcaa644d"
+    },
+    "sources/tools/ocr-literal-retry-accuracy/Factory.csproj": {
+      "bytes": 520,
+      "sha256": "68c58a2c0c2204b97224a15e8b456b0dddba4d0d7dabdff218da0ef5ff025b2a"
+    },
+    "sources/tools/ocr-literal-retry-accuracy/Inspect.csproj": {
+      "bytes": 429,
+      "sha256": "f15269cad90e38ef87463204a64688bd5cc118d41512b6fc8befdb0314e720b3"
+    },
+    "sources/tools/ocr-literal-retry-accuracy/Read.cs": {
+      "bytes": 9139,
+      "sha256": "9c73422046676364626ef19b1e400010c3cdf73b15f77681ca47119a7ff86a08"
+    },
+    "sources/tools/ocr-literal-retry-accuracy/Read.csproj": {
+      "bytes": 485,
+      "sha256": "a27b6a8a84698ef9eb040a2effc81522d9b177fbc050f73029c28d70e9de7653"
+    },
+    "sources/tools/ocr-literal-retry-accuracy/compare_factory.py": {
+      "bytes": 4011,
+      "sha256": "2ecb69468b103905a016b70f0fffa0fd1bd54329ce219d5f790fc99b7d45dbad"
+    },
+    "sources/tools/ocr-literal-retry-accuracy/exclusions-extra.json": {
+      "bytes": 420703,
+      "sha256": "53e094878fbd5d863c755f5774768d1cef14183089295ad3b1ef50a938213818"
+    },
+    "sources/tools/ocr-literal-retry-accuracy/exclusions.json": {
+      "bytes": 1077,
+      "sha256": "f0fac8ea11d1f30974e56df3a024f309053b5bd1dae06b2d7af7d572220f3670"
+    },
+    "sources/tools/ocr-literal-retry-accuracy/factory-reference.json": {
+      "bytes": 600494,
+      "sha256": "5f7347c42e0b198aed0e3aca21a133f2906de60af2f4f3cae0f4466964137f0a"
+    },
+    "sources/tools/ocr-literal-retry-accuracy/prepare.py": {
+      "bytes": 11431,
+      "sha256": "0b27c9613b8ef5dee0d21902f82fdfed785cd3ee416e8c2157f3a8863d6f3317"
+    },
+    "sources/tools/ocr-literal-retry-accuracy/protocol.json": {
+      "bytes": 10125,
+      "sha256": "266edba77041cab084eebdcd03a9b66ed57ea2541f07fde3b1dc5a8238ca46a3"
+    },
+    "sources/tools/ocr-literal-retry-accuracy/run_factory.py": {
+      "bytes": 6527,
+      "sha256": "e9f6e8a6b1fb189ebd3e66448f28ce56755c5c4738825b2985b57474a97ea15c"
+    },
+    "sources/tools/ocr-literal-retry-accuracy/run_windows.py": {
+      "bytes": 8229,
+      "sha256": "6c3124dd01e6dfa6e30aaa60b8df86c62b6ffe9c03a88bbe83050f1ccf2bc01a"
+    },
+    "sources/tools/ocr-literal-retry-accuracy/score.py": {
+      "bytes": 9283,
+      "sha256": "dc81c8ec97e9cd0d7c37fdb19bbcf9f15951157fbe1b8d7be422f0987509f484"
+    },
+    "sources/tools/ocr-physical-framing/prepare_pdf.py": {
+      "bytes": 2945,
+      "sha256": "11395893bfafb8a5a11c93c815dbf855ad2c2a6608cb3a2643ae9375b0dbf140"
+    },
+    "sources/tools/ocr-physical-framing/windows-render/WindowsRender.cs": {
+      "bytes": 5094,
+      "sha256": "e41e22f1f0f8a051d2eec967e8120f368ce03d80a355b379c1f31ecd10e2f7a1"
+    },
+    "study/factory-bundle.json": {
+      "bytes": 2166,
+      "sha256": "e5d0286694139065291d3b3221a189e27a29319ebccc6d842c45df189ace38d5"
+    },
+    "study/factory-equivalence.json": {
+      "bytes": 865,
+      "sha256": "edabc08c0238f027f0f9b527341bf4ba88c607ccc5c5881e21b93de6c0efdae8"
+    },
+    "study/factory-receipt.json": {
+      "bytes": 107,
+      "sha256": "b13792427c513e2c8b023b6626ab023b26922ad4201e83d11d4c16e7055b4228"
+    },
+    "study/factory-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "study/factory-stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "study/freeze.json": {
+      "bytes": 14987,
+      "sha256": "3461c8d3da2a52a4810f16eb4130071e86e1f731695668304f4db8b0b549f601"
+    },
+    "study/generation-freeze.json": {
+      "bytes": 2527,
+      "sha256": "f66d4ab7ddb83881d44fac685de0da709603fb0a2af0fbd68020253c07187614"
+    },
+    "study/hybrid-dictionary.json": {
+      "bytes": 112374,
+      "sha256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f"
+    },
+    "study/inputs.json": {
+      "bytes": 3744,
+      "sha256": "ba6100ae3bbb20568b1ffac24239867ca2a68083bddc71eba7d65f0cb7119f17"
+    },
+    "study/native-inputs.json": {
+      "bytes": 4676,
+      "sha256": "7cc9d8f2c93fa12cab8fd658ea7bd8308d4597294781e045002345d9a1dd296e"
+    },
+    "study/native-render-receipt.json": {
+      "bytes": 4713,
+      "sha256": "4fdd2296bdb230bdc32da2b4433754ac8fccc6b460c4fb0be2234ff02e1d2743"
+    },
+    "study/oracle.json": {
+      "bytes": 365918,
+      "sha256": "18a3275a1673d91dd0a2e46cbaed85c507d87b863b2c9eace7c102f3d28cda72"
+    },
+    "study/original-pixel-restoration.json": {
+      "bytes": 1688,
+      "sha256": "4ff69203141a3d0fef42f46e58e64ba7d41724127f3d22735f9071af2fd98701"
+    },
+    "study/pdf-inputs.json": {
+      "bytes": 4348,
+      "sha256": "3141080dab8f7ba2114d7ca641c39d45ac9b00bc6fa9d526941e89c481e00528"
+    }
+  },
+  "rawStreams": {
+    "study/factory-observations.jsonl": {
+      "bytes": 4816429,
+      "sha256": "c666297cf948e1f6d496ec286ae7e58013ada9dcb3d8dff02049ad4bb7272acb",
+      "parts": [
+        {
+          "path": "raw/factory-observations/00-literalfresh-0-positive.jsonl.gz",
+          "id": "literalfresh-0-positive",
+          "rawBytes": 2402615,
+          "rawSHA256": "fb12b166be8a3b31cf11c9672147f47e25e032ec44317a4ab8f9936f4cc21f1d",
+          "compressedBytes": 343283,
+          "compressedSHA256": "71da9c7e199a3bee2d13bb2f853677224cc55c6002cc7515f914bf9893843052"
+        },
+        {
+          "path": "raw/factory-observations/01-literalfresh-1-positive.jsonl.gz",
+          "id": "literalfresh-1-positive",
+          "rawBytes": 2413814,
+          "rawSHA256": "1c18e87b883c7c9ec44448282ae5f2cf20c862080991db6ef4d47eb5ec80caec",
+          "compressedBytes": 347601,
+          "compressedSHA256": "9f4def6449b9b10d140f074ba1975752574850502c4693dc94608f24797b152a"
+        }
+      ]
+    }
+  },
+  "excluded": []
+}

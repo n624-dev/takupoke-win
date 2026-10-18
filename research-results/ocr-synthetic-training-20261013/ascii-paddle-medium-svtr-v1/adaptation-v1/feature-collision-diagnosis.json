@@ -1,0 +1,80 @@
+{
+  "scope": "Read-only cached feature equality diagnosis, no inference or frozen protocol change",
+  "splits": [
+    {
+      "split": "train",
+      "collisions": [
+        {
+          "representation": "contextAndShortcut",
+          "keySha256": "09d735b2f6e4199cc953193cce21db3c4e7d5778b5252be619791c99e797c1ef",
+          "ids": [
+            "train-01922",
+            "train-01923"
+          ],
+          "nativeInputsIdentical": true,
+          "providedPngsIdentical": true,
+          "limit": "Identical tensors cannot determine contradictory text labels. This is information diagnosis, no target/inference repair or development exclusion."
+        },
+        {
+          "representation": "contextAndShortcut",
+          "keySha256": "0880b4a02a073396fb3ee3be65ac8ed4df2a0c760fe82ec7a90045b9a6867b52",
+          "ids": [
+            "train-02092",
+            "train-02093"
+          ],
+          "nativeInputsIdentical": true,
+          "providedPngsIdentical": true,
+          "limit": "Identical tensors cannot determine contradictory text labels. This is information diagnosis, no target/inference repair or development exclusion."
+        },
+        {
+          "representation": "contextAndShortcut",
+          "keySha256": "0c563ba3f45b71c3bfb5d404b0ea6695f8125f09461d1574ddcf3ca0b78d5bdc",
+          "ids": [
+            "train-02432",
+            "train-02433"
+          ],
+          "nativeInputsIdentical": true,
+          "providedPngsIdentical": true,
+          "limit": "Identical tensors cannot determine contradictory text labels. This is information diagnosis, no target/inference repair or development exclusion."
+        },
+        {
+          "representation": "originalFinalFeatures",
+          "keySha256": "f0289bd4d7714053af9a40b1ecc907896fc0500c462d2256c1c6081ab2ce85b9",
+          "ids": [
+            "train-01922",
+            "train-01923"
+          ],
+          "nativeInputsIdentical": true,
+          "providedPngsIdentical": true,
+          "limit": "Identical tensors cannot determine contradictory text labels. This is information diagnosis, no target/inference repair or development exclusion."
+        },
+        {
+          "representation": "originalFinalFeatures",
+          "keySha256": "9510884438cb87f0bacafa04f1ec6757990274fc8c38e32c81ccbed84f058671",
+          "ids": [
+            "train-02092",
+            "train-02093"
+          ],
+          "nativeInputsIdentical": true,
+          "providedPngsIdentical": true,
+          "limit": "Identical tensors cannot determine contradictory text labels. This is information diagnosis, no target/inference repair or development exclusion."
+        },
+        {
+          "representation": "originalFinalFeatures",
+          "keySha256": "c2979cf43c4e8444b1c86c6662037b1802c855588905d679693cdb11ed8b4926",
+          "ids": [
+            "train-02432",
+            "train-02433"
+          ],
+          "nativeInputsIdentical": true,
+          "providedPngsIdentical": true,
+          "limit": "Identical tensors cannot determine contradictory text labels. This is information diagnosis, no target/inference repair or development exclusion."
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "collisions": []
+    }
+  ]
+}

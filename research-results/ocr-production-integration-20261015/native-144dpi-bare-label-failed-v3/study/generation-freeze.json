@@ -1,0 +1,61 @@
+{
+  "recipe": "production-complete-three-class-final-v1",
+  "sourceSHA256": "27d51dabf776b61cec1e5a92f3604ba08c51287a5e35f701ea9d716ed26b8992",
+  "fonts": [
+    [
+      "sawarabigothic",
+      "SawarabiGothic-Regular.ttf",
+      1902848,
+      "04f2f9111bb69cb8d3706c27b44879c2c0fac593a11edf5cfe8cec1efc92c789"
+    ],
+    [
+      "sawarabimincho",
+      "SawarabiMincho-Regular.ttf",
+      1084300,
+      "86373c619710d1528aac3a4d47ce96834101bb38b057235b39e47b61ba143c6d"
+    ]
+  ],
+  "seedBase": 20261015017,
+  "classes": [
+    "1_1",
+    "2_IT",
+    "AI_1"
+  ],
+  "days": 5,
+  "periods": 8,
+  "pages": 5,
+  "bodyFontPixels": 20,
+  "headerFontPixels": 24,
+  "width": 2237,
+  "height": 415,
+  "variants": [
+    "positive",
+    "missing-day",
+    "missing-class"
+  ],
+  "plannedArms": [
+    "v5-production",
+    "hybrid-production"
+  ],
+  "prospectiveCriteria": {
+    "allPositiveSlotsAndFields": true,
+    "maximumCERPerFont": 0.03,
+    "maximumCorrectionsAndReviewUnion": 128,
+    "negativeDocumentsRefused": true,
+    "maximumRSSBytes": 6442450944,
+    "zeroErrorsRequired": false
+  },
+  "scope": "Fresh fictional final OCR content, Sawarabi fonts previously unused for OCR training/development. Windows-rendered PDFs required; no real school success-rate claim",
+  "metrics": [
+    "slot coverage",
+    "literal CER",
+    "field error count",
+    "uncertain field count",
+    "high-confidence wrong fields",
+    "runtime",
+    "RSS"
+  ],
+  "zeroErrorsRequired": false,
+  "manualTypingBudget": 128,
+  "reviewBudget": 128
+}

@@ -1,0 +1,37 @@
+{
+  "scope": "Unscored contradiction controls only; not training targets, selection, independent final or production credit",
+  "models": [
+    {
+      "name": "original",
+      "samePixelPairs": 32,
+      "pairsAcceptedInBothConflictingSources": 28,
+      "pairsRejectedInBothSources": 4,
+      "rawSha256": "ac227aadb0f5478721ff22589dd08a9381b6ec1f67757ef1bf5c13d45ad315fd",
+      "limits": "Rejecting both also loses legitimate ASCII. Classification cannot resolve identical pixels with contradictory source/script provenance; require independent source proof."
+    },
+    {
+      "name": "reduced-untrained",
+      "samePixelPairs": 32,
+      "pairsAcceptedInBothConflictingSources": 28,
+      "pairsRejectedInBothSources": 4,
+      "rawSha256": "c20e17de157aeaf5cada083a255ac2e226769a4199a9e006cfed289baaff4430",
+      "limits": "Rejecting both also loses legitimate ASCII. Classification cannot resolve identical pixels with contradictory source/script provenance; require independent source proof."
+    },
+    {
+      "name": "epoch-4",
+      "samePixelPairs": 32,
+      "pairsAcceptedInBothConflictingSources": 15,
+      "pairsRejectedInBothSources": 17,
+      "rawSha256": "aa6827f1489327db7a8209b0031009605d78b080009feadd7417362ab6f40094",
+      "limits": "Rejecting both also loses legitimate ASCII. Classification cannot resolve identical pixels with contradictory source/script provenance; require independent source proof."
+    },
+    {
+      "name": "epoch-8",
+      "samePixelPairs": 32,
+      "pairsAcceptedInBothConflictingSources": 28,
+      "pairsRejectedInBothSources": 4,
+      "rawSha256": "208be7eb969c4e022f0966a02ae654c637cc84870059f4eb98b7ac79de75d404",
+      "limits": "Rejecting both also loses legitimate ASCII. Classification cannot resolve identical pixels with contradictory source/script provenance; require independent source proof."
+    }
+  ]
+}

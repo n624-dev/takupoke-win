@@ -1,0 +1,20 @@
+{
+  "nativeCalls": 0,
+  "scope": "Closed consumed-data comparison only; no extra model calls/qualification",
+  "observations": [
+    {
+      "id": "d0-positive",
+      "observations": 2175,
+      "inputWidthChanged": 135,
+      "literalChanged": 0,
+      "belowFloorDecisionChanged": 0
+    },
+    {
+      "id": "d1-positive",
+      "observations": 2175,
+      "inputWidthChanged": 130,
+      "literalChanged": 0,
+      "belowFloorDecisionChanged": 0
+    }
+  ]
+}

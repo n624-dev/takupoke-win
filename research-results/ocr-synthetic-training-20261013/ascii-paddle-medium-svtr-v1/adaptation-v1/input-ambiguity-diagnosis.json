@@ -1,0 +1,160 @@
+{
+  "scope": "Read-only fixed corpus diagnosis; never removes development rows or repairs any prediction/score",
+  "splits": [
+    {
+      "split": "train",
+      "scope": "Known synthetic corpus pixel/hash impossibility audit, not model selection or heldout final",
+      "collisions": [
+        {
+          "hashType": "pngSha256",
+          "hash": "bee90ac6d6f6c0cd8db431d0a0a62072d8c863e1b945ac154e28c2f490bc0259",
+          "rows": [
+            {
+              "id": "train-01922",
+              "font": "ZenKakuGothicNew-Regular",
+              "kind": "mixed_confusable",
+              "literal": "木葉に霞空: vI1OIO-jY",
+              "density": 1,
+              "framedBaseline": 24
+            },
+            {
+              "id": "train-01923",
+              "font": "ZenKakuGothicNew-Regular",
+              "kind": "mixed_confusable",
+              "literal": "木葉に霞空: vI1OlO-jY",
+              "density": 1,
+              "framedBaseline": 24
+            }
+          ],
+          "sourceProofRequired": true,
+          "limit": "Different literal provenance with identical provided/model input. No crop recognizer can distinguish these exact inputs. Not a target correction or permission to accept unsupported sources."
+        },
+        {
+          "hashType": "pngSha256",
+          "hash": "3ccf267102e652a4f27d8c1c1f50b3fcde61c5c6fb342b2d2af93ffea01ab83f",
+          "rows": [
+            {
+              "id": "train-02092",
+              "font": "ZenKakuGothicNew-Regular",
+              "kind": "mixed_confusable",
+              "literal": "山風に紫雲 — ml0O11OI lu",
+              "density": 1,
+              "framedBaseline": 19
+            },
+            {
+              "id": "train-02093",
+              "font": "ZenKakuGothicNew-Regular",
+              "kind": "mixed_confusable",
+              "literal": "山風に紫雲 — ml0O11Ol lu",
+              "density": 1,
+              "framedBaseline": 19
+            }
+          ],
+          "sourceProofRequired": true,
+          "limit": "Different literal provenance with identical provided/model input. No crop recognizer can distinguish these exact inputs. Not a target correction or permission to accept unsupported sources."
+        },
+        {
+          "hashType": "pngSha256",
+          "hash": "040499db486ff406c55b75c574c1b0dea0c8cd4b0800ad43ceb46579d0618289",
+          "rows": [
+            {
+              "id": "train-02432",
+              "font": "ZenKakuGothicNew-Regular",
+              "kind": "mixed_confusable",
+              "literal": "薄雲の紅葉：i0II_bi",
+              "density": 1,
+              "framedBaseline": 18
+            },
+            {
+              "id": "train-02433",
+              "font": "ZenKakuGothicNew-Regular",
+              "kind": "mixed_confusable",
+              "literal": "薄雲の紅葉：i0Il_bi",
+              "density": 1,
+              "framedBaseline": 18
+            }
+          ],
+          "sourceProofRequired": true,
+          "limit": "Different literal provenance with identical provided/model input. No crop recognizer can distinguish these exact inputs. Not a target correction or permission to accept unsupported sources."
+        },
+        {
+          "hashType": "inputTensorSha256",
+          "hash": "a8c7c16cbb58832e20d598eb5482f7728286919db010af217e73022244d01c2e",
+          "rows": [
+            {
+              "id": "train-01922",
+              "font": "ZenKakuGothicNew-Regular",
+              "kind": "mixed_confusable",
+              "literal": "木葉に霞空: vI1OIO-jY",
+              "density": 1,
+              "framedBaseline": 24
+            },
+            {
+              "id": "train-01923",
+              "font": "ZenKakuGothicNew-Regular",
+              "kind": "mixed_confusable",
+              "literal": "木葉に霞空: vI1OlO-jY",
+              "density": 1,
+              "framedBaseline": 24
+            }
+          ],
+          "sourceProofRequired": true,
+          "limit": "Different literal provenance with identical provided/model input. No crop recognizer can distinguish these exact inputs. Not a target correction or permission to accept unsupported sources."
+        },
+        {
+          "hashType": "inputTensorSha256",
+          "hash": "23870aaf931461af0e1b8c11b15964b530c9f9888867696c70227fc43dd7e2a6",
+          "rows": [
+            {
+              "id": "train-02092",
+              "font": "ZenKakuGothicNew-Regular",
+              "kind": "mixed_confusable",
+              "literal": "山風に紫雲 — ml0O11OI lu",
+              "density": 1,
+              "framedBaseline": 19
+            },
+            {
+              "id": "train-02093",
+              "font": "ZenKakuGothicNew-Regular",
+              "kind": "mixed_confusable",
+              "literal": "山風に紫雲 — ml0O11Ol lu",
+              "density": 1,
+              "framedBaseline": 19
+            }
+          ],
+          "sourceProofRequired": true,
+          "limit": "Different literal provenance with identical provided/model input. No crop recognizer can distinguish these exact inputs. Not a target correction or permission to accept unsupported sources."
+        },
+        {
+          "hashType": "inputTensorSha256",
+          "hash": "5c7d60bea079e1aac65008aa1ac820903bfb6ba0f58a643775c0155c1b2321d1",
+          "rows": [
+            {
+              "id": "train-02432",
+              "font": "ZenKakuGothicNew-Regular",
+              "kind": "mixed_confusable",
+              "literal": "薄雲の紅葉：i0II_bi",
+              "density": 1,
+              "framedBaseline": 18
+            },
+            {
+              "id": "train-02433",
+              "font": "ZenKakuGothicNew-Regular",
+              "kind": "mixed_confusable",
+              "literal": "薄雲の紅葉：i0Il_bi",
+              "density": 1,
+              "framedBaseline": 18
+            }
+          ],
+          "sourceProofRequired": true,
+          "limit": "Different literal provenance with identical provided/model input. No crop recognizer can distinguish these exact inputs. Not a target correction or permission to accept unsupported sources."
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "scope": "Known synthetic corpus pixel/hash impossibility audit, not model selection or heldout final",
+      "collisions": []
+    }
+  ]
+}

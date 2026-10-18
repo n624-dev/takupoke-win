@@ -1,0 +1,61 @@
+{
+  "timeUtc": "2026-10-14T03:28:20.383551+00:00",
+  "selected": "original",
+  "status": "Closed/unqualified/inactive/production target unmet",
+  "metrics": [
+    {
+      "name": "original",
+      "exact": 228,
+      "correctAccepted": 175,
+      "incorrectAccepted": 64,
+      "negativeAccepted": 25,
+      "retentionExact": 128
+    },
+    {
+      "name": "epoch-2",
+      "exact": 239,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "negativeAccepted": 0,
+      "retentionExact": 128
+    },
+    {
+      "name": "epoch-4",
+      "exact": 237,
+      "correctAccepted": 71,
+      "incorrectAccepted": 13,
+      "negativeAccepted": 0,
+      "retentionExact": 128
+    },
+    {
+      "name": "epoch-8",
+      "exact": 240,
+      "correctAccepted": 81,
+      "incorrectAccepted": 14,
+      "negativeAccepted": 1,
+      "retentionExact": 128
+    }
+  ],
+  "trainingSeconds": 392.84594946000107,
+  "cacheSeconds": 181.38226207500156,
+  "peakRssMiB": 2589.6953125,
+  "budgetStopped": false,
+  "cacheBytes": 1144598659,
+  "ownAllScratchFileBytes": 1400824328,
+  "freeDiskBytes": 2825752576,
+  "strictContinuationGate": {
+    "selectedTrained": false,
+    "rawExactAtLeast97percent": false,
+    "correctAcceptedAtLeast90percent": false,
+    "wrongAcceptedZero": false,
+    "negativeAcceptedZero": false,
+    "eachFontRawExactAtLeast95percent": false,
+    "japaneseRetentionRegressionsZero": true
+  },
+  "gateRelaxed": false,
+  "furtherTrainingStarted": false,
+  "finalCorpusGeneratedOrInferred": false,
+  "iosEdited": false,
+  "commitOrPush": false,
+  "nextDecision": "Pause sameDWcondition; future earlierCNN vertical-information diagnosis only before any newprotocol training."
+}

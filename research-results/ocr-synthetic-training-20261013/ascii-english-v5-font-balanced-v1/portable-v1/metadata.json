@@ -1,0 +1,406 @@
+{
+  "status": "Inactive research candidate; no app switch/document qualification/publicmodel/iPhone claim",
+  "format": "Standard ONNX opset17, FP32, CPUExecutionProvider; customop none",
+  "modelSha256": "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703",
+  "modelBytes": 22183975,
+  "inputs": {
+    "x": {
+      "type": "FLOAT32",
+      "layout": "BCHW",
+      "channels": "BGR",
+      "shape": [
+        "batch",
+        3,
+        48,
+        "input_width"
+      ],
+      "widthMin": 320,
+      "widthMax": 960
+    },
+    "valid_width": {
+      "type": "INT64",
+      "shape": [
+        "batch"
+      ],
+      "bounds": "1<=valid_width<=input_width",
+      "purpose": "Reject-head mean frame mask only. Does not hide or trim CTC outputs."
+    }
+  },
+  "outputs": {
+    "probabilities": {
+      "type": "FLOAT32",
+      "shape": [
+        "batch",
+        "time_steps",
+        438
+      ],
+      "operation": "Full438 softmax, unchanged dictionary denominator; no ASCII renormalization"
+    },
+    "reject_probability": {
+      "type": "FLOAT32",
+      "shape": [
+        "batch"
+      ],
+      "operation": "Independent sigmoid reject; uncalibrated"
+    }
+  },
+  "preprocessing": {
+    "input": "Original RGB24 wholeline crop retaining every supplied nonwhite RGB sample; bbox+2originalpixels, original crop offset separately retained",
+    "orientation": "Natural single baseline/relative glyph heights/internal gaps retained; no glyph isolation/case/lexicon normalization",
+    "inputWidth": "floor(48 * max(320/48, originalCropWidth/originalCropHeight)); refuse if >960",
+    "validWidth": "min(inputWidth, ceil(48*originalCropWidth/originalCropHeight))",
+    "sampling": "Center-coordinate bilinear in float64 on original RGB byte pixels, channel order reversed to BGR. xs=clamp((j+0.5)*originalWidth/validWidth-0.5,0,originalWidth-1); ys=clamp((i+0.5)*originalHeight/48-0.5,0,originalHeight-1). floor(value+0.5) to uint8-compatible numeric range, then FP32.",
+    "normalization": "FP32 steps: (roundedPixels / float32(255) - float32(0.5)) / float32(0.5); zero FP32 rightpadding, not white pixels. Preserve validWidth and original offsets.",
+    "referenceSourceSha256": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098",
+    "referenceSourceFile": "image_tensor.py",
+    "officialHfImageProcessorIdentityClaim": false,
+    "productionWindowsByteParityClaim": false
+  },
+  "ctc": {
+    "dictionarySize": 438,
+    "dictionaryFile": "dictionary.json",
+    "dictionarySha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368",
+    "blankIndex": 0,
+    "spaceIndex": 437,
+    "unkAdded": false,
+    "decode": "AllT greedy argmax over438 (ties lowest index); skipblank0; consecutive same nonblank collapse; blank resets previous. Text literal unchanged.",
+    "confidence": "MAX emitted-class probability over each consecutive run; line diagnostic minimum across emitted pieces. Not average, not calibrated probability of correctness.",
+    "intervals": "Start inclusive/End exclusive time-step indices from original argmax sequence",
+    "paddingRule": "Decode fullT. If any emitted End*inputWidth > validWidth*T, refuse supported-source claim; never drop terminal predictions to repair text.",
+    "frameMeanMask": "Exact integer inequality (2*t+1)*inputWidth < 2*T*validWidth; model reject mean only",
+    "sourcePositionMapping": "ScaledX=t/T*inputWidth; OriginalX=framedOriginalX+ScaledX/validWidth*framedOriginalWidth; height stays original wholeline. SourceBox is CTC estimate, not exact glyph-outline evidence; original ink/ownership/provenance proof remains separate."
+  },
+  "diagnosticAcceptance": {
+    "minimumCtcConfidence": 0.8,
+    "maximumRejectProbability": 0.05,
+    "required": "Nonempty, every output character printableASCII32..126, allintervals supported; no output correction/lexicon/whitelist",
+    "limits": "Same frozen comparison thresholds retained for report; new model has increased correct-lowCTC review burden. Do not interpret as calibrated or source-domain proof."
+  },
+  "trainingProvenance": {
+    "foundation": "PaddlePaddle/en_PP-OCRv5_mobile_rec_safetensors",
+    "foundationRevision": "e4abce2bbd335f6c3eda0507b7f8e8abd5af3419",
+    "foundationWeightsSha256": "9dab63fb9b819082f3f06e889a3af56dc2c27155d46d8409659c869a2aece2bc",
+    "declaredLicense": "Apache-2.0 per pinned officialHF receipt",
+    "checkpoint": "/workspace/scratch/ascii-english-v5-font-balanced-20261014-v1/adaptation-v1/epoch-4.safetensors",
+    "checkpointSha256": "7313bee5dabf17998010c6f47844fe80649744b03c0366af05c627fc47314547",
+    "trainingProtocolSha256": "ff7611adf18b20cab76c93b5ec28144d02a9ba2590dac7162fdc43f4258da52b",
+    "parameters": "Official CNN/encoder/full438head plus reject121; originalclass/config/normepsilon1e-6 retained, BNstats fixed",
+    "data": "New independent fictional literals; train8/dev4 Latin families disjoint, mono50percent/natural50percent; no realschooldata/olddevfont train transfer/oldliteral training. CJK/mixed wholeline negative controls only.",
+    "oldNativeOnnxIdentityClaim": false,
+    "oldZeroWrongGateChanged": false
+  },
+  "fidelity": {
+    "status": "Inactive new-model ONNX export; no final/document/iPhone qualification",
+    "onnxBytes": 22183975,
+    "onnxSha256": "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703",
+    "opset": 17,
+    "domains": [
+      ""
+    ],
+    "numericShapes": [
+      {
+        "batch": 1,
+        "width": 320,
+        "timeSteps": 40,
+        "maximumProbabilityAbsDifference": 3.5762786865234375e-07,
+        "maximumRejectAbsDifference": 5.960464477539063e-08,
+        "rows": [
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 5.960464477539063e-08,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          }
+        ]
+      },
+      {
+        "batch": 1,
+        "width": 321,
+        "timeSteps": 40,
+        "maximumProbabilityAbsDifference": 4.76837158203125e-07,
+        "maximumRejectAbsDifference": 1.1920928955078125e-07,
+        "rows": [
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 1.1920928955078125e-07,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          }
+        ]
+      },
+      {
+        "batch": 1,
+        "width": 481,
+        "timeSteps": 60,
+        "maximumProbabilityAbsDifference": 2.980232238769531e-07,
+        "maximumRejectAbsDifference": 5.960464477539063e-08,
+        "rows": [
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 5.960464477539063e-08,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          }
+        ]
+      },
+      {
+        "batch": 1,
+        "width": 500,
+        "timeSteps": 62,
+        "maximumProbabilityAbsDifference": 3.5762786865234375e-07,
+        "maximumRejectAbsDifference": 1.1920928955078125e-07,
+        "rows": [
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 1.1920928955078125e-07,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          }
+        ]
+      },
+      {
+        "batch": 1,
+        "width": 640,
+        "timeSteps": 80,
+        "maximumProbabilityAbsDifference": 3.5762786865234375e-07,
+        "maximumRejectAbsDifference": 0.0,
+        "rows": [
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 0.0,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          }
+        ]
+      },
+      {
+        "batch": 1,
+        "width": 960,
+        "timeSteps": 120,
+        "maximumProbabilityAbsDifference": 2.980232238769531e-07,
+        "maximumRejectAbsDifference": 0.0,
+        "rows": [
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 0.0,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          }
+        ]
+      },
+      {
+        "batch": 2,
+        "width": 320,
+        "timeSteps": 40,
+        "maximumProbabilityAbsDifference": 2.980232238769531e-07,
+        "maximumRejectAbsDifference": 0.0,
+        "rows": [
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 0.0,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          },
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 0.0,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          }
+        ]
+      },
+      {
+        "batch": 2,
+        "width": 321,
+        "timeSteps": 40,
+        "maximumProbabilityAbsDifference": 3.5762786865234375e-07,
+        "maximumRejectAbsDifference": 0.0,
+        "rows": [
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 0.0,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          },
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 0.0,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          }
+        ]
+      },
+      {
+        "batch": 2,
+        "width": 481,
+        "timeSteps": 60,
+        "maximumProbabilityAbsDifference": 3.5762786865234375e-07,
+        "maximumRejectAbsDifference": 0.0,
+        "rows": [
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 0.0,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          },
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 0.0,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          }
+        ]
+      },
+      {
+        "batch": 2,
+        "width": 500,
+        "timeSteps": 62,
+        "maximumProbabilityAbsDifference": 3.5762786865234375e-07,
+        "maximumRejectAbsDifference": 0.0,
+        "rows": [
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 0.0,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          },
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 0.0,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          }
+        ]
+      },
+      {
+        "batch": 2,
+        "width": 640,
+        "timeSteps": 80,
+        "maximumProbabilityAbsDifference": 5.364418029785156e-07,
+        "maximumRejectAbsDifference": 0.0,
+        "rows": [
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 0.0,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          },
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 0.0,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          }
+        ]
+      },
+      {
+        "batch": 2,
+        "width": 960,
+        "timeSteps": 120,
+        "maximumProbabilityAbsDifference": 4.76837158203125e-07,
+        "maximumRejectAbsDifference": 1.1920928955078125e-07,
+        "rows": [
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 1.1920928955078125e-07,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          },
+          {
+            "textEqual": true,
+            "ctcIntervalsEqual": true,
+            "paddingSupportedEqual": true,
+            "acceptedEqual": true,
+            "minimumConfidenceAbsDifference": 0,
+            "rejectAbsDifference": 0.0,
+            "maximumAlignedPieceConfidenceAbsDifference": 0
+          }
+        ]
+      }
+    ],
+    "developmentRows": 496,
+    "developmentEqualCounts": {
+      "textEqual": 496,
+      "ctcIntervalsEqual": 496,
+      "paddingSupportedEqual": 496,
+      "acceptedEqual": 496
+    },
+    "allDevelopmentTextIntervalPaddingAcceptEqual": true,
+    "maximumDevelopmentAbsDifferences": {
+      "probability": 1.7762184143066406e-05,
+      "reject": 1.2516975402832031e-06,
+      "confidence": 1.4960765838623047e-05
+    },
+    "priorSelectedTorchRawReproducedExactly": true,
+    "numpyHostVsIntegerFrameCenterMaskAllEqual": true,
+    "checkpointWeightsUnchanged": true,
+    "stageSeconds": 103.47452123799985,
+    "peakRssMiB": 855.1484375,
+    "dictionarySha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368",
+    "torchRawSha256": "324a7b36e14dd5476379f6cd711d2b6b79ed201eca0804c2b170f38c8cbb2db1",
+    "onnxRawSha256": "d098a41754d4b3de5ddbccb184e56d07ef075b9872c99cdcca7ba3203d7d2473",
+    "numericRawSha256": "6587271a5b33933e69e5d01293227f6f95a1f7b1cfdeea81c653f66328d77f92",
+    "onnxOutsideGit": "/workspace/scratch/ascii-english-v5-font-balanced-20261014-v1/portable-v1/model.onnx",
+    "coremlAttempted": false,
+    "iosRepoEdited": false,
+    "activated": false
+  },
+  "limitations": [
+    "Fresh development consumed, no final qualification. Sawarabi remains reserved.",
+    "WholeJapanese fields have out-of-vocabulary characters; do not oracle-cut prefix or credit ASCII suffix as whole-field.",
+    "Interior damage/clipping can be accepted; crop pixels cannot prove completeness/script origin/cell affiliation.",
+    "iOS repository not edited; CoreML not attempted; iPhone inference/memory unmeasured.",
+    "No automatic app activation, publicmodel release, commit or push."
+  ]
+}

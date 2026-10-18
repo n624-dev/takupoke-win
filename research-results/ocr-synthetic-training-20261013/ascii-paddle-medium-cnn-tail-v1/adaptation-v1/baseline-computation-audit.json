@@ -1,0 +1,9 @@
+{
+  "scope": "Read-only clarification of frozen development baseline; no raw/model/protocol/selection changed",
+  "developmentBaseline": "Original native ONNX finalteacherFP32features passed through copied full18710classifier via Torch F.linear/softmax. This is not direct original full ONNX output bytes. Same classifier computational path is used for all candidates.",
+  "nativeOriginalFullOnnxFidelity": "Separate pretraining 48 consumed images plus10 dynamicshapes checked original fullONNX probabilities/logits against copied Torch finalCNN/downstream/head, with identical decoded text/CTCinterval/floor decisions and registered numeric bounds.",
+  "developmentInitialization": "576 newdevelopment copied-classifier baseline and reconstructed untrained tail matched all text/CTCinterval/floor decisions before optimizer; numeric scope separately recorded.",
+  "confidence": "Original uncalibrated greedy CTC probabilities from the model arithmetic; no dictionary reduction/normalization over a selected class subset/clamp/oracle repair",
+  "windowsNativeOrBitwiseEqualityClaim": false,
+  "limits": "Float matrix operation order differs between Torch and ONNX. Baseline confidence is not claimed to be bitwise native Windows confidence. No trained model is production-qualified."
+}

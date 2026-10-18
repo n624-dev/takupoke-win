@@ -1,0 +1,24 @@
+{
+  "study/factory-observations.jsonl": {
+    "bytes": 4816429,
+    "sha256": "c666297cf948e1f6d496ec286ae7e58013ada9dcb3d8dff02049ad4bb7272acb",
+    "parts": [
+      {
+        "path": "raw/factory-observations/00-literalfresh-0-positive.jsonl.gz",
+        "id": "literalfresh-0-positive",
+        "rawBytes": 2402615,
+        "rawSHA256": "fb12b166be8a3b31cf11c9672147f47e25e032ec44317a4ab8f9936f4cc21f1d",
+        "compressedBytes": 343283,
+        "compressedSHA256": "71da9c7e199a3bee2d13bb2f853677224cc55c6002cc7515f914bf9893843052"
+      },
+      {
+        "path": "raw/factory-observations/01-literalfresh-1-positive.jsonl.gz",
+        "id": "literalfresh-1-positive",
+        "rawBytes": 2413814,
+        "rawSHA256": "1c18e87b883c7c9ec44448282ae5f2cf20c862080991db6ef4d47eb5ec80caec",
+        "compressedBytes": 347601,
+        "compressedSHA256": "9f4def6449b9b10d140f074ba1975752574850502c4693dc94608f24797b152a"
+      }
+    ]
+  }
+}

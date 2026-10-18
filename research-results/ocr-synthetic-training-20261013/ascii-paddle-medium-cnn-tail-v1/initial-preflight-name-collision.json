@@ -1,0 +1,9 @@
+{
+  "scope": "Torch constructor before freeze, inference or training",
+  "sourceSha256": "6d154d206310e5985e6c4a48ceb8ef3dd7dd9cf2f0a9b3bddbbdaae484b26f1c",
+  "logSha256": "f511af00f2b761317cb8c1636797e66a7836337349568d3a18f3836331b1bbb5",
+  "error": "Registered buffer half collides with nn.Module.half method",
+  "freezeCreated": false,
+  "trainingStarted": false,
+  "resolution": "Rename exact scalar buffers to geluHalf/geluOne/geluSqrt2; arithmetic unchanged"
+}

@@ -1,0 +1,104 @@
+{
+  "recipe": "all-prior-literals-before-newfresh-native-v1",
+  "base": {
+    "file": "tools/ocr-whole-model-comparison/exclusions.json",
+    "bytes": 1527422,
+    "sha256": "53d560e3dc2095ba3ebda29f0eac0d67e4a896db187d2a95351d754d584f5411"
+  },
+  "parts": [
+    {
+      "file": "tools/ocr-acquisition-accuracy/exclusions-extra-0.json",
+      "bytes": 52503,
+      "sha256": "9406c283904c98935584d019d303c9f0f7b4432772fcbf7959e256acf92b9721"
+    },
+    {
+      "file": "tools/ocr-acquisition-accuracy/exclusions-extra-1.json",
+      "bytes": 52503,
+      "sha256": "98fad51f77be5a65f0c12d723fa8ed049a35dd169667ea8b48c144501cd4b4a3"
+    },
+    {
+      "file": "tools/ocr-acquisition-accuracy/exclusions-extra-2.json",
+      "bytes": 52503,
+      "sha256": "aa0d37f64fe47036e4f741dee2cf97284da84e70367b0f2ee903804c031741c0"
+    },
+    {
+      "file": "tools/ocr-acquisition-accuracy/exclusions-extra-3.json",
+      "bytes": 52503,
+      "sha256": "ae496f340a396038a32b396e7bdc5232e5897a6c75f51d1dd0f3269310d51e10"
+    },
+    {
+      "file": "tools/ocr-acquisition-accuracy/exclusions-extra-4.json",
+      "bytes": 52503,
+      "sha256": "0727401303dc74bf41fd8442a6a69b4164c3fab2b4fe5969b00a54d3de8aacfc"
+    },
+    {
+      "file": "tools/ocr-acquisition-accuracy/exclusions-extra-5.json",
+      "bytes": 52503,
+      "sha256": "f3437ab3bcea8e18625cefb1ee89b38b62cb6669eefdb2ea8a849719bc421f5e"
+    },
+    {
+      "file": "tools/ocr-acquisition-accuracy/exclusions-extra-6.json",
+      "bytes": 52503,
+      "sha256": "25161a8e66e8c20379cb29c4a8dd1ca9a7f052b98c9db2a681057fc57cadb9be"
+    },
+    {
+      "file": "tools/ocr-acquisition-accuracy/exclusions-extra-7.json",
+      "bytes": 44663,
+      "sha256": "f1fb30ad468c7bad15547ffa1407da762692a72e11b58532f573a71c68bc5305"
+    },
+    {
+      "file": "tools/ocr-source-order-accuracy/exclusions-extra-0.json",
+      "bytes": 52503,
+      "sha256": "cde1f09d1bfa99507e350c211c3b6a435923911c7e4b7d10d26de3d30942542e"
+    },
+    {
+      "file": "tools/ocr-source-order-accuracy/exclusions-extra-1.json",
+      "bytes": 45293,
+      "sha256": "2c53a5ca2032d9d303c4acbebb3e9038f0b88e8438c44c2701c922b2f5821b85"
+    }
+  ],
+  "totalExcludedLiterals": 28486,
+  "sources": [
+    {
+      "file": "excluded-values.json",
+      "bytes": 13747437,
+      "sha256": "292006a01c6ccb56771250d2be7b088f4c94b5e072289dc5003d365241312dcf"
+    },
+    {
+      "file": "train/manifest.json",
+      "bytes": 1588668,
+      "sha256": "96ab7536234f693959e246c26fae30dab2f45fe65722246a6c383d9fcd4ec22f"
+    },
+    {
+      "file": "development/manifest.json",
+      "bytes": 568421,
+      "sha256": "e4beaa18de3a0f705dd97079ed60d5fa13a0f090436b109b07e25391bb01afa4"
+    },
+    {
+      "file": "closed-native-v3/oracle.json",
+      "bytes": 488463,
+      "sha256": "2ea4e1ad6d999c95c23aa958307cee8ca7ccf46b06897d91c0f32285b260061a"
+    },
+    {
+      "file": "v4/fresh/manifest.json",
+      "bytes": 775648,
+      "sha256": "9ebfa74191925d0949055ff1daf4c5347c1142cad85d33ced3a5fb0582ee106c"
+    },
+    {
+      "file": "v4/train/manifest.json",
+      "bytes": 2647159,
+      "sha256": "3953682a34d48fa540de11edf6144e897536690680ba744de5ef138f7a1ab976"
+    },
+    {
+      "file": "v4/development/manifest.json",
+      "bytes": 781209,
+      "sha256": "cc2702244018eadb3e9bba0e8f15cd5de4196ad7ec718276f1a3dfe2f7aef736"
+    },
+    {
+      "file": "closed-native38831256353/oracle.json",
+      "bytes": 768215,
+      "sha256": "ec57957497a676c0c1c8d2674658fb87a912f9db80512ba9a71d3c3404a3ffd8"
+    }
+  ],
+  "scope": "Includes ALL original V3/root exclusions and every closed root whole-field literal/component and V4 train/development/fresh literal. Only SHA256 hashes, no private documents."
+}

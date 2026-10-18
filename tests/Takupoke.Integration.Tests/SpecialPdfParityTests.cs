@@ -4,9 +4,67 @@ using Xunit;
 
 namespace Takupoke.Integration.Tests;
 
-/// <summary>Fictional geometry and expected results match the iOS SpecialScheduleTests fixtures.</summary>
+/// <summary>Fictional ruled tables with intact role baselines, empty fields and merged lessons.</summary>
 public sealed class SpecialPdfParityTests
 {
+    [Fact]
+    public void OffCenterMergedGradeLabelOwnsItsPhysicalRowsInsteadOfTheNearestGrade()
+    {
+        var page=ReturnPage();
+        page=page with { Glyphs=page.Glyphs.Select(g=>g.X<110 && g.Y>450 && g.Text is "A" or "I" ? g with { Y=500 } : g).ToArray(),
+            Lines=page.Lines.Select(l=>l.Horizontal && l.X1==0 && l.Y1>=120 && l.Y1<=545 ? l with { X1=110 } : l)
+                .Append(new(0,120,0,545)).Concat(new[]{0,3,6,9,12,15,17}.Select(row=>new PdfRule(0,120+row*25,110,120+row*25))).ToArray() };
+        var result=PdfScheduleParser.Special([page],MaterialKind.ExamReturn);
+        Assert.Equal(17,result.CoveredClasses.Count);
+        Assert.Equal(Takupoke.Core.Recovery.RecoveryValidator.SpecialClasses.Order(),result.CoveredClasses.Order());
+    }
+
+    [Theory]
+    [InlineData(MaterialKind.Exam)][InlineData(MaterialKind.ExamReturn)]
+    public void MergedRowLabelHeaderDoesNotEnterTheLessonCalibrationArea(MaterialKind kind)
+    {
+        var pages=kind==MaterialKind.Exam ? Enumerable.Range(1,6).Select(i=>ExamPage(i)).ToArray() : [ReturnPage()];
+        var expected=PdfScheduleParser.Special(pages,kind);
+        pages=pages.Select(p=> {
+            var top=kind==MaterialKind.Exam ? 110 : 120;var left=kind==MaterialKind.Exam ? 100 : 140;
+            return p with { Lines=p.Lines.Select(l=>l.Horizontal && l.Y1==top ? l with { X1=left } : l)
+                .Append(new(0,top-10,left,top-10)).ToArray() };
+        }).ToArray();
+        var actual=PdfScheduleParser.Special(pages,kind);
+        Assert.Equal(System.Text.Json.JsonSerializer.Serialize(expected.Lessons),System.Text.Json.JsonSerializer.Serialize(actual.Lessons));
+        Assert.Equal(expected.CoveredClasses,actual.CoveredClasses);
+    }
+
+    [Theory]
+    [InlineData(MaterialKind.Exam, "令和8年度令和9年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度2027年度")]
+    [InlineData(MaterialKind.Exam, "令和8年度令和Ⅸ年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度令和Ⅸ年度")]
+    [InlineData(MaterialKind.Exam, "令和8年度令和௰年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度令和௰年度")]
+    [InlineData(MaterialKind.Exam, "令和8年度ⅯⅯⅩⅩⅦ年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度ⅯⅯⅩⅩⅦ年度")]
+    [InlineData(MaterialKind.Exam, "令和8年度令和9年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度令和9年度")]
+    [InlineData(MaterialKind.Exam, "令和8年度㋿9年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度㋿9年度")]
+    [InlineData(MaterialKind.Exam, "令和8年度令和Ⅸ年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度令和Ⅸ年度")]
+    [InlineData(MaterialKind.Exam, "令和8年度𝟚𝟘𝟚𝟟年度")]
+    [InlineData(MaterialKind.ExamReturn, "令和8年度𝟚𝟘𝟚𝟟年度")]
+    public void ConflictingSpecialTitleYearsCannotSelectTheFirstYear(MaterialKind kind, string title)
+    {
+        var pages = kind == MaterialKind.Exam ? Enumerable.Range(1, 6).Select(i => ExamPage(i, titleYears: i == 1 ? title : "令和8年度")).ToArray() : new[] { ReturnPage(titleYears: title) };
+        Assert.Equal("P03", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special(pages, kind)).Stage);
+    }
+    [Theory]
+    [InlineData(MaterialKind.Exam)]
+    [InlineData(MaterialKind.ExamReturn)]
+    public void EquivalentSpecialTitleYearsRemainValid(MaterialKind kind)
+    {
+        var pages = kind == MaterialKind.Exam ? Enumerable.Range(1, 6).Select(i => ExamPage(i, titleYears: "㋿8年度𝟚𝟘𝟚𝟞年度")).ToArray() : new[] { ReturnPage(titleYears: "㋿8年度令和8年度") };
+        Assert.Equal(2026, PdfScheduleParser.Special(pages, kind).SchoolYear);
+    }
     [Fact]
     public void ExamMatchesIosCoveredClassesDatesTimesAndMergedLessons()
     {
@@ -41,10 +99,52 @@ public sealed class SpecialPdfParityTests
             Assert.All(pair, l => Assert.Equal(date == "2026-04-01" ? new("10:30", "11:50") : new TimeRange("12:50", "14:20"), result.TimeFor(l)));
         }
     }
+    [Theory]
+    [InlineData(3, 4, 2, 5, 6)]
+    [InlineData(1, 2, 6, 4, 5)]
+    public void ReturnDateColumnsCannotMoveTheDedicatedClockToAnotherDay(int first, int second, int third, int fourth, int last)
+    {
+        Assert.Equal("P10", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special(
+            [ReturnPage(dateDays: [first, second, third, fourth, last])], MaterialKind.ExamReturn)).Stage);
+    }
     [Fact]
     public void MissingSpecialTimeCannotBeReplacedByOrdinaryTime()
     {
         Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special(Enumerable.Range(1, 6).Select(i => ExamPage(i, omitLastTime: i == 1)).ToArray(), MaterialKind.Exam));
+    }
+    [Theory]
+    [InlineData("9:20~10:35")]
+    [InlineData("8:40~9:30")]
+    public void RepeatedExamChartsCannotAcceptOverlappingOrReversedPeriodOrder(string second)
+    {
+        var times = new[] { "8:50~9:35", second, "10:50~11:35", "11:50~12:35", "13:20~14:05", "14:20~15:05" };
+        Assert.Equal("P05", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special(Enumerable.Range(1,6).Select(i=>ExamPage(i,timingOverride:times)).ToArray(),MaterialKind.Exam)).Stage);
+    }
+    [Fact]
+    public void ReturnChartCannotAcceptOverlappingFirstDayPeriods()
+    {
+        var times = new[] { "7:00~7:40", "7:50~8:30", "8:40~9:20", "9:30~10:10", "10:30~11:10", "11:00~11:50", "12:00~12:40", "12:40~13:20" };
+        Assert.Equal("P05", Assert.Throws<PdfParseException>(()=>PdfScheduleParser.Special([ReturnPage(timingOverride:times)],MaterialKind.ExamReturn)).Stage);
+    }
+    [Fact]
+    public void AdjacentExamPeriodsMayShareAnEndpoint()
+    {
+        var times = new[] { "8:50~9:35", "9:35~10:35", "10:50~11:35", "11:50~12:35", "13:20~14:05", "14:20~15:05" };
+        var result=PdfScheduleParser.Special(Enumerable.Range(1,6).Select(i=>ExamPage(i,timingOverride:times)).ToArray(),MaterialKind.Exam);
+        Assert.Equal(new TimeRange("09:35","10:35"),result.PeriodTimes[2]);
+    }
+    [Theory]
+    [InlineData("3-XX")]
+    [InlineData("3-1")]
+    public void SeventeenExamClassesMustMatchTheRequiredSet(string replacement)
+    {
+        var pages = Enumerable.Range(1, 6).Select(i => ExamPage(i, firstLabel: i == 3 ? replacement : null)).ToArray();
+        Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special(pages, MaterialKind.Exam));
+    }
+    [Fact]
+    public void SeventeenReturnClassesCannotReplaceAiTwoWithAiThree()
+    {
+        Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special([ReturnPage(invalidAiClass: true)], MaterialKind.ExamReturn));
     }
     private sealed class Builder(bool ordered, double height)
     {
@@ -58,11 +158,49 @@ public sealed class SpecialPdfParityTests
         public void Line(double x1, double y1, double x2, double y2) => Lines.Add(new(x1, y1, x2, y2));
         public PdfPageLayout Page(double width, double pageHeight) => new(width, pageHeight, Glyphs, Lines);
     }
-    private static PdfPageLayout ExamPage(int number, bool merged = false, bool metadata = false, bool omitLastTime = false)
+    [Fact]
+    public void LowerPeriodHeadingsAreSeparatedByTheirRealRuleWithoutFilteringLessonWords()
+    {
+        var original = ReturnPage();
+        var page = original with
+        {
+            Lines = original.Lines.Select(line => line.Horizontal && line.Y1 == 120 ? line with { X1 = 140 } : line)
+                .Append(new(0, 110, 140, 110)).ToArray(),
+            Glyphs = original.Glyphs.Concat(new[]
+            {
+                new PdfGlyph("1コマ", 150, 112, 15, 3, 90001, 90001),
+                new PdfGlyph("2コマ目", 470, 112, 15, 3, 90002, 90002),
+                new PdfGlyph("1コマ", 1450, 122, 15, 3, 90003, 90003)
+            }).ToArray()
+        };
+        var recorder = new ReturnGeometryRecorder("2026-04-01", "1_1", 5);
+        var actual = PdfScheduleParser.Special([page], MaterialKind.ExamReturn, ordinary:true, geometry:recorder);
+        Assert.DoesNotContain(actual.Lessons, lesson => lesson.Lines.Contains("2コマ目"));
+        Assert.Contains(actual.Lessons, lesson => lesson.Lines.Contains("1コマ"));
+        var json = recorder.ToJson();
+        Assert.DoesNotContain("架空", json); Assert.DoesNotContain("コマ", json); Assert.DoesNotContain("2026-04", json);
+        Assert.Contains("SourceOrder", json); Assert.Contains("Rules", json);
+        using var parsed = System.Text.Json.JsonDocument.Parse(json);
+        Assert.All(parsed.RootElement.GetProperty("Cells").EnumerateArray(), cell =>
+            Assert.True(cell.GetProperty("Content").GetProperty("Top").GetDouble() >= 120));
+    }
+
+    [Fact]
+    public void OrdinarySpecialCellsPreserveExtraPrintedLinesWhileCertifiedRolesRemainStrict()
+    {
+        var original = ReturnPage();
+        var page = original with { Glyphs = original.Glyphs.Append(new("架空注記", 302, 137, 15, 2)).ToArray() };
+        var result = PdfScheduleParser.Special([page], MaterialKind.ExamReturn, ordinary:true);
+        Assert.Contains(result.Lessons, lesson => lesson.Lines.Contains("架空注記"));
+        Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special([page], MaterialKind.ExamReturn));
+    }
+
+    private static PdfPageLayout ExamPage(int number, bool merged = false, bool metadata = false, bool omitLastTime = false, string? firstLabel = null, string[]? timingOverride = null, string titleYears = "令和8年度")
     {
         var b = new Builder(true, 8); var columns = number == 6 ? 2 : 3;
         string[] labels = number switch { 1 => ["1-1", "1-2", "1-3"], 6 => ["1年", "2年"], _ => [$"{number}-CN", $"{number}-ES", $"{number}-IT"] };
-        b.Write("令和8年度 試験時間割", 20, 20);
+        if (firstLabel is not null) labels[0] = firstLabel;
+        b.Write(titleYears + " 試験時間割", 20, 20);
         for (var column = 0; column < columns; column++)
         {
             b.Write(labels[column], 200 + column * 240, 70);
@@ -74,24 +212,24 @@ public sealed class SpecialPdfParityTests
         for (var index = 0; index < 5; index++)
         {
             b.Write($"4月{index + 1}日", 16, 126 + index * 40);
-            for (var column = 0; column < columns; column++) b.Write("架空科目A", 106 + column * 240, 126 + index * 40, 6);
-            if (metadata && index == 0) { b.Write("架空教員A", 106, 136, 5); b.Write("架空教室A", 106, 145, 5); }
+            for (var column = 0; column < columns; column++) { b.Write("架空科目A", 106 + column * 240, 126 + index * 40, 6); b.Write("架空教員A", 106 + column * 240, 136 + index * 40, 5); b.Write("架空教室A", 106 + column * 240, 142 + index * 40, 5); }
         }
-        var times = new[] { "8:50~9:35", "9:50~10:35", "10:50~11:35", "11:50~12:35", "13:20~14:05", "14:20~15:05" };
+        var times = timingOverride ?? new[] { "8:50~9:35", "9:50~10:35", "10:50~11:35", "11:50~12:35", "13:20~14:05", "14:20~15:05" };
         for (var index = 0; index < times.Length; index++) if (!omitLastTime || index != 5) b.Write($"{index + 1}時限目{times[index]}", 20, 470 + index * 15);
         b.Write("1・2時限連続8:50~10:20", 300, 470);
         return b.Page(850, 600);
     }
-    private static PdfPageLayout ReturnPage()
+    private static PdfPageLayout ReturnPage(bool invalidAiClass = false, string[]? timingOverride = null, int[]? dateDays = null, string titleYears = "令和8年度")
     {
-        var b = new Builder(false, 4); b.Write("令和8年度 試験返却時間割", 20, 20);
+        var days = dateDays ?? [1, 2, 3, 4, 5];
+        var b = new Builder(false, 4); b.Write(titleYears + " 試験返却時間割", 20, 20);
         for (var day = 0; day < 5; day++)
         {
-            b.Write($"4/{day + 1}", 150 + day * 8 * 40, 70);
+            b.Write($"4/{days[day]}", 150 + day * 8 * 40, 70);
             for (var period = 0; period < 8; period++) b.Write((period + 1).ToString(), 150 + (day * 8 + period) * 40, 100);
         }
         var groups = new[] { ("1", new[] { "1", "2", "3" }), ("2", new[] { "CN", "ES", "IT" }), ("3", new[] { "CN", "ES", "IT" }),
-            ("4", new[] { "CN", "ES", "IT" }), ("5", new[] { "CN", "ES", "IT" }), ("AI", new[] { "1", "2" }) };
+            ("4", new[] { "CN", "ES", "IT" }), ("5", new[] { "CN", "ES", "IT" }), ("AI", new[] { "1", invalidAiClass ? "3" : "2" }) };
         var row = 0;
         foreach (var (grade, classes) in groups)
         { b.Write(grade, 30, 132 + (row + classes.Length / 2) * 25); foreach (var cls in classes) { b.Write(cls, 124, 132 + row * 25); row++; } }
@@ -99,10 +237,13 @@ public sealed class SpecialPdfParityTests
         b.Line(110, 110, 110, 545);
         for (var index = 0; index <= 17; index++) b.Line(0, 120 + index * 25, 1740, 120 + index * 25);
         b.Line(220, 332.5, 260, 332.5);
-        b.Write("架空科目A", 222, 322, 3); b.Write("架空教員A", 222, 327, 3); b.Write("架空科目B", 222, 335, 3); b.Write("架空教員B", 222, 340, 3);
-        b.Write("架空科目C", 502, 322, 3); b.Write("架空科目D", 302, 130, 3); b.Write("架空科目E", 622, 130, 3);
-        b.Write("4月1日の時間割は以下のとおりです。", 1300, 650); b.Write("4月2日~5日は通常の授業日どおりの授業時間です。", 1300, 670);
-        var times = new[] { "7:00~7:40", "7:50~8:30", "8:40~9:20", "9:30~10:10", "10:30~11:10", "11:10~11:50", "12:00~12:40", "12:40~13:20" };
+        b.Write("架空科目A", 222, 321, 3); b.Write("架空教員A", 222, 324, 3); b.Write("架空科目B", 222, 333.5, 3); b.Write("架空教員B", 222, 336.5, 3);
+        b.Line(260, 332.5, 300, 332.5); b.Write("架空位置基準", 262, 321, 3); b.Write("架空教員基準", 262, 324, 3); b.Write("架空教室基準", 262, 327, 3);
+        b.Write("架空科目C", 502, 322, 3); b.Write("架空教員C", 502, 327, 3); b.Write("架空教室C", 502, 332, 3);
+        b.Write("架空科目D", 302, 122, 3); b.Write("架空教員D", 302, 127, 3); b.Write("架空教室D", 302, 132, 3);
+        b.Write("架空科目E", 622, 122, 3); b.Write("架空教員E", 622, 127, 3); b.Write("架空教室E", 622, 132, 3);
+        b.Write($"4月{days[0]}日の時間割は以下のとおりです。", 1300, 650); b.Write($"4月{days[1]}日~{days[^1]}日は通常の授業日どおりの授業時間です。", 1300, 670);
+        var times = timingOverride ?? new[] { "7:00~7:40", "7:50~8:30", "8:40~9:20", "9:30~10:10", "10:30~11:10", "11:10~11:50", "12:00~12:40", "12:40~13:20" };
         for (var index = 0; index < times.Length; index++) b.Write($"{index + 1}時限目{times[index]}", 20, 760 + (index + 1) * 15);
         return b.Page(1800, 1000);
     }

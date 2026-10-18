@@ -1,0 +1,40 @@
+{
+  "scope": "Read-only source/raw/cache audit; no inference repeated",
+  "frozenSourceHashes": true,
+  "candidateRawHashes": true,
+  "fp32InputFeatureCache": [
+    {
+      "split": "train",
+      "rows": 5120,
+      "frames": 256405,
+      "maps": [
+        "context",
+        "shortcut",
+        "teacher-features"
+      ],
+      "floatType": "float32",
+      "fileHashesVerified": true
+    },
+    {
+      "split": "development",
+      "rows": 1088,
+      "frames": 52788,
+      "maps": [
+        "context",
+        "shortcut",
+        "teacher-features"
+      ],
+      "floatType": "float32",
+      "fileHashesVerified": true
+    }
+  ],
+  "trainDevelopmentDisjoint": true,
+  "utf8LfPathIoAudit": true,
+  "finalDirectoryAbsent": true,
+  "previousPortableZipUnchanged": true,
+  "initializationNewdevSameDecodingDecisions": true,
+  "contradictoryOptimizerRowsExcluded": 6,
+  "noStaticLossCompression": true,
+  "inferenceDictionaryClasses": 18710,
+  "originalCnnAndClassifierFrozen": "Frozen standard ONNX prefix and classifier buffers, not optimizer parameters; encoder adaptation can change all18710 logits, Japanese regression quantified separately"
+}

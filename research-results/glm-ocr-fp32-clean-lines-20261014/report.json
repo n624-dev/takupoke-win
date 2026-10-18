@@ -1,0 +1,75 @@
+{
+  "groups": {
+    "sans/subject": {
+      "rows": 24,
+      "rawExact": 14,
+      "highTokenWrong": 6,
+      "truncated": 0
+    },
+    "sans/teacher": {
+      "rows": 24,
+      "rawExact": 19,
+      "highTokenWrong": 4,
+      "truncated": 0
+    },
+    "sans/room": {
+      "rows": 24,
+      "rawExact": 13,
+      "highTokenWrong": 6,
+      "truncated": 0
+    },
+    "sans/header": {
+      "rows": 21,
+      "rawExact": 20,
+      "highTokenWrong": 0,
+      "truncated": 0
+    },
+    "sans/blank": {
+      "rows": 3,
+      "rawExact": 0,
+      "highTokenWrong": 0,
+      "truncated": 0
+    },
+    "serif/subject": {
+      "rows": 24,
+      "rawExact": 20,
+      "highTokenWrong": 3,
+      "truncated": 0
+    },
+    "serif/teacher": {
+      "rows": 24,
+      "rawExact": 21,
+      "highTokenWrong": 2,
+      "truncated": 0
+    },
+    "serif/room": {
+      "rows": 24,
+      "rawExact": 12,
+      "highTokenWrong": 10,
+      "truncated": 0
+    },
+    "serif/header": {
+      "rows": 21,
+      "rawExact": 20,
+      "highTokenWrong": 0,
+      "truncated": 0
+    },
+    "serif/blank": {
+      "rows": 3,
+      "rawExact": 0,
+      "highTokenWrong": 0,
+      "truncated": 0
+    }
+  },
+  "rawSha256": "d14c50341c89cf91cd10132ee7c506bc7a8330c257567e2f899df4c2cfdd6dd5",
+  "peakRssBytes": 5016727552,
+  "worker": {
+    "callsCompleted": 192,
+    "totalSeconds": 338.73055548499906,
+    "qualification": false,
+    "modelActivation": false
+  },
+  "qualification": false,
+  "modelActivation": false,
+  "confidenceIsNotCalibratedFieldAccuracy": true
+}

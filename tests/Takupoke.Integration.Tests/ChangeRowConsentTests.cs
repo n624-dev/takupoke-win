@@ -34,6 +34,41 @@ public sealed class ChangeRowConsentTests : IAsyncLifetime
     }
 
     [Fact]
+    public async Task IndependentRowAndWeekdayApprovalsAreAtomicAndSurviveRefreshReparseAndRestart()
+    {
+        var source = await Source();
+        var rows = new ChangeRowSkipConsent(source.Id, source.Digest, 2032, XlsxChangeReader.Version, [4]);
+        var changes = XlsxChangeReader.Parse(FictionalChangeWorkbook.Create(), 2032,
+            dateDerivedWeekdays: true, skippingRows: rows.Rows.ToHashSet());
+        var analysis = new MaterialAnalysis(source.Id, MaterialKind.Changes, XlsxChangeReader.Version,
+            source.Digest, source.OriginalName, DateTimeOffset.UtcNow, 2032,
+            Changes: changes, RowSkipConsent: rows) { DateDerivedWeekdays = true };
+        var lease = await _store.BeginAsync();
+        await Assert.ThrowsAsync<InvalidDataException>(() => _store.SaveAnalysisAsync(lease, analysis));
+        await Assert.ThrowsAsync<InvalidDataException>(() => _store.SaveAnalysisAsync(lease, analysis,
+            authorizeWeekdayCorrection: true));
+        await Assert.ThrowsAsync<InvalidDataException>(() => _store.SaveAnalysisAsync(lease, analysis,
+            authorizeRowSkips: true));
+        Assert.Null((await Source()).WeekdayConsent);
+        Assert.Null((await Source()).RowSkipConsent);
+        Assert.Equal(_previous.OriginalId, (await Analysis())!.OriginalId);
+        await _store.SaveAnalysisAsync(lease, analysis, authorizeWeekdayCorrection: true, authorizeRowSkips: true);
+        Assert.True((await Source()).WeekdayConsent!.Matches(await Source(), 2032, XlsxChangeReader.Version));
+        Assert.True(rows.SameAs((await Source()).RowSkipConsent));
+        Assert.True((await _coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed);
+        Assert.True((await _coordinator.ReparseAsync(MaterialKind.Changes, 2032)).Parsed);
+        await _store.DisposeAsync();
+        _store = new(DataRoot, _protector);
+        _coordinator = new(_store, new(_identity));
+        Assert.True((await _coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed);
+        Assert.True((await _coordinator.ReparseAsync(MaterialKind.Changes, 2032)).Parsed);
+        var accepted = (await Analysis())!;
+        Assert.True(accepted.DateDerivedWeekdays);
+        Assert.Equal([4], accepted.RowSkipConsent!.Rows);
+        Assert.Equal(["架空科目A", "架空除外科目B", "架空科目C"], accepted.Changes!.Select(change => change.AfterSubject));
+    }
+
+    [Fact]
     public async Task ExplicitApprovalPersistsWithAnalysisAndSurvivesRefreshReparseAndRestart()
     {
         var preview = await _coordinator.PreviewChangesAsync(2032);
@@ -61,7 +96,7 @@ public sealed class ChangeRowConsentTests : IAsyncLifetime
     }
 
     [Fact]
-    public async Task ContentChangeReselectionAndYearChangesInvalidateWithoutResurrection()
+    public async Task ContentAndOriginalChangesInvalidateWhileFailedYearReparsePreservesPreviousDecision()
     {
         await Approve();
         var bytes = FictionalChangeWorkbook.Create();
@@ -77,23 +112,22 @@ public sealed class ChangeRowConsentTests : IAsyncLifetime
         Assert.Null((await Source()).RowSkipConsent);
         await Approve();
         Assert.False((await _coordinator.ReparseAsync(MaterialKind.Changes, 2033)).Parsed);
-        Assert.Null((await Source()).RowSkipConsent);
-        Assert.False((await _coordinator.ReparseAsync(MaterialKind.Changes, 2032)).Parsed);
-        await Approve();
-        Assert.False((await _coordinator.SelectAsync(MaterialKind.Changes, FilePath, 2032)).Parsed);
-        Assert.Null((await Source()).RowSkipConsent);
+        Assert.Equal(2032, (await Source()).RowSkipConsent!.SchoolYear);
+        Assert.True((await _coordinator.ReparseAsync(MaterialKind.Changes, 2032)).Parsed);
+        Assert.True((await _coordinator.SelectAsync(MaterialKind.Changes, FilePath, 2032)).Parsed);
+        Assert.Equal([3, 4], (await Source()).RowSkipConsent!.Rows);
     }
 
     [Fact]
-    public async Task OldParserConsentIsClearedEvenIfTheContentIsUnchanged()
+    public async Task OldParserConsentIsRevalidatedAndCommittedWithTheCurrentAnalysis()
     {
         await Approve();
         var source = await Source();
         await _store.WriteAsync(await _store.BeginAsync(), "selection.Changes", source with
         { RowSkipConsent = source.RowSkipConsent! with { ParserVersion = XlsxChangeReader.Version - 1 } });
-        Assert.False((await _coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed);
-        Assert.Null((await Source()).RowSkipConsent);
-        Assert.NotNull((await Analysis())!.RowSkipConsent);
+        Assert.True((await _coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed);
+        Assert.Equal(XlsxChangeReader.Version, (await Source()).RowSkipConsent!.ParserVersion);
+        Assert.True((await Source()).RowSkipConsent!.SameAs((await Analysis())!.RowSkipConsent));
     }
 
     [Fact]
@@ -165,6 +199,26 @@ public sealed class ChangeRowConsentTests : IAsyncLifetime
         Assert.Null(DataCodec.Decode<SourceRecord>(System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(json)).RowSkipConsent);
         json = JsonNode.Parse(DataCodec.Encode(_previous))!.AsObject(); json.Remove("rowSkipConsent");
         Assert.Null(DataCodec.Decode<MaterialAnalysis>(System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(json)).RowSkipConsent);
+    }
+
+    [Fact]
+    public async Task FailedCurrentRevalidationPreservesOlderConfirmationAndLastGoodResult()
+    {
+        await Approve(); var good = await Analysis(); var source = await Source();
+        var old = source.RowSkipConsent! with { ParserVersion = XlsxChangeReader.Version - 1, Rows = new[] { 3 } };
+        await _store.WriteAsync(await _store.BeginAsync(), "selection.Changes", source with { RowSkipConsent = old });
+        Assert.False((await _coordinator.ReparseAsync(MaterialKind.Changes, 2032)).Parsed);
+        Assert.True(old.SameAs((await Source()).RowSkipConsent));
+        Assert.Equal(NotificationDiff.Digest(DataCodec.Encode(good)), NotificationDiff.Digest(DataCodec.Encode(await Analysis())));
+    }
+
+    [Fact]
+    public async Task ReselectingAnotherFileWithIdenticalBytesCannotInheritTheDecision()
+    {
+        await Approve(); var source = await Source(); var other = Path.Combine(_root, "別の架空原本.xlsx");
+        await File.WriteAllBytesAsync(other, await File.ReadAllBytesAsync(FilePath));
+        Assert.False((await _coordinator.SelectAsync(MaterialKind.Changes, other, 2032)).Parsed);
+        Assert.NotEqual(source.Id, (await Source()).Id); Assert.Null((await Source()).RowSkipConsent);
     }
 
     private async Task Approve() => await _coordinator.ApplyRowSkipsAsync(

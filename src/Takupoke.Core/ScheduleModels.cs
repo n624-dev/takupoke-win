@@ -17,7 +17,11 @@ public sealed record LessonNames(string Subject, string Teacher = "", string Roo
     private static string FullOrOriginal(string? full, string original) => string.IsNullOrWhiteSpace(full) ? original.Trim() : full.Trim();
 }
 
-public sealed record NormalLesson(string ClassName, int Weekday, int Period, LessonNames Names, string SourceText, int Page);
+public sealed record NormalLesson(string ClassName, int Weekday, int Period, LessonNames Names, string SourceText, int Page)
+{
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public string? SourceClassName { get; init; }
+}
 public sealed record TimetableAnalysis(int SchoolYear, string? Term, IReadOnlyList<NormalLesson> Lessons)
 {
     public SchoolDateRange? ApplicableRange => Term switch
@@ -72,16 +76,24 @@ public sealed record ScheduleChange(string ChangeDate, string ClassName, string 
 public sealed record SpecialLesson(string Date, string ClassName, int Period, int SpanStart, int SpanEnd,
     TimeRange? RecordedTime, IReadOnlyList<string> Lines, int Page)
 {
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public string? SourceClassName { get; init; }
     public LessonNames Names => new(Lines.ElementAtOrDefault(0) ?? "", Lines.ElementAtOrDefault(1) ?? "", Lines.ElementAtOrDefault(2) ?? "");
 }
 
 public sealed record SpecialAnalysis(MaterialKind Kind, int SchoolYear, IReadOnlyList<string> CoveredDates,
     IReadOnlyList<string> CoveredClasses, IReadOnlyDictionary<int, TimeRange> PeriodTimes, IReadOnlyList<SpecialLesson> Lessons)
 {
-    public bool Applies(DateOnly day, string className) => CoveredDates.Contains(day.Iso()) && CoveredClasses.Contains(className);
+    public IReadOnlyDictionary<string, TimeRange>? DatePeriodTimes { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
+    public int ClassAssignmentVersion { get; init; }
+    public bool Applies(DateOnly day, string className) => CoveredDates.Contains(day.Iso()) &&
+        (CoveredClasses.Contains(className) || ClassAssignmentVersion == PdfClassAssignment.Version &&
+        PdfClassAssignment.Departments.Contains(className) && CoveredClasses.Any(c => c.StartsWith("1_", StringComparison.Ordinal)));
     public TimeRange? PeriodTime(DateOnly day, int period)
     {
         if (!CoveredDates.Contains(day.Iso())) return null;
+        if (DatePeriodTimes is not null) return DatePeriodTimes.GetValueOrDefault(day.Iso() + ":" + period);
         if (Kind == MaterialKind.ExamReturn && day.Iso() != CoveredDates.FirstOrDefault()) return ScheduleTimes.Normal.GetValueOrDefault(period);
         return PeriodTimes.GetValueOrDefault(period);
     }

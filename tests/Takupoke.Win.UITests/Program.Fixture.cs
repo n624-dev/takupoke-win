@@ -22,6 +22,18 @@ internal static partial class Program
             throw new InvalidOperationException("The seed root must match the isolated app root.");
         await using var store = new SchoolDataStore(root, new WindowsDpapiProtector());
         var lease = await store.BeginAsync(); var now = DateTimeOffset.UtcNow;
+        // The preceding installer run adopts special schedules in this same
+        // fictional root. They cover Monday and correctly replace its normal
+        // lesson; this independent five-weekday fixture must start without them.
+        await using (var connection = new Microsoft.Data.Sqlite.SqliteConnection(new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder
+            { DataSource = Path.Combine(root, "school", "school.sqlite"), Mode = Microsoft.Data.Sqlite.SqliteOpenMode.ReadWrite, Pooling = false }.ToString()))
+        {
+            await connection.OpenAsync(); using var reset = connection.CreateCommand();
+            reset.CommandText = "DELETE FROM entry WHERE key IN ('analysis.Exam','analysis.ExamReturn')";
+            Console.WriteLine($"Reset {await reset.ExecuteNonQueryAsync()} prior fictional special analyses; personal preferences remain intact.");
+        }
+        if (await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Exam") is not null || await store.ReadAsync<MaterialAnalysis>(lease, "analysis.ExamReturn") is not null)
+            throw new InvalidOperationException("The five-weekday fixture still contains a special schedule.");
         var bytes = Encoding.UTF8.GetBytes("%PDF-1.7\n% Entirely synthetic accepted-store UI fixture.\n");
         // A real fictional file keeps the accepted digest current even when
         // native activation checks it. The scenario deletes it after checking

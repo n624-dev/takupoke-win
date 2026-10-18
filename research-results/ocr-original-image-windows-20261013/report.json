@@ -1,0 +1,59 @@
+{
+  "recipe": "post-worker-consumed-full-document-exact-v1",
+  "rawSHA256": "b5294f448d19935d89041371c161beab4995ef705e145f45c641d0e27a22c8d7",
+  "oraclePacketSHA256": "7a87ca9355ee2577fb3fab05cfc9dc86ab5d870a8e49f2119b54ef70d260a54c",
+  "scope": "Consumed original drawings only; no new heldout, production success rate or device qualification",
+  "observations": [
+    {
+      "id": "d0",
+      "condition": "production",
+      "outcome": "engine-refused",
+      "failure": "coverage,periodEvidence,unclassifiedSource,dayBinding",
+      "exactDocument": false,
+      "positiveRefused": true,
+      "manualCorrections": 0,
+      "quality": "positive-failed"
+    },
+    {
+      "id": "d0",
+      "condition": "physical-input-frame",
+      "outcome": "formal-returned-unscored",
+      "failure": null,
+      "exactDocument": true,
+      "positiveRefused": false,
+      "manualCorrections": 0,
+      "checks": {
+        "year": true,
+        "term": true,
+        "requiredSlotSet": true,
+        "cellSlotCoverage": true,
+        "allOtherSlotsBlank": true,
+        "lessonsAndLiteralNames": true,
+        "zeroManualCorrections": true,
+        "completeSourceCapture": true,
+        "formalReturned": true
+      },
+      "quality": "positive-exact"
+    },
+    {
+      "id": "d1",
+      "condition": "production",
+      "outcome": "engine-refused",
+      "failure": "coverage,periodEvidence,unclassifiedSource,dayBinding",
+      "exactDocument": false,
+      "positiveRefused": true,
+      "manualCorrections": 0,
+      "quality": "positive-failed"
+    },
+    {
+      "id": "d1",
+      "condition": "physical-input-frame",
+      "outcome": "engine-refused",
+      "failure": "noLocalProvider",
+      "exactDocument": false,
+      "positiveRefused": true,
+      "manualCorrections": 0,
+      "quality": "positive-failed"
+    }
+  ]
+}

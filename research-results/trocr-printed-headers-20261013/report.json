@@ -1,0 +1,162 @@
+{
+  "repository": "microsoft/trocr-base-printed",
+  "revision": "93450be3f1ed40a930690d951ef3932687cc1892",
+  "license": "HF model card has no explicit weight license; research-only, redistribution unqualified",
+  "files": {
+    "README.md": {
+      "bytes": 2976,
+      "sha256": "f9976f9bc32cc85bae12346aad6dd60fee70f5df5b9f587bd9cbd0e17ca9647d"
+    },
+    "config.json": {
+      "bytes": 4126,
+      "sha256": "5bda1deab455661feb3d91906656e5600e2ca520d5c00a2a03836614b850c93e"
+    },
+    "generation_config.json": {
+      "bytes": 190,
+      "sha256": "41149cdcffec4d657f32dfcddd9b208037f01286c9e07945c724908c58ed0193"
+    },
+    "merges.txt": {
+      "bytes": 456318,
+      "sha256": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5"
+    },
+    "preprocessor_config.json": {
+      "bytes": 224,
+      "sha256": "2fcc0da9466ee00be0403b26027373039e032820ebac409e207b32e52e52119d"
+    },
+    "special_tokens_map.json": {
+      "bytes": 772,
+      "sha256": "c611b1f7d416eb001ee4f293d903ea8c88e703463f1d403f1866a0352743fd00"
+    },
+    "tokenizer_config.json": {
+      "bytes": 1118,
+      "sha256": "5a1356884c6ae736a621841535264ba7c5bebd52f169258add2c48fcbb32d50a"
+    },
+    "vocab.json": {
+      "bytes": 898822,
+      "sha256": "06b4d46c8e752d410213d9548eb27a54db70fda0319b6271fb8d59dead5e1cab"
+    },
+    "model.safetensors": {
+      "bytes": 1333384464,
+      "sha256": "1cf4a6eedab26afaaf505f1c7f73d9634944924dbd1ed049d569db98039cd596"
+    }
+  },
+  "recipe": "official-trocr-printed-consumed-headers-v1",
+  "pixelsSHA256": "6e54d6bc0cc2213dc51a6e0ff67f3551a736e4e75641ec00f96c7b9de87f14ff",
+  "oracleSHA256": "1c5652c38a5d84691d5105bd4e851349bc1879d38b2a1cc2a2b6169c12683095",
+  "plannedOrdinals": [
+    "n072",
+    "n073",
+    "n074",
+    "n075",
+    "n076",
+    "n077",
+    "n078",
+    "n079",
+    "n080",
+    "n081",
+    "n082",
+    "n083",
+    "n084",
+    "n085",
+    "n086",
+    "n087",
+    "n088",
+    "n089",
+    "n090",
+    "n091",
+    "n092",
+    "n093",
+    "n094",
+    "n095",
+    "n168",
+    "n169",
+    "n170",
+    "n171",
+    "n172",
+    "n173",
+    "n174",
+    "n175",
+    "n176",
+    "n177",
+    "n178",
+    "n179",
+    "n180",
+    "n181",
+    "n182",
+    "n183",
+    "n184",
+    "n185",
+    "n186",
+    "n187",
+    "n188",
+    "n189",
+    "n190",
+    "n191"
+  ],
+  "callsPlanned": 48,
+  "seed": 17,
+  "cpuThreads": 2,
+  "dtype": "float32",
+  "backend": "pil",
+  "attention": "eager",
+  "processor": "Official native RGB384 bilinear/normalization, no custom crop/contrast/rotation",
+  "generation": {
+    "do_sample": false,
+    "num_beams": 1,
+    "max_new_tokens": 32,
+    "use_cache": true
+  },
+  "sourceSHA256": {
+    "run_trocr.py": "f70756c1f65f681815f50f9990ffb252d375dbb2ff6bfc7c02949e8153256900",
+    "trocr_worker.py": "87d9b184689ee92258c210a5cd73e62b33bf70d323b3dfbc42f52e3ba93516b7"
+  },
+  "runtime": {
+    "torch": "2.7.1+cpu",
+    "transformers": "5.19.0",
+    "Pillow": "12.3.0",
+    "safetensors": "0.8.0"
+  },
+  "licenseScope": "HF model card has no explicit weight license, no distribution or activation authorized by this study",
+  "qualification": false,
+  "scope": "Consumed 42 short headers and 6 blank crops, no heldout/source-glyph/PDF/full-document/Windows qualification",
+  "rawSHA256": "d370f67d8a089c845afd75586c30e135afba6feec54605fdde08f010f66997fe",
+  "callsCompleted": 48,
+  "aggregates": [
+    {
+      "cohort": "sans",
+      "kind": "blank",
+      "observed": 3,
+      "exact": 0,
+      "correctAboveDiagnosticFloor": 0,
+      "wrongAboveDiagnosticFloor": 0
+    },
+    {
+      "cohort": "sans",
+      "kind": "header",
+      "observed": 21,
+      "exact": 14,
+      "correctAboveDiagnosticFloor": 12,
+      "wrongAboveDiagnosticFloor": 3
+    },
+    {
+      "cohort": "serif",
+      "kind": "blank",
+      "observed": 3,
+      "exact": 0,
+      "correctAboveDiagnosticFloor": 0,
+      "wrongAboveDiagnosticFloor": 0
+    },
+    {
+      "cohort": "serif",
+      "kind": "header",
+      "observed": 21,
+      "exact": 11,
+      "correctAboveDiagnosticFloor": 5,
+      "wrongAboveDiagnosticFloor": 6
+    }
+  ],
+  "peakRssBytes": 1976037376,
+  "totalInferenceSeconds": 62.91852023499814,
+  "confidenceScope": "Uncalibrated autoregressive token probabilities including EOS, not CTC scores or source evidence",
+  "modelActivation": false
+}

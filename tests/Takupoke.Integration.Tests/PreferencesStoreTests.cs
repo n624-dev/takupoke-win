@@ -8,6 +8,20 @@ namespace Takupoke.Integration.Tests;
 public sealed class PreferencesStoreTests
 {
     [Fact]
+    public async Task AiPermissionDefaultsOffForNewAndLegacyPreferencesAndPersistsExplicitChoice()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-ai-preferences-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            var store = new PreferencesStore(root); Assert.False((await store.LoadAsync()).UseAiFeatures);
+            Directory.CreateDirectory(root); await File.WriteAllTextAsync(Path.Combine(root, "preferences.json"), "{}");
+            Assert.False((await store.LoadAsync()).UseAiFeatures);
+            await store.SaveAsync(new() { UseAiFeatures = true }); Assert.True((await new PreferencesStore(root).LoadAsync()).UseAiFeatures);
+            await store.SaveAsync(new() { UseAiFeatures = false }); Assert.False((await store.LoadAsync()).UseAiFeatures);
+        }
+        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
+    [Fact]
     public async Task DefaultRemovesSavedColorAndPreservesOtherPersonalSettings()
     {
         var root = Path.Combine(Path.GetTempPath(), "takupoke-preferences-tests-" + Guid.NewGuid().ToString("N"));

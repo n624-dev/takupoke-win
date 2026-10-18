@@ -1,0 +1,46 @@
+{
+  "README.md": {
+    "bytes": 1118,
+    "sha256": "1680be18444f32c5daff50e8c7cab6a4b4baada11e0c9d2a577292d7324d8508"
+  },
+  "inputs.json": {
+    "bytes": 4271,
+    "sha256": "74e1380164bfc437295494ab3c7d8e46438d00d3b5222265ee6a7d31f602ccc7"
+  },
+  "observations.jsonl": {
+    "bytes": 502414,
+    "sha256": "b5294f448d19935d89041371c161beab4995ef705e145f45c641d0e27a22c8d7"
+  },
+  "pdf-inputs.json": {
+    "bytes": 4954,
+    "sha256": "e9aeba135a93a6d9a9c05771024c2d2456791628e59e3f4ea04c5e6a8ec4b140"
+  },
+  "raw-receipt.json": {
+    "bytes": 122,
+    "sha256": "8b6bff6e41ffcfc98aebb12859fa0e67c502c60c57bbe69c3a3ca15550102f86"
+  },
+  "report.json": {
+    "bytes": 1831,
+    "sha256": "bc46e17db2e23bfb5429675f9a25e96cb4337ae67cfc8e6882e890114455705d"
+  },
+  "source-freeze.json": {
+    "bytes": 1365,
+    "sha256": "5e21ab892e6569404d84a0d8e3eb6f8caae6d7a7e0e701ef85d5a128bb8780fa"
+  },
+  "source-original-inputs.json": {
+    "bytes": 5226,
+    "sha256": "7e12d2d899fe4ca5a1cfa8e6b7bfd59b8ae86abdf8e9417d9831d1add125807a"
+  },
+  "source-original-receipt.json": {
+    "bytes": 4945,
+    "sha256": "3a2c436caa032955b65f34f5ced203554c7725462bf130a0d91132d9ba4c0437"
+  },
+  "worker-stderr.txt": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "worker-stdout.txt": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

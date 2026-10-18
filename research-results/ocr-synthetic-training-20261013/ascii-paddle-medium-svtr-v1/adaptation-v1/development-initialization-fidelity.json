@@ -1,0 +1,10 @@
+{
+  "scope": "Before optimizer; newdev same native original input maps, no quality selection or correction",
+  "rows": 1088,
+  "allTextIntervalsAndFloorDecisionsIdentical": true,
+  "maximumDifferences": {
+    "feature": 4.38690185546875e-05,
+    "logit": 7.62939453125e-05,
+    "probability": 8.821487426757812e-06
+  }
+}

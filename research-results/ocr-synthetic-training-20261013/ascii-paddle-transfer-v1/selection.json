@@ -1,0 +1,642 @@
+{
+  "protocolSha256": "306b85beb9904c7695cfa0261ee6edfc0d091ae7b563ce33cdf9b1efa6291054",
+  "original": {
+    "name": "original-full18710",
+    "epoch": 0,
+    "path": "/workspace/scratch/ocr-training-assets/model.safetensors",
+    "sha256": "f65a332afe5aa663f0b9d5706f4ae8457b5b4058a842d5c1eb22df505c27d642",
+    "metrics": {
+      "name": "original-full18710",
+      "positiveRows": 512,
+      "exact": 405,
+      "correctAccepted": 368,
+      "incorrectAccepted": 46,
+      "negativeRows": 192,
+      "negativeAccepted": 14,
+      "cer": 0.03471264367816092,
+      "paddingRows": 42,
+      "caseMismatchAccepted": 0,
+      "confusableMismatchAccepted": 37,
+      "groups": {
+        "blank": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 0,
+          "asciiNonempty": 0
+        },
+        "case": {
+          "rows": 128,
+          "exact": 123,
+          "correctAccepted": 120,
+          "incorrectAccepted": 4,
+          "accepted": 124,
+          "nonempty": 128,
+          "asciiNonempty": 128
+        },
+        "cjk": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 32,
+          "asciiNonempty": 0
+        },
+        "clipped": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 12,
+          "nonempty": 32,
+          "asciiNonempty": 32
+        },
+        "code": {
+          "rows": 128,
+          "exact": 122,
+          "correctAccepted": 116,
+          "incorrectAccepted": 3,
+          "accepted": 119,
+          "nonempty": 128,
+          "asciiNonempty": 128
+        },
+        "confusable": {
+          "rows": 128,
+          "exact": 57,
+          "correctAccepted": 41,
+          "incorrectAccepted": 27,
+          "accepted": 68,
+          "nonempty": 128,
+          "asciiNonempty": 128
+        },
+        "mixed": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 32,
+          "asciiNonempty": 0
+        },
+        "multiline": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 32,
+          "asciiNonempty": 32
+        },
+        "noise": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 2,
+          "nonempty": 20,
+          "asciiNonempty": 17
+        },
+        "printable": {
+          "rows": 128,
+          "exact": 103,
+          "correctAccepted": 91,
+          "incorrectAccepted": 12,
+          "accepted": 103,
+          "nonempty": 128,
+          "asciiNonempty": 123
+        }
+      },
+      "rawSha256": "297c8a346a7048444b7bd90481f708fe78d9e6aaa70312c4b3b08ba8af77b68e",
+      "status": "research-only/unqualified/inactive; independent development, final unopened"
+    }
+  },
+  "reducedUntrainedDiagnostic": {
+    "name": "reduced-untrained",
+    "positiveRows": 512,
+    "exact": 409,
+    "correctAccepted": 371,
+    "incorrectAccepted": 50,
+    "negativeRows": 192,
+    "negativeAccepted": 35,
+    "cer": 0.033563218390804596,
+    "paddingRows": 42,
+    "caseMismatchAccepted": 0,
+    "confusableMismatchAccepted": 38,
+    "groups": {
+      "blank": {
+        "rows": 32,
+        "exact": 0,
+        "correctAccepted": 0,
+        "incorrectAccepted": 0,
+        "accepted": 0,
+        "nonempty": 0,
+        "asciiNonempty": 0
+      },
+      "case": {
+        "rows": 128,
+        "exact": 123,
+        "correctAccepted": 120,
+        "incorrectAccepted": 4,
+        "accepted": 124,
+        "nonempty": 128,
+        "asciiNonempty": 128
+      },
+      "cjk": {
+        "rows": 32,
+        "exact": 0,
+        "correctAccepted": 0,
+        "incorrectAccepted": 0,
+        "accepted": 0,
+        "nonempty": 10,
+        "asciiNonempty": 10
+      },
+      "clipped": {
+        "rows": 32,
+        "exact": 0,
+        "correctAccepted": 0,
+        "incorrectAccepted": 0,
+        "accepted": 12,
+        "nonempty": 32,
+        "asciiNonempty": 32
+      },
+      "code": {
+        "rows": 128,
+        "exact": 122,
+        "correctAccepted": 116,
+        "incorrectAccepted": 3,
+        "accepted": 119,
+        "nonempty": 128,
+        "asciiNonempty": 128
+      },
+      "confusable": {
+        "rows": 128,
+        "exact": 57,
+        "correctAccepted": 41,
+        "incorrectAccepted": 27,
+        "accepted": 68,
+        "nonempty": 128,
+        "asciiNonempty": 128
+      },
+      "mixed": {
+        "rows": 32,
+        "exact": 0,
+        "correctAccepted": 0,
+        "incorrectAccepted": 0,
+        "accepted": 20,
+        "nonempty": 32,
+        "asciiNonempty": 32
+      },
+      "multiline": {
+        "rows": 32,
+        "exact": 0,
+        "correctAccepted": 0,
+        "incorrectAccepted": 0,
+        "accepted": 0,
+        "nonempty": 32,
+        "asciiNonempty": 32
+      },
+      "noise": {
+        "rows": 32,
+        "exact": 0,
+        "correctAccepted": 0,
+        "incorrectAccepted": 0,
+        "accepted": 3,
+        "nonempty": 19,
+        "asciiNonempty": 19
+      },
+      "printable": {
+        "rows": 128,
+        "exact": 107,
+        "correctAccepted": 94,
+        "incorrectAccepted": 16,
+        "accepted": 110,
+        "nonempty": 128,
+        "asciiNonempty": 128
+      }
+    },
+    "rawSha256": "ac9a55d3e8876b90daf9765848b7840a1c8efa5d689e1841024ec4d0fa497987",
+    "status": "research-only/unqualified/inactive; independent development, final unopened"
+  },
+  "candidates": [
+    {
+      "name": "epoch-4",
+      "epoch": 4,
+      "path": "/workspace/scratch/ascii-paddle-transfer-20261013-v1/epoch-4.safetensors",
+      "sha256": "6e54e179fdd97fcd458a71c3b57a51b564e1bb12cebd737666f5ff1ef7f1f17e",
+      "metrics": {
+        "name": "epoch-4",
+        "positiveRows": 512,
+        "exact": 455,
+        "correctAccepted": 385,
+        "incorrectAccepted": 26,
+        "negativeRows": 192,
+        "negativeAccepted": 0,
+        "cer": 0.02666666666666667,
+        "paddingRows": 13,
+        "caseMismatchAccepted": 0,
+        "confusableMismatchAccepted": 20,
+        "groups": {
+          "blank": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32,
+            "asciiNonempty": 0
+          },
+          "case": {
+            "rows": 128,
+            "exact": 120,
+            "correctAccepted": 109,
+            "incorrectAccepted": 3,
+            "accepted": 112,
+            "nonempty": 128,
+            "asciiNonempty": 125
+          },
+          "cjk": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32,
+            "asciiNonempty": 0
+          },
+          "clipped": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32,
+            "asciiNonempty": 2
+          },
+          "code": {
+            "rows": 128,
+            "exact": 111,
+            "correctAccepted": 91,
+            "incorrectAccepted": 6,
+            "accepted": 97,
+            "nonempty": 128,
+            "asciiNonempty": 123
+          },
+          "confusable": {
+            "rows": 128,
+            "exact": 108,
+            "correctAccepted": 85,
+            "incorrectAccepted": 12,
+            "accepted": 97,
+            "nonempty": 128,
+            "asciiNonempty": 128
+          },
+          "mixed": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32,
+            "asciiNonempty": 0
+          },
+          "multiline": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32,
+            "asciiNonempty": 0
+          },
+          "noise": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32,
+            "asciiNonempty": 0
+          },
+          "printable": {
+            "rows": 128,
+            "exact": 116,
+            "correctAccepted": 100,
+            "incorrectAccepted": 5,
+            "accepted": 105,
+            "nonempty": 128,
+            "asciiNonempty": 127
+          }
+        },
+        "rawSha256": "1d57a9ac2d6943871f0fbb9fa193929c74027d85eb43e7018d04c985f8f93e8d",
+        "status": "research-only/unqualified/inactive; independent development, final unopened"
+      }
+    },
+    {
+      "name": "epoch-8",
+      "epoch": 8,
+      "path": "/workspace/scratch/ascii-paddle-transfer-20261013-v1/epoch-8.safetensors",
+      "sha256": "490c9ddc53bde0416463ebe822cb65178a66188604690b4c7d7b19f5e0bc7dff",
+      "metrics": {
+        "name": "epoch-8",
+        "positiveRows": 512,
+        "exact": 472,
+        "correctAccepted": 432,
+        "incorrectAccepted": 23,
+        "negativeRows": 192,
+        "negativeAccepted": 0,
+        "cer": 0.011724137931034483,
+        "paddingRows": 13,
+        "caseMismatchAccepted": 0,
+        "confusableMismatchAccepted": 19,
+        "groups": {
+          "blank": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32,
+            "asciiNonempty": 0
+          },
+          "case": {
+            "rows": 128,
+            "exact": 126,
+            "correctAccepted": 118,
+            "incorrectAccepted": 2,
+            "accepted": 120,
+            "nonempty": 128,
+            "asciiNonempty": 128
+          },
+          "cjk": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32,
+            "asciiNonempty": 0
+          },
+          "clipped": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32,
+            "asciiNonempty": 3
+          },
+          "code": {
+            "rows": 128,
+            "exact": 119,
+            "correctAccepted": 114,
+            "incorrectAccepted": 4,
+            "accepted": 118,
+            "nonempty": 128,
+            "asciiNonempty": 128
+          },
+          "confusable": {
+            "rows": 128,
+            "exact": 108,
+            "correctAccepted": 96,
+            "incorrectAccepted": 11,
+            "accepted": 107,
+            "nonempty": 128,
+            "asciiNonempty": 128
+          },
+          "mixed": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32,
+            "asciiNonempty": 0
+          },
+          "multiline": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32,
+            "asciiNonempty": 0
+          },
+          "noise": {
+            "rows": 32,
+            "exact": 0,
+            "correctAccepted": 0,
+            "incorrectAccepted": 0,
+            "accepted": 0,
+            "nonempty": 32,
+            "asciiNonempty": 0
+          },
+          "printable": {
+            "rows": 128,
+            "exact": 119,
+            "correctAccepted": 104,
+            "incorrectAccepted": 6,
+            "accepted": 110,
+            "nonempty": 128,
+            "asciiNonempty": 128
+          }
+        },
+        "rawSha256": "8971c234e24cd8e956ccc87203e761de21953c54f5b7619633f03bbf170270db",
+        "status": "research-only/unqualified/inactive; independent development, final unopened"
+      }
+    }
+  ],
+  "selected": {
+    "name": "epoch-8",
+    "epoch": 8,
+    "path": "/workspace/scratch/ascii-paddle-transfer-20261013-v1/epoch-8.safetensors",
+    "sha256": "490c9ddc53bde0416463ebe822cb65178a66188604690b4c7d7b19f5e0bc7dff",
+    "metrics": {
+      "name": "epoch-8",
+      "positiveRows": 512,
+      "exact": 472,
+      "correctAccepted": 432,
+      "incorrectAccepted": 23,
+      "negativeRows": 192,
+      "negativeAccepted": 0,
+      "cer": 0.011724137931034483,
+      "paddingRows": 13,
+      "caseMismatchAccepted": 0,
+      "confusableMismatchAccepted": 19,
+      "groups": {
+        "blank": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 32,
+          "asciiNonempty": 0
+        },
+        "case": {
+          "rows": 128,
+          "exact": 126,
+          "correctAccepted": 118,
+          "incorrectAccepted": 2,
+          "accepted": 120,
+          "nonempty": 128,
+          "asciiNonempty": 128
+        },
+        "cjk": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 32,
+          "asciiNonempty": 0
+        },
+        "clipped": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 32,
+          "asciiNonempty": 3
+        },
+        "code": {
+          "rows": 128,
+          "exact": 119,
+          "correctAccepted": 114,
+          "incorrectAccepted": 4,
+          "accepted": 118,
+          "nonempty": 128,
+          "asciiNonempty": 128
+        },
+        "confusable": {
+          "rows": 128,
+          "exact": 108,
+          "correctAccepted": 96,
+          "incorrectAccepted": 11,
+          "accepted": 107,
+          "nonempty": 128,
+          "asciiNonempty": 128
+        },
+        "mixed": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 32,
+          "asciiNonempty": 0
+        },
+        "multiline": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 32,
+          "asciiNonempty": 0
+        },
+        "noise": {
+          "rows": 32,
+          "exact": 0,
+          "correctAccepted": 0,
+          "incorrectAccepted": 0,
+          "accepted": 0,
+          "nonempty": 32,
+          "asciiNonempty": 0
+        },
+        "printable": {
+          "rows": 128,
+          "exact": 119,
+          "correctAccepted": 104,
+          "incorrectAccepted": 6,
+          "accepted": 110,
+          "nonempty": 128,
+          "asciiNonempty": 128
+        }
+      },
+      "rawSha256": "8971c234e24cd8e956ccc87203e761de21953c54f5b7619633f03bbf170270db",
+      "status": "research-only/unqualified/inactive; independent development, final unopened"
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "meanLosses": [
+        1.7809730323962867,
+        0.3502308805705979,
+        0.12315329729462973
+      ]
+    },
+    {
+      "epoch": 2,
+      "meanLosses": [
+        0.36242058540228755,
+        0.07231916773016564,
+        0.15757543576182798
+      ]
+    },
+    {
+      "epoch": 3,
+      "meanLosses": [
+        0.20272902426077052,
+        0.03504933919175528,
+        0.20360698807053268
+      ]
+    },
+    {
+      "epoch": 4,
+      "meanLosses": [
+        0.12768646075273865,
+        0.02300906948894408,
+        0.23354113566456364
+      ]
+    },
+    {
+      "epoch": 5,
+      "meanLosses": [
+        0.0856074732640991,
+        0.013525799069248024,
+        0.22918208832852544
+      ]
+    },
+    {
+      "epoch": 6,
+      "meanLosses": [
+        0.09359481895517092,
+        0.012090676913067,
+        0.22319102389737963
+      ]
+    },
+    {
+      "epoch": 7,
+      "meanLosses": [
+        0.05097078354592668,
+        0.007663085900412625,
+        0.21870200984412805
+      ]
+    },
+    {
+      "epoch": 8,
+      "meanLosses": [
+        0.051524083434196656,
+        0.006195294912572535,
+        0.2166080267401412
+      ]
+    },
+    {
+      "epoch": 9,
+      "meanLosses": [
+        0.05333017152006505,
+        0.005384061546237717,
+        0.20959938652813434
+      ]
+    }
+  ],
+  "budgetStopped": true,
+  "trainingSeconds": 1800.9692856439979,
+  "peakRssMiB": 2635.671875,
+  "status": "research-only/unqualified/inactive; development selection not full-document eligibility; final unopened"
+}

@@ -1,0 +1,354 @@
+{
+  "protocol": {
+    "namespace": "research-ascii-english-v5-official-transfer-v1/adaptation-v1",
+    "basis": "Independent unmodified official HF PPOCRV5MobileRecForTextRecognition/config/safetensors revision e4abce2bbd335f6c3eda0507b7f8e8abd5af3419. Old strict ONNX transplant remains failed; no nativeONNX identity/transplant claim. No epsilon replacement/fusedDAG replacement.",
+    "dictionary": "Full438 original dictionary/blank0/space final437 retained; all95ASCII present. No vocabulary probability renormalization/class whitelist/output repair.",
+    "parameters": "All officialCNN/encoder/full438classifier weights and affine params (5,510,778) train + reject121. Original architecture/config and norm epsilon stay unchanged. BNrunningstats frozen by evalmode for all optimization forwards; eval does not disable gradients. Japaneseprimary untouched/independentASCIIbranch only.",
+    "train": {
+      "seed": 845391,
+      "fonts": [
+        "NotoSansJP400",
+        "NotoSerifJP400",
+        "MPLUS1Code-Regular",
+        "BIZUDMincho-Regular"
+      ],
+      "positiveCounts": {
+        "code": 192,
+        "lookalike": 192,
+        "natural": 128,
+        "printable": 128
+      },
+      "negativeCounts": {
+        "clipped": 32,
+        "interior_damage": 32,
+        "multiline": 32,
+        "noise": 32,
+        "blank": 32,
+        "unknown_cjk": 32,
+        "unknown_mixed": 32
+      }
+    },
+    "development": {
+      "seed": 845411,
+      "fonts": [
+        "KosugiMaru-Regular",
+        "ZenAntique-Regular"
+      ],
+      "positiveCounts": {
+        "code": 128,
+        "lookalike": 128,
+        "natural": 64,
+        "printable": 64
+      },
+      "negativeCounts": {
+        "clipped": 32,
+        "interior_damage": 32,
+        "multiline": 32,
+        "noise": 32,
+        "blank": 32,
+        "unknown_cjk": 32,
+        "unknown_mixed": 32
+      }
+    },
+    "fontExposure": "All trainfonts previously consumed training; devKosugiMaru/ZenAntique consumeddevelopmentfaces/newliteral only/nevertrain. No unseen-font or final claim. Sawarabi reserved; priorSawarabiMincho source-only exposure disclosed separately.",
+    "fontBalance": "Eachpositivegroup equalcounts perfont before cache/optimizer; pairunit j//2 for code/lookalike, j for others. Trainmono50percent exactly. cmapcheck eachtarget; no fontfallback/tofulabel.",
+    "data": "Fresh arbitraryASCII code/case/Il1O0/digits/underscore/space, shuffledcomplete95printablecoverage and independent Englishnaturephrases. CJK/wholemixed lines are unknownnegative wholecrop, no oracleprefixcut/suffixscore wholefield. No realschooldata; previousliteraloracles/manifests onlyexclusion; newtrain/devdisjoint.",
+    "preprocessing": "All suppliedRGBink bbox+2originalpx/commonbaseline/relativeheight/internalgaps; nativeFP32BGR48 sampler centerbilinear/uint8round/zero-normalizedpadding width320..960, validWidth/sourceRect preserved. NoFP16. This fixes input condition for independentHFbasis and does not assert officialHFImageProcessor or Windowsbyteparity.",
+    "cache": "LosslessNPZ officialFP32input tensor, teacherfeature120 and official438probabilities from exactsame officialTorchforward; restoredbyte/dtype/shapeSHA. Baseline uses storedofficialprobabilities, not copied ONNXhead.",
+    "selfConsistencyNewDevGate": "Before optimizer everynewdev storedofficialbaseline vs initializedsameofficialAdapter exactFP32feature/probability byte equality and text/interval/floor/ASCII/validWidthdecision equality. Halt iffail.",
+    "contradictionAudit": "ExactprovidedPNG/FP32input with differentpositive target or positive-vs-negative conflict ->excludeallconflictingtrainrows from everyupdate, no targetrepair/falsedamage label. Dev unchanged. CTClength<=nativeframes.",
+    "training": {
+      "seed": 845431,
+      "threads": 2,
+      "batchSize": 2,
+      "epochs": 6,
+      "evaluateEpochs": [
+        2,
+        4,
+        6
+      ],
+      "cnnLearningRate": 3e-05,
+      "encoderLearningRate": 0.0001,
+      "headLearningRate": 0.0003,
+      "rejectLearningRate": 0.001,
+      "teacherKlWeight": 0.2,
+      "teacherFeatureMseWeight": 0.02,
+      "rejectBceWeight": 0.5,
+      "weightDecay": 0.0001,
+      "gradientClip": 5.0,
+      "maximumTrainingSeconds": 1800,
+      "maximumCacheSeconds": 1800,
+      "maximumRssMiB": 4096,
+      "additionalDiskBudgetGiB": 1.0,
+      "minimumFreeDiskGiB": 2
+    },
+    "loss": "Full438CTC on intactpositives/emptyblank; fullteacherKL+teacherfeatureMSE on allsamples; BCEreject on allsamples. Damage/multiline/noise/CJK/mixed receive no guessedCTClabel.",
+    "batching": "ExactFP32inputWidthbucket, no new image/temporalpadding/noattentionmask. Original outputT centers scaledbyinputWidth/validWidth onlydefine rejectmean; CTCSourceBox interval end pastvalidWidth alwaysrefused.",
+    "acceptance": "Baseline/trainednonempty/alltextprintableASCII/minemittedCTCconfidence>=.8/nointervalpastvalidWidth; trainedalso rejectProbability<=.05. Uncalibrateddiagnostic only; outputASCII cannotprove inputsource/domain.",
+    "selection": "OriginalofficialHFbaseline included. Trainedeligible only code+lookalike exact>=base/wrongAccepted<=base/negativeAccepted<=base. MaxcorrectAccepted thenrawexact/lowerwrongandnegative/CER/earlier complete2/4/6. Partialepochnevercandidate.",
+    "continuationGate": "Selectedtrained/rawexact>=97percent/correctAccepted>=90percent/wrongAccepted0/negativeAccepted0/everydevfont>=95percentrawexact; paddedunsupportedsource alwaysrefused. Onlypermits separate prospectivefinal/export, never standalonecomponentactivation/fullfield/full-documentqualification.",
+    "sourceProof": "Oldconsumed64samepixelscriptalias/missingprefixcontrols onlypostselection, never train/choose/final. Sourcecompleteness/script/cellgeometry provenance remains independent.",
+    "final": "Sawarabi2fonts notused for thistraining/dev/final; onlyafter unchangedgatepass+newfinal/full-documentprotocol. Japaneseprimary unchanged/iOS noedit/publicmodel/push none."
+  },
+  "protocolSha256": "12609be771f8779a4a70a40a30a97e01e7a89fc3f421fdc9e538b6901e715d18",
+  "sources": {
+    "protocol.json": "12609be771f8779a4a70a40a30a97e01e7a89fc3f421fdc9e538b6901e715d18",
+    "data.py": "b056d23c9bfc702faaf018b839a9a80e623a6c72ef310e00d1abf5e6af0315d6",
+    "model.py": "499be516a853d5396c6bc44aaae20811510d4f79542c19e3071b4636155cc573",
+    "adapter.py": "563a8734c3b5830d8bc8f5742c9eca772bd8c889976cb188e97216a1651fa697",
+    "train.py": "28f54fdd6875717e8c21760b0ec8c365ccaa1583e6ab77ddad8b7b7fdc41cccb"
+  },
+  "assetReceipt": {
+    "repository": "PaddlePaddle/en_PP-OCRv5_mobile_rec_safetensors",
+    "revision": "e4abce2bbd335f6c3eda0507b7f8e8abd5af3419",
+    "declaredLicense": "Apache-2.0",
+    "files": {
+      "config.json": {
+        "bytes": 2086,
+        "sha256": "be52e23a259dc4838322115ee4c8f59197ce136a1aa0bd96574122b84f1fa4b7"
+      },
+      "model.safetensors": {
+        "bytes": 22465008,
+        "sha256": "9dab63fb9b819082f3f06e889a3af56dc2c27155d46d8409659c869a2aece2bc"
+      },
+      "inference.yml": {
+        "bytes": 3964,
+        "sha256": "49b7c9ccda20164cf42851995d235ab9ed11b7109e456d1cf911d42b71025858"
+      },
+      "preprocessor_config.json": {
+        "bytes": 4805,
+        "sha256": "66db0fbb4e009096e9a766845646dc34c3186892a1b76637dab2cb75a91edd4c"
+      },
+      "README.md": {
+        "bytes": 31,
+        "sha256": "4bcf87ecfbbb8e07a01b21415a970c8b53a5283bf6872b657040d3f45c9241f7"
+      }
+    }
+  },
+  "dictionarySha256": "30068d4c87b2f94e4f3e8a4f962e41da42d5f29a750dd59a2a8fcac31ed8e70d",
+  "fontHashes": {
+    "NotoSansJP400": "54aba28468f275bc372eda5f29b202c0d9e7b9ba2bc18a53a4c72c481c75cf9f",
+    "NotoSerifJP400": "2b127545ad3dba023d255733015059e550d9dbcd04c980a80021dc8ea666e813",
+    "MPLUS1Code-Regular": "c098c9fbdb9ede89a6769e33d590802d7bd2598051cae39f88199dc70c8341ee",
+    "BIZUDMincho-Regular": "a8c855817e5cfcc0366926070639f1dc2752693034ea19ddfc50f9a70ffddac2",
+    "KosugiMaru-Regular": "4b8d0022c8dadd090ef67cd1f71f130714767af7806cba2eb4ebe4b0271c1d68",
+    "ZenAntique-Regular": "8c5cf7a136837ee705d06bbc133ea18ac06b7dd284f38aace91f5de36725c315"
+  },
+  "preprocessSha256": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098",
+  "initialStateSha256": "3b15ae52d891dcad13f832924304d237f746280dace8c93d82ad7ac39b8c6927",
+  "preflightSha256": "dd733b136d8f03970326a8eb0f516df165cefc92bcd5394bedaa7780d12ef1df",
+  "japanesePrimarySha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba",
+  "trainableParameters": 5510899,
+  "officialConfig": {
+    "transformers_version": "5.19.0",
+    "architectures": null,
+    "output_hidden_states": false,
+    "return_dict": true,
+    "dtype": "float32",
+    "chunk_size_feed_forward": 0,
+    "is_encoder_decoder": false,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "problem_type": null,
+    "hidden_act": "silu",
+    "backbone_config": {
+      "architectures": null,
+      "output_hidden_states": false,
+      "return_dict": true,
+      "dtype": "float32",
+      "chunk_size_feed_forward": 0,
+      "is_encoder_decoder": false,
+      "id2label": {
+        "0": "LABEL_0",
+        "1": "LABEL_1"
+      },
+      "label2id": {
+        "LABEL_0": 0,
+        "LABEL_1": 1
+      },
+      "problem_type": null,
+      "scale": 0.95,
+      "block_configs": [
+        [
+          [
+            3,
+            16,
+            32,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            3,
+            32,
+            64,
+            1,
+            false
+          ],
+          [
+            3,
+            64,
+            64,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            3,
+            64,
+            128,
+            [
+              2,
+              1
+            ],
+            false
+          ],
+          [
+            3,
+            128,
+            128,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            3,
+            128,
+            256,
+            [
+              1,
+              2
+            ],
+            false
+          ],
+          [
+            5,
+            256,
+            256,
+            1,
+            false
+          ],
+          [
+            5,
+            256,
+            256,
+            1,
+            false
+          ],
+          [
+            5,
+            256,
+            256,
+            1,
+            false
+          ],
+          [
+            5,
+            256,
+            256,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            5,
+            256,
+            512,
+            [
+              2,
+              1
+            ],
+            true
+          ],
+          [
+            5,
+            512,
+            512,
+            1,
+            true
+          ],
+          [
+            5,
+            512,
+            512,
+            [
+              2,
+              1
+            ],
+            false
+          ],
+          [
+            5,
+            512,
+            512,
+            1,
+            false
+          ]
+        ]
+      ],
+      "stem_channels": 16,
+      "stem_stride": 2,
+      "reduction": 4,
+      "divisor": 16,
+      "hidden_act": "hardswish",
+      "conv_symmetric_num": 4,
+      "depths": [
+        1,
+        2,
+        2,
+        5,
+        4
+      ],
+      "stage_names": [
+        "stem",
+        "stage1",
+        "stage2",
+        "stage3",
+        "stage4",
+        "stage5"
+      ],
+      "_name_or_path": "",
+      "model_type": "pp_lcnet_v3",
+      "output_attentions": false,
+      "out_features": [
+        "stage2",
+        "stage3",
+        "stage4",
+        "stage5"
+      ],
+      "out_indices": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "hidden_size": 120,
+    "mlp_ratio": 2.0,
+    "depth": 2,
+    "head_out_channels": 438,
+    "conv_kernel_size": [
+      1,
+      3
+    ],
+    "qkv_bias": true,
+    "num_attention_heads": 8,
+    "attention_dropout": 0.0,
+    "layer_norm_eps": 1e-06,
+    "_name_or_path": "/workspace/scratch/ascii-english-v5-transfer-20261014-v1/assets",
+    "model_type": "pp_ocrv5_mobile_rec",
+    "output_attentions": false
+  },
+  "selfConsistencySourceFreezeSha256": "5f24c4d773254ad3e052be244bc354fe535695201d0b291e1e221a07a287ceb0",
+  "finalOpened": false
+}

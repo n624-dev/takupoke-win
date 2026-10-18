@@ -1,0 +1,2192 @@
+[
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室I1149",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-030",
+    "role": "room",
+    "before": "架空室O023",
+    "after": "架空室0023",
+    "expected": "架空室O023",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-031",
+    "role": "room",
+    "before": "架空室I1I91",
+    "after": "架空室I1191",
+    "expected": "架空室I1l91",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-033",
+    "role": "room",
+    "before": "架空室I1I70",
+    "after": "架空室I1170",
+    "expected": "架空室I1l70",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-053",
+    "role": "room",
+    "before": "架空室O061",
+    "after": "架空室0061",
+    "expected": "架空室O061",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-055",
+    "role": "room",
+    "before": "架空室O050",
+    "after": "架空室0050",
+    "expected": "架空室O050",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-056",
+    "role": "room",
+    "before": "架空室O047",
+    "after": "架空室0047",
+    "expected": "架空室O047",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-057",
+    "role": "room",
+    "before": "架空室O094",
+    "after": "架空室0094",
+    "expected": "架空室O094",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-078",
+    "role": "room",
+    "before": "架空室O039",
+    "after": "架空室0039",
+    "expected": "架空室O039",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-083",
+    "role": "room",
+    "before": "架空室O048",
+    "after": "架空室0048",
+    "expected": "架空室O048",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室I1199",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-031",
+    "role": "room",
+    "before": "架空室I1I91",
+    "after": "架空室I1191",
+    "expected": "架空室I1l91",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-033",
+    "role": "room",
+    "before": "架空室I1I70",
+    "after": "架空室I1170",
+    "expected": "架空室I1l70",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-053",
+    "role": "room",
+    "before": "架空室O061",
+    "after": "架空室0061",
+    "expected": "架空室O061",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-057",
+    "role": "room",
+    "before": "架空室O094",
+    "after": "架空室0094",
+    "expected": "架空室O094",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-083",
+    "role": "room",
+    "before": "架空室O048",
+    "after": "架空室0048",
+    "expected": "架空室O048",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室I1199",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室I1149",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-030",
+    "role": "room",
+    "before": "架空室O023",
+    "after": "架空室0023",
+    "expected": "架空室O023",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-031",
+    "role": "room",
+    "before": "架空室I1I91",
+    "after": "架空室I1191",
+    "expected": "架空室I1l91",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-033",
+    "role": "room",
+    "before": "架空室I1I70",
+    "after": "架空室I1170",
+    "expected": "架空室I1l70",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-053",
+    "role": "room",
+    "before": "架空室O061",
+    "after": "架空室0061",
+    "expected": "架空室O061",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-055",
+    "role": "room",
+    "before": "架空室O050",
+    "after": "架空室0050",
+    "expected": "架空室O050",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-056",
+    "role": "room",
+    "before": "架空室O047",
+    "after": "架空室0047",
+    "expected": "架空室O047",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-057",
+    "role": "room",
+    "before": "架空室O094",
+    "after": "架空室0094",
+    "expected": "架空室O094",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-078",
+    "role": "room",
+    "before": "架空室O039",
+    "after": "架空室0039",
+    "expected": "架空室O039",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-083",
+    "role": "room",
+    "before": "架空室O048",
+    "after": "架空室0048",
+    "expected": "架空室O048",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室I1199",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-031",
+    "role": "room",
+    "before": "架空室I1I91",
+    "after": "架空室I1191",
+    "expected": "架空室I1l91",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-033",
+    "role": "room",
+    "before": "架空室I1I70",
+    "after": "架空室I1170",
+    "expected": "架空室I1l70",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-053",
+    "role": "room",
+    "before": "架空室O061",
+    "after": "架空室0061",
+    "expected": "架空室O061",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-057",
+    "role": "room",
+    "before": "架空室O094",
+    "after": "架空室0094",
+    "expected": "架空室O094",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-083",
+    "role": "room",
+    "before": "架空室O048",
+    "after": "架空室0048",
+    "expected": "架空室O048",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室I1199",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室I1149",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-031",
+    "role": "room",
+    "before": "架空室I1I91",
+    "after": "架空室I1191",
+    "expected": "架空室I1l91",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室I1143",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室I1149",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-031",
+    "role": "room",
+    "before": "架空室I1I91",
+    "after": "架空室I1191",
+    "expected": "架空室I1l91",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室I1143",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室I1149",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-031",
+    "role": "room",
+    "before": "架空室I1I91",
+    "after": "架空室I1191",
+    "expected": "架空室I1l91",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室I1143",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室I1193",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室I1149",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-031",
+    "role": "room",
+    "before": "架空室I1I91",
+    "after": "架空室I1191",
+    "expected": "架空室I1l91",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室I1143",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室I1149",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-031",
+    "role": "room",
+    "before": "架空室I1I91",
+    "after": "架空室I1191",
+    "expected": "架空室I1l91",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室I1143",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室I1193",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室I1149",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-031",
+    "role": "room",
+    "before": "架空室I1I91",
+    "after": "架空室I1191",
+    "expected": "架空室I1l91",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "server-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室I1143",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室11149",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-030",
+    "role": "room",
+    "before": "架空室O023",
+    "after": "架空室0023",
+    "expected": "架空室O023",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-033",
+    "role": "room",
+    "before": "架空室I1I70",
+    "after": "架空室11170",
+    "expected": "架空室I1l70",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室11143",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-053",
+    "role": "room",
+    "before": "架空室O061",
+    "after": "架空室0061",
+    "expected": "架空室O061",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-055",
+    "role": "room",
+    "before": "架空室O050",
+    "after": "架空室0050",
+    "expected": "架空室O050",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-056",
+    "role": "room",
+    "before": "架空室O047",
+    "after": "架空室0047",
+    "expected": "架空室O047",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-057",
+    "role": "room",
+    "before": "架空室O094",
+    "after": "架空室0094",
+    "expected": "架空室O094",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-078",
+    "role": "room",
+    "before": "架空室O039",
+    "after": "架空室0039",
+    "expected": "架空室O039",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室11193",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-081",
+    "role": "room",
+    "before": "架空室O011",
+    "after": "架空室0011",
+    "expected": "架空室O011",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-083",
+    "role": "room",
+    "before": "架空室O048",
+    "after": "架空室0048",
+    "expected": "架空室O048",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-030",
+    "role": "room",
+    "before": "架空室O023",
+    "after": "架空室0023",
+    "expected": "架空室O023",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-053",
+    "role": "room",
+    "before": "架空室O061",
+    "after": "架空室0061",
+    "expected": "架空室O061",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-055",
+    "role": "room",
+    "before": "架空室O050",
+    "after": "架空室0050",
+    "expected": "架空室O050",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-056",
+    "role": "room",
+    "before": "架空室O047",
+    "after": "架空室0047",
+    "expected": "架空室O047",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-057",
+    "role": "room",
+    "before": "架空室O094",
+    "after": "架空室0094",
+    "expected": "架空室O094",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-078",
+    "role": "room",
+    "before": "架空室O039",
+    "after": "架空室0039",
+    "expected": "架空室O039",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-081",
+    "role": "room",
+    "before": "架空室O011",
+    "after": "架空室0011",
+    "expected": "架空室O011",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-083",
+    "role": "room",
+    "before": "架空室O048",
+    "after": "架空室0048",
+    "expected": "架空室O048",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室11149",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-030",
+    "role": "room",
+    "before": "架空室O023",
+    "after": "架空室0023",
+    "expected": "架空室O023",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-033",
+    "role": "room",
+    "before": "架空室I1I70",
+    "after": "架空室11170",
+    "expected": "架空室I1l70",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室11143",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-053",
+    "role": "room",
+    "before": "架空室O061",
+    "after": "架空室0061",
+    "expected": "架空室O061",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-055",
+    "role": "room",
+    "before": "架空室O050",
+    "after": "架空室0050",
+    "expected": "架空室O050",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-056",
+    "role": "room",
+    "before": "架空室O047",
+    "after": "架空室0047",
+    "expected": "架空室O047",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-057",
+    "role": "room",
+    "before": "架空室O094",
+    "after": "架空室0094",
+    "expected": "架空室O094",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-078",
+    "role": "room",
+    "before": "架空室O039",
+    "after": "架空室0039",
+    "expected": "架空室O039",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室11193",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-081",
+    "role": "room",
+    "before": "架空室O011",
+    "after": "架空室0011",
+    "expected": "架空室O011",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-083",
+    "role": "room",
+    "before": "架空室O048",
+    "after": "架空室0048",
+    "expected": "架空室O048",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-030",
+    "role": "room",
+    "before": "架空室O023",
+    "after": "架空室0023",
+    "expected": "架空室O023",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-053",
+    "role": "room",
+    "before": "架空室O061",
+    "after": "架空室0061",
+    "expected": "架空室O061",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-055",
+    "role": "room",
+    "before": "架空室O050",
+    "after": "架空室0050",
+    "expected": "架空室O050",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-056",
+    "role": "room",
+    "before": "架空室O047",
+    "after": "架空室0047",
+    "expected": "架空室O047",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-057",
+    "role": "room",
+    "before": "架空室O094",
+    "after": "架空室0094",
+    "expected": "架空室O094",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-078",
+    "role": "room",
+    "before": "架空室O039",
+    "after": "架空室0039",
+    "expected": "架空室O039",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-081",
+    "role": "room",
+    "before": "架空室O011",
+    "after": "架空室0011",
+    "expected": "架空室O011",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-083",
+    "role": "room",
+    "before": "架空室O048",
+    "after": "架空室0048",
+    "expected": "架空室O048",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室11149",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-030",
+    "role": "room",
+    "before": "架空室O023",
+    "after": "架空室0023",
+    "expected": "架空室O023",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-033",
+    "role": "room",
+    "before": "架空室I1I70",
+    "after": "架空室11170",
+    "expected": "架空室I1l70",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室11143",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-053",
+    "role": "room",
+    "before": "架空室O061",
+    "after": "架空室0061",
+    "expected": "架空室O061",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-055",
+    "role": "room",
+    "before": "架空室O050",
+    "after": "架空室0050",
+    "expected": "架空室O050",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-056",
+    "role": "room",
+    "before": "架空室O047",
+    "after": "架空室0047",
+    "expected": "架空室O047",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-057",
+    "role": "room",
+    "before": "架空室O094",
+    "after": "架空室0094",
+    "expected": "架空室O094",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-078",
+    "role": "room",
+    "before": "架空室O039",
+    "after": "架空室0039",
+    "expected": "架空室O039",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室11193",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-081",
+    "role": "room",
+    "before": "架空室O011",
+    "after": "架空室0011",
+    "expected": "架空室O011",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-083",
+    "role": "room",
+    "before": "架空室O048",
+    "after": "架空室0048",
+    "expected": "架空室O048",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室11199",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室11149",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-030",
+    "role": "room",
+    "before": "架空室O023",
+    "after": "架空室0023",
+    "expected": "架空室O023",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-033",
+    "role": "room",
+    "before": "架空室I1I70",
+    "after": "架空室11170",
+    "expected": "架空室I1l70",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室11143",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-053",
+    "role": "room",
+    "before": "架空室O061",
+    "after": "架空室0061",
+    "expected": "架空室O061",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-055",
+    "role": "room",
+    "before": "架空室O050",
+    "after": "架空室0050",
+    "expected": "架空室O050",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-056",
+    "role": "room",
+    "before": "架空室O047",
+    "after": "架空室0047",
+    "expected": "架空室O047",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-057",
+    "role": "room",
+    "before": "架空室O094",
+    "after": "架空室0094",
+    "expected": "架空室O094",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-078",
+    "role": "room",
+    "before": "架空室O039",
+    "after": "架空室0039",
+    "expected": "架空室O039",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室I1193",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-081",
+    "role": "room",
+    "before": "架空室O011",
+    "after": "架空室0011",
+    "expected": "架空室O011",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-083",
+    "role": "room",
+    "before": "架空室O048",
+    "after": "架空室0048",
+    "expected": "架空室O048",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室I1199",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室11149",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-030",
+    "role": "room",
+    "before": "架空室O023",
+    "after": "架空室0023",
+    "expected": "架空室O023",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-033",
+    "role": "room",
+    "before": "架空室I1I70",
+    "after": "架空室11170",
+    "expected": "架空室I1l70",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室11143",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-053",
+    "role": "room",
+    "before": "架空室O061",
+    "after": "架空室0061",
+    "expected": "架空室O061",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-055",
+    "role": "room",
+    "before": "架空室O050",
+    "after": "架空室0050",
+    "expected": "架空室O050",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-056",
+    "role": "room",
+    "before": "架空室O047",
+    "after": "架空室0047",
+    "expected": "架空室O047",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-057",
+    "role": "room",
+    "before": "架空室O094",
+    "after": "架空室0094",
+    "expected": "架空室O094",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-078",
+    "role": "room",
+    "before": "架空室O039",
+    "after": "架空室0039",
+    "expected": "架空室O039",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室11193",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-081",
+    "role": "room",
+    "before": "架空室O011",
+    "after": "架空室0011",
+    "expected": "架空室O011",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-083",
+    "role": "room",
+    "before": "架空室O048",
+    "after": "架空室0048",
+    "expected": "架空室O048",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室11199",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室11149",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-030",
+    "role": "room",
+    "before": "架空室O023",
+    "after": "架空室0023",
+    "expected": "架空室O023",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-033",
+    "role": "room",
+    "before": "架空室I1I70",
+    "after": "架空室11170",
+    "expected": "架空室I1l70",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室11143",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-053",
+    "role": "room",
+    "before": "架空室O061",
+    "after": "架空室0061",
+    "expected": "架空室O061",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-055",
+    "role": "room",
+    "before": "架空室O050",
+    "after": "架空室0050",
+    "expected": "架空室O050",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-056",
+    "role": "room",
+    "before": "架空室O047",
+    "after": "架空室0047",
+    "expected": "架空室O047",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-057",
+    "role": "room",
+    "before": "架空室O094",
+    "after": "架空室0094",
+    "expected": "架空室O094",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-078",
+    "role": "room",
+    "before": "架空室O039",
+    "after": "架空室0039",
+    "expected": "架空室O039",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室I1193",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-081",
+    "role": "room",
+    "before": "架空室O011",
+    "after": "架空室0011",
+    "expected": "架空室O011",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-083",
+    "role": "room",
+    "before": "架空室O048",
+    "after": "架空室0048",
+    "expected": "架空室O048",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室I1199",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  }
+]

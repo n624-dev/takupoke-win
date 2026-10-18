@@ -1,0 +1,293 @@
+{
+  "recipe": "consumed-dense-pretrained-ink-v1",
+  "model": "v6-medium",
+  "modelIdentity": {
+    "bytes": 76554979,
+    "sha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba",
+    "symbols": 18710,
+    "dictionarySHA256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f"
+  },
+  "priorRawSHA256": "f4606f40ab90a954f9db1e7c24277ab4ec39f09754b12cbfc646eacd056f86e8",
+  "inputsSHA256": "35311d4dfb558df25edaa9839357c8a3af11a2ecc0acc6166310009c3808e24e",
+  "oracleSHA256": "8bc4223a69e23d2f5b6ef596b3b3a23627d9cb49dc793a8f83b3a221a5bb9e1e",
+  "sourceSHA256": {
+    "tools/ocr-physical-framing/Program.cs": "b381e74f6fcf86832af9a815a4e2b803605598490069d12e2f760aad53465d94",
+    "tools/ocr-physical-framing/InkCropFrame.cs": "c4be2d8087bca1c794a74b392e32fb3790154c26c4ddc41cfc79b463ba36ba00",
+    "tools/ocr-physical-framing/OriginalImageRead.cs": "3a51e5b489dfa68df703b5da4e84f58c70848b5fb81b73f230c09f278237e0df",
+    "tools/ocr-physical-framing/run_dense_model.py": "3265c86ef559e67744e2882b808ca019caa161b5fccb124111fe66f4b7fa6de8",
+    "tools/ocr-physical-framing/prepare_pdf.py": "34321c7ac8a998f51850d6d7f6164b69c3d04898374ec66a99cf6c611dd33bc0",
+    "src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs": "6622945599f8a3d62f7ac983b898fa8c8304be4ef4b5b9f70ed139c74e5621b7"
+  },
+  "readerFiles": {
+    "DocumentFormat.OpenXml.Framework.dll": {
+      "bytes": 478688,
+      "sha256": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae"
+    },
+    "DocumentFormat.OpenXml.dll": {
+      "bytes": 7985120,
+      "sha256": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499"
+    },
+    "Microsoft.Data.Sqlite.dll": {
+      "bytes": 177464,
+      "sha256": "b98d957462be432895b00dccca012d3c127e118d3d4262418014b92c7bbd66cf"
+    },
+    "Microsoft.ML.OnnxRuntime.dll": {
+      "bytes": 232480,
+      "sha256": "4c6985df4aa2f810ba8a2b37c3c791e619d8fe126954a6bd28cffd3f4adeba95"
+    },
+    "SQLitePCLRaw.batteries_v2.dll": {
+      "bytes": 5120,
+      "sha256": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b"
+    },
+    "SQLitePCLRaw.core.dll": {
+      "bytes": 51200,
+      "sha256": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84"
+    },
+    "SQLitePCLRaw.provider.e_sqlite3.dll": {
+      "bytes": 36864,
+      "sha256": "df996bcae63c2cabcfe8d4b9c5110eb39a2a4706178b07d875665391c6eb3995"
+    },
+    "System.IO.Packaging.dll": {
+      "bytes": 159504,
+      "sha256": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+    },
+    "System.Numerics.Tensors.dll": {
+      "bytes": 410936,
+      "sha256": "9d96dc759fdb54cbc3c26ee65cfd78ff32e3745f418119cc0811e63d3f29ecb9"
+    },
+    "System.Security.Cryptography.ProtectedData.dll": {
+      "bytes": 39760,
+      "sha256": "b61a1445b99a1486a5d9abbd45d766497f136270f5b04862defee1fc054ded14"
+    },
+    "Takupoke.Core.dll": {
+      "bytes": 381952,
+      "sha256": "e03c849c161f4c7165ead832576e007633fa9cdf74760eb4717185369de9f65e"
+    },
+    "Takupoke.Core.pdb": {
+      "bytes": 83544,
+      "sha256": "2d4e0b41a5fa05679d54bcc6db8494352b5444e1782489df7d05bf5839a65461"
+    },
+    "Takupoke.Infrastructure.dll": {
+      "bytes": 539648,
+      "sha256": "8b244b6818eab949a3b094364a8a64f8bd49ed45b77b7d9253f98d6b5549c2a8"
+    },
+    "Takupoke.Infrastructure.pdb": {
+      "bytes": 124404,
+      "sha256": "2e92433343feb358b187ad3525b2b4967ef45954b7c502f2a8ee93171a3fb708"
+    },
+    "Takupoke.OcrComparison": {
+      "bytes": 78256,
+      "sha256": "229ca1d7fbfb862f639b906929248b7c133781fe7a3471d6ea99ed4c904c9b2f"
+    },
+    "Takupoke.OcrComparison.deps.json": {
+      "bytes": 17536,
+      "sha256": "bcceab924604fe4f0ff96fde99c77b3a01ab7ed9bda01edac2a626ec4619cc42"
+    },
+    "Takupoke.OcrComparison.dll": {
+      "bytes": 92672,
+      "sha256": "c4cf4fbda2cdd161fb68514d423a0f14358820a793848577418f17644120f03c"
+    },
+    "Takupoke.OcrComparison.pdb": {
+      "bytes": 25436,
+      "sha256": "55af9f3949cdbdabd23d7a95854fdcc58bf22f0bb333108cedec5c73e3822c7e"
+    },
+    "Takupoke.OcrComparison.runtimeconfig.json": {
+      "bytes": 330,
+      "sha256": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f"
+    },
+    "UglyToad.PdfPig.Core.dll": {
+      "bytes": 50176,
+      "sha256": "cbdd1809ee0f4ba617900845d182e5e67183377fe5848a8d9d1222b3c395116b"
+    },
+    "UglyToad.PdfPig.DocumentLayoutAnalysis.dll": {
+      "bytes": 248320,
+      "sha256": "c0d1e237eabcb2c741fc7ab7b26c255af6f5751d1cd7e86d7ae613611f79bc88"
+    },
+    "UglyToad.PdfPig.Fonts.dll": {
+      "bytes": 1095680,
+      "sha256": "30521d2aa02252c0097cd3a9b12832368d5c925e1ccb4bc3a5735671bd3d2e1e"
+    },
+    "UglyToad.PdfPig.Package.dll": {
+      "bytes": 4608,
+      "sha256": "3227f79347329b57e50745d2ade1deb7ccdfe57da1d382796283832aae6ea41a"
+    },
+    "UglyToad.PdfPig.Tokenization.dll": {
+      "bytes": 23040,
+      "sha256": "539d0ca2c7981b9eaf8541e17434911042f7cc73d3abc24962994bb99472ed3c"
+    },
+    "UglyToad.PdfPig.Tokens.dll": {
+      "bytes": 48128,
+      "sha256": "d6fbd73a520bb961ffcc98030ab686f43c88b03f5b059ba11e3781e0f091433d"
+    },
+    "UglyToad.PdfPig.dll": {
+      "bytes": 4251648,
+      "sha256": "c47abebdffebb6e48a1d40f4c22ce5f673c57558ecdb3187841b728112dea279"
+    },
+    "runtimes/android/native/onnxruntime.aar": {
+      "bytes": 30241654,
+      "sha256": "82048d1f462218adae4ba76477089ab0ba76093d84f733540066db1a8ba6b827"
+    },
+    "runtimes/browser-wasm/nativeassets/net9.0/e_sqlite3.a": {
+      "bytes": 1308854,
+      "sha256": "c64ae8d44dc3e1aa03aca4e79ccc501cbc3a3c490e8e2ea9e369367f68cf0f21"
+    },
+    "runtimes/ios/native/onnxruntime.xcframework.zip": {
+      "bytes": 46790152,
+      "sha256": "60cd467b88cbe61142dd3f9f6c1e5f4e1d88e3c48a943335aea7587324d48bb6"
+    },
+    "runtimes/linux-arm/native/libe_sqlite3.so": {
+      "bytes": 982224,
+      "sha256": "43556c2f5075857bf57be1136d556733bdc27195884fbdde127cd976d1c25ad5"
+    },
+    "runtimes/linux-arm64/native/libe_sqlite3.so": {
+      "bytes": 1534296,
+      "sha256": "707fff6b18c1f083158e7a543c8d2545d5485f547ffd96db29679a95f52878d5"
+    },
+    "runtimes/linux-arm64/native/libonnxruntime.so": {
+      "bytes": 18693384,
+      "sha256": "648ffa64fbe027ae27139109410900cf776a030dec2dbbac51053318cc44c286"
+    },
+    "runtimes/linux-arm64/native/libonnxruntime_providers_shared.so": {
+      "bytes": 198792,
+      "sha256": "3b6be288fbfb7dff8770d08a23defdde18e8f7e0f5a2b344a0e5e238c999ea88"
+    },
+    "runtimes/linux-armel/native/libe_sqlite3.so": {
+      "bytes": 1375344,
+      "sha256": "3f4d9b9ca49bb3f100882e78ba85807398cee19b481bfd4c301a8f5f58d48540"
+    },
+    "runtimes/linux-mips64/native/libe_sqlite3.so": {
+      "bytes": 1756544,
+      "sha256": "985884523e512414f3e50aa359f08dad3ce635e99405e7823de9b26a7db38d09"
+    },
+    "runtimes/linux-musl-arm/native/libe_sqlite3.so": {
+      "bytes": 1322584,
+      "sha256": "7fec7057d16e8b5ae54fed0c42a0e6b85e40df0d57092ef20cd647a4e1c1e0ed"
+    },
+    "runtimes/linux-musl-arm64/native/libe_sqlite3.so": {
+      "bytes": 1450704,
+      "sha256": "530e2f74f259fe04faa4b595336e671fab5eedbb6f4e94dad59494efb7b00c2a"
+    },
+    "runtimes/linux-musl-riscv64/native/libe_sqlite3.so": {
+      "bytes": 1015888,
+      "sha256": "d8e54eb7dc52ea0a7df9b78ac6feb85af429e7264613099df478825dea5805d4"
+    },
+    "runtimes/linux-musl-s390x/native/libe_sqlite3.so": {
+      "bytes": 1685752,
+      "sha256": "64260c0460ad6efa7dce9263bff7a4b64ad66172ccc580cb09181c845e1a3407"
+    },
+    "runtimes/linux-musl-x64/native/libe_sqlite3.so": {
+      "bytes": 1445336,
+      "sha256": "647b7b5886526691aed58e0fcbb56dc1e6dea8b1f9f5390782f0c95269250db1"
+    },
+    "runtimes/linux-ppc64le/native/libe_sqlite3.so": {
+      "bytes": 1937408,
+      "sha256": "1ef00b5e3ac63e491f59ecf587680fc52ad844cea62e0a879a1315ef6bd10fc6"
+    },
+    "runtimes/linux-riscv64/native/libe_sqlite3.so": {
+      "bytes": 1291896,
+      "sha256": "6b390eecbc6f55c44d9ab8a774f1fe4283dfb33a72e6f29f4e0b173065e7e105"
+    },
+    "runtimes/linux-s390x/native/libe_sqlite3.so": {
+      "bytes": 1655776,
+      "sha256": "dfd5ab35f6d61155a3c629d0bceff4d6e0f0f190983f3fb8f681fb34ec08c67e"
+    },
+    "runtimes/linux-x64/native/libe_sqlite3.so": {
+      "bytes": 1470784,
+      "sha256": "b0f5c48026fedcf9f05cf31c6fadf9e1e001ca59cd85aa68b8b6814e52c18a07"
+    },
+    "runtimes/linux-x64/native/libonnxruntime.so": {
+      "bytes": 22326072,
+      "sha256": "13ab8084954fa4a47c777880180b90810d6020f021441395712b48a75b74c68b"
+    },
+    "runtimes/linux-x64/native/libonnxruntime_providers_shared.so": {
+      "bytes": 14632,
+      "sha256": "086ec1d5388f64153d9c63470d126693db9a182c8ce236d3a1119068471b8a0d"
+    },
+    "runtimes/linux-x86/native/libe_sqlite3.so": {
+      "bytes": 1547984,
+      "sha256": "fe8229e5baeaf21e721cf65626a6b07ec22d9b17d07bd624e7a77927174277f1"
+    },
+    "runtimes/maccatalyst-arm64/native/libe_sqlite3.dylib": {
+      "bytes": 1695264,
+      "sha256": "8d63d80bc6caa754679d6fc89fd741a32c156f136c34759cc8fff8cd51468a93"
+    },
+    "runtimes/maccatalyst-x64/native/libe_sqlite3.dylib": {
+      "bytes": 1724352,
+      "sha256": "43d27adbc5ba40850bac42a12aea08314a22a43d3ce77cdc7a6cc47ecffb5746"
+    },
+    "runtimes/osx-arm64/native/libe_sqlite3.dylib": {
+      "bytes": 1696624,
+      "sha256": "09fe20a6c050912a7944b2f2f2981debe31679f7919f523c87251ae8cf0f2daa"
+    },
+    "runtimes/osx-arm64/native/libonnxruntime.dylib": {
+      "bytes": 35138784,
+      "sha256": "d306d2bc768540766c7ed8a1e0ff05d2870c77a934ebeee4a7bafa1b732ef299"
+    },
+    "runtimes/osx-x64/native/libe_sqlite3.dylib": {
+      "bytes": 1724472,
+      "sha256": "02344e1d0bcb5ed447ad9b79ed19e37a590fb1ece3eba1e63efbc35e36e47bdf"
+    },
+    "runtimes/osx-x64/native/libonnxruntime.dylib": {
+      "bytes": 39742608,
+      "sha256": "8c9c78de65ea3786f987c0d980e9c1b13a3a5fbc6b3e2965ba05b450e6e4c054"
+    },
+    "runtimes/win-arm64/native/e_sqlite3.dll": {
+      "bytes": 1814528,
+      "sha256": "4177542756bd94f75b55fb74367e0cf34e66a88ffaf95755489af14c6ca2f792"
+    },
+    "runtimes/win-arm64/native/onnxruntime.dll": {
+      "bytes": 14868512,
+      "sha256": "99a11bb077f723a81d100fd98099f332e4178bbb7025ac10fd40699a0b82c2f0"
+    },
+    "runtimes/win-arm64/native/onnxruntime.lib": {
+      "bytes": 2124,
+      "sha256": "73b90a251880c4ef6b7bfc3d8ac44cf111ab13a19d8a14697e822218009eb054"
+    },
+    "runtimes/win-arm64/native/onnxruntime_providers_shared.dll": {
+      "bytes": 21048,
+      "sha256": "27cafd6da30843bf4c5f42f1af16cdd42af4aca69f9003bb3ef7382d8c794978"
+    },
+    "runtimes/win-arm64/native/onnxruntime_providers_shared.lib": {
+      "bytes": 2314,
+      "sha256": "08494afafb299b7e32772726ead6f060702cbd4ebaf4e760a64c613a80acb099"
+    },
+    "runtimes/win-x64/native/e_sqlite3.dll": {
+      "bytes": 1978880,
+      "sha256": "b7385d722c83fb52142a00477a726723745916d22a555711ee89834c1111fb2e"
+    },
+    "runtimes/win-x64/native/onnxruntime.dll": {
+      "bytes": 14186016,
+      "sha256": "dec964ab1ee36cc9b0ae247d13b376627992fc57dec0454354017ab8fd84f1ea"
+    },
+    "runtimes/win-x64/native/onnxruntime.lib": {
+      "bytes": 2124,
+      "sha256": "977263ca76e6a9d0f230a198d3b05b2a2bddfed66bc5c4d4fd25293b03cc78b5"
+    },
+    "runtimes/win-x64/native/onnxruntime_providers_shared.dll": {
+      "bytes": 22088,
+      "sha256": "a2b3a50956aa75a9879c8472bc7df4f7a8072bcd2db19a1b7d988e7688f293ef"
+    },
+    "runtimes/win-x64/native/onnxruntime_providers_shared.lib": {
+      "bytes": 2314,
+      "sha256": "82b8de544d855964658d3c5e41e5f2da7422ebc6a1275d5385fdb12d7e4516b7"
+    },
+    "runtimes/win-x86/native/e_sqlite3.dll": {
+      "bytes": 1533952,
+      "sha256": "d13eb819d1353d98c684c88672868bbfcc6a52eb5987bdf2557ec02fabce4ea7"
+    }
+  },
+  "plannedConditions": {
+    "d0-positive": [
+      "ink-input-frame"
+    ],
+    "d1-positive": [
+      "ink-input-frame"
+    ]
+  },
+  "qualification": false,
+  "nativeConfidenceFloor": 0.8,
+  "originalInkMargin": 0,
+  "manualCorrections": 0,
+  "selection": "Both fixed complete positives, no negative qualification",
+  "nativeGlobalDeadlineSeconds": 3300
+}

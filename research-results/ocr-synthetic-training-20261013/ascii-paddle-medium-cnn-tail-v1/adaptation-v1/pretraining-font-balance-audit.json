@@ -1,0 +1,51 @@
+{
+  "eachPositiveGroupExactlyBalanced": true,
+  "trainMonoRatio": 0.5,
+  "counts": {
+    "train": {
+      "mixed_code": {
+        "NotoSansJP400": 48,
+        "NotoSerifJP400": 48,
+        "MPLUS1Code-Regular": 48,
+        "BIZUDMincho-Regular": 48
+      },
+      "mixed_confusable": {
+        "NotoSansJP400": 48,
+        "NotoSerifJP400": 48,
+        "MPLUS1Code-Regular": 48,
+        "BIZUDMincho-Regular": 48
+      },
+      "ascii_short": {
+        "NotoSansJP400": 32,
+        "NotoSerifJP400": 32,
+        "MPLUS1Code-Regular": 32,
+        "BIZUDMincho-Regular": 32
+      },
+      "japanese": {
+        "NotoSansJP400": 32,
+        "NotoSerifJP400": 32,
+        "MPLUS1Code-Regular": 32,
+        "BIZUDMincho-Regular": 32
+      }
+    },
+    "development": {
+      "mixed_code": {
+        "KosugiMaru-Regular": 64,
+        "ZenAntique-Regular": 64
+      },
+      "mixed_confusable": {
+        "KosugiMaru-Regular": 64,
+        "ZenAntique-Regular": 64
+      },
+      "ascii_short": {
+        "KosugiMaru-Regular": 32,
+        "ZenAntique-Regular": 32
+      },
+      "japanese": {
+        "KosugiMaru-Regular": 32,
+        "ZenAntique-Regular": 32
+      }
+    }
+  },
+  "developmentFontsNeverTrain": true
+}

@@ -1,0 +1,138 @@
+{
+  "stage": "Read-only supplemental audit after initial freeze; no model execution or selection",
+  "manifests": [
+    {
+      "split": "train",
+      "sha256": "96ab7536234f693959e246c26fae30dab2f45fe65722246a6c383d9fcd4ec22f"
+    },
+    {
+      "split": "development",
+      "sha256": "e4beaa18de3a0f705dd97079ed60d5fa13a0f090436b109b07e25391bb01afa4"
+    }
+  ],
+  "priorNormalizedPngRows": 37776,
+  "priorMissingImageRows": 0,
+  "priorManifests": [
+    {
+      "path": "/workspace/scratch/ascii-english-v5-confusion-20261016-v2/adaptation-v2/development/manifest.json",
+      "scanned": 496
+    },
+    {
+      "path": "/workspace/scratch/ascii-english-v5-confusion-20261016-v2/adaptation-v2/fresh/manifest.json",
+      "scanned": 496
+    },
+    {
+      "path": "/workspace/scratch/ascii-english-v5-confusion-20261016-v2/adaptation-v2/train/manifest.json",
+      "scanned": 880
+    },
+    {
+      "path": "/workspace/scratch/ascii-english-v5-font-balanced-20261014-v1/adaptation-v1/development/manifest.json",
+      "scanned": 496
+    },
+    {
+      "path": "/workspace/scratch/ascii-english-v5-font-balanced-20261014-v1/adaptation-v1/train/manifest.json",
+      "scanned": 752
+    },
+    {
+      "path": "/workspace/scratch/ascii-english-v5-official-transfer-20261014-v1/adaptation-v1/development/manifest.json",
+      "scanned": 608
+    },
+    {
+      "path": "/workspace/scratch/ascii-english-v5-official-transfer-20261014-v1/adaptation-v1/train/manifest.json",
+      "scanned": 864
+    },
+    {
+      "path": "/workspace/scratch/ascii-line-ctc-20261013-v1/development/manifest.json",
+      "scanned": 512
+    },
+    {
+      "path": "/workspace/scratch/ascii-line-ctc-20261013-v1/train/manifest.json",
+      "scanned": 5376
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-cnn-tail-20261014-v1/adaptation-v1/development/manifest.json",
+      "scanned": 576
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-cnn-tail-20261014-v1/adaptation-v1/train/manifest.json",
+      "scanned": 800
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-features-20261013-v1/mixed-head-v1/development/manifest.json",
+      "scanned": 1088
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-features-20261013-v1/mixed-head-v1/train/manifest.json",
+      "scanned": 7168
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-height-neck-20261013-v1/adaptation-v1/development/manifest.json",
+      "scanned": 832
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-height-neck-20261013-v1/adaptation-v1/train/manifest.json",
+      "scanned": 2560
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-svtr-20261013-v1/adaptation-v1/development/manifest.json",
+      "scanned": 1088
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-medium-svtr-20261013-v1/adaptation-v1/train/manifest.json",
+      "scanned": 5120
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-transfer-20261013-v1/development/manifest.json",
+      "scanned": 704
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-transfer-20261013-v1/source-proof-probes/manifest.json",
+      "scanned": 64
+    },
+    {
+      "path": "/workspace/scratch/ascii-paddle-transfer-20261013-v1/train/manifest.json",
+      "scanned": 5120
+    },
+    {
+      "path": "/workspace/scratch/ocr-finetune-20261013/development/manifest.json",
+      "scanned": 192
+    },
+    {
+      "path": "/workspace/scratch/ocr-finetune-20261013/final/manifest.json",
+      "scanned": 384
+    },
+    {
+      "path": "/workspace/scratch/ocr-finetune-20261013/ood/manifest.json",
+      "scanned": 64
+    },
+    {
+      "path": "/workspace/scratch/ocr-finetune-20261013/train/manifest.json",
+      "scanned": 1536
+    },
+    {
+      "path": "/workspace/scratch/pdf-colour-acquisition-20261013/manifest.json",
+      "scanned": 0
+    },
+    {
+      "path": "/workspace/scratch/pdf-source-final-20261013/manifest.json",
+      "scanned": 0
+    },
+    {
+      "path": "/workspace/scratch/takupoke-ios-reference/tools/recovery-prompt-contracts/manifest.json",
+      "scanned": 0
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/tools/raster-acquisition-native-probe/fixtures/manifest.json",
+      "scanned": 0
+    },
+    {
+      "path": "/workspace/scratch/takupoke-win/tools/recovery-prompt-contracts/manifest.json",
+      "scanned": 0
+    }
+  ],
+  "nonblankPriorCollisions": [],
+  "nonblankCurrentDuplicates": [],
+  "whiteControlsExcludedFromNovelty": true,
+  "passed": true,
+  "sourceSha256": "d51756b596a9365a4eee43ce85ab2587b46cd94c0cabd39185084e7ff7c1e65b"
+}

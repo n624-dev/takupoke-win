@@ -1,0 +1,133 @@
+{
+  "scope": "Read-only formatting correction from immutable outputs. Frozen evaluate() positive-only characterize update overwrote summary.groups[negative].accepted with0. Overall negativeAccepted and every raw.accepted remain correct; selection uses overall, so no selection/inference/training change. Original frozen source/summary/raw/protocol retained. Use canonical groups here or practical-error-review-diagnosis for negative subgroups.",
+  "conditions": [
+    {
+      "name": "official-baseline",
+      "canonicalNegativeGroupsFromRaw": {
+        "clipped": {
+          "rows": 16,
+          "accepted": 5,
+          "nonempty": 16
+        },
+        "interior_damage": {
+          "rows": 16,
+          "accepted": 10,
+          "nonempty": 16
+        },
+        "multiline": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 16
+        },
+        "noise": {
+          "rows": 16,
+          "accepted": 1,
+          "nonempty": 13
+        },
+        "blank": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 2
+        },
+        "unknown_cjk": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 12
+        },
+        "unknown_mixed": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 16
+        }
+      },
+      "overallNegativeAcceptedUnchanged": 16,
+      "rawSha256": "956c73454c613347ece6ed771b2bff7d555d07ee8adcce3c327342bc3e4e9250"
+    },
+    {
+      "name": "epoch-2",
+      "canonicalNegativeGroupsFromRaw": {
+        "clipped": {
+          "rows": 16,
+          "accepted": 1,
+          "nonempty": 16
+        },
+        "interior_damage": {
+          "rows": 16,
+          "accepted": 10,
+          "nonempty": 16
+        },
+        "multiline": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 7
+        },
+        "noise": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "blank": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "unknown_cjk": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "unknown_mixed": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 16
+        }
+      },
+      "overallNegativeAcceptedUnchanged": 11,
+      "rawSha256": "78d395506effd60b7634847fe111c97bd96f1071e8e765bb91a7a51aa127d3e0"
+    },
+    {
+      "name": "epoch-4",
+      "canonicalNegativeGroupsFromRaw": {
+        "clipped": {
+          "rows": 16,
+          "accepted": 2,
+          "nonempty": 16
+        },
+        "interior_damage": {
+          "rows": 16,
+          "accepted": 11,
+          "nonempty": 16
+        },
+        "multiline": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 12
+        },
+        "noise": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "blank": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "unknown_cjk": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 1
+        },
+        "unknown_mixed": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 16
+        }
+      },
+      "overallNegativeAcceptedUnchanged": 13,
+      "rawSha256": "acf12006c9babee1ea3a3284d2423338af49ef67b3a7a6a5e3f95eb4997d7015"
+    }
+  ],
+  "modelRerun": false,
+  "selectionChanged": false
+}

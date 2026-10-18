@@ -1,0 +1,20 @@
+native	Install public Japanese OCR language capability before inference	﻿2026-10-14T03:00:28.8582491Z ##[group]Run $capability = 'Language.OCR~~~ja-JP~0.0.1.0'
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8582789Z [36;1m$capability = 'Language.OCR~~~ja-JP~0.0.1.0'[0m
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8583011Z [36;1m$before = Get-WindowsCapability -Online -Name $capability[0m
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8583266Z [36;1m$before | Select-Object Name, State | ConvertTo-Json -Compress[0m
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8583604Z [36;1mif ($before.State -ne 'Installed') { Add-WindowsCapability -Online -Name $capability | ConvertTo-Json -Compress }[0m
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8583935Z [36;1m$after = Get-WindowsCapability -Online -Name $capability[0m
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8584164Z [36;1m$after | Select-Object Name, State | ConvertTo-Json -Compress[0m
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8584500Z [36;1mif ($after.State -ne 'Installed') { throw 'Japanese OCR capability not installed; no Japanese precision measurement.' }[0m
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8627774Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8627974Z env:
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8628079Z   PYTHONUTF8: 1
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8628228Z   DOTNET_CLI_TELEMETRY_OPTOUT: 1
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8628358Z   DOTNET_NOLOGO: 1
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8628529Z   TAKUPOKE_SYSTEM_OCR_TEMP: D:\a\_temp\takupoke-system-ocr-38503900381-1
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8628787Z   DOTNET_CLI_HOME: D:\a\_temp\takupoke-system-ocr-38503900381-1\dotnet
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8629023Z   NUGET_PACKAGES: D:\a\_temp\takupoke-system-ocr-38503900381-1\nuget
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8629217Z   DOTNET_ROOT: C:\Program Files\dotnet
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:28.8629354Z ##[endgroup]
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:00:29.5130274Z {"Name":"Language.OCR~~~ja-JP~0.0.1.0","State":0}
+native	Install public Japanese OCR language capability before inference	2026-10-14T03:08:39.6134824Z ##[error]The action 'Install public Japanese OCR language capability before inference' has timed out after 8 minutes.

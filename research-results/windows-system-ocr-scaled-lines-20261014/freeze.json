@@ -1,0 +1,22 @@
+{
+  "recipe": "windows-system-ocr-integer3-white32-lines-v2",
+  "pixelsSha256": "6e54d6bc0cc2213dc51a6e0ff67f3551a736e4e75641ec00f96c7b9de87f14ff",
+  "oracleSha256": "1c5652c38a5d84691d5105bd4e851349bc1879d38b2a1cc2a2b6169c12683095",
+  "readerFiles": {
+    "Microsoft.Windows.SDK.NET.dll": "c633ab241cd09846c2aa409f0bee2026962610404a7bf132c75cbd66b0e5a9f4",
+    "Probe.deps.json": "3e4d4ba07599585cc368f288a3f7ab09e2668ba9a1b3d232473159a44b88584d",
+    "Probe.dll": "473c950922e2dd0b23fe18cad3c2033f5e19cb5be9080bf1d086cb1a14a6b132",
+    "Probe.exe": "648d23c8f86f39d02fa94e8dd045679f586badada8ff02900b1d1d437f5d35e9",
+    "Probe.pdb": "86d60da8b0a07e91e215d15f3883e53eef8b2fbadcbd5b86988ba4959123a0a8",
+    "Probe.runtimeconfig.json": "3e965cd7cfd553c2ff4e842d8d8019aaae2da0a21d92ff85a87573dd8d1b95c6",
+    "WinRT.Runtime.dll": "bcf3a14e8712a90837fc5c0d8c8a24696af2bd7f74e9767597ec81ededfb23db"
+  },
+  "sources": {
+    "Program.cs": "b2be2f0a53727107c2407d9313bee072cba170a1d985fea5dc227af2bb7f6915",
+    "Probe.csproj": "195034e363b046fa3768064763150763f25d0614c5cd587a3a181c6cd698ca28",
+    "run.py": "befcc3b456bd13c69e9ac9f208460cd9a4bb077519cbd9da1151da160452001d"
+  },
+  "condition": "Each unchanged original BGRA pixel replicated3x3 with32px white border, explicit installed ja-JP/en-US engines, no interpolation/routing/retry or invented native confidence",
+  "qualification": false,
+  "modelActivation": false
+}

@@ -1,7 +1,7 @@
 # 暗号化DB・原子保存・設定・年度期限
 
 対応関係・宣言名・実行方法のSHA-256：
-`53e48cda102920ea977ce9ffb0cb5e82b632f775e07d66ff017bdf961278cd42`
+`355c63488c463a71e324987ca134fc35f643801848e276abe408268ef9d0de5c`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -28,6 +28,19 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `MidnightAtOctoberBoundaryInvalidatesPreviousPeriod`
 - `JanuaryDoesNotInvalidateOctoberPeriod`
 
+## [tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs](../../tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs)
+
+- `IndependentRowAndWeekdayApprovalsAreAtomicAndSurviveRefreshReparseAndRestart`
+- `ExplicitApprovalPersistsWithAnalysisAndSurvivesRefreshReparseAndRestart`
+- `ContentAndOriginalChangesInvalidateWhileFailedYearReparsePreservesPreviousDecision`
+- `OldParserConsentIsRevalidatedAndCommittedWithTheCurrentAnalysis`
+- `StalePreviewMissingSelectionCancellationAndReplacementCannotSave`
+- `ExcludingEveryChangeRefusesAndPreservesLastGood`
+- `StorageFailureRollsBackConsentAnalysisAndAttemptTogether`
+- `PreviousPayloadsWithoutOptionalConsentRemainReadable`
+- `FailedCurrentRevalidationPreservesOlderConfirmationAndLastGoodResult`
+- `ReselectingAnotherFileWithIdenticalBytesCannotInheritTheDecision`
+
 ## [tests/Takupoke.Integration.Tests/DataDirectoryTests.cs](../../tests/Takupoke.Integration.Tests/DataDirectoryTests.cs)
 
 - `MigrationPreservesKeysEncryptedDataOriginalsAndPreferences`
@@ -35,8 +48,14 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `FailedMoveKeepsExistingDataUsableAndDoesNotOverwriteDestination`
 - `EmptyLegacyDirectoryDoesNotHideCurrentData`
 
+## [tests/Takupoke.Integration.Tests/PreferenceSnapshotTests.cs](../../tests/Takupoke.Integration.Tests/PreferenceSnapshotTests.cs)
+
+- `SharedSnapshotAllowsAtomicPreferenceReplacementAndKeepsCompleteOldValue`
+- `SnapshotRetriesRealSharingViolationUntilExclusiveHandleIsReleased`
+
 ## [tests/Takupoke.Integration.Tests/PreferencesStoreTests.cs](../../tests/Takupoke.Integration.Tests/PreferencesStoreTests.cs)
 
+- `AiPermissionDefaultsOffForNewAndLegacyPreferencesAndPersistsExplicitChoice`
 - `DefaultRemovesSavedColorAndPreservesOtherPersonalSettings`
 
 ## [tests/Takupoke.Integration.Tests/SchoolDataStoreTests.cs](../../tests/Takupoke.Integration.Tests/SchoolDataStoreTests.cs)
@@ -47,13 +66,17 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `ParseFailureKeepsNewSelectionAndLastSuccessfulAnalysisWithItsOwnOriginal`
 - `CorruptDatabaseDoesNotGetReinitializedWithinCurrentPeriod`
 - `CipherRejectsTamperingAndDifferentRecordPurpose`
-
-## [tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs](../../tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs)
-
-- `ExplicitApprovalPersistsWithAnalysisAndSurvivesRefreshReparseAndRestart`
-- `ContentChangeReselectionAndYearChangesInvalidateWithoutResurrection`
-- `OldParserConsentIsClearedEvenIfTheContentIsUnchanged`
-- `StalePreviewMissingSelectionCancellationAndReplacementCannotSave`
-- `ExcludingEveryChangeRefusesAndPreservesLastGood`
-- `StorageFailureRollsBackConsentAnalysisAndAttemptTogether`
-- `PreviousPayloadsWithoutOptionalConsentRemainReadable`
+- `PendingFailureAndJobCommitTogetherAndNewSourceInvalidatesJob`
+- `SameHashReselectionInvalidatesFailureCacheBeforeAReplacementParseStarts`
+- `PriorYearCannotReachRecoveryPreview`
+- `PriorYearPersistedPreviewOrAcceptanceCannotBeAdopted`
+- `WrongTermCannotReachPreviewOrReplaceTheCurrentFormalAnalysis`
+- `SpecialDatesFromAnotherHalfCannotReachRecoveryPreview`
+- `SpecialDatesFromAnotherHalfCannotBeAdoptedFromOldPreviewOrAcceptance`
+- `RecoveryAdoptionCommitsFormalAuditAcceptanceAndClearsPendingTogether`
+- `OldStrictFailureCannotAuthorizePreviewAdoptionOrAcceptanceReuse`
+- `StrictSuccessInvalidatesOldPreviewAndCannotBeOverwrittenByRecovery`
+- `CancelledAdoptionPreservesPreviewAndSelectionChangeRejectsIt`
+- `OldStrictClassAssignmentMigratesOnceAndPersistsOriginalCellKeys`
+- `OldRecoveryProjectionIsVerifiedBeforeAffiliationMigrationAndTamperingIsRejected`
+- `ForegroundRecoveryPreservesPersistedJobStartWhileCreatingPreview`

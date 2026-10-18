@@ -1,0 +1,56 @@
+{
+  "scope": "Before optimizer, group positive training rows by exact provided-PNG hash and native FP32 input-tensor hash; any hash with different literal targets excludes all colliding rows from optimization, without guessed target or false reject label. Preserve count/provenance separately. Newdev collisions stay unmodified diagnostic controls; no oracle repairs/routing. CTC minimum-frame feasibility audited.",
+  "excludedOptimizerRows": 6,
+  "groups": [
+    {
+      "hashType": "pngSha256",
+      "hash": "bee90ac6d6f6c0cd8db431d0a0a62072d8c863e1b945ac154e28c2f490bc0259",
+      "ids": [
+        "train-01922",
+        "train-01923"
+      ]
+    },
+    {
+      "hashType": "pngSha256",
+      "hash": "3ccf267102e652a4f27d8c1c1f50b3fcde61c5c6fb342b2d2af93ffea01ab83f",
+      "ids": [
+        "train-02092",
+        "train-02093"
+      ]
+    },
+    {
+      "hashType": "pngSha256",
+      "hash": "040499db486ff406c55b75c574c1b0dea0c8cd4b0800ad43ceb46579d0618289",
+      "ids": [
+        "train-02432",
+        "train-02433"
+      ]
+    },
+    {
+      "hashType": "inputTensorSha256",
+      "hash": "a8c7c16cbb58832e20d598eb5482f7728286919db010af217e73022244d01c2e",
+      "ids": [
+        "train-01922",
+        "train-01923"
+      ]
+    },
+    {
+      "hashType": "inputTensorSha256",
+      "hash": "23870aaf931461af0e1b8c11b15964b530c9f9888867696c70227fc43dd7e2a6",
+      "ids": [
+        "train-02092",
+        "train-02093"
+      ]
+    },
+    {
+      "hashType": "inputTensorSha256",
+      "hash": "5c7d60bea079e1aac65008aa1ac820903bfb6ba0f58a643775c0155c1b2321d1",
+      "ids": [
+        "train-02432",
+        "train-02433"
+      ]
+    }
+  ],
+  "ctcFrameFeasibility": true,
+  "targetsNeverRepaired": true
+}

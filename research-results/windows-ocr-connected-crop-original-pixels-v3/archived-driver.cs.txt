@@ -1,0 +1,110 @@
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Text.Json;
+using Microsoft.ML.OnnxRuntime;
+using Takupoke.Core;
+using Takupoke.Core.Recovery;
+using Takupoke.Infrastructure.Parsing;
+using Takupoke.Infrastructure.Recovery;
+using Takupoke.Infrastructure.Storage;
+
+if (args.Length != 0 || !OperatingSystem.IsLinux()) throw new InvalidOperationException("Fixed Linux CPU observation only.");
+var root = "/workspace/recovery-research/windows-ocr-crop-completion-development-v3-20261004";
+using var recipe = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(root, "recipe.json")));
+foreach (var pin in recipe.RootElement.GetProperty("pins").EnumerateArray())
+    if (Sha(File.ReadAllBytes(pin.GetProperty("path").GetString()!)) != pin.GetProperty("sha256").GetString()) throw new InvalidDataException("Frozen source/input/model pin changed.");
+var inputBytes = File.ReadAllBytes(Path.Combine(root, "inputs.json"));
+using var inputs = JsonDocument.Parse(inputBytes);
+var documents = inputs.RootElement.GetProperty("documents").EnumerateArray().ToArray();
+if (documents.Length != 2 || documents.Any(d => d.GetProperty("pages").GetArrayLength() != 5)) throw new InvalidDataException("Exactly two originals and ten pages required.");
+using var lifetime = new CancellationTokenSource(TimeSpan.FromMinutes(10));
+var observations = new List<object>(); var pageObservations = new List<object>(); var positiveExact = 0; var positiveRejections = 0; var operationalUnassessed = 0; var incorrectAcceptances = 0; var acceptedFormalUnassessed = 0;
+try
+{
+    Environment.SetEnvironmentVariable("ORT_TELEMETRY_DISABLED", "1");
+    var nativeVersion = OrtEnv.Instance().GetVersionString();
+    if (nativeVersion != "1.23.2") throw new InvalidOperationException("Pinned production-dependency ORT1.23.2 required.");
+    var pipelineAssemblies = new[] { typeof(OnnxJapaneseOcr).Assembly, typeof(RecoveryEngine).Assembly }.Select(a => new { name = a.GetName().Name, sha256 = Sha(File.ReadAllBytes(a.Location)) }).ToArray();
+    var native = Process.GetCurrentProcess().Modules.Cast<ProcessModule>().Where(m => m.FileName.Contains("libonnxruntime.so", StringComparison.Ordinal)).Select(m => new { path = m.FileName, sha256 = Sha(File.ReadAllBytes(m.FileName)) }).ToArray();
+    if (native.Length == 0) throw new InvalidOperationException("Loaded native ORT identity unavailable.");
+    Console.WriteLine(JsonSerializer.Serialize(new { runtime = new { nativeVersion, managedVersion = typeof(OrtEnv).Assembly.GetName().Version?.ToString(), managedSha256 = Sha(File.ReadAllBytes(typeof(OrtEnv).Assembly.Location)), native, pipelineAssemblies, os = RuntimeInformation.OSDescription, architecture = RuntimeInformation.ProcessArchitecture.ToString(), cpuModel = File.ReadLines("/proc/cpuinfo").FirstOrDefault(l => l.StartsWith("model name")), availableMemoryLimitBytes = GC.GetGCMemoryInfo().TotalAvailableMemoryBytes }, recipe = "pinned-ocr-connected-crop-original-pixels-v3", inputSha256 = Sha(inputBytes), scope = "Actual production OCR source and Linux ORT1.23.2; same original PDFs' lossless embedded pixels, not Windows-rendered pixels or deploy qualification; no LLM" }));
+    using var ocr = new OnnxJapaneseOcr("/workspace/recovery-research/artifacts/ocr-det.onnx", "/workspace/recovery-research/artifacts/ocr-rec.onnx", "/tmp/takupoke-windows-ocr-crop-completion-20261004/src/Takupoke.Win/Assets/Recovery/ocr-characters.json");
+    foreach (var item in documents)
+    {
+        var id = item.GetProperty("id").GetString()!; var pdfBytes = File.ReadAllBytes(item.GetProperty("pdfPath").GetString()!); var pdfSha = Sha(pdfBytes);
+        var rasters = new List<RecoveryRaster>(); var rulesByPage = new List<IReadOnlyList<PdfRule>>(); var layouts = new List<PdfPageLayout>();
+        var stage = "Strict"; var rejectedInput = false; var caseOperationalError = false; var accepted = false; var watch = Stopwatch.StartNew();
+        try
+        {
+            if (pdfSha != item.GetProperty("pdfSha256").GetString() || pdfBytes.Length != item.GetProperty("pdfBytes").GetInt32()) throw new InvalidDataException("Original PDF pin changed.");
+            string? strictError = null;
+            try { var pages = PdfPigLayoutReader.Read(pdfBytes, MaterialKind.Timetable, lifetime.Token, new RecoveryReadCapture()); _ = PdfScheduleParser.Timetable(pages, lifetime.Token); }
+            catch (PdfParseException error) { strictError = error.Stage; }
+            if (strictError is null || !RecoveryPolicy.Eligible(MaterialKind.Timetable, strictError)) throw new InvalidOperationException("Original PDF is not an eligible Strict failure.");
+            stage = "OCR/ink";
+            foreach (var page in item.GetProperty("pages").EnumerateArray())
+            {
+                using var deadline = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token); deadline.CancelAfter(TimeSpan.FromSeconds(180));
+                var pageNumber = page.GetProperty("page").GetInt32(); var pixels = File.ReadAllBytes(page.GetProperty("path").GetString()!);
+                var raster = new RecoveryRaster(page.GetProperty("width").GetInt32(), page.GetProperty("height").GetInt32(), pixels); rasters.Add(raster);
+                var recognitionObservations = new List<OcrRecognitionObservation>();
+                ocr.RecognitionObserver = observation => { recognitionObservations.Add(observation); Console.WriteLine(JsonSerializer.Serialize(new { recognitionObservation = new { id, page = pageNumber, bgraSha256 = Sha(pixels), observation } })); };
+                var pageWatch = Stopwatch.StartNew(); var ocrReadStarted = false; var ocrReadReturned = false;
+                try
+                {
+                    if (!raster.Valid || Sha(pixels) != page.GetProperty("bgraSha256").GetString()) throw new InvalidDataException("Original pixel pin changed.");
+                    var rules = raster.Rules(deadline.Token); rulesByPage.Add(rules);
+                    ocrReadStarted = true; var glyphs = ocr.Read(raster, deadline.Token); ocrReadReturned = true; var recognized = ocr.RecognizedBoxes.ToArray();
+                    var completeInk = !raster.HasUnrecognizedInk(recognized, rules, deadline.Token);
+                    if (completeInk) layouts.Add(new(raster.Width, raster.Height, glyphs, rules)); else rejectedInput = true;
+                    RecordPage(new { id, page = pageNumber, ocrReadStarted, ocrReadReturned, bgraSha256 = Sha(pixels), raster.Width, raster.Height, recognized, glyphs, rules, completeInk, recognitionObservations, milliseconds = pageWatch.ElapsedMilliseconds });
+                }
+                catch (Exception error)
+                {
+                    var confirmedRefusal = error is InvalidDataException && error.Message is "OCRで判読できない文字があります。空欄には置き換えません。" or "OCR文字の位置が入力画像の余白に重なっています。" or "OCR認識画像の幅が上限を超えています。" or "OCR印字の切り出し範囲を一意に確認できません。" or "OCR候補の画素範囲が重なっています。" or "OCR切り出しの追加範囲に別の印字があります。";
+                    rejectedInput |= confirmedRefusal; caseOperationalError |= !confirmedRefusal;
+                    RecordPage(new { id, page = pageNumber, ocrReadStarted, ocrReadReturned, bgraSha256 = Sha(pixels), raster.Width, raster.Height, confirmedRefusal, operationalUnassessed = !confirmedRefusal, errorType = error.GetType().Name, errorMessage = error.Message, recognitionObservations, milliseconds = pageWatch.ElapsedMilliseconds, forensicLimit = "Only already-computed valid CTC pieces retained by opt-in observer. Pre-recognition/crop/range failures have no CTC observation. No duplicate inference; CTC positions are estimates." });
+                }
+            }
+            if (caseOperationalError) { operationalUnassessed++; Record(new { id, outcome = "operational-unassessed", accepted = false, exact = (bool?)null, stage, milliseconds = watch.ElapsedMilliseconds }); continue; }
+            if (rejectedInput || layouts.Count != 5) { positiveRejections++; Record(new { id, outcome = "readable-positive-refusal", accepted = false, exact = (bool?)null, stage, milliseconds = watch.ElapsedMilliseconds }); continue; }
+            stage = "Builder";
+            var scanners = rasters.Select((r, index) => r.InkFreeScanner(r.RuleMask(rulesByPage[index], lifetime.Token), lifetime.Token)).ToArray();
+            var document = RecoveryDocumentBuilder.Build(pdfSha, MaterialKind.Timetable, layouts, (page, box) => scanners[page - 1](box), Enumerable.Range(1, 5).ToHashSet(), lifetime.Token, allowStructureProposal: true);
+            stage = "Rules/Engine/Validator";
+            var prepared = await RecoveryStructure.ResolveAsync(document, "windows", 10, [], lifetime.Token);
+            var run = prepared.Document is null ? null : await RecoveryEngine.RunAsync(prepared.Document, "windows", 10, true, [], _ => null, lifetime.Token);
+            accepted = run?.Result is not null && run.State == RecoveryJobState.AwaitingConfirmation && RecoveryValidator.Validate(prepared.Document!, run.Result, lifetime.Token).CanAdopt;
+            if (!accepted) { positiveRejections++; Record(new { id, outcome = "readable-positive-pipeline-refusal", accepted = false, exact = (bool?)null, stage, errors = run?.Errors ?? prepared.Errors }); continue; }
+            stage = "Formal/literal";
+            var source = new SourceRecord("fictional", MaterialKind.Timetable, "fictional.pdf", "fictional", "fictional.pdf", pdfSha, pdfBytes.Length, DateTimeOffset.UnixEpoch, DateTimeOffset.UnixEpoch, null);
+            var formal = RecoveryAnalysisConverter.Convert(source, prepared.Document!, run!.Result!, DateTimeOffset.UnixEpoch, lifetime.Token);
+            // Literal gold is loaded ONLY after native calls and formal conversion.
+            var oracleBytes = File.ReadAllBytes(item.GetProperty("formalOraclePath").GetString()!);
+            if (Sha(oracleBytes) != item.GetProperty("formalOracleSha256").GetString()) throw new InvalidDataException("Independent literal formal oracle changed.");
+            using var oracle = JsonDocument.Parse(oracleBytes); var exact = IndependentFormalOracle.Exact(prepared.Document!, formal, oracle.RootElement);
+            if (exact) positiveExact++; else incorrectAcceptances++;
+            Record(new { id, outcome = exact ? "full-literal-formal-exact" : "incorrect-validator-acceptance", accepted, exact, stage, documentSource = document.Sources, formal, milliseconds = watch.ElapsedMilliseconds });
+        }
+        catch (Exception error)
+        {
+            operationalUnassessed++; if (accepted) acceptedFormalUnassessed++;
+            Record(new { id, outcome = "operational-unassessed", accepted, incorrectAcceptance = accepted ? (bool?)null : false, stage, errorType = error.GetType().Name, errorMessage = error.Message, milliseconds = watch.ElapsedMilliseconds });
+        }
+        finally { foreach (var raster in rasters) CryptographicOperations.ZeroMemory(raster.Bgra); }
+    }
+}
+catch (Exception error)
+{
+    Console.WriteLine(JsonSerializer.Serialize(new { initializationOrRunFailure = new { type = error.GetType().Name, error.Message } }));
+}
+finally
+{
+    var process = Process.GetCurrentProcess(); process.Refresh();
+    Console.WriteLine(JsonSerializer.Serialize(new { recipe = "pinned-ocr-connected-crop-original-pixels-v3", eligibleDocuments = 2, eligiblePages = 10, documentObservations = observations.Count, remainingDocumentsUnassessed = 2 - observations.Count, pageObservations = pageObservations.Count, positiveExact, readablePositiveRefusals = positiveRejections, operationalUnassessed, incorrectValidatorAcceptances = incorrectAcceptances, acceptedFormalUnassessed, observations, pages = pageObservations, evaluatorProcessPeakWorkingSetBytes = process.PeakWorkingSet64, llmCalls = 0, scope = "Consumed2 development originals; no negative corpus, quality qualification, saved adoption, Windows renderer or minimumdevice claim. Synchronous native cancellation is cooperative." }));
+}
+return observations.Count == 2 && operationalUnassessed == 0 && incorrectAcceptances == 0 && acceptedFormalUnassessed == 0 ? 0 : 1;
+void Record(object row) { observations.Add(row); Console.WriteLine(JsonSerializer.Serialize(new { documentObservation = row })); }
+void RecordPage(object row) { pageObservations.Add(row); Console.WriteLine(JsonSerializer.Serialize(new { pageObservation = row })); }
+static string Sha(byte[] bytes) => Convert.ToHexStringLower(SHA256.HashData(bytes));

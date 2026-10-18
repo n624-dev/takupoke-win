@@ -1,0 +1,97 @@
+{
+  "name": "original",
+  "positiveRows": 768,
+  "exact": 434,
+  "correctAccepted": 358,
+  "incorrectAccepted": 157,
+  "negativeRows": 192,
+  "negativeAccepted": 30,
+  "cer": 0.06737670757119704,
+  "retentionRows": 256,
+  "retentionExact": 250,
+  "paddingRows": 30,
+  "groups": {
+    "ascii_short": {
+      "rows": 128,
+      "exact": 119,
+      "correctAccepted": 111,
+      "incorrectAccepted": 6,
+      "accepted": 117,
+      "nonempty": 128
+    },
+    "blank": {
+      "rows": 40,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 0
+    },
+    "clipped": {
+      "rows": 38,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 8,
+      "nonempty": 38
+    },
+    "interior_damage": {
+      "rows": 38,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 18,
+      "nonempty": 38
+    },
+    "japanese": {
+      "rows": 128,
+      "exact": 126,
+      "correctAccepted": 125,
+      "incorrectAccepted": 1,
+      "accepted": 126,
+      "nonempty": 128
+    },
+    "mixed_code": {
+      "rows": 256,
+      "exact": 122,
+      "correctAccepted": 80,
+      "incorrectAccepted": 66,
+      "accepted": 146,
+      "nonempty": 256
+    },
+    "mixed_confusable": {
+      "rows": 256,
+      "exact": 67,
+      "correctAccepted": 42,
+      "incorrectAccepted": 84,
+      "accepted": 126,
+      "nonempty": 256
+    },
+    "multiline": {
+      "rows": 38,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 38
+    },
+    "noise": {
+      "rows": 38,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 4,
+      "nonempty": 16
+    },
+    "retention_japanese": {
+      "rows": 128,
+      "exact": 124,
+      "correctAccepted": 124,
+      "incorrectAccepted": 3,
+      "accepted": 127,
+      "nonempty": 128
+    }
+  },
+  "rawSha256": "9c18d3d2fa26248c9c5e8ab072734ee528e61748b6e6435612148e0d32e9fed1",
+  "scope": "New independent fictional development only; full18710 decoding unchanged, no correction/final/activation"
+}

@@ -1,0 +1,464 @@
+{
+  "scope": "Closed fictional-study records. Images, fonts, models and executable binaries excluded. JSONL losslessly gzip compressed with mtime=0. Every original and published byte hash retained.",
+  "files": [
+    {
+      "originalFile": "curation-manifest.json",
+      "originalBytes": 8975,
+      "originalSHA256": "f5669eb556a1e2bfbc52c000f48d82fb10297d12a86deb2b6904b5d64a532377",
+      "publicFile": "curation-manifest.json",
+      "publicBytes": 8975,
+      "publicSHA256": "f5669eb556a1e2bfbc52c000f48d82fb10297d12a86deb2b6904b5d64a532377",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "hardware.json",
+      "originalBytes": 261,
+      "originalSHA256": "ace1a87b15d7b845952e93d0a9b3d0e3c0919bdc9900c8279005dd01614b9bbd",
+      "publicFile": "hardware.json",
+      "publicBytes": 261,
+      "publicSHA256": "ace1a87b15d7b845952e93d0a9b3d0e3c0919bdc9900c8279005dd01614b9bbd",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "run/bundle.json",
+      "originalBytes": 1279,
+      "originalSHA256": "87178c5999e4262d4a78807900855ab84b2a77552be7f1ebcf083015ded3082f",
+      "publicFile": "run/bundle.json",
+      "publicBytes": 1279,
+      "publicSHA256": "87178c5999e4262d4a78807900855ab84b2a77552be7f1ebcf083015ded3082f",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "run/download-receipt.json",
+      "originalBytes": 1828,
+      "originalSHA256": "3bcae776ff1a46b3ed447938cd0fe5b76e1138ff16f2ad8c0fb37ede9070f1e1",
+      "publicFile": "run/download-receipt.json",
+      "publicBytes": 1828,
+      "publicSHA256": "3bcae776ff1a46b3ed447938cd0fe5b76e1138ff16f2ad8c0fb37ede9070f1e1",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/OcrAsciiRefinement.cs",
+      "originalBytes": 5345,
+      "originalSHA256": "05fdd502f96140a50839b28b834ce14c0ad3acc6d8aa86fb8714e5fd709b19b6",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/OcrAsciiRefinement.cs",
+      "publicBytes": 5345,
+      "publicSHA256": "05fdd502f96140a50839b28b834ce14c0ad3acc6d8aa86fb8714e5fd709b19b6",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs",
+      "originalBytes": 6605,
+      "originalSHA256": "63b118c426844c6705a723240b0863d0906c2ef0a415af91dc399aa021685df0",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs",
+      "publicBytes": 6605,
+      "publicSHA256": "63b118c426844c6705a723240b0863d0906c2ef0a415af91dc399aa021685df0",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs",
+      "originalBytes": 2589,
+      "originalSHA256": "9a95f142408a60de47965b91aa81f47a4a34e9274700d283148efea1fc927126",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs",
+      "publicBytes": 2589,
+      "publicSHA256": "9a95f142408a60de47965b91aa81f47a4a34e9274700d283148efea1fc927126",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/OcrDetectorProbability.cs",
+      "originalBytes": 1386,
+      "originalSHA256": "f221a38e197b8a7f2d9a922219077ceb0adc97950366d093e5c9503cf0b65c71",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/OcrDetectorProbability.cs",
+      "publicBytes": 1386,
+      "publicSHA256": "f221a38e197b8a7f2d9a922219077ceb0adc97950366d093e5c9503cf0b65c71",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/OcrInkCropFrame.cs",
+      "originalBytes": 2776,
+      "originalSHA256": "5aa2605f3d743ba91e307778bd1dcb38faf10ead1492efe024774cfb1c07aa0d",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/OcrInkCropFrame.cs",
+      "publicBytes": 2776,
+      "publicSHA256": "5aa2605f3d743ba91e307778bd1dcb38faf10ead1492efe024774cfb1c07aa0d",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs",
+      "originalBytes": 6239,
+      "originalSHA256": "b13927678f0c5ed3f05d6e01c35f580647e228f969059bb003d4a47c2a6b7eaa",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs",
+      "publicBytes": 6239,
+      "publicSHA256": "b13927678f0c5ed3f05d6e01c35f580647e228f969059bb003d4a47c2a6b7eaa",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/OcrWhiteGapPartition.cs",
+      "originalBytes": 2266,
+      "originalSHA256": "62eb957afb2b527303643d037829363abbc02776f266d069d8bc06c082c193b6",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/OcrWhiteGapPartition.cs",
+      "publicBytes": 2266,
+      "publicSHA256": "62eb957afb2b527303643d037829363abbc02776f266d069d8bc06c082c193b6",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/OnnxAsciiOcr.cs",
+      "originalBytes": 4826,
+      "originalSHA256": "212be449861c5b9329d89b5584af1b95868ae3c42b81e04ef8f2740f1c6309e1",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/OnnxAsciiOcr.cs",
+      "publicBytes": 4826,
+      "publicSHA256": "212be449861c5b9329d89b5584af1b95868ae3c42b81e04ef8f2740f1c6309e1",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs",
+      "originalBytes": 26308,
+      "originalSHA256": "029e7783c00a67457262494f650df06efd019b7eed6f4171543682a0d983cea6",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs",
+      "publicBytes": 26308,
+      "publicSHA256": "029e7783c00a67457262494f650df06efd019b7eed6f4171543682a0d983cea6",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryAnalysisConverter.cs",
+      "originalBytes": 6356,
+      "originalSHA256": "12cc992411fefbe6db50f70b1d0b27f07fed5221de9c649d1ae463b7efc03354",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryAnalysisConverter.cs",
+      "publicBytes": 6356,
+      "publicSHA256": "12cc992411fefbe6db50f70b1d0b27f07fed5221de9c649d1ae463b7efc03354",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryAuditCertification.cs",
+      "originalBytes": 4888,
+      "originalSHA256": "226fea751cffb21b86165de6690bc5072bf524a6181b4d76281fcb1a06c6f904",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryAuditCertification.cs",
+      "publicBytes": 4888,
+      "publicSHA256": "226fea751cffb21b86165de6690bc5072bf524a6181b4d76281fcb1a06c6f904",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryCapturedLayoutBuilder.cs",
+      "originalBytes": 1369,
+      "originalSHA256": "30b1750c3d8718ba2499282b3763fa0fe5477402a2ddc635e427e04099798882",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryCapturedLayoutBuilder.cs",
+      "publicBytes": 1369,
+      "publicSHA256": "30b1750c3d8718ba2499282b3763fa0fe5477402a2ddc635e427e04099798882",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryContainmentIndex.cs",
+      "originalBytes": 2320,
+      "originalSHA256": "eb1b98d93b697abd2eba187ab4f3cea3da5c717a6d16b49ea4e0f6f215baad53",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryContainmentIndex.cs",
+      "publicBytes": 2320,
+      "publicSHA256": "eb1b98d93b697abd2eba187ab4f3cea3da5c717a6d16b49ea4e0f6f215baad53",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryCoordinator.cs",
+      "originalBytes": 24755,
+      "originalSHA256": "006460ae8e2459e57bf5a426d1d2db5e25c60f7f1af9b6d7350db800138774c1",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryCoordinator.cs",
+      "publicBytes": 24755,
+      "publicSHA256": "006460ae8e2459e57bf5a426d1d2db5e25c60f7f1af9b6d7350db800138774c1",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs",
+      "originalBytes": 68604,
+      "originalSHA256": "aee3fe421987ccfed5ca06a60754b3708b13911f69dbdb248303f4ce62b79d05",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs",
+      "publicBytes": 68604,
+      "publicSHA256": "aee3fe421987ccfed5ca06a60754b3708b13911f69dbdb248303f4ce62b79d05",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryLayoutGeometry.cs",
+      "originalBytes": 4662,
+      "originalSHA256": "079d6f1f1469b51a638c85b48962d67eecd6d619a5b91e6fc04a61ffca953ee2",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryLayoutGeometry.cs",
+      "publicBytes": 4662,
+      "publicSHA256": "079d6f1f1469b51a638c85b48962d67eecd6d619a5b91e6fc04a61ffca953ee2",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryModelBundleStore.cs",
+      "originalBytes": 10968,
+      "originalSHA256": "03faa06f766c0f8ae79425a109aea502b6e54f64a939cee03b15ac32a86a2125",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryModelBundleStore.cs",
+      "publicBytes": 10968,
+      "publicSHA256": "03faa06f766c0f8ae79425a109aea502b6e54f64a939cee03b15ac32a86a2125",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryModelStore.cs",
+      "originalBytes": 6942,
+      "originalSHA256": "ad370251951dc72467268bd8eceeaeccbddcfcb69465c841e47df9a9e825bc61",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryModelStore.cs",
+      "publicBytes": 6942,
+      "publicSHA256": "ad370251951dc72467268bd8eceeaeccbddcfcb69465c841e47df9a9e825bc61",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryOcrModels.cs",
+      "originalBytes": 2166,
+      "originalSHA256": "8b4afbc01d5b11909f261738662c83801929921e6cb83fc06584d1ec9e68776e",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryOcrModels.cs",
+      "publicBytes": 2166,
+      "publicSHA256": "8b4afbc01d5b11909f261738662c83801929921e6cb83fc06584d1ec9e68776e",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryOutputDecoder.cs",
+      "originalBytes": 2235,
+      "originalSHA256": "4b0da14cef205b426ca06c8bb8453663bde0aba76d16b7fb637f960e5aee3849",
+      "publicFile": "sources/src/Takupoke.Infrastructure/Recovery/RecoveryOutputDecoder.cs",
+      "publicBytes": 2235,
+      "publicSHA256": "4b0da14cef205b426ca06c8bb8453663bde0aba76d16b7fb637f960e5aee3849",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/tools/ocr-physical-framing/windows-render/WindowsRender.cs",
+      "originalBytes": 5094,
+      "originalSHA256": "e41e22f1f0f8a051d2eec967e8120f368ce03d80a355b379c1f31ecd10e2f7a1",
+      "publicFile": "sources/tools/ocr-physical-framing/windows-render/WindowsRender.cs",
+      "publicBytes": 5094,
+      "publicSHA256": "e41e22f1f0f8a051d2eec967e8120f368ce03d80a355b379c1f31ecd10e2f7a1",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/tools/ocr-production-validation/Read.cs",
+      "originalBytes": 7365,
+      "originalSHA256": "9b3061c70ea34b6fb8e465c7746ced930d4cea964f4ec0f90ce3a59862fa42a8",
+      "publicFile": "sources/tools/ocr-production-validation/Read.cs",
+      "publicBytes": 7365,
+      "publicSHA256": "9b3061c70ea34b6fb8e465c7746ced930d4cea964f4ec0f90ce3a59862fa42a8",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/tools/ocr-production-validation/prepare.py",
+      "originalBytes": 5884,
+      "originalSHA256": "43485bf2c16803ab1fbad4834fb51b765d70af1fa08bfaf2bc257cff7ee6b08a",
+      "publicFile": "sources/tools/ocr-production-validation/prepare.py",
+      "publicBytes": 5884,
+      "publicSHA256": "43485bf2c16803ab1fbad4834fb51b765d70af1fa08bfaf2bc257cff7ee6b08a",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/tools/ocr-production-validation/run_windows.py",
+      "originalBytes": 5011,
+      "originalSHA256": "87a3b2a12948742db84f6e7287a7d318826b03359c8780272306b0a69fe02d12",
+      "publicFile": "sources/tools/ocr-production-validation/run_windows.py",
+      "publicBytes": 5011,
+      "publicSHA256": "87a3b2a12948742db84f6e7287a7d318826b03359c8780272306b0a69fe02d12",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "sources/tools/ocr-production-validation/score.py",
+      "originalBytes": 5005,
+      "originalSHA256": "0d868b1c18b0cbe2e605cff6cc0c1eb57224e51edd95ec70ab88e2efb12e19c0",
+      "publicFile": "sources/tools/ocr-production-validation/score.py",
+      "publicBytes": 5005,
+      "publicSHA256": "0d868b1c18b0cbe2e605cff6cc0c1eb57224e51edd95ec70ab88e2efb12e19c0",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/alphabet.json",
+      "originalBytes": 110788,
+      "originalSHA256": "d858428fbe0ada92b439a5f277b51bc1b318fd985d80946a3ce859d7f2446a92",
+      "publicFile": "study/alphabet.json",
+      "publicBytes": 110788,
+      "publicSHA256": "d858428fbe0ada92b439a5f277b51bc1b318fd985d80946a3ce859d7f2446a92",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/execution-freeze.json",
+      "originalBytes": 10971,
+      "originalSHA256": "3eabcef9d6af2fda2604e70773a36cdcfc9a508e2f7159d3d5d5e373aca30db6",
+      "publicFile": "study/execution-freeze.json",
+      "publicBytes": 10971,
+      "publicSHA256": "3eabcef9d6af2fda2604e70773a36cdcfc9a508e2f7159d3d5d5e373aca30db6",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/freeze.json",
+      "originalBytes": 3967,
+      "originalSHA256": "2e574ea24f18360a4df1db25c9fe2205b083f21539463dd84feaa1343b5ed934",
+      "publicFile": "study/freeze.json",
+      "publicBytes": 3967,
+      "publicSHA256": "2e574ea24f18360a4df1db25c9fe2205b083f21539463dd84feaa1343b5ed934",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/generation-freeze.json",
+      "originalBytes": 1544,
+      "originalSHA256": "0725a57bba96977b08d03e564eeca6a5ced8350b149872dbc554d04299bc037f",
+      "publicFile": "study/generation-freeze.json",
+      "publicBytes": 1544,
+      "publicSHA256": "0725a57bba96977b08d03e564eeca6a5ced8350b149872dbc554d04299bc037f",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/hybrid-dictionary.json",
+      "originalBytes": 112374,
+      "originalSHA256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f",
+      "publicFile": "study/hybrid-dictionary.json",
+      "publicBytes": 112374,
+      "publicSHA256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/hybrid-inspection.jsonl",
+      "originalBytes": 479803,
+      "originalSHA256": "3ebcd8d19cc367aa2fb180ff95df19c7bb7117ad8627415a3cfaf9cfd05a0fa8",
+      "publicFile": "study/hybrid-inspection.jsonl.gz",
+      "publicBytes": 70172,
+      "publicSHA256": "3547baefe5197d5d57e0dab0241e662b70477394e0b0ae811204be413b3c3050",
+      "encoding": "gzip, decompress to original bytes"
+    },
+    {
+      "originalFile": "study/hybrid-observations.jsonl",
+      "originalBytes": 12234857,
+      "originalSHA256": "ce9f9e74872930ff8aa081919011e6c0c58ecc8d69f0e0165bdfe553dfa4fce6",
+      "publicFile": "study/hybrid-observations.jsonl.gz",
+      "publicBytes": 1640758,
+      "publicSHA256": "0f028dd8607d4afa0a9b304e44bfd9728c187a5b432ef5743a0307538591f75c",
+      "encoding": "gzip, decompress to original bytes"
+    },
+    {
+      "originalFile": "study/hybrid-receipt.json",
+      "originalBytes": 129,
+      "originalSHA256": "e27524885224bbf2e38ea1644e79fa90f1d70062ade9d252b8a0712d069aa7d9",
+      "publicFile": "study/hybrid-receipt.json",
+      "publicBytes": 129,
+      "publicSHA256": "e27524885224bbf2e38ea1644e79fa90f1d70062ade9d252b8a0712d069aa7d9",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/hybrid-stderr.txt",
+      "originalBytes": 0,
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "publicFile": "study/hybrid-stderr.txt",
+      "publicBytes": 0,
+      "publicSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/hybrid-stdout.txt",
+      "originalBytes": 0,
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "publicFile": "study/hybrid-stdout.txt",
+      "publicBytes": 0,
+      "publicSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/inputs.json",
+      "originalBytes": 12075,
+      "originalSHA256": "333d99577f95674466cd4c56512eaf7a634be7c466796569b6a7379f6bc13b14",
+      "publicFile": "study/inputs.json",
+      "publicBytes": 12075,
+      "publicSHA256": "333d99577f95674466cd4c56512eaf7a634be7c466796569b6a7379f6bc13b14",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/native-inputs.json",
+      "originalBytes": 14173,
+      "originalSHA256": "9f339fcb3fd5bfaa4c7e3a3ef329e5cf499beee4324c338871471671879bc454",
+      "publicFile": "study/native-inputs.json",
+      "publicBytes": 14173,
+      "publicSHA256": "9f339fcb3fd5bfaa4c7e3a3ef329e5cf499beee4324c338871471671879bc454",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/native-render-receipt.json",
+      "originalBytes": 14023,
+      "originalSHA256": "f6d21ee3e72d171ccb5358cafc1a2d80401b16a4933ff0d2b5ef0ccfe7b8e239",
+      "publicFile": "study/native-render-receipt.json",
+      "publicBytes": 14023,
+      "publicSHA256": "f6d21ee3e72d171ccb5358cafc1a2d80401b16a4933ff0d2b5ef0ccfe7b8e239",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/oracle.json",
+      "originalBytes": 243054,
+      "originalSHA256": "350cf737226b8793654b1ac591a39c8485d39a40977bbf6258e8108addc3a3de",
+      "publicFile": "study/oracle.json",
+      "publicBytes": 243054,
+      "publicSHA256": "350cf737226b8793654b1ac591a39c8485d39a40977bbf6258e8108addc3a3de",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/pdf-inputs.json",
+      "originalBytes": 13407,
+      "originalSHA256": "1bdf26d396595f651fca77e53499d919531dd8876214b6c2ce5a16d4d828117c",
+      "publicFile": "study/pdf-inputs.json",
+      "publicBytes": 13407,
+      "publicSHA256": "1bdf26d396595f651fca77e53499d919531dd8876214b6c2ce5a16d4d828117c",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/report.json",
+      "originalBytes": 15079,
+      "originalSHA256": "c9b13d46e0cd2dccfc93a4a6adc0f585896adcb019b197779435e4243166d04e",
+      "publicFile": "study/report.json",
+      "publicBytes": 15079,
+      "publicSHA256": "c9b13d46e0cd2dccfc93a4a6adc0f585896adcb019b197779435e4243166d04e",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/v5-alphabet.json",
+      "originalBytes": 110788,
+      "originalSHA256": "d858428fbe0ada92b439a5f277b51bc1b318fd985d80946a3ce859d7f2446a92",
+      "publicFile": "study/v5-alphabet.json",
+      "publicBytes": 110788,
+      "publicSHA256": "d858428fbe0ada92b439a5f277b51bc1b318fd985d80946a3ce859d7f2446a92",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/v5-inspection.jsonl",
+      "originalBytes": 117735,
+      "originalSHA256": "a69c42d9edced4a2dd5a256abc42101042173a4bc617707ce14c7f499fc3a10c",
+      "publicFile": "study/v5-inspection.jsonl.gz",
+      "publicBytes": 18171,
+      "publicSHA256": "71a53eb4cfe207c35d4b85a70bcbc35cec8553ae8239c658bd19826436889c72",
+      "encoding": "gzip, decompress to original bytes"
+    },
+    {
+      "originalFile": "study/v5-observations.jsonl",
+      "originalBytes": 6356779,
+      "originalSHA256": "279904c492b848ae0e574c8b2cf727d8dbe3f5f408b66555f6c16df763ef4518",
+      "publicFile": "study/v5-observations.jsonl.gz",
+      "publicBytes": 870728,
+      "publicSHA256": "337569498adfaabc06e21abd82046ead05809c62ca3a993086bf61a537e8fee6",
+      "encoding": "gzip, decompress to original bytes"
+    },
+    {
+      "originalFile": "study/v5-receipt.json",
+      "originalBytes": 128,
+      "originalSHA256": "1023433e6332dae601ea02f08835ea80c0a92baf23241f87880cd4c745e1591d",
+      "publicFile": "study/v5-receipt.json",
+      "publicBytes": 128,
+      "publicSHA256": "1023433e6332dae601ea02f08835ea80c0a92baf23241f87880cd4c745e1591d",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/v5-stderr.txt",
+      "originalBytes": 0,
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "publicFile": "study/v5-stderr.txt",
+      "publicBytes": 0,
+      "publicSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoding": "original bytes"
+    },
+    {
+      "originalFile": "study/v5-stdout.txt",
+      "originalBytes": 0,
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "publicFile": "study/v5-stdout.txt",
+      "publicBytes": 0,
+      "publicSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoding": "original bytes"
+    }
+  ]
+}

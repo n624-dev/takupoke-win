@@ -1,0 +1,26 @@
+{
+  "scope": "Read-only source/raw/cache audit, no inference repeated",
+  "frozenSourceHashes": true,
+  "candidateRawHashes": true,
+  "fp32InputFeatureLogitCache": [
+    {
+      "split": "train",
+      "floatType": "float32",
+      "rows": 7168,
+      "frames": 350509
+    },
+    {
+      "split": "development",
+      "floatType": "float32",
+      "rows": 1088,
+      "frames": 52225
+    }
+  ],
+  "trainDevelopmentDisjoint": true,
+  "utf8LfPathIoAudit": true,
+  "finalDirectoryAbsent": true,
+  "previousPortableZipUnchanged": true,
+  "inferenceDictionaryClasses": 18710,
+  "asciiTrainableRows": 95,
+  "blankAndNonAsciiWeightRowsRemainBuffers": "Verified by frozen module/optimizer scope; no backbone/blank/nonASCII parameter appears in optimizer groups"
+}

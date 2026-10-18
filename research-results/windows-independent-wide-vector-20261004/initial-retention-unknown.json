@@ -1,0 +1,21 @@
+{
+  "runId": 37221204309,
+  "sourceCommit": "62726241d2e56b66df62e972f2b1132839a0ce87",
+  "operationConclusion": "success",
+  "semanticAssessment": "unassessed",
+  "reason": "All three unchunked native Python JSON reports absent from retained Actions log; no inference of success or failure from green execution",
+  "logs": [
+    {
+      "file": "windows-independent-wide-vector-native-full.log",
+      "sha256": "84a28f4c65f1f312e0e391282b4c0ed39e8e5d5089c6494b76166117a7fb117d"
+    }
+  ],
+  "observableFacts": [
+    "generator produced exact fixed fictional primaryPDF SHA pins",
+    "native helper build0warnings/errors",
+    "always cleanup completed"
+  ],
+  "nativeOcrPlanned": 0,
+  "llmPlanned": 0,
+  "reportAbsentDoesNotProveNativeCallCount": true
+}

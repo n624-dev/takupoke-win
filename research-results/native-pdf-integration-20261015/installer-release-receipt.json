@@ -1,0 +1,86 @@
+{
+  "version": "0.1.0-dev.10440",
+  "sourceCommit": "b9dc24d6f147889989472cac9f29aa4f9015f51d",
+  "run": 38712585333,
+  "runUrl": "https://github.com/n624-dev/takupoke-win/actions/runs/38712585333",
+  "releaseUrl": "https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10440",
+  "allEightJobsSucceeded": true,
+  "publishedPrerelease": true,
+  "tagMatchesBuildSource": true,
+  "allSixPublishedAssetsDownloadedAndHashed": true,
+  "bothZipManifestsAndAllListedPayloadHashesVerified": true,
+  "arm64HardwareExecutionVerified": false,
+  "publicAssets": [
+    {
+      "name": "SHA256SUMS.txt",
+      "size": 495,
+      "sha256": "e701cd6d29c61398dda5af589c3234c35ca1f588295cb810cee2cf529be8c0a2",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10440/SHA256SUMS.txt",
+      "package": null
+    },
+    {
+      "name": "INSTALL.txt",
+      "size": 4092,
+      "sha256": "858981daad019f771c1c6a96fef6ce4c9ee1a8fc768f6a69d1b8468830b03be6",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10440/INSTALL.txt",
+      "package": null
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10440-arm64-Setup.exe",
+      "size": 77430158,
+      "sha256": "cbb10b0a705f908ef93ebd59f2f356764b2ecee1eb98f61704a8dd3fbd5aabd7",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10440/takupoke-0.1.0-dev.10440-arm64-Setup.exe",
+      "package": null
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10440-arm64.zip",
+      "size": 114870532,
+      "sha256": "0f863b2d88d7a80e31d26e360618c6338b64f1b89d8b24473fb47f69d184dd6b",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10440/takupoke-0.1.0-dev.10440-arm64.zip",
+      "package": {
+        "architecture": "arm64",
+        "commit": "b9dc24d6f147889989472cac9f29aa4f9015f51d",
+        "version": "0.1.0-dev.10440",
+        "verifiedPayloadFiles": 585,
+        "peArchitecturesVerified": true
+      }
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10440-x64-Setup.exe",
+      "size": 80044923,
+      "sha256": "0e17dad4c64e726020507c5869bf9c2fd1228d9d46573dfef72f1c7764a1557a",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10440/takupoke-0.1.0-dev.10440-x64-Setup.exe",
+      "package": null
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10440-x64.zip",
+      "size": 117713108,
+      "sha256": "2e79f5bbd47ef4280d1061cbebfeebd07c6acafcd8d27eea1776a235c1a1c9cf",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10440/takupoke-0.1.0-dev.10440-x64.zip",
+      "package": {
+        "architecture": "x64",
+        "commit": "b9dc24d6f147889989472cac9f29aa4f9015f51d",
+        "version": "0.1.0-dev.10440",
+        "verifiedPayloadFiles": 589,
+        "peArchitecturesVerified": true
+      }
+    }
+  ],
+  "temporaryDownloadedPayloadsRemoved": true,
+  "scope": "Published installer bytes, exact source revision, ZIP manifests and payload hashes; native installer states and UI are tested by the linked Windows workflow. No independent recognition accuracy measurement.",
+  "installedWindowsUiChecks": [
+    829,
+    830,
+    829,
+    830,
+    830,
+    830
+  ],
+  "node20WarningCount": 0,
+  "allEightJobAnnotationsChecked": true,
+  "branchCiRun": 38712553459,
+  "branchCiUrl": "https://github.com/n624-dev/takupoke-win/actions/runs/38712553459",
+  "coreTests": 288,
+  "integrationTests": 1071,
+  "materialPrivacy": "Only public distribution assets and fictional Windows UI fixtures are covered by this receipt. Supplied PDF source content is not included."
+}

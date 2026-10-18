@@ -1,0 +1,40 @@
+{
+  "scope": "Read-only source/raw/cache audit; no inference repeated",
+  "frozenSourceHashes": true,
+  "candidateRawHashes": true,
+  "losslessFp32InputFeatureCache": [
+    {
+      "split": "train",
+      "rows": 800,
+      "floatType": "float32",
+      "encoding": "LosslessNPZallow_pickleFalse",
+      "compressedBytes": 657521969,
+      "rawBytes": 729778944,
+      "ratio": 0.9009878599621531,
+      "fileAndRestoredFp32HashesVerified": true
+    },
+    {
+      "split": "development",
+      "rows": 576,
+      "floatType": "float32",
+      "encoding": "LosslessNPZallow_pickleFalse",
+      "compressedBytes": 487076690,
+      "rawBytes": 540564480,
+      "ratio": 0.9010519707103212,
+      "fileAndRestoredFp32HashesVerified": true
+    }
+  ],
+  "frozenPointwisePoolNeckSvtrAndBatchNormCheckpointTensors": {
+    "count": 54,
+    "allCandidatesIdentical": true
+  },
+  "trainDevelopmentDisjoint": true,
+  "utf8LfPathIoAudit": true,
+  "finalDirectoryAbsent": true,
+  "previousPortableZipUnchanged": true,
+  "initializationNewdevSameDecodingDecisions": true,
+  "contradictoryOptimizerRowsExcluded": 0,
+  "noStaticLossCompression": true,
+  "inferenceDictionaryClasses": 18710,
+  "frozenScope": "StandardONNXearlyCNNprefix, originalpointwiseCNN/pool/localneck/SVTR/BN/classifier not optimizer parameters; finalCNNdepthwise3x3+bias can change full18710logits, Japanese regressions quantified separately"
+}

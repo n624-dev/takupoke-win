@@ -1,0 +1,50 @@
+{
+  "scores": [
+    {
+      "margin": 2,
+      "route": "before",
+      "rows": 384,
+      "ocrExact": 292,
+      "wrongWithReference": 44,
+      "wrongWithCorrectCandidate": 0,
+      "alreadyCorrectWithAlternatives": 0,
+      "unknownWithAlternatives": 0,
+      "withCandidates": 0
+    },
+    {
+      "margin": 2,
+      "route": "after",
+      "rows": 384,
+      "ocrExact": 292,
+      "wrongWithReference": 44,
+      "wrongWithCorrectCandidate": 34,
+      "alreadyCorrectWithAlternatives": 16,
+      "unknownWithAlternatives": 15,
+      "withCandidates": 60
+    },
+    {
+      "margin": 6,
+      "route": "before",
+      "rows": 384,
+      "ocrExact": 257,
+      "wrongWithReference": 61,
+      "wrongWithCorrectCandidate": 0,
+      "alreadyCorrectWithAlternatives": 0,
+      "unknownWithAlternatives": 0,
+      "withCandidates": 0
+    },
+    {
+      "margin": 6,
+      "route": "after",
+      "rows": 384,
+      "ocrExact": 257,
+      "wrongWithReference": 61,
+      "wrongWithCorrectCandidate": 54,
+      "alreadyCorrectWithAlternatives": 14,
+      "unknownWithAlternatives": 15,
+      "withCandidates": 80
+    }
+  ],
+  "rawSHA256": "70a0cb11a4271468fbc91d401d37693bb2ff38edce00f32917cb4c42017fb7c2",
+  "scope": "Retrospective reference-roster typing-aid coverage, not new OCR accuracy, completed corrections or human review time. Japanese/space characters must match literally; no automatic substitution."
+}

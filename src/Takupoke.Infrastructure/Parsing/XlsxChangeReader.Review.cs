@@ -50,7 +50,8 @@ public static partial class XlsxChangeReader
             if (caches.TryGetValue(number, out var cached) && !cached)
                 warnings.Add(new(ChangeErrorCode.FormulaCache, number));
             else if (!ChangeNormalizer.WeekdayMatches(printed, date))
-                warnings.Add(new(ChangeErrorCode.WeekdayMismatch, number));
+                warnings.Add(new(ChangeErrorCode.WeekdayMismatch, number)
+                    { PrintedWeekday = printed, CalculatedWeekday = ChangeNormalizer.Weekday(date) });
         }
     }
 

@@ -1,0 +1,290 @@
+{
+  "scope": "Sources/docs/JSON/rawlogs only, no pixel/weights/cache/internalMD blobs",
+  "fileCount": 70,
+  "totalBytes": 7515289,
+  "files": {
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/PORTABLE.md": {
+      "bytes": 950,
+      "sha256": "8f0425115d708eeee55b296983b2560dd263afd010dce33548a5f6693df1cf5e"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/README.md": {
+      "bytes": 2307,
+      "sha256": "6c9c71e42f902c9dee60053cbea6f5de8b2e5abdca33bbf662bef23371387b18"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/adapter.py": {
+      "bytes": 553,
+      "sha256": "563a8734c3b5830d8bc8f5742c9eca772bd8c889976cb188e97216a1651fa697"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/close.py": {
+      "bytes": 4357,
+      "sha256": "03ff1b48c6fb475b820de799f14a205c87504af77b65cc0798a9ef63b940c5d1"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/data.py": {
+      "bytes": 11624,
+      "sha256": "a3afd1e322a5c8bca0c47e9a55d1529660ae67edf8d093f128c2becc1c0c70ec"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/diagnose_saved.py": {
+      "bytes": 3185,
+      "sha256": "e99beb4a980a8bde2f09555b6fc6dd994b34e63ef60b4f6d013e7fa0c33d1f7c"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/download_fonts.py": {
+      "bytes": 2571,
+      "sha256": "c2ac6c7c4ced4e5c1ff03936415c8d8d61ad08c09758fee85b8693821d108c79"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/font_serialization_audit.py": {
+      "bytes": 1555,
+      "sha256": "7752aec58fd8486aa95844b8febdfd04a1e8d880dd0ec7f87610672c1d4de359"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/model.py": {
+      "bytes": 515,
+      "sha256": "499be516a853d5396c6bc44aaae20811510d4f79542c19e3071b4636155cc573"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/package_portable.py": {
+      "bytes": 7899,
+      "sha256": "263ed63ad762ce894ad822c6857a787d623a6264b8fa7abd5703dc3c64ddecff"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/portable.py": {
+      "bytes": 11055,
+      "sha256": "22ac41208fc7744d1b98773b73f0cd9d0362460f6948a3e72c4a45ba19712dfc"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/preflight.py": {
+      "bytes": 4884,
+      "sha256": "5be570299aff74b708b140d8f81f94f56ce5c8f691126a2ac69a2a48dd752ea8"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/probes.py": {
+      "bytes": 3909,
+      "sha256": "08f5656ea1b60007477e2917f88134be871dbcaaab985ca1dfa331d2eaa435f3"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/protocol.json": {
+      "bytes": 6261,
+      "sha256": "ff7611adf18b20cab76c93b5ec28144d02a9ba2590dac7162fdc43f4258da52b"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/report.py": {
+      "bytes": 6232,
+      "sha256": "66df282275c80c0605e63fb2828df359df3c6eaab7bfae33eb5409aa8877abe5"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/summary_metadata_audit.py": {
+      "bytes": 1693,
+      "sha256": "3257fafd8a10fa6d3e8acfdfbff0d23efa6311d17ecfeb4dd1fc6a4d1853af5d"
+    },
+    "tools/ocr-synthetic-training/ascii-english-v5-font-balanced/train.py": {
+      "bytes": 19175,
+      "sha256": "18fcd2311c977743deefa93ccfb10704845eab3b87e3cd3cb64c36fe20585300"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/README.md": {
+      "bytes": 4946,
+      "sha256": "9b442d0e84a46111b94f704b7224e335314e1c5524022d57b958e5b17a94052a"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/closure.json": {
+      "bytes": 13968,
+      "sha256": "f8af8485d8c04dee09ce68f76e201ebaa975a22ed734f2833b0170ae87326e57"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/development-cache-receipt.json": {
+      "bytes": 389786,
+      "sha256": "e5de9be3d059263699e24b2aea0769be80412a79d47291526bfba73ab8259dde"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/development-diagnosis.json": {
+      "bytes": 5377,
+      "sha256": "c9905af3a9fdb804cb00811e6ed82d1900ea3cdb9b84e8ab5ee39fc3e5609cf7"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/development-manifest.json": {
+      "bytes": 526181,
+      "sha256": "773e2b51e45a3056b8ed366cdefe50d165a81692f6d56b071b24ebf2b1035e6d"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/epoch-2-summary.json": {
+      "bytes": 5934,
+      "sha256": "8c2370d3173bdb6aac039e3034b5cd71470221b97f228a6bd9c8e6b3ad841fae"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/epoch-2-unjudged.jsonl": {
+      "bytes": 736561,
+      "sha256": "78d395506effd60b7634847fe111c97bd96f1071e8e765bb91a7a51aa127d3e0"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/epoch-4-summary.json": {
+      "bytes": 5928,
+      "sha256": "7926689601f95328abdd4116009bba24ea8e0c0e0e28dbba27fcc141d0d77d23"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/epoch-4-unjudged.jsonl": {
+      "bytes": 745649,
+      "sha256": "acf12006c9babee1ea3a3284d2423338af49ef67b3a7a6a5e3f95eb4997d7015"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/exclusion-receipt.json": {
+      "bytes": 126294,
+      "sha256": "c8b812a1c9e7592918ae3382345bbc9023d69eefe821f118a319b5c649099cf7"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/external-scratch-file-manifest.json": {
+      "bytes": 407974,
+      "sha256": "d6b607961192fd1bd3fe0594ad040a1f4f6b82d8b55d49a71d4264fe791f011d"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/font-serialization-audit.json": {
+      "bytes": 3089,
+      "sha256": "58da71a50831b8a01112a4a8e0b54ddc2d38e2e1e515ee2e4d74da2497107bca"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/font-serialization-environment-addendum.json": {
+      "bytes": 573,
+      "sha256": "8ed5d80e9b3d8627093c5282080d0316d176d2344898128f70d7292c62372876"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/font-serialization-initial-source.py.txt": {
+      "bytes": 1532,
+      "sha256": "2f9e8520b6fdcf2539ab6d957a6d4d59f8a6869e7aaa903a15f9d8b08bd1cc0a"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/freeze.json": {
+      "bytes": 21812,
+      "sha256": "8d672c5a806ed74d6ab1f896f27abd8495f45fff9ecb2da43b6133b458a6a84d"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/initialized-adapter-summary.json": {
+      "bytes": 6054,
+      "sha256": "e04e2399743fe56a54b658403e58c1774ac310c599ea9b5fc1768a19e17908ee"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/initialized-adapter-unjudged.jsonl": {
+      "bytes": 745908,
+      "sha256": "956c73454c613347ece6ed771b2bff7d555d07ee8adcce3c327342bc3e4e9250"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/negative-group-summary-metadata-addendum.json": {
+      "bytes": 3418,
+      "sha256": "82dd7afb82ee17351161e4a70b48932609f8b24288cd3c471706d2dbcad736dd"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/newdev-initialization-self-consistency.json": {
+      "bytes": 154,
+      "sha256": "4bb4ca25f364713df0e4e8c925bfd6155bcc51c88cdcd4109462a9a5f619f61f"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/official-baseline-summary.json": {
+      "bytes": 5942,
+      "sha256": "340907738998e2e51e67de014ec0022043fadd9853ba54298f284de12b1d0667"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/official-baseline-unjudged.jsonl": {
+      "bytes": 745908,
+      "sha256": "956c73454c613347ece6ed771b2bff7d555d07ee8adcce3c327342bc3e4e9250"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/practical-error-review-diagnosis.json": {
+      "bytes": 20716,
+      "sha256": "7870390a93e9e9ec2babaf62bf3bd906c02d0ca01916ffdb211367b0ab6d34fb"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/pretraining-contradiction-audit.json": {
+      "bytes": 105,
+      "sha256": "cfb73954df868c91f5f0a0c9b2c5c74a4a7892776ed474a071c6c3795c23864a"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/pretraining-corpus-audit.json": {
+      "bytes": 3437,
+      "sha256": "af7eb190921a46b3c018961ddf513ad974dfd847908db2f8085feb1d8c1a8000"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/selection.json": {
+      "bytes": 31024,
+      "sha256": "26a631faa85537fe9f7ac60876498d05ca72389f3855d3e5341022915840650e"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/source-proof-epoch-2-unjudged.jsonl": {
+      "bytes": 20480,
+      "sha256": "8df17aefedc0520480818fc9c2b627792333d9c6c55dca696b9b77e53477fbfe"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/source-proof-epoch-4-unjudged.jsonl": {
+      "bytes": 20696,
+      "sha256": "bfbbccee0a1a66f34276a6377a1f41b702251dfda4989683fb3e34592c28ea4b"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/source-proof-freeze.json": {
+      "bytes": 411,
+      "sha256": "5a7e2346f41915449deb75c18da16bac31dd93009aa8205d14d90998b1730467"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/source-proof-official-baseline-unjudged.jsonl": {
+      "bytes": 19680,
+      "sha256": "47e0dc9ec817c4eec02e4998b1c7499fa618a5055d4a2e9958d003919053fe23"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/source-proof-summary.json": {
+      "bytes": 1116,
+      "sha256": "455923e272758b0bf74edf8b47612d4a90c0be9d81ce84a48146f610ff5cac4f"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/train-cache-receipt.json": {
+      "bytes": 581870,
+      "sha256": "75be97f7bc455f5666dceb41de8d2bdcda1e837f1123c47095bf2426a666910a"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/train-manifest.json": {
+      "bytes": 793723,
+      "sha256": "353716c6d3b4322a052a603dc994f09b31462e56e559e0e472674696ba17a9f8"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/adaptation-v1/verification.json": {
+      "bytes": 877,
+      "sha256": "a271646578a70b5c040b80b55ce77e1ceab5357187c998e3cf6e66543d2ddf80"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/completion-addendum.json": {
+      "bytes": 2540,
+      "sha256": "8f2476fe780ee88dba26d20887f8e9c61579e3618138c328b4054d28d62270d3"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/freeze.json": {
+      "bytes": 2075,
+      "sha256": "10b813fe9e0b33bc2d07b7d7e4a952adcac24ad6b0c7b1e743fa86b6cafb7f02"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/partial-numeric-budget.json": {
+      "bytes": 1128,
+      "sha256": "eca8368c553f5e9fdea8eef744c31f1d3fc8b17352c7eb7af272c118b23ed76e"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/portable-v1/README.md": {
+      "bytes": 1576,
+      "sha256": "1e3268e2e44f32dbffed8d883654d332019a019a9bdf7dde1681eef381687d98"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/portable-v1/comparisons.json": {
+      "bytes": 164816,
+      "sha256": "3dc6a3fd609469117f661369c685ae6e543df04ddf0ad2e90bf64ca0ea93a602"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/portable-v1/dictionary.json": {
+      "bytes": 3614,
+      "sha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/portable-v1/execution.log": {
+      "bytes": 7393,
+      "sha256": "e1be845383b15f43739760e293c2531fca07a58a8333830aadb1da28e4968512"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/portable-v1/export-warnings.json": {
+      "bytes": 751,
+      "sha256": "38b9cd7ebe999762e1de59fd0e2940ff6e62dc633549995f1ab36da81bad7f52"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/portable-v1/metadata.json": {
+      "bytes": 15785,
+      "sha256": "5173d286a389bfc03c10244eb22cc65a2df21a97f241b9c507a0d55b9a2a7417"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/portable-v1/numeric-unjudged.jsonl": {
+      "bytes": 12982,
+      "sha256": "6587271a5b33933e69e5d01293227f6f95a1f7b1cfdeea81c653f66328d77f92"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/portable-v1/onnx-unjudged.jsonl": {
+      "bytes": 578027,
+      "sha256": "d098a41754d4b3de5ddbccb184e56d07ef075b9872c99cdcca7ba3203d7d2473"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/portable-v1/package-file-receipt.json": {
+      "bytes": 974,
+      "sha256": "9650908ca3e05e6580f95d56d07a037ec64b78c1e33c32347b35fbba892af143"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/portable-v1/protocol.json": {
+      "bytes": 2559,
+      "sha256": "797831fbba58490c0a0d2d772b1348e9d89e3f733738f2e67f664d73fa1534a7"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/portable-v1/summary.json": {
+      "bytes": 9495,
+      "sha256": "688ef866313e67b28a7e2002e4d99598a86bb71c29ae840423a38332e46b20f5"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/portable-v1/torch-unjudged.jsonl": {
+      "bytes": 578009,
+      "sha256": "324a7b36e14dd5476379f6cd711d2b6b79ed201eca0804c2b170f38c8cbb2db1"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/pre-execution-registration.json": {
+      "bytes": 14402,
+      "sha256": "1556978658ed372dffded3f72e9f9265359d08b05536b857359ed9b298499f36"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/preflight-execution.log": {
+      "bytes": 994,
+      "sha256": "d946b4aeae81643e6770c10647c22bfd274432950d324eeec897f7ee1561b2ba"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/preflight.json": {
+      "bytes": 1336,
+      "sha256": "e7f7f9d586f081ae53bb0dc99a08f782b47d116281b0a8f697c3963c5e728b7e"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/self-consistency.json": {
+      "bytes": 1572,
+      "sha256": "4c8909a68d67e39cd960482cc8e8d3e61d649a2e3790140f868c54c6e7f63bcb"
+    },
+    "research-results/ocr-synthetic-training-20261013/ascii-english-v5-font-balanced-v1/training-execution.log": {
+      "bytes": 29413,
+      "sha256": "3c146e6eaa76dcecb57fde4964726c99b45c4f6626fa2de370d461a73f517c9f"
+    }
+  },
+  "externalModel": "9dd3ed77db4f2af171cf434d200c666033c9bdfe5f33446bc47dbfecac90d703",
+  "selectedCheckpoint": "7313bee5dabf17998010c6f47844fe80649744b03c0366af05c627fc47314547",
+  "status": "Inactive research result; childdidnotcommit/push"
+}

@@ -1,0 +1,8 @@
+{
+  "scope": "Unscored contradiction controls only; not training targets, selection, independent final or production credit",
+  "consumedProbeManifestSha256": "ae2f562925634b1c154f30a71387ad83f83a9b0c639337d08f8f2697bc7f6cde",
+  "selectionSha256": "98043207eb0350825b001cb9a09a2fad5f70ea878e3e949ddec2013b228cc788",
+  "sourceSha256": "92720994bed5e6f75a7f44e35cf9eb3d13693674fa21945ebc7b5cf31ae07916",
+  "condition": "Reuse frozen provided pixels only; direct native FP32 BGR48; full18710; selected checkpoints immutable; never adjust selection/rejection thresholds",
+  "rows": 64
+}

@@ -1,0 +1,20 @@
+{
+  "sourceCommit": "c2fcdb5c5abd76592b474d75ff0eaf6089deab28",
+  "sourceProject": "src/Takupoke.Win/Takupoke.Win.csproj",
+  "restoreOverrides": [
+    "EnableWindowsTargeting=true",
+    "Platform=x64",
+    "WindowsAppSDKSelfContained=false (restore/compile context only, no Windows native run)"
+  ],
+  "assetsSha256": "afb311f99b0cabd933b8ecde8731649015b7af6eac639f7eb713ec323db0fe88",
+  "onnxLibraries": [
+    "Microsoft.ML.OnnxRuntime/1.23.2",
+    "Microsoft.ML.OnnxRuntime.Foundry/1.26.0",
+    "Microsoft.ML.OnnxRuntime.Gpu.Linux/1.26.0",
+    "Microsoft.ML.OnnxRuntime.Managed/1.26.0",
+    "Microsoft.ML.OnnxRuntimeGenAI.Foundry/0.14.1",
+    "Microsoft.ML.OnnxRuntimeGenAI.Managed/0.14.1"
+  ],
+  "runtimeDistinction": "Infrastructure standalone declaredandloaded1.23.2 for this Linux measurement; Windows app resolves OnnxRuntime.Managed1.26.0 and Foundry1.26.0. Resolved dependency graph is not fresh Windows OCR execution proof. Historical Windows actual loaded1.26 provides separate evidence only.",
+  "additionalModelInference": 0
+}

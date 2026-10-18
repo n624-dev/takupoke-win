@@ -1,0 +1,377 @@
+{
+  "status": "research-only; final not opened; not qualified or activated",
+  "protocolSha256": "b7999c82c59adf24d2f5c60aa060474e4631297a6e615c22ca7e88ca25070af7",
+  "selected": {
+    "epoch": 24,
+    "checkpoint": "/workspace/scratch/ascii-line-ctc-20261013-v1/epoch-24.safetensors",
+    "sha256": "2a4c726434b7bdd980a370b9e3daba852bd28f4709e60bc2a8b2f38a79e5fd4a",
+    "positiveRows": 384,
+    "exact": 61,
+    "correctAccepted": 29,
+    "incorrectAccepted": 57,
+    "negativeRows": 128,
+    "negativeRejected": 128,
+    "negativeAccepted": 0,
+    "harmonic": 0.2741573033707865,
+    "cer": 0.1834319526627219,
+    "groups": {
+      "cjk": {
+        "rows": 32,
+        "accepted": 0,
+        "exact": 0
+      },
+      "clipped": {
+        "rows": 32,
+        "accepted": 0,
+        "exact": 0
+      },
+      "code": {
+        "rows": 96,
+        "accepted": 35,
+        "exact": 24
+      },
+      "lookalike": {
+        "rows": 96,
+        "accepted": 24,
+        "exact": 8
+      },
+      "multiline": {
+        "rows": 32,
+        "accepted": 0,
+        "exact": 0
+      },
+      "natural": {
+        "rows": 96,
+        "accepted": 17,
+        "exact": 17
+      },
+      "printable": {
+        "rows": 96,
+        "accepted": 10,
+        "exact": 12
+      },
+      "unknown": {
+        "rows": 32,
+        "accepted": 0,
+        "exact": 0
+      }
+    }
+  },
+  "candidates": [
+    {
+      "epoch": 8,
+      "checkpoint": "/workspace/scratch/ascii-line-ctc-20261013-v1/epoch-8.safetensors",
+      "sha256": "a70903537d1ff31a54ea184c7bb8a2471d5d2ac299e7202ce6f04ffc25b9a20b",
+      "positiveRows": 384,
+      "exact": 5,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "negativeRows": 128,
+      "negativeRejected": 128,
+      "negativeAccepted": 0,
+      "harmonic": 0.025706940874035994,
+      "cer": 0.4533454710969504,
+      "groups": {
+        "cjk": {
+          "rows": 32,
+          "accepted": 0,
+          "exact": 0
+        },
+        "clipped": {
+          "rows": 32,
+          "accepted": 0,
+          "exact": 0
+        },
+        "code": {
+          "rows": 96,
+          "accepted": 0,
+          "exact": 2
+        },
+        "lookalike": {
+          "rows": 96,
+          "accepted": 0,
+          "exact": 0
+        },
+        "multiline": {
+          "rows": 32,
+          "accepted": 0,
+          "exact": 0
+        },
+        "natural": {
+          "rows": 96,
+          "accepted": 0,
+          "exact": 3
+        },
+        "printable": {
+          "rows": 96,
+          "accepted": 0,
+          "exact": 0
+        },
+        "unknown": {
+          "rows": 32,
+          "accepted": 0,
+          "exact": 0
+        }
+      }
+    },
+    {
+      "epoch": 16,
+      "checkpoint": "/workspace/scratch/ascii-line-ctc-20261013-v1/epoch-16.safetensors",
+      "sha256": "963012357d7711d5c03aa5e865d8a44880afdd009b67ab1d82808c464238503f",
+      "positiveRows": 384,
+      "exact": 53,
+      "correctAccepted": 15,
+      "incorrectAccepted": 42,
+      "negativeRows": 128,
+      "negativeRejected": 128,
+      "negativeAccepted": 0,
+      "harmonic": 0.24256292906178492,
+      "cer": 0.1838871187983614,
+      "groups": {
+        "cjk": {
+          "rows": 32,
+          "accepted": 0,
+          "exact": 0
+        },
+        "clipped": {
+          "rows": 32,
+          "accepted": 0,
+          "exact": 0
+        },
+        "code": {
+          "rows": 96,
+          "accepted": 29,
+          "exact": 22
+        },
+        "lookalike": {
+          "rows": 96,
+          "accepted": 14,
+          "exact": 11
+        },
+        "multiline": {
+          "rows": 32,
+          "accepted": 0,
+          "exact": 0
+        },
+        "natural": {
+          "rows": 96,
+          "accepted": 6,
+          "exact": 14
+        },
+        "printable": {
+          "rows": 96,
+          "accepted": 8,
+          "exact": 6
+        },
+        "unknown": {
+          "rows": 32,
+          "accepted": 0,
+          "exact": 0
+        }
+      }
+    },
+    {
+      "epoch": 24,
+      "checkpoint": "/workspace/scratch/ascii-line-ctc-20261013-v1/epoch-24.safetensors",
+      "sha256": "2a4c726434b7bdd980a370b9e3daba852bd28f4709e60bc2a8b2f38a79e5fd4a",
+      "positiveRows": 384,
+      "exact": 61,
+      "correctAccepted": 29,
+      "incorrectAccepted": 57,
+      "negativeRows": 128,
+      "negativeRejected": 128,
+      "negativeAccepted": 0,
+      "harmonic": 0.2741573033707865,
+      "cer": 0.1834319526627219,
+      "groups": {
+        "cjk": {
+          "rows": 32,
+          "accepted": 0,
+          "exact": 0
+        },
+        "clipped": {
+          "rows": 32,
+          "accepted": 0,
+          "exact": 0
+        },
+        "code": {
+          "rows": 96,
+          "accepted": 35,
+          "exact": 24
+        },
+        "lookalike": {
+          "rows": 96,
+          "accepted": 24,
+          "exact": 8
+        },
+        "multiline": {
+          "rows": 32,
+          "accepted": 0,
+          "exact": 0
+        },
+        "natural": {
+          "rows": 96,
+          "accepted": 17,
+          "exact": 17
+        },
+        "printable": {
+          "rows": 96,
+          "accepted": 10,
+          "exact": 12
+        },
+        "unknown": {
+          "rows": 32,
+          "accepted": 0,
+          "exact": 0
+        }
+      }
+    }
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 13.396606971820196,
+      "elapsedSeconds": 42.00096834700162,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 2,
+      "loss": 4.105342358350754,
+      "elapsedSeconds": 85.5692994509991,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 3,
+      "loss": 3.8439961700212386,
+      "elapsedSeconds": 129.4118475960022,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 4,
+      "loss": 3.6515889579341527,
+      "elapsedSeconds": 178.19185185800234,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 5,
+      "loss": 3.401691726275853,
+      "elapsedSeconds": 219.96684079899933,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 6,
+      "loss": 3.0086804628372192,
+      "elapsedSeconds": 263.9489254629989,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 7,
+      "loss": 2.3668436528671357,
+      "elapsedSeconds": 305.1247152690012,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 8,
+      "loss": 1.4777721407867612,
+      "elapsedSeconds": 350.2155816400009,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 9,
+      "loss": 0.9670853792201906,
+      "elapsedSeconds": 400.34412610800064,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 10,
+      "loss": 0.7127050471802553,
+      "elapsedSeconds": 443.9103252540008,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 11,
+      "loss": 0.5716641488529387,
+      "elapsedSeconds": 487.12412735100224,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 12,
+      "loss": 0.3905693156910794,
+      "elapsedSeconds": 528.1396789400023,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 13,
+      "loss": 0.22879336321992533,
+      "elapsedSeconds": 569.1113161370013,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 14,
+      "loss": 0.1632044372991437,
+      "elapsedSeconds": 612.0478499780002,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 15,
+      "loss": 0.1321425959467888,
+      "elapsedSeconds": 657.5968099919992,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 16,
+      "loss": 0.11006694238278128,
+      "elapsedSeconds": 703.2212951729998,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 17,
+      "loss": 0.0853342419224126,
+      "elapsedSeconds": 751.2915023669993,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 18,
+      "loss": 0.0723632377394963,
+      "elapsedSeconds": 795.2946446150017,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 19,
+      "loss": 0.06127197437343143,
+      "elapsedSeconds": 839.1167508940016,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 20,
+      "loss": 0.05804827546567789,
+      "elapsedSeconds": 884.4293954530003,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 21,
+      "loss": 0.04773957008451578,
+      "elapsedSeconds": 926.6562111050007,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 22,
+      "loss": 0.05126438279902296,
+      "elapsedSeconds": 970.2073250989997,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 23,
+      "loss": 0.05375477314616243,
+      "elapsedSeconds": 1020.029738008001,
+      "maxRssMiB": 2317.8828125
+    },
+    {
+      "epoch": 24,
+      "loss": 0.09350688003801874,
+      "elapsedSeconds": 1063.899821758001,
+      "maxRssMiB": 2317.8828125
+    }
+  ],
+  "parameters": 217682
+}

@@ -1,0 +1,17 @@
+{
+  "sha256": "1ffb99d36924ad4117e1c168c8a9775d01accfa6e95c2c32c0dbbc16cafdf284",
+  "counts": {
+    "active-baseline": 168,
+    "epoch-1": 130,
+    "epoch-2": 134,
+    "epoch-3": 133,
+    "epoch-4": 132,
+    "trainfit-active": 549,
+    "trainfit-candidate": 386,
+    "fresh-active": 160,
+    "fresh-candidate": 151
+  },
+  "allScoredModelsAndAllMisreadPositivesOrRejectedPositivesOrAcceptedNegativesIncluded": true,
+  "correctButRejectedPositivesIncludedForCoverageReview": true,
+  "rejectedNegativeRawAlsoRetainedInCompleteUnjudgedLogs": true
+}

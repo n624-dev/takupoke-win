@@ -1,0 +1,28 @@
+{
+  "scope": "Read-only supplemental dependency/provenance audit; frozen protocol and original artifacts unchanged",
+  "dependencies": {
+    "ascii-paddle-medium-height-neck/neck.py": "8889997581817beb7450fd067da70d6ff948b6ac697b1ab1bcb05f78a2287fa9",
+    "ascii-paddle-medium-svtr/svtr_exact.py": "2e63b78aae0a47288f63fcdabe2a17a9b7611faeb9414156812058ae0d686a52",
+    "ascii-paddle-medium-svtr/reproduce_v2.py": "1881a50839c6aa4096a4f4f3d885d2b67ce6203b66adef1586ebdfd63aa50e6d",
+    "image_tensor.py": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098"
+  },
+  "originalClassifierRows": 18710,
+  "blankIndex": 0,
+  "dictionaryReduction": false,
+  "windowsOrIphoneValidation": false,
+  "trainableSpatialParameters": 7680,
+  "trainableRejectParameters": 193,
+  "fixed": [
+    "Earlier CNN",
+    "last CNN pointwise expansion/projection",
+    "original average height pool",
+    "local neck weights and BN buffers",
+    "SVTR attention and normalization",
+    "original full CTC classifier weights/bias"
+  ],
+  "cropOnlyCannotProve": [
+    "original script of same pixel glyph",
+    "missing whole prefix",
+    "original ink completeness or cell ownership"
+  ]
+}

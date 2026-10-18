@@ -1,0 +1,12 @@
+{
+  "scope": "Read-only prior exposure clarification; frozen protocol/final/model unchanged",
+  "finalFonts": [
+    "SawarabiGothic",
+    "SawarabiMincho"
+  ],
+  "thisCandidateFinalCorpusGenerated": false,
+  "thisCandidateFinalInferencePerformed": false,
+  "finalUsedForTrainingOrSelection": false,
+  "knownPriorExposure": "Parent disclosed SawarabiMincho prior source-only original-text/position acquisition use; not recognizer input or training. SawarabiGothic was explicitly reserved before download/render/recognition by parent.",
+  "terminology": "Final remains reserved and OCR-unconsumed. Inherited protocol phrase notrendered must not be read as absence of all historical source-only rendering of SawarabiMincho. Neither entire publicfont pretraining absence nor whole font lineage unseen is claimed."
+}

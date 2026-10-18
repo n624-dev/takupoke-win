@@ -1,0 +1,39 @@
+{
+  "status": "All current hashes, losslessFP32 arrays, PNG-derived inputs and syntax verified; no quality reselection",
+  "counts": {
+    "json": 43,
+    "jsonlRows": 11847,
+    "sourcePng": 3392,
+    "cacheNpz": 3392,
+    "fp32Arrays": 11424
+  },
+  "splits": {
+    "train": {
+      "rows": 2144,
+      "manifestSha256": "3953682a34d48fa540de11edf6144e897536690680ba744de5ef138f7a1ab976",
+      "cacheReceiptSha256": "80eab22585ae97ca4fdae1a9fdde05f5197d33875d6176346fc9cc292d685e1b"
+    },
+    "development": {
+      "rows": 624,
+      "manifestSha256": "cc2702244018eadb3e9bba0e8f15cd5de4196ad7ec718276f1a3dfe2f7aef736",
+      "cacheReceiptSha256": "04e923417f1838b82ad7b06c5f533a37a64659dbd0417a52db48f2d6e94ceb46"
+    },
+    "fresh": {
+      "rows": 624,
+      "manifestSha256": "9ebfa74191925d0949055ff1daf4c5347c1142cad85d33ced3a5fb0582ee106c",
+      "cacheReceiptSha256": "38d96858a407c5123c7bac1216576294352aef875324926c03adf0990bd7d415"
+    }
+  },
+  "all28FontAndLicenseHashesUnchanged": true,
+  "frozenTrainingSourcesAndProtocolUnchanged": true,
+  "allEpochCheckpointsVerified": true,
+  "activeAndJapanesePrimaryUnchanged": true,
+  "portable": null,
+  "ownScratchBytes": 578465348,
+  "freeBytes": 1307676672,
+  "freshOpened": true,
+  "selected": "epoch-2",
+  "iosEdited": false,
+  "defaultSwitched": false,
+  "commitOrPushByThisAgent": false
+}

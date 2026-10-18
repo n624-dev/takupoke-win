@@ -1,0 +1,183 @@
+{
+  "nativeSource": "469e49960b4b24ee48322b551baced32d4dae07b",
+  "releaseSource": "810f40e0023b81eb9054fbaa61a4c7797c690582",
+  "allRuntimeOcrAndParserSourcesByteIdentical": true,
+  "toolsOnlyCheckoutNewlineDifferences": true,
+  "files": [
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/OcrAsciiRefinement.cs",
+      "nativeSHA256": "05fdd502f96140a50839b28b834ce14c0ad3acc6d8aa86fb8714e5fd709b19b6",
+      "releaseSHA256": "05fdd502f96140a50839b28b834ce14c0ad3acc6d8aa86fb8714e5fd709b19b6",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs",
+      "nativeSHA256": "63b118c426844c6705a723240b0863d0906c2ef0a415af91dc399aa021685df0",
+      "releaseSHA256": "63b118c426844c6705a723240b0863d0906c2ef0a415af91dc399aa021685df0",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs",
+      "nativeSHA256": "9a95f142408a60de47965b91aa81f47a4a34e9274700d283148efea1fc927126",
+      "releaseSHA256": "9a95f142408a60de47965b91aa81f47a4a34e9274700d283148efea1fc927126",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/OcrDetectorProbability.cs",
+      "nativeSHA256": "f221a38e197b8a7f2d9a922219077ceb0adc97950366d093e5c9503cf0b65c71",
+      "releaseSHA256": "f221a38e197b8a7f2d9a922219077ceb0adc97950366d093e5c9503cf0b65c71",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/OcrInkCropFrame.cs",
+      "nativeSHA256": "5aa2605f3d743ba91e307778bd1dcb38faf10ead1492efe024774cfb1c07aa0d",
+      "releaseSHA256": "5aa2605f3d743ba91e307778bd1dcb38faf10ead1492efe024774cfb1c07aa0d",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs",
+      "nativeSHA256": "b13927678f0c5ed3f05d6e01c35f580647e228f969059bb003d4a47c2a6b7eaa",
+      "releaseSHA256": "b13927678f0c5ed3f05d6e01c35f580647e228f969059bb003d4a47c2a6b7eaa",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/OcrWhiteGapPartition.cs",
+      "nativeSHA256": "62eb957afb2b527303643d037829363abbc02776f266d069d8bc06c082c193b6",
+      "releaseSHA256": "62eb957afb2b527303643d037829363abbc02776f266d069d8bc06c082c193b6",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/OnnxAsciiOcr.cs",
+      "nativeSHA256": "212be449861c5b9329d89b5584af1b95868ae3c42b81e04ef8f2740f1c6309e1",
+      "releaseSHA256": "212be449861c5b9329d89b5584af1b95868ae3c42b81e04ef8f2740f1c6309e1",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs",
+      "nativeSHA256": "029e7783c00a67457262494f650df06efd019b7eed6f4171543682a0d983cea6",
+      "releaseSHA256": "029e7783c00a67457262494f650df06efd019b7eed6f4171543682a0d983cea6",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/RecoveryAnalysisConverter.cs",
+      "nativeSHA256": "12cc992411fefbe6db50f70b1d0b27f07fed5221de9c649d1ae463b7efc03354",
+      "releaseSHA256": "12cc992411fefbe6db50f70b1d0b27f07fed5221de9c649d1ae463b7efc03354",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/RecoveryAuditCertification.cs",
+      "nativeSHA256": "226fea751cffb21b86165de6690bc5072bf524a6181b4d76281fcb1a06c6f904",
+      "releaseSHA256": "226fea751cffb21b86165de6690bc5072bf524a6181b4d76281fcb1a06c6f904",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/RecoveryCapturedLayoutBuilder.cs",
+      "nativeSHA256": "30b1750c3d8718ba2499282b3763fa0fe5477402a2ddc635e427e04099798882",
+      "releaseSHA256": "30b1750c3d8718ba2499282b3763fa0fe5477402a2ddc635e427e04099798882",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/RecoveryContainmentIndex.cs",
+      "nativeSHA256": "eb1b98d93b697abd2eba187ab4f3cea3da5c717a6d16b49ea4e0f6f215baad53",
+      "releaseSHA256": "eb1b98d93b697abd2eba187ab4f3cea3da5c717a6d16b49ea4e0f6f215baad53",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/RecoveryCoordinator.cs",
+      "nativeSHA256": "006460ae8e2459e57bf5a426d1d2db5e25c60f7f1af9b6d7350db800138774c1",
+      "releaseSHA256": "006460ae8e2459e57bf5a426d1d2db5e25c60f7f1af9b6d7350db800138774c1",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs",
+      "nativeSHA256": "aee3fe421987ccfed5ca06a60754b3708b13911f69dbdb248303f4ce62b79d05",
+      "releaseSHA256": "aee3fe421987ccfed5ca06a60754b3708b13911f69dbdb248303f4ce62b79d05",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/RecoveryLayoutGeometry.cs",
+      "nativeSHA256": "079d6f1f1469b51a638c85b48962d67eecd6d619a5b91e6fc04a61ffca953ee2",
+      "releaseSHA256": "079d6f1f1469b51a638c85b48962d67eecd6d619a5b91e6fc04a61ffca953ee2",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/RecoveryModelBundleStore.cs",
+      "nativeSHA256": "03faa06f766c0f8ae79425a109aea502b6e54f64a939cee03b15ac32a86a2125",
+      "releaseSHA256": "03faa06f766c0f8ae79425a109aea502b6e54f64a939cee03b15ac32a86a2125",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/RecoveryModelStore.cs",
+      "nativeSHA256": "ad370251951dc72467268bd8eceeaeccbddcfcb69465c841e47df9a9e825bc61",
+      "releaseSHA256": "ad370251951dc72467268bd8eceeaeccbddcfcb69465c841e47df9a9e825bc61",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/RecoveryOcrModels.cs",
+      "nativeSHA256": "8b4afbc01d5b11909f261738662c83801929921e6cb83fc06584d1ec9e68776e",
+      "releaseSHA256": "8b4afbc01d5b11909f261738662c83801929921e6cb83fc06584d1ec9e68776e",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "src/Takupoke.Infrastructure/Recovery/RecoveryOutputDecoder.cs",
+      "nativeSHA256": "4b0da14cef205b426ca06c8bb8453663bde0aba76d16b7fb637f960e5aee3849",
+      "releaseSHA256": "4b0da14cef205b426ca06c8bb8453663bde0aba76d16b7fb637f960e5aee3849",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "tools/ocr-physical-framing/windows-render/WindowsRender.cs",
+      "nativeSHA256": "e41e22f1f0f8a051d2eec967e8120f368ce03d80a355b379c1f31ecd10e2f7a1",
+      "releaseSHA256": "e41e22f1f0f8a051d2eec967e8120f368ce03d80a355b379c1f31ecd10e2f7a1",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "tools/ocr-production-validation/Read.cs",
+      "nativeSHA256": "9b3061c70ea34b6fb8e465c7746ced930d4cea964f4ec0f90ce3a59862fa42a8",
+      "releaseSHA256": "9b3061c70ea34b6fb8e465c7746ced930d4cea964f4ec0f90ce3a59862fa42a8",
+      "byteIdentical": true,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "tools/ocr-production-validation/prepare.py",
+      "nativeSHA256": "43485bf2c16803ab1fbad4834fb51b765d70af1fa08bfaf2bc257cff7ee6b08a",
+      "releaseSHA256": "9ad2bf98633b3dc26833e89bb361097921ba42f4982e6610e2c317be8aa88fea",
+      "byteIdentical": false,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "tools/ocr-production-validation/run_windows.py",
+      "nativeSHA256": "87a3b2a12948742db84f6e7287a7d318826b03359c8780272306b0a69fe02d12",
+      "releaseSHA256": "175ab889617b86d074ca58bfc366952239651acde448b2efdf794d5c858f434e",
+      "byteIdentical": false,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    },
+    {
+      "file": "tools/ocr-production-validation/score.py",
+      "nativeSHA256": "0d868b1c18b0cbe2e605cff6cc0c1eb57224e51edd95ec70ab88e2efb12e19c0",
+      "releaseSHA256": "506596dfef419d7b925388c839647f5956d0930457e8c31f9a57d3858b363ff9",
+      "byteIdentical": false,
+      "contentIdenticalIgnoringCheckoutCRLF": true
+    }
+  ]
+}

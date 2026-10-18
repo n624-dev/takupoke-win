@@ -1,0 +1,2442 @@
+{
+  "gains": [
+    {
+      "id": "code-0030",
+      "expected": "IOO41",
+      "before": "IO041",
+      "after": "IOO41",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.9831564
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.49995798
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.5050464
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.99999666
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99999213
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.8283389
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.6924177
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.861748
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9983217
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9996433
+        }
+      ]
+    },
+    {
+      "id": "code-0054",
+      "expected": "0O094",
+      "before": "00094",
+      "after": "0O094",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.99999464
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.83915037
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99999523
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999969
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9999981
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.84775966
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.76579946
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9788912
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9839215
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.99936813
+        }
+      ]
+    },
+    {
+      "id": "code-0070",
+      "expected": "01I49",
+      "before": "01149",
+      "after": "01I49",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.9999976
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99999726
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.66048914
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9999995
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999975
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.6544293
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99996686
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.5586999
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.99943215
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.98372203
+        }
+      ]
+    },
+    {
+      "id": "code-0082",
+      "expected": "Il095",
+      "before": "II095",
+      "after": "Il095",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.8708547
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.8501468
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9994997
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.99989164
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.9999944
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.72142226
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.59539086
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9712648
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.99232715
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.9872513
+        }
+      ]
+    },
+    {
+      "id": "code-0094",
+      "expected": "0O197",
+      "before": "00197",
+      "after": "0O197",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.9999881
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.71969783
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99999917
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999995
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.99999905
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.6880831
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.7688071
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9998344
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9889548
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.99977297
+        }
+      ]
+    },
+    {
+      "id": "code-0102",
+      "expected": "0OO77",
+      "before": "00077",
+      "after": "0OO77",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.9999093
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.8891381
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.75553524
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.99999547
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.999997
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.9650118
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.69688666
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.6924926
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9992042
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9991679
+        }
+      ]
+    },
+    {
+      "id": "code-0134",
+      "expected": "0IO37",
+      "before": "01O37",
+      "after": "0IO37",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.9999248
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.54492617
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.6451407
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.99999523
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9999962
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.96747434
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.8553429
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.7717533
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9935267
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9555951
+        }
+      ]
+    },
+    {
+      "id": "code-0162",
+      "expected": "Il039",
+      "before": "II039",
+      "after": "Il039",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.89441156
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.89120984
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99877125
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.99996424
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999864
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.7548555
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.5927087
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.97250235
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9995252
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.78620327
+        }
+      ]
+    },
+    {
+      "id": "code-0174",
+      "expected": "I1O77",
+      "before": "I1077",
+      "after": "I1O77",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.68055487
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99983704
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.8716191
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9999975
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.99999833
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.9057632
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99986565
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.7990505
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9994343
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.99960965
+        }
+      ]
+    },
+    {
+      "id": "code-0259",
+      "expected": "IlO33",
+      "before": "I1O33",
+      "after": "IlO33",
+      "font": "SawarabiMincho-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.9930276
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.5809376
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.9587899
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9998425
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.99989974
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.993258
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.8873098
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.7046355
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9694267
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.99851805
+        }
+      ]
+    },
+    {
+      "id": "code-0271",
+      "expected": "1Il21",
+      "before": "1I121",
+      "after": "1Il21",
+      "font": "SawarabiMincho-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.9999347
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.9613205
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.73064274
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.9999534
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.999961
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.9909039
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.96402
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.6862942
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.99507797
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99802125
+        }
+      ]
+    },
+    {
+      "id": "code-0307",
+      "expected": "l1063",
+      "before": "11063",
+      "after": "l1063",
+      "font": "SawarabiMincho-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.9999678
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999918
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99999917
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.9999981
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9999982
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "l",
+          "Confidence": 0.5576467
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9987644
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99889696
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.9994881
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9999677
+        }
+      ]
+    },
+    {
+      "id": "code-0319",
+      "expected": "IlO98",
+      "before": "I1O98",
+      "after": "IlO98",
+      "font": "SawarabiMincho-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.9966949
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.69591165
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.92169863
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.99999225
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9999963
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.99812514
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.922633
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.56986725
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9920398
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99972683
+        }
+      ]
+    },
+    {
+      "id": "code-0323",
+      "expected": "ll153",
+      "before": "11153",
+      "after": "ll153",
+      "font": "SawarabiMincho-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.9970567
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9991117
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999975
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.9999989
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.99999905
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "l",
+          "Confidence": 0.9327558
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.7367515
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9997147
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.9902092
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9998379
+        }
+      ]
+    },
+    {
+      "id": "code-0339",
+      "expected": "lO041",
+      "before": "1O041",
+      "after": "lO041",
+      "font": "SawarabiMincho-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.98664296
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.86593467
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99999535
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9999982
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999938
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "l",
+          "Confidence": 0.81997824
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.537874
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9693559
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.99938524
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9951428
+        }
+      ]
+    },
+    {
+      "id": "code-0343",
+      "expected": "lO169",
+      "before": "1O169",
+      "after": "lO169",
+      "font": "SawarabiMincho-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.89835364
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.9788311
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999913
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.99999714
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.99999845
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "l",
+          "Confidence": 0.7736688
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.6829745
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99901927
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.9999676
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.98383707
+        }
+      ]
+    },
+    {
+      "id": "code-0371",
+      "expected": "0lO91",
+      "before": "01O91",
+      "after": "0lO91",
+      "font": "SawarabiMincho-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.99998593
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9769381
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.92644906
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.99999833
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999949
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.9976603
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.63254
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.60992134
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9902592
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99634355
+        }
+      ]
+    },
+    {
+      "id": "code-0404",
+      "expected": "0O192",
+      "before": "00192",
+      "after": "0O192",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.9999776
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.98863834
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99999774
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999758
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.99999964
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.7321275
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.7149172
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99996483
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.8573802
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.9999367
+        }
+      ]
+    },
+    {
+      "id": "code-0444",
+      "expected": "1OI89",
+      "before": "10189",
+      "after": "1OI89",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.9999778
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99563956
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9949108
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99998593
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999629
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.99851245
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.70373696
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.88620067
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9998795
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.806998
+        }
+      ]
+    },
+    {
+      "id": "code-0452",
+      "expected": "0OO83",
+      "before": "00083",
+      "after": "0OO83",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.9999713
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9935138
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9910953
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9999896
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9999964
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.9752964
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.64689684
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.593619
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9998363
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9999014
+        }
+      ]
+    },
+    {
+      "id": "code-0460",
+      "expected": "O1O52",
+      "before": "01052",
+      "after": "O1O52",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.7848106
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99997306
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.6807556
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.99999774
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.9999995
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "O",
+          "Confidence": 0.9068523
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99990726
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.6526089
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.994323
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.99969935
+        }
+      ]
+    },
+    {
+      "id": "code-0464",
+      "expected": "I0I44",
+      "before": "10144",
+      "after": "I0I44",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.9117206
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999645
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99950004
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.99999857
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9999989
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.8532424
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.7775656
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.716916
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.99848574
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.99934465
+        }
+      ]
+    },
+    {
+      "id": "code-0472",
+      "expected": "00O40",
+      "before": "00040",
+      "after": "00O40",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.99997747
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99999464
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.80643076
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.99999905
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99998045
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.84975106
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9653066
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.6980862
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.99807954
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.8996441
+        }
+      ]
+    },
+    {
+      "id": "code-0480",
+      "expected": "OIO85",
+      "before": "01085",
+      "after": "OIO85",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.84769094
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.7368711
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9079086
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9999951
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.9999981
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "O",
+          "Confidence": 0.9042735
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.876772
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.6814999
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99978846
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.9997664
+        }
+      ]
+    },
+    {
+      "id": "code-0484",
+      "expected": "IOI20",
+      "before": "10120",
+      "after": "IOI20",
+      "font": "KleeOne-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.5094151
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.7994324
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.97324425
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.999995
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99997854
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.9616244
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.8722742
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.9511306
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.9996251
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.79749614
+        }
+      ]
+    },
+    {
+      "id": "code-0508",
+      "expected": "OOI76",
+      "before": "00176",
+      "after": "OOI76",
+      "font": "KleeOne-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.70486474
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.75477326
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.926878
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9999814
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.99999833
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "O",
+          "Confidence": 0.7679768
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.62855476
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.7937812
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9976464
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.9998878
+        }
+      ]
+    },
+    {
+      "id": "code-0560",
+      "expected": "I1077",
+      "before": "11077",
+      "after": "I1077",
+      "font": "KleeOne-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.8439926
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99999404
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99999654
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9999926
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9999926
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.88670725
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99962604
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.5756665
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.99932337
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9992286
+        }
+      ]
+    },
+    {
+      "id": "code-0605",
+      "expected": "OIl33",
+      "before": "Oll33",
+      "after": "OIl33",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "O",
+          "Confidence": 0.96644574
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.8138726
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.9808972
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9998498
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9999788
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "O",
+          "Confidence": 0.6427763
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.97368073
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.93975604
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.86048234
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.99986434
+        }
+      ]
+    },
+    {
+      "id": "code-0629",
+      "expected": "10O25",
+      "before": "10025",
+      "after": "10O25",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.9999949
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999969
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.72562474
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.99999964
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.9999988
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.9956905
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9997644
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.6216177
+        },
+        {
+          "Text": "2",
+          "Confidence": 0.9999509
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.999951
+        }
+      ]
+    },
+    {
+      "id": "code-0633",
+      "expected": "0OO97",
+      "before": "00097",
+      "after": "0OO97",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.9999912
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.86395097
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.82718444
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.99999833
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.99999297
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.99662894
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.49840897
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.59049946
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.98388267
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.99927086
+        }
+      ]
+    },
+    {
+      "id": "code-0637",
+      "expected": "00l83",
+      "before": "00183",
+      "after": "00l83",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.9999392
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99992335
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.95150155
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9999975
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9999949
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.99836975
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9998441
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.6230829
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9999056
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9997602
+        }
+      ]
+    },
+    {
+      "id": "code-0641",
+      "expected": "I1l40",
+      "before": "I1140",
+      "after": "I1l40",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.91348505
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999317
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9889389
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9999988
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999956
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.9976888
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999492
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.75484216
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9992899
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.998749
+        }
+      ]
+    },
+    {
+      "id": "code-0645",
+      "expected": "1lI96",
+      "before": "11I96",
+      "after": "1lI96",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.99972194
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.8881347
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.9396319
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999975
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.9999958
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.9998727
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.67310363
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.7556849
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.97324955
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.99990976
+        }
+      ]
+    },
+    {
+      "id": "code-0649",
+      "expected": "1O059",
+      "before": "10059",
+      "after": "1O059",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.9999888
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9533417
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99999833
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.99999845
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999995
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.99928313
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.61221313
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99957687
+        },
+        {
+          "Text": "5",
+          "Confidence": 0.9985329
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.99219394
+        }
+      ]
+    },
+    {
+      "id": "code-0665",
+      "expected": "l1O96",
+      "before": "11096",
+      "after": "l1O96",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.9987741
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999888
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.86227936
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.99999845
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.9999982
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "l",
+          "Confidence": 0.9531402
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.999843
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.5273494
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.97072953
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.99856347
+        }
+      ]
+    },
+    {
+      "id": "code-0673",
+      "expected": "l0O66",
+      "before": "10066",
+      "after": "l0O66",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "1",
+          "Confidence": 0.9993143
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999956
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9115232
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.9999908
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.99999654
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "l",
+          "Confidence": 0.9228234
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9997416
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.68336743
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.9999075
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.9999217
+        }
+      ]
+    },
+    {
+      "id": "code-0701",
+      "expected": "OIl68",
+      "before": "OI168",
+      "after": "OIl68",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "O",
+          "Confidence": 0.98484784
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.9214859
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.52606297
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.9999964
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99999857
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "O",
+          "Confidence": 0.67357665
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.96500266
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.59365034
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.99991703
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99992347
+        }
+      ]
+    },
+    {
+      "id": "code-0705",
+      "expected": "llI91",
+      "before": "l1I91",
+      "after": "llI91",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "l",
+          "Confidence": 0.64701605
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.538452
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.9776715
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.99999666
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999896
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "l",
+          "Confidence": 0.85836476
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.6696936
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.9272959
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.86439914
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999505
+        }
+      ]
+    },
+    {
+      "id": "code-0713",
+      "expected": "0OO41",
+      "before": "00O41",
+      "after": "0OO41",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.9999857
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.8052446
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.5299783
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9999988
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99999785
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.99943763
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.5092141
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.52211934
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.99528533
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99995553
+        }
+      ]
+    },
+    {
+      "id": "code-0745",
+      "expected": "0O174",
+      "before": "00174",
+      "after": "0O174",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.9999714
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.50221
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999975
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9999968
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.99999857
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.99873036
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.57348317
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99995327
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9990558
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9917305
+        }
+      ]
+    }
+  ],
+  "losses": [
+    {
+      "id": "code-0006",
+      "expected": "IIO63",
+      "before": "IIO63",
+      "after": "IlO63",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.9778405
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.92791337
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.9668236
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.99985397
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.99996483
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.79158586
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.77035916
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.818454
+        },
+        {
+          "Text": "6",
+          "Confidence": 0.99994755
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.79749656
+        }
+      ]
+    },
+    {
+      "id": "code-0182",
+      "expected": "IIO81",
+      "before": "IIO81",
+      "after": "IlO81",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.98429686
+        },
+        {
+          "Text": "I",
+          "Confidence": 0.9526523
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.9385098
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99998343
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99998355
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.8945626
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.5040079
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.7994615
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9986833
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99967766
+        }
+      ]
+    },
+    {
+      "id": "code-0186",
+      "expected": "I1170",
+      "before": "I1170",
+      "after": "I117O",
+      "font": "SawarabiGothic-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.7343403
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999645
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.999997
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9999975
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.9999989
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.9189865
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9998018
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999422
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.99895906
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.65433216
+        }
+      ]
+    },
+    {
+      "id": "code-0388",
+      "expected": "01193",
+      "before": "01193",
+      "after": "O1193",
+      "font": "KleeOne-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "0",
+          "Confidence": 0.99999666
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99998784
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9999975
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.9999851
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9999968
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "O",
+          "Confidence": 0.5243727
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.99940896
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.9968522
+        },
+        {
+          "Text": "9",
+          "Confidence": 0.89772874
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9991197
+        }
+      ]
+    },
+    {
+      "id": "code-0574",
+      "expected": "Q780",
+      "before": "Q780",
+      "after": "Q78O",
+      "font": "KleeOne-Regular.ttf",
+      "size": 26,
+      "beforePieces": [
+        {
+          "Text": "Q",
+          "Confidence": 0.9999958
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.99999726
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99999905
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.99999917
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "Q",
+          "Confidence": 0.9975212
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9981117
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99964464
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.57585466
+        }
+      ]
+    },
+    {
+      "id": "code-0625",
+      "expected": "Ill73",
+      "before": "Ill73",
+      "after": "Il173",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.981756
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.47913805
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.57221246
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9999453
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9999924
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "I",
+          "Confidence": 0.9919002
+        },
+        {
+          "Text": "l",
+          "Confidence": 0.98294616
+        },
+        {
+          "Text": "1",
+          "Confidence": 0.78731525
+        },
+        {
+          "Text": "7",
+          "Confidence": 0.9996557
+        },
+        {
+          "Text": "3",
+          "Confidence": 0.9978327
+        }
+      ]
+    },
+    {
+      "id": "code-0657",
+      "expected": "OOO48",
+      "before": "OOO48",
+      "after": "O0O48",
+      "font": "KaiseiTokumin-Regular.ttf",
+      "size": 18,
+      "beforePieces": [
+        {
+          "Text": "O",
+          "Confidence": 0.51265323
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.52111065
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.527422
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.99999857
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.99999905
+        }
+      ],
+      "afterPieces": [
+        {
+          "Text": "O",
+          "Confidence": 0.63410944
+        },
+        {
+          "Text": "0",
+          "Confidence": 0.5176349
+        },
+        {
+          "Text": "O",
+          "Confidence": 0.5722207
+        },
+        {
+          "Text": "4",
+          "Confidence": 0.9763098
+        },
+        {
+          "Text": "8",
+          "Confidence": 0.9999471
+        }
+      ]
+    }
+  ]
+}

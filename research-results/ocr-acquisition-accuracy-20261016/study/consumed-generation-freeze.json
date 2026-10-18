@@ -1,0 +1,70 @@
+{
+  "recipe": "paired-native-whole-specialist-v3-v1",
+  "sourceSHA256": "aee785b0288fa0451fcf08844e7fc3c1acff8a8055d6c7354e04cd02759d5470",
+  "fonts": [
+    [
+      "BIZUDPGothic-Regular.ttf",
+      4669688,
+      "a8e73ddd5a208b2bef62c2846a87c173cd7aae101725044d9e723d361093d7db"
+    ],
+    [
+      "ZenMaruGothic-Regular.ttf",
+      3832700,
+      "d38657d92bbb343a1c6c4f9133025c7991efc52419444d16e31e3a97aaef2d9d"
+    ]
+  ],
+  "seedBase": 20261016073,
+  "exclusionsSHA256": "53d560e3dc2095ba3ebda29f0eac0d67e4a896db187d2a95351d754d584f5411",
+  "exclusionProvenance": [
+    {
+      "file": "excluded-values.json",
+      "bytes": 13747437,
+      "sha256": "292006a01c6ccb56771250d2be7b088f4c94b5e072289dc5003d365241312dcf"
+    },
+    {
+      "file": "train/manifest.json",
+      "bytes": 1588668,
+      "sha256": "96ab7536234f693959e246c26fae30dab2f45fe65722246a6c383d9fcd4ec22f"
+    },
+    {
+      "file": "development/manifest.json",
+      "bytes": 568421,
+      "sha256": "e4beaa18de3a0f705dd97079ed60d5fa13a0f090436b109b07e25391bb01afa4"
+    }
+  ],
+  "classes": [
+    "1_1",
+    "2_IT",
+    "AI_1"
+  ],
+  "days": 5,
+  "periods": 8,
+  "positiveDocuments": 4,
+  "negativeDocuments": 8,
+  "bodyFieldsPerPositive": 360,
+  "variants": [
+    "positive",
+    "missing-day",
+    "missing-class"
+  ],
+  "roomDistribution": [
+    "60% Japanese prefix plus arbitrary 2..8 ASCII code containing digit",
+    "20% code alone",
+    "20% Japanese descriptive room plus three digits"
+  ],
+  "priorPatternNotAssumed": true,
+  "plannedArms": [
+    "baseline-v1",
+    "exploratory-epoch1-manual-code-ink2-fallback-v1"
+  ],
+  "prospectiveCriteria": {
+    "maximumCERPerFont": 0.03,
+    "maximumRSSBytes": 6442450944,
+    "maximumReviewUnion": 128,
+    "completeFieldsAndSlots": true,
+    "negativeDocumentsRefused": true,
+    "pairedLiteralImprovement": "Every positive font nondecreasing exact fields and nonincreasing edits; fresh total exact strictly improves"
+  },
+  "zeroErrorsRequired": false,
+  "scope": "Consumed two-font regression and two independent fonts/new literals, no real-school PDFs. Font BIZUDPMincho reserved for future, not evaluated. First fresh result is not available to training/selection."
+}

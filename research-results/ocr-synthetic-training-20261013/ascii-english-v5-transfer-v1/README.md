@@ -1,0 +1,23 @@
+# English PP-OCRv5 transfer feasibility: closed before training
+
+No additional learning, model adoption, new train/dev corpus, final, export or activation occurred. The independent English branch would retain all438 vocabulary classes and leave Japanese primary unchanged. Parent’s previously consumed baseline was223/384 positives exact,191 correct accepts,75 wrong accepts and15/128 negative accepts; this child does not re-score or treat that development set as final.
+
+Official HF safetensors are pinned to PaddlePaddle/en_PP-OCRv5_mobile_rec_safetensors revision e4abce2bbd335f6c3eda0507b7f8e8abd5af3419, declaredApache2. Weight bytes22,465,008, SHA9dab63fb9b819082f3f06e889a3af56dc2c27155d46d8409659c869a2aece2bc. Full438 dictionary equals pinned original ONNX dictionary exactly and contains all95 printableASCII. Native ONNX revision3fafbc3b5dcf93dd72add9f48368be8a3a2cd33b/7,848,423bytes/SHA b5f833dfc5d0eb71da397b4efa06ebeee9b431b690a47d6af40d77d8eabc557f. Source and provenance stay separate from model/pixel payloads.
+
+All three reconstruction conditions preserve original512 supplied whole-line-ink+2px PNGs/sourceRect, nativeFP32 BGR48 sampler/width320..960/validWidth, full438 greedyCTC/confidence and the original ASCII-domain/min.8/padding diagnostic. They read `inputs.json` and PNGs only, without oracle or class/word routing. Every condition matches all512 decoded text/CTCinterval/floor/ASCII-domain/validWidth decisions, plus10 numeric batch/width cases. These are consumed initialization tests, not accuracy or safety qualification.
+
+|Condition|Maximum feature difference|Maximum logit difference|Maximum probability difference|Numeric gate|
+|---|---:|---:|---:|---|
+|OfficialHF with original norm epsilon|.000334859|.000745773|.0000991821|Fail|
+|Original fusedCNN + HFencoder|.000278592|.00119781|.000118092|Fail|
+|FusedCNN + native norm/query scaling order|.000284076|.00122261|.000120029|Fail|
+
+The **unchanged** initial bounds were feature<=.0001/logit<=.001/probability<=.0001. Initial failures, freezes and unjudged outputs remain intact. No relative-size argument or identical decoded text overrides the failed numeric gate.
+
+The HF class uses5,510,778 parameters and CNN reparameterization branches. Native fusedCNN copies original ONNX Conv/bias/affine tensors into a differentiable fixed-whitelist Torch DAG; its complete CNN plus encoder/fullhead has1,932,342 parameters, including1,313,184 CNN parameters. The whitelist is Conv, BN, Identity, Reshape, Add, Mul, HardSigmoid, GlobalAveragePool, Relu and AveragePool. No arbitrary code evaluation or custom Windows op is used. Original norm epsilon is firstfour1e-5/final1e-6, while the HFclass defaults allfive1e-6. The third condition also reproduces native mean/subtract/squaredmean LayerNorm and query scaling before attentionMatMul. All weights are copied, not learned.
+
+The largest numerical cases have nativeCNN values227.78/306.59 and CNN absolute differences.000232697/.000503540. Feeding **native** CNN maps to the same Torch encoder yields feature differences.0000391603/.0000599623; feeding **Torch** CNN maps yields.000284076/.000132799. All27 inspected downstreamConv/BN/classifier weight arrays have zero difference. This identifies CNN floatingpoint execution as the main difference locus in these cases; it does not establish which optimizer fusion or CPUkernel causes it, nor prove all cases behave the same way.
+
+A no-update numeric backward with batch4/8 stopped at the4GiB RSS guard. The first script did not persist per-shape measurements before the failure, so its failing shape and exact peak are unknown; failure source/log are retained and receive no timing-success credit. A separate no-update batch1/2 measurement passed fullCNN/encoder/full438CTC+teacherKL+featureMSE finite gradients with state and BNstats unchanged. CPU2 means B2/W320=.196seconds, B2/W960=.483seconds, peak1,681.230MiB. Random numerical inputs only, no optimizer, no image quality/model selection. Concurrent Linux measurements do not qualify nativeWindows or iPhone performance.
+
+Small-batch execution is feasible, but **native fidelity remains unqualified**. No new training protocol is frozen and no model learning starts. This does not demonstrate that EnglishV5 transfer lacks learning potential; it means the required faithful initialization has not met this experiment’s fixed bounds. A wider fullgraph migration or relative-tolerance replacement is not performed. Parent continues nonlearning/source/full-document research; production accuracy remains unmet. Sawarabi final is reserved, development fonts never moved into training, real school data never used, iOS unchanged and no child commit/push.

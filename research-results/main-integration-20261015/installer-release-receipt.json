@@ -1,0 +1,105 @@
+{
+  "version": "0.1.0-dev.10442",
+  "sourceCommit": "bf964d49942fff854f1252c0a4ecbf159d568c99",
+  "integratedMain": "944662b277f7d8eb31e3ce66f6a447c822144561",
+  "mainIsAncestorOfBuildSource": true,
+  "run": 38728635572,
+  "runUrl": "https://github.com/n624-dev/takupoke-win/actions/runs/38728635572",
+  "releaseUrl": "https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10442",
+  "allEightJobsSucceeded": true,
+  "publishedNormalRelease": true,
+  "verifiedAsLatest": true,
+  "tagMatchesBuildSource": true,
+  "allSixPublishedAssetsDownloadedAndHashed": true,
+  "bothZipManifestsAndAllListedPayloadHashesVerified": true,
+  "arm64HardwareExecutionVerified": false,
+  "publicAssets": [
+    {
+      "name": "SHA256SUMS.txt",
+      "size": 495,
+      "sha256": "f146621c802789c65bccea365546c60a3b5de07c23f9bd0e203ef1960d8112bc",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10442/SHA256SUMS.txt",
+      "package": null
+    },
+    {
+      "name": "INSTALL.txt",
+      "size": 4092,
+      "sha256": "858981daad019f771c1c6a96fef6ce4c9ee1a8fc768f6a69d1b8468830b03be6",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10442/INSTALL.txt",
+      "package": null
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10442-arm64-Setup.exe",
+      "size": 77439487,
+      "sha256": "82ff9e267f540afb29350e81e1d6dfed905d9bedec918226f57bd62979883f6e",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10442/takupoke-0.1.0-dev.10442-arm64-Setup.exe",
+      "package": null
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10442-arm64.zip",
+      "size": 114880391,
+      "sha256": "2f9312bd84b9f3ea11d094380657990a6042bc6d1692618ff22871aa484828b5",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10442/takupoke-0.1.0-dev.10442-arm64.zip",
+      "package": {
+        "architecture": "arm64",
+        "commit": "bf964d49942fff854f1252c0a4ecbf159d568c99",
+        "version": "0.1.0-dev.10442",
+        "verifiedPayloadFiles": 585,
+        "peArchitecturesVerified": true
+      }
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10442-x64-Setup.exe",
+      "size": 80042474,
+      "sha256": "a5af6d9a4a3ce62d04f001410ecb162f0d322e92d5b6bb29d945e42ddb0c35f4",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10442/takupoke-0.1.0-dev.10442-x64-Setup.exe",
+      "package": null
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10442-x64.zip",
+      "size": 117722933,
+      "sha256": "60fb6f15c6f543551c79c683fb123ee9250284a1c58bb0ee49f11551dde80ff4",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10442/takupoke-0.1.0-dev.10442-x64.zip",
+      "package": {
+        "architecture": "x64",
+        "commit": "bf964d49942fff854f1252c0a4ecbf159d568c99",
+        "version": "0.1.0-dev.10442",
+        "verifiedPayloadFiles": 589,
+        "peArchitecturesVerified": true
+      }
+    }
+  ],
+  "temporaryDownloadedPayloadsRemoved": true,
+  "scope": "Public distribution bytes, exact main-integrated source, full ZIP manifest hashes and PE architectures. Native installed-state UI checks are provided by the linked Windows workflow; not recognition-accuracy measurements.",
+  "installedWindowsUiChecks": [
+    990,
+    990,
+    989,
+    989,
+    989,
+    989
+  ],
+  "installedWindowsUiScenarios": [
+    "new installation",
+    "installation moved to a different folder",
+    "same-folder reinstallation",
+    "actual dev.5 same-folder upgrade",
+    "actual dev.5 different-folder upgrade",
+    "actual dev.5 upgrade with unrelated startup registration"
+  ],
+  "installedWindowsArchitecture": "x64",
+  "node20WarningCount": 0,
+  "annotationsVerified": true,
+  "mainCiRun": 38728598256,
+  "mainCiAllSevenSucceeded": true,
+  "mainCiWindowsUiChecks": 989,
+  "coreTests": 288,
+  "linuxIntegrationTests": 1093,
+  "windowsIntegrationTests": 1095,
+  "installedRawCallbackProcessesVerified": 12,
+  "installedRawCallbackExitMillisecondsRange": [
+    1064,
+    1500
+  ],
+  "installedRawCallbackDeadlineMilliseconds": 10000
+}

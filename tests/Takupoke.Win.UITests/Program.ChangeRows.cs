@@ -39,6 +39,8 @@ internal static partial class Program
             "Choosing rows alone does not save an analysis.");
         Require(ByName("除外して読み込む").Current.IsEnabled,
             "The final confirmation appears before any analysis is saved.");
+        Require(Checked(WaitElement("change-skip-row-3")) && Checked(WaitElement("change-skip-row-4")),
+            "The confirmation retains the original preview and selected rows until acceptance.");
         Invoke(ByName("除外して読み込む"));
         Wait(() => Find("change-skipped-count")?.Current.Name.Contains("103行を除外中") == true,
             "The material details show the accepted exclusion count.");
@@ -53,6 +55,58 @@ internal static partial class Program
             "The actual row exclusion survives application restart.");
         Require(ReadChangeStateAsync(root).GetAwaiter().GetResult(),
             "Restart preserves the saved analysis and matching consent.");
+        CheckDateDerivedWeekdays(executable, root);
+    }
+
+    private static void CheckDateDerivedWeekdays(string executable, string root)
+    {
+        Stop();
+        PrepareWeekdayCorrectionAsync(root).GetAwaiter().GetResult();
+        Start(executable);
+        OpenChangeDetails();
+        Invoke("correct-change-weekdays");
+        Invoke(ByName("キャンセル"));
+        Require(!ReadWeekdayCorrectionAsync(root).GetAwaiter().GetResult(),
+            "Cancelling weekday correction grants neither correction nor row exclusion.");
+        Invoke("correct-change-weekdays");
+        Invoke(ByName("この曜日で読み込む"));
+        Wait(() => ReadWeekdayCorrectionAsync(root).GetAwaiter().GetResult(),
+            "The visible confirmation saves date-derived weekdays and keeps all three populated rows.");
+        Stop();
+        Start(executable);
+        OpenChangeDetails();
+        Require(ReadWeekdayCorrectionAsync(root).GetAwaiter().GetResult(),
+            "Weekday correction survives restart independently of explicit row exclusion.");
+    }
+
+    private static async Task PrepareWeekdayCorrectionAsync(string root)
+    {
+        var path = Path.Combine(root, "fictional-weekday-correction.xlsx");
+        await File.WriteAllBytesAsync(path, FictionalChangeWorkbook.Valid());
+        await using var store = new SchoolDataStore(root, new WindowsDpapiProtector());
+        var coordinator = new MaterialCoordinator(store, new(new WindowsFileIdentity()));
+        Require((await coordinator.SelectAsync(MaterialKind.Changes, path, 2032)).Parsed,
+            "An independently created valid source is accepted before weekday correction.");
+        await File.WriteAllBytesAsync(path, FictionalChangeWorkbook.Create(sheet =>
+            sheet.Descendants(FictionalChangeWorkbook.Namespace + "row")
+                .Single(row => (string?)row.Attribute("r") == "4").Remove()));
+        Require(!(await coordinator.RefreshAsync(MaterialKind.Changes, 2032)).Parsed,
+            "A printed weekday mismatch remains unresolved before explicit confirmation.");
+    }
+
+    private static async Task<bool> ReadWeekdayCorrectionAsync(string root)
+    {
+        await using var store = new SchoolDataStore(root, new WindowsDpapiProtector());
+        var lease = await store.BeginAsync();
+        var source = (await store.ReadAsync<SourceRecord>(lease, "selection.Changes"))!;
+        var analysis = (await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes"))!;
+        Require(source.RowSkipConsent is null && analysis.RowSkipConsent is null,
+            "Date-derived weekdays never authorize or invent excluded rows.");
+        if (source.WeekdayConsent is null) return false;
+        return source.WeekdayConsent.Matches(source, 2032, MaterialCoordinator.ParserVersion(MaterialKind.Changes))
+            && analysis.DateDerivedWeekdays && analysis.OriginalId == source.Id
+            && analysis.Changes!.Select(change => change.AfterSubject)
+                .SequenceEqual(new[] { "架空科目A", "架空除外科目B", "架空科目C" });
     }
 
     private static async Task PrepareChangeRowsAsync(string root)

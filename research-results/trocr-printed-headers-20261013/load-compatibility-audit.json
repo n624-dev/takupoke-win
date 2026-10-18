@@ -1,0 +1,27 @@
+{
+  "nativeCalls": 0,
+  "readOnlySourceAudit": true,
+  "missingKeys": [
+    "encoder.pooler.dense.bias",
+    "encoder.pooler.dense.weight"
+  ],
+  "scope": "Only absent parameters belong to unused ViT pooler; encoder-decoder generation consumes encoder last_hidden_state, not pooled output. Source audit, not an additional quality trial.",
+  "runtimeSources": {
+    "VisionEncoderDecoderModel": {
+      "filename": "modeling_vision_encoder_decoder.py",
+      "sha256": "f76f8f99602f55d1be1696271f464d396b2ea5eee7b752a841975502c47278e6",
+      "relevantForwardStatements": [
+        "encoder_hidden_states = encoder_outputs[0]",
+        "encoder_last_hidden_state=encoder_outputs.last_hidden_state,"
+      ]
+    },
+    "ViTModel": {
+      "filename": "modeling_vit.py",
+      "sha256": "bbe6ee95ae860687c179b93744214d301dd860d3e5754098ab18ff831524c311",
+      "relevantForwardStatements": [
+        "pooled_output = self.pooler(sequence_output) if self.pooler is not None else None",
+        "return BaseModelOutputWithPooling(last_hidden_state=sequence_output, pooler_output=pooled_output)"
+      ]
+    }
+  }
+}

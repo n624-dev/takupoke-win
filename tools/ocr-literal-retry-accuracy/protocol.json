@@ -1,0 +1,182 @@
+{
+  "recipe": "conditional-literal-retry-native-v3",
+  "baselineCommit": "70ba342a9e6ecba7f5aff2febccc593eaea2e320",
+  "baselineProfile": "20261016-v2",
+  "fontPins": [
+    {
+      "file": "KaiseiOpti-Regular.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/kaiseiopti/KaiseiOpti-Regular.ttf",
+      "bytes": 4503024,
+      "sha256": "990cfb1fb00f311c8975c2c5f4778b2fe5462fd5eabf0884828a323dad3f18c0",
+      "family": "kaiseiopti"
+    },
+    {
+      "file": "kaiseiopti-OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/kaiseiopti/OFL.txt",
+      "bytes": 4383,
+      "sha256": "6c5445d4febbf6d84025b874a85c51e7e4bfa7495279eccdb4c317a6de857b46",
+      "family": "kaiseiopti"
+    },
+    {
+      "file": "ZenKakuGothicAntique-Medium.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/zenkakugothicantique/ZenKakuGothicAntique-Medium.ttf",
+      "bytes": 2337952,
+      "sha256": "02bdc45744fd357b04c1a8fb0f2392a8c31b3a9250acb9899252a933ec66f4b6",
+      "family": "zenkakugothicantique"
+    },
+    {
+      "file": "zenkakugothicantique-OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/295d98a7a0c17c68f1341eaeea354e7960ea70d3/ofl/zenkakugothicantique/OFL.txt",
+      "bytes": 4401,
+      "sha256": "0fac78a235c98d640cb06332eb5362c211d86fa03c011df438c35005d22ad2c7",
+      "family": "zenkakugothicantique"
+    }
+  ],
+  "fontExposure": "Both font FILES are now consumed by native V2 trial38862878122; this is a prospectively fixed NEW-LITERAL holdout in observed fonts, not an unseen-font/family/pretraining claim. Selection fixed before its generation/inference.",
+  "seedBase": 20261016411,
+  "facesize": 20,
+  "headersize": 24,
+  "classes": [
+    "1_1",
+    "2_IT",
+    "AI_1"
+  ],
+  "days": 5,
+  "periods": 8,
+  "variants": [
+    "positive",
+    "missing-day",
+    "missing-class"
+  ],
+  "totalDocuments": 6,
+  "fieldsPerPositive": 360,
+  "roomCases": [
+    "40% letter+digit codes including a predeclared 1-in-8 trailing underscore/hyphen challenge",
+    "25% true alphabetic identifiers",
+    "15% Japanese room description+digits",
+    "10% numeric-only",
+    "10% literal multiplication-symbol identifiers"
+  ],
+  "subjectCases": [
+    "80% Japanese",
+    "20% English alphabetic"
+  ],
+  "teacherCases": [
+    "70% common Japanese",
+    "20% legitimate uncommon Japanese variants",
+    "10% English alphabetic"
+  ],
+  "excludeLiteralCount": 34490,
+  "exclusionsSHA256": "f0fac8ea11d1f30974e56df3a024f309053b5bd1dae06b2d7af7d572220f3670",
+  "selectedMethod": {
+    "literal": "V3actual code retry also for alphabetic source hypotheses; changed length requires same supported actualv1 text; no symbol normalization",
+    "japanese": "Japanesev3 retry only already observed role+uncertain Japanese body, all other literals agree except observed colon variant, same count/full padding support, oldp<.8/newp>=.8; no character mapping",
+    "expertNativeFloor": 0.8,
+    "codeRejectMaximum": 0.05,
+    "weightsUnchanged": true,
+    "trainingRequired": false
+  },
+  "japaneseAlternative": {
+    "url": "https://huggingface.co/tobiichioriguchi/japan_PP-OCRv3_mobile_rec_onnx/resolve/1c772b3dd782e6ac4e61aba8bfe9683bee3334fc/inference.onnx",
+    "bytes": 10089078,
+    "sha256": "2e397c27461751befc82eca78c9b19e87322ebee34e7316468b21856f9977d64"
+  },
+  "japaneseAlternativeDictionary": {
+    "file": "model-artifacts/japanese-v3-conditional-expert/dictionary.json",
+    "bytes": 26140,
+    "sha256": "0cda0d37debec2f0481bb5bb7bf3223b159d8268d288781eef1668455a811f1d"
+  },
+  "candidateRuntimeSources": {
+    "src/Takupoke.Infrastructure/Recovery/OcrConditionalJapaneseRetry.cs": "d00138a1b415e09f0543596c5b5a95e42e061fd902241ef2860bb638dc12f164",
+    "src/Takupoke.Infrastructure/Recovery/RecoveryModelBundleStore.cs": "03faa06f766c0f8ae79425a109aea502b6e54f64a939cee03b15ac32a86a2125",
+    "src/Takupoke.Infrastructure/Recovery/RecoveryLayoutGeometry.cs": "079d6f1f1469b51a638c85b48962d67eecd6d619a5b91e6fc04a61ffca953ee2",
+    "src/Takupoke.Infrastructure/Recovery/RecoveryOcrModels.cs": "ea44f0ad70caf6cb4bad5b487bc434c3dd3f4fb673d3e407ad75175e1b23734a",
+    "src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs": "341cc6d874d95cd9dfd333e447677cf289564cc7c34ccf973eb27b63aa63c3e8",
+    "src/Takupoke.Infrastructure/Recovery/OcrDetectorProbability.cs": "f221a38e197b8a7f2d9a922219077ceb0adc97950366d093e5c9503cf0b65c71",
+    "src/Takupoke.Infrastructure/Recovery/RecoveryAuditCertification.cs": "226fea751cffb21b86165de6690bc5072bf524a6181b4d76281fcb1a06c6f904",
+    "src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs": "272ded7940fa28dac1b624660211b160df1f860ea922c932e8ff0862df2cde25",
+    "src/Takupoke.Infrastructure/Recovery/RecoveryCapturedLayoutBuilder.cs": "30b1750c3d8718ba2499282b3763fa0fe5477402a2ddc635e427e04099798882",
+    "src/Takupoke.Infrastructure/Recovery/RecoveryContainmentIndex.cs": "eb1b98d93b697abd2eba187ab4f3cea3da5c717a6d16b49ea4e0f6f215baad53",
+    "src/Takupoke.Infrastructure/Recovery/RecoveryOutputDecoder.cs": "4b0da14cef205b426ca06c8bb8453663bde0aba76d16b7fb637f960e5aee3849",
+    "src/Takupoke.Infrastructure/Recovery/OcrWhiteGapPartition.cs": "62eb957afb2b527303643d037829363abbc02776f266d069d8bc06c082c193b6",
+    "src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs": "0fc4aa380e487bcecc268fe2f7c6b008f8a2947fb6b75eae53ede2d8c54e7108",
+    "src/Takupoke.Infrastructure/Recovery/OcrInkCropFrame.cs": "683cb76baebc602b0c2fde5a1ca3b6ae35a3ff72bf2d86b6236a9f8bf3bc5069",
+    "src/Takupoke.Infrastructure/Recovery/OcrAsciiRefinement.cs": "59ba219f4969f29980bbc08140ccf226e1e33a8ecf8e22b4a2fc68df674e76e2",
+    "src/Takupoke.Infrastructure/Recovery/RecoveryCoordinator.cs": "006460ae8e2459e57bf5a426d1d2db5e25c60f7f1af9b6d7350db800138774c1",
+    "src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs": "9a95f142408a60de47965b91aa81f47a4a34e9274700d283148efea1fc927126",
+    "src/Takupoke.Infrastructure/Recovery/OcrHeaderContext.cs": "9d7e324f1e97b7331b18670dcbc1a5e77c477ba35f0918dcaa85018857fe35b6",
+    "src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs": "cd2924d80b844dc9ad5a21efec8b6af42f940358a8c437b1d01705b9a0c88b85",
+    "src/Takupoke.Infrastructure/Recovery/OnnxAsciiOcr.cs": "212be449861c5b9329d89b5584af1b95868ae3c42b81e04ef8f2740f1c6309e1",
+    "src/Takupoke.Infrastructure/Recovery/OcrLiteralCodeRetry.cs": "dc80c1ee82abb076d9926db0b5232b2920675d622b98bfff51162d74225fd3b1",
+    "src/Takupoke.Infrastructure/Recovery/OnnxJapaneseAlternative.cs": "b1f4ff2eebc2e43ea0f140bea65dd66e9078231ca0ff24b6a5dd4dcec700cbfd",
+    "src/Takupoke.Infrastructure/Recovery/OcrRoleLabelRetry.cs": "2513f067ddc67162b1fc15efca139346758b0a46bbbab3085c8292f04c1c8d10",
+    "src/Takupoke.Infrastructure/Recovery/RecoveryAnalysisConverter.cs": "12cc992411fefbe6db50f70b1d0b27f07fed5221de9c649d1ae463b7efc03354",
+    "src/Takupoke.Infrastructure/Recovery/RecoveryModelStore.cs": "ad370251951dc72467268bd8eceeaeccbddcfcb69465c841e47df9a9e825bc61"
+  },
+  "development": {
+    "nativePrimaryFixed": true,
+    "exactWindowsOriginalPages": 10,
+    "baselineFields": [
+      344,
+      355
+    ],
+    "candidateFields": [
+      349,
+      357
+    ],
+    "baselineCharacterErrors": [
+      16,
+      7
+    ],
+    "candidateCharacterErrors": [
+      11,
+      4
+    ],
+    "fullCurrentSchema4": true,
+    "controlComponents": 320,
+    "controlChanges": {
+      "gains": 1,
+      "losses": 0
+    },
+    "independentCredit": false
+  },
+  "criteria": {
+    "minimumExactFieldRate": 0.9,
+    "maximumCERPerFont": 0.03,
+    "maximumReviewUnion": 128,
+    "maximumRSSBytes": 6442450944,
+    "completeFieldsAndSlots": true,
+    "allFourNegativeAcquisitionCompleteAndRefused": true,
+    "eachFreshFontExactNondecreaseAndCoverageEditsNonincrease": true,
+    "eachControlSubgroupExactNondecreaseAndEditsNonincrease": true,
+    "strictImprovement": "Combined consumed development plus fresh paired fields must strictly improve; disclose fresh gains separately, never relabel development fresh"
+  },
+  "freshDrawsBeforeProtocol": 0,
+  "freshModelCallsBeforeProtocol": 0,
+  "zeroErrorsRequired": false,
+  "scope": "Fresh actual Windows full OCR and current-schema4 downstream, separate immutable10446 baseline/currentcandidate binaries, no oracle/roster/modeloutput repair. Preserve every failed arm. Never private school data. Registration precedes new drawing/inference.",
+  "fixture": "Original source-order exercised template: inclusive2237x415; label100,col267,top108,row102; explicit printed weekday band x100..2236 y36..70 spanning all periods; all grid endpoints inside image. Firstv1 failed fixture lacked right/bottom borders and day-span band; preserved asFAIL, excluded from qualification.",
+  "fontCoverage": "Before random sampling, rare Japanese names are limited to the font native cmap: KaiseiOpti supports7/8 (lacks高﨑), ZenKakuGothicAntiqueMedium supports8/8. Record pool; still test all other rare variants. No missing glyphs/tofu/fallback.",
+  "registrationCorrection": "Previous V2 setup failure and actual V2 quality failure remain immutable public records. New-literal V3 is fixed only after the generic source-order repair and regression tests.",
+  "sourceEvidenceFix": "Preserve exactly the selected original year/term/title source IDs in actual Sources order after the geometric-label and complete-native-line discovery passes; no literals/positions/scores/validator thresholds are changed. Native V2 had correct front-term text but failed solely on discovery order on one positive font.",
+  "failedNativeV2": {
+    "run": 38862878122,
+    "source": "65a23a7cfea42219b83ae5239bf952e7f8b520aa",
+    "exactFieldsBefore": [
+      346,
+      341
+    ],
+    "exactFieldsAfter": [
+      347,
+      341
+    ],
+    "characterErrorsAfter": [
+      13,
+      20
+    ],
+    "gains": 1,
+    "losses": 0,
+    "qualityCriteriaMet": false,
+    "reason": "Secondfont positive termEvidence order prevented manual confirmation; no activation/qualification credit."
+  }
+}

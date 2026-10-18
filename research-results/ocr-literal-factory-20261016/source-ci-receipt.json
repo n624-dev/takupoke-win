@@ -1,0 +1,61 @@
+{
+  "source": "fce8bb496bd997cf1bb4c48ecb91b222cd00abf8",
+  "run": 38867340526,
+  "allSevenSuccess": true,
+  "jobs": [
+    {
+      "id": 116863096170,
+      "name": "Public files and commit identity",
+      "node20Warnings": 0,
+      "tests": []
+    },
+    {
+      "id": 116863195275,
+      "name": "WinUI ARM64 Release build",
+      "node20Warnings": 0,
+      "tests": []
+    },
+    {
+      "id": 116863195383,
+      "name": "WinUI x64 Release build and launch",
+      "node20Warnings": 0,
+      "tests": [
+        "2026-10-16T07:31:59.2187294Z Passed 1026 Windows UI checks: hierarchical settings, desktop timetable geometry, raw and OS URI callbacks, fake OIDC verification and three datasets, failure/cancellation recovery, transient footer, persistence, colors, pointer and keyboard operations.\r"
+      ]
+    },
+    {
+      "id": 116863195404,
+      "name": "Core tests (Windows)",
+      "node20Warnings": 0,
+      "tests": [
+        "2026-10-16T07:28:54.1028042Z Total tests: 301\r",
+        "2026-10-16T07:28:54.1028210Z      Passed: 301\r",
+        "2026-10-16T07:30:12.9820726Z Total tests: 1163\r",
+        "2026-10-16T07:30:12.9820909Z      Passed: 1163\r"
+      ]
+    },
+    {
+      "id": 116863195436,
+      "name": "Core tests (Linux)",
+      "node20Warnings": 0,
+      "tests": [
+        "2026-10-16T07:28:30.5054308Z Total tests: 301",
+        "2026-10-16T07:28:30.5054570Z      Passed: 301",
+        "2026-10-16T07:29:05.6794118Z Total tests: 1161",
+        "2026-10-16T07:29:05.6794389Z      Passed: 1161"
+      ]
+    },
+    {
+      "id": 116863195451,
+      "name": "Original iOS reference comparison",
+      "node20Warnings": 0,
+      "tests": []
+    },
+    {
+      "id": 116863195851,
+      "name": "WinUI x64 Debug build",
+      "node20Warnings": 0,
+      "tests": []
+    }
+  ]
+}

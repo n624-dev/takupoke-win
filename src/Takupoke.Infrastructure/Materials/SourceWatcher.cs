@@ -13,8 +13,14 @@ public sealed class SourceWatcher : IDisposable
         lock (_gate)
         {
             if (_disposed) throw new ObjectDisposedException(nameof(SourceWatcher));
-            Clear();
-            foreach (var path in paths.Distinct(StringComparer.OrdinalIgnoreCase))
+            var selected = paths.Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
+            // Empty registration is also used for lock, expiry and user cancel.
+            if (selected.Length == 0) { _debounce?.Dispose(); _debounce = null; }
+            // A saved-data reload re-registers the same sources. Keep an already
+            // received change until it reaches the serialized refresh queue.
+            // This also lets unavailable folders be retried on registration.
+            ClearWatchers();
+            foreach (var path in selected)
             {
                 FileSystemWatcher? watcher = null;
                 try
@@ -46,7 +52,13 @@ public sealed class SourceWatcher : IDisposable
             _debounce.Change(TimeSpan.FromSeconds(2), Timeout.InfiniteTimeSpan);
         }
     }
-    private void Clear()
-    { _debounce?.Dispose(); _debounce = null; foreach (var watcher in _watchers) watcher.Dispose(); _watchers.Clear(); }
-    public void Dispose() { lock (_gate) { _disposed = true; Clear(); } }
+    private void ClearWatchers()
+    { foreach (var watcher in _watchers) watcher.Dispose(); _watchers.Clear(); }
+    public void Dispose()
+    {
+        lock (_gate)
+        {
+            _disposed = true; _debounce?.Dispose(); _debounce = null; ClearWatchers();
+        }
+    }
 }

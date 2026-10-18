@@ -1,0 +1,36 @@
+{
+  "recipe": "physical-input-framing-fresh-development-v1",
+  "generatorSHA256": "9dd9f096dcee057280f3f898e60c81a32f85f5cd140946bc486c7ce1182422e0",
+  "fonts": [
+    [
+      "shipporimincho",
+      "ShipporiMincho-Regular.ttf",
+      8677284,
+      "769b5269f0f9bc6534b352c0e6bd856a566e03ff788f107191c2d835863570b2"
+    ],
+    [
+      "mplusrounded1c",
+      "MPLUSRounded1c-Regular.ttf",
+      3389792,
+      "b75708b53e45b06d17d470aeeca5b766e3d1b3999f03f13ec4eb863ca846c14c"
+    ]
+  ],
+  "variants": [
+    "positive",
+    "missing-day",
+    "noncanonical-class"
+  ],
+  "conditions": [
+    "production",
+    "physical-input-frame"
+  ],
+  "seedBase": 910701,
+  "fullObligationsPerDocument": {
+    "pages": 5,
+    "classes": 17,
+    "slots": 680,
+    "bodyValues": 2040
+  },
+  "pixelPolicy": "All original text retained, no model feedback or CTC box clipping",
+  "scope": "New content/fonts development experiment, not independent final or deployment qualification"
+}

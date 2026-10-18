@@ -1,0 +1,108 @@
+{
+  "protocol": {
+    "namespace": "research-ascii-paddle-medium-svtr-v1/adaptation-v1",
+    "scope": "New independent fictional natural mixed-line bounded SVTR adaptation; unqualified/inactive, no final/full-document production credit",
+    "modelSha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba",
+    "initialization": "Corrected-epsilon-v2 strict fidelity before training: original CNN/local neck FP32 maps exact, Torch SVTR2blocks final norm epsilon1e-6 copied and earlier4norms1e-5; full18710 original dictionary/head, blank0, no UNK/vocabulary reduction",
+    "parameters": "Original CNN/local neck frozen in standard ONNX. Original18710 classifier W/bias frozen; SVTR890112parameters lowLR, zero-initialized ASCII95 delta18335parameters, separate reject193parameters. SVTR changes can alter every class logit; fullteacherKL and Japanese retention are explicit safeguards, not guarantees.",
+    "train": {
+      "seed": 75681123,
+      "fonts": [
+        "NotoSansJP400",
+        "NotoSerifJP400",
+        "MPLUS1p-Regular",
+        "ZenKakuGothicNew-Regular",
+        "BIZUDPMincho-Regular"
+      ],
+      "positiveCounts": {
+        "mixed_code": 1536,
+        "mixed_confusable": 1536,
+        "ascii_short": 512,
+        "japanese": 512
+      },
+      "negativeRows": 1024
+    },
+    "development": {
+      "seed": 75683127,
+      "fonts": [
+        "BIZUDGothic-Regular",
+        "KaiseiTokumin-Regular"
+      ],
+      "positiveCounts": {
+        "mixed_code": 256,
+        "mixed_confusable": 256,
+        "ascii_short": 128,
+        "japanese": 128
+      },
+      "retentionRows": 128,
+      "negativeRows": 192
+    },
+    "fontExposure": "Training5font families consumed previously. BIZUDGothic/KaiseiTokumin consumed in closed head-v1 development; here new independent literal/render seeds, not unused-font or heldout-final claim. Sawarabi Gothic/Mincho remain reserved final and unrendered/uninferred by this experiment.",
+    "source": "Fresh nature-phrase Japanese mixed with arbitrary codes/ASCII/case/I-l-1/O-0, shared baseline/relative height/internal gaps; no school subjects/names/rooms or main-doc label targets. Prior literals including closed mixed-head-v1 train/dev excluded; no candidate/output repair, dictionary routing or class whitelist.",
+    "preprocessing": "All original RGB nonwhite bbox+2originalpx, preserve all supplied ink/CJK, native BGR48 original-center bilinear uint8round normalized0pad width320..960; inputs/three map caches FP32 throughout. Parent minWidth160 experiment is separate, not used here.",
+    "rendering": "14..28logicalpx density1/2/4 probabilities.4/.4/.2, black/navy/gray/green and10percent mild blur, paired confusables/case share font/renderseed/prefix",
+    "negatives": "Measured real ink deletion through20..40percent inkheight boundary clip or small interior erasure; duplicated multiline/random strokes/blank. Damaged/multiline/noise do not receive guessed lost-text CTC targets. Blank receives empty CTC target to preserve empty decoding.",
+    "cache": "Original standard ONNX observes pre-global-SVTR context192x1xT, shortcut192x1xT, and original final teacher featuresTx192. No saved normalized or feature/logit FP16. Full18710 teacher distribution recomputed from exact original features/head each training batch.",
+    "training": {
+      "seed": 75685131,
+      "threads": 2,
+      "batchSize": 16,
+      "epochs": 8,
+      "evaluateEpochs": [
+        2,
+        4,
+        8
+      ],
+      "svtrLearningRate": 3e-05,
+      "asciiDeltaLearningRate": 0.0003,
+      "rejectLearningRate": 0.001,
+      "teacherKlWeight": 0.2,
+      "teacherFeatureMseWeight": 0.02,
+      "rejectBceWeight": 0.5,
+      "weightDecay": 0.0001,
+      "gradientClip": 5.0,
+      "maximumTrainingSeconds": 1800,
+      "maximumCacheSeconds": 1800,
+      "maximumRssMiB": 4096,
+      "minimumFreeDiskGiB": 2,
+      "additionalDiskBudgetGiB": 1.25
+    },
+    "batching": "Bucket exact original native T, shuffle batches/rows deterministically. No added sequence padding or attention mask; original unmasked padding in each individual input is retained. This avoids artificial batch padding changing global self-attention.",
+    "loss": "Full18710 CTC and complete full18710 teacherKL; no static OTHER/logit compression from frozen-feature head stage. Teacher-feature MSE retention. Valid-source temporal-center mean only for reject head; recognition uses all original native T.",
+    "acceptance": "Uncalibrated diagnostic only: nonempty, minimum emitted CTCconfidence>=.8, all intervals within original validWidth; trained additionally rejectProbability<=.05. No clamp or output repair. Source script/full-ink/cell ownership proof remains independent.",
+    "initializationDevelopmentGate": "Before optimizer starts, original vs reconstructed-untrained fullhead must have identical text/CTC intervals/floor.8+validWidth decisions for every newdev row. Numeric maxima recorded; no confidence threshold adjustment if it fails.",
+    "selection": "Original fallback included; trained eligible only if mixed exact>=original, incorrectAccepted<=original, negativeAccepted<=original, original-correct Japanese-retention regressions0. Max correctAccepted, then exact, lower incorrect/negativeAccepted, lower CER, earlier epoch. Only completed fixed evaluated epochs count; partial epochs never candidates.",
+    "continuationGate": "Selected trained, rawexact>=97percent, correctAccepted>=90percent, wrongAccepted0, negativeAccepted0, each devfont rawexact>=95percent, zero original-correct Japanese-retention regressions. Passing only authorizes prospective unused-final/portable stage; never qualifies model by component results.",
+    "sourceProof": "Postselection reuse of64 consumed identical-pixel alias/whole-prefix-loss controls only, not targets/selection/final. Contradictory provenance cannot be resolved by crop classifier; independent source/ownership proof required.",
+    "final": "Reserved Sawarabi2fonts not opened unless continuation gate passes and separate final/full-document protocol fixed. iOS untouched. Standard ONNX/CoreML later only if warranted.",
+    "contradictionAudit": "Before optimizer, group positive training rows by exact provided-PNG hash and native FP32 input-tensor hash; any hash with different literal targets excludes all colliding rows from optimization, without guessed target or false reject label. Preserve count/provenance separately. Newdev collisions stay unmodified diagnostic controls; no oracle repairs/routing. CTC minimum-frame feasibility audited."
+  },
+  "protocolSha256": "9ffc2c934300a005ab16903233441ef9fa43f91057b9281c7018b70b4f1768c2",
+  "sources": {
+    "adapt_protocol.json": "9ffc2c934300a005ab16903233441ef9fa43f91057b9281c7018b70b4f1768c2",
+    "adapt_data.py": "a75a25d5e574b5ea40f1402ce3832e226543f034c1f1ae1ec183df59c8f2e722",
+    "adapt_model.py": "1523858310d84bcdc9fcbdbf9bc3f16af5ae972e362c02c410a33d8056b8df5e",
+    "adapt_train.py": "ed3941a6390c000f742772f55d472ecda1125b1f902012333bf4ea9539252cb8",
+    "svtr_exact.py": "2e63b78aae0a47288f63fcdabe2a17a9b7611faeb9414156812058ae0d686a52",
+    "reproduce_v2.py": "1881a50839c6aa4096a4f4f3d885d2b67ce6203b66adef1586ebdfd63aa50e6d"
+  },
+  "preprocessSha256": "98c1704840569316f90128de69f36004447c6256b5dd9e43767ee90a3fd19098",
+  "modelSha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba",
+  "dictionarySha256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f",
+  "fidelitySha256": "d7fb9acd5a28fd832e84f6c57c8f5374cd880bc0dd1a022663d7a78004b1e62e",
+  "originalSvtrStateSha256": "71954be5fa861296231b320e910b09e380896100bfd427e84f5e030ba8f4be60",
+  "observerSha256": "5a8b591e2b5184869ae8cef00cdc09f66297b20a8eab9369363f9ac5964ace45",
+  "fontHashes": {
+    "NotoSansJP400": "54aba28468f275bc372eda5f29b202c0d9e7b9ba2bc18a53a4c72c481c75cf9f",
+    "NotoSerifJP400": "2b127545ad3dba023d255733015059e550d9dbcd04c980a80021dc8ea666e813",
+    "MPLUS1p-Regular": "2f294ad496432b1608f070d310e3aa2adcf1de4af429f4901df97ec4bd361ed1",
+    "ZenKakuGothicNew-Regular": "b840cd07a67d89cacca44249ae49aa99ee7640eb5ce623be8d8983d6aabac801",
+    "BIZUDPMincho-Regular": "02e07546c51503acb864004b663f1762f099d8fbe1af7d619b185568568101ef",
+    "BIZUDGothic-Regular": "709fcd41e3209fb765da750472f55ccdf925653e9fa7e1eb007cb65c8f749c75",
+    "KaiseiTokumin-Regular": "3fbdbec539369aed11bb1fa0cdda1d19ea246e795107357383dfa561848a427d"
+  },
+  "exclusionSha256": "5781f6a891612bab2c4c87d32011042a192100fae4ebfa9d53e6b87409f195cf",
+  "freeDiskGiBBeforeCorpus": 6.447601318359375,
+  "trainableParameters": 908640,
+  "finalOpened": false
+}

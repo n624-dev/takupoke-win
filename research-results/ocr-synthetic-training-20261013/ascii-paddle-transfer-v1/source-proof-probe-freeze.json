@@ -1,0 +1,1920 @@
+{
+  "scope": "Unscored contradiction controls only; not training targets, selection, independent final or production credit",
+  "rows": [
+    {
+      "id": "alias-000-ascii",
+      "pair": "alias-000",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-000-ascii.png",
+      "pngSha256": "846f874de7d3acc3b6eef71191e160ce0ebd72071fcb61f2d3706394080ed5a2",
+      "framedRgbSha256": "f7ddd2982698b349c57272718da8cadf7ba3226337406fc1b401aa0da797659d",
+      "source": {
+        "crop": [
+          7,
+          26,
+          37,
+          59
+        ],
+        "originalWidth": 45,
+        "originalHeight": 79,
+        "nonwhiteSamples": 293,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-000-cyrillic",
+      "pair": "alias-000",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-000-cyrillic.png",
+      "pngSha256": "846f874de7d3acc3b6eef71191e160ce0ebd72071fcb61f2d3706394080ed5a2",
+      "framedRgbSha256": "f7ddd2982698b349c57272718da8cadf7ba3226337406fc1b401aa0da797659d",
+      "source": {
+        "crop": [
+          7,
+          26,
+          37,
+          59
+        ],
+        "originalWidth": 45,
+        "originalHeight": 79,
+        "nonwhiteSamples": 293,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-001-ascii",
+      "pair": "alias-001",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-001-ascii.png",
+      "pngSha256": "25492416b22c24007521b24b1455a50e8cbcddad26a3952157026efdcb06b5dc",
+      "framedRgbSha256": "0f2595b28b1e47e50c223afb529b6c500e84e64fb57a9b4c24ff42228e897edc",
+      "source": {
+        "crop": [
+          10,
+          25,
+          36,
+          60
+        ],
+        "originalWidth": 46,
+        "originalHeight": 79,
+        "nonwhiteSamples": 249,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-001-cyrillic",
+      "pair": "alias-001",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-001-cyrillic.png",
+      "pngSha256": "25492416b22c24007521b24b1455a50e8cbcddad26a3952157026efdcb06b5dc",
+      "framedRgbSha256": "0f2595b28b1e47e50c223afb529b6c500e84e64fb57a9b4c24ff42228e897edc",
+      "source": {
+        "crop": [
+          10,
+          25,
+          36,
+          60
+        ],
+        "originalWidth": 46,
+        "originalHeight": 79,
+        "nonwhiteSamples": 249,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-002-ascii",
+      "pair": "alias-002",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-002-ascii.png",
+      "pngSha256": "79061586f8d1fb71de867cbe328f6a7c1911cea3bca6b02172f80a3f6f66f0a7",
+      "framedRgbSha256": "a1b224860187958bc30ee0295b3679b61424c55e833c353db145783415c88b44",
+      "source": {
+        "crop": [
+          12,
+          26,
+          34,
+          59
+        ],
+        "originalWidth": 44,
+        "originalHeight": 79,
+        "nonwhiteSamples": 230,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-002-cyrillic",
+      "pair": "alias-002",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-002-cyrillic.png",
+      "pngSha256": "79061586f8d1fb71de867cbe328f6a7c1911cea3bca6b02172f80a3f6f66f0a7",
+      "framedRgbSha256": "a1b224860187958bc30ee0295b3679b61424c55e833c353db145783415c88b44",
+      "source": {
+        "crop": [
+          12,
+          26,
+          34,
+          59
+        ],
+        "originalWidth": 44,
+        "originalHeight": 79,
+        "nonwhiteSamples": 230,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-003-ascii",
+      "pair": "alias-003",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-003-ascii.png",
+      "pngSha256": "bb1e4b4535ea85958376b931b20f73490ba8ec369ff7435de399f5eee4131085",
+      "framedRgbSha256": "d7ef9b044266b8210360676a084d1ecbf347a2ecf6e05601cd466ec6c280e8e2",
+      "source": {
+        "crop": [
+          12,
+          26,
+          37,
+          59
+        ],
+        "originalWidth": 50,
+        "originalHeight": 79,
+        "nonwhiteSamples": 271,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-003-cyrillic",
+      "pair": "alias-003",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-003-cyrillic.png",
+      "pngSha256": "bb1e4b4535ea85958376b931b20f73490ba8ec369ff7435de399f5eee4131085",
+      "framedRgbSha256": "d7ef9b044266b8210360676a084d1ecbf347a2ecf6e05601cd466ec6c280e8e2",
+      "source": {
+        "crop": [
+          12,
+          26,
+          37,
+          59
+        ],
+        "originalWidth": 50,
+        "originalHeight": 79,
+        "nonwhiteSamples": 271,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-004-ascii",
+      "pair": "alias-004",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-004-ascii.png",
+      "pngSha256": "6660a93dbc28dc4bdbba17da8593e48e2ed536cad0aad56cabd90ece0831a9cf",
+      "framedRgbSha256": "9aac52f4717cc0da15b6ddac7d01404b07c45078156be25ea69ff1e2b7020289",
+      "source": {
+        "crop": [
+          10,
+          25,
+          39,
+          60
+        ],
+        "originalWidth": 50,
+        "originalHeight": 79,
+        "nonwhiteSamples": 341,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-004-cyrillic",
+      "pair": "alias-004",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-004-cyrillic.png",
+      "pngSha256": "6660a93dbc28dc4bdbba17da8593e48e2ed536cad0aad56cabd90ece0831a9cf",
+      "framedRgbSha256": "9aac52f4717cc0da15b6ddac7d01404b07c45078156be25ea69ff1e2b7020289",
+      "source": {
+        "crop": [
+          10,
+          25,
+          39,
+          60
+        ],
+        "originalWidth": 50,
+        "originalHeight": 79,
+        "nonwhiteSamples": 341,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-005-ascii",
+      "pair": "alias-005",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-005-ascii.png",
+      "pngSha256": "438561a2d95e96c0f01e392dec83dd80a1564bb4967b7eca916e3058845bdda8",
+      "framedRgbSha256": "defc5939281a734602dbea000697de0093406da195c256c1c7b471f6967fff45",
+      "source": {
+        "crop": [
+          12,
+          26,
+          35,
+          59
+        ],
+        "originalWidth": 46,
+        "originalHeight": 79,
+        "nonwhiteSamples": 255,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-005-cyrillic",
+      "pair": "alias-005",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-005-cyrillic.png",
+      "pngSha256": "438561a2d95e96c0f01e392dec83dd80a1564bb4967b7eca916e3058845bdda8",
+      "framedRgbSha256": "defc5939281a734602dbea000697de0093406da195c256c1c7b471f6967fff45",
+      "source": {
+        "crop": [
+          12,
+          26,
+          35,
+          59
+        ],
+        "originalWidth": 46,
+        "originalHeight": 79,
+        "nonwhiteSamples": 255,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-006-ascii",
+      "pair": "alias-006",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-006-ascii.png",
+      "pngSha256": "fbcbfa1df1c8f761d56dc7417322122e735896f0c9aa0d862a0f436daf413544",
+      "framedRgbSha256": "98edc00d06045fba9f4ae8b1816ef092221864f4d8244534f53fb001283eed51",
+      "source": {
+        "crop": [
+          8,
+          26,
+          35,
+          59
+        ],
+        "originalWidth": 43,
+        "originalHeight": 79,
+        "nonwhiteSamples": 288,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-006-cyrillic",
+      "pair": "alias-006",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-006-cyrillic.png",
+      "pngSha256": "fbcbfa1df1c8f761d56dc7417322122e735896f0c9aa0d862a0f436daf413544",
+      "framedRgbSha256": "98edc00d06045fba9f4ae8b1816ef092221864f4d8244534f53fb001283eed51",
+      "source": {
+        "crop": [
+          8,
+          26,
+          35,
+          59
+        ],
+        "originalWidth": 43,
+        "originalHeight": 79,
+        "nonwhiteSamples": 288,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-007-ascii",
+      "pair": "alias-007",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-007-ascii.png",
+      "pngSha256": "efa8f7bc14600f2b523d44e15845fe3ab53ac2932958ac2d76cdc242df1a5639",
+      "framedRgbSha256": "15e51281c3c31ecd26d0e820b976b6afc643285e63c5ff1b51646d53c2f66c7e",
+      "source": {
+        "crop": [
+          10,
+          33,
+          31,
+          60
+        ],
+        "originalWidth": 43,
+        "originalHeight": 79,
+        "nonwhiteSamples": 247,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-007-cyrillic",
+      "pair": "alias-007",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-007-cyrillic.png",
+      "pngSha256": "efa8f7bc14600f2b523d44e15845fe3ab53ac2932958ac2d76cdc242df1a5639",
+      "framedRgbSha256": "15e51281c3c31ecd26d0e820b976b6afc643285e63c5ff1b51646d53c2f66c7e",
+      "source": {
+        "crop": [
+          10,
+          33,
+          31,
+          60
+        ],
+        "originalWidth": 43,
+        "originalHeight": 79,
+        "nonwhiteSamples": 247,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-008-ascii",
+      "pair": "alias-008",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-008-ascii.png",
+      "pngSha256": "4edcd7f85b03e97bc474f54980a82587649b2cf186a33b1273fdee406760c494",
+      "framedRgbSha256": "1cb66fabbbc091c1783ec09c1a47eb357a4684aaa66e0019173426f475d8ff74",
+      "source": {
+        "crop": [
+          10,
+          33,
+          32,
+          60
+        ],
+        "originalWidth": 41,
+        "originalHeight": 79,
+        "nonwhiteSamples": 187,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-008-cyrillic",
+      "pair": "alias-008",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-008-cyrillic.png",
+      "pngSha256": "4edcd7f85b03e97bc474f54980a82587649b2cf186a33b1273fdee406760c494",
+      "framedRgbSha256": "1cb66fabbbc091c1783ec09c1a47eb357a4684aaa66e0019173426f475d8ff74",
+      "source": {
+        "crop": [
+          10,
+          33,
+          32,
+          60
+        ],
+        "originalWidth": 41,
+        "originalHeight": 79,
+        "nonwhiteSamples": 187,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-009-ascii",
+      "pair": "alias-009",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-009-ascii.png",
+      "pngSha256": "771303ed195743f16bd025f0d28302a476938d8269ff6a1586353d11e43237d2",
+      "framedRgbSha256": "66072d2c1062fb52dc37463e4174d525f7cb876523e3da6ae6044b3a698db84d",
+      "source": {
+        "crop": [
+          10,
+          33,
+          33,
+          60
+        ],
+        "originalWidth": 43,
+        "originalHeight": 79,
+        "nonwhiteSamples": 253,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-009-cyrillic",
+      "pair": "alias-009",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-009-cyrillic.png",
+      "pngSha256": "771303ed195743f16bd025f0d28302a476938d8269ff6a1586353d11e43237d2",
+      "framedRgbSha256": "66072d2c1062fb52dc37463e4174d525f7cb876523e3da6ae6044b3a698db84d",
+      "source": {
+        "crop": [
+          10,
+          33,
+          33,
+          60
+        ],
+        "originalWidth": 43,
+        "originalHeight": 79,
+        "nonwhiteSamples": 253,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-010-ascii",
+      "pair": "alias-010",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-010-ascii.png",
+      "pngSha256": "dfc2ac8252333dae73387d38fe320319403cc366fcd4e4df2b21c506ad80400b",
+      "framedRgbSha256": "02936ca782354ab2f3c8069754446b8f983258eab28099ce842a0f5c9f8c2474",
+      "source": {
+        "crop": [
+          10,
+          33,
+          34,
+          60
+        ],
+        "originalWidth": 45,
+        "originalHeight": 79,
+        "nonwhiteSamples": 256,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-010-cyrillic",
+      "pair": "alias-010",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-010-cyrillic.png",
+      "pngSha256": "dfc2ac8252333dae73387d38fe320319403cc366fcd4e4df2b21c506ad80400b",
+      "framedRgbSha256": "02936ca782354ab2f3c8069754446b8f983258eab28099ce842a0f5c9f8c2474",
+      "source": {
+        "crop": [
+          10,
+          33,
+          34,
+          60
+        ],
+        "originalWidth": 45,
+        "originalHeight": 79,
+        "nonwhiteSamples": 256,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-011-ascii",
+      "pair": "alias-011",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-011-ascii.png",
+      "pngSha256": "e20d153239c060d271f24a8782272510473e7d3f5411cd1a41528392c9dc1d80",
+      "framedRgbSha256": "bd5ee19d4494ac7db2e8a8cd6a3bc7411dc54403b59b66da117987045f541f55",
+      "source": {
+        "crop": [
+          12,
+          33,
+          35,
+          68
+        ],
+        "originalWidth": 45,
+        "originalHeight": 79,
+        "nonwhiteSamples": 293,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-011-cyrillic",
+      "pair": "alias-011",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-011-cyrillic.png",
+      "pngSha256": "e20d153239c060d271f24a8782272510473e7d3f5411cd1a41528392c9dc1d80",
+      "framedRgbSha256": "bd5ee19d4494ac7db2e8a8cd6a3bc7411dc54403b59b66da117987045f541f55",
+      "source": {
+        "crop": [
+          12,
+          33,
+          35,
+          68
+        ],
+        "originalWidth": 45,
+        "originalHeight": 79,
+        "nonwhiteSamples": 293,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-012-ascii",
+      "pair": "alias-012",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-012-ascii.png",
+      "pngSha256": "f4982fa06d5b63ef7a9e68407a5a60250b809aa863d689ef7e6fad4615a97f23",
+      "framedRgbSha256": "f4634a5a84b88f9d59549d1759839e0eaf2ebdaea00f1736692d919b51eb6d6f",
+      "source": {
+        "crop": [
+          8,
+          34,
+          32,
+          59
+        ],
+        "originalWidth": 40,
+        "originalHeight": 79,
+        "nonwhiteSamples": 203,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-012-cyrillic",
+      "pair": "alias-012",
+      "kind": "scriptAlias",
+      "font": "NotoSansJP400",
+      "file": "alias-012-cyrillic.png",
+      "pngSha256": "f4982fa06d5b63ef7a9e68407a5a60250b809aa863d689ef7e6fad4615a97f23",
+      "framedRgbSha256": "f4634a5a84b88f9d59549d1759839e0eaf2ebdaea00f1736692d919b51eb6d6f",
+      "source": {
+        "crop": [
+          8,
+          34,
+          32,
+          59
+        ],
+        "originalWidth": 40,
+        "originalHeight": 79,
+        "nonwhiteSamples": 203,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "prefix-NotoSansJP400-complete",
+      "pair": "prefix-NotoSansJP400",
+      "kind": "wholePrefixRemoved",
+      "font": "NotoSansJP400",
+      "file": "prefix-NotoSansJP400-complete.png",
+      "pngSha256": "ec794a311a8fbf83be9052fe4e02722530fc6252bfba84fa57e75d9fe059e9eb",
+      "framedRgbSha256": "534f9e84e072d370f9f7b1fd62d80fe311ee49a4a23d1a2646f0e6552999672f",
+      "source": {
+        "crop": [
+          19,
+          41,
+          136,
+          105
+        ],
+        "originalWidth": 154,
+        "originalHeight": 126,
+        "nonwhiteSamples": 1909,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "completeTail",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "Complete tail may be recognized; original-prefix loss must be refused from source geometry/ink ownership. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "prefix-NotoSansJP400-lost-prefix",
+      "pair": "prefix-NotoSansJP400",
+      "kind": "wholePrefixRemoved",
+      "font": "NotoSansJP400",
+      "file": "prefix-NotoSansJP400-lost-prefix.png",
+      "pngSha256": "ec794a311a8fbf83be9052fe4e02722530fc6252bfba84fa57e75d9fe059e9eb",
+      "framedRgbSha256": "534f9e84e072d370f9f7b1fd62d80fe311ee49a4a23d1a2646f0e6552999672f",
+      "source": {
+        "crop": [
+          19,
+          41,
+          136,
+          105
+        ],
+        "originalWidth": 154,
+        "originalHeight": 126,
+        "nonwhiteSamples": 1909,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "originalPrefixFullyOutsideCrop",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "Complete tail may be recognized; original-prefix loss must be refused from source geometry/ink ownership. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-014-ascii",
+      "pair": "alias-014",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-014-ascii.png",
+      "pngSha256": "e3a367b77f7323699948267f1b60ca5d7c29cc16184b937058fc502f73ff9e55",
+      "framedRgbSha256": "bdb13e5573c3626a960a285c4e81d95b80e8815190f042021be0e1b8e25154a6",
+      "source": {
+        "crop": [
+          9,
+          19,
+          41,
+          52
+        ],
+        "originalWidth": 49,
+        "originalHeight": 68,
+        "nonwhiteSamples": 253,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-014-cyrillic",
+      "pair": "alias-014",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-014-cyrillic.png",
+      "pngSha256": "e3a367b77f7323699948267f1b60ca5d7c29cc16184b937058fc502f73ff9e55",
+      "framedRgbSha256": "bdb13e5573c3626a960a285c4e81d95b80e8815190f042021be0e1b8e25154a6",
+      "source": {
+        "crop": [
+          9,
+          19,
+          41,
+          52
+        ],
+        "originalWidth": 49,
+        "originalHeight": 68,
+        "nonwhiteSamples": 253,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-015-ascii",
+      "pair": "alias-015",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-015-ascii.png",
+      "pngSha256": "73879244d363d329b65e15967eb8806445561f677738af2e540e9815cdf1a9e8",
+      "framedRgbSha256": "ef25ddf2bcabd74335b47745116ed100cafd56e41165e04fb15774abf4050293",
+      "source": {
+        "crop": [
+          10,
+          18,
+          38,
+          53
+        ],
+        "originalWidth": 48,
+        "originalHeight": 68,
+        "nonwhiteSamples": 235,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-015-cyrillic",
+      "pair": "alias-015",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-015-cyrillic.png",
+      "pngSha256": "73879244d363d329b65e15967eb8806445561f677738af2e540e9815cdf1a9e8",
+      "framedRgbSha256": "ef25ddf2bcabd74335b47745116ed100cafd56e41165e04fb15774abf4050293",
+      "source": {
+        "crop": [
+          10,
+          18,
+          38,
+          53
+        ],
+        "originalWidth": 48,
+        "originalHeight": 68,
+        "nonwhiteSamples": 235,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-016-ascii",
+      "pair": "alias-016",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-016-ascii.png",
+      "pngSha256": "2a500e61b6c5d4f321822156879af151e744dbb0dd9a789d0fac562547e073c7",
+      "framedRgbSha256": "54235a2af1d808f9add66fabe1d9620b5ea3849a0725e905171ef44bdd8b6108",
+      "source": {
+        "crop": [
+          9,
+          19,
+          36,
+          52
+        ],
+        "originalWidth": 47,
+        "originalHeight": 68,
+        "nonwhiteSamples": 276,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-016-cyrillic",
+      "pair": "alias-016",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-016-cyrillic.png",
+      "pngSha256": "2a500e61b6c5d4f321822156879af151e744dbb0dd9a789d0fac562547e073c7",
+      "framedRgbSha256": "54235a2af1d808f9add66fabe1d9620b5ea3849a0725e905171ef44bdd8b6108",
+      "source": {
+        "crop": [
+          9,
+          19,
+          36,
+          52
+        ],
+        "originalWidth": 47,
+        "originalHeight": 68,
+        "nonwhiteSamples": 276,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-017-ascii",
+      "pair": "alias-017",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-017-ascii.png",
+      "pngSha256": "d5a6986a68d21980305c712b31087d1c5d57f4d995e7ae69928bca1cd7d73d7d",
+      "framedRgbSha256": "ed4c9b98f7d04f6cdad13ec9358a26a23addb120f1b7141d8f1287069e641e19",
+      "source": {
+        "crop": [
+          9,
+          19,
+          44,
+          52
+        ],
+        "originalWidth": 55,
+        "originalHeight": 68,
+        "nonwhiteSamples": 328,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-017-cyrillic",
+      "pair": "alias-017",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-017-cyrillic.png",
+      "pngSha256": "d5a6986a68d21980305c712b31087d1c5d57f4d995e7ae69928bca1cd7d73d7d",
+      "framedRgbSha256": "ed4c9b98f7d04f6cdad13ec9358a26a23addb120f1b7141d8f1287069e641e19",
+      "source": {
+        "crop": [
+          9,
+          19,
+          44,
+          52
+        ],
+        "originalWidth": 55,
+        "originalHeight": 68,
+        "nonwhiteSamples": 328,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-018-ascii",
+      "pair": "alias-018",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-018-ascii.png",
+      "pngSha256": "f991f17a137b8ec394b12acfc48aec041e51c150cc2b29c11800287a6bc8b17c",
+      "framedRgbSha256": "03d4fec55bdffbb72de659a4205b40842186a5620bdff70d092302c962aa03dd",
+      "source": {
+        "crop": [
+          10,
+          18,
+          40,
+          53
+        ],
+        "originalWidth": 51,
+        "originalHeight": 68,
+        "nonwhiteSamples": 288,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-018-cyrillic",
+      "pair": "alias-018",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-018-cyrillic.png",
+      "pngSha256": "f991f17a137b8ec394b12acfc48aec041e51c150cc2b29c11800287a6bc8b17c",
+      "framedRgbSha256": "03d4fec55bdffbb72de659a4205b40842186a5620bdff70d092302c962aa03dd",
+      "source": {
+        "crop": [
+          10,
+          18,
+          40,
+          53
+        ],
+        "originalWidth": 51,
+        "originalHeight": 68,
+        "nonwhiteSamples": 288,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-019-ascii",
+      "pair": "alias-019",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-019-ascii.png",
+      "pngSha256": "360ce9a98c402509be4287660a9af61ebe79c9f20d7104eff229d54478f61548",
+      "framedRgbSha256": "438b768f3ccebf0021a86641538951b0cda8e5bcd52a58dc103d1a4de7f413a4",
+      "source": {
+        "crop": [
+          9,
+          19,
+          36,
+          52
+        ],
+        "originalWidth": 46,
+        "originalHeight": 68,
+        "nonwhiteSamples": 249,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-019-cyrillic",
+      "pair": "alias-019",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-019-cyrillic.png",
+      "pngSha256": "360ce9a98c402509be4287660a9af61ebe79c9f20d7104eff229d54478f61548",
+      "framedRgbSha256": "438b768f3ccebf0021a86641538951b0cda8e5bcd52a58dc103d1a4de7f413a4",
+      "source": {
+        "crop": [
+          9,
+          19,
+          36,
+          52
+        ],
+        "originalWidth": 46,
+        "originalHeight": 68,
+        "nonwhiteSamples": 249,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-020-ascii",
+      "pair": "alias-020",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-020-ascii.png",
+      "pngSha256": "5b9bb8030c42012bd328af3f22f7e86d644fb12e6bec08e50972520cd7164660",
+      "framedRgbSha256": "2066667d90ea04f4d2843d21efa68fc7db14e02967e45d0c961a4d26b4d2c73d",
+      "source": {
+        "crop": [
+          9,
+          19,
+          40,
+          52
+        ],
+        "originalWidth": 48,
+        "originalHeight": 68,
+        "nonwhiteSamples": 280,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-020-cyrillic",
+      "pair": "alias-020",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-020-cyrillic.png",
+      "pngSha256": "5b9bb8030c42012bd328af3f22f7e86d644fb12e6bec08e50972520cd7164660",
+      "framedRgbSha256": "2066667d90ea04f4d2843d21efa68fc7db14e02967e45d0c961a4d26b4d2c73d",
+      "source": {
+        "crop": [
+          9,
+          19,
+          40,
+          52
+        ],
+        "originalWidth": 48,
+        "originalHeight": 68,
+        "nonwhiteSamples": 280,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-021-ascii",
+      "pair": "alias-021",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-021-ascii.png",
+      "pngSha256": "fb8fddb7e35e5c93b08c051b841ac81b77a7417d87137dbf09032126f7e0f5d3",
+      "framedRgbSha256": "ba3d5bcc1cfde94ba64549525e64de3a82c0193f7504d0cd7bbfc312892c1369",
+      "source": {
+        "crop": [
+          10,
+          27,
+          35,
+          53
+        ],
+        "originalWidth": 43,
+        "originalHeight": 68,
+        "nonwhiteSamples": 221,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-021-cyrillic",
+      "pair": "alias-021",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-021-cyrillic.png",
+      "pngSha256": "fb8fddb7e35e5c93b08c051b841ac81b77a7417d87137dbf09032126f7e0f5d3",
+      "framedRgbSha256": "ba3d5bcc1cfde94ba64549525e64de3a82c0193f7504d0cd7bbfc312892c1369",
+      "source": {
+        "crop": [
+          10,
+          27,
+          35,
+          53
+        ],
+        "originalWidth": 43,
+        "originalHeight": 68,
+        "nonwhiteSamples": 221,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-022-ascii",
+      "pair": "alias-022",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-022-ascii.png",
+      "pngSha256": "6d8182c8f3bf7dd0a5f40bd2f171908215e6904baf2e21c7c236c22f36881f95",
+      "framedRgbSha256": "a04cda81540110783722441de95cb523b799d95164d683e02c281e969458d4f5",
+      "source": {
+        "crop": [
+          10,
+          27,
+          32,
+          53
+        ],
+        "originalWidth": 42,
+        "originalHeight": 68,
+        "nonwhiteSamples": 165,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-022-cyrillic",
+      "pair": "alias-022",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-022-cyrillic.png",
+      "pngSha256": "6d8182c8f3bf7dd0a5f40bd2f171908215e6904baf2e21c7c236c22f36881f95",
+      "framedRgbSha256": "a04cda81540110783722441de95cb523b799d95164d683e02c281e969458d4f5",
+      "source": {
+        "crop": [
+          10,
+          27,
+          32,
+          53
+        ],
+        "originalWidth": 42,
+        "originalHeight": 68,
+        "nonwhiteSamples": 165,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-023-ascii",
+      "pair": "alias-023",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-023-ascii.png",
+      "pngSha256": "fd49d7639bee75f9a1cf15ada437390941955a9b1c8cb5fcc1771aac4c3b55ee",
+      "framedRgbSha256": "bcb63f967145497713a5114c7312d174a6b45529844be299f0eb9f9aeef56935",
+      "source": {
+        "crop": [
+          10,
+          27,
+          33,
+          53
+        ],
+        "originalWidth": 42,
+        "originalHeight": 68,
+        "nonwhiteSamples": 220,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-023-cyrillic",
+      "pair": "alias-023",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-023-cyrillic.png",
+      "pngSha256": "fd49d7639bee75f9a1cf15ada437390941955a9b1c8cb5fcc1771aac4c3b55ee",
+      "framedRgbSha256": "bcb63f967145497713a5114c7312d174a6b45529844be299f0eb9f9aeef56935",
+      "source": {
+        "crop": [
+          10,
+          27,
+          33,
+          53
+        ],
+        "originalWidth": 42,
+        "originalHeight": 68,
+        "nonwhiteSamples": 220,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-024-ascii",
+      "pair": "alias-024",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-024-ascii.png",
+      "pngSha256": "3cf57ed399c9783dad4e19bff308d312affb729ede2b758a9d1fa099d795900b",
+      "framedRgbSha256": "18e5518f4d6cc91f7902093e779ca4334c0c39b4c28185dbcf198ec7a6b4ae42",
+      "source": {
+        "crop": [
+          10,
+          27,
+          34,
+          53
+        ],
+        "originalWidth": 44,
+        "originalHeight": 68,
+        "nonwhiteSamples": 202,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-024-cyrillic",
+      "pair": "alias-024",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-024-cyrillic.png",
+      "pngSha256": "3cf57ed399c9783dad4e19bff308d312affb729ede2b758a9d1fa099d795900b",
+      "framedRgbSha256": "18e5518f4d6cc91f7902093e779ca4334c0c39b4c28185dbcf198ec7a6b4ae42",
+      "source": {
+        "crop": [
+          10,
+          27,
+          34,
+          53
+        ],
+        "originalWidth": 44,
+        "originalHeight": 68,
+        "nonwhiteSamples": 202,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-025-ascii",
+      "pair": "alias-025",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-025-ascii.png",
+      "pngSha256": "471b29c740c7365da5d66db62af796b84a4a178c62f7154c08482a47f61136ea",
+      "framedRgbSha256": "31ab698cf6fb32341f60132c1dbb8a5d4daf47de7f4fa080ed5ff624b8dd2782",
+      "source": {
+        "crop": [
+          9,
+          27,
+          36,
+          62
+        ],
+        "originalWidth": 46,
+        "originalHeight": 68,
+        "nonwhiteSamples": 284,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-025-cyrillic",
+      "pair": "alias-025",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-025-cyrillic.png",
+      "pngSha256": "471b29c740c7365da5d66db62af796b84a4a178c62f7154c08482a47f61136ea",
+      "framedRgbSha256": "31ab698cf6fb32341f60132c1dbb8a5d4daf47de7f4fa080ed5ff624b8dd2782",
+      "source": {
+        "crop": [
+          9,
+          27,
+          36,
+          62
+        ],
+        "originalWidth": 46,
+        "originalHeight": 68,
+        "nonwhiteSamples": 284,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-026-ascii",
+      "pair": "alias-026",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-026-ascii.png",
+      "pngSha256": "f823dd1ae03ca25ac967c83249111620300b5db0f8004ba494c5d2cb217751fd",
+      "framedRgbSha256": "8a892f6ee44dfbe368abbbb80088b7aa7ca73ab8676dd0e165cec025c7a047d3",
+      "source": {
+        "crop": [
+          9,
+          28,
+          35,
+          52
+        ],
+        "originalWidth": 43,
+        "originalHeight": 68,
+        "nonwhiteSamples": 187,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-026-cyrillic",
+      "pair": "alias-026",
+      "kind": "scriptAlias",
+      "font": "NotoSerifJP400",
+      "file": "alias-026-cyrillic.png",
+      "pngSha256": "f823dd1ae03ca25ac967c83249111620300b5db0f8004ba494c5d2cb217751fd",
+      "framedRgbSha256": "8a892f6ee44dfbe368abbbb80088b7aa7ca73ab8676dd0e165cec025c7a047d3",
+      "source": {
+        "crop": [
+          9,
+          28,
+          35,
+          52
+        ],
+        "originalWidth": 43,
+        "originalHeight": 68,
+        "nonwhiteSamples": 187,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "prefix-NotoSerifJP400-complete",
+      "pair": "prefix-NotoSerifJP400",
+      "kind": "wholePrefixRemoved",
+      "font": "NotoSerifJP400",
+      "file": "prefix-NotoSerifJP400-complete.png",
+      "pngSha256": "11ef3977f19ee61b770586c797cf922c21ebf40e69747bdc8d13963bcc4d33f3",
+      "framedRgbSha256": "51efdf69e106142336f36d4763751ae0092b27797f088fa20f65fd880bfe74cd",
+      "source": {
+        "crop": [
+          16,
+          30,
+          139,
+          96
+        ],
+        "originalWidth": 158,
+        "originalHeight": 109,
+        "nonwhiteSamples": 1677,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "completeTail",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "Complete tail may be recognized; original-prefix loss must be refused from source geometry/ink ownership. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "prefix-NotoSerifJP400-lost-prefix",
+      "pair": "prefix-NotoSerifJP400",
+      "kind": "wholePrefixRemoved",
+      "font": "NotoSerifJP400",
+      "file": "prefix-NotoSerifJP400-lost-prefix.png",
+      "pngSha256": "11ef3977f19ee61b770586c797cf922c21ebf40e69747bdc8d13963bcc4d33f3",
+      "framedRgbSha256": "51efdf69e106142336f36d4763751ae0092b27797f088fa20f65fd880bfe74cd",
+      "source": {
+        "crop": [
+          16,
+          30,
+          139,
+          96
+        ],
+        "originalWidth": 158,
+        "originalHeight": 109,
+        "nonwhiteSamples": 1677,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "originalPrefixFullyOutsideCrop",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "Complete tail may be recognized; original-prefix loss must be refused from source geometry/ink ownership. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "prefix-KiwiMaru-Regular-complete",
+      "pair": "prefix-KiwiMaru-Regular",
+      "kind": "wholePrefixRemoved",
+      "font": "KiwiMaru-Regular",
+      "file": "prefix-KiwiMaru-Regular-complete.png",
+      "pngSha256": "0c3fe3282b65266f80511a3f912c4a40af68e363c595f26b66eb328834ee6d11",
+      "framedRgbSha256": "55c21dc0d83c566ba5727d7a30725348843bc84a48027b7628ceb4515c0b5b5d",
+      "source": {
+        "crop": [
+          16,
+          41,
+          149,
+          105
+        ],
+        "originalWidth": 166,
+        "originalHeight": 126,
+        "nonwhiteSamples": 1956,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "completeTail",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "Complete tail may be recognized; original-prefix loss must be refused from source geometry/ink ownership. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "prefix-KiwiMaru-Regular-lost-prefix",
+      "pair": "prefix-KiwiMaru-Regular",
+      "kind": "wholePrefixRemoved",
+      "font": "KiwiMaru-Regular",
+      "file": "prefix-KiwiMaru-Regular-lost-prefix.png",
+      "pngSha256": "0c3fe3282b65266f80511a3f912c4a40af68e363c595f26b66eb328834ee6d11",
+      "framedRgbSha256": "55c21dc0d83c566ba5727d7a30725348843bc84a48027b7628ceb4515c0b5b5d",
+      "source": {
+        "crop": [
+          16,
+          41,
+          149,
+          105
+        ],
+        "originalWidth": 166,
+        "originalHeight": 126,
+        "nonwhiteSamples": 1956,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "originalPrefixFullyOutsideCrop",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "Complete tail may be recognized; original-prefix loss must be refused from source geometry/ink ownership. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-029-ascii",
+      "pair": "alias-029",
+      "kind": "scriptAlias",
+      "font": "HinaMincho-Regular",
+      "file": "alias-029-ascii.png",
+      "pngSha256": "20f94489ef9f0e14c1fe8278370d04ba3d6207a03ce1eb5b495debdc98f2f261",
+      "framedRgbSha256": "a5bef407ce660caa72e71677903da97a7d0ac8b7757bcebee35eadf41438088c",
+      "source": {
+        "crop": [
+          8,
+          28,
+          36,
+          59
+        ],
+        "originalWidth": 46,
+        "originalHeight": 79,
+        "nonwhiteSamples": 271,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-029-cyrillic",
+      "pair": "alias-029",
+      "kind": "scriptAlias",
+      "font": "HinaMincho-Regular",
+      "file": "alias-029-cyrillic.png",
+      "pngSha256": "20f94489ef9f0e14c1fe8278370d04ba3d6207a03ce1eb5b495debdc98f2f261",
+      "framedRgbSha256": "a5bef407ce660caa72e71677903da97a7d0ac8b7757bcebee35eadf41438088c",
+      "source": {
+        "crop": [
+          16,
+          28,
+          44,
+          59
+        ],
+        "originalWidth": 60,
+        "originalHeight": 79,
+        "nonwhiteSamples": 271,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-030-ascii",
+      "pair": "alias-030",
+      "kind": "scriptAlias",
+      "font": "HinaMincho-Regular",
+      "file": "alias-030-ascii.png",
+      "pngSha256": "54a5fe5c48d581b973d2c9c8d74290cba1d5dd4530f515423eec3360d5e91665",
+      "framedRgbSha256": "d92a06144a375ee5f8b65451bf0a54639d5f3724b7dd49603b6073554856e1de",
+      "source": {
+        "crop": [
+          9,
+          40,
+          28,
+          59
+        ],
+        "originalWidth": 36,
+        "originalHeight": 79,
+        "nonwhiteSamples": 145,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "printableASCII",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "alias-030-cyrillic",
+      "pair": "alias-030",
+      "kind": "scriptAlias",
+      "font": "HinaMincho-Regular",
+      "file": "alias-030-cyrillic.png",
+      "pngSha256": "54a5fe5c48d581b973d2c9c8d74290cba1d5dd4530f515423eec3360d5e91665",
+      "framedRgbSha256": "d92a06144a375ee5f8b65451bf0a54639d5f3724b7dd49603b6073554856e1de",
+      "source": {
+        "crop": [
+          21,
+          40,
+          40,
+          59
+        ],
+        "originalWidth": 60,
+        "originalHeight": 79,
+        "nonwhiteSamples": 145,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "unsupportedCyrillic",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "ASCII literal may be recognized; unsupported script must be refused from source evidence. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "prefix-HinaMincho-Regular-complete",
+      "pair": "prefix-HinaMincho-Regular",
+      "kind": "wholePrefixRemoved",
+      "font": "HinaMincho-Regular",
+      "file": "prefix-HinaMincho-Regular-complete.png",
+      "pngSha256": "5f27ede8fca172137399d39accc1b1ba2cec3f93bddf84835d1bf83b0be91c71",
+      "framedRgbSha256": "1664c3f38797ba9fcf83216e8774e00e47e569432385c98fc822cea4a9d5f083",
+      "source": {
+        "crop": [
+          14,
+          45,
+          123,
+          101
+        ],
+        "originalWidth": 138,
+        "originalHeight": 126,
+        "nonwhiteSamples": 1391,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "completeTail",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "Complete tail may be recognized; original-prefix loss must be refused from source geometry/ink ownership. Pixels alone cannot distinguish."
+    },
+    {
+      "id": "prefix-HinaMincho-Regular-lost-prefix",
+      "pair": "prefix-HinaMincho-Regular",
+      "kind": "wholePrefixRemoved",
+      "font": "HinaMincho-Regular",
+      "file": "prefix-HinaMincho-Regular-lost-prefix.png",
+      "pngSha256": "5f27ede8fca172137399d39accc1b1ba2cec3f93bddf84835d1bf83b0be91c71",
+      "framedRgbSha256": "1664c3f38797ba9fcf83216e8774e00e47e569432385c98fc822cea4a9d5f083",
+      "source": {
+        "crop": [
+          14,
+          45,
+          123,
+          101
+        ],
+        "originalWidth": 138,
+        "originalHeight": 126,
+        "nonwhiteSamples": 1391,
+        "allNonwhiteRetained": true,
+        "borderInk": false
+      },
+      "sourceInterpretation": "originalPrefixFullyOutsideCrop",
+      "sourceProofRequired": true,
+      "incompatibleExpectedHandling": "Complete tail may be recognized; original-prefix loss must be refused from source geometry/ink ownership. Pixels alone cannot distinguish."
+    }
+  ],
+  "fontAliasComparisons": [
+    {
+      "font": "NotoSansJP400",
+      "ascii": "A",
+      "cyrillic": "А",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSansJP400",
+      "ascii": "C",
+      "cyrillic": "С",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSansJP400",
+      "ascii": "E",
+      "cyrillic": "Е",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSansJP400",
+      "ascii": "H",
+      "cyrillic": "Н",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSansJP400",
+      "ascii": "O",
+      "cyrillic": "О",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSansJP400",
+      "ascii": "P",
+      "cyrillic": "Р",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSansJP400",
+      "ascii": "X",
+      "cyrillic": "Х",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSansJP400",
+      "ascii": "a",
+      "cyrillic": "а",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSansJP400",
+      "ascii": "c",
+      "cyrillic": "с",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSansJP400",
+      "ascii": "e",
+      "cyrillic": "е",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSansJP400",
+      "ascii": "o",
+      "cyrillic": "о",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSansJP400",
+      "ascii": "p",
+      "cyrillic": "р",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSansJP400",
+      "ascii": "x",
+      "cyrillic": "х",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSerifJP400",
+      "ascii": "A",
+      "cyrillic": "А",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSerifJP400",
+      "ascii": "C",
+      "cyrillic": "С",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSerifJP400",
+      "ascii": "E",
+      "cyrillic": "Е",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSerifJP400",
+      "ascii": "H",
+      "cyrillic": "Н",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSerifJP400",
+      "ascii": "O",
+      "cyrillic": "О",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSerifJP400",
+      "ascii": "P",
+      "cyrillic": "Р",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSerifJP400",
+      "ascii": "X",
+      "cyrillic": "Х",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSerifJP400",
+      "ascii": "a",
+      "cyrillic": "а",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSerifJP400",
+      "ascii": "c",
+      "cyrillic": "с",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSerifJP400",
+      "ascii": "e",
+      "cyrillic": "е",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSerifJP400",
+      "ascii": "o",
+      "cyrillic": "о",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSerifJP400",
+      "ascii": "p",
+      "cyrillic": "р",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "NotoSerifJP400",
+      "ascii": "x",
+      "cyrillic": "х",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "KiwiMaru-Regular",
+      "ascii": "A",
+      "cyrillic": "А",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "KiwiMaru-Regular",
+      "ascii": "C",
+      "cyrillic": "С",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "KiwiMaru-Regular",
+      "ascii": "E",
+      "cyrillic": "Е",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "KiwiMaru-Regular",
+      "ascii": "H",
+      "cyrillic": "Н",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "KiwiMaru-Regular",
+      "ascii": "O",
+      "cyrillic": "О",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "KiwiMaru-Regular",
+      "ascii": "P",
+      "cyrillic": "Р",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "KiwiMaru-Regular",
+      "ascii": "X",
+      "cyrillic": "Х",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "KiwiMaru-Regular",
+      "ascii": "a",
+      "cyrillic": "а",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "KiwiMaru-Regular",
+      "ascii": "c",
+      "cyrillic": "с",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "KiwiMaru-Regular",
+      "ascii": "e",
+      "cyrillic": "е",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "KiwiMaru-Regular",
+      "ascii": "o",
+      "cyrillic": "о",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "KiwiMaru-Regular",
+      "ascii": "p",
+      "cyrillic": "р",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "KiwiMaru-Regular",
+      "ascii": "x",
+      "cyrillic": "х",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "HinaMincho-Regular",
+      "ascii": "A",
+      "cyrillic": "А",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "HinaMincho-Regular",
+      "ascii": "C",
+      "cyrillic": "С",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "HinaMincho-Regular",
+      "ascii": "E",
+      "cyrillic": "Е",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "HinaMincho-Regular",
+      "ascii": "H",
+      "cyrillic": "Н",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "HinaMincho-Regular",
+      "ascii": "O",
+      "cyrillic": "О",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "HinaMincho-Regular",
+      "ascii": "P",
+      "cyrillic": "Р",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "HinaMincho-Regular",
+      "ascii": "X",
+      "cyrillic": "Х",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "HinaMincho-Regular",
+      "ascii": "a",
+      "cyrillic": "а",
+      "sameFramedPixels": true
+    },
+    {
+      "font": "HinaMincho-Regular",
+      "ascii": "c",
+      "cyrillic": "с",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "HinaMincho-Regular",
+      "ascii": "e",
+      "cyrillic": "е",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "HinaMincho-Regular",
+      "ascii": "o",
+      "cyrillic": "о",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "HinaMincho-Regular",
+      "ascii": "p",
+      "cyrillic": "р",
+      "sameFramedPixels": false
+    },
+    {
+      "font": "HinaMincho-Regular",
+      "ascii": "x",
+      "cyrillic": "х",
+      "sameFramedPixels": false
+    }
+  ],
+  "sourceSha256": "8b3322a8fd7fed802f3a5b2fa8b12c872e0580c17e7a54c8d3a38e1c7c07a3fc"
+}

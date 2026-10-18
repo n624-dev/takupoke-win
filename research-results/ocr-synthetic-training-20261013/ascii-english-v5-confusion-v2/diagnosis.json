@@ -1,0 +1,2262 @@
+{
+  "scope": "Read-only descriptive synthetic-crop diagnostic; edit alignment is not glyph localization; no calibration, training, selection, or output repair",
+  "conditions": {
+    "active-baseline": {
+      "perFont": {
+        "RedHatMono": {
+          "rows": 96,
+          "characters": 1386,
+          "editErrors": 1,
+          "exact": 95,
+          "correctAccepted": 82,
+          "wrongAccepted": 0,
+          "codeCharacters": 336,
+          "codeErrors": 1,
+          "cer": 0.0007215007215007215,
+          "codeCer": 0.002976190476190476
+        },
+        "OverpassMono": {
+          "rows": 96,
+          "characters": 1410,
+          "editErrors": 8,
+          "exact": 89,
+          "correctAccepted": 62,
+          "wrongAccepted": 0,
+          "codeCharacters": 332,
+          "codeErrors": 8,
+          "cer": 0.005673758865248227,
+          "codeCer": 0.024096385542168676
+        },
+        "SourceSerif4": {
+          "rows": 96,
+          "characters": 1441,
+          "editErrors": 19,
+          "exact": 83,
+          "correctAccepted": 61,
+          "wrongAccepted": 2,
+          "codeCharacters": 354,
+          "codeErrors": 15,
+          "cer": 0.0131852879944483,
+          "codeCer": 0.0423728813559322
+        },
+        "Literata": {
+          "rows": 96,
+          "characters": 1344,
+          "editErrors": 20,
+          "exact": 79,
+          "correctAccepted": 65,
+          "wrongAccepted": 5,
+          "codeCharacters": 324,
+          "codeErrors": 12,
+          "cer": 0.01488095238095238,
+          "codeCer": 0.037037037037037035
+        }
+      },
+      "negativeKinds": {
+        "clipped": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 16
+        },
+        "interior_damage": {
+          "rows": 16,
+          "accepted": 5,
+          "nonempty": 16
+        },
+        "multiline": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 15
+        },
+        "noise": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "blank": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "unknown_cjk": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 2
+        },
+        "unknown_mixed": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 16
+        }
+      },
+      "confusableMismatchRows": 27,
+      "confusableWrongAccepted": 2,
+      "wrongAccepted": [
+        {
+          "id": "development-00126",
+          "minimumConfidence": 0.8874819278717041,
+          "rejectProbability": 0.001154889352619648
+        },
+        {
+          "id": "development-00198",
+          "minimumConfidence": 0.9900338053703308,
+          "rejectProbability": 0.00024804178974591196
+        },
+        {
+          "id": "development-00315",
+          "minimumConfidence": 0.9451034665107727,
+          "rejectProbability": 0.00047770742094144225
+        },
+        {
+          "id": "development-00330",
+          "minimumConfidence": 0.967630922794342,
+          "rejectProbability": 0.00034749353653751314
+        },
+        {
+          "id": "development-00355",
+          "minimumConfidence": 0.8020749092102051,
+          "rejectProbability": 0.00019602203974500299
+        },
+        {
+          "id": "development-00371",
+          "minimumConfidence": 0.806753396987915,
+          "rejectProbability": 7.463896326953545e-05
+        },
+        {
+          "id": "development-00379",
+          "minimumConfidence": 0.9834861755371094,
+          "rejectProbability": 0.0003410681674722582
+        }
+      ],
+      "correctNeedsReview": [
+        {
+          "id": "development-00002",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00003",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00004",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00013",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00015",
+          "lowCtc": false,
+          "reject": false,
+          "unsupportedPadding": true
+        },
+        {
+          "id": "development-00017",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00018",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00019",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00020",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00021",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00022",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00023",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00034",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00035",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00036",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00038",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00041",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00042",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00045",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00048",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00049",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00053",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00061",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00066",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00072",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00073",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00076",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00078",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00080",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00086",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00087",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00090",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00091",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00093",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00106",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00107",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00108",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00109",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00110",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00119",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00130",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00131",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00132",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00137",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00138",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00139",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00140",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00141",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00146",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00147",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00161",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00164",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00175",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00180",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00192",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00204",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00221",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00234",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00235",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00238",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00242",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00256",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00257",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00285",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00298",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00302",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00311",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00313",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00323",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00346",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00354",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00359",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00361",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00365",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00373",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00377",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        }
+      ],
+      "maximumWrongAcceptedMinimumConfidence": 0.9900338053703308,
+      "editCounts": [
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 21
+        },
+        {
+          "gold": "1",
+          "prediction": "l",
+          "count": 11
+        },
+        {
+          "gold": "F",
+          "prediction": "",
+          "count": 2
+        },
+        {
+          "gold": "",
+          "prediction": "8",
+          "count": 2
+        },
+        {
+          "gold": "&",
+          "prediction": "c",
+          "count": 2
+        },
+        {
+          "gold": "O",
+          "prediction": "o",
+          "count": 1
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 1
+        },
+        {
+          "gold": "l",
+          "prediction": "1",
+          "count": 1
+        },
+        {
+          "gold": " ",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "i",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "N",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "0",
+          "prediction": "O",
+          "count": 1
+        },
+        {
+          "gold": "-",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "V",
+          "prediction": "v",
+          "count": 1
+        },
+        {
+          "gold": "&",
+          "prediction": "8",
+          "count": 1
+        }
+      ]
+    },
+    "epoch-1": {
+      "perFont": {
+        "RedHatMono": {
+          "rows": 96,
+          "characters": 1386,
+          "editErrors": 0,
+          "exact": 96,
+          "correctAccepted": 95,
+          "wrongAccepted": 0,
+          "codeCharacters": 336,
+          "codeErrors": 0,
+          "cer": 0.0,
+          "codeCer": 0.0
+        },
+        "OverpassMono": {
+          "rows": 96,
+          "characters": 1410,
+          "editErrors": 0,
+          "exact": 96,
+          "correctAccepted": 92,
+          "wrongAccepted": 0,
+          "codeCharacters": 332,
+          "codeErrors": 0,
+          "cer": 0.0,
+          "codeCer": 0.0
+        },
+        "SourceSerif4": {
+          "rows": 96,
+          "characters": 1441,
+          "editErrors": 6,
+          "exact": 91,
+          "correctAccepted": 83,
+          "wrongAccepted": 1,
+          "codeCharacters": 354,
+          "codeErrors": 5,
+          "cer": 0.004163775156141568,
+          "codeCer": 0.014124293785310734
+        },
+        "Literata": {
+          "rows": 96,
+          "characters": 1344,
+          "editErrors": 32,
+          "exact": 74,
+          "correctAccepted": 62,
+          "wrongAccepted": 6,
+          "codeCharacters": 324,
+          "codeErrors": 22,
+          "cer": 0.023809523809523808,
+          "codeCer": 0.06790123456790123
+        }
+      },
+      "negativeKinds": {
+        "clipped": {
+          "rows": 16,
+          "accepted": 1,
+          "nonempty": 15
+        },
+        "interior_damage": {
+          "rows": 16,
+          "accepted": 8,
+          "nonempty": 16
+        },
+        "multiline": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 16
+        },
+        "noise": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "blank": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "unknown_cjk": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 2
+        },
+        "unknown_mixed": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 16
+        }
+      },
+      "confusableMismatchRows": 22,
+      "confusableWrongAccepted": 6,
+      "wrongAccepted": [
+        {
+          "id": "development-00030",
+          "minimumConfidence": 0.9166155457496643,
+          "rejectProbability": 0.002159247873350978
+        },
+        {
+          "id": "development-00031",
+          "minimumConfidence": 0.908721387386322,
+          "rejectProbability": 0.0024997531436383724
+        },
+        {
+          "id": "development-00077",
+          "minimumConfidence": 0.8055053353309631,
+          "rejectProbability": 0.0012569130631163716
+        },
+        {
+          "id": "development-00126",
+          "minimumConfidence": 0.9883458614349365,
+          "rejectProbability": 0.001866969745606184
+        },
+        {
+          "id": "development-00127",
+          "minimumConfidence": 0.9052137136459351,
+          "rejectProbability": 0.0033334719482809305
+        },
+        {
+          "id": "development-00135",
+          "minimumConfidence": 0.8191403150558472,
+          "rejectProbability": 0.0014900430105626583
+        },
+        {
+          "id": "development-00371",
+          "minimumConfidence": 0.9334853291511536,
+          "rejectProbability": 8.740767952986062e-05
+        }
+      ],
+      "correctNeedsReview": [
+        {
+          "id": "development-00014",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00015",
+          "lowCtc": false,
+          "reject": false,
+          "unsupportedPadding": true
+        },
+        {
+          "id": "development-00028",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00029",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00047",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00050",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00051",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00062",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00063",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00070",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00108",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00109",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00133",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00141",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00142",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00143",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00145",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00159",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00175",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00234",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00315",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00354",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00361",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00373",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00383",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        }
+      ],
+      "maximumWrongAcceptedMinimumConfidence": 0.9883458614349365,
+      "editCounts": [
+        {
+          "gold": "1",
+          "prediction": "l",
+          "count": 25
+        },
+        {
+          "gold": "",
+          "prediction": "8",
+          "count": 3
+        },
+        {
+          "gold": "&",
+          "prediction": "c",
+          "count": 3
+        },
+        {
+          "gold": "0",
+          "prediction": "O",
+          "count": 3
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 1
+        },
+        {
+          "gold": " ",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "i",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "-",
+          "prediction": "",
+          "count": 1
+        }
+      ]
+    },
+    "epoch-2": {
+      "perFont": {
+        "RedHatMono": {
+          "rows": 96,
+          "characters": 1386,
+          "editErrors": 0,
+          "exact": 96,
+          "correctAccepted": 96,
+          "wrongAccepted": 0,
+          "codeCharacters": 336,
+          "codeErrors": 0,
+          "cer": 0.0,
+          "codeCer": 0.0
+        },
+        "OverpassMono": {
+          "rows": 96,
+          "characters": 1410,
+          "editErrors": 1,
+          "exact": 95,
+          "correctAccepted": 90,
+          "wrongAccepted": 0,
+          "codeCharacters": 332,
+          "codeErrors": 1,
+          "cer": 0.0007092198581560284,
+          "codeCer": 0.0030120481927710845
+        },
+        "SourceSerif4": {
+          "rows": 96,
+          "characters": 1441,
+          "editErrors": 4,
+          "exact": 92,
+          "correctAccepted": 85,
+          "wrongAccepted": 0,
+          "codeCharacters": 354,
+          "codeErrors": 4,
+          "cer": 0.002775850104094379,
+          "codeCer": 0.011299435028248588
+        },
+        "Literata": {
+          "rows": 96,
+          "characters": 1344,
+          "editErrors": 22,
+          "exact": 78,
+          "correctAccepted": 73,
+          "wrongAccepted": 8,
+          "codeCharacters": 324,
+          "codeErrors": 15,
+          "cer": 0.01636904761904762,
+          "codeCer": 0.046296296296296294
+        }
+      },
+      "negativeKinds": {
+        "clipped": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 16
+        },
+        "interior_damage": {
+          "rows": 16,
+          "accepted": 7,
+          "nonempty": 16
+        },
+        "multiline": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 15
+        },
+        "noise": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "blank": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "unknown_cjk": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 2
+        },
+        "unknown_mixed": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 16
+        }
+      },
+      "confusableMismatchRows": 18,
+      "confusableWrongAccepted": 6,
+      "wrongAccepted": [
+        {
+          "id": "development-00030",
+          "minimumConfidence": 0.8337633609771729,
+          "rejectProbability": 0.001691941637545824
+        },
+        {
+          "id": "development-00031",
+          "minimumConfidence": 0.8560887575149536,
+          "rejectProbability": 0.002295520156621933
+        },
+        {
+          "id": "development-00126",
+          "minimumConfidence": 0.9551030397415161,
+          "rejectProbability": 0.001984653063118458
+        },
+        {
+          "id": "development-00127",
+          "minimumConfidence": 0.8365370631217957,
+          "rejectProbability": 0.0034644980914890766
+        },
+        {
+          "id": "development-00135",
+          "minimumConfidence": 0.9357789754867554,
+          "rejectProbability": 0.0013790171360597014
+        },
+        {
+          "id": "development-00158",
+          "minimumConfidence": 0.823823869228363,
+          "rejectProbability": 0.0009412464569322765
+        },
+        {
+          "id": "development-00371",
+          "minimumConfidence": 0.8922094702720642,
+          "rejectProbability": 0.00010626732546370476
+        },
+        {
+          "id": "development-00379",
+          "minimumConfidence": 0.9496661424636841,
+          "rejectProbability": 0.0005607652710750699
+        }
+      ],
+      "correctNeedsReview": [
+        {
+          "id": "development-00015",
+          "lowCtc": false,
+          "reject": false,
+          "unsupportedPadding": true
+        },
+        {
+          "id": "development-00029",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00038",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00051",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00087",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00090",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00091",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00133",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00140",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00141",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00175",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00198",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00354",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00359",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00361",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00373",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "development-00378",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        }
+      ],
+      "maximumWrongAcceptedMinimumConfidence": 0.9551030397415161,
+      "editCounts": [
+        {
+          "gold": "1",
+          "prediction": "l",
+          "count": 17
+        },
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 2
+        },
+        {
+          "gold": "",
+          "prediction": "8",
+          "count": 2
+        },
+        {
+          "gold": "&",
+          "prediction": "c",
+          "count": 2
+        },
+        {
+          "gold": " ",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "i",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "0",
+          "prediction": "O",
+          "count": 1
+        },
+        {
+          "gold": "&",
+          "prediction": "8",
+          "count": 1
+        }
+      ]
+    },
+    "fresh-active": {
+      "perFont": {
+        "SplineSansMono": {
+          "rows": 96,
+          "characters": 1384,
+          "editErrors": 5,
+          "exact": 91,
+          "correctAccepted": 77,
+          "wrongAccepted": 1,
+          "codeCharacters": 334,
+          "codeErrors": 4,
+          "cer": 0.0036127167630057803,
+          "codeCer": 0.011976047904191617
+        },
+        "MartianMono": {
+          "rows": 96,
+          "characters": 1389,
+          "editErrors": 3,
+          "exact": 93,
+          "correctAccepted": 79,
+          "wrongAccepted": 2,
+          "codeCharacters": 336,
+          "codeErrors": 0,
+          "cer": 0.0021598272138228943,
+          "codeCer": 0.0
+        },
+        "Newsreader": {
+          "rows": 96,
+          "characters": 1393,
+          "editErrors": 12,
+          "exact": 86,
+          "correctAccepted": 72,
+          "wrongAccepted": 8,
+          "codeCharacters": 338,
+          "codeErrors": 4,
+          "cer": 0.008614501076812634,
+          "codeCer": 0.011834319526627219
+        },
+        "Fraunces": {
+          "rows": 96,
+          "characters": 1449,
+          "editErrors": 6,
+          "exact": 90,
+          "correctAccepted": 63,
+          "wrongAccepted": 2,
+          "codeCharacters": 360,
+          "codeErrors": 2,
+          "cer": 0.004140786749482402,
+          "codeCer": 0.005555555555555556
+        }
+      },
+      "negativeKinds": {
+        "clipped": {
+          "rows": 16,
+          "accepted": 1,
+          "nonempty": 16
+        },
+        "interior_damage": {
+          "rows": 16,
+          "accepted": 10,
+          "nonempty": 16
+        },
+        "multiline": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 15
+        },
+        "noise": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "blank": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "unknown_cjk": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 4
+        },
+        "unknown_mixed": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 16
+        }
+      },
+      "confusableMismatchRows": 9,
+      "confusableWrongAccepted": 2,
+      "wrongAccepted": [
+        {
+          "id": "fresh-00016",
+          "minimumConfidence": 0.8256253004074097,
+          "rejectProbability": 0.0023255222477018833
+        },
+        {
+          "id": "fresh-00037",
+          "minimumConfidence": 0.884861171245575,
+          "rejectProbability": 0.0010975991608574986
+        },
+        {
+          "id": "fresh-00045",
+          "minimumConfidence": 0.9827647805213928,
+          "rejectProbability": 0.0003544954815879464
+        },
+        {
+          "id": "fresh-00087",
+          "minimumConfidence": 0.868937611579895,
+          "rejectProbability": 0.0004338840954005718
+        },
+        {
+          "id": "fresh-00166",
+          "minimumConfidence": 0.8076246380805969,
+          "rejectProbability": 7.461362838512287e-05
+        },
+        {
+          "id": "fresh-00174",
+          "minimumConfidence": 0.9857565760612488,
+          "rejectProbability": 0.00025331522920168936
+        },
+        {
+          "id": "fresh-00190",
+          "minimumConfidence": 0.9657153487205505,
+          "rejectProbability": 0.00010406605724710971
+        },
+        {
+          "id": "fresh-00191",
+          "minimumConfidence": 0.9255818128585815,
+          "rejectProbability": 3.257571006543003e-05
+        },
+        {
+          "id": "fresh-00230",
+          "minimumConfidence": 0.9328709840774536,
+          "rejectProbability": 8.848836296238005e-05
+        },
+        {
+          "id": "fresh-00278",
+          "minimumConfidence": 0.9673931002616882,
+          "rejectProbability": 4.065656685270369e-05
+        },
+        {
+          "id": "fresh-00353",
+          "minimumConfidence": 0.8206767439842224,
+          "rejectProbability": 7.915154856164008e-05
+        },
+        {
+          "id": "fresh-00362",
+          "minimumConfidence": 0.9158654808998108,
+          "rejectProbability": 0.00017542696150485426
+        },
+        {
+          "id": "fresh-00377",
+          "minimumConfidence": 0.812330961227417,
+          "rejectProbability": 0.00019392282410990447
+        }
+      ],
+      "correctNeedsReview": [
+        {
+          "id": "fresh-00007",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00010",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00011",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00028",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00032",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00034",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00035",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00038",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00039",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00042",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00044",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00046",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00047",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00048",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00049",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00059",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00060",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00061",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00062",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00063",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00064",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00070",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00072",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00078",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00079",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00081",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00094",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00095",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00098",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00099",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00101",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00102",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00103",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00104",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00110",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00121",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00126",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00127",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00128",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00129",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00138",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00141",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00142",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00143",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00144",
+          "lowCtc": false,
+          "reject": false,
+          "unsupportedPadding": true
+        },
+        {
+          "id": "fresh-00145",
+          "lowCtc": false,
+          "reject": false,
+          "unsupportedPadding": true
+        },
+        {
+          "id": "fresh-00146",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00147",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00156",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00158",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00159",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00167",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00175",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00178",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00186",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00197",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00235",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00246",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00247",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00266",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00298",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00323",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00336",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00369",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00370",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00371",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00374",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00380",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00381",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        }
+      ],
+      "maximumWrongAcceptedMinimumConfidence": 0.9857565760612488,
+      "editCounts": [
+        {
+          "gold": "1",
+          "prediction": "l",
+          "count": 5
+        },
+        {
+          "gold": ".",
+          "prediction": "",
+          "count": 4
+        },
+        {
+          "gold": "O",
+          "prediction": "0",
+          "count": 3
+        },
+        {
+          "gold": "`",
+          "prediction": "'",
+          "count": 3
+        },
+        {
+          "gold": "l",
+          "prediction": "",
+          "count": 2
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 2
+        },
+        {
+          "gold": "-",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "k",
+          "prediction": "l",
+          "count": 1
+        },
+        {
+          "gold": "I",
+          "prediction": "1",
+          "count": 1
+        },
+        {
+          "gold": "O",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "&",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "9",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "g",
+          "prediction": "8",
+          "count": 1
+        }
+      ]
+    },
+    "fresh-candidate": {
+      "perFont": {
+        "SplineSansMono": {
+          "rows": 96,
+          "characters": 1384,
+          "editErrors": 0,
+          "exact": 96,
+          "correctAccepted": 91,
+          "wrongAccepted": 0,
+          "codeCharacters": 334,
+          "codeErrors": 0,
+          "cer": 0.0,
+          "codeCer": 0.0
+        },
+        "MartianMono": {
+          "rows": 96,
+          "characters": 1389,
+          "editErrors": 3,
+          "exact": 93,
+          "correctAccepted": 93,
+          "wrongAccepted": 0,
+          "codeCharacters": 336,
+          "codeErrors": 0,
+          "cer": 0.0021598272138228943,
+          "codeCer": 0.0
+        },
+        "Newsreader": {
+          "rows": 96,
+          "characters": 1393,
+          "editErrors": 6,
+          "exact": 90,
+          "correctAccepted": 85,
+          "wrongAccepted": 4,
+          "codeCharacters": 338,
+          "codeErrors": 1,
+          "cer": 0.004307250538406317,
+          "codeCer": 0.0029585798816568047
+        },
+        "Fraunces": {
+          "rows": 96,
+          "characters": 1449,
+          "editErrors": 8,
+          "exact": 89,
+          "correctAccepted": 87,
+          "wrongAccepted": 3,
+          "codeCharacters": 360,
+          "codeErrors": 5,
+          "cer": 0.005521048999309869,
+          "codeCer": 0.013888888888888888
+        }
+      },
+      "negativeKinds": {
+        "clipped": {
+          "rows": 16,
+          "accepted": 1,
+          "nonempty": 15
+        },
+        "interior_damage": {
+          "rows": 16,
+          "accepted": 10,
+          "nonempty": 16
+        },
+        "multiline": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 15
+        },
+        "noise": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "blank": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 0
+        },
+        "unknown_cjk": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 2
+        },
+        "unknown_mixed": {
+          "rows": 16,
+          "accepted": 0,
+          "nonempty": 16
+        }
+      },
+      "confusableMismatchRows": 6,
+      "confusableWrongAccepted": 2,
+      "wrongAccepted": [
+        {
+          "id": "fresh-00054",
+          "minimumConfidence": 0.8487882018089294,
+          "rejectProbability": 0.0009134637075476348
+        },
+        {
+          "id": "fresh-00087",
+          "minimumConfidence": 0.8403857350349426,
+          "rejectProbability": 0.0004899439518339932
+        },
+        {
+          "id": "fresh-00166",
+          "minimumConfidence": 0.8437793850898743,
+          "rejectProbability": 0.00011001810344168916
+        },
+        {
+          "id": "fresh-00174",
+          "minimumConfidence": 0.9749369621276855,
+          "rejectProbability": 0.0004339782171882689
+        },
+        {
+          "id": "fresh-00191",
+          "minimumConfidence": 0.9045946002006531,
+          "rejectProbability": 5.070111001259647e-05
+        },
+        {
+          "id": "fresh-00230",
+          "minimumConfidence": 0.8901007175445557,
+          "rejectProbability": 0.00016583545948378742
+        },
+        {
+          "id": "fresh-00278",
+          "minimumConfidence": 0.967136800289154,
+          "rejectProbability": 8.560520655009896e-05
+        }
+      ],
+      "correctNeedsReview": [
+        {
+          "id": "fresh-00016",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00017",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00045",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00109",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00110",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00144",
+          "lowCtc": false,
+          "reject": false,
+          "unsupportedPadding": true
+        },
+        {
+          "id": "fresh-00145",
+          "lowCtc": false,
+          "reject": false,
+          "unsupportedPadding": true
+        },
+        {
+          "id": "fresh-00156",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00190",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00355",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00370",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        },
+        {
+          "id": "fresh-00372",
+          "lowCtc": true,
+          "reject": false,
+          "unsupportedPadding": false
+        }
+      ],
+      "maximumWrongAcceptedMinimumConfidence": 0.9749369621276855,
+      "editCounts": [
+        {
+          "gold": "1",
+          "prediction": "l",
+          "count": 7
+        },
+        {
+          "gold": "`",
+          "prediction": "'",
+          "count": 3
+        },
+        {
+          "gold": ".",
+          "prediction": "",
+          "count": 2
+        },
+        {
+          "gold": "",
+          "prediction": " ",
+          "count": 2
+        },
+        {
+          "gold": "",
+          "prediction": "l",
+          "count": 1
+        },
+        {
+          "gold": "l",
+          "prediction": "",
+          "count": 1
+        },
+        {
+          "gold": "&",
+          "prediction": "",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "paired": [
+    {
+      "before": "active-baseline",
+      "after": "epoch-1",
+      "gainIds": [
+        "development-00005",
+        "development-00025",
+        "development-00028",
+        "development-00029",
+        "development-00043",
+        "development-00044",
+        "development-00050",
+        "development-00051",
+        "development-00058",
+        "development-00059",
+        "development-00060",
+        "development-00098",
+        "development-00099",
+        "development-00102",
+        "development-00116",
+        "development-00117",
+        "development-00133",
+        "development-00198",
+        "development-00315",
+        "development-00330"
+      ],
+      "regressionIds": [
+        "development-00013",
+        "development-00038",
+        "development-00078",
+        "development-00086",
+        "development-00087",
+        "development-00110",
+        "development-00119",
+        "development-00140",
+        "development-00359"
+      ],
+      "naturalGains": [
+        "development-00198",
+        "development-00315",
+        "development-00330"
+      ],
+      "naturalRegressions": []
+    },
+    {
+      "before": "active-baseline",
+      "after": "epoch-2",
+      "gainIds": [
+        "development-00005",
+        "development-00025",
+        "development-00029",
+        "development-00043",
+        "development-00044",
+        "development-00051",
+        "development-00058",
+        "development-00059",
+        "development-00060",
+        "development-00098",
+        "development-00099",
+        "development-00102",
+        "development-00116",
+        "development-00117",
+        "development-00133",
+        "development-00198",
+        "development-00315",
+        "development-00330",
+        "development-00378"
+      ],
+      "regressionIds": [
+        "development-00013",
+        "development-00078",
+        "development-00110",
+        "development-00119"
+      ],
+      "naturalGains": [
+        "development-00198",
+        "development-00315",
+        "development-00330"
+      ],
+      "naturalRegressions": []
+    },
+    {
+      "before": "fresh-active",
+      "after": "fresh-candidate",
+      "gainIds": [
+        "fresh-00016",
+        "fresh-00017",
+        "fresh-00037",
+        "fresh-00045",
+        "fresh-00073",
+        "fresh-00109",
+        "fresh-00120",
+        "fresh-00190",
+        "fresh-00355",
+        "fresh-00372"
+      ],
+      "regressionIds": [
+        "fresh-00094",
+        "fresh-00095"
+      ],
+      "naturalGains": [
+        "fresh-00190"
+      ],
+      "naturalRegressions": []
+    }
+  ],
+  "actualNativeCombinedRouteNotMeasured": true,
+  "japanesePrimaryUnchanged": true
+}

@@ -1,0 +1,87 @@
+{
+  "freezeSha256": "7de17f2e42dd0dad5faa91fd7776796c3f419d70393fa055377f0166ef28efde",
+  "rawSha256": "b3ed7a8af8844b66b8267afa90de723256b643175e3a2c41e77ed90c751046a5",
+  "callsCompleted": 192,
+  "groups": {
+    "sans/subject": {
+      "rows": 24,
+      "exact": 19,
+      "correctAboveFloor": 17,
+      "incorrectAboveFloor": 0,
+      "unsupportedPadding": 0
+    },
+    "sans/teacher": {
+      "rows": 24,
+      "exact": 19,
+      "correctAboveFloor": 16,
+      "incorrectAboveFloor": 1,
+      "unsupportedPadding": 0
+    },
+    "sans/room": {
+      "rows": 24,
+      "exact": 0,
+      "correctAboveFloor": 0,
+      "incorrectAboveFloor": 14,
+      "unsupportedPadding": 0
+    },
+    "sans/header": {
+      "rows": 21,
+      "exact": 13,
+      "correctAboveFloor": 9,
+      "incorrectAboveFloor": 5,
+      "unsupportedPadding": 0
+    },
+    "sans/blank": {
+      "rows": 3,
+      "exact": 3,
+      "correctAboveFloor": 0,
+      "incorrectAboveFloor": 0,
+      "unsupportedPadding": 0
+    },
+    "serif/subject": {
+      "rows": 24,
+      "exact": 20,
+      "correctAboveFloor": 18,
+      "incorrectAboveFloor": 1,
+      "unsupportedPadding": 0
+    },
+    "serif/teacher": {
+      "rows": 24,
+      "exact": 21,
+      "correctAboveFloor": 16,
+      "incorrectAboveFloor": 1,
+      "unsupportedPadding": 0
+    },
+    "serif/room": {
+      "rows": 24,
+      "exact": 0,
+      "correctAboveFloor": 0,
+      "incorrectAboveFloor": 10,
+      "unsupportedPadding": 0
+    },
+    "serif/header": {
+      "rows": 21,
+      "exact": 17,
+      "correctAboveFloor": 11,
+      "incorrectAboveFloor": 1,
+      "unsupportedPadding": 0
+    },
+    "serif/blank": {
+      "rows": 3,
+      "exact": 3,
+      "correctAboveFloor": 0,
+      "incorrectAboveFloor": 0,
+      "unsupportedPadding": 0
+    }
+  },
+  "worker": {
+    "callsCompleted": 192,
+    "elapsedSeconds": 66.51049892499941,
+    "peakRssBytes": 820842496,
+    "parameters": 55314439,
+    "qualification": false
+  },
+  "qualification": false,
+  "modelActivation": false,
+  "limits": "CTC min-piece confidence is uncalibrated; scores do not establish source ownership or document acceptance. Timing is Linux CPU under concurrent work."
+}

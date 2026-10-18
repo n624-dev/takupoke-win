@@ -1,0 +1,83 @@
+{
+  "pdfSha256": "eece294ddd4d96f82228b01f528585f9cf3a00b4179d6a8662377c6db79f3ee0",
+  "readerComplete": true,
+  "strictReturned": true,
+  "lessonRows": 655,
+  "slotsCompared": 680,
+  "mismatchedSlots": [
+    {
+      "className": "1_1",
+      "weekday": 3,
+      "period": 1,
+      "expected": [
+        {
+          "subject": "架空科目011",
+          "teacher": "架空教員011",
+          "room": "架空室011"
+        },
+        {
+          "subject": "架空科目012",
+          "teacher": "架空教員012",
+          "room": "架空室012"
+        }
+      ],
+      "actual": [
+        {
+          "subject": "架空科目011・架空科目012",
+          "teacher": "架空教員011",
+          "room": "架空室011・架空室012"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 3,
+      "period": 2,
+      "expected": [
+        {
+          "subject": "架空科目011",
+          "teacher": "架空教員011",
+          "room": "架空室011"
+        },
+        {
+          "subject": "架空科目012",
+          "teacher": "架空教員012",
+          "room": "架空室012"
+        }
+      ],
+      "actual": [
+        {
+          "subject": "架空科目011・架空科目012",
+          "teacher": "架空教員011",
+          "room": "架空室011・架空室012"
+        }
+      ]
+    },
+    {
+      "className": "1_1",
+      "weekday": 3,
+      "period": 3,
+      "expected": [
+        {
+          "subject": "架空科目011",
+          "teacher": "架空教員011",
+          "room": "架空室011"
+        },
+        {
+          "subject": "架空科目012",
+          "teacher": "架空教員012",
+          "room": "架空室012"
+        }
+      ],
+      "actual": [
+        {
+          "subject": "架空科目011・架空科目012",
+          "teacher": "架空教員011",
+          "room": "架空室011・架空室012"
+        }
+      ]
+    }
+  ],
+  "stage": "Strict source-only acceptance; no save/adoption and no native call",
+  "resultSha256": "b7432bc10012ee653f612314406dc14076c2bb7be2f9c09b8567effc888ac0ec"
+}

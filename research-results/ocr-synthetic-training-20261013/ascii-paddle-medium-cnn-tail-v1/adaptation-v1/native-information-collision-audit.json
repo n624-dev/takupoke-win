@@ -1,0 +1,17 @@
+{
+  "scope": "Exact hash information-loss audit on frozen new corpus/nativeFP32maps; no additional inference, label repair or selection changes",
+  "stage": "Original input, finalCNNinput before spatial3x3, originalfinalteacherfeature",
+  "conflictingExactHashes": {
+    "train": {
+      "inputTensorSha256": [],
+      "cnnSha256": [],
+      "teacherFeatureSha256": []
+    },
+    "development": {
+      "inputTensorSha256": [],
+      "cnnSha256": [],
+      "teacherFeatureSha256": []
+    }
+  },
+  "interpretation": "Absence of an exact FP32collision does not establish separability or reading correctness. In particular lowresolution lookalikes or lost originalsource information cannot be recovered by training. Prior source-proof probes are separate consumed postselection controls."
+}

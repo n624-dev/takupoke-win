@@ -1,0 +1,1219 @@
+[
+  {
+    "id": "native-line-000",
+    "beforeLine": "2029年度前期",
+    "fields": []
+  },
+  {
+    "id": "native-line-001",
+    "beforeLine": "月",
+    "fields": []
+  },
+  {
+    "id": "native-line-002",
+    "beforeLine": "1",
+    "fields": []
+  },
+  {
+    "id": "native-line-003",
+    "beforeLine": "2",
+    "fields": []
+  },
+  {
+    "id": "native-line-004",
+    "beforeLine": "3",
+    "fields": []
+  },
+  {
+    "id": "native-line-005",
+    "beforeLine": "4",
+    "fields": []
+  },
+  {
+    "id": "native-line-006",
+    "beforeLine": "5",
+    "fields": []
+  },
+  {
+    "id": "native-line-007",
+    "beforeLine": "6",
+    "fields": []
+  },
+  {
+    "id": "native-line-008",
+    "beforeLine": "7",
+    "fields": []
+  },
+  {
+    "id": "native-line-009",
+    "beforeLine": "8",
+    "fields": []
+  },
+  {
+    "id": "native-line-010",
+    "beforeLine": "科目：架空数学97",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空数学97",
+        "expected": "架空数学97",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-011",
+    "beforeLine": "科目：架空理科21",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空理科21",
+        "expected": "架空理科21",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-012",
+    "beforeLine": "科目：架空数学49",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空数学49",
+        "expected": "架空数学49",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-013",
+    "beforeLine": "科目：架空英語70",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空英語70",
+        "expected": "架空英語70",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 7
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-014",
+    "beforeLine": "科目：架空数学54",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空数学54",
+        "expected": "架空数学54",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 8
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-015",
+    "beforeLine": "科目：架空理科23",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空理科23",
+        "expected": "架空理科23",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-016",
+    "beforeLine": "科目：架空数学84",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空数学84",
+        "expected": "架空数学84",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-017",
+    "beforeLine": "科目：架空英語91",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空英語91",
+        "expected": "架空英語91",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-018",
+    "beforeLine": "担当：仮想田中97",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想田中97",
+        "expected": "仮想田中97",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-019",
+    "beforeLine": "担当：仮想高橋21",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想高橋21",
+        "expected": "仮想高橋21",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-020",
+    "beforeLine": "担当：仮想佐藤49",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想佐藤49",
+        "expected": "仮想佐藤49",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-021",
+    "beforeLine": "担当：仮想田中23",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想田中23",
+        "expected": "仮想田中23",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-022",
+    "beforeLine": "担当：仮想田中91",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想田中91",
+        "expected": "仮想田中91",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-023",
+    "beforeLine": "担当：仮想田中84",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想田中84",
+        "expected": "仮想田中84",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-024",
+    "beforeLine": "担当：仮想佐藤70",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想佐藤70",
+        "expected": "仮想佐藤70",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 7
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-025",
+    "beforeLine": "担当：仮想佐藤54",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想佐藤54",
+        "expected": "仮想佐藤54",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 8
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-026",
+    "beforeLine": "1_1",
+    "fields": []
+  },
+  {
+    "id": "native-line-027",
+    "beforeLine": "教室：架空室A97",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室A97",
+        "expected": "架空室A97",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-028",
+    "beforeLine": "教室：架空室A21",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室A21",
+        "expected": "架空室A21",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-029",
+    "beforeLine": "教室：架空室I1I49",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室I1I49",
+        "expected": "架空室I1l49",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-030",
+    "beforeLine": "教室：架空室O023",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室O023",
+        "expected": "架空室O023",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-031",
+    "beforeLine": "教室：架空室I1I91",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室I1I91",
+        "expected": "架空室I1l91",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-032",
+    "beforeLine": "教室：架空室A84",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室A84",
+        "expected": "架空室A84",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-033",
+    "beforeLine": "教室：架空室I1I70",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室I1I70",
+        "expected": "架空室I1l70",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 7
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-034",
+    "beforeLine": "教室：架空室A54",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室A54",
+        "expected": "架空室A54",
+        "slot": {
+          "ClassName": "1_1",
+          "Day": "1",
+          "Period": 8
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-035",
+    "beforeLine": "科目：架空英語43",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空英語43",
+        "expected": "架空英語43",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-036",
+    "beforeLine": "科目：架空英語50",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空英語50",
+        "expected": "架空英語50",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-037",
+    "beforeLine": "科目：架空理科47",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空理科47",
+        "expected": "架空理科47",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-038",
+    "beforeLine": "科目：架空国語29",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空国語29",
+        "expected": "架空国語29",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 7
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-039",
+    "beforeLine": "科目：架空英語26",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空英語26",
+        "expected": "架空英語26",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 8
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-040",
+    "beforeLine": "科目：架空国語61",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空国語61",
+        "expected": "架空国語61",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-041",
+    "beforeLine": "科目：架空英語29",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空英語29",
+        "expected": "架空英語29",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-042",
+    "beforeLine": "科目：架空理科94",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空理科94",
+        "expected": "架空理科94",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-043",
+    "beforeLine": "担当：仮想高橋43",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想高橋43",
+        "expected": "仮想高橋43",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-044",
+    "beforeLine": "担当：仮想佐藤61",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想佐藤61",
+        "expected": "仮想佐藤61",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-045",
+    "beforeLine": "担当：仮想高橋29",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想高橋29",
+        "expected": "仮想高橋29",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-046",
+    "beforeLine": "担当：仮想田中50",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想田中50",
+        "expected": "仮想田中50",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-047",
+    "beforeLine": "担当：仮想高橋47",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想高橋47",
+        "expected": "仮想高橋47",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-048",
+    "beforeLine": "担当：仮想田中94",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想田中94",
+        "expected": "仮想田中94",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-049",
+    "beforeLine": "担当：仮想佐藤29",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想佐藤29",
+        "expected": "仮想佐藤29",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 7
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-050",
+    "beforeLine": "担当：仮想佐藤26",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想佐藤26",
+        "expected": "仮想佐藤26",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 8
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-051",
+    "beforeLine": "2_IT",
+    "fields": []
+  },
+  {
+    "id": "native-line-052",
+    "beforeLine": "教室：架空室I1I43",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室I1I43",
+        "expected": "架空室I1l43",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-053",
+    "beforeLine": "教室：架空室O061",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室O061",
+        "expected": "架空室O061",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-054",
+    "beforeLine": "教室：架空室B29",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室B29",
+        "expected": "架空室B29",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-055",
+    "beforeLine": "教室：架空室O050",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室O050",
+        "expected": "架空室O050",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-056",
+    "beforeLine": "教室：架空室O047",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室O047",
+        "expected": "架空室O047",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-057",
+    "beforeLine": "教室：架空室O094",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室O094",
+        "expected": "架空室O094",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-058",
+    "beforeLine": "教室：架空室B29",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室B29",
+        "expected": "架空室B29",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 7
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-059",
+    "beforeLine": "教室：架空室B26",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室B26",
+        "expected": "架空室B26",
+        "slot": {
+          "ClassName": "2_IT",
+          "Day": "1",
+          "Period": 8
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-060",
+    "beforeLine": "科目：架空数学12",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空数学12",
+        "expected": "架空数学12",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-061",
+    "beforeLine": "科目：架空数学39",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空数学39",
+        "expected": "架空数学39",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-062",
+    "beforeLine": "科目：架空理科93",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空理科93",
+        "expected": "架空理科93",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-063",
+    "beforeLine": "科目：架空理科34",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空理科34",
+        "expected": "架空理科34",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-064",
+    "beforeLine": "科目：架空数学11",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空数学11",
+        "expected": "架空数学11",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-065",
+    "beforeLine": "科目：架空英語81",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空英語81",
+        "expected": "架空英語81",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-066",
+    "beforeLine": "科目：架空理科48",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空理科48",
+        "expected": "架空理科48",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 7
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-067",
+    "beforeLine": "科目：架空理科99",
+    "fields": [
+      {
+        "role": "subject",
+        "before": "架空理科99",
+        "expected": "架空理科99",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 8
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-068",
+    "beforeLine": "担当：仮想高橋12",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想高橋12",
+        "expected": "仮想高橋12",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-069",
+    "beforeLine": "担当：仮想田中39",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想田中39",
+        "expected": "仮想田中39",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-070",
+    "beforeLine": "担当：仮想高橋93",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想高橋93",
+        "expected": "仮想高橋93",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-071",
+    "beforeLine": "担当：仮想高橋34",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想高橋34",
+        "expected": "仮想高橋34",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-072",
+    "beforeLine": "担当：仮想佐藤11",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想佐藤11",
+        "expected": "仮想佐藤11",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-073",
+    "beforeLine": "担当：仮想佐藤81",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想佐藤81",
+        "expected": "仮想佐藤81",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-074",
+    "beforeLine": "担当：仮想高橋48",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想高橋48",
+        "expected": "仮想高橋48",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 7
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-075",
+    "beforeLine": "担当：仮想田中99",
+    "fields": [
+      {
+        "role": "teacher",
+        "before": "仮想田中99",
+        "expected": "仮想田中99",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 8
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-076",
+    "beforeLine": "AI_1",
+    "fields": []
+  },
+  {
+    "id": "native-line-077",
+    "beforeLine": "教室：架空室A12",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室A12",
+        "expected": "架空室A12",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-078",
+    "beforeLine": "教室：架空室O039",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室O039",
+        "expected": "架空室O039",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-079",
+    "beforeLine": "教室：架空室I1I93",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室I1I93",
+        "expected": "架空室I1l93",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-080",
+    "beforeLine": "教室：架空室B34",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室B34",
+        "expected": "架空室B34",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-081",
+    "beforeLine": "教室：架空室O011",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室O011",
+        "expected": "架空室O011",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-082",
+    "beforeLine": "教室：架空室B81",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室B81",
+        "expected": "架空室B81",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-083",
+    "beforeLine": "教室：架空室O048",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室O048",
+        "expected": "架空室O048",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 7
+        }
+      }
+    ]
+  },
+  {
+    "id": "native-line-084",
+    "beforeLine": "教室：架空室I1I99",
+    "fields": [
+      {
+        "role": "room",
+        "before": "架空室I1I99",
+        "expected": "架空室I1l99",
+        "slot": {
+          "ClassName": "AI_1",
+          "Day": "1",
+          "Period": 8
+        }
+      }
+    ]
+  }
+]

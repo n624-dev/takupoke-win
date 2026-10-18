@@ -1,0 +1,157 @@
+{
+  "scope": "Byte-exact closed actual-product development observations and source snapshots. Fictional source crops may be serialized in raw documents; no real school data, complete PDF/page raster, weights or binaries.",
+  "files": {
+    "hybrid-inspection.jsonl": {
+      "bytes": 317292,
+      "sha256": "32e49539ec4e26f7aaa3c1a0f23dc443c18ea44c1ace030f6b7be88f7414fc3c"
+    },
+    "hybrid-receipt.json": {
+      "bytes": 123,
+      "sha256": "48fbde80268e86acf72e7acb2fb2f629c21f7cad514891077ad6c713415dfecf"
+    },
+    "hybrid-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "v5-receipt.json": {
+      "bytes": 123,
+      "sha256": "3cd6e6e696a790f156bc18fd04f8c84258391ddcfe32f3b7baf66ed4dec24565"
+    },
+    "execution-freeze.json": {
+      "bytes": 10588,
+      "sha256": "7c47e0b059e70fa6105f537d0853548200544843c751005420c3ce8e9563c9a3"
+    },
+    "v5-inspection.jsonl": {
+      "bytes": 106016,
+      "sha256": "817bb49057f1e9139a4e295902ee839b757ca743d42b9c4936f80a1af18d5b5f"
+    },
+    "v5-stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "hybrid-stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "inputs.json": {
+      "bytes": 9545,
+      "sha256": "a47bfd7ad42c2e9cd122edda940e0415a1c26a155a03b0fb2129518dbe2588a1"
+    },
+    "v5-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "report.json": {
+      "bytes": 9666,
+      "sha256": "45a03dfbb661b59d3c95d6cabb8fe2387b3f4280df6de43d9e38b00091c15ae1"
+    },
+    "as-run-Read.cs": {
+      "bytes": 6915,
+      "sha256": "d721551a142c11a7b06aa278ad12e6ec6581c3ba6e98f516d5283f0b5b022098"
+    },
+    "alphabet.json": {
+      "bytes": 110788,
+      "sha256": "d858428fbe0ada92b439a5f277b51bc1b318fd985d80946a3ce859d7f2446a92"
+    },
+    "freeze.json": {
+      "bytes": 3077,
+      "sha256": "569c89fe2fab20414a8c193b58165f5e7565252ded88bd2bd227ec7541a439d0"
+    },
+    "oracle.json": {
+      "bytes": 162115,
+      "sha256": "3df55d2bbcd2f06c7827f27959fc3cd2eaebaa66da70841922fd2d9b6c062af3"
+    },
+    "v5-observations.jsonl": {
+      "bytes": 4245404,
+      "sha256": "680fa11d971a3232ca9e862ad313aad97b6c3b81ec34bca0e9a4731955f78ab8"
+    },
+    "hybrid-observations.jsonl": {
+      "bytes": 8573144,
+      "sha256": "ac74ff1680ce079ca8dacb9dedc973e8ced6eac9685559f44d7a93c13e686fe2"
+    },
+    "v6-dictionary.json": {
+      "bytes": 112374,
+      "sha256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f"
+    },
+    "sources/tools/ocr-production-validation/Read.cs": {
+      "bytes": 6915,
+      "sha256": "d721551a142c11a7b06aa278ad12e6ec6581c3ba6e98f516d5283f0b5b022098"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryModelBundleStore.cs": {
+      "bytes": 9902,
+      "sha256": "b059a1a1aaae42a8a61db504ffee272fa4456a80f7e39769b3f95df8fbf163df"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryOcrModels.cs": {
+      "bytes": 2166,
+      "sha256": "8b4afbc01d5b11909f261738662c83801929921e6cb83fc06584d1ec9e68776e"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrCropCompleteness.cs": {
+      "bytes": 6003,
+      "sha256": "cd2ca77d976855da1eb80739d040b11b6e311e85a4104c5477ddc1005f4bd182"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrDetectorProbability.cs": {
+      "bytes": 1386,
+      "sha256": "f221a38e197b8a7f2d9a922219077ceb0adc97950366d093e5c9503cf0b65c71"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryAuditCertification.cs": {
+      "bytes": 4888,
+      "sha256": "226fea751cffb21b86165de6690bc5072bf524a6181b4d76281fcb1a06c6f904"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OnnxJapaneseOcr.cs": {
+      "bytes": 26122,
+      "sha256": "58f43dead74a470644aa781b839d002c0e0cb98e01f00f6baca3d633a7b9440e"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryCapturedLayoutBuilder.cs": {
+      "bytes": 1293,
+      "sha256": "fd5b41b1b342dc7f9944f04347a85b3bf75bd9d12f29f471e315ac73fd1dd864"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryContainmentIndex.cs": {
+      "bytes": 2320,
+      "sha256": "eb1b98d93b697abd2eba187ab4f3cea3da5c717a6d16b49ea4e0f6f215baad53"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryOutputDecoder.cs": {
+      "bytes": 2235,
+      "sha256": "4b0da14cef205b426ca06c8bb8453663bde0aba76d16b7fb637f960e5aee3849"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrWhiteGapPartition.cs": {
+      "bytes": 2266,
+      "sha256": "62eb957afb2b527303643d037829363abbc02776f266d069d8bc06c082c193b6"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryDocumentBuilder.cs": {
+      "bytes": 54808,
+      "sha256": "6622945599f8a3d62f7ac983b898fa8c8304be4ef4b5b9f70ed139c74e5621b7"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrInkCropFrame.cs": {
+      "bytes": 2776,
+      "sha256": "5aa2605f3d743ba91e307778bd1dcb38faf10ead1492efe024774cfb1c07aa0d"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrAsciiRefinement.cs": {
+      "bytes": 3541,
+      "sha256": "01fa23c046b2be430b9cd0b5c9efa78fadca9f47c0005d3cc5bf66cfe8f0454b"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryCoordinator.cs": {
+      "bytes": 24086,
+      "sha256": "6cd882e4f084aa47bd2e91e2da70d3537e8ccfdfa923aa78976a5fd5aa0ef7a0"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrCtcDecoder.cs": {
+      "bytes": 2589,
+      "sha256": "9a95f142408a60de47965b91aa81f47a4a34e9274700d283148efea1fc927126"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OcrInputTransform.cs": {
+      "bytes": 6239,
+      "sha256": "b13927678f0c5ed3f05d6e01c35f580647e228f969059bb003d4a47c2a6b7eaa"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/OnnxAsciiOcr.cs": {
+      "bytes": 4826,
+      "sha256": "212be449861c5b9329d89b5584af1b95868ae3c42b81e04ef8f2740f1c6309e1"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryAnalysisConverter.cs": {
+      "bytes": 5977,
+      "sha256": "3bb2d8fcb42f04b26f72f3d6bec31b0f06dd110d4a5e4ed9ca1ec3bb19ca2767"
+    },
+    "sources/src/Takupoke.Infrastructure/Recovery/RecoveryModelStore.cs": {
+      "bytes": 6942,
+      "sha256": "ad370251951dc72467268bd8eceeaeccbddcfcb69465c841e47df9a9e825bc61"
+    }
+  }
+}

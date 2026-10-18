@@ -1,0 +1,532 @@
+{
+  "arms": {
+    "baseline": {
+      "inputSHA256": "c14b5d699a562e585974266db2348bbdcdbed923c45be8a7a6eae6a98b9754e1",
+      "files": {
+        "DocumentFormat.OpenXml.dll": {
+          "bytes": 7985120,
+          "sha256": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499"
+        },
+        "DocumentFormat.OpenXml.Framework.dll": {
+          "bytes": 478688,
+          "sha256": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae"
+        },
+        "Microsoft.Data.Sqlite.dll": {
+          "bytes": 177464,
+          "sha256": "b98d957462be432895b00dccca012d3c127e118d3d4262418014b92c7bbd66cf"
+        },
+        "Microsoft.ML.OnnxRuntime.dll": {
+          "bytes": 232480,
+          "sha256": "4c6985df4aa2f810ba8a2b37c3c791e619d8fe126954a6bd28cffd3f4adeba95"
+        },
+        "SQLitePCLRaw.batteries_v2.dll": {
+          "bytes": 5120,
+          "sha256": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b"
+        },
+        "SQLitePCLRaw.core.dll": {
+          "bytes": 51200,
+          "sha256": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84"
+        },
+        "SQLitePCLRaw.provider.e_sqlite3.dll": {
+          "bytes": 36864,
+          "sha256": "df996bcae63c2cabcfe8d4b9c5110eb39a2a4706178b07d875665391c6eb3995"
+        },
+        "System.IO.Packaging.dll": {
+          "bytes": 159504,
+          "sha256": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+        },
+        "System.Numerics.Tensors.dll": {
+          "bytes": 410936,
+          "sha256": "9d96dc759fdb54cbc3c26ee65cfd78ff32e3745f418119cc0811e63d3f29ecb9"
+        },
+        "System.Security.Cryptography.ProtectedData.dll": {
+          "bytes": 39760,
+          "sha256": "b61a1445b99a1486a5d9abbd45d766497f136270f5b04862defee1fc054ded14"
+        },
+        "Takupoke.Core.dll": {
+          "bytes": 412672,
+          "sha256": "200498da762168a3fc8ef3abd260851b3411b3f477c603dcd6ab772c9e81028b"
+        },
+        "Takupoke.Core.pdb": {
+          "bytes": 89632,
+          "sha256": "ef185884d27428b3d256d3846b83ed6a39a6fcc1ecebb6a7f6ced213e32b8716"
+        },
+        "Takupoke.Infrastructure.dll": {
+          "bytes": 738816,
+          "sha256": "f3a7f380328cb303db7447932d30789e30a9434dbc83970ca886335f311c9ad0"
+        },
+        "Takupoke.Infrastructure.pdb": {
+          "bytes": 157272,
+          "sha256": "28718da514254071a2eb9ebc6c70c9e06ebe81fff861342dc3fc00d982307504"
+        },
+        "Takupoke.OcrComparison.deps.json": {
+          "bytes": 18055,
+          "sha256": "b607d9e8079d42c7b249259b9cb9c3cea3017cca2482bf5c7177eb86d418123f"
+        },
+        "Takupoke.OcrComparison.dll": {
+          "bytes": 30720,
+          "sha256": "50a3c7c49140a22b27537ea9e450ffa944b8b72c930184bbf820c3370a5ba516"
+        },
+        "Takupoke.OcrComparison.exe": {
+          "bytes": 162304,
+          "sha256": "4e6629163e976a268e3b9525ca074bc594b1233f50b4ae46b9799e096949baf6"
+        },
+        "Takupoke.OcrComparison.pdb": {
+          "bytes": 14044,
+          "sha256": "3994747ca7fdf2d79a39c823e669e23fec221aa7fb15a55ceae5a2dbcc8929cb"
+        },
+        "Takupoke.OcrComparison.runtimeconfig.json": {
+          "bytes": 342,
+          "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+        },
+        "UglyToad.PdfPig.Core.dll": {
+          "bytes": 50176,
+          "sha256": "cbdd1809ee0f4ba617900845d182e5e67183377fe5848a8d9d1222b3c395116b"
+        },
+        "UglyToad.PdfPig.dll": {
+          "bytes": 4251648,
+          "sha256": "c47abebdffebb6e48a1d40f4c22ce5f673c57558ecdb3187841b728112dea279"
+        },
+        "UglyToad.PdfPig.DocumentLayoutAnalysis.dll": {
+          "bytes": 248320,
+          "sha256": "c0d1e237eabcb2c741fc7ab7b26c255af6f5751d1cd7e86d7ae613611f79bc88"
+        },
+        "UglyToad.PdfPig.Fonts.dll": {
+          "bytes": 1095680,
+          "sha256": "30521d2aa02252c0097cd3a9b12832368d5c925e1ccb4bc3a5735671bd3d2e1e"
+        },
+        "UglyToad.PdfPig.Package.dll": {
+          "bytes": 4608,
+          "sha256": "3227f79347329b57e50745d2ade1deb7ccdfe57da1d382796283832aae6ea41a"
+        },
+        "UglyToad.PdfPig.Tokenization.dll": {
+          "bytes": 23040,
+          "sha256": "539d0ca2c7981b9eaf8541e17434911042f7cc73d3abc24962994bb99472ed3c"
+        },
+        "UglyToad.PdfPig.Tokens.dll": {
+          "bytes": 48128,
+          "sha256": "d6fbd73a520bb961ffcc98030ab686f43c88b03f5b059ba11e3781e0f091433d"
+        },
+        "runtimes\\android\\native\\onnxruntime.aar": {
+          "bytes": 30241654,
+          "sha256": "82048d1f462218adae4ba76477089ab0ba76093d84f733540066db1a8ba6b827"
+        },
+        "runtimes\\browser-wasm\\nativeassets\\net9.0\\e_sqlite3.a": {
+          "bytes": 1308854,
+          "sha256": "c64ae8d44dc3e1aa03aca4e79ccc501cbc3a3c490e8e2ea9e369367f68cf0f21"
+        },
+        "runtimes\\ios\\native\\onnxruntime.xcframework.zip": {
+          "bytes": 46790152,
+          "sha256": "60cd467b88cbe61142dd3f9f6c1e5f4e1d88e3c48a943335aea7587324d48bb6"
+        },
+        "runtimes\\linux-arm\\native\\libe_sqlite3.so": {
+          "bytes": 982224,
+          "sha256": "43556c2f5075857bf57be1136d556733bdc27195884fbdde127cd976d1c25ad5"
+        },
+        "runtimes\\linux-arm64\\native\\libe_sqlite3.so": {
+          "bytes": 1534296,
+          "sha256": "707fff6b18c1f083158e7a543c8d2545d5485f547ffd96db29679a95f52878d5"
+        },
+        "runtimes\\linux-arm64\\native\\libonnxruntime.so": {
+          "bytes": 18693384,
+          "sha256": "648ffa64fbe027ae27139109410900cf776a030dec2dbbac51053318cc44c286"
+        },
+        "runtimes\\linux-arm64\\native\\libonnxruntime_providers_shared.so": {
+          "bytes": 198792,
+          "sha256": "3b6be288fbfb7dff8770d08a23defdde18e8f7e0f5a2b344a0e5e238c999ea88"
+        },
+        "runtimes\\linux-armel\\native\\libe_sqlite3.so": {
+          "bytes": 1375344,
+          "sha256": "3f4d9b9ca49bb3f100882e78ba85807398cee19b481bfd4c301a8f5f58d48540"
+        },
+        "runtimes\\linux-mips64\\native\\libe_sqlite3.so": {
+          "bytes": 1756544,
+          "sha256": "985884523e512414f3e50aa359f08dad3ce635e99405e7823de9b26a7db38d09"
+        },
+        "runtimes\\linux-musl-arm\\native\\libe_sqlite3.so": {
+          "bytes": 1322584,
+          "sha256": "7fec7057d16e8b5ae54fed0c42a0e6b85e40df0d57092ef20cd647a4e1c1e0ed"
+        },
+        "runtimes\\linux-musl-arm64\\native\\libe_sqlite3.so": {
+          "bytes": 1450704,
+          "sha256": "530e2f74f259fe04faa4b595336e671fab5eedbb6f4e94dad59494efb7b00c2a"
+        },
+        "runtimes\\linux-musl-riscv64\\native\\libe_sqlite3.so": {
+          "bytes": 1015888,
+          "sha256": "d8e54eb7dc52ea0a7df9b78ac6feb85af429e7264613099df478825dea5805d4"
+        },
+        "runtimes\\linux-musl-s390x\\native\\libe_sqlite3.so": {
+          "bytes": 1685752,
+          "sha256": "64260c0460ad6efa7dce9263bff7a4b64ad66172ccc580cb09181c845e1a3407"
+        },
+        "runtimes\\linux-musl-x64\\native\\libe_sqlite3.so": {
+          "bytes": 1445336,
+          "sha256": "647b7b5886526691aed58e0fcbb56dc1e6dea8b1f9f5390782f0c95269250db1"
+        },
+        "runtimes\\linux-ppc64le\\native\\libe_sqlite3.so": {
+          "bytes": 1937408,
+          "sha256": "1ef00b5e3ac63e491f59ecf587680fc52ad844cea62e0a879a1315ef6bd10fc6"
+        },
+        "runtimes\\linux-riscv64\\native\\libe_sqlite3.so": {
+          "bytes": 1291896,
+          "sha256": "6b390eecbc6f55c44d9ab8a774f1fe4283dfb33a72e6f29f4e0b173065e7e105"
+        },
+        "runtimes\\linux-s390x\\native\\libe_sqlite3.so": {
+          "bytes": 1655776,
+          "sha256": "dfd5ab35f6d61155a3c629d0bceff4d6e0f0f190983f3fb8f681fb34ec08c67e"
+        },
+        "runtimes\\linux-x64\\native\\libe_sqlite3.so": {
+          "bytes": 1470784,
+          "sha256": "b0f5c48026fedcf9f05cf31c6fadf9e1e001ca59cd85aa68b8b6814e52c18a07"
+        },
+        "runtimes\\linux-x64\\native\\libonnxruntime.so": {
+          "bytes": 22326072,
+          "sha256": "13ab8084954fa4a47c777880180b90810d6020f021441395712b48a75b74c68b"
+        },
+        "runtimes\\linux-x64\\native\\libonnxruntime_providers_shared.so": {
+          "bytes": 14632,
+          "sha256": "086ec1d5388f64153d9c63470d126693db9a182c8ce236d3a1119068471b8a0d"
+        },
+        "runtimes\\linux-x86\\native\\libe_sqlite3.so": {
+          "bytes": 1547984,
+          "sha256": "fe8229e5baeaf21e721cf65626a6b07ec22d9b17d07bd624e7a77927174277f1"
+        },
+        "runtimes\\maccatalyst-arm64\\native\\libe_sqlite3.dylib": {
+          "bytes": 1695264,
+          "sha256": "8d63d80bc6caa754679d6fc89fd741a32c156f136c34759cc8fff8cd51468a93"
+        },
+        "runtimes\\maccatalyst-x64\\native\\libe_sqlite3.dylib": {
+          "bytes": 1724352,
+          "sha256": "43d27adbc5ba40850bac42a12aea08314a22a43d3ce77cdc7a6cc47ecffb5746"
+        },
+        "runtimes\\osx-arm64\\native\\libe_sqlite3.dylib": {
+          "bytes": 1696624,
+          "sha256": "09fe20a6c050912a7944b2f2f2981debe31679f7919f523c87251ae8cf0f2daa"
+        },
+        "runtimes\\osx-arm64\\native\\libonnxruntime.dylib": {
+          "bytes": 35138784,
+          "sha256": "d306d2bc768540766c7ed8a1e0ff05d2870c77a934ebeee4a7bafa1b732ef299"
+        },
+        "runtimes\\osx-x64\\native\\libe_sqlite3.dylib": {
+          "bytes": 1724472,
+          "sha256": "02344e1d0bcb5ed447ad9b79ed19e37a590fb1ece3eba1e63efbc35e36e47bdf"
+        },
+        "runtimes\\osx-x64\\native\\libonnxruntime.dylib": {
+          "bytes": 39742608,
+          "sha256": "8c9c78de65ea3786f987c0d980e9c1b13a3a5fbc6b3e2965ba05b450e6e4c054"
+        },
+        "runtimes\\win-arm64\\native\\e_sqlite3.dll": {
+          "bytes": 1814528,
+          "sha256": "4177542756bd94f75b55fb74367e0cf34e66a88ffaf95755489af14c6ca2f792"
+        },
+        "runtimes\\win-arm64\\native\\onnxruntime.dll": {
+          "bytes": 14868512,
+          "sha256": "99a11bb077f723a81d100fd98099f332e4178bbb7025ac10fd40699a0b82c2f0"
+        },
+        "runtimes\\win-arm64\\native\\onnxruntime.lib": {
+          "bytes": 2124,
+          "sha256": "73b90a251880c4ef6b7bfc3d8ac44cf111ab13a19d8a14697e822218009eb054"
+        },
+        "runtimes\\win-arm64\\native\\onnxruntime_providers_shared.dll": {
+          "bytes": 21048,
+          "sha256": "27cafd6da30843bf4c5f42f1af16cdd42af4aca69f9003bb3ef7382d8c794978"
+        },
+        "runtimes\\win-arm64\\native\\onnxruntime_providers_shared.lib": {
+          "bytes": 2314,
+          "sha256": "08494afafb299b7e32772726ead6f060702cbd4ebaf4e760a64c613a80acb099"
+        },
+        "runtimes\\win-x64\\native\\e_sqlite3.dll": {
+          "bytes": 1978880,
+          "sha256": "b7385d722c83fb52142a00477a726723745916d22a555711ee89834c1111fb2e"
+        },
+        "runtimes\\win-x64\\native\\onnxruntime.dll": {
+          "bytes": 14186016,
+          "sha256": "dec964ab1ee36cc9b0ae247d13b376627992fc57dec0454354017ab8fd84f1ea"
+        },
+        "runtimes\\win-x64\\native\\onnxruntime.lib": {
+          "bytes": 2124,
+          "sha256": "977263ca76e6a9d0f230a198d3b05b2a2bddfed66bc5c4d4fd25293b03cc78b5"
+        },
+        "runtimes\\win-x64\\native\\onnxruntime_providers_shared.dll": {
+          "bytes": 22088,
+          "sha256": "a2b3a50956aa75a9879c8472bc7df4f7a8072bcd2db19a1b7d988e7688f293ef"
+        },
+        "runtimes\\win-x64\\native\\onnxruntime_providers_shared.lib": {
+          "bytes": 2314,
+          "sha256": "82b8de544d855964658d3c5e41e5f2da7422ebc6a1275d5385fdb12d7e4516b7"
+        },
+        "runtimes\\win-x86\\native\\e_sqlite3.dll": {
+          "bytes": 1533952,
+          "sha256": "d13eb819d1353d98c684c88672868bbfcc6a52eb5987bdf2557ec02fabce4ea7"
+        }
+      },
+      "goldReadByWorker": false,
+      "sourceCommit": "70ba342a9e6ecba7f5aff2febccc593eaea2e320"
+    },
+    "candidate": {
+      "inputSHA256": "c14b5d699a562e585974266db2348bbdcdbed923c45be8a7a6eae6a98b9754e1",
+      "files": {
+        "DocumentFormat.OpenXml.dll": {
+          "bytes": 7985120,
+          "sha256": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499"
+        },
+        "DocumentFormat.OpenXml.Framework.dll": {
+          "bytes": 478688,
+          "sha256": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae"
+        },
+        "Microsoft.Data.Sqlite.dll": {
+          "bytes": 177464,
+          "sha256": "b98d957462be432895b00dccca012d3c127e118d3d4262418014b92c7bbd66cf"
+        },
+        "Microsoft.ML.OnnxRuntime.dll": {
+          "bytes": 232480,
+          "sha256": "4c6985df4aa2f810ba8a2b37c3c791e619d8fe126954a6bd28cffd3f4adeba95"
+        },
+        "SQLitePCLRaw.batteries_v2.dll": {
+          "bytes": 5120,
+          "sha256": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b"
+        },
+        "SQLitePCLRaw.core.dll": {
+          "bytes": 51200,
+          "sha256": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84"
+        },
+        "SQLitePCLRaw.provider.e_sqlite3.dll": {
+          "bytes": 36864,
+          "sha256": "df996bcae63c2cabcfe8d4b9c5110eb39a2a4706178b07d875665391c6eb3995"
+        },
+        "System.IO.Packaging.dll": {
+          "bytes": 159504,
+          "sha256": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+        },
+        "System.Numerics.Tensors.dll": {
+          "bytes": 410936,
+          "sha256": "9d96dc759fdb54cbc3c26ee65cfd78ff32e3745f418119cc0811e63d3f29ecb9"
+        },
+        "System.Security.Cryptography.ProtectedData.dll": {
+          "bytes": 39760,
+          "sha256": "b61a1445b99a1486a5d9abbd45d766497f136270f5b04862defee1fc054ded14"
+        },
+        "Takupoke.Core.dll": {
+          "bytes": 412672,
+          "sha256": "65c8ac14f1d73f9ed38169ec68e4d3bf70e3998e83a9ab91a068d34e5dfcf6d6"
+        },
+        "Takupoke.Core.pdb": {
+          "bytes": 90252,
+          "sha256": "a2a94db4520463f97330be1d3d8d4843c728fe45b6c996cf90c5e8af477ffe73"
+        },
+        "Takupoke.Infrastructure.dll": {
+          "bytes": 750592,
+          "sha256": "df3703f529ea70609e8711943436692b63c06ceccc445d1489de5b845f1a3cea"
+        },
+        "Takupoke.Infrastructure.pdb": {
+          "bytes": 160824,
+          "sha256": "50f0c6dac80752bdea5b643acd796d6e6b4dac7eeec0bc795c393783713e3e8c"
+        },
+        "Takupoke.OcrComparison.deps.json": {
+          "bytes": 18055,
+          "sha256": "b607d9e8079d42c7b249259b9cb9c3cea3017cca2482bf5c7177eb86d418123f"
+        },
+        "Takupoke.OcrComparison.dll": {
+          "bytes": 31744,
+          "sha256": "4d336e111874ea8aa7a6f52cb7e9a09449a5f0f37a9e0ee344267de8f277c1e4"
+        },
+        "Takupoke.OcrComparison.exe": {
+          "bytes": 162816,
+          "sha256": "f57be69066957cd058b3f35411e115058a9193a079b741ba8c595c43d1fb8ddf"
+        },
+        "Takupoke.OcrComparison.pdb": {
+          "bytes": 14772,
+          "sha256": "26691c86471bbb066064ad38675798681105f1bc4ae989b0cf489c96cf21d502"
+        },
+        "Takupoke.OcrComparison.runtimeconfig.json": {
+          "bytes": 342,
+          "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+        },
+        "UglyToad.PdfPig.Core.dll": {
+          "bytes": 50176,
+          "sha256": "cbdd1809ee0f4ba617900845d182e5e67183377fe5848a8d9d1222b3c395116b"
+        },
+        "UglyToad.PdfPig.dll": {
+          "bytes": 4251648,
+          "sha256": "c47abebdffebb6e48a1d40f4c22ce5f673c57558ecdb3187841b728112dea279"
+        },
+        "UglyToad.PdfPig.DocumentLayoutAnalysis.dll": {
+          "bytes": 248320,
+          "sha256": "c0d1e237eabcb2c741fc7ab7b26c255af6f5751d1cd7e86d7ae613611f79bc88"
+        },
+        "UglyToad.PdfPig.Fonts.dll": {
+          "bytes": 1095680,
+          "sha256": "30521d2aa02252c0097cd3a9b12832368d5c925e1ccb4bc3a5735671bd3d2e1e"
+        },
+        "UglyToad.PdfPig.Package.dll": {
+          "bytes": 4608,
+          "sha256": "3227f79347329b57e50745d2ade1deb7ccdfe57da1d382796283832aae6ea41a"
+        },
+        "UglyToad.PdfPig.Tokenization.dll": {
+          "bytes": 23040,
+          "sha256": "539d0ca2c7981b9eaf8541e17434911042f7cc73d3abc24962994bb99472ed3c"
+        },
+        "UglyToad.PdfPig.Tokens.dll": {
+          "bytes": 48128,
+          "sha256": "d6fbd73a520bb961ffcc98030ab686f43c88b03f5b059ba11e3781e0f091433d"
+        },
+        "runtimes\\android\\native\\onnxruntime.aar": {
+          "bytes": 30241654,
+          "sha256": "82048d1f462218adae4ba76477089ab0ba76093d84f733540066db1a8ba6b827"
+        },
+        "runtimes\\browser-wasm\\nativeassets\\net9.0\\e_sqlite3.a": {
+          "bytes": 1308854,
+          "sha256": "c64ae8d44dc3e1aa03aca4e79ccc501cbc3a3c490e8e2ea9e369367f68cf0f21"
+        },
+        "runtimes\\ios\\native\\onnxruntime.xcframework.zip": {
+          "bytes": 46790152,
+          "sha256": "60cd467b88cbe61142dd3f9f6c1e5f4e1d88e3c48a943335aea7587324d48bb6"
+        },
+        "runtimes\\linux-arm\\native\\libe_sqlite3.so": {
+          "bytes": 982224,
+          "sha256": "43556c2f5075857bf57be1136d556733bdc27195884fbdde127cd976d1c25ad5"
+        },
+        "runtimes\\linux-arm64\\native\\libe_sqlite3.so": {
+          "bytes": 1534296,
+          "sha256": "707fff6b18c1f083158e7a543c8d2545d5485f547ffd96db29679a95f52878d5"
+        },
+        "runtimes\\linux-arm64\\native\\libonnxruntime.so": {
+          "bytes": 18693384,
+          "sha256": "648ffa64fbe027ae27139109410900cf776a030dec2dbbac51053318cc44c286"
+        },
+        "runtimes\\linux-arm64\\native\\libonnxruntime_providers_shared.so": {
+          "bytes": 198792,
+          "sha256": "3b6be288fbfb7dff8770d08a23defdde18e8f7e0f5a2b344a0e5e238c999ea88"
+        },
+        "runtimes\\linux-armel\\native\\libe_sqlite3.so": {
+          "bytes": 1375344,
+          "sha256": "3f4d9b9ca49bb3f100882e78ba85807398cee19b481bfd4c301a8f5f58d48540"
+        },
+        "runtimes\\linux-mips64\\native\\libe_sqlite3.so": {
+          "bytes": 1756544,
+          "sha256": "985884523e512414f3e50aa359f08dad3ce635e99405e7823de9b26a7db38d09"
+        },
+        "runtimes\\linux-musl-arm\\native\\libe_sqlite3.so": {
+          "bytes": 1322584,
+          "sha256": "7fec7057d16e8b5ae54fed0c42a0e6b85e40df0d57092ef20cd647a4e1c1e0ed"
+        },
+        "runtimes\\linux-musl-arm64\\native\\libe_sqlite3.so": {
+          "bytes": 1450704,
+          "sha256": "530e2f74f259fe04faa4b595336e671fab5eedbb6f4e94dad59494efb7b00c2a"
+        },
+        "runtimes\\linux-musl-riscv64\\native\\libe_sqlite3.so": {
+          "bytes": 1015888,
+          "sha256": "d8e54eb7dc52ea0a7df9b78ac6feb85af429e7264613099df478825dea5805d4"
+        },
+        "runtimes\\linux-musl-s390x\\native\\libe_sqlite3.so": {
+          "bytes": 1685752,
+          "sha256": "64260c0460ad6efa7dce9263bff7a4b64ad66172ccc580cb09181c845e1a3407"
+        },
+        "runtimes\\linux-musl-x64\\native\\libe_sqlite3.so": {
+          "bytes": 1445336,
+          "sha256": "647b7b5886526691aed58e0fcbb56dc1e6dea8b1f9f5390782f0c95269250db1"
+        },
+        "runtimes\\linux-ppc64le\\native\\libe_sqlite3.so": {
+          "bytes": 1937408,
+          "sha256": "1ef00b5e3ac63e491f59ecf587680fc52ad844cea62e0a879a1315ef6bd10fc6"
+        },
+        "runtimes\\linux-riscv64\\native\\libe_sqlite3.so": {
+          "bytes": 1291896,
+          "sha256": "6b390eecbc6f55c44d9ab8a774f1fe4283dfb33a72e6f29f4e0b173065e7e105"
+        },
+        "runtimes\\linux-s390x\\native\\libe_sqlite3.so": {
+          "bytes": 1655776,
+          "sha256": "dfd5ab35f6d61155a3c629d0bceff4d6e0f0f190983f3fb8f681fb34ec08c67e"
+        },
+        "runtimes\\linux-x64\\native\\libe_sqlite3.so": {
+          "bytes": 1470784,
+          "sha256": "b0f5c48026fedcf9f05cf31c6fadf9e1e001ca59cd85aa68b8b6814e52c18a07"
+        },
+        "runtimes\\linux-x64\\native\\libonnxruntime.so": {
+          "bytes": 22326072,
+          "sha256": "13ab8084954fa4a47c777880180b90810d6020f021441395712b48a75b74c68b"
+        },
+        "runtimes\\linux-x64\\native\\libonnxruntime_providers_shared.so": {
+          "bytes": 14632,
+          "sha256": "086ec1d5388f64153d9c63470d126693db9a182c8ce236d3a1119068471b8a0d"
+        },
+        "runtimes\\linux-x86\\native\\libe_sqlite3.so": {
+          "bytes": 1547984,
+          "sha256": "fe8229e5baeaf21e721cf65626a6b07ec22d9b17d07bd624e7a77927174277f1"
+        },
+        "runtimes\\maccatalyst-arm64\\native\\libe_sqlite3.dylib": {
+          "bytes": 1695264,
+          "sha256": "8d63d80bc6caa754679d6fc89fd741a32c156f136c34759cc8fff8cd51468a93"
+        },
+        "runtimes\\maccatalyst-x64\\native\\libe_sqlite3.dylib": {
+          "bytes": 1724352,
+          "sha256": "43d27adbc5ba40850bac42a12aea08314a22a43d3ce77cdc7a6cc47ecffb5746"
+        },
+        "runtimes\\osx-arm64\\native\\libe_sqlite3.dylib": {
+          "bytes": 1696624,
+          "sha256": "09fe20a6c050912a7944b2f2f2981debe31679f7919f523c87251ae8cf0f2daa"
+        },
+        "runtimes\\osx-arm64\\native\\libonnxruntime.dylib": {
+          "bytes": 35138784,
+          "sha256": "d306d2bc768540766c7ed8a1e0ff05d2870c77a934ebeee4a7bafa1b732ef299"
+        },
+        "runtimes\\osx-x64\\native\\libe_sqlite3.dylib": {
+          "bytes": 1724472,
+          "sha256": "02344e1d0bcb5ed447ad9b79ed19e37a590fb1ece3eba1e63efbc35e36e47bdf"
+        },
+        "runtimes\\osx-x64\\native\\libonnxruntime.dylib": {
+          "bytes": 39742608,
+          "sha256": "8c9c78de65ea3786f987c0d980e9c1b13a3a5fbc6b3e2965ba05b450e6e4c054"
+        },
+        "runtimes\\win-arm64\\native\\e_sqlite3.dll": {
+          "bytes": 1814528,
+          "sha256": "4177542756bd94f75b55fb74367e0cf34e66a88ffaf95755489af14c6ca2f792"
+        },
+        "runtimes\\win-arm64\\native\\onnxruntime.dll": {
+          "bytes": 14868512,
+          "sha256": "99a11bb077f723a81d100fd98099f332e4178bbb7025ac10fd40699a0b82c2f0"
+        },
+        "runtimes\\win-arm64\\native\\onnxruntime.lib": {
+          "bytes": 2124,
+          "sha256": "73b90a251880c4ef6b7bfc3d8ac44cf111ab13a19d8a14697e822218009eb054"
+        },
+        "runtimes\\win-arm64\\native\\onnxruntime_providers_shared.dll": {
+          "bytes": 21048,
+          "sha256": "27cafd6da30843bf4c5f42f1af16cdd42af4aca69f9003bb3ef7382d8c794978"
+        },
+        "runtimes\\win-arm64\\native\\onnxruntime_providers_shared.lib": {
+          "bytes": 2314,
+          "sha256": "08494afafb299b7e32772726ead6f060702cbd4ebaf4e760a64c613a80acb099"
+        },
+        "runtimes\\win-x64\\native\\e_sqlite3.dll": {
+          "bytes": 1978880,
+          "sha256": "b7385d722c83fb52142a00477a726723745916d22a555711ee89834c1111fb2e"
+        },
+        "runtimes\\win-x64\\native\\onnxruntime.dll": {
+          "bytes": 14186016,
+          "sha256": "dec964ab1ee36cc9b0ae247d13b376627992fc57dec0454354017ab8fd84f1ea"
+        },
+        "runtimes\\win-x64\\native\\onnxruntime.lib": {
+          "bytes": 2124,
+          "sha256": "977263ca76e6a9d0f230a198d3b05b2a2bddfed66bc5c4d4fd25293b03cc78b5"
+        },
+        "runtimes\\win-x64\\native\\onnxruntime_providers_shared.dll": {
+          "bytes": 22088,
+          "sha256": "a2b3a50956aa75a9879c8472bc7df4f7a8072bcd2db19a1b7d988e7688f293ef"
+        },
+        "runtimes\\win-x64\\native\\onnxruntime_providers_shared.lib": {
+          "bytes": 2314,
+          "sha256": "82b8de544d855964658d3c5e41e5f2da7422ebc6a1275d5385fdb12d7e4516b7"
+        },
+        "runtimes\\win-x86\\native\\e_sqlite3.dll": {
+          "bytes": 1533952,
+          "sha256": "d13eb819d1353d98c684c88672868bbfcc6a52eb5987bdf2557ec02fabce4ea7"
+        }
+      },
+      "goldReadByWorker": false,
+      "sourceCommit": "231fe87203b9c92a0c79993dc8649a6f990f25dc"
+    }
+  },
+  "sameOriginalManifest": true,
+  "baselineSourceCommit": "70ba342a9e6ecba7f5aff2febccc593eaea2e320"
+}

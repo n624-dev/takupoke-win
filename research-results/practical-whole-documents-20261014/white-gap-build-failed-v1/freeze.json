@@ -1,0 +1,18 @@
+{
+  "recipe": "consumed-primary-portable-ascii-white-gap-v1",
+  "sourceSHA256": {
+    "tools/ocr-practical-documents/run_portable_white_gap.py": "bb7a11ee835edd7bcf9c65b1fcf303a43288690ebb2e350835d20e460fd290fa",
+    "tools/ocr-practical-documents/PortableWhiteGapProgram.cs": "be743255f8c25b5018ad2aac0df73c53435e84db0847f5c25d1406df9e7162fd",
+    "tools/ocr-practical-documents/portable-white-gap-probe/PortableWhiteGapProbe.csproj": "324d7a1c683c33de9bb7234cbb4480cfe8d3cf0946d9c85450f2158d617bce3f"
+  },
+  "readerFiles": {},
+  "inputsSHA256": "c0cb3dc40d84a509b3540eec4b9cc00747de26ae3cfa4982d6041726f008f6ef",
+  "oracleSHA256": "3df55d2bbcd2f06c7827f27959fc3cd2eaebaa66da70841922fd2d9b6c062af3",
+  "primaryRawSHA256": "6f11d816d978c9498c5db36148f412bd26ef5330dc94fe41dcdfc191c3ddfde7",
+  "qualification": false,
+  "plannedRouting": "Physical left grid column, raw primary ASCII only, literal canonical portable English output, reject <= .05, supported padding; retain native confidence and require read-only original header confirmation below .8",
+  "additionalPrimaryCalls": 0,
+  "inputPixelsModified": false,
+  "tailRouting": "Raw primary ASCII suffix + measured original all-white vertical band in native prefix/tail gap, partition full original line with no nonwhite removal; same literal character count, native min .8/reject .05/padding. CTC boxes not outline/script proof, no final claim",
+  "scope": "Consumed cohort, new English header calls only; no heldout/device/full primary rerun credit"
+}

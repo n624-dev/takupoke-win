@@ -1,0 +1,138 @@
+{
+  "scope": "Initialization/feature extraction fidelity only on fixed consumed ordinals; no oracle access, quality score, training, final or activation",
+  "rows": 48,
+  "matches": {
+    "observerTextIntervals": 48,
+    "torchTextIntervals": 48,
+    "floor08Decisions": 48,
+    "allSourceNonwhiteRetained": 48
+  },
+  "maximumDifferences": {
+    "observerVsOriginalProb": 0.0,
+    "torchVsOriginalLogits": 0.0,
+    "torchVsOriginalProb": 2.384185791015625e-07,
+    "featureTrunkVsObserver": 0.0,
+    "maxEmittedConfidenceDifference": 2.384185791015625e-07
+  },
+  "dynamicShapes": [
+    {
+      "batch": 1,
+      "inputWidth": 320,
+      "featureShape": [
+        1,
+        40,
+        192
+      ],
+      "featureMaxDifference": 0.0,
+      "probabilityMaxDifference": 2.384185791015625e-07,
+      "logitMaxDifference": 0.0,
+      "textIntervalsIdentical": true,
+      "scope": "Synthetic numeric input shape fidelity only, no recognition quality claim"
+    },
+    {
+      "batch": 1,
+      "inputWidth": 481,
+      "featureShape": [
+        1,
+        60,
+        192
+      ],
+      "featureMaxDifference": 0.0,
+      "probabilityMaxDifference": 2.384185791015625e-07,
+      "logitMaxDifference": 0.0,
+      "textIntervalsIdentical": true,
+      "scope": "Synthetic numeric input shape fidelity only, no recognition quality claim"
+    },
+    {
+      "batch": 1,
+      "inputWidth": 640,
+      "featureShape": [
+        1,
+        80,
+        192
+      ],
+      "featureMaxDifference": 0.0,
+      "probabilityMaxDifference": 1.1920928955078125e-07,
+      "logitMaxDifference": 0.0,
+      "textIntervalsIdentical": true,
+      "scope": "Synthetic numeric input shape fidelity only, no recognition quality claim"
+    },
+    {
+      "batch": 1,
+      "inputWidth": 960,
+      "featureShape": [
+        1,
+        120,
+        192
+      ],
+      "featureMaxDifference": 0.0,
+      "probabilityMaxDifference": 1.1920928955078125e-07,
+      "logitMaxDifference": 0.0,
+      "textIntervalsIdentical": true,
+      "scope": "Synthetic numeric input shape fidelity only, no recognition quality claim"
+    },
+    {
+      "batch": 2,
+      "inputWidth": 320,
+      "featureShape": [
+        2,
+        40,
+        192
+      ],
+      "featureMaxDifference": 0.0,
+      "probabilityMaxDifference": 2.384185791015625e-07,
+      "logitMaxDifference": 0.0,
+      "textIntervalsIdentical": true,
+      "scope": "Synthetic numeric input shape fidelity only, no recognition quality claim"
+    },
+    {
+      "batch": 2,
+      "inputWidth": 481,
+      "featureShape": [
+        2,
+        60,
+        192
+      ],
+      "featureMaxDifference": 0.0,
+      "probabilityMaxDifference": 2.384185791015625e-07,
+      "logitMaxDifference": 0.0,
+      "textIntervalsIdentical": true,
+      "scope": "Synthetic numeric input shape fidelity only, no recognition quality claim"
+    },
+    {
+      "batch": 2,
+      "inputWidth": 640,
+      "featureShape": [
+        2,
+        80,
+        192
+      ],
+      "featureMaxDifference": 0.0,
+      "probabilityMaxDifference": 1.1920928955078125e-07,
+      "logitMaxDifference": 0.0,
+      "textIntervalsIdentical": true,
+      "scope": "Synthetic numeric input shape fidelity only, no recognition quality claim"
+    },
+    {
+      "batch": 2,
+      "inputWidth": 960,
+      "featureShape": [
+        2,
+        120,
+        192
+      ],
+      "featureMaxDifference": 0.0,
+      "probabilityMaxDifference": 1.1920928955078125e-07,
+      "logitMaxDifference": 0.0,
+      "textIntervalsIdentical": true,
+      "scope": "Synthetic numeric input shape fidelity only, no recognition quality claim"
+    }
+  ],
+  "rawSha256": "a05efc7523af78935bef24fdbbd8b6c15c3f8324f96d6316e764a4a3dd0128cc",
+  "elapsedSeconds": 39.34366086299997,
+  "peakRssMiB": 1191.93359375,
+  "oracleOpened": false,
+  "trainingStarted": false,
+  "finalOpened": false,
+  "portability": "Original and extracted graphs standard domain only/opset11. Full-network PyTorch/CoreML conversion not attempted. Cached-feature head training may be feasible without a transformers medium class; not yet validated by training or independent new development."
+}

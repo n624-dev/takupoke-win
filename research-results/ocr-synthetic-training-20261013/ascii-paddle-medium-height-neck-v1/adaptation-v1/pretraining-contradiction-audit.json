@@ -1,0 +1,7 @@
+{
+  "scope": "Beforeoptimizer sameprovidedPNG or sameFP32input differentpositiveCTCliteral -> excludeallcollidingrowsfrom everyupdate, no guessedlabel/falsedamage target. Keepnewdevunchanged. CheckCTCminimumframefeasibility.",
+  "excludedOptimizerRows": 0,
+  "groups": [],
+  "ctcFrameFeasibility": true,
+  "targetsNeverRepaired": true
+}

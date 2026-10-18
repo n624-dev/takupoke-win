@@ -1,7 +1,7 @@
 # 時間割変更・曜日・行除外・原文保持
 
 対応関係・宣言名・実行方法のSHA-256：
-`d68467f36bfb5651eab04a3b9769317b43840619042de6400b46ed5e1b7537e5`
+`d4fc673beca3742a6871051d533ac40a1df2c9ee2f57a383da4e6c5505c30557`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -30,16 +30,20 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs](../../tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs)
 
+- `IndependentRowAndWeekdayApprovalsAreAtomicAndSurviveRefreshReparseAndRestart`
 - `ExplicitApprovalPersistsWithAnalysisAndSurvivesRefreshReparseAndRestart`
-- `ContentChangeReselectionAndYearChangesInvalidateWithoutResurrection`
-- `OldParserConsentIsClearedEvenIfTheContentIsUnchanged`
+- `ContentAndOriginalChangesInvalidateWhileFailedYearReparsePreservesPreviousDecision`
+- `OldParserConsentIsRevalidatedAndCommittedWithTheCurrentAnalysis`
 - `StalePreviewMissingSelectionCancellationAndReplacementCannotSave`
 - `ExcludingEveryChangeRefusesAndPreservesLastGood`
 - `StorageFailureRollsBackConsentAnalysisAndAttemptTogether`
 - `PreviousPayloadsWithoutOptionalConsentRemainReadable`
+- `FailedCurrentRevalidationPreservesOlderConfirmationAndLastGoodResult`
+- `ReselectingAnotherFileWithIdenticalBytesCannotInheritTheDecision`
 
 ## [tests/Takupoke.Integration.Tests/ChangeRowReaderTests.cs](../../tests/Takupoke.Integration.Tests/ChangeRowReaderTests.cs)
 
+- `WeekdayCorrectionCannotSilentlyExcludeRowsAndExplicitExclusionPreservesRemainingText`
 - `IdenticalWeekdayTailGroupsPhysicalRowsButStillRequiresFullExplicitConsent`
 - `GroupingPreservesGapsDifferentWeekdaysAndPopulatedRows`
 - `ExplicitSelectionPreservesOriginalFieldsAndExcludesWholeRows`
@@ -53,6 +57,8 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `ReadsRealOoxmlStructureAndKeepsSourceText`
 - `ValidWeekdayFormulaUsesSavedValueWithoutEvaluation`
 - `FormulaWarningsAreAvailableForPreviewButCannotBeAccepted`
+- `LiteralWeekdayRequiresExplicitBoundedCorrection`
+- `CorrectionCannotHideMissingFormulaCacheOrAnotherFormula`
 - `RejectsFormulaInSubjectColumn`
 - `RejectsUnsupportedOrAmbiguousStructures`
 - `CancellationStopsReading`

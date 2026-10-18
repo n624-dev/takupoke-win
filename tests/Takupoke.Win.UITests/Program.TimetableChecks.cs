@@ -23,7 +23,13 @@ internal static partial class Program
     private static void CheckLessonFocusAcrossClock()
     {
         AutomationElement[] lessons = [];
-        Wait(() => (lessons = FindLessons("架空科目甲")).Length == 5, "The synthetic subject appears on all five weekdays");
+        try { Wait(() => (lessons = FindLessons("架空科目甲")).Length == 5, "The synthetic subject appears on all five weekdays"); }
+        catch
+        {
+            Console.Error.WriteLine("Fictional weekday fixture diagnostic: " + string.Join("; ", FindLessons("架空科目甲").Select(lesson => lesson.Current.AutomationId)));
+            Capture("fictional-five-weekday-fixture-failure");
+            throw;
+        }
         var ids = lessons.Select(lesson => lesson.Current.AutomationId).Order(StringComparer.Ordinal).ToArray();
         Require(ids.All(id => id.Length > 0) && ids.Distinct(StringComparer.Ordinal).Count() == 5,
             "The same subject on different weekdays has five stable unique automation IDs.");
@@ -49,6 +55,7 @@ internal static partial class Program
         Console.WriteLine("Synthetic timetable menu: open-before-clock");
         OpenDisplayMenu(root);
         var option = ByName("時間割変更を反映", ControlType.MenuItem);
+        Require(Checked(option) == previousValue, "The original menu check matches the persisted display preference.");
         var menuId = option.GetRuntimeId();
         var previousGrid = WaitElement("timetable-grid-scroller").GetRuntimeId();
         var previousTick = ReadProbe(clockProbe);
@@ -175,7 +182,7 @@ internal static partial class Program
     private static extern nint GetAncestor(nint window, uint flags);
     private static bool SavedIncludesChanges(string path)
     {
-        using var document = JsonDocument.Parse(File.ReadAllBytes(path));
+        using var document = JsonDocument.Parse(PreferenceSnapshot.ReadBytes(path));
         return !document.RootElement.TryGetProperty("includesChanges", out var value) || value.GetBoolean();
     }
 }

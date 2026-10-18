@@ -1,0 +1,53 @@
+{
+  "originalSelection": "active-baseline",
+  "originalTrialFailed": true,
+  "originalFreshGeneratedOrInferred": false,
+  "trainingInputsAndProtocolUnchanged": true,
+  "initialSourceDraftChanges": {
+    "portable.py": {
+      "initial": "241b2a8724fe5e8b843d3af19c74e2b9e1c0a6e0837d6428654590d3fcca3ab9",
+      "current": "c82b9af4e0cce9b56aa052820eff018c8430c46784b174e918f22fa7a9cb7635"
+    }
+  },
+  "changeExplanation": "Export-only portable.py metadata changed from inherited finalOpenedfalse to freshOpenedtrue/fullDocumentQualifiedfalse for a future successful stage; never run for this failed trial. Later exploratory/diagnostic scripts have independent receipts.",
+  "coreSources": [
+    "train.py",
+    "data.py",
+    "model.py",
+    "adapter.py",
+    "fresh.py",
+    "download_fonts.py"
+  ],
+  "currentSourceHashes": {
+    "portable.py": "c82b9af4e0cce9b56aa052820eff018c8430c46784b174e918f22fa7a9cb7635",
+    "data.py": "41493d48dfc80bcacb6695988e57d442bae717f6c339b970985292304728a30b",
+    "framing_alias_audit.py": "8305cc15d30915d1d7adee98a75287aedf3880c4adbdb588762f4dd8e7516e60",
+    "fresh.py": "337ed6710ac4b763ed475c6845e5273d976dd1f3b15f6ce756b55c2e46b66750",
+    "distortion.py": "f87b6b8a4ec16e73bf22f17db8f52448a5753c27b8fb3a1ef80f46f099905ac5",
+    "glyph_geometry.py": "13dc4ceee3966841dab9df87faedae63f44a832bc669d73cdf0f26ea60f14f2b",
+    "exploratory_epoch1.py": "6bca07f43a2e9c6d2effee12ec58174679596de3ebef772062b3d2064d191699",
+    "model.py": "499be516a853d5396c6bc44aaae20811510d4f79542c19e3071b4636155cc573",
+    "postfit.py": "32e13fe494a7b2fca9baf826ddf3bece9bb06c64d4685c6345b391494981dbf9",
+    "train.py": "cac004727fef0a80514dd58f418ffcef9eec9275a679f68f5412315c931f68c4",
+    "bundle_exploratory.py": "f9c7ac8254135ba2eb70ab3883fcecf6b103b5b8eaa5e5b15a4f691e9bb19d5b",
+    "package_portable.py": "8caced8d025ca9e53ae07da3ebffa57c91cf28df64631c52c6ced5254e9c53f7",
+    "report.py": "b430beb7ab2578587283ce75046d60a7e5809f23c632d1afd76cbc5b5bb28168",
+    "adapter.py": "563a8734c3b5830d8bc8f5742c9eca772bd8c889976cb188e97216a1651fa697",
+    "download_fonts.py": "d536220e835eb1778fe5e4890b6b14636fe8b0b80e15e78cfdf6f1b7a23b338c",
+    "audit_corpus.py": "d51756b596a9365a4eee43ce85ab2587b46cd94c0cabd39185084e7ff7c1e65b",
+    "verify_artifacts.py": "789b4bb31ac0ab681a33526ef18f9494c3bfbb8c1a7b625cd33e63c6901d8529"
+  },
+  "allSourceAstAndExplicitTextEncoding": true,
+  "researchJsonFiles": 36,
+  "researchJsonlRows": 6420,
+  "allRegisteredPngNpzShaAndExactFp32": 1952,
+  "portablePackageFilesVerified": 33,
+  "portableModelSha256": "95bab179e0d6cc75269419078d68696cd4679661f94f6128b858b7a074fe2971",
+  "oldInitializerActiveOnnxAndJapanesePrimaryUnchanged": true,
+  "ownScratchBytes": 457181319,
+  "freeDiskBytes": 2792079360,
+  "iosEdited": false,
+  "childCommitOrPush": false,
+  "modelActivated": false,
+  "nextOptimizerHeldByParent": true
+}

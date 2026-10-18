@@ -1,0 +1,195 @@
+{
+  "status": "research-only; not qualified, not activated",
+  "selection": {
+    "name": "epoch-1",
+    "epoch": 1,
+    "exact": 162,
+    "cer": 0.02872670807453416,
+    "path": "/workspace/scratch/ocr-finetune-20261013/epoch-1",
+    "sha256": "8286b4fc102d5a398ae9a535872cb5223fd5369171dcec03f2af57725d06c046"
+  },
+  "protocolSha256": "0b7ddb2b90065d56ce4060d34118d70cbccb159ca61f9f8dd496f64a9833dc6a",
+  "trainRows": 1536,
+  "developmentRows": 192,
+  "finalGroups": {
+    "baseline": {
+      "all": {
+        "rows": 384,
+        "exact": 320,
+        "cer": 0.02831923501287238,
+        "correctAtFloor08": 295,
+        "incorrectAtFloor08": 41,
+        "belowFloor08OrEmpty": 48
+      },
+      "arbitrary-ascii": {
+        "rows": 96,
+        "exact": 87,
+        "cer": 0.010273972602739725,
+        "correctAtFloor08": 85,
+        "incorrectAtFloor08": 7,
+        "belowFloor08OrEmpty": 4
+      },
+      "confusable-code": {
+        "rows": 96,
+        "exact": 65,
+        "cer": 0.06799336650082918,
+        "correctAtFloor08": 59,
+        "incorrectAtFloor08": 18,
+        "belowFloor08OrEmpty": 19
+      },
+      "japanese": {
+        "rows": 96,
+        "exact": 82,
+        "cer": 0.02973977695167286,
+        "correctAtFloor08": 78,
+        "incorrectAtFloor08": 9,
+        "belowFloor08OrEmpty": 9
+      },
+      "mixed": {
+        "rows": 96,
+        "exact": 86,
+        "cer": 0.01566951566951567,
+        "correctAtFloor08": 73,
+        "incorrectAtFloor08": 7,
+        "belowFloor08OrEmpty": 16
+      },
+      "BIZUDPMincho-Regular": {
+        "rows": 192,
+        "exact": 163,
+        "cer": 0.025544703230653644,
+        "correctAtFloor08": 151,
+        "incorrectAtFloor08": 17,
+        "belowFloor08OrEmpty": 24
+      },
+      "ZenKakuGothicNew-Regular": {
+        "rows": 192,
+        "exact": 157,
+        "cer": 0.030979827089337175,
+        "correctAtFloor08": 144,
+        "incorrectAtFloor08": 24,
+        "belowFloor08OrEmpty": 24
+      }
+    },
+    "selected": {
+      "all": {
+        "rows": 384,
+        "exact": 351,
+        "cer": 0.013240161824200073,
+        "correctAtFloor08": 341,
+        "incorrectAtFloor08": 23,
+        "belowFloor08OrEmpty": 20
+      },
+      "arbitrary-ascii": {
+        "rows": 96,
+        "exact": 89,
+        "cer": 0.007990867579908675,
+        "correctAtFloor08": 88,
+        "incorrectAtFloor08": 6,
+        "belowFloor08OrEmpty": 2
+      },
+      "confusable-code": {
+        "rows": 96,
+        "exact": 80,
+        "cer": 0.03150912106135987,
+        "correctAtFloor08": 73,
+        "incorrectAtFloor08": 11,
+        "belowFloor08OrEmpty": 12
+      },
+      "japanese": {
+        "rows": 96,
+        "exact": 92,
+        "cer": 0.007434944237918215,
+        "correctAtFloor08": 92,
+        "incorrectAtFloor08": 2,
+        "belowFloor08OrEmpty": 2
+      },
+      "mixed": {
+        "rows": 96,
+        "exact": 90,
+        "cer": 0.008547008547008548,
+        "correctAtFloor08": 88,
+        "incorrectAtFloor08": 4,
+        "belowFloor08OrEmpty": 4
+      },
+      "BIZUDPMincho-Regular": {
+        "rows": 192,
+        "exact": 184,
+        "cer": 0.006010518407212622,
+        "correctAtFloor08": 177,
+        "incorrectAtFloor08": 3,
+        "belowFloor08OrEmpty": 12
+      },
+      "ZenKakuGothicNew-Regular": {
+        "rows": 192,
+        "exact": 167,
+        "cer": 0.020172910662824207,
+        "correctAtFloor08": 164,
+        "incorrectAtFloor08": 20,
+        "belowFloor08OrEmpty": 8
+      }
+    }
+  },
+  "improvements": 36,
+  "regressions": 5,
+  "onnxParity": {
+    "rows": 384,
+    "exactTextAndIntervals": 384,
+    "maximumProbabilityDifference": 0.0008983314037322998,
+    "dynamicProbes": [
+      {
+        "width": 320,
+        "batch": 2,
+        "shape": [
+          2,
+          40,
+          18710
+        ],
+        "exactTextAndIntervals": true,
+        "maximumProbabilityDifference": 3.5762786865234375e-07
+      },
+      {
+        "width": 481,
+        "batch": 2,
+        "shape": [
+          2,
+          60,
+          18710
+        ],
+        "exactTextAndIntervals": true,
+        "maximumProbabilityDifference": 8.940696716308594e-07
+      },
+      {
+        "width": 640,
+        "batch": 2,
+        "shape": [
+          2,
+          80,
+          18710
+        ],
+        "exactTextAndIntervals": true,
+        "maximumProbabilityDifference": 2.384185791015625e-07
+      },
+      {
+        "width": 960,
+        "batch": 2,
+        "shape": [
+          2,
+          120,
+          18710
+        ],
+        "exactTextAndIntervals": true,
+        "maximumProbabilityDifference": 2.384185791015625e-07
+      }
+    ],
+    "onnxBytes": 21176440,
+    "onnxSha256": "796b2eb06ed399a6799120b008a78da344f54dbe5151461b12f9bc9a1d1ec146",
+    "elapsedSecondsWithConcurrentWork": 46.43565130600018,
+    "torchEvaluationModeVerified": true,
+    "selectedRowsTouchingPadding": 6,
+    "comparisonCorrection": "Fresh eval-only Torch reload. Prior post-export Torch probability comparison invalid because legacy exporter restored a train-mode wrapper recursively. Model and checkpoint selection unchanged; no gold used."
+  },
+  "trainingMaxRssMiB": 1409.34765625,
+  "evaluationMaxRssMiB": 900.046875,
+  "finalPixelManifestSha256": "e21daa803652624202d93b2e72e76e356d170b1a959a5fe2469993b562e80cdf",
+  "limits": "Synthetic crop evaluation cannot establish full-document OCR, position/cell membership, validator safety, damage rejection, <=3 corrections, arbitrary school-independent unknown words, or broad 18,710-class regression coverage."
+}

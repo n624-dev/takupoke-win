@@ -9,28 +9,31 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class XlsxChangeReader
 {
-    public const int Version = 5;
+    public const int Version = 6;
     private const string SpreadsheetNamespace = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
     private const string RelationshipNamespace = "http://schemas.openxmlformats.org/package/2006/relationships";
     private const string DocumentRelationshipNamespace = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
     public static IReadOnlyList<ScheduleChange> Parse(byte[] data, int schoolYear,
-        CancellationToken cancellationToken = default, IReadOnlySet<int>? skippingRows = null)
+        CancellationToken cancellationToken = default, bool dateDerivedWeekdays = false,
+        IReadOnlySet<int>? skippingRows = null)
     {
         var table = ReadForPreview(data, schoolYear, cancellationToken);
         if (skippingRows is { Count: > 0 })
         {
             if (!skippingRows.IsSubsetOf(table.ReviewRows.Select(row => row.Row).ToHashSet()))
                 throw new ChangeParseException(ChangeErrorCode.Unsupported);
-            // Validate populated excluded rows too: weekday permission cannot hide other errors.
             _ = ChangeNormalizer.Parse(table.WithoutWeekdayOnlyRows(), schoolYear, cancellationToken,
                 allowEmptyPreview: true);
         }
         if (table.Warnings.FirstOrDefault(warning =>
-            warning.Row is null || skippingRows?.Contains(warning.Row.Value) != true) is { } warning)
-            throw warning;
+            (warning.Row is null || skippingRows?.Contains(warning.Row.Value) != true)
+            && (!dateDerivedWeekdays || !warning.CanCorrectWeekday)) is { } failure) throw failure;
         return ChangeNormalizer.Parse(table.Excluding(skippingRows ?? new HashSet<int>()), schoolYear,
             cancellationToken);
     }
+    public static IReadOnlyList<ScheduleChange> Parse(byte[] data, int schoolYear,
+        CancellationToken cancellationToken, IReadOnlySet<int>? excludedRows) =>
+        Parse(data, schoolYear, cancellationToken, dateDerivedWeekdays: false, skippingRows: excludedRows);
     public static ChangeTable ReadForPreview(byte[] data, int schoolYear, CancellationToken cancellationToken = default)
     {
         try { return Read(data, schoolYear, cancellationToken); }

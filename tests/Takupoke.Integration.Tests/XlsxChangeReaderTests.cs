@@ -33,6 +33,31 @@ public sealed class XlsxChangeReaderTests
         Assert.Equal(expected, Assert.Single(XlsxChangeReader.ReadForPreview(bytes, 2032).Warnings).Code);
         Assert.Equal(expected, Assert.Throws<ChangeParseException>(() => XlsxChangeReader.Parse(bytes, 2032)).Code);
     }
+    [Theory]
+    [InlineData("火", true)]
+    [InlineData("（火）", true)]
+    [InlineData("架空曜日", false)]
+    public void LiteralWeekdayRequiresExplicitBoundedCorrection(string printed, bool correctable)
+    {
+        var bytes = Workbook(mutate: entries => entries["xl/worksheets/sheet1.xml"] = entries["xl/worksheets/sheet1.xml"].Replace(">月<", ">" + printed + "<"));
+        var warning = Assert.Single(XlsxChangeReader.ReadForPreview(bytes, 2032).Warnings);
+        Assert.Equal(ChangeErrorCode.WeekdayMismatch, warning.Code); Assert.Equal(correctable, warning.CanCorrectWeekday);
+        Assert.Throws<ChangeParseException>(() => XlsxChangeReader.Parse(bytes, 2032));
+        if (correctable)
+        {
+            var change = Assert.Single(XlsxChangeReader.Parse(bytes, 2032, dateDerivedWeekdays: true));
+            Assert.Equal("2032-04-05", change.ChangeDate); Assert.Contains(ChangeNormalizer.Text(printed), change.RawText);
+        }
+        else Assert.Throws<ChangeParseException>(() => XlsxChangeReader.Parse(bytes, 2032, dateDerivedWeekdays: true));
+    }
+    [Fact]
+    public void CorrectionCannotHideMissingFormulaCacheOrAnotherFormula()
+    {
+        Assert.Equal(ChangeErrorCode.FormulaCache, Assert.Throws<ChangeParseException>(() => XlsxChangeReader.Parse(Workbook(formula: true), 2032, dateDerivedWeekdays: true)).Code);
+        // A bad date must fail even with a recognizable mismatched weekday.
+        var bytes = Workbook(formula: true, cache: "火", mutate: entries => entries["xl/worksheets/sheet1.xml"] = entries["xl/worksheets/sheet1.xml"].Replace(">4/5<", ">2/31<"));
+        Assert.Equal(ChangeErrorCode.Date, Assert.Throws<ChangeParseException>(() => XlsxChangeReader.Parse(bytes, 2032, dateDerivedWeekdays: true)).Code);
+    }
     [Fact]
     public void RejectsFormulaInSubjectColumn()
     {

@@ -43,7 +43,7 @@ public sealed partial class MainWindow : Window
         _themeTimer.Start();
         RootGrid.ActualThemeChanged += (_, _) => { ApplyWindowChrome(); if (_ready) Render(); };
         _uiSettings.TextScaleFactorChanged += (_, _) => DispatcherQueue.TryEnqueue(() => { if (_ready) Render(); });
-        _model.SnapshotChanged += () => { Render(); OfferInitialSetup(); };
+        _model.SnapshotChanged += () => { if (KeepManualFormForSnapshot()) UpdateStatus(); else Render(); OfferInitialSetup(); };
         _model.ClockChanged += () =>
         {
             if (_model.OfflineTest)
@@ -135,9 +135,12 @@ public sealed partial class MainWindow : Window
         PageHost.IsEnabled = !_model.Locked;
         foreach (var control in _operationControls) control.IsEnabled = !_model.Busy && _model.PreferencesReady && !_model.Locked;
         foreach (var control in _preferenceControls) control.IsEnabled = _model.PreferencesReady && !_model.Locked;
+        UpdateManualSubmitStatus();
+        _updateRecoveryBatchStatus?.Invoke();
     }
     private void Render()
     {
+        DismissChangedScheduleDetail();
         if (_dialogOpen || _selectingMaterial || DeferRenderForPopups()) { UpdateStatus(); return; }
         _popupRenderPending = false;
         var pageChanged = _renderedPage != _page;
@@ -171,10 +174,15 @@ public sealed partial class MainWindow : Window
         }
         foreach (var theme in new[] { "Light", "Dark" })
             ((SolidColorBrush)((ResourceDictionary)Navigation.Resources.ThemeDictionaries[theme])["NavigationViewSelectionIndicatorForeground"]).Color = MainAccentColor();
-        PageContent.Children.Clear(); _operationControls.Clear(); _preferenceControls.Clear();
+        // TextChanged is queued: retain the current editor text before a
+        // snapshot/theme rebuild replaces its control and discards that event.
+        if (!pageChanged && _page == "links" && _linkSearch is { } currentSearch) _linkQuery = currentSearch.Text;
+        PageContent.Children.Clear(); _operationControls.Clear(); _preferenceControls.Clear(); _updateRecoveryBatchStatus=null;
         UpdatePageLayout();
         PageContent.Spacing = 24;
         if (_page.StartsWith("material.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var material)) BuildMaterialDetails(material);
+        else if (_page.StartsWith("recovery.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var recovering)) BuildRecoveryPreview(recovering);
+        else if (_page == "ai-models") BuildRecoveryModels();
         else if (_page.StartsWith("analysis.", StringComparison.Ordinal) && Enum.TryParse<MaterialKind>(_page[9..], out var analysed)) BuildAnalysis(analysed);
         else if (_page == "account") BuildAccountData();
         else if (_page == "setup") BuildSetup();
@@ -238,9 +246,10 @@ public sealed partial class MainWindow : Window
     private static Border Card(UIElement content) => new() { Child = content, Padding = new Thickness(20), CornerRadius = new CornerRadius(12),
         Background = (Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"],
         BorderThickness = new Thickness(1), BorderBrush = (Brush)Application.Current.Resources["CardStrokeColorDefaultBrush"] };
-    private async Task<ContentDialogResult> Dialog(string title, UIElement content, string primary = "閉じる",
-        string? secondary = null, Action<ContentDialog>? configure = null)
+    private async Task<ContentDialogResult> Dialog(string title, UIElement content, string primary = "閉じる", string? secondary = null,
+        Func<string>? detailRevision = null, Action<ContentDialog>? configure = null)
     {
+        if (_dialogOpen) return ContentDialogResult.None;
         _dialogOpen = true;
         RegisterPopupTree(content);
         try
@@ -253,9 +262,11 @@ public sealed partial class MainWindow : Window
                 PrimaryButtonText = primary, CloseButtonText = secondary ?? "", DefaultButton = ContentDialogButton.Primary };
             _activeDialog = dialog;
             configure?.Invoke(dialog);
+            _scheduleDetailRevision = detailRevision;
+            _scheduleDetailSnapshot = detailRevision?.Invoke();
             return await dialog.ShowAsync();
         }
-        finally { _activeDialog = null; _dialogOpen = false; Render(); }
+        finally { _scheduleDetailRevision = null; _scheduleDetailSnapshot = null; _activeDialog = null; _dialogOpen = false; Render(); }
     }
     private Task Message(string title, string message) => Dialog(title, Text(message));
     private async Task SelectMaterial(MaterialKind kind)

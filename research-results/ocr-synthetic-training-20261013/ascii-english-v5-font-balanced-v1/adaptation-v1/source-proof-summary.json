@@ -1,0 +1,36 @@
+{
+  "models": [
+    {
+      "name": "official-baseline",
+      "pairs": 32,
+      "acceptedBothConflictingSources": 30,
+      "rawSha256": "47e0dc9ec817c4eec02e4998b1c7499fa618a5055d4a2e9958d003919053fe23",
+      "groups": {
+        "scriptAlias": 26,
+        "wholePrefixRemoved": 4
+      }
+    },
+    {
+      "name": "epoch-2",
+      "pairs": 32,
+      "acceptedBothConflictingSources": 6,
+      "rawSha256": "8df17aefedc0520480818fc9c2b627792333d9c6c55dca696b9b77e53477fbfe",
+      "groups": {
+        "scriptAlias": 3,
+        "wholePrefixRemoved": 3
+      }
+    },
+    {
+      "name": "epoch-4",
+      "pairs": 32,
+      "acceptedBothConflictingSources": 18,
+      "rawSha256": "bfbbccee0a1a66f34276a6377a1f41b702251dfda4989683fb3e34592c28ea4b",
+      "groups": {
+        "scriptAlias": 14,
+        "wholePrefixRemoved": 4
+      }
+    }
+  ],
+  "seconds": 14.104581050999968,
+  "scope": "Consumed unscored postselection controls; identical suppliedpixels cannot establishscriptorigin, completeness or wholeprefix. Refusingboth losesvalidcounterpart; independent originalsource/geometry/inkownership required."
+}

@@ -108,6 +108,14 @@ internal static partial class Program
         Wait(() => combo.Current.IsEnabled, "main color is enabled");
         if (combo.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll))
             ((ScrollItemPattern)scroll).ScrollIntoView();
+        // ExpandCollapse does not focus the control. After a native callback or
+        // asynchronous preference render, give this actual control focus before
+        // opening it once; never reopen a dismissed popup to rescue selection.
+        combo.SetFocus();
+        Wait(() => combo.Current.HasKeyboardFocus && !combo.Current.IsOffscreen
+            && Find("main-color") is { } current
+            && current.GetRuntimeId().SequenceEqual(combo.GetRuntimeId()),
+            "the current main color control has native keyboard focus before opening");
         var expansion = (ExpandCollapsePattern)combo.GetCurrentPattern(ExpandCollapsePattern.Pattern);
         Console.WriteLine($"Synthetic color popup before opening: {expansion.Current.ExpandCollapseState}");
         if (expansion.Current.ExpandCollapseState == ExpandCollapseState.Collapsed) expansion.Expand();
@@ -149,8 +157,7 @@ internal static partial class Program
 
     private static string? SavedMainColor(string path)
     {
-        if (!File.Exists(path)) return null;
-        using var document = JsonDocument.Parse(File.ReadAllBytes(path));
+        using var document = JsonDocument.Parse(PreferenceSnapshot.ReadBytes(path));
         return document.RootElement.TryGetProperty("mainColor", out var color) ? color.GetString() : "default";
     }
     private static void PickMaterial(string? path)
@@ -173,8 +180,10 @@ internal static partial class Program
         }
         var button = dialog!.FindFirst(TreeScope.Descendants, new AndCondition(new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button), new PropertyCondition(AutomationElement.AutomationIdProperty, path is null ? "2" : "1")));
         if (button is null) throw new InvalidOperationException("Native file picker action was not found.");
-        Invoke(button);
-        Wait(() => { try { return !dialog.Current.IsEnabled || dialog.Current.NativeWindowHandle == 0; } catch (ElementNotAvailableException) { return true; } }, "native file picker closes");
+        var pickerHandle = dialog!.Current.NativeWindowHandle;
+        if (pickerHandle == 0 || !IsWindowVisible(pickerHandle)) throw new InvalidOperationException("The selected native picker window is not visible.");
+        ((InvokePattern)button.GetCurrentPattern(InvokePattern.Pattern)).Invoke();
+        Wait(() => !IsWindowVisible(pickerHandle), "native file picker actually disappears");
     }
     private static void PointerClick(AutomationElement element)
     {
@@ -225,8 +234,7 @@ internal static partial class Program
     private static bool Checked(AutomationElement element) => ((TogglePattern)element.GetCurrentPattern(TogglePattern.Pattern)).Current.ToggleState == ToggleState.On;
     private static string? SavedClass(string path)
     {
-        if (!File.Exists(path)) return null;
-        using var document = JsonDocument.Parse(File.ReadAllBytes(path));
+        using var document = JsonDocument.Parse(PreferenceSnapshot.ReadBytes(path));
         var classes = document.RootElement.GetProperty("selectedClasses");
         return classes.GetArrayLength() == 1 ? classes[0].GetString() : null;
     }

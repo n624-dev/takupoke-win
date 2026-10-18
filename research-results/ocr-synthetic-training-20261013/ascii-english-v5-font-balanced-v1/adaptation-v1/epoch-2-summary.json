@@ -1,0 +1,253 @@
+{
+  "name": "epoch-2",
+  "positiveRows": 384,
+  "exact": 340,
+  "correctAccepted": 200,
+  "incorrectAccepted": 15,
+  "negativeRows": 112,
+  "negativeAccepted": 11,
+  "paddingRows": 4,
+  "cer": 0.008991537376586742,
+  "groups": {
+    "blank": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 0,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0
+    },
+    "clipped": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 16,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0
+    },
+    "code": {
+      "rows": 96,
+      "exact": 81,
+      "correctAccepted": 41,
+      "incorrectAccepted": 3,
+      "accepted": 44,
+      "nonempty": 96,
+      "characters": 832,
+      "editErrors": 18,
+      "cer": 0.021634615384615384,
+      "correctLowConfidence": 36,
+      "wrongHighConfidence": 4
+    },
+    "interior_damage": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 16,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0
+    },
+    "lookalike": {
+      "rows": 64,
+      "exact": 54,
+      "correctAccepted": 23,
+      "incorrectAccepted": 2,
+      "accepted": 25,
+      "nonempty": 64,
+      "characters": 558,
+      "editErrors": 13,
+      "cer": 0.023297491039426525,
+      "correctLowConfidence": 25,
+      "wrongHighConfidence": 2
+    },
+    "multiline": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 7,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0
+    },
+    "natural": {
+      "rows": 192,
+      "exact": 181,
+      "correctAccepted": 121,
+      "incorrectAccepted": 8,
+      "accepted": 129,
+      "nonempty": 192,
+      "characters": 3930,
+      "editErrors": 11,
+      "cer": 0.0027989821882951653,
+      "correctLowConfidence": 59,
+      "wrongHighConfidence": 8
+    },
+    "noise": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 0,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0
+    },
+    "printable": {
+      "rows": 32,
+      "exact": 24,
+      "correctAccepted": 15,
+      "incorrectAccepted": 2,
+      "accepted": 17,
+      "nonempty": 32,
+      "characters": 352,
+      "editErrors": 9,
+      "cer": 0.02556818181818182,
+      "correctLowConfidence": 9,
+      "wrongHighConfidence": 2
+    },
+    "unknown_cjk": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 0,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0
+    },
+    "unknown_mixed": {
+      "rows": 16,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 16,
+      "characters": 0,
+      "editErrors": 0,
+      "cer": null,
+      "correctLowConfidence": 0,
+      "wrongHighConfidence": 0
+    }
+  },
+  "rawSha256": "78d395506effd60b7634847fe111c97bd96f1071e8e765bb91a7a51aa127d3e0",
+  "scope": "Fresh literals and research-new development font families; development only, independent ASCII branch; no final/wholefield/documentqualification",
+  "fontMetrics": {
+    "Cousine": {
+      "rows": 96,
+      "characters": 1386,
+      "editErrors": 9,
+      "cer": 0.006493506493506494,
+      "exact": 87,
+      "correctLowConfidence": 21,
+      "wrongHighConfidence": 2,
+      "accepted": 64
+    },
+    "UbuntuMono": {
+      "rows": 96,
+      "characters": 1430,
+      "editErrors": 10,
+      "cer": 0.006993006993006993,
+      "exact": 88,
+      "correctLowConfidence": 32,
+      "wrongHighConfidence": 5,
+      "accepted": 60
+    },
+    "PTSerif": {
+      "rows": 96,
+      "characters": 1409,
+      "editErrors": 12,
+      "cer": 0.008516678495386799,
+      "exact": 87,
+      "correctLowConfidence": 37,
+      "wrongHighConfidence": 3,
+      "accepted": 50
+    },
+    "LibreCaslonText": {
+      "rows": 96,
+      "characters": 1447,
+      "editErrors": 20,
+      "cer": 0.013821700069108501,
+      "exact": 78,
+      "correctLowConfidence": 39,
+      "wrongHighConfidence": 6,
+      "accepted": 41
+    }
+  },
+  "codeMetrics": {
+    "rows": 160,
+    "characters": 1390,
+    "editErrors": 31,
+    "cer": 0.022302158273381296,
+    "exact": 135,
+    "correctLowConfidence": 61,
+    "wrongHighConfidence": 6,
+    "accepted": 69
+  },
+  "monoCodeMetrics": {
+    "rows": 80,
+    "characters": 680,
+    "editErrors": 13,
+    "cer": 0.01911764705882353,
+    "exact": 69,
+    "correctLowConfidence": 25,
+    "wrongHighConfidence": 3,
+    "accepted": 42
+  },
+  "fontCodeMetrics": {
+    "Cousine": {
+      "rows": 40,
+      "characters": 328,
+      "editErrors": 6,
+      "cer": 0.018292682926829267,
+      "exact": 34,
+      "correctLowConfidence": 10,
+      "wrongHighConfidence": 1,
+      "accepted": 21
+    },
+    "UbuntuMono": {
+      "rows": 40,
+      "characters": 352,
+      "editErrors": 7,
+      "cer": 0.019886363636363636,
+      "exact": 35,
+      "correctLowConfidence": 15,
+      "wrongHighConfidence": 2,
+      "accepted": 21
+    }
+  },
+  "reviewMetrics": {
+    "rows": 384,
+    "characters": 5672,
+    "editErrors": 51,
+    "cer": 0.008991537376586742,
+    "exact": 340,
+    "correctLowConfidence": 129,
+    "wrongHighConfidence": 16,
+    "accepted": 215
+  },
+  "allUnsupportedPaddingRefused": true
+}

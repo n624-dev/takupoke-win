@@ -1,0 +1,712 @@
+{
+  "scope": "Byte-exact closed invented development records and source snapshots only; no pixels, PDFs, learned weights or native binaries. Duplicate cached primary records do not provide independent measurements.",
+  "fileCount": 141,
+  "totalBytes": 113438528,
+  "files": {
+    "research-results/practical-whole-documents-20261014/preparation-failed-v1/as-run-failed-run.py": {
+      "bytes": 4056,
+      "sha256": "8e6c9b308cff70f7d308cfc313425c3f999e79e034b84a08d02702a673e16017",
+      "ownedSource": "practical-documents-20261014-v1/as-run-failed-run.py"
+    },
+    "research-results/practical-whole-documents-20261014/preparation-failed-v1/generation-freeze.json": {
+      "bytes": 1201,
+      "sha256": "578d9a0953b273b3be1200eaab36813b7924f136aff7903a8e6873e42f4d01da",
+      "ownedSource": "practical-documents-20261014-v1/generation-freeze.json"
+    },
+    "research-results/practical-whole-documents-20261014/preparation-failed-v1/generation-source.py": {
+      "bytes": 5390,
+      "sha256": "0ab4045dc93d9b4fbc8158bf051edfbaf369e4017da1043a7b8daa142f5bdd44",
+      "ownedSource": "practical-documents-20261014-v1/generation-source.py"
+    },
+    "research-results/practical-whole-documents-20261014/preparation-failed-v1/inputs.json": {
+      "bytes": 7976,
+      "sha256": "4e199939a9166e4f65708a6b97682096d2012a3e0893b12e7d6efe9b00453311",
+      "ownedSource": "practical-documents-20261014-v1/inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/preparation-failed-v1/oracle.json": {
+      "bytes": 162115,
+      "sha256": "3df55d2bbcd2f06c7827f27959fc3cd2eaebaa66da70841922fd2d9b6c062af3",
+      "ownedSource": "practical-documents-20261014-v1/oracle.json"
+    },
+    "research-results/practical-whole-documents-20261014/preparation-failed-v1/pdf-inputs.json": {
+      "bytes": 9129,
+      "sha256": "2cb039220e20219fef004e2bedfb2458e63577881e03a42f17f09881f0c49562",
+      "ownedSource": "practical-documents-20261014-v1/pdf-inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/preparation-failed-v1/reader-freeze.json": {
+      "bytes": 16703,
+      "sha256": "71f2c0220d39fa6cc4ae68cdfdc67f5bc2e523087a9a5db8b4a5bce859a54fb7",
+      "ownedSource": "practical-documents-20261014-v1/reader-freeze.json"
+    },
+    "research-results/practical-whole-documents-20261014/preparation-failed-v1/source-original-inputs.json": {
+      "bytes": 9315,
+      "sha256": "432b11c7bfbdeecaada119682760c31567c072c18585d1250b9338b72fd1d7d9",
+      "ownedSource": "practical-documents-20261014-v1/source-original-inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/preparation-failed-v1/source-original-receipt.json": {
+      "bytes": 9612,
+      "sha256": "2bdc7b649712f07e254a4414c0c33ae3c01479c113636447ff5ef0e0eaf6c903",
+      "ownedSource": "practical-documents-20261014-v1/source-original-receipt.json"
+    },
+    "research-results/practical-whole-documents-20261014/preparation-failed-v1/v5-inputs.json": {
+      "bytes": 9311,
+      "sha256": "f2044572a021afe989aec5f41bc4136da6e7f81036a4b16d116f5bc57a789fd5",
+      "ownedSource": "practical-documents-20261014-v1/v5-inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/preparation-failed-v1/v5-receipt.json": {
+      "bytes": 59,
+      "sha256": "d3786e087cbad93e42bf923bae898506360fd22cf4187cad7038bbd4e910bc6e",
+      "ownedSource": "practical-documents-20261014-v1/v5-receipt.json"
+    },
+    "research-results/practical-whole-documents-20261014/preparation-failed-v1/v5-stderr.txt": {
+      "bytes": 386,
+      "sha256": "b0460d8877fd9d4215968322e8e5592fde300508f2a3dafcc77f07c2f0ccba87",
+      "ownedSource": "practical-documents-20261014-v1/v5-stderr.txt"
+    },
+    "research-results/practical-whole-documents-20261014/preparation-failed-v1/v5-stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-documents-20261014-v1/v5-stdout.txt"
+    },
+    "research-results/practical-whole-documents-20261014/preparation-failed-v1/v6-inputs.json": {
+      "bytes": 9220,
+      "sha256": "459d8b2a508f4a90cf0de0bf1e089880136a1879becf88345af2ae2385fe332d",
+      "ownedSource": "practical-documents-20261014-v1/v6-inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/alphabet.json": {
+      "bytes": 110788,
+      "sha256": "d858428fbe0ada92b439a5f277b51bc1b318fd985d80946a3ce859d7f2446a92",
+      "ownedSource": "practical-documents-20261014-v2/alphabet.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/as-run-run.py": {
+      "bytes": 4112,
+      "sha256": "e624be7cb75e00e7450644c88f3cf8d3ab752317a5a8fb0d0c1a5c2a952f4cfa",
+      "ownedSource": "practical-documents-20261014-v2/as-run-run.py"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/as-run-score-v1.py": {
+      "bytes": 5158,
+      "sha256": "3d8dd1ea2eff0bf3e88a88e33af1d3fdaa6d2db3ced065dddabcda7af236109c",
+      "ownedSource": "practical-documents-20261014-v2/as-run-score-v1.py"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/generation-freeze.json": {
+      "bytes": 1201,
+      "sha256": "240d5b3573abbd50d26945132fc640727a5c6330f073b065024b34cdf5258b47",
+      "ownedSource": "practical-documents-20261014-v2/generation-freeze.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/inputs.json": {
+      "bytes": 7793,
+      "sha256": "1d1403fdea0b0cb06a789851f62a031ea57cb63190eedf89d78296f851fd880e",
+      "ownedSource": "practical-documents-20261014-v2/inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/inspection-freeze-labels-v2.json": {
+      "bytes": 2469,
+      "sha256": "4b3ea6e424aefd5941655c0de337d82b976bbd76a6d2a90db0c4b2e71c65431d",
+      "ownedSource": "practical-documents-20261014-v2/inspection-freeze-labels-v2.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/oracle.json": {
+      "bytes": 162115,
+      "sha256": "3df55d2bbcd2f06c7827f27959fc3cd2eaebaa66da70841922fd2d9b6c062af3",
+      "ownedSource": "practical-documents-20261014-v2/oracle.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/pdf-inputs.json": {
+      "bytes": 8946,
+      "sha256": "41dc1728248917ba931bd44c97cac808a0c2c1be7066a03d7a9a0048e733c3aa",
+      "ownedSource": "practical-documents-20261014-v2/pdf-inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/reader-freeze.json": {
+      "bytes": 16703,
+      "sha256": "901e0f05d7d292527f3cfbdf14272abe8b766251d4d8eb9e851a95b61f8e8953",
+      "ownedSource": "practical-documents-20261014-v2/reader-freeze.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/report-labels-v2.json": {
+      "bytes": 13304,
+      "sha256": "091adea29eb93dce84b6976e7056d598103c46c5ea0b0d2360de95c2744930e8",
+      "ownedSource": "practical-documents-20261014-v2/report-labels-v2.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/report.json": {
+      "bytes": 13029,
+      "sha256": "f5fa948857f014b138ddf9d2044fcff79eac44f565bba2d752cd7524ea4b06f5",
+      "ownedSource": "practical-documents-20261014-v2/report.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/source-original-inputs.json": {
+      "bytes": 9132,
+      "sha256": "fd14174c5c48887f4162df02768f579dcee6584923bf73e301f31ba6c42ed9c3",
+      "ownedSource": "practical-documents-20261014-v2/source-original-inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/source-original-receipt.json": {
+      "bytes": 9612,
+      "sha256": "2bdc7b649712f07e254a4414c0c33ae3c01479c113636447ff5ef0e0eaf6c903",
+      "ownedSource": "practical-documents-20261014-v2/source-original-receipt.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v5-inputs.json": {
+      "bytes": 9128,
+      "sha256": "c02f0963fe3042f709993d4317b044938109d0a3af00c260da093e4e804e6cee",
+      "ownedSource": "practical-documents-20261014-v2/v5-inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v5-inspection-labels-v2.jsonl": {
+      "bytes": 264081,
+      "sha256": "f94e2da58617c7f40abd52eefdfc38edabed8fd502bdf66ccadf7df672ee96ad",
+      "ownedSource": "practical-documents-20261014-v2/v5-inspection-labels-v2.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v5-inspection.jsonl": {
+      "bytes": 264081,
+      "sha256": "f94e2da58617c7f40abd52eefdfc38edabed8fd502bdf66ccadf7df672ee96ad",
+      "ownedSource": "practical-documents-20261014-v2/v5-inspection.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v5-observations.jsonl": {
+      "bytes": 8206916,
+      "sha256": "61c581797aea133b1f3b67d68d6b2ecfb7c184ac228ae8d51b35b3d98f7d0e99",
+      "ownedSource": "practical-documents-20261014-v2/v5-observations.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v5-receipt.json": {
+      "bytes": 123,
+      "sha256": "d49a184fe16bce17c11dd7cb9f456fd803e07c9b983a9d38f2b02bada6db44b3",
+      "ownedSource": "practical-documents-20261014-v2/v5-receipt.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v5-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-documents-20261014-v2/v5-stderr.txt"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v5-stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-documents-20261014-v2/v5-stdout.txt"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v6-dictionary.json": {
+      "bytes": 112374,
+      "sha256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f",
+      "ownedSource": "practical-documents-20261014-v2/v6-dictionary.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v6-inputs.json": {
+      "bytes": 9082,
+      "sha256": "2cebf42cf7de5c3f563f664e2cf26ae3fefab4921a68ded1a6b24d9da8c1b474",
+      "ownedSource": "practical-documents-20261014-v2/v6-inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v6-inspection-labels-v2.jsonl": {
+      "bytes": 263786,
+      "sha256": "f3fee684a26d796a50f6cf19d2ee7e11ee9b76cf76a04513963622711991025f",
+      "ownedSource": "practical-documents-20261014-v2/v6-inspection-labels-v2.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v6-inspection.jsonl": {
+      "bytes": 263248,
+      "sha256": "ff53091351ef5d260b0fdc53690da1011f189c80f1119ba2649e36da41de945c",
+      "ownedSource": "practical-documents-20261014-v2/v6-inspection.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v6-observations.jsonl": {
+      "bytes": 8111658,
+      "sha256": "6f11d816d978c9498c5db36148f412bd26ef5330dc94fe41dcdfc191c3ddfde7",
+      "ownedSource": "practical-documents-20261014-v2/v6-observations.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v6-receipt.json": {
+      "bytes": 123,
+      "sha256": "2ed22462adae0d8bbf9f91cb9c1043ea02577a69cc6d7d0348dab78fdf856be0",
+      "ownedSource": "practical-documents-20261014-v2/v6-receipt.json"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v6-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-documents-20261014-v2/v6-stderr.txt"
+    },
+    "research-results/practical-whole-documents-20261014/whole-pages-v2/v6-stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-documents-20261014-v2/v6-stdout.txt"
+    },
+    "research-results/practical-whole-documents-20261014/official-english-headers-v1/as-run-HeaderProbe.csproj": {
+      "bytes": 423,
+      "sha256": "2d6972596e4fd9ee07b40ad5555d79302b5abcc61bd0c29ae2a18e33adec7360",
+      "ownedSource": "practical-english-headers-20261014-v1/as-run-HeaderProbe.csproj"
+    },
+    "research-results/practical-whole-documents-20261014/official-english-headers-v1/as-run-HeaderProgram.cs": {
+      "bytes": 10113,
+      "sha256": "cb17790a82dda29fd2f6208d42896c5a3820bdf96c6cc24487a163c243083dc5",
+      "ownedSource": "practical-english-headers-20261014-v1/as-run-HeaderProgram.cs"
+    },
+    "research-results/practical-whole-documents-20261014/official-english-headers-v1/as-run-run_header.py": {
+      "bytes": 3848,
+      "sha256": "d9c449e432dffb67a1b71def863f9c8947ec99609df30381c1503ca28aadec94",
+      "ownedSource": "practical-english-headers-20261014-v1/as-run-run_header.py"
+    },
+    "research-results/practical-whole-documents-20261014/official-english-headers-v1/dictionary.json": {
+      "bytes": 2299,
+      "sha256": "ef84489f927fb92b64714c7f110404e5bfb83c4067bd609fe4c41d5f23e25659",
+      "ownedSource": "practical-english-headers-20261014-v1/dictionary.json"
+    },
+    "research-results/practical-whole-documents-20261014/official-english-headers-v1/freeze.json": {
+      "bytes": 11476,
+      "sha256": "a34e1c4ff84670da08eb0354fffececfa51b6711f0728903b22a82f6efc5b295",
+      "ownedSource": "practical-english-headers-20261014-v1/freeze.json"
+    },
+    "research-results/practical-whole-documents-20261014/official-english-headers-v1/inputs.json": {
+      "bytes": 679,
+      "sha256": "dcb9b2e25db335c8c98c90cc4ea4575e06b32e281def3db8797d8abe05bca406",
+      "ownedSource": "practical-english-headers-20261014-v1/inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/official-english-headers-v1/observations.jsonl": {
+      "bytes": 7858925,
+      "sha256": "3d9017a269843d72fb0732cd5c1fae27614f643915a288a4d0b9588d86510a15",
+      "ownedSource": "practical-english-headers-20261014-v1/observations.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/official-english-headers-v1/oracle.json": {
+      "bytes": 162115,
+      "sha256": "3df55d2bbcd2f06c7827f27959fc3cd2eaebaa66da70841922fd2d9b6c062af3",
+      "ownedSource": "practical-english-headers-20261014-v1/oracle.json"
+    },
+    "research-results/practical-whole-documents-20261014/official-english-headers-v1/raw-receipt.json": {
+      "bytes": 123,
+      "sha256": "041011248440fa59758e1419e46caef01c2a0a3fcd189e924936ae80bb668b3e",
+      "ownedSource": "practical-english-headers-20261014-v1/raw-receipt.json"
+    },
+    "research-results/practical-whole-documents-20261014/official-english-headers-v1/v6-inputs.json": {
+      "bytes": 9082,
+      "sha256": "2cebf42cf7de5c3f563f664e2cf26ae3fefab4921a68ded1a6b24d9da8c1b474",
+      "ownedSource": "practical-english-headers-20261014-v1/v6-inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/official-english-headers-v1/v6-observations.jsonl": {
+      "bytes": 8111658,
+      "sha256": "6f11d816d978c9498c5db36148f412bd26ef5330dc94fe41dcdfc191c3ddfde7",
+      "ownedSource": "practical-english-headers-20261014-v1/v6-observations.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/official-english-headers-v1/worker-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-english-headers-20261014-v1/worker-stderr.txt"
+    },
+    "research-results/practical-whole-documents-20261014/official-english-headers-v1/worker-stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-english-headers-20261014-v1/worker-stdout.txt"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/as-run-PortableHeaderProbe.csproj": {
+      "bytes": 431,
+      "sha256": "c325731881c3c79e261c2ff61cc314bafbccc419d91ee28197ea0539af3ea8e4",
+      "ownedSource": "practical-portable-headers-20261014-v1/as-run-PortableHeaderProbe.csproj"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/as-run-PortableHeaderProgram.cs": {
+      "bytes": 10658,
+      "sha256": "f5c0f1273e5873c8b20d368ba035e9d94ab980e3cf711d4c48e34933e9349b42",
+      "ownedSource": "practical-portable-headers-20261014-v1/as-run-PortableHeaderProgram.cs"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/as-run-run_portable_header.py": {
+      "bytes": 3933,
+      "sha256": "957024d2a1b066887bf2a36ebf1cccf2a46eee208bf9c24abc2b789bb93b69a1",
+      "ownedSource": "practical-portable-headers-20261014-v1/as-run-run_portable_header.py"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/as-run-score.py": {
+      "bytes": 2699,
+      "sha256": "f4c6076a8ae0b65687f3e057d85df67f5ed89b4abf067b7f8d2254b2b8a7b4b1",
+      "ownedSource": "practical-portable-headers-20261014-v1/as-run-score.py"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/dictionary.json": {
+      "bytes": 3614,
+      "sha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368",
+      "ownedSource": "practical-portable-headers-20261014-v1/dictionary.json"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/freeze.json": {
+      "bytes": 11567,
+      "sha256": "89f2cb72716ef85b8d85a1c070cc28431b2571049456e5c97e2cb5941dd7ab2f",
+      "ownedSource": "practical-portable-headers-20261014-v1/freeze.json"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/inputs.json": {
+      "bytes": 677,
+      "sha256": "7841b370f5aeaa263f7d3e9ab33bee2573188344295cf26d6327def4403a357f",
+      "ownedSource": "practical-portable-headers-20261014-v1/inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/inspection-freeze.json": {
+      "bytes": 583,
+      "sha256": "cc11a797b131f2edc606fa9ef21113772ec23667fc9e1aa97498f1dff6de9b72",
+      "ownedSource": "practical-portable-headers-20261014-v1/inspection-freeze.json"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/inspection.jsonl": {
+      "bytes": 320013,
+      "sha256": "78ee457ef67b9d4b431d619912082817c5e7b6583a3c0c980faa660597805e5d",
+      "ownedSource": "practical-portable-headers-20261014-v1/inspection.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/observations.jsonl": {
+      "bytes": 8015807,
+      "sha256": "aa3b1b47eaa248f971a24510f072d95dfbc6f2eae1c3f9e4de48d4b88758b2bd",
+      "ownedSource": "practical-portable-headers-20261014-v1/observations.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/oracle.json": {
+      "bytes": 162115,
+      "sha256": "3df55d2bbcd2f06c7827f27959fc3cd2eaebaa66da70841922fd2d9b6c062af3",
+      "ownedSource": "practical-portable-headers-20261014-v1/oracle.json"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/raw-receipt.json": {
+      "bytes": 123,
+      "sha256": "161aebcc219ad57c3ff60b04c29aa9d90fa0b00a3d2a0a30bba9b8612022a6c7",
+      "ownedSource": "practical-portable-headers-20261014-v1/raw-receipt.json"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/report.json": {
+      "bytes": 5030,
+      "sha256": "b9f1e0d27d0a9e7b02d8d5ed9d1a3139a5c27743bf91240fb02e3189efc5595a",
+      "ownedSource": "practical-portable-headers-20261014-v1/report.json"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/v6-inputs.json": {
+      "bytes": 9082,
+      "sha256": "2cebf42cf7de5c3f563f664e2cf26ae3fefab4921a68ded1a6b24d9da8c1b474",
+      "ownedSource": "practical-portable-headers-20261014-v1/v6-inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/v6-observations.jsonl": {
+      "bytes": 8111658,
+      "sha256": "6f11d816d978c9498c5db36148f412bd26ef5330dc94fe41dcdfc191c3ddfde7",
+      "ownedSource": "practical-portable-headers-20261014-v1/v6-observations.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/worker-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-portable-headers-20261014-v1/worker-stderr.txt"
+    },
+    "research-results/practical-whole-documents-20261014/trained-english-headers-v1/worker-stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-portable-headers-20261014-v1/worker-stdout.txt"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/as-run-PortableTailProbe.csproj": {
+      "bytes": 429,
+      "sha256": "2d03e7fdbca0fd4f55534ab1e817c5f1444aa2cc55e37f9e4835554b0de25df4",
+      "ownedSource": "practical-portable-tails-20261014-v1/as-run-PortableTailProbe.csproj"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/as-run-PortableTailProgram.cs": {
+      "bytes": 12922,
+      "sha256": "f66b3f9223ae4a4b55e81176afbefc4ac599df155f544d5ea85eed8a45f88169",
+      "ownedSource": "practical-portable-tails-20261014-v1/as-run-PortableTailProgram.cs"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/as-run-run_portable_tail.py": {
+      "bytes": 4190,
+      "sha256": "59b91b3d18a1a456a55c15e3e203e9c256b617050fba4bb2e116be9861c20dff",
+      "ownedSource": "practical-portable-tails-20261014-v1/as-run-run_portable_tail.py"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/dictionary.json": {
+      "bytes": 3614,
+      "sha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368",
+      "ownedSource": "practical-portable-tails-20261014-v1/dictionary.json"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/freeze.json": {
+      "bytes": 11828,
+      "sha256": "7ca6a0b2a732e4be10fc4a6f99befeff7708d661b2a842e712c61e494c7c62d2",
+      "ownedSource": "practical-portable-tails-20261014-v1/freeze.json"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/inputs.json": {
+      "bytes": 681,
+      "sha256": "939556e76555f2b532b15d47379318ef77335db46f1561a1ea42f23dde886bd4",
+      "ownedSource": "practical-portable-tails-20261014-v1/inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/inspection-freeze.json": {
+      "bytes": 583,
+      "sha256": "30bc28f8ba59317f272adcefe3e37a04ebe08036a58d6186113251a004e92951",
+      "ownedSource": "practical-portable-tails-20261014-v1/inspection-freeze.json"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/inspection.jsonl": {
+      "bytes": 320013,
+      "sha256": "78ee457ef67b9d4b431d619912082817c5e7b6583a3c0c980faa660597805e5d",
+      "ownedSource": "practical-portable-tails-20261014-v1/inspection.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/observations.jsonl": {
+      "bytes": 8030848,
+      "sha256": "bfe3e7f3f5eff7522209c682612110ac05899514c9f6faff0e52dd4ec095accc",
+      "ownedSource": "practical-portable-tails-20261014-v1/observations.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/oracle.json": {
+      "bytes": 162115,
+      "sha256": "3df55d2bbcd2f06c7827f27959fc3cd2eaebaa66da70841922fd2d9b6c062af3",
+      "ownedSource": "practical-portable-tails-20261014-v1/oracle.json"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/raw-receipt.json": {
+      "bytes": 123,
+      "sha256": "1b1d615e84cd62c69158aed2902fe6276cf6958805e05507165257d92d2fe7e1",
+      "ownedSource": "practical-portable-tails-20261014-v1/raw-receipt.json"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/report.json": {
+      "bytes": 5247,
+      "sha256": "126d863d16feeeb88c3290e16aedd343bb22737dc54ce84ab506d7631a42d08e",
+      "ownedSource": "practical-portable-tails-20261014-v1/report.json"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/v6-inputs.json": {
+      "bytes": 9082,
+      "sha256": "2cebf42cf7de5c3f563f664e2cf26ae3fefab4921a68ded1a6b24d9da8c1b474",
+      "ownedSource": "practical-portable-tails-20261014-v1/v6-inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/v6-observations.jsonl": {
+      "bytes": 8111658,
+      "sha256": "6f11d816d978c9498c5db36148f412bd26ef5330dc94fe41dcdfc191c3ddfde7",
+      "ownedSource": "practical-portable-tails-20261014-v1/v6-observations.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/worker-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-portable-tails-20261014-v1/worker-stderr.txt"
+    },
+    "research-results/practical-whole-documents-20261014/tail-ownership-failed-v1/worker-stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-portable-tails-20261014-v1/worker-stdout.txt"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-build-failed-v1/as-run-PortableWhiteGapProbe.csproj": {
+      "bytes": 433,
+      "sha256": "324d7a1c683c33de9bb7234cbb4480cfe8d3cf0946d9c85450f2158d617bce3f",
+      "ownedSource": "practical-portable-white-gap-20261014-v1/as-run-PortableWhiteGapProbe.csproj"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-build-failed-v1/as-run-PortableWhiteGapProgram.cs": {
+      "bytes": 13591,
+      "sha256": "be743255f8c25b5018ad2aac0df73c53435e84db0847f5c25d1406df9e7162fd",
+      "ownedSource": "practical-portable-white-gap-20261014-v1/as-run-PortableWhiteGapProgram.cs"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-build-failed-v1/as-run-run_portable_white_gap.py": {
+      "bytes": 4234,
+      "sha256": "bb7a11ee835edd7bcf9c65b1fcf303a43288690ebb2e350835d20e460fd290fa",
+      "ownedSource": "practical-portable-white-gap-20261014-v1/as-run-run_portable_white_gap.py"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-build-failed-v1/dictionary.json": {
+      "bytes": 3614,
+      "sha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368",
+      "ownedSource": "practical-portable-white-gap-20261014-v1/dictionary.json"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-build-failed-v1/freeze.json": {
+      "bytes": 1509,
+      "sha256": "48270d7770d3343d107ff987142f7941f41f7b29991164399a7e522bc1b318fb",
+      "ownedSource": "practical-portable-white-gap-20261014-v1/freeze.json"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-build-failed-v1/inputs.json": {
+      "bytes": 686,
+      "sha256": "c0cb3dc40d84a509b3540eec4b9cc00747de26ae3cfa4982d6041726f008f6ef",
+      "ownedSource": "practical-portable-white-gap-20261014-v1/inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-build-failed-v1/oracle.json": {
+      "bytes": 162115,
+      "sha256": "3df55d2bbcd2f06c7827f27959fc3cd2eaebaa66da70841922fd2d9b6c062af3",
+      "ownedSource": "practical-portable-white-gap-20261014-v1/oracle.json"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-build-failed-v1/raw-receipt.json": {
+      "bytes": 58,
+      "sha256": "a2e690c6220afd62c46275ba23379f6842d4c7f2ce3dbbf39a10362b551aa2a2",
+      "ownedSource": "practical-portable-white-gap-20261014-v1/raw-receipt.json"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-build-failed-v1/v6-inputs.json": {
+      "bytes": 9082,
+      "sha256": "2cebf42cf7de5c3f563f664e2cf26ae3fefab4921a68ded1a6b24d9da8c1b474",
+      "ownedSource": "practical-portable-white-gap-20261014-v1/v6-inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-build-failed-v1/v6-observations.jsonl": {
+      "bytes": 8111658,
+      "sha256": "6f11d816d978c9498c5db36148f412bd26ef5330dc94fe41dcdfc191c3ddfde7",
+      "ownedSource": "practical-portable-white-gap-20261014-v1/v6-observations.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-build-failed-v1/worker-stderr.txt": {
+      "bytes": 71,
+      "sha256": "0c10b82377d4ebc86f3fb090243c623b036f8456465786e8bef315f17d0921d7",
+      "ownedSource": "practical-portable-white-gap-20261014-v1/worker-stderr.txt"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-build-failed-v1/worker-stdout.txt": {
+      "bytes": 365,
+      "sha256": "4dd2c8df11e71d6c9ac360f1d24c8f7369302181d983ed277a9b1e4b831f4eec",
+      "ownedSource": "practical-portable-white-gap-20261014-v1/worker-stdout.txt"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/as-run-PortableWhiteGapProbe.csproj": {
+      "bytes": 433,
+      "sha256": "324d7a1c683c33de9bb7234cbb4480cfe8d3cf0946d9c85450f2158d617bce3f",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/as-run-PortableWhiteGapProbe.csproj"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/as-run-PortableWhiteGapProgram.cs": {
+      "bytes": 13671,
+      "sha256": "cba621a6be0e6607150b253bb0e51522b561de46a5acfb9dbdf343bf47001593",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/as-run-PortableWhiteGapProgram.cs"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/as-run-Program.cs": {
+      "bytes": 4223,
+      "sha256": "1cc6e56ab8d6795132662961604b4207a93d5e0083f0297801fc472465145031",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/as-run-Program.cs"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/as-run-run_portable_white_gap.py": {
+      "bytes": 4234,
+      "sha256": "bb7a11ee835edd7bcf9c65b1fcf303a43288690ebb2e350835d20e460fd290fa",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/as-run-run_portable_white_gap.py"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/as-run-score.py": {
+      "bytes": 5895,
+      "sha256": "4d8c7626f132d26a388a737b61095e6d04f30469f29bd8baee62ed67d57523dc",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/as-run-score.py"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/as-run-score_header.py": {
+      "bytes": 2977,
+      "sha256": "8bd17a6848a3acc503b5e1a7314cb7acd272c442e3739569ab22228a9dcb9c2d",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/as-run-score_header.py"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/dictionary.json": {
+      "bytes": 3614,
+      "sha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/dictionary.json"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/freeze.json": {
+      "bytes": 11872,
+      "sha256": "0b0d5f6d52f4ceb013f053baf4304ccdd21bd9c0958317b5e9ab7c08e485e3c6",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/freeze.json"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/inputs.json": {
+      "bytes": 686,
+      "sha256": "c0cb3dc40d84a509b3540eec4b9cc00747de26ae3cfa4982d6041726f008f6ef",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/inspection-freeze.json": {
+      "bytes": 583,
+      "sha256": "15fc7865749cd2e0b17497b0377b15e78cc1438ffaaaffaff78d45c9b5787be4",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/inspection-freeze.json"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/inspection.jsonl": {
+      "bytes": 317324,
+      "sha256": "895a542fabf2229e45da9335959dee5bd5c9047b684c353ae9db2e7377a71f40",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/inspection.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/observations.jsonl": {
+      "bytes": 10101189,
+      "sha256": "2255fbe9e165b805f07bc2fe3f3df460bf96d14a266cc33f76c496da1e426e2b",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/observations.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/oracle.json": {
+      "bytes": 162115,
+      "sha256": "3df55d2bbcd2f06c7827f27959fc3cd2eaebaa66da70841922fd2d9b6c062af3",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/oracle.json"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/raw-receipt.json": {
+      "bytes": 124,
+      "sha256": "afbc42f0876679853c915b75033a7e763972ee397ba1218b2165a7c033859613",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/raw-receipt.json"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/report.json": {
+      "bytes": 5280,
+      "sha256": "d9ba19ed20597c4618bb1f5ea188a6fe7a0aa371c3049455034c5929c91e71ef",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/report.json"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/v6-inputs.json": {
+      "bytes": 9082,
+      "sha256": "2cebf42cf7de5c3f563f664e2cf26ae3fefab4921a68ded1a6b24d9da8c1b474",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/v6-inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/v6-observations.jsonl": {
+      "bytes": 8111658,
+      "sha256": "6f11d816d978c9498c5db36148f412bd26ef5330dc94fe41dcdfc191c3ddfde7",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/v6-observations.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/worker-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/worker-stderr.txt"
+    },
+    "research-results/practical-whole-documents-20261014/white-gap-tails-v2/worker-stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-portable-white-gap-20261014-v2/worker-stdout.txt"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/as-run-OcrWhiteGapPartition.cs": {
+      "bytes": 2266,
+      "sha256": "62eb957afb2b527303643d037829363abbc02776f266d069d8bc06c082c193b6",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/as-run-OcrWhiteGapPartition.cs"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/as-run-OnnxAsciiOcr.cs": {
+      "bytes": 4826,
+      "sha256": "212be449861c5b9329d89b5584af1b95868ae3c42b81e04ef8f2740f1c6309e1",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/as-run-OnnxAsciiOcr.cs"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/as-run-Program.cs": {
+      "bytes": 4223,
+      "sha256": "1cc6e56ab8d6795132662961604b4207a93d5e0083f0297801fc472465145031",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/as-run-Program.cs"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/as-run-SharedAsciiProbe.csproj": {
+      "bytes": 428,
+      "sha256": "683140bbfd500d6eb08f2c301b1ef20867ce771d64eb2e060102f04dd0987db9",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/as-run-SharedAsciiProbe.csproj"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/as-run-SharedAsciiProgram.cs": {
+      "bytes": 11110,
+      "sha256": "070308cd08685a6dde67067d67aadec954a859cec47278a636d4ca607860a1e8",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/as-run-SharedAsciiProgram.cs"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/as-run-run_shared_ascii.py": {
+      "bytes": 4346,
+      "sha256": "1b62177990ae242a65ce484b72a5e30fb48afc83daf78f091a88d2c39e38f61d",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/as-run-run_shared_ascii.py"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/as-run-score.py": {
+      "bytes": 5895,
+      "sha256": "4d8c7626f132d26a388a737b61095e6d04f30469f29bd8baee62ed67d57523dc",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/as-run-score.py"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/as-run-score_header.py": {
+      "bytes": 3139,
+      "sha256": "26235bd4076aeee66fabe3f06cbf08fb7e539e9f95758e91f292cff20669943e",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/as-run-score_header.py"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/dictionary.json": {
+      "bytes": 3614,
+      "sha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/dictionary.json"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/freeze.json": {
+      "bytes": 12119,
+      "sha256": "d73bae07d18a53a27470c100633d531069ae0eff61096b6333bee55069303b4f",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/freeze.json"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/inputs.json": {
+      "bytes": 682,
+      "sha256": "82b07b8be79ec9e5c6b8d45832bb9704f4fc3e21bec388a42a7d93f2a3d81950",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/inspection-freeze.json": {
+      "bytes": 583,
+      "sha256": "896a4fd4dff47bd467e35405e2e457e55474452049a5bd4e2f2face07bcfa648",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/inspection-freeze.json"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/inspection.jsonl": {
+      "bytes": 317324,
+      "sha256": "895a542fabf2229e45da9335959dee5bd5c9047b684c353ae9db2e7377a71f40",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/inspection.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/observations.jsonl": {
+      "bytes": 10101225,
+      "sha256": "ad50377231a70c7da3a464e99548195d7315a3f5b1ca5f5319d0d208a7666d8e",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/observations.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/oracle.json": {
+      "bytes": 162115,
+      "sha256": "3df55d2bbcd2f06c7827f27959fc3cd2eaebaa66da70841922fd2d9b6c062af3",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/oracle.json"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/raw-receipt.json": {
+      "bytes": 124,
+      "sha256": "2f67feb5bb995384547a8f05cd005e15b36bc015a9c231823fc6b87b58bdf5df",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/raw-receipt.json"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/regression-receipt.json": {
+      "bytes": 522,
+      "sha256": "c9a8b7ed123059e2740edb04ac34ea3e0b53a158a8aba8df333cb43df012a1e7",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/regression-receipt.json"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/report.json": {
+      "bytes": 5372,
+      "sha256": "f26ec248b2ce6efe2172bb7ce3634f047236d5711601c2624bdfb63a46c8eb1d",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/report.json"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/v6-inputs.json": {
+      "bytes": 9082,
+      "sha256": "2cebf42cf7de5c3f563f664e2cf26ae3fefab4921a68ded1a6b24d9da8c1b474",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/v6-inputs.json"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/v6-observations.jsonl": {
+      "bytes": 8111658,
+      "sha256": "6f11d816d978c9498c5db36148f412bd26ef5330dc94fe41dcdfc191c3ddfde7",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/v6-observations.jsonl"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/worker-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/worker-stderr.txt"
+    },
+    "research-results/practical-whole-documents-20261014/shared-runtime-regression-v1/worker-stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedSource": "practical-shared-ascii-runtime-20261014-v1/worker-stdout.txt"
+    }
+  }
+}

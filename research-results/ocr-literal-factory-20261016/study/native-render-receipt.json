@@ -1,0 +1,111 @@
+{
+  "receipts": [
+    {
+      "id": "literalfresh-0-positive",
+      "sourcePDFHash": "c666f7761c0cabe073c93a34074c1d735db78a6a09f8745636688e0924a7b20a",
+      "strictFailure": "raster",
+      "capturedComplete": false,
+      "renderedPages": [
+        {
+          "page": 1,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "f769c5ca17449a0a63b8d970b24b4b0f15032d618d014d0feb15386ce70dc232",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "df88f2ba6b90e0d3c2cd508cee3d1fdac3c5dcc61b245710d669e6b62522aacf",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 2,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "d5f7fb257621091f6bf238383873ea9531e7c42d5fc8163fd80b90892468ca84",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "7e9d0ad9ba239847f35e71bc2d03c67187fc7ce06db27ab8aea17ff6510cdda1",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 3,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "126ce3fcba0f5c927ab73493f83d1fa7dacf84b00b8828200888b25ff2eef396",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "c96dd72b9c9ef2239c9b8669cab23306ab380a427b3b3a4928294927e9416545",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 4,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "2bcce563a6667dcc216180e07d6e3007da97d72ef078d64f11a654e050d61556",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "48456f8644e1b3882013d387d36d2609d6d8b98b03d09b3df1f6c829baa74125",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 5,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "5c2f9d8e5040ff47f05b3e766b4c46396a6eade78b2c797d48902fa4f17504e8",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "55574670a5e6526faefebfeac384c4cff9f99e5197edb31854257992b6350adc",
+          "nativeEqualsOriginal": false
+        }
+      ]
+    },
+    {
+      "id": "literalfresh-1-positive",
+      "sourcePDFHash": "cd25bb26826814cc56278ee11f8397715d304cd9027b94ec7c0e80be719f809b",
+      "strictFailure": "raster",
+      "capturedComplete": false,
+      "renderedPages": [
+        {
+          "page": 1,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "14b55135efdcd4ff6982226561b01c5e9ee656a32da9454ea70f755d0ae76acf",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "1498b371e57dbe52b3858b2b02b3667b7c2d0a77b7a288be26766e0857da5b0b",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 2,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "37a29fb03a062d014349e8ea827f648dab252f1df653818a67de498cc8b07ad9",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "37a98a3ee7419b615ddc8d156e1152f4fd7281aab177afea588e555d36ad9461",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 3,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "d9539874390deccde34b6f688f9cfa61bc5c4f067b62236afbf555f3d486160a",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "f4d1055598ddddfc9fbc8d55b74c2cd9d51c6efcd0bbc06dd522e4856e1d436c",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 4,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "15e5606b54033fbfb9d9a7d9b850b99f6e8f9f1dccbb142caef60b0aa754b489",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "77b405ad83f01a7db32888c97b879cb3147edb08353cbda4970305e9454d9306",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 5,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "6224a1b82af08830af21e893b5f58f89d13d5ebd669b09857b2fb66555a1ef01",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "7e1cc7ee30dda3099d3f4f41f7994a2741348ef7527d86eab6417ef03a2c6fc7",
+          "nativeEqualsOriginal": false
+        }
+      ]
+    }
+  ],
+  "modelCalls": 0
+}

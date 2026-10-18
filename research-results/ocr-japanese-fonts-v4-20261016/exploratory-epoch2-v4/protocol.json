@@ -1,0 +1,89 @@
+{
+  "namespace": "ascii-english-v5-japanese-fonts-v4/exploratory-epoch2-v4",
+  "basis": "EXPLORATORY originaldev-selected e2 only; originalfresh FAIL and activebaselinefallback unchanged. Parent explicit request for consumed actualnative route assessment, not qualification; no epoch/threshold changes or fresh reinference",
+  "selectedCheckpoint": "/workspace/scratch/ascii-english-v5-japanese-fonts-v4/adaptation-v4/epoch-2.safetensors",
+  "selectedCheckpointSha256": "8298dff5e2f302edb10645c2a8636497d29664db25e3e75d5ced659ee2593a45",
+  "selectionSha256": "d4a74294d9f33a7ab2edaa9cca1bd75e25b92fbf1a143c822d4aaaff75c5b48f",
+  "dictionarySha256": "fbf156ed886e4c46075f599651e60a0c38953dce89e10d999c765014477a7368",
+  "numericSeed": 108611,
+  "numericShapes": [
+    [
+      1,
+      320
+    ],
+    [
+      1,
+      321
+    ],
+    [
+      1,
+      481
+    ],
+    [
+      1,
+      500
+    ],
+    [
+      1,
+      640
+    ],
+    [
+      1,
+      960
+    ],
+    [
+      2,
+      320
+    ],
+    [
+      2,
+      321
+    ],
+    [
+      2,
+      481
+    ],
+    [
+      2,
+      500
+    ],
+    [
+      2,
+      640
+    ],
+    [
+      2,
+      960
+    ]
+  ],
+  "numericInputs": "Random finite normalizedFP32; batch2 secondrow normalizedzero rightpadding validWidth=W-17. No gold/quality credit.",
+  "developmentRows": 624,
+  "developmentPrecision": "Lossless previouslyfrozen allFP32originalpixels from cache; no FP16/newresize/crop/oracle routing",
+  "inputs": {
+    "x": "FLOAT32[B,3,48,W], BGR, W320..960",
+    "valid_width": "INT64[B], integer1..W"
+  },
+  "outputs": {
+    "probabilities": "FLOAT32[B,T,438] fullCTCsoftmax",
+    "reject_probability": "FLOAT32[B] sigmoid; uncalibrated"
+  },
+  "mask": "(2*t+1)*inputWidth < 2*T*validWidth, exact integer originalpixel-center inequality",
+  "onnxOpset": 17,
+  "allowedNodeDomains": [
+    "",
+    "ai.onnx"
+  ],
+  "ortProvider": "CPUExecutionProvider",
+  "ortIntraThreads": 2,
+  "ortInterThreads": 1,
+  "maximumRssMiB": 4096,
+  "maximumStageSeconds": 1800,
+  "maximumOwnScratchGiB": 1.3,
+  "minimumFreeGiB": 1,
+  "fidelityAssessment": "Numeric finite/shape/domain checks mandatory; record allprob/reject absolute differences. Compare every fixeddev and numeric raw text/interval/confidence/padding/acceptance; any mismatch retained as limitation, no repair or gate relaxation. Fixeddev Torchwrapper must reproduce priorselected Torchraw decisions/intervals and confidence exactly. ONNX not qualification/activation evenifallmatch.",
+  "freshOpened": true,
+  "fullDocumentQualified": false,
+  "iosEdited": false,
+  "coreml": "Not attempted; Linux conversion is not iPhone validation",
+  "sourceSha256": "44d2faab405def9360a125b841b0b02f6bdc4b0df47720cb8c31e1f53cea9596"
+}

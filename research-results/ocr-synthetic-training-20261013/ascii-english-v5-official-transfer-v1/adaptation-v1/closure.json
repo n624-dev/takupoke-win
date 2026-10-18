@@ -1,0 +1,66 @@
+{
+  "timeUtc": "2026-10-14T06:12:55.722889+00:00",
+  "status": "Closed/research-selectedepoch6/unqualified/inactive/productionaccuracyunmet",
+  "protocolSha256": "12609be771f8779a4a70a40a30a97e01e7a89fc3f421fdc9e538b6901e715d18",
+  "selectedResearchCheckpoint": "epoch-6",
+  "productionModelSwitch": false,
+  "metrics": [
+    {
+      "name": "official-baseline",
+      "exact": 145,
+      "correctAccepted": 123,
+      "incorrectAccepted": 94,
+      "negativeAccepted": 38,
+      "paddingRows": 32
+    },
+    {
+      "name": "epoch-2",
+      "exact": 202,
+      "correctAccepted": 130,
+      "incorrectAccepted": 76,
+      "negativeAccepted": 8,
+      "paddingRows": 2
+    },
+    {
+      "name": "epoch-4",
+      "exact": 179,
+      "correctAccepted": 142,
+      "incorrectAccepted": 80,
+      "negativeAccepted": 8,
+      "paddingRows": 11
+    },
+    {
+      "name": "epoch-6",
+      "exact": 220,
+      "correctAccepted": 175,
+      "incorrectAccepted": 79,
+      "negativeAccepted": 8,
+      "paddingRows": 14
+    }
+  ],
+  "trainingSeconds": 1682.0615250949995,
+  "cacheSeconds": 207.5421083820038,
+  "peakRssMiB": 2011.01171875,
+  "budgetStopped": false,
+  "continuationGate": {
+    "selectedTrained": true,
+    "rawExact97percent": false,
+    "correctAccepted90percent": false,
+    "wrongAcceptedZero": false,
+    "negativeAcceptedZero": false,
+    "everyFont95percent": false,
+    "allInsufficientPaddingSourceRefused": true
+  },
+  "gateRelaxed": false,
+  "finalGeneratedOrInferred": false,
+  "exportCoremlOrPublicModelRelease": false,
+  "japanesePrimaryChanged": false,
+  "oldTransplantChanged": false,
+  "allBnStatsAndConfigFixed": true,
+  "losslessCacheBytes": 129193539,
+  "ownAllScratchBytes": 227343040,
+  "freeDiskBytes": 3585335296,
+  "next": "Pause identicalcondition/epochextension; empirical improvement insufficient and monospacecode weakness persists. Additionaltrainingoptional. Parentnonlearning/source/full-document work continues.",
+  "iosEdited": false,
+  "childCommitOrPush": false
+}

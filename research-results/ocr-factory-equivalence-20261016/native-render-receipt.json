@@ -1,0 +1,641 @@
+{
+  "receipts": [
+    {
+      "id": "final-0-positive",
+      "sourcePDFHash": "e06708ada0461bda7cd92571a6261533ec5c232f586bd4edb3e638ec42305a35",
+      "strictFailure": "raster",
+      "capturedComplete": false,
+      "renderedPages": [
+        {
+          "page": 1,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "cebcec5fd205db7c239fa3276e7225b0f1a5def53b654d048fafdf9a5a481a44",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "8147f4e86214c80257ba4772fc69a4d6b7835050dc2b2235393e4024d6b5b4a6",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 2,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "0303ce8ab2e7ac6a534b070089e9c141f31582186218ffe208f78559f14452d8",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "35463dd4e7e9ed5d522e5f0ab4830c93dec0891abb1d9308cefe02d12d489424",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 3,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "d481c1c13a0c4648a6356db3f3f7aa994417beec129a6868eb0eff3cfda2ee00",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "6dfd928c1803df0297825545d1cbbd1ce31d91317ddb242b569ca17696b7aa35",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 4,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "12e5a2ee7f1151eacb64c6eb34b5d9d96cb015ea44a11e739697049d93bda57c",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "e81e1bf44edab7e117f936129235eaf8438867577352e704569fd67380111a53",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 5,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "4ddf8477af71cf6be73873a7264864d76ec68968e6d6dd43b97839607b841395",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "ad0dd88fa2b880a837a1c216289d419f0c15afa80f150066c90f107d3b8f9771",
+          "nativeEqualsOriginal": false
+        }
+      ]
+    },
+    {
+      "id": "final-0-missing-day",
+      "sourcePDFHash": "c66283e6d5dbaff3610a38b86c577bdef3cc3d7821bd5382bfea1cd8faa571aa",
+      "strictFailure": "raster",
+      "capturedComplete": false,
+      "renderedPages": [
+        {
+          "page": 1,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "7da39d4fbf842ab01cfa6affc80360963bc4d2c99fca4c04f5251ab06fcb11e4",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "011cff07e295954ac7588d9ac8ceb1dfc4baac50b94b00b2613627692f7a5d71",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 2,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "0303ce8ab2e7ac6a534b070089e9c141f31582186218ffe208f78559f14452d8",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "35463dd4e7e9ed5d522e5f0ab4830c93dec0891abb1d9308cefe02d12d489424",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 3,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "d481c1c13a0c4648a6356db3f3f7aa994417beec129a6868eb0eff3cfda2ee00",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "6dfd928c1803df0297825545d1cbbd1ce31d91317ddb242b569ca17696b7aa35",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 4,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "12e5a2ee7f1151eacb64c6eb34b5d9d96cb015ea44a11e739697049d93bda57c",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "e81e1bf44edab7e117f936129235eaf8438867577352e704569fd67380111a53",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 5,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "4ddf8477af71cf6be73873a7264864d76ec68968e6d6dd43b97839607b841395",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "ad0dd88fa2b880a837a1c216289d419f0c15afa80f150066c90f107d3b8f9771",
+          "nativeEqualsOriginal": false
+        }
+      ]
+    },
+    {
+      "id": "final-0-missing-class",
+      "sourcePDFHash": "44dee32147b65c0c6e2e19aa01e117df4c3b6bc46725a392a2efc6fb83b73115",
+      "strictFailure": "raster",
+      "capturedComplete": false,
+      "renderedPages": [
+        {
+          "page": 1,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "32ea39368e2dc5862c91828cef71295c2c73f6a7bf7be51dc8023abc82d4562e",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "e99c3fb5ef95d69d75c554581c3054eac8763f44333b6be9cef6499127519718",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 2,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "0303ce8ab2e7ac6a534b070089e9c141f31582186218ffe208f78559f14452d8",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "35463dd4e7e9ed5d522e5f0ab4830c93dec0891abb1d9308cefe02d12d489424",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 3,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "d481c1c13a0c4648a6356db3f3f7aa994417beec129a6868eb0eff3cfda2ee00",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "6dfd928c1803df0297825545d1cbbd1ce31d91317ddb242b569ca17696b7aa35",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 4,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "12e5a2ee7f1151eacb64c6eb34b5d9d96cb015ea44a11e739697049d93bda57c",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "e81e1bf44edab7e117f936129235eaf8438867577352e704569fd67380111a53",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 5,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "4ddf8477af71cf6be73873a7264864d76ec68968e6d6dd43b97839607b841395",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "ad0dd88fa2b880a837a1c216289d419f0c15afa80f150066c90f107d3b8f9771",
+          "nativeEqualsOriginal": false
+        }
+      ]
+    },
+    {
+      "id": "final-1-positive",
+      "sourcePDFHash": "5f0298efaf80031d300a8b3ebbb7ed7a29fd8f54a2603d2b19dda7b2e3c3b65e",
+      "strictFailure": "raster",
+      "capturedComplete": false,
+      "renderedPages": [
+        {
+          "page": 1,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "475e79d44ab7c58d116723d17c0782134e0b7f40af2bdde27791c0ff782d5bbf",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "a84c7c81d54222becb3aec4bfa20ecf8b37742e4630043e6fd19880ccaff99f5",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 2,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "a753e8159d035aa6012bd7514020cfd4bf474be72f8b70122f33f750bbdcf413",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "bb1645bd4d1bd0c1152ba143edfc890083a0047a9472a1da8aab0154a8b2754f",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 3,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "230ca2a3ac7f2e1e0a53bdf2098e39c1cc713de26d9ff7c1ac2e61edfe123c36",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "60b449d2ad966f91628744f94e8df9ce310a4473151932377ea2a355ed23aaa0",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 4,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "1915a974b22c998c9b7248b5c13e4622346651230e6d04494dd516e4734f3d1f",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "9ec913fb203d779172508b0879571d4bee3612100ea13e26aed32f9b7650afb8",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 5,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "7f890a9a11024e0c648c0fd177a98aaaf55e8a745f3b6a51ccb2582388170074",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "f4ef9f246942a3afd77b50536a4f5caff2dc67e80fce0eef3c6a3b87f9c28445",
+          "nativeEqualsOriginal": false
+        }
+      ]
+    },
+    {
+      "id": "final-1-missing-day",
+      "sourcePDFHash": "4a022c68534ee6ad3f5aa6aa8dc99998c335beccc86687d721f4f1fdbedca669",
+      "strictFailure": "raster",
+      "capturedComplete": false,
+      "renderedPages": [
+        {
+          "page": 1,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "09916149d9d1c2314f3a45e90bc4e7c9c8b7e6200d0e6ac6e397b56f22589108",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "daafc54deb57c63529df1e4ae2b7605ed257b70c002874bdccdc0872c5038c70",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 2,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "a753e8159d035aa6012bd7514020cfd4bf474be72f8b70122f33f750bbdcf413",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "bb1645bd4d1bd0c1152ba143edfc890083a0047a9472a1da8aab0154a8b2754f",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 3,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "230ca2a3ac7f2e1e0a53bdf2098e39c1cc713de26d9ff7c1ac2e61edfe123c36",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "60b449d2ad966f91628744f94e8df9ce310a4473151932377ea2a355ed23aaa0",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 4,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "1915a974b22c998c9b7248b5c13e4622346651230e6d04494dd516e4734f3d1f",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "9ec913fb203d779172508b0879571d4bee3612100ea13e26aed32f9b7650afb8",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 5,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "7f890a9a11024e0c648c0fd177a98aaaf55e8a745f3b6a51ccb2582388170074",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "f4ef9f246942a3afd77b50536a4f5caff2dc67e80fce0eef3c6a3b87f9c28445",
+          "nativeEqualsOriginal": false
+        }
+      ]
+    },
+    {
+      "id": "final-1-missing-class",
+      "sourcePDFHash": "0f8896839d9bcc0b5ef60e5c50bd15e284fed4f789351710ba75e2ff5e169d47",
+      "strictFailure": "raster",
+      "capturedComplete": false,
+      "renderedPages": [
+        {
+          "page": 1,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "b0f823f10a75f81773b275ac3a88c12e64958573a72cf1fd5a550b1071adfe8a",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "e9efc6ffb4a28982ad09caa0e5fe5d971a7524ba7448620ecd793ee3228586c1",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 2,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "a753e8159d035aa6012bd7514020cfd4bf474be72f8b70122f33f750bbdcf413",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "bb1645bd4d1bd0c1152ba143edfc890083a0047a9472a1da8aab0154a8b2754f",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 3,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "230ca2a3ac7f2e1e0a53bdf2098e39c1cc713de26d9ff7c1ac2e61edfe123c36",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "60b449d2ad966f91628744f94e8df9ce310a4473151932377ea2a355ed23aaa0",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 4,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "1915a974b22c998c9b7248b5c13e4622346651230e6d04494dd516e4734f3d1f",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "9ec913fb203d779172508b0879571d4bee3612100ea13e26aed32f9b7650afb8",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 5,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "7f890a9a11024e0c648c0fd177a98aaaf55e8a745f3b6a51ccb2582388170074",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "f4ef9f246942a3afd77b50536a4f5caff2dc67e80fce0eef3c6a3b87f9c28445",
+          "nativeEqualsOriginal": false
+        }
+      ]
+    },
+    {
+      "id": "fresh-0-positive",
+      "sourcePDFHash": "2c6a661be3823f3f125971d966e3acfa5f7a0804fe5ba67af8b383d2484bc6df",
+      "strictFailure": "raster",
+      "capturedComplete": false,
+      "renderedPages": [
+        {
+          "page": 1,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "638a585524d46ddb55a2a248f8853ff7702ae31989e152ddd10f931fada5e289",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "689f1639c3caff8617dc1a036aaec13e712005227dfad0ada1e6475bad73d38e",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 2,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "2491353ac9d5b6ebeb522497a8cc918a035b4684b8c022f4eb3e05ba7eb9015b",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "7f53f77c4a3e3085433d8d8d0fc2562a76f76ca9bcdc891f57f229b3f91f5e17",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 3,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "17fa39fa086acb576672cf35a5d13e3d6f0e01757626c508878b045f4e2b70e0",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "0b557e26cf535d4feb6a471821a9078c7876814eb4ade9d86b970c419cc75a5f",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 4,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "287144614b81e1ac64aad2d041a4b8dfe66dcaf10b6a6ed7107a0e240d9d72d6",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "353dcbf569c6da422db956bcc4f383555d6e76181f748d97b324164bc3e7c785",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 5,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "80b112fda11e2afb21568a5c6e533ae65d3d99a554cba6b7d4dac17c23437776",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "0650b4bcaaee9a68683551121a5b0744e9931345ff2216f732b9772d44798562",
+          "nativeEqualsOriginal": false
+        }
+      ]
+    },
+    {
+      "id": "fresh-0-missing-day",
+      "sourcePDFHash": "39201bf75f83451ef0259dc9c9223debec4bdbc356beac895a174e495f7a0554",
+      "strictFailure": "raster",
+      "capturedComplete": false,
+      "renderedPages": [
+        {
+          "page": 1,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "225576ea32d2742ba4d4b8ea2cf40226d42cae3f02bc22af35cca270e4704500",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "6cd7b3971448bb9144f5f10711a715d1ff2f48423e22fa0b5632a6715a8e1171",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 2,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "2491353ac9d5b6ebeb522497a8cc918a035b4684b8c022f4eb3e05ba7eb9015b",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "7f53f77c4a3e3085433d8d8d0fc2562a76f76ca9bcdc891f57f229b3f91f5e17",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 3,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "17fa39fa086acb576672cf35a5d13e3d6f0e01757626c508878b045f4e2b70e0",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "0b557e26cf535d4feb6a471821a9078c7876814eb4ade9d86b970c419cc75a5f",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 4,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "287144614b81e1ac64aad2d041a4b8dfe66dcaf10b6a6ed7107a0e240d9d72d6",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "353dcbf569c6da422db956bcc4f383555d6e76181f748d97b324164bc3e7c785",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 5,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "80b112fda11e2afb21568a5c6e533ae65d3d99a554cba6b7d4dac17c23437776",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "0650b4bcaaee9a68683551121a5b0744e9931345ff2216f732b9772d44798562",
+          "nativeEqualsOriginal": false
+        }
+      ]
+    },
+    {
+      "id": "fresh-0-missing-class",
+      "sourcePDFHash": "8d51a02f274c7e6a89855783b9c75a442d2c6c4a5b1c9c396cc242c46c6e3d5e",
+      "strictFailure": "raster",
+      "capturedComplete": false,
+      "renderedPages": [
+        {
+          "page": 1,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "0053f5f3b205b73835b22e81a42b8feec77765b26efddefb35166f232e1aa042",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "1176efa0ef454faf773566f77d7443fae16d7e57dabd23cd3ac3fee908901645",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 2,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "2491353ac9d5b6ebeb522497a8cc918a035b4684b8c022f4eb3e05ba7eb9015b",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "7f53f77c4a3e3085433d8d8d0fc2562a76f76ca9bcdc891f57f229b3f91f5e17",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 3,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "17fa39fa086acb576672cf35a5d13e3d6f0e01757626c508878b045f4e2b70e0",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "0b557e26cf535d4feb6a471821a9078c7876814eb4ade9d86b970c419cc75a5f",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 4,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "287144614b81e1ac64aad2d041a4b8dfe66dcaf10b6a6ed7107a0e240d9d72d6",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "353dcbf569c6da422db956bcc4f383555d6e76181f748d97b324164bc3e7c785",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 5,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "80b112fda11e2afb21568a5c6e533ae65d3d99a554cba6b7d4dac17c23437776",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "0650b4bcaaee9a68683551121a5b0744e9931345ff2216f732b9772d44798562",
+          "nativeEqualsOriginal": false
+        }
+      ]
+    },
+    {
+      "id": "fresh-1-positive",
+      "sourcePDFHash": "2b489a6f57bba4dffb184a52f7a5d199fc70d824d7747cce9f0ca0258bd7df59",
+      "strictFailure": "raster",
+      "capturedComplete": false,
+      "renderedPages": [
+        {
+          "page": 1,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "0dc15adabf228d9f4b2b7f43c13a797528a9d92486e8dd09ae700e6da51fa76d",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "9a825cd126b16b2c016e902f011d34f3a5819adc265b3f86ba0021c51bdb6ecf",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 2,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "6c21471a110620796e2310d4f037bf9f11492c3e481d5f81abfd07cba96dcfa9",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "2465a645e7268b2f2e74d7b9b9fff0fc65de828ed8688446b6bbb3f8f39652c0",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 3,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "e4582e2218f71608037a7b33546d2af307913e0c502412f4e0f4902f7da0babd",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "e85d2b1b81bf097b7da593e67385ab9ac89b62d08147daf7b39da85a044238e2",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 4,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "2dbf5fd9503da62556b7249e94c10458ab0e8baa410ed59d22acf0632e8d606e",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "67fd72bd6ceab55f705634cc8c56b1ed8c5de962e387f8f73cb1a12f56bf13d1",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 5,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "7e4d383600c5eca0d739e2b0f0699dc11b4f7ada9f5145bfbc615e99c100c868",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "a43fb1ef68a6a81f88feddbeca750887f881f2db2481803de2b8461f2bc8876f",
+          "nativeEqualsOriginal": false
+        }
+      ]
+    },
+    {
+      "id": "fresh-1-missing-day",
+      "sourcePDFHash": "bd68c7bd1538022280ad7726c70ecb6c26b26b665fc6f88feea7c00871eb02f2",
+      "strictFailure": "raster",
+      "capturedComplete": false,
+      "renderedPages": [
+        {
+          "page": 1,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "7eb61cccd9f5066a0f3154b1c414e3b880b9f86ef9ffc135a0cb5cdc71747005",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "5c23986315ff8f2e3af9c672e882f3e8d11354466236aa1f27237425688dd70b",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 2,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "6c21471a110620796e2310d4f037bf9f11492c3e481d5f81abfd07cba96dcfa9",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "2465a645e7268b2f2e74d7b9b9fff0fc65de828ed8688446b6bbb3f8f39652c0",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 3,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "e4582e2218f71608037a7b33546d2af307913e0c502412f4e0f4902f7da0babd",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "e85d2b1b81bf097b7da593e67385ab9ac89b62d08147daf7b39da85a044238e2",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 4,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "2dbf5fd9503da62556b7249e94c10458ab0e8baa410ed59d22acf0632e8d606e",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "67fd72bd6ceab55f705634cc8c56b1ed8c5de962e387f8f73cb1a12f56bf13d1",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 5,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "7e4d383600c5eca0d739e2b0f0699dc11b4f7ada9f5145bfbc615e99c100c868",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "a43fb1ef68a6a81f88feddbeca750887f881f2db2481803de2b8461f2bc8876f",
+          "nativeEqualsOriginal": false
+        }
+      ]
+    },
+    {
+      "id": "fresh-1-missing-class",
+      "sourcePDFHash": "e2ac8d7ebe681568ef35ef92c0c72fc79e3a0ecc27ace81e64dbc682adfd8ade",
+      "strictFailure": "raster",
+      "capturedComplete": false,
+      "renderedPages": [
+        {
+          "page": 1,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "2c8dfc3395c9c7881e2d7e53a350c9af7c54c3237621d725fa68183ce8f340a8",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "7db6dae46f8bcbc99d81f89f4400288b96fae858c4d1e021152871b32ede92ae",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 2,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "6c21471a110620796e2310d4f037bf9f11492c3e481d5f81abfd07cba96dcfa9",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "2465a645e7268b2f2e74d7b9b9fff0fc65de828ed8688446b6bbb3f8f39652c0",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 3,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "e4582e2218f71608037a7b33546d2af307913e0c502412f4e0f4902f7da0babd",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "e85d2b1b81bf097b7da593e67385ab9ac89b62d08147daf7b39da85a044238e2",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 4,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "2dbf5fd9503da62556b7249e94c10458ab0e8baa410ed59d22acf0632e8d606e",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "67fd72bd6ceab55f705634cc8c56b1ed8c5de962e387f8f73cb1a12f56bf13d1",
+          "nativeEqualsOriginal": false
+        },
+        {
+          "page": 5,
+          "PixelWidth": 2237,
+          "PixelHeight": 415,
+          "pixelHash": "7e4d383600c5eca0d739e2b0f0699dc11b4f7ada9f5145bfbc615e99c100c868",
+          "decoderCodecId": "e018945b-aa86-4008-9bd4-6777a1e40c11",
+          "originalLosslessPixelHash": "a43fb1ef68a6a81f88feddbeca750887f881f2db2481803de2b8461f2bc8876f",
+          "nativeEqualsOriginal": false
+        }
+      ]
+    }
+  ],
+  "modelCalls": 0
+}

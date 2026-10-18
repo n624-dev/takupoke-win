@@ -1,0 +1,10 @@
+{
+  "recipe": "english438-whole-field-representability-consumed-audit-v1",
+  "dictionarySha256": "ef84489f927fb92b64714c7f110404e5bfb83c4067bd609fe4c41d5f23e25659",
+  "oracleSha256": "1c5652c38a5d84691d5105bd4e851349bc1879d38b2a1cc2a2b6169c12683095",
+  "closedReaderRawSha256": "e99972160eeba5f445feb533a9e7ee032e4c071cb86b5dbac8d097a25055d1b7",
+  "sourceSha256": "34df10316ba1c72dcd05405f433846f13a7d6963932820abfb2ad77f06edc42e",
+  "scope": "Posthoc expected-literal alphabet coverage only; no inference, field routing, source crop, repair, dictionary reduction or quality selection.",
+  "additionalModelCalls": 0,
+  "qualification": false
+}

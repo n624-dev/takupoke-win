@@ -1,0 +1,15 @@
+{
+  "scope": "Consumed native firstpage DEVELOPMENT only; local GLM originalFP32 official processor/template Text Recognition: greedy128, CPU4. Native AR scores retained but never calibrated CTC/source positions.",
+  "selection": "All eligible original source crops. No oracle to worker.",
+  "formatArms": [
+    "exact raw code",
+    "single line transport: optional ONE leading LF and ONE trailing LF OR one complete fenced text block; inner string must be bounded code, no other stripping/repair"
+  ],
+  "code": "2..32 ASCIIletters/digits/_/-, at least one digit",
+  "fallback": "actual unchanged v1 baseline",
+  "lengthPolicies": [
+    "same-length",
+    "bounded-code"
+  ],
+  "noAutomaticAdoption": true
+}

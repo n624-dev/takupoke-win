@@ -1,0 +1,457 @@
+{
+  "split": "distortion",
+  "left": "distortion-active",
+  "right": "distortion-candidate",
+  "gains": [
+    {
+      "id": "distortion-00004",
+      "font": "SawarabiGothic",
+      "kind": "lookalike",
+      "gold": "l1 R",
+      "active": "I1 R",
+      "candidate": "l1 R",
+      "activeMinimumConfidence": 0.8295049667358398,
+      "candidateMinimumConfidence": 0.9096445441246033,
+      "activeReject": 0.003854449838399887,
+      "candidateReject": 0.0005803234525956213,
+      "activeAccepted": true,
+      "candidateAccepted": true
+    },
+    {
+      "id": "distortion-00009",
+      "font": "SawarabiMincho",
+      "kind": "lookalike",
+      "gold": "1l_1",
+      "active": "11_1",
+      "candidate": "1l_1",
+      "activeMinimumConfidence": 0.8242172598838806,
+      "candidateMinimumConfidence": 0.9449582695960999,
+      "activeReject": 0.0005818561767227948,
+      "candidateReject": 0.00010259526607114822,
+      "activeAccepted": true,
+      "candidateAccepted": true
+    },
+    {
+      "id": "distortion-00016",
+      "font": "SawarabiGothic",
+      "kind": "code",
+      "gold": "Ok6c31l0ai",
+      "active": "Ok6c31I0ai",
+      "candidate": "Ok6c31l0ai",
+      "activeMinimumConfidence": 0.5338236689567566,
+      "candidateMinimumConfidence": 0.9601183533668518,
+      "activeReject": 0.005731393117457628,
+      "candidateReject": 0.002395863411948085,
+      "activeAccepted": false,
+      "candidateAccepted": true
+    },
+    {
+      "id": "distortion-00023",
+      "font": "KaiseiTokumin",
+      "kind": "code",
+      "gold": "shsU",
+      "active": "shsUJ",
+      "candidate": "shsU",
+      "activeMinimumConfidence": 0.5495690107345581,
+      "candidateMinimumConfidence": 0.9836069345474243,
+      "activeReject": 0.0013912857975810766,
+      "candidateReject": 0.0003858645504806191,
+      "activeAccepted": false,
+      "candidateAccepted": true
+    },
+    {
+      "id": "distortion-00030",
+      "font": "KleeOne",
+      "kind": "code",
+      "gold": "R7V",
+      "active": "R7",
+      "candidate": "R7V",
+      "activeMinimumConfidence": 0.7944400906562805,
+      "candidateMinimumConfidence": 0.5581088662147522,
+      "activeReject": 0.020373092964291573,
+      "candidateReject": 0.017787212505936623,
+      "activeAccepted": false,
+      "candidateAccepted": false
+    },
+    {
+      "id": "distortion-00034",
+      "font": "KleeOne",
+      "kind": "lookalike",
+      "gold": "l1I0",
+      "active": "I1IO",
+      "candidate": "l1I0",
+      "activeMinimumConfidence": 0.6513421535491943,
+      "candidateMinimumConfidence": 0.5318101644515991,
+      "activeReject": 0.08948997408151627,
+      "candidateReject": 0.019750870764255524,
+      "activeAccepted": false,
+      "candidateAccepted": false
+    },
+    {
+      "id": "distortion-00039",
+      "font": "KaiseiTokumin",
+      "kind": "lookalike",
+      "gold": "l-IlO",
+      "active": "1-I1O",
+      "candidate": "l-IlO",
+      "activeMinimumConfidence": 0.5680924654006958,
+      "candidateMinimumConfidence": 0.7850659489631653,
+      "activeReject": 0.012433324940502644,
+      "candidateReject": 0.0011088087921962142,
+      "activeAccepted": false,
+      "candidateAccepted": false
+    },
+    {
+      "id": "distortion-00040",
+      "font": "SawarabiGothic",
+      "kind": "lookalike",
+      "gold": "llkX",
+      "active": "IlkX",
+      "candidate": "llkX",
+      "activeMinimumConfidence": 0.6487725377082825,
+      "candidateMinimumConfidence": 0.8108078241348267,
+      "activeReject": 0.36558377742767334,
+      "candidateReject": 0.13731718063354492,
+      "activeAccepted": false,
+      "candidateAccepted": false
+    },
+    {
+      "id": "distortion-00050",
+      "font": "KleeOne",
+      "kind": "code",
+      "gold": "0YjVu Y8",
+      "active": "OYjVu Y8",
+      "candidate": "0YjVu Y8",
+      "activeMinimumConfidence": 0.8780156373977661,
+      "candidateMinimumConfidence": 0.7946736812591553,
+      "activeReject": 0.0004994429182261229,
+      "candidateReject": 0.00048352309386245906,
+      "activeAccepted": true,
+      "candidateAccepted": false
+    },
+    {
+      "id": "distortion-00062",
+      "font": "KleeOne",
+      "kind": "code",
+      "gold": "A0 JSKOYG",
+      "active": "AO JSKOYG",
+      "candidate": "A0 JSKOYG",
+      "activeMinimumConfidence": 0.609180212020874,
+      "candidateMinimumConfidence": 0.7843205332756042,
+      "activeReject": 0.0013538941275328398,
+      "candidateReject": 0.0006117004668340087,
+      "activeAccepted": false,
+      "candidateAccepted": false
+    }
+  ],
+  "regressions": [
+    {
+      "id": "distortion-00000",
+      "font": "SawarabiGothic",
+      "kind": "lookalike",
+      "gold": "BXIMI",
+      "active": "BXIMI",
+      "candidate": "BXIMl",
+      "activeMinimumConfidence": 0.7116664052009583,
+      "candidateMinimumConfidence": 0.8784061074256897,
+      "activeReject": 0.04484708607196808,
+      "candidateReject": 0.024082399904727936,
+      "activeAccepted": false,
+      "candidateAccepted": true
+    },
+    {
+      "id": "distortion-00032",
+      "font": "SawarabiGothic",
+      "kind": "lookalike",
+      "gold": "DIO I0Bk",
+      "active": "DIO I0Bk",
+      "candidate": "DlO l0Bk",
+      "activeMinimumConfidence": 0.9414878487586975,
+      "candidateMinimumConfidence": 0.6516785025596619,
+      "activeReject": 0.007026641163975,
+      "candidateReject": 0.0027489406056702137,
+      "activeAccepted": true,
+      "candidateAccepted": false
+    },
+    {
+      "id": "distortion-00042",
+      "font": "KleeOne",
+      "kind": "lookalike",
+      "gold": "OIXdO",
+      "active": "OIXdO",
+      "candidate": "OlXdO",
+      "activeMinimumConfidence": 0.6794648170471191,
+      "candidateMinimumConfidence": 0.8310980200767517,
+      "activeReject": 0.056881971657276154,
+      "candidateReject": 0.023307446390390396,
+      "activeAccepted": false,
+      "candidateAccepted": true
+    }
+  ],
+  "allChangedPositivePredictions": [
+    {
+      "id": "distortion-00000",
+      "font": "SawarabiGothic",
+      "kind": "lookalike",
+      "gold": "BXIMI",
+      "active": "BXIMI",
+      "candidate": "BXIMl",
+      "activeMinimumConfidence": 0.7116664052009583,
+      "candidateMinimumConfidence": 0.8784061074256897,
+      "activeReject": 0.04484708607196808,
+      "candidateReject": 0.024082399904727936,
+      "activeAccepted": false,
+      "candidateAccepted": true
+    },
+    {
+      "id": "distortion-00002",
+      "font": "KleeOne",
+      "kind": "lookalike",
+      "gold": "D Rll",
+      "active": "D RII",
+      "candidate": "D RIl",
+      "activeMinimumConfidence": 0.6854960322380066,
+      "candidateMinimumConfidence": 0.7112897038459778,
+      "activeReject": 0.00554433511570096,
+      "candidateReject": 0.003284560749307275,
+      "activeAccepted": false,
+      "candidateAccepted": false
+    },
+    {
+      "id": "distortion-00004",
+      "font": "SawarabiGothic",
+      "kind": "lookalike",
+      "gold": "l1 R",
+      "active": "I1 R",
+      "candidate": "l1 R",
+      "activeMinimumConfidence": 0.8295049667358398,
+      "candidateMinimumConfidence": 0.9096445441246033,
+      "activeReject": 0.003854449838399887,
+      "candidateReject": 0.0005803234525956213,
+      "activeAccepted": true,
+      "candidateAccepted": true
+    },
+    {
+      "id": "distortion-00009",
+      "font": "SawarabiMincho",
+      "kind": "lookalike",
+      "gold": "1l_1",
+      "active": "11_1",
+      "candidate": "1l_1",
+      "activeMinimumConfidence": 0.8242172598838806,
+      "candidateMinimumConfidence": 0.9449582695960999,
+      "activeReject": 0.0005818561767227948,
+      "candidateReject": 0.00010259526607114822,
+      "activeAccepted": true,
+      "candidateAccepted": true
+    },
+    {
+      "id": "distortion-00016",
+      "font": "SawarabiGothic",
+      "kind": "code",
+      "gold": "Ok6c31l0ai",
+      "active": "Ok6c31I0ai",
+      "candidate": "Ok6c31l0ai",
+      "activeMinimumConfidence": 0.5338236689567566,
+      "candidateMinimumConfidence": 0.9601183533668518,
+      "activeReject": 0.005731393117457628,
+      "candidateReject": 0.002395863411948085,
+      "activeAccepted": false,
+      "candidateAccepted": true
+    },
+    {
+      "id": "distortion-00023",
+      "font": "KaiseiTokumin",
+      "kind": "code",
+      "gold": "shsU",
+      "active": "shsUJ",
+      "candidate": "shsU",
+      "activeMinimumConfidence": 0.5495690107345581,
+      "candidateMinimumConfidence": 0.9836069345474243,
+      "activeReject": 0.0013912857975810766,
+      "candidateReject": 0.0003858645504806191,
+      "activeAccepted": false,
+      "candidateAccepted": true
+    },
+    {
+      "id": "distortion-00030",
+      "font": "KleeOne",
+      "kind": "code",
+      "gold": "R7V",
+      "active": "R7",
+      "candidate": "R7V",
+      "activeMinimumConfidence": 0.7944400906562805,
+      "candidateMinimumConfidence": 0.5581088662147522,
+      "activeReject": 0.020373092964291573,
+      "candidateReject": 0.017787212505936623,
+      "activeAccepted": false,
+      "candidateAccepted": false
+    },
+    {
+      "id": "distortion-00032",
+      "font": "SawarabiGothic",
+      "kind": "lookalike",
+      "gold": "DIO I0Bk",
+      "active": "DIO I0Bk",
+      "candidate": "DlO l0Bk",
+      "activeMinimumConfidence": 0.9414878487586975,
+      "candidateMinimumConfidence": 0.6516785025596619,
+      "activeReject": 0.007026641163975,
+      "candidateReject": 0.0027489406056702137,
+      "activeAccepted": true,
+      "candidateAccepted": false
+    },
+    {
+      "id": "distortion-00034",
+      "font": "KleeOne",
+      "kind": "lookalike",
+      "gold": "l1I0",
+      "active": "I1IO",
+      "candidate": "l1I0",
+      "activeMinimumConfidence": 0.6513421535491943,
+      "candidateMinimumConfidence": 0.5318101644515991,
+      "activeReject": 0.08948997408151627,
+      "candidateReject": 0.019750870764255524,
+      "activeAccepted": false,
+      "candidateAccepted": false
+    },
+    {
+      "id": "distortion-00039",
+      "font": "KaiseiTokumin",
+      "kind": "lookalike",
+      "gold": "l-IlO",
+      "active": "1-I1O",
+      "candidate": "l-IlO",
+      "activeMinimumConfidence": 0.5680924654006958,
+      "candidateMinimumConfidence": 0.7850659489631653,
+      "activeReject": 0.012433324940502644,
+      "candidateReject": 0.0011088087921962142,
+      "activeAccepted": false,
+      "candidateAccepted": false
+    },
+    {
+      "id": "distortion-00040",
+      "font": "SawarabiGothic",
+      "kind": "lookalike",
+      "gold": "llkX",
+      "active": "IlkX",
+      "candidate": "llkX",
+      "activeMinimumConfidence": 0.6487725377082825,
+      "candidateMinimumConfidence": 0.8108078241348267,
+      "activeReject": 0.36558377742767334,
+      "candidateReject": 0.13731718063354492,
+      "activeAccepted": false,
+      "candidateAccepted": false
+    },
+    {
+      "id": "distortion-00042",
+      "font": "KleeOne",
+      "kind": "lookalike",
+      "gold": "OIXdO",
+      "active": "OIXdO",
+      "candidate": "OlXdO",
+      "activeMinimumConfidence": 0.6794648170471191,
+      "candidateMinimumConfidence": 0.8310980200767517,
+      "activeReject": 0.056881971657276154,
+      "candidateReject": 0.023307446390390396,
+      "activeAccepted": false,
+      "candidateAccepted": true
+    },
+    {
+      "id": "distortion-00050",
+      "font": "KleeOne",
+      "kind": "code",
+      "gold": "0YjVu Y8",
+      "active": "OYjVu Y8",
+      "candidate": "0YjVu Y8",
+      "activeMinimumConfidence": 0.8780156373977661,
+      "candidateMinimumConfidence": 0.7946736812591553,
+      "activeReject": 0.0004994429182261229,
+      "candidateReject": 0.00048352309386245906,
+      "activeAccepted": true,
+      "candidateAccepted": false
+    },
+    {
+      "id": "distortion-00062",
+      "font": "KleeOne",
+      "kind": "code",
+      "gold": "A0 JSKOYG",
+      "active": "AO JSKOYG",
+      "candidate": "A0 JSKOYG",
+      "activeMinimumConfidence": 0.609180212020874,
+      "candidateMinimumConfidence": 0.7843205332756042,
+      "activeReject": 0.0013538941275328398,
+      "candidateReject": 0.0006117004668340087,
+      "activeAccepted": false,
+      "candidateAccepted": false
+    }
+  ],
+  "editConfusions": {
+    "distortion-active": [
+      {
+        "source": "l",
+        "prediction": "I",
+        "count": 6
+      },
+      {
+        "source": "l",
+        "prediction": "1",
+        "count": 3
+      },
+      {
+        "source": "0",
+        "prediction": "O",
+        "count": 3
+      },
+      {
+        "source": "",
+        "prediction": " ",
+        "count": 1
+      },
+      {
+        "source": "I",
+        "prediction": "l",
+        "count": 1
+      },
+      {
+        "source": "I",
+        "prediction": "\\",
+        "count": 1
+      },
+      {
+        "source": "",
+        "prediction": "J",
+        "count": 1
+      },
+      {
+        "source": "V",
+        "prediction": "",
+        "count": 1
+      }
+    ],
+    "distortion-candidate": [
+      {
+        "source": "I",
+        "prediction": "l",
+        "count": 5
+      },
+      {
+        "source": "l",
+        "prediction": "I",
+        "count": 1
+      },
+      {
+        "source": "",
+        "prediction": " ",
+        "count": 1
+      },
+      {
+        "source": "I",
+        "prediction": "\\",
+        "count": 1
+      }
+    ]
+  },
+  "noFurtherSelectionOrOptimization": true,
+  "confidenceUncalibrated": true
+}

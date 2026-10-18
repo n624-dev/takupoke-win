@@ -1,0 +1,39 @@
+{
+  "scope": "Read-only numeric failure diagnosis, consumed reconstruction inputs only; no training/selection/final",
+  "worstConsumedOrdinal": "n086",
+  "normDifferences": [
+    {
+      "norm": 0,
+      "explicitMax": 1.049041748046875e-05,
+      "torchFusedMax": 1.1444091796875e-05,
+      "doubleMax": 1.0013580322265625e-05
+    },
+    {
+      "norm": 1,
+      "explicitMax": 1.049041748046875e-05,
+      "torchFusedMax": 1.1444091796875e-05,
+      "doubleMax": 1.1444091796875e-05
+    },
+    {
+      "norm": 2,
+      "explicitMax": 7.62939453125e-06,
+      "torchFusedMax": 7.62939453125e-06,
+      "doubleMax": 7.62939453125e-06
+    },
+    {
+      "norm": 3,
+      "explicitMax": 9.5367431640625e-06,
+      "torchFusedMax": 9.5367431640625e-06,
+      "doubleMax": 9.5367431640625e-06
+    },
+    {
+      "norm": 4,
+      "explicitMax": 0.0007190704345703125,
+      "torchFusedMax": 0.0007190704345703125,
+      "doubleMax": 0.0007190704345703125
+    }
+  ],
+  "qkvFusedLinearMax": 0.0,
+  "qkvMatmulThenAddMax": 0.0,
+  "sourceSha256": "8f3c08aab02ed06c12dedf3be9d0b92d82aa91ffa11072e8596e2db3611b0b7b"
+}

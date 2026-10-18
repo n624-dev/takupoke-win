@@ -1,0 +1,92 @@
+{
+  "scope": "Unscored contradiction controls only; not training targets, selection, independent final or production credit",
+  "models": [
+    {
+      "name": "original",
+      "samePixelPairs": 32,
+      "acceptedBothConflictingSources": 30,
+      "refusedBothSources": 2,
+      "groups": {
+        "scriptAlias": {
+          "pairs": 28,
+          "acceptedBoth": 26
+        },
+        "wholePrefixRemoved": {
+          "pairs": 4,
+          "acceptedBoth": 4
+        }
+      },
+      "rawSha256": "b6e3fac8c4609954e3b64419e0fe133eefee2e9d2f50242aa35afcfb1b65713a"
+    },
+    {
+      "name": "epoch-4",
+      "samePixelPairs": 32,
+      "acceptedBothConflictingSources": 26,
+      "refusedBothSources": 6,
+      "groups": {
+        "scriptAlias": {
+          "pairs": 28,
+          "acceptedBoth": 22
+        },
+        "wholePrefixRemoved": {
+          "pairs": 4,
+          "acceptedBoth": 4
+        }
+      },
+      "rawSha256": "ec91e2de33982765b2ec6ad8df5592a9b4ed9a18548beb7297643f5e5b5e39e2"
+    },
+    {
+      "name": "epoch-8",
+      "samePixelPairs": 32,
+      "acceptedBothConflictingSources": 26,
+      "refusedBothSources": 6,
+      "groups": {
+        "scriptAlias": {
+          "pairs": 28,
+          "acceptedBoth": 22
+        },
+        "wholePrefixRemoved": {
+          "pairs": 4,
+          "acceptedBoth": 4
+        }
+      },
+      "rawSha256": "6aece97be76b2bc373dbd960d02adca702db8d7fef03332c40c5c76e45e8c79b"
+    },
+    {
+      "name": "epoch-16",
+      "samePixelPairs": 32,
+      "acceptedBothConflictingSources": 27,
+      "refusedBothSources": 5,
+      "groups": {
+        "scriptAlias": {
+          "pairs": 28,
+          "acceptedBoth": 23
+        },
+        "wholePrefixRemoved": {
+          "pairs": 4,
+          "acceptedBoth": 4
+        }
+      },
+      "rawSha256": "3d684aaa3d8860aec726a691e6a30b718117c229ee2b1864428c963d694baf72"
+    },
+    {
+      "name": "epoch-24",
+      "samePixelPairs": 32,
+      "acceptedBothConflictingSources": 27,
+      "refusedBothSources": 5,
+      "groups": {
+        "scriptAlias": {
+          "pairs": 28,
+          "acceptedBoth": 23
+        },
+        "wholePrefixRemoved": {
+          "pairs": 4,
+          "acceptedBoth": 4
+        }
+      },
+      "rawSha256": "a0b4d8228e3ddfe9edc40feeb5f52d0c2545491eb2c81bc7740269996e124455"
+    }
+  ],
+  "seconds": 7.151566145999823,
+  "limitations": "Identical provided pixels cannot establish script origin or missing whole-prefix geometry. Refusing both loses a valid counterpart. Require independent source/ownership proof; no model selection or production credit."
+}

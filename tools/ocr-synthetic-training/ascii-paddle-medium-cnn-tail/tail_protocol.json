@@ -1,0 +1,79 @@
+{
+  "namespace": "research-ascii-paddle-medium-cnn-tail-v1/adaptation-v1",
+  "scope": "Independent new literal limited finalCNN spatial adaptation; no final/production qualification",
+  "modelSha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba",
+  "initialization": "Original finalCNNinput add.65[B7683W] -> Conv128 DW3x3 + copiedbias -> original Conv129/130 pointwise/exactERF GELU/residual -> originalpool/localneck/SVTR/full18710head. Native fidelity registered and passed before training.",
+  "parameters": "Only original lastCNN spatialDW6912+bias768 and reject193 trainable =7873. All earlierCNN, finalpointwise weights/bias, pool/localneck, SVTR, original18710classifier stay frozen. Changes to CNNfeatures may alter Japanese output; empirical retention required.",
+  "train": {
+    "seed": 84173113,
+    "fonts": [
+      "NotoSansJP400",
+      "NotoSerifJP400",
+      "MPLUS1Code-Regular",
+      "BIZUDMincho-Regular"
+    ],
+    "positiveCounts": {
+      "mixed_code": 192,
+      "mixed_confusable": 192,
+      "ascii_short": 128,
+      "japanese": 128
+    },
+    "negativeRows": 160
+  },
+  "development": {
+    "seed": 84175117,
+    "fonts": [
+      "KosugiMaru-Regular",
+      "ZenAntique-Regular"
+    ],
+    "positiveCounts": {
+      "mixed_code": 128,
+      "mixed_confusable": 128,
+      "ascii_short": 64,
+      "japanese": 64
+    },
+    "retentionRows": 64,
+    "negativeRows": 128
+  },
+  "fontExposure": "Train NotoSans/Serif+MPLUS1Code/BIZUDMincho: all previously consumed training fonts, exact50:50 mono/proportional everypositive group. Dev KosugiMaru/ZenAntique are consumeddevelopmentfonts/newliteral, never train. BIZUDGothic/KaiseiTokumin/KiwiMaru/HinaMincho and all reservedSawarabi nevertrain. Source-onlyKosugi-Regular priorlineageexposure disclosed. No font-unseen final claim.",
+  "source": "Fresh independent naturephrases and arbitrary ASCIIcodes/case/I-l-1/O-0/printable, not school original subjects/names/rooms or previous main/dev/final labels. Prior literal corpus/oracles exclusion-only; newtrain/devdisjoint; no class whitelist/output repair or oracle candidate routing.",
+  "preprocessing": "Whole original RGBnonwhite bbox+2originalpx/commonbaseline/relativeheights/internalgap/CJKprefix retained, native BGR48 original-center bilinear uint8round/norm0padding width320..960; parentminimum160 condition separate.",
+  "rendering": "Same whole-line physicalvariation/commonbaseline; allmixedcode/confusablecases paired with sharedfont/seed/prefix. Fresh seeds/literals, priorcorpora exclusions-only.",
+  "negatives": "Boundary20..40percent inkheightclip/interior smallerasure actualinkloss measured, duplicatedmultiline/randomstrokes/blank; no guessedlosttext CTClabel fordamage/multi/noise; blank receivesemptyCTC.",
+  "cache": "FP32 original add.65 finalCNNinput768x3xlocalWidth + original nativefinalteacherTx192, losslessNPZ restoredbytesSHA; original inputFP32hash, no FP16.",
+  "batching": "Exact originaladd.65 widthbucket includingoddtrailingcolumns/noCNNpadding; nativepool stride3x2 floor; originalselfattention noaddedmask; validwidth onlyrejectmean/SourceBox intervals.",
+  "training": {
+    "seed": 84177119,
+    "threads": 2,
+    "batchSize": 16,
+    "epochs": 8,
+    "evaluateEpochs": [
+      2,
+      4,
+      8
+    ],
+    "rejectLearningRate": 0.001,
+    "teacherKlWeight": 0.2,
+    "teacherFeatureMseWeight": 0.02,
+    "rejectBceWeight": 0.5,
+    "weightDecay": 0.0001,
+    "gradientClip": 5.0,
+    "maximumTrainingSeconds": 1800,
+    "maximumCacheSeconds": 1800,
+    "maximumRssMiB": 4096,
+    "minimumFreeDiskGiB": 2,
+    "additionalDiskBudgetGiB": 1.5,
+    "spatialLearningRate": 0.0001
+  },
+  "loss": "Completefull18710CTC/fullteacherKL/teacherFeatureMSE+rejectBCE. Original teacherdistribution recomputedfromnative finalfeatures/fulloriginalhead. Frozenhead-stage staticOTHER compression not used.",
+  "acceptance": "Uncalibrateddiagnostic: nonempty/minemittedCTCconfidence>=.8/nointervalpastvalidWidth; trained additionallyrejectProbability<=.05. No clamp/correction. Source script/fullink/cellownership proofindependent.",
+  "initializationDevelopmentGate": "Before optimizer everynewdev original/reconstructed-untrained text/CTCinterval/floor+validWidthdecision mustagree; maxfloatdiff recorded. Halt ifgatefail, do not change thresholds.",
+  "contradictionAudit": "Beforeoptimizer sameprovidedPNG or sameFP32input differentpositiveCTCliteral -> excludeallcollidingrowsfrom everyupdate, no guessedlabel/falsedamage target. Keepnewdevunchanged. CheckCTCminimumframefeasibility.",
+  "selection": "Originalfallbackincluded. Trainedeligibleonly mixedexact>=original/wrongaccepted<=original/negativeaccepted<=original/zerooriginal-correctJapanese-retentionregression. MaxcorrectAccepted thenexact/lowerwrong+negative/CER/earlier. Onlycompletefixed2,4,8 checkpoints; partialepochsnevercandidate.",
+  "continuationGate": "Selectedtrained/rawexact>=97percent/correctaccepted>=90percent/wrongaccepted0/negativeaccepted0/perdevfont>=95percentrawexact/zerooriginal-correctJPregressions. This onlypermitsseparateprospectivefinal/export, nevercomponent-basedactivation.",
+  "sourceProof": "64consumed same-pixelscriptalias/wholeprefixloss controls onlypostselection/unscored/nottrainorselect. Identicalcrop cannotproveorigin/completeness; sourcegeometry/script/ownershipproofindependent.",
+  "final": "Sawarabi Gothic/Mincho reserved notrendered/inferred; onlyaftercontinuationgatepass andseparatefinal/full-documentprotocol. iOS noedit. StandardONNX/CoreML laterifwarranted.",
+  "fontCoverage": "Before render accept only synthetic literals whose everyUnicode scalar is in selectedfont bestCmap; unsupportedliteral rerolls without replacement, fontfallback or inferredtext. MPLUS1Code lacksfullwidthcolon andKosugiMaru lacksemdash, so those combinations are excluded prospectively. AllASCII95 arepresent. Recordcoverage for every acceptedrow.",
+  "fontBalanceAudit": "Bothmixed groups use paired-unit font cycling (j//2); pairedpositivecounts divisibleby2*fontcount, otherpositivecounts divisiblebyfontcount. Assert exact perfontcount and trainmono50percent in everypositivegroup before cache or optimizer. Negatives not included in mono-positive ratio; counts recorded separately.",
+  "asciiCoverage": "Train ascii_short everyfourthrow includes eightcharacters from seededshuffled95printableASCII cycliccoverage plus randomletter/codewrapper, ensures complete95coverage without targetlist/dictionary. Othercodes arbitraryuniform/case/confusables. Corpus asserts everyASCIIoccurs before cache/training."
+}

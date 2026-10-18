@@ -1,0 +1,218 @@
+{
+  "study/baseline-inspection.jsonl": {
+    "bytes": 498690,
+    "sha256": "f813b24b93db188e377382eaedd87a808feef7d05fd55d05dee05956276fe3ff",
+    "parts": [
+      {
+        "path": "raw/baseline-inspection/00-literalfresh-0-positive.jsonl.gz",
+        "id": "literalfresh-0-positive",
+        "rawBytes": 91385,
+        "rawSHA256": "1a5350434cd8cf7045b06b2c35b2d98056213dcb105dbc9df0c54a58aac1a49a",
+        "compressedBytes": 15848,
+        "compressedSHA256": "1b970a19c48ed5d31e93a56087934f2d837bbeef82c313196b1a5916120ec9e7"
+      },
+      {
+        "path": "raw/baseline-inspection/01-literalfresh-0-missing-day.jsonl.gz",
+        "id": "literalfresh-0-missing-day",
+        "rawBytes": 73198,
+        "rawSHA256": "e67bb20dd32181243d2285908a768f54d96cce86b224db91faa825299af41535",
+        "compressedBytes": 12826,
+        "compressedSHA256": "9886a79713e05be9735332f4b626f8346b04db94d9a302fa01985d431890223b"
+      },
+      {
+        "path": "raw/baseline-inspection/02-literalfresh-0-missing-class.jsonl.gz",
+        "id": "literalfresh-0-missing-class",
+        "rawBytes": 85184,
+        "rawSHA256": "ea908805f99917b07b4d2d83f16371d63b0d2415a5d34a06345bd1d36c08987d",
+        "compressedBytes": 14836,
+        "compressedSHA256": "9617fda0a46e0fd993752b450cff47f511b22575f405024e217405a3e13a4f2c"
+      },
+      {
+        "path": "raw/baseline-inspection/03-literalfresh-1-positive.jsonl.gz",
+        "id": "literalfresh-1-positive",
+        "rawBytes": 91096,
+        "rawSHA256": "cee741535f2e8e2801159eed63ece5b8c897a42e1eb37de94d1ae449702544ff",
+        "compressedBytes": 16013,
+        "compressedSHA256": "a9175f22713371ec330cbd900fe7d9df920a5d719f87769ecc5ce0e2a8e1954d"
+      },
+      {
+        "path": "raw/baseline-inspection/04-literalfresh-1-missing-day.jsonl.gz",
+        "id": "literalfresh-1-missing-day",
+        "rawBytes": 72850,
+        "rawSHA256": "650300c85dafca88752105805fbb76259bd91ac7160c01106446af3c70edd0ee",
+        "compressedBytes": 12905,
+        "compressedSHA256": "fd1cad8dd2e6fd79207c7bf36519d9446b476bb9b63a317a1a6d108e478aec1e"
+      },
+      {
+        "path": "raw/baseline-inspection/05-literalfresh-1-missing-class.jsonl.gz",
+        "id": "literalfresh-1-missing-class",
+        "rawBytes": 84977,
+        "rawSHA256": "fc7a34881debd6252075ba74f16633200ac5f4dd6efeddbf466953e034a50891",
+        "compressedBytes": 15002,
+        "compressedSHA256": "b4363c02c703dfa9a2d48656053c915ba28ef66a9f23c1e7d961aea493c9477e"
+      }
+    ]
+  },
+  "study/baseline-observations.jsonl": {
+    "bytes": 13902091,
+    "sha256": "ba1f85709a8c3640301687a197001150cec4153710244fa65bb3d878c8445463",
+    "parts": [
+      {
+        "path": "raw/baseline-observations/00-literalfresh-0-positive.jsonl.gz",
+        "id": "literalfresh-0-positive",
+        "rawBytes": 2354622,
+        "rawSHA256": "95c1a8e88fcde522dff3857fdf82f9b6d04271958a91664dd82d71476ca1acf9",
+        "compressedBytes": 329587,
+        "compressedSHA256": "ce32966b2965468536d53e0c4ec784d2093d14a18d34089c9f81ea3327bb6f70"
+      },
+      {
+        "path": "raw/baseline-observations/01-literalfresh-0-missing-day.jsonl.gz",
+        "id": "literalfresh-0-missing-day",
+        "rawBytes": 2288549,
+        "rawSHA256": "53836d5867794a9fcd5a8a156b22923d91a11fe6c7d87c9b220198d7ec8a19b2",
+        "compressedBytes": 319397,
+        "compressedSHA256": "c9c8ae790d5e92f4257b7b49acd98d9937bdb5138ad8a81c35424686d69c42da"
+      },
+      {
+        "path": "raw/baseline-observations/02-literalfresh-0-missing-class.jsonl.gz",
+        "id": "literalfresh-0-missing-class",
+        "rawBytes": 2321721,
+        "rawSHA256": "dfba0b698c08a566a76f8e9460bf70e91e8314ce4c483f2936ba000f7176d887",
+        "compressedBytes": 323886,
+        "compressedSHA256": "955ae03db6219ea33de772e265dcbb5b70525137da79f00228cea39d37085438"
+      },
+      {
+        "path": "raw/baseline-observations/03-literalfresh-1-positive.jsonl.gz",
+        "id": "literalfresh-1-positive",
+        "rawBytes": 2335010,
+        "rawSHA256": "430327bf3440980b11083c4996c16d118e1a8dc98762a13255300896ecec4a0a",
+        "compressedBytes": 333442,
+        "compressedSHA256": "71bcd287b8ddc74b3e9325b32f7204ab4e6899ba434eb3f1352084afa991266b"
+      },
+      {
+        "path": "raw/baseline-observations/04-literalfresh-1-missing-day.jsonl.gz",
+        "id": "literalfresh-1-missing-day",
+        "rawBytes": 2285264,
+        "rawSHA256": "df7e146398fac09774082d1250b1aed6fe3cc9fd7d4456cc775dfe727ddd1e75",
+        "compressedBytes": 326215,
+        "compressedSHA256": "7ec08a6e1677a24d29949cd1912a2da1fdf13e5e5f17efd88f9a2733faf9d5a2"
+      },
+      {
+        "path": "raw/baseline-observations/05-literalfresh-1-missing-class.jsonl.gz",
+        "id": "literalfresh-1-missing-class",
+        "rawBytes": 2316925,
+        "rawSHA256": "38b72bfa09e80f86e95ead0677060ac3cf39a35985edf9a4d191ad36c0a68623",
+        "compressedBytes": 331005,
+        "compressedSHA256": "b1e0caff2d8f11a41d08fa0d4223893324c156e42181458f8c371f61dabffa45"
+      }
+    ]
+  },
+  "study/candidate-inspection.jsonl": {
+    "bytes": 498706,
+    "sha256": "c1071dbddcec4c400b41c6cd9bcd7d174ff22676b9ec53f31edf56bb498caf2b",
+    "parts": [
+      {
+        "path": "raw/candidate-inspection/00-literalfresh-0-positive.jsonl.gz",
+        "id": "literalfresh-0-positive",
+        "rawBytes": 91396,
+        "rawSHA256": "f2a48bb80ded5de66bb3c7bf82bd8f55391e38648fa5ca9b89304360985ce950",
+        "compressedBytes": 15860,
+        "compressedSHA256": "28103ee8ecd59c5bd68ce77dc47f61fca4a347d201cd65aa15d124d235785618"
+      },
+      {
+        "path": "raw/candidate-inspection/01-literalfresh-0-missing-day.jsonl.gz",
+        "id": "literalfresh-0-missing-day",
+        "rawBytes": 73199,
+        "rawSHA256": "90382cf692906e65348b8799229e463ded85ca2f61c98517a8222919fa1deac9",
+        "compressedBytes": 12827,
+        "compressedSHA256": "9730c7140b21460c7484116b9f0dec3ed1e15ddbacada29c7bd1def0851d29ee"
+      },
+      {
+        "path": "raw/candidate-inspection/02-literalfresh-0-missing-class.jsonl.gz",
+        "id": "literalfresh-0-missing-class",
+        "rawBytes": 85185,
+        "rawSHA256": "716883b17ce4502cb02ec3b99fdbbcec4ff7865e80b2addd23982fcb487c965b",
+        "compressedBytes": 14836,
+        "compressedSHA256": "4304194dfb6fa3d39eee0cd82dce52e760c69c340250d257f56e88c0385be091"
+      },
+      {
+        "path": "raw/candidate-inspection/03-literalfresh-1-positive.jsonl.gz",
+        "id": "literalfresh-1-positive",
+        "rawBytes": 91097,
+        "rawSHA256": "be7fc76ef14def71457a012d795461f3525f944df66aa8cd9f8e4fb5e3951ee1",
+        "compressedBytes": 16012,
+        "compressedSHA256": "c92b257bf5aec821014546436c8588b5a19216380c3df60ef373168660ca619a"
+      },
+      {
+        "path": "raw/candidate-inspection/04-literalfresh-1-missing-day.jsonl.gz",
+        "id": "literalfresh-1-missing-day",
+        "rawBytes": 72851,
+        "rawSHA256": "86768caf5998d8dd049934f186f47cfe5ca616b496e9ec9420cca0251d2351ba",
+        "compressedBytes": 12905,
+        "compressedSHA256": "4ea5f6d939f86d633895dcf8a07827ff0bffb3225f7303cd976d0e7566508899"
+      },
+      {
+        "path": "raw/candidate-inspection/05-literalfresh-1-missing-class.jsonl.gz",
+        "id": "literalfresh-1-missing-class",
+        "rawBytes": 84978,
+        "rawSHA256": "b3bef169762e759f131e15ba2ea44132c6d2f8d3976f8d779bd963d23166bc87",
+        "compressedBytes": 15002,
+        "compressedSHA256": "a63810bcb344a3789f308665a763096a998fb5539df2c52052d48f239ca421cb"
+      }
+    ]
+  },
+  "study/candidate-observations.jsonl": {
+    "bytes": 13915704,
+    "sha256": "de0adc2665526858b4ab69883f7901de08849e63ae699e352ff736e4ddfd50e2",
+    "parts": [
+      {
+        "path": "raw/candidate-observations/00-literalfresh-0-positive.jsonl.gz",
+        "id": "literalfresh-0-positive",
+        "rawBytes": 2355078,
+        "rawSHA256": "45651fa37f2557d2141802d1e437e5594d2339080c67077d12e11301961e9bc4",
+        "compressedBytes": 329762,
+        "compressedSHA256": "2266b596ca77e6c7c4084892938e563da11d8f7584ebf488667d7709bc36cc72"
+      },
+      {
+        "path": "raw/candidate-observations/01-literalfresh-0-missing-day.jsonl.gz",
+        "id": "literalfresh-0-missing-day",
+        "rawBytes": 2288997,
+        "rawSHA256": "3489f5db75543e991c8a62f281c9ccf30e1f758ca3018cd0e5ba444a5e06e213",
+        "compressedBytes": 319555,
+        "compressedSHA256": "a7eb03f8e14d6b61481740c1d759a4077138ede9fe5da16ddc1e90f103505aaa"
+      },
+      {
+        "path": "raw/candidate-observations/02-literalfresh-0-missing-class.jsonl.gz",
+        "id": "literalfresh-0-missing-class",
+        "rawBytes": 2322169,
+        "rawSHA256": "4143b6dd9541e72cf6000767f5fd00f85a9ac53cd9bd34f01cd0837c7471e49c",
+        "compressedBytes": 324042,
+        "compressedSHA256": "8517f683ae91b78ef6d5f03db450ec1b71c47152f5b509d7f509bc6635cb094b"
+      },
+      {
+        "path": "raw/candidate-observations/03-literalfresh-1-positive.jsonl.gz",
+        "id": "literalfresh-1-positive",
+        "rawBytes": 2339097,
+        "rawSHA256": "0bc8c1b1770f78d08b7277976a19a8b65ee87e1f78f3d406859725289b9bc9f6",
+        "compressedBytes": 333887,
+        "compressedSHA256": "ef771af1d2d3857a53fdb690eae2cc151cbb94e21ee31096281c92c8acd91388"
+      },
+      {
+        "path": "raw/candidate-observations/04-literalfresh-1-missing-day.jsonl.gz",
+        "id": "literalfresh-1-missing-day",
+        "rawBytes": 2289351,
+        "rawSHA256": "3c8a7eb854a8365643d02664f3ff82d3cecb038810ab9026865160322532cb0e",
+        "compressedBytes": 326670,
+        "compressedSHA256": "2257b7be95227ff5f651f8ec5a688457eb2cb5dbbb0897973bcdbad7e5f82819"
+      },
+      {
+        "path": "raw/candidate-observations/05-literalfresh-1-missing-class.jsonl.gz",
+        "id": "literalfresh-1-missing-class",
+        "rawBytes": 2321012,
+        "rawSHA256": "7115469971bbab140d7c8978885824f58f259bace5f030e929b72f2f556a80be",
+        "compressedBytes": 331450,
+        "compressedSHA256": "425df45b09b48c0cfc23dd97b8db1e2db884faabf0a73390f9f076bf0a7a7949"
+      }
+    ]
+  }
+}

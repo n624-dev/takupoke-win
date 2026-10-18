@@ -1,0 +1,4 @@
+Unhandled exception. System.IO.InvalidDataException: Asset path invalid.
+   at Program.<>c__DisplayClass0_0.<<Main>$>g__Verified|2(JsonElement asset) in /workspace/scratch/takupoke-win/tools/ocr-physical-framing/Program.cs:line 196
+   at Program.<Main>$(String[] args) in /workspace/scratch/takupoke-win/tools/ocr-physical-framing/Program.cs:line 33
+   at Program.<Main>(String[] args)

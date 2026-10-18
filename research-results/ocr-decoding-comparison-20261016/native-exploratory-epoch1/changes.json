@@ -1,0 +1,962 @@
+[
+  {
+    "arm": [
+      "v1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室l1I49",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室l1I43",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室l1I93",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-080",
+    "role": "room",
+    "before": "架空室B34",
+    "after": "架空室334",
+    "expected": "架空室B34",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "v1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-082",
+    "role": "room",
+    "before": "架空室B81",
+    "after": "架空室381",
+    "expected": "架空室B81",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "v1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室l1I99",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室l1I49",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室l1I43",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室l1I93",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-080",
+    "role": "room",
+    "before": "架空室B34",
+    "after": "架空室334",
+    "expected": "架空室B34",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "v1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-082",
+    "role": "room",
+    "before": "架空室B81",
+    "after": "架空室381",
+    "expected": "架空室B81",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "v1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室l1I99",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室l1I49",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室l1I43",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室l1I93",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-080",
+    "role": "room",
+    "before": "架空室B34",
+    "after": "架空室334",
+    "expected": "架空室B34",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "v1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-082",
+    "role": "room",
+    "before": "架空室B81",
+    "after": "架空室381",
+    "expected": "架空室B81",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "v1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室l1I99",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室l1I49",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室l1I43",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室l1I93",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-080",
+    "role": "room",
+    "before": "架空室B34",
+    "after": "架空室334",
+    "expected": "架空室B34",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "v1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-082",
+    "role": "room",
+    "before": "架空室B81",
+    "after": "架空室381",
+    "expected": "架空室B81",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "v1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室l1I99",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室l1I49",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室l1I43",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室l1I93",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室l1I99",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室I1l99",
+    "expected": "架空室I1l99",
+    "gain": true,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室l1I49",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室l1I43",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室l1I93",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室l1I99",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室I1l99",
+    "expected": "架空室I1l99",
+    "gain": true,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室l1I49",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室l1I43",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室l1I93",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室l1I99",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "beam8",
+      "same-length",
+      "ink2"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室I1l99",
+    "expected": "架空室I1l99",
+    "gain": true,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室l1I49",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室l1I43",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室l1I93",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室l1I99",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "v3-exploratory-epoch1",
+      "beam8",
+      "bounded-code",
+      "ink2"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室I1l99",
+    "expected": "架空室I1l99",
+    "gain": true,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室l1I49",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室l1I43",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室l1I93",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-082",
+    "role": "room",
+    "before": "架空室B81",
+    "after": "架空室381",
+    "expected": "架空室B81",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "greedy",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室l1I99",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室l1I49",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室l1I43",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室l1I93",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-082",
+    "role": "room",
+    "before": "架空室B81",
+    "after": "架空室381",
+    "expected": "架空室B81",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "greedy",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室l1I99",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室l1I49",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室l1I43",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室l1I93",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-082",
+    "role": "room",
+    "before": "架空室B81",
+    "after": "架空室381",
+    "expected": "架空室B81",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "beam8",
+      "same-length",
+      "ink0"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室l1I99",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-029",
+    "role": "room",
+    "before": "架空室I1I49",
+    "after": "架空室l1I49",
+    "expected": "架空室I1l49",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-052",
+    "role": "room",
+    "before": "架空室I1I43",
+    "after": "架空室l1I43",
+    "expected": "架空室I1l43",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-079",
+    "role": "room",
+    "before": "架空室I1I93",
+    "after": "架空室l1I93",
+    "expected": "架空室I1l93",
+    "gain": false,
+    "loss": false
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-082",
+    "role": "room",
+    "before": "架空室B81",
+    "after": "架空室381",
+    "expected": "架空室B81",
+    "gain": false,
+    "loss": true
+  },
+  {
+    "arm": [
+      "mean-v1-v3-exploratory-epoch1",
+      "beam8",
+      "bounded-code",
+      "ink0"
+    ],
+    "id": "native-line-084",
+    "role": "room",
+    "before": "架空室I1I99",
+    "after": "架空室l1I99",
+    "expected": "架空室I1l99",
+    "gain": false,
+    "loss": false
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "scope": "Source-only postclosure audit; no image/model/inference/selection rerun or frozen artifact changes",
+  "runs": [
+    {
+      "run": "mixed-head-v1",
+      "split": "train",
+      "literalRows": 6144,
+      "unsupportedRows": []
+    },
+    {
+      "run": "mixed-head-v1",
+      "split": "development",
+      "literalRows": 896,
+      "unsupportedRows": []
+    },
+    {
+      "run": "adaptation-v1",
+      "split": "train",
+      "literalRows": 4096,
+      "unsupportedRows": []
+    },
+    {
+      "run": "adaptation-v1",
+      "split": "development",
+      "literalRows": 896,
+      "unsupportedRows": []
+    }
+  ]
+}

@@ -14,6 +14,9 @@ public sealed class LinkSearchTests
     [InlineData("しこく", "shikoku")]
     [InlineData("しこく", "sikoku")]
     [InlineData("きっぷ", "kippu")]
+    [InlineData("スー", "su")]
+    [InlineData("ちゅうがく", "chugaku")]
+    [InlineData("ABC", "abc")]
     public void MatchesRomajiQueries(string source, string query) => Assert.True(LinkSearch.Score(source, query) >= 0);
     [Theory]
     [InlineData("https://example.invalid/fake", true)]

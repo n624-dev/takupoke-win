@@ -1,0 +1,14 @@
+[
+  {
+    "category": "DeprecationWarning",
+    "message": "The feature will be removed. Please remove usage of this function"
+  },
+  {
+    "category": "TracerWarning",
+    "message": "Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!"
+  },
+  {
+    "category": "TracerWarning",
+    "message": "Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!"
+  }
+]

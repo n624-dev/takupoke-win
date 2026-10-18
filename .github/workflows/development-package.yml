@@ -1,5 +1,7 @@
 name: Development installers
 on:
+  push:
+    branches: [release/development/*]
   workflow_dispatch:
     inputs:
       version:
@@ -36,6 +38,11 @@ jobs:
           persist-credentials: false
       - name: Prepare isolated paths and validate development version
         run: |
+          if ($env:GITHUB_EVENT_NAME -eq 'push') {
+            if ($env:GITHUB_REF_NAME -notmatch '^release/development/(?<version>\d+\.\d+\.\d+-dev\.\d+)$') { throw 'Unexpected development release branch.' }
+            $env:DISTRIBUTION_VERSION = $Matches.version
+            "DISTRIBUTION_VERSION=$env:DISTRIBUTION_VERSION" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          }
           if ($env:DISTRIBUTION_VERSION -notmatch '^\d+\.\d+\.\d+-dev\.\d+$') { throw 'Only development versions are permitted.' }
           $taskRoot = Join-Path $env:RUNNER_TEMP "takupoke-package-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
           @(
@@ -45,6 +52,20 @@ jobs:
             "NUGET_HTTP_CACHE_PATH=$(Join-Path $taskRoot 'nuget-http')"
             "NUGET_PLUGINS_CACHE_PATH=$(Join-Path $taskRoot 'nuget-plugins')"
           ) | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+      - name: Create the immutable tag for a development release branch
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # POST creates a new ref and never moves an existing tag. On a rerun,
+          # validation below accepts only a tag that already identifies this SHA.
+          gh api --method POST "repos/$env:GITHUB_REPOSITORY/git/refs" -f "ref=refs/tags/v$env:DISTRIBUTION_VERSION" -f "sha=$env:GITHUB_SHA"
+          if ($LASTEXITCODE -ne 0) { Write-Output 'No new tag was created; validating the existing tag without changing it.' }
+          ./scripts/publish-development-release.ps1 -Version $env:DISTRIBUTION_VERSION -ValidateTagOnly
+      - name: Verify the pre-created release tag before building
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./scripts/publish-development-release.ps1 -Version $env:DISTRIBUTION_VERSION -ValidateTagOnly
       - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
         with:
           dotnet-version: 10.0.x

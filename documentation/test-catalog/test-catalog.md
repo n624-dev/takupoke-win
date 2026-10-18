@@ -1,7 +1,7 @@
 # テスト一覧・対象検索・宣言整合性・CI接続
 
 対応関係・宣言名・実行方法のSHA-256：
-`74eaf9ebd6c2d636087b1853f56670f6c2bcea5394ef1d6630d9024f0c0e5186`
+`f72e1444c552143f98df44f57e04b073e1dc749483897127414afc2e61977caf`
 
 環境：Linux Python（隔離Gitリポジトリ）
 
@@ -12,10 +12,10 @@ python3 -B tests/test_test_catalog.py
 ## 変更時に確認するソース
 
 - [.github/workflows/ci.yml](../../.github/workflows/ci.yml)
+- [.github/workflows/test-tools.yml](../../.github/workflows/test-tools.yml)
 - [scripts/test_catalog.py](../../scripts/test_catalog.py)
 - [scripts/test_catalog_inventory.py](../../scripts/test_catalog_inventory.py)
 - [tests/test-catalog.json](../../tests/test-catalog.json)
-- [.github/workflows/test-tools.yml](../../.github/workflows/test-tools.yml)
 
 ## [tests/test_test_catalog.py](../../tests/test_test_catalog.py)
 

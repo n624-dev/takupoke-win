@@ -1,0 +1,390 @@
+{
+  "documents": [
+    {
+      "id": "sourcefresh-0-positive",
+      "originalPDFSHA256": "aa89a2fa35b0a7848eb695dd43589374fce4d0c396e198e742a533be332a3b76",
+      "pages": [
+        {
+          "page": 1,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-positive-native-p1.bgra",
+            "bytes": 3713420,
+            "sha256": "8fb5ad001aff895bb798ad01eaea24dac294ad2b5b90207dc4c766b96eb08e57"
+          }
+        },
+        {
+          "page": 2,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-positive-native-p2.bgra",
+            "bytes": 3713420,
+            "sha256": "2cf8f6af1cb995916513c4702eedca35926271a5168b1e764be024fb559454b4"
+          }
+        },
+        {
+          "page": 3,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-positive-native-p3.bgra",
+            "bytes": 3713420,
+            "sha256": "2384588c2c03c7607ac9f4a7c884f0320562d212982a93aa052ba977e175cca4"
+          }
+        },
+        {
+          "page": 4,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-positive-native-p4.bgra",
+            "bytes": 3713420,
+            "sha256": "8a9322d486ab8426febd636df8e6eb5047e7d4802bb09979a842370a1ab284d4"
+          }
+        },
+        {
+          "page": 5,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-positive-native-p5.bgra",
+            "bytes": 3713420,
+            "sha256": "4c3dab27f3ca5ffacfb6353061ea56099ef4d9be43b247134bf98e1585325194"
+          }
+        }
+      ],
+      "originalDrawingPDFSHA256": "dfb8f21a6399c4e28e0bba0913e11b73bf93a6be770b3c6215da7d75770d5fe0",
+      "sourcePDF": {
+        "file": "sourcefresh-0-positive-lossless.pdf",
+        "bytes": 476439,
+        "sha256": "aa89a2fa35b0a7848eb695dd43589374fce4d0c396e198e742a533be332a3b76"
+      }
+    },
+    {
+      "id": "sourcefresh-0-missing-day",
+      "originalPDFSHA256": "76f78d16546767c08a0e571c0597aeb4ae7d934d887a74301999999d43b098dc",
+      "pages": [
+        {
+          "page": 1,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-missing-day-native-p1.bgra",
+            "bytes": 3713420,
+            "sha256": "6d0834290e31fabab98fb3043383b55dd0fb67402754f11d14093887b13fc063"
+          }
+        },
+        {
+          "page": 2,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-missing-day-native-p2.bgra",
+            "bytes": 3713420,
+            "sha256": "2cf8f6af1cb995916513c4702eedca35926271a5168b1e764be024fb559454b4"
+          }
+        },
+        {
+          "page": 3,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-missing-day-native-p3.bgra",
+            "bytes": 3713420,
+            "sha256": "2384588c2c03c7607ac9f4a7c884f0320562d212982a93aa052ba977e175cca4"
+          }
+        },
+        {
+          "page": 4,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-missing-day-native-p4.bgra",
+            "bytes": 3713420,
+            "sha256": "8a9322d486ab8426febd636df8e6eb5047e7d4802bb09979a842370a1ab284d4"
+          }
+        },
+        {
+          "page": 5,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-missing-day-native-p5.bgra",
+            "bytes": 3713420,
+            "sha256": "4c3dab27f3ca5ffacfb6353061ea56099ef4d9be43b247134bf98e1585325194"
+          }
+        }
+      ],
+      "originalDrawingPDFSHA256": "19fcf579c9c4fb03cd5591aa8d61e274bbf403e5a89e9c8d275dea6f784d69d7",
+      "sourcePDF": {
+        "file": "sourcefresh-0-missing-day-lossless.pdf",
+        "bytes": 475969,
+        "sha256": "76f78d16546767c08a0e571c0597aeb4ae7d934d887a74301999999d43b098dc"
+      }
+    },
+    {
+      "id": "sourcefresh-0-missing-class",
+      "originalPDFSHA256": "053260003239eac432670f8ea8cc91bd33fa4227ea5ab3be0d9cabbabe35f1fb",
+      "pages": [
+        {
+          "page": 1,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-missing-class-native-p1.bgra",
+            "bytes": 3713420,
+            "sha256": "bec60c0049e572637f5f277dc8ab5e95e5c5dd0c8ee1ae5267e1ae6d646d9508"
+          }
+        },
+        {
+          "page": 2,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-missing-class-native-p2.bgra",
+            "bytes": 3713420,
+            "sha256": "2cf8f6af1cb995916513c4702eedca35926271a5168b1e764be024fb559454b4"
+          }
+        },
+        {
+          "page": 3,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-missing-class-native-p3.bgra",
+            "bytes": 3713420,
+            "sha256": "2384588c2c03c7607ac9f4a7c884f0320562d212982a93aa052ba977e175cca4"
+          }
+        },
+        {
+          "page": 4,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-missing-class-native-p4.bgra",
+            "bytes": 3713420,
+            "sha256": "8a9322d486ab8426febd636df8e6eb5047e7d4802bb09979a842370a1ab284d4"
+          }
+        },
+        {
+          "page": 5,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-0-missing-class-native-p5.bgra",
+            "bytes": 3713420,
+            "sha256": "4c3dab27f3ca5ffacfb6353061ea56099ef4d9be43b247134bf98e1585325194"
+          }
+        }
+      ],
+      "originalDrawingPDFSHA256": "4550463294b37bc2d377825cee1427fd049c12c54eaf624dceb829b8412a06df",
+      "sourcePDF": {
+        "file": "sourcefresh-0-missing-class-lossless.pdf",
+        "bytes": 476047,
+        "sha256": "053260003239eac432670f8ea8cc91bd33fa4227ea5ab3be0d9cabbabe35f1fb"
+      }
+    },
+    {
+      "id": "sourcefresh-1-positive",
+      "originalPDFSHA256": "b5646d9524fda1fe7683b4c1c6fd66911d69620d7d854c077b2118fdcaf236d7",
+      "pages": [
+        {
+          "page": 1,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-positive-native-p1.bgra",
+            "bytes": 3713420,
+            "sha256": "723ec85f213e5ba301084bc81343caebe9bbcc2d6d383a359a9d3583c33771de"
+          }
+        },
+        {
+          "page": 2,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-positive-native-p2.bgra",
+            "bytes": 3713420,
+            "sha256": "db8060f6b90f3b52457920e1539f4f121042816c55a30825be39e9ef1913eb1d"
+          }
+        },
+        {
+          "page": 3,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-positive-native-p3.bgra",
+            "bytes": 3713420,
+            "sha256": "641b5e30d603a54ff8b818ad8305569e42175c90b0b79c414847383fbed0b843"
+          }
+        },
+        {
+          "page": 4,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-positive-native-p4.bgra",
+            "bytes": 3713420,
+            "sha256": "f59044ab6b3ef30a4b810f226b65205f4b7774affbb7fca02943a7af8ef738bb"
+          }
+        },
+        {
+          "page": 5,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-positive-native-p5.bgra",
+            "bytes": 3713420,
+            "sha256": "6c14261c2fb8d0b1f54dcb51f56ed5ce2b4ba6dbe29a28309f1c0c0586095ea3"
+          }
+        }
+      ],
+      "originalDrawingPDFSHA256": "cf25f2483b7e49d7f148e7c31bb5856944bd7f81cc1e4472db3c7b5808c9a181",
+      "sourcePDF": {
+        "file": "sourcefresh-1-positive-lossless.pdf",
+        "bytes": 465933,
+        "sha256": "b5646d9524fda1fe7683b4c1c6fd66911d69620d7d854c077b2118fdcaf236d7"
+      }
+    },
+    {
+      "id": "sourcefresh-1-missing-day",
+      "originalPDFSHA256": "1b1db53f576f79cec8b15e1be98f07f7c0e21fb9ad6142933a8ba3c94020c60a",
+      "pages": [
+        {
+          "page": 1,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-missing-day-native-p1.bgra",
+            "bytes": 3713420,
+            "sha256": "a4a039e60fb654782f179c399857e8ecc79b3bbdf8fef4b20115fb62efe13f8d"
+          }
+        },
+        {
+          "page": 2,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-missing-day-native-p2.bgra",
+            "bytes": 3713420,
+            "sha256": "db8060f6b90f3b52457920e1539f4f121042816c55a30825be39e9ef1913eb1d"
+          }
+        },
+        {
+          "page": 3,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-missing-day-native-p3.bgra",
+            "bytes": 3713420,
+            "sha256": "641b5e30d603a54ff8b818ad8305569e42175c90b0b79c414847383fbed0b843"
+          }
+        },
+        {
+          "page": 4,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-missing-day-native-p4.bgra",
+            "bytes": 3713420,
+            "sha256": "f59044ab6b3ef30a4b810f226b65205f4b7774affbb7fca02943a7af8ef738bb"
+          }
+        },
+        {
+          "page": 5,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-missing-day-native-p5.bgra",
+            "bytes": 3713420,
+            "sha256": "6c14261c2fb8d0b1f54dcb51f56ed5ce2b4ba6dbe29a28309f1c0c0586095ea3"
+          }
+        }
+      ],
+      "originalDrawingPDFSHA256": "cbda76d2961dcd4ed08066fdafe5d122cf2c92d5a31082b600400e336526d03f",
+      "sourcePDF": {
+        "file": "sourcefresh-1-missing-day-lossless.pdf",
+        "bytes": 465537,
+        "sha256": "1b1db53f576f79cec8b15e1be98f07f7c0e21fb9ad6142933a8ba3c94020c60a"
+      }
+    },
+    {
+      "id": "sourcefresh-1-missing-class",
+      "originalPDFSHA256": "f74fc3a930669349de62b8851eb8e90c9dc9a89f2232396a72febdd3c5ce016a",
+      "pages": [
+        {
+          "page": 1,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-missing-class-native-p1.bgra",
+            "bytes": 3713420,
+            "sha256": "cf81e75c4375a9a2c9f72b90b00ba616026ab69fc41ac884528a67b05153b721"
+          }
+        },
+        {
+          "page": 2,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-missing-class-native-p2.bgra",
+            "bytes": 3713420,
+            "sha256": "db8060f6b90f3b52457920e1539f4f121042816c55a30825be39e9ef1913eb1d"
+          }
+        },
+        {
+          "page": 3,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-missing-class-native-p3.bgra",
+            "bytes": 3713420,
+            "sha256": "641b5e30d603a54ff8b818ad8305569e42175c90b0b79c414847383fbed0b843"
+          }
+        },
+        {
+          "page": 4,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-missing-class-native-p4.bgra",
+            "bytes": 3713420,
+            "sha256": "f59044ab6b3ef30a4b810f226b65205f4b7774affbb7fca02943a7af8ef738bb"
+          }
+        },
+        {
+          "page": 5,
+          "width": 2237,
+          "height": 415,
+          "pixels": {
+            "file": "sourcefresh-1-missing-class-native-p5.bgra",
+            "bytes": 3713420,
+            "sha256": "6c14261c2fb8d0b1f54dcb51f56ed5ce2b4ba6dbe29a28309f1c0c0586095ea3"
+          }
+        }
+      ],
+      "originalDrawingPDFSHA256": "8cd3ffc16f6b2762757d9f6a1b85a0bd6cd2b62bab6f41eeb5c1df12bd29fb5f",
+      "sourcePDF": {
+        "file": "sourcefresh-1-missing-class-lossless.pdf",
+        "bytes": 465481,
+        "sha256": "f74fc3a930669349de62b8851eb8e90c9dc9a89f2232396a72febdd3c5ce016a"
+      }
+    }
+  ],
+  "recipe": "source-order-native-fresh-v1",
+  "researchDeadlineSeconds": 1250,
+  "sourceScope": "New lossless image-only PDF containers; consumed original drawing pixels, no extra independent document credit",
+  "hybridDictionary": {
+    "file": "hybrid-dictionary.json",
+    "bytes": 112374,
+    "sha256": "a49d51120786924a642c9e8a14b2a2ab73c019699abf5b2b6970ec7355c0415f"
+  },
+  "candidateRecognizer": {
+    "file": "candidate-rec.onnx",
+    "bytes": 22183975,
+    "sha256": "95bab179e0d6cc75269419078d68696cd4679661f94f6128b858b7a074fe2971"
+  },
+  "renderer": "Actual native Windows PDF renderer; lossless PNG; production dimensions and Bgra8/Ignore/DoNotColorManage"
+}

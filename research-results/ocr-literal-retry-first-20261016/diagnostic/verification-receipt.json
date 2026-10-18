@@ -1,0 +1,19 @@
+{
+  "sourceCommit": "8b2fa2ade00967221286934c2e054f46128d8154",
+  "run": 38861549102,
+  "artifact": 12029198916,
+  "zipBytes": 1295566,
+  "zipSHA256": "40e5efe8b528f3036a6341dc5138f4db31d2db526470eb9a681034bd253ea70d",
+  "all10ExactNativePages": true,
+  "copied": {
+    "restoration-receipt.json": {
+      "bytes": 3940,
+      "sha256": "fce48e0845209431fd793912ea2ff5e40447c820c4f5ef2da52f0e50d4e407bc"
+    },
+    "crop-diagnostics.jsonl": {
+      "bytes": 108489,
+      "sha256": "4a7144b92c5ea31da91ca6463cc4187ad119f2368e861b16d63f369b501ab4f8"
+    }
+  },
+  "scope": "Consumed fictional original restoration and unchanged10446factory diagnostics; no independent accuracy or product release credit. Full-page pixels excluded from public source."
+}

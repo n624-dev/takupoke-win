@@ -1,0 +1,8 @@
+{
+  "failure": "ImportError: parent train.py was resolved instead of sibling training source",
+  "phase": "Before fresh freeze/generation/model loading/inference",
+  "fix": "Explicit importlib file path for sibling training helper; no training source/protocol/checkpoint change",
+  "originalLog": "/workspace/scratch/ascii-english-v5-confusion-20261016-v2/fresh.log",
+  "retryLog": "/workspace/scratch/ascii-english-v5-confusion-20261016-v2/fresh-run2.log",
+  "freshCreditNotConsumedByFailedImport": true
+}

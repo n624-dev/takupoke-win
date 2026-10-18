@@ -1,0 +1,684 @@
+{
+  "scope": "Development only: all original primary line crops on first page of old native fictional font0 positive. No crop chosen using errors/gold. Not full-document evidence.",
+  "kind": "native",
+  "rawSHA256": "a498c5661bb21a0432ffad4ea930684f6e61b676addea3cc743381ede9378406",
+  "frozenArms": [
+    [
+      "official-english-v5/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    [
+      "official-english-v5/native-floor",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    [
+      "official-english-v5/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    [
+      "official-english-v5/native-floor",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    [
+      "official-english-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    [
+      "server-v5/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    [
+      "server-v5/native-floor",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    [
+      "server-v5/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    [
+      "server-v5/native-floor",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    [
+      "server-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    [
+      "server-v5/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    [
+      "server-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    [
+      "server-v5/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    [
+      "japanese-v3/native-floor",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    [
+      "japanese-v3/native-floor",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ],
+    [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "original"
+    ],
+    [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "same-length",
+      "ink2"
+    ],
+    [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "original"
+    ],
+    [
+      "japanese-v3/manual-retain",
+      "greedy",
+      "bounded-code",
+      "ink2"
+    ]
+  ],
+  "scores": [
+    {
+      "arm": [
+        "official-english-v5/native-floor",
+        "greedy",
+        "same-length",
+        "original"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 45,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "official-english-v5/native-floor",
+        "greedy",
+        "same-length",
+        "ink2"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 48,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "official-english-v5/native-floor",
+        "greedy",
+        "bounded-code",
+        "original"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 45,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "official-english-v5/native-floor",
+        "greedy",
+        "bounded-code",
+        "ink2"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 48,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "official-english-v5/manual-retain",
+        "greedy",
+        "same-length",
+        "original"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 59,
+      "gains": 0,
+      "losses": 7,
+      "changed": 11,
+      "selectedCrops": 59,
+      "selectedCodeBelowNativeFloor": 14,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 11,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 13
+    },
+    {
+      "arm": [
+        "official-english-v5/manual-retain",
+        "greedy",
+        "same-length",
+        "ink2"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 63,
+      "gains": 0,
+      "losses": 3,
+      "changed": 6,
+      "selectedCrops": 61,
+      "selectedCodeBelowNativeFloor": 13,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 15,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 9
+    },
+    {
+      "arm": [
+        "official-english-v5/manual-retain",
+        "greedy",
+        "bounded-code",
+        "original"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 59,
+      "gains": 0,
+      "losses": 7,
+      "changed": 11,
+      "selectedCrops": 59,
+      "selectedCodeBelowNativeFloor": 14,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 11,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 13
+    },
+    {
+      "arm": [
+        "official-english-v5/manual-retain",
+        "greedy",
+        "bounded-code",
+        "ink2"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 63,
+      "gains": 0,
+      "losses": 3,
+      "changed": 6,
+      "selectedCrops": 61,
+      "selectedCodeBelowNativeFloor": 13,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 15,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 9
+    },
+    {
+      "arm": [
+        "server-v5/native-floor",
+        "greedy",
+        "same-length",
+        "original"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 3,
+      "selectedCrops": 53,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "server-v5/native-floor",
+        "greedy",
+        "same-length",
+        "ink2"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 45,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "server-v5/native-floor",
+        "greedy",
+        "bounded-code",
+        "original"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 3,
+      "selectedCrops": 53,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "server-v5/native-floor",
+        "greedy",
+        "bounded-code",
+        "ink2"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 0,
+      "selectedCrops": 45,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "server-v5/manual-retain",
+        "greedy",
+        "same-length",
+        "original"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 4,
+      "selectedCrops": 56,
+      "selectedCodeBelowNativeFloor": 3,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "server-v5/manual-retain",
+        "greedy",
+        "same-length",
+        "ink2"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 3,
+      "selectedCrops": 51,
+      "selectedCodeBelowNativeFloor": 6,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "server-v5/manual-retain",
+        "greedy",
+        "bounded-code",
+        "original"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 4,
+      "selectedCrops": 56,
+      "selectedCodeBelowNativeFloor": 3,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "server-v5/manual-retain",
+        "greedy",
+        "bounded-code",
+        "ink2"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 66,
+      "gains": 0,
+      "losses": 0,
+      "changed": 3,
+      "selectedCrops": 51,
+      "selectedCodeBelowNativeFloor": 6,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 18,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 6
+    },
+    {
+      "arm": [
+        "japanese-v3/native-floor",
+        "greedy",
+        "same-length",
+        "original"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 58,
+      "gains": 0,
+      "losses": 8,
+      "changed": 12,
+      "selectedCrops": 57,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 10,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 18
+    },
+    {
+      "arm": [
+        "japanese-v3/native-floor",
+        "greedy",
+        "same-length",
+        "ink2"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 58,
+      "gains": 0,
+      "losses": 8,
+      "changed": 8,
+      "selectedCrops": 54,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 10,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 14
+    },
+    {
+      "arm": [
+        "japanese-v3/native-floor",
+        "greedy",
+        "bounded-code",
+        "original"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 58,
+      "gains": 0,
+      "losses": 8,
+      "changed": 12,
+      "selectedCrops": 57,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 10,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 18
+    },
+    {
+      "arm": [
+        "japanese-v3/native-floor",
+        "greedy",
+        "bounded-code",
+        "ink2"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 58,
+      "gains": 0,
+      "losses": 8,
+      "changed": 8,
+      "selectedCrops": 54,
+      "selectedCodeBelowNativeFloor": 0,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 10,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 14
+    },
+    {
+      "arm": [
+        "japanese-v3/manual-retain",
+        "greedy",
+        "same-length",
+        "original"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 58,
+      "gains": 0,
+      "losses": 8,
+      "changed": 13,
+      "selectedCrops": 59,
+      "selectedCodeBelowNativeFloor": 2,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 10,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 19
+    },
+    {
+      "arm": [
+        "japanese-v3/manual-retain",
+        "greedy",
+        "same-length",
+        "ink2"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 58,
+      "gains": 0,
+      "losses": 8,
+      "changed": 13,
+      "selectedCrops": 60,
+      "selectedCodeBelowNativeFloor": 6,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 10,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 17
+    },
+    {
+      "arm": [
+        "japanese-v3/manual-retain",
+        "greedy",
+        "bounded-code",
+        "original"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 58,
+      "gains": 0,
+      "losses": 8,
+      "changed": 13,
+      "selectedCrops": 59,
+      "selectedCodeBelowNativeFloor": 2,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 10,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 19
+    },
+    {
+      "arm": [
+        "japanese-v3/manual-retain",
+        "greedy",
+        "bounded-code",
+        "ink2"
+      ],
+      "fields": 72,
+      "beforeExact": 66,
+      "afterExact": 58,
+      "gains": 0,
+      "losses": 8,
+      "changed": 13,
+      "selectedCrops": 60,
+      "selectedCodeBelowNativeFloor": 6,
+      "roomFields": 24,
+      "roomBeforeExact": 18,
+      "roomAfterExact": 10,
+      "characters": 452,
+      "beforeEdits": 6,
+      "afterEdits": 17
+    }
+  ],
+  "eligibleCrops": 61,
+  "baselineNativeIdentity": true,
+  "limits": "Consumed component development, not new accuracy/whole-document credit. Native page outputs preserve all fields but do not rerun full acquisition/parser for each proposal. Confidence is uncalibrated; below-floor counts concern selected code pieces, not document review plans."
+}

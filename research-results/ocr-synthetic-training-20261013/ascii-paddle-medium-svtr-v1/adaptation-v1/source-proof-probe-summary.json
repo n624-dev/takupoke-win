@@ -1,0 +1,75 @@
+{
+  "scope": "Unscored contradiction controls only; not training targets, selection, independent final or production credit",
+  "models": [
+    {
+      "name": "original",
+      "samePixelPairs": 32,
+      "acceptedBothConflictingSources": 30,
+      "refusedBothSources": 2,
+      "groups": {
+        "scriptAlias": {
+          "pairs": 28,
+          "acceptedBoth": 26
+        },
+        "wholePrefixRemoved": {
+          "pairs": 4,
+          "acceptedBoth": 4
+        }
+      },
+      "rawSha256": "b6e3fac8c4609954e3b64419e0fe133eefee2e9d2f50242aa35afcfb1b65713a"
+    },
+    {
+      "name": "epoch-2",
+      "samePixelPairs": 32,
+      "acceptedBothConflictingSources": 32,
+      "refusedBothSources": 0,
+      "groups": {
+        "scriptAlias": {
+          "pairs": 28,
+          "acceptedBoth": 28
+        },
+        "wholePrefixRemoved": {
+          "pairs": 4,
+          "acceptedBoth": 4
+        }
+      },
+      "rawSha256": "9c6ff262e0b800840cfa96660b939c479fb091ff7a2e20e8f82e5627fa01ca4c"
+    },
+    {
+      "name": "epoch-4",
+      "samePixelPairs": 32,
+      "acceptedBothConflictingSources": 32,
+      "refusedBothSources": 0,
+      "groups": {
+        "scriptAlias": {
+          "pairs": 28,
+          "acceptedBoth": 28
+        },
+        "wholePrefixRemoved": {
+          "pairs": 4,
+          "acceptedBoth": 4
+        }
+      },
+      "rawSha256": "a64fa9afe2ae7f6be05aa2824647b220d60746529694af6297690c0a613c155f"
+    },
+    {
+      "name": "epoch-8",
+      "samePixelPairs": 32,
+      "acceptedBothConflictingSources": 32,
+      "refusedBothSources": 0,
+      "groups": {
+        "scriptAlias": {
+          "pairs": 28,
+          "acceptedBoth": 28
+        },
+        "wholePrefixRemoved": {
+          "pairs": 4,
+          "acceptedBoth": 4
+        }
+      },
+      "rawSha256": "46cea2dfe5d2f048ab9552e6e77de64a2059d4b0f075a2075cc10c0ccd1c2505"
+    }
+  ],
+  "seconds": 6.476002119998157,
+  "limitations": "Identical provided pixels cannot establish script origin or whole missing-prefix geometry. Refusing both loses a valid counterpart. Require independent source/ownership proof; no model selection/production credit."
+}

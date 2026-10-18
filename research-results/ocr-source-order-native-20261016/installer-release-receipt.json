@@ -1,0 +1,110 @@
+{
+  "version": "0.1.0-dev.10446",
+  "sourceCommit": "70ba342a9e6ecba7f5aff2febccc593eaea2e320",
+  "integratedMain": "944662b277f7d8eb31e3ce66f6a447c822144561",
+  "mainIsAncestorOfBuildSource": true,
+  "run": 38839386958,
+  "runUrl": "https://github.com/n624-dev/takupoke-win/actions/runs/38839386958",
+  "releaseUrl": "https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10446",
+  "allEightJobsSucceeded": true,
+  "publishedNormalRelease": true,
+  "verifiedAsLatest": true,
+  "tagMatchesBuildSource": true,
+  "allSixPublishedAssetsDownloadedAndHashed": true,
+  "bothZipManifestsAndAllListedPayloadHashesVerified": true,
+  "bothZipArchivesContainExactlyTheManifestPayloads": true,
+  "arm64HardwareExecutionVerified": false,
+  "publicAssets": [
+    {
+      "name": "SHA256SUMS.txt",
+      "size": 495,
+      "sha256": "a215f61fa2af6fa00336786a001605c54209a5e1ed515e5991f1745c4c9f0e29",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10446/SHA256SUMS.txt",
+      "package": null
+    },
+    {
+      "name": "INSTALL.txt",
+      "size": 4092,
+      "sha256": "858981daad019f771c1c6a96fef6ce4c9ee1a8fc768f6a69d1b8468830b03be6",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10446/INSTALL.txt",
+      "package": null
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10446-arm64-Setup.exe",
+      "size": 77456447,
+      "sha256": "e1fe91b69852bb8243b53a470196c7572ea795fa9a9aa43492cfc3d994589c68",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10446/takupoke-0.1.0-dev.10446-arm64-Setup.exe",
+      "package": null
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10446-arm64.zip",
+      "size": 114905927,
+      "sha256": "64fe28405c84fc45d15b527c55c33a395745db811423bacdb1918d3188dd398b",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10446/takupoke-0.1.0-dev.10446-arm64.zip",
+      "package": {
+        "architecture": "arm64",
+        "commit": "70ba342a9e6ecba7f5aff2febccc593eaea2e320",
+        "version": "0.1.0-dev.10446",
+        "verifiedPayloadFiles": 585,
+        "peArchitecturesVerified": true
+      }
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10446-x64-Setup.exe",
+      "size": 80059802,
+      "sha256": "bd40156b90aa0dcdccb72e5824f8922fc098af0b69e650813d68b0321ba31575",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10446/takupoke-0.1.0-dev.10446-x64-Setup.exe",
+      "package": null
+    },
+    {
+      "name": "takupoke-0.1.0-dev.10446-x64.zip",
+      "size": 117748509,
+      "sha256": "f4e0ff32a513e4d11ba9066c28341d0ad7b1673802fdd5b7cdda1cbe28036c73",
+      "url": "https://github.com/n624-dev/takupoke-win/releases/download/v0.1.0-dev.10446/takupoke-0.1.0-dev.10446-x64.zip",
+      "package": {
+        "architecture": "x64",
+        "commit": "70ba342a9e6ecba7f5aff2febccc593eaea2e320",
+        "version": "0.1.0-dev.10446",
+        "verifiedPayloadFiles": 589,
+        "peArchitecturesVerified": true
+      }
+    }
+  ],
+  "temporaryDownloadedPayloadsRemoved": true,
+  "scope": "Public distribution bytes, exact main-integrated source, full ZIP manifest hashes and PE architectures. Native installed-state UI checks are provided by the linked Windows workflow; not recognition-accuracy measurements.",
+  "coreTests": 301,
+  "linuxIntegrationTests": 1143,
+  "windowsIntegrationTests": 1145,
+  "sourceCiRun": 38839354676,
+  "sourceCiAllSevenSuccess": true,
+  "sourceCiNativeUiChecks": 1026,
+  "installedWindowsUiChecks": [
+    1026,
+    1026,
+    1027,
+    1026,
+    1026,
+    1027
+  ],
+  "node20WarningCount": 0,
+  "defaultModelBundle": "20261016-v2",
+  "defaultModelArtifactCount": 5,
+  "defaultModelBytes": 125753061,
+  "manualCodeExpertSHA256": "95bab179e0d6cc75269419078d68696cd4679661f94f6128b858b7a074fe2971",
+  "independentAccuracyRun": 38836313175,
+  "independentNewDocumentsExactFields": [
+    344,
+    355
+  ],
+  "independentNewDocumentsExpectedFields": 360,
+  "independentNewDocumentsCharacterErrors": [
+    16,
+    7
+  ],
+  "independentNewDocumentsExpectedCharacters": [
+    2906,
+    2895
+  ],
+  "factoryNativeRun": 38839348881,
+  "factoryNativeParity": true
+}

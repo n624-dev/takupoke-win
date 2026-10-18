@@ -1,0 +1,63 @@
+{
+  "commit": "cef73315992ad28358013cd218cbb06917e59c33",
+  "allEightPublicCompressedRawFilesDownloadedAndMatched": true,
+  "files": [
+    {
+      "file": "research-results/ocr-model-routing-20261016/raw.jsonl.gz",
+      "bytes": 236692,
+      "sha256": "1727eec490bc587f4264393f24a3b2726feb8fe286a9faa922d0f132f2a52107",
+      "uncompressedBytes": 2984554,
+      "uncompressedSHA256": "9489007c55c4e14b0b73f2c90c4493067a89b56ed388a71c906002fde7554415"
+    },
+    {
+      "file": "research-results/ocr-manual-tail-20261016/baseline-verified-raw.jsonl.gz",
+      "bytes": 307787,
+      "sha256": "3d8923b658308adee24cd9d3faf1cab01bc303e236db35e9f6b36d7ab56a526a",
+      "uncompressedBytes": 3993356,
+      "uncompressedSHA256": "f7589ee2b2a2ee768f76d6079c3e4ea985fa6bec94933f74a5df01fad47c8120"
+    },
+    {
+      "file": "research-results/ocr-manual-tail-20261016/raw.jsonl.gz",
+      "bytes": 327831,
+      "sha256": "c2d7bc78ebf3130e29f2955ae9a0e3b6a6f88041118e0383335b6fa219072f7a",
+      "uncompressedBytes": 3991510,
+      "uncompressedSHA256": "6e4d0a1c20393957796139e0eda519153f21dfc13dcff5ddc3de56c0168fd4b1"
+    },
+    {
+      "file": "research-results/ocr-manual-tail-20261016/native-windows/study/hybrid-observations.jsonl.gz",
+      "bytes": 1640758,
+      "sha256": "0f028dd8607d4afa0a9b304e44bfd9728c187a5b432ef5743a0307538591f75c",
+      "uncompressedBytes": 12234857,
+      "uncompressedSHA256": "ce9f9e74872930ff8aa081919011e6c0c58ecc8d69f0e0165bdfe553dfa4fce6"
+    },
+    {
+      "file": "research-results/ocr-manual-tail-20261016/native-windows/study/v5-inspection.jsonl.gz",
+      "bytes": 18171,
+      "sha256": "71a53eb4cfe207c35d4b85a70bcbc35cec8553ae8239c658bd19826436889c72",
+      "uncompressedBytes": 117735,
+      "uncompressedSHA256": "a69c42d9edced4a2dd5a256abc42101042173a4bc617707ce14c7f499fc3a10c"
+    },
+    {
+      "file": "research-results/ocr-manual-tail-20261016/native-windows/study/hybrid-inspection.jsonl.gz",
+      "bytes": 70172,
+      "sha256": "3547baefe5197d5d57e0dab0241e662b70477394e0b0ae811204be413b3c3050",
+      "uncompressedBytes": 479803,
+      "uncompressedSHA256": "3ebcd8d19cc367aa2fb180ff95df19c7bb7117ad8627415a3cfaf9cfd05a0fa8"
+    },
+    {
+      "file": "research-results/ocr-manual-tail-20261016/native-windows/study/v5-observations.jsonl.gz",
+      "bytes": 870728,
+      "sha256": "337569498adfaabc06e21abd82046ead05809c62ca3a993086bf61a537e8fee6",
+      "uncompressedBytes": 6356779,
+      "uncompressedSHA256": "279904c492b848ae0e574c8b2cf727d8dbe3f5f408b66555f6c16df763ef4518"
+    },
+    {
+      "file": "research-results/ocr-literal-candidates-20261016/raw.jsonl.gz",
+      "bytes": 4602,
+      "sha256": "8c731a11b9ee90e011e779a1f3bedfde5def3c0e435b77e4b10610a3266fbd2d",
+      "uncompressedBytes": 61731,
+      "uncompressedSHA256": "70a0cb11a4271468fbc91d401d37693bb2ff38edce00f32917cb4c42017fb7c2"
+    }
+  ],
+  "payloadsRetained": false
+}

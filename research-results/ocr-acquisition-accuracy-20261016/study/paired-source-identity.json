@@ -1,0 +1,146 @@
+[
+  {
+    "id": "final-0-positive",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 5,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "final-0-missing-day",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 5,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "final-0-missing-class",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 5,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "final-1-positive",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 5,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "final-1-missing-day",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 5,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "final-1-missing-class",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 5,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "fresh-0-positive",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 0,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "fresh-0-missing-day",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 0,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "fresh-0-missing-class",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 0,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "fresh-1-positive",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 4,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "fresh-1-missing-day",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 4,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "fresh-1-missing-class",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 4,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "newfresh-0-positive",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 0,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "newfresh-0-missing-day",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 1,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "newfresh-0-missing-class",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 0,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "newfresh-1-positive",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 5,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "newfresh-1-missing-day",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 5,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  },
+  {
+    "id": "newfresh-1-missing-class",
+    "sameOriginalNativeManifest": true,
+    "baselinePages": 5,
+    "candidatePages": 5,
+    "primaryObservationsIdentical": false,
+    "scope": "Acquisition repair intentionally changes native calls/crops. Every source asset verified by both worker binaries; fully captured page hashes independently checked against shared manifest."
+  }
+]

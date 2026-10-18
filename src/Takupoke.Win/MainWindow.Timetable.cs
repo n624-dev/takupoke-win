@@ -74,16 +74,21 @@ public sealed partial class MainWindow
             displayMenu.Closed += (_, _) => RecordOfflineDisplayLifecycle(opened: false);
         }
         var included = PreferenceControl(new ToggleMenuFlyoutItem { Text = "時間割変更を反映", IsChecked = _model.Preferences.IncludesChanges });
+        var requestedIncludesChanges = included.IsChecked;
         included.Click += async (_, _) =>
         {
             var enabled = included.IsChecked;
             RecordOfflineDisplayClick(completed: false, selected: enabled);
-            if (enabled != _model.Preferences.IncludesChanges)
+            if (enabled != requestedIncludesChanges)
+            {
+                requestedIncludesChanges = enabled;
                 await _model.SavePreferencesAsync(current => current with { IncludesChanges = enabled });
+            }
             RecordOfflineDisplayClick(completed: true, selected: enabled);
         };
         var international = PreferenceControl(new ToggleMenuFlyoutItem { Text = "留学生向け授業を表示", IsChecked = _model.Preferences.International });
-        international.Click += async (_, _) => { var enabled = international.IsChecked; if (enabled != _model.Preferences.International) await _model.SavePreferencesAsync(current => current with { International = enabled }); };
+        var requestedInternational = international.IsChecked;
+        international.Click += async (_, _) => { var enabled = international.IsChecked; if (enabled != requestedInternational) { requestedInternational = enabled; await _model.SavePreferencesAsync(current => current with { International = enabled }); } };
         displayMenu.Items.Add(included); displayMenu.Items.Add(international);
         var displayLabel = Text("表示設定", 15); displayLabel.IsTextSelectionEnabled = false;
         var displayOptions = new DropDownButton { Content = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 10, Children = { FluentIcon("settings"), displayLabel } }, Flyout = displayMenu, MinHeight = 44, Padding = new Thickness(16, 10, 16, 10) };
@@ -105,7 +110,8 @@ public sealed partial class MainWindow
         AddChange(IconButton("一覧のクラスを選択", "people", () => ChooseClasses(changes: true), "timetable-change-classes"));
         var range = new ComboBox { Header = "表示する期間", ItemsSource = new[] { "今日以降", "この週", "全件" }, SelectedIndex = (int)_model.Preferences.ChangeRange, HorizontalAlignment = HorizontalAlignment.Stretch };
         AutomationProperties.SetAutomationId(range, "timetable-change-range");
-        range.SelectionChanged += async (_, _) => { if (range.SelectedIndex is >= 0 and <= 2 && range.SelectedIndex != (int)_model.Preferences.ChangeRange) { var value = (ChangeRange)range.SelectedIndex; await _model.SavePreferencesAsync(current => current with { ChangeRange = value }); } }; AddChange(range);
+        var requestedRange = range.SelectedIndex;
+        range.SelectionChanged += async (_, _) => { if (range.SelectedIndex is >= 0 and <= 2 && range.SelectedIndex != requestedRange) { requestedRange = range.SelectedIndex; var value = (ChangeRange)requestedRange; await _model.SavePreferencesAsync(current => current with { ChangeRange = value }); } }; AddChange(range);
         var selected = (_model.Preferences.ChangeClasses.Length > 0 ? _model.Preferences.ChangeClasses : _model.Preferences.SelectedClasses).ToHashSet();
         var parsedClasses = (_model.Data.Timetable?.Lessons.Select(l => l.ClassName) ?? []).Concat(_model.Data.Changes?.Select(c => c.DisplayClassName) ?? []).ToHashSet();
         if (_model.Preferences.ChangeClasses.Any(cls => !parsedClasses.Contains(cls))) AddChange(Text("選択したクラスの一部が、現在の時間割にありません。"));
@@ -119,7 +125,7 @@ public sealed partial class MainWindow
     }
     private Button ChangeListButton(ScheduleChange change, int index)
     {
-        var before = ScheduleValue(_model.Presentation.BeforeSubject(change)); var after = ScheduleValue(_model.Presentation.ChangeNames(change).After.Subject);
+        var before = ScheduleValue(_model.Presentation.BeforeSubject(change, detail: true)); var after = ScheduleValue(_model.Presentation.ChangeNames(change).After.DetailSubject);
         var date = SchoolDate.TryParse(change.ChangeDate, out var day) ? day.ToString("M月d日（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP")) : change.ChangeDate;
         var heading = Text(date + " · " + ClassSelection.Display(change.DisplayClassName) + " · " + change.DisplayPeriod, 14);
         var kind = Text(change.KindLabel, 14); kind.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold; kind.Foreground = WarningBrush;

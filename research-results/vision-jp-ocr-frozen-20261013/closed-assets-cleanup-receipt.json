@@ -1,0 +1,18 @@
+{
+  "removedClosedPublicAssets": [
+    {
+      "file": "qwen35ocr-jp-2b-f16.gguf",
+      "bytes": 4914506752,
+      "sha256": "302b7d71c0755e703831fc6606822121ed9788ea86479ff04adc284043d667f7"
+    },
+    {
+      "file": "qwen35ocr-jp-2b-mmproj-f16.gguf",
+      "bytes": 668227232,
+      "sha256": "e445e9802c73621fa802a2f92771dfac1ed25eddd5ea405bbcb8f9443baaa435"
+    }
+  ],
+  "reason": "Closed unqualified high-RAM candidate; preserved pinned download metadata and192raw; reserve disk for newer official small OCR comparison",
+  "rawSha256": "e4b92fed011f75c880afcaaac95d5db231eef6ab166a02debc4d19a4428e5d92",
+  "modelCalls": 0,
+  "modelsCanBeRedownloaded": true
+}

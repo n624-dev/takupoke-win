@@ -1,0 +1,5 @@
+# Exact closed V4 evidence
+
+The original trial failed and is not activated. Every original record is retained in `raw-publication-manifest.json`. Original `.log` files are published byte-identically as `.txt` under the public-tree policy; restore their original names from the manifest. Large JSONL files are published as deterministic gzip; decompress each `.jsonl.gz` to its original `.jsonl` name before using the original verification manifests. Verify original and compressed byte counts and SHA256 hashes against the publication manifest. Original trial gates and denominators are unchanged.
+
+The fixed original-development-selected epoch2 was also compared in the actual source-bound manual-code route on all85 lines/72 body fields of a consumed native Windows page. All12 registered arms remained66/72 exact with6 edits; V3 on the same route had67/72. This gives V4 no activation credit. No new checkpoint/threshold was selected from fresh. The exploratory standard ONNX export exists for reproduction; it is not a shipped product model or an iPhone verification.

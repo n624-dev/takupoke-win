@@ -1,0 +1,60 @@
+{
+  "scope": "Independent literal raster-PDF fixtures only; no OCR/model or pipeline success claim",
+  "fontSha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+  "fixtures": [
+    {
+      "id": "Timetable-clean",
+      "oracleFile": "Timetable-clean/literal-oracle.json",
+      "oracleSha256": "f1ee99083fe78beadf6614fc70e21a6f42c7c5fae78c6a01576af1ad7a5be271",
+      "pdfSha256": "709a1c6654d4def6d9d6a077dd976275407bdd26edfa039c3e99485b984ee464"
+    },
+    {
+      "id": "Exam-clean",
+      "oracleFile": "Exam-clean/literal-oracle.json",
+      "oracleSha256": "29501b74df6d1e2cc0afe7c4bd3854d88143b022ca6712c2561eb13115fa4919",
+      "pdfSha256": "c6fa44d83fddf00c31f464e37e268e2ea5bf6affcc9c1da5bbb5d50700de3ce3"
+    },
+    {
+      "id": "ExamReturn-clean",
+      "oracleFile": "ExamReturn-clean/literal-oracle.json",
+      "oracleSha256": "173efed5ff1f7ba295d110566ff6905db0b60182ca4a2cca670f8cf011da79ed",
+      "pdfSha256": "932c9a783cae67b52d878bb4b7f090d9993cea0eb88f1171b4fd4c01a31696f1"
+    },
+    {
+      "id": "Timetable-confusable-1",
+      "oracleFile": "Timetable-confusable-1/literal-oracle.json",
+      "oracleSha256": "8f65f6f406b9d843396b82cdc6f70bb53b73c72ae419dcaf6ced654467b79af6",
+      "pdfSha256": "85e8fbefb3cc2a63fbc7c3e59fe498f5a78194e369dc16b88838344d790640ab"
+    },
+    {
+      "id": "Timetable-confusable-2",
+      "oracleFile": "Timetable-confusable-2/literal-oracle.json",
+      "oracleSha256": "26952a80f8d22f9c33002b2c2b572e4ddf128cc62e0edb1abcd50858b486a790",
+      "pdfSha256": "761168d36ea66ceffc50b5f6d48d94fad5bbd7059645b18432f41d90e767b6a4"
+    },
+    {
+      "id": "Timetable-blank-values",
+      "oracleFile": "Timetable-blank-values/literal-oracle.json",
+      "oracleSha256": "d420c43adc56ec0684fcc13e0b96e707acc2208e9c4cfb214c918f4fee5edcd9",
+      "pdfSha256": "d86f56336d6f1b47ab54e6d5ec20bbdcecfc30afbbed13c574430c11520c6fe0"
+    },
+    {
+      "id": "Timetable-unreadable",
+      "oracleFile": "Timetable-unreadable/literal-oracle.json",
+      "oracleSha256": "95b40088589aadc87b4249ae917b0e9072c3930a4f7aed7bf45aa5cbb024d00b",
+      "pdfSha256": "b3fda900e7a097304fc119ef7e50896e3429ba5e3582d9ff8c7f11267cdc3eda"
+    },
+    {
+      "id": "Timetable-small-font",
+      "oracleFile": "Timetable-small-font/literal-oracle.json",
+      "oracleSha256": "ce714822fdac0772ea41322f1c963c7aae11115f9377b55ff4460386ee1be273",
+      "pdfSha256": "9d1bc3fa307c383381cb23e38319f78409ae40768404239ff1f08a1c713a7a32"
+    },
+    {
+      "id": "Timetable-rotate-90",
+      "oracleFile": "Timetable-rotate-90/literal-oracle.json",
+      "oracleSha256": "27b1fc9e2cc3494d307e6f5ca64168f735fa05c757903378c692a4d70153f1b1",
+      "pdfSha256": "740fafecd9b08ccb00b5b7bbf5d54713279fc6c73bb030494cf68cdd22375a7b"
+    }
+  ]
+}

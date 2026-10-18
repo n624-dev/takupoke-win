@@ -1,0 +1,102 @@
+{
+  "name": "reconstructed-untrained",
+  "positiveRows": 512,
+  "exact": 277,
+  "correctAccepted": 232,
+  "incorrectAccepted": 117,
+  "negativeRows": 192,
+  "negativeAccepted": 36,
+  "retentionRows": 192,
+  "retentionExact": 192,
+  "paddingRows": 26,
+  "cer": 0.08847669074195666,
+  "groups": {
+    "ascii_short": {
+      "rows": 64,
+      "exact": 47,
+      "correctAccepted": 42,
+      "incorrectAccepted": 11,
+      "accepted": 53,
+      "nonempty": 64
+    },
+    "blank": {
+      "rows": 40,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 0
+    },
+    "clipped": {
+      "rows": 38,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 12,
+      "nonempty": 38
+    },
+    "interior_damage": {
+      "rows": 38,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 23,
+      "nonempty": 38
+    },
+    "japanese": {
+      "rows": 64,
+      "exact": 64,
+      "correctAccepted": 64,
+      "incorrectAccepted": 0,
+      "accepted": 64,
+      "nonempty": 64
+    },
+    "mixed_code": {
+      "rows": 192,
+      "exact": 122,
+      "correctAccepted": 97,
+      "incorrectAccepted": 56,
+      "accepted": 153,
+      "nonempty": 192
+    },
+    "mixed_confusable": {
+      "rows": 192,
+      "exact": 44,
+      "correctAccepted": 29,
+      "incorrectAccepted": 50,
+      "accepted": 79,
+      "nonempty": 192
+    },
+    "multiline": {
+      "rows": 38,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 0,
+      "nonempty": 38
+    },
+    "noise": {
+      "rows": 38,
+      "exact": 0,
+      "correctAccepted": 0,
+      "incorrectAccepted": 0,
+      "accepted": 1,
+      "nonempty": 20
+    },
+    "retention_japanese": {
+      "rows": 128,
+      "exact": 128,
+      "correctAccepted": 128,
+      "incorrectAccepted": 0,
+      "accepted": 128,
+      "nonempty": 128
+    }
+  },
+  "rawSha256": "d0c5eb3816634caa5c4f86bdb8828974b04f6f7d6f7ea42742d1960ad182d626",
+  "scope": "New independent fictional literal development on newly reserved KosugiMaru/ZenAntique fonts; not final or production qualification",
+  "reconstructionMaxDifferences": {
+    "feature": 5.435943603515625e-05,
+    "logit": 0.00020599365234375,
+    "probability": 2.893805503845215e-05
+  }
+}
