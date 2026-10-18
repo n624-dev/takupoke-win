@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Authentication;
+using System.Security.Principal;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -84,21 +85,24 @@ internal sealed class BrowserFixtureCertificates : IDisposable
     public X509Certificate2 Untrusted { get; }
     public BrowserFixtureCertificates()
     {
+        using var identity = WindowsIdentity.GetCurrent();
+        if (!new WindowsPrincipal(identity).IsInRole(WindowsBuiltInRole.Administrator))
+            throw new InvalidOperationException("The isolated CI browser fixture requires an elevated disposable runner.");
         var request = new CertificateRequest("CN=Takupoke isolated browser test " + Guid.NewGuid().ToString("N"), _rootKey, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
         request.CertificateExtensions.Add(new X509BasicConstraintsExtension(true, false, 0, true));
         request.CertificateExtensions.Add(new X509KeyUsageExtension(X509KeyUsageFlags.KeyCertSign, true));
         _root = request.CreateSelfSigned(DateTimeOffset.UtcNow.AddMinutes(-5), DateTimeOffset.UtcNow.AddDays(1));
         Trusted = Leaf("127.0.0.1", true); Mismatched = Leaf("fictional.invalid", true); Untrusted = Leaf("127.0.0.1", false);
-        // CurrentUser Root's interactive import can wait for a system consent
-        // dialog before the app even starts. Prepare this synthetic fixture via
-        // the OS's explicit command, with a hard failure bound and no UI input.
+        // User Root import can wait for system consent, including certutil -f.
+        // The disposable elevated CI runner uses its machine Root for this one
+        // synthetic CA; normal browser TLS verification remains enabled.
         var file = Path.Combine(Path.GetTempPath(), "takupoke-browser-root-" + Guid.NewGuid().ToString("N") + ".cer");
         try
         {
             File.WriteAllBytes(file, _root.Export(X509ContentType.Cert));
             Console.WriteLine("Browser fixture stage: import synthetic root certificate");
             CertUtil("-addstore", "Root", file);
-            using var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser); store.Open(OpenFlags.ReadOnly);
+            using var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine); store.Open(OpenFlags.ReadOnly);
             if (store.Certificates.Find(X509FindType.FindByThumbprint, _root.Thumbprint, false).Count != 1)
                 throw new InvalidOperationException("The synthetic root was not installed exactly once.");
             Console.WriteLine("Browser fixture stage: synthetic root certificate installed");
@@ -122,9 +126,12 @@ internal sealed class BrowserFixtureCertificates : IDisposable
     {
         try
         {
-            using var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser); store.Open(OpenFlags.ReadOnly);
+            using var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine); store.Open(OpenFlags.ReadOnly);
             if (store.Certificates.Find(X509FindType.FindByThumbprint, _root.Thumbprint, false).Count != 0)
                 CertUtil("-delstore", "Root", _root.Thumbprint);
+            using var verified = new X509Store(StoreName.Root, StoreLocation.LocalMachine); verified.Open(OpenFlags.ReadOnly);
+            if (verified.Certificates.Find(X509FindType.FindByThumbprint, _root.Thumbprint, false).Count != 0)
+                throw new InvalidOperationException("The owned synthetic root was not removed.");
         }
         finally { Trusted.Dispose(); Mismatched.Dispose(); Untrusted.Dispose(); _root.Dispose(); _rootKey.Dispose(); }
     }
@@ -133,7 +140,7 @@ internal sealed class BrowserFixtureCertificates : IDisposable
         var info = new ProcessStartInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "certutil.exe")) {
             UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true
         };
-        foreach (var argument in new[] { "-user", "-f" }.Concat(arguments)) info.ArgumentList.Add(argument);
+        foreach (var argument in new[] { "-f" }.Concat(arguments)) info.ArgumentList.Add(argument);
         using var process = Process.Start(info) ?? throw new InvalidOperationException("Certificate fixture tool did not start.");
         var output = process.StandardOutput.ReadToEndAsync(); var error = process.StandardError.ReadToEndAsync();
         if (!process.WaitForExit(15000))

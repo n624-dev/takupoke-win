@@ -1,3 +1,10 @@
+## W13 第3焦点CIが実ブラウザstepでfailure終端（2026-10-19）
+
+- source19c715df917dcea2271b42a391602989b30c801d、run39152378034/attempt1、job117748477969。18:03:13Z開始・18:05:36Z failure。公開登録・WinUI buildは成功、実WebView2検査stepが失敗。完了ログ取得前で停止操作/原因は未確定。W10/W11/W12・実fixture/appコードと照合してから候補を決める。
+
+- 完了ログSHA6e464f9529b7c4a6dc35ce52afefcc9e0387cd78b7630924e1f048a50e607ad0。18:05:14に一時CA作成・CurrentUser Root import開始、18:05:30に15秒TimeoutException、app起動前・0checks。certutil -user -fでもこの環境のユーザーRoot追加は完了しない。W10の無制限import候補と同段階だが、確認dialog自体は未観測。
+- 既存Root fixtureとWinUI本体の証明書Cancelを照合。次は管理者権限を持つ使い捨てWindows CI runnerのLocalMachine Rootへ所有するランダムCAだけをOSコマンドで一時importする。管理者条件を検査し、不足なら失敗にする。15秒上限・通常TLS検証・自己署名/名前不一致拒否は維持。finallyは同thumbprintだけを削除し削除後の不在も検査する。実利用者PCのtruststoreは変更しない。ローカルcross buildは0警告/0エラー（15.62秒）、catalog/public-tree・Python15件成功、fresh57はblockingなし。実Windows動作は次の焦点実行で確認する。
+
 ## W12 第2焦点CIも登録検査でfailure終端（2026-10-19）
 
 - sourcec23138c6d8d2bdee006c2d02238f368ce7ac01ce、run39152217286/attempt1、job117748003013。18:01:09Z開始・18:02:07Z failure。公開ファイル／登録stepで失敗、build/browserは未到達。完了ログ取得前で詳細未確定。W11とコードを照合してから対処し、検査を省略しない。
