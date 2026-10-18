@@ -16,18 +16,25 @@ public sealed class ViewModelOfflineCollection;
 [Collection("view-model-offline")]
 public sealed class AppViewModelRefreshTests
 {
-    [Fact]
-    public async Task RecoveryOffBlocksOcrModelDownloadAndPreservesLastGood()
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task OcrModelInstallRequiresOptInBeforeRuntimeAndPreservesLastGood(bool enabled)
     {
         await using var fixture = await Fixture.CreateAsync();
-        Assert.False(fixture.Model.Preferences.UseAiFeatures);
+        await fixture.Model.SavePreferencesAsync(p => p with { UseAiFeatures = enabled });
+        var runtime = Field<Takupoke.Win.Platform.WindowsRecoveryModels>(fixture.Model, "_recoveryModels");
         await fixture.Model.InstallOcrModelAsync();
-        // The offline runtime throws NotSupportedException if reached. Cancellation
-        // proves the preference gate ran before initializing the model download.
-        Assert.Contains("処理を中止", fixture.Model.Status);
+        Assert.Equal(enabled ? 1 : 0, runtime.OcrInstallCalls);
+        if (!enabled)
+            Assert.Equal("OCRモデルを取得・更新するには、設定の「AI・OCRを使用する」をONにしてください。", fixture.Model.Status);
+        else
+            // This offline runtime deliberately refuses the actual download.
+            Assert.Contains("処理を完了できませんでした", fixture.Model.Status);
+        Assert.DoesNotContain("処理を中止", fixture.Model.Status);
         Assert.False(fixture.Model.Busy);
         Assert.Equal(fixture.Analysis.SourceDigest, fixture.Model.Materials[MaterialKind.Timetable].Analysis!.SourceDigest);
-        Assert.False(fixture.Model.Preferences.UseAiFeatures);
+        Assert.Equal(enabled, fixture.Model.Preferences.UseAiFeatures);
     }
 
     [Theory]

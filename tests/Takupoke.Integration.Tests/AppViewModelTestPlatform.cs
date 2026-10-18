@@ -102,7 +102,9 @@ namespace Takupoke.Win.Platform
         public Task CleanupBeforeProvidersAsync(CancellationToken token) => Task.CompletedTask;
         public Task<(RecoveryModelBundle Bundle, string Path)?> OcrInstalledAsync(CancellationToken token) => Task.FromResult<(RecoveryModelBundle, string)?>(null);
         public Task<(RecoveryModelBundle Bundle, string Path)?> OcrStateAsync(CancellationToken token) => Task.FromResult<(RecoveryModelBundle, string)?>(null);
-        public Task InstallOcrAsync(Action<long, long>? progress, CancellationToken token, Action<Takupoke.Infrastructure.Recovery.RecoveryInstallProgress>? phase = null) => throw new NotSupportedException();
+        public int OcrInstallCalls { get; private set; }
+        public Task InstallOcrAsync(Action<long, long>? progress, CancellationToken token, Action<Takupoke.Infrastructure.Recovery.RecoveryInstallProgress>? phase = null)
+        { OcrInstallCalls++; throw new NotSupportedException(); }
         public Task DeleteOcrAsync(CancellationToken token) => throw new NotSupportedException();
         public Task<IReadOnlyList<ILocalRecoveryProvider>> ProvidersAsync(CancellationToken token) => throw new NotSupportedException();
     }

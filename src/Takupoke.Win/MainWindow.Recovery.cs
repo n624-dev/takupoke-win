@@ -358,10 +358,16 @@ public sealed partial class MainWindow
         var ocrActions = Panel();
         if (!_model.OcrModelReady)
         {
-            var download = OperationButton(_model.OcrModelInstalled ? "OCRモデルを更新" : "日本語・英数字OCRモデルをダウンロード",
+            var download = Button(_model.OcrModelInstalled ? "OCRモデルを更新" : "日本語・英数字OCRモデルをダウンロード",
                 _model.InstallOcrModelAsync, "download-ocr-model");
-            download.IsEnabled &= _model.Preferences.UseAiFeatures; ocrActions.Children.Add(download);
+            // UpdateStatus enables registered operations after each render.
+            // Keep an opt-out download outside that list so it stays disabled.
+            if (_model.Preferences.UseAiFeatures) OperationControl(download);
+            else download.IsEnabled = false;
+            ocrActions.Children.Add(download);
         }
+        if (!_model.Preferences.UseAiFeatures)
+            ocrActions.Children.Add(Text("モデルを取得・更新するには、設定の「AI・OCRを使用する」をONにしてください。保存済みモデルの削除はOFFでもできます。"));
         if (_model.OcrModelInstalled) ocrActions.Children.Add(OperationButton("OCRモデルを削除", _model.DeleteOcrModelAsync, "delete-ocr-model"));
         Add(Card(Panel(SettingsSectionTitle("日本語・英数字OCR"), Text(_model.OcrModelReady ? "確認済みモデルを保存しています。" : _model.OcrModelInstalled ? "改善モデルへ更新できます。更新に失敗した場合は保存済みモデルを保持します。" : "画像PDF用のモデルは未ダウンロードです。"), Text($"約{WindowsRecoveryModels.OcrBundle.Size / 1048576d:F1} MiB · {WindowsRecoveryModels.OcrBundle.License}"),
             ocrActions)));

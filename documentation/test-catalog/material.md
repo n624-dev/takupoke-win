@@ -1,7 +1,7 @@
 # 原本取得・更新・保存・監視
 
 対応関係・宣言名・実行方法のSHA-256：
-`fb4c4708283c53be7d968781a523145a826c77d6ae939a41a8e9e7e204912466`
+`c22b34546d6dea12eb6041b96c60c9f84095492f3d258a8e7745ffefddc1fb22`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -24,7 +24,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/AppViewModelRefreshTests.cs](../../tests/Takupoke.Integration.Tests/AppViewModelRefreshTests.cs)
 
-- `RecoveryOffBlocksOcrModelDownloadAndPreservesLastGood`
+- `OcrModelInstallRequiresOptInBeforeRuntimeAndPreservesLastGood`
 - `SavedRecoveryDisplayRequiresConfirmedSemanticAuditAndExactFormalProjection`
 - `SelectedHighConfidenceManualPlanSurvivesSnapshotReloadAndRejectsDamagedReviewToken`
 - `KnownLatestAcquisitionFailureBlocksPendingPreviewPdfWithoutChangingLastGood`

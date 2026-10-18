@@ -277,6 +277,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     }, "確認した結果を保存しています。");
     public Task InstallOcrModelAsync() => RunAsync(async token =>
     {
+        if (!Preferences.UseAiFeatures)
+            throw new InvalidDataException("OCRモデルを取得・更新するには、設定の「AI・OCRを使用する」をONにしてください。");
         var permission = _aiPermission.Capture(); _aiPermission.Check(permission.Generation);
         using var operation = CancellationTokenSource.CreateLinkedTokenSource(token, permission.Token); token = operation.Token;
         await _recoveryModels.InstallOcrAsync(null, token, update => _dispatcher.TryEnqueue(() =>
