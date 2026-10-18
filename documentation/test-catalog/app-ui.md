@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`cb44a499c40435c52d15a13a1edac2746fdc8c9918f450688c2d2d8449b68874`
+`1bce773771375fffeb328534c50e879c714ab4cd39f25b8b49575951bedda9a9`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -44,6 +44,7 @@
 - [tests/Takupoke.Win.UITests/startup-smoke.ps1](../../tests/Takupoke.Win.UITests/startup-smoke.ps1)
 - [src/Takupoke.Win/MainWindow.Browser.cs](../../src/Takupoke.Win/MainWindow.Browser.cs)
 - [tests/Takupoke.Win.UITests/BrowserFixtureServer.cs](../../tests/Takupoke.Win.UITests/BrowserFixtureServer.cs)
+- [.github/workflows/browser-check.yml](../../.github/workflows/browser-check.yml)
 
 ## [tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs](../../tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs)
 

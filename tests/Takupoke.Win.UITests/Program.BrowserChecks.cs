@@ -9,7 +9,9 @@ internal static partial class Program
 {
     private static void CheckBrowser(string executable, string root)
     {
+        Console.WriteLine("Browser fixture stage: create certificates");
         using var certificates = new BrowserFixtureCertificates();
+        Console.WriteLine("Browser fixture stage: start owned HTTP/TLS servers");
         using var http = new BrowserFixtureServer();
         using var https = new BrowserFixtureServer(certificates.Trusted);
         using var mismatched = new BrowserFixtureServer(certificates.Mismatched);
@@ -17,6 +19,7 @@ internal static partial class Program
         SeedAsync(root).GetAwaiter().GetResult();
         SeedBrowserLinksAsync(root, [http.Address, new UriBuilder(http.Address) { Host = "localhost" }.Uri,
             https.Address, mismatched.Address, untrusted.Address]).GetAwaiter().GetResult();
+        Console.WriteLine("Browser fixture stage: launch app with fictional local links");
         Start(executable); Navigate("links");
         AutomationElement[] Pages() => AutomationElement.RootElement.FindAll(TreeScope.Children,
             new AndCondition(new PropertyCondition(AutomationElement.ProcessIdProperty, _process!.Id),
@@ -24,6 +27,7 @@ internal static partial class Program
             .Cast<AutomationElement>().Where(e => e.Current.Name.StartsWith("架空ブラウザ", StringComparison.Ordinal)).ToArray();
         AutomationElement Open(int number)
         {
+            Console.WriteLine("Browser fixture stage: open real link " + number);
             Invoke("link-browser-" + number);
             AutomationElement? page = null; Wait(() => (page = Pages().SingleOrDefault()) is not null, "The real loopback browser window opens"); return page!;
         }
@@ -34,6 +38,7 @@ internal static partial class Program
         Wait(() => Text(first, "架空ローカルページ到達") is not null, "Actual HTTP loopback response appears inside WebView2");
         foreach (var (label, heading) in new[] { ("架空新規リンク", "架空新規ページ到達"), ("架空空白から開く", "架空空白からの遷移到達") })
         {
+            Console.WriteLine("Browser fixture stage: popup " + label);
             var button = Text(first, label); Require(button is not null, "The served popup control is present");
             Invoke(button!);
             AutomationElement? child = null;

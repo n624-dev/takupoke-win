@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Security;
@@ -88,7 +89,22 @@ internal sealed class BrowserFixtureCertificates : IDisposable
         request.CertificateExtensions.Add(new X509KeyUsageExtension(X509KeyUsageFlags.KeyCertSign, true));
         _root = request.CreateSelfSigned(DateTimeOffset.UtcNow.AddMinutes(-5), DateTimeOffset.UtcNow.AddDays(1));
         Trusted = Leaf("127.0.0.1", true); Mismatched = Leaf("fictional.invalid", true); Untrusted = Leaf("127.0.0.1", false);
-        using var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser); store.Open(OpenFlags.ReadWrite); store.Add(_root);
+        // CurrentUser Root's interactive import can wait for a system consent
+        // dialog before the app even starts. Prepare this synthetic fixture via
+        // the OS's explicit command, with a hard failure bound and no UI input.
+        var file = Path.Combine(Path.GetTempPath(), "takupoke-browser-root-" + Guid.NewGuid().ToString("N") + ".cer");
+        try
+        {
+            File.WriteAllBytes(file, _root.Export(X509ContentType.Cert));
+            Console.WriteLine("Browser fixture stage: import synthetic root certificate");
+            CertUtil("-addstore", "Root", file);
+            using var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser); store.Open(OpenFlags.ReadOnly);
+            if (store.Certificates.Find(X509FindType.FindByThumbprint, _root.Thumbprint, false).Count != 1)
+                throw new InvalidOperationException("The synthetic root was not installed exactly once.");
+            Console.WriteLine("Browser fixture stage: synthetic root certificate installed");
+        }
+        catch { Dispose(); throw; }
+        finally { File.Delete(file); }
     }
     private X509Certificate2 Leaf(string name, bool trusted)
     {
@@ -104,7 +120,28 @@ internal sealed class BrowserFixtureCertificates : IDisposable
     }
     public void Dispose()
     {
-        try { using var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser); store.Open(OpenFlags.ReadWrite); store.Remove(_root); }
+        try
+        {
+            using var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser); store.Open(OpenFlags.ReadOnly);
+            if (store.Certificates.Find(X509FindType.FindByThumbprint, _root.Thumbprint, false).Count != 0)
+                CertUtil("-delstore", "Root", _root.Thumbprint);
+        }
         finally { Trusted.Dispose(); Mismatched.Dispose(); Untrusted.Dispose(); _root.Dispose(); _rootKey.Dispose(); }
+    }
+    private static void CertUtil(params string[] arguments)
+    {
+        var info = new ProcessStartInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "certutil.exe")) {
+            UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true
+        };
+        foreach (var argument in new[] { "-user", "-f" }.Concat(arguments)) info.ArgumentList.Add(argument);
+        using var process = Process.Start(info) ?? throw new InvalidOperationException("Certificate fixture tool did not start.");
+        var output = process.StandardOutput.ReadToEndAsync(); var error = process.StandardError.ReadToEndAsync();
+        if (!process.WaitForExit(15000))
+        {
+            process.Kill(true); process.WaitForExit(5000);
+            throw new TimeoutException("Certificate fixture OS import/removal did not complete in 15 seconds.");
+        }
+        Task.WhenAll(output, error).GetAwaiter().GetResult();
+        if (process.ExitCode != 0) throw new InvalidOperationException("Certificate fixture OS command failed with exit code " + process.ExitCode);
     }
 }

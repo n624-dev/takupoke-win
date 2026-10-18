@@ -40,3 +40,11 @@ Windows必須UIジョブに実WebView2の追加検査を接続した。所有loo
 レビュー後の最終ローカルIntegration1167件・失敗0（43秒）。公開source1192ce9、Windows run39149590379を開始し、10450の全必須検査と公開を確認中。
 
 Issue #2の追加照合で配信側のHTTP拒否を確認。対応Windowsは一覧のrevisionと本文の両方へlocal-http-v1 capabilityを送り、限定HTTPを含む同じ表現を要求する。APIは未指定・未知capabilityでHTTPを除き、旧iOS/Webの一覧を破壊しない。各表現のETag/revisionを混同しない。追加のApiClient24件成功。10450の実行は取消さず、配信互換性を含む次の10451で最終確認する。
+
+API互換配信9d42a56はmainCI39150374749・Cloudflare本番・本番確認39150411436がすべて成功。Windows10451 source cef7648のrun39150336346は10450の後続待ちで、今回の実WebView2・6導入状態は未完了。
+
+### 実ブラウザの停止切り分け
+
+10450の通常UI1059チェックと全画面captureは成功。追加したbrowser-checkで進捗を出す前に停滞し、job20分上限でcancelled終了したため公開されなかった。Root CAをCurrentUserへ追加するfixture操作が候補で、実停止箇所は未確定。fixtureの段階ログと補助プロセス15秒の失敗上限を追加し、明示的なcertutil import/deleteで一時CAを扱う。HTTPSの実検証や証明書Cancelは変更しない。
+
+開発用 `codex/windows-browser-check/**` では実ブラウザだけの焦点検査を実行できる。公開もartifactも作らず、保存用cacheなし。正式の全8/6導入状態ゲートは一切変更せず、焦点成功を配布成功へ加算しない。

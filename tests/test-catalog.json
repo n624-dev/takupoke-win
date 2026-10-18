@@ -280,7 +280,8 @@
         "tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj",
         "tests/Takupoke.Win.UITests/startup-smoke.ps1",
         "src/Takupoke.Win/MainWindow.Browser.cs",
-        "tests/Takupoke.Win.UITests/BrowserFixtureServer.cs"
+        "tests/Takupoke.Win.UITests/BrowserFixtureServer.cs",
+        ".github/workflows/browser-check.yml"
       ],
       "checks": [
         "tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs",
