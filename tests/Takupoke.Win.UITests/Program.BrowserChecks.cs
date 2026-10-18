@@ -1,4 +1,5 @@
 using System.Windows.Automation;
+using BrowserElement = FlaUI.Core.AutomationElements.AutomationElement;
 using Takupoke.Core;
 using Takupoke.Infrastructure.Api;
 using Takupoke.Infrastructure.Storage;
@@ -20,6 +21,7 @@ internal static partial class Program
         SeedBrowserLinksAsync(root, [http.Address, new UriBuilder(http.Address) { Host = "localhost" }.Uri,
             https.Address, mismatched.Address, untrusted.Address]).GetAwaiter().GetResult();
         Console.WriteLine("Browser fixture stage: launch app with fictional local links");
+        using var browserAutomation = new FlaUI.UIA3.UIA3Automation();
         Start(executable, browserAccessibility: true); Navigate("links");
         AutomationElement[] Pages() => AutomationElement.RootElement.FindAll(TreeScope.Children,
             new AndCondition(new PropertyCondition(AutomationElement.ProcessIdProperty, _process!.Id),
@@ -31,8 +33,14 @@ internal static partial class Program
             Invoke("link-browser-" + number);
             AutomationElement? page = null; Wait(() => (page = Pages().SingleOrDefault()) is not null, "The real loopback browser window opens"); return page!;
         }
-        AutomationElement? Text(AutomationElement page, string name) => page.FindFirst(TreeScope.Descendants,
-            new PropertyCondition(AutomationElement.NameProperty, name));
+        BrowserElement? Text(AutomationElement page, string name) => browserAutomation
+            .FromHandle((nint)page.Current.NativeWindowHandle).FindFirstDescendant(condition => condition.ByName(name));
+        void InvokePage(BrowserElement element)
+        {
+            Require(element.IsEnabled && !element.IsOffscreen, "The real served page control is enabled and visible");
+            Require(element.Patterns.Invoke.IsSupported, "The real served page control exposes native InvokePattern");
+            element.Patterns.Invoke.Pattern.Invoke();
+        }
         void Close(AutomationElement page) => ((WindowPattern)page.GetCurrentPattern(WindowPattern.Pattern)).Close();
         try
         {
@@ -42,7 +50,7 @@ internal static partial class Program
             {
                 Console.WriteLine("Browser fixture stage: popup " + label);
                 var button = Text(first, label); Require(button is not null, "The served popup control is present");
-                Invoke(button!);
+                InvokePage(button!);
                 AutomationElement? child = null;
                 Wait(() => (child = Pages().FirstOrDefault(p => !p.GetRuntimeId().SequenceEqual(first.GetRuntimeId()) && Text(p, heading) is not null)) is not null,
                     "The real popup retains its new-window context and reaches the served page");
@@ -51,10 +59,12 @@ internal static partial class Program
             var external = first.FindFirst(TreeScope.Descendants,
                 new PropertyCondition(AutomationElement.AutomationIdProperty, "外部ブラウザで開く"));
             Require(external is not null && external.Current.IsEnabled, "The native external-browser control accepts the local HTTP destination");
-            Invoke(external!);
+            Require(external!.TryGetCurrentPattern(InvokePattern.Pattern, out var externalPattern),
+                "The actual browser-window control exposes native InvokePattern");
+            ((InvokePattern)externalPattern!).Invoke();
             Wait(() => Text(first, "OfflineExternalLaunchBlocked") is not null,
                 "The real external-browser operation reaches the offline launch guard without starting an external process");
-            Invoke(Text(first, "架空外部HTTP拒否")!);
+            InvokePage(Text(first, "架空外部HTTP拒否")!);
             Wait(() => Text(first, "BlockedNavigation") is not null, "Disallowed external HTTP navigation reports a reason");
             Close(first); Wait(() => Pages().Length == 0, "The first local browser closes");
             var named = Open(1); Wait(() => Text(named, "架空ローカルページ到達") is not null, "Localhost HTTP reaches the same real test server"); Close(named);

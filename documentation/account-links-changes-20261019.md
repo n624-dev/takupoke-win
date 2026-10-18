@@ -48,3 +48,5 @@ API互換配信9d42a56はmainCI39150374749・Cloudflare本番・本番確認3915
 10450の通常UI1059チェックと全画面captureは成功。追加したbrowser-checkで進捗を出す前に停滞し、job20分上限でcancelled終了したため公開されなかった。Root CAをCurrentUserへ追加するfixture操作が候補で、実停止箇所は未確定。fixtureの段階ログと補助プロセス15秒の失敗上限を追加し、明示的なcertutil import/deleteで一時CAを扱う。HTTPSの実検証や証明書Cancelは変更しない。
 
 開発用 `codex/windows-browser-check/**` では実ブラウザだけの焦点検査を実行できる。公開もartifactも作らず、保存用cacheなし。正式の全8/6導入状態ゲートは一切変更せず、焦点成功を配布成功へ加算しない。
+
+最新規則に合わせ、未実行の旧OCR研究workflow9本にも残っていた保存用artifactのupload stepを除去する。架空比較の実行・観測収集・失敗判定・所有領域cleanupは維持する。今回の正式/焦点workflowは元から保存artifact/cacheなしであり、旧研究workflowを新たに実行していない。

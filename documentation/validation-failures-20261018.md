@@ -1,3 +1,15 @@
+## W17 第6焦点CIがfailure終端（2026-10-19）
+
+- sourcec9840de08dbea0ccd7264fff4ec6417a49b97df6、run39153660970/attempt1、job117752293411。18:19:53Z開始・18:22:05Z failure、実ブラウザstepで失敗。accessibility flag比較の初回結果。完了ログ取得前でHTTP/Popup/TLSどの段階かは未確定。W16と実コード/ログを照合し、期待・期限を緩めない。
+
+- 完了ログSHA48c3e899a1e3b0aa5d89f0b40bb48bdcd7c37260035c0e80b0ce01746741fdf2。flag有効比較でも同じHTTP2requests・status表示完了/error空・WebView相当pane752×355にDOM childなし、30秒timeout/6checks。flagだけではこのUIA取得条件を変えられなかった。HTTP/TLS/popup完了と扱わない。
+- 次の試行前にWinUI WebView2のAutomationPeerと実UIA検索（control view/Win32 bridge）、公式APIを確認する。同じ条件を無変更で繰り返さず、本文検査をnative statusだけへ置換しない。
+
+- [WinUI公式AutomationPeer実装](https://github.com/microsoft/microsoft-ui-xaml/blob/main/controls/dev/WebView2/WebView2AutomationPeer.cpp)はCOMのWebView providerを橋渡しする。現在のSystem.Windows.Automationはmanaged UIA2で、[FlaUI公式説明](https://github.com/FlaUI/FlaUI)もWinUI系にはCOM UIA3を別に扱う。flagだけでは不足した実測と照合し、次はbrowser本文の取得/InvokeだけUIA3（FlaUI.UIA3 5.0.0）で比較する。
+- 通常WinUI検査/ウィンドウ選択/閉鎖は既存UIA2のまま、本文の実見出し・実リンク/ボタンInvokePattern・popup保持・TLS拒否と全待機は維持。自動座標ClickやExecuteScriptへ置換しない。依存はテストprojectだけでapp配布へ混ぜない。DOMが取得できなければ失敗のまま。
+
+- 同じコード照合で、既存Invoke(AutomationElement)がmainwindowの_windowへ再検索するため、別browser windowのcontrolを操作できないテスト側の対象範囲不具合も確認。新browser操作は取得した実controlのInvokePatternを一回呼び、mainwindowへ再検索しない。実操作・失敗判定を維持する。cross buildは0警告/0エラー、catalog整合と配布Python13件が成功。fresh60はUIA3/直接Invokeと旧artifact削除のコード差分にblockingなし。
+
 ## W16 第5焦点CIがfailure終端（2026-10-19）
 
 - source6edbb90c30fd32fabcef0e1e7128570a0dab9978、run39153263397/attempt1、job117751121648。18:14:45Z開始・18:16:49Z failure。診断追加版の初回結果。完了ログ取得前で詳細未確定。W15のHTTP見出し失敗と同じか、画面/サーバーの実測を照合してから対処する。

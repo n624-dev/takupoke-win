@@ -38,12 +38,6 @@ jobs:
           python scripts/check-public-tree.py
           python tools/ocr-literal-retry-study/restore_native.py --output (Join-Path $env:TAKUPOKE_STUDY_TEMP 'run')
           if ($LASTEXITCODE -ne 0) { throw 'Original Windows pixel identity was not restored.' }
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        if: always()
-        with:
-          name: consumed-native-literal-development-pixels
-          path: ${{ env.TAKUPOKE_STUDY_TEMP }}/run/records
-          retention-days: 7
       - name: Remove owned work and caches
         if: always()
         run: |
