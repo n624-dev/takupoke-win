@@ -11,7 +11,7 @@
 
 選択済み資料は登録した同じパスから再取得します。同じ場所でファイルが作り直されても、安定した最新版を読み取ります。読み取り中の書換えや取得・解析の失敗時には前回正常結果を保持します。別の場所へ移動した資料は再選択してください。
 
-ホームの正式名称・シラバス設定・一覧専用学内認証・現在資料の状態表示について、[今回の実装と検証](documentation/account-links-changes-20261019.md)に記録しています。公開済み10449の実績と、新しいソースの結果は区別します。
+ホームの正式名称・シラバス設定・一覧専用学内認証・現在資料の状態表示について、[今回の実装と検証](documentation/account-links-changes-20261019.md)に記録しています。同一ソース10452のCI・公開物と、未確認の実機動作・実資料を区別します。
 
 初回正式版は、iOS版の現行機能への対応、同じ入力に対する結果の比較、失敗時の動作確認、Windows実機での確認が揃ってから公開します。
 
@@ -29,9 +29,9 @@ PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCR�
 
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版0.1.0-dev.10449のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10449)からSetup.exeを取得してください。通常Release・Latestとして公開しています。正式版ではありません。AI・OCRがOFFでもモデル取得ボタンを押せて「中止」となる問題を修正し、ONにする案内を追加しました。時間割変更の正式名称表示・行除外・OCR復旧等の既存機能は維持しています。[今回の修正・検証](documentation/ocr-model-opt-in-20261018.md)・[同一ソースの配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/39102835131)全8チェックとx64の6導入状態が成功し、公開6ファイルと両ZIPの全同梱ファイルを照合済みです。OCR自体の研究結果は[既存の測定記録](documentation/ocr-source-order-accuracy-20261016.md)を参照してください。
+[開発確認版0.1.0-dev.10452のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10452)からSetup.exeを取得してください。通常Release・Latestとして公開しています。正式版ではありません。ホーム正式名称・シラバス設定・一覧専用学内認証・現在資料の状態表示と、Issue #2のローカルHTTP／別窓／証明書エラー表示を含みます。[今回の変更と検証](documentation/account-links-changes-20261019.md)・[同一ソースの配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/39157350382)全8チェックとx64の6導入状態が成功し、公開6添付・全5チェックサム・両ZIPの全同梱ファイルを匿名取得して照合済みです。厳格なPDF解析と入口・通過経路は変更していません。
 
-1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10449-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10449-arm64-Setup.exe`。
+1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10452-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10452-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
 3. スタートメニューの「たくポケ」から起動します。
 4. OCRを利用する場合は設定の「AI・OCRを使用する」をONにし、モデル管理で約130 MiBの日本語・英数字モデルを取得／更新します。復旧プレビューを原PDFと照合し、必要な欄を訂正してから明示採用してください。

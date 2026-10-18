@@ -1,6 +1,6 @@
 # 2026-10-19 一覧認証・ホーム・シラバス・現在資料の状態
 
-開始時点はソース1f50bc5・公開10449。今回のソースは実装済み、配布前。既存10449のCI/公開物検証を今回の結果へ合算しない。
+開始時点はソース1f50bc5・公開10449。今回の変更は10452として通常Release／Latestへ公開済み。既存10449のCI/公開物検証を今回の結果へ合算しない。
 
 ## 実装
 
@@ -17,11 +17,11 @@ PDF Strictの本文・入口・通過経路、認識器・モデル・採用条�
 
 Issue対応前のCoreは302件・失敗0。Integrationの選択全8組合せ、scope/assurance否定例、現在年度と確認内容の状態を実処理で検査。token交換・ES256署名・JWKSを通したmemory cacheの権限/期限/取消検査は17件・失敗0。追加後のIntegration全1166件・失敗0（41秒）。Python配布検査と一覧検査14件も失敗0。
 WinUIでは既存の実キーボード操作でシラバス設定A→B→Aと保存を追加し、認証済みtokenの再利用を確認する。取消テストは実再起動でmemory cacheを消してから継続し、token/結果注入で認証待ちを作らない。
-Issue #2の追加前ローカル検証と実ブラウザCIを区別する。全必須CI・全6導入状態・公開添付照合はこれから同じcommitで確認する。ARM64実機、学校アカウントの本番ログイン、実資料、通知・ロックはCIで代用しない。
+Issue #2の追加前ローカル検証と実ブラウザCIを区別する。この段階では全必須CI・全6導入状態・公開添付照合は未確認だった。最終10452の結果は末尾に記載する。ARM64実機、学校アカウントの本番ログイン、実資料、通知・ロックはCIで代用しない。
 
 ## サーバー
 
-認証506278c: main CI39147649729・Cloudflare本番成功。API1f9cbcb: main CI39148300682・本番確認39148341401・Cloudflare本番成功。links専用以外のstandardや追加scope・audience・別clientを拒否し、mapping/timesのMicrosoft条件を保持。
+認証506278c: main CI39147649729・Cloudflare本番成功。API9d42a56: main CI39150374749・本番確認39150411436・Cloudflare本番成功。API73件と型検査成功、対応Windowsのみのlocal-http-v1表現を含み、旧iOS/Webには従来のHTTPS表現を返す。links専用以外のstandardや追加scope・audience・別clientを拒否し、mapping/timesのMicrosoft条件を保持。
 両nativeクライアントの本番認可開始GETはこの環境からHTTP403。登録済みの過去記録を消さず、今回の実機認証成功にも数えない。
 
 ## Issue #2 ローカルHTTP/HTTPS・popup
@@ -37,11 +37,11 @@ Windows必須UIジョブに実WebView2の追加検査を接続した。所有loo
 
 公開前レビュー49でcache期限の起点を修正し、追加のブラウザ差分も同じ開始前レビューでblockingなし。Core335件・失敗0、UIテストのLinux cross buildは0警告/0エラー。ただしWebView2の本体・実動作はWindowsで確認する。DocumentsのShowPdf以降は旧HEADとbytes一致（SHA256 b63dbc1db4c8a94c99560e3e0bcac8e5f290630891d051a11d0a3c42571e1841）、MaterialCoordinator.cs全体もbytes一致。
 
-レビュー後の最終ローカルIntegration1167件・失敗0（43秒）。公開source1192ce9、Windows run39149590379を開始し、10450の全必須検査と公開を確認中。
+レビュー後の最終ローカルIntegration1167件・失敗0（43秒）。source1192ce9の10450／run39149590379は、通常UI後のfixture準備停止で20分上限に達し公開されなかった。
 
-Issue #2の追加照合で配信側のHTTP拒否を確認。対応Windowsは一覧のrevisionと本文の両方へlocal-http-v1 capabilityを送り、限定HTTPを含む同じ表現を要求する。APIは未指定・未知capabilityでHTTPを除き、旧iOS/Webの一覧を破壊しない。各表現のETag/revisionを混同しない。追加のApiClient24件成功。10450の実行は取消さず、配信互換性を含む次の10451で最終確認する。
+Issue #2の追加照合で配信側のHTTP拒否を確認。対応Windowsは一覧のrevisionと本文の両方へlocal-http-v1 capabilityを送り、限定HTTPを含む同じ表現を要求する。APIは未指定・未知capabilityでHTTPを除き、旧iOS/Webの一覧を破壊しない。各表現のETag/revisionを混同しない。追加のApiClient24件成功。10450を取消さず、失敗判明前に配信互換性を含む10451を後続へ投入していた。
 
-API互換配信9d42a56はmainCI39150374749・Cloudflare本番・本番確認39150411436がすべて成功。Windows10451 source cef7648のrun39150336346は10450の後続待ちで、今回の実WebView2・6導入状態は未完了。
+API互換配信9d42a56はmainCI39150374749・Cloudflare本番・本番確認39150411436がすべて成功。Windows10451 source cef7648のrun39150336346も旧fixture準備で20分上限となり、公開されなかった。両実行は全終端と全非空ログを確認済みで、別実行の成功を合算しない。
 
 ### 実ブラウザの停止切り分け
 
@@ -50,3 +50,21 @@ API互換配信9d42a56はmainCI39150374749・Cloudflare本番・本番確認3915
 開発用 `codex/windows-browser-check/**` では実ブラウザだけの焦点検査を実行できる。公開もartifactも作らず、保存用cacheなし。正式の全8/6導入状態ゲートは一切変更せず、焦点成功を配布成功へ加算しない。
 
 最新規則に合わせ、未実行の旧OCR研究workflow9本にも残っていた保存用artifactのupload stepを除去する。架空比較の実行・観測収集・失敗判定・所有領域cleanupは維持する。今回の正式/焦点workflowは元から保存artifact/cacheなしであり、旧研究workflowを新たに実行していない。
+
+### 実ブラウザの焦点検査の完了
+
+焦点13／run39157065437・attempt1、sourceb032a927ade25a618329ec35f25a748d59eb02a8では実WebView2の50チェックが成功。HTTP・localhost・正しいHTTPSの可視本文、自己署名／名前不一致の証明書拒否（HTTP受信0）、target=_blankとabout:blank起点の別窓、親本文・URLの保持、子窓閉鎖、外部HTTP拒否、外部ブラウザbuttonの有効化とoffline起動guardを確認した。学校サイトや別Chromiumへ置き換えていない。
+
+途中で見つかった停止は検査fixture側だった。管理者WebView2のoverride規則は所有HKLM policyで扱い、後発controllerのtarget発見は子navigation完了後に同じendpointへ追加CDP接続する。Windows SChannelに使えないephemeral鍵は、同じ証明書をメモリPKCS12から短命OS鍵へ読み込み直し、bytes消去・部分生成失敗を含むDispose回収を行う。詳細・失敗と未確定の区別はW10〜W24を保持する。製品src/はcef7648からbytes不変で、TLS回避や本文条件の緩和はない。
+
+fresh67のコード差分レビューにblockingなし。同じb032a92の正式10452／run39157350382を開始し、全8・6導入状態・公開添付照合が同一実行で成功した（下記）。
+
+## 正式配布検証10452の完了
+
+source `b032a927ade25a618329ec35f25a748d59eb02a8`、[run39157350382・attempt1](https://github.com/n624-dev/takupoke-win/actions/runs/39157350382)の全8必須チェックが成功し、[0.1.0-dev.10452](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10452)を通常Release／Latestとして公開した。Core335件、Integration Linux1168件／Windows1170件、通常WinUI1059チェック、実WebView2 50チェックが成功。x64の新規導入・移動・再導入、実dev.5から同じ／別フォルダーへの更新と無関係な自動起動の保護の全6状態でも実UIが成功し、設定・無関係ファイル・自動起動の保持とアンインストールを確認した。
+
+認証なしで6添付を取得し、GitHub配布ハッシュ・5件のチェックサム・両ZIPの全manifest／payloadハッシュと版／sourceを照合。Playwright等の検査依存は配布物に含まれず、保存用Actions artifactは0件。旧10450/10451の成功部分を合算していない。Strictの本体・入口／通過経路、MaterialCoordinator全体、DocumentsのShowPdf以降を維持し、今回の生成AIモデルの追加・品質合格はない。
+
+特定の実サイトのHTTPS空白原因はURLと端末error未採取で未確定。新しい学内standard／Microsoft callbackの物理端末完了、ARM64実機、学校資料の精度、OneDriveの自然同期・OS通知／backgroundは今回未確認。学校資料は再取得していない。
+
+Issue #2は10452の全8・6導入状態・匿名公開物照合の完了後にcompletedで閉じた。特定端末のHTTPS直接原因が未採取という確認限界は上記のとおり保持する。

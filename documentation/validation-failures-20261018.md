@@ -209,3 +209,7 @@
 元ログSHA d43699d95ab8e2fe5625913a1c0d1a8d03bea46698f9f2812a8ed54c1c9b8f1f。17:30:49Zに通常UI1059チェック成功、17:31:21Zに全画面capture完了。その後、新規browser-checkの進捗・例外出力が一切なく15分以上後にjob上限で停止。通常設定・認証取消・保存・訂正の失敗ではない。
 新browser-checkは最初にCurrentUser Rootへ一時CAをX509Store.Addするが、開始段階の観測と操作上限がない。Windowsのroot追加確認に停滞する可能性を候補とし、実際の停止操作は未確定。過去の索引にはこのfixture処理の実行記録がない。
 次はfixtureの各段階を記録し、既存の証明書検証を維持したまま、所有一時CAをcertutilの明示import/deleteで準備・回収する。補助プロセスは15秒で失敗を返し、停止を成功扱いにしない。ブラウザだけの焦点CIで切り分け、その成功後も正式全8・6導入状態を省略しない。検査期限の延長・UI押し直し・AlwaysAllowは行わない。
+
+### W10〜W24 正式10452での比較結果
+
+[run39157350382・attempt1](https://github.com/n624-dev/takupoke-win/actions/runs/39157350382)／source `b032a927ade25a618329ec35f25a748d59eb02a8`は全8チェックと6導入状態が成功。焦点13に続き同じsourceの実WebView2 50チェックも成功し、公開6添付の匿名全照合まで完了。Root準備・DOM取得・後発controller発見・SChannel一時鍵・localMSBuildの失敗を成功扱いへ変更せず記録を保持する。実サイトHTTPSの直接原因と実機は未確認のまま。
