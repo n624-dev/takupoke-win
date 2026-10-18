@@ -1,3 +1,11 @@
+## W19 第8焦点CIがfailure終端（2026-10-19）
+
+- source0233f269fc6bb3aaeb4a0c29997ff748cfe1e356、run39154739540/attempt1、job117755518389。18:34:09Z開始・18:36:27Z failure、実ブラウザstepで失敗。CDP比較版の初回。完了ログ取得前で接続/本文/popup/TLSのどこか未確定。対処前に記録し、過去索引/実コード/新しい段階観測を照合する。
+
+- 完了ログSHA0291d775c78d9eb814c50ac3e21231dd54440eae8a1d65b58412d1b1a35c9bc2。HTTP2requests・native表示完了後、18:36:19のCDP attachはloopback ECONNREFUSED。8checks、本文検査前。成功した表示を誤読・TLS失敗とは扱わない。
+- [Microsoft公式security規則](https://learn.microsoft.com/microsoft-edge/webview2/concepts/security#for-an-elevated-host-app-use-appropriate-override-flags)を照合。管理者High ILのWebView2はWEBVIEW2環境変数とHKCU overrideを無視し、HKLMのapp単位policyを許可する。今回の管理者CIと一致し、以前のaccessibility flag比較も有効化自体が成立した証拠はなかった。
+- 製品コードへdebug hookを追加せず、使い捨てCIのHKLM AdditionalBrowserArgumentsにこのexe名だけのloopback CDP値を一時登録する。既存app値があれば上書きせず失敗、finallyは同値だけ削除/不在照合し、今回作成した空keyだけ回収。通常Startを元へ戻し環境変数補助は除去。TLS/実DOM/実popup/期限は維持し、ユーザーPCや配布アプリにはこのpolicyを作成しない。local cross build0警告/0エラー18.07秒、catalog整合成功、fresh62にblockingなし。
+
 ## W18 第7焦点CIがfailure終端（2026-10-19）
 
 - source76b54294a66224f97039c3ecff15699cef00ebfc、run39154118138/attempt1、job117753670643。18:25:57Z開始・18:28:33Z failure。UIA3比較版の初回結果、実ブラウザstepで失敗。完了ログ取得前で段階/原因未確定。W17以前と実コード/ログを照合し、同条件無変更の再試行や検査緩和をしない。

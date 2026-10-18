@@ -24,7 +24,8 @@ internal static partial class Program
         var debugPort = ((System.Net.IPEndPoint)reservation.LocalEndpoint).Port;
         reservation.Stop();
         Console.WriteLine("Browser fixture stage: launch app with fictional local links");
-        Start(executable, browserDebugPort: debugPort); Navigate("links");
+        using var debugPolicy = new BrowserFixtureDebugPolicy(executable, debugPort);
+        Start(executable); Navigate("links");
         AutomationElement[] Pages() => AutomationElement.RootElement.FindAll(TreeScope.Children,
             new AndCondition(new PropertyCondition(AutomationElement.ProcessIdProperty, _process!.Id),
                 new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window)))

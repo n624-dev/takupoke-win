@@ -16,16 +16,9 @@ namespace Takupoke.Win.UITests;
 
 internal static partial class Program
 {
-    private static void Start(string executable, int? browserDebugPort = null)
+    private static void Start(string executable)
     {
-        var start = new ProcessStartInfo(Path.GetFullPath(executable)) { UseShellExecute = false };
-        // Only the isolated test child exposes its actual WebView2 via loopback CDP.
-        if (browserDebugPort is { } port)
-        {
-            if (port is < 1 or > 65535) throw new ArgumentOutOfRangeException(nameof(browserDebugPort));
-            start.Environment["WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS"] = $"--remote-debugging-address=127.0.0.1 --remote-debugging-port={port}";
-        }
-        _process = Process.Start(start) ?? throw new InvalidOperationException("App did not start.");
+        _process = Process.Start(new ProcessStartInfo(Path.GetFullPath(executable)) { UseShellExecute = false }) ?? throw new InvalidOperationException("App did not start.");
         Wait(() =>
         {
             _process.Refresh();

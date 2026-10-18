@@ -152,3 +152,67 @@ internal sealed class BrowserFixtureCertificates : IDisposable
         if (process.ExitCode != 0) throw new InvalidOperationException("Certificate fixture OS command failed with exit code " + process.ExitCode);
     }
 }
+
+// Elevated WebView2 hosts ignore environment overrides. This per-app machine
+// policy exists only on the disposable CI runner and is removed on every exit.
+internal sealed class BrowserFixtureDebugPolicy : IDisposable
+{
+    private const string Prefix = @"SOFTWARE\Policies\Microsoft";
+    private const string PolicyPath = Prefix + @"\Edge\WebView2\AdditionalBrowserArguments";
+    private readonly List<string> _ownedKeys = [];
+    private readonly string _application;
+    private readonly string _arguments;
+    private bool _installed;
+    public BrowserFixtureDebugPolicy(string executable, int port)
+    {
+        _application = Path.GetFileName(executable);
+        if (string.IsNullOrEmpty(_application) || port is < 1 or > 65535)
+            throw new ArgumentException("An owned executable and allocated loopback port are required.");
+        _arguments = $"--remote-debugging-address=127.0.0.1 --remote-debugging-port={port}";
+        try
+        {
+            using var prefix = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(Prefix)
+                ?? throw new InvalidOperationException("The isolated runner's machine policy root is unavailable.");
+            foreach (var path in new[] { Prefix + @"\Edge", Prefix + @"\Edge\WebView2", PolicyPath })
+            {
+                using var existing = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(path);
+                if (existing is not null) continue;
+                using var created = Microsoft.Win32.Registry.LocalMachine.CreateSubKey(path, writable: true)
+                    ?? throw new InvalidOperationException("The owned test policy key could not be created.");
+                _ownedKeys.Add(path);
+            }
+            using var policy = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(PolicyPath, writable: true)
+                ?? throw new InvalidOperationException("The owned test policy key is unavailable.");
+            if (policy.GetValueNames().Contains(_application, StringComparer.OrdinalIgnoreCase))
+                throw new InvalidOperationException("An existing application policy must not be overwritten by the browser fixture.");
+            policy.SetValue(_application, _arguments, Microsoft.Win32.RegistryValueKind.String);
+            _installed = true;
+            if (policy.GetValue(_application) as string != _arguments)
+                throw new InvalidOperationException("The isolated browser policy was not installed.");
+            Console.WriteLine("Browser fixture stage: owned per-app machine debug policy installed");
+        }
+        catch { Dispose(); throw; }
+    }
+    public void Dispose()
+    {
+        if (_installed)
+        {
+            using var policy = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(PolicyPath, writable: true)
+                ?? throw new InvalidOperationException("The owned browser policy disappeared before cleanup.");
+            if (policy.GetValue(_application) as string != _arguments)
+                throw new InvalidOperationException("The browser policy changed; refusing to delete another owner's value.");
+            policy.DeleteValue(_application);
+            if (policy.GetValueNames().Contains(_application, StringComparer.OrdinalIgnoreCase))
+                throw new InvalidOperationException("The owned browser policy was not removed.");
+            _installed = false;
+        }
+        foreach (var path in _ownedKeys.AsEnumerable().Reverse())
+        {
+            bool empty;
+            using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(path))
+                empty = key is not null && key.ValueCount == 0 && key.SubKeyCount == 0;
+            if (empty) Microsoft.Win32.Registry.LocalMachine.DeleteSubKey(path, throwOnMissingSubKey: false);
+        }
+        _ownedKeys.Clear();
+    }
+}
