@@ -85,6 +85,9 @@ internal sealed class BrowserFixtureCertificates : IDisposable
     public X509Certificate2 Untrusted { get; }
     public BrowserFixtureCertificates()
     {
+        if (Environment.GetEnvironmentVariable("GITHUB_ACTIONS") != "true"
+            || Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") != "1")
+            throw new InvalidOperationException("Machine certificate fixtures are restricted to isolated offline CI.");
         using var identity = WindowsIdentity.GetCurrent();
         if (!new WindowsPrincipal(identity).IsInRole(WindowsBuiltInRole.Administrator))
             throw new InvalidOperationException("The isolated CI browser fixture requires an elevated disposable runner.");
@@ -165,6 +168,9 @@ internal sealed class BrowserFixtureDebugPolicy : IDisposable
     private bool _installed;
     public BrowserFixtureDebugPolicy(string executable, int port)
     {
+        if (Environment.GetEnvironmentVariable("GITHUB_ACTIONS") != "true"
+            || Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") != "1")
+            throw new InvalidOperationException("Machine browser policies are restricted to isolated offline CI.");
         _application = Path.GetFileName(executable);
         if (string.IsNullOrEmpty(_application) || port is < 1 or > 65535)
             throw new ArgumentException("An owned executable and allocated loopback port are required.");

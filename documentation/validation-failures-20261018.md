@@ -1,3 +1,10 @@
+## W20 第9焦点CIがfailure終端（2026-10-19）
+
+- sourcef9e9616d78ae610142dc3d53e4b46f6b9a7846b4、run39155230852/attempt1、job117756970761。18:40:28Z開始・18:43:34Z failure、実ブラウザstepで失敗。HKLM所有policy比較の初回。完了ログ取得前で接続/本文/popup/TLSの段階未確定。対処前に記録し、W19と新しい実測・コードを照合する。
+
+- 完了ログSHAe708f1082d7d5358cfdb99a1f34b4344614c3c078d2f46862ddccebd70e86dad。HKLM policyでCDP接続とHTTP可視見出しは成功、最初のtarget=_blankを実クリックするとnative windowは2件とも表示完了・HTTPは4requests、しかしPlaywright context1/pages1のまま/target見出し30秒timeout（10checks）。新規窓でのHTTP取得は起きたが、実popupのDOMへの接続が未確認。
+- 以前の接続拒否は越えた。Native windowがない失敗ではなく、既存CDP接続から新controllerを発見できない条件かどうか未確定。次は失敗後だけ所有loopback DevTools endpointのtarget一覧を確認し、typeとfixtureの相対pathのみ出力する。URLquery/token/WebSocket URLは出さない。CDPの取得条件をstatusだけへ緩めず、同じ実クリックを押し直さない。machine fixtureはGitHub Actionsかつoffline CIに限定する起動guardも追加。cross build0警告/0エラー、catalog整合成功、fresh63にblockingなし。
+
 ## W19 第8焦点CIがfailure終端（2026-10-19）
 
 - source0233f269fc6bb3aaeb4a0c29997ff748cfe1e356、run39154739540/attempt1、job117755518389。18:34:09Z開始・18:36:27Z failure、実ブラウザstepで失敗。CDP比較版の初回。完了ログ取得前で接続/本文/popup/TLSのどこか未確定。対処前に記録し、過去索引/実コード/新しい段階観測を照合する。

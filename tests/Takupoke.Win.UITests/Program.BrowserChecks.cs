@@ -128,6 +128,25 @@ internal static partial class Program
             try
             {
                 Console.Error.WriteLine($"Synthetic CDP state: connected={browser?.IsConnected == true};contexts={browser?.Contexts.Count ?? 0};pages={browser?.Contexts.Sum(context => context.Pages.Count) ?? 0}");
+                using var debugHttp = new System.Net.Http.HttpClient { Timeout = TimeSpan.FromSeconds(5) };
+                using var targets = System.Text.Json.JsonDocument.Parse(debugHttp.GetStringAsync($"http://127.0.0.1:{debugPort}/json/list").GetAwaiter().GetResult());
+                foreach (var target in targets.RootElement.EnumerateArray().Take(12))
+                {
+                    var kind = target.TryGetProperty("type", out var type) ? type.GetString() : "unknown";
+                    var location = target.TryGetProperty("url", out var address) ? address.GetString() : null;
+                    var path = Uri.TryCreate(location, UriKind.Absolute, out var actual) && actual.IsLoopback
+                        && new[] { http.Address.Port, https.Address.Port, mismatched.Address.Port, untrusted.Address.Port }.Contains(actual.Port)
+                        ? actual.AbsolutePath : "non-fixture-or-blank";
+                    Console.Error.WriteLine($"Synthetic CDP target: type={kind};fixturePath={path}");
+                }
+                foreach (var context in browser?.Contexts ?? [])
+                    foreach (var page in context.Pages)
+                    {
+                        var path = Uri.TryCreate(page.Url, UriKind.Absolute, out var actual) && actual.IsLoopback
+                            && new[] { http.Address.Port, https.Address.Port, mismatched.Address.Port, untrusted.Address.Port }.Contains(actual.Port)
+                            ? actual.AbsolutePath : "non-fixture-or-blank";
+                        Console.Error.WriteLine($"Synthetic CDP tracked page: fixturePath={path}");
+                    }
                 foreach (var page in Pages())
                 {
                     Console.Error.WriteLine("Synthetic browser window: " + page.Current.BoundingRectangle);
