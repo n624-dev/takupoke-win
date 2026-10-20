@@ -1,4 +1,11 @@
+## W26 公開後の文書差分で末尾空行を検出（2026-10-20）
+
+- 10453の全8CI・6導入状態・匿名公開物照合が成功した後、最終文書生成のgit diff --checkでhidden-international-cancellation-20261020.md:37のnew blank line at EOFを検出。製品・配布ソースの失敗ではなく、未送信のMarkdownだけが対象。
+- 対処前に記録。既存W01〜W04と今回の生成処理を照合し、置換文末と元文末の改行が重複したことを確認。文末を単一改行へ揃え、差分・送信commitの空白検査を再実行する。CI・期待値・配布物は変更しない。
+
 ## W25 非表示の留学生向け休講が通常授業を抑止する（2026-10-20）
+
+- 修正source5d1035cac3a7ffc162290490991f2649a7955761／run39391712035・attempt1は全8必須チェック・6導入状態・全job終端・保存artifact0を確認し0.1.0-dev.10453を公開。通常Release／Latest、匿名6添付・全5チェックサム・両ZIP全payloadを照合した。Windows実機による修正再確認は未確認。詳細は[今回の検証](hidden-international-cancellation-20261020.md)。
 
 - iOSの実機報告を受けたWindows調査。HEAD68a2ba1d2323b9d305773b28df8c11c9c136dbd5のTimetableEngine.Blocksは、全変更の存在で通常・特別授業を除外した後、表示対象の変更だけを選ぶ。非表示の変更のみなら空欄になる条件をコードで確認。Windows実機での再現報告ではない。
 - 対処前に記録。既存InternationalStudentFilterUsesPrefixは通常授業の非表示だけ、LastMakeupWinsAndAllOriginalsRemainInDetailsは表示対象変更の優先だけを検査する。この組合せを検出する独立の架空入力を追加し、修正前後を比較する。解析・取得・保存経路は対象外。

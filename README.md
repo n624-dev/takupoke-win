@@ -29,9 +29,11 @@ PDF端末内復旧の開始・確認・採用、原PDF表示、ローカルOCR�
 
 ## Windowsへの導入（ビルド不要）
 
-[開発確認版0.1.0-dev.10452のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10452)からSetup.exeを取得してください。通常Release・Latestとして公開しています。正式版ではありません。ホーム正式名称・シラバス設定・一覧専用学内認証・現在資料の状態表示と、Issue #2のローカルHTTP／別窓／証明書エラー表示を含みます。[今回の変更と検証](documentation/account-links-changes-20261019.md)・[同一ソースの配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/39157350382)全8チェックとx64の6導入状態が成功し、公開6添付・全5チェックサム・両ZIPの全同梱ファイルを匿名取得して照合済みです。厳格なPDF解析と入口・通過経路は変更していません。
+[開発確認版0.1.0-dev.10453のダウンロード](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10453)からSetup.exeを取得してください。通常Release・Latestとして公開しています。正式版ではありません。
+留学生向けの休講・変更を非表示にした際、通常授業や試験／返却授業まで消える問題を修正しました。ホーム・時間割・共通時刻・振替土曜へ同じ表示条件を適用します。再解析は不要です。ホーム正式名称・シラバス・一覧専用学内認証・HTTP／別窓／証明書エラー表示は10452から継承しています。
+[同一ソースの配布検証](https://github.com/n624-dev/takupoke-win/actions/runs/39391712035)全8チェックとx64の6導入状態が成功し、公開6添付・全5チェックサム・両ZIPの全同梱ファイルを匿名取得して照合済みです。[変更と検証](documentation/hidden-international-cancellation-20261020.md)。厳格なPDF解析と全入口・通過経路は変更していません。
 
-1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10452-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10452-arm64-Setup.exe`。
+1. Intel/AMDの通常の64ビットPC：`takupoke-0.1.0-dev.10453-x64-Setup.exe`。Windows on Arm：`takupoke-0.1.0-dev.10453-arm64-Setup.exe`。
 2. Setup.exeを通常ユーザーとして実行し、画面の案内に従います。
 3. スタートメニューの「たくポケ」から起動します。
 4. OCRを利用する場合は設定の「AI・OCRを使用する」をONにし、モデル管理で約130 MiBの日本語・英数字モデルを取得／更新します。復旧プレビューを原PDFと照合し、必要な欄を訂正してから明示採用してください。
