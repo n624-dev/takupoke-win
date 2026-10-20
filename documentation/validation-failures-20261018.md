@@ -1,3 +1,10 @@
+## W25 非表示の留学生向け休講が通常授業を抑止する（2026-10-20）
+
+- iOSの実機報告を受けたWindows調査。HEAD68a2ba1d2323b9d305773b28df8c11c9c136dbd5のTimetableEngine.Blocksは、全変更の存在で通常・特別授業を除外した後、表示対象の変更だけを選ぶ。非表示の変更のみなら空欄になる条件をコードで確認。Windows実機での再現報告ではない。
+- 対処前に記録。既存InternationalStudentFilterUsesPrefixは通常授業の非表示だけ、LastMakeupWinsAndAllOriginalsRemainInDetailsは表示対象変更の優先だけを検査する。この組合せを検出する独立の架空入力を追加し、修正前後を比較する。解析・取得・保存経路は対象外。
+- 変更前のCore対象33件で5件失敗・28件成功。prefix／対応表、試験／返却、土曜振替で空欄を再現し、表示対象休講・補講の優先は成功した。
+- Blocksの置換判断と有効変更の選択へ同じ表示対象行を使う候補でCore341件・失敗0。DisplayedDaysとCommonPeriodTimeは既にBlocksを参照するため追加変更せず同じ回帰で確認。Slot／ChangesOnと週移動判定、取得・解析・保存の本文は不変。Windows実UI・導入・公開はこの時点で未確認。
+
 ## W24 ローカルcross buildのMSBuild child node終了（2026-10-19）
 
 - 6a756e9の未コミットTLS fixture修正に対するLinux .NET10.0.402 cross buildでMSB4166、child node2が途中終了。compileのC#エラーではなく追加の失敗ファイル先は/tmp/MSBuildTempM5EYFV。1.46秒でbuild failure、0警告/1エラー。修正v1は同環境で17.16秒/0エラーだった。Actionsはまだ開始していない。対処を決める前に記録し、診断と既存ビルド条件を照合する。

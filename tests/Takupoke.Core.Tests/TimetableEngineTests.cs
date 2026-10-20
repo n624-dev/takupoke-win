@@ -103,6 +103,66 @@ public sealed class TimetableEngineTests
         Assert.Single(new TimetableEngine(data, international: true).Blocks(Day, "1_CN"));
     }
     [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void HiddenInternationalCancellationPreservesOrdinaryLessonsAndClock(bool byMapping)
+    {
+        var hidden = Change("1,2", "休講", "") with
+        { BeforeSubject = byMapping ? "架空対象科目Z" : "留架空科目Z" };
+        var data = new ScheduleData(Timetable(Lesson(1), Lesson(2)), [hidden]);
+        bool Rule(string subject, string cls) => byMapping && subject == "架空対象科目Z" && cls == "1_CN";
+        var engine = new TimetableEngine(data, internationalRule: Rule);
+        var block = Assert.Single(engine.Blocks(Day, "1_CN"));
+        Assert.IsType<NormalContent>(block.Content);
+        Assert.Equal((1, 2), (block.StartPeriod, block.EndPeriod));
+        Assert.Equal(new TimeRange("08:50", "09:35"), engine.CommonPeriodTime(1, [Day], ["1_CN"]));
+        Assert.Single(engine.Slot(Day, 1, "1_CN").Changes);
+        Assert.Single(engine.Slot(Day, 1, "1_CN").BaseLessons);
+        Assert.Empty(engine.Changes(new HashSet<string> { "1_CN" }, ChangeRange.All, Day, Day.Monday()));
+        Assert.IsType<NormalContent>(Assert.Single(engine.Blocks(Day.AddDays(7), "1_CN")).Content);
+        var shown = new TimetableEngine(data, international: true, internationalRule: Rule);
+        Assert.Equal(hidden, Assert.IsType<ChangeContent>(Assert.Single(shown.Blocks(Day, "1_CN")).Content).Change);
+        Assert.IsType<NormalContent>(Assert.Single(new TimetableEngine(data, includesChanges: false).Blocks(Day, "1_CN")).Content);
+    }
+    [Fact]
+    public void HiddenChangesPreserveVisibleCancellationAndMakeupPriority()
+    {
+        var hidden = Change(note: "補講", after: "留架空科目Z");
+        var visible = Change(note: "休講", after: "");
+        var engine = new TimetableEngine(new(Timetable(Lesson(1)), [visible, hidden]));
+        Assert.Equal(visible, Assert.IsType<ChangeContent>(Assert.Single(engine.Blocks(Day, "1_CN")).Content).Change);
+        var makeup = Change(note: "補講");
+        engine = new TimetableEngine(new(Timetable(Lesson(1)), [makeup, visible, hidden]));
+        Assert.Equal(makeup, Assert.IsType<ChangeContent>(Assert.Single(engine.Blocks(Day, "1_CN")).Content).Change);
+        Assert.Equal(3, engine.Slot(Day, 1, "1_CN").Changes.Count);
+    }
+    [Theory]
+    [InlineData(MaterialKind.Exam)]
+    [InlineData(MaterialKind.ExamReturn)]
+    public void HiddenCancellationPreservesSpecialLessonsWithoutFillingSpecialBlanks(MaterialKind kind)
+    {
+        var hidden = Change("1,2", "休講", "") with { BeforeSubject = "留架空科目Z" };
+        var time = new TimeRange("10:10", "10:30");
+        var engine = new TimetableEngine(new(Timetable(Lesson(1), Lesson(2)), [hidden], [Special(kind, time)]));
+        var block = Assert.Single(engine.Blocks(Day, "1_CN"));
+        Assert.Equal(kind, Assert.IsType<SpecialContent>(block.Content).Kind);
+        Assert.Equal((1, 1), (block.StartPeriod, block.EndPeriod));
+        Assert.Empty(engine.Slot(Day, 2, "1_CN").BaseLessons);
+        Assert.Equal(time, engine.CommonPeriodTime(1, [Day], ["1_CN"]));
+        Assert.Null(engine.CommonPeriodTime(2, [Day], ["1_CN"]));
+    }
+    [Fact]
+    public void HiddenCancellationKeepsWeekendWithWeekdayOverrideVisible()
+    {
+        var saturday = Day.AddDays(5);
+        var hidden = Change(note: "休講", after: "") with { ChangeDate = saturday.Iso(), BeforeSubject = "留架空科目Z" };
+        var weekday = new SchoolEvent(saturday.Iso(), "架空振替日Z", "", Classification: EventClassification.WeekdayOverride,
+            ScheduleDay: Day.SchoolWeekday());
+        var engine = new TimetableEngine(new(Timetable(Lesson(1)), [hidden], Events: [weekday]));
+        Assert.Contains(saturday, engine.DisplayedDays(Day, ["1_CN"]));
+        Assert.IsType<NormalContent>(Assert.Single(engine.Blocks(saturday, "1_CN")).Content);
+    }
+    [Theory]
     [InlineData(8, 49, false)]
     [InlineData(8, 50, true)]
     [InlineData(9, 34, true)]

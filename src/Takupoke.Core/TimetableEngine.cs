@@ -87,7 +87,8 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
         for (var period = 1; period <= 8; period++)
         {
             var slot = Slot(day, period, className);
-            if (slot.Changes.Count == 0)
+            var visibleChanges = slot.Changes.Where(c => Visible(className, c.BeforeSubject, c.AfterSubject)).ToArray();
+            if (visibleChanges.Length == 0)
             {
                 foreach (var lesson in slot.BaseLessons.Where(l => Visible(className, l.Names.Subject, l.Names.SubjectFullName ?? "")))
                 {
@@ -104,7 +105,7 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
                     else result.Add(new(period, period, special));
                 }
             }
-            var change = EffectiveChange(slot.Changes.Where(c => Visible(className, c.BeforeSubject, c.AfterSubject)));
+            var change = EffectiveChange(visibleChanges);
             if (change is not null)
             {
                 var index = result.FindLastIndex(block => block.EndPeriod == period - 1 && block.Content is ChangeContent old && old.Change == change);
