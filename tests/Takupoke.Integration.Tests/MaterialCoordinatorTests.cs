@@ -227,4 +227,54 @@ public sealed class MaterialCoordinatorTests
         finally { Directory.Delete(root, true); }
     }
 
+
+    [Fact]
+    public async Task InvalidYearCannotReplaceAcceptedDatesAndFreshnessChecksConfiguredYear()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-year-tests-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root); using var protector = new Protector();
+        try
+        {
+            var path = Path.Combine(root, "fictional.xlsx");
+            await File.WriteAllBytesAsync(path, XlsxChangeReaderTests.ContentWorkbook("休講", "架空備考A", edit: sheet =>
+            {
+                System.Xml.Linq.XNamespace ns = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
+                var first = sheet.Descendants(ns + "row").Last();
+                first.Descendants(ns + "t").ElementAt(2).Value = "7/10";
+                var second = new System.Xml.Linq.XElement(first); second.SetAttributeValue("r", 3);
+                foreach (var cell in second.Elements(ns + "c")) cell.SetAttributeValue("r", ((string)cell.Attribute("r")!)[..^1] + "3");
+                second.Descendants(ns + "t").ElementAt(2).Value = "1/10";
+                second.Descendants(ns + "t").ElementAt(3).Value = "2";
+                second.Descendants(ns + "t").ElementAt(4).Value = "補講";
+                sheet.Descendants(ns + "sheetData").Single().Add(second);
+            }));
+            await using (var store = new SchoolDataStore(Path.Combine(root, "data"), protector))
+            {
+                var coordinator = new MaterialCoordinator(store, new(new FakeIdentity()));
+                Assert.True((await coordinator.SelectAsync(MaterialKind.Changes, path, 2032)).Parsed);
+                var lease = await store.BeginAsync();
+                var good = (await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes"))!;
+                var source = (await store.ReadAsync<SourceRecord>(lease, "selection.Changes"))!;
+                Assert.Equal(new[] { "2032-07-10", "2033-01-10" }, good.Changes!.Select(c => c.ChangeDate));
+                Assert.True(MaterialCoordinator.AnalysisMatches(good, source, MaterialKind.Changes, 2032));
+                Assert.False(MaterialCoordinator.AnalysisMatches(good, source, MaterialKind.Changes, null));
+                Assert.False(MaterialCoordinator.AnalysisMatches(good, source, MaterialKind.Changes, 2033));
+                Assert.False(MaterialCoordinator.AnalysisMatches(good with { ParserVersion = 0 }, source, MaterialKind.Changes, 2032));
+                foreach (var year in new[] { 203, 1899, 9999 })
+                {
+                    Assert.False((await coordinator.RefreshAsync(MaterialKind.Changes, year)).Parsed);
+                    Assert.False((await coordinator.ReparseAsync(MaterialKind.Changes, year)).Parsed);
+                    Assert.False((await coordinator.SelectAsync(MaterialKind.Changes, path, year)).Parsed);
+                    Assert.Equal(DataCodec.Encode(good), DataCodec.Encode(await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes")));
+                    Assert.Equal(source, await store.ReadAsync<SourceRecord>(lease, "selection.Changes"));
+                }
+            }
+            await using var reopened = new SchoolDataStore(Path.Combine(root, "data"), protector);
+            var saved = (await reopened.ReadAsync<MaterialAnalysis>(await reopened.BeginAsync(), "analysis.Changes"))!;
+            Assert.Equal(new[] { "2032-07-10", "2033-01-10" }, saved.Changes!.Select(c => c.ChangeDate));
+            Assert.True(saved.Changes[0].IsCancellation); Assert.True(saved.Changes[1].IsMakeup);
+            Assert.Equal("架空備考A", saved.Changes[0].Note);
+        }
+        finally { Directory.Delete(root, true); }
+    }
 }

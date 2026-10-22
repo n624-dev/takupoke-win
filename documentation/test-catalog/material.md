@@ -1,7 +1,7 @@
 # 原本取得・更新・保存・監視
 
 対応関係・宣言名・実行方法のSHA-256：
-`ad8a2f8e631bf6e644077ad63384fc01ec9135c41f318bd2312c5a48163c527d`
+`04d8f1b470baa37d6d3b73c11f1acc4487742791b4fa0893dd4215b58d8b8b83`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -33,10 +33,12 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `ReplacementDuringCurrentReadIsRejectedAndKeepsPreviousSourceAndAnalysis`
 - `WeekdayPreviewIsReadOnlyAndRejectsDifferentYearOrSource`
 - `WrongExtensionAndExcelTemporaryFilesCannotReplaceSelection`
+- `InvalidYearCannotReplaceAcceptedDatesAndFreshnessChecksConfiguredYear`
 
 ## [tests/Takupoke.Integration.Tests/SourceWatcherTests.cs](../../tests/Takupoke.Integration.Tests/SourceWatcherTests.cs)
 
 - `UnavailableFolderDoesNotPreventOtherSelectedFilesFromReportingUpdates`
+- `SameSourceIsRegisteredAgainAfterMissingFolderRecovers`
 
 ## [tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs](../../tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs)
 

@@ -15,6 +15,8 @@ public sealed partial class MaterialCoordinator(SchoolDataStore store, FileSourc
     public Task<MaterialResult> ReparseAsync(MaterialKind kind, int schoolYear, CancellationToken token = default) => Run(kind, null, schoolYear, false, true, token);
     private async Task<MaterialResult> Run(MaterialKind kind, string? selectedPath, int year, bool selecting, bool reparsing, CancellationToken token)
     {
+        if (kind == MaterialKind.Changes && year is < 1900 or > 9998)
+            return new(kind, false, false, new ChangeParseException(ChangeErrorCode.DefaultYear).Message);
         await _gate.WaitAsync(token);
         try
         {
@@ -106,6 +108,11 @@ public sealed partial class MaterialCoordinator(SchoolDataStore store, FileSourc
             return new(source.Kind, changed, false, error.Message);
         }
     }
+    public static bool AnalysisMatches(MaterialAnalysis? analysis, SourceRecord? source, MaterialKind kind, int? schoolYear) =>
+        analysis is not null && source is not null && analysis.SourceDigest == source.Digest
+        && analysis.ParserVersion == ParserVersion(kind)
+        && (kind != MaterialKind.Changes || schoolYear is { } year && analysis.Changes is not null && analysis.SchoolYear == year && RowSkipMatches(analysis, source, year));
+
     public static int ParserVersion(MaterialKind kind) => kind == MaterialKind.Changes ? XlsxChangeReader.Version
         : kind == MaterialKind.Timetable ? PdfScheduleParser.TimetableVersion : PdfScheduleParser.SpecialVersion;
 }

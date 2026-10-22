@@ -14,8 +14,11 @@ public interface INotificationSink
 public sealed class NotificationCoordinator(SchoolDataStore store, INotificationSink sink)
 {
     private readonly SemaphoreSlim _gate = new(1, 1);
-    public async Task CheckAsync(ScheduleData data, IReadOnlyDictionary<MaterialKind, string> acceptedDigests, UserPreferences preferences, DateOnly today, CancellationToken token = default)
+    public async Task CheckAsync(ScheduleData data, IReadOnlyDictionary<MaterialKind, string> acceptedDigests, UserPreferences preferences, DateOnly today, CancellationToken token = default, IReadOnlyDictionary<string, NotificationSourceState>? availability = null)
     {
+        NotificationSourceState State(string kind) => availability?.GetValueOrDefault(kind) ?? (kind == "changes"
+            ? data.Changes is null ? NotificationSourceState.Unavailable : NotificationSourceState.Available
+            : acceptedDigests.ContainsKey(kind == "exam" ? MaterialKind.Exam : MaterialKind.ExamReturn) ? NotificationSourceState.Available : NotificationSourceState.Unavailable);
         await _gate.WaitAsync(token);
         try
         {
@@ -27,13 +30,14 @@ public sealed class NotificationCoordinator(SchoolDataStore store, INotification
             var notifyChanges = allowed && preferences.NotifyChanges;
             var notifySpecials = allowed && preferences.NotifySpecials;
             var next = NotificationDiff.Reconcile(saved, data.Changes is null ? null : NotificationDiff.Fingerprints(data.Changes), specialDigests,
-                today, preferences.SelectedClasses.ToHashSet(), notifyChanges, notifySpecials);
+                today, preferences.SelectedClasses.ToHashSet(), notifyChanges, notifySpecials, availability);
             await store.WriteAsync(lease, "notifications", next, token);
             if (!notifyChanges) await sink.ClearKindAsync("changes", token);
             if (!notifySpecials) { await sink.ClearKindAsync("exam", token); await sink.ClearKindAsync("examReturn", token); }
             foreach (var pending in next.Pending ?? new Dictionary<string, PendingNotice>())
             {
                 token.ThrowIfCancellationRequested();
+                if (State(pending.Key) != NotificationSourceState.Available) continue;
                 // Retry the same stable tag; reconcile accepted notifications before attempting another send.
                 if (!await sink.ContainsAsync(pending.Key, pending.Value.Fingerprint, token)
                     && !await sink.ShowAsync(pending.Key, pending.Value.Fingerprint, pending.Value.Count, token)) continue;

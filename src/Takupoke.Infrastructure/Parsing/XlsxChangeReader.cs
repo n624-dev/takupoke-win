@@ -9,7 +9,7 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class XlsxChangeReader
 {
-    public const int Version = 5;
+    public const int Version = 6;
     private const string SpreadsheetNamespace = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
     private const string RelationshipNamespace = "http://schemas.openxmlformats.org/package/2006/relationships";
     private const string DocumentRelationshipNamespace = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
@@ -144,10 +144,33 @@ public static partial class XlsxChangeReader
     }
     private static string RichText(DocumentFormat.OpenXml.OpenXmlElement node)
     {
-        var value = string.Concat(node.ChildElements.Select(child => child is Text text ? text.Text
-            : child is Run run ? string.Concat(run.Elements<Text>().Select(t => t.Text)) : ""));
+        var value = string.Concat(node.ChildElements.Select(child => child is Text text ? DecodedString(text.Text)
+            : child is Run run ? string.Concat(run.Elements<Text>().Select(t => DecodedString(t.Text))) : ""));
         if (Encoding.UTF8.GetByteCount(value) > 4096) throw new ChangeParseException(ChangeErrorCode.Limit);
         return value;
+    }
+    private static string DecodedString(string source)
+    {
+        var result = new StringBuilder();
+        for (var i = 0; i < source.Length;)
+        {
+            if (i + 6 < source.Length && source[i] == '_' && source[i + 1] == 'x' && source[i + 6] == '_'
+                && source.AsSpan(i + 2, 4).ToArray().All(c => c is >= '0' and <= '9' or >= 'a' and <= 'f' or >= 'A' and <= 'F')
+                && ushort.TryParse(source.AsSpan(i + 2, 4), System.Globalization.NumberStyles.HexNumber,
+                    System.Globalization.CultureInfo.InvariantCulture, out var unit))
+            { result.Append((char)unit); i += 7; }
+            else result.Append(source[i++]);
+        }
+        var text = result.ToString();
+        for (var i = 0; i < text.Length; i++)
+        {
+            if (char.IsHighSurrogate(text[i]))
+            {
+                if (i + 1 >= text.Length || !char.IsLowSurrogate(text[++i])) throw new ChangeParseException(ChangeErrorCode.InvalidXml);
+            }
+            else if (char.IsLowSurrogate(text[i])) throw new ChangeParseException(ChangeErrorCode.InvalidXml);
+        }
+        return text;
     }
     private static (int Row, int Column) Coordinate(string value)
     {

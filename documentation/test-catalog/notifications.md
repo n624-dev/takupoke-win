@@ -1,7 +1,7 @@
 # 通知・差分・実配信
 
 対応関係・宣言名・実行方法のSHA-256：
-`0e818030996fbf3f612b8022bf3cf2255559cd2f1ba2c6e5c786033bb0c97ef7`
+`15922cfa8733cd3ec3f74b76a32771e2cb8a92cb96efbb2ac1f75ed9af82c227`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -24,6 +24,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `PendingChangesAreFilteredByCurrentClassesAndDateWithoutChangingTheStableOsTag`
 - `LegacyChangeNoticeIsDiscardedButComparisonBaselineRemainsUsable`
 - `UnsentSlotsAccumulateWithoutCountingRepeatedUpdatesToTheSameSlotTwice`
+- `PartialStartupPreservesPersistedPendingButConfirmedAbsenceInvalidatesIt`
 
 ## [tests/Takupoke.Integration.Tests/NotificationCoordinatorTests.cs](../../tests/Takupoke.Integration.Tests/NotificationCoordinatorTests.cs)
 

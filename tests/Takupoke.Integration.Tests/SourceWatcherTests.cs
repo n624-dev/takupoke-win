@@ -32,4 +32,24 @@ public sealed class SourceWatcherTests
             Directory.Delete(root, recursive: true);
         }
     }
+
+    [Fact]
+    public async Task SameSourceIsRegisteredAgainAfterMissingFolderRecovers()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-watcher-tests-" + Guid.NewGuid().ToString("N"));
+        var path = Path.Combine(root, "recovered", "fictional.xlsx");
+        using var watcher = new SourceWatcher();
+        try
+        {
+            watcher.Replace([path]);
+            Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+            await File.WriteAllTextAsync(path, "fictional initial");
+            watcher.Replace([path]);
+            var changed = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            watcher.Changed += () => changed.TrySetResult();
+            await File.WriteAllTextAsync(path, "fictional updated");
+            await changed.Task.WaitAsync(TimeSpan.FromSeconds(10));
+        }
+        finally { watcher.Replace([]); if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
 }

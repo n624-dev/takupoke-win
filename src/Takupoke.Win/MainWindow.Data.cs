@@ -61,7 +61,7 @@ public sealed partial class MainWindow
         {
             results.Children.Add(SettingsDescription("未解析")); Add(Card(results)); return;
         }
-        if (analysis.SourceDigest != source?.Digest || analysis.ParserVersion != MaterialCoordinator.ParserVersion(kind))
+        if (!_model.HasCurrentAnalysis(kind))
             results.Children.Add(SettingsDescription("前回の正常な解析結果を表示しています。選択中の原本と異なる場合があります。"));
         var count = analysis.Timetable?.Lessons.Count ?? analysis.Changes?.Count ?? analysis.Special?.Lessons.Count ?? 0;
         results.Children.Add(DataField("最終解析成功", DisplayDateTime(analysis.ParsedAt)));

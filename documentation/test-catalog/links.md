@@ -1,7 +1,7 @@
 # リンク・検索・名称対応
 
 対応関係・宣言名・実行方法のSHA-256：
-`ef43c9d9f6c39ac9e4a22cd47f301fead3991553f1547a506a85af37ea9febec`
+`16b23e2f60a433d5c8320fa0c3810f5b93b4af4d902d26501b81bd161d5b2ed3`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -30,3 +30,5 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `SeparatesOnlyConfirmedMetadata`
 - `ConflictingExplicitMetadataPreservesOriginalSubject`
 - `AmbiguousNormalizedAliasesAreNotGuessed`
+- `ScopedInternationalRuleWinsOverGenericAliasRegardlessOfOrder`
+- `ContextualTeacherAndConfirmedRoomSeparateInEitherOrder`

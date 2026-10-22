@@ -25,14 +25,14 @@ CIはpushのbefore、PRのbase、手動実行ではHEADの親を比較する。
 
 | 対象 | 宣言数 | 検証する環境 |
 |---|---:|---|
-| [時間割変更・曜日・行除外・原文保持](test-catalog/xlsx.md) | 26 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [原本取得・更新・保存・監視](test-catalog/material.md) | 18 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [時間割変更・曜日・行除外・原文保持](test-catalog/xlsx.md) | 28 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [原本取得・更新・保存・監視](test-catalog/material.md) | 20 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [暗号化DB・原子保存・設定・年度期限](test-catalog/storage.md) | 22 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [API・年度別行事・更新失敗](test-catalog/api.md) | 24 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [API・年度別行事・更新失敗](test-catalog/api.md) | 25 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [OIDC・実認証・取消](test-catalog/auth.md) | 5 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [リンク・検索・名称対応](test-catalog/links.md) | 8 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [通知・差分・実配信](test-catalog/notifications.md) | 16 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [時間割・授業名・時刻・日付](test-catalog/timetable.md) | 27 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [リンク・検索・名称対応](test-catalog/links.md) | 10 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [通知・差分・実配信](test-catalog/notifications.md) | 17 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [時間割・授業名・時刻・日付](test-catalog/timetable.md) | 29 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [Strict PDF・文字・罫線・試験・返却](test-catalog/pdf.md) | 13 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [固定iOS参照・独立期待値](test-catalog/parity.md) | 8 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [WinUI画面・行選択・表示領域・実操作・再起動](test-catalog/app-ui.md) | 7 | Windows WinUI x64。Linuxクロスビルドは操作成功に数えない |

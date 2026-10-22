@@ -29,11 +29,11 @@ public sealed record TimetableAnalysis(int SchoolYear, string? Term, IReadOnlyLi
 }
 
 public sealed record ScheduleChange(string ChangeDate, string ClassName, string Period, string BeforeSubject,
-    string AfterSubject, string Teacher, string Room, string Note, string RawText, string CanonicalText)
+    string AfterSubject, string Teacher, string Room, string Note, string RawText, string CanonicalText, string? ChangeKind = null)
 {
     public string DisplayClassName => ClassSelection.Canonical(ClassName);
-    public bool IsCancellation => Note.Normalize(NormalizationForm.FormKC).Trim() == "休講";
-    public bool IsMakeup => Note.Normalize(NormalizationForm.FormKC).Trim() == "補講";
+    public bool IsCancellation => (ChangeKind ?? Note).Normalize(NormalizationForm.FormKC).Trim() == "休講";
+    public bool IsMakeup => (ChangeKind ?? Note).Normalize(NormalizationForm.FormKC).Trim() == "補講";
     public string KindLabel => IsCancellation ? "休講" : IsMakeup ? "補講" : "変更";
     public string DisplayPeriod => string.IsNullOrWhiteSpace(Period) ? "記載なし" : Regex.IsMatch(Period.Trim(), "^[0-9]+$") ? Period.Trim() + "限" : Period;
     public IReadOnlyList<int>? DetailPeriods
@@ -84,6 +84,11 @@ public sealed record SpecialAnalysis(MaterialKind Kind, int SchoolYear, IReadOnl
         if (!CoveredDates.Contains(day.Iso())) return null;
         if (Kind == MaterialKind.ExamReturn && day.Iso() != CoveredDates.FirstOrDefault()) return ScheduleTimes.Normal.GetValueOrDefault(period);
         return PeriodTimes.GetValueOrDefault(period);
+    }
+    public TimeRange? DisplayTime(SpecialLesson lesson, int start, int end)
+    {
+        if (lesson.Period < start || lesson.Period > end || !SchoolDate.TryParse(lesson.Date, out var day) || !Applies(day, lesson.ClassName)) return null;
+        return start <= lesson.SpanStart && end >= lesson.SpanEnd ? TimeFor(lesson) : PeriodTime(day, lesson.Period);
     }
     public TimeRange? TimeFor(SpecialLesson lesson)
     {

@@ -177,6 +177,7 @@ public sealed partial class MainWindow
         {
             var day = days[dayIndex]; var plan = engine.Plan(day); var fullDay = engine.FullDayEventTitle(day, classes);
             var header = Panel(Text(day.ToString("M/d（ddd）", System.Globalization.CultureInfo.GetCultureInfo("ja-JP")), 16));
+            if (plan.WeekdayOverrideWarning is { } warning) header.Children.Add(Text(warning, 12));
             foreach (var schoolEvent in plan.HeaderEvents(fullDay is not null)) header.Children.Add(Text(DisplayText.FullWidthKana(schoolEvent.Title), 12));
             foreach (var cls in classes) foreach (var message in engine.MissingMessages(day, cls)) header.Children.Add(Text(ClassSelection.Display(cls) + "：" + message, 12));
             var dayHeader = Card(header); dayHeader.Padding = new Thickness(12); dayHeader.Margin = new Thickness(3, 0, 3, 6); header.Spacing = 6;

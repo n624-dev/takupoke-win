@@ -93,9 +93,10 @@ public static class ApiPayloads
         ValidateRules(rules, schema);
         return new(revision, version, schema, etag, NotificationDiff.Digest(bytes), published, at, rules);
     }
-    private static void ValidateRules(MappingRules rules, int schema)
+    internal static void ValidateRules(MappingRules rules, int schema)
     {
-        bool Text(string value) => value.Length is > 0 and <= 512 && value == value.Trim();
+        bool Text(string? value) => value is { Length: > 0 and <= 512 } && value == value.Trim();
+        if (rules.Subjects is null || rules.Teachers is null || rules.Rooms is null) throw new ApiException(ApiFailure.InvalidResponse);
         var contexts = rules.TeacherContexts ?? [];
         if (rules.Subjects.Count + rules.Teachers.Count + rules.Rooms.Count + contexts.Count > 10000 || schema == 1 && contexts.Count > 0) throw new ApiException(ApiFailure.InvalidResponse);
         foreach (var group in new[] { (Subject: true, Rules: rules.Subjects), (Subject: false, Rules: rules.Teachers), (Subject: false, Rules: rules.Rooms) })
@@ -103,15 +104,15 @@ public static class ApiPayloads
             var seen = new HashSet<(string, string)>();
             foreach (var rule in group.Rules)
             {
-                if (!Text(rule.Alias) || !Text(rule.FullName) || rule.InternationalStudent == false
+                if (rule is null || !Text(rule.Alias) || !Text(rule.FullName) || rule.InternationalStudent == false
                     || !group.Subject && rule.Classes is not null || rule.InternationalStudent == true && !rule.Alias.StartsWith("留 ", StringComparison.Ordinal)
-                    || rule.Classes is { } classes && (classes.Count is < 1 or > 100 || classes.Any(c => c.Length is < 1 or > 128))) throw new ApiException(ApiFailure.InvalidResponse);
+                    || rule.Classes is { } classes && (classes.Count is < 1 or > 100 || classes.Any(c => c is null || c.Length is < 1 or > 128))) throw new ApiException(ApiFailure.InvalidResponse);
                 foreach (var cls in rule.Classes ?? [""]) if (!seen.Add((rule.Alias, cls))) throw new ApiException(ApiFailure.InvalidResponse);
             }
         }
         var seenContexts = new HashSet<(string, int, string, string)>();
         foreach (var rule in contexts)
-            if (!Text(rule.Alias) || !Text(rule.FullName) || !Text(rule.Subject) || rule.ClassName != rule.ClassName.Trim()
+            if (rule is null || !Text(rule.Alias) || !Text(rule.FullName) || !Text(rule.Subject) || rule.ClassName != rule.ClassName.Trim()
                 || rule.SchoolYear is < 2000 or > 2099 || !ClassSelection.Candidates.Contains(rule.ClassName)
                 || !seenContexts.Add((rule.Alias, rule.SchoolYear, rule.ClassName, MappingRules.Comparable(rule.Subject)))) throw new ApiException(ApiFailure.InvalidResponse);
     }

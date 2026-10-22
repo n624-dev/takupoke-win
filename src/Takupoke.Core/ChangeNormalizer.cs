@@ -8,7 +8,7 @@ public enum ChangeErrorCode
 {
     InvalidArchive, Limit, InvalidXml, MissingSheet, Unsupported, Headers, Date, Year, Classes,
     UnknownAll, Empty, Cancelled, Storage, Formula, FormulaCache, WeekdayMismatch, MergedCells, DateSystem, CellType,
-    WeekdayOnly
+    WeekdayOnly, DefaultYear
 }
 public sealed class ChangeParseException(ChangeErrorCode code, int? row = null) : Exception(MessageFor(code, row))
 {
@@ -20,6 +20,7 @@ public sealed class ChangeParseException(ChangeErrorCode code, int? row = null) 
         ChangeErrorCode.MissingSheet => "「時間割変更」シートが見つからないか、重複しています。",
         ChangeErrorCode.Headers => "必要な見出しがないか、見出しが重複しています。",
         ChangeErrorCode.Date => "日付を確定できません。補完する学校年度を確認してください。",
+        ChangeErrorCode.DefaultYear => "西暦1900〜9998の学校年度を入力してください。",
         ChangeErrorCode.Year => "学年の指定を読み取れません。",
         ChangeErrorCode.Classes => "クラスの指定を読み取れません。",
         ChangeErrorCode.UnknownAll => "「全」の対象クラスをファイル内の記載から確定できません。",
@@ -51,8 +52,12 @@ public static class ChangeNormalizer
         var text = Text(value);
         return Regex.IsMatch(text, @"^-?[0-9]+\.0+$") ? text.Split('.')[0] : text;
     }
-    public static int EffectiveSchoolYear(string? configured, DateOnly today) =>
-        int.TryParse(configured?.Trim(), out var year) && year is >= 1900 and <= 9998 ? year : today.SchoolYear();
+    public static int? EffectiveSchoolYear(string? configured, DateOnly today)
+    {
+        var text = configured?.Trim();
+        if (string.IsNullOrEmpty(text)) return today.SchoolYear();
+        return text.All(char.IsAsciiDigit) && int.TryParse(text, out var year) && year is >= 1900 and <= 9998 ? year : null;
+    }
     public static IReadOnlyList<string> Years(string value)
     {
         var text = Text(value);
@@ -152,6 +157,7 @@ public static class ChangeNormalizer
             }
             catch (ChangeParseException error) { throw new ChangeParseException(error.Code, i + 1); }
         }
+        if (defaultYear is not null && defaultYear is < 1900 or > 9998) throw new ChangeParseException(ChangeErrorCode.DefaultYear);
         var output = new List<ScheduleChange>();
         long textBytes = 0;
         foreach (var row in table)
@@ -189,7 +195,7 @@ public static class ChangeNormalizer
                     var canonical = string.Join(" | ", fields.Select(Text).Where(f => f.Length > 0));
                     textBytes += fields.Sum(f => (long)Encoding.UTF8.GetByteCount(f)) + Encoding.UTF8.GetByteCount(canonical);
                     if (output.Count >= MaximumRecords || textBytes > MaximumTextBytes) throw new ChangeParseException(ChangeErrorCode.Limit);
-                    output.Add(new(date, name, period, before, after, teacher, room, note, raw, canonical));
+                    output.Add(new(date, name, period, before, after, teacher, room, note, raw, canonical, content));
                 }
             }
         }

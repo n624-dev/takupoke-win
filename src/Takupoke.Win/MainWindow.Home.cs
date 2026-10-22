@@ -115,7 +115,7 @@ public sealed partial class MainWindow
     {
         var stale = _model.Materials.Where(item => item.Value.AcquisitionAttempt?.Failure is not null
             || item.Value.ParseAttempt?.Failure is not null
-            || item.Value.Source is { } source && item.Value.Analysis is { } analysis && (source.Digest != analysis.SourceDigest || analysis.ParserVersion != MaterialCoordinator.ParserVersion(item.Key)))
+            || item.Value.Source is { } source && item.Value.Analysis is { } analysis && !_model.HasCurrentAnalysis(item.Key))
             .ToArray();
         if (stale.Length == 0) return;
         var warnings = Panel(ScheduleHeading("時間割ファイルの確認が必要です", "info"));
@@ -149,6 +149,7 @@ public sealed partial class MainWindow
         if (_model.EventStorageMessage is { } storageFailure) Add(Card(Text(storageFailure)));
         if (classes.Length == 0) Add(ScheduleNotice("クラスを選んでください", "", "クラスを選択", "people", ChooseClasses));
         var engine = _model.HomeEngine; var day = _model.Today;
+        if (engine.Plan(day).WeekdayOverrideWarning is { } overrideWarning) Add(Card(Text(overrideWarning)));
         var eventTitles = engine.Plan(day).Events.Select(e => e.Title).ToArray();
         if (eventTitles.Length > 0) Add(Card(Panel(ScheduleHeading("今日の学校行事", "calendar"), Text(DisplayText.FullWidthKana(string.Join("・", eventTitles))))));
         if (classes.Length > 0)

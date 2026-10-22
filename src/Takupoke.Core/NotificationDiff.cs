@@ -10,12 +10,17 @@ public sealed record PendingNotice(string Fingerprint, int Count, IReadOnlyList<
 public sealed record NotificationBaseline(IReadOnlyList<ChangeFingerprint>? Changes = null,
     IReadOnlyDictionary<string, string>? SpecialDigests = null, IReadOnlyDictionary<string, PendingNotice>? Pending = null);
 
+public enum NotificationSourceState { Unavailable, Absent, Available }
+
 public static class NotificationDiff
 {
     public static IReadOnlyList<ChangeFingerprint> Fingerprints(IEnumerable<ScheduleChange> changes) => changes.Select(change =>
     {
         var period = change.DetailPeriods is { } periods ? string.Join(",", periods) : change.Period;
-        var fields = new[] { change.ChangeDate, change.DisplayClassName, period, change.BeforeSubject, change.AfterSubject, change.Teacher, change.Room, change.Note };
+        var fields = new List<string> { change.ChangeDate, change.DisplayClassName, period, change.BeforeSubject, change.AfterSubject, change.Teacher, change.Room, change.Note };
+        var oldKind = change.Note.Normalize(NormalizationForm.FormKC).Trim();
+        if (oldKind is not ("休講" or "補講")) oldKind = "変更";
+        if (oldKind != change.KindLabel) fields.Add(change.KindLabel);
         return new ChangeFingerprint(change.ChangeDate, change.DisplayClassName, period, Digest(JsonSerializer.SerializeToUtf8Bytes(fields)));
     }).Distinct().OrderBy(f => f.Date, StringComparer.Ordinal).ThenBy(f => f.ClassName, StringComparer.Ordinal).ThenBy(f => f.Period, StringComparer.Ordinal)
         .ThenBy(f => f.Fingerprint, StringComparer.Ordinal).ToArray();
@@ -33,8 +38,12 @@ public static class NotificationDiff
         targets.Where(c => SchoolDate.TryParse(c.Date, out var day) && day >= today && classes.Contains(c.ClassName)).Distinct()
             .OrderBy(c => c.Date, StringComparer.Ordinal).ThenBy(c => c.ClassName, StringComparer.Ordinal).ThenBy(c => c.Period, StringComparer.Ordinal).ToArray();
     public static NotificationBaseline Reconcile(NotificationBaseline previous, IReadOnlyList<ChangeFingerprint>? changes,
-        IReadOnlyDictionary<string, string> specialDigests, DateOnly today, IReadOnlySet<string> classes, bool notifyChanges, bool notifySpecials)
+        IReadOnlyDictionary<string, string> specialDigests, DateOnly today, IReadOnlySet<string> classes, bool notifyChanges, bool notifySpecials,
+        IReadOnlyDictionary<string, NotificationSourceState>? availability = null)
     {
+        NotificationSourceState State(string kind) => availability?.GetValueOrDefault(kind) ??
+            (kind == "changes" ? changes is null ? NotificationSourceState.Unavailable : NotificationSourceState.Available
+                : specialDigests.ContainsKey(kind) ? NotificationSourceState.Available : NotificationSourceState.Unavailable);
         var pending = new Dictionary<string, PendingNotice>(previous.Pending ?? new Dictionary<string, PendingNotice>());
         var specials = new Dictionary<string, string>(previous.SpecialDigests ?? new Dictionary<string, string>());
         if (pending.TryGetValue("changes", out var notice))
@@ -42,10 +51,11 @@ public static class NotificationDiff
             // Older saved notices lack the targets needed to determine whether a retry
             // is still relevant. Keep the baseline, but safely discard those notices.
             var targets = EligibleTargets(notice.ChangeTargets ?? [], today, classes);
-            if (!notifyChanges || targets.Count == 0) pending.Remove("changes");
+            if (!notifyChanges || State("changes") == NotificationSourceState.Absent || targets.Count == 0
+                || State("changes") == NotificationSourceState.Available && changes is not null && (previous.Changes is null || notice.Fingerprint != ChangeRevision(previous.Changes))) pending.Remove("changes");
             else pending["changes"] = notice with { Count = targets.Count, ChangeTargets = targets };
         }
-        if (changes is not null)
+        if (State("changes") == NotificationSourceState.Available && changes is not null)
         {
             var targets = ChangedTargets(previous.Changes, changes, today, classes);
             if (notifyChanges && targets.Count > 0)
@@ -53,18 +63,24 @@ public static class NotificationDiff
                 // Collect unsent slots across updates, counting a repeatedly changed slot once.
                 var retained = pending.GetValueOrDefault("changes")?.ChangeTargets ?? [];
                 targets = EligibleTargets(retained.Concat(targets), today, classes);
-                pending["changes"] = new(Digest(JsonSerializer.SerializeToUtf8Bytes(changes.Select(c => c.Fingerprint).Order(StringComparer.Ordinal))), targets.Count, targets);
+                pending["changes"] = new(ChangeRevision(changes), targets.Count, targets);
             }
         }
+        foreach (var kind in new[] { "exam", "examReturn" })
+            if (State(kind) == NotificationSourceState.Absent) { pending.Remove(kind); specials.Remove(kind); }
         foreach (var pair in specialDigests)
         {
+            if (State(pair.Key) != NotificationSourceState.Available) continue;
             if (notifySpecials && specials.TryGetValue(pair.Key, out var old) && old != pair.Value) pending[pair.Key] = new(pair.Value, 1);
+            else if (pending.GetValueOrDefault(pair.Key)?.Fingerprint != pair.Value) pending.Remove(pair.Key);
             specials[pair.Key] = pair.Value;
         }
         if (!notifyChanges) pending.Remove("changes");
         if (!notifySpecials) { pending.Remove("exam"); pending.Remove("examReturn"); }
-        return new(changes ?? previous.Changes, specials, pending);
+        return new(State("changes") == NotificationSourceState.Absent ? null : changes ?? previous.Changes, specials, pending);
     }
+    public static string ChangeRevision(IReadOnlyList<ChangeFingerprint> changes) =>
+        Digest(JsonSerializer.SerializeToUtf8Bytes(changes.Select(c => c.Fingerprint).Order(StringComparer.Ordinal)));
     public static string Digest(ReadOnlySpan<byte> bytes) => Convert.ToHexStringLower(SHA256.HashData(bytes));
     public static string Digest(string text) => Digest(Encoding.UTF8.GetBytes(text));
 }

@@ -212,7 +212,7 @@ public sealed partial class MainWindow
     private Border MaterialCard(MaterialKind kind)
     {
         var snapshot = _model.Materials.GetValueOrDefault(kind); var source = snapshot?.Source;
-        var state = snapshot?.AnalysisStatus(kind) ?? "未選択";
+        var state = snapshot?.AnalysisStatus(kind, ChangeNormalizer.EffectiveSchoolYear(_model.Preferences.DefaultSchoolYear, _model.Today)) ?? "未選択";
         var summary = SettingsDescription(source is null ? state : source.OriginalName + "\n" + state);
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(summary, "material-summary-" + kind);
         if (snapshot?.AcquisitionAttempt?.Failure is not null || snapshot?.ParseAttempt?.Failure is not null) summary.Foreground = WarningBrush;

@@ -26,12 +26,14 @@ public sealed record MappingRules(IReadOnlyList<MappingRule> Subjects, IReadOnly
     }
     public bool IsInternational(string source, string className)
     {
-        MappingRule? Preferred(IEnumerable<MappingRule> rules) => rules.FirstOrDefault(r => r.Classes?.Contains(className) == true)
-            ?? rules.FirstOrDefault(r => r.Classes is null);
-        var exact = Preferred(Subjects.Where(r => r.Alias == source));
-        if (exact is not null) return exact.InternationalStudent == true;
-        return Preferred(Subjects.Where(r => r.InternationalStudent == true && r.Alias.StartsWith("留 ", StringComparison.Ordinal)
-            && r.Alias[2..] == source))?.InternationalStudent == true;
+        var key = Comparable(source);
+        if (key.Length == 0) return false;
+        var candidates = Subjects.Where(r => (r.Classes is null || r.Classes.Contains(className))
+            && (Comparable(r.Alias) == key || r.InternationalStudent == true && Comparable(r.Alias).StartsWith("留 ", StringComparison.Ordinal)
+                && Comparable(r.Alias)[2..] == key)).ToArray();
+        var specific = candidates.Where(r => r.Classes?.Contains(className) == true).ToArray();
+        var flags = (specific.Length > 0 ? specific : candidates).Select(r => r.InternationalStudent).OfType<bool>().Distinct().ToArray();
+        return flags.Length == 1 && flags[0];
     }
     private static string? Match(string source, IReadOnlyList<MappingRule> rules, string? className = null)
     {
@@ -95,24 +97,29 @@ public sealed record MappingRules(IReadOnlyList<MappingRule> Subjects, IReadOnly
     }
     public LessonNames SeparateChangeField(string source, string? className = null, int? year = null)
     {
-        var remaining = source.Trim();
-        var teacher = "";
-        var room = "";
-        while (remaining.Length > 0 && remaining[^1] is ')' or '）')
+        static (string Subject, string Token)? Suffix(string value)
         {
-            var closing = remaining[^1];
-            var opening = closing == ')' ? '(' : '（';
-            var depth = 0;
-            var openingIndex = -1;
-            for (var i = remaining.Length - 1; i >= 0; i--)
+            if (value.Length == 0 || value[^1] is not (')' or '）')) return null;
+            var closing = value[^1]; var opening = closing == ')' ? '(' : '（'; var depth = 0;
+            for (var i = value.Length - 1; i >= 0; i--)
             {
-                if (remaining[i] == closing) depth++;
-                else if (remaining[i] == opening && --depth == 0) { openingIndex = i; break; }
+                if (value[i] == closing) depth++;
+                else if (value[i] == opening && --depth == 0) return (value[..i].Trim(), value[(i + 1)..^1].Trim());
             }
-            if (openingIndex < 0 || depth != 0) break;
-            var token = remaining[(openingIndex + 1)..^1].Trim();
-            var subject = remaining[..openingIndex].Trim();
-            var isTeacher = Confirms(token, Teachers, alias => className is null ? null : ContextualTeacher(alias, subject, className, year));
+            return null;
+        }
+        string ContextualSubject(string subject)
+        {
+            if (className is null || CanonicalSubject(subject, className) is not null || Suffix(subject) is not { } tail
+                || !Confirms(tail.Token, Rooms) || Confirms(tail.Token, Teachers, alias => ContextualTeacher(alias, tail.Subject, className, year))
+                || CanonicalSubject(tail.Subject, className) is null) return subject;
+            return tail.Subject;
+        }
+        var remaining = source.Trim(); var teacher = ""; var room = "";
+        while (Suffix(remaining) is { } tail)
+        {
+            var token = tail.Token; var subject = tail.Subject;
+            var isTeacher = Confirms(token, Teachers, alias => className is null ? null : ContextualTeacher(alias, ContextualSubject(subject), className, year));
             var isRoom = Confirms(token, Rooms);
             if (isTeacher == isRoom) break;
             if (isTeacher) { if (teacher.Length > 0) break; teacher = token; }

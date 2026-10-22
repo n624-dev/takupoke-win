@@ -52,9 +52,26 @@ public sealed class SharedDataUpdater(ApiClient api, SchoolDataStore store)
     private async Task<string?> InstalledAsync(DataSet kind, SchoolLease lease, CancellationToken token) => kind switch
     {
         DataSet.Links => (await store.ReadAsync<SavedLinks>(lease, "api.links", token))?.Revision,
-        DataSet.Mapping => (await store.ReadAsync<SavedMapping>(lease, "api.mapping", token))?.Revision,
+        DataSet.Mapping => (await LoadMappingAsync(lease, token))?.Revision,
         _ => (await LoadTimesAsync(lease, token))?.Revision
     };
+    public async Task<SavedMapping?> LoadMappingAsync(SchoolLease lease, CancellationToken token = default)
+    {
+        SavedMapping? saved;
+        try { saved = await store.ReadAsync<SavedMapping>(lease, "api.mapping", token); }
+        catch (SchoolDataStore.InvalidPayloadException) { return null; }
+        if (saved is null) return null;
+        if (saved.Revision is null || !ApiPayloads.ValidRevision(saved.Revision) || saved.Version is null
+            || !System.Text.RegularExpressions.Regex.IsMatch(saved.Version, "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
+            || saved.SchemaVersion is not (1 or 2) || saved.Rules is null
+            || saved.ArchiveETag is null || !ApiPayloads.ValidETag(saved.ArchiveETag)
+            || saved.ArchiveSha256 is null || !ApiPayloads.HexDigest(saved.ArchiveSha256)
+            || !DateTimeOffset.TryParseExact(saved.PublishedAt, "yyyy-MM-dd'T'HH:mm:ss'Z'", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.AssumeUniversal, out _)) return null;
+        try { ApiPayloads.ValidateRules(saved.Rules, saved.SchemaVersion); }
+        catch (ApiException) { return null; }
+        return saved;
+    }
     public async Task<SavedTimes?> LoadTimesAsync(SchoolLease lease, CancellationToken token = default)
     {
         SavedTimes? saved;

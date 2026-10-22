@@ -21,8 +21,9 @@ public sealed record PositionedBlock(ScheduleBlock Block, int Lane);
 public sealed record ScheduleSlot(IReadOnlyList<NormalLesson> BaseLessons, IReadOnlyList<SpecialContent> SpecialLessons,
     IReadOnlyList<ScheduleChange> Changes);
 public sealed record DayPlan(IReadOnlyList<SchoolEvent> Events, bool IsNoClass, bool IsSupplementary,
-    int? WeekdayOverride, bool ApiNoClass, bool ApiTest, bool ApiTestReturn, IReadOnlyList<string> WeekendEventLabels)
+    int? WeekdayOverride, bool ApiNoClass, bool ApiTest, bool ApiTestReturn, IReadOnlyList<string> WeekendEventLabels, bool WeekdayOverrideConflict = false)
 {
+    public string? WeekdayOverrideWarning => WeekdayOverrideConflict ? "曜日振替を確定できません" : null;
     public IReadOnlyList<string> FullDayLabels => Events.Where(e =>
         (!e.NeedsReview && e.Classification is EventClassification.NoClass or EventClassification.SchoolEventNoClass) || e.Tag == "補講日")
         .Select(e => e.Title.Trim()).Where(t => t.Length > 0).Distinct().Order(StringComparer.Ordinal).ToArray();
@@ -44,7 +45,7 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
         return new(events, reliable.Any(e => e.Classification is EventClassification.NoClass or EventClassification.SchoolEventNoClass),
             reliable.Any(e => e.Classification == EventClassification.Supplementary), overrides.Length == 1 ? overrides[0] : null,
             events.Any(e => e.Tag is "授業なし" or "行事（授業なし）"), events.Any(e => e.Tag == "テスト"), events.Any(e => e.Tag == "テスト返却"),
-            day.SchoolWeekday() > 5 ? events.Where(e => e.Tag is "行事（授業なし）" or "補講日").Select(e => e.Title).Distinct().Order(StringComparer.Ordinal).ToArray() : []);
+            day.SchoolWeekday() > 5 ? events.Where(e => e.Tag is "行事（授業なし）" or "補講日").Select(e => e.Title).Distinct().Order(StringComparer.Ordinal).ToArray() : [], overrides.Length > 1);
     }
 
     public ScheduleSlot Slot(DateOnly day, int period, string className)
@@ -151,9 +152,11 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
     public TimeRange? SlotTime(DateOnly day, string className, int period)
     {
         var slot = Slot(day, period, className);
-        if (slot.SpecialLessons.Count > 0) return UniqueTime(slot.SpecialLessons.Select(s => s.Time));
+        if (slot.SpecialLessons.Count > 0) return UniqueTime(slot.SpecialLessons.Select(item =>
+            UniqueTime(Specials.Where(s => s.Kind == item.Kind && s.Lessons.Contains(item.Lesson))
+                .Select(s => s.DisplayTime(item.Lesson, period, period)))));
         var sourceTimes = Specials.SelectMany(s => s.Lessons.Where(l => l.Date == day.Iso() && l.ClassName == className && l.Period == period)
-            .Select(s.TimeFor)).OfType<TimeRange>().Distinct().ToArray();
+            .Select(l => s.DisplayTime(l, period, period))).OfType<TimeRange>().Distinct().ToArray();
         if (sourceTimes.Length > 0) return sourceTimes.Length == 1 ? sourceTimes[0] : null;
         var applicable = Specials.Where(s => s.Applies(day, className)).ToArray();
         if (applicable.Length > 0) return UniqueTime(applicable.Select(s => s.PeriodTime(day, period)));
@@ -171,12 +174,12 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
     {
         if (block.Content is SpecialContent item)
         {
-            if (block.StartPeriod == block.EndPeriod) return item.Time;
+            if (block.StartPeriod == block.EndPeriod && item.Lesson.SpanStart == item.Lesson.SpanEnd) return item.Time;
             var ranges = Specials.Where(s => s.Kind == item.Kind && s.Lessons.Contains(item.Lesson)).Select(source =>
             {
                 var clocks = Enumerable.Range(block.StartPeriod, block.EndPeriod - block.StartPeriod + 1).Select(period =>
                     UniqueTime(source.Lessons.Where(l => l.Date == day.Iso() && l.ClassName == className && l.Period == period
-                        && SameNames(l.Names, item.Names)).Select(source.TimeFor))).ToArray();
+                        && SameNames(l.Names, item.Names)).Select(l => source.DisplayTime(l, block.StartPeriod, block.EndPeriod)))).ToArray();
                 return clocks.Length > 0 && clocks.All(t => t is not null) ? new TimeRange(clocks[0]!.Start, clocks[^1]!.End) : null;
             });
             return UniqueTime(ranges);

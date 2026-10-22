@@ -45,4 +45,29 @@ public sealed class MappingRulesTests
         Assert.Null(rules.CanonicalSubject("A", "1_CN"));
         Assert.Equal("架空科目B", rules.Apply(new("A"), "1_CN").SubjectFullName);
     }
+
+    [Fact]
+    public void ScopedInternationalRuleWinsOverGenericAliasRegardlessOfOrder()
+    {
+        MappingRule generic = new("架空科目A", "架空正式科目A");
+        MappingRule scoped = new("留 架空科目A", "架空正式科目A", ["1_CN"], true);
+        foreach (var rules in new[] { new MappingRules([generic, scoped], [], []), new MappingRules([scoped, generic], [], []) })
+        {
+            Assert.True(rules.IsInternational("架空科目A", "1_CN"));
+            Assert.False(rules.IsInternational("架空科目A", "2_CN"));
+            Assert.Equal("架空正式科目A", rules.Apply(new("架空科目A"), "1_CN").SubjectFullName);
+        }
+    }
+    [Theory]
+    [InlineData("科A（教C）（室A）")]
+    [InlineData("科A（室A）（教C）")]
+    [InlineData("科A(室A)(教C)")]
+    public void ContextualTeacherAndConfirmedRoomSeparateInEitherOrder(string source)
+    {
+        Assert.Equal(new LessonNames("科A", "教C", "室A"), Rules.SeparateChangeField(source, "1_CN", 2032));
+        Assert.Contains("教C", Rules.SeparateChangeField(source, "1_CN", 2033).Subject);
+        Assert.Contains("教C", Rules.SeparateChangeField(source, "2_CN", 2032).Subject);
+        Assert.Contains("未確認", Rules.SeparateChangeField("科A（未確認）（教C）", "1_CN", 2032).Subject);
+    }
+
 }

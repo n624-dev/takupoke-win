@@ -206,4 +206,50 @@ public sealed class TimetableEngineTests
         Assert.Equal(reference.Monday(), bounds.Lower);
         Assert.True(bounds.Upper >= bounds.Lower);
     }
+
+    [Theory]
+    [InlineData(MaterialKind.Exam)]
+    [InlineData(MaterialKind.ExamReturn)]
+    public void ReplacedMergedSpecialUsesVerifiedClocksForRemainingFragments(MaterialKind kind)
+    {
+        var clocks = new Dictionary<int, TimeRange> { [1] = new("09:00", "09:20"), [2] = new("09:30", "09:50"), [3] = new("10:00", "10:20") };
+        var source = new SpecialAnalysis(kind, 2032, [Day.Iso()], ["1_CN"], clocks,
+            Enumerable.Range(1, 3).Select(p => new SpecialLesson(Day.Iso(), "1_CN", p, 1, 3, new("09:00", "10:20"), ["架空特別科目A"], 1)).ToArray());
+        foreach (var replaced in new[] { "1", "3", "2", "1,2", "" })
+        {
+            var engine = new TimetableEngine(new(Changes: replaced.Length == 0 ? [] : [Change(replaced)], Specials: [source]));
+            foreach (var block in engine.Blocks(Day, "1_CN").Where(b => b.Content is SpecialContent))
+            {
+                var expected = block.StartPeriod == 1 && block.EndPeriod == 3 ? new TimeRange("09:00", "10:20")
+                    : new TimeRange(clocks[block.StartPeriod].Start, clocks[block.EndPeriod].End);
+                Assert.Equal(expected, engine.CardTime(Day, "1_CN", block));
+                if (block.StartPeriod > 1) Assert.False(engine.IsInProgress(Day, "1_CN", block, new(2032, 4, 5, 9, 5, 0, TimeSpan.FromHours(9))));
+            }
+        }
+        var missing = source with { PeriodTimes = new Dictionary<int, TimeRange>() };
+        var unknown = new TimetableEngine(new(Changes: [Change("1,2")], Specials: [missing]));
+        Assert.Null(unknown.CardTime(Day, "1_CN", unknown.Blocks(Day, "1_CN").Single(b => b.Content is SpecialContent)));
+        Assert.All(source.Lessons, l => Assert.Equal(new TimeRange("09:00", "10:20"), l.RecordedTime));
+    }
+    [Fact]
+    public void ConflictingOverridesWarnAndUseRealWeekdayWithoutLosingOtherTags()
+    {
+        SchoolEvent Override(int weekday) => new(Day.Iso(), "架空振替A", "曜日振替", Day.AddDays(2).Iso(), EventClassification.WeekdayOverride, weekday);
+        var first = Override(2); var second = Override(3);
+        var timetable = Timetable(Lesson(1));
+        var events = new[] { first, second, new SchoolEvent(Day.Iso(), "架空メモA", "行事メモ") };
+        var engine = new TimetableEngine(new(timetable, Events: events));
+        Assert.Equal("曜日振替を確定できません", engine.Plan(Day).WeekdayOverrideWarning);
+        Assert.IsType<NormalContent>(Assert.Single(engine.Blocks(Day, "1_CN")).Content);
+        Assert.Equal("曜日振替を確定できません", engine.Plan(Day.AddDays(1)).WeekdayOverrideWarning);
+        Assert.Null(new TimetableEngine(new(timetable, Events: [first, first])).Plan(Day).WeekdayOverrideWarning);
+        Assert.Null(new TimetableEngine(new(timetable, Events: [first])).Plan(Day).WeekdayOverrideWarning);
+        Assert.Null(new TimetableEngine(new(timetable)).Plan(Day).WeekdayOverrideWarning);
+        Assert.Equal(3, engine.Plan(Day).Events.Count);
+        var supplementary = new TimetableEngine(new(timetable, Events: [first, second, new(Day.Iso(), "架空補講A", "補講日", Classification: EventClassification.Supplementary)]));
+        Assert.Empty(supplementary.Blocks(Day, "1_CN"));
+        Assert.True(supplementary.Plan(Day).IsSupplementary);
+        Assert.Equal("曜日振替を確定できません", supplementary.Plan(Day).WeekdayOverrideWarning);
+    }
+
 }

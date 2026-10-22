@@ -252,4 +252,30 @@ public sealed class SharedDataUpdaterTests
         finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
     }
 
+
+    [Theory]
+    [InlineData("\"fictional invalid mapping\"")]
+    [InlineData("{\"revision\":\"invalid\",\"rules\":{\"subjects\":[],\"teachers\":[],\"rooms\":[]}}")]
+    [InlineData("{\"revision\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\"schemaVersion\":2,\"rules\":null}")]
+    public async Task CorruptMappingCanBeAuthenticatedAndReplacedWithoutPrematureDeletion(string json)
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-mapping-tests-" + Guid.NewGuid().ToString("N"));
+        using var protector = new Protector();
+        try
+        {
+            await using var store = new SchoolDataStore(root, protector); var lease = await store.BeginAsync();
+            var corrupt = System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(json);
+            await store.WriteAsync(lease, "api.mapping", corrupt);
+            using var http = new HttpClient(new Handler());
+            var updater = new SharedDataUpdater(new(http, new("https://example.invalid/")), store);
+            Assert.Null(await updater.LoadMappingAsync(lease));
+            Assert.True((await updater.CheckDetailedAsync(DataSet.Mapping)).Revisions[DataSet.Mapping].Changed);
+            await Assert.ThrowsAsync<OperationCanceledException>(() => updater.UpdateAsync(_ => throw new OperationCanceledException()));
+            Assert.Equal(corrupt.GetRawText(), (await store.ReadAsync<System.Text.Json.JsonElement>(lease, "api.mapping")).GetRawText());
+            Assert.True((await updater.UpdateAsync(_ => Task.FromResult("fake-token"))).Single(r => r.Kind == DataSet.Mapping).Updated);
+            Assert.Equal(Revision, (await updater.LoadMappingAsync(lease))!.Revision);
+        }
+        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
+
 }

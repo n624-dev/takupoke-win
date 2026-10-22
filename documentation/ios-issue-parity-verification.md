@@ -30,3 +30,12 @@ change-row-exclusion-verification.mdの既存「SQLite接続の既定プール�
 - #46：単独特別カードは保存された自分の時刻、結合カードはkindと元授業が一致する解析に限定した各コマの時刻を使う。欠落を別資料から補わず、共通欄と変更カードの曖昧さは維持する。単独／同時／逆順／同時刻／異なる時刻・結合・時刻欠落・授業中を独立した架空入力で検査する。
 
 LinuxのCore187件・統合149件は失敗0。固定iOS fixture・生成元・hashは未変更であり、追加仕様に一致するカード時計だけ明示した期待値を使う。Swift原参照の再生成照合は既存CIで維持する。追加分のWindows CIはこれから確認する。
+
+### 2026-10-22 追加Issue 初回ローカル失敗（対処前記録）
+
+- source ebe0848 からの未コミット追加Issue差分、Debian13 / .NET10.0.402、Core test初回（ログ /tmp/additional-win-core.log）。195件中193成功・2失敗。
+- PartialStartupPreservesPersistedPendingButConfirmedAbsenceInvalidatesIt はJSON再読込後のPendingNotice dictionary比較で、同じ値のChangeTargetsがListとarrayで異なるとされた。観測内容を先に記録し、原因・対処はまだ確定していない。
+- ConflictingOverridesWarnAndUseRealWeekdayWithoutLosingOtherTags は警告一致後、BlocksのAssert.Singleで0件だった。他タグとしてSupplementaryを同時に与えた条件。対処前に現行・過去仕様を照合する。次の試行前に根拠と修正をpushする。
+
+- 既存検証記録全件とebe0848のSlot/NotificationDiffTestsを照合した。Supplementaryは従来から通常授業を抑制する確定仕様で、振替競合のfallbackがこのタグを無効にする仕様ではない。回帰では行事メモを併記して実曜日授業を確認し、補講日併記では通常授業が抑制され警告・タグが残ることを別に要求する。
+- PendingNoticeはIReadOnlyListを含むrecordなので、再読込で生成されたListとreconcileのarrayはrecord参照比較では等値にならない。件数・キー・fingerprint・count・全target列をそれぞれ検証する。期待する保留3要素等を減らさず、製品変更でテストへ合わせない。

@@ -1,7 +1,7 @@
 # 時間割変更・曜日・行除外・原文保持
 
 対応関係・宣言名・実行方法のSHA-256：
-`d68467f36bfb5651eab04a3b9769317b43840619042de6400b46ed5e1b7537e5`
+`5c528fe7672112859198187622c6988376f814d2b7c2a444b30132d58fa8d1b4`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -57,3 +57,5 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `RejectsUnsupportedOrAmbiguousStructures`
 - `CancellationStopsReading`
 - `ZipBoundsApplyBeforeReadingDocumentParts`
+- `WorkbookKindIsIndependentOfRemarksAndEscapesDecodeOnlyOnce`
+- `WorkbookMakeupWithRemarksKeepsPriorityOverFollowingCancellation`

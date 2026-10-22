@@ -12,13 +12,13 @@ namespace Takupoke.Win.ViewModels;
 
 public sealed record MaterialSnapshot(SourceRecord? Source, MaterialAnalysis? Analysis, MaterialAttempt? ParseAttempt, MaterialAttempt? AcquisitionAttempt)
 {
-    public string AnalysisStatus(MaterialKind kind)
+    public string AnalysisStatus(MaterialKind kind, int? schoolYear = null)
     {
         if (Source is null) return "未選択";
         var previous = Analysis is null ? "" : "（前回結果あり）";
         if (AcquisitionAttempt?.Failure is not null) return "取得失敗" + previous;
         if (ParseAttempt?.Failure is not null) return "解析失敗" + previous;
-        return Analysis is not null && Analysis.SourceDigest == Source.Digest && Analysis.ParserVersion == MaterialCoordinator.ParserVersion(kind)
+        return MaterialCoordinator.AnalysisMatches(Analysis, Source, kind, schoolYear)
             ? "解析済み" : "未解析" + previous;
     }
 }
@@ -73,6 +73,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public IReadOnlyDictionary<DataSet, ApiFailure> RevisionFailures => _revisionChecks.Failures;
     public IReadOnlyList<int> SavedEventYears { get; private set; } = [];
     public IReadOnlyDictionary<int, SavedEvents> EventRecords { get; private set; } = new Dictionary<int, SavedEvents>();
+    public bool HasCurrentAnalysis(MaterialKind kind) => Materials.TryGetValue(kind, out var item)
+        && MaterialCoordinator.AnalysisMatches(item.Analysis, item.Source, kind,
+            ChangeNormalizer.EffectiveSchoolYear(Preferences.DefaultSchoolYear, Today));
     public DateOnly Today => SchoolDate.InJapan(DateTimeOffset.UtcNow);
     public DateOnly WeekStart { get; set; }
     public SchedulePresentation Presentation => new(Data, Mappings);
@@ -158,7 +161,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         }
         if (!_notificationsInitialized) { _notificationSink.Initialize(); _notificationsInitialized = true; }
     }
-    private int ParserYear => int.TryParse(Preferences.DefaultSchoolYear, out var year) && year is >= 1900 and <= 9998 ? year : Today.SchoolYear();
+    private int ParserYear => ChangeNormalizer.EffectiveSchoolYear(Preferences.DefaultSchoolYear, Today)
+        ?? throw new ChangeParseException(ChangeErrorCode.DefaultYear);
+    private int ParserYearFor(MaterialKind kind) => kind == MaterialKind.Changes ? ParserYear : Today.SchoolYear();
     public Task RefreshAsync() => RefreshAsync(automatic: false);
     public Task RefreshAutomaticallyAsync(bool force = false)
     {
@@ -190,7 +195,10 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         await _school.BeginAsync(token);
         var incomplete = false;
         foreach (var kind in Enum.GetValues<MaterialKind>())
-            if ((await _materials.RefreshAsync(kind, ParserYear, token)).Error is not null) incomplete = true;
+        {
+            if (kind == MaterialKind.Changes && ChangeNormalizer.EffectiveSchoolYear(Preferences.DefaultSchoolYear, Today) is null) { incomplete = true; continue; }
+            if ((await _materials.RefreshAsync(kind, ParserYearFor(kind), token)).Error is not null) incomplete = true;
+        }
         if (!OfflineTest)
         {
             ApplyRevisionCheck(await _shared.CheckDetailedAsync(token));
@@ -218,13 +226,13 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public Task SelectAsync(MaterialKind kind, string path) => RunAsync(async token =>
     {
         ResumeFileMonitoring();
-        var result = await _materials.SelectAsync(kind, path, ParserYear, token); await ReloadAsync(token);
+        var result = await _materials.SelectAsync(kind, path, ParserYearFor(kind), token); await ReloadAsync(token);
         Status = result.Error ?? (result.Parsed ? "資料の解析結果を保存しました。" : "資料を保存しました。");
     });
     public Task ReparseAsync(MaterialKind kind) => RunAsync(async token =>
     {
         ResumeFileMonitoring();
-        var result = await _materials.ReparseAsync(kind, ParserYear, token); await ReloadAsync(token);
+        var result = await _materials.ReparseAsync(kind, ParserYearFor(kind), token); await ReloadAsync(token);
         Status = result.Error ?? "保存した資料を再解析しました。";
     });
     public Task UpdateSharedAsync() => RunAsync(async token =>
@@ -293,7 +301,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         Status = "選んだ行を除外して読み込みました。";
     });
     public Task ReacquireAsync(MaterialKind kind) => RunAsync(async token =>
-    { ResumeFileMonitoring(); var result = await _materials.RefreshAsync(kind, ParserYear, token); await ReloadAsync(token); Status = result.Error ?? "同じ原本を確認しました。"; });
+    { ResumeFileMonitoring(); var result = await _materials.RefreshAsync(kind, ParserYearFor(kind), token); await ReloadAsync(token); Status = result.Error ?? "同じ原本を確認しました。"; });
     public SavedLinks? LinksRecord { get; private set; }
     public SavedMapping? MappingRecord { get; private set; }
     public SavedTimes? TimesRecord { get; private set; }
@@ -315,7 +323,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         foreach (var kind in Enum.GetValues<MaterialKind>()) snapshots[kind] = new(
             await _school.ReadAsync<SourceRecord>(lease, "selection." + kind, token), await _school.ReadAsync<MaterialAnalysis>(lease, "analysis." + kind, token),
             await _school.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token), await _school.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, token));
-        var mappingRecord = await _school.ReadAsync<SavedMapping>(lease, "api.mapping", token); var mappings = mappingRecord?.Rules;
+        var mappingRecord = await _shared.LoadMappingAsync(lease, token); var mappings = mappingRecord?.Rules;
         var linksRecord = await _school.ReadAsync<SavedLinks>(lease, "api.links", token); var links = linksRecord?.Payload.Validated();
         var timesRecord = await _shared.LoadTimesAsync(lease, token); var times = timesRecord?.Data;
         var events = new List<SchoolEvent>();
@@ -338,11 +346,12 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     }
     private Task CheckNotificationsAsync(CancellationToken token)
     {
-        var eligible = Materials.Where(p => p.Value.Analysis is { } analysis && p.Value.Source?.Digest == analysis.SourceDigest
-            && analysis.ParserVersion == (p.Key == MaterialKind.Changes ? Takupoke.Infrastructure.Parsing.XlsxChangeReader.Version : p.Key == MaterialKind.Timetable
-                ? Takupoke.Infrastructure.Parsing.PdfScheduleParser.TimetableVersion : Takupoke.Infrastructure.Parsing.PdfScheduleParser.SpecialVersion))
-            .ToDictionary(p => p.Key, p => p.Value.Analysis!.SourceDigest);
-        return _notifications.CheckAsync(eligible.ContainsKey(MaterialKind.Changes) ? Data : Data with { Changes = null }, eligible, Preferences, Today, token);
+        var eligible = Materials.Where(p => HasCurrentAnalysis(p.Key)).ToDictionary(p => p.Key, p => p.Value.Analysis!.SourceDigest);
+        var availability = new[] { MaterialKind.Changes, MaterialKind.Exam, MaterialKind.ExamReturn }.ToDictionary(
+            kind => kind == MaterialKind.Changes ? "changes" : kind == MaterialKind.Exam ? "exam" : "examReturn",
+            kind => Materials[kind].Source is null ? NotificationSourceState.Absent
+                : eligible.ContainsKey(kind) ? NotificationSourceState.Available : NotificationSourceState.Unavailable);
+        return _notifications.CheckAsync(eligible.ContainsKey(MaterialKind.Changes) ? Data : Data with { Changes = null }, eligible, Preferences, Today, token, availability);
     }
     private async Task RunAsync(Func<CancellationToken, Task> action, string progress = "処理しています。", bool automatic = false)
     {

@@ -35,7 +35,7 @@ public sealed class ChangeNormalizerTests
             if (fixture.TryGetProperty("iosClassAliases", out var aliases) && aliases.TryGetProperty(cls, out var alias)) cls = alias.GetString()!;
             var canonical = Get("canonical_text");
             if (cls != Get("class_name")) canonical = canonical.Replace(" | " + Get("class_name") + " | ", " | " + cls + " | ");
-            Assert.Equal(new(Get("change_date"), cls, Get("period"), Get("before_subject"), Get("after_subject"), Get("teacher"), Get("room"), Get("note"), Get("raw_text"), canonical), actual[i]);
+            Assert.Equal(new(Get("change_date"), cls, Get("period"), Get("before_subject"), Get("after_subject"), Get("teacher"), Get("room"), Get("note"), Get("raw_text"), canonical), actual[i] with { ChangeKind = null });
         }
     }
     [Theory]

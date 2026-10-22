@@ -1,7 +1,7 @@
 # API・年度別行事・更新失敗
 
 対応関係・宣言名・実行方法のSHA-256：
-`b7b755a3d640e574bea12383a8f861e8fc284d8688958de2026a6f77071be453`
+`4e04ca62e0b9e473d6d375d994c9b54bce1fcfae0d8738108831047654899c33`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -53,3 +53,4 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `CurrentRevisionsRequireNeitherAuthenticationNorDownloads`
 - `PublicFailureIsReportedIndependentlyAndRetryClearsOnlyItsFailure`
 - `PublicCheckCancellationPropagatesWithoutReplacingKnownState`
+- `CorruptMappingCanBeAuthenticatedAndReplacedWithoutPrematureDeletion`

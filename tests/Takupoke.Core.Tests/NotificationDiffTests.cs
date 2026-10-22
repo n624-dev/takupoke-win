@@ -75,4 +75,33 @@ public sealed class NotificationDiffTests
         Assert.Equal(2, second.Pending!["changes"].Count);
         Assert.Equal(2, second.Pending["changes"].ChangeTargets!.Count);
     }
+
+    [Fact]
+    public void PartialStartupPreservesPersistedPendingButConfirmedAbsenceInvalidatesIt()
+    {
+        var before = NotificationDiff.Reconcile(new(), NotificationDiff.Fingerprints([Change()]), new Dictionary<string, string> { ["exam"] = "old" }, Today, Classes, true, true);
+        var current = NotificationDiff.Fingerprints([Change("架空更新A")]);
+        var pending = NotificationDiff.Reconcile(before, current, new Dictionary<string, string> { ["exam"] = "new" }, Today, Classes, true, true);
+        Assert.Equal(2, pending.Pending!.Count);
+        var reopened = System.Text.Json.JsonSerializer.Deserialize<NotificationBaseline>(System.Text.Json.JsonSerializer.Serialize(pending))!;
+        var partial = NotificationDiff.Reconcile(reopened, null, new Dictionary<string, string>(), Today, Classes, true, true,
+            new Dictionary<string, NotificationSourceState> { ["changes"] = NotificationSourceState.Unavailable, ["exam"] = NotificationSourceState.Unavailable });
+        Assert.Equal(reopened.Pending!.Keys.Order(), partial.Pending!.Keys.Order());
+        foreach (var pair in reopened.Pending)
+        {
+            var retained = partial.Pending[pair.Key];
+            Assert.Equal(pair.Value.Fingerprint, retained.Fingerprint);
+            Assert.Equal(pair.Value.Count, retained.Count);
+            Assert.Equal((pair.Value.ChangeTargets ?? []).ToArray(), (retained.ChangeTargets ?? []).ToArray());
+        }
+        Assert.Equal(reopened.Changes, partial.Changes);
+        var ready = NotificationDiff.Reconcile(partial, current, new Dictionary<string, string> { ["exam"] = "new" }, Today, Classes, true, true);
+        Assert.Equal(2, ready.Pending!.Count);
+        var removed = NotificationDiff.Reconcile(ready, null, new Dictionary<string, string>(), Today, Classes, true, true,
+            new Dictionary<string, NotificationSourceState> { ["changes"] = NotificationSourceState.Absent, ["exam"] = NotificationSourceState.Absent });
+        Assert.Empty(removed.Pending!); Assert.Null(removed.Changes);
+        var disabled = NotificationDiff.Reconcile(partial, null, new Dictionary<string, string>(), Today, Classes, false, false);
+        Assert.Empty(disabled.Pending!);
+    }
+
 }
