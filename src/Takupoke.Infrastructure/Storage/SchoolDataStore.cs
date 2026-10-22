@@ -7,6 +7,8 @@ namespace Takupoke.Infrastructure.Storage;
 /// <summary>Every private read/write is period- and generation-checked; SQLite stores encrypted payloads only.</summary>
 public sealed class SchoolDataStore(string root, IKeyProtector protector, TimeProvider? timeProvider = null) : IAsyncDisposable
 {
+    // Distinguish decoded cache content from database, key and filesystem failures.
+    public sealed class InvalidPayloadException(Exception inner) : Exception("保存内容の形式を確認できません。", inner);
     private readonly SemaphoreSlim _gate = new(1, 1);
     private readonly TimeProvider _clock = timeProvider ?? TimeProvider.System;
     private readonly string _root = Path.GetFullPath(root);
@@ -118,6 +120,8 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
         if (bytes is null) return default(T);
         var plain = _cipher!.Decrypt(bytes, key);
         try { return DataCodec.Decode<T>(plain); }
+        catch (Exception error) when (error is System.Text.Json.JsonException or InvalidDataException)
+        { throw new InvalidPayloadException(error); }
         finally { CryptographicOperations.ZeroMemory(plain); }
     }, token);
     public Task WriteAsync<T>(SchoolLease lease, string key, T value, CancellationToken token = default) => WithConnectionAsync(lease, async connection =>

@@ -53,8 +53,19 @@ public sealed class SharedDataUpdater(ApiClient api, SchoolDataStore store)
     {
         DataSet.Links => (await store.ReadAsync<SavedLinks>(lease, "api.links", token))?.Revision,
         DataSet.Mapping => (await store.ReadAsync<SavedMapping>(lease, "api.mapping", token))?.Revision,
-        _ => (await store.ReadAsync<SavedTimes>(lease, "api.times", token))?.Revision
+        _ => (await LoadTimesAsync(lease, token))?.Revision
     };
+    public async Task<SavedTimes?> LoadTimesAsync(SchoolLease lease, CancellationToken token = default)
+    {
+        SavedTimes? saved;
+        try { saved = await store.ReadAsync<SavedTimes>(lease, "api.times", token); }
+        catch (SchoolDataStore.InvalidPayloadException) { return null; }
+        if (saved is null) return null;
+        if (saved.Revision is null || !ApiPayloads.ValidRevision(saved.Revision) || saved.Data is null) return null;
+        try { _ = saved.Data.Validated(); }
+        catch (InvalidDataException) { return null; }
+        return saved;
+    }
     public async Task<IReadOnlyList<UpdateResult>> UpdateAsync(Func<CancellationToken, Task<string>> authenticate, CancellationToken token = default)
     {
         await _gate.WaitAsync(token);

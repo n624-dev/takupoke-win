@@ -5,6 +5,26 @@ namespace Takupoke.Core.Tests;
 
 public sealed class SchedulePresentationTests
 {
+    [Fact]
+    public void DisjointChangeDetailsFindOnlyRequestedOriginalsWithoutChangingGrid()
+    {
+        var change = Change() with { Period = "1,3" };
+        var normal = new[] { Normal, Normal with { Period = 2 }, Normal with { Period = 3, Names = new("架空科目C") } };
+        var data = new ScheduleData(new(2032, "前期", normal), [change]);
+        var presentation = new SchedulePresentation(data, Mapping);
+        Assert.Equal([1, 3], presentation.NormalOriginals(change).Select(l => l.Period));
+        Assert.Equal("架空科目A・架空科目C", presentation.BeforeSubject(change, detail: true));
+        Assert.Null(change.GridPeriods);
+        Assert.All(new[] { 1, 3 }, period => Assert.Empty(presentation.Engine(new()).Slot(Day, period, "1_CN").Changes));
+        foreach (var kind in new[] { MaterialKind.Exam, MaterialKind.ExamReturn })
+        {
+            var special = new SpecialAnalysis(kind, 2032, [Day.Iso()], ["1_CN"], new Dictionary<int, TimeRange>(),
+                new[] { 1, 2, 3 }.Select(p => new SpecialLesson(Day.Iso(), "1_CN", p, p, p, null, ["架空科目B"], 1)).ToArray());
+            var duringSpecial = new SchedulePresentation(data with { Specials = [special] }, Mapping);
+            Assert.Empty(duringSpecial.NormalOriginals(change));
+            Assert.Equal([1, 3], duringSpecial.SpecialOriginals(change).Select(s => s.Lesson.Period));
+        }
+    }
     private static readonly DateOnly Day = new(2032, 4, 5);
     private static readonly NormalLesson Normal = new("1_CN", 1, 1, new("架空科目A", "架空教員A", "架空教室A"), "架空原文", 1);
     private static ScheduleChange Change(string before = "", string after = "架空科目B") => new(Day.Iso(), "1_CN", "1", before, after, "", "", "補講", "架空原文B", "架空正規化B");

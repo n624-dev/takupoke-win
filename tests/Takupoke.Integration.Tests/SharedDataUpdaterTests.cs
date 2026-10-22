@@ -10,6 +10,73 @@ namespace Takupoke.Integration.Tests;
 
 public sealed class SharedDataUpdaterTests
 {
+    [Theory]
+    [InlineData("\"fictional invalid cache\"")]
+    [InlineData("{\"revision\":\"invalid\",\"data\":{\"schemaVersion\":1,\"days\":[]}}")]
+    [InlineData("{\"revision\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\"data\":{\"schemaVersion\":2,\"days\":[]}}")]
+    [InlineData("{\"revision\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\"data\":{\"schemaVersion\":1,\"days\":null}}")]
+    public async Task CorruptTimeCacheCanBeReplacedAfterAuthentication(string json)
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-update-tests-" + Guid.NewGuid().ToString("N"));
+        using var protector = new Protector();
+        try
+        {
+            await using var store = new SchoolDataStore(root, protector);
+            var lease = await store.BeginAsync();
+            var corrupt = System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(json);
+            await store.WriteAsync(lease, "api.times", corrupt);
+            var handler = new Handler(); using var http = new HttpClient(handler);
+            var updater = new SharedDataUpdater(new(http, new("https://example.invalid/")), store);
+            Assert.Null(await updater.LoadTimesAsync(lease));
+            var check = await updater.CheckDetailedAsync(DataSet.Times);
+            Assert.True(check.Revisions[DataSet.Times].Changed);
+            Assert.Equal(corrupt.GetRawText(), (await store.ReadAsync<System.Text.Json.JsonElement>(lease, "api.times")).GetRawText());
+            await Assert.ThrowsAsync<OperationCanceledException>(() => updater.UpdateAsync(_ => throw new OperationCanceledException()));
+            Assert.Equal(corrupt.GetRawText(), (await store.ReadAsync<System.Text.Json.JsonElement>(lease, "api.times")).GetRawText());
+            var result = await updater.UpdateAsync(_ => Task.FromResult("fake-token"));
+            Assert.True(result.Single(r => r.Kind == DataSet.Times).Updated);
+            Assert.Equal(Revision, (await updater.LoadTimesAsync(lease))!.Revision);
+        }
+        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
+
+    [Fact]
+    public async Task FailedTimeRequestPreservesCorruptCacheAndDatabaseFailuresStillStop()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-update-tests-" + Guid.NewGuid().ToString("N"));
+        using var protector = new Protector();
+        try
+        {
+            await using var store = new SchoolDataStore(root, protector); var lease = await store.BeginAsync();
+            await store.WriteAsync(lease, "api.times", "fictional corrupt cache");
+            var handler = new Handler { FailedRevision = DataSet.Times }; using var http = new HttpClient(handler);
+            var updater = new SharedDataUpdater(new(http, new("https://example.invalid/")), store);
+            var result = await updater.UpdateAsync(_ => Task.FromResult("fake-token"));
+            Assert.False(result.Single(r => r.Kind == DataSet.Times).Updated);
+            Assert.Equal("fictional corrupt cache", await store.ReadAsync<string>(lease, "api.times"));
+            handler.FailedRevision = null; handler.FailTimesDownload = true;
+            result = await updater.UpdateAsync(_ => Task.FromResult("fake-token"));
+            Assert.False(result.Single(r => r.Kind == DataSet.Times).Updated);
+            Assert.Equal("fictional corrupt cache", await store.ReadAsync<string>(lease, "api.times"));
+            handler.FailTimesDownload = false;
+            using (var connection = new Microsoft.Data.Sqlite.SqliteConnection("Data Source=" + Path.Combine(root, "school", "school.sqlite")))
+            {
+                await connection.OpenAsync();
+                using var command = connection.CreateCommand();
+                command.CommandText = "CREATE TRIGGER fictional_save_failure BEFORE UPDATE ON entry WHEN NEW.key='api.times' BEGIN SELECT RAISE(ABORT, 'fictional write failure'); END;";
+                await command.ExecuteNonQueryAsync();
+            }
+            result = await updater.UpdateAsync(_ => Task.FromResult("fake-token"));
+            Assert.Equal(ApiFailure.Storage, result.Single(r => r.Kind == DataSet.Times).Failure);
+            Assert.False(result.Single(r => r.Kind == DataSet.Times).Updated);
+            Assert.Equal("fictional corrupt cache", await store.ReadAsync<string>(lease, "api.times"));
+            await File.WriteAllTextAsync(Path.Combine(root, "school", "school.sqlite"), "fictional damaged database");
+            await Assert.ThrowsAnyAsync<Exception>(() => updater.LoadTimesAsync(lease));
+            Assert.Equal("fictional damaged database", await File.ReadAllTextAsync(Path.Combine(root, "school", "school.sqlite")));
+        }
+        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
+
     private const string Revision = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
     private sealed class Protector : IKeyProtector, IDisposable
     {
@@ -21,6 +88,7 @@ public sealed class SharedDataUpdaterTests
     private sealed class Handler : HttpMessageHandler
     {
         public DataSet? FailedRevision { get; set; }
+        public bool FailTimesDownload { get; set; }
         public CancellationTokenSource? CancelRevision { get; set; }
         public List<string> RevisionPaths { get; } = [];
         public int PublicRequests { get; private set; }
@@ -44,6 +112,7 @@ public sealed class SharedDataUpdaterTests
                 if (path == "/links") response.StatusCode = HttpStatusCode.ServiceUnavailable;
                 else if (path == "/timetable-times")
                 {
+                    if (FailTimesDownload) response.StatusCode = HttpStatusCode.ServiceUnavailable;
                     response.Content = new StringContent("{\"schemaVersion\":1,\"days\":[]}", Encoding.UTF8, "application/json");
                     response.Headers.TryAddWithoutValidation("X-Timetable-Times-Revision", Revision);
                     response.Headers.ETag = new("\"fake-times\"");

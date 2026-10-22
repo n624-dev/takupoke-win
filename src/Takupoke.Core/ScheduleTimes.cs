@@ -38,15 +38,15 @@ public sealed record ScheduleTimes(int SchemaVersion, IReadOnlyList<DayTimes> Da
     };
     public ScheduleTimes Validated()
     {
-        if (SchemaVersion != 1 || Days.Count > 400 || Days.Select(d => d.Date).Distinct().Count() != Days.Count) throw new InvalidDataException("授業時刻の形式を確認できませんでした。");
+        if (SchemaVersion != 1 || Days is null || Days.Count > 400 || Days.Any(d => d is null) || Days.Select(d => d.Date).Distinct().Count() != Days.Count) throw new InvalidDataException("授業時刻の形式を確認できませんでした。");
         foreach (var day in Days)
         {
-            if (!SchoolDate.TryParse(day.Date, out _) || day.Periods.Count != 8) throw new InvalidDataException("授業時刻の日付または時限数が不正です。");
+            if (!SchoolDate.TryParse(day.Date, out _) || day.Periods is null || day.Periods.Count != 8) throw new InvalidDataException("授業時刻の日付または時限数が不正です。");
             var previousEnd = "00:00";
             for (var index = 0; index < 8; index++)
             {
                 var slot = day.Periods[index];
-                if (slot.Period != index + 1 || !new TimeRange(slot.Start, slot.End).IsValid || string.CompareOrdinal(slot.Start, previousEnd) < 0)
+                if (slot is null || slot.Start is null || slot.End is null || slot.Period != index + 1 || !new TimeRange(slot.Start, slot.End).IsValid || string.CompareOrdinal(slot.Start, previousEnd) < 0)
                     throw new InvalidDataException("授業時刻の順序を確認できませんでした。");
                 previousEnd = slot.End;
             }

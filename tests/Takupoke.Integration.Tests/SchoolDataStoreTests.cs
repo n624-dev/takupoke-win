@@ -97,6 +97,19 @@ public sealed class SchoolDataStoreTests : IAsyncLifetime
         Assert.Equal("fake damaged database", await File.ReadAllTextAsync(Path.Combine(_root, "school", "school.sqlite")));
     }
     [Fact]
+    public async Task MissingDatabaseDoesNotReinitializeOrDeleteRemainingKey()
+    {
+        await using (var store = Store()) { _ = await store.BeginAsync(); }
+        var keyFile = Path.Combine(_root, "school", "key.dpapi");
+        var previousKey = await File.ReadAllBytesAsync(keyFile);
+        var database = Path.Combine(_root, "school", "school.sqlite");
+        File.Delete(database);
+        await using var reopened = Store();
+        await Assert.ThrowsAsync<InvalidDataException>(() => reopened.BeginAsync());
+        Assert.False(File.Exists(database));
+        Assert.Equal(previousKey, await File.ReadAllBytesAsync(keyFile));
+    }
+    [Fact]
     public void CipherRejectsTamperingAndDifferentRecordPurpose()
     {
         using var cipher = new EnvelopeCipher(RandomNumberGenerator.GetBytes(32));

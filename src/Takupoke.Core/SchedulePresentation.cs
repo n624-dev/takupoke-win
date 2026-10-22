@@ -23,7 +23,7 @@ public sealed class SchedulePresentation(ScheduleData data, MappingRules? mappin
     {
         if (!SchoolDate.TryParse(change.ChangeDate, out var day)) return [];
         var original = new TimetableEngine(data, false, true);
-        return (change.GridPeriods ?? []).Select(p => original.Slot(day, p, change.DisplayClassName));
+        return (change.DetailPeriods ?? []).Select(p => original.Slot(day, p, change.DisplayClassName));
     }
     public string BeforeSubject(ScheduleChange change, bool detail = false)
     {

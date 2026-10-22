@@ -1,7 +1,7 @@
 # 暗号化DB・原子保存・設定・年度期限
 
 対応関係・宣言名・実行方法のSHA-256：
-`53e48cda102920ea977ce9ffb0cb5e82b632f775e07d66ff017bdf961278cd42`
+`0a79dd2959288332a46212dd441538f73c3741729782ba5dc4f5ecddc76a725c`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -46,6 +46,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `LockPreventsReadsAndOldOperationsCannotResumeAfterUnlock`
 - `ParseFailureKeepsNewSelectionAndLastSuccessfulAnalysisWithItsOwnOriginal`
 - `CorruptDatabaseDoesNotGetReinitializedWithinCurrentPeriod`
+- `MissingDatabaseDoesNotReinitializeOrDeleteRemainingKey`
 - `CipherRejectsTamperingAndDifferentRecordPurpose`
 
 ## [tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs](../../tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs)

@@ -317,7 +317,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             await _school.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token), await _school.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, token));
         var mappingRecord = await _school.ReadAsync<SavedMapping>(lease, "api.mapping", token); var mappings = mappingRecord?.Rules;
         var linksRecord = await _school.ReadAsync<SavedLinks>(lease, "api.links", token); var links = linksRecord?.Payload.Validated();
-        var timesRecord = await _school.ReadAsync<SavedTimes>(lease, "api.times", token); var times = timesRecord?.Data.Validated();
+        var timesRecord = await _shared.LoadTimesAsync(lease, token); var times = timesRecord?.Data;
         var events = new List<SchoolEvent>();
         var eventRecords = new Dictionary<int, SavedEvents>();
         var years = _events.SavedYears();
