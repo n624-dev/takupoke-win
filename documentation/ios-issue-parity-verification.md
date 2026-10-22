@@ -9,3 +9,11 @@
 テスト一覧をSchedulePresentation・SharedDataUpdater・SchoolDataStore・AppViewModelで検索した。新しい回帰を既存ネイティブテストへ追加し、一覧を再生成、`check --base 944662b`を確認した。
 
 Debian13/x86_64、.NET SDK10.0.402でCore184件・統合149件が失敗0。後者には破損内容の復旧、認証中止、公開確認失敗、取得失敗、SQLite triggerによる保存失敗、破損DBの停止と保持を含む。Pythonの一覧14件・配布通知13件、公開tree／noreply検査、差分空白検査も成功。WinUI実操作・Windows固有ビルドはこのLinux結果に含めない。Actions結果は別途追記する。
+
+## Windows CI初回の回帰テスト準備失敗
+
+source`ccd11ab`、run39702647850／試行1、Windows2025・.NET10で、追加したFailedTimeRequestPreservesCorruptCacheAndDatabaseFailuresStillStopがschool.sqliteを破損データへ置換する段階でIOExceptionになった（同テスト77行）。取得・保存失敗後の保持確認までは通過したが、このケースのDB破損確認に未到達。Core184件は成功、統合は1件失敗。Linux側とWinUI x64 Debug／Release・ARM64のビルド／既存操作は成功した。
+
+対処前に記録。`pool|sqlite|IOException|school.sqlite`で既存documentationとstore・テストを照合する。テストのtrigger設定用SqliteConnectionだけが既定poolを使い、製品SchoolDataStoreはPooling=falseで開く条件の違いを調べる。検証条件を削除せず、同じ失敗後保持とDB破損停止をWindowsでも実行する。
+
+change-row-exclusion-verification.mdの既存「SQLite接続の既定プールが削除を妨げた」記録と一致した。今回も製品接続はPooling=falseで、追加したtrigger設定用接続だけが既定値だった。この所有接続をPooling=falseにそろえ、DB破損の作成・例外・bytes保持のassertionをすべて維持した。製品コードは変更しない。修正後のWindows結果はまだ未確認。

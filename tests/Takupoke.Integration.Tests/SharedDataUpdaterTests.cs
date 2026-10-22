@@ -59,7 +59,8 @@ public sealed class SharedDataUpdaterTests
             Assert.False(result.Single(r => r.Kind == DataSet.Times).Updated);
             Assert.Equal("fictional corrupt cache", await store.ReadAsync<string>(lease, "api.times"));
             handler.FailTimesDownload = false;
-            using (var connection = new Microsoft.Data.Sqlite.SqliteConnection("Data Source=" + Path.Combine(root, "school", "school.sqlite")))
+            using (var connection = new Microsoft.Data.Sqlite.SqliteConnection(new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder
+                { DataSource = Path.Combine(root, "school", "school.sqlite"), Pooling = false }.ToString()))
             {
                 await connection.OpenAsync();
                 using var command = connection.CreateCommand();
