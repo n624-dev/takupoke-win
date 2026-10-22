@@ -243,7 +243,7 @@ public sealed class AppLifecycleTests
             control.SelectedIndex = 1; control.SelectedClass = "3_IT"; control.Change();
             control.SelectedIndex = 0; control.SelectedClass = ""; control.Change();
         }
-        control.Change(); // Duplicate must not enqueue a third write.
+        control.Change(); // Duplicate must not enqueue another write.
         release.SetResult(); await Observe(model, () => Volatile.Read(ref changes) == 2 * roundTrips);
         Assert.Equal(0, control.SelectedIndex); Assert.Equal("", control.SelectedClass);
         await fixture.Close(model); var reopened = fixture.Create(); await reopened.InitializeAsync();

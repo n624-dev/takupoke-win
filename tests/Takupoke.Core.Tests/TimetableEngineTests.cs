@@ -156,6 +156,33 @@ public sealed class TimetableEngineTests
         Assert.Single(new TimetableEngine(data, international: true).Blocks(Day, "1_CN"));
     }
     [Theory]
+    [InlineData(MaterialKind.Timetable)]
+    [InlineData(MaterialKind.Exam)]
+    [InlineData(MaterialKind.ExamReturn)]
+    public void HiddenInternationalChangesKeepOrdinaryAndSpecialLessonsIncludingSaturday(MaterialKind sourceKind)
+    {
+        foreach (var day in new[] { Day, new DateOnly(2032, 4, 10) })
+        foreach (var kind in new[] { "休講", "変更", "補講" })
+        {
+            var row = Change(note: kind) with { ChangeDate = day.Iso(), BeforeSubject = "留 架空科目B", AfterSubject = kind == "休講" ? "" : "留 架空科目C" };
+            var clock = new TimeRange("09:00", "09:45");
+            var specials = sourceKind == MaterialKind.Timetable ? Array.Empty<SpecialAnalysis>() :
+                new[] { new SpecialAnalysis(sourceKind, 2032, [day.Iso()], ["1_CN"], new Dictionary<int, TimeRange> { [1] = clock },
+                    [new(day.Iso(), "1_CN", 1, 1, 1, clock, ["架空科目A"], 1)], sourceKind == MaterialKind.ExamReturn ? day.Iso() : null) };
+            var data = new ScheduleData(Timetable(Lesson(1)), [row], specials,
+                Events: [new(day.Iso(), "架空振替A", "曜日振替", ScheduleDay: 1, Classification: EventClassification.WeekdayOverride)]);
+            var hidden = new TimetableEngine(data);
+            var block = Assert.Single(hidden.Blocks(day, "1_CN"));
+            if (sourceKind == MaterialKind.Timetable) Assert.IsType<NormalContent>(block.Content);
+            else Assert.Equal(sourceKind, Assert.IsType<SpecialContent>(block.Content).Kind);
+            Assert.Equal("架空科目A", block.Content.Names.Subject);
+            Assert.Equal(sourceKind == MaterialKind.Timetable ? new TimeRange("08:50", "09:35") : clock, hidden.SlotTime(day, "1_CN", 1));
+            Assert.Equal(row, Assert.Single(hidden.Slot(day, 1, "1_CN").Changes));
+            Assert.IsType<ChangeContent>(Assert.Single(new TimetableEngine(data, international: true).Blocks(day, "1_CN")).Content);
+            Assert.Equal(block.Content, Assert.Single(new TimetableEngine(data, includesChanges: false, international: true).Blocks(day, "1_CN")).Content);
+        }
+    }
+    [Theory]
     [InlineData(8, 49, false)]
     [InlineData(8, 50, true)]
     [InlineData(9, 34, true)]
@@ -218,6 +245,16 @@ public sealed class TimetableEngineTests
         foreach (var replaced in new[] { "1", "3", "2", "1,2", "" })
         {
             var engine = new TimetableEngine(new(Changes: replaced.Length == 0 ? [] : [Change(replaced)], Specials: [source]));
+            foreach (var changed in engine.Blocks(Day, "1_CN").Where(b => b.Content is ChangeContent))
+            {
+                var expected = new TimeRange(clocks[changed.StartPeriod].Start, clocks[changed.EndPeriod].End);
+                Assert.Equal(expected, engine.CardTime(Day, "1_CN", changed));
+                var start = TimeOnly.Parse(expected.Start); var end = TimeOnly.Parse(expected.End);
+                DateTimeOffset At(TimeOnly time) => new(Day.ToDateTime(time), TimeSpan.FromHours(9));
+                Assert.False(engine.IsInProgress(Day, "1_CN", changed, At(start.AddMinutes(-1))));
+                Assert.True(engine.IsInProgress(Day, "1_CN", changed, At(start)));
+                Assert.False(engine.IsInProgress(Day, "1_CN", changed, At(end)));
+            }
             foreach (var block in engine.Blocks(Day, "1_CN").Where(b => b.Content is SpecialContent))
             {
                 var expected = block.StartPeriod == 1 && block.EndPeriod == 3 ? new TimeRange("09:00", "10:20")

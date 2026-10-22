@@ -1,7 +1,7 @@
 # 時間割・授業名・時刻・日付
 
 対応関係・宣言名・実行方法のSHA-256：
-`587a052b066ee2af939b5841a278804b122efc4fd08970990a05d06308ba7746`
+`1c93d6dfbf9b8fddfad3ddabd59cc490fa4a2081f45d5b5f51e068c62aeebd05`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -45,6 +45,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `ExamAndReturnOverlapWithoutLosingEitherLesson`
 - `NormalModeStillUsesSpecialsButIgnoresChanges`
 - `InternationalStudentFilterUsesPrefix`
+- `HiddenInternationalChangesKeepOrdinaryAndSpecialLessonsIncludingSaturday`
 - `InProgressIncludesStartAndExcludesEnd`
 - `CancellationIsNeverInProgress`
 - `UnknownTermAndOutOfTermNeverLeakNormalLessons`
