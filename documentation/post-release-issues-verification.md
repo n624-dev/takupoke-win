@@ -74,3 +74,29 @@ iOSとの照合: ApplicationData.prepareは永続installedPeriodの実変更時�
 0.1.0-dev.10454は前回公開済みで、今回の追加4件はまだ配布版へ含まれない。次版は `Development installers` を `main` / `version=0.1.0-dev.10455` で起動する準備まで完了した。公開ゲート・導入検査を省略していない。
 
 環境のGH_TOKENによるgh API呼出しがHTTP 401となった（トークンの値は出力・転記していない）。GitHub連携でコード反映・PRマージ・検査確認は継続できたが、連携にはworkflow_dispatchの開始機能が無い。環境には代替のGitHub認証設定が無く、公開Actionsは未起動。環境認証の更新または利用者によるGitHub画面からの起動を依頼した。401の原因を期限切れ等と断定しない。認証が復旧したら既存の全検証と導入検査を伴う公開経路を使用し、公開後の匿名ダウンロード・全ハッシュを確認する。
+
+### 公開の再開（2026-10-22 22:22 UTC）
+
+利用者から継続指示を受け、同じ環境のghでGitHub認証が成功することを確認した。mainは引き続きe001729、Latestは10454で、未公開の10455を既存のDevelopment installers経路から起動した。
+[公開実行39864446227](https://github.com/n624-dev/takupoke-win/actions/runs/39864446227) の元ソースもe001729である。前回は検査開始から公開ジョブ終了まで約18分だったため、22:42 UTCを次の一括結果確認の目安とした。22:24 UTCには両リポジトリのopen issueを1回のGraphQL呼出しで照合し、どちらも0件だった。
+
+### 10455 公開と匿名照合の完了
+
+[0.1.0-dev.10455](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10455) を2026-10-22 22:38 UTCに通常Release/Latestとして公開した。配布元はe001729aee0afadde59032d42ed5c11e015e4bc0。上記の認証障害による未起動状態は解消した。
+
+公開実行39864446227は全8ジョブ成功（取消しなし）。Windows Core199件・Integration215件成功、x64 Debug/Release・ARM64 Release、Linux、固定Swift参照も成功した。インストール後の実画面検査は6回とも406チェックが成功。導入先の変更・同フォルダーへの再インストール・dev.5からの実更新・自動移行・無関係ファイルと設定の保持・アンインストール回収を確認した。ARM64実機・学校アカウント/実資料・物理Windowsロックと実トーストの確認は未実施。
+
+22:42 UTCの結果照会で全8項目の完了をまとめて確認した。公開起動確認後から予定時刻まで、Actionsの状態照会は行っていない。前回所要約18分に対し、今回の実行は22:22:19〜22:38:39（約16分20秒）だった。
+
+全6添付を認証なしで取得し、GitHubのsize/digestとSHA256SUMSを照合した。ZIP内の版・ソース・アーキテクチャ、x64の561ファイル、ARM64の557ファイルの全ハッシュを確認した。重複・相対逸脱pathや学校資料/ソース/ログ/鍵の混入も拒否した。取得用一時領域は自動回収した。
+
+| 添付 | bytes | SHA256 |
+| --- | ---: | --- |
+| INSTALL.txt | 2916 | de1c31d71be1fc62f64d83a6054f49f85cac150e2df74b3458b9e3ba21e896ed |
+| SHA256SUMS.txt | 495 | cf4e26e1c1a5408a871d9b471e6afcd9fa6e88e0ae6d1cdd76073685d2fd3eb2 |
+| takupoke-0.1.0-dev.10455-arm64-Setup.exe | 68274781 | ef960357c432ba916509efc7cb9f99617859541b8b351a88a6a3492082dfcee9 |
+| takupoke-0.1.0-dev.10455-arm64.zip | 100434051 | e7fe6b155aba59de89cc394e4cceea6653a661b45d5c34c2fbb5c0be015f8b9e |
+| takupoke-0.1.0-dev.10455-x64-Setup.exe | 70826512 | 9d2baa6f83211263efccd456c684862e33a07faedf7dbf31a2df0d2fde5b236f |
+| takupoke-0.1.0-dev.10455-x64.zip | 103011732 | ed7e9c15d902bfd5f7c5c2f281e52bce93ff83068f3f001601971fe4f511cbff |
+
+公開後に両リポジトリのopen issueを1回のGraphQL呼出しで照合し、どちらも0件だった。
