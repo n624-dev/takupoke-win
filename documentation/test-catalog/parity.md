@@ -1,7 +1,7 @@
 # 固定iOS参照・独立期待値
 
 対応関係・宣言名・実行方法のSHA-256：
-`d3eb59a174631576e89690011c0792abd6b6baf221bd9ae272a5233415531f99`
+`2b6dbe1411a0d2ebb21c590a1e9cc30b62a5349629b06b11001a0a8008902b43`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -33,3 +33,4 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `ExamSeparatesSubjectTeacherAndRoom`
 - `ReturnMatchesIosSplitCellsAndDifferentTimesOnSubsequentDays`
 - `MissingSpecialTimeCannotBeReplacedByOrdinaryTime`
+- `ReturnDedicatedClockFollowsOriginalColumnAfterSortedDatePersistence`

@@ -19,6 +19,15 @@ public sealed class IosParityTests
     {
         var row = Reference["schedule"]!.AsArray().Single(value => value!["id"]!.GetValue<string>() == id)!;
         var data = row["input"]!.Deserialize<ScheduleData>(Options)!;
+        // ExportParity.swift constructs this fictional model with April 5 as
+        // its dedicated clock day; it is not a parsed, sorted legacy cache.
+        // Supply that original input contract explicitly after schema expansion.
+        data = data with { Specials = data.Specials!.Select(special =>
+        {
+            if (special.Kind != MaterialKind.ExamReturn) return special;
+            Assert.Equal(new[] { "2032-04-05", "2032-04-06" }, special.CoveredDates);
+            return special with { DedicatedTimeDate = "2032-04-05" };
+        }).ToArray() };
         Assert.True(SchoolDate.TryParse(row["day"]!.GetValue<string>(), out var day));
         var className = row["className"]!.GetValue<string>();
         var engine = new TimetableEngine(data, row["includesChanges"]!.GetValue<bool>());

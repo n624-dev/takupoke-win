@@ -37,7 +37,7 @@ public sealed class TimetableEngineTests
         SpecialAnalysis Source(MaterialKind kind, string start, string middle, string end, bool joined) => new(kind, 2032,
             [Day.Iso()], ["1_CN"], new Dictionary<int, TimeRange> { [1] = new(start, middle), [2] = new(middle, end) },
             new[] { 1, 2 }.Select(p => new SpecialLesson(Day.Iso(), "1_CN", p, joined ? 1 : p, joined ? 2 : p,
-                joined ? new(start, end) : p == 1 ? new(start, middle) : new(middle, end), ["架空特別科目A"], 1)).ToArray());
+                joined ? new(start, end) : p == 1 ? new(start, middle) : new(middle, end), ["架空特別科目A"], 1)).ToArray(), kind == MaterialKind.ExamReturn ? Day.Iso() : null);
         foreach (var joined in new[] { false, true })
         {
             var engine = new TimetableEngine(new(Specials: [Source(MaterialKind.Exam, "09:00", "09:20", "09:40", joined),
@@ -65,7 +65,7 @@ public sealed class TimetableEngineTests
         new(Day.Iso(), "1_CN", period, "架空科目A", after, "架空教員B", "架空教室B", note, "架空原文B", "架空正規化B");
     private static TimetableAnalysis Timetable(params NormalLesson[] lessons) => new(2032, "前期", lessons);
     private static SpecialAnalysis Special(MaterialKind kind, TimeRange time) => new(kind, 2032, [Day.Iso()], ["1_CN"],
-        new Dictionary<int, TimeRange> { [1] = time }, [new(Day.Iso(), "1_CN", 1, 1, 1, time, ["架空科目C", "架空教員C", ""], 1)]);
+        new Dictionary<int, TimeRange> { [1] = time }, [new(Day.Iso(), "1_CN", 1, 1, 1, time, ["架空科目C", "架空教員C", ""], 1)], kind == MaterialKind.ExamReturn ? Day.Iso() : null);
 
     [Fact]
     public void AdjacentIdenticalLessonsMergeWithoutChangingInput()
@@ -214,7 +214,7 @@ public sealed class TimetableEngineTests
     {
         var clocks = new Dictionary<int, TimeRange> { [1] = new("09:00", "09:20"), [2] = new("09:30", "09:50"), [3] = new("10:00", "10:20") };
         var source = new SpecialAnalysis(kind, 2032, [Day.Iso()], ["1_CN"], clocks,
-            Enumerable.Range(1, 3).Select(p => new SpecialLesson(Day.Iso(), "1_CN", p, 1, 3, new("09:00", "10:20"), ["架空特別科目A"], 1)).ToArray());
+            Enumerable.Range(1, 3).Select(p => new SpecialLesson(Day.Iso(), "1_CN", p, 1, 3, new("09:00", "10:20"), ["架空特別科目A"], 1)).ToArray(), kind == MaterialKind.ExamReturn ? Day.Iso() : null);
         foreach (var replaced in new[] { "1", "3", "2", "1,2", "" })
         {
             var engine = new TimetableEngine(new(Changes: replaced.Length == 0 ? [] : [Change(replaced)], Specials: [source]));
@@ -252,4 +252,18 @@ public sealed class TimetableEngineTests
         Assert.Equal("曜日振替を確定できません", supplementary.Plan(Day).WeekdayOverrideWarning);
     }
 
+
+    [Fact]
+    public void LegacyReturnRangeRemainsVerbatimButUnknownColumnDateCannotSupplyPeriodClocks()
+    {
+        var source = Special(MaterialKind.ExamReturn, new("10:30", "11:50")) with
+        {
+            CoveredDates = ["2032-04-04", Day.Iso()], DedicatedTimeDate = null,
+            Lessons = [new(Day.Iso(), "1_CN", 5, 5, 6, new("10:30", "11:50"), ["架空科目A"], 1)]
+        };
+        var restored = System.Text.Json.JsonSerializer.Deserialize<SpecialAnalysis>(System.Text.Json.JsonSerializer.Serialize(source))!;
+        Assert.Null(restored.PeriodTime(Day, 5)); Assert.Null(restored.PeriodTime(Day.AddDays(-1), 5));
+        Assert.Equal(new TimeRange("10:30", "11:50"), restored.TimeFor(restored.Lessons[0]));
+        Assert.Null((restored with { DedicatedTimeDate = "2032-04-01" }).PeriodTime(Day,5));
+    }
 }

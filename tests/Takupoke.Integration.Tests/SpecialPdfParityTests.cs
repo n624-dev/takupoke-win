@@ -82,12 +82,13 @@ public sealed class SpecialPdfParityTests
         b.Write("1・2時限連続8:50~10:20", 300, 470);
         return b.Page(850, 600);
     }
-    private static PdfPageLayout ReturnPage()
+    private static PdfPageLayout ReturnPage(int[]? dateDays = null)
     {
+        dateDays ??= [1,2,3,4,5];
         var b = new Builder(false, 4); b.Write("令和8年度 試験返却時間割", 20, 20);
         for (var day = 0; day < 5; day++)
         {
-            b.Write($"4/{day + 1}", 150 + day * 8 * 40, 70);
+            b.Write($"4/{dateDays[day]}", 150 + day * 8 * 40, 70);
             for (var period = 0; period < 8; period++) b.Write((period + 1).ToString(), 150 + (day * 8 + period) * 40, 100);
         }
         var groups = new[] { ("1", new[] { "1", "2", "3" }), ("2", new[] { "CN", "ES", "IT" }), ("3", new[] { "CN", "ES", "IT" }),
@@ -101,9 +102,40 @@ public sealed class SpecialPdfParityTests
         b.Line(220, 332.5, 260, 332.5);
         b.Write("架空科目A", 222, 322, 3); b.Write("架空教員A", 222, 327, 3); b.Write("架空科目B", 222, 335, 3); b.Write("架空教員B", 222, 340, 3);
         b.Write("架空科目C", 502, 322, 3); b.Write("架空科目D", 302, 130, 3); b.Write("架空科目E", 622, 130, 3);
-        b.Write("4月1日の時間割は以下のとおりです。", 1300, 650); b.Write("4月2日~5日は通常の授業日どおりの授業時間です。", 1300, 670);
+        b.Write($"4月{dateDays[0]}日の時間割は以下のとおりです。", 1300, 650); b.Write($"4月{dateDays[1]}日~{dateDays[4]}日は通常の授業日どおりの授業時間です。", 1300, 670);
         var times = new[] { "7:00~7:40", "7:50~8:30", "8:40~9:20", "9:30~10:10", "10:30~11:10", "11:10~11:50", "12:00~12:40", "12:40~13:20" };
         for (var index = 0; index < times.Length; index++) b.Write($"{index + 1}時限目{times[index]}", 20, 760 + (index + 1) * 15);
         return b.Page(1800, 1000);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void ReturnDedicatedClockFollowsOriginalColumnAfterSortedDatePersistence(bool reversed)
+    {
+        var result = PdfScheduleParser.Special([ReturnPage(reversed ? [2,1,3,4,5] : [1,2,3,4,5])], MaterialKind.ExamReturn);
+        var expectedDate = reversed ? "2026-04-02" : "2026-04-01";
+        Assert.Equal(expectedDate, result.DedicatedTimeDate);
+        Assert.Equal(Enumerable.Range(1,5).Select(d => $"2026-04-0{d}"), result.CoveredDates);
+        var restored = Takupoke.Infrastructure.Storage.DataCodec.Decode<SpecialAnalysis>(Takupoke.Infrastructure.Storage.DataCodec.Encode(result));
+        foreach (var date in restored.CoveredDates)
+        {
+            var day = DateOnly.Parse(date); var first = date == expectedDate;
+            var engine = new TimetableEngine(new(Specials: [restored]));
+            Assert.Equal(first ? new("10:30", "11:10") : new TimeRange("12:50", "13:35"), restored.PeriodTime(day, 5));
+            Assert.Equal(first ? new("11:10", "11:50") : new TimeRange("13:35", "14:20"), restored.PeriodTime(day, 6));
+            var empty = new ScheduleChange(date, "2_CN", "5", "", "架空変更科目A", "", "", "変更", "", "");
+            Assert.Equal(restored.PeriodTime(day, 5), Assert.Single(engine.ChangeTimes(empty)));
+            if (date is "2026-04-01" or "2026-04-02")
+            {
+                var block = Assert.Single(engine.Blocks(day, "1_1").Where(b => b.StartPeriod == 5 && b.EndPeriod == 6));
+                Assert.Equal(first ? new("10:30", "11:50") : new TimeRange("12:50", "14:20"), engine.CardTime(day, "1_1", block));
+                Assert.Equal(first, engine.IsInProgress(day, "1_1", block, new DateTimeOffset(day.Year, day.Month, day.Day, 10,45,0,TimeSpan.FromHours(9))));
+                var fragment = block with { StartPeriod = 6 };
+                Assert.Equal(restored.PeriodTime(day,6), engine.CardTime(day,"1_1",fragment));
+                var original = restored.Lessons.First(l => l.ClassName == "1_1" && l.Date == date && l.Period == 5);
+                Assert.Equal(original.RecordedTime, restored.TimeFor(original));
+            }
+        }
     }
 }

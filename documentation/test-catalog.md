@@ -32,9 +32,9 @@ CIはpushのbefore、PRのbase、手動実行ではHEADの親を比較する。
 | [OIDC・実認証・取消](test-catalog/auth.md) | 5 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [リンク・検索・名称対応](test-catalog/links.md) | 10 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [通知・差分・実配信](test-catalog/notifications.md) | 18 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [時間割・授業名・時刻・日付](test-catalog/timetable.md) | 29 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [時間割・授業名・時刻・日付](test-catalog/timetable.md) | 30 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [Strict PDF・文字・罫線・試験・返却](test-catalog/pdf.md) | 13 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [固定iOS参照・独立期待値](test-catalog/parity.md) | 8 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [固定iOS参照・独立期待値](test-catalog/parity.md) | 9 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [WinUI画面・行選択・表示領域・実操作・再起動](test-catalog/app-ui.md) | 7 | Windows WinUI x64。Linuxクロスビルドは操作成功に数えない |
 | [配布パッケージ・ライセンス・公開情報](test-catalog/release.md) | 13 | Linux Python／Windows包装・導入検証 |
 | [テスト一覧・対象検索・宣言整合性・CI接続](test-catalog/test-catalog.md) | 14 | Linux Python（隔離Gitリポジトリ） |

@@ -9,6 +9,7 @@ public static partial class PdfScheduleParser
     public static SpecialAnalysis Special(IReadOnlyList<PdfPageLayout> pages, MaterialKind kind, CancellationToken token = default)
     {
         if (kind is not MaterialKind.Exam and not MaterialKind.ExamReturn || pages.Count != (kind == MaterialKind.Exam ? 6 : 1)) throw new PdfParseException("P04");
+        string? dedicatedTimeDate = null;
         int? year = null; string[]? expectedDates = null; PdfTimes? expectedTimes = null;
         var classes = new HashSet<string>(); var lessons = new List<SpecialLesson>();
         for (var index = 0; index < pages.Count; index++)
@@ -23,6 +24,7 @@ public static partial class PdfScheduleParser
             if (expectedTimes is not null && !expectedTimes.Same(times)) throw new PdfParseException("P05", index + 1);
             expectedTimes = times;
             var parsed = kind == MaterialKind.Exam ? ExamPage(page, currentYear, index + 1, times, token) : ReturnPage(page, currentYear, times, token);
+            if (kind == MaterialKind.ExamReturn) dedicatedTimeDate = parsed.Dates.FirstOrDefault();
             var dates = parsed.Dates.Order(StringComparer.Ordinal).ToArray();
             if (expectedDates is not null && !expectedDates.SequenceEqual(dates)) throw new PdfParseException("P10", index + 1);
             expectedDates = dates;
@@ -32,7 +34,7 @@ public static partial class PdfScheduleParser
         }
         if (year is null || expectedDates is null || expectedTimes is null || classes.Count != 17 || lessons.Count == 0) throw new PdfParseException("P04");
         return new(kind, year.Value, expectedDates, classes.Order(StringComparer.Ordinal).ToArray(), expectedTimes.Single,
-            lessons.OrderBy(l => l.Date, StringComparer.Ordinal).ThenBy(l => l.ClassName, StringComparer.Ordinal).ThenBy(l => l.Period).ThenBy(l => l.Page).ToArray());
+            lessons.OrderBy(l => l.Date, StringComparer.Ordinal).ThenBy(l => l.ClassName, StringComparer.Ordinal).ThenBy(l => l.Period).ThenBy(l => l.Page).ToArray(), dedicatedTimeDate);
     }
     private static ParsedSpecialPage ExamPage(PdfPageLayout page, int year, int number, PdfTimes times, CancellationToken token)
     {

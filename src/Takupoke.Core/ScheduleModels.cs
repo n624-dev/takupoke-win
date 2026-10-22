@@ -76,13 +76,17 @@ public sealed record SpecialLesson(string Date, string ClassName, int Period, in
 }
 
 public sealed record SpecialAnalysis(MaterialKind Kind, int SchoolYear, IReadOnlyList<string> CoveredDates,
-    IReadOnlyList<string> CoveredClasses, IReadOnlyDictionary<int, TimeRange> PeriodTimes, IReadOnlyList<SpecialLesson> Lessons)
+    IReadOnlyList<string> CoveredClasses, IReadOnlyDictionary<int, TimeRange> PeriodTimes, IReadOnlyList<SpecialLesson> Lessons, string? DedicatedTimeDate = null)
 {
     public bool Applies(DateOnly day, string className) => CoveredDates.Contains(day.Iso()) && CoveredClasses.Contains(className);
     public TimeRange? PeriodTime(DateOnly day, int period)
     {
         if (!CoveredDates.Contains(day.Iso())) return null;
-        if (Kind == MaterialKind.ExamReturn && day.Iso() != CoveredDates.FirstOrDefault()) return ScheduleTimes.Normal.GetValueOrDefault(period);
+        if (Kind == MaterialKind.ExamReturn)
+        {
+            if (DedicatedTimeDate is null || !CoveredDates.Contains(DedicatedTimeDate)) return null;
+            if (day.Iso() != DedicatedTimeDate) return ScheduleTimes.Normal.GetValueOrDefault(period);
+        }
         return PeriodTimes.GetValueOrDefault(period);
     }
     public TimeRange? DisplayTime(SpecialLesson lesson, int start, int end)
@@ -93,7 +97,7 @@ public sealed record SpecialAnalysis(MaterialKind Kind, int SchoolYear, IReadOnl
     public TimeRange? TimeFor(SpecialLesson lesson)
     {
         if (!SchoolDate.TryParse(lesson.Date, out var day) || !Applies(day, lesson.ClassName)) return null;
-        if ((Kind != MaterialKind.ExamReturn || lesson.Date == CoveredDates.FirstOrDefault()) && lesson.RecordedTime is not null) return lesson.RecordedTime;
+        if (lesson.RecordedTime is not null) return lesson.RecordedTime;
         var start = PeriodTime(day, lesson.SpanStart);
         var end = PeriodTime(day, lesson.SpanEnd);
         return start is not null && end is not null ? new(start.Start, end.End) : null;

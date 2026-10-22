@@ -1,7 +1,7 @@
 # 時間割・授業名・時刻・日付
 
 対応関係・宣言名・実行方法のSHA-256：
-`883b87373a10bac49561d53ad9ce0be00899fcc2c9549f2966998ac0e4f84e6b`
+`587a052b066ee2af939b5841a278804b122efc4fd08970990a05d06308ba7746`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -53,3 +53,4 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `SemesterBoundsAllowTheWeekOverlappingOctoberFirst`
 - `ReplacedMergedSpecialUsesVerifiedClocksForRemainingFragments`
 - `ConflictingOverridesWarnAndUseRealWeekdayWithoutLosingOtherTags`
+- `LegacyReturnRangeRemainsVerbatimButUnknownColumnDateCannotSupplyPeriodClocks`

@@ -59,3 +59,9 @@ source63e801a、Debian13/.NET10.0.402。Core第2試行は共通Takupoke.Core参�
 - #57/58：WinのSourceWatcherには版の先行ackや同一Sourceの再登録省略はない。既存の有界debounce・取消を維持し、欠損フォルダー復旧後の同一path Replaceで監視が戻る実FileSystemWatcher回帰を追加した。
 
 一覧を機能・ファイルで事前検索し、write/check --base ebe0848を実行。Linux/.NET10.0.402のCore195件・統合166件が失敗0。Python一覧14件・配布通知13件・公開tree検査も成功。新規GPT-6.1 Sol/Highによるコード差分だけのレビューでnull入力の指摘を修正し、修正差分の再確認もblockingなし。Windowsビルド・UIは次のCIで確認する。
+
+### Issue59 初回ローカル検査（対処前）
+
+基点5bbca48からのIssue59作業差分、Debian13/.NET10.0.402。Core195件中151成功・44失敗、統合168件は成功。Coreの失敗は固定Swift参照比較の時間欄で、具体的な差とfixture生成元はこれから照合する。対処前に観測を記録し、期待値・fixtureを一律変更しない。次の試行前に根拠と修正をpushする。
+
+44件はすべて返却を含む固定参照ケースで、追加情報のない旧入力を「元PDFの先頭列不明」とする新しい安全条件により時計がnilになった差だった。ExportParity.swift:37〜40を全文照合すると、このfixtureは元資料解析のキャッシュではなく、2032-04-05を専用日として直接構築した2日分の架空モデルである。固定fixture・生成元・hash・全期待値は維持し、この既知の構築条件を入力adapterで明示する。日付列が2つの固定日であることもassertし、実出力やexpectedから値を生成しない。旧キャッシュの推測禁止は別の独立回帰で要求する。
