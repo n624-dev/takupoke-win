@@ -75,3 +75,12 @@ Windowsにも同じ日付sort後の専用日取り違えと保存済み時計の
 ### 公開準備
 
 追加59を含むa991d68のCI39750318016は全7チェック成功。Windows Core196件・統合171件、固定Swift参照、WinUI x64 Debug/Releaseの起動・実操作とARM64 buildが成功した。利用者の公開指示に従い、既存の通常Release/Latest経路で次の開発確認版を配布する。公開文面だけを今回の修正へ更新し、配布処理・6添付・導入検査・未確認事項は維持する。事前にrelease catalogを検索した。本文だけの変更なので追加テストは作らず、既存package-notices13件・一覧checkと実配布workflowの包装/導入検査を使う。
+
+### 2026-10-22 開発確認版10454の公開と照合
+
+[0.1.0-dev.10454](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10454)を通常Release/Latestとして公開した。配布元は008b108ffc65738150aea76d3044e82f4cc743a2。mainのCI39770173155は全7成功、配布39770173276は全8成功。6つの導入状態で実UI407/406/406/406/406/406項目が成功し、新規導入・同じ/別フォルダーへの更新・設定と無関係ファイルの保持・削除を確認した。所有作業領域の回収も成功した。
+
+認証なしのLatest APIでdraft=false・prerelease=false・tag・完全SHAを照合し、全6添付を匿名取得した。GitHubのsize/digestとSHA256SUMSの5ファイルが一致し、x64/ARM64 ZIPのmanifestは版・元コミット・構成と全561/557ファイルのSHA-256に一致した。学校資料・テスト資料・鍵・ログの禁止形式を含まない。取得した一時領域は自動回収した。
+
+x64 Setupは70,822,016 bytes、SHA-256は`b877b2ecf01e6fe52bcc895648e2c7ee648ebd61c0d227af030a1a23ae17eb9f`。
+ARM64実機、学校認証・実資料、OneDrive同期、OS通知とロック/復帰の実機確認はこのCI・配布照合に含まない。
