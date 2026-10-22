@@ -71,3 +71,7 @@ source63e801a、Debian13/.NET10.0.402。Core第2試行は共通Takupoke.Core参�
 Windowsにも同じ日付sort後の専用日取り違えと保存済み時計の上書きがあった。元列順の先頭日をDedicatedTimeDateへ保存し、PDF特別解析版を7へ更新した。受理条件は変更しない。元列順[2,1,3,4,5]と[1,2,3,4,5]で各5日×8限、JSON再読込、変更の空枠、結合カード・進捗・fragmentと原文保持を検査し、実暗号化SQLiteの再起動後も同じ日付・時刻を要求する。旧キャッシュの不明な先頭列は推測せず、保存済み範囲は保持する。
 
 修正記録push後のLinux/.NET10.0.402はCore196件・統合169件が失敗0（共有参照buildは逐次実行）。一覧check --base 5bbca48と公開tree・noreply検査も成功した。固定参照のfixture・生成元Swift・hash・期待値は変更していない。前版5bbca48のCI39742410763は全7成功（Windows Core195・統合168、Linux Core195・統合166、WinUI操作とx64/ARM64 build）。Issue59追加後のWindows CIはこれから確認する。
+
+### 公開準備
+
+追加59を含むa991d68のCI39750318016は全7チェック成功。Windows Core196件・統合171件、固定Swift参照、WinUI x64 Debug/Releaseの起動・実操作とARM64 buildが成功した。利用者の公開指示に従い、既存の通常Release/Latest経路で次の開発確認版を配布する。公開文面だけを今回の修正へ更新し、配布処理・6添付・導入検査・未確認事項は維持する。事前にrelease catalogを検索した。本文だけの変更なので追加テストは作らず、既存package-notices13件・一覧checkと実配布workflowの包装/導入検査を使う。
