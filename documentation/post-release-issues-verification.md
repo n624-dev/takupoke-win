@@ -60,3 +60,17 @@ UI変更前の検索は test-catalog の AppViewModel / WindowsNotifications / M
 iOSとの照合: ApplicationData.prepareは永続installedPeriodの実変更時だけresetForRetentionを呼び、SettingsViewはAppStorageへの直接Picker bindingで固定初期値guardを持たない。#6はWindows独自ロック/Busy経路。#9はWindows通常読取の未確認色命令への対応であり、固定Strict239の受理規則変更や共通実装の導入は行っていない。
 
 差分の自己確認で、単一subpathが同じ矩形を2周する場合も不透明背景と見なせてしまう余地を見つけた。even-odd fillでは塗りが相殺し得るため、矩形は4頂点＋任意の終端閉鎖1点だけを許し、再走査するpathは未確認として拒否する。テスト失敗からの期待値変更ではなく、入力独立の穴あき背景回帰を追加した。進行中のActionsは取り消さない。
+
+## PR・main の最終結果と公開状況
+
+- 最終製品ソース: e001729aee0afadde59032d42ed5c11e015e4bc0。
+- [PR #15](https://github.com/n624-dev/takupoke-win/pull/15) は2026-10-22 16:02 UTCにmainへ反映され、merged=trueをAPIで確認した。#4–14の11件はクローズされた。
+- 最初の [PR CI](https://github.com/n624-dev/takupoke-win/actions/runs/39808892974) と、補強後の [最終PR CI](https://github.com/n624-dev/takupoke-win/actions/runs/39809448474) は両方とも全7ジョブ成功。実行を取り消していない。
+- 最終PRのログではWindows Core199件・Integration215件、実WinUI操作406チェック成功。x64 Debug/Release・ARM64 Release、Linux、固定Swift参照も成功。
+- [main CI](https://github.com/n624-dev/takupoke-win/actions/runs/39810426324) も全7ジョブ成功。16:02:18開始、最後のx64実画面ジョブが16:05:09に成功。16:07 UTCの一括確認で全完了を照合した。
+- 16:07 UTC、両リポジトリのopen issue一覧をAPIで取得し、未対応issueが0件であることを確認した。
+- GitHub確認は完了実績から間隔を決め、複数実行を一括確認した。最後のPRは約3分、mainも約3分だった。
+
+0.1.0-dev.10454は前回公開済みで、今回の追加4件はまだ配布版へ含まれない。次版は `Development installers` を `main` / `version=0.1.0-dev.10455` で起動する準備まで完了した。公開ゲート・導入検査を省略していない。
+
+環境のGH_TOKENによるgh API呼出しがHTTP 401となった（トークンの値は出力・転記していない）。GitHub連携でコード反映・PRマージ・検査確認は継続できたが、連携にはworkflow_dispatchの開始機能が無い。環境には代替のGitHub認証設定が無く、公開Actionsは未起動。環境認証の更新または利用者によるGitHub画面からの起動を依頼した。401の原因を期限切れ等と断定しない。認証が復旧したら既存の全検証と導入検査を伴う公開経路を使用し、公開後の匿名ダウンロード・全ハッシュを確認する。
