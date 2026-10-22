@@ -58,3 +58,5 @@ UI変更前の検索は test-catalog の AppViewModel / WindowsNotifications / M
 | #14 | iOS #56 相当。WorkbookKindIsIndependentOfRemarksAndEscapesDecodeOnlyOnce。shared/inline/rich、CR/LF/CRLF、リテラル保護・surrogate・類似不正表現。一度だけ復号、原文保持、XLSX解析版6 |
 
 iOSとの照合: ApplicationData.prepareは永続installedPeriodの実変更時だけresetForRetentionを呼び、SettingsViewはAppStorageへの直接Picker bindingで固定初期値guardを持たない。#6はWindows独自ロック/Busy経路。#9はWindows通常読取の未確認色命令への対応であり、固定Strict239の受理規則変更や共通実装の導入は行っていない。
+
+差分の自己確認で、単一subpathが同じ矩形を2周する場合も不透明背景と見なせてしまう余地を見つけた。even-odd fillでは塗りが相殺し得るため、矩形は4頂点＋任意の終端閉鎖1点だけを許し、再走査するpathは未確認として拒否する。テスト失敗からの期待値変更ではなく、入力独立の穴あき背景回帰を追加した。進行中のActionsは取り消さない。

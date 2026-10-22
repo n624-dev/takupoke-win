@@ -77,7 +77,8 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
                 {
                     // Overlapping subpaths can create holes under the fill rule.
                     // A bounding box is not proof of an opaque rectangle.
-                    if (corners.Length != 4 || corners.Any(p => p.X != left && p.X != right || p.Y != top && p.Y != bottom)) throw new PdfParseException("P01");
+                    if (path.Count is not 4 and not 5 || path.Count == 5 && path[0] != path[^1]
+                        || corners.Length != 4 || corners.Any(p => p.X != left && p.X != right || p.Y != top && p.Y != bottom)) throw new PdfParseException("P01");
                     for (var index = 0; index < path.Count; index++)
                     {
                         var next = path[(index + 1) % path.Count];

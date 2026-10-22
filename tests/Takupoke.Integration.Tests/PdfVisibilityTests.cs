@@ -81,6 +81,11 @@ public sealed class PdfVisibilityTests
         var partial = new PdfPaintVisibility();
         partial.Paths(new([new (double, double)[] { (10, 10), (20, 10), (20, 20), (10, 20), (10, 10) }], true, false, 1, false));
         partial.Glyph(Glyph()); Assert.Throws<PdfParseException>(partial.Validate);
+        // The same rectangle traversed twice can cancel under even-odd fill;
+        // its bounding box is not proof of an opaque background.
+        var retraced = new PdfPaintVisibility();
+        Assert.Throws<PdfParseException>(() => retraced.Paths(new([
+            new (double, double)[] { (0, 0), (50, 0), (50, 50), (0, 50), (0, 0), (50, 0), (50, 50), (0, 50), (0, 0) }], true, false, 1, false)));
         var holes = new PdfPaintVisibility();
         Assert.Throws<PdfParseException>(() => holes.Paths(new([
             new (double, double)[] { (0, 0), (50, 0), (50, 50), (0, 50), (0, 0) },
