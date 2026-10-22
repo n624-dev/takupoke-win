@@ -79,7 +79,7 @@ public sealed class NotificationCoordinatorTests : IAsyncLifetime
         await using var store = new SchoolDataStore(_root, _protector); var sink = new Sink();
         await store.WriteAsync(await store.BeginAsync(), "notifications", new NotificationBaseline(Pending: new Dictionary<string, PendingNotice> { ["exam"] = new("fake-accepted", 1) }));
         sink.Delivered.Add(("exam", "fake-accepted"));
-        await new NotificationCoordinator(store, sink).CheckAsync(new(), new Dictionary<MaterialKind, string>(), Preferences, Today);
+        await new NotificationCoordinator(store, sink).CheckAsync(new(), new Dictionary<MaterialKind, string> { [MaterialKind.Exam] = "fake-accepted" }, Preferences, Today);
         Assert.Equal(0, sink.Attempts);
         Assert.Empty((await store.ReadAsync<NotificationBaseline>(await store.BeginAsync(), "notifications"))!.Pending!);
     }
@@ -183,5 +183,44 @@ public sealed class NotificationCoordinatorTests : IAsyncLifetime
         Assert.Equal("exam", sink.Sends[1].Kind);
         await coordinator.CheckAsync(new(), new Dictionary<MaterialKind, string> { [MaterialKind.Exam] = "fake-next" }, Preferences, Today.AddDays(1));
         Assert.Equal(2, sink.Attempts);
+    }
+
+    [Theory]
+    [InlineData("cer")]
+    [InlineData("cre")]
+    [InlineData("ecr")]
+    [InlineData("erc")]
+    [InlineData("rce")]
+    [InlineData("rec")]
+    public async Task PersistedThreeKindPendingSurvivesEveryPartialLoadOrderWithoutStaleDelivery(string order)
+    {
+        var sink = new Sink { Accept = false };
+        var digests = new Dictionary<MaterialKind, string> { [MaterialKind.Exam] = "old-exam", [MaterialKind.ExamReturn] = "old-return" };
+        await using (var store = new SchoolDataStore(_root, _protector))
+        {
+            var coordinator = new NotificationCoordinator(store, sink);
+            await coordinator.CheckAsync(Changes("架空A"), digests, Preferences, Today);
+            digests[MaterialKind.Exam] = "new-exam"; digests[MaterialKind.ExamReturn] = "new-return";
+            await coordinator.CheckAsync(Changes("架空B"), digests, Preferences, Today);
+            Assert.Equal(3, (await store.ReadAsync<NotificationBaseline>(await store.BeginAsync(), "notifications"))!.Pending!.Count);
+        }
+        await using var reopened = new SchoolDataStore(_root, _protector);
+        sink = new Sink(); var retry = new NotificationCoordinator(reopened, sink);
+        await retry.CheckAsync(new(), new Dictionary<MaterialKind, string>(), Preferences, Today);
+        Assert.Equal(0, sink.Attempts);
+        Assert.Equal(3, (await reopened.ReadAsync<NotificationBaseline>(await reopened.BeginAsync(), "notifications"))!.Pending!.Count);
+        var loaded = new HashSet<char>();
+        foreach (var kind in order)
+        {
+            loaded.Add(kind);
+            var available = new Dictionary<MaterialKind, string>();
+            if (loaded.Contains('e')) available[MaterialKind.Exam] = "new-exam";
+            if (loaded.Contains('r')) available[MaterialKind.ExamReturn] = "new-return";
+            await retry.CheckAsync(loaded.Contains('c') ? Changes("架空B") : new(), available, Preferences, Today);
+            Assert.Equal(loaded.Count, sink.Attempts);
+            Assert.Equal(3 - loaded.Count, (await reopened.ReadAsync<NotificationBaseline>(await reopened.BeginAsync(), "notifications"))!.Pending!.Count);
+        }
+        await retry.CheckAsync(Changes("架空B"), digests, Preferences, Today);
+        Assert.Equal(3, sink.Attempts); Assert.Equal(3, sink.Delivered.Count);
     }
 }
