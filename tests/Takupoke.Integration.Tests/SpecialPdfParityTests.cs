@@ -138,4 +138,30 @@ public sealed class SpecialPdfParityTests
             }
         }
     }
+
+    private sealed class ClockProtector : Takupoke.Infrastructure.Storage.IKeyProtector, IDisposable
+    {
+        private readonly Takupoke.Infrastructure.Storage.EnvelopeCipher _cipher = new(System.Security.Cryptography.RandomNumberGenerator.GetBytes(32));
+        public byte[] Protect(byte[] key) => _cipher.Encrypt(key, "fictional-clock-key");
+        public byte[] Unprotect(byte[] bytes) => _cipher.Decrypt(bytes, "fictional-clock-key");
+        public void Dispose() => _cipher.Dispose();
+    }
+    [Fact]
+    public async Task DedicatedReturnDateSurvivesEncryptedSqliteStoreRestart()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-return-clock-" + Guid.NewGuid().ToString("N"));
+        using var protector = new ClockProtector();
+        try
+        {
+            var parsed = PdfScheduleParser.Special([ReturnPage([2,1,3,4,5])], MaterialKind.ExamReturn);
+            await using (var store = new Takupoke.Infrastructure.Storage.SchoolDataStore(root, protector))
+                await store.WriteAsync(await store.BeginAsync(), "fictional.special", parsed);
+            await using var reopened = new Takupoke.Infrastructure.Storage.SchoolDataStore(root, protector);
+            var restored = (await reopened.ReadAsync<SpecialAnalysis>(await reopened.BeginAsync(), "fictional.special"))!;
+            Assert.Equal("2026-04-02", restored.DedicatedTimeDate);
+            Assert.Equal(new TimeRange("10:30", "11:10"), restored.PeriodTime(new(2026,4,2),5));
+            Assert.Equal(new TimeRange("12:50", "13:35"), restored.PeriodTime(new(2026,4,1),5));
+        }
+        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
 }
