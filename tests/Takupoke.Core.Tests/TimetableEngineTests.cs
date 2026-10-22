@@ -5,6 +5,59 @@ namespace Takupoke.Core.Tests;
 
 public sealed class TimetableEngineTests
 {
+    [Fact]
+    public void OverlappingSpecialCardsKeepIndividualTimesAndProgressWhileCommonAndChangeRemainAmbiguous()
+    {
+        var exam = Special(MaterialKind.Exam, new("09:00", "09:40"));
+        var returns = Special(MaterialKind.ExamReturn, new("10:00", "10:20"));
+        SpecialAnalysis[][] combinations = [[exam], [returns], [exam, returns], [returns, exam],
+            [exam, Special(MaterialKind.ExamReturn, new("09:00", "09:40"))]];
+        foreach (var sources in combinations)
+        {
+            var engine = new TimetableEngine(new(Timetable(Lesson(1)), Specials: sources));
+            var blocks = engine.Blocks(Day, "1_CN");
+            Assert.Equal(sources.Length, blocks.Count);
+            foreach (var block in blocks)
+            {
+                var item = Assert.IsType<SpecialContent>(block.Content);
+                Assert.Equal(item.Time, engine.CardTime(Day, "1_CN", block));
+                Assert.Equal(item.Time == new TimeRange("09:00", "09:40"), engine.IsInProgress(Day, "1_CN", block,
+                    new DateTimeOffset(2032, 4, 5, 9, 10, 0, TimeSpan.FromHours(9))));
+            }
+            var ambiguous = sources.Length == 2 && sources[0].PeriodTimes[1] != sources[1].PeriodTimes[1];
+            var common = engine.CommonPeriodTime(1, [Day], ["1_CN"]);
+            Assert.Equal(ambiguous ? null : sources[0].PeriodTimes[1], common);
+            Assert.Equal(common, engine.CardTime(Day, "1_CN", new(1, 1, new ChangeContent(Change()))));
+        }
+    }
+
+    [Fact]
+    public void MergedSpecialCardsUseOnlyTheirOwnSourceAndNeverBorrowMissingTimes()
+    {
+        SpecialAnalysis Source(MaterialKind kind, string start, string middle, string end, bool joined) => new(kind, 2032,
+            [Day.Iso()], ["1_CN"], new Dictionary<int, TimeRange> { [1] = new(start, middle), [2] = new(middle, end) },
+            new[] { 1, 2 }.Select(p => new SpecialLesson(Day.Iso(), "1_CN", p, joined ? 1 : p, joined ? 2 : p,
+                joined ? new(start, end) : p == 1 ? new(start, middle) : new(middle, end), ["架空特別科目A"], 1)).ToArray());
+        foreach (var joined in new[] { false, true })
+        {
+            var engine = new TimetableEngine(new(Specials: [Source(MaterialKind.Exam, "09:00", "09:20", "09:40", joined),
+                Source(MaterialKind.ExamReturn, "10:00", "10:10", "10:20", joined)]));
+            var blocks = engine.Blocks(Day, "1_CN");
+            Assert.Equal(2, blocks.Count);
+            foreach (var block in blocks)
+            {
+                Assert.Equal((1, 2), (block.StartPeriod, block.EndPeriod));
+                var item = Assert.IsType<SpecialContent>(block.Content);
+                Assert.Equal(item.Kind == MaterialKind.Exam ? new("09:00", "09:40") : new TimeRange("10:00", "10:20"), engine.CardTime(Day, "1_CN", block));
+            }
+            Assert.Null(Assert.Single(engine.ChangeTimes(Change("1,2"))));
+        }
+        var missing = Source(MaterialKind.Exam, "09:00", "09:20", "09:40", false) with { PeriodTimes = new Dictionary<int, TimeRange>() };
+        missing = missing with { Lessons = missing.Lessons.Select(l => l with { RecordedTime = null }).ToArray() };
+        var unknown = new TimetableEngine(new(Specials: [missing, Source(MaterialKind.ExamReturn, "10:00", "10:10", "10:20", false)]));
+        Assert.Null(unknown.CardTime(Day, "1_CN", unknown.Blocks(Day, "1_CN")[0]));
+    }
+
     private static readonly DateOnly Day = new(2032, 4, 5);
     private static NormalLesson Lesson(int period, string subject = "架空科目A", string teacher = "架空教員A", string room = "架空教室A") =>
         new("1_CN", Day.SchoolWeekday(), period, new(subject, teacher, room), "架空原文A", 1);

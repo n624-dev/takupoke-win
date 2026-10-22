@@ -6,6 +6,37 @@ namespace Takupoke.Core.Tests;
 public sealed class SchedulePresentationTests
 {
     [Fact]
+    public void ContextualInternationalChangesUseClassAndSchoolYearBeforeReplacingOrdinaryLessons()
+    {
+        var mapping = new MappingRules([new("留 架空正式科目A", "架空正式科目A", ["1_CN", "2_CN"], true)], [], [],
+            [new("架空教員A", "架空正式教員A", "架空正式科目A", "1_CN", 2032)]);
+        foreach (var (date, cls, subject, hidden) in new[] {
+            ("2032-04-05", "1_CN", "架空正式科目A（架空教員A）", true),
+            ("2033-03-07", "1_CN", "架空正式科目A（架空教員A）", true),
+            ("2033-04-04", "1_CN", "架空正式科目A（架空教員A）", false),
+            ("2032-04-05", "2_CN", "架空正式科目A（架空教員A）", false),
+            ("2032-04-05", "1_CN", "架空正式科目A（架空未確認教員B）", false),
+            ("2032-04-05", "1_CN", "架空正式科目A", true) })
+        {
+            var day = DateOnly.Parse(date);
+            var row = Change(after: subject) with { ChangeDate = date, ClassName = cls };
+            var normal = Normal with { ClassName = cls, Weekday = day.SchoolWeekday() };
+            var data = new ScheduleData(new(day.SchoolYear(), day.Month < 4 ? "後期" : "前期", [normal]), [row]);
+            var presentation = new SchedulePresentation(data, mapping);
+            var engine = presentation.Engine(new());
+            var block = Assert.Single(engine.Blocks(day, cls));
+            if (hidden) Assert.Equal(normal, Assert.IsType<NormalContent>(block.Content).Lesson);
+            else Assert.Equal(row, Assert.IsType<ChangeContent>(block.Content).Change);
+            Assert.Equal(hidden ? 0 : 1, engine.Changes(new HashSet<string> { cls }, ChangeRange.All, day, day.Monday()).Count());
+            var included = Assert.Single(presentation.Engine(new() { International = true }).Blocks(day, cls));
+            Assert.Equal(row, Assert.IsType<ChangeContent>(included.Content).Change);
+            Assert.Equal(row, Assert.Single(engine.Slot(day, 1, cls).Changes));
+        }
+        var standard = mapping with { Teachers = [new("架空教員A", "架空正式教員A")], TeacherContexts = [] };
+        Assert.True(standard.IsInternationalChangeField("架空正式科目A（架空教員A）", "1_CN", 2033));
+    }
+
+    [Fact]
     public void DisjointChangeDetailsFindOnlyRequestedOriginalsWithoutChangingGrid()
     {
         var change = Change() with { Period = "1,3" };

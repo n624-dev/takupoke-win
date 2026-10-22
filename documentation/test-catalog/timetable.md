@@ -1,7 +1,7 @@
 # 時間割・授業名・時刻・日付
 
 対応関係・宣言名・実行方法のSHA-256：
-`58302cc4a4f6bc7f58b619cb6b5943dad67fb4a2156a6699583e441b005bcdeb`
+`7add3c9bad6ad9775ee6f9c80be7c4d994dc0311532e5fe226bbed891c935f61`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -21,6 +21,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Core.Tests/SchedulePresentationTests.cs](../../tests/Takupoke.Core.Tests/SchedulePresentationTests.cs)
 
+- `ContextualInternationalChangesUseClassAndSchoolYearBeforeReplacingOrdinaryLessons`
 - `DisjointChangeDetailsFindOnlyRequestedOriginalsWithoutChangingGrid`
 - `HomeAlwaysIncludesChangesWhenWeekViewIsSetToNormal`
 - `EmptyBeforeSubjectUsesOnlyNormalSourceNamesAndNeverSpecialsOrFullNames`
@@ -32,6 +33,8 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Core.Tests/TimetableEngineTests.cs](../../tests/Takupoke.Core.Tests/TimetableEngineTests.cs)
 
+- `OverlappingSpecialCardsKeepIndividualTimesAndProgressWhileCommonAndChangeRemainAmbiguous`
+- `MergedSpecialCardsUseOnlyTheirOwnSourceAndNeverBorrowMissingTimes`
 - `AdjacentIdenticalLessonsMergeWithoutChangingInput`
 - `ParallelLessonsRemainInSeparateLanes`
 - `LastMakeupWinsAndAllOriginalsRemainInDetails`

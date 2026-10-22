@@ -5,7 +5,7 @@ public sealed class SchedulePresentation(ScheduleData data, MappingRules? mappin
 {
     public TimetableEngine Engine(UserPreferences preferences, bool home = false) => new(data,
         home || preferences.IncludesChanges, preferences.International,
-        mappings is null ? null : (source, cls) => mappings.IsInternational(mappings.SeparateChangeField(source).Subject, cls));
+        mappings is null ? null : (source, cls, year) => mappings.IsInternationalChangeField(source, cls, year));
 
     public LessonNames Names(string cls, ScheduleBlock block, bool home = false) => block.Content switch
     {

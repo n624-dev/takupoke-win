@@ -32,7 +32,7 @@ public sealed record DayPlan(IReadOnlyList<SchoolEvent> Events, bool IsNoClass, 
 
 /// <summary>Read-only projection shared by the home page, timetable and details.</summary>
 public sealed class TimetableEngine(ScheduleData data, bool includesChanges = true, bool international = false,
-    Func<string, string, bool>? internationalRule = null)
+    Func<string, string, int?, bool>? internationalRule = null)
 {
     private IEnumerable<SpecialAnalysis> Specials => data.Specials ?? [];
     public DayPlan Plan(DateOnly day)
@@ -68,7 +68,7 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
 
     public IEnumerable<ScheduleChange> Changes(IReadOnlySet<string> classes, ChangeRange range, DateOnly today, DateOnly weekStart) =>
         (data.Changes ?? []).Where(c => classes.Contains(c.DisplayClassName) && SchoolDate.TryParse(c.ChangeDate, out var day)
-            && Visible(c.DisplayClassName, c.BeforeSubject, c.AfterSubject)
+            && Visible(c)
             && (range == ChangeRange.All || range == ChangeRange.Today && day >= today || range == ChangeRange.Week && day >= weekStart && day < weekStart.AddDays(7)))
             .OrderBy(c => c.ChangeDate, StringComparer.Ordinal).ThenBy(c => c.Period, StringComparer.Ordinal).ThenBy(c => c.DisplayClassName, StringComparer.Ordinal);
 
@@ -79,7 +79,13 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
     }
 
     private bool Visible(string className, params string[] subjects) => international ||
-        !subjects.Any(s => DisplayText.IsInternational(s) || internationalRule?.Invoke(s, className) == true);
+        !subjects.Any(s => DisplayText.IsInternational(s) || internationalRule?.Invoke(s, className, null) == true);
+    private bool Visible(ScheduleChange change)
+    {
+        int? year = SchoolDate.TryParse(change.ChangeDate, out var day) ? day.SchoolYear() : null;
+        return international || !new[] { change.BeforeSubject, change.AfterSubject }.Any(s =>
+            DisplayText.IsInternational(s) || internationalRule?.Invoke(s, change.DisplayClassName, year) == true);
+    }
 
     public IReadOnlyList<ScheduleBlock> Blocks(DateOnly day, string className)
     {
@@ -87,7 +93,8 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
         for (var period = 1; period <= 8; period++)
         {
             var slot = Slot(day, period, className);
-            if (slot.Changes.Count == 0)
+            var visibleChanges = slot.Changes.Where(Visible).ToArray();
+            if (visibleChanges.Length == 0)
             {
                 foreach (var lesson in slot.BaseLessons.Where(l => Visible(className, l.Names.Subject, l.Names.SubjectFullName ?? "")))
                 {
@@ -104,7 +111,7 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
                     else result.Add(new(period, period, special));
                 }
             }
-            var change = EffectiveChange(slot.Changes.Where(c => Visible(className, c.BeforeSubject, c.AfterSubject)));
+            var change = EffectiveChange(visibleChanges);
             if (change is not null)
             {
                 var index = result.FindLastIndex(block => block.EndPeriod == period - 1 && block.Content is ChangeContent old && old.Change == change);
@@ -162,6 +169,18 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
 
     public TimeRange? CardTime(DateOnly day, string className, ScheduleBlock block)
     {
+        if (block.Content is SpecialContent item)
+        {
+            if (block.StartPeriod == block.EndPeriod) return item.Time;
+            var ranges = Specials.Where(s => s.Kind == item.Kind && s.Lessons.Contains(item.Lesson)).Select(source =>
+            {
+                var clocks = Enumerable.Range(block.StartPeriod, block.EndPeriod - block.StartPeriod + 1).Select(period =>
+                    UniqueTime(source.Lessons.Where(l => l.Date == day.Iso() && l.ClassName == className && l.Period == period
+                        && SameNames(l.Names, item.Names)).Select(source.TimeFor))).ToArray();
+                return clocks.Length > 0 && clocks.All(t => t is not null) ? new TimeRange(clocks[0]!.Start, clocks[^1]!.End) : null;
+            });
+            return UniqueTime(ranges);
+        }
         var first = SlotTime(day, className, block.StartPeriod);
         var last = SlotTime(day, className, block.EndPeriod);
         return first is not null && last is not null ? new(first.Start, last.End) : null;

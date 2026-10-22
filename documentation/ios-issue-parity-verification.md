@@ -12,8 +12,21 @@ Debian13/x86_64、.NET SDK10.0.402でCore184件・統合149件が失敗0。後�
 
 ## Windows CI初回の回帰テスト準備失敗
 
-source`ccd11ab`、run39702647850／試行1、Windows2025・.NET10で、追加したFailedTimeRequestPreservesCorruptCacheAndDatabaseFailuresStillStopがschool.sqliteを破損データへ置換する段階でIOExceptionになった（同テスト77行）。取得・保存失敗後の保持確認までは通過したが、このケースのDB破損確認に未到達。Core184件は成功、統合は1件失敗。Linux側とWinUI x64 Debug／Release・ARM64のビルド／既存操作は成功した。
+source`ccd11ab`、run39702647850／試行1、Windows2025・.NET10で、追加したFailedTimeRequestPreservesCorruptCacheAndDatabaseFailuresStillStopがschool.sqliteのファイルロックによるIOExceptionで失敗した。最終スタックは所有一時ディレクトリの回収（同テスト77行）であり、DB破損確認の成否はこの結果では確定できない。Core184件は成功、統合は1件失敗。Linux側とWinUI x64 Debug／Release・ARM64のビルド／既存操作は成功した。
 
 対処前に記録。`pool|sqlite|IOException|school.sqlite`で既存documentationとstore・テストを照合する。テストのtrigger設定用SqliteConnectionだけが既定poolを使い、製品SchoolDataStoreはPooling=falseで開く条件の違いを調べる。検証条件を削除せず、同じ失敗後保持とDB破損停止をWindowsでも実行する。
 
 change-row-exclusion-verification.mdの既存「SQLite接続の既定プールが削除を妨げた」記録と一致した。今回も製品接続はPooling=falseで、追加したtrigger設定用接続だけが既定値だった。この所有接続をPooling=falseにそろえ、DB破損の作成・例外・bytes保持のassertionをすべて維持した。製品コードは変更しない。修正後のWindows結果はまだ未確認。
+
+## 追加Issue 45・46の実装中Linux検査（2026-10-22）
+
+基点f300e90からの作業差分、Debian13／.NET10.0.402。追加Issueの時限・文脈判定を変更した段階で既存Core検査を実行し、184件中11件が失敗した。成功173件、コンパイルは成功。詳細ログを読む前に観測を記録した。対応する実装・固定iOS参照・独立期待値を照合し、仕様修正に必要な差か、別の回帰かを調べる。期待値を一律変更しない。
+
+11件の失敗は、全て固定iOS参照の`changes-false-special-3`（試験と返却が同時に存在する各行事タグ）であり、差は両カードのtimeだけだった。元のSwift fixtureと生成元hash・再生成照合は変更しない。比較の期待側で対象11IDを明示し、元の2カードがexam／examReturn・time=nilであることも検査してから、独立した確定期待値09:10〜09:50／09:10〜10:00を要求する。C#結果から期待値を生成せず、その他の全フィールド・共通欄・変更時刻も引き続き固定参照へ完全一致させる。追加の独立回帰は別時刻・並び順・単独／同時・同時刻・結合・時刻欠落・授業中を検査する。参照差を隠すためのskipや実結果の正規化は行わない。
+
+## 追加Issue 45・46の修正内容
+
+- #45：共有の表示判定へ変更日由来の学校年度とクラスを渡し、文脈付き教員名の確認済み括弧だけを分離する。Win側は非表示変更の影響で通常／特別授業を抑制しないよう、置換前のchanges絞り込みも接続した。元のSlotと原文は保持する。3月・別年度・別クラス・未確認括弧・一般教員規則・OFF／ON・変更一覧と通常授業の保持を回帰で検査する。
+- #46：単独特別カードは保存された自分の時刻、結合カードはkindと元授業が一致する解析に限定した各コマの時刻を使う。欠落を別資料から補わず、共通欄と変更カードの曖昧さは維持する。単独／同時／逆順／同時刻／異なる時刻・結合・時刻欠落・授業中を独立した架空入力で検査する。
+
+LinuxのCore187件・統合149件は失敗0。固定iOS fixture・生成元・hashは未変更であり、追加仕様に一致するカード時計だけ明示した期待値を使う。Swift原参照の再生成照合は既存CIで維持する。追加分のWindows CIはこれから確認する。

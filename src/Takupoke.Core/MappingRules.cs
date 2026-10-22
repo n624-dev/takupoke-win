@@ -121,6 +121,8 @@ public sealed record MappingRules(IReadOnlyList<MappingRule> Subjects, IReadOnly
         }
         return new(remaining, teacher, room);
     }
+    public bool IsInternationalChangeField(string source, string className, int? year) =>
+        IsInternational(SeparateChangeField(source, className, year).Subject, className);
     public ChangePresentation Present(ScheduleChange change)
     {
         var cls = change.DisplayClassName;
