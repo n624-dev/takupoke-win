@@ -278,4 +278,24 @@ public sealed class SharedDataUpdaterTests
         finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
     }
 
+
+    [Fact]
+    public async Task NullTeacherContextClassInCacheDoesNotBlockAuthenticatedRepair()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-mapping-tests-" + Guid.NewGuid().ToString("N"));
+        using var protector = new Protector();
+        try
+        {
+            await using var store = new SchoolDataStore(root, protector); var lease = await store.BeginAsync();
+            var saved = ApiPayloads.Mapping(ApiClientTests.MappingZip(), "fake-v1", Revision, "\"fake-mapping\"", DateTimeOffset.UtcNow);
+            var corrupt = saved with { Rules = saved.Rules with { TeacherContexts = [saved.Rules.TeacherContexts![0] with { ClassName = null! }] } };
+            await store.WriteAsync(lease, "api.mapping", corrupt);
+            using var http = new HttpClient(new Handler()); var updater = new SharedDataUpdater(new(http, new("https://example.invalid/")), store);
+            Assert.Null(await updater.LoadMappingAsync(lease));
+            Assert.Equal(DataCodec.Encode(corrupt), DataCodec.Encode(await store.ReadAsync<SavedMapping>(lease, "api.mapping")));
+            Assert.True((await updater.UpdateAsync(_ => Task.FromResult("fake-token"))).Single(r => r.Kind == DataSet.Mapping).Updated);
+            Assert.NotNull(await updater.LoadMappingAsync(lease));
+        }
+        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
 }

@@ -190,14 +190,14 @@ public sealed class ApiClientTests
         Assert.Throws<ApiException>(() => ApiPayloads.Times("{\"schemaVersion\":1,\"days\":[],\"extra\":true}"u8.ToArray()));
         Assert.Empty(ApiPayloads.Times("{\"schemaVersion\":1,\"days\":[]}"u8.ToArray()).Days);
     }
-    internal static byte[] MappingZip(string? mutation = null)
+    internal static byte[] MappingZip(string? mutation = null, string? rulesJson = null)
     {
         const string context = "{\"alias\":\"教A\",\"fullName\":\"架空教員A\",\"subject\":\"架空正式科目A\",\"className\":\"1_CN\",\"schoolYear\":2032}";
         var json = "{\"subjects\":[{\"alias\":\"科A\",\"fullName\":\"架空正式科目A\"}],\"teachers\":[],\"rooms\":[],\"teacherContexts\":[" + context + "]}";
         if (mutation == "extraProperty") json = json.Replace("\"alias\":\"科A\"", "\"alias\":\"科A\",\"source\":\"fake\"");
         if (mutation == "falseInternational") json = json.Replace("\"alias\":\"科A\"", "\"alias\":\"科A\",\"internationalStudent\":false");
         if (mutation == "duplicateContext") json = json.Replace(context, context + "," + context);
-        var bytes = Encoding.UTF8.GetBytes(json);
+        var bytes = Encoding.UTF8.GetBytes(rulesJson ?? json);
         var manifest = DataCodec.Encode(new { schemaVersion = 2, version = "fake-v1", publishedAt = "2032-01-02T03:04:05Z", mappings = new { bytes = bytes.Length, sha256 = mutation == "digest" ? new string('0', 64) : NotificationDiff.Digest(bytes) } });
         using var output = new MemoryStream();
         using (var archive = new ZipArchive(output, ZipArchiveMode.Create, true))
@@ -207,5 +207,29 @@ public sealed class ApiClientTests
             if (mutation == "extraFile") { using var entry = archive.CreateEntry("fake.csv").Open(); entry.Write("fake"u8); }
         }
         return output.ToArray();
+    }
+
+    [Fact]
+    public void VerifiedPackagePreservesScopedInternationalRuleBesideGenericAlias()
+    {
+        const string generic = "{\"alias\":\"架空科目A\",\"fullName\":\"架空正式科目A\"}";
+        const string scoped = "{\"alias\":\"留 架空科目A\",\"fullName\":\"架空正式科目A\",\"classes\":[\"1_CN\"],\"internationalStudent\":true}";
+        foreach (var subjects in new[] { generic + "," + scoped, scoped + "," + generic })
+        {
+            var json = "{\"subjects\":[" + subjects + "],\"teachers\":[],\"rooms\":[],\"teacherContexts\":[]}";
+            var rules = ApiPayloads.Mapping(MappingZip(rulesJson: json), "fake-v1", Revision, "\"fake-archive\"", DateTimeOffset.UtcNow).Rules;
+            Assert.True(rules.IsInternational("架空科目A", "1_CN")); Assert.False(rules.IsInternational("架空科目A", "2_CN"));
+            var day = new DateOnly(2032, 4, 5);
+            foreach (var cls in new[] { "1_CN", "2_CN" })
+            foreach (var kind in new[] { "休講", "補講", "変更" })
+            {
+                var change = new ScheduleChange(day.Iso(), cls, "1", "", "架空科目A", "", "", "架空備考A", "", "", kind);
+                var data = new ScheduleData(new(2032, "前期", [new(cls, 1, 1, new("架空一般科目B"), "", 1)]), [change]);
+                var filtered = new TimetableEngine(data, internationalRule: rules.IsInternationalChangeField);
+                if (cls == "1_CN") Assert.IsType<NormalContent>(Assert.Single(filtered.Blocks(day, cls)).Content);
+                else Assert.IsType<ChangeContent>(Assert.Single(filtered.Blocks(day, cls)).Content);
+                Assert.IsType<ChangeContent>(Assert.Single(new TimetableEngine(data, international: true, internationalRule: rules.IsInternationalChangeField).Blocks(day, cls)).Content);
+            }
+        }
     }
 }

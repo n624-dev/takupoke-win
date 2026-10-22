@@ -1,7 +1,7 @@
 # API・年度別行事・更新失敗
 
 対応関係・宣言名・実行方法のSHA-256：
-`4e04ca62e0b9e473d6d375d994c9b54bce1fcfae0d8738108831047654899c33`
+`a6290aef50d54cbc451a4738f5a240aa07b6a0f3bd2de7421a5fe037101b4ef9`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -33,6 +33,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `MappingRejectsUnverifiedOrAmbiguousPackages`
 - `MappingAcceptsVerifiedV2ContextWithoutExposingSourceCsv`
 - `ApiTimesRejectUnknownFieldsRatherThanIgnoringThem`
+- `VerifiedPackagePreservesScopedInternationalRuleBesideGenericAlias`
 
 ## [tests/Takupoke.Integration.Tests/EventSourceCheckerTests.cs](../../tests/Takupoke.Integration.Tests/EventSourceCheckerTests.cs)
 
@@ -54,3 +55,4 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `PublicFailureIsReportedIndependentlyAndRetryClearsOnlyItsFailure`
 - `PublicCheckCancellationPropagatesWithoutReplacingKnownState`
 - `CorruptMappingCanBeAuthenticatedAndReplacedWithoutPrematureDeletion`
+- `NullTeacherContextClassInCacheDoesNotBlockAuthenticatedRepair`

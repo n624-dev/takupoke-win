@@ -112,7 +112,7 @@ public static class ApiPayloads
         }
         var seenContexts = new HashSet<(string, int, string, string)>();
         foreach (var rule in contexts)
-            if (rule is null || !Text(rule.Alias) || !Text(rule.FullName) || !Text(rule.Subject) || rule.ClassName != rule.ClassName.Trim()
+            if (rule is null || !Text(rule.Alias) || !Text(rule.FullName) || !Text(rule.Subject) || !Text(rule.ClassName)
                 || rule.SchoolYear is < 2000 or > 2099 || !ClassSelection.Candidates.Contains(rule.ClassName)
                 || !seenContexts.Add((rule.Alias, rule.SchoolYear, rule.ClassName, MappingRules.Comparable(rule.Subject)))) throw new ApiException(ApiFailure.InvalidResponse);
     }

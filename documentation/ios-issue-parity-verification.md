@@ -46,3 +46,16 @@ source63e801a、Debian13/.NET10.0.402。Core第2試行は共通Takupoke.Core参�
 
 - ebe0848の通知処理・既存テスト全文とsource-refresh-pending-policyを照合。以前の送信済み通知テストは読込状態のない空入力でpendingを処理していたが、#50では未読込は保留し配信時に現在digestを確認する必要がある。テストに当該examの検証済みdigestを与え、OSへの再送0・pending消去の両assertionを維持する。追加で3種の読込順全6通りを暗号化SQLite再読込経路で検査する。
 - Core再試行のIOExceptionは共有objへの同時buildと一致し、製品処理開始前。今後は同じ参照出力を使う.NET buildを逐次実行する。既存SQLite接続poolの失敗とはpath・段階が異なる。製品やテスト条件を変えず、修正記録push後に逐次試行する。
+
+### 追加Issue47〜58の修正と検証
+
+- #47/56：変更内容をChangeKindへ保存し備考と分離する。OOXML escapeをshared/inline/richのt要素で一回だけ展開する。旧保存形式のNote fallbackは保持しparserVersionを6に更新。元の固定fixture/hashは変更せず旧フィールドと新規仕様の独立期待を検査する。
+- #48/53：不正な非空年度は補完しない。coordinatorの全入口で変更の取得前に拒否し、既存SQLite内容を保持する。Home・週・詳細の鮮度判定をdigest/version/現在年度/除外同意へ統一する。WinUIは元から不正な年度draftを保存しないが、破損した保存設定と直接呼出しも防御した。
+- #49：結合セルから残ったfragmentは、その元解析の各時限時計だけを使い、欠落時は不明にする。元セル全体の時計・原文は保持する。
+- #50：Winは元から全資料をまとめてロードするためiOSと同じ部分起動の消失はなかった。ただし入力が未読込のときの古いpending配信と、明示的対象削除を区別するためavailabilityを追加した。暗号化SQLite再起動・全6読込順・現在対象確認・3種の一回配信を検査する。
+- #51/52：クラス規則を一般exact aliasより優先する。確定した部屋だけを一段分離して教員文脈を確認し、末尾の部屋／教員の順序の両方を扱う。検証済みZIPから時間割合成までON/OFF・別クラスを検査する。
+- #54：競合時は振替を適用せず、実曜日の暫定時間割と他タグを保ち、Home/週へ合意済み警告を表示する。
+- #55：不正なmapping payloadだけを復旧可能として扱い、鍵・DB・I/O失敗は従来どおり停止する。レビューで見つかったnullのteacher-context classNameも型検証で拒否する。認証取消・保存前bytes保持・検証済みZIPによる置換を実DBで検査した。
+- #57/58：WinのSourceWatcherには版の先行ackや同一Sourceの再登録省略はない。既存の有界debounce・取消を維持し、欠損フォルダー復旧後の同一path Replaceで監視が戻る実FileSystemWatcher回帰を追加した。
+
+一覧を機能・ファイルで事前検索し、write/check --base ebe0848を実行。Linux/.NET10.0.402のCore195件・統合166件が失敗0。Python一覧14件・配布通知13件・公開tree検査も成功。新規GPT-6.1 Sol/Highによるコード差分だけのレビューでnull入力の指摘を修正し、修正差分の再確認もblockingなし。Windowsビルド・UIは次のCIで確認する。
