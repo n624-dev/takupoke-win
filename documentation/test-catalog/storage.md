@@ -1,7 +1,7 @@
 # 暗号化DB・原子保存・設定・年度期限
 
 対応関係・宣言名・実行方法のSHA-256：
-`0a79dd2959288332a46212dd441538f73c3741729782ba5dc4f5ecddc76a725c`
+`a03a100b937bd94ab2470731934cf26828523b11134bd420dfaea19856d660b8`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -58,3 +58,16 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `ExcludingEveryChangeRefusesAndPreservesLastGood`
 - `StorageFailureRollsBackConsentAnalysisAndAttemptTogether`
 - `PreviousPayloadsWithoutOptionalConsentRemainReadable`
+
+## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
+
+- `UnlockDuringUnfinishedReadReloadsAfterCancellationWithEitherTraySetting`
+- `FinishingBeforeUnlockAndRemainingLockedNeverApplyTheCancelledSnapshot`
+- `ExplicitStopDiscardsTheQueuedUnlockRefreshUntilExplicitResume`
+- `QueuedUnlockUsesTheNewRetentionLeaseAndKeepsTheOriginalFile`
+- `SamePeriodStartupReconcilesPendingWithoutClearingAcceptedOsHistory`
+- `AcceptedNoticeWithFailedPendingSaveIsAcknowledgedOnRestartWithoutResending`
+- `ActualRetentionChangeClearsOsHistoryAndOldPending`
+- `RetentionClearStillRunsWhenTheOldOperationIsCancelledBeforeReload`
+- `ActualSelectionHandlerPreservesRoundTripsDuringNotificationWaitAndRestart`
+- `SelectionSaveFailureKeepsPreferencesAndCanBeRetriedAfterRebuildingTheControl`

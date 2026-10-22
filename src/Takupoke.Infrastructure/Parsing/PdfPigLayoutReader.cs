@@ -30,20 +30,26 @@ public static class PdfPigLayoutReader
                 if (page.Rotation.Value is not 0 and not 90 and not 180 and not 270) throw new PdfParseException("P02", number);
                 if (page.Operations.Count > 1_000_000 || page.Letters.Count is < 1 or > 100000 || page.Text.Length > 100000) throw new PdfParseException("limit", number);
                 var transform = new PdfDisplayTransform(media.Left, media.Bottom, media.Width, media.Height, page.Rotation.Value);
-                var paths = new PdfPathEngine(transform, token);
-                var text = kind == MaterialKind.Timetable ? new PdfTextEngine(token) : null;
+                var paint = kind == MaterialKind.Timetable ? new PdfPaintVisibility(token) : null;
+                var paths = new PdfPathEngine(transform, token, paint is null ? null : paint.Paths);
+                var text = paint is not null ? new PdfTextEngine(token, glyph => paint.Glyph(transform.Glyph(glyph))) : null;
                 var resources = Resources(document, page.Dictionary); var fonts = new Dictionary<string, PdfFont>();
+                if (paint is not null && (Get(page.Dictionary, "Group") is not null
+                    || Get(resources, "ColorSpace") is { } spaces && Resolve<DictionaryToken>(document, spaces).Data.Keys.Any(key => key is "DefaultGray" or "DefaultRGB" or "DefaultCMYK")))
+                    throw new PdfParseException("P01", number);
                 foreach (var operation in page.Operations)
                 {
                     token.ThrowIfCancellationRequested();
                     var name = operation.Operator;
                     if (name == "Do") throw new PdfParseException("P12", number);
+                    if (paint is not null && PdfPaintVisibility.Unverified(name)) throw new PdfParseException("P01", number);
                     if (text is not null && name is "BDC" or "BMC" or "W" or "W*") throw new PdfParseException("P01", number);
-                    if (PdfPathEngine.Supports(name) || text is not null && PdfTextEngine.Supports(name))
+                    if (PdfPathEngine.Supports(name) || text is not null && PdfTextEngine.Supports(name) || paint is not null && PdfPaintVisibility.Supports(name))
                     {
                         var numbers = Numbers(operation);
                         if (PdfPathEngine.Supports(name)) paths.Operation(name, numbers);
                         if (text is not null && PdfTextEngine.Supports(name)) text.Operation(name, numbers);
+                        if (paint is not null && PdfPaintVisibility.Supports(name)) paint.Operation(name, numbers);
                     }
                     if (text is null) continue;
                     switch (operation)
@@ -69,10 +75,14 @@ public static class PdfPigLayoutReader
                         var items = Encoding.ASCII.GetString(serialized.ToArray()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
                         if (items.Length != 2 || !items[0].StartsWith('/')) throw new PdfParseException("P01", number);
                         var state = Resource(document, resources, "ExtGState", items[0][1..]);
-                        if (new[] { "Font", "SMask", "TR", "TR2" }.Any(state.Data.ContainsKey) || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1) throw new PdfParseException("P01", number);
+                        if (state.Data.Keys.Any(key => key is not ("Type" or "ca" or "CA" or "BM" or "LW"))
+                            || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1
+                            || state.Data.ContainsKey("BM") && Name(document, state, "BM") is not ("Normal" or "Compatible")) throw new PdfParseException("P01", number);
+                        if (state.Data.ContainsKey("LW")) paint!.Operation("w", [Number(document, state, "LW")]);
                     }
                 }
                 IReadOnlyList<PdfGlyph> glyphs = text is not null ? text.Finish(page.Text).Select(transform.Glyph).ToArray() : SpecialGlyphs(page, transform, token);
+                paint?.Validate();
                 var layout = new PdfPageLayout(transform.Width, transform.Height, glyphs, paths.Finish()); layout.Validate(number); output.Add(layout);
             }
             return output;

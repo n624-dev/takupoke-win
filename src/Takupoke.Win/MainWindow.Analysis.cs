@@ -27,12 +27,11 @@ public sealed partial class MainWindow
                 picker.Items.Add(new ComboBoxItem { Content = ClassSelection.Display(cls) + (!available.Contains(cls) ? "（現在の資料に該当なし）" : ""), Tag = cls });
             picker.SelectedItem = picker.Items.Cast<ComboBoxItem>().Single(item => (string)item.Tag == selected);
             AutomationProperties.SetAutomationId(picker, "analysis-class");
-            picker.SelectionChanged += async (_, _) =>
-            {
-                if (picker.SelectedItem is not ComboBoxItem { Tag: string cls } || cls == selected || !picker.IsLoaded) return;
-                var values = cls.Length == 0 ? Array.Empty<string>() : [cls];
-                await _model.SavePreferencesAsync(current => kind == MaterialKind.Timetable ? current with { TimetableAnalysisClasses = values } : current with { ChangeAnalysisClasses = values });
-            };
+            BindPreferenceSelection(picker, selected,
+                () => picker.SelectedItem is ComboBoxItem { Tag: string cls } ? (true, cls) : (false, ""),
+                (current, cls) => kind == MaterialKind.Timetable
+                    ? current with { TimetableAnalysisClasses = cls.Length == 0 ? [] : [cls] }
+                    : current with { ChangeAnalysisClasses = cls.Length == 0 ? [] : [cls] });
             var filters = Panel(SettingsSectionTitle("確認する範囲"), SettingInput(picker));
             if (selected.Length > 0 && !available.Contains(selected)) filters.Children.Add(SettingsDescription("選択したクラスは現在の解析結果にありません。選択は保持しています。"));
             if (kind == MaterialKind.Timetable)
@@ -40,7 +39,9 @@ public sealed partial class MainWindow
                 var weekday = _model.Preferences.TimetableAnalysisWeekday;
                 var days = new ComboBox { Header = "曜日", ItemsSource = new[] { "すべて", "月", "火", "水", "木", "金" }, SelectedIndex = weekday, MaxWidth = 420, HorizontalAlignment = HorizontalAlignment.Stretch };
                 AutomationProperties.SetAutomationId(days, "analysis-weekday");
-                days.SelectionChanged += async (_, _) => { if (days.SelectedIndex is >= 0 and <= 5 && days.SelectedIndex != weekday && days.IsLoaded) { var value = days.SelectedIndex; await _model.SavePreferencesAsync(current => current with { TimetableAnalysisWeekday = value }); } };
+                BindPreferenceSelection(days, weekday,
+                    () => (days.SelectedIndex is >= 0 and <= 5, days.SelectedIndex),
+                    (current, value) => current with { TimetableAnalysisWeekday = value });
                 filters.Children.Add(SettingInput(days));
                 foreach (var lesson in analysis.Timetable?.Lessons.Where(l => (selected.Length == 0 || l.ClassName == selected) && (weekday == 0 || l.Weekday == weekday)) ?? [])
                     rows.Add(AnalysisResultRow(DisplayText.Continuous(lesson.Names.Subject),

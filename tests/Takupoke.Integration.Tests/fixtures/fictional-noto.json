@@ -1,0 +1,107 @@
+{
+  "source": "https://github.com/notofonts/noto-cjk/blob/f8d157532fbfaeda587e826d4cd5b21a49186f7c/Sans/OTF/Japanese/NotoSansCJKjp-Regular.otf",
+  "sourceSha256": "68a3fc98800b2a27b371f2fb79991daf3633bd89309d4ffaa6946fd587f375b5",
+  "subsetSha256": "1095e2b540b343fb793ab48ac1ca846dcc65191c282e934fe4d82117e946905e",
+  "generator": "fontTools 4.61.1; subset unicode text only; layout_features=[]; recalc_timestamp=False; CFF names renamed FictionalNotoCJKSubset",
+  "fictionalText": "令和14年度前期時間割CN12345678架空科目A",
+  "ascent": 1160,
+  "descent": -288,
+  "glyphs": {
+    "1": {
+      "cid": 18,
+      "width": 555
+    },
+    "2": {
+      "cid": 19,
+      "width": 555
+    },
+    "3": {
+      "cid": 20,
+      "width": 555
+    },
+    "4": {
+      "cid": 21,
+      "width": 555
+    },
+    "5": {
+      "cid": 22,
+      "width": 555
+    },
+    "6": {
+      "cid": 23,
+      "width": 555
+    },
+    "7": {
+      "cid": 24,
+      "width": 555
+    },
+    "8": {
+      "cid": 25,
+      "width": 555
+    },
+    "A": {
+      "cid": 34,
+      "width": 608
+    },
+    "C": {
+      "cid": 36,
+      "width": 638
+    },
+    "N": {
+      "cid": 47,
+      "width": 723
+    },
+    "令": {
+      "cid": 9808,
+      "width": 1000
+    },
+    "前": {
+      "cid": 11237,
+      "width": 1000
+    },
+    "割": {
+      "cid": 11295,
+      "width": 1000
+    },
+    "和": {
+      "cid": 12144,
+      "width": 1000
+    },
+    "年": {
+      "cid": 16855,
+      "width": 1000
+    },
+    "度": {
+      "cid": 16945,
+      "width": 1000
+    },
+    "時": {
+      "cid": 20359,
+      "width": 1000
+    },
+    "期": {
+      "cid": 20735,
+      "width": 1000
+    },
+    "架": {
+      "cid": 20960,
+      "width": 1000
+    },
+    "目": {
+      "cid": 27864,
+      "width": 1000
+    },
+    "科": {
+      "cid": 29101,
+      "width": 1000
+    },
+    "空": {
+      "cid": 29404,
+      "width": 1000
+    },
+    "間": {
+      "cid": 42868,
+      "width": 1000
+    }
+  }
+}

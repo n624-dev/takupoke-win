@@ -57,7 +57,8 @@
         "tests/Takupoke.Integration.Tests/MaterialCoordinatorTests.cs",
         "tests/Takupoke.Integration.Tests/SourceWatcherTests.cs",
         "tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs",
-        "tests/Takupoke.Integration.Tests/WindowsSourceRefreshTests.cs"
+        "tests/Takupoke.Integration.Tests/WindowsSourceRefreshTests.cs",
+        "tests/Takupoke.Integration.Tests/AppLifecycleTests.cs"
       ]
     },
     {
@@ -84,7 +85,8 @@
         "tests/Takupoke.Integration.Tests/DataDirectoryTests.cs",
         "tests/Takupoke.Integration.Tests/PreferencesStoreTests.cs",
         "tests/Takupoke.Integration.Tests/SchoolDataStoreTests.cs",
-        "tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs"
+        "tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs",
+        "tests/Takupoke.Integration.Tests/AppLifecycleTests.cs"
       ]
     },
     {
@@ -157,7 +159,8 @@
       ],
       "checks": [
         "tests/Takupoke.Core.Tests/NotificationDiffTests.cs",
-        "tests/Takupoke.Integration.Tests/NotificationCoordinatorTests.cs"
+        "tests/Takupoke.Integration.Tests/NotificationCoordinatorTests.cs",
+        "tests/Takupoke.Integration.Tests/AppLifecycleTests.cs"
       ]
     },
     {
@@ -198,10 +201,14 @@
         "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.Special.cs",
         "src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs",
         "src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs",
-        "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs"
+        "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
+        "src/Takupoke.Infrastructure/Parsing/PdfPaintVisibility.cs",
+        "tests/shared/FictionalTimetablePdf.cs",
+        "tests/Takupoke.Integration.Tests/fixtures/fictional-noto.json"
       ],
       "checks": [
-        "tests/Takupoke.Integration.Tests/PdfParsingTests.cs"
+        "tests/Takupoke.Integration.Tests/PdfParsingTests.cs",
+        "tests/Takupoke.Integration.Tests/PdfVisibilityTests.cs"
       ]
     },
     {
@@ -262,7 +269,9 @@
         "tests/Takupoke.Win.UITests/Program.cs",
         "tests/Takupoke.Win.UITests/ScreenReview.cs",
         "tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj",
-        "tests/Takupoke.Win.UITests/startup-smoke.ps1"
+        "tests/Takupoke.Win.UITests/startup-smoke.ps1",
+        "src/Takupoke.Win/MainWindow.PreferenceSelection.cs",
+        "tests/Takupoke.Integration.Tests/AppPlatformFakes.cs"
       ],
       "checks": [
         "tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs",
@@ -270,7 +279,8 @@
         "tests/Takupoke.Win.UITests/Program.ChangeRows.cs",
         "tests/Takupoke.Win.UITests/Program.InstallerChecks.cs",
         "tests/Takupoke.Win.UITests/Program.TimetableChecks.cs",
-        "tests/Takupoke.Win.UITests/ShortcutReview.cs"
+        "tests/Takupoke.Win.UITests/ShortcutReview.cs",
+        "tests/Takupoke.Integration.Tests/AppLifecycleTests.cs"
       ]
     },
     {

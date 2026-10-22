@@ -28,6 +28,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private readonly DispatcherQueue _dispatcher;
     private readonly SemaphoreSlim _operations = new(1, 1);
     private readonly SemaphoreSlim _preferenceOperations = new(1, 1);
+    private readonly SemaphoreSlim _notificationResets = new(1, 1);
     private CancellationTokenSource _session = new();
     private readonly HttpClient _http;
     private readonly SchoolDataStore _school;
@@ -48,6 +49,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private DateTimeOffset _lastAutomaticCheck;
     private bool _busy;
     private bool _pendingRefresh;
+    private long _notificationReset;
+    private long _clearedNotificationReset;
     private bool _notificationsInitialized;
     private bool _protocolRegistered;
     private bool _automaticPaused;
@@ -88,7 +91,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public event Action? PrivateDataCleared;
     public event Action? NotificationActivated;
     public string NotificationStatus => _notificationSink.Status;
-    public AppViewModel(DispatcherQueue dispatcher)
+    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
+    public AppViewModel(DispatcherQueue dispatcher) : this(dispatcher, new WindowsDpapiProtector()) { }
+    internal AppViewModel(DispatcherQueue dispatcher, IKeyProtector protector, IFileIdentityProvider? identity = null)
     {
         _dispatcher = dispatcher;
         var directory = OfflineTest
@@ -97,14 +102,14 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         Root = directory.Root; RootMigrationMessage = directory.Message;
         var offline = OfflineTest ? new OfflineTestNetwork(Root) : null;
         _http = offline is not null ? new(offline) : ApiClient.CreateHttpClient();
-        _school = new(Root, new WindowsDpapiProtector()); _preferences = new(Root); _events = new(Root);
-        _api = new(_http); _shared = new(_api, _school); _materials = new(_school, new(new WindowsFileIdentity()));
+        _school = new(Root, protector); _preferences = new(Root); _events = new(Root);
+        _api = new(_http); _shared = new(_api, _school); _materials = new(_school, new(identity ?? new WindowsFileIdentity()));
         _authentication = new(new OidcClient(_http), offline is null ? null : offline.OpenBrowser);
         _authentication.ProgressChanged += value => OperationStatus = value;
         NavigationAnchor = Today; WeekStart = Today.DisplayWeekStart();
         _notifications = new(_school, _notificationSink);
         _notificationSink.Activated += () => _dispatcher.TryEnqueue(() => NotificationActivated?.Invoke());
-        _school.RetentionChanged += ClearPrivateData;
+        _school.RetentionChanged += () => { Interlocked.Increment(ref _notificationReset); ClearPrivateData(); };
         _watcher.Changed += () =>
         {
             var generation = System.Threading.Volatile.Read(ref _operationGeneration);
@@ -167,7 +172,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public Task RefreshAsync() => RefreshAsync(automatic: false);
     public Task RefreshAutomaticallyAsync(bool force = false)
     {
-        if (Locked || Busy || _automaticPaused || !force && DateTimeOffset.UtcNow - _lastAutomaticCheck < TimeSpan.FromMinutes(1)) return Task.CompletedTask;
+        if (Locked || _automaticPaused || !force && DateTimeOffset.UtcNow - _lastAutomaticCheck < TimeSpan.FromMinutes(1)) return Task.CompletedTask;
+        if (Busy) { _pendingRefresh = true; return Task.CompletedTask; }
         _lastAutomaticCheck = DateTimeOffset.UtcNow;
         return RefreshAsync(automatic: true);
     }
@@ -284,7 +290,12 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
                 catch { Status = "設定は保存しましたが、通知の確認を完了できませんでした。"; }
         }
         catch { Status = "個人設定を保存できませんでした。もう一度お試しください。"; }
-        finally { _preferenceOperations.Release(); SnapshotChanged?.Invoke(); }
+        finally
+        {
+            try { await ClearExpiredNotificationsAsync(); }
+            catch { Status = "保存期間が切り替わりましたが、以前の通知履歴を削除できませんでした。"; }
+            _preferenceOperations.Release(); SnapshotChanged?.Invoke();
+        }
     }
     public async Task<byte[]> ReadPdfAsync(MaterialKind kind, bool accepted)
     {
@@ -316,9 +327,10 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     }
     private async Task ReloadAsync(CancellationToken token)
     {
-        if (_displayPeriod is null || _displayPeriod != SchoolDataPeriod.FromInstant(DateTimeOffset.UtcNow))
-            await _notifications.ClearAsync(token);
         var lease = await _school.BeginAsync(token);
+        // An empty in-memory snapshot also occurs on same-period startup and
+        // unlock. Only the store's actual retention reset invalidates OS tags.
+        await ClearExpiredNotificationsAsync();
         var snapshots = new Dictionary<MaterialKind, MaterialSnapshot>();
         foreach (var kind in Enum.GetValues<MaterialKind>()) snapshots[kind] = new(
             await _school.ReadAsync<SourceRecord>(lease, "selection." + kind, token), await _school.ReadAsync<MaterialAnalysis>(lease, "analysis." + kind, token),
@@ -353,6 +365,18 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
                 : eligible.ContainsKey(kind) ? NotificationSourceState.Available : NotificationSourceState.Unavailable);
         return _notifications.CheckAsync(eligible.ContainsKey(MaterialKind.Changes) ? Data : Data with { Changes = null }, eligible, Preferences, Today, token, availability);
     }
+    private async Task ClearExpiredNotificationsAsync()
+    {
+        await _notificationResets.WaitAsync();
+        try
+        {
+            var reset = Volatile.Read(ref _notificationReset);
+            if (reset == _clearedNotificationReset) return;
+            await _notifications.ClearAsync(CancellationToken.None);
+            _clearedNotificationReset = reset;
+        }
+        finally { _notificationResets.Release(); }
+    }
     private async Task RunAsync(Func<CancellationToken, Task> action, string progress = "処理しています。", bool automatic = false)
     {
         if (Locked) { Status = "Windowsのロック中は学校データを利用できません。"; return; }
@@ -375,6 +399,10 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         catch { Status = "処理を完了できませんでした。保存済みの正常なデータは保持しています。もう一度お試しください。"; }
         finally
         {
+            // Retention can cancel the operation before ReloadAsync is reached.
+            // Its obsolete OS history must still be removed after cancellation.
+            try { await ClearExpiredNotificationsAsync(); }
+            catch { Status = "保存期間が切り替わりましたが、以前の通知履歴を削除できませんでした。"; }
             Busy = false; _operations.Release(); SnapshotChanged?.Invoke();
             if (!automatic && Status.Length > 0) _statusUntil = DateTimeOffset.UtcNow.AddSeconds(5);
             if (_pendingRefresh) { _pendingRefresh = false; _dispatcher.TryEnqueue(() => _ = RefreshAutomaticallyAsync(force: true)); }
@@ -399,6 +427,6 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     {
         Cancel(); _timer.Stop(); _watcher.Dispose(); _authentication.Dispose();
         await _operations.WaitAsync(); await _preferenceOperations.WaitAsync();
-        await _school.DisposeAsync(); _notificationSink.Dispose(); _http.Dispose(); _session.Dispose(); _operations.Dispose(); _preferenceOperations.Dispose();
+        await _school.DisposeAsync(); _notificationSink.Dispose(); _http.Dispose(); _session.Dispose(); _operations.Dispose(); _preferenceOperations.Dispose(); _notificationResets.Dispose();
     }
 }

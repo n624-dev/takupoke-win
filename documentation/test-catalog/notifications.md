@@ -1,7 +1,7 @@
 # 通知・差分・実配信
 
 対応関係・宣言名・実行方法のSHA-256：
-`98dce40fca74bb09b77f8243587b48803f00356cc8b8ec2aeb490cd9b87ba147`
+`1492372348e6c7f8786350ddb3706430b91991e667e758bf734221c9b9b38156`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -38,3 +38,16 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `LegacyChangeNoticeWithoutTargetsIsDiscardedAndDoesNotBreakNewNotifications`
 - `FailedSpecialPdfNoticeRemainsEligibleAfterClassAndDayChanges`
 - `PersistedThreeKindPendingSurvivesEveryPartialLoadOrderWithoutStaleDelivery`
+
+## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
+
+- `UnlockDuringUnfinishedReadReloadsAfterCancellationWithEitherTraySetting`
+- `FinishingBeforeUnlockAndRemainingLockedNeverApplyTheCancelledSnapshot`
+- `ExplicitStopDiscardsTheQueuedUnlockRefreshUntilExplicitResume`
+- `QueuedUnlockUsesTheNewRetentionLeaseAndKeepsTheOriginalFile`
+- `SamePeriodStartupReconcilesPendingWithoutClearingAcceptedOsHistory`
+- `AcceptedNoticeWithFailedPendingSaveIsAcknowledgedOnRestartWithoutResending`
+- `ActualRetentionChangeClearsOsHistoryAndOldPending`
+- `RetentionClearStillRunsWhenTheOldOperationIsCancelledBeforeReload`
+- `ActualSelectionHandlerPreservesRoundTripsDuringNotificationWaitAndRestart`
+- `SelectionSaveFailureKeepsPreferencesAndCanBeRetriedAfterRebuildingTheControl`

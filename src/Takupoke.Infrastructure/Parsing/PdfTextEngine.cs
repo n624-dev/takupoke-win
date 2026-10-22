@@ -21,7 +21,7 @@ public sealed record PdfFont(PdfUnicodeMap Map, IReadOnlyDictionary<int, double>
         return this;
     }
 }
-public sealed class PdfTextEngine(CancellationToken cancellationToken = default)
+public sealed class PdfTextEngine(CancellationToken cancellationToken = default, Action<PdfGlyph>? painted = null)
 {
     private sealed record State(PdfMatrix Ctm, PdfFont? Font = null, double Size = 0, double Spacing = 0, double WordSpacing = 0, double Scale = 1, double Leading = 0, double Rise = 0);
     private State _state = new(PdfMatrix.Identity);
@@ -80,7 +80,8 @@ public sealed class PdfTextEngine(CancellationToken cancellationToken = default)
             {
                 var x = points.Min(p => p.X); var y = points.Min(p => p.Y); var right = points.Max(p => p.X); var upper = points.Max(p => p.Y);
                 if (width <= 0 || right <= x || upper <= y) throw new PdfParseException("P01");
-                _glyphs.Add(new(text, x, y, right - x, upper - y, _line, _order));
+                var glyph = new PdfGlyph(text, x, y, right - x, upper - y, _line, _order);
+                _glyphs.Add(glyph); painted?.Invoke(glyph);
             }
             _drawn.Append(text); _units += text.Length; _order++;
             var word = font.Map.CodeBytes == 1 && cid == 32 ? _state.WordSpacing : 0;

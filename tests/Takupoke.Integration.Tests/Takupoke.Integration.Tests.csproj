@@ -5,9 +5,15 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../src/Takupoke.Win/Platform/WindowsFileIdentity.cs" Link="Platform/WindowsFileIdentity.cs" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
+    <Compile Include="../../src/Takupoke.Win/ViewModels/AppViewModel.cs" Link="App/ViewModels/AppViewModel.cs" />
+    <Compile Include="../../src/Takupoke.Win/MainWindow.PreferenceSelection.cs" Link="App/MainWindow.PreferenceSelection.cs" />
+    <Compile Include="../../src/Takupoke.Win/Platform/OfflineTestNetwork.cs" Link="App/Platform/OfflineTestNetwork.cs" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <Compile Include="../../src/Takupoke.Win/Platform/WindowsFileIdentity.cs" Link="Platform/WindowsFileIdentity.cs" />
     <Compile Remove="WindowsSourceRefreshTests.cs" Condition="!$([MSBuild]::IsOSPlatform('Windows'))" />
     <Compile Include="../shared/FictionalChangeWorkbook.cs" Link="FictionalChangeWorkbook.cs" />
+    <Compile Include="../shared/FictionalTimetablePdf.cs" Link="FictionalTimetablePdf.cs" />
+    <None Update="fixtures/fictional-noto*" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../Takupoke.Core.Tests/fixtures/ios-parity.json" Link="fixtures/ios-parity.json" CopyToOutputDirectory="PreserveNewest" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
     <PackageReference Include="xunit" Version="2.9.3" />

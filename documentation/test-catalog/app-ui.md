@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`af2b94de02836122b58e70991f1412773c7b9b52abb809275b1a49873c7d27bf`
+`6501af73658c9a51de6f028a3d5a2984b125c394df6af5bb5c534714417492cb`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -42,6 +42,8 @@
 - [tests/Takupoke.Win.UITests/ScreenReview.cs](../../tests/Takupoke.Win.UITests/ScreenReview.cs)
 - [tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj](../../tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj)
 - [tests/Takupoke.Win.UITests/startup-smoke.ps1](../../tests/Takupoke.Win.UITests/startup-smoke.ps1)
+- [src/Takupoke.Win/MainWindow.PreferenceSelection.cs](../../src/Takupoke.Win/MainWindow.PreferenceSelection.cs)
+- [tests/Takupoke.Integration.Tests/AppPlatformFakes.cs](../../tests/Takupoke.Integration.Tests/AppPlatformFakes.cs)
 
 ## [tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs](../../tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs)
 
@@ -67,3 +69,16 @@
 ## [tests/Takupoke.Win.UITests/ShortcutReview.cs](../../tests/Takupoke.Win.UITests/ShortcutReview.cs)
 
 - `CheckShortcut`
+
+## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
+
+- `UnlockDuringUnfinishedReadReloadsAfterCancellationWithEitherTraySetting`
+- `FinishingBeforeUnlockAndRemainingLockedNeverApplyTheCancelledSnapshot`
+- `ExplicitStopDiscardsTheQueuedUnlockRefreshUntilExplicitResume`
+- `QueuedUnlockUsesTheNewRetentionLeaseAndKeepsTheOriginalFile`
+- `SamePeriodStartupReconcilesPendingWithoutClearingAcceptedOsHistory`
+- `AcceptedNoticeWithFailedPendingSaveIsAcknowledgedOnRestartWithoutResending`
+- `ActualRetentionChangeClearsOsHistoryAndOldPending`
+- `RetentionClearStillRunsWhenTheOldOperationIsCancelledBeforeReload`
+- `ActualSelectionHandlerPreservesRoundTripsDuringNotificationWaitAndRestart`
+- `SelectionSaveFailureKeepsPreferencesAndCanBeRetriedAfterRebuildingTheControl`

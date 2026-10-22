@@ -16,13 +16,15 @@ public sealed class PdfDisplayTransform(double left, double bottom, double width
         return glyph with { X = x, Y = y, Width = points.Max(p => p.X) - x, Height = points.Max(p => p.Y) - y };
     }
 }
-public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken token = default)
+public sealed record PdfPathPaint(IReadOnlyList<IReadOnlyList<(double X, double Y)>> Paths, bool Fill, bool Stroke, double StrokeScale, bool Curved);
+public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken token = default, Action<PdfPathPaint>? painted = null)
 {
     private PdfMatrix _ctm = PdfMatrix.Identity;
     private readonly Stack<PdfMatrix> _stack = new();
     private readonly List<List<(double X, double Y)>> _paths = [];
     private readonly List<PdfRule> _rules = [];
     private int _paintWork;
+    private bool _curved;
     private void ConsumePaintWork()
     {
         if (++_paintWork > 1_000_000) throw new PdfParseException("limit");
@@ -54,8 +56,8 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
             case "f": case "F": case "f*": Paint(true, false); break;
             case "B": case "B*": Paint(true, true); break;
             case "b": case "b*": Close(); Paint(true, true); break;
-            case "n": _paths.Clear(); break;
-            case "c": case "v": case "y": if (_paths.Count > 0) _paths[^1].Clear(); break;
+            case "n": _paths.Clear(); _curved = false; break;
+            case "c": case "v": case "y": _curved = true; if (_paths.Count > 0) _paths[^1].Clear(); break;
         }
         if (_paths.Count > 10000 || _paths.Count > 0 && _paths[^1].Count > 10000) throw new PdfParseException("limit");
     }
@@ -68,6 +70,13 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
     private void Paint(bool fill, bool stroke)
     {
         token.ThrowIfCancellationRequested();
+        if (painted is not null)
+        {
+            var sum = _ctm.A * _ctm.A + _ctm.B * _ctm.B + _ctm.C * _ctm.C + _ctm.D * _ctm.D;
+            var determinant = _ctm.A * _ctm.D - _ctm.B * _ctm.C;
+            var scale = Math.Sqrt((sum + Math.Sqrt(Math.Max(0, sum * sum - 4 * determinant * determinant))) / 2);
+            painted(new(_paths.Select(path => (IReadOnlyList<(double X, double Y)>)path).ToArray(), fill, stroke, scale, _curved));
+        }
         foreach (var path in _paths)
         {
             ConsumePaintWork();
@@ -83,6 +92,7 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
             if (stroke) for (var index = 1; index < path.Count; index++) { ConsumePaintWork(); Line(path[index - 1], path[index]); }
         }
         _paths.Clear();
+        _curved = false;
     }
     public IReadOnlyList<PdfRule> Finish()
     { token.ThrowIfCancellationRequested(); if (_stack.Count > 0) throw new PdfParseException("P12"); return _rules.ToArray(); }

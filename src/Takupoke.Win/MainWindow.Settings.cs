@@ -42,13 +42,9 @@ public sealed partial class MainWindow
         };
         var opening = PreferenceControl(new ComboBox { MinWidth = 155, ItemsSource = new[] { "アプリ内で開く", "既定のブラウザ" }, SelectedIndex = (int)_model.Preferences.OpeningMode });
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(opening, "link-opening-mode");
-        var initialOpening = opening.SelectedIndex;
-        opening.SelectionChanged += async (_, _) =>
-        {
-            if (opening.IsLoaded && opening.SelectedIndex is >= 0 and <= 1 && opening.SelectedIndex != initialOpening
-                && opening.SelectedIndex != (int)_model.Preferences.OpeningMode)
-                { var value = (LinkOpeningMode)opening.SelectedIndex; await _model.SavePreferencesAsync(current => current with { OpeningMode = value }); }
-        };
+        BindPreferenceSelection(opening, opening.SelectedIndex,
+            () => (opening.SelectedIndex is >= 0 and <= 1, opening.SelectedIndex),
+            (current, value) => current with { OpeningMode = (LinkOpeningMode)value });
         Add(SettingsGroup(
             SettingsRow("クラス", ChooseClasses, "settings-class", _model.Preferences.SelectedClasses.Length == 0 ? "未選択" : string.Join("・", _model.Preferences.SelectedClasses.Select(ClassSelection.Display))),
             SettingsRow("通知・バックグラウンド", () => OpenPage("notifications"), "settings-notifications"),

@@ -1,7 +1,7 @@
 # Strict PDF・文字・罫線・試験・返却
 
 対応関係・宣言名・実行方法のSHA-256：
-`277794abe9f6e5638e7c617101285d30efca11d0c585402fc196331597abcbb1`
+`8bb7dea3f58eef71fe466036a895cbf4ac46d6189fb6e8d934cd0ea114030340`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -21,6 +21,9 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - [src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs](../../src/Takupoke.Infrastructure/Parsing/PdfScheduleParser.cs)
 - [src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs](../../src/Takupoke.Infrastructure/Parsing/PdfTextEngine.cs)
 - [src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs](../../src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs)
+- [src/Takupoke.Infrastructure/Parsing/PdfPaintVisibility.cs](../../src/Takupoke.Infrastructure/Parsing/PdfPaintVisibility.cs)
+- [tests/shared/FictionalTimetablePdf.cs](../../tests/shared/FictionalTimetablePdf.cs)
+- [tests/Takupoke.Integration.Tests/fixtures/fictional-noto.json](../../tests/Takupoke.Integration.Tests/fixtures/fictional-noto.json)
 
 ## [tests/Takupoke.Integration.Tests/PdfParsingTests.cs](../../tests/Takupoke.Integration.Tests/PdfParsingTests.cs)
 
@@ -37,3 +40,16 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `PaintedThinRectanglesProvideRulesWithoutBroadHighlightEdges`
 - `ReaderVerifiesACompleteSyntheticPdfWithExplicitUnicodeAndFontMetrics`
 - `ReaderRejectsMissingMappingAndFormObjects`
+
+## [tests/Takupoke.Integration.Tests/PdfVisibilityTests.cs](../../tests/Takupoke.Integration.Tests/PdfVisibilityTests.cs)
+
+- `RealFontControlUsesItsActualCidMappingAndProducesOneFictionalLesson`
+- `VisibleBlackDeviceColoursAndRestoredStatesKeepTheLesson`
+- `WhiteTextOnTheWhitePageRejectsTheWholeInput`
+- `OpaqueColouredBackgroundsAreComparedRatherThanDroppingWhiteLetters`
+- `StrokeAndFillModesRequireVerifiedVisibleInk`
+- `UnprovedTransparencyAndBlendModesRejectInsteadOfPretendingOpaque`
+- `LaterPaintAndMixedInvisibleCellsCannotBecomePartialSuccess`
+- `PartialBackgroundsAndOverlappingFillSubpathsRemainUnverified`
+- `ColourValidationPreservesCancellationAndRejectsUnverifiedColourSpaces`
+- `InvisibleReplacementKeepsThePreviousAnalysisAndBothOriginalsAcrossRestart`

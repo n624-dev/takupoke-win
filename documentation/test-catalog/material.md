@@ -1,7 +1,7 @@
 # 原本取得・更新・保存・監視
 
 対応関係・宣言名・実行方法のSHA-256：
-`04d8f1b470baa37d6d3b73c11f1acc4487742791b4fa0893dd4215b58d8b8b83`
+`6f0342d843f46546d9a5d0350ff62fb628f8be64f153ab9fda6f95df84e910aa`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -53,3 +53,16 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 ## [tests/Takupoke.Integration.Tests/WindowsSourceRefreshTests.cs](../../tests/Takupoke.Integration.Tests/WindowsSourceRefreshTests.cs)
 
 - `AtomicReplacementUsesNewNativeFileIdAndRefreshesWithoutReselection`
+
+## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
+
+- `UnlockDuringUnfinishedReadReloadsAfterCancellationWithEitherTraySetting`
+- `FinishingBeforeUnlockAndRemainingLockedNeverApplyTheCancelledSnapshot`
+- `ExplicitStopDiscardsTheQueuedUnlockRefreshUntilExplicitResume`
+- `QueuedUnlockUsesTheNewRetentionLeaseAndKeepsTheOriginalFile`
+- `SamePeriodStartupReconcilesPendingWithoutClearingAcceptedOsHistory`
+- `AcceptedNoticeWithFailedPendingSaveIsAcknowledgedOnRestartWithoutResending`
+- `ActualRetentionChangeClearsOsHistoryAndOldPending`
+- `RetentionClearStillRunsWhenTheOldOperationIsCancelledBeforeReload`
+- `ActualSelectionHandlerPreservesRoundTripsDuringNotificationWaitAndRestart`
+- `SelectionSaveFailureKeepsPreferencesAndCanBeRetriedAfterRebuildingTheControl`
