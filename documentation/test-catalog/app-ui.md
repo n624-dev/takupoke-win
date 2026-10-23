@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`6501af73658c9a51de6f028a3d5a2984b125c394df6af5bb5c534714417492cb`
+`a6551bde04ec1ecc12e38323317efd737ca3294607d223e6f857930e58c71071`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -82,3 +82,9 @@
 - `RetentionClearStillRunsWhenTheOldOperationIsCancelledBeforeReload`
 - `ActualSelectionHandlerPreservesRoundTripsDuringNotificationWaitAndRestart`
 - `SelectionSaveFailureKeepsPreferencesAndCanBeRetriedAfterRebuildingTheControl`
+- `CorruptRetentionSuspendsPrivateViewsWithoutClearingOsHistoryUntilConfirmedRecovery`
+- `SelectedSpecialWithoutFirstAnalysisRequiresAttentionOnBothScheduleViews`
+
+## [tests/Takupoke.Win.UITests/Program.RetentionRecovery.cs](../../tests/Takupoke.Win.UITests/Program.RetentionRecovery.cs)
+
+- `CheckRetentionRecovery`

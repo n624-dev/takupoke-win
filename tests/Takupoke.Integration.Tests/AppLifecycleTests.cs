@@ -272,4 +272,53 @@ public sealed class AppLifecycleTests
         await fixture.Close(model); var reopened = fixture.Create(); await reopened.InitializeAsync();
         Assert.Equal(LinkOpeningMode.External, reopened.Preferences.OpeningMode);
     }
+    [Fact]
+    public async Task CorruptRetentionSuspendsPrivateViewsWithoutClearingOsHistoryUntilConfirmedRecovery()
+    {
+        await using var fixture = new Fixture(); await fixture.SeedExam(accepted: true);
+        var model = fixture.Create(); await model.InitializeAsync();
+        Assert.NotNull(model.Data.Specials); Assert.Single(WindowsNotifications.Delivered);
+        var marker = Path.Combine(fixture.Root, "school-data-period.json");
+        await File.WriteAllTextAsync(marker, "{fictional-corrupt-marker");
+        var original = Path.Combine(fixture.Root, "fictional-original.pdf");
+        await File.WriteAllTextAsync(original, "fictional original bytes");
+        for (var i = 0; i < 3; i++)
+        {
+            await model.RefreshAsync(); fixture.Dispatcher.Drain();
+            Assert.True(model.RetentionRecoveryNeeded); Assert.False(model.Busy);
+            Assert.Empty(model.Materials); Assert.Null(model.Data.Specials);
+            Assert.Equal(0, WindowsNotifications.Latest!.Clears); Assert.Single(WindowsNotifications.Delivered);
+            Assert.Equal("{fictional-corrupt-marker", await File.ReadAllTextAsync(marker));
+        }
+        await model.RecoverRetentionAsync(); fixture.Dispatcher.Drain();
+        await Observe(model, () => !model.Busy && model.Materials.Count == 4);
+        Assert.False(model.RetentionRecoveryNeeded); Assert.Equal(1, WindowsNotifications.Latest!.Clears);
+        Assert.Empty(WindowsNotifications.Delivered); Assert.All(model.Materials.Values, item => Assert.Null(item.Source));
+        Assert.Equal(["3_IT"], model.Preferences.SelectedClasses);
+        Assert.Equal("fictional original bytes", await File.ReadAllTextAsync(original));
+        await fixture.Close(model); var reopened = fixture.Create(); await reopened.InitializeAsync();
+        Assert.False(reopened.RetentionRecoveryNeeded); Assert.Equal(4, reopened.Materials.Count);
+    }
+    [Theory]
+    [InlineData(MaterialKind.Exam)]
+    [InlineData(MaterialKind.ExamReturn)]
+    public async Task SelectedSpecialWithoutFirstAnalysisRequiresAttentionOnBothScheduleViews(MaterialKind kind)
+    {
+        await using var fixture = new Fixture(); await fixture.Preferences();
+        await using (var store = new SchoolDataStore(fixture.Root, fixture.Protector))
+        {
+            var lease = await store.BeginAsync(); var now = DateTimeOffset.UtcNow;
+            var bytes = "%PDF-fictional-unanalysed"u8.ToArray();
+            var source = new SourceRecord(Guid.NewGuid().ToString("N"), kind, Path.Combine(fixture.Root, "fictional-missing.pdf"),
+                "fictional-identity", "fictional.pdf", NotificationDiff.Digest(bytes), bytes.Length, now, now, now);
+            await store.SaveOriginalAsync(lease, source, bytes);
+        }
+        var model = fixture.Create(); await model.InitializeAsync();
+        var selected = model.Materials[kind];
+        Assert.NotNull(selected.Source); Assert.Null(selected.Analysis); Assert.Null(selected.ParseAttempt);
+        Assert.True(selected.NeedsAttention(kind, model.Today.SchoolYear()));
+        Assert.False(new MaterialSnapshot(null, null, null, null).NeedsAttention(kind, model.Today.SchoolYear()));
+        Assert.DoesNotContain("前回", selected.AnalysisStatus(kind, model.Today.SchoolYear()));
+    }
+
 }

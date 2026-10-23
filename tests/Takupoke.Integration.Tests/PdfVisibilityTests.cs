@@ -22,6 +22,40 @@ public sealed class PdfVisibilityTests
         Assert.Equal(2032, result.SchoolYear);
     }
     [Theory]
+    [InlineData("/DeviceGray cs 1 sc")]
+    [InlineData("/DeviceRGB cs 1 1 1 scn")]
+    [InlineData("/DeviceCMYK cs 0 0 0 0 sc")]
+    [InlineData("/DeviceGray CS 1 SC 1 Tr")]
+    [InlineData("/DeviceRGB CS 1 1 1 SCN 1 Tr")]
+    public void DeviceColourSpaceWhiteInkStillRejectsTheWholeInput(string paint)
+        => Assert.Equal("P01", Assert.Throws<PdfParseException>(() => Parse(FictionalTimetablePdf.Make(Fixtures, paint))).Stage);
+    [Theory]
+    [InlineData("/DeviceRGB cs q /DeviceGray cs 1 sc Q 0 0 0 scn")]
+    [InlineData("/DeviceRGB cs 1 1 1 scn 0 g 0 sc")]
+    [InlineData("/DeviceGray CS 0 SC 1 Tr")]
+    [InlineData("/DeviceRGB CS 0 0 0 SCN 1 Tr")]
+    [InlineData("/DeviceCMYK cs")]
+    public void DeviceColourSpacesTrackRestorationImplicitSelectionAndInitialBlack(string paint)
+        => Assert.Single(Parse(FictionalTimetablePdf.Make(Fixtures, paint)).Lessons);
+    [Fact]
+    public void UnverifiedSpacesAndIncorrectComponentCountsAreRejected()
+    {
+        var paint = new PdfPaintVisibility();
+        Assert.Throws<PdfParseException>(() => paint.SelectColourSpace(false, "Pattern"));
+        Assert.Throws<PdfParseException>(() => paint.SelectColourSpace(false, "ICCBased"));
+        paint.SelectColourSpace(false, "DeviceRGB");
+        Assert.Throws<PdfParseException>(() => paint.Operation("sc", [0]));
+        Assert.Throws<PdfParseException>(() => paint.Operation("scn", [0, 0, 2]));
+        paint.Operation("q", []); paint.SelectColourSpace(false, "DeviceGray"); paint.Operation("Q", []);
+        Assert.Throws<PdfParseException>(() => paint.Operation("sc", [0]));
+    }
+    [Theory]
+    [InlineData("/DeviceGray cs 0 sc")]
+    [InlineData("/DeviceRGB cs 0 0 0 scn")]
+    [InlineData("/DeviceCMYK cs 0 0 0 1 sc")]
+    public void StandardDeviceColourSpaceOperatorsProduceTheSameVerifiedBlackLesson(string paint)
+        => Assert.Equal("架空科目A", Assert.Single(Parse(FictionalTimetablePdf.Make(Fixtures, paint)).Lessons).Names.Subject);
+    [Theory]
     [InlineData("0 g")]
     [InlineData("0 0 0 rg")]
     [InlineData("0 0 0 1 k")]
@@ -96,7 +130,7 @@ public sealed class PdfVisibilityTests
     {
         using var cancellation = new CancellationTokenSource(); cancellation.Cancel();
         Assert.Throws<OperationCanceledException>(() => PdfPigLayoutReader.Read(FictionalTimetablePdf.Make(Fixtures), MaterialKind.Timetable, cancellation.Token));
-        foreach (var command in new[] { "2 g", "-1 0 0 rg", "/DeviceRGB cs 0 0 0 sc" })
+        foreach (var command in new[] { "2 g", "-1 0 0 rg", "/Pattern cs /FictionalPattern scn" })
             Assert.Throws<PdfParseException>(() => Parse(FictionalTimetablePdf.Make(Fixtures, command)));
     }
     [Fact]
@@ -125,6 +159,7 @@ public sealed class PdfVisibilityTests
             var source = (await reopened.ReadAsync<SourceRecord>(reopenedLease, "selection.Timetable"))!;
             Assert.False(MaterialCoordinator.AnalysisMatches(analysis, source, MaterialKind.Timetable, 2032));
             Assert.False(MaterialCoordinator.AnalysisMatches(analysis with { ParserVersion = 8 }, source with { Digest = analysis.SourceDigest }, MaterialKind.Timetable, 2032));
+            Assert.False(MaterialCoordinator.AnalysisMatches(analysis with { ParserVersion = 9 }, source with { Digest = analysis.SourceDigest }, MaterialKind.Timetable, 2032));
         }
         finally { Directory.Delete(root, recursive: true); }
     }

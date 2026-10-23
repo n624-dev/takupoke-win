@@ -42,6 +42,15 @@ public static class PdfPigLayoutReader
                     token.ThrowIfCancellationRequested();
                     var name = operation.Operator;
                     if (name == "Do") throw new PdfParseException("P12", number);
+                    if (paint is not null && name is "cs" or "CS")
+                    {
+                        using var serialized = new MemoryStream(); operation.Write(serialized);
+                        if (serialized.Length > 1024) throw new PdfParseException("limit", number);
+                        var parts = Encoding.ASCII.GetString(serialized.ToArray()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
+                        if (parts.Length != 2 || parts[1] != name || !parts[0].StartsWith('/')) throw new PdfParseException("P01", number);
+                        paint.SelectColourSpace(name == "CS", parts[0][1..]);
+                        continue;
+                    }
                     if (paint is not null && PdfPaintVisibility.Unverified(name)) throw new PdfParseException("P01", number);
                     if (text is not null && name is "BDC" or "BMC" or "W" or "W*") throw new PdfParseException("P01", number);
                     if (PdfPathEngine.Supports(name) || text is not null && PdfTextEngine.Supports(name) || paint is not null && PdfPaintVisibility.Supports(name))

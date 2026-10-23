@@ -1,7 +1,7 @@
 # 原本取得・更新・保存・監視
 
 対応関係・宣言名・実行方法のSHA-256：
-`6f0342d843f46546d9a5d0350ff62fb628f8be64f153ab9fda6f95df84e910aa`
+`6af61c56a6068f3243345341a02cc96cafa764c73e4f0b6014cde4fece562e28`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -66,3 +66,5 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `RetentionClearStillRunsWhenTheOldOperationIsCancelledBeforeReload`
 - `ActualSelectionHandlerPreservesRoundTripsDuringNotificationWaitAndRestart`
 - `SelectionSaveFailureKeepsPreferencesAndCanBeRetriedAfterRebuildingTheControl`
+- `CorruptRetentionSuspendsPrivateViewsWithoutClearingOsHistoryUntilConfirmedRecovery`
+- `SelectedSpecialWithoutFirstAnalysisRequiresAttentionOnBothScheduleViews`

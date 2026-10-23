@@ -184,6 +184,20 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
             });
             return UniqueTime(ranges);
         }
+        if (block.Content is ChangeContent)
+        {
+            var applicable = Specials.Where(source => source.Applies(day, className)).ToArray();
+            if (applicable.Length > 0) return UniqueTime(applicable.Select(source =>
+            {
+                var clocks = Enumerable.Range(block.StartPeriod, block.EndPeriod - block.StartPeriod + 1).Select(period =>
+                {
+                    var lessons = source.Lessons.Where(lesson => lesson.Date == day.Iso() && lesson.ClassName == className && lesson.Period == period).ToArray();
+                    return lessons.Length == 0 ? source.PeriodTime(day, period)
+                        : UniqueTime(lessons.Select(lesson => source.DisplayTime(lesson, block.StartPeriod, block.EndPeriod)));
+                }).ToArray();
+                return clocks.All(clock => clock is not null) ? new TimeRange(clocks[0]!.Start, clocks[^1]!.End) : null;
+            }));
+        }
         var first = SlotTime(day, className, block.StartPeriod);
         var last = SlotTime(day, className, block.EndPeriod);
         return first is not null && last is not null ? new(first.Start, last.End) : null;
@@ -210,12 +224,16 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
     public bool IsInProgress(DateOnly day, string className, ScheduleBlock block, DateTimeOffset now)
     {
         if (block.Content is ChangeContent { Change.IsCancellation: true } || day != SchoolDate.InJapan(now)) return false;
-        var time = CardTime(day, className, block);
-        if (time is null || !TimeRange.TryMinutes(time.Start, out var start) || !TimeRange.TryMinutes(time.End, out var end) || start >= end) return false;
+        var clocks = block.Content is NormalContent
+            ? Enumerable.Range(block.StartPeriod, block.EndPeriod - block.StartPeriod + 1)
+                .Select(period => data.Times?.Time(day, period) ?? ScheduleTimes.Normal.GetValueOrDefault(period))
+            : new[] { CardTime(day, className, block) };
         var japan = now.ToOffset(TimeSpan.FromHours(9));
         var minute = japan.Hour * 60 + japan.Minute;
-        return start <= minute && minute < end;
+        return clocks.Any(time => time is not null && TimeRange.TryMinutes(time.Start, out var start)
+            && TimeRange.TryMinutes(time.End, out var end) && start < end && start <= minute && minute < end);
     }
+
     public IReadOnlyList<string> MissingMessages(DateOnly day, string className)
     {
         var plan = Plan(day);

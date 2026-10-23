@@ -12,6 +12,10 @@ namespace Takupoke.Win.ViewModels;
 
 public sealed record MaterialSnapshot(SourceRecord? Source, MaterialAnalysis? Analysis, MaterialAttempt? ParseAttempt, MaterialAttempt? AcquisitionAttempt)
 {
+    public bool NeedsAttention(MaterialKind kind, int? schoolYear = null) => AcquisitionAttempt?.Failure is not null
+        || ParseAttempt?.Failure is not null
+        || Source is not null && !MaterialCoordinator.AnalysisMatches(Analysis, Source, kind, schoolYear);
+
     public string AnalysisStatus(MaterialKind kind, int? schoolYear = null)
     {
         if (Source is null) return "未選択";
@@ -51,6 +55,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private bool _pendingRefresh;
     private long _notificationReset;
     private long _clearedNotificationReset;
+    public bool RetentionRecoveryNeeded { get; private set; }
     private bool _notificationsInitialized;
     private bool _protocolRegistered;
     private bool _automaticPaused;
@@ -110,6 +115,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         _notifications = new(_school, _notificationSink);
         _notificationSink.Activated += () => _dispatcher.TryEnqueue(() => NotificationActivated?.Invoke());
         _school.RetentionChanged += () => { Interlocked.Increment(ref _notificationReset); ClearPrivateData(); };
+        _school.RetentionUnavailable += canRecover => { RetentionRecoveryNeeded = canRecover; ClearPrivateData(); };
         _watcher.Changed += () =>
         {
             var generation = System.Threading.Volatile.Read(ref _operationGeneration);
@@ -331,6 +337,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         // An empty in-memory snapshot also occurs on same-period startup and
         // unlock. Only the store's actual retention reset invalidates OS tags.
         await ClearExpiredNotificationsAsync();
+        RetentionRecoveryNeeded = false;
         var snapshots = new Dictionary<MaterialKind, MaterialSnapshot>();
         foreach (var kind in Enum.GetValues<MaterialKind>()) snapshots[kind] = new(
             await _school.ReadAsync<SourceRecord>(lease, "selection." + kind, token), await _school.ReadAsync<MaterialAnalysis>(lease, "analysis." + kind, token),
@@ -394,6 +401,10 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         if (_session.IsCancellationRequested) { _session.Dispose(); _session = new(); }
         try { await action(_session.Token); }
         catch (OperationCanceledException) { Status = "処理を中止しました。保存期間内の正常なデータは保持しています。"; }
+        catch (SchoolDataStore.RetentionStateException error)
+        {
+            RetentionRecoveryNeeded = error.CanRecover; Status = error.Message;
+        }
         catch (ApiException error) { Status = error.Message; }
         catch (SourceException error) { Status = error.Message; }
         catch { Status = "処理を完了できませんでした。保存済みの正常なデータは保持しています。もう一度お試しください。"; }
@@ -408,6 +419,17 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             if (_pendingRefresh) { _pendingRefresh = false; _dispatcher.TryEnqueue(() => _ = RefreshAutomaticallyAsync(force: true)); }
         }
     }
+    public Task RecoverRetentionAsync() => RunAsync(async token =>
+    {
+        if (!RetentionRecoveryNeeded) return;
+        await _school.RecoverRetentionAsync(token);
+        RetentionRecoveryNeeded = false;
+        // Retention invalidates the old session while resetting the store.
+        // Load through a new operation rather than applying its cancelled lease.
+        _automaticPaused = false; _pendingRefresh = true;
+        Status = "学校データを初期化しました。資料を選び直し、学校アカウントのデータを再取得してください。";
+    });
+
     public void Cancel() { _automaticPaused = true; _operationGeneration++; _pendingRefresh = false; _watcher.Replace([]); _session.Cancel(); _authentication.Cancel(); }
     public void SuspendAutomaticRefresh()
     {
