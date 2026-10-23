@@ -130,7 +130,7 @@ public sealed class PdfVisibilityTests
     {
         using var cancellation = new CancellationTokenSource(); cancellation.Cancel();
         Assert.Throws<OperationCanceledException>(() => PdfPigLayoutReader.Read(FictionalTimetablePdf.Make(Fixtures), MaterialKind.Timetable, cancellation.Token));
-        foreach (var command in new[] { "2 g", "-1 0 0 rg", "/DeviceRGB cs 0 0 0 sc" })
+        foreach (var command in new[] { "2 g", "-1 0 0 rg", "/Pattern cs /FictionalPattern scn" })
             Assert.Throws<PdfParseException>(() => Parse(FictionalTimetablePdf.Make(Fixtures, command)));
     }
     [Fact]
@@ -159,6 +159,7 @@ public sealed class PdfVisibilityTests
             var source = (await reopened.ReadAsync<SourceRecord>(reopenedLease, "selection.Timetable"))!;
             Assert.False(MaterialCoordinator.AnalysisMatches(analysis, source, MaterialKind.Timetable, 2032));
             Assert.False(MaterialCoordinator.AnalysisMatches(analysis with { ParserVersion = 8 }, source with { Digest = analysis.SourceDigest }, MaterialKind.Timetable, 2032));
+            Assert.False(MaterialCoordinator.AnalysisMatches(analysis with { ParserVersion = 9 }, source with { Digest = analysis.SourceDigest }, MaterialKind.Timetable, 2032));
         }
         finally { Directory.Delete(root, recursive: true); }
     }

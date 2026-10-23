@@ -38,3 +38,9 @@ P01の利用者資料はまだ未受領。10454は利用者も未確認で、も
 2026-10-23、利用者は対象PDFを共有できないと回答した。Debian13 / .NET10.0.402、source f4e9169 を基点とするcodex/fix-device-colour-p01の追加テスト差分。`dotnet test tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj --configuration Release --filter FullyQualifiedName~StandardDeviceColourSpaceOperators` の3件がすべて失敗。実フォントを埋めた完全架空の同じ時間割で、黒文字の表記だけを /DeviceGray cs 0 sc、/DeviceRGB cs 0 0 0 scn、/DeviceCMYK cs 0 0 0 1 sc に変更すると、Readの45行目でP01を返した。ログ/tmp/win-device-colour-regression-first.log。利用者PDFの原因と同じとは未確認。対処方針を決める前にこの観測を保存する。
 
 008b108の実Readはこれらの色指定命令を無視していた。公開後の可視性拒否を追加したe001729では、標準Device色空間でもcs/sc系を一律未確認として拒否するため、旧入力との同値表記が新たにP01となる。W15のテスト引数不足によるコンパイル失敗と異なり、今回は実Reader→Parserの採否回帰。候補は標準DeviceGray/RGB/CMYKの色空間・初期色・成分数・q/Q復元・直接色指定の暗黙切替を追跡すること。未知の色空間・Pattern/ICC・不正成分・白地白文字・後描画は拒否を維持する。既存の背景/描画順/透明度/原本保持条件は外さない。テストと記録を隔離ブランチへpush後に再試行する。
+
+## W19: 色空間修正後の既存拒否ケースとの不一致
+
+2026-10-23、Debian13 / .NET10.0.402、sourcef6797cb、`--filter FullyQualifiedName~PdfVisibilityTests`。42件中41成功、ColourValidationPreservesCancellationAndRejectsUnverifiedColourSpacesだけが134行のAssert.Throwsで「例外が無い」と失敗。ログ/tmp/win-device-colour-regression-second.log。3件のW18入力は成功した。失敗した入力と旧契約を読む前に対処を決めず、この事実を保存する。
+
+W19の旧e001729の拒否リストには標準DeviceRGB自体が含まれていた。今回の同値表記の受理仕様と矛盾するこの入力を、引き続き未確認のPatternへ置き換える。取消・範囲外成分の拒否、3種類の白文字・線描画・成分数・未知空間・q/Qの新検査は維持する。通常解析版を9→10に更新し、同じPDFの旧失敗が現在版の結果と見なされず再解析対象になることを既存freshness経路と版9拒否assertで確認する。特別資料の版は維持する。修正/記録push後に全検査を再実行する。
