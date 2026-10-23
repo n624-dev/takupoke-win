@@ -120,6 +120,32 @@ public sealed class MaterialCoordinatorTests
         finally { Directory.Delete(root, true); }
     }
     [Fact]
+    public async Task CachedPdfFailureKeepsTheInitialExplanationAcrossRefreshAndRestart()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-cached-pdf-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root); using var protector = new Protector();
+        try
+        {
+            var path = Path.Combine(root, "fictional.pdf");
+            await File.WriteAllBytesAsync(path, System.Text.Encoding.ASCII.GetBytes("%PDF-1.7\n% Entirely fictional malformed PDF.\n"));
+            string? initial;
+            MaterialAttempt? saved;
+            await using (var store = new SchoolDataStore(Path.Combine(root, "data"), protector))
+            {
+                var coordinator = new MaterialCoordinator(store, new(new FakeIdentity()));
+                var failed = await coordinator.SelectAsync(MaterialKind.Timetable, path, 2032);
+                initial = failed.Error; Assert.NotNull(initial); Assert.False(failed.Parsed);
+                saved = await store.ReadAsync<MaterialAttempt>(await store.BeginAsync(), "attempt.Timetable");
+                Assert.Equal(initial, (await coordinator.RefreshAsync(MaterialKind.Timetable, 2032)).Error);
+            }
+            await using var reopened = new SchoolDataStore(Path.Combine(root, "data"), protector);
+            var refresh = await new MaterialCoordinator(reopened, new(new FakeIdentity())).RefreshAsync(MaterialKind.Timetable, 2032);
+            Assert.Equal(initial, refresh.Error); Assert.False(refresh.Parsed);
+            Assert.Equal(saved, await reopened.ReadAsync<MaterialAttempt>(await reopened.BeginAsync(), "attempt.Timetable"));
+        }
+        finally { Directory.Delete(root, true); }
+    }
+    [Fact]
     public async Task FirstSelectionAndOriginalSurviveRestartWhenPdfCannotBeParsed()
     {
         var root = Path.Combine(Path.GetTempPath(), "takupoke-material-tests-" + Guid.NewGuid().ToString("N"));

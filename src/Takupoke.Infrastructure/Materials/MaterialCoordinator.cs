@@ -54,7 +54,9 @@ public sealed partial class MaterialCoordinator(SchoolDataStore store, FileSourc
                             new MaterialAttempt(now, null, false, digest, year, ParserVersion: version), token);
                         return new(kind, false, true);
                     }
-                    if (attempt?.SourceDigest == digest && attempt.Failure is not null && attempt.ParserVersion == version && (kind != MaterialKind.Changes || attempt.SchoolYear == year)) return new(kind, false, false, attempt.Failure);
+                    if (attempt?.SourceDigest == digest && attempt.Failure is not null && attempt.ParserVersion == version && (kind != MaterialKind.Changes || attempt.SchoolYear == year))
+                        return new(kind, false, false, kind == MaterialKind.Changes ? attempt.Failure
+                            : new PdfParseException(attempt.Failure, attempt.Page, attempt.Cell).Message);
                     return await ParseAsync(lease, source with { LastCheckedAt = now }, content.Bytes, year, false, token);
                 }
                 var next = new SourceRecord(Guid.NewGuid().ToString("N"), kind, Path.GetFullPath(selectedPath ?? source!.Path), content.Identity,

@@ -73,7 +73,7 @@ public static class ChangeNormalizer
                 if (n == last) return result;
             }
         }
-        if (Regex.IsMatch(Token(text), "^[0-9]+$") && int.TryParse(Token(text), out var year) && year is >= 1 and <= 9) return [Token(text)];
+        if (Regex.IsMatch(Token(text), "^[0-9]+$") && int.TryParse(Token(text), out var year) && year is >= 1 and <= 9) return [year.ToString(CultureInfo.InvariantCulture)];
         throw new ChangeParseException(ChangeErrorCode.Year);
     }
     public static IReadOnlyList<string> Classes(string value)

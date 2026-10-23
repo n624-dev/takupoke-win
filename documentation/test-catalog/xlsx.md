@@ -1,7 +1,7 @@
 # 時間割変更・曜日・行除外・原文保持
 
 対応関係・宣言名・実行方法のSHA-256：
-`8c59cd347bb4e39b2687b30f8051a3e14d408cc3697cebac43abd180f1dc762b`
+`6a3861b89e64e5a460b9a4048a840e36794d2481bdf2d0c22640a36d050d506a`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -50,6 +50,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/XlsxChangeReaderTests.cs](../../tests/Takupoke.Integration.Tests/XlsxChangeReaderTests.cs)
 
+- `LeadingZeroGradesFromWorkbookRemainSelectableAndExpandAll`
 - `TypedIsoDateCellsKeepTheirWrittenCalendarDay`
 - `InvalidTypedDatesRemainRejected`
 - `Utf8BomAtTheStartOfXmlDoesNotChangeLessons`
