@@ -289,7 +289,8 @@
         "tests/Takupoke.Win.UITests/ShortcutReview.cs",
         "tests/Takupoke.Integration.Tests/AppLifecycleTests.cs",
         "tests/Takupoke.Win.UITests/Program.RetentionRecovery.cs",
-        "tests/Takupoke.Integration.Tests/StartupVisibilityTests.cs"
+        "tests/Takupoke.Integration.Tests/StartupVisibilityTests.cs",
+        "tests/Takupoke.Integration.Tests/BrowserLifecycleTests.cs"
       ]
     },
     {

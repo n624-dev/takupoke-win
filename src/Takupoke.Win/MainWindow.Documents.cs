@@ -33,14 +33,27 @@ public sealed partial class MainWindow
         root.Children.Add(new ScrollViewer { Content = controls, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto, VerticalScrollBarVisibility = ScrollBarVisibility.Disabled });
         Grid.SetRow(browser, 1); root.Children.Add(browser);
         window.Content = root; _browserWindow = window; _browser = browser;
-        window.Closed += (_, _) => { browser.Close(); if (_browser == browser) { _browser = null; _browserWindow = null; } };
+        var closed = false;
+        window.Closed += (_, _) =>
+        {
+            closed = true;
+            try { browser.Close(); }
+            finally { if (_browser == browser) { _browser = null; _browserWindow = null; } }
+        };
+        bool IsCurrent() => !closed && epoch == _model.PrivateEpoch && !_model.Locked && _browser == browser;
+        void CloseOwned()
+        {
+            if (_browser == browser) { _browser = null; _browserWindow = null; }
+            if (!closed) window.Close();
+        }
         window.Activate();
         try
         {
             var environment = await CoreWebView2Environment.CreateWithOptionsAsync(null, Path.Combine(_model.Root, "school", "browser"), null);
+            if (!IsCurrent()) { CloseOwned(); return; }
             var options = environment.CreateCoreWebView2ControllerOptions(); options.IsInPrivateModeEnabled = true;
             await browser.EnsureCoreWebView2Async(environment, options);
-            if (epoch != _model.PrivateEpoch || _model.Locked || _browser != browser) { browser.Close(); return; }
+            if (!IsCurrent()) { CloseOwned(); return; }
             browser.CoreWebView2.Settings.IsWebMessageEnabled = false; browser.CoreWebView2.Settings.AreHostObjectsAllowed = false;
             reload.IsEnabled = external.IsEnabled = true;
             browser.CoreWebView2.HistoryChanged += (_, _) => { back.IsEnabled = browser.CanGoBack; forward.IsEnabled = browser.CanGoForward; };
@@ -51,12 +64,17 @@ public sealed partial class MainWindow
             { args.Handled = true; if (Uri.TryCreate(args.Uri, UriKind.Absolute, out var destination) && destination.Scheme == "https") browser.Source = destination; };
             browser.Source = uri;
         }
-        catch { CloseBrowser(); await Message("アプリ内ブラウザを開けませんでした", "設定の「リンクの開き方」を「既定のブラウザ」に変更して、もう一度リンクを開いてください。"); }
+        catch
+        {
+            var report = IsCurrent();
+            CloseOwned();
+            if (report) await Message("アプリ内ブラウザを開けませんでした", "設定の「リンクの開き方」を「既定のブラウザ」に変更して、もう一度リンクを開いてください。");
+        }
     }
     private void CloseBrowser()
     {
         var browser = _browser; var window = _browserWindow; _browser = null; _browserWindow = null;
-        browser?.Close(); window?.Close();
+        if (window != null) window.Close(); else browser?.Close();
     }
     private async Task ShowPdf(MaterialKind kind, bool accepted)
     {

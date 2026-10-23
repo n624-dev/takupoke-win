@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`38611f2a1dde3b49036f0b0b25ebef92bc619a81962d0298dcc2e93208168c21`
+`a3dd3170382c4417bce1f21b073ef8474ef56f7c76f6bdb51fb456ba68bbbb38`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -101,3 +101,7 @@
 ## [tests/Takupoke.Integration.Tests/StartupVisibilityTests.cs](../../tests/Takupoke.Integration.Tests/StartupVisibilityTests.cs)
 
 - `ActualInitializationAndLoadedMethodsPrepareBackgroundVisibilityBeforeWaitingForNetwork`
+
+## [tests/Takupoke.Integration.Tests/BrowserLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/BrowserLifecycleTests.cs)
+
+- `ActualBrowserMethodsOnlyCloseTheirOwnWindowAcrossInitializationRaces`

@@ -101,3 +101,9 @@ PR47失敗の追加観測:実AXの通常cardはlesson-week-2026-10-26-3_IT-1-1-n
 候補は初期化をローカル準備と通信へ分け、従来InitializeAsyncは順に両方を呼ぶ互換入口として保持する。Loadedではローカル準備→tray/背景表示設定→通信とし、初期設定が必要なら表示を維持する。ShowWindowで明示的な表示要求を記録し、準備中の要求を後で隠さない。7条件（通常/背景・trayなし・設定未完了・準備中/通信中の明示表示・通信失敗）を同じmethod本文で比較する。
 
 44候補は7条件を含むactual-method回帰1件/失敗0（3.1176秒）、共通コンパイルhelper抽出後も1件/失敗0（約2秒）。テストは追加NuGet feedを使わず、所有一時projectをfinallyで回収する。実Windows UIとStartupTaskの確認はCI・実機の範囲を分けて後続確認する。PR48/c7c4e8は全8CI成功、MSIX447checks後に7c5b998へmerge、main40036612783も22:58:25成功終端。完了済み実行は再照会しない。
+
+## 古いブラウザ初期化の所有権（24）
+
+source568fbb5（製品未変更、追加BrowserLifecycleTests）、Linux/.NET10.0.402、独立のactual-method probe初回1件失敗。両方のA→B順序でBが閉じられ/不要警告が出て、Aへの再Ensureと二重Close、手動閉鎖/epoch/lock後の残存window、現在失敗時の二重Closeを観測。コンパイルは成功。環境生成とWebView境界だけをgate/failureで制御し、実Windows RO_E_CLOSEDの再現と区別する。HTTP/学校への通信はない。
+
+現在OpenBrowser/CloseBrowserとissue24のff2166f版を比較し、catchの引数なしCloseBrowserと、Ensure後しかない所有権検査が同じことを確認。今回候補は閉鎖済み状態と現在browserのidentityを待機後に検査し、各呼出しのwindowだけを閉鎖する。Closedイベントを唯一の通常WebView解放点とし、現在の失敗だけ案内する。URL制限/private mode/ブリッジ拒否は保持。iOSの同種画面はSFSafariViewControllerであり、このCoreWebView2共有field/catch経路はない。
