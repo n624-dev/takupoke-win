@@ -75,3 +75,9 @@ PR45/aefc2c7のCI40024262360/1は21:06:07〜21:14:19の8分12秒で全8job成功
 Windows74交差の追加nativeケースでは、架空XLSXを実Parser/暗号化storeで採用してから一回起動し、単独休講の既知時計が実Text子要素であること・可視/カード内の実枠包含・accessible labelを確認する。前の全操作を維持し、後のretentionケースで所有fixtureを通常どおり作り直す。Linuxでは未実行、次のMSIX/x64 native CIで確認する。
 
 43修正後はPlatform5件/失敗0（0.6915秒）、Integration全276件/失敗0（7秒）。Python全体は初回PowerShell不在でStore境界23条件が失敗した。製品変更をせず公式PowerShell7.5.3を所有toolchainへ設置し、23件/失敗0（8.069秒）を確認した。PR46/82d7191の全8 CI成功、MSIX437checks、22:00:36にaead585へmerge。main40030766121も22:04:09成功終端。今回の39/43/74はそのrunへ含めず、別のCIで確認する。
+
+## PR47 native UI追加ケースの初回失敗
+
+source9aa3989a1939f3d4501be8b5fa064497e36b4c09、run40031836382/1、x64Release job120681978502（22:10:55〜22:14:22 UTC）。ビルドと実XLSX採用/休講判定は成功、既存を含む412checks後、新規の実休講ButtonのID prefix検索がtimeout（22:13:48）。時計Text/可視枠/読み上げlabelのassertへ未到達であり、それらの不具合とは断定しない。OS/SDKの下位条件・表示scope・実AX情報とケース前後の保存状態を比較してから候補を選ぶ。runの他jobは継続し、取消ししない。
+
+PR47失敗の追加観測:実AXの通常cardはlesson-week-2026-10-26-3_IT-1-1-normal-0-0。JST土曜日のアプリは仕様のDisplayWeekStartで翌月曜26日、今回fixtureは単純Mondayで19日の休講を置いていた。現行AppViewModel constructorのToday.DisplayWeekStart、BuildTimetableのWeekStart、Coreの週末週選択を照合し、検証入力の日付だけ同じDisplayWeekStartへそろえる。検索ID・期限・実時計Text・実枠・accessible labelの期待は一切緩めず、製品のclock修正も変えない。既存Coreの曜日別週境界検査と元nativeケースがこの入力差を検証するため模倣テストは追加しない。次のPR実行を確認し、旧runも全終端まで保持する。

@@ -20,7 +20,7 @@ internal static partial class Program
     {
         Stop();
         var today = SchoolDate.InJapan(DateTimeOffset.UtcNow);
-        var day = today.AddDays(-(((int)today.DayOfWeek + 6) % 7));
+        var day = today.DisplayWeekStart();
         PrepareCancellationClockAsync(root, day).GetAwaiter().GetResult();
         Start(executable); Navigate("timetable");
         var prefix = $"lesson-week-{day.Iso()}-3_IT-1-1-cancelled-";
