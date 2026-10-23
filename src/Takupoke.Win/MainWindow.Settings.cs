@@ -175,7 +175,7 @@ public sealed partial class MainWindow
         var tray = new ToggleSwitch { Header = "通知領域に常駐", IsOn = _model.Preferences.KeepInTray, IsEnabled = _desktop is not null };
         tray.Toggled += async (_, _) => { var enabled = tray.IsOn; if (enabled == _model.Preferences.KeepInTray) return; try { _desktop?.SetTray(enabled); await _model.SavePreferencesAsync(current => current with { KeepInTray = enabled }); } catch { await Message("常駐を設定できません", "通知領域にアイコンを登録できませんでした。"); } };
         var startup = new ToggleSwitch { Header = "Windowsへのサインイン時に起動", IsOn = _model.Preferences.AutoStart, IsEnabled = !_model.OfflineTest };
-        startup.Toggled += async (_, _) => { var enabled = startup.IsOn; if (enabled == _model.Preferences.AutoStart) return; try { DesktopIntegration.SetAutoStart(enabled); await _model.SavePreferencesAsync(current => current with { AutoStart = enabled }); } catch { await Message("自動起動を設定できません", "Windowsの設定を確認してください。"); } };
+        startup.Toggled += async (_, _) => { var enabled = startup.IsOn; if (enabled == _model.Preferences.AutoStart) return; try { await DesktopIntegration.SetAutoStartAsync(enabled); await _model.SavePreferencesAsync(current => current with { AutoStart = enabled }); } catch { startup.IsOn = _model.Preferences.AutoStart; await Message("自動起動を設定できません", "Windowsの設定を確認してください。"); } };
         Add(Card(Panel(tray, SettingsDescription("ウィンドウを閉じた後も更新を確認"), startup)));
         Add(Button("アプリを完全に終了", () => { _exitRequested = true; Close(); return Task.CompletedTask; }));
     }

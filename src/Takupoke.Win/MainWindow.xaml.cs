@@ -96,10 +96,10 @@ public sealed partial class MainWindow : Window
             catch { await Message("通知領域に表示できません", "ウィンドウを閉じると完全終了します。Windowsの通知領域を確認してください。"); }
             if (_model.Preferences.AutoStart)
             {
-                try { DesktopIntegration.SetAutoStart(true); }
+                try { await DesktopIntegration.SetAutoStartAsync(true); }
                 catch { await Message("自動起動を設定できません", "Windowsへのサインイン時に起動する設定を反映できませんでした。設定の「通知・バックグラウンド」で設定し直してください。"); }
             }
-            if (_desktop.TrayAvailable && Environment.GetCommandLineArgs().Contains("--background")) AppWindow.Hide();
+            if (_desktop.TrayAvailable && Program.StartInBackground) AppWindow.Hide();
         }
         OfferInitialSetup();
     }

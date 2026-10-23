@@ -27,8 +27,14 @@ internal static partial class Program
         const string commandPath = @"Software\Classes\jp.n624.takupoke.win\shell\open\command";
         using var existing = Registry.CurrentUser.OpenSubKey(commandPath);
         var previous = existing?.GetValue("") as string;
-        using (var command = Registry.CurrentUser.CreateSubKey(commandPath)) command.SetValue("", "\"" + Path.GetFullPath(executable) + "\" \"----ms-protocol:%1\"");
-        using (var scheme = Registry.CurrentUser.CreateSubKey(@"Software\Classes\jp.n624.takupoke.win")) scheme.SetValue("URL Protocol", "");
+        var packagedProtocol = Environment.GetEnvironmentVariable("TAKUPOKE_TEST_PACKAGED_PROTOCOL") == "1";
+        if (packagedProtocol)
+            Require(previous is null, "The installed MSIX protocol test has no per-user command override.");
+        else
+        {
+            using (var command = Registry.CurrentUser.CreateSubKey(commandPath)) command.SetValue("", "\"" + Path.GetFullPath(executable) + "\" \"----ms-protocol:%1\"");
+            using (var scheme = Registry.CurrentUser.CreateSubKey(@"Software\Classes\jp.n624.takupoke.win")) scheme.SetValue("URL Protocol", "");
+        }
         try
         {
             File.Delete(tokenRequests); File.Delete(privateRequests);
@@ -92,8 +98,11 @@ internal static partial class Program
         finally
         {
             File.Delete(mode); File.Delete(state); File.Delete(Path.Combine(root, "offline-auth-revision.txt"));
-            if (previous is not null) { using var command = Registry.CurrentUser.CreateSubKey(commandPath); command.SetValue("", previous); }
-            else Registry.CurrentUser.DeleteSubKeyTree(@"Software\Classes\jp.n624.takupoke.win", false);
+            if (!packagedProtocol)
+            {
+                if (previous is not null) { using var command = Registry.CurrentUser.CreateSubKey(commandPath); command.SetValue("", previous); }
+                else Registry.CurrentUser.DeleteSubKeyTree(@"Software\Classes\jp.n624.takupoke.win", false);
+            }
         }
     }
     private static void SendCallback(string executable, string callback, bool shell)

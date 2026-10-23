@@ -15,6 +15,22 @@ public sealed class DesktopIntegration : IDisposable
     public event Action<bool>? LockedChanged;
     public event Action? Resumed, Suspended, OpenRequested, ExitRequested;
     public bool TrayAvailable => _tray;
+    public static bool HasPackageIdentity
+    {
+        get
+        {
+            uint length = 0;
+            return GetCurrentPackageFullName(ref length, 0) == 122;
+        }
+    }
+    public static async Task SetAutoStartAsync(bool enabled)
+    {
+        if (!HasPackageIdentity) { SetAutoStart(enabled); return; }
+        var startup = await Windows.ApplicationModel.StartupTask.GetAsync("TakupokeStartup");
+        if (!enabled) { startup.Disable(); return; }
+        if (await startup.RequestEnableAsync() != Windows.ApplicationModel.StartupTaskState.Enabled)
+            throw new InvalidOperationException("Windowsのスタートアップ設定で、このアプリの自動起動を有効にしてください。");
+    }
     public static bool IsInputDesktopAccessible()
     {
         // READOBJECTS only; this does not switch desktops or change permissions.
@@ -65,6 +81,8 @@ public sealed class DesktopIntegration : IDisposable
         else if (Owned(key.GetValue("takupoke"))) key.DeleteValue("takupoke", false);
         if (Owned(key.GetValue("TakupokeWin"))) key.DeleteValue("TakupokeWin", false);
     }
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+    private static extern int GetCurrentPackageFullName(ref uint packageFullNameLength, nint packageFullName);
     private NotifyIconData IconData() => new()
     {
         Size = (uint)Marshal.SizeOf<NotifyIconData>(), Window = _window, Id = 1, Flags = 1 | 2 | 4 | 128,
