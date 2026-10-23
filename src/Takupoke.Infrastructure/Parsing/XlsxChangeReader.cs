@@ -9,7 +9,7 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class XlsxChangeReader
 {
-    public const int Version = 7;
+    public const int Version = 8;
     private const string SpreadsheetNamespace = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
     private const string RelationshipNamespace = "http://schemas.openxmlformats.org/package/2006/relationships";
     private const string DocumentRelationshipNamespace = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";

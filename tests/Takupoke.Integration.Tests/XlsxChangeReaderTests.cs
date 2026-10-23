@@ -9,6 +9,34 @@ namespace Takupoke.Integration.Tests;
 
 public sealed class XlsxChangeReaderTests
 {
+    [Theory]
+    [InlineData("1")]
+    [InlineData("01")]
+    [InlineData("001")]
+    [InlineData("００１")]
+    [InlineData("1.0")]
+    [InlineData("01.0")]
+    [InlineData("０１．０")]
+    public void LeadingZeroGradesFromWorkbookRemainSelectableAndExpandAll(string grade)
+    {
+        var bytes = Workbook(mutate: entries =>
+        {
+            var sheet = XDocument.Parse(entries["xl/worksheets/sheet1.xml"]); XNamespace ns = Ns;
+            var row = sheet.Descendants(ns + "row").Single(r => (string?)r.Attribute("r") == "2");
+            row.Elements(ns + "c").Single(c => (string?)c.Attribute("r") == "A2").Descendants(ns + "t").Single().Value = grade;
+            var all = new XElement(row); all.SetAttributeValue("r", "3");
+            foreach (var cell in all.Elements(ns + "c")) cell.SetAttributeValue("r", ((string)cell.Attribute("r")!)[..1]+"3");
+            all.Elements(ns + "c").Single(c => (string?)c.Attribute("r") == "A3").Descendants(ns + "t").Single().Value = "1";
+            all.Elements(ns + "c").Single(c => (string?)c.Attribute("r") == "B3").Descendants(ns + "t").Single().Value = "全";
+            row.AddAfterSelf(all); entries["xl/worksheets/sheet1.xml"] = sheet.ToString();
+        });
+        var rows = XlsxChangeReader.Parse(bytes, 2032);
+        Assert.Equal(new[]{"1_CN","1_CN"}, rows.Select(r=>r.ClassName));
+        Assert.All(rows, row=>Assert.Contains(row.ClassName, ClassSelection.Candidates));
+        Assert.Equal(new[]{"1","2","3"}, ChangeNormalizer.Years("01～03"));
+        Assert.Equal(new[]{"3","2","1"}, ChangeNormalizer.Years("03～01"));
+    }
+
     private const string Ns = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
     private static byte[] TypedDateWorkbook(string value) => Workbook(mutate: entries =>
     {

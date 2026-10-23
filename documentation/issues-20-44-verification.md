@@ -117,3 +117,7 @@ source568fbb5（製品未変更、追加BrowserLifecycleTests）、Linux/.NET10.
 ## 保存したPDF失敗の説明（29）
 
 sourcee9e1413＋追加actual Coordinator/store回帰、Linux/.NET10.0.402。修正前1件失敗（145ms）、同一原本の再取得が初回の日本語説明ではなくP01だけを返す。実架空不正PDFの選択が実Readerから生成した失敗を使い、失敗結果を注入していない。保存/再起動/同一bytes取得を検査する。元版ff2166fと現在のcache-returnと詳細説明の復元を照合し、PDF stage/page/cellから同じPdfParseException.Messageへ復元する候補にする。XLSXの既存日本語エラーと正常cacheは変えず、PDFの受理規則/版は変更しない。iOSのMaterialError側は同種cacheのtyped parseFailureをPDFParseError表示へ渡すため、この生stage文字列返却は非該当。
+
+## 先頭ゼロ付き学年（32、iOSにも該当）
+
+source19d9bee＋実XLSX回帰で7件中5失敗（200ms）。1/1.0は通過、01/001/全角/01.0はknownの年keyが1と一致せず「全」行の展開で失敗。iOSも実ZIP→Reader→Normalizerで同じunknownAllを再現。現行/元版のYearsの検証済みIntと戻す生文字列を比較し、単一年も範囲記法と同じ数値から文字列にする。受理範囲は拡大せず、AIや小数.0処理・全展開を保持。Win解析版7→8、iOS8→9で旧解析を更新対象にする。29の説明回帰は再取得/再起動後とも1件/失敗0（141ms）。
