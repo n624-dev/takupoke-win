@@ -15,7 +15,7 @@ public sealed class IosParityTests
 
     [Theory]
     [MemberData(nameof(ScheduleCases))]
-    public void ScheduleMatchesOriginalSwiftWithReviewedOverlapClockCorrection(string id)
+    public void ScheduleMatchesOriginalSwiftWithReviewedClockCorrections(string id)
     {
         var row = Reference["schedule"]!.AsArray().Single(value => value!["id"]!.GetValue<string>() == id)!;
         var data = row["input"]!.Deserialize<ScheduleData>(Options)!;
@@ -57,9 +57,9 @@ public sealed class IosParityTests
         var expected = row["expected"]!.DeepClone();
         // The immutable Swift fixture deliberately retains the old bug from
         // iOS #46. Only these reviewed cases have two corrected card clocks;
-        // every other field, including ambiguous common/change clocks, is still
-        // compared with that original fixture. No production result is used to
-        // construct these independent expected values.
+        // every other field is compared with the original fixture, except for
+        // the four missing-source cases explicitly listed below. No production
+        // result constructs these independent expectations.
         string[] corrected = ["tag-empty-changes-false-special-3", "tag-授業なし-changes-false-special-3",
             "tag-補講日-changes-false-special-3", "tag-行事（授業なし）-changes-false-special-3",
             "tag-行事（授業あり）-changes-false-special-3", "tag-行事-changes-false-special-3",
@@ -74,6 +74,36 @@ public sealed class IosParityTests
             Assert.Null(blocks[0]!["time"]); Assert.Null(blocks[1]!["time"]);
             blocks[0]!["time"] = "09:10～09:50";
             blocks[1]!["time"] = "09:10～10:00";
+        }
+        // iOS #90 / Windows cross-check: the immutable old implementation
+        // confirmed a change clock even while its own event required a missing
+        // special PDF. Keep the original fixture unchanged and assert exactly
+        // which old values these independently tested cases correct.
+        string[] missingSources = ["tag-テスト返却-changes-true-special-1", "tag-テスト返却-changes-false-special-1",
+            "tag-テスト-changes-true-special-2", "tag-テスト-changes-false-special-2"];
+        if (missingSources.Contains(row["id"]!.GetValue<string>()))
+        {
+            var returnsMissing = row["id"]!.GetValue<string>().StartsWith("tag-テスト返却-", StringComparison.Ordinal);
+            var input = row["input"]!.Deserialize<ScheduleData>(Options)!;
+            var missingKind = returnsMissing ? MaterialKind.ExamReturn : MaterialKind.Exam;
+            Assert.DoesNotContain(input.Specials!, source => source.Kind == missingKind);
+            Assert.Contains(input.Events!, item => item.Date == "2032-04-05" && item.Tag == (returnsMissing ? "テスト返却" : "テスト"));
+            var oldClocks = returnsMissing ? new[] { "09:10～09:50", "09:30～09:50", "09:10～09:30" }
+                : new[] { "09:10～10:00", "09:40～10:00", "09:10～09:30" };
+            var changeTimes = expected["changeTimes"]!.AsArray();
+            Assert.Equal(4, changeTimes.Count);
+            for (var index = 0; index < oldClocks.Length; index++)
+            {
+                Assert.Equal(oldClocks[index], changeTimes[index]![0]!.GetValue<string>());
+                changeTimes[index]![0] = null;
+            }
+            if (row["includesChanges"]!.GetValue<bool>())
+            {
+                var block = Assert.Single(expected["blocks"]!.AsArray())!;
+                Assert.Equal("change", block["kind"]!.GetValue<string>());
+                Assert.Equal(oldClocks[0], block["time"]!.GetValue<string>());
+                block["time"] = null;
+            }
         }
         return expected;
     }

@@ -1,7 +1,7 @@
 # 通知・差分・実配信
 
 対応関係・宣言名・実行方法のSHA-256：
-`1cb30e1f88ff60bf6298fdf0ec96e383715cb116ec339efeb36ac25ad1ea5094`
+`794ec5d4d046bf393e6fd719cf479d035f74c50c3afaa05b5d841b63f64ab991`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -43,6 +43,11 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 - `IncompatibleLinksCacheStillDisplaysIndependentSavedLessons`
 - `EventDirectoryEnumerationFailureDoesNotHideLessonsAndCanBeRetried`
+- `ActualNotificationToggleKeepsTheLastEditDuringAnEarlierSave`
+- `CompletingAnEarlierYearSaveKeepsANewerUnsubmittedDraft`
+- `StartupRegistrationRollsBackIfThePreferenceFileCannotBeSaved`
+- `StartupFailureRestoresTheOldStateOrRetainsAnExplicitWarning`
+- `FailedYearSaveKeepsItsDraftAndSuccessfulUnchangedSaveClearsIt`
 - `UnlockDuringUnfinishedReadReloadsAfterCancellationWithEitherTraySetting`
 - `FinishingBeforeUnlockAndRemainingLockedNeverApplyTheCancelledSnapshot`
 - `ExplicitStopDiscardsTheQueuedUnlockRefreshUntilExplicitResume`

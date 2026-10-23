@@ -1,7 +1,7 @@
 # リンク・検索・名称対応
 
 対応関係・宣言名・実行方法のSHA-256：
-`830efa2671b708558db43f34752966f9890a32729acd9b3903720e0ee574b0eb`
+`4a5f19bd85d59bb84203a0b570b1dd91a751dd6e7b2149f099994c57bd28574c`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -28,6 +28,10 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Core.Tests/MappingRulesTests.cs](../../tests/Takupoke.Core.Tests/MappingRulesTests.cs)
 
+- `ExactSubjectSpellingTakesPriorityWithinThePreferredClass`
+- `AnExplicitOrdinarySubjectIsNotHiddenByOmittedInternationalPrefix`
+- `ConditionalTeacherUsesExactThenUniqueWidthMatchInItsOwnContext`
+- `OmittedInternationalShortSubjectStillResolvesItsConditionalTeacher`
 - `ClassSpecificRulesTakePriorityAndMetadataKeepsSeparators`
 - `ContextualTeacherRequiresMatchingYearClassAndCanonicalSubject`
 - `SeparatesOnlyConfirmedMetadata`
