@@ -14,7 +14,7 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
         public bool Intersects(Bounds b) => Left < b.Right && Right > b.Left && Top < b.Bottom && Bottom > b.Top;
         public bool Contains(Bounds b) => Left <= b.Left && Right >= b.Right && Top <= b.Top && Bottom >= b.Bottom;
     }
-    private sealed record State(Colour Fill, Colour Stroke, int Mode = 0, double Width = 1);
+    private sealed record State(Colour Fill, Colour Stroke, int Mode = 0, double Width = 1, int FillComponents = 1, int StrokeComponents = 1);
     private sealed record Paint(Bounds Bounds, Colour? Colour, int Order);
     private sealed record Text(Bounds Bounds, State State, int Order);
     private State _state = new(new(0, 0, 0), new(0, 0, 0));
@@ -23,19 +23,32 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
     private readonly List<Text> _text = [];
     private int _order, _work;
     private static readonly IReadOnlyDictionary<string, int> Counts = new Dictionary<string, int>
-    { ["q"] = 0, ["Q"] = 0, ["g"] = 1, ["G"] = 1, ["rg"] = 3, ["RG"] = 3, ["k"] = 4, ["K"] = 4, ["Tr"] = 1, ["w"] = 1 };
+    { ["q"] = 0, ["Q"] = 0, ["g"] = 1, ["G"] = 1, ["rg"] = 3, ["RG"] = 3, ["k"] = 4, ["K"] = 4, ["Tr"] = 1, ["w"] = 1, ["sc"] = -1, ["SC"] = -1, ["scn"] = -1, ["SCN"] = -1 };
     public static bool Supports(string operation) => Counts.ContainsKey(operation);
-    public static bool Unverified(string operation) => operation is "cs" or "CS" or "sc" or "SC" or "scn" or "SCN" or "sh" or "BI" or "ID" or "EI";
+    public static bool Unverified(string operation) => operation is "sh" or "BI" or "ID" or "EI";
     private void Work()
     {
         if (++_work > 10_000_000) throw new PdfParseException("limit");
         if (_work % 128 == 0) token.ThrowIfCancellationRequested();
     }
+    public void SelectColourSpace(bool stroke, string name)
+    {
+        token.ThrowIfCancellationRequested();
+        var count = name switch { "DeviceGray" => 1, "DeviceRGB" => 3, "DeviceCMYK" => 4, _ => throw new PdfParseException("P01") };
+        // PDF device colour spaces initialize to black. q/Q must preserve the
+        // space as well as the colour, and g/rg/k implicitly select a space.
+        var black = new Colour(0, 0, 0);
+        _state = stroke ? _state with { Stroke = black, StrokeComponents = count }
+            : _state with { Fill = black, FillComponents = count };
+    }
     public void Operation(string operation, double[] values)
     {
         token.ThrowIfCancellationRequested();
-        if (!Counts.TryGetValue(operation, out var count) || values.Length != count || !values.All(double.IsFinite)) throw new PdfParseException("P01");
-        if (operation is "g" or "G" or "rg" or "RG" or "k" or "K")
+        if (!Counts.TryGetValue(operation, out var count)) throw new PdfParseException("P01");
+        var stroke = operation is "G" or "RG" or "K" or "SC" or "SCN";
+        if (count == -1) count = stroke ? _state.StrokeComponents : _state.FillComponents;
+        if (values.Length != count || !values.All(double.IsFinite)) throw new PdfParseException("P01");
+        if (operation is "g" or "G" or "rg" or "RG" or "k" or "K" or "sc" or "SC" or "scn" or "SCN")
         {
             if (values.Any(value => value is < 0 or > 1)) throw new PdfParseException("P01");
             var colour = values.Length switch
@@ -44,7 +57,7 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
                 3 => new Colour(values[0], values[1], values[2]),
                 _ => new Colour(1 - Math.Min(1, values[0] + values[3]), 1 - Math.Min(1, values[1] + values[3]), 1 - Math.Min(1, values[2] + values[3]))
             };
-            _state = operation is "g" or "rg" or "k" ? _state with { Fill = colour } : _state with { Stroke = colour };
+            _state = stroke ? _state with { Stroke = colour, StrokeComponents = count } : _state with { Fill = colour, FillComponents = count };
             return;
         }
         switch (operation)

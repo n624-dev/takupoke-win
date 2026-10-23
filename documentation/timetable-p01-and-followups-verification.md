@@ -32,3 +32,9 @@ P01の利用者資料はまだ未受領。10454は利用者も未確認で、も
 ## Windows PR の確認
 
 [PR17](https://github.com/n624-dev/takupoke-win/pull/17)、source4921c6bの[run39906933933](https://github.com/n624-dev/takupoke-win/actions/runs/39906933933)は05:42:25 UTCまでに全7job成功。Windows Core205件・Integration223件、Linux205/221件、固定Swift比較、x64 Debug/ReleaseとARM64 Releaseの製品ビルド、実WinUI435項目が成功した。追加の復旧キャンセル/確定・再起動も実行済み。05:44にmainを同一sourceへfast-forwardした。main側Actionsと正式パッケージの導入検証・匿名配布物の照合は別に確認する。利用者P01の解消証拠ではない。
+
+## W18: 標準Device色空間の同値表記を拒否する架空PDF回帰
+
+2026-10-23、利用者は対象PDFを共有できないと回答した。Debian13 / .NET10.0.402、source f4e9169 を基点とするcodex/fix-device-colour-p01の追加テスト差分。`dotnet test tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj --configuration Release --filter FullyQualifiedName~StandardDeviceColourSpaceOperators` の3件がすべて失敗。実フォントを埋めた完全架空の同じ時間割で、黒文字の表記だけを /DeviceGray cs 0 sc、/DeviceRGB cs 0 0 0 scn、/DeviceCMYK cs 0 0 0 1 sc に変更すると、Readの45行目でP01を返した。ログ/tmp/win-device-colour-regression-first.log。利用者PDFの原因と同じとは未確認。対処方針を決める前にこの観測を保存する。
+
+008b108の実Readはこれらの色指定命令を無視していた。公開後の可視性拒否を追加したe001729では、標準Device色空間でもcs/sc系を一律未確認として拒否するため、旧入力との同値表記が新たにP01となる。W15のテスト引数不足によるコンパイル失敗と異なり、今回は実Reader→Parserの採否回帰。候補は標準DeviceGray/RGB/CMYKの色空間・初期色・成分数・q/Q復元・直接色指定の暗黙切替を追跡すること。未知の色空間・Pattern/ICC・不正成分・白地白文字・後描画は拒否を維持する。既存の背景/描画順/透明度/原本保持条件は外さない。テストと記録を隔離ブランチへpush後に再試行する。
