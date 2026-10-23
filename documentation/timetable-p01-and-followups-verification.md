@@ -28,3 +28,7 @@ Debian13 / .NET10.0.402。W17の記録/修正push後、復旧store5件成功。�
 P01の利用者資料はまだ未受領。10454は利用者も未確認で、もう少し前の版では動いたとの報告。実PDFの採否や拒否枝は未確定のため、P01の解析条件はこの差分では変更していない。
 
 一覧146ファイルの整合検査、一覧自体の14テスト、配布notice検査は成功。作業環境の短い接続断ではコマンドプロセスが作成されず、復旧後の同一ファイルと成功ログを確認した。テストの失敗/再実行とは区別する。
+
+## Windows PR の確認
+
+[PR17](https://github.com/n624-dev/takupoke-win/pull/17)、source4921c6bの[run39906933933](https://github.com/n624-dev/takupoke-win/actions/runs/39906933933)は05:42:25 UTCまでに全7job成功。Windows Core205件・Integration223件、Linux205/221件、固定Swift比較、x64 Debug/ReleaseとARM64 Releaseの製品ビルド、実WinUI435項目が成功した。追加の復旧キャンセル/確定・再起動も実行済み。05:44にmainを同一sourceへfast-forwardした。main側Actionsと正式パッケージの導入検証・匿名配布物の照合は別に確認する。利用者P01の解消証拠ではない。
