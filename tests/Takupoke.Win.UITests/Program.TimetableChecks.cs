@@ -16,6 +16,57 @@ namespace Takupoke.Win.UITests;
 
 internal static partial class Program
 {
+    private static void CheckSinglePeriodCancellationClock(string executable, string root)
+    {
+        Stop();
+        var today = SchoolDate.InJapan(DateTimeOffset.UtcNow);
+        var day = today.DisplayWeekStart();
+        PrepareCancellationClockAsync(root, day).GetAwaiter().GetResult();
+        Start(executable); Navigate("timetable");
+        var prefix = $"lesson-week-{day.Iso()}-3_IT-1-1-cancelled-";
+        AutomationElement? card = null;
+        Wait(() => (card = _window!.FindAll(TreeScope.Descendants,
+            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button))
+            .Cast<AutomationElement>().FirstOrDefault(item => item.Current.AutomationId.StartsWith(prefix, StringComparison.Ordinal))) is not null,
+            "The real parsed single-period cancellation is displayed");
+        if (card!.TryGetCurrentPattern(ScrollItemPattern.Pattern, out var scroll)) ((ScrollItemPattern)scroll).ScrollIntoView();
+        Wait(() => !card.Current.IsOffscreen, "The cancellation card is visible");
+        var clock = card.FindFirst(TreeScope.Descendants, new AndCondition(
+            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Text),
+            new PropertyCondition(AutomationElement.NameProperty, "08:50～09:35")));
+        Require(clock is not null, "A known single cancellation clock is actual card text, including when the shared clock exists");
+        Require(!clock!.Current.IsOffscreen && card.Current.BoundingRectangle.Contains(clock.Current.BoundingRectangle),
+            "The rendered cancellation clock fits inside the measured card");
+        Require(card.Current.Name.Contains("08:50～09:35", StringComparison.Ordinal),
+            "The cancellation accessible label retains its known clock");
+    }
+
+    private static async Task PrepareCancellationClockAsync(string root, DateOnly day)
+    {
+        var preferences = new PreferencesStore(root);
+        await preferences.SaveAsync((await preferences.LoadAsync()) with {
+            SelectedClasses = ["3_IT"], IncludesChanges = true, DefaultSchoolYear = day.SchoolYear().ToString() });
+        var bytes = Takupoke.Testing.FictionalChangeWorkbook.Create(sheet => {
+            System.Xml.Linq.XNamespace ns = Takupoke.Testing.FictionalChangeWorkbook.Namespace;
+            var rows = sheet.Descendants(ns + "sheetData").Single();
+            foreach (var old in rows.Elements(ns + "row").Skip(1).ToArray()) old.Remove();
+            var values = new[] { "3", "IT", $"{day.Month}/{day.Day}",
+                new[] { "日", "月", "火", "水", "木", "金", "土" }[(int)day.DayOfWeek], "1", "休講", "架空取消科目A" };
+            rows.Add(new System.Xml.Linq.XElement(ns + "row", new System.Xml.Linq.XAttribute("r", 2),
+                values.Select((value, index) => new System.Xml.Linq.XElement(ns + "c",
+                    new System.Xml.Linq.XAttribute("r", $"{(char)('A' + index)}2"), new System.Xml.Linq.XAttribute("t", "inlineStr"),
+                    new System.Xml.Linq.XElement(ns + "is", new System.Xml.Linq.XElement(ns + "t", value))))));
+        });
+        var path = Path.Combine(root, "fictional-cancellation-clock.xlsx"); await File.WriteAllBytesAsync(path, bytes);
+        await using var store = new SchoolDataStore(root, new WindowsDpapiProtector());
+        var result = await new MaterialCoordinator(store, new(new WindowsFileIdentity())).SelectAsync(MaterialKind.Changes, path, day.SchoolYear());
+        Require(result.Parsed && result.Error is null, "The fictional cancellation passes the real XLSX parser");
+        var lease = await store.BeginAsync();
+        var analysis = await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes");
+        Require(analysis!.Changes!.Single().IsCancellation, "The parsed record is a cancellation");
+        await store.WriteAsync(lease, "api.times", new SavedTimes(new string('A', 43), DateTimeOffset.UtcNow, new(1, [])));
+    }
+
     private static bool Visible(string id) => Find(id) is { } element && !element.Current.IsOffscreen;
     private static AutomationElement[] FindLessons(string subject) => _window?.FindAll(TreeScope.Descendants,
         new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button)).Cast<AutomationElement>()

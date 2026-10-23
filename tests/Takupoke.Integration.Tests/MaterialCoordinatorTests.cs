@@ -22,6 +22,55 @@ public sealed class MaterialCoordinatorTests
         public void Dispose() => _cipher.Dispose();
     }
     [Fact]
+    public async Task ReturningToAcceptedYearClearsAnObsoleteParseAttemptWhenReusingTheCache()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-material-year-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root); using var protector = new Protector();
+        try
+        {
+            var path = Path.Combine(root, "fictional.xlsx"); var bytes = XlsxChangeReaderTests.Workbook();
+            await File.WriteAllBytesAsync(path, bytes);
+            async Task<Takupoke.Win.ViewModels.MaterialSnapshot> Snapshot(SchoolDataStore store)
+            {
+                var lease = await store.BeginAsync();
+                return new(await store.ReadAsync<SourceRecord>(lease, "selection.Changes"),
+                    await store.ReadAsync<MaterialAnalysis>(lease, "analysis.Changes"),
+                    await store.ReadAsync<MaterialAttempt>(lease, "attempt.Changes"),
+                    await store.ReadAsync<MaterialAttempt>(lease, "acquisition.Changes"));
+            }
+            await using (var store = new SchoolDataStore(Path.Combine(root, "data"), protector))
+            {
+                var coordinator = new MaterialCoordinator(store, new(new FakeIdentity()));
+                Assert.True((await coordinator.SelectAsync(MaterialKind.Changes, path, 2032)).Parsed);
+                var accepted = await Snapshot(store);
+                Assert.False((await coordinator.ReparseAsync(MaterialKind.Changes, 2033)).Parsed);
+                var failed = await Snapshot(store);
+                Assert.Equal(2033, failed.ParseAttempt!.SchoolYear);
+                Assert.True(failed.NeedsAttention(MaterialKind.Changes, 2033));
+                Assert.StartsWith("解析失敗", failed.AnalysisStatus(MaterialKind.Changes, 2033));
+                var result = await coordinator.RefreshAsync(MaterialKind.Changes, 2032);
+                Assert.True(result.Parsed); Assert.Null(result.Error); Assert.False(result.Changed);
+                var restored = await Snapshot(store);
+                Assert.Equal(System.Text.Json.JsonSerializer.Serialize(accepted.Analysis),
+                    System.Text.Json.JsonSerializer.Serialize(restored.Analysis));
+                Assert.Equal(bytes, await store.ReadOriginalAsync(await store.BeginAsync(), restored.Source!.Id));
+                Assert.False(restored.NeedsAttention(MaterialKind.Changes, 2032));
+                Assert.Equal("解析済み", restored.AnalysisStatus(MaterialKind.Changes, 2032));
+                Assert.Null(restored.ParseAttempt!.Failure);
+                Assert.Equal(2032, restored.ParseAttempt.SchoolYear);
+            }
+            await using var reopened = new SchoolDataStore(Path.Combine(root, "data"), protector);
+            var persisted = await Snapshot(reopened);
+            Assert.False(persisted.NeedsAttention(MaterialKind.Changes, 2032));
+            Assert.Equal("解析済み", persisted.AnalysisStatus(MaterialKind.Changes, 2032));
+            var retry = await new MaterialCoordinator(reopened, new(new FakeIdentity())).ReparseAsync(MaterialKind.Changes, 2033);
+            Assert.False(retry.Parsed);
+            Assert.True((await Snapshot(reopened)).NeedsAttention(MaterialKind.Changes, 2033));
+        }
+        finally { Directory.Delete(root, true); }
+    }
+
+    [Fact]
     public async Task DeletedOriginalReportsUnavailableAndKeepsAcceptedDataAndSavedCopy()
     {
         var root = Path.Combine(Path.GetTempPath(), "takupoke-material-tests-" + Guid.NewGuid().ToString("N"));

@@ -1,7 +1,7 @@
 # 原本取得・更新・保存・監視
 
 対応関係・宣言名・実行方法のSHA-256：
-`6b4a3e4c3440eb498409bdfbb285766d6157eb0745b127d617707f5c79469582`
+`6fde97aa1a285edb812e32789bfaa9f61471f038514b6c0ad9215bed5589cf54`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -25,6 +25,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/MaterialCoordinatorTests.cs](../../tests/Takupoke.Integration.Tests/MaterialCoordinatorTests.cs)
 
+- `ReturningToAcceptedYearClearsAnObsoleteParseAttemptWhenReusingTheCache`
 - `DeletedOriginalReportsUnavailableAndKeepsAcceptedDataAndSavedCopy`
 - `ChangedButInvalidXlsxRetainsPreviousAcceptedAnalysisAndBothOriginals`
 - `FirstSelectionAndOriginalSurviveRestartWhenPdfCannotBeParsed`

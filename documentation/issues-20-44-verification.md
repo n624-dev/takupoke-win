@@ -61,3 +61,23 @@ PR45/aefc2c7のCI40024262360/1は21:06:07〜21:14:19の8分12秒で全8job成功
 候補は全個人設定controlに観測済みの利用者遷移を保持し、同値判定を保留キュー外の保存値へ依存させない。初期/duplicateイベントを除き、実遷移はgate順に保存する。既存ComboBoxの往復回帰も維持する。年度下書きは送信時のversionと保存成功を確認した場合だけ解除。OS変更と保存は同じpreference gate内で行い、保存/OS失敗時は元OS状態へ戻す。rollback自体の失敗は独立warningとして残し、別の設定保存や更新確認成功では消さない。
 
 設定修正後はsource-linked AppLifecycle28件成功。その後、未loaded/初期/重複イベントを保存回数でも検証し、OSの部分成功→例外・rollback成功/失敗・再試行、年度保存失敗/同じ下書きの成功時解除/再起動を追加してIntegration全275件/失敗0（6秒）。実StartupTask/Run registryと実Trayは未検証で、OS boundaryだけをfakeにした結果。Native WinUI CIはまだ別途実行する。
+
+## 年度往復後の旧解析失敗（39）
+
+実Coordinator/暗号化store/MaterialSnapshotで2032正常→2033の実曜日不一致失敗→2032同じ原本の再取得を比較。最初はMaterialAnalysis内Listの参照等価を使った新規assertが失敗したため、保存内容全体のJSON一致へ変更して入力・結果の全フィールドを比較した。次の修正前実行でNeedsAttention=trueが実再現。再利用成功時に既存の正常analysisを維持したまま、同じstoreへ現在digest/年度/解析版と失敗なしのattemptを書き、操作結果と保存状態を一致させる。再起動と再度2033強制解析の失敗対照も検査する。iOSはMaterialsModel.changeFailureMessageのidentity/digest/yearとchangeAttempt.matchesで年度scopeを既に照合しており、同じ無条件旧失敗の分岐はない。
+
+39修正後の独立年度往復1件/失敗0。全体は後続実行。iOS74交差でWindowsのLessonButtonにも共通時計がある単独休講の時刻行が消える条件を確認し、休講の既知時計を常に含める。Homeの時計とnil時計は既存のまま。Windowsはcontentの実measureでrow高さを再計算するのでiOSの固定部品の高さ式とは異なる。実Windows UIの単独休講はまだ未確認。
+
+## Windows通知の送信結果（43）
+
+本番WindowsNotifications.csをそのまま別の小さなPlatform test assemblyへsource-linkし、WinAppSDKの通知境界だけをfakeにした。既存AppLifecycleの通知fakeと混同しない。修正前5件中3件が失敗し、実ShowAsync成功の非表示、ID0の未受理時に失敗説明が出ないこと、失敗後の成功も表示されないことを確認。状態は文言のprefixではなくNone/Sent/Failedで管理し、OS設定の読み直しとは別に直近の送信結果を付ける。例外とID0はいずれも失敗表示にし、成功時だけ成功へ遷移。未対応/登録失敗/OS設定読取失敗/中止の対照を保持する。実Windowsトースト送信は行っていない。
+
+Windows74交差の追加nativeケースでは、架空XLSXを実Parser/暗号化storeで採用してから一回起動し、単独休講の既知時計が実Text子要素であること・可視/カード内の実枠包含・accessible labelを確認する。前の全操作を維持し、後のretentionケースで所有fixtureを通常どおり作り直す。Linuxでは未実行、次のMSIX/x64 native CIで確認する。
+
+43修正後はPlatform5件/失敗0（0.6915秒）、Integration全276件/失敗0（7秒）。Python全体は初回PowerShell不在でStore境界23条件が失敗した。製品変更をせず公式PowerShell7.5.3を所有toolchainへ設置し、23件/失敗0（8.069秒）を確認した。PR46/82d7191の全8 CI成功、MSIX437checks、22:00:36にaead585へmerge。main40030766121も22:04:09成功終端。今回の39/43/74はそのrunへ含めず、別のCIで確認する。
+
+## PR47 native UI追加ケースの初回失敗
+
+source9aa3989a1939f3d4501be8b5fa064497e36b4c09、run40031836382/1、x64Release job120681978502（22:10:55〜22:14:22 UTC）。ビルドと実XLSX採用/休講判定は成功、既存を含む412checks後、新規の実休講ButtonのID prefix検索がtimeout（22:13:48）。時計Text/可視枠/読み上げlabelのassertへ未到達であり、それらの不具合とは断定しない。OS/SDKの下位条件・表示scope・実AX情報とケース前後の保存状態を比較してから候補を選ぶ。runの他jobは継続し、取消ししない。
+
+PR47失敗の追加観測:実AXの通常cardはlesson-week-2026-10-26-3_IT-1-1-normal-0-0。JST土曜日のアプリは仕様のDisplayWeekStartで翌月曜26日、今回fixtureは単純Mondayで19日の休講を置いていた。現行AppViewModel constructorのToday.DisplayWeekStart、BuildTimetableのWeekStart、Coreの週末週選択を照合し、検証入力の日付だけ同じDisplayWeekStartへそろえる。検索ID・期限・実時計Text・実枠・accessible labelの期待は一切緩めず、製品のclock修正も変えない。既存Coreの曜日別週境界検査と元nativeケースがこの入力差を検証するため模倣テストは追加しない。次のPR実行を確認し、旧runも全終端まで保持する。

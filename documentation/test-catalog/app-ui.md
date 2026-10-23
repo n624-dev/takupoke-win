@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`d0ad9d3ae17a561c4ba60c795fca7585ba62fa5e5cc8357f7d45ffbee7333f6f`
+`84a8da6e6079414d12e881b6c5b21eb11c309f68a55a9ac7d3946e7048094893`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -31,7 +31,6 @@
 - [src/Takupoke.Win/Platform/BrowserAuthenticator.cs](../../src/Takupoke.Win/Platform/BrowserAuthenticator.cs)
 - [src/Takupoke.Win/Platform/DesktopIntegration.cs](../../src/Takupoke.Win/Platform/DesktopIntegration.cs)
 - [src/Takupoke.Win/Platform/OfflineTestNetwork.cs](../../src/Takupoke.Win/Platform/OfflineTestNetwork.cs)
-- [src/Takupoke.Win/Platform/WindowsNotifications.cs](../../src/Takupoke.Win/Platform/WindowsNotifications.cs)
 - [src/Takupoke.Win/Program.cs](../../src/Takupoke.Win/Program.cs)
 - [src/Takupoke.Win/ProtocolActivation.cs](../../src/Takupoke.Win/ProtocolActivation.cs)
 - [src/Takupoke.Win/Takupoke.Win.csproj](../../src/Takupoke.Win/Takupoke.Win.csproj)
@@ -63,6 +62,7 @@
 
 ## [tests/Takupoke.Win.UITests/Program.TimetableChecks.cs](../../tests/Takupoke.Win.UITests/Program.TimetableChecks.cs)
 
+- `CheckSinglePeriodCancellationClock`
 - `CheckLessonFocusAcrossClock`
 - `CheckTimetableMenuAcrossClock`
 

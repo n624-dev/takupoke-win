@@ -109,6 +109,9 @@ jobs:
       - name: Run integration tests
         if: matrix.suite == 'core'
         run: dotnet test tests/Takupoke.Integration.Tests/Takupoke.Integration.Tests.csproj --configuration ${{ matrix.configuration }} --logger 'console;verbosity=normal'
+      - name: Run platform adapter tests with simulated OS boundaries
+        if: matrix.suite == 'core'
+        run: dotnet test tests/Takupoke.Platform.Tests/Takupoke.Platform.Tests.csproj --configuration ${{ matrix.configuration }} --logger 'console;verbosity=normal'
       - name: Build WinUI app
         if: matrix.suite == 'windows'
         run: dotnet build src/Takupoke.Win/Takupoke.Win.csproj --configuration ${{ matrix.configuration }} -p:Platform=${{ matrix.platform }}
