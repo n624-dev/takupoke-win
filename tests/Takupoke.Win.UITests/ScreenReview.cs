@@ -134,7 +134,65 @@ internal static partial class Program
         await new PublicEventsStore(root).SaveAsync(new(now, new("v1", lease.Period.SchoolYear, new string('a', 64), null, [new($"{lease.Period.SchoolYear + 1}-03-10", $"{lease.Period.SchoolYear + 1}-03-10", "架空の行事メモ", "行事メモ")]), "\"fake-api-etag\""));
     }
 
-    private static void Capture(string name)
+    private static int CaptureStoreListingPages(string executable, string root)
+    {
+        if (Environment.GetEnvironmentVariable("GITHUB_ACTIONS") != "true"
+            || Environment.GetEnvironmentVariable("RUNNER_ENVIRONMENT") != "github-hosted"
+            || Path.GetFullPath(root) != Path.GetFullPath(Environment.GetEnvironmentVariable("TAKUPOKE_DATA_ROOT") ?? ""))
+            throw new InvalidOperationException("Store listing captures require an isolated GitHub-hosted fixture.");
+        if (SetThreadDpiAwarenessContext((nint)(-4)) == 0)
+            throw new InvalidOperationException("Cannot enable physical screenshot coordinates.");
+        if (!SystemParametersInfo(0x0030, 0, out var work, 0) || work.Right - work.Left < 1632 || work.Bottom - work.Top < 932)
+            throw new InvalidOperationException("Store listing captures require a larger physical desktop.");
+        using var accessibility = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Accessibility");
+        var previousScale = accessibility.GetValue("TextScaleFactor");
+        var previousKind = previousScale is null ? RegistryValueKind.DWord : accessibility.GetValueKind("TextScaleFactor");
+        try
+        {
+            SetTextScale(accessibility, 100);
+            foreach (var theme in new[] { "Light", "Dark" })
+            {
+                Environment.SetEnvironmentVariable("TAKUPOKE_TEST_THEME", theme);
+                SeedAsync(root).GetAwaiter().GetResult();
+                SeedReviewDetails(root).GetAwaiter().GetResult();
+                new PreferencesStore(root).SaveAsync(new UserPreferences { SelectedClasses = ["3_IT"], MainColor = "default", SetupCompleted = true }).GetAwaiter().GetResult();
+                Start(executable);
+                try
+                {
+                    Require(SetWindowPos(_process!.MainWindowHandle, 0, work.Left + 16, work.Top + 16, 1600, 900, 0x0044), "Position the Store listing window");
+                    Wait(() => _window!.Current.BoundingRectangle.Width >= 1590 && _window.Current.BoundingRectangle.Height >= 890, "The Store listing window is arranged at native size");
+                    Capture("Store-" + theme + "-home", true);
+                    Navigate("links"); Capture("Store-" + theme + "-links", true);
+                    Navigate("timetable"); Capture("Store-" + theme + "-timetable", true);
+                    Navigate("settings"); Capture("Store-" + theme + "-settings", true);
+                    Invoke(WaitElement("settings-materials")); Capture("Store-" + theme + "-materials", true);
+                }
+                finally { Stop(); }
+            }
+        }
+        finally
+        {
+            if (previousScale is null) accessibility.DeleteValue("TextScaleFactor", false);
+            else accessibility.SetValue("TextScaleFactor", previousScale, previousKind);
+            BroadcastTextScale();
+            Environment.SetEnvironmentVariable("TAKUPOKE_TEST_THEME", null);
+        }
+        return 0;
+    }
+
+    [System.Runtime.InteropServices.DllImport("dwmapi.dll")]
+    private static extern int DwmGetWindowAttribute(nint window, int attribute, out StoreCaptureBounds bounds, int size);
+
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    private struct StoreCaptureBounds
+    {
+        public int Left;
+        public int Top;
+        public int Right;
+        public int Bottom;
+    }
+
+    private static void Capture(string name, bool storeListing = false)
     {
         // The mode is reachable only through the offline fixture command. Capture
         // only our own visible app window; never the surrounding desktop or pickers.
@@ -142,6 +200,14 @@ internal static partial class Program
             throw new InvalidOperationException("Synthetic screenshots must remain isolated.");
         Thread.Sleep(250);
         var bounds = _window.Current.BoundingRectangle;
+        if (storeListing)
+        {
+            if (DwmGetWindowAttribute(_process.MainWindowHandle, 9, out var frame, System.Runtime.InteropServices.Marshal.SizeOf<StoreCaptureBounds>()) != 0)
+                throw new InvalidOperationException("Cannot query the visible Store window frame.");
+            bounds = new System.Windows.Rect(frame.Left, frame.Top, frame.Right - frame.Left, frame.Bottom - frame.Top);
+            if (bounds.Width < 1366 || bounds.Height < 768)
+                throw new InvalidOperationException("Store screenshots must meet the native desktop size requirements.");
+        }
         if (!SystemParametersInfo(0x0030, 0, out var work, 0) || bounds.Left < work.Left || bounds.Top < work.Top
             || bounds.Right > work.Right + 1 || bounds.Bottom > work.Bottom + 1)
             throw new InvalidOperationException("The app is outside the review desktop.");

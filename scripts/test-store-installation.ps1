@@ -42,6 +42,11 @@ try {
     $env:TAKUPOKE_DATA_ROOT = Join-Path $env:TAKUPOKE_CI_TEMP 'store-installed-screens'
     dotnet run --project tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj --configuration Release --no-build -- --capture $executable $env:TAKUPOKE_DATA_ROOT
     if ($LASTEXITCODE -ne 0) { throw 'Installed MSIX screen checks failed.' }
+    powershell.exe -NoProfile -NonInteractive -Command "Set-DisplayResolution -Width 1920 -Height 1080 -Force"
+    if ($LASTEXITCODE -ne 0) { throw 'Preparing the ephemeral Store screenshot desktop failed.' }
+    $env:TAKUPOKE_DATA_ROOT = Join-Path $env:TAKUPOKE_CI_TEMP 'store-listing-screens'
+    dotnet run --project tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj --configuration Release --no-build -- --capture-store $executable $env:TAKUPOKE_DATA_ROOT
+    if ($LASTEXITCODE -ne 0) { throw 'Native-size Store listing captures failed.' }
 } finally {
     if ($installed) {
         $package = Get-AppxPackage -Name $identity
