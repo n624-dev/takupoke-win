@@ -26,6 +26,8 @@ internal static partial class Program
     {
         try
         {
+            if (args is ["--capture-store", var storeApp, var storeRoot] && Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
+                return CaptureStoreListingPages(storeApp, storeRoot);
             if (args is ["--capture", var capturedApp, var captureRoot] && Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
                 return CapturePages(capturedApp, captureRoot);
             if (args is ["--check-installer", var installer, var caption] && Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") == "1")
