@@ -48,7 +48,12 @@ public sealed partial class MaterialCoordinator(SchoolDataStore store, FileSourc
                     var version = ParserVersion(kind);
                     if (analysis?.SourceDigest == digest && analysis.ParserVersion == version
                         && (kind != MaterialKind.Changes || analysis.SchoolYear == year &&
-                            RowSkipMatches(analysis, source, year))) return new(kind, false, true);
+                            RowSkipMatches(analysis, source, year)))
+                    {
+                        await store.WriteAsync(lease, "attempt." + kind,
+                            new MaterialAttempt(now, null, false, digest, year, ParserVersion: version), token);
+                        return new(kind, false, true);
+                    }
                     if (attempt?.SourceDigest == digest && attempt.Failure is not null && attempt.ParserVersion == version && (kind != MaterialKind.Changes || attempt.SchoolYear == year)) return new(kind, false, false, attempt.Failure);
                     return await ParseAsync(lease, source with { LastCheckedAt = now }, content.Bytes, year, false, token);
                 }

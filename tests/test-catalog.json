@@ -152,16 +152,21 @@
       "environment": "Linux／Windows .NET（WinUI操作はWindows限定）",
       "commands": [
         "dotnet test tests/Takupoke.Core.Tests --configuration Release",
-        "dotnet test tests/Takupoke.Integration.Tests --configuration Release"
+        "dotnet test tests/Takupoke.Integration.Tests --configuration Release",
+        "dotnet test tests/Takupoke.Platform.Tests --configuration Release"
       ],
       "sources": [
         "src/Takupoke.Core/NotificationDiff.cs",
-        "src/Takupoke.Infrastructure/Notifications/NotificationCoordinator.cs"
+        "src/Takupoke.Infrastructure/Notifications/NotificationCoordinator.cs",
+        "tests/Takupoke.Platform.Tests/Takupoke.Platform.Tests.csproj",
+        "tests/Takupoke.Platform.Tests/NotificationApiFakes.cs",
+        "src/Takupoke.Win/Platform/WindowsNotifications.cs"
       ],
       "checks": [
         "tests/Takupoke.Core.Tests/NotificationDiffTests.cs",
         "tests/Takupoke.Integration.Tests/NotificationCoordinatorTests.cs",
-        "tests/Takupoke.Integration.Tests/AppLifecycleTests.cs"
+        "tests/Takupoke.Integration.Tests/AppLifecycleTests.cs",
+        "tests/Takupoke.Platform.Tests/WindowsNotificationsTests.cs"
       ]
     },
     {
@@ -261,7 +266,6 @@
         "src/Takupoke.Win/Platform/BrowserAuthenticator.cs",
         "src/Takupoke.Win/Platform/DesktopIntegration.cs",
         "src/Takupoke.Win/Platform/OfflineTestNetwork.cs",
-        "src/Takupoke.Win/Platform/WindowsNotifications.cs",
         "src/Takupoke.Win/Program.cs",
         "src/Takupoke.Win/ProtocolActivation.cs",
         "src/Takupoke.Win/Takupoke.Win.csproj",

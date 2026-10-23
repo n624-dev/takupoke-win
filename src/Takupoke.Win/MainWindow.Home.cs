@@ -54,7 +54,7 @@ public sealed partial class MainWindow
             }
             content.Children.Add(subject);
         }
-        if (showTime && !home && time is not null) content.Children.Add(Text(time.Display, 12));
+        if ((showTime || change?.IsCancellation == true) && !home && time is not null) content.Children.Add(Text(time.Display, 12));
         var teacher = block.Content is SpecialContent && !home ? names.Teacher : DisplayText.Metadata(names.Teacher);
         var room = block.Content is SpecialContent && !home ? names.Room : DisplayText.Metadata(names.Room);
         foreach (var metadata in new[] { teacher, room }.Where(value => value.Length > 0))

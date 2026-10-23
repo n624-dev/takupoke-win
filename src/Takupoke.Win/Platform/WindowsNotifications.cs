@@ -9,12 +9,20 @@ public sealed class WindowsNotifications : INotificationSink, IDisposable
     private bool _registered;
     public event Action? Activated;
     private string _status = "通知の利用状態を確認していません。";
+    private enum DeliveryState { None, Sent, Failed }
+    private DeliveryState _delivery;
+    private string DeliveryMessage => _delivery switch
+    {
+        DeliveryState.Sent => "\nWindows通知を送信しました。",
+        DeliveryState.Failed => "\n通知を送信できませんでした。Windowsの通知設定を確認してください。",
+        _ => ""
+    };
     public string Status
     {
         get
         {
             try { return _registered ? "Windowsの通知設定：" + SettingLabel(AppNotificationManager.Default.Setting)
-                    + (_status.StartsWith("通知を送信", StringComparison.Ordinal) ? "\n" + _status : "") : _status; }
+                    + DeliveryMessage : _status; }
             catch { return "Windowsの通知設定を確認できません。"; }
         }
         private set => _status = value;
@@ -30,6 +38,7 @@ public sealed class WindowsNotifications : INotificationSink, IDisposable
     };
     public void Initialize()
     {
+        _delivery = DeliveryState.None;
         try
         {
             if (!AppNotificationManager.IsSupported()) { Status = "この環境ではWindowsアプリ通知を利用できません。"; return; }
@@ -63,10 +72,10 @@ public sealed class WindowsNotifications : INotificationSink, IDisposable
                 .AddArgument("destination", "timetable").BuildNotification();
             notice.Tag = Tag(fingerprint); notice.Group = kind;
             AppNotificationManager.Default.Show(notice);
-            if (notice.Id != 0) _status = "Windows通知を送信しました。";
+            _delivery = notice.Id != 0 ? DeliveryState.Sent : DeliveryState.Failed;
             return Task.FromResult(notice.Id != 0);
         }
-        catch { Status = "通知を送信できませんでした。Windowsの通知設定を確認してください。"; return Task.FromResult(false); }
+        catch { _delivery = DeliveryState.Failed; return Task.FromResult(false); }
     }
     public async Task ClearAsync(CancellationToken token)
     { token.ThrowIfCancellationRequested(); if (_registered) await AppNotificationManager.Default.RemoveAllAsync(); }
