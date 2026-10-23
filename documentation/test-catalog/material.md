@@ -1,7 +1,7 @@
 # 原本取得・更新・保存・監視
 
 対応関係・宣言名・実行方法のSHA-256：
-`408254b4383cc1086df04ed771665f179fc303684d74d39b0985270434927237`
+`471519639b60415bc388b34135ee3c079845d7fdf5ce1f86ec5d52a5e0058b0e`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -28,6 +28,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `ReturningToAcceptedYearClearsAnObsoleteParseAttemptWhenReusingTheCache`
 - `DeletedOriginalReportsUnavailableAndKeepsAcceptedDataAndSavedCopy`
 - `ChangedButInvalidXlsxRetainsPreviousAcceptedAnalysisAndBothOriginals`
+- `CachedPdfFailureKeepsTheInitialExplanationAcrossRefreshAndRestart`
 - `FirstSelectionAndOriginalSurviveRestartWhenPdfCannotBeParsed`
 - `SamePathReplacementWithIdenticalBytesRetainsAnalysisAndRefreshesIdentity`
 - `SamePathAtomicReplacementWithChangedBytesParsesAndSurvivesRestart`
