@@ -282,7 +282,8 @@
         "tests/Takupoke.Win.UITests/Program.InstallerChecks.cs",
         "tests/Takupoke.Win.UITests/Program.TimetableChecks.cs",
         "tests/Takupoke.Win.UITests/ShortcutReview.cs",
-        "tests/Takupoke.Integration.Tests/AppLifecycleTests.cs"
+        "tests/Takupoke.Integration.Tests/AppLifecycleTests.cs",
+        "tests/Takupoke.Win.UITests/Program.RetentionRecovery.cs"
       ]
     },
     {

@@ -12,6 +12,10 @@ namespace Takupoke.Win.ViewModels;
 
 public sealed record MaterialSnapshot(SourceRecord? Source, MaterialAnalysis? Analysis, MaterialAttempt? ParseAttempt, MaterialAttempt? AcquisitionAttempt)
 {
+    public bool NeedsAttention(MaterialKind kind, int? schoolYear = null) => AcquisitionAttempt?.Failure is not null
+        || ParseAttempt?.Failure is not null
+        || Source is not null && !MaterialCoordinator.AnalysisMatches(Analysis, Source, kind, schoolYear);
+
     public string AnalysisStatus(MaterialKind kind, int? schoolYear = null)
     {
         if (Source is null) return "未選択";

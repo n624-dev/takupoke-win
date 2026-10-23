@@ -190,5 +190,6 @@ internal static partial class Program
         Invoke("settings-materials");
         Wait(() => Find("material-summary-Exam")?.Current.Name.Contains("fictional-selection.pdf", StringComparison.Ordinal) == true, "file selected through the native picker survives restart");
         CheckChangeRowSkips(args[0], args[1]);
+        CheckRetentionRecovery(args[0], args[1]);
     }
 }

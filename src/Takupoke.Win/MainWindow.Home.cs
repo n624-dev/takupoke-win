@@ -113,9 +113,8 @@ public sealed partial class MainWindow
     private readonly HashSet<string> _expandedMaterialWarnings = [];
     private void AddMaterialWarnings()
     {
-        var stale = _model.Materials.Where(item => item.Value.AcquisitionAttempt?.Failure is not null
-            || item.Value.ParseAttempt?.Failure is not null
-            || item.Value.Source is { } source && item.Value.Analysis is { } analysis && !_model.HasCurrentAnalysis(item.Key))
+        var stale = _model.Materials.Where(item => item.Value.NeedsAttention(item.Key,
+            ChangeNormalizer.EffectiveSchoolYear(_model.Preferences.DefaultSchoolYear, _model.Today)))
             .ToArray();
         if (stale.Length == 0) return;
         var warnings = Panel(ScheduleHeading("時間割ファイルの確認が必要です", "info"));
