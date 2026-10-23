@@ -8,7 +8,7 @@ namespace Takupoke.Integration.Tests;
 public static class FictionalTimetablePdf
 {
     public static byte[] Make(string root, string subjectPaint = "0 g", string? backgroundPaint = null,
-        bool backgroundAfterText = false, bool extraWhiteCell = false, string? graphicsState = null, string? pageEntries = null)
+        bool backgroundAfterText = false, bool extraWhiteCell = false, string? graphicsState = null, string? pageEntries = null, bool mergedFirstPeriods = false, string gridPaint = "0 G", string? extraGridContent = null)
     {
         using var metadata = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(root, "fictional-noto.json")));
         var map = metadata.RootElement.GetProperty("glyphs");
@@ -24,9 +24,10 @@ public static class FictionalTimetablePdf
         var content = new StringBuilder();
         void Background() { if (backgroundPaint is not null) content.Append("q ").Append(backgroundPaint).Append(" 162 362 36 46 re f Q\n"); }
         if (!backgroundAfterText) Background();
-        content.Append("0 G 1 w\n");
+        content.Append(gridPaint).Append(" 1 w\n");
         foreach (var y in new[] { 60, 90, 140 }) content.Append($"0 {500 - y} m 1760 {500 - y} l S\n");
-        foreach (var x in new[] { 0, 80 }.Concat(Enumerable.Range(0, 41).Select(i => 160 + i * 40))) content.Append($"{x} 440 m {x} 360 l S\n");
+        foreach (var x in new[] { 0, 80 }.Concat(Enumerable.Range(0, 41).Select(i => 160 + i * 40))) content.Append($"{x} 440 m {x} {(mergedFirstPeriods && x == 200 ? 410 : 360)} l S\n");
+        if (extraGridContent is not null) content.Append(extraGridContent).Append('\n');
         content.Append(Text("令和14年度前期時間割", 120, 20, 12));
         for (var i = 0; i < 40; i++) content.Append(Text((i % 8 + 1).ToString(CultureInfo.InvariantCulture), 168 + i * 40, 70, 8));
         content.Append(Text("CN", 100, 110, 8)).Append(Text("1", 20, 110, 8));

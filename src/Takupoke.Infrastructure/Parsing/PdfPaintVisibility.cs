@@ -12,6 +12,7 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
     private readonly record struct Bounds(double Left, double Top, double Right, double Bottom)
     {
         public bool Intersects(Bounds b) => Left < b.Right && Right > b.Left && Top < b.Bottom && Bottom > b.Top;
+        public bool Touches(Bounds b) => Left <= b.Right && Right >= b.Left && Top <= b.Bottom && Bottom >= b.Top;
         public bool Contains(Bounds b) => Left <= b.Left && Right >= b.Right && Top <= b.Top && Bottom >= b.Bottom;
     }
     private sealed record State(Colour Fill, Colour Stroke, int Mode = 0, double Width = 1, int FillComponents = 1, int StrokeComponents = 1);
@@ -20,6 +21,7 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
     private State _state = new(new(0, 0, 0), new(0, 0, 0));
     private readonly Stack<State> _stack = new();
     private readonly List<Paint> _paint = [];
+    private readonly List<Paint> _rules = [];
     private readonly List<Text> _text = [];
     private int _order, _work;
     private static readonly IReadOnlyDictionary<string, int> Counts = new Dictionary<string, int>
@@ -103,7 +105,13 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
                 }
             }
         }
-        foreach (var rectangle in rectangles) Add(new(rectangle, _state.Fill, _order++));
+        foreach (var rectangle in rectangles)
+        {
+            var item = new Paint(rectangle, _state.Fill, _order++);
+            Add(item);
+            var width = rectangle.Right - rectangle.Left; var height = rectangle.Bottom - rectangle.Top;
+            if (width <= 2.1 && height > 3 || height <= 2.1 && width > 3) _rules.Add(item);
+        }
         if (!paint.Stroke) return;
         var radius = Math.Max(1, _state.Width) * paint.StrokeScale / 2;
         foreach (var path in paint.Paths)
@@ -111,8 +119,12 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
             {
                 Work(); var a = path[index - 1]; var b = path[index];
                 if (a.X != b.X && a.Y != b.Y) throw new PdfParseException("P01");
+                var order = _order++;
                 Add(new(new(Math.Min(a.X, b.X) - radius, Math.Min(a.Y, b.Y) - radius,
-                    Math.Max(a.X, b.X) + radius, Math.Max(a.Y, b.Y) + radius), null, _order++));
+                    Math.Max(a.X, b.X) + radius, Math.Max(a.Y, b.Y) + radius), null, order));
+                if (Math.Max(Math.Abs(a.X - b.X), Math.Abs(a.Y - b.Y)) > 0.1)
+                    _rules.Add(new(new(Math.Min(a.X, b.X), Math.Min(a.Y, b.Y),
+                        Math.Max(a.X, b.X), Math.Max(a.Y, b.Y)), _state.Stroke, order));
             }
     }
     private void Add(Paint paint)
@@ -124,6 +136,20 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
     {
         token.ThrowIfCancellationRequested();
         if (_stack.Count != 0) throw new PdfParseException("P01");
+        foreach (var rule in _rules)
+        {
+            var background = new Colour(1, 1, 1);
+            for (var index = _paint.Count - 1; index >= 0; index--)
+            {
+                Work(); var paint = _paint[index];
+                // Stroke intersections do not establish an opaque background.
+                // Every stroke independently proves its contrast below.
+                if (paint.Order == rule.Order || paint.Colour is not { } colour || !paint.Bounds.Touches(rule.Bounds)) continue;
+                if (paint.Order > rule.Order || !paint.Bounds.Contains(rule.Bounds)) throw new PdfParseException("P01");
+                background = colour; break;
+            }
+            if (rule.Colour is not { } ink || !ink.Differs(background)) throw new PdfParseException("P01");
+        }
         foreach (var text in _text)
         {
             var background = new Colour(1, 1, 1);

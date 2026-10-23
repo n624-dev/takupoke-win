@@ -33,7 +33,7 @@ CIはpushのbefore、PRのbase、手動実行ではHEADの親を比較する。
 | [リンク・検索・名称対応](test-catalog/links.md) | 17 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [通知・差分・実配信](test-catalog/notifications.md) | 43 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [時間割・授業名・時刻・日付](test-catalog/timetable.md) | 38 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [Strict PDF・文字・罫線・試験・返却](test-catalog/pdf.md) | 29 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [Strict PDF・文字・罫線・試験・返却](test-catalog/pdf.md) | 33 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [固定iOS参照・独立期待値](test-catalog/parity.md) | 10 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [WinUI画面・行選択・表示領域・実操作・再起動](test-catalog/app-ui.md) | 32 | Windows WinUI x64。Linuxクロスビルドは操作成功に数えない |
 | [配布パッケージ・ライセンス・公開情報](test-catalog/release.md) | 22 | Linux Python／Windows包装・導入検証 |

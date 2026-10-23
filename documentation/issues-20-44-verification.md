@@ -131,3 +131,7 @@ source19d9bee＋実XLSX回帰で7件中5失敗（200ms）。1/1.0は通過、01/
 source825a8f9＋追加架空real-font PDF回帰、Linux/.NET10.0.402、4件中2件失敗（434ms）。完全Crop/注釈なしは同じ授業を受理し、授業をCropBoxから外した版と不透明白Square注釈版も例外なしで受理する修正前動作を確認。描画命令・元フォント・授業文字は対照と同一。現在/ff2166fのReaderはMediaBoxで配置し、注釈を検証しない。候補はCropBoxとMediaBoxの交差領域へ全文字/採用罫線が含まれるか検証し、未検証の非空Annotsはページを拒否する。注釈のappearanceや透明度を推測して無視しない。正常結果保持は既存実Coordinator/store回帰を新しい2条件にも適用する。Reader共通なので通常/特別の解析版を更新する。
 
 iOS対照:Certifiedの通常/特別は既にCropBox==MediaBoxを要求する。固定PDF239のStrict入口は異なるため、Certifiedの検査をStrictにも実行済みとは扱わない。この既知のStrict固定条件との整合は後続で扱い、今回Windowsの成功だけでiOS交差確認を完了扱いにしない。
+
+## 不可視のセル境界（34）
+
+sourcee2cf276＋追加実PDF回帰、Linux/.NET10.0.402、4件中3失敗（456ms）。黒い結合セル対照は1/2限を保持し、可視の黒線対照は1限だけに分割される。白地の白stroke/白thin fillの内部境界、全白罫線の3条件は拒否されず受理された。現行/元版のPathEngine.Paint→LineとPaintVisibility.Paths/Validateを照合し、罫線の色が検証対象に含まれないことを確認。候補は採用候補のstroke/細長fillを色と描画順付きで保持し、既知の不透明背景とコントラストを検査する。上塗り/部分背景/同色ならページ全体を拒否し、授業の一部だけ消さない。交差する罫線自体を背景色の証明には使わず、塗りの背景と分ける。既存10M work上限と取消を共用する。33後の解析版11/8を維持し、この未公開branchの同じ版へ集約する。

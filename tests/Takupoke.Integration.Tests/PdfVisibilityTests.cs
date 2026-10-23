@@ -13,6 +13,39 @@ public sealed class PdfVisibilityTests
     private static string Fixtures => Path.Combine(AppContext.BaseDirectory, "fixtures");
     private static TimetableAnalysis Parse(byte[] bytes) => PdfScheduleParser.Timetable(PdfPigLayoutReader.Read(bytes, MaterialKind.Timetable));
     [Theory]
+    [InlineData(false, false)]
+    [InlineData(true, true)]
+    [InlineData(false, true)]
+    public void RuleContrastUsesTheActualOpaqueBackgroundAndRejectsLaterCover(bool whiteInk, bool blackBackground)
+    {
+        var visibility = new PdfPaintVisibility();
+        visibility.Operation("g", [blackBackground ? 0 : 1]);
+        visibility.Paths(new([new (double,double)[]{(0,0),(100,0),(100,100),(0,100),(0,0)}],true,false,1,false));
+        visibility.Operation("G", [whiteInk ? 1 : 0]);
+        visibility.Paths(new([new (double,double)[]{(10,50),(90,50)}],false,true,1,false));
+        if (whiteInk == blackBackground) visibility.Validate(); else Assert.Throws<PdfParseException>(visibility.Validate);
+        visibility.Operation("g", [1]);
+        visibility.Paths(new([new (double,double)[]{(0,0),(100,0),(100,100),(0,100),(0,0)}],true,false,1,false));
+        Assert.Throws<PdfParseException>(visibility.Validate);
+    }
+
+    [Fact]
+    public void MergedAndVisibleSplitRuleControlsUseTheirActualPeriodSpan()
+    {
+        Assert.Equal(new[]{1,2}, Parse(FictionalTimetablePdf.Make(Fixtures, mergedFirstPeriods:true)).Lessons.Select(l=>l.Period));
+        Assert.Single(Parse(FictionalTimetablePdf.Make(Fixtures, mergedFirstPeriods:true,
+            extraGridContent:"q 0 G 200 360 m 200 410 l S Q")).Lessons);
+    }
+    [Theory]
+    [InlineData("q 1 G 200 360 m 200 410 l S Q")]
+    [InlineData("q 1 g 199.5 360 1 50 re f Q")]
+    public void InvisibleStrokeOrFilledBoundaryCannotChangeTheAcceptedMergedSpan(string content)
+        => Assert.Throws<PdfParseException>(() => Parse(FictionalTimetablePdf.Make(Fixtures, mergedFirstPeriods:true, extraGridContent:content)));
+    [Fact]
+    public void EntirelyWhiteRulesCannotProveAWhitePageTable()
+        => Assert.Throws<PdfParseException>(() => Parse(FictionalTimetablePdf.Make(Fixtures, gridPaint:"1 G")));
+
+    [Theory]
     [InlineData("/CropBox [0 420 2000 500]")]
     [InlineData("/Annots [<< /Type /Annot /Subtype /Square /Rect [162 362 198 408] /C [1 1 1] /IC [1 1 1] /CA 1 /BS << /W 0 >> >>]")]
     public void CroppedOutAndAnnotationObscuredTimetablesRejectTheWholeInput(string pageEntries)
