@@ -63,6 +63,7 @@ Store審査の成功と実際の公開は、Actionsの提出成功とは別に�
 配布するMSIXはMicrosoft Store側で署名するため、配布用秘密鍵をリポジトリに持たない。
 `scripts/test-store-installation.ps1`は使い捨てのGitHub-hosted runner限定で、1日有効のテスト証明書を生成する。
 導入検証専用コピーへ署名し、架空データによるUI・再起動・設定保存・URIコールバックと画面撮影を実行する。
+Store版のURI起動ではユーザー別の仮登録を作らず、MSIXマニフェストの実際のプロトコル登録を使用する。
 その後、テスト導入と証明書の信頼設定を回収する。配布用MSIXへテスト署名は付けない。
 開発者PCやself-hosted runnerでは、この導入検証スクリプトは証明書を作る前に失敗する。
 ARM64の実行形式は検証するが、x64 runnerでARM64実機の起動成功を主張しない。

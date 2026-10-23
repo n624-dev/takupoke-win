@@ -35,6 +35,7 @@ try {
     if (-not $package -or $package.Version -ne "$Version.0") { throw 'The installed Store version does not match.' }
     $executable = Join-Path $package.InstallLocation 'takupoke.exe'
     $env:TAKUPOKE_OFFLINE_TEST_MODE = '1'
+    $env:TAKUPOKE_TEST_PACKAGED_PROTOCOL = '1'
     $env:TAKUPOKE_DATA_ROOT = Join-Path $env:TAKUPOKE_CI_TEMP 'store-installed-ui-data'
     dotnet run --project tests/Takupoke.Win.UITests/Takupoke.Win.UITests.csproj --configuration Release -- $executable $env:TAKUPOKE_DATA_ROOT
     if ($LASTEXITCODE -ne 0) { throw 'Installed MSIX UI, restart, persistence or protocol checks failed.' }
