@@ -5,6 +5,9 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="../../src/Takupoke.Win/MainWindow.Documents.cs" Link="fixtures/document-methods.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../src/Takupoke.Win/MainWindow.xaml.cs" Link="fixtures/startup-window.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../src/Takupoke.Win/ViewModels/AppViewModel.cs" Link="fixtures/startup-model.txt" CopyToOutputDirectory="PreserveNewest" />
     <Compile Include="../../src/Takupoke.Win/ViewModels/AppViewModel.cs" Link="App/ViewModels/AppViewModel.cs" />
     <Compile Include="../../src/Takupoke.Win/MainWindow.PreferenceSelection.cs" Link="App/MainWindow.PreferenceSelection.cs" />
     <Compile Include="../../src/Takupoke.Win/Platform/OfflineTestNetwork.cs" Link="App/Platform/OfflineTestNetwork.cs" />

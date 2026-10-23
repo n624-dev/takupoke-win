@@ -93,3 +93,11 @@ PR47失敗の追加観測:実AXの通常cardはlesson-week-2026-10-26-3_IT-1-1-n
 候補は更新失敗を年度集合で保持し、成功した年度だけ解除する。元資料対象の2026取得後は採用済みpayloadとの照合を実際に再実行して状態を更新し、他年度の取得では元資料警告を触らない。全てexample.invalidで、知らないhost/pathはfakeが拒否する。学校本番通信・APIサーバー変更は行わない。通知30修正後のCore223/Integration280も失敗0で、今回41を加えた全体は後続確認する。
 
 41修正後の実API/store/checker経路1件/失敗0（0.8121秒）。他年度成功で警告を維持し、関連年度の新payloadと実HEAD一致で当該source警告を解除、複数失敗の部分解除を確認した。追加後のIntegration全281件/失敗0（7秒）、Core223件/失敗0。実学校サイト・実APIにアクセスせず、提供したHTTP境界は全requestをexample.invalidだけへ限定する。
+
+## 背景起動時の通信待ち（44）
+
+実AppViewModel初期化とMainWindow.Loaded/ShowWindowのmethod本文を無変更で取り出してC#へ渡し、保存読込・OS window/tray・通信境界だけをgateで制御する回帰を追加。初回はcompile成功、通信待機中にTrayAvailable=falseとなる動作失敗で1件失敗（3.3429秒）。固定sleepではなくlocal/networkの実呼出しを待って観測する。実WinUI/StartupTaskの表示時間の測定とは区別する。
+
+候補は初期化をローカル準備と通信へ分け、従来InitializeAsyncは順に両方を呼ぶ互換入口として保持する。Loadedではローカル準備→tray/背景表示設定→通信とし、初期設定が必要なら表示を維持する。ShowWindowで明示的な表示要求を記録し、準備中の要求を後で隠さない。7条件（通常/背景・trayなし・設定未完了・準備中/通信中の明示表示・通信失敗）を同じmethod本文で比較する。
+
+44候補は7条件を含むactual-method回帰1件/失敗0（3.1176秒）、共通コンパイルhelper抽出後も1件/失敗0（約2秒）。テストは追加NuGet feedを使わず、所有一時projectをfinallyで回収する。実Windows UIとStartupTaskの確認はCI・実機の範囲を分けて後続確認する。PR48/c7c4e8は全8CI成功、MSIX447checks後に7c5b998へmerge、main40036612783も22:58:25成功終端。完了済み実行は再照会しない。
