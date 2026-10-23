@@ -28,6 +28,19 @@ namespace Microsoft.UI.Dispatching
 }
 namespace Microsoft.UI.Xaml.Controls
 {
+    public sealed class ToggleMenuFlyoutItem
+    {
+        public bool IsChecked { get; set; }
+        public event EventHandler? Click;
+        public void Change(bool value) { IsChecked = value; Click?.Invoke(this, EventArgs.Empty); }
+    }
+    public sealed class ToggleSwitch
+    {
+        public bool IsLoaded { get; set; }
+        public bool IsOn { get; set; }
+        public event EventHandler? Toggled;
+        public void Change(bool value) { IsOn = value; Toggled?.Invoke(this, EventArgs.Empty); }
+    }
     public sealed class ComboBox
     {
         public bool IsLoaded { get; set; }
@@ -47,6 +60,11 @@ namespace Takupoke.Win
     public sealed partial class MainWindow(AppViewModel model)
     {
         private readonly AppViewModel _model = model;
+        public void BindToggle(Microsoft.UI.Xaml.Controls.ToggleSwitch control, Func<UserPreferences, bool> current,
+            Func<UserPreferences, bool, UserPreferences> update) => BindPreferenceToggle(control, current, update);
+        public void EditSchoolYear(string value) => SetSchoolYearDraft(value);
+        public string? SchoolYearDraft => _schoolYearDraft;
+        public Task SaveSchoolYear(string value) => SaveSchoolYearAsync(value);
         public void Bind<T>(Microsoft.UI.Xaml.Controls.ComboBox control, T initial,
             Func<(bool Valid, T Value)> selected, Func<UserPreferences, T, UserPreferences> update)
             => BindPreferenceSelection(control, initial, selected, update);

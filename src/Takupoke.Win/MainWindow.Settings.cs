@@ -116,7 +116,6 @@ public sealed partial class MainWindow
         row.Children.Add(control);
         return row;
     }
-    private string? _schoolYearDraft;
     private double? _eventsYearDraft;
     private string? _eventsYearTextDraft;
     private void BuildMaterials()
@@ -125,13 +124,12 @@ public sealed partial class MainWindow
         foreach (var kind in Enum.GetValues<MaterialKind>()) Add(MaterialCard(kind));
         var year = PreferenceControl(new TextBox { Header = "学校年度", Text = _schoolYearDraft ?? _model.Preferences.DefaultSchoolYear ?? "", PlaceholderText = _model.Today.SchoolYear() + "（自動）", MaxWidth = 420, HorizontalAlignment = HorizontalAlignment.Stretch });
         AutomationProperties.SetAutomationId(year, "materials-school-year");
-        year.TextChanged += (_, _) => _schoolYearDraft = year.Text;
+        year.TextChanged += (_, _) => SetSchoolYearDraft(year.Text);
         var saveYear = Button("年度を保存", async () =>
         {
             if (year.Text.Trim().Length > 0 && (!int.TryParse(year.Text, out var value) || value is < 1900 or > 9998)) { await Message("年度を確認してください", "1900〜9998の学校年度を入力してください。"); return; }
             var selectedYear = year.Text.Trim();
-            await _model.SavePreferencesAsync(current => current with { DefaultSchoolYear = selectedYear.Length == 0 ? null : selectedYear });
-            if (_model.Preferences.DefaultSchoolYear == (selectedYear.Length == 0 ? null : selectedYear)) _schoolYearDraft = null;
+            await SaveSchoolYearAsync(selectedYear);
         });
         Add(Card(Panel(SettingsSectionTitle("年のない変更日を補完"), SettingsDescription("空欄は現在の年度。1〜3月は翌年扱い。変更後は再解析してください。"), SettingInput(year), saveYear)));
         var stop = Button("自動確認を中止", () => { _model.SuspendAutomaticRefresh(); Render(); return Task.CompletedTask; }, "suspend-automatic-refresh");
@@ -166,16 +164,19 @@ public sealed partial class MainWindow
     {
         TitleText("通知・バックグラウンド", "page-notifications"); BackToSettings();
         Add(Card(Panel(SettingsSectionTitle("通知の状態"), SettingsDescription(_model.NotificationStatus))));
+        if (_model.PlatformPreferenceMessage is { } platformWarning) Add(Card(SettingsDescription(platformWarning)));
         var changes = PreferenceControl(new ToggleSwitch { Header = "時間割変更", IsOn = _model.Preferences.NotifyChanges });
-        changes.Toggled += async (_, _) => { var enabled = changes.IsOn; if (enabled == _model.Preferences.NotifyChanges) return; await _model.SavePreferencesAsync(current => current with { NotifyChanges = enabled, NotificationsSetupCompleted = true }); };
+        BindPreferenceToggle(changes, current => current.NotifyChanges, (current, enabled) => current with { NotifyChanges = enabled, NotificationsSetupCompleted = true });
         var special = PreferenceControl(new ToggleSwitch { Header = "試験・返却", IsOn = _model.Preferences.NotifySpecials });
-        special.Toggled += async (_, _) => { var enabled = special.IsOn; if (enabled == _model.Preferences.NotifySpecials) return; await _model.SavePreferencesAsync(current => current with { NotifySpecials = enabled, NotificationsSetupCompleted = true }); };
+        BindPreferenceToggle(special, current => current.NotifySpecials, (current, enabled) => current with { NotifySpecials = enabled, NotificationsSetupCompleted = true });
         Add(Card(Panel(SettingsSectionTitle("通知する更新"), changes, special)));
         Add(SettingsSectionTitle("バックグラウンド"));
         var tray = new ToggleSwitch { Header = "通知領域に常駐", IsOn = _model.Preferences.KeepInTray, IsEnabled = _desktop is not null };
-        tray.Toggled += async (_, _) => { var enabled = tray.IsOn; if (enabled == _model.Preferences.KeepInTray) return; try { _desktop?.SetTray(enabled); await _model.SavePreferencesAsync(current => current with { KeepInTray = enabled }); } catch { await Message("常駐を設定できません", "通知領域にアイコンを登録できませんでした。"); } };
+        BindPreferenceToggle(tray, current => current.KeepInTray, (current, enabled) => current with { KeepInTray = enabled },
+            value => { _desktop?.SetTray(value.KeepInTray); return Task.CompletedTask; });
         var startup = new ToggleSwitch { Header = "Windowsへのサインイン時に起動", IsOn = _model.Preferences.AutoStart, IsEnabled = !_model.OfflineTest };
-        startup.Toggled += async (_, _) => { var enabled = startup.IsOn; if (enabled == _model.Preferences.AutoStart) return; try { await DesktopIntegration.SetAutoStartAsync(enabled); await _model.SavePreferencesAsync(current => current with { AutoStart = enabled }); } catch { startup.IsOn = _model.Preferences.AutoStart; await Message("自動起動を設定できません", "Windowsの設定を確認してください。"); } };
+        BindPreferenceToggle(startup, current => current.AutoStart, (current, enabled) => current with { AutoStart = enabled },
+            value => DesktopIntegration.SetAutoStartAsync(value.AutoStart));
         Add(Card(Panel(tray, SettingsDescription("ウィンドウを閉じた後も更新を確認"), startup)));
         Add(Button("アプリを完全に終了", () => { _exitRequested = true; Close(); return Task.CompletedTask; }));
     }

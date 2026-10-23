@@ -134,6 +134,124 @@ public sealed class AppLifecycleTests
         Assert.Null(model.EventStorageMessage);
     }
 
+    [Theory]
+    [InlineData(false, 1)]
+    [InlineData(false, 3)]
+    [InlineData(true, 1)]
+    [InlineData(true, 3)]
+    public async Task ActualNotificationToggleKeepsTheLastEditDuringAnEarlierSave(bool initial, int roundTrips)
+    {
+        await using var fixture = new Fixture(); await fixture.Preferences();
+        var model = fixture.Create(); await model.InitializeAsync();
+        await model.SavePreferencesAsync(current => current with { NotifyChanges = initial });
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        WindowsNotifications.Latest!.BeforeAllowed = async token => { entered.TrySetResult(); await release.Task.WaitAsync(token); };
+        var control = new ToggleSwitch { IsOn = initial }; var window = new MainWindow(model);
+        window.BindToggle(control, current => current.NotifyChanges, (current, value) => current with { NotifyChanges = value, NotificationsSetupCompleted = true });
+        var snapshots = 0; model.SnapshotChanged += () => Interlocked.Increment(ref snapshots);
+        try
+        {
+            control.Change(!initial); Assert.Equal(0, snapshots); // Before native loading.
+            control.Change(initial); control.IsLoaded = true; control.Change(initial); // Initial/duplicate.
+            control.Change(!initial);
+            await entered.Task.WaitAsync(TimeSpan.FromSeconds(10));
+            for (var round = 0; round < roundTrips; round++) { control.Change(initial); control.Change(!initial); }
+            control.Change(!initial); // Duplicate final event cannot add a write.
+            release.TrySetResult();
+            await model.SavePreferencesAsync(current => current); // Queue barrier after every real transition.
+            Assert.Equal(2 + 2 * roundTrips, snapshots);
+            Assert.Equal(!initial, model.Preferences.NotifyChanges);
+            Assert.Equal(!initial, (await new PreferencesStore(fixture.Root).LoadAsync()).NotifyChanges);
+            await fixture.Close(model); var reopened = fixture.Create(); await reopened.InitializeAsync();
+            Assert.Equal(!initial, reopened.Preferences.NotifyChanges);
+        }
+        finally { release.TrySetResult(); }
+    }
+    [Fact]
+    public async Task CompletingAnEarlierYearSaveKeepsANewerUnsubmittedDraft()
+    {
+        await using var fixture = new Fixture(); await fixture.Preferences();
+        var model = fixture.Create(); await model.InitializeAsync();
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        WindowsNotifications.Latest!.BeforeAllowed = async token => { entered.TrySetResult(); await release.Task.WaitAsync(token); };
+        var window = new MainWindow(model); window.EditSchoolYear("2032");
+        var saving = window.SaveSchoolYear("2032");
+        try
+        {
+            await entered.Task.WaitAsync(TimeSpan.FromSeconds(10));
+            window.EditSchoolYear("2033");
+            release.TrySetResult(); await saving;
+            Assert.Equal("2032", model.Preferences.DefaultSchoolYear);
+            Assert.Equal("2033", window.SchoolYearDraft);
+        }
+        finally { release.TrySetResult(); await saving; }
+    }
+
+    [Fact]
+    public async Task StartupRegistrationRollsBackIfThePreferenceFileCannotBeSaved()
+    {
+        await using var fixture = new Fixture(); await fixture.Preferences();
+        var model = fixture.Create(); await model.InitializeAsync();
+        Assert.False(model.Preferences.AutoStart);
+        var path = Path.Combine(fixture.Root, "preferences.json"); var backup = path + ".fictional-preserved";
+        var registered = false;
+        File.Move(path, backup); Directory.CreateDirectory(path);
+        try
+        {
+            await model.SavePlatformPreferencesAsync(current => current with { AutoStart = true },
+                value => { registered = value.AutoStart; return Task.CompletedTask; });
+            Assert.False(registered);
+            Assert.False(model.Preferences.AutoStart);
+        }
+        finally { Directory.Delete(path); File.Move(backup, path); }
+        await model.SavePlatformPreferencesAsync(current => current with { AutoStart = true },
+            value => { registered = value.AutoStart; return Task.CompletedTask; });
+        Assert.True(registered); Assert.True(model.Preferences.AutoStart);
+        await fixture.Close(model); var reopened = fixture.Create(); await reopened.InitializeAsync();
+        Assert.True(reopened.Preferences.AutoStart);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task StartupFailureRestoresTheOldStateOrRetainsAnExplicitWarning(bool rollbackFails)
+    {
+        await using var fixture = new Fixture(); await fixture.Preferences();
+        var model = fixture.Create(); await model.InitializeAsync();
+        var path = Path.Combine(fixture.Root, "preferences.json"); var original = await File.ReadAllBytesAsync(path);
+        var registered = false; var calls = new List<bool>();
+        await model.SavePlatformPreferencesAsync(current => current with { AutoStart = true }, value =>
+        {
+            calls.Add(value.AutoStart);
+            if (!value.AutoStart && rollbackFails) throw new IOException("fictional rollback failure");
+            registered = value.AutoStart;
+            if (value.AutoStart) throw new IOException("fictional partially applied startup failure");
+            return Task.CompletedTask;
+        });
+        Assert.Equal(new[] { true, false }, calls);
+        Assert.Equal(rollbackFails, registered); Assert.False(model.Preferences.AutoStart);
+        Assert.NotNull(model.PlatformPreferenceMessage); Assert.Equal(original, await File.ReadAllBytesAsync(path));
+        if (rollbackFails) Assert.Contains("Windows側", model.PlatformPreferenceMessage);
+        await model.SavePlatformPreferencesAsync(current => current with { AutoStart = true }, value =>
+        { registered = value.AutoStart; return Task.CompletedTask; });
+        Assert.True(registered); Assert.True(model.Preferences.AutoStart); Assert.Null(model.PlatformPreferenceMessage);
+    }
+    [Fact]
+    public async Task FailedYearSaveKeepsItsDraftAndSuccessfulUnchangedSaveClearsIt()
+    {
+        await using var fixture = new Fixture(); await fixture.Preferences();
+        var model = fixture.Create(); await model.InitializeAsync();
+        var window = new MainWindow(model); window.EditSchoolYear("2033");
+        var path = Path.Combine(fixture.Root, "preferences.json"); var backup = path + ".fictional-preserved";
+        File.Move(path, backup); Directory.CreateDirectory(path);
+        try { await window.SaveSchoolYear("2033"); Assert.Equal("2033", window.SchoolYearDraft); Assert.Equal("2032", model.Preferences.DefaultSchoolYear); }
+        finally { Directory.Delete(path); File.Move(backup, path); }
+        await window.SaveSchoolYear("2033"); Assert.Null(window.SchoolYearDraft); Assert.Equal("2033", model.Preferences.DefaultSchoolYear);
+        await fixture.Close(model); var reopened = fixture.Create(); await reopened.InitializeAsync(); Assert.Equal("2033", reopened.Preferences.DefaultSchoolYear);
+    }
+
     private sealed class ReadGate(FakeIdentity identity) : IDisposable
     {
         private readonly ManualResetEventSlim _release = new();

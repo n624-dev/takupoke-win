@@ -74,16 +74,10 @@ public sealed partial class MainWindow
             displayMenu.Closed += (_, _) => RecordOfflineDisplayLifecycle(opened: false);
         }
         var included = PreferenceControl(new ToggleMenuFlyoutItem { Text = "時間割変更を反映", IsChecked = _model.Preferences.IncludesChanges });
-        included.Click += async (_, _) =>
-        {
-            var enabled = included.IsChecked;
-            RecordOfflineDisplayClick(completed: false, selected: enabled);
-            if (enabled != _model.Preferences.IncludesChanges)
-                await _model.SavePreferencesAsync(current => current with { IncludesChanges = enabled });
-            RecordOfflineDisplayClick(completed: true, selected: enabled);
-        };
+        BindPreferenceToggleMenu(included, current => current.IncludesChanges, (current, enabled) => current with { IncludesChanges = enabled },
+            (completed, selected) => RecordOfflineDisplayClick(completed: completed, selected: selected));
         var international = PreferenceControl(new ToggleMenuFlyoutItem { Text = "留学生向け授業を表示", IsChecked = _model.Preferences.International });
-        international.Click += async (_, _) => { var enabled = international.IsChecked; if (enabled != _model.Preferences.International) await _model.SavePreferencesAsync(current => current with { International = enabled }); };
+        BindPreferenceToggleMenu(international, current => current.International, (current, enabled) => current with { International = enabled });
         displayMenu.Items.Add(included); displayMenu.Items.Add(international);
         var displayLabel = Text("表示設定", 15); displayLabel.IsTextSelectionEnabled = false;
         var displayOptions = new DropDownButton { Content = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 10, Children = { FluentIcon("settings"), displayLabel } }, Flyout = displayMenu, MinHeight = 44, Padding = new Thickness(16, 10, 16, 10) };
@@ -105,7 +99,8 @@ public sealed partial class MainWindow
         AddChange(IconButton("一覧のクラスを選択", "people", () => ChooseClasses(changes: true), "timetable-change-classes"));
         var range = new ComboBox { Header = "表示する期間", ItemsSource = new[] { "今日以降", "この週", "全件" }, SelectedIndex = (int)_model.Preferences.ChangeRange, HorizontalAlignment = HorizontalAlignment.Stretch };
         AutomationProperties.SetAutomationId(range, "timetable-change-range");
-        range.SelectionChanged += async (_, _) => { if (range.SelectedIndex is >= 0 and <= 2 && range.SelectedIndex != (int)_model.Preferences.ChangeRange) { var value = (ChangeRange)range.SelectedIndex; await _model.SavePreferencesAsync(current => current with { ChangeRange = value }); } }; AddChange(range);
+        BindPreferenceSelection(range, (int)_model.Preferences.ChangeRange, () => (range.SelectedIndex is >= 0 and <= 2, range.SelectedIndex),
+            (current, value) => current with { ChangeRange = (ChangeRange)value }); AddChange(range);
         var selected = (_model.Preferences.ChangeClasses.Length > 0 ? _model.Preferences.ChangeClasses : _model.Preferences.SelectedClasses).ToHashSet();
         var parsedClasses = (_model.Data.Timetable?.Lessons.Select(l => l.ClassName) ?? []).Concat(_model.Data.Changes?.Select(c => c.DisplayClassName) ?? []).ToHashSet();
         if (_model.Preferences.ChangeClasses.Any(cls => !parsedClasses.Contains(cls))) AddChange(Text("選択したクラスの一部が、現在の時間割にありません。"));

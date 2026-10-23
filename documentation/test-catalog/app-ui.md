@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`1571c42c93869db28f943eeb7ab879f395a91e6a3188d1a2791fffd12399fa35`
+`d0ad9d3ae17a561c4ba60c795fca7585ba62fa5e5cc8357f7d45ffbee7333f6f`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -74,6 +74,11 @@
 
 - `IncompatibleLinksCacheStillDisplaysIndependentSavedLessons`
 - `EventDirectoryEnumerationFailureDoesNotHideLessonsAndCanBeRetried`
+- `ActualNotificationToggleKeepsTheLastEditDuringAnEarlierSave`
+- `CompletingAnEarlierYearSaveKeepsANewerUnsubmittedDraft`
+- `StartupRegistrationRollsBackIfThePreferenceFileCannotBeSaved`
+- `StartupFailureRestoresTheOldStateOrRetainsAnExplicitWarning`
+- `FailedYearSaveKeepsItsDraftAndSuccessfulUnchangedSaveClearsIt`
 - `UnlockDuringUnfinishedReadReloadsAfterCancellationWithEitherTraySetting`
 - `FinishingBeforeUnlockAndRemainingLockedNeverApplyTheCancelledSnapshot`
 - `ExplicitStopDiscardsTheQueuedUnlockRefreshUntilExplicitResume`

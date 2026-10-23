@@ -280,22 +280,50 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     }, "一覧の更新情報を確認しています。", automatic: true);
     public Task FetchEventsAsync(int year) => RunAsync(async token =>
     { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await LoadEventsAsync(year, token), token), token); EventSourceMessage = null; EventsUpdateMessage = null; await ReloadAsync(token); Status = "学校行事を保存しました。元PDFの更新確認は次回起動時に行います。"; });
-    public async Task SavePreferencesAsync(Func<UserPreferences, UserPreferences> update)
+    public string? PlatformPreferenceMessage { get; private set; }
+    internal Task SavePlatformPreferencesAsync(Func<UserPreferences, UserPreferences> update,
+        Func<UserPreferences, Task> applyPlatform) => SavePreferencesWithResultAsync(update, applyPlatform);
+    public Task SavePreferencesAsync(Func<UserPreferences, UserPreferences> update) => SavePreferencesWithResultAsync(update);
+    internal async Task<bool> SavePreferencesWithResultAsync(Func<UserPreferences, UserPreferences> update,
+        Func<UserPreferences, Task>? applyPlatform = null)
     {
         await _preferenceOperations.WaitAsync();
         try
         {
-            if (!PreferencesReady) { Status = "個人設定を読み込めませんでした。再読み込みしてください。"; return; }
-            // Apply just this edit to the latest preferences. Authentication and
-            // file-provider waits never block local settings or lose another edit.
-            var next = update(Preferences).Validated();
-            await _preferences.SaveAsync(next); Preferences = next;
+            if (!PreferencesReady) { Status = "個人設定を読み込めませんでした。再読み込みしてください。"; return false; }
+            var previous = Preferences;
+            var next = update(previous).Validated();
+            var saving = false;
+            try
+            {
+                if (applyPlatform is not null) await applyPlatform(next);
+                saving = true;
+                await _preferences.SaveAsync(next);
+            }
+            catch
+            {
+                if (applyPlatform is not null)
+                {
+                    try
+                    {
+                        await applyPlatform(previous);
+                        PlatformPreferenceMessage = saving ? "個人設定を保存できなかったため、Windowsの設定を元に戻しました。"
+                            : "Windowsの設定を変更できませんでした。以前の設定を維持しています。";
+                    }
+                    catch { PlatformPreferenceMessage = "Windowsの設定を元に戻せませんでした。自動起動・常駐の実際の状態をWindows側で確認してください。"; }
+                }
+                Status = PlatformPreferenceMessage ?? "個人設定を保存できませんでした。もう一度お試しください。";
+                return false;
+            }
+            Preferences = next;
+            if (applyPlatform is not null) PlatformPreferenceMessage = null;
             if (!Locked && _displayPeriod is not null)
                 try { await CheckNotificationsAsync(_session.Token); }
                 catch (OperationCanceledException) { }
                 catch { Status = "設定は保存しましたが、通知の確認を完了できませんでした。"; }
+            return true;
         }
-        catch { Status = "個人設定を保存できませんでした。もう一度お試しください。"; }
+        catch { Status = "個人設定を保存できませんでした。もう一度お試しください。"; return false; }
         finally
         {
             try { await ClearExpiredNotificationsAsync(); }

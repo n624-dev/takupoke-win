@@ -53,3 +53,11 @@ XLSX parserVersionを7へ更新し、保存済み旧結果を再解析対象と�
 時計修正後は独立8件すべて通り、Core223件のうち219成功・固定Swift参照4件だけが差分になった。いずれもtagテスト/テスト返却が要求するkindが未取得なのに旧参照が変更clockを確定する90と同じ条件。入力fixtureを一切変更せず、その4IDの既存非nullの正確な値・不足kind・タグをassertしたうえで、変更card（反映ONだけ）と変更詳細3時計だけnilという独立した期待をコピーに適用する。元のcommon時計・日付・欠落警告・残り詳細・全他条件とのDeepEqualsを維持する。別に追加した両タグ/片側欠落/両側取得の動作検査が補正根拠。自己確認で、commonの表示filterを可視変更がある場合には適用せず必要な全資料を維持するようiOSと同じ方針へそろえた。
 
 PR45/aefc2c7のCI40024262360/1は21:06:07〜21:14:19の8分12秒で全8job成功。Windows Core/Integration成功、MSIXインストール後436 UI checks成功、x64 Debug/Release・ARM64・Linux・固定元Swift照合を含む。MSIX検査は仮証明書と所有テスト導入を回収。新しい名称/時計branchはこの実行に含まれず、別途検証する。
+
+## 設定の競合・OS登録・未送信年度（20/21/40）
+
+旧通知Toggleと年度保存の本体を同じMainWindow型のsource-linked helperへ無変更抽出してから再現。通知確認だけを待機し、実handler→実AppViewModel→実PreferencesStoreで往復4条件と古い保存による新しい年度下書きの消去1件が全失敗。自動起動も旧OS変更→保存の順を同じモデルhelperへ抽出し、実保存先を一時的にdirectoryへすると登録true/設定falseが残る1件で失敗した。元ファイルはfinallyで復元する。OS APIだけfakeであり、実StartupTask/Run登録は未検証。
+
+候補は全個人設定controlに観測済みの利用者遷移を保持し、同値判定を保留キュー外の保存値へ依存させない。初期/duplicateイベントを除き、実遷移はgate順に保存する。既存ComboBoxの往復回帰も維持する。年度下書きは送信時のversionと保存成功を確認した場合だけ解除。OS変更と保存は同じpreference gate内で行い、保存/OS失敗時は元OS状態へ戻す。rollback自体の失敗は独立warningとして残し、別の設定保存や更新確認成功では消さない。
+
+設定修正後はsource-linked AppLifecycle28件成功。その後、未loaded/初期/重複イベントを保存回数でも検証し、OSの部分成功→例外・rollback成功/失敗・再試行、年度保存失敗/同じ下書きの成功時解除/再起動を追加してIntegration全275件/失敗0（6秒）。実StartupTask/Run registryと実Trayは未検証で、OS boundaryだけをfakeにした結果。Native WinUI CIはまだ別途実行する。
