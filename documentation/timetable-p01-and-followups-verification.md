@@ -48,3 +48,9 @@ W19の旧e001729の拒否リストには標準DeviceRGB自体が含まれてい�
 W19修正後、Core205件・Integration235件（可視性42件を含む）がDebian13 / .NET10.0.402で失敗/skip0。通常版10、特別版不変、一覧146ファイル整合も成功。独立PyMuPDF描画ではGray/RGBの同値表記は0 gと完全一致。CMYK黒は0 gと同じ画素ではなかったため、CMYKの直接k命令との比較を別に確認し、色空間をまたぐ画素一致を通過根拠にしない。利用者の実PDFは未受領で、そのP01解消を保証しない。
 
 独立したPyMuPDFの追加比較では、Grayのg対cs/sc、RGBのrg対cs/scn、CMYKのk対cs/scそれぞれの実画素が完全一致した。比較用PDF/生成プロジェクトは所有tempで回収済み。異なる色空間の画素一致とは区別する。
+
+## 10456 の公開と照合
+
+main66d3ccbのPR実行39908392906とmain実行39909619548は全7job成功。配布[run39909620433](https://github.com/n624-dev/takupoke-win/actions/runs/39909620433)も全8job成功し、2026-10-23 06:26 UTCに[0.1.0-dev.10456](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10456)を通常Release／Latestとして公開した。Windows Core205件・Integration237件、Linux205/235件、固定Swift比較、x64 Debug/Release・ARM64 Releaseが成功した。
+
+新規導入・再導入・実dev.5から同じ/別フォルダーへの更新など6状態で実UI435項目ずつ、設定・無関係ファイル/自動起動・移行・削除を確認した。公開後は匿名で6添付の全bytes/SHA-256一覧/配布digestを照合し、ZIP内x64 561ファイル・ARM64 557ファイルのmanifestハッシュも一致。ビルド元66d3ccb・版・通常Release・Latestも一致した。検証の詳細は作業環境の/tmp/takupoke-win-10456-public-verification.json。実資料のP01解消、ARM64実機、学校アカウント/OneDriveでの確認は未完了。
