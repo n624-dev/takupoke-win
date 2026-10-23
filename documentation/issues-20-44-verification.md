@@ -111,3 +111,5 @@ source568fbb5（製品未変更、追加BrowserLifecycleTests）、Linux/.NET10.
 36の追加probe初回はコンパイル後に旧実装のlocked-entryでstub readを解放せず外側deadlineへ達する構成を発見。製品の処理停止の証拠には使わない。先頭の二重entry競合の判定を直後にfail-fastし、その観測を先に記録するよう検証harnessだけを修正する。実ShowPdf/Dialog/Button本文は未変更。ButtonのClick delegateはprobeではTask返却のUI境界にbindし、catchからの例外伝播を観測する。実async void/OSプロセス終了とは区別する。
 
 36のfail-fast版は3秒で製品動作の失敗を確認:読取が2件開始、後続が実Button catchの外へ例外を返し、先行PDFの共有状態も消える。元の先行dialogを閉じて終了し、一時projectも回収。MainWindow.Documentsの8aef93f/currentとissue36の元版を照合し、所有開始がRead/Loadより後でfinallyが無条件解除という原因は変わらない。候補はPDF/通常Dialogの共通ownerを最初のawait前に取得し、競合要求はNone/完了を返し、finallyは同じowner/dialog/imageだけ解除する。ページ上限の説明はowner解放後に表示する。ロック/epochによる表示拒否と前回正常データを維持する。iOSの元PDFシートは別のBool/URL寿命問題（92）として継続対応し、Windows修正の成功で代用しない。
+
+24修正後のactual-method probeは1件/失敗0（約2秒）。36候補も二重entry、別modal、手動閉鎖、read/load/render例外、ロック/epoch、ページ上限の説明を含む1件/失敗0（約2秒）。追加後のIntegration全284件/失敗0（7秒）。この境界検査は実Windows WebView/PDF表示のタイミングやasync voidでのプロセス終了を証明せず、既存WinUI CIは別途確認する。元資料/保存結果に変更はない。
