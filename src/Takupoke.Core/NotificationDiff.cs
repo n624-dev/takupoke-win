@@ -6,7 +6,7 @@ namespace Takupoke.Core;
 
 public sealed record ChangeFingerprint(string Date, string ClassName, string Period, string Fingerprint);
 public sealed record ChangeNoticeTarget(string Date, string ClassName, string Period);
-public sealed record PendingNotice(string Fingerprint, int Count, IReadOnlyList<ChangeNoticeTarget>? ChangeTargets = null);
+public sealed record PendingNotice(string Fingerprint, int Count, IReadOnlyList<ChangeNoticeTarget>? ChangeTargets = null, string? Revision = null);
 public sealed record NotificationBaseline(IReadOnlyList<ChangeFingerprint>? Changes = null,
     IReadOnlyDictionary<string, string>? SpecialDigests = null, IReadOnlyDictionary<string, PendingNotice>? Pending = null);
 
@@ -52,7 +52,7 @@ public static class NotificationDiff
             // is still relevant. Keep the baseline, but safely discard those notices.
             var targets = EligibleTargets(notice.ChangeTargets ?? [], today, classes);
             if (!notifyChanges || State("changes") == NotificationSourceState.Absent || targets.Count == 0
-                || State("changes") == NotificationSourceState.Available && changes is not null && (previous.Changes is null || notice.Fingerprint != ChangeRevision(previous.Changes))) pending.Remove("changes");
+                || State("changes") == NotificationSourceState.Available && changes is not null && (previous.Changes is null || (notice.Revision ?? notice.Fingerprint) != ChangeRevision(previous.Changes))) pending.Remove("changes");
             else pending["changes"] = notice with { Count = targets.Count, ChangeTargets = targets };
         }
         if (State("changes") == NotificationSourceState.Available && changes is not null)
@@ -63,7 +63,13 @@ public static class NotificationDiff
                 // Collect unsent slots across updates, counting a repeatedly changed slot once.
                 var retained = pending.GetValueOrDefault("changes")?.ChangeTargets ?? [];
                 targets = EligibleTargets(retained.Concat(targets), today, classes);
-                pending["changes"] = new(ChangeRevision(changes), targets.Count, targets);
+                pending["changes"] = new(ChangeRevision(changes), targets.Count, targets, ChangeRevision(changes));
+            }
+            else if (pending.TryGetValue("changes", out var retained))
+            {
+                // Unrelated edits advance the validation baseline without changing
+                // the OS tag for a notice that may already have been accepted.
+                pending["changes"] = retained with { Revision = ChangeRevision(changes) };
             }
         }
         foreach (var kind in new[] { "exam", "examReturn" })

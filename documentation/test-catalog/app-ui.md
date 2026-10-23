@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`84a8da6e6079414d12e881b6c5b21eb11c309f68a55a9ac7d3946e7048094893`
+`ddd3b5bcbf411d716d21ea412e1198ee3e0ca076e8ea645ccf52b0c0a0116661`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -72,6 +72,7 @@
 
 ## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
 
+- `UnrelatedEventFetchKeepsWarningsGeneratedByRealApiAndSourceChecks`
 - `IncompatibleLinksCacheStillDisplaysIndependentSavedLessons`
 - `EventDirectoryEnumerationFailureDoesNotHideLessonsAndCanBeRetried`
 - `ActualNotificationToggleKeepsTheLastEditDuringAnEarlierSave`

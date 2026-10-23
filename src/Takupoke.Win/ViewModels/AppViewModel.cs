@@ -39,6 +39,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private readonly PreferencesStore _preferences;
     private readonly PublicEventsStore _events;
     private readonly ApiClient _api;
+    private readonly EventSourceChecker _eventSourceChecker;
     private readonly SharedDataUpdater _shared;
     private readonly MaterialCoordinator _materials;
     private readonly SourceWatcher _watcher = new();
@@ -98,7 +99,8 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public string NotificationStatus => _notificationSink.Status;
     [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     public AppViewModel(DispatcherQueue dispatcher) : this(dispatcher, new WindowsDpapiProtector()) { }
-    internal AppViewModel(DispatcherQueue dispatcher, IKeyProtector protector, IFileIdentityProvider? identity = null, PublicEventsStore? events = null)
+    internal AppViewModel(DispatcherQueue dispatcher, IKeyProtector protector, IFileIdentityProvider? identity = null, PublicEventsStore? events = null,
+        HttpClient? network = null, Uri? apiBaseUri = null, Uri? eventSourceUri = null)
     {
         _dispatcher = dispatcher;
         var directory = OfflineTest
@@ -106,9 +108,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             : DataDirectory.Resolve(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
         Root = directory.Root; RootMigrationMessage = directory.Message;
         var offline = OfflineTest ? new OfflineTestNetwork(Root) : null;
-        _http = offline is not null ? new(offline) : ApiClient.CreateHttpClient();
+        _http = network ?? (offline is not null ? new(offline) : ApiClient.CreateHttpClient());
         _school = new(Root, protector); _preferences = new(Root); _events = events ?? new(Root);
-        _api = new(_http); _shared = new(_api, _school); _materials = new(_school, new(identity ?? new WindowsFileIdentity()));
+        _api = new(_http, apiBaseUri); _eventSourceChecker = new(_http, eventSourceUri); _shared = new(_api, _school); _materials = new(_school, new(identity ?? new WindowsFileIdentity()));
         _authentication = new(new OidcClient(_http), offline is null ? null : offline.OpenBrowser);
         _authentication.ProgressChanged += value => OperationStatus = value;
         NavigationAnchor = Today; WeekStart = Today.DisplayWeekStart();
@@ -129,6 +131,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private DateTimeOffset _lastClock;
     private long _operationGeneration;
     private bool _checkedEventSource;
+    private readonly HashSet<int> _failedEventUpdateYears = [];
     public string? EventSourceMessage { get; private set; }
     public string? EventsUpdateMessage { get; private set; }
     private void TimerTick(DispatcherQueueTimer sender, object args)
@@ -215,19 +218,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         {
             ApplyRevisionCheck(await _shared.CheckDetailedAsync(token));
             incomplete |= RevisionFailures.Count > 0;
-            var failedYears = new List<int>();
-            foreach (var year in AvailableEventYears(token))
-                try { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await LoadEventsAsync(year, token), token), token); }
-                catch (ApiException) { failedYears.Add(year); }
-            EventsUpdateMessage = failedYears.Count == 0 ? null : string.Join("、", failedYears) + "年度の学校行事を更新確認できませんでした。保存済みの結果を表示しています。";
-            incomplete |= failedYears.Count > 0 || _eventDirectoryFailed;
-            if (!_checkedEventSource)
-            {
-                _checkedEventSource = true;
-                var sourceState = await new EventSourceChecker(_http).CheckAsync(await LoadEventsAsync(EventSourceChecker.SourceSchoolYear, token), token);
-                EventSourceMessage = EventSourceChecker.Message(sourceState);
-                incomplete |= sourceState == EventSourceState.Unavailable;
-            }
+            incomplete |= await CheckSavedEventsAsync(token);
         }
         await ReloadAsync(token);
         if (!automatic) Status = incomplete
@@ -235,6 +226,37 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             : "資料と更新情報を確認しました。";
         }, "資料と更新情報を確認しています。", automatic);
     }
+    private void SetEventUpdateFailure(int year, bool failed)
+    {
+        if (failed) _failedEventUpdateYears.Add(year); else _failedEventUpdateYears.Remove(year);
+        EventsUpdateMessage = _failedEventUpdateYears.Count == 0 ? null :
+            string.Join("、", _failedEventUpdateYears.Order()) + "年度の学校行事を更新確認できませんでした。保存済みの結果を表示しています。";
+    }
+
+    private async Task<EventSourceState> CheckEventSourceAsync(CancellationToken token)
+    {
+        _checkedEventSource = false;
+        var state = await _eventSourceChecker.CheckAsync(await LoadEventsAsync(EventSourceChecker.SourceSchoolYear, token), token);
+        EventSourceMessage = EventSourceChecker.Message(state);
+        _checkedEventSource = true;
+        return state;
+    }
+
+    internal async Task<bool> CheckSavedEventsAsync(CancellationToken token = default)
+    {
+        foreach (var year in AvailableEventYears(token))
+        {
+            try
+            {
+                await _events.SaveAsync(await _api.DownloadEventsAsync(year, await LoadEventsAsync(year, token), token), token);
+                SetEventUpdateFailure(year, false);
+            }
+            catch (ApiException) { SetEventUpdateFailure(year, true); }
+        }
+        var unavailable = !_checkedEventSource && await CheckEventSourceAsync(token) == EventSourceState.Unavailable;
+        return _failedEventUpdateYears.Count > 0 || _eventDirectoryFailed || unavailable;
+    }
+
     public Task SelectAsync(MaterialKind kind, string path) => RunAsync(async token =>
     {
         ResumeFileMonitoring();
@@ -279,7 +301,17 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         ApplyRevisionCheck(await _shared.CheckDetailedAsync(DataSet.Links, token));
     }, "一覧の更新情報を確認しています。", automatic: true);
     public Task FetchEventsAsync(int year) => RunAsync(async token =>
-    { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await LoadEventsAsync(year, token), token), token); EventSourceMessage = null; EventsUpdateMessage = null; await ReloadAsync(token); Status = "学校行事を保存しました。元PDFの更新確認は次回起動時に行います。"; });
+    {
+        try
+        {
+            await _events.SaveAsync(await _api.DownloadEventsAsync(year, await LoadEventsAsync(year, token), token), token);
+            SetEventUpdateFailure(year, false);
+        }
+        catch (ApiException) { SetEventUpdateFailure(year, true); throw; }
+        if (year == EventSourceChecker.SourceSchoolYear) await CheckEventSourceAsync(token);
+        await ReloadAsync(token);
+        Status = "学校行事を保存しました。";
+    });
     public string? PlatformPreferenceMessage { get; private set; }
     internal Task SavePlatformPreferencesAsync(Func<UserPreferences, UserPreferences> update,
         Func<UserPreferences, Task> applyPlatform) => SavePreferencesWithResultAsync(update, applyPlatform);

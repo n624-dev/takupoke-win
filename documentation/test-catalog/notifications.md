@@ -1,7 +1,7 @@
 # 通知・差分・実配信
 
 対応関係・宣言名・実行方法のSHA-256：
-`3c4d166d5aa85461cd119513996be54cb540a86aadc77190f224f025f9b63a0b`
+`265e747f6ed2843bf960c410cf883754c921b04d221920d666a2e938b82a1738`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -32,6 +32,7 @@ dotnet test tests/Takupoke.Platform.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/NotificationCoordinatorTests.cs](../../tests/Takupoke.Integration.Tests/NotificationCoordinatorTests.cs)
 
+- `UnrelatedUpdatesRetainPendingTargetsAndTheSameOsTagAcrossRestart`
 - `FirstImportAndClassSwitchDoNotNotifyButChangedSelectedSlotDoes`
 - `FailedSendSurvivesStoreRestartAndIsSentOnlyOnce`
 - `PreviouslyAcceptedOsNoticeIsAcknowledgedWithoutResending`
@@ -45,6 +46,7 @@ dotnet test tests/Takupoke.Platform.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
 
+- `UnrelatedEventFetchKeepsWarningsGeneratedByRealApiAndSourceChecks`
 - `IncompatibleLinksCacheStillDisplaysIndependentSavedLessons`
 - `EventDirectoryEnumerationFailureDoesNotHideLessonsAndCanBeRetried`
 - `ActualNotificationToggleKeepsTheLastEditDuringAnEarlierSave`
