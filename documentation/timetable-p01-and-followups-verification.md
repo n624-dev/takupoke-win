@@ -44,3 +44,5 @@ P01の利用者資料はまだ未受領。10454は利用者も未確認で、も
 2026-10-23、Debian13 / .NET10.0.402、sourcef6797cb、`--filter FullyQualifiedName~PdfVisibilityTests`。42件中41成功、ColourValidationPreservesCancellationAndRejectsUnverifiedColourSpacesだけが134行のAssert.Throwsで「例外が無い」と失敗。ログ/tmp/win-device-colour-regression-second.log。3件のW18入力は成功した。失敗した入力と旧契約を読む前に対処を決めず、この事実を保存する。
 
 W19の旧e001729の拒否リストには標準DeviceRGB自体が含まれていた。今回の同値表記の受理仕様と矛盾するこの入力を、引き続き未確認のPatternへ置き換える。取消・範囲外成分の拒否、3種類の白文字・線描画・成分数・未知空間・q/Qの新検査は維持する。通常解析版を9→10に更新し、同じPDFの旧失敗が現在版の結果と見なされず再解析対象になることを既存freshness経路と版9拒否assertで確認する。特別資料の版は維持する。修正/記録push後に全検査を再実行する。
+
+W19修正後、Core205件・Integration235件（可視性42件を含む）がDebian13 / .NET10.0.402で失敗/skip0。通常版10、特別版不変、一覧146ファイル整合も成功。独立PyMuPDF描画ではGray/RGBの同値表記は0 gと完全一致。CMYK黒は0 gと同じ画素ではなかったため、CMYKの直接k命令との比較を別に確認し、色空間をまたぐ画素一致を通過根拠にしない。利用者の実PDFは未受領で、そのP01解消を保証しない。
