@@ -289,14 +289,22 @@
       "environment": "Linux Python／Windows包装・導入検証",
       "commands": [
         "python3 -B tests/package-notices-tests.py",
+        "python3 -B tests/test_store_release.py",
+        "./scripts/test-store-package.ps1 -Version 1.0.0",
+        "./scripts/test-store-installation.ps1 -Version 1.0.0",
         "./scripts/test-development-package.ps1"
       ],
       "sources": [
         ".github/workflows/development-package.yml",
+        ".github/workflows/microsoft-store.yml",
         "Directory.Build.props",
         "Takupoke.slnx",
         "global.json",
         "scripts/build-development-package.ps1",
+        "scripts/build-store-package.ps1",
+        "scripts/store-version.ps1",
+        "scripts/test-store-package.ps1",
+        "scripts/test-store-installation.ps1",
         "scripts/check-public-tree.py",
         "scripts/collect-package-notices.py",
         "scripts/publish-development-release.ps1",
@@ -306,7 +314,8 @@
         "tests/Takupoke.Core.Tests/Takupoke.Core.Tests.csproj"
       ],
       "checks": [
-        "tests/package-notices-tests.py"
+        "tests/package-notices-tests.py",
+        "tests/test_store_release.py"
       ]
     },
     {

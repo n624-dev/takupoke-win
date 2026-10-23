@@ -15,6 +15,7 @@ public sealed class BrowserAuthenticator(OidcClient oidc, Action<Uri>? openBrows
     public event Action<string>? ProgressChanged;
     public static void RegisterProtocol()
     {
+        if (DesktopIntegration.HasPackageIdentity) return;
         ActivationRegistrationManager.RegisterForProtocolActivation("jp.n624.takupoke.win", "", "たくポケ", Environment.ProcessPath!);
         // Repair the direct command left by older installers as well as the SDK association.
         using var command = Registry.CurrentUser.CreateSubKey(@"Software\Classes\jp.n624.takupoke.win\shell\open\command");

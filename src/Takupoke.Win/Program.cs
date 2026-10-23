@@ -11,6 +11,7 @@ public static class Program
     private static readonly ConcurrentQueue<Uri> Pending = new();
     internal static Action<Uri>? ProtocolCallback;
     internal static Action? OpenRequested;
+    internal static bool StartInBackground { get; private set; }
     [STAThread]
     public static void Main(string[] args)
     {
@@ -24,6 +25,7 @@ public static class Program
             return;
         }
         var activation = AppInstance.GetCurrent().GetActivatedEventArgs();
+        StartInBackground = activation.Kind == ExtendedActivationKind.StartupTask || args.Contains("--background");
         var instance = AppInstance.FindOrRegisterForKey("takupoke-win");
         if (!instance.IsCurrent)
         {
