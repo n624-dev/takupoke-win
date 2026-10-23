@@ -26,8 +26,33 @@ jobs:
        (github.event_name == 'release' && vars.MICROSOFT_STORE_AUTO_SUBMIT == 'true' && !github.event.release.prerelease &&
         startsWith(github.event.release.tag_name, 'v') && !contains(github.event.release.tag_name, '-')))
     uses: ./.github/workflows/ci.yml
-  package:
+  store-access:
     needs: checks
+    runs-on: windows-2025
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Install Microsoft Store CLI
+        uses: microsoft/microsoft-store-apppublisher@cc9910a8d59f2eb55cbb83df0a3800cf3b5300e0
+      - name: Verify access without changing the Store submission
+        env:
+          STORE_TENANT_ID: ${{ secrets.MICROSOFT_STORE_TENANT_ID }}
+          STORE_CLIENT_ID: ${{ secrets.MICROSOFT_STORE_CLIENT_ID }}
+          STORE_CLIENT_SECRET: ${{ secrets.MICROSOFT_STORE_CLIENT_SECRET }}
+          STORE_SELLER_ID: ${{ secrets.MICROSOFT_STORE_SELLER_ID }}
+        run: |
+          foreach ($name in @('STORE_TENANT_ID', 'STORE_CLIENT_ID', 'STORE_CLIENT_SECRET', 'STORE_SELLER_ID')) {
+            if (-not [Environment]::GetEnvironmentVariable($name)) { throw "Missing secret: $name" }
+          }
+          msstore reconfigure --tenantId $env:STORE_TENANT_ID --sellerId $env:STORE_SELLER_ID --clientId $env:STORE_CLIENT_ID --clientSecret $env:STORE_CLIENT_SECRET | Out-Null
+          if ($LASTEXITCODE -ne 0) { throw 'Microsoft Store authentication configuration failed.' }
+          msstore apps get 9NC5CVVZD59H | Out-Null
+          if ($LASTEXITCODE -ne 0) { throw 'Microsoft Store application access could not be verified.' }
+          Write-Output 'Store application access verified without creating, editing or submitting a submission.'
+  package:
+    needs: [checks, store-access]
     runs-on: windows-2025
     timeout-minutes: 45
     permissions:

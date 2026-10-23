@@ -29,7 +29,9 @@ Actionsの保存用artifactやキャッシュは作らず、配布用MSIXとSHA-
    | `MICROSOFT_STORE_SELLER_ID` | Partner CenterのSeller ID |
 
 4. `Microsoft Store stable release`をmainから手動実行し、versionに`1.0.0`を指定する。
-   全CI成功後にx64とARM64を包装し、MSIX内容とx64のインストール後UIを検証する。
+   全CI成功後に、ソースをcheckoutしない別runnerでStoreアプリ情報の読み取りだけを試し、接続を確認する。
+   この事前確認では提出を作成・編集・送信しない。
+   成功後にx64とARM64を包装し、MSIX内容とx64のインストール後UIを検証する。
    成功すると、未公開のGitHub Release `v1.0.0`にMSIX bundleとSHA-256を保存する。
 5. Partner Centerで初回の説明・プライバシーポリシーURL・スクリーンショット・年齢区分等を設定し、
    検証済みMSIXをアップロードして初回審査へ提出する。
