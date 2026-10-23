@@ -1,7 +1,7 @@
 # リンク・検索・名称対応
 
 対応関係・宣言名・実行方法のSHA-256：
-`16b23e2f60a433d5c8320fa0c3810f5b93b4af4d902d26501b81bd161d5b2ed3`
+`830efa2671b708558db43f34752966f9890a32729acd9b3903720e0ee574b0eb`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -19,6 +19,9 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Core.Tests/LinkSearchTests.cs](../../tests/Takupoke.Core.Tests/LinkSearchTests.cs)
 
+- `LateSearchTermsRetainMatchesAndMatchKindPriority`
+- `LongVowelVariantsKeepTheirVowel`
+- `LongUVowelNeverBecomesO`
 - `NormalizesKanaLatinAndPunctuation`
 - `MatchesRomajiQueries`
 - `AcceptsOnlySupportedLinkTargets`

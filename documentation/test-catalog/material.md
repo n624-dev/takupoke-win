@@ -1,7 +1,7 @@
 # 原本取得・更新・保存・監視
 
 対応関係・宣言名・実行方法のSHA-256：
-`6af61c56a6068f3243345341a02cc96cafa764c73e4f0b6014cde4fece562e28`
+`e1d2de73e9a3466178479a1ccca9be9fa033260d8359d01e3619f460c4c4f72a`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -37,6 +37,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/SourceWatcherTests.cs](../../tests/Takupoke.Integration.Tests/SourceWatcherTests.cs)
 
+- `ReplacingTheSameSourcePreservesAnAlreadyPendingRefresh`
 - `UnavailableFolderDoesNotPreventOtherSelectedFilesFromReportingUpdates`
 - `SameSourceIsRegisteredAgainAfterMissingFolderRecovers`
 
@@ -56,6 +57,8 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
 
+- `IncompatibleLinksCacheStillDisplaysIndependentSavedLessons`
+- `EventDirectoryEnumerationFailureDoesNotHideLessonsAndCanBeRetried`
 - `UnlockDuringUnfinishedReadReloadsAfterCancellationWithEitherTraySetting`
 - `FinishingBeforeUnlockAndRemainingLockedNeverApplyTheCancelledSnapshot`
 - `ExplicitStopDiscardsTheQueuedUnlockRefreshUntilExplicitResume`

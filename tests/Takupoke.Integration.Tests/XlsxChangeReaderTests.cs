@@ -10,6 +10,68 @@ namespace Takupoke.Integration.Tests;
 public sealed class XlsxChangeReaderTests
 {
     private const string Ns = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
+    private static byte[] TypedDateWorkbook(string value) => Workbook(mutate: entries =>
+    {
+        var sheet = XDocument.Parse(entries["xl/worksheets/sheet1.xml"]); XNamespace ns = Ns;
+        sheet.Descendants(ns + "c").Single(c => (string?)c.Attribute("r") == "C2").ReplaceWith(
+            new XElement(ns + "c", new XAttribute("r", "C2"), new XAttribute("t", "d"), new XElement(ns + "v", value)));
+        entries["xl/worksheets/sheet1.xml"] = sheet.ToString();
+    });
+    [Theory]
+    [InlineData("2032-04-05")]
+    [InlineData("2032-04-05T00:00:00.000")]
+    [InlineData("2032-04-05T23:59:59.123456789+14:00")]
+    [InlineData("2032-04-05T00:00:00-12:00")]
+    [InlineData("2032-04-05T01:02:03Z")]
+    public void TypedIsoDateCellsKeepTheirWrittenCalendarDay(string value)
+    {
+        var actual = Assert.Single(XlsxChangeReader.Parse(TypedDateWorkbook(value), 2032));
+        Assert.Equal("2032-04-05", actual.ChangeDate);
+        Assert.Equal("架空科目B", actual.AfterSubject);
+    }
+    [Theory]
+    [InlineData("2032-04-05T24:00:00")]
+    [InlineData("2032-04-05T01:60:00")]
+    [InlineData("2032-04-05T01:00:60")]
+    [InlineData("2032-02-30T00:00:00")]
+    [InlineData("2032-04-05T01:00:00+14:01")]
+    [InlineData("2032-04-05T01:00:00junk")]
+    public void InvalidTypedDatesRemainRejected(string value) => Assert.Throws<ChangeParseException>(() => XlsxChangeReader.Parse(TypedDateWorkbook(value), 2032));
+
+    [Theory]
+    [InlineData("xl/workbook.xml")]
+    [InlineData("xl/worksheets/sheet1.xml")]
+    public void Utf8BomAtTheStartOfXmlDoesNotChangeLessons(string part)
+    {
+        var expected = Assert.Single(XlsxChangeReader.Parse(Workbook(), 2032));
+        var actual = Assert.Single(XlsxChangeReader.Parse(Workbook(mutate: entries => entries[part] = "\uFEFF" + entries[part]), 2032));
+        Assert.Equal(expected, actual);
+    }
+    [Theory]
+    [InlineData("月_x000D_", "月\r")]
+    [InlineData("_x6708__x000D_", "月\r")]
+    public void CachedStringWeekdaysDecodeSpreadsheetEscapesOnce(string cached, string expected)
+    {
+        var table = XlsxChangeReader.ReadForPreview(Workbook(formula: true, cache: cached), 2032);
+        Assert.Empty(table.Warnings);
+        Assert.Single(XlsxChangeReader.Parse(Workbook(formula: true, cache: cached), 2032));
+        Assert.Equal(expected, table.Rows[1][6]);
+    }
+    [Fact]
+    public void PlainStringCellsDecodeEscapesWithoutRecursingOrRepairingSurrogates()
+    {
+        byte[] Bytes(string value) => Workbook(mutate: entries =>
+        {
+            var sheet = XDocument.Parse(entries["xl/worksheets/sheet1.xml"]); XNamespace ns = Ns;
+            sheet.Descendants(ns + "c").Single(c => (string?)c.Attribute("r") == "F2").ReplaceWith(
+                new XElement(ns + "c", new XAttribute("r", "F2"), new XAttribute("t", "str"), new XElement(ns + "v", value)));
+            entries["xl/worksheets/sheet1.xml"] = sheet.ToString();
+        });
+        Assert.Equal("架空科目A", Assert.Single(XlsxChangeReader.Parse(Bytes("架空科目_x0041_"), 2032)).AfterSubject);
+        Assert.Equal("架空_x0041_", Assert.Single(XlsxChangeReader.Parse(Bytes("架空_x005F_x0041_"), 2032)).AfterSubject);
+        Assert.Equal(ChangeErrorCode.InvalidXml, Assert.Throws<ChangeParseException>(() => XlsxChangeReader.Parse(Bytes("_xD800_"), 2032)).Code);
+    }
+
     [Fact]
     public void ReadsRealOoxmlStructureAndKeepsSourceText()
     {

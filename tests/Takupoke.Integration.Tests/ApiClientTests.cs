@@ -38,6 +38,61 @@ public sealed class ApiClientTests
             throw new InvalidOperationException("The fake request must be cancelled.");
         }
     }
+    private sealed class WaitingBodyStream : Stream
+    {
+        public TaskCompletionSource Started { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        public override bool CanRead => true;
+        public override bool CanSeek => false;
+        public override bool CanWrite => false;
+        public override long Length => throw new NotSupportedException();
+        public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        { Started.TrySetResult(); await Task.Delay(Timeout.Infinite, cancellationToken); return 0; }
+        public override int Read(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+        public override void Flush() => throw new NotSupportedException();
+        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        public override void SetLength(long value) => throw new NotSupportedException();
+        public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+    }
+    [Theory]
+    [InlineData("revision", false)]
+    [InlineData("download", false)]
+    [InlineData("events", false)]
+    [InlineData("revision", true)]
+    [InlineData("download", true)]
+    [InlineData("events", true)]
+    public async Task RequestDeadlineIncludesTheBodyAndKeepsUserCancellationDistinct(string kind, bool cancel)
+    {
+        using var body = new WaitingBodyStream();
+        using var http = new HttpClient(new Handler(_ =>
+        {
+            var response = Response(HttpStatusCode.OK, "", "application/json", ("X-Links-Revision", Revision), ("ETag", "\"" + Revision + "\""));
+            response.Content = new StreamContent(body);
+            response.Content.Headers.ContentType = new("application/json");
+            return response;
+        })) { Timeout = TimeSpan.FromMilliseconds(cancel ? 3000 : 250) };
+        using var cancellation = new CancellationTokenSource();
+        var request = Request(Client(http), kind, cancellation.Token);
+        try
+        {
+            await body.Started.Task.WaitAsync(TimeSpan.FromSeconds(1));
+            if (cancel)
+            {
+                cancellation.Cancel();
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() => request.WaitAsync(TimeSpan.FromSeconds(2)));
+            }
+            else
+            {
+                var failure = await Assert.ThrowsAsync<ApiException>(() => request.WaitAsync(TimeSpan.FromSeconds(2)));
+                Assert.Equal(ApiFailure.Unavailable, failure.Failure);
+            }
+        }
+        finally
+        {
+            cancellation.Cancel();
+            try { await request; } catch (Exception error) when (error is ApiException or OperationCanceledException) { }
+        }
+    }
     private static Task Request(ApiClient client, string kind, CancellationToken token) => kind switch
     {
         "revision" => client.CheckRevisionAsync(DataSet.Links, null, token),

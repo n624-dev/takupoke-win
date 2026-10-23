@@ -1,7 +1,7 @@
 # 通知・差分・実配信
 
 対応関係・宣言名・実行方法のSHA-256：
-`2684b6cba898d6fefffd6e089bd983bbe7503be961d09cd8a2b1a3674e5d82be`
+`1cb30e1f88ff60bf6298fdf0ec96e383715cb116ec339efeb36ac25ad1ea5094`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -41,6 +41,8 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
 
+- `IncompatibleLinksCacheStillDisplaysIndependentSavedLessons`
+- `EventDirectoryEnumerationFailureDoesNotHideLessonsAndCanBeRetried`
 - `UnlockDuringUnfinishedReadReloadsAfterCancellationWithEitherTraySetting`
 - `FinishingBeforeUnlockAndRemainingLockedNeverApplyTheCancelledSnapshot`
 - `ExplicitStopDiscardsTheQueuedUnlockRefreshUntilExplicitResume`

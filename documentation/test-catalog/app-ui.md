@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`a6551bde04ec1ecc12e38323317efd737ca3294607d223e6f857930e58c71071`
+`1571c42c93869db28f943eeb7ab879f395a91e6a3188d1a2791fffd12399fa35`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -72,6 +72,8 @@
 
 ## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
 
+- `IncompatibleLinksCacheStillDisplaysIndependentSavedLessons`
+- `EventDirectoryEnumerationFailureDoesNotHideLessonsAndCanBeRetried`
 - `UnlockDuringUnfinishedReadReloadsAfterCancellationWithEitherTraySetting`
 - `FinishingBeforeUnlockAndRemainingLockedNeverApplyTheCancelledSnapshot`
 - `ExplicitStopDiscardsTheQueuedUnlockRefreshUntilExplicitResume`

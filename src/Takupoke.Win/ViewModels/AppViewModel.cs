@@ -98,7 +98,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public string NotificationStatus => _notificationSink.Status;
     [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     public AppViewModel(DispatcherQueue dispatcher) : this(dispatcher, new WindowsDpapiProtector()) { }
-    internal AppViewModel(DispatcherQueue dispatcher, IKeyProtector protector, IFileIdentityProvider? identity = null)
+    internal AppViewModel(DispatcherQueue dispatcher, IKeyProtector protector, IFileIdentityProvider? identity = null, PublicEventsStore? events = null)
     {
         _dispatcher = dispatcher;
         var directory = OfflineTest
@@ -107,7 +107,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         Root = directory.Root; RootMigrationMessage = directory.Message;
         var offline = OfflineTest ? new OfflineTestNetwork(Root) : null;
         _http = offline is not null ? new(offline) : ApiClient.CreateHttpClient();
-        _school = new(Root, protector); _preferences = new(Root); _events = new(Root);
+        _school = new(Root, protector); _preferences = new(Root); _events = events ?? new(Root);
         _api = new(_http); _shared = new(_api, _school); _materials = new(_school, new(identity ?? new WindowsFileIdentity()));
         _authentication = new(new OidcClient(_http), offline is null ? null : offline.OpenBrowser);
         _authentication.ProgressChanged += value => OperationStatus = value;
@@ -216,11 +216,11 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             ApplyRevisionCheck(await _shared.CheckDetailedAsync(token));
             incomplete |= RevisionFailures.Count > 0;
             var failedYears = new List<int>();
-            foreach (var year in _events.SavedYears())
+            foreach (var year in AvailableEventYears(token))
                 try { await _events.SaveAsync(await _api.DownloadEventsAsync(year, await LoadEventsAsync(year, token), token), token); }
                 catch (ApiException) { failedYears.Add(year); }
             EventsUpdateMessage = failedYears.Count == 0 ? null : string.Join("、", failedYears) + "年度の学校行事を更新確認できませんでした。保存済みの結果を表示しています。";
-            incomplete |= failedYears.Count > 0;
+            incomplete |= failedYears.Count > 0 || _eventDirectoryFailed;
             if (!_checkedEventSource)
             {
                 _checkedEventSource = true;
@@ -323,8 +323,24 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public SavedMapping? MappingRecord { get; private set; }
     public SavedTimes? TimesRecord { get; private set; }
     private readonly SortedSet<int> _eventReadFailures = [];
-    public string? EventStorageMessage => _eventReadFailures.Count == 0 ? null
-        : string.Join("、", _eventReadFailures) + "年度の保存した学校行事を読み込めませんでした。この年度の行事は時間割に反映していません。設定の「学校行事」で取得し直してください。他の資料は引き続き表示します。";
+    private bool _eventDirectoryFailed;
+    public string? EventStorageMessage
+    {
+        get
+        {
+            var messages = new List<string>();
+            if (_eventDirectoryFailed) messages.Add("保存した学校行事のフォルダーを読み込めませんでした。行事を再確認してください。他の資料は引き続き表示します。");
+            if (_eventReadFailures.Count > 0) messages.Add(string.Join("、", _eventReadFailures) + "年度の保存した学校行事を読み込めませんでした。この年度の行事は時間割に反映していません。設定の「学校行事」で取得し直してください。他の資料は引き続き表示します。");
+            return messages.Count == 0 ? null : string.Join(" ", messages);
+        }
+    }
+    private IReadOnlyList<int> AvailableEventYears(CancellationToken token)
+    {
+        var read = _events.LoadSavedYearsAvailable(token);
+        _eventDirectoryFailed = read.Failed;
+        if (!read.Failed) _eventReadFailures.IntersectWith(read.Years);
+        return read.Years;
+    }
     private async Task<SavedEvents?> LoadEventsAsync(int year, CancellationToken token)
     {
         var read = await _events.LoadAvailableAsync(year, token);
@@ -343,11 +359,11 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             await _school.ReadAsync<SourceRecord>(lease, "selection." + kind, token), await _school.ReadAsync<MaterialAnalysis>(lease, "analysis." + kind, token),
             await _school.ReadAsync<MaterialAttempt>(lease, "attempt." + kind, token), await _school.ReadAsync<MaterialAttempt>(lease, "acquisition." + kind, token));
         var mappingRecord = await _shared.LoadMappingAsync(lease, token); var mappings = mappingRecord?.Rules;
-        var linksRecord = await _school.ReadAsync<SavedLinks>(lease, "api.links", token); var links = linksRecord?.Payload.Validated();
+        var linksRecord = await _shared.LoadLinksAsync(lease, token); var links = linksRecord?.Payload.Validated();
         var timesRecord = await _shared.LoadTimesAsync(lease, token); var times = timesRecord?.Data;
         var events = new List<SchoolEvent>();
         var eventRecords = new Dictionary<int, SavedEvents>();
-        var years = _events.SavedYears();
+        var years = AvailableEventYears(token);
         foreach (var year in years) { var saved = await LoadEventsAsync(year, token); if (saved is not null) { eventRecords[year] = saved; events.AddRange(saved.Payload.Project()); } }
         token.ThrowIfCancellationRequested();
         if (await _school.BeginAsync(token) != lease) throw new OperationCanceledException();

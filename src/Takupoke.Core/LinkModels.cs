@@ -15,17 +15,18 @@ public sealed record LinksPayload(string Version, string LinksVersion, IReadOnly
     public IEnumerable<LinkItem> Items => Categories.SelectMany(c => c.Buttons);
     public LinksPayload Validated()
     {
-        bool Id(string value) => Regex.IsMatch(value, "^[A-Za-z0-9_-]{1,100}$");
-        bool Text(string value, int length) => value.Length is > 0 && value.Length <= length && value.Trim() == value;
-        if (Version != "v1" || !Regex.IsMatch(LinksVersion, "^sha256-[a-f0-9]{64}$") || Categories.Count is < 1 or > 100
+        bool Id(string? value) => value is not null && Regex.IsMatch(value, "^[A-Za-z0-9_-]{1,100}$");
+        bool Text(string? value, int length) => value is not null && value.Length is > 0 && value.Length <= length && value.Trim() == value;
+        if (Version != "v1" || LinksVersion is null || !Regex.IsMatch(LinksVersion, "^sha256-[a-f0-9]{64}$") || Categories is null || Categories.Count is < 1 or > 100
+            || Categories.Any(c => c is null || c.Buttons is null || c.Buttons.Any(i => i is null))
             || Categories.Select(c => c.Id).Distinct().Count() != Categories.Count || Items.Count() > 800 || Items.Select(i => i.Id).Distinct().Count() != Items.Count())
             throw new InvalidDataException("一覧のデータを確認できませんでした。");
         foreach (var category in Categories)
         {
             if (!Id(category.Id) || !Text(category.Label, 80)) throw new InvalidDataException("一覧のカテゴリを確認できませんでした。");
             foreach (var item in category.Buttons)
-                if (!Id(item.Id) || item.CategoryId != category.Id || !Text(item.Label, 80) || !ValidUrl(item.Href) || !Colors.Contains(item.Color)
-                    || item.SearchAliases.Count > 20 || item.SearchAliases.Any(a => !Text(a, 80)) || item.SearchTerms.Length is < 1 or > 5000)
+                if (!Id(item.Id) || item.CategoryId != category.Id || !Text(item.Label, 80) || item.Href is null || !ValidUrl(item.Href) || !Colors.Contains(item.Color)
+                    || item.SearchAliases is null || item.SearchAliases.Count > 20 || item.SearchAliases.Any(a => !Text(a, 80)) || item.SearchTerms is null || item.SearchTerms.Length is < 1 or > 5000)
                     throw new InvalidDataException("一覧のリンクを確認できませんでした。");
         }
         return this;

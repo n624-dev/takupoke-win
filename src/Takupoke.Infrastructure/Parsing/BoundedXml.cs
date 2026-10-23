@@ -14,6 +14,7 @@ public static class BoundedXml
         string text;
         try { text = new UTF8Encoding(false, true).GetString(bytes); }
         catch (DecoderFallbackException) { throw new ChangeParseException(ChangeErrorCode.Unsupported); }
+        if (text.StartsWith('\uFEFF')) text = text[1..];
         if (text.Contains('\0') || text.Contains("<!DOCTYPE", StringComparison.OrdinalIgnoreCase) || text.Contains("<!ENTITY", StringComparison.OrdinalIgnoreCase))
             throw new ChangeParseException(ChangeErrorCode.Unsupported);
         var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit, XmlResolver = null, MaxCharactersInDocument = MaximumBytes };

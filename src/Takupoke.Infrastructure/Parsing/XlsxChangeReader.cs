@@ -9,7 +9,7 @@ namespace Takupoke.Infrastructure.Parsing;
 
 public static partial class XlsxChangeReader
 {
-    public const int Version = 6;
+    public const int Version = 7;
     private const string SpreadsheetNamespace = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
     private const string RelationshipNamespace = "http://schemas.openxmlformats.org/package/2006/relationships";
     private const string DocumentRelationshipNamespace = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
@@ -107,7 +107,9 @@ public static partial class XlsxChangeReader
                     case "b":
                         if (value is not "0" and not "1") throw new ChangeParseException(ChangeErrorCode.InvalidXml, number);
                         decoded = value == "1" ? "TRUE" : "FALSE"; break;
-                    case "n": case "str": case "d": decoded = value; break;
+                    case "str": decoded = DecodedString(value); break;
+                    case "d": decoded = TypedDate(value, number); break;
+                    case "n": decoded = value; break;
                     default:
                         if (!formula) throw new ChangeParseException(ChangeErrorCode.CellType, number);
                         decoded = ""; break;
@@ -171,6 +173,22 @@ public static partial class XlsxChangeReader
             else if (char.IsLowSurrogate(text[i])) throw new ChangeParseException(ChangeErrorCode.InvalidXml);
         }
         return text;
+    }
+    private static string TypedDate(string value, int row)
+    {
+        // A spreadsheet date is its written calendar day. Validate the entire
+        // typed ISO value, including its clock/offset, without timezone shifts.
+        var match = Regex.Match(value, @"\A([0-9]{4}-[0-9]{2}-[0-9]{2})(?:T([0-9]{2}):([0-9]{2}):([0-9]{2})(?:\.[0-9]{1,9})?(?:Z|([+-])([0-9]{2}):([0-9]{2}))?)?\z");
+        if (!match.Success) throw new ChangeParseException(ChangeErrorCode.Date, row);
+        if (match.Groups[2].Success && (int.Parse(match.Groups[2].Value) > 23
+            || int.Parse(match.Groups[3].Value) > 59 || int.Parse(match.Groups[4].Value) > 59))
+            throw new ChangeParseException(ChangeErrorCode.Date, row);
+        if (match.Groups[5].Success && (int.Parse(match.Groups[6].Value) > 14
+            || int.Parse(match.Groups[7].Value) > 59
+            || int.Parse(match.Groups[6].Value) == 14 && int.Parse(match.Groups[7].Value) != 0))
+            throw new ChangeParseException(ChangeErrorCode.Date, row);
+        try { return ChangeNormalizer.Date(match.Groups[1].Value, null); }
+        catch (ChangeParseException error) { throw new ChangeParseException(error.Code, row); }
     }
     private static (int Row, int Column) Coordinate(string value)
     {

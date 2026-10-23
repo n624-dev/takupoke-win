@@ -1,7 +1,7 @@
 # 時間割変更・曜日・行除外・原文保持
 
 対応関係・宣言名・実行方法のSHA-256：
-`5c528fe7672112859198187622c6988376f814d2b7c2a444b30132d58fa8d1b4`
+`8c59cd347bb4e39b2687b30f8051a3e14d408cc3697cebac43abd180f1dc762b`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -50,6 +50,11 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/XlsxChangeReaderTests.cs](../../tests/Takupoke.Integration.Tests/XlsxChangeReaderTests.cs)
 
+- `TypedIsoDateCellsKeepTheirWrittenCalendarDay`
+- `InvalidTypedDatesRemainRejected`
+- `Utf8BomAtTheStartOfXmlDoesNotChangeLessons`
+- `CachedStringWeekdaysDecodeSpreadsheetEscapesOnce`
+- `PlainStringCellsDecodeEscapesWithoutRecursingOrRepairingSurrogates`
 - `ReadsRealOoxmlStructureAndKeepsSourceText`
 - `ValidWeekdayFormulaUsesSavedValueWithoutEvaluation`
 - `FormulaWarningsAreAvailableForPreviewButCannotBeAccepted`

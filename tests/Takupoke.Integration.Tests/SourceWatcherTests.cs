@@ -6,6 +6,29 @@ namespace Takupoke.Integration.Tests;
 public sealed class SourceWatcherTests
 {
     [Fact]
+    public async Task ReplacingTheSameSourcePreservesAnAlreadyPendingRefresh()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-watcher-tests-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        using var watcher = new SourceWatcher();
+        try
+        {
+            var source = Path.Combine(root, "fictional.pdf");
+            await File.WriteAllTextAsync(source, "%PDF-fictional");
+            watcher.Replace([source]);
+            var changed = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            watcher.Changed += () => changed.TrySetResult();
+            // Exercise the exact debounce entry used by real FS callbacks. Other
+            // cases test actual file events; this isolates a pending replacement.
+            typeof(SourceWatcher).GetMethod("Signal", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)!.Invoke(watcher, null);
+            watcher.Replace([source]);
+            await changed.Task.WaitAsync(TimeSpan.FromSeconds(5));
+            watcher.Replace([]);
+        }
+        finally { watcher.Replace([]); Directory.Delete(root, true); }
+    }
+
+    [Fact]
     public async Task UnavailableFolderDoesNotPreventOtherSelectedFilesFromReportingUpdates()
     {
         var root = Path.Combine(Path.GetTempPath(), "takupoke-watcher-tests-" + Guid.NewGuid().ToString("N"));
