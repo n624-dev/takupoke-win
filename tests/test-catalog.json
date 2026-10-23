@@ -86,7 +86,8 @@
         "tests/Takupoke.Integration.Tests/PreferencesStoreTests.cs",
         "tests/Takupoke.Integration.Tests/SchoolDataStoreTests.cs",
         "tests/Takupoke.Integration.Tests/ChangeRowConsentTests.cs",
-        "tests/Takupoke.Integration.Tests/AppLifecycleTests.cs"
+        "tests/Takupoke.Integration.Tests/AppLifecycleTests.cs",
+        "tests/Takupoke.Integration.Tests/RetentionRecoveryTests.cs"
       ]
     },
     {
@@ -181,7 +182,8 @@
       ],
       "checks": [
         "tests/Takupoke.Core.Tests/SchedulePresentationTests.cs",
-        "tests/Takupoke.Core.Tests/TimetableEngineTests.cs"
+        "tests/Takupoke.Core.Tests/TimetableEngineTests.cs",
+        "tests/Takupoke.Core.Tests/ClockEvidenceTests.cs"
       ]
     },
     {

@@ -1,7 +1,7 @@
 # 暗号化DB・原子保存・設定・年度期限
 
 対応関係・宣言名・実行方法のSHA-256：
-`a03a100b937bd94ab2470731934cf26828523b11134bd420dfaea19856d660b8`
+`ed8da73d8b550951afcb381d9dfe8a4842a98c90191471f9ac62a485eac3a9a1`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -71,3 +71,9 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `RetentionClearStillRunsWhenTheOldOperationIsCancelledBeforeReload`
 - `ActualSelectionHandlerPreservesRoundTripsDuringNotificationWaitAndRestart`
 - `SelectionSaveFailureKeepsPreferencesAndCanBeRetriedAfterRebuildingTheControl`
+
+## [tests/Takupoke.Integration.Tests/RetentionRecoveryTests.cs](../../tests/Takupoke.Integration.Tests/RetentionRecoveryTests.cs)
+
+- `CorruptMarkersBlockExistingLeasesAndExplicitRecoveryPreservesPublicAndPersonalFiles`
+- `FailedResetKeepsQuarantinedMarkerAndCanResumeAfterRestart`
+- `NormalMarkersLockedStateAndUnreadableMarkersCannotUseTheResetPath`

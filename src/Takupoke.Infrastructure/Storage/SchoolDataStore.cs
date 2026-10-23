@@ -8,18 +8,23 @@ namespace Takupoke.Infrastructure.Storage;
 public sealed class SchoolDataStore(string root, IKeyProtector protector, TimeProvider? timeProvider = null) : IAsyncDisposable
 {
     // Distinguish decoded cache content from database, key and filesystem failures.
+    public sealed class RetentionStateException(bool canRecover, Exception? inner = null)
+        : Exception(canRecover ? "保存期間の管理情報が破損しています。学校データの利用を停止しています。" : "保存期間の管理情報を読み込めません。保存先を確認して再試行してください。", inner)
+    { public bool CanRecover { get; } = canRecover; }
     public sealed class InvalidPayloadException(Exception inner) : Exception("保存内容の形式を確認できません。", inner);
     private readonly SemaphoreSlim _gate = new(1, 1);
     private readonly TimeProvider _clock = timeProvider ?? TimeProvider.System;
     private readonly string _root = Path.GetFullPath(root);
     private string PrivateRoot => Path.Combine(_root, "school");
     private string MarkerFile => Path.Combine(_root, "school-data-period.json");
+    private string RecoveryRoot => Path.Combine(_root, "school-data-period-recovery");
     private string DatabaseFile => Path.Combine(PrivateRoot, "school.sqlite");
     private SchoolDataPeriod? _period;
     private EnvelopeCipher? _cipher;
     private long _generation;
     private bool _available = true;
     public event Action? RetentionChanged;
+    public event Action<bool>? RetentionUnavailable;
     public bool ProtectedDataAvailable => Volatile.Read(ref _available);
 
     public async Task SetProtectedDataAvailableAsync(bool available)
@@ -41,14 +46,59 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
         if (!ProtectedDataAvailable || lease.Generation != Interlocked.Read(ref _generation) || lease.Period != SchoolDataPeriod.FromInstant(_clock.GetUtcNow()) || _period != lease.Period)
             throw new OperationCanceledException("学校データの保存期間または利用状態が変わりました。");
     }
+    private async Task<RetentionMarker?> ReadRetentionMarkerAsync(CancellationToken token)
+    {
+        byte[] bytes;
+        try
+        {
+            if (Directory.Exists(MarkerFile)) throw new IOException("Period marker is not a file.");
+            bytes = await File.ReadAllBytesAsync(MarkerFile, token);
+        }
+        catch (FileNotFoundException) { return null; }
+        catch (DirectoryNotFoundException) { return null; }
+        catch (OperationCanceledException) { throw; }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException) { throw new RetentionStateException(false, error); }
+        try
+        {
+            var marker = DataCodec.Decode<RetentionMarker>(bytes);
+            if (marker.SchemaVersion != 1 || marker.SchoolYear is < 1900 or > 9998 || marker.Half is < 1 or > 2) throw new InvalidDataException();
+            return marker;
+        }
+        catch (Exception error) when (error is System.Text.Json.JsonException or InvalidDataException or NotSupportedException)
+        { throw new RetentionStateException(true, error); }
+    }
+    /// Explicitly confirmed reset: preserve a malformed readable marker before
+    /// starting private cleanup, and remove its quarantine only after commit.
+    public async Task RecoverRetentionAsync(CancellationToken token = default)
+    {
+        await _gate.WaitAsync(token);
+        try
+        {
+            if (!ProtectedDataAvailable) throw new OperationCanceledException("Windowsのロック中は復旧しません。");
+            try { _ = await ReadRetentionMarkerAsync(token); throw new InvalidOperationException("破損した管理情報ではありません。"); }
+            catch (RetentionStateException error) when (error.CanRecover) { }
+            token.ThrowIfCancellationRequested();
+            Directory.CreateDirectory(RecoveryRoot);
+            File.Move(MarkerFile, Path.Combine(RecoveryRoot, Guid.NewGuid().ToString("N") + ".json"));
+            await EnsurePeriodAsync(CancellationToken.None);
+        }
+        finally { _gate.Release(); }
+    }
+
     private async Task EnsurePeriodAsync(CancellationToken token)
     {
         if (!ProtectedDataAvailable) throw new OperationCanceledException("端末のロック中は学校データを読み取りません。");
         Directory.CreateDirectory(_root);
         var current = SchoolDataPeriod.FromInstant(_clock.GetUtcNow());
-        RetentionMarker? marker = null;
-        if (File.Exists(MarkerFile)) marker = DataCodec.Decode<RetentionMarker>(await File.ReadAllBytesAsync(MarkerFile, token));
-        if (marker is not null && (marker.SchemaVersion != 1 || marker.SchoolYear is < 1900 or > 9998 || marker.Half is < 1 or > 2)) throw new InvalidDataException("学校データの期間管理情報を確認できません。");
+        RetentionMarker? marker;
+        try { marker = await ReadRetentionMarkerAsync(token); }
+        catch (RetentionStateException error)
+        {
+            Interlocked.Increment(ref _generation); _period = null;
+            _cipher?.Dispose(); _cipher = null;
+            RetentionUnavailable?.Invoke(error.CanRecover);
+            throw;
+        }
         var matches = marker is not null && marker.SchoolYear == current.SchoolYear && marker.Half == current.Half;
         if (!matches)
         {
@@ -77,6 +127,7 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
             }
             finally { if (Directory.Exists(initializing)) Directory.Delete(initializing, recursive: true); }
         }
+        if (Directory.Exists(RecoveryRoot)) Directory.Delete(RecoveryRoot, recursive: true);
         if (!File.Exists(DatabaseFile) || !File.Exists(Path.Combine(PrivateRoot, "key.dpapi"))) throw new InvalidDataException("保存情報の一部がありません。既存データを保護するため更新を停止しました。");
         _period = current;
         if (_cipher is null)

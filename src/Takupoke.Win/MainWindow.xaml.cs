@@ -185,6 +185,18 @@ public sealed partial class MainWindow : Window
         else if (_page == "notifications") BuildNotificationSettings();
         else if (_page == "about") BuildAbout();
         else switch (_page) { case "links": BuildLinks(); break; case "timetable": BuildTimetable(); break; case "settings": BuildSettings(); break; default: BuildHome(); break; }
+        if (_model.RetentionRecoveryNeeded)
+        {
+            var recovery = Panel(Text("保存期間の管理情報が破損しているため、学校データを利用できません。"));
+            recovery.Children.Add(Button("保存期間の管理情報を復旧", async () =>
+            {
+                if (await Dialog("学校データを初期化して復旧しますか？",
+                    Text("破損した管理情報を隔離し、保存済みの学校データを削除して保存期間を設定し直します。個人設定・公開行事・OneDriveなどの元ファイルは保持します。"),
+                    "初期化して復旧", "キャンセル") == ContentDialogResult.Primary)
+                    await _model.RecoverRetentionAsync();
+            }, "recover-retention"));
+            PageContent.Children.Insert(0, Card(recovery));
+        }
         UpdateStatus();
         if (pageChanged)
         {
