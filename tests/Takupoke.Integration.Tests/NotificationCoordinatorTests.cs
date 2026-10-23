@@ -41,6 +41,37 @@ public sealed class NotificationCoordinatorTests : IAsyncLifetime
     public Task InitializeAsync() => Task.CompletedTask;
     public Task DisposeAsync() { _protector.Dispose(); if (Directory.Exists(_root)) Directory.Delete(_root, true); return Task.CompletedTask; }
 
+    [Theory]
+    [InlineData(false, false)]
+    [InlineData(true, false)]
+    [InlineData(false, true)]
+    [InlineData(true, true)]
+    public async Task UnrelatedUpdatesRetainPendingTargetsAndTheSameOsTagAcrossRestart(bool pastDay, bool alreadyAccepted)
+    {
+        ScheduleData State(string selected, string unrelated) => new(Changes: [
+            new(Today.Iso(), "3_IT", "1", "架空変更前A", selected, "", "", "", "", ""),
+            new((pastDay ? Today.AddDays(-1) : Today).Iso(), pastDay ? "3_IT" : "2_CN", "2", "架空変更前B", unrelated, "", "", "", "", "")]);
+        var sink = new Sink { Accept = false }; string tag;
+        await using (var store = new SchoolDataStore(_root, _protector))
+        {
+            var coordinator = new NotificationCoordinator(store, sink);
+            await coordinator.CheckAsync(State("架空A", "架空X"), new Dictionary<MaterialKind, string>(), Preferences, Today);
+            await coordinator.CheckAsync(State("架空B", "架空X"), new Dictionary<MaterialKind, string>(), Preferences, Today);
+            tag = Assert.Single((await store.ReadAsync<NotificationBaseline>(await store.BeginAsync(), "notifications"))!.Pending!).Value.Fingerprint;
+            await coordinator.CheckAsync(State("架空B", "架空Y"), new Dictionary<MaterialKind, string>(), Preferences, Today);
+            Assert.Equal(2, sink.Attempts);
+            Assert.All(sink.Sends, sent => Assert.Equal(tag, sent.Fingerprint));
+        }
+        if (alreadyAccepted) sink.Delivered.Add(("changes", tag));
+        sink.Accept = true;
+        await using var reopened = new SchoolDataStore(_root, _protector);
+        await new NotificationCoordinator(reopened, sink).CheckAsync(State("架空B", "架空Y"), new Dictionary<MaterialKind, string>(), Preferences, Today);
+        Assert.Equal(alreadyAccepted ? 2 : 3, sink.Attempts);
+        Assert.Contains(("changes", tag), sink.Delivered);
+        Assert.All(sink.Sends, sent => Assert.Equal(tag, sent.Fingerprint));
+        Assert.Empty((await reopened.ReadAsync<NotificationBaseline>(await reopened.BeginAsync(), "notifications"))!.Pending!);
+    }
+
     [Fact]
     public async Task FirstImportAndClassSwitchDoNotNotifyButChangedSelectedSlotDoes()
     {

@@ -36,6 +36,30 @@ public sealed class AppLifecycleTests
             return Path.GetFullPath(stream.Name);
         }
     }
+    private sealed class EventStatusHandler : HttpMessageHandler
+    {
+        public HashSet<int> FailedYears { get; } = [2026];
+        public int Heads { get; private set; }
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken token)
+        {
+            token.ThrowIfCancellationRequested(); Assert.Equal("example.invalid", request.RequestUri!.Host);
+            if (request.Method == HttpMethod.Head)
+            {
+                Assert.Equal("/fictional-school-source", request.RequestUri.AbsolutePath); Heads++;
+                var head = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+                head.Headers.ETag = new("\"fictional-new-source\""); return Task.FromResult(head);
+            }
+            Assert.Equal("/events", request.RequestUri.AbsolutePath);
+            var year = int.Parse(request.RequestUri.Query.Split('=').Last());
+            if (FailedYears.Contains(year)) return Task.FromResult(new HttpResponseMessage(System.Net.HttpStatusCode.ServiceUnavailable));
+            var body = System.Text.Json.JsonSerializer.Serialize(new {
+                version = "v1", schoolYear = year, sourcePdfSha256 = new string('a',64), sourcePdfETag = "\"fictional-new-source\"",
+                events = new[] { new { startDate = $"{year}-04-01", endDate = $"{year}-04-01", title = "架空年度別行事", tag = "行事メモ" } } });
+            var response = new HttpResponseMessage(System.Net.HttpStatusCode.OK) { Content = new StringContent(body, System.Text.Encoding.UTF8, "application/json") };
+            response.Headers.ETag = new("\"fictional-api-" + year + "\""); return Task.FromResult(response);
+        }
+    }
+
     private sealed class Fixture : IAsyncDisposable
     {
         private readonly string? _previousMode = Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE");
@@ -52,8 +76,9 @@ public sealed class AppLifecycleTests
             Environment.SetEnvironmentVariable("TAKUPOKE_DATA_ROOT", Root);
             WindowsNotifications.Delivered.Clear();
         }
-        public AppViewModel Create(PublicEventsStore? events = null)
-        { var model = new AppViewModel(Dispatcher, Protector, Identity, events); _models.Add(model); return model; }
+        public AppViewModel Create(PublicEventsStore? events = null, HttpClient? network = null,
+            Uri? apiBaseUri = null, Uri? eventSourceUri = null)
+        { var model = new AppViewModel(Dispatcher, Protector, Identity, events, network, apiBaseUri, eventSourceUri); _models.Add(model); return model; }
         public async Task Close(AppViewModel model) { await model.DisposeAsync(); _models.Remove(model); }
         public async Task Preferences(bool tray = false) => await new PreferencesStore(Root).SaveAsync(new()
         { SelectedClasses = ["3_IT"], DefaultSchoolYear = "2032", NotifySpecials = true, KeepInTray = tray });
@@ -90,6 +115,36 @@ public sealed class AppLifecycleTests
             Directory.Delete(Root, recursive: true);
         }
     }
+    [Fact]
+    public async Task UnrelatedEventFetchKeepsWarningsGeneratedByRealApiAndSourceChecks()
+    {
+        await using var fixture = new Fixture(); await fixture.Preferences();
+        var events = new PublicEventsStore(fixture.Root);
+        await events.SaveAsync(new(DateTimeOffset.UtcNow, new("v1", 2026, new string('a',64), "\"fictional-old-source\"",
+            [new("2026-04-01", "2026-04-01", "架空保存行事", "行事メモ")]), "\"fictional-old-api\""));
+        using var handler = new EventStatusHandler(); using var network = new HttpClient(handler);
+        var model = fixture.Create(events, network, new("https://example.invalid/"), new("https://example.invalid/fictional-school-source"));
+        await model.InitializeAsync();
+        Assert.True(await model.CheckSavedEventsAsync());
+        var sourceWarning = Assert.IsType<string>(model.EventSourceMessage);
+        var failure = Assert.IsType<string>(model.EventsUpdateMessage);
+        Assert.Contains("2026", failure); Assert.Equal(1, handler.Heads);
+        await model.FetchEventsAsync(2032);
+        Assert.Equal(sourceWarning, model.EventSourceMessage);
+        Assert.Equal(failure, model.EventsUpdateMessage); Assert.Equal(1, handler.Heads);
+        handler.FailedYears.Clear(); await model.FetchEventsAsync(2026);
+        Assert.Null(model.EventSourceMessage); Assert.Null(model.EventsUpdateMessage); Assert.Equal(2, handler.Heads);
+        await model.FetchEventsAsync(2033);
+        handler.FailedYears.UnionWith([2026,2033]);
+        Assert.True(await model.CheckSavedEventsAsync());
+        await model.FetchEventsAsync(2032);
+        Assert.Contains("2026", model.EventsUpdateMessage); Assert.Contains("2033", model.EventsUpdateMessage);
+        handler.FailedYears.Remove(2026); await model.FetchEventsAsync(2026);
+        Assert.DoesNotContain("2026", model.EventsUpdateMessage); Assert.Contains("2033", model.EventsUpdateMessage);
+        handler.FailedYears.Clear(); await model.FetchEventsAsync(2033);
+        Assert.Null(model.EventsUpdateMessage);
+    }
+
     [Fact]
     public async Task IncompatibleLinksCacheStillDisplaysIndependentSavedLessons()
     {

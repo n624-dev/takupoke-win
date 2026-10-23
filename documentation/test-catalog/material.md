@@ -1,7 +1,7 @@
 # 原本取得・更新・保存・監視
 
 対応関係・宣言名・実行方法のSHA-256：
-`6fde97aa1a285edb812e32789bfaa9f61471f038514b6c0ad9215bed5589cf54`
+`408254b4383cc1086df04ed771665f179fc303684d74d39b0985270434927237`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -58,6 +58,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
 
+- `UnrelatedEventFetchKeepsWarningsGeneratedByRealApiAndSourceChecks`
 - `IncompatibleLinksCacheStillDisplaysIndependentSavedLessons`
 - `EventDirectoryEnumerationFailureDoesNotHideLessonsAndCanBeRetried`
 - `ActualNotificationToggleKeepsTheLastEditDuringAnEarlierSave`
