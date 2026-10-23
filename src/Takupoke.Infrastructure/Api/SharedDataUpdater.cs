@@ -51,10 +51,22 @@ public sealed class SharedDataUpdater(ApiClient api, SchoolDataStore store)
     }
     private async Task<string?> InstalledAsync(DataSet kind, SchoolLease lease, CancellationToken token) => kind switch
     {
-        DataSet.Links => (await store.ReadAsync<SavedLinks>(lease, "api.links", token))?.Revision,
+        DataSet.Links => (await LoadLinksAsync(lease, token))?.Revision,
         DataSet.Mapping => (await LoadMappingAsync(lease, token))?.Revision,
         _ => (await LoadTimesAsync(lease, token))?.Revision
     };
+    public async Task<SavedLinks?> LoadLinksAsync(SchoolLease lease, CancellationToken token = default)
+    {
+        SavedLinks? saved;
+        try { saved = await store.ReadAsync<SavedLinks>(lease, "api.links", token); }
+        catch (SchoolDataStore.InvalidPayloadException) { return null; }
+        if (saved is null || saved.Revision is null || !ApiPayloads.ValidRevision(saved.Revision)
+            || saved.ApiETag is null || !ApiPayloads.ValidETag(saved.ApiETag) || saved.Payload is null) return null;
+        try { _ = ApiPayloads.Links(DataCodec.Encode(saved.Payload)); }
+        catch (Exception error) when (error is ApiException or InvalidDataException or System.Text.Json.JsonException
+            or InvalidOperationException or ArgumentException) { return null; }
+        return saved;
+    }
     public async Task<SavedMapping?> LoadMappingAsync(SchoolLease lease, CancellationToken token = default)
     {
         SavedMapping? saved;

@@ -56,16 +56,19 @@ public static class LinkSearch
             {
                 var roman = Normalize(Romaji(term));
                 expanded.Add(roman);
-                expanded.Add(roman.Replace("ou", "o").Replace("uu", "o").Replace("oo", "o"));
+                expanded.Add(roman.Replace("ou", "o").Replace("uu", "u").Replace("oo", "o"));
             }
         }
         var best = -1;
         for (var index = 0; index < expanded.Count; index++)
         {
-            var term = expanded[index];
-            if (term == query) best = Math.Max(best, 1000 - index);
-            else if (term.StartsWith(query, StringComparison.Ordinal)) best = Math.Max(best, 800 - index);
-            else if (term.Contains(query, StringComparison.Ordinal)) best = Math.Max(best, 500 - index);
+            var term = Normalize(expanded[index]);
+            // Position is a tie-breaker within a match kind. Even a late exact
+            // match must outrank a prefix and remain distinct from no match.
+            var penalty = Math.Min(index, 199);
+            if (term == query) best = Math.Max(best, 1000 - penalty);
+            else if (term.StartsWith(query, StringComparison.Ordinal)) best = Math.Max(best, 800 - penalty);
+            else if (term.Contains(query, StringComparison.Ordinal)) best = Math.Max(best, 500 - penalty);
         }
         return best;
     }

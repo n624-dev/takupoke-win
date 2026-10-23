@@ -1,3 +1,4 @@
+using System.Text;
 using Takupoke.Infrastructure.Api;
 using Takupoke.Infrastructure.Storage;
 using Xunit;
@@ -9,6 +10,26 @@ public sealed class PublicEventsStoreTests : IDisposable
     private readonly string _root = Path.Combine(Path.GetTempPath(), "takupoke-events-" + Guid.NewGuid().ToString("N"));
     private static SavedEvents Saved(int year) => new(DateTimeOffset.UtcNow,
         new("v1", year, new string('a', 64), null, [new($"{year}-04-01", $"{year}-04-01", "架空の行事", "行事メモ")]), "\"fake-tag\"");
+
+    [Fact]
+    public async Task AcceptedUtf8PayloadSurvivesAnEscapedSavedEnvelope()
+    {
+        var title = string.Concat(Enumerable.Repeat("😀", 100));
+        var candidate = new EventsPayload("v1", 2032, new string('a', 64), null,
+            Enumerable.Range(0,1800).Select(_ => new EventRow("2032-04-01", "2032-04-01", title, "行事メモ")).ToArray());
+        var raw = Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(DataCodec.Encode(candidate)).Replace("\\uD83D\\uDE00", "😀", StringComparison.OrdinalIgnoreCase));
+        Assert.True(raw.Length < 1_000_000);
+        var accepted = ApiPayloads.Events(raw, 2032);
+        var store = new PublicEventsStore(_root);
+        await store.SaveAsync(new(DateTimeOffset.UtcNow, accepted, "\"fictional\""));
+        var read = await new PublicEventsStore(_root).LoadAvailableAsync(2032);
+        Assert.False(read.Failed); Assert.NotNull(read.Events);
+        Assert.Equal(DataCodec.Encode(accepted), DataCodec.Encode(read.Events.Payload));
+        var path = Path.Combine(_root, "public-events", "2032.json");
+        var preserved = await File.ReadAllBytesAsync(path);
+        await Assert.ThrowsAsync<InvalidDataException>(() => store.SaveAsync(read.Events with { ApiETag = "invalid" }));
+        Assert.Equal(preserved, await File.ReadAllBytesAsync(path));
+    }
 
     [Theory]
     [InlineData("{")]

@@ -52,8 +52,8 @@ public sealed class AppLifecycleTests
             Environment.SetEnvironmentVariable("TAKUPOKE_DATA_ROOT", Root);
             WindowsNotifications.Delivered.Clear();
         }
-        public AppViewModel Create()
-        { var model = new AppViewModel(Dispatcher, Protector, Identity); _models.Add(model); return model; }
+        public AppViewModel Create(PublicEventsStore? events = null)
+        { var model = new AppViewModel(Dispatcher, Protector, Identity, events); _models.Add(model); return model; }
         public async Task Close(AppViewModel model) { await model.DisposeAsync(); _models.Remove(model); }
         public async Task Preferences(bool tray = false) => await new PreferencesStore(Root).SaveAsync(new()
         { SelectedClasses = ["3_IT"], DefaultSchoolYear = "2032", NotifySpecials = true, KeepInTray = tray });
@@ -90,6 +90,50 @@ public sealed class AppLifecycleTests
             Directory.Delete(Root, recursive: true);
         }
     }
+    [Fact]
+    public async Task IncompatibleLinksCacheStillDisplaysIndependentSavedLessons()
+    {
+        await using var fixture = new Fixture(); await fixture.SeedExam(accepted: false);
+        await using (var store = new SchoolDataStore(fixture.Root, fixture.Protector))
+        {
+            var lease = await store.BeginAsync();
+            await store.WriteAsync(lease, "api.links", "fictional incompatible links");
+        }
+        var model = fixture.Create(); await model.InitializeAsync();
+        Assert.Equal(4, model.Materials.Count);
+        Assert.NotNull(model.Data.Specials); Assert.Single(model.Data.Specials);
+        Assert.Null(model.Links);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task EventDirectoryEnumerationFailureDoesNotHideLessonsAndCanBeRetried(bool permission)
+    {
+        await using var fixture = new Fixture(); await fixture.SeedExam(accepted: false);
+        var fail = true;
+        IEnumerable<string> Enumerate(string directory)
+        {
+            if (fail) throw permission ? new UnauthorizedAccessException("fictional directory permission") : new IOException("fictional enumeration failure");
+            return Directory.EnumerateFiles(directory, "*.json");
+        }
+        var events = new PublicEventsStore(fixture.Root, Enumerate);
+        var year = SchoolDate.InJapan(DateTimeOffset.UtcNow).SchoolYear();
+        await events.SaveAsync(new(DateTimeOffset.UtcNow, new("v1", year, new string('a',64), null,
+            [new($"{year}-04-01", $"{year}-04-01", "架空行事", "行事メモ")]), null));
+        var model = fixture.Create(events); await model.InitializeAsync();
+        Assert.Equal(4, model.Materials.Count); Assert.NotNull(model.Data.Specials); Assert.Single(model.Data.Specials);
+        Assert.NotNull(model.EventStorageMessage); Assert.Empty(model.EventRecords);
+        fail = false;
+        await File.WriteAllTextAsync(Path.Combine(fixture.Root, "public-events", (year + 1) + ".json"), "{fictional invalid");
+        await model.RefreshAsync();
+        Assert.Equal(4, model.Materials.Count); Assert.True(model.EventRecords.ContainsKey(year));
+        Assert.Contains((year + 1).ToString(), model.EventStorageMessage);
+        File.Delete(Path.Combine(fixture.Root, "public-events", (year + 1) + ".json"));
+        await model.RefreshAsync();
+        Assert.Null(model.EventStorageMessage);
+    }
+
     private sealed class ReadGate(FakeIdentity identity) : IDisposable
     {
         private readonly ManualResetEventSlim _release = new();

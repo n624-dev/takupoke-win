@@ -1,7 +1,7 @@
 # 暗号化DB・原子保存・設定・年度期限
 
 対応関係・宣言名・実行方法のSHA-256：
-`7bd57a9e975e5232de0a41b551898e9877fdb589f544a4dd87e7abb4827eaf99`
+`04e65ae93e82e65c2e9999070da023481f4960b64c13e33a93e4fb1ca14e11f1`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -61,6 +61,8 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
 
+- `IncompatibleLinksCacheStillDisplaysIndependentSavedLessons`
+- `EventDirectoryEnumerationFailureDoesNotHideLessonsAndCanBeRetried`
 - `UnlockDuringUnfinishedReadReloadsAfterCancellationWithEitherTraySetting`
 - `FinishingBeforeUnlockAndRemainingLockedNeverApplyTheCancelledSnapshot`
 - `ExplicitStopDiscardsTheQueuedUnlockRefreshUntilExplicitResume`

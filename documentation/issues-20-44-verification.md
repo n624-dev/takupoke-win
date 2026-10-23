@@ -1,0 +1,39 @@
+# 10456公開後の追加Issue対応
+
+対象main ff2166f3086bd52b573ba2f54aa3f7810f678c77。iOS436の初回公開完了後に着手。各OS独立実装、完全架空fixture、本番学校/API通信なし。Linux/.NET10.0.402、実WinUI/Windows ACL未確認。
+
+## 保存済みリンク（37）
+
+修正前:実暗号化storeの復号後JSONだけを不整合にした3ケースはrevision確認/取得を阻止、実AppViewModelの独立した正常な試験授業がMaterials0になる1ケースも失敗。修正後:LoadLinksAsyncで復号後形式/検証不一致だけを分離し、正常な他資料を利用しつつ公開revision確認と認証後置換へ進む。DB/鍵/認証暗号の例外はcatch対象外。関連18件が失敗0（0.658秒）。途中の追加ETag対照はJsonElementを再保存するとquoteがUnicode escapeへ正規化されるため、元JSON字句の比較を同じDataCodec再エンコードbytes同士の比較へ直した。前回内容の完全比較を維持し製品変更にしない。
+
+iOS対照:LinksStoreは既にdecode失敗をthrowしLinksModelの個別catchで他モデルから分離。ただしpreferences失敗状態の扱いはiOS71として別途対応。
+
+## XLSX文字列・XML（25/27、iOS69）
+
+修正前に本番readerへ完全架空XLSXを渡し、workbook/worksheet先頭BOM2件が拒否、t=strの曜日escape2件と通常科目escape1件も失敗（計5件）。修正候補は先頭のBOM1字のみ消費、strは既存の一回UTF16 decoderへ分岐。DTD/ENTITY/size/depth/UTF8/cancel、数式の許可範囲は維持する。iOSも同じstr漏れあり、別Swift実装で対応中。
+
+## 検索（28/42、iOS99）
+
+修正前:検索関連17件中3失敗。くうこう→kukoは不一致でkokoが998点、上限内の334かな語の後方finalmatchも結果0。候補はuu→u、位置減点を199までに制限して完全/前方/部分一致の優先と非一致-1を保つ。Winは元語も正規化してiOSと一貫する。iOS長音は既にuu→uで非該当だが減点問題は該当する。
+
+## typed ISO日付（26、iOSにも該当）
+
+修正前11件中、ISO日時4件がDate失敗、date-onlyと不正値6件の拒否は成功。t=dに限定し、date-onlyまたはT時刻（秒まで、fraction1〜9桁、Z/±14:00までのoffset任意）全体を検証して記載された暦日を用いる。機械のlocal timezoneへ変換しない。無効日・24時・60分/秒・+14:01・余分なsuffixは拒否、通常の任意文字列や数式の許可範囲は拡大しない。日時の型付き値は従来のnumeric serial同様日付へ正規化し、その他の資料本文・raw構築を維持する。iOSにも同じ生値経路があり、Swift側で別に回帰を追加した。
+
+上記27/25/37関連42件と検索17件は修正後失敗0。typed日付の修正後・全体・Apple/Windows固有検査・公開は未確認。未対応issueを完了扱いにしない。
+
+## 公開行事フォルダー（38、iOS100類似）
+
+FS列挙境界だけにIO/UnauthorizedAccess例外を返すseamを設け、実暗号化store/実AppViewModelで独立した正常授業を検証。修正前は2ケースともMaterials0で失敗。候補は列挙を独立した公開cache状態として警告し、他の学校資料の組み立てを続ける。列挙の復旧→破損年度の個別警告→その修復までを同じモデルで確認する。権限を復旧したこと自体を注入せず、FS boundaryの復旧後は実ファイルを読む。キャンセルは破損扱いにしない。Windows ACLの実検証と、Issue報告の非root chmod実測は本回帰テストと区別する。
+
+## 全応答の期限と監視置換（22/23）
+
+修正前、revision/links/eventsの各応答headerを受けた後、架空stream本文だけを停止。3件すべてHttpClient.Timeout250msを超えて2秒の外側期限で失敗した。利用者取消3件は成功。pending debounceを実callbackと同じSignalへ投入して同一pathでReplaceする回帰も5秒で失敗した（計7件中4失敗）。全てfinallyで所有する停止streamをcancelしcleanup。候補はAPI request全体にlinked deadlineを設け、利用者cancelと通信期限を区別する。watcherは同一pathの健全な登録/timerを維持し、不足/故障登録だけ再登録、空登録・Disposeは停止する。iOSはURLSessionのrequest/resource timeoutを既に使用し、FileRefreshCoordinatorは同一sourceの登録を保持するため同じ置換の実装は非該当。
+
+XLSX parserVersionを7へ更新し、保存済み旧結果を再解析対象とする。固定参照fixtureの期待値は変更しない。
+
+## iOS68のWindows交差確認で見つかった保存サイズ差
+
+当初、Windowsはpayload1MBと保存2MBなので余裕があると静的に見積もったが、UTF16のJSON escapeで反証された。1800件×100架空emojiのUTF8本文を実ApiPayloads.Eventsが1MB未満で受理しsave成功、再起動相当loadがFailed=trueとなるテストが修正前に失敗。System.Text.Jsonのsurrogate escapeで保存形式が2MBを超える。保存全体は2000件×200 UTF16文字と有限metadataに十分な3MBへそろえ、save前とload双方で同じ境界を確認する。API本文1MB制限は変更しない。保存時ETag検証もloadとそろえ、拒否時の既存bytes保持を検査する。
+
+22/23を含む全体は暫定integration264件、Core210件が失敗0。上記交差確認の追加後は全体を再確認する。

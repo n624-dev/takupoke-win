@@ -1,7 +1,7 @@
 # API・年度別行事・更新失敗
 
 対応関係・宣言名・実行方法のSHA-256：
-`a6290aef50d54cbc451a4738f5a240aa07b6a0f3bd2de7421a5fe037101b4ef9`
+`2a315eae963fd6cb1d02c1f71775272ee4eadfe3c511b68bf6c62d4383e7bb2f`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -20,6 +20,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/ApiClientTests.cs](../../tests/Takupoke.Integration.Tests/ApiClientTests.cs)
 
+- `RequestDeadlineIncludesTheBodyAndKeepsUserCancellationDistinct`
 - `HttpTimeoutIsReportedAsCommunicationFailure`
 - `CallerCanCancelAnActiveRequestWithoutReportingCommunicationFailure`
 - `PublicRevisionNeverSendsAuthenticationAndUsesInstalledRevision`
@@ -42,11 +43,13 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/PublicEventsStoreTests.cs](../../tests/Takupoke.Integration.Tests/PublicEventsStoreTests.cs)
 
+- `AcceptedUtf8PayloadSurvivesAnEscapedSavedEnvelope`
 - `DamagedYearDoesNotBlockHealthyYearsAndCanBeReplaced`
 - `CancellationIsNotReportedAsDamagedData`
 
 ## [tests/Takupoke.Integration.Tests/SharedDataUpdaterTests.cs](../../tests/Takupoke.Integration.Tests/SharedDataUpdaterTests.cs)
 
+- `InvalidLinksCacheDoesNotBlockChecksOrAuthenticatedReplacement`
 - `CorruptTimeCacheCanBeReplacedAfterAuthentication`
 - `FailedTimeRequestPreservesCorruptCacheAndDatabaseFailuresStillStop`
 - `SingleAuthenticationAndFailureOfOneDatasetDoesNotRollBackOthers`

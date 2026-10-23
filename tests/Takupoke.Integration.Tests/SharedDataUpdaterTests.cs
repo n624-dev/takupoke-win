@@ -11,6 +11,36 @@ namespace Takupoke.Integration.Tests;
 public sealed class SharedDataUpdaterTests
 {
     [Theory]
+    [InlineData("\"fictional incompatible links\"")]
+    [InlineData("{\"revision\":\"invalid\",\"payload\":{}}")]
+    [InlineData("{\"revision\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\"apiETag\":\"\\\"fictional\\\"\",\"payload\":{}}")]
+    public async Task InvalidLinksCacheDoesNotBlockChecksOrAuthenticatedReplacement(string json)
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-update-tests-" + Guid.NewGuid().ToString("N"));
+        using var protector = new Protector();
+        try
+        {
+            await using var store = new SchoolDataStore(root, protector);
+            var lease = await store.BeginAsync();
+            var corrupt = System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(json);
+            await store.WriteAsync(lease, "api.links", corrupt);
+            var handler = new Handler { ValidLinksDownload = true }; using var http = new HttpClient(handler);
+            var updater = new SharedDataUpdater(new(http, new("https://example.invalid/")), store);
+            var check = await updater.CheckDetailedAsync(DataSet.Links);
+            Assert.True(check.Revisions[DataSet.Links].Changed);
+            Assert.Equal(DataCodec.Encode(corrupt), DataCodec.Encode(await store.ReadAsync<System.Text.Json.JsonElement>(lease, "api.links")));
+            await Assert.ThrowsAsync<OperationCanceledException>(() => updater.UpdateAsync(_ => throw new OperationCanceledException()));
+            Assert.Equal(DataCodec.Encode(corrupt), DataCodec.Encode(await store.ReadAsync<System.Text.Json.JsonElement>(lease, "api.links")));
+            var result = await updater.UpdateAsync(_ => Task.FromResult("fake-token"));
+            Assert.True(result.Single(r => r.Kind == DataSet.Links).Updated);
+            var saved = await store.ReadAsync<SavedLinks>(lease, "api.links");
+            Assert.Equal(Revision, saved!.Revision);
+            Assert.Equal("架空カテゴリ", saved.Payload.Validated().Categories.Single().Label);
+        }
+        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
+
+    [Theory]
     [InlineData("\"fictional invalid cache\"")]
     [InlineData("{\"revision\":\"invalid\",\"data\":{\"schemaVersion\":1,\"days\":[]}}")]
     [InlineData("{\"revision\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\"data\":{\"schemaVersion\":2,\"days\":[]}}")]
@@ -90,6 +120,7 @@ public sealed class SharedDataUpdaterTests
     {
         public DataSet? FailedRevision { get; set; }
         public bool FailTimesDownload { get; set; }
+        public bool ValidLinksDownload { get; set; }
         public CancellationTokenSource? CancelRevision { get; set; }
         public List<string> RevisionPaths { get; } = [];
         public int PublicRequests { get; private set; }
@@ -110,7 +141,16 @@ public sealed class SharedDataUpdaterTests
             else
             {
                 Assert.Equal("fake-token", request.Headers.Authorization?.Parameter); AuthenticatedRequests++;
-                if (path == "/links") response.StatusCode = HttpStatusCode.ServiceUnavailable;
+                if (path == "/links")
+                {
+                    if (!ValidLinksDownload) response.StatusCode = HttpStatusCode.ServiceUnavailable;
+                    else
+                    {
+                        response.Content = new StringContent("{\"version\":\"v1\",\"linksVersion\":\"sha256-" + new string('a', 64) + "\",\"categories\":[{\"id\":\"fictional\",\"label\":\"架空カテゴリ\",\"sortOrder\":0,\"buttons\":[]}]}", Encoding.UTF8, "application/json");
+                        response.Headers.TryAddWithoutValidation("X-Links-Revision", Revision);
+                        response.Headers.ETag = new("\"fake-links\"");
+                    }
+                }
                 else if (path == "/timetable-times")
                 {
                     if (FailTimesDownload) response.StatusCode = HttpStatusCode.ServiceUnavailable;

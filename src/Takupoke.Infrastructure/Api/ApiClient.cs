@@ -48,22 +48,32 @@ public sealed class ApiClient(HttpClient http, Uri? baseUri = null, TimeProvider
         if (response.StatusCode != HttpStatusCode.OK) throw new ApiException(ApiFailure.Unavailable);
         if (response.Content.Headers.ContentType?.MediaType?.Equals(contentType, StringComparison.OrdinalIgnoreCase) != true) throw new ApiException(ApiFailure.InvalidResponse);
     }
-    private static async Task<T> Guard<T>(Func<Task<T>> action, CancellationToken token)
+    private async Task<T> Guard<T>(Func<CancellationToken, Task<T>> action, CancellationToken token)
     {
-        try { return await action(); }
+        // ResponseHeadersRead ends HttpClient's own timeout at the headers.
+        // This budget also covers the body and validates caller cancellation
+        // separately from a communication deadline.
+        using var deadline = CancellationTokenSource.CreateLinkedTokenSource(token);
+        deadline.CancelAfter(http.Timeout == Timeout.InfiniteTimeSpan ? TimeSpan.FromSeconds(90) : http.Timeout);
+        try
+        {
+            var result = await action(deadline.Token);
+            deadline.Token.ThrowIfCancellationRequested();
+            return result;
+        }
         catch (ApiException) { throw; }
         catch (OperationCanceledException) when (!token.IsCancellationRequested) { throw new ApiException(ApiFailure.Unavailable); }
         catch (OperationCanceledException) { throw; }
         catch (HttpRequestException) { throw new ApiException(ApiFailure.Unavailable); }
         catch { throw new ApiException(ApiFailure.InvalidResponse); }
     }
-    public Task<RevisionResult> CheckRevisionAsync(DataSet kind, string? installed, CancellationToken token = default) => Guard(async () =>
+    public Task<RevisionResult> CheckRevisionAsync(DataSet kind, string? installed, CancellationToken token = default) => Guard(async requestToken =>
     {
         if (installed is not null && !ApiPayloads.ValidRevision(installed)) throw new ApiException(ApiFailure.InvalidResponse);
         using var request = Request(RevisionPath(kind));
         if (installed is not null) request.Headers.IfNoneMatch.Add(new('"' + installed + '"'));
-        using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token);
-        if ((await ReadBoundedAsync(response, 0, token)).Length != 0) throw new ApiException(ApiFailure.InvalidResponse);
+        using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, requestToken);
+        if ((await ReadBoundedAsync(response, 0, requestToken)).Length != 0) throw new ApiException(ApiFailure.InvalidResponse);
         if (response.StatusCode == HttpStatusCode.NotModified && installed is not null) return new RevisionResult(installed, false);
         if (response.StatusCode != HttpStatusCode.OK) throw new ApiException(ApiFailure.Unavailable);
         var etag = Header(response, "ETag");
@@ -82,26 +92,26 @@ public sealed class ApiClient(HttpClient http, Uri? baseUri = null, TimeProvider
     private static string ValidETag(HttpResponseMessage response)
     { var tag = Header(response, "ETag"); return ApiPayloads.ValidETag(tag) ? tag : throw new ApiException(ApiFailure.InvalidResponse); }
     private Task<T> Download<T>(string path, string type, string revisionHeader, string accessToken, string expected,
-        int maximum, Func<byte[], HttpResponseMessage, T> decode, CancellationToken token) => Guard(async () =>
+        int maximum, Func<byte[], HttpResponseMessage, T> decode, CancellationToken token) => Guard(async requestToken =>
     {
         if (!ApiPayloads.ValidRevision(expected)) throw new ApiException(ApiFailure.InvalidResponse);
         using var request = Request(path, accessToken, type);
-        using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token);
+        using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, requestToken);
         Success(response, type);
         if (Header(response, revisionHeader) != expected) throw new ApiException(ApiFailure.Changed);
-        return decode(await ReadBoundedAsync(response, maximum, token), response);
+        return decode(await ReadBoundedAsync(response, maximum, requestToken), response);
     }, token);
-    public Task<SavedEvents> DownloadEventsAsync(int schoolYear, SavedEvents? saved, CancellationToken token = default) => Guard(async () =>
+    public Task<SavedEvents> DownloadEventsAsync(int schoolYear, SavedEvents? saved, CancellationToken token = default) => Guard(async requestToken =>
     {
         if (schoolYear is < 1900 or > 9998) throw new ApiException(ApiFailure.InvalidResponse);
         if (saved is not null) saved.Payload.Validated(schoolYear);
         using var request = Request("events?schoolYear=" + schoolYear, accept: "application/json");
         if (saved?.ApiETag is { } sent)
         { if (!ApiPayloads.ValidETag(sent)) throw new ApiException(ApiFailure.InvalidResponse); request.Headers.IfNoneMatch.Add(EntityTagHeaderValue.Parse(sent)); }
-        using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token);
+        using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, requestToken);
         if (response.StatusCode == HttpStatusCode.NotFound) throw new ApiException(ApiFailure.UnsupportedYear);
         var etag = response.Headers.Contains("ETag") ? ValidETag(response) : null;
-        var bytes = await ReadBoundedAsync(response, response.StatusCode == HttpStatusCode.NotModified ? 0 : 1_000_000, token);
+        var bytes = await ReadBoundedAsync(response, response.StatusCode == HttpStatusCode.NotModified ? 0 : 1_000_000, requestToken);
         if (response.StatusCode == HttpStatusCode.NotModified)
         {
             if (saved?.ApiETag is not { } old || etag is null || ApiPayloads.OpaqueETag(old) != ApiPayloads.OpaqueETag(etag)) throw new ApiException(ApiFailure.InvalidResponse);
