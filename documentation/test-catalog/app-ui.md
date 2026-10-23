@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`a3dd3170382c4417bce1f21b073ef8474ef56f7c76f6bdb51fb456ba68bbbb38`
+`4ec72b4e3ddc01f7a35a51d5baeb85716bd6ac8a3ed7d1e66797ec0e311cb51c`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -105,3 +105,7 @@
 ## [tests/Takupoke.Integration.Tests/BrowserLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/BrowserLifecycleTests.cs)
 
 - `ActualBrowserMethodsOnlyCloseTheirOwnWindowAcrossInitializationRaces`
+
+## [tests/Takupoke.Integration.Tests/PdfDialogLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/PdfDialogLifecycleTests.cs)
+
+- `ActualPdfDialogAndButtonMethodsKeepModalOwnershipDuringReadsAndFailures`

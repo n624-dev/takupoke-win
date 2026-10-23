@@ -78,55 +78,65 @@ public sealed partial class MainWindow
     }
     private async Task ShowPdf(MaterialKind kind, bool accepted)
     {
-        var epoch = _model.PrivateEpoch;
-        var bytes = await _model.ReadPdfAsync(kind, accepted);
-        using var source = new InMemoryRandomAccessStream();
+        if (_dialogOpen || _model.Locked) return;
+        var owner = new object(); _dialogOwner = owner;
+        Image? image = null; ContentDialog? dialog = null;
         try
         {
-            using (var writer = new DataWriter(source)) { writer.WriteBytes(bytes); await writer.StoreAsync(); writer.DetachStream(); }
-        }
-        finally { CryptographicOperations.ZeroMemory(bytes); }
-        source.Seek(0);
-        var document = await PdfDocument.LoadFromStreamAsync(source);
-        if (epoch != _model.PrivateEpoch || _model.Locked) return;
-        if (document.PageCount is < 1 or > 12) { await Message("PDFを表示できません", "ページ数が対応範囲外です。"); return; }
-        var image = new Image(); AutomationProperties.SetName(image, "保存した資料のPDFページ。読み取った内容は解析結果から確認できます。");
-        _pdfImage = image;
-        var label = Text(""); var pageNumber = 0u; var zoom = new Slider { Header = "表示幅", Minimum = 300, Maximum = 1600, Value = 700 };
-        var rendering = false; var pending = false;
-        async Task RenderPage()
-        {
-            if (epoch != _model.PrivateEpoch || _model.Locked) return;
-            pending = true; if (rendering) return; rendering = true;
+            var epoch = _model.PrivateEpoch;
+            var bytes = await _model.ReadPdfAsync(kind, accepted);
+            using var source = new InMemoryRandomAccessStream();
             try
             {
-                while (pending && epoch == _model.PrivateEpoch && !_model.Locked)
-                {
-                pending = false; var requestedPage = pageNumber; var requestedWidth = (uint)zoom.Value;
-                using var page = document.GetPage(requestedPage); using var rendered = new InMemoryRandomAccessStream();
-                await page.RenderToStreamAsync(rendered, new PdfPageRenderOptions { DestinationWidth = requestedWidth });
-                rendered.Seek(0); var bitmap = new BitmapImage(); await bitmap.SetSourceAsync(rendered);
-                if (epoch != _model.PrivateEpoch || _model.Locked) return;
-                if (requestedPage != pageNumber || requestedWidth != (uint)zoom.Value) { pending = true; continue; }
-                image.Source = bitmap;
-                label.Text = $"{requestedPage + 1} / {document.PageCount}ページ";
-                }
+                using (var writer = new DataWriter(source)) { writer.WriteBytes(bytes); await writer.StoreAsync(); writer.DetachStream(); }
             }
-            finally { rendering = false; }
-        }
-        var controls = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
-        controls.Children.Add(Button("前のページ", async () => { if (pageNumber > 0) { pageNumber--; await RenderPage(); } })); controls.Children.Add(label);
-        controls.Children.Add(Button("次のページ", async () => { if (pageNumber + 1 < document.PageCount) { pageNumber++; await RenderPage(); } }));
-        zoom.ValueChanged += async (_, _) => await RenderPage();
-        _dialogOpen = true;
-        try
-        {
+            finally { CryptographicOperations.ZeroMemory(bytes); }
+            source.Seek(0);
+            var document = await PdfDocument.LoadFromStreamAsync(source);
+            if (epoch != _model.PrivateEpoch || _model.Locked) return;
+            if (document.PageCount is < 1 or > 12) { if (ReferenceEquals(_dialogOwner, owner)) _dialogOwner = null; await Message("PDFを表示できません", "ページ数が対応範囲外です。"); return; }
+            image = new Image(); AutomationProperties.SetName(image, "保存した資料のPDFページ。読み取った内容は解析結果から確認できます。");
+            _pdfImage = image;
+            var label = Text(""); var pageNumber = 0u; var zoom = new Slider { Header = "表示幅", Minimum = 300, Maximum = 1600, Value = 700 };
+            var rendering = false; var pending = false;
+            async Task RenderPage()
+            {
+                if (epoch != _model.PrivateEpoch || _model.Locked) return;
+                pending = true; if (rendering) return; rendering = true;
+                try
+                {
+                    while (pending && epoch == _model.PrivateEpoch && !_model.Locked)
+                    {
+                    pending = false; var requestedPage = pageNumber; var requestedWidth = (uint)zoom.Value;
+                    using var page = document.GetPage(requestedPage); using var rendered = new InMemoryRandomAccessStream();
+                    await page.RenderToStreamAsync(rendered, new PdfPageRenderOptions { DestinationWidth = requestedWidth });
+                    rendered.Seek(0); var bitmap = new BitmapImage(); await bitmap.SetSourceAsync(rendered);
+                    if (epoch != _model.PrivateEpoch || _model.Locked) return;
+                    if (requestedPage != pageNumber || requestedWidth != (uint)zoom.Value) { pending = true; continue; }
+                    image.Source = bitmap;
+                    label.Text = $"{requestedPage + 1} / {document.PageCount}ページ";
+                    }
+                }
+                finally { rendering = false; }
+            }
+            var controls = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
+            controls.Children.Add(Button("前のページ", async () => { if (pageNumber > 0) { pageNumber--; await RenderPage(); } })); controls.Children.Add(label);
+            controls.Children.Add(Button("次のページ", async () => { if (pageNumber + 1 < document.PageCount) { pageNumber++; await RenderPage(); } }));
+            zoom.ValueChanged += async (_, _) => await RenderPage();
             await RenderPage();
             if (epoch != _model.PrivateEpoch || _model.Locked) return;
-            _pdfDialog = new ContentDialog { XamlRoot = RootGrid.XamlRoot, Title = "保存したPDF", CloseButtonText = "閉じる",
+            dialog = new ContentDialog { XamlRoot = RootGrid.XamlRoot, Title = "保存したPDF", CloseButtonText = "閉じる",
                 Content = Panel(controls, zoom, new ScrollViewer { Content = image, MaxHeight = 450, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto }) };
-            await _pdfDialog.ShowAsync();
+            _pdfDialog = dialog;
+            await dialog.ShowAsync();
         }
-        finally { image.Source = null; _pdfImage = null; _pdfDialog = null; _dialogOpen = false; Render(); }
+        finally
+        {
+            if (image != null) image.Source = null;
+            if (ReferenceEquals(_pdfImage, image)) _pdfImage = null;
+            if (ReferenceEquals(_pdfDialog, dialog)) _pdfDialog = null;
+            if (ReferenceEquals(_dialogOwner, owner)) _dialogOwner = null;
+            Render();
+        }
     }
 }

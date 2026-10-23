@@ -15,7 +15,8 @@ public sealed partial class MainWindow : Window
     private readonly AppViewModel _model;
     private string _page = "home";
     private string? _renderedPage;
-    private bool _dialogOpen;
+    private object? _dialogOwner;
+    private bool _dialogOpen => _dialogOwner != null;
     private ContentDialog? _activeDialog;
     private bool _ready;
     private bool _foregroundRequested;
@@ -255,21 +256,28 @@ public sealed partial class MainWindow : Window
     private async Task<ContentDialogResult> Dialog(string title, UIElement content, string primary = "閉じる",
         string? secondary = null, Action<ContentDialog>? configure = null)
     {
-        _dialogOpen = true;
-        RegisterPopupTree(content);
+        if (_dialogOpen) return ContentDialogResult.None;
+        var owner = new object(); _dialogOwner = owner;
+        ContentDialog? dialog = null;
         try
         {
+            RegisterPopupTree(content);
             var scroll = new ScrollViewer { Content = new Border { Child = content, Padding = new Thickness(0, 4, 12, 8) },
                 MaxHeight = 560, VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
                 HorizontalScrollMode = ScrollMode.Disabled, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled };
-            var dialog = new ContentDialog { XamlRoot = RootGrid.XamlRoot, Title = title,
+            dialog = new ContentDialog { XamlRoot = RootGrid.XamlRoot, Title = title,
                 Content = scroll,
                 PrimaryButtonText = primary, CloseButtonText = secondary ?? "", DefaultButton = ContentDialogButton.Primary };
             _activeDialog = dialog;
             configure?.Invoke(dialog);
             return await dialog.ShowAsync();
         }
-        finally { _activeDialog = null; _dialogOpen = false; Render(); }
+        finally
+        {
+            if (ReferenceEquals(_activeDialog, dialog)) _activeDialog = null;
+            if (ReferenceEquals(_dialogOwner, owner)) _dialogOwner = null;
+            Render();
+        }
     }
     private Task Message(string title, string message) => Dialog(title, Text(message));
     private async Task SelectMaterial(MaterialKind kind)
