@@ -123,3 +123,11 @@ sourcee9e1413＋追加actual Coordinator/store回帰、Linux/.NET10.0.402。修�
 source19d9bee＋実XLSX回帰で7件中5失敗（200ms）。1/1.0は通過、01/001/全角/01.0はknownの年keyが1と一致せず「全」行の展開で失敗。iOSも実ZIP→Reader→Normalizerで同じunknownAllを再現。現行/元版のYearsの検証済みIntと戻す生文字列を比較し、単一年も範囲記法と同じ数値から文字列にする。受理範囲は拡大せず、AIや小数.0処理・全展開を保持。Win解析版7→8、iOS8→9で旧解析を更新対象にする。29の説明回帰は再取得/再起動後とも1件/失敗0（141ms）。
 
 32修正後7件/失敗0（163ms）、両方向のrange・選択可能な1_CNと「全」の一致を確認した。後続全体はCore223件/失敗0（1秒）、Integration292件/失敗0（8秒）。29はPDF表示説明だけ、32は学年keyと解析版だけの修正で、PDF読取の受理規則はこのbranchでは変更しない。
+
+33の追加fixture回帰の最初はassertの括弧誤りでC# CS1002/CS1519、Readerへ未到達。製品不具合の証拠にせず、既存positive assertionと同じParse(...).Lessons→Assert.Single→Names.Subjectの順へテストだけ直して再実行する。製品コードは未変更。
+
+## ページ可視範囲と注釈（33）
+
+source825a8f9＋追加架空real-font PDF回帰、Linux/.NET10.0.402、4件中2件失敗（434ms）。完全Crop/注釈なしは同じ授業を受理し、授業をCropBoxから外した版と不透明白Square注釈版も例外なしで受理する修正前動作を確認。描画命令・元フォント・授業文字は対照と同一。現在/ff2166fのReaderはMediaBoxで配置し、注釈を検証しない。候補はCropBoxとMediaBoxの交差領域へ全文字/採用罫線が含まれるか検証し、未検証の非空Annotsはページを拒否する。注釈のappearanceや透明度を推測して無視しない。正常結果保持は既存実Coordinator/store回帰を新しい2条件にも適用する。Reader共通なので通常/特別の解析版を更新する。
+
+iOS対照:Certifiedの通常/特別は既にCropBox==MediaBoxを要求する。固定PDF239のStrict入口は異なるため、Certifiedの検査をStrictにも実行済みとは扱わない。この既知のStrict固定条件との整合は後続で扱い、今回Windowsの成功だけでiOS交差確認を完了扱いにしない。

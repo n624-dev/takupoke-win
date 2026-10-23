@@ -92,13 +92,36 @@ public static class PdfPigLayoutReader
                 }
                 IReadOnlyList<PdfGlyph> glyphs = text is not null ? text.Finish(page.Text).Select(transform.Glyph).ToArray() : SpecialGlyphs(page, transform, token);
                 paint?.Validate();
-                var layout = new PdfPageLayout(transform.Width, transform.Height, glyphs, paths.Finish()); layout.Validate(number); output.Add(layout);
+                var rules = paths.Finish();
+                ValidatePageVisibility(document, page, transform, glyphs, rules);
+                var layout = new PdfPageLayout(transform.Width, transform.Height, glyphs, rules); layout.Validate(number); output.Add(layout);
             }
             return output;
         }
         catch (PdfParseException) { throw; }
         catch (OperationCanceledException) { throw; }
         catch { throw new PdfParseException("P01"); }
+    }
+    private static void ValidatePageVisibility(PdfDocument document, Page page, PdfDisplayTransform display,
+        IReadOnlyList<PdfGlyph> glyphs, IReadOnlyList<PdfRule> rules)
+    {
+        // Annotation appearance streams are not interpreted by this reader.
+        // Refuse uncertain overpainting instead of adopting hidden page text.
+        if (Get(page.Dictionary, "Annots") is { } annotations && Resolve<ArrayToken>(document, annotations).Data.Count != 0)
+            throw new PdfParseException("P01", page.Number);
+        var media = page.MediaBox.Bounds; var crop = page.CropBox.Bounds;
+        var left = Math.Max(media.Left, crop.Left); var right = Math.Min(media.Right, crop.Right);
+        var bottom = Math.Max(media.Bottom, crop.Bottom); var top = Math.Min(media.Top, crop.Top);
+        if (!(right > left && top > bottom)) throw new PdfParseException("P01", page.Number);
+        var corners = new[] { display.Point(left, bottom), display.Point(left, top), display.Point(right, bottom), display.Point(right, top) };
+        var x1 = corners.Min(p => p.X); var x2 = corners.Max(p => p.X);
+        var y1 = corners.Min(p => p.Y); var y2 = corners.Max(p => p.Y);
+        bool Contains(double a, double b, double c, double d) =>
+            double.IsFinite(a) && double.IsFinite(b) && double.IsFinite(c) && double.IsFinite(d)
+            && a >= x1 - 0.000001 && b >= y1 - 0.000001 && c <= x2 + 0.000001 && d <= y2 + 0.000001;
+        if (glyphs.Any(g => !Contains(g.X, g.Y, g.X + g.Width, g.Y + g.Height))
+            || rules.Any(r => !Contains(Math.Min(r.X1, r.X2), Math.Min(r.Y1, r.Y2), Math.Max(r.X1, r.X2), Math.Max(r.Y1, r.Y2))))
+            throw new PdfParseException("P01", page.Number);
     }
     private static byte[] Bytes(string? literal, ReadOnlyMemory<byte> bytes)
     { if (literal is null) return bytes.ToArray(); if (literal.Any(c => c > 255)) throw new PdfParseException("P01"); return Encoding.Latin1.GetBytes(literal); }

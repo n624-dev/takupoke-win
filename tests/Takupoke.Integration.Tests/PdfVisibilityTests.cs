@@ -12,6 +12,17 @@ public sealed class PdfVisibilityTests
 {
     private static string Fixtures => Path.Combine(AppContext.BaseDirectory, "fixtures");
     private static TimetableAnalysis Parse(byte[] bytes) => PdfScheduleParser.Timetable(PdfPigLayoutReader.Read(bytes, MaterialKind.Timetable));
+    [Theory]
+    [InlineData("/CropBox [0 420 2000 500]")]
+    [InlineData("/Annots [<< /Type /Annot /Subtype /Square /Rect [162 362 198 408] /C [1 1 1] /IC [1 1 1] /CA 1 /BS << /W 0 >> >>]")]
+    public void CroppedOutAndAnnotationObscuredTimetablesRejectTheWholeInput(string pageEntries)
+        => Assert.Equal("P01", Assert.Throws<PdfParseException>(() => Parse(FictionalTimetablePdf.Make(Fixtures, pageEntries: pageEntries))).Stage);
+    [Theory]
+    [InlineData("/CropBox [0 0 2000 500]")]
+    [InlineData("/Annots []")]
+    public void FullCropAndNoAnnotationControlsKeepTheSameLesson(string pageEntries)
+        => Assert.Equal("架空科目A", Assert.Single(Parse(FictionalTimetablePdf.Make(Fixtures, pageEntries: pageEntries)).Lessons).Names.Subject);
+
     [Fact]
     public void RealFontControlUsesItsActualCidMappingAndProducesOneFictionalLesson()
     {
@@ -133,14 +144,21 @@ public sealed class PdfVisibilityTests
         foreach (var command in new[] { "2 g", "-1 0 0 rg", "/Pattern cs /FictionalPattern scn" })
             Assert.Throws<PdfParseException>(() => Parse(FictionalTimetablePdf.Make(Fixtures, command)));
     }
-    [Fact]
-    public async Task InvisibleReplacementKeepsThePreviousAnalysisAndBothOriginalsAcrossRestart()
+    [Theory]
+    [InlineData("white")]
+    [InlineData("crop")]
+    [InlineData("annotation")]
+    public async Task InvisibleReplacementKeepsThePreviousAnalysisAndBothOriginalsAcrossRestart(string failureMode)
     {
         var root = Path.Combine(Path.GetTempPath(), "takupoke-pdf-visibility-" + Guid.NewGuid().ToString("N")); Directory.CreateDirectory(root);
         using var protector = new Protector();
         try
         {
-            var file = Path.Combine(root, "fictional.pdf"); var black = FictionalTimetablePdf.Make(Fixtures); var white = FictionalTimetablePdf.Make(Fixtures, "1 g");
+            var file = Path.Combine(root, "fictional.pdf"); var black = FictionalTimetablePdf.Make(Fixtures); var white = failureMode switch {
+                "crop" => FictionalTimetablePdf.Make(Fixtures, pageEntries: "/CropBox [0 420 2000 500]"),
+                "annotation" => FictionalTimetablePdf.Make(Fixtures, pageEntries: "/Annots [<< /Type /Annot /Subtype /Square /Rect [162 362 198 408] /C [1 1 1] /IC [1 1 1] /CA 1 >>]"),
+                _ => FictionalTimetablePdf.Make(Fixtures, "1 g")
+            };
             var oldId = ""; var currentId = "";
             await using (var store = new SchoolDataStore(root, protector))
             {

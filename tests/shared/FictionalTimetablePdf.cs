@@ -8,7 +8,7 @@ namespace Takupoke.Integration.Tests;
 public static class FictionalTimetablePdf
 {
     public static byte[] Make(string root, string subjectPaint = "0 g", string? backgroundPaint = null,
-        bool backgroundAfterText = false, bool extraWhiteCell = false, string? graphicsState = null)
+        bool backgroundAfterText = false, bool extraWhiteCell = false, string? graphicsState = null, string? pageEntries = null)
     {
         using var metadata = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(root, "fictional-noto.json")));
         var map = metadata.RootElement.GetProperty("glyphs");
@@ -49,7 +49,7 @@ public static class FictionalTimetablePdf
         {
             Ascii("<< /Type /Catalog /Pages 2 0 R >>"),
             Ascii("<< /Type /Pages /Kids [3 0 R] /Count 1 >>"),
-            Ascii("<< /Type /Page /Parent 2 0 R /MediaBox [0 0 2000 500] /Resources << " + resources + " >> /Contents 5 0 R >>"),
+            Ascii("<< /Type /Page /Parent 2 0 R /MediaBox [0 0 2000 500] /Resources << " + resources + " >> /Contents 5 0 R " + pageEntries + " >>"),
             Ascii("<< /Type /Font /Subtype /Type0 /BaseFont /FictionalNotoCJKSubset /Encoding /Identity-H /DescendantFonts [8 0 R] /ToUnicode 6 0 R >>"),
             Stream(Ascii(content.ToString())), Stream(Ascii(cmap.ToString())),
             Ascii($"<< /Type /FontDescriptor /FontName /FictionalNotoCJKSubset /Flags 4 /FontBBox [-1000 -1200 3000 3000] /ItalicAngle 0 /Ascent {ascent} /Descent {descent} /CapHeight 700 /StemV 80 /FontFile3 9 0 R >>"),
