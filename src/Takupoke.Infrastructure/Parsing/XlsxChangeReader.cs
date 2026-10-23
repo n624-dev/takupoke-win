@@ -178,7 +178,7 @@ public static partial class XlsxChangeReader
     {
         // A spreadsheet date is its written calendar day. Validate the entire
         // typed ISO value, including its clock/offset, without timezone shifts.
-        var match = Regex.Match(value, @"^([0-9]{4}-[0-9]{2}-[0-9]{2})(?:T([0-9]{2}):([0-9]{2}):([0-9]{2})(?:\.[0-9]{1,9})?(?:Z|([+-])([0-9]{2}):([0-9]{2}))?)?$");
+        var match = Regex.Match(value, @"\A([0-9]{4}-[0-9]{2}-[0-9]{2})(?:T([0-9]{2}):([0-9]{2}):([0-9]{2})(?:\.[0-9]{1,9})?(?:Z|([+-])([0-9]{2}):([0-9]{2}))?)?\z");
         if (!match.Success) throw new ChangeParseException(ChangeErrorCode.Date, row);
         if (match.Groups[2].Success && (int.Parse(match.Groups[2].Value) > 23
             || int.Parse(match.Groups[3].Value) > 59 || int.Parse(match.Groups[4].Value) > 59))

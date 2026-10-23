@@ -10,6 +10,32 @@ namespace Takupoke.Integration.Tests;
 
 public sealed class SharedDataUpdaterTests
 {
+    [Fact]
+    public async Task LinksAuthenticationCipherFailuresRemainErrors()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "takupoke-update-tests-" + Guid.NewGuid().ToString("N"));
+        using var protector = new Protector();
+        try
+        {
+            await using var store = new SchoolDataStore(root, protector);
+            var lease = await store.BeginAsync(); await store.WriteAsync(lease, "api.links", "fictional format");
+            await using (var connection = new Microsoft.Data.Sqlite.SqliteConnection(new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder
+                { DataSource = Path.Combine(root, "school", "school.sqlite"), Pooling = false }.ToString()))
+            {
+                await connection.OpenAsync();
+                using var command = connection.CreateCommand();
+                command.CommandText = "UPDATE entry SET payload = $bytes WHERE key = 'api.links'";
+                var tampered = new byte[64]; tampered[0] = 1; // Keep the envelope version; fail AES authentication.
+                command.Parameters.AddWithValue("$bytes", tampered); await command.ExecuteNonQueryAsync();
+            }
+            using var http = new HttpClient(new Handler());
+            var updater = new SharedDataUpdater(new(http, new("https://example.invalid/")), store);
+            await Assert.ThrowsAnyAsync<CryptographicException>(() => updater.LoadLinksAsync(lease));
+            await Assert.ThrowsAnyAsync<CryptographicException>(() => updater.CheckDetailedAsync(DataSet.Links));
+        }
+        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
+
     [Theory]
     [InlineData("\"fictional incompatible links\"")]
     [InlineData("{\"revision\":\"invalid\",\"payload\":{}}")]
