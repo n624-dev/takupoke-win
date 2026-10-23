@@ -15,9 +15,11 @@ public sealed partial class MainWindow : Window
     private readonly AppViewModel _model;
     private string _page = "home";
     private string? _renderedPage;
-    private bool _dialogOpen;
+    private object? _dialogOwner;
+    private bool _dialogOpen => _dialogOwner != null;
     private ContentDialog? _activeDialog;
     private bool _ready;
+    private bool _foregroundRequested;
     private bool _selectingMaterial;
     private readonly Windows.UI.ViewManagement.AccessibilitySettings _accessibility = new();
     private readonly Windows.UI.ViewManagement.UISettings _uiSettings = new();
@@ -89,7 +91,7 @@ public sealed partial class MainWindow : Window
             }
             catch { await _model.SetLockedAsync(true); await Message("Windowsとの連携を開始できません", "ロック通知を受け取れないため学校データの利用を停止しました。通常ユーザー権限で再起動してください。"); }
         }
-        await _model.InitializeAsync();
+        await _model.InitializeLocalAsync();
         if (_desktop is not null)
         {
             try { _desktop.SetTray(_model.Preferences.KeepInTray); }
@@ -99,8 +101,9 @@ public sealed partial class MainWindow : Window
                 try { await DesktopIntegration.SetAutoStartAsync(true); }
                 catch { await Message("自動起動を設定できません", "Windowsへのサインイン時に起動する設定を反映できませんでした。設定の「通知・バックグラウンド」で設定し直してください。"); }
             }
-            if (_desktop.TrayAvailable && Program.StartInBackground) AppWindow.Hide();
+            if (_desktop.TrayAvailable && Program.StartInBackground && _model.Preferences.SetupCompleted && !_foregroundRequested) AppWindow.Hide();
         }
+        await _model.RefreshAfterInitializationAsync();
         OfferInitialSetup();
     }
     private void OfferInitialSetup()
@@ -108,7 +111,7 @@ public sealed partial class MainWindow : Window
         if (_ready && !_initialSetupOffered && !_model.OfflineTest && !_model.Locked && !_model.Busy && _model.PreferencesReady && !_model.Preferences.SetupCompleted)
             _ = InitialSetup();
     }
-    private void ShowWindow() { AppWindow.Show(); Activate(); }
+    private void ShowWindow() { _foregroundRequested = true; AppWindow.Show(); Activate(); }
     private void Navigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
         if (args.SelectedItem is NavigationViewItem item) _page = (string)item.Tag;
@@ -253,21 +256,28 @@ public sealed partial class MainWindow : Window
     private async Task<ContentDialogResult> Dialog(string title, UIElement content, string primary = "閉じる",
         string? secondary = null, Action<ContentDialog>? configure = null)
     {
-        _dialogOpen = true;
-        RegisterPopupTree(content);
+        if (_dialogOpen) return ContentDialogResult.None;
+        var owner = new object(); _dialogOwner = owner;
+        ContentDialog? dialog = null;
         try
         {
+            RegisterPopupTree(content);
             var scroll = new ScrollViewer { Content = new Border { Child = content, Padding = new Thickness(0, 4, 12, 8) },
                 MaxHeight = 560, VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
                 HorizontalScrollMode = ScrollMode.Disabled, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled };
-            var dialog = new ContentDialog { XamlRoot = RootGrid.XamlRoot, Title = title,
+            dialog = new ContentDialog { XamlRoot = RootGrid.XamlRoot, Title = title,
                 Content = scroll,
                 PrimaryButtonText = primary, CloseButtonText = secondary ?? "", DefaultButton = ContentDialogButton.Primary };
             _activeDialog = dialog;
             configure?.Invoke(dialog);
             return await dialog.ShowAsync();
         }
-        finally { _activeDialog = null; _dialogOpen = false; Render(); }
+        finally
+        {
+            if (ReferenceEquals(_activeDialog, dialog)) _activeDialog = null;
+            if (ReferenceEquals(_dialogOwner, owner)) _dialogOwner = null;
+            Render();
+        }
     }
     private Task Message(string title, string message) => Dialog(title, Text(message));
     private async Task SelectMaterial(MaterialKind kind)

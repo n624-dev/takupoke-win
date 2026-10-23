@@ -156,6 +156,11 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     }
     public async Task InitializeAsync()
     {
+        await InitializeLocalAsync();
+        await RefreshAfterInitializationAsync();
+    }
+    internal async Task InitializeLocalAsync()
+    {
         await RunAsync(async token =>
         {
             Preferences = await _preferences.LoadAsync(token); PreferencesReady = true;
@@ -163,6 +168,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             await ReloadAsync(token);
         });
         _timer.Start();
+    }
+    internal async Task RefreshAfterInitializationAsync()
+    {
         if (!OfflineTest) await RefreshAutomaticallyAsync(force: true);
     }
     private void InitializePlatform()

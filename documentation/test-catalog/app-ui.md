@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`ddd3b5bcbf411d716d21ea412e1198ee3e0ca076e8ea645ccf52b0c0a0116661`
+`4ec72b4e3ddc01f7a35a51d5baeb85716bd6ac8a3ed7d1e66797ec0e311cb51c`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -43,6 +43,7 @@
 - [tests/Takupoke.Win.UITests/startup-smoke.ps1](../../tests/Takupoke.Win.UITests/startup-smoke.ps1)
 - [src/Takupoke.Win/MainWindow.PreferenceSelection.cs](../../src/Takupoke.Win/MainWindow.PreferenceSelection.cs)
 - [tests/Takupoke.Integration.Tests/AppPlatformFakes.cs](../../tests/Takupoke.Integration.Tests/AppPlatformFakes.cs)
+- [tests/Takupoke.Integration.Tests/CSharpMethodProbe.cs](../../tests/Takupoke.Integration.Tests/CSharpMethodProbe.cs)
 
 ## [tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs](../../tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs)
 
@@ -96,3 +97,15 @@
 ## [tests/Takupoke.Win.UITests/Program.RetentionRecovery.cs](../../tests/Takupoke.Win.UITests/Program.RetentionRecovery.cs)
 
 - `CheckRetentionRecovery`
+
+## [tests/Takupoke.Integration.Tests/StartupVisibilityTests.cs](../../tests/Takupoke.Integration.Tests/StartupVisibilityTests.cs)
+
+- `ActualInitializationAndLoadedMethodsPrepareBackgroundVisibilityBeforeWaitingForNetwork`
+
+## [tests/Takupoke.Integration.Tests/BrowserLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/BrowserLifecycleTests.cs)
+
+- `ActualBrowserMethodsOnlyCloseTheirOwnWindowAcrossInitializationRaces`
+
+## [tests/Takupoke.Integration.Tests/PdfDialogLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/PdfDialogLifecycleTests.cs)
+
+- `ActualPdfDialogAndButtonMethodsKeepModalOwnershipDuringReadsAndFailures`
