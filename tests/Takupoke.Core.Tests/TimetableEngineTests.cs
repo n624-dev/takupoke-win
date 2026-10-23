@@ -5,6 +5,83 @@ namespace Takupoke.Core.Tests;
 
 public sealed class TimetableEngineTests
 {
+    [Theory]
+    [InlineData(2, 3, "10:25", false)]
+    [InlineData(2, 3, "10:25", true)]
+    [InlineData(4, 5, "12:25", false)]
+    [InlineData(4, 5, "12:25", true)]
+    public void ChangeAndMakeupMergesRespectBreaksAndLunch(int start, int end, string gap, bool custom)
+    {
+        var times = new ScheduleTimes(1, [new(Day.Iso(), [new(1,"08:55","09:40"), new(2,"09:40","10:25"), new(3,"10:35","11:20"), new(4,"11:20","12:05"),
+            new(5,"12:55","13:40"), new(6,"13:40","14:25"), new(7,"14:35","15:20"), new(8,"15:20","16:05")])]).Validated();
+        foreach (var kind in new[] { "変更", "補講" })
+        {
+            var engine = new TimetableEngine(new(Changes: [Change($"{start},{end}", kind)], Times: custom ? times : null));
+            var block = Assert.Single(engine.Blocks(Day, "1_CN"));
+            Assert.NotNull(engine.CardTime(Day, "1_CN", block));
+            Assert.False(engine.IsInProgress(Day, "1_CN", block, DateTimeOffset.Parse(Day.Iso() + "T" + gap + ":00+09:00")));
+            var first = custom ? times.Time(Day, start)! : ScheduleTimes.Normal[start];
+            var last = custom ? times.Time(Day, end)! : ScheduleTimes.Normal[end];
+            Assert.True(engine.IsInProgress(Day, "1_CN", block, DateTimeOffset.Parse(Day.Iso() + "T" + first.Start + ":00+09:00")));
+            Assert.False(engine.IsInProgress(Day, "1_CN", block, DateTimeOffset.Parse(Day.Iso() + "T" + last.End + ":00+09:00")));
+        }
+    }
+    [Theory]
+    [InlineData(MaterialKind.Exam)]
+    [InlineData(MaterialKind.ExamReturn)]
+    public void IndependentSpecialCellsKeepTheirGapWhenVisuallyMerged(MaterialKind kind)
+    {
+        var clocks = new Dictionary<int, TimeRange> { [1] = new("09:00", "09:20"), [2] = new("09:30", "09:50") };
+        var source = new SpecialAnalysis(kind, 2032, [Day.Iso()], ["1_CN"], clocks,
+            new[] {1,2}.Select(period => new SpecialLesson(Day.Iso(), "1_CN", period, period, period, clocks[period], ["架空科目A"], 1)).ToArray(), kind == MaterialKind.ExamReturn ? Day.Iso() : null);
+        var engine = new TimetableEngine(new(Specials: [source]));
+        var block = Assert.Single(engine.Blocks(Day, "1_CN"));
+        Assert.False(engine.IsInProgress(Day, "1_CN", block, DateTimeOffset.Parse(Day.Iso() + "T09:25:00+09:00")));
+        Assert.True(engine.IsInProgress(Day, "1_CN", block, DateTimeOffset.Parse(Day.Iso() + "T09:00:00+09:00")));
+        Assert.False(engine.IsInProgress(Day, "1_CN", block, DateTimeOffset.Parse(Day.Iso() + "T09:50:00+09:00")));
+        var continuous = source with { Lessons = source.Lessons.Select(lesson => lesson with { SpanStart = 1, SpanEnd = 2, RecordedTime = new("09:00", "09:50") }).ToArray() };
+        var joined = new TimetableEngine(new(Specials: [continuous]));
+        Assert.True(joined.IsInProgress(Day, "1_CN", Assert.Single(joined.Blocks(Day, "1_CN")), DateTimeOffset.Parse(Day.Iso() + "T09:25:00+09:00")));
+    }
+    [Fact]
+    public void HiddenSpecialDoesNotRemoveTheVisibleCommonClock()
+    {
+        var exam = Special(MaterialKind.Exam, new("09:00", "09:40"));
+        exam = exam with { Lessons = exam.Lessons.Select(lesson => lesson with { Lines = ["留 架空試験科目A"] }).ToArray() };
+        var returns = Special(MaterialKind.ExamReturn, new("10:00", "10:20"));
+        foreach (var sources in new[] { new[] { exam, returns }, new[] { returns, exam } })
+        {
+            var data = new ScheduleData(Specials: sources);
+            var hidden = new TimetableEngine(data);
+            Assert.Single(hidden.Blocks(Day, "1_CN"));
+            Assert.Equal(new("10:00", "10:20"), hidden.CommonPeriodTime(1, [Day], ["1_CN"]));
+            Assert.Null(new TimetableEngine(data, international: true).CommonPeriodTime(1, [Day], ["1_CN"]));
+        }
+    }
+    [Fact]
+    public void ChangeClockIsUnknownWhenOneRequiredSpecialKindIsMissing()
+    {
+        var events = new[] { "テスト", "テスト返却" }.Select(tag => new SchoolEvent(Day.Iso(), "架空行事", tag)).ToArray();
+        var exam = Special(MaterialKind.Exam, new("09:00", "09:45"));
+        var returns = Special(MaterialKind.ExamReturn, new("09:00", "09:45"));
+        foreach (var sources in new[] { new[] { exam }, new[] { returns }, new[] { exam, returns } })
+        {
+            var change = Change();
+            var data = new ScheduleData(Changes: [change], Specials: sources, Events: events);
+            var engine = new TimetableEngine(data);
+            var block = Assert.Single(engine.Blocks(Day, "1_CN"));
+            Assert.Equal(sources.Length == 2 ? new TimeRange("09:00", "09:45") : null, engine.CardTime(Day, "1_CN", block));
+            Assert.Equal(sources.Length == 2 ? new TimeRange("09:00", "09:45") : null, engine.CommonPeriodTime(1, [Day], ["1_CN"]));
+            if (sources.Length == 1)
+            {
+                Assert.Equal(new TimeRange?[] { null }, engine.ChangeTimes(change));
+                Assert.False(engine.IsInProgress(Day, "1_CN", block, DateTimeOffset.Parse(Day.Iso() + "T09:20:00+09:00")));
+                var own = new TimetableEngine(data with { Changes = null });
+                Assert.NotNull(own.CardTime(Day, "1_CN", Assert.Single(own.Blocks(Day, "1_CN"))));
+            }
+        }
+    }
+
     [Fact]
     public void OverlappingSpecialCardsKeepIndividualTimesAndProgressWhileCommonAndChangeRemainAmbiguous()
     {

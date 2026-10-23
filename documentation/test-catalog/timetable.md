@@ -1,7 +1,7 @@
 # 時間割・授業名・時刻・日付
 
 対応関係・宣言名・実行方法のSHA-256：
-`568d2bb3ebc9cac060b82a37749414a27d6faa670d9d9ee6ee82eebfc321c3b2`
+`48dc557eb9fa80d98ddab4a42b3ab0dbfa797c7f45789be0ce64c77641fc6aee`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -33,6 +33,10 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Core.Tests/TimetableEngineTests.cs](../../tests/Takupoke.Core.Tests/TimetableEngineTests.cs)
 
+- `ChangeAndMakeupMergesRespectBreaksAndLunch`
+- `IndependentSpecialCellsKeepTheirGapWhenVisuallyMerged`
+- `HiddenSpecialDoesNotRemoveTheVisibleCommonClock`
+- `ChangeClockIsUnknownWhenOneRequiredSpecialKindIsMissing`
 - `OverlappingSpecialCardsKeepIndividualTimesAndProgressWhileCommonAndChangeRemainAmbiguous`
 - `MergedSpecialCardsUseOnlyTheirOwnSourceAndNeverBorrowMissingTimes`
 - `AdjacentIdenticalLessonsMergeWithoutChangingInput`

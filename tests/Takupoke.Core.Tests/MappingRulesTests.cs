@@ -5,6 +5,55 @@ namespace Takupoke.Core.Tests;
 
 public sealed class MappingRulesTests
 {
+    [Fact]
+    public void ExactSubjectSpellingTakesPriorityWithinThePreferredClass()
+    {
+        var rules = new MappingRules([
+            new("架空科目A", "架空正式科目A", ["3_IT"]), new("架空科目Ａ", "架空別科目A", ["3_IT"]),
+            new("架空科目A", "架空共通科目A")], [], [], [new("架空姓", "架空正式教員A", "架空正式科目A", "3_IT", 2032)]);
+        Assert.Equal("架空正式科目A", rules.CanonicalSubject("架空科目A", "3_IT"));
+        Assert.Equal("架空別科目A", rules.CanonicalSubject("架空科目Ａ", "3_IT"));
+        Assert.Null(rules.CanonicalSubject("架空科目𝔸", "3_IT"));
+        Assert.Equal("架空共通科目A", rules.CanonicalSubject("架空科目A", "2_IT"));
+        Assert.Equal("架空姓", rules.SeparateChangeField("架空科目A（架空姓）", "3_IT", 2032).Teacher);
+        Assert.Equal("", rules.SeparateChangeField("架空科目A（架空姓）", "3_IT", 2033).Teacher);
+    }
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void AnExplicitOrdinarySubjectIsNotHiddenByOmittedInternationalPrefix(bool specific)
+    {
+        var rules = new MappingRules([new("架空科目A", "架空一般科目A", specific ? ["2_IT"] : null),
+            new("留 架空科目A", "架空留学生科目A", ["2_IT"], true)], [], []);
+        Assert.Equal(!specific, rules.IsInternational("架空科目A", "2_IT"));
+        Assert.True(rules.IsInternational("留 架空科目A", "2_IT"));
+        Assert.False(rules.IsInternational("架空科目A", "3_IT"));
+    }
+    [Fact]
+    public void ConditionalTeacherUsesExactThenUniqueWidthMatchInItsOwnContext()
+    {
+        var subject = new MappingRule("留 架空正式科目A", "架空正式科目A", ["2_IT"], true);
+        var context = new TeacherContextRule("架空姓Ａ", "架空正式教員A", "架空正式科目A", "2_IT", 2032);
+        var rules = new MappingRules([subject], [], [], [context]);
+        Assert.Equal("架空姓A", rules.SeparateChangeField("架空正式科目A(架空姓A)", "2_IT", 2032).Teacher);
+        Assert.True(rules.IsInternationalChangeField("架空正式科目A(架空姓A)", "2_IT", 2032));
+        Assert.False(rules.IsInternationalChangeField("架空正式科目A(架空姓A)", "2_IT", 2033));
+        var ambiguous = new MappingRules([subject], [], [], [context, context with { Alias = "架空姓A", FullName = "架空別教員B" }]);
+        var change = new ScheduleChange("2032-04-05", "2_IT", "1", "", "架空正式科目A(架空姓A)", "", "", "", "架空原文", "架空正規化");
+        Assert.Equal("架空別教員B", ambiguous.Present(change).After.DetailTeacher);
+        Assert.Equal("", ambiguous.SeparateChangeField("架空正式科目A(架空姓𝔸)", "2_IT", 2032).Teacher);
+    }
+    [Fact]
+    public void OmittedInternationalShortSubjectStillResolvesItsConditionalTeacher()
+    {
+        var rules = new MappingRules([new("留 架空略科A", "架空正式科目A", ["2_IT"], true)], [], [],
+            [new("架空姓", "架空正式教員A", "架空正式科目A", "2_IT", 2032)]);
+        Assert.Equal("架空正式科目A", rules.CanonicalSubject("架空略科A", "2_IT"));
+        Assert.Equal("架空姓", rules.SeparateChangeField("架空略科A（架空姓）", "2_IT", 2032).Teacher);
+        Assert.True(rules.IsInternationalChangeField("架空略科A（架空姓）", "2_IT", 2032));
+        Assert.False(rules.IsInternationalChangeField("架空略科A（架空姓）", "3_IT", 2032));
+    }
+
     private static MappingRules Rules => new(
         [new("科A", "架空正式科目A"), new("科A", "架空専門科目A", ["2_CN"]), new("留 科B", "架空正式科目B", null, true)],
         [new("教A", "架空教員A"), new("教B", "架空教員B")], [new("室A", "架空教室A")],
@@ -42,7 +91,9 @@ public sealed class MappingRulesTests
     public void AmbiguousNormalizedAliasesAreNotGuessed()
     {
         var rules = new MappingRules([new("Ａ", "架空科目A"), new("A", "架空科目B")], [], []);
-        Assert.Null(rules.CanonicalSubject("A", "1_CN"));
+        Assert.Equal("架空科目B", rules.CanonicalSubject("A", "1_CN"));
+        Assert.Equal("架空科目A", rules.CanonicalSubject("Ａ", "1_CN"));
+        Assert.Null(rules.CanonicalSubject("𝔸", "1_CN"));
         Assert.Equal("架空科目B", rules.Apply(new("A"), "1_CN").SubjectFullName);
     }
 

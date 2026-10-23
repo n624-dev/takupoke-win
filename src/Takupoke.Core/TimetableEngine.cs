@@ -152,7 +152,11 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
     public TimeRange? SlotTime(DateOnly day, string className, int period)
     {
         var slot = Slot(day, period, className);
-        if (slot.SpecialLessons.Count > 0) return UniqueTime(slot.SpecialLessons.Select(item =>
+        var changed = slot.Changes.Any(Visible);
+        if (changed && !HasRequiredSpecialSources(day, className)) return null;
+        var visibleSpecials = changed ? slot.SpecialLessons.ToArray()
+            : slot.SpecialLessons.Where(item => Visible(className, item.Names.Subject)).ToArray();
+        if (visibleSpecials.Length > 0) return UniqueTime(visibleSpecials.Select(item =>
             UniqueTime(Specials.Where(s => s.Kind == item.Kind && s.Lessons.Contains(item.Lesson))
                 .Select(s => s.DisplayTime(item.Lesson, period, period)))));
         var sourceTimes = Specials.SelectMany(s => s.Lessons.Where(l => l.Date == day.Iso() && l.ClassName == className && l.Period == period)
@@ -168,6 +172,13 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
         var times = values.ToArray();
         var distinct = times.OfType<TimeRange>().Distinct().ToArray();
         return times.All(t => t is not null) && distinct.Length == 1 ? distinct[0] : null;
+    }
+
+    private bool HasRequiredSpecialSources(DateOnly day, string className)
+    {
+        var plan = Plan(day);
+        return (!plan.ApiTest || Specials.Any(source => source.Kind == MaterialKind.Exam && source.Applies(day, className)))
+            && (!plan.ApiTestReturn || Specials.Any(source => source.Kind == MaterialKind.ExamReturn && source.Applies(day, className)));
     }
 
     public TimeRange? CardTime(DateOnly day, string className, ScheduleBlock block)
@@ -186,6 +197,7 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
         }
         if (block.Content is ChangeContent)
         {
+            if (!HasRequiredSpecialSources(day, className)) return null;
             var applicable = Specials.Where(source => source.Applies(day, className)).ToArray();
             if (applicable.Length > 0) return UniqueTime(applicable.Select(source =>
             {
@@ -221,13 +233,41 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
         }
         return ranges.Select(range => CardTime(day, change.DisplayClassName, new(range.Start, range.End, new ChangeContent(change)))).ToArray();
     }
+    private IReadOnlyList<TimeRange?> ActivityTimes(DateOnly day, string className, ScheduleBlock block)
+    {
+        var item = block.Content as SpecialContent;
+        var sources = (item is null ? Specials.Where(source => source.Applies(day, className))
+            : Specials.Where(source => source.Kind == item.Kind && source.Lessons.Contains(item.Lesson))).ToArray();
+        if (sources.Length == 0) return item is not null ? [] :
+            Enumerable.Range(block.StartPeriod, block.EndPeriod - block.StartPeriod + 1)
+                .Select(period => data.Times?.Time(day, period) ?? ScheduleTimes.Normal.GetValueOrDefault(period)).ToArray();
+        HashSet<TimeRange>? agreed = null;
+        foreach (var source in sources)
+        {
+            var intervals = new HashSet<TimeRange>();
+            foreach (var period in Enumerable.Range(block.StartPeriod, block.EndPeriod - block.StartPeriod + 1))
+            {
+                var lessons = source.Lessons.Where(lesson => lesson.Date == day.Iso() && lesson.ClassName == className && lesson.Period == period
+                    && (item is null || SameNames(lesson.Names, item.Names))).ToArray();
+                var values = lessons.Length == 0 && item is null ? new[] { source.PeriodTime(day, period) }
+                    : lessons.Select(lesson => lesson.RecordedTime is null ? source.PeriodTime(day, period)
+                        : source.DisplayTime(lesson, block.StartPeriod, block.EndPeriod)).ToArray();
+                if (values.Length == 0 || values.Any(value => value is null)) return [];
+                intervals.UnionWith(values.OfType<TimeRange>());
+            }
+            if (agreed is not null && !agreed.SetEquals(intervals)) return [];
+            agreed = intervals;
+        }
+        return agreed?.Cast<TimeRange?>().ToArray() ?? [];
+    }
+
     public bool IsInProgress(DateOnly day, string className, ScheduleBlock block, DateTimeOffset now)
     {
         if (block.Content is ChangeContent { Change.IsCancellation: true } || day != SchoolDate.InJapan(now)) return false;
         var clocks = block.Content is NormalContent
             ? Enumerable.Range(block.StartPeriod, block.EndPeriod - block.StartPeriod + 1)
                 .Select(period => data.Times?.Time(day, period) ?? ScheduleTimes.Normal.GetValueOrDefault(period))
-            : new[] { CardTime(day, className, block) };
+            : CardTime(day, className, block) is null ? [] : ActivityTimes(day, className, block);
         var japan = now.ToOffset(TimeSpan.FromHours(9));
         var minute = japan.Hour * 60 + japan.Minute;
         return clocks.Any(time => time is not null && TimeRange.TryMinutes(time.Start, out var start)

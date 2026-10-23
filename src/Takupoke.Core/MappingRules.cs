@@ -15,25 +15,27 @@ public sealed record MappingRules(IReadOnlyList<MappingRule> Subjects, IReadOnly
         TeacherFullName = MetadataName(names.Teacher, Teachers) ?? names.TeacherFullName,
         RoomFullName = MetadataName(names.Room, Rooms) ?? names.RoomFullName
     };
-    public string? CanonicalSubject(string source, string className)
+    private MappingRule[] SubjectCandidates(string source, string className)
     {
         var text = Comparable(source);
-        if (text.Length == 0) return null;
-        var candidates = Subjects.Where(r => (r.Classes is null || r.Classes.Contains(className))
-            && (Comparable(r.Alias) == text || Comparable(r.FullName) == text)).ToArray();
-        var specific = candidates.Where(r => r.Classes?.Contains(className) == true).ToArray();
-        return Unique((specific.Length > 0 ? specific : candidates).Select(r => Comparable(r.FullName)));
+        if (text.Length == 0) return [];
+        bool Direct(MappingRule rule) => Comparable(rule.Alias) == text || Comparable(rule.FullName) == text;
+        var candidates = Subjects.Where(rule => (rule.Classes is null || rule.Classes.Contains(className))
+            && (Direct(rule) || rule.InternationalStudent == true && Comparable(rule.Alias).StartsWith("留 ", StringComparison.Ordinal)
+                && Comparable(rule.Alias)[2..] == text)).ToArray();
+        var specific = candidates.Where(rule => rule.Classes?.Contains(className) == true).ToArray();
+        var scoped = specific.Length == 0 ? candidates : specific;
+        var exact = scoped.Where(rule => rule.Alias == source || rule.FullName == source).ToArray();
+        if (exact.Length > 0) return exact;
+        var normalized = scoped.Where(Direct).ToArray();
+        return normalized.Length == 0 ? scoped : normalized;
     }
+    public string? CanonicalSubject(string source, string className) =>
+        Unique(SubjectCandidates(source, className).Select(rule => Comparable(rule.FullName)));
     public bool IsInternational(string source, string className)
     {
-        var key = Comparable(source);
-        if (key.Length == 0) return false;
-        var candidates = Subjects.Where(r => (r.Classes is null || r.Classes.Contains(className))
-            && (Comparable(r.Alias) == key || r.InternationalStudent == true && Comparable(r.Alias).StartsWith("留 ", StringComparison.Ordinal)
-                && Comparable(r.Alias)[2..] == key)).ToArray();
-        var specific = candidates.Where(r => r.Classes?.Contains(className) == true).ToArray();
-        var flags = (specific.Length > 0 ? specific : candidates).Select(r => r.InternationalStudent).OfType<bool>().Distinct().ToArray();
-        return flags.Length == 1 && flags[0];
+        var candidates = SubjectCandidates(source, className);
+        return candidates.Length > 0 && candidates.All(rule => rule.InternationalStudent == true);
     }
     private static string? Match(string source, IReadOnlyList<MappingRule> rules, string? className = null)
     {
@@ -92,8 +94,10 @@ public sealed record MappingRules(IReadOnlyList<MappingRule> Subjects, IReadOnly
     private string? ContextualTeacher(string alias, string subject, string className, int? year)
     {
         if (year is null || CanonicalSubject(subject, className) is not { } canonical) return null;
-        return Unique((TeacherContexts ?? []).Where(r => r.Alias == alias && r.ClassName == className && r.SchoolYear == year
-            && Comparable(r.Subject) == canonical).Select(r => r.FullName));
+        var candidates = (TeacherContexts ?? []).Where(r => Comparable(r.Alias) == Comparable(alias)
+            && r.ClassName == className && r.SchoolYear == year && Comparable(r.Subject) == canonical).ToArray();
+        var exact = candidates.Where(r => r.Alias == alias).ToArray();
+        return Unique((exact.Length > 0 ? exact : candidates).Select(r => r.FullName));
     }
     public LessonNames SeparateChangeField(string source, string? className = null, int? year = null)
     {

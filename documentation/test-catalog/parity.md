@@ -1,7 +1,7 @@
 # 固定iOS参照・独立期待値
 
 対応関係・宣言名・実行方法のSHA-256：
-`f79f5e4d7d1d764d5cedd3a876b20424c0ef222f03604563a7e78a5951f36a9b`
+`5120c78657f1f7cd8bf189f0baa84c6c20ea88ff544e5838a4e7a9e46ee15ff1`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -19,7 +19,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Core.Tests/IosParityTests.cs](../../tests/Takupoke.Core.Tests/IosParityTests.cs)
 
-- `ScheduleMatchesOriginalSwiftWithReviewedOverlapClockCorrection`
+- `ScheduleMatchesOriginalSwiftWithReviewedClockCorrections`
 - `XlsxNormalizationMatchesOriginalSwift`
 - `TextSearchClassesAndColorsMatchOriginalSwift`
 
