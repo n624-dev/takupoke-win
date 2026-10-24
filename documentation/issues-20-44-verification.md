@@ -174,6 +174,12 @@ source19d9bee＋実XLSX回帰で7件中5失敗（200ms）。1/1.0は通過、01/
 
 33の追加fixture回帰の最初はassertの括弧誤りでC# CS1002/CS1519、Readerへ未到達。製品不具合の証拠にせず、既存positive assertionと同じParse(...).Lessons→Assert.Single→Names.Subjectの順へテストだけ直して再実行する。製品コードは未変更。
 
+## iOS440.2公開後の交差回帰（iOS84/91）
+
+iOS440.2とWindows10457の公開・匿名配布照合の完了後に再開。Windowsの作業枝へ公開済みmain/test-only修正と10457の公開記録をmerge/cherry-pickし、33/34の未公開修正を保持した。公開後snapshotの未完了Windows issueは33〜35の3件で、既存PR1は今回の追加issueではない。
+
+catalogをPdfGrid/PdfScheduleParserで検索し、既存の文字断片・完全試験表・連続時刻・暗号化Store再起動を読んだ。iOS84と同じ中心行順→上端再sortがPdfGridにもあり、iOS91と同じ数値部分一致のregexがReadTimesにもある。高さの異なる3行（分割断片あり/なし）を完全通常Parserへ、不正時限/3桁分/Unicode数字を完全6ページSpecial Parserへ通す独立回帰を追加した。隣接した単独/連続見出しと全半角・空白・保存codecの対照も保持し、まず製品未変更で結果を確認する。
+
 ## ページ可視範囲と注釈（33）
 
 source825a8f9＋追加架空real-font PDF回帰、Linux/.NET10.0.402、4件中2件失敗（434ms）。完全Crop/注釈なしは同じ授業を受理し、授業をCropBoxから外した版と不透明白Square注釈版も例外なしで受理する修正前動作を確認。描画命令・元フォント・授業文字は対照と同一。現在/ff2166fのReaderはMediaBoxで配置し、注釈を検証しない。候補はCropBoxとMediaBoxの交差領域へ全文字/採用罫線が含まれるか検証し、未検証の非空Annotsはページを拒否する。注釈のappearanceや透明度を推測して無視しない。正常結果保持は既存実Coordinator/store回帰を新しい2条件にも適用する。Reader共通なので通常/特別の解析版を更新する。

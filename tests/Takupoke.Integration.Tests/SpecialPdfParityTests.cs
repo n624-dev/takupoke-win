@@ -7,6 +7,52 @@ namespace Takupoke.Integration.Tests;
 /// <summary>Fictional geometry and expected results match the iOS SpecialScheduleTests fixtures.</summary>
 public sealed class SpecialPdfParityTests
 {
+    private static PdfPageLayout ReplaceFirstExamTime(PdfPageLayout original, string text, bool consecutive = false)
+    {
+        var glyphs = original.Glyphs.Where(g => g.Y != 470 || (consecutive ? g.X < 300 : g.X >= 280)).ToList();
+        for (var index = 0; index < text.Length; index++)
+            glyphs.Add(new(text[index].ToString(), (consecutive ? 300 : 20) + index * 4, 470, 4, 8, 9000, 90000 + index));
+        return original with { Glyphs = glyphs };
+    }
+
+    [Theory]
+    [InlineData("11時限目8:50~9:35")]
+    [InlineData("1時限目7:00~8:500")]
+    [InlineData("١1時限目8:50~9:35")]
+    [InlineData("\U000104A11時限目8:50~9:35")]
+    public void SpecialPeriodHeadingsDoNotTruncateNumericTokens(string text)
+    {
+        var pages = Enumerable.Range(1, 6).Select(i => ReplaceFirstExamTime(ExamPage(i), text)).ToArray();
+        Assert.Equal("P05", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special(pages, MaterialKind.Exam)).Stage);
+    }
+
+    [Theory]
+    [InlineData("11・2時限連続7:00~8:00")]
+    [InlineData("1・2時限連続7:00~8:500")]
+    public void SpecialConsecutiveHeadingsDoNotAdoptNumericSuffix(string text)
+    {
+        var pages = Enumerable.Range(1, 6).Select(i => ReplaceFirstExamTime(ExamPage(i, merged: i == 1), text, true)).ToArray();
+        var result = PdfScheduleParser.Special(pages, MaterialKind.Exam);
+        Assert.All(result.Lessons.Where(l => l.ClassName == "1_1" && l.SpanEnd == 2),
+            lesson => Assert.Equal(new TimeRange("08:50", "10:35"), lesson.RecordedTime));
+        Assert.Contains(result.Lessons, l => l.ClassName == "1_1" && l.SpanEnd == 2);
+    }
+
+    [Theory]
+    [InlineData("1時限目8:50~9:35")]
+    [InlineData("１ 時限目 ８：５０〜９：３５")]
+    public void SpecialWholeNumericTokensRetainAdjacentAndWidthNormalizedHeadings(string text)
+    {
+        var pages = Enumerable.Range(1, 6).Select(i => ReplaceFirstExamTime(ExamPage(i, merged: i == 1), text)).ToArray();
+        var parsed = PdfScheduleParser.Special(pages, MaterialKind.Exam);
+        var result = Takupoke.Infrastructure.Storage.DataCodec.Decode<SpecialAnalysis>(
+            Takupoke.Infrastructure.Storage.DataCodec.Encode(parsed));
+        Assert.Equal(86, result.Lessons.Count);
+        Assert.Equal(new TimeRange("08:50", "09:35"), result.PeriodTimes[1]);
+        Assert.Contains(result.Lessons, l => l.ClassName == "1_1" && l.SpanEnd == 2
+            && l.RecordedTime == new TimeRange("08:50", "10:20"));
+    }
+
     [Fact]
     public void ExamMatchesIosCoveredClassesDatesTimesAndMergedLessons()
     {

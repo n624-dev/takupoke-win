@@ -66,6 +66,31 @@ public sealed class PdfParsingTests
         Assert.Equal("P20", Assert.Throws<PdfParseException>(() => Grid(12, 4, 4).TimetableText(new(0, 0, 50, 50))).Stage);
         Assert.Equal("P20", Assert.Throws<PdfParseException>(() => Grid(18, 10, 2).TimetableText(new(0, 0, 50, 50))).Stage);
     }
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void MixedHeightTimetableLinesKeepEstablishedVerticalOrder(bool split)
+    {
+        string[] expected = ["架空科目A", "架空教員B", "架空教室C"];
+        var original = TimetableLayout(expected[0], expected[1], expected[2]);
+        var glyphs = original.Glyphs.Where(g => g.SourceLine is not (4 or 5 or 6)).ToList();
+        for (var row = 0; row < expected.Length; row++)
+        {
+            var top = new[] { 100.0, 95.0, 126.0 }[row];
+            var height = new[] { 4.0, 30.0, 6.0 }[row];
+            if (split)
+            {
+                glyphs.Add(new(expected[row][..2], 41, top, 3, height, 100 + row * 2, 1000 + row * 2));
+                glyphs.Add(new(expected[row][2..], 44, top, 3, height, 101 + row * 2, 1001 + row * 2));
+            }
+            else glyphs.Add(new(expected[row], 41, top, 8, height, 100 + row, 1000 + row));
+        }
+        var page = original with { Glyphs = glyphs };
+        var lesson = Assert.Single(PdfScheduleParser.Timetable([page]).Lessons);
+        Assert.Equal(new LessonNames(expected[0], expected[1], expected[2]), lesson.Names);
+        Assert.Equal(expected, new PdfGrid(page).TimetableText(new(40, 90, 50, 140)));
+    }
+
     [Fact]
     public void TimetablePreservesParallelLessonsAndEmptyRoom()
     {

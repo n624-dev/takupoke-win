@@ -1,7 +1,7 @@
 # Strict PDF・文字・罫線・試験・返却
 
 対応関係・宣言名・実行方法のSHA-256：
-`052254a261d810700822f8ada8c8624645a1e51a7d46aee1f608d0f5c14aeab2`
+`5e603a426f5bbf3f23232c8c81a9ddb81f835877bb3c32063dcab2ba54925674`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -34,6 +34,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `CmapRejectsUnsupportedOrAmbiguousMappings`
 - `ContentOrderSurvivesOverlappingCharacterBounds`
 - `DisjointFragmentsMergeButContainedOrBackwardsFragmentsAreRejected`
+- `MixedHeightTimetableLinesKeepEstablishedVerticalOrder`
 - `TimetablePreservesParallelLessonsAndEmptyRoom`
 - `TimetableRejectsAmbiguousParallelPairing`
 - `CollapsesOnlyRepeatedVoicingMarksFollowingHalfwidthKana`
