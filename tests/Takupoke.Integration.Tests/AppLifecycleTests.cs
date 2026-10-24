@@ -76,6 +76,11 @@ public sealed class AppLifecycleTests
         public override long TimestampFrequency => 1;
         public override long GetTimestamp() => Seconds;
     }
+    private sealed class HomeClockProvider : TimeProvider
+    {
+        public DateTimeOffset Now = DateTimeOffset.Parse("2032-04-05T08:00:00+09:00");
+        public override DateTimeOffset GetUtcNow() => Now;
+    }
     private sealed class RevisionHandler : HttpMessageHandler
     {
         public int Calls, Unexpected;
@@ -151,6 +156,48 @@ public sealed class AppLifecycleTests
             Directory.Delete(Root, recursive: true);
         }
     }
+    [Fact]
+    public async Task HomeBoundaryNotificationsDoNotReplaceTheTimetablePeriodicClock()
+    {
+        await using var fixture = new Fixture(); await fixture.Preferences();
+        var clock = new HomeClockProvider(); var model = fixture.Create(clock: clock);
+        await model.InitializeLocalAsync();
+        var timer = Assert.Single(fixture.Dispatcher.Timers);
+        var start = clock.Now.AddHours(1);
+        model.ConfigureHomeClock([new("A", start, start.AddHours(1)), new("B", start.AddHours(1), start.AddHours(2))]);
+        var home = 0; var timetable = 0;
+        model.HomeClockChanged += () => home++; model.ClockChanged += () => timetable++;
+        clock.Now = clock.Now.AddSeconds(15); timer.Fire(); Assert.Equal(0, home); Assert.Equal(1, timetable);
+        clock.Now = start; timer.Fire(); Assert.Equal(1, home);
+        clock.Now = start.AddMinutes(30); timer.Fire(); Assert.Equal(1, home);
+        clock.Now = start.AddHours(1); timer.Fire(); Assert.Equal(2, home);
+        clock.Now = DateTimeOffset.Parse("2032-04-06T00:00:00+09:00"); timer.Fire(); Assert.Equal(3, home);
+        Assert.True(timetable >= 4); Assert.Equal(new DateOnly(2032,4,6), model.Today);
+        await model.SetLockedAsync(true);
+        clock.Now = clock.Now.AddDays(1); timer.Fire(); Assert.Equal(3, home);
+    }
+
+    [Fact]
+    public async Task ProjectionOwnersReuseAcceptedInputsAndDiscardPrivateReferencesOnLock()
+    {
+        await using var fixture = new Fixture(); await fixture.SeedExam(accepted: true);
+        var model = fixture.Create(); await model.InitializeAsync();
+        var original = model.HomeEngine; var presentation = model.Presentation;
+        Assert.NotEmpty(original.Blocks(model.Today, "3_IT"));
+        for (int i = 0; i < 100; i++) { Assert.Same(original, model.HomeEngine); Assert.Same(presentation, model.Presentation); }
+        await model.SavePreferencesAsync(p => p with { FavoriteIds = ["fictional-favorite"] });
+        Assert.Same(original, model.HomeEngine);
+        await model.SavePreferencesAsync(p => p with { IncludesChanges = false });
+        Assert.NotSame(original, model.Engine); Assert.Same(original, model.HomeEngine);
+        await model.SavePreferencesAsync(p => p with { International = true });
+        Assert.NotSame(original, model.HomeEngine);
+        await model.SavePreferencesAsync(p => p with { International = false, IncludesChanges = true });
+        Assert.Same(original, model.HomeEngine);
+        await model.SetLockedAsync(true);
+        Assert.NotSame(original, model.HomeEngine); Assert.NotSame(presentation, model.Presentation);
+        Assert.Empty(model.HomeEngine.Blocks(model.Today,"3_IT"));
+    }
+
     [Fact]
     public async Task LinkNavigationCoalescesAndCachedChecksAvoidBusyAndRedrawWithoutHidingErrorsOrRetention()
     {

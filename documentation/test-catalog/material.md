@@ -1,7 +1,7 @@
 # 原本取得・更新・保存・監視
 
 対応関係・宣言名・実行方法のSHA-256：
-`987e238397db655635ca60e7fa2a90d3e8e79d080aaf94e92375a783543bc077`
+`8a704b8bff706adf171afb68f78d1b52f5b470870b85e37f151a2c310453127d`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -59,6 +59,8 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
 
+- `HomeBoundaryNotificationsDoNotReplaceTheTimetablePeriodicClock`
+- `ProjectionOwnersReuseAcceptedInputsAndDiscardPrivateReferencesOnLock`
 - `LinkNavigationCoalescesAndCachedChecksAvoidBusyAndRedrawWithoutHidingErrorsOrRetention`
 - `InstalledLinkRevisionChangeInvalidatesNavigationCache`
 - `EventMetadataDoesNotOwnBusyAndConcurrentCallersShareOneActualRequest`

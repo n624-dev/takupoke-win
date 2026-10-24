@@ -183,12 +183,14 @@
         "src/Takupoke.Core/SchedulePresentation.cs",
         "src/Takupoke.Core/ScheduleTimes.cs",
         "src/Takupoke.Core/SchoolDate.cs",
-        "src/Takupoke.Core/TimetableEngine.cs"
+        "src/Takupoke.Core/TimetableEngine.cs",
+        "src/Takupoke.Core/HomeActivityClock.cs"
       ],
       "checks": [
         "tests/Takupoke.Core.Tests/SchedulePresentationTests.cs",
         "tests/Takupoke.Core.Tests/TimetableEngineTests.cs",
-        "tests/Takupoke.Core.Tests/ClockEvidenceTests.cs"
+        "tests/Takupoke.Core.Tests/ClockEvidenceTests.cs",
+        "tests/Takupoke.Core.Tests/HomeActivityClockTests.cs"
       ]
     },
     {

@@ -5,6 +5,28 @@ namespace Takupoke.Core.Tests;
 
 public sealed class TimetableEngineTests
 {
+    [Fact]
+    public void ProjectionMemoIsScopedToItsEngineAndEvictionRetainsExactResults()
+    {
+        var source = new TimetableAnalysis(2032, "前期", [new("1_CN", 1, 1, new("架空科目A"), "架空原文", 1)]);
+        var data = new ScheduleData(Timetable: source);
+        var day = new DateOnly(2032,4,5);
+        var engine = new TimetableEngine(data);
+        var plan = engine.Plan(day); var slot = engine.Slot(day, 1, "1_CN"); var blocks = engine.Blocks(day, "1_CN");
+        Assert.Same(plan, engine.Plan(day)); Assert.Same(slot, engine.Slot(day, 1, "1_CN"));
+        Assert.Same(blocks, engine.Blocks(day, "1_CN"));
+        Assert.Empty(engine.Blocks(day, "2_CN"));
+        var next = new TimetableEngine(data with { Timetable = source with { Lessons = [new("1_CN", 1, 1, new("架空別科目"), "架空原文", 1)] } });
+        Assert.Equal("架空別科目", Assert.Single(next.Blocks(day,"1_CN")).Content.Names.Subject);
+        for (var offset = 1; offset <= 1100; offset++)
+        {
+            var other = day.AddDays(offset); _ = engine.Plan(other); _ = engine.Blocks(other, "1_CN");
+        }
+        Assert.NotSame(plan, engine.Plan(day)); Assert.Equal(blocks, engine.Blocks(day,"1_CN"));
+        Assert.Throws<ArgumentOutOfRangeException>(() => engine.Slot(day,0,"1_CN"));
+        Assert.Throws<ArgumentOutOfRangeException>(() => engine.Slot(day,9,"1_CN"));
+    }
+
     [Theory]
     [InlineData(2, 3, "10:25", false)]
     [InlineData(2, 3, "10:25", true)]

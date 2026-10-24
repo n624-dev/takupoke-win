@@ -13,7 +13,8 @@ namespace Microsoft.UI.Dispatching
     {
         private readonly ConcurrentQueue<Action> _queue = new();
         public bool HasThreadAccess => true;
-        public DispatcherQueueTimer CreateTimer() => new();
+        public List<DispatcherQueueTimer> Timers { get; } = [];
+        public DispatcherQueueTimer CreateTimer() { var timer = new DispatcherQueueTimer(); Timers.Add(timer); return timer; }
         public bool TryEnqueue(Action action) { _queue.Enqueue(action); return true; }
         public void Drain() { while (_queue.TryDequeue(out var action)) action(); }
     }

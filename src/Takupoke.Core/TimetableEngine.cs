@@ -35,8 +35,12 @@ public sealed record DayPlan(IReadOnlyList<SchoolEvent> Events, bool IsNoClass, 
 public sealed class TimetableEngine(ScheduleData data, bool includesChanges = true, bool international = false,
     Func<string, string, int?, bool>? internationalRule = null)
 {
+    private readonly Memo<DateOnly, DayPlan> _plans = new(512);
+    private readonly Memo<(DateOnly Day, int Period, string Class), ScheduleSlot> _slots = new(4096);
+    private readonly Memo<(DateOnly Day, string Class), IReadOnlyList<ScheduleBlock>> _blocks = new(1024);
     private IEnumerable<SpecialAnalysis> Specials => data.Specials ?? [];
-    public DayPlan Plan(DateOnly day)
+    public DayPlan Plan(DateOnly day) => _plans.Get(day, () => ResolvePlan(day));
+    private DayPlan ResolvePlan(DateOnly day)
     {
         var events = (data.Events ?? []).Where(e => e.Applies(day)).ToArray();
         var reliable = events.Where(e => !e.NeedsReview).ToArray();
@@ -51,6 +55,10 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
     public ScheduleSlot Slot(DateOnly day, int period, string className)
     {
         if (period is < 1 or > 8) throw new ArgumentOutOfRangeException(nameof(period));
+        return _slots.Get((day, period, className), () => ResolveSlot(day, period, className));
+    }
+    private ScheduleSlot ResolveSlot(DateOnly day, int period, string className)
+    {
         var plan = Plan(day);
         if (plan.IsNoClass && !plan.ApiNoClass) return new([], [], []);
         var applies = Specials.Any(s => s.Applies(day, className));
@@ -88,7 +96,9 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
             DisplayText.IsInternational(s) || internationalRule?.Invoke(s, change.DisplayClassName, year) == true);
     }
 
-    public IReadOnlyList<ScheduleBlock> Blocks(DateOnly day, string className)
+    public IReadOnlyList<ScheduleBlock> Blocks(DateOnly day, string className) =>
+        _blocks.Get((day, className), () => ResolveBlocks(day, className));
+    private IReadOnlyList<ScheduleBlock> ResolveBlocks(DateOnly day, string className)
     {
         var result = new List<ScheduleBlock>();
         for (var period = 1; period <= 8; period++)
@@ -261,17 +271,44 @@ public sealed class TimetableEngine(ScheduleData data, bool includesChanges = tr
         return agreed?.Cast<TimeRange?>().ToArray() ?? [];
     }
 
-    public bool IsInProgress(DateOnly day, string className, ScheduleBlock block, DateTimeOffset now)
+    public IReadOnlyList<(int Start, int End)> ActivityMinuteRanges(DateOnly day, string className, ScheduleBlock block)
     {
-        if (block.Content is ChangeContent { Change.IsCancellation: true } || day != SchoolDate.InJapan(now)) return false;
+        if (block.Content is ChangeContent { Change.IsCancellation: true }) return [];
         var clocks = block.Content is NormalContent
             ? Enumerable.Range(block.StartPeriod, block.EndPeriod - block.StartPeriod + 1)
                 .Select(period => data.Times?.Time(day, period) ?? ScheduleTimes.Normal.GetValueOrDefault(period))
             : CardTime(day, className, block) is null ? [] : ActivityTimes(day, className, block);
+        var ranges = new List<(int Start, int End)>();
+        foreach (var time in clocks)
+            if (time is not null && TimeRange.TryMinutes(time.Start, out var start) &&
+                TimeRange.TryMinutes(time.End, out var end) && start < end) ranges.Add((start, end));
+        return ranges;
+    }
+    public bool IsInProgress(DateOnly day, string className, ScheduleBlock block, DateTimeOffset now)
+    {
+        if (day != SchoolDate.InJapan(now)) return false;
         var japan = now.ToOffset(TimeSpan.FromHours(9));
         var minute = japan.Hour * 60 + japan.Minute;
-        return clocks.Any(time => time is not null && TimeRange.TryMinutes(time.Start, out var start)
-            && TimeRange.TryMinutes(time.End, out var end) && start < end && start <= minute && minute < end);
+        return ActivityMinuteRanges(day, className, block).Any(range => range.Start <= minute && minute < range.End);
+    }
+
+    // An engine belongs to one accepted data/mapping/options snapshot. Keep
+    // memoized projections bounded even when the user browses many weeks.
+    private sealed class Memo<TKey, TValue>(int capacity) where TKey : notnull
+    {
+        private readonly object _lock = new();
+        private readonly Dictionary<TKey, TValue> _values = [];
+        public TValue Get(TKey key, Func<TValue> resolve)
+        {
+            lock (_lock)
+            {
+                if (_values.TryGetValue(key, out var existing)) return existing;
+                var value = resolve();
+                if (_values.Count >= capacity) _values.Clear();
+                _values[key] = value;
+                return value;
+            }
+        }
     }
 
     public IReadOnlyList<string> MissingMessages(DateOnly day, string className)

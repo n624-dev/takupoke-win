@@ -148,6 +148,8 @@ public sealed partial class MainWindow
         if (_model.EventStorageMessage is { } storageFailure) Add(Card(Text(storageFailure)));
         if (classes.Length == 0) Add(ScheduleNotice("クラスを選んでください", "", "クラスを選択", "people", ChooseClasses));
         var engine = _model.HomeEngine; var day = _model.Today;
+        var activity = new List<HomeActivityInterval>();
+        var midnight = new DateTimeOffset(day.ToDateTime(TimeOnly.MinValue), TimeSpan.FromHours(9));
         if (engine.Plan(day).WeekdayOverrideWarning is { } overrideWarning) Add(Card(Text(overrideWarning)));
         var eventTitles = engine.Plan(day).Events.Select(e => e.Title).ToArray();
         if (eventTitles.Length > 0) Add(Card(Panel(ScheduleHeading("今日の学校行事", "calendar"), Text(DisplayText.FullWidthKana(string.Join("・", eventTitles))))));
@@ -161,12 +163,19 @@ public sealed partial class MainWindow
                 if (missing.Count == 0 && blocks.Count == 0 && _model.Data.Changes is not null && _model.SavedEventYears.Contains(day.SchoolYear())) group.Children.Add(Text("今日は授業がありません。"));
                 foreach (var message in missing) group.Children.Add(Text(message));
                 if (missing.Count > 0) group.Children.Add(IconButton("時間割ファイルを確認", "document", () => OpenPage("materials")));
-                for (var index = 0; index < blocks.Count; index++) group.Children.Add(LessonButton(day, cls, blocks[index], home: true, index: index));
+                for (var index = 0; index < blocks.Count; index++)
+                {
+                    var block = blocks[index];
+                    group.Children.Add(LessonButton(day, cls, block, home: true, index: index));
+                    foreach (var range in engine.ActivityMinuteRanges(day, cls, block))
+                        activity.Add(new(cls.Length + ":" + cls + ":" + index, midnight.AddMinutes(range.Start), midnight.AddMinutes(range.End)));
+                }
                 Add(Card(group));
             }
             if (_model.Data.Changes is null) Add(ScheduleNotice("時間割変更を表示できません", "時間割変更ファイルを選択して、状況を確認してください。", "時間割ファイルを開く", "document", () => OpenPage("materials")));
             if (!_model.SavedEventYears.Contains(day.SchoolYear())) Add(ScheduleNotice("学校行事は未取得です", "", "学校行事を取得", "calendar", () => OpenPage("events")));
         }
+        _model.ConfigureHomeClock(activity);
         Add(IconButton("時間割を見る", "calendar", () => { _model.OpenTodayWeek(); Navigation.SelectedItem = Navigation.MenuItems[2]; return Task.CompletedTask; }, "home-timetable"));
         var favorites = _model.Links?.Items.Where(i => i.Visible && _model.Preferences.FavoriteIds.Contains(i.Id) && !_model.Preferences.HiddenIds.Contains(i.Id)).ToArray() ?? [];
         if (favorites.Length > 0) { Add(ScheduleHeading("お気に入り", "star")); foreach (var item in favorites) Add(LinkButton(item)); }

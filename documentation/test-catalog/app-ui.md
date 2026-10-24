@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`32c3a3df011fe6920f7a11ee69c6e681d5ae62e0a325f694f9e7dc93dc00fe9d`
+`afff443ea005f2a54371a78d21373b6ed94f9faeebef95a8585b8638815e7d6b`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -73,6 +73,8 @@
 
 ## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
 
+- `HomeBoundaryNotificationsDoNotReplaceTheTimetablePeriodicClock`
+- `ProjectionOwnersReuseAcceptedInputsAndDiscardPrivateReferencesOnLock`
 - `LinkNavigationCoalescesAndCachedChecksAvoidBusyAndRedrawWithoutHidingErrorsOrRetention`
 - `InstalledLinkRevisionChangeInvalidatesNavigationCache`
 - `EventMetadataDoesNotOwnBusyAndConcurrentCallersShareOneActualRequest`

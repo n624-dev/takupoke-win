@@ -64,7 +64,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public bool AutomaticRefreshPaused => _automaticPaused;
     public bool Locked { get; private set; }
     public long PrivateEpoch { get; private set; }
-    public string Status { get => _status; private set { _statusUntil = DateTimeOffset.UtcNow.AddSeconds(5); SetProperty(ref _status, value); } }
+    public string Status { get => _status; private set { _statusUntil = _clock.GetUtcNow().AddSeconds(5); SetProperty(ref _status, value); } }
     public string OperationStatus { get => _operationStatus; private set => SetProperty(ref _operationStatus, value); }
     public void DismissStatus() => Status = "";
     public bool Busy { get => _busy; private set => SetProperty(ref _busy, value); }
@@ -86,15 +86,40 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public bool HasCurrentAnalysis(MaterialKind kind) => Materials.TryGetValue(kind, out var item)
         && MaterialCoordinator.AnalysisMatches(item.Analysis, item.Source, kind,
             ChangeNormalizer.EffectiveSchoolYear(Preferences.DefaultSchoolYear, Today));
-    public DateOnly Today => SchoolDate.InJapan(DateTimeOffset.UtcNow);
+    public DateOnly Today => SchoolDate.InJapan(_clock.GetUtcNow());
     public DateOnly WeekStart { get; set; }
-    public SchedulePresentation Presentation => new(Data, Mappings);
-    public TimetableEngine Engine => Presentation.Engine(Preferences);
-    public TimetableEngine HomeEngine => Presentation.Engine(Preferences, home: true);
+    private ScheduleData? _projectionData;
+    private MappingRules? _projectionMappings;
+    private SchedulePresentation? _presentation;
+    private readonly Dictionary<(bool Changes, bool International), TimetableEngine> _engines = [];
+    public SchedulePresentation Presentation
+    {
+        get
+        {
+            if (_presentation is null || !ReferenceEquals(_projectionData, Data) || !ReferenceEquals(_projectionMappings, Mappings))
+            {
+                _projectionData = Data; _projectionMappings = Mappings;
+                _presentation = new(Data, Mappings); _engines.Clear();
+            }
+            return _presentation;
+        }
+    }
+    private TimetableEngine ProjectedEngine(bool home)
+    {
+        var presentation = Presentation;
+        var key = (home || Preferences.IncludesChanges, Preferences.International);
+        if (!_engines.TryGetValue(key, out var engine)) _engines[key] = engine = presentation.Engine(Preferences, home);
+        return engine;
+    }
+    public TimetableEngine Engine => ProjectedEngine(home: false);
+    public TimetableEngine HomeEngine => ProjectedEngine(home: true);
     public DateOnly NavigationAnchor { get; private set; }
     public void OpenTodayWeek() { NavigationAnchor = Today; WeekStart = Today.Monday(); }
     public event Action? SnapshotChanged;
     public event Action? ClockChanged;
+    public event Action? HomeClockChanged;
+    private readonly HomeActivityClock _homeClock = new();
+    public void ConfigureHomeClock(IEnumerable<HomeActivityInterval> intervals) => _homeClock.Configure(_clock.GetUtcNow(), intervals);
     public event Action? PrivateDataCleared;
     public event Action? NotificationActivated;
     public string NotificationStatus => _notificationSink.Status;
@@ -103,14 +128,14 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     internal AppViewModel(DispatcherQueue dispatcher, IKeyProtector protector, IFileIdentityProvider? identity = null, PublicEventsStore? events = null,
         HttpClient? network = null, Uri? apiBaseUri = null, TimeProvider? clock = null)
     {
-        _dispatcher = dispatcher; _clock = clock ?? TimeProvider.System;
+        _dispatcher = dispatcher; _clock = clock ?? TimeProvider.System; _nextCheck = _clock.GetUtcNow().AddMinutes(15);
         var directory = OfflineTest
             ? new DataDirectoryResult(Environment.GetEnvironmentVariable("TAKUPOKE_DATA_ROOT") ?? throw new InvalidOperationException("CI data root is required."))
             : DataDirectory.Resolve(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
         Root = directory.Root; RootMigrationMessage = directory.Message;
         var offline = OfflineTest ? new OfflineTestNetwork(Root) : null;
         _http = network ?? (offline is not null ? new(offline) : ApiClient.CreateHttpClient());
-        _school = new(Root, protector); _preferences = new(Root); _events = events ?? new(Root);
+        _school = new(Root, protector, _clock); _preferences = new(Root); _events = events ?? new(Root);
         _api = new(_http, apiBaseUri, _clock); _eventSourceChecker = new(_api, _events, _clock); _shared = new(_api, _school, _clock); _materials = new(_school, new(identity ?? new WindowsFileIdentity()));
         _authentication = new(new OidcClient(_http), offline is null ? null : offline.OpenBrowser);
         _authentication.ProgressChanged += value => OperationStatus = value;
@@ -127,7 +152,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         _timer = dispatcher.CreateTimer(); _timer.Interval = TimeSpan.FromSeconds(1); _timer.Tick += TimerTick;
         Program.ProtocolCallback = uri => _dispatcher.TryEnqueue(() => _authentication.HandleCallback(uri)); Program.DrainCallbacks();
     }
-    private DateTimeOffset _nextCheck = DateTimeOffset.UtcNow.AddMinutes(15);
+    private DateTimeOffset _nextCheck;
     private DateOnly? _lastDay;
     private DateTimeOffset _lastClock;
     private long _operationGeneration;
@@ -150,17 +175,19 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public string? EventsUpdateMessage { get; private set; }
     private void TimerTick(DispatcherQueueTimer sender, object args)
     {
-        var now = DateTimeOffset.UtcNow;
+        var now = _clock.GetUtcNow();
         if (!Busy && Status.Length > 0 && now >= _statusUntil) DismissStatus();
         if (_displayPeriod is { } displayed && displayed != SchoolDataPeriod.FromInstant(now))
         { _session.Cancel(); _authentication.Cancel(); ClearPrivateData(); _ = RefreshAsync(); return; }
         if (!_automaticPaused && Preferences.KeepInTray && now >= _nextCheck) { _nextCheck = now.AddMinutes(15); _ = RefreshAutomaticallyAsync(force: true); }
+        if (_homeClock.Tick(now)) HomeClockChanged?.Invoke();
         if (_lastDay != Today || now - _lastClock >= TimeSpan.FromSeconds(15)) { _lastDay = Today; _lastClock = now; ClockChanged?.Invoke(); }
     }
     private void ClearPrivateData()
     {
         if (_displayPeriod is not null) Cancel();
         PrivateEpoch++;
+        _homeClock.Clear(); _projectionData = null; _projectionMappings = null; _presentation = null; _engines.Clear();
         Data = Data with { Timetable = null, Changes = null, Specials = null, Times = null };
         LinksRecord = null; MappingRecord = null; TimesRecord = null; Links = null; Mappings = null; Materials = new Dictionary<MaterialKind, MaterialSnapshot>(); _revisionChecks = RevisionCheckResult.Empty;
         SharedUpdateResults = []; SharedUpdateMessage = null; DismissStatus();
@@ -570,7 +597,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             if (!silentSkip) Busy = false;
             _operations.Release();
             if (!silentSkip) SnapshotChanged?.Invoke();
-            if (!automatic && Status.Length > 0) _statusUntil = DateTimeOffset.UtcNow.AddSeconds(5);
+            if (!automatic && Status.Length > 0) _statusUntil = _clock.GetUtcNow().AddSeconds(5);
             if (_pendingRefresh) { _pendingRefresh = false; _dispatcher.TryEnqueue(() => _ = RefreshAutomaticallyAsync(force: true)); }
         }
     }

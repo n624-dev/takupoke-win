@@ -50,8 +50,9 @@ public sealed partial class MainWindow : Window
         {
             if (_model.OfflineTest)
                 try { File.WriteAllText(Path.Combine(_model.Root, "offline-clock-ticks.txt"), (++_offlineClockTicks).ToString(System.Globalization.CultureInfo.InvariantCulture)); } catch { }
-            if (_page is "home" or "timetable" && !_model.Busy && !_selectingMaterial) Render();
+            if (_page == "timetable" && !_model.Busy && !_selectingMaterial) Render();
         };
+        _model.HomeClockChanged += () => { if (_page == "home" && !_model.Busy && !_selectingMaterial) Render(); };
         _model.PropertyChanged += (_, _) => UpdateStatus();
         _model.PrivateDataCleared += () => { ClosePrivatePopups(); if (_activeDialog is { } active) { active.Content = null; active.Hide(); } CloseBrowser(); if (_pdfImage is not null) _pdfImage.Source = null; _pdfDialog?.Hide(); Render(); };
         _model.NotificationActivated += () => { _model.OpenTodayWeek(); Navigation.SelectedItem = Navigation.MenuItems[2]; ShowWindow(); };
