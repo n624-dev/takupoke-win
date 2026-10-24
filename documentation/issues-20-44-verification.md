@@ -16,6 +16,8 @@ PR45〜50はそれぞれの全8CI検査を通してmainへ統合済み。直前P
 
 次の候補は短いApiClientTests collectionだけをxUnitのDisableParallelizationへ登録して、外部コンパイル等と実時間の期限比較を重ねないこと。テスト本文・全入力・body開始1秒/通信250ms/外側2秒・例外分類・finallyの所有取消は完全に維持し、製品や他collectionの並行実行は変更しない。単なる同条件再試行や期限延長にせず、候補/根拠を隔離branchへpush後、同じ全Integrationを確認する。
 
+候補1675f3aのLinux Integration全292件/失敗0（9秒）。元d98aadbと現在のApiClientTests class本文をbyte比較し、全テスト本文/値/期限が同一であることも確認した。catalog check --base d98aadb成功。Windowsの実時間条件と配布8検査/MSIX/インストーラーは次の新規実行で確認し、今回のLinux結果で成功扱いにしない。
+
 対象main ff2166f3086bd52b573ba2f54aa3f7810f678c77。iOS436の初回公開完了後に着手。各OS独立実装、完全架空fixture、本番学校/API通信なし。Linux/.NET10.0.402、実WinUI/Windows ACL未確認。
 
 ## 保存済みリンク（37）
