@@ -40,6 +40,8 @@ installerログ観測:最初の導入の実UI447件は00:58:45に成功。その
 
 原因:新しい休講clock caseが呼出元と同じstoreへ表示週月曜1限の変更を書き、IncludesChanges=trueで保存して終了する。次のRunは通常授業を5曜日分再seedするが変更資料を消さないため、前回の月曜休講が正しく適用され、通常科目は火〜金の4件となる。製品の変更反映ではなく、繰返し導入検証のfixtureの寿命の問題。候補は既存retention検証と同じ専用の所有rootへ休講caseを分離し、呼出元の個人設定を複製して検証する。finallyでapp停止/環境復元/所有root回収を行い、呼出元のpreferences bytes保持も確認する。通常5曜日の期待、実XLSX解析/休講card時計、6導入状態と保存/更新/削除の条件は削らない。
 
+候補fe65f71のWinUI test targetクロスビルドは警告/エラー0（5.52秒）、catalog check --base f7b0a52成功。新しい所有rootに正常な架空通常授業と呼出元の個人設定を用意し、そこで元の実XLSX取消とnative clockを検査する。親rootの環境値・個人設定bytes保持を元caseの完了条件へ追加した。アプリ本体と元の5曜日/6導入状態の検証を変えていない。新しい配布実行で繰返し導入も含めて確認する。
+
 対象main ff2166f3086bd52b573ba2f54aa3f7810f678c77。iOS436の初回公開完了後に着手。各OS独立実装、完全架空fixture、本番学校/API通信なし。Linux/.NET10.0.402、実WinUI/Windows ACL未確認。
 
 ## 保存済みリンク（37）
