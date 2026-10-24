@@ -26,6 +26,8 @@ color/popup/色選択で過去索引を検索し、change-row-exclusion-verifica
 
 次の候補は診断のみ。選択前/直後/元30秒待機のtimeout時に、実保存enum・新しいcontrolの有効性/Popup/選択enum/可視色項目・元controlとのRuntimeId一致を観測する。offline fixtureのときだけ固定色enumと状態を出し、観測失敗は型名だけ記録する。元の一回Select/必要な一回Collapse、全wait条件/期限/件数を維持し、押し直し・値注入・条件緩和は行わない。根本原因や製品修正済みと扱わず、隔離branchへpush後、クロスビルドと新規Windows CIで切り分ける。
 
+診断6131409はWinUI automation targetのLinuxクロスビルドに成功（5.92秒、警告/エラー0）、catalog check --base c80b3bf成功。Windows上の実UI操作は次の隔離branchのCIで確認する。アプリ本体、保存、UI操作の合格条件は変更していないため、このコンパイル成功を色選択の成功には数えない。
+
 対象main ff2166f3086bd52b573ba2f54aa3f7810f678c77。iOS436の初回公開完了後に着手。各OS独立実装、完全架空fixture、本番学校/API通信なし。Linux/.NET10.0.402、実WinUI/Windows ACL未確認。
 
 ## 保存済みリンク（37）
