@@ -130,10 +130,14 @@ internal static partial class Program
         }
         // Select once. UIA selection can leave the native popup open, obscuring
         // other controls; complete that interaction through the standard peer.
+        ObserveMainColor("before-select", color, preferences, combo);
         ((SelectionItemPattern)option!.GetCurrentPattern(SelectionItemPattern.Pattern)).Select();
         var popup = expansion.Current.ExpandCollapseState;
         Console.WriteLine($"Synthetic color popup after one selection: {popup}");
         if (popup == ExpandCollapseState.Expanded) expansion.Collapse();
+        ObserveMainColor("after-select", color, preferences, combo);
+        try
+        {
         Wait(() => SavedMainColor(preferences) == color
             && Find("main-color") is { } current && current.Current.IsEnabled
             && ((ExpandCollapsePattern)current.GetCurrentPattern(ExpandCollapsePattern.Pattern))
@@ -145,6 +149,41 @@ internal static partial class Program
                 .Cast<AutomationElement>().Any(item => !item.Current.IsOffscreen
                     && UserPreferences.MainColors.Any(key => item.Current.Name == UserPreferences.MainColorLabel(key))),
             "main color " + color + " is saved, displayed and its popup items are closed");
+        }
+        catch (TimeoutException)
+        {
+            ObserveMainColor("timeout", color, preferences, combo);
+            throw;
+        }
+    }
+
+    private static void ObserveMainColor(string phase, string color, string preferences, AutomationElement original)
+    {
+        if (Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE") != "1") return;
+        try
+        {
+            var labels = UserPreferences.MainColors.Select(UserPreferences.MainColorLabel).ToHashSet();
+            var current = Find("main-color");
+            var stored = SavedMainColor(preferences);
+            var selected = current is not null && current.TryGetCurrentPattern(SelectionPattern.Pattern, out var selection)
+                ? ((SelectionPattern)selection).Current.GetSelection().Select(item => item.Current.Name)
+                    .Select(name => labels.Contains(name) ? name : "unrecognized").ToArray() : [];
+            var popup = current is not null && current.TryGetCurrentPattern(ExpandCollapsePattern.Pattern, out var expansion)
+                ? ((ExpandCollapsePattern)expansion).Current.ExpandCollapseState.ToString() : "missing-or-unsupported";
+            var visible = _window!.FindAll(TreeScope.Descendants,
+                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem))
+                .Cast<AutomationElement>().Where(item => !item.Current.IsOffscreen)
+                .Select(item => item.Current.Name).Where(labels.Contains).Distinct().Order().ToArray();
+            Console.WriteLine($"Synthetic color state: phase={phase}; requested={color}; "
+                + $"saved={(stored is null ? "missing" : UserPreferences.MainColors.Contains(stored) ? stored : "unrecognized")}; "
+                + $"currentIsOriginal={current is not null && current.GetRuntimeId().SequenceEqual(original.GetRuntimeId())}; "
+                + $"enabled={current?.Current.IsEnabled}; popup={popup}; "
+                + $"selected=[{string.Join(",", selected)}]; visibleColors=[{string.Join(",", visible)}]");
+        }
+        catch (Exception error)
+        {
+            Console.WriteLine($"Synthetic color state: phase={phase}; observationUnavailable={error.GetType().Name}");
+        }
     }
 
     private static string? SavedMainColor(string path)
