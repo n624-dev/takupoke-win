@@ -111,7 +111,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         var offline = OfflineTest ? new OfflineTestNetwork(Root) : null;
         _http = network ?? (offline is not null ? new(offline) : ApiClient.CreateHttpClient());
         _school = new(Root, protector); _preferences = new(Root); _events = events ?? new(Root);
-        _api = new(_http, apiBaseUri, _clock); _eventSourceChecker = new(_api, _events, _clock); _shared = new(_api, _school); _materials = new(_school, new(identity ?? new WindowsFileIdentity()));
+        _api = new(_http, apiBaseUri, _clock); _eventSourceChecker = new(_api, _events, _clock); _shared = new(_api, _school, _clock); _materials = new(_school, new(identity ?? new WindowsFileIdentity()));
         _authentication = new(new OidcClient(_http), offline is null ? null : offline.OpenBrowser);
         _authentication.ProgressChanged += value => OperationStatus = value;
         NavigationAnchor = Today; WeekStart = Today.DisplayWeekStart();
@@ -345,12 +345,32 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         SharedUpdateResults = SharedUpdateResults.Where(result => result.Failure is null || !check.Revisions.ContainsKey(result.Kind)).ToArray();
         if (check.Failures.Count == 0 && check.Revisions.Count == Enum.GetValues<DataSet>().Length) SharedUpdateMessage = null;
     }
-    public Task CheckLinkRevisionAsync() => RunAsync(async token =>
+    private Task? _linksRevisionTask;
+    private long _linksRevisionEpoch, _linksRevisionGeneration;
+    public Task CheckLinkRevisionAsync(bool force = false)
     {
-        // Public revision checks do not read selected files or authenticate.
-        // They remain available while automatic selected-file checks are paused.
-        ApplyRevisionCheck(await _shared.CheckDetailedAsync(DataSet.Links, token));
-    }, "一覧の更新情報を確認しています。", automatic: true);
+        if (_linksRevisionTask is not null && _linksRevisionEpoch == PrivateEpoch && _linksRevisionGeneration == _operationGeneration)
+            return _linksRevisionTask;
+        var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        _linksRevisionTask = completion.Task;
+        _linksRevisionEpoch = PrivateEpoch; _linksRevisionGeneration = _operationGeneration;
+        _ = Check();
+        return completion.Task;
+        async Task Check()
+        {
+            try
+            {
+                await RunAsync(async token => ApplyRevisionCheck(await _shared.CheckDetailedAsync(DataSet.Links, token)),
+                    "一覧の更新情報を確認しています。", automatic: true,
+                    skipIf: force ? null : _shared.HasFreshLinksCheckAsync);
+            }
+            finally
+            {
+                if (ReferenceEquals(_linksRevisionTask, completion.Task)) _linksRevisionTask = null;
+                completion.TrySetResult();
+            }
+        }
+    }
     public Task FetchEventsAsync(int year) => RunAsync(async token =>
     {
         try
@@ -512,7 +532,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         }
         finally { _notificationResets.Release(); }
     }
-    private async Task RunAsync(Func<CancellationToken, Task> action, string progress = "処理しています。", bool automatic = false)
+    private async Task RunAsync(Func<CancellationToken, Task> action, string progress = "処理しています。", bool automatic = false, Func<CancellationToken, Task<bool>>? skipIf = null)
     {
         if (Locked) { Status = "Windowsのロック中は学校データを利用できません。"; return; }
         // Picker completion can race a refresh triggered by window activation.
@@ -525,9 +545,14 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             Status = "学校データの利用状態が変わったため処理を中止しました。もう一度お試しください。";
             return;
         }
-        OperationStatus = progress; Busy = true;
+        var silentSkip = false;
         if (_session.IsCancellationRequested) { _session.Dispose(); _session = new(); }
-        try { await action(_session.Token); }
+        try
+        {
+            if (skipIf is not null && await skipIf(_session.Token)) { silentSkip = true; return; }
+            OperationStatus = progress; Busy = true;
+            await action(_session.Token);
+        }
         catch (OperationCanceledException) { Status = "処理を中止しました。保存期間内の正常なデータは保持しています。"; }
         catch (SchoolDataStore.RetentionStateException error)
         {
@@ -542,7 +567,9 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
             // Its obsolete OS history must still be removed after cancellation.
             try { await ClearExpiredNotificationsAsync(); }
             catch { Status = "保存期間が切り替わりましたが、以前の通知履歴を削除できませんでした。"; }
-            Busy = false; _operations.Release(); SnapshotChanged?.Invoke();
+            if (!silentSkip) Busy = false;
+            _operations.Release();
+            if (!silentSkip) SnapshotChanged?.Invoke();
             if (!automatic && Status.Length > 0) _statusUntil = DateTimeOffset.UtcNow.AddSeconds(5);
             if (_pendingRefresh) { _pendingRefresh = false; _dispatcher.TryEnqueue(() => _ = RefreshAutomaticallyAsync(force: true)); }
         }
@@ -558,7 +585,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         Status = "学校データを初期化しました。資料を選び直し、学校アカウントのデータを再取得してください。";
     });
 
-    public void Cancel() { foreach (var check in _sourceChecks.Values.ToArray()) check.Cancellation.Cancel(); _automaticPaused = true; _operationGeneration++; _pendingRefresh = false; _watcher.Replace([]); _session.Cancel(); _authentication.Cancel(); }
+    public void Cancel() { _shared.InvalidateLinksCheck(); foreach (var check in _sourceChecks.Values.ToArray()) check.Cancellation.Cancel(); _automaticPaused = true; _operationGeneration++; _pendingRefresh = false; _watcher.Replace([]); _session.Cancel(); _authentication.Cancel(); }
     public void SuspendAutomaticRefresh()
     {
         Cancel();

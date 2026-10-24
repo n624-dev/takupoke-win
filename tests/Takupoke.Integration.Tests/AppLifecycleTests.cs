@@ -70,6 +70,32 @@ public sealed class AppLifecycleTests
         }
     }
 
+    private sealed class RevisionClock : TimeProvider
+    {
+        public long Seconds;
+        public override long TimestampFrequency => 1;
+        public override long GetTimestamp() => Seconds;
+    }
+    private sealed class RevisionHandler : HttpMessageHandler
+    {
+        public int Calls, Unexpected;
+        public bool Fail;
+        public string? Installed;
+        public TaskCompletionSource? Started, Release;
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken token)
+        {
+            Calls++;
+            if (request.RequestUri!.AbsoluteUri != "https://example.invalid/links-revision" || request.Method != HttpMethod.Get ||
+                request.Headers.Authorization is not null || request.Headers.IfNoneMatch.SingleOrDefault()?.Tag !=
+                (Installed is null ? null : "\"" + Installed + "\""))
+            { Unexpected++; throw new InvalidOperationException("Unexpected revision request"); }
+            Started?.TrySetResult(); if (Release is { } wait) await wait.Task.WaitAsync(token);
+            var response = new HttpResponseMessage(Fail ? System.Net.HttpStatusCode.ServiceUnavailable : System.Net.HttpStatusCode.OK)
+                { Content = new ByteArrayContent([]) };
+            response.Headers.ETag = new("\"" + new string('A', 43) + "\""); return response;
+        }
+    }
+
     private sealed class Fixture : IAsyncDisposable
     {
         private readonly string? _previousMode = Environment.GetEnvironmentVariable("TAKUPOKE_OFFLINE_TEST_MODE");
@@ -125,6 +151,65 @@ public sealed class AppLifecycleTests
             Directory.Delete(Root, recursive: true);
         }
     }
+    [Fact]
+    public async Task LinkNavigationCoalescesAndCachedChecksAvoidBusyAndRedrawWithoutHidingErrorsOrRetention()
+    {
+        await using var fixture = new Fixture(); await fixture.Preferences();
+        using var handler = new RevisionHandler
+        {
+            Started = new(TaskCreationOptions.RunContinuationsAsynchronously),
+            Release = new(TaskCreationOptions.RunContinuationsAsynchronously)
+        };
+        using var network = new HttpClient(handler); var clock = new RevisionClock();
+        var model = fixture.Create(network: network, apiBaseUri: new("https://example.invalid/"), clock: clock);
+        await model.InitializeAsync();
+        var first = model.CheckLinkRevisionAsync();
+        await handler.Started.Task.WaitAsync(TimeSpan.FromSeconds(5));
+        var second = model.CheckLinkRevisionAsync(force: true);
+        Assert.Same(first, second); Assert.True(model.Busy); Assert.Equal(1, handler.Calls);
+        handler.Release.SetResult(); await Task.WhenAll(first, second);
+        Assert.False(model.Busy); Assert.Empty(model.RevisionFailures);
+        int snapshots = 0, busyChanges = 0;
+        model.SnapshotChanged += () => snapshots++;
+        model.PropertyChanged += (_, args) => { if (args.PropertyName == nameof(model.Busy)) busyChanges++; };
+        for (int i = 0; i < 5; i++) await model.CheckLinkRevisionAsync();
+        Assert.Equal(1, handler.Calls); Assert.Equal(0, snapshots); Assert.Equal(0, busyChanges);
+        clock.Seconds = 299; await model.CheckLinkRevisionAsync(); Assert.Equal(1, handler.Calls);
+        clock.Seconds = 300; await model.CheckLinkRevisionAsync(); Assert.Equal(2, handler.Calls);
+        handler.Fail = true; await model.CheckLinkRevisionAsync(force: true);
+        Assert.Equal(3, handler.Calls); Assert.Contains(Takupoke.Infrastructure.Api.DataSet.Links, model.RevisionFailures.Keys);
+        await model.CheckLinkRevisionAsync(); Assert.Equal(3, handler.Calls);
+        Assert.Contains(Takupoke.Infrastructure.Api.DataSet.Links, model.RevisionFailures.Keys);
+        handler.Fail = false; await model.CheckLinkRevisionAsync(force: true);
+        Assert.Empty(model.RevisionFailures); Assert.Equal(4, handler.Calls);
+        model.Cancel(); await model.CheckLinkRevisionAsync(); Assert.Equal(5, handler.Calls);
+        Assert.True(model.AutomaticRefreshPaused);
+        await File.WriteAllTextAsync(Path.Combine(fixture.Root, "school-data-period.json"), "{fictional broken marker");
+        await model.CheckLinkRevisionAsync();
+        Assert.Equal(5, handler.Calls); Assert.True(model.RetentionRecoveryNeeded);
+        Assert.Null(model.Links); Assert.Empty(model.Revisions); Assert.Equal(0, handler.Unexpected);
+    }
+
+    [Fact]
+    public async Task InstalledLinkRevisionChangeInvalidatesNavigationCache()
+    {
+        await using var fixture = new Fixture(); await fixture.Preferences();
+        using var handler = new RevisionHandler(); using var network = new HttpClient(handler);
+        var model = fixture.Create(network: network, apiBaseUri: new("https://example.invalid/"));
+        await model.InitializeAsync(); await model.CheckLinkRevisionAsync(); Assert.Equal(1, handler.Calls);
+        var installed = new string('B', 43);
+        await using (var store = new SchoolDataStore(fixture.Root, fixture.Protector))
+        {
+            await store.WriteAsync(await store.BeginAsync(), "api.links", new Takupoke.Infrastructure.Api.SavedLinks(
+                new("v1", "sha256-" + new string('a',64), [new("fake-category", "架空カテゴリ", 0, [])]),
+                "\"fake-installed-links\"", DateTimeOffset.UtcNow, installed));
+        }
+        handler.Installed = installed;
+        await model.InitializeLocalAsync(); await model.CheckLinkRevisionAsync();
+        Assert.Equal(2, handler.Calls); Assert.Empty(model.RevisionFailures);
+        Assert.Equal(installed, model.LinksRecord?.Revision); Assert.Equal(0, handler.Unexpected);
+    }
+
     [Fact]
     public async Task EventMetadataDoesNotOwnBusyAndConcurrentCallersShareOneActualRequest()
     {

@@ -22,9 +22,34 @@ public sealed record RevisionCheckResult(
 }
 
 /// <summary>Public checks never authenticate. A user-requested update authenticates once; each dataset commits independently.</summary>
-public sealed class SharedDataUpdater(ApiClient api, SchoolDataStore store)
+public sealed class SharedDataUpdater(ApiClient api, SchoolDataStore store, TimeProvider? clock = null)
 {
     private readonly SemaphoreSlim _gate = new(1, 1);
+    private readonly TimeProvider _clock = clock ?? TimeProvider.System;
+    private sealed record LinksCheck(SchoolLease Lease, string? Installed, long Timestamp, long Generation);
+    private LinksCheck? _linksCheck;
+    private long _linksCheckGeneration;
+    public void InvalidateLinksCheck()
+    {
+        Interlocked.Increment(ref _linksCheckGeneration);
+        Volatile.Write(ref _linksCheck, null);
+    }
+    /// Even a cache hit must validate the retention marker and installed data.
+    /// Returning a cached network result must never bypass the private lease.
+    public async Task<bool> HasFreshLinksCheckAsync(CancellationToken token = default)
+    {
+        await _gate.WaitAsync(token);
+        try
+        {
+            var lease = await store.BeginAsync(token);
+            var installed = await InstalledAsync(DataSet.Links, lease, token);
+            var cached = Volatile.Read(ref _linksCheck);
+            return cached is not null && cached.Lease == lease && cached.Installed == installed &&
+                cached.Generation == Interlocked.Read(ref _linksCheckGeneration) &&
+                _clock.GetElapsedTime(cached.Timestamp) is var age && age >= TimeSpan.Zero && age < TimeSpan.FromMinutes(5);
+        }
+        finally { _gate.Release(); }
+    }
     public async Task<IReadOnlyDictionary<DataSet, RevisionResult>> CheckAsync(CancellationToken token = default)
         => (await CheckDetailedAsync(token)).Revisions;
     public Task<RevisionCheckResult> CheckDetailedAsync(CancellationToken token = default)
@@ -42,7 +67,13 @@ public sealed class SharedDataUpdater(ApiClient api, SchoolDataStore store)
             foreach (var kind in kinds)
             {
                 var installed = await InstalledAsync(kind, lease, token);
-                try { results[kind] = await api.CheckRevisionAsync(kind, installed, token); }
+                try
+                {
+                    var generation = Interlocked.Read(ref _linksCheckGeneration);
+                    results[kind] = await api.CheckRevisionAsync(kind, installed, token);
+                    if (kind == DataSet.Links && generation == Interlocked.Read(ref _linksCheckGeneration))
+                        Volatile.Write(ref _linksCheck, new(lease, installed, _clock.GetTimestamp(), generation));
+                }
                 catch (ApiException error) { failures[kind] = error.Failure; }
             }
             return new(results, failures);

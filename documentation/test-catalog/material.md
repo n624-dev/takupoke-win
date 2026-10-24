@@ -1,7 +1,7 @@
 # 原本取得・更新・保存・監視
 
 対応関係・宣言名・実行方法のSHA-256：
-`62c61268f80b5a7f270817649df0ae3e156601dc09829c67846109dc87b63a68`
+`987e238397db655635ca60e7fa2a90d3e8e79d080aaf94e92375a783543bc077`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -59,6 +59,8 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
 
+- `LinkNavigationCoalescesAndCachedChecksAvoidBusyAndRedrawWithoutHidingErrorsOrRetention`
+- `InstalledLinkRevisionChangeInvalidatesNavigationCache`
 - `EventMetadataDoesNotOwnBusyAndConcurrentCallersShareOneActualRequest`
 - `DelayedMetadataForOldEventBytesCannotOverrideNewSnapshot`
 - `UnrelatedEventFetchKeepsWarningsGeneratedByRealApiAndSourceChecks`
