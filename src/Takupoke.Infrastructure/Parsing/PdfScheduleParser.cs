@@ -1,3 +1,4 @@
+using System.Buffers;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -128,13 +129,18 @@ public static partial class PdfScheduleParser
         foreach (var row in PdfGrid.Rows(page.Glyphs))
         {
             var value = PdfGrid.Key(Joined(row));
-            foreach (Match match in Regex.Matches(value, "([1-8])時限目([0-9]{1,2}:[0-9]{2})[~〜]([0-9]{1,2}:[0-9]{2})"))
+            var singles = Regex.Matches(value, "([1-8])時限目([0-9]{1,2}:[0-9]{2})[~〜]([0-9]{1,2}:[0-9]{2})");
+            var pairs = Regex.Matches(value, "([1-8])[・･]([1-8])時限連続([0-9]{1,2}:[0-9]{2})[~〜]([0-9]{1,2}:[0-9]{2})");
+            var whole = WholeNumericHeadings(value, singles, pairs);
+            foreach (Match match in singles)
             {
+                if (!whole.Contains((match.Index, match.Length))) continue;
                 var period = int.Parse(match.Groups[1].Value);
                 if (period > count || !times.TryAdd(period, Range(match.Groups[2].Value, match.Groups[3].Value))) throw new PdfParseException("P05");
             }
-            foreach (Match match in Regex.Matches(value, "([1-8])[・･]([1-8])時限連続([0-9]{1,2}:[0-9]{2})[~〜]([0-9]{1,2}:[0-9]{2})"))
+            foreach (Match match in pairs)
             {
+                if (!whole.Contains((match.Index, match.Length))) continue;
                 var first = int.Parse(match.Groups[1].Value); var last = int.Parse(match.Groups[2].Value);
                 if (first >= last || last > count || !consecutive.TryAdd(first + "-" + last, Range(match.Groups[3].Value, match.Groups[4].Value))) throw new PdfParseException("P05");
             }
@@ -142,6 +148,29 @@ public static partial class PdfScheduleParser
         if (times.Count != count) throw new PdfParseException("P05");
         return new(times, consecutive);
     }
+    private static HashSet<(int Start, int Length)> WholeNumericHeadings(string text, MatchCollection singles, MatchCollection pairs)
+    {
+        var matches = singles.Cast<Match>().Concat(pairs.Cast<Match>()).OrderBy(match => match.Index).ToArray();
+        var accepted = new HashSet<(int, int)>();
+        for (var first = 0; first < matches.Length;)
+        {
+            var next = first + 1;
+            // Complete headings may abut after whitespace normalization.
+            while (next < matches.Length && matches[next - 1].Index + matches[next - 1].Length == matches[next].Index) next++;
+            var start = matches[first].Index; var end = matches[next - 1].Index + matches[next - 1].Length;
+            var startsInNumber = start > 0
+                && Rune.DecodeLastFromUtf16(text.AsSpan(0, start), out var before, out _) == OperationStatus.Done
+                && Rune.IsDigit(before);
+            var endsInNumber = end < text.Length
+                && Rune.DecodeFromUtf16(text.AsSpan(end), out var after, out _) == OperationStatus.Done
+                && Rune.IsDigit(after);
+            if (!startsInNumber && !endsInNumber)
+                for (var index = first; index < next; index++) accepted.Add((matches[index].Index, matches[index].Length));
+            first = next;
+        }
+        return accepted;
+    }
+
     private static DateOnly? Date(string text, int schoolYear, bool slash)
     {
         var match = Regex.Match(text, slash ? "^([0-9]{1,2})/([0-9]{1,2})$" : "^([0-9]{1,2})月([0-9]{1,2})日");

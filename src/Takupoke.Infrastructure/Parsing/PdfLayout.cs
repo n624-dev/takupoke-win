@@ -85,7 +85,9 @@ public sealed class PdfGrid(PdfPageLayout page)
         if (input.Sum(g => Encoding.UTF8.GetByteCount(g.Text)) > 4096) throw new PdfParseException("limit");
         var rows = ContentRows(input);
         if (!input.Any(g => g.SourceLine is not null)) return rows.Select(r => string.Concat(r.Select(g => g.Text))).ToArray();
-        var fragments = rows.Select(r => new Fragment(r)).OrderBy(f => f.Top).ThenBy(f => f.Left);
+        // ContentRows established the vertical order; font bounds can cross
+        // that order. Only fragments within a matching band are sorted by X.
+        var fragments = rows.Select(r => new Fragment(r));
         var bands = new List<List<Fragment>>();
         foreach (var fragment in fragments)
         {
