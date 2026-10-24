@@ -1,6 +1,6 @@
 # 10456公開後の追加Issue対応
 
-## 10457の公開準備（未公開）
+## 10457の公開準備と検証
 
 PR45〜50はそれぞれの全8CI検査を通してmainへ統合済み。直前PR50のmain push 40040706149もsource1c1814ffc9c52e63fbc3ffdbe2105a814a0ac6b6でsuccess（23:40:10 UTC）。このmainの修正を配布し、新しい33/34の作業branchは含めない。公開スクリプトの更新内容だけを今回の入力・名称・時刻・保存・通知・起動・画面所有の修正へ更新する。
 
@@ -41,6 +41,12 @@ installerログ観測:最初の導入の実UI447件は00:58:45に成功。その
 原因:新しい休講clock caseが呼出元と同じstoreへ表示週月曜1限の変更を書き、IncludesChanges=trueで保存して終了する。次のRunは通常授業を5曜日分再seedするが変更資料を消さないため、前回の月曜休講が正しく適用され、通常科目は火〜金の4件となる。製品の変更反映ではなく、繰返し導入検証のfixtureの寿命の問題。候補は既存retention検証と同じ専用の所有rootへ休講caseを分離し、呼出元の個人設定を複製して検証する。finallyでapp停止/環境復元/所有root回収を行い、呼出元のpreferences bytes保持も確認する。通常5曜日の期待、実XLSX解析/休講card時計、6導入状態と保存/更新/削除の条件は削らない。
 
 候補fe65f71のWinUI test targetクロスビルドは警告/エラー0（5.52秒）、catalog check --base f7b0a52成功。新しい所有rootに正常な架空通常授業と呼出元の個人設定を用意し、そこで元の実XLSX取消とnative clockを検査する。親rootの環境値・個人設定bytes保持を元caseの完了条件へ追加した。アプリ本体と元の5曜日/6導入状態の検証を変えていない。新しい配布実行で繰返し導入も含めて確認する。
+
+## 10457公開と匿名照合（2026-10-24）
+
+[0.1.0-dev.10457](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10457)を通常Release/Latestとして公開した。source ff7bb3b1a9434fb2ab401f841b3561f9d48d58a4、配布run40049296428/attempt1は事前7検査とinstallerの選択8jobが成功、MSIXはdispatchの指定条件でskip。main40049296762もsuccess終端。配布job120739382975は01:39:52 UTCにsuccessとなり、6導入状態の実UIは447/448/447/447/448/447項目で成功した。初回・同じ/別folderへの再導入、実dev.5からの更新、起動登録と個人設定・無関係ファイルの保持、削除、所有作業領域回収を確認した。休講の独立rootと親preferences保持も全回通過した。
+
+匿名で公開6添付の全bytes/配布digest/SHA256SUMSを照合し、x64 ZIP内561ファイル・ARM64 ZIP内557ファイルのmanifestハッシュも一致した。版/tag/ビルド元も一致、保存artifactはAPIで実数0を確認した。照合結果は作業環境の/tmp/takupoke-win-10457-public-verification.json。x64 Setupは70,831,232 bytes、SHA256 5c4b1457a4d545b7c0a4db06886da77cad78cd92b39854115976219f6a5bcd16。ARM64実機・学校アカウント/実資料・OneDriveの再確認はこの結果へ含めない。全終端確認済みの実行/ログは再取得しない。
 
 対象main ff2166f3086bd52b573ba2f54aa3f7810f678c77。iOS436の初回公開完了後に着手。各OS独立実装、完全架空fixture、本番学校/API通信なし。Linux/.NET10.0.402、実WinUI/Windows ACL未確認。
 
