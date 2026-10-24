@@ -16,9 +16,19 @@ namespace Takupoke.Win.UITests;
 
 internal static partial class Program
 {
-    private static void CheckSinglePeriodCancellationClock(string executable, string root)
+    private static void CheckSinglePeriodCancellationClock(string executable, string originalRoot)
     {
         Stop();
+        var originalEnvironment = Environment.GetEnvironmentVariable("TAKUPOKE_DATA_ROOT");
+        var preferencesPath = Path.Combine(originalRoot, "preferences.json");
+        var preferenceBytes = File.ReadAllBytes(preferencesPath);
+        var personal = new PreferencesStore(originalRoot).LoadAsync().GetAwaiter().GetResult();
+        var root = Path.Combine(Path.GetDirectoryName(originalRoot)!, "fictional-cancellation-clock-ui-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+        Environment.SetEnvironmentVariable("TAKUPOKE_DATA_ROOT", root);
+        SeedAsync(root).GetAwaiter().GetResult();
+        new PreferencesStore(root).SaveAsync(personal).GetAwaiter().GetResult();
         var today = SchoolDate.InJapan(DateTimeOffset.UtcNow);
         var day = today.DisplayWeekStart();
         PrepareCancellationClockAsync(root, day).GetAwaiter().GetResult();
@@ -39,6 +49,19 @@ internal static partial class Program
             "The rendered cancellation clock fits inside the measured card");
         Require(card.Current.Name.Contains("08:50～09:35", StringComparison.Ordinal),
             "The cancellation accessible label retains its known clock");
+        }
+        finally
+        {
+            try { Stop(); }
+            finally
+            {
+                Environment.SetEnvironmentVariable("TAKUPOKE_DATA_ROOT", originalEnvironment);
+                if (Directory.Exists(root)) Directory.Delete(root, recursive: true);
+            }
+        }
+        Require(Environment.GetEnvironmentVariable("TAKUPOKE_DATA_ROOT") == originalEnvironment
+            && File.ReadAllBytes(preferencesPath).SequenceEqual(preferenceBytes),
+            "The dedicated cancellation fixture preserves the caller root and personal preferences");
     }
 
     private static async Task PrepareCancellationClockAsync(string root, DateOnly day)

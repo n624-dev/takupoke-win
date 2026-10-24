@@ -1,5 +1,47 @@
 # 10456公開後の追加Issue対応
 
+## 10457の公開準備（未公開）
+
+PR45〜50はそれぞれの全8CI検査を通してmainへ統合済み。直前PR50のmain push 40040706149もsource1c1814ffc9c52e63fbc3ffdbe2105a814a0ac6b6でsuccess（23:40:10 UTC）。このmainの修正を配布し、新しい33/34の作業branchは含めない。公開スクリプトの更新内容だけを今回の入力・名称・時刻・保存・通知・起動・画面所有の修正へ更新する。
+
+ローカルのlicense notices13件は失敗0（0.011秒）、PowerShell構文parseも成功。Store境界9件の最初の実行は全23assert失敗（0.011秒）で、すべてrun_script冒頭の「PowerShell 7 is required」。PowerShellは所有toolchainへ設置済みだが、このshellではPATHへ追加する前に検査を呼んだため実scriptは未実行。製品や公開内容の失敗とは扱わず、既存toolchainをPATHへ設定して同じ境界を再確認する。catalog checkも成功。配布workflow・インストーラーの確認・公開はまだ未実行。
+
+所有PowerShell7.5.3をPATHへ設定した同じStore境界9件は失敗0（7.679秒）。製品コード・テスト・判定条件を変更していない。公開開始は本番mainへのfast-forward後にDevelopment installers/version=0.1.0-dev.10457で行い、同じsource/runの全CIとインストーラー検査・公開添付の匿名byte照合を別途確認する。
+
+10457の初回配布run40043131691/attempt1/source d98aadb9fb994745aaecbf6084031d3d59e6f452は00:04:38〜00:08:13 UTCでfailure、00:14予定照会で確認。具体job・case・失敗段階はログ未確認であり、対処未選択。同じsourceのmain push40043130939は00:08:18にsuccess。公開成功とは扱わず、失敗詳細と過去の配布条件を照合してから次の対応を選ぶ。
+
+失敗ログ観測:Core Windows job120718708277、Core223件成功後のIntegration294件中、RequestDeadlineIncludesTheBodyAndKeepsUserCancellationDistinct(kind=download,cancel=false)だけ失敗。ApiClientTests.cs:86のAssert.ThrowsAsync<ApiException>がTimeoutExceptionを受けた（case約3秒）。他のrequest種別/利用者取消を含む残り293件は成功。00:06:27に失敗を記録、Integration全体は00:06:39終端。配布インストーラー/MSIXは依存skipで未実行。次に元の期限/停止stream/外側待機と、同時実行した実method probeの待機を照合し、製品の期限不備か検査実行条件かを切り分ける。
+
+期限/TimeoutException/parallelで過去記録を検索し、22/23の停止body実再現、03451ebと現行ApiClient/ApiClientTests/CSharpMethodProbeを比較。製品Guardはheaders/body全体へ同じlinked250ms期限を渡し、同じsourceの直前mainと過去PRではこのcaseが通過している。今回失敗時は別collectionの本番method probe用dotnetコンパイル/実行が並行し、それらは5〜7秒、当該caseの外側2秒待機がTimeoutExceptionとなった。CPU/継続スケジュール競合は候補であり、ログだけで根本原因と断定しない。
+
+次の候補は短いApiClientTests collectionだけをxUnitのDisableParallelizationへ登録して、外部コンパイル等と実時間の期限比較を重ねないこと。テスト本文・全入力・body開始1秒/通信250ms/外側2秒・例外分類・finallyの所有取消は完全に維持し、製品や他collectionの並行実行は変更しない。単なる同条件再試行や期限延長にせず、候補/根拠を隔離branchへpush後、同じ全Integrationを確認する。
+
+候補1675f3aのLinux Integration全292件/失敗0（9秒）。元d98aadbと現在のApiClientTests class本文をbyte比較し、全テスト本文/値/期限が同一であることも確認した。catalog check --base d98aadb成功。Windowsの実時間条件と配布8検査/MSIX/インストーラーは次の新規実行で確認し、今回のLinux結果で成功扱いにしない。
+
+再配布run40044293420/attempt1/source c80b3bf9e15799441563b582c3d37602b43c78d5を00:30に観測。Windows Core/Integration job120722421977はsuccess（00:20:37終端）で、前回の期限caseは再発しなかった。一方、WinUI x64 Release build and launch/job120722422047はnative UI操作の段階でfailure（00:20:30終端）、具体case/原因は未確認。元iOS比較はmacos-15のrunner待ち。同じsourceのmain push40044293111ではWindows全job成功、元iOS比較だけrunner待ち。対処を選ぶ前の観測記録で、両実行の残jobを取り消さない。
+
+失敗ログ:main color blue is saved, displayed and its popup items are closedでTimeoutException（00:20:02、先行67チェック成功）。色選択後の保存値/表示/popup閉鎖の結合条件に失敗し、どの部分が不成立かはまだ未確定。synthetic screenの採取は行われた。製品の色保存や閉じ方を推測で変更せず、実Automation値/保存値/操作の詳細と旧コードを照合する。
+
+color/popup/色選択で過去索引を検索し、change-row-exclusion-verificationの2b08bba以前の次項目取得失敗と23ea860の紫戻し未保存、当時と現在のSelectMainColor/Settings SelectionChangedを比較した。今回green/yellow/orange/red/pinkの完了後blueだけで30秒待機が切れ、直後のpopupはCollapsed。旧紫戻しの製品修正は維持済みで、今回のどの条件が不成立かは未観測。後続CapturePagesは再seedしてMainColor=defaultから起動するため、その画像を失敗瞬間の色状態の証拠には使えない。
+
+次の候補は診断のみ。選択前/直後/元30秒待機のtimeout時に、実保存enum・新しいcontrolの有効性/Popup/選択enum/可視色項目・元controlとのRuntimeId一致を観測する。offline fixtureのときだけ固定色enumと状態を出し、観測失敗は型名だけ記録する。元の一回Select/必要な一回Collapse、全wait条件/期限/件数を維持し、押し直し・値注入・条件緩和は行わない。根本原因や製品修正済みと扱わず、隔離branchへpush後、クロスビルドと新規Windows CIで切り分ける。
+
+診断6131409はWinUI automation targetのLinuxクロスビルドに成功（5.92秒、警告/エラー0）、catalog check --base c80b3bf成功。Windows上の実UI操作は次の隔離branchのCIで確認する。アプリ本体、保存、UI操作の合格条件は変更していないため、このコンパイル成功を色選択の成功には数えない。
+
+診断CI40045896233/attempt1/source f25622860aae1bd5097bd247d172f7499d56d4bcではWindows全jobとLinux Coreがsuccess。WinUI/job120727515121は00:40:39終端、実446チェックが成功。blueは選択前saved=pink/選択表示ピンク/元control一致、選択直後saved=blueで、その後の元の保存/表示/Popup閉鎖条件も通過した。他の全色・紫への戻しも成功。直後にcontrolが一時不在になる観測は全色で起こり、元wait内で復帰した。古いc80b3bfの失敗時の状態は未観測なので、今回から旧失敗の原因や恒常的解消を断定しない。元iOS比較はまだrunner待ち、MSIXは未開始で、同じsourceの配布workflowで全必須検査を改めて要求する。
+
+旧main40044293111は全job success終端、旧配布40044293420は元iOS比較もsuccess後、既知の色UI失敗によりMSIX/installerはskip、全job終端となった。取消しせず確認済みで再照会しない。新診断CIの残件も継続して終端確認する。
+
+01:05照会で、新配布40046761428/attempt1/source f7b0a5233810293e4aacc5156bf109844094c362が00:59:57にfailure終端したことを確認。具体job/段階/原因は未確認で対処未選択。同じsourceのmain40046761483は00:57:13にsuccess終端。診断CI40045896233は元iOS比較もsuccessとなり、選択7job成功/指定条件のMSIX skipで全終端。CIのMSIXはこのdispatchでは選択されない条件であり、依存失敗によるskipとは区別する。旧実行を再照会しない。
+
+配布40046761428の全job終端:事前7job success、指定条件のMSIX skip、installer job120731823097 failure（00:54:40〜00:59:56）。パッケージ構築は成功し、Test the x64 installer and installed app（00:57:08〜00:59:51）で失敗した。インストーラー内の具体case/段階は次のログで確認し、通常CIの成功へ置き換えない。
+
+installerログ観測:最初の導入の実UI447件は00:58:45に成功。その後の同じ保存先を使う検証で257チェック後、The synthetic subject appears on all five weekdaysの30秒待機が失敗。残った最初の通常授業は2026-10-27（火曜）の3_IT/1限。blueを含む全色の保存はこの回も成功した。The synthetic subject/fixture/DisplayWeekStartで元のPR47日付修正記録と現在のSeedAsync・CheckSinglePeriodCancellationClock・installerの繰返しRun-UiChecksを比較した。
+
+原因:新しい休講clock caseが呼出元と同じstoreへ表示週月曜1限の変更を書き、IncludesChanges=trueで保存して終了する。次のRunは通常授業を5曜日分再seedするが変更資料を消さないため、前回の月曜休講が正しく適用され、通常科目は火〜金の4件となる。製品の変更反映ではなく、繰返し導入検証のfixtureの寿命の問題。候補は既存retention検証と同じ専用の所有rootへ休講caseを分離し、呼出元の個人設定を複製して検証する。finallyでapp停止/環境復元/所有root回収を行い、呼出元のpreferences bytes保持も確認する。通常5曜日の期待、実XLSX解析/休講card時計、6導入状態と保存/更新/削除の条件は削らない。
+
+候補fe65f71のWinUI test targetクロスビルドは警告/エラー0（5.52秒）、catalog check --base f7b0a52成功。新しい所有rootに正常な架空通常授業と呼出元の個人設定を用意し、そこで元の実XLSX取消とnative clockを検査する。親rootの環境値・個人設定bytes保持を元caseの完了条件へ追加した。アプリ本体と元の5曜日/6導入状態の検証を変えていない。新しい配布実行で繰返し導入も含めて確認する。
+
 対象main ff2166f3086bd52b573ba2f54aa3f7810f678c77。iOS436の初回公開完了後に着手。各OS独立実装、完全架空fixture、本番学校/API通信なし。Linux/.NET10.0.402、実WinUI/Windows ACL未確認。
 
 ## 保存済みリンク（37）
