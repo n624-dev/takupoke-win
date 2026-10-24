@@ -8,6 +8,10 @@ using Xunit;
 
 namespace Takupoke.Integration.Tests;
 
+[CollectionDefinition("Request deadline timing", DisableParallelization = true)]
+public sealed class ApiClientDeadlineCollection { }
+
+[Collection("Request deadline timing")]
 public sealed class ApiClientTests
 {
     private const string Revision = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";

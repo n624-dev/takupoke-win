@@ -8,6 +8,14 @@ PR45〜50はそれぞれの全8CI検査を通してmainへ統合済み。直前P
 
 所有PowerShell7.5.3をPATHへ設定した同じStore境界9件は失敗0（7.679秒）。製品コード・テスト・判定条件を変更していない。公開開始は本番mainへのfast-forward後にDevelopment installers/version=0.1.0-dev.10457で行い、同じsource/runの全CIとインストーラー検査・公開添付の匿名byte照合を別途確認する。
 
+10457の初回配布run40043131691/attempt1/source d98aadb9fb994745aaecbf6084031d3d59e6f452は00:04:38〜00:08:13 UTCでfailure、00:14予定照会で確認。具体job・case・失敗段階はログ未確認であり、対処未選択。同じsourceのmain push40043130939は00:08:18にsuccess。公開成功とは扱わず、失敗詳細と過去の配布条件を照合してから次の対応を選ぶ。
+
+失敗ログ観測:Core Windows job120718708277、Core223件成功後のIntegration294件中、RequestDeadlineIncludesTheBodyAndKeepsUserCancellationDistinct(kind=download,cancel=false)だけ失敗。ApiClientTests.cs:86のAssert.ThrowsAsync<ApiException>がTimeoutExceptionを受けた（case約3秒）。他のrequest種別/利用者取消を含む残り293件は成功。00:06:27に失敗を記録、Integration全体は00:06:39終端。配布インストーラー/MSIXは依存skipで未実行。次に元の期限/停止stream/外側待機と、同時実行した実method probeの待機を照合し、製品の期限不備か検査実行条件かを切り分ける。
+
+期限/TimeoutException/parallelで過去記録を検索し、22/23の停止body実再現、03451ebと現行ApiClient/ApiClientTests/CSharpMethodProbeを比較。製品Guardはheaders/body全体へ同じlinked250ms期限を渡し、同じsourceの直前mainと過去PRではこのcaseが通過している。今回失敗時は別collectionの本番method probe用dotnetコンパイル/実行が並行し、それらは5〜7秒、当該caseの外側2秒待機がTimeoutExceptionとなった。CPU/継続スケジュール競合は候補であり、ログだけで根本原因と断定しない。
+
+次の候補は短いApiClientTests collectionだけをxUnitのDisableParallelizationへ登録して、外部コンパイル等と実時間の期限比較を重ねないこと。テスト本文・全入力・body開始1秒/通信250ms/外側2秒・例外分類・finallyの所有取消は完全に維持し、製品や他collectionの並行実行は変更しない。単なる同条件再試行や期限延長にせず、候補/根拠を隔離branchへpush後、同じ全Integrationを確認する。
+
 対象main ff2166f3086bd52b573ba2f54aa3f7810f678c77。iOS436の初回公開完了後に着手。各OS独立実装、完全架空fixture、本番学校/API通信なし。Linux/.NET10.0.402、実WinUI/Windows ACL未確認。
 
 ## 保存済みリンク（37）
