@@ -1,9 +1,9 @@
 {
   "source": "Debian fonts-noto-cjk 1:20240730+repack1-1 / NotoSansCJK-Regular.ttc face0 Noto Sans CJK JP 2.004",
   "sourceSha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
-  "subsetSha256": "26edf599426c04771ca15418b9db8bb2f091d83c4c23bcb3cf994e510d580b80",
+  "subsetSha256": "9f86a86aa43c404dd59d53af53e1cdf7c7305ed63642b3ae8fa3c70f9f486b22",
   "generator": "fontTools 4.61.1; subset unicode text only; layout_features=[]; desubroutinize=True; recalc_timestamp=False; CFF names renamed FictionalSpecialScheduleCJKSubset",
-  "fictionalText": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ 令和年度試験返却時間割架空科目教員室月日時限目連続以下のとおりです。は通常の授業日どおりの授業時間",
+  "fictionalText": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ 令和年度試験返却時間割架空科目教員室月日時限目連続以下のとおりです。は通常の授業日どおりの授業時間・",
   "ascent": 1160,
   "descent": -288,
   "glyphs": {
@@ -421,6 +421,10 @@
     },
     "り": {
       "cid": 1533,
+      "width": 1000
+    },
+    "・": {
+      "cid": 1644,
       "width": 1000
     },
     "下": {

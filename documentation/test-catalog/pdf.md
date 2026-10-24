@@ -1,7 +1,7 @@
 # Strict PDF・文字・罫線・試験・返却
 
 対応関係・宣言名・実行方法のSHA-256：
-`f7aa2720b9a7e6d5408ae274a316e44b76607b094f47ddc0bbd48f9a80307603`
+`e98d5f4109759d4b41387f9d05a492ae536da256bae58bdad1dee2d2959bac0e`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -49,8 +49,10 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/PdfVisibilityTests.cs](../../tests/Takupoke.Integration.Tests/PdfVisibilityTests.cs)
 
+- `SpecialTextShowOrderIncludesEmptyStringsQuotesAndWholeTJ`
 - `RealFontSpecialControlsKeepFullExamAndReturnTimetables`
 - `SpecialPaintMustProveActualTextVisibility`
+- `HiddenSpecialReplacementKeepsPreviousGoodAfterEncryptedStoreRestart`
 - `RuleContrastUsesTheActualOpaqueBackgroundAndRejectsLaterCover`
 - `MergedAndVisibleSplitRuleControlsUseTheirActualPeriodSpan`
 - `InvisibleStrokeOrFilledBoundaryCannotChangeTheAcceptedMergedSpan`

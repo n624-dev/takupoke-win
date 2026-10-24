@@ -200,6 +200,10 @@ iOS77の交差確認でWindowsのToUnicodeもrange追加と文字挿入ごとに
 
 ## 特別PDFの文字描画順と可視性（35、iOS101交差）
 
+25e1fb4の修正前8展開は7失敗/1成功（527ms）。返却7授業の正対照は成功し、白本文/上塗り/未知alphaの3条件は実Readerが例外なしで受理。試験writerは中点だけがsubsetに欠けReader前に失敗した（iOS索引N133に事実を先記録）。中点を同じ元TTCから追加した134文字/14,930bytesのSHAは9f86a86aa43c404dd59d53af53e1cdf7c7305ed63642b3ae8fa3c70f9f486b22。元の字体/CID/幅・名前変更/OFL・全85/7件の期待は保持する。
+
+候補は全kindでpaintを構築し、SpecialGlyphsの実PdfPig結果を一度だけTextSequence別に保持する。各実Tj/TJ/'/"で1進め、該当群を色/上塗り順へ注入する。未消費/不正sequenceは全体拒否。通常customfont engineは通常のみのまま、Specialをそこへ経由させない。gsのalpha/blend検査を従来のSpecial continueより前に置き、clip/marked-content/Group/既定色の不確実な可視性も拒否する。空文字/複数stringの実校正を永久回帰にし、両種別の実暗号化store再起動・前回正常授業/双方原本/失敗記録保持も追加する。未配布の解析版11/8を維持する。候補とN133根拠をpush後に再検査する。
+
 現行PdfPigLayoutReaderはTimetableだけpaintを作り、SpecialGlyphsは実PdfPigのフォント/幾何を保持するが色/上塗りに結び付けていない。実PdfPig0.1.16と旧実Reader/XMLを照合した。所有一時consoleで実埋込CFFのA Tj/空Tj/[C 空 N] TJ/A '/C "を読ませ、文字列A/C/N/A/CのTextSequenceが1/3/3/4/5、次の通常文字は6だった。TJ内の各stringではなくtext-show演算全体が一つ、空Tjも一つの順序を消費する。結果は/tmp/takupoke-win35-sequence-diagnostic.log。推測したindexや通常のcustomfont engineへの切替は行わない。
 
 元の通常fixtureのfontは変えず、別名FictionalSpecialScheduleCJKSubsetを追加。Debian fonts-noto-cjk 1:20240730+repack1-1のTTC face0/JP2.004（元SHA b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a）からfontTools4.61.1でASCIIと架空見出し/科目/教員だけをsubset。layout_features空/desubroutinize=True/recalc_timestamp=False、CFF/FD名を別名へ変更し、実CID/widthの対応とOFLを保持した。133文字/14,889bytes、SHA26edf599426c04771ca15418b9db8bb2f091d83c4c23bcb3cf994e510d580b80。旧OTFのSHAをこの由来と混同しない。

@@ -11,6 +11,23 @@ namespace Takupoke.Integration.Tests;
 public sealed class PdfVisibilityTests
 {
     [Theory]
+    [InlineData(MaterialKind.Exam)]
+    [InlineData(MaterialKind.ExamReturn)]
+    public void SpecialTextShowOrderIncludesEmptyStringsQuotesAndWholeTJ(MaterialKind kind)
+    {
+        using var metadata = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(Fixtures,"fictional-noto.json")));
+        string Code(string value) => metadata.RootElement.GetProperty("glyphs").GetProperty(value).GetProperty("cid").GetInt32().ToString("X4");
+        var content = $"BT /F1 8 Tf 1 0 0 1 20 450 Tm <{Code("A")}> Tj <> Tj [<{Code("C")}> -10 <> <{Code("N")}>] TJ <{Code("A")}> ' 0 0 <{Code("C")}> \" ET";
+        var bytes = FictionalTimetablePdf.Make(Fixtures,extraGridContent:content);
+        using var document = UglyToad.PdfPig.PdfDocument.Open(bytes,new UglyToad.PdfPig.ParsingOptions { UseLenientParsing=false,SkipMissingFonts=false });
+        var original = document.GetPage(1).Letters.Take(5).ToArray();
+        Assert.Equal(new[] {"A","C","N","A","C"},original.Select(l => l.Value));
+        Assert.Equal(new[] {1,3,3,4,5},original.Select(l => l.TextSequence));
+        var actual = Assert.Single(PdfPigLayoutReader.Read(bytes,kind)).Glyphs.Take(5).ToArray();
+        Assert.Equal(original.Select(l => l.Value),actual.Select(g => g.Text));
+        Assert.Equal(new int?[] {1,3,3,4,5},actual.Select(g => g.SourceLine));
+    }
+    [Theory]
     [InlineData(false,85)]
     [InlineData(true,7)]
     public void RealFontSpecialControlsKeepFullExamAndReturnTimetables(bool returns, int count)
@@ -39,6 +56,38 @@ public sealed class PdfVisibilityTests
             : Enumerable.Range(1,6).Select(i => SpecialPdfParityTests.ExamPage(i)).ToArray();
         var bytes = FictionalTimetablePdf.MakeSpecial(Fixtures,layouts,paint,after,state);
         Assert.Equal("P01",Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(bytes,kind)).Stage);
+    }
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task HiddenSpecialReplacementKeepsPreviousGoodAfterEncryptedStoreRestart(bool returns)
+    {
+        var root = Path.Combine(Path.GetTempPath(),"takupoke-special-paint-"+Guid.NewGuid().ToString("N")); Directory.CreateDirectory(root);
+        using var protector = new Protector();
+        try
+        {
+            var kind = returns ? MaterialKind.ExamReturn : MaterialKind.Exam;
+            var layouts = returns ? new[] { SpecialPdfParityTests.ReturnPage() }
+                : Enumerable.Range(1,6).Select(i => SpecialPdfParityTests.ExamPage(i)).ToArray();
+            var black = FictionalTimetablePdf.MakeSpecial(Fixtures,layouts);
+            var white = FictionalTimetablePdf.MakeSpecial(Fixtures,layouts,"1 g");
+            var path = Path.Combine(root,"fictional.pdf"); string oldId, newId;
+            await using (var store = new SchoolDataStore(root,protector))
+            {
+                var coordinator = new MaterialCoordinator(store,new(new Identity()));
+                await File.WriteAllBytesAsync(path,black); Assert.True((await coordinator.SelectAsync(kind,path,2026)).Parsed);
+                var lease = await store.BeginAsync(); oldId = (await store.ReadAsync<MaterialAnalysis>(lease,"analysis."+kind))!.OriginalId;
+                await File.WriteAllBytesAsync(path,white); Assert.False((await coordinator.RefreshAsync(kind,2026)).Parsed);
+                newId = (await store.ReadAsync<SourceRecord>(lease,"selection."+kind))!.Id; Assert.NotEqual(oldId,newId);
+            }
+            await using var reopened = new SchoolDataStore(root,protector); var restored = await reopened.BeginAsync();
+            var kept = (await reopened.ReadAsync<MaterialAnalysis>(restored,"analysis."+kind))!;
+            Assert.Equal(oldId,kept.OriginalId); Assert.Equal(returns ? 7:85,kept.Special!.Lessons.Count);
+            Assert.Equal("P01",(await reopened.ReadAsync<MaterialAttempt>(restored,"attempt."+kind))!.Failure);
+            Assert.Equal(black,await reopened.ReadOriginalAsync(restored,oldId));
+            Assert.Equal(white,await reopened.ReadOriginalAsync(restored,newId));
+        }
+        finally { Directory.Delete(root,true); }
     }
 
     private static string Fixtures => Path.Combine(AppContext.BaseDirectory, "fixtures");
