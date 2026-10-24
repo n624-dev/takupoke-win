@@ -31,14 +31,14 @@ public static class PdfPigLayoutReader
                 if (page.Operations.Count > 1_000_000 || page.Letters.Count is < 1 or > 100000 || page.Text.Length > 100000) throw new PdfParseException("limit", number);
                 var transform = new PdfDisplayTransform(media.Left, media.Bottom, media.Width, media.Height, page.Rotation.Value);
                 var paint = new PdfPaintVisibility(token);
-                var paths = new PdfPathEngine(transform, token, paint is null ? null : paint.Paths);
+                var paths = new PdfPathEngine(transform, token, paint.Paths);
                 var text = kind == MaterialKind.Timetable ? new PdfTextEngine(token, glyph => paint.Glyph(transform.Glyph(glyph))) : null;
                 var special = text is null ? SpecialGlyphs(page, transform, token) : null;
                 var specialGroups = special?.GroupBy(g => g.SourceLine ?? throw new PdfParseException("P01", number)).ToDictionary(g => g.Key,g => g.ToArray());
                 if (specialGroups?.Keys.Any(sequence => sequence <= 0) == true) throw new PdfParseException("P01", number);
                 var specialSequence = 0;
                 var resources = Resources(document, page.Dictionary); var fonts = new Dictionary<string, PdfFont>();
-                if (paint is not null && (Get(page.Dictionary, "Group") is not null
+                if ((Get(page.Dictionary, "Group") is not null
                     || Get(resources, "ColorSpace") is { } spaces && Resolve<DictionaryToken>(document, spaces).Data.Keys.Any(key => key is "DefaultGray" or "DefaultRGB" or "DefaultCMYK")))
                     throw new PdfParseException("P01", number);
                 foreach (var operation in page.Operations)
@@ -46,7 +46,7 @@ public static class PdfPigLayoutReader
                     token.ThrowIfCancellationRequested();
                     var name = operation.Operator;
                     if (name == "Do") throw new PdfParseException("P12", number);
-                    if (paint is not null && name is "cs" or "CS")
+                    if (name is "cs" or "CS")
                     {
                         using var serialized = new MemoryStream(); operation.Write(serialized);
                         if (serialized.Length > 1024) throw new PdfParseException("limit", number);
@@ -55,14 +55,14 @@ public static class PdfPigLayoutReader
                         paint.SelectColourSpace(name == "CS", parts[0][1..]);
                         continue;
                     }
-                    if (paint is not null && PdfPaintVisibility.Unverified(name)) throw new PdfParseException("P01", number);
+                    if (PdfPaintVisibility.Unverified(name)) throw new PdfParseException("P01", number);
                     if (name is "BDC" or "BMC" or "W" or "W*") throw new PdfParseException("P01", number);
-                    if (PdfPathEngine.Supports(name) || text is not null && PdfTextEngine.Supports(name) || paint is not null && PdfPaintVisibility.Supports(name))
+                    if (PdfPathEngine.Supports(name) || text is not null && PdfTextEngine.Supports(name) || PdfPaintVisibility.Supports(name))
                     {
                         var numbers = Numbers(operation);
                         if (PdfPathEngine.Supports(name)) paths.Operation(name, numbers);
                         if (text is not null && PdfTextEngine.Supports(name)) text.Operation(name, numbers);
-                        if (paint is not null && PdfPaintVisibility.Supports(name)) paint.Operation(name, numbers);
+                        if (PdfPaintVisibility.Supports(name)) paint.Operation(name, numbers);
                     }
                     if (name == "gs")
                     {
@@ -73,7 +73,7 @@ public static class PdfPigLayoutReader
                         if (state.Data.Keys.Any(key => key is not ("Type" or "ca" or "CA" or "BM" or "LW"))
                             || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1
                             || state.Data.ContainsKey("BM") && Name(document, state, "BM") is not ("Normal" or "Compatible")) throw new PdfParseException("P01", number);
-                        if (state.Data.ContainsKey("LW")) paint!.Operation("w", [Number(document, state, "LW")]);
+                        if (state.Data.ContainsKey("LW")) paint.Operation("w", [Number(document, state, "LW")]);
                     }
                     if (specialGroups is not null && name is "Tj" or "TJ" or "'" or "\"")
                     {

@@ -200,6 +200,8 @@ iOS77の交差確認でWindowsのToUnicodeもrange追加と文字挿入ごとに
 
 ## 特別PDFの文字描画順と可視性（35、iOS101交差）
 
+fc5fdceの新規/周辺PDF回帰は111展開/失敗0（約1秒）。完全試験85/返却7授業、空Tj/TJ/引用符の実順序、白/上塗り/未知alpha拒否、実Coordinator保存・暗号化SQLite再起動・旧授業/双方原本/失敗保持を通過した。新しいnullable警告3件は常に生成するpaintへ旧nullable guardが残ったためで、同じ非null処理へ整理する。追加でiOS101の同一複合塗り相殺を両Specialへ適用し、離れた/接触だけの独立した実PDF正対照を保持する。全体検査とWindows実UI/配布は未確認。
+
 25e1fb4の修正前8展開は7失敗/1成功（527ms）。返却7授業の正対照は成功し、白本文/上塗り/未知alphaの3条件は実Readerが例外なしで受理。試験writerは中点だけがsubsetに欠けReader前に失敗した（iOS索引N133に事実を先記録）。中点を同じ元TTCから追加した134文字/14,930bytesのSHAは9f86a86aa43c404dd59d53af53e1cdf7c7305ed63642b3ae8fa3c70f9f486b22。元の字体/CID/幅・名前変更/OFL・全85/7件の期待は保持する。
 
 候補は全kindでpaintを構築し、SpecialGlyphsの実PdfPig結果を一度だけTextSequence別に保持する。各実Tj/TJ/'/"で1進め、該当群を色/上塗り順へ注入する。未消費/不正sequenceは全体拒否。通常customfont engineは通常のみのまま、Specialをそこへ経由させない。gsのalpha/blend検査を従来のSpecial continueより前に置き、clip/marked-content/Group/既定色の不確実な可視性も拒否する。空文字/複数stringの実校正を永久回帰にし、両種別の実暗号化store再起動・前回正常授業/双方原本/失敗記録保持も追加する。未配布の解析版11/8を維持する。候補とN133根拠をpush後に再検査する。

@@ -49,6 +49,8 @@ public sealed class PdfVisibilityTests
     [InlineData(true,"0 g","q 1 g 0 0 1800 1000 re f Q",null)]
     [InlineData(false,"/GS0 gs",null,"/ca 0.5")]
     [InlineData(true,"/GS0 gs",null,"/CA 0")]
+    [InlineData(false,"0 g","10 10 1 30 re 10 10 1 30 re f*",null)]
+    [InlineData(true,"0 g","10 10 1 30 re 10 10 m 10 40 l 11 40 l 11 10 l h f",null)]
     public void SpecialPaintMustProveActualTextVisibility(bool returns,string paint,string? after,string? state)
     {
         var kind = returns ? MaterialKind.ExamReturn : MaterialKind.Exam;
@@ -56,6 +58,17 @@ public sealed class PdfVisibilityTests
             : Enumerable.Range(1,6).Select(i => SpecialPdfParityTests.ExamPage(i)).ToArray();
         var bytes = FictionalTimetablePdf.MakeSpecial(Fixtures,layouts,paint,after,state);
         Assert.Equal("P01",Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(bytes,kind)).Stage);
+    }
+    [Theory]
+    [InlineData(false,"10 10 1 30 re 20 10 1 30 re f*")]
+    [InlineData(true,"10 10 1 30 re 11 10 1 30 re f")]
+    public void IndependentCompoundFillControlsKeepTheSpecialTimetable(bool returns,string content)
+    {
+        var kind = returns ? MaterialKind.ExamReturn : MaterialKind.Exam;
+        var layouts = returns ? new[] { SpecialPdfParityTests.ReturnPage() }
+            : Enumerable.Range(1,6).Select(i => SpecialPdfParityTests.ExamPage(i)).ToArray();
+        var parsed = PdfScheduleParser.Special(PdfPigLayoutReader.Read(FictionalTimetablePdf.MakeSpecial(Fixtures,layouts,afterText:content),kind),kind);
+        Assert.Equal(returns ? 7:85,parsed.Lessons.Count);
     }
     [Theory]
     [InlineData(false)]
