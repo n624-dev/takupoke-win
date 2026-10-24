@@ -7,6 +7,9 @@ namespace Takupoke.Infrastructure.Parsing;
 public sealed record PdfUnicodeMap(int CodeBytes, IReadOnlyDictionary<int, string> Values)
 {
     public static PdfUnicodeMap Read(byte[] data, CancellationToken cancellationToken = default)
+        => ReadWithCheckpoint(data, cancellationToken.ThrowIfCancellationRequested);
+
+    internal static PdfUnicodeMap ReadWithCheckpoint(byte[] data, Action checkpoint)
     {
         if (data.Length > 2_000_000 || data.Any(b => b > 127)) throw new PdfParseException("P01");
         var source = Regex.Replace(Encoding.ASCII.GetString(data), "%[^\\r\\n]*", "");
@@ -32,14 +35,14 @@ public sealed record PdfUnicodeMap(int CodeBytes, IReadOnlyDictionary<int, strin
         }
         while (cursor < tokens.Length)
         {
-            cancellationToken.ThrowIfCancellationRequested();
+            checkpoint();
             var token = Next();
             if (token == "/WMode" && Next() != "0") throw new PdfParseException("P01");
             if (token is not "begincodespacerange" and not "beginbfchar" and not "beginbfrange") continue;
             if (cursor < 2 || !int.TryParse(tokens[cursor - 2], NumberStyles.Integer, CultureInfo.InvariantCulture, out var count) || count is < 1 or > 65536) throw new PdfParseException("P01");
             for (var index = 0; index < count; index++)
             {
-                cancellationToken.ThrowIfCancellationRequested();
+                checkpoint();
                 if (token == "begincodespacerange")
                 {
                     var low = Hex(Next()); var high = Hex(Next());

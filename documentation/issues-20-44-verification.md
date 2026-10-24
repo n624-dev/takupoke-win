@@ -188,6 +188,12 @@ source36954cbの同じ再検査は8成功・2失敗（184ms）。通常行順・
 
 N129照合後、不正な明示連続時計を未記載扱いで補完する当初の追加test期待は採用しない。「曖昧な内容を推測採用しない」という既存方針に合わせ、境界違反そのものをP05で拒否する。元のCell処理は維持し、連続見出しが本当に未記載の完全Parserを独立した正対照として追加し、正常な単独時計からの算出を必須にする。正常な隣接/全角/保存codecの対照は不変。WindowsのRune判定はOsmanyaも既に拒否しているので変更しない。候補と記録をpushしてから11展開を再検査する。
 
+ea6ac2fでは11展開/失敗0（299ms）、周辺のPDF/固定参照/可視性/実Coordinator104件/失敗0が成功。iOSも新規6ケースと周辺207件が成功した。現在は両作業枝のローカル検証で、公開済み10457へ含まれるとは記載しない。
+
+iOS77の交差確認でWindowsのToUnicodeもrange追加と文字挿入ごとにspaces.Anyを再走査すると確認。製品関数を変更せず、エラー型だけ補助した.NET10 Releaseハーネスで全対応をAとした架空CMapを3回ずつ計測し、4,096/16,384/65,536対応の中央値は0.204352/0.413463/5.511566秒。最大1,572,937bytes、全対応/個数/code checksumを照合。Windows実機/PDF全体の所要時間ではなく、iOS側と別の実関数の計測である。外側の取消を保持しつつ内側bfrange/符号走査の確認を追加する対象として扱う。
+
+取消の再現準備として、public ReadのCancellationToken.ThrowIfCancellationRequestedを同じ位置/回数の内部checkpointへ委譲し、mapping/拒否条件/内側ループは変更しない。Integrationだけへinternalを公開し、単一codespace/単一bfrangeの65,536対応で16回目のcheckpoint時に実CancellationTokenSourceをcancelする回帰を追加する。固定sleepや壁時計のassertは使わず、内部の長い処理で取消確認が不足するかを実行で見る。全domainの両表現、重複/範囲外、元のcontrol拒否も対照として追加。現段階はcheckpointの準備と回帰のみで、高速化/取消解消済みとはしない。
+
 ## ページ可視範囲と注釈（33）
 
 source825a8f9＋追加架空real-font PDF回帰、Linux/.NET10.0.402、4件中2件失敗（434ms）。完全Crop/注釈なしは同じ授業を受理し、授業をCropBoxから外した版と不透明白Square注釈版も例外なしで受理する修正前動作を確認。描画命令・元フォント・授業文字は対照と同一。現在/ff2166fのReaderはMediaBoxで配置し、注釈を検証しない。候補はCropBoxとMediaBoxの交差領域へ全文字/採用罫線が含まれるか検証し、未検証の非空Annotsはページを拒否する。注釈のappearanceや透明度を推測して無視しない。正常結果保持は既存実Coordinator/store回帰を新しい2条件にも適用する。Reader共通なので通常/特別の解析版を更新する。

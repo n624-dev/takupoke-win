@@ -41,11 +41,63 @@ public sealed class PdfParsingTests
         var map = PdfUnicodeMap.Read("1 begincodespacerange <00> <ff> endcodespacerange 1 beginbfchar <41> <67b6> endbfchar 1 beginbfrange <42> <43> <0042> endbfrange"u8.ToArray());
         Assert.Equal("架", map.Values[65]); Assert.Equal("B", map.Values[66]); Assert.Equal("C", map.Values[67]);
     }
+
+    private static byte[] MaximumCmapDomain(bool range)
+    {
+        const int count = 65536;
+        if (range)
+            return Encoding.ASCII.GetBytes("1 begincodespacerange <0000><FFFF> endcodespacerange 1 beginbfrange <0000><FFFF> ["
+                + string.Concat(Enumerable.Repeat("<0041>", count)) + "] endbfrange");
+        var spaces = new StringBuilder(); var entries = new StringBuilder();
+        for (var index = 0; index < count; index++)
+        {
+            var code = "<" + index.ToString("X4", CultureInfo.InvariantCulture) + ">";
+            spaces.Append(code).Append(code); entries.Append(code).Append("<0041>");
+        }
+        return Encoding.ASCII.GetBytes($"{count} begincodespacerange {spaces} endcodespacerange {count} beginbfchar {entries} endbfchar");
+    }
+
+    [Fact]
+    public void CmapInnerWorkHonorsCallerCancellation()
+    {
+        var data = MaximumCmapDomain(true);
+        using var cancellation = new CancellationTokenSource();
+        var checks = 0;
+        Assert.Throws<OperationCanceledException>(() => PdfUnicodeMap.ReadWithCheckpoint(data, () =>
+        {
+            if (++checks == 16) cancellation.Cancel();
+            cancellation.Token.ThrowIfCancellationRequested();
+        }));
+        Assert.Equal(16, checks);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void CmapMaximumDomainPreservesMappings(bool range)
+    {
+        var data = MaximumCmapDomain(range);
+        Assert.InRange(data.Length, 1, 2_000_000);
+        var map = PdfUnicodeMap.Read(data);
+        Assert.Equal(2, map.CodeBytes); Assert.Equal(65536, map.Values.Count);
+        Assert.All(map.Values.Values, text => Assert.Equal("A", text));
+        Assert.Equal(2147450880L, map.Values.Keys.Sum(code => (long)code));
+        using var cancellation = new CancellationTokenSource(); cancellation.Cancel();
+        Assert.Throws<OperationCanceledException>(() => PdfUnicodeMap.Read(data, cancellation.Token));
+    }
+
+    [Theory]
+    [InlineData("2 begincodespacerange <0000><00FF><00FF><01FF> endcodespacerange 1 beginbfchar <0000><0041> endbfchar")]
+    [InlineData("1 begincodespacerange <0000><00FF> endcodespacerange 1 beginbfchar <0100><0041> endbfchar")]
+    public void CmapRejectsOverlappingSpacesAndOutOfDomainCodes(string text)
+        => Assert.Equal("P01", Assert.Throws<PdfParseException>(() => PdfUnicodeMap.Read(Encoding.ASCII.GetBytes(text))).Stage);
     [Theory]
     [InlineData("usecmap")]
     [InlineData("/WMode 1")]
     [InlineData("1 beginbfchar <41> <d800> endbfchar")]
     [InlineData("2 beginbfchar <41> <0041> <41> <0042> endbfchar")]
+    [InlineData("1 beginbfchar <00> <0000> endbfchar")]
+    [InlineData("1 beginbfchar <41> <000A> endbfchar")]
     public void CmapRejectsUnsupportedOrAmbiguousMappings(string content)
     {
         Assert.Throws<PdfParseException>(() => PdfUnicodeMap.Read(Encoding.ASCII.GetBytes("1 begincodespacerange <00> <ff> endcodespacerange " + content)));
