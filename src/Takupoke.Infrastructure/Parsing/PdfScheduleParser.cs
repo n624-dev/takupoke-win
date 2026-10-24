@@ -132,15 +132,14 @@ public static partial class PdfScheduleParser
             var singles = Regex.Matches(value, "([1-8])時限目([0-9]{1,2}:[0-9]{2})[~〜]([0-9]{1,2}:[0-9]{2})");
             var pairs = Regex.Matches(value, "([1-8])[・･]([1-8])時限連続([0-9]{1,2}:[0-9]{2})[~〜]([0-9]{1,2}:[0-9]{2})");
             var whole = WholeNumericHeadings(value, singles, pairs);
+            if (whole.Count != singles.Count + pairs.Count) throw new PdfParseException("P05");
             foreach (Match match in singles)
             {
-                if (!whole.Contains((match.Index, match.Length))) continue;
                 var period = int.Parse(match.Groups[1].Value);
                 if (period > count || !times.TryAdd(period, Range(match.Groups[2].Value, match.Groups[3].Value))) throw new PdfParseException("P05");
             }
             foreach (Match match in pairs)
             {
-                if (!whole.Contains((match.Index, match.Length))) continue;
                 var first = int.Parse(match.Groups[1].Value); var last = int.Parse(match.Groups[2].Value);
                 if (first >= last || last > count || !consecutive.TryAdd(first + "-" + last, Range(match.Groups[3].Value, match.Groups[4].Value))) throw new PdfParseException("P05");
             }

@@ -1,7 +1,7 @@
 # 固定iOS参照・独立期待値
 
 対応関係・宣言名・実行方法のSHA-256：
-`2a1cf88d8a35ea0a60a5532d9dcc178cf15be9c67452b3f6e9421cf1ae986342`
+`49be8859832c5bc1cd609df1db7a1cf6a4949718776c98552c7652d7366f1489`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -31,6 +31,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 - `SpecialPeriodHeadingsDoNotTruncateNumericTokens`
 - `SpecialConsecutiveHeadingsDoNotAdoptNumericSuffix`
+- `MissingContinuousHeadingKeepsVerifiedSinglePeriodFallback`
 - `SpecialWholeNumericTokensRetainAdjacentAndWidthNormalizedHeadings`
 - `ExamMatchesIosCoveredClassesDatesTimesAndMergedLessons`
 - `ExamSeparatesSubjectTeacherAndRoom`

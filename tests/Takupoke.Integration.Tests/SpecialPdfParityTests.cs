@@ -32,10 +32,18 @@ public sealed class SpecialPdfParityTests
     public void SpecialConsecutiveHeadingsDoNotAdoptNumericSuffix(string text)
     {
         var pages = Enumerable.Range(1, 6).Select(i => ReplaceFirstExamTime(ExamPage(i, merged: i == 1), text, true)).ToArray();
+        Assert.Equal("P05", Assert.Throws<PdfParseException>(() => PdfScheduleParser.Special(pages, MaterialKind.Exam)).Stage);
+    }
+
+    [Fact]
+    public void MissingContinuousHeadingKeepsVerifiedSinglePeriodFallback()
+    {
+        var pages = Enumerable.Range(1, 6).Select(i => ReplaceFirstExamTime(ExamPage(i, merged: i == 1), "", true)).ToArray();
         var result = PdfScheduleParser.Special(pages, MaterialKind.Exam);
-        Assert.All(result.Lessons.Where(l => l.ClassName == "1_1" && l.SpanEnd == 2),
-            lesson => Assert.Equal(new TimeRange("08:50", "10:35"), lesson.RecordedTime));
-        Assert.Contains(result.Lessons, l => l.ClassName == "1_1" && l.SpanEnd == 2);
+        Assert.Equal(86, result.Lessons.Count);
+        var merged = result.Lessons.Where(l => l.ClassName == "1_1" && l.SpanEnd == 2).ToArray();
+        Assert.NotEmpty(merged);
+        Assert.All(merged, lesson => Assert.Equal(new TimeRange("08:50", "10:35"), lesson.RecordedTime));
     }
 
     [Theory]
