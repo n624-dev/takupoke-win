@@ -112,7 +112,7 @@ public sealed class SpecialPdfParityTests
         public void Line(double x1, double y1, double x2, double y2) => Lines.Add(new(x1, y1, x2, y2));
         public PdfPageLayout Page(double width, double pageHeight) => new(width, pageHeight, Glyphs, Lines);
     }
-    private static PdfPageLayout ExamPage(int number, bool merged = false, bool metadata = false, bool omitLastTime = false)
+    internal static PdfPageLayout ExamPage(int number, bool merged = false, bool metadata = false, bool omitLastTime = false)
     {
         var b = new Builder(true, 8); var columns = number == 6 ? 2 : 3;
         string[] labels = number switch { 1 => ["1-1", "1-2", "1-3"], 6 => ["1年", "2年"], _ => [$"{number}-CN", $"{number}-ES", $"{number}-IT"] };
@@ -136,7 +136,7 @@ public sealed class SpecialPdfParityTests
         b.Write("1・2時限連続8:50~10:20", 300, 470);
         return b.Page(850, 600);
     }
-    private static PdfPageLayout ReturnPage(int[]? dateDays = null)
+    internal static PdfPageLayout ReturnPage(int[]? dateDays = null)
     {
         dateDays ??= [1,2,3,4,5];
         var b = new Builder(false, 4); b.Write("令和8年度 試験返却時間割", 20, 20);

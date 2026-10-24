@@ -1,7 +1,7 @@
 # Strict PDF・文字・罫線・試験・返却
 
 対応関係・宣言名・実行方法のSHA-256：
-`14a1dea8e4f6a2c43560d4fce7a03e428aa24584bcf5efa3237626dc40822d2c`
+`f7aa2720b9a7e6d5408ae274a316e44b76607b094f47ddc0bbd48f9a80307603`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -24,6 +24,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - [src/Takupoke.Infrastructure/Parsing/PdfPaintVisibility.cs](../../src/Takupoke.Infrastructure/Parsing/PdfPaintVisibility.cs)
 - [tests/shared/FictionalTimetablePdf.cs](../../tests/shared/FictionalTimetablePdf.cs)
 - [tests/Takupoke.Integration.Tests/fixtures/fictional-noto.json](../../tests/Takupoke.Integration.Tests/fixtures/fictional-noto.json)
+- [tests/Takupoke.Integration.Tests/fixtures/fictional-noto-special.json](../../tests/Takupoke.Integration.Tests/fixtures/fictional-noto-special.json)
 
 ## [tests/Takupoke.Integration.Tests/PdfParsingTests.cs](../../tests/Takupoke.Integration.Tests/PdfParsingTests.cs)
 
@@ -48,6 +49,8 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/PdfVisibilityTests.cs](../../tests/Takupoke.Integration.Tests/PdfVisibilityTests.cs)
 
+- `RealFontSpecialControlsKeepFullExamAndReturnTimetables`
+- `SpecialPaintMustProveActualTextVisibility`
 - `RuleContrastUsesTheActualOpaqueBackgroundAndRejectsLaterCover`
 - `MergedAndVisibleSplitRuleControlsUseTheirActualPeriodSpan`
 - `InvisibleStrokeOrFilledBoundaryCannotChangeTheAcceptedMergedSpan`

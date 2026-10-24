@@ -198,6 +198,18 @@ iOS77の交差確認でWindowsのToUnicodeもrange追加と文字挿入ごとに
 
 ## ページ可視範囲と注釈（33）
 
+## 特別PDFの文字描画順と可視性（35、iOS101交差）
+
+現行PdfPigLayoutReaderはTimetableだけpaintを作り、SpecialGlyphsは実PdfPigのフォント/幾何を保持するが色/上塗りに結び付けていない。実PdfPig0.1.16と旧実Reader/XMLを照合した。所有一時consoleで実埋込CFFのA Tj/空Tj/[C 空 N] TJ/A '/C "を読ませ、文字列A/C/N/A/CのTextSequenceが1/3/3/4/5、次の通常文字は6だった。TJ内の各stringではなくtext-show演算全体が一つ、空Tjも一つの順序を消費する。結果は/tmp/takupoke-win35-sequence-diagnostic.log。推測したindexや通常のcustomfont engineへの切替は行わない。
+
+元の通常fixtureのfontは変えず、別名FictionalSpecialScheduleCJKSubsetを追加。Debian fonts-noto-cjk 1:20240730+repack1-1のTTC face0/JP2.004（元SHA b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a）からfontTools4.61.1でASCIIと架空見出し/科目/教員だけをsubset。layout_features空/desubroutinize=True/recalc_timestamp=False、CFF/FD名を別名へ変更し、実CID/widthの対応とOFLを保持した。133文字/14,889bytes、SHA26edf599426c04771ca15418b9db8bb2f091d83c4c23bcb3cf994e510d580b80。旧OTFのSHAをこの由来と混同しない。
+
+既存の完全架空geometry入力を実font/TJ/PDFへ描く独立writerと、6ページ試験85授業/返却7授業の正対照、白い本文/不透明上塗り/未知alphaの負対照を追加する。production Readerの出力からPDFや期待値を作らない。現段階はテストのみで、製品のSpecial visibilityは未変更。catalogのPdfPigLayoutReaderと既存PDF/可視性テストを検索済み。iOS Certifiedは101の複合塗り拒否を追加し、Strict固定経路は変えていない。
+
+40bde67のCMap回帰は13展開/失敗0（414ms）。最適化済み同一実関数・同一架空入力の3回中央値は4,096/16,384/65,536で0.015231/0.045538/0.209914秒、修正前0.204352/0.413463/5.511566秒。全対応/個数/checksum一致、最大約26.3倍だがWindows UI/PDF全体の測定ではない。84/91もea6ac2fで11展開と周辺104件が失敗0、未公開。
+
+## ページ可視範囲と注釈（33、既存記録）
+
 source825a8f9＋追加架空real-font PDF回帰、Linux/.NET10.0.402、4件中2件失敗（434ms）。完全Crop/注釈なしは同じ授業を受理し、授業をCropBoxから外した版と不透明白Square注釈版も例外なしで受理する修正前動作を確認。描画命令・元フォント・授業文字は対照と同一。現在/ff2166fのReaderはMediaBoxで配置し、注釈を検証しない。候補はCropBoxとMediaBoxの交差領域へ全文字/採用罫線が含まれるか検証し、未検証の非空Annotsはページを拒否する。注釈のappearanceや透明度を推測して無視しない。正常結果保持は既存実Coordinator/store回帰を新しい2条件にも適用する。Reader共通なので通常/特別の解析版を更新する。
 
 iOS対照:Certifiedの通常/特別は既にCropBox==MediaBoxを要求する。固定PDF239のStrict入口は異なるため、Certifiedの検査をStrictにも実行済みとは扱わない。この既知のStrict固定条件との整合は後続で扱い、今回Windowsの成功だけでiOS交差確認を完了扱いにしない。

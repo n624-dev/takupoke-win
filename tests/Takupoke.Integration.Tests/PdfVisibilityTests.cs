@@ -10,6 +10,37 @@ namespace Takupoke.Integration.Tests;
 
 public sealed class PdfVisibilityTests
 {
+    [Theory]
+    [InlineData(false,85)]
+    [InlineData(true,7)]
+    public void RealFontSpecialControlsKeepFullExamAndReturnTimetables(bool returns, int count)
+    {
+        var kind = returns ? MaterialKind.ExamReturn : MaterialKind.Exam;
+        var layouts = returns ? new[] { SpecialPdfParityTests.ReturnPage() }
+            : Enumerable.Range(1,6).Select(i => SpecialPdfParityTests.ExamPage(i)).ToArray();
+        var bytes = FictionalTimetablePdf.MakeSpecial(Fixtures,layouts);
+        using var font = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(Fixtures,"fictional-noto-special.json")));
+        Assert.Equal(font.RootElement.GetProperty("subsetSha256").GetString(),Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(Path.Combine(Fixtures,"fictional-noto-special.cff")))));
+        var parsed = PdfScheduleParser.Special(PdfPigLayoutReader.Read(bytes,kind),kind);
+        Assert.Equal(count,parsed.Lessons.Count); Assert.Equal(17,parsed.CoveredClasses.Count); Assert.Equal(5,parsed.CoveredDates.Count);
+        Assert.Contains(parsed.Lessons,l => l.Names.Subject == "架空科目A");
+    }
+    [Theory]
+    [InlineData(false,"1 g",null,null)]
+    [InlineData(true,"1 g",null,null)]
+    [InlineData(false,"0 g","q 1 g 0 0 850 600 re f Q",null)]
+    [InlineData(true,"0 g","q 1 g 0 0 1800 1000 re f Q",null)]
+    [InlineData(false,"/GS0 gs",null,"/ca 0.5")]
+    [InlineData(true,"/GS0 gs",null,"/CA 0")]
+    public void SpecialPaintMustProveActualTextVisibility(bool returns,string paint,string? after,string? state)
+    {
+        var kind = returns ? MaterialKind.ExamReturn : MaterialKind.Exam;
+        var layouts = returns ? new[] { SpecialPdfParityTests.ReturnPage() }
+            : Enumerable.Range(1,6).Select(i => SpecialPdfParityTests.ExamPage(i)).ToArray();
+        var bytes = FictionalTimetablePdf.MakeSpecial(Fixtures,layouts,paint,after,state);
+        Assert.Equal("P01",Assert.Throws<PdfParseException>(() => PdfPigLayoutReader.Read(bytes,kind)).Stage);
+    }
+
     private static string Fixtures => Path.Combine(AppContext.BaseDirectory, "fixtures");
     private static TimetableAnalysis Parse(byte[] bytes) => PdfScheduleParser.Timetable(PdfPigLayoutReader.Read(bytes, MaterialKind.Timetable));
     [Theory]

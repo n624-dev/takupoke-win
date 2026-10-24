@@ -211,7 +211,8 @@
         "src/Takupoke.Infrastructure/Parsing/PdfUnicodeMap.cs",
         "src/Takupoke.Infrastructure/Parsing/PdfPaintVisibility.cs",
         "tests/shared/FictionalTimetablePdf.cs",
-        "tests/Takupoke.Integration.Tests/fixtures/fictional-noto.json"
+        "tests/Takupoke.Integration.Tests/fixtures/fictional-noto.json",
+        "tests/Takupoke.Integration.Tests/fixtures/fictional-noto-special.json"
       ],
       "checks": [
         "tests/Takupoke.Integration.Tests/PdfParsingTests.cs",
