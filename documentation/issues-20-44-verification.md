@@ -32,6 +32,14 @@ color/popup/色選択で過去索引を検索し、change-row-exclusion-verifica
 
 旧main40044293111は全job success終端、旧配布40044293420は元iOS比較もsuccess後、既知の色UI失敗によりMSIX/installerはskip、全job終端となった。取消しせず確認済みで再照会しない。新診断CIの残件も継続して終端確認する。
 
+01:05照会で、新配布40046761428/attempt1/source f7b0a5233810293e4aacc5156bf109844094c362が00:59:57にfailure終端したことを確認。具体job/段階/原因は未確認で対処未選択。同じsourceのmain40046761483は00:57:13にsuccess終端。診断CI40045896233は元iOS比較もsuccessとなり、選択7job成功/指定条件のMSIX skipで全終端。CIのMSIXはこのdispatchでは選択されない条件であり、依存失敗によるskipとは区別する。旧実行を再照会しない。
+
+配布40046761428の全job終端:事前7job success、指定条件のMSIX skip、installer job120731823097 failure（00:54:40〜00:59:56）。パッケージ構築は成功し、Test the x64 installer and installed app（00:57:08〜00:59:51）で失敗した。インストーラー内の具体case/段階は次のログで確認し、通常CIの成功へ置き換えない。
+
+installerログ観測:最初の導入の実UI447件は00:58:45に成功。その後の同じ保存先を使う検証で257チェック後、The synthetic subject appears on all five weekdaysの30秒待機が失敗。残った最初の通常授業は2026-10-27（火曜）の3_IT/1限。blueを含む全色の保存はこの回も成功した。The synthetic subject/fixture/DisplayWeekStartで元のPR47日付修正記録と現在のSeedAsync・CheckSinglePeriodCancellationClock・installerの繰返しRun-UiChecksを比較した。
+
+原因:新しい休講clock caseが呼出元と同じstoreへ表示週月曜1限の変更を書き、IncludesChanges=trueで保存して終了する。次のRunは通常授業を5曜日分再seedするが変更資料を消さないため、前回の月曜休講が正しく適用され、通常科目は火〜金の4件となる。製品の変更反映ではなく、繰返し導入検証のfixtureの寿命の問題。候補は既存retention検証と同じ専用の所有rootへ休講caseを分離し、呼出元の個人設定を複製して検証する。finallyでapp停止/環境復元/所有root回収を行い、呼出元のpreferences bytes保持も確認する。通常5曜日の期待、実XLSX解析/休講card時計、6導入状態と保存/更新/削除の条件は削らない。
+
 対象main ff2166f3086bd52b573ba2f54aa3f7810f678c77。iOS436の初回公開完了後に着手。各OS独立実装、完全架空fixture、本番学校/API通信なし。Linux/.NET10.0.402、実WinUI/Windows ACL未確認。
 
 ## 保存済みリンク（37）
