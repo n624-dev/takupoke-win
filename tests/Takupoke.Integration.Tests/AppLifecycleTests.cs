@@ -66,7 +66,7 @@ public sealed class AppLifecycleTests
             Assert.Equal("/events", request.RequestUri.AbsolutePath);
             if (FailedYears.Contains(year)) return new(System.Net.HttpStatusCode.ServiceUnavailable);
             var response = new HttpResponseMessage(System.Net.HttpStatusCode.OK) { Content = new StringContent(body, System.Text.Encoding.UTF8, "application/json") };
-            response.Headers.ETag = new("W/\"" + NotificationDiff.Digest(System.Text.Encoding.UTF8.GetBytes(body)) + "\""); return response;
+            response.Headers.ETag = new("\"" + NotificationDiff.Digest(System.Text.Encoding.UTF8.GetBytes(body)) + "\"", isWeak: true); return response;
         }
     }
 
