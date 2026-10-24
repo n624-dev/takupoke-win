@@ -134,3 +134,13 @@ IsInProgressの時刻選択をActivityMinuteRangesへ同値に抽出し、Home�
 2026-10-24 15:03:10 UTC、Windows main253512955c9ebb6572a73289140a9cd55a120316のpushは成功し、main CIは自動開始対象となった。続くgh workflow run development-package.yml --ref main -f version=0.1.0-dev.10458はworkflow情報GETの時点でHTTP401 Bad credentialsとなりexit1。配布dispatch/新しい配布runの作成はまだ確認していない。直前に新tag10458の存在確認GETは404だった。認証情報の値は表示せず、期限切れやrate limitとは断定しない。対処選択前に記録する。既に開始したmain CIは取消しせず確認する。
 
 N141照合：10月22日の全CLI401/dispatch未開始の記録と現workflowを読んだ。今回は同じ環境のgh api userがn624-devで成功し、gitのmain/inactive枝pushも成功している。特定workflow情報GETの一回の401と区別し、資格情報を差替え/表示せず、現在認証の成功という新しい観測に基づいて同じ既存dispatchを一度だけ再試行する。配布runは初回GETで未作成と扱い、作成された場合はsource/runを確認し、重複開始や既存runの取消しは行わない。source2535129/mainと元8選択検査/6導入状態を維持する。
+
+## 10458の公開確認（2026-10-24 UTC）
+
+main253512955c9ebb6572a73289140a9cd55a120316のCI40105194551/attempt1は全7対象job成功・構成上MSIXのみskip。実WinUI448項目、Linux Core228/統合350/Platform5、Windows統合352/Platform5が成功し、x64 Debug/ReleaseとARM64 Releaseを確認した。新しく完了した7jobのログを一度だけ保存し、再取得しない。
+
+既存Development installers40105464187/attempt1は同sourceで全8選択job成功・MSIX構成skip。package120906890809で6導入状態の実UI447/447/447/447/448/447項目、設定保持/移行/再導入/削除が成功し、15:23:57 UTCに0.1.0-dev.10458を通常Release/Latestとして公開した。全8実jobの完了ログを一度だけ保存し、保存artifact0も確認した。初回CLI401はN141へ保持し、その後の成功で原因を断定しない。
+
+匿名6添付の全bytes/API digest/SHA256SUMSを照合し、x64/ARM64のZIP manifest版/commit/architectureと全記載fileのSHA-256も一致した。x64 Setup70847970bytes SHA256 8a14ffe5d8f1f3f6b6a0fbd90d4f123e35ccb387067cf3359a6ca030dc9ce07e。receiptは所有stateへ保存し、消費済みdownload本体と計測bin/objは回収した。公開先 https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10458 。ARM64実機/学校原本/OneDrive/実通知は未確認。利用者の通常PDFは提供不可のため、元のP01事象を同一原本で解消確認したとは扱わない。今後の追加issueはiOS公開後にまとめて確認する。
+
+ZIPの照合file数：x64 561、ARM64 557。
