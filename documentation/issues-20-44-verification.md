@@ -1,5 +1,11 @@
 # 10456公開後の追加Issue対応
 
+## 10457の公開準備（未公開）
+
+PR45〜50はそれぞれの全8CI検査を通してmainへ統合済み。直前PR50のmain push 40040706149もsource1c1814ffc9c52e63fbc3ffdbe2105a814a0ac6b6でsuccess（23:40:10 UTC）。このmainの修正を配布し、新しい33/34の作業branchは含めない。公開スクリプトの更新内容だけを今回の入力・名称・時刻・保存・通知・起動・画面所有の修正へ更新する。
+
+ローカルのlicense notices13件は失敗0（0.011秒）、PowerShell構文parseも成功。Store境界9件の最初の実行は全23assert失敗（0.011秒）で、すべてrun_script冒頭の「PowerShell 7 is required」。PowerShellは所有toolchainへ設置済みだが、このshellではPATHへ追加する前に検査を呼んだため実scriptは未実行。製品や公開内容の失敗とは扱わず、既存toolchainをPATHへ設定して同じ境界を再確認する。catalog checkも成功。配布workflow・インストーラーの確認・公開はまだ未実行。
+
 対象main ff2166f3086bd52b573ba2f54aa3f7810f678c77。iOS436の初回公開完了後に着手。各OS独立実装、完全架空fixture、本番学校/API通信なし。Linux/.NET10.0.402、実WinUI/Windows ACL未確認。
 
 ## 保存済みリンク（37）
