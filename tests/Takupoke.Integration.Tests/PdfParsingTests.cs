@@ -42,6 +42,17 @@ public sealed class PdfParsingTests
         Assert.Equal("架", map.Values[65]); Assert.Equal("B", map.Values[66]); Assert.Equal("C", map.Values[67]);
     }
 
+    [Fact]
+    public void CmapPreservesSurrogatesAndSequentialAndArrayRanges()
+    {
+        var data = Encoding.ASCII.GetBytes("/WMode 0 def 1 begincodespacerange <0000><FFFF> endcodespacerange "
+            + "2 beginbfchar <0001><D83DDE00><0002><00650301> endbfchar "
+            + "2 beginbfrange <0003><0004><0041><0005><0006>[<0043><0044>] endbfrange");
+        var map = PdfUnicodeMap.Read(data);
+        Assert.Equal(2, map.CodeBytes);
+        Assert.Equal(new Dictionary<int, string> { [1] = "😀", [2] = "e\u0301", [3] = "A", [4] = "B", [5] = "C", [6] = "D" }, map.Values);
+    }
+
     private static byte[] MaximumCmapDomain(bool range)
     {
         const int count = 65536;

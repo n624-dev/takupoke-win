@@ -11,12 +11,23 @@ public sealed record PdfUnicodeMap(int CodeBytes, IReadOnlyDictionary<int, strin
 
     internal static PdfUnicodeMap ReadWithCheckpoint(byte[] data, Action checkpoint)
     {
+        checkpoint();
+        var work = 0;
+        void Consume() { if (++work % 128 == 0) checkpoint(); }
         if (data.Length > 2_000_000 || data.Any(b => b > 127)) throw new PdfParseException("P01");
         var source = Regex.Replace(Encoding.ASCII.GetString(data), "%[^\\r\\n]*", "");
-        var tokens = Regex.Matches(source, "<[^<>]*>|\\[|\\]|[^\\s<>\\[\\]]+").Select(m => m.Value).ToArray();
+        var tokens = new List<string>();
+        foreach (Match match in Regex.Matches(source, "<[^<>]*>|\\[|\\]|[^\\s<>\\[\\]]+"))
+        { Consume(); tokens.Add(match.Value); }
         if (tokens.Contains("usecmap") || tokens.Contains("beginnotdefrange") || tokens.Contains("beginnotdefchar")) throw new PdfParseException("P01");
-        var spaces = new List<(int Low, int High)>(); int? codeBytes = null; var values = new Dictionary<int, string>(); var cursor = 0;
-        string Next() => cursor < tokens.Length ? tokens[cursor++] : throw new PdfParseException("P01");
+        var covered = new bool[65536]; int? codeBytes = null; var values = new Dictionary<int, string>(); var cursor = 0;
+        string Next() { Consume(); return cursor < tokens.Count ? tokens[cursor++] : throw new PdfParseException("P01"); }
+        bool RangeAvailable(int low, int high)
+        {
+            if (low > high) return false;
+            for (var code = low; code <= high; code++) { Consume(); if (covered[code]) return false; }
+            return true;
+        }
         static byte[] Hex(string token)
         {
             if (token.Length < 4 || token[0] != '<' || token[^1] != '>') throw new PdfParseException("P01");
@@ -28,12 +39,13 @@ public sealed record PdfUnicodeMap(int CodeBytes, IReadOnlyDictionary<int, strin
         int Code(string token) { var bytes = Hex(token); if (bytes.Length != codeBytes) throw new PdfParseException("P01"); return Number(bytes); }
         void Insert(int code, byte[] bytes)
         {
-            if (bytes.Length % 2 != 0 || values.Count >= 65536 || !spaces.Any(s => s.Low <= code && code <= s.High)) throw new PdfParseException("P01");
+            Consume();
+            if (bytes.Length % 2 != 0 || values.Count >= 65536 || code is < 0 or >= 65536 || !covered[code]) throw new PdfParseException("P01");
             string text;
             try { text = new UnicodeEncoding(true, false, true).GetString(bytes); } catch { throw new PdfParseException("P01"); }
             if (text.Length == 0 || text.Any(char.IsControl) || !values.TryAdd(code, text)) throw new PdfParseException("P01");
         }
-        while (cursor < tokens.Length)
+        while (cursor < tokens.Count)
         {
             checkpoint();
             var token = Next();
@@ -48,7 +60,8 @@ public sealed record PdfUnicodeMap(int CodeBytes, IReadOnlyDictionary<int, strin
                     var low = Hex(Next()); var high = Hex(Next());
                     if (low.Length is not 1 and not 2 || low.Length != high.Length || codeBytes is not null && codeBytes != low.Length) throw new PdfParseException("P01");
                     codeBytes = low.Length; var a = Number(low); var b = Number(high);
-                    if (a > b || spaces.Any(s => a <= s.High && b >= s.Low)) throw new PdfParseException("P01"); spaces.Add((a, b));
+                    if (!RangeAvailable(a, b)) throw new PdfParseException("P01");
+                    for (var code = a; code <= b; code++) { Consume(); covered[code] = true; }
                 }
                 else if (token == "beginbfchar") { var code = Code(Next()); Insert(code, Hex(Next())); }
                 else
@@ -79,6 +92,7 @@ public sealed record PdfUnicodeMap(int CodeBytes, IReadOnlyDictionary<int, strin
             if (Next() != token.Replace("begin", "end", StringComparison.Ordinal)) throw new PdfParseException("P01");
         }
         if (codeBytes is null || values.Count == 0) throw new PdfParseException("P01");
+        checkpoint();
         return new(codeBytes.Value, values);
     }
 }

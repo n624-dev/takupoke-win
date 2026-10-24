@@ -1,7 +1,7 @@
 # Strict PDF・文字・罫線・試験・返却
 
 対応関係・宣言名・実行方法のSHA-256：
-`180ecb7135271670672c460d8a1fa0c63a77b9960e089c18fadac785dcc7d54e`
+`14a1dea8e4f6a2c43560d4fce7a03e428aa24584bcf5efa3237626dc40822d2c`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -31,6 +31,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `RejectsMissingUnicodeInvisibleTextUnfinishedTextAndMismatch`
 - `CompositeFontsUseDefaultWidthWhenIndividualWidthsAreMissing`
 - `CmapDecodesBfcharAndSequentialRanges`
+- `CmapPreservesSurrogatesAndSequentialAndArrayRanges`
 - `CmapInnerWorkHonorsCallerCancellation`
 - `CmapMaximumDomainPreservesMappings`
 - `CmapRejectsOverlappingSpacesAndOutOfDomainCodes`
