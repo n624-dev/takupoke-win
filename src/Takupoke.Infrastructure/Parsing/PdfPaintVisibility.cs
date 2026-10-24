@@ -105,9 +105,12 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
                 }
             }
         }
+        // All subpaths belong to one simultaneous fill. Distinct, touching
+        // rectangles must not become later overpainting of one another.
+        var fillOrder = _order++;
         foreach (var rectangle in rectangles)
         {
-            var item = new Paint(rectangle, _state.Fill, _order++);
+            var item = new Paint(rectangle, _state.Fill, fillOrder);
             Add(item);
             var width = rectangle.Right - rectangle.Left; var height = rectangle.Bottom - rectangle.Top;
             if (width <= 2.1 && height > 3 || height <= 2.1 && width > 3) _rules.Add(item);
