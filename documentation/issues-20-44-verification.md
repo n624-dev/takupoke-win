@@ -6,6 +6,8 @@ PR45〜50はそれぞれの全8CI検査を通してmainへ統合済み。直前P
 
 ローカルのlicense notices13件は失敗0（0.011秒）、PowerShell構文parseも成功。Store境界9件の最初の実行は全23assert失敗（0.011秒）で、すべてrun_script冒頭の「PowerShell 7 is required」。PowerShellは所有toolchainへ設置済みだが、このshellではPATHへ追加する前に検査を呼んだため実scriptは未実行。製品や公開内容の失敗とは扱わず、既存toolchainをPATHへ設定して同じ境界を再確認する。catalog checkも成功。配布workflow・インストーラーの確認・公開はまだ未実行。
 
+所有PowerShell7.5.3をPATHへ設定した同じStore境界9件は失敗0（7.679秒）。製品コード・テスト・判定条件を変更していない。公開開始は本番mainへのfast-forward後にDevelopment installers/version=0.1.0-dev.10457で行い、同じsource/runの全CIとインストーラー検査・公開添付の匿名byte照合を別途確認する。
+
 対象main ff2166f3086bd52b573ba2f54aa3f7810f678c77。iOS436の初回公開完了後に着手。各OS独立実装、完全架空fixture、本番学校/API通信なし。Linux/.NET10.0.402、実WinUI/Windows ACL未確認。
 
 ## 保存済みリンク（37）
