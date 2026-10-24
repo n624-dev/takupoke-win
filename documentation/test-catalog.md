@@ -28,7 +28,7 @@ CIはpushのbefore、PRのbase、手動実行ではHEADの親を比較する。
 | [時間割変更・曜日・行除外・原文保持](test-catalog/xlsx.md) | 34 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [原本取得・更新・保存・監視](test-catalog/material.md) | 49 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [暗号化DB・原子保存・設定・年度期限](test-catalog/storage.md) | 51 | Linux／Windows .NET（WinUI操作はWindows限定） |
-| [API・年度別行事・更新失敗](test-catalog/api.md) | 35 | Linux／Windows .NET（WinUI操作はWindows限定） |
+| [API・年度別行事・更新失敗](test-catalog/api.md) | 36 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [OIDC・実認証・取消](test-catalog/auth.md) | 5 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [リンク・検索・名称対応](test-catalog/links.md) | 17 | Linux／Windows .NET（WinUI操作はWindows限定） |
 | [通知・差分・実配信](test-catalog/notifications.md) | 49 | Linux／Windows .NET（WinUI操作はWindows限定） |

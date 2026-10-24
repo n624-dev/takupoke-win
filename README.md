@@ -13,6 +13,8 @@
 
 初回正式版は、iOS版の現行機能への対応、同じ入力に対する結果の比較、失敗時の動作確認、Windows実機での確認が揃ってから公開します。
 
+追加修正の候補では、学校行事の元PDF確認を専用APIへ移し、年度・元PDFハッシュ・配信版を照合します。一覧の更新確認と時間割計算の重複を減らし、ホームは授業中の状態が変わる時刻に更新します。確認範囲と未確認事項は[相互修正の記録](documentation/ios-issue-parity-verification.md)を参照してください。
+
 ## Windowsへの導入（ビルド不要）
 
 [最新の開発確認版のダウンロード](https://github.com/n624-dev/takupoke-win/releases/latest)からSetup.exeを取得してください。GitHubでは通常Releaseとして公開し、Latestに指定しています。全機能の確認を終えた正式版ではありません。

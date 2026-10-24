@@ -1,7 +1,7 @@
 # API・年度別行事・更新失敗
 
 対応関係・宣言名・実行方法のSHA-256：
-`7970558931bdf20426a48afd27a0c4b7777dfc4fd0d6c0a5286beef1fe79fa7e`
+`ee1cbd9d36d86cbcfce9d9f252dd44e4c4b658005c0bed5536d4cfc48782fc66`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -43,6 +43,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `TwelveHourPersistentCacheCoalescesWaitersForceBypassesAndFailureKeepsPreviousSuccess`
 - `CheckingUsesSixtySecondsAndUnavailableOldEdgesPreserveNewestSuccessfulResult`
 - `InvalidMetadataAndCorruptAdvisoryCacheCannotDestroyAnnualEvents`
+- `MissingCheckingOrStaleCannotBecomeAnApparentlyFreshMatch`
 - `CallerCancellationDoesNotReplaceAHealthyObservation`
 
 ## [tests/Takupoke.Integration.Tests/PublicEventsStoreTests.cs](../../tests/Takupoke.Integration.Tests/PublicEventsStoreTests.cs)

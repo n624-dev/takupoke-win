@@ -18,6 +18,7 @@ public sealed class EventSourceCheckerTests
         public int Calls, Unexpected;
         public HttpStatusCode HttpStatus = HttpStatusCode.OK;
         public EventSourceStatus Status = Matched();
+        public byte[]? WireOverride;
         public TaskCompletionSource? Started, Release;
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken token)
         {
@@ -27,7 +28,7 @@ public sealed class EventSourceCheckerTests
                 request.Headers.Authorization is not null || request.Headers.IfNoneMatch.Count != 0)
             { Unexpected++; throw new InvalidOperationException("Unexpected metadata URL/method/headers"); }
             Started?.TrySetResult(); if (Release is { } wait) await wait.Task.WaitAsync(token);
-            return new(HttpStatus) { Content = new ByteArrayContent(DataCodec.Encode(Status))
+            return new(HttpStatus) { Content = new ByteArrayContent(WireOverride ?? DataCodec.Encode(Status))
                 { Headers = { ContentType = new MediaTypeHeaderValue("application/json") } } };
         }
     }
@@ -133,6 +134,21 @@ public sealed class EventSourceCheckerTests
         f.Handler.Status = Matched(); Assert.False((await f.Checker.CheckAsync(Events())).Failed);
         Assert.NotNull(await f.Store.LoadSourceStatusAsync(2032));
     }
+    [Fact]
+    public async Task MissingCheckingOrStaleCannotBecomeAnApparentlyFreshMatch()
+    {
+        using var f = new Fixture(); await f.Store.SaveAsync(Events());
+        foreach (var field in new[] { "checking", "stale" })
+        {
+            var properties = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string,System.Text.Json.JsonElement>>(DataCodec.Encode(Matched()))!;
+            properties.Remove(field); f.Handler.WireOverride = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(properties);
+            var result = await f.Checker.CheckAsync(Events(), force: true);
+            Assert.True(result.Failed); Assert.Null(result.Saved);
+            Assert.NotNull(result.Warning(Events(), f.Clock.Now));
+            Assert.Equal(DataCodec.Encode(Events()), DataCodec.Encode(await f.Store.LoadAsync(2032)));
+        }
+    }
+
     [Fact]
     public async Task CallerCancellationDoesNotReplaceAHealthyObservation()
     {

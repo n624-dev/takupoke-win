@@ -5,7 +5,8 @@ namespace Takupoke.Infrastructure.Api;
 public sealed record EventSourceStatus(string Version, int SchoolYear, string DataVersion,
     string AdoptedSourcePdfSha256, string Status, string? LastSuccessfulStatus,
     DateTimeOffset? LastSuccessAt, DateTimeOffset? LastAttemptAt, DateTimeOffset? NextAttemptAt,
-    bool Checking, bool Stale)
+    [property: System.Text.Json.Serialization.JsonRequired] bool Checking,
+    [property: System.Text.Json.Serialization.JsonRequired] bool Stale)
 {
     public static bool ValidDataVersion(string? value) => value is { Length: 71 } &&
         value.StartsWith("sha256-", StringComparison.Ordinal) && ApiPayloads.HexDigest(value[7..]);
