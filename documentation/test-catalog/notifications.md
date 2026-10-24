@@ -1,7 +1,7 @@
 # 通知・差分・実配信
 
 対応関係・宣言名・実行方法のSHA-256：
-`265e747f6ed2843bf960c410cf883754c921b04d221920d666a2e938b82a1738`
+`8abf5a8d17c798352d1fb5490d4daafdd99814264c3e3ef28a7573d33b97e533`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -46,6 +46,8 @@ dotnet test tests/Takupoke.Platform.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
 
+- `EventMetadataDoesNotOwnBusyAndConcurrentCallersShareOneActualRequest`
+- `DelayedMetadataForOldEventBytesCannotOverrideNewSnapshot`
 - `UnrelatedEventFetchKeepsWarningsGeneratedByRealApiAndSourceChecks`
 - `IncompatibleLinksCacheStillDisplaysIndependentSavedLessons`
 - `EventDirectoryEnumerationFailureDoesNotHideLessonsAndCanBeRetried`

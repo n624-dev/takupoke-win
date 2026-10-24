@@ -65,4 +65,32 @@ public sealed class PublicEventsStore(string root, Func<string, IEnumerable<stri
         try { await DataCodec.AtomicWriteAsync(PathFor(events.Payload.SchoolYear), bytes, token); }
         finally { _gate.Release(); }
     }
+
+    public async Task<SavedEventSourceStatus?> LoadSourceStatusAsync(int year, CancellationToken token = default)
+    {
+        _ = PathFor(year);
+        var file = Path.Combine(_directory, $"source-status-{year}.json");
+        await _gate.WaitAsync(token);
+        try
+        {
+            if (!File.Exists(file)) return null;
+            var info = new FileInfo(file);
+            if ((info.Attributes & (FileAttributes.ReparsePoint | FileAttributes.Directory)) != 0 || info.Length > 18_432)
+                throw new InvalidDataException("元PDFの状態cacheを確認できません。");
+            var bytes = await File.ReadAllBytesAsync(file, token);
+            if (bytes.Length > 18_432) throw new InvalidDataException("元PDFの状態cacheを確認できません。");
+            return DataCodec.Decode<SavedEventSourceStatus>(bytes).Validated(year);
+        }
+        finally { _gate.Release(); }
+    }
+    public async Task SaveSourceStatusAsync(SavedEventSourceStatus value, CancellationToken token = default)
+    {
+        value.Validated(value.Response.SchoolYear);
+        _ = PathFor(value.Response.SchoolYear);
+        var bytes = DataCodec.Encode(value);
+        if (bytes.Length > 18_432) throw new InvalidDataException("元PDFの状態cacheを確認できません。");
+        await _gate.WaitAsync(token);
+        try { await DataCodec.AtomicWriteAsync(Path.Combine(_directory, $"source-status-{value.Response.SchoolYear}.json"), bytes, token); }
+        finally { _gate.Release(); }
+    }
 }

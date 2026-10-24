@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`4ec72b4e3ddc01f7a35a51d5baeb85716bd6ac8a3ed7d1e66797ec0e311cb51c`
+`b5caa0169b00ef4b371c2fc0a5165997b6c34a2ee1a45bc43e268b970d06262c`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -73,6 +73,8 @@
 
 ## [tests/Takupoke.Integration.Tests/AppLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.cs)
 
+- `EventMetadataDoesNotOwnBusyAndConcurrentCallersShareOneActualRequest`
+- `DelayedMetadataForOldEventBytesCannotOverrideNewSnapshot`
 - `UnrelatedEventFetchKeepsWarningsGeneratedByRealApiAndSourceChecks`
 - `IncompatibleLinksCacheStillDisplaysIndependentSavedLessons`
 - `EventDirectoryEnumerationFailureDoesNotHideLessonsAndCanBeRetried`

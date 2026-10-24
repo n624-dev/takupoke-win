@@ -43,4 +43,18 @@ public sealed record EventsPayload(string Version, int SchoolYear, string Source
             "補講日" => EventClassification.Supplementary, "行事（授業なし）" => EventClassification.SchoolEventNoClass, _ => EventClassification.None },
         OverrideDay(row.Title))).ToArray();
 }
-public sealed record SavedEvents(DateTimeOffset FetchedAt, EventsPayload Payload, string? ApiETag);
+public sealed record SavedEvents(DateTimeOffset FetchedAt, EventsPayload Payload, string? ApiETag, string? ResponseDataVersion = null)
+{
+    [System.Text.Json.Serialization.JsonIgnore]
+    public string? DataVersion
+    {
+        get
+        {
+            if (EventSourceStatus.ValidDataVersion(ResponseDataVersion)) return ResponseDataVersion;
+            if (ApiETag is null || !ApiPayloads.ValidETag(ApiETag)) return null;
+            var opaque = ApiPayloads.OpaqueETag(ApiETag);
+            var hash = opaque[1..^1];
+            return ApiPayloads.HexDigest(hash) ? "sha256-" + hash : null;
+        }
+    }
+}

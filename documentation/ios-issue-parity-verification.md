@@ -84,3 +84,17 @@ Windowsにも同じ日付sort後の専用日取り違えと保存済み時計の
 
 x64 Setupは70,822,016 bytes、SHA-256は`b877b2ecf01e6fe52bcc895648e2c7ee648ebd61c0d227af030a1a23ae17eb9f`。
 ARM64実機、学校認証・実資料、OneDrive同期、OS通知とロック/復帰の実機確認はこのCI・配布照合に含まない。
+
+## N138 状態API移行の編集準備でpatch形式エラー
+
+2026-10-24、Windows source fa57223の未コミット状態、Debian13。ApiModels/ApiClientの版保存・状態取得候補を編集した直後、EventSourceChecker.csを同じpatch内でDelete+Addした編集toolが「multiple operations target」で拒否した。checkerの変更と後続Store編集は未適用。コンパイル/テスト/本番通信は開始していない。対処選択前の観測を記録する。
+
+同ファイルの旧/currentを照合し、拒否はtoolの一ファイル一操作制限であり、HTTP/API/製品の失敗ではないと確認した。既存ファイルへの単一Updateとして適用し、コードの受理条件やテスト期待を変更して回避しない。後続の最初の検証前に完成候補と記録を隔離branchへpushする。
+
+## iOS65共通の元PDF状態API移行候補
+
+EventSourceCheckerの学校直接HEAD/2026固定/sourcePdfETag比較を除き、公開状態APIの年度・採用hash・配信版を保存行事と照合する。新/events200の元bytes SHA-256を保存し、304は版を維持、旧保存は64桁hex API ETagだけから識別する。PublicEventsStoreのsource-status-年度.jsonは行事本体から独立し、破損でも正常行事を読み込める。原則12時間/checking60秒、同じ保存対象での版ずれもcacheし、新対象・forceは再確認する。通信失敗/未成功/古いedgeは最新成功日時を保持する。
+
+実AppViewModelは年度別の独立Task/取消ownerを持ち、元PDF状態待ちはBusyや私用操作queueを占有しない。Reload/復帰でTTL確認、手動200/304ではforce、別snapshotの古い応答はowner/対象/epochで拒否する。設定に年度別の状態/最終成功結果/日本時間の確認日時を標準Textで表示する。学校資料/本文/本番応答をfixtureへコピーせず、全通信テストはexample.invalidを使用する。
+
+catalog EventSourceChecker/AppLifecycleを検索し、旧HEAD固定2ケースは変更要求と衝突するため、API限定GET・本文一致/差異/未確認/取得失敗・版ずれ・永続TTL・古い成功保持・破損・取消へ置換する。既存の年度別失敗保持は元の因果を維持し、2026の元PDF状態と別年度取得の影響を実APIハンドラで検査する。追加2件は実Model/URLSession相当のHttpClient境界で非blocking/合流と新旧snapshot競合を通す。まだ未実行。

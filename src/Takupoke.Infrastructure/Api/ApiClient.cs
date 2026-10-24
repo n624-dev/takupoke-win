@@ -115,9 +115,20 @@ public sealed class ApiClient(HttpClient http, Uri? baseUri = null, TimeProvider
         if (response.StatusCode == HttpStatusCode.NotModified)
         {
             if (saved?.ApiETag is not { } old || etag is null || ApiPayloads.OpaqueETag(old) != ApiPayloads.OpaqueETag(etag)) throw new ApiException(ApiFailure.InvalidResponse);
-            return new SavedEvents(_clock.GetUtcNow(), saved.Payload, etag);
+            return new SavedEvents(_clock.GetUtcNow(), saved.Payload, etag, saved.ResponseDataVersion);
         }
         Success(response, "application/json");
-        return new SavedEvents(_clock.GetUtcNow(), ApiPayloads.Events(bytes, schoolYear), etag);
+        return new SavedEvents(_clock.GetUtcNow(), ApiPayloads.Events(bytes, schoolYear), etag,
+            "sha256-" + Convert.ToHexStringLower(System.Security.Cryptography.SHA256.HashData(bytes)));
     }, token);
+    public Task<EventSourceStatus> DownloadEventSourceStatusAsync(int schoolYear, CancellationToken token = default) => Guard(async requestToken =>
+    {
+        if (schoolYear is < 1900 or > 9998) throw new ApiException(ApiFailure.InvalidResponse);
+        using var request = Request("events/source-status?schoolYear=" + schoolYear, accept: "application/json");
+        using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, requestToken);
+        Success(response, "application/json");
+        var value = DataCodec.Decode<EventSourceStatus>(await ReadBoundedAsync(response, 16_384, requestToken));
+        return value.Validated(schoolYear);
+    }, token);
+
 }

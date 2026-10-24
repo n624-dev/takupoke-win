@@ -39,24 +39,34 @@ public sealed class AppLifecycleTests
     private sealed class EventStatusHandler : HttpMessageHandler
     {
         public HashSet<int> FailedYears { get; } = [2026];
-        public int Heads { get; private set; }
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken token)
+        public int Metadata2026 { get; private set; }
+        public int MetadataCalls { get; private set; }
+        public TaskCompletionSource? MetadataStarted, MetadataRelease;
+        public bool Updated;
+        private string Body(int year) => System.Text.Json.JsonSerializer.Serialize(new {
+            version = "v1", schoolYear = year, sourcePdfSha256 = new string('a',64), sourcePdfETag = "\"fictional-new-source\"",
+            events = new[] { new { startDate = $"{year}-04-01", endDate = $"{year}-04-01", title = Updated ? "架空更新行事" : "架空年度別行事", tag = "行事メモ" } } });
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken token)
         {
             token.ThrowIfCancellationRequested(); Assert.Equal("example.invalid", request.RequestUri!.Host);
-            if (request.Method == HttpMethod.Head)
+            Assert.Equal(HttpMethod.Get, request.Method);
+            var year = int.Parse(request.RequestUri.Query.Split('=').Last());
+            var body = Body(year);
+            if (request.RequestUri.AbsolutePath == "/events/source-status")
             {
-                Assert.Equal("/fictional-school-source", request.RequestUri.AbsolutePath); Heads++;
-                var head = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
-                head.Headers.ETag = new("\"fictional-new-source\""); return Task.FromResult(head);
+                MetadataCalls++; if (year == 2026) Metadata2026++;
+                MetadataStarted?.TrySetResult();
+                if (MetadataRelease is { } release) await release.Task.WaitAsync(token);
+                var status = new Takupoke.Infrastructure.Api.EventSourceStatus("v1", year,
+                    "sha256-" + NotificationDiff.Digest(System.Text.Encoding.UTF8.GetBytes(body)), new('a',64),
+                    "matched", "matched", DateTimeOffset.UtcNow, null, null, false, false);
+                return new(System.Net.HttpStatusCode.OK) { Content = new StringContent(
+                    System.Text.Encoding.UTF8.GetString(DataCodec.Encode(status)), System.Text.Encoding.UTF8, "application/json") };
             }
             Assert.Equal("/events", request.RequestUri.AbsolutePath);
-            var year = int.Parse(request.RequestUri.Query.Split('=').Last());
-            if (FailedYears.Contains(year)) return Task.FromResult(new HttpResponseMessage(System.Net.HttpStatusCode.ServiceUnavailable));
-            var body = System.Text.Json.JsonSerializer.Serialize(new {
-                version = "v1", schoolYear = year, sourcePdfSha256 = new string('a',64), sourcePdfETag = "\"fictional-new-source\"",
-                events = new[] { new { startDate = $"{year}-04-01", endDate = $"{year}-04-01", title = "架空年度別行事", tag = "行事メモ" } } });
+            if (FailedYears.Contains(year)) return new(System.Net.HttpStatusCode.ServiceUnavailable);
             var response = new HttpResponseMessage(System.Net.HttpStatusCode.OK) { Content = new StringContent(body, System.Text.Encoding.UTF8, "application/json") };
-            response.Headers.ETag = new("\"fictional-api-" + year + "\""); return Task.FromResult(response);
+            response.Headers.ETag = new("W/\"" + NotificationDiff.Digest(System.Text.Encoding.UTF8.GetBytes(body)) + "\""); return response;
         }
     }
 
@@ -77,8 +87,8 @@ public sealed class AppLifecycleTests
             WindowsNotifications.Delivered.Clear();
         }
         public AppViewModel Create(PublicEventsStore? events = null, HttpClient? network = null,
-            Uri? apiBaseUri = null, Uri? eventSourceUri = null)
-        { var model = new AppViewModel(Dispatcher, Protector, Identity, events, network, apiBaseUri, eventSourceUri); _models.Add(model); return model; }
+            Uri? apiBaseUri = null, TimeProvider? clock = null)
+        { var model = new AppViewModel(Dispatcher, Protector, Identity, events, network, apiBaseUri, clock); _models.Add(model); return model; }
         public async Task Close(AppViewModel model) { await model.DisposeAsync(); _models.Remove(model); }
         public async Task Preferences(bool tray = false) => await new PreferencesStore(Root).SaveAsync(new()
         { SelectedClasses = ["3_IT"], DefaultSchoolYear = "2032", NotifySpecials = true, KeepInTray = tray });
@@ -116,6 +126,58 @@ public sealed class AppLifecycleTests
         }
     }
     [Fact]
+    public async Task EventMetadataDoesNotOwnBusyAndConcurrentCallersShareOneActualRequest()
+    {
+        await using var fixture = new Fixture(); await fixture.Preferences();
+        var events = new PublicEventsStore(fixture.Root);
+        await events.SaveAsync(new(DateTimeOffset.UtcNow, new("v1", 2032, new('a',64), null,
+            [new("2032-04-01", "2032-04-01", "架空保存行事", "行事メモ")]), "\"legacy-api\""));
+        using var handler = new EventStatusHandler
+        {
+            MetadataStarted = new(TaskCreationOptions.RunContinuationsAsynchronously),
+            MetadataRelease = new(TaskCreationOptions.RunContinuationsAsynchronously)
+        };
+        using var network = new HttpClient(handler);
+        var model = fixture.Create(events, network, new("https://example.invalid/"));
+        await model.InitializeAsync();
+        await handler.MetadataStarted.Task.WaitAsync(TimeSpan.FromSeconds(5));
+        var first = model.CheckEventSourceAsync(2032); var manual = model.CheckEventSourceAsync(2032, force: true);
+        Assert.Same(first, manual); Assert.False(model.Busy); Assert.Single(model.EventRecords);
+        Assert.Single(model.Data.Events!); Assert.Equal(1, handler.MetadataCalls);
+        handler.MetadataRelease.SetResult(); await Task.WhenAll(first, manual);
+        Assert.Contains("配信版が一致しません", model.EventSourceMessage);
+        await model.FetchEventsAsync(2032); await model.CheckEventSourceAsync(2032);
+        Assert.Null(model.EventSourceMessage); Assert.Contains("最終成功確認", model.EventSourceDescription(2032));
+    }
+
+    [Fact]
+    public async Task DelayedMetadataForOldEventBytesCannotOverrideNewSnapshot()
+    {
+        await using var fixture = new Fixture(); await fixture.Preferences();
+        var events = new PublicEventsStore(fixture.Root);
+        await events.SaveAsync(new(DateTimeOffset.UtcNow, new("v1", 2032, new('a',64), null,
+            [new("2032-04-01", "2032-04-01", "架空保存行事", "行事メモ")]), "\"legacy-api\""));
+        using var handler = new EventStatusHandler
+        {
+            MetadataStarted = new(TaskCreationOptions.RunContinuationsAsynchronously),
+            MetadataRelease = new(TaskCreationOptions.RunContinuationsAsynchronously)
+        };
+        using var network = new HttpClient(handler);
+        var model = fixture.Create(events, network, new("https://example.invalid/"));
+        await model.InitializeAsync(); await handler.MetadataStarted.Task.WaitAsync(TimeSpan.FromSeconds(5));
+        var old = model.CheckEventSourceAsync(2032);
+        handler.Updated = true;
+        handler.MetadataStarted = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        await model.FetchEventsAsync(2032);
+        await handler.MetadataStarted.Task.WaitAsync(TimeSpan.FromSeconds(5));
+        Assert.False(model.Busy); Assert.Equal("架空更新行事", model.EventRecords[2032].Payload.Events[0].Title);
+        handler.MetadataRelease.SetResult(); await old; await model.CheckEventSourceAsync(2032);
+        Assert.Null(model.EventSourceMessage);
+        Assert.Contains("登録元と一致", model.EventSourceDescription(2032));
+        Assert.Equal(2, handler.MetadataCalls);
+    }
+
+    [Fact]
     public async Task UnrelatedEventFetchKeepsWarningsGeneratedByRealApiAndSourceChecks()
     {
         await using var fixture = new Fixture(); await fixture.Preferences();
@@ -123,17 +185,18 @@ public sealed class AppLifecycleTests
         await events.SaveAsync(new(DateTimeOffset.UtcNow, new("v1", 2026, new string('a',64), "\"fictional-old-source\"",
             [new("2026-04-01", "2026-04-01", "架空保存行事", "行事メモ")]), "\"fictional-old-api\""));
         using var handler = new EventStatusHandler(); using var network = new HttpClient(handler);
-        var model = fixture.Create(events, network, new("https://example.invalid/"), new("https://example.invalid/fictional-school-source"));
+        var model = fixture.Create(events, network, new("https://example.invalid/"));
         await model.InitializeAsync();
         Assert.True(await model.CheckSavedEventsAsync());
+        await model.CheckEventSourceAsync(2026);
         var sourceWarning = Assert.IsType<string>(model.EventSourceMessage);
         var failure = Assert.IsType<string>(model.EventsUpdateMessage);
-        Assert.Contains("2026", failure); Assert.Equal(1, handler.Heads);
-        await model.FetchEventsAsync(2032);
+        Assert.Contains("2026", failure); Assert.Equal(1, handler.Metadata2026);
+        await model.FetchEventsAsync(2032); await model.CheckEventSourceAsync(2032);
         Assert.Equal(sourceWarning, model.EventSourceMessage);
-        Assert.Equal(failure, model.EventsUpdateMessage); Assert.Equal(1, handler.Heads);
-        handler.FailedYears.Clear(); await model.FetchEventsAsync(2026);
-        Assert.Null(model.EventSourceMessage); Assert.Null(model.EventsUpdateMessage); Assert.Equal(2, handler.Heads);
+        Assert.Equal(failure, model.EventsUpdateMessage); Assert.Equal(1, handler.Metadata2026);
+        handler.FailedYears.Clear(); await model.FetchEventsAsync(2026); await model.CheckEventSourceAsync(2026);
+        Assert.Null(model.EventSourceMessage); Assert.Null(model.EventsUpdateMessage); Assert.Equal(2, handler.Metadata2026);
         await model.FetchEventsAsync(2033);
         handler.FailedYears.UnionWith([2026,2033]);
         Assert.True(await model.CheckSavedEventsAsync());

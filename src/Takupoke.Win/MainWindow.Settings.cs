@@ -158,7 +158,12 @@ public sealed partial class MainWindow
             OperationButton("選んだ年度の行事を取得", () => _model.FetchEventsAsync(double.IsNaN(eventsYear.Value) ? _model.Today.SchoolYear() : (int)eventsYear.Value), "fetch-events"))));
         Add(SettingsSectionTitle("保存済みの年度"));
         if (_model.SavedEventYears.Count == 0) Add(Card(SettingsDescription("行事データをまだ取得していません。上で学校年度を選んで取得してください。")));
-        else Add(SettingsGroup(_model.SavedEventYears.Select(savedYear => SettingsRow(savedYear + "年度", () => EventDetails(savedYear), "events-details-" + savedYear, "取得済み")).Cast<UIElement>().ToArray()));
+        else
+        {
+            Add(SettingsGroup(_model.SavedEventYears.Select(savedYear => SettingsRow(savedYear + "年度", () => EventDetails(savedYear), "events-details-" + savedYear, "取得済み")).Cast<UIElement>().ToArray()));
+            foreach (var savedYear in _model.SavedEventYears)
+                Add(Card(Panel(SettingsSectionTitle(savedYear + "年度の元PDF確認"), SettingsDescription(_model.EventSourceDescription(savedYear)))));
+        }
     }
     private void BuildNotificationSettings()
     {
