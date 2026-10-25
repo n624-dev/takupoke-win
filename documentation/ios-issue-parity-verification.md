@@ -144,3 +144,9 @@ main253512955c9ebb6572a73289140a9cd55a120316のCI40105194551/attempt1は全7対�
 匿名6添付の全bytes/API digest/SHA256SUMSを照合し、x64/ARM64のZIP manifest版/commit/architectureと全記載fileのSHA-256も一致した。x64 Setup70847970bytes SHA256 8a14ffe5d8f1f3f6b6a0fbd90d4f123e35ccb387067cf3359a6ca030dc9ce07e。receiptは所有stateへ保存し、消費済みdownload本体と計測bin/objは回収した。公開先 https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10458 。ARM64実機/学校原本/OneDrive/実通知は未確認。利用者の通常PDFは提供不可のため、元のP01事象を同一原本で解消確認したとは扱わない。今後の追加issueはiOS公開後にまとめて確認する。
 
 ZIPの照合file数：x64 561、ARM64 557。
+
+## iOS449.1公開後の相互照合・issue整理（2026-10-25 UTC）
+
+iOS source67273c0eb2c6fa2b0b950c7dce140a841954ed38/run40157376822/attempt1の全15必須条件が成功し、全18job終端・保存artifact0、449.1通常Release/Latestと匿名4添付・IPA内部版/source・固定AltStore Sourceを確認した。公開後に両repoのopen issueを一回ずつ取得し、新規追加はなかった。Windows33〜35は10458の実Reader/Parser/Store正負回帰・全CI/導入/匿名配布照合と本文を照合しcompletedで閉じた。iOS65/77/84/85/91/93/101も449.1で対処・確認しcompletedとした。コメントは投稿していない。既存PR1は変更していない。
+
+iOS66/67の最適化も両版に含むが、完了条件の実iPhone Time Profiler/SwiftUI更新/フレーム落ち・初回/再訪・online/offline比較は未実施のため二件はopenを維持する。実Core queryの継続計時やWindows CI/Simulator結果を実機性能へ代用しない。Win35に対応するiOS Strict239の固有受理差は既存の承認された契約を維持し、iOS85/93のOCR訂正・旧受領移行は現Windowsに同機能がなく非該当とした。利用者の元通常PDFは提供不可で、P01の同一原本による解消は引き続き未確認。
