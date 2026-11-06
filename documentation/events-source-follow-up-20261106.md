@@ -25,3 +25,19 @@ W15/W17のコンパイル境界、W18/W19の独立期待の詳細と旧2535129�
 候補はSnapshotChanged callback内（元requestの所有中）でTaskを合流取得し、そのTaskだけを
 通知後にawaitする。期待2回・失敗時保持・全56件を変えず、余分なテスト由来GETを除く。
 この事実/旧現比較/候補を隔離refへpushした後にのみ同じ対象検査を行う。
+
+W20候補ae80224のpush後に同じ対象56件をRelease/Linuxで実行し、失敗0・skip0、4.8124秒。
+自動GETの期待回数・失敗時保持と前回結果/日時の全検査を維持した。実Windows UIはCIで別途確認する。
+
+## W21 配布契約のローカル検査失敗
+
+2026-11-06、ae80224+README/公開文面の未コミット差分、Linux/Python3.12。
+Core228/Integration358/Platform5は失敗0。Python catalog14成功後、test_store_release.pyは9件中
+23assert失敗で終了した。具体的失敗と原因はlog未読で未確定として対処前に記録する。
+次に所有win-store-tests.logと旧配布契約/今回の差分を照合する。実Windowsビルド/公開はまだ開始していない。
+
+W21の23assertは全てPowerShell7未設置の前提チェック（PWSH=None）で、配布script実行前だった。
+旧2535129と現test_store_release.pyのrun_scriptは同じ必須条件を維持している。前回40c792eの
+配布Python23件成功記録も読み、今回の製品や文面差分の失敗とは区別した。対処は公式PowerShell7を
+所有toolchainsへ設置し、同じ9件/全23条件を再実行する。skipや期待変更はしない。本記録と候補を
+隔離refへpush後にだけ再検証する。Core228/Integration358/Platform5は全件失敗0・skip0。
