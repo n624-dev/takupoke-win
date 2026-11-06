@@ -41,3 +41,11 @@ W21の23assertは全てPowerShell7未設置の前提チェック（PWSH=None）�
 配布Python23件成功記録も読み、今回の製品や文面差分の失敗とは区別した。対処は公式PowerShell7を
 所有toolchainsへ設置し、同じ9件/全23条件を再実行する。skipや期待変更はしない。本記録と候補を
 隔離refへpush後にだけ再検証する。Core228/Integration358/Platform5は全件失敗0・skip0。
+
+W21補完：公式PowerShell7.5.4を所有toolchainsへ設置して元9件を実行し失敗0（11.637秒）。
+catalog14件/失敗0（0.546秒）、license検査、public-tree、catalog164/check --base2535129、
+公開scriptのPowerShell構文が成功した。主担当は2535129以降のコード差分全体（実partial Model、
+activation、実Checker、取消/Dispose/Prune、独立fake通信と9追加Modelケース）を読み、元の検査・
+CI/配布gateの削減がないことを確認した。WinにはAGENTS.mdはなく、iOSの実装共有やAPI変更はない。
+この最終sourceを既存main CIでWindows実ビルド/x64実操作まで確認し、成功後に通常Release/Latestの
+既存配布workflowへ進む。ARM64実機/学校実PDF/実ログイン/自然なロック復帰は未確認のまま残す。
