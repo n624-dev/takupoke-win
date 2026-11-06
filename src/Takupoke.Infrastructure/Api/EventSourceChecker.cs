@@ -54,7 +54,7 @@ public sealed record SavedEventSourceStatus(DateTimeOffset ReceivedAt, EventSour
     }
 }
 
-public sealed record EventSourceObservation(SavedEventSourceStatus? Saved, bool Failed)
+public sealed record EventSourceObservation(SavedEventSourceStatus? Saved, bool Failed, bool FollowUpExhausted = false)
 {
     public string? Warning(SavedEvents events, DateTimeOffset now)
     {
@@ -62,7 +62,10 @@ public sealed record EventSourceObservation(SavedEventSourceStatus? Saved, bool 
         var response = Saved.Response;
         if (!response.Matches(events)) return "APIと保存済み行事の年度・元PDF・配信版が一致しません。学校行事を更新してください。";
         if (Failed) return "元PDFの状態APIを確認できませんでした。前回の成功結果と保存済み行事は保持しています。";
-        if (response.Checking) return "APIが元PDFを確認中です。前回の確認結果を表示しています。";
+        if (response.Checking) return FollowUpExhausted
+            ? "元PDFの確認完了を取得できませんでした。前回の確認結果を表示しています。現在の更新状況は未確認です。"
+            : Saved.IsFresh(now) ? "APIが元PDFを確認中です。前回の確認結果を表示しています。"
+            : "前回確認時は元PDFを確認中でした。現在の更新状況は未確認です。";
         if (response.Status is "unavailable" or "unknown") return response.Status == "unknown" ? "元PDFの更新状況は未確認です。" : "APIで元PDFの更新状況を確認できませんでした。";
         if (Saved.PreviousSuccess is not null) return "APIから以前の結果が返りました。新しい成功結果を保持し、現在の更新状況は未確認としています。";
         if (response.Stale || !Saved.IsFresh(now) || response.LastSuccessAt is not { } success ||

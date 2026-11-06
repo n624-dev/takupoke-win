@@ -69,6 +69,7 @@ public sealed partial class MainWindow : Window
         {
             var active = args.WindowActivationState != WindowActivationState.Deactivated;
             var returned = active && !_windowActive; _windowActive = active;
+            _model.SetEventSourceChecksActive(active);
             if (returned && _ready) _ = _model.ResumeAutomaticRefreshAsync(refresh: !_selectingMaterial);
         };
         AppWindow.Closing += (_, args) =>

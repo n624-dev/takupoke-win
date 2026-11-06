@@ -281,7 +281,8 @@
         "tests/Takupoke.Win.UITests/startup-smoke.ps1",
         "src/Takupoke.Win/MainWindow.PreferenceSelection.cs",
         "tests/Takupoke.Integration.Tests/AppPlatformFakes.cs",
-        "tests/Takupoke.Integration.Tests/CSharpMethodProbe.cs"
+        "tests/Takupoke.Integration.Tests/CSharpMethodProbe.cs",
+        "src/Takupoke.Win/ViewModels/AppViewModel.EventSource.cs"
       ],
       "checks": [
         "tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs",
@@ -294,7 +295,8 @@
         "tests/Takupoke.Win.UITests/Program.RetentionRecovery.cs",
         "tests/Takupoke.Integration.Tests/StartupVisibilityTests.cs",
         "tests/Takupoke.Integration.Tests/BrowserLifecycleTests.cs",
-        "tests/Takupoke.Integration.Tests/PdfDialogLifecycleTests.cs"
+        "tests/Takupoke.Integration.Tests/PdfDialogLifecycleTests.cs",
+        "tests/Takupoke.Integration.Tests/AppLifecycleTests.EventSource.cs"
       ]
     },
     {

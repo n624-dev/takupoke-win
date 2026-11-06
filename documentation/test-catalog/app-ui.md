@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`afff443ea005f2a54371a78d21373b6ed94f9faeebef95a8585b8638815e7d6b`
+`4869225d189e531d75133619de8f7b691125daaf42daa7585ebfb849b621ee48`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -44,6 +44,7 @@
 - [src/Takupoke.Win/MainWindow.PreferenceSelection.cs](../../src/Takupoke.Win/MainWindow.PreferenceSelection.cs)
 - [tests/Takupoke.Integration.Tests/AppPlatformFakes.cs](../../tests/Takupoke.Integration.Tests/AppPlatformFakes.cs)
 - [tests/Takupoke.Integration.Tests/CSharpMethodProbe.cs](../../tests/Takupoke.Integration.Tests/CSharpMethodProbe.cs)
+- [src/Takupoke.Win/ViewModels/AppViewModel.EventSource.cs](../../src/Takupoke.Win/ViewModels/AppViewModel.EventSource.cs)
 
 ## [tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs](../../tests/Takupoke.Win.UITests/Program.ApplicationChecks.cs)
 
@@ -115,3 +116,13 @@
 ## [tests/Takupoke.Integration.Tests/PdfDialogLifecycleTests.cs](../../tests/Takupoke.Integration.Tests/PdfDialogLifecycleTests.cs)
 
 - `ActualPdfDialogAndButtonMethodsKeepModalOwnershipDuringReadsAndFailures`
+
+## [tests/Takupoke.Integration.Tests/AppLifecycleTests.EventSource.cs](../../tests/Takupoke.Integration.Tests/AppLifecycleTests.EventSource.cs)
+
+- `CheckingAutomaticallyBecomesMatchedWithoutReplacingOrFetchingEvents`
+- `CheckingStopsAfterThreeAdditionalRequestsAndKeepsSuccessfulEvidence`
+- `ForegroundResumeKeepsTheRemainingRequestBudgetAfterShortOrLongPauses`
+- `AFailedFollowUpStopsWithoutReplacingEventsOrLastSuccessfulResult`
+- `BackgroundingCancelsAnInFlightAutomaticRequestWithoutPublishingIt`
+- `ManualCheckReplacesThePendingTimerWithoutAddingAnAutomaticRequest`
+- `NewEventBytesCancelTheOldTimerAndMismatchedMetadataCannotScheduleOne`

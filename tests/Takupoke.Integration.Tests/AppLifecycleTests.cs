@@ -16,7 +16,7 @@ namespace Takupoke.Integration.Tests;
 public sealed class AppLifecycleCollection { }
 
 [Collection("Application lifecycle")]
-public sealed class AppLifecycleTests
+public sealed partial class AppLifecycleTests
 {
     private sealed class Protector : IKeyProtector, IDisposable
     {
@@ -43,6 +43,10 @@ public sealed class AppLifecycleTests
         public int MetadataCalls { get; private set; }
         public TaskCompletionSource? MetadataStarted, MetadataRelease;
         public bool Updated;
+        public bool Checking, MetadataFails, WrongVersion;
+        public int EventCalls;
+        public TimeProvider? MetadataClock;
+        public string EventBody(int year) => Body(year);
         private string Body(int year) => System.Text.Json.JsonSerializer.Serialize(new {
             version = "v1", schoolYear = year, sourcePdfSha256 = new string('a',64), sourcePdfETag = "\"fictional-new-source\"",
             events = new[] { new { startDate = $"{year}-04-01", endDate = $"{year}-04-01", title = Updated ? "架空更新行事" : "架空年度別行事", tag = "行事メモ" } } });
@@ -57,13 +61,15 @@ public sealed class AppLifecycleTests
                 MetadataCalls++; if (year == 2026) Metadata2026++;
                 MetadataStarted?.TrySetResult();
                 if (MetadataRelease is { } release) await release.Task.WaitAsync(token);
+                if (MetadataFails) return new(System.Net.HttpStatusCode.ServiceUnavailable);
                 var status = new Takupoke.Infrastructure.Api.EventSourceStatus("v1", year,
-                    "sha256-" + NotificationDiff.Digest(System.Text.Encoding.UTF8.GetBytes(body)), new('a',64),
-                    "matched", "matched", DateTimeOffset.UtcNow, null, null, false, false);
+                    "sha256-" + (WrongVersion ? new string('c',64) : NotificationDiff.Digest(System.Text.Encoding.UTF8.GetBytes(body))), new('a',64),
+                    "matched", "matched", MetadataClock?.GetUtcNow() ?? DateTimeOffset.UtcNow, null, null, Checking, false);
                 return new(System.Net.HttpStatusCode.OK) { Content = new StringContent(
                     System.Text.Encoding.UTF8.GetString(DataCodec.Encode(status)), System.Text.Encoding.UTF8, "application/json") };
             }
             Assert.Equal("/events", request.RequestUri.AbsolutePath);
+            EventCalls++;
             if (FailedYears.Contains(year)) return new(System.Net.HttpStatusCode.ServiceUnavailable);
             var response = new HttpResponseMessage(System.Net.HttpStatusCode.OK) { Content = new StringContent(body, System.Text.Encoding.UTF8, "application/json") };
             response.Headers.ETag = new("\"" + NotificationDiff.Digest(System.Text.Encoding.UTF8.GetBytes(body)) + "\"", isWeak: true); return response;
@@ -118,8 +124,8 @@ public sealed class AppLifecycleTests
             WindowsNotifications.Delivered.Clear();
         }
         public AppViewModel Create(PublicEventsStore? events = null, HttpClient? network = null,
-            Uri? apiBaseUri = null, TimeProvider? clock = null)
-        { var model = new AppViewModel(Dispatcher, Protector, Identity, events, network, apiBaseUri, clock); _models.Add(model); return model; }
+            Uri? apiBaseUri = null, TimeProvider? clock = null, Func<TimeSpan, CancellationToken, Task>? sourceDelay = null)
+        { var model = new AppViewModel(Dispatcher, Protector, Identity, events, network, apiBaseUri, clock, sourceDelay); _models.Add(model); return model; }
         public async Task Close(AppViewModel model) { await model.DisposeAsync(); _models.Remove(model); }
         public async Task Preferences(bool tray = false) => await new PreferencesStore(Root).SaveAsync(new()
         { SelectedClasses = ["3_IT"], DefaultSchoolYear = "2032", NotifySpecials = true, KeepInTray = tray });

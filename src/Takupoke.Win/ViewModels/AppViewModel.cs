@@ -27,7 +27,7 @@ public sealed record MaterialSnapshot(SourceRecord? Source, MaterialAnalysis? An
     }
 }
 
-public sealed class AppViewModel : ObservableObject, IAsyncDisposable
+public sealed partial class AppViewModel : ObservableObject, IAsyncDisposable
 {
     private readonly DispatcherQueue _dispatcher;
     private readonly SemaphoreSlim _operations = new(1, 1);
@@ -126,9 +126,10 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     public AppViewModel(DispatcherQueue dispatcher) : this(dispatcher, new WindowsDpapiProtector()) { }
     internal AppViewModel(DispatcherQueue dispatcher, IKeyProtector protector, IFileIdentityProvider? identity = null, PublicEventsStore? events = null,
-        HttpClient? network = null, Uri? apiBaseUri = null, TimeProvider? clock = null)
+        HttpClient? network = null, Uri? apiBaseUri = null, TimeProvider? clock = null, Func<TimeSpan, CancellationToken, Task>? sourceDelay = null)
     {
-        _dispatcher = dispatcher; _clock = clock ?? TimeProvider.System; _nextCheck = _clock.GetUtcNow().AddMinutes(15);
+        _dispatcher = dispatcher; _clock = clock ?? TimeProvider.System;
+        _sourceDelay = sourceDelay ?? ((delay, token) => Task.Delay(delay, _clock, token)); _nextCheck = _clock.GetUtcNow().AddMinutes(15);
         var directory = OfflineTest
             ? new DataDirectoryResult(Environment.GetEnvironmentVariable("TAKUPOKE_DATA_ROOT") ?? throw new InvalidOperationException("CI data root is required."))
             : DataDirectory.Resolve(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
@@ -156,23 +157,6 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     private DateOnly? _lastDay;
     private DateTimeOffset _lastClock;
     private long _operationGeneration;
-    private sealed record SourceCheck(Guid Id, EventSourceTarget Target, CancellationTokenSource Cancellation, Task Task);
-    private readonly Dictionary<int, SourceCheck> _sourceChecks = [];
-    private readonly Dictionary<int, EventSourceObservation> _sourceObservations = [];
-    private readonly HashSet<int> _failedEventUpdateYears = [];
-    public string? EventSourceMessage
-    {
-        get
-        {
-            var messages = EventRecords.OrderBy(p => p.Key).Select(p =>
-                (Year: p.Key, Warning: _sourceObservations.GetValueOrDefault(p.Key)?.Warning(p.Value, _clock.GetUtcNow())))
-                .Where(p => p.Warning is not null).Select(p => $"{p.Year}年度：{p.Warning}").ToArray();
-            return messages.Length == 0 ? null : string.Join("\n", messages);
-        }
-    }
-    public string EventSourceDescription(int year) => EventRecords.TryGetValue(year, out var events)
-        ? (_sourceObservations.GetValueOrDefault(year) ?? new(null, false)).Description(events, _clock.GetUtcNow()) : "学校行事は未取得です。";
-    public string? EventsUpdateMessage { get; private set; }
     private void TimerTick(DispatcherQueueTimer sender, object args)
     {
         var now = _clock.GetUtcNow();
@@ -280,45 +264,6 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         if (failed) _failedEventUpdateYears.Add(year); else _failedEventUpdateYears.Remove(year);
         EventsUpdateMessage = _failedEventUpdateYears.Count == 0 ? null :
             string.Join("、", _failedEventUpdateYears.Order()) + "年度の学校行事を更新確認できませんでした。保存済みの結果を表示しています。";
-    }
-
-    /// Metadata does not own Busy or the private-operation queue. Saved events
-    /// remain immediately usable while the API checks its official source.
-    public Task CheckEventSourceAsync(int year, bool force = false)
-    {
-        if (!EventRecords.TryGetValue(year, out var saved)) return Task.CompletedTask;
-        var target = EventSourceTarget.From(saved);
-        if (_sourceChecks.TryGetValue(year, out var running) && running.Target == target && !running.Cancellation.IsCancellationRequested)
-            return running.Task;
-        running?.Cancellation.Cancel();
-        var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var id = Guid.NewGuid(); var epoch = PrivateEpoch;
-        var cancellation = CancellationTokenSource.CreateLinkedTokenSource(_session.Token);
-        _sourceChecks[year] = new(id, target, cancellation, completion.Task);
-        _ = Check();
-        return completion.Task;
-        async Task Check()
-        {
-            try
-            {
-                var result = await _eventSourceChecker.CheckAsync(saved, force, cancellation.Token);
-                if (cancellation.IsCancellationRequested || epoch != PrivateEpoch ||
-                    !_sourceChecks.TryGetValue(year, out var current) || current.Id != id ||
-                    !EventRecords.TryGetValue(year, out var active) || EventSourceTarget.From(active) != target) return;
-                if (_sourceObservations.GetValueOrDefault(year) != result)
-                {
-                    _sourceObservations[year] = result;
-                    SnapshotChanged?.Invoke();
-                }
-            }
-            catch (OperationCanceledException) { }
-            catch { /* Advisory failure cannot invalidate saved events. */ }
-            finally
-            {
-                if (_sourceChecks.TryGetValue(year, out var current) && current.Id == id) _sourceChecks.Remove(year);
-                cancellation.Dispose(); completion.TrySetResult();
-            }
-        }
     }
 
     internal async Task<bool> CheckSavedEventsAsync(CancellationToken token = default)
@@ -528,7 +473,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         var timetable = snapshots[MaterialKind.Timetable].Analysis?.Timetable;
         if (timetable is not null && mappings is not null) timetable = timetable with { Lessons = timetable.Lessons.Select(l => l with { Names = mappings.Apply(l.Names, l.ClassName) }).ToArray() };
         MappingRecord = mappingRecord; LinksRecord = linksRecord; TimesRecord = timesRecord;
-        Materials = snapshots; Mappings = mappings; Links = links; SavedEventYears = eventRecords.Keys.Order().ToArray(); EventRecords = eventRecords;
+        Materials = snapshots; Mappings = mappings; Links = links; SavedEventYears = eventRecords.Keys.Order().ToArray(); EventRecords = eventRecords; PruneEventSourceChecks();
         Data = new(timetable, snapshots[MaterialKind.Changes].Analysis?.Changes,
             new[] { snapshots[MaterialKind.Exam].Analysis?.Special, snapshots[MaterialKind.ExamReturn].Analysis?.Special }.OfType<SpecialAnalysis>().ToArray(), events, times);
         _displayPeriod = lease.Period;
@@ -612,7 +557,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
         Status = "学校データを初期化しました。資料を選び直し、学校アカウントのデータを再取得してください。";
     });
 
-    public void Cancel() { _shared.InvalidateLinksCheck(); foreach (var check in _sourceChecks.Values.ToArray()) check.Cancellation.Cancel(); _automaticPaused = true; _operationGeneration++; _pendingRefresh = false; _watcher.Replace([]); _session.Cancel(); _authentication.Cancel(); }
+    public void Cancel() { _shared.InvalidateLinksCheck(); CancelEventSourceChecks(); _sourceBudgets.Clear(); _automaticPaused = true; _operationGeneration++; _pendingRefresh = false; _watcher.Replace([]); _session.Cancel(); _authentication.Cancel(); }
     public void SuspendAutomaticRefresh()
     {
         Cancel();
@@ -629,7 +574,7 @@ public sealed class AppViewModel : ObservableObject, IAsyncDisposable
     public static string DataSetLabel(DataSet kind) => kind switch { DataSet.Links => "リンク一覧", DataSet.Mapping => "名称対応表", _ => "授業時刻" };
     public async ValueTask DisposeAsync()
     {
-        var sourceTasks = _sourceChecks.Values.Select(v => v.Task).ToArray();
+        var sourceTasks = _sourceChecks.Values.Concat(_sourceFollowUps.Values).Select(v => v.Task).ToArray();
         Cancel(); _timer.Stop(); _watcher.Dispose(); _authentication.Dispose();
         await Task.WhenAll(sourceTasks);
         await _operations.WaitAsync(); await _preferenceOperations.WaitAsync();
