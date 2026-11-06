@@ -77,3 +77,28 @@ Win42144738673は全8表示job終端（6成功/1失敗/1構成skip）、7log各�
 W22候補4a3f0bbをpush後、Windows UI test targetのRelease/Linuxクロスbuildが警告0/エラー0（17.86秒）、
 catalog164/check --base81b6ddfが成功した。主担当は元撮影と余白literal/両倍率/全画面を保持し、一回のnative
 page scrollだけを元の測定前へ加えたことを確認した。クロスbuildをWindows実操作成功に換算せず、新source全CIで確認する。
+
+source228b593fdfd700625609825e334161e264f5bd77/main CI42147083555/attempt1は全7必須job成功、
+MSIXは元のmain構成でskip、全8表示job終端。7実logを各一度・artifact0を一度確認し再照会しない。
+W22の実測は200% clock(313,136,57,93)/cell(257,62,168,200)、150% clock(299,119,43,71)/
+cell(257,62,126,150)、viewport(225,50,791,662)で、元左右11/下9pxが成功した。実native smoke/
+明暗/狭幅/44画面と既存Core/Integration/OS境界/Swift比較も成功した。clip対処の今回の成立であって
+UIAの一般的安定性や実機の保証とはしない。既存Latest10458/remote main228b593を一度照合し、
+同sourceの既存Development installersをversion0.1.0-dev.10459で開始した。配布側の全CI/導入検査/
+公開と匿名byte検証は別に完了を確認する。公開記録は非CI branchだけへpushする。
+
+## W23 公開byte照合の補助scriptが途中停止
+
+2026-11-06 02:40 UTC、公開10459/source228b593、Linux/Python3.12。配布Actionsは全8成功終端、
+6導入状態各447項目成功・artifact0。匿名取得した6添付はAPI size/digestまで一致したが、所有の
+verify-public-win.pyがZIP内Microsoft.UI.Xaml.dll取得でKeyError停止した。実ZIP/原因は未確認として
+対処前に記録する。公開済みのファイル変更やテスト不合格とはまだ断定しない。6添付は所有assetsへ保持し、
+再download/同じAPI照会をせず、旧包装scriptと現ZIP/補助scriptの名前契約を照合する。
+
+W23照合：ZIPの実ルート名は両archともMicrosoft.ui.xaml.dllで、manifestにも同じ名前がある。
+旧2535129と現build-development-package.ps1のGet-PeMachineはWindowsの大文字小文字を区別しない
+ファイル取得でMicrosoft.UI.Xaml.dllを検査する。公開補助scriptだけがLinux zipfileの完全一致名を要求していた。
+従って配布物の欠落ではなく主担当の照合ツールの誤りである。候補は固定の必須binary名の照合だけを
+casefoldした一意な実entryへ解決し、同名衝突を拒否すること。全entryのmanifest完全一致/SHA256とPE機械値、
+全6添付のAPI digestとSHA256SUMS、正式Latest/fullSHAの元確認は維持する。保存済み6添付と初回のdigest記録を
+そのまま使ってoffline補完し、再download/API再取得/公開物変更はしない。本記録を隔離refへpushしてから補完する。
