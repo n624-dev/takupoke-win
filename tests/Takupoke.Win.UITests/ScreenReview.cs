@@ -85,8 +85,32 @@ internal static partial class Program
                         System.Globalization.CultureInfo.InvariantCulture, out var actual) && Math.Abs(actual - percent / 100.0) < 0.01;
                 }, "The app receives the real Windows text scale " + percent);
                 Capture(theme + "-" + percent + "-timetable");
+                // UIA bounds can be clipped by the outer page viewport. Keep the
+                // original screenshot, then reveal the whole cell before measuring
+                // its internal padding, including when an advisory precedes it.
+                var viewport = VisiblePageBounds();
+                var initialCell = WaitElement("timetable-time-1").Current.BoundingRectangle;
+                var pageScroll = (ScrollPattern)WaitElement("page-scroller").GetCurrentPattern(ScrollPattern.Pattern);
+                var scrollState = pageScroll.Current;
+                Require(!initialCell.IsEmpty && initialCell.Height > 0 && viewport.Height > 0,
+                    "The enlarged clock cell and viewport have real positive geometry");
+                if (scrollState.VerticallyScrollable)
+                {
+                    var extent = viewport.Height * (100 / scrollState.VerticalViewSize - 1);
+                    Require(double.IsFinite(extent) && extent > 0, "The measured page scroll extent is finite");
+                    var offset = extent * scrollState.VerticalScrollPercent / 100;
+                    var target = Math.Clamp(offset + initialCell.Top - viewport.Top - 12, 0, extent);
+                    pageScroll.SetScrollPercent(ScrollPattern.NoScroll, target / extent * 100);
+                }
+                Wait(() =>
+                {
+                    var current = WaitElement("timetable-time-1").Current.BoundingRectangle;
+                    var view = VisiblePageBounds();
+                    return !current.IsEmpty && current.Width > 0 && current.Height > 0 && view.Contains(current);
+                }, "The enlarged clock cell is fully inside the actual page viewport");
                 var clock = WaitElement("timetable-clock-label-1").Current.BoundingRectangle;
                 var cell = WaitElement("timetable-time-1").Current.BoundingRectangle;
+                Console.WriteLine($"SYNTHETIC_CLOCK_PADDING percent={percent};clock={clock};cell={cell};viewport={VisiblePageBounds()}");
                 Require(clock.Left >= cell.Left + 11 && clock.Right <= cell.Right - 11 && clock.Bottom <= cell.Bottom - 9,
                     "Timetable clocks retain padding at enlarged Windows text sizes");
                 Navigate("settings"); Capture(theme + "-" + percent + "-settings");

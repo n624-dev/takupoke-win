@@ -49,3 +49,27 @@ activation、実Checker、取消/Dispose/Prune、独立fake通信と9追加Model
 CI/配布gateの削減がないことを確認した。WinにはAGENTS.mdはなく、iOSの実装共有やAPI変更はない。
 この最終sourceを既存main CIでWindows実ビルド/x64実操作まで確認し、成功後に通常Release/Latestの
 既存配布workflowへ進む。ARM64実機/学校実PDF/実ログイン/自然なロック復帰は未確認のまま残す。
+
+## W22 正式CIのx64 Release実操作失敗
+
+予定01:50 UTCの一括照会、source81b6ddf7d94f68d0bf44b61a272861892c010c63/run42144738673/attempt1、
+WinUI x64 Release build and launch/job127653482575は01:34:52Z開始・01:38:01Z failure終端。
+具体case/ビルドか実操作か/原因は完了log未読で未確定として対処前に記録する。他6jobは成功、MSIXは
+元構成でskip。全job終端、配布は未開始。7実job logを各一度・artifactを一度確認し、過去詳細/旧現sourceを
+照合してから候補を選びpush前には再試行しない。
+
+W22完了log：build成功後、独立screen-reviewのLight/200%で184項目通過後、ScreenReview.cs:90の
+時刻Textとcellの左右11px/下9px余白assertに失敗した。通常のnative smokeは前段成功。
+画像Light-200-timetableを全16片から復元し70431bytes/SHA256
+35702273a88410dd34a083e8774c4c336e1f0bbcb4da8d99f0bb830717f2995cを照合・目視した。
+状態APIの失敗案内が上に表示され、1限cellの下側がアプリの表示領域を越えている。時計は表示されている。
+元のUIA測定値はlogにないため、製品の文字幅/余白自体の不良かclipとの差かをこの画像だけで断定しない。
+padding/textscale/clock/拡大で過去記録を検索し、10457の色UI/fixture寿命失敗とPR47の週選択詳細を読み、
+2535129と81b6ddfのScreenReview/Timetable/Controlsを比較した。これらは同じbytesで、以前の色の
+invoke未成立や日付fixtureとは異なる。新activationによる状態確認は失敗案内を表示しうるが、保存行事は保持する。
+候補は元のスクリーン撮影を残し、時刻余白を測る前に既存のnative page ScrollPatternと実viewport/cell位置/
+VerticalViewSizeから算出した一回のscrollで1限cellをviewport内へ出す。元30秒内にcell全包含/有限正枠を要求し、
+元左右11/下9pxの余白・実200/150%・全画面/明暗/狭幅・全CI/導入検査は維持する。期待値や時間を緩めない。
+実測frameを短いconsole行へ加え、scroll後でも余白がなければ失敗のままにする。製品のレイアウトや警告を消さない。
+候補/根拠を隔離refへpush後、Windows UI test targetクロスbuildとcatalogを確認し、新sourceの全CIで実操作を確認する。
+Win42144738673は全8表示job終端（6成功/1失敗/1構成skip）、7log各一度・artifact0確認済みで再照会しない。
