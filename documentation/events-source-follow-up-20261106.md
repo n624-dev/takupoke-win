@@ -73,3 +73,7 @@ VerticalViewSizeから算出した一回のscrollで1限cellをviewport内へ出
 実測frameを短いconsole行へ加え、scroll後でも余白がなければ失敗のままにする。製品のレイアウトや警告を消さない。
 候補/根拠を隔離refへpush後、Windows UI test targetクロスbuildとcatalogを確認し、新sourceの全CIで実操作を確認する。
 Win42144738673は全8表示job終端（6成功/1失敗/1構成skip）、7log各一度・artifact0確認済みで再照会しない。
+
+W22候補4a3f0bbをpush後、Windows UI test targetのRelease/Linuxクロスbuildが警告0/エラー0（17.86秒）、
+catalog164/check --base81b6ddfが成功した。主担当は元撮影と余白literal/両倍率/全画面を保持し、一回のnative
+page scrollだけを元の測定前へ加えたことを確認した。クロスbuildをWindows実操作成功に換算せず、新source全CIで確認する。
