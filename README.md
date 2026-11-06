@@ -15,6 +15,8 @@
 
 学校行事の元PDF確認は専用APIで年度・元PDFハッシュ・配信版を照合します。確認中の場合は60秒間隔で最大3回追加確認し、完了時に表示を更新します。非アクティブ中は確認を止め、上限後は未確認と表示して保存済みの行事と前回の成功日時を保持します。一覧の更新確認と時間割計算の重複を減らし、ホームは授業中の状態が変わる時刻に更新します。確認範囲と未確認事項は[相互修正の記録](documentation/ios-issue-parity-verification.md)を参照してください。
 
+学校行事の確認中表示への追従は[0.1.0-dev.10459](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10459)で公開しました。main CIの全7検査と配布の全8検査、6通りの導入・更新、公開6添付のハッシュと両ZIP内全ファイルの照合が成功しています。[今回の検証記録](documentation/events-source-follow-up-20261106.md)に確認範囲と未確認事項を記載しています。
+
 ## Windowsへの導入（ビルド不要）
 
 [最新の開発確認版のダウンロード](https://github.com/n624-dev/takupoke-win/releases/latest)からSetup.exeを取得してください。GitHubでは通常Releaseとして公開し、Latestに指定しています。全機能の確認を終えた正式版ではありません。

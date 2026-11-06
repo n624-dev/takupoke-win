@@ -102,3 +102,18 @@ W23照合：ZIPの実ルート名は両archともMicrosoft.ui.xaml.dllで、mani
 casefoldした一意な実entryへ解決し、同名衝突を拒否すること。全entryのmanifest完全一致/SHA256とPE機械値、
 全6添付のAPI digestとSHA256SUMS、正式Latest/fullSHAの元確認は維持する。保存済み6添付と初回のdigest記録を
 そのまま使ってoffline補完し、再download/API再取得/公開物変更はしない。本記録を隔離refへpushしてから補完する。
+
+W23補完：初回の6添付bytes/API digest記録と保存済み実ファイルの再hashを照合し、名前解決だけ補正した
+offline照合が成功した。再download/API再取得はしていない。全6添付の正確なsize/hash、SHA256SUMS全5対象、x64の561ファイル/ARM64の557ファイル全てのmanifest原pathとSHA256、
+version/fullSHA/architecture/self-contained、実PEのx64/ARM64を照合した。二つのZIPでWindows同名衝突は0。
+検証済み所有downloadは回収し、receiptだけを保持する。
+
+## 公開完了
+
+[0.1.0-dev.10459](https://github.com/n624-dev/takupoke-win/releases/tag/v0.1.0-dev.10459)を通常Release/Latestとして
+公開・匿名byte照合まで確認した。公開元は228b593fdfd700625609825e334161e264f5bd77。
+main CI42147083555は全7成功、配布42147978442は全8成功、構成上のMSIX skipは成功へ数えない。
+6導入状態（新規・同じ場所/別の場所の更新・設定/無関係ファイルの保持・削除）で各447の実UI検査が成功した。
+全7+8実logは各一度、両run artifact0は各一度確認し、終端run/log/artifactを再照会しない。
+未署名・自動更新未実装、ARM64実機/学校実資料/実アカウント/自然なロック復帰は未確認として保持する。
+完了記録だけを非CI feature branchへpushし、公開元mainへ文書pushして再実行を開始しない。
