@@ -116,6 +116,25 @@ public sealed class PdfVisibilityTests
         } else Assert.Equal("P01",Assert.Throws<PdfParseException>(()=>PdfPigLayoutReader.Read(bytes,MaterialKind.Exam)).Stage);
     }
 
+    [Theory]
+    [InlineData("0 g 0 G 10 w 1 Tr",false)]
+    [InlineData("0 g 0 G 10 w 2 Tr",true)]
+    [InlineData("0 g 0.2 G 10 w 2 Tr",false)]
+    public void SpecialStrokePaintRequiresItsOutlineUnlessTheCompleteSameInkFillRemains(string paint,bool outerAccepted)
+    {
+        var layout=new PdfPageLayout(500,500,[new("架",100,100,20,20),new("空",140,100,20,20)],[new(300,300,450,300)]);
+        byte[] Make(string? cover=null)=>FictionalTimetablePdf.MakeSpecial(Fixtures,[layout],subjectPaint:paint,afterText:cover);
+        var baseline=Make();Assert.Single(PdfPigLayoutReader.Read(baseline,MaterialKind.Exam));
+        using var document=UglyToad.PdfPig.PdfDocument.Open(baseline);
+        var ink=document.GetPage(1).Letters[0].BoundingBox;
+        foreach(var inside in new[]{false,true}) {
+            var right=ink.Left+(inside ? 1 : -0.05);
+            var cover=FormattableString.Invariant($"1 g 0 {ink.Bottom-20:0.#########} {right:0.#########} {ink.Height+40:0.#########} re f\n");
+            if(!inside && outerAccepted)Assert.Single(PdfPigLayoutReader.Read(Make(cover),MaterialKind.Exam));
+            else Assert.Equal("P01",Assert.Throws<PdfParseException>(()=>PdfPigLayoutReader.Read(Make(cover),MaterialKind.Exam)).Stage);
+        }
+    }
+
     [Fact]
     public void SameInkModeTwoRequiresTheEntireOpaqueFilledGlyphInsideTheClip()
     {
@@ -193,7 +212,7 @@ public sealed class PdfVisibilityTests
     [Fact]
     public void IntersectingFilledRulesAndPartialEarlierBackgroundKeepContrastChecks()
     {
-        var paint=new PdfPaintVisibility();paint.Operation("g",[0.8]);
+        var paint=new PdfPaintVisibility(partialBackgrounds:true);paint.Operation("g",[0.8]);
         paint.Paths(new([new (double,double)[]{(0,0),(30,0),(30,100),(0,100),(0,0)}],true,false,1,false));
         paint.Operation("g",[0]);
         paint.Paths(new([new (double,double)[]{(10,50),(90,50),(90,51),(10,51),(10,50)}],true,false,1,false));
@@ -202,6 +221,18 @@ public sealed class PdfVisibilityTests
         paint.Operation("g",[1]);
         paint.Paths(new([new (double,double)[]{(0,0),(100,0),(100,100),(0,100),(0,0)}],true,false,1,false));
         Assert.Throws<PdfParseException>(paint.Validate);
+    }
+
+    [Fact]
+    public void OrdinaryTimetablesKeepTheirCompleteBackgroundRequirement()
+    {
+        foreach(var special in new[]{false,true}) {
+            var paint=new PdfPaintVisibility(partialBackgrounds:special);
+            paint.Operation("g",[0.8]);
+            paint.Paths(new([new (double,double)[]{(0,0),(15,0),(15,50),(0,50),(0,0)}],true,false,1,false));
+            paint.Operation("g",[0]);paint.Glyph(new("架",10,10,20,20));
+            if(special)paint.Validate();else Assert.Throws<PdfParseException>(paint.Validate);
+        }
     }
 
     [Fact]

@@ -32,7 +32,7 @@ public static class PdfPigLayoutReader
                     if (page.Rotation.Value is not 0 and not 90 and not 180 and not 270) throw new PdfParseException("P02", number);
                     if (page.Operations.Count > 1_000_000 || page.Letters.Count is < 1 or > 100000 || page.Text.Length > 100000) throw new PdfParseException("limit", number);
                     var transform = new PdfDisplayTransform(media.Left, media.Bottom, media.Width, media.Height, page.Rotation.Value);
-                    var paint = new PdfPaintVisibility(token);
+                    var paint = new PdfPaintVisibility(token,partialBackgrounds:kind != MaterialKind.Timetable);
                     var paths = new PdfPathEngine(transform, token, paint.Paths, rectangularClips:kind != MaterialKind.Timetable);
                     var text = kind == MaterialKind.Timetable ? new PdfTextEngine(token, glyph => paint.Glyph(transform.Glyph(glyph))) : null;
                     var special = text is null ? SpecialGlyphs(page, transform, token) : null;
@@ -77,14 +77,20 @@ public static class PdfPigLayoutReader
                                 || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1
                                 || state.Data.ContainsKey("BM") && Name(document, state, "BM") is not ("Normal" or "Compatible")) throw new PdfParseException("P01", number);
                             if (state.Data.ContainsKey("LW")) {
-                            var width=Number(document,state,"LW");paint.Operation("w",[width]);paths.Operation("w",[width]);
-                        }
+                                var width=Number(document,state,"LW");
+                                paint.Operation("w",[width]);paths.Operation("w",[width]);
+                            }
                         }
                         if (specialGroups is not null && name is "Tj" or "TJ" or "'" or "\"")
                         {
                             specialSequence++;
                             if (specialGroups.Remove(specialSequence,out var group))
-                                foreach (var glyph in group) { token.ThrowIfCancellationRequested(); paths.RequireUnclipped(clipGlyphs![glyph.SourceOrder!.Value],sameInkFilledOutline:paint.FilledShapePreserved); paint.Glyph(clipGlyphs[glyph.SourceOrder.Value]); }
+                                foreach (var glyph in group) {
+                                    token.ThrowIfCancellationRequested();
+                                    var ink=clipGlyphs![glyph.SourceOrder!.Value];
+                                    paths.RequireUnclipped(ink,sameInkFilledOutline:paint.FilledShapePreserved);
+                                    paint.Glyph(paths.PaintBounds(ink,glyph,sameInkFilledOutline:paint.FilledShapePreserved));
+                                }
                         }
                         if (text is null) continue;
                         switch (operation)

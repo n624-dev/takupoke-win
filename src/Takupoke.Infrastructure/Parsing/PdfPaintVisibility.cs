@@ -1,9 +1,10 @@
 namespace Takupoke.Infrastructure.Parsing;
 
 /// <summary>Proves ordinary text contrast over opaque device-colour rectangles.
-/// Uncertain paint, partial backgrounds and later overpainting reject the page;
-/// no extracted letters are silently removed or replaced.</summary>
-public sealed class PdfPaintVisibility(CancellationToken token = default)
+/// Special documents can prove partial backgrounds by checking all exposed
+/// colours. Ordinary timetables retain their prior complete-background checks.
+/// No extracted letters are silently removed or replaced.</summary>
+public sealed class PdfPaintVisibility(CancellationToken token = default, bool partialBackgrounds = false)
 {
     private readonly record struct Colour(double R, double G, double B)
     {
@@ -12,6 +13,7 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
     private readonly record struct Bounds(double Left, double Top, double Right, double Bottom)
     {
         public bool Intersects(Bounds b) => Left < b.Right && Right > b.Left && Top < b.Bottom && Bottom > b.Top;
+        public bool Touches(Bounds b) => Left <= b.Right && Right >= b.Left && Top <= b.Bottom && Bottom >= b.Top;
         // Merely sharing a rectangle edge leaves the stroke's other half
         // visible. A fill obscures a rule only across its centre and length.
         public bool CutsRule(Bounds b) => b.Left == b.Right
@@ -166,11 +168,13 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
                 Work(); var paint = _paint[index];
                 // Stroke intersections do not establish an opaque background.
                 // Every stroke independently proves its contrast below.
-                var filledRule = filledRuleOrders.Contains(paint.Order) &&
+                var filledRule = partialBackgrounds && filledRuleOrders.Contains(paint.Order) &&
                     (paint.Bounds.Right - paint.Bounds.Left <= 2.1 && paint.Bounds.Bottom - paint.Bounds.Top > 3 ||
                      paint.Bounds.Bottom - paint.Bounds.Top <= 2.1 && paint.Bounds.Right - paint.Bounds.Left > 3);
-                if (paint.Order == rule.Order || filledRule || paint.Colour is not { } colour || !paint.Bounds.CutsRule(rule.Bounds)) continue;
-                if (paint.Order > rule.Order || rule.Colour is not { } ruleInk || !ruleInk.Differs(colour)) throw new PdfParseException("P01");
+                var overlaps=partialBackgrounds ? paint.Bounds.CutsRule(rule.Bounds) : paint.Bounds.Touches(rule.Bounds);
+                if (paint.Order == rule.Order || filledRule || paint.Colour is not { } colour || !overlaps) continue;
+                if (paint.Order > rule.Order || !partialBackgrounds && !paint.Bounds.Contains(rule.Bounds)
+                    || rule.Colour is not { } ruleInk || !ruleInk.Differs(colour)) throw new PdfParseException("P01");
                 // Partial earlier backgrounds are safe only if every possible
                 // exposed colour contrasts. Keep searching for the base layer.
                 if (!paint.Bounds.Contains(rule.Bounds)) continue;
@@ -185,7 +189,8 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
             {
                 Work(); var paint = _paint[index];
                 if (!paint.Bounds.Intersects(text.Bounds)) continue;
-                if (paint.Order > text.Order || paint.Colour is not { } colour || !Visible(text.State,colour)) throw new PdfParseException("P01");
+                if (paint.Order > text.Order || paint.Colour is not { } colour
+                    || !partialBackgrounds && !paint.Bounds.Contains(text.Bounds) || !Visible(text.State,colour)) throw new PdfParseException("P01");
                 if (!paint.Bounds.Contains(text.Bounds)) continue;
                 background = colour; break;
             }

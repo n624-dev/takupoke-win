@@ -107,6 +107,15 @@ public sealed class PdfPathEngine(PdfDisplayTransform display, CancellationToken
         if (!double.IsFinite(radius) || glyph.X-radius < clip.Left-0.001 || glyph.Y-radius < clip.Top-0.001
             || glyph.X+glyph.Width+radius > clip.Right+0.001 || glyph.Y+glyph.Height+radius > clip.Bottom+0.001) throw new PdfParseException("P01");
     }
+    public PdfGlyph PaintBounds(PdfGlyph ink, PdfGlyph selection, bool sameInkFilledOutline = false)
+    {
+        if (_textMode == 0 || _textMode == 2 && _lineWidth > 0 && sameInkFilledOutline) return ink;
+        // Preserve the previous non-clipping hairline representation. Explicit
+        // clips still reject these in RequireUnclipped before reaching here.
+        if (_lineWidth == 0) return selection;
+        var radius=ClipStrokeRadius();
+        return ink with { X=ink.X-radius,Y=ink.Y-radius,Width=ink.Width+2*radius,Height=ink.Height+2*radius };
+    }
     private void Line((double X, double Y) a, (double X, double Y) b)
     {
         if (Math.Abs(a.X - b.X) < 0.2 && Math.Abs(a.Y - b.Y) > 0.1) _rules.Add(new((a.X + b.X) / 2, Math.Min(a.Y, b.Y), (a.X + b.X) / 2, Math.Max(a.Y, b.Y)));
