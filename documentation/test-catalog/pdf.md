@@ -1,7 +1,7 @@
 # Strict PDF・文字・罫線・試験・返却
 
 対応関係・宣言名・実行方法のSHA-256：
-`2254f09aeb5687d2b2e17ca06933263ec910aad66682a422b71c3055a7f724bf`
+`edef376b592d267d06e566db32b524b9906d2d10f052e0178a8b2c60ee75002b`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -62,6 +62,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `RectangularSpecialClipsPreserveOnlyUncutInkAndRestoreOnQ`
 - `IntersectingFilledRulesAndPartialEarlierBackgroundKeepContrastChecks`
 - `OrdinaryTimetablesKeepTheirCompleteBackgroundRequirement`
+- `FilledRuleCentresCannotBeCoveredHalfwayAlongTheirLength`
 - `ScopedReturnSubsetCannotReplaceTheFullReturnAfterRestart`
 - `FivePageExamScopeSurvivesEncryptedRestartAndMalformedReplacement`
 - `RuleContrastUsesTheActualOpaqueBackgroundAndRejectsLaterCover`

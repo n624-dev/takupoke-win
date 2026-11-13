@@ -235,6 +235,26 @@ public sealed class PdfVisibilityTests
         }
     }
 
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void FilledRuleCentresCannotBeCoveredHalfwayAlongTheirLength(bool vertical)
+    {
+        foreach(var coversCentre in new[]{true,false}) {
+            var paint=new PdfPaintVisibility(partialBackgrounds:true);
+            var rule=vertical ? new (double,double)[]{(10,0),(11,0),(11,100),(10,100),(10,0)}
+                : new (double,double)[]{(0,10),(100,10),(100,11),(0,11),(0,10)};
+            paint.Paths(new([rule],true,false,1,false));
+            var cover=vertical
+                ? (coversCentre ? new (double,double)[]{(0,40),(30,40),(30,60),(0,60),(0,40)}
+                    : new (double,double)[]{(11,40),(30,40),(30,60),(11,60),(11,40)})
+                : (coversCentre ? new (double,double)[]{(40,10.25),(60,10.25),(60,30),(40,30),(40,10.25)}
+                    : new (double,double)[]{(40,11),(60,11),(60,30),(40,30),(40,11)});
+            paint.Operation("g",[1]);paint.Paths(new([cover],true,false,1,false));
+            if(coversCentre)Assert.Throws<PdfParseException>(paint.Validate);else paint.Validate();
+        }
+    }
+
     [Fact]
     public async Task ScopedReturnSubsetCannotReplaceTheFullReturnAfterRestart()
     {

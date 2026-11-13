@@ -16,9 +16,15 @@ public sealed class PdfPaintVisibility(CancellationToken token = default, bool p
         public bool Touches(Bounds b) => Left <= b.Right && Right >= b.Left && Top <= b.Bottom && Bottom >= b.Top;
         // Merely sharing a rectangle edge leaves the stroke's other half
         // visible. A fill obscures a rule only across its centre and length.
-        public bool CutsRule(Bounds b) => b.Left == b.Right
-            ? Left < b.Left && b.Left < Right && Math.Min(Bottom,b.Bottom)>Math.Max(Top,b.Top)
-            : Top < b.Top && b.Top < Bottom && Math.Min(Right,b.Right)>Math.Max(Left,b.Left);
+        public bool CutsRule(Bounds b)
+        {
+            if (b.Bottom-b.Top > b.Right-b.Left) {
+                var centre=b.Left+(b.Right-b.Left)/2;
+                return Left < centre && centre < Right && Math.Min(Bottom,b.Bottom)>Math.Max(Top,b.Top);
+            }
+            var middle=b.Top+(b.Bottom-b.Top)/2;
+            return Top < middle && middle < Bottom && Math.Min(Right,b.Right)>Math.Max(Left,b.Left);
+        }
         public bool Contains(Bounds b) => Left <= b.Left && Right >= b.Right && Top <= b.Top && Bottom >= b.Bottom;
     }
     private sealed record State(Colour Fill, Colour Stroke, int Mode = 0, double Width = 1, int FillComponents = 1, int StrokeComponents = 1);
