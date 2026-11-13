@@ -103,6 +103,159 @@ public sealed class PdfVisibilityTests
         finally { Directory.Delete(root,true); }
     }
 
+    [Theory]
+    [InlineData("q -10 -10 870 620 re W* n\n",true)]
+    [InlineData("q 0 0 850 600 re W* n\n",false)]
+    [InlineData("q 0 0 20 20 re W n\n",false)]
+    public void RealFontSpecialReaderAcceptsOnlyClipsContainingEveryGlyphAndRule(string clip,bool accepted)
+    {
+        var bytes=FictionalTimetablePdf.MakeSpecial(Fixtures,[SpecialPdfParityTests.ExamPage(1)],afterText:"Q",beforeContent:clip);
+        if(accepted) {
+            var result=PdfScheduleParser.Special(PdfPigLayoutReader.Read(bytes,MaterialKind.Exam),MaterialKind.Exam);
+            Assert.Equal(3,result.CoveredClasses.Count);Assert.Equal(15,result.Lessons.Count);
+        } else Assert.Equal("P01",Assert.Throws<PdfParseException>(()=>PdfPigLayoutReader.Read(bytes,MaterialKind.Exam)).Stage);
+    }
+
+    [Fact]
+    public void SameInkModeTwoRequiresTheEntireOpaqueFilledGlyphInsideTheClip()
+    {
+        var paths=new PdfPathEngine(new(0,0,100,100,0),rectangularClips:true);
+        paths.Operation("re",[10,10,80,80]);paths.Operation("W",[]);paths.Operation("n",[]);
+        var paint=new PdfPaintVisibility();paint.Operation("w",[2]);paths.Operation("w",[2]);
+        paint.Operation("Tr",[2]);paths.Operation("Tr",[2]);
+        Assert.True(paint.FilledShapePreserved);
+        paths.RequireUnclipped(new("架",11,30,10,10),sameInkFilledOutline:paint.FilledShapePreserved);
+        Assert.Throws<PdfParseException>(()=>paths.RequireUnclipped(new("架",9,30,10,10),sameInkFilledOutline:paint.FilledShapePreserved));
+        paint.Operation("g",[1]);Assert.False(paint.FilledShapePreserved);
+        Assert.Throws<PdfParseException>(()=>paths.RequireUnclipped(new("架",11,30,10,10),sameInkFilledOutline:paint.FilledShapePreserved));
+        paths.Operation("Tr",[1]);
+        Assert.Throws<PdfParseException>(()=>paths.RequireUnclipped(new("架",11,30,10,10),sameInkFilledOutline:true));
+        paint.Operation("Tr",[1]);Assert.False(paint.FilledShapePreserved);
+        paths.Operation("Tr",[2]);paths.Operation("w",[0]);
+        Assert.Throws<PdfParseException>(()=>paths.RequireUnclipped(new("架",30,30,10,10),sameInkFilledOutline:true));
+    }
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    public void SpecialClipBoundsMiterJoinsAndRefusesUnboundedDeviceHairlines(int mode)
+    {
+        var paths=new PdfPathEngine(new(0,0,100,100,0),rectangularClips:true);
+        paths.Operation("re",[10,10,80,80]);paths.Operation("W",[]);paths.Operation("n",[]);
+        paths.Operation("w",[2]);paths.Operation("Tr",[mode]);
+        paths.RequireUnclipped(new("架",30,30,10,10));
+        Assert.Throws<PdfParseException>(()=>paths.RequireUnclipped(new("架",11,30,10,10)));
+        paths.Operation("q",[]);paths.Operation("j",[1]);paths.RequireUnclipped(new("架",11,30,10,10));paths.Operation("Q",[]);
+        Assert.Throws<PdfParseException>(()=>paths.RequireUnclipped(new("架",11,30,10,10)));
+        paths.Operation("M",[2]);paths.RequireUnclipped(new("架",13,30,10,10));
+        paths.Operation("M",[20]);Assert.Throws<PdfParseException>(()=>paths.RequireUnclipped(new("架",13,30,10,10)));
+        paths.Operation("cm",[0.001,0,0,0.001,0,0]);paths.Operation("w",[0]);
+        Assert.Throws<PdfParseException>(()=>paths.RequireUnclipped(new("架",30,30,10,10)));
+        paths.Operation("m",[30000,30000]);paths.Operation("l",[40000,30000]);
+        Assert.Throws<PdfParseException>(()=>paths.Operation("S",[]));
+    }
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    public void SpecialClipContainsStrokeInkIncludingTransformAndTextMode(int mode)
+    {
+        var text=new PdfPathEngine(new(0,0,100,100,0),rectangularClips:true);
+        text.Operation("re",[10,10,80,80]);text.Operation("W",[]);text.Operation("n",[]);
+        text.Operation("q",[]);text.Operation("cm",[2,0,0,2,0,0]);text.Operation("w",[4]);text.Operation("j",[1]);text.Operation("Tr",[mode]);
+        text.RequireUnclipped(new("架",20,20,10,10));
+        Assert.Throws<PdfParseException>(()=>text.RequireUnclipped(new("架",11,20,10,10)));
+        text.Operation("w",[0.1]);text.RequireUnclipped(new("架",10.2,20,10,10));
+        text.Operation("Q",[]);text.RequireUnclipped(new("架",11,20,10,10));
+        var rule=new PdfPathEngine(new(0,0,100,100,0),rectangularClips:true);
+        rule.Operation("re",[10,10,80,80]);rule.Operation("W*",[]);rule.Operation("n",[]);
+        rule.Operation("cm",[2,0,0,2,0,0]);rule.Operation("w",[4]);
+        rule.Operation("m",[5.5,20]);rule.Operation("l",[5.5,30]);
+        Assert.Throws<PdfParseException>(()=>rule.Operation("S",[]));
+    }
+
+    [Fact]
+    public void RectangularSpecialClipsPreserveOnlyUncutInkAndRestoreOnQ()
+    {
+        var paths=new PdfPathEngine(new(0,0,100,100,0),rectangularClips:true);
+        paths.Operation("q",[]);paths.Operation("re",[10,10,80,80]);paths.Operation("W*",[]);paths.Operation("n",[]);
+        paths.RequireUnclipped(new("架",20,20,10,10));
+        Assert.Throws<PdfParseException>(()=>paths.RequireUnclipped(new("架",5,20,10,10)));
+        paths.Operation("Q",[]);paths.RequireUnclipped(new("架",5,20,10,10));
+        Assert.Empty(paths.Finish());
+        var ordinary=new PdfPathEngine(new(0,0,100,100,0));ordinary.Operation("re",[0,0,100,100]);
+        Assert.Throws<PdfParseException>(()=>ordinary.Operation("W",[]));
+        var curve=new PdfPathEngine(new(0,0,100,100,0),rectangularClips:true);
+        curve.Operation("m",[0,0]);curve.Operation("c",[0,10,10,10,10,0]);
+        Assert.Throws<PdfParseException>(()=>curve.Operation("W*",[]));
+    }
+
+    [Fact]
+    public void IntersectingFilledRulesAndPartialEarlierBackgroundKeepContrastChecks()
+    {
+        var paint=new PdfPaintVisibility();paint.Operation("g",[0.8]);
+        paint.Paths(new([new (double,double)[]{(0,0),(30,0),(30,100),(0,100),(0,0)}],true,false,1,false));
+        paint.Operation("g",[0]);
+        paint.Paths(new([new (double,double)[]{(10,50),(90,50),(90,51),(10,51),(10,50)}],true,false,1,false));
+        paint.Paths(new([new (double,double)[]{(50,10),(51,10),(51,90),(50,90),(50,10)}],true,false,1,false));
+        paint.Validate();
+        paint.Operation("g",[1]);
+        paint.Paths(new([new (double,double)[]{(0,0),(100,0),(100,100),(0,100),(0,0)}],true,false,1,false));
+        Assert.Throws<PdfParseException>(paint.Validate);
+    }
+
+    [Fact]
+    public async Task ScopedReturnSubsetCannotReplaceTheFullReturnAfterRestart()
+    {
+        var root=Path.Combine(Path.GetTempPath(),"takupoke-return-scope-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);
+        using var protector=new Protector();
+        try {
+            var bytes=FictionalTimetablePdf.MakeSpecial(Fixtures,[SpecialPdfParityTests.ReturnPage()]);
+            var path=Path.Combine(root,"fictional.pdf");await File.WriteAllBytesAsync(path,bytes);
+            await using(var store=new SchoolDataStore(root,protector)) {
+                var coordinator=new MaterialCoordinator(store,new(new Identity()));
+                Assert.True((await coordinator.SelectAsync(MaterialKind.ExamReturn,path,2026)).Parsed);
+                var lease=await store.BeginAsync();var analysis=(await store.ReadAsync<MaterialAnalysis>(lease,"analysis.ExamReturn"))!;
+                var partial=analysis.Special! with { CoveredDates=["2026-04-01"],CoveredClasses=["3_IT"],
+                    Lessons=analysis.Special!.Lessons.Where(l=>l.ClassName=="3_IT" && l.Date=="2026-04-01").ToArray(),
+                    Scopes=[new(1,["3_IT"],["2026-04-01"])] };
+                Assert.True(partial.ValidScopes());
+                await Assert.ThrowsAsync<InvalidDataException>(()=>store.SaveAnalysisAsync(lease,analysis with { Special=partial }));
+            }
+            await using var reopened=new SchoolDataStore(root,protector);var restored=await reopened.BeginAsync();
+            var kept=(await reopened.ReadAsync<MaterialAnalysis>(restored,"analysis.ExamReturn"))!;
+            Assert.Equal(17,kept.Special!.CoveredClasses.Count);Assert.Equal(5,kept.Special.CoveredDates.Count);
+        } finally { Directory.Delete(root,true); }
+    }
+
+    [Fact]
+    public async Task FivePageExamScopeSurvivesEncryptedRestartAndMalformedReplacement()
+    {
+        var root=Path.Combine(Path.GetTempPath(),"takupoke-variable-exam-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);
+        using var protector=new Protector();
+        try {
+            var pages=Enumerable.Range(1,5).Select(i=>SpecialPdfParityTests.ExamPage(i)).ToArray();
+            var bytes=FictionalTimetablePdf.MakeSpecial(Fixtures,pages);
+            var path=Path.Combine(root,"fictional.pdf");await File.WriteAllBytesAsync(path,bytes);
+            await using(var store=new SchoolDataStore(root,protector)) {
+                var coordinator=new MaterialCoordinator(store,new(new Identity()));
+                Assert.True((await coordinator.SelectAsync(MaterialKind.Exam,path,2026)).Parsed);
+                var lease=await store.BeginAsync();var analysis=(await store.ReadAsync<MaterialAnalysis>(lease,"analysis.Exam"))!;
+                Assert.Equal(15,analysis.Special!.CoveredClasses.Count);Assert.True(analysis.Special.ValidScopes());
+                var invalid=analysis with { Special=analysis.Special with { Scopes=null } };
+                await Assert.ThrowsAsync<InvalidDataException>(()=>store.SaveAnalysisAsync(lease,invalid));
+                var broken=pages[0] with { Glyphs=pages[0].Glyphs.Where(g=>g.Y!=70).ToArray() };
+                await File.WriteAllBytesAsync(path,FictionalTimetablePdf.MakeSpecial(Fixtures,[broken]));
+                Assert.False((await coordinator.RefreshAsync(MaterialKind.Exam,2026)).Parsed);
+            }
+            await using var reopened=new SchoolDataStore(root,protector);var restored=await reopened.BeginAsync();
+            var kept=(await reopened.ReadAsync<MaterialAnalysis>(restored,"analysis.Exam"))!;
+            Assert.Equal(75,kept.Special!.Lessons.Count);Assert.Equal(15,kept.Special.CoveredClasses.Count);
+            Assert.False(kept.Special.Applies(new(2026,4,1),"AI_1"));Assert.True(kept.Special.Applies(new(2026,4,1),"2_CN"));
+            Assert.Equal(bytes,await reopened.ReadOriginalAsync(restored,kept.OriginalId));
+        } finally { Directory.Delete(root,true); }
+    }
+
     private static string Fixtures => Path.Combine(AppContext.BaseDirectory, "fixtures");
     private static TimetableAnalysis Parse(byte[] bytes) => PdfScheduleParser.Timetable(PdfPigLayoutReader.Read(bytes, MaterialKind.Timetable));
     [Theory]

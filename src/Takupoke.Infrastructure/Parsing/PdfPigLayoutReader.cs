@@ -25,88 +25,95 @@ public static class PdfPigLayoutReader
             var output = new List<PdfPageLayout>();
             for (var number = 1; number <= document.NumberOfPages; number++)
             {
-                token.ThrowIfCancellationRequested();
-                var page = document.GetPage(number); var media = page.MediaBox.Bounds;
-                if (page.Rotation.Value is not 0 and not 90 and not 180 and not 270) throw new PdfParseException("P02", number);
-                if (page.Operations.Count > 1_000_000 || page.Letters.Count is < 1 or > 100000 || page.Text.Length > 100000) throw new PdfParseException("limit", number);
-                var transform = new PdfDisplayTransform(media.Left, media.Bottom, media.Width, media.Height, page.Rotation.Value);
-                var paint = new PdfPaintVisibility(token);
-                var paths = new PdfPathEngine(transform, token, paint.Paths);
-                var text = kind == MaterialKind.Timetable ? new PdfTextEngine(token, glyph => paint.Glyph(transform.Glyph(glyph))) : null;
-                var special = text is null ? SpecialGlyphs(page, transform, token) : null;
-                var specialGroups = special?.GroupBy(g => g.SourceLine ?? throw new PdfParseException("P01", number)).ToDictionary(g => g.Key,g => g.ToArray());
-                if (specialGroups?.Keys.Any(sequence => sequence <= 0) == true) throw new PdfParseException("P01", number);
-                var specialSequence = 0;
-                var resources = Resources(document, page.Dictionary); var fonts = new Dictionary<string, PdfFont>();
-                if ((Get(page.Dictionary, "Group") is not null
-                    || Get(resources, "ColorSpace") is { } spaces && Resolve<DictionaryToken>(document, spaces).Data.Keys.Any(key => key is "DefaultGray" or "DefaultRGB" or "DefaultCMYK")))
-                    throw new PdfParseException("P01", number);
-                foreach (var operation in page.Operations)
+                try
                 {
                     token.ThrowIfCancellationRequested();
-                    var name = operation.Operator;
-                    if (name == "Do") throw new PdfParseException("P12", number);
-                    if (name is "cs" or "CS")
+                    var page = document.GetPage(number); var media = page.MediaBox.Bounds;
+                    if (page.Rotation.Value is not 0 and not 90 and not 180 and not 270) throw new PdfParseException("P02", number);
+                    if (page.Operations.Count > 1_000_000 || page.Letters.Count is < 1 or > 100000 || page.Text.Length > 100000) throw new PdfParseException("limit", number);
+                    var transform = new PdfDisplayTransform(media.Left, media.Bottom, media.Width, media.Height, page.Rotation.Value);
+                    var paint = new PdfPaintVisibility(token);
+                    var paths = new PdfPathEngine(transform, token, paint.Paths, rectangularClips:kind != MaterialKind.Timetable);
+                    var text = kind == MaterialKind.Timetable ? new PdfTextEngine(token, glyph => paint.Glyph(transform.Glyph(glyph))) : null;
+                    var special = text is null ? SpecialGlyphs(page, transform, token) : null;
+                    var specialGroups = special?.GroupBy(g => g.SourceLine ?? throw new PdfParseException("P01", number)).ToDictionary(g => g.Key,g => g.ToArray());
+                    if (specialGroups?.Keys.Any(sequence => sequence <= 0) == true) throw new PdfParseException("P01", number);
+                    var clipGlyphs = text is null ? SpecialGlyphs(page,transform,token,tight:true).ToDictionary(g=>g.SourceOrder!.Value) : null;
+                    var specialSequence = 0;
+                    var resources = Resources(document, page.Dictionary); var fonts = new Dictionary<string, PdfFont>();
+                    if ((Get(page.Dictionary, "Group") is not null
+                        || Get(resources, "ColorSpace") is { } spaces && Resolve<DictionaryToken>(document, spaces).Data.Keys.Any(key => key is "DefaultGray" or "DefaultRGB" or "DefaultCMYK")))
+                        throw new PdfParseException("P01", number);
+                    foreach (var operation in page.Operations)
                     {
-                        using var serialized = new MemoryStream(); operation.Write(serialized);
-                        if (serialized.Length > 1024) throw new PdfParseException("limit", number);
-                        var parts = Encoding.ASCII.GetString(serialized.ToArray()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
-                        if (parts.Length != 2 || parts[1] != name || !parts[0].StartsWith('/')) throw new PdfParseException("P01", number);
-                        paint.SelectColourSpace(name == "CS", parts[0][1..]);
-                        continue;
-                    }
-                    if (PdfPaintVisibility.Unverified(name)) throw new PdfParseException("P01", number);
-                    if (name is "BDC" or "BMC" or "W" or "W*") throw new PdfParseException("P01", number);
-                    if (PdfPathEngine.Supports(name) || text is not null && PdfTextEngine.Supports(name) || PdfPaintVisibility.Supports(name))
-                    {
-                        var numbers = Numbers(operation);
-                        if (PdfPathEngine.Supports(name)) paths.Operation(name, numbers);
-                        if (text is not null && PdfTextEngine.Supports(name)) text.Operation(name, numbers);
-                        if (PdfPaintVisibility.Supports(name)) paint.Operation(name, numbers);
-                    }
-                    if (name == "gs")
-                    {
-                        using var serialized = new MemoryStream(); operation.Write(serialized);
-                        var items = Encoding.ASCII.GetString(serialized.ToArray()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
-                        if (items.Length != 2 || !items[0].StartsWith('/')) throw new PdfParseException("P01", number);
-                        var state = Resource(document, resources, "ExtGState", items[0][1..]);
-                        if (state.Data.Keys.Any(key => key is not ("Type" or "ca" or "CA" or "BM" or "LW"))
-                            || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1
-                            || state.Data.ContainsKey("BM") && Name(document, state, "BM") is not ("Normal" or "Compatible")) throw new PdfParseException("P01", number);
-                        if (state.Data.ContainsKey("LW")) paint.Operation("w", [Number(document, state, "LW")]);
-                    }
-                    if (specialGroups is not null && name is "Tj" or "TJ" or "'" or "\"")
-                    {
-                        specialSequence++;
-                        if (specialGroups.Remove(specialSequence,out var group))
-                            foreach (var glyph in group) { token.ThrowIfCancellationRequested(); paint.Glyph(glyph); }
-                    }
-                    if (text is null) continue;
-                    switch (operation)
-                    {
-                        case SetFontAndSize font:
-                            if (!fonts.TryGetValue(font.Font.Data, out var decoded))
-                            { if (fonts.Count >= 128) throw new PdfParseException("limit", number); decoded = ReadFont(document, Resource(document, resources, "Font", font.Font.Data), token); fonts.Add(font.Font.Data, decoded); }
-                            text.SetFont(decoded, font.Size); break;
-                        case ShowText show: text.Show(Bytes(show.Text, show.Bytes)); break;
-                        case ShowTextsWithPositioning show:
-                            if (show.Array.Count > 100000) throw new PdfParseException("limit", number);
-                            foreach (var item in show.Array)
-                                switch (item)
-                                { case NumericToken adjust: text.Adjust(adjust.Data); break; case StringToken s: text.Show(s.GetBytes()); break; case HexToken h: text.Show(h.Bytes); break; default: throw new PdfParseException("P01", number); }
-                            break;
-                        case MoveToNextLineShowText show: text.Operation("T*"); text.Show(Bytes(show.Text, show.Bytes)); break;
-                        case MoveToNextLineShowTextWithSpacing show:
-                            text.Operation("Tw", show.WordSpacing); text.Operation("Tc", show.CharacterSpacing); text.Operation("T*"); text.Show(Bytes(show.Text, show.Bytes)); break;
-                    }
+                        token.ThrowIfCancellationRequested();
+                        var name = operation.Operator;
+                        if (name == "Do") throw new PdfParseException("P12", number);
+                        if (name is "cs" or "CS")
+                        {
+                            using var serialized = new MemoryStream(); operation.Write(serialized);
+                            if (serialized.Length > 1024) throw new PdfParseException("limit", number);
+                            var parts = Encoding.ASCII.GetString(serialized.ToArray()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
+                            if (parts.Length != 2 || parts[1] != name || !parts[0].StartsWith('/')) throw new PdfParseException("P01", number);
+                            paint.SelectColourSpace(name == "CS", parts[0][1..]);
+                            continue;
+                        }
+                        if (PdfPaintVisibility.Unverified(name)) throw new PdfParseException("P01", number);
+                        if (name is "BDC" or "BMC" || kind == MaterialKind.Timetable && (name is "W" or "W*")) throw new PdfParseException("P01", number);
+                        if (PdfPathEngine.Supports(name) || text is not null && PdfTextEngine.Supports(name) || PdfPaintVisibility.Supports(name))
+                        {
+                            var numbers = Numbers(operation);
+                            if (PdfPathEngine.Supports(name)) paths.Operation(name, numbers);
+                            if (text is not null && PdfTextEngine.Supports(name)) text.Operation(name, numbers);
+                            if (PdfPaintVisibility.Supports(name)) paint.Operation(name, numbers);
+                        }
+                        if (name == "gs")
+                        {
+                            using var serialized = new MemoryStream(); operation.Write(serialized);
+                            var items = Encoding.ASCII.GetString(serialized.ToArray()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
+                            if (items.Length != 2 || !items[0].StartsWith('/')) throw new PdfParseException("P01", number);
+                            var state = Resource(document, resources, "ExtGState", items[0][1..]);
+                            if (state.Data.Keys.Any(key => key is not ("Type" or "ca" or "CA" or "BM" or "LW"))
+                                || Number(document, state, "ca", 1) != 1 || Number(document, state, "CA", 1) != 1
+                                || state.Data.ContainsKey("BM") && Name(document, state, "BM") is not ("Normal" or "Compatible")) throw new PdfParseException("P01", number);
+                            if (state.Data.ContainsKey("LW")) {
+                            var width=Number(document,state,"LW");paint.Operation("w",[width]);paths.Operation("w",[width]);
+                        }
+                        }
+                        if (specialGroups is not null && name is "Tj" or "TJ" or "'" or "\"")
+                        {
+                            specialSequence++;
+                            if (specialGroups.Remove(specialSequence,out var group))
+                                foreach (var glyph in group) { token.ThrowIfCancellationRequested(); paths.RequireUnclipped(clipGlyphs![glyph.SourceOrder!.Value],sameInkFilledOutline:paint.FilledShapePreserved); paint.Glyph(clipGlyphs[glyph.SourceOrder.Value]); }
+                        }
+                        if (text is null) continue;
+                        switch (operation)
+                        {
+                            case SetFontAndSize font:
+                                if (!fonts.TryGetValue(font.Font.Data, out var decoded))
+                                { if (fonts.Count >= 128) throw new PdfParseException("limit", number); decoded = ReadFont(document, Resource(document, resources, "Font", font.Font.Data), token); fonts.Add(font.Font.Data, decoded); }
+                                text.SetFont(decoded, font.Size); break;
+                            case ShowText show: text.Show(Bytes(show.Text, show.Bytes)); break;
+                            case ShowTextsWithPositioning show:
+                                if (show.Array.Count > 100000) throw new PdfParseException("limit", number);
+                                foreach (var item in show.Array)
+                                    switch (item)
+                                    { case NumericToken adjust: text.Adjust(adjust.Data); break; case StringToken s: text.Show(s.GetBytes()); break; case HexToken h: text.Show(h.Bytes); break; default: throw new PdfParseException("P01", number); }
+                                break;
+                            case MoveToNextLineShowText show: text.Operation("T*"); text.Show(Bytes(show.Text, show.Bytes)); break;
+                            case MoveToNextLineShowTextWithSpacing show:
+                                text.Operation("Tw", show.WordSpacing); text.Operation("Tc", show.CharacterSpacing); text.Operation("T*"); text.Show(Bytes(show.Text, show.Bytes)); break;
+                        }
 
+                    }
+                    IReadOnlyList<PdfGlyph> glyphs = text is not null ? text.Finish(page.Text).Select(transform.Glyph).ToArray() : special!;
+                    if (specialGroups?.Count > 0) throw new PdfParseException("P01", number);
+                    paint.Validate();
+                    var rules = paths.Finish();
+                    ValidatePageVisibility(document, page, transform, glyphs, rules);
+                    var layout = new PdfPageLayout(transform.Width, transform.Height, glyphs, rules); layout.Validate(number); output.Add(layout);
                 }
-                IReadOnlyList<PdfGlyph> glyphs = text is not null ? text.Finish(page.Text).Select(transform.Glyph).ToArray() : special!;
-                if (specialGroups?.Count > 0) throw new PdfParseException("P01", number);
-                paint.Validate();
-                var rules = paths.Finish();
-                ValidatePageVisibility(document, page, transform, glyphs, rules);
-                var layout = new PdfPageLayout(transform.Width, transform.Height, glyphs, rules); layout.Validate(number); output.Add(layout);
+                catch (PdfParseException error) when (error.Page is null) { throw new PdfParseException(error.Stage,number,error.Cell); }
             }
             return output;
         }
@@ -145,7 +152,7 @@ public static class PdfPigLayoutReader
         if (parts.Length == 0 || parts[^1] != operation.Operator) throw new PdfParseException("P01");
         return parts[..^1].Select(part => double.TryParse(part, NumberStyles.Float, CultureInfo.InvariantCulture, out var value) && double.IsFinite(value) ? value : throw new PdfParseException("P01")).ToArray();
     }
-    private static IReadOnlyList<PdfGlyph> SpecialGlyphs(Page page, PdfDisplayTransform display, CancellationToken token)
+    private static IReadOnlyList<PdfGlyph> SpecialGlyphs(Page page, PdfDisplayTransform display, CancellationToken token, bool tight = false)
     {
         var output = new List<PdfGlyph>(); var crop = page.CropBox.Bounds; var order = 0;
         // PdfPig has already translated/rotated letters to the crop box. Undo that transform before applying the media-box display transform.
@@ -157,7 +164,7 @@ public static class PdfPigLayoutReader
             token.ThrowIfCancellationRequested();
             if (string.IsNullOrWhiteSpace(letter.Value)) { order++; continue; }
             if ((int)letter.RenderingMode is < 0 or > 2 || letter.Value.Contains('\uFFFD') || letter.Value.Any(char.IsControl)) throw new PdfParseException("P01", page.Number);
-            var rect = letter.GlyphRectangleLoose;
+            var rect = tight ? letter.BoundingBox : letter.GlyphRectangleLoose;
             var corners = new[] { Raw(rect.Left, rect.Bottom), Raw(rect.Left, rect.Top), Raw(rect.Right, rect.Bottom), Raw(rect.Right, rect.Top) };
             var points = corners.Select(p => display.Point(p.X, p.Y)).ToArray();
             var x = points.Min(p => p.X); var y = points.Min(p => p.Y); var w = points.Max(p => p.X) - x; var h = points.Max(p => p.Y) - y;

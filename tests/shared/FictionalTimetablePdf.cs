@@ -11,7 +11,7 @@ public static class FictionalTimetablePdf
     /// Embed a separately named real CJK subset into fictional input layouts.
     /// The layouts are test inputs, never output from the production PDF reader.
     public static byte[] MakeSpecial(string root, IReadOnlyList<PdfPageLayout> layouts,
-        string subjectPaint = "0 g", string? afterText = null, string? graphicsState = null)
+        string subjectPaint = "0 g", string? afterText = null, string? graphicsState = null, string? beforeContent = null)
     {
         using var metadata = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(root, "fictional-noto-special.json")));
         var map = metadata.RootElement.GetProperty("glyphs");
@@ -43,6 +43,7 @@ public static class FictionalTimetablePdf
         for (var pageIndex = 0; pageIndex < layouts.Count; pageIndex++)
         {
             var layout = layouts[pageIndex]; var content = new StringBuilder("0 G 1 w\n");
+            content.Append(beforeContent);
             foreach (var line in layout.Lines) content.Append($"{N(line.X1)} {N(layout.Height-line.Y1)} m {N(line.X2)} {N(layout.Height-line.Y2)} l S\n");
             foreach (var row in layout.Glyphs.GroupBy(g => (g.Y,g.Height)).OrderBy(g => g.Key.Y))
             {

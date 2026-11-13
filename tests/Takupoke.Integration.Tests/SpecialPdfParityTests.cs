@@ -7,6 +7,98 @@ namespace Takupoke.Integration.Tests;
 /// <summary>Fictional geometry and expected results match the iOS SpecialScheduleTests fixtures.</summary>
 public sealed class SpecialPdfParityTests
 {
+    internal static PdfPageLayout FlexibleExamPage(string[] classes, int[] days, int? declaredPages=null)
+    {
+        var b=new Builder(true,4);
+        b.Write("令和8年度 試験時間割",20,20,3);
+        if(declaredPages is { } total)b.Write($"全{total}ページ",20,36,3);
+        for(var column=0;column<classes.Length;column++) {
+            b.Write(classes[column],170+column*240,110,3);
+            for(var p=0;p<6;p++)b.Write((p+1).ToString(),108+(column*6+p)*40,150,3);
+        }
+        var bottom=170+days.Length*45;var right=90+classes.Length*240;
+        for(var i=0;i<=classes.Length*6;i++)b.Line(90+i*40,170,90+i*40,bottom);
+        b.Line(0,170,0,bottom);
+        for(var i=0;i<=days.Length;i++)b.Line(0,170+i*45,right,170+i*45);
+        for(var row=0;row<days.Length;row++) {
+            var y=182+row*45;b.Write($"4月{days[row]}日",12,y,3);
+            for(var column=0;column<classes.Length;column++) {
+                var x=94+column*240;b.Write("架空科目甲",x,y,3);b.Write("架空教員乙",x,y+9,3);b.Write("架空教室丙",x,y+18,3);
+            }
+        }
+        for(var p=1;p<=6;p++)b.Write($"{p}時限目{p+7}:00~{p+7}:40",20,480+p*16,3);
+        return b.Page(Math.Max(850,right+20),650);
+    }
+
+    [Fact]
+    public void SegmentedCellTopBordersDefineTheCompleteExamBody()
+    {
+        var page=FlexibleExamPage(["2-CN"],[1,2]);
+        page=page with { Lines=page.Lines.SelectMany(rule=>!rule.Horizontal ? new[]{rule} :
+            new[]{new PdfRule(0,rule.Y1,90,rule.Y2)}.Concat(Enumerable.Range(0,6).Select(i=>new PdfRule(90+i*40,rule.Y1,130+i*40,rule.Y2)))).ToArray() };
+        var result=PdfScheduleParser.Special([page],MaterialKind.Exam);
+        Assert.Equal(new[]{"2026-04-01","2026-04-02"},result.CoveredDates);Assert.Equal(2,result.Lessons.Count);
+        page=page with { Glyphs=page.Glyphs.Where(g=>!(170<g.Cy && g.Cy<215)).ToArray() };
+        Assert.Throws<PdfParseException>(()=>PdfScheduleParser.Special([page],MaterialKind.Exam));
+    }
+
+    [Fact]
+    public void BlankRuledEdgeRowsCannotDisappearFromExamScope()
+    {
+        foreach(var row in new[]{0,2}) {
+            var page=FlexibleExamPage(["2-CN"],[1,2,3]);
+            page=page with { Glyphs=page.Glyphs.Where(g=>!(170+row*45 < g.Cy && g.Cy < 215+row*45)).ToArray() };
+            Assert.Equal("P10",Assert.Throws<PdfParseException>(()=>PdfScheduleParser.Special([page],MaterialKind.Exam)).Stage);
+        }
+    }
+
+    [Fact]
+    public void DeclaredExamPageCountMustMatchTheSelectedDocument()
+    {
+        var page=FlexibleExamPage(["2-CN"],[1,2],declaredPages:1);
+        Assert.Single(PdfScheduleParser.Special([page],MaterialKind.Exam).Scopes!);
+        var missing=FlexibleExamPage(["2-CN"],[1,2],declaredPages:2);
+        Assert.Equal("P04",Assert.Throws<PdfParseException>(()=>PdfScheduleParser.Special([missing],MaterialKind.Exam)).Stage);
+    }
+
+    [Fact]
+    public void ExamUsesActualHeadersAndKeepsPageBoundScopeAfterSerialization()
+    {
+        var pages=new[] { FlexibleExamPage(["1年","2年"],[4,5]),FlexibleExamPage(["1-1","1-2"],[1,2,3]),
+            FlexibleExamPage(["2-CN"],[1,2,3]),FlexibleExamPage(["1-1"],[4,5]) };
+        var parsed=PdfScheduleParser.Special(pages,MaterialKind.Exam);
+        var result=Takupoke.Infrastructure.Storage.DataCodec.Decode<SpecialAnalysis>(Takupoke.Infrastructure.Storage.DataCodec.Encode(parsed));
+        Assert.Equal(15,result.Lessons.Count);Assert.Equal(5,result.CoveredClasses.Count);Assert.Equal(5,result.CoveredDates.Count);
+        Assert.True(result.Applies(new(2026,4,4),"1_1"));
+        Assert.False(result.Applies(new(2026,4,4),"1_2"));Assert.False(result.Applies(new(2026,4,1),"AI_1"));
+    }
+
+    [Fact]
+    public void ExamRejectsDuplicateScopeMissingClassAndUnassignedDateBody()
+    {
+        var page=FlexibleExamPage(["2-CN"],[1,2,3]);
+        var crossClass=FlexibleExamPage(["2-CN","3-IT"],[1]);
+        crossClass=crossClass with { Lines=crossClass.Lines.Where(l=>!(l.Vertical && l.X1==330)).ToArray() };
+        Assert.Throws<PdfParseException>(()=>PdfScheduleParser.Special([crossClass],MaterialKind.Exam));
+        var crossDay=page with { Lines=page.Lines.Where(l=>!(l.Horizontal && l.Y1==215)).ToArray() };
+        Assert.Throws<PdfParseException>(()=>PdfScheduleParser.Special([crossDay],MaterialKind.Exam));
+        Assert.Throws<PdfParseException>(()=>PdfScheduleParser.Special([page,page],MaterialKind.Exam));
+        foreach(var y in new[] {110,227}) {
+            var broken=page with { Glyphs=page.Glyphs.Where(g=>!(g.X < (y==110?240:90) && g.Y==y)).ToArray() };
+            Assert.Throws<PdfParseException>(()=>PdfScheduleParser.Special([broken],MaterialKind.Exam));
+        }
+    }
+
+    [Fact]
+    public void FiveExamPagesAndReorderedSixPagesKeepAllLessons()
+    {
+        var five=PdfScheduleParser.Special(Enumerable.Range(1,5).Select(i=>ExamPage(i)).ToArray(),MaterialKind.Exam);
+        Assert.Equal(15,five.CoveredClasses.Count);Assert.Equal(75,five.Lessons.Count);
+        var six=PdfScheduleParser.Special(new[] {6,3,1,5,2,4}.Select(i=>ExamPage(i)).ToArray(),MaterialKind.Exam);
+        Assert.Equal(17,six.CoveredClasses.Count);Assert.Equal(85,six.Lessons.Count);
+        Assert.All(six.Lessons.Where(l=>l.ClassName.StartsWith("AI_",StringComparison.Ordinal)),l=>Assert.Equal(1,l.Page));
+    }
+
     private static PdfPageLayout ReplaceFirstExamTime(PdfPageLayout original, string text, bool consecutive = false)
     {
         var glyphs = original.Glyphs.Where(g => g.Y != 470 || (consecutive ? g.X < 300 : g.X >= 280)).ToList();
@@ -122,9 +214,9 @@ public sealed class SpecialPdfParityTests
             b.Write(labels[column], 200 + column * 240, 70);
             for (var period = 0; period < 6; period++) b.Write((period + 1).ToString(), 118 + (column * 6 + period) * 40, 100);
         }
-        for (var index = 0; index <= columns * 6; index++) b.Line(100 + index * 40, merged && index == 1 ? 150 : 110, 100 + index * 40, 350);
-        b.Line(0, 110, 0, 350);
-        for (var index = 0; index <= 6; index++) b.Line(0, 110 + index * 40, 100 + columns * 6 * 40, 110 + index * 40);
+        for (var index = 0; index <= columns * 6; index++) b.Line(100 + index * 40, merged && index == 1 ? 150 : 110, 100 + index * 40, 310);
+        b.Line(0, 110, 0, 310);
+        for (var index = 0; index <= 5; index++) b.Line(0, 110 + index * 40, 100 + columns * 6 * 40, 110 + index * 40);
         for (var index = 0; index < 5; index++)
         {
             b.Write($"4月{index + 1}日", 16, 126 + index * 40);

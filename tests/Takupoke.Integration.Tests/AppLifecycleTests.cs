@@ -139,7 +139,7 @@ public sealed partial class AppLifecycleTests
             await store.SaveOriginalAsync(lease, source, bytes);
             var day = SchoolDate.InJapan(now); var times = new Dictionary<int, TimeRange> { [1] = new("09:00", "09:45") };
             var special = new SpecialAnalysis(MaterialKind.Exam, day.SchoolYear(), [day.Iso()], ["3_IT"], times,
-                [new(day.Iso(), "3_IT", 1, 1, 1, times[1], ["架空科目A"], 1)]);
+                [new(day.Iso(), "3_IT", 1, 1, 1, times[1], ["架空科目A"], 1)], Scopes: [new(1,["3_IT"],[day.Iso()])]);
             await store.SaveAnalysisAsync(lease, new(source.Id, MaterialKind.Exam, MaterialCoordinator.ParserVersion(MaterialKind.Exam), digest, source.OriginalName, now, day.SchoolYear(), Special: special));
             await store.WriteAsync(lease, "notifications", new NotificationBaseline(SpecialDigests: new Dictionary<string, string> { ["exam"] = digest },
                 Pending: new Dictionary<string, PendingNotice> { ["exam"] = new(digest, 1) }));

@@ -1,7 +1,7 @@
 # 固定iOS参照・独立期待値
 
 対応関係・宣言名・実行方法のSHA-256：
-`49be8859832c5bc1cd609df1db7a1cf6a4949718776c98552c7652d7366f1489`
+`561b0d05fbb90cea51be3187be210f341910daabbed2e59f8c203c54e08c52c7`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -29,6 +29,12 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 
 ## [tests/Takupoke.Integration.Tests/SpecialPdfParityTests.cs](../../tests/Takupoke.Integration.Tests/SpecialPdfParityTests.cs)
 
+- `SegmentedCellTopBordersDefineTheCompleteExamBody`
+- `BlankRuledEdgeRowsCannotDisappearFromExamScope`
+- `DeclaredExamPageCountMustMatchTheSelectedDocument`
+- `ExamUsesActualHeadersAndKeepsPageBoundScopeAfterSerialization`
+- `ExamRejectsDuplicateScopeMissingClassAndUnassignedDateBody`
+- `FiveExamPagesAndReorderedSixPagesKeepAllLessons`
 - `SpecialPeriodHeadingsDoNotTruncateNumericTokens`
 - `SpecialConsecutiveHeadingsDoNotAdoptNumericSuffix`
 - `MissingContinuousHeadingKeepsVerifiedSinglePeriodFallback`

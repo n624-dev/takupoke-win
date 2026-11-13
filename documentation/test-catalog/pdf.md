@@ -1,7 +1,7 @@
 # Strict PDF・文字・罫線・試験・返却
 
 対応関係・宣言名・実行方法のSHA-256：
-`db0882d291448e7dca49b0182ce0bf6ab5c453066ef1e7e4e85afee889d676ba`
+`10f6a93b15f9318415cb1e20c7945cec71342be4a87adc87f287eb654a5dc49f`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -54,6 +54,14 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `SpecialPaintMustProveActualTextVisibility`
 - `IndependentCompoundFillControlsKeepTheSpecialTimetable`
 - `HiddenSpecialReplacementKeepsPreviousGoodAfterEncryptedStoreRestart`
+- `RealFontSpecialReaderAcceptsOnlyClipsContainingEveryGlyphAndRule`
+- `SameInkModeTwoRequiresTheEntireOpaqueFilledGlyphInsideTheClip`
+- `SpecialClipBoundsMiterJoinsAndRefusesUnboundedDeviceHairlines`
+- `SpecialClipContainsStrokeInkIncludingTransformAndTextMode`
+- `RectangularSpecialClipsPreserveOnlyUncutInkAndRestoreOnQ`
+- `IntersectingFilledRulesAndPartialEarlierBackgroundKeepContrastChecks`
+- `ScopedReturnSubsetCannotReplaceTheFullReturnAfterRestart`
+- `FivePageExamScopeSurvivesEncryptedRestartAndMalformedReplacement`
 - `RuleContrastUsesTheActualOpaqueBackgroundAndRejectsLaterCover`
 - `MergedAndVisibleSplitRuleControlsUseTheirActualPeriodSpan`
 - `InvisibleStrokeOrFilledBoundaryCannotChangeTheAcceptedMergedSpan`

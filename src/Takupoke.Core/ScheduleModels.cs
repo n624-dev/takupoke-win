@@ -75,10 +75,30 @@ public sealed record SpecialLesson(string Date, string ClassName, int Period, in
     public LessonNames Names => new(Lines.ElementAtOrDefault(0) ?? "", Lines.ElementAtOrDefault(1) ?? "", Lines.ElementAtOrDefault(2) ?? "");
 }
 
+public sealed record SpecialScope(int Page, IReadOnlyList<string> Classes, IReadOnlyList<string> Dates);
+
 public sealed record SpecialAnalysis(MaterialKind Kind, int SchoolYear, IReadOnlyList<string> CoveredDates,
-    IReadOnlyList<string> CoveredClasses, IReadOnlyDictionary<int, TimeRange> PeriodTimes, IReadOnlyList<SpecialLesson> Lessons, string? DedicatedTimeDate = null)
+    IReadOnlyList<string> CoveredClasses, IReadOnlyDictionary<int, TimeRange> PeriodTimes, IReadOnlyList<SpecialLesson> Lessons, string? DedicatedTimeDate = null, IReadOnlyList<SpecialScope>? Scopes = null)
 {
-    public bool Applies(DateOnly day, string className) => CoveredDates.Contains(day.Iso()) && CoveredClasses.Contains(className);
+    public bool ValidScopes()
+    {
+        if (Scopes is null || Scopes.Count is < 1 or > 12) return false;
+        var pairs=new HashSet<(string Class,string Date)>();
+        foreach(var scope in Scopes) {
+            if(scope.Page is < 1 or > 12 || scope.Classes.Count is < 1 or > 64 || scope.Dates.Count is < 1 or > 31
+                || scope.Classes.Distinct().Count()!=scope.Classes.Count || scope.Dates.Distinct().Count()!=scope.Dates.Count) return false;
+            foreach(var cls in scope.Classes) {
+                if(!System.Text.RegularExpressions.Regex.IsMatch(cls,"^(?:[1-5]_(?:[1-3]|[A-Z]{2})|AI_[12])$")) return false;
+                foreach(var date in scope.Dates)
+                    if(!SchoolDate.TryParse(date,out var day) || day.SchoolYear()!=SchoolYear || !pairs.Add((cls,date))) return false;
+            }
+        }
+        return Scopes.SelectMany(s=>s.Classes).ToHashSet().SetEquals(CoveredClasses)
+            && Scopes.SelectMany(s=>s.Dates).ToHashSet().SetEquals(CoveredDates)
+            && Lessons.All(l=>Scopes.Any(s=>s.Page==l.Page && s.Classes.Contains(l.ClassName) && s.Dates.Contains(l.Date)));
+    }
+    public bool Applies(DateOnly day, string className) => Scopes is null ? CoveredDates.Contains(day.Iso()) && CoveredClasses.Contains(className)
+        : Scopes.Any(scope => scope.Dates.Contains(day.Iso()) && scope.Classes.Contains(className));
     public TimeRange? PeriodTime(DateOnly day, int period)
     {
         if (!CoveredDates.Contains(day.Iso())) return null;

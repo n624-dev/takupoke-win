@@ -12,7 +12,11 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
     private readonly record struct Bounds(double Left, double Top, double Right, double Bottom)
     {
         public bool Intersects(Bounds b) => Left < b.Right && Right > b.Left && Top < b.Bottom && Bottom > b.Top;
-        public bool Touches(Bounds b) => Left <= b.Right && Right >= b.Left && Top <= b.Bottom && Bottom >= b.Top;
+        // Merely sharing a rectangle edge leaves the stroke's other half
+        // visible. A fill obscures a rule only across its centre and length.
+        public bool CutsRule(Bounds b) => b.Left == b.Right
+            ? Left < b.Left && b.Left < Right && Math.Min(Bottom,b.Bottom)>Math.Max(Top,b.Top)
+            : Top < b.Top && b.Top < Bottom && Math.Min(Right,b.Right)>Math.Max(Left,b.Left);
         public bool Contains(Bounds b) => Left <= b.Left && Right >= b.Right && Top <= b.Top && Bottom >= b.Bottom;
     }
     private sealed record State(Colour Fill, Colour Stroke, int Mode = 0, double Width = 1, int FillComponents = 1, int StrokeComponents = 1);
@@ -135,10 +139,25 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
         if (_paint.Count >= 100000) throw new PdfParseException("limit");
         _paint.Add(paint);
     }
+    /// Mode 2 renders the filled glyph, then its outline. An identical opaque
+    /// fill/stroke preserves the entire filled shape even if an auxiliary edge
+    /// of the outline reaches a clip. Validate() still proves fill contrast and
+    /// rejects any later covering paint. Stroke-only or different-colour text
+    /// has no such proof and must retain its complete stroked bounds.
+    public bool FilledShapePreserved => _state.Mode == 2 && _state.Width > 0 && _state.Fill == _state.Stroke;
+    private static bool Visible(State state, Colour background) => state.Mode switch
+    {
+        0 => state.Fill.Differs(background),
+        1 => state.Stroke.Differs(background),
+        _ => state.Stroke.Differs(background)
+    };
     public void Validate()
     {
         token.ThrowIfCancellationRequested();
         if (_stack.Count != 0) throw new PdfParseException("P01");
+        // Thin opaque fills are rules too. Their intersections are not opaque
+        // cell backgrounds; each rule proves its own contrast in this pass.
+        var filledRuleOrders = _rules.Select(rule => rule.Order).ToHashSet();
         foreach (var rule in _rules)
         {
             var background = new Colour(1, 1, 1);
@@ -147,8 +166,14 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
                 Work(); var paint = _paint[index];
                 // Stroke intersections do not establish an opaque background.
                 // Every stroke independently proves its contrast below.
-                if (paint.Order == rule.Order || paint.Colour is not { } colour || !paint.Bounds.Touches(rule.Bounds)) continue;
-                if (paint.Order > rule.Order || !paint.Bounds.Contains(rule.Bounds)) throw new PdfParseException("P01");
+                var filledRule = filledRuleOrders.Contains(paint.Order) &&
+                    (paint.Bounds.Right - paint.Bounds.Left <= 2.1 && paint.Bounds.Bottom - paint.Bounds.Top > 3 ||
+                     paint.Bounds.Bottom - paint.Bounds.Top <= 2.1 && paint.Bounds.Right - paint.Bounds.Left > 3);
+                if (paint.Order == rule.Order || filledRule || paint.Colour is not { } colour || !paint.Bounds.CutsRule(rule.Bounds)) continue;
+                if (paint.Order > rule.Order || rule.Colour is not { } ruleInk || !ruleInk.Differs(colour)) throw new PdfParseException("P01");
+                // Partial earlier backgrounds are safe only if every possible
+                // exposed colour contrasts. Keep searching for the base layer.
+                if (!paint.Bounds.Contains(rule.Bounds)) continue;
                 background = colour; break;
             }
             if (rule.Colour is not { } ink || !ink.Differs(background)) throw new PdfParseException("P01");
@@ -160,18 +185,11 @@ public sealed class PdfPaintVisibility(CancellationToken token = default)
             {
                 Work(); var paint = _paint[index];
                 if (!paint.Bounds.Intersects(text.Bounds)) continue;
-                if (paint.Order > text.Order || paint.Colour is not { } colour || !paint.Bounds.Contains(text.Bounds)) throw new PdfParseException("P01");
+                if (paint.Order > text.Order || paint.Colour is not { } colour || !Visible(text.State,colour)) throw new PdfParseException("P01");
+                if (!paint.Bounds.Contains(text.Bounds)) continue;
                 background = colour; break;
             }
-            var visible = text.State.Mode switch
-            {
-                0 => text.State.Fill.Differs(background),
-                1 => text.State.Stroke.Differs(background),
-                // A same-colour stroke can cover a contrasting thin fill.
-                // Without glyph-outline rasterisation, require the outline.
-                _ => text.State.Stroke.Differs(background)
-            };
-            if (!visible) throw new PdfParseException("P01");
+            if (!Visible(text.State,background)) throw new PdfParseException("P01");
         }
     }
 }

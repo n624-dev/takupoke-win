@@ -224,6 +224,9 @@ public sealed class SchoolDataStore(string root, IKeyProtector protector, TimePr
     public Task SaveAnalysisAsync(SchoolLease lease, MaterialAnalysis analysis,
         CancellationToken token = default, bool authorizeRowSkips = false) => WithConnectionAsync(lease, async connection =>
     {
+        if (analysis.Kind is MaterialKind.Exam or MaterialKind.ExamReturn && analysis.ParserVersion >= 9
+            && (analysis.Special is null || !analysis.Special.ValidScopes() || analysis.Kind == MaterialKind.ExamReturn &&
+                (analysis.Special.CoveredClasses.Count != 17 || analysis.Special.CoveredDates.Count != 5))) throw new InvalidDataException("解析結果の適用範囲を確認できません。");
         var selectionKey = "selection." + analysis.Kind;
         using var transaction = connection.BeginTransaction();
         SourceRecord source;
