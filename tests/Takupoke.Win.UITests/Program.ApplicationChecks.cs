@@ -41,6 +41,11 @@ internal static partial class Program
         Wait(() => Find("link-fake-study") is not null && Find("link-fake-second") is not null, "A query empty after normalization shows the complete category list");
         Navigate("timetable"); Navigate("settings");
         Require(Find("material-summary-Exam") is null && Find("fetch-events") is null, "Root settings contains destinations rather than file and event details.");
+        Invoke("settings-status");
+        Wait(() => Find("page-status") is not null && Find("status-events") is not null, "status opens from settings");
+        Require(Find("status-refresh") is not null, "status refresh is present in the offline fixture");
+        Invoke("back-settings");
+        Wait(() => Find("page-settings") is not null, "status returns to settings");
         var preferences = Path.Combine(args[1], "preferences.json");
         Wait(() => !Visible("status-bar"), "idle footer is hidden");
         var bodyColor = TextColor("page-settings");

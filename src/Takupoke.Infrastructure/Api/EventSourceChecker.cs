@@ -56,11 +56,15 @@ public sealed record SavedEventSourceStatus(DateTimeOffset ReceivedAt, EventSour
 
 public sealed record EventSourceObservation(SavedEventSourceStatus? Saved, bool Failed, bool FollowUpExhausted = false)
 {
+    public bool IsUpdateWaiting(SavedEvents events) => Saved?.Response.Matches(events) == true
+        && Saved.Successful?.LastSuccessfulStatus == "source_differs";
+
     public string? Warning(SavedEvents events, DateTimeOffset now)
     {
         if (Saved is null) return Failed ? "元PDFの状態APIに接続できませんでした。保存済み行事は表示しています。" : "元PDFの更新状況は未確認です。";
         var response = Saved.Response;
         if (!response.Matches(events)) return "APIと保存済み行事の年度・元PDF・配信版が一致しません。学校行事を更新してください。";
+        if (IsUpdateWaiting(events)) return "更新待ち。学校の元PDFと採用原本に差異があり、保存済みの行事を表示しています。";
         if (Failed) return "元PDFの状態APIを確認できませんでした。前回の成功結果と保存済み行事は保持しています。";
         if (response.Checking) return FollowUpExhausted
             ? "元PDFの確認完了を取得できませんでした。前回の確認結果を表示しています。現在の更新状況は未確認です。"
@@ -70,13 +74,13 @@ public sealed record EventSourceObservation(SavedEventSourceStatus? Saved, bool 
         if (Saved.PreviousSuccess is not null) return "APIから以前の結果が返りました。新しい成功結果を保持し、現在の更新状況は未確認としています。";
         if (response.Stale || !Saved.IsFresh(now) || response.LastSuccessAt is not { } success ||
             now < success || now - success >= TimeSpan.FromHours(24)) return "元PDFの確認結果は古くなっています。現在の更新状況は未確認です。";
-        return response.Status == "source_differs" ? "元PDFの本文に差異があります。行事内容は確認待ちです。保存済み行事を表示しています。" : null;
+        return null;
     }
     public string Description(SavedEvents events, DateTimeOffset now)
     {
         var text = Warning(events, now) ?? "元PDFの本文は登録元と一致しています。";
         if (Saved?.Response.Matches(events) == true && Saved.Successful is { LastSuccessAt: { } at } success)
-            text += $" 最終成功の結果：{(success.LastSuccessfulStatus == "matched" ? "登録元と一致" : "本文差異・内容確認待ち")}。最終成功確認：{at.ToOffset(TimeSpan.FromHours(9)):yyyy/MM/dd HH:mm:ss}（日本時間）。";
+            text += $" 最終成功の結果：{(success.LastSuccessfulStatus == "matched" ? "登録元と一致" : "元PDFに差異あり")}。最終成功確認：{at.ToOffset(TimeSpan.FromHours(9)):yyyy/MM/dd HH:mm:ss}（日本時間）。";
         return text;
     }
 }

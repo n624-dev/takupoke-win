@@ -70,11 +70,12 @@ public sealed partial class MainWindow : Window
             var active = args.WindowActivationState != WindowActivationState.Deactivated;
             var returned = active && !_windowActive; _windowActive = active;
             _model.SetEventSourceChecksActive(active);
+            UpdateStatusVisibility();
             if (returned && _ready) _ = _model.ResumeAutomaticRefreshAsync(refresh: !_selectingMaterial);
         };
         AppWindow.Closing += (_, args) =>
         { if (!_exitRequested && _model.Preferences.KeepInTray && _desktop?.TrayAvailable == true) { args.Cancel = true; AppWindow.Hide(); } };
-        Closed += async (_, _) => { _themeTimer?.Stop(); CloseBrowser(); _desktop?.Dispose(); Program.OpenRequested = null; await _model.DisposeAsync(); };
+        Closed += async (_, _) => { _windowActive = false; UpdateStatusVisibility(); _statusHttp?.Dispose(); _themeTimer?.Stop(); CloseBrowser(); _desktop?.Dispose(); Program.OpenRequested = null; await _model.DisposeAsync(); };
         Program.OpenRequested = () => DispatcherQueue.TryEnqueue(ShowWindow);
     }
     private async void Loaded(object sender, RoutedEventArgs args)
@@ -187,6 +188,7 @@ public sealed partial class MainWindow : Window
         else if (_page == "licenses") BuildLicenses();
         else if (_page == "materials") BuildMaterials();
         else if (_page == "events") BuildEventsSettings();
+        else if (_page == "status") BuildPublicStatus();
         else if (_page == "notifications") BuildNotificationSettings();
         else if (_page == "about") BuildAbout();
         else switch (_page) { case "links": BuildLinks(); break; case "timetable": BuildTimetable(); break; case "settings": BuildSettings(); break; default: BuildHome(); break; }
@@ -219,6 +221,7 @@ public sealed partial class MainWindow : Window
                 FindById(PageContent, focusId)?.Focus(FocusState.Programmatic);
             });
         }
+        UpdateStatusVisibility();
     }
     private Windows.UI.Color MainAccentColor() => _model.Preferences.MainColor == "default"
         ? _uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Accent) : LinkColor(_model.Preferences.MainColor);

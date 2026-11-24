@@ -1,7 +1,7 @@
 # API・年度別行事・更新失敗
 
 対応関係・宣言名・実行方法のSHA-256：
-`ee1cbd9d36d86cbcfce9d9f252dd44e4c4b658005c0bed5536d4cfc48782fc66`
+`77271e4062e2c800f34783fb42b09a10be2c07b2d2ae64ed7a7c580911922b95`
 
 環境：Linux／Windows .NET（WinUI操作はWindows限定）
 
@@ -16,6 +16,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - [src/Takupoke.Infrastructure/Api/ApiModels.cs](../../src/Takupoke.Infrastructure/Api/ApiModels.cs)
 - [src/Takupoke.Infrastructure/Api/ApiPayloads.cs](../../src/Takupoke.Infrastructure/Api/ApiPayloads.cs)
 - [src/Takupoke.Infrastructure/Api/EventSourceChecker.cs](../../src/Takupoke.Infrastructure/Api/EventSourceChecker.cs)
+- [src/Takupoke.Infrastructure/Api/PublicStatusClient.cs](../../src/Takupoke.Infrastructure/Api/PublicStatusClient.cs)
 - [src/Takupoke.Infrastructure/Api/SharedDataUpdater.cs](../../src/Takupoke.Infrastructure/Api/SharedDataUpdater.cs)
 
 ## [tests/Takupoke.Integration.Tests/ApiClientTests.cs](../../tests/Takupoke.Integration.Tests/ApiClientTests.cs)
@@ -39,6 +40,7 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 ## [tests/Takupoke.Integration.Tests/EventSourceCheckerTests.cs](../../tests/Takupoke.Integration.Tests/EventSourceCheckerTests.cs)
 
 - `MetadataChecksOnlyApiAndDistinguishesResultsWithoutUsingPdfEtag`
+- `SourceDifferenceRemainsWaitingWhenTheNextCheckFails`
 - `VersionHashAndYearMustMatchBeforeAnObservationCanApply`
 - `TwelveHourPersistentCacheCoalescesWaitersForceBypassesAndFailureKeepsPreviousSuccess`
 - `CheckingUsesSixtySecondsAndUnavailableOldEdgesPreserveNewestSuccessfulResult`
@@ -51,6 +53,11 @@ dotnet test tests/Takupoke.Integration.Tests --configuration Release
 - `AcceptedUtf8PayloadSurvivesAnEscapedSavedEnvelope`
 - `DamagedYearDoesNotBlockHealthyYearsAndCanBeReplaced`
 - `CancellationIsNotReportedAsDamagedData`
+
+## [tests/Takupoke.Integration.Tests/PublicStatusTests.cs](../../tests/Takupoke.Integration.Tests/PublicStatusTests.cs)
+
+- `FunctionalStatusKeepsPdfEvidenceAndReadinessSeparate`
+- `PublicHistoryIgnoresUnrelatedOutageAndDuplicateDates`
 
 ## [tests/Takupoke.Integration.Tests/SharedDataUpdaterTests.cs](../../tests/Takupoke.Integration.Tests/SharedDataUpdaterTests.cs)
 
