@@ -41,6 +41,7 @@ public sealed record FunctionalStatus(int SchemaVersion, string Service, [proper
 {
     public sealed record DataEvidence(PublicEventEvidence? Events);
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
+    public bool IsCurrent(DateTimeOffset now) => now >= CheckedAt && now < ValidUntil;
 
     public FunctionalFeature? Find(string id)
     {

@@ -134,7 +134,7 @@ public sealed partial class MainWindow
     {
         _statusExpiry?.Cancel();
         var now = DateTimeOffset.UtcNow;
-        var deadlines = _functionalStatus.Values.SelectMany(status => status.Features.Select(feature => feature.ValidUntil)
+        var deadlines = _functionalStatus.Values.SelectMany(status => status.Features.Select(feature => feature.ValidUntil).Append(status.ValidUntil)
             .Append(status.Data?.Events?.ValidUntil ?? DateTimeOffset.MinValue))
             .Append(_monitoring?.ReceivedAt.AddMinutes(3) ?? DateTimeOffset.MinValue);
         var next = deadlines.Where(date => date > now).DefaultIfEmpty().Min();
@@ -195,7 +195,7 @@ public sealed partial class MainWindow
             foreach (var (id, featureTitle) in features)
             {
                 var feature = functional?.Find(id);
-                var state = !_failedStatus.Contains(service) ? feature?.Current(now) : null;
+                var state = !_failedStatus.Contains(service) && functional?.IsCurrent(now) == true ? feature?.Current(now) : null;
                 var label = state switch
                 {
                     FunctionalState.Available => "利用可能",

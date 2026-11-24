@@ -23,6 +23,9 @@ public sealed class PublicStatusTests
         Assert.Throws<ApiException>(() => FunctionalStatus.Decode(bytes, PublicService.Authentication));
         Assert.Equal(FunctionalState.Available, value.Find("events")!.Current(value.CheckedAt));
         Assert.Equal(FunctionalState.Unknown, value.Find("events")!.Current(value.ValidUntil));
+        var expired = value with { ValidUntil = value.CheckedAt.AddSeconds(1) };
+        Assert.False(expired.IsCurrent(value.CheckedAt.AddSeconds(2)));
+        Assert.NotNull(expired.Data!.Events!.Find(2032, "v1", value.CheckedAt.AddSeconds(2)));
         Assert.Equal("source_differs", value.Data!.Events!.Find(2032, "v1", value.CheckedAt)?.SourceState);
         Assert.Null(value.Data.Events.Find(2032, "v2", value.CheckedAt));
         Assert.Null(value.Data.Events.Find(2032, "v1", value.ValidUntil));
