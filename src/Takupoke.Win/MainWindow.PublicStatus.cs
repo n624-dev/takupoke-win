@@ -16,6 +16,7 @@ public sealed partial class MainWindow
     private CancellationTokenSource? _statusLifetime;
     private readonly Dictionary<PublicService, FunctionalStatus> _functionalStatus = [];
     private readonly HashSet<PublicService> _failedStatus = [];
+    private readonly HashSet<int> _publisherWaiting = [];
     private PublicMonitoringResult? _monitoring;
     private bool _monitoringFailed, _statusChecking;
 
@@ -77,6 +78,7 @@ public sealed partial class MainWindow
                 {
                     _functionalStatus[item.Service] = document;
                     _failedStatus.Remove(item.Service);
+                    if (item.Service == PublicService.Api) UpdatePublisherStatus(document);
                 }
                 else _failedStatus.Add(item.Service);
             }
@@ -94,6 +96,20 @@ public sealed partial class MainWindow
         }
     }
 
+    private void UpdatePublisherStatus(FunctionalStatus status)
+    {
+        if (status.Data?.Events is not { } evidence) return;
+        var now = DateTimeOffset.UtcNow;
+        foreach (var year in evidence.Versions.Select(version => version.SchoolYear).Distinct())
+        {
+            var version = evidence.Find(year, "v1", now);
+            if (version?.SourceCheckedAt is not { } compared || compared > now) continue;
+            if (version.SourceState == "source_differs") _publisherWaiting.Add(year);
+            if (version.SourceState == "matched" && version.ReviewState == "reviewed"
+                && version.ReviewCheckedAt is { } reviewed && reviewed <= now) _publisherWaiting.Remove(year);
+        }
+    }
+
     private void BuildPublicStatus()
     {
         TitleText("ステータス", "page-status");
@@ -108,7 +124,7 @@ public sealed partial class MainWindow
         _model.EventRecords.TryGetValue(year, out var saved);
         var evidence = _failedStatus.Contains(PublicService.Api) ? null :
             _functionalStatus.GetValueOrDefault(PublicService.Api)?.Data?.Events?.Find(year, "v1", now);
-        var waiting = evidence?.SourceState == "source_differs" || _model.EventSourceUpdateWaiting(year);
+        var waiting = _publisherWaiting.Contains(year) || _model.EventSourceUpdateWaiting(year);
         Add(SettingsGroup(
             SettingsRow("学校行事", () => OpenPage("events"), "status-events",
                 waiting ? "更新待ち" : evidence?.SourceState == "matched" ? "元PDFの一致を確認" : "元PDFは未確認"),

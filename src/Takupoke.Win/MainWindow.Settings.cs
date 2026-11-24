@@ -15,7 +15,8 @@ public sealed partial class MainWindow
     {
         TitleText("設定", "page-settings");
         Add(SettingsGroup(SettingsRow("ステータス", () => OpenPage("status"), "settings-status",
-            _model.EventSourceUpdateWaiting(_model.Today.SchoolYear()) ? "更新待ち" : null)));
+            (_publisherWaiting.Contains(_model.Today.SchoolYear()) || _model.EventSourceUpdateWaiting(_model.Today.SchoolYear()))
+                ? "更新待ち" : null)));
         Add(SettingsSectionTitle("データ"));
         Add(SettingsGroup(
             SettingsRow("時間割ファイル", () => OpenPage("materials"), "settings-materials"),

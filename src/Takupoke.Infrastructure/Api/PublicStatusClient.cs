@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Takupoke.Infrastructure.Authentication;
 
 namespace Takupoke.Infrastructure.Api;
@@ -8,8 +9,9 @@ namespace Takupoke.Infrastructure.Api;
 public enum PublicService { Api, Authentication }
 public enum FunctionalState { Unknown, Available, Unavailable }
 
-public sealed record FunctionalFeature(string Id, string State, DateTimeOffset CheckedAt,
-    DateTimeOffset ValidUntil, DateTimeOffset? LastSuccessfulAt)
+public sealed record FunctionalFeature([property: JsonRequired] string Id, [property: JsonRequired] string State,
+    [property: JsonRequired] DateTimeOffset CheckedAt, [property: JsonRequired] DateTimeOffset ValidUntil,
+    DateTimeOffset? LastSuccessfulAt)
 {
     public FunctionalState Current(DateTimeOffset now) =>
         now < CheckedAt || now >= ValidUntil ? FunctionalState.Unknown : State switch
@@ -23,8 +25,8 @@ public sealed record FunctionalFeature(string Id, string State, DateTimeOffset C
 public sealed record PublicEventVersion(int SchoolYear, string Format, string DataVersion,
     string SourceState, DateTimeOffset? SourceCheckedAt, string ReviewState, DateTimeOffset? ReviewCheckedAt);
 
-public sealed record PublicEventEvidence(DateTimeOffset CheckedAt, DateTimeOffset ValidUntil,
-    IReadOnlyList<PublicEventVersion> Versions)
+public sealed record PublicEventEvidence([property: JsonRequired] DateTimeOffset CheckedAt,
+    [property: JsonRequired] DateTimeOffset ValidUntil, [property: JsonRequired] IReadOnlyList<PublicEventVersion> Versions)
 {
     public PublicEventVersion? Find(int year, string format, DateTimeOffset now)
     {
@@ -34,8 +36,8 @@ public sealed record PublicEventEvidence(DateTimeOffset CheckedAt, DateTimeOffse
     }
 }
 
-public sealed record FunctionalStatus(int SchemaVersion, string Service, DateTimeOffset CheckedAt,
-    DateTimeOffset ValidUntil, IReadOnlyList<FunctionalFeature> Features, FunctionalStatus.DataEvidence? Data)
+public sealed record FunctionalStatus(int SchemaVersion, string Service, [property: JsonRequired] DateTimeOffset CheckedAt,
+    [property: JsonRequired] DateTimeOffset ValidUntil, IReadOnlyList<FunctionalFeature> Features, FunctionalStatus.DataEvidence? Data)
 {
     public sealed record DataEvidence(PublicEventEvidence? Events);
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
