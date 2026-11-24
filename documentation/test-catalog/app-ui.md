@@ -1,7 +1,7 @@
 # WinUI画面・行選択・表示領域・実操作・再起動
 
 対応関係・宣言名・実行方法のSHA-256：
-`4869225d189e531d75133619de8f7b691125daaf42daa7585ebfb849b621ee48`
+`ef9d6547fa5eaf4b51435a016adbaa88dc3ae6ee166eb8b321a2fa624cb65c2c`
 
 環境：Windows WinUI x64。Linuxクロスビルドは操作成功に数えない
 
@@ -24,6 +24,7 @@
 - [src/Takupoke.Win/MainWindow.Links.cs](../../src/Takupoke.Win/MainWindow.Links.cs)
 - [src/Takupoke.Win/MainWindow.PopupRendering.cs](../../src/Takupoke.Win/MainWindow.PopupRendering.cs)
 - [src/Takupoke.Win/MainWindow.Presentation.cs](../../src/Takupoke.Win/MainWindow.Presentation.cs)
+- [src/Takupoke.Win/MainWindow.PublicStatus.cs](../../src/Takupoke.Win/MainWindow.PublicStatus.cs)
 - [src/Takupoke.Win/MainWindow.Settings.cs](../../src/Takupoke.Win/MainWindow.Settings.cs)
 - [src/Takupoke.Win/MainWindow.Timetable.cs](../../src/Takupoke.Win/MainWindow.Timetable.cs)
 - [src/Takupoke.Win/MainWindow.xaml](../../src/Takupoke.Win/MainWindow.xaml)

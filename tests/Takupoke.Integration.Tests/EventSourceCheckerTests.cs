@@ -50,7 +50,7 @@ public sealed class EventSourceCheckerTests
     }
     [Theory]
     [InlineData("matched", null)]
-    [InlineData("source_differs", "内容は確認待ち")]
+    [InlineData("source_differs", "更新待ち")]
     [InlineData("unknown", "未確認")]
     [InlineData("unavailable", "確認できませんでした")]
     public async Task MetadataChecksOnlyApiAndDistinguishesResultsWithoutUsingPdfEtag(string status, string? warning)
@@ -63,6 +63,20 @@ public sealed class EventSourceCheckerTests
         else Assert.Contains(warning, result.Warning(Events(), f.Clock.Now));
         Assert.Contains("最終成功確認", result.Description(Events(), f.Clock.Now));
         Assert.Equal("\"different-pdf-etag\"", Events("\"different-pdf-etag\"").Payload.SourcePdfETag);
+    }
+    [Fact]
+    public async Task SourceDifferenceRemainsWaitingWhenTheNextCheckFails()
+    {
+        using var f = new Fixture();
+        f.Handler.Status = Matched() with { Status = "source_differs", LastSuccessfulStatus = "source_differs" };
+        var checker = f.Checker;
+        await checker.CheckAsync(Events());
+        f.Handler.HttpStatus = HttpStatusCode.ServiceUnavailable;
+        var observation = await checker.CheckAsync(Events(), force: true);
+        Assert.True(observation.Failed);
+        Assert.True(observation.IsUpdateWaiting(Events()));
+        Assert.StartsWith("更新待ち", observation.Warning(Events(), f.Clock.Now));
+        Assert.False(observation.IsUpdateWaiting(Events(version: "sha256-" + new string('c', 64))));
     }
     [Fact]
     public async Task VersionHashAndYearMustMatchBeforeAnObservationCanApply()

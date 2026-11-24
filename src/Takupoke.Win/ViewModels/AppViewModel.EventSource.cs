@@ -97,6 +97,8 @@ public sealed partial class AppViewModel
     }
     public string EventSourceDescription(int year) => EventRecords.TryGetValue(year, out var events)
         ? (_sourceObservations.GetValueOrDefault(year) ?? new(null, false)).Description(events, _clock.GetUtcNow()) : "学校行事は未取得です。";
+    public bool EventSourceUpdateWaiting(int year) => EventRecords.TryGetValue(year, out var events)
+        && _sourceObservations.GetValueOrDefault(year)?.IsUpdateWaiting(events) == true;
     public string? EventsUpdateMessage { get; private set; }
     /// Metadata does not own Busy or the private-operation queue. Saved events
     /// remain immediately usable while the API checks its official source.

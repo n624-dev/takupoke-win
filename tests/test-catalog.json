@@ -103,12 +103,14 @@
         "src/Takupoke.Infrastructure/Api/ApiModels.cs",
         "src/Takupoke.Infrastructure/Api/ApiPayloads.cs",
         "src/Takupoke.Infrastructure/Api/EventSourceChecker.cs",
+        "src/Takupoke.Infrastructure/Api/PublicStatusClient.cs",
         "src/Takupoke.Infrastructure/Api/SharedDataUpdater.cs"
       ],
       "checks": [
         "tests/Takupoke.Integration.Tests/ApiClientTests.cs",
         "tests/Takupoke.Integration.Tests/EventSourceCheckerTests.cs",
         "tests/Takupoke.Integration.Tests/PublicEventsStoreTests.cs",
+        "tests/Takupoke.Integration.Tests/PublicStatusTests.cs",
         "tests/Takupoke.Integration.Tests/SharedDataUpdaterTests.cs"
       ]
     },
@@ -262,6 +264,7 @@
         "src/Takupoke.Win/MainWindow.Links.cs",
         "src/Takupoke.Win/MainWindow.PopupRendering.cs",
         "src/Takupoke.Win/MainWindow.Presentation.cs",
+        "src/Takupoke.Win/MainWindow.PublicStatus.cs",
         "src/Takupoke.Win/MainWindow.Settings.cs",
         "src/Takupoke.Win/MainWindow.Timetable.cs",
         "src/Takupoke.Win/MainWindow.xaml",

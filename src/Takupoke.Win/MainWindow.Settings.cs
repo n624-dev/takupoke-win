@@ -14,6 +14,8 @@ public sealed partial class MainWindow
     private void BuildSettings()
     {
         TitleText("設定", "page-settings");
+        Add(SettingsGroup(SettingsRow("ステータス", () => OpenPage("status"), "settings-status",
+            _model.EventSourceUpdateWaiting(_model.Today.SchoolYear()) ? "更新待ち" : null)));
         Add(SettingsSectionTitle("データ"));
         Add(SettingsGroup(
             SettingsRow("時間割ファイル", () => OpenPage("materials"), "settings-materials"),
@@ -162,7 +164,8 @@ public sealed partial class MainWindow
         {
             Add(SettingsGroup(_model.SavedEventYears.Select(savedYear => SettingsRow(savedYear + "年度", () => EventDetails(savedYear), "events-details-" + savedYear, "取得済み")).Cast<UIElement>().ToArray()));
             foreach (var savedYear in _model.SavedEventYears)
-                Add(Card(Panel(SettingsSectionTitle(savedYear + "年度の元PDF確認"), SettingsDescription(_model.EventSourceDescription(savedYear)))));
+                Add(Card(Panel(SettingsSectionTitle(savedYear + "年度の元PDF確認"),
+                    SettingsDescription(_model.EventSourceUpdateWaiting(savedYear) ? "更新待ち" : _model.EventSourceDescription(savedYear)))));
         }
     }
     private void BuildNotificationSettings()
