@@ -143,7 +143,7 @@ public sealed partial class MainWindow
         if (_model.RevisionFailures.Count > 0) Add(ScheduleNotice("更新を確認できませんでした", "通信状況を確認して、もう一度お試しください。保存済みのデータはそのまま使えます。", "もう一度確認", "refresh", _model.RefreshAsync));
         AddMaterialWarnings();
         var classes = _model.Preferences.SelectedClasses;
-        if (_model.EventSourceMessage is { } eventWarning) Add(Card(Text(eventWarning)));
+        if (CurrentEventSourceMessage() is { } eventWarning) Add(Card(Text(eventWarning)));
         if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
         if (_model.EventStorageMessage is { } storageFailure) Add(Card(Text(storageFailure)));
         if (classes.Length == 0) Add(ScheduleNotice("クラスを選んでください", "", "クラスを選択", "people", ChooseClasses));

@@ -16,9 +16,10 @@ public sealed partial class MainWindow
     private CancellationTokenSource? _statusLifetime;
     private readonly Dictionary<PublicService, FunctionalStatus> _functionalStatus = [];
     private readonly HashSet<PublicService> _failedStatus = [];
-    private readonly HashSet<int> _publisherWaiting = [];
+    private readonly Dictionary<int, (DateTimeOffset Compared, bool Waiting)> _publisherStatus = [];
     private PublicMonitoringResult? _monitoring;
     private bool _monitoringFailed, _statusChecking;
+    private CancellationTokenSource? _statusExpiry;
 
     private void UpdateStatusVisibility()
     {
@@ -29,6 +30,7 @@ public sealed partial class MainWindow
                 _statusLifetime = null;
                 previous.Cancel();
                 _statusChecking = false;
+                _statusExpiry = null;
             }
             return;
         }
@@ -92,6 +94,7 @@ public sealed partial class MainWindow
             {
                 _statusChecking = false;
                 Render();
+                ScheduleStatusExpiry(lifetime);
             }
         }
     }
@@ -104,9 +107,54 @@ public sealed partial class MainWindow
         {
             var version = evidence.Find(year, "v1", now);
             if (version?.SourceCheckedAt is not { } compared || compared > now) continue;
-            if (version.SourceState == "source_differs") _publisherWaiting.Add(year);
+            if (_publisherStatus.TryGetValue(year, out var old) && compared < old.Compared) continue;
+            if (version.SourceState == "source_differs") _publisherStatus[year] = (compared, true);
             if (version.SourceState == "matched" && version.ReviewState == "reviewed"
-                && version.ReviewCheckedAt is { } reviewed && reviewed <= now) _publisherWaiting.Remove(year);
+                && version.ReviewCheckedAt is { } reviewed && reviewed <= now) _publisherStatus[year] = (compared, false);
+        }
+    }
+
+    private bool PublisherWaiting(int year)
+    {
+        var published = _publisherStatus.GetValueOrDefault(year);
+        var previousDifference = _model.EventSourceDifferenceAt(year);
+        return published.Waiting || previousDifference is { } compared && compared > published.Compared;
+    }
+
+    private string? CurrentEventSourceMessage()
+    {
+        var messages = _model.SavedEventYears.Order().Select(year =>
+            (Year: year, Warning: PublisherWaiting(year) ? "更新待ち。保存済みの行事を表示しています。"
+                : _model.EventSourceDifferenceAt(year) is not null ? null : _model.EventSourceWarning(year)))
+            .Where(item => item.Warning is not null).Select(item => item.Year + "年度：" + item.Warning).ToArray();
+        return messages.Length == 0 ? null : string.Join("\n", messages);
+    }
+
+    private void ScheduleStatusExpiry(CancellationTokenSource lifetime)
+    {
+        _statusExpiry?.Cancel();
+        var now = DateTimeOffset.UtcNow;
+        var deadlines = _functionalStatus.Values.SelectMany(status => status.Features.Select(feature => feature.ValidUntil)
+            .Append(status.Data?.Events?.ValidUntil ?? DateTimeOffset.MinValue))
+            .Append(_monitoring?.ReceivedAt.AddMinutes(3) ?? DateTimeOffset.MinValue);
+        var next = deadlines.Where(date => date > now).DefaultIfEmpty().Min();
+        if (next <= now) { _statusExpiry = null; return; }
+        var expiry = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
+        _statusExpiry = expiry;
+        _ = Invalidate();
+        async Task Invalidate()
+        {
+            try
+            {
+                var wait = next - now;
+                await Task.Delay(wait < TimeSpan.FromMinutes(3) ? wait : TimeSpan.FromMinutes(3), expiry.Token);
+                if (!ReferenceEquals(expiry, _statusExpiry) || expiry.IsCancellationRequested) return;
+                _statusExpiry = null;
+                Render();
+                ScheduleStatusExpiry(lifetime);
+            }
+            catch (OperationCanceledException) when (expiry.IsCancellationRequested) { }
+            finally { expiry.Dispose(); }
         }
     }
 
@@ -124,7 +172,7 @@ public sealed partial class MainWindow
         _model.EventRecords.TryGetValue(year, out var saved);
         var evidence = _failedStatus.Contains(PublicService.Api) ? null :
             _functionalStatus.GetValueOrDefault(PublicService.Api)?.Data?.Events?.Find(year, "v1", now);
-        var waiting = _publisherWaiting.Contains(year) || _model.EventSourceUpdateWaiting(year);
+        var waiting = PublisherWaiting(year);
         Add(SettingsGroup(
             SettingsRow("学校行事", () => OpenPage("events"), "status-events",
                 waiting ? "更新待ち" : evidence?.SourceState == "matched" ? "元PDFの一致を確認" : "元PDFは未確認"),

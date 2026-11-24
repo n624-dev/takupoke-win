@@ -89,16 +89,18 @@ public sealed partial class AppViewModel
     {
         get
         {
-            var messages = EventRecords.OrderBy(p => p.Key).Select(p =>
-                (Year: p.Key, Warning: _sourceObservations.GetValueOrDefault(p.Key)?.Warning(p.Value, _clock.GetUtcNow())))
+            var messages = EventRecords.Keys.Order().Select(year => (Year: year, Warning: EventSourceWarning(year)))
                 .Where(p => p.Warning is not null).Select(p => $"{p.Year}年度：{p.Warning}").ToArray();
             return messages.Length == 0 ? null : string.Join("\n", messages);
         }
     }
+    public string? EventSourceWarning(int year) => EventRecords.TryGetValue(year, out var value)
+        ? _sourceObservations.GetValueOrDefault(year)?.Warning(value, _clock.GetUtcNow()) : null;
     public string EventSourceDescription(int year) => EventRecords.TryGetValue(year, out var events)
         ? (_sourceObservations.GetValueOrDefault(year) ?? new(null, false)).Description(events, _clock.GetUtcNow()) : "学校行事は未取得です。";
-    public bool EventSourceUpdateWaiting(int year) => EventRecords.TryGetValue(year, out var events)
-        && _sourceObservations.GetValueOrDefault(year)?.IsUpdateWaiting(events) == true;
+    public DateTimeOffset? EventSourceDifferenceAt(int year) =>
+        EventRecords.TryGetValue(year, out var events) && _sourceObservations.GetValueOrDefault(year) is { } observation
+            && observation.IsUpdateWaiting(events) ? observation.Saved?.Successful?.LastSuccessAt : null;
     public string? EventsUpdateMessage { get; private set; }
     /// Metadata does not own Busy or the private-operation queue. Saved events
     /// remain immediately usable while the API checks its official source.

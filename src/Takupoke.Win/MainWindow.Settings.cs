@@ -15,8 +15,7 @@ public sealed partial class MainWindow
     {
         TitleText("設定", "page-settings");
         Add(SettingsGroup(SettingsRow("ステータス", () => OpenPage("status"), "settings-status",
-            (_publisherWaiting.Contains(_model.Today.SchoolYear()) || _model.EventSourceUpdateWaiting(_model.Today.SchoolYear()))
-                ? "更新待ち" : null)));
+            PublisherWaiting(_model.Today.SchoolYear()) ? "更新待ち" : null)));
         Add(SettingsSectionTitle("データ"));
         Add(SettingsGroup(
             SettingsRow("時間割ファイル", () => OpenPage("materials"), "settings-materials"),
@@ -149,7 +148,7 @@ public sealed partial class MainWindow
     private void BuildEventsSettings()
     {
         TitleText("学校行事", "page-events"); BackToSettings();
-        if (_model.EventSourceMessage is { } eventWarning) Add(Card(Text(eventWarning)));
+        if (CurrentEventSourceMessage() is { } eventWarning) Add(Card(Text(eventWarning)));
         if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
         if (_model.EventStorageMessage is { } storageFailure) Add(Card(Text(storageFailure)));
         var eventsYear = OperationControl(new NumberBox { Header = "学校年度", Minimum = 1900, Maximum = 9998, Value = _eventsYearDraft ?? _model.Today.SchoolYear(), SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Inline, MaxWidth = 420, HorizontalAlignment = HorizontalAlignment.Stretch });
@@ -165,8 +164,12 @@ public sealed partial class MainWindow
         {
             Add(SettingsGroup(_model.SavedEventYears.Select(savedYear => SettingsRow(savedYear + "年度", () => EventDetails(savedYear), "events-details-" + savedYear, "取得済み")).Cast<UIElement>().ToArray()));
             foreach (var savedYear in _model.SavedEventYears)
-                Add(Card(Panel(SettingsSectionTitle(savedYear + "年度の元PDF確認"),
-                    SettingsDescription(_model.EventSourceUpdateWaiting(savedYear) ? "更新待ち" : _model.EventSourceDescription(savedYear)))));
+            {
+                var state = PublisherWaiting(savedYear) ? "更新待ち"
+                    : _model.EventSourceDifferenceAt(savedYear) is not null ? "配信元の再照合とレビューを確認しました。"
+                    : _model.EventSourceDescription(savedYear);
+                Add(Card(Panel(SettingsSectionTitle(savedYear + "年度の元PDF確認"), SettingsDescription(state))));
+            }
         }
     }
     private void BuildNotificationSettings()

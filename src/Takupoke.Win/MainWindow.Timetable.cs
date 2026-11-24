@@ -47,7 +47,7 @@ public sealed partial class MainWindow
     {
         TitleText("時間割", "page-timetable");
         AddMaterialWarnings();
-        if (_model.EventSourceMessage is { } eventWarning) Add(Card(Text(eventWarning)));
+        if (CurrentEventSourceMessage() is { } eventWarning) Add(Card(Text(eventWarning)));
         if (_model.EventsUpdateMessage is { } eventFailure) Add(Card(Text(eventFailure)));
         if (_model.EventStorageMessage is { } storageFailure) Add(Card(Text(storageFailure)));
         var bounds = _model.Engine.ReachableWeeks(_model.NavigationAnchor, _model.Preferences.SelectedClasses);
